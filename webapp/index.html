@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1c5d50">
+<title>PetitionsManager</title>
+
+<!-- PWA / installierbar auf Android & iOS ("Zum Home-Bildschirm") -->
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Petitionen">
+<meta name="mobile-web-app-capable" content="yes">
+
+<link rel="stylesheet" href="fontawesome/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- Kopfleiste -->
+  <header class="topbar">
+    <div class="topbar__title" id="topbar-title">Petitionen</div>
+    <button class="iconbtn" id="hamburger" aria-label="Menü öffnen">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </header>
+
+  <!-- Inhaltsbereich (Tabs werden hier hineingerendert) -->
+  <main class="content" id="content"></main>
+
+  <!-- Footer-Navigation -->
+  <nav class="tabbar" id="tabbar">
+    <button class="tab" data-tab="liste" aria-label="Liste">
+      <i class="fa-solid fa-list"></i><span>Liste</span>
+    </button>
+    <button class="tab" data-tab="einstellungen" aria-label="Einstellungen">
+      <i class="fa-solid fa-gear"></i><span>Einstellungen</span>
+    </button>
+    <button class="tab" data-tab="profil" aria-label="Profil">
+      <i class="fa-solid fa-user"></i><span>Profil</span>
+    </button>
+  </nav>
+
+  <!-- Nach-oben-Button (erscheint nach dem Scrollen) -->
+  <button class="to-top" id="to-top" type="button" aria-label="Nach oben">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- Hamburger-Drawer -->
+  <div class="drawer-scrim" id="drawer-scrim"></div>
+  <aside class="drawer" id="drawer">
+    <div class="drawer__head">Menü</div>
+    <button class="drawer__item" data-action="refresh">
+      <i class="fa-solid fa-arrows-rotate"></i> Daten aktualisieren</button>
+    <button class="drawer__item" data-action="source">
+      <i class="fa-solid fa-database"></i> Datenquelle</button>
+    <button class="drawer__item" data-action="about">
+      <i class="fa-solid fa-circle-info"></i> Über die App</button>
+    <div class="drawer__foot" id="drawer-foot">—</div>
+  </aside>
+
+</div>
+<script src="app.js"></script>
+</body>
+</html>

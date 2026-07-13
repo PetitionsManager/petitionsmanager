@@ -1,0 +1,45 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'app.petitionsmanager'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "app.petitionsmanager"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+    }
+
+    // Die komplette Web-App (inkl. webapp/data/*.json) wird als Asset gebündelt.
+    // Einzige Quelle der Wahrheit ist der Ordner ../../webapp – nach jedem
+    // `python3 publish.py` sind die Daten in der nächsten APK automatisch aktuell.
+    sourceSets {
+        main {
+            assets.srcDirs += ['../../webapp']
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
+                    'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    // JSON ist bereits Text; erneutes Komprimieren beim Packen bringt wenig,
+    // aber wir lassen die Standardkomprimierung des APK aktiv (kleinere Datei).
+}
+
+dependencies {
+    implementation 'androidx.webkit:webkit:1.11.0'
+}
