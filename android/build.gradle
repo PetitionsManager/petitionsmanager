@@ -1,0 +1,5 @@
+// Wurzel-Build-Skript. Das Android-Gradle-Plugin (AGP) wird nur deklariert,
+// angewendet wird es im Modul :app.
+plugins {
+    id 'com.android.application' version '8.5.2' apply false
+}
