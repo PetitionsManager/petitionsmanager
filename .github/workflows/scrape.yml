@@ -36,7 +36,7 @@ jobs:
       - name: Abhängigkeiten
         run: pip install -r requirements.txt
 
-      - name: Scraper-Zustand aus Cache holen (Fallback: Stand im Repo)
+      - name: "Scraper-Zustand aus Cache holen (Fallback: Stand im Repo)"
         uses: actions/cache/restore@v4
         with:
           path: '*_petitions.json'

@@ -115,7 +115,11 @@ def main() -> None:
                    and (not args.platform or p.key == args.platform)]
         for p in targets:
             core.log(f"=== Scrape: {p.name} ===")
-            p.run(args)
+            try:
+                p.run(args)
+            except Exception as exc:   # eine Plattform darf den Lauf nicht kippen
+                core.log(f"!! {p.name} fehlgeschlagen: {exc!r} – übersprungen, "
+                         "die übrigen Plattformen laufen weiter.")
         core.write_dashboard(PLATFORMS)
         core.write_placeholder_pages(PLATFORMS)
     except KeyboardInterrupt:
