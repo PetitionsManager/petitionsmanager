@@ -44,6 +44,10 @@ jobs:
           restore-keys: |
             petition-stores-
 
+      - name: Health-Check der Entdeckungsquellen (nicht blockierend)
+        continue-on-error: true
+        run: python3 monitor.py --check
+
       - name: Scrapen (alle Live-Plattformen; überspringt <24 h Geprüftes)
         run: python3 monitor.py
 

@@ -10,6 +10,7 @@
       "recipient": "Adressat",
       "category": "Thema/Kategorie (falls die Plattform Kategorien hat)",
       "category_url": "Link zur Kategorieseite",
+      "tags": "bis zu 10 aus dem Text abgeleitete Schlagwörter (zum Verlinken)",
       "summary": "Kurzbeschreibung (og:description)",
       "description_full": "komplette, gegliederte Beschreibung als bereinigtes HTML",
       "image_url": "Petitionsbild",
@@ -25,9 +26,11 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-07-13T13:20:59-06:00",
-    "petition_count": 47,
-    "new_petitions_last_run": []
+    "generated_at": "2026-07-20T22:52:50-06:00",
+    "petition_count": 48,
+    "new_petitions_last_run": [
+      "201055"
+    ]
   },
   "196175": {
     "slug": "196175",
@@ -2034,5 +2037,47 @@
     "last_seen": "2026-07-13T13:20:39-06:00",
     "offline_since": null,
     "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "201055": {
+    "slug": "201055",
+    "first_seen": "2026-07-20T22:52:35-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-20T22:52:35-06:00",
+        "count": 108
+      }
+    ],
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_05/_20/Petition_201055.nc.html",
+    "title": "Einführung einer verpflichtenden Notfall-Kommunikationsstruktur im Betreuungsrecht",
+    "start_date": "2026-05-20",
+    "category": "Betreuungsrecht",
+    "signatures": 108,
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit der Petition wird ein gesetzlicher Modellversuch zur Einführung einer verpflichtenden Notfall-Kommunikationsstruktur im Betreuungsrecht gefordert. Wenn Betreuer die Gesundheitssorge oder Aufenthaltsbestimmung innehaben, sollen gesetzlich geregelte digitale Notfallkontakte oder verbindliche Vertretungsregelungen für akute Krisensituationen geschaffen werden, da eine ausdrückliche Notfall-Kommunikationspflicht bislang nicht im Betreuungsrecht existiert.</p></p>",
+    "summary": "Mit der Petition wird ein gesetzlicher Modellversuch zur Einführung einer verpflichtenden Notfall-Kommunikationsstruktur im Betreuungsrecht gefordert. Wenn Betreuer die Gesundheitssorge oder Aufenthal…",
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-20T22:52:35",
+        "text": "Mitzeichnungsfrist bis 2026-08-24"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-20T22:52:35-06:00",
+    "offline_since": null,
+    "tags": [
+      "Betreuungsrecht",
+      "Verpflichtenden",
+      "Einführung",
+      "Gesundheitssorge",
+      "Modellversuch",
+      "Gesetzlicher",
+      "Betreuer",
+      "Aufenthaltsbestimmung",
+      "Vertretungsregelungen",
+      "Krisensituationen"
+    ],
+    "last_checked": "2026-07-20T22:52:35-06:00"
   }
 }

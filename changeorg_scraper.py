@@ -271,10 +271,21 @@ def run(args) -> None:
         log(f"NEU: {len(new_petitions)} neue Petition(en) in diesem Lauf.")
 
     prog(message="Speichere & baue HTML …")
-    save(quiet=False, new_petitions_last_run=new_petitions)
+    save(quiet=False, new_petitions_last_run=new_petitions,
+         available=len(discovered))
     core.write_list_html(PLATFORM)
     log("Fertig (Change.org).")
 
+
+def check(fetcher):
+    resp = fetcher.get(SITEMAP_INDEX)
+    if resp is None or not resp.ok:
+        return False, "Sitemap-Index nicht erreichbar"
+    maps = re.findall(r"<loc>([^<]+sitemap-[^<]+)</loc>", resp.text)
+    if not maps:
+        return False, "keine Monats-Sitemaps im Index"
+    return core.check_source(fetcher, maps[0], PETITION_SLUG_RE, 10,
+                             "/p/-Slugs (1 Sitemap)")
 
 PLATFORM = Platform(
     key="changeorg",
@@ -289,6 +300,7 @@ PLATFORM = Platform(
     data_file=DATA_FILE,
     html_file=HTML_FILE,
     run=run,
+    check=check,
 )
 
 

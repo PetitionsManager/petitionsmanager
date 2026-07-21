@@ -257,10 +257,16 @@ def run(args) -> None:
         log(f"NEU: {len(new_petitions)} neue Petition(en) in diesem Lauf.")
 
     prog(message="Speichere & baue HTML …")
-    save(quiet=False, new_petitions_last_run=new_petitions)
+    save(quiet=False, new_petitions_last_run=new_petitions,
+         available=len(discovered))
     core.write_list_html(PLATFORM)
     log("Fertig (Bundestag).")
 
+
+def check(fetcher):
+    fetcher.get(LIST_PAGE)          # setzt die Session-Cookie
+    return core.check_source(fetcher, FRAGMENT.format(page=0), DETAIL_HREF_RE, 5,
+                             "Petitionen (AJAX-Fragment)")
 
 PLATFORM = Platform(
     key="bundestag",
@@ -270,6 +276,7 @@ PLATFORM = Platform(
     data_file=DATA_FILE,
     html_file=HTML_FILE,
     run=run,
+    check=check,
     openness=2,
     openness_note="Eingeschränkt: offizielle Daten, aber JS-Portal mit "
                   "Session-Cookies und verstecktem AJAX-Fragment (status.2-"

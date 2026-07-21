@@ -530,10 +530,15 @@ def run(args) -> None:
 
     prog(message="Speichere & baue HTML …")
     save(quiet=False, new_petitions_last_run=new_petitions,
-         new_categories_last_run=new_categories)
+         new_categories_last_run=new_categories,
+         available=len(discovered))
     core.write_list_html(PLATFORM)
     log("Fertig (WeAct).")
 
+
+def check(fetcher):
+    return core.check_source(fetcher, BASE_URL + "/", PETITION_HREF_RE, 5,
+                             "Petitionen")
 
 PLATFORM = Platform(
     key="weact",
@@ -547,6 +552,7 @@ PLATFORM = Platform(
     data_file=DATA_FILE,
     html_file=HTML_FILE,
     run=run,
+    check=check,
 )
 
 

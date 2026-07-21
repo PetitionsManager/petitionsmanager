@@ -22,6 +22,7 @@
 from __future__ import annotations
 
 import json
+import shutil
 from pathlib import Path
 
 import monitor
@@ -87,6 +88,13 @@ def main() -> None:
 
     (OUT_DIR / "manifest.json").write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    # Scraper-Dashboard als Status-Snapshot mit auf GitHub Pages ausliefern
+    # (read-only: die "Jetzt scrapen"-Buttons brauchen den lokalen Server).
+    dash = Path("dashboard.html")
+    if dash.exists():
+        shutil.copy(dash, OUT_DIR.parent / "dashboard.html")
+        print("dashboard.html → webapp/ (Status-Ansicht via Pages-URL)")
 
     live = [p for p in manifest["platforms"] if p["live"]]
     total = sum(p["count"] for p in live)

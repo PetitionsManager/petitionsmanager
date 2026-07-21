@@ -469,10 +469,21 @@ def run(args) -> None:
         log("Keine neuen Einträge seit dem letzten Lauf gefunden.")
 
     prog(message="Speichere & baue HTML …")
-    save(quiet=False, new_petitions_last_run=new_petitions)
+    save(quiet=False, new_petitions_last_run=new_petitions,
+         available=len(discovered) + len(campaigns))
     core.write_list_html(PLATFORM)
     log("Fertig (Avaaz).")
 
+
+def check(fetcher):
+    # Entdeckung läuft über die Startseite (avaaz.org/de/), nicht über
+    # secure.avaaz.org (dessen robots per Cloudflare zeitweise alles sperrt).
+    resp = fetcher.get(HOME_URL)
+    if resp is None or not resp.ok:
+        return False, "Startseite nicht erreichbar"
+    n = len(set(PETITION_HREF_RE.findall(resp.text)) |
+            set(CAMPAIGN_HREF_RE.findall(resp.text)))
+    return (n >= 1), f"{n} Aktionen (Startseite)"
 
 PLATFORM = Platform(
     key="avaaz",
@@ -486,6 +497,7 @@ PLATFORM = Platform(
     data_file=DATA_FILE,
     html_file=HTML_FILE,
     run=run,
+    check=check,
 )
 
 

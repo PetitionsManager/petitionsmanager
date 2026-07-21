@@ -186,10 +186,14 @@ def run(args) -> None:
         log(f"NEU: {len(new_petitions)} neue Aktion(en) in diesem Lauf.")
 
     prog(message="Speichere & baue HTML …")
-    save(quiet=False, new_petitions_last_run=new_petitions)
+    save(quiet=False, new_petitions_last_run=new_petitions,
+         available=len(discovered))
     core.write_list_html(PLATFORM)
     log("Fertig (foodwatch).")
 
+
+def check(fetcher):
+    return core.check_source(fetcher, LIST_URL, ACTION_HREF_RE, 3, "Aktionen")
 
 PLATFORM = Platform(
     key="foodwatch",
@@ -202,6 +206,7 @@ PLATFORM = Platform(
     data_file=DATA_FILE,
     html_file=HTML_FILE,
     run=run,
+    check=check,
 )
 
 
