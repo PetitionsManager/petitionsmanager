@@ -1,0 +1,2038 @@
+{
+  "_meta": {
+    "_README": "Petitions-Monitor. Datensaetze werden aktualisiert, nie ueberschrieben.",
+    "fields": {
+      "slug": "ID/Schluessel aus der URL",
+      "url": "kanonische Petitions-URL",
+      "petition_id": "interne numerische ID der Plattform oder null",
+      "title": "Titel",
+      "started_by": "Gestartet von",
+      "recipient": "Adressat",
+      "category": "Thema/Kategorie (falls die Plattform Kategorien hat)",
+      "category_url": "Link zur Kategorieseite",
+      "summary": "Kurzbeschreibung (og:description)",
+      "description_full": "komplette, gegliederte Beschreibung als bereinigtes HTML",
+      "image_url": "Petitionsbild",
+      "signatures": "aktueller Unterschriftenstand",
+      "signatures_history": "Zeitreihe [{checked_at,count}]",
+      "milestones": "Meilenstein-Marken [{threshold,timestamp}]",
+      "updates": "Neuigkeiten [{timestamp,text}]",
+      "goal": "aktuelles Unterschriften-Ziel (falls die Plattform eines zeigt)",
+      "start_date": "Startdatum (plattformabhängig ermittelt)",
+      "status": "online | offline",
+      "first_seen": "erstmals gescrapt (unveraenderlich)",
+      "last_seen": "zuletzt online",
+      "last_checked": "zuletzt geprueft",
+      "offline_since": "seit wann offline oder null"
+    },
+    "generated_at": "2026-07-13T13:20:59-06:00",
+    "petition_count": 47,
+    "new_petitions_last_run": []
+  },
+  "196175": {
+    "slug": "196175",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 69
+      },
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 71
+      },
+      {
+        "checked_at": "2026-07-07T10:24:27-06:00",
+        "count": 75
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 80
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit der Petition wird die Einführung eines Wahlrechts (Opt-Out) für den Arbeitnehmeranteil zur gesetzlichen Rentenversicherung gefordert.</p></p>",
+    "summary": "Mit der Petition wird die Einführung eines Wahlrechts (Opt-Out) für den Arbeitnehmeranteil zur gesetzlichen Rentenversicherung gefordert.",
+    "signatures": 80,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_03/_08/Petition_196175.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:20:39",
+        "text": "Nicht mehr in der Mitzeichnungsliste (Frist abgelaufen oder abgeschlossen)"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Einführung eines Wahlrechts (Opt-Out) für den Arbeitnehmeranteil zur gesetzlichen Rentenversicherung",
+    "start_date": "2026-03-08",
+    "category": "Grundsatzfragen zur Beitragszahlung in der gesetzlichen Rentenversicherung"
+  },
+  "197261": {
+    "slug": "197261",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 109
+      },
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 111
+      },
+      {
+        "checked_at": "2026-07-07T10:24:27-06:00",
+        "count": 113
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 136
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit der Petition wird die Einführung einer verfassungsrechtlichen Steuer- und Abgabenobergrenze gefordert. </p></p>",
+    "summary": "Mit der Petition wird die Einführung einer verfassungsrechtlichen Steuer- und Abgabenobergrenze gefordert.",
+    "signatures": 136,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_03/_27/Petition_197261.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:20:39",
+        "text": "Nicht mehr in der Mitzeichnungsliste (Frist abgelaufen oder abgeschlossen)"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Einführung einer verfassungsrechtlichen Steuer- und Abgabenobergrenze",
+    "start_date": "2026-03-27",
+    "category": "Haushaltswesen"
+  },
+  "197366": {
+    "slug": "197366",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 278
+      },
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 281
+      },
+      {
+        "checked_at": "2026-07-07T10:24:27-06:00",
+        "count": 283
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 325
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Gefordert wird, vor einer möglichen Erhöhung der Mehrwertsteuer zunächst bestehende Staatsausgaben umfassend zu überprüfen und Einsparpotenziale konsequent zu nutzen.<br/></p></p>",
+    "summary": "Gefordert wird, vor einer möglichen Erhöhung der Mehrwertsteuer zunächst bestehende Staatsausgaben umfassend zu überprüfen und Einsparpotenziale konsequent zu nutzen.",
+    "signatures": 325,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_03/_28/Petition_197366.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:20:39",
+        "text": "Nicht mehr in der Mitzeichnungsliste (Frist abgelaufen oder abgeschlossen)"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Verzicht auf eine Erhöhung der Mehrwertsteuer",
+    "start_date": "2026-03-28",
+    "category": "Haushaltswesen"
+  },
+  "198019": {
+    "slug": "198019",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 83
+      },
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 84
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 97
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit der Petition wird gefordert, den Sozialstaat im gesunden und fairen Sinn im Zeitalter der Globalisierung zu sichern.<br/>Für mehr Fairness, Eigenverantwortung und Nachhaltigkeit im Gesundheitssystem. <br/>Reformen sollen dazu beitragen, die Akzeptanz in der Bevölkerung zu stärken und die Qualität der Versorgung langfristig zu sichern.  Ein „gesundes“, an die Bedingungen der Globalisierung angepasstes und gerechtes Gesundheitssystem muss sowohl Solidarität als auch Eigenverantwortung vereinen.</p></p>",
+    "summary": "Mit der Petition wird gefordert, den Sozialstaat im gesunden und fairen Sinn im Zeitalter der Globalisierung zu sichern. Für mehr Fairness, Eigenverantwortung und Nachhaltigkeit im Gesundheitssystem. …",
+    "signatures": 97,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_04/_07/Petition_198019.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:20:39",
+        "text": "Nicht mehr in der Mitzeichnungsliste (Frist abgelaufen oder abgeschlossen)"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Sicherung des Sozialstaates im gesunden und fairen Sinn im Zeitalter der Globalisierung",
+    "start_date": "2026-04-07",
+    "category": "Reformvorschläge in der Sozialversicherung"
+  },
+  "199714": {
+    "slug": "199714",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 227
+      },
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 233
+      },
+      {
+        "checked_at": "2026-07-07T10:24:27-06:00",
+        "count": 236
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 322
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 324
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit der Petition wird angeregt, auf KI-generierte Wertschöpfungen Sozialabgaben zu erheben, um die Sozialsysteme finanzierbar und zukunftssicher auszugestalten.</p></p>",
+    "summary": "Mit der Petition wird angeregt, auf KI-generierte Wertschöpfungen Sozialabgaben zu erheben, um die Sozialsysteme finanzierbar und zukunftssicher auszugestalten.",
+    "signatures": 324,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_04/_30/Petition_199714.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-06T21:37:40",
+        "text": "Mitzeichnungsfrist bis 2026-07-15"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Erhebung von Sozialabgaben auf KI-generierte Wertschöpfungen",
+    "start_date": "2026-04-30",
+    "category": "Reformvorschläge in der Sozialversicherung"
+  },
+  "198828": {
+    "slug": "198828",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 59
+      },
+      {
+        "checked_at": "2026-07-07T10:24:27-06:00",
+        "count": 60
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 81
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 85
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit der Petition wird gefordert, dass Soldatinnen und Soldaten der Bundeswehr spürbar entlastet und im Alltag besser unterstützt werden. Dazu gehören insbesondere finanzielle Hilfen bei Heimfahrten, Zuschüsse zu hohen Mobilitätskosten sowie eine stärkere Berücksichtigung der familiären Belastungen durch weite Stationierungen, Übungen und längere Abwesenheiten.</p></p>",
+    "summary": "Mit der Petition wird gefordert, dass Soldatinnen und Soldaten der Bundeswehr spürbar entlastet und im Alltag besser unterstützt werden. Dazu gehören insbesondere finanzielle Hilfen bei Heimfahrten, Z…",
+    "signatures": 85,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_04/_20/Petition_198828.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-06T21:37:40",
+        "text": "Mitzeichnungsfrist bis 2026-07-20"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Spürbare Entlastung und Unterstützung der Soldatinnen und Soldaten der Bundeswehr",
+    "start_date": "2026-04-20",
+    "category": "Rechtsstellung der Soldaten (einschl. SG und Durchführungsbestimmungen)"
+  },
+  "191939": {
+    "slug": "191939",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 237
+      },
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 238
+      },
+      {
+        "checked_at": "2026-07-07T10:24:27-06:00",
+        "count": 240
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 302
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 303
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit der Petition wird gefordert, dass Verbraucher verpflichtend über etwaige Funktionen eines Produkts informiert werden, die eine Registrierung voraussetzen beziehungsweise nur über Apps verfügbar sind. </p></p>",
+    "summary": "Mit der Petition wird gefordert, dass Verbraucher verpflichtend über etwaige Funktionen eines Produkts informiert werden, die eine Registrierung voraussetzen beziehungsweise nur über Apps verfügbar si…",
+    "signatures": 303,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2025/_12/_12/Petition_191939.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-06T21:37:40",
+        "text": "Mitzeichnungsfrist bis 2026-07-29"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Verpflichtende Information über nur nach einer Registrierung bzw. über Apps verfügbare Funktionen eines Produkts",
+    "start_date": "2025-12-12",
+    "category": "Verbraucherschutz (Justiz)"
+  },
+  "192858": {
+    "slug": "192858",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 85
+      },
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 86
+      },
+      {
+        "checked_at": "2026-07-07T10:24:27-06:00",
+        "count": 87
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 128
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 130
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit der Petition wird gefordert, ein allgemeines Verbot für rein kosmetische Operationen an Minderjährigen einzuführen.</p></p>",
+    "summary": "Mit der Petition wird gefordert, ein allgemeines Verbot für rein kosmetische Operationen an Minderjährigen einzuführen.",
+    "signatures": 130,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_01/_04/Petition_192858.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-06T21:37:40",
+        "text": "Mitzeichnungsfrist bis 2026-07-29"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Einführung eines allgemeinen Verbots für rein kosmetische Operationen an Minderjährigen",
+    "start_date": "2026-01-04",
+    "category": "Gesundheitswesen"
+  },
+  "196995": {
+    "slug": "196995",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 14337
+      },
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 14371
+      },
+      {
+        "checked_at": "2026-07-07T07:30:33-06:00",
+        "count": 14374
+      },
+      {
+        "checked_at": "2026-07-07T10:24:27-06:00",
+        "count": 14393
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 16521
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 17594
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Es wird gefordert, dass Unfruchtbarkeit als Krankheit anerkannt und Kinderwunschbehandlungen bei medizinischer Notwendigkeit zu 100% von den gesetzlichen Krankenkassen übernommen werden. Die starre Beschränkung auf drei Versuche und die bisherigen Altersgrenzen sind aufzuheben – stattdessen soll die medizinische Erfolgsaussicht entscheiden. Auch unverheiratete und homosexuelle Paare sowie alleinstehende Frauen sind bei der Kostenübernahme mit einzuschließen, ebenso Behandlungen mit Spendersamen.</p></p>",
+    "summary": "Es wird gefordert, dass Unfruchtbarkeit als Krankheit anerkannt und Kinderwunschbehandlungen bei medizinischer Notwendigkeit zu 100% von den gesetzlichen Krankenkassen übernommen werden. Die starre Be…",
+    "signatures": 17594,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_03/_24/Petition_196995.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-06T21:37:40",
+        "text": "Mitzeichnungsfrist bis 2026-07-29"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Anerkennung von Unfruchtbarkeit als Krankheit/Kostenübernahme bei Kinderwunschbehandlungen bei medizinischer Notwendigkeit",
+    "start_date": "2026-03-24",
+    "category": "Gesetzliche Krankenversicherung - Leistungen"
+  },
+  "198940": {
+    "slug": "198940",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 50
+      },
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 51
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 78
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 80
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Die Petition fordert die systematische Aufarbeitung der historischen Praxis internationaler Auslandsadoptionen &amp; deren politischer Einordnung. Konkret geht es um die Prüfung, ob &amp; in welcher Form in Deutschland staatliche oder parlamentarische Prozesse zur Aufarbeitung dieser historischen Adoptionsvermittlungen bestehen oder initiiert werden können. Ziel ist ins-besondere eine stärkere Transparenz sowie die Einordnung staatlicher Verantwortung im historischen Kontext internationaler Adoptionen.</p></p>",
+    "summary": "Die Petition fordert die systematische Aufarbeitung der historischen Praxis internationaler Auslandsadoptionen & deren politischer Einordnung. Konkret geht es um die Prüfung, ob & in welcher Form in D…",
+    "signatures": 80,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_04/_21/Petition_198940.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-06T21:37:40",
+        "text": "Mitzeichnungsfrist bis 2026-07-29"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Systematische Aufarbeitung der historischen Praxis internationaler Auslandsadoptionen & deren politische Einordnung",
+    "start_date": "2026-04-21",
+    "category": "Annahme als Kind"
+  },
+  "201306": {
+    "slug": "201306",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 228
+      },
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 232
+      },
+      {
+        "checked_at": "2026-07-07T07:30:33-06:00",
+        "count": 233
+      },
+      {
+        "checked_at": "2026-07-07T10:24:27-06:00",
+        "count": 237
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 359
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 378
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit der Petition soll die BAföG-Wohnkostenpauschale auf mindestens 440 € erhöht und regelmäßig an reale Mietkosten angepasst werden. Zudem wird eine Erhöhung der BAföG-Sätze gefordert. Ziel ist es, Bildung unabhängig von sozialer Herkunft zu ermöglichen und Studierende sowie Auszubildende finanziell so zu unterstützen, dass sie sich auf ihre Ausbildung konzentrieren können. Bildung ist eine Zukunftsinvestition und darf nicht vom Geldbeutel abhängen.</p></p>",
+    "summary": "Mit der Petition soll die BAföG-Wohnkostenpauschale auf mindestens 440 € erhöht und regelmäßig an reale Mietkosten angepasst werden. Zudem wird eine Erhöhung der BAföG-Sätze gefordert. Ziel ist es, Bi…",
+    "signatures": 378,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_05/_23/Petition_201306.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-06T21:37:40",
+        "text": "Mitzeichnungsfrist bis 2026-07-29"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Erhöhung sowie regelmäßige Anpassung der BAföG-Wohnkostenpauschale/Erhöhung der BAföG-Sätze",
+    "start_date": "2026-05-23",
+    "category": "Leistungen nach dem BAföG"
+  },
+  "193962": {
+    "slug": "193962",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 84
+      },
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 86
+      },
+      {
+        "checked_at": "2026-07-07T10:24:27-06:00",
+        "count": 88
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 126
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 128
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit der Petition wird die Einführung eindeutiger Rechnungsnummern für Forderungen der Bundesagentur für Arbeit/Jobcenter gefordert.</p></p>",
+    "summary": "Mit der Petition wird die Einführung eindeutiger Rechnungsnummern für Forderungen der Bundesagentur für Arbeit/Jobcenter gefordert.",
+    "signatures": 128,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_01/_22/Petition_193962.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-06T21:37:40",
+        "text": "Mitzeichnungsfrist bis 2026-08-04"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Einführung eindeutiger Rechnungsnummern für Forderungen der Bundesagentur für Arbeit/Jobcenter",
+    "start_date": "2026-01-22",
+    "category": "Bundesagentur für Arbeit"
+  },
+  "196059": {
+    "slug": "196059",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 84
+      },
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 90
+      },
+      {
+        "checked_at": "2026-07-07T10:24:27-06:00",
+        "count": 91
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 140
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 144
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit der Petition wird gefordert:<br/>(1) eine gesundheitsorientierte Koordinierung<br/>(2) die institutionelle Verankerung naturbasierter Prävention (Natur- und Waldschutz sind Investitionen in die physische und psychische Gesundheit der Bevölkerung)<br/>(3) die Nutzung erheblicher Einsparpotenziale im Gesundheitssystem<br/>(4) die Umsetzung europäischer Verpflichtungen unter gesundheitspolitischer Perspektive.</p></p>",
+    "summary": "Mit der Petition wird gefordert: (1) eine gesundheitsorientierte Koordinierung (2) die institutionelle Verankerung naturbasierter Prävention (Natur- und Waldschutz sind Investitionen in die physische …",
+    "signatures": 144,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_03/_06/Petition_196059.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-06T21:37:40",
+        "text": "Mitzeichnungsfrist bis 2026-08-04"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Institutionelle Verankerung von Umweltaspekten in der gesundheitlichen Prävention",
+    "start_date": "2026-03-06",
+    "category": "Umwelt und Gesundheit"
+  },
+  "196530": {
+    "slug": "196530",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 52
+      },
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 55
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 79
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit der Petition wird im Sinne wirtschaftlicher Vernunft und direkter Demokratie gefordert, übermäßige Klimaschutzauflagen zu stoppen und die verfassungsrechtlichen Grundlagen neu auszulegen.</p></p>",
+    "summary": "Mit der Petition wird im Sinne wirtschaftlicher Vernunft und direkter Demokratie gefordert, übermäßige Klimaschutzauflagen zu stoppen und die verfassungsrechtlichen Grundlagen neu auszulegen.",
+    "signatures": 79,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_03/_15/Petition_196530.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-06T21:37:40",
+        "text": "Mitzeichnungsfrist bis 2026-08-04"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Stopp übermäßiger Klimaschutzauflagen sowie Neuauflage der verfassungsrechtlichen Grundlagen",
+    "start_date": "2026-03-15",
+    "category": "Klimaschutz"
+  },
+  "197874": {
+    "slug": "197874",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 31
+      },
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 32
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 49
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit dieser Petition wird die Anerkennung der Beitragsjahre in der Landwirtschaftlichen Alterskasse bei der Deutschen Rentenversicherung, zumindest anteilig, gefordert. Diese werden derzeit nicht anerkannt, so dass langjährig Versicherte der Landwirtschaftlichen Alterskasse nicht auf ihre Beitragsjahre bei der Deutschen Rentenversicherung kommen. Umgekehrt ist das sehr wohl der Fall.</p></p>",
+    "summary": "Mit dieser Petition wird die Anerkennung der Beitragsjahre in der Landwirtschaftlichen Alterskasse bei der Deutschen Rentenversicherung, zumindest anteilig, gefordert. Diese werden derzeit nicht anerk…",
+    "signatures": 49,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_04/_04/Petition_197874.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-06T21:37:40",
+        "text": "Mitzeichnungsfrist bis 2026-08-04"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Beitragsjahre in der Landwirtschaftlichen Alterskasse bei der Deutschen Rentenversicherung anerkennen",
+    "start_date": "2026-04-04",
+    "category": "Alterssicherung der Landwirte"
+  },
+  "198450": {
+    "slug": "198450",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 33
+      },
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 37
+      },
+      {
+        "checked_at": "2026-07-07T10:24:27-06:00",
+        "count": 38
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 52
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 53
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit der Petition wird gefordert, die staatlichen Subventionen für Opern- und Theaterbetriebe in Deutschland im internationalen Vergleich zu überprüfen und eine Evaluation der Kulturförderstruktur vorzunehmen. Dabei soll geprüft werden, ob Umfang und Verteilung der öffentlichen Mittel noch im angemessenen Verhältnis zu zentralen staatlichen Aufgaben – insbesondere im Gesundheitswesen – stehen.</p></p>",
+    "summary": "Mit der Petition wird gefordert, die staatlichen Subventionen für Opern- und Theaterbetriebe in Deutschland im internationalen Vergleich zu überprüfen und eine Evaluation der Kulturförderstruktur vorz…",
+    "signatures": 53,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_04/_14/Petition_198450.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-06T21:37:40",
+        "text": "Mitzeichnungsfrist bis 2026-08-04"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Überprüfung der staatlichen Subventionen für Opern- und Theaterbetriebe in Deutschland im internationalen Vergleich",
+    "start_date": "2026-04-14",
+    "category": "Kulturförderungsmaßnahmen"
+  },
+  "196408": {
+    "slug": "196408",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 62
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 89
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 92
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit der Petition wird gefordert, das Jugendarbeitsschutzgesetz so anzupassen, dass die den Jugendlichen zustehende zusätzliche Pausenzeit nicht von der Arbeitszeit abgezogen wird.</p></p>",
+    "summary": "Mit der Petition wird gefordert, das Jugendarbeitsschutzgesetz so anzupassen, dass die den Jugendlichen zustehende zusätzliche Pausenzeit nicht von der Arbeitszeit abgezogen wird.",
+    "signatures": 92,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_03/_13/Petition_196408.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-06T21:37:40",
+        "text": "Mitzeichnungsfrist bis 2026-08-05"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Kein Abzug der Jugendlichen zustehenden zusätzlichen Pausenzeit von der Arbeitszeit (Anpassung JArbSchG)",
+    "start_date": "2026-03-13",
+    "category": "Arbeitsschutz"
+  },
+  "198005": {
+    "slug": "198005",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 92
+      },
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 96
+      },
+      {
+        "checked_at": "2026-07-07T10:24:27-06:00",
+        "count": 97
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 143
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 147
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit der Petition wird gefordert, dass die Bundesregierung eine klare und konsequente Ablehnung der Todesstrafe auch gegenüber Israel öffentlich vertritt, sich aktiv auf EU-Ebene für eine gemeinsame Position einsetzt und diplomatische Maßnahmen zur Wahrung der Menschenrechte prüft. Menschenrechte müssen unabhängig vom jeweiligen Staat einheitlich angewendet werden.</p></p>",
+    "summary": "Mit der Petition wird gefordert, dass die Bundesregierung eine klare und konsequente Ablehnung der Todesstrafe auch gegenüber Israel öffentlich vertritt, sich aktiv auf EU-Ebene für eine gemeinsame Po…",
+    "signatures": 147,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_04/_06/Petition_198005.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-06T21:37:40",
+        "text": "Mitzeichnungsfrist bis 2026-08-05"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Klare und konsequente Ablehnung der Todesstrafe/Gemeinsame Positionierung auf EU-Ebene",
+    "start_date": "2026-04-06",
+    "category": "Außenpolitik"
+  },
+  "198731": {
+    "slug": "198731",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 2100
+      },
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 2123
+      },
+      {
+        "checked_at": "2026-07-07T07:30:33-06:00",
+        "count": 2124
+      },
+      {
+        "checked_at": "2026-07-07T10:24:27-06:00",
+        "count": 2130
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 2476
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 2491
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit der Petition wird eine gesetzliche Regelung gefordert, die gewährleistet, dass medizinisches Cannabis in Form von Blüten weiterhin als erstattungsfähige Leistung der gesetzlichen Krankenversicherung verfügbar bleibt, sofern eine ärztliche Verordnung vorliegt und keine gleichwertige therapeutische Alternative besteht.</p></p>",
+    "summary": "Mit der Petition wird eine gesetzliche Regelung gefordert, die gewährleistet, dass medizinisches Cannabis in Form von Blüten weiterhin als erstattungsfähige Leistung der gesetzlichen Krankenversicheru…",
+    "signatures": 2491,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_04/_19/Petition_198731.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-06T21:37:40",
+        "text": "Mitzeichnungsfrist bis 2026-08-05"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Weiterhin Verfügbarkeit von medizinischem Cannabis (Blüten) als erstattungsfähige Leistung der GKV",
+    "start_date": "2026-04-19",
+    "category": "Arzneimittelwesen"
+  },
+  "199047": {
+    "slug": "199047",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 66
+      },
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 70
+      },
+      {
+        "checked_at": "2026-07-07T10:24:27-06:00",
+        "count": 71
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 105
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 108
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit der Petition wird eine strukturelle Reform des Allgemeinen Gleichbehandlungsgesetzes mit klarer Durchsetzung durch eine unabhängige Prüf- und Aufsichtsstelle, wirksame Sanktionen bei Pflichtverletzungen, verbindliche Präventions- und Schutzstandards sowie die Stärkung der Antidiskriminierungsstelle des Bundes gefordert.</p></p>",
+    "summary": "Mit der Petition wird eine strukturelle Reform des Allgemeinen Gleichbehandlungsgesetzes mit klarer Durchsetzung durch eine unabhängige Prüf- und Aufsichtsstelle, wirksame Sanktionen bei Pflichtverlet…",
+    "signatures": 108,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_04/_22/Petition_199047.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-06T21:37:40",
+        "text": "Mitzeichnungsfrist bis 2026-08-05"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Strukturelle Reform des Allgemeinen Gleichbehandlungsgesetzes",
+    "start_date": "2026-04-22",
+    "category": "Allgemeines Gleichbehandlungsgesetz"
+  },
+  "190680": {
+    "slug": "190680",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 160
+      },
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 168
+      },
+      {
+        "checked_at": "2026-07-07T10:24:27-06:00",
+        "count": 169
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 234
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 237
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit der Petition wird gefordert,<br/>1.\tdas bestehende Pfandsystem auf alkoholische Getränke in Glasflaschen wie Sekt, Wein und Spirituosen auszuweiten,<br/>2.\tein Pfandsystem für Getränkekartons (Tetrapacks) einzuführen,<br/>3.\tdas Pfand für alle Einweg- und Mehrweg-Getränkeverpackungen einheitlich auf 0,25 € festzusetzen.</p></p>",
+    "summary": "Mit der Petition wird gefordert, 1.\tdas bestehende Pfandsystem auf alkoholische Getränke in Glasflaschen wie Sekt, Wein und Spirituosen auszuweiten, 2.\tein Pfandsystem für Getränkekartons (Tetrapacks)…",
+    "signatures": 237,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2025/_11/_17/Petition_190680.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-06T21:37:40",
+        "text": "Mitzeichnungsfrist bis 2026-08-09"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Erweiterung und Vereinheitlichung des Pfandsystems",
+    "start_date": "2025-11-17",
+    "category": "Abfallwirtschaft"
+  },
+  "196036": {
+    "slug": "196036",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 99
+      },
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 104
+      },
+      {
+        "checked_at": "2026-07-07T07:30:33-06:00",
+        "count": 105
+      },
+      {
+        "checked_at": "2026-07-07T10:24:27-06:00",
+        "count": 106
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 146
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 154
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit der Petition wird gefordert, die umgehende Aufnahme in den Leistungskatalog der Krankenkassen und damit Änderung der Leitlinien und Umsetzungsmöglichkeit durch Onkologie: Antikörpertherapie (Trastuzumab) auch ohne verpflichtende Chemotherapie bei Her2+ Brustkrebs im Frühstadium! Wahlmöglichkeit und medizinische Selbstbestimmung der Patientinnen sicher stellen!</p></p>",
+    "summary": "Mit der Petition wird gefordert, die umgehende Aufnahme in den Leistungskatalog der Krankenkassen und damit Änderung der Leitlinien und Umsetzungsmöglichkeit durch Onkologie: Antikörpertherapie (Trast…",
+    "signatures": 154,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_03/_06/Petition_196036.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-06T21:37:40",
+        "text": "Mitzeichnungsfrist bis 2026-08-09"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Antikörpertherapie auch ohne verpflichtende Chemotherapie bei Her2+ Brustkrebs im Frühstadium",
+    "start_date": "2026-03-06",
+    "category": "Gesetzliche Krankenversicherung - Leistungen"
+  },
+  "199979": {
+    "slug": "199979",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 132
+      },
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 133
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 183
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 199
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Der Deutsche Bundestag wird aufgefordert, das Embryonenschutzgesetz (ESchG) grundlegend zu reformieren. Ziel ist es, allen Menschen, insbesondere Trans-Personen mit unerfülltem Kinderwunsch sowie Menschen mit schweren genetischen Vorbelastungen, den Zugang zu modernen reproduktionsmedizinischen Verfahren wie der Eizellspende und der Mitochondrien-Ersatztherapie zu ermöglichen.</p></p>",
+    "summary": "Der Deutsche Bundestag wird aufgefordert, das Embryonenschutzgesetz (ESchG) grundlegend zu reformieren. Ziel ist es, allen Menschen, insbesondere Trans-Personen mit unerfülltem Kinderwunsch sowie Mens…",
+    "signatures": 199,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_05/_04/Petition_199979.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-06T21:37:40",
+        "text": "Mitzeichnungsfrist bis 2026-08-09"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Grundlegende Reform des Embryonenschutzgesetzes",
+    "start_date": "2026-05-04",
+    "category": "Gesundheitswesen"
+  },
+  "190163": {
+    "slug": "190163",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 104
+      },
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 110
+      },
+      {
+        "checked_at": "2026-07-07T10:24:27-06:00",
+        "count": 112
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 154
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 158
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit der Petition wird gefordert, dass Offshore-Windparks ihre Fundamente nach einer Betriebseinstellung nicht zurückbauen müssen.</p></p>",
+    "summary": "Mit der Petition wird gefordert, dass Offshore-Windparks ihre Fundamente nach einer Betriebseinstellung nicht zurückbauen müssen.",
+    "signatures": 158,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2025/_11/_08/Petition_190163.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-06T21:37:40",
+        "text": "Mitzeichnungsfrist bis 2026-08-10"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Kein Rückbau der Fundamente von Offshore-Windparks nach einer Betriebseinstellung",
+    "start_date": "2025-11-08",
+    "category": "Naturschutz und Ökologie"
+  },
+  "198725": {
+    "slug": "198725",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 64
+      },
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 66
+      },
+      {
+        "checked_at": "2026-07-07T10:24:27-06:00",
+        "count": 69
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 109
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 110
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit der Petition wird gefordert, dass die digitalen Inhalte von (www.)Gesetze-im-Internet(.de) versioniert werden und die Begründungen der Änderungen/Versionen nachlesbar sind.</p></p>",
+    "summary": "Mit der Petition wird gefordert, dass die digitalen Inhalte von (www.)Gesetze-im-Internet(.de) versioniert werden und die Begründungen der Änderungen/Versionen nachlesbar sind.",
+    "signatures": 110,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_04/_19/Petition_198725.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-06T21:37:40",
+        "text": "Mitzeichnungsfrist bis 2026-08-10"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Versionierung von Änderungen an digitalen Inhalten",
+    "start_date": "2026-04-19",
+    "category": "Beschwerden über Bundesbehörden"
+  },
+  "199064": {
+    "slug": "199064",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 79
+      },
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 80
+      },
+      {
+        "checked_at": "2026-07-07T10:24:27-06:00",
+        "count": 83
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 127
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 130
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit der Petition wird gefordert, das Arbeitszeitgesetz oder das Mindestlohngesetz so zu ergänzen, dass Arbeitgeber gesetzlich verpflichtet werden, bei Arbeit an Sonn- und gesetzlichen Feiertagen einen finanziellen Zuschlag zu zahlen. Diese Regelung muss explizit auch für geringfügig Beschäftigte (Minijobber) gelten, um die bestehende Ungleichbehandlung gegenüber vielen Festangestellten zu beenden.</p></p>",
+    "summary": "Mit der Petition wird gefordert, das Arbeitszeitgesetz oder das Mindestlohngesetz so zu ergänzen, dass Arbeitgeber gesetzlich verpflichtet werden, bei Arbeit an Sonn- und gesetzlichen Feiertagen einen…",
+    "signatures": 130,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_04/_22/Petition_199064.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-06T21:37:40",
+        "text": "Mitzeichnungsfrist bis 2026-08-10"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Zahlung von Sonn- und Feiertagszuschlägen für Minijobber",
+    "start_date": "2026-04-22",
+    "category": "Arbeitslohn"
+  },
+  "200101": {
+    "slug": "200101",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 54
+      },
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 55
+      },
+      {
+        "checked_at": "2026-07-07T10:24:27-06:00",
+        "count": 57
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 72
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 73
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit der Petition wird gefordert, das Betriebsverfassungsgesetz und die Verordnung zur Durchführung des Betriebsverfassungsgesetzes (Wahlordnung) dahingehend zu ändern, dass eine elektronische Unterschrift zulässig ist.</p></p>",
+    "summary": "Mit der Petition wird gefordert, das Betriebsverfassungsgesetz und die Verordnung zur Durchführung des Betriebsverfassungsgesetzes (Wahlordnung) dahingehend zu ändern, dass eine elektronische Untersch…",
+    "signatures": 73,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_05/_06/Petition_200101.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-06T21:37:40",
+        "text": "Mitzeichnungsfrist bis 2026-08-10"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Zulässigkeit einer elektronischen Unterschrift",
+    "start_date": "2026-05-06",
+    "category": "Betriebsverfassung"
+  },
+  "200640": {
+    "slug": "200640",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 75
+      },
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 78
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 106
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 108
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit der Petition wird die Prüfung gesetzlicher Änderungen gefordert, um anwaltliche Unterstützung und rechtliche Hilfsangebote im Strafverfahren für alle Menschen besser und niedrigschwelliger zugänglich zu machen. </p></p>",
+    "summary": "Mit der Petition wird die Prüfung gesetzlicher Änderungen gefordert, um anwaltliche Unterstützung und rechtliche Hilfsangebote im Strafverfahren für alle Menschen besser und niedrigschwelliger zugängl…",
+    "signatures": 108,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_05/_12/Petition_200640.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-06T21:37:40",
+        "text": "Mitzeichnungsfrist bis 2026-08-10"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Gewährleistung anwaltlicher Unterstützung/rechtlicher Hilfsangebote im Strafverfahren für alle Menschen",
+    "start_date": "2026-05-12",
+    "category": "Strafprozessordnung"
+  },
+  "201482": {
+    "slug": "201482",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 4391
+      },
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 4601
+      },
+      {
+        "checked_at": "2026-07-07T07:30:33-06:00",
+        "count": 4620
+      },
+      {
+        "checked_at": "2026-07-07T10:24:27-06:00",
+        "count": 4692
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 6203
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 6244
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit der Petition wird gefordert, das Strafgesetzbuch und die Richtlinien für das Strafverfahren und das Bußgeldverfahren (RiStBV) bei Straftaten von Autofahrenden gegen Radfahrende und zu Fuß Gehende so zu ändern, dass Autogewalt regelmäßig verfolgt wird, indem die Staatsanwaltschaften das \"öffentliche Interesse\" an der Strafverfolgung bejahen, anstatt wie bisher auf den Privatklageweg zu verweisen.</p></p>",
+    "summary": "Mit der Petition wird gefordert, das Strafgesetzbuch und die Richtlinien für das Strafverfahren und das Bußgeldverfahren (RiStBV) bei Straftaten von Autofahrenden gegen Radfahrende und zu Fuß Gehende …",
+    "signatures": 6244,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_05/_26/Petition_201482.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-06T21:37:40",
+        "text": "Mitzeichnungsfrist bis 2026-08-10"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Änderung der strafrechtlichen Regelungen bei Straftaten gegen Radfahrende und zu Fuß Gehende",
+    "start_date": "2026-05-26",
+    "category": "Gemeingefährliche Straftaten"
+  },
+  "186771": {
+    "slug": "186771",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 153
+      },
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 160
+      },
+      {
+        "checked_at": "2026-07-07T10:24:27-06:00",
+        "count": 163
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 196
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 199
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit der Petition wird gefordert, die Einstufung von Psilocybin und Psilocin sowie deren Ester im Betäubungsmittelgesetz (BtMG) neu zu bewerten, den aktuellen Stand der Forschung zu berücksichtigen und eine Überführung ins Arzneimittelgesetz zu prüfen.</p></p>",
+    "summary": "Mit der Petition wird gefordert, die Einstufung von Psilocybin und Psilocin sowie deren Ester im Betäubungsmittelgesetz (BtMG) neu zu bewerten, den aktuellen Stand der Forschung zu berücksichtigen und…",
+    "signatures": 199,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2025/_09/_17/Petition_186771.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-06T21:37:40",
+        "text": "Mitzeichnungsfrist bis 2026-08-11"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Neubewertung der Einstufung von Psilocybin und Psilocin sowie deren Ester im BtMG",
+    "start_date": "2025-09-17",
+    "category": "Sucht und Drogen"
+  },
+  "198057": {
+    "slug": "198057",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 5076
+      },
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 5164
+      },
+      {
+        "checked_at": "2026-07-07T07:30:33-06:00",
+        "count": 5169
+      },
+      {
+        "checked_at": "2026-07-07T10:24:27-06:00",
+        "count": 5201
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 8228
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 8269
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit der Petition wird gefordert, dass der Bundestag Beteiligung ermöglicht, um auch zwischen den Wahlen zielgerichtet Vorschläge und Kritik anbringen zu können. Insbesondere sollen losbasierte Bürgerräte organisiert, über eine Plattform die Kommentierung von Gesetzesentwürfen ermöglicht, das Petitionsrecht ausgebaut und nach dem Modell der Bundesländer direktdemokratische Instrumente wie ein Initiativ- und ein Vetorecht eingeführt werden.</p></p>",
+    "summary": "Mit der Petition wird gefordert, dass der Bundestag Beteiligung ermöglicht, um auch zwischen den Wahlen zielgerichtet Vorschläge und Kritik anbringen zu können. Insbesondere sollen losbasierte Bürgerr…",
+    "signatures": 8269,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_04/_07/Petition_198057.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-06T21:37:40",
+        "text": "Mitzeichnungsfrist bis 2026-08-11"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Bürgerbeteiligung auch zwischen den Wahlen ermöglichen",
+    "start_date": "2026-04-07",
+    "category": "Volksabstimmung"
+  },
+  "196343": {
+    "slug": "196343",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 123
+      },
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 125
+      },
+      {
+        "checked_at": "2026-07-07T10:24:27-06:00",
+        "count": 126
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 142
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Die Petition soll erreichen, die gleich lautenden Erlasse der obersten Finanzbehörden der Länder zur Versteuerung des geldwerten Vorteils der von Luftfahrtunternehmen gewährten unentgeltlichen oder verbilligten Flüge vom 5.11.2025 unverzüglich zurückzunehmen und den alten Sachstand wieder in Kraft zu setzen.</p></p>",
+    "summary": "Die Petition soll erreichen, die gleich lautenden Erlasse der obersten Finanzbehörden der Länder zur Versteuerung des geldwerten Vorteils der von Luftfahrtunternehmen gewährten unentgeltlichen oder ve…",
+    "signatures": 142,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_03/_12/Petition_196343.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-06T21:37:40",
+        "text": "Mitzeichnungsfrist bis 2026-08-12"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Steuerliche Behandlung der von Luftfahrtunternehmen gewährten unentgeltlichen/verbilligten Flüge",
+    "start_date": "2026-03-12",
+    "category": "Einkommensteuer"
+  },
+  "201268": {
+    "slug": "201268",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 66
+      },
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 70
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 102
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 103
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Ich bitte den Bundestag zu prüfen, wie der Onlinehandel – insbesondere große ausländische Anbieter – stärker besteuert werden kann, um faire Wettbewerbsbedingungen herzustellen. Die zusätzlichen Einnahmen sollen gezielt zur Entlastung und Förderung des lokalen Einzelhandels eingesetzt werden, damit regionale Strukturen, Arbeitsplätze und Innenstädte langfristig stabil bleiben.</p></p>",
+    "summary": "Ich bitte den Bundestag zu prüfen, wie der Onlinehandel – insbesondere große ausländische Anbieter – stärker besteuert werden kann, um faire Wettbewerbsbedingungen herzustellen. Die zusätzlichen Einna…",
+    "signatures": 103,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_05/_22/Petition_201268.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-06T21:37:40",
+        "text": "Mitzeichnungsfrist bis 2026-08-12"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Stärkere Besteuerung des Onlinehandels",
+    "start_date": "2026-05-22",
+    "category": "Steuerrecht"
+  },
+  "201645": {
+    "slug": "201645",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 80
+      },
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 85
+      },
+      {
+        "checked_at": "2026-07-07T10:24:27-06:00",
+        "count": 86
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 130
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 133
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Die Besteuerung von Schenkungen soll grundsätzlich anders geregelt werden als die von Erbschaften. Der Steuersatz für Schenkungen zu Lebzeiten des Schenkenden sollte ab einem Betrag von 50.000 € einen hohen Steuersatz (30 – 50 %) haben, unabhängig vom Verwandtschaftsgrad und gesetzlicher Erbfolge. Alle Schenkungen an eine Person sollten über die gesamte Lebenszeit aufsummiert werden, um die Schenkungsteuer nicht durch mehrere (kleinere) Schenkungen über einen längeren Zeitraum zu umgehen.</p></p>",
+    "summary": "Die Besteuerung von Schenkungen soll grundsätzlich anders geregelt werden als die von Erbschaften. Der Steuersatz für Schenkungen zu Lebzeiten des Schenkenden sollte ab einem Betrag von 50.000 € einen…",
+    "signatures": 133,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_05/_29/Petition_201645.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-06T21:37:40",
+        "text": "Mitzeichnungsfrist bis 2026-08-12"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Besteuerung von Schenkungen und Erbschaften",
+    "start_date": "2026-05-29",
+    "category": "Schenkungsteuer"
+  },
+  "193137": {
+    "slug": "193137",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 7
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 21
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit der Petition wird die rezeptfreie Verfügbarkeit von Arzneimitteln mit dem Wirkstoff Cytisin zur Rauchentwöhnung gefordert. Angesichts der gesundheitlichen und gesellschaftlichen Folgen des Rauchens soll der Zugang zu wirksamen Entwöhnungsmitteln erleichtert werden.</p></p>",
+    "summary": "Mit der Petition wird die rezeptfreie Verfügbarkeit von Arzneimitteln mit dem Wirkstoff Cytisin zur Rauchentwöhnung gefordert. Angesichts der gesundheitlichen und gesellschaftlichen Folgen des Rauchen…",
+    "signatures": 21,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_01/_08/Petition_193137.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-06T21:37:40",
+        "text": "Mitzeichnungsfrist bis 2026-08-16"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Rezeptfreie Verfügbarkeit von Arzneimitteln mit dem Wirkstoff Cytisin zur Rauchentwöhnung",
+    "start_date": "2026-01-08",
+    "category": "Sucht und Drogen"
+  },
+  "198593": {
+    "slug": "198593",
+    "first_seen": "2026-07-06T21:37:40-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T21:37:40-06:00",
+        "count": 25
+      },
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 31
+      },
+      {
+        "checked_at": "2026-07-07T10:24:27-06:00",
+        "count": 34
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 109
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 114
+      }
+    ],
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit der Petition wird gefordert, die gesetzlichen Regelungen zum Nichtraucherschutz im öffentlichen Raum, insbesondere an Haltestellen und Bahnhöfen, bundesweit zu verschärfen. Ziel ist eine signifikante Erhöhung der Bußgelder für Verstöße sowie eine verstärkte Kontrolle durch die zuständigen Behörden.</p></p>",
+    "summary": "Mit der Petition wird gefordert, die gesetzlichen Regelungen zum Nichtraucherschutz im öffentlichen Raum, insbesondere an Haltestellen und Bahnhöfen, bundesweit zu verschärfen. Ziel ist eine signifika…",
+    "signatures": 114,
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_04/_17/Petition_198593.nc.html",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-06T21:37:40",
+        "text": "Mitzeichnungsfrist bis 2026-08-16"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "title": "Bundesweite Verschärfung gesetzlicher Regelungen zum Nichtraucherschutz im öffentlichen Raum",
+    "start_date": "2026-04-17",
+    "category": "Nichtraucherschutz"
+  },
+  "196340": {
+    "slug": "196340",
+    "first_seen": "2026-07-07T07:06:47-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 4
+      },
+      {
+        "checked_at": "2026-07-07T10:24:27-06:00",
+        "count": 6
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 16
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 18
+      }
+    ],
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_03/_12/Petition_196340.nc.html",
+    "title": "Pflicht zur serologischen Untersuchung über ausreichenden Impfschutz für alle gewerblichen Junghennenaufzüchter",
+    "start_date": "2026-03-12",
+    "category": "Tierseuchenbekämpfung",
+    "signatures": 18,
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Der Petent fordert eine gesetzliche Verpflichtung für alle gewerblichen Junghennenaufzüchter dahingehend, dass vor der Abgabe von Tieren an Dritte (Hobbyhalter, mobile Ställe, Erzeugerbetriebe) ein serologischer Nachweis über einen ausreichenden Impfschutz gegen Newcastle Disease (ND) zu erbringen ist.</p></p>",
+    "summary": "Der Petent fordert eine gesetzliche Verpflichtung für alle gewerblichen Junghennenaufzüchter dahingehend, dass vor der Abgabe von Tieren an Dritte (Hobbyhalter, mobile Ställe, Erzeugerbetriebe) ein se…",
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-07T07:06:47",
+        "text": "Mitzeichnungsfrist bis 2026-08-17"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "198437": {
+    "slug": "198437",
+    "first_seen": "2026-07-07T07:06:47-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 2
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 19
+      }
+    ],
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_04/_14/Petition_198437.nc.html",
+    "title": "Verbot der Verwendung von jodiertem Speisesalz",
+    "start_date": "2026-04-14",
+    "category": "Lebens- und Genussmittel",
+    "signatures": 19,
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit der Petition wird gefordert, die Verwendung von Salz, welches jodiert ist oder mit anderen Nahrungsergänzungsmitteln behandelt wurde, im Bereich der Fertignahrungsherstellung, in Restaurants und Gemeinschaftsverpflegungseinrichtungen zu verbieten.</p></p>",
+    "summary": "Mit der Petition wird gefordert, die Verwendung von Salz, welches jodiert ist oder mit anderen Nahrungsergänzungsmitteln behandelt wurde, im Bereich der Fertignahrungsherstellung, in Restaurants und G…",
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-07T07:06:47",
+        "text": "Mitzeichnungsfrist bis 2026-08-17"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "199509": {
+    "slug": "199509",
+    "first_seen": "2026-07-07T07:06:47-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 125
+      },
+      {
+        "checked_at": "2026-07-07T07:30:33-06:00",
+        "count": 131
+      },
+      {
+        "checked_at": "2026-07-07T10:24:27-06:00",
+        "count": 175
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 371
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 373
+      }
+    ],
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_04/_28/Petition_199509.nc.html",
+    "title": "Regelungen zur Veräußerung von Vermögensgegenständen durch Behörden",
+    "start_date": "2026-04-28",
+    "category": "Bundeshaushaltsordnung",
+    "signatures": 373,
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit der Petition wird gefordert, die Bundeshaushaltsordnung um eine Regelung zu ergänzen, die Bundesbehörden verpflichtet, ausgemusterte, funktionsfähige Fahrzeuge und Ausstattungsgegenstände vor ihrer Verwertung in einem transparenten, diskriminierungsfreien Verfahren gegen ein symbolisches Entgelt vorrangig gemeinnützigen Organisationen anzubieten.</p></p>",
+    "summary": "Mit der Petition wird gefordert, die Bundeshaushaltsordnung um eine Regelung zu ergänzen, die Bundesbehörden verpflichtet, ausgemusterte, funktionsfähige Fahrzeuge und Ausstattungsgegenstände vor ihre…",
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-07T07:06:47",
+        "text": "Mitzeichnungsfrist bis 2026-08-17"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "201686": {
+    "slug": "201686",
+    "first_seen": "2026-07-07T07:06:47-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 101
+      },
+      {
+        "checked_at": "2026-07-07T07:30:33-06:00",
+        "count": 103
+      },
+      {
+        "checked_at": "2026-07-07T10:24:27-06:00",
+        "count": 128
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 475
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 478
+      }
+    ],
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_05/_30/Petition_201686.nc.html",
+    "title": "Stopp der geplanten Einstellung der DAAD-Hochschulkooperationsprogramme",
+    "start_date": "2026-05-30",
+    "category": "Entwicklungszusammenarbeit",
+    "signatures": 478,
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit der Petition wird gefordert, die geplante Einstellung der DAAD-Hochschulkooperationsprogramme mit Ländern des Globalen Südens durch das Bundesministerium für wirtschaftliche Zusammenarbeit und Entwicklung (BMZ) zu stoppen, die Förderung dauerhaft auf mindestens 25 Millionen Euro jährlich zu verstetigen sowie einen transparenten Dialog zwischen BMZ, DAAD und den betroffenen Partnerhochschulen über zukunftsfähige Finanzierungsmodelle zu etablieren.</p></p>",
+    "summary": "Mit der Petition wird gefordert, die geplante Einstellung der DAAD-Hochschulkooperationsprogramme mit Ländern des Globalen Südens durch das Bundesministerium für wirtschaftliche Zusammenarbeit und Ent…",
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-07T07:06:47",
+        "text": "Mitzeichnungsfrist bis 2026-08-17"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "202037": {
+    "slug": "202037",
+    "first_seen": "2026-07-07T07:06:47-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-07T07:06:47-06:00",
+        "count": 1
+      },
+      {
+        "checked_at": "2026-07-07T10:24:27-06:00",
+        "count": 3
+      },
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 19
+      }
+    ],
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_06/_05/Petition_202037.nc.html",
+    "title": "Änderung der Regelungen zur passiven Teilnahme an der Sozialwahl",
+    "start_date": "2026-06-05",
+    "category": "Reformvorschläge in der Sozialversicherung",
+    "signatures": 19,
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Der Deutsche Bundestag möge die §§ 45, 48, 48a bis 48c SGB IV und die SVWO so reformieren, dass neue, unabhängige und thematisch spezialisierte Listen bei Sozialversicherungswahlen realistische Zugangschancen erhalten. Dazu sollen Unterstützungsquoren gesenkt, digitale Unterstützungen ermöglicht, die 5-Prozent-Hürde überprüft und faire Zulassungsregeln für neue Versicherten- und Arbeitnehmerinitiativen geschaffen werden.</p></p>",
+    "summary": "Der Deutsche Bundestag möge die §§ 45, 48, 48a bis 48c SGB IV und die SVWO so reformieren, dass neue, unabhängige und thematisch spezialisierte Listen bei Sozialversicherungswahlen realistische Zugang…",
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-07T07:06:47",
+        "text": "Mitzeichnungsfrist bis 2026-08-17"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "198918": {
+    "slug": "198918",
+    "first_seen": "2026-07-13T10:54:20-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 60
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 63
+      }
+    ],
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_04/_20/Petition_198918.nc.html",
+    "title": "Verankerung des Rettungsdienstes als eigenständigen medizinischen Leistungsbereich im SGB V",
+    "start_date": "2026-04-20",
+    "category": "Gesetzliche Krankenversicherung - Leistungen",
+    "signatures": 63,
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Der Deutsche Bundestag wird gebeten, den Rettungsdienst als eigenständigen medizinischen Leistungsbereich ausdrücklich im Fünften Buch Sozialgesetzbuch (SGB V) zu verankern und ihn inhaltlich und strukturell von der bislang lediglich ergänzenden Einordnung als „Fahrkosten“ oder Annexleistung zu lösen.</p></p>",
+    "summary": "Der Deutsche Bundestag wird gebeten, den Rettungsdienst als eigenständigen medizinischen Leistungsbereich ausdrücklich im Fünften Buch Sozialgesetzbuch (SGB V) zu verankern und ihn inhaltlich und stru…",
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T10:54:20",
+        "text": "Mitzeichnungsfrist bis 2026-08-18"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "199370": {
+    "slug": "199370",
+    "first_seen": "2026-07-13T10:54:20-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 25
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 26
+      }
+    ],
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_04/_27/Petition_199370.nc.html",
+    "title": "Verabschiedung eines Digitalisierungs- und Präventionsgesetzes",
+    "start_date": "2026-04-27",
+    "category": "Ärzte",
+    "signatures": 26,
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Der Deutsche Bundestag möge ein Digitalisierungs- und Präventionsgesetz verabschieden. Vertragsärzte sollen verpflichtet werden, eine interoperable Online-Terminbuchungsschnittstelle anzubieten. Die technische Wahl der Software bleibt frei, muss aber mit der ePA kommunizieren können. Parallel dazu ist das Vergütungssystem von reiner Akut-Reparatur auf gesundheitliche Vorsorge umzustellen. Ziel ist eine effiziente, dezentrale und präventionsorientierte Gesundheitsversorgung.</p></p>",
+    "summary": "Der Deutsche Bundestag möge ein Digitalisierungs- und Präventionsgesetz verabschieden. Vertragsärzte sollen verpflichtet werden, eine interoperable Online-Terminbuchungsschnittstelle anzubieten. Die t…",
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T10:54:20",
+        "text": "Mitzeichnungsfrist bis 2026-08-18"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "199584": {
+    "slug": "199584",
+    "first_seen": "2026-07-13T10:54:20-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 134
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 142
+      }
+    ],
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_04/_29/Petition_199584.nc.html",
+    "title": "Keine Einführung der geplanten Teilkrankschreibung",
+    "start_date": "2026-04-29",
+    "category": "Ärzte",
+    "signatures": 142,
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Die Petition fordert, die geplante Teilkrankschreibung nicht einzuführen. Ziel ist es, Arbeitnehmer vor Druck zu schützen, trotz Krankheit zu arbeiten, und eine vollständige Genesung zu sichern. Medizinische Entscheidungen sollen unabhängig bleiben und nicht durch wirtschaftliche Interessen beeinflusst werden. Die Gesundheit der Beschäftigten muss Vorrang vor Einsparmaßnahmen haben.</p></p>",
+    "summary": "Die Petition fordert, die geplante Teilkrankschreibung nicht einzuführen. Ziel ist es, Arbeitnehmer vor Druck zu schützen, trotz Krankheit zu arbeiten, und eine vollständige Genesung zu sichern. Mediz…",
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T10:54:20",
+        "text": "Mitzeichnungsfrist bis 2026-08-18"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "199680": {
+    "slug": "199680",
+    "first_seen": "2026-07-13T10:54:20-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 48
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 49
+      }
+    ],
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_04/_30/Petition_199680.nc.html",
+    "title": "Finanzierung von Tests zur Typisierung in der DKMS für mögliche Spender über GKV & PKV",
+    "start_date": "2026-04-30",
+    "category": "Gesetzliche Krankenversicherung - Leistungen",
+    "signatures": 49,
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit der Petition wird gefordert, Tests zur Typisierung in der Deutschen Knochenmarkspenderdatei (DKMS) für mögliche Spender über die gesetzlichen und privaten Krankenkassen zu finanzieren.</p></p>",
+    "summary": "Mit der Petition wird gefordert, Tests zur Typisierung in der Deutschen Knochenmarkspenderdatei (DKMS) für mögliche Spender über die gesetzlichen und privaten Krankenkassen zu finanzieren.",
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T10:54:20",
+        "text": "Mitzeichnungsfrist bis 2026-08-18"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "200457": {
+    "slug": "200457",
+    "first_seen": "2026-07-13T10:54:20-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 107
+      }
+    ],
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_05/_10/Petition_200457.nc.html",
+    "title": "Einschränkung bzw. Verbot sogenannter „Mogelpackungen“ im Handel",
+    "start_date": "2026-05-10",
+    "category": "Mess- und Eichgesetz (MessEG)",
+    "signatures": 107,
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit der Petition wird eine Einschränkung bzw. ein Verbot sogenannter „Mogelpackungen“ im Handel gefordert.</p></p>",
+    "summary": "Mit der Petition wird eine Einschränkung bzw. ein Verbot sogenannter „Mogelpackungen“ im Handel gefordert.",
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T10:54:20",
+        "text": "Mitzeichnungsfrist bis 2026-08-18"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "201334": {
+    "slug": "201334",
+    "first_seen": "2026-07-13T10:54:20-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-13T10:54:20-06:00",
+        "count": 19
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 34
+      }
+    ],
+    "url": "https://epetitionen.bundestag.de/petitionen/_2026/_05/_23/Petition_201334.nc.html",
+    "title": "Verbesserung der Nachsorge von Frauen nach der Geburt",
+    "start_date": "2026-05-23",
+    "category": "Qualitätssicherung im medizinischen Bereich",
+    "signatures": 34,
+    "description_full": "<p><p>\n\t\tText der Petition\n\t</p>\n<p>Mit der Petition wird gefordert, dass die Nachsorge von Frauen nach der Geburt verbessert wird. Es soll ein Fokus auf den Gesundheitszustand der Frau gelegt werden, sowohl physisch als auch psychisch. Dazu sollte eine Expertenkommission eine Übersicht/Checkliste (z. B. fest verankert im Mutterpass) erarbeiten.</p></p>",
+    "summary": "Mit der Petition wird gefordert, dass die Nachsorge von Frauen nach der Geburt verbessert wird. Es soll ein Fokus auf den Gesundheitszustand der Frau gelegt werden, sowohl physisch als auch psychisch.…",
+    "goal": 30000,
+    "recipient": "Deutscher Bundestag · Petitionsausschuss",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T10:54:20",
+        "text": "Mitzeichnungsfrist bis 2026-08-23"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  }
+}
