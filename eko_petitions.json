@@ -10,6 +10,7 @@
       "recipient": "Adressat",
       "category": "Thema/Kategorie (falls die Plattform Kategorien hat)",
       "category_url": "Link zur Kategorieseite",
+      "tags": "bis zu 10 aus dem Text abgeleitete Schlagwörter (zum Verlinken)",
       "summary": "Kurzbeschreibung (og:description)",
       "description_full": "komplette, gegliederte Beschreibung als bereinigtes HTML",
       "image_url": "Petitionsbild",
@@ -25,7 +26,7 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-07-13T13:23:42-06:00",
+    "generated_at": "2026-07-20T22:52:34-06:00",
     "petition_count": 28,
     "new_petitions_last_run": []
   },

@@ -225,10 +225,15 @@ def run(args) -> None:
         log(f"NEU: {len(new_petitions)} neue Kampagne(n) in diesem Lauf.")
 
     prog(message="Speichere & baue HTML …")
-    save(quiet=False, new_petitions_last_run=new_petitions)
+    save(quiet=False, new_petitions_last_run=new_petitions,
+         available=len(discovered))
     core.write_list_html(PLATFORM)
     log("Fertig (WeMove Europe).")
 
+
+def check(fetcher):
+    return core.check_source(fetcher, f"{WWW_URL}/de/campaigns", SIGN_HREF_RE, 20,
+                             "Kampagnen-Links")
 
 PLATFORM = Platform(
     key="wemove",
@@ -242,6 +247,7 @@ PLATFORM = Platform(
     data_file=DATA_FILE,
     html_file=HTML_FILE,
     run=run,
+    check=check,
 )
 
 

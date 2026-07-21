@@ -287,10 +287,21 @@ def run(args) -> None:
         log(f"NEU: {len(new_petitions)} neue Aktion(en) in diesem Lauf.")
 
     prog(message="Speichere & baue HTML …")
-    save(quiet=False, new_petitions_last_run=new_petitions)
+    save(quiet=False, new_petitions_last_run=new_petitions,
+         available=len(discovered))
     core.write_list_html(PLATFORM)
     log("Fertig (350.org).")
 
+
+def check(fetcher):
+    resp = fetcher.get(_api_url(TIME_FILTERS[0]))
+    if resp is None or not resp.ok:
+        return False, "JSON-API nicht erreichbar"
+    try:
+        n = len(json.loads(resp.text))
+    except ValueError:
+        return False, "API liefert kein JSON"
+    return (n >= 1), f"{n} Aktionen (Europa/Deutsch)"
 
 PLATFORM = Platform(
     key="threefifty",
@@ -306,6 +317,7 @@ PLATFORM = Platform(
     data_file=DATA_FILE,
     html_file=HTML_FILE,
     run=run,
+    check=check,
 )
 
 

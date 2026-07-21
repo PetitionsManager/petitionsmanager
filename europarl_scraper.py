@@ -215,10 +215,15 @@ def run(args) -> None:
         log(f"NEU: {len(new_petitions)} neue Petition(en) in diesem Lauf.")
 
     prog(message="Speichere & baue HTML …")
-    save(quiet=False, new_petitions_last_run=new_petitions)
+    save(quiet=False, new_petitions_last_run=new_petitions,
+         available=len(discovered))
     core.write_list_html(PLATFORM)
     log("Fertig (Europäisches Parlament).")
 
+
+def check(fetcher):
+    return core.check_source(fetcher, LIST_URL.format(size=20), NUMBER_HREF_RE, 10,
+                             "DE-Petitionen")
 
 PLATFORM = Platform(
     key="europarl",
@@ -233,6 +238,7 @@ PLATFORM = Platform(
     data_file=DATA_FILE,
     html_file=HTML_FILE,
     run=run,
+    check=check,
 )
 
 

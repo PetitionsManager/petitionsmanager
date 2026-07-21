@@ -262,10 +262,15 @@ def run(args) -> None:
         log("Keine neuen Petitionen seit dem letzten Lauf gefunden.")
 
     prog(message="Speichere & baue HTML …")
-    save(quiet=False, new_petitions_last_run=new_petitions)
+    save(quiet=False, new_petitions_last_run=new_petitions,
+         available=len(discovered))
     core.write_list_html(PLATFORM)
     log("Fertig (OpenPetition).")
 
+
+def check(fetcher):
+    return core.check_source(fetcher, LIST_URL + "?seite=1", PETITION_HREF_RE, 5,
+                             "Petitionen")
 
 PLATFORM = Platform(
     key="openpetition",
@@ -279,6 +284,7 @@ PLATFORM = Platform(
     data_file=DATA_FILE,
     html_file=HTML_FILE,
     run=run,
+    check=check,
 )
 
 

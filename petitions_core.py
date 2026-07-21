@@ -74,6 +74,10 @@ class Platform:
     eyebrow: str = ""              # Kopfzeile der Listen-Seite
     data_file: Path | None = None  # None → reiner Platzhalter
     run: Callable | None = None    # run(args); None → reiner Platzhalter
+    check: Callable | None = None  # check(fetcher)->(ok:bool, detail:str):
+                                   # leichte Erreichbarkeits-/Format-Prüfung der
+                                   # Entdeckungsquelle (wenige Requests). Für
+                                   # `monitor.py --check` (erkennt kaputte Quellen).
     openness: int = 0              # Ampel 1(rot)–5(grün): Wie kooperativ gibt
                                    # die Plattform ihre Petitionen frei? 0=unbewertet
     openness_note: str = ""        # Kurzbegründung (Tooltip auf der Kachel)
@@ -144,6 +148,22 @@ def skip_recent(rec: dict | None, args=None,
         return False
     now = _dt.datetime.now(dt.tzinfo) if dt.tzinfo else _dt.datetime.now()
     return (now - dt) < _dt.timedelta(hours=hours)
+
+
+def check_source(fetcher, url: str, pattern, min_count: int = 1,
+                 label: str = "Treffer") -> tuple[bool, str]:
+    """Baustein für die Plattform-Health-Checks (monitor.py --check): holt EINE
+    URL und zählt eindeutige Regex-Treffer. (ok, Detailtext). `pattern` ist ein
+    kompiliertes re-Objekt; ok = genug Treffer (Quelle liefert noch Daten)."""
+    resp = fetcher.get(url)
+    if resp is None:
+        return False, f"nicht erreichbar ({url[:55]})"
+    if not resp.ok:
+        return False, f"HTTP {resp.status_code} ({url[:45]})"
+    hits = len({m if isinstance(m, str) else m[0]
+                for m in pattern.findall(resp.text)})
+    ok = hits >= min_count
+    return ok, f"{hits} {label}" + ("" if ok else f" – erwartet ≥{min_count}!")
 
 
 def log(msg: str) -> None:
@@ -1039,6 +1059,16 @@ def _live_card(platform: Platform) -> str:
     generated = meta.get("generated_at")
     cats = str(cat_count) if cat_count else "—"
 
+    # Vollständigkeitsgrad: wie viele der bei der Entdeckung gefundenen
+    # Kandidaten (Feld "available") stecken schon im Store? Zeigt z. B. den
+    # großen Change.org-Backlog. Ohne "available" (Altbestand vor diesem
+    # Feature) Rückfall auf 100 % (= als vollständig angenommen).
+    available = meta.get("available") or len(store) or 1
+    pct = min(100, round(len(store) / available * 100)) if available else 100
+    comp_cls, comp_lbl = (("full", "vollständig") if pct >= 95 else
+                          ("grow", "wächst noch") if pct >= 50 else
+                          ("low", "großer Backlog"))
+
     return f"""
     <a class="card" href="{platform.html_file.name}" data-platform="{_esc(platform.key)}">
       <div class="card-head"><span class="card-dot weact"></span><h2>{_esc(platform.name)}</h2>
@@ -1049,6 +1079,11 @@ def _live_card(platform: Platform) -> str:
         <div class="cs"><div class="n">{online}</div><div class="l">Online</div></div>
         <div class="cs"><div class="n">{offline}</div><div class="l">Offline</div></div>
         <div class="cs"><div class="n">{cats}</div><div class="l">Kategorien</div></div>
+      </div>
+      <div class="completeness {comp_cls}">
+        <div class="completeness__head"><span>Vollständigkeit</span><b>{pct}%</b></div>
+        <div class="completeness__bar"><div class="completeness__fill" style="width:{pct}%"></div></div>
+        <span class="completeness__sub">{len(store)} von ~{available} entdeckten · {comp_lbl}</span>
       </div>
       <div class="mini-progress">
         <div class="mini-progress__bar"><div class="mini-progress__fill"></div></div>
@@ -1148,6 +1183,19 @@ _DASHBOARD_TEMPLATE = """<!DOCTYPE html>
   .cs .n{font-family:var(--mono);font-size:20px;font-weight:700}
   .cs .l{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
   .card-sub{color:var(--muted);font-size:12px;margin:0 0 14px;min-height:2.6em}
+  .completeness{margin:0 0 12px}
+  .completeness__head{display:flex;justify-content:space-between;align-items:baseline;
+    font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+  .completeness__head b{font-family:var(--mono);font-size:15px;color:var(--ink)}
+  .completeness__bar{height:7px;background:var(--bg);border-radius:999px;
+    overflow:hidden;margin:4px 0 4px}
+  .completeness__fill{height:100%;border-radius:999px;transition:width .3s}
+  .completeness__sub{font-size:11px;color:var(--muted)}
+  .completeness.full  .completeness__fill{background:var(--online)}
+  .completeness.grow  .completeness__fill{background:#c98a20}
+  .completeness.low   .completeness__fill{background:var(--offline)}
+  .completeness.full  .completeness__head b{color:var(--online)}
+  .completeness.low   .completeness__head b{color:var(--offline)}
   .card-btn{display:inline-block;font-weight:650;color:var(--indigo)}
   .card.placeholder .cs .n{color:var(--muted)}
   .run-pill{display:none;align-items:center;font-size:10px;font-weight:700;

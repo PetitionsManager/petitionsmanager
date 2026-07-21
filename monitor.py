@@ -82,6 +82,9 @@ def parse_args():
     p.add_argument("--force", action="store_true",
                    help="Mindestabstand ignorieren und alle bekannten "
                         "Petitionen erneut prüfen")
+    p.add_argument("--check", action="store_true",
+                   help="Nur die Entdeckungsquellen prüfen (schnell, kein "
+                        "Scrape); Exit-Code 1, wenn eine Quelle fehlschlägt")
     p.add_argument("--html-only", action="store_true",
                    help="kein Scrape; nur HTML aus vorhandenen JSONs neu bauen")
     p.add_argument("--delay", type=float, default=core.REQUEST_DELAY,
@@ -93,9 +96,42 @@ def parse_args():
     return p.parse_args()
 
 
+def run_checks(args) -> None:
+    """Health-Check aller Live-Plattformen: prüft je Plattform die
+    Entdeckungsquelle (wenige Requests). Erkennt kaputte Quellen (Umbau,
+    404, Format-Änderung) FRÜH – ideal für einen CI-Schritt vor dem Scrape."""
+    # Browser-User-Agent wie die Scraper – sonst blockt Cloudflare (avaaz u. a.).
+    fetcher = core.Fetcher(delay=0.4, headers={
+        "User-Agent": ("Mozilla/5.0 (X11; Linux x86_64; rv:128.0) "
+                       "Gecko/20100101 Firefox/128.0"),
+        "Accept-Language": "de-DE,de;q=0.9"})
+    targets = [p for p in PLATFORMS if p.is_live
+               and (not args.platform or p.key == args.platform)]
+    core.log(f"Health-Check: {len(targets)} Plattform(en) …")
+    failed = []
+    for p in targets:
+        if not p.check:
+            print(f"  ??   {p.name:24} (kein Check definiert)")
+            continue
+        try:
+            ok, detail = p.check(fetcher)
+        except Exception as exc:
+            ok, detail = False, f"Ausnahme: {exc!r}"
+        print(f"  {'OK  ' if ok else 'FAIL'} {p.name:24} {detail}")
+        if not ok:
+            failed.append(p.key)
+    if failed:
+        core.log(f"FEHLGESCHLAGEN ({len(failed)}): {', '.join(failed)}")
+        raise SystemExit(1)
+    core.log("Alle Entdeckungsquellen erreichbar. ✓")
+
+
 def main() -> None:
     args = parse_args()
     try:
+        if args.check:
+            run_checks(args)
+            return
         if args.serve:
             core.serve(PLATFORMS, args)
             return

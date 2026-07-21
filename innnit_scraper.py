@@ -205,10 +205,22 @@ def run(args) -> None:
         log(f"NEU: {len(new_petitions)} neue Petition(en) in diesem Lauf.")
 
     prog(message="Speichere & baue HTML …")
-    save(quiet=False, new_petitions_last_run=new_petitions)
+    save(quiet=False, new_petitions_last_run=new_petitions,
+         available=(total_count if total_count is not None else len(seen)))
     core.write_list_html(PLATFORM)
     log("Fertig (Innn.it).")
 
+
+def check(fetcher):
+    url = f"{BASE_URL}/api/v2/posts/initiatives?limit=1&offset=0&type=petition&sort=createdAt"
+    resp = fetcher.get(url)
+    if resp is None or not resp.ok:
+        return False, "API nicht erreichbar"
+    try:
+        total = (json.loads(resp.text).get("meta") or {}).get("totalCount")
+    except ValueError:
+        return False, "API liefert kein JSON"
+    return (bool(total) and total > 50), f"API totalCount={total}"
 
 PLATFORM = Platform(
     key="innnit",
@@ -218,6 +230,7 @@ PLATFORM = Platform(
     data_file=DATA_FILE,
     html_file=HTML_FILE,
     run=run,
+    check=check,
     openness=3,
     openness_note="Mittel: vollständige Liste existiert, aber nur über ein "
                   "verstecktes internes API (per Reverse-Engineering gefunden); "
