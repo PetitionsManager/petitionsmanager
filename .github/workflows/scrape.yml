@@ -1,0 +1,70 @@
+name: Scrape & Publish
+
+# Holt täglich frische Petitionsdaten und veröffentlicht sie über GitHub Pages.
+# Der Scraper-Zustand (die *_petitions.json) lebt im Actions-Cache – so wächst
+# das Repo NICHT mit jedem Lauf. Manuell startbar über "Run workflow".
+on:
+  schedule:
+    - cron: '17 3 * * *'      # täglich 03:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: scrape-publish
+  cancel-in-progress: false
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Abhängigkeiten
+        run: pip install -r requirements.txt
+
+      - name: Scraper-Zustand aus Cache holen (Fallback: Stand im Repo)
+        uses: actions/cache/restore@v4
+        with:
+          path: '*_petitions.json'
+          key: petition-stores-${{ github.run_id }}
+          restore-keys: |
+            petition-stores-
+
+      - name: Scrapen (alle Live-Plattformen; überspringt <24 h Geprüftes)
+        run: python3 monitor.py
+
+      - name: Web-App-Daten erzeugen
+        run: python3 publish.py
+
+      - name: Scraper-Zustand cachen
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: '*_petitions.json'
+          key: petition-stores-${{ github.run_id }}
+
+      - name: Pages konfigurieren
+        uses: actions/configure-pages@v5
+
+      - name: webapp/ als Pages-Artefakt hochladen
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: webapp
+
+      - name: Auf GitHub Pages veröffentlichen
+        id: deploy
+        uses: actions/deploy-pages@v4

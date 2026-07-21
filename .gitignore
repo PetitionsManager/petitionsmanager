@@ -1,0 +1,11 @@
+# Python
+__pycache__/
+*.pyc
+
+# Scraper-HTML-Ausgabe (wird zur Laufzeit erzeugt, nicht versioniert)
+*_petitions.html
+dashboard.html
+threefifty_petitions.html
+
+# Scratch / lokal
+*.log

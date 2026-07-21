@@ -1,0 +1,694 @@
+{
+  "_meta": {
+    "_README": "Petitions-Monitor. Datensaetze werden aktualisiert, nie ueberschrieben.",
+    "fields": {
+      "slug": "ID/Schluessel aus der URL",
+      "url": "kanonische Petitions-URL",
+      "petition_id": "interne numerische ID der Plattform oder null",
+      "title": "Titel",
+      "started_by": "Gestartet von",
+      "recipient": "Adressat",
+      "category": "Thema/Kategorie (falls die Plattform Kategorien hat)",
+      "category_url": "Link zur Kategorieseite",
+      "summary": "Kurzbeschreibung (og:description)",
+      "description_full": "komplette, gegliederte Beschreibung als bereinigtes HTML",
+      "image_url": "Petitionsbild",
+      "signatures": "aktueller Unterschriftenstand",
+      "signatures_history": "Zeitreihe [{checked_at,count}]",
+      "milestones": "Meilenstein-Marken [{threshold,timestamp}]",
+      "updates": "Neuigkeiten [{timestamp,text}]",
+      "goal": "aktuelles Unterschriften-Ziel (falls die Plattform eines zeigt)",
+      "start_date": "Startdatum (plattformabhängig ermittelt)",
+      "status": "online | offline",
+      "first_seen": "erstmals gescrapt (unveraenderlich)",
+      "last_seen": "zuletzt online",
+      "last_checked": "zuletzt geprueft",
+      "offline_since": "seit wann offline oder null"
+    },
+    "generated_at": "2026-07-13T13:21:44-06:00",
+    "petition_count": 15,
+    "new_petitions_last_run": []
+  },
+  "les_ministeres_des_affaires_etrangeres_de_la_fr_uk_free_leonid_pshenichnov": {
+    "slug": "les_ministeres_des_affaires_etrangeres_de_la_fr_uk_free_leonid_pshenichnov",
+    "first_seen": "2026-07-06T10:23:35-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T10:23:35-06:00",
+        "count": 10611
+      },
+      {
+        "checked_at": "2026-07-06T13:49:10-06:00",
+        "count": 16811
+      },
+      {
+        "checked_at": "2026-07-06T13:49:10-06:00",
+        "count": 10611
+      },
+      {
+        "checked_at": "2026-07-06T13:52:49-06:00",
+        "count": 16811
+      },
+      {
+        "checked_at": "2026-07-06T13:52:49-06:00",
+        "count": 10611
+      },
+      {
+        "checked_at": "2026-07-06T13:57:44-06:00",
+        "count": 16811
+      },
+      {
+        "checked_at": "2026-07-06T13:57:44-06:00",
+        "count": 10617
+      },
+      {
+        "checked_at": "2026-07-07T07:08:12-06:00",
+        "count": 16822
+      },
+      {
+        "checked_at": "2026-07-07T07:08:12-06:00",
+        "count": 10628
+      },
+      {
+        "checked_at": "2026-07-07T07:30:33-06:00",
+        "count": 16825
+      },
+      {
+        "checked_at": "2026-07-07T07:30:33-06:00",
+        "count": 10628
+      },
+      {
+        "checked_at": "2026-07-07T10:24:27-06:00",
+        "count": 16825
+      },
+      {
+        "checked_at": "2026-07-07T10:24:27-06:00",
+        "count": 10628
+      },
+      {
+        "checked_at": "2026-07-13T10:54:19-06:00",
+        "count": 16879
+      },
+      {
+        "checked_at": "2026-07-13T10:54:19-06:00",
+        "count": 10684
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 16879
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 10684
+      }
+    ],
+    "title": "Freiheit für Leonid Pschenitschnow",
+    "summary": "Dieser 70-jährige Wissenschaftler sitzt im Gefängnis, weil er Alarm geschlagen hat, um die Antarktis zu schützen. Fordern Sie jetzt seine Freilassung!",
+    "image_url": "https://avaazdoimages.avaaz.org/cc9c1677886340dabc82c5035353aa65_meme.jpeg?1780998861",
+    "url": "https://secure.avaaz.org/community_petitions/de/les_ministeres_des_affaires_etrangeres_de_la_fr_uk_free_leonid_pshenichnov/",
+    "petition_id": 1766123,
+    "started_by": "Camille E.",
+    "recipient": "An die Außenministerien von Kanada, Frankreich, Deutschland, Japan, Italien und das Vereinigte Königreich",
+    "description_full": "<p><b><p></p><b></b></b><p><b>Leonid Pschenitschnow ist ein 70-jähriger ukrainischer Meeresbiologe, der sein Leben dem Schutz der Ozeane gewidmet hat. Jetzt drohen ihm bis zu 20 Jahre Haft.</b></p><p><b>Nicht etwa wegen einer Straftat. Sondern weil seine wissenschaftliche Arbeit über den antarktischen Krill wirtschaftliche Interessen bedroht.</b><br/></p><p>Krill sind winzige, garnelenartige Lebewesen, etwa so groß wie eine Büroklammer. Doch sie bilden eine der Lebensgrundlagen am Südpol, einem der abgelegensten und unberührtesten Ökosysteme unseres Planeten. Wale, Robben, Pinguine und viele Fischarten sind davon abhängig. Ohne Krill bricht das Ökosystem der Antarktis zusammen. </p><p>Leonid Pschenitschnow arbeitet seit Jahrzehnten mit der Kommission zur Erhaltung der lebenden Meeresschätze der Antarktis (CCAMLR) zusammen. Dieses internationale Gremium wurde 1982 ins Leben gerufen, um das Leben im Südpolarmeer zu schützen. Seine 27 Mitglieder, darunter Russland, die USA, China, Australien und die EU, kommen jedes Jahr zusammen, um über Fangquoten und die Einrichtung von Meeresschutzgebieten zu entscheiden (1).<br/></p><p>Leonid Pschenitschnow ist ein in der Fachwelt hoch angesehener Spezialist, der maßgebliche Beiträge zur ukrainischen und internationalen Antarktisforschung geleistet hat. Von 1992 bis 2007 arbeitete er auf ukrainischen Fischerei- und Forschungsschiffen, australischen Trawlern und dem deutschen Forschungseisbrecher Polarstern. Seinem Engagement ist es zu verdanken, dass bedeutende ukrainische Expeditionen in antarktischen Gewässern möglich wurden, die wertvolle Erkenntnisse über die Ökosysteme und Meeresressourcen des Südpolarmeeres lieferten (2).<br/></p><p><b>Leonid wurde Anfang September 2025 festgenommen</b>. Die Verhaftung erfolgte auf der Krym, während er sich auf die Reise zu den jährlichen CCAMLR-Verhandlungen über die Krillfischerei vorbereitete.</p><p>Ihm wird „Hochverrat“ gemäß Artikel 275 des russischen Strafgesetzbuches vorgeworfen; es droht eine Haftstrafe von 12 bis 20 Jahren (3). Geleakte Berichte zeigen jedoch, dass die Verhaftung direkt mit seinen wissenschaftlichen Beiträgen innerhalb der CCAMLR zusammenhängt – einer Arbeit, die er stets mit größter Sorgfalt und Integrität ausführte. Dazu gehörten sein Einsatz für wissenschaftlich fundierte Grenzwerte bei der Krillfischerei sowie seine Vorschläge zur Stärkung des Meeresschutzes. Die russischen Behörden behaupten, diese Arbeit habe den wirtschaftlichen Interessen Russlands geschadet (4).<br/></p><p>Dabei hat die Fachwelt Leonids Ergebnisse längst bestätigt. In den vergangenen Jahren haben Forschende wiederholt davor gewarnt, dass die Krillfischerei ein potenziell nicht mehr tragbares Niveau erreicht (5). Dennoch stellen sich Russland und China bei jeder CCAMLR-Verhandlung gegen neue Meeresschutzgebiete und strengere Fangbegrenzungen.</p><p><b>Inzwischen ist Leonid seit acht Monaten – mehr als 200 Tagen – zu Unrecht inhaftiert. </b>Kolleginnen und Kollegen berichten, dass er gesundheitliche Probleme hat und dringend angemessene medizinische Versorgung benötigt (6), (7).</p><p>Hier geht es nicht um Politik. Es geht um Wissenschaft.<br/></p><p>Die Antarktis ist seit langem ein Ort, an dem Staaten friedlich zusammenarbeiten, um ein gemeinsames Ökosystem zu schützen. Einen Wissenschaftler dafür strafrechtlich zu verfolgen, dass er sich an internationalen Naturschutzbemühungen beteiligt, bedroht diesen Grundsatz und ist ein fatales Signal an Forschende weltweit.<br/></p><p><b>Leonid Pschenitschnow ist ein Wissenschaftler, kein Krimineller.</b></p><p>Wir fordern:</p><ul><li><p>seine sofortige und bedingungslose Freilassung;</p></li><li><p>uneingeschränkten Zugang zu Rechtsbeistand, Kontakt zu seiner Familie und jede notwendige medizinische Versorgung gemäß den Mindestgrundsätzen der Vereinten Nationen für die Behandlung von Gefangenen (8);</p></li></ul><p><br/></p><p>Wir fordern zudem ein entschlossenes diplomatisches Handeln der Außenministerien von:</p><ul><li><p>Frankreich – Jean-Noël Barrot;</p></li><li><p>Deutschland – Johann David Wadephul;</p></li><li><p>Japan – Motegi Toshimitsu;</p></li><li><p>Kanada – Anita Anand;</p></li><li><p>Italien – Antonio Tajani;</p></li><li><p>und dem Vereinigten Königreich – Yvette Cooper.</p></li></ul><p>Der Einsatz für den Schutz des antarktischen Krills darf nicht im Gefängnis enden.</p><p>Setzen Sie sich für die Wissenschaft ein.<br/></p><p>Setzen Sie sich für den Ozean ein.</p><p><b>Fordern Sie die sofortige Freilassung von Leonid Pschenitschnow.</b></p><br/>Quellen:<ol><li>CCAMLR website, https://www.ccamlr.org/</li><li>Ukrainian Ministry of Foreign Affairs, <i>Declaration of the Ukrainian Ministry of Foreign Affairs regarding the illegal detention of Ukrainian scientist Leonid Pshenichnov</i>, 21 October 2025.</li><li>The Guardian,<i> “Russia arrests Ukrainian biologist for backing curbs on Antarctic krill fishing”</i>, 26 October 2025, https://www.theguardian.com/environment/2025/oct/26/russia-ukrainian-biologist-leonid-pshenichnov-arrest-treason-antarctic-krill-overfishing</li><li>Human Rights in Ukraine, <i>“Imprisoned Ukrainian marine biologist charged with ‘treason’ for opposing Russia’s plans in Antarctic area” </i>, 23 October 2025, https://khpg.org/en/1608815199</li><li>The Guardian, <i>“Russia arrests Ukrainian biologist for backing curbs on Antarctic krill fishing”</i>, 26 October 2025, https://www.theguardian.com/environment/2025/oct/26/russia-ukrainian-biologist-leonid-pshenichnov-arrest-treason-antarctic-krill-overfishing</li><li>The Guardian, <i>“Russia arrests Ukrainian biologist for backing curbs on Antarctic krill fishing”</i>, 26 October 2025, https://www.theguardian.com/environment/2025/oct/26/russia-ukrainian-biologist-leonid-pshenichnov-arrest-treason-antarctic-krill-overfishing</li><li>Royal Swedish Academy of Sciences, <i>Appeal for the release of marine biologist Leonid Pshenichnov</i>, 10 February 2026</li><li>UNODC, <i>The United Nations Standard Minimum Rules for the Treatment of Prisoners</i>, https://www.unodc.org/documents/justice-and-prison-reform/Nelson_Mandela_Rules-E-ebook.pdf</li></ol></p>",
+    "start_date": "2026-05-05T08:22:18-06:00",
+    "updates": [
+      {
+        "timestamp": "2026-05-05T08:57:19-06:00",
+        "text": "Petitionstext aktualisiert"
+      }
+    ],
+    "signatures": 10684,
+    "goal": 20000,
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "kind": "petition",
+    "category": "Bürgerpetition"
+  },
+  "herr_volodymyr_o_selenskyi_prasident_der_ukraine_unterstutze_die_ukraine_fur_freiheit_and_gerechtigkeit": {
+    "slug": "herr_volodymyr_o_selenskyi_prasident_der_ukraine_unterstutze_die_ukraine_fur_freiheit_and_gerechtigkeit",
+    "first_seen": "2026-07-06T10:23:35-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T10:23:35-06:00",
+        "count": 425
+      },
+      {
+        "checked_at": "2026-07-06T13:49:10-06:00",
+        "count": 426
+      },
+      {
+        "checked_at": "2026-07-06T13:49:10-06:00",
+        "count": 425
+      },
+      {
+        "checked_at": "2026-07-06T13:52:49-06:00",
+        "count": 426
+      },
+      {
+        "checked_at": "2026-07-06T13:52:49-06:00",
+        "count": 425
+      },
+      {
+        "checked_at": "2026-07-06T13:57:44-06:00",
+        "count": 426
+      },
+      {
+        "checked_at": "2026-07-13T10:54:19-06:00",
+        "count": 431
+      }
+    ],
+    "title": "Unterstütze Zelenskyy, Präsident der Ukraine - für Freiheit und Gerechtigkeit",
+    "summary": "Wir fordern unsere Regierungen auf, die Unterstützung für die Ukraine zu verstärken - angemessen und rechtzeitig. Wir ermutigen deshalb den ukrainischen Präsidenten Selenskyi, weiterhin um Unterstützung zu werben und diese Petition als zusätzliches Argument zu nutzen. Wir stehen als Einzelpersonen und besorgte Bürger und Bürgerinnen auf und geben der schweigenden Mehrheit eine Stimme. Unsere Werte stehen heute in der Ukraine auf dem Spiel - mit Unterstützung für die Ukraine verteidigen wir sowohl den Frieden als auch Freiheit und Gerechtigkeit. ******************...",
+    "image_url": "https://avaazdoimages.avaaz.org/d9fd1d4476524872a6dd23af2b9c578a_meme.jpeg?1741171853",
+    "url": "https://secure.avaaz.org/community_petitions/de/herr_volodymyr_o_selenskyi_prasident_der_ukraine_unterstutze_die_ukraine_fur_freiheit_and_gerechtigkeit/",
+    "petition_id": 1739207,
+    "started_by": "Alex M.",
+    "recipient": "Herr Volodymyr O. Selenskyi, Präsident der Ukraine",
+    "description_full": "<p><i>Wir fordern unsere Regierungen auf, die Unterstützung\nfür die Ukraine zu verstärken - angemessen und rechtzeitig. Wir ermutigen\ndeshalb den ukrainischen Präsidenten Selenskyi, weiterhin um Unterstützung zu\nwerben und diese Petition als zusätzliches Argument zu nutzen. <br/><br>\n\nWir\nstehen als Einzelpersonen und besorgte Bürger und Bürgerinnen auf und geben der\nschweigenden Mehrheit eine Stimme. Unsere Werte stehen heute in der Ukraine auf\ndem Spiel - mit Unterstützung für die Ukraine verteidigen wir sowohl den\nFrieden als auch Freiheit und Gerechtigkeit. <br/>\n<br/>\n**************************\n<br/>\n<b>Ihre\nExzellenz<br/>\nHerr Volodymyr O. Zelenskyy, Präsident der Ukraine<br/>\n</b><br/>\nWir unterschreiben diese Botschaft, um zu unterstreichen, dass unsere\nRegierungen Ihnen die dringend benötigte Unterstützung zukommen lassen.<br/>\n<br/>\n<b>Was immer es braucht, und so lange es nötig ist!</b>\n\n \n\nDie\nUkraine hat bisher grossartige Arbeit geleistet und es geschafft, der\nrussischen Aggression Stand zu halten. Darüber hinaus hat die Ukraine dank\nerfolgreicher Zug- und Schiffstransporte beachtliche Mengen an Getreide\nexportiert, die zur Ernährung der Welt beitragen. \n\n \n\nDas\nukrainische Volk ist mit einer brutalen Realität konfrontiert: Jeder Moment der\nSchwäche birgt das Risiko des Scheiterns. Jeder Rückschlag führt zu noch mehr\nOpfern und noch mehr Zerstörung. <br/>\n<br/>\nJe länger die freie Welt abseits steht, desto mehr Opfer wird es geben, desto\nmehr Schaden entsteht und desto höher wird der Preis für den Wiederaufbau sein.\n\n\n \n\nWir\nbrauchen ein klares Bekenntnis zu einer internationalen Ordnung, die auf der\nCharta der Vereinten Nationen und der Achtung der Menschenrechte beruht. Diese\nPrinzipien haben uns in den letzten 70 Jahren eine relativ friedliche Ära\nbeschert. Aus diesem Grund stimmten 141 Länder der Vereinten Nationen am 2.\nMärz 2022 gegen die russische Aggression - mit nur 5 Gegenstimmen; von\nRussland, Belarus, Eritrea, Nordkorea und Syrien. <br/>\n<br/>\nDie internationale Gemeinschaft muss ein starkes Zeichen setzen, um Russland die\nAbsurdität seines Angriffs vor Augen zu führen und ihm jegliche Aussicht auf\nErfolg zu nehmen.\n\n <br/><br/><b>=&gt; Wir fordern alle Regierungen auf, sich\nunverzüglich für die Lieferung aller für die Selbstverteidigung benötigten\nWaffen und der notwendigen finanziellen Unterstützung einzusetzen. <br/>\n<br/>\n=&gt; Wir fordern noch schärfere Sanktionen gegen die russische\nKriegswirtschaft und eine bessere Umsetzung der bestehenden Sanktionen,\neinschliesslich des Einfrierens und der Beschlagnahmung von russischen\nVermögenswerten im Ausland. <br/>\n<br/>\n=&gt; Wir fordern die Wiederherstellung der Souveränität, Unabhängigkeit,\nEinheit und territorialen Integrität der Ukraine innerhalb ihrer international\nanerkannten Grenzen von 1991, die sich auch auf ihre Hoheitsgewässer\nerstrecken.</b>\n\n \n<br/><br/>\nDie\nUkraine trägt die wahren Kosten des Krieges. Etwa 10 Millionen Ukrainerinnen\nund Ukrainer waren gezwungen, ihre Häuser zu verlassen. Das ukrainische Volk\nkämpft um Demokratie, Selbstbestimmung, Souveränität und ums nackte Überleben\nin ihren eigenen Häusern. <br/>\n<br/>\nMit all diesen Opfern kämpft die Ukraine auch für UNSERE Freiheit und für einen\nglobalen, nachhaltigen Frieden!\n\n \n\nDiese\nPetition ist auch ein Zeichen der moralischen Unterstützung und Wertschätzung\nfür den mutigen Kampf der Ukraine.\n\n \n\nSehr\ngeehrter Herr Präsident, wir senden Ihnen und allen Ukrainerinnen und Ukrainern\nunsere besten Wünsche in der Hoffnung, dass bald alle sicher in ihre Heimat\nzurückkehren können. <br/>\n<br/>\nHochachtungsvoll, <br/>\nbesorgte Bürgerinnen und Bürger <br/>\n<br/>\n\n\n**************************************\n\n \n\n <br/><br/><b>=&gt; Jetzt sofort: Unterschreibe diese\nPetition und leite sie weiter an alle Bekannten und Verwandten!</b><br/>\n<br/>\nErstunterzeichnende: Alex M., Alexander M., Asami T., Christoph M., Christoph\nW., František H., Jorgos S., Jürg. S., Karin H., Kuno S., Kyoko T., Lesko K.,\nMakoto T., Marcel H., Marcela H., Maria M., Marianne H., Mirja L., Oleksii B.,\nPeter B., Piotr M., Roland R., Sibylle S., Šimon S., Stefan I., Stéphane G.,\nUrsula K., Wim H., Züheyla K. <br/>\n<br/></br></i>******************\n\n\n\n<br/><br/>(1) Die Eurobarometer-Umfrage vom Januar 2023 ergab, dass\neine überwältigende Mehrheit von 74 Prozent der EU-Bürger die fortgesetzte\nUnterstützung der Ukraine durch die EU befürwortet. Fast ebenso viele – 73\nProzent – gaben an, dass sie mit der finanziellen, militärischen und\nhumanitären Hilfe der EU für die Ukraine sowie mit den Sanktionen gegen\nRussland einverstanden sind. https://www.politico.eu/article/ukraine-war-europe-support-74-percent-polls/  <br/><br/>2 In einer <em>Notfall</em>-<em>Sondersitzung </em>der UN-<em>Generalversammlung </em>am <em>2. März 2022 </em>wurde eine <em>Resolution </em>zur Verurteilung der russischen <em>Aggression\ngegen die Ukraine mit 141 zu 5 Stimmen verabschiedet (bei 35 Enthaltungen):</em>\nAt the eleventh emergency\nspecial session the General Assembly of the United Nations adopted on 2 March\n2022 the resolution on \"Aggression against Ukraine\". https://undocs.org/Home/Mobile?FinalSymbol=A/RES/ES-11/1&amp;Language=E&amp;DeviceType=Desktop&amp;LangRequested=False\n\n\n\n <br/><br/>3 Führende Politikerinnen, Militärs und\nandere Expertinnen und Experten schlugen am 19. November 2024 vor, eine „Koalition\nder Willigen“ zur Verteidigung der Ukraine auf internationaler Ebene zu\nbilden. Byline Times series War\nin Ukraine, 19 November 2024. https://bylinetimes.com/2024/11/19/europe-must-forget-trump-and-form-a-coalition-of-the-willing-to-defend-ukraine/\n\n\n\n<br/><br/>4  Am selben Tag stellte die\nukrainische Regierung den „Resilienzplan“ mit 10 Punkten vor. Beide Dokumente\nsind eine gute Grundlage, um die erwähnten Ziele zu erreichen. \n\n\n\n\n\nhttps://www.president.gov.ua/en/news/volodimir-zelenskij-predstaviv-plan-vnutrishnoyi-stijkosti-u-94505\n\n\n\n<br/>   <br/>5 Gemäss der Studie des Kieler Instituts für\nWeltwirtschaft belaufen sich die Kosten eines russischen Siegs für Deutschland\nauf 1 % bis 2 % des BIP pro Jahr, was etwa dem 10- bis 20-fachen der\nderzeitigen militärischen Unterstützung entspricht: IFW-Kiel, Policy brief\nno. 179, November 2024: \" For Germany, we estimate costs of 1% to 2% of\nGDP annually, about 10-20 times higher than current military support\nlevels.\"  https://www.ifw-kiel.de/fileadmin/Dateiverwaltung/IfW-Publications/fis-import/92541751-97c2-4c8f-9067-730998a3fa07-KPB_179_DE.pdf\n\n\n\n\n\n<br/><br/>\n\n******************\n\n<br/><br/><b>Disclaimer <br/></b>In Russland gibt es Online-Zensur harte\nStrafverfolgung und strenge Strafen für Aussagen zum Krieg in der Ukraine. Wenn Sie in Russland oder in von Russland abhängigen\nGebieten leben, bitten wir sie dringend, mögliche Konsequenzen zu bedenken,\nbevor Sie diese Kampagne unterzeichnen und weiterleiten.\n\n<br/></p>",
+    "start_date": "2024-11-28T16:45:20-06:00",
+    "updates": [
+      {
+        "timestamp": "2024-11-29T00:51:32-06:00",
+        "text": "Petitionstext aktualisiert"
+      }
+    ],
+    "signatures": 431,
+    "goal": 500,
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "kind": "petition",
+    "category": "Bürgerpetition"
+  },
+  "bundesinnenministerin_nancy_faeser_stoppt_die_kriminalisierung_der_klimabewegung": {
+    "slug": "bundesinnenministerin_nancy_faeser_stoppt_die_kriminalisierung_der_klimabewegung",
+    "first_seen": "2026-07-06T10:23:35-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T10:23:35-06:00",
+        "count": 1347
+      },
+      {
+        "checked_at": "2026-07-06T13:49:10-06:00",
+        "count": 1348
+      },
+      {
+        "checked_at": "2026-07-06T13:49:10-06:00",
+        "count": 1347
+      },
+      {
+        "checked_at": "2026-07-06T13:52:49-06:00",
+        "count": 1348
+      },
+      {
+        "checked_at": "2026-07-06T13:52:49-06:00",
+        "count": 1347
+      },
+      {
+        "checked_at": "2026-07-06T13:57:44-06:00",
+        "count": 1348
+      },
+      {
+        "checked_at": "2026-07-13T10:54:19-06:00",
+        "count": 1356
+      }
+    ],
+    "title": "Stoppt die Kriminalisierung der Klimabewegung",
+    "summary": "Am Mittwoch hat die Polizei bundesweit Razzien gegen die Aktivist*innen der “Letzten Generation” durchgeführt. Bundesinnenministerin Nancy Faeser hat dieses Vorgehen ausdrücklich unterstützt und damit klar gemacht: Die Bundesregierung nimmt in Kauf, dass Klimaaktivist*innen in der öffentlichen Wahrnehmung als Kriminelle abgestempelt und so ihre Botschaft untergraben wird. Damit schlägt sie die komplett falsche Richtung ein. Selbst bei Menschen, die mit den Methoden der “Letzten Generation” nicht einverstanden sind, müssen jetzt alle Alarmglocken läuten: In Deutschland w...",
+    "image_url": "https://avaazdo.s3.amazonaws.com/1cb17686fecf47c6af697875b67a68df_meme.jpeg?1722012996",
+    "url": "https://secure.avaaz.org/community_petitions/de/bundesinnenministerin_nancy_faeser_stoppt_die_kriminalisierung_der_klimabewegung/",
+    "petition_id": 1690828,
+    "started_by": "Tabea W.",
+    "recipient": "Bundesinnenministerin Nancy Faeser",
+    "description_full": "<p>Am Mittwoch hat die Polizei bundesweit Razzien gegen die Aktivist*innen der “Letzten Generation” durchgeführt. Bundesinnenministerin Nancy Faeser hat dieses Vorgehen ausdrücklich unterstützt und damit klar gemacht:\n       <b>Die Bundesregierung nimmt in Kauf, dass Klimaaktivist*innen in der öffentlichen Wahrnehmung als Kriminelle abgestempelt und so ihre Botschaft untergraben wird. </b>\n<br/>\n<br>\n        Damit schlägt sie die komplett falsche Richtung ein. Selbst bei Menschen, die mit den Methoden der “Letzten Generation” nicht einverstanden sind,\n        <b>müssen jetzt alle Alarmglocken läuten: In Deutschland wird Klima-Protest kriminalisiert.</b>\n<b>Die Politik versucht, einen Keil zwischen die Bevölkerung und die Klimabewegung zu treiben.</b>\n        Und das, obwohl die eigentliche Gefahr für uns alle keineswegs von jungen Aktivist*innen ausgeht, die sich auf den Straßen festkleben.\n        <br/>\n<br/>\n<b>Wir steuern gerade auf die totale Klimakatastrophe zu und die Bundesregierung hält nicht einmal ihre selbst gesteckten viel zu niedrigen Klimaschutzziele ein. </b>\n        Doch anstatt längst überfällige Maßnahmen wie ein Tempolimit oder den schnellen Austritt aus den fossilen Energieträgern zu beschließen, werden junge Menschen bekämpft, die auf dieses fatale politische Versagen aufmerksam machen.\n        <br/>\n<br/>\n        Die Reaktion der Polizei ist maßlos überzogen.\n        <b>Der Umgang mit den Aktivisten und Aktivistinnen gleicht dem mit einem Drogenkartell oder einer Terrorgruppe und fußt dabei teilweise nicht einmal auf Rechtsgrundlagen.</b>\n<br/>\n        Das muss ein Ende haben.\n        <b> Jetzt ist der Moment, um friedlichen Protest den Rücken zu stärken:</b>\n        Die Jagd auf Klimaaktivistinnen - und aktivisten muss gestoppt werden!\n        <b>Lassen Sie sich uns solidarisch zeigen mit den jungen Menschen, die um nichts Geringeres als ihre Zukunft bangen! <br/></b>\n<br/>\n</br></p>",
+    "start_date": "2023-05-25T23:55:27-06:00",
+    "updates": [
+      {
+        "timestamp": "2023-05-31T05:57:20-06:00",
+        "text": "Petitionstext aktualisiert"
+      }
+    ],
+    "signatures": 1356,
+    "goal": 2000,
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "kind": "petition",
+    "category": "Bürgerpetition"
+  },
+  "eu_kommissarin_fur_gesundheit_dr_stella_kyriakides_eu_eine_gesunde_mahlzeit_fur_jedes_kind_in_jeder_schule": {
+    "slug": "eu_kommissarin_fur_gesundheit_dr_stella_kyriakides_eu_eine_gesunde_mahlzeit_fur_jedes_kind_in_jeder_schule",
+    "first_seen": "2026-07-06T10:23:35-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T10:23:35-06:00",
+        "count": 6528
+      },
+      {
+        "checked_at": "2026-07-07T07:08:12-06:00",
+        "count": 6531
+      },
+      {
+        "checked_at": "2026-07-13T10:54:19-06:00",
+        "count": 6540
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 6541
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 6540
+      }
+    ],
+    "title": "EU: Eine gesunde Mahlzeit für jedes Kind in jeder Schule",
+    "summary": "Ein Viertel aller Kinder in der EU ist von Armut oder sozialer Ausgrenzung bedroht, die durch die hohe Inflation verschärft wird. Alle Kinder gehen zur Schule. Manche EU Länder bieten kostenlose Schulmahlzeiten für alle Kinder an, einige Schulen nur für benachteiligte Kinder, aber viele Schulen bieten überhaupt keine Schulmahlzeiten an. Dies sollte sich ändern, weil damit so viel erreicht werden kann! Jedes Kind sollte Zugang zu mindestens einer nahrhaften, guten Mahlzeit pro Tag haben. Wir wollen, dass kein Kind mit leerem Magen in d...",
+    "image_url": "https://avaazdoimages.avaaz.org/e281e00ff87f4dcb8a4cd71883cf8ddb.jpeg",
+    "url": "https://secure.avaaz.org/community_petitions/de/eu_kommissarin_fur_gesundheit_dr_stella_kyriakides_eu_eine_gesunde_mahlzeit_fur_jedes_kind_in_jeder_schule/",
+    "petition_id": 1648438,
+    "started_by": "BuyBetterFood P.",
+    "recipient": "EU-Kommissarin für Gesundheit, Dr. Stella Kyriakides, die EU-Mitgliedstaaten und Kommunen",
+    "description_full": "<p><b>Ein\r\nViertel aller Kinder in der EU ist von Armut oder sozialer Ausgrenzung bedroht, die durch die hohe Inflation verschärft wird.</b>\n<br/>\n<br>\n        Alle Kinder gehen zur Schule. Manche EU Länder bieten kostenlose Schulmahlzeiten für alle Kinder an, einige Schulen nur für benachteiligte Kinder,\n        <b>aber viele Schulen bieten überhaupt keine Schulmahlzeiten an.</b>\n        Dies sollte sich ändern, weil damit so viel erreicht werden kann!\n        <b><br/></b>\n<b><br/></b>\n<b>Jedes Kind sollte Zugang zu mindestens einer nahrhaften, guten Mahlzeit pro Tag haben. </b>\n        Wir wollen, dass kein Kind mit leerem Magen in der Schule sitzt, sondern dass alle Kinder eine gesunde Schulmahlzeit und Ernährungsbildung bekommen, um sich im Unterricht konzentrieren zu können und gesund aufzuwachsen.\n        <b> <br/></b>\n<br/>\n<b></b>\n<b>JETZT gibt es ein Momentum in der EU, um dies zu erreichen:</b>\n        Die Kommission und die EU-Mitgliedstaaten könnten\r\nbald dafür sorgen, dass jedes Kind in jeder Schule in der EU ein gesundes und\r\nnachhaltig produziertes Mittagessen erhält und schon den Jüngsten beigebracht\r\nwird, was eine ausgewogene Ernährung ausmacht. Die finanzielle Ermöglichung kann auf nationaler bzw. lokaler Ebene abgestimmt werden.\n        <b><br/></b>\n<b><br/></b>\n<b>Gesunde Mahlzeiten und Ernährungserziehung sind\r\nunglaublich wichtig:</b>\n        Die Fettleibigkeitsraten bei Kindern in der EU steigen alarmierend an (1 von 3 Kindern), und gleichzeitig nimmt die Armut zu. Dabei macht das Essen in der Schule für viele Kinder in der EU bis zu 50 % der täglichen Energieaufnahme aus.\n        <br/>\n<br/>\n        Lasst uns jetzt den Druck\r\nerhöhen und zeigen: Wir wollen, dass\n        <b>kein\r\nKind mit leerem Magen in der Schule sitzt</b>\n        -- und alle Zugang zu\n        <b>gesundem Essen und Ernährungsbildung</b>\n        haben\n        <br/>\n<b><br/></b>\n<b>Machen Sie mit - mit ihrer Unterschrift! Dankeschön.</b>\n<b><br/></b>\n<b><br/></b>\n        An die\n        <b>EU-Kommissarin für Gesundheit und\r\nLebensmittelsicherheit Stella Kyriakides</b>\n        , und die für die Umsetzung der EU ‚Farm-to-Fork‘\r\nStrategie\n        <b>zuständigen EU-Mitgliedstaaten</b>\n        :\n        <br/>\n<br/>\n<i>Wir fordern Sie auf, als\r\nMindeststandard für die EU-Strategie \"Farm to Fork\" <b>gesunde Schulmahlzeiten und Ernährungsbildung\r\nfür jedes Kind in jeder Schule in der EU</b> anzunehmen. Jedes Kind hat das\r\nRecht auf eine ausgewogene Ernährung, um gesund aufzuwachsen und konzentriert\r\nam Unterricht teilnehmen zu können. Gesunde Schulmahlzeiten sind gut für Mensch\r\nund Umwelt. <b>Gepaart mit\r\nErnährungskompetenz</b>, können Schulkinder gesund essen und kochen lernen --\r\nund den verantwortungsvollen Umgang mit Lebensmitteln. <b>Schulen werden somit zu Drehpunkten für nachhaltige Ernährung\r\naufgewertet. </b>\n</i>\n<b><br/></b>\n<b><br/></b>\n<i><b><br/></b></i>\n<i><b>Kleiner Teller, große Wirkung!</b>\n</i>\n<b><br/></b>\n<b><br/></b>\n<b>Weiterführende Links:</b>\n<ol>\n<li>\n          Public\r\nProcurement of Food for Health. Technical Report on the school setting.  Joint Publication of the Maltese Presidency\r\nand the European Union, 2017.Online: https://linkscommunity.org/assets/PDFs/maltese-presidency-and-eu-public-procurement-of-food-for-health_technical-report-on-the-school-setting-(2017).pdf\n          <br/>\n</li>\n<li>\n          The\n          <b>EU Farm to Fork strategy</b>\n          . Online: https://food.ec.europa.eu/system/files/2020-05/f2f_action-plan_2020_strategy-info_en.pdf\n          <br/>\n</li>\n<li>\n          Under the\n          <b>European\r\nChild Guarantee</b>\n          (2021), \"it is recommended to Member States\" to\r\nprovide a.o. \"at least one healthy meal each school day\" (...) free\r\nof charge and readily available to children in need\". Online: https://ec.europa.eu/social/main.jsp?catId=1428&amp;langId=en\n          <br/>\n</li>\n<li>\n          Provision\r\nof school meals across the EU. An overview of rationales, evidence,\r\nfacilitators and barriers (European Commission, 2021). Online: https://ec.europa.eu/social/main.jsp?catId=738&amp;langId=en&amp;pubId=8422&amp;furtherPubs=yes\n         </li>\n<li>\n          WHO\r\nEuropean Regional Obesity Report 2022 (3/2022). Online: https://www.who.int/europe/news/item/03-05-2022-new-who-report--europe-can-reverse-its-obesity--epidemic\n          <br/>\n</li>\n<li>\n<b>SchoolFood4Change</b>\n          – the largest EU\r\nproject on EU school meals and food education. Online: https://schoolfood4change.eu/\n          <br/>\n</li>\n<li>\n          European\n          <b>Buy Better Food\r\nCampaign</b>\n          (BBF): Online: https://iclei-europe.org/topics/food/buy-better-food/\n          <br/>\n</li>\n<li>\n          Image: (andreonegin | Shutterstock)\n          <br/>\n</li>\n</ol>\n</br></p>",
+    "start_date": "2022-09-06T05:42:32-06:00",
+    "updates": [
+      {
+        "timestamp": "2022-09-06T05:50:01-06:00",
+        "text": "Petitionstext aktualisiert"
+      }
+    ],
+    "signatures": 6540,
+    "goal": 7500,
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "kind": "petition",
+    "category": "Bürgerpetition"
+  },
+  "to_all_heads_of_state_of_the_european_union__europe_time_to_paris": {
+    "slug": "to_all_heads_of_state_of_the_european_union__europe_time_to_paris",
+    "first_seen": "2026-07-06T10:23:35-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T10:23:35-06:00",
+        "count": 2835
+      },
+      {
+        "checked_at": "2026-07-13T10:54:19-06:00",
+        "count": 2837
+      }
+    ],
+    "title": "Europe: Time to Paris!",
+    "summary": "Sehr geehrte europäische Kanzler, Premierminister und Präsidenten, wir, Mütter und Väter aus Europa, wenden uns an Sie, weil Sie Ihre Hausaufgaben nicht gemacht haben und wir Sie daran erinnern müssen.Die Welt bereitet sich auf den wohl wichtigsten Geburtstag aller Zeiten vor: Das Pariser Klimaschutzabkommen wird fünf Jahre alt! Seit über einem Jahr erinnert UN-Generalsekretär Guterres alle Länder daran, mit größeren Ambitionen die fossilen Energieträger und andere Emissionen auf Null zu reduzieren – so schnell wie möglich! Denn das rät uns die Wissenschaft.In dies...",
+    "image_url": "https://avaazdoimages.avaaz.org/65451096ff6a4576aed5a63f4cff65c5_meme.jpeg?1722090252",
+    "url": "https://secure.avaaz.org/community_petitions/de/to_all_heads_of_state_of_the_european_union__europe_time_to_paris/",
+    "petition_id": 1128068,
+    "started_by": "Holger D.",
+    "recipient": "An alle Staats- und Regierungschefs der Europäischen Union",
+    "description_full": "<p><p>Sehr geehrte europäische Kanzler, Premierminister und Präsidenten, </p>\n<p>wir,  Mütter und Väter aus Europa, wenden uns an Sie, weil Sie Ihre Hausaufgaben nicht gemacht haben und wir Sie daran erinnern müssen.</p>\n<p>Die Welt bereitet sich auf den wohl wichtigsten Geburtstag aller Zeiten vor: Das Pariser Klimaschutzabkommen wird fünf Jahre alt! Seit über einem Jahr erinnert UN-Generalsekretär Guterres alle Länder daran, mit größeren Ambitionen die fossilen Energieträger und andere Emissionen auf Null zu reduzieren – so schnell wie möglich! Denn das rät uns die Wissenschaft.</p>\n<p>In diesem Sinne wird Großbritannien die Geburtstagsparty am 12. Dezember ausrichten und das erste Geschenk präsentieren: Ein erweitertes Parisabkommen. China kommt zwar zu spät zur Party, hat aber eine kleine Überraschung im Gepäck: China, das Land mit den weltweit größten Emissionen wird seine Emissionen bis 2060 auf Null senken und will den Höhepunkt der Emissionen vor 2030 erreichen – das war eine große und unerwartete Ankündigung von Präsident Xi bei der UN-Vollversammlung letzte Woche. Das ist eine provokative, aber klare Botschaft an die USA und an die ganze Welt: Egal was im Weißen Haus geschehen wird, China ist noch dabei. <br/>Aber welche Rolle spielen wir/Europa bei diesem Ereignis? </p>\n<p>Europa wird höchstwahrscheinlich mit leeren Händen zum Geburtstag kommen, ohne sich auf ernstzunehmende Entscheidungen geeinigt zu haben. Vor fünf Jahren gaben Sie das Versprechen in Paris: „Wir werden in 5 Jahren unsere Ziele verschärfen.“ Werden Sie das wirklich? Schon vor fünf Jahren war Ihnen bewusst, was sie zu tun hatten. Sie haben sich jedoch dafür entschieden, nichts zu tun. Wird es jetzt auch wieder so sein? Nächste Woche, am 15. Oktober 2020, werden Sie, die führenden europäischen Politiker und Politikerinnen, sich zum letzten Mal vor der Geburtstagsfeier sehen!</p>\n<p>Statt endlich Maßnahmen zu ergreifen, beschuldigen Sie unsere Kinder, zu radikal zu sein. Diese pochen jedoch nur auf ihr Recht auf eine sichere Zukunft und eine vernünftige Politik: Die Einhaltung des 1,5°-Ziels in Europa durch die Reduktion der fossilen Energieträger auf Null. Wir reden hier von einer wirklichen Null. Ohne Wenn und Aber und ohne Schönrechnerei durch Kompensationen. Wirklich radikal sind nicht unsere Kinder, sondern Sie, wenn Sie an fossilen Energieträgern festhalten wollen, während Sie doch die Verantwortung haben, Familien, Arbeitsplätze und Küstenorte vor der Klimakatastrophe zu bewahren. </p>\n<p>Mit diesem Verhalten brechen Sie mit unseren Kindern, mit den Bürgerinnen und Bürgern in Europa und der ganzen Welt. </p>\n<p>Deshalb kommen wir nach Brüssel mit dieser deutlichen Botschaft: Machen Sie ihre Hausaufgaben. Machen Sie das, wofür Sie gewählt wurden. Beschützen Sie die Menschen in Europa und der Welt vor der Klimakatastrophe. Erhalten Sie diese Welt für zukünftige Generationen. Machen Sie endlich Ihren Job!</p>\n<p><b>Parents for Future Germany</b></p>\n<p><b>Students for Future Germany</b></p>\n<p><b>Parents for Future Denmark</b></p>\n<p><b>Parents for Future Sweden</b></p>\n<p><b>Parents for Future France</b></p>\n<p><b>Unis Pour Le Climat</b></p>\n<p><b>Madres por el Clima, España</b></p>\n<p><b>Rodzice dla Klimatu<br/></b></p></p>",
+    "start_date": "2020-10-07T10:37:38-06:00",
+    "updates": [
+      {
+        "timestamp": "2021-03-03T07:45:33-06:00",
+        "text": "Petitionstext aktualisiert"
+      }
+    ],
+    "signatures": 2837,
+    "goal": 3000,
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "kind": "petition",
+    "category": "Bürgerpetition"
+  },
+  "the_governments_of_germany_france_the_united_kingd_stop_eu_arms_exports_to_saudi_arabia_and_the_united_arab_emirates": {
+    "slug": "the_governments_of_germany_france_the_united_kingd_stop_eu_arms_exports_to_saudi_arabia_and_the_united_arab_emirates",
+    "first_seen": "2026-07-06T10:23:35-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T10:23:35-06:00",
+        "count": 10734
+      },
+      {
+        "checked_at": "2026-07-07T07:08:12-06:00",
+        "count": 10739
+      },
+      {
+        "checked_at": "2026-07-13T10:54:19-06:00",
+        "count": 10756
+      }
+    ],
+    "title": "STOPPT die europäischen Waffenlieferungen an Saudi-Arabien und die Vereinigten Arabischen Emirate!",
+    "summary": "“Wir fordern, dass Sie unverzüglich rechtlich bindende Exportverbote für den Waffenhandel mit Saudi-Arabien und den Vereinigten Arabischen Emiraten erlassen. Im Krieg gegen den Jemen werden europäische Waffen von der von den Saudis angeführten Militärkoalition aktiv gegen die Zivilbevölkerung eingesetzt. Gegen die Beamten, die diese Exporte genehmigt haben, und die Unternehmen, die sie durchgeführt haben, muss strafrechtlich ermittelt werden. Wir fordern, dass Sie die Ermittlungen des Internationalen Strafgerichtshofs voll und ganz unterstützen.”Die Mittäterschaft e...",
+    "image_url": "https://avaazdoimages.avaaz.org/fa79fde5f2ec4a38b80547fadd451b2e_meme.jpeg?1722086606",
+    "url": "https://secure.avaaz.org/community_petitions/de/the_governments_of_germany_france_the_united_kingd_stop_eu_arms_exports_to_saudi_arabia_and_the_united_arab_emirates/",
+    "petition_id": 1152116,
+    "started_by": "ECCHR E.",
+    "recipient": "An die Regierungen von Deutschland, Frankreich, dem Vereinigten Königreich, Italien und Spanien",
+    "description_full": "<p><p>“<b>Wir fordern, dass Sie unverzüglich rechtlich bindende Exportverbote für den Waffenhandel mit Saudi-Arabien und den Vereinigten Arabischen Emiraten erlassen</b>. Im Krieg gegen den Jemen werden europäische Waffen von der von den Saudis angeführten Militärkoalition aktiv gegen die Zivilbevölkerung eingesetzt. Gegen die Beamten, die diese Exporte genehmigt haben, und die Unternehmen, die sie durchgeführt haben, muss strafrechtlich ermittelt werden. <b>Wir fordern, dass Sie die Ermittlungen des Internationalen Strafgerichtshofs voll und ganz unterstützen.</b>”</p>\n<p>Die Mittäterschaft europäischer Unternehmen an Kriegsverbrechen ist ein Skandal, aber gemeinsam können wir dem ein Ende setzen.<b> Unterstützen Sie unsere Forderung nach einer strafrechtlichen Untersuchung und fordern Sie Ihre Regierung auf, diese kriminellen Exporte jetzt zu verbieten.</b></p>\n<p>Tausende von Zivilisten werden durch wahllose Angriffe der von den Saudis geführten Koalition getötet, die in großem Umfang von in Europa hergestellte Kampfflugzeuge und Waffen Gebrauch macht. Sie bombardieren die Häuser unschuldiger Familien, ihre Krankenhäuser und Schulen und zerstören Jahrhunderte alte Stätten des kulturellen Erbes.</p>\n<p>Waffenexporteure und Regierungen in Europa geben vor, dass dies nichts mit ihnen zu tun hat. Sie bestreiten ihre Beteiligung, aber sie profitieren weiterhin durch den Verkauf von Waffen an Saudi-Arabien und die Vereinigten Arabischen Emirate und sorgen sogar gegen Bezahlung für für die Wartung, die erforderlich ist, um die Kampfjets der Koalition in der Luft zu halten.</p>\n<p>All das könnte sich ändern, wenn die Anklagebehörde des Internationalen Strafgerichtshofs eine Untersuchung über die Verantwortung von Unternehmen für Kriegsverbrechen im Jemen einleiten würde!</p>\n<b>Unterschreiben Sie die Petition! </b>\n       Gemeinsam können wir moralisch korrupte und illegale Waffenexporte beenden!\n       <br/></p>",
+    "start_date": "2020-12-02T04:48:55-06:00",
+    "updates": [
+      {
+        "timestamp": "2021-04-19T13:53:28-06:00",
+        "text": "Petitionstext aktualisiert"
+      }
+    ],
+    "signatures": 10756,
+    "goal": 20000,
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "kind": "petition",
+    "category": "Bürgerpetition"
+  },
+  "Prof_Dr_Karl_Broich_BfArM_Hermann_Groehe_BMG_Anton_Hofreiter_Gruene_Gegen_jegliche_Behinderung_der_Quecksilberentgiftung": {
+    "slug": "Prof_Dr_Karl_Broich_BfArM_Hermann_Groehe_BMG_Anton_Hofreiter_Gruene_Gegen_jegliche_Behinderung_der_Quecksilberentgiftung",
+    "first_seen": "2026-07-06T10:23:35-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T10:23:35-06:00",
+        "count": 1409
+      },
+      {
+        "checked_at": "2026-07-07T07:08:12-06:00",
+        "count": 1411
+      },
+      {
+        "checked_at": "2026-07-13T10:54:19-06:00",
+        "count": 1412
+      }
+    ],
+    "title": "Gegen jegliche Behinderung der Quecksilber Entgiftung! Petition an Prof. Dr. Karl Broich (BfArM), Hermann Gröhe (BMG), Anton Hofreiter (Grüne)",
+    "summary": "Petition gegen die Angriffe auf die Umweltmedizin Ich bin gegen die Verschreibungspflicht der Chelatoren DMSA und EDTA, da sie den Körper vor freien Quecksilber‐ und anderen Schwermetall‐Ionen schützen können! Ich bin gegen den vorauseilenden Gehorsam gegenüber CETA und TTIP, da die Verschreibungspflicht von DMSA und EDTA auch mit der Anpassung des deutschen Marktes an die anderen Märkte begründet wird! Ich bin gegen die Einschränkung der Umweltmedizin, die mit der Verschreibungspflicht von DMSA und EDTA...",
+    "image_url": "https://avaazdo.s3.amazonaws.com/cbc4400480697e5c203c91d7420fe36e.jpg",
+    "url": "https://secure.avaaz.org/community_petitions/de/Prof_Dr_Karl_Broich_BfArM_Hermann_Groehe_BMG_Anton_Hofreiter_Gruene_Gegen_jegliche_Behinderung_der_Quecksilberentgiftung/",
+    "petition_id": 389813,
+    "started_by": "Emanuel S.",
+    "recipient": "Prof. Dr. Karl Broich (BfArM), Hermann Gröhe (BMG), Anton Hofreiter (Grüne)",
+    "description_full": "<p><b>Petition gegen die Angriffe auf die Umweltmedizin</b>\n<br/>\n<br>\n<ul>\n<li>\n          Ich bin\n          <b>gegen die Verschreibungspflicht der Chelatoren DMSA und EDTA</b>\n          , da\nsie den Körper vor freien Quecksilber‐ und anderen Schwermetall‐Ionen schützen\nkönnen!\n         </li>\n</ul>\n<ul>\n<li>\n          Ich bin gegen den\n          <b>vorauseilenden Gehorsam gegenüber CETA und\nTTIP</b>\n          , da die Verschreibungspflicht von DMSA und EDTA auch mit der Anpassung\ndes deutschen Marktes an die anderen Märkte begründet wird!\n          <br/>\n</li>\n<li>\n          Ich bin gegen die\n          <b>Einschränkung der Umweltmedizin</b>\n          , die\nmit der Verschreibungspflicht von DMSA und EDTA begonnen wird, angesichts der\nimmer größer werdenden Umweltbelastungen durch Schwermetalle!\n         </li>\n</ul>\n<b>DMSA und EDTA müssen frei zugänglich\nbleiben angesichts der zunehmenden Verschmutzung der Umwelt mit Quecksilber und\nanderen Schwermetallen:\n</b>\n        ·               \nsowohl für die\nBevölkerung, um sich mit DMSA gegen die Quecksilberbelastung schützen zu können\n\n·               \nals auch für\nHeilpraktiker, damit sie weiterhin EDTA / DMSA‐Infusionen bei höheren\nQuecksilber und Schwermetall Belastungen verabreichen können!\n        <br/>\n<b>Quecksilberbelastungen</b>\n        entstehen, laut\nBundesumweltamt, neben dem\n        <b>Verzehr</b>\n        von belasteten\n        <b>Nahrungsmitteln</b>\n        , auch\ndurch Zahnfüllungen aus Amalgam. \n\nQuecksilber wird vermehrt durch das\n        <b>Abschmelzen</b>\n        der\n        <b>Pole</b>\n        in den\n        <b>Hochseefischen</b>\n        angereichert.\n        <br/>\n<b><i>Quecksilber im\nGewitterregen:</i></b>\n        Mittlerweile wird bei\n        <b>Gewitterregen</b>\n        Quecksilber aus höheren Schichten der Atmosphäre\nfreigesetzt und mit dem Regen in den Boden gebracht, von den Pflanzen (Gemüse\netc.) aufgenommen und im Grundwasser angereichert.\n        <br/>\n<ul>\n<li>\n          Es ist ein Versäumnis der offiziellen\nMedizin, dass\n          <b>Umweltbelastungen</b>\n          durch Schwermetalle die\n          <b>unterhalb</b>\n          der\n          <b>Grenzwerte</b>\n          für\nMetallvergiftungen liegen\n          <b>nicht behandelt\n</b>\n          werden. So konnten z. B. durch Chelatoren die\n          <b>Herzinfarkte</b>\n          um\n          <b>50</b>\n          % bei\n          <b>Diabetes</b>\n          reduziert werden ( Dr. Lamas Studienleiter der TACT Studie, die mit dem Chelator EDTA durchgeführt wurde), obwohl diese Patienten keine Metallvergiftungen entsprechend der geltenden Grenzwerte hatten. (TACT Studie USA und\nKanada unterstützt vom Gesundheitsministerium der USA (FDA).\n         </li>\n</ul>\n<b><br/>Warum\nsoll darunter die Bevölkerung leiden, wenn die Medizin sich nicht bewegt? </b>\n        Es ist nicht akzeptabel, dass die\nVerschreibungspflicht in anderen Ländern herangezogen wird, um auch unsere\nBevölkerung\n        <b>schutzlos</b>\n<b>gegen</b>\n<b>Quecksilber und Schwermetalle</b>\n        zu lassen, bzw. abhängig von\närztlicher Verordnung zu machen, da DMSA dann\nerst beim Überschreiten der viel zu hohen Grenzwerte für Metall Vergiftungen verordnet wird.\n        <br/>\n        Die Entwicklung sollte angesichts der\n        <b>rapiden</b>\n<b>Zunahme</b>\n        der\n        <b>Umweltbelastung</b>\n        und der daraus resultierenden Krankheiten andersherum sein:\n        <b>andere\nLänder sollten ebenfalls DMSA / EDTA ohne Verschreibungspflicht freigeben!</b>\n<br/>\n<br/>\n<br/>\n<br/>\n<br/>\n<br/>\n</br></p>",
+    "start_date": "2016-10-13T02:12:31-06:00",
+    "updates": [
+      {
+        "timestamp": "2017-03-14T07:03:02-06:00",
+        "text": "Petitionstext aktualisiert"
+      }
+    ],
+    "signatures": 1412,
+    "goal": 2000,
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00",
+    "kind": "petition",
+    "category": "Bürgerpetition"
+  },
+  "land_rights_evergreen_2026": {
+    "slug": "land_rights_evergreen_2026",
+    "first_seen": "2026-07-06T13:49:10-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T13:49:10-06:00",
+        "count": 1083237
+      },
+      {
+        "checked_at": "2026-07-07T07:08:12-06:00",
+        "count": 1083259
+      },
+      {
+        "checked_at": "2026-07-13T10:54:19-06:00",
+        "count": 1083365
+      }
+    ],
+    "title": "Ermordet, weil sie ihr Land verteidigen",
+    "summary": "Schützt ihre Rechte und ihr Land! Jetzt unterschreiben:",
+    "image_url": "https://images.avaaz.org/55571-brloc-5.jpg",
+    "url": "https://secure.avaaz.org/campaign/de/land_rights_evergreen_2026/",
+    "petition_id": 57785,
+    "kind": "campaign",
+    "category": "Avaaz-Kampagne (Unterschriften)",
+    "started_by": "Avaaz-Team",
+    "signatures": 1083365,
+    "goal": 1500000,
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "no_death_penalty_for_palestinians_loc": {
+    "slug": "no_death_penalty_for_palestinians_loc",
+    "first_seen": "2026-07-06T13:49:10-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T13:49:10-06:00",
+        "count": 552628
+      },
+      {
+        "checked_at": "2026-07-07T07:08:12-06:00",
+        "count": 552684
+      },
+      {
+        "checked_at": "2026-07-13T10:54:19-06:00",
+        "count": 552928
+      }
+    ],
+    "title": "Todesstrafe für Palästinenser*innen stoppen!",
+    "summary": "ES EILT: Israel hat gerade eines der extremsten Todesstrafengesetze der Welt für Palästinenser*innen verabschiedet.",
+    "image_url": "https://images.avaaz.org/57456-ben-gvir-12w.jpeg",
+    "url": "https://secure.avaaz.org/campaign/de/no_death_penalty_for_palestinians_loc/",
+    "petition_id": 57456,
+    "kind": "campaign",
+    "category": "Avaaz-Kampagne (Unterschriften)",
+    "started_by": "Avaaz-Team",
+    "start_date": "2026-04-07T22:00:00-06:00",
+    "signatures": 552928,
+    "goal": 750000,
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "el_fasher_emergency_loc": {
+    "slug": "el_fasher_emergency_loc",
+    "first_seen": "2026-07-06T13:49:10-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T13:49:10-06:00",
+        "count": 70450
+      }
+    ],
+    "title": "Sudan-Nothilfeaufruf: Helfen wir, die Hoffnung am Leben zu erhalten",
+    "summary": "Gemeinschaftlich organisierte Küchen und Kliniken sind für unzählige Familien, die vor extremer Gewalt und Hungersnot in Sudan fliehen, zu einem Rettungsanker geworden. Doch sie erhalten kaum Unterstützung durch Regierungen oder Hilfsorganisationen, und nun gehen ihnen die Vorräte aus. Viele mussten bereits schließen. Dies ist ein dringender Spendenaufruf.",
+    "image_url": "https://images.avaaz.org/55556-53537-sudan-2.jpeg",
+    "url": "https://secure.avaaz.org/campaign/de/el_fasher_emergency_loc/",
+    "petition_id": 55556,
+    "kind": "campaign",
+    "category": "Avaaz-Kampagne (Spenden)",
+    "started_by": "Avaaz-Team",
+    "description_full": "<p><strong>Sudan erlebt gerade die tödlichste humanitäre Katastrophe der Welt.<br/></strong>\n<br/>Ein brutaler Bürgerkrieg hat bereits über 150.000 Menschen das Leben gekostet und die größte Geflüchtetenkrise weltweit ausgelöst. Das Gesundheitssystem steht vor dem Zusammenbruch, Kinder sterben an Hunger, und die Regierungen der Welt tun so gut wie nichts.\n<br/>\n<br/><strong>Doch mitten in all dem Grauen und Leid geschieht etwas Wunderbares.</strong>\n<br/>\n<br/>Im ganzen Land schließen sich gewöhnliche Bürgerinnen und Bürger zusammen und betreiben Hunderte von Gemeinschaftsküchen und Notfallkliniken. Sie versorgen Menschen mit Essen, Medikamenten und einem Dach über dem Kopf. <strong>Diese Notfall-Hilfszentren, sogenannte Emergency Response Rooms, sind für unzählige Familien</strong>, die vor extremer Gewalt und Hungersnot fliehen,<strong> zum Rettungsanker geworden</strong>. Sie bewirken so viel, dass sie sogar für den Friedensnobelpreis nominiert wurden.\n<br/>\n<br/><strong>Doch selbst diese dünnen Rettungsleinen drohen nun zu zerreißen. </strong>Sie erhalten kaum Unterstützung durch Regierungen oder Hilfsorganisationen, und nun gehen den Gemeinschaftsküchen die Vorräte aus. Viele mussten bereits schließen.\n<br/>\n<br/><strong>Dies ist ein dringender Spendenaufruf.</strong>\n<br/>\n<br/>\n<strong>Gemeinsam können wir helfen, dass diese Notfall-Hilfszentren geöffnet bleiben und Familien, die alles verloren haben, mit Nahrung und medizinischer Hilfe versorgen. </strong>Und damit nicht genug: Wir werden auch dafür sorgen, dass das Leid in Sudan große mediale Aufmerksamkeit erfährt und unsere weltweite Kampagne für konkrete Maßnahmen verstärken.\n<br/><strong>Jede einzelne Spende hilft, die Hoffnung in Sudan aufrecht zu erhalten.</strong>\n<br/><strong>Bitte spenden Sie jetzt, was immer Sie können.</strong><br/><br/><strong>-------</strong><br/><br/><em>Avaaz geht mit der Entscheidung, wann und wo wir Fotos von Kindern verwenden, nicht leichtfertig um, ebenso wie mit den Umständen, unter denen sie aufgenommen sind. In diesem Fall halten wir es für wichtig, dass die Welt das Grauen dessen sieht, was in Sudan geschieht. Wir haben uns jedoch für ein Foto entschieden, bei dem die Identität von Mutter und Kind nicht preisgegeben wird. Das Foto wurde im „Mother of Mercy Hospital“ in Sudan im Bundesstaat Südkordofan aufgenommen.</em><strong><br/></strong></p>",
+    "start_date": "2025-09-26T22:00:00-06:00",
+    "signatures": 70450,
+    "goal": 100000,
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "afd_vs_lehrkrafte_rb_loc": {
+    "slug": "afd_vs_lehrkrafte_rb_loc",
+    "first_seen": "2026-07-06T13:49:10-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T13:49:10-06:00",
+        "count": 136087
+      },
+      {
+        "checked_at": "2026-07-06T13:52:49-06:00",
+        "count": 136088
+      },
+      {
+        "checked_at": "2026-07-07T07:08:12-06:00",
+        "count": 136193
+      },
+      {
+        "checked_at": "2026-07-07T07:30:33-06:00",
+        "count": 136207
+      },
+      {
+        "checked_at": "2026-07-07T10:24:27-06:00",
+        "count": 136246
+      },
+      {
+        "checked_at": "2026-07-13T10:54:19-06:00",
+        "count": 136631
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 136634
+      }
+    ],
+    "title": "AfD geht gegen Lehrkräfte vor!",
+    "summary": "Zeigen wir Lehrkräften im ganzen Land, dass sie nicht allein stehen und sich von der AfD nicht einschüchtern lassen dürfen!",
+    "image_url": "https://images.avaaz.org/58211-afd-vs-lehrkrafte-5.jpg",
+    "url": "https://secure.avaaz.org/campaign/de/afd_vs_lehrkrafte_rb_loc/",
+    "petition_id": 58353,
+    "kind": "campaign",
+    "category": "Avaaz-Kampagne (Unterschriften)",
+    "started_by": "Avaaz-Team",
+    "start_date": "2025-06-13T22:00:00-06:00",
+    "signatures": 136634,
+    "goal": 250000,
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "solidaritycuba_loc": {
+    "slug": "solidaritycuba_loc",
+    "first_seen": "2026-07-06T13:49:10-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T13:49:10-06:00",
+        "count": 340135
+      },
+      {
+        "checked_at": "2026-07-07T07:08:12-06:00",
+        "count": 340152
+      },
+      {
+        "checked_at": "2026-07-13T10:54:19-06:00",
+        "count": 340226
+      }
+    ],
+    "title": "Kein Angriff auf Kuba",
+    "summary": "Trump hat gerade gesagt, \"Kuba ist als nächstes dran\", nach Venezuela. Durch seine brutale Blockade steht das Land bereits kurz vor dem Kollaps. Das ist illegal und die Entscheidungstragenden müssen endlich gemeinsam gegen seine Schikanen aufstehen, vor dem nächsten Angriff. Unterschreiben Sie jetzt, damit die Regierenden sich gemeinsam für die Zukunft eines unabhängigen Lateinamerikas einsetzen. Wir überbringen unsere Stimmen vor einem wichtigen Gipfeltreffen diesen Monat.",
+    "image_url": "https://images.avaaz.org/56932-trump-ok-fu-5.jpg",
+    "url": "https://secure.avaaz.org/campaign/de/solidaritycuba_loc/",
+    "petition_id": 57377,
+    "kind": "campaign",
+    "category": "Avaaz-Kampagne (Unterschriften)",
+    "started_by": "Avaaz-Team",
+    "description_full": "<p>Trump hat gerade erklärt, er könne Kuba übernehmen und \"damit machen, was ich will\".<br/><br/>Aber das ist illegal und es ist höchste Zeit, dass unsere Regierenden zusammenstehen und ihn öffentlich zur Rede stellen.<br/><br/>Viele Regierungsoberhäupter haben bislang vorsichtig reagiert, während Trump Mexiko bedroht, mit dem Gedanken gespielt hat, Grönland zu übernehmen und iranische Schulkinder bombardierte. <strong>Doch er versucht rücksichtslos seinen Willen durchzusetzen und wenn unsere Regierenden jetzt nicht gemeinsam handeln und ihm Einhalt gebieten, könnte er noch weiter gehen.</strong><br/><br/><strong>Dieser Moment könnte ein Wendepunkt sein:</strong> Als Europa Trump geeint entgegentrat, gab er seine Pläne auf, in Grönland einzumarschieren. Angesichts weiterer drohender Angriffe können wir nun die Staatsoberhäupter Lateinamerikas dazu bewegen, zusammenzustehen, eine klare Grenze zu ziehen und für eine gemeinsame Zukunft einzutreten, in der internationales Recht gilt und auf keine Region ein kolonialer Anspruch erhoben werden kann.<br/><br/>Fügen Sie Ihren Namen hinzu, um zu fordern, dass die Regierenden in Lateinamerika und auf der ganzen Welt <strong>gemeinsam Stellung beziehen: gegen Trumps illegale Aggression gegen Kuba und jedes Mal, wenn er internationales Recht bricht.</strong> Wir übergeben unsere Unterschriften dann in wenigen Tagen bei einem wichtigen globalen Gipfeltreffen in Barcelona!</p>",
+    "start_date": "2026-03-31T22:00:00-06:00",
+    "signatures": 340226,
+    "goal": 500000,
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "vanuatu_climate_resolution_2026_loc": {
+    "slug": "vanuatu_climate_resolution_2026_loc",
+    "first_seen": "2026-07-06T13:49:10-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T13:49:10-06:00",
+        "count": 466733
+      },
+      {
+        "checked_at": "2026-07-07T07:08:12-06:00",
+        "count": 466813
+      },
+      {
+        "checked_at": "2026-07-13T10:54:19-06:00",
+        "count": 467188
+      }
+    ],
+    "title": "Für unsere Zukunft – Vanuatu unterstützen!",
+    "summary": "Er versucht, Regierungen dazu zu zwingen, einen entscheidenden Klimaplan abzulehnen. Erheben Sie jetzt Ihre Stimme!",
+    "image_url": "https://images.avaaz.org/57556-vanuatu02-5.jpg",
+    "url": "https://secure.avaaz.org/campaign/de/vanuatu_climate_resolution_2026_loc/",
+    "petition_id": 57562,
+    "kind": "campaign",
+    "category": "Avaaz-Kampagne (Unterschriften)",
+    "started_by": "Avaaz-Team",
+    "description_full": "<p><strong>ERFOLGS-UPDATE:</strong> 141 Länder haben gerade <a href=\"https://de.euronews.com/2026/05/21/petrostaaten-blockieren-historisches-klimaurteil-un-generalversammlung-stellt-sich-dahinte\" rel=\"noopener\" target=\"_blank\">bei der UNO für Aufsehen gesorgt</a>! Eine überwältigende Mehrheit hat sich eindeutig dafür ausgesprochen, dass Länder, die sich weigern, gegen die Klimakrise anzugehen, mit realen rechtlichen Konsequenzen rechnen müssen. Das ist ein massiver Rückschlag für die Interessen der Ölindustrie und ein Riesenerfolg für uns alle – <a href=\"https://www.instagram.com/p/DYmmkdvgtnu/\" rel=\"noopener\" target=\"_blank\">liken und teilen Sie</a> diese Nachricht! <br/>-----<br/>\n<br/>\n<br/><strong>Trump ist wieder auf zerstörerischer Mission</strong> – er versucht Regierungen dazu zu zwingen, Pläne für Maßnahmen gegen die Klimakrise abzulehnen.\n<br/>\n<br/>Menschen auf der ganzen Welt leiden schon jetzt unter den Folgen des Klimakollapses – von Überschwemmungen bis hin zu verheerenden Bränden. Doch für den kleinen Inselstaat Vanuatu steht noch mehr auf dem Spiel: Er wird <strong>von der Landkarte verschwinden, wenn wir nicht aufhören, fossile Brennstoffe zu nutzen</strong>.\n<br/>\n<br/>Deshalb haben sie den Fall vor den Internationalen Gerichtshof gebracht, der entschied, dass <strong>Regierungen eine rechtliche Verantwortung haben, gegen den Klimawandel vorzugehen</strong>. Jetzt könnte die UN eine Resolution verabschieden, <strong>damit aus diesem Urteil echte globale Handlungskonsequenzen gezogen werden</strong>.\n<br/>\n<br/><strong>In wenigen Tagen </strong>stimmen die Regierungen darüber ab, doch Trump übt massiven Druck aus, damit sie den Plan ablehnen. Ein <strong>Zeichen, dass es massive öffentliche Unterstützung gibt, könnte jetzt den Ausschlag geben. Unterschreiben Sie jetzt und helfen Sie dabei, dass zugunsten des Klimas entschieden wird!</strong></p>",
+    "start_date": "2026-04-15T22:00:00-06:00",
+    "signatures": 467188,
+    "goal": 500000,
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "free_narges_mohammadi_loc": {
+    "slug": "free_narges_mohammadi_loc",
+    "first_seen": "2026-07-06T13:49:10-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-06T13:49:10-06:00",
+        "count": 428953
+      },
+      {
+        "checked_at": "2026-07-07T07:08:12-06:00",
+        "count": 428997
+      },
+      {
+        "checked_at": "2026-07-13T10:54:19-06:00",
+        "count": 429148
+      }
+    ],
+    "title": "DRINGEND: Freiheit für die Friedensnobelpreisträgerin Narges Mohammadi",
+    "summary": "Nach massivem internationalen Druck wurde die iranische Friedensnobelpreisträgerin Narges Mohammadi endlich in ein Krankenhaus verlegt, wo sie von ihren eigenen Ärzt*innen behandelt werden kann. Doch sie könnte jederzeit wieder ins Gefängnis zurückgeschickt werden – schließen Sie sich dem Aufruf zu ihrer Freilassung an.",
+    "image_url": "https://images.avaaz.org/57715-bk-zoom-crop-same-aspect-v2-5.jpg",
+    "url": "https://secure.avaaz.org/campaign/de/free_narges_mohammadi_loc/",
+    "petition_id": 57715,
+    "kind": "campaign",
+    "category": "Avaaz-Kampagne (Unterschriften)",
+    "started_by": "Avaaz-Team",
+    "description_full": "<p>UPDATE VOM 18. MAI: <em>Nach massivem internationalen Druck, wurde die iranische Friedensnobelpreisträgerin Narges Mohammadi <strong>endlich </strong><strong>aus der Haft entlassen und für fachgerechte medizinische Behandlung nach Hause geschickt</strong>. Doch sie ist weiterhin in Gefahr – ihre Tochter warnt, dass <strong>eine Rückverlegung ins Gefängnis einem \"Todesurteil\" gleichkäme</strong>.<br/>Der globale Druck zeigt Wirkung – <strong>helfen Sie uns, ihn aufrechtzuerhalten</strong>:</em><br/>----<br/><br/>UPDATE VOM 11. MAI: <em>Nach massivem internationalen Druck wurde die iranische Friedensnobelpreisträgerin <strong>Narges Mohammadi nun endlich in ein Krankenhaus verlegt, wo sie von ihren eigenen Ärztinnen und Ärzten behandelt werden kann.</strong> Ihre Inhaftierung ist dadurch jedoch nicht beendet und ohne anhaltenden Druck könnte sie bald wieder in ein iranisches Gefängnis zurückgebracht werden. Wir haben nun den Beweis, dass internationale Aufmerksamkeit wirklich etwas bewegt – </em><strong><em>helfen Sie uns, Narges Mohammadi endgültig zu befreien, bevor es zu spät ist:</em></strong>\n<br/>----\n<br/>\n<br/>Die iranische Friedensnobelpreisträgerin Narges Mohammadi hat <strong>furchtlos die Rechte von Frauen verteidigt</strong>, sich mutig gegen Hinrichtungen in Iran eingesetzt und ist ein Vorbild für Millionen Menschen in ihrem Land und auf der ganzen Welt.\n<br/>\n<br/>Für ihren Aktivismus hat das iranische Regime sie ins Gefängnis geworfen – und <strong>nun hängt ihr Leben an einem seidenen Faden</strong>. Als sie im Dezember festgenommen wurde, wurde sie brutal zusammengeschlagen und erlitt seitdem offenbar einen Herzinfarkt.\n<br/>\n<br/>Sie wurde in kritischem Zustand ins Krankenhaus eingeliefert – eine Rückkehr ins Gefängnis könnte ihr das Leben kosten. Aber gemeinsam können <strong>wir helfen, dass sie ihre Freiheit wiedererlangt</strong>. Internationaler Druck hat bereits in der Vergangenheit dazu beigetragen, Gefangene im Iran zu befreien, und <strong>massive öffentliche Aufmerksamkeit könnte Teheran jetzt dazu bewegen, Mohammadi freizulassen</strong>.\n<br/>\n<br/>Uns bleibt nicht viel Zeit – wir müssen diesen Aufruf riesengroß machen.<strong> Fügen Sie jetzt Ihren Namen hinzu</strong> und teilen sie die Petition mit allen, die Sie kennen. Starten wir einen weitreichenden Aufruf zur Solidarität mit Narges Mohammadi und allen politischen Gefangenen Irans.<br/>\n<br/><em>Bildnachweis: Nooshin Jafari</em></p>",
+    "start_date": "2026-04-30T22:00:00-06:00",
+    "signatures": 429148,
+    "goal": 500000,
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "european_voter_europe_for_nature_vote_for_our_future_in_the_european_election": {
+    "slug": "european_voter_europe_for_nature_vote_for_our_future_in_the_european_election",
+    "first_seen": "2026-07-13T10:54:19-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-13T10:54:19-06:00",
+        "count": 5241
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 5242
+      },
+      {
+        "checked_at": "2026-07-13T13:20:39-06:00",
+        "count": 5241
+      }
+    ],
+    "title": "Europe For Nature; Wähle Natur und Nachhaltigkeit",
+    "summary": "Ich bin zutiefst besorgt über den Rückgang der Natur in Europa und weltweit und seine Auswirkungen auf die gegenwärtigen und zukünftigen Generationen. Ich fordere die europäischen Führer auf, Biodiversität und Klima Priorität einzuräumen und den Grünen Deal in die Tat umzusetzen. Ich fordere alle Mitbürger auf, Natur und Nachhaltigkeit bei ihren Entscheidungen Priorität einzuräumen.",
+    "image_url": "https://avaazdoimages.avaaz.org/f47a180cb09649ab95a3e37010d66dc0.jpeg",
+    "url": "https://secure.avaaz.org/community_petitions/de/european_voter_europe_for_nature_vote_for_our_future_in_the_european_election/",
+    "petition_id": 1727801,
+    "started_by": "Arnold V.",
+    "recipient": "Europäische Führer und europäische Bürger",
+    "description_full": "<p>Ich bin zutiefst besorgt über den Rückgang der Natur in Europa und weltweit und seine Auswirkungen auf die gegenwärtigen und zukünftigen Generationen.\n       <br/>\n<br>\n        Ich fordere die europäischen Führer auf, Biodiversität und Klima Priorität einzuräumen und den Grünen Deal in die Tat umzusetzen.\n        <br/>\n<br/>\n        Ich fordere alle Mitbürger auf, Natur und Nachhaltigkeit bei ihren Entscheidungen Priorität einzuräumen.\n        <br/>\n<br/>\n<br/>\n</br></p>",
+    "start_date": "2024-04-24T00:40:13-06:00",
+    "updates": [
+      {
+        "timestamp": "2024-05-08T11:00:14-06:00",
+        "text": "Petitionstext aktualisiert"
+      }
+    ],
+    "kind": "petition",
+    "category": "Bürgerpetition",
+    "signatures": 5241,
+    "goal": 7500,
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  }
+}

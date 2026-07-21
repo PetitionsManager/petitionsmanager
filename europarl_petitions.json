@@ -1,0 +1,2349 @@
+{
+  "_meta": {
+    "_README": "Petitions-Monitor. Datensaetze werden aktualisiert, nie ueberschrieben.",
+    "fields": {
+      "slug": "ID/Schluessel aus der URL",
+      "url": "kanonische Petitions-URL",
+      "petition_id": "interne numerische ID der Plattform oder null",
+      "title": "Titel",
+      "started_by": "Gestartet von",
+      "recipient": "Adressat",
+      "category": "Thema/Kategorie (falls die Plattform Kategorien hat)",
+      "category_url": "Link zur Kategorieseite",
+      "summary": "Kurzbeschreibung (og:description)",
+      "description_full": "komplette, gegliederte Beschreibung als bereinigtes HTML",
+      "image_url": "Petitionsbild",
+      "signatures": "aktueller Unterschriftenstand",
+      "signatures_history": "Zeitreihe [{checked_at,count}]",
+      "milestones": "Meilenstein-Marken [{threshold,timestamp}]",
+      "updates": "Neuigkeiten [{timestamp,text}]",
+      "goal": "aktuelles Unterschriften-Ziel (falls die Plattform eines zeigt)",
+      "start_date": "Startdatum (plattformabhängig ermittelt)",
+      "status": "online | offline",
+      "first_seen": "erstmals gescrapt (unveraenderlich)",
+      "last_seen": "zuletzt online",
+      "last_checked": "zuletzt geprueft",
+      "offline_since": "seit wann offline oder null"
+    },
+    "generated_at": "2026-07-13T13:24:12-06:00",
+    "petition_count": 98,
+    "new_petitions_last_run": []
+  },
+  "0474-2026": {
+    "slug": "0474-2026",
+    "first_seen": "2026-07-06T20:10:17-06:00",
+    "signatures_history": [],
+    "title": "Petition 0474/2026: an alleged infringement of the right to inclusive education of children with special educational needs in Germany",
+    "started_by": "U. F. (German)",
+    "category": "Equal Opportunities and Gender",
+    "description_full": "<p>Petition No 0474/2026 by U. F. (German) on an alleged infringement of the right to inclusive education of children with special educational needs in Germany</p>",
+    "summary": "Petition No 0474/2026 by U. F. (German) on an alleged infringement of the right to inclusive education of children with special educational needs in Germany",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2026-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0474%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:20:42",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0296-2026": {
+    "slug": "0296-2026",
+    "first_seen": "2026-07-06T20:10:17-06:00",
+    "signatures_history": [],
+    "title": "Petition 0296/2026: alleged breaches of EU public procurement rules concerning planned construction projects in Hamburg, Germany",
+    "started_by": "Peter Schönberger (German)",
+    "category": "Internal Market - Free movement of goods and services",
+    "description_full": "<p>Petition No 0296/2026 by Peter Schönberger (German) on alleged breaches of EU public procurement rules concerning planned construction projects in Hamburg, Germany</p>",
+    "summary": "Petition No 0296/2026 by Peter Schönberger (German) on alleged breaches of EU public procurement rules concerning planned construction projects in Hamburg, Germany",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2026-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0296%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:20:44",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0003-2026": {
+    "slug": "0003-2026",
+    "first_seen": "2026-07-06T20:10:17-06:00",
+    "signatures_history": [],
+    "title": "Petition 0003/2026: Regulation (EC) No 261/2004",
+    "started_by": "N. H. (German)",
+    "category": "Consumer Rights",
+    "description_full": "<p>The petitioner points out that Regulation (EC) No 261/2004 regulates passenger compensation in the event of delays. Article 12 speaks of &amp;#34;crediting&amp;#34; to further claims. However, according to the petitioner, it is completely unclear whether the compensation for &amp;#34;inconvenience&amp;#34; also covers concrete material damage. The petitioner describes the case, with flight delay during the package tour, and points out that experts had different opinions on the crediting of claims. According to the petitioner, the consequences of the ambiguities are that tour operators systematically refuse payments and consumers remain seated on damages. The petitioner asks the European Parliament to clarify in Article 12 of Regulation 261/2004 that compensation for intangible damage (stress, waiting time) is not to be counted towards material damage (not received hotel services, local taxes). According to the petitioner, this would strengthen consumer protection and ensure fair burden-sharing between airlines and organisers.</p>",
+    "summary": "The petitioner points out that Regulation (EC) No 261/2004 regulates passenger compensation in the event of delays. Article 12 speaks of &#34;crediting&#34; to further claims. However, according to th…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2026-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0003%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:20:46",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "2517-2025": {
+    "slug": "2517-2025",
+    "first_seen": "2026-07-06T20:10:17-06:00",
+    "signatures_history": [],
+    "title": "Petition 2517/2025",
+    "category": "Fundamental Rights",
+    "description_full": "<p>Petition No&amp;nbsp;2517/2025 by P. O. S. (Spanish), on behalf of ‘Iniciativa Ciudadana’, on the persecution and harassment of Christians in the European Union</p>",
+    "summary": "Petition No&nbsp;2517/2025 by P. O. S. (Spanish), on behalf of ‘Iniciativa Ciudadana’, on the persecution and harassment of Christians in the European Union",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2025-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=2517%252F2025",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:20:48",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "2346-2025": {
+    "slug": "2346-2025",
+    "first_seen": "2026-07-06T20:10:17-06:00",
+    "signatures_history": [],
+    "title": "Petition 2346/2025: alleged breach of Regulation (EU) 2018/302 and on addressing unjustified geo-blocking based on country of residence",
+    "started_by": "Robert A. Schulz (German)",
+    "category": "Consumer Rights",
+    "description_full": "<p>Petition No 2346/2025 by Robert A. Schulz (German) on alleged breach of Regulation (EU) 2018/302 and on addressing unjustified geo-blocking based on country of residence</p>",
+    "summary": "Petition No 2346/2025 by Robert A. Schulz (German) on alleged breach of Regulation (EU) 2018/302 and on addressing unjustified geo-blocking based on country of residence",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2025-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=2346%252F2025",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:20:51",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "2143-2025": {
+    "slug": "2143-2025",
+    "first_seen": "2026-07-06T20:10:17-06:00",
+    "signatures_history": [],
+    "title": "Petition 2143/2025: institutional transparency and accountability during the COVID-19 pandemic",
+    "started_by": "Danny Hanke (Belgian)",
+    "category": "Internal Market - Recognition of qualifications",
+    "description_full": "<p>Petition No 2143/2025 by Danny Hanke (Belgian) on institutional transparency and accountability during the COVID-19 pandemic</p>",
+    "summary": "Petition No 2143/2025 by Danny Hanke (Belgian) on institutional transparency and accountability during the COVID-19 pandemic",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2025-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=2143%252F2025",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:20:53",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1794-2025": {
+    "slug": "1794-2025",
+    "first_seen": "2026-07-06T20:10:17-06:00",
+    "signatures_history": [],
+    "title": "Petition 1794/2025: behalf of VoT Germany e.V. Organisation für Opfer von Terrorismus, on the alleged incomplete implementation of EU Directive on combating terrorism by Germany",
+    "started_by": "Astrid Passin (German),",
+    "category": "Justice",
+    "description_full": "<p>Petition No 1794/2025 by Astrid Passin (German), on behalf of VoT Germany e.V. Organisation für Opfer von Terrorismus, on the alleged incomplete implementation of EU Directive on combating terrorism by Germany</p>",
+    "summary": "Petition No 1794/2025 by Astrid Passin (German), on behalf of VoT Germany e.V. Organisation für Opfer von Terrorismus, on the alleged incomplete implementation of EU Directive on combating terrorism b…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2025-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1794%252F2025",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:20:55",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1589-2025": {
+    "slug": "1589-2025",
+    "first_seen": "2026-07-06T20:10:17-06:00",
+    "signatures_history": [],
+    "title": "Petition 1589/2025",
+    "category": "Consumer Rights",
+    "description_full": "<p>Petition No 1589/2025 by Sebastian Giesbert Herbring (German) on increasing the traveller’s allowances for those travelling by air and sea</p>",
+    "summary": "Petition No 1589/2025 by Sebastian Giesbert Herbring (German) on increasing the traveller’s allowances for those travelling by air and sea",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2025-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1589%252F2025",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:20:58",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1554-2025": {
+    "slug": "1554-2025",
+    "first_seen": "2026-07-06T20:10:17-06:00",
+    "signatures_history": [],
+    "title": "Petition 1554/2025: an alleged infringement of the Digital Services Act by Meta",
+    "started_by": "V. V. (German)",
+    "category": "Information Society and Media",
+    "description_full": "<p>The petitioner denounces that her Instagram account was suspended for alleged adult sexual services. According to the petitioner, this is a false accusation. The petitioner argues that META has infringed the Digital Services Act by inadequately reasoning the content restriction, defective internal complaint-handling system and taking over 8 days without processing appeal. The petitioner considers that this situation affects millions of European citizens facing arbitrary account suspensions by Meta platforms. According to the petitioner, Meta systematically violates DSA requirements for transparent content moderation, effective appeal processes and timely complaint handling. The petitioner urges the European Parliament to investigate Meta's alleged systematic DSA violations, impose significant penalties under DSA Article 74, demand immediate compliance with EU law and protect European citizens from arbitrary platform decisions.</p>",
+    "summary": "The petitioner denounces that her Instagram account was suspended for alleged adult sexual services. According to the petitioner, this is a false accusation. The petitioner argues that META has infrin…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2025-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1554%252F2025",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:21:00",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1268-2025": {
+    "slug": "1268-2025",
+    "first_seen": "2026-07-06T20:10:17-06:00",
+    "signatures_history": [],
+    "title": "Petition 1268/2025: banning attached tethered caps of plastic bottles and paper straws in the EU",
+    "started_by": "H.H. (German)",
+    "category": "Environment - Protection and Preservation",
+    "description_full": "<p>The petitioner questions the proportionality and effectiveness of EU regulations on tethered bottle caps and plastic straws, arguing they are impractical, lack evidence of environmental benefit, and erode public trust. The petitioner urges the European Parliament to reassess the proportionality and effectiveness of the tethered cap and plastic straw regulations, and to prioritise evidence-based, high-impact measures that genuinely enhance sustainability and recyclability across the EU.</p>",
+    "summary": "The petitioner questions the proportionality and effectiveness of EU regulations on tethered bottle caps and plastic straws, arguing they are impractical, lack evidence of environmental benefit, and e…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2025-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1268%252F2025",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:21:02",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1139-2025": {
+    "slug": "1139-2025",
+    "first_seen": "2026-07-06T20:10:17-06:00",
+    "signatures_history": [],
+    "title": "Petition 1139/2025",
+    "category": "Environment - Waste",
+    "description_full": "<p>Petition No 1139/2025 by D.G. (German) on access to environmental information following asbestos incident in Hamm, Germany</p>",
+    "summary": "Petition No 1139/2025 by D.G. (German) on access to environmental information following asbestos incident in Hamm, Germany",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2025-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1139%252F2025",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:21:04",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1125-2025": {
+    "slug": "1125-2025",
+    "first_seen": "2026-07-06T20:10:17-06:00",
+    "signatures_history": [],
+    "title": "Petition 1125/2025: German authorities' alleged refusal to recognise a Polish driving license",
+    "started_by": "Kai Schliefkowitz (German)",
+    "category": "Internal Market - Free movement of persons",
+    "description_full": "<p>Petition No 1125/2025 by Kai Schliefkowitz (German) on German authorities' alleged refusal to recognise a Polish driving license</p>",
+    "summary": "Petition No 1125/2025 by Kai Schliefkowitz (German) on German authorities' alleged refusal to recognise a Polish driving license",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2025-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1125%252F2025",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:21:06",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1051-2025": {
+    "slug": "1051-2025",
+    "first_seen": "2026-07-06T20:10:17-06:00",
+    "signatures_history": [],
+    "title": "Petition 1051/2025: an alleged breach of Directive 2008/48/EC on credit agreements for consumers by a Swedish financial institution and the regulation of cross border lending",
+    "started_by": "Andrés Felipe Valdés Pérez (Cuban)",
+    "category": "Consumer Rights",
+    "description_full": "<p>Petition No 1051/2025 by Andrés Felipe Valdés Pérez (Cuban) on an alleged breach of Directive 2008/48/EC on credit agreements for consumers by a Swedish financial institution and the regulation of cross border lending</p>",
+    "summary": "Petition No 1051/2025 by Andrés Felipe Valdés Pérez (Cuban) on an alleged breach of Directive 2008/48/EC on credit agreements for consumers by a Swedish financial institution and the regulation of cro…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2025-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1051%252F2025",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:21:08",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1036-2025": {
+    "slug": "1036-2025",
+    "first_seen": "2026-07-06T20:10:17-06:00",
+    "signatures_history": [],
+    "title": "Petition 1036/2025: an alleged breach of the Strategic Environmental Assessment Directive by a German district government",
+    "started_by": "Sönke Walther (German)",
+    "category": "Environment - Pollution",
+    "description_full": "<p>Petition No 1036/2025 by Sönke Walther (German) on an alleged breach of the Strategic Environmental Assessment Directive by a German district government</p>",
+    "summary": "Petition No 1036/2025 by Sönke Walther (German) on an alleged breach of the Strategic Environmental Assessment Directive by a German district government",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2025-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1036%252F2025",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:21:10",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1033-2025": {
+    "slug": "1033-2025",
+    "first_seen": "2026-07-06T20:10:17-06:00",
+    "signatures_history": [],
+    "title": "Petition 1033/2025: amending the Directive 2006/112/EC to exempt donations from charitable events",
+    "started_by": "Samein Smith (German)",
+    "category": "Economic and Monetary Affairs",
+    "description_full": "<p>Petition No 1033/2025 by Samein Smith (German) on amending the Directive 2006/112/EC to exempt donations from charitable events</p>",
+    "summary": "Petition No 1033/2025 by Samein Smith (German) on amending the Directive 2006/112/EC to exempt donations from charitable events",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2025-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1033%252F2025",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:21:12",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0844-2025": {
+    "slug": "0844-2025",
+    "first_seen": "2026-07-06T20:10:17-06:00",
+    "signatures_history": [],
+    "title": "Petition 0844/2025: alleged discriminatory barriers to obtain a driving license for Bulgarian citizens",
+    "started_by": "Rumen Petrov (Bulgarian)",
+    "category": "Fundamental Rights",
+    "description_full": "<p>Petition No 0844/2025 by Rumen Petrov (Bulgarian) on alleged discriminatory barriers to obtain a driving license for Bulgarian citizens</p>",
+    "summary": "Petition No 0844/2025 by Rumen Petrov (Bulgarian) on alleged discriminatory barriers to obtain a driving license for Bulgarian citizens",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2025-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0844%252F2025",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:21:14",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0694-2025": {
+    "slug": "0694-2025",
+    "first_seen": "2026-07-06T20:10:17-06:00",
+    "signatures_history": [],
+    "title": "Petition 0694/2025",
+    "category": "Fundamental Rights",
+    "description_full": "<p>Petition No 0694/2025 by Olena Apalaghiei (Romanian) on improving access to Amyotrophic Lateral Sclerosis  treatment and clinical trials in Romania</p>",
+    "summary": "Petition No 0694/2025 by Olena Apalaghiei (Romanian) on improving access to Amyotrophic Lateral Sclerosis  treatment and clinical trials in Romania",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2025-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0694%252F2025",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:21:17",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0301-2025": {
+    "slug": "0301-2025",
+    "first_seen": "2026-07-06T20:10:17-06:00",
+    "signatures_history": [],
+    "title": "Petition 0301/2025",
+    "category": "Disability Issues",
+    "description_full": "<p>Petition 0301/2025 by M. C. (German) on the protection of housing rights for disabled and elderly citizens in Germany and the EU</p>",
+    "summary": "Petition 0301/2025 by M. C. (German) on the protection of housing rights for disabled and elderly citizens in Germany and the EU",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2025-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0301%252F2025",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:21:19",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1386-2024": {
+    "slug": "1386-2024",
+    "first_seen": "2026-07-06T20:10:17-06:00",
+    "signatures_history": [],
+    "title": "Petition 1386/2024: alleged insufficient implementation of Regulation (EC) No 883/2004 by Germany",
+    "started_by": "S. H. (German)",
+    "category": "Health",
+    "description_full": "<p>The petitioner, a German civil servant residing in Switzerland, raises concerns about alleged gaps in the implementation of Regulation (EC) No 883/2004 on the coordination of social security systems into German law. Despite being privately insured in Germany prior to relocation, the petitioner faced challenges when his insurer limited coverage in Switzerland and required a premium surcharge. The petitioner could not obtain insurance from Swiss providers due to ongoing employment in Germany nor from German public health insurance schemes. Attempts to secure coverage with another private insurer also failed due to the change in residence to Switzerland. The petitioner argues that the German law inadequately reflects the requirements of Regulation (EC) No 883/2004, particularly for civil servants, as the regulation applies to EFTA states, including Switzerland. Unlike Norway, Iceland, and Liechtenstein, Switzerland is not covered under the German law, creating an alleged legal gap. Efforts to resolve the issue with the Ombudsman for Private Health Insurance and the Federal Financial Supervisory Authority (BaFin) were unsuccessful.</p>",
+    "summary": "The petitioner, a German civil servant residing in Switzerland, raises concerns about alleged gaps in the implementation of Regulation (EC) No 883/2004 on the coordination of social security systems i…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2024-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1386%252F2024",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:21:21",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0919-2024": {
+    "slug": "0919-2024",
+    "first_seen": "2026-07-06T20:10:17-06:00",
+    "signatures_history": [],
+    "title": "Petition 0919/2024: linguistic diversity and accessibility on streaming platforms in the EU",
+    "started_by": "A. N. (Polish)",
+    "category": "Internal Market - Free movement of goods and services",
+    "description_full": "<p>The petitioner says that streaming platforms should have to provide access to Polish versions of streaming materials across the European Union. According to the petitioner, platforms such as Netflix do not offer Polish language streaming in Germany despite the same materials being available in Poland, in Polish. The petitioner claims that this limits Polish children living abroad who are unable to view materials in their native language: this in turn infringes on their cultural identity and the parents’ ability to educate. The petitioner calls for the introduction of regulations to require streaming platforms to make materials available in all languages of the European Union. According to the petitioner, this change would align with the ethos of both EU and UN law, which it currently contradicts with regard to equal access to media and culture.</p>",
+    "summary": "The petitioner says that streaming platforms should have to provide access to Polish versions of streaming materials across the European Union. According to the petitioner, platforms such as Netflix d…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2024-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0919%252F2024",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:21:23",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0734-2024": {
+    "slug": "0734-2024",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0734/2024: the accessibility of public spaces for people with reduced mobility",
+    "started_by": "R. W. (German)",
+    "category": "Disability Issues",
+    "description_full": "<p>The petitioner highlights an alleged lack of accessibility for wheelchair users in Germany and across the EU, pointing out that many public spaces, including train stations, buses, and rural stops, are not barrier-free. The petitioner argues that there should be regulations at both the national and EU levels to improve accessibility. This includes ensuring that all new buses, trains, and public buildings are fully accessible, eliminating barriers such as stairs, narrow doorways, and lack of elevators. The petitioner calls for swift action to improve the everyday freedom and mobility of people with disabilities.</p>",
+    "summary": "The petitioner highlights an alleged lack of accessibility for wheelchair users in Germany and across the EU, pointing out that many public spaces, including train stations, buses, and rural stops, ar…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2024-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0734%252F2024",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:21:26",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0733-2024": {
+    "slug": "0733-2024",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0733/2024",
+    "category": "Environment - Pollution",
+    "description_full": "<p>The petitioner points out that testing on European waters has revealed high concentrations of PFAS degradation products, such as trifluoroacetate (TFA). According to the petitioner, the European Food Safety Authority (EFSA) does not consider that TFAs pose a risk, therefore no monitoring obligations or limit values are in place. The petitioner states that these degradation products and PFAS could make their way into groundwater, which could threaten to compromise drinking water. The petitioner states that it is therefore necessary to restrict PFAS under the REACH Regulation, to make the Water Framework Directive’s provisions on TFAs more stringent and to establish limits values and monitoring obligations for PFAS. The petitioner is also in favour of banning non-essential uses of PFAS.</p>",
+    "summary": "The petitioner points out that testing on European waters has revealed high concentrations of PFAS degradation products, such as trifluoroacetate (TFA). According to the petitioner, the European Food …",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2024-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0733%252F2024",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:21:28",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0700-2024": {
+    "slug": "0700-2024",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0700/2024: increased rights for rail passengers",
+    "started_by": "J.D. (German)",
+    "category": "Transport",
+    "description_full": "<p>This petition calls for rail passenger rights to be enhanced by determining when a journey ends on the basis of the actual travel destination rather than what is written on the ticket, in order to also cover the costs of any connections (such as a bus) that are missed as a result of delays. In support of this, the petitioner claims that the vast majority of passengers arriving at a train station travel on using other modes of transport, such as buses or trams, until they reach their actual destination are confronted with difficulties. A delayed train could mean that the final leg of the journey (such as a late-night bus ride) cannot be taken.</p>",
+    "summary": "This petition calls for rail passenger rights to be enhanced by determining when a journey ends on the basis of the actual travel destination rather than what is written on the ticket, in order to als…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2024-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0700%252F2024",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:21:30",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0663-2024": {
+    "slug": "0663-2024",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0663/2024: labelling food containing eggs",
+    "started_by": "S. L. (German)",
+    "category": "Food Safety",
+    "description_full": "<p>The petition calls for food manufacturers to be required to indicate the type of farming used for the chickens on the ingredients lists of foods containing eggs. The petition states that information on the eggs used in the product and the type of farming used to produce them is currently missing from the information provided to consumers when making a purchase decision. It is therefore proposed that this information on the type of farming, for example “free-range eggs”, be included in the ingredients list.</p>",
+    "summary": "The petition calls for food manufacturers to be required to indicate the type of farming used for the chickens on the ingredients lists of foods containing eggs. The petition states that information o…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2024-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0663%252F2024",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:21:32",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0386-2024": {
+    "slug": "0386-2024",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0386/2024",
+    "category": "Disability Issues",
+    "description_full": "<p>Petition No 0386/2024 by H. A. M. (German) calling for a legal regulation to exempt items needed by severely disabled people from the Montreal Convention’s liability limits in case of damage during air transportation</p>",
+    "summary": "Petition No 0386/2024 by H. A. M. (German) calling for a legal regulation to exempt items needed by severely disabled people from the Montreal Convention’s liability limits in case of damage during ai…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2024-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0386%252F2024",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:21:34",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0861-2023": {
+    "slug": "0861-2023",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0861/2023: the rights of victims of sexual violence in Germany",
+    "started_by": "R. R. (German)",
+    "category": "Personal Matter",
+    "description_full": "<p>According to the petitioner, the national compensation procedures for victims of sexual violence in Germany violate the European Convention on Human Rights, as well as the European Victims' Rights Directive. The petitioner states as reasons, among others, the consequences of retraumatisation and secondary victimisation during the proceedings, which the petitioner allegedly experienced during the processing of his petition by the Committee on Petitions of the German Land of Baden-Württemberg. According to the petitioner, the communication with the authorities, the medical assessments, the court proceedings and the processing time of the petitioner's application for victim compensation have led to further damage to his health. The petitioner states that many other victims have similar traumatising experiences in Germany, which all violate the European Victims' Rights Directive.</p>",
+    "summary": "According to the petitioner, the national compensation procedures for victims of sexual violence in Germany violate the European Convention on Human Rights, as well as the European Victims' Rights Dir…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2023-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0861%252F2023",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:21:36",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0794-2023": {
+    "slug": "0794-2023",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0794/2023: the transparency of the score of the German credit rating agency ‘Schufa’",
+    "started_by": "M. H. (German)",
+    "category": "Economic and Monetary Affairs",
+    "description_full": "<p>The petitioner demands that the score of the German credit rating agency “Schufa” be made fully transparent. At present, parts of the calculation basis are secret, which, according to the petitioner, violates democratic principles. According to the petitioner, low-income households are discriminated against because citizens living in structurally weak regions are rated lower. The petitioner fears that a large proportion of citizens with a migration background are disadvantaged in the granting of loans.</p>",
+    "summary": "The petitioner demands that the score of the German credit rating agency “Schufa” be made fully transparent. At present, parts of the calculation basis are secret, which, according to the petitioner, …",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2023-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0794%252F2023",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:21:38",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0254-2023": {
+    "slug": "0254-2023",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0254/2023",
+    "category": "Trade",
+    "description_full": "<p>The petitioner criticises Amazon’s policy towards its suppliers and states that it is completely abusive and that it does not generate any profit for vendors. He denounces the margins they apply to products and the fact that this type of platform is going to put an end to small businesses that will not be able to survive.</p>",
+    "summary": "The petitioner criticises Amazon’s policy towards its suppliers and states that it is completely abusive and that it does not generate any profit for vendors. He denounces the margins they apply to pr…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2023-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0254%252F2023",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:21:40",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0215-2023": {
+    "slug": "0215-2023",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0215/2023",
+    "category": "Industry and Entreprise",
+    "description_full": "<p>Petition No 0215/2023 by G. S. (German) on the development of a standard On-board diagnostics (OBD) interface for all vehicles</p>",
+    "summary": "Petition No 0215/2023 by G. S. (German) on the development of a standard On-board diagnostics (OBD) interface for all vehicles",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2023-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0215%252F2023",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:21:42",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0025-2023": {
+    "slug": "0025-2023",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0025/2023: the right of German pensioners living elsewhere in the EU to receive an energy allowance from Germany",
+    "started_by": "Harald Weil (German)",
+    "category": "Justice",
+    "description_full": "<p>Petition No 0025/2023 by Harald Weil (German) on the right of German pensioners living elsewhere in the EU to receive an energy allowance from Germany</p>",
+    "summary": "Petition No 0025/2023 by Harald Weil (German) on the right of German pensioners living elsewhere in the EU to receive an energy allowance from Germany",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2023-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0025%252F2023",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:21:44",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1015-2022": {
+    "slug": "1015-2022",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 1015/2022: the climate goals and the practice of offsetting",
+    "started_by": "Philipp Schmagold (German)",
+    "category": "Energy",
+    "description_full": "<p>The petitioner calls for the adopted climate goals to be complied with at national level and for an end to be put to EU-wide offsetting. In his view, emissions trading should no longer be permitted. He proposes introducing a penalty of 30 euros, with an annual increase of 5%, for every tonne of CO2 or CO2 equivalent that a Member State produces above the agreed target. This money could then be put towards a climate-friendly fund, such as the EU Just Transition Fund.</p>",
+    "summary": "The petitioner calls for the adopted climate goals to be complied with at national level and for an end to be put to EU-wide offsetting. In his view, emissions trading should no longer be permitted. H…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2022-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1015%252F2022",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:21:46",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0855-2022": {
+    "slug": "0855-2022",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0855/2022: the impact of sanctions against Russia on German citizens",
+    "started_by": "G. E. (German)",
+    "category": "Fundamental Rights",
+    "description_full": "<p>The petitioner has submitted the petition on behalf of his wife, who is originally from Russia and has been a German citizen for ten years, and stresses how she is directly affected by the sanctions – most notably the SWIFT-related sanctions – imposed by the EU on Russia. The petitioner explains that his wife made contributions to the Russian pension system and usually receives a pension from her country of origin. However, since the sanctions were imposed on Russia, she has not been able to access her pension as it is not possible via a German bank. The petitioner’s wife has lost her income as a result of the sanctions, which he regards as a violation of EU citizens’ human rights and fundamental freedoms. The petitioner regrets that precautions to avoid such problems were not taken in the planning phase prior to the implementation of the sanctions. The petitioner calls on the EU to address this issue as a matter of international law and to consider ways of providing compensation.</p>",
+    "summary": "The petitioner has submitted the petition on behalf of his wife, who is originally from Russia and has been a German citizen for ten years, and stresses how she is directly affected by the sanctions –…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2022-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0855%252F2022",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:21:49",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0768-2022": {
+    "slug": "0768-2022",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0768/2022: fish deaths in the River Oder",
+    "started_by": "P.O.S. (Spanish)",
+    "category": "Health",
+    "description_full": "<p>The petitioner complains that, this summer, 300 tonnes of dead fish were removed from the River Oder, on the border between Germany and Poland, having been killed by an environmental disaster that could be linked to a toxic species of algae. He calls on Parliament to investigate this state of affairs.</p>",
+    "summary": "The petitioner complains that, this summer, 300 tonnes of dead fish were removed from the River Oder, on the border between Germany and Poland, having been killed by an environmental disaster that cou…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2022-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0768%252F2022",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:21:51",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0527-2022": {
+    "slug": "0527-2022",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0527/2022: alleged violations of EU public procurement law in Germany",
+    "started_by": "Peter Schönberger (German)",
+    "category": "Internal Market",
+    "description_full": "<p>The petitioner calls on the Commission to take action against a widespread public procurement practice in Germany, which is preventing the best talent from having a fair shot in planning competitions. According to the petitioner, preference is given to running restricted competitions in Germany. He claims that random selection is used to reduce the number of participants.  This is done on the basis of a special provision in Section 75(6) of the German Ordinance on the Award of Public Contracts, which allows for a selection to be made by drawing lots ‘if the number of applicants is too high even following an objective selection process pursuant to the underlying eligibility criteria’. That special provision has no equivalent in Directive 2014/24/EU on public procurement, which in recital 93 states that the drawing of lots should be avoided. What is more, preferred architects and planning agencies are allegedly pre-selected prior to the lots being drawn and are as such allowed to participate without being part of the random selection. This unfair practice places applicants from other Member States at a disadvantage. To demonstrate what he describes, the petitioner provides a specific example of a planning competition that was run for Hamburg train station.</p>",
+    "summary": "The petitioner calls on the Commission to take action against a widespread public procurement practice in Germany, which is preventing the best talent from having a fair shot in planning competitions.…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2022-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0527%252F2022",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:21:53",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0227-2022": {
+    "slug": "0227-2022",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0227/2022",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2022-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0227%252F2022",
+    "kind": "petition",
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0114-2022": {
+    "slug": "0114-2022",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0114/2022",
+    "category": "Competition",
+    "description_full": "<p>The petitioner suggests that the European Parliament reconsider the relationship between the EU and Cuba. The petitioner denounces that, due to the terrible human rights situation in Cuba, freedom of speech, freedom of the press and freedom of religion have all been severely suppressed. The petitioner states that the EU must consider reducing economic and trade relations with Cuba and condemn human rights atrocities in the country.</p>",
+    "summary": "The petitioner suggests that the European Parliament reconsider the relationship between the EU and Cuba. The petitioner denounces that, due to the terrible human rights situation in Cuba, freedom of …",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2022-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0114%252F2022",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:21:58",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0020-2022": {
+    "slug": "0020-2022",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0020/2022: the return to Greece of fragments of the Parthenon held by other Member States",
+    "started_by": "Fernando Herrera de las Heras (Spanish)",
+    "category": "Culture and Heritage",
+    "description_full": "<p>Petition No 0020/2022 by Fernando Herrera de las Heras (Spanish) on the return to Greece of fragments of the Parthenon held by other Member States</p>",
+    "summary": "Petition No 0020/2022 by Fernando Herrera de las Heras (Spanish) on the return to Greece of fragments of the Parthenon held by other Member States",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2022-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0020%252F2022",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:22:00",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1209-2021": {
+    "slug": "1209-2021",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 1209/2021: the situation of EU citizen Luis Frometa Compte in Cuba",
+    "started_by": "J.D.J.K. (German)",
+    "category": "Justice",
+    "description_full": "<p>The petitioner urges the European Parliament to take concrete measures to pursue the freedom of Mr Luis Frómeta Compte, who is imprisoned in Cuba and for whom the Cuban prosecution demands 24 years of imprisonment. Mr Compte is an EU citizen, who was on a family visit to Cuba in July 2021, when some anti-government riots took place. Mr Compte was filming the events on the street with his smartphone, when he was forcibly taken to the police station by the competent authorities and was later arrested. According to the petitioner, the charges against Mr Compte are unjustifiable and arbitrary, reflecting the injustice of a totalitarian regime. Therefore, he calls on the European Parliament to help Mr Compte and stand with the other political prisoners in Cuba, who are subject to the harsh injustice of the national regime.</p>",
+    "summary": "The petitioner urges the European Parliament to take concrete measures to pursue the freedom of Mr Luis Frómeta Compte, who is imprisoned in Cuba and for whom the Cuban prosecution demands 24 years of…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2021-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1209%252F2021",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:22:02",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0435-2021": {
+    "slug": "0435-2021",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0435/2021: the right to leave and return to Cuba.",
+    "started_by": "M. S. G. B. (Cuban), bearing 6 000 signatures,",
+    "category": "Justice",
+    "description_full": "<p>The petitioner writes about the situation of Cubans residing in the EU. Following enactment in Cuba of Law No 989 in 1962, the Cuban authorities identified the act of emigrating from the country as ‘treason’, for which an exit permit was necessary. The latter only ceased to be necessary when the migration reform of 2013 was brought in. The UN states that there are currently around 1 654 684 people with Cuban nationality living outside the country (14 % of the population), including approximately 200 000 residents of countries in the European Community, mainly in Spain, Italy, Germany and France, many of them with refugee status. As residents or citizens of the European Union, they ask Parliament to adopt a resolution condemning the human rights violations in Cuba and consider that these practices by the Cuban State also entail a violation of its commitments vis-à-vis the European Union as part of the EU-Cuba Political Dialogue and Cooperation Agreement in 2017. They ask for the support of the international community and the United Nations in order to drive forward a national reconciliation process.</p>",
+    "summary": "The petitioner writes about the situation of Cubans residing in the EU. Following enactment in Cuba of Law No 989 in 1962, the Cuban authorities identified the act of emigrating from the country as ‘t…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2021-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0435%252F2021",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:22:05",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0288-2021": {
+    "slug": "0288-2021",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0288/2021: the posting of workers within the European Union",
+    "started_by": "T.H. (German) bearing 15 signatures",
+    "category": "Internal Market - Free movement of persons",
+    "description_full": "<p>The petitioner demands simplified postings of workers to other Member States in order to reduce the resulting competitive disadvantages. He argues that the registration requirements for posted workers cause enormous costs for German companies and makes German products more expensive compared to foreign products. According to the petitioner, there is considerable bureaucracy, which severely restricts the free movement of persons in Europe. As an example, he mentions the obligation to register in France. German company representatives who want to sell their products in France would have to submit extensive information to the French customs authorities before travelling and would not be able to contact unregistered clients spontaneously.</p>",
+    "summary": "The petitioner demands simplified postings of workers to other Member States in order to reduce the resulting competitive disadvantages. He argues that the registration requirements for posted workers…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2021-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0288%252F2021",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:22:07",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1563-2020": {
+    "slug": "1563-2020",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 1563/2020: protection of wolves under the Habitats Directive",
+    "started_by": "P.A. (German), bearing 2 signatures,",
+    "category": "Environment",
+    "description_full": "<p>The petitioner indicates that the co-signatory, who keeps sheep, is contributing with his flock to dyke maintenance. Between April 2019 and September 2020, however, he lost 460 sheep to wolf attacks and is now seriously thinking of abandoning his activity. Without dyke maintenance by sheep farmers, dyke safety and flood protection could no longer be guaranteed. DNA samples have identified the wolves in the pack that are responsible for the killing the sheep. The petitioner is accordingly seeking official accreditation for independent DNA sampling laboratories across Europe, the introduction of a joint European Canis Lupus gene database and, finally, a change in the protection status of wolves.</p>",
+    "summary": "The petitioner indicates that the co-signatory, who keeps sheep, is contributing with his flock to dyke maintenance. Between April 2019 and September 2020, however, he lost 460 sheep to wolf attacks a…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2020-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1563%252F2020",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:22:09",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1174-2020": {
+    "slug": "1174-2020",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 1174/2020",
+    "category": "Animal Welfare",
+    "description_full": "<p>Petition No 1174/2020 by V.R. (German) on the verification of and compliance with the Habitats Directive pursuant to Article 16(b) with regard to the species Canis Lupus listed in Annexes II and IV as regards Germany</p>",
+    "summary": "Petition No 1174/2020 by V.R. (German) on the verification of and compliance with the Habitats Directive pursuant to Article 16(b) with regard to the species Canis Lupus listed in Annexes II and IV as…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2020-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1174%252F2020",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:22:11",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0891-2020": {
+    "slug": "0891-2020",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0891/2020",
+    "category": "Financial Services",
+    "description_full": "<p>The petitioner denounces the actions of both, the main financial control body in Germany (Federal Financial Supervisory Authority BaFin), and the German public prosecutor’s office, which initiated proceedings to sanction complainants for market manipulation, in a possible accounting fraud by the Wirecard company between 2008 and 2016. In February 2019, BaFin prohibited short selling of Wirecard shares, alleging market manipulation by complainants and Financial Times journalists. BaFin justified the measure citing the wish to avoid a loss of investor confidence. The petitioner points out that in June 2020 it was discovered that all allegations against Wirecard were true and that there were also illegal activities by Wirecard which had not yet been reported. The petitioner considers that Bafin’s measures in fact caused exactly what it said it was trying to prevent, a manipulation of the market price. It also caused investors to place trust in the company unjustifiably. It is estimated that 250 000 small European investors were affected by massive damage to their savings and pension schemes as a result. The damage caused to these investors is estimated to be close to EUR 20 000 million. The petitioner asks the European Parliament to discuss and assess the role of the German administrations in the Wirecard fraud and to seek a solution for the small investors affected who now have to deal with an economy affected by Covid19, with massive losses in their savings.</p>",
+    "summary": "The petitioner denounces the actions of both, the main financial control body in Germany (Federal Financial Supervisory Authority BaFin), and the German public prosecutor’s office, which initiated pro…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2020-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0891%252F2020",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:22:13",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0535-2020": {
+    "slug": "0535-2020",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0535/2020",
+    "category": "Internal Market",
+    "description_full": "<p>The petitioner states that the implementation of the European Fertiliser Regulation means that the transposition of the Nitrates Directive has been delayed by several years. In his opinion, however, there are problems with the measurement results across the EU, as the measuring stations in the Member States do not measure using the same standards and thus cannot easily be compared with each other. This also causes competition problems in European agriculture. The petitioner asks how the EU will guarantee the comparability of measuring stations across the Member States, whether there is an awareness of the differences between the measuring systems in the EU and whether an EU regulation on measuring stations might lead to comparable results.</p>",
+    "summary": "The petitioner states that the implementation of the European Fertiliser Regulation means that the transposition of the Nitrates Directive has been delayed by several years. In his opinion, however, t…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2020-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0535%252F2020",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:22:15",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0499-2020": {
+    "slug": "0499-2020",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0499/2020: the different kinds of European nitrate measuring systems",
+    "started_by": "Christof Christensen (German)",
+    "category": "Agriculture",
+    "description_full": "<p>The petitioner claims that, as a result of the review of the Fertilisers Regulation, the transposition of the Nitrates Directive has been delayed by several years. In his opinion, however, there are problems with the measurement systems across the EU, as the measuring stations in the Member States do not use the same standards and thus results cannot easily be compared. This also causes competition problems in European agriculture. The petitioner asks how the EU will guarantee the comparability of measurement results across the Member States, whether there is an awareness of the differences among the measuring systems, and whether an EU regulation on measuring systems might lead to comparable results.</p>",
+    "summary": "The petitioner claims that, as a result of the review of the Fertilisers Regulation, the transposition of the Nitrates Directive has been delayed by several years. In his opinion, however, there are p…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2020-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0499%252F2020",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:22:17",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0482-2020": {
+    "slug": "0482-2020",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0482/2020: the different kinds of European nitrate measuring systems",
+    "started_by": "M.B. (Austrian)",
+    "category": "Agriculture",
+    "description_full": "<p>The petitioner claims that, as a result of the review of the Fertilisers Regulation, the transposition of the Nitrates Directive has been delayed by several years. In his opinion, however, there are problems with the measurement systems across the EU, as the measuring stations in the Member States do not use the same standards and thus results cannot easily be compared. This also causes competition problems in European agriculture. The petitioner asks how the EU will guarantee the comparability of measurement results across the Member States, whether there is an awareness of the differences among the measuring systems, and whether an EU regulation on measuring systems might lead to comparable results.</p>",
+    "summary": "The petitioner claims that, as a result of the review of the Fertilisers Regulation, the transposition of the Nitrates Directive has been delayed by several years. In his opinion, however, there are p…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2020-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0482%252F2020",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:22:19",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0402-2020": {
+    "slug": "0402-2020",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0402/2020: the fundamental rights of LGBT-EU citizens and their different treatment in different Member States",
+    "started_by": "Frank Bartz (German)",
+    "category": "Fundamental Rights",
+    "description_full": "<p>Petition No 0402/2020 by Frank Bartz (German) on the fundamental rights of LGBT-EU citizens and their different treatment in different Member States</p>",
+    "summary": "Petition No 0402/2020 by Frank Bartz (German) on the fundamental rights of LGBT-EU citizens and their different treatment in different Member States",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2020-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0402%252F2020",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:22:21",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1246-2019": {
+    "slug": "1246-2019",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 1246/2019",
+    "category": "Environment - Protection and Preservation",
+    "description_full": "<p>Petition 1246/2019 by K.B. (German), on non-compliance with Implementing Decision (EU 2015/893) of 9 June 2015 – felling of trees infested by the Asian Longhorn Beetle in the city of Miesbach</p>",
+    "summary": "Petition 1246/2019 by K.B. (German), on non-compliance with Implementing Decision (EU 2015/893) of 9 June 2015 – felling of trees infested by the Asian Longhorn Beetle in the city of Miesbach",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2019-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1246%252F2019",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:22:24",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1314-2019": {
+    "slug": "1314-2019",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 1314/2019: the revision of the host plant list to combat Asian long-horned beetle (ALB) infestation in Germany",
+    "started_by": "Karin Bracher (Swiss)",
+    "category": "Environment - Protection and Preservation",
+    "description_full": "<p>Petition No 1314/2019 by Karin Bracher (Swiss) on the revision of the host plant list to combat Asian long-horned beetle (ALB) infestation in Germany</p>",
+    "summary": "Petition No 1314/2019 by Karin Bracher (Swiss) on the revision of the host plant list to combat Asian long-horned beetle (ALB) infestation in Germany",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2019-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1314%252F2019",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:22:26",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1236-2019": {
+    "slug": "1236-2019",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 1236/2019: behalf of Liberecký kraj, on the danger of losing drinking water in the Liberec Region (Czech Republic) due to the expansion of a brown coal mine in Turów (Poland)",
+    "started_by": "Jiří Vozák (Czech),",
+    "category": "Environment - Protection and Preservation",
+    "description_full": "<p>Petition No 1236/2019 by Jiří Vozák (Czech), on behalf of Liberecký kraj, on the danger of losing drinking water in the Liberec Region (Czech Republic) due to the expansion of a brown coal mine in Turów (Poland)</p>",
+    "summary": "Petition No 1236/2019 by Jiří Vozák (Czech), on behalf of Liberecký kraj, on the danger of losing drinking water in the Liberec Region (Czech Republic) due to the expansion of a brown coal mine in Tur…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2019-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1236%252F2019",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:22:29",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1233-2019": {
+    "slug": "1233-2019",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 1233/2019: reducing plastic packaging for fruits and vegetables",
+    "started_by": "Michelle Wiesner (German)",
+    "category": "Environment - Waste",
+    "description_full": "<p>The petitioner points out that fruits and vegetables are increasingly being sold in plastic packaging. In her opinion, plastic packaging is a threat to the environment and has serious consequences on people’s health. She believes that Directive 94/62EC, as amended, and Directive 2019/904 do not sufficiently address this problem.  Finally, the petitioner calls on the European Parliament to request the Commission to revise Directive 94/62/EC in order to reduce the production and use of plastic packaging for fruits and vegetables in the EU point out that fruits and vegetables are increasingly being sold pre-packaged in plastic.</p>",
+    "summary": "The petitioner points out that fruits and vegetables are increasingly being sold in plastic packaging. In her opinion, plastic packaging is a threat to the environment and has serious consequences on …",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2019-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1233%252F2019",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:22:31",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0540-2019": {
+    "slug": "0540-2019",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0540/2019",
+    "category": "Internal Market",
+    "description_full": "<p>Petition No 0540/2019 by Thomas Bublitz (German), on behalf of the German Federal Association of Private Clinics (Bundesverbandes Deutscher Privatkliniken e.V.), on transposition of the Value Added Tax Directive into German law</p>",
+    "summary": "Petition No 0540/2019 by Thomas Bublitz (German), on behalf of the German Federal Association of Private Clinics (Bundesverbandes Deutscher Privatkliniken e.V.), on transposition of the Value Added Ta…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2019-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0540%252F2019",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:22:33",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0409-2019": {
+    "slug": "0409-2019",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0409/2019",
+    "category": "Environment - Waste",
+    "description_full": "<p>The petitioner is calling for a European Parliament decision banning overpackaging in the form of plastic films, for example for single-use handkerchiefs. The packaging should instead be made from solid recycled paper.</p>",
+    "summary": "The petitioner is calling for a European Parliament decision banning overpackaging in the form of plastic films, for example for single-use handkerchiefs. The packaging should instead be made from sol…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2019-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0409%252F2019",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:22:35",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0377-2018": {
+    "slug": "0377-2018",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0377/2018",
+    "category": "Environment - Pollution",
+    "description_full": "<p>Petition No 0377/2018 by M.S. (German), bearing one additional signature, on noise pollution from motorcycle traffic in Nordlippe and Schaumburg, Germany</p>",
+    "summary": "Petition No 0377/2018 by M.S. (German), bearing one additional signature, on noise pollution from motorcycle traffic in Nordlippe and Schaumburg, Germany",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2018-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0377%252F2018",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:22:37",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0699-2017": {
+    "slug": "0699-2017",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0699/2017: the application of the Directive on the assessment and management of environmental noise in the town of Hückeswagen (North Rhine-Westphalia, Germany)",
+    "started_by": "V.S. (German)",
+    "category": "Environment",
+    "description_full": "<p>Petition No 0699/2017 by V.S. (German) on the application of the Directive on the assessment and management of environmental noise in the town of Hückeswagen (North Rhine-Westphalia, Germany)</p>",
+    "summary": "Petition No 0699/2017 by V.S. (German) on the application of the Directive on the assessment and management of environmental noise in the town of Hückeswagen (North Rhine-Westphalia, Germany)",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2017-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0699%252F2017",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:22:40",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0235-2017": {
+    "slug": "0235-2017",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0235/2017: the Czech proposal to build a barrage dam on the Elbe river near Decin, Czech Republic",
+    "started_by": "H.W.F. (German)",
+    "category": "Environment",
+    "description_full": "<p>Petition No 0235/2017 by H.W.F. (German) on the Czech proposal to build a barrage dam on the Elbe river near Decin, Czech Republic</p>",
+    "summary": "Petition No 0235/2017 by H.W.F. (German) on the Czech proposal to build a barrage dam on the Elbe river near Decin, Czech Republic",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2017-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0235%252F2017",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:22:41",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1428-2016": {
+    "slug": "1428-2016",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 1428/2016: stopping subsidies for industrial-style chicken breeding in the laying battery of Doberschwitz (Sachsen)",
+    "started_by": "R.E. (German)",
+    "category": "Health",
+    "description_full": "<p>Petition No 1428/2016 by R.E. (German) on stopping subsidies for industrial-style chicken breeding in the laying battery of Doberschwitz (Sachsen)</p>",
+    "summary": "Petition No 1428/2016 by R.E. (German) on stopping subsidies for industrial-style chicken breeding in the laying battery of Doberschwitz (Sachsen)",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2016-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1428%252F2016",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:22:44",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1427-2016": {
+    "slug": "1427-2016",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 1427/2016: the non-compliance by the Ravensburg City Council with Directive 2014/24/EU on public procurement",
+    "started_by": "A. S. (German)",
+    "category": "Competition",
+    "description_full": "<p>Petition No 1427/2016 by A. S. (German) on the non-compliance by the Ravensburg City Council with Directive 2014/24/EU on public procurement</p>",
+    "summary": "Petition No 1427/2016 by A. S. (German) on the non-compliance by the Ravensburg City Council with Directive 2014/24/EU on public procurement",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2016-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1427%252F2016",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:22:46",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1407-2016": {
+    "slug": "1407-2016",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 1407/2016",
+    "category": "Transport",
+    "description_full": "<p>Petition 1407/2016 by I.L. (German) regarding alleged infringement by the Ravensburg utilities company of EU public procurement rules</p>",
+    "summary": "Petition 1407/2016 by I.L. (German) regarding alleged infringement by the Ravensburg utilities company of EU public procurement rules",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2016-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1407%252F2016",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:22:48",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1211-2016": {
+    "slug": "1211-2016",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 1211/2016: behalf of the residents of Barnstorf (Lower Saxony), bearing one signature, on the acceptance by the local council of a building application for a wind farm",
+    "started_by": "Bodo Sebald (German)",
+    "category": "Environment",
+    "description_full": "<p>Petition No 1211/2016 by Bodo Sebald (German) on behalf of the residents of Barnstorf (Lower Saxony), bearing one signature, on the acceptance by the local council of a building application for a wind farm</p>",
+    "summary": "Petition No 1211/2016 by Bodo Sebald (German) on behalf of the residents of Barnstorf (Lower Saxony), bearing one signature, on the acceptance by the local council of a building application for a wind…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2016-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1211%252F2016",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:22:50",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1170-2016": {
+    "slug": "1170-2016",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 1170/2016",
+    "category": "Industry and Entreprise",
+    "description_full": "<p>In the petitioner’s view, the EU Regulation on CE marking is ambiguous, unclear and not legally sound when it comes to protecting the rights of citizens. He describes a personal incident involving the marking on the domed roof lights installed in his house which were determined by a surveyor to be faulty. Despite this, the petitioner could find no stipulation in the Regulation for when a CE marking qualifies as invalid. Few members of the public would have the funds to make a legal claim as the result of a fault. The petitioner requests that this error be rectified and that the agency responsible for declaring CE markings invalid should be named.</p>",
+    "summary": "In the petitioner’s view, the EU Regulation on CE marking is ambiguous, unclear and not legally sound when it comes to protecting the rights of citizens. He describes a personal incident involving the…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2016-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1170%252F2016",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:22:52",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1131-2016": {
+    "slug": "1131-2016",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 1131/2016",
+    "category": "Justice",
+    "description_full": "<p>Petition 1131/2016 by Georgios Kornelakis (Greek) concerning problems he is facing due to the allegedly incorrect implementation of European arrest warrant legislation in Greece and Germany</p>",
+    "summary": "Petition 1131/2016 by Georgios Kornelakis (Greek) concerning problems he is facing due to the allegedly incorrect implementation of European arrest warrant legislation in Greece and Germany",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2016-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1131%252F2016",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:22:55",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1038-2016": {
+    "slug": "1038-2016",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 1038/2016: the re-integration into the labour market in Germany of persons suffering from a mental illness",
+    "started_by": "T.H. (German)",
+    "category": "Personal Matter",
+    "description_full": "<p>Petition No 1038/2016 by T.H. (German) on the re-integration into the labour market in Germany of persons suffering from a mental illness</p>",
+    "summary": "Petition No 1038/2016 by T.H. (German) on the re-integration into the labour market in Germany of persons suffering from a mental illness",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2016-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1038%252F2016",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:22:57",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0999-2016": {
+    "slug": "0999-2016",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0999/2016: banning the killing of male chicks and for farm animal welfare in Germany",
+    "started_by": "Ricarda Cieslik (German)",
+    "category": "Animal Welfare",
+    "description_full": "<p>Petition No 0999/2016 by Ricarda Cieslik (German) on banning the killing of male chicks and for farm animal welfare in Germany</p>",
+    "summary": "Petition No 0999/2016 by Ricarda Cieslik (German) on banning the killing of male chicks and for farm animal welfare in Germany",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2016-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0999%252F2016",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:22:59",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0985-2016": {
+    "slug": "0985-2016",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0985/2016: the construction of refugee accommodation in a residential area",
+    "started_by": "Matthias Behnke (German)",
+    "category": "Asylum",
+    "description_full": "<p>The petitioner claims that Germany has breached EU asylum regulations by building accommodation for 360 asylum seekers in a residential area of Lübeck (Travemünde). He considers it particularly inconsiderate that the accommodation has been built away from Travemünde in the Pommern-Zentrum area and a short distance from a nursing home, and that it does not make it easier for refugees to integrate, for example through socially fair interaction with locals and ties with nurseries and schools. There is a risk of a shift in sentiment towards more xenophobia. He therefore calls for fair integration to be imposed upon Germany or Lübeck and for construction of the accommodation to be prohibited, as there are sufficient decentralised accommodation options throughout the urban area.</p>",
+    "summary": "The petitioner claims that Germany has breached EU asylum regulations by building accommodation for 360 asylum seekers in a residential area of Lübeck (Travemünde). He considers it particularly incons…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2016-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0985%252F2016",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:23:01",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0967-2016": {
+    "slug": "0967-2016",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0967/2016: behalf of the local authority of Loxstedt (rural district of Cuxhaven) on the economic impact of low milk prices on the dairy industry in the region",
+    "started_by": "Detlef Wellbrock (German)",
+    "category": "Urban Development",
+    "description_full": "<p>Petition No 0967/2016 by Detlef Wellbrock (German) on behalf of the local authority of Loxstedt (rural district of Cuxhaven) on the economic impact of low milk prices on the dairy industry in the region</p>",
+    "summary": "Petition No 0967/2016 by Detlef Wellbrock (German) on behalf of the local authority of Loxstedt (rural district of Cuxhaven) on the economic impact of low milk prices on the dairy industry in the regi…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2016-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0967%252F2016",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:23:03",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0943-2016": {
+    "slug": "0943-2016",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0943/2016: the obligation of residents in an EU Member State to use the lanes reserved for non-EU citizens at the Schengen border crossing points",
+    "started_by": "Mr Onur Dülger (Turkish)",
+    "category": "Justice",
+    "description_full": "<p>Petition No 0943/2016 by Mr Onur Dülger (Turkish) on the obligation of residents in an EU Member State to use the lanes reserved for non-EU citizens at the Schengen border crossing points</p>",
+    "summary": "Petition No 0943/2016 by Mr Onur Dülger (Turkish) on the obligation of residents in an EU Member State to use the lanes reserved for non-EU citizens at the Schengen border crossing points",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2016-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0943%252F2016",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:23:05",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0855-2016": {
+    "slug": "0855-2016",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0855/2016: behalf of the Interessensgemeinschaft Botulismus und Clostridiose geschädigter Tier und Landbesitzer e. V. (interest group representing livestock owners and landowners affected by botulism and clostridium – IG Botulismus), on botulism and the actions",
+    "started_by": "K. W. (German)",
+    "category": "Health",
+    "description_full": "<p>Petition No 0855/2016 by K. W. (German) on behalf of the Interessensgemeinschaft Botulismus und Clostridiose geschädigter Tier und Landbesitzer e. V. (interest group representing livestock owners and landowners affected by botulism and clostridium – IG Botulismus), on botulism and the actions of local German authorities that caused damage to his farm and to public health</p>",
+    "summary": "Petition No 0855/2016 by K. W. (German) on behalf of the Interessensgemeinschaft Botulismus und Clostridiose geschädigter Tier und Landbesitzer e. V. (interest group representing livestock owners and …",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2016-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0855%252F2016",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:23:07",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0748-2016": {
+    "slug": "0748-2016",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0748/2016: the implementation of Directive 2014/17/EU on credit agreements for consumers relating to residential immovable property in Germany",
+    "started_by": "E.S. (German)",
+    "category": "Financial Services",
+    "description_full": "<p>Petition No 0748/2016 by E.S. (German) on the implementation of Directive 2014/17/EU on credit agreements for consumers relating to residential immovable property in Germany</p>",
+    "summary": "Petition No 0748/2016 by E.S. (German) on the implementation of Directive 2014/17/EU on credit agreements for consumers relating to residential immovable property in Germany",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2016-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0748%252F2016",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:23:09",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0737-2016": {
+    "slug": "0737-2016",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0737/2016: harmonising motorway tolls in Europe",
+    "started_by": "Peter Styppa (German)",
+    "category": "Transport",
+    "description_full": "<p>The petitioner suggests, in light of debates on introducing tolls that are taking place in Germany, to introduce a European-wide solution rather than to search for national solutions that might be incompatible with EU law and discriminate against the residents of other countries. A unified toll system would make it easier to travel across Europe. Moreover, roads would unite people living in different countries rather than remind them of national self-interests.</p>",
+    "summary": "The petitioner suggests, in light of debates on introducing tolls that are taking place in Germany, to introduce a European-wide solution rather than to search for national solutions that might be inc…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2016-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0737%252F2016",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:23:11",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0713-2016": {
+    "slug": "0713-2016",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0713/2016: the working conditions of professional lorry drivers in Germany",
+    "started_by": "R.G.B. (German)",
+    "category": "Transport",
+    "description_full": "<p>The petitioner states that professional lorry drivers deliberately exceed the applicable speed and driving limits in Germany, as they are indirectly being forced to do so by their employers. In fact, it is cheaper for shipping companies to pay related fines instead of incurring delays as regards deliveries or of recruiting more drivers. This constantly undermines road safety.</p>",
+    "summary": "The petitioner states that professional lorry drivers deliberately exceed the applicable speed and driving limits in Germany, as they are indirectly being forced to do so by their employers. In fact, …",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2016-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0713%252F2016",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:23:13",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0685-2016": {
+    "slug": "0685-2016",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0685/2016: the recognition of her son’s Spanish professional education in Germany",
+    "started_by": "Y. K. H. (German)",
+    "category": "Internal Market",
+    "description_full": "<p>The petitioner complains that her son’s Spanish professional qualification as a mechatronics engineer in Germany is not fully recognised. She reports difficulties in having the professional education recognised by the Stuttgart/Baden-Württemberg Chamber of Trade. There were significant delays in the recognition process in spite of several requests from the petitioner to the authorities, various questions by the petitioner could neither be answered nor were solutions offered or support given. The petitioner complains about the fact that successfully completed professional education in Spain is not fully recognised in Germany, considering they are both Member States.</p>",
+    "summary": "The petitioner complains that her son’s Spanish professional qualification as a mechatronics engineer in Germany is not fully recognised. She reports difficulties in having the professional education …",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2016-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0685%252F2016",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:23:15",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0665-2016": {
+    "slug": "0665-2016",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0665/2016: salary threshold for skilled workers originating from countries outside Germany",
+    "started_by": "T.V. (German)",
+    "category": "Immigration",
+    "description_full": "<p>Petition No 0665/2016 by T.V. (German) on salary threshold for skilled workers originating from countries outside Germany</p>",
+    "summary": "Petition No 0665/2016 by T.V. (German) on salary threshold for skilled workers originating from countries outside Germany",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2016-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0665%252F2016",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:23:17",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0519-2016": {
+    "slug": "0519-2016",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0519/2016: reuse of ink cartridges for printers",
+    "started_by": "V.G. (German)",
+    "category": "Environment",
+    "description_full": "<p>The petitioner considers that there is much waste and environmental pollution linked to the replacement of printer ink cartridges. He thinks that it would make sense if such cartridges were so designed that they could be refilled.</p>",
+    "summary": "The petitioner considers that there is much waste and environmental pollution linked to the replacement of printer ink cartridges. He thinks that it would make sense if such cartridges were so designe…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2016-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0519%252F2016",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:23:19",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0514-2016": {
+    "slug": "0514-2016",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0514/2016: the proposal for a regulation on the introduction of noise-related operating restrictions at EU airports",
+    "started_by": "N.K. (German)",
+    "category": "Environment",
+    "description_full": "<p>Petition No 0514/2016 by N.K. (German) on the proposal for a regulation on the introduction of noise-related operating restrictions at EU airports</p>",
+    "summary": "Petition No 0514/2016 by N.K. (German) on the proposal for a regulation on the introduction of noise-related operating restrictions at EU airports",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2016-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0514%252F2016",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:23:21",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0360-2016": {
+    "slug": "0360-2016",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0360/2016: issues arising from the rights of rail passengers being exercised in the event of a delay",
+    "started_by": "A.H. (German)",
+    "category": "Internal Market",
+    "description_full": "<p>Petition No 0360/2016 by A.H. (German) on issues arising from the rights of rail passengers being exercised in the event of a delay</p>",
+    "summary": "Petition No 0360/2016 by A.H. (German) on issues arising from the rights of rail passengers being exercised in the event of a delay",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2016-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0360%252F2016",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:23:23",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0248-2016": {
+    "slug": "0248-2016",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0248/2016: expropriation, pollution and climate change due to lignite mining in Germany",
+    "started_by": "Andreas Cichy (German), supported by 480 signatories,",
+    "category": "Fundamental Rights",
+    "description_full": "<p>Petition No 0248/2016 by Andreas Cichy (German), supported by 480 signatories, on expropriation, pollution and climate change due to lignite mining in Germany</p>",
+    "summary": "Petition No 0248/2016 by Andreas Cichy (German), supported by 480 signatories, on expropriation, pollution and climate change due to lignite mining in Germany",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2016-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0248%252F2016",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:23:26",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0174-2016": {
+    "slug": "0174-2016",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0174/2016: behalf of Bürgerinitiative pro Ortsumgehung Waren (citizens’ pressure group for a Waren bypass), on noise pollution and the protection of public health.",
+    "started_by": "Horst Schmidt (German)",
+    "category": "Environment",
+    "description_full": "<p>Petition No 0174/2016 by Horst Schmidt (German) on behalf of Bürgerinitiative pro Ortsumgehung Waren (citizens’ pressure group for a Waren bypass), on noise pollution and the protection of public health.</p>",
+    "summary": "Petition No 0174/2016 by Horst Schmidt (German) on behalf of Bürgerinitiative pro Ortsumgehung Waren (citizens’ pressure group for a Waren bypass), on noise pollution and the protection of public heal…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2016-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0174%252F2016",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:23:28",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0077-2016": {
+    "slug": "0077-2016",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0077/2016: behalf of Bürgerverein Allendeviertel Köpenick e.V., on safeguarding the drinking-water supply in Berlin Köpenick",
+    "started_by": "Harald Wiener (German)",
+    "category": "Environment",
+    "description_full": "<p>Petition No 0077/2016 by Harald Wiener (German) on behalf of Bürgerverein Allendeviertel Köpenick e.V., on safeguarding the drinking-water supply in Berlin Köpenick</p>",
+    "summary": "Petition No 0077/2016 by Harald Wiener (German) on behalf of Bürgerverein Allendeviertel Köpenick e.V., on safeguarding the drinking-water supply in Berlin Köpenick",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2016-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0077%252F2016",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:23:30",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1342-2015": {
+    "slug": "1342-2015",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 1342/2015: serious deficiencies in a fishing vessel that were discovered after purchase",
+    "started_by": "C.A.G. (Irish)",
+    "category": "Consumer Rights",
+    "description_full": "<p>The petitioner is an Irish fisherman who bought a fishing vessel in the Netherlands in 2007. The vessel was registered under the German flag. At the time of the purchase the vessel’s motor was working and the vessel was suitable for fishing. Its type book was in order and stamped by Germanischer Lloyd Classification Society. However, the information in the book did not correspond to reality, because the vessel was naturally unstable. The petitioner began fishing on the vessel in January 2008 and noted instantly that the vessel was significantly more unstable than his previous older vessel. Due to the unstable character, water entered the vessel and it was, on several occasions, at risk of sinking.\nIn 2009, a new law entered into force in Ireland requiring all fishing vessels built after 1987 to pass a stability test performed by the Irish Maritime Administration. As a result, the Irish authorities prohibited the use of the vessel which the petitioner had bought. According to the preliminary hearing in the Netherlands, the vessel had always been overweight and it would never be seaworthy. The petitioner asserts to his rights in a transaction across EU countries, the failure of which has caused him to lose his livelihood and serious financial distress.</p>",
+    "summary": "The petitioner is an Irish fisherman who bought a fishing vessel in the Netherlands in 2007. The vessel was registered under the German flag. At the time of the purchase the vessel’s motor was working…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2015-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1342%252F2015",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:23:32",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1364-2015": {
+    "slug": "1364-2015",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 1364/2015: the prevention of ghettoization as the result of the influx of refugees in Germany",
+    "started_by": "Michael Uhlig (German)",
+    "category": "Asylum",
+    "description_full": "<p>Petition No 1364/2015 by Michael Uhlig (German) on the prevention of ghettoization as the result of the influx of refugees in Germany</p>",
+    "summary": "Petition No 1364/2015 by Michael Uhlig (German) on the prevention of ghettoization as the result of the influx of refugees in Germany",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2015-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1364%252F2015",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:23:34",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1363-2015": {
+    "slug": "1363-2015",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 1363/2015: building in nature reserves by the City of Hamburg",
+    "started_by": "Michael Uhlig (German)",
+    "category": "Environment",
+    "description_full": "<p>According to the petitioner Germany has been given a warning from the European Commission because of continuously exceeding air pollution limits. The City of Hamburg is exceeding these values with respect to ozone, particulate matter and NO2, which has caused 400 000 preliminary deaths. In spite of the warning, Hamburg has not changed its policy, but continues to build on green zones without taking compensatory measures. Therefore the “green lung” of the city is getting smaller and smaller. It is the opinion of the petitioner that the European Commission must forbid the city of Hamburg from using more green areas, especially protected nature reserves, for building or for other uses, until all of the conditions for air quality in the EU regulations have been met.</p>",
+    "summary": "According to the petitioner Germany has been given a warning from the European Commission because of continuously exceeding air pollution limits. The City of Hamburg is exceeding these values with res…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2015-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1363%252F2015",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:23:36",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1362-2015": {
+    "slug": "1362-2015",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 1362/2015: a ban on building in Natura 2000 areas in Germany",
+    "started_by": "Michael Uhlig (German)",
+    "category": "Environment",
+    "description_full": "<p>The petitioner has learned that the European Commission has started an infringement procedure against Germany in connection with the implementation of legislation on determination, protection and maintenance of Natura 2000 areas. The Commission pointed out that the deadline for this (2010) has passed, and that Germany is implementing the legislation far too slowly, which is unacceptable. Therefore, the Commission is threatening to bring the case before the Court of Justice of the European Union. It is the petitioner’s opinion that the European Commission should prohibit Germany from building in nature reserves or using them for purposes other than those laid down in plans for 2010, because building and other development would mean there would not be enough natural habitats to be classed as Natura 2000.</p>",
+    "summary": "The petitioner has learned that the European Commission has started an infringement procedure against Germany in connection with the implementation of legislation on determination, protection and main…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2015-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1362%252F2015",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:23:38",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1298-2015": {
+    "slug": "1298-2015",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 1298/2015: the obligation to make available all documentation concerning EU-regulations on banking supervision in Germany",
+    "started_by": "Gerhard Frank (German)",
+    "category": "Financial Services",
+    "description_full": "<p>Petition No 1298/2015 by Gerhard Frank (German) on the obligation to make available all documentation concerning EU-regulations on banking supervision in Germany</p>",
+    "summary": "Petition No 1298/2015 by Gerhard Frank (German) on the obligation to make available all documentation concerning EU-regulations on banking supervision in Germany",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2015-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1298%252F2015",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:23:40",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1268-2015": {
+    "slug": "1268-2015",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 1268/2015: behalf of the Kraftfahrergewerkschaft (Trade Union of Lorry Drivers), on road haulage and the misapplication of Regulation (EC) 561/2006 in Germany",
+    "started_by": "F.X.W (German)",
+    "category": "Competition",
+    "description_full": "<p>Petition No 1268/2015 by F.X.W (German) on behalf of the Kraftfahrergewerkschaft (Trade Union of Lorry Drivers), on road haulage and the misapplication of Regulation (EC) 561/2006 in Germany</p>",
+    "summary": "Petition No 1268/2015 by F.X.W (German) on behalf of the Kraftfahrergewerkschaft (Trade Union of Lorry Drivers), on road haulage and the misapplication of Regulation (EC) 561/2006 in Germany",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2015-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1268%252F2015",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:23:42",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1254-2015": {
+    "slug": "1254-2015",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 1254/2015: working conditions for professional drivers",
+    "started_by": "U. S. (German)",
+    "category": "Employment",
+    "description_full": "<p>The petitioner lodged a complaint with the German Bundestag’s petitions committee regarding lacking controls for cabotage in Germany, in which he requested that working conditions for professional drivers be improved. The petitioner claims that drivers working for foreign companies are often forced to sleep in their vehicles and that the pressure of their work can lead to them driving more aggressively or turning to alcohol. He also claims that such companies are using tactics including wage dumping and changing license plates in order to circumvent regulations. According to the petitioner, these practices are making it more difficult for German companies to compete in the market. \nThe petition was sent to and investigated by the transport committee of the German government, who upheld that pay for professional drivers is decided by companies and that working conditions are checked by the police and the Bundesamt für Güterverkehr, with legal avenues available for complaints by drivers. The committee also reported that professional drivers in Germany receive fairly high wages (in a survey conducted in 2014), that more offences regarding working conditions are committed by German companies than foreign companies operating in Germany (in 2013), and that stricter rules are in force in Germany regarding obligatory resting times than at EU level. However, the committee points out that EU legislation does not prevent drivers from choosing to spend their resting time in their vehicles if they so desire. The German Bundestag has sent the petition to the European Parliament in the hope that a law could be introduced to prevent drivers from being able to choose to spend their rest time in their vehicles through enforcing fines for such actions. It is pointed out that such legislation would be more effective were it to be introduced at EU level, as simply introducing it in Germany might risk drivers travelling to neighbouring countries in order to rest legally in their vehicles.</p>",
+    "summary": "The petitioner lodged a complaint with the German Bundestag’s petitions committee regarding lacking controls for cabotage in Germany, in which he requested that working conditions for professional dri…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2015-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1254%252F2015",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:23:44",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0898-2015": {
+    "slug": "0898-2015",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0898/2015: non-recognition of military service in Greece in calculating his pension in Germany",
+    "started_by": "I.V. (Greek)",
+    "category": "Pension",
+    "description_full": "<p>Petition No 0898/2015 by I.V. (Greek) on non-recognition of military service in Greece in calculating his pension in Germany</p>",
+    "summary": "Petition No 0898/2015 by I.V. (Greek) on non-recognition of military service in Greece in calculating his pension in Germany",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2015-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0898%252F2015",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:23:46",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0312-2015": {
+    "slug": "0312-2015",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0312/2015: the reversal of the burden of proof in infringements of copyright on the internet",
+    "started_by": "Rudi Eifert (German),",
+    "category": "Justice",
+    "description_full": "<p>Petition No 0312/2015 by Rudi Eifert (German), on the reversal of the burden of proof in infringements of copyright on the internet</p>",
+    "summary": "Petition No 0312/2015 by Rudi Eifert (German), on the reversal of the burden of proof in infringements of copyright on the internet",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2015-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0312%252F2015",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:23:49",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0108-2015": {
+    "slug": "0108-2015",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0108/2015: the establishment of specific labelling on meat produced by using farming methods which respect animals and the environment",
+    "started_by": "Henning Krause (German),",
+    "category": "Internal Market",
+    "description_full": "<p>Petition No 0108/2015 by Henning Krause (German), on the establishment of specific labelling on meat produced by using farming methods which respect animals and the environment</p>",
+    "summary": "Petition No 0108/2015 by Henning Krause (German), on the establishment of specific labelling on meat produced by using farming methods which respect animals and the environment",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2015-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0108%252F2015",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:23:51",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1969-2014": {
+    "slug": "1969-2014",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 1969/2014",
+    "category": "Consumer Rights",
+    "description_full": "<p>The petitioner says that in Germany firms providing a cable television signal have exclusive rights to operate in a specific area. This means that end users are forced to use the services offered by the undertaking acting in their place of residence even though products offered by competitors might be more favourable.</p>",
+    "summary": "The petitioner says that in Germany firms providing a cable television signal have exclusive rights to operate in a specific area. This means that end users are forced to use the services offered by t…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2014-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1969%252F2014",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:23:53",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1217-2014": {
+    "slug": "1217-2014",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 1217/2014: passenger rights across different modes of transport",
+    "started_by": "Florian Bosse (German)",
+    "category": "Transport",
+    "description_full": "<p>The petitioner suggests a number of improvements to passenger rights across different modes of transport, highlighting gaps and problems. Firstly, he refers to the lack of a joined-up approach to passenger rights and compensation for inter-modal journeys. He argues that, because there are no tickets combining two modes of transport (for example rail and air), passengers may needlessly miss connections, which, since the Regulation on Rail Passengers’ Rights and Obligations entered into force, no longer results in a full ticket refund. The petitioner argues that the Regulation should provide for a full refund where there is no longer a need for the ticket or where an alternative mode of transport must be used. He also points to the fact that many tickets are linked to a specific time of travel, causing problems with inter-modal travel. A late train, for instance, can mean missing the aeroplane and paying a large rebooking fee. The petitioner proposes that transport undertakings be required to allow free rebooking for the next available connection if the passenger can demonstrate that the connecting transport caused the delay. Secondly, he suggests that where tickets cannot be used because the passenger information system has given inaccurate data, transport companies should be required to pay compensation. Thirdly, the petitioner argues that, where a strike means that the journey cannot take place, tickets should be properly reimbursed (monthly season tickets should mean a refund of two single tickets per strike day). Fourthly, he complains about the practice of imposing and enforcing punitive charges or fines on passengers travelling without a valid ticket. In his opinion, most people caught without a ticket are either unable to pay at all, have simply forgotten to buy a ticket or have purchased the wrong ticket. He believes passengers should have the right to make good and simply purchase the correct ticket from a conductor and cannot see the economic argument for not employing conductors. Fifthly, the petitioner highlights problems with compensation where supplements have been paid for specific services that are then not performed. He cites, by way of example, the high-speed train link from Cologne to Frankfurt, which is 75 minutes faster than the slow line and costs 66% more, but where a 75-minute delay would result in a refund of just 25% of the ticket price. Similarly, Lufthansa Y fares are more expensive than B fares. When a B ticketholder takes a Y flight, he/she has to pay a surcharge. Yet, when a passenger with a Y ticket is put onto a B ticket flight, he/she receives no refund. The petitioner argues that the supplement should be reimbursed in full as the specific service is not being performed. Finally, the petitioner complains about the practice of some online travel agencies that allegedly do not confirm bookings until the last minute. According to the petitioner, these agencies deliberately undercut competitors to generate business, but do not actually have a ticket to offer. Instead, they hope to get a cheap ticket and adjust their booking fee accordingly to achieve the agreed price. Should they fail to do this, the customer faces last-minute cancellation or a last-minute and very expensive ticket purchase. The petitioner proposes therefore that waiting list bookings should be clearly indicated as such and that customers should be entitled to cancel the contract (with a small fee) up to the booking confirmation.</p>",
+    "summary": "The petitioner suggests a number of improvements to passenger rights across different modes of transport, highlighting gaps and problems. Firstly, he refers to the lack of a joined-up approach to pass…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2014-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1217%252F2014",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:23:55",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1237-2014": {
+    "slug": "1237-2014",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 1237/2014: defectiveparts in his cars",
+    "started_by": "Günter Paulick (German)",
+    "category": "Consumer Rights",
+    "description_full": "<p>The petitioner has been the owner of several cars produced by the same manufacturer. He alleges that most of these cars have had defective parts in the electronic equipment, which have negatively affected the handling of the vehicles. He complains that the company repeatedly refused to take the vehicles back or to repair them for free and claims that this would be against EC law. His attempts to settle the matter before German courts have so far not been successful.</p>",
+    "summary": "The petitioner has been the owner of several cars produced by the same manufacturer. He alleges that most of these cars have had defective parts in the electronic equipment, which have negatively affe…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2014-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1237%252F2014",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:23:57",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1205-2014": {
+    "slug": "1205-2014",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 1205/2014: the payment of the television and radio licence fee in Germany",
+    "started_by": "Wolfgang Heinrich (Austrian)",
+    "category": "Culture and Heritage",
+    "description_full": "<p>The petitioner is a pensioner and has a very low income. He lives in temporary accommodation. In Germany, the television and radio licence fee must be paid for in every dwelling. However, the petitioner argues that the shelter where he lives is not a full dwelling. He also claims that he does not own a television or radio. He has written to the German national broadcasting organisation about this, but was told that he must pay unless he has at his disposal a judicial decision stating that he does not have to pay. He asks the European Parliament for help.</p>",
+    "summary": "The petitioner is a pensioner and has a very low income. He lives in temporary accommodation. In Germany, the television and radio licence fee must be paid for in every dwelling. However, the petition…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2014-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1205%252F2014",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:23:59",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0174-2014": {
+    "slug": "0174-2014",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0174/2014: the terms of granting the benefits to disabled persons in Germany",
+    "started_by": "P. B. (Dutch)",
+    "category": "Industry and Entreprise",
+    "description_full": "<p>The petitioner was deprived in Germany of the benefits relating to his disability due to the fact that he resides in the Netherlands. There is a doubt whether the German regulations are consistent in this respect with the European Union regulations.</p>",
+    "summary": "The petitioner was deprived in Germany of the benefits relating to his disability due to the fact that he resides in the Netherlands. There is a doubt whether the German regulations are consistent in …",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2014-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0174%252F2014",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:24:01",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "2716-2013": {
+    "slug": "2716-2013",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 2716/2013",
+    "category": "Justice",
+    "description_full": "<p>The petitioner’s young daughter was abducted by her ex-partner (petitioner in Petitions 0979/2012 and 1060/2012) and taken to France. According to the petitioner, her ex-partner was aided in this by  the organisation CEED (Conseil Européen des Enfants du Divorce - European Council for Children of Divorce). A French court subsequently found that the child was to remain with her father. The petitioner has not seen her child since May 2013. According to the petitioner, her ex-partner’s intention is to keep the child in France until such times as it no longer needs to be handed over on the basis of the Hague Convention. According to the petitioner, the German police and German politicians are working with the CEED organisation to prevent intensification of the debate on German family policy. The petitioner asks the European Parliament for help.</p>",
+    "summary": "The petitioner’s young daughter was abducted by her ex-partner (petitioner in Petitions 0979/2012 and 1060/2012) and taken to France. According to the petitioner, her ex-partner was aided in this by  …",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2013-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=2716%252F2013",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:24:03",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "2252-2013": {
+    "slug": "2252-2013",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 2252/2013",
+    "category": "Internal Market",
+    "description_full": "<p>The petitioner states that his company, set up in Bulgaria, collaborated with a German company, beginning in 2003. The Bulgarian company works with materials supplied by the producers based on pre-defined models, established by means of agreements. Between 2012 and 2013, the German company began to significantly delay its payments, but nevertheless gave assurances that it was going to pay its debts. In June 2013, the German company submitted to the regional court an application for temporary insolvency, without informing its partner company. The German company placed another order, which should have been delivered by July 2013, but thereafter no longer answered the phone and refused to pay its debts. The petitioner accuses the German liquidator that it used the German legislation to deliberately obstruct the Bulgarian company’s activity.</p>",
+    "summary": "The petitioner states that his company, set up in Bulgaria, collaborated with a German company, beginning in 2003. The Bulgarian company works with materials supplied by the producers based on pre-def…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2013-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=2252%252F2013",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:24:05",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "1083-2013": {
+    "slug": "1083-2013",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 1083/2013",
+    "category": "Environment",
+    "description_full": "<p>Petition 1083/2013 by Wolfdietrich Burde (German) concerning inadequate Commission monitoring of environmental infringements in Freiburg im Breisgau, Germany</p>",
+    "summary": "Petition 1083/2013 by Wolfdietrich Burde (German) concerning inadequate Commission monitoring of environmental infringements in Freiburg im Breisgau, Germany",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2013-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1083%252F2013",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:24:07",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  },
+  "0643-2013": {
+    "slug": "0643-2013",
+    "first_seen": "2026-07-06T21:12:18-06:00",
+    "signatures_history": [],
+    "title": "Petition 0643/2013",
+    "category": "Justice",
+    "description_full": "<p>The petitioner’s son has been taken into care by order of the Jugendamt in Darmstadt. As her son was aggressive and very difficult, he was placed in the Jugendamt’s Petra project. Here, however, he made no progress, so he was transferred to a different institution. Here too, no progress was made. In the meantime, the Jugendamt decided that the petitioner’s partner, who is from the USA, was the aggressor. The Jugendamt threatened to take the petitioner’s other 4 children into care too unless her partner left the house. The partner refused to do so, and the case came before the court, which ruled that the children did not need to be taken into care and that her son should be admitted to a different institution. Here his problem was correctly diagnosed and he is now making good progress. The petitioner wonders, in retrospect, why the Jugendamt’s opinion about her and her partner was never withdrawn and why the Jugendamt wished to have all her children taken into care. She is unhappy about the fact that the finger of guilt was pointed at her foreign partner and that her son’s problem was ignored. She calls for more scrutiny of the conduct of Jugendämter in Germany so that children and families receive the right assistance.</p>",
+    "summary": "The petitioner’s son has been taken into care by order of the Jugendamt in Darmstadt. As her son was aggressive and very difficult, he was placed in the Jugendamt’s Petra project. Here, however, he ma…",
+    "recipient": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    "start_date": "2013-01-01",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0643%252F2013",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-07-13T13:24:10",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "status": "online",
+    "last_seen": "2026-07-13T13:20:39-06:00",
+    "offline_since": null,
+    "last_checked": "2026-07-13T13:20:39-06:00"
+  }
+}

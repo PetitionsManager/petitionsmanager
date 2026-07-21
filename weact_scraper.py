@@ -1,0 +1,557 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# =============================================================================
+#  weact_scraper.py  —  Plattform-Modul für WeAct (Campact)
+# =============================================================================
+#
+#  Enthält NUR noch das WeAct-Spezifische (Discovery, Selektoren, Parsing,
+#  Ablauf eines Laufs). Alles Generische (HTTP, Store, HTML, Server) liegt in
+#  petitions_core.py; Einstiegspunkt für alle Plattformen ist monitor.py:
+#
+#      python3 monitor.py --serve            # Dashboard + alle Plattformen
+#      python3 monitor.py --platform weact   # nur WeAct scrapen (CLI)
+#
+#  Der Kompatibilität halber funktioniert  python3 weact_scraper.py --serve
+#  weiterhin und delegiert an monitor.py.
+#
+#  WEACT-BESONDERHEITEN (hart erarbeitet – nicht ohne Not ändern):
+#  - Petitions-/Kategorie-Links stecken in custom Elementen (<cmpr-card
+#    href=…>, <cmpr-tag href=…>), NICHT in <a>-Tags → Suche ohne Tag-Namen.
+#  - Kategorieseiten paginieren mit ?cpage=N ("page" liefert immer Seite 1!).
+#  - /petitions/search ist die Suchseite, keine Petition (NON_PETITION_SLUGS).
+#  - Petitionstexte kommen aus dem Trix-Editor: Absätze sind <div>s, keine
+#    <p>s → vor der Extraktion umbenennen.
+#  - Manche Petitionen leiten auf das "Aktion"-Template um
+#    (aktion.campact.de/weact/<slug>/…) mit völlig anderer Struktur
+#    (.content-column, echte <cmpr-accordion-item>-Akkordions).
+# =============================================================================
+
+from __future__ import annotations
+
+import json
+import re
+from pathlib import Path
+from urllib.parse import urljoin
+
+from bs4 import BeautifulSoup
+
+import petitions_core as core
+from petitions_core import (Platform, log, now_iso, prog, sanitize_fragment,
+                            ALLOWED_DESC_TAGS, _esc)
+
+# ----------------------------------------------------------------------------
+# Konfiguration
+# ----------------------------------------------------------------------------
+BASE_URL   = "https://weact.campact.de"
+DATA_FILE  = Path("weact_petitions.json")
+HTML_FILE  = Path("weact_petitions.html")
+
+TRY_JSON_VARIANT = True        # zuerst /petitions/<slug>.json versuchen
+MAX_LIST_PAGES   = 200         # Sicherheitslimit für die Paginierung pro Liste
+
+# Fallback-Themen-Slugs, falls die Kategorie-Navigation der Startseite bei
+# einem Lauf mal nicht lesbar ist. Im Normalfall werden die Kategorien bei
+# JEDEM Lauf live gelesen (discover_categories), damit neue/umbenannte
+# Kategorien automatisch erkannt werden.
+CATEGORY_SLUGS = [
+    "antifaschismus", "antirassismus", "bildung-kinderrechte",
+    "buergerinnen-menschenrechte", "datenschutz", "demokratie",
+    "energiewende", "feminismus", "flucht-asyl", "gesundheit", "handel",
+    "internationales", "klimaschutz", "kohle", "landwirtschaft",
+    "lobbyismus-transparenz", "medienpolitik", "soziales", "tierschutz",
+    "umwelt-ressourcen", "verbraucherinnen-schutz", "verkehr",
+    "wirtschaft-finanzen", "wohnen",
+]
+# Paginierungs-Parameter der Kategorieseiten. Verifiziert: "cpage", NICHT
+# "page" (mit "page" liefert der Server immer wieder Seite 1 aus, wodurch fast
+# alle Petitionen einer Kategorie unentdeckt blieben).
+PAGE_PARAM = "cpage"
+
+# Optional: exakter CSS-Selektor des Beschreibungs-Containers (leer = Auto).
+DESCRIPTION_SELECTOR = ""
+
+PETITION_HREF_RE = re.compile(r"/petitions/([a-z0-9][a-z0-9\-]+)", re.I)
+CATEGORY_HREF_RE = re.compile(r"/categories/([a-z0-9][a-z0-9\-]*)", re.I)
+SIG_RE  = re.compile(r"([\d.\s]+)\s*Unterschrift", re.I)
+MILESTONE_RE = re.compile(r"([\d.,]+)\s*Unterschriften?\s+erreicht", re.I)
+TS_RE = re.compile(r"\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}:\d{2}\s*[+\-]\d{2}:?\d{2}")
+
+# /petitions/search ist die Suchseite, keine Petition – ohne Ausfiltern hebelt
+# sie sogar die Paginierungs-Abbruchbedingung aus.
+NON_PETITION_SLUGS = {"search"}
+
+DESC_STOP_WORDS = ("neuigkeiten", "kommentare", "jetzt unterschreiben",
+                   "teilen", "unterstützer")
+
+
+# ----------------------------------------------------------------------------
+# Entdeckung der Kategorien (bei jedem Lauf live von der Startseite)
+# ----------------------------------------------------------------------------
+def discover_categories(fetcher: core.Fetcher) -> dict[str, str]:
+    """{slug: Anzeigename} aus der Kategorie-Navigation der Startseite.
+    Die Nav-Einträge stecken in <cmpr-tag href="/categories/<slug>">."""
+    resp = fetcher.get(BASE_URL + "/")
+    cats: dict[str, str] = {}
+    if not resp or not resp.ok:
+        return cats
+    soup = BeautifulSoup(resp.text, "html.parser")
+    for el in soup.find_all(href=CATEGORY_HREF_RE):
+        m = CATEGORY_HREF_RE.search(el.get("href", ""))
+        if not m:
+            continue
+        slug = m.group(1)
+        label = el.get_text(" ", strip=True) or slug
+        cats.setdefault(slug, label)
+    return cats
+
+
+def load_known_categories() -> dict[str, str]:
+    return core.load_meta(DATA_FILE).get("categories", {})
+
+
+# ----------------------------------------------------------------------------
+# Entdeckung der Petitionen
+# ----------------------------------------------------------------------------
+def discover_slugs(fetcher: core.Fetcher, category_slugs: list[str]) -> dict[str, dict]:
+    """{slug: {"started_by":…, "signatures":…}} aus allen Listen. Listen-
+    Karten enthalten Starter*in und Unterschriftenzahl – Felder, die auf der
+    Detailseite fehlen. Deshalb hier mitnehmen."""
+    found: dict[str, dict] = {}
+    total_steps = len(category_slugs) + 2      # Sitemap + Startseite + je Kategorie
+    step = 0
+
+    def bump(label: str) -> None:
+        nonlocal step
+        step += 1
+        prog(phase="discover", current=step, total=total_steps,
+             message=f"{label} · {len(found)} Petitionen bisher")
+
+    def harvest(html: str) -> int:
+        soup = BeautifulSoup(html, "html.parser")
+        before = len(found)
+        # Link steckt im href-Attribut des custom Elements <cmpr-card>, nicht
+        # in einem <a> → ohne Tag-Namen-Filter suchen.
+        for a in soup.find_all(href=PETITION_HREF_RE):
+            m = PETITION_HREF_RE.search(a.get("href", ""))
+            if not m:
+                continue
+            slug = m.group(1)
+            if slug in found or slug in NON_PETITION_SLUGS:
+                continue
+            card = a if a.name != "a" else (a.find_parent(["article", "li", "div"]) or a)
+            card_text = card.get_text(" ", strip=True)
+            started_by = None
+            m_by = re.search(r"Gestartet von\s+(.+?)(?:\s{2,}|$)", card_text)
+            if m_by:
+                started_by = m_by.group(1).strip()[:200]
+            signatures = None
+            m_sig = SIG_RE.search(card_text)
+            if m_sig:
+                signatures = int(re.sub(r"\D", "", m_sig.group(1)) or 0)
+            found[slug] = {"started_by": started_by, "signatures": signatures}
+        return len(found) - before
+
+    # (a) Sitemap – sauberster Weg, falls vorhanden.
+    for sm in ("/sitemap.xml", "/petitions/sitemap.xml"):
+        resp = fetcher.get(urljoin(BASE_URL, sm))
+        if resp and resp.status_code == 200 and "<loc>" in resp.text:
+            locs = re.findall(r"<loc>([^<]+)</loc>", resp.text)
+            new = 0
+            for loc in locs:
+                m = PETITION_HREF_RE.search(loc)
+                if m and m.group(1) not in found and m.group(1) not in NON_PETITION_SLUGS:
+                    found[m.group(1)] = {"started_by": None, "signatures": None}
+                    new += 1
+            if new:
+                log(f"Sitemap {sm}: {new} Petitions-URLs gefunden.")
+    bump("Sitemap geprüft")
+
+    # (b) Startseite.
+    resp = fetcher.get(BASE_URL + "/")
+    if resp and resp.ok:
+        log(f"Startseite: +{harvest(resp.text)} Petitionen.")
+    bump("Startseite geprüft")
+
+    # (c) Kategorieseiten inkl. Paginierung.
+    for cat in category_slugs:
+        cat_url = f"{BASE_URL}/categories/{cat}"
+        page, empty_streak = 1, 0
+        while page <= MAX_LIST_PAGES:
+            url = cat_url if page == 1 else f"{cat_url}?{PAGE_PARAM}={page}"
+            resp = fetcher.get(url)
+            if not resp or not resp.ok:
+                break
+            added = harvest(resp.text)
+            if added == 0:
+                empty_streak += 1
+                if empty_streak >= 1:        # keine neuen Slugs → Kategorie fertig
+                    break
+            else:
+                empty_streak = 0
+            page += 1
+        log(f"Kategorie '{cat}': insgesamt {len(found)} Slugs gesammelt.")
+        bump(f"Kategorie „{cat}“ geprüft")
+
+    return found
+
+
+# ----------------------------------------------------------------------------
+# Detailseite parsen
+# ----------------------------------------------------------------------------
+def _meta(soup: BeautifulSoup, prop: str) -> str | None:
+    tag = (soup.find("meta", property=prop)
+           or soup.find("meta", attrs={"name": prop}))
+    if tag and tag.get("content"):
+        return tag["content"].strip()
+    return None
+
+
+def _sanitize_desc(node) -> str:
+    """Reduziert einen Block auf erlaubte Tags; Links werden absolut gemacht."""
+    for t in list(node.find_all(True)):
+        if t.name not in ALLOWED_DESC_TAGS:
+            t.unwrap()
+            continue
+        if t.name == "a":
+            href = t.get("href")
+            t.attrs = {}
+            if href:
+                t["href"] = urljoin(BASE_URL, href)
+                t["target"] = "_blank"
+                t["rel"] = "noopener"
+        else:
+            t.attrs = {}
+    if node.name not in ALLOWED_DESC_TAGS:
+        node.name = "p"
+    node.attrs = {}
+    return str(node)
+
+
+def _extract_description(main_html: str) -> str | None:
+    """Komplette, GEGLIEDERTE Beschreibung als bereinigtes HTML.
+
+    WeAct rendert die Texte über den Trix-Editor: jeder Absatz steckt in
+    einem bloßen <div>, nicht in <p>. Ohne Umwandlung fiele der komplette
+    Fließtext (Haupttext + "Warum ist das wichtig?") unbemerkt durch. Die
+    <div>s in .trix-content werden deshalb zu <p> umbenannt."""
+    frag = BeautifulSoup(main_html, "html.parser")
+    for bad in frag.select("header, nav, footer, script, style, form, aside, "
+                           "[data-component-name], .campaign-image-wrapper"):
+        bad.decompose()
+
+    if DESCRIPTION_SELECTOR:
+        picked = frag.select_one(DESCRIPTION_SELECTOR)
+        if picked:
+            frag = BeautifulSoup(str(picked), "html.parser")
+
+    for block in frag.select(".trix-content"):
+        for div in block.find_all("div"):
+            div.name = "p"
+
+    out = []
+    for b in frag.find_all(["h2", "h3", "h4", "p", "ul", "ol", "blockquote"]):
+        txt = b.get_text(" ", strip=True)
+        low = txt.lower()
+        if not txt:
+            continue
+        if b.name in ("h2", "h3", "h4") and any(w in low for w in DESC_STOP_WORDS):
+            break
+        if TS_RE.search(txt) or MILESTONE_RE.search(txt):
+            continue
+        if low.startswith("an:"):
+            continue
+        if low in ("kategorie", "kategorien"):
+            continue
+        if (b.name == "p" and b.find("a") and len(txt) < 40
+                and "/categories/" in str(b)):
+            continue
+        out.append(_sanitize_desc(b))
+    html = "\n".join(out).strip()
+    return html or None
+
+
+def _extract_aktion_content(soup: BeautifulSoup) -> str | None:
+    """Beschreibung für das neuere Campact-"Aktion"-Template
+    (aktion.campact.de/weact/<slug>/…). Struktur unter .content-column:
+      .description                      – Intro ohne eigene Überschrift
+      cmpr-cta-appeal[header]           – Forderung (header → Überschrift,
+                                           slot="recipients" = Adressat)
+      #accordion cmpr-accordion-item[header] – ausgeklappte Akkordions
+                                           (header → Überschrift, Inhalt
+                                           darunter als Bodytext)."""
+    root = soup.select_one(".content-column .content") or soup.select_one(".content-column")
+    if not root:
+        return None
+    parts = []
+
+    desc = root.select_one(".description")
+    if desc:
+        txt = desc.get_text(" ", strip=True)
+        if txt:
+            parts.append(f"<p>{_esc(txt)}</p>")
+
+    for appeal in root.select("cmpr-cta-appeal"):
+        heading = appeal.get("header")
+        if heading:
+            parts.append(f"<h3>{_esc(heading)}</h3>")
+        copy = BeautifulSoup(str(appeal), "html.parser").find(appeal.name)
+        for slot in copy.select("[slot=recipients]"):
+            slot.decompose()      # Adressat wird separat als recipient erfasst
+        frag = sanitize_fragment(copy, BASE_URL)
+        if frag:
+            parts.append(frag)
+
+    for item in root.select("cmpr-accordion-item"):
+        heading = item.get("header")
+        if heading:
+            parts.append(f"<h3>{_esc(heading)}</h3>")
+        copy = BeautifulSoup(str(item), "html.parser").find(item.name)
+        frag = sanitize_fragment(copy, BASE_URL)
+        if frag:
+            parts.append(frag)
+
+    html = "\n".join(p for p in parts if p and p.strip())
+    return html or None
+
+
+def parse_detail(html: str, url: str) -> dict:
+    soup = BeautifulSoup(html, "html.parser")
+    rec: dict = {}
+
+    # Aktion-Template: og:title ist oft gekürzt – volle Überschrift im
+    # h1.page-title.hero__title.
+    long_title = soup.select_one("h1.page-title.hero__title")
+    rec["title"] = (
+        (long_title.get_text(strip=True) if long_title else None)
+        or _meta(soup, "og:title")
+        or (soup.h1.get_text(strip=True) if soup.h1 else None))
+    rec["summary"] = _meta(soup, "og:description") or _meta(soup, "description")
+    rec["image_url"] = _meta(soup, "og:image")
+    canon = soup.find("link", rel="canonical")
+    rec["url"] = (canon["href"].strip() if canon and canon.get("href")
+                  else _meta(soup, "og:url") or url)
+
+    # Adressat ("An: …")  # >>> SELEKTOR
+    recipient = None
+    an = soup.find(string=re.compile(r"^\s*An:\s*", re.I))
+    if an:
+        host = an.find_parent(["h2", "h3", "p", "div"]) or an
+        recipient = re.sub(r"^\s*An:\s*", "", host.get_text(" ", strip=True))
+    if not recipient:
+        slot = soup.select_one("[slot=recipients]")      # Aktion-Template
+        if slot:
+            recipient = slot.get_text(" ", strip=True) or None
+    rec["recipient"] = recipient or None
+
+    # Kategorie über /categories/<slug>-Link.
+    cat_link = soup.find("a", href=re.compile(r"/categories/[a-z0-9\-]+", re.I))
+    if cat_link:
+        rec["category"] = cat_link.get_text(strip=True) or None
+        rec["category_url"] = urljoin(BASE_URL, cat_link["href"])
+    else:
+        rec["category"] = rec["category_url"] = None
+
+    # Beschreibung: klassisches WeAct-Template vs. Aktion-Template.
+    weact_col = (soup.select_one(".main-column .petition-content .campaign-text")
+                or soup.select_one(".main-column .petition-content"))
+    if weact_col:
+        rec["description_full"] = _extract_description(str(weact_col))
+    elif soup.select_one(".content-column"):
+        rec["description_full"] = _extract_aktion_content(soup)
+    else:
+        main = (soup.find("main") or soup.find("article")
+                or soup.find(id="main-content") or soup.body)
+        rec["description_full"] = _extract_description(str(main)) if main else None
+
+    # Neuigkeiten / Meilensteine aus datierten Einträgen.
+    updates, milestones = [], []
+    for node in soup.find_all(string=TS_RE):
+        ts_raw = TS_RE.search(node).group(0)
+        try:
+            import datetime as _dt
+            ts = _dt.datetime.fromisoformat(ts_raw.replace(" ", "T", 1)
+                                            .replace(" ", "")).isoformat()
+        except ValueError:
+            ts = ts_raw
+        container = node.find_parent(["li", "div", "article", "p"])
+        text = container.get_text(" ", strip=True) if container else str(node)
+        text = TS_RE.sub("", text).strip(" -– ")
+        m_ms = MILESTONE_RE.search(text)
+        if m_ms:
+            milestones.append({"threshold": int(re.sub(r"\D", "", m_ms.group(1))),
+                               "timestamp": ts})
+        elif text:
+            updates.append({"timestamp": ts, "text": text[:500]})
+
+    seen = set()
+    uniq_u = []
+    for u in updates:
+        k = (u["timestamp"], u["text"])
+        if k not in seen:
+            seen.add(k); uniq_u.append(u)
+    rec["updates"] = sorted(uniq_u, key=lambda x: x["timestamp"], reverse=True)
+    rec["milestones"] = sorted({(m["threshold"], m["timestamp"]) for m in milestones})
+    rec["milestones"] = [{"threshold": t, "timestamp": ts}
+                         for t, ts in rec["milestones"]]
+    rec["start_date"] = (rec["milestones"][0]["timestamp"]
+                         if rec["milestones"] else None)
+    return rec
+
+
+def parse_json_variant(text: str) -> dict:
+    """Optionale, saubere Quelle: /petitions/<slug>.json (falls vorhanden)."""
+    out = {}
+    try:
+        data = json.loads(text)
+    except (ValueError, TypeError):
+        return out
+    obj = data.get("petition", data) if isinstance(data, dict) else {}
+    if isinstance(obj, dict):
+        if "id" in obj:
+            out["petition_id"] = obj["id"]
+        for src, dst in (("signature_count", "signatures"),
+                         ("signatures_count", "signatures"),
+                         ("title", "title")):
+            if obj.get(src) is not None:
+                out[dst] = obj[src]
+    return out
+
+
+def scrape_petition(fetcher: core.Fetcher, slug: str) -> tuple[str, dict | None]:
+    """(status, record) – status: online | offline | error."""
+    url = f"{BASE_URL}/petitions/{slug}"
+    rec: dict = {}
+
+    if TRY_JSON_VARIANT:
+        jresp = fetcher.get(url + ".json")
+        if jresp is not None and jresp.status_code == 200:
+            rec.update(parse_json_variant(jresp.text))
+
+    resp = fetcher.get(url)
+    if resp is None:
+        return "error", None
+    if resp.status_code in (404, 410):
+        return "offline", None
+    if not resp.ok:
+        return "error", None
+
+    rec.update({k: v for k, v in parse_detail(resp.text, url).items()
+                if v is not None or k not in rec})
+    rec.setdefault("petition_id", None)
+    return "online", rec
+
+
+# ----------------------------------------------------------------------------
+# Ablauf eines Laufs
+# ----------------------------------------------------------------------------
+def run(args) -> None:
+    store = core.load_store(DATA_FILE)
+    fetcher = core.Fetcher(delay=args.delay)
+    ts = now_iso()
+
+    # Kategorien bei JEDEM Lauf live prüfen (neue Kategorien erkennen).
+    log("Prüfe Kategorie-Navigation …")
+    prog(phase="categories", current=0, total=0, message="Prüfe Kategorien …")
+    prev_categories = load_known_categories()
+    live_categories = discover_categories(fetcher)
+    if live_categories:
+        categories = live_categories
+        category_slugs = sorted(categories)
+    else:
+        log("Kategorie-Navigation nicht lesbar – verwende feste Fallback-Liste.")
+        categories = {c: c for c in CATEGORY_SLUGS}
+        category_slugs = CATEGORY_SLUGS
+    new_categories = sorted(set(categories) - set(prev_categories)) if prev_categories else []
+    if new_categories:
+        log(f"NEU: {len(new_categories)} neue Kategorie(n) seit letztem Lauf: "
+            f"{', '.join(new_categories)}")
+
+    def save(quiet=True, **extra):
+        core.save_store(store, DATA_FILE,
+                        extra_meta={"categories": categories, **extra},
+                        quiet=quiet)
+
+    # Bekannte Petitionen werden VOR jeder Neuentdeckung geprüft.
+    known_slugs = list(store.keys())
+    if known_slugs and not args.no_recheck and not args.limit:
+        log(f"Prüfe {len(known_slugs)} bekannte Petition(en) …")
+        prog(phase="check-known", current=0, total=len(known_slugs),
+             message="Prüfe bekannte Petitionen …")
+        for k, slug in enumerate(known_slugs, 1):
+            prog(current=k, total=len(known_slugs), message=slug)
+            if core.skip_recent(store.get(slug), args):
+                continue
+            status, rec = scrape_petition(fetcher, slug)
+            if status == "error":
+                continue
+            core.upsert(store, slug, rec or {}, {}, status, ts,
+                        f"{BASE_URL}/petitions/{slug}")
+            save()
+            if status == "offline":
+                log(f"  OFFLINE: {slug}")
+    elif args.no_recheck:
+        log("Prüfung bekannter Petitionen übersprungen (--no-recheck).")
+
+    log("Sammle Petitions-Slugs aus Listen …")
+    prog(phase="discover", current=0, total=0, message="Sammle Petitionen …")
+    discovered = discover_slugs(fetcher, category_slugs)
+    known_set = set(known_slugs)
+    # Bereits geprüfte Petitionen nicht nochmal laden – nur Listen-Infos
+    # (Unterschriften/Starter*in) ohne Zusatz-Request übernehmen.
+    new_slugs = [s for s in discovered if s not in known_set]
+    for slug, hint in discovered.items():
+        if slug in known_set:
+            core.upsert(store, slug, {}, hint, "online", ts,
+                        f"{BASE_URL}/petitions/{slug}")
+    if args.limit:
+        new_slugs = new_slugs[:args.limit]
+    log(f"{len(new_slugs)} neue Petitionen zum Scrapen "
+        f"(Gesamt im Store: {len(store)}).")
+    prog(phase="scrape", current=0, total=len(new_slugs), message="Beginne Scrape …")
+
+    for i, slug in enumerate(new_slugs, 1):
+        log(f"({i}/{len(new_slugs)}) {slug}")
+        prog(current=i, total=len(new_slugs), message=slug)
+        status, rec = scrape_petition(fetcher, slug)
+        if status == "error":
+            log("  übersprungen (Fehler) – Datensatz bleibt unverändert.")
+            continue
+        core.upsert(store, slug, rec or {}, discovered.get(slug, {}), status, ts,
+                    f"{BASE_URL}/petitions/{slug}")
+        save()
+
+    new_petitions = [s for s, r in store.items() if r.get("first_seen") == ts]
+    if new_petitions:
+        log(f"NEU: {len(new_petitions)} neue Petition(en) in diesem Lauf: "
+            f"{', '.join(new_petitions[:10])}"
+            f"{' …' if len(new_petitions) > 10 else ''}")
+    else:
+        log("Keine neuen Petitionen seit dem letzten Lauf gefunden.")
+
+    prog(message="Speichere & baue HTML …")
+    save(quiet=False, new_petitions_last_run=new_petitions,
+         new_categories_last_run=new_categories)
+    core.write_list_html(PLATFORM)
+    log("Fertig (WeAct).")
+
+
+PLATFORM = Platform(
+    key="weact",
+    openness=4,
+    openness_note="Offen: vollständige Listen über Kategorien + Pagination, aber "
+                  "technische Hürden (Custom-Elemente statt Links, verstecktes "
+                  "cpage-Parameter, zwei verschiedene Seiten-Templates).",
+    name="WeAct",
+    eyebrow="WeAct · Campact",
+    source_url=BASE_URL,
+    data_file=DATA_FILE,
+    html_file=HTML_FILE,
+    run=run,
+)
+
+
+if __name__ == "__main__":
+    # Kompatibilität: `python3 weact_scraper.py --serve` funktioniert weiter
+    # und delegiert an den neuen zentralen Einstiegspunkt.
+    import monitor
+    monitor.main()
