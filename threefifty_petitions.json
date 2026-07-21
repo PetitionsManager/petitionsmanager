@@ -1,0 +1,733 @@
+{
+  "_meta": {
+    "_README": "Petitions-Monitor. Datensaetze werden aktualisiert, nie ueberschrieben.",
+    "fields": {
+      "slug": "ID/Schluessel aus der URL",
+      "url": "kanonische Petitions-URL",
+      "petition_id": "interne numerische ID der Plattform oder null",
+      "title": "Titel",
+      "started_by": "Gestartet von",
+      "recipient": "Adressat",
+      "category": "Thema/Kategorie (falls die Plattform Kategorien hat)",
+      "category_url": "Link zur Kategorieseite",
+      "tags": "bis zu 10 aus dem Text abgeleitete Schlagwörter (zum Verlinken)",
+      "summary": "Kurzbeschreibung (og:description)",
+      "description_full": "komplette, gegliederte Beschreibung als bereinigtes HTML",
+      "image_url": "Petitionsbild",
+      "signatures": "aktueller Unterschriftenstand",
+      "signatures_history": "Zeitreihe [{checked_at,count}]",
+      "milestones": "Meilenstein-Marken [{threshold,timestamp}]",
+      "updates": "Neuigkeiten [{timestamp,text}]",
+      "goal": "aktuelles Unterschriften-Ziel (falls die Plattform eines zeigt)",
+      "start_date": "Startdatum (plattformabhängig ermittelt)",
+      "status": "online | offline",
+      "first_seen": "erstmals gescrapt (unveraenderlich)",
+      "last_seen": "zuletzt online",
+      "last_checked": "zuletzt geprueft",
+      "offline_since": "seit wann offline oder null"
+    },
+    "generated_at": "2026-07-20T22:41:30-06:00",
+    "petition_count": 21,
+    "new_petitions_last_run": [
+      "25286",
+      "25229",
+      "25183",
+      "24777",
+      "24670",
+      "23794",
+      "23159",
+      "22924",
+      "22773",
+      "21720",
+      "21334",
+      "20799",
+      "19891",
+      "19707",
+      "19490",
+      "19474",
+      "19264",
+      "22424"
+    ]
+  },
+  "25468": {
+    "slug": "25468",
+    "first_seen": "2026-07-20T22:38:57-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-20T22:38:57-06:00",
+        "count": 11582
+      }
+    ],
+    "kind": "petition",
+    "started_by": "350.org",
+    "category": "Petition",
+    "title": "Schluss mit den Rekordprofiten aus Öl und Gas – die Verursacher sollen zahlen!",
+    "summary": "Fossile Konzerne machen weiterhin unglaubliche Profite, während unsere Rechnungen steigen und unser Planet sich immer weiter aufheizt. Wir können nicht weiter zahlen, während sie profitieren. Unsere R…",
+    "description_full": "<p>Fossile Konzerne machen weiterhin unglaubliche Profite, während unsere Rechnungen steigen und unser Planet sich immer weiter aufheizt. Wir können nicht weiter zahlen, während sie profitieren. Unsere Regierungen müssen sich von Öl und Gas lösen. Bist du dabei? Unterschreibe:</p>",
+    "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/Screenshot_2026-07-03_at_15.35.05.png",
+    "url": "https://act.350.org/cms/view_by_page_id/25468?source=get_involved_dynamic",
+    "signatures": 11582,
+    "goal": 1000,
+    "status": "online",
+    "last_seen": "2026-07-20T22:40:46-06:00",
+    "offline_since": null,
+    "tags": [
+      "Während",
+      "Zahlen",
+      "Unglaubliche",
+      "Profitieren",
+      "Rechnungen",
+      "Weiterhin",
+      "Aufheizt",
+      "Konzerne",
+      "Fossile",
+      "Profite"
+    ],
+    "last_checked": "2026-07-20T22:40:46-06:00"
+  },
+  "25350": {
+    "slug": "25350",
+    "first_seen": "2026-07-20T22:38:57-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-20T22:38:57-06:00",
+        "count": 29872
+      }
+    ],
+    "kind": "petition",
+    "started_by": "350.org",
+    "category": "Petition",
+    "title": "Wir zahlen. Sie kassieren. Es ist Zeit, die Macht neu zu verteilen!",
+    "summary": "Regierungen müssen bezahlbare, sichere und saubere Energie für alle garantieren. Fossile Brennstoffe heizen nicht nur den Planeten auf – sie machen das Leben auch teurer. Füge deinen Namen hinzu und f…",
+    "description_full": "<p>Regierungen müssen bezahlbare, sichere und saubere Energie für alle garantieren. Fossile Brennstoffe heizen nicht nur den Planeten auf – sie machen das Leben auch teurer. Füge deinen Namen hinzu und fordere von Regierungen ein faires, bezahlbares Energiesystem für alle.</p>",
+    "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/DE_The_great_power_shift.png",
+    "url": "https://act.350.org/cms/view_by_page_id/25350?source=get_involved_dynamic",
+    "signatures": 29872,
+    "goal": 1000,
+    "status": "online",
+    "last_seen": "2026-07-20T22:40:46-06:00",
+    "offline_since": null,
+    "tags": [
+      "Regierungen",
+      "Brennstoffe",
+      "Garantieren",
+      "Bezahlbare",
+      "Planeten",
+      "Energie",
+      "Fossile",
+      "Saubere",
+      "Sichere",
+      "Heizen"
+    ],
+    "last_checked": "2026-07-20T22:40:46-06:00"
+  },
+  "25289": {
+    "slug": "25289",
+    "first_seen": "2026-07-20T22:38:57-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-20T22:38:57-06:00",
+        "count": 37075
+      }
+    ],
+    "kind": "petition",
+    "started_by": "350.org",
+    "category": "Petition",
+    "title": "Besteuert jetzt die Gewinne der Umweltverschmutzer!",
+    "summary": "Der Krieg im Nahen Osten kostet Menschenleben und lässt Preise für Öl und Gas stark steigen, Energiekonzerne kassieren ab, während Familien mit steigenden Kosten kämpfen. Die reichsten Länder müssen d…",
+    "description_full": "<p>Der Krieg im Nahen Osten kostet Menschenleben und lässt Preise für Öl und Gas stark steigen, Energiekonzerne kassieren ab, während Familien mit steigenden Kosten kämpfen. Die reichsten Länder müssen diese Umweltverschmutzer besteuern! Lass sie bezahlen!</p>",
+    "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/Tax_polluters_De_2026.png",
+    "url": "https://act.350.org/cms/view_by_page_id/25289?source=get_involved_dynamic",
+    "signatures": 37075,
+    "goal": 1000,
+    "status": "online",
+    "last_seen": "2026-07-20T22:40:46-06:00",
+    "offline_since": null,
+    "tags": [
+      "Umweltverschmutzer",
+      "Energiekonzerne",
+      "Menschenleben",
+      "Steigenden",
+      "Kassieren",
+      "Reichsten",
+      "Familien",
+      "Kämpfen",
+      "Steigen",
+      "Während"
+    ],
+    "last_checked": "2026-07-20T22:40:46-06:00"
+  },
+  "25286": {
+    "slug": "25286",
+    "first_seen": "2026-07-20T22:40:46-06:00",
+    "signatures_history": [],
+    "kind": "petition",
+    "started_by": "350.org",
+    "category": "E-Mail-Aktion",
+    "title": "Sag der EU: Beendet fossile Brennstoffe endgültig!",
+    "summary": "Die EU kann weltweit beim Ausstieg aus Kohle, Öl und Gas vorangehen – auf der Konferenz im April in Kolumbien. EU-Klimakommissar Hoekstra kann jetzt Taten zeigen: Ausstieg, Umweltsteuern, Unterstützun…",
+    "description_full": "<p>Die EU kann weltweit beim Ausstieg aus Kohle, Öl und Gas vorangehen – auf der Konferenz im April in Kolumbien. EU-Klimakommissar Hoekstra kann jetzt Taten zeigen: Ausstieg, Umweltsteuern, Unterstützung für arme Länder. Schick ihm eine Nachricht und fordere einen schnellen, gerechten Übergang!</p>",
+    "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/Hoekstra_letter_March2026.png",
+    "url": "https://act.350.org/cms/view_by_page_id/25286?source=get_involved_dynamic",
+    "status": "online",
+    "last_seen": "2026-07-20T22:40:46-06:00",
+    "offline_since": null,
+    "tags": [
+      "Ausstieg",
+      "EU-Klimakommissar",
+      "Umweltsteuern",
+      "Vorangehen",
+      "Kolumbien",
+      "Konferenz",
+      "Hoekstra",
+      "Weltweit",
+      "April",
+      "Kohle"
+    ],
+    "last_checked": "2026-07-20T22:40:46-06:00"
+  },
+  "25229": {
+    "slug": "25229",
+    "first_seen": "2026-07-20T22:40:46-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-20T22:40:46-06:00",
+        "count": 27144
+      }
+    ],
+    "kind": "petition",
+    "started_by": "350.org",
+    "category": "Petition",
+    "title": "Kein Blut für Öl: Fordere eine fossilfreie Zukunft!",
+    "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/smokestack.png",
+    "url": "https://act.350.org/cms/view_by_page_id/25229?source=get_involved_dynamic",
+    "signatures": 27144,
+    "goal": 1000,
+    "status": "online",
+    "last_seen": "2026-07-20T22:40:46-06:00",
+    "offline_since": null,
+    "tags": [
+      "Fossilfreie",
+      "Fordere",
+      "Zukunft",
+      "Blut"
+    ],
+    "last_checked": "2026-07-20T22:40:46-06:00"
+  },
+  "25183": {
+    "slug": "25183",
+    "first_seen": "2026-07-20T22:40:46-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-20T22:40:46-06:00",
+        "count": 29245
+      }
+    ],
+    "kind": "petition",
+    "started_by": "350.org",
+    "category": "Aktion",
+    "title": "Fossile Energien für immer beenden",
+    "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/1000x751px-660740-renewable-energy-460-67-kb-13-03-2015.jpg",
+    "url": "https://act.350.org/cms/view_by_page_id/25183?source=get_involved_dynamic",
+    "signatures": 29245,
+    "goal": 1000,
+    "status": "online",
+    "last_seen": "2026-07-20T22:40:46-06:00",
+    "offline_since": null,
+    "tags": [
+      "Energien",
+      "Beenden",
+      "Fossile"
+    ],
+    "last_checked": "2026-07-20T22:40:46-06:00"
+  },
+  "24777": {
+    "slug": "24777",
+    "first_seen": "2026-07-20T22:40:46-06:00",
+    "signatures_history": [],
+    "kind": "petition",
+    "started_by": "350.org",
+    "category": "E-Mail-Aktion",
+    "title": "Sag es Brasilien: Führe die Welt über fossile Brennstoffe hinaus!",
+    "summary": "Brasilien verspricht, den Amazonas zu schützen, erlaubt jedoch gleichzeitig neue Ölbohrungen. Die brasilianische Führung muss konsequent handeln: Führe die Welt bei der COP30 über fossile Brennstoffe …",
+    "description_full": "<p>Brasilien verspricht, den Amazonas zu schützen, erlaubt jedoch gleichzeitig neue Ölbohrungen. Die brasilianische Führung muss konsequent handeln: Führe die Welt bei der COP30 über fossile Brennstoffe hinaus!</p>",
+    "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/UK_350_Make_Them_Pay_1.png",
+    "url": "https://act.350.org/cms/view_by_page_id/24777?source=get_involved_dynamic",
+    "status": "online",
+    "last_seen": "2026-07-20T22:40:46-06:00",
+    "offline_since": null,
+    "tags": [
+      "Brennstoffe",
+      "Brasilien",
+      "Fossile",
+      "Führe",
+      "Welt",
+      "Brasilianische",
+      "Gleichzeitig",
+      "Ölbohrungen",
+      "Konsequent",
+      "Verspricht"
+    ],
+    "last_checked": "2026-07-20T22:40:46-06:00"
+  },
+  "24670": {
+    "slug": "24670",
+    "first_seen": "2026-07-20T22:40:46-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-20T22:40:46-06:00",
+        "count": 2778
+      }
+    ],
+    "kind": "petition",
+    "started_by": "350.org",
+    "category": "Aktion",
+    "title": "Stehen Sie Seite an Seite mit der indigenen Bevölkerung Brasiliens",
+    "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/Backgroiund_.png",
+    "url": "https://act.350.org/cms/view_by_page_id/24670?source=get_involved_dynamic",
+    "signatures": 2778,
+    "status": "online",
+    "last_seen": "2026-07-20T22:40:46-06:00",
+    "offline_since": null,
+    "tags": [
+      "Seite",
+      "Bevölkerung",
+      "Brasiliens",
+      "Indigenen",
+      "Stehen"
+    ],
+    "last_checked": "2026-07-20T22:40:46-06:00"
+  },
+  "23794": {
+    "slug": "23794",
+    "first_seen": "2026-07-20T22:40:46-06:00",
+    "signatures_history": [],
+    "kind": "petition",
+    "started_by": "350.org",
+    "category": "Brief-Aktion",
+    "title": "Schreib dem Präsidenten der COP30: Der Ausstieg aus fossilen Brennstoffen muss Priorität haben!",
+    "summary": "Kohle, Öl und Gas sind die größten Verursacher des Klimawandels.1 Aber kaum zu glauben: Wir haben gerade erfahren, dass der Ausstieg noch nicht auf der Tagesordnung der diesjährigen entscheidenden Kli…",
+    "description_full": "<p>Kohle, Öl und Gas sind die größten Verursacher des Klimawandels.1 Aber kaum zu glauben: Wir haben gerade erfahren, dass der Ausstieg noch nicht auf der Tagesordnung der diesjährigen entscheidenden Klimakonferenz – der COP30 in Brasilien – steht.2</p>",
+    "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/COP30_Agenda_Make_ending_FF_priority.png",
+    "url": "https://act.350.org/cms/view_by_page_id/23794?source=get_involved_dynamic",
+    "status": "online",
+    "last_seen": "2026-07-20T22:40:46-06:00",
+    "offline_since": null,
+    "tags": [
+      "Ausstieg",
+      "Entscheidenden",
+      "Diesjährigen",
+      "Klimawandels",
+      "Tagesordnung",
+      "Verursacher",
+      "Erfahren",
+      "Glauben",
+      "Größten",
+      "Kohle"
+    ],
+    "last_checked": "2026-07-20T22:40:46-06:00"
+  },
+  "23159": {
+    "slug": "23159",
+    "first_seen": "2026-07-20T22:40:46-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-20T22:40:46-06:00",
+        "count": 20626
+      }
+    ],
+    "kind": "petition",
+    "started_by": "350.org",
+    "category": "Aktion",
+    "title": "Befreie dich von „TrumpGas“!",
+    "summary": "Erst PutinGas, jetzt TrumpGas: Europas Abhängigkeit von fossilem Gas fesselt uns an die Launen autoritärer Führer. Gas ist zudem teuer und klimaschädlich. Wir können es durch günstige, heimische erneu…",
+    "description_full": "<p>Erst PutinGas, jetzt TrumpGas: Europas Abhängigkeit von fossilem Gas fesselt uns an die Launen autoritärer Führer. Gas ist zudem teuer und klimaschädlich. Wir können es durch günstige, heimische erneuerbare Energie und Energieeffizienz ersetzen.</p>",
+    "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/background_image_with_100_Trumps.jpg",
+    "url": "https://act.350.org/cms/view_by_page_id/23159?source=get_involved_dynamic",
+    "signatures": 20626,
+    "goal": 5000,
+    "status": "online",
+    "last_seen": "2026-07-20T22:40:46-06:00",
+    "offline_since": null,
+    "tags": [
+      "TrumpGas",
+      "Klimaschädlich",
+      "Abhängigkeit",
+      "Autoritärer",
+      "Heimische",
+      "Fossilem",
+      "Günstige",
+      "PutinGas",
+      "Europas",
+      "Fesselt"
+    ],
+    "last_checked": "2026-07-20T22:40:46-06:00"
+  },
+  "22924": {
+    "slug": "22924",
+    "first_seen": "2026-07-20T22:40:46-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-20T22:40:46-06:00",
+        "count": 15650
+      }
+    ],
+    "kind": "petition",
+    "started_by": "350.org",
+    "category": "Petition",
+    "title": "Fordere Präsident Lula auf, Nein zu Öl zu sagen!",
+    "summary": "Brasiliens Präsident Lula hat angekündigt, weitere Ölbohrungen in unmittelbarer Nähe des Amazonas zu genehmigen. Der Amazonas ist die einzige Wasserquelle für die dort lebenden Indigenen sowie viele W…",
+    "description_full": "<p>Brasiliens Präsident Lula hat angekündigt, weitere Ölbohrungen in unmittelbarer Nähe des Amazonas zu genehmigen. Der Amazonas ist die einzige Wasserquelle für die dort lebenden Indigenen sowie viele Wildtiere. Präsident Lula hofft, diese Projekte noch vor Beginn der Klimakonferenz COP30 möglichst heimlich durchzusetzen, um negative Schlagzeilen zu vermeiden. Genau deshalb müssen wir ihm jetzt deutlich machen, dass wir ihn genau im Blick haben</p>",
+    "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/Amazonia-livre-de-petroleo-1-1024x929.jpg",
+    "url": "https://act.350.org/cms/view_by_page_id/22924?source=get_involved_dynamic",
+    "signatures": 15650,
+    "goal": 5000,
+    "status": "online",
+    "last_seen": "2026-07-20T22:40:46-06:00",
+    "offline_since": null,
+    "tags": [
+      "Präsident",
+      "Amazonas",
+      "Lula",
+      "Unmittelbarer",
+      "Wasserquelle",
+      "Angekündigt",
+      "Ölbohrungen",
+      "Brasiliens",
+      "Genehmigen",
+      "Indigenen"
+    ],
+    "last_checked": "2026-07-20T22:40:46-06:00"
+  },
+  "22773": {
+    "slug": "22773",
+    "first_seen": "2026-07-20T22:40:46-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-20T22:40:46-06:00",
+        "count": 2444
+      }
+    ],
+    "kind": "petition",
+    "started_by": "350.org",
+    "category": "Petition",
+    "title": "Klimaschutz kennt keine Grenzen!",
+    "summary": "Wir, die weltweite Klimabewegung, bekräftigen, dass wir uns gemeinsam für Menschen, Gemeinschaften und die Natur einzusetzen. Wir kämpfen für Klimagerechtigkeit und unterstützen einander in dunkleren,…",
+    "description_full": "<p>Wir, die weltweite Klimabewegung, bekräftigen, dass wir uns gemeinsam für Menschen, Gemeinschaften und die Natur einzusetzen. Wir kämpfen für Klimagerechtigkeit und unterstützen einander in dunkleren, schwereren Zeiten. Gemeinsam werden wir: uns aktiv in der Klimagerechtigkeitsbewegung einsetzen, egal, wer in unserem Land an der Macht ist.</p>",
+    "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/CLIMATE_MOVEMENT_WITHOUT_BORDERSgerman.png",
+    "url": "https://act.350.org/cms/view_by_page_id/22773?source=get_involved_dynamic",
+    "signatures": 2444,
+    "status": "online",
+    "last_seen": "2026-07-20T22:40:46-06:00",
+    "offline_since": null,
+    "tags": [
+      "Gemeinsam",
+      "Klimagerechtigkeit",
+      "Gemeinschaften",
+      "Klimabewegung",
+      "Bekräftigen",
+      "Einzusetzen",
+      "Dunkleren",
+      "Weltweite",
+      "Einander",
+      "Kämpfen"
+    ],
+    "last_checked": "2026-07-20T22:40:46-06:00"
+  },
+  "21720": {
+    "slug": "21720",
+    "first_seen": "2026-07-20T22:40:46-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-20T22:40:46-06:00",
+        "count": 39750
+      }
+    ],
+    "kind": "petition",
+    "started_by": "350.org",
+    "category": "Aktion",
+    "title": "Sei solidarisch mit den indigenen Völkern des Amazonas!",
+    "summary": "Kolumbien hat gerade offiziell anerkannt, dass die indigenen Völker im kolumbianischen Amazonasgebiet das Recht haben, ihr eigenes Land zu schützen. Aber die indigenen Gemeinschaften in den anderen Lä…",
+    "description_full": "<p>Kolumbien hat gerade offiziell anerkannt, dass die indigenen Völker im kolumbianischen Amazonasgebiet das Recht haben, ihr eigenes Land zu schützen. Aber die indigenen Gemeinschaften in den anderen Ländern des Amazonasgebiets haben noch nicht dieselben Rechte.</p>",
+    "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/Amazon-Frontlines-Brazil-Indigenous-Women-March-August-03.jpg",
+    "url": "https://act.350.org/cms/view_by_page_id/21720?source=get_involved_dynamic",
+    "signatures": 39750,
+    "goal": 5000,
+    "status": "online",
+    "last_seen": "2026-07-20T22:40:46-06:00",
+    "offline_since": null,
+    "tags": [
+      "Indigenen",
+      "Kolumbianischen",
+      "Amazonasgebiet",
+      "Gemeinschaften",
+      "Anerkannt",
+      "Kolumbien",
+      "Offiziell",
+      "Schützen",
+      "Eigenes",
+      "Völker"
+    ],
+    "last_checked": "2026-07-20T22:40:46-06:00"
+  },
+  "21334": {
+    "slug": "21334",
+    "first_seen": "2026-07-20T22:40:46-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-20T22:40:46-06:00",
+        "count": 29908
+      }
+    ],
+    "kind": "petition",
+    "started_by": "350.org",
+    "category": "Aktion",
+    "title": "An die führenden Politiker*innen weltweit: Setzen Sie ehrgeizige Klimaziele!",
+    "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/20231209_COP28_Global_Day_Of_Action_KSW_04.jpg",
+    "url": "https://act.350.org/cms/view_by_page_id/21334?source=get_involved_dynamic",
+    "signatures": 29908,
+    "goal": 20000,
+    "status": "online",
+    "last_seen": "2026-07-20T22:40:46-06:00",
+    "offline_since": null,
+    "tags": [
+      "Ehrgeizige",
+      "Klimaziele",
+      "Führenden",
+      "Politiker",
+      "Weltweit",
+      "Setzen",
+      "Innen"
+    ],
+    "last_checked": "2026-07-20T22:40:46-06:00"
+  },
+  "20799": {
+    "slug": "20799",
+    "first_seen": "2026-07-20T22:40:46-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-20T22:40:46-06:00",
+        "count": 158293
+      }
+    ],
+    "kind": "petition",
+    "started_by": "350.org",
+    "category": "Petition",
+    "title": "Tax Their Billions!",
+    "summary": "Während immer mehr Hitzerekorde gebrochen und viele Teile der Welt und Deutschlands von Überschwemmungen heimgesucht werden, können sich viele von uns ihre Strom- und Heizrechnungen nicht mehr leisten…",
+    "description_full": "<p>Während immer mehr Hitzerekorde gebrochen und viele Teile der Welt und Deutschlands von Überschwemmungen heimgesucht werden, können sich viele von uns ihre Strom- und Heizrechnungen nicht mehr leisten. Gleichzeitig werden extrem reiche Menschen immer reicher, heizen die Klimakrise an und zahlen noch dazu weniger Steuern als der Rest von uns. Wir müssen dringend auf erneuerbare, bezahlbare Energiequellen für alle umstellen.</p>",
+    "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/DE_TTB_ActionKit_graphics.png",
+    "url": "https://act.350.org/cms/view_by_page_id/20799?source=get_involved_dynamic",
+    "signatures": 158293,
+    "status": "online",
+    "last_seen": "2026-07-20T22:40:46-06:00",
+    "offline_since": null,
+    "tags": [
+      "Überschwemmungen",
+      "Heizrechnungen",
+      "Deutschlands",
+      "Hitzerekorde",
+      "Heimgesucht",
+      "Gebrochen",
+      "Leisten",
+      "Während",
+      "Strom",
+      "Teile"
+    ],
+    "last_checked": "2026-07-20T22:40:46-06:00"
+  },
+  "19891": {
+    "slug": "19891",
+    "first_seen": "2026-07-20T22:40:46-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-20T22:40:46-06:00",
+        "count": 18918
+      }
+    ],
+    "kind": "petition",
+    "started_by": "350.org",
+    "category": "Petition",
+    "title": "Reiche Länder: Leitet das Geld in erneuerbare Energie um!",
+    "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/move-the-money.jpg",
+    "url": "https://act.350.org/cms/view_by_page_id/19891?source=get_involved_dynamic",
+    "signatures": 18918,
+    "goal": 10000,
+    "status": "online",
+    "last_seen": "2026-07-20T22:40:46-06:00",
+    "offline_since": null,
+    "tags": [
+      "Erneuerbare",
+      "Energie",
+      "Leitet",
+      "Länder",
+      "Reiche",
+      "Geld"
+    ],
+    "last_checked": "2026-07-20T22:40:46-06:00"
+  },
+  "19707": {
+    "slug": "19707",
+    "first_seen": "2026-07-20T22:40:46-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-20T22:40:46-06:00",
+        "count": 39549
+      }
+    ],
+    "kind": "petition",
+    "started_by": "350.org",
+    "category": "Petition",
+    "title": "Offener Brief an den Präsidenten der COP29",
+    "summary": "Ich habe gerade einen offenen Brief unterschrieben, in dem der Präsident der COP29 aufgefordert wird, den Chef eines Ölkonzerns aus dem Organisationskomitee der diesjährigen UN-Klimakonferenz zu entfe…",
+    "description_full": "<p>Ich habe gerade einen offenen Brief unterschrieben, in dem der Präsident der COP29 aufgefordert wird, den Chef eines Ölkonzerns aus dem Organisationskomitee der diesjährigen UN-Klimakonferenz zu entfernen. Bist du dabei? Unterstütze uns mit deiner Unterschrift!</p>",
+    "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/Renewable_Energy_South_Asia.jpg",
+    "url": "https://act.350.org/cms/view_by_page_id/19707?source=get_involved_dynamic",
+    "signatures": 39549,
+    "goal": 5000,
+    "status": "online",
+    "last_seen": "2026-07-20T22:40:46-06:00",
+    "offline_since": null,
+    "tags": [
+      "Brief",
+      "Organisationskomitee",
+      "UN-Klimakonferenz",
+      "Unterschrieben",
+      "Aufgefordert",
+      "Diesjährigen",
+      "Ölkonzerns",
+      "Präsident",
+      "Offenen",
+      "Chef"
+    ],
+    "last_checked": "2026-07-20T22:40:46-06:00"
+  },
+  "19490": {
+    "slug": "19490",
+    "first_seen": "2026-07-20T22:40:46-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-20T22:40:46-06:00",
+        "count": 1835
+      }
+    ],
+    "kind": "petition",
+    "started_by": "350.org",
+    "category": "Petition",
+    "title": "Gaslobby: Finger weg von unserer Wärmeversorgung!",
+    "summary": "Die Gaslobby übt einen enormen Einfluss auf Politik und lokale Energieversorger wie Stadtwerke aus. Mit falschen Lösungen wie Wasserstoff, die sowohl ineffizient als auch klimaschädlich sind, zögert s…",
+    "description_full": "<p>Die Gaslobby übt einen enormen Einfluss auf Politik und lokale Energieversorger wie Stadtwerke aus. Mit falschen Lösungen wie Wasserstoff, die sowohl ineffizient als auch klimaschädlich sind, zögert sie eine gerechte Wärmewende hinaus, damit die fossile Industrie sich auch noch weiterhin die Taschen füllen kann. Es ist an der Zeit, dass wir die Kontrolle über unsere Wärmeversorgung aus den Fängen der Gaslobby zurückgewinnen! Unterschreibe jetzt!</p>",
+    "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/2402-gaslobby-finger-weg-von-unserer-waermeversorgung.png",
+    "url": "https://act.350.org/cms/view_by_page_id/19490?source=get_involved_dynamic",
+    "signatures": 1835,
+    "goal": 5000,
+    "status": "online",
+    "last_seen": "2026-07-20T22:40:46-06:00",
+    "offline_since": null,
+    "tags": [
+      "Gaslobby",
+      "Energieversorger",
+      "Wärmeversorgung",
+      "Klimaschädlich",
+      "Ineffizient",
+      "Wasserstoff",
+      "Stadtwerke",
+      "Einfluss",
+      "Falschen",
+      "Lösungen"
+    ],
+    "last_checked": "2026-07-20T22:40:46-06:00"
+  },
+  "19474": {
+    "slug": "19474",
+    "first_seen": "2026-07-20T22:40:46-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-20T22:40:46-06:00",
+        "count": 44418
+      }
+    ],
+    "kind": "petition",
+    "started_by": "350.org",
+    "category": "Petition",
+    "title": "An die EU: Kein grünes Gütesiegel für Flugzeuge und Schiffe!",
+    "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/2403_EU-taxonomy_German-Sharepic.png",
+    "url": "https://act.350.org/cms/view_by_page_id/19474?source=get_involved_dynamic",
+    "signatures": 44418,
+    "goal": 5000,
+    "status": "online",
+    "last_seen": "2026-07-20T22:40:46-06:00",
+    "offline_since": null,
+    "tags": [
+      "Gütesiegel",
+      "Flugzeuge",
+      "Schiffe",
+      "Grünes"
+    ],
+    "last_checked": "2026-07-20T22:40:46-06:00"
+  },
+  "19264": {
+    "slug": "19264",
+    "first_seen": "2026-07-20T22:40:46-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-20T22:40:46-06:00",
+        "count": 52
+      }
+    ],
+    "kind": "petition",
+    "started_by": "350.org",
+    "category": "Petition",
+    "title": "Kein Geld für RWE!",
+    "summary": "RWE macht weiterhin Rekordgewinne mit der Zerstörung des Planeten und soll jetzt auch noch 2,6 MILLIARDEN Euro vom Staat bekommen... während Millionen von uns Schwierigkeiten haben, ihre Rechnungen zu…",
+    "description_full": "<p>RWE macht weiterhin Rekordgewinne mit der Zerstörung des Planeten und soll jetzt auch noch 2,6 MILLIARDEN Euro vom Staat bekommen... während Millionen von uns Schwierigkeiten haben, ihre Rechnungen zu bezahlen 🤯 Wir fordern: Kein Geld für RWE!</p>",
+    "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/RWE.png",
+    "url": "https://act.350.org/cms/view_by_page_id/19264?source=get_involved_dynamic",
+    "signatures": 52,
+    "status": "online",
+    "last_seen": "2026-07-20T22:40:46-06:00",
+    "offline_since": null,
+    "tags": [
+      "Schwierigkeiten",
+      "Rekordgewinne",
+      "MILLIARDEN",
+      "Rechnungen",
+      "Zerstörung",
+      "Millionen",
+      "Weiterhin",
+      "Bekommen",
+      "Planeten",
+      "Während"
+    ],
+    "last_checked": "2026-07-20T22:40:46-06:00"
+  },
+  "22424": {
+    "slug": "22424",
+    "first_seen": "2026-07-20T22:40:46-06:00",
+    "signatures_history": [],
+    "kind": "petition",
+    "started_by": "350.org",
+    "category": "E-Mail-Aktion",
+    "title": "Anmeldung für die Tax Their Billions Kampagne",
+    "summary": "<p><span style=\"font-weight: 400;\"><em>Im Folgenden möchten wir etwas mehr über dich erfahren. Wir werden die Daten nicht weitergeben. Wenn du nicht alle Fragen beantworten möchtest, ist das völlig in…",
+    "description_full": "<p>&lt;p&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;em&gt;Im Folgenden möchten wir etwas mehr über dich erfahren. Wir werden die Daten nicht weitergeben. Wenn du nicht alle Fragen beantworten möchtest, ist das völlig in Ordnung.  &lt;/em&gt;&lt;/span&gt;&lt;/p&gt;\r\n&lt;p&gt;&lt;a href=&quot;https://350.org/de/tax-their-billions/&quot;&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Hier erfährst du mehr über die Kampagne.&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;\r\n&lt;p&gt;&lt;strong&gt;Unsere Geschichte:&lt;/strong&gt;&lt;/p&gt;\r\n&lt;p&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Egal, wer wir sind oder woher wir kommen, wir alle glauben, dass jeder seinen Beitrag leisten sollte, damit es unseren Kommunen und Gemeinschaften gut geht und sie gedeihen. Doch wir brauchen Veränderungen, damit unsere Bedürfnisse an erster Stelle stehen. Wir brauchen saubere Luft, warme und sichere Wohnungen, die wir uns leisten können, und zukunftsfähige Arbeitsplätze und Ausbildung. Unsere Krankenhäuser, Bibliotheken und Schulen sollten gut ausgestattet und einladend sein. &lt;/span&gt;&lt;/p&gt;\r\n&lt;p&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Doch anstatt in sichere, gut funktionierende und gedeihende Kommunen und Gemeinschaften zu investieren, haben politische Entscheidungen inmitten steigender Lebenshaltungskosten zu höheren Steuern für uns geführt und Superreiche zahlen weniger Steuern als wir übrigen. Zusätzlich heizen Superreiche und fossile Brennstoffunternehmen die Erderhitzung weiter an und verschärfen bestehende Ungleichheiten. Ein Milliardär emittiert in 90 Minuten mehr CO2 als ein Durchschnittsmensch in seinem ganzen Leben. &lt;/span&gt;&lt;/p&gt;\r\n&lt;p&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Und trotzdem benutzen Medien und viele Politiker*innen Bürgergeldempfänger*innen, Migrant*innen und Geflüchtete als Sündenböcke, aber wir lassen uns davon nicht ablenken oder wenden uns gegen unsere Nachbar*innen. Die Schuld und die Lösung liegen eindeutig beim extremen Reichtum der Superreichen. Denn privater extremer Reichtum bedeutet öffentliche Armut.&lt;/span&gt;&lt;/p&gt;\r\n&lt;p&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Die Besteuerung von weniger als 3000 der reichsten Menschen der Welt würde jährlich 250 Milliarden Dollar einbringen. Wir sprechen hier nicht von einer durchschnittlichen Ärztin oder einem Anwalt, sondern von Leuten wie Elon Musk, Jeff Bezos, Bernard Arnault, James Dyson und der Porsche-Piëch oder BMW Familie.&lt;/span&gt;&lt;/p&gt;\r\n&lt;p&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Mit einer Vermögenssteuer und einer angemessenen Steuer auf die gefährliche fossile Brennstoffindustrie können jährlich Milliarden, ja sogar Billionen, aufgebracht werden, um Dinge zu finanzieren, die wir alle dringend brauchen, wie günstige Wohnungen, gut ausgestattete Krankenhäuser, Schulen, Kitas, den öffentlichen Nahverkehr, gut isolierte Häuser und erschwingliche, erneuerbare Energie zu – im Inland und in den Ländern, die am wenigsten für die Klimakrise verantwortlich sind. Der Stress, den viele von uns jeden Tag erleben, könnte nachlassen, weil wir wüssten, dass für alle gut gesorgt ist. &lt;/span&gt;&lt;/p&gt;\r\n&lt;p&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Wenn wir gemeinsam handeln und uns organisieren, können wir eine sichere und lebenswerte Zukunft für alle aufbauen, in der die Bedürfnisse der Vielen die Gier der Wenigen überwiegen. Lasst uns zusammenkommen und verlangen, dass unsere Regierungen das Wohl der Menschen und des Planeten an erster Stelle setzen und eine Vermögenssteuer für die Superreichen fordern -  für eine sichere und gute Zukunft für alle. &lt;a href=&quot;https://350.org/de/tax-their-billions/&quot;&gt;Tax Their Billions! Lasst Superreiche für die Lösung der Klimakrise und ein gutes Leben für alle Zahlen. &lt;/a&gt;&lt;/span&gt;&lt;/p&gt;</p>",
+    "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/Oslo-GCM-photo-Monica-Lovdahl-900px.jpeg",
+    "url": "https://act.350.org/cms/view_by_page_id/22424?source=get_involved_dynamic",
+    "status": "online",
+    "last_seen": "2026-07-20T22:40:46-06:00",
+    "offline_since": null,
+    "tags": [
+      "Span",
+      "Font-weight",
+      "Style",
+      "Sichere",
+      "Innen",
+      "Superreiche",
+      "Brauchen",
+      "Vermögenssteuer",
+      "Gemeinschaften",
+      "Krankenhäuser"
+    ],
+    "last_checked": "2026-07-20T22:40:46-06:00"
+  }
+}
