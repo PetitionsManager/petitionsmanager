@@ -35,6 +35,7 @@ import eko_scraper
 import europarl_scraper
 import changeorg_scraper
 import bundestag_scraper
+import threefifty_scraper
 
 # ----------------------------------------------------------------------------
 # Plattform-Registry: Live-Scraper zuerst, dann die geplanten Platzhalter.
@@ -50,17 +51,7 @@ PLATFORMS: list[Platform] = [
     wemove_scraper.PLATFORM,
     europarl_scraper.PLATFORM,
     foodwatch_scraper.PLATFORM,
-    # Platzhalter (noch kein Scraper). 350.org läuft auf ActionKit (wie
-    # WeMove): act.350.org/sign/<slug>, robots erlaubt /sign/. Für einen
-    # späteren Scraper: deutsche Aktionen über get-involved/ mit Region
-    # Deutschland (Sign-URLs tragen ?r=<region>&c=<kontinent>), Live-Zähler
-    # analog WeMove über act.350.org/progress/<slug>.
-    Platform(key="threefifty", name="350.org",
-             source_url="https://350.org/de/",
-             html_file=Path("threefifty_petitions.html"),
-             openness=3,
-             openness_note="Voraussichtlich mittel (ActionKit wie WeMove; "
-                           "/sign/ erlaubt). Noch kein Scraper – Platzhalter."),
+    threefifty_scraper.PLATFORM,
 ]
 
 
