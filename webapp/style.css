@@ -502,6 +502,29 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
 .ptools__note i{flex:none;margin-top:.125rem;font-size:.6875rem;opacity:.75}
 .ptools__notetext span{display:block}
 .ptools__notetext span+span{margin-top:.1875rem}
+
+/* Sprungmarke (app.js → jumpBtn). Sitzt im Fliesstext, deshalb inline und in
+   Akzentfarbe wie ein Link – ein gefuellter Knopf wuerde den Hinweis
+   erschlagen, den er nur ergaenzt. */
+.jump{display:inline-flex;align-items:center;gap:.3125rem;margin-left:.375rem;
+  background:none;border:0;padding:.125rem .0625rem;font:inherit;
+  font-size:.75rem;font-weight:700;color:var(--accent);cursor:pointer;
+  text-decoration:underline;text-underline-offset:.125rem}
+.jump i{font-size:.625rem;text-decoration:none}
+.jump:active{opacity:.6}
+/* Ziel nicht gefunden: sagt es und nimmt die Link-Optik zurueck, damit es
+   nicht wie ein weiterer Sprung aussieht. */
+.jump--miss{color:var(--muted);text-decoration:none;cursor:default}
+
+/* Kurzes Aufleuchten der angesprungenen Karte. Nur der Rahmen wird gefaerbt,
+   nicht die Flaeche: eine getoente Flaeche wuerde die Schrift darauf
+   mitverstimmen und im Dunkel-Design absaufen. */
+.jump-hit{animation:jumpHit 1.8s ease-out}
+@keyframes jumpHit{
+  0%,55%{box-shadow:0 0 0 .1875rem var(--accent)}
+  100%{box-shadow:0 0 0 .1875rem rgba(0,0,0,0)}}
+@media (prefers-reduced-motion:reduce){
+  .jump-hit{animation:none;box-shadow:0 0 0 .1875rem var(--accent)}}
 .chiprow{display:flex;flex-wrap:wrap;gap:.4375rem}
 .chiprow .chip{display:inline-flex;align-items:center;gap:.375rem;
   border:.0625rem solid var(--line);background:var(--bg);color:var(--ink);

@@ -659,6 +659,41 @@
     render();
   }
 
+  /* Sprungmarke: kleiner Knopf, der zu einer Stelle in der Liste rollt und sie
+     kurz hervorhebt. `ziel` ist eine FUNKTION, kein Element – die Liste wird
+     bei jedem Filter neu gezeichnet, ein beim Bauen gemerktes Element wäre
+     danach nicht mehr im Dokument.
+     Findet sich nichts (die Liste ist auf LIST_MAX gedeckelt, das Ziel kann
+     also jenseits davon liegen), sagt der Knopf das, statt stumm nichts zu
+     tun – ein Klick ohne Wirkung wäre als Fehler nicht erkennbar. */
+  function jumpBtn(label, ziel) {
+    var b = el('<button class="jump" type="button">' +
+      '<i class="fa-solid fa-arrow-turn-down"></i>' +
+      '<span class="jump__l">' + esc(label) + "</span></button>");
+    var lbl = b.querySelector(".jump__l");
+    b.addEventListener("click", function (e) {
+      e.preventDefault(); e.stopPropagation();
+      var treffer = ziel();
+      if (!treffer) {
+        b.classList.add("jump--miss");
+        lbl.textContent = "Nicht in der angezeigten Liste";
+        setTimeout(function () {
+          b.classList.remove("jump--miss"); lbl.textContent = label;
+        }, 2400);
+        return;
+      }
+      /* Steht der Knopf in einem Ausklapper, diesen erst schließen: er nimmt
+         sonst den halben Bildschirm ein und das Ziel landet trotz „center"
+         am Rand. Synchron, also VOR dem Rollen wirksam. */
+      var auf = b.closest("details[open]");
+      if (auf) auf.open = false;
+      treffer.scrollIntoView({ behavior: "smooth", block: "center" });
+      treffer.classList.add("jump-hit");
+      setTimeout(function () { treffer.classList.remove("jump-hit"); }, 1800);
+    });
+    return b;
+  }
+
   /* Höhe des aufgeklappten Vorschaubildes auf sein echtes Seitenverhältnis
      setzen. Vorher stand dort feste 11rem und object-fit:cover – bei einem
      breiten Aufmacher wie dem von 350.org schnitt das unten sichtbar ab.
@@ -1301,21 +1336,32 @@
         }).join("") + "</div>";
       // Ehrlich benennen, wenn die Sortierung nur einen Teil erfassen kann.
       var luecken = [];
-      function fehlt(n, was) {
-        return "Bei " + nf.format(n) + (n === 1 ? " Petition fehlt " : " Petitionen fehlt ") +
-          was + " – sie " + (n === 1 ? "steht" : "stehen") + " am Ende.";
+      /* „stehen am Ende" gilt NUR bei aktiver Sortierung – sortRows() schiebt
+         leere Werte ans Ende, die Standardreihenfolge lässt sie, wo sie sind.
+         Vorher stand der Satz unbedingt da und behauptete damit eine Ordnung,
+         die ohne Sortierung gar nicht besteht. */
+      function fehlt(n, was, feld) {
+        return { text: "Bei " + nf.format(n) +
+                   (n === 1 ? " Petition fehlt " : " Petitionen fehlt ") + was +
+                   " – beim Sortieren " + (n === 1 ? "steht sie" : "stehen sie") +
+                   " am Ende.",
+                 feld: feld, anzahl: n };
       }
       if (mitDatum && mitDatum < arr.length)
-        luecken.push(fehlt(arr.length - mitDatum, "das Startdatum"));
+        luecken.push(fehlt(arr.length - mitDatum, "das Startdatum", "start_date"));
       if (mitZahl && mitZahl < arr.length)
-        luecken.push(fehlt(arr.length - mitZahl, "die Unterschriftenzahl"));
-      if (!mitDatum) luecken.push("Diese Plattform liefert keine Startdaten.");
-      if (!mitZahl) luecken.push("Diese Plattform liefert keine Unterschriftenzahlen.");
+        luecken.push(fehlt(arr.length - mitZahl, "die Unterschriftenzahl", "signatures"));
+      if (!mitDatum)
+        luecken.push({ text: "Diese Plattform liefert keine Startdaten." });
+      if (!mitZahl)
+        luecken.push({ text: "Diese Plattform liefert keine Unterschriftenzahlen." });
       if (luecken.length)
         h += '<div class="ptools__note"><i class="fa-solid fa-circle-info"></i>' +
              '<span class="ptools__notetext">' +
-             luecken.map(function (s) { return "<span>" + esc(s) + "</span>"; })
-                    .join("") + "</span></div>";
+             luecken.map(function (l) {
+               return '<span data-luecke="' + esc(l.feld || "") + '">' +
+                      esc(l.text) + "</span>";
+             }).join("") + "</span></div>";
       h += "</div>";
 
       // Kategorien dieser Plattform, häufigste zuerst.
@@ -1348,6 +1394,26 @@
           if (state.catFilter) state.tagFilter = null;
           draw(arr); window.scrollTo(0, 0);
         });
+      });
+      /* Sprungmarke je Lücke: führt zur ersten Petition, der der Wert fehlt.
+         Die Adressen werden einmal gesammelt; gesucht wird erst beim Klick in
+         der gerade gezeichneten Liste, denn Filter und Sortierung ändern
+         laufend, welche Karte die erste ist. */
+      tbody.querySelectorAll("[data-luecke]").forEach(function (sp) {
+        var feld = sp.dataset.luecke;
+        if (!feld) return;                       // Satz ohne Ziel
+        var fehlend = {};
+        arr.forEach(function (r) {
+          var leer = feld === "signatures"
+            ? typeof r.signatures !== "number" : !r.start_date;
+          if (leer && r.url) fehlend[r.url] = 1;
+        });
+        sp.appendChild(jumpBtn("Zur ersten", function () {
+          var karten = listWrap.querySelectorAll(".pet");
+          for (var i = 0; i < karten.length; i++)
+            if (fehlend[karten[i].dataset.url]) return karten[i];
+          return null;
+        }));
       });
     }
 
