@@ -48,7 +48,9 @@
   --veil-rail:rgba(255,255,255,0);  /* Markenkante bleibt hell unverändert */
   /* Schalter-Spur und -Knopf (keine sinnvolle Ableitung aus den Neutralen) */
   --track-off:#d8d2c4; --knob:#ffffff;
-  --topbar-h:3.5rem; --tabbar-h:4.5rem; --radius:1.375rem;
+  /* Kopfleiste etwas höher als früher: sie trägt jetzt Wortmarke + „Beta"
+     zweizeilig statt einer einzelnen Titelzeile. */
+  --topbar-h:3.75rem; --tabbar-h:4.5rem; --radius:1.375rem;
   --shadow:0 .0625rem .1875rem rgba(60,45,20,.05);
 }
 *{box-sizing:border-box}
@@ -65,18 +67,63 @@ button,input,select,textarea{color:inherit}
 
 /* ---- Kopfleiste ----
    Bewusst flach und in der Grundfarbe: die Seite soll über ihre Überschrift
-   getragen werden, nicht über einen farbigen Balken. */
-.topbar{position:sticky;top:0;z-index:20;height:var(--topbar-h);
+   getragen werden, nicht über einen farbigen Balken.
+
+   NOTCH: die Höhe muss den Sicherheitsabstand oben MIT enthalten. Wegen des
+   globalen box-sizing:border-box zieht `padding-top` sonst von der festen
+   Höhe ab — auf einem iPhone mit 47 px Aussparung blieben von 3,75 rem
+   ganze 13 px für die Wortmarke übrig. Der Balken liegt in der Grundfarbe
+   unter der Statusleiste (index.html: viewport-fit=cover +
+   apple-mobile-web-app-status-bar-style=black-translucent), deshalb bleibt
+   die Aussparung farbig gefüllt statt schwarz. Das `0px` im zweiten
+   Argument ist der Rückfall für alles ohne env(). */
+.topbar{position:sticky;top:0;z-index:20;
+  height:calc(var(--topbar-h) + env(safe-area-inset-top,0px));
   display:flex;align-items:center;justify-content:space-between;
   padding:0 .75rem 0 1.25rem;background:var(--bg);color:var(--ink);
-  padding-top:env(safe-area-inset-top)}
-.topbar__title{font-weight:800;font-size:1.0625rem;letter-spacing:-.01em}
+  padding-top:env(safe-area-inset-top,0px)}
+
+/* ---- Wortmarke ----
+   Zeichen + Name + „Beta". Das SVG steht inline in index.html; seine Farben
+   kommen ausschließlich von hier, damit der Dark Mode greift. */
+.brand{display:flex;align-items:center;gap:.625rem;min-width:0}
+.brand__mark{width:2rem;height:2rem;flex:none;display:block}
+.bm-badge{fill:var(--accent)}
+.bm-check{stroke:var(--on-accent)}
+.bm-line{fill:var(--on-accent);opacity:.55}
+.brand__txt{display:flex;flex-direction:column;align-items:flex-start;
+  gap:.1875rem;min-width:0}
+.brand__name{font-size:1.0625rem;font-weight:800;letter-spacing:-.02em;
+  line-height:1;white-space:nowrap}
+/* Zweisilbig gesetzt: „Manager" im Akzentgrün. Das gibt der Marke ohne
+   eigene Schrift ein Gesicht — Wortmarken als SVG-Pfade schieden aus, sie
+   würden die Schriftgrößen-Einstellung des Geräts ignorieren. */
+.brand__name2{color:var(--accent)}
+/* „Beta" liegt auf dem vollen Orange, nicht auf der weichen Variante:
+   --hot und --on-hot sind in BEIDEN Designs dieselben Werte (siehe :root),
+   die Plakette braucht also keine Dark-Mode-Abstimmung und behält überall
+   denselben Kontrast. Der zarte Grund --hot-soft schied aus — mit 9 px
+   fetter Schrift zählt das als Kleintext und kam hell nur auf 4,23, also
+   unter AA. Als Fläche hebt sich das Orange über den Farbton ab, nicht über
+   die Helligkeit; das ist hier unkritisch, weil die Information im Wort
+   steckt und nicht in der Pillenform. */
+.brand__beta{font-size:.5625rem;font-weight:800;letter-spacing:.12em;
+  text-transform:uppercase;line-height:1;padding:.1875rem .4375rem;
+  border-radius:999px;background:var(--hot);color:var(--on-hot)}
+
 .iconbtn{border:0;background:transparent;color:inherit;cursor:pointer;
   width:2.75rem;height:2.75rem;border-radius:50%;display:flex;align-items:center;
   justify-content:center}
 .iconbtn:active{background:var(--line)}
 
 /* ---- Inhaltsbereich ---- */
+/* Seitentitel, früher in der Kopfleiste. Maße wie .content, damit die Zeile
+   bündig mit dem Inhalt beginnt. Leer oder als Dublette zur Überschrift
+   darunter wird sie ausgeblendet (app.js → syncPageTitle). */
+.pagekick{max-width:37.5rem;margin:0 auto;padding:.625rem 1.125rem 0;
+  font-size:.75rem;font-weight:800;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted)}
+.pagekick:empty,.pagekick.is-dup{display:none}
 .content{max-width:37.5rem;margin:0 auto;
   padding:.5rem 1.125rem calc(var(--tabbar-h) + 2rem);min-height:60vh}
 .page-title{font-size:.75rem;font-weight:800;letter-spacing:.08em;
@@ -253,6 +300,14 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
 .pet__head:active{background:var(--accent-soft)}
 .pet__thumb{width:3.375rem;height:2.5rem;object-fit:cover;border-radius:.625rem;
   flex:none;background:var(--line)}
+/* Ersatz für ein fehlendes Vorschaubild (siehe app.js → petCard): Plattform-
+   Logo mittig, exakt im Maß von .pet__thumb, damit die Kacheln in einer
+   gemischten Liste dieselbe Rhythmik behalten. Die Fläche bleibt bewusst das
+   neutrale var(--line) aus .pet__thumb – die Logos aus platforms.js sind selbst
+   schon Badges in der Markenfarbe; eine zweite getönte Fläche darunter ergäbe
+   nur Farbmatsch und verschwände im Dunkel-Design fast im Kachelhintergrund. */
+.pet__thumb--ph{display:inline-flex;align-items:center;justify-content:center}
+.pet__thumb--ph .plogo{width:1.5rem;height:1.5rem}
 .pet__main{flex:1;min-width:0}
 .pet__title{font-weight:700;font-size:.9375rem;line-height:1.35;
   letter-spacing:-.005em}
@@ -267,7 +322,37 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
 .pet.open .pet__toggle{transform:rotate(180deg)}
 .pet__body{display:none;padding:0 1rem 1rem}
 .pet.open .pet__body{display:block}
-.pet__img{width:100%;border-radius:.75rem;margin:.125rem 0 .75rem;display:block}
+/* Aufgeklappt wird aus dem kleinen Vorschaubild der Aufmacher der Karte: es
+   rutscht per order:-1 nach vorn und über die volle Breite, Titel und Zeile
+   wandern darunter, darunter kommt der Textteil. Möglich ohne Eingriff ins
+   Markup, weil .pet__head ein Flex-Container ist.
+   Im Textteil stand früher ein zweites <img> mit demselben Bild – das ist
+   entfallen (app.js → buildPetBody). In „Band" bleibt es wirkungslos: dort ist
+   .pet__thumb auf display:none, und das übersteuert diese Regel nicht. */
+.pet.open .pet__head{flex-wrap:wrap;gap:0;padding:0 0 .75rem}
+/* Die 11rem sind nur der Rückfall, falls die Maße des Bildes noch nicht
+   bekannt sind (loading="lazy"). Im Normalfall setzt app.js → sizeThumb() die
+   Höhe auf das echte Seitenverhältnis: der Kasten hat dann exakt die Form des
+   Bildes, und object-fit:cover schneidet nichts mehr ab. Für den Platzhalter
+   ohne Bild bleibt es bei der festen Höhe. */
+.pet.open .pet__thumb{order:-1;flex:0 0 100%;width:100%;height:11rem;
+  border-radius:0;margin-bottom:.875rem}
+.pet.open .pet__thumb--ph .plogo{width:3rem;height:3rem}
+/* Sanftes Aufklappen. Die Höhe ist animierbar, weil sizeThumb() einen
+   Pixelwert setzt – auf height:auto ließe sich nicht überblenden. */
+.pet__thumb{transition:width .3s cubic-bezier(.4,0,.2,1),
+  height .3s cubic-bezier(.4,0,.2,1),border-radius .3s,margin .3s}
+.pet.open .pet__body{animation:petBodyIn .28s cubic-bezier(.4,0,.2,1) both}
+@keyframes petBodyIn{
+  from{opacity:0;transform:translateY(-.375rem)}
+  to{opacity:1;transform:none}}
+/* Wer Bewegung abbestellt hat, bekommt den Sprung statt der Blende. */
+@media (prefers-reduced-motion:reduce){
+  .pet__thumb{transition:none}
+  .pet.open .pet__body{animation:none}}
+.pet.open .pet__main{padding-left:1rem}
+.pet.open .pet__toggle{padding-left:.5rem}
+.pet.open .pet__ext{margin:0 .5rem 0 .25rem}
 .pet__body h4{margin:.75rem 0 .25rem;font-size:.75rem;letter-spacing:.05em;
   text-transform:uppercase;color:var(--muted)}
 .pet__body p{margin:0 0 .375rem}
@@ -328,9 +413,12 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
   border-radius:.75rem;padding:.75rem .875rem;font-size:.8125rem;
   line-height:1.45}
 
-.chip{background:var(--accent-soft);color:var(--accent);border-radius:999px;
-  padding:.1875rem .6875rem;font-size:.75rem;font-weight:650;cursor:pointer}
-.chip:active{background:var(--accent-soft);filter:brightness(.96)}
+/* Hier stand eine dritte, ungenutzte .chip-Regel. Es gibt genau ZWEI
+   Chip-Familien, und sie sind bewusst verschieden: die kleinen im Bedienfeld
+   (.chiprow) und die großen im Onboarding (.wiz__chips). Beide hießen einfach
+   „.chip", die spätere Regel gewann – deshalb sah der aktive Filter-Chip aus
+   wie ein Wizard-Chip (dünner Umriss statt gefüllt). Beide sind jetzt an ihren
+   Container gebunden; eine neue Chip-Art bitte ebenso scopen. */
 
 /* Schlagwörter (Tags) – im ausgeklappten Bereich; Klick verlinkt/filtert. */
 .pet__tags{margin-top:1rem}
@@ -344,6 +432,68 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
   line-height:1.2;cursor:pointer}
 .tag::before{content:"#";opacity:.5;margin-right:.0625rem}
 .tag:active{background:var(--accent-soft)}
+
+/* ---- Bedienfeld unter der Suche: Sortierung + Kategorien ----
+   Zugeklappt, sonst schöbe es die Liste weit nach unten. <details> statt
+   eigener Schalterlogik – dasselbe Muster wie .descacc in der Karte.
+   Ist etwas eingestellt, sagt das die Zeile im zugeklappten Zustand. */
+.ptools{margin:0 0 .625rem}
+.ptools__sum{cursor:pointer;list-style:none;display:flex;align-items:center;
+  gap:.625rem;background:var(--surface);border:.0625rem solid var(--line);
+  border-radius:.875rem;padding:.8125rem 1rem;font-size:.875rem;font-weight:700;
+  color:var(--ink)}
+.ptools__sum::-webkit-details-marker{display:none}
+.ptools__lbl{display:flex;align-items:center;gap:.5625rem;flex:none}
+.ptools__lbl i{color:var(--accent)}
+.ptools__state{flex:1;min-width:0;text-align:right;font-weight:650;
+  font-size:.8125rem;color:var(--accent);overflow:hidden;text-overflow:ellipsis;
+  white-space:nowrap}
+.ptools__chev{flex:none;font-size:.75rem;color:var(--muted);
+  transition:transform .2s}
+.ptools[open] .ptools__chev{transform:rotate(180deg)}
+.ptools[open] .ptools__sum{border-radius:.875rem .875rem 0 0;border-bottom:0}
+.ptools.is-active .ptools__sum{border-color:var(--accent)}
+.ptools__body{background:var(--surface);border:.0625rem solid var(--line);
+  border-top:0;border-radius:0 0 .875rem .875rem;padding:.875rem 1rem 1rem}
+.ptools[open].is-active .ptools__body{border-color:var(--accent)}
+.ptools__grp+.ptools__grp{margin-top:1rem;padding-top:.875rem;
+  border-top:.0625rem solid var(--line)}
+.ptools__h{display:flex;align-items:center;gap:.4375rem;font-size:.75rem;
+  letter-spacing:.05em;text-transform:uppercase;color:var(--muted);
+  margin-bottom:.5625rem}
+/* Steht bewusst da, wo die Sortierung gewählt wird: bei WeAct fehlt jedes
+   Startdatum, bei Europarl jede Unterschriftenzahl. */
+.ptools__note{display:flex;gap:.5rem;margin-top:.75rem;background:var(--bg);
+  border-radius:.625rem;padding:.5rem .625rem;font-size:.75rem;line-height:1.45;
+  color:var(--muted)}
+.ptools__note i{flex:none;margin-top:.125rem;font-size:.6875rem;opacity:.75}
+.ptools__notetext span{display:block}
+.ptools__notetext span+span{margin-top:.1875rem}
+.chiprow{display:flex;flex-wrap:wrap;gap:.4375rem}
+.chiprow .chip{display:inline-flex;align-items:center;gap:.375rem;
+  border:.0625rem solid var(--line);background:var(--bg);color:var(--ink);
+  border-radius:999px;padding:.375rem .6875rem .375rem .625rem;font:inherit;
+  font-size:.8125rem;font-weight:650;line-height:1.2;cursor:pointer;
+  transition:background .15s,border-color .15s,color .15s}
+.chiprow .chip i{font-size:.6875rem;color:var(--muted)}
+.chiprow .chip:active{background:var(--accent-soft);border-color:var(--accent)}
+.chiprow .chip.on{background:var(--accent);border-color:var(--accent);
+  color:var(--on-accent)}
+.chiprow .chip.on i{color:inherit;opacity:.75}
+/* Die Zahl ist eine Angabe, keine Beschriftung – eigene Fläche, damit sie sich
+   vom Kategorienamen löst. Auf dem aktiven Chip liegt sie auf der Akzentfläche
+   und braucht deshalb eine eigene, durchscheinende Variante. */
+/* NICHT var(--muted) auf var(--line): 11 px fett ist Kleintext, und dieses
+   Paar bringt es hell nur auf 4,46:1. Stattdessen --ink mit Deckkraft – das
+   gleiche Mittel wie beim Beendet-Abzeichen, theme-sicher ohne neues Token
+   (gemessen 5,66 hell / 6,20 dunkel). */
+.chiprow .chip__n{margin-left:.125rem;background:var(--line);color:var(--ink);
+  opacity:.72;border-radius:999px;padding:.0625rem .375rem;font-size:.6875rem;
+  font-weight:700;line-height:1.4}
+/* Auf der gefüllten Fläche trägt schon der Chip die Trennung – eine zweite
+   Fläche darauf drückte den Kontrast unter AA (weiß auf weiß-über-Akzent:
+   4,46). Nur leicht zurückgenommene Schrift, gemessen 5,29 hell / 5,12 dunkel. */
+.chiprow .chip.on .chip__n{background:none;color:inherit;opacity:.78}
 
 /* Footer: gleiche / ähnliche Petitionen (Titel + Plattform). */
 .pet__similar{margin-top:1.125rem;border-top:.0625rem solid var(--line);
@@ -563,6 +713,11 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
 .plogo--fallback{background:var(--brand,var(--accent));color:var(--on-brand);
   border-radius:.5rem;font-weight:800;font-size:.875rem}
 .plat .plogo,.opt .plogo{width:2.375rem;height:2.375rem}
+/* Echtes Plattform-Logo (platforms.js → logoFile). Standardmäßig AUS: in der
+   Zeilenansicht („klassisch" und „Band") stünde eine 6:1 breite Wortmarke
+   neben dem Namen und würde ihn zusammendrücken. Sichtbar wird es allein im
+   Bento-Raster, wo es das Monogramm ersetzt — siehe layouts.css. */
+.plogo--mark{display:none}
 .plat__tag{display:block;color:var(--muted);font-size:.75rem;
   margin-top:.1875rem;line-height:1.4}
 
@@ -608,15 +763,15 @@ body.wizard-open{overflow:hidden}
   line-height:1.6}
 .wiz__hint{margin:1rem 0 0;color:var(--muted);font-size:.75rem;text-align:center}
 .wiz__chips{display:flex;flex-wrap:wrap;gap:.625rem}
-.chip{display:inline-flex;align-items:center;gap:.5rem;
+.wiz__chips .chip{display:inline-flex;align-items:center;gap:.5rem;
   border:.125rem solid var(--line);background:var(--surface);border-radius:999px;
   padding:.6875rem 1.125rem;font:inherit;font-size:.9375rem;font-weight:700;
   color:var(--ink);cursor:pointer}
-.chip.on{border-color:var(--accent);background:var(--accent-soft);
+.wiz__chips .chip.on{border-color:var(--accent);background:var(--accent-soft);
   color:var(--accent)}
-.chip__n{background:var(--bg);border-radius:999px;padding:.0625rem .5rem;
-  font-size:.75rem;font-weight:700;color:var(--muted)}
-.chip.on .chip__n{background:var(--surface);color:var(--accent)}
+.wiz__chips .chip__n{background:var(--bg);border-radius:999px;
+  padding:.0625rem .5rem;font-size:.75rem;font-weight:700;color:var(--muted)}
+.wiz__chips .chip.on .chip__n{background:var(--surface);color:var(--accent)}
 .wiz__plats{display:flex;flex-direction:column;gap:.625rem}
 /* Ausgewählte Plattform: Markenkante + Markentönung wie in der Liste. */
 .wplat{display:flex;align-items:center;gap:.875rem;width:100%;text-align:left;
@@ -664,6 +819,10 @@ body.wizard-open{overflow:hidden}
 .srow--done .srow__ic,.srow--done .srow__go{color:var(--online)}
 .srow__note{color:var(--muted);font-size:.75rem;line-height:1.55;
   margin:0 .25rem .75rem}
+/* Zwischenüberschrift innerhalb eines Abschnitts – trennt in „Darstellung"
+   die beiden Schalterleisten (Farbdesign / Layout) voneinander. */
+.srow__lbl{font-size:.8125rem;font-weight:700;color:var(--ink);
+  margin:.875rem .25rem .375rem}
 .seg{display:flex;gap:.25rem;background:var(--surface);
   border:.0625rem solid var(--line);border-radius:1.125rem;padding:.25rem;
   margin-bottom:.5rem}
@@ -798,9 +957,41 @@ body.wizard-open{overflow:hidden}
   padding:.4375rem .8125rem;font-size:.75rem;font-weight:650;color:var(--accent);
   text-decoration:none}
 .pabout__link i{font-size:.625rem;opacity:.7}
-.pabout__open{margin-top:.875rem;padding:.75rem .875rem;border-radius:.75rem;
+.pabout__open{padding:.75rem .875rem;border-radius:.75rem;
   background:var(--surface);font-size:.75rem;line-height:1.55;color:var(--muted)}
 .pabout__open b{color:var(--ink)}
+
+/* Echtes Plattform-Logo im Info-Bereich. Hier steht es auf hellem Grund,
+   deshalb in der Markenfarbe – auf der Bento-Kachel dagegen in der Textfarbe
+   (layouts.css). Beides über dieselbe Maske, nur mit anderem Untergrund. */
+.pabout__logo{display:block;margin:0 0 .875rem;
+  width:calc(var(--logo-ar,4) * 1.625rem);height:1.625rem;max-width:100%;
+  background-color:var(--brand,var(--accent));
+  -webkit-mask-image:var(--logo);mask-image:var(--logo);
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  -webkit-mask-position:left center;mask-position:left center;
+  -webkit-mask-size:contain;mask-size:contain}
+
+/* „Für Nerds" – hieß früher „Datenlage" und stand offen im Info-Bereich.
+   Jetzt eingeklappt, weil es eine Randnotiz für wenige ist. */
+.nerd{margin-top:.875rem}
+.nerd__sum{cursor:pointer;list-style:none;display:flex;align-items:center;
+  justify-content:space-between;gap:.625rem;background:var(--bg);
+  border:.0625rem solid var(--line);border-radius:.75rem;
+  padding:.625rem .875rem;font-size:.8125rem;font-weight:700;color:var(--ink)}
+.nerd__sum::-webkit-details-marker{display:none}
+.nerd__sum i:first-child{color:var(--muted);margin-right:.375rem}
+.nerd__chev{font-size:.6875rem;color:var(--muted);transition:transform .2s}
+.nerd[open] .nerd__sum{border-radius:.75rem .75rem 0 0;border-bottom:0}
+.nerd[open] .nerd__chev{transform:rotate(180deg)}
+.nerd__body{border:.0625rem solid var(--line);border-top:0;
+  border-radius:0 0 .75rem .75rem;padding:.875rem}
+.nerd__row{font-size:.75rem;line-height:1.55;color:var(--muted);
+  margin-top:.625rem;word-break:break-word}
+.nerd__row:first-child{margin-top:0}
+.nerd__row b{display:block;color:var(--ink);font-weight:700;
+  margin-bottom:.125rem}
+.nerd__row a{color:var(--accent)}
 
 @media (prefers-reduced-motion:reduce){
   *{transition:none!important;animation:none!important}

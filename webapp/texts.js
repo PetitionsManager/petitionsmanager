@@ -107,7 +107,15 @@ window.PM_TEXTS = {
       reset: "Zurücksetzen"
     },
     darkMode: "Dunkles Design",
-    darkModeHint: "Schaltet die App in den Dunkel-Modus.",
+    darkModeHint: "Wähle helles oder dunkles Design. „Automatisch“ folgt der Einstellung deines Geräts.",
+    themeLight: "Hell",
+    themeDark: "Dunkel",
+    themeAuto: "Automatisch",
+    layoutLabel: "Layout",
+    layoutClassic: "Klassisch",
+    layoutBand: "Farbband",
+    layoutMag: "Magazin",
+    layoutHint: "Ändert nur das Aussehen, nicht die Inhalte. „Klassisch“ ist die bisherige Ansicht. „Farbband“ setzt jede Plattform als durchgehendes Farbband und zeigt Petitionen als schlichte Textliste ohne Vorschaubilder. „Magazin“ ordnet die Plattformen als Kachelraster in ihren echten Markenfarben an und stellt das Bild der Petition groß nach oben.",
     autoDark: "Systemeinstellung folgen",
     refresh: "Daten aktualisieren",
     refreshHint: "Lädt die aktuellen Petitionsdaten neu von der Quelle.",
@@ -176,7 +184,7 @@ window.PM_TEXTS = {
     },
     help: {
       q: "Möchtest du helfen?",
-      a: "Hilf mit — mit Feedback, Ideen, Übersetzungen oder einer Spende.",
+      a: "Hilf mit — mit Feedback, Ideen, Übersetzungen oder finanzieller Unterstützung über Liberapay.",
       btn: "Mithelfen"
     },
     share: {

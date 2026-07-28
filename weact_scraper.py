@@ -31,7 +31,7 @@ from __future__ import annotations
 import json
 import re
 from pathlib import Path
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlsplit
 
 from bs4 import BeautifulSoup
 
@@ -112,6 +112,65 @@ def load_known_categories() -> dict[str, str]:
 # ----------------------------------------------------------------------------
 # Entdeckung der Petitionen
 # ----------------------------------------------------------------------------
+# Leerzeichen, die str.strip() NICHT kennt: geschütztes Leerzeichen, Braille-
+# Blank (U+2800, von Starter*innen zum Auffüllen benutzt: "AlgorithmWatch ⠀"),
+# schmales Leerzeichen und Zero-Width-Space.
+BLANKS = " \t\r\n   ​⠀"
+
+
+def _card_root(el):
+    """Die <cmpr-card> zum gefundenen Link. Der Link IST auf WeAct meist schon
+    die Karte (href steckt im Custom Element); die Elternsuche ist nur die
+    Rückfallebene für abweichende Layouts."""
+    if el.name == "cmpr-card":
+        return el
+    return (el.find_parent("cmpr-card")
+            or el.find_parent(["article", "li", "div"]) or el)
+
+
+def _card_started_by(card) -> str | None:
+    """Name der Starter*in aus <cmpr-card-meta>.
+
+    Vorher lief hier eine Regex über den zusammengeflossenen Kartentext, deren
+    Abbruchbedingung `\\s{2,}` NIE greifen konnte: `get_text(" ")` macht jede
+    Elementgrenze zu EINEM Leerzeichen. Der „Name" lief damit bis zum
+    Kartenende und wurde stumpf bei 200 Zeichen gekappt — bei 1636 von 1865
+    Datensätzen stand so Titel + halber Petitionstext im Feld. Die Karte
+    zeichnet den Namen aber sauber aus:
+
+        <cmpr-card-meta>Gestartet von <strong>NAME</strong></cmpr-card-meta>"""
+    meta = card.find("cmpr-card-meta")
+    if meta is None:
+        # Rückfallebene für abweichende Layouts: das Element, das die Zeile
+        # „Gestartet von" trägt (auf den Listen ist es immer cmpr-card-meta).
+        knoten = card.find(string=re.compile(r"Gestartet von", re.I))
+        meta = knoten.parent if knoten else None
+    if meta is None:
+        return None
+    stark = meta.find("strong")
+    if stark:
+        name = stark.get_text(" ", strip=True)
+    else:      # Rückfallebene: eigener Text der Meta-Zeile ohne das Präfix
+        name = re.sub(r"^\s*Gestartet von\s*", "",
+                      meta.get_text(" ", strip=True), flags=re.I)
+    return name.strip(BLANKS)[:200] or None
+
+
+def _card_signatures(card) -> int | None:
+    """Unterschriftenzahl der Karte. Zuerst das ausgezeichnete
+    `[data-signatures]`, dann der Footer, zuletzt die ganze Karte — die
+    Startseite rendert die Karten OHNE `data-signatures`, andere Layouts
+    ganz ohne Footer."""
+    for quelle in (card.select_one("[data-signatures]"),
+                   card.find("cmpr-card-footer"), card):
+        if quelle is None:
+            continue
+        m = SIG_RE.search(quelle.get_text(" ", strip=True))
+        if m:
+            return int(re.sub(r"\D", "", m.group(1)) or 0)
+    return None
+
+
 def discover_slugs(fetcher: core.Fetcher, category_slugs: list[str]) -> dict[str, dict]:
     """{slug: {"started_by":…, "signatures":…}} aus allen Listen. Listen-
     Karten enthalten Starter*in und Unterschriftenzahl – Felder, die auf der
@@ -138,17 +197,9 @@ def discover_slugs(fetcher: core.Fetcher, category_slugs: list[str]) -> dict[str
             slug = m.group(1)
             if slug in found or slug in NON_PETITION_SLUGS:
                 continue
-            card = a if a.name != "a" else (a.find_parent(["article", "li", "div"]) or a)
-            card_text = card.get_text(" ", strip=True)
-            started_by = None
-            m_by = re.search(r"Gestartet von\s+(.+?)(?:\s{2,}|$)", card_text)
-            if m_by:
-                started_by = m_by.group(1).strip()[:200]
-            signatures = None
-            m_sig = SIG_RE.search(card_text)
-            if m_sig:
-                signatures = int(re.sub(r"\D", "", m_sig.group(1)) or 0)
-            found[slug] = {"started_by": started_by, "signatures": signatures}
+            card = _card_root(a)
+            found[slug] = {"started_by": _card_started_by(card),
+                           "signatures": _card_signatures(card)}
         return len(found) - before
 
     # (a) Sitemap – sauberster Weg, falls vorhanden.
@@ -327,9 +378,13 @@ def parse_detail(html: str, url: str) -> dict:
         or (soup.h1.get_text(strip=True) if soup.h1 else None))
     rec["summary"] = _meta(soup, "og:description") or _meta(soup, "description")
     rec["image_url"] = _meta(soup, "og:image")
+    # Nur eine echte Petitions-URL darf die angefragte ersetzen. Sonst schrieb
+    # die Weiterleitung einer entfernten Petition die Startseiten-URL in den
+    # Datensatz – und zwei entfernte Petitionen trugen anschließend dieselbe.
     canon = soup.find("link", rel="canonical")
-    rec["url"] = (canon["href"].strip() if canon and canon.get("href")
-                  else _meta(soup, "og:url") or url)
+    kandidat = (canon["href"].strip() if canon and canon.get("href")
+                else _meta(soup, "og:url"))
+    rec["url"] = kandidat if ist_petitionsseite(kandidat) else url
 
     # Adressat ("An: …")  # >>> SELEKTOR
     recipient = None
@@ -417,8 +472,62 @@ def parse_json_variant(text: str) -> dict:
     return out
 
 
-def scrape_petition(fetcher: core.Fetcher, slug: str) -> tuple[str, dict | None]:
-    """(status, record) – status: online | offline | error."""
+WEACT_HOST = urlsplit(BASE_URL).netloc
+# Das "Aktion"-Template liegt auf einem eigenen Host und hat keinen
+# Petitions-Slug im Pfad – trotzdem sind das echte Petitionen.
+AKTION_HOST = "aktion.campact.de"
+AKTION_PATH_RE = re.compile(r"^/weact/[a-z0-9][a-z0-9\-]*", re.I)
+
+
+def ist_petitionsseite(url: str | None) -> bool:
+    """Zeigt die URL auf eine Petition – oder ist die Petition weg?
+
+    WeAct leitet entfernte Petitionen auf die Startseite um (weact.campact.de/
+    bzw. www.campact.de/). Ohne diese Prüfung übernahm der Scraper Titel, Bild
+    und URL DER STARTSEITE in den Datensatz und ließ ihn auf „online": in der
+    App standen dadurch Phantom-Einträge namens „WeAct – Die Petitionsplattform
+    von Campact", mehrere davon mit derselben URL."""
+    if not url:
+        return False
+    teile = urlsplit(url)
+    if teile.netloc in ("", WEACT_HOST):
+        return bool(PETITION_HREF_RE.search(teile.path))
+    if teile.netloc == AKTION_HOST:
+        return bool(AKTION_PATH_RE.search(teile.path))
+    return False
+
+
+def canonical_slug(resp, rec: dict, requested: str) -> str:
+    """Slug, unter dem der Datensatz gespeichert werden muss.
+
+    WeAct benennt Slugs gelegentlich um und leitet den alten Pfad per 302 auf
+    den neuen um (/petitions/giftexporte-stoppen → …-4). Ohne diese Auswertung
+    landet die Petition zweimal im Store: einmal unter dem alten Slug – dort
+    aber mit der kanonischen Ziel-URL im Datensatz, weil parse_detail den
+    canonical-Link der ausgelieferten Seite übernimmt – und einmal unter dem
+    neuen. In der App steht sie dann doppelt.
+
+    Umgeschrieben wird nur bei weact.campact.de/petitions/<slug>. Die
+    Umleitungen auf aktion.campact.de/weact/<name>/teilnehmen führen auf ein
+    anderes Template ohne Petitions-Slug und bleiben unter ihrem Ursprungs-
+    Slug stehen."""
+    for cand in (getattr(resp, "url", None), (rec or {}).get("url")):
+        if not cand:
+            continue
+        teile = urlsplit(cand)
+        if teile.netloc and teile.netloc != WEACT_HOST:
+            continue
+        m = PETITION_HREF_RE.search(teile.path)
+        if m and m.group(1) not in NON_PETITION_SLUGS:
+            return m.group(1)
+    return requested
+
+
+def scrape_petition(fetcher: core.Fetcher,
+                    slug: str) -> tuple[str, dict | None, str]:
+    """(status, record, slug) – status: online | offline | error.
+    Der zurückgegebene Slug kann vom angefragten abweichen, wenn WeAct auf
+    einen umbenannten Pfad umleitet (siehe canonical_slug)."""
     url = f"{BASE_URL}/petitions/{slug}"
     rec: dict = {}
 
@@ -429,16 +538,21 @@ def scrape_petition(fetcher: core.Fetcher, slug: str) -> tuple[str, dict | None]
 
     resp = fetcher.get(url)
     if resp is None:
-        return "error", None
+        return "error", None, slug
     if resp.status_code in (404, 410):
-        return "offline", None
+        return "offline", {"url": url}, slug
     if not resp.ok:
-        return "error", None
+        return "error", None, slug
+    if not ist_petitionsseite(getattr(resp, "url", None) or url):
+        # Weiterleitung auf die Startseite = Petition entfernt. Die eigene
+        # URL wird mitgegeben, damit ein früher verfälschter Datensatz sie
+        # zurückbekommt (core.upsert korrigiert sie auch im Offline-Zweig).
+        return "offline", {"url": url}, slug
 
     rec.update({k: v for k, v in parse_detail(resp.text, url).items()
                 if v is not None or k not in rec})
     rec.setdefault("petition_id", None)
-    return "online", rec
+    return "online", rec, canonical_slug(resp, rec, slug)
 
 
 # ----------------------------------------------------------------------------
@@ -471,6 +585,24 @@ def run(args) -> None:
                         extra_meta={"categories": categories, **extra},
                         quiet=quiet)
 
+    # Umleitungen dieses Laufs: alter Slug → kanonischer Slug. Bewusst nur im
+    # Arbeitsspeicher: WeAct kann einen frei gewordenen Slug später neu
+    # vergeben, eine dauerhafte Tabelle würde die Petition dann falsch
+    # zuordnen. Der Preis ist ein zusätzlicher Abruf je umbenannter Petition.
+    alias: dict[str, str] = {}
+
+    def store_result(requested: str, key: str, rec: dict | None,
+                     hint: dict, status: str) -> None:
+        """Schreibt das Ergebnis unter dem kanonischen Slug weg und führt einen
+        etwaigen Altbestand unter dem angefragten Slug mit ihm zusammen."""
+        if key != requested:
+            alias[requested] = key
+            if core.merge_records(store, requested, key):
+                log(f"  UMBENANNT: {requested} → {key} (Weiterleitung) – "
+                    f"Datensätze zusammengeführt.")
+        core.upsert(store, key, rec or {}, hint, status, ts,
+                    f"{BASE_URL}/petitions/{key}")
+
     # Bekannte Petitionen werden VOR jeder Neuentdeckung geprüft.
     known_slugs = list(store.keys())
     if known_slugs and not args.no_recheck and not args.limit:
@@ -479,13 +611,14 @@ def run(args) -> None:
              message="Prüfe bekannte Petitionen …")
         for k, slug in enumerate(known_slugs, 1):
             prog(current=k, total=len(known_slugs), message=slug)
+            if slug not in store:      # zuvor in diesem Lauf zusammengeführt
+                continue
             if core.skip_recent(store.get(slug), args):
                 continue
-            status, rec = scrape_petition(fetcher, slug)
+            status, rec, key = scrape_petition(fetcher, slug)
             if status == "error":
                 continue
-            core.upsert(store, slug, rec or {}, {}, status, ts,
-                        f"{BASE_URL}/petitions/{slug}")
+            store_result(slug, key, rec, {}, status)
             save()
             if status == "offline":
                 log(f"  OFFLINE: {slug}")
@@ -495,11 +628,24 @@ def run(args) -> None:
     log("Sammle Petitions-Slugs aus Listen …")
     prog(phase="discover", current=0, total=0, message="Sammle Petitionen …")
     discovered = discover_slugs(fetcher, category_slugs)
-    known_set = set(known_slugs)
+
+    # Listen verlinken umbenannte Petitionen oft noch unter dem alten Slug.
+    # Schon aufgelöste Umleitungen werden deshalb hier übersetzt – sonst legte
+    # der Listen-Upsert den eben zusammengeführten Slug sofort wieder an.
+    hints: dict[str, dict] = {}
+    for slug, hint in discovered.items():
+        key = alias.get(slug, slug)
+        # Sind alter und neuer Slug gelistet, zählt die Karte des kanonischen:
+        # die alte Karte kann eine abweichende Unterschriftenzahl zeigen.
+        if key in hints and slug != key:
+            continue
+        hints[key] = hint
+
+    known_set = set(store)     # nach dem Recheck: die kanonischen Schlüssel
     # Bereits geprüfte Petitionen nicht nochmal laden – nur Listen-Infos
     # (Unterschriften/Starter*in) ohne Zusatz-Request übernehmen.
-    new_slugs = [s for s in discovered if s not in known_set]
-    for slug, hint in discovered.items():
+    new_slugs = [s for s in hints if s not in known_set]
+    for slug, hint in hints.items():
         if slug in known_set:
             core.upsert(store, slug, {}, hint, "online", ts,
                         f"{BASE_URL}/petitions/{slug}")
@@ -512,12 +658,13 @@ def run(args) -> None:
     for i, slug in enumerate(new_slugs, 1):
         log(f"({i}/{len(new_slugs)}) {slug}")
         prog(current=i, total=len(new_slugs), message=slug)
-        status, rec = scrape_petition(fetcher, slug)
+        status, rec, key = scrape_petition(fetcher, slug)
         if status == "error":
             log("  übersprungen (Fehler) – Datensatz bleibt unverändert.")
             continue
-        core.upsert(store, slug, rec or {}, discovered.get(slug, {}), status, ts,
-                    f"{BASE_URL}/petitions/{slug}")
+        # Bei einer Weiterleitung gilt die Karte des Ziel-Slugs, falls gelistet.
+        store_result(slug, key, rec, hints.get(key) or hints.get(slug) or {},
+                     status)
         save()
 
     new_petitions = [s for s, r in store.items() if r.get("first_seen") == ts]
@@ -531,7 +678,7 @@ def run(args) -> None:
     prog(message="Speichere & baue HTML …")
     save(quiet=False, new_petitions_last_run=new_petitions,
          new_categories_last_run=new_categories,
-         available=len(discovered))
+         available=len(hints))      # ohne doppelt gelistete Alt-Slugs
     core.write_list_html(PLATFORM)
     log("Fertig (WeAct).")
 

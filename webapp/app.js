@@ -26,6 +26,7 @@
     openGroup: null,      // aktuell offene Listen-Gruppe (exklusiv); Key/"__fav"
     catFilter: null,      // aktiver Kategorie-Filter (Plattform-Detail)
     tagFilter: null,      // aktiver Schlagwort-Filter (Plattform-Detail)
+    sort: null,           // Sortierung der Liste: null|"neu"|"alt"|"viel"|"wenig"
     mainQuery: "",        // letzte Volltextsuche auf der Hauptseite
     cross: null,          // plattformübergreifende Suche {type,value,fromPlatform}
     openPetitionUrl: null,// nach Navigation diese Petition automatisch aufklappen
@@ -39,7 +40,11 @@
   };
 
   var content = document.getElementById("content");
-  var titleEl = document.getElementById("topbar-title");
+  // Seitentitel. Sitzt seit dem Logo-Umbau nicht mehr in der Kopfleiste,
+  // sondern als Zeile über dem Inhalt (index.html → .pagekick). NICHT mit der
+  // Klasse .page-title verwechseln — das sind die kleinen Etiketten innerhalb
+  // einer Seite („DARSTELLUNG"), deshalb heißt das hier bewusst anders.
+  var titleEl = document.getElementById("pagekick");
 
   // Sprache → Anzeigename + Flagge (für Tag & Gruppierung in der Liste).
   var LANG = {
@@ -89,6 +94,34 @@
   }
   function platColor(key) { return platInfo(key).color || null; }
 
+  /* Schriftfarbe auf einer Vollton-Markenfläche (Bento-Kacheln im Layout
+     „Magazin"). Pauschal Weiß geht nicht auf: foodwatch-Orange bringt es
+     unter weißer Schrift nur auf 3,4:1, Bundestagsblau unter dunkler Schrift
+     auf 1,5:1. Deshalb wird je Farbe gerechnet – relative Leuchtdichte nach
+     WCAG 2.1 – und die Seite mit dem größeren Abstand gewählt.
+     Das Ergebnis hängt allein an der Markenfarbe, nicht am Design: eine
+     orangene Kachel bleibt hell, auch wenn ringsum alles dunkel ist. Es
+     braucht dafür deshalb KEINEN Gegenpart in theme.css. */
+  var INK_DARK = "#1e1c18";                   /* = --ink im hellen Design */
+  function relLum(hex) {
+    var m = /^#([0-9a-f]{6})$/i.exec(String(hex || ""));
+    if (!m) return null;
+    var n = parseInt(m[1], 16), lum = 0,
+        shift = [16, 8, 0], weight = [.2126, .7152, .0722];
+    for (var i = 0; i < 3; i++) {
+      var c = ((n >> shift[i]) & 255) / 255;
+      c = c <= .03928 ? c / 12.92 : Math.pow((c + .055) / 1.055, 2.4);
+      lum += weight[i] * c;
+    }
+    return lum;
+  }
+  function ratio(a, b) { return (Math.max(a, b) + .05) / (Math.min(a, b) + .05); }
+  function platInk(hex) {
+    var l = relLum(hex);
+    if (l == null) return null;              /* Weiß hat die Leuchtdichte 1 */
+    return ratio(l, 1) >= ratio(l, relLum(INK_DARK)) ? "#ffffff" : INK_DARK;
+  }
+
   // ---- Persönliche Einstellungen ---------------------------------------------
   // Ein einziger localStorage-Schlüssel für alles, was die Person selbst
   // einstellt (Darstellung, Benachrichtigungen, Name/Bild, Wizard-Status).
@@ -96,6 +129,7 @@
   function defaultPrefs() {
     return {
       theme: "auto",              // "light" | "dark" | "auto"
+      layout: "klassisch",        // "klassisch" | "band" | "magazin" (layouts.css)
       wizardDone: false,
       name: "",
       photo: null,                // Data-URL des Profilbilds
@@ -110,6 +144,7 @@
         var o = JSON.parse(raw);
         if (o && typeof o === "object") {
           if (o.theme) p.theme = o.theme;
+          if (o.layout) p.layout = o.layout;
           if (o.wizardDone) p.wizardDone = true;
           if (typeof o.name === "string") p.name = o.name;
           if (typeof o.photo === "string") p.photo = o.photo;
@@ -142,6 +177,16 @@
       metas[0].removeAttribute("media");
       metas[0].setAttribute("content", dark ? "#191714" : "#f7f4ec");
     }
+  }
+
+  // Layout anwenden. Zweite Ebene neben dem Hell/Dunkel-Design und nach
+  // demselben Muster gebaut: das CSS in layouts.css hängt an
+  // <html data-layout="…">, die Farben bleiben in beiden Fällen dieselben
+  // Variablen. „klassisch" setzt bewusst KEINE Regeln – dann greift allein
+  // style.css, und das ursprüngliche Erscheinungsbild bleibt unangetastet.
+  function applyLayout() {
+    var l = (state.prefs && state.prefs.layout) || "klassisch";
+    document.documentElement.setAttribute("data-layout", l);
   }
 
   // ---- Hilfen ----------------------------------------------------------------
@@ -341,8 +386,12 @@
   }
 
   // Unterstützungs-Bereich (Hauptseite unten): Intro + vier Akkordions.
-  var SUPPORT_MAIL = "kontakt@petitionsmanager.app";   // Platzhalter-Adresse
-  var SUPPORT_DONATE = "https://www.paypal.com/donate"; // Platzhalter-Spendenlink
+  /* Vom Nutzer am 2026-07-28 bestätigt: Schreibweise mit „t" wie der App-Name.
+     Die Domain war zu dem Zeitpunkt noch nicht registriert (RDAP/DNS geprüft) –
+     vor der Veröffentlichung muss das Postfach also wirklich existieren. */
+  var SUPPORT_MAIL = "mail@petitionsmanager.app";
+  var GITHUB_URL = "https://github.com/PetitionsManager/petitionsmanager";
+  var SUPPORT_DONATE = "https://liberapay.com/Timeras/donate";
   function supportSection() {
     var sec = el('<section class="support">' +
       '<div class="support__title"><i class="fa-solid fa-hand-holding-heart">' +
@@ -363,7 +412,7 @@
        { mailto: "Fehlende Petition" }],
       ["fa-hands-helping", "Möchtest du helfen?",
        "PetitionsManager ist ein freies Projekt. Hilf mit – mit Feedback, " +
-       "Ideen, Übersetzungen oder einer Spende.",
+       "Ideen, Übersetzungen oder finanzieller Unterstützung über Liberapay.",
        "Mithelfen",
        { mailto: "Ich möchte unterstützen", donate: true }],
       ["fa-share-nodes", "Möchtest du die App teilen?",
@@ -389,7 +438,7 @@
       if (opt.donate) {
         btns.appendChild(el('<a class="support__btn support__btn--donate" href="' +
           esc(SUPPORT_DONATE) + '" target="_blank" rel="noopener">' +
-          '<i class="fa-solid fa-heart"></i> Spenden</a>'));
+          '<i class="fa-solid fa-heart"></i> Finanziell unterstützen</a>'));
       }
       if (opt.share) {
         var sBtn = el('<button class="support__btn" type="button">' +
@@ -450,24 +499,57 @@
       acc.classList.toggle("open", nowOpen);
       state.openGroup = nowOpen ? openKey : null;
     });
-    var body = el('<div class="acc-body"></div>');
-    plats.forEach(function (p) { body.appendChild(platCard(p)); });
+    // Zusatzklasse, damit layouts.css genau diese Liste als Kachelraster
+    // setzen kann. Ohne sie träfe eine Regel auf .acc-body auch die
+    // Schalterlisten in den Einstellungen.
+    var body = el('<div class="acc-body acc-body--plats"></div>');
+    // Größenrang für das Bento-Raster im Layout „Magazin": alle Kacheln sind
+    // gleich groß, nur die größte Plattform der Gruppe belegt zwei Spalten
+    // und zwei Zeilen, die zweitgrößte zwei Spalten. Der Rang steckt in einer
+    // Klasse, NICHT in der Reihenfolge – die Liste bleibt alphabetisch. In
+    // den anderen beiden Layouts hängt an den Klassen keine Regel.
+    var rank = plats.slice().sort(function (a, b) {
+      return (b.online || 0) - (a.online || 0);
+    });
+    // Ein oder zwei Plattformen ergeben kein Raster: dann laufen alle über die
+    // volle Breite, sonst stünde eine halbe Kachel im Leeren (Favoriten!).
+    var xlKey   = plats.length > 2 ? rank[0].key : null;
+    var wideKey = plats.length > 3 ? rank[1].key : null;
+    plats.forEach(function (p) {
+      body.appendChild(platCard(p,
+        plats.length <= 2      ? "plat--wide"
+        : p.key === xlKey      ? "plat--xl"
+        : p.key === wideKey    ? "plat--wide" : ""));
+    });
     acc.appendChild(head); acc.appendChild(body);
     groupEls.push({ key: openKey, el: acc });
     return acc;
   }
 
-  function platCard(p) {
+  function platCard(p, size) {
     var info = langInfo(p.language || "de");
     var newN = p["new"] || 0;
     var newLabel = newN > 0
       ? '<span class="plat__new">+' + nf.format(newN) + " neu</span>" : "";
     var brand = platColor(p.key);
+    // --on-brand gilt ab hier für die ganze Kachel und alles darin.
+    var ink = brand ? platInk(brand) : null;
     var tagline = platInfo(p.key).tagline;
+    // Echtes Plattform-Logo (platforms.js → logoFile). Liegt als CSS-Maske vor
+    // der Textfarbe der Kachel, ist also immer einfarbig im richtigen Ton –
+    // ein <img> brächte seine eigene Farbe mit. Standardmäßig ausgeblendet;
+    // nur das Bento-Raster zeigt es (layouts.css). Für elf Plattformen gibt es
+    // acht Dateien; wo eine fehlt, bleibt es beim Monogramm.
+    var lf = platInfo(p.key).logoFile;
+    var mark = lf
+      ? '<span class="plogo--mark" aria-hidden="true" style="--logo:url(' +
+        esc(lf) + ');--logo-ar:' + (platInfo(p.key).logoAR || 4) + '"></span>'
+      : "";
     var card = el(
-      '<button class="plat"' +
-        (brand ? ' style="--brand:' + esc(brand) + '"' : "") + ">" +
-        platLogo(p.key, p.name) +
+      '<button class="plat' + (size ? " " + size : "") + '"' +
+        (brand ? ' style="--brand:' + esc(brand) +
+                 (ink ? ";--on-brand:" + ink : "") + '"' : "") + ">" +
+        platLogo(p.key, p.name) + mark +
         '<span class="plat__body">' +
           '<span class="plat__name">' + esc(p.name) +
             '<span class="flag">' + info.flag + '</span></span>' +
@@ -480,7 +562,8 @@
       '</button>');
     card.addEventListener("click", function () {
       state.platform = p.key; state.search = "";
-      state.catFilter = null; state.tagFilter = null; render();
+      state.catFilter = null; state.tagFilter = null;
+      state.sort = null; render();
     });
     return card;
   }
@@ -497,10 +580,33 @@
     state.cross = null;
     state.platform = platKey;
     state.search = "";
-    state.catFilter = null; state.tagFilter = null;
+    state.catFilter = null; state.tagFilter = null; state.sort = null;
     state.openPetitionUrl = url;
     render();
   }
+
+  /* Höhe des aufgeklappten Vorschaubildes auf sein echtes Seitenverhältnis
+     setzen. Vorher stand dort feste 11rem und object-fit:cover – bei einem
+     breiten Aufmacher wie dem von 350.org schnitt das unten sichtbar ab.
+     Mit passender Höhe ist der Ausschnitt deckungsgleich mit dem Bild, es
+     fehlt nichts, und weil es ein Pixelwert ist, kann die Höhe weich
+     wachsen (height:auto ließe sich nicht animieren).
+     Beim Zuklappen wieder freigeben, sonst bliebe die Karte hoch. */
+  function sizeThumb(pet) {
+    var img = pet.querySelector("img.pet__thumb");
+    if (!img) return;                       // Platzhalter: feste Höhe aus dem CSS
+    if (!pet.classList.contains("open")) { img.style.height = ""; return; }
+    var breite = img.parentNode.clientWidth;
+    if (!img.naturalWidth || !img.naturalHeight || !breite) return;
+    img.style.height =
+      Math.round(breite * img.naturalHeight / img.naturalWidth) + "px";
+  }
+  /* Dreht der Nutzer das Gerät, stimmt der Pixelwert nicht mehr. EIN Zuhörer
+     für die ganze Liste statt einer pro Karte – offen sind immer nur wenige. */
+  window.addEventListener("resize", function () {
+    var offene = document.querySelectorAll(".pet.open");
+    for (var i = 0; i < offene.length; i++) sizeThumb(offene[i]);
+  });
 
   // Ausklappbare Petitions-Karte (Akkordion) im Swipe-Wrapper.
   // Wischen rechts = als unterschrieben markieren, links = archivieren
@@ -528,9 +634,20 @@
       ? '<span class="pet-closed"><i class="fa-solid fa-flag-checkered"></i> ' +
         (r.deadline ? "beendet " + fmtDate(r.deadline) : "beendet") + "</span>"
       : "";
+    // Vorschaubild. Über die Hälfte des Bestands hat gar keins – Bundestag
+    // (7.903 Sätze) und Europarl liefern grundsätzlich keine Bilder. Ohne
+    // Ersatz stünde dort nichts, der Titel rutschte nach links, und in einer
+    // gemischten Liste sähe jede zweite Kachel anders aus. Ersatz ist deshalb
+    // das Plattform-Logo auf neutraler Fläche, im exakten Maß des Bildes –
+    // die Markenfarbe steckt schon im Logo selbst (siehe style.css). Dasselbe
+    // greift, wenn ein Bild nicht kommt: alle Bilder liegen auf fremden
+    // Servern, offline oder bei einer Störung lädt keines davon.
+    var thumbPh = '<span class="pet__thumb pet__thumb--ph">' +
+      platLogo(platKey, platInfo(platKey).name) + "</span>";
     var thumb = r.image_url
       ? '<img class="pet__thumb" src="' + esc(r.image_url) + '" alt="" ' +
-        "loading=\"lazy\" onerror=\"this.style.display='none'\">" : "";
+        'loading="lazy">'
+      : thumbPh;
     var ext = r.url
       ? '<a class="pet__ext" href="' + esc(r.url) + '" target="_blank" ' +
         'rel="noopener" aria-label="Petition extern öffnen">' +
@@ -547,14 +664,28 @@
       '<span class="pet__toggle"><i class="fa-solid fa-chevron-down"></i></span>' +
       ext +
     "</div>");
+    // Scheitert das Fremdbild, tritt der Platzhalter an seine Stelle. Vorher
+    // wurde es per onerror einfach ausgeblendet – dann fehlte der Kasten und
+    // die Kachel sprang um.
+    var thumbImg = head.querySelector("img.pet__thumb");
+    if (thumbImg) thumbImg.addEventListener("error", function () {
+      thumbImg.outerHTML = thumbPh;
+    });
     var body = el('<div class="pet__body"></div>');
     head.addEventListener("click", function (e) {
       if (e.target.closest(".pet__ext")) return;   // Extern-Link klappt nicht
       var open = pet.classList.toggle("open");
+      sizeThumb(pet);
       if (open && !body.dataset.built) {
         // platKey mitgeben: daraus wird das Volltext-Paket geladen.
         buildPetBody(body, r, ctx, platKey); body.dataset.built = "1";
       }
+    });
+    // Kommt das Bild erst nach dem Aufklappen an (loading="lazy"), sind seine
+    // Maße beim Klick noch 0 – dann greift die Höhe aus dem CSS und wird hier
+    // nachgezogen.
+    if (thumbImg) thumbImg.addEventListener("load", function () {
+      sizeThumb(pet);
     });
     if (catBar) {
       var catEl = el(catBar);
@@ -787,10 +918,11 @@
   }
 
   function buildPetBody(body, r, ctx, platKey) {
+    // Kein Bild mehr an dieser Stelle: hier stand früher ein ZWEITES <img> mit
+    // derselben Adresse wie das Vorschaubild der Kachel – dasselbe Motiv zweimal
+    // untereinander, und zweimal über das Netz geholt. Stattdessen wächst beim
+    // Aufklappen das vorhandene Vorschaubild zum Aufmacher (style.css, .pet.open).
     var h = "";
-    if (r.image_url)
-      h += '<img class="pet__img" src="' + esc(r.image_url) + '" alt="" ' +
-        "loading=\"lazy\" onerror=\"this.style.display='none'\">";
     if (r.summary) h += "<h4>Kurzbeschreibung</h4><p>" + esc(r.summary) + "</p>";
     if (r.recipient) h += "<h4>Adressat</h4><p>" + esc(r.recipient) + "</p>";
     if (r.started_by) h += "<h4>Gestartet von</h4><p>" + esc(r.started_by) + "</p>";
@@ -899,6 +1031,14 @@
       '<i class="fa-solid fa-chevron-down pabout__chev"></i></button>' +
       '<div class="pabout__body"></div></div>');
     var body = box.querySelector(".pabout__body");
+    // Echtes Logo als Aufmacher. Anders als auf der Bento-Kachel steht es hier
+    // auf hellem Kartengrund – deshalb in der Markenfarbe statt in der
+    // Textfarbe (style.css → .pabout__logo).
+    if (info.logoFile)
+      body.appendChild(el('<span class="pabout__logo" role="img" ' +
+        'aria-label="Logo ' + esc(manifestEntry.name || key) +
+        '" style="--logo:url(' + esc(info.logoFile) + ');--logo-ar:' +
+        (info.logoAR || 4) + '"></span>'));
     box.querySelector(".pabout__head").addEventListener("click", function () {
       state.aboutPlatform = !box.classList.contains("open");
       box.classList.toggle("open", state.aboutPlatform);
@@ -925,6 +1065,15 @@
     var links = (about.links || []).slice();
     if (!links.length && manifestEntry.source_url)
       links.push({ label: "Website", url: manifestEntry.source_url });
+    // Wikipedia. Der Artikelname steht mit im Etikett, weil er nicht überall
+    // gleich der Plattform heißt – Eko führt zu „SumOfUs" (Umbenennung), WeAct
+    // zum Träger „Campact". Für innn.it und WeMove Europe gibt es keinen
+    // deutschen Artikel; dort fehlt das Feld und damit der Link.
+    if (info.wikipedia) {
+      var artikel = decodeURIComponent(info.wikipedia.split("/wiki/")[1] || "")
+        .replace(/_/g, " ");
+      links.push({ label: "Wikipedia: " + artikel, url: info.wikipedia });
+    }
     if (links.length) {
       var ul = el('<div class="pabout__links"></div>');
       links.forEach(function (l) {
@@ -936,16 +1085,33 @@
       body.appendChild(ul);
     }
 
-    // Offenheit der Datenquelle – die Einschätzung steht im Manifest.
-    if (manifestEntry.openness_note) {
-      body.appendChild(el('<div class="pabout__open ' +
-        ampClass(manifestEntry.openness) + '"><b>Datenlage:</b> ' +
-        esc(manifestEntry.openness_note) + "</div>"));
-    }
+    // „Für Nerds": Herkunft und Offenheit der Daten plus der Quellcode der App.
+    // Hieß früher „Datenlage" und stand offen da – das ist eine Randnotiz für
+    // wenige, deshalb jetzt eingeklappt. <details> statt eigener Schalterlogik,
+    // dasselbe Muster wie die Beschreibung in der Petitionskarte (.descacc).
+    var nerdInhalt = "";
+    if (manifestEntry.openness_note)
+      nerdInhalt += '<div class="pabout__open ' +
+        ampClass(manifestEntry.openness) + '">' +
+        esc(manifestEntry.openness_note) + "</div>";
+    if (manifestEntry.source_url)
+      nerdInhalt += '<div class="nerd__row"><b>Quelle der Daten</b> ' +
+        '<a href="' + esc(manifestEntry.source_url) + '" target="_blank" ' +
+        'rel="noopener">' + esc(manifestEntry.source_url) + "</a></div>";
+    nerdInhalt += '<div class="nerd__row"><b>Quellcode dieser App</b> ' +
+      '<a href="' + esc(GITHUB_URL) + '" target="_blank" rel="noopener">' +
+      esc(GITHUB_URL.replace(/^https:\/\//, "")) +
+      ' <i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>';
+    // Der Hinweis „nicht bekannt" muss VOR dem Nerd-Bereich entschieden werden:
+    // den gibt es immer (Quellcode-Link), sonst käme er nie zum Zug.
     if (!body.childNodes.length) {
       body.appendChild(el("<p>" + esc(T("platform.unknown", "nicht bekannt")) +
         "</p>"));
     }
+    body.appendChild(el('<details class="nerd"><summary class="nerd__sum">' +
+      '<span><i class="fa-solid fa-flask"></i> Für Nerds</span>' +
+      '<i class="fa-solid fa-chevron-down nerd__chev"></i></summary>' +
+      '<div class="nerd__body">' + nerdInhalt + "</div></details>"));
     return box;
   }
 
@@ -958,7 +1124,8 @@
         "Zum Archiv</a></div>");
     head.querySelector(".backbtn").addEventListener("click", function () {
       state.platform = null;
-      state.catFilter = null; state.tagFilter = null; render();
+      state.catFilter = null; state.tagFilter = null;
+      state.sort = null; render();
     });
     head.querySelector(".archlink").addEventListener("click", function (e) {
       e.preventDefault();
@@ -988,6 +1155,18 @@
     var searchBox = el('<input class="search" type="search" ' +
       'placeholder="In dieser Plattform suchen …" value="' + esc(state.search) + '">');
     content.appendChild(searchBox);
+
+    // Ausklapper direkt unter der Suche: Sortierung und die Kategorien DIESER
+    // Plattform. Zugeklappt, weil er sonst die Liste nach unten drückt.
+    var tools = el('<details class="ptools">' +
+      '<summary class="ptools__sum">' +
+        '<span class="ptools__lbl"><i class="fa-solid fa-sliders"></i> ' +
+        'Sortieren und filtern</span>' +
+        '<span class="ptools__state"></span>' +
+        '<i class="fa-solid fa-chevron-down ptools__chev"></i></summary>' +
+      '<div class="ptools__body"></div></details>');
+    content.appendChild(tools);
+    var toolsBuilt = false;
     // Filter (Kategorie/Schlagwort) liegen im State, damit sie eine plattform-
     // übergreifende Suche + Zurück-Navigation überstehen.
     var filterBar = el('<div class="filterbar" style="display:none"></div>');
@@ -997,15 +1176,134 @@
     var listWrap = el('<div id="petlist"></div>');
     content.appendChild(listWrap);
 
+    // Sortierung. Sätze OHNE den jeweiligen Wert wandern immer ans Ende – bei
+    // WeAct fehlt das Startdatum durchgehend, bei Europarl die Unterschriften-
+    // zahl, bei openPetition liegt das Datum nur für gut die Hälfte vor. Sie
+    // vorne einzusortieren würde eine Ordnung vortäuschen, die es nicht gibt.
+    // Startdaten sind ISO-Zeichenketten, deshalb genügt der Textvergleich.
+    function sortRows(list) {
+      var s = state.sort;
+      if (!s) return list;
+      var out = list.slice();
+      if (s === "neu" || s === "alt") {
+        out.sort(function (a, b) {
+          var da = a.start_date || "", db = b.start_date || "";
+          if (!da && !db) return 0;
+          if (!da) return 1;
+          if (!db) return -1;
+          if (da === db) return 0;
+          return (s === "neu") === (da > db) ? -1 : 1;
+        });
+      } else {
+        out.sort(function (a, b) {
+          var sa = typeof a.signatures === "number" ? a.signatures : null;
+          var sb = typeof b.signatures === "number" ? b.signatures : null;
+          if (sa === null && sb === null) return 0;
+          if (sa === null) return 1;
+          if (sb === null) return -1;
+          return s === "viel" ? sb - sa : sa - sb;
+        });
+      }
+      return out;
+    }
+
+    // Inhalt des Ausklappers. Wird einmal gebaut, sobald die Daten da sind:
+    // welche Sortierungen überhaupt Sinn ergeben und welche Kategorien es gibt,
+    // steht erst dann fest.
+    function buildTools(arr) {
+      var tbody = tools.querySelector(".ptools__body");
+      var mitDatum = arr.filter(function (r) { return !!r.start_date; }).length;
+      var mitZahl = arr.filter(function (r) {
+        return typeof r.signatures === "number"; }).length;
+      var opts = [["", "Standardreihenfolge", "fa-list"]];
+      if (mitDatum) opts.push(["neu", "Neueste zuerst", "fa-arrow-down-wide-short"],
+                              ["alt", "Älteste zuerst", "fa-arrow-up-wide-short"]);
+      if (mitZahl) opts.push(["viel", "Meiste Unterschriften", "fa-arrow-down-9-1"],
+                             ["wenig", "Wenigste Unterschriften", "fa-arrow-up-1-9"]);
+      var h = '<div class="ptools__grp"><span class="ptools__h">Sortierung</span>' +
+        '<div class="chiprow">' + opts.map(function (o) {
+          return '<button class="chip" type="button" data-sort="' + o[0] + '">' +
+            '<i class="fa-solid ' + o[2] + '"></i> ' + o[1] + "</button>";
+        }).join("") + "</div>";
+      // Ehrlich benennen, wenn die Sortierung nur einen Teil erfassen kann.
+      var luecken = [];
+      function fehlt(n, was) {
+        return "Bei " + nf.format(n) + (n === 1 ? " Petition fehlt " : " Petitionen fehlt ") +
+          was + " – sie " + (n === 1 ? "steht" : "stehen") + " am Ende.";
+      }
+      if (mitDatum && mitDatum < arr.length)
+        luecken.push(fehlt(arr.length - mitDatum, "das Startdatum"));
+      if (mitZahl && mitZahl < arr.length)
+        luecken.push(fehlt(arr.length - mitZahl, "die Unterschriftenzahl"));
+      if (!mitDatum) luecken.push("Diese Plattform liefert keine Startdaten.");
+      if (!mitZahl) luecken.push("Diese Plattform liefert keine Unterschriftenzahlen.");
+      if (luecken.length)
+        h += '<div class="ptools__note"><i class="fa-solid fa-circle-info"></i>' +
+             '<span class="ptools__notetext">' +
+             luecken.map(function (s) { return "<span>" + esc(s) + "</span>"; })
+                    .join("") + "</span></div>";
+      h += "</div>";
+
+      // Kategorien dieser Plattform, häufigste zuerst.
+      var zaehler = {};
+      arr.forEach(function (r) {
+        if (r.category) zaehler[r.category] = (zaehler[r.category] || 0) + 1; });
+      var kats = Object.keys(zaehler).sort(function (a, b) {
+        return zaehler[b] - zaehler[a] || a.localeCompare(b, "de"); });
+      if (kats.length) {
+        h += '<div class="ptools__grp"><span class="ptools__h">' +
+          '<i class="fa-solid fa-tag"></i> Kategorien (' + kats.length +
+          ')</span><div class="chiprow">' +
+          '<button class="chip" type="button" data-cat="">Alle</button>' +
+          kats.map(function (c) {
+            return '<button class="chip" type="button" data-cat="' + esc(c) +
+              '">' + esc(c) + '<span class="chip__n">' +
+              nf.format(zaehler[c]) + "</span></button>";
+          }).join("") + "</div></div>";
+      }
+      tbody.innerHTML = h;
+      tbody.querySelectorAll("[data-sort]").forEach(function (b) {
+        b.addEventListener("click", function () {
+          state.sort = b.dataset.sort || null;
+          draw(arr); window.scrollTo(0, 0);
+        });
+      });
+      tbody.querySelectorAll("[data-cat]").forEach(function (b) {
+        b.addEventListener("click", function () {
+          state.catFilter = b.dataset.cat || null;
+          if (state.catFilter) state.tagFilter = null;
+          draw(arr); window.scrollTo(0, 0);
+        });
+      });
+    }
+
+    // Zeigt am zugeklappten Ausklapper, ob gerade etwas eingestellt ist.
+    function markTools() {
+      var namen = { neu: "Neueste zuerst", alt: "Älteste zuerst",
+                    viel: "Meiste Unterschriften", wenig: "Wenigste Unterschriften" };
+      var aktiv = [];
+      if (state.sort) aktiv.push(namen[state.sort]);
+      if (state.catFilter) aktiv.push(state.catFilter);
+      var st = tools.querySelector(".ptools__state");
+      st.textContent = aktiv.join(" · ");
+      tools.classList.toggle("is-active", aktiv.length > 0);
+      tools.querySelectorAll("[data-sort]").forEach(function (b) {
+        b.classList.toggle("on", (b.dataset.sort || null) === state.sort); });
+      tools.querySelectorAll("[data-cat]").forEach(function (b) {
+        b.classList.toggle("on", (b.dataset.cat || null) === state.catFilter); });
+    }
+
     function draw(arr) {
+      if (!toolsBuilt) { buildTools(arr); toolsBuilt = true; }
+      markTools();
       var term = state.search.trim().toLowerCase();
-      var rows = arr.filter(function (r) {
+      var rows = sortRows(arr.filter(function (r) {
         if (state.catFilter && r.category !== state.catFilter) return false;
         if (state.tagFilter && (r.tags || []).indexOf(state.tagFilter) < 0) return false;
         if (!term) return true;
         return ((r.title || "") + " " + (r.category || "") + " " +
                 (r.started_by || "")).toLowerCase().indexOf(term) > -1;
-      });
+      }));
       var notArch = rows.filter(function (r) { return !isArchived(r.url); });
       var online = notArch.filter(function (r) { return (r.status || "online") !== "offline"; });
       // Beendete Petitionen aus der aktiven Liste heraushalten: beim Bundestag
@@ -1294,6 +1592,56 @@
       esc(T("settings.intro", "Wähle, welche Petitionsplattformen in der " +
                               "Liste erscheinen sollen.")) + "</p></div>";
 
+    // ---- Darstellung ---------------------------------------------------------
+    // Bewusst GANZ OBEN: das Plattform-Akkordion darunter ist offen rund 1.300 px
+    // hoch, alles dahinter lag damit zwei Bildschirmhöhen tief und war praktisch
+    // unauffindbar.
+    content.appendChild(setSection(T("settings.sections.appearance", "Darstellung")));
+
+    // Zwei Schalterleisten nach demselben Muster: Farbdesign und Layout.
+    // Beide setzen nur ein Attribut auf <html> und speichern die Wahl – kein
+    // Neuzeichnen nötig, weil ausschließlich CSS daran hängt.
+    function segControl(label, items, current, pick) {
+      var seg = el('<div class="seg" role="group" aria-label="' +
+        esc(label) + '"></div>');
+      items.forEach(function (it) {
+        var b = el('<button class="seg__b' +
+          (current === it[0] ? " on" : "") + '" type="button">' +
+          '<i class="fa-solid ' + it[2] + '"></i> ' + esc(it[1]) + "</button>");
+        b.addEventListener("click", function () {
+          pick(it[0]);
+          seg.querySelectorAll(".seg__b").forEach(function (x) {
+            x.classList.remove("on"); });
+          b.classList.add("on");
+        });
+        seg.appendChild(b);
+      });
+      return seg;
+    }
+
+    content.appendChild(segControl("Farbdesign",
+      [["light", T("settings.themeLight", "Hell"), "fa-sun"],
+       ["dark", T("settings.themeDark", "Dunkel"), "fa-moon"],
+       ["auto", T("settings.themeAuto", "Automatisch"), "fa-circle-half-stroke"]],
+      state.prefs.theme,
+      function (v) { state.prefs.theme = v; savePrefs(); applyTheme(); }));
+    content.appendChild(el('<div class="srow__note">' +
+      esc(T("settings.darkModeHint",
+            "„Automatisch“ folgt der Einstellung deines Geräts.")) + "</div>"));
+
+    content.appendChild(el('<div class="srow__lbl">' +
+      esc(T("settings.layoutLabel", "Layout")) + "</div>"));
+    content.appendChild(segControl("Layout",
+      [["klassisch", T("settings.layoutClassic", "Klassisch"), "fa-list"],
+       ["band", T("settings.layoutBand", "Farbband"), "fa-bars-staggered"],
+       ["magazin", T("settings.layoutMag", "Magazin"), "fa-image"]],
+      state.prefs.layout,
+      function (v) { state.prefs.layout = v; savePrefs(); applyLayout(); }));
+    content.appendChild(el('<div class="srow__note">' +
+      esc(T("settings.layoutHint",
+            "Ändert nur das Aussehen der Listen, nicht die Inhalte. " +
+            "„Klassisch“ ist die bisherige Ansicht.")) + "</div>"));
+
     // Akkordion "Plattformen"
     var acc = el('<section class="accordion' +
       (state.settingsOpen ? " open" : "") + '"></section>');
@@ -1371,28 +1719,6 @@
     body.appendChild(toggleAll);          // Button unter der Plattform-Liste
     acc.appendChild(body);
     content.appendChild(acc);
-
-    // ---- Darstellung ---------------------------------------------------------
-    content.appendChild(setSection(T("settings.sections.appearance", "Darstellung")));
-    var themes = [["light", "Hell", "fa-sun"], ["dark", "Dunkel", "fa-moon"],
-                  ["auto", "Automatisch", "fa-circle-half-stroke"]];
-    var seg = el('<div class="seg" role="group" aria-label="Darstellung"></div>');
-    themes.forEach(function (t) {
-      var b = el('<button class="seg__b' +
-        (state.prefs.theme === t[0] ? " on" : "") + '" type="button">' +
-        '<i class="fa-solid ' + t[2] + '"></i> ' + esc(t[1]) + "</button>");
-      b.addEventListener("click", function () {
-        state.prefs.theme = t[0]; savePrefs(); applyTheme();
-        seg.querySelectorAll(".seg__b").forEach(function (x) {
-          x.classList.remove("on"); });
-        b.classList.add("on");
-      });
-      seg.appendChild(b);
-    });
-    content.appendChild(seg);
-    content.appendChild(el('<div class="srow__note">' +
-      esc(T("settings.darkModeHint",
-            "„Automatisch“ folgt der Einstellung deines Geräts.")) + "</div>"));
 
     // ---- Benachrichtigungen --------------------------------------------------
     content.appendChild(setSection(
@@ -1523,6 +1849,7 @@
     state.base = DEFAULT_BASE;
     savePrefs();
     applyTheme();
+    applyLayout();
   }
 
   // ---- Benachrichtigungen ----------------------------------------------------
@@ -1804,6 +2131,7 @@
     state.base = LS.getItem("dataBase") || DEFAULT_BASE;
     state.prefs = loadPrefs();
     applyTheme();
+    applyLayout();
     scheduleNotify();
     // Zahlen für die Rückmeldung.
     return {
@@ -2227,7 +2555,20 @@
     }
     else if (state.tab === "einstellungen") renderEinstellungen();
     else if (state.tab === "profil") renderProfil();
+    syncPageTitle();
     window.scrollTo(0, 0);
+  }
+
+  // Seitentitel und Inhaltsüberschrift können denselben Text tragen – in den
+  // Einstellungen steht zweimal „Einstellungen" untereinander. Dann wird die
+  // Titelzeile ausgeblendet statt sie doppelt zu zeigen. Bewusst als Vergleich
+  // der Texte und nicht als Liste von Ausnahmen: so greift es von allein auch
+  // für Ansichten, die später dazukommen.
+  function syncPageTitle() {
+    function norm(s) { return String(s || "").trim().toLowerCase(); }
+    var h1 = content.querySelector(".welcome__t");
+    titleEl.classList.toggle("is-dup",
+      !!h1 && norm(h1.textContent) === norm(titleEl.textContent));
   }
 
   // ---- Menü ------------------------------------------------------------------
@@ -2246,7 +2587,7 @@
       // Footer-Tab "Liste" führt immer zur Plattform-Übersicht (frischer Start).
       if (t.dataset.tab === "liste") {
         state.platform = null; state.cross = null;
-        state.catFilter = null; state.tagFilter = null;
+        state.catFilter = null; state.tagFilter = null; state.sort = null;
       }
       state.tab = t.dataset.tab; render();
     });
@@ -2260,6 +2601,7 @@
     state.archived = loadSet("archivedPetitions");
     state.prefs = loadPrefs();
     applyTheme();
+    applyLayout();
     // Bei „automatisch" auf Systemwechsel reagieren (Nachtmodus des Geräts).
     if (window.matchMedia) {
       var mq = window.matchMedia("(prefers-color-scheme: dark)");

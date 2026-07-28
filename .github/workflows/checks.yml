@@ -39,6 +39,7 @@ jobs:
         run: |
           python3 - <<'PY'
           import json, sys
+          from collections import Counter
           from pathlib import Path
 
           data = Path("webapp/data")
@@ -64,8 +65,24 @@ jobs:
               ohne_url = sum(1 for r in recs if not r.get("url"))
               if ohne_url:
                   fehler.append(f"{key}: {ohne_url} Datensätze ohne URL")
+              # Dieselbe URL zweimal = dieselbe Petition zweimal in der App.
+              # Ursache sind umbenannte Slugs, deren alter Pfad auf den neuen
+              # umleitet: der Scraper speichert dann unter beiden Schlüsseln,
+              # beide Datensätze tragen aber die kanonische Ziel-URL. Nebenbei
+              # überschreiben sie sich im Volltext-Paket (publish.write_texts
+              # legt je URL genau einen Eintrag an), ein Text geht verloren.
+              # Behebung: in petitions_core.merge_records zusammenführen.
+              doppelt = [(u, n) for u, n in
+                         Counter(r["url"] for r in recs if r.get("url")).items()
+                         if n > 1]
+              for u, n in sorted(doppelt):
+                  titel = sorted({r.get("title") or "?"
+                                  for r in recs if r.get("url") == u})
+                  fehler.append(f"{key}: URL {n}× vorhanden – {u} "
+                                f"({' | '.join(titel)})")
               print(f"{key}: {len(recs)} Petitionen, "
-                    f"{sum(1 for r in recs if r.get('related'))} mit Verwandtschaft")
+                    f"{sum(1 for r in recs if r.get('related'))} mit Verwandtschaft"
+                    f"{f', {len(doppelt)} doppelte URLs' if doppelt else ''}")
 
           for f in sorted(data.glob("*.t[0-9]*.json")):
               json.loads(f.read_text(encoding="utf-8"))
