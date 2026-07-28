@@ -51,7 +51,10 @@ SITEMAP_INDEX = f"{BASE_URL}/sitemap.xml"
 # Detailseiten, die über MAX_NEW_PER_RUN pro Lauf gedeckelt bleiben, sodass
 # der Bestand über mehrere Läufe vollständig aufgefüllt wird.
 SITEMAP_COUNT = 60
-MAX_NEW_PER_RUN = 150             # neue Detail-Scrapes pro Lauf
+MAX_NEW_PER_RUN = 500             # neue Detail-Scrapes pro Lauf (2026-07-27
+                                 # von 150 erhöht; die Aufhol-Schleife im
+                                 # GitHub-Actions-Workflow ruft den Lauf so oft
+                                 # neu auf, bis der Backlog abgearbeitet ist)
 
 LOC_RE  = re.compile(r"<loc>https://www\.change\.org/p/([^<]+)</loc>")
 # Startseite: aktuelle deutsche Themen (rotieren) im eingebetteten State.

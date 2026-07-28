@@ -51,6 +51,17 @@ jobs:
       - name: Scrapen (alle Live-Plattformen; überspringt <24 h Geprüftes)
         run: python3 monitor.py
 
+      - name: "Change.org aufholen (500/Lauf, wiederholt bis vollständig; Budget ~4 h)"
+        run: |
+          deadline=$(( $(date +%s) + 14400 ))
+          while ! python3 ci_changeorg_done.py; do
+            if [ "$(date +%s)" -ge "$deadline" ]; then
+              echo "Zeitbudget erreicht – Rest folgt beim nächsten Lauf."
+              break
+            fi
+            python3 monitor.py --platform changeorg
+          done
+
       - name: Web-App-Daten erzeugen
         run: python3 publish.py
 
