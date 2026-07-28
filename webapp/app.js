@@ -5,6 +5,10 @@
 (function () {
   var LS = window.localStorage;
   var DEFAULT_BASE = "./data";
+  // Wie viele Karten eine Liste höchstens auf einmal rendert. Der Bundestag
+  // bringt allein 7.845 beendete Petitionen mit; ungedeckelt wächst die Seite
+  // auf über 180.000 DOM-Knoten und braucht schon am PC ~2 s zum Aufbau.
+  var LIST_MAX = 300;
   var nf = new Intl.NumberFormat("de-DE");
 
   var state = {
@@ -27,6 +31,7 @@
     openPetitionUrl: null,// nach Navigation diese Petition automatisch aufklappen
     archiveOpen: false,   // Archiv-Akkordion (Plattform-Detail) offen?
     offlineOpen: false,   // Offline-Akkordion offen?
+    closedOpen: false,    // Akkordion "Beendet" offen? (Frist abgelaufen)
     prefs: null,          // persönliche Einstellungen (siehe loadPrefs)
     signedQuery: "",      // Suchwort in "Meine unterzeichneten Petitionen"
     aboutPlatform: false, // Info-Panel "Über diese Plattform" offen?
@@ -204,6 +209,10 @@
   }
   function isSigned(u) { return state.signed.has(u); }
   function isArchived(u) { return state.archived.has(u); }
+  // Von der Quelle beendet (Frist abgelaufen/archiviert) – nicht mehr
+  // unterschreibbar. Das ist etwas anderes als "offline" (Seite weg) und als
+  // "archiviert" (das ist das persönliche Archiv des Nutzers).
+  function isClosed(r) { return !!(r && r.closed); }
   function toggleSigned(u, meta) {
     if (state.signed.has(u)) state.signed.delete(u);
     else state.signed.set(u, {
@@ -515,6 +524,10 @@
     var signedBadge = isSigned(r.url)
       ? '<span class="pet-signed"><i class="fa-solid fa-circle-check"></i>' +
         " unterschrieben</span>" : "";
+    var closedBadge = isClosed(r)
+      ? '<span class="pet-closed"><i class="fa-solid fa-flag-checkered"></i> ' +
+        (r.deadline ? "beendet " + fmtDate(r.deadline) : "beendet") + "</span>"
+      : "";
     var thumb = r.image_url
       ? '<img class="pet__thumb" src="' + esc(r.image_url) + '" alt="" ' +
         "loading=\"lazy\" onerror=\"this.style.display='none'\">" : "";
@@ -529,7 +542,7 @@
     var head = el('<div class="pet__head">' + thumb +
       '<div class="pet__main">' +
         '<div class="pet__title">' + esc(r.title || "(ohne Titel)") + "</div>" +
-        '<div class="pet__row">' + signedBadge + sig + "</div>" +
+        '<div class="pet__row">' + signedBadge + closedBadge + sig + "</div>" +
       "</div>" +
       '<span class="pet__toggle"><i class="fa-solid fa-chevron-down"></i></span>' +
       ext +
@@ -729,7 +742,7 @@
     var cands = [];
     all.forEach(function (grp) {
       grp.arr.forEach(function (c) {
-        if (c.url === r.url || isArchived(c.url) ||
+        if (c.url === r.url || isArchived(c.url) || isClosed(c) ||
             (c.status || "online") === "offline") return;
         var tags = c.tags || [], shares = false;
         for (var i = 0; i < tags.length; i++)
@@ -994,7 +1007,12 @@
                 (r.started_by || "")).toLowerCase().indexOf(term) > -1;
       });
       var notArch = rows.filter(function (r) { return !isArchived(r.url); });
-      var active = notArch.filter(function (r) { return (r.status || "online") !== "offline"; });
+      var online = notArch.filter(function (r) { return (r.status || "online") !== "offline"; });
+      // Beendete Petitionen aus der aktiven Liste heraushalten: beim Bundestag
+      // stehen ~7.800 abgelaufene gegen ~57 laufende – sonst wäre die Liste
+      // praktisch nur noch Archiv.
+      var active = online.filter(function (r) { return !isClosed(r); });
+      var closedRows = online.filter(isClosed);
       var offline = notArch.filter(function (r) { return (r.status || "online") === "offline"; });
       var archived = rows.filter(function (r) { return isArchived(r.url); });
       note.textContent = state.catFilter
@@ -1045,17 +1063,21 @@
 
       listWrap.innerHTML = "";
       // Ziel-Petition (nach In-App-Navigation) nach vorne holen, damit sie
-      // sicher innerhalb der ersten 300 gerendert wird.
+      // sicher innerhalb der ersten LIST_MAX gerendert wird.
       if (state.openPetitionUrl) {
         var ti = active.findIndex(function (r) { return r.url === state.openPetitionUrl; });
         if (ti > 0) active.unshift(active.splice(ti, 1)[0]);
       }
-      active.slice(0, 300).forEach(function (r) { listWrap.appendChild(petCard(r, ctx, key)); });
-      if (active.length > 300)
-        listWrap.appendChild(el('<div class="count-note">Es werden die ersten ' +
-          '300 angezeigt – Suche eingrenzen für mehr.</div>'));
+      var restNote = 'Es werden die ersten ' + LIST_MAX +
+        ' angezeigt – Suche eingrenzen für mehr.';
+      active.slice(0, LIST_MAX).forEach(function (r) { listWrap.appendChild(petCard(r, ctx, key)); });
+      if (active.length > LIST_MAX)
+        listWrap.appendChild(el('<div class="count-note">' + restNote + "</div>"));
 
-      // Bottom-Akkordion (Archiv, danach Offline) – jeweils klappbar.
+      // Bottom-Akkordion (Beendet, Archiv, Offline) – jeweils klappbar.
+      // Der Inhalt entsteht ERST beim Aufklappen und ist wie die Hauptliste
+      // gedeckelt: eifrig gerendert stünden allein beim Bundestag 7.845
+      // beendete Karten dauerhaft im DOM, obwohl das Akkordion zu ist.
       function bottomSection(id, icon, label, items, stateKey, empty) {
         var open = state[stateKey];
         var sec = el('<section class="accordion langgroup bottomacc' +
@@ -1064,19 +1086,33 @@
           '<i class="fa-solid ' + icon + '"></i> ' + label +
           '<span class="acc-count">' + items.length + "</span></span>" +
           '<i class="fa-solid fa-chevron-down acc-chev"></i></button>');
+        var bd = el('<div class="acc-body"></div>');
+        var gefuellt = false;
+        function fuellen() {
+          if (gefuellt) return;
+          gefuellt = true;
+          if (!items.length) {
+            bd.appendChild(el('<div class="count-note" style="margin:6px 2px">' +
+              empty + "</div>"));
+            return;
+          }
+          items.slice(0, LIST_MAX).forEach(function (r) { bd.appendChild(petCard(r, ctx, key)); });
+          if (items.length > LIST_MAX)
+            bd.appendChild(el('<div class="count-note">' + restNote + "</div>"));
+        }
         hd.addEventListener("click", function () {
           var o = !sec.classList.contains("open");
           sec.classList.toggle("open", o); state[stateKey] = o;
+          if (o) fuellen();
         });
-        var bd = el('<div class="acc-body"></div>');
-        if (items.length)
-          items.forEach(function (r) { bd.appendChild(petCard(r, ctx, key)); });
-        else
-          bd.appendChild(el('<div class="count-note" style="margin:6px 2px">' +
-            empty + "</div>"));
+        if (open) fuellen();
         sec.appendChild(hd); sec.appendChild(bd);
         listWrap.appendChild(sec);
       }
+      // Nur zeigen, wo die Quelle beendete Petitionen kennt (bisher Bundestag).
+      if (closedRows.length)
+        bottomSection("pet-beendet", "fa-flag-checkered", "Beendet", closedRows,
+          "closedOpen", "Keine beendeten Petitionen.");
       bottomSection("pet-archiv", "fa-box-archive", "Archiv", archived,
         "archiveOpen", "Noch nichts archiviert. Wische eine Petition nach links.");
       bottomSection("pet-offline", "fa-circle-xmark", "Offline", offline,
@@ -1179,8 +1215,8 @@
         var arr = state.dataCache[p.key];
         if (!arr) return;
         var hits = arr.filter(function (r) {
-          return !isArchived(r.url) && (r.status || "online") !== "offline" &&
-                 crossMatch(r, v);
+          return !isArchived(r.url) && !isClosed(r) &&
+                 (r.status || "online") !== "offline" && crossMatch(r, v);
         });
         if (!hits.length) return;
         nPlat++; total += hits.length;
@@ -1694,6 +1730,12 @@
   }
 
   // "DD.MM.YYYY, HH:MM Uhr" aus einem ISO-Zeitstempel.
+  // "2026-07-20" → "20.07.2026" (leer, wenn unbrauchbar)
+  function fmtDate(iso) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(iso || ""));
+    return m ? m[3] + "." + m[2] + "." + m[1] : "";
+  }
+
   function fmtDateTime(iso) {
     if (!iso) return "Zeitpunkt unbekannt";
     var d = new Date(iso);

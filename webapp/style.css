@@ -240,6 +240,14 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
 .pet-signed{display:inline-flex;align-items:center;gap:.3125rem;
   background:var(--accent-soft);color:var(--online);border-radius:999px;
   padding:.125rem .5625rem;font-size:.75rem;font-weight:700}
+/* Frist abgelaufen/archiviert – bewusst gedämpft, damit laufende Petitionen
+   optisch vorn bleiben. Nutzt nur Theme-Variablen, wirkt also hell wie dunkel. */
+/* Gedämpft, aber lesbar: --muted auf --line ergab hell nur 4,46:1 und verfehlt
+   damit AA (12px fett zählt als Kleintext). --ink mit Deckung 72 % bleibt
+   optisch zurückhaltend, kommt auf 5,6:1 und wirkt in beiden Designs. */
+.pet-closed{display:inline-flex;align-items:center;gap:.3125rem;
+  background:var(--line);color:var(--ink);opacity:.72;border-radius:999px;
+  padding:.125rem .5625rem;font-size:.75rem;font-weight:700}
 .pet__head{display:flex;align-items:center;gap:.75rem;padding:.875rem 1rem;
   cursor:pointer}
 .pet__head:active{background:var(--accent-soft)}

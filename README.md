@@ -116,6 +116,31 @@ Weitere Optionen:
 | `--min-interval-hours N` | Mindestabstand anpassen (0 = immer prüfen) |
 | `--delay N` | Pause zwischen Anfragen in Sekunden (Standard: 1,5 s) |
 | `--html-only` | Nur HTML aus vorhandenen JSONs neu bauen, kein Scrape |
+| `--archive` | Kandidatenliste im Internet Archive auffrischen (nur `avaaz`) |
+| `--archive-batch N` | Archiv-Kandidaten pro Lauf (Standard 120; 0 = keine) |
+| `--backfill` | Beendete + archivierte Listen komplett einlesen (nur `bundestag`) |
+| `--backfill-batch N` | Fehlende Volltexte pro Lauf nachladen (Standard 300; 0 = keine) |
+
+### Beendete Petitionen (Bundestag)
+
+Der Bundestag führt neben den laufenden Petitionen zwei weitere Listen:
+beendete Mitzeichnungsfristen und ein Archiv. Zusammen sind das rund 7.850
+Einträge — sie werden deshalb **nicht** bei jedem Lauf geholt:
+
+```bash
+# Einmalig: beide Listen komplett einlesen (~655 Anfragen, ca. 15 Minuten).
+# Die Datensätze entstehen sofort aus der Listentabelle.
+python3 monitor.py --platform bundestag --backfill
+
+# Danach zieht jeder normale Lauf die nächste Portion Volltexte nach.
+# Zum Aufholen am Stück (dauert entsprechend lange):
+python3 monitor.py --platform bundestag --backfill-batch 3000 --no-recheck
+```
+
+Diese Einträge tragen `closed: true` und sind nicht mehr mitzeichenbar. Die
+Listenansicht zeigt dafür das Abzeichen **Beendet** und die Filter
+*Laufend* / *Beendet*; die Mobile-App sammelt sie in einem eigenen
+Abschnitt „Beendet", damit die aktive Liste übersichtlich bleibt.
 
 ---
 

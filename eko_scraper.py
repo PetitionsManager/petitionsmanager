@@ -139,6 +139,11 @@ def _parse_card(card) -> tuple[str, dict] | None:
     texts = sorted((d.get_text(" ", strip=True)
                     for d in card.find_all("div")), key=len, reverse=True)
     summary = next((t for t in texts if 40 < len(t) < 1200 and t != title), None)
+    # Die Karte hat drei <div>: Überschrift, Fließtext und eine Umhüllung um
+    # beide. Die Umhüllung ist die längste und gewinnt deshalb die Sortierung –
+    # ohne das Abschneiden stünde der Titel doppelt in jedem Kurztext.
+    if summary and title and summary.startswith(title):
+        summary = summary[len(title):].lstrip(" –—:·") or None
     data = {
         "title": title or None,
         "summary": summary,
@@ -330,6 +335,12 @@ def run(args) -> None:
     def save(quiet=True, **extra):
         core.save_store(store, DATA_FILE, extra_meta=extra, quiet=quiet)
 
+    # Erst entdecken, dann nachprüfen: die Kampagnenkarten sind auch beim
+    # Nachprüfen bekannter Aktionen die einzige Rückfallebene, solange die
+    # Detailseiten hinter dem Bot-Schutz liegen.
+    log("Sammle Aktionen von der deutschen Kampagnenliste …")
+    discovered = discover_slugs(fetcher)
+
     known = list(store.keys())
     if known and not args.no_recheck and not args.limit:
         log(f"Prüfe {len(known)} bekannte Aktion(en) …")
@@ -341,6 +352,15 @@ def run(args) -> None:
                 continue
             status, rec = scrape_petition(fetcher, slug)
             if status == "error":
+                # Detailseite gesperrt – wenigstens die Karte nachziehen. Die
+                # Sprachprüfung entfällt hier: der Eintrag steht schon im
+                # Bestand, war also bei der Aufnahme deutsch. upsert überschreibt
+                # nur mit gefüllten Werten, der Unterschriftenstand bleibt.
+                card = discovered.get(slug) or {}
+                if card.get("title"):
+                    core.upsert(store, slug, record_from_card(slug, card), {},
+                                "online", ts, f"{BASE_URL}/a/{slug}")
+                    save()
                 continue
             if status == "skip":
                 del store[slug]
@@ -353,8 +373,6 @@ def run(args) -> None:
             if status == "offline":
                 log(f"  OFFLINE: {slug}")
 
-    log("Sammle Aktionen von der deutschen Kampagnenliste …")
-    discovered = discover_slugs(fetcher)
     new_slugs = [s for s in discovered if s not in store]
     if args.limit:
         new_slugs = new_slugs[:args.limit]

@@ -36,7 +36,7 @@ from __future__ import annotations
 import json
 import re
 import shutil
-from collections import defaultdict
+from collections import Counter, defaultdict
 from pathlib import Path
 
 import monitor
@@ -49,11 +49,16 @@ OUT_DIR = Path("webapp/data")
 # hunderte Einzeldateien entstehen.
 TEXT_CHUNK = 150
 
+# Merkzettel, welche Petition in welchem Volltext-Paket liegt. Muss versioniert
+# werden und mitwandern, sonst wird die Zuordnung beim nächsten Lauf neu
+# gewürfelt – siehe write_texts().
+INDEX_FILE = Path("texts_index.json")
+
 # Felder, die die App für die Listenansicht braucht. description_full fehlt
 # hier bewusst – es wandert in die Volltext-Pakete (siehe oben).
 SLIM_FIELDS = ("title", "url", "signatures", "goal", "category", "status",
                "started_by", "recipient", "start_date", "image_url", "kind",
-               "summary", "tags")
+               "summary", "tags", "closed", "deadline")
 
 # Verwandtschaft: dieselbe Gewichtung wie die Notlösung in der App
 # (app.js → similarityScore), damit sich das Verhalten nicht ändert.
@@ -118,6 +123,12 @@ def compute_related(by_platform: dict[str, list[dict]]) -> int:
         for rec in recs:
             if (rec.get("status") or "online") == "offline":
                 continue
+            # Beendete Petitionen bleiben außen vor – weder als Vorschlag
+            # (man kann sie nicht mehr unterschreiben) noch als Ausgangspunkt.
+            # Beim Bundestag sind das ~7.850 Datensätze; ihre "related"-Listen
+            # machten allein 4,8 MB der App-Daten aus.
+            if rec.get("closed"):
+                continue
             tags = [str(t).lower() for t in (rec.get("tags") or [])]
             if not tags:
                 continue
@@ -167,19 +178,49 @@ def compute_related(by_platform: dict[str, list[dict]]) -> int:
 # ----------------------------------------------------------------------------
 # Volltexte in Häppchen auslagern
 # ----------------------------------------------------------------------------
-def write_texts(key: str, items: list[dict], texts: list[str | None]) -> int:
+def load_text_index() -> dict[str, dict[str, int]]:
+    if INDEX_FILE.exists():
+        try:
+            return json.loads(INDEX_FILE.read_text(encoding="utf-8"))
+        except ValueError:
+            print(f"  ! {INDEX_FILE} unlesbar – Zuordnung wird neu aufgebaut.")
+    return {}
+
+
+def write_texts(key: str, items: list[dict], texts: list[str | None],
+                index: dict[str, dict[str, int]]) -> int:
     """Schreibt <key>.t<N>.json und vermerkt die Paketnummer als "tc" am
-    Datensatz. Rückgabe: Anzahl geschriebener Pakete."""
-    chunks: dict[int, dict[str, str]] = defaultdict(dict)
-    for pos, (rec, html) in enumerate(zip(items, texts)):
+    Datensatz. Rückgabe: Anzahl geschriebener Pakete.
+
+    Die Paketnummer hängt bewusst NICHT an der Position in `items`: die Liste
+    ist nach Unterschriften sortiert, und die ändern sich täglich. Über die
+    Position gerechnet wanderten die Petitionen jeden Tag zwischen den Paketen
+    hin und her – jedes Gerät hätte alle 16 MB neu geladen, obwohl sich fast
+    nichts geändert hat. Stattdessen bekommt jede URL beim ersten Mal eine
+    Nummer und behält sie für immer (INDEX_FILE). Neue Petitionen füllen das
+    letzte angefangene Paket auf, danach kommt ein neues dazu. So bleiben alte
+    Pakete Byte für Byte gleich und wachsen auf dem Gerät zur Bibliothek."""
+    zuordnung = index.setdefault(key, {})
+    belegung = Counter(zuordnung.values())   # auch gelöschte zählen mit, damit
+    chunks: dict[int, dict[str, str]] = defaultdict(dict)   # Nummern nie rücken
+    for rec, html in zip(items, texts):
         if not html:
             continue
-        n = pos // TEXT_CHUNK
-        chunks[n][rec["url"]] = html
+        url = rec["url"]
+        n = zuordnung.get(url)
+        if n is None:
+            n = next((i for i in range(len(belegung) + 1)
+                      if belegung[i] < TEXT_CHUNK), 0)
+            zuordnung[url] = n
+            belegung[n] += 1
+        chunks[n][url] = html
         rec["tc"] = n
     for n, mapping in chunks.items():
+        # sort_keys, damit ein inhaltlich unverändertes Paket auch byteweise
+        # unverändert bleibt (sonst wechselt allein die Reihenfolge im JSON).
         (OUT_DIR / f"{key}.t{n}.json").write_text(
-            json.dumps(mapping, ensure_ascii=False), encoding="utf-8")
+            json.dumps(mapping, ensure_ascii=False, sort_keys=True),
+            encoding="utf-8")
     return len(chunks)
 
 
@@ -233,11 +274,16 @@ def main() -> None:
     # laufen, weil "related" in den Datensätzen landet.
     related_n = compute_related(by_platform)
 
+    text_index = load_text_index()
     chunks_total = 0
     for key, items in by_platform.items():
-        chunks_total += write_texts(key, items, texts_by_platform[key])
+        chunks_total += write_texts(key, items, texts_by_platform[key],
+                                    text_index)
         (OUT_DIR / f"{key}.json").write_text(
             json.dumps(items, ensure_ascii=False), encoding="utf-8")
+    INDEX_FILE.write_text(
+        json.dumps(text_index, ensure_ascii=False, sort_keys=True),
+        encoding="utf-8")
 
     (OUT_DIR / "manifest.json").write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")

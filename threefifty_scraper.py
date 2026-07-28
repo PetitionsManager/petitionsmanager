@@ -53,8 +53,13 @@ API_URL   = "https://getinvolved350.vercel.app/"
 DATA_FILE = Path("threefifty_petitions.json")
 HTML_FILE = Path("threefifty_petitions.html")
 
-# Default: Deutschland/Europa, deutschsprachig.
-REGION    = "Region: Europe"
+# Deutschsprachig; zwei Regionsvarianten, weil keine allein alles kennt:
+# "Region: Europe" liefert 21 Aktionen, das Weglassen des Parameters ebenfalls
+# 21 – aber nur 16 davon sind dieselben. Zusammen 26. Die zwölf einzelnen
+# Regionen (Africa, Worldwide, United States …) wurden am 2026-07-28 alle
+# durchgemessen und brachten NULL zusätzliche Aktionen; sie zu fragen wäre nur
+# Last ohne Ertrag. None = Parameter weglassen.
+REGIONS   = ["Region: Europe", None]
 LANG_CODE = "Language: German"
 TIME_FILTERS = ["Get involved page: low bar",
                 "Get involved page: medium bar",
@@ -92,10 +97,11 @@ def classify(obj: dict) -> str:
 # ----------------------------------------------------------------------------
 # Entdeckung über die JSON-API (alle drei Zeitstufen zusammenführen)
 # ----------------------------------------------------------------------------
-def _api_url(time_filter: str) -> str:
-    return API_URL + "?" + urlencode({"region": REGION,
-                                      "time_filter": time_filter,
-                                      "lang_code": LANG_CODE})
+def _api_url(time_filter: str, region: str | None = REGIONS[0]) -> str:
+    params = {"time_filter": time_filter, "lang_code": LANG_CODE}
+    if region:
+        params["region"] = region
+    return API_URL + "?" + urlencode(params)
 
 
 def _page_id(obj: dict) -> str | None:
@@ -104,12 +110,13 @@ def _page_id(obj: dict) -> str | None:
 
 
 def discover(fetcher: core.Fetcher) -> dict[str, dict]:
-    """{page_id: api_obj} über alle Zeitstufen (Region Europa, Deutsch)."""
+    """{page_id: api_obj} über alle Zeitstufen × Regionsvarianten (Deutsch)."""
     found: dict[str, dict] = {}
-    prog(phase="discover", current=0, total=len(TIME_FILTERS),
-         message="Lade Aktionsliste (Europa/Deutsch) …")
-    for i, tf in enumerate(TIME_FILTERS, 1):
-        resp = fetcher.get(_api_url(tf))
+    abfragen = [(r, tf) for r in REGIONS for tf in TIME_FILTERS]
+    prog(phase="discover", current=0, total=len(abfragen),
+         message="Lade Aktionsliste (Deutsch) …")
+    for i, (region, tf) in enumerate(abfragen, 1):
+        resp = fetcher.get(_api_url(tf, region))
         added = 0
         if resp is not None and resp.ok:
             try:
@@ -127,8 +134,8 @@ def discover(fetcher: core.Fetcher) -> dict[str, dict]:
                     pid = str(key) if str(key).isdigit() else _page_id(val)
                     if pid and pid not in found:
                         found[pid] = val; added += 1
-        log(f"  {tf}: +{added} (gesamt {len(found)}).")
-        prog(current=i, total=len(TIME_FILTERS),
+        log(f"  {region or 'ohne Region'} / {tf}: +{added} (gesamt {len(found)}).")
+        prog(current=i, total=len(abfragen),
              message=f"{len(found)} Aktionen bisher")
     return found
 
@@ -240,7 +247,7 @@ def run(args) -> None:
         return (store.get(page_id, {}).get("url")
                 or f"{BASE_URL}/cms/view_by_page_id/{page_id}")
 
-    log("Sammle deutsche 350.org-Aktionen (Region Europa) …")
+    log("Sammle deutsche 350.org-Aktionen (Europa + ohne Regionsfilter) …")
     discovered = discover(fetcher)
 
     # (1) Bekannte, die nicht mehr im Feed sind → Offline-Prüfung.
@@ -301,7 +308,7 @@ def check(fetcher):
         n = len(json.loads(resp.text))
     except ValueError:
         return False, "API liefert kein JSON"
-    return (n >= 1), f"{n} Aktionen (Europa/Deutsch)"
+    return (n >= 1), f"{n} Aktionen ({REGIONS[0]}/Deutsch)"
 
 PLATFORM = Platform(
     key="threefifty",

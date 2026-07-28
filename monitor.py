@@ -98,6 +98,15 @@ def parse_args():
     p.add_argument("--archive-batch", type=int, default=core.ARCHIVE_BATCH,
                    help="wie viele Archiv-Kandidaten pro Lauf geprüft werden "
                         f"(Default {core.ARCHIVE_BATCH}; 0 = keine)")
+    p.add_argument("--backfill", action="store_true",
+                   help="Listen der beendeten und archivierten Petitionen "
+                        "einmal komplett einlesen (bundestag: status.3 + "
+                        "status.4, ~655 Anfragen). Die Datensätze entstehen "
+                        "sofort aus der Listentabelle; die fehlenden Volltexte "
+                        "arbeiten die folgenden Läufe portionsweise ab")
+    p.add_argument("--backfill-batch", type=int, default=core.BACKFILL_BATCH,
+                   help="wie viele fehlende Volltexte pro Lauf nachgeladen "
+                        f"werden (Default {core.BACKFILL_BATCH}; 0 = keine)")
     p.add_argument("--serve", action="store_true",
                    help="Monitor lokal ausliefern, inkl. 'Jetzt scrapen'-Buttons")
     p.add_argument("--port", type=int, default=8000,
