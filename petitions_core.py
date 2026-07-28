@@ -40,7 +40,7 @@ from dataclasses import dataclass, field
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Callable
-from urllib.parse import urljoin, urlparse, parse_qs
+from urllib.parse import urljoin, urlparse, parse_qs, urlencode as _urlencode
 
 import requests
 from bs4 import BeautifulSoup
@@ -123,6 +123,11 @@ def now_iso() -> str:
 # Standard-Mindestabstand zwischen zwei Prüfungen derselben Petition (Stunden).
 DEFAULT_MIN_INTERVAL_HOURS = 24
 
+# So oft muss eine bekannte Petition in aufeinanderfolgenden Läufen fehlen,
+# bevor sie wirklich als offline gilt (siehe upsert). Schützt davor, dass eine
+# vorübergehend blockierende Quelle einen kompletten Bestand abschaltet.
+OFFLINE_CONFIRMATIONS = 2
+
 
 def skip_recent(rec: dict | None, args=None,
                 hours: float | None = None) -> bool:
@@ -164,6 +169,51 @@ def check_source(fetcher, url: str, pattern, min_count: int = 1,
                 for m in pattern.findall(resp.text)})
     ok = hits >= min_count
     return ok, f"{hits} {label}" + ("" if ok else f" – erwartet ≥{min_count}!")
+
+
+# ----------------------------------------------------------------------------
+# Archiv-Entdeckung über das Internet Archive
+# ----------------------------------------------------------------------------
+# Manche Plattformen veröffentlichen KEINE vollständige Liste (Avaaz zeigt nur
+# ~12 kuratierte Petitionen). Die CDX-API des Internet Archive kennt dagegen
+# alle jemals archivierten URLs einer Domain – daraus lassen sich die Slugs
+# rekonstruieren und anschließend LIVE gegen die Plattform verifizieren.
+# Nur was heute noch erreichbar ist, landet im Bestand.
+WAYBACK_CDX = "https://web.archive.org/cdx/search/cdx"
+
+
+def wayback_slugs(fetcher, url_prefix: str, pattern, limit: int = 200000,
+                  label: str = "Slugs") -> list[str]:
+    """Eindeutige Slugs aus allen archivierten URLs unterhalb `url_prefix`.
+
+    `pattern` ist ein kompiliertes Regex mit genau einer Gruppe, das den Slug
+    aus dem Pfad zieht. Query-Strings/Fragmente werden vorher abgeschnitten,
+    Groß-/Kleinschreibung beim Dedupe ignoriert. Fehler sind nicht fatal –
+    dann kommt einfach eine leere Liste zurück (die Live-Quellen greifen
+    weiterhin)."""
+    query = _urlencode({"url": url_prefix, "matchType": "prefix",
+                        "output": "json", "fl": "original",
+                        "collapse": "urlkey", "limit": str(limit)})
+    resp = fetcher.get(f"{WAYBACK_CDX}?{query}", timeout=300)
+    if resp is None or not resp.ok:
+        log("Archiv-Abfrage (Internet Archive) fehlgeschlagen – übersprungen.")
+        return []
+    try:
+        rows = json.loads(resp.text)[1:]
+    except (ValueError, IndexError):
+        log("Archiv-Antwort unlesbar – übersprungen.")
+        return []
+    seen: dict[str, str] = {}
+    for row in rows:
+        path = str(row[0]).split("?")[0].split("#")[0]
+        m = pattern.search(path)
+        if m:
+            slug = m.group(1).strip("/")
+            if slug:
+                seen.setdefault(slug.lower(), slug)
+    log(f"Internet Archive: {len(rows)} archivierte URLs → "
+        f"{len(seen)} eindeutige {label}.")
+    return sorted(seen.values())
 
 
 def log(msg: str) -> None:
@@ -355,15 +405,17 @@ class Fetcher:
         except Exception:
             return True
 
-    def get(self, url: str):
+    def get(self, url: str, timeout: int | None = None):
         """requests.Response oder None bei endgültigem Fehler.
-        404/410 werden bewusst zurückgegeben (Offline-Erkennung)."""
+        404/410 werden bewusst zurückgegeben (Offline-Erkennung).
+        `timeout` überschreibt REQUEST_TIMEOUT (z. B. für große Archiv-Listen)."""
         if not self.allowed(url):
             log(f"robots.txt verbietet: {url}")
             return None
         for attempt in range(1, MAX_RETRIES + 1):
             try:
-                resp = self.session.get(url, timeout=REQUEST_TIMEOUT)
+                resp = self.session.get(url,
+                                        timeout=timeout or REQUEST_TIMEOUT)
                 time.sleep(self.delay)
                 # Fehlt im Content-Type das Charset, rät requests ISO-8859-1
                 # (→ "fÃ¼r" statt "für"). Alle Zielplattformen liefern UTF-8.
@@ -440,9 +492,30 @@ def save_store(store: dict, data_file: Path, extra_meta: dict | None = None,
                quiet: bool = False) -> None:
     """Atomar (Temp-Datei + Rename): ein Abbruch mitten im Schreiben hinterlässt
     nie eine kaputte Datei. Wird bei jedem Scrape-Fortschritt aufgerufen, damit
-    bei Absturz/Timeout nichts verloren geht."""
+    bei Absturz/Timeout nichts verloren geht.
+
+    Beim Abschluss-Speichern (quiet=False) wird zusätzlich geprüft, ob die Zahl
+    der Online-Petitionen gegenüber dem letzten Lauf eingebrochen ist. Das ist
+    fast nie echt, sondern ein Zeichen für eine blockierende/kaputte Quelle
+    (WAF-Seite, Umbau, Rate-Limit) – dann wird eine Warnung ins _meta
+    geschrieben, die das Dashboard anzeigt."""
+    online_now = sum(1 for r in store.values()
+                     if isinstance(r, dict) and r.get("status") == "online")
+    meta_extra = dict(extra_meta or {})
+    if not quiet:
+        prev = load_meta(data_file)
+        prev_online = prev.get("online_count")
+        warn = None
+        if (isinstance(prev_online, int) and prev_online >= 20
+                and online_now < prev_online * 0.5):
+            warn = (f"Online-Bestand von {prev_online} auf {online_now} "
+                    f"gefallen – Quelle vermutlich blockiert oder umgebaut.")
+            log(f"WARNUNG: {warn}")
+        meta_extra["health_warning"] = warn
+        meta_extra["online_count"] = online_now
+
     out = {"_meta": {**FIELD_META, "generated_at": now_iso(),
-                     "petition_count": len(store), **(extra_meta or {})}}
+                     "petition_count": len(store), **meta_extra}}
     out.update(store)
     tmp = data_file.with_name(data_file.name + ".tmp")
     tmp.write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -476,13 +549,22 @@ def upsert(store: dict, slug: str, new: dict, list_hint: dict,
         rec["status"] = "online"
         rec["last_seen"] = ts
         rec["offline_since"] = None
+        rec.pop("offline_misses", None)
         tags = make_tags(rec)
         if tags:
             rec["tags"] = tags
     elif status == "offline":
-        rec["status"] = "offline"
-        if not rec.get("offline_since"):
-            rec["offline_since"] = ts
+        # Nicht beim ersten Fehlschlag abschalten: eine kurzzeitig blockende
+        # Quelle (WAF-/Fehlerseite, Rate-Limit) darf keine ganze Plattform auf
+        # "offline" kippen. Erst nach OFFLINE_CONFIRMATIONS Läufen in Folge.
+        misses = int(rec.get("offline_misses") or 0) + 1
+        rec["offline_misses"] = misses
+        if rec.get("status") == "offline" or misses >= OFFLINE_CONFIRMATIONS:
+            rec["status"] = "offline"
+            if not rec.get("offline_since"):
+                rec["offline_since"] = ts
+        else:
+            rec["status"] = "online"      # noch unbestätigt → vorerst behalten
 
     rec["last_checked"] = ts
     rec.setdefault("url", default_url)
@@ -1069,6 +1151,12 @@ def _live_card(platform: Platform) -> str:
                           ("grow", "wächst noch") if pct >= 50 else
                           ("low", "großer Backlog"))
 
+    # Einbruch des Online-Bestands = fast immer ein Quellenproblem, kein echtes
+    # Verschwinden der Petitionen (siehe save_store).
+    warning = meta.get("health_warning")
+    warn_html = (f'<div class="healthwarn">⚠ {_esc(warning)}</div>'
+                 if warning else "")
+
     return f"""
     <a class="card" href="{platform.html_file.name}" data-platform="{_esc(platform.key)}">
       <div class="card-head"><span class="card-dot weact"></span><h2>{_esc(platform.name)}</h2>
@@ -1085,6 +1173,7 @@ def _live_card(platform: Platform) -> str:
         <div class="completeness__bar"><div class="completeness__fill" style="width:{pct}%"></div></div>
         <span class="completeness__sub">{len(store)} von ~{available} entdeckten · {comp_lbl}</span>
       </div>
+      {warn_html}
       <div class="mini-progress">
         <div class="mini-progress__bar"><div class="mini-progress__fill"></div></div>
         <span class="mini-progress__text"></span>
@@ -1194,6 +1283,9 @@ _DASHBOARD_TEMPLATE = """<!DOCTYPE html>
   .completeness.full  .completeness__fill{background:var(--online)}
   .completeness.grow  .completeness__fill{background:#c98a20}
   .completeness.low   .completeness__fill{background:var(--offline)}
+  .healthwarn{margin:0 0 12px;padding:8px 10px;border-radius:8px;font-size:12px;
+              line-height:1.4;background:#fdeceb;color:#8d2f28;
+              border:1px solid #f3c3bf}
   .completeness.full  .completeness__head b{color:var(--online)}
   .completeness.low   .completeness__head b{color:var(--offline)}
   .card-btn{display:inline-block;font-weight:650;color:var(--indigo)}

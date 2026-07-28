@@ -3,7 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#1c5d50">
+<!-- Startwerte; app.js zieht das je nach gewaehltem Design nach. -->
+<meta name="theme-color" content="#f7f4ec" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#191714" media="(prefers-color-scheme: dark)">
 <title>PetitionsManager</title>
 
 <!-- PWA / installierbar auf Android & iOS ("Zum Home-Bildschirm") -->
@@ -16,16 +18,16 @@
 
 <link rel="stylesheet" href="fontawesome/css/all.min.css">
 <link rel="stylesheet" href="style.css">
+<!-- Dark Mode: haengt an <html data-theme="light|dark|auto"> -->
+<link rel="stylesheet" href="theme.css">
 </head>
 <body>
 <div class="app">
 
-  <!-- Kopfleiste -->
+  <!-- Kopfleiste (das Hamburger-Menue ist entfallen: alles steht in den
+       Einstellungen) -->
   <header class="topbar">
     <div class="topbar__title" id="topbar-title">Petitionen</div>
-    <button class="iconbtn" id="hamburger" aria-label="Menü öffnen">
-      <i class="fa-solid fa-bars"></i>
-    </button>
   </header>
 
   <!-- Inhaltsbereich (Tabs werden hier hineingerendert) -->
@@ -49,20 +51,11 @@
     <i class="fa-solid fa-arrow-up"></i>
   </button>
 
-  <!-- Hamburger-Drawer -->
-  <div class="drawer-scrim" id="drawer-scrim"></div>
-  <aside class="drawer" id="drawer">
-    <div class="drawer__head">Menü</div>
-    <button class="drawer__item" data-action="refresh">
-      <i class="fa-solid fa-arrows-rotate"></i> Daten aktualisieren</button>
-    <button class="drawer__item" data-action="source">
-      <i class="fa-solid fa-database"></i> Datenquelle</button>
-    <button class="drawer__item" data-action="about">
-      <i class="fa-solid fa-circle-info"></i> Über die App</button>
-    <div class="drawer__foot" id="drawer-foot">—</div>
-  </aside>
-
 </div>
+<!-- Texte und Plattform-Stammdaten liegen getrennt vom Programmcode und
+     muessen VOR app.js geladen werden. -->
+<script src="texts.js"></script>
+<script src="platforms.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

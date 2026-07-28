@@ -1,0 +1,98 @@
+name: Checks
+
+# Schnelle Grundprüfung bei jedem Push. Grund: ein Syntaxfehler in webapp/app.js
+# fällt sonst erst auf dem Handy auf – die App zeigt dann einen weißen
+# Bildschirm, und der APK-Build hätte ihn klaglos mitgebaut.
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Node einrichten
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: JavaScript der App prüfen
+        run: |
+          for f in webapp/*.js; do
+            echo "prüfe $f"
+            node --check "$f"
+          done
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Python-Dateien übersetzen
+        run: python3 -m compileall -q *.py
+
+      - name: App-Daten als JSON validieren
+        run: |
+          python3 - <<'PY'
+          import json, sys
+          from pathlib import Path
+
+          data = Path("webapp/data")
+          if not data.exists():
+              print("webapp/data fehlt – übersprungen.")
+              sys.exit(0)
+
+          manifest = json.loads((data / "manifest.json").read_text(encoding="utf-8"))
+          keys = [p["key"] for p in manifest["platforms"] if p.get("live")]
+          fehler = []
+
+          for key in keys:
+              liste = data / f"{key}.json"
+              if not liste.exists():
+                  fehler.append(f"{key}.json fehlt, steht aber live im Manifest")
+                  continue
+              recs = json.loads(liste.read_text(encoding="utf-8"))
+              # Jedes "tc" muss ein vorhandenes Volltext-Paket bezeichnen,
+              # sonst laeuft die App beim Aufklappen ins Leere.
+              for chunk in {r["tc"] for r in recs if isinstance(r.get("tc"), int)}:
+                  if not (data / f"{key}.t{chunk}.json").exists():
+                      fehler.append(f"{key}: Volltext-Paket t{chunk} fehlt")
+              ohne_url = sum(1 for r in recs if not r.get("url"))
+              if ohne_url:
+                  fehler.append(f"{key}: {ohne_url} Datensätze ohne URL")
+              print(f"{key}: {len(recs)} Petitionen, "
+                    f"{sum(1 for r in recs if r.get('related'))} mit Verwandtschaft")
+
+          for f in sorted(data.glob("*.t[0-9]*.json")):
+              json.loads(f.read_text(encoding="utf-8"))
+
+          if fehler:
+              print("\nFEHLER:")
+              for f in fehler:
+                  print(" -", f)
+              sys.exit(1)
+          print("\nAlle App-Daten in Ordnung.")
+          PY
+
+      - name: Texte und Plattform-Stammdaten auf Vollständigkeit prüfen
+        run: |
+          node -e '
+            global.window = {};
+            require("./webapp/texts.js");
+            require("./webapp/platforms.js");
+            const T = global.window.PM_TEXTS, P = global.window.PM_PLATFORMS;
+            const fehlt = [];
+            for (const k of ["app","wizard","liste","signed","platform",
+                             "settings","notify","reset","profile","about"])
+              if (!T[k]) fehlt.push("texts.js: Abschnitt " + k);
+            for (const [key, v] of Object.entries(P))
+              for (const f of ["color","logo","about"])
+                if (!v[f]) fehlt.push(`platforms.js: ${key}.${f}`);
+            if (fehlt.length) { console.error(fehlt.join("\n")); process.exit(1); }
+            console.log(`texts.js und platforms.js vollständig `
+              + `(${Object.keys(P).length} Plattformen)`);
+          '

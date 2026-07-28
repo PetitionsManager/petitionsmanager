@@ -3,12 +3,18 @@
    und App-Dateien; offline → zuletzt geladene Inhalte aus dem Cache. Beim
    Install wird die App-Hülle vorab gecacht, damit sie auch beim ersten
    Offline-Start funktioniert. */
-var CACHE = "pm-cache-v1";
+/* Version hochzählen, sobald Dateien in SHELL dazukommen oder sich die
+   App-Hülle grundlegend ändert – sonst behalten installierte Geräte die
+   alte Fassung. */
+var CACHE = "pm-cache-v2";
 var SHELL = [
   "./",
   "./index.html",
   "./app.js",
+  "./texts.js",
+  "./platforms.js",
   "./style.css",
+  "./theme.css",
   "./manifest.webmanifest",
   "./fontawesome/css/all.min.css",
   "./fontawesome/webfonts/fa-solid-900.woff2",
