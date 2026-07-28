@@ -37,8 +37,10 @@
    (app.js/style.css)
    v12: Wortmarke führt zurück zur Übersicht (index.html: <div> → <button>),
    Aufnahmekodex als eigener Abschnitt unter „Unterstütze PetitionsManager"
-   (index.html/app.js/style.css) */
-var CACHE = "pm-cache-v12";
+   (index.html/app.js/style.css)
+   v13: Sprungmarke in der Lücken-Meldung des Bedienfelds, Wortlaut dort
+   korrigiert („beim Sortieren am Ende") (app.js/style.css) */
+var CACHE = "pm-cache-v13";
 /* Versionsunabhängig – überlebt das Hochzählen von CACHE. Die Zahl dahinter
    NUR hochsetzen, wenn sich die Paketnummerierung selbst ändert (dann stimmen
    die alten Inhalte nicht mehr zur Nummer und die Bibliothek muss weg). */
