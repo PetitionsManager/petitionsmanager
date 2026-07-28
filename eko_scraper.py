@@ -49,6 +49,22 @@ HTML_FILE = Path("eko_petitions.html")
 ACTION_HREF_RE = re.compile(r'https://actions?\.eko\.org/a/([a-z0-9\-]+)')
 NON_ACTION_SLUGS = {"donate", "spende"}
 
+# Kampagnenkarten der Übersicht: <div data-block="campaign-card"> mit Bild
+# (alt = Titel), Kurztext, und CTA-Link auf /a/<slug>. Aus ihnen wird ein
+# Datensatz gebaut, wenn die Detailseite nicht erreichbar ist (siehe unten).
+CARD_SEL = 'div[data-block="campaign-card"]'
+
+# Sprach-Heuristik für Karten: die deutsche Übersicht listet auch globale
+# (englische) Kampagnen. Ohne Detailseite (die <html lang> liefert) entscheiden
+# Funktionswörter – die sind sprachtypisch und robust gegen kaputte Umlaute.
+_DE_WORDS = re.compile(
+    r"\b(und|oder|der|die|das|den|dem|des|ein|eine|einen|f[uü]r|gegen|nicht|"
+    r"kein|keine|wir|sie|ist|sind|werden|wird|jetzt|auf|von|vom|mit|zum|zur|"
+    r"dass|muss|soll|sollen|schon|mehr|unsere|unser|ihre|beim|durch)\b", re.I)
+_EN_WORDS = re.compile(
+    r"\b(the|and|for|with|our|your|this|that|are|from|now|stop|tell|they|"
+    r"their|has|have|will|must|need|before|about|into|over|been|being)\b", re.I)
+
 # Die Kampagnen-Suche (eko.org/de/campaigns?query=…) ist serverseitig hart auf
 # 27 Treffer gedeckelt – aber verschiedene Begriffe fördern verschiedene
 # Kampagnen zutage. Union über viele deutsche Themenbegriffe hebt die
@@ -89,10 +105,58 @@ FETCH_HEADERS = {
 # ----------------------------------------------------------------------------
 # Entdeckung
 # ----------------------------------------------------------------------------
+def _looks_german(text: str) -> bool:
+    de = len(_DE_WORDS.findall(text))
+    en = len(_EN_WORDS.findall(text))
+    return de >= 2 and de > en
+
+
+def classify(cta: str, title: str) -> str:
+    """Format der Aktion (Eko mischt Petitionen, Spendenaufrufe und sonstige
+    Aktionen). Petition zuerst prüfen – „unterschreiben“ enthält „schreib“."""
+    t = f"{cta} {title}".lower()
+    if any(w in t for w in ("unterschreib", "unterzeichn", "petition")):
+        return "Petition"
+    if "spend" in t:
+        return "Spenden-Aktion"
+    if "brief" in t:
+        return "Brief-Aktion"
+    if any(w in t for w in ("mail", "nachricht", "schreib")):
+        return "E-Mail-Aktion"
+    return "Aktion"
+
+
+def _parse_card(card) -> tuple[str, dict] | None:
+    """(slug, karten-daten) aus einer Kampagnenkarte der Übersicht."""
+    link = card.find("a", href=ACTION_HREF_RE)
+    if link is None:
+        return None
+    m = ACTION_HREF_RE.search(link["href"])
+    if not m or m.group(1) in NON_ACTION_SLUGS:
+        return None
+    img = card.find("img")
+    title = (img.get("alt") or "").strip() if img else ""
+    texts = sorted((d.get_text(" ", strip=True)
+                    for d in card.find_all("div")), key=len, reverse=True)
+    summary = next((t for t in texts if 40 < len(t) < 1200 and t != title), None)
+    data = {
+        "title": title or None,
+        "summary": summary,
+        "image_url": (img.get("src") or "").strip() if img else None,
+        "cta": link.get_text(" ", strip=True),
+    }
+    data["german"] = _looks_german(f"{title} {summary or ''}")
+    return m.group(1), data
+
+
 def discover_slugs(fetcher: core.Fetcher) -> dict[str, dict]:
     """Kandidaten aus der Kampagnen-Startseite PLUS der Union vieler deutscher
     Suchbegriffe (die Suche cappt bei 27/Begriff, liefert aber je nach Begriff
-    andere Kampagnen). Sprach-Verifikation erfolgt danach in parse_detail."""
+    andere Kampagnen).
+
+    Rückgabe: {slug: karten-daten}. Die Karten sind wichtig geworden, weil Eko
+    die Detailseiten nach action.eko.org (Vercel) umzieht, wo ein
+    Bot-Schutz-Checkpoint sitzt – dann ist die Karte die einzige Quelle."""
     found: dict[str, dict] = {}
     sources = ["", *[f"?query={t}" for t in SEARCH_TERMS]]
     total = len(sources)
@@ -100,15 +164,38 @@ def discover_slugs(fetcher: core.Fetcher) -> dict[str, dict]:
     for i, qs in enumerate(sources, 1):
         resp = fetcher.get(f"{WWW_URL}/de/campaigns{qs}")
         if resp is not None and resp.ok:
+            soup = BeautifulSoup(resp.text, "html.parser")
+            for card in soup.select(CARD_SEL):
+                parsed = _parse_card(card)
+                if parsed and parsed[0] not in found:
+                    found[parsed[0]] = parsed[1]
+            # Sicherheitsnetz, falls das Karten-Markup wieder wechselt.
             for m in ACTION_HREF_RE.finditer(resp.text):
-                slug = m.group(1)
-                if slug not in NON_ACTION_SLUGS:
-                    found.setdefault(slug, {})
+                if m.group(1) not in NON_ACTION_SLUGS:
+                    found.setdefault(m.group(1), {})
         label = "Startseite" if qs == "" else qs[7:]
         prog(current=i, total=total,
              message=f"„{label}“ · {len(found)} Kandidaten bisher")
-    log(f"Kampagnen-Suche: {len(found)} eindeutige Aktionen gefunden.")
+    german = sum(1 for d in found.values() if d.get("german"))
+    log(f"Kampagnen-Suche: {len(found)} eindeutige Aktionen gefunden "
+        f"({german} davon deutschsprachig).")
     return found
+
+
+def record_from_card(slug: str, card: dict) -> dict:
+    """Notdatensatz allein aus der Kampagnenkarte – ohne Unterschriftenstand,
+    aber mit Titel, Kurztext und Bild. Besser als gar kein Eintrag."""
+    return {
+        "title": card.get("title"),
+        "summary": card.get("summary"),
+        "description_full": (f"<p>{core._esc(card['summary'])}</p>"
+                             if card.get("summary") else None),
+        "image_url": card.get("image_url"),
+        "url": f"{BASE_URL}/a/{slug}",
+        "started_by": "Eko",
+        "kind": "petition",
+        "category": classify(card.get("cta") or "", card.get("title") or ""),
+    }
 
 
 # ----------------------------------------------------------------------------
@@ -276,11 +363,22 @@ def run(args) -> None:
     prog(phase="scrape", current=0, total=len(new_slugs),
          message="Beginne Scrape …")
 
+    from_cards = 0
     for i, slug in enumerate(new_slugs, 1):
+        card = discovered.get(slug) or {}
         log(f"({i}/{len(new_slugs)}) {slug}")
         prog(current=i, total=len(new_slugs), message=slug)
         status, rec = scrape_petition(fetcher, slug)
         if status == "error":
+            # Typischer Fall seit dem Umzug auf action.eko.org: Bot-Schutz
+            # antwortet mit 429. Dann die Kampagnenkarte übernehmen – ohne
+            # Unterschriftenstand, aber mit Titel, Text und Bild.
+            if card.get("german") and card.get("title"):
+                core.upsert(store, slug, record_from_card(slug, card), {},
+                            "online", ts, f"{BASE_URL}/a/{slug}")
+                save()
+                from_cards += 1
+                log("  Detailseite gesperrt – aus Kampagnenkarte übernommen.")
             continue
         if status == "skip":
             log("  übersprungen (keine deutsche Unterschriften-Aktion).")
@@ -290,11 +388,18 @@ def run(args) -> None:
 
     new_petitions = [s for s, r in store.items() if r.get("first_seen") == ts]
     if new_petitions:
-        log(f"NEU: {len(new_petitions)} neue Aktion(en) in diesem Lauf.")
+        log(f"NEU: {len(new_petitions)} neue Aktion(en) in diesem Lauf "
+            f"({from_cards} davon nur aus der Kampagnenkarte).")
+
+    # Vollständigkeit ehrlich rechnen: die deutsche Übersicht listet auch
+    # globale (englische) Kampagnen mit – die gehören nicht in den Bestand und
+    # dürfen die Quote nicht drücken.
+    german = {s for s, d in discovered.items() if d.get("german")}
+    available = len(german | set(store)) if german else len(discovered)
 
     prog(message="Speichere & baue HTML …")
     save(quiet=False, new_petitions_last_run=new_petitions,
-         available=len(discovered))
+         available=available)
     core.write_list_html(PLATFORM)
     log("Fertig (Eko).")
 

@@ -26,7 +26,11 @@
     cross: null,          // plattformübergreifende Suche {type,value,fromPlatform}
     openPetitionUrl: null,// nach Navigation diese Petition automatisch aufklappen
     archiveOpen: false,   // Archiv-Akkordion (Plattform-Detail) offen?
-    offlineOpen: false    // Offline-Akkordion offen?
+    offlineOpen: false,   // Offline-Akkordion offen?
+    prefs: null,          // persönliche Einstellungen (siehe loadPrefs)
+    signedQuery: "",      // Suchwort in "Meine unterzeichneten Petitionen"
+    aboutPlatform: false, // Info-Panel "Über diese Plattform" offen?
+    wizardStep: 0         // aktueller Schritt der Ersteinrichtung
   };
 
   var content = document.getElementById("content");
@@ -46,6 +50,93 @@
   }
   function langRank(code) {
     var i = LANG_ORDER.indexOf(code); return i < 0 ? 99 : i;
+  }
+
+  // ---- Texte & Plattform-Stammdaten ------------------------------------------
+  // Sämtliche Bildschirmtexte stehen in texts.js, die Marken-Daten der
+  // Plattformen in platforms.js. Beide werden vor app.js geladen. Fehlt eine
+  // der Dateien, läuft die App weiter – dann greifen die Rückfalltexte.
+  var TX = window.PM_TEXTS || {};
+  var PLATS = window.PM_PLATFORMS || {};
+
+  // T("wizard.lang.title", "Rückfalltext") – holt einen Text über seinen Pfad.
+  function T(path, fallback) {
+    var cur = TX, parts = String(path).split("."), i;
+    for (i = 0; i < parts.length; i++) {
+      if (cur == null || typeof cur !== "object") return fallback || "";
+      cur = cur[parts[i]];
+    }
+    return (cur == null || cur === "") ? (fallback || "") : cur;
+  }
+  // Platzhalter der Form {n} ersetzen: fill("Schritt {n}", {n: 2}).
+  function fill(str, vals) {
+    return String(str).replace(/\{(\w+)\}/g, function (m, k) {
+      return Object.prototype.hasOwnProperty.call(vals, k) ? vals[k] : m;
+    });
+  }
+  function platInfo(key) { return PLATS[key] || {}; }
+  // Marken-Monogramm; ohne platforms.js ein schlichtes Buchstaben-Badge.
+  function platLogo(key, name) {
+    var info = platInfo(key);
+    if (info.logo) return '<span class="plogo">' + info.logo + "</span>";
+    var initial = String(name || key || "?").trim().charAt(0).toUpperCase();
+    return '<span class="plogo plogo--fallback">' + esc(initial) + "</span>";
+  }
+  function platColor(key) { return platInfo(key).color || null; }
+
+  // ---- Persönliche Einstellungen ---------------------------------------------
+  // Ein einziger localStorage-Schlüssel für alles, was die Person selbst
+  // einstellt (Darstellung, Benachrichtigungen, Name/Bild, Wizard-Status).
+  var PREFS_KEY = "prefs";
+  function defaultPrefs() {
+    return {
+      theme: "auto",              // "light" | "dark" | "auto"
+      wizardDone: false,
+      name: "",
+      photo: null,                // Data-URL des Profilbilds
+      notify: { on: false, time: "09:00", quiet: true, lastDate: null }
+      // notify.quiet = true  → auch melden, wenn es nichts Neues gibt
+    };
+  }
+  function loadPrefs() {
+    var p = defaultPrefs(), raw = LS.getItem(PREFS_KEY);
+    if (raw) {
+      try {
+        var o = JSON.parse(raw);
+        if (o && typeof o === "object") {
+          if (o.theme) p.theme = o.theme;
+          if (o.wizardDone) p.wizardDone = true;
+          if (typeof o.name === "string") p.name = o.name;
+          if (typeof o.photo === "string") p.photo = o.photo;
+          if (o.notify && typeof o.notify === "object") {
+            if (typeof o.notify.on === "boolean") p.notify.on = o.notify.on;
+            if (o.notify.time) p.notify.time = o.notify.time;
+            if (typeof o.notify.quiet === "boolean") p.notify.quiet = o.notify.quiet;
+            if (o.notify.lastDate) p.notify.lastDate = o.notify.lastDate;
+          }
+        }
+      } catch (e) {}
+    }
+    return p;
+  }
+  function savePrefs() { LS.setItem(PREFS_KEY, JSON.stringify(state.prefs)); }
+
+  // Darstellung anwenden: das CSS in theme.css hängt an <html data-theme="…">.
+  function applyTheme() {
+    var t = (state.prefs && state.prefs.theme) || "auto";
+    document.documentElement.setAttribute("data-theme", t);
+    var dark = t === "dark" || (t === "auto" && window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches);
+    // Statusleiste des Geräts an den Seitengrund angleichen (siehe style.css
+    // bzw. theme.css: --bg). Sonst bleibt oben ein andersfarbiger Streifen.
+    // index.html liefert zwei Tags mit media-Abfrage für den ersten Aufbau;
+    // sobald wir selbst entscheiden, bleibt genau eines ohne media übrig.
+    var metas = document.querySelectorAll('meta[name="theme-color"]');
+    for (var i = metas.length - 1; i > 0; i--) metas[i].parentNode.removeChild(metas[i]);
+    if (metas[0]) {
+      metas[0].removeAttribute("media");
+      metas[0].setAttribute("content", dark ? "#191714" : "#f7f4ec");
+    }
   }
 
   // ---- Hilfen ----------------------------------------------------------------
@@ -165,10 +256,22 @@
     }
     content.innerHTML = "";
 
+    // Begrüßung: erklärt in zwei Zeilen, worum es geht, und führt zur Suche.
+    var hello = T("app.welcomeTitle", "Willkommen im PetitionsManager");
+    var name = (state.prefs.name || "").trim();
+    content.appendChild(el('<div class="welcome">' +
+      '<h1 class="welcome__t">' +
+        esc(name ? "Schön, dass du da bist, " + name + "." : hello) + "</h1>" +
+      '<p class="welcome__s">' +
+        esc(T("app.welcomeText",
+              "Mit der Suche findest du aktuelle Petitionen – " +
+              "plattformübergreifend an einem Ort.")) + "</p></div>"));
+
     // Volltextsuche über alle aktivierten Plattformen (Feld + Button).
     var searchRow = el('<form class="mainsearch" role="search">' +
       '<input class="mainsearch__in" type="search" ' +
-      'placeholder="Alle Petitionen durchsuchen …" value="' +
+      'placeholder="' + esc(T("liste.searchPlaceholder",
+        "Alle Petitionen durchsuchen …")) + '" value="' +
       esc(state.mainQuery) + '">' +
       '<button class="mainsearch__btn" type="submit" aria-label="Suchen">' +
       '<i class="fa-solid fa-magnifying-glass"></i> Suchen</button></form>');
@@ -182,11 +285,24 @@
       render();
     });
     content.appendChild(searchRow);
+    if (T("liste.searchHint", "")) {
+      content.appendChild(el('<p class="mainsearch__hint">' +
+        esc(T("liste.searchHint", "")) + "</p>"));
+    }
 
     // Gruppen aufbauen: (1) Favoriten zuerst, (2) danach nach Sprache.
     var groupDefs = [];
     var favs = live.filter(function (p) { return isFav(p.key); });
     if (favs.length) groupDefs.push({ key: "__fav", label: "Favoriten", plats: favs });
+    else if (T("favorites.how", "")) {
+      // Noch keine Favoriten: einmal erklären, wie das geht.
+      content.appendChild(el('<div class="favtip">' +
+        '<i class="fa-solid fa-star"></i><p>' +
+        esc(T("favorites.how",
+              "Tippe in den Einstellungen auf den Stern neben einer " +
+              "Plattform – sie erscheint dann ganz oben in deiner Liste.")) +
+        "</p></div>"));
+    }
 
     var rest = live.filter(function (p) { return !isFav(p.key); });
     var groups = {};
@@ -337,15 +453,21 @@
     var newN = p["new"] || 0;
     var newLabel = newN > 0
       ? '<span class="plat__new">+' + nf.format(newN) + " neu</span>" : "";
+    var brand = platColor(p.key);
+    var tagline = platInfo(p.key).tagline;
     var card = el(
-      '<button class="plat">' +
+      '<button class="plat"' +
+        (brand ? ' style="--brand:' + esc(brand) + '"' : "") + ">" +
+        platLogo(p.key, p.name) +
         '<span class="plat__body">' +
           '<span class="plat__name">' + esc(p.name) +
             '<span class="flag">' + info.flag + '</span></span>' +
           '<span class="plat__meta">' + nf.format(p.online) +
             " Petitionen" + newLabel + '</span>' +
+          (tagline ? '<span class="plat__tag">' + esc(tagline) + "</span>" : "") +
         '</span>' +
-        '<span class="plat__chev"><i class="fa-solid fa-chevron-right"></i></span>' +
+        '<span class="plat__chev">' +
+          '<i class="fa-solid fa-arrow-right"></i></span>' +
       '</button>');
     card.addEventListener("click", function () {
       state.platform = p.key; state.search = "";
@@ -417,7 +539,8 @@
       if (e.target.closest(".pet__ext")) return;   // Extern-Link klappt nicht
       var open = pet.classList.toggle("open");
       if (open && !body.dataset.built) {
-        buildPetBody(body, r, ctx); body.dataset.built = "1";
+        // platKey mitgeben: daraus wird das Volltext-Paket geladen.
+        buildPetBody(body, r, ctx, platKey); body.dataset.built = "1";
       }
     });
     if (catBar) {
@@ -492,6 +615,32 @@
   // Lädt (und cacht) die Daten ALLER aktivierten Plattformen; für die Suche
   // nach gleichen/ähnlichen Petitionen im Kachel-Footer. Beim ersten Aufruf
   // werden die JSONs geholt, danach kommt alles aus dem Cache.
+  // Vorberechnete Verwandtschaft (publish.py) in die Form bringen, die
+  // renderSimilar erwartet – ganz ohne Nachladen fremder Plattformdaten.
+  function relatedFromData(r) {
+    if (!Array.isArray(r.related) || !r.related.length) return null;
+    var out = [];
+    r.related.forEach(function (rel) {
+      if (!rel || !rel.url || isArchived(rel.url)) return;
+      var plat = state.manifest.platforms.find(function (x) {
+        return x.key === rel.platform; });
+      if (!plat || !isEnabled(plat.key)) return;
+      var sc = typeof rel.score === "number" ? rel.score : 0;
+      out.push({ c: { url: rel.url, title: rel.title }, plat: plat,
+                 score: sc, same: sc >= 0.8 });
+    });
+    return out.length ? out : null;
+  }
+
+  // Volltext-Pakete: <key>.t<N>.json, einmal geladen und dann gemerkt.
+  var textChunks = {};        // "key.N" -> Promise auf {url: html}
+  function loadTextChunk(key, n) {
+    var id = key + "." + n;
+    if (!textChunks[id])
+      textChunks[id] = fetchJSON(state.base + "/" + key + ".t" + n + ".json");
+    return textChunks[id];
+  }
+
   function ensureAllData() {
     var plats = livePlatforms().filter(function (p) { return isEnabled(p.key); });
     return Promise.all(plats.map(function (p) {
@@ -624,7 +773,7 @@
     });
   }
 
-  function buildPetBody(body, r, ctx) {
+  function buildPetBody(body, r, ctx, platKey) {
     var h = "";
     if (r.image_url)
       h += '<img class="pet__img" src="' + esc(r.image_url) + '" alt="" ' +
@@ -632,12 +781,17 @@
     if (r.summary) h += "<h4>Kurzbeschreibung</h4><p>" + esc(r.summary) + "</p>";
     if (r.recipient) h += "<h4>Adressat</h4><p>" + esc(r.recipient) + "</p>";
     if (r.started_by) h += "<h4>Gestartet von</h4><p>" + esc(r.started_by) + "</p>";
-    if (r.description_full)
+    // Beschreibung: entweder schon im Datensatz (alte Datenstände) oder als
+    // Paketnummer "tc" hinterlegt – dann wird sie unten nachgeladen.
+    var textPending = !r.description_full && typeof r.tc === "number";
+    if (r.description_full || textPending)
       h += '<details class="descacc"><summary>' +
         '<span class="descacc__lbl"><i class="fa-solid fa-align-left"></i> ' +
         "Beschreibung</span>" +
         '<i class="fa-solid fa-chevron-down descacc__chev"></i></summary>' +
-        '<div class="pet__desc">' + r.description_full + "</div></details>";
+        '<div class="pet__desc">' + (r.description_full ||
+          '<div class="count-note">Text wird geladen …</div>') +
+        "</div></details>";
     // Schlagwörter (Tags) – aus dem Text abgeleitet; Klick verlinkt/filtert.
     if (Array.isArray(r.tags) && r.tags.length) {
       h += '<div class="pet__tags"><span class="pet__tags-lbl">' +
@@ -670,9 +824,39 @@
         });
       });
 
-    // Ähnliche Petitionen plattformübergreifend suchen (asynchron nachladen).
+    // Beschreibung nachladen, sobald sie gebraucht wird.
+    if (textPending && platKey) {
+      var descBox = body.querySelector(".pet__desc");
+      loadTextChunk(platKey, r.tc).then(function (map) {
+        var html = map[r.url];
+        if (html) {
+          r.description_full = html;            // im Speicher merken
+          descBox.innerHTML = html;
+        } else {
+          // Eigene Klasse: .count-note ist im Petitionstext der pulsierende
+          // Ladehinweis – eine Meldung darf nicht blinken.
+          descBox.innerHTML = '<div class="pet__desc-note">Für diese Petition ' +
+            "liegt kein ausführlicher Text vor.</div>";
+        }
+      }).catch(function () {
+        descBox.innerHTML = '<div class="pet__desc-note">Der Text konnte ' +
+          "nicht geladen werden. Prüfe deine Verbindung.</div>";
+      });
+    }
+
+    // Gleiche/ähnliche Petitionen. Sind sie vorberechnet (publish.py), stehen
+    // sie sofort da – sonst der alte Weg über alle Plattformdaten.
     var simBox = hasTags ? body.querySelector(".pet__similar") : null;
     if (simBox) {
+      var pre = relatedFromData(r);
+      if (pre) { renderSimilar(simBox, pre); return; }
+      // Ab Datenformat 2 hat publish.py die Verwandtschaft vollständig
+      // berechnet. Kein "related" heißt dann: es gibt keine – und NICHT,
+      // dass die App alle Plattformen durchsuchen soll.
+      if ((state.manifest.format || 1) >= 2) {
+        renderSimilar(simBox, []);
+        return;
+      }
       simBox.innerHTML = '<div class="pet__similar-lbl"><i class="fa-solid ' +
         'fa-link"></i> Gleiche / Ähnliche Petitionen</div>' +
         '<div class="count-note" style="margin:0">Suche über alle ' +
@@ -683,6 +867,73 @@
         simBox.innerHTML = "";
       });
     }
+  }
+
+  // Aufklappbarer Info-Bereich über der Petitionsliste: wer steckt hinter
+  // dieser Plattform, wie finanziert sie sich, wo steht das Original?
+  function platformAbout(key) {
+    var info = platInfo(key);
+    var about = info.about || {};
+    var manifestEntry = state.manifest.platforms.find(function (x) {
+      return x.key === key; }) || {};
+    var brand = info.color;
+    var box = el('<div class="pabout"' +
+      (brand ? ' style="--brand:' + esc(brand) + '"' : "") + ">" +
+      '<button class="pabout__head" type="button">' +
+      platLogo(key, manifestEntry.name) +
+      '<span class="pabout__lbl">' +
+        esc(T("platform.aboutBtn", "Über diese Plattform")) + "</span>" +
+      '<i class="fa-solid fa-chevron-down pabout__chev"></i></button>' +
+      '<div class="pabout__body"></div></div>');
+    var body = box.querySelector(".pabout__body");
+    box.querySelector(".pabout__head").addEventListener("click", function () {
+      state.aboutPlatform = !box.classList.contains("open");
+      box.classList.toggle("open", state.aboutPlatform);
+    });
+
+    if (about.text) body.appendChild(el("<p>" + esc(about.text) + "</p>"));
+
+    // Kennzahlen nur zeigen, was wirklich hinterlegt ist.
+    var facts = [
+      [T("platform.operatorLabel", "Träger"), about.operator],
+      [T("platform.seatLabel", "Sitz"), about.seat],
+      [T("platform.foundedLabel", "Gegründet"), about.founded],
+      [T("platform.financingLabel", "Finanzierung"), about.financing]
+    ].filter(function (f) { return f[1]; });
+    if (facts.length) {
+      var dl = el('<dl class="pabout__facts"></dl>');
+      facts.forEach(function (f) {
+        dl.appendChild(el("<dt>" + esc(f[0]) + "</dt>"));
+        dl.appendChild(el("<dd>" + esc(f[1]) + "</dd>"));
+      });
+      body.appendChild(dl);
+    }
+
+    var links = (about.links || []).slice();
+    if (!links.length && manifestEntry.source_url)
+      links.push({ label: "Website", url: manifestEntry.source_url });
+    if (links.length) {
+      var ul = el('<div class="pabout__links"></div>');
+      links.forEach(function (l) {
+        if (!l || !l.url) return;
+        ul.appendChild(el('<a class="pabout__link" href="' + esc(l.url) +
+          '" target="_blank" rel="noopener">' + esc(l.label || l.url) +
+          ' <i class="fa-solid fa-arrow-up-right-from-square"></i></a>'));
+      });
+      body.appendChild(ul);
+    }
+
+    // Offenheit der Datenquelle – die Einschätzung steht im Manifest.
+    if (manifestEntry.openness_note) {
+      body.appendChild(el('<div class="pabout__open ' +
+        ampClass(manifestEntry.openness) + '"><b>Datenlage:</b> ' +
+        esc(manifestEntry.openness_note) + "</div>"));
+    }
+    if (!body.childNodes.length) {
+      body.appendChild(el("<p>" + esc(T("platform.unknown", "nicht bekannt")) +
+        "</p>"));
+    }
+    return box;
   }
 
   function renderPlatformDetail(key) {
@@ -702,6 +953,8 @@
       if (a) a.scrollIntoView({ behavior: "smooth", block: "start" });
     });
     content.appendChild(head);
+
+    content.appendChild(platformAbout(key));
 
     if (!LS.getItem("swipeHintDismissed")) {
       var hint = el('<div class="swipe-hint">' +
@@ -969,6 +1222,27 @@
     return state.enabled;
   }
 
+  // Abschnitts-Überschrift für die Einstellungs-Liste.
+  function setSection(label) {
+    return el('<div class="sect">' + esc(label) + "</div>");
+  }
+  // Eine Zeile im Listen-Layout: Icon, Titel, Untertitel, rechts ein Element.
+  function setRow(icon, title, sub, opts) {
+    opts = opts || {};
+    var tag = opts.button === false ? "div" : "button";
+    var cls = "srow" + (opts.cls ? " " + opts.cls : "");
+    var row = el("<" + tag + ' class="' + cls + '"' +
+      (tag === "button" ? ' type="button"' : "") + ">" +
+      '<span class="srow__ic"><i class="fa-solid ' + icon + '"></i></span>' +
+      '<span class="srow__body"><span class="srow__t">' + esc(title) + "</span>" +
+      (sub ? '<span class="srow__s">' + esc(sub) + "</span>" : "") +
+      "</span>" +
+      '<span class="srow__end"></span></' + tag + ">");
+    if (opts.end) row.querySelector(".srow__end").innerHTML = opts.end;
+    if (opts.onClick) row.addEventListener("click", opts.onClick);
+    return row;
+  }
+
   function renderEinstellungen() {
     titleEl.textContent = "Einstellungen";
     var live = livePlatforms()
@@ -976,8 +1250,13 @@
     var activeCount = live.filter(function (p) { return isEnabled(p.key); }).length;
     var allOn = activeCount === live.length;
 
-    content.innerHTML = '<div class="settings-note">Wähle, welche ' +
-      'Petitionsplattformen in der Liste erscheinen sollen.</div>';
+    // Seitenüberschrift wie auf der Liste: die Seite soll über die Überschrift
+    // tragen, nicht über die schmale Kopfleiste.
+    content.innerHTML =
+      '<div class="welcome"><h1 class="welcome__t">Einstellungen</h1>' +
+      '<p class="welcome__s">' +
+      esc(T("settings.intro", "Wähle, welche Petitionsplattformen in der " +
+                              "Liste erscheinen sollen.")) + "</p></div>";
 
     // Akkordion "Plattformen"
     var acc = el('<section class="accordion' +
@@ -1009,7 +1288,10 @@
       var on = p.live && isEnabled(p.key);
       var finfo = langInfo(p.language || "de");
       var fav = p.live && isFav(p.key);
-      var opt = el('<div class="opt' + (p.live ? "" : " disabled") + '">' +
+      var brand = platColor(p.key);
+      var opt = el('<div class="opt' + (p.live ? "" : " disabled") + '"' +
+        (brand ? ' style="--brand:' + esc(brand) + '"' : "") + ">" +
+        platLogo(p.key, p.name) +
         '<div class="opt__body"><div class="opt__name">' + esc(p.name) +
           '<span class="flag">' + finfo.flag + '</span></div>' +
         '<div class="opt__meta">' + (p.live
@@ -1053,6 +1335,327 @@
     body.appendChild(toggleAll);          // Button unter der Plattform-Liste
     acc.appendChild(body);
     content.appendChild(acc);
+
+    // ---- Darstellung ---------------------------------------------------------
+    content.appendChild(setSection(T("settings.sections.appearance", "Darstellung")));
+    var themes = [["light", "Hell", "fa-sun"], ["dark", "Dunkel", "fa-moon"],
+                  ["auto", "Automatisch", "fa-circle-half-stroke"]];
+    var seg = el('<div class="seg" role="group" aria-label="Darstellung"></div>');
+    themes.forEach(function (t) {
+      var b = el('<button class="seg__b' +
+        (state.prefs.theme === t[0] ? " on" : "") + '" type="button">' +
+        '<i class="fa-solid ' + t[2] + '"></i> ' + esc(t[1]) + "</button>");
+      b.addEventListener("click", function () {
+        state.prefs.theme = t[0]; savePrefs(); applyTheme();
+        seg.querySelectorAll(".seg__b").forEach(function (x) {
+          x.classList.remove("on"); });
+        b.classList.add("on");
+      });
+      seg.appendChild(b);
+    });
+    content.appendChild(seg);
+    content.appendChild(el('<div class="srow__note">' +
+      esc(T("settings.darkModeHint",
+            "„Automatisch“ folgt der Einstellung deines Geräts.")) + "</div>"));
+
+    // ---- Benachrichtigungen --------------------------------------------------
+    content.appendChild(setSection(
+      T("settings.sections.notify", "Benachrichtigungen")));
+    content.appendChild(renderNotifyBox());
+
+    // ---- Daten ---------------------------------------------------------------
+    content.appendChild(setSection(T("settings.sections.data", "Daten")));
+    var refreshRow = setRow("fa-arrows-rotate",
+      T("settings.refresh", "Daten aktualisieren"),
+      T("settings.refreshHint", "Petitionen neu von der Quelle laden"),
+      { end: '<i class="fa-solid fa-chevron-right srow__go"></i>' });
+    refreshRow.addEventListener("click", function () {
+      var sub = refreshRow.querySelector(".srow__s");
+      sub.textContent = "Wird geladen …";
+      state.dataCache = {};
+      loadManifest().then(function () {
+        sub.textContent = "Aktualisiert am " + fmtDateTime(new Date().toISOString());
+      }).catch(function () { sub.textContent = "Nicht erreichbar."; });
+    });
+    content.appendChild(refreshRow);
+
+    content.appendChild(setRow("fa-database",
+      T("settings.source", "Datenquelle"), state.base,
+      { end: '<i class="fa-solid fa-chevron-right srow__go"></i>',
+        onClick: function () {
+          var v = prompt("URL der Datenquelle (Basis-Ordner mit manifest.json):",
+                         state.base);
+          if (v == null) return;
+          state.base = v.trim() || DEFAULT_BASE;
+          LS.setItem("dataBase", state.base);
+          state.dataCache = {}; state.manifest = null;
+          boot();
+        } }));
+
+    content.appendChild(setRow("fa-circle-info",
+      T("settings.about", "Über die App"), null,
+      { end: '<i class="fa-solid fa-chevron-right srow__go"></i>',
+        onClick: showAbout }));
+
+    // ---- Zurücksetzen --------------------------------------------------------
+    content.appendChild(setSection(T("settings.sections.reset", "Zurücksetzen")));
+    content.appendChild(el('<div class="srow__note">' +
+      esc(T("reset.intro", "")) + "</div>"));
+
+    var wizRow = setRow("fa-wand-magic-sparkles",
+      T("reset.wizard", "Ersteinrichtung neu starten"),
+      T("reset.wizardHint", "Sprachen und Plattformen erneut auswählen"),
+      { end: '<i class="fa-solid fa-chevron-right srow__go"></i>',
+        onClick: function () { startWizard(); } });
+    content.appendChild(wizRow);
+
+    var hintRow = setRow("fa-circle-question",
+      T("reset.hints", "Hilfe-Hinweise zurücksetzen"),
+      T("reset.hintsHint", "Ausgeblendete Hinweise wieder anzeigen"),
+      { end: '<i class="fa-solid fa-arrow-rotate-left srow__go"></i>' });
+    hintRow.addEventListener("click", function () {
+      LS.removeItem("swipeHintDismissed");
+      hintRow.classList.add("srow--done");
+      hintRow.querySelector(".srow__s").textContent =
+        "Zurückgesetzt – die Hinweise erscheinen wieder.";
+      hintRow.querySelector(".srow__go").className = "fa-solid fa-check srow__go";
+    });
+    content.appendChild(hintRow);
+
+    content.appendChild(renderDangerZone());
+  }
+
+  // Doppelt abgesicherter Bereich: erst aufklappen, dann bewusst bestätigen.
+  function renderDangerZone() {
+    var box = el('<div class="danger">' +
+      '<button class="danger__head" type="button">' +
+      '<span class="srow__ic"><i class="fa-solid fa-triangle-exclamation"></i></span>' +
+      '<span class="srow__body"><span class="srow__t">' +
+      esc(T("reset.all", "Alle Daten zurücksetzen")) + "</span>" +
+      '<span class="srow__s">' +
+      esc(T("reset.allHint", "Löscht alles, was du in der App gesammelt hast")) +
+      "</span></span>" +
+      '<i class="fa-solid fa-chevron-down srow__go"></i></button>' +
+      '<div class="danger__body"></div></div>');
+    var body = box.querySelector(".danger__body");
+    box.querySelector(".danger__head").addEventListener("click", function () {
+      box.classList.toggle("open");
+    });
+
+    body.appendChild(el('<div class="danger__warn"><b>' +
+      esc(T("reset.allWarnTitle", "Das lässt sich nicht rückgängig machen.")) +
+      "</b><p>" +
+      esc(T("reset.allWarnText",
+            "Gelöscht werden: Favoriten, unterzeichnete Petitionen, Archiv, " +
+            "deine Plattform-Auswahl sowie Name und Profilbild.")) +
+      "</p></div>"));
+
+    // Zusatzabfrage: erst das Häkchen macht den Knopf scharf.
+    var confirmLabel = T("reset.allConfirmLabel",
+      "Ja, ich möchte alle meine Daten löschen.");
+    var chk = el('<label class="danger__check"><input type="checkbox">' +
+      "<span>" + esc(confirmLabel) + "</span></label>");
+    var go = el('<button class="danger__btn" type="button" disabled>' +
+      '<i class="fa-solid fa-trash-can"></i> ' +
+      esc(T("reset.allConfirmBtn", "Endgültig löschen")) + "</button>");
+    chk.querySelector("input").addEventListener("change", function () {
+      go.disabled = !this.checked;
+    });
+    go.addEventListener("click", function () {
+      if (!window.confirm(T("reset.allWarnTitle",
+            "Das lässt sich nicht rückgängig machen.") + "\n\n" +
+            T("reset.allWarnText", "") + "\n\nWirklich alles löschen?")) return;
+      wipeEverything();
+      box.classList.add("danger--done");
+      body.innerHTML = '<div class="danger__done"><i class="fa-solid fa-check"></i> ' +
+        esc(T("reset.doneToast", "Alle Daten wurden gelöscht.")) + "</div>";
+      setTimeout(function () { startWizard(); }, 900);
+    });
+    body.appendChild(chk);
+    body.appendChild(go);
+    return box;
+  }
+
+  // Löscht restlos alles, was die App lokal abgelegt hat.
+  function wipeEverything() {
+    BACKUP_KEYS.concat([PREFS_KEY]).forEach(function (k) { LS.removeItem(k); });
+    state.enabled = null;
+    state.favorites = new Set();
+    state.signed = new Map();
+    state.archived = new Set();
+    state.prefs = defaultPrefs();
+    state.base = DEFAULT_BASE;
+    savePrefs();
+    applyTheme();
+  }
+
+  // ---- Benachrichtigungen ----------------------------------------------------
+  // Ehrliche Umsetzung ohne Server: die App prüft, während sie läuft, ob die
+  // gewählte Uhrzeit heute schon erreicht war, und meldet sich dann EINMAL.
+  // Ein echter Push zu einer festen Uhrzeit bräuchte einen Server – das steht
+  // so auch im Hinweistext, damit niemand etwas anderes erwartet.
+  var notifyTimer = null;
+
+  function notifySupported() { return "Notification" in window; }
+
+  function renderNotifyBox() {
+    var n = state.prefs.notify;
+    var box = el('<div class="nbox"></div>');
+
+    box.appendChild(el('<div class="srow__note">' +
+      esc(T("notify.intro",
+            "Einmal am Tag eine kurze Info über neue Petitionen.")) +
+      "</div>"));
+
+    var main = el('<div class="srow srow--static">' +
+      '<span class="srow__ic"><i class="fa-solid fa-bell"></i></span>' +
+      '<span class="srow__body"><span class="srow__t">' +
+      esc(T("notify.enable", "Tägliche Info")) + "</span>" +
+      '<span class="srow__s nbox__state"></span></span>' +
+      '<span class="srow__end"><label class="switch">' +
+      '<input type="checkbox"' + (n.on ? " checked" : "") +
+      '><span class="slider"></span></label></span></div>');
+    var stateLbl = main.querySelector(".nbox__state");
+    var detail = el('<div class="nbox__detail"' +
+      (n.on ? "" : ' style="display:none"') + "></div>");
+
+    function refreshState() {
+      if (!notifySupported()) {
+        stateLbl.textContent = "Dieses Gerät unterstützt keine Benachrichtigungen.";
+      } else if (Notification.permission === "denied") {
+        stateLbl.textContent = T("notify.permissionDenied",
+          "In den Geräte-Einstellungen gesperrt.");
+      } else if (n.on) {
+        stateLbl.textContent = "Täglich um " + n.time + " Uhr";
+      } else {
+        stateLbl.textContent = "Aus";
+      }
+    }
+
+    main.querySelector("input").addEventListener("change", function () {
+      var on = this.checked;
+      var self = this;
+      if (on && notifySupported() && Notification.permission === "default") {
+        Notification.requestPermission().then(function (perm) {
+          if (perm !== "granted") { self.checked = false; on = false; }
+          n.on = on; savePrefs(); refreshState();
+          detail.style.display = on ? "" : "none";
+          scheduleNotify();
+        });
+        return;
+      }
+      n.on = on; savePrefs(); refreshState();
+      detail.style.display = on ? "" : "none";
+      scheduleNotify();
+    });
+    box.appendChild(main);
+
+    // Uhrzeit
+    var timeRow = el('<div class="srow srow--static">' +
+      '<span class="srow__ic"><i class="fa-solid fa-clock"></i></span>' +
+      '<span class="srow__body"><span class="srow__t">' +
+      esc(T("notify.timeLabel", "Uhrzeit")) + "</span></span>" +
+      '<span class="srow__end"><input class="timein" type="time" value="' +
+      esc(n.time) + '"></span></div>');
+    timeRow.querySelector("input").addEventListener("change", function () {
+      n.time = this.value || "09:00";
+      n.lastDate = null;              // neue Uhrzeit → heute erneut zulassen
+      savePrefs(); refreshState(); scheduleNotify();
+    });
+    detail.appendChild(timeRow);
+
+    // Auch melden, wenn es nichts Neues gibt?
+    var quietRow = el('<div class="srow srow--static">' +
+      '<span class="srow__ic"><i class="fa-solid fa-comment-dots"></i></span>' +
+      '<span class="srow__body"><span class="srow__t">' +
+      esc(T("notify.quietLabel",
+            "Auch melden, wenn es nichts Neues gibt")) + "</span>" +
+      '<span class="srow__s nbox__quiet"></span></span>' +
+      '<span class="srow__end"><label class="switch"><input type="checkbox"' +
+      (n.quiet ? " checked" : "") + '><span class="slider"></span></label>' +
+      "</span></div>");
+    var quietLbl = quietRow.querySelector(".nbox__quiet");
+    function refreshQuiet() {
+      quietLbl.textContent = n.quiet
+        ? T("notify.quietHintOn", "Du hörst täglich von uns.")
+        : T("notify.quietHintOff", "Nur wenn es wirklich Neues gibt.");
+    }
+    refreshQuiet();
+    quietRow.querySelector("input").addEventListener("change", function () {
+      n.quiet = this.checked; savePrefs(); refreshQuiet();
+    });
+    detail.appendChild(quietRow);
+
+    var testBtn = el('<button class="btn-secondary" type="button">' +
+      '<i class="fa-regular fa-bell"></i> ' +
+      esc(T("notify.testBtn", "Testbenachrichtigung")) + "</button>");
+    testBtn.addEventListener("click", function () {
+      showNotification(T("notify.sampleTitle", "PetitionsManager"),
+        fill(T("notify.sampleBodyNew", "{n} neue Petitionen warten auf dich."),
+             { n: countNew() }));
+    });
+    detail.appendChild(testBtn);
+
+    detail.appendChild(el('<div class="srow__note">Hinweis: Die Meldung ' +
+      "erscheint, sobald du die App nach der gewählten Uhrzeit das nächste " +
+      "Mal öffnest oder sie im Hintergrund noch läuft. Eine Erinnerung bei " +
+      "komplett geschlossener App bräuchte einen eigenen Server – den hat " +
+      "diese App bewusst nicht.</div>"));
+
+    box.appendChild(detail);
+    refreshState();
+    return box;
+  }
+
+  // Summe der „neu"-Zähler aller aktivierten Plattformen.
+  function countNew() {
+    if (!state.manifest) return 0;
+    return livePlatforms().filter(function (p) { return isEnabled(p.key); })
+      .reduce(function (s, p) { return s + (p["new"] || 0); }, 0);
+  }
+
+  function showNotification(title, body) {
+    if (!notifySupported() || Notification.permission !== "granted") return false;
+    try {
+      new Notification(title, { body: body, icon: "icons/icon-192.png",
+                                tag: "petitionsmanager-daily" });
+      return true;
+    } catch (e) { return false; }
+  }
+
+  // Prüft im Minutentakt, ob die gewählte Uhrzeit heute erreicht wurde.
+  function scheduleNotify() {
+    if (notifyTimer) { clearInterval(notifyTimer); notifyTimer = null; }
+    var n = state.prefs.notify;
+    if (!n.on || !notifySupported()) return;
+    var tick = function () {
+      var now = new Date();
+      var today = now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate();
+      if (n.lastDate === today) return;
+      var parts = String(n.time || "09:00").split(":");
+      var due = new Date(now);
+      due.setHours(parseInt(parts[0], 10) || 0,
+                   parseInt(parts[1], 10) || 0, 0, 0);
+      if (now < due) return;
+      var fresh = countNew();
+      if (!fresh && !n.quiet) { n.lastDate = today; savePrefs(); return; }
+      var body = fresh
+        ? fill(T("notify.sampleBodyNew", "{n} neue Petitionen warten auf dich."),
+               { n: fresh })
+        : T("notify.sampleBodyNone", "Heute nichts Neues – schau gern trotzdem rein.");
+      if (showNotification(T("notify.sampleTitle", "PetitionsManager"), body)) {
+        n.lastDate = today; savePrefs();
+      }
+    };
+    notifyTimer = setInterval(tick, 60000);
+    tick();
+  }
+
+  function showAbout() {
+    alert(T("about.title", "Über die App") + "\n\n" +
+      T("about.text", "PetitionsManager bündelt Petitionen mehrerer Plattformen.") +
+      "\n\n" + T("about.dataNote", "") +
+      "\n\n" + T("about.disclaimer", ""));
   }
 
   // ---- Rendering: Profil (Platzhalter) --------------------------------------
@@ -1060,7 +1663,29 @@
   // Alle vom Nutzer angepassten Einstellungen liegen im localStorage. Diese
   // Schlüssel werden gesichert/wiederhergestellt.
   var BACKUP_KEYS = ["enabledPlatforms", "favorites", "signedPetitions",
-                     "archivedPetitions", "swipeHintDismissed", "dataBase"];
+                     "archivedPetitions", "swipeHintDismissed", "dataBase",
+                     "prefs"];
+
+  // Profilbild verkleinern, bevor es im localStorage landet (dort ist bei
+  // ~5 MB Schluss – ein Kamerafoto würde den Speicher allein sprengen).
+  function readImageScaled(file, maxSide, done) {
+    var reader = new FileReader();
+    reader.onload = function () {
+      var img = new Image();
+      img.onload = function () {
+        var w = img.width, h = img.height;
+        var scale = Math.min(1, maxSide / Math.max(w, h));
+        var c = document.createElement("canvas");
+        c.width = Math.round(w * scale); c.height = Math.round(h * scale);
+        c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+        try { done(c.toDataURL("image/jpeg", 0.82)); }
+        catch (e) { done(reader.result); }
+      };
+      img.onerror = function () { done(reader.result); };
+      img.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  }
 
   function tsStamp() {
     var d = new Date(), p = function (n) { return (n < 10 ? "0" : "") + n; };
@@ -1085,14 +1710,24 @@
       if (v !== null) data[k] = v;      // Roh-Strings → verlustfreier Roundtrip
     });
     return {
-      app: "PetitionsManager", type: "backup", version: 1,
+      app: "PetitionsManager", type: "backup", version: 2,
+      // Der Name steht bewusst auch oben in der Datei – so ist auf einen
+      // Blick erkennbar, wessen Sicherung man vor sich hat.
+      owner: (state.prefs && state.prefs.name) || null,
       exportedAt: new Date().toISOString(), data: data
     };
   }
 
+  // Dateiname mit Datum vorn und – falls gesetzt – dem Namen der Person.
+  function backupFilename() {
+    var n = (state.prefs && state.prefs.name || "").trim()
+      .replace(/[^\wÄÖÜäöüß -]/g, "").replace(/\s+/g, "-");
+    return tsStamp() + "-petitionsmanager-backup" + (n ? "-" + n : "") + ".json";
+  }
+
   function exportData() {
     var json = JSON.stringify(collectBackup(), null, 2);
-    var name = "petitionsmanager-backup-" + tsStamp() + ".json";
+    var name = backupFilename();
     // In der Android-APK übernimmt eine native Brücke das Speichern.
     if (window.AndroidBackup && window.AndroidBackup.saveBackup) {
       try { window.AndroidBackup.saveBackup(name, json); return true; }
@@ -1125,7 +1760,9 @@
     state.signed = loadSigned();
     state.archived = loadSet("archivedPetitions");
     state.base = LS.getItem("dataBase") || DEFAULT_BASE;
-    document.getElementById("drawer-foot").textContent = "Datenquelle: " + state.base;
+    state.prefs = loadPrefs();
+    applyTheme();
+    scheduleNotify();
     // Zahlen für die Rückmeldung.
     return {
       favoriten: state.favorites.size,
@@ -1151,55 +1788,148 @@
     reader.readAsText(file);
   }
 
+  // Treffer im Text farbig hervorheben (Eingabe wird escaped, dann markiert).
+  function highlight(text, query) {
+    var safe = esc(text || "");
+    var q = String(query || "").trim();
+    if (!q) return safe;
+    var rx = new RegExp("(" + q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")", "gi");
+    return safe.replace(rx, "<mark>$1</mark>");
+  }
+
+  // Meilenstein-Zeile – nur bei GENAU erreichter Schwelle, sonst wäre bei drei
+  // Unterschriften dauerhaft „Deine erste Unterschrift" zu lesen.
+  function milestoneFor(count) {
+    return T("signed.milestones." + count, "");
+  }
+
   function renderProfil() {
     titleEl.textContent = "Profil";
-    content.innerHTML =
-      '<div class="profile-head">' +
-        '<div class="avatar">G</div>' +
-        '<div class="profile-name">Gast</div>' +
-        '<div class="profile-sub">Nicht angemeldet</div>' +
-      '</div>';
-    var rows = [
-      ["fa-right-to-bracket", "Anmelden / Registrieren", "Platzhalter"],
-      ["fa-bell", "Benachrichtigungen", "Bald verfügbar"],
-      ["fa-circle-info", "Über die App", ""]
-    ];
-    rows.forEach(function (r) {
-      content.appendChild(el('<div class="prow">' +
-        '<span class="prow__ic"><i class="fa-solid ' + r[0] + '"></i></span>' +
-        '<div class="prow__body"><div>' + esc(r[1]) + '</div>' +
-          (r[2] && r[2] !== "Platzhalter" && r[2] !== "Bald verfügbar"
-            ? '<div class="prow__val">' + esc(r[2]) + '</div>' : '') +
-        '</div>' +
-        (r[2] === "Platzhalter" || r[2] === "Bald verfügbar"
-          ? '<span class="badge-ph">' + esc(r[2]) + '</span>' : '') +
-        '</div>'));
-    });
+    content.innerHTML = "";
+    var p = state.prefs;
 
-    // Meine unterzeichneten Petitionen: Anzahl + ausklappbare Liste, nach
-    // Markierungs-Zeitstempel absteigend sortiert (neueste zuerst).
+    // ---- Kopf: Bild, Name, Datenschutz-Hinweis ------------------------------
+    var initial = (p.name || "?").trim().charAt(0).toUpperCase() || "?";
+    var head = el('<div class="profile-head">' +
+      '<button class="avatar' + (p.photo ? " avatar--img" : "") +
+        '" type="button" aria-label="' + esc(T("profile.photoLabel", "Profilbild")) +
+        '">' + (p.photo ? '<img src="' + esc(p.photo) + '" alt="">'
+                        : esc(initial)) +
+        '<span class="avatar__edit"><i class="fa-solid fa-camera"></i></span>' +
+      "</button>" +
+      '<input class="profile-namein" type="text" maxlength="40" value="' +
+        esc(p.name) + '" placeholder="' +
+        esc(T("profile.namePlaceholder", "Dein Name")) + '">' +
+      '<div class="profile-sub">' + esc(T("profile.privacy",
+        "Alles bleibt auf deinem Gerät – kein Konto, kein Server.")) +
+      "</div></div>");
+    var photoIn = el('<input type="file" accept="image/*" style="display:none">');
+    var avatar = head.querySelector(".avatar");
+    avatar.addEventListener("click", function () { photoIn.click(); });
+    photoIn.addEventListener("change", function () {
+      var f = photoIn.files && photoIn.files[0];
+      if (!f) return;
+      readImageScaled(f, 256, function (dataUrl) {
+        p.photo = dataUrl; savePrefs(); renderProfil();
+      });
+      photoIn.value = "";
+    });
+    var nameIn = head.querySelector(".profile-namein");
+    nameIn.addEventListener("change", function () {
+      p.name = nameIn.value.trim(); savePrefs();
+      if (!p.photo) avatar.firstChild.textContent =
+        (p.name || "?").trim().charAt(0).toUpperCase() || "?";
+    });
+    nameIn.addEventListener("blur", function () { nameIn.dispatchEvent(
+      new Event("change")); });
+    head.appendChild(photoIn);
+    if (p.photo) {
+      var rm = el('<button class="profile-rmphoto" type="button">' +
+        esc(T("profile.photoRemove", "Bild entfernen")) + "</button>");
+      rm.addEventListener("click", function () {
+        p.photo = null; savePrefs(); renderProfil();
+      });
+      head.appendChild(rm);
+    }
+    content.appendChild(head);
+
+    // ---- Wirkungs-Karte ------------------------------------------------------
+    var total = state.signed.size;
+    var impacts = TX.impact && TX.impact.length ? TX.impact
+      : ["Jede Unterschrift macht ein Anliegen ein Stück sichtbarer."];
+    var impact = impacts[Math.floor(Date.now() / 86400000) % impacts.length];
+    content.appendChild(el('<div class="impact">' +
+      '<div class="impact__n">' + nf.format(total) + "</div>" +
+      '<div class="impact__l">' +
+        esc(total === 1 ? T("signed.countOne", "1 Petition")
+                        : fill(T("signed.countMany", "{n} Petitionen"),
+                               { n: nf.format(total) })) +
+        " unterzeichnet</div>" +
+      (milestoneFor(total)
+        ? '<div class="impact__m">' + esc(milestoneFor(total)) + "</div>" : "") +
+      '<div class="impact__q">' + esc(impact) + "</div></div>"));
+
+    // ---- Meine unterzeichneten Petitionen ------------------------------------
     var signedSorted = Array.from(state.signed.entries()).sort(function (a, b) {
       return String(b[1].ts || "").localeCompare(String(a[1].ts || ""));
     });
-    var sAcc = el('<div class="signed-acc"></div>');
-    var sHead = el('<button class="prow prow--btn signed-head" type="button">' +
-      '<span class="prow__ic"><i class="fa-solid fa-bookmark"></i></span>' +
-      '<div class="prow__body"><div>Meine unterzeichneten Petitionen</div>' +
-        '<div class="prow__val">' + signedSorted.length + " markiert</div></div>" +
-      '<i class="fa-solid fa-chevron-down prow__go signed-chev"></i></button>');
-    var sList = el('<div class="signed-list"></div>');
-    if (!signedSorted.length) {
-      sList.appendChild(el('<div class="signed-empty">Noch nichts als ' +
-        '„unterschrieben" markiert. Wische eine Petition nach rechts.</div>'));
-    } else {
-      signedSorted.forEach(function (e) {
+    var sec = el('<section class="signed">' +
+      '<div class="signed__head"><h2>' +
+        esc(T("signed.title", "Meine unterzeichneten Petitionen")) + "</h2>" +
+      '<p>' + esc(T("signed.intro", "")) + "</p></div>" +
+      '<div class="signed__searchwrap"><i class="fa-solid fa-magnifying-glass">' +
+      '</i><input class="signed__search" type="search" placeholder="' +
+        esc(T("signed.searchPlaceholder", "In deinen Unterschriften suchen …")) +
+        '" value="' + esc(state.signedQuery) + '"></div>' +
+      '<div class="signed__count"></div>' +
+      '<div class="signed-list"></div></section>');
+    var sList = sec.querySelector(".signed-list");
+    var sCount = sec.querySelector(".signed__count");
+    var sSearch = sec.querySelector(".signed__search");
+
+    function drawSigned() {
+      var q = state.signedQuery.trim().toLowerCase();
+      sList.innerHTML = "";
+      if (!signedSorted.length) {
+        sList.appendChild(el('<div class="signed-empty">' +
+          '<i class="fa-regular fa-hand-pointer"></i><p>' +
+          esc(T("signed.empty",
+                "Noch nichts markiert. Wische eine Petition nach rechts, " +
+                "sobald du sie unterschrieben hast.")) + "</p></div>"));
+        sCount.textContent = "";
+        return;
+      }
+      var rows = signedSorted.filter(function (e) {
+        if (!q) return true;
+        var pn = e[1].platform ? platformName(e[1].platform) : "";
+        return ((e[1].title || "") + " " + pn + " " + e[0])
+          .toLowerCase().indexOf(q) > -1;
+      });
+      sCount.textContent = q
+        ? rows.length + " von " + signedSorted.length + " Treffern"
+        : (signedSorted.length === 1
+            ? T("signed.countOne", "1 Petition")
+            : fill(T("signed.countMany", "{n} Petitionen"),
+                   { n: nf.format(signedSorted.length) }));
+      if (!rows.length) {
+        sList.appendChild(el('<div class="signed-empty"><p>Keine Treffer für ' +
+          "„" + esc(state.signedQuery) + "“.</p></div>"));
+        return;
+      }
+      rows.forEach(function (e) {
         var url = e[0], v = e[1];
-        var platName = v.platform ? platformName(v.platform) : "";
-        var meta = (platName ? esc(platName) + " · " : "") +
-          '<span class="signed-item__when">' + esc(fmtDateTime(v.ts)) + "</span>";
-        var row = el('<button class="signed-item" type="button">' +
-          '<div class="signed-item__t">' + esc(v.title || url) + "</div>" +
-          '<div class="signed-item__meta">' + meta + "</div></button>");
+        var pn = v.platform ? platformName(v.platform) : "";
+        var brand = v.platform ? platColor(v.platform) : null;
+        var row = el('<button class="signed-item" type="button"' +
+          (brand ? ' style="--brand:' + esc(brand) + '"' : "") + ">" +
+          (v.platform ? platLogo(v.platform, pn) : "") +
+          '<span class="signed-item__body">' +
+          '<span class="signed-item__t">' +
+            highlight(v.title || url, state.signedQuery) + "</span>" +
+          '<span class="signed-item__meta">' +
+            (pn ? highlight(pn, state.signedQuery) + " · " : "") +
+            '<span class="signed-item__when">' + esc(fmtDateTime(v.ts)) +
+          "</span></span></span></button>");
         if (v.platform) {
           row.addEventListener("click", function () {
             openPetitionInApp(v.platform, url);
@@ -1208,26 +1938,11 @@
         sList.appendChild(row);
       });
     }
-    sHead.addEventListener("click", function () { sAcc.classList.toggle("open"); });
-    sAcc.appendChild(sHead); sAcc.appendChild(sList);
-    content.appendChild(sAcc);
-
-    // Hilfe-Hinweise (z. B. den Wisch-Hinweis) wieder anzeigen.
-    var helpBtn = el('<button class="prow prow--btn" type="button">' +
-      '<span class="prow__ic"><i class="fa-solid fa-circle-question"></i></span>' +
-      '<div class="prow__body"><div>Hilfe-Hinweise zurücksetzen</div>' +
-        '<div class="prow__val">Ausgeblendete Hinweise wieder anzeigen</div></div>' +
-      '<i class="fa-solid fa-arrow-rotate-left prow__go"></i></button>');
-    helpBtn.addEventListener("click", function () {
-      LS.removeItem("swipeHintDismissed");
-      helpBtn.classList.add("prow--done");
-      helpBtn.querySelector(".prow__body").innerHTML =
-        '<div>Zurückgesetzt</div>' +
-        '<div class="prow__val">Hinweise werden wieder angezeigt</div>';
-      helpBtn.querySelector(".prow__go").className =
-        "fa-solid fa-check prow__go";
+    sSearch.addEventListener("input", function () {
+      state.signedQuery = sSearch.value; drawSigned();
     });
-    content.appendChild(helpBtn);
+    drawSigned();
+    content.appendChild(sec);
 
     // Daten sichern: Export / Import (Favoriten, unterschrieben/archiviert,
     // Plattform-Auswahl & Einstellungen).
@@ -1269,6 +1984,194 @@
     content.appendChild(io);
   }
 
+  // ---- Ersteinrichtung (Wizard) ----------------------------------------------
+  // Drei Schritte beim ersten Start: Begrüßung → Sprachen → Plattformen.
+  // Liegt als Overlay über der App, damit auch die Fußleiste verdeckt ist.
+  var wizardSel = { langs: null, plats: null };   // Auswahl während des Wizards
+
+  function wizardLanguages() {
+    var seen = {};
+    livePlatforms().forEach(function (p) { seen[p.language || "de"] = true; });
+    return Object.keys(seen).sort(function (a, b) {
+      return langRank(a) - langRank(b) || a.localeCompare(b);
+    });
+  }
+
+  function startWizard() {
+    state.wizardStep = 0;
+    // Vorbelegung: bereits aktive Plattformen bzw. alles Deutschsprachige.
+    var langs = wizardLanguages();
+    wizardSel.langs = new Set(langs.indexOf("de") >= 0 ? ["de"] : langs.slice(0, 1));
+    wizardSel.plats = new Set(state.enabled === null
+      ? livePlatforms().map(function (p) { return p.key; })
+      : Array.from(state.enabled));
+    renderWizard();
+  }
+
+  function closeWizard(save) {
+    if (save) {
+      state.enabled = new Set(wizardSel.plats);
+      saveEnabled();
+    }
+    state.prefs.wizardDone = true;
+    savePrefs();
+    var ov = document.getElementById("wizard");
+    if (ov) ov.remove();
+    document.body.classList.remove("wizard-open");
+    render();
+  }
+
+  function renderWizard() {
+    var old = document.getElementById("wizard");
+    if (old) old.remove();
+    document.body.classList.add("wizard-open");
+
+    var TOTAL = 3;                       // gezählte Schritte (ohne Begrüßung)
+    var step = state.wizardStep;
+    var ov = el('<div class="wiz" id="wizard"><div class="wiz__inner">' +
+      '<div class="wiz__top"></div>' +
+      '<div class="wiz__main"></div>' +
+      '<div class="wiz__foot"></div></div></div>');
+    var top = ov.querySelector(".wiz__top");
+    var main = ov.querySelector(".wiz__main");
+    var foot = ov.querySelector(".wiz__foot");
+
+    // Kopf: Fortschrittspunkte + Überspringen
+    if (step > 0) {
+      var dots = '<div class="wiz__dots">';
+      for (var i = 1; i <= TOTAL; i++)
+        dots += '<span class="wiz__dot' + (i <= step ? " on" : "") + '"></span>';
+      dots += "</div>";
+      top.innerHTML = dots +
+        '<span class="wiz__step">' +
+        esc(fill(T("wizard.stepOf", "Schritt {n} von {total}"),
+                 { n: step, total: TOTAL })) + "</span>";
+    }
+    var skip = el('<button class="wiz__skip" type="button">' +
+      esc(T("wizard.skip", "Überspringen")) + "</button>");
+    skip.addEventListener("click", function () { closeWizard(false); });
+    top.appendChild(skip);
+
+    if (step === 0) {
+      main.appendChild(el('<div class="wiz__hero">' +
+        '<div class="wiz__mark"><i class="fa-solid fa-hand-holding-heart"></i></div>' +
+        '<h1 class="wiz__title">' +
+        esc(T("wizard.intro.title", "Willkommen im PetitionsManager")) + "</h1>" +
+        '<p class="wiz__text">' +
+        esc(T("wizard.intro.text",
+              "Petitionen vieler Plattformen an einem Ort – such dir aus, " +
+              "was du sehen möchtest.")) + "</p></div>"));
+
+    } else if (step === 1) {
+      main.appendChild(el('<h1 class="wiz__title">' +
+        esc(T("wizard.lang.title", "In welchen Sprachen suchst du?")) + "</h1>" ));
+      main.appendChild(el('<p class="wiz__text">' +
+        esc(T("wizard.lang.text",
+              "Wir zeigen dir nur Plattformen in den Sprachen, die du " +
+              "verstehst.")) + "</p>"));
+      var lgrid = el('<div class="wiz__chips"></div>');
+      wizardLanguages().forEach(function (code) {
+        var info = langInfo(code);
+        var n = livePlatforms().filter(function (p) {
+          return (p.language || "de") === code; }).length;
+        var chip = el('<button class="chip' +
+          (wizardSel.langs.has(code) ? " on" : "") + '" type="button">' +
+          '<span class="chip__flag">' + info.flag + "</span>" +
+          '<span class="chip__l">' + esc(info.name) + "</span>" +
+          '<span class="chip__n">' + n + "</span></button>");
+        chip.addEventListener("click", function () {
+          if (wizardSel.langs.has(code)) wizardSel.langs["delete"](code);
+          else wizardSel.langs.add(code);
+          chip.classList.toggle("on", wizardSel.langs.has(code));
+          foot.querySelector(".wiz__next").disabled = !wizardSel.langs.size;
+        });
+        lgrid.appendChild(chip);
+      });
+      main.appendChild(lgrid);
+      main.appendChild(el('<p class="wiz__hint">' +
+        esc(T("wizard.lang.hint", "Das lässt sich jederzeit ändern.")) + "</p>"));
+
+    } else if (step === 2) {
+      main.appendChild(el('<h1 class="wiz__title">' +
+        esc(T("wizard.platforms.title", "Welche Plattformen möchtest du sehen?"))
+        + "</h1>"));
+      main.appendChild(el('<p class="wiz__text">' +
+        esc(T("wizard.platforms.text",
+              "Tippe an, was dich interessiert – alle sind vorausgewählt."))
+        + "</p>"));
+      var pl = livePlatforms().filter(function (p) {
+        return wizardSel.langs.has(p.language || "de");
+      }).sort(function (a, b) { return a.name.localeCompare(b.name, "de"); });
+      // Plattformen aus abgewählten Sprachen fliegen aus der Auswahl.
+      Array.from(wizardSel.plats).forEach(function (k) {
+        if (!pl.some(function (p) { return p.key === k; }))
+          wizardSel.plats["delete"](k);
+      });
+      var pgrid = el('<div class="wiz__plats"></div>');
+      pl.forEach(function (p) {
+        var on = wizardSel.plats.has(p.key);
+        var color = platColor(p.key);
+        var row = el('<button class="wplat' + (on ? " on" : "") + '" type="button"' +
+          (color ? ' style="--brand:' + esc(color) + '"' : "") + ">" +
+          platLogo(p.key, p.name) +
+          '<span class="wplat__body"><span class="wplat__n">' + esc(p.name) +
+          "</span><span class=\"wplat__m\">" + nf.format(p.online) +
+          " Petitionen</span></span>" +
+          '<span class="wplat__check"><i class="fa-solid fa-check"></i></span>' +
+          "</button>");
+        row.addEventListener("click", function () {
+          if (wizardSel.plats.has(p.key)) wizardSel.plats["delete"](p.key);
+          else wizardSel.plats.add(p.key);
+          row.classList.toggle("on", wizardSel.plats.has(p.key));
+          foot.querySelector(".wiz__next").disabled = !wizardSel.plats.size;
+        });
+        pgrid.appendChild(row);
+      });
+      main.appendChild(pgrid);
+      main.appendChild(el('<p class="wiz__hint">' +
+        esc(T("wizard.platforms.hint",
+              "Später jederzeit in den Einstellungen änderbar.")) + "</p>"));
+
+    } else {
+      main.appendChild(el('<div class="wiz__hero">' +
+        '<div class="wiz__mark wiz__mark--done">' +
+        '<i class="fa-solid fa-check"></i></div>' +
+        '<h1 class="wiz__title">' +
+        esc(T("wizard.done.title", "Fertig!")) + "</h1>" +
+        '<p class="wiz__text">' +
+        esc(T("wizard.done.text",
+              "Tippe eine Plattform an, um ihre Petitionen zu sehen. " +
+              "Mit dem Stern merkst du dir, was dir wichtig ist.")) +
+        "</p></div>"));
+    }
+
+    // Fußzeile: Zurück / Weiter
+    if (step > 0 && step < 3) {
+      var back = el('<button class="wiz__back" type="button">' +
+        '<i class="fa-solid fa-chevron-left"></i> ' +
+        esc(T("wizard.back", "Zurück")) + "</button>");
+      back.addEventListener("click", function () {
+        state.wizardStep--; renderWizard();
+      });
+      foot.appendChild(back);
+    }
+    var isLast = step === 3;
+    var nextLabel = step === 0 ? T("wizard.intro.cta", "Los geht's")
+                  : isLast     ? T("wizard.finish", "Los geht's")
+                               : T("wizard.next", "Weiter");
+    var next = el('<button class="wiz__next" type="button">' + esc(nextLabel) +
+      ' <i class="fa-solid fa-arrow-right"></i></button>');
+    if ((step === 1 && !wizardSel.langs.size) ||
+        (step === 2 && !wizardSel.plats.size)) next.disabled = true;
+    next.addEventListener("click", function () {
+      if (isLast) { closeWizard(true); return; }
+      state.wizardStep++; renderWizard();
+    });
+    foot.appendChild(next);
+
+    document.body.appendChild(ov);
+  }
+
   // ---- Router ----------------------------------------------------------------
   function render() {
     document.querySelectorAll(".tab").forEach(function (t) {
@@ -1285,41 +2188,14 @@
     window.scrollTo(0, 0);
   }
 
-  // ---- Drawer ----------------------------------------------------------------
-  var drawer = document.getElementById("drawer");
-  var scrim = document.getElementById("drawer-scrim");
-  function openDrawer(o) {
-    drawer.classList.toggle("show", o); scrim.classList.toggle("show", o);
-  }
-  document.getElementById("hamburger").addEventListener("click", function () {
-    openDrawer(true);
-  });
-  scrim.addEventListener("click", function () { openDrawer(false); });
-  document.getElementById("drawer-foot").textContent = "Datenquelle: " + state.base;
-
-  document.querySelectorAll(".drawer__item").forEach(function (b) {
-    b.addEventListener("click", function () {
-      var a = b.dataset.action;
-      openDrawer(false);
-      if (a === "refresh") {
-        state.dataCache = {};
-        loadManifest().then(render).catch(function () {});
-      } else if (a === "source") {
-        var v = prompt("URL der Datenquelle (Basis-Ordner mit manifest.json):",
-          state.base);
-        if (v != null) {
-          state.base = v.trim() || DEFAULT_BASE;
-          LS.setItem("dataBase", state.base);
-          state.dataCache = {}; state.manifest = null;
-          document.getElementById("drawer-foot").textContent =
-            "Datenquelle: " + state.base;
-          boot();
-        }
-      } else if (a === "about") {
-        alert("Petitionen-App\n\nZeigt laufende Petitionen mehrerer Plattformen." +
-          "\nDaten werden extern gescrapt und hier nur angezeigt.");
-      }
-    });
+  // ---- Menü ------------------------------------------------------------------
+  // Das Hamburger-Menü ist abgeschafft: „Daten aktualisieren", „Datenquelle"
+  // und „Über die App" stehen jetzt in den Einstellungen. Das Markup ist aus
+  // index.html entfernt; dieser Rest räumt nur noch auf, falls eine ältere
+  // Version im Browser-Cache liegt.
+  ["drawer", "drawer-scrim", "hamburger"].forEach(function (id) {
+    var node = document.getElementById(id);
+    if (node) node.remove();
   });
 
   // ---- Tab-Navigation --------------------------------------------------------
@@ -1340,6 +2216,14 @@
     state.favorites = loadFavorites();
     state.signed = loadSigned();
     state.archived = loadSet("archivedPetitions");
+    state.prefs = loadPrefs();
+    applyTheme();
+    // Bei „automatisch" auf Systemwechsel reagieren (Nachtmodus des Geräts).
+    if (window.matchMedia) {
+      var mq = window.matchMedia("(prefers-color-scheme: dark)");
+      if (mq.addEventListener) mq.addEventListener("change", applyTheme);
+      else if (mq.addListener) mq.addListener(applyTheme);
+    }
 
     // Nach-oben-Button: erscheint nach dem Scrollen, scrollt sanft hoch.
     var toTop = document.getElementById("to-top");
@@ -1354,9 +2238,14 @@
       updateTop();
     }
     render();   // zeigt "Lade Daten …"
-    loadManifest().then(render).catch(function () {
+    loadManifest().then(function () {
+      render();
+      // Beim allerersten Start durch die Ersteinrichtung führen.
+      if (!state.prefs.wizardDone) startWizard();
+      scheduleNotify();
+    }).catch(function () {
       content.innerHTML = '<div class="empty">Daten konnten nicht geladen ' +
-        'werden.<br>Prüfe die Datenquelle im Menü (☰).</div>';
+        'werden.<br>Prüfe die <b>Datenquelle</b> in den Einstellungen.</div>';
     });
   }
 

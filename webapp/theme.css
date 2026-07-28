@@ -1,0 +1,193 @@
+/*
+ * theme.css — PetitionsManager Dark Mode
+ * ========================================
+ * Diese Datei überschreibt Farb-Variablen und die wenigen hart kodierten
+ * Farben, die sich nicht aus Variablen ableiten lassen.
+ *
+ * Steuerung:
+ *   document.documentElement.dataset.theme = "light" | "dark" | "auto"
+ *   → "light" : erzwungen hell (Standard, style.css greift)
+ *   → "dark"  : erzwungen dunkel (Block A)
+ *   → "auto"  : folgt dem Betriebssystem (Block C, prefers-color-scheme)
+ *
+ * WICHTIG: Block A (:root[data-theme="dark"]) und Block C
+ * (@media prefers-color-scheme: dark → :root[data-theme="auto"])
+ * müssen IMMER SYNCHRON gehalten werden. Änderungen bitte in beiden
+ * Stellen eintragen; die Reihenfolge der Regeln ist in beiden Blöcken
+ * identisch, damit sich ein Vergleich (diff) leicht maschinell führen lässt.
+ *
+ * Die Palette ist – wie das helle Design – ins Warme gezogen: der Grund ist
+ * ein warmes Anthrazit, keine blaugraue Nacht.
+ *
+ * Geprüfte WCAG-Kontraste (Auszug):
+ *   INK auf BG      14.50:1  ✓   MUTED auf BG    6.65:1  ✓
+ *   ACCENT auf BG    7.91:1  ✓   HOT auf SURFACE 8.23:1  ✓
+ *   Pill-Button      14.50:1  ✓  Wirkungs-Karte  7.91:1  ✓
+ * Flächen mit var(--accent) bzw. var(--amp1) erhalten dunklen Text
+ * (--on-accent / --on-danger), weil Weiß darauf nur 2.26:1 erreicht.
+ *
+ * Marken-Tönung: style.css legt einen halbtransparenten Schleier über die
+ * Markenfarbe --brand. Im Dunklen ist das ein dunkler Schleier (--veil-1,
+ * --veil-2); die Markenkante bekommt zusätzlich einen weißen Schleier
+ * (--veil-rail), damit dunkle Markenfarben wie EU-Blau #003399 auf dem
+ * dunklen Grund nicht verschwinden.
+ */
+
+/* ============================================================
+   BLOCK A — :root[data-theme="dark"]
+   Erzwungener Dark Mode
+   ============================================================ */
+:root[data-theme="dark"] {
+  /* Flächen */
+  --bg:           #191714;   /* Hauptfläche, warmes Anthrazit */
+  --surface:      #232019;   /* Karten, Akkordions, Eingabefelder */
+  --line:         #332f27;   /* Trennlinien, Rahmen */
+
+  /* Texte */
+  --ink:          #ebe7df;   /* Haupttext */
+  --muted:        #a49d90;   /* Gedämpfter Text */
+
+  /* Akzent-Grün: auf dunklem Grund hell genug aufgezogen */
+  --accent:       #4bbfa4;
+  --accent-soft:  #1e352e;   /* dunkle grünliche Fläche statt Pastell */
+
+  /* Orange (Trending/Hot) */
+  --hot:          #f6a92b;   /* bleibt, guter Kontrast auf Dunkel */
+  --hot-soft:     #31250f;   /* dunkle orange Fläche */
+
+  /* Ampelfarben — angehoben für dunklen Grund */
+  --online:       #34c785;
+  --amp5:         #34c785;
+  --amp4:         #9fcf55;
+  --amp3:         #f0c040;
+  --amp2:         #f09060;
+  --amp1:         #e06060;
+
+  /* Textfarbe AUF farbigen Flaechen: --accent und --amp1 sind hier hell,
+     weisser Text darauf faellt durch (2.3:1). Dunkler Text traegt. */
+  --on-accent:    #191714;
+  --on-danger:    #191714;
+
+  /* --hot und --brand sind in beiden Designs gleich, --on-hot und --on-brand
+     bleiben deshalb unveraendert (kein Override noetig).
+     --hot-soft wird hier dunkel, also kehrt sich die Symbolfarbe darauf um. */
+  --on-hot-soft:  #f6a92b;
+
+  /* Schleier ueber der Markenfarbe (siehe Kopfkommentar) */
+  --veil-1:       rgba(35,32,25,.88);
+  --veil-2:       rgba(35,32,25,.74);
+  --veil-rail:    rgba(255,255,255,.40);
+
+  /* Schalter-Spur und -Knopf */
+  --track-off:    #4a453c;
+  --knob:         #c2bcb0;
+
+  /* Schatten: fast unsichtbar; stattdessen Linien (--line) als Trenner */
+  --shadow:       0 0 0 1px #332f27;
+}
+
+/* ---- Verbleibende Overrides ----------------------------------------------
+   Fast alles laeuft ueber Variablen. Uebrig bleiben nur Stellen, an denen
+   eine Farbe konstruktionsbedingt nicht aus der Palette kommen kann:
+   Bildhelligkeit, Verdunklungsebene und Schlagschatten.
+   -------------------------------------------------------------------------- */
+
+/* ---- Petitionsbilder: leicht gedämpft ------------------ */
+:root[data-theme="dark"] .pet__img {
+  filter: brightness(.88);
+}
+:root[data-theme="dark"] .pet__thumb {
+  filter: brightness(.88);
+}
+
+/* ---- Drawer-Scrim -------------------------------------- */
+:root[data-theme="dark"] .drawer-scrim {
+  background: rgba(0,0,0,.65);
+}
+
+/* ---- Drawer-Box-Shadow --------------------------------- */
+:root[data-theme="dark"] .drawer {
+  box-shadow: -1px 0 0 #332f27, -.375rem 0 1.5rem rgba(0,0,0,.5);
+}
+
+/* ---- Scroll-to-top Box-Shadow -------------------------- */
+:root[data-theme="dark"] .to-top {
+  box-shadow: 0 0 0 1px #332f27, 0 .375rem 1.125rem rgba(0,0,0,.4);
+}
+
+
+/* ============================================================
+   BLOCK C — @media (prefers-color-scheme: dark)
+   System folgt automatisch (data-theme="auto")
+   MUSS mit Block A synchron gehalten werden!
+   ============================================================ */
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="auto"] {
+    /* Flächen */
+    --bg:           #191714;
+    --surface:      #232019;
+    --line:         #332f27;
+
+    /* Texte */
+    --ink:          #ebe7df;
+    --muted:        #a49d90;
+
+    /* Akzent */
+    --accent:       #4bbfa4;
+    --accent-soft:  #1e352e;
+
+    /* Orange */
+    --hot:          #f6a92b;
+    --hot-soft:     #31250f;
+
+    /* Ampelfarben */
+    --online:       #34c785;
+    --amp5:         #34c785;
+    --amp4:         #9fcf55;
+    --amp3:         #f0c040;
+    --amp2:         #f09060;
+    --amp1:         #e06060;
+
+    /* Textfarbe auf farbigen Flaechen (siehe Block A) */
+    --on-accent:    #191714;
+    --on-danger:    #191714;
+
+    /* Symbolfarbe auf --hot-soft (siehe Block A) */
+    --on-hot-soft:  #f6a92b;
+
+    /* Schleier ueber der Markenfarbe (siehe Block A) */
+    --veil-1:       rgba(35,32,25,.88);
+    --veil-2:       rgba(35,32,25,.74);
+    --veil-rail:    rgba(255,255,255,.40);
+
+    /* Schalter-Spur und -Knopf */
+    --track-off:    #4a453c;
+    --knob:         #c2bcb0;
+
+    /* Schatten */
+    --shadow:       0 0 0 1px #332f27;
+  }
+
+  /* Petitionsbilder */
+  :root[data-theme="auto"] .pet__img {
+    filter: brightness(.88);
+  }
+  :root[data-theme="auto"] .pet__thumb {
+    filter: brightness(.88);
+  }
+
+  /* Drawer-Scrim */
+  :root[data-theme="auto"] .drawer-scrim {
+    background: rgba(0,0,0,.65);
+  }
+
+  /* Drawer-Box-Shadow */
+  :root[data-theme="auto"] .drawer {
+    box-shadow: -1px 0 0 #332f27, -.375rem 0 1.5rem rgba(0,0,0,.5);
+  }
+
+  /* Scroll-to-top Box-Shadow */
+  :root[data-theme="auto"] .to-top {
+    box-shadow: 0 0 0 1px #332f27, 0 .375rem 1.125rem rgba(0,0,0,.4);
+  }
+}

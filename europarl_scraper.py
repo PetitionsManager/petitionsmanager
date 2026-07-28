@@ -157,8 +157,14 @@ def scrape_petition(fetcher: core.Fetcher, slug: str) -> tuple[str, dict | None]
         return "offline", None
     if not resp.ok:
         return "error", None
-    if "Petition" not in resp.text:
-        return "offline", None
+    # Ein 200 OHNE Petitionsinhalt ist kein Beleg für "verschwunden": das
+    # Portal liefert bei Störungen/Sperren ebenfalls 200 mit Fehlerseite.
+    # Solche Antworten daher als Fehler behandeln (Datensatz unverändert),
+    # NICHT als offline – sonst kippt ein Ausfall den ganzen Bestand.
+    if "Petition No" not in resp.text:
+        log(f"  unerwartete Antwort für {slug} (kein Petitionstext) – "
+            "als Fehler gewertet, Datensatz bleibt unverändert.")
+        return "error", None
     return "online", parse_detail(resp.text, url, slug)
 
 
