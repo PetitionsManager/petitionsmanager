@@ -94,33 +94,12 @@
   }
   function platColor(key) { return platInfo(key).color || null; }
 
-  /* Schriftfarbe auf einer Vollton-Markenfläche (Bento-Kacheln im Layout
-     „Magazin"). Pauschal Weiß geht nicht auf: foodwatch-Orange bringt es
-     unter weißer Schrift nur auf 3,4:1, Bundestagsblau unter dunkler Schrift
-     auf 1,5:1. Deshalb wird je Farbe gerechnet – relative Leuchtdichte nach
-     WCAG 2.1 – und die Seite mit dem größeren Abstand gewählt.
-     Das Ergebnis hängt allein an der Markenfarbe, nicht am Design: eine
-     orangene Kachel bleibt hell, auch wenn ringsum alles dunkel ist. Es
-     braucht dafür deshalb KEINEN Gegenpart in theme.css. */
-  var INK_DARK = "#1e1c18";                   /* = --ink im hellen Design */
-  function relLum(hex) {
-    var m = /^#([0-9a-f]{6})$/i.exec(String(hex || ""));
-    if (!m) return null;
-    var n = parseInt(m[1], 16), lum = 0,
-        shift = [16, 8, 0], weight = [.2126, .7152, .0722];
-    for (var i = 0; i < 3; i++) {
-      var c = ((n >> shift[i]) & 255) / 255;
-      c = c <= .03928 ? c / 12.92 : Math.pow((c + .055) / 1.055, 2.4);
-      lum += weight[i] * c;
-    }
-    return lum;
-  }
-  function ratio(a, b) { return (Math.max(a, b) + .05) / (Math.min(a, b) + .05); }
-  function platInk(hex) {
-    var l = relLum(hex);
-    if (l == null) return null;              /* Weiß hat die Leuchtdichte 1 */
-    return ratio(l, 1) >= ratio(l, relLum(INK_DARK)) ? "#ffffff" : INK_DARK;
-  }
+  /* Hier stand platInk(): die Schriftfarbe der Bento-Kachel wurde je
+     Markenfarbe gerechnet (relative Leuchtdichte nach WCAG 2.1) und auf die
+     kontraststärkere Seite gesetzt. Seit der Nutzerentscheidung „alle
+     Schriften/Logos weiß" ist die Farbe fest und die Rechnung hinfällig —
+     der Wert kommt jetzt aus layouts.css. Zum Zurückholen siehe Commit
+     ae4ab06 (samt der Messreihe über alle elf Marken). */
 
   // ---- Persönliche Einstellungen ---------------------------------------------
   // Ein einziger localStorage-Schlüssel für alles, was die Person selbst
@@ -606,12 +585,14 @@
     var newLabel = newN > 0
       ? '<span class="plat__new">+' + nf.format(newN) + " neu</span>" : "";
     var brand = platColor(p.key);
-    /* --on-brand gilt ab hier für die ganze Kachel und alles darin.
-       platforms.js darf die Rechnung mit `ink` übersteuern – dort, wo die
-       Marke selbst eine Schriftfarbe vorgibt, die knapp hinter der
-       rechnerisch besten liegt (350.org: Weiß 3,94 gegen Dunkel 4,31).
-       Die 3:1-Grenze für Großtext muss der Wert trotzdem halten. */
-    var ink = platInfo(p.key).ink || (brand ? platInk(brand) : null);
+    /* Die Kachel gibt KEINE eigene Schriftfarbe mehr vor: --on-brand kommt
+       einheitlich aus layouts.css und ist überall Weiß (Nutzerentscheidung
+       2026-07-28, „alle Schriften/Logos weiß").
+       Vorher rechnete platInk() je Markenfarbe die kontraststärkere Seite aus.
+       Das ist damit hinfällig — und es kostet etwas: auf drei hellen Marken
+       hält Weiß nicht einmal die 3:1 für Großtext (foodwatch #f7a600 → 2,02,
+       openPetition #29b0cc → 2,57, innn.it #fc691f → 2,92). Wer das zurück
+       will, holt platInk aus der Versionsgeschichte (Commit ae4ab06). */
     var tagline = platInfo(p.key).tagline;
     // Echtes Plattform-Logo (platforms.js → logoFile). Liegt als CSS-Maske vor
     // der Textfarbe der Kachel, ist also immer einfarbig im richtigen Ton –
@@ -632,8 +613,7 @@
       : "";
     var card = el(
       '<button class="plat' + (size ? " " + size : "") + '"' +
-        (brand ? ' style="--brand:' + esc(brand) +
-                 (ink ? ";--on-brand:" + ink : "") + '"' : "") + ">" +
+        (brand ? ' style="--brand:' + esc(brand) + '"' : "") + ">" +
         platLogo(p.key, p.name) + mark +
         '<span class="plat__body">' +
           /* Die Flagge bleibt bewusst IM Namen: in „klassisch" und „Band"
