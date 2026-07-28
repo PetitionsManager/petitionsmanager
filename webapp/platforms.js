@@ -85,8 +85,8 @@ window.PM_PLATFORMS = {
     colorDark: "#fdac84",          /* aufgehellt für dunklen Hintergrund */
     logo: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="7" fill="#e8174a"/><text x="12" y="17" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#fff">i!</text></svg>',
     logoNote: "https://innn.it",
-    logoFile: "logos/innnit.png",  /* eigenes App-Icon, freigestellt und zugeschnitten */
-    logoAR:   0.745,               /* 123 : 165 Bildpunkte */
+    logoFile: "logos/innnit.svg",  /* eigenes App-Icon, freigestellt und zugeschnitten */
+    logoAR:   1.43,                /* 123 : 86 – Ausschnitt, den der Browser wirklich zeichnet */
     tagline: "Petitionen für Deutschland",
     about: {
       text: "innn.it ist eine gemeinnützige Petitionsplattform mit Schwerpunkt auf deutschen politischen und gesellschaftlichen Themen. Der Trägerverein innn.it e. V. wurde 2022 als eigenständige Organisation gegründet, nachdem die Plattform zunächst im Netzwerk von Change.org betrieben worden war. Die Finanzierung erfolgt vollständig durch Spenden.",

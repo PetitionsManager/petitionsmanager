@@ -145,9 +145,15 @@ section.langgroup{background:transparent;border:0;border-radius:0;
   font-weight:800;letter-spacing:-.015em;text-transform:none;color:var(--ink)}
 .langgroup:first-child>.acc-head{padding-top:.375rem}
 .langgroup>.acc-head .acc-title{gap:.5625rem}
-/* Kopf-Icon mit fester Breite: Flagge und Stern gleich breit/ausgerichtet. */
-.langgroup>.acc-head .grp-ic{width:1.375rem;flex:none;display:inline-flex;
-  align-items:center;justify-content:center;font-size:1rem;line-height:1}
+/* Kopf-Icon: Flagge und Stern gleich breit und ausgerichtet.
+   Die Flagge ist ein rundes Abzeichen — das Emoji ist ein breites Rechteck,
+   deshalb wird es GRÖSSER gesetzt als der Kreis und von overflow:hidden
+   beschnitten. Ohne das Übermass blieben oben und unten Lücken, weil das
+   Emoji breiter als hoch ist. Der Stern bekommt seine Grösse aus der Regel
+   darunter und bleibt davon unberührt. */
+.langgroup>.acc-head .grp-ic{width:1.5rem;height:1.5rem;flex:none;
+  display:inline-flex;align-items:center;justify-content:center;
+  border-radius:50%;overflow:hidden;font-size:2rem;line-height:1}
 .langgroup>.acc-head .fa-star{color:var(--hot);font-size:.9375rem}
 .langgroup>.acc-head .fa-box-archive{color:var(--muted);font-size:.875rem}
 .langgroup>.acc-head .acc-count{background:var(--accent-soft);color:var(--accent);
@@ -163,8 +169,10 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
 .bottomacc>.acc-head{color:var(--muted);font-size:.9375rem;font-weight:750}
 .bottomacc>.acc-head .fa-circle-xmark{color:var(--amp1)}
 .flag{font-size:1.05em;line-height:1;flex:none}
-/* Flagge steht hinter dem Namen/Titel → Abstand links */
-.plat__name .flag,.opt__name .flag,.acc-title .flag,.simrow__p .flag{
+/* Flagge steht hinter dem Namen/Titel → Abstand links.
+   .plat__name ist hier NICHT mehr aufgeführt: die Plattform-Kachel trägt
+   keine eigene Flagge mehr, die Gruppenüberschrift zeigt sie einmal. */
+.opt__name .flag,.acc-title .flag,.simrow__p .flag{
   margin-left:.4375rem;font-size:1em}
 
 /* ---- Plattform-Kacheln (Liste) ----

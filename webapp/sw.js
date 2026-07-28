@@ -46,8 +46,11 @@
    Wischen im Magazin repariert; im Archiv links = Wiederherstellen,
    rechts = Unterschreiben (app.js/style.css/layouts.css/platforms.js)
    v15: Bento durchgehend weiße Schrift und Logos, schmalerer Spaltenabstand
-   (app.js/layouts.css/platforms.js) */
-var CACHE = "pm-cache-v15";
+   (app.js/layouts.css/platforms.js)
+   v16: innn.it-Logo als SVG statt PNG (als CSS-Maske wurde das einzige
+   Rasterbild nicht gezeichnet), Flaggen nur noch an der Gruppenüberschrift
+   und dort als runder Kreis (app.js/style.css/layouts.css/platforms.js) */
+var CACHE = "pm-cache-v16";
 /* Versionsunabhängig – überlebt das Hochzählen von CACHE. Die Zahl dahinter
    NUR hochsetzen, wenn sich die Paketnummerierung selbst ändert (dann stimmen
    die alten Inhalte nicht mehr zur Nummer und die Bibliothek muss weg). */
@@ -77,7 +80,7 @@ var SHELL = [
   "./logos/eko.svg",
   "./logos/europarl.svg",
   "./logos/foodwatch.svg",
-  "./logos/innnit.png",
+  "./logos/innnit.svg",
   "./logos/openpetition.svg",
   "./logos/threefifty.svg",
   "./logos/weact.svg",
