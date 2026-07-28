@@ -20,34 +20,27 @@
       "updates": "Neuigkeiten [{timestamp,text}]",
       "goal": "aktuelles Unterschriften-Ziel (falls die Plattform eines zeigt)",
       "start_date": "Startdatum (plattformabhängig ermittelt)",
-      "status": "online | offline",
+      "deadline": "Ende der Mitzeichnungs-/Unterschriftenfrist oder null",
+      "closed": "true = nicht mehr mitzeichenbar (Frist abgelaufen/archiviert)",
+      "phase": "Verfahrensstand der Plattform (z. B. mitzeichnung|beendet|archiv)",
+      "status": "online | offline (erreichbar die Seite noch?)",
       "first_seen": "erstmals gescrapt (unveraenderlich)",
       "last_seen": "zuletzt online",
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-07-20T22:41:30-06:00",
-    "petition_count": 21,
+    "generated_at": "2026-07-28T08:22:04-06:00",
+    "petition_count": 26,
     "new_petitions_last_run": [
-      "25286",
-      "25229",
-      "25183",
-      "24777",
-      "24670",
-      "23794",
-      "23159",
-      "22924",
-      "22773",
-      "21720",
-      "21334",
-      "20799",
-      "19891",
-      "19707",
-      "19490",
-      "19474",
-      "19264",
-      "22424"
-    ]
+      "24253",
+      "23919",
+      "23884",
+      "20864",
+      "20858"
+    ],
+    "available": 26,
+    "health_warning": null,
+    "online_count": 26
   },
   "25468": {
     "slug": "25468",
@@ -56,6 +49,10 @@
       {
         "checked_at": "2026-07-20T22:38:57-06:00",
         "count": 11582
+      },
+      {
+        "checked_at": "2026-07-28T08:21:03-06:00",
+        "count": 11870
       }
     ],
     "kind": "petition",
@@ -66,10 +63,10 @@
     "description_full": "<p>Fossile Konzerne machen weiterhin unglaubliche Profite, während unsere Rechnungen steigen und unser Planet sich immer weiter aufheizt. Wir können nicht weiter zahlen, während sie profitieren. Unsere Regierungen müssen sich von Öl und Gas lösen. Bist du dabei? Unterschreibe:</p>",
     "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/Screenshot_2026-07-03_at_15.35.05.png",
     "url": "https://act.350.org/cms/view_by_page_id/25468?source=get_involved_dynamic",
-    "signatures": 11582,
+    "signatures": 11870,
     "goal": 1000,
     "status": "online",
-    "last_seen": "2026-07-20T22:40:46-06:00",
+    "last_seen": "2026-07-28T08:21:03-06:00",
     "offline_since": null,
     "tags": [
       "Während",
@@ -83,7 +80,7 @@
       "Fossile",
       "Profite"
     ],
-    "last_checked": "2026-07-20T22:40:46-06:00"
+    "last_checked": "2026-07-28T08:21:03-06:00"
   },
   "25350": {
     "slug": "25350",
@@ -92,6 +89,10 @@
       {
         "checked_at": "2026-07-20T22:38:57-06:00",
         "count": 29872
+      },
+      {
+        "checked_at": "2026-07-28T08:21:03-06:00",
+        "count": 30248
       }
     ],
     "kind": "petition",
@@ -102,10 +103,10 @@
     "description_full": "<p>Regierungen müssen bezahlbare, sichere und saubere Energie für alle garantieren. Fossile Brennstoffe heizen nicht nur den Planeten auf – sie machen das Leben auch teurer. Füge deinen Namen hinzu und fordere von Regierungen ein faires, bezahlbares Energiesystem für alle.</p>",
     "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/DE_The_great_power_shift.png",
     "url": "https://act.350.org/cms/view_by_page_id/25350?source=get_involved_dynamic",
-    "signatures": 29872,
+    "signatures": 30248,
     "goal": 1000,
     "status": "online",
-    "last_seen": "2026-07-20T22:40:46-06:00",
+    "last_seen": "2026-07-28T08:21:03-06:00",
     "offline_since": null,
     "tags": [
       "Regierungen",
@@ -119,7 +120,7 @@
       "Sichere",
       "Heizen"
     ],
-    "last_checked": "2026-07-20T22:40:46-06:00"
+    "last_checked": "2026-07-28T08:21:03-06:00"
   },
   "25289": {
     "slug": "25289",
@@ -128,6 +129,10 @@
       {
         "checked_at": "2026-07-20T22:38:57-06:00",
         "count": 37075
+      },
+      {
+        "checked_at": "2026-07-28T08:21:03-06:00",
+        "count": 37535
       }
     ],
     "kind": "petition",
@@ -138,10 +143,10 @@
     "description_full": "<p>Der Krieg im Nahen Osten kostet Menschenleben und lässt Preise für Öl und Gas stark steigen, Energiekonzerne kassieren ab, während Familien mit steigenden Kosten kämpfen. Die reichsten Länder müssen diese Umweltverschmutzer besteuern! Lass sie bezahlen!</p>",
     "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/Tax_polluters_De_2026.png",
     "url": "https://act.350.org/cms/view_by_page_id/25289?source=get_involved_dynamic",
-    "signatures": 37075,
+    "signatures": 37535,
     "goal": 1000,
     "status": "online",
-    "last_seen": "2026-07-20T22:40:46-06:00",
+    "last_seen": "2026-07-28T08:21:03-06:00",
     "offline_since": null,
     "tags": [
       "Umweltverschmutzer",
@@ -155,7 +160,7 @@
       "Steigen",
       "Während"
     ],
-    "last_checked": "2026-07-20T22:40:46-06:00"
+    "last_checked": "2026-07-28T08:21:03-06:00"
   },
   "25286": {
     "slug": "25286",
@@ -170,7 +175,7 @@
     "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/Hoekstra_letter_March2026.png",
     "url": "https://act.350.org/cms/view_by_page_id/25286?source=get_involved_dynamic",
     "status": "online",
-    "last_seen": "2026-07-20T22:40:46-06:00",
+    "last_seen": "2026-07-28T08:21:03-06:00",
     "offline_since": null,
     "tags": [
       "Ausstieg",
@@ -184,7 +189,7 @@
       "April",
       "Kohle"
     ],
-    "last_checked": "2026-07-20T22:40:46-06:00"
+    "last_checked": "2026-07-28T08:21:03-06:00"
   },
   "25229": {
     "slug": "25229",
@@ -193,6 +198,10 @@
       {
         "checked_at": "2026-07-20T22:40:46-06:00",
         "count": 27144
+      },
+      {
+        "checked_at": "2026-07-28T08:21:03-06:00",
+        "count": 27149
       }
     ],
     "kind": "petition",
@@ -201,10 +210,10 @@
     "title": "Kein Blut für Öl: Fordere eine fossilfreie Zukunft!",
     "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/smokestack.png",
     "url": "https://act.350.org/cms/view_by_page_id/25229?source=get_involved_dynamic",
-    "signatures": 27144,
+    "signatures": 27149,
     "goal": 1000,
     "status": "online",
-    "last_seen": "2026-07-20T22:40:46-06:00",
+    "last_seen": "2026-07-28T08:21:03-06:00",
     "offline_since": null,
     "tags": [
       "Fossilfreie",
@@ -212,7 +221,7 @@
       "Zukunft",
       "Blut"
     ],
-    "last_checked": "2026-07-20T22:40:46-06:00"
+    "last_checked": "2026-07-28T08:21:03-06:00"
   },
   "25183": {
     "slug": "25183",
@@ -221,6 +230,10 @@
       {
         "checked_at": "2026-07-20T22:40:46-06:00",
         "count": 29245
+      },
+      {
+        "checked_at": "2026-07-28T08:21:03-06:00",
+        "count": 29258
       }
     ],
     "kind": "petition",
@@ -229,17 +242,17 @@
     "title": "Fossile Energien für immer beenden",
     "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/1000x751px-660740-renewable-energy-460-67-kb-13-03-2015.jpg",
     "url": "https://act.350.org/cms/view_by_page_id/25183?source=get_involved_dynamic",
-    "signatures": 29245,
+    "signatures": 29258,
     "goal": 1000,
     "status": "online",
-    "last_seen": "2026-07-20T22:40:46-06:00",
+    "last_seen": "2026-07-28T08:21:03-06:00",
     "offline_since": null,
     "tags": [
       "Energien",
       "Beenden",
       "Fossile"
     ],
-    "last_checked": "2026-07-20T22:40:46-06:00"
+    "last_checked": "2026-07-28T08:21:03-06:00"
   },
   "24777": {
     "slug": "24777",
@@ -254,7 +267,7 @@
     "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/UK_350_Make_Them_Pay_1.png",
     "url": "https://act.350.org/cms/view_by_page_id/24777?source=get_involved_dynamic",
     "status": "online",
-    "last_seen": "2026-07-20T22:40:46-06:00",
+    "last_seen": "2026-07-28T08:21:03-06:00",
     "offline_since": null,
     "tags": [
       "Brennstoffe",
@@ -268,7 +281,7 @@
       "Konsequent",
       "Verspricht"
     ],
-    "last_checked": "2026-07-20T22:40:46-06:00"
+    "last_checked": "2026-07-28T08:21:03-06:00"
   },
   "24670": {
     "slug": "24670",
@@ -287,7 +300,7 @@
     "url": "https://act.350.org/cms/view_by_page_id/24670?source=get_involved_dynamic",
     "signatures": 2778,
     "status": "online",
-    "last_seen": "2026-07-20T22:40:46-06:00",
+    "last_seen": "2026-07-28T08:21:03-06:00",
     "offline_since": null,
     "tags": [
       "Seite",
@@ -296,7 +309,7 @@
       "Indigenen",
       "Stehen"
     ],
-    "last_checked": "2026-07-20T22:40:46-06:00"
+    "last_checked": "2026-07-28T08:21:03-06:00"
   },
   "23794": {
     "slug": "23794",
@@ -311,7 +324,7 @@
     "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/COP30_Agenda_Make_ending_FF_priority.png",
     "url": "https://act.350.org/cms/view_by_page_id/23794?source=get_involved_dynamic",
     "status": "online",
-    "last_seen": "2026-07-20T22:40:46-06:00",
+    "last_seen": "2026-07-28T08:21:03-06:00",
     "offline_since": null,
     "tags": [
       "Ausstieg",
@@ -325,7 +338,7 @@
       "Größten",
       "Kohle"
     ],
-    "last_checked": "2026-07-20T22:40:46-06:00"
+    "last_checked": "2026-07-28T08:21:03-06:00"
   },
   "23159": {
     "slug": "23159",
@@ -334,6 +347,10 @@
       {
         "checked_at": "2026-07-20T22:40:46-06:00",
         "count": 20626
+      },
+      {
+        "checked_at": "2026-07-28T08:21:03-06:00",
+        "count": 20638
       }
     ],
     "kind": "petition",
@@ -344,10 +361,10 @@
     "description_full": "<p>Erst PutinGas, jetzt TrumpGas: Europas Abhängigkeit von fossilem Gas fesselt uns an die Launen autoritärer Führer. Gas ist zudem teuer und klimaschädlich. Wir können es durch günstige, heimische erneuerbare Energie und Energieeffizienz ersetzen.</p>",
     "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/background_image_with_100_Trumps.jpg",
     "url": "https://act.350.org/cms/view_by_page_id/23159?source=get_involved_dynamic",
-    "signatures": 20626,
+    "signatures": 20638,
     "goal": 5000,
     "status": "online",
-    "last_seen": "2026-07-20T22:40:46-06:00",
+    "last_seen": "2026-07-28T08:21:03-06:00",
     "offline_since": null,
     "tags": [
       "TrumpGas",
@@ -361,7 +378,7 @@
       "Europas",
       "Fesselt"
     ],
-    "last_checked": "2026-07-20T22:40:46-06:00"
+    "last_checked": "2026-07-28T08:21:03-06:00"
   },
   "22924": {
     "slug": "22924",
@@ -370,6 +387,10 @@
       {
         "checked_at": "2026-07-20T22:40:46-06:00",
         "count": 15650
+      },
+      {
+        "checked_at": "2026-07-28T08:21:03-06:00",
+        "count": 15651
       }
     ],
     "kind": "petition",
@@ -380,10 +401,10 @@
     "description_full": "<p>Brasiliens Präsident Lula hat angekündigt, weitere Ölbohrungen in unmittelbarer Nähe des Amazonas zu genehmigen. Der Amazonas ist die einzige Wasserquelle für die dort lebenden Indigenen sowie viele Wildtiere. Präsident Lula hofft, diese Projekte noch vor Beginn der Klimakonferenz COP30 möglichst heimlich durchzusetzen, um negative Schlagzeilen zu vermeiden. Genau deshalb müssen wir ihm jetzt deutlich machen, dass wir ihn genau im Blick haben</p>",
     "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/Amazonia-livre-de-petroleo-1-1024x929.jpg",
     "url": "https://act.350.org/cms/view_by_page_id/22924?source=get_involved_dynamic",
-    "signatures": 15650,
+    "signatures": 15651,
     "goal": 5000,
     "status": "online",
-    "last_seen": "2026-07-20T22:40:46-06:00",
+    "last_seen": "2026-07-28T08:21:03-06:00",
     "offline_since": null,
     "tags": [
       "Präsident",
@@ -397,7 +418,7 @@
       "Genehmigen",
       "Indigenen"
     ],
-    "last_checked": "2026-07-20T22:40:46-06:00"
+    "last_checked": "2026-07-28T08:21:03-06:00"
   },
   "22773": {
     "slug": "22773",
@@ -418,7 +439,7 @@
     "url": "https://act.350.org/cms/view_by_page_id/22773?source=get_involved_dynamic",
     "signatures": 2444,
     "status": "online",
-    "last_seen": "2026-07-20T22:40:46-06:00",
+    "last_seen": "2026-07-28T08:21:03-06:00",
     "offline_since": null,
     "tags": [
       "Gemeinsam",
@@ -432,7 +453,7 @@
       "Einander",
       "Kämpfen"
     ],
-    "last_checked": "2026-07-20T22:40:46-06:00"
+    "last_checked": "2026-07-28T08:21:03-06:00"
   },
   "21720": {
     "slug": "21720",
@@ -454,7 +475,7 @@
     "signatures": 39750,
     "goal": 5000,
     "status": "online",
-    "last_seen": "2026-07-20T22:40:46-06:00",
+    "last_seen": "2026-07-28T08:21:03-06:00",
     "offline_since": null,
     "tags": [
       "Indigenen",
@@ -468,7 +489,7 @@
       "Eigenes",
       "Völker"
     ],
-    "last_checked": "2026-07-20T22:40:46-06:00"
+    "last_checked": "2026-07-28T08:21:03-06:00"
   },
   "21334": {
     "slug": "21334",
@@ -477,6 +498,10 @@
       {
         "checked_at": "2026-07-20T22:40:46-06:00",
         "count": 29908
+      },
+      {
+        "checked_at": "2026-07-28T08:21:03-06:00",
+        "count": 29912
       }
     ],
     "kind": "petition",
@@ -485,10 +510,10 @@
     "title": "An die führenden Politiker*innen weltweit: Setzen Sie ehrgeizige Klimaziele!",
     "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/20231209_COP28_Global_Day_Of_Action_KSW_04.jpg",
     "url": "https://act.350.org/cms/view_by_page_id/21334?source=get_involved_dynamic",
-    "signatures": 29908,
+    "signatures": 29912,
     "goal": 20000,
     "status": "online",
-    "last_seen": "2026-07-20T22:40:46-06:00",
+    "last_seen": "2026-07-28T08:21:03-06:00",
     "offline_since": null,
     "tags": [
       "Ehrgeizige",
@@ -499,7 +524,7 @@
       "Setzen",
       "Innen"
     ],
-    "last_checked": "2026-07-20T22:40:46-06:00"
+    "last_checked": "2026-07-28T08:21:03-06:00"
   },
   "20799": {
     "slug": "20799",
@@ -508,6 +533,10 @@
       {
         "checked_at": "2026-07-20T22:40:46-06:00",
         "count": 158293
+      },
+      {
+        "checked_at": "2026-07-28T08:21:03-06:00",
+        "count": 158330
       }
     ],
     "kind": "petition",
@@ -518,9 +547,9 @@
     "description_full": "<p>Während immer mehr Hitzerekorde gebrochen und viele Teile der Welt und Deutschlands von Überschwemmungen heimgesucht werden, können sich viele von uns ihre Strom- und Heizrechnungen nicht mehr leisten. Gleichzeitig werden extrem reiche Menschen immer reicher, heizen die Klimakrise an und zahlen noch dazu weniger Steuern als der Rest von uns. Wir müssen dringend auf erneuerbare, bezahlbare Energiequellen für alle umstellen.</p>",
     "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/DE_TTB_ActionKit_graphics.png",
     "url": "https://act.350.org/cms/view_by_page_id/20799?source=get_involved_dynamic",
-    "signatures": 158293,
+    "signatures": 158330,
     "status": "online",
-    "last_seen": "2026-07-20T22:40:46-06:00",
+    "last_seen": "2026-07-28T08:21:03-06:00",
     "offline_since": null,
     "tags": [
       "Überschwemmungen",
@@ -534,7 +563,7 @@
       "Strom",
       "Teile"
     ],
-    "last_checked": "2026-07-20T22:40:46-06:00"
+    "last_checked": "2026-07-28T08:21:03-06:00"
   },
   "19891": {
     "slug": "19891",
@@ -543,6 +572,10 @@
       {
         "checked_at": "2026-07-20T22:40:46-06:00",
         "count": 18918
+      },
+      {
+        "checked_at": "2026-07-28T08:21:03-06:00",
+        "count": 18919
       }
     ],
     "kind": "petition",
@@ -551,10 +584,10 @@
     "title": "Reiche Länder: Leitet das Geld in erneuerbare Energie um!",
     "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/move-the-money.jpg",
     "url": "https://act.350.org/cms/view_by_page_id/19891?source=get_involved_dynamic",
-    "signatures": 18918,
+    "signatures": 18919,
     "goal": 10000,
     "status": "online",
-    "last_seen": "2026-07-20T22:40:46-06:00",
+    "last_seen": "2026-07-28T08:21:03-06:00",
     "offline_since": null,
     "tags": [
       "Erneuerbare",
@@ -564,7 +597,7 @@
       "Reiche",
       "Geld"
     ],
-    "last_checked": "2026-07-20T22:40:46-06:00"
+    "last_checked": "2026-07-28T08:21:03-06:00"
   },
   "19707": {
     "slug": "19707",
@@ -586,7 +619,7 @@
     "signatures": 39549,
     "goal": 5000,
     "status": "online",
-    "last_seen": "2026-07-20T22:40:46-06:00",
+    "last_seen": "2026-07-28T08:21:03-06:00",
     "offline_since": null,
     "tags": [
       "Brief",
@@ -600,7 +633,7 @@
       "Offenen",
       "Chef"
     ],
-    "last_checked": "2026-07-20T22:40:46-06:00"
+    "last_checked": "2026-07-28T08:21:03-06:00"
   },
   "19490": {
     "slug": "19490",
@@ -622,7 +655,7 @@
     "signatures": 1835,
     "goal": 5000,
     "status": "online",
-    "last_seen": "2026-07-20T22:40:46-06:00",
+    "last_seen": "2026-07-28T08:21:03-06:00",
     "offline_since": null,
     "tags": [
       "Gaslobby",
@@ -636,7 +669,7 @@
       "Falschen",
       "Lösungen"
     ],
-    "last_checked": "2026-07-20T22:40:46-06:00"
+    "last_checked": "2026-07-28T08:21:03-06:00"
   },
   "19474": {
     "slug": "19474",
@@ -656,7 +689,7 @@
     "signatures": 44418,
     "goal": 5000,
     "status": "online",
-    "last_seen": "2026-07-20T22:40:46-06:00",
+    "last_seen": "2026-07-28T08:21:03-06:00",
     "offline_since": null,
     "tags": [
       "Gütesiegel",
@@ -664,7 +697,7 @@
       "Schiffe",
       "Grünes"
     ],
-    "last_checked": "2026-07-20T22:40:46-06:00"
+    "last_checked": "2026-07-28T08:21:03-06:00"
   },
   "19264": {
     "slug": "19264",
@@ -685,7 +718,7 @@
     "url": "https://act.350.org/cms/view_by_page_id/19264?source=get_involved_dynamic",
     "signatures": 52,
     "status": "online",
-    "last_seen": "2026-07-20T22:40:46-06:00",
+    "last_seen": "2026-07-28T08:21:03-06:00",
     "offline_since": null,
     "tags": [
       "Schwierigkeiten",
@@ -699,7 +732,7 @@
       "Planeten",
       "Während"
     ],
-    "last_checked": "2026-07-20T22:40:46-06:00"
+    "last_checked": "2026-07-28T08:21:03-06:00"
   },
   "22424": {
     "slug": "22424",
@@ -714,7 +747,7 @@
     "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/Oslo-GCM-photo-Monica-Lovdahl-900px.jpeg",
     "url": "https://act.350.org/cms/view_by_page_id/22424?source=get_involved_dynamic",
     "status": "online",
-    "last_seen": "2026-07-20T22:40:46-06:00",
+    "last_seen": "2026-07-28T08:21:03-06:00",
     "offline_since": null,
     "tags": [
       "Span",
@@ -728,6 +761,157 @@
       "Gemeinschaften",
       "Krankenhäuser"
     ],
-    "last_checked": "2026-07-20T22:40:46-06:00"
+    "last_checked": "2026-07-28T08:21:03-06:00"
+  },
+  "24253": {
+    "slug": "24253",
+    "first_seen": "2026-07-28T08:21:03-06:00",
+    "signatures_history": [],
+    "kind": "petition",
+    "started_by": "350.org",
+    "category": "Aktion",
+    "title": "Draw The Line",
+    "summary": "Menschen auf der ganzen Welt werden für Frieden, erneuerbare Energien und Klimagerechtigkeit auf die Straße gehen. Mach mit – #DrawTheLine, zieh eine klare Linie im September!",
+    "description_full": "<p>Menschen auf der ganzen Welt werden für Frieden, erneuerbare Energien und Klimagerechtigkeit auf die Straße gehen. Mach mit – #DrawTheLine, zieh eine klare Linie im September!</p>",
+    "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/German.png",
+    "url": "https://act.350.org/cms/view_by_page_id/24253?source=get_involved_dynamic",
+    "status": "online",
+    "last_seen": "2026-07-28T08:21:03-06:00",
+    "offline_since": null,
+    "tags": [
+      "Klimagerechtigkeit",
+      "DrawTheLine",
+      "Erneuerbare",
+      "September",
+      "Energien",
+      "Frieden",
+      "Ganzen",
+      "Straße",
+      "Klare",
+      "Linie"
+    ],
+    "last_checked": "2026-07-28T08:21:03-06:00"
+  },
+  "23919": {
+    "slug": "23919",
+    "first_seen": "2026-07-28T08:21:03-06:00",
+    "signatures_history": [],
+    "kind": "petition",
+    "started_by": "350.org",
+    "category": "Aktion",
+    "title": "Sag den Minister*innen: Wir brauchen JETZT den Energiewende-Plan!",
+    "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/Amazon-WS.jpg",
+    "url": "https://act.350.org/cms/view_by_page_id/23919?source=get_involved_dynamic",
+    "status": "online",
+    "last_seen": "2026-07-28T08:21:03-06:00",
+    "offline_since": null,
+    "tags": [
+      "Energiewende-Plan",
+      "Brauchen",
+      "Minister",
+      "Innen"
+    ],
+    "last_checked": "2026-07-28T08:21:03-06:00"
+  },
+  "23884": {
+    "slug": "23884",
+    "first_seen": "2026-07-28T08:21:03-06:00",
+    "signatures_history": [],
+    "kind": "petition",
+    "started_by": "350.org",
+    "category": "Aktion",
+    "title": "Sage Ministerin Reiche: Schluss mit Trump-Gas!",
+    "summary": "Anstatt in Erneuerbare zu investieren, beugen sich die Energieminister*innen der EU dem Druck von Donald Trump und planen, noch mehr dreckiges Gas zu importieren. Aber es braucht nur eine*n Minister*i…",
+    "description_full": "<p>Anstatt in Erneuerbare zu investieren, beugen sich die Energieminister*innen der EU dem Druck von Donald Trump und planen, noch mehr dreckiges Gas zu importieren. Aber es braucht nur eine*n Minister*in, um diesen Plan zu stoppen. Gemeinsam können wir für echten Klimaschutz einzustehen.</p>",
+    "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/DE_350_trumpgas_letter_to_EU_energy_ministers_1.png",
+    "url": "https://act.350.org/cms/view_by_page_id/23884?source=get_involved_dynamic",
+    "status": "online",
+    "last_seen": "2026-07-28T08:21:03-06:00",
+    "offline_since": null,
+    "tags": [
+      "Energieminister",
+      "Erneuerbare",
+      "Importieren",
+      "Investieren",
+      "Dreckiges",
+      "Minister",
+      "Anstatt",
+      "Braucht",
+      "Beugen",
+      "Donald"
+    ],
+    "last_checked": "2026-07-28T08:21:03-06:00"
+  },
+  "20864": {
+    "slug": "20864",
+    "first_seen": "2026-07-28T08:21:03-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-28T08:21:03-06:00",
+        "count": 25588
+      }
+    ],
+    "kind": "petition",
+    "started_by": "350.org",
+    "category": "Petition",
+    "title": "Fordern wir die Staatschefs der G20 auf: Milliarden besteuern, Klimakrise beheben!",
+    "summary": "Wir fordern die Staatschefs und Finanzminister*innen der G20 auf, die Superreichen zu besteuern, um den Übergang von fossilen Brennstoffen zu erneuerbaren Energien zu finanzieren und die Ungleichheit …",
+    "description_full": "<p>Wir fordern die Staatschefs und Finanzminister*innen der G20 auf, die Superreichen zu besteuern, um den Übergang von fossilen Brennstoffen zu erneuerbaren Energien zu finanzieren und die Ungleichheit zu bekämpfen. Milliardäre horten gierig Geld, während der Planet brennt und wir mit steigenden Energiekosten konfrontiert sind.</p>",
+    "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/2.png",
+    "url": "https://act.350.org/cms/view_by_page_id/20864?source=get_involved_dynamic",
+    "signatures": 25588,
+    "goal": 20000,
+    "status": "online",
+    "last_seen": "2026-07-28T08:21:03-06:00",
+    "offline_since": null,
+    "tags": [
+      "Staatschefs",
+      "Besteuern",
+      "Finanzminister",
+      "Brennstoffen",
+      "Erneuerbaren",
+      "Superreichen",
+      "Ungleichheit",
+      "Finanzieren",
+      "Energien",
+      "Fossilen"
+    ],
+    "last_checked": "2026-07-28T08:21:03-06:00"
+  },
+  "20858": {
+    "slug": "20858",
+    "first_seen": "2026-07-28T08:21:03-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-07-28T08:21:03-06:00",
+        "count": 39092
+      }
+    ],
+    "kind": "petition",
+    "started_by": "350.org",
+    "category": "Petition",
+    "title": "Fordere Investitionen und Unterstützung erneuerbarer Energien für die Menschen in Afrika",
+    "summary": "Kommunen in Uganda und Tansania wehren sich gegen eine Megapipeline und setzen auf Solarenergie – unterzeichne, um sie zu unterstützen!",
+    "description_full": "<p>Kommunen in Uganda und Tansania wehren sich gegen eine Megapipeline und setzen auf Solarenergie – unterzeichne, um sie zu unterstützen!</p>",
+    "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/4_1.png",
+    "url": "https://act.350.org/cms/view_by_page_id/20858?source=get_involved_dynamic",
+    "signatures": 39092,
+    "goal": 10000,
+    "status": "online",
+    "last_seen": "2026-07-28T08:21:03-06:00",
+    "offline_since": null,
+    "tags": [
+      "Megapipeline",
+      "Solarenergie",
+      "Unterzeichne",
+      "Kommunen",
+      "Tansania",
+      "Setzen",
+      "Uganda",
+      "Wehren",
+      "Investitionen",
+      "Unterstützung"
+    ],
+    "last_checked": "2026-07-28T08:21:03-06:00"
   }
 }

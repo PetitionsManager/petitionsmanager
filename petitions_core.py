@@ -58,6 +58,14 @@ RESPECT_ROBOTS  = True
 # dauerte bei 1,5 s Pause über eine Stunde. Der Rückstand wird deshalb über
 # mehrere Läufe abgearbeitet; die Warteschlange steht im _meta der Datendatei.
 ARCHIVE_BATCH   = 120
+
+# Wie viele Volltexte ein Lauf höchstens nachträgt (siehe bundestag_scraper).
+# Der Bundestag listet neben den ~57 laufenden Petitionen rund 7.850 beendete
+# und archivierte. Deren Stammdaten (Titel, Sachgebiet, Mitzeichnungen, Frist)
+# stehen schon in der Listentabelle; nur "Text der Petition"/"Begründung"
+# brauchen je eine Detailseite. Diese Nacharbeit läuft portionsweise über
+# mehrere Läufe; die Warteschlange steht im _meta der Datendatei.
+BACKFILL_BATCH  = 300
 USER_AGENT      = ("Mozilla/5.0 (X11; Linux x86_64) PetitionsMonitor/2.0 "
                    "(privater/gemeinnütziger Zweck)")
 
@@ -477,7 +485,10 @@ FIELD_META = {
         "updates": "Neuigkeiten [{timestamp,text}]",
         "goal": "aktuelles Unterschriften-Ziel (falls die Plattform eines zeigt)",
         "start_date": "Startdatum (plattformabhängig ermittelt)",
-        "status": "online | offline",
+        "deadline": "Ende der Mitzeichnungs-/Unterschriftenfrist oder null",
+        "closed": "true = nicht mehr mitzeichenbar (Frist abgelaufen/archiviert)",
+        "phase": "Verfahrensstand der Plattform (z. B. mitzeichnung|beendet|archiv)",
+        "status": "online | offline (erreichbar die Seite noch?)",
         "first_seen": "erstmals gescrapt (unveraenderlich)",
         "last_seen": "zuletzt online",
         "last_checked": "zuletzt geprueft",
@@ -741,8 +752,13 @@ def build_list_html(store: dict, platform: Platform) -> str:
         else:
             offline += 1
         sig = r.get("signatures")
+        # "closed" = nicht mehr unterschreibbar (Frist abgelaufen/archiviert).
+        # Das ist etwas anderes als "offline" (Seite nicht mehr erreichbar),
+        # deshalb eine eigene Kennzeichnung statt eines dritten status-Wertes.
+        closed = bool(r.get("closed")) and status == "online"
         rows.append(
             f'<tr class="main" data-slug="{_esc(slug)}" data-status="{status}" '
+            f'data-closed="{"1" if closed else ""}" '
             f'data-title="{_esc((r.get("title") or "").lower())}" '
             f'data-starter="{_esc((r.get("started_by") or "").lower())}" '
             f'data-category="{_esc((r.get("category") or "").lower())}" '
@@ -753,8 +769,10 @@ def build_list_html(store: dict, platform: Platform) -> str:
             f'aria-expanded="false" aria-label="Details ein-/ausklappen">'
             f'<span class="chev">›</span></button></td>'
             f'<td class="c-thumb">{_img_tag(r.get("image_url"), "thumb")}</td>'
-            f'<td class="c-status"><span class="badge {status}">'
-            f'<span class="dot"></span>{"Online" if status=="online" else "Offline"}'
+            f'<td class="c-status"><span class="badge '
+            f'{"closed" if closed else status}">'
+            f'<span class="dot"></span>'
+            f'{"Beendet" if closed else ("Online" if status=="online" else "Offline")}'
             f'</span></td>'
             f'<td class="c-title"><a href="{_esc(r.get("url"))}" target="_blank" '
             f'rel="noopener">{_esc(r.get("title") or slug)}</a>'
@@ -773,6 +791,14 @@ def build_list_html(store: dict, platform: Platform) -> str:
     tmpl = tmpl.replace("{{NAME}}", _esc(platform.name))
     tmpl = tmpl.replace("{{EYEBROW}}", _esc(platform.eyebrow or platform.name))
     tmpl = tmpl.replace("{{GENERATED}}", _esc(now_iso()))
+    # Die Filter "Laufend"/"Beendet" nur zeigen, wo es überhaupt beendete
+    # Einträge gibt (bisher nur Bundestag) – sonst bliebe die Leiste leer.
+    n_closed = sum(1 for r in store.values()
+                   if isinstance(r, dict) and r.get("closed"))
+    tmpl = tmpl.replace("{{CLOSEDFILTERS}}",
+                        '<button data-f="running" aria-pressed="false">Laufend'
+                        '</button><button data-f="closed" aria-pressed="false">'
+                        'Beendet</button>' if n_closed else "")
     tmpl = tmpl.replace("{{TOTAL}}", str(len(store)))
     tmpl = tmpl.replace("{{ONLINE}}", str(online))
     tmpl = tmpl.replace("{{OFFLINE}}", str(offline))
@@ -837,6 +863,7 @@ _LIST_TEMPLATE = """<!DOCTYPE html>
     --bg:#eef0f4; --surface:#ffffff; --ink:#161a22; --muted:#5d6675;
     --line:#e2e5ec; --indigo:#2f3f86; --indigo-soft:#eaeefb;
     --online:#1f7a4d; --online-bg:#e6f3ec; --offline:#b23b3b; --offline-bg:#f7e8e8;
+    --closed:#6b5a2e; --closed-bg:#f4eeda;
     --mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
     --sans:ui-sans-serif,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   }
@@ -912,6 +939,7 @@ _LIST_TEMPLATE = """<!DOCTYPE html>
          padding:3px 10px;border-radius:999px}
   .badge.online{background:var(--online-bg);color:var(--online)}
   .badge.offline{background:var(--offline-bg);color:var(--offline)}
+  .badge.closed{background:var(--closed-bg);color:var(--closed)}
   .c-toggle{width:42px} .c-thumb{width:78px}
   .toggle{width:28px;height:28px;border:1px solid var(--line);background:var(--surface);
           border-radius:7px;cursor:pointer;display:inline-flex;align-items:center;
@@ -986,7 +1014,7 @@ _LIST_TEMPLATE = """<!DOCTYPE html>
     <div class="seg" role="group" aria-label="Status filtern">
       <button data-f="all" aria-pressed="true">Alle</button>
       <button data-f="online" aria-pressed="false">Online</button>
-      <button data-f="offline" aria-pressed="false">Offline</button>
+      <button data-f="offline" aria-pressed="false">Offline</button>{{CLOSEDFILTERS}}
     </div>
     <select id="catFilter" aria-label="Kategorie filtern">
       <option value="">Alle Kategorien</option>
@@ -1048,7 +1076,11 @@ _LIST_TEMPLATE = """<!DOCTYPE html>
     rows.forEach(function(r){
       var okText=!term || (r.dataset.title+" "+r.dataset.starter+" "+
                            r.dataset.category).indexOf(term)>-1;
-      var okStatus=statusFilter==="all"||r.dataset.status===statusFilter;
+      var okStatus = statusFilter==="all" ? true
+        : statusFilter==="closed"  ? r.dataset.closed==="1"
+        : statusFilter==="running" ? (r.dataset.status==="online" &&
+                                      r.dataset.closed!=="1")
+        : r.dataset.status===statusFilter;
       var okCat=!cat||r.dataset.category===cat;
       var ok=okText&&okStatus&&okCat;
       r.style.display=ok?"":"none";

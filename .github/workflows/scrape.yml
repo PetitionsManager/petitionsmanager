@@ -39,7 +39,13 @@ jobs:
       - name: "Scraper-Zustand aus Cache holen (Fallback: Stand im Repo)"
         uses: actions/cache/restore@v4
         with:
-          path: '*_petitions.json'
+          # texts_index.json MUSS mitwandern: er hält fest, in welchem
+          # Volltext-Paket eine Petition liegt. Geht er verloren, vergibt
+          # publish.py die Nummern neu und jedes Gerät lädt alle Pakete
+          # noch einmal (siehe publish.write_texts).
+          path: |
+            *_petitions.json
+            texts_index.json
           key: petition-stores-${{ github.run_id }}
           restore-keys: |
             petition-stores-
@@ -69,7 +75,9 @@ jobs:
         if: always()
         uses: actions/cache/save@v4
         with:
-          path: '*_petitions.json'
+          path: |
+            *_petitions.json
+            texts_index.json
           key: petition-stores-${{ github.run_id }}
 
       - name: Pages konfigurieren
