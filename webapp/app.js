@@ -392,6 +392,71 @@
   var SUPPORT_MAIL = "mail@petitionsmanager.app";
   var GITHUB_URL = "https://github.com/PetitionsManager/petitionsmanager";
   var SUPPORT_DONATE = "https://liberapay.com/Timeras/donate";
+  /* Aufnahmekodex für Petitionsplattformen.
+     ENTWURF – vom Nutzer am 2026-07-28 beauftragt, aber juristisch NICHT
+     geprüft. Der Text ist eine Selbstverpflichtung, kein Rechtstext: er
+     beschreibt, wonach entschieden wird, und macht die Ausschlussgründe
+     benennbar. Ob er im konkreten Fall haftungsrechtlich trägt, kann nur eine
+     Anwältin oder ein Anwalt beurteilen – vor der Veröffentlichung prüfen
+     lassen. Bewusst KEINE Paragrafen zitiert: eine erfundene oder falsch
+     wiedergegebene Fundstelle wäre schlimmer als keine.
+     Steht hier im Code statt in texts.js, weil texts.js kurze Beschriftungen
+     hält; dieser Block ist ein zusammenhängender Text, der als Ganzes
+     redigiert wird. */
+  var KODEX_HTML =
+    '<div class="kodex">' +
+      '<div class="kodex__grp">' +
+        '<div class="kodex__h"><i class="fa-solid fa-circle-check"></i>' +
+        " Was eine Plattform mitbringen muss</div><ul class=\"kodex__list\">" +
+          "<li>Sie macht öffentlich, wer sie betreibt – Impressum oder eine " +
+            "gleichwertige Angabe.</li>" +
+          "<li>Ihre Petitionen sind ohne Konto lesbar.</li>" +
+          "<li>Sie erlaubt automatisiertes Auslesen. Sperren in der " +
+            "robots.txt und Botschutz halten wir ein; wir umgehen sie " +
+            "nicht.</li>" +
+          "<li>Sie steht grundsätzlich allen offen und ist nicht die Bühne " +
+            "einer einzelnen Kampagne.</li>" +
+          "<li>Sie legt nachvollziehbar dar, wie Unterschriften gezählt " +
+            "werden.</li>" +
+        "</ul></div>" +
+      '<div class="kodex__grp kodex__grp--stop">' +
+        '<div class="kodex__h"><i class="fa-solid fa-ban"></i>' +
+        " Was zum Ausschluss führt</div>" +
+        "<p>Ohne Abwägung ausgeschlossen sind Plattformen, die Inhalte " +
+          "verbreiten oder dulden, die</p><ul class=\"kodex__list\">" +
+          "<li>Menschen wegen Herkunft, Hautfarbe, Staatsangehörigkeit, " +
+            "Religion, Geschlecht, sexueller Orientierung, Behinderung, " +
+            "Alter oder sozialer Stellung herabwürdigen;</li>" +
+          "<li>zu Hass, Gewalt oder Ausgrenzung gegen Personen oder Gruppen " +
+            "aufrufen;</li>" +
+          "<li>den Holocaust oder andere Völkermorde leugnen oder " +
+            "verharmlosen;</li>" +
+          "<li>verfassungswidrige oder verbotene Kennzeichen verwenden;</li>" +
+          "<li>Menschen gezielt einschüchtern, bloßstellen oder zur " +
+            "Zielscheibe machen.</li>" +
+        "</ul>" +
+        "<p>Das gilt unabhängig davon, ob die Plattform solche Inhalte selbst " +
+          "veröffentlicht oder sie nur stehen lässt.</p></div>" +
+      '<div class="kodex__grp">' +
+        '<div class="kodex__h"><i class="fa-solid fa-gavel"></i>' +
+        " Wie wir entscheiden</div><ul class=\"kodex__list\">" +
+          "<li>Jeden Vorschlag prüfen wir von Hand, bevor eine Plattform " +
+            "aufgenommen wird.</li>" +
+          "<li>Bei einem begründeten Hinweis prüfen wir erneut – und nehmen " +
+            "eine Plattform auch wieder heraus.</li>" +
+          "<li>Einzelne Petitionen, die gegen diesen Kodex verstoßen, " +
+            "entfernen wir aus der App, auch wenn die Plattform bleibt.</li>" +
+        "</ul></div>" +
+      '<p class="kodex__note"><i class="fa-solid fa-circle-info"></i> ' +
+        "<span><strong>Was die Aufnahme nicht bedeutet:</strong> " +
+        "PetitionsManager zeigt, was auf den Plattformen öffentlich steht. " +
+        "Die Aufnahme einer Plattform ist keine Empfehlung und keine " +
+        "Zustimmung zu einzelnen Petitionen. Für den Inhalt einer Petition " +
+        "stehen ihre Urheberinnen und Urheber sowie die jeweilige Plattform " +
+        "ein. Wir prüfen nicht jede einzelne Petition im Voraus – sag uns " +
+        "Bescheid, was dir auffällt.</span></p>" +
+    "</div>";
+
   function supportSection() {
     var sec = el('<section class="support">' +
       '<div class="support__title"><i class="fa-solid fa-hand-holding-heart">' +
@@ -399,7 +464,15 @@
       '<div class="support__acc"></div></section>');
     var acc = sec.querySelector(".support__acc");
 
+    /* Der Kodex steht bewusst ganz oben: er beantwortet die Frage, nach
+       welchen Regeln überhaupt entschieden wird — wer eine Plattform
+       vorschlägt, soll sie vorher gelesen haben, nicht hinterher. */
     var items = [
+      ["fa-scale-balanced", "Wen wir aufnehmen – unser Kodex",
+       "Nach diesen Regeln entscheiden wir, welche Petitionsplattform in die " +
+       "App kommt und welche nicht.",
+       "Verstoß melden",
+       { mailto: "Verstoß gegen den Kodex", html: KODEX_HTML }],
       ["fa-layer-group", "Fehlt eine Plattform?",
        "Kennst du eine Petitionsplattform, die hier noch fehlt? Sag uns " +
        "Bescheid – wir prüfen die Aufnahme.",
@@ -427,7 +500,8 @@
         '<button class="support__head" type="button"><span>' +
         '<i class="fa-solid ' + it[0] + '"></i> ' + esc(it[1]) + "</span>" +
         '<i class="fa-solid fa-chevron-down"></i></button>' +
-        '<div class="support__body"><p>' + esc(it[2]) + "</p></div></div>");
+        '<div class="support__body"><p>' + esc(it[2]) + "</p>" +
+        (it[4].html || "") + "</div></div>");
       item.querySelector(".support__head").addEventListener("click", function () {
         item.classList.toggle("open");
       });
@@ -2581,17 +2655,33 @@
     if (node) node.remove();
   });
 
+  /* Zurück zur Plattform-Übersicht: verlässt Plattform-Detail und
+     plattformübergreifende Suche und räumt deren Filter weg.
+     Die Volltextsuche der Hauptseite (state.mainQuery) bleibt bewusst stehen –
+     sie wird in localStorage gehalten, ist also eine bewusste Einstellung des
+     Nutzers und keine Navigationsspur. */
+  function goHome() {
+    state.platform = null; state.cross = null;
+    state.catFilter = null; state.tagFilter = null; state.sort = null;
+    state.openPetitionUrl = null;
+    state.tab = "liste";
+    render();
+    window.scrollTo(0, 0);
+  }
+
   // ---- Tab-Navigation --------------------------------------------------------
   document.querySelectorAll(".tab").forEach(function (t) {
     t.addEventListener("click", function () {
       // Footer-Tab "Liste" führt immer zur Plattform-Übersicht (frischer Start).
-      if (t.dataset.tab === "liste") {
-        state.platform = null; state.cross = null;
-        state.catFilter = null; state.tagFilter = null; state.sort = null;
-      }
+      if (t.dataset.tab === "liste") { goHome(); return; }
       state.tab = t.dataset.tab; render();
     });
   });
+
+  // Wortmarke in der Kopfleiste = Weg zurück zur Übersicht (wie das Logo auf
+  // einer Website). Erreicht man aus jeder Ansicht, auch aus Einstellungen.
+  var brandHome = document.getElementById("brandhome");
+  if (brandHome) brandHome.addEventListener("click", goHome);
 
   // ---- Start -----------------------------------------------------------------
   function boot() {
