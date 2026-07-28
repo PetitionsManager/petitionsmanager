@@ -39,8 +39,13 @@
    Aufnahmekodex als eigener Abschnitt unter „Unterstütze PetitionsManager"
    (index.html/app.js/style.css)
    v13: Sprungmarke in der Lücken-Meldung des Bedienfelds, Wortlaut dort
-   korrigiert („beim Sortieren am Ende") (app.js/style.css) */
-var CACHE = "pm-cache-v13";
+   korrigiert („beim Sortieren am Ende") (app.js/style.css)
+   v14: Bento-Kachel umgebaut – Beschriftung oben, Logo groß unten links,
+   Flagge als Ecke oben rechts, gefüllter Pfeil auf den großen Kacheln;
+   350.org mit weißer Schrift; Favoritenstern auf der Plattformseite;
+   Wischen im Magazin repariert; im Archiv links = Wiederherstellen,
+   rechts = Unterschreiben (app.js/style.css/layouts.css/platforms.js) */
+var CACHE = "pm-cache-v14";
 /* Versionsunabhängig – überlebt das Hochzählen von CACHE. Die Zahl dahinter
    NUR hochsetzen, wenn sich die Paketnummerierung selbst ändert (dann stimmen
    die alten Inhalte nicht mehr zur Nummer und die Bibliothek muss weg). */

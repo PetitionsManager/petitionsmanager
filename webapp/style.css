@@ -214,6 +214,13 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
   padding:.5rem .5rem .5rem 0}
 .archlink{display:inline-flex;align-items:center;gap:.375rem;color:var(--muted);
   font-weight:650;font-size:.8125rem;text-decoration:none;padding:.5rem .125rem}
+/* Rechte Seite der Kopfzeile: Favoriten-Stern + Archiv-Link.
+   .subhead verteilt mit space-between, ohne diese Klammer wanderte der Stern
+   in die Mitte. */
+.subhead__r{display:flex;align-items:center;gap:.125rem}
+/* Der Stern ist hier kleiner als in den Einstellungen: dort ist er das
+   Hauptbedienelement der Zeile, hier steht er neben einer Textzeile. */
+.favbtn--head{width:2.25rem;height:2.25rem;font-size:1.0625rem}
 .archlink i{color:var(--accent)}
 .archlink:active{color:var(--accent)}
 .swipe-hint{color:var(--ink);font-size:.875rem;line-height:1.55;
@@ -332,7 +339,11 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
   cursor:pointer}
 .pet__head:active{background:var(--accent-soft)}
 .pet__thumb{width:3.375rem;height:2.5rem;object-fit:cover;border-radius:.625rem;
-  flex:none;background:var(--line)}
+  flex:none;background:var(--line);
+  /* Zweite Haelfte der Massnahme gegen das Bild-Ziehen des Browsers (siehe
+     app.js → petCard). draggable="false" allein genuegt WebKit nicht. */
+  -webkit-user-drag:none;-khtml-user-drag:none;user-select:none;
+  -webkit-user-select:none}
 /* Ersatz für ein fehlendes Vorschaubild (siehe app.js → petCard): Plattform-
    Logo mittig, exakt im Maß von .pet__thumb, damit die Kacheln in einer
    gemischten Liste dieselbe Rhythmik behalten. Die Fläche bleibt bewusst das

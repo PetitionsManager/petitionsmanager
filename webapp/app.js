@@ -606,8 +606,12 @@
     var newLabel = newN > 0
       ? '<span class="plat__new">+' + nf.format(newN) + " neu</span>" : "";
     var brand = platColor(p.key);
-    // --on-brand gilt ab hier für die ganze Kachel und alles darin.
-    var ink = brand ? platInk(brand) : null;
+    /* --on-brand gilt ab hier für die ganze Kachel und alles darin.
+       platforms.js darf die Rechnung mit `ink` übersteuern – dort, wo die
+       Marke selbst eine Schriftfarbe vorgibt, die knapp hinter der
+       rechnerisch besten liegt (350.org: Weiß 3,94 gegen Dunkel 4,31).
+       Die 3:1-Grenze für Großtext muss der Wert trotzdem halten. */
+    var ink = platInfo(p.key).ink || (brand ? platInk(brand) : null);
     var tagline = platInfo(p.key).tagline;
     // Echtes Plattform-Logo (platforms.js → logoFile). Liegt als CSS-Maske vor
     // der Textfarbe der Kachel, ist also immer einfarbig im richtigen Ton –
@@ -615,9 +619,16 @@
     // nur das Bento-Raster zeigt es (layouts.css). Für elf Plattformen gibt es
     // acht Dateien; wo eine fehlt, bleibt es beim Monogramm.
     var lf = platInfo(p.key).logoFile;
+    var lar = platInfo(p.key).logoAR || 4;
+    /* Hochkant-Symbole (innn.it) brauchen mehr Höhe als Wortmarken: bei
+       gleicher Höhe ist eine 0,75er-Marke nur 22 px breit, eine Wortmarke
+       aber 60–185 px – nebeneinander wirkt das Symbol wie gar nichts.
+       Deshalb eine eigene Klasse ab Seitenverhältnis < 1,2. */
+    var markKl = lar < 1.2 ? " plogo--mark--icon" : "";
     var mark = lf
-      ? '<span class="plogo--mark" aria-hidden="true" style="--logo:url(' +
-        esc(lf) + ');--logo-ar:' + (platInfo(p.key).logoAR || 4) + '"></span>'
+      ? '<span class="plogo--mark' + markKl +
+        '" aria-hidden="true" style="--logo:url(' + esc(lf) +
+        ');--logo-ar:' + lar + '"></span>'
       : "";
     var card = el(
       '<button class="plat' + (size ? " " + size : "") + '"' +
@@ -625,8 +636,12 @@
                  (ink ? ";--on-brand:" + ink : "") + '"' : "") + ">" +
         platLogo(p.key, p.name) + mark +
         '<span class="plat__body">' +
+          /* Die Flagge bleibt bewusst IM Namen: in „klassisch" und „Band"
+             gehört sie dorthin. Im Bento holt layouts.css sie per
+             position:absolute in die obere rechte Ecke – dafür genügt CSS,
+             ein zweites Element wäre nur Ballast. */
           '<span class="plat__name">' + esc(p.name) +
-            '<span class="flag">' + info.flag + '</span></span>' +
+            '<span class="flag">' + info.flag + "</span></span>" +
           '<span class="plat__meta">' + nf.format(p.online) +
             " Petitionen" + newLabel + '</span>' +
           (tagline ? '<span class="plat__tag">' + esc(tagline) + "</span>" : "") +
@@ -717,18 +732,24 @@
     for (var i = 0; i < offene.length; i++) sizeThumb(offene[i]);
   });
 
-  // Ausklappbare Petitions-Karte (Akkordion) im Swipe-Wrapper.
-  // Wischen rechts = als unterschrieben markieren, links = archivieren
-  // (im Archiv: rechts = wiederherstellen). ctx.redraw() zeichnet die Liste neu.
+  /* Ausklappbare Petitions-Karte (Akkordion) im Swipe-Wrapper.
+     Wischrichtungen sind ÜBERALL gleich belegt, auch im Archiv:
+       rechts = unterschreiben bzw. Markierung zurücknehmen,
+       links  = archivieren – im Archiv stattdessen wiederherstellen.
+     Vorher lag das Wiederherstellen rechts und links bot im Archiv noch
+     einmal „Archivieren" an, was dort nichts bewirken konnte.
+     ctx.redraw() zeichnet die Liste neu. */
   function petCard(r, ctx, platKey) {
     var wrap = el('<div class="pet-wrap"></div>');
-    // Label des Rechts-Wischens: schon unterschrieben → Zurücksetzen.
-    var leftLabel = isArchived(r.url) ? "Wiederherstellen"
-      : (isSigned(r.url) ? "Zurücksetzen" : "Unterschrieben");
+    var imArchiv = isArchived(r.url);
+    var rechtsLabel = isSigned(r.url) ? "Zurücksetzen" : "Unterschrieben";
+    var linksLabel = imArchiv ? "Wiederherstellen" : "Archivieren";
+    var linksIcon = imArchiv ? "fa-rotate-left" : "fa-box-archive";
     var bg = el('<div class="pet-bg">' +
       '<span class="pet-bg__l"><i class="fa-solid fa-circle-check"></i> ' +
-        leftLabel + "</span>" +
-      '<span class="pet-bg__r">Archivieren <i class="fa-solid fa-box-archive"></i>' +
+        rechtsLabel + "</span>" +
+      '<span class="pet-bg__r">' + linksLabel +
+        ' <i class="fa-solid ' + linksIcon + '"></i>' +
       "</span></div>");
     var pet = el('<div class="pet"></div>');
     pet.dataset.url = r.url || "";
@@ -753,9 +774,14 @@
     // Servern, offline oder bei einer Störung lädt keines davon.
     var thumbPh = '<span class="pet__thumb pet__thumb--ph">' +
       platLogo(platKey, platInfo(platKey).name) + "</span>";
+    /* draggable="false" ist hier KEIN Beiwerk: auf einem <img> startet der
+       Browser sein eigenes Bild-Ziehen, sobald man mit gedrückter Taste zieht,
+       und bricht dabei die Zeigerereignisse ab. In „klassisch" fiel das kaum
+       auf (54×40 großes Bildchen), im Magazin füllt das Bild die halbe Karte –
+       dort ging das Wischen deshalb fast immer ins Leere. */
     var thumb = r.image_url
       ? '<img class="pet__thumb" src="' + esc(r.image_url) + '" alt="" ' +
-        'loading="lazy">'
+        'loading="lazy" draggable="false">'
       : thumbPh;
     var ext = r.url
       ? '<a class="pet__ext" href="' + esc(r.url) + '" target="_blank" ' +
@@ -844,15 +870,15 @@
       if (!dragging) { return; }
       dragging = false;
       if (horiz && Math.abs(dx) >= THRESHOLD) {
-        if (dx > 0) {                                 // Wisch rechts
-          if (isArchived(r.url)) { setArchived(r.url, false); slideAndRedraw(1); }
-          else {
-            toggleSigned(r.url, { title: r.title, platform: platKey });
-            reset(); ctx.redraw();
-          }
-        } else {                                      // Wisch links
-          if (!isArchived(r.url)) { setArchived(r.url, true); slideAndRedraw(-1); }
-          else reset();
+        if (dx > 0) {
+          // Rechts: unterschreiben – im Archiv genauso wie in der Liste.
+          toggleSigned(r.url, { title: r.title, platform: platKey });
+          reset(); ctx.redraw();
+        } else {
+          // Links: archivieren, im Archiv zurückholen. Beide Male verlässt
+          // die Karte ihre Liste, also gleitet sie in beiden Fällen hinaus.
+          setArchived(r.url, !isArchived(r.url));
+          slideAndRedraw(-1);
         }
       } else reset();
     }
@@ -1226,15 +1252,36 @@
 
   function renderPlatformDetail(key) {
     content.innerHTML = "";
+    /* Favoriten-Stern auch hier, nicht nur in den Einstellungen: wer eine
+       Plattform gerade durchsieht, entscheidet genau dann, ob sie oben in der
+       Übersicht stehen soll. Gleiche Mechanik wie dort (state.favorites +
+       saveFavorites), nur an einer zweiten Stelle bedienbar. */
     var head = el('<div class="subhead">' +
       '<button class="backbtn"><i class="fa-solid fa-chevron-left"></i> ' +
         "Alle Plattformen</button>" +
-      '<a class="archlink" href="#"><i class="fa-solid fa-box-archive"></i> ' +
-        "Zum Archiv</a></div>");
+      '<span class="subhead__r">' +
+        '<button class="favbtn favbtn--head' + (isFav(key) ? " on" : "") +
+          '" type="button"><i class="' + (isFav(key) ? "fa-solid" : "fa-regular") +
+          ' fa-star"></i></button>' +
+        '<a class="archlink" href="#"><i class="fa-solid fa-box-archive"></i> ' +
+          "Zum Archiv</a></span></div>");
     head.querySelector(".backbtn").addEventListener("click", function () {
       state.platform = null;
       state.catFilter = null; state.tagFilter = null;
       state.sort = null; render();
+    });
+    var favBtn = head.querySelector(".favbtn");
+    favBtn.setAttribute("aria-pressed", isFav(key) ? "true" : "false");
+    favBtn.setAttribute("aria-label", "Plattform als Favorit merken");
+    favBtn.addEventListener("click", function () {
+      if (isFav(key)) state.favorites["delete"](key);
+      else state.favorites.add(key);
+      saveFavorites();
+      var jetzt = isFav(key);
+      favBtn.classList.toggle("on", jetzt);
+      favBtn.setAttribute("aria-pressed", jetzt ? "true" : "false");
+      favBtn.querySelector("i").className =
+        (jetzt ? "fa-solid" : "fa-regular") + " fa-star";
     });
     head.querySelector(".archlink").addEventListener("click", function (e) {
       e.preventDefault();

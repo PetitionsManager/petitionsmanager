@@ -252,7 +252,11 @@
    bleibt davon unberührt — nur die Platzierung im Raster ändert sich. */
 [data-layout="magazin"] .accordion.open>.acc-body--plats{display:grid}
 [data-layout="magazin"] .acc-body--plats{
-  grid-template-columns:1fr 1fr;grid-auto-rows:11rem;
+  /* Zeilenhöhe gemessen aufgebaut, nicht geschätzt: Text oben braucht im
+     schlimmsten Fall 152 px (WeMove: dreizeiliger Name; Change.org: Zahl und
+     „+68 neu" auf zwei Zeilen), das Logo unten belegt 58 px. 14rem = 224 px
+     lassen dazwischen Luft; bei 12,5rem überlappten beide um 10 px. */
+  grid-template-columns:1fr 1fr;grid-auto-rows:14rem;
   grid-auto-flow:row dense;gap:.75rem;padding:0 0 .5rem}
 
 /* Vollton statt Tönung: die Kachel trägt die echte Markenfarbe.
@@ -262,8 +266,12 @@
    das style-Attribut der Kachel sticht sie. */
 [data-layout="magazin"] .acc-body--plats .plat{
   --brand:var(--accent); --on-brand:#ffffff;
+  /* Beschriftung oben, Logo unten links (Nutzerwunsch). Das löst nebenbei
+     einen Platzkonflikt: solange das Logo oben links stand, teilte es sich
+     die Zeile mit der Flagge in der Ecke, und eine 5:1 breite Wortmarke
+     musste sich dafür verkleinern. Unten hat sie die ganze Kachelbreite. */
   position:relative;flex-direction:column;align-items:flex-start;
-  justify-content:flex-end;gap:.25rem;margin:0;min-height:0;overflow:hidden;
+  justify-content:flex-start;gap:.25rem;margin:0;min-height:0;overflow:hidden;
   padding:1.125rem;border:0;border-radius:var(--radius);
   background-color:var(--brand);background-image:none;color:var(--on-brand);
   box-shadow:inset 0 0 0 .0625rem var(--tile-edge),
@@ -273,24 +281,50 @@
    gesetzt wie die Beschriftung der Kachel, also auf jeder Markenfarbe
    lesbar. Ein <img> könnte das nicht: es brächte seine eigenen Farben mit
    und säuft auf der gleichfarbigen Fläche ab.
-   Für drei der elf Plattformen gibt es keine Datei (WeAct rendert die
-   Kopfleiste per JavaScript, Europarl blockt, innn.it liefert nur ein
-   Bildchen) — dort bleibt der Platz oben links einfach leer. */
+   Inzwischen hat jede der elf Plattformen eine Datei. */
 [data-layout="magazin"] .acc-body--plats .plogo{display:none}
 [data-layout="magazin"] .acc-body--plats .plogo--mark{display:block;
-  position:absolute;top:1.125rem;left:1.125rem;
-  width:calc(var(--logo-ar,4) * 1.375rem);height:1.375rem;
+  position:absolute;bottom:1.125rem;left:1.125rem;
+  width:calc(var(--logo-ar,4) * 2.5rem);height:2.5rem;
   max-width:calc(100% - 2.25rem);background-color:currentColor;
   -webkit-mask-image:var(--logo);mask-image:var(--logo);
   -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
   -webkit-mask-position:left center;mask-position:left center;
   -webkit-mask-size:contain;mask-size:contain}
-/* Auf den großen Kacheln größer – und mit Abstand zum Pfeil oben rechts. */
+/* Auf den großen Kacheln größer. */
 [data-layout="magazin"] .acc-body--plats .plat--xl .plogo--mark,
 [data-layout="magazin"] .acc-body--plats .plat--wide .plogo--mark{
-  top:1.5rem;left:1.5rem;width:calc(var(--logo-ar,4) * 1.875rem);
-  height:1.875rem;max-width:calc(100% - 6rem)}
+  bottom:1.5rem;left:1.5rem;width:calc(var(--logo-ar,4) * 3.5rem);
+  height:3.5rem;max-width:calc(100% - 3rem)}
+/* Hochkant-Symbol statt Wortmarke (innn.it, Seitenverhältnis 0,75). Bei der
+   Höhe der Wortmarken wäre es nur ein Fünftel so breit wie diese und ginge
+   neben ihnen unter; die zusätzliche Höhe gleicht das aus. Die Breite folgt
+   weiterhin dem echten Seitenverhältnis, das Symbol wird also nicht verzerrt. */
+[data-layout="magazin"] .acc-body--plats .plogo--mark--icon{
+  width:calc(var(--logo-ar,1) * 3.25rem);height:3.25rem}
+[data-layout="magazin"] .acc-body--plats .plat--xl .plogo--mark--icon,
+[data-layout="magazin"] .acc-body--plats .plat--wide .plogo--mark--icon{
+  width:calc(var(--logo-ar,1) * 4rem);height:4rem}
+/* Die Flagge IST die obere rechte Ecke: bündig am Rand, nach innen rund.
+   Aussen bleibt sie eckig — die Rundung der Kachel schneidet sie zu, weil
+   .plat overflow:hidden hat. Deshalb braucht es hier keinen zweiten Radius
+   und die Ecke folgt automatisch der Kachelform.
+   Die Flagge steht im Markup im Namen; dort gehört sie in „klassisch" und
+   „Band" auch hin. position:absolute holt sie hier heraus (.plat ist im
+   Bento position:relative), ein zweites Element wäre nur Ballast. */
+[data-layout="magazin"] .acc-body--plats .plat__name .flag{
+  position:absolute;top:0;right:0;margin:0;
+  padding:.375rem .5rem .4375rem .5625rem;
+  background:var(--on-brand);border-bottom-left-radius:1.125rem;
+  font-size:1rem;line-height:1}
 [data-layout="magazin"] .acc-body--plats .plat__body{flex:none;width:100%}
+/* Beschriftung oben — der Name muss der Eckflagge ausweichen.
+   overflow-wrap ist hier NICHT vorsorglich: „OpenPetition", „Change.org" und
+   „foodwatch" sind einzelne Wörter, die breiter sind als die 102 px, die auf
+   der schmalen Kachel neben der Flagge bleiben. Ohne Umbruchpunkt schoben sie
+   über die Polsterung hinaus und liefen unter die Flagge (gemessen). */
+[data-layout="magazin"] .acc-body--plats .plat__name{padding-right:2.75rem;
+  overflow-wrap:anywhere}
 /* KEINE der elf Markenfarben trägt im Vollton Kleintext auf AA – weder unter
    Weiß noch unter Dunkel (Change.org 4,24, WeAct 4,35, 350.org 4,31, jeweils
    im besseren der beiden Fälle). Auf der Kachel steht deshalb ausschließlich
@@ -306,23 +340,27 @@
 [data-layout="magazin"] .acc-body--plats .plat__tag{display:none}
 [data-layout="magazin"] .acc-body--plats .plat__new{font-size:.8125rem;
   margin-left:.4375rem;vertical-align:.0625rem}
-/* Auf der kleinen Kachel entfällt der Pfeil. Sie ist nur 164 px breit; bei
-   „Change.org 376 Petitionen +68 neu" laufen Name und Zahl über fünf Zeilen
-   und damit unter den Pfeilkreis — gemessen, kein Verdacht. Die Kachel ist
-   als Ganzes der Schalter, der Pfeil erklärt daran nichts. Auf den beiden
-   großen Kacheln ist Platz, dort bleibt er.
-   Kein gefüllter Kreis, sondern eine Linie in currentColor: so folgt er von
-   allein der hellen wie der dunklen Beschriftung, ohne zweite Variable. */
+/* Pfeil unten rechts, gefüllt statt Kontur: Fläche in der Schriftfarbe der
+   Kachel, Pfeil in der Markenfarbe. Beide Werte liegen als --on-brand und
+   --brand schon an der Kachel an — keine dritte Variable, kein Gegenpart in
+   theme.css nötig.
+   NUR auf den großen Kacheln. Auf der 164 px schmalen Kachel konkurriert er
+   direkt mit dem Logo um dieselbe Zeile: mit Pfeil bleiben der Wortmarke
+   94 px Breite, und weil mask-size:contain proportional verkleinert, wäre
+   foodwatch damit 18 px hoch — NIEDRIGER als die 24 px vor der
+   Vergrößerung. Ohne Pfeil sind es 128 px Breite und 24 px Höhe. Die kleine
+   Kachel ist als Ganzes der Schalter; der Pfeil erklärt daran nichts. */
 [data-layout="magazin"] .acc-body--plats .plat__chev{display:none}
 [data-layout="magazin"] .acc-body--plats .plat--xl .plat__chev,
 [data-layout="magazin"] .acc-body--plats .plat--wide .plat__chev{
-  display:flex;position:absolute;top:1rem;right:1rem;left:auto;bottom:auto;
-  width:2.125rem;height:2.125rem;background:none;
-  border:.09375rem solid currentColor;color:inherit;font-size:.75rem}
-/* Der Name darf nicht unter den Pfeil laufen. */
-[data-layout="magazin"] .acc-body--plats .plat--xl .plat__name,
-[data-layout="magazin"] .acc-body--plats .plat--wide .plat__name{
-  padding-right:3.25rem}
+  display:flex;position:absolute;bottom:1.5rem;right:1.5rem;
+  top:auto;left:auto;width:2.5rem;height:2.5rem;border:0;
+  background-color:var(--on-brand);background-image:none;
+  color:var(--brand);font-size:.875rem}
+/* Auf den großen Kacheln darf das Logo nicht unter den Pfeil laufen. */
+[data-layout="magazin"] .acc-body--plats .plat--xl .plogo--mark,
+[data-layout="magazin"] .acc-body--plats .plat--wide .plogo--mark{
+  max-width:calc(100% - 7rem)}
 
 /* Die beiden großen Kacheln. Welche das sind, entscheidet app.js nach der
    Zahl der Petitionen (größte → --xl, zweitgrößte → --wide); die Klassen
