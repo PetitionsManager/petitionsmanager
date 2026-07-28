@@ -298,6 +298,14 @@ def _extract_description(main_html: str) -> str | None:
     for block in frag.select(".trix-content"):
         for div in block.find_all("div"):
             div.name = "p"
+        # Zweiter Fall, der lange durchgerutscht ist: manche Abschnitte haben
+        # GAR KEIN Kind-Element, der Fliesstext steht als blosser Textknoten
+        # direkt im .trix-content, nur mit <br> getrennt. find_all() weiter
+        # unten sammelt aber ausschliesslich Blockelemente ein - der Abschnitt
+        # blieb dadurch leer, waehrend seine Ueberschrift stehen blieb.
+        # Gemessen betraf das 424 der 1862 WeAct-Texte (23 %).
+        if not block.find(["p", "ul", "ol", "blockquote"]):
+            block.name = "p"
 
     out = []
     for b in frag.find_all(["h2", "h3", "h4", "p", "ul", "ol", "blockquote"]):

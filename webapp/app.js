@@ -327,15 +327,10 @@
     var groupDefs = [];
     var favs = live.filter(function (p) { return isFav(p.key); });
     if (favs.length) groupDefs.push({ key: "__fav", label: "Favoriten", plats: favs });
-    else if (T("favorites.how", "")) {
-      // Noch keine Favoriten: einmal erklären, wie das geht.
-      content.appendChild(el('<div class="favtip">' +
-        '<i class="fa-solid fa-star"></i><p>' +
-        esc(T("favorites.how",
-              "Tippe in den Einstellungen auf den Stern neben einer " +
-              "Plattform – sie erscheint dann ganz oben in deiner Liste.")) +
-        "</p></div>"));
-    }
+    /* Die Erklärung, wie man einen Favoriten setzt, stand früher hier auf der
+       Hauptliste. Sie steht jetzt in den Einstellungen direkt über der
+       Plattform-Liste – also dort, wo die Sterne tatsächlich sind – und ist
+       wegklickbar (siehe renderEinstellungen). */
 
     var rest = live.filter(function (p) { return !isFav(p.key); });
     var groups = {};
@@ -1805,6 +1800,25 @@
       esc(T("settings.layoutHint",
             "Ändert nur das Aussehen der Listen, nicht die Inhalte. " +
             "„Klassisch“ ist die bisherige Ansicht.")) + "</div>"));
+
+    /* Favoriten-Erklärung: steht direkt über der Plattform-Liste, also dort,
+       wo die Sterne sind. Wegklickbar wie der Wisch-Hinweis, mit demselben
+       Muster (eigener localStorage-Schlüssel, Element entfernen). */
+    if (!LS.getItem("favTipDismissed")) {
+      var favTip = el('<div class="favtip">' +
+        '<i class="fa-solid fa-star"></i>' +
+        '<div><p>' + esc(T("favorites.how",
+          "Tippe auf den Stern neben einer Plattform, um sie zu einem " +
+          "Favoriten zu machen. Favoriten erscheinen immer ganz oben in " +
+          "der Liste.")) + "</p>" +
+        '<button class="hint-dismiss" type="button">' +
+        '<i class="fa-solid fa-check"></i> Verstanden, nicht mehr anzeigen' +
+        "</button></div></div>");
+      favTip.querySelector(".hint-dismiss").addEventListener("click", function () {
+        LS.setItem("favTipDismissed", "1"); favTip.remove();
+      });
+      content.appendChild(favTip);
+    }
 
     // Akkordion "Plattformen"
     var acc = el('<section class="accordion' +

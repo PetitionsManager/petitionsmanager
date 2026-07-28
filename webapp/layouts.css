@@ -252,12 +252,12 @@
    bleibt davon unberührt — nur die Platzierung im Raster ändert sich. */
 [data-layout="magazin"] .accordion.open>.acc-body--plats{display:grid}
 [data-layout="magazin"] .acc-body--plats{
-  /* Zeilenhöhe gemessen aufgebaut, nicht geschätzt: Text oben braucht im
-     schlimmsten Fall 152 px (WeMove: dreizeiliger Name; Change.org: Zahl und
-     „+68 neu" auf zwei Zeilen), das Logo unten belegt 58 px. 14rem = 224 px
-     lassen dazwischen Luft; bei 12,5rem überlappten beide um 10 px. */
-  grid-template-columns:1fr 1fr;grid-auto-rows:14rem;
-  grid-auto-flow:row dense;gap:.375rem;padding:0 0 .5rem}
+  /* Zeilenhöhe gemessen aufgebaut, nicht geschätzt. Seit die Flaggen von den
+     Kacheln weg sind, hat der Name die volle Breite und bricht seltener um:
+     der Text endet jetzt spätestens bei 126 px (Change.org), Logo und unterer
+     Rand belegen 54. 12rem = 192 px lassen dazwischen 12 px Luft. */
+  grid-template-columns:1fr 1fr;grid-auto-rows:12rem;
+  grid-auto-flow:row dense;gap:.75rem;padding:0 0 .5rem}
 
 /* Vollton statt Tönung: die Kachel trägt die echte Markenfarbe, --brand
    kommt je Kachel als style-Attribut aus app.js.
@@ -276,7 +276,7 @@
      musste sich dafür verkleinern. Unten hat sie die ganze Kachelbreite. */
   position:relative;flex-direction:column;align-items:flex-start;
   justify-content:flex-start;gap:.25rem;margin:0;min-height:0;overflow:hidden;
-  padding:1.125rem;border:0;border-radius:var(--radius);
+  padding:.875rem;border:0;border-radius:var(--radius);
   background-color:var(--brand);background-image:none;color:var(--on-brand);
   box-shadow:inset 0 0 0 .0625rem var(--tile-edge),
              0 .25rem .75rem rgba(40,30,15,.10)}
@@ -288,7 +288,7 @@
    Inzwischen hat jede der elf Plattformen eine Datei. */
 [data-layout="magazin"] .acc-body--plats .plogo{display:none}
 [data-layout="magazin"] .acc-body--plats .plogo--mark{display:block;
-  position:absolute;bottom:1.125rem;left:1.125rem;
+  position:absolute;bottom:.875rem;left:.875rem;
   width:calc(var(--logo-ar,4) * 2.5rem);height:2.5rem;
   max-width:calc(100% - 2.25rem);background-color:currentColor;
   -webkit-mask-image:var(--logo);mask-image:var(--logo);
