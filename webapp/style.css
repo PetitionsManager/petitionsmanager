@@ -808,8 +808,12 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
 .favtip{display:flex;gap:.75rem;align-items:flex-start;margin:0 0 1.25rem;
   padding:1rem 1.125rem;border-radius:1.125rem;background:var(--hot-soft);
   color:var(--ink)}
-.favtip i{color:var(--on-hot-soft);margin-top:.1875rem}
+.favtip>i{color:var(--on-hot-soft);margin-top:.1875rem;flex:none}
 .favtip p{margin:0;font-size:.8125rem;line-height:1.55}
+/* Der Wegklick-Knopf nutzt dieselbe Klasse wie beim Wisch-Hinweis, sitzt hier
+   aber auf --hot-soft statt auf der Seitenflaeche – deshalb die eigene Regel
+   fuer Farbe und Abstand. */
+.favtip .hint-dismiss{margin-top:.625rem}
 
 /* ---- Ersteinrichtung (Wizard) ---- */
 body.wizard-open{overflow:hidden}
