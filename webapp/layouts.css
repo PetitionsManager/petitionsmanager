@@ -1,0 +1,402 @@
+/*
+ * layouts.css — PetitionsManager: wählbare Layouts
+ * ===========================================================================
+ * Zweite Gestaltungsebene neben dem Hell/Dunkel-Design. Gesteuert genau wie
+ * theme.css, nur über ein eigenes Attribut:
+ *
+ *   document.documentElement.dataset.layout = "klassisch" | "band" | "magazin"
+ *   → "klassisch" : KEINE Regel in dieser Datei. Es greift allein style.css,
+ *                   das bisherige Erscheinungsbild bleibt unverändert. Genau
+ *                   deshalb steht der Rückweg immer offen: eine Auswahl in den
+ *                   Einstellungen, kein Zurückspielen von Dateien.
+ *   → "band"      : Editorial/Plakat. Randlose Farbbänder, riesige Überschrift,
+ *                   Petitionen als nackte Textliste OHNE Bild, harte Kanten,
+ *                   dunkle Pille als Fußleiste.  Vorbild: Wochenplaner.
+ *   → "magazin"   : Bento & Glas. Plattformen als Kachelraster im Vollton
+ *                   ihrer echten Markenfarbe, zwei Kacheln über mehrere
+ *                   Felder, Petitionen als große Bildkarten mit Milchglas-
+ *                   Etikett, schwebende Milchglas-Fußleiste.
+ *                   Vorbilder: Finanz-App (Bento) und Self-care-App (Glas).
+ *
+ * Die beiden Entwürfe sollen sich NICHT ähneln. Sie unterscheiden sich
+ * absichtlich in jeder Hauptachse:
+ *
+ *              Band                      Magazin
+ *   Bild       gar keins                 groß oben, 11rem
+ *   Petition   flache Zeile, Haarlinie   Karte, 1.75rem Radius, Schatten
+ *   Plattform  randlos, Radius 0         Bento-Raster, Markenfarbe im Vollton
+ *   Titel      2.75rem, eng              1.75rem, dafür starker Fließtext
+ *   Suche      2px-Rahmen, kantig        Pille ohne Rahmen
+ *   Fußleiste  dunkle Pille              Milchglas
+ *   Kategorie  Versalien ohne Fläche     Glas-Pille auf dem Bild
+ *
+ * Reihenfolge im <head>: style.css → theme.css → layouts.css. Diese Datei
+ * kommt zuletzt und kann deshalb beide überschreiben.
+ *
+ * GRUNDREGEL: hier stehen Maße, Formen und Anordnung – keine neuen Farben.
+ * Jede Fläche kommt aus einer Variablen (--bg, --surface, --ink, --brand …),
+ * sonst bricht der Dunkelmodus. Wo ein Layout eine eigene Deckung braucht,
+ * bekommt sie eine eigene Variable, die für hell und dunkel getrennt gesetzt
+ * wird — und zwar an DREI Stellen, analog zu theme.css:
+ *   1. :root[data-layout="…"]                       → hell
+ *   2. :root[data-layout="…"][data-theme="dark"]     → erzwungen dunkel
+ *   3. @media (prefers-color-scheme:dark) + [data-theme="auto"] → System
+ * Stellen 2 und 3 MÜSSEN synchron bleiben.
+ *
+ * .content hat links/rechts 1.125rem Innenabstand (style.css). Wo etwas
+ * randlos über die volle Breite laufen soll, wird genau dieser Wert als
+ * negativer Außenabstand gegengerechnet.
+ */
+
+
+/* ===========================================================================
+   LAYOUT „BAND" — Editorial
+   ---------------------------------------------------------------------------
+   Vorbild ist der Wochenplaner: eine übergroße Überschrift, darunter randlose
+   Farbbänder, und auf der Detailseite eine schmucklose Textliste. Alles, was
+   nach „Karte" aussieht — Rahmen, Radius, Schatten, Vorschaubild — fällt weg.
+   Die Markenfarbe trägt die Orientierung, nicht mehr das Logo; das entfällt
+   deshalb, es wäre als Marken-Badge auf dem eigenen Markenton kaum zu sehen.
+
+   Warum nicht der volle Markenton? Weiß auf den elf Markenfarben kommt teils
+   nur auf gut 3:1 und verfehlt damit AA für Fließtext. Ein Band mit rund der
+   Hälfte Deckung trägt dagegen den normalen Textton (--ink) mit über 6:1 – und
+   sieht dem Vorbild mit seinen pastelligen Bändern ähnlicher als Vollton.
+   =========================================================================== */
+:root[data-layout="band"]{
+  --radius:.5rem;                  /* kantig statt weich */
+  --tabbar-h:5.25rem;              /* schwebende Pille braucht mehr Fußraum */
+  --band-veil:rgba(255,255,255,.55);
+}
+:root[data-layout="band"][data-theme="dark"]{
+  --band-veil:rgba(25,23,20,.62);
+}
+@media (prefers-color-scheme:dark){
+  :root[data-layout="band"][data-theme="auto"]{
+    --band-veil:rgba(25,23,20,.62);
+  }
+}
+
+/* ---- Kopf: engere Wortmarke, riesige Überschrift ----
+   Die Kopfleiste bleibt deckend: sie klebt oben (position:sticky) und deckt
+   auf Apple-Geräten die Aussparung ab — durchsichtig würde der Inhalt beim
+   Scrollen darunter durchlaufen. */
+[data-layout="band"] .brand__name{letter-spacing:-.04em}
+[data-layout="band"] .pagekick{color:var(--ink);opacity:.55;
+  letter-spacing:.12em}
+[data-layout="band"] .welcome{padding:.25rem .125rem 1.5rem}
+[data-layout="band"] .welcome__t{font-size:2.75rem;letter-spacing:-.05em;
+  line-height:.98}
+[data-layout="band"] .welcome__s{font-size:.875rem;max-width:26rem}
+
+/* ---- Suche: harte Kante, kräftiger Rahmen ---- */
+[data-layout="band"] .mainsearch__in,
+[data-layout="band"] .search{border:.125rem solid var(--ink);
+  border-radius:var(--radius);background:transparent}
+[data-layout="band"] .mainsearch__btn{border-radius:var(--radius)}
+
+/* ---- Gruppenüberschrift als Kleinstetikett ---- */
+[data-layout="band"] .langgroup>.acc-head{font-size:.75rem;font-weight:800;
+  letter-spacing:.12em;text-transform:uppercase;padding:1.75rem .125rem .625rem}
+[data-layout="band"] .langgroup>.acc-head .acc-count{background:transparent;
+  color:var(--ink);opacity:.6;padding:0}
+
+/* ---- Plattformzeile als randloses Farbband ----
+   Nur die Liste, nicht die Plattform-Schalter in den Einstellungen: dort
+   sitzen dieselben .plat in einem Akkordion mit eigenem Innenabstand, ein
+   randloses Band würde dort aus dem Kasten laufen. Die Zusatzklasse kommt aus
+   app.js (groupAccordion).
+
+   Die Umrandung nutzt --veil-rail aus style.css: hell ist sie durchsichtig
+   (die Bänder heben sich dort von allein vom cremefarbenen Grund ab), dunkel
+   ist sie ein weißer Schleier. Ohne sie verschwinden genau die Plattformen,
+   deren Markenfarbe dunkler ist als der Seitengrund — Bundestag und das
+   EU-Blau #003399 kamen im Dunkeln auf 1,14 zur Fläche dahinter. */
+[data-layout="band"] .acc-body--plats .plat{
+  background-image:linear-gradient(var(--band-veil),var(--band-veil));
+  border:0;box-shadow:inset 0 0 0 .0625rem var(--veil-rail);
+  border-radius:0;
+  /* .plat ist ein <button>: bei width:auto greift die intrinsische Breite und
+     das Band bliebe schmaler als die Seite. Deshalb der Innenabstand von
+     .content (2 × 1.125rem) ausdrücklich aufgeschlagen. */
+  width:calc(100% + 2.25rem);
+  margin:0 -1.125rem .1875rem;padding:1.25rem 1.125rem;gap:.75rem}
+/* Marken-Badge auf Markenton ergäbe nur Fleck auf Fleck. */
+[data-layout="band"] .acc-body--plats .plat>.plogo{display:none}
+[data-layout="band"] .plat__name{font-size:1.3125rem;font-weight:800;
+  letter-spacing:-.03em}
+/* --muted erreicht auf dem Band nur rund 2:1. Der normale Textton mit
+   reduzierter Deckung bleibt zurückhaltend UND lesbar (vgl. .pet-closed).
+   Deckung gemessen, nicht geschätzt: bei 0.72 fiel die schwächste der elf
+   Plattformen im hellen Design auf 3,99 und verfehlte AA; 0.82 hebt sie auf
+   4,90 (dunkel: 6,12). */
+[data-layout="band"] .plat__meta,
+[data-layout="band"] .plat__tag{color:var(--ink);opacity:.82}
+[data-layout="band"] .plat__new{background:var(--surface)}
+/* Pfeil als offener Ring, diagonal — wie im Vorbild. */
+[data-layout="band"] .plat__chev{background-color:transparent;
+  background-image:none;border:.09375rem solid var(--ink);color:var(--ink);
+  width:2.5rem;height:2.5rem}
+[data-layout="band"] .plat__chev i{transform:rotate(-45deg)}
+
+/* ---- Petitionen: nackte Textliste ----
+   Kein Kasten, kein Schatten, kein Vorschaubild – nur Titel und eine
+   Haarlinie darunter. Der Kartengrund muss trotzdem deckend bleiben (--bg
+   statt transparent): unter jeder Petition liegt die Wischfläche .pet-bg,
+   durch eine durchsichtige Karte würde sie im Ruhezustand durchscheinen. */
+[data-layout="band"] .pet-wrap,
+[data-layout="band"] .pet-bg,
+[data-layout="band"] .pet{border-radius:0}
+[data-layout="band"] .pet-wrap{margin-bottom:0}
+[data-layout="band"] .pet{background:var(--bg);border:0;
+  box-shadow:inset 0 -.0625rem 0 0 var(--line)}
+[data-layout="band"] .pet__head{padding:1.0625rem .125rem;gap:.625rem}
+[data-layout="band"] .pet__thumb{display:none}
+[data-layout="band"] .pet__title{font-size:1rem;font-weight:700;
+  letter-spacing:-.015em;line-height:1.35}
+[data-layout="band"] .pet__body{padding:0 .125rem 1.25rem}
+/* Kategorie wird vom Balken zur Zeile in Versalien, ohne eigene Fläche. */
+[data-layout="band"] .pet__catbar,
+[data-layout="band"] .pet__catbar:active{background:transparent;
+  color:var(--ink);opacity:.6;border-bottom:0;padding:.875rem .125rem 0;
+  font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase}
+
+/* ---- Fußleiste als schwebende dunkle Pille ---- */
+[data-layout="band"] .tabbar{left:.75rem;right:.75rem;
+  bottom:calc(.625rem + env(safe-area-inset-bottom));height:3.75rem;
+  padding-bottom:0;border:0;border-radius:999px;background:var(--ink);
+  box-shadow:0 .5rem 1.5rem rgba(0,0,0,.22)}
+[data-layout="band"] .tab{color:var(--bg);opacity:.62}
+[data-layout="band"] .tab.active{color:var(--bg);opacity:1}
+/* Auf dem dunklen Grund trägt --hot-soft nicht; ein aufgehellter Ausschnitt
+   derselben Fläche schon. */
+[data-layout="band"] .tab.active i{background:rgba(255,255,255,.18);
+  color:var(--bg)}
+
+
+/* ===========================================================================
+   LAYOUT „MAGAZIN" — Bento & Glas
+   ---------------------------------------------------------------------------
+   Zwei Vorbilder, zwei Bausteine:
+   • Bento (Finanz-App): die Plattformen werden ein Kachelraster mit
+     unterschiedlich großen Blöcken. Die erste Kachel jeder Gruppe läuft über
+     beide Spalten und wird zur Kopfkachel — das ist der eigentliche
+     Bento-Griff, ein gleichförmiges 2×N-Raster wäre nur eine schmalere Liste.
+   • Glas (Self-care-App): Etikett und Fußleiste schweben als milchige Flächen
+     über dem Inhalt.
+
+   Das Vorschaubild wandert aus der Zeile heraus und wird zum Aufmacher über
+   dem Titel. Möglich ohne Eingriff ins Markup: .pet__head ist ein Flex-
+   Container, das Bild bekommt volle Breite und per order:-1 den ersten Platz,
+   der Rest bricht darunter um.
+
+   Für Petitionen ohne Bild greift derselbe Platzhalter wie sonst (siehe
+   app.js → petCard), nur größer: über die Hälfte des Bestands hat kein Bild,
+   ein Aufmacher-Layout muss diesen Fall aushalten.
+   =========================================================================== */
+:root[data-layout="magazin"]{
+  --radius:1.75rem;
+  --tabbar-h:5.75rem;              /* schwebende Glasleiste braucht Fußraum */
+  --glass-bar:rgba(255,255,255,.74);
+  /* Kachelkante. Die Kacheln tragen die echte Markenfarbe im Vollton, und die
+     ist mal heller, mal dunkler als der Grund: hell verschwindet foodwatch-Gelb
+     (1,84 gegen den cremefarbenen Grund) und openPetition-Türkis (2,34), dunkel
+     verschwinden WeMove-Marine (1,12 gegen #191714), Bundestagsblau (1,56) und
+     EU-Blau (1,65). Es braucht deshalb in BEIDEN Designs eine Haarlinie, nur in
+     entgegengesetzter Richtung: hell ein schwarzer, dunkel ein weißer Schleier.
+     Bei .26 kommt die schwächste Linie (foodwatch) auf 3,28. */
+  --tile-edge:rgba(0,0,0,.26);
+}
+:root[data-layout="magazin"][data-theme="dark"]{
+  --glass-bar:rgba(35,32,25,.74);
+  --tile-edge:rgba(255,255,255,.34);
+}
+@media (prefers-color-scheme:dark){
+  :root[data-layout="magazin"][data-theme="auto"]{
+    --glass-bar:rgba(35,32,25,.74);
+    --tile-edge:rgba(255,255,255,.34);
+  }
+}
+
+/* ---- Kopf: ruhige Überschrift, kräftiger Fließtext ----
+   Bewusst umgekehrt zu „Band": dort trägt die Überschrift die Seite, hier der
+   Text darunter. */
+[data-layout="magazin"] .pagekick{text-transform:none;letter-spacing:0;
+  font-size:.8125rem;font-weight:650}
+[data-layout="magazin"] .welcome{padding:1rem .125rem 1.5rem}
+[data-layout="magazin"] .welcome__t{font-size:1.75rem;letter-spacing:-.02em;
+  line-height:1.15}
+[data-layout="magazin"] .welcome__s{font-size:1rem;color:var(--ink);
+  opacity:.75;line-height:1.65}
+
+/* ---- Suche als randlose Pille ---- */
+[data-layout="magazin"] .mainsearch__in,
+[data-layout="magazin"] .search{border-radius:999px;padding:1rem 1.25rem;
+  border-color:transparent;background:var(--surface);box-shadow:var(--shadow)}
+[data-layout="magazin"] .mainsearch__btn{border-radius:999px;
+  padding-left:1.25rem;padding-right:1.25rem}
+
+/* ---- Plattformen als Bento-Raster ----
+   Die Zusatzklasse kommt aus app.js (groupAccordion); .acc-body allein träfe
+   auch die Schalterlisten in den Einstellungen.
+
+   Das display MUSS über .accordion.open mitgenommen werden: style.css
+   schaltet die Gruppe mit display:none/block auf und zu. Eine Regel nur auf
+   .acc-body--plats verliert dagegen und die Kacheln blieben untereinander. */
+/* Raster: EIN Grundmaß, alle Kacheln sind ganze Vielfache davon. Die feste
+   Zeilenhöhe aus grid-auto-rows ist der Kern davon — ohne sie zieht die
+   inhaltsreichste Kachel ihre ganze Zeile auf und die Reihen werden
+   unterschiedlich hoch. „dense" füllt die Lücken, die neben den großen
+   Kacheln entstehen, mit nachfolgenden kleinen; ohne das bliebe rechts neben
+   jeder großen Kachel ein Loch. Die Reihenfolge im Markup (alphabetisch)
+   bleibt davon unberührt — nur die Platzierung im Raster ändert sich. */
+[data-layout="magazin"] .accordion.open>.acc-body--plats{display:grid}
+[data-layout="magazin"] .acc-body--plats{
+  grid-template-columns:1fr 1fr;grid-auto-rows:11rem;
+  grid-auto-flow:row dense;gap:.75rem;padding:0 0 .5rem}
+
+/* Vollton statt Tönung: die Kachel trägt die echte Markenfarbe.
+   --on-brand kommt je Kachel aus app.js (platInk) und ist Weiß oder der
+   dunkle Textton – je nachdem, was auf DIESER Farbe mehr Abstand hat. Die
+   beiden Werte hier sind nur der Rückfall für eine Plattform ohne Farbe;
+   das style-Attribut der Kachel sticht sie. */
+[data-layout="magazin"] .acc-body--plats .plat{
+  --brand:var(--accent); --on-brand:#ffffff;
+  position:relative;flex-direction:column;align-items:flex-start;
+  justify-content:flex-end;gap:.25rem;margin:0;min-height:0;overflow:hidden;
+  padding:1.125rem;border:0;border-radius:var(--radius);
+  background-color:var(--brand);background-image:none;color:var(--on-brand);
+  box-shadow:inset 0 0 0 .0625rem var(--tile-edge),
+             0 .25rem .75rem rgba(40,30,15,.10)}
+/* Das selbstgebaute Monogramm weicht dem echten Logo. Dieses liegt als
+   CSS-Maske vor `currentColor` — es ist damit automatisch in demselben Ton
+   gesetzt wie die Beschriftung der Kachel, also auf jeder Markenfarbe
+   lesbar. Ein <img> könnte das nicht: es brächte seine eigenen Farben mit
+   und säuft auf der gleichfarbigen Fläche ab.
+   Für drei der elf Plattformen gibt es keine Datei (WeAct rendert die
+   Kopfleiste per JavaScript, Europarl blockt, innn.it liefert nur ein
+   Bildchen) — dort bleibt der Platz oben links einfach leer. */
+[data-layout="magazin"] .acc-body--plats .plogo{display:none}
+[data-layout="magazin"] .acc-body--plats .plogo--mark{display:block;
+  position:absolute;top:1.125rem;left:1.125rem;
+  width:calc(var(--logo-ar,4) * 1.375rem);height:1.375rem;
+  max-width:calc(100% - 2.25rem);background-color:currentColor;
+  -webkit-mask-image:var(--logo);mask-image:var(--logo);
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  -webkit-mask-position:left center;mask-position:left center;
+  -webkit-mask-size:contain;mask-size:contain}
+/* Auf den großen Kacheln größer – und mit Abstand zum Pfeil oben rechts. */
+[data-layout="magazin"] .acc-body--plats .plat--xl .plogo--mark,
+[data-layout="magazin"] .acc-body--plats .plat--wide .plogo--mark{
+  top:1.5rem;left:1.5rem;width:calc(var(--logo-ar,4) * 1.875rem);
+  height:1.875rem;max-width:calc(100% - 6rem)}
+[data-layout="magazin"] .acc-body--plats .plat__body{flex:none;width:100%}
+/* KEINE der elf Markenfarben trägt im Vollton Kleintext auf AA – weder unter
+   Weiß noch unter Dunkel (Change.org 4,24, WeAct 4,35, 350.org 4,31, jeweils
+   im besseren der beiden Fälle). Auf der Kachel steht deshalb ausschließlich
+   Großtext im Sinne der WCAG (ab 18,66 px fett gilt 3:1), und damit liegt
+   der schwächste Fall mit 4,24 klar darüber. Aus demselben Grund hier kein
+   opacity: das würde den gerechneten Abstand wieder auffressen. */
+[data-layout="magazin"] .acc-body--plats .plat__name{font-size:1.375rem;
+  font-weight:800;letter-spacing:-.03em;line-height:1.15}
+[data-layout="magazin"] .acc-body--plats .plat__meta{color:inherit;
+  font-size:1.25rem;font-weight:700;letter-spacing:-.02em;margin-top:.125rem}
+/* In der kleinen Kachel bleibt Platz für Name und Zahl – der Untertitel
+   käme auf vier Zeilen. Nur die große Kachel zeigt ihn (siehe unten). */
+[data-layout="magazin"] .acc-body--plats .plat__tag{display:none}
+[data-layout="magazin"] .acc-body--plats .plat__new{font-size:.8125rem;
+  margin-left:.4375rem;vertical-align:.0625rem}
+/* Auf der kleinen Kachel entfällt der Pfeil. Sie ist nur 164 px breit; bei
+   „Change.org 376 Petitionen +68 neu" laufen Name und Zahl über fünf Zeilen
+   und damit unter den Pfeilkreis — gemessen, kein Verdacht. Die Kachel ist
+   als Ganzes der Schalter, der Pfeil erklärt daran nichts. Auf den beiden
+   großen Kacheln ist Platz, dort bleibt er.
+   Kein gefüllter Kreis, sondern eine Linie in currentColor: so folgt er von
+   allein der hellen wie der dunklen Beschriftung, ohne zweite Variable. */
+[data-layout="magazin"] .acc-body--plats .plat__chev{display:none}
+[data-layout="magazin"] .acc-body--plats .plat--xl .plat__chev,
+[data-layout="magazin"] .acc-body--plats .plat--wide .plat__chev{
+  display:flex;position:absolute;top:1rem;right:1rem;left:auto;bottom:auto;
+  width:2.125rem;height:2.125rem;background:none;
+  border:.09375rem solid currentColor;color:inherit;font-size:.75rem}
+/* Der Name darf nicht unter den Pfeil laufen. */
+[data-layout="magazin"] .acc-body--plats .plat--xl .plat__name,
+[data-layout="magazin"] .acc-body--plats .plat--wide .plat__name{
+  padding-right:3.25rem}
+
+/* Die beiden großen Kacheln. Welche das sind, entscheidet app.js nach der
+   Zahl der Petitionen (größte → --xl, zweitgrößte → --wide); die Klassen
+   sind in den anderen Layouts wirkungslos. */
+[data-layout="magazin"] .acc-body--plats .plat--xl{
+  grid-column:span 2;grid-row:span 2;padding:1.5rem}
+[data-layout="magazin"] .acc-body--plats .plat--xl .plat__name{font-size:2rem}
+[data-layout="magazin"] .acc-body--plats .plat--xl .plat__meta{font-size:1.5rem}
+[data-layout="magazin"] .acc-body--plats .plat--xl .plat__tag{display:block;
+  color:inherit;font-size:1.25rem;font-weight:700;line-height:1.35;
+  margin-top:.5rem;max-width:24ch}
+[data-layout="magazin"] .acc-body--plats .plat--xl .plat__chev{
+  top:1.5rem;right:1.5rem;width:2.5rem;height:2.5rem;font-size:.875rem}
+[data-layout="magazin"] .acc-body--plats .plat--wide{grid-column:span 2}
+[data-layout="magazin"] .acc-body--plats .plat--wide .plat__name{
+  font-size:1.625rem}
+
+/* ---- Petition als Bildkarte ---- */
+[data-layout="magazin"] .pet-wrap,
+[data-layout="magazin"] .pet-bg,
+[data-layout="magazin"] .pet{border-radius:var(--radius)}
+[data-layout="magazin"] .pet-wrap{margin-bottom:1.25rem}
+[data-layout="magazin"] .pet{border:0;
+  box-shadow:0 .75rem 1.75rem rgba(40,30,15,.10)}
+[data-layout="magazin"] .pet__head{flex-wrap:wrap;gap:0;padding:0 0 1.125rem;
+  align-items:center}
+[data-layout="magazin"] .pet__thumb{order:-1;flex:0 0 100%;width:100%;
+  height:11rem;border-radius:0;margin-bottom:1rem}
+/* Hier ist das Bild schon im Ruhezustand der Aufmacher – beim Aufklappen
+   wächst es weiter, statt (wie in „klassisch") überhaupt erst nach oben zu
+   springen. */
+[data-layout="magazin"] .pet.open .pet__thumb{height:15rem}
+[data-layout="magazin"] .pet.open .pet__head{padding:0 0 1.125rem}
+[data-layout="magazin"] .pet.open .pet__main{padding-left:1.25rem}
+[data-layout="magazin"] .pet__thumb--ph .plogo{width:3.5rem;height:3.5rem}
+[data-layout="magazin"] .pet__main{padding-left:1.25rem}
+[data-layout="magazin"] .pet__title{font-size:1.125rem;font-weight:750;
+  line-height:1.3;letter-spacing:-.015em}
+[data-layout="magazin"] .pet__toggle{padding-left:.5rem}
+[data-layout="magazin"] .pet__ext{margin:0 .625rem 0 .25rem}
+[data-layout="magazin"] .pet__head>.pet__toggle:last-child{margin-right:1rem}
+[data-layout="magazin"] .pet__body{padding:0 1.25rem 1.25rem}
+
+/* ---- Kategorie als Milchglas-Etikett auf dem Bild ----
+   .pet ist position:relative und overflow:hidden (style.css), der Balken ist
+   das erste Kind – er lässt sich deshalb ohne Markup-Änderung über den
+   Aufmacher legen.
+
+   --glass ist ABSICHTLICH in beiden Designs dieselbe helle Fläche und wird
+   nicht mit umgeschaltet: das Etikett liegt nicht auf einer App-Fläche,
+   sondern auf einem fremden Foto beliebiger Helligkeit. Weiß mit 80 % Deckung
+   ergibt auch über einem tiefschwarzen Bild noch rund 8,9:1 zu dunklem Text –
+   eine dunkle Glasfläche hätte über hellen Fotos keine vergleichbare Garantie.
+   Deshalb steht hier ausnahmsweise ein fester Farbwert. */
+[data-layout="magazin"] .pet__catbar,
+[data-layout="magazin"] .pet__catbar:active{position:absolute;z-index:2;
+  top:.875rem;left:.875rem;width:auto;border:0;border-radius:999px;
+  padding:.4375rem .8125rem;font-size:.6875rem;
+  background:rgba(255,255,255,.80);color:#191714;filter:none;
+  -webkit-backdrop-filter:blur(.75rem) saturate(1.6);
+  backdrop-filter:blur(.75rem) saturate(1.6);
+  box-shadow:0 .125rem .5rem rgba(0,0,0,.14)}
+
+/* ---- Gruppenüberschrift größer, Akkordions weicher ---- */
+[data-layout="magazin"] .langgroup>.acc-head{font-size:1.25rem;font-weight:800;
+  letter-spacing:-.02em;padding:1.5rem .25rem 1rem}
+[data-layout="magazin"] .accordion:not(.langgroup){border-radius:var(--radius)}
+
+/* ---- Fußleiste als schwebendes Milchglas ----
+   Text- und Symbolfarben bleiben die Theme-Variablen, die Fläche wechselt
+   über --glass-bar mit (drei Stellen, siehe Kopf). */
+[data-layout="magazin"] .tabbar{left:.875rem;right:.875rem;
+  bottom:calc(.75rem + env(safe-area-inset-bottom));height:4rem;
+  padding-bottom:0;border:0;border-radius:1.5rem;background:var(--glass-bar);
+  -webkit-backdrop-filter:blur(1.25rem) saturate(1.6);
+  backdrop-filter:blur(1.25rem) saturate(1.6);
+  box-shadow:0 .5rem 1.75rem rgba(40,30,15,.16)}

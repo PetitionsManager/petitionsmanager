@@ -20,15 +20,40 @@
 <link rel="stylesheet" href="style.css">
 <!-- Dark Mode: haengt an <html data-theme="light|dark|auto"> -->
 <link rel="stylesheet" href="theme.css">
+<!-- Layout: haengt an <html data-layout="klassisch|band|magazin">.
+     Muss NACH theme.css stehen (siehe Kopfkommentar in layouts.css). -->
+<link rel="stylesheet" href="layouts.css">
 </head>
 <body>
 <div class="app">
 
-  <!-- Kopfleiste (das Hamburger-Menue ist entfallen: alles steht in den
-       Einstellungen) -->
+  <!-- Kopfleiste: traegt jetzt die Wortmarke statt des Seitentitels.
+       Das Zeichen ist Inline-SVG — keine zusaetzliche Datei, kein Nachladen,
+       und es faerbt sich ueber Klassen aus den Theme-Variablen (siehe
+       style.css, Abschnitt „Wortmarke"). Als fill="…"-Attribut geschrieben
+       liefe der Dark Mode daran vorbei. -->
   <header class="topbar">
-    <div class="topbar__title" id="topbar-title">Petitionen</div>
+    <div class="brand">
+      <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true"
+           focusable="false">
+        <rect class="bm-badge" x="0" y="0" width="32" height="32" rx="9"/>
+        <path class="bm-check" d="M9.5 14.2l4.2 4.2L23 9.2" fill="none"
+              stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect class="bm-line" x="9" y="21" width="14" height="2.2" rx="1.1"/>
+      </svg>
+      <span class="brand__txt">
+        <span class="brand__name">Petitions<span
+          class="brand__name2">Manager</span></span>
+        <span class="brand__beta">Beta</span>
+      </span>
+    </div>
   </header>
+
+  <!-- Seitentitel. Stand frueher in der Kopfleiste; dort sitzt jetzt die
+       Wortmarke. Bewusst AUSSERHALB von #content, weil app.js dessen Inhalt
+       bei jedem Rendern komplett neu schreibt und das Element sonst jedes Mal
+       verloren ginge. -->
+  <div class="pagekick" id="pagekick"></div>
 
   <!-- Inhaltsbereich (Tabs werden hier hineingerendert) -->
   <main class="content" id="content"></main>

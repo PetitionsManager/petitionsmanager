@@ -468,6 +468,7 @@ FIELD_META = {
     "_README": "Petitions-Monitor. Datensaetze werden aktualisiert, nie ueberschrieben.",
     "fields": {
         "slug": "ID/Schluessel aus der URL",
+        "merged_slugs": "frühere Schluessel, die auf diesen umgeleitet wurden",
         "url": "kanonische Petitions-URL",
         "petition_id": "interne numerische ID der Plattform oder null",
         "title": "Titel",
@@ -596,9 +597,77 @@ def upsert(store: dict, slug: str, new: dict, list_hint: dict,
         else:
             rec["status"] = "online"      # noch unbestätigt → vorerst behalten
 
+    # Auch im Offline-Zweig darf ein Scraper die URL richtigstellen: wurde sie
+    # früher durch eine Weiterleitung auf eine fremde Seite verfälscht (z. B.
+    # die Startseite der Plattform), bekommt der Datensatz hier seine eigene
+    # zurück. Sonst trügen mehrere entfernte Petitionen dieselbe URL.
+    if status == "offline" and (new or {}).get("url"):
+        rec["url"] = new["url"]
+
     rec["last_checked"] = ts
     rec.setdefault("url", default_url)
     store[slug] = rec
+
+
+def merge_records(store: dict, old_key: str, new_key: str) -> bool:
+    """Führt einen umbenannten Datensatz mit seinem Nachfolger zusammen.
+
+    Anlass: Plattformen benennen Slugs um und leiten den alten Pfad auf den
+    neuen um (WeAct: /petitions/giftexporte-stoppen → …-4). Wer den Store
+    weiter unter dem alten Schlüssel führt, bekommt dieselbe Petition zweimal
+    in die App – und weil die Detailseite die kanonische URL liefert, tragen
+    beide Datensätze am Ende sogar dieselbe URL. Im Export teilen sie sich
+    dann einen Volltext-Eintrag (publish.write_texts speichert je URL), einer
+    der beiden Texte geht also verloren.
+
+    Erhalten bleiben das ältere first_seen und die Historie des aufgelösten
+    Datensatzes: übernommen werden alle Messpunkte, die AUSSERHALB des
+    Zeitraums der Zielhistorie liegen (typischerweise die Zeit vor der
+    Umbenennung). Die überlappenden werden bewusst verworfen – beide Slugs
+    wurden eine Weile parallel gezählt und die beiden Seiten zeigen nicht
+    zwangsläufig dieselbe Zahl (WeAct: 175.128 vs. 157.258 für dieselbe
+    Petition). Ineinander sortiert ergäbe das eine Sägezahn-Kurve.
+
+    Rückgabe: True, wenn zusammengeführt oder umbenannt wurde."""
+    if old_key == new_key or old_key not in store:
+        return False
+    old = store.pop(old_key)
+    new = store.get(new_key)
+
+    if new is None:
+        # Reine Umbenennung: der Datensatz wandert samt Historie mit. Die URL
+        # wird verworfen, damit der folgende upsert() die aktuelle setzt –
+        # sonst bliebe bei Plattformen ohne canonical-Link die alte stehen.
+        old["slug"] = new_key
+        old.pop("url", None)
+        old["merged_slugs"] = sorted({*(old.get("merged_slugs") or []), old_key})
+        store[new_key] = old
+        return True
+
+    for field, value in old.items():      # nur Lücken im Zieldatensatz füllen
+        if field in ("slug", "url", "first_seen", "signatures_history",
+                     "merged_slugs"):
+            continue
+        if new.get(field) in (None, "", [], {}):
+            new[field] = value
+
+    first_old, first_new = old.get("first_seen"), new.get("first_seen")
+    if first_old and (not first_new or first_old < first_new):
+        new["first_seen"] = first_old
+
+    hist = new.get("signatures_history") or []
+    extra = [e for e in (old.get("signatures_history") or []) if e.get("checked_at")]
+    if hist and extra:
+        von, bis = hist[0]["checked_at"], hist[-1]["checked_at"]
+        extra = [e for e in extra if not von <= e["checked_at"] <= bis]
+    if extra:
+        new["signatures_history"] = sorted(hist + extra,
+                                           key=lambda e: e.get("checked_at") or "")
+
+    new["merged_slugs"] = sorted({*(new.get("merged_slugs") or []),
+                                  *(old.get("merged_slugs") or []), old_key})
+    store[new_key] = new
+    return True
 
 
 # ----------------------------------------------------------------------------

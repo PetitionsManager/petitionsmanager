@@ -13,7 +13,29 @@
 /* Version hochzählen, sobald Dateien in SHELL dazukommen oder sich die
    App-Hülle grundlegend ändert – sonst behalten installierte Geräte die
    alte Fassung. */
-var CACHE = "pm-cache-v4";   /* v4: Beendet-Akkordion lädt verzögert (app.js/style.css) */
+/* v5: Liberapay-Link, „Darstellung" oben in den Einstellungen, Platzhalter für
+   fehlende Vorschaubilder (app.js/texts.js/style.css)
+   v6: wählbare Layouts – NEUE Datei layouts.css in SHELL (app.js/texts.js/
+   style.css/index.html)
+   v7: Wortmarke mit „Beta" in der Kopfleiste, Seitentitel in den Inhalt
+   gewandert, Notch-Höhe der Kopfleiste korrigiert (index.html/app.js/
+   style.css/layouts.css)
+   v8: Bento-Kacheln im Vollton der echten Markenfarbe, Schriftfarbe je Kachel
+   gerechnet, gleich große Kacheln mit zwei großen Feldern, Monogramme raus,
+   NEU acht echte Plattform-Logos in logos/ (app.js/layouts.css/style.css/
+   platforms.js/texts.js)
+   v9: Petitionsbild nicht mehr doppelt (wächst beim Aufklappen), Bedienfeld
+   „Sortieren und filtern" unter der Suche, „Datenlage" → eingeklapptes
+   „Für Nerds" mit Quellcode-Link, Logo + Wikipedia in „Über diese Plattform"
+   (app.js/style.css/layouts.css/platforms.js)
+   v10: die beiden letzten echten Logos (WeAct, Europäisches Parlament) – damit
+   haben alle elf Plattformen eines –, dazu vier belegte Markenfarben anstelle
+   von Schätzungen (platforms.js)
+   v11: Vorschaubild wird beim Aufklappen nicht mehr beschnitten (Höhe folgt
+   dem Seitenverhältnis) und wächst weich, Bedienfeld aufgeräumt, .chip-
+   Kollision zwischen Bedienfeld und Onboarding behoben, echte Kontaktadresse
+   (app.js/style.css) */
+var CACHE = "pm-cache-v11";
 /* Versionsunabhängig – überlebt das Hochzählen von CACHE. Die Zahl dahinter
    NUR hochsetzen, wenn sich die Paketnummerierung selbst ändert (dann stimmen
    die alten Inhalte nicht mehr zur Nummer und die Bibliothek muss weg). */
@@ -27,13 +49,27 @@ var SHELL = [
   "./platforms.js",
   "./style.css",
   "./theme.css",
+  "./layouts.css",
   "./manifest.webmanifest",
   "./fontawesome/css/all.min.css",
   "./fontawesome/webfonts/fa-solid-900.woff2",
   "./fontawesome/webfonts/fa-regular-400.woff2",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
-  "./icons/apple-touch-icon.png"
+  "./icons/apple-touch-icon.png",
+  /* Echte Plattform-Logos. Gehören zur Hülle, nicht zu den Daten: sie ändern
+     sich nur, wenn eine Plattform ihre Marke wechselt. */
+  "./logos/avaaz.svg",
+  "./logos/bundestag.svg",
+  "./logos/changeorg.svg",
+  "./logos/eko.svg",
+  "./logos/europarl.svg",
+  "./logos/foodwatch.svg",
+  "./logos/innnit.png",
+  "./logos/openpetition.svg",
+  "./logos/threefifty.svg",
+  "./logos/weact.svg",
+  "./logos/wemove.svg"
 ];
 
 self.addEventListener("install", function (e) {
