@@ -52,6 +52,12 @@ REQUEST_DELAY   = 1.5          # Sekunden Pause zwischen Anfragen (höflich!)
 REQUEST_TIMEOUT = 30
 MAX_RETRIES     = 3
 RESPECT_ROBOTS  = True
+
+# Wie viele Archiv-Kandidaten ein Lauf höchstens prüft (siehe wayback_slugs).
+# Bei Avaaz stehen rund 1.700 Kandidaten an – die alle in einem Lauf zu prüfen
+# dauerte bei 1,5 s Pause über eine Stunde. Der Rückstand wird deshalb über
+# mehrere Läufe abgearbeitet; die Warteschlange steht im _meta der Datendatei.
+ARCHIVE_BATCH   = 120
 USER_AGENT      = ("Mozilla/5.0 (X11; Linux x86_64) PetitionsMonitor/2.0 "
                    "(privater/gemeinnütziger Zweck)")
 
@@ -214,6 +220,19 @@ def wayback_slugs(fetcher, url_prefix: str, pattern, limit: int = 200000,
     log(f"Internet Archive: {len(rows)} archivierte URLs → "
         f"{len(seen)} eindeutige {label}.")
     return sorted(seen.values())
+
+
+def archive_queue(data_file: Path) -> tuple[list[str], list[str]]:
+    """(todo, dead) – die Archiv-Warteschlange aus dem _meta der Datendatei.
+
+    todo = noch zu prüfende Kandidaten, dead = geprüft und nachweislich weg
+    (404/410). Die Dead-Liste verhindert, dass eine spätere Auffrischung der
+    Archivliste dieselben verschwundenen Seiten immer wieder einreiht.
+    Beide Listen müssen bei JEDEM save_store mitgegeben werden, sonst fallen
+    sie beim nächsten Schreiben aus dem _meta heraus."""
+    meta = load_meta(data_file)
+    return (list(meta.get("archive_todo") or []),
+            list(meta.get("archive_dead") or []))
 
 
 def log(msg: str) -> None:
