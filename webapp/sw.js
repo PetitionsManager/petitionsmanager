@@ -50,7 +50,7 @@
    v16: innn.it-Logo als SVG statt PNG (als CSS-Maske wurde das einzige
    Rasterbild nicht gezeichnet), Flaggen nur noch an der Gruppenüberschrift
    und dort als runder Kreis (app.js/style.css/layouts.css/platforms.js) */
-var CACHE = "pm-cache-v17";
+var CACHE = "pm-cache-v18";
 /* Versionsunabhängig – überlebt das Hochzählen von CACHE. Die Zahl dahinter
    NUR hochsetzen, wenn sich die Paketnummerierung selbst ändert (dann stimmen
    die alten Inhalte nicht mehr zur Nummer und die Bibliothek muss weg). */

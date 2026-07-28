@@ -286,20 +286,13 @@
    lesbar. Ein <img> könnte das nicht: es brächte seine eigenen Farben mit
    und säuft auf der gleichfarbigen Fläche ab.
    Inzwischen hat jede der elf Plattformen eine Datei. */
-[data-layout="magazin"] .acc-body--plats .plogo{display:none}
-[data-layout="magazin"] .acc-body--plats .plogo--mark{display:block;
+[data-layout="magazin"] .acc-body--plats .plat .plogo{
   position:absolute;bottom:.875rem;left:.875rem;
-  width:calc(var(--logo-ar,4) * 2.5rem);height:2.5rem;
-  max-width:calc(100% - 2.25rem);background-color:currentColor;
-  -webkit-mask-image:var(--logo);mask-image:var(--logo);
-  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
-  -webkit-mask-position:left center;mask-position:left center;
-  -webkit-mask-size:contain;mask-size:contain}
+  --logo-h:3rem;background-color:#ffffff;max-width:calc(100% - 1.75rem)}
 /* Auf den großen Kacheln größer. */
-[data-layout="magazin"] .acc-body--plats .plat--xl .plogo--mark,
-[data-layout="magazin"] .acc-body--plats .plat--wide .plogo--mark{
-  bottom:1.5rem;left:1.5rem;width:calc(var(--logo-ar,4) * 3.5rem);
-  height:3.5rem;max-width:calc(100% - 3rem)}
+[data-layout="magazin"] .acc-body--plats .plat--xl .plogo,
+[data-layout="magazin"] .acc-body--plats .plat--wide .plogo{
+  bottom:1.5rem;left:1.5rem;--logo-h:4rem;max-width:calc(100% - 7rem)}
 /* Hier stand eine Sonderregel fuer Hochkant-Symbole (Seitenverhaeltnis
    < 1,2). Seit innn.it auf seinen sichtbaren Ausschnitt beschnitten ist
    (1,43:1), liegt keine der elf Marken mehr darunter - die Regel war tot. */
@@ -340,9 +333,9 @@
   background-color:var(--on-brand);background-image:none;
   color:var(--brand);font-size:.875rem}
 /* Auf den großen Kacheln darf das Logo nicht unter den Pfeil laufen. */
-[data-layout="magazin"] .acc-body--plats .plat--xl .plogo--mark,
-[data-layout="magazin"] .acc-body--plats .plat--wide .plogo--mark{
-  max-width:calc(100% - 7rem)}
+[data-layout="magazin"] .acc-body--plats .plat--xl .plogo,
+[data-layout="magazin"] .acc-body--plats .plat--wide .plogo{
+  bottom:1.5rem;left:1.5rem;--logo-h:4rem;max-width:calc(100% - 7rem)}
 
 /* Die beiden großen Kacheln. Welche das sind, entscheidet app.js nach der
    Zahl der Petitionen (größte → --xl, zweitgrößte → --wide); die Klassen

@@ -215,6 +215,10 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
 .empty a{color:var(--accent)}
 
 /* ---- Petitionsliste (Plattform-Detail) ---- */
+/* Marke ganz oben auf der Plattformseite. Grosszuegiges Bezugsmass: hier ist
+   sie der Aufmacher, nicht ein Listensymbol. */
+.phead{display:flex;align-items:center;margin:0 0 .625rem}
+.phead .plogo{--logo-h:3.5rem}
 .subhead{display:flex;align-items:center;justify-content:space-between;gap:.375rem;
   margin:-.125rem 0 .75rem}
 .backbtn{border:0;background:transparent;color:var(--accent);font-weight:700;
@@ -359,7 +363,7 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
    schon Badges in der Markenfarbe; eine zweite getönte Fläche darunter ergäbe
    nur Farbmatsch und verschwände im Dunkel-Design fast im Kachelhintergrund. */
 .pet__thumb--ph{display:inline-flex;align-items:center;justify-content:center}
-.pet__thumb--ph .plogo{width:1.5rem;height:1.5rem}
+.pet__thumb--ph .plogo{--logo-h:1.75rem}
 .pet__main{flex:1;min-width:0}
 .pet__title{font-weight:700;font-size:.9375rem;line-height:1.35;
   letter-spacing:-.005em}
@@ -389,7 +393,7 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
    ohne Bild bleibt es bei der festen Höhe. */
 .pet.open .pet__thumb{order:-1;flex:0 0 100%;width:100%;height:11rem;
   border-radius:0;margin-bottom:.875rem}
-.pet.open .pet__thumb--ph .plogo{width:3rem;height:3rem}
+.pet.open .pet__thumb--ph .plogo{--logo-h:3.25rem}
 /* Sanftes Aufklappen. Die Höhe ist animierbar, weil sizeThumb() einen
    Pixelwert setzt – auf height:auto ließe sich nicht überblenden. */
 .pet__thumb{transition:width .3s cubic-bezier(.4,0,.2,1),
@@ -781,18 +785,37 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
    Benachrichtigungen, Profil und Wirkungs-Karte.
    =========================================================================== */
 
-/* ---- Marken-Monogramm der Plattformen ---- */
-.plogo{flex:none;width:1.75rem;height:1.75rem;display:inline-flex;
-  align-items:center;justify-content:center}
-.plogo svg{width:100%;height:100%;display:block;border-radius:.5rem}
-.plogo--fallback{background:var(--brand,var(--accent));color:var(--on-brand);
+/* ---- Plattform-Logo (app.js → platLogo) ----
+   Das Element ist LEER; die Marke entsteht als CSS-Maske vor einer Farbfläche.
+   Nur so lässt sich dieselbe Datei in jeder Farbe ausgeben (Varianten unten).
+
+   Die Grösse steuern ZWEI Werte:
+     --logo-h  Bezugsmass, wird je Zusammenhang gesetzt (Liste, Kachel, Kopf)
+     --logo-k  1/Wurzel(Seitenverhaeltnis), kommt aus app.js
+   Zusammen ergibt das für jede Marke dieselbe FLÄCHE statt derselben Höhe.
+   Ohne diese Normierung nimmt der Bundestag-Schriftzug (6,17:1) gut viermal
+   so viel Fläche ein wie die WeAct-Marke (1,42:1) und erschlägt sie. */
+.plogo{flex:none;display:inline-block;
+  width:calc(var(--logo-ar,4) * var(--logo-h,1.75rem) * var(--logo-k,.5));
+  height:calc(var(--logo-h,1.75rem) * var(--logo-k,.5));
+  background-color:var(--brand,var(--accent));
+  -webkit-mask-image:var(--logo);mask-image:var(--logo);
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  -webkit-mask-position:left center;mask-position:left center;
+  -webkit-mask-size:contain;mask-size:contain}
+/* Vier Varianten. „marke" ist die Vorgabe und steckt schon in .plogo. */
+.plogo--v-weiss{background-color:#ffffff}
+.plogo--v-schwarz{background-color:var(--ink)}
+.plogo--v-auto{background-color:currentColor}
+/* Ohne hinterlegte Datei: Anfangsbuchstabe auf der Markenfläche. Betrifft
+   derzeit keine der elf Plattformen, bleibt aber als Auffangnetz. */
+.plogo--fallback{width:2.375rem;height:2.375rem;display:inline-flex;
+  align-items:center;justify-content:center;-webkit-mask-image:none;
+  mask-image:none;background:var(--brand,var(--accent));color:var(--on-brand);
   border-radius:.5rem;font-weight:800;font-size:.875rem}
-.plat .plogo,.opt .plogo{width:2.375rem;height:2.375rem}
-/* Echtes Plattform-Logo (platforms.js → logoFile). Standardmäßig AUS: in der
-   Zeilenansicht („klassisch" und „Band") stünde eine 6:1 breite Wortmarke
-   neben dem Namen und würde ihn zusammendrücken. Sichtbar wird es allein im
-   Bento-Raster, wo es das Monogramm ersetzt — siehe layouts.css. */
-.plogo--mark{display:none}
+/* Bezugsmasse je Zusammenhang. */
+.opt .plogo{--logo-h:2.5rem}
+.plat .plogo{--logo-h:2.75rem}
 .plat__tag{display:block;color:var(--muted);font-size:.75rem;
   margin-top:.1875rem;line-height:1.4}
 
@@ -1043,13 +1066,6 @@ body.wizard-open{overflow:hidden}
 /* Echtes Plattform-Logo im Info-Bereich. Hier steht es auf hellem Grund,
    deshalb in der Markenfarbe – auf der Bento-Kachel dagegen in der Textfarbe
    (layouts.css). Beides über dieselbe Maske, nur mit anderem Untergrund. */
-.pabout__logo{display:block;margin:0 0 .875rem;
-  width:calc(var(--logo-ar,4) * 1.625rem);height:1.625rem;max-width:100%;
-  background-color:var(--brand,var(--accent));
-  -webkit-mask-image:var(--logo);mask-image:var(--logo);
-  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
-  -webkit-mask-position:left center;mask-position:left center;
-  -webkit-mask-size:contain;mask-size:contain}
 
 /* „Für Nerds" – hieß früher „Datenlage" und stand offen im Info-Bereich.
    Jetzt eingeklappt, weil es eine Randnotiz für wenige ist. */
