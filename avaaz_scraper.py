@@ -73,8 +73,11 @@ PETITION_HREF_RE = re.compile(r"/community_petitions/de/([a-z0-9_]+)", re.I)
 CAMPAIGN_HREF_RE = re.compile(r"/campaign/de/([a-z0-9_]+)", re.I)
 
 # Seiten unterhalb von /community_petitions/de/, die keine Petitionen sind.
+# (popular_/recent_petitions tauchen nur bei der Archiv-Suche auf – dort steht
+# der Dateiname ohne Endung als vermeintlicher Slug im Pfad.)
 NON_PETITION_SLUGS = {"about", "how_to_create_petition", "my_account",
-                      "start_a_petition"}
+                      "start_a_petition", "popular_petitions",
+                      "recent_petitions", "search", "sitemap"}
 # Seiten unter /campaign/de/, die keine Kampagnen sind.
 NON_CAMPAIGN_SLUGS = {"donate"}
 
@@ -185,6 +188,46 @@ def discover_slugs(fetcher: core.Fetcher) -> tuple[dict[str, dict], set[str]]:
                      f"{len(campaigns)} Kampagnen bisher")
 
     return found, campaigns
+
+
+# ----------------------------------------------------------------------------
+# Archiv-Discovery: was Avaaz heute nicht mehr verlinkt
+# ----------------------------------------------------------------------------
+#  Avaaz zeigt öffentlich nur 5–10 kuratierte Petitionen. Alles andere ist zwar
+#  weiterhin online, aber von keiner Seite mehr aus erreichbar – über die
+#  normale Entdeckung also unauffindbar. Das Internet Archive hat die
+#  Übersichtsseiten über Jahre mitgeschnitten und kennt dadurch rund 1.700
+#  Slugs, von denen die meisten noch abrufbar sind.
+#
+#  Ablauf: `--archive` füllt die Warteschlange (steht im _meta der Datendatei),
+#  jeder Lauf arbeitet danach ARCHIVE_BATCH Einträge ab. Kandidaten mit 404/410
+#  wandern in die Dead-Liste und werden nie wieder eingereiht; sie kommen auch
+#  NICHT als Offline-Datensatz in den Bestand – eine Petition, die wir nie
+#  gesehen haben, „verschwindet" nicht, sie hat nur nie existiert.
+# ----------------------------------------------------------------------------
+def _q(kind: str, slug: str) -> str:
+    """Warteschlangen-Eintrag: 'petition:slug' bzw. 'campaign:slug'."""
+    return f"{kind}:{slug}"
+
+
+def _unq(entry: str) -> tuple[str, str]:
+    kind, _, slug = str(entry).partition(":")
+    return slug, (kind or "petition")
+
+
+def archive_candidates(fetcher: core.Fetcher) -> list[str]:
+    """Warteschlangen-Einträge aus dem Internet Archive (Petitionen + Kampagnen)."""
+    out: list[str] = []
+    for prefix, pattern, kind, skip, label in (
+        (f"{BASE_URL}/community_petitions/de/", PETITION_HREF_RE, "petition",
+         NON_PETITION_SLUGS, "Petitions-Slugs"),
+        (f"{BASE_URL}/campaign/de/", CAMPAIGN_HREF_RE, "campaign",
+         NON_CAMPAIGN_SLUGS, "Kampagnen-Slugs"),
+    ):
+        for slug in core.wayback_slugs(fetcher, prefix, pattern, label=label):
+            if slug not in skip:
+                out.append(_q(kind, slug))
+    return out
 
 
 # ----------------------------------------------------------------------------
@@ -397,9 +440,15 @@ def run(args) -> None:
     store = core.load_store(DATA_FILE)
     fetcher = core.Fetcher(delay=args.delay, headers=FETCH_HEADERS)
     ts = now_iso()
+    arch_todo, arch_dead = core.archive_queue(DATA_FILE)
 
     def save(quiet=True, **extra):
-        core.save_store(store, DATA_FILE, extra_meta=extra, quiet=quiet)
+        # Die Archiv-Warteschlange muss bei jedem Speichern mit, sonst ist sie
+        # nach dem nächsten Schreibvorgang weg (save_store ersetzt _meta).
+        core.save_store(store, DATA_FILE,
+                        extra_meta={"archive_todo": arch_todo,
+                                    "archive_dead": arch_dead, **extra},
+                        quiet=quiet)
 
     # Bekannte Einträge zuerst prüfen (Status/Unterschriften auffrischen).
     # rec["kind"] steuert Scraper + URL; Altbestand ohne kind = Petition.
@@ -460,6 +509,46 @@ def run(args) -> None:
                     ts, url)
         save()
 
+    # --- Archiv-Kandidaten -------------------------------------------------
+    if getattr(args, "archive", False):
+        bekannt = set(arch_todo) | set(arch_dead) | {
+            _q(r.get("kind", "petition"), s) for s, r in store.items()}
+        neu = [e for e in archive_candidates(fetcher) if e not in bekannt]
+        arch_todo.extend(neu)
+        log(f"Archiv: {len(neu)} neue Kandidaten eingereiht "
+            f"({len(arch_todo)} offen, {len(arch_dead)} bereits als weg bekannt).")
+        save()
+
+    batch = int(getattr(args, "archive_batch", core.ARCHIVE_BATCH) or 0)
+    if args.limit:
+        batch = 0        # Testläufe nicht mit dem Rückstand volllaufen lassen
+    if batch and arch_todo:
+        todo = arch_todo[:batch]
+        log(f"Archiv-Rückstand: {len(arch_todo)} offen, prüfe {len(todo)} "
+            f"in diesem Lauf …")
+        prog(phase="archive", current=0, total=len(todo),
+             message="Prüfe Archiv-Kandidaten …")
+        gefunden = weg = 0
+        for i, entry in enumerate(todo, 1):
+            slug, kind = _unq(entry)
+            prog(current=i, total=len(todo), message=slug)
+            status, rec, url = _scrape_any(fetcher, slug, kind)
+            arch_todo.remove(entry)
+            if status == "error":
+                arch_todo.append(entry)   # ans Ende: nächster Lauf, nicht nie
+                continue
+            if status in ("offline", "skip"):
+                # Nie gesehen und heute weg → gar nicht erst aufnehmen.
+                arch_dead.append(entry)
+                weg += 1
+                continue
+            core.upsert(store, slug, rec or {}, {}, "online", ts, url)
+            gefunden += 1
+            save()
+        log(f"Archiv: {gefunden} wiedergefunden, {weg} endgültig weg, "
+            f"{len(arch_todo)} bleiben offen.")
+        save()
+
     new_petitions = [s for s, r in store.items() if r.get("first_seen") == ts]
     if new_petitions:
         log(f"NEU: {len(new_petitions)} neue Einträge in diesem Lauf: "
@@ -469,8 +558,12 @@ def run(args) -> None:
         log("Keine neuen Einträge seit dem letzten Lauf gefunden.")
 
     prog(message="Speichere & baue HTML …")
+    # Vollständigkeit ehrlich halten: solange Archiv-Kandidaten offen sind,
+    # kennen wir nachweislich mehr Petitionen, als im Bestand stehen.
+    available = max(len(discovered) + len(campaigns),
+                    len(store) + len(arch_todo))
     save(quiet=False, new_petitions_last_run=new_petitions,
-         available=len(discovered) + len(campaigns))
+         available=available)
     core.write_list_html(PLATFORM)
     log("Fertig (Avaaz).")
 

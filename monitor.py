@@ -89,6 +89,15 @@ def parse_args():
                    help="kein Scrape; nur HTML aus vorhandenen JSONs neu bauen")
     p.add_argument("--delay", type=float, default=core.REQUEST_DELAY,
                    help=f"Pause zwischen Anfragen in s (Default {core.REQUEST_DELAY})")
+    p.add_argument("--archive", action="store_true",
+                   help="Kandidatenliste im Internet Archive auffrischen. Für "
+                        "Plattformen ohne öffentliche Gesamtliste (avaaz): "
+                        "findet Petitionen, die heute nirgends mehr verlinkt "
+                        "sind. Der Rückstand wird danach über mehrere Läufe "
+                        "abgearbeitet, nicht auf einen Schlag")
+    p.add_argument("--archive-batch", type=int, default=core.ARCHIVE_BATCH,
+                   help="wie viele Archiv-Kandidaten pro Lauf geprüft werden "
+                        f"(Default {core.ARCHIVE_BATCH}; 0 = keine)")
     p.add_argument("--serve", action="store_true",
                    help="Monitor lokal ausliefern, inkl. 'Jetzt scrapen'-Buttons")
     p.add_argument("--port", type=int, default=8000,
