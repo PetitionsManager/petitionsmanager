@@ -85,6 +85,12 @@
   /* Schatten: fast unsichtbar; stattdessen Linien (--line) als Trenner */
   --shadow:       0 0 0 1px #332f27;
 }
+:root[data-theme="dark"]
+/* Einfarbige Plattform-Logos: im Dunkeln den aufgehellten Markenton
+   nehmen. Ohne das verschwindet der Bundestag (#191919) auf dunklem
+   Grund vollstaendig. --brand-dark liefert app.js -> platLogo. */
+.plogo--v-marke{background-color:var(--brand-dark,var(--brand,var(--accent)))}
+
 
 /* ---- Verbleibende Overrides ----------------------------------------------
    Fast alles laeuft ueber Variablen. Uebrig bleiben nur Stellen, an denen
@@ -167,6 +173,12 @@
     /* Schatten */
     --shadow:       0 0 0 1px #332f27;
   }
+  :root[data-theme="auto"]
+  /* Einfarbige Plattform-Logos: im Dunkeln den aufgehellten Markenton
+     nehmen. Ohne das verschwindet der Bundestag (#191919) auf dunklem
+     Grund vollstaendig. --brand-dark liefert app.js -> platLogo. */
+  .plogo--v-marke{background-color:var(--brand-dark,var(--brand,var(--accent)))}
+
 
   /* Petitionsbilder */
   :root[data-theme="auto"] .pet__img {

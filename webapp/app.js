@@ -86,11 +86,50 @@
   }
   function platInfo(key) { return PLATS[key] || {}; }
   // Marken-Monogramm; ohne platforms.js ein schlichtes Buchstaben-Badge.
-  function platLogo(key, name) {
+  /* ---- Logo-Register ------------------------------------------------------
+     EINE Stelle, die ein Plattform-Logo ausgibt. Vorher lieferte platLogo ein
+     selbstgebautes Monogramm („350", „Av", „BT" …) aus platforms.js; seit alle
+     elf Plattformen ihre echte Marke haben, sind die Insignien überflüssig.
+
+     Technik: CSS-Maske vor einer Farbfläche, kein <img>. Dadurch lässt sich
+     dieselbe Datei in JEDER Farbe ausgeben — das ist der ganze Trick hinter
+     den Varianten:
+        "marke"  Markenfarbe (Listen auf hellem/dunklem Grund)
+        "weiss"  Weiß        (auf Vollton-Markenflächen, Bento)
+        "schwarz" Textton    (Druck/Kontrastfälle)
+        "auto"   currentColor – erbt vom Elternteil
+     Ein <img> könnte das nicht: es brächte seine eigenen Farben mit und
+     verschwände auf gleichfarbigem Grund.
+
+     GRÖSSENNORMIERUNG: Die Marken sind verschieden proportioniert — Bundestag
+     6,17:1, foodwatch 5,23:1 gegen WeAct 1,42:1. Bei gleicher HÖHE nimmt die
+     breiteste viermal so viel Fläche ein wie die schmalste und erschlägt sie
+     optisch. Deshalb skaliert die Höhe mit 1/Wurzel(Seitenverhältnis): dann
+     ist die FLÄCHE aller Marken gleich. Die Wurzel kann CSS nicht, der Faktor
+     kommt deshalb hier als --logo-k heraus. */
+  function logoVars(key) {
     var info = platInfo(key);
-    if (info.logo) return '<span class="plogo">' + info.logo + "</span>";
-    var initial = String(name || key || "?").trim().charAt(0).toUpperCase();
-    return '<span class="plogo plogo--fallback">' + esc(initial) + "</span>";
+    if (!info.logoFile) return null;
+    var ar = info.logoAR || 4;
+    return "--logo:url(" + esc(info.logoFile) + ");--logo-ar:" + ar +
+           ";--logo-k:" + (1 / Math.sqrt(ar)).toFixed(3);
+  }
+  /* variante: "marke" | "weiss" | "schwarz" | "auto" (Vorgabe "marke") */
+  function platLogo(key, name, variante) {
+    var vars = logoVars(key);
+    if (!vars) {
+      // Kein Logo hinterlegt: Anfangsbuchstabe auf der Markenfarbe.
+      var initial = String(name || key || "?").trim().charAt(0).toUpperCase();
+      return '<span class="plogo plogo--fallback">' + esc(initial) + "</span>";
+    }
+    /* Beide Markentöne mitgeben: die Variante „marke" nimmt im Dunkel-Design
+       den aufgehellten Wert. Ohne das verschwindet der Bundestag (#191919)
+       auf dunklem Grund vollständig – die Datei ist ja einfarbig. */
+    var farbe = platColor(key), dunkel = platInfo(key).colorDark;
+    return '<span class="plogo plogo--v-' + (variante || "marke") +
+      '" role="img" aria-label="Logo ' + esc(name || key) + '" style="' + vars +
+      (farbe ? ";--brand:" + esc(farbe) : "") +
+      (dunkel ? ";--brand-dark:" + esc(dunkel) : "") + '"></span>';
   }
   function platColor(key) { return platInfo(key).color || null; }
 
@@ -594,21 +633,14 @@
     // ein <img> brächte seine eigene Farbe mit. Standardmäßig ausgeblendet;
     // nur das Bento-Raster zeigt es (layouts.css). Für elf Plattformen gibt es
     // acht Dateien; wo eine fehlt, bleibt es beim Monogramm.
-    var lf = platInfo(p.key).logoFile;
-    var lar = platInfo(p.key).logoAR || 4;
-    /* Hochkant-Symbole (innn.it) brauchen mehr Höhe als Wortmarken: bei
-       gleicher Höhe ist eine 0,75er-Marke nur 22 px breit, eine Wortmarke
-       aber 60–185 px – nebeneinander wirkt das Symbol wie gar nichts.
-       Deshalb eine eigene Klasse ab Seitenverhältnis < 1,2. */
-    var mark = lf
-      ? '<span class="plogo--mark' +
-        '" aria-hidden="true" style="--logo:url(' + esc(lf) +
-        ');--logo-ar:' + lar + '"></span>'
-      : "";
+    /* Nur EIN Logo-Element. Früher standen hier zwei: das Monogramm und
+       daneben ein zweites Element für die echte Marke im Bento. Seit
+       platLogo() selbst die Maske ausgibt, positioniert layouts.css einfach
+       dieses eine Element. */
     var card = el(
       '<button class="plat' + (size ? " " + size : "") + '"' +
         (brand ? ' style="--brand:' + esc(brand) + '"' : "") + ">" +
-        platLogo(p.key, p.name) + mark +
+        platLogo(p.key, p.name) +
         '<span class="plat__body">' +
           /* Keine Flagge an der einzelnen Kachel: die Liste ist ohnehin nach
              Sprache gruppiert, und die Gruppenüberschrift trägt sie einmal
@@ -1138,14 +1170,10 @@
       '<i class="fa-solid fa-chevron-down pabout__chev"></i></button>' +
       '<div class="pabout__body"></div></div>');
     var body = box.querySelector(".pabout__body");
-    // Echtes Logo als Aufmacher. Anders als auf der Bento-Kachel steht es hier
-    // auf hellem Kartengrund – deshalb in der Markenfarbe statt in der
-    // Textfarbe (style.css → .pabout__logo).
-    if (info.logoFile)
-      body.appendChild(el('<span class="pabout__logo" role="img" ' +
-        'aria-label="Logo ' + esc(manifestEntry.name || key) +
-        '" style="--logo:url(' + esc(info.logoFile) + ');--logo-ar:' +
-        (info.logoAR || 4) + '"></span>'));
+    /* Kein zweites Logo mehr im Aufklapp-Bereich: seit platLogo() selbst die
+       echte Marke ausgibt, steht sie schon in der Kopfzeile darüber. Vorher
+       waren es Monogramm oben + Marke unten, also dieselbe Plattform zweimal
+       gekennzeichnet. */
     box.querySelector(".pabout__head").addEventListener("click", function () {
       state.aboutPlatform = !box.classList.contains("open");
       box.classList.toggle("open", state.aboutPlatform);
@@ -1228,6 +1256,11 @@
        Plattform gerade durchsieht, entscheidet genau dann, ob sie oben in der
        Übersicht stehen soll. Gleiche Mechanik wie dort (state.favorites +
        saveFavorites), nur an einer zweiten Stelle bedienbar. */
+    /* Marke oben auf der Seite: der Seitentitel nennt die Plattform nur als
+       Text. Das Logo steht in ihrer eigenen Farbe darüber, damit auf einen
+       Blick klar ist, wo man gelandet ist. */
+    content.appendChild(el('<div class="phead">' +
+      platLogo(key, platformName(key)) + "</div>"));
     var head = el('<div class="subhead">' +
       '<button class="backbtn"><i class="fa-solid fa-chevron-left"></i> ' +
         "Alle Plattformen</button>" +
@@ -1472,11 +1505,24 @@
       var closedRows = online.filter(isClosed);
       var offline = notArch.filter(function (r) { return (r.status || "online") === "offline"; });
       var archived = rows.filter(function (r) { return isArchived(r.url); });
+      /* „25 von 26" ließ offen, wo die eine geblieben ist. Die Differenz wird
+         deshalb aufgeschlüsselt – jeder Grund entspricht genau einem der
+         Abschnitte weiter unten, sodass man sie auch findet. */
+      function zahl(n, ein, mehr) {
+        return nf.format(n) + " " + (n === 1 ? ein : mehr);
+      }
+      var gruende = [];
+      if (closedRows.length) gruende.push(zahl(closedRows.length, "beendet", "beendet"));
+      if (archived.length) gruende.push(zahl(archived.length, "im Archiv", "im Archiv"));
+      if (offline.length) gruende.push(zahl(offline.length, "offline", "offline"));
       note.textContent = state.catFilter
-        ? nf.format(active.length) + " Petition(en) in dieser Kategorie"
+        ? zahl(active.length, "Petition in dieser Kategorie",
+               "Petitionen in dieser Kategorie")
         : state.tagFilter
-        ? nf.format(active.length) + " Petition(en) mit diesem Schlagwort"
-        : nf.format(active.length) + " von " + nf.format(arr.length) + " Petitionen";
+        ? zahl(active.length, "Petition mit diesem Schlagwort",
+               "Petitionen mit diesem Schlagwort")
+        : nf.format(active.length) + " von " + nf.format(arr.length) + " Petitionen" +
+          (gruende.length ? " (" + gruende.join(", ") + ")" : "");
 
       // Filter-Leiste über der Liste, wenn Kategorie ODER Schlagwort aktiv ist.
       if (state.catFilter || state.tagFilter) {
