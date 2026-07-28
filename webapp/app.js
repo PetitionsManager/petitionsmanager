@@ -605,9 +605,8 @@
        gleicher Höhe ist eine 0,75er-Marke nur 22 px breit, eine Wortmarke
        aber 60–185 px – nebeneinander wirkt das Symbol wie gar nichts.
        Deshalb eine eigene Klasse ab Seitenverhältnis < 1,2. */
-    var markKl = lar < 1.2 ? " plogo--mark--icon" : "";
     var mark = lf
-      ? '<span class="plogo--mark' + markKl +
+      ? '<span class="plogo--mark' +
         '" aria-hidden="true" style="--logo:url(' + esc(lf) +
         ');--logo-ar:' + lar + '"></span>'
       : "";
@@ -616,12 +615,10 @@
         (brand ? ' style="--brand:' + esc(brand) + '"' : "") + ">" +
         platLogo(p.key, p.name) + mark +
         '<span class="plat__body">' +
-          /* Die Flagge bleibt bewusst IM Namen: in „klassisch" und „Band"
-             gehört sie dorthin. Im Bento holt layouts.css sie per
-             position:absolute in die obere rechte Ecke – dafür genügt CSS,
-             ein zweites Element wäre nur Ballast. */
-          '<span class="plat__name">' + esc(p.name) +
-            '<span class="flag">' + info.flag + "</span></span>" +
+          /* Keine Flagge an der einzelnen Kachel: die Liste ist ohnehin nach
+             Sprache gruppiert, und die Gruppenüberschrift trägt sie einmal
+             für alle. An jeder Kachel wiederholt, war sie nur Rauschen. */
+          '<span class="plat__name">' + esc(p.name) + "</span>" +
           '<span class="plat__meta">' + nf.format(p.online) +
             " Petitionen" + newLabel + '</span>' +
           (tagline ? '<span class="plat__tag">' + esc(tagline) + "</span>" : "") +

@@ -300,35 +300,13 @@
 [data-layout="magazin"] .acc-body--plats .plat--wide .plogo--mark{
   bottom:1.5rem;left:1.5rem;width:calc(var(--logo-ar,4) * 3.5rem);
   height:3.5rem;max-width:calc(100% - 3rem)}
-/* Hochkant-Symbol statt Wortmarke (innn.it, Seitenverhältnis 0,75). Bei der
-   Höhe der Wortmarken wäre es nur ein Fünftel so breit wie diese und ginge
-   neben ihnen unter; die zusätzliche Höhe gleicht das aus. Die Breite folgt
-   weiterhin dem echten Seitenverhältnis, das Symbol wird also nicht verzerrt. */
-[data-layout="magazin"] .acc-body--plats .plogo--mark--icon{
-  width:calc(var(--logo-ar,1) * 3.25rem);height:3.25rem}
-[data-layout="magazin"] .acc-body--plats .plat--xl .plogo--mark--icon,
-[data-layout="magazin"] .acc-body--plats .plat--wide .plogo--mark--icon{
-  width:calc(var(--logo-ar,1) * 4rem);height:4rem}
-/* Die Flagge IST die obere rechte Ecke: bündig am Rand, nach innen rund.
-   Aussen bleibt sie eckig — die Rundung der Kachel schneidet sie zu, weil
-   .plat overflow:hidden hat. Deshalb braucht es hier keinen zweiten Radius
-   und die Ecke folgt automatisch der Kachelform.
-   Die Flagge steht im Markup im Namen; dort gehört sie in „klassisch" und
-   „Band" auch hin. position:absolute holt sie hier heraus (.plat ist im
-   Bento position:relative), ein zweites Element wäre nur Ballast. */
-[data-layout="magazin"] .acc-body--plats .plat__name .flag{
-  position:absolute;top:0;right:0;margin:0;
-  padding:.375rem .5rem .4375rem .5625rem;
-  background:var(--on-brand);border-bottom-left-radius:1.125rem;
-  font-size:1rem;line-height:1}
+/* Hier stand eine Sonderregel fuer Hochkant-Symbole (Seitenverhaeltnis
+   < 1,2). Seit innn.it auf seinen sichtbaren Ausschnitt beschnitten ist
+   (1,43:1), liegt keine der elf Marken mehr darunter - die Regel war tot. */
 [data-layout="magazin"] .acc-body--plats .plat__body{flex:none;width:100%}
-/* Beschriftung oben — der Name muss der Eckflagge ausweichen.
-   overflow-wrap ist hier NICHT vorsorglich: „OpenPetition", „Change.org" und
-   „foodwatch" sind einzelne Wörter, die breiter sind als die 102 px, die auf
-   der schmalen Kachel neben der Flagge bleiben. Ohne Umbruchpunkt schoben sie
-   über die Polsterung hinaus und liefen unter die Flagge (gemessen). */
-[data-layout="magazin"] .acc-body--plats .plat__name{padding-right:2.75rem;
-  overflow-wrap:anywhere}
+/* „OpenPetition" und „foodwatch" sind einzelne Wörter, die breiter sind als
+   die schmale Kachel — ohne Umbruchpunkt schössen sie über den Rand. */
+[data-layout="magazin"] .acc-body--plats .plat__name{overflow-wrap:anywhere}
 /* KEINE der elf Markenfarben trägt im Vollton Kleintext auf AA – weder unter
    Weiß noch unter Dunkel (Change.org 4,24, WeAct 4,35, 350.org 4,31, jeweils
    im besseren der beiden Fälle). Auf der Kachel steht deshalb ausschließlich
