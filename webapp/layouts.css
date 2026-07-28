@@ -257,13 +257,17 @@
      „+68 neu" auf zwei Zeilen), das Logo unten belegt 58 px. 14rem = 224 px
      lassen dazwischen Luft; bei 12,5rem überlappten beide um 10 px. */
   grid-template-columns:1fr 1fr;grid-auto-rows:14rem;
-  grid-auto-flow:row dense;gap:.75rem;padding:0 0 .5rem}
+  grid-auto-flow:row dense;gap:.375rem;padding:0 0 .5rem}
 
-/* Vollton statt Tönung: die Kachel trägt die echte Markenfarbe.
-   --on-brand kommt je Kachel aus app.js (platInk) und ist Weiß oder der
-   dunkle Textton – je nachdem, was auf DIESER Farbe mehr Abstand hat. Die
-   beiden Werte hier sind nur der Rückfall für eine Plattform ohne Farbe;
-   das style-Attribut der Kachel sticht sie. */
+/* Vollton statt Tönung: die Kachel trägt die echte Markenfarbe, --brand
+   kommt je Kachel als style-Attribut aus app.js.
+   --on-brand ist seit dem 2026-07-28 FEST WEISS (Nutzerentscheidung „alle
+   Schriften/Logos weiß") und gilt für Beschriftung, Logo-Maske, Eckflagge
+   und die Pfeilfläche. Vorher rechnete app.js je Marke die kontraststärkere
+   Seite aus. Der Preis steht in Zahlen: auf foodwatch-Bernstein erreicht
+   Weiß nur 2,02, auf openPetition-Türkis 2,57, auf innn.it-Orange 2,92 –
+   alle drei unter den 3:1, die WCAG selbst für Großtext verlangt. Die
+   übrigen acht liegen zwischen 3,50 und 17,58. */
 [data-layout="magazin"] .acc-body--plats .plat{
   --brand:var(--accent); --on-brand:#ffffff;
   /* Beschriftung oben, Logo unten links (Nutzerwunsch). Das löst nebenbei

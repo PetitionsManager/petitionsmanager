@@ -256,11 +256,6 @@ window.PM_PLATFORMS = {
     color:     "#0f81e8",          /* Markenblau, offiziell aus 350.org Brand Toolkit */
     colorSoft: "#e6f0fc",          /* ~8 % Deckkraft über Weiß */
     colorDark: "#5ab0ff",          /* aufgehellt für dunklen Hintergrund */
-    /* Ausnahme von der gerechneten Schriftfarbe (app.js → platInk): auf diesem
-       Blau liegt Dunkel mit 4,31 rechnerisch knapp vorn, Weiß kommt auf 3,94.
-       Die Marke tritt aber durchgängig weiß auf blau auf, und auf der Kachel
-       steht ausschließlich WCAG-Großtext – dafür genügen 3:1. Nutzerwunsch. */
-    ink:       "#ffffff",
     logo: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="7" fill="#0f81e8"/><text x="12" y="16" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" font-weight="bold" fill="#fff">350</text></svg>',
     logoFile: "logos/threefifty.svg",  /* echtes Logo, einfarbig als CSS-Maske */
     logoAR:   2.67,              /* Breite/Höhe aus der viewBox */

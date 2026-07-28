@@ -44,8 +44,10 @@
    Flagge als Ecke oben rechts, gefüllter Pfeil auf den großen Kacheln;
    350.org mit weißer Schrift; Favoritenstern auf der Plattformseite;
    Wischen im Magazin repariert; im Archiv links = Wiederherstellen,
-   rechts = Unterschreiben (app.js/style.css/layouts.css/platforms.js) */
-var CACHE = "pm-cache-v14";
+   rechts = Unterschreiben (app.js/style.css/layouts.css/platforms.js)
+   v15: Bento durchgehend weiße Schrift und Logos, schmalerer Spaltenabstand
+   (app.js/layouts.css/platforms.js) */
+var CACHE = "pm-cache-v15";
 /* Versionsunabhängig – überlebt das Hochzählen von CACHE. Die Zahl dahinter
    NUR hochsetzen, wenn sich die Paketnummerierung selbst ändert (dann stimmen
    die alten Inhalte nicht mehr zur Nummer und die Bibliothek muss weg). */
