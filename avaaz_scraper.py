@@ -215,6 +215,32 @@ def _unq(entry: str) -> tuple[str, str]:
     return slug, (kind or "petition")
 
 
+# Pfade, die im Archiv als vermeintliche Slugs auftauchen, aber Technik sind.
+ARCHIVE_JUNK = {"admin", "api", "contact", "create", "css", "event", "front",
+                "gtm", "images", "index", "js", "privacy", "static", "v3"}
+
+
+def _drop_truncations(slugs: list[str]) -> list[str]:
+    """Abgeschnittene URL-Varianten aussortieren.
+
+    Das Archiv hat viele Links aus HTML-Seiten mitgeschnitten, in denen die URL
+    umbrochen oder gekürzt war. Dadurch stehen Ketten wie
+    ``AKW_Cattenom_abschalten_Kein_`` / ``…_Fukushima_2_im`` / ``…_im_Herzen_Europas``
+    nebeneinander – nur die längste ist echt, der Rest liefert 404.
+
+    Regel: Ist ein Slug echtes Präfix eines anderen, fliegt der kürzere raus.
+    In sortierter Reihenfolge genügt der Blick auf den direkten Nachfolger:
+    liegt zwischen ``s`` und einer Verlängerung von ``s`` ein weiterer Eintrag,
+    beginnt auch der zwangsläufig mit ``s``.
+
+    Der seltene Fehlerfall – zwei echte Petitionen, deren Titel exakt
+    ineinander stecken – kostet höchstens einen Eintrag, und der kommt über die
+    normale Entdeckung wieder rein, sobald Avaaz ihn verlinkt."""
+    slugs = sorted(slugs)
+    return [s for i, s in enumerate(slugs)
+            if not (i + 1 < len(slugs) and slugs[i + 1].startswith(s))]
+
+
 def archive_candidates(fetcher: core.Fetcher) -> list[str]:
     """Warteschlangen-Einträge aus dem Internet Archive (Petitionen + Kampagnen)."""
     out: list[str] = []
@@ -224,9 +250,12 @@ def archive_candidates(fetcher: core.Fetcher) -> list[str]:
         (f"{BASE_URL}/campaign/de/", CAMPAIGN_HREF_RE, "campaign",
          NON_CAMPAIGN_SLUGS, "Kampagnen-Slugs"),
     ):
-        for slug in core.wayback_slugs(fetcher, prefix, pattern, label=label):
-            if slug not in skip:
-                out.append(_q(kind, slug))
+        roh = core.wayback_slugs(fetcher, prefix, pattern, label=label)
+        sauber = [s for s in _drop_truncations(roh)
+                  if s not in skip and s.lower() not in ARCHIVE_JUNK]
+        log(f"  {label}: {len(roh)} → {len(sauber)} nach Abzug von "
+            f"Kappungen und Technikpfaden.")
+        out.extend(_q(kind, s) for s in sauber)
     return out
 
 
@@ -511,13 +540,20 @@ def run(args) -> None:
 
     # --- Archiv-Kandidaten -------------------------------------------------
     if getattr(args, "archive", False):
-        bekannt = set(arch_todo) | set(arch_dead) | {
-            _q(r.get("kind", "petition"), s) for s, r in store.items()}
-        neu = [e for e in archive_candidates(fetcher) if e not in bekannt]
-        arch_todo.extend(neu)
-        log(f"Archiv: {len(neu)} neue Kandidaten eingereiht "
-            f"({len(arch_todo)} offen, {len(arch_dead)} bereits als weg bekannt).")
-        save()
+        kandidaten = archive_candidates(fetcher)
+        if kandidaten:
+            # Neu aufbauen statt anhängen: so verschwinden Altlasten aus
+            # früheren, noch ungefilterten Läufen von selbst wieder.
+            erledigt = set(arch_dead) | {
+                _q(r.get("kind", "petition"), s) for s, r in store.items()}
+            vorher = len(arch_todo)
+            arch_todo[:] = [e for e in kandidaten if e not in erledigt]
+            log(f"Archiv: Warteschlange neu aufgebaut – {len(arch_todo)} offen "
+                f"(vorher {vorher}; {len(arch_dead)} bereits als weg bekannt).")
+            save()
+        else:
+            log("Archiv: keine Kandidaten erhalten (Abfrage fehlgeschlagen?) – "
+                "Warteschlange unverändert.")
 
     batch = int(getattr(args, "archive_batch", core.ARCHIVE_BATCH) or 0)
     if args.limit:
@@ -583,7 +619,9 @@ PLATFORM = Platform(
     openness=2,
     openness_note="Eingeschränkt: keine öffentliche Gesamtliste (nur ~5-10 "
                   "kuratierte/beliebte/neue), Zähler nur via Stats-JSON, "
-                  "Cloudflare blockt Nicht-Browser-Clients.",
+                  "Cloudflare blockt Nicht-Browser-Clients. Der Altbestand "
+                  "kommt über das Internet Archive herein (--archive), "
+                  "portionsweise über mehrere Läufe.",
     name="Avaaz",
     eyebrow="Avaaz · Bürgerpetitionen & Kampagnen (deutsch)",
     source_url="https://secure.avaaz.org/community_petitions/de/",
