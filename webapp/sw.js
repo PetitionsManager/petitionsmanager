@@ -34,8 +34,11 @@
    v11: Vorschaubild wird beim Aufklappen nicht mehr beschnitten (Höhe folgt
    dem Seitenverhältnis) und wächst weich, Bedienfeld aufgeräumt, .chip-
    Kollision zwischen Bedienfeld und Onboarding behoben, echte Kontaktadresse
-   (app.js/style.css) */
-var CACHE = "pm-cache-v11";
+   (app.js/style.css)
+   v12: Wortmarke führt zurück zur Übersicht (index.html: <div> → <button>),
+   Aufnahmekodex als eigener Abschnitt unter „Unterstütze PetitionsManager"
+   (index.html/app.js/style.css) */
+var CACHE = "pm-cache-v12";
 /* Versionsunabhängig – überlebt das Hochzählen von CACHE. Die Zahl dahinter
    NUR hochsetzen, wenn sich die Paketnummerierung selbst ändert (dann stimmen
    die alten Inhalte nicht mehr zur Nummer und die Bibliothek muss weg). */
