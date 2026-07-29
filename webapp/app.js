@@ -2059,12 +2059,14 @@
       var brand = platColor(p.key);
       var opt = el('<div class="opt' + (p.live ? "" : " disabled") + '"' +
         (brand ? ' style="--brand:' + esc(brand) + '"' : "") + ">" +
-        platLogo(p.key, p.name) +
+        /* Logo NACH der Beschriftung. Das ist zugleich die bessere Lesefolge
+           für Screenreader: erst der Name, dann „Logo <Name>". */
         '<div class="opt__body"><div class="opt__name">' + esc(p.name) +
           '<span class="flag">' + finfo.flag + '</span></div>' +
         '<div class="opt__meta">' + (p.live
           ? finfo.name + " · " + nf.format(p.online) + " Petitionen"
           : finfo.name + " · in Vorbereitung") + '</div></div>' +
+        platLogo(p.key, p.name) +
         '<button class="favbtn' + (fav ? " on" : "") + '"' +
           (p.live ? "" : " disabled") + ' aria-label="Als Favorit markieren">' +
           '<i class="' + (fav ? "fa-solid" : "fa-regular") + ' fa-star"></i></button>' +
