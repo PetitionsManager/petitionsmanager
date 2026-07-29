@@ -50,22 +50,62 @@ jobs:
           restore-keys: |
             petition-stores-
 
+      # Gemeinsame Frist für die beiden langen Schritte. Das Job-Limit liegt bei
+      # 350 min; die letzten 50 min gehören fest publish.py und dem Pages-Deploy.
+      # Vorher hatte jeder Schritt sein eigenes Budget – am 29.7.26 fraß das
+      # Scrapen allein 289 min, das Change.org-Budget von 4 h kam nie zum Tragen,
+      # der Job lief ins Job-Limit und wurde MITTEN im Lauf abgeschossen. Folge:
+      # publish.py und der Pages-Deploy wurden übersprungen, der ganze Tag ohne
+      # Veröffentlichung – obwohl das Scrapen erfolgreich war. Mit einer
+      # gemeinsamen Frist teilen sich beide Schritte den Rest: ist das Scrapen
+      # schnell (28.7.: 42 min), bleiben dem Aufholen über 4 h.
+      - name: Zeitrahmen setzen
+        run: echo "FRIST=$(( $(date +%s) + 300*60 ))" >> "$GITHUB_ENV"
+
       - name: Health-Check der Entdeckungsquellen (nicht blockierend)
         continue-on-error: true
         run: python3 monitor.py --check
 
       - name: Scrapen (alle Live-Plattformen; überspringt <24 h Geprüftes)
-        run: python3 monitor.py
-
-      - name: "Change.org aufholen (500/Lauf, wiederholt bis vollständig; Budget ~4 h)"
         run: |
-          deadline=$(( $(date +%s) + 14400 ))
+          rest=$(( FRIST - $(date +%s) ))
+          # Bewusst als if: GitHub führt run-Blöcke mit "bash -e" aus, und
+          # ein "[ … ] && x=1" mit falscher Bedingung liefert 1 – das würde
+          # den Schritt an dieser Stelle abbrechen.
+          if [ "$rest" -lt 60 ]; then rest=60; fi
+          set +e
+          # SIGINT statt SIGKILL: die Scraper schreiben ihren Zustand laufend
+          # über eine temporäre Datei, ein sauberer Abbruch verliert nur den
+          # angefangenen Block.
+          timeout --signal=INT "$rest" python3 monitor.py
+          code=$?
+          set -e
+          # 124/130 = Frist erreicht; alles andere ist ein echter Fehler und
+          # muss den Lauf weiterhin rot färben.
+          if [ $code -eq 124 ] || [ $code -eq 130 ]; then
+            echo "::warning::Zeitrahmen beim Scrapen erreicht – Rest folgt beim nächsten Lauf."
+          elif [ $code -ne 0 ]; then
+            exit $code
+          fi
+
+      - name: "Change.org aufholen (500/Lauf, wiederholt bis zur gemeinsamen Frist)"
+        run: |
           while ! python3 ci_changeorg_done.py; do
-            if [ "$(date +%s)" -ge "$deadline" ]; then
-              echo "Zeitbudget erreicht – Rest folgt beim nächsten Lauf."
+            if [ "$(date +%s)" -ge "$FRIST" ]; then
+              echo "::warning::Zeitrahmen erreicht – Change.org-Rest folgt beim nächsten Lauf."
               break
             fi
-            python3 monitor.py --platform changeorg
+            rest=$(( FRIST - $(date +%s) ))
+            set +e
+            timeout --signal=INT "$rest" python3 monitor.py --platform changeorg
+            code=$?
+            set -e
+            if [ $code -eq 124 ] || [ $code -eq 130 ]; then
+              echo "::warning::Zeitrahmen erreicht – Change.org-Rest folgt beim nächsten Lauf."
+              break
+            elif [ $code -ne 0 ]; then
+              exit $code
+            fi
           done
 
       - name: Web-App-Daten erzeugen
