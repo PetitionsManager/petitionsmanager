@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Nachtvariante des App-Themas.
+
+  Sie ist die Voraussetzung dafür, dass die Web-App im WebView überhaupt
+  erfährt, dass das Gerät dunkel eingestellt ist: WebView leitet
+  `prefers-color-scheme` NICHT von der Systemeinstellung ab, sondern vom Thema
+  der App (android:isLightTheme). Mit einem fest hellen Thema meldet es
+  dauerhaft „hell", und das automatische Farbdesign der App blieb wirkungslos.
+
+  Diese Datei greift über den Ressourcen-Qualifier -night von allein, sobald
+  das Gerät in den Dunkelmodus wechselt — das funktioniert ab API 24 und
+  braucht kein DayNight-Thema aus AppCompat (die Activity erbt von
+  android.app.Activity, nicht von AppCompatActivity).
+
+  Zweite Hälfte der Reparatur: setAlgorithmicDarkeningAllowed(true) in
+  MainActivity.java. Ohne beides zusammen bleibt es hell.
+-->
+<resources>
+    <style name="AppTheme" parent="@android:style/Theme.Material.NoActionBar">
+        <item name="android:statusBarColor">#1C5D50</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

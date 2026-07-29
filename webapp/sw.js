@@ -55,8 +55,12 @@
    (app.js/layouts.css/style.css)
    v18: Logo-Register – Monogramme raus, alle elf Logos flächengleich statt
    höhengleich, vier Farbvarianten, Markenfarbe im dunklen Thema
-   (app.js/style.css/theme.css/layouts.css/platforms.js) */
-var CACHE = "pm-cache-v18";
+   (app.js/style.css/theme.css/layouts.css/platforms.js)
+   v19: Datenquelle „Automatisch" – die App prüft beim Start, ob die
+   tagesaktuellen Daten auf GitHub Pages erreichbar und neuer sind als die
+   mitgelieferten, und nimmt sonst das App-Paket. Neue Vorgabe für alle, die
+   nichts eingestellt haben (app.js) */
+var CACHE = "pm-cache-v19";
 /* Versionsunabhängig – überlebt das Hochzählen von CACHE. Die Zahl dahinter
    NUR hochsetzen, wenn sich die Paketnummerierung selbst ändert (dann stimmen
    die alten Inhalte nicht mehr zur Nummer und die Bibliothek muss weg).

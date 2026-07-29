@@ -18,7 +18,9 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
+import androidx.webkit.WebSettingsCompat;
 import androidx.webkit.WebViewAssetLoader;
+import androidx.webkit.WebViewFeature;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -57,6 +59,26 @@ public class MainActivity extends Activity {
         s.setUseWideViewPort(true);
         s.setLoadWithOverviewMode(true);
         s.setSupportZoom(false);
+
+        /* Dunkelmodus an die Web-App durchreichen.
+         *
+         * Ohne das meldet WebView `prefers-color-scheme` dauerhaft als "hell",
+         * ganz unabhängig davon, wie das Gerät eingestellt ist — das
+         * Farbdesign "Automatisch" der App blieb deshalb in der APK wirkungslos,
+         * obwohl es im Browser nachweislich funktioniert.
+         *
+         * Zwei Teile, die nur gemeinsam wirken:
+         *   1. hier das Zulassen (ab androidx.webkit; targetSdk 34 verlangt
+         *      diesen Aufruf, setForceDark ist dort schon außer Betrieb),
+         *   2. res/values-night/themes.xml, damit die App im Dunkelmodus
+         *      überhaupt ein dunkles Thema hat — daran liest WebView ab.
+         *
+         * Algorithmisches Aufhellen/Abdunkeln fasst unsere Seiten nicht an:
+         * die Web-App bringt eine eigene Dunkelregel mit, und WebView
+         * überlässt Inhalten mit eigener Unterstützung die Gestaltung. */
+        if (WebViewFeature.isFeatureSupported(WebViewFeature.ALGORITHMIC_DARKENING)) {
+            WebSettingsCompat.setAlgorithmicDarkeningAllowed(s, true);
+        }
 
         // Export: JS ruft window.AndroidBackup.saveBackup(name, json).
         web.addJavascriptInterface(new BackupBridge(), "AndroidBackup");

@@ -1,18 +1,43 @@
 "use strict";
 /* Petitionen — Mobile-App (entkoppelt vom Server; lädt statische JSON-Daten).
-   Datenquelle konfigurierbar über localStorage "dataBase" (Default ./data). */
+   Datenquelle über localStorage "dataBase": "auto" (Vorgabe), "./data" für die
+   mitgelieferten Daten oder eine eigene URL. Was "auto" wählt, entscheidet
+   resolveBase() beim Start. */
 
 (function () {
   var LS = window.localStorage;
-  var DEFAULT_BASE = "./data";
+  var BUNDLED_BASE = "./data";        // im App-Paket bzw. neben index.html
+  /* Tagesaktueller Stand aus dem GitHub-Actions-Lauf. Muss absolut sein: in
+     der APK läuft die Seite unter appassets.androidplatform.net, ein relativer
+     Pfad zeigt dort ins App-Paket und käme nie über den Bauzeitpunkt hinaus.
+     GitHub Pages schickt "access-control-allow-origin: *", der Abruf von
+     fremder Herkunft ist also erlaubt (am 29.7.26 nachgemessen). */
+  var LIVE_BASE = "https://petitionsmanager.github.io/petitionsmanager/data";
+  var AUTO = "auto";
+  var DEFAULT_BASE = AUTO;
+  /* Wartezeit für die Erreichbarkeitsprüfung. Bewusst knapp: sie sitzt vor dem
+     ersten Bild, und wer im Funkloch startet, soll nicht warten müssen —
+     die mitgelieferten Daten liegen ja bereit. */
+  var LIVE_PROBE_MS = 6000;
   // Wie viele Karten eine Liste höchstens auf einmal rendert. Der Bundestag
   // bringt allein 7.845 beendete Petitionen mit; ungedeckelt wächst die Seite
   // auf über 180.000 DOM-Knoten und braucht schon am PC ~2 s zum Aufbau.
   var LIST_MAX = 300;
+  /* Alle Schlüssel weggeklickter Hinweise an EINER Stelle — hier eintragen,
+     sobald ein neuer Hinweis dazukommt. Vorher stand "swipeHintDismissed"
+     dreimal einzeln im Code (Zurücksetzen, BACKUP_KEYS, wipeEverything). Als
+     "favTipDismissed" für den Favoriten-Hinweis dazukam, wurde es an keiner
+     dieser Stellen nachgetragen: der Hinweis ließ sich nicht zurückholen,
+     fehlte in der Sicherung und überlebte sogar „alles löschen". */
+  var HINT_KEYS = ["swipeHintDismissed", "favTipDismissed"];
   var nf = new Intl.NumberFormat("de-DE");
 
   var state = {
-    base: LS.getItem("dataBase") || DEFAULT_BASE,
+    baseSetting: LS.getItem("dataBase") || DEFAULT_BASE,  // "auto" | "./data" | URL
+    base: BUNDLED_BASE,   // tatsächlich benutzte Quelle; resolveBase() setzt sie
+    baseAuto: null,       // bei "auto": "live" | "bundled"
+    baseWhy: null,        // Kurzbegründung für die Zeile in den Einstellungen
+    lastRefresh: null,    // ISO-Zeit des letzten „Daten aktualisieren"
     manifest: null,
     dataCache: {},        // key -> array of petitions
     tab: "liste",
@@ -294,21 +319,125 @@
   }
 
   // ---- Daten laden -----------------------------------------------------------
-  function fetchJSON(url) {
-    return fetch(url, { cache: "no-store" }).then(function (r) {
+  function fetchJSON(url, cacheMode) {
+    return fetch(url, { cache: cacheMode || "no-store" }).then(function (r) {
       if (!r.ok) throw new Error("HTTP " + r.status); return r.json();
     });
   }
+  function isRemote(base) { return /^https?:/i.test(base); }
+  /* Eigene Dateien mit "no-store", sonst hält der HTTP-Cache alte Stände fest
+     (das hat am 28.7.26 dreimal eine veraltete app.js vorgetäuscht). Für die
+     Live-Quelle dagegen ausdrücklich der normale Cache: die Listen sind
+     zusammen ~14 MB, die dürfen nicht bei jedem Start neu über die
+     Mobilfunkverbindung kommen. Pages schickt max-age=600 und einen ETag, die
+     Daten wechseln ohnehin nur einmal täglich. */
+  function fetchFrom(base, path) {
+    return fetchJSON(base + "/" + path,
+                     isRemote(base) ? "default" : "no-store");
+  }
+  /* Holt eine Datendatei und fällt auf die mitgelieferten Daten zurück, wenn
+     die Live-Quelle unterwegs wegbricht — Verbindung verloren, Pages-Ausfall.
+     Der Service Worker kann das nicht abfangen: sein fetch-Handler lässt
+     fremde Herkunft absichtlich unangetastet durch, cached davon also nichts.
+
+     Grenze des Rückfalls, bewusst so gelassen: die Paketnummer eines Volltexts
+     (r.tc) stammt aus der Liste, die geladen wurde. Live- und Paketstand
+     vergeben Nummern unabhängig voneinander — CI und lokaler Lauf kennen nicht
+     dieselben Petitionen (am 29.7.26: 1.895 gegen 1.865 bei WeAct). Für eine
+     erst kürzlich hinzugekommene Petition kann die Nummer daher auseinander
+     laufen. Schlimmster Fall ist kein falscher Text, sondern keiner: die Pakete
+     sind nach URL geschlüsselt, ein Fehlgriff findet den Eintrag einfach nicht
+     und die Karte zeigt „kein ausführlicher Text". Das ist der Preis dafür,
+     dass die App bei Verbindungsverlust überhaupt weiterläuft. */
+  function fetchData(path) {
+    return fetchFrom(state.base, path).catch(function (err) {
+      if (state.base === BUNDLED_BASE) throw err;
+      return fetchFrom(BUNDLED_BASE, path);
+    });
+  }
   function loadManifest() {
-    return fetchJSON(state.base + "/manifest.json").then(function (m) {
+    return fetchData("manifest.json").then(function (m) {
       state.manifest = m; return m;
     });
   }
   function loadPlatformData(key) {
     if (state.dataCache[key]) return Promise.resolve(state.dataCache[key]);
-    return fetchJSON(state.base + "/" + key + ".json").then(function (arr) {
+    return fetchData(key + ".json").then(function (arr) {
       state.dataCache[key] = arr; return arr;
     });
+  }
+
+  /* Jüngster Scrape-Zeitpunkt eines Manifests, in Millisekunden.
+     Date.parse statt Textvergleich ist Pflicht: die Zeitstempel tragen
+     unterschiedliche Zonen ("…+00:00" aus der CI, "…-06:00" vom lokalen Lauf),
+     als Zeichenketten verglichen käme die falsche Reihenfolge heraus. */
+  function manifestStamp(m) {
+    var best = 0;
+    ((m && m.platforms) || []).forEach(function (p) {
+      var t = Date.parse(p.generated_at || "");
+      if (t && t > best) best = t;
+    });
+    return best;
+  }
+  function withTimeout(p, ms) {
+    return new Promise(function (resolve, reject) {
+      var fertig = false;
+      var t = setTimeout(function () {
+        if (!fertig) { fertig = true; reject(new Error("Zeitüberschreitung")); }
+      }, ms);
+      p.then(function (v) {
+        if (!fertig) { fertig = true; clearTimeout(t); resolve(v); }
+      }, function (e) {
+        if (!fertig) { fertig = true; clearTimeout(t); reject(e); }
+      });
+    });
+  }
+  /* Bei "auto": Live-Daten nehmen, wenn sie erreichbar UND nicht älter sind als
+     die mitgelieferten. Der Vergleich ist nötig, weil beide Stände auseinander
+     laufen können — die APK bringt einen Stand vom Bauzeitpunkt mit, der
+     CI-Lauf veröffentlicht täglich neu, kann aber auch mal ausfallen (am
+     29.7.26 lief er ins Job-Limit und veröffentlichte nichts). Scheitert die
+     Prüfung, bleibt es beim App-Paket; die App startet also auch im Flugmodus. */
+  function resolveBase() {
+    if (state.baseSetting !== AUTO) {
+      state.base = state.baseSetting;
+      state.baseAuto = null; state.baseWhy = null;
+      return Promise.resolve();
+    }
+    state.base = BUNDLED_BASE;      // Rückfall, bis die Prüfung etwas Besseres weiß
+    var eigen = fetchFrom(BUNDLED_BASE, "manifest.json")
+                  .catch(function () { return null; });
+    var live = withTimeout(fetchFrom(LIVE_BASE, "manifest.json"), LIVE_PROBE_MS)
+                  .catch(function () { return null; });
+    return Promise.all([live, eigen]).then(function (r) {
+      var mLive = r[0], mEigen = r[1];
+      if (!mLive) {
+        state.baseAuto = "bundled";
+        state.baseWhy = mEigen ? "Live-Daten nicht erreichbar" : "Keine Verbindung";
+        return;
+      }
+      if (mEigen && manifestStamp(mEigen) > manifestStamp(mLive)) {
+        state.baseAuto = "bundled";
+        state.baseWhy = "Mitgelieferte Daten sind neuer";
+        return;
+      }
+      state.base = LIVE_BASE;
+      state.baseAuto = "live";
+      state.baseWhy = "Tagesaktuell von GitHub Pages";
+    });
+  }
+  /* Quelle gewechselt: alles Geladene verwerfen und neu auflösen. textChunks
+     MUSS mit weg, sonst behält die App die Volltexte der alten Quelle — das
+     war in der Prompt-Variante vorher ein stiller Fehler. Bewusst nicht boot():
+     das hängt bei jedem Aufruf erneut Scroll- und matchMedia-Horcher an. */
+  function reloadData() {
+    state.dataCache = {}; state.manifest = null; textChunks = {};
+    content.innerHTML = '<div class="empty">Lade Daten …</div>';
+    return resolveBase().then(loadManifest).then(function () { render(); })
+      .catch(function () {
+        content.innerHTML = '<div class="empty">Daten konnten nicht geladen ' +
+          'werden.<br>Prüfe die <b>Datenquelle</b> in den Einstellungen.</div>';
+      });
   }
 
   // ---- Rendering: Liste ------------------------------------------------------
@@ -920,7 +1049,7 @@
   function loadTextChunk(key, n) {
     var id = key + "." + n;
     if (!textChunks[id])
-      textChunks[id] = fetchJSON(state.base + "/" + key + ".t" + n + ".json");
+      textChunks[id] = fetchData(key + ".t" + n + ".json");
     return textChunks[id];
   }
 
@@ -1953,29 +2082,68 @@
     content.appendChild(setSection(T("settings.sections.data", "Daten")));
     var refreshRow = setRow("fa-arrows-rotate",
       T("settings.refresh", "Daten aktualisieren"),
-      T("settings.refreshHint", "Petitionen neu von der Quelle laden"),
+      state.lastRefresh
+        ? "Aktualisiert am " + fmtDateTime(state.lastRefresh) + " · Quelle: " +
+          (state.baseAuto === "live" ? "live" : "mitgeliefert")
+        : T("settings.refreshHint", "Petitionen neu von der Quelle laden"),
       { end: '<i class="fa-solid fa-chevron-right srow__go"></i>' });
     refreshRow.addEventListener("click", function () {
       var sub = refreshRow.querySelector(".srow__s");
       sub.textContent = "Wird geladen …";
-      state.dataCache = {};
-      loadManifest().then(function () {
-        sub.textContent = "Aktualisiert am " + fmtDateTime(new Date().toISOString());
+      // Auch die Quelle neu bestimmen: wer vorher im Funkloch startete, sitzt
+      // sonst bis zum nächsten App-Start auf den mitgelieferten Daten fest.
+      state.dataCache = {}; textChunks = {};
+      resolveBase().then(loadManifest).then(function () {
+        /* Die Listen hängen an state.dataCache, nicht am Manifest. Das Leeren
+           allein macht nichts sichtbar — die Petitionen kommen erst beim
+           nächsten Zeichnen neu. Ohne das hier behauptete die Zeile
+           „aktualisiert", während die Ansicht unverändert alt blieb.
+           Das Ergebnis geht in den Zustand, nicht in dieses DOM-Element:
+           render() ersetzt den Inhalt, danach ist `sub` nicht mehr im
+           Dokument und ein Schreiben darauf wäre unsichtbar. */
+        state.lastRefresh = new Date().toISOString();
+        render();
       }).catch(function () { sub.textContent = "Nicht erreichbar."; });
     });
     content.appendChild(refreshRow);
 
+    content.appendChild(el('<div class="srow__lbl">' +
+      esc(T("settings.source", "Datenquelle")) + "</div>"));
+    content.appendChild(segControl("Datenquelle",
+      [[AUTO, T("settings.srcAuto", "Automatisch"), "fa-wand-magic-sparkles"],
+       [BUNDLED_BASE, T("settings.srcBundled", "Mitgeliefert"), "fa-box-archive"],
+       [LIVE_BASE, T("settings.srcLive", "Live"), "fa-cloud-arrow-down"]],
+      state.baseSetting,
+      function (v) {
+        state.baseSetting = v;
+        LS.setItem("dataBase", v);
+        reloadData();     // zeichnet die Einstellungen samt Hinweis neu
+      }));
+    content.appendChild(el('<div class="srow__note">' + esc(
+      state.baseSetting === AUTO
+        ? "Aktiv: " + (state.baseAuto === "live" ? "Live" : "Mitgeliefert") +
+          (state.baseWhy ? " – " + state.baseWhy : "") +
+          ". „Automatisch“ nimmt die tagesaktuellen Daten, wenn sie erreichbar " +
+          "und neuer sind als die mitgelieferten."
+        : state.baseSetting === BUNDLED_BASE
+          ? "Nur die Daten aus dem App-Paket. Sie veralten, bis eine neue " +
+            "Fassung der App kommt."
+          : "Immer aus dem Netz. Ohne Verbindung greift die App auf die " +
+            "mitgelieferten Daten zurück."
+      ) + "</div>"));
     content.appendChild(setRow("fa-database",
-      T("settings.source", "Datenquelle"), state.base,
+      T("settings.sourceCustom", "Eigene Quelle"),
+      isRemote(state.baseSetting) && state.baseSetting !== LIVE_BASE
+        ? state.baseSetting
+        : T("settings.sourceCustomHint", "Für Tests: eigener Basis-Ordner"),
       { end: '<i class="fa-solid fa-chevron-right srow__go"></i>',
         onClick: function () {
           var v = prompt("URL der Datenquelle (Basis-Ordner mit manifest.json):",
                          state.base);
           if (v == null) return;
-          state.base = v.trim() || DEFAULT_BASE;
-          LS.setItem("dataBase", state.base);
-          state.dataCache = {}; state.manifest = null;
-          boot();
+          state.baseSetting = v.trim() || DEFAULT_BASE;
+          LS.setItem("dataBase", state.baseSetting);
+          reloadData();
         } }));
 
     content.appendChild(setRow("fa-circle-info",
@@ -2000,11 +2168,15 @@
       T("reset.hintsHint", "Ausgeblendete Hinweise wieder anzeigen"),
       { end: '<i class="fa-solid fa-arrow-rotate-left srow__go"></i>' });
     hintRow.addEventListener("click", function () {
-      LS.removeItem("swipeHintDismissed");
+      HINT_KEYS.forEach(function (k) { LS.removeItem(k); });
       hintRow.classList.add("srow--done");
       hintRow.querySelector(".srow__s").textContent =
         "Zurückgesetzt – die Hinweise erscheinen wieder.";
       hintRow.querySelector(".srow__go").className = "fa-solid fa-check srow__go";
+      /* Neu zeichnen, damit der Favoriten-Hinweis sofort wieder auftaucht: er
+         steht auf DIESER Seite, ohne Neuzeichnen bliebe die Rückmeldung
+         behauptet statt sichtbar. Verzögert, damit der Haken kurz zu sehen ist. */
+      setTimeout(render, 900);
     });
     content.appendChild(hintRow);
 
@@ -2070,7 +2242,7 @@
     state.signed = new Map();
     state.archived = new Set();
     state.prefs = defaultPrefs();
-    state.base = DEFAULT_BASE;
+    state.baseSetting = DEFAULT_BASE;   // zurück auf "auto"
     savePrefs();
     applyTheme();
     applyLayout();
@@ -2176,12 +2348,44 @@
     var testBtn = el('<button class="btn-secondary" type="button">' +
       '<i class="fa-regular fa-bell"></i> ' +
       esc(T("notify.testBtn", "Testbenachrichtigung")) + "</button>");
+    /* Rückmeldung neben der Schaltfläche. Vorher gab es keine: schlug die
+       Meldung fehl — kein Recht erteilt, WebView ohne Meldungs-Schnittstelle,
+       Android-Konstruktorfehler —, passierte sichtbar gar nichts und man
+       konnte nicht unterscheiden, ob die App kaputt ist oder das Gerät. */
+    var testMsg = el('<div class="srow__note"></div>');
+    function sagen(text) { testMsg.textContent = text; }
     testBtn.addEventListener("click", function () {
-      showNotification(T("notify.sampleTitle", "PetitionsManager"),
-        fill(T("notify.sampleBodyNew", "{n} neue Petitionen warten auf dich."),
-             { n: countNew() }));
+      if (!notifySupported()) {
+        sagen("Diese Umgebung kennt keine Benachrichtigungen. In der " +
+              "Android-App ist das bekannt – dort fehlt die Schnittstelle im " +
+              "WebView, die Erinnerung braucht dafür einen eigenen Einbau.");
+        return;
+      }
+      var senden = function () {
+        showNotification(T("notify.sampleTitle", "PetitionsManager"),
+          fill(T("notify.sampleBodyNew", "{n} neue Petitionen warten auf dich."),
+               { n: countNew() })).then(function (ok) {
+          sagen(ok ? "Gesendet. Erscheint sie nicht, sind Benachrichtigungen " +
+                     "für den Browser in den Systemeinstellungen abgeschaltet."
+                   : "Konnte nicht gesendet werden.");
+        });
+      };
+      if (Notification.permission === "granted") { senden(); return; }
+      if (Notification.permission === "denied") {
+        sagen("Du hast Benachrichtigungen für diese Seite abgelehnt. Das lässt " +
+              "sich nur in den Einstellungen des Browsers zurücknehmen.");
+        return;
+      }
+      // "default" – vorher scheiterte der Test hier stumm, weil das Recht nur
+      // beim Einschalten des Schalters erfragt wurde.
+      sagen("Warte auf deine Erlaubnis …");
+      Notification.requestPermission().then(function (perm) {
+        if (perm === "granted") senden();
+        else sagen("Ohne Erlaubnis keine Benachrichtigung.");
+      });
     });
     detail.appendChild(testBtn);
+    detail.appendChild(testMsg);
 
     detail.appendChild(el('<div class="srow__note">Hinweis: Die Meldung ' +
       "erscheint, sobald du die App nach der gewählten Uhrzeit das nächste " +
@@ -2201,13 +2405,31 @@
       .reduce(function (s, p) { return s + (p["new"] || 0); }, 0);
   }
 
+  /* Meldung anzeigen. Liefert ein Promise auf true/false.
+
+     Der Weg über den Service Worker ist NICHT bloß eine Absicherung, sondern
+     auf Android der einzige, der funktioniert: dort wirft `new Notification()`
+     einen TypeError ("Illegal constructor"), Meldungen müssen zwingend über
+     registration.showNotification() laufen. Vorher fing das try/catch den
+     Fehler ab und gab stillschweigend false zurück — die Schaltfläche tat
+     also am Telefon sichtbar nichts, ohne einen Grund zu nennen. */
   function showNotification(title, body) {
-    if (!notifySupported() || Notification.permission !== "granted") return false;
-    try {
-      new Notification(title, { body: body, icon: "icons/icon-192.png",
-                                tag: "petitionsmanager-daily" });
-      return true;
-    } catch (e) { return false; }
+    if (!notifySupported() || Notification.permission !== "granted")
+      return Promise.resolve(false);
+    var opt = { body: body, icon: "icons/icon-192.png",
+                badge: "icons/icon-192.png", tag: "petitionsmanager-daily" };
+    var viaSW = navigator.serviceWorker && navigator.serviceWorker.ready
+      ? navigator.serviceWorker.ready.then(function (reg) {
+          return reg.showNotification(title, opt).then(function () { return true; });
+        }).catch(function () { return null; })
+      : Promise.resolve(null);
+    return viaSW.then(function (ok) {
+      if (ok) return true;
+      try {                       // Rückfall für Desktop-Browser ohne SW
+        new Notification(title, opt);
+        return true;
+      } catch (e) { return false; }
+    });
   }
 
   // Prüft im Minutentakt, ob die gewählte Uhrzeit heute erreicht wurde.
@@ -2230,9 +2452,12 @@
         ? fill(T("notify.sampleBodyNew", "{n} neue Petitionen warten auf dich."),
                { n: fresh })
         : T("notify.sampleBodyNone", "Heute nichts Neues – schau gern trotzdem rein.");
-      if (showNotification(T("notify.sampleTitle", "PetitionsManager"), body)) {
-        n.lastDate = today; savePrefs();
-      }
+      // showNotification liefert jetzt ein Promise. Ein blankes `if` darauf wäre
+      // immer wahr und hätte den Tag als gemeldet abgehakt, auch wenn nichts kam.
+      showNotification(T("notify.sampleTitle", "PetitionsManager"), body)
+        .then(function (ok) {
+          if (ok) { n.lastDate = today; savePrefs(); }
+        });
     };
     notifyTimer = setInterval(tick, 60000);
     tick();
@@ -2250,8 +2475,8 @@
   // Alle vom Nutzer angepassten Einstellungen liegen im localStorage. Diese
   // Schlüssel werden gesichert/wiederhergestellt.
   var BACKUP_KEYS = ["enabledPlatforms", "favorites", "signedPetitions",
-                     "archivedPetitions", "swipeHintDismissed", "dataBase",
-                     "prefs"];
+                     "archivedPetitions", "dataBase",
+                     "prefs"].concat(HINT_KEYS);
 
   // Profilbild verkleinern, bevor es im localStorage landet (dort ist bei
   // ~5 MB Schluss – ein Kamerafoto würde den Speicher allein sprengen).
@@ -2340,7 +2565,7 @@
     var data = obj && obj.data;
     if (!data || typeof data !== "object")
       throw new Error("Keine gültige PetitionsManager-Sicherung.");
-    var oldBase = state.base;
+    var oldBase = state.baseSetting;
     BACKUP_KEYS.forEach(function (k) {
       if (Object.prototype.hasOwnProperty.call(data, k)) {
         if (data[k] === null || data[k] === "") LS.removeItem(k);
@@ -2352,7 +2577,7 @@
     state.favorites = loadFavorites();
     state.signed = loadSigned();
     state.archived = loadSet("archivedPetitions");
-    state.base = LS.getItem("dataBase") || DEFAULT_BASE;
+    state.baseSetting = LS.getItem("dataBase") || DEFAULT_BASE;
     state.prefs = loadPrefs();
     applyTheme();
     applyLayout();
@@ -2362,7 +2587,7 @@
       favoriten: state.favorites.size,
       unterschrieben: state.signed.size,
       archiviert: state.archived.size,
-      baseChanged: state.base !== oldBase
+      baseChanged: state.baseSetting !== oldBase
     };
   }
 
@@ -2371,9 +2596,10 @@
     reader.onload = function () {
       try {
         var stats = applyBackup(JSON.parse(reader.result));
-        if (stats.baseChanged) {           // Datenquelle geändert → neu laden
-          state.dataCache = {}; state.manifest = null;
-          loadManifest().then(function () { onDone(true, stats); })
+        if (stats.baseChanged) {           // Datenquelle geändert → neu auflösen
+          state.dataCache = {}; state.manifest = null; textChunks = {};
+          resolveBase().then(loadManifest)
+            .then(function () { onDone(true, stats); })
             .catch(function () { onDone(true, stats); });
         } else onDone(true, stats);
       } catch (e) { onDone(false, e.message); }
@@ -2862,7 +3088,8 @@
       updateTop();
     }
     render();   // zeigt "Lade Daten …"
-    loadManifest().then(function () {
+    // resolveBase() vor loadManifest(): erst danach steht fest, woher geladen wird.
+    resolveBase().then(loadManifest).then(function () {
       render();
       // Beim allerersten Start durch die Ersteinrichtung führen.
       if (!state.prefs.wizardDone) startWizard();
