@@ -1711,7 +1711,24 @@
       // gedeckelt: eifrig gerendert stünden allein beim Bundestag 7.845
       // beendete Karten dauerhaft im DOM, obwohl das Akkordion zu ist.
       function bottomSection(id, icon, label, items, stateKey, empty) {
-        var open = state[stateKey];
+        /* Liegt die Ziel-Petition in DIESEM Abschnitt, muss er aufgeklappt und
+           gefüllt werden. Sonst sucht der Sprung weiter unten in einem leeren
+           Akkordion, löscht die Absicht und die Navigation endet stumm auf der
+           Plattformübersicht. Genau das passierte bei unterschriebenen
+           Petitionen: die sind häufig längst beendet, liegen also unter
+           „Beendet" und nie in der aktiven Liste. */
+        var zielHier = false;
+        if (state.openPetitionUrl) {
+          var zi = items.findIndex(function (r) {
+            return r.url === state.openPetitionUrl; });
+          if (zi >= 0) {
+            zielHier = true;
+            // Nach vorne holen, damit sie innerhalb der ersten LIST_MAX landet.
+            if (zi > 0) items.unshift(items.splice(zi, 1)[0]);
+          }
+        }
+        if (zielHier) state[stateKey] = true;   // bleibt bei Filterwechsel offen
+        var open = state[stateKey] || zielHier;
         var sec = el('<section class="accordion langgroup bottomacc' +
           (open ? " open" : "") + '" id="' + id + '"></section>');
         var hd = el('<button class="acc-head"><span class="acc-title">' +
@@ -1750,12 +1767,18 @@
       bottomSection("pet-offline", "fa-circle-xmark", "Offline", offline,
         "offlineOpen", "Keine Offline-Petitionen.");
 
-      // Nach Navigation aus „Ähnliche Petitionen": Ziel aufklappen + hinscrollen.
+      /* Nach Navigation aus „Ähnliche Petitionen" oder aus den unterschriebenen
+         Petitionen: Ziel aufklappen + hinscrollen. Die Abfrage umfasst auch die
+         unteren Akkordeons, weil deren Abschnitte in listWrap hängen — sie
+         greift dort aber nur, wenn der Abschnitt vorher gefüllt wurde (siehe
+         zielHier in bottomSection). */
       if (state.openPetitionUrl) {
         var target = state.openPetitionUrl; state.openPetitionUrl = null;
         var pets = listWrap.querySelectorAll(".pet");
+        var gefunden = false;
         for (var pi = 0; pi < pets.length; pi++) {
           if (pets[pi].dataset.url === target) {
+            gefunden = true;
             var petEl = pets[pi];
             if (!petEl.classList.contains("open"))
               petEl.querySelector(".pet__head").click();
@@ -1767,6 +1790,14 @@
             break;
           }
         }
+        /* Nichts gefunden heißt: die Petition steht nicht mehr in den Daten
+           dieser Plattform — etwa weil ihr Slug gewechselt hat. Das muss man
+           sehen; ein Klick ohne jede Wirkung ist als Fehler nicht erkennbar
+           (gleiche Überlegung wie bei jumpBtn). */
+        if (!gefunden)
+          listWrap.insertBefore(el('<div class="count-note">Diese Petition ' +
+            "steht nicht mehr in den Daten dieser Plattform. Vermutlich hat " +
+            "sich ihre Adresse geändert.</div>"), listWrap.firstChild);
       }
     }
 
