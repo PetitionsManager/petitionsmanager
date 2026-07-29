@@ -3,6 +3,7 @@
     "_README": "Petitions-Monitor. Datensaetze werden aktualisiert, nie ueberschrieben.",
     "fields": {
       "slug": "ID/Schluessel aus der URL",
+      "merged_slugs": "frühere Schluessel, die auf diesen umgeleitet wurden",
       "url": "kanonische Petitions-URL",
       "petition_id": "interne numerische ID der Plattform oder null",
       "title": "Titel",
@@ -10,6 +11,7 @@
       "recipient": "Adressat",
       "category": "Thema/Kategorie (falls die Plattform Kategorien hat)",
       "category_url": "Link zur Kategorieseite",
+      "tags": "bis zu 10 aus dem Text abgeleitete Schlagwörter (zum Verlinken)",
       "summary": "Kurzbeschreibung (og:description)",
       "description_full": "komplette, gegliederte Beschreibung als bereinigtes HTML",
       "image_url": "Petitionsbild",
@@ -19,15 +21,17 @@
       "updates": "Neuigkeiten [{timestamp,text}]",
       "goal": "aktuelles Unterschriften-Ziel (falls die Plattform eines zeigt)",
       "start_date": "Startdatum (plattformabhängig ermittelt)",
-      "status": "online | offline",
+      "deadline": "Ende der Mitzeichnungs-/Unterschriftenfrist oder null",
+      "closed": "true = nicht mehr mitzeichenbar (Frist abgelaufen/archiviert)",
+      "phase": "Verfahrensstand der Plattform (z. B. mitzeichnung|beendet|archiv)",
+      "status": "online | offline (erreichbar die Seite noch?)",
       "first_seen": "erstmals gescrapt (unveraenderlich)",
       "last_seen": "zuletzt online",
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-07-13T13:36:22-06:00",
-    "petition_count": 261,
-    "new_petitions_last_run": []
+    "generated_at": "2026-07-29T16:15:05-06:00",
+    "petition_count": 261
   },
   "2026-06-StopVW-Israel-Airshield-petition-DE": {
     "slug": "2026-06-StopVW-Israel-Airshield-petition-DE",
@@ -60,6 +64,10 @@
       {
         "checked_at": "2026-07-13T13:20:39-06:00",
         "count": 76440
+      },
+      {
+        "checked_at": "2026-07-29T16:01:03-06:00",
+        "count": 77099
       }
     ],
     "title": "Stoppen Sie Volkswagens gefährlichen neuen Deal",
@@ -70,12 +78,24 @@
     "start_date": "2026-06-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 76440,
+    "signatures": 77099,
     "goal": 100000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "tags": [
+      "Volkswagen",
+      "Unternehmen",
+      "Deal",
+      "Stoppen",
+      "Israel",
+      "Krieg",
+      "Gefährlichen",
+      "Europäische",
+      "Volkswagens",
+      "Unternehmensleitung"
+    ]
   },
   "2026-05-only-yes-means-yes-petition-DE": {
     "slug": "2026-05-only-yes-means-yes-petition-DE",
@@ -100,6 +120,10 @@
       {
         "checked_at": "2026-07-13T13:20:39-06:00",
         "count": 47343
+      },
+      {
+        "checked_at": "2026-07-29T16:01:03-06:00",
+        "count": 47448
       }
     ],
     "title": "EU: Nur Ja heißt Ja!",
@@ -110,12 +134,24 @@
     "start_date": "2026-05-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 47343,
+    "signatures": 47448,
     "goal": 50000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "tags": [
+      "Vergewaltigung",
+      "Bedeutet",
+      "Pelicot",
+      "Gesetz",
+      "Heißt",
+      "EU-Mitgliedstaaten",
+      "Einwilligung",
+      "Europäische",
+      "Definition",
+      "Kommission"
+    ]
   },
   "2026-06-dont-send-our-data-to-the-US-petition-DE": {
     "slug": "2026-06-dont-send-our-data-to-the-US-petition-DE",
@@ -144,6 +180,10 @@
       {
         "checked_at": "2026-07-13T13:20:39-06:00",
         "count": 113265
+      },
+      {
+        "checked_at": "2026-07-29T16:01:03-06:00",
+        "count": 113798
       }
     ],
     "title": "EU: Schickt unsere Daten nicht an die USA!",
@@ -154,12 +194,24 @@
     "start_date": "2026-06-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 113265,
+    "signatures": 113798,
     "goal": 150000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "tags": [
+      "Daten",
+      "Europäische",
+      "Abkommen",
+      "Zugang",
+      "Trump",
+      "Gesichtsaufnahmen",
+      "Schickt",
+      "Innen",
+      "Demonstrierende",
+      "Mitgliedstaaten"
+    ]
   },
   "2026-06-phone-hacking-petition-DE": {
     "slug": "2026-06-phone-hacking-petition-DE",
@@ -188,6 +240,10 @@
       {
         "checked_at": "2026-07-13T13:20:39-06:00",
         "count": 57633
+      },
+      {
+        "checked_at": "2026-07-29T16:01:03-06:00",
+        "count": 57833
       }
     ],
     "title": "Stoppt die Telefonhacker",
@@ -198,12 +254,24 @@
     "start_date": "2026-06-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 57633,
+    "signatures": 57833,
     "goal": 75000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "tags": [
+      "Innen",
+      "Spionagesoftware",
+      "Europäische",
+      "Journalist",
+      "Telefonhacker",
+      "Unternehmen",
+      "Stoppt",
+      "EU-Mitgliedstaaten",
+      "Bürgerinnen",
+      "Technologie"
+    ]
   },
   "2026-05-green-data-centres-petition-DE": {
     "slug": "2026-05-green-data-centres-petition-DE",
@@ -228,6 +296,10 @@
       {
         "checked_at": "2026-07-13T13:20:39-06:00",
         "count": 95237
+      },
+      {
+        "checked_at": "2026-07-29T16:01:03-06:00",
+        "count": 95516
       }
     ],
     "title": "Betreibt EU-Rechenzentren zu 100 % mit Erneuerbaren!",
@@ -238,12 +310,24 @@
     "start_date": "2026-05-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 95237,
+    "signatures": 95516,
     "goal": 100000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "tags": [
+      "Rechenzentren",
+      "Erneuerbaren",
+      "Europäische",
+      "Energie",
+      "EU-Rechenzentren",
+      "Erneuerbarer",
+      "Europäischen",
+      "Betrieben",
+      "Betreibt",
+      "Verbrauchen"
+    ]
   },
   "2026-02-boycott-world-cup-petition-DE": {
     "slug": "2026-02-boycott-world-cup-petition-DE",
@@ -260,6 +344,10 @@
       {
         "checked_at": "2026-07-13T10:54:20-06:00",
         "count": 88207
+      },
+      {
+        "checked_at": "2026-07-29T16:01:03-06:00",
+        "count": 88219
       }
     ],
     "title": "Boykottiert Trumps Weltmeisterschaft",
@@ -270,12 +358,24 @@
     "start_date": "2026-02-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 88207,
+    "signatures": 88219,
     "goal": 100000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "tags": [
+      "Weltmeisterschaft",
+      "Fans",
+      "Boykottiert",
+      "Football",
+      "Fußballverbände",
+      "Gewährleisten",
+      "Association",
+      "Sicherheit",
+      "Spieler",
+      "Verlegt"
+    ]
   },
   "2026-05-circular-economy-petition-DE": {
     "slug": "2026-05-circular-economy-petition-DE",
@@ -304,6 +404,10 @@
       {
         "checked_at": "2026-07-13T13:20:39-06:00",
         "count": 95911
+      },
+      {
+        "checked_at": "2026-07-29T16:01:03-06:00",
+        "count": 97241
       }
     ],
     "title": "Längere Lebensdauer, geringere Kosten!",
@@ -314,12 +418,24 @@
     "start_date": "2026-05-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 95911,
+    "signatures": 97241,
     "goal": 100000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "tags": [
+      "Wiederverwendung",
+      "Reparatur",
+      "Europäische",
+      "Mitgliedstaaten",
+      "Lebensdauer",
+      "Reparieren",
+      "Geringere",
+      "Recycling",
+      "Längere",
+      "Kosten"
+    ]
   },
   "2019-08-Mercosur-petition-DE": {
     "slug": "2019-08-Mercosur-petition-DE",
@@ -332,6 +448,10 @@
       {
         "checked_at": "2026-07-07T07:10:43-06:00",
         "count": 18418
+      },
+      {
+        "checked_at": "2026-07-29T16:01:03-06:00",
+        "count": 18420
       }
     ],
     "title": "Schützen Sie die lokalen Landwirt*innen: Stoppen Sie das EU-MERCOSUR-Handelsabkommen!",
@@ -342,12 +462,24 @@
     "start_date": "2019-08-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 18418,
+    "signatures": 18420,
     "goal": 20000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "tags": [
+      "Stoppen",
+      "Landwirt",
+      "Innen",
+      "Europäischen",
+      "Europäische",
+      "Schützen",
+      "Lokalen",
+      "Handelsabkommen",
+      "Landwirtschaft",
+      "Nachhaltigen"
+    ]
   },
   "201906-actua_por_hope_deten_nuevo_macropuerto_en_tenerife-petition-DE": {
     "slug": "201906-actua_por_hope_deten_nuevo_macropuerto_en_tenerife-petition-DE",
@@ -368,10 +500,22 @@
     "signatures": 274,
     "goal": 1000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00",
-    "start_date": "2019-06-01"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "start_date": "2019-06-01",
+    "tags": [
+      "Gebiet",
+      "Teneriffa",
+      "HOPE",
+      "Megahafen",
+      "Handeln",
+      "Arten",
+      "Wurde",
+      "Mega-Hafen",
+      "Regierung",
+      "Darunter"
+    ]
   },
   "2020-12-resign-leggeri-frontex-launch-petition-DE": {
     "slug": "2020-12-resign-leggeri-frontex-launch-petition-DE",
@@ -393,9 +537,21 @@
     "signatures": 8,
     "goal": 1000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "tags": [
+      "FRONTEX",
+      "Leggeri",
+      "Direktor",
+      "Fabrice",
+      "EU-Grenzchef",
+      "Zurücktreten",
+      "Innen",
+      "Nederlands",
+      "Português",
+      "Rücktritt"
+    ]
   },
   "202009-the_eu_must_protect_forests_not_burn_them_for_energy-petition-DE": {
     "slug": "202009-the_eu_must_protect_forests_not_burn_them_for_energy-petition-DE",
@@ -416,10 +572,22 @@
     "signatures": 196,
     "goal": 1000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00",
-    "start_date": "2020-09-01"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "start_date": "2020-09-01",
+    "tags": [
+      "Verbrennen",
+      "Wälder",
+      "Schlecht",
+      "Schützen",
+      "Waldholz",
+      "Energiegewinnung",
+      "Erneuerbare",
+      "Europäische",
+      "Suomalainen",
+      "Nederlands"
+    ]
   },
   "2021-02-energy-charter-treaty-petition-DE": {
     "slug": "2021-02-energy-charter-treaty-petition-DE",
@@ -428,6 +596,10 @@
       {
         "checked_at": "2026-07-06T19:02:57-06:00",
         "count": 267
+      },
+      {
+        "checked_at": "2026-07-29T16:01:03-06:00",
+        "count": 270
       }
     ],
     "title": "Konzerne dürfen nicht gegen Klimaschutz klagen",
@@ -438,12 +610,24 @@
     "start_date": "2021-02-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 267,
+    "signatures": 270,
     "goal": 1000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "tags": [
+      "Konzerne",
+      "Innen",
+      "Euro",
+      "Millones",
+      "Vertrag",
+      "Inglés",
+      "Energiecharta-Vertrag",
+      "Europäischen",
+      "Brennstoffe",
+      "Klimaschutz"
+    ]
   },
   "2021-03-air-quality-petition-DE": {
     "slug": "2021-03-air-quality-petition-DE",
@@ -465,9 +649,21 @@
     "signatures": 2735,
     "goal": 5000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "tags": [
+      "Luft",
+      "Gesundheit",
+      "Europäische",
+      "Luftverschmutzung",
+      "Grenzwerte",
+      "Verursacht",
+      "Parlament",
+      "Schützen",
+      "Saubere",
+      "Sollten"
+    ]
   },
   "2021-06-ban-live-export-petition-DE": {
     "slug": "2021-06-ban-live-export-petition-DE",
@@ -480,6 +676,10 @@
       {
         "checked_at": "2026-07-13T10:54:20-06:00",
         "count": 179
+      },
+      {
+        "checked_at": "2026-07-29T16:01:03-06:00",
+        "count": 183
       }
     ],
     "title": "Exporte lebender Tiere verbieten",
@@ -490,12 +690,24 @@
     "start_date": "2021-06-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 179,
+    "signatures": 183,
     "goal": 1000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "tags": [
+      "Tiere",
+      "Lebenden",
+      "Tieren",
+      "Verbot",
+      "Kommission",
+      "Verbieten",
+      "Lebender",
+      "Exporte",
+      "Lang",
+      "UNTERZEICHNENDEN"
+    ]
   },
   "2021-10-non-au-glyphosate-petition-DE": {
     "slug": "2021-10-non-au-glyphosate-petition-DE",
@@ -508,6 +720,10 @@
       {
         "checked_at": "2026-07-13T10:54:20-06:00",
         "count": 13907
+      },
+      {
+        "checked_at": "2026-07-29T16:01:03-06:00",
+        "count": 13910
       }
     ],
     "title": "Emmanuel Macron: Verbieten Sie Glyphosat in Europa!",
@@ -518,12 +734,24 @@
     "start_date": "2021-10-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 13907,
+    "signatures": 13910,
     "goal": 20000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "tags": [
+      "Macron",
+      "Emmanuel",
+      "Glyphosat",
+      "Italiano",
+      "Präsident",
+      "Verbieten",
+      "Studien",
+      "Innen",
+      "Ratspräsidentschaft",
+      "Beschleunigten"
+    ]
   },
   "2021-11-aid-Polish-border-petition-DE": {
     "slug": "2021-11-aid-Polish-border-petition-DE",
@@ -532,6 +760,10 @@
       {
         "checked_at": "2026-07-06T19:02:57-06:00",
         "count": 70
+      },
+      {
+        "checked_at": "2026-07-29T16:01:03-06:00",
+        "count": 71
       }
     ],
     "title": "Antwort auf die humanitäre Krise an der EU-Grenze",
@@ -542,12 +774,24 @@
     "start_date": "2021-11-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 70,
+    "signatures": 71,
     "goal": 1000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "tags": [
+      "Humanitäre",
+      "Krise",
+      "EU-Grenze",
+      "Antwort",
+      "Grenze",
+      "Medizinische",
+      "Öffentlicher",
+      "Einzusetzen",
+      "Europäische",
+      "Kommission"
+    ]
   },
   "2021-11-stop-big-tech-petition-DE": {
     "slug": "2021-11-stop-big-tech-petition-DE",
@@ -569,9 +813,21 @@
     "signatures": 62,
     "goal": 1000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "tags": [
+      "Tech",
+      "Daten",
+      "Stoppt",
+      "Geschäftsmodells",
+      "Zerstörerischen",
+      "Europäischen",
+      "Europäisches",
+      "Europäische",
+      "Demokratie",
+      "Kommission"
+    ]
   },
   "202103-fur_neue_grundrechte_in_europa-petition-DE": {
     "slug": "202103-fur_neue_grundrechte_in_europa-petition-DE",
@@ -592,6 +848,10 @@
       {
         "checked_at": "2026-07-13T13:20:39-06:00",
         "count": 9994
+      },
+      {
+        "checked_at": "2026-07-29T16:01:03-06:00",
+        "count": 10112
       }
     ],
     "title": "Für neue Grundrechte in Europa",
@@ -601,13 +861,25 @@
     "summary": "Deutsch български Svenska Latvian Ceština Slovenský English Français Español Polski Für neue Grundrechte in Europa Europäisches Parlament, Europäische Kommission, Regierungen der EU-Mitgliedstaaten Di…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 9994,
-    "goal": 10000,
+    "signatures": 10112,
+    "goal": 20000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00",
-    "start_date": "2021-03-01"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "start_date": "2021-03-01",
+    "tags": [
+      "Grundrechte",
+      "Mensch",
+      "Artikel",
+      "Recht",
+      "Europäische",
+      "Sechs",
+      "Versprechen",
+      "Wahrheit",
+      "Umwelt",
+      "EU-Mitgliedstaaten"
+    ]
   },
   "2022-02-aus-ahrtal-wird-sola-h-rtal-petition-DE": {
     "slug": "2022-02-aus-ahrtal-wird-sola-h-rtal-petition-DE",
@@ -629,9 +901,21 @@
     "signatures": 1,
     "goal": 1000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "tags": [
+      "Ahrtal",
+      "Innen",
+      "Erneuerbare",
+      "Region",
+      "Wiederaufbau",
+      "SOLahrtal",
+      "Energien",
+      "Wissenschaftler",
+      "Katastrophe",
+      "Ahrtals"
+    ]
   },
   "2022-02-ban-killing-forests-products-petition-DE": {
     "slug": "2022-02-ban-killing-forests-products-petition-DE",
@@ -640,6 +924,10 @@
       {
         "checked_at": "2026-07-06T19:02:57-06:00",
         "count": 204
+      },
+      {
+        "checked_at": "2026-07-29T16:01:03-06:00",
+        "count": 205
       }
     ],
     "title": "EU: Verbot waldzerstörender Produkte",
@@ -650,12 +938,24 @@
     "start_date": "2022-02-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 204,
+    "signatures": 205,
     "goal": 1000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "tags": [
+      "Produkte",
+      "Europäischen",
+      "Europäische",
+      "Stehen",
+      "Verbot",
+      "Wälder",
+      "Innen",
+      "Waldzerstörender",
+      "Kommission",
+      "Abholzung"
+    ]
   },
   "2022-03-ukraine-rapid-response-petition-DE": {
     "slug": "2022-03-ukraine-rapid-response-petition-DE",
@@ -664,6 +964,10 @@
       {
         "checked_at": "2026-07-06T19:02:57-06:00",
         "count": 97
+      },
+      {
+        "checked_at": "2026-07-29T16:01:03-06:00",
+        "count": 98
       }
     ],
     "title": "Europa, schütze die Menschen, die vor Krieg fliehen!",
@@ -674,12 +978,24 @@
     "start_date": "2022-03-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 97,
+    "signatures": 98,
     "goal": 1000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "tags": [
+      "Innen",
+      "Fliehen",
+      "Krieg",
+      "Vorübergehenden",
+      "Schutz",
+      "Innenminister",
+      "Richtlinie",
+      "Erhalten",
+      "Schütze",
+      "Dies"
+    ]
   },
   "2022-07-new-gmos-petition-DE": {
     "slug": "2022-07-new-gmos-petition-DE",
@@ -704,6 +1020,10 @@
       {
         "checked_at": "2026-07-13T10:54:20-06:00",
         "count": 73944
+      },
+      {
+        "checked_at": "2026-07-29T16:01:03-06:00",
+        "count": 73976
       }
     ],
     "title": "GVO-Lebensmittel müssen reguliert und gekennzeichnet werden!",
@@ -714,12 +1034,24 @@
     "start_date": "2022-07-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 73944,
+    "signatures": 73976,
     "goal": 75000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "tags": [
+      "Gentechnisch",
+      "Lebensmittel",
+      "Veränderte",
+      "GVOs",
+      "Gekennzeichnet",
+      "GVO-Lebensmittel",
+      "Vorschriften",
+      "Europäische",
+      "Regierungen",
+      "Transparenz"
+    ]
   },
   "2022-07-uber-launch-petition-DE": {
     "slug": "2022-07-uber-launch-petition-DE",
@@ -741,9 +1073,21 @@
     "signatures": 46,
     "goal": 1000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "tags": [
+      "Uber",
+      "Reicht",
+      "Beschäftigten",
+      "Gesetz",
+      "Rechte",
+      "Plattformbeschäftigten",
+      "Arbeitnehmerrechte",
+      "EU-Regierungschefs",
+      "Arbeitnehmenden",
+      "Europäischen"
+    ]
   },
   "2022-08-justice-is-everybodys-business-petition-DE": {
     "slug": "2022-08-justice-is-everybodys-business-petition-DE",
@@ -752,6 +1096,10 @@
       {
         "checked_at": "2026-07-06T19:02:57-06:00",
         "count": 1615
+      },
+      {
+        "checked_at": "2026-07-29T16:01:03-06:00",
+        "count": 1616
       }
     ],
     "title": "Gerechtigkeit geht uns alle an!",
@@ -762,12 +1110,24 @@
     "start_date": "2022-08-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 1615,
+    "signatures": 1616,
     "goal": 2000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "tags": [
+      "Unternehmen",
+      "Innen",
+      "Gerechtigkeit",
+      "Svenska",
+      "Welt",
+      "Entlang",
+      "Union",
+      "Gewerkschaften",
+      "Menschenrechte",
+      "Arbeitnehmer"
+    ]
   },
   "2022-08-justice-is-everybodys-business-petition-iframe-DE": {
     "slug": "2022-08-justice-is-everybodys-business-petition-iframe-DE",
@@ -776,6 +1136,10 @@
       {
         "checked_at": "2026-07-06T19:02:57-06:00",
         "count": 1615
+      },
+      {
+        "checked_at": "2026-07-29T16:01:03-06:00",
+        "count": 1616
       }
     ],
     "title": "Gerechtigkeit geht uns alle an!",
@@ -786,12 +1150,24 @@
     "start_date": "2022-08-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 1615,
+    "signatures": 1616,
     "goal": 2000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "tags": [
+      "Deutsch",
+      "Svenska",
+      "Gerechtigkeit",
+      "Nederlands",
+      "Français",
+      "Italiano",
+      "English",
+      "Español",
+      "Appell",
+      "Polski"
+    ]
   },
   "2022-09-ecocide-DE": {
     "slug": "2022-09-ecocide-DE",
@@ -804,6 +1180,10 @@
       {
         "checked_at": "2026-07-13T10:54:20-06:00",
         "count": 13318
+      },
+      {
+        "checked_at": "2026-07-29T16:01:03-06:00",
+        "count": 13326
       }
     ],
     "title": "Die Zerstörung des Planeten ist ein Verbrechen",
@@ -814,12 +1194,24 @@
     "start_date": "2022-09-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 13318,
+    "signatures": 13326,
     "goal": 20000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "tags": [
+      "Verbrechen",
+      "Planeten",
+      "Ökozid",
+      "Europäische",
+      "Zerstörung",
+      "Europäischen",
+      "Parlament",
+      "Unseren",
+      "Innen",
+      "Umweltkriminalität"
+    ]
   },
   "2022-10-frontex-discharge-petition-DE": {
     "slug": "2022-10-frontex-discharge-petition-DE",
@@ -841,9 +1233,21 @@
     "signatures": 49,
     "goal": 1000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "tags": [
+      "Frontex",
+      "Agentur",
+      "Skrupellose",
+      "Stoppt",
+      "Europäischen",
+      "Abgeordente",
+      "Nederlands",
+      "Parlaments",
+      "Christian",
+      "Angelika"
+    ]
   },
   "2022-11-bee-killer-exports-petition-DE": {
     "slug": "2022-11-bee-killer-exports-petition-DE",
@@ -865,9 +1269,21 @@
     "signatures": 1345,
     "goal": 2000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "tags": [
+      "Pestizide",
+      "Bienen-Killer",
+      "EU-Kommission",
+      "Exportverbot",
+      "Europäische",
+      "Kommission",
+      "Pestiziden",
+      "Verbotenen",
+      "Verboten",
+      "Gefährliche"
+    ]
   },
   "2022-12-lobby-scandal-petition-DE": {
     "slug": "2022-12-lobby-scandal-petition-DE",
@@ -893,9 +1309,21 @@
     "signatures": 178,
     "goal": 1000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "tags": [
+      "Strengere",
+      "Korruptionsskandal",
+      "Europäischen",
+      "Gesetze",
+      "Regeln",
+      "Aufklärung",
+      "Umfassende",
+      "Brauchen",
+      "Dringend",
+      "Innen"
+    ]
   },
   "202202-the_eu_must_not_become_a_lawless_zone-petition-DE": {
     "slug": "202202-the_eu_must_not_become_a_lawless_zone-petition-DE",
@@ -916,10 +1344,22 @@
     "signatures": 77,
     "goal": 1000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00",
-    "start_date": "2022-02-01"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "start_date": "2022-02-01",
+    "tags": [
+      "Europäischen",
+      "Union",
+      "Grenze",
+      "Europäische",
+      "Wurden",
+      "Rechtsfreien",
+      "Asylanträge",
+      "Bekräftigen",
+      "Entwickeln",
+      "Raum"
+    ]
   },
   "202203-end_forced_sterilisation_in_the_eu_now-petition-DE": {
     "slug": "202203-end_forced_sterilisation_in_the_eu_now-petition-DE",
@@ -940,10 +1380,22 @@
     "signatures": 253,
     "goal": 1000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00",
-    "start_date": "2022-03-01"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "start_date": "2022-03-01",
+    "tags": [
+      "Zwangssterilisation",
+      "Behinderungen",
+      "Sterilisiert",
+      "Europäische",
+      "Beenden",
+      "Zwangssterilisationen",
+      "EU-Mitgliedstaaten",
+      "Kommission",
+      "Nederlands",
+      "Richtlinie"
+    ]
   },
   "202203-save_the_baltic_harbour_porpoise-petition-DE": {
     "slug": "202203-save_the_baltic_harbour_porpoise-petition-DE",
@@ -956,6 +1408,10 @@
       {
         "checked_at": "2026-07-13T10:54:20-06:00",
         "count": 23704
+      },
+      {
+        "checked_at": "2026-07-29T16:01:03-06:00",
+        "count": 23707
       }
     ],
     "title": "Rettet den Ostseeschweinswal",
@@ -965,13 +1421,25 @@
     "summary": "Deutsch Dansk Latvian Svenska Lietuvių Eesti keel Russian Suomalainen Belarusian English Français Español Italiano Nederlands Polski Rettet den Ostseeschweinswal An den Kommissar für Umwelt, Ozeane un…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 23704,
+    "signatures": 23707,
     "goal": 50000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00",
-    "start_date": "2022-03-01"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "start_date": "2022-03-01",
+    "tags": [
+      "Ostseeschweinswal",
+      "Fischerei",
+      "Beifang",
+      "Umwelt",
+      "Ostseeanrainerstaaten",
+      "Schweinswal",
+      "Rettet",
+      "Auswirkungen",
+      "Schweinswale",
+      "Verteidigung"
+    ]
   },
   "202206-help_us_protect_the_puffins_in_iceland_-_establish_a_sales_ban-petition-DE": {
     "slug": "202206-help_us_protect_the_puffins_in_iceland_-_establish_a_sales_ban-petition-DE",
@@ -992,6 +1460,10 @@
       {
         "checked_at": "2026-07-13T13:20:39-06:00",
         "count": 214030
+      },
+      {
+        "checked_at": "2026-07-29T16:01:03-06:00",
+        "count": 214123
       }
     ],
     "title": "Schützt die Papageientaucher in Island – Verkaufsverbot jetzt",
@@ -1001,13 +1473,25 @@
     "summary": "Deutsch English Français Español Italiano Nederlands Polski Schützt die Papageientaucher in Island – Verkaufsverbot jetzt Dieser Appell richtet sich an die isländische Regierung, insbesondere an die P…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 214030,
+    "signatures": 214123,
     "goal": 300000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00",
-    "start_date": "2022-06-01"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "start_date": "2022-06-01",
+    "tags": [
+      "Papageientaucher",
+      "Island",
+      "Verkaufsverbot",
+      "Appell",
+      "Isländische",
+      "Schützt",
+      "Gejagt",
+      "Papageientauchern",
+      "Nederlands",
+      "Regierung"
+    ]
   },
   "202207-stop_tax-free_private_flights_in_the_eu-petition-DE": {
     "slug": "202207-stop_tax-free_private_flights_in_the_eu-petition-DE",
@@ -1028,10 +1512,22 @@
     "signatures": 47,
     "goal": 1000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00",
-    "start_date": "2022-07-01"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "start_date": "2022-07-01",
+    "tags": [
+      "Privatflüge",
+      "Steuerfreie",
+      "Stoppt",
+      "Petitionskomitees",
+      "Organisiert",
+      "Inititator",
+      "Produziert",
+      "Millionen",
+      "Parlament",
+      "Italiano"
+    ]
   },
   "202209-russia_belarus_ukraine_protection_and_asylum_for_deserters_and_conscientious_objectors_to_military_service-petition-DE": {
     "slug": "202209-russia_belarus_ukraine_protection_and_asylum_for_deserters_and_conscientious_objectors_to_military_service-petition-DE",
@@ -1040,6 +1536,10 @@
       {
         "checked_at": "2026-07-06T19:02:57-06:00",
         "count": 872
+      },
+      {
+        "checked_at": "2026-07-29T16:01:03-06:00",
+        "count": 874
       }
     ],
     "title": "Russland, Belarus, Ukraine: Schutz und Asyl für Deserteure und Verweigerer",
@@ -1049,13 +1549,25 @@
     "summary": "Deutsch Ελληνικά Russian English Français Español Italiano Nederlands Russland, Belarus, Ukraine: Schutz und Asyl für Deserteure und Verweigerer An Präsidentin der Europäischen Kommission, Ursula von …",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 872,
+    "signatures": 874,
     "goal": 1000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00",
-    "start_date": "2022-09-01"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "start_date": "2022-09-01",
+    "tags": [
+      "Europäischen",
+      "Belarus",
+      "Ukraine",
+      "Schutz",
+      "Asyl",
+      "Präsidentin",
+      "Verweigerer",
+      "Deserteure",
+      "Föderation",
+      "Russland"
+    ]
   },
   "202210-kritische_deutsche_infrastruktur_kein_anteil_am_hamburger_hafen_an_china-petition-DE": {
     "slug": "202210-kritische_deutsche_infrastruktur_kein_anteil_am_hamburger_hafen_an_china-petition-DE",
@@ -1076,10 +1588,22 @@
     "signatures": 0,
     "goal": 1000,
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00",
-    "start_date": "2022-10-01"
+    "last_checked": "2026-07-29T16:01:03-06:00",
+    "start_date": "2022-10-01",
+    "tags": [
+      "China",
+      "Hamburger",
+      "Hafen",
+      "Infrastruktur",
+      "Kritische",
+      "Weitere",
+      "Anteil",
+      "Appell",
+      "Stimme",
+      "Unterwanderung"
+    ]
   },
   "202211-stop_chocolate_giant_storck_to_save_the_rainforest-petition-DE": {
     "slug": "202211-stop_chocolate_giant_storck_to_save_the_rainforest-petition-DE",
@@ -1088,6 +1612,10 @@
       {
         "checked_at": "2026-07-07T10:24:27-06:00",
         "count": 52992
+      },
+      {
+        "checked_at": "2026-07-29T16:01:03-06:00",
+        "count": 52994
       }
     ],
     "title": "Stoppen Sie den Schokoladenriesen Storck, um den Regenwald zu retten",
@@ -1098,12 +1626,24 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00",
+    "last_checked": "2026-07-29T16:01:03-06:00",
     "start_date": "2022-11-01",
-    "signatures": 52992,
-    "goal": 75000
+    "signatures": 52994,
+    "goal": 75000,
+    "tags": [
+      "Storck",
+      "Kakao",
+      "Regenwald",
+      "Oberwelland",
+      "Stoppen",
+      "Schokoladenriesen",
+      "Schützen",
+      "Retten",
+      "Druck",
+      "Axel"
+    ]
   },
   "2023-01-cut-ties-fossil-fuel-petition-DE": {
     "slug": "2023-01-cut-ties-fossil-fuel-petition-DE",
@@ -1112,6 +1652,10 @@
       {
         "checked_at": "2026-07-07T10:24:27-06:00",
         "count": 575
+      },
+      {
+        "checked_at": "2026-07-29T16:01:03-06:00",
+        "count": 576
       }
     ],
     "title": "Anti-Klimalobby raus aus der Politik!",
@@ -1120,14 +1664,26 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00",
+    "last_checked": "2026-07-29T16:01:03-06:00",
     "image_url": "https://drupal.wemove.eu/sites/wemove.eu/files/shutterstock_1555865300_1.jpg",
     "description_full": "<p><!-- Remove this if you don't want popins like \"This page also in English\" -->\n\n\n\n\n          \n            \n          \n            \n          \n            \n              \n              Deutsch\n\n              \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n        \n\n<ul>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-01-cut-ties-fossil-fuel-petition-EN\" rel=\"noopener\" target=\"_blank\">\n                    \n                    English\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-01-cut-ties-fossil-fuel-petition-FR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Français\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-01-cut-ties-fossil-fuel-petition-ES\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Español\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-01-cut-ties-fossil-fuel-petition-IT\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Italiano\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-01-cut-ties-fossil-fuel-petition-NL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Nederlands\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-01-cut-ties-fossil-fuel-petition-PL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Polski\n\n                    \n                    </a>\n</li>\n</ul>\n\n\n          Anti-Klimalobby raus aus der Politik!\n        \n\n\n\n<h3>\n\n<p>An die Mitglieder des europäischen Parlaments</p>\n<!-- ak.wysiwyg=code -->\n</h3>\n\n<h2>\n            Appell\n          </h2>\n\n<p>Die Energiepreise schießen in die Höhe und die Menschen haben Mühe, ihre Wohnungen zu heizen. Gleichzeitig gibt die Lobby der Kohle-, Gas- und Ölindustrie Millionen aus, um politische Maßnahmen zu sabotieren, die den Menschen helfen sollen, ihre Rechnungen in diesem Winter zu bezahlen. Die europäischen Staats- und Regierungschefs müssen die Beziehungen zur Lobby der fossilen Brennstoffindustrie beenden durch:</p>\n<ol>\n<li>Den Entzug der Lobbyausweise für Vertreter*innen der Öl-, Gas- und Kohlekonzerne, so dass sie in europäischen Institutionen nicht mehr ein und aus gehen können.</li>\n<li>Die Entwicklung eines Konzeptes für Interessenskonflikte bezüglich europäischer Klima- und Energiepolitik, ähnlich wie die Beschränkungen für die Lobbyarbeit der Tabakindustrie im Bereich der Gesundheitspolitik.</li>\n<li>Einrichtung einer europäischen Taskforce für Klima- und Soziales, durchgeführt von NGOs, Sozialverbänden und Gewerkschaften, um eine soziale und ökologisch gerechte Beratung der Politik zu gewährleisten.</li>\n</ol>\n<!-- ak.wysiwyg=code -->\n\n\n<h2>\n            \n              Warum das wichtig ist\n            \n          </h2>\n\n\n<p><strong>in Brüssel läuft die Lobbymaschinerie der Kohle-, Öl- und Gasindustrie auf Hochtouren.</strong> [1] Jeden zweiten Tag treffen sich Lobbyist*innen mit führenden Politiker*innen und sorgen so dafür, dass Kohle und Gas weiter Vorrang vor erneuerbaren Energien bekommen.</p>\n<p><strong>Dabei fährt genau diese Industrie beispiellose Gewinne ein</strong> - während viele Menschen vor der bitteren Wahl stehen, entweder die Wohnung zu heizen oder Essen auf den Tisch zu bringen. [2]</p>\n<p>Die gute Nachricht ist: Dieser Einfluss der Lobby auf unsere Politik ist nicht gesetzt. <strong>So wurden zum Beispiel den Lobbyist*innen russischer Staatskonzerne ihre Zugangsprivilegien entzogen.</strong> [3] Wir fordern das Gleiche für die Lobbyist*innen der Kohl- und Gasindustrien – denn sie schaden Menschen und Planeten.</p>\n<p><strong>Wir haben keine Zeit zu verlieren.</strong> Die Industrielobby will Pläne zunichte machen, die <strong>uns \"Normalbürger*innen\" helfen sollen, diesen Winter zu überstehen. </strong>Zum Beispiel die Deckelung der Energiepreise oder eine Steuer auf Übergewinne. [4] Unsere europäischen Politiker*innen müssen JETZT die Beziehungen zur fossilen Energielobby beenden.</p>\n<p>In den letzten Jahrzehnten haben die Kohle-und Gaskonzerne Millionen für Lobbyarbeit ausgegeben, um Europas Abhängigkeit vom Gas zu erhalten und den Übergang zu erneuerbaren Energien zu blockieren. <strong>Die Industrie nutzt die gleichen Taktiken wie die großen Tabakkonzerne:</strong> Sie sponsert Greenwashing-Veranstaltungen für Politiker*innen und bringt dubiose Forschungsergebnisse heraus, die die Gefahren des Klimawandels verharmlosen. [5]</p>\n<p><strong>Jetzt kämpft die Industrie dafür, dass Gas so teuer wie möglich bleibt und Familien in ganz Europa zahlen den Preis dafür.</strong> Wir müssen die fossile Industrie zur Verantwortung ziehen und <strong>ihren Einfluss auf unsere Politiker*innen begrenzen.</strong></p>\n<p>Fordern Sie unsere Politiker*innen auf, den Öl-, Gas- und Kohlekonzerne ihre Lobbyausweise zu entziehen, so dass sie im europäischen Parlament nicht mehr ein und aus gehen können.</p>\n\n<!-- ak.wysiwyg=code -->\n<h4>\n            Referenzen:\n          </h4>\n\n\n<ol>\n<li>Zwischen Februar und September 2022 gab es mehr als 100 Treffen zwischen der fossilen Brennstoff-Industrie und führenden Vertreter*innen der Europäischen Kommission - also jeden zweiten Tag eines:<br/>https://corporateeurope.org/en/2022/10/fuelling-cost-living-crisis<br/>Auch bei der UN-Klimakonferenz COP27 im letzten Jahr waren die Unternehmen für fossile Brennstoffe in fast allen nationalen Delegationen in der Überzahl:<br/>https://www.euronews.com/green/2022/11/10/fossil-fuel-lobbyists-outnumber-almost-every-national-delegation-at-cop27-data-shows</li>\n<li>https://www.euractiv.com/section/energy-environment/news/analysis-forget-showering-its-eat-or-heat-for-shocked-europeans-hit-by-energy-crisis/</li>\n<li>https://euobserver.com/eu-political/155120</li>\n<li>https://corporateeurope.org/en/2022/11/how-gas-lobby-fuelling-cost-living-crisis</li>\n<li>https://edition.cnn.com/2021/05/13/business/exxon-climate-change-harvard/index.html</li>\n</ol>\n<!-- ak.wysiwyg=code -->\n\n\n\n<h3>In Zusammenarbeit mit:</h3>\n\n<p></p></p>",
     "summary": "Deutsch English Français Español Italiano Nederlands Polski Anti-Klimalobby raus aus der Politik! An die Mitglieder des europäischen Parlaments Appell Die Energiepreise schießen in die Höhe und die Me…",
-    "signatures": 575,
-    "goal": 1000
+    "signatures": 576,
+    "goal": 1000,
+    "tags": [
+      "Innen",
+      "Europäischen",
+      "Politiker",
+      "Politik",
+      "Industrie",
+      "Anti-Klimalobby",
+      "Energiepreise",
+      "Fossilen",
+      "Lobbyist",
+      "Kohle"
+    ]
   },
   "2023-03-basel-plastic-waste-petition-DE": {
     "slug": "2023-03-basel-plastic-waste-petition-DE",
@@ -1139,12 +1695,24 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00",
+    "last_checked": "2026-07-29T16:01:03-06:00",
     "image_url": "https://drupal.wemove.eu/sites/wemove.eu/files/plastic-waste01.jpg",
     "description_full": "<p><!-- Remove this if you don't want popins like \"This page also in English\" -->\n\n\n\n\n          \n            \n          \n            \n          \n            \n              \n              Deutsch\n\n              \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n        \n\n<ul>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-03-basel-plastic-waste-petition-EN\" rel=\"noopener\" target=\"_blank\">\n                    \n                    English\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-03-basel-plastic-waste-petition-FR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Français\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-03-basel-plastic-waste-petition-ES\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Español\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-03-basel-plastic-waste-petition-IT\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Italiano\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-03-basel-plastic-waste-petition-NL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Nederlands\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-03-basel-plastic-waste-petition-PL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Polski\n\n                    \n                    </a>\n</li>\n</ul>\n\n\n          Für ein Verbot von EU-Plastikmüll-Exporten\n        \n\n\n\n<h3>\n\n<p>Die Europäische Kommission und die EU-Regierungen</p>\n<!-- ak.wysiwyg=code -->\n</h3>\n\n<h2>\n            Appell\n          </h2>\n<p>Unser Wirtschaftssystem ist nicht nachhaltig - es basiert auf der unnötigen Produktion von Kunststoffen. EU-Länder exportieren ihren Plastikmüll, zusammen mit all den damit einhergehenden gesundheitlichen Auswirkungen und Umweltschäden.</p>\n<p>Die EU ist einer der größten Exporteure von Plastikmüll in der Welt und verursacht große Schäden für die Umwelt und die menschliche Gesundheit. Deshalb muss die EU alle Exporte von Kunststoffabfällen in Länder außerhalb der Union verbieten und zusätzliche Schutzmaßnahmen für Transporte innerhalb der EU einführen. Damit die Gesundheit der Menschen und die Umwelt geschützt werden.</p>\n\n\n<h2>\n            \n              Warum das wichtig ist\n            \n          </h2>\n\n\n<p><strong>Wie viel Plastikmüll haben Sie heute schon recycled, allein durch Ihren Lebensmitteleinkauf?</strong></p>\n<p>Es ist schwer, Plastikverpackungen in unserem täglichen Leben zu vermeiden. Uns wird so oft gesagt: Recycling ist die Lösung. <strong>Aber wie viele von uns wissen, wo das von uns recycelte Plastik landet?</strong></p>\n<p><strong>Auf einer Plastikrecycling-Deponie in der Türkei leiden Arbeiter*innen und Einheimische unter Atemproblemen, starken Kopfschmerzen und Hautkrankheiten. </strong>Wegen der Gifte, die beim Recycling der europäischen Kunststoffe freigesetzt werden. [1] Viele Schutzbedürftige - Kinder, Flüchtlinge und Menschen ohne Aufenthaltspapiere - arbeiten auf diesen Recyclingdeponien. [2]</p>\n<p><strong>Das Europäische Parlament hat bereits gefordert, dass die EU ihre Plastikabfälle nicht mehr im Ausland deponiert. </strong>Und alle EU-Länder sind bereits Teil eines internationalen Abkommens, das garantieren soll, dass wir alle vor gefährlichen Abfällen geschützt sind. [3] <strong>Das Einzige, was dem im Wege steht, sind unsere eigenen Regierungen.</strong></p>\n<p>Ein Verbot der Ausfuhr von Plastikmüll würde <strong>die EU dazu zwingen, ihre gesamte Herangehensweise an die Plastikproduktion und -verschmutzung zu überdenken.</strong> Es wäre ein Schritt in diese Richtung.</p>\n<p>Wenn uns das gelingt, können wir nicht mehr weitermachen wie bisher. <strong>Wenn das Problem direkt vor unserer Haustür liegt, müssen unsere Politiker*innen neue und nachhaltigere Wiederverwendungs- und Nachfüllsysteme einführen.</strong></p>\n\n<!-- ak.wysiwyg=code -->\n<h4>\n            Referenzen:\n          </h4>\n\n\n<ol>\n<li>Toxin-Exposition im Kunststoffrecycling führt zu einem erhöhten Krebsrisiko, zu neurologischen Auswirkungen und Schäden an unserem Fortpflanzungssystem. Studien zeigen, dass sie dort, wo Kunststoffabfälle recycelt, verbrannt oder deponiert werden, in die Nahrungskette gelangen. Wiederholte Boden-, Luft- und Wassertests an Plastikmülldeponien auf der ganzen Welt zeigen durchweg extrem hohe Werte an giftigen Chemikalien.<br/><a>https://www.who.int/news-room/fact-sheets/detail/dioxins-and-their-effects-on-human-health</a><br/><a>https://www.annualreviews.org/doi/abs/10.1146/annurev.publhealth.012809.103714</a><br/><a>https://ipen.org/sites/default/files/documents/ipen-plastic-waste-contamination-full-en.pdf</a>, Seiten 7-11</li>\n<li>https://www.greenpeace.org.uk/news/plastic-dumpsites-in-turkey-found-to-be-highly-contaminated-with-toxic-chemicals/<br/>https://www.hrw.org/news/2022/09/21/turkey-plastic-recycling-harms-health-environment</li>\n<li>Das Basler Übereinkommen ist ein internationaler Vertrag, dem 190 Länder angehören, darunter alle EU-Mitgliedstaaten.<br/>Es soll die menschliche Gesundheit und die Umwelt schützen, indem die Produktion gefährlicher Abfälle so weit wie möglich reduziert wird. Es schreibt außerdem vor, dass die Produktion gefährlicher Abfälle von der Entstehung bis zur Lagerung, dem Transport, der Behandlung, der Wiederverwendung, dem Recycling, der Verwertung und der endgültigen Beseitigung unter strengen Kontrollen gehandhabt werden muss.<br/><a>https://www.europarl.europa.eu/news/en/press-room/20230113IPR66627/waste-shipments-meps-push-for-tighter-eu-rules</a><br/><a>https://www.eea.europa.eu/help/glossary/eea-glossary/basel-convention</a></li>\n</ol>\n<p>Weitere Hintergrunddokumente sind:<br/><a>https://eia-international.org/report/the-offshoring-and-recycling-displacement-involved-in-trying-to-recycle-eu-plastic-waste/</a><br/><a>https://eia-international.org/wp-content/uploads/EIA-The-Truth-Behind-Trash-FINAL.pdf</a></p>\n<!-- ak.wysiwyg=code -->\n\n\n\n<h3>In Zusammenarbeit mit:</h3>\n\n<p></p></p>",
-    "summary": "Deutsch English Français Español Italiano Nederlands Polski Für ein Verbot von EU-Plastikmüll-Exporten Die Europäische Kommission und die EU-Regierungen Appell Unser Wirtschaftssystem ist nicht nachha…"
+    "summary": "Deutsch English Français Español Italiano Nederlands Polski Für ein Verbot von EU-Plastikmüll-Exporten Die Europäische Kommission und die EU-Regierungen Appell Unser Wirtschaftssystem ist nicht nachha…",
+    "tags": [
+      "Plastikmüll",
+      "Verbot",
+      "Europäische",
+      "Gesundheit",
+      "Produktion",
+      "Recycling",
+      "Umwelt",
+      "Wirtschaftssystem",
+      "EU-Regierungen",
+      "Auswirkungen"
+    ]
   },
   "2023-03-stop-deep-sea-mining-petition-DE": {
     "slug": "2023-03-stop-deep-sea-mining-petition-DE",
@@ -1156,9 +1724,12 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null,
+    "tags": [
+      "Disabled"
+    ]
   },
   "2023-03-stop-rio-tinto-DE": {
     "slug": "2023-03-stop-rio-tinto-DE",
@@ -1170,9 +1741,12 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null,
+    "tags": [
+      "Disabled"
+    ]
   },
   "2023-04-restore-nature-petition-DE": {
     "slug": "2023-04-restore-nature-petition-DE",
@@ -1184,9 +1758,12 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null,
+    "tags": [
+      "Disabled"
+    ]
   },
   "2023-04-save-polesia-petition-DE": {
     "slug": "2023-04-save-polesia-petition-DE",
@@ -1198,9 +1775,12 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null,
+    "tags": [
+      "Disabled"
+    ]
   },
   "2023-04-SUR-pesticide-petition-DE": {
     "slug": "2023-04-SUR-pesticide-petition-DE",
@@ -1212,9 +1792,12 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null,
+    "tags": [
+      "Disabled"
+    ]
   },
   "2023-05-end-bottom-trawling-petition-DE": {
     "slug": "2023-05-end-bottom-trawling-petition-DE",
@@ -1226,9 +1809,12 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null,
+    "tags": [
+      "Disabled"
+    ]
   },
   "2023-05-end-bottom-trawling-widget-DE": {
     "slug": "2023-05-end-bottom-trawling-widget-DE",
@@ -1240,9 +1826,12 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null,
+    "tags": [
+      "Disabled"
+    ]
   },
   "2023-05-european-health-data-space-petition-DE": {
     "slug": "2023-05-european-health-data-space-petition-DE",
@@ -1254,9 +1843,12 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null,
+    "tags": [
+      "Disabled"
+    ]
   },
   "2023-05-luxury-emissions-petition-DE": {
     "slug": "2023-05-luxury-emissions-petition-DE",
@@ -1268,9 +1860,12 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null,
+    "tags": [
+      "Disabled"
+    ]
   },
   "2023-05-protect-objectors-petition-DE": {
     "slug": "2023-05-protect-objectors-petition-DE",
@@ -1282,9 +1877,12 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null,
+    "tags": [
+      "Disabled"
+    ]
   },
   "2023-05-save-donana-petition-DE": {
     "slug": "2023-05-save-donana-petition-DE",
@@ -1296,9 +1894,12 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null,
+    "tags": [
+      "Disabled"
+    ]
   },
   "2023-05-violence-against-women-directive-petition-DE": {
     "slug": "2023-05-violence-against-women-directive-petition-DE",
@@ -1310,9 +1911,12 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null,
+    "tags": [
+      "Disabled"
+    ]
   },
   "2023-06-deaths-at-sea-petition-DE": {
     "slug": "2023-06-deaths-at-sea-petition-DE",
@@ -1324,9 +1928,12 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null,
+    "tags": [
+      "Disabled"
+    ]
   },
   "2023-06-odra-river-petition-DE": {
     "slug": "2023-06-odra-river-petition-DE",
@@ -1338,9 +1945,12 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null,
+    "tags": [
+      "Disabled"
+    ]
   },
   "2023-07-frontex-whistleblowers-petition-DE": {
     "slug": "2023-07-frontex-whistleblowers-petition-DE",
@@ -1351,9 +1961,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-07-Make-Polluters-Pay-petition-DE": {
     "slug": "2023-07-Make-Polluters-Pay-petition-DE",
@@ -1364,9 +1974,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-07-simon-1-DE": {
     "slug": "2023-07-simon-1-DE",
@@ -1377,9 +1987,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-07-test01-michal-DE": {
     "slug": "2023-07-test01-michal-DE",
@@ -1390,9 +2000,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-07-test07-michal-DE": {
     "slug": "2023-07-test07-michal-DE",
@@ -1403,9 +2013,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-07-test10-michal-DE": {
     "slug": "2023-07-test10-michal-DE",
@@ -1416,9 +2026,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-08-glyphosate-petition-DE": {
     "slug": "2023-08-glyphosate-petition-DE",
@@ -1429,9 +2039,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-08-hope-trumps-hate-training-DE": {
     "slug": "2023-08-hope-trumps-hate-training-DE",
@@ -1442,9 +2052,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-08-michal-test12-petition-DE": {
     "slug": "2023-08-michal-test12-petition-DE",
@@ -1455,9 +2065,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-08-michal-test20-petition-DE": {
     "slug": "2023-08-michal-test20-petition-DE",
@@ -1468,9 +2078,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-08-pesticide-rebels-training-DE": {
     "slug": "2023-08-pesticide-rebels-training-DE",
@@ -1481,9 +2091,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-08-postactiontest2-michal-DE": {
     "slug": "2023-08-postactiontest2-michal-DE",
@@ -1494,9 +2104,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-08-postactiontest3-michal-DE": {
     "slug": "2023-08-postactiontest3-michal-DE",
@@ -1507,9 +2117,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-08-postactiontest4-michal-DE": {
     "slug": "2023-08-postactiontest4-michal-DE",
@@ -1520,9 +2130,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-08-postactiontest9-michal-DE": {
     "slug": "2023-08-postactiontest9-michal-DE",
@@ -1533,9 +2143,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-08-test7-michal-DE": {
     "slug": "2023-08-test7-michal-DE",
@@ -1546,9 +2156,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-09-michal-test1-DE": {
     "slug": "2023-09-michal-test1-DE",
@@ -1559,9 +2169,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-09-michal-test2-DE": {
     "slug": "2023-09-michal-test2-DE",
@@ -1572,9 +2182,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-09-michal-test3-DE": {
     "slug": "2023-09-michal-test3-DE",
@@ -1585,9 +2195,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-09-michal-test4-petition-DE": {
     "slug": "2023-09-michal-test4-petition-DE",
@@ -1598,9 +2208,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-09-michal-test5-DE": {
     "slug": "2023-09-michal-test5-DE",
@@ -1611,9 +2221,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-09-michaltest7-petition-DE": {
     "slug": "2023-09-michaltest7-petition-DE",
@@ -1624,9 +2234,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-09-pesticide-rebels-training-campaigns-petition-DE": {
     "slug": "2023-09-pesticide-rebels-training-campaigns-petition-DE",
@@ -1637,9 +2247,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-09-pesticide-rebels-training-morecampaigns-petition-DE": {
     "slug": "2023-09-pesticide-rebels-training-morecampaigns-petition-DE",
@@ -1650,9 +2260,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-09-simon-6-petition-DE": {
     "slug": "2023-09-simon-6-petition-DE",
@@ -1663,9 +2273,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-09-stop-hoekstra-petition-DE": {
     "slug": "2023-09-stop-hoekstra-petition-DE",
@@ -1676,9 +2286,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-10--DE": {
     "slug": "2023-10--DE",
@@ -1689,9 +2299,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-10-end-the-destruction-of-romanian-forests-petition2-DE": {
     "slug": "2023-10-end-the-destruction-of-romanian-forests-petition2-DE",
@@ -1702,9 +2312,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-10-es-ist-zeit-frieden-in-europa-zu-schaffen-DE": {
     "slug": "2023-10-es-ist-zeit-frieden-in-europa-zu-schaffen-DE",
@@ -1715,9 +2325,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-10-es-ist-zeit-frieden-in-europa-zu-schliessen-DE": {
     "slug": "2023-10-es-ist-zeit-frieden-in-europa-zu-schliessen-DE",
@@ -1728,9 +2338,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-10-eu-parliament-stop-selling-out-people-and-nature-to-mining-JOLANTA-TESTING-petition-DE": {
     "slug": "2023-10-eu-parliament-stop-selling-out-people-and-nature-to-mining-JOLANTA-TESTING-petition-DE",
@@ -1741,9 +2351,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-10-eu-parliament-stop-selling-out-people-and-nature-to-mining-petition-DE": {
     "slug": "2023-10-eu-parliament-stop-selling-out-people-and-nature-to-mining-petition-DE",
@@ -1754,9 +2364,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-10-gaza-civilians-petition-DE": {
     "slug": "2023-10-gaza-civilians-petition-DE",
@@ -1767,9 +2377,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-10-michaltest2-petition-DE": {
     "slug": "2023-10-michaltest2-petition-DE",
@@ -1780,9 +2390,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-10-michaltest5-petition2-DE": {
     "slug": "2023-10-michaltest5-petition2-DE",
@@ -1793,9 +2403,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-10-michaltest5-petition3-DE": {
     "slug": "2023-10-michaltest5-petition3-DE",
@@ -1806,9 +2416,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-11-end-tax-havens-in-the-eu-implement-the-treaty-reform-adopted-by-DE": {
     "slug": "2023-11-end-tax-havens-in-the-eu-implement-the-treaty-reform-adopted-by-DE",
@@ -1819,9 +2429,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-11-gesundheit-von-millionen-ist-wichtiger-als-DE": {
     "slug": "2023-11-gesundheit-von-millionen-ist-wichtiger-als-DE",
@@ -1832,9 +2442,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-11-romain-petition-DE": {
     "slug": "2023-11-romain-petition-DE",
@@ -1845,9 +2455,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-11-schutz-fur-pazifisten-und-kriegsdienstverweigerer-aus-russland-b-DE": {
     "slug": "2023-11-schutz-fur-pazifisten-und-kriegsdienstverweigerer-aus-russland-b-DE",
@@ -1858,9 +2468,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-12-tax-the-rich-petition-DE": {
     "slug": "2023-12-tax-the-rich-petition-DE",
@@ -1871,9 +2481,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2023-test-romain-DE": {
     "slug": "2023-test-romain-DE",
@@ -1883,9 +2493,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "202303-proteggiamo_i_bambini_dalle_aziende_di_videogiochi_che_non_rispettano_le_regole_imposte_per_immagini_pubblicita_e_contenuti-petition-DE": {
     "slug": "202303-proteggiamo_i_bambini_dalle_aziende_di_videogiochi_che_non_rispettano_le_regole_imposte_per_immagini_pubblicita_e_contenuti-petition-DE",
@@ -1895,9 +2505,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00",
+    "last_checked": null,
     "start_date": "2023-03-01"
   },
   "202305-stop_financing_putin_s_aggression_now-petition-DE": {
@@ -1908,9 +2518,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00",
+    "last_checked": null,
     "start_date": "2023-05-01"
   },
   "202307-save_the_great_river_of_rafina_greece-petition-DE": {
@@ -1921,9 +2531,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00",
+    "last_checked": null,
     "start_date": "2023-07-01"
   },
   "202309-cerremos_el_loro_parque-petition-DE": {
@@ -1934,9 +2544,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00",
+    "last_checked": null,
     "start_date": "2023-09-01"
   },
   "202310-act_now_to_ban_pvc-DE": {
@@ -1947,9 +2557,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00",
+    "last_checked": null,
     "start_date": "2023-10-01"
   },
   "2024-01-09-social-actions-wiki-test-lucas-petition-DE": {
@@ -1961,9 +2571,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-01-ban-forever-chemicals-petition3-DE": {
     "slug": "2024-01-ban-forever-chemicals-petition3-DE",
@@ -1974,9 +2584,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-01-michaltest1-petition-DE": {
     "slug": "2024-01-michaltest1-petition-DE",
@@ -1987,9 +2597,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-01-michaltest2-petition-DE": {
     "slug": "2024-01-michaltest2-petition-DE",
@@ -2000,9 +2610,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-02-michaltest1-petition-DE": {
     "slug": "2024-02-michaltest1-petition-DE",
@@ -2013,9 +2623,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-02-michaltest1-petition2-DE": {
     "slug": "2024-02-michaltest1-petition2-DE",
@@ -2026,9 +2636,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-02-save-the-alps-petition-DE": {
     "slug": "2024-02-save-the-alps-petition-DE",
@@ -2039,9 +2649,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-02-test-setup-mep-target-lino-petition-DE": {
     "slug": "2024-02-test-setup-mep-target-lino-petition-DE",
@@ -2052,9 +2662,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-03-lesly-test-donation-pages-petition-DE": {
     "slug": "2024-03-lesly-test-donation-pages-petition-DE",
@@ -2065,9 +2675,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-03-plastic-pellets-petition-DE": {
     "slug": "2024-03-plastic-pellets-petition-DE",
@@ -2078,9 +2688,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-03-raiffeisen-russia-petition-DE": {
     "slug": "2024-03-raiffeisen-russia-petition-DE",
@@ -2091,9 +2701,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-03-Santander-Amazon-petition-DE": {
     "slug": "2024-03-Santander-Amazon-petition-DE",
@@ -2104,9 +2714,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-03-world-bank-lucas-test-petition-DE": {
     "slug": "2024-03-world-bank-lucas-test-petition-DE",
@@ -2117,9 +2727,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-03-world-bank-petition-DE": {
     "slug": "2024-03-world-bank-petition-DE",
@@ -2130,9 +2740,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-04-cap-reform-petition-DE": {
     "slug": "2024-04-cap-reform-petition-DE",
@@ -2143,9 +2753,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-04-Elections-GOTVMM-campaign-petition-DE": {
     "slug": "2024-04-Elections-GOTVMM-campaign-petition-DE",
@@ -2156,9 +2766,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-04-EU-elections-GOTV-climate-message-testing-climate-energy-hr-DE": {
     "slug": "2024-04-EU-elections-GOTV-climate-message-testing-climate-energy-hr-DE",
@@ -2169,9 +2779,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-04-EU-elections-GOTV-climate-message-testing-climate-nature-hr-DE": {
     "slug": "2024-04-EU-elections-GOTV-climate-message-testing-climate-nature-hr-DE",
@@ -2182,9 +2792,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-04-EU-elections-GOTV-climate-message-testing-food-security-hr-DE": {
     "slug": "2024-04-EU-elections-GOTV-climate-message-testing-food-security-hr-DE",
@@ -2195,9 +2805,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-04-EU-elections-GOTV-extremists-message-testing-eu-unity-hr-DE": {
     "slug": "2024-04-EU-elections-GOTV-extremists-message-testing-eu-unity-hr-DE",
@@ -2208,9 +2818,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-04-EU-elections-GOTV-extremists-message-testing-far-right-democracy-hr-DE": {
     "slug": "2024-04-EU-elections-GOTV-extremists-message-testing-far-right-democracy-hr-DE",
@@ -2221,9 +2831,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-04-EU-elections-GOTV-extremists-message-testing-far-right-feminism-hr-DE": {
     "slug": "2024-04-EU-elections-GOTV-extremists-message-testing-far-right-feminism-hr-DE",
@@ -2234,9 +2844,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-04-EU-elections-GOTV-get-stuff-done-climate-pride-message-testing-hr-DE": {
     "slug": "2024-04-EU-elections-GOTV-get-stuff-done-climate-pride-message-testing-hr-DE",
@@ -2247,9 +2857,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-04-EU-elections-GOTV-get-stuff-done-future-message-testing-hr-DE": {
     "slug": "2024-04-EU-elections-GOTV-get-stuff-done-future-message-testing-hr-DE",
@@ -2260,9 +2870,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-04-michaltest1-petition-DE": {
     "slug": "2024-04-michaltest1-petition-DE",
@@ -2273,9 +2883,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-04-michaltest4-petition-DE": {
     "slug": "2024-04-michaltest4-petition-DE",
@@ -2286,9 +2896,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-04-recognise-Palestine-petition-DE": {
     "slug": "2024-04-recognise-Palestine-petition-DE",
@@ -2299,9 +2909,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-05-GOTV-Use-You-Power-postcard-DE": {
     "slug": "2024-05-GOTV-Use-You-Power-postcard-DE",
@@ -2312,9 +2922,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-05-michaltest1-petition-DE": {
     "slug": "2024-05-michaltest1-petition-DE",
@@ -2325,9 +2935,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-05-national-laws-ecocide-youmove-petition-austria-DE": {
     "slug": "2024-05-national-laws-ecocide-youmove-petition-austria-DE",
@@ -2338,9 +2948,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-05-national-laws-ecocide-youmove-petition-germany-DE": {
     "slug": "2024-05-national-laws-ecocide-youmove-petition-germany-DE",
@@ -2351,9 +2961,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-06-03-Triple-Your-Vote-petition-DE": {
     "slug": "2024-06-03-Triple-Your-Vote-petition-DE",
@@ -2364,9 +2974,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-06-Renew-dont-normalise-hate-petition-DE": {
     "slug": "2024-06-Renew-dont-normalise-hate-petition-DE",
@@ -2377,9 +2987,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-07-big-meat-petition-DE": {
     "slug": "2024-07-big-meat-petition-DE",
@@ -2390,9 +3000,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-07-lidl-chicken-scandal-petition-DE": {
     "slug": "2024-07-lidl-chicken-scandal-petition-DE",
@@ -2403,9 +3013,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-07-michaltest1-petition-DE": {
     "slug": "2024-07-michaltest1-petition-DE",
@@ -2416,9 +3026,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-07-pesticide-free-petition-DE": {
     "slug": "2024-07-pesticide-free-petition-DE",
@@ -2429,9 +3039,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-08-Fossil-Fuel-Firewall-petition-DE": {
     "slug": "2024-08-Fossil-Fuel-Firewall-petition-DE",
@@ -2442,9 +3052,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-08-homes-for-people-not-for-profit-petition-DE": {
     "slug": "2024-08-homes-for-people-not-for-profit-petition-DE",
@@ -2455,9 +3065,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-08-language-switch-pages-petition-DE": {
     "slug": "2024-08-language-switch-pages-petition-DE",
@@ -2468,9 +3078,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-09-ban-octopus-farming-in-the-eu-petition-petition-DE": {
     "slug": "2024-09-ban-octopus-farming-in-the-eu-petition-petition-DE",
@@ -2481,9 +3091,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-09-digital-futures-petition-DE": {
     "slug": "2024-09-digital-futures-petition-DE",
@@ -2494,9 +3104,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-09-free-school-meals-petition-DE": {
     "slug": "2024-09-free-school-meals-petition-DE",
@@ -2507,9 +3117,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-09-pour-plan-national-contre-le-viol-petition-DE": {
     "slug": "2024-09-pour-plan-national-contre-le-viol-petition-DE",
@@ -2520,9 +3130,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-09-seasonal-farm-workers-petition-DE": {
     "slug": "2024-09-seasonal-farm-workers-petition-DE",
@@ -2533,9 +3143,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-1-reform-des-unterhaltsrechtes-DE": {
     "slug": "2024-1-reform-des-unterhaltsrechtes-DE",
@@ -2545,9 +3155,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-1-vollgeld-fur-alle-DE": {
     "slug": "2024-1-vollgeld-fur-alle-DE",
@@ -2557,9 +3167,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-10-are-you-sick-and-tired-of-changing-the-clock-twice-a-year-DE": {
     "slug": "2024-10-are-you-sick-and-tired-of-changing-the-clock-twice-a-year-DE",
@@ -2570,9 +3180,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-10-no-toxic-mineral-oils-in-our-food-petition-DE": {
     "slug": "2024-10-no-toxic-mineral-oils-in-our-food-petition-DE",
@@ -2583,9 +3193,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-10-paul-watson-france-asylum-petition-DE": {
     "slug": "2024-10-paul-watson-france-asylum-petition-DE",
@@ -2596,9 +3206,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-10-per-il-bene-dell-italia-eliminiamo-il-governo-di-centrodestra-fr-DE": {
     "slug": "2024-10-per-il-bene-dell-italia-eliminiamo-il-governo-di-centrodestra-fr-DE",
@@ -2609,9 +3219,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-10-seals-ban-petition-DE": {
     "slug": "2024-10-seals-ban-petition-DE",
@@ -2622,9 +3232,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-10-youmove-wildlife-crossings-petition-DE": {
     "slug": "2024-10-youmove-wildlife-crossings-petition-DE",
@@ -2635,9 +3245,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-11-endlich-vermogenssteuer-einfuhren-DE": {
     "slug": "2024-11-endlich-vermogenssteuer-einfuhren-DE",
@@ -2648,9 +3258,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-11-gegen-ungerechtfertigte-strafzahlungen-an-kunstler-DE": {
     "slug": "2024-11-gegen-ungerechtfertigte-strafzahlungen-an-kunstler-DE",
@@ -2661,9 +3271,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-11-klima-effektiv-verbessern-DE": {
     "slug": "2024-11-klima-effektiv-verbessern-DE",
@@ -2674,9 +3284,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-12-Amazon-workers-petition-DE": {
     "slug": "2024-12-Amazon-workers-petition-DE",
@@ -2687,9 +3297,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-12-iskra-testing-revamped-mail-action-petition-DE": {
     "slug": "2024-12-iskra-testing-revamped-mail-action-petition-DE",
@@ -2700,9 +3310,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-12-Soumahoro-antiracism-petition-DE": {
     "slug": "2024-12-Soumahoro-antiracism-petition-DE",
@@ -2713,9 +3323,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-12-umweltwissen-aufklarung-als-obligatorisches-schulfach-einfuhren-DE": {
     "slug": "2024-12-umweltwissen-aufklarung-als-obligatorisches-schulfach-einfuhren-DE",
@@ -2726,9 +3336,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-2-free-doctor-ahmed-muhanna-and-the-awda-medical-staff-petition-DE": {
     "slug": "2024-2-free-doctor-ahmed-muhanna-and-the-awda-medical-staff-petition-DE",
@@ -2738,9 +3348,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-3-stoppt-in-vitro-zellproduktion-im-bioreaktor-DE": {
     "slug": "2024-3-stoppt-in-vitro-zellproduktion-im-bioreaktor-DE",
@@ -2750,9 +3360,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-4-agrarreform-DE": {
     "slug": "2024-4-agrarreform-DE",
@@ -2762,9 +3372,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-4-friedensdemonstrationen-weltweit-am-sonntag-den-5-5-24-um-10h-DE": {
     "slug": "2024-4-friedensdemonstrationen-weltweit-am-sonntag-den-5-5-24-um-10h-DE",
@@ -2774,9 +3384,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-4-politische-entscheider-mussen-verpflichtet-werden-mit-diplomatie-DE": {
     "slug": "2024-4-politische-entscheider-mussen-verpflichtet-werden-mit-diplomatie-DE",
@@ -2786,9 +3396,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-5--DE": {
     "slug": "2024-5--DE",
@@ -2798,9 +3408,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-6-100-prozent-erneuerbare-in-modellregion-ahrtal-wird-solahrtal-DE": {
     "slug": "2024-6-100-prozent-erneuerbare-in-modellregion-ahrtal-wird-solahrtal-DE",
@@ -2810,9 +3420,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-6-because-our-planet-is-blue-DE": {
     "slug": "2024-6-because-our-planet-is-blue-DE",
@@ -2822,9 +3432,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-7-beitrag-zum-klimaschutz-DE": {
     "slug": "2024-7-beitrag-zum-klimaschutz-DE",
@@ -2834,9 +3444,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-7-gerechtigkeit-fur-deutsche-rentner-DE": {
     "slug": "2024-7-gerechtigkeit-fur-deutsche-rentner-DE",
@@ -2846,9 +3456,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-8-deneguemos-la-reapertura-de-la-mina-de-touro-a-coruna-espana-petition-DE": {
     "slug": "2024-8-deneguemos-la-reapertura-de-la-mina-de-touro-a-coruna-espana-petition-DE",
@@ -2858,9 +3468,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-8-kein-schlussstrich-unter-den-holocaust-DE": {
     "slug": "2024-8-kein-schlussstrich-unter-den-holocaust-DE",
@@ -2870,9 +3480,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-8-marcin-test-youmove-pol1-DE": {
     "slug": "2024-8-marcin-test-youmove-pol1-DE",
@@ -2882,9 +3492,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2024-feb-olga-v-test-trial-petition-DE": {
     "slug": "2024-feb-olga-v-test-trial-petition-DE",
@@ -2894,9 +3504,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-01-23-russian-fleet-launch-DE": {
     "slug": "2025-01-23-russian-fleet-launch-DE",
@@ -2907,9 +3517,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-01-elon-musk-dsa-petition-DE": {
     "slug": "2025-01-elon-musk-dsa-petition-DE",
@@ -2920,9 +3530,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-01-Stop-Trump-Greenland-petition-DE": {
     "slug": "2025-01-Stop-Trump-Greenland-petition-DE",
@@ -2933,9 +3543,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-02-mercosur-pesticides-petition-DE": {
     "slug": "2025-02-mercosur-pesticides-petition-DE",
@@ -2946,9 +3556,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-02-ngo-funding-petition-DE": {
     "slug": "2025-02-ngo-funding-petition-DE",
@@ -2959,9 +3569,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-02-save-green-deal-petition-DE": {
     "slug": "2025-02-save-green-deal-petition-DE",
@@ -2972,9 +3582,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-02-trial-version3-omnibus-petition-DE": {
     "slug": "2025-02-trial-version3-omnibus-petition-DE",
@@ -2985,9 +3595,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-02-trial-version4-omnibus-petition-DE": {
     "slug": "2025-02-trial-version4-omnibus-petition-DE",
@@ -2998,9 +3608,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-02-trial-version5-omnibus-petition-DE": {
     "slug": "2025-02-trial-version5-omnibus-petition-DE",
@@ -3011,9 +3621,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-04-capreform-launch-petition-DE": {
     "slug": "2025-04-capreform-launch-petition-DE",
@@ -3024,9 +3634,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-04-Huawei-EU-corruption-scandal-petition-DE": {
     "slug": "2025-04-Huawei-EU-corruption-scandal-petition-DE",
@@ -3037,9 +3647,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-04-score-fast-fashion-petition-DE": {
     "slug": "2025-04-score-fast-fashion-petition-DE",
@@ -3050,9 +3660,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-04-Trump-Gas-petition-DE": {
     "slug": "2025-04-Trump-Gas-petition-DE",
@@ -3063,9 +3673,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-05-14-rebecca-practice-petition-DE": {
     "slug": "2025-05-14-rebecca-practice-petition-DE",
@@ -3076,9 +3686,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-05-berlin-onboarding-campaign-petition-DE": {
     "slug": "2025-05-berlin-onboarding-campaign-petition-DE",
@@ -3089,9 +3699,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-05-breakupbigtech-petition-DE": {
     "slug": "2025-05-breakupbigtech-petition-DE",
@@ -3102,9 +3712,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-05-criminalisation-migration-petition-DE": {
     "slug": "2025-05-criminalisation-migration-petition-DE",
@@ -3115,9 +3725,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-05-EU-trade-Israel-petition-DE": {
     "slug": "2025-05-EU-trade-Israel-petition-DE",
@@ -3128,9 +3738,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-05-landmine-ban-petition-DE": {
     "slug": "2025-05-landmine-ban-petition-DE",
@@ -3141,9 +3751,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-05-olga-v-berlin-test-petition-DE": {
     "slug": "2025-05-olga-v-berlin-test-petition-DE",
@@ -3154,9 +3764,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-06-farmersunite-petition-DE": {
     "slug": "2025-06-farmersunite-petition-DE",
@@ -3167,9 +3777,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-06-hungary-pride-ban-petition-DE": {
     "slug": "2025-06-hungary-pride-ban-petition-DE",
@@ -3180,9 +3790,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-07-antigreenwashing-directive-petition-DE": {
     "slug": "2025-07-antigreenwashing-directive-petition-DE",
@@ -3193,9 +3803,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-07-coffee-certification-schemes-petition-DE": {
     "slug": "2025-07-coffee-certification-schemes-petition-DE",
@@ -3206,9 +3816,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-08-end-the-plastic-era-petition-DE": {
     "slug": "2025-08-end-the-plastic-era-petition-DE",
@@ -3219,9 +3829,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-08-EU-2040-climate-goal-petition-DE": {
     "slug": "2025-08-EU-2040-climate-goal-petition-DE",
@@ -3232,9 +3842,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-08-USAID-contraceptives-petition-DE": {
     "slug": "2025-08-USAID-contraceptives-petition-DE",
@@ -3245,9 +3855,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-09-Global-Flotilla-petition-DE": {
     "slug": "2025-09-Global-Flotilla-petition-DE",
@@ -3258,9 +3868,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-09-israelfootballban-petition-DE": {
     "slug": "2025-09-israelfootballban-petition-DE",
@@ -3271,9 +3881,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-09-kelsey-onboarding-campaign-petition-DE": {
     "slug": "2025-09-kelsey-onboarding-campaign-petition-DE",
@@ -3284,9 +3894,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-1-europa-kauft-keine-teslas-mehr-DE": {
     "slug": "2025-1-europa-kauft-keine-teslas-mehr-DE",
@@ -3296,9 +3906,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-1-propaganda-DE": {
     "slug": "2025-1-propaganda-DE",
@@ -3308,9 +3918,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-10-harmit-onboarding-campaign-petition-DE": {
     "slug": "2025-10-harmit-onboarding-campaign-petition-DE",
@@ -3321,9 +3931,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-10-jessie-onboarding-campaign-petition-DE": {
     "slug": "2025-10-jessie-onboarding-campaign-petition-DE",
@@ -3334,9 +3944,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-10-oil-Baltic-Sea-petition-DE": {
     "slug": "2025-10-oil-Baltic-Sea-petition-DE",
@@ -3347,9 +3957,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-10-trump-trade-deal-petition-DE": {
     "slug": "2025-10-trump-trade-deal-petition-DE",
@@ -3360,9 +3970,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-10-yes-to-greening-no-to-mandates-DE": {
     "slug": "2025-10-yes-to-greening-no-to-mandates-DE",
@@ -3373,9 +3983,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-11-ban-on-solar-radiation-management-and-high-risk-geoengineering-i-DE": {
     "slug": "2025-11-ban-on-solar-radiation-management-and-high-risk-geoengineering-i-DE",
@@ -3386,9 +3996,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-11-ban-shark-meat-EU-petition-DE": {
     "slug": "2025-11-ban-shark-meat-EU-petition-DE",
@@ -3399,9 +4009,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-11-dpc-ireland-petition-DE": {
     "slug": "2025-11-dpc-ireland-petition-DE",
@@ -3412,9 +4022,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-11-housing-for-all-petition-DE": {
     "slug": "2025-11-housing-for-all-petition-DE",
@@ -3425,9 +4035,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-11-stop-aux-megots-les-fabricants-de-tabac-doivent-financer-le-recy-DE": {
     "slug": "2025-11-stop-aux-megots-les-fabricants-de-tabac-doivent-financer-le-recy-DE",
@@ -3438,9 +4048,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-12-laer-altenberge-bau-einer-querungshilfe-bushaltestelle-an-der-l5-DE": {
     "slug": "2025-12-laer-altenberge-bau-einer-querungshilfe-bushaltestelle-an-der-l5-DE",
@@ -3451,9 +4061,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-12-no-deportation-petition-DE": {
     "slug": "2025-12-no-deportation-petition-DE",
@@ -3464,9 +4074,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-12-omnibus-food-petition-DE": {
     "slug": "2025-12-omnibus-food-petition-DE",
@@ -3477,9 +4087,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-12-translation-test-dpc-ireland-petition-DE": {
     "slug": "2025-12-translation-test-dpc-ireland-petition-DE",
@@ -3490,9 +4100,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-12-translation-test-oil-baltic-sea-petition-DE": {
     "slug": "2025-12-translation-test-oil-baltic-sea-petition-DE",
@@ -3503,9 +4113,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-12-translation-test-plastic-era-petition-DE": {
     "slug": "2025-12-translation-test-plastic-era-petition-DE",
@@ -3516,9 +4126,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-12-waffenstillstand-fur-die-ukraine-sofort-DE": {
     "slug": "2025-12-waffenstillstand-fur-die-ukraine-sofort-DE",
@@ -3529,9 +4139,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-2-cancelacion-inmediata-del-macro-proyecto-turistico-underwatergar-petition-DE": {
     "slug": "2025-2-cancelacion-inmediata-del-macro-proyecto-turistico-underwatergar-petition-DE",
@@ -3541,9 +4151,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-3-erhebt-steuern-beteiligt-alle-gemass-ihrer-finanzkraft-DE": {
     "slug": "2025-3-erhebt-steuern-beteiligt-alle-gemass-ihrer-finanzkraft-DE",
@@ -3553,9 +4163,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-3-mehr-steuergerechtigkeit-nicht-nur-neue-schulden-DE": {
     "slug": "2025-3-mehr-steuergerechtigkeit-nicht-nur-neue-schulden-DE",
@@ -3565,9 +4175,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-3-santa-should-wear-european-blue-DE": {
     "slug": "2025-3-santa-should-wear-european-blue-DE",
@@ -3577,9 +4187,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-4-8-mart-dunya-emekci-kadinlar-gunu-ucretli-izin-gunu-olsun-DE": {
     "slug": "2025-4-8-mart-dunya-emekci-kadinlar-gunu-ucretli-izin-gunu-olsun-DE",
@@ -3589,9 +4199,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-6-keine-investitionen-in-klimakiller-DE": {
     "slug": "2025-6-keine-investitionen-in-klimakiller-DE",
@@ -3601,9 +4211,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-6-protect-the-freedom-flotilla-end-gazas-blockade-now-petition-DE": {
     "slug": "2025-6-protect-the-freedom-flotilla-end-gazas-blockade-now-petition-DE",
@@ -3613,9 +4223,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2025-8-in-35-jahren-ist-alles-vorbei-DE": {
     "slug": "2025-8-in-35-jahren-ist-alles-vorbei-DE",
@@ -3625,9 +4235,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2026-01-omnibus-tech-petition-DE": {
     "slug": "2026-01-omnibus-tech-petition-DE",
@@ -3638,9 +4248,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2026-01-PFAS-ban-forever-chemicals-petition-DE": {
     "slug": "2026-01-PFAS-ban-forever-chemicals-petition-DE",
@@ -3651,9 +4261,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2026-01-safe-country-petition-DE": {
     "slug": "2026-01-safe-country-petition-DE",
@@ -3664,9 +4274,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2026-02-deforestation-petition-DE": {
     "slug": "2026-02-deforestation-petition-DE",
@@ -3677,9 +4287,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2026-02-digital-euro-petition-DE": {
     "slug": "2026-02-digital-euro-petition-DE",
@@ -3690,9 +4300,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2026-02-my-voice-my-choice-petition-DE": {
     "slug": "2026-02-my-voice-my-choice-petition-DE",
@@ -3703,9 +4313,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2026-02-pesticides-mayor-Germany-test-petition-DE": {
     "slug": "2026-02-pesticides-mayor-Germany-test-petition-DE",
@@ -3716,9 +4326,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2026-03-Europe-against-illegal-war-in-Iran-petition-DE": {
     "slug": "2026-03-Europe-against-illegal-war-in-Iran-petition-DE",
@@ -3729,9 +4339,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2026-03-palantir-petition-DE": {
     "slug": "2026-03-palantir-petition-DE",
@@ -3742,9 +4352,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2026-04-anti-slapps-petition-DE": {
     "slug": "2026-04-anti-slapps-petition-DE",
@@ -3755,9 +4365,9 @@
     "started_by": "WeMove Europe",
     "kind": "petition",
     "status": "online",
-    "last_seen": "2026-07-13T13:20:39-06:00",
+    "last_seen": "2026-07-29T16:01:03-06:00",
     "offline_since": null,
-    "last_checked": "2026-07-13T13:20:39-06:00"
+    "last_checked": null
   },
   "2026-04-ban-landmines-europe-petition-DE": {
     "slug": "2026-04-ban-landmines-europe-petition-DE",
