@@ -67,8 +67,10 @@
    vorhanden, über die Android-Brücke window.AndroidNotify (app.js)
    v21: echtes innn.it-Logo (Wellenmarke aus dem Bündel der Plattform statt
    eines PNG-Ausschnitts), EIN Innenabstand von 1.5rem für alle Kachelgrößen
-   (logos/innnit.svg/platforms.js/layouts.css) */
-var CACHE = "pm-cache-v21";
+   (logos/innnit.svg/platforms.js/layouts.css)
+   v22: Plattform-Logo in den Einstellungen liegt hinter der Beschriftung statt
+   daneben (app.js/style.css) */
+var CACHE = "pm-cache-v22";
 /* Versionsunabhängig – überlebt das Hochzählen von CACHE. Die Zahl dahinter
    NUR hochsetzen, wenn sich die Paketnummerierung selbst ändert (dann stimmen
    die alten Inhalte nicht mehr zur Nummer und die Bibliothek muss weg).

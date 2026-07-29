@@ -639,7 +639,8 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
   border-radius:999px;padding:.875rem;cursor:pointer;margin-top:.5rem}
 .btn-secondary:active{background:var(--line)}
 /* Plattform-Zeile in den Einstellungen: gleiche Marken-Tönung wie die Liste. */
-.opt{display:flex;align-items:center;gap:.75rem;
+/* position/overflow für das Logo, das hinter der Beschriftung liegt (s. u.) */
+.opt{position:relative;overflow:hidden;display:flex;align-items:center;gap:.75rem;
   background-color:var(--brand,var(--surface));
   background-image:linear-gradient(var(--veil-1),var(--veil-1));
   border:.0625rem solid var(--line);border-radius:1.125rem;
@@ -647,7 +648,21 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
   box-shadow:inset .375rem 0 0 0 var(--veil-rail),
              inset .375rem 0 0 0 var(--brand,var(--line)),
              var(--shadow)}
-.opt__body{flex:1;min-width:0}
+.opt__body{flex:1;min-width:0;position:relative;z-index:1}
+/* Logo HINTER der Beschriftung statt daneben.
+   Nachgemessen, warum nicht daneben: auf 375 px Breite teilen sich Text, Logo,
+   Stern und Schalter eine Zeile. Weil .plogo nicht schrumpft (flex:none),
+   blieben dem Text nur 52–86 px — „Bundestag ePetitionen" wurde abgeschnitten
+   und die Zeile wuchs von 88 auf 145 px. Absolut gesetzt beansprucht das Logo
+   keine Breite, der Name behält die ganze Zeile.
+   Zurückhaltende Deckung, damit die Marke erkennbar bleibt, ohne mit der
+   Schrift zu konkurrieren: sie liegt darunter, nicht darüber.
+   Der Abstand rechts hält die Marke aus Stern und Schalter heraus (zusammen
+   rund 6 rem), sie liegt also im Feld hinter der Beschriftung. */
+.opt .plogo{position:absolute;right:8.5rem;top:50%;
+  transform:translateY(-50%);z-index:0;opacity:.22;pointer-events:none}
+/* Stern und Schalter müssen über dem Logo liegen und bedienbar bleiben. */
+.opt .favbtn,.opt .switch{position:relative;z-index:1}
 .opt__name{font-weight:700;font-size:.9375rem;line-height:1.3}
 .opt__meta{color:var(--muted);font-size:.75rem;margin-top:.125rem}
 .opt.disabled{opacity:.55}
