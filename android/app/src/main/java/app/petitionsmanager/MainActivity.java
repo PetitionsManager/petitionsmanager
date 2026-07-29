@@ -40,8 +40,20 @@ public class MainActivity extends Activity {
 
     private static final String APP_HOST = "appassets.androidplatform.net";
     private static final int FILE_CHOOSER_REQ = 1;
+    private static final int NOTIFY_PERM_REQ = 2;
     private WebView web;
     private ValueCallback<Uri[]> filePathCallback;
+    /* Android kennt kein "noch nicht gefragt" für Rechte. Ohne diese Merkung
+       wäre ein abgelehntes Recht nicht von einem ungefragten zu unterscheiden,
+       und die App würde „bitte erlaube es in den Einstellungen" anzeigen,
+       bevor sie überhaupt gefragt hat. Dauerhaft gespeichert, weil die
+       Unterscheidung sonst bei jedem App-Start wieder verloren wäre. */
+    private static final String KEY_GEFRAGT = "permissionAsked";
+
+    private boolean gefragtGemerkt() {
+        return getSharedPreferences(NotifyReceiver.PREFS, MODE_PRIVATE)
+                .getBoolean(KEY_GEFRAGT, false);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +94,9 @@ public class MainActivity extends Activity {
 
         // Export: JS ruft window.AndroidBackup.saveBackup(name, json).
         web.addJavascriptInterface(new BackupBridge(), "AndroidBackup");
+        // Benachrichtigungen: JS ruft window.AndroidNotify.* (siehe NotifyBridge).
+        web.addJavascriptInterface(new NotifyBridge(), "AndroidNotify");
+        NotifyReceiver.kanalAnlegen(this);
 
         web.setWebChromeClient(new WebChromeClient() {
             @Override
@@ -142,6 +157,18 @@ public class MainActivity extends Activity {
         }
     }
 
+    /* Android liefert das Ergebnis der Rechte-Abfrage nicht an den Aufrufer
+       zurück, sondern hier. Die Web-App erfährt es über ein Ereignis – sie
+       liest danach selbst AndroidNotify.permission() und zeichnet neu. */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                           int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode != NOTIFY_PERM_REQ || web == null) return;
+        web.evaluateJavascript(
+                "window.dispatchEvent(new Event('androidNotifyPermission'))", null);
+    }
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -184,6 +211,73 @@ public class MainActivity extends Activity {
             } catch (Exception e) {
                 toast("Speichern fehlgeschlagen: " + e.getMessage());
             }
+        }
+    }
+
+    /**
+     * JS-Brücke für die tägliche Erinnerung. Die Web-App bevorzugt sie, wenn
+     * window.AndroidNotify vorhanden ist – im WebView fehlt die
+     * Web-Notification-API ersatzlos, dort ginge es sonst überhaupt nicht.
+     *
+     * Alle Methoden laufen auf einem WebView-Thread, nicht auf dem UI-Thread;
+     * SharedPreferences und AlarmManager sind damit einverstanden.
+     */
+    private class NotifyBridge {
+        /** "granted" | "denied" | "default" – gleiche Wörter wie im Web, damit
+         *  die App keine zweite Begriffswelt braucht. */
+        @JavascriptInterface
+        public String permission() {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) return "granted";
+            if (checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS)
+                    == android.content.pm.PackageManager.PERMISSION_GRANTED)
+                return "granted";
+            /* Android unterscheidet "abgelehnt" nicht von "noch nie gefragt".
+               Die Merkung liegt deshalb dauerhaft in den Einstellungen: sonst
+               fragte die App nach jedem Neustart wieder, Android zeigte den
+               Dialog bei dauerhafter Ablehnung gar nicht mehr, und der Nutzer
+               sähe nur eine Meldung, die auf ein Ergebnis wartet. */
+            return gefragtGemerkt() ? "denied" : "default";
+        }
+
+        /** Fragt das Recht zur Laufzeit. Ab Android 13 nötig. */
+        @JavascriptInterface
+        public void requestPermission() {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) return;
+            getSharedPreferences(NotifyReceiver.PREFS, MODE_PRIVATE).edit()
+                    .putBoolean(KEY_GEFRAGT, true).apply();
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    requestPermissions(
+                            new String[]{ android.Manifest.permission.POST_NOTIFICATIONS },
+                            NOTIFY_PERM_REQ);
+                }
+            });
+        }
+
+        /** Sofort eine Meldung zeigen – für die Testschaltfläche. */
+        @JavascriptInterface
+        public boolean show(String title, String body) {
+            if (!"granted".equals(permission())) return false;
+            NotifyReceiver.zeigen(MainActivity.this, title, body);
+            return true;
+        }
+
+        /** Tageserinnerung einschalten bzw. Uhrzeit ändern. */
+        @JavascriptInterface
+        public void schedule(int hour, int minute) {
+            getSharedPreferences(NotifyReceiver.PREFS, MODE_PRIVATE).edit()
+                    .putBoolean(NotifyReceiver.KEY_ON, true)
+                    .putInt(NotifyReceiver.KEY_HOUR, hour)
+                    .putInt(NotifyReceiver.KEY_MINUTE, minute)
+                    .apply();
+            NotifyReceiver.planen(MainActivity.this, hour, minute);
+        }
+
+        @JavascriptInterface
+        public void cancel() {
+            getSharedPreferences(NotifyReceiver.PREFS, MODE_PRIVATE).edit()
+                    .putBoolean(NotifyReceiver.KEY_ON, false).apply();
+            NotifyReceiver.abbrechen(MainActivity.this);
         }
     }
 
