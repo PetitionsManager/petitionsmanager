@@ -49,12 +49,22 @@
    (app.js/layouts.css/platforms.js)
    v16: innn.it-Logo als SVG statt PNG (als CSS-Maske wurde das einzige
    Rasterbild nicht gezeichnet), Flaggen nur noch an der Gruppenüberschrift
-   und dort als runder Kreis (app.js/style.css/layouts.css/platforms.js) */
+   und dort als runder Kreis (app.js/style.css/layouts.css/platforms.js)
+   v17: Innenabstand der Kacheln enger (Außenabstand zurück auf .75rem),
+   Favoriten-Erklärung von der Übersicht in die Einstellungen gewandert
+   (app.js/layouts.css/style.css)
+   v18: Logo-Register – Monogramme raus, alle elf Logos flächengleich statt
+   höhengleich, vier Farbvarianten, Markenfarbe im dunklen Thema
+   (app.js/style.css/theme.css/layouts.css/platforms.js) */
 var CACHE = "pm-cache-v18";
 /* Versionsunabhängig – überlebt das Hochzählen von CACHE. Die Zahl dahinter
    NUR hochsetzen, wenn sich die Paketnummerierung selbst ändert (dann stimmen
-   die alten Inhalte nicht mehr zur Nummer und die Bibliothek muss weg). */
-var TEXTS = "pm-texts-1";
+   die alten Inhalte nicht mehr zur Nummer und die Bibliothek muss weg).
+   pm-texts-2: die WeAct-Reparatur hat genau diesen Fall ausgelöst – 423 Pakete
+   behielten ihre Nummer, bekamen aber vollständige Texte. Ohne den Sprung
+   hätten Geräte mit gefüllter Bibliothek die abgeschnittenen Fassungen
+   dauerhaft behalten, weil Volltexte cache-first ausgeliefert werden. */
+var TEXTS = "pm-texts-2";
 var TEXT_RE = /\.t\d+\.json$/;
 var SHELL = [
   "./",
