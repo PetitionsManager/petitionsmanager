@@ -2286,7 +2286,44 @@
   // so auch im Hinweistext, damit niemand etwas anderes erwartet.
   var notifyTimer = null;
 
-  function notifySupported() { return "Notification" in window; }
+  /* Android-Brücke (MainActivity.NotifyBridge). Sie hat Vorrang, wo sie
+     existiert: im WebView fehlt die Web-Notification-API ersatzlos, dort ginge
+     es ohne sie überhaupt nicht. Zusätzlich weckt sie über den AlarmManager,
+     also auch bei geschlossener App — das kann die Web-Variante grundsätzlich
+     nicht, die braucht eine laufende Seite. */
+  var AN = window.AndroidNotify || null;
+  function notifySupported() { return !!AN || ("Notification" in window); }
+  function notifyPermission() {
+    if (AN) return AN.permission();
+    return ("Notification" in window) ? Notification.permission : "denied";
+  }
+  function notifyRequest() {
+    if (!AN) return Notification.requestPermission();
+    /* Android antwortet nicht auf dem Rückweg des Aufrufs, sondern später über
+       onRequestPermissionsResult. Bis das Ereignis kommt, wissen wir nichts. */
+    AN.requestPermission();
+    return new Promise(function (resolve) {
+      var fertig = function () {
+        window.removeEventListener("androidNotifyPermission", fertig);
+        resolve(AN.permission());
+      };
+      window.addEventListener("androidNotifyPermission", fertig);
+      // Notausgang, falls der Dialog weggewischt wird und nie ein Ergebnis kommt.
+      setTimeout(fertig, 30000);
+    });
+  }
+  /* Weckruf im Android-Teil setzen bzw. abbestellen. Ohne Brücke ein Nichts —
+     im Browser bleibt es beim Minutentakt in scheduleNotify(). */
+  function notifySyncAlarm() {
+    if (!AN) return;
+    var n = state.prefs.notify;
+    if (n.on && notifyPermission() === "granted") {
+      var t = String(n.time || "09:00").split(":");
+      AN.schedule(parseInt(t[0], 10) || 0, parseInt(t[1], 10) || 0);
+    } else {
+      AN.cancel();
+    }
+  }
 
   function renderNotifyBox() {
     var n = state.prefs.notify;
@@ -2312,7 +2349,7 @@
     function refreshState() {
       if (!notifySupported()) {
         stateLbl.textContent = "Dieses Gerät unterstützt keine Benachrichtigungen.";
-      } else if (Notification.permission === "denied") {
+      } else if (notifyPermission() === "denied") {
         stateLbl.textContent = T("notify.permissionDenied",
           "In den Geräte-Einstellungen gesperrt.");
       } else if (n.on) {
@@ -2325,16 +2362,16 @@
     main.querySelector("input").addEventListener("change", function () {
       var on = this.checked;
       var self = this;
-      if (on && notifySupported() && Notification.permission === "default") {
-        Notification.requestPermission().then(function (perm) {
+      if (on && notifySupported() && notifyPermission() === "default") {
+        notifyRequest().then(function (perm) {
           if (perm !== "granted") { self.checked = false; on = false; }
           n.on = on; savePrefs(); refreshState();
           detail.style.display = on ? "" : "none";
-          scheduleNotify();
+          scheduleNotify(); notifySyncAlarm();
         });
         return;
       }
-      n.on = on; savePrefs(); refreshState();
+      n.on = on; savePrefs(); refreshState(); notifySyncAlarm();
       detail.style.display = on ? "" : "none";
       scheduleNotify();
     });
@@ -2351,6 +2388,7 @@
       n.time = this.value || "09:00";
       n.lastDate = null;              // neue Uhrzeit → heute erneut zulassen
       savePrefs(); refreshState(); scheduleNotify();
+      notifySyncAlarm();              // Weckruf im Android-Teil nachziehen
     });
     detail.appendChild(timeRow);
 
@@ -2387,9 +2425,8 @@
     function sagen(text) { testMsg.textContent = text; }
     testBtn.addEventListener("click", function () {
       if (!notifySupported()) {
-        sagen("Diese Umgebung kennt keine Benachrichtigungen. In der " +
-              "Android-App ist das bekannt – dort fehlt die Schnittstelle im " +
-              "WebView, die Erinnerung braucht dafür einen eigenen Einbau.");
+        sagen("Diese Umgebung kennt keine Benachrichtigungen — weder über den " +
+              "Browser noch über die Android-Brücke.");
         return;
       }
       var senden = function () {
@@ -2401,28 +2438,40 @@
                    : "Konnte nicht gesendet werden.");
         });
       };
-      if (Notification.permission === "granted") { senden(); return; }
-      if (Notification.permission === "denied") {
-        sagen("Du hast Benachrichtigungen für diese Seite abgelehnt. Das lässt " +
-              "sich nur in den Einstellungen des Browsers zurücknehmen.");
+      var recht = notifyPermission();
+      if (recht === "granted") { senden(); return; }
+      if (recht === "denied") {
+        sagen(AN
+          ? "Benachrichtigungen sind für diese App gesperrt. Das lässt sich " +
+            "nur in den Android-Einstellungen der App zurücknehmen."
+          : "Du hast Benachrichtigungen für diese Seite abgelehnt. Das lässt " +
+            "sich nur in den Einstellungen des Browsers zurücknehmen.");
         return;
       }
       // "default" – vorher scheiterte der Test hier stumm, weil das Recht nur
       // beim Einschalten des Schalters erfragt wurde.
       sagen("Warte auf deine Erlaubnis …");
-      Notification.requestPermission().then(function (perm) {
-        if (perm === "granted") senden();
+      notifyRequest().then(function (perm) {
+        if (perm === "granted") { notifySyncAlarm(); senden(); }
         else sagen("Ohne Erlaubnis keine Benachrichtigung.");
       });
     });
     detail.appendChild(testBtn);
     detail.appendChild(testMsg);
 
-    detail.appendChild(el('<div class="srow__note">Hinweis: Die Meldung ' +
-      "erscheint, sobald du die App nach der gewählten Uhrzeit das nächste " +
-      "Mal öffnest oder sie im Hintergrund noch läuft. Eine Erinnerung bei " +
-      "komplett geschlossener App bräuchte einen eigenen Server – den hat " +
-      "diese App bewusst nicht.</div>"));
+    /* Der Hinweis muss die Wahrheit für die jeweilige Umgebung sagen: mit der
+       Android-Brücke weckt ein AlarmManager auch bei geschlossener App, im
+       Browser gibt es nur den Minutentakt einer laufenden Seite. */
+    detail.appendChild(el('<div class="srow__note">' + (AN
+      ? "Die Erinnerung kommt zur gewählten Uhrzeit, auch wenn die App " +
+        "geschlossen ist. Android darf sie um einige Minuten verschieben, um " +
+        "Akku zu sparen. Wie viele Petitionen neu sind, steht in der App – die " +
+        "Meldung selbst kennt die Daten nicht."
+      : "Hinweis: Die Meldung erscheint, sobald du die App nach der gewählten " +
+        "Uhrzeit das nächste Mal öffnest oder sie im Hintergrund noch läuft. " +
+        "Eine Erinnerung bei komplett geschlossener App bräuchte einen eigenen " +
+        "Server – den hat diese App im Browser bewusst nicht. In der " +
+        "Android-App übernimmt das ein Weckruf des Systems.") + "</div>"));
 
     box.appendChild(detail);
     refreshState();
@@ -2445,8 +2494,9 @@
      Fehler ab und gab stillschweigend false zurück — die Schaltfläche tat
      also am Telefon sichtbar nichts, ohne einen Grund zu nennen. */
   function showNotification(title, body) {
-    if (!notifySupported() || Notification.permission !== "granted")
+    if (!notifySupported() || notifyPermission() !== "granted")
       return Promise.resolve(false);
+    if (AN) return Promise.resolve(!!AN.show(title, body));
     var opt = { body: body, icon: "icons/icon-192.png",
                 badge: "icons/icon-192.png", tag: "petitionsmanager-daily" };
     var viaSW = navigator.serviceWorker && navigator.serviceWorker.ready

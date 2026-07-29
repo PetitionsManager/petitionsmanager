@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- Nur für den optionalen Remote-Datenmodus (Datenquelle im Menü).
-         Die App funktioniert vollständig OFFLINE mit den gebündelten Daten. -->
+    <!-- Für die Datenquelle "Automatisch"/"Live": tagesaktuelle Daten von
+         GitHub Pages. Die App funktioniert auch vollständig OFFLINE mit den
+         gebündelten Daten – ohne Verbindung fällt sie darauf zurück. -->
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Tägliche Erinnerung. Ab Android 13 muss das Recht zusätzlich zur
+         Laufzeit erfragt werden (siehe MainActivity). Ohne Zustimmung bleibt
+         die Funktion einfach aus; die App fragt nur, wenn der Nutzer die
+         Erinnerung selbst einschaltet. -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- Damit eine eingeschaltete Erinnerung einen Neustart des Geräts
+         übersteht. Geweckt wird mit einem UNGENAUEN Alarm – der braucht kein
+         SCHEDULE_EXACT_ALARM, und für eine Tageserinnerung ist die Minute
+         ohnehin nicht entscheidend. -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -22,5 +34,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Empfängt den Tagesalarm und den Gerätestart. android:exported ist
+             bewusst "false": nur das System und die App selbst dürfen ihn
+             auslösen, sonst könnte jede andere App die Meldung erzeugen. -->
+        <receiver
+            android:name=".NotifyReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 </manifest>

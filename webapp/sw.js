@@ -59,8 +59,13 @@
    v19: Datenquelle „Automatisch" – die App prüft beim Start, ob die
    tagesaktuellen Daten auf GitHub Pages erreichbar und neuer sind als die
    mitgelieferten, und nimmt sonst das App-Paket. Neue Vorgabe für alle, die
-   nichts eingestellt haben (app.js) */
-var CACHE = "pm-cache-v19";
+   nichts eingestellt haben (app.js)
+   v20: unterschriebene Petition öffnet wieder die Petition statt der
+   Plattformübersicht (beendete lagen im zugeklappten Akkordion); Register
+   HINT_KEYS, damit „Hinweise zurücksetzen" alle Hinweise erreicht;
+   Benachrichtigungen laufen über registration.showNotification() und, wo
+   vorhanden, über die Android-Brücke window.AndroidNotify (app.js) */
+var CACHE = "pm-cache-v20";
 /* Versionsunabhängig – überlebt das Hochzählen von CACHE. Die Zahl dahinter
    NUR hochsetzen, wenn sich die Paketnummerierung selbst ändert (dann stimmen
    die alten Inhalte nicht mehr zur Nummer und die Bibliothek muss weg).
