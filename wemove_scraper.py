@@ -61,6 +61,16 @@ FETCH_HEADERS = {
     "Accept-Language": "de-DE,de;q=0.9",
 }
 
+# Grenzen fuer einen Lauf. action.wemove.eu schaltet nach einigen Dutzend
+# Abrufen einen Checkpoint davor, der mit leeren 200/202-Antworten reagiert.
+# Am 29.7.26 lieferte ein Lauf ueber alle 262 Kampagnen deshalb nach den ersten
+# rund 40 nur noch Leerseiten. Statt das zu umgehen, fragt der Scraper weniger:
+# er hoert auf, sobald mehrere Abrufe hintereinander leer bleiben, und holt den
+# Rest beim naechsten Tageslauf. Der Rueckstand baut sich so ueber einige Tage
+# ab - langsamer, aber ohne dem Betreiber zur Last zu fallen.
+DETAIL_BUDGET = 120        # erfolgreiche Detailabrufe pro Lauf
+ABBRUCH_NACH_FEHLERN = 5   # Leerantworten in Folge = Checkpoint erreicht
+
 
 def _goal_for(count: int) -> int:
     for t in TARGETS:
@@ -164,6 +174,23 @@ def scrape_petition(fetcher: core.Fetcher, page: str) -> tuple[str, dict | None]
     if not resp.ok:
         return "error", None
     rec = parse_detail(resp.text, url, page)
+
+    # Bot-Schutz erkennen und als FEHLER behandeln, nicht als Erfolg.
+    #
+    # action.wemove.eu schaltet nach einigen Dutzend Abrufen einen Checkpoint
+    # davor. Der antwortet nicht mit 403, sondern mit 200 bzw. 202 und einer
+    # Seite ohne Inhalt - selbst robots.txt kommt dann als leeres 202. Ohne
+    # diese Pruefung lief das als "online" durch: upsert schreibt zwar keine
+    # leeren Werte, setzt aber last_checked, und skip_recent sperrt den
+    # Datensatz danach 24 h. Am 29.7.26 hat genau das 241 von 262 Petitionen
+    # blockiert, ohne dass ein einziger Text dazukam. Als "error" bleibt
+    # last_checked stehen und der naechste Lauf versucht es erneut.
+    #
+    # Der Checkpoint wird NICHT umgangen - das waere gegen den erklaerten
+    # Willen des Betreibers. Die Antwort ist, weniger und langsamer zu fragen
+    # (siehe DETAIL_BUDGET in run()).
+    if not rec.get("title") and not rec.get("description_full"):
+        return "error", None
     sig = fetch_progress(fetcher, page)
     if sig is not None:
         rec["signatures"] = sig
@@ -183,17 +210,36 @@ def run(args) -> None:
         core.save_store(store, DATA_FILE, extra_meta=extra, quiet=quiet)
 
     known = list(store.keys())
+    # Datensaetze ohne Volltext nach vorne. Der Checkpoint deckelt die Menge pro
+    # Lauf ohnehin (siehe unten), also soll das Wenige dort landen, wo es etwas
+    # aendert. Solange der Rueckstand besteht, werden die vollstaendigen
+    # Datensaetze seltener nachgezaehlt - das ist der Preis und geht vorbei.
+    known.sort(key=lambda p: bool((store.get(p) or {}).get("description_full")))
     if known and not args.no_recheck and not args.limit:
         log(f"Prüfe {len(known)} bekannte Kampagne(n) …")
         prog(phase="check-known", current=0, total=len(known),
              message="Prüfe bekannte Kampagnen …")
+        erfolge = 0
+        fehler_in_folge = 0
         for k, page in enumerate(known, 1):
+            if erfolge >= DETAIL_BUDGET:
+                log(f"  Budget von {DETAIL_BUDGET} Abrufen erreicht – "
+                    f"Rest folgt beim nächsten Lauf.")
+                break
             prog(current=k, total=len(known), message=page)
             if core.skip_recent(store.get(page), args):
                 continue
             status, rec = scrape_petition(fetcher, page)
             if status == "error":
+                fehler_in_folge += 1
+                if fehler_in_folge >= ABBRUCH_NACH_FEHLERN:
+                    log(f"  {fehler_in_folge} Fehlschläge in Folge – vermutlich "
+                        f"der Checkpoint von WeMove. Lauf hier beendet; der "
+                        f"Rest folgt beim nächsten Mal.")
+                    break
                 continue
+            fehler_in_folge = 0
+            erfolge += 1
             core.upsert(store, page, rec or {}, {}, status, ts,
                         f"{BASE_URL}/sign/{page}")
             save()

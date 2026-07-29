@@ -64,8 +64,11 @@
    Plattformübersicht (beendete lagen im zugeklappten Akkordion); Register
    HINT_KEYS, damit „Hinweise zurücksetzen" alle Hinweise erreicht;
    Benachrichtigungen laufen über registration.showNotification() und, wo
-   vorhanden, über die Android-Brücke window.AndroidNotify (app.js) */
-var CACHE = "pm-cache-v20";
+   vorhanden, über die Android-Brücke window.AndroidNotify (app.js)
+   v21: echtes innn.it-Logo (Wellenmarke aus dem Bündel der Plattform statt
+   eines PNG-Ausschnitts), EIN Innenabstand von 1.5rem für alle Kachelgrößen
+   (logos/innnit.svg/platforms.js/layouts.css) */
+var CACHE = "pm-cache-v21";
 /* Versionsunabhängig – überlebt das Hochzählen von CACHE. Die Zahl dahinter
    NUR hochsetzen, wenn sich die Paketnummerierung selbst ändert (dann stimmen
    die alten Inhalte nicht mehr zur Nummer und die Bibliothek muss weg).

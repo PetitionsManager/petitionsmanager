@@ -276,7 +276,13 @@
      musste sich dafür verkleinern. Unten hat sie die ganze Kachelbreite. */
   position:relative;flex-direction:column;align-items:flex-start;
   justify-content:flex-start;gap:.25rem;margin:0;min-height:0;overflow:hidden;
-  padding:.875rem;border:0;border-radius:var(--radius);
+  /* EIN Innenabstand für alle Kachelgrößen. Vorher .875rem bei den kleinen
+     und 1.5rem bei den großen — Logos und Beschriftung saßen dadurch je nach
+     Kachel unterschiedlich weit vom Rand. Alle Positionen unten leiten sich
+     von dieser Variablen ab, damit sie nicht wieder auseinanderlaufen.
+     Der Abstand ZWISCHEN den Kacheln bleibt unberührt bei .75rem (gap). */
+  --pad:1.5rem;
+  padding:var(--pad);border:0;border-radius:var(--radius);
   background-color:var(--brand);background-image:none;color:var(--on-brand);
   box-shadow:inset 0 0 0 .0625rem var(--tile-edge),
              0 .25rem .75rem rgba(40,30,15,.10)}
@@ -287,15 +293,16 @@
    und säuft auf der gleichfarbigen Fläche ab.
    Inzwischen hat jede der elf Plattformen eine Datei. */
 [data-layout="magazin"] .acc-body--plats .plat .plogo{
-  position:absolute;bottom:.875rem;left:.875rem;
-  --logo-h:3rem;background-color:#ffffff;max-width:calc(100% - 1.75rem)}
-/* Auf den großen Kacheln größer. */
+  position:absolute;bottom:var(--pad);left:var(--pad);
+  --logo-h:3rem;background-color:#ffffff;
+  max-width:calc(100% - 2 * var(--pad))}
+/* Auf den großen Kacheln nur GRÖSSER, nicht anders eingerückt. Rechts bleibt
+   Platz für den Pfeil, deshalb dort mehr Abzug. */
 [data-layout="magazin"] .acc-body--plats .plat--xl .plogo,
 [data-layout="magazin"] .acc-body--plats .plat--wide .plogo{
-  bottom:1.5rem;left:1.5rem;--logo-h:4rem;max-width:calc(100% - 7rem)}
+  --logo-h:4rem;max-width:calc(100% - var(--pad) - 4.5rem)}
 /* Hier stand eine Sonderregel fuer Hochkant-Symbole (Seitenverhaeltnis
-   < 1,2). Seit innn.it auf seinen sichtbaren Ausschnitt beschnitten ist
-   (1,43:1), liegt keine der elf Marken mehr darunter - die Regel war tot. */
+   < 1,2). Keine der elf Marken liegt darunter - die Regel war tot. */
 [data-layout="magazin"] .acc-body--plats .plat__body{flex:none;width:100%}
 /* „OpenPetition" und „foodwatch" sind einzelne Wörter, die breiter sind als
    die schmale Kachel — ohne Umbruchpunkt schössen sie über den Rand. */
@@ -328,20 +335,19 @@
 [data-layout="magazin"] .acc-body--plats .plat__chev{display:none}
 [data-layout="magazin"] .acc-body--plats .plat--xl .plat__chev,
 [data-layout="magazin"] .acc-body--plats .plat--wide .plat__chev{
-  display:flex;position:absolute;bottom:1.5rem;right:1.5rem;
+  display:flex;position:absolute;bottom:var(--pad);right:var(--pad);
   top:auto;left:auto;width:2.5rem;height:2.5rem;border:0;
   background-color:var(--on-brand);background-image:none;
   color:var(--brand);font-size:.875rem}
-/* Auf den großen Kacheln darf das Logo nicht unter den Pfeil laufen. */
-[data-layout="magazin"] .acc-body--plats .plat--xl .plogo,
-[data-layout="magazin"] .acc-body--plats .plat--wide .plogo{
-  bottom:1.5rem;left:1.5rem;--logo-h:4rem;max-width:calc(100% - 7rem)}
+/* Hier stand die Regel für .plat--xl/.--wide .plogo ein ZWEITES Mal, wörtlich
+   wie weiter oben. Beim Vereinheitlichen des Innenabstands hätte die späte
+   Kopie die neue Variante wieder überschrieben — entfernt. */
 
 /* Die beiden großen Kacheln. Welche das sind, entscheidet app.js nach der
    Zahl der Petitionen (größte → --xl, zweitgrößte → --wide); die Klassen
    sind in den anderen Layouts wirkungslos. */
 [data-layout="magazin"] .acc-body--plats .plat--xl{
-  grid-column:span 2;grid-row:span 2;padding:1.5rem}
+  grid-column:span 2;grid-row:span 2}   /* Innenabstand kommt aus --pad */
 [data-layout="magazin"] .acc-body--plats .plat--xl .plat__name{font-size:2rem}
 [data-layout="magazin"] .acc-body--plats .plat--xl .plat__meta{font-size:1.5rem}
 [data-layout="magazin"] .acc-body--plats .plat--xl .plat__tag{display:block;
