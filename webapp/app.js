@@ -132,11 +132,84 @@
      optisch. Deshalb skaliert die Höhe mit 1/Wurzel(Seitenverhältnis): dann
      ist die FLÄCHE aller Marken gleich. Die Wurzel kann CSS nicht, der Faktor
      kommt deshalb hier als --logo-k heraus. */
+  /* ---- Marken-Bogen -------------------------------------------------------
+     Die Maske kann nur EINE Farbe. Sie kennt vom Bild nur „bemalt oder
+     nicht" (den Alphakanal) und wirft damit zwei Dinge weg: die echten
+     Markenfarben UND jede Aussparung. Bei openPetition war der Vogel
+     deshalb eine Silhouette, bei foodwatch fehlte die weiße Apfelscheibe.
+
+     Deshalb liegen die Marken jetzt EINGEBETTET im Dokument. Nicht je
+     Fundstelle — das wären bei wemove.svg (80 Formen, 85 kB) in einer Liste
+     mit zwanzig Zeilen 1,7 MB —, sondern einmal als <symbol> in einem
+     verborgenen Bogen. Jede Fundstelle kostet dann nur noch ein <use>.
+
+     Die Farben kommen als eigene Variablen, nicht über Klassen: ein
+     CSS-Selektor erreicht den Schattenbaum eines <use> NICHT, geerbte
+     Eigenschaften und eigene Variablen aber schon. In den Dateien steht
+     darum style="fill:var(--pl-b1, <hausfarbe>)" statt einer Klassenregel.
+
+     Bis der Bogen geladen ist (und falls er es nie wird) liefert platLogo()
+     weiter die Maske. Die App kann daran also nicht scheitern. */
+  var LOGO_READY = {};   // key -> true, sobald die Marke im Bogen steht
+  var LOGO_AR = {};      // key -> Seitenverhältnis AUS DER DATEI
+  function logoSymbolId(key) {
+    return "pl-" + String(key).replace(/[^A-Za-z0-9_-]/g, "");
+  }
+  function loadLogoSprite() {
+    var keys = [], k;
+    for (k in PLATS) if (PLATS[k] && PLATS[k].logoFile) keys.push(k);
+    if (!keys.length || !window.DOMParser) return Promise.resolve();
+    var sprite = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    sprite.setAttribute("class", "plogo-sprite");
+    sprite.setAttribute("aria-hidden", "true");
+    return Promise.all(keys.map(function (key) {
+      return fetch(PLATS[key].logoFile, { cache: "no-store" })
+        .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status);
+                             return r.text(); })
+        .then(function (txt) { addLogoSymbol(sprite, key, txt); })
+        .catch(function () { /* diese Marke bleibt bei der Maske */ });
+    })).then(function () {
+      if (sprite.childNodes.length) document.body.appendChild(sprite);
+    });
+  }
+  function addLogoSymbol(sprite, key, txt) {
+    var doc = new DOMParser().parseFromString(txt, "image/svg+xml");
+    var root = doc.documentElement;
+    // Bei einem Parserfehler heißt das Wurzelelement <parsererror>.
+    if (!root || root.nodeName.toLowerCase() !== "svg") return;
+    var vb = root.getAttribute("viewBox");
+    if (!vb) return;
+    var sym = document.createElementNS("http://www.w3.org/2000/svg", "symbol");
+    sym.setAttribute("id", logoSymbolId(key));
+    sym.setAttribute("viewBox", vb);
+    /* Wie die Maske vorher: links ausgerichtet, senkrecht mittig. Wichtig
+       für die Stellen mit festem quadratischem Kasten (Magazin-Layout). */
+    sym.setAttribute("preserveAspectRatio", "xMinYMid meet");
+    var kids = root.childNodes, i, n;
+    for (i = 0; i < kids.length; i++) {
+      n = kids[i];
+      /* <style> NICHT übernehmen. Zwei Dateien bringen Kurznamen wie .st0
+         mit; elf Dateien in EINEM Dokument würden sich damit gegenseitig
+         umfärben. Beide Dateien tragen ihre Füllung deshalb am Element. */
+      if (n.nodeType === 1 && n.nodeName.toLowerCase() === "style") continue;
+      sym.appendChild(document.importNode(n, true));
+    }
+    sprite.appendChild(sym);
+    LOGO_READY[key] = true;
+    var p = String(vb).trim().split(/[\s,]+/);
+    var w = parseFloat(p[2]), h = parseFloat(p[3]);
+    if (w > 0 && h > 0) LOGO_AR[key] = w / h;
+  }
   function logoVars(key) {
     var info = platInfo(key);
     if (!info.logoFile) return null;
-    var ar = info.logoAR || 4;
-    return "--logo:url(" + esc(info.logoFile) + ");--logo-ar:" + ar +
+    /* Das Seitenverhältnis kommt aus der DATEI, sobald sie geladen ist —
+       logoAR in platforms.js ist nur der Rückfall. Genau diese doppelte
+       Buchführung war am 29.7.26 die Fehlerquelle: der Wert dort stand für
+       innn.it auf 2,64, die Datei zeichnete 3,65. */
+    var ar = LOGO_AR[key] || info.logoAR || 4;
+    return "--logo:url(" + esc(info.logoFile) +
+           ");--logo-ar:" + (Math.round(ar * 1000) / 1000) +
            ";--logo-k:" + (1 / Math.sqrt(ar)).toFixed(3);
   }
   /* variante: "marke" | "weiss" | "schwarz" | "auto" (Vorgabe "marke") */
@@ -148,13 +221,29 @@
       return '<span class="plogo plogo--fallback">' + esc(initial) + "</span>";
     }
     /* Beide Markentöne mitgeben: die Variante „marke" nimmt im Dunkel-Design
-       den aufgehellten Wert. Ohne das verschwindet der Bundestag (#191919)
-       auf dunklem Grund vollständig – die Datei ist ja einfarbig. */
-    var farbe = platColor(key), dunkel = platInfo(key).colorDark;
-    return '<span class="plogo plogo--v-' + (variante || "marke") +
-      '" role="img" aria-label="Logo ' + esc(name || key) + '" style="' + vars +
-      (farbe ? ";--brand:" + esc(farbe) : "") +
-      (dunkel ? ";--brand-dark:" + esc(dunkel) : "") + '"></span>';
+       den aufgehellten Wert. Ohne das verschwindet Ekōs #6400ff auf dunklem
+       Grund (2,5:1). Dazu die zweite Hausfarbe, wo es eine gibt — innn.it
+       hat einen violetten Punkt, WeMove ein magentafarbenes Muster. */
+    var info = platInfo(key), farbe = platColor(key);
+    var toene = (farbe ? ";--brand:" + esc(farbe) : "") +
+      (info.colorDark ? ";--brand-dark:" + esc(info.colorDark) : "") +
+      (info.color2 ? ";--brand2:" + esc(info.color2) : "") +
+      (info.color2Dark ? ";--brand2-dark:" + esc(info.color2Dark) : "");
+    /* href UND xlink:href: das kurze href kann erst SVG2 (Chrome 51). Diese
+       Datei ist bewusst in altem JavaScript geschrieben — var, keine
+       Pfeilfunktionen —, weil die APK auch auf betagte Android-WebViews
+       kommt. Dort wäre das Logo sonst lautlos unsichtbar. Der HTML-Parser
+       hängt xlink:href von selbst in den richtigen Namensraum, eine eigene
+       Namensraum-Angabe braucht es dafür nicht. */
+    var ziel = "#" + logoSymbolId(key);
+    var marke = LOGO_READY[key]
+      ? '<svg class="plogo__i" aria-hidden="true" focusable="false"><use href="' +
+        ziel + '" xlink:href="' + ziel + '"/></svg>'
+      : "";
+    return '<span class="plogo' + (marke ? " plogo--svg" : "") +
+      " plogo--v-" + (variante || "marke") +
+      '" role="img" aria-label="Logo ' + esc(name || key) + '" style="' +
+      vars + toene + '">' + marke + "</span>";
   }
   function platColor(key) { return platInfo(key).color || null; }
 
@@ -173,6 +262,13 @@
     return {
       theme: "auto",              // "light" | "dark" | "auto"
       layout: "klassisch",        // "klassisch" | "relief" | "magazin" (layouts.css)
+      /* Bilder in den Aufruf-Texten. Vorgabe an: sie gehören zum Aufruf.
+         Wer über Mobilfunk spart, schaltet sie aus — dann werden die <img>
+         beim Aufbau der Beschreibung ENTFERNT statt versteckt (siehe
+         stripImages): ein display:none-Bild lädt der Browser trotzdem.
+         Am 29.7.26 gemessen: 21 verlinkte Bilder, zusammen 24,5 MB, im
+         Schnitt 1,2 MB je Bild, das größte 4,9 MB. */
+      descImages: true,
       wizardDone: false,
       name: "",
       photo: null,                // Data-URL des Profilbilds
@@ -196,6 +292,7 @@
              deshalb wird umgestellt und nicht zurückgesetzt. */
           if (o.layout === "band") o.layout = "relief";
           if (o.layout) p.layout = o.layout;
+          if (typeof o.descImages === "boolean") p.descImages = o.descImages;
           if (o.wizardDone) p.wizardDone = true;
           if (typeof o.name === "string") p.name = o.name;
           if (typeof o.photo === "string") p.photo = o.photo;
@@ -365,7 +462,9 @@
   }
   function loadManifest() {
     return fetchData("manifest.json").then(function (m) {
-      state.manifest = m; return m;
+      state.manifest = m;
+      pruneTextLibrary();   // erst jetzt möglich: braucht die Kennungen
+      return m;
     });
   }
   function loadPlatformData(key) {
@@ -533,6 +632,8 @@
 
     // Farblich abgetrennter Unterstützungs-Bereich ganz unten.
     content.appendChild(supportSection());
+    // Rechtliches darunter: Impressum muss auffindbar sein, nicht versteckt.
+    content.appendChild(legalSection());
   }
 
   // Unterstützungs-Bereich (Hauptseite unten): Intro + vier Akkordions.
@@ -606,6 +707,155 @@
         "ein. Wir prüfen nicht jede einzelne Petition im Voraus – sag uns " +
         "Bescheid, was dir auffällt.</span></p>" +
     "</div>";
+
+  /* ---- Rechtliches -------------------------------------------------------
+     ENTWURF – am 2026-07-29 vom Nutzer beauftragt, juristisch NICHT geprüft.
+     Wie beim Kodex bewusst OHNE Paragrafenzitate: eine falsch wiedergegebene
+     Fundstelle wäre schlimmer als keine. Die üblichen Angaben stehen
+     vollständig da, nur die Vorschrift ist nicht benannt.
+
+     WARUM EIN EIGENER ABSCHNITT und kein weiteres Akkordion in
+     supportSection(): ein Impressum muss auffindbar beschriftet sein. Unter
+     der Überschrift „Unterstütze PetitionsManager" würde es niemand suchen.
+     Die CSS-Klassen der Support-Familie werden mitbenutzt (gleiche Optik),
+     nur mit eigenem Wurzel-Modifikator .support--legal.
+
+     NOCH OFFEN: eine Datenschutzerklärung. Sie fehlt hier absichtlich, statt
+     etwas Erfundenes hinzuschreiben. Zwei Tatsachen müssen darin stehen und
+     sind belegt: die App holt ihre Daten von GitHub Pages (dort wird die
+     IP-Adresse sichtbar), und die Bilder sind bei den Plattformen EINGEBETTET
+     – beim Anzeigen einer Liste sieht also jeder der bis zu 20 Bild-Hosts die
+     IP des Geräts. */
+  var RECHTE_STAND = {
+    /* Stand der Erlaubnis-Anfrage je Plattform. Der Nutzer kontaktiert die
+       Betreiber im Zuge der Veröffentlichung und trägt die Antworten hier
+       ein — EINE Stelle, eine Zeile je Antwort.
+         asked / answer : ISO-Datum oder null
+         result         : "erlaubt" | "eingeschraenkt" | "abgelehnt" | null
+       null heißt „nicht angefragt". Hier wird nichts vermutet: solange keine
+       Antwort vorliegt, sagt die App genau das. */
+    weact:        { asked: null, answer: null, result: null },
+    openpetition: { asked: null, answer: null, result: null },
+    changeorg:    { asked: null, answer: null, result: null },
+    innnit:       { asked: null, answer: null, result: null },
+    avaaz:        { asked: null, answer: null, result: null },
+    bundestag:    { asked: null, answer: null, result: null },
+    europarl:     { asked: null, answer: null, result: null },
+    wemove:       { asked: null, answer: null, result: null },
+    eko:          { asked: null, answer: null, result: null },
+    foodwatch:    { asked: null, answer: null, result: null },
+    threefifty:   { asked: null, answer: null, result: null }
+  };
+
+  function dmy(iso) {
+    if (!iso) return "";
+    var t = String(iso).slice(0, 10).split("-");
+    return t.length === 3 ? t[2] + "." + t[1] + "." + t[0] : String(iso);
+  }
+
+  function rechteStandText(r) {
+    if (!r || !r.asked) return "ungeklärt – noch nicht angefragt";
+    if (!r.answer) return "angefragt am " + dmy(r.asked) + " – noch keine Antwort";
+    var wort = { erlaubt: "Nutzung zugesagt",
+                 eingeschraenkt: "eingeschränkt zugesagt",
+                 abgelehnt: "abgelehnt" };
+    return (wort[r.result] || "Antwort erhalten") + " am " + dmy(r.answer);
+  }
+
+  /* Tabelle je Plattform. Bewusst gestapelt und nicht als <table>: bei rund
+     380 px Breite läuft eine fünfspaltige Tabelle über den Rand, und ein
+     querscrollender Rechtstext wird nicht gelesen. */
+  function rechtePlattformen() {
+    var plats = (state.manifest && state.manifest.platforms)
+      ? livePlatforms() : [];
+    if (!plats.length) return "";
+    return plats.map(function (p) {
+      var about = platInfo(p.key).about || {};
+      var zeilen = [
+        ["Betreiber", about.operator || "nicht bekannt"],
+        ["Sitz", about.seat || "nicht bekannt"],
+        ["Nutzungsrecht", rechteStandText(RECHTE_STAND[p.key])]
+      ].map(function (z) {
+        return "<dt>" + esc(z[0]) + "</dt><dd>" + esc(z[1]) + "</dd>";
+      }).join("");
+      var links = (about.links || []).filter(function (l) {
+        return /impressum|datenschutz|privacy|legal/i.test(l.label + l.url);
+      }).map(function (l) {
+        return '<a href="' + esc(l.url) + '" target="_blank" rel="noopener">' +
+               esc(l.label) + "</a>";
+      }).join("");
+      return '<div class="legal__plat"><div class="legal__pname">' +
+        esc(p.name || p.key) + "</div>" +
+        '<dl class="legal__dl">' + zeilen + "</dl>" +
+        (links ? '<div class="legal__links">' + links + "</div>" : "") +
+        "</div>";
+    }).join("");
+  }
+
+  function rechteHtml() {
+    return "" +
+      '<p class="legal__lead">Die Petitionen in dieser App stammen von ' +
+      "fremden Plattformen. Das Urheberrecht an ihren Inhalten – Titel, " +
+      "Aufruf-Texte, Bilder – liegt bei den jeweiligen Urheberinnen und " +
+      "Urhebern beziehungsweise bei der Plattform. PetitionsManager " +
+      "erwirbt daran keine Rechte und räumt keine ein.</p>" +
+      '<p class="legal__lead">Was davon kopiert wird und was nicht: Titel, ' +
+      "Kurzfassung, Aufruf-Text, Unterschriftenzahl und Datum werden " +
+      "abgerufen und in der App gespeichert. Die <strong>Bilder werden " +
+      "nicht kopiert</strong>, sondern von den Servern der Plattformen " +
+      "eingebunden – sie bleiben dort liegen und werden beim Anzeigen von " +
+      "dort geholt.</p>" +
+      '<p class="legal__lead"><strong>Das Nutzungsrecht ist ungeklärt.</strong> ' +
+      "Die Inhalte sind öffentlich zugänglich, und diese App ist " +
+      "nicht-kommerziell und ihr Quellcode offen – eine Erlaubnis der " +
+      "Plattformen ist damit aber nicht gegeben. Im Zuge der " +
+      "Veröffentlichung werden alle Betreiber angefragt; die Tabelle zeigt " +
+      "je Plattform, wie weit das ist.</p>" +
+      '<div class="legal__tbl">' + rechtePlattformen() + "</div>" +
+      '<p class="legal__note">Wenn Sie für eine der genannten Plattformen ' +
+      "sprechen und mit der Darstellung Ihrer Inhalte nicht einverstanden " +
+      "sind, schreiben Sie uns – wir nehmen sie heraus.</p>";
+  }
+
+  var IMPRESSUM_HTML =
+    '<dl class="legal__dl">' +
+      "<dt>Anbieter</dt><dd>Matthias Drees</dd>" +
+      "<dt>Anschrift</dt><dd>Tempelhof 3<br>74594 Kreßberg<br>Deutschland</dd>" +
+      '<dt>Kontakt</dt><dd><a href="mailto:' + SUPPORT_MAIL + '">' +
+        SUPPORT_MAIL + "</a></dd>" +
+      "<dt>Verantwortlich für den Inhalt</dt><dd>Matthias Drees</dd>" +
+    "</dl>" +
+    '<p class="legal__note">PetitionsManager ist ein privates, ' +
+    'nicht-kommerzielles Projekt. Der Quellcode ist offen: ' +
+    '<a href="' + GITHUB_URL + '" target="_blank" rel="noopener">' +
+    "GitHub</a>.</p>";
+
+  // Rechtlicher Bereich: Impressum und Rechte an den Inhalten.
+  function legalSection() {
+    var sec = el('<section class="support support--legal">' +
+      '<div class="support__title"><i class="fa-solid fa-scale-balanced">' +
+      "</i> Rechtliches</div>" +
+      '<div class="support__acc"></div></section>');
+    var acc = sec.querySelector(".support__acc");
+    [["fa-address-card", "Impressum",
+      "Wer diese App anbietet und wie er erreichbar ist.", IMPRESSUM_HTML],
+     ["fa-copyright", "Rechte an den Inhalten",
+      "Wem die Petitionstexte und Bilder gehören und was mit den Plattformen " +
+      "abgestimmt ist.", rechteHtml()]
+    ].forEach(function (it) {
+      var item = el('<div class="support__item">' +
+        '<button class="support__head" type="button"><span>' +
+        '<i class="fa-solid ' + it[0] + '"></i> ' + esc(it[1]) + "</span>" +
+        '<i class="fa-solid fa-chevron-down"></i></button>' +
+        '<div class="support__body"><p>' + esc(it[2]) + "</p>" +
+        it[3] + "</div></div>");
+      item.querySelector(".support__head").addEventListener("click", function () {
+        item.classList.toggle("open");
+      });
+      acc.appendChild(item);
+    });
+    return sec;
+  }
 
   function supportSection() {
     var sec = el('<section class="support">' +
@@ -1054,11 +1304,63 @@
 
   // Volltext-Pakete: <key>.t<N>.json, einmal geladen und dann gemerkt.
   var textChunks = {};        // "key.N" -> Promise auf {url: html}
+
+  /* Inhaltskennung eines Pakets aus dem Manifest ("tv": {"0": "ab12cd"}).
+     Eine Paketnummer bleibt für immer, ihr INHALT nicht: wird ein Text
+     nachgetragen oder repariert, ändert sich das Paket unter gleicher Nummer.
+     Weil der Service Worker Volltexte cache-first ausliefert, behielt ein
+     Gerät dann für immer die alte Fassung – bis hierhin blieb nur, die ganze
+     Bibliothek zu verwerfen (sw.js, TEXTS hochzählen). Die Kennung wandert
+     deshalb als "?v=" in die Adresse: der Cache liegt auf der vollständigen
+     Adresse, ein geändertes Paket wird also von selbst neu geholt und alle
+     unveränderten bleiben liegen. Fehlt "tv" (älteres Manifest), läuft alles
+     wie vorher – ohne Kennung, ohne Fehler. */
+  function chunkRev(key, n) {
+    var plats = (state.manifest && state.manifest.platforms) || [];
+    var p = plats.find(function (x) { return x.key === key; });
+    return (p && p.tv && p.tv[String(n)]) || null;
+  }
   function loadTextChunk(key, n) {
     var id = key + "." + n;
-    if (!textChunks[id])
-      textChunks[id] = fetchData(key + ".t" + n + ".json");
+    if (!textChunks[id]) {
+      var rev = chunkRev(key, n);
+      textChunks[id] = fetchData(key + ".t" + n + ".json" +
+        (rev ? "?v=" + encodeURIComponent(rev) : ""));
+    }
     return textChunks[id];
+  }
+
+  /* Veraltete Fassungen aus der Bibliothek werfen. Ohne das lägen nach einer
+     Textänderung zwei Einträge für dasselbe Paket im Cache: der alte (ohne
+     oder mit falschem "?v=") würde nie mehr gelesen und belegte dauerhaft
+     Platz. Angefasst werden ausschließlich Pakete, die im Manifest stehen –
+     unbekannte Einträge bleiben unberührt, damit ein unvollständiges Manifest
+     nicht die halbe Bibliothek kostet. */
+  function pruneTextLibrary() {
+    if (!("caches" in window) || !state.manifest) return;
+    var soll = {};      // "threefifty.t0.json" -> "ab12cd"
+    (state.manifest.platforms || []).forEach(function (p) {
+      var tv = p.tv || {};
+      Object.keys(tv).forEach(function (n) {
+        soll[p.key + ".t" + n + ".json"] = tv[n];
+      });
+    });
+    if (!Object.keys(soll).length) return;
+    caches.keys().then(function (namen) {
+      namen.filter(function (n) { return n.indexOf("pm-texts-") === 0; })
+        .forEach(function (name) {
+          caches.open(name).then(function (c) {
+            c.keys().then(function (reqs) {
+              reqs.forEach(function (req) {
+                var u = new URL(req.url);
+                var datei = u.pathname.split("/").pop();
+                if (!(datei in soll)) return;
+                if (u.searchParams.get("v") !== soll[datei]) c.delete(req);
+              });
+            });
+          });
+        });
+    }).catch(function () { /* Bibliothek aufzuräumen ist nie dringend */ });
   }
 
   function ensureAllData() {
@@ -1193,6 +1495,47 @@
     });
   }
 
+  /* Beschreibung fürs Einsetzen vorbereiten: bei ausgeschalteter Option ohne
+     Bilder. Eine einzige Stelle, durch die JEDER Beschreibungstext läuft —
+     sowohl der schon im Datensatz stehende als auch der nachgeladene. */
+  function descHtml(html) {
+    if (!html) return html;
+    return (state.prefs && state.prefs.descImages === false)
+      ? stripImages(html) : html;
+  }
+
+  /* Bilder herausnehmen, OHNE sie zu laden.
+     Der Umweg über DOMParser ist der Kern der Sache: das entstehende Dokument
+     ist „inert", es holt keine Dateien. Schreibt man den Text stattdessen per
+     innerHTML in ein losgelöstes <div>, beginnt der Browser den Abruf
+     trotzdem — ein gesetztes img.src genügt, das Element muss nicht im
+     Dokument hängen (genau darauf beruht das übliche Bild-Vorladen). Und
+     display:none hilft erst recht nicht. */
+  function stripImages(html) {
+    if (html.indexOf("<img") < 0) return html;
+    if (window.DOMParser) {
+      try {
+        var doc = new DOMParser().parseFromString(
+          "<!DOCTYPE html><body>" + html, "text/html");
+        var weg = doc.body.querySelectorAll("img");
+        for (var i = 0; i < weg.length; i++)
+          weg[i].parentNode.removeChild(weg[i]);
+        // Bildunterschrift ohne Bild erklärt nichts mehr; ein Link, der nur
+        // das Bild umschloss, wäre unsichtbar und unklickbar.
+        var figs = doc.body.querySelectorAll("figure");
+        for (var j = 0; j < figs.length; j++)
+          if (!figs[j].querySelector("img"))
+            figs[j].parentNode.removeChild(figs[j]);
+        var links = doc.body.querySelectorAll("a");
+        for (var k = 0; k < links.length; k++)
+          if (!links[k].textContent.replace(/\s+/g, ""))
+            links[k].parentNode.removeChild(links[k]);
+        return doc.body.innerHTML;
+      } catch (e) { /* unten weiter mit dem einfachen Weg */ }
+    }
+    return html.replace(/<img\b[^>]*>/gi, "");
+  }
+
   function buildPetBody(body, r, ctx, platKey) {
     // Kein Bild mehr an dieser Stelle: hier stand früher ein ZWEITES <img> mit
     // derselben Adresse wie das Vorschaubild der Kachel – dasselbe Motiv zweimal
@@ -1210,7 +1553,7 @@
         '<span class="descacc__lbl"><i class="fa-solid fa-align-left"></i> ' +
         "Beschreibung</span>" +
         '<i class="fa-solid fa-chevron-down descacc__chev"></i></summary>' +
-        '<div class="pet__desc">' + (r.description_full ||
+        '<div class="pet__desc">' + (descHtml(r.description_full) ||
           '<div class="count-note">Text wird geladen …</div>') +
         "</div></details>";
     // Schlagwörter (Tags) – aus dem Text abgeleitet; Klick verlinkt/filtert.
@@ -1251,8 +1594,8 @@
       loadTextChunk(platKey, r.tc).then(function (map) {
         var html = map[r.url];
         if (html) {
-          r.description_full = html;            // im Speicher merken
-          descBox.innerHTML = html;
+          r.description_full = html;            // im Speicher merken: MIT Bildern,
+          descBox.innerHTML = descHtml(html);   // gefiltert wird erst beim Anzeigen
         } else {
           // Eigene Klasse: .count-note ist im Petitionstext der pulsierende
           // Ladehinweis – eine Meldung darf nicht blinken.
@@ -2014,6 +2357,57 @@
       esc(T("settings.layoutHint",
             "Ändert nur das Aussehen der Listen, nicht die Inhalte. " +
             "„Klassisch“ ist die bisherige Ansicht.")) + "</div>"));
+
+    /* WARUM ES DIESE OPTION BRAUCHT (am 29.7.26 nachgemessen): die Plattformen
+       setzen unverkleinerte Pressebilder in den Aufruf-Text. 35 abrufbare
+       Bilder, zusammen 27,5 MB, im Mittel 804 KB — das größte ein einzelnes
+       foodwatch-PNG mit 17,25 MB, mehr als ein Achtel aller 14.036 Volltexte
+       zusammen. Da die Bilder EINGEBETTET sind, kann die App sie nicht
+       verkleinern; abschalten ist der einzige Schutz. Deshalb ist die Option
+       kein Beiwerk, sondern die Gegenmaßnahme.
+       EIN EIGENES BILD-PAKET (Kopien selbst ausliefern, umkodiert auf 800 px)
+       wurde gebaut und wieder verworfen: es nützte nur foodwatch — 24,5 MB
+       wären auf 0,92 MB geschrumpft —, aber images.avaaz.org beantwortet
+       robots.txt mit HTTP 403, seine 16 Bilder dürfen wir nicht kopieren. Für
+       eine Plattform lohnte die Mechanik nicht, und eigene Kopien fremder
+       Bilder zu verbreiten ist rechtlich etwas anderes als einbetten. Die
+       6.037 Vorschaubilder der Listenansicht bleiben aus demselben Grund
+       eingebettet; selbst ausgeliefert wären sie auch umkodiert rund 83 MB.
+
+       Anders als Farbdesign und Layout hängt das
+       nicht nur an CSS: ausgeschaltet werden die <img> beim Aufbau der
+       Beschreibung entfernt (stripImages), deshalb muss die Ansicht danach neu
+       gezeichnet werden. Aufgeklappte Petitionen bleiben dabei offen, weil der
+       Zustand in state und nicht im DOM steht. */
+    var imgRow = el('<div class="srow srow--static">' +
+      '<span class="srow__ic"><i class="fa-solid fa-image"></i></span>' +
+      '<span class="srow__body"><span class="srow__t">' +
+      esc(T("settings.descImagesLabel", "Bilder in Beschreibungen laden")) +
+      "</span>" +
+      '<span class="srow__s srow__imgnote"></span></span>' +
+      '<span class="srow__end"><label class="switch"><input type="checkbox"' +
+      (state.prefs.descImages ? " checked" : "") +
+      '><span class="slider"></span></label></span></div>');
+    var imgNote = imgRow.querySelector(".srow__imgnote");
+    function refreshImgNote() {
+      imgNote.textContent = state.prefs.descImages
+        ? T("settings.descImagesOn",
+            "Fotos und Logos aus dem Aufruf werden geladen – einzelne sind "
+            + "mehrere Megabyte groß.")
+        : T("settings.descImagesOff",
+            "Nur Text. Es werden keine Bilddateien abgerufen.");
+    }
+    refreshImgNote();
+    imgRow.querySelector("input").addEventListener("change", function () {
+      state.prefs.descImages = this.checked;
+      savePrefs(); refreshImgNote();
+      // render() endet mit scrollTo(0,0) — ohne das Merken stünde man nach dem
+      // Umschalten wieder oben in den Einstellungen statt am Schalter.
+      var y = window.pageYOffset || document.documentElement.scrollTop || 0;
+      render();
+      window.scrollTo(0, y);
+    });
+    content.appendChild(imgRow);
 
     /* Favoriten-Erklärung: steht direkt über der Plattform-Liste, also dort,
        wo die Sterne sind. Wegklickbar wie der Wisch-Hinweis, mit demselben
@@ -3179,8 +3573,16 @@
       updateTop();
     }
     render();   // zeigt "Lade Daten …"
+    /* Marken-Bogen parallel zu den Daten holen: die elf Dateien liegen im
+       Cache des Service Workers, kosten also normalerweise keine Wartezeit.
+       Der erste render() oben zeigt nur „Lade Daten …" und braucht kein
+       Logo. Bewusst mit eigenem catch: eine fehlende Logodatei darf die
+       Liste nicht verhindern — platLogo() nimmt dann wieder die Maske. */
+    var marken = loadLogoSprite().catch(function () {});
     // resolveBase() vor loadManifest(): erst danach steht fest, woher geladen wird.
     resolveBase().then(loadManifest).then(function () {
+      return marken;
+    }).then(function () {
       render();
       // Beim allerersten Start durch die Ersteinrichtung führen.
       if (!state.prefs.wizardDone) startWizard();

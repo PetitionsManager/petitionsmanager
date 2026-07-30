@@ -117,7 +117,28 @@
           Fehler, den beide Kritiken beschreiben.
         • .pet-bg — die Wischflächen (grün „unterschrieben", orange „merken")
           sind Rückmeldung während der Bewegung, keine Oberfläche.
-        • .plat__dot / .amp1–.amp5 — die Ampelpunkte SIND die Farbskala.
+        • --amp1 — das Rot des Löschbereichs und der Stop-Gruppe im
+          Aufnahmekodex bleibt Rot; es benennt die Schwere, nicht die Fläche.
+
+   Keine Ausnahme, obwohl es eine Farbskala ist: .amp0–.amp5 auf
+   .pabout__open, die Offenheitsstufe der Plattform (1–5) im Abschnitt „Für
+   Nerds". Grund: die Fläche ist schon vor dem Relief unwirksam. Nachgemessen
+   an OpenPetition (Stufe 5) trägt das Element die Klasse amp5, gezeichnet wird
+   aber rgb(255,255,255) statt #1f8a5b — .pabout__open setzt in style.css
+   selbst `background:var(--surface)`, hat dieselbe Spezifität und steht
+   später. Das Relief nimmt hier also nichts weg, was vorher zu sehen war.
+   Und es fehlt auch nichts: openness_note BEGINNT mit demselben Wort, das die
+   Farbe ausdrücken sollte („Offen: …", „Eingeschränkt: …", „Vorbildlich: …").
+
+   Zur Vorgeschichte, weil sie zweimal in die Irre geführt hat: hier stand
+   erst „.plat__dot / .amp1–.amp5, die Ampelpunkte SIND die Farbskala", dann
+   das Gegenteil („tote Regeln in style.css"). Beides falsch. Die Klassen
+   lagen neben einem .plat__dot, das app.js nie erzeugt hat — das las sich wie
+   Punkte an der Plattformzeile. Und sie entstehen dynamisch über
+   app.js → ampClass() ("amp" + Stufe); eine Suche nach `class="amp` findet
+   sie NICHT. Entfernt wurden am 2026-07-29 nur .plat__dot und die
+   .prow-Familie (die lebende Schwester heißt .srow); .amp0–.amp5 stehen
+   weiter da, mit einem Kommentar an der Regel selbst.
 
    Grundmaß: die Referenz-Formel 9 px Versatz / 16 px Weichzeichnung
    (= .5625rem / 1rem) für Aufmacher, davon abgeleitet .375rem/.8125rem für
@@ -127,12 +148,25 @@
    Geprüfte WCAG-Kontraste. Sie sind der eigentliche Grund, warum Gesetz 5
    funktioniert: alle Schriftfarben liegen jetzt auf DEMSELBEN Grund (--bg),
    es gibt also nur noch eine Handvoll Paare zu prüfen statt eines pro Fläche.
-   Gemessen, nicht geschätzt, jeweils hell / dunkel:
-     --ink   auf --bg   15.6 / 15.6  ✓  (auf --surface waren es 14.5)
-     --muted auf --bg    5.19 /  7.6  ✓  AA
-     --accent auf --bg   7.01 /  7.91 ✓  (trägt alle Knopfbeschriftungen)
+   Im Browser aus den berechneten Werten nachgerechnet, jeweils hell / dunkel
+   (Stand 2026-07-29; zwei Zahlen standen hier vorher falsch, siehe unten):
+     --ink   auf --bg   15.48 / 14.50 ✓
+     --muted auf --bg    5.19 /  6.65 ✓  AA
+     --accent auf --bg   7.00 /  7.91 ✓  (trägt alle Knopfbeschriftungen)
+     --online auf --bg   5.33 /  8.22 ✓  („+N neu", unterschrieben)
      --amp1  auf --bg    5.33 /  5.12 ✓  (Warnungen, Löschbereich)
-     --on-hot-soft       4.56 /  9.05 ✓  AA (Spenden-Knopf, Favoritenstern)
+     --on-hot-soft       4.55 /  9.05 ✓  AA (Spenden-Knopf, Favoritenstern)
+   Korrigiert: --ink dunkel sind 14.50, nicht 15.6 (die 15.6 gelten nur hell),
+   und --muted dunkel sind 6.65, nicht 7.6. Beide bestehen weiterhin.
+
+   NICHT bestanden, und zwar unabhängig vom Relief: die Plattform-Logos tragen
+   seit dem 2026-07-29 volle Markenfarbe (vorher in den Einstellungen 22 %).
+   Drei helle Marken bleiben damit hell auf hellem Grund unter den 3:1 für
+   Grafiken — foodwatch 1.84, OpenPetition 2.34, innn.it 2.66. Hingenommen,
+   weil WCAG Logos ausdrücklich ausnimmt UND der Plattformname in jeder Zeile
+   als Schrift daneben steht: das Logo trägt keine Information allein. Wer es
+   beheben will, braucht einen abgedunkelten Hellwert je Marke in
+   platforms.js — das Gegenstück zu colorDark, das den Dunkelmodus rettet.
    Licht und Schatten sind KEINE Kontrastträger und dürfen es nicht sein —
    deshalb steht darüber hinaus:
      • :focus-visible bekommt einen 3-px-Ring im Akzentton (das FAQ der
@@ -179,7 +213,7 @@
   --nu-rim:inset 0 0 0 .0625rem var(--nu-edge);
 
   /* Auffangnetz: --shadow steckt in style.css in gut einem Dutzend Regeln
-     (.pet, .srow, .prow, .io, .plat, .search …). Es hier umzulegen heißt,
+     (.pet, .srow, .io, .plat, .search …). Es hier umzulegen heißt,
      dass auch eine später hinzukommende Karte automatisch weich erhaben ist
      statt eine Haarlinie zu tragen — und im dunklen Design nicht den
      1-px-Ring aus theme.css bekommt. */
@@ -215,7 +249,6 @@
 [data-layout="relief"] .pet,
 [data-layout="relief"] .srow,
 [data-layout="relief"] .seg,
-[data-layout="relief"] .prow,
 [data-layout="relief"] .io,
 [data-layout="relief"] .simrow,
 [data-layout="relief"] .tag,
@@ -267,7 +300,6 @@
 [data-layout="relief"] .plat,
 [data-layout="relief"] .opt,
 [data-layout="relief"] .srow,
-[data-layout="relief"] .prow,
 [data-layout="relief"] .simrow,
 [data-layout="relief"] .signed-item,
 [data-layout="relief"] .pet-wrap{margin-bottom:1rem}
@@ -437,15 +469,44 @@
 [data-layout="relief"] .pet-bg,
 [data-layout="relief"] .pet{border-radius:var(--radius)}
 [data-layout="relief"] .pet{box-shadow:var(--nu-rim),var(--nu-out)}
-[data-layout="relief"] .pet__head{padding:1rem 1.125rem;gap:.875rem}
+/* Das Bild ist der Aufmacher der Karte, nicht ihre Briefmarke: es läuft als
+   schmales Band randlos über die ganze Breite und fährt beim Antippen auf die
+   echte Höhe auf. Die Höhe rechnet app.js → sizeThumb() aus dem
+   Seitenverhältnis, überblenden lässt sie sich, weil das ein Pixelwert ist
+   (auf height:auto ginge es nicht) – die Übergänge stehen in style.css.
+   Damit die Kopfzeile das Band aufnimmt, muss sie umbrechen dürfen und ihren
+   Innenabstand abgeben; den holen sich Titel und Knöpfe einzeln zurück.
+   Dasselbe Rezept wie im Magazin, nur mit schmalem Band statt hoher Kachel.
+   gap:0 .5rem – NICHT gap:.5rem: der Zeilenabstand käme sonst unter dem Band
+   zum margin-bottom hinzu und das Bild bekäme einen zweiten Abstand. */
+[data-layout="relief"] .pet__head{padding:0 0 1rem;gap:0 .5rem;
+  flex-wrap:wrap;align-items:center}
+[data-layout="relief"] .pet__main{padding-left:1.125rem}
 /* Die Fläche beim Antippen fällt weg (sie wäre eine farbige Füllung nach
    Gesetz 5); die Rückmeldung gibt die Buchse des Pfeils. */
 [data-layout="relief"] .pet__head:active{background:transparent}
-[data-layout="relief"] .pet__thumb{border-radius:.875rem;
-  box-shadow:var(--nu-out-s)}
-/* Aufgeklappt läuft das Bild randlos über die Karte – dort wäre ein Relief
-   sinnlos, die Kante ist keine mehr. */
-[data-layout="relief"] .pet.open .pet__thumb{box-shadow:none}
+/* Kein Relief am Bild: randlos ist die Kante keine mehr, und ein Schatten
+   ließe sich hier ohnehin nicht vertiefen (siehe Kopf dieses Abschnitts). */
+[data-layout="relief"] .pet__thumb{order:-1;flex:0 0 100%;width:100%;
+  height:4rem;border-radius:0;margin:0 0 1rem;box-shadow:none}
+/* Aufgeklappt wächst dasselbe Band weiter, statt (wie in „klassisch") erst
+   von der Briefmarke nach oben zu springen. Die 11rem aus style.css bleiben
+   der Rückfall, solange die Bildmaße fehlen (loading="lazy"). */
+[data-layout="relief"] .pet.open .pet__head{padding:0 0 1rem}
+[data-layout="relief"] .pet.open .pet__main{padding-left:1.125rem}
+/* Ohne Bild bleibt das Band flach. Der Platzhalter kennt kein
+   Seitenverhältnis, sizeThumb() lässt ihn deshalb auf dem CSS-Wert stehen –
+   aufgeklappt wären das die 11rem aus style.css, also ein leerer Streifen mit
+   einem kleinen Logo darin. Und das ist hier nicht der Ausnahmefall: Bundestag
+   und Europäisches Parlament liefern grundsätzlich keine Bilder, zusammen
+   8.001 Petitionen. Das Logo wächst mit, bleibt aber flächennormiert. */
+[data-layout="relief"] .pet.open .pet__thumb--ph{height:6rem}
+/* Die Bezugsmaße sind am flachsten Logo abgemessen, nicht am Durchschnitt:
+   --logo-h ergibt die Höhe --logo-h/Wurzel(Seitenverhältnis), beim
+   Bundestag-Schriftzug (6,17:1) also nur 40 % davon. Mit 1.5rem wären das
+   9,7 px in einem 64 px hohen Band gewesen – unlesbar. */
+[data-layout="relief"] .pet__thumb--ph .plogo{--logo-h:2rem}
+[data-layout="relief"] .pet.open .pet__thumb--ph .plogo{--logo-h:3.25rem}
 [data-layout="relief"] .pet__title{font-size:.9375rem;font-weight:700;
   line-height:1.4}
 /* Aufklapper und Fremdlink als Buchsen, wie der Pfeil in der Plattformzeile.
@@ -455,6 +516,12 @@
   color:var(--accent);box-shadow:var(--nu-in-s);font-size:.8125rem}
 [data-layout="relief"] .pet__ext{border-radius:50%;color:var(--accent);
   box-shadow:var(--nu-in-s);font-size:.875rem}
+/* Der rechte Innenabstand der Kopfzeile ist für das randlose Band gefallen –
+   die letzte Buchse in der Zeile bringt ihn selbst mit. Beide Fälle: mit
+   Fremdlink ist .pet__ext das letzte Kind, ohne ihn .pet__toggle. */
+[data-layout="relief"] .pet__head>.pet__ext:last-child,
+[data-layout="relief"] .pet__head>.pet__toggle:last-child{
+  margin-right:1.125rem}
 [data-layout="relief"] .pet__ext:active{background:transparent;
   box-shadow:var(--nu-out-s)}
 /* Kategorie: vom randlosen Balken zur kleinen erhabenen Plakette oben in der
@@ -588,6 +655,54 @@
   box-shadow:var(--nu-out-s)}
 [data-layout="relief"] .favbtn:disabled{box-shadow:none}
 
+/* ---- Logo ÜBER der Beschriftung (schmale Geräte) ----------------------------
+   Nebeneinander geht auf einem Telefon nicht auf, nachgemessen bei 375 px:
+   in der Einstellungszeile bleiben nach Stern und Schalter 197 px übrig, allein
+   „Bundestag ePetitionen" braucht 197,5 px. Und weil .plogo mit flex:none nicht
+   schrumpft, beanspruchte es je Marke 43 bis 100 px Breite – dem Text blieb
+   also unterschiedlich viel (129 bis 181 px), die Zeilen umbrachen
+   unterschiedlich oft, und die Listenkarten wurden 98 bis 136 px hoch. Genau
+   diese Sprünge sollten weg.
+   Über den Text gestellt kostet das Logo keine Breite mehr: der Text hat in
+   jeder Zeile dieselbe, und jede Zeile wächst um denselben Betrag.
+
+   Die feste Zeilenhöhe ist kein Zierwert. Ein Maskenkasten über die volle
+   Breite mit dem geerbten mask-size:contain würde das Logo auf die KASTENHÖHE
+   skalieren – dann wären alle elf gleich HOCH und die Flächennormierung aus
+   style.css (--logo-k = 1/Wurzel(Seitenverhältnis)) wäre hin: der
+   Bundestag-Schriftzug (6,17:1) nähme wieder rund das Vierfache der
+   WeAct-Marke (1,42:1) ein. Deshalb gibt mask-size die normierte BREITE vor
+   und lässt die Höhe folgen. Der Kasten ist nur so hoch wie das höchste Logo –
+   das ist die Marke mit dem KLEINSTEN Seitenverhältnis, WeAct mit 1,42, also
+   --logo-h/Wurzel(1,42) = --logo-h × 0,839 – und damit für alle elf gleich. */
+/* Der Abstand unter dem Logo steckt in der ZEILENLÜCKE, nicht in einem
+   Außenabstand am Logo. Beides zusammen addierte sich: die 1rem Lücke der
+   Zeile gilt mit flex-wrap auch zwischen den Zeilen, plus .875rem Rand ergab
+   gemessene 30 px statt der gewollten 14. Deshalb hier zwei Werte —
+   Zeile .875rem, Spalte 1rem — und am Logo margin:0. */
+@media (max-width:30rem){
+  [data-layout="relief"] .acc-body--plats .plat{flex-wrap:wrap;
+    gap:.875rem 1rem}
+  [data-layout="relief"] .acc-body--plats .plat .plogo{
+    order:-1;flex:0 0 100%;width:auto;height:2.125rem;margin:0;
+    -webkit-mask-size:calc(var(--logo-ar,4) * var(--logo-h,1.75rem)
+                           * var(--logo-k,.5)) auto;
+            mask-size:calc(var(--logo-ar,4) * var(--logo-h,1.75rem)
+                           * var(--logo-k,.5)) auto}
+  [data-layout="relief"] .opt{flex-wrap:wrap;gap:.75rem 1rem}
+  /* Hier fällt zugleich die absolute Platzierung aus style.css: dort lag das
+     Logo HINTER der Beschriftung und war auf 22 % gedimmt, damit die Schrift
+     darüber lesbar blieb (--ink auf Bundestag-Schwarz wären sonst 1,03:1
+     gewesen). Über dem Text braucht es beides nicht mehr – nichts überlappt,
+     also volle Markenfarbe. */
+  [data-layout="relief"] .opt .plogo{position:static;opacity:1;
+    order:-1;flex:0 0 100%;width:auto;height:2rem;margin:0;
+    -webkit-mask-size:calc(var(--logo-ar,4) * var(--logo-h,1.75rem)
+                           * var(--logo-k,.5)) auto;
+            mask-size:calc(var(--logo-ar,4) * var(--logo-h,1.75rem)
+                           * var(--logo-k,.5)) auto}
+}
+
 /* Löschbereich. Der rote Rahmen fällt wie jeder Rahmen, das Rot bleibt in
    Symbol und Schrift — und der Knopf selbst behält seine Füllung
    (AUSNAHME 1, siehe Kopf). */
@@ -626,11 +741,6 @@
 [data-layout="relief"] .impact__m{color:var(--accent)}
 [data-layout="relief"] .impact__q{color:var(--muted)}
 
-[data-layout="relief"] .prow{border-radius:var(--radius);padding:1.125rem;
-  box-shadow:var(--nu-rim),var(--nu-out-s)}
-[data-layout="relief"] .prow--btn:active{transform:none;background:var(--bg);
-  box-shadow:var(--nu-rim),var(--nu-in-s)}
-[data-layout="relief"] .prow--done{background:var(--bg)}
 [data-layout="relief"] .badge-ph{background:transparent;color:var(--muted);
   box-shadow:var(--nu-in-s);padding:.125rem .625rem}
 [data-layout="relief"] .io{border-radius:var(--radius);
@@ -796,8 +906,7 @@
   [data-layout="relief"] .opt,
   [data-layout="relief"] .pet,
   [data-layout="relief"] .srow,
-  [data-layout="relief"] .prow,
-  [data-layout="relief"] .io,
+    [data-layout="relief"] .io,
   [data-layout="relief"] .simrow,
   [data-layout="relief"] .signed-item,
   [data-layout="relief"] .impact,
@@ -847,8 +956,7 @@
   [data-layout="relief"] .opt,
   [data-layout="relief"] .pet,
   [data-layout="relief"] .srow,
-  [data-layout="relief"] .prow,
-  [data-layout="relief"] .io,
+    [data-layout="relief"] .io,
   [data-layout="relief"] .simrow,
   [data-layout="relief"] .signed-item,
   [data-layout="relief"] .seg,
@@ -972,15 +1080,19 @@
   background-color:var(--brand);background-image:none;color:var(--on-brand);
   box-shadow:inset 0 0 0 .0625rem var(--tile-edge),
              0 .25rem .75rem rgba(40,30,15,.10)}
-/* Das selbstgebaute Monogramm weicht dem echten Logo. Dieses liegt als
-   CSS-Maske vor `currentColor` — es ist damit automatisch in demselben Ton
-   gesetzt wie die Beschriftung der Kachel, also auf jeder Markenfarbe
-   lesbar. Ein <img> könnte das nicht: es brächte seine eigenen Farben mit
-   und säuft auf der gleichfarbigen Fläche ab.
+/* Das selbstgebaute Monogramm weicht dem echten Logo. Auf der Kachel wird es
+   WEISS gesetzt, weil die Fläche im Vollton der Hausfarbe steht — die Marke
+   in ihrer eigenen Farbe wäre darauf unsichtbar. Ein <img> könnte das nicht:
+   es brächte seine eigenen Farben mit und säuft ab.
    Inzwischen hat jede der elf Plattformen eine Datei. */
 [data-layout="magazin"] .acc-body--plats .plat .plogo{
   position:absolute;bottom:var(--pad);left:var(--pad);
   --logo-h:3rem;background-color:#ffffff;
+  /* Zwei Wege, dieselbe Aussage: background-color färbt die Maske, color und
+     die Rollenvariablen die eingebettete Marke (style.css, Abschnitt
+     „Eingebettete Marke"). Fehlte das Zweite, kämen mehrfarbige Marken hier
+     in ihrer Hausfarbe auf der eigenen Hausfarbe heraus. */
+  color:#ffffff;--pl-b1:#ffffff;--pl-b2:#ffffff;
   max-width:calc(100% - 2 * var(--pad))}
 /* Auf den großen Kacheln nur GRÖSSER, nicht anders eingerückt. Rechts bleibt
    Platz für den Pfeil, deshalb dort mehr Abzug. */

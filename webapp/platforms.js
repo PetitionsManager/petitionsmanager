@@ -1,6 +1,39 @@
-/* platforms.js — Marken-Farben, Monogramme und Hintergrundinfos je Plattform.
+/* platforms.js — Marken-Farben, Logos und Hintergrundinfos je Plattform.
    Wird vor app.js geladen und stellt window.PM_PLATFORMS bereit.
-   Letzte Aktualisierung: 2026-07-27 */
+   Letzte Aktualisierung: 2026-07-29
+
+   ---- Corporate Design: was hier steht und was in der Logodatei ----------
+   Am 29.7.26 sind alle elf Marken gegen den Kopf ihrer eigenen Website
+   abgeglichen worden, Wert für Wert. Dabei sind zwei Dinge auseinander-
+   gefallen, die vorher als eines behandelt wurden:
+
+     color      die HAUSFARBE der Plattform. Sie färbt die Bento-Kachel im
+                Magazin-Layout, Chips und Akzente. Sie ist NICHT
+                zwangsläufig die Farbe des Logos: Avaaz führt sein Zeichen
+                schwarz und nutzt #e40a68 nur für Schaltflächen, 350.org und
+                der Bundestag haben gar keine Logofarbe.
+     Logodatei  trägt ihre Farben SELBST, in vier Rollen:
+                  currentColor          adaptiv, folgt der Schriftfarbe
+                  fill:var(--pl-b1, …)  Hausfarbe
+                  fill:var(--pl-b2, …)  zweite Hausfarbe
+                  fill="#ffffff"        feste Aussparung
+                Welche Rolle wo gilt, steht ausführlich im Kopf jeder Datei;
+                die kurze Fassung als Kommentar hinter logoFile.
+
+   Warum die Rollen nicht einfach als festes Hex in der Datei stehen: sechs
+   von acht Hausfarben fallen in EINEM der beiden Themen unter 3:1 (foodwatch
+   1,84 hell, openPetition 2,34 hell, innn.it 2,78 hell, Ekō 2,54 dunkel,
+   WeMove 1,12 dunkel). Deshalb gibt app.js/platLogo die themenrichtige Farbe
+   aus dieser Tabelle in die Datei hinein — im dunklen Thema colorDark.
+
+   logoAR ist nur noch der RÜCKFALL: app.js liest das Seitenverhältnis aus
+   der viewBox der geladenen Datei. Die doppelte Buchführung war am 29.7.26
+   die Fehlerquelle — hier stand für innn.it 2,64, die Datei zeichnete 3,65.
+
+   Entfernt wurde das Feld logo: ein selbstgebautes Monogramm je Plattform
+   („W", „i!", „WM" … als 24x24-SVG, zusammen 2,8 kB). Seit alle elf
+   Plattformen ihre echte Marke haben, liest es niemand mehr — kein Treffer
+   in app.js, texts.js oder index.html. */
 
 window.PM_PLATFORMS = {
 
@@ -9,9 +42,8 @@ window.PM_PLATFORMS = {
     color:     "#e9005f",          /* Vorgabefarbe des eigenen Logo-Bausteins cmpr-logo-weact (vorher geschaetzt #e03c1c) */
     colorSoft: "#fdebf2",          /* ~8 % Deckkraft ueber Weiss */
     colorDark: "#f373a7",          /* aufgehellt fuer dunklen Hintergrund */
-    logo: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="7" fill="#e03c1c"/><text x="12" y="17" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#fff">W</text></svg>',
-    logoFile: "logos/weact.svg",  /* echtes Logo, einfarbig als CSS-Maske */
-    logoAR:   1.42,              /* Breite/Höhe aus der viewBox */
+    logoFile: "logos/weact.svg",  /* Wortmarke, eine Hausfarbe (Rolle pl-b1) */
+    logoAR:   1.423,
     logoNote: "https://www.campact.de/presse/",
     wikipedia: "https://de.wikipedia.org/wiki/Campact",
     tagline: "Petitionsplattform von Campact",
@@ -34,9 +66,8 @@ window.PM_PLATFORMS = {
     color:     "#29b0cc",          /* theme-color der eigenen Seite (vorher #2d8a4e, geschätzt) */
     colorSoft: "#eef9fb",          /* ~8 % Deckkraft über Weiß */
     colorDark: "#89d4e3",          /* aufgehellt für dunklen Hintergrund */
-    logo: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="7" fill="#2d8a4e"/><text x="12" y="16" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#fff">oP</text></svg>',
-    logoFile: "logos/openpetition.svg",  /* echtes Logo, einfarbig als CSS-Maske */
-    logoAR:   3.39,              /* Breite/Höhe aus der viewBox */
+    logoFile: "logos/openpetition.svg",  /* MEHRfarbig: Vogel pl-b1, Wortmarke adaptiv, weisse Aussparung */
+    logoAR:   3.395,
     logoNote: "https://www.openpetition.de/content/legal_details",
     wikipedia: "https://de.wikipedia.org/wiki/OpenPetition",
     tagline: "Bürgerplattform für Petitionen",
@@ -59,9 +90,8 @@ window.PM_PLATFORMS = {
     color:     "#f34e49",          /* eigenes Token --color-fill-brand-strong (faerbt das Kopf-Logo) (vorher #ec2c22) */
     colorSoft: "#fef1f0",          /* ~8 % Deckkraft ueber Weiss */
     colorDark: "#f89e9b",          /* aufgehellt fuer dunklen Hintergrund */
-    logo: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="7" fill="#ec2c22"/><text x="12" y="17" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#fff">C</text></svg>',
-    logoFile: "logos/changeorg.svg",  /* echtes Logo, einfarbig als CSS-Maske */
-    logoAR:   5.1,              /* Breite/Höhe aus der viewBox */
+    logoFile: "logos/changeorg.svg",  /* Wortmarke, alle 19 Pfade pl-b1 */
+    logoAR:   5.104,
     logoNote: "https://www.change.org/l/en/press",
     wikipedia: "https://de.wikipedia.org/wiki/Change.org",
     tagline: "Globale Petitionsplattform",
@@ -80,13 +110,22 @@ window.PM_PLATFORMS = {
 
   /* ------------------------------------------------------------------ */
   innnit: {
-    color:     "#fc691f",          /* Farbe des eigenen App-Icons favicon-192.png (vorher #e8174a, geschätzt) */
+    /* Belegt am 2026-07-29 im Inline-SVG des Seitenkopfs von https://innn.it
+       (in Chrome nachgesehen). Vorher stand hier #fc691f aus dem App-Icon,
+       davor das geschätzte #e8174a — beide waren daneben. */
+    color:     "#F7661E",          /* Orange aller Buchstaben */
     colorSoft: "#fff3ed",          /* ~8 % Deckkraft über Weiß */
     colorDark: "#fdac84",          /* aufgehellt für dunklen Hintergrund */
-    logo: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="7" fill="#e8174a"/><text x="12" y="17" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#fff">i!</text></svg>',
+    /* ZWEITE Markenfarbe. innn.it färbt genau eine Form violett: den Punkt in
+       „innn.it". Trägt in beiden Themen (gegen den Grund 3,51 hell / 4,64
+       dunkel), deshalb braucht sie keinen eigenen Dunkelwert. */
+    color2:    "#9466F2",          /* Violett, nur der Punkt */
     logoNote: "https://innn.it",
-    logoFile: "logos/innnit.svg",  /* echte Wellenmarke aus dem Bündel der Plattform */
-    logoAR:   2.64,                /* 952 : 360 aus der viewBox */
+    logoFile: "logos/innnit.svg",  /* vollstaendige Wortmarke: Buchstaben pl-b1, Punkt pl-b2 */
+    /* 1000 : 274 — die viewBox ist eng um die Tinte gelegt. Vorher 2,64: da
+       lag in der Datei nur die „nnn"-Welle, es fehlten das führende „i", das
+       „it" und der Punkt (vom Nutzer gemeldet, am Original bestätigt). */
+    logoAR:   3.650,
     tagline: "Petitionen für Deutschland",
     about: {
       text: "innn.it ist eine gemeinnützige Petitionsplattform mit Schwerpunkt auf deutschen politischen und gesellschaftlichen Themen. Der Trägerverein innn.it e. V. wurde 2022 als eigenständige Organisation gegründet, nachdem die Plattform zunächst im Netzwerk von Change.org betrieben worden war. Die Finanzierung erfolgt vollständig durch Spenden.",
@@ -106,9 +145,8 @@ window.PM_PLATFORMS = {
     color:     "#e40a68",          /* eigenes Stylesheet, 7 Fundstellen (Magenta der Aktionsschaltflaeche) (vorher #005b99) */
     colorSoft: "#fdebf3",          /* ~8 % Deckkraft ueber Weiss */
     colorDark: "#f078ac",          /* aufgehellt fuer dunklen Hintergrund */
-    logo: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="7" fill="#005b99"/><text x="12" y="17" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#fff">Av</text></svg>',
-    logoFile: "logos/avaaz.svg",  /* echtes Logo, einfarbig als CSS-Maske */
-    logoAR:   3.96,              /* Breite/Höhe aus der viewBox */
+    logoFile: "logos/avaaz.svg",  /* Wortmarke ohne Hausfarbe, ganz adaptiv */
+    logoAR:   3.958,
     logoNote: "https://secure.avaaz.org/en/about.php",
     wikipedia: "https://de.wikipedia.org/wiki/Avaaz",
     tagline: "Globale Bürgerbewegung",
@@ -131,9 +169,8 @@ window.PM_PLATFORMS = {
     color:     "#191919",          /* eigenes Stylesheet, 123 Fundstellen (Akzent waere #ff7100) (vorher #1e3a5f) */
     colorSoft: "#ededed",          /* ~8 % Deckkraft ueber Weiss */
     colorDark: "#808080",          /* aufgehellt fuer dunklen Hintergrund */
-    logo: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="7" fill="#1e3a5f"/><text x="12" y="17" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="bold" fill="#fff">BT</text></svg>',
-    logoFile: "logos/bundestag.svg",  /* echtes Logo, einfarbig als CSS-Maske */
-    logoAR:   6.17,              /* Breite/Höhe aus der viewBox */
+    logoFile: "logos/bundestag.svg",  /* Wortmarke ohne Hausfarbe, ganz adaptiv */
+    logoAR:   6.171,
     logoNote: "https://www.bundestag.de/services/presse",
     wikipedia: "https://de.wikipedia.org/wiki/Petitionsausschuss_(Deutscher_Bundestag)",
     tagline: "Offizielle Petitionen an den Bundestag",
@@ -156,9 +193,8 @@ window.PM_PLATFORMS = {
     color:     "#003399",          /* Offizielles EU-Blau */
     colorSoft: "#e5e8f4",          /* ~8 % Deckkraft über Weiß */
     colorDark: "#4d7acc",          /* aufgehellt für dunklen Hintergrund */
-    logo: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="7" fill="#003399"/><text x="12" y="17" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#ffcc00">EP</text></svg>',
-    logoFile: "logos/europarl.svg",  /* echtes Logo, einfarbig als CSS-Maske */
-    logoAR:   1.82,              /* Breite/Höhe aus der viewBox */
+    logoFile: "logos/europarl.svg",  /* Emblem ohne Hausfarbe, ganz adaptiv */
+    logoAR:   1.818,
     logoNote: "https://www.europarl.europa.eu/about-parliament/de/resources-and-links/resources/visual-identity",
     wikipedia: "https://de.wikipedia.org/wiki/Petitionsausschuss_des_Europäischen_Parlaments",
     tagline: "Petitionen ans EU-Parlament",
@@ -178,12 +214,16 @@ window.PM_PLATFORMS = {
 
   /* ------------------------------------------------------------------ */
   wemove: {
-    color:     "#21194f",          /* theme-color der eigenen Seite (vorher #6b3fa0, geschätzt) */
+    color:     "#21194f",          /* theme-color der eigenen Seite, am 2026-07-29 bestätigt (vorher #6b3fa0, geschätzt) */
     colorSoft: "#ededf1",          /* ~8 % Deckkraft über Weiß */
     colorDark: "#85809e",          /* aufgehellt für dunklen Hintergrund */
-    logo: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="7" fill="#6b3fa0"/><text x="12" y="16" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#fff">WM</text></svg>',
-    logoFile: "logos/wemove.svg",  /* echtes Logo, einfarbig als CSS-Maske */
-    logoAR:   2.07,              /* Breite/Höhe aus der viewBox */
+    /* ZWEITE Markenfarbe, belegt in der eigenen Logodatei der Plattform
+       (logo_3_8acffc909d.svg über strapiapp.com, 2026-07-29). Sie trägt dort
+       72 der 80 Formen — das gepunktete Muster —, während das Dunkelblau nur
+       die Wortmarke füllt. Hält in beiden Themen (3,38 hell / 4,81 dunkel). */
+    color2:    "#C552DF",          /* Magenta des Musters */
+    logoFile: "logos/wemove.svg",  /* MEHRfarbig: Muster pl-b2, Wortmarke adaptiv */
+    logoAR:   2.072,
     logoNote: "https://wemove.eu/en/about-us",
     tagline: "Europäische Bürgerbewegung",
     about: {
@@ -205,9 +245,8 @@ window.PM_PLATFORMS = {
     color:     "#6400ff",          /* Farbe im offiziellen Logo (vorher #7b2d8b, geschätzt) */
     colorSoft: "#f3ebff",          /* ~8 % Deckkraft über Weiß */
     colorDark: "#aa73ff",          /* aufgehellt für dunklen Hintergrund */
-    logo: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="7" fill="#7b2d8b"/><text x="12" y="17" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#fff">ek</text></svg>',
-    logoFile: "logos/eko.svg",  /* echtes Logo, einfarbig als CSS-Maske */
-    logoAR:   1.81,              /* Breite/Höhe aus der viewBox */
+    logoFile: "logos/eko.svg",  /* Wortmarke, eine Hausfarbe (Rolle pl-b1) */
+    logoAR:   1.811,
     logoNote: "https://eko.org/eko/",
     wikipedia: "https://de.wikipedia.org/wiki/SumOfUs",
     tagline: "Konzernkritische Kampagnenplattform",
@@ -230,9 +269,8 @@ window.PM_PLATFORMS = {
     color:     "#f7a600",          /* Farbe im offiziellen Logo (vorher #e8600a, geschätzt) */
     colorSoft: "#fef8eb",          /* ~8 % Deckkraft über Weiß */
     colorDark: "#fbce73",          /* aufgehellt für dunklen Hintergrund */
-    logo: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="7" fill="#e8600a"/><text x="12" y="16" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#fff">fw</text></svg>',
-    logoFile: "logos/foodwatch.svg",  /* echtes Logo, einfarbig als CSS-Maske */
-    logoAR:   5.23,              /* Breite/Höhe aus der viewBox */
+    logoFile: "logos/foodwatch.svg",  /* MEHRfarbig: „food" pl-b1, „watch" adaptiv, weisse Scheibe */
+    logoAR:   5.232,
     logoNote: "https://www.foodwatch.org/de/presse/",
     wikipedia: "https://de.wikipedia.org/wiki/Foodwatch",
     tagline: "Verbraucherrechte im Lebensmittelbereich",
@@ -256,9 +294,8 @@ window.PM_PLATFORMS = {
     color:     "#0f81e8",          /* Markenblau, offiziell aus 350.org Brand Toolkit */
     colorSoft: "#e6f0fc",          /* ~8 % Deckkraft über Weiß */
     colorDark: "#5ab0ff",          /* aufgehellt für dunklen Hintergrund */
-    logo: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="7" fill="#0f81e8"/><text x="12" y="16" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" font-weight="bold" fill="#fff">350</text></svg>',
-    logoFile: "logos/threefifty.svg",  /* echtes Logo, einfarbig als CSS-Maske */
-    logoAR:   2.67,              /* Breite/Höhe aus der viewBox */
+    logoFile: "logos/threefifty.svg",  /* Wortmarke ohne Hausfarbe, ganz adaptiv */
+    logoAR:   2.666,
     logoNote: "https://350.org/brand-toolkit/",
     wikipedia: "https://de.wikipedia.org/wiki/350.org",
     tagline: "Klimabewegung gegen fossile Brennstoffe",

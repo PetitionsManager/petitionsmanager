@@ -4,12 +4,20 @@
    Install wird die App-Hülle vorab gecacht, damit sie auch beim ersten
    Offline-Start funktioniert.
 
-   AUSNAHME Volltext-Pakete (data/<key>.t<N>.json): die sind unveränderlich –
-   eine einmal vergebene Paketnummer wechselt nie mehr (siehe
-   publish.write_texts). Sie laufen deshalb cache-first und liegen in einem
-   EIGENEN Cache, den das Hochzählen der Version nicht wegräumt. So wächst auf
-   dem Gerät eine Bibliothek: einmal gelesene Petitionstexte bleiben da und
-   werden nie erneut heruntergeladen. */
+   AUSNAHME Volltext-Pakete (data/<key>.t<N>.json): eine einmal vergebene
+   Paketnummer wechselt nie mehr (siehe publish.write_texts). Sie laufen
+   deshalb cache-first und liegen in einem EIGENEN Cache, den das Hochzählen
+   der Version nicht wegräumt. So wächst auf dem Gerät eine Bibliothek: einmal
+   gelesene Petitionstexte bleiben da und werden nie erneut heruntergeladen.
+
+   Die Nummer bleibt, der INHALT kann sich ändern (nachgetragene oder
+   reparierte Texte). Damit ein Gerät dann nicht für immer die alte Fassung
+   behält, hängt die App an jedes Paket die Inhaltskennung aus dem Manifest an
+   ("?v=ab12cd", siehe app.js/loadTextChunk). Der Cache liegt auf der
+   VOLLSTÄNDIGEN Adresse einschließlich Suchteil, ein geändertes Paket wird
+   also von selbst neu geholt, während alle unveränderten liegen bleiben; das
+   Aufräumen der überholten Einträge macht app.js/pruneTextLibrary. TEXT_RE
+   prüft nur den Pfad und ist vom Suchteil unberührt. */
 /* Version hochzählen, sobald Dateien in SHELL dazukommen oder sich die
    App-Hülle grundlegend ändert – sonst behalten installierte Geräte die
    alte Fassung. */
@@ -72,12 +80,48 @@
    daneben (app.js/style.css)
    v23: Layout „Farbband" ersetzt durch „Relief" (Neumorphismus) – gilt für die
    ganze App einschließlich Einstellungen und Profil; alte Auswahl "band" wird
-   beim Laden auf "relief" umgeschrieben
-   (layouts.css/app.js/texts.js/index.html) */
-var CACHE = "pm-cache-v23";
-/* Versionsunabhängig – überlebt das Hochzählen von CACHE. Die Zahl dahinter
-   NUR hochsetzen, wenn sich die Paketnummerierung selbst ändert (dann stimmen
-   die alten Inhalte nicht mehr zur Nummer und die Bibliothek muss weg).
+   beim Laden auf "relief" umgeschrieben. Im Relief außerdem: Petitionsbild als
+   schmales Band über die volle Kartenbreite statt als Vorschaubildchen (fährt
+   beim Antippen weiter auf), und das Plattform-Logo steht bis 30rem Breite
+   ÜBER der Beschriftung statt daneben bzw. dahinter – dadurch volle
+   Markenfarbe statt 22 % und gleich hohe Zeilen
+   (layouts.css/app.js/texts.js/index.html)
+   v24: tote CSS-Regeln entfernt – .plat__dot und die ganze .prow-Familie
+   werden von app.js nirgends erzeugt (die lebende Schwesterfamilie heißt
+   .srow). .amp0–.amp5 sind dabei ausdrücklich GEBLIEBEN: sie sehen zwar
+   genauso tot aus, entstehen aber dynamisch über ampClass() und färben die
+   Offenheitsstufe in „Für Nerds" – sie haben jetzt einen Kommentar, der das
+   sagt (style.css/layouts.css)
+   v25: Bilder in den Aufruf-Texten – sie werden angezeigt (style.css:
+   .pet__desc img/figure/figcaption) und lassen sich in den Einstellungen
+   abschalten. Ausgeschaltet werden die <img> über DOMParser aus dem Text
+   ENTFERNT, nicht versteckt: ein gesetztes img.src lädt auch außerhalb des
+   Dokuments. Jedes Volltext-Paket trägt außerdem jetzt eine Inhaltskennung
+   aus dem Manifest, die als "?v=" an die Adresse wandert
+   (app.js/texts.js/style.css)
+   v26: die Plattform-Logos sind nicht mehr einfarbig. Sie lagen als CSS-Maske
+   vor einer Farbfläche; eine Maske kennt vom Bild nur den Alphakanal und wirft
+   damit die echten Markenfarben UND jede Aussparung weg – der openPetition-
+   Vogel war eine Silhouette, foodwatch fehlte die weiße Apfelscheibe. Jetzt
+   liegen alle elf Marken EINGEBETTET im Dokument: einmal als <symbol> in einem
+   verborgenen Bogen (app.js/loadLogoSprite), je Fundstelle nur ein <use> –
+   sonst stünde wemove.svg mit 80 Formen und 85 kB zwanzigmal in einer Liste.
+   Die Farben kommen als Variablen --pl-b1/--pl-b2 in die Datei hinein, weil
+   ein CSS-Selektor den Schattenbaum eines <use> nicht erreicht. Bleibt der
+   Bogen aus, fällt platLogo() auf die Maske zurück. Alle elf Logodateien
+   geändert (Farbrollen, change.org von adaptiv auf rot, innn.it vollständig,
+   zwei <style>-Blöcke aufgelöst); das ungenutzte Monogramm-Feld ist raus
+   (app.js/style.css/theme.css/layouts.css/platforms.js/logos/*.svg)
+   Mit v26 kommt außerdem der Abschnitt „Rechtliches" auf die Hauptseite:
+   Impressum und „Rechte an den Inhalten" mit einer Tabelle je Plattform. Kein
+   eigener Versionssprung nötig, weil v26 noch nicht ausgeliefert war — die
+   geänderten app.js/style.css reisen mit (app.js/style.css) */
+var CACHE = "pm-cache-v26";
+/* Versionsunabhängig – überlebt das Hochzählen von CACHE. Diese Zahl sollte ab
+   jetzt NICHT mehr steigen: seit die Pakete eine Inhaltskennung tragen ("?v=",
+   siehe oben) holt sich jedes geänderte Paket von selbst neu. Ein Sprung wäre
+   nur noch nötig, wenn die NUMMERIERUNG selbst umgestellt würde – und würde
+   dann wie bisher die ganze Bibliothek auf allen Geräten kosten.
    pm-texts-2: die WeAct-Reparatur hat genau diesen Fall ausgelöst – 423 Pakete
    behielten ihre Nummer, bekamen aber vollständige Texte. Ohne den Sprung
    hätten Geräte mit gefüllter Bibliothek die abgeschnittenen Fassungen

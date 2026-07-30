@@ -1,1 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?> <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 283.46 156.52" style="enable-background:new 0 0 283.46 156.52;" xml:space="preserve"> <style type="text/css"> .st0{fill:currentColor;} </style> <g> <g> <path class="st0" d="M219.66,124.09c-17.38,0-31.46-14.09-31.46-31.46c0-17.38,14.09-31.46,31.46-31.46 c17.38,0,31.46,14.09,31.46,31.46C251.12,110.01,237.03,124.09,219.66,124.09 M219.66,29.14c-35.05,0-63.47,28.43-63.47,63.49 s28.42,63.49,63.47,63.49s63.47-28.43,63.47-63.49S254.71,29.14,219.66,29.14"/> </g> <polygon class="st0" points="127.15,48.2 104.33,79.45 93.79,79.45 93.79,48.2 67.62,48.2 67.62,136.73 93.79,136.73 93.79,105.62 104.45,105.62 126.98,136.73 156.08,136.73 124.69,92.29 156.02,48.2 "/> <polygon class="st0" points="0.15,61.5 0.15,123.43 56.9,123.43 56.9,108.43 21.75,108.43 21.75,97.19 44.77,97.19 44.77,86.43 21.75,86.43 21.75,76.5 56.9,76.5 56.9,61.5 "/> <rect x="182.42" y="0.16" class="st0"/> </g> </svg>
+<?xml version="1.0" encoding="utf-8"?> <!-- Ekō (ehemals SumOfUs) - Wortmarke.
+     Am Original belegt 2026-07-29: die Datei der Plattform,
+     Eko_Logo_Purple_svg.svg, hat dieselbe viewBox 0 0 283.46 156.52
+     (Verhaeltnis 1,811, deckt sich mit logoAR 1,81) und die Hausfarbe
+     #6400FF - genau der Wert, der schon in platforms.js stand.
+
+     Anders als bei Bundestag, Avaaz und 350.org steht hier eine echte
+     Hausfarbe im Logo, deshalb ein fester Wert statt currentColor. ACHTUNG, hier stand zuerst eine falsche Zahl von mir: das Violett traegt
+     NICHT in beiden Themen. Gegen unseren dunklen Grund kommt #6400FF nur auf
+     2,54 - die 5,63, die hier stand, gelten fuer die aufgehellte Fassung
+     #aa73ff (colorDark in platforms.js). Deshalb steht die Fuellung nicht
+     fest, sondern nimmt die themenrichtige Farbe aus der Tabelle.
+     Eine Weiss-Variante gibt es zusaetzlich (Eko_Logo_White_svg.svg); sie
+     wird hier nicht gebraucht, weil das Violett auf beiden Gruenden haelt.
+
+     Farbrollen - ausfuehrlich in style.css, Abschnitt "Eingebettete Marke":
+     Markenformen tragen jetzt BEIDES, fill="#6400ff" und
+     style="fill:var(pl-b1, #6400ff)" (die Variable im Quelltext mit zwei
+     Bindestrichen davor, die hier im Kommentar nicht stehen duerfen). Das
+     feste Hex haelt die Datei fuer sich betrachtet richtig; die Variable
+     laesst die App im dunklen Thema den aufgehellten Ton einsetzen.
+     currentColor bleibt der adaptive Teil und folgt der Schriftfarbe.
+     Der Block style mit .st0{fill:inherit} ist aufgeloest: der Marken-Bogen
+     in app.js uebernimmt keine Formatvorlagen aus den Dateien. Sonst wuerden
+     elf Dateien ihre Kurznamen (st0, st1 ...) in EIN Dokument schuetten und
+     sich gegenseitig umfaerben. Die Klasse st0 bleibt als Herkunftsspur. -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 283.46 156.52" style="enable-background:new 0 0 283.46 156.52;" xml:space="preserve"> <g> <g> <path class="st0 pl-b1" d="M219.66,124.09c-17.38,0-31.46-14.09-31.46-31.46c0-17.38,14.09-31.46,31.46-31.46 c17.38,0,31.46,14.09,31.46,31.46C251.12,110.01,237.03,124.09,219.66,124.09 M219.66,29.14c-35.05,0-63.47,28.43-63.47,63.49 s28.42,63.49,63.47,63.49s63.47-28.43,63.47-63.49S254.71,29.14,219.66,29.14" fill="#6400ff" style="fill:var(--pl-b1,#6400ff)"/> </g> <polygon class="st0 pl-b1" points="127.15,48.2 104.33,79.45 93.79,79.45 93.79,48.2 67.62,48.2 67.62,136.73 93.79,136.73 93.79,105.62 104.45,105.62 126.98,136.73 156.08,136.73 124.69,92.29 156.02,48.2 " fill="#6400ff" style="fill:var(--pl-b1,#6400ff)"/> <polygon class="st0 pl-b1" points="0.15,61.5 0.15,123.43 56.9,123.43 56.9,108.43 21.75,108.43 21.75,97.19 44.77,97.19 44.77,86.43 21.75,86.43 21.75,76.5 56.9,76.5 56.9,61.5 " fill="#6400ff" style="fill:var(--pl-b1,#6400ff)"/> <rect x="182.42" y="0.16" class="st0 pl-b1" fill="#6400ff" style="fill:var(--pl-b1,#6400ff)"/> </g> </svg>

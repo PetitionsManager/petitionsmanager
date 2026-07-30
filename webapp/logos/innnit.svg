@@ -1,24 +1,56 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 952 360">
-  <!-- Markenzeichen von innn.it: die durchgehende Welle, die die drei "n" des
-       Namens bildet. Aus dem eigenen Buendel der Plattform uebernommen
-       (innn.it/_next/static/chunks/pages/_app-*.js, dort als Hero-Grafik mit
-       Farbverlauf hinterlegt) - also die echte Vektorform der Marke und keine
-       Nachzeichnung von mir.
+<!-- innn.it - die VOLLSTAENDIGE Wortmarke "innn.it".
+     Uebernommen aus dem Inline-SVG im Seitenkopf von https://innn.it,
+     nachgeprueft am 2026-07-29 in Chrome.
 
-       Vorgeschichte, damit der Fehler nicht wiederkehrt: hier lag vorher ein
-       in SVG gewickeltes Base64-PNG, und das war doppelt falsch. Erstens war
-       die Datei nur ein AUSSCHNITT (123x165 Pixel; sichtbar ein Punkt und ein
-       einzelner Bogen), nicht die Marke. Zweitens hatte ich den viewBox auf
-       123x86 beschnitten, weil ich glaubte, der Browser zeichne nur die obere
-       Haelfte - damit fehlten die Zeilen 86 bis 165, also gerade der dichteste
-       Teil. Nachgemessen habe ich erst hinterher: das PNG hatte einen
-       einwandfreien Alphakanal (31 % deckend, 65 % transparent), taugte als
-       Maske also grundsaetzlich. Es zeigte nur das Falsche. Die Lehre ist,
-       die gezeichnete FLAECHE zu pruefen und nicht bloss, ob die Datei laedt.
+     Was vorher hier lag und warum es falsch war (zweite Korrektur an dieser
+     Datei, deshalb ausfuehrlich):
 
-       Der Pfad ist bewusst einfarbig gefuellt. Als CSS-Maske zaehlt allein der
-       Alphakanal; die Farbe kommt aus background-color (siehe .plogo in
-       style.css). Ein Farbverlauf wie im Original wuerde in der Maske zu
-       Deckungsgrad verrechnet und die Form verwaschen. -->
-  <path fill="#000" d="M888.473 134.004c0-38.704-31.513-73.08-70.222-73.08-38.709 0-70.236 34.39-70.236 73.08v82.715c0 55.59-45.229 100.814-100.825 100.814-55.596 0-100.825-45.21-100.825-100.814v-40.234c0-38.704-31.5-70.213-70.236-70.213-38.737 0-70.222 31.509-70.222 70.213v82.702c0 55.589-45.23 100.813-100.826 100.813-55.595 0-100.825-45.224-100.825-100.813V219.09c0-38.704-31.499-70.213-70.222-70.213s-70.236 31.509-70.236 70.213V360H0V219.09C0 145.196 60.117 85.086 134.02 85.086c73.903 0 134.02 60.097 134.02 134.004v40.097c0 20.413 16.612 37.022 37.028 37.022s37.027-16.609 37.027-37.022v-82.702c0-73.894 60.117-134.004 134.02-134.004 73.903 0 134.02 60.097 134.02 134.004v40.234c0 20.414 16.612 37.023 37.028 37.023s37.027-16.609 37.027-37.023v-82.715C684.19 60.097 744.307 0 818.21 0c73.903 0 134.02 60.096 134.02 134.004v132.529h-63.798V134.004h.041Z"/>
+     1. Runde: ein in SVG gewickeltes Base64-PNG. Das war nur ein AUSSCHNITT
+        (123x165 Pixel, ein Punkt und ein einzelner Bogen), und der viewBox war
+        zusaetzlich auf 123x86 beschnitten - damit fehlte gerade der dichteste
+        Teil. Nachgemessen wurde erst hinterher: der Alphakanal war einwandfrei,
+        die Datei taugte als Maske. Sie zeigte nur das Falsche.
+     2. Runde: die "nnn"-Welle allein, aus dem eigenen Buendel der Plattform.
+        Echte Vektorform der Marke, aber eben nur EIN von vier Tintenpfaden. Es
+        fehlten das fuehrende "i", das "i" von "it", das "t" und der Punkt - der
+        Nutzer hat genau das gemeldet. Das Seitenverhaeltnis war mit 2,64
+        entsprechend falsch.
+
+     Die Lehre aus beiden Runden ist dieselbe: die gezeichnete FLAECHE pruefen,
+     nicht bloss ob die Datei laedt.
+
+     Zur viewBox: das Original steht auf "100 0 1200 580" und hat viel Luft, die
+     Tinte liegt nur bei x 100..1100 und y 153..427. Weil die
+     Flaechennormierung (die Variable logo-k in style.css) aus dem
+     Seitenverhaeltnis rechnet, wuerde diese Luft das Logo kleiner zeichnen als
+     alle anderen. (Kein doppeltes Minus in XML-Kommentaren, deshalb steht die
+     Variable hier ohne ihr Praefix.)
+     Deshalb ist die viewBox hier eng um die Tinte gelegt:
+     100 153 1000 274, Verhaeltnis 3,650 (in platforms.js als logoAR fuehren).
+
+     Zwei Markenfarben, beide aus dem Original belegt:
+       #F7661E  Orange, alle Buchstaben   (unsere Tabelle hatte #fc691f)
+       #9466F2  Violett, NUR der Punkt in "innn.it"
+     Es gibt die Marke auch einfarbig weiss (Wirkungsbericht der Plattform,
+     vom Nutzer belegt) - diese Fassung deckt app.js ueber die Farbvarianten ab.
+
+     Farbrollen - ausfuehrlich in style.css, Abschnitt "Eingebettete Marke":
+     Markenformen tragen jetzt BEIDES, fill="#F7661E" und
+     style="fill:var(pl-b1, #F7661E)" (die Variable im Quelltext mit zwei
+     Bindestrichen davor, die hier im Kommentar nicht stehen duerfen). Das
+     feste Hex haelt die Datei fuer sich betrachtet richtig; die Variable
+     laesst die App im dunklen Thema den aufgehellten Ton einsetzen.
+     currentColor bleibt der adaptive Teil und folgt der Schriftfarbe.
+     Der Punkt laeuft ueber pl-b2 mit #9466F2. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="100 153 1000 274"
+     role="img" aria-label="innn.it">
+  <!-- die drei verbundenen Boegen: das "nnn" -->
+  <path class="pl-b1" d="M834.9 256.6c0-28.1-22.9-53-50.9-53-28.1 0-50.9 24.9-50.9 53v60c0 40.3-32.8 73.1-73.1 73.1s-73.1-32.8-73.1-73.1v-29.2c0-28.1-22.9-50.9-50.9-50.9-28.1 0-50.9 22.9-50.9 50.9v60c0 40.3-32.8 73.1-73.1 73.1s-73.1-32.8-73.1-73.1v-29.1c0-28.1-22.9-50.9-50.9-50.9-28.1 0-50.9 22.9-50.9 50.9v102.2h-46.3V318.4c0-53.6 43.6-97.2 97.2-97.2s97.2 43.6 97.2 97.2v29.1c0 14.8 12 26.9 26.9 26.9 14.8 0 26.9-12 26.9-26.9v-60c0-53.6 43.6-97.2 97.2-97.2s97.2 43.6 97.2 97.2v29.2c0 14.8 12 26.9 26.9 26.9s26.9-12 26.9-26.9v-60c0-53.6 43.6-97.2 97.2-97.2s97.2 43.6 97.2 97.2v96.1h-46.3v-96.2z" fill="#F7661E" style="fill:var(--pl-b1,#F7661E)"/>
+  <!-- die beiden i-Staemme mit ihren Tuepfeln: vorne das "i" von "innn",
+       hinten das "i" von "it" -->
+  <path class="pl-b1" d="M921.5 227.3h46.1v193.3h-46.1zM104 227.3h46.1v193.3H104zM127.3 153.1c-15.9 0-27.3 11.9-27.3 27.3 0 14.9 10.9 26.8 26.3 26.8 17.4 0 28.3-11.9 27.8-26.8-.1-15.4-10.5-27.3-26.8-27.3zM944.8 153.1c-15.9 0-27.3 11.9-27.3 27.3 0 14.9 10.9 26.8 26.3 26.8 17.4 0 28.3-11.9 27.8-26.8-.1-15.4-10.5-27.3-26.8-27.3z" fill="#F7661E" style="fill:var(--pl-b1,#F7661E)"/>
+  <!-- der Punkt in "innn.it" - die einzige violette Form der Marke -->
+  <path class="pl-b2" d="M859 372.8c-17.4 0-28.3 11.9-27.8 26.8 0 15.4 10.4 27.3 26.8 27.3 15.9 0 27.3-11.9 27.3-27.3 0-14.9-10.9-26.8-26.3-26.8z" fill="#9466F2" style="fill:var(--pl-b2,#9466F2)"/>
+  <!-- das "t" -->
+  <path class="pl-b1" d="M1100 273.4v-46.1h-46.1v-67.9h-46.1v194c0 40.3 32.8 73.1 73.1 73.1h19v-46.3h-19c-14.8 0-27.1-12-27.1-26.9v-80h46.2z" fill="#F7661E" style="fill:var(--pl-b1,#F7661E)"/>
 </svg>
