@@ -21,11 +21,21 @@
 #    Unterschriftenstand kommt über act.350.org/progress/<slug> (JSONP
 #    onProgressLoaded → total.actions + goal) – identisch zu WeMove.
 #
+#  TEXTE (seit 2026-07-29):
+#    Das Feld "description" der API ist bei einem Teil der Aktionen LEER (am
+#    2026-07-29: 6 von 20 im Feed), und wo es gefüllt ist, steht darin nur ein
+#    Anreißer von ~250 Zeichen. Der eigentliche Text steht auf der /sign/-Seite:
+#      #action-description-text → Einleitung (die "Beschreibung"),
+#      #petition-text          → der ganze Aufruf (auf der Seite hinter dem
+#                                Link „Den ganzen Text des Aufrufs lesen").
+#    Beides wird von dort geholt (fetch_detail) und ersetzt den API-Anreißer.
+#
 #  ROBOTS (act.350.org: Disallow /act/, /login/, /share/, /cms/unsubscribe):
-#    /sign/, /progress/ und /cms/view_by_page_id sind erlaubt. Die eigentliche
-#    Aktions-Seite wird NIE geladen – der Slug wird nur aus dem Redirect-Header
-#    "Location" gelesen (ohne die evtl. gesperrte /act/-Seite abzurufen); der
-#    Zähler läuft über den separat erlaubten /progress/-Endpunkt.
+#    /sign/, /progress/ und /cms/view_by_page_id sind erlaubt, /act/ nicht.
+#    Welche Form vorliegt, verrät die Weiterleitung, BEVOR etwas geladen wird:
+#    resolve_target liest nur den "Location"-Header. Nur bei /sign/ wird die
+#    Aktionsseite abgerufen – eine /act/-Adresse fasst der Scraper nie an.
+#    Der Zähler läuft über den separat erlaubten /progress/-Endpunkt.
 #    getinvolved350.vercel.app hat keine robots-Einschränkung.
 #
 #  FORMAT-KENNZEICHNUNG:
@@ -41,6 +51,8 @@ import json
 import re
 from pathlib import Path
 from urllib.parse import urlencode, urljoin
+
+from bs4 import BeautifulSoup
 
 import petitions_core as core
 from petitions_core import Platform, log, now_iso, prog
@@ -64,6 +76,14 @@ LANG_CODE = "Language: German"
 TIME_FILTERS = ["Get involved page: low bar",
                 "Get involved page: medium bar",
                 "Get involved page: high bar"]
+
+# Textbausteine der /sign/-Seite (siehe Kopf, Abschnitt TEXTE).
+INTRO_SEL  = "#action-description-text"
+APPEAL_SEL = "#petition-text"
+
+# So viele leere Antworten hintereinander gelten als „Bot-Schutz aktiv" (siehe
+# run). Fünf, weil einzelne Aussetzer vorkommen, eine Sperre aber nicht endet.
+ABBRUCH_NACH_LEEREN = 5
 
 PROGRESS_RE = re.compile(r"onProgressLoaded\((.*)\)\s*;?\s*$", re.S)
 PAGE_ID_RE  = re.compile(r"view_by_page_id/(\d+)")
@@ -144,28 +164,39 @@ def discover(fetcher: core.Fetcher) -> dict[str, dict]:
 # Slug ermitteln (nur aus dem Redirect-Location, ohne die Zielseite zu laden)
 # und Live-Zähler über /progress/
 # ----------------------------------------------------------------------------
-def resolve_target(fetcher: core.Fetcher, page_id: str) -> tuple[str | None, str | None]:
-    """(kind, slug) aus der Weiterleitung von view_by_page_id. Liest nur den
-    Location-Header – die (evtl. per robots gesperrte) Zielseite wird NICHT
-    abgerufen."""
+def resolve_target(fetcher: core.Fetcher, page_id: str
+                   ) -> tuple[str | None, str | None, bool]:
+    """(kind, slug, weg) aus der Weiterleitung von view_by_page_id. Liest nur
+    den Location-Header – die (evtl. per robots gesperrte) Zielseite wird hier
+    NICHT abgerufen.
+
+    ``weg`` ist nur dann True, wenn die Antwort eindeutig sagt, dass es die
+    Aktion nicht mehr gibt (404/410). Kein Ergebnis heißt sonst „heute nicht zu
+    klären", nicht „verschwunden": act.350.org (Cloudflare) schaltet nach
+    einigen Dutzend Abrufen einen Bot-Schutz davor und antwortet dann mit einem
+    leeren 202 OHNE Location – am 2026-07-29 nachgemessen, dieselbe Seite hatte
+    Minuten vorher noch sauber weitergeleitet. Wer das als „weg" verbucht,
+    schiebt bei jeder Drosselung reihenweise lebende Aktionen ins Archiv."""
     url = f"{BASE_URL}/cms/view_by_page_id/{page_id}"
     for _ in range(4):
         if not fetcher.allowed(url):
-            return None, None
+            return None, None, False
         m = TARGET_RE.search(url)
         if m:
-            return m.group(1), m.group(2)
+            return m.group(1), m.group(2), False
         try:
             resp = fetcher.session.get(url, timeout=core.REQUEST_TIMEOUT,
                                        allow_redirects=False)
         except Exception:
-            return None, None
+            return None, None, False
+        if resp.status_code in (404, 410):
+            return None, None, True
         loc = resp.headers.get("Location")
         if not loc:
-            return None, None
+            return None, None, False
         url = urljoin(url, loc)
     m = TARGET_RE.search(url)
-    return (m.group(1), m.group(2)) if m else (None, None)
+    return (m.group(1), m.group(2), False) if m else (None, None, False)
 
 
 def fetch_progress(fetcher: core.Fetcher, slug: str) -> tuple[int, int | None] | None:
@@ -183,6 +214,44 @@ def fetch_progress(fetcher: core.Fetcher, slug: str) -> tuple[int, int | None] |
     goal = data.get("goal")
     goal = int(goal) if goal not in (None, 0, 1) else None
     return int(actions), goal
+
+
+def fetch_detail(fetcher: core.Fetcher, slug: str) -> dict:
+    """Einleitung + ganzen Aufruf-Text von der /sign/-Seite holen.
+
+    Nur für /sign/ aufrufen! /act/ ist per robots.txt gesperrt; welche Form
+    vorliegt, steht schon fest, bevor hier etwas geladen wird (resolve_target
+    liest allein den Location-Header). fetcher.get prüft robots.txt zusätzlich
+    selbst – doppelter Boden, keine Ausrede.
+
+    Warum überhaupt: das API-Feld "description" ist bei einem Teil der Aktionen
+    leer, die standen in der App dann ganz ohne Text da. Siehe Kopf, TEXTE.
+    """
+    resp = fetcher.get(f"{BASE_URL}/sign/{slug}/")
+    if resp is None or not resp.ok:
+        return {}
+    soup = BeautifulSoup(resp.text, "html.parser")
+    intro = soup.select_one(INTRO_SEL)
+    appeal = soup.select_one(APPEAL_SEL)
+    # Klartext VOR dem Bereinigen abnehmen: sanitize_fragment baut den Knoten um.
+    kurz = intro.get_text(" ", strip=True) if intro else ""
+    teile = []
+    if intro:
+        teile.append(core.sanitize_fragment(intro, BASE_URL))
+    if appeal:
+        # Eigene Überschrift, weil dieser Teil auf der Seite hinter dem Link
+        # „Den ganzen Text des Aufrufs lesen" in einem Dialog steckt – in der
+        # App trägt ihn das Beschreibungs-Akkordion. Enthält auch die
+        # Forderungszeile (.petition-target) als ersten Absatz.
+        teile.append("<h3>Der ganze Text des Aufrufs</h3>")
+        teile.append(core.sanitize_fragment(appeal, BASE_URL))
+    rec: dict = {}
+    html = "\n".join(t for t in teile if t)
+    if html:
+        rec["description_full"] = html
+    if kurz:
+        rec["summary"] = (kurz[:200] + "…") if len(kurz) > 200 else kurz
+    return rec
 
 
 # ----------------------------------------------------------------------------
@@ -204,25 +273,41 @@ def build_rec(page_id: str, obj: dict) -> dict:
 
 
 def scrape_action(fetcher: core.Fetcher, page_id: str, obj: dict,
-                  with_count: bool = True) -> tuple[str, dict]:
+                  with_count: bool = True) -> tuple[str, dict, bool]:
+    """(status, rec, unklar). ``unklar`` = die Weiterleitung war nicht zu lesen
+    und es war kein klares 404 – Zeichen für den Bot-Schutz (resolve_target)."""
     rec = build_rec(page_id, obj)
+    unklar = False
     if with_count:
-        _kind, slug = resolve_target(fetcher, page_id)
+        kind, slug, weg = resolve_target(fetcher, page_id)
         if slug:
             prog_data = fetch_progress(fetcher, slug)
             if prog_data:
                 rec["signatures"] = prog_data[0]
                 if prog_data[1]:
                     rec["goal"] = prog_data[1]
-    return "online", rec
+            # Texte im selben Fenster wie den Zähler holen (höchstens einmal
+            # je 24 h, siehe skip_recent beim Aufrufer): der Aufruf-Text ändert
+            # sich selten, aber er ändert sich – die Aktionen tragen
+            # Aktualisierungen mitten im Text nach.
+            if kind == "sign":
+                rec.update(fetch_detail(fetcher, slug))
+        else:
+            unklar = not weg
+    return "online", rec, unklar
 
 
-def recheck_missing(fetcher: core.Fetcher, page_id: str) -> tuple[str, dict | None]:
+def recheck_missing(fetcher: core.Fetcher, page_id: str
+                    ) -> tuple[str | None, dict | None]:
     """Aus dem Feed verschwundene Aktion: noch erreichbar → online (nur Zähler
-    aktualisieren), sonst offline."""
-    kind, slug = resolve_target(fetcher, page_id)
+    aktualisieren), nachweislich fort → offline.
+
+    Status None = heute nicht zu klären (leeres 202 vom Bot-Schutz o. ä.). Dann
+    darf NICHTS geschrieben werden, sonst wandert eine lebende Aktion ins
+    Archiv, bloß weil die Seite gerade drosselt."""
+    kind, slug, weg = resolve_target(fetcher, page_id)
     if not slug:
-        return "offline", None
+        return ("offline" if weg else None), None
     rec: dict = {}
     prog_data = fetch_progress(fetcher, slug)
     if prog_data:
@@ -261,6 +346,9 @@ def run(args) -> None:
             if core.skip_recent(store.get(page_id), args):
                 continue
             status, rec = recheck_missing(fetcher, page_id)
+            if status is None:
+                log(f"  unklar (leere Antwort): {page_id} – bleibt unverändert.")
+                continue
             core.upsert(store, page_id, rec or {}, {}, status, ts, rec_url(page_id))
             save()
             if status == "offline":
@@ -280,12 +368,27 @@ def run(args) -> None:
         f"({processed_new} neu, Rest Auffrischung).")
     prog(phase="scrape", current=0, total=len(ids), message="Beginne …")
 
+    # Notbremse: bei mehreren leeren Antworten hintereinander steht der
+    # Bot-Schutz von act.350.org davor. Dann weiterzuklopfen brächte nichts und
+    # wäre der Seite gegenüber unangemessen – der Rest des Laufs holt nur noch
+    # die kostenlosen Metadaten aus dem Discovery-Call, Zähler und Texte kommen
+    # beim nächsten Lauf.
+    leere = 0
+    gebremst = False
     for i, page_id in enumerate(ids, 1):
         obj = discovered[page_id]
         prog(current=i, total=len(ids), message=(obj.get("title") or page_id)[:60])
         existing = store.get(page_id)
         with_count = not (existing and core.skip_recent(existing, args))
-        status, rec = scrape_action(fetcher, page_id, obj, with_count=with_count)
+        if gebremst:
+            with_count = False
+        status, rec, unklar = scrape_action(fetcher, page_id, obj,
+                                           with_count=with_count)
+        leere = leere + 1 if unklar else 0
+        if leere >= ABBRUCH_NACH_LEEREN and not gebremst:
+            gebremst = True
+            log(f"  {leere} leere Antworten hintereinander – act.350.org "
+                "drosselt. Hole für den Rest des Laufs nur noch Metadaten.")
         core.upsert(store, page_id, rec, {}, status, ts, rec["url"])
         save()
 
@@ -315,9 +418,11 @@ PLATFORM = Platform(
     language="de",
     openness=3,
     openness_note="Mittel: keine offene Liste; Aktionen über eine externe "
-                  "JSON-API (im Seiten-JS gefunden), Zähler über /progress/. "
-                  "/act/-Aktionsseiten sind per robots gesperrt (werden nicht "
-                  "geladen) – Format wird aus dem Button-Text abgeleitet.",
+                  "JSON-API (im Seiten-JS gefunden), Zähler über /progress/, "
+                  "Texte von der /sign/-Seite. /act/-Aktionsseiten sind per "
+                  "robots gesperrt und werden nicht geladen – dort bleibt nur "
+                  "der Anreißer der API, das Format leitet sich aus dem "
+                  "Button-Text ab.",
     name="350.org",
     eyebrow="350.org · Klima-Aktionen (deutsch): Petitionen, E-Mail- & Brief-Aktionen",
     source_url="https://350.org/de/mitmachen/",
