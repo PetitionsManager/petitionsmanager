@@ -37,6 +37,7 @@ import json
 import re
 import shutil
 from collections import Counter, defaultdict
+from datetime import datetime
 from pathlib import Path
 
 import monitor
@@ -224,6 +225,23 @@ def write_texts(key: str, items: list[dict], texts: list[str | None],
     return len(chunks)
 
 
+def _stamp(iso: str | None) -> float:
+    """ISO-Zeitstempel als Sekunden, unlesbares/fehlendes als 0.
+
+    Muss geparst werden, Textvergleich reicht nicht: die Stempel tragen
+    verschiedene Zonen — "…T11:47:11+00:00" aus der CI, "…T10:26:42-06:00" vom
+    lokalen Lauf. Als Zeichenketten verglichen gilt 10:26 als früher, in
+    Wahrheit liegt es vier Stunden SPÄTER. Dieselbe Falle steht in app.js
+    (manifestStamp) beschrieben.
+    """
+    if not iso:
+        return 0.0
+    try:
+        return datetime.fromisoformat(iso).timestamp()
+    except ValueError:
+        return 0.0
+
+
 def main() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     manifest = {"platforms": [], "generated_at": None, "format": 2}
@@ -266,7 +284,16 @@ def main() -> None:
             entry["count"] = len(items)
             entry["online"] = sum(1 for r in items
                                   if r.get("status", "online") == "online")
-            if not manifest["generated_at"]:
+            # Jüngster Plattform-Stempel, nicht der erste, der vorbeikommt:
+            # vorher stand hier der Stempel der ERSTEN Live-Plattform in
+            # monitor.PLATFORMS. Nach einem publish-Lauf am 29.7.26 um 18:59
+            # meldete das Manifest deshalb weiter den 28.7. — der Wert sagte
+            # nichts über den Stand des Pakets, sondern nur über eine einzelne
+            # Plattform. Die App rechnet sich ihr Maß selbst aus (app.js,
+            # manifestStamp: Maximum über manifest.platforms) und hing nie an
+            # diesem Feld; es steht für Menschen und andere Leser da und soll
+            # deshalb auch stimmen.
+            if _stamp(entry["generated_at"]) > _stamp(manifest["generated_at"]):
                 manifest["generated_at"] = entry["generated_at"]
         manifest["platforms"].append(entry)
 
