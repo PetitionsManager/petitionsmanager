@@ -7,6 +7,11 @@ on:
   schedule:
     - cron: '17 3 * * *'      # täglich 03:17 UTC
   workflow_dispatch:
+    inputs:
+      nacharbeit:
+        description: 'Einmalige Nacharbeit mitlaufen lassen (Bundestag-Phasen 3+4, Avaaz-Archiv)'
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -65,6 +70,41 @@ jobs:
       - name: Health-Check der Entdeckungsquellen (nicht blockierend)
         continue-on-error: true
         run: python3 monitor.py --check
+
+      # Bewusst NICHT im Tageslauf, sondern nur über "Run workflow" mit dem
+      # Haken "nacharbeit". Grund: der Tageslauf entdeckt beim Bundestag nur
+      # die Mitzeichnungsfrist (status.2) und bei Avaaz nur die ~10 verlinkten
+      # Petitionen. Die 7.845 beendeten Bundestags-Petitionen (status.3+4) und
+      # die Archivfunde bei Avaaz kommen ausschließlich über --backfill bzw.
+      # --archive. Ohne diesen Schritt zeigt die Live-App dauerhaft 64 statt
+      # 7.903 Bundestags-Petitionen, obwohl die APK die lokal erzeugten 7.903
+      # gebündelt mitbringt (am 30.7.26 gegen das Live-Manifest gemessen).
+      # Einmal anfordern genügt: beide Aufrufe legen die Datensätze sofort an
+      # und hinterlassen ihre Volltext-Warteschlange (backfill_todo bzw.
+      # archive_todo) im _meta des Stores; die täglichen Läufe arbeiten sie
+      # danach von allein in Portionen ab (300 bzw. 120 pro Lauf).
+      - name: "Nacharbeit auf Anforderung (Bundestag-Phasen 3+4, Avaaz-Archiv)"
+        if: ${{ inputs.nacharbeit }}
+        run: |
+          # Höchstens 60 min je Aufruf: die Nacharbeit darf dem Tages-Scrape
+          # und dem Deploy nicht das gemeinsame Zeitbudget wegnehmen.
+          for aufruf in "--platform bundestag --backfill" "--platform avaaz --archive"; do
+            rest=$(( FRIST - $(date +%s) ))
+            if [ "$rest" -gt 3600 ]; then rest=3600; fi
+            if [ "$rest" -lt 60 ]; then
+              echo "::warning::Zeitrahmen erschöpft – Nacharbeit $aufruf übersprungen."
+              continue
+            fi
+            set +e
+            timeout --signal=INT "$rest" python3 monitor.py $aufruf --no-recheck
+            code=$?
+            set -e
+            if [ $code -eq 124 ] || [ $code -eq 130 ]; then
+              echo "::warning::Zeitrahmen bei der Nacharbeit erreicht ($aufruf) – Rest folgt beim nächsten Lauf."
+            elif [ $code -ne 0 ]; then
+              exit $code
+            fi
+          done
 
       - name: Scrapen (alle Live-Plattformen; überspringt <24 h Geprüftes)
         run: |
