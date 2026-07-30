@@ -86,10 +86,17 @@
   --shadow:       0 0 0 1px #332f27;
 }
 :root[data-theme="dark"]
-/* Einfarbige Plattform-Logos: im Dunkeln den aufgehellten Markenton
-   nehmen. Ohne das verschwindet der Bundestag (#191919) auf dunklem
-   Grund vollstaendig. --brand-dark liefert app.js -> platLogo. */
-.plogo--v-marke{background-color:var(--brand-dark,var(--brand,var(--accent)))}
+/* Plattform-Logos: im Dunkeln den aufgehellten Markenton nehmen. Ohne das
+   verschwindet Ekos #6400ff auf dunklem Grund (2,5:1) und WeMoves #21194f
+   voellig (1,1:1). --brand-dark/--brand2-dark liefert app.js -> platLogo.
+   background-color gilt fuer die Maske, die Variablen fuer die eingebettete
+   Marke (style.css, Abschnitt "Eingebettete Marke") - dieselbe Entscheidung
+   an denselben Werten, nur zweimal ausgedrueckt.
+   Spezifitaet: dieser Selektor zaehlt (0,3,0) und schlaegt damit die
+   Grundregel .plogo--v-marke (0,1,0) in style.css. */
+.plogo--v-marke{background-color:var(--brand-dark,var(--brand,var(--accent)));
+  --pl-b1:var(--brand-dark,var(--brand,var(--accent)));
+  --pl-b2:var(--brand2-dark,var(--brand2,var(--brand-dark,var(--brand,var(--accent)))))}
 
 
 /* ---- Verbleibende Overrides ----------------------------------------------
@@ -174,10 +181,12 @@
     --shadow:       0 0 0 1px #332f27;
   }
   :root[data-theme="auto"]
-  /* Einfarbige Plattform-Logos: im Dunkeln den aufgehellten Markenton
-     nehmen. Ohne das verschwindet der Bundestag (#191919) auf dunklem
-     Grund vollstaendig. --brand-dark liefert app.js -> platLogo. */
-  .plogo--v-marke{background-color:var(--brand-dark,var(--brand,var(--accent)))}
+  /* Wie im Abschnitt data-theme="dark" weiter oben, nur fuer die Einstellung
+     „automatisch" (Nachtmodus des Geraets). Beide Zweige muessen dasselbe
+     tun; wer hier etwas aendert, aendert es dort mit. */
+  .plogo--v-marke{background-color:var(--brand-dark,var(--brand,var(--accent)));
+    --pl-b1:var(--brand-dark,var(--brand,var(--accent)));
+    --pl-b2:var(--brand2-dark,var(--brand2,var(--brand-dark,var(--brand,var(--accent)))))}
 
 
   /* Petitionsbilder */

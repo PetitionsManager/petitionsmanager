@@ -191,7 +191,24 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
              var(--shadow);
   transition:transform .1s;text-align:left;width:100%}
 .plat:active{transform:scale(.99)}
-.plat__dot{width:.75rem;height:.75rem;border-radius:50%;flex:none}
+/* Offenheitsstufe der Plattform (1-5). Die Klasse wird DYNAMISCH gesetzt,
+   deshalb findet eine Suche nach `class="amp` sie nicht: app.js -> ampClass()
+   baut den Namen aus der Zahl zusammen ("amp" + Stufe) und haengt ihn an
+   .pabout__open im Abschnitt „Fuer Nerds". Vorsicht beim Aufraeumen - die
+   Regeln sehen deshalb tot aus und sind es nicht.
+
+   ABER: sie WIRKEN auch nicht. Nachgemessen an OpenPetition (Stufe 5):
+   die Klasse steht am Element, gezeichnet wird trotzdem rgb(255,255,255),
+   nicht #1f8a5b. Grund ist die Reihenfolge - .pabout__open (Zeile 1073)
+   setzt selbst `background:var(--surface)`, hat mit einer Klasse dieselbe
+   Spezifitaet wie .amp5 hier und steht spaeter, gewinnt also. Das gilt in
+   ALLEN drei Layouts, nicht nur im Relief. Die Farbskala ist also seit dem
+   Umzug der Klassen von einem .plat__dot (das app.js nie erzeugt hat) auf
+   .pabout__open ohne Wirkung.
+   Bewusst so gelassen, nicht reparieren ohne Entscheidung: die Stufe steht
+   ohnehin als Schrift da, weil openness_note mit demselben Wort BEGINNT
+   („Offen: …", „Eingeschraenkt: …", „Vorbildlich: …"). Und im Relief waere
+   eine farbige Flaeche ein Bruch von Gesetz 5 (siehe layouts.css). */
 .amp5{background:var(--amp5)}.amp4{background:var(--amp4)}.amp3{background:var(--amp3)}
 .amp2{background:var(--amp2)}.amp1{background:var(--amp1)}.amp0{background:var(--muted)}
 .plat__body{flex:1;min-width:0}
@@ -275,6 +292,33 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
 .support__item.open .support__body{display:block}
 .support__body p{margin:0 0 .75rem;font-size:.875rem;color:var(--muted);
   line-height:1.55}
+/* Rechtliches (app.js → legalSection). Eigener Wurzel-Modifikator, damit der
+   Bereich sich vom Unterstuetzungs-Block abhebt: dort wirbt die App um Hilfe,
+   hier steht eine Pflichtangabe. Deshalb KEINE Akzentflaeche, sondern der
+   Seitenhintergrund — die beiden Akkordions stehen dann als hellere Karten
+   (.support__item hat --surface) frei auf der Seite, und die Ueberschrift
+   nimmt die normale Textfarbe statt der Akzentfarbe. */
+.support--legal{background:var(--bg);margin-top:.75rem;padding:1.25rem 0 0}
+.support--legal .support__title{color:var(--ink)}
+/* Beschriftung/Wert-Paare. Zweispaltig erst ab 25rem – darunter waere die
+   Wertspalte so schmal, dass "Verden (Aller), Deutschland" dreizeilig bricht. */
+.legal__dl{margin:0 0 .5rem;font-size:.8125rem;line-height:1.5}
+.legal__dl dt{font-weight:700;color:var(--ink)}
+.legal__dl dd{margin:0 0 .375rem;color:var(--muted)}
+@media (min-width:25rem){
+  .legal__dl{display:grid;grid-template-columns:auto 1fr;
+    column-gap:.75rem;row-gap:.25rem}
+  .legal__dl dd{margin:0}
+}
+.legal__lead{margin:0 0 .75rem;font-size:.875rem;line-height:1.55;
+  color:var(--muted)}
+.legal__tbl{display:flex;flex-direction:column;gap:.5rem;margin:.75rem 0}
+.legal__plat{background:var(--bg);border-radius:.625rem;padding:.75rem}
+.legal__pname{font-weight:800;font-size:.875rem;color:var(--ink);
+  margin-bottom:.375rem}
+.legal__links{display:flex;flex-wrap:wrap;gap:.75rem;font-size:.75rem}
+.legal__note{margin:.75rem 0 0;font-size:.75rem;line-height:1.5;
+  color:var(--muted)}
 /* Aufnahmekodex (app.js → KODEX_HTML). Laengster Text der App, deshalb in
    beschriftete Gruppen zerlegt statt als Textwand. Die Ausschlussgruppe traegt
    eine eigene Kante in --amp1 (das Rot des Projekts, in theme.css fuer den
@@ -420,6 +464,12 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
 .pet__desc li{margin:.125rem 0}
 .pet__desc a{color:var(--accent)}
 .pet__desc strong,.pet__desc b{font-weight:700}
+/* Bilder im Aufruf-Text (Pressefotos mit Bildunterschrift, seit die Scraper
+   img/figure/figcaption durchlassen). max-width statt fester Breite, damit ein
+   2310px-Foto die Karte nicht aufreisst; height:auto haelt das Seitenverhaeltnis. */
+.pet__desc figure{margin:.75rem 0}
+.pet__desc img{display:block;max-width:100%;height:auto;border-radius:.5rem}
+.pet__desc figcaption{margin-top:.375rem;font-size:.8125rem;color:var(--muted)}
 .descacc{margin-top:.875rem}
 .descacc>summary{cursor:pointer;list-style:none;display:flex;align-items:center;
   justify-content:space-between;gap:.625rem;background:var(--accent-soft);
@@ -691,13 +741,6 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
   font-size:2.375rem;font-weight:800;margin-bottom:.875rem}
 .profile-name{font-size:1.75rem;font-weight:800;letter-spacing:-.02em}
 .profile-sub{color:var(--muted);font-size:.875rem;line-height:1.55}
-.prow{display:flex;align-items:center;gap:.875rem;background:var(--surface);
-  border:.0625rem solid var(--line);border-radius:1.125rem;padding:1rem;
-  margin-bottom:.5rem;box-shadow:var(--shadow)}
-.prow__ic{color:var(--accent);flex:none;font-size:1.25rem;width:1.5rem;
-  text-align:center}
-.prow__body{flex:1}
-.prow__val{color:var(--muted);font-size:.8125rem;margin-top:.125rem}
 .badge-ph{margin-left:auto;background:var(--line);color:var(--muted);
   border-radius:999px;padding:.125rem .5625rem;font-size:.6875rem;font-weight:700}
 
@@ -740,12 +783,6 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
 .io__btn--ghost{background:var(--surface);color:var(--accent);
   border:.0625rem solid var(--line)}
 .io__btn--ghost:active{opacity:1;background:var(--accent-soft)}
-.prow--btn{width:100%;text-align:left;font:inherit;cursor:pointer;
-  -webkit-tap-highlight-color:transparent}
-.prow--btn:active{transform:scale(.99)}
-.prow__go{margin-left:auto;color:var(--muted);font-size:1rem;flex:none}
-.prow--done{background:var(--accent-soft);border-color:transparent}
-.prow--done .prow__ic,.prow--done .prow__go{color:var(--accent)}
 
 /* ---- Footer-Navigation ---- */
 .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:20;height:var(--tabbar-h);
@@ -822,6 +859,50 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
 .plogo--v-weiss{background-color:#ffffff}
 .plogo--v-schwarz{background-color:var(--ink)}
 .plogo--v-auto{background-color:currentColor}
+
+/* ---- Eingebettete Marke (app.js → loadLogoSprite) ----
+   Die Maske oben kann nur EINE Farbe: sie kennt vom Bild nur den Alphakanal,
+   also „bemalt oder nicht". Damit fällt nicht bloß die Farbe weg, sondern
+   auch jede AUSSPARUNG — der openPetition-Vogel war deshalb eine Silhouette,
+   foodwatch fehlte die weiße Apfelscheibe. Seit dem 29.7.26 liegen die
+   Marken darum eingebettet im Dokument.
+
+   Nicht je Fundstelle: wemove.svg allein hat 80 Formen und 85 kB, in einer
+   Liste mit zwanzig Zeilen wären das 1,7 MB. Der Bogen (.plogo-sprite) steht
+   EINMAL im Dokument, jede Fundstelle ist nur ein <use> darauf.
+
+   Drei Rollen, so stehen sie in den Dateien:
+     currentColor              adaptiver Teil, folgt der Schriftfarbe
+                               (foodwatch „watch", die openPetition-Wortmarke,
+                               Bundestag, Avaaz, 350.org, Europarl, WeMove)
+     fill:var(--pl-b1, hex)    die Hausfarbe
+     fill:var(--pl-b2, hex)    die zweite Hausfarbe (innn.it-Punkt,
+                               WeMove-Muster)
+     fill="#ffffff"            feste Aussparung, .pl-cut
+   Warum Variablen und keine Klassenregeln: ein CSS-Selektor erreicht den
+   Schattenbaum eines <use> NICHT. Geerbte Eigenschaften (color) und eigene
+   Variablen schon — nur darüber lässt sich dieselbe Datei mehrfarbig UND
+   themenrichtig zeichnen.
+
+   Das feste Hex in der Datei ist der Rückfall, damit die Datei auch für sich
+   betrachtet richtig aussieht. Die Variable gewinnt in der App, weil sechs
+   von acht Hausfarben in EINEM der beiden Themen unter 3:1 fallen
+   (foodwatch 1,84 hell, WeMove 1,12 dunkel — Messreihe im Kopf von
+   layouts.css). */
+.plogo--svg{background-color:transparent;
+  -webkit-mask-image:none;mask-image:none}
+.plogo__i{display:block;width:100%;height:100%}
+/* Der Bogen selbst wird nie gezeichnet, muss aber im Layout stehen: mit
+   display:none verweigern manche Browser die Referenz aus dem <use>. */
+.plogo-sprite{position:absolute;width:0;height:0;overflow:hidden}
+/* Farbrollen je Variante. „marke": Hausfarben aus platforms.js, adaptive
+   Teile in der Schriftfarbe. Den dunklen Gegenpart setzt theme.css. */
+.plogo--v-marke{color:var(--ink);
+  --pl-b1:var(--brand,var(--accent));
+  --pl-b2:var(--brand2,var(--brand,var(--accent)))}
+.plogo--v-weiss{color:#ffffff;--pl-b1:#ffffff;--pl-b2:#ffffff}
+.plogo--v-schwarz{color:var(--ink);--pl-b1:var(--ink);--pl-b2:var(--ink)}
+.plogo--v-auto{--pl-b1:currentColor;--pl-b2:currentColor}
 /* Ohne hinterlegte Datei: Anfangsbuchstabe auf der Markenfläche. Betrifft
    derzeit keine der elf Plattformen, bleibt aber als Auffangnetz. */
 .plogo--fallback{width:2.375rem;height:2.375rem;display:inline-flex;
