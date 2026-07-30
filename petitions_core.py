@@ -43,7 +43,7 @@ from typing import Callable
 from urllib.parse import urljoin, urlparse, parse_qs, urlencode as _urlencode
 
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Comment
 
 # ----------------------------------------------------------------------------
 # Gemeinsame Konfiguration
@@ -72,8 +72,19 @@ USER_AGENT      = ("Mozilla/5.0 (X11; Linux x86_64) PetitionsMonitor/2.0 "
 DASHBOARD_FILE  = Path("dashboard.html")
 
 # Tags, die in bereinigten Beschreibungen erhalten bleiben (Gliederung!).
+# img/figure/figcaption seit dem 29.7.26: die Aufrufe enthalten Pressefotos mit
+# Bildunterschrift (foodwatch: <figure> mit dem Foto des kranken Lachses), und
+# ohne diese drei Tags blieb davon nichts übrig – der Text sprach von einem
+# Bild, das nicht da war. Die App begrenzt die Größe (style.css, .pet__desc img).
 ALLOWED_DESC_TAGS = {"h2", "h3", "h4", "p", "ul", "ol", "li",
-                     "strong", "em", "b", "i", "br", "a", "blockquote"}
+                     "strong", "em", "b", "i", "br", "a", "blockquote",
+                     "img", "figure", "figcaption"}
+# Davon die Block-Elemente: steht eines an der Wurzel eines Fragments, darf
+# sanitize_fragment kein <p> mehr darumlegen (siehe dort).
+BLOCK_DESC_TAGS = {"h2", "h3", "h4", "p", "ul", "ol", "blockquote", "figure"}
+# Nur zum Erzeugen neuer <p>-Tags in sanitize_fragment. new_tag gibt es allein
+# auf einem BeautifulSoup-Objekt, und eines reicht für alle Aufrufe.
+_P_SOUP = BeautifulSoup("", "html.parser")
 
 
 # ----------------------------------------------------------------------------
@@ -275,7 +286,22 @@ def _esc(s) -> str:
 
 def sanitize_fragment(node, base_url: str) -> str:
     """Reduziert einen Container mit gemischtem Inhalt auf erlaubte Tags;
-    Links werden absolut gemacht. Liefert '<p>…</p>' um den Inhalt."""
+    Links werden absolut gemacht.
+
+    Loser Text wird in '<p>…</p>' gefasst, fertige Absätze NICHT noch einmal:
+    vorher lief jeder Inhalt durch die Umhüllung, und weil die Container fast
+    immer schon Absätze enthalten, entstand '<p><p>Text</p>…</p>' – am
+    2026-07-29 in 756 von 776 veröffentlichten Volltexten. Der Parser schließt
+    das äußere <p> beim inneren automatisch und hinterlässt beim Einsetzen per
+    innerHTML einen leeren Absatz, also einen zusätzlichen Leerraum über jeder
+    Beschreibung in der App.
+
+    Gefasst wird stückweise, nicht alles am Stück: manche Quellen mischen lose
+    Textknoten und Absätze im selben Container (WeAct in .trix-content). Die
+    alte Doppelhülle hat diesen Fall aus Versehen richtig behandelt, weil der
+    Parser das äußere <p> am ersten inneren schloss. Wer nur die Hülle
+    weglässt, verliert den Absatz um den losen Text – deshalb bekommt jede
+    zusammenhängende Folge loser Stücke ihren eigenen Absatz."""
     for t in list(node.find_all(True)):
         if t.name not in ALLOWED_DESC_TAGS:
             t.unwrap()
@@ -287,10 +313,59 @@ def sanitize_fragment(node, base_url: str) -> str:
                 t["href"] = urljoin(base_url, href)
                 t["target"] = "_blank"
                 t["rel"] = "noopener"
+        elif t.name == "img":
+            # Nur Quelle und Beschriftung behalten. Die Adresse muss absolut
+            # sein, sonst zeigte sie später auf die App selbst. Bilder ohne
+            # brauchbare Quelle fliegen ganz raus (Platzhalter, 1x1-Pixel);
+            # data:-URLs bleiben ebenfalls draußen, die blähen die Texte auf.
+            src = (t.get("src") or t.get("data-src") or "").strip()
+            alt = (t.get("alt") or "").strip()
+            t.attrs = {}
+            if not src or src.startswith("data:"):
+                t.decompose()
+                continue
+            t["src"] = urljoin(base_url, src)
+            if alt:
+                t["alt"] = alt
+            t["loading"] = "lazy"
         else:
             t.attrs = {}
-    inner = node.decode_contents().strip()
-    return f"<p>{inner}</p>" if inner else ""
+    # Lose Stücke (Text, <strong>, <br> …) in eigene Absätze fassen; Blöcke
+    # bleiben, wo sie sind. Das Umbauen läuft über den Baum und nicht über
+    # Zeichenketten, damit BeautifulSoup das Maskieren übernimmt.
+    puffer: list = []
+
+    def traegt_inhalt(x) -> bool:
+        """Ist dieser Knoten es wert, einen Absatz zu bekommen?
+
+        Kommentare nicht: openpetition liefert ein <!--marker--> mitten im Text,
+        und daraus wurde ein <p><!--marker--></p> – ein leerer Absatz, also
+        genau der Fehler, der hier beseitigt werden soll. Ein einzelnes <br>
+        ebenso wenig."""
+        if isinstance(x, Comment):
+            return False
+        name = getattr(x, "name", None)
+        if name:
+            return name != "br"
+        return bool(str(x).strip())
+
+    def fassen() -> None:
+        if not puffer:
+            return
+        if any(traegt_inhalt(x) for x in puffer):
+            absatz = _P_SOUP.new_tag("p")
+            puffer[0].insert_before(absatz)
+            for x in puffer:
+                absatz.append(x.extract())
+        puffer.clear()
+
+    for kind in list(node.contents):
+        if getattr(kind, "name", None) in BLOCK_DESC_TAGS:
+            fassen()
+        else:
+            puffer.append(kind)
+    fassen()
+    return node.decode_contents().strip()
 
 
 # ----------------------------------------------------------------------------

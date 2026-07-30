@@ -366,6 +366,39 @@ def scrape_petition(fetcher: core.Fetcher, slug: str) -> tuple[str, dict | None]
 _GENERIC_H1 = {"weitersagen", "teilen", "share", "jetzt unterschreiben"}
 
 
+# Bausteine der Seitenform „Offener Brief". Avaaz benutzt sie für einen Teil
+# der Kampagnen (2026-07-29: 3 von 7); dort fehlt .margin_left_campaign, und
+# genau diese drei standen in der App ohne einen Satz Text da. Reihenfolge hier
+# = Leserichtung, nicht DOM-Reihenfolge: im HTML steht der Unterschriftenblock
+# vor dem Brief.
+BRIEF_TEILE = (
+    ".open-letter-intro",                          # Anschrift
+    "article.open-letter-intro-quote",             # der Brief selbst
+    ".open-letter-content > article:not([class])",  # Hintergrund/„Weitere Infos"
+)
+
+
+def _offener_brief(soup) -> str | None:
+    """Beschreibung aus der Seitenform „Offener Brief" zusammensetzen.
+
+    Die drei Bausteine werden EINZELN bereinigt und dann verbunden. Nimmt man
+    stattdessen den ganzen Container, löst sanitize_fragment die div/article-
+    Hüllen auf und der komplette Brief landet in einem einzigen Absatz.
+
+    Gearbeitet wird auf Kopien: der Container trägt auch den
+    Unterschriftenblock, aus dem an anderer Stelle der Zähler gelesen wird –
+    der darf im Original nicht verschwinden.
+    """
+    teile = []
+    for sel in BRIEF_TEILE:
+        node = soup.select_one(sel)
+        if not node:
+            continue
+        kopie = BeautifulSoup(str(node), "html.parser").find(node.name)
+        teile.append(sanitize_fragment(kopie, BASE_URL))
+    return "\n".join(t for t in teile if t) or None
+
+
 def parse_campaign(html: str, url: str) -> dict:
     soup = BeautifulSoup(html, "html.parser")
     rec: dict = {}
@@ -399,10 +432,13 @@ def parse_campaign(html: str, url: str) -> dict:
     rec["category_url"] = None
     rec["started_by"] = "Avaaz-Team"
 
-    # Beschreibung: Artikel-Block der Kampagnenseite.
+    # Beschreibung: Artikel-Block der klassischen Kampagnenseite, sonst die
+    # Form „Offener Brief".
     desc = soup.select_one(".margin_left_campaign article")
     if desc:
         rec["description_full"] = sanitize_fragment(desc, BASE_URL) or None
+    else:
+        rec["description_full"] = _offener_brief(soup)
 
     m_created = CREATED_RE.search(html)
     if m_created:
