@@ -4,14 +4,18 @@
  * Zweite Gestaltungsebene neben dem Hell/Dunkel-Design. Gesteuert genau wie
  * theme.css, nur über ein eigenes Attribut:
  *
- *   document.documentElement.dataset.layout = "klassisch" | "band" | "magazin"
+ *   document.documentElement.dataset.layout = "klassisch" | "relief" | "magazin"
  *   → "klassisch" : KEINE Regel in dieser Datei. Es greift allein style.css,
  *                   das bisherige Erscheinungsbild bleibt unverändert. Genau
  *                   deshalb steht der Rückweg immer offen: eine Auswahl in den
  *                   Einstellungen, kein Zurückspielen von Dateien.
- *   → "band"      : Editorial/Plakat. Randlose Farbbänder, riesige Überschrift,
- *                   Petitionen als nackte Textliste OHNE Bild, harte Kanten,
- *                   dunkle Pille als Fußleiste.  Vorbild: Wochenplaner.
+ *   → "relief"    : Neumorphismus (Soft UI). EINE einzige Fläche für Grund,
+ *                   Karte, Zeile und Knopf; Tiefe entsteht allein aus zwei
+ *                   Schlagschatten. Rahmen, Trennlinien und farbige Füllungen
+ *                   fallen weg, „gedrückt/an/offen" wird nach innen gestellt.
+ *                   Vorbild: freefrontend.com/css-neumorphism-examples/.
+ *                   Ersetzt das frühere Layout „Farbband" (Commit-Stand davor:
+ *                   siehe git log dieser Datei).
  *   → "magazin"   : Bento & Glas. Plattformen als Kachelraster im Vollton
  *                   ihrer echten Markenfarbe, zwei Kacheln über mehrere
  *                   Felder, Petitionen als große Bildkarten mit Milchglas-
@@ -21,14 +25,20 @@
  * Die beiden Entwürfe sollen sich NICHT ähneln. Sie unterscheiden sich
  * absichtlich in jeder Hauptachse:
  *
- *              Band                      Magazin
- *   Bild       gar keins                 groß oben, 11rem
- *   Petition   flache Zeile, Haarlinie   Karte, 1.75rem Radius, Schatten
- *   Plattform  randlos, Radius 0         Bento-Raster, Markenfarbe im Vollton
- *   Titel      2.75rem, eng              1.75rem, dafür starker Fließtext
- *   Suche      2px-Rahmen, kantig        Pille ohne Rahmen
- *   Fußleiste  dunkle Pille              Milchglas
- *   Kategorie  Versalien ohne Fläche     Glas-Pille auf dem Bild
+ *              Relief                    Magazin
+ *   Fläche     Karte = Grund, ein Ton    Karte hebt sich ab
+ *   Kante      keine, nur Licht/Schatten Haarlinie + Schlagschatten
+ *   Plattform  erhabene Zeile, Logo      Bento-Raster, Markenfarbe im Vollton
+ *              in der Markenfarbe
+ *   Farbe      nur in Schrift/Symbol     ganze Flächen im Markenton
+ *   Zustand    eingedrückt (inset)       Füllung wechselt
+ *   Suche      vertieftes Feld           Pille mit Schlagschatten
+ *   Fußleiste  angesetzt, aktiv = Delle  schwebendes Milchglas
+ *
+ * „Relief" ist der Name in der App. Der Fachbegriff Neumorphismus passt nicht
+ * in einen Drittel-Schalter (drei Beschriftungen auf ~110 px) und sagt einer
+ * nicht-fachlichen Leserin nichts; das Wort steht deshalb im Erklärtext unter
+ * dem Schalter (texts.js → settings.layoutHint).
  *
  * Reihenfolge im <head>: style.css → theme.css → layouts.css. Diese Datei
  * kommt zuletzt und kann deshalb beide überschreiben.
@@ -50,128 +60,804 @@
 
 
 /* ===========================================================================
-   LAYOUT „BAND" — Editorial
+   LAYOUT „RELIEF" — Neumorphismus / Soft UI
    ---------------------------------------------------------------------------
-   Vorbild ist der Wochenplaner: eine übergroße Überschrift, darunter randlose
-   Farbbänder, und auf der Detailseite eine schmucklose Textliste. Alles, was
-   nach „Karte" aussieht — Rahmen, Radius, Schatten, Vorschaubild — fällt weg.
-   Die Markenfarbe trägt die Orientierung, nicht mehr das Logo; das entfällt
-   deshalb, es wäre als Marken-Badge auf dem eigenen Markenton kaum zu sehen.
+   Quellen, nach denen dieser Entwurf gebaut ist:
+     • freefrontend.com/css-neumorphism-examples/ (samt Seiten 2–10 der
+       Blätterung) — 30+ Beispiele und die Grundformel im FAQ:
+       „Neumorphism requires a background color matched perfectly to the
+       element's base color … top-left offset is white (-9px -9px 16px
+       #ffffff) and the bottom-right offset is a slightly darker tint of the
+       background (9px 9px 16px #bebebe)."
+       Aus den Beispielen übernommen: Eingabefeld und Schalterspur VERTIEFT
+       („recessed trench"), An/Aus über konkav↔konvex („Soft UI Radio Buttons
+       and Checkboxes"), Fußleiste mit wanderndem Anzeiger („Animated Bottom
+       Tab Bar"), und für das dunkle Design: „instantly updating the shadow
+       physics to maintain the illusion of depth" („Dark Mode Calculator") —
+       im Dunkeln wird das Licht ein aufgehellter Grundton, nicht Weiß.
+     • justinmind.com/ui-design/neumorphism — die drei Grundsätze:
+       Element und Grund tragen EXAKT denselben Ton; EINE Lichtquelle für die
+       ganze Oberfläche; runde Ecken sind Pflicht, harte Kanten zerstören die
+       Täuschung. Eingabefelder gehören nach innen, Karten nach außen –
+       „they don't look like they are floating … they extrude".
+     • bighuman.com/blog/neumorphism und webflow.com/blog/neumorphism — beide
+       im Kern eine KRITIK, und die ist hier eingearbeitet statt ignoriert.
+       Vorwurf 1: „You can't easily tell what's a button, what's interactive."
+       Vorwurf 2: „it can be difficult to decipher on/off states."
+       Vorwurf 3: „no distinction made between elements that showcase critical
+       or peripheral information" — die Rangfolge fällt zusammen.
+       Webflow lobt ausdrücklich das Gegenmittel: „avoids some of the inherent
+       problems … by using a bit more contrast between the edges of its
+       elements. We're fans of how pronounced these buttons are, making sure
+       that we can detect a change in their states." Big Human nennt dasselbe
+       an Apples Big Sur: „Apple avoided some of the pitfalls … by maintaining
+       strong contrast in critical areas (like settings)."
 
-   Warum nicht der volle Markenton? Weiß auf den elf Markenfarben kommt teils
-   nur auf gut 3:1 und verfehlt damit AA für Fließtext. Ein Band mit rund der
-   Hälfte Deckung trägt dagegen den normalen Textton (--ink) mit über 6:1 – und
-   sieht dem Vorbild mit seinen pastelligen Bändern ähnlicher als Vollton.
+   Daraus die FÜNF Gesetze dieses Layouts:
+
+   1. EINE Fläche. Grund, Karte, Zeile, Knopf und Eingabefeld tragen denselben
+      Ton (--surface wird auf --bg gelegt). Tiefe entsteht ausschließlich aus
+      zwei Schlagschatten: Licht von oben links (--nu-hi), Schatten unten
+      rechts (--nu-lo). Rahmen und Trennlinien fallen weg.
+   2. Erhaben = anfassbar, vertieft = Zustand. „Gedrückt", „an" und „offen"
+      stellen dasselbe Element nach INNEN. Das ist der einzige Zustandswechsel,
+      den dieses Design kennt, und er ersetzt jede farbige Füllung.
+   3. Eingabefelder und Sammelkästen liegen VERTIEFT (Mulde), Karten und
+      Knöpfe ERHABEN (Buckel). Nie beides auf derselben Ebene.
+   4. Alles Antippbare bekommt zusätzlich eine Haarlinie (--nu-rim). Das ist
+      die Antwort auf Vorwurf 1: eine Fläche mit Kante ist ein Bedienelement,
+      eine Fläche ohne Kante ist nur Untergrund. Zwei Quellen empfehlen genau
+      das (siehe oben).
+   5. Farbe steckt nur in Schrift, Symbol und Logo — nie in einer Fläche.
+      Das ist die Antwort auf Vorwurf 3: die Rangfolge trägt der Akzentton auf
+      der Schrift, nicht die Größe des Schattens. Drei begründete AUSNAHMEN,
+      weil dort die Farbe eine Bedeutung trägt und kein Schmuck ist:
+        • .danger__btn — „Alle Daten löschen" bleibt rot gefüllt. Ein
+          unwiderruflicher Knopf, der aussieht wie jeder andere, ist genau der
+          Fehler, den beide Kritiken beschreiben.
+        • .pet-bg — die Wischflächen (grün „unterschrieben", orange „merken")
+          sind Rückmeldung während der Bewegung, keine Oberfläche.
+        • .plat__dot / .amp1–.amp5 — die Ampelpunkte SIND die Farbskala.
+
+   Grundmaß: die Referenz-Formel 9 px Versatz / 16 px Weichzeichnung
+   (= .5625rem / 1rem) für Aufmacher, davon abgeleitet .375rem/.8125rem für
+   Karten und .1875rem/.4375rem für Kleinteile. Drei Stufen, nicht eine —
+   sonst wirkt eine Liste aus 30 gleich stark erhabenen Karten wie Kies.
+
+   Geprüfte WCAG-Kontraste. Sie sind der eigentliche Grund, warum Gesetz 5
+   funktioniert: alle Schriftfarben liegen jetzt auf DEMSELBEN Grund (--bg),
+   es gibt also nur noch eine Handvoll Paare zu prüfen statt eines pro Fläche.
+   Gemessen, nicht geschätzt, jeweils hell / dunkel:
+     --ink   auf --bg   15.6 / 15.6  ✓  (auf --surface waren es 14.5)
+     --muted auf --bg    5.19 /  7.6  ✓  AA
+     --accent auf --bg   7.01 /  7.91 ✓  (trägt alle Knopfbeschriftungen)
+     --amp1  auf --bg    5.33 /  5.12 ✓  (Warnungen, Löschbereich)
+     --on-hot-soft       4.56 /  9.05 ✓  AA (Spenden-Knopf, Favoritenstern)
+   Licht und Schatten sind KEINE Kontrastträger und dürfen es nicht sein —
+   deshalb steht darüber hinaus:
+     • :focus-visible bekommt einen 3-px-Ring im Akzentton (das FAQ der
+       Referenz verlangt „highly visible :focus-visible outlines"),
+     • @media (prefers-contrast:more) holt echte Rahmen zurück,
+     • @media (forced-colors:active) schaltet das Relief ganz ab.
+
+   GRUNDREGEL DER DATEI: hier stehen Maße, Formen und Anordnung – keine neuen
+   Farben. Ausnahme sind --nu-hi/--nu-lo/--nu-edge: das sind Licht und
+   Schatten der Oberfläche selbst, sie lassen sich aus der Palette nicht
+   ableiten und werden deshalb an DREI Stellen gesetzt (siehe Kopf der Datei).
    =========================================================================== */
-:root[data-layout="band"]{
-  --radius:.5rem;                  /* kantig statt weich */
-  --tabbar-h:5.25rem;              /* schwebende Pille braucht mehr Fußraum */
-  --band-veil:rgba(255,255,255,.55);
+:root[data-layout="relief"]{
+  /* Gesetz 1. Damit fallen alle Karten, Zeilen und Felder der App in einem
+     Zug auf den Grundton — auch die, die weiter unten nicht eigens genannt
+     sind. */
+  --surface:var(--bg);
+  --radius:1.5rem;                 /* Gesetz: runde Ecken, großzügig */
+
+  /* Licht und Schatten der Oberfläche. NUR diese drei Werte wechseln mit dem
+     Hell/Dunkel-Design; alle Verbund-Schatten darunter greifen über var()
+     darauf zu und rechnen sich dadurch von selbst um. */
+  --nu-hi:#ffffff;                 /* Licht oben links */
+  --nu-lo:#ddd6c5;                 /* Schatten unten rechts: --bg um ~12 %
+                                      abgedunkelt, warm gehalten (nicht grau,
+                                      der Grund ist cremefarben) */
+  --nu-edge:rgba(30,28,24,.13);    /* Haarlinie nach Gesetz 4 */
+
+  /* Erhaben, drei Stufen (siehe Kopf) */
+  --nu-out-l:-.5625rem -.5625rem 1rem var(--nu-hi),
+              .5625rem .5625rem 1rem var(--nu-lo);
+  --nu-out:-.375rem -.375rem .8125rem var(--nu-hi),
+            .375rem .375rem .8125rem var(--nu-lo);
+  --nu-out-s:-.1875rem -.1875rem .4375rem var(--nu-hi),
+              .1875rem .1875rem .4375rem var(--nu-lo);
+  /* Vertieft, zwei Stufen */
+  --nu-in:inset .375rem .375rem .8125rem var(--nu-lo),
+          inset -.375rem -.375rem .8125rem var(--nu-hi);
+  --nu-in-s:inset .1875rem .1875rem .4375rem var(--nu-lo),
+            inset -.1875rem -.1875rem .4375rem var(--nu-hi);
+  /* Haarlinie als eigener Baustein, damit sie sich mit jeder der obigen
+     Stufen kombinieren lässt. Steht in der Liste VORNE und wird deshalb
+     zuoberst gezeichnet. */
+  --nu-rim:inset 0 0 0 .0625rem var(--nu-edge);
+
+  /* Auffangnetz: --shadow steckt in style.css in gut einem Dutzend Regeln
+     (.pet, .srow, .prow, .io, .plat, .search …). Es hier umzulegen heißt,
+     dass auch eine später hinzukommende Karte automatisch weich erhaben ist
+     statt eine Haarlinie zu tragen — und im dunklen Design nicht den
+     1-px-Ring aus theme.css bekommt. */
+  --shadow:var(--nu-out-s);
 }
-:root[data-layout="band"][data-theme="dark"]{
-  --band-veil:rgba(25,23,20,.62);
+:root[data-layout="relief"][data-theme="dark"]{
+  /* Im Dunkeln ist das Licht kein Weiß, sondern ein aufgehellter Grundton;
+     Weiß wäre auf #191714 ein greller Streifen. Der Schatten geht dafür fast
+     auf Schwarz. Vgl. „Dark Mode Calculator" in der Referenz. */
+  --nu-hi:#26221a;
+  --nu-lo:#0b0a08;
+  --nu-edge:rgba(255,255,255,.09);
 }
 @media (prefers-color-scheme:dark){
-  :root[data-layout="band"][data-theme="auto"]{
-    --band-veil:rgba(25,23,20,.62);
+  :root[data-layout="relief"][data-theme="auto"]{
+    --nu-hi:#26221a;
+    --nu-lo:#0b0a08;
+    --nu-edge:rgba(255,255,255,.09);
   }
 }
 
-/* ---- Kopf: engere Wortmarke, riesige Überschrift ----
-   Die Kopfleiste bleibt deckend: sie klebt oben (position:sticky) und deckt
-   auf Apple-Geräten die Aussparung ab — durchsichtig würde der Inhalt beim
-   Scrollen darunter durchlaufen. */
-[data-layout="band"] .brand__name{letter-spacing:-.04em}
-[data-layout="band"] .pagekick{color:var(--ink);opacity:.55;
-  letter-spacing:.12em}
-[data-layout="band"] .welcome{padding:.25rem .125rem 1.5rem}
-[data-layout="band"] .welcome__t{font-size:2.75rem;letter-spacing:-.05em;
-  line-height:.98}
-[data-layout="band"] .welcome__s{font-size:.875rem;max-width:26rem}
 
-/* ---- Suche: harte Kante, kräftiger Rahmen ---- */
-[data-layout="band"] .mainsearch__in,
-[data-layout="band"] .search{border:.125rem solid var(--ink);
-  border-radius:var(--radius);background:transparent}
-[data-layout="band"] .mainsearch__btn{border-radius:var(--radius)}
+/* ---------------------------------------------------------------------------
+   GRUNDLAGEN — Kanten weg, Flächen gleich
+   Ein Sammelgriff für alles, was in style.css eine Haarlinie und eine eigene
+   Fläche trägt. Erst wird abgeräumt, danach setzt jeder Abschnitt seine
+   Tiefe. Ohne diesen Block bliebe unter jedem Relief eine 1-px-Linie stehen
+   und die Täuschung wäre sofort tot.
+   --------------------------------------------------------------------------- */
+[data-layout="relief"] .accordion,
+[data-layout="relief"] .plat,
+[data-layout="relief"] .opt,
+[data-layout="relief"] .pet,
+[data-layout="relief"] .srow,
+[data-layout="relief"] .seg,
+[data-layout="relief"] .prow,
+[data-layout="relief"] .io,
+[data-layout="relief"] .simrow,
+[data-layout="relief"] .tag,
+[data-layout="relief"] .wplat,
+[data-layout="relief"] .chiprow .chip,
+[data-layout="relief"] .wiz__chips .chip,
+[data-layout="relief"] .support,
+[data-layout="relief"] .support__item,
+[data-layout="relief"] .support__btn,
+[data-layout="relief"] .support__btn--ghost,
+[data-layout="relief"] .io__btn--ghost,
+[data-layout="relief"] .filterbar,
+[data-layout="relief"] .filterbar__reset,
+[data-layout="relief"] .ptools__sum,
+[data-layout="relief"] .ptools__body,
+[data-layout="relief"] .nerd__sum,
+[data-layout="relief"] .nerd__body,
+[data-layout="relief"] .descacc>summary,
+[data-layout="relief"] .descacc .pet__desc,
+[data-layout="relief"] .pabout,
+[data-layout="relief"] .pabout__link,
+[data-layout="relief"] .pabout__open,
+[data-layout="relief"] .danger,
+[data-layout="relief"] .btn-secondary,
+[data-layout="relief"] .search,
+[data-layout="relief"] .mainsearch__in,
+[data-layout="relief"] .signed__search,
+[data-layout="relief"] .signed-list,
+[data-layout="relief"] .signed-item,
+[data-layout="relief"] .timein,
+[data-layout="relief"] .impact,
+[data-layout="relief"] .swipe-hint,
+[data-layout="relief"] .favtip,
+[data-layout="relief"] .wplat__check,
+[data-layout="relief"] .tabbar{
+  border:0;
+  /* Die Markentönung aus style.css (Markenfarbe + Schleier als Gradient)
+     fällt nach Gesetz 5 weg. Die Marke steckt in diesem Layout im Logo, das
+     auf allen betroffenen Zeilen ohnehin steht (app.js → platLogo bei .plat,
+     .opt, .wplat, .signed-item). */
+  background-color:var(--bg);
+  background-image:none;
+}
 
-/* ---- Gruppenüberschrift als Kleinstetikett ---- */
-[data-layout="band"] .langgroup>.acc-head{font-size:.75rem;font-weight:800;
-  letter-spacing:.12em;text-transform:uppercase;padding:1.75rem .125rem .625rem}
-[data-layout="band"] .langgroup>.acc-head .acc-count{background:transparent;
-  color:var(--ink);opacity:.6;padding:0}
+/* Karten brauchen mehr Luft als in „klassisch": zwei Reliefs im Abstand von
+   .5rem lassen ihre Schatten ineinanderlaufen, und die Mulde zwischen ihnen
+   verschwindet. Gemessen am größten hier benutzten Versatz (.375rem) plus
+   Weichzeichnung braucht es rund 1rem. */
+[data-layout="relief"] .plat,
+[data-layout="relief"] .opt,
+[data-layout="relief"] .srow,
+[data-layout="relief"] .prow,
+[data-layout="relief"] .simrow,
+[data-layout="relief"] .signed-item,
+[data-layout="relief"] .pet-wrap{margin-bottom:1rem}
+[data-layout="relief"] .accordion{margin-bottom:1.25rem}
 
-/* ---- Plattformzeile als randloses Farbband ----
-   Nur die Liste, nicht die Plattform-Schalter in den Einstellungen: dort
-   sitzen dieselben .plat in einem Akkordion mit eigenem Innenabstand, ein
-   randloses Band würde dort aus dem Kasten laufen. Die Zusatzklasse kommt aus
-   app.js (groupAccordion).
 
-   Die Umrandung nutzt --veil-rail aus style.css: hell ist sie durchsichtig
-   (die Bänder heben sich dort von allein vom cremefarbenen Grund ab), dunkel
-   ist sie ein weißer Schleier. Ohne sie verschwinden genau die Plattformen,
-   deren Markenfarbe dunkler ist als der Seitengrund — Bundestag und das
-   EU-Blau #003399 kamen im Dunkeln auf 1,14 zur Fläche dahinter. */
-[data-layout="band"] .acc-body--plats .plat{
-  background-image:linear-gradient(var(--band-veil),var(--band-veil));
-  border:0;box-shadow:inset 0 0 0 .0625rem var(--veil-rail);
-  border-radius:0;
-  /* .plat ist ein <button>: bei width:auto greift die intrinsische Breite und
-     das Band bliebe schmaler als die Seite. Deshalb der Innenabstand von
-     .content (2 × 1.125rem) ausdrücklich aufgeschlagen. */
-  width:calc(100% + 2.25rem);
-  margin:0 -1.125rem .1875rem;padding:1.25rem 1.125rem;gap:.75rem}
-/* Marken-Badge auf Markenton ergäbe nur Fleck auf Fleck. */
-[data-layout="band"] .acc-body--plats .plat>.plogo{display:none}
-[data-layout="band"] .plat__name{font-size:1.3125rem;font-weight:800;
-  letter-spacing:-.03em}
-/* --muted erreicht auf dem Band nur rund 2:1. Der normale Textton mit
-   reduzierter Deckung bleibt zurückhaltend UND lesbar (vgl. .pet-closed).
-   Deckung gemessen, nicht geschätzt: bei 0.72 fiel die schwächste der elf
-   Plattformen im hellen Design auf 3,99 und verfehlte AA; 0.82 hebt sie auf
-   4,90 (dunkel: 6,12). */
-[data-layout="band"] .plat__meta,
-[data-layout="band"] .plat__tag{color:var(--ink);opacity:.82}
-[data-layout="band"] .plat__new{background:var(--surface)}
-/* Pfeil als offener Ring, diagonal — wie im Vorbild. */
-[data-layout="band"] .plat__chev{background-color:transparent;
-  background-image:none;border:.09375rem solid var(--ink);color:var(--ink);
-  width:2.5rem;height:2.5rem}
-[data-layout="band"] .plat__chev i{transform:rotate(-45deg)}
+/* ---------------------------------------------------------------------------
+   KOPF UND ÜBERSCHRIFT
+   Die Kopfleiste bleibt flach und im Grundton: sie IST die Oberfläche, aus
+   der alles andere herauswächst. Ein Relief auf der Kopfleiste selbst würde
+   sie zu einem Bedienelement erklären (Gesetz 4).
+   --------------------------------------------------------------------------- */
+[data-layout="relief"] .pagekick{color:var(--muted);letter-spacing:.1em}
+[data-layout="relief"] .welcome{padding:.5rem .125rem 1.5rem}
+[data-layout="relief"] .welcome__t{font-size:2rem;letter-spacing:-.025em;
+  line-height:1.1}
+[data-layout="relief"] .welcome__s{font-size:.9375rem;line-height:1.65}
+/* Der Menü-/Symbolknopf in der Kopfleiste: ruhige Fläche, beim Tippen Mulde.
+   Kein Dauer-Relief, sonst schwebt in der flachen Kopfleiste ein Buckel. */
+[data-layout="relief"] .iconbtn:active{background:transparent;
+  box-shadow:var(--nu-in-s)}
 
-/* ---- Petitionen: nackte Textliste ----
-   Kein Kasten, kein Schatten, kein Vorschaubild – nur Titel und eine
-   Haarlinie darunter. Der Kartengrund muss trotzdem deckend bleiben (--bg
-   statt transparent): unter jeder Petition liegt die Wischfläche .pet-bg,
-   durch eine durchsichtige Karte würde sie im Ruhezustand durchscheinen. */
-[data-layout="band"] .pet-wrap,
-[data-layout="band"] .pet-bg,
-[data-layout="band"] .pet{border-radius:0}
-[data-layout="band"] .pet-wrap{margin-bottom:0}
-[data-layout="band"] .pet{background:var(--bg);border:0;
-  box-shadow:inset 0 -.0625rem 0 0 var(--line)}
-[data-layout="band"] .pet__head{padding:1.0625rem .125rem;gap:.625rem}
-[data-layout="band"] .pet__thumb{display:none}
-[data-layout="band"] .pet__title{font-size:1rem;font-weight:700;
-  letter-spacing:-.015em;line-height:1.35}
-[data-layout="band"] .pet__body{padding:0 .125rem 1.25rem}
-/* Kategorie wird vom Balken zur Zeile in Versalien, ohne eigene Fläche. */
-[data-layout="band"] .pet__catbar,
-[data-layout="band"] .pet__catbar:active{background:transparent;
-  color:var(--ink);opacity:.6;border-bottom:0;padding:.875rem .125rem 0;
-  font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase}
 
-/* ---- Fußleiste als schwebende dunkle Pille ---- */
-[data-layout="band"] .tabbar{left:.75rem;right:.75rem;
-  bottom:calc(.625rem + env(safe-area-inset-bottom));height:3.75rem;
-  padding-bottom:0;border:0;border-radius:999px;background:var(--ink);
-  box-shadow:0 .5rem 1.5rem rgba(0,0,0,.22)}
-[data-layout="band"] .tab{color:var(--bg);opacity:.62}
-[data-layout="band"] .tab.active{color:var(--bg);opacity:1}
-/* Auf dem dunklen Grund trägt --hot-soft nicht; ein aufgehellter Ausschnitt
-   derselben Fläche schon. */
-[data-layout="band"] .tab.active i{background:rgba(255,255,255,.18);
-  color:var(--bg)}
+/* ---------------------------------------------------------------------------
+   EINGABEFELDER — Mulden (Gesetz 3)
+   „We don't want the input fields to scream for attention, but rather feel
+   like natural indentations in the canvas." (justinmind)
+   Die Haarlinie sitzt hier mit: ein Eingabefeld ist ein Bedienelement.
+   --------------------------------------------------------------------------- */
+[data-layout="relief"] .search,
+[data-layout="relief"] .mainsearch__in,
+[data-layout="relief"] .signed__search,
+[data-layout="relief"] .timein,
+[data-layout="relief"] .profile-namein{
+  box-shadow:var(--nu-rim),var(--nu-in-s)}
+[data-layout="relief"] .search,
+[data-layout="relief"] .mainsearch__in,
+[data-layout="relief"] .signed__search{padding:1rem 1.25rem;
+  border-radius:999px}
+[data-layout="relief"] .signed__search{padding-left:2.625rem}
+[data-layout="relief"] .timein{border-radius:999px;padding:.625rem 1rem}
+/* Der Fokusring liegt außen, damit er die Mulde nicht zuklebt. */
+[data-layout="relief"] .search:focus,
+[data-layout="relief"] .mainsearch__in:focus,
+[data-layout="relief"] .signed__search:focus{outline:.1875rem solid var(--accent);
+  outline-offset:.125rem;border-color:transparent}
+/* Der Name im Profil war eine gestrichelte Linie – die passt nicht in eine
+   Oberfläche ohne Kanten. Jetzt eine vertiefte Pille wie jedes andere Feld. */
+[data-layout="relief"] .profile-namein{border-bottom:0;border-radius:999px;
+  padding:.75rem 1.25rem;text-align:center;margin-bottom:.75rem}
+[data-layout="relief"] .profile-namein:focus{outline:.1875rem solid var(--accent);
+  outline-offset:.125rem}
+
+
+/* ---------------------------------------------------------------------------
+   KNÖPFE — erhaben, Beschriftung im Akzentton (Gesetz 5)
+   In style.css sind die Hauptaktionen dunkle Pillen (--ink gefüllt). Eine
+   gefüllte Pille ist in dieser Oberfläche ein Fremdkörper: sie schwebt, statt
+   herauszuwachsen. Der Rang wandert deshalb von der Fläche in die Schrift –
+   Akzentgrün auf dem Grundton trägt mit 7,01 (hell) und 7,91 (dunkel).
+   --------------------------------------------------------------------------- */
+[data-layout="relief"] .hint-dismiss,
+[data-layout="relief"] .mainsearch__btn,
+[data-layout="relief"] .support__btn,
+[data-layout="relief"] .io__btn,
+[data-layout="relief"] .filterbar__cross,
+[data-layout="relief"] .filterbar__reset,
+[data-layout="relief"] .pet__extlink,
+[data-layout="relief"] .wiz__next,
+[data-layout="relief"] .btn-secondary,
+[data-layout="relief"] .pabout__link,
+[data-layout="relief"] .tag,
+[data-layout="relief"] .to-top{
+  background:var(--bg);color:var(--accent);
+  box-shadow:var(--nu-rim),var(--nu-out-s)}
+/* Gedrückt = Mulde. Das ersetzt das bisherige opacity:.82, das auf einer
+   Fläche in Grundfarbe gar nichts mehr zeigen würde. */
+[data-layout="relief"] .hint-dismiss:active,
+[data-layout="relief"] .mainsearch__btn:active,
+[data-layout="relief"] .support__btn:active,
+[data-layout="relief"] .io__btn:active,
+[data-layout="relief"] .filterbar__cross:active,
+[data-layout="relief"] .filterbar__reset:active,
+[data-layout="relief"] .pet__extlink:active,
+[data-layout="relief"] .wiz__next:active,
+[data-layout="relief"] .btn-secondary:active,
+[data-layout="relief"] .pabout__link:active,
+[data-layout="relief"] .tag:active,
+[data-layout="relief"] .to-top:active{opacity:1;filter:none;
+  background:var(--bg);box-shadow:var(--nu-rim),var(--nu-in-s)}
+/* Die Hauptaktion einer Seite bleibt die Hauptaktion: größeres Relief und
+   fettere Schrift, nicht eine andere Farbe. */
+[data-layout="relief"] .wiz__next,
+[data-layout="relief"] .pet__extlink{box-shadow:var(--nu-rim),var(--nu-out)}
+[data-layout="relief"] .wiz__next:disabled{opacity:.45;
+  box-shadow:var(--nu-rim),var(--nu-in-s)}
+/* Spenden: das Orange bleibt als SCHRIFT erhalten (--on-hot-soft, AA-fest in
+   beiden Designs), nicht als Fläche. */
+[data-layout="relief"] .support__btn--donate{color:var(--on-hot-soft)}
+[data-layout="relief"] .support__btn--donate i{color:inherit}
+[data-layout="relief"] .to-top{border-radius:50%;
+  width:3rem;height:3rem;font-size:1.125rem}
+/* MIT :root davor, nicht ohne. theme.css setzt für den Dunkelmodus
+   `:root[data-theme="dark"] .to-top{box-shadow:…}` – das sind zwei Klassen
+   plus Pseudoklasse und schlägt ein einfaches [data-layout] .to-top. Ohne den
+   :root-Vorsatz behielte der Knopf im Dunkeln den alten 1-px-Ring und wäre
+   das einzige Element der App ohne Relief. Gleiches Gewicht + spätere Datei
+   = diese Regel gewinnt. */
+:root[data-layout="relief"] .to-top{
+  box-shadow:var(--nu-rim),var(--nu-out-s)}
+:root[data-layout="relief"] .to-top:active{
+  box-shadow:var(--nu-rim),var(--nu-in-s)}
+
+
+/* ---------------------------------------------------------------------------
+   LISTE — Gruppenüberschriften und Plattformzeilen
+   Hier stand vorher das Farbband. Der Weg ist jetzt umgekehrt: die Zeile
+   verliert ihre Markenfläche und bekommt Tiefe, die Marke wandert ins Logo.
+   Die Zusatzklasse .acc-body--plats kommt aus app.js (groupAccordion) und
+   trifft nur die Liste, nicht die Schalterlisten in den Einstellungen.
+   --------------------------------------------------------------------------- */
+[data-layout="relief"] .langgroup>.acc-head{font-size:1.125rem;font-weight:800;
+  letter-spacing:-.01em;padding:1.5rem .25rem 1rem}
+/* Zähler als kleine Mulde – eine Angabe, kein Bedienelement, also ohne
+   Haarlinie. */
+[data-layout="relief"] .acc-count,
+[data-layout="relief"] .langgroup>.acc-head .acc-count{background:transparent;
+  color:var(--accent);box-shadow:var(--nu-in-s);padding:.1875rem .6875rem}
+/* Der Trennstrich zwischen den Sprachgruppen fällt weg: in einer Oberfläche
+   ohne Kanten trennt der Abstand. */
+[data-layout="relief"] section.langgroup:not(.bottomacc):not(.crossgroup)
+  + section.langgroup:not(.bottomacc):not(.crossgroup){border-top:0}
+[data-layout="relief"] .bottomacc{border-top:0;margin-top:2rem}
+
+[data-layout="relief"] .acc-body--plats .plat{
+  border-radius:var(--radius);padding:1.125rem 1.125rem 1.125rem 1.25rem;
+  gap:1rem;box-shadow:var(--nu-rim),var(--nu-out);
+  transition:box-shadow .12s cubic-bezier(.4,0,.2,1)}
+/* Gedrückt: die Zeile sinkt in die Fläche ein. Das transform:scale aus
+   style.css muss weg – zwei gleichzeitige Rückmeldungen wirken wie ein
+   Ruckeln, und die Mulde allein ist deutlicher. */
+[data-layout="relief"] .acc-body--plats .plat:active{transform:none;
+  box-shadow:var(--nu-rim),var(--nu-in)}
+[data-layout="relief"] .plat .plogo{--logo-h:2.5rem}
+[data-layout="relief"] .plat__name{font-size:1.0625rem;font-weight:750}
+/* Der Pfeil wird eine ausgefräste Buchse mit dem Symbol im Akzentton. Auf
+   einer erhabenen Karte ist eine Mulde das Richtige: ein zweiter Buckel
+   darauf verwischt die Ebenen (Gesetz 3). */
+[data-layout="relief"] .plat__chev{background-color:transparent;
+  background-image:none;color:var(--accent);width:2.5rem;height:2.5rem;
+  box-shadow:var(--nu-in-s)}
+/* „Neu"-Plakette: Mulde statt eigener Fläche. */
+[data-layout="relief"] .plat__new{background:transparent;color:var(--online);
+  box-shadow:var(--nu-in-s);padding:.125rem .625rem}
+
+
+/* ---------------------------------------------------------------------------
+   PETITIONSKARTEN
+   Die Karte wächst aus dem Grund heraus („they extrude", justinmind), das
+   Vorschaubild liegt als eigenes kleines Relief darauf. Ein Bild lässt sich
+   NICHT vertiefen: ein inset-Schatten wird vom Bildinhalt überdeckt, weil
+   der Inhalt eines ersetzten Elements über der Innenschattenebene liegt.
+   Deshalb sitzt es erhaben — und das ist ohnehin die Lesart „Foto liegt auf
+   der Fläche".
+   --------------------------------------------------------------------------- */
+[data-layout="relief"] .pet-wrap,
+[data-layout="relief"] .pet-bg,
+[data-layout="relief"] .pet{border-radius:var(--radius)}
+[data-layout="relief"] .pet{box-shadow:var(--nu-rim),var(--nu-out)}
+[data-layout="relief"] .pet__head{padding:1rem 1.125rem;gap:.875rem}
+/* Die Fläche beim Antippen fällt weg (sie wäre eine farbige Füllung nach
+   Gesetz 5); die Rückmeldung gibt die Buchse des Pfeils. */
+[data-layout="relief"] .pet__head:active{background:transparent}
+[data-layout="relief"] .pet__thumb{border-radius:.875rem;
+  box-shadow:var(--nu-out-s)}
+/* Aufgeklappt läuft das Bild randlos über die Karte – dort wäre ein Relief
+   sinnlos, die Kante ist keine mehr. */
+[data-layout="relief"] .pet.open .pet__thumb{box-shadow:none}
+[data-layout="relief"] .pet__title{font-size:.9375rem;font-weight:700;
+  line-height:1.4}
+/* Aufklapper und Fremdlink als Buchsen, wie der Pfeil in der Plattformzeile.
+   .pet__toggle ist bisher nur ein Zeichen ohne Maße und bekommt sie hier. */
+[data-layout="relief"] .pet__toggle{width:2.125rem;height:2.125rem;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  color:var(--accent);box-shadow:var(--nu-in-s);font-size:.8125rem}
+[data-layout="relief"] .pet__ext{border-radius:50%;color:var(--accent);
+  box-shadow:var(--nu-in-s);font-size:.875rem}
+[data-layout="relief"] .pet__ext:active{background:transparent;
+  box-shadow:var(--nu-out-s)}
+/* Kategorie: vom randlosen Balken zur kleinen erhabenen Plakette oben in der
+   Karte. Der Balken lief über die ganze Breite und trug eine Fläche in
+   --accent-soft – beides fällt. width:auto plus Außenabstand genügt, .pet ist
+   kein Flex-Container. */
+[data-layout="relief"] .pet__catbar,
+[data-layout="relief"] .pet__catbar:active{width:auto;border-bottom:0;
+  display:inline-flex;margin:1rem 0 -.25rem 1.125rem;padding:.375rem .8125rem;
+  border-radius:999px;background:var(--bg);color:var(--accent);filter:none;
+  box-shadow:var(--nu-rim),var(--nu-out-s)}
+[data-layout="relief"] .pet__catbar:active{
+  box-shadow:var(--nu-rim),var(--nu-in-s)}
+/* Abzeichen „unterschrieben" / „beendet": Mulden, Farbe bleibt in der
+   Schrift. */
+[data-layout="relief"] .pet-signed{background:transparent;color:var(--online);
+  box-shadow:var(--nu-in-s);padding:.1875rem .625rem}
+[data-layout="relief"] .pet-closed{background:transparent;color:var(--ink);
+  opacity:.72;box-shadow:var(--nu-in-s);padding:.1875rem .625rem}
+/* Hinweiskästen im Text: Mulden ohne Haarlinie (Text, nicht antippbar). */
+[data-layout="relief"] .pet__desc .count-note,
+[data-layout="relief"] .pet__desc-note,
+[data-layout="relief"] .ptools__note,
+[data-layout="relief"] .kodex__note,
+[data-layout="relief"] .danger__warn,
+[data-layout="relief"] .pabout__open,
+[data-layout="relief"] .impact__q{background:transparent;
+  box-shadow:var(--nu-in-s);border-radius:1rem}
+[data-layout="relief"] .swipe-hint,
+[data-layout="relief"] .favtip{box-shadow:var(--nu-in);border-radius:var(--radius)}
+[data-layout="relief"] .favtip>i{color:var(--on-hot-soft)}
+/* Das Aufleuchten der angesprungenen Karte behält den Akzentring, endet aber
+   auf dem Relief der Karte statt auf „kein Schatten" – sonst fiele die Karte
+   am Ende der Blende flach. */
+[data-layout="relief"] .jump-hit{animation:reliefHit 1.8s ease-out}
+@keyframes reliefHit{
+  0%,55%{box-shadow:0 0 0 .1875rem var(--accent),var(--nu-out)}
+  100%{box-shadow:var(--nu-rim),var(--nu-out)}}
+@media (prefers-reduced-motion:reduce){
+  [data-layout="relief"] .jump-hit{animation:none;
+    box-shadow:0 0 0 .1875rem var(--accent),var(--nu-out)}}
+/* Ähnliche Petitionen im Fuß der Karte: Karte in der Karte, deshalb die
+   kleinste Stufe. Der Trennstrich darüber fällt weg. */
+[data-layout="relief"] .pet__similar{border-top:0;padding-top:1.25rem}
+[data-layout="relief"] .simrow{border-radius:1.125rem;
+  box-shadow:var(--nu-rim),var(--nu-out-s)}
+[data-layout="relief"] .simrow:active{background:var(--bg);
+  box-shadow:var(--nu-rim),var(--nu-in-s)}
+
+
+/* ---------------------------------------------------------------------------
+   FUSSLEISTE — angesetzt, der aktive Tab ist eine Delle
+   Bewusst NICHT schwebend: die Pille hat „Band" getragen, das Milchglas
+   trägt „Magazin". Hier ist die Leiste dieselbe Oberfläche wie die Seite,
+   nur mit einer Lichtkante oben — als wäre der Inhalt darüber ausgefräst.
+   Der aktive Tab ist die einzige Mulde in der Leiste; das ist der Anzeiger
+   aus dem Beispiel „Animated Bottom Tab Bar", nur ohne Wanderung.
+   --------------------------------------------------------------------------- */
+[data-layout="relief"] .tabbar{background:var(--bg);border-top:0;
+  box-shadow:0 -.375rem 1rem var(--nu-lo),inset 0 .0625rem 0 var(--nu-hi)}
+[data-layout="relief"] .tab i{width:2.75rem;height:2.75rem;border-radius:50%}
+[data-layout="relief"] .tab.active{color:var(--ink)}
+[data-layout="relief"] .tab.active i{background:transparent;color:var(--accent);
+  box-shadow:var(--nu-in-s)}
+[data-layout="relief"] .tab:active i{transform:none;
+  box-shadow:var(--nu-in-s)}
+
+
+/* ---------------------------------------------------------------------------
+   EINSTELLUNGEN
+   Hier gilt Big Sur als Warnung: „Apple avoided some of the pitfalls by
+   maintaining strong contrast in critical areas (like settings)."
+   Deshalb bleiben in diesem Abschnitt ALLE Beschriftungen auf --ink (15,6:1),
+   und jeder Schalter zeigt seinen Zustand doppelt — über die Form (Mulde
+   gegen Buckel) UND über den Akzentton.
+   --------------------------------------------------------------------------- */
+/* Das Akkordion war eine Karte MIT Karten darin. Zwei Reliefs übereinander
+   werden Matsch, also verliert der Rahmen seine Fläche: nur der Kopf ist noch
+   ein Bedienelement, die Zeilen darin stehen frei. overflow muss dafür auf
+   visible, sonst schneidet der Kasten den Schatten des Kopfes ab. */
+[data-layout="relief"] .accordion:not(.langgroup){background:transparent;
+  box-shadow:none;overflow:visible}
+[data-layout="relief"] .accordion:not(.langgroup)>.acc-head{
+  background:var(--bg);border-radius:var(--radius);padding:1.125rem 1.25rem;
+  box-shadow:var(--nu-rim),var(--nu-out)}
+/* Gesetz 2: offen = eingedrückt. */
+[data-layout="relief"] .accordion:not(.langgroup).open>.acc-head{
+  box-shadow:var(--nu-rim),var(--nu-in)}
+[data-layout="relief"] .accordion:not(.langgroup)>.acc-body{padding:1rem 0 0}
+
+[data-layout="relief"] .sect{margin-top:2.25rem}
+[data-layout="relief"] .srow{border-radius:var(--radius);padding:1.125rem;
+  box-shadow:var(--nu-rim),var(--nu-out-s)}
+[data-layout="relief"] .srow:not(.srow--static):active{background:var(--bg);
+  box-shadow:var(--nu-rim),var(--nu-in-s)}
+[data-layout="relief"] .srow--static{box-shadow:var(--nu-in-s)}
+[data-layout="relief"] .srow__lbl{margin:1.25rem .25rem .5rem}
+
+/* Schalterleiste (Farbdesign, Layout): vertiefte Rinne, die gewählte Taste
+   ein Buckel darin. Das ist die Bauform aus „Soft UI Radio Buttons and
+   Checkboxes" — konkav gegen konvex. Der Akzentton kommt zusätzlich, weil
+   „it can be difficult to decipher on/off states" der Hauptvorwurf ist. */
+[data-layout="relief"] .seg{background:var(--bg);border-radius:999px;
+  padding:.375rem;gap:.375rem;box-shadow:var(--nu-in)}
+[data-layout="relief"] .seg__b{border-radius:999px;padding:.625rem .375rem}
+[data-layout="relief"] .seg__b.on{background:var(--bg);color:var(--accent);
+  font-weight:750;box-shadow:var(--nu-rim),var(--nu-out-s)}
+
+/* Schalter: Spur vertieft, Knopf erhaben. „An" färbt den Knopf in den
+   Akzentton und legt die Spur in --accent-soft — die Form allein wäre bei
+   einem 46-px-Element zu wenig, das ist genau der kritisierte Fall. */
+[data-layout="relief"] .slider{background:var(--bg);
+  box-shadow:var(--nu-rim),var(--nu-in-s)}
+[data-layout="relief"] .slider::before{background:var(--bg);
+  box-shadow:var(--nu-rim),var(--nu-out-s)}
+[data-layout="relief"] .switch input:checked + .slider{
+  background:var(--accent-soft);box-shadow:var(--nu-rim),var(--nu-in-s)}
+[data-layout="relief"] .switch input:checked + .slider::before{
+  background:var(--accent);box-shadow:var(--nu-out-s)}
+
+/* Plattformzeile in den Einstellungen (dieselbe Behandlung wie in der Liste,
+   nur eine Stufe flacher: sie steht in einem Akkordion). */
+[data-layout="relief"] .opt{border-radius:1.25rem;
+  padding:1rem 1rem 1rem 1.125rem;box-shadow:var(--nu-out-s)}
+[data-layout="relief"] .opt .plogo{--logo-h:2.25rem}
+/* Der Favoritenstern ist das Bedienelement der Zeile und bekommt deshalb eine
+   Buchse — angetippt springt er heraus. */
+[data-layout="relief"] .favbtn{border-radius:50%;box-shadow:var(--nu-in-s);
+  width:2.375rem;height:2.375rem}
+[data-layout="relief"] .favbtn:active{transform:none;
+  box-shadow:var(--nu-out-s)}
+[data-layout="relief"] .favbtn:disabled{box-shadow:none}
+
+/* Löschbereich. Der rote Rahmen fällt wie jeder Rahmen, das Rot bleibt in
+   Symbol und Schrift — und der Knopf selbst behält seine Füllung
+   (AUSNAHME 1, siehe Kopf). */
+[data-layout="relief"] .danger{border-radius:var(--radius);overflow:visible;
+  box-shadow:var(--nu-out)}
+[data-layout="relief"] .danger__head,
+[data-layout="relief"] .danger__body{background:transparent}
+[data-layout="relief"] .danger__btn{box-shadow:var(--nu-out-s)}
+[data-layout="relief"] .danger__btn:active{box-shadow:var(--nu-in-s)}
+[data-layout="relief"] .danger__btn:disabled{box-shadow:var(--nu-in-s)}
+/* Der senkrechte Strich am Benachrichtigungs-Detail wird eine schmale
+   Rinne — dieselbe Sprache, kein Rahmen. */
+[data-layout="relief"] .nbox__detail{border-left:0;padding-left:1.125rem;
+  box-shadow:inset .1875rem 0 .375rem -.125rem var(--nu-lo)}
+
+
+/* ---------------------------------------------------------------------------
+   PROFIL
+   --------------------------------------------------------------------------- */
+/* Das Bild sitzt als kräftigstes Relief der App auf der Seite – hier ist die
+   große Stufe richtig, es ist der Aufmacher. */
+[data-layout="relief"] .avatar{background:var(--bg);color:var(--accent);
+  box-shadow:var(--nu-out-l)}
+[data-layout="relief"] .avatar:active{box-shadow:var(--nu-in)}
+[data-layout="relief"] .avatar__edit{background:var(--bg);color:var(--accent);
+  border:0;box-shadow:var(--nu-rim),var(--nu-out-s)}
+[data-layout="relief"] .profile-rmphoto{color:var(--muted)}
+
+/* Wirkungs-Karte: war eine vollflächige Akzentkarte. Nach Gesetz 5 trägt
+   jetzt die Zahl die Farbe – und sie ist mit 3rem ohnehin das Lauteste auf
+   der Seite. */
+[data-layout="relief"] .impact{background:var(--bg);color:var(--ink);
+  border-radius:var(--radius);box-shadow:var(--nu-out);padding:1.75rem 1.25rem}
+[data-layout="relief"] .impact__n{color:var(--accent)}
+[data-layout="relief"] .impact__l{color:var(--muted);opacity:1}
+[data-layout="relief"] .impact__m{color:var(--accent)}
+[data-layout="relief"] .impact__q{color:var(--muted)}
+
+[data-layout="relief"] .prow{border-radius:var(--radius);padding:1.125rem;
+  box-shadow:var(--nu-rim),var(--nu-out-s)}
+[data-layout="relief"] .prow--btn:active{transform:none;background:var(--bg);
+  box-shadow:var(--nu-rim),var(--nu-in-s)}
+[data-layout="relief"] .prow--done{background:var(--bg)}
+[data-layout="relief"] .badge-ph{background:transparent;color:var(--muted);
+  box-shadow:var(--nu-in-s);padding:.125rem .625rem}
+[data-layout="relief"] .io{border-radius:var(--radius);
+  box-shadow:var(--nu-out-s)}
+[data-layout="relief"] .io--done{background:var(--bg);
+  box-shadow:var(--nu-in-s)}
+
+/* Unterzeichnete Petitionen: die Liste war ein umrandeter Kasten mit
+   Trennlinien. Jetzt einzelne Reliefzeilen mit Abstand. */
+[data-layout="relief"] .signed-list,
+[data-layout="relief"] .signed .signed-list{background:transparent;
+  box-shadow:none;overflow:visible;border-radius:0;border-top:0}
+[data-layout="relief"] .signed-item,
+[data-layout="relief"] .signed .signed-item{border-top:0;border-radius:1.25rem;
+  padding:1rem;box-shadow:var(--nu-rim),var(--nu-out-s)}
+[data-layout="relief"] .signed-item:active{background:var(--bg);
+  box-shadow:var(--nu-rim),var(--nu-in-s)}
+[data-layout="relief"] .signed-item--nolink{box-shadow:var(--nu-in-s);
+  opacity:.85}
+[data-layout="relief"] .signed-item__t mark,
+[data-layout="relief"] .signed-item__meta mark{background:transparent;
+  color:var(--on-hot-soft);font-weight:750}
+[data-layout="relief"] .signed-empty,
+[data-layout="relief"] .signed .signed-empty{box-shadow:var(--nu-in-s);
+  border-radius:var(--radius)}
+
+
+/* ---------------------------------------------------------------------------
+   AUSKLAPPER — Bedienfeld, Beschreibung, „Für Nerds", Unterstützen
+   Alle vier waren in style.css aus zwei umrandeten Hälften gebaut (Kopf oben
+   ohne untere Linie, Körper darunter). Ohne Rahmen braucht es das nicht:
+   der Kopf ist der Knopf, der Körper steht frei darunter. Gesetz 2 bleibt —
+   offen heißt eingedrückt.
+   --------------------------------------------------------------------------- */
+[data-layout="relief"] .ptools__sum,
+[data-layout="relief"] .nerd__sum,
+[data-layout="relief"] .descacc>summary,
+[data-layout="relief"] .support__head,
+[data-layout="relief"] .pabout__head{background:var(--bg);
+  border-radius:1.25rem;box-shadow:var(--nu-rim),var(--nu-out-s)}
+[data-layout="relief"] .ptools[open] .ptools__sum,
+[data-layout="relief"] .nerd[open] .nerd__sum,
+[data-layout="relief"] .descacc[open]>summary,
+[data-layout="relief"] .support__item.open .support__head,
+[data-layout="relief"] .pabout.open .pabout__head{
+  border-radius:1.25rem;border-bottom:0;
+  box-shadow:var(--nu-rim),var(--nu-in-s)}
+[data-layout="relief"] .ptools__body,
+[data-layout="relief"] .nerd__body,
+[data-layout="relief"] .descacc .pet__desc,
+[data-layout="relief"] .support__body,
+[data-layout="relief"] .pabout__body{background:transparent;box-shadow:none;
+  border-radius:0;padding:1rem .25rem 0}
+[data-layout="relief"] .descacc>summary{color:var(--accent)}
+[data-layout="relief"] .ptools.is-active .ptools__sum{color:var(--accent)}
+[data-layout="relief"] .ptools__grp+.ptools__grp{border-top:0}
+[data-layout="relief"] .kodex__grp+.kodex__grp{border-top:0;
+  margin-top:1.125rem;padding-top:0}
+/* Die Ausschlussgruppe im Kodex behält ihre rote Kante als BEDEUTUNG: sie
+   sagt „hier wird ausgeschlossen". Als Rinne statt als Rahmenlinie. */
+[data-layout="relief"] .kodex__grp--stop{border-left:0;padding-left:1rem;
+  box-shadow:inset .1875rem 0 0 0 var(--amp1)}
+/* „Unterstütze PetitionsManager": Sammelkasten, also Mulde (Gesetz 3), mit
+   erhabenen Ausklappern darin. */
+[data-layout="relief"] .support{box-shadow:var(--nu-in);
+  border-radius:var(--radius);padding:1.25rem}
+[data-layout="relief"] .support__title{color:var(--accent)}
+[data-layout="relief"] .support__item{background:transparent;box-shadow:none;
+  overflow:visible}
+[data-layout="relief"] .support__acc{gap:.75rem}
+[data-layout="relief"] .pabout{border-radius:var(--radius);overflow:visible;
+  box-shadow:none}
+[data-layout="relief"] .pabout__head{padding:1rem 1.125rem}
+[data-layout="relief"] .pabout__body{padding:1rem .25rem 0}
+[data-layout="relief"] .filterbar{box-shadow:var(--nu-in);
+  border-radius:var(--radius)}
+[data-layout="relief"] .crosshead b,
+[data-layout="relief"] .filterbar__cat b{color:var(--accent)}
+
+
+/* ---------------------------------------------------------------------------
+   CHIPS UND SCHLAGWÖRTER
+   Gewählt = eingedrückt. Das ist der Zustandswechsel, den beide Kritiken
+   verlangen, und er ist hier wörtlich physisch: eine gedrückte Taste.
+   --------------------------------------------------------------------------- */
+[data-layout="relief"] .chiprow .chip{background:var(--bg);color:var(--ink);
+  box-shadow:var(--nu-rim),var(--nu-out-s)}
+[data-layout="relief"] .chiprow .chip:active{background:var(--bg);
+  box-shadow:var(--nu-rim),var(--nu-in-s)}
+[data-layout="relief"] .chiprow .chip.on{background:var(--bg);
+  color:var(--accent);font-weight:750;
+  box-shadow:var(--nu-rim),var(--nu-in-s)}
+[data-layout="relief"] .chiprow .chip.on i{color:inherit;opacity:1}
+[data-layout="relief"] .chiprow .chip__n{background:transparent;
+  color:var(--ink);opacity:.72}
+[data-layout="relief"] .chiprow .chip.on .chip__n{color:var(--accent);
+  opacity:.85}
+[data-layout="relief"] .tag::before{opacity:.55}
+
+
+/* ---------------------------------------------------------------------------
+   ERSTEINRICHTUNG (Wizard)
+   --------------------------------------------------------------------------- */
+[data-layout="relief"] .wiz__mark{border-radius:2rem;background:var(--bg);
+  color:var(--accent);box-shadow:var(--nu-out-l)}
+[data-layout="relief"] .wiz__mark--done{color:var(--on-hot-soft)}
+[data-layout="relief"] .wiz__title{letter-spacing:-.025em}
+/* Fortschrittspunkte: leere Punkte sind Rinnen, der erreichte ist gefüllt. */
+[data-layout="relief"] .wiz__dot{background:transparent;
+  box-shadow:var(--nu-in-s)}
+[data-layout="relief"] .wiz__dot.on{background:var(--accent);box-shadow:none}
+[data-layout="relief"] .wiz__chips .chip{background:var(--bg);
+  box-shadow:var(--nu-rim),var(--nu-out-s)}
+[data-layout="relief"] .wiz__chips .chip.on{background:var(--bg);
+  color:var(--accent);box-shadow:var(--nu-rim),var(--nu-in-s)}
+[data-layout="relief"] .wiz__chips .chip__n{background:transparent;
+  color:var(--muted);box-shadow:var(--nu-in-s)}
+[data-layout="relief"] .wiz__chips .chip.on .chip__n{color:var(--accent)}
+[data-layout="relief"] .wiz__plats{gap:1rem}
+[data-layout="relief"] .wplat{border-radius:1.25rem;padding:1rem;
+  box-shadow:var(--nu-rim),var(--nu-out-s)}
+/* Ausgewählte Plattform: eingedrückt statt Markentönung. */
+[data-layout="relief"] .wplat.on{padding-left:1rem;
+  box-shadow:var(--nu-rim),var(--nu-in-s)}
+[data-layout="relief"] .wplat__check{background:var(--bg);color:transparent;
+  box-shadow:var(--nu-in-s)}
+/* Das Häkchen bleibt in der Markenfarbe: hier ist es die Antwort auf „welche
+   habe ich gewählt", also Bedeutung. */
+[data-layout="relief"] .wplat.on .wplat__check{
+  background:var(--brand,var(--accent));color:var(--on-brand);
+  box-shadow:var(--nu-out-s)}
+
+
+/* ---------------------------------------------------------------------------
+   SCHUBLADE UND NACH-OBEN-KNOPF
+   --------------------------------------------------------------------------- */
+/* Auch hier der :root-Vorsatz, aus demselben Grund wie bei .to-top:
+   theme.css setzt `:root[data-theme="dark"] .drawer{box-shadow:…}`. */
+:root[data-layout="relief"] .drawer{background:var(--bg);
+  box-shadow:-.5rem 0 1.5rem var(--nu-lo)}
+[data-layout="relief"] .drawer__item:active{background:transparent;
+  box-shadow:var(--nu-in-s)}
+[data-layout="relief"] .drawer__foot{border-top:0;
+  box-shadow:inset 0 .0625rem 0 var(--nu-edge)}
+
+
+/* ---------------------------------------------------------------------------
+   BARRIEREFREIHEIT
+   Licht und Schatten sind hier die ganze Gestaltung — und genau das ist der
+   Punkt, an dem beide Kritiken ansetzen. Drei Sicherungen:
+   --------------------------------------------------------------------------- */
+/* 1. Sichtbarer Fokus. Das FAQ der Referenz verlangt ihn ausdrücklich, und in
+      einer Oberfläche ohne Kanten ist er die einzige Tastatur-Orientierung.
+      :focus-visible statt :focus, damit beim Antippen kein Ring aufblitzt. */
+[data-layout="relief"] :focus-visible{outline:.1875rem solid var(--accent);
+  outline-offset:.1875rem}
+
+/* 2. „Mehr Kontrast": Relief raus, echte Rahmen rein. Wer diese Einstellung
+      setzt, sieht weiche Schatten oft gar nicht — dann muss die Kante die
+      Arbeit machen. outline statt border, damit sich kein Maß verschiebt. */
+@media (prefers-contrast:more){
+  [data-layout="relief"] .plat,
+  [data-layout="relief"] .opt,
+  [data-layout="relief"] .pet,
+  [data-layout="relief"] .srow,
+  [data-layout="relief"] .prow,
+  [data-layout="relief"] .io,
+  [data-layout="relief"] .simrow,
+  [data-layout="relief"] .signed-item,
+  [data-layout="relief"] .impact,
+  [data-layout="relief"] .seg,
+  [data-layout="relief"] .search,
+  [data-layout="relief"] .mainsearch__in,
+  [data-layout="relief"] .signed__search,
+  [data-layout="relief"] .timein,
+  [data-layout="relief"] .profile-namein,
+  [data-layout="relief"] .accordion:not(.langgroup)>.acc-head,
+  [data-layout="relief"] .ptools__sum,
+  [data-layout="relief"] .nerd__sum,
+  [data-layout="relief"] .descacc>summary,
+  [data-layout="relief"] .support__head,
+  [data-layout="relief"] .pabout__head,
+  [data-layout="relief"] .chiprow .chip,
+  [data-layout="relief"] .wiz__chips .chip,
+  [data-layout="relief"] .wplat,
+  [data-layout="relief"] .tag,
+  [data-layout="relief"] .btn-secondary,
+  [data-layout="relief"] .hint-dismiss,
+  [data-layout="relief"] .mainsearch__btn,
+  [data-layout="relief"] .support__btn,
+  [data-layout="relief"] .io__btn,
+  [data-layout="relief"] .filterbar__cross,
+  [data-layout="relief"] .filterbar__reset,
+  [data-layout="relief"] .pet__extlink,
+  [data-layout="relief"] .wiz__next,
+  [data-layout="relief"] .to-top{outline:.0625rem solid var(--ink);
+    outline-offset:-.0625rem}
+  /* Gewählt/gedrückt muss auch hier zu erkennen sein, und zwar nicht über
+     Tiefe: doppelte Kante. */
+  [data-layout="relief"] .seg__b.on,
+  [data-layout="relief"] .chiprow .chip.on,
+  [data-layout="relief"] .wiz__chips .chip.on,
+  [data-layout="relief"] .wplat.on{outline:.1875rem solid var(--accent);
+    outline-offset:-.1875rem}
+}
+
+/* 3. Erzwungene Systemfarben (Windows-Kontrastdesign, „forced colors"):
+      dort werden Schatten schlicht nicht gezeichnet. Das Relief wird
+      abgeschaltet, damit keine halbe Gestaltung stehen bleibt; die
+      Systemfarben übernehmen. */
+@media (forced-colors:active){
+  [data-layout="relief"] *{box-shadow:none!important}
+  [data-layout="relief"] .plat,
+  [data-layout="relief"] .opt,
+  [data-layout="relief"] .pet,
+  [data-layout="relief"] .srow,
+  [data-layout="relief"] .prow,
+  [data-layout="relief"] .io,
+  [data-layout="relief"] .simrow,
+  [data-layout="relief"] .signed-item,
+  [data-layout="relief"] .seg,
+  [data-layout="relief"] .search,
+  [data-layout="relief"] .mainsearch__in,
+  [data-layout="relief"] .signed__search,
+  [data-layout="relief"] .accordion:not(.langgroup)>.acc-head{
+    border:.0625rem solid}
+}
 
 
 /* ===========================================================================

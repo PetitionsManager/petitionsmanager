@@ -69,16 +69,27 @@
    eines PNG-Ausschnitts), EIN Innenabstand von 1.5rem für alle Kachelgrößen
    (logos/innnit.svg/platforms.js/layouts.css)
    v22: Plattform-Logo in den Einstellungen liegt hinter der Beschriftung statt
-   daneben (app.js/style.css) */
-var CACHE = "pm-cache-v22";
+   daneben (app.js/style.css)
+   v23: Layout „Farbband" ersetzt durch „Relief" (Neumorphismus) – gilt für die
+   ganze App einschließlich Einstellungen und Profil; alte Auswahl "band" wird
+   beim Laden auf "relief" umgeschrieben
+   (layouts.css/app.js/texts.js/index.html) */
+var CACHE = "pm-cache-v23";
 /* Versionsunabhängig – überlebt das Hochzählen von CACHE. Die Zahl dahinter
    NUR hochsetzen, wenn sich die Paketnummerierung selbst ändert (dann stimmen
    die alten Inhalte nicht mehr zur Nummer und die Bibliothek muss weg).
    pm-texts-2: die WeAct-Reparatur hat genau diesen Fall ausgelöst – 423 Pakete
    behielten ihre Nummer, bekamen aber vollständige Texte. Ohne den Sprung
    hätten Geräte mit gefüllter Bibliothek die abgeschnittenen Fassungen
-   dauerhaft behalten, weil Volltexte cache-first ausgeliefert werden. */
-var TEXTS = "pm-texts-2";
+   dauerhaft behalten, weil Volltexte cache-first ausgeliefert werden.
+   pm-texts-3: 350.org holt seine Texte jetzt von der Aktionsseite statt aus
+   dem Anreißer der Discovery-API. Sechs Aktionen bekommen dadurch überhaupt
+   erst einen Text und dreizehn einen längeren – alles im bestehenden Paket
+   threefifty.t0.json, also wieder gleiche Nummer bei geändertem Inhalt.
+   Dass dieser Sprung jedes Mal die GANZE Bibliothek kostet, ist der Preis der
+   Nummern-Unveränderlichkeit; eine Kennung je Paket würde das auf das eine
+   geänderte Paket begrenzen (siehe Aufgabenliste). */
+var TEXTS = "pm-texts-3";
 var TEXT_RE = /\.t\d+\.json$/;
 var SHELL = [
   "./",
