@@ -172,7 +172,7 @@
   function defaultPrefs() {
     return {
       theme: "auto",              // "light" | "dark" | "auto"
-      layout: "klassisch",        // "klassisch" | "band" | "magazin" (layouts.css)
+      layout: "klassisch",        // "klassisch" | "relief" | "magazin" (layouts.css)
       wizardDone: false,
       name: "",
       photo: null,                // Data-URL des Profilbilds
@@ -187,6 +187,14 @@
         var o = JSON.parse(raw);
         if (o && typeof o === "object") {
           if (o.theme) p.theme = o.theme;
+          /* „band" (Farbband) ist am 2026-07-29 durch „relief"
+             (Neumorphismus) ersetzt worden. Wer das alte Layout gewählt
+             hatte, hat den Wert im localStorage stehen; ohne Umschreiben
+             fiele die App stillschweigend auf „klassisch" zurück, weil
+             layouts.css zu "band" keine Regel mehr kennt. Beides sind
+             Nachfolger des SELBEN Wunsches („nicht die Standardansicht"),
+             deshalb wird umgestellt und nicht zurückgesetzt. */
+          if (o.layout === "band") o.layout = "relief";
           if (o.layout) p.layout = o.layout;
           if (o.wizardDone) p.wizardDone = true;
           if (typeof o.name === "string") p.name = o.name;
@@ -1998,7 +2006,7 @@
       esc(T("settings.layoutLabel", "Layout")) + "</div>"));
     content.appendChild(segControl("Layout",
       [["klassisch", T("settings.layoutClassic", "Klassisch"), "fa-list"],
-       ["band", T("settings.layoutBand", "Farbband"), "fa-bars-staggered"],
+       ["relief", T("settings.layoutRelief", "Relief"), "fa-cube"],
        ["magazin", T("settings.layoutMag", "Magazin"), "fa-image"]],
       state.prefs.layout,
       function (v) { state.prefs.layout = v; savePrefs(); applyLayout(); }));
