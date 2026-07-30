@@ -100,6 +100,13 @@ def parse_detail(html: str, url: str) -> dict:
     if content:
         for bad in content.select("form, script, style"):
             bad.decompose()
+        # Hover-Dubletten weg. foodwatch legt zu jeder Kachelbeschriftung eine
+        # zweite mit der Endung "--hover" ins HTML und tauscht sie per CSS aus.
+        # Im bereinigten Text steht davon nichts mehr im Weg – dort stand
+        # jeder Name schlicht zweimal ("Deutschland Deutschland" im Block
+        # "Eine gemeinsame Aktion von").
+        for dub in content.select('[class*="--hover"]'):
+            dub.decompose()
         rec["description_full"] = sanitize_fragment(content, BASE_URL) or None
 
     rec["started_by"] = "foodwatch"

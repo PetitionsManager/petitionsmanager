@@ -33,6 +33,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 import shutil
@@ -189,9 +190,9 @@ def load_text_index() -> dict[str, dict[str, int]]:
 
 
 def write_texts(key: str, items: list[dict], texts: list[str | None],
-                index: dict[str, dict[str, int]]) -> int:
+                index: dict[str, dict[str, int]]) -> dict[str, str]:
     """Schreibt <key>.t<N>.json und vermerkt die Paketnummer als "tc" am
-    Datensatz. Rückgabe: Anzahl geschriebener Pakete.
+    Datensatz. Rückgabe: {"<N>": "<Kennung>"} für das Manifest.
 
     Die Paketnummer hängt bewusst NICHT an der Position in `items`: die Liste
     ist nach Unterschriften sortiert, und die ändern sich täglich. Über die
@@ -200,7 +201,17 @@ def write_texts(key: str, items: list[dict], texts: list[str | None],
     nichts geändert hat. Stattdessen bekommt jede URL beim ersten Mal eine
     Nummer und behält sie für immer (INDEX_FILE). Neue Petitionen füllen das
     letzte angefangene Paket auf, danach kommt ein neues dazu. So bleiben alte
-    Pakete Byte für Byte gleich und wachsen auf dem Gerät zur Bibliothek."""
+    Pakete Byte für Byte gleich und wachsen auf dem Gerät zur Bibliothek.
+
+    Die Nummer bleibt, der INHALT nicht: wird ein Text nachgetragen oder
+    reparariert, ändert sich ein Paket unter gleicher Nummer. Weil die App
+    Volltexte cache-first ausliefert, behielt ein Gerät dann für immer die alte
+    Fassung – bisher blieb nur, die ganze Bibliothek zu verwerfen (sw.js,
+    TEXTS hochzählen; zweimal passiert, WeAct und 350.org). Deshalb bekommt
+    jedes Paket hier eine kurze Kennung über seinen Inhalt. Die App hängt sie
+    beim Laden als "?v=" an, und da der Cache auf der vollständigen Adresse
+    liegt, holt sich ein GEÄNDERTES Paket von selbst neu, während alle
+    unveränderten liegen bleiben."""
     zuordnung = index.setdefault(key, {})
     belegung = Counter(zuordnung.values())   # auch gelöschte zählen mit, damit
     chunks: dict[int, dict[str, str]] = defaultdict(dict)   # Nummern nie rücken
@@ -216,13 +227,16 @@ def write_texts(key: str, items: list[dict], texts: list[str | None],
             belegung[n] += 1
         chunks[n][url] = html
         rec["tc"] = n
+    kennungen: dict[str, str] = {}
     for n, mapping in chunks.items():
         # sort_keys, damit ein inhaltlich unverändertes Paket auch byteweise
-        # unverändert bleibt (sonst wechselt allein die Reihenfolge im JSON).
-        (OUT_DIR / f"{key}.t{n}.json").write_text(
-            json.dumps(mapping, ensure_ascii=False, sort_keys=True),
-            encoding="utf-8")
-    return len(chunks)
+        # unverändert bleibt (sonst wechselt allein die Reihenfolge im JSON)
+        # – und damit die Kennung darunter reproduzierbar ist.
+        payload = json.dumps(mapping, ensure_ascii=False, sort_keys=True)
+        (OUT_DIR / f"{key}.t{n}.json").write_text(payload, encoding="utf-8")
+        kennungen[str(n)] = hashlib.sha1(
+            payload.encode("utf-8")).hexdigest()[:8]
+    return kennungen
 
 
 def _stamp(iso: str | None) -> float:
@@ -303,9 +317,15 @@ def main() -> None:
 
     text_index = load_text_index()
     chunks_total = 0
+    # Kennungen je Paket ins Manifest, damit die App "?v=" anhängen kann. Muss
+    # nach write_texts passieren (die Kennung entsteht erst beim Schreiben) und
+    # vor dem Schreiben des Manifests.
+    eintrag_je_key = {e["key"]: e for e in manifest["platforms"]}
     for key, items in by_platform.items():
-        chunks_total += write_texts(key, items, texts_by_platform[key],
-                                    text_index)
+        kennungen = write_texts(key, items, texts_by_platform[key], text_index)
+        chunks_total += len(kennungen)
+        if key in eintrag_je_key:
+            eintrag_je_key[key]["tv"] = kennungen
         (OUT_DIR / f"{key}.json").write_text(
             json.dumps(items, ensure_ascii=False), encoding="utf-8")
     INDEX_FILE.write_text(
