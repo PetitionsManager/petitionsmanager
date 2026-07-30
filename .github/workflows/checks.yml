@@ -106,9 +106,20 @@ jobs:
             for (const k of ["app","wizard","liste","signed","platform",
                              "settings","notify","reset","profile","about"])
               if (!T[k]) fehlt.push("texts.js: Abschnitt " + k);
+            // Geprueft wird logoFile, NICHT mehr logo. Das Feld logo war ein
+            // selbstgebautes Monogramm-Badge und ist am 29.7.26 entfallen,
+            // seit alle elf Plattformen ihre echte Marke haben; diese Zeile
+            // hat den Wegfall gemeldet, und das war richtig so.
             for (const [key, v] of Object.entries(P))
-              for (const f of ["color","logo","about"])
+              for (const f of ["color","logoFile","about"])
                 if (!v[f]) fehlt.push(`platforms.js: ${key}.${f}`);
+            // Ein Pfad, hinter dem keine Datei liegt, faellt sonst erst auf
+            // dem Handy auf: die Marke bleibt dann einfach leer.
+            const fs = require("fs");
+            for (const [key, v] of Object.entries(P))
+              if (v.logoFile && !fs.existsSync("webapp/" + v.logoFile))
+                fehlt.push(`platforms.js: ${key}.logoFile zeigt auf `
+                  + `${v.logoFile}, diese Datei fehlt`);
             if (fehlt.length) { console.error(fehlt.join("\n")); process.exit(1); }
             console.log(`texts.js und platforms.js vollständig `
               + `(${Object.keys(P).length} Plattformen)`);
