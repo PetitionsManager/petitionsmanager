@@ -48,6 +48,8 @@ SIGN_HREF_RE = re.compile(r'https://action\.wemove\.eu/sign/([A-Za-z0-9_-]+)/?')
 # Neue Slugs: "2026-05-…", alte: "202203-…" (ohne Bindestrich).
 PAGE_DATE_RE = re.compile(r"^(\d{4})-?(\d{2})-")
 PROGRESS_RE  = re.compile(r"onProgressLoaded\((.*)\)\s*;?\s*$", re.S)
+# Titel unfertiger ActionKit-Seiten: „Enter a Title for 2023-08-michal-test12…"
+PLATZHALTER_TITEL_RE = re.compile(r"^\s*enter a title\b", re.I)
 
 # Ziel-Staffel (nächster Meilenstein über dem Stand), analog zu Avaaz/WeMove-JS.
 TARGETS = [1000, 2000, 5000, 10000, 20000, 50000, 75000, 100000,
@@ -126,6 +128,11 @@ def parse_detail(html: str, url: str, page: str) -> dict:
     h1 = soup.find("h1")
     rec["title"] = (h1.get_text(" ", strip=True) if h1
                     else _meta(soup, "og:title"))
+    # Merker für scrape_petition, wird dort wieder entfernt: Eine echte
+    # ActionKit-Seite bringt immer ein <h1> mit, auch wenn es leer ist. Die
+    # Checkpoint-Antwort bringt gar keins. Daran hängt die Unterscheidung
+    # „Seite ist unbrauchbar" gegen „wir werden gerade geblockt".
+    rec["_hat_h1"] = h1 is not None
     rec["image_url"] = _meta(soup, "og:image")
     rec["url"] = url
 
@@ -174,6 +181,7 @@ def scrape_petition(fetcher: core.Fetcher, page: str) -> tuple[str, dict | None]
     if not resp.ok:
         return "error", None
     rec = parse_detail(resp.text, url, page)
+    hat_h1 = rec.pop("_hat_h1", False)
 
     # Bot-Schutz erkennen und als FEHLER behandeln, nicht als Erfolg.
     #
@@ -189,8 +197,29 @@ def scrape_petition(fetcher: core.Fetcher, page: str) -> tuple[str, dict | None]
     # Der Checkpoint wird NICHT umgangen - das waere gegen den erklaerten
     # Willen des Betreibers. Die Antwort ist, weniger und langsamer zu fragen
     # (siehe DETAIL_BUDGET in run()).
-    if not rec.get("title") and not rec.get("description_full"):
+    titel = (rec.get("title") or "").strip()
+    if not titel and not rec.get("description_full") and not hat_h1:
         return "error", None
+
+    # "unbrauchbar": die Seite ANTWORTET vollständig, taugt aber nicht als
+    # Petition — leerer Titel (z. B. /sign/2023-10--DE) oder der Platzhalter
+    # unfertiger ActionKit-Seiten („Enter a Title for <seitenname>", am 4.8.26
+    # zwanzigmal in der App: …michal-test12…, …postactiontest3…, …JOLANTA-
+    # TESTING…). Das ist ausdrücklich KEIN Fehler:
+    #
+    #   Genau hier lag der eigentliche Schaden. Solche Seiten galten als
+    #   "error", `known` sortiert Datensaetze ohne Volltext nach VORN, und
+    #   ABBRUCH_NACH_FEHLERN bricht nach fünf Fehlschlägen in Folge ab. Die
+    #   toten Seiten standen also am Anfang der Warteschlange und beendeten
+    #   jeden Lauf, bevor eine einzige lebende Kampagne an die Reihe kam.
+    #   Ergebnis (4.8.26 gemessen): 188 von 208 Datensaetzen hatten seit ihrer
+    #   Anlage am 6.7.26 nie ein `last_checked` — sie wurden nie erreicht.
+    #   Als Checkpoint gewertet wurde dabei ein Zustand, der keiner war.
+    #
+    # Der Aufrufer stempelt solche Seiten nur mit `last_checked` ab, damit sie
+    # 24 h lang aus der Warteschlange sind, und zählt sie NICHT als Fehler.
+    if not titel or PLATZHALTER_TITEL_RE.match(titel):
+        return "unbrauchbar", None
     sig = fetch_progress(fetcher, page)
     if sig is not None:
         rec["signatures"] = sig
@@ -221,6 +250,7 @@ def run(args) -> None:
              message="Prüfe bekannte Kampagnen …")
         erfolge = 0
         fehler_in_folge = 0
+        unbrauchbar = 0
         for k, page in enumerate(known, 1):
             if erfolge >= DETAIL_BUDGET:
                 log(f"  Budget von {DETAIL_BUDGET} Abrufen erreicht – "
@@ -238,6 +268,17 @@ def run(args) -> None:
                         f"Rest folgt beim nächsten Mal.")
                     break
                 continue
+            if status == "unbrauchbar":
+                # Die Seite hat geantwortet, wir sind also NICHT geblockt –
+                # der Zähler geht zurück auf null. Nur abstempeln, damit sie
+                # 24 h lang nicht wieder vorne in der Warteschlange steht.
+                unbrauchbar += 1
+                fehler_in_folge = 0
+                erfolge += 1
+                core.upsert(store, page, {}, {}, "online", ts,
+                            f"{BASE_URL}/sign/{page}")
+                save()
+                continue
             fehler_in_folge = 0
             erfolge += 1
             core.upsert(store, page, rec or {}, {}, status, ts,
@@ -245,6 +286,10 @@ def run(args) -> None:
             save()
             if status == "offline":
                 log(f"  OFFLINE: {page}")
+        if unbrauchbar:
+            log(f"  {unbrauchbar} Seite(n) ohne brauchbaren Titel "
+                f"(Test-/Entwurfsseiten) – abgestempelt, nicht als Fehler "
+                f"gewertet.")
 
     log("Sammle Kampagnen (Startseite + Übersicht) …")
     discovered = discover_slugs(fetcher)
@@ -260,7 +305,9 @@ def run(args) -> None:
         log(f"({i}/{len(new_pages)}) {page}")
         prog(current=i, total=len(new_pages), message=page)
         status, rec = scrape_petition(fetcher, page)
-        if status == "error":
+        # "unbrauchbar" hier ebenfalls überspringen: eine Test- oder
+        # Entwurfsseite soll gar nicht erst als Datensatz entstehen.
+        if status in ("error", "unbrauchbar"):
             continue
         core.upsert(store, page, rec or {}, {}, status, ts,
                     f"{BASE_URL}/sign/{page}")
