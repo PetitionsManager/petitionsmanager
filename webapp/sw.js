@@ -242,8 +242,30 @@
       Fremdlink entfällt der Trennabstand. Relief gegengemessen 34×34
       rund unverändert. (layouts.css)
    (app.js/style.css/layouts.css/texts.js/theme.css
-    + europarl_scraper.py/publish.py) */
-var CACHE = "pm-cache-v27";
+    + europarl_scraper.py/publish.py)
+
+   --- v28 -------------------------------------------------------------------
+   27. Mehr Verwandte je Petition (Nutzerwunsch „vollständige Abdeckung, Limit
+      darf steigen"). publish.SIM_MAX_PER_PETITION 4 → 8, und wer über der
+      Schwelle NICHTS findet, bekommt seinen besten Treffer trotzdem
+      (SIM_FILL_WEAKEST) — das betraf 42 Listen, die sonst leer geblieben
+      wären. Hier in app.js dazu SIM_SHOW_MAX = 8: der Abschnitt zeigte fest
+      6 an, die Einträge 7 und 8 wären ausgeliefert, aber unsichtbar gewesen.
+      Gemessen an den 16.914 Live-Sätzen: Abdeckung 97,2 → 97,6 %, Nestlé-Probe
+      5/7 → 6/7, related-Nutzlast 6,9 → 12,9 MB, Rechenzeit 32 s.
+      ⚠️ 97,6 % ist die BAUARTBEDINGTE OBERGRENZE, nicht eine Frage der
+      Schwelle: von 0,24 auf 0,00 gesenkt bringt sie nur dieselben 97,6 % und
+      kostet mehr. Die fehlenden 212 Petitionen haben zu 191 GAR KEINEN TITEL
+      (184 davon WeMove, dessen Bot-Schutz eine leere Vorlage ausliefert) —
+      ohne Text keine Schlagwörter, ohne Schlagwörter kein Vergleich. Sie
+      stehen in der App ohnehin als „(ohne Titel)". (app.js/publish.py)
+   28. dashboard.html fehlte auf GitHub Pages (HTTP 404, am 4.8.26 gemessen).
+      monitor.py schrieb es erst NACH der Plattformschleife; der CI-Lauf
+      schickt aber SIGINT, sobald die gemeinsame Frist erreicht ist, und dann
+      wurde die Zeile übersprungen. publish.py fand nichts zu kopieren und
+      schwieg dazu. Jetzt steht das Schreiben in einem finally, und publish.py
+      meldet das Fehlen. (monitor.py/publish.py, nicht in der App sichtbar) */
+var CACHE = "pm-cache-v28";
 /* Versionsunabhängig – überlebt das Hochzählen von CACHE. Diese Zahl sollte ab
    jetzt NICHT mehr steigen: seit die Pakete eine Inhaltskennung tragen ("?v=",
    siehe oben) holt sich jedes geänderte Paket von selbst neu. Ein Sprung wäre
