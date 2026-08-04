@@ -18,7 +18,9 @@ und eine mobile Web-App (PWA/APK), die diese Daten offline durchsuchbar macht.
   (Hauptseite, Plattformseite und Liste der unterzeichneten Petitionen)
 - Ähnliche Petitionen: gemeinsame Schlagwörter, Titel- und Textüberschneidung,
   mit Zuschlag für ein *seltenes* gemeinsames Schlagwort — so finden sich auch
-  Petitionen zur selben Marke über Plattformgrenzen hinweg
+  Petitionen zur selben Marke über Plattformgrenzen hinweg. Bis zu zwölf je
+  Petition; 99,9 % aller vergleichbaren Petitionen haben welche (die Lücke sind
+  Datensätze, die von ihrer Quelle ohne Titel und ohne Text kommen)
 - Petitionen nach Tags filtern; Tags werden automatisch aus Titeln und Texten abgeleitet
 - Favoriten-Plattformen anpinnen, Petitionen als „unterschrieben" oder archiviert markieren
 - Wischgesten: rechts = unterschrieben, links = archivieren
@@ -34,7 +36,9 @@ und eine mobile Web-App (PWA/APK), die diese Daten offline durchsuchbar macht.
 - Daten werden per Upsert akkumuliert, nie überschrieben — Verlaufsdaten bleiben erhalten
 - Unterschriftenverlauf als Zeitreihe, Meilensteine, Plattform-Neuigkeiten
 - Automatischer 24-Stunden-Mindestabstand pro Petition (spart Anfragen)
-- Health-Check (`--check`): prüft alle Entdeckungsquellen schnell ohne vollständigen Scrape
+- Health-Check (`--check`): prüft alle Entdeckungsquellen schnell ohne vollständigen
+  Scrape; eine rote Quelle wird nach kurzer Pause ein zweites Mal versucht (Aussetzer
+  hinter Cloudflare sind häufig) und danach in der CI namentlich als Warnung gemeldet
 - Lokaler Dashboard-Server (`--serve`) mit „Jetzt scrapen"-Schaltflächen
 - Täglicher Lauf via GitHub Actions, Veröffentlichung über GitHub Pages
 - Datensatz-Warnung bei unerwartetem Einbruch des Online-Bestands
@@ -179,8 +183,18 @@ Der tägliche Workflow (`.github/workflows/scrape.yml`) läuft um 03:17 UTC,
 cacht die `*_petitions.json`-Dateien zwischen den Läufen (das Repo wächst
 dadurch nicht mit jedem Lauf) und veröffentlicht `webapp/` auf GitHub Pages.
 
+Über **Actions → „Scrape & Publish" → „Run workflow"** gibt es zwei Haken:
+
+| Haken | Wirkung |
+|---|---|
+| `nacharbeit` | Einmalige Nachträge mitlaufen lassen (Bundestag-Phasen 3+4, Avaaz-Archiv) |
+| `nur_veroeffentlichen` | **Nicht scrapen**, nur den Stand aus dem Cache neu ausliefern — rund 3 statt 300 Minuten. Für Änderungen an der Web-App oder an `publish.py`, die sonst bis zum Nachtlauf unsichtbar blieben. Ohne gültigen Cache bricht der Lauf ab, statt einen veralteten Stand live zu schieben |
+
 Das Dashboard (Überblick aller Plattformen mit Zählern) ist nach dem Lauf unter
 `https://petitionsmanager.github.io/petitionsmanager/dashboard.html` erreichbar.
+Es entsteht zur Laufzeit und steht deshalb nicht im Repo; erzeugt wird es von
+`monitor.py`, und `publish.py` legt es notfalls selbst an, damit die Adresse
+auch nach einem abgebrochenen Lauf nicht ins Leere zeigt.
 
 ---
 

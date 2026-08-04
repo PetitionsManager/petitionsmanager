@@ -72,7 +72,7 @@ SLIM_FIELDS = ("title", "url", "signatures", "goal", "category", "status",
 # Einträge kosten nichts an Qualität — die Nestlé-Probe fällt mit vier genauso
 # aus wie mit sechs — und drücken die Daten auf 6,9 MB.
 SIM_MIN_SCORE = 0.24      # darunter ist es kein sinnvoller Treffer mehr
-SIM_MAX_PER_PETITION = 8
+SIM_MAX_PER_PETITION = 12
 SIM_TAG_MAX_MEMBERS = 900  # Allerwelts-Schlagwörter beim Vergleichen auslassen
 # Hat eine Petition NICHTS über der Schwelle, bekommt sie trotzdem ihren besten
 # Treffer — lieber ein schwacher Vorschlag als ein leerer Abschnitt.
@@ -85,16 +85,28 @@ SIM_FILL_WEAKEST = True
 # Auffüllen oben für 0,01 MB und ohne die Güte der übrigen Listen zu verwässern
 # (Ø 0,37 statt 0,36) — deshalb Auffüllen statt Schwelle senken.
 #
-# 97,6 % ist zugleich die BAUARTBEDINGTE OBERGRENZE: verglichen wird nur, wer
+# 97,7 % ist zugleich die BAUARTBEDINGTE OBERGRENZE: verglichen wird nur, wer
 # mindestens ein Schlagwort teilt, und Schlagwörter entstehen aus dem Text.
-# Die fehlenden 212 Petitionen haben zu 191 GAR KEINEN TITEL — 184 davon von
-# WeMove, dessen Bot-Schutz statt der Kampagne eine leere Vorlage ausliefert
+# Die fehlenden 202 Petitionen haben GAR KEINEN TITEL — 183 davon von WeMove,
+# dessen Bot-Schutz statt der Kampagne eine leere Vorlage ausliefert
 # („[% inititator_name %]"). Das ist kein Ähnlichkeitsproblem: diese Sätze
-# stehen in der App ohnehin als „(ohne Titel)". Wer über 97,6 % hinaus will,
+# stehen in der App ohnehin als „(ohne Titel)". Wer über 97,7 % hinaus will,
 # muss WeMove reparieren, nicht an diesen Zahlen drehen.
 #
-# Der Deckel ist der teure Regler: 4 → 6,9 MB · 6 → 10,1 · 8 → 12,9 · 12 → 17,3.
-# Acht ist die Stufe, auf der die Nestlé-Probe von 5/7 auf 6/7 steigt.
+# Von allem, was überhaupt vergleichbar ist (8.766), bekommt seit dem
+# Titelwort-Rückfall unten JEDE Petition Verwandte — 100,0 %.
+#
+# Der Deckel ist der teure Regler. Entscheidend ist aber nicht die rohe Größe,
+# sondern was über die Leitung geht; GitHub Pages liefert gzip-komprimiert, und
+# JSON schrumpft dabei um das Vierfache (4.8.26 nachgemessen):
+#     Deckel   roh MB   gzip MB   Einträge
+#        8      12,9      3,17      63.275
+#       12      17,2      4,18      84.343
+#       16      19,9      4,79      97.457
+# Zwölf kostet gegenüber acht rund 1 MB übertragen und hebt den Schnitt von
+# 7,2 auf 9,7 Verwandte; von zwölf auf sechzehn wird es spürbar unwirtschaft-
+# licher (0,6 MB für 1,5 Einträge mehr). Zum Vergleich der Ausgangspunkt:
+# der live ausgelieferte Bestand hatte 8.976 Einträge in 0,27 MB gzip.
 
 # ---- Zuschlag für ein seltenes gemeinsames SCHLAGWORT (Nutzerwunsch 3.8.26)
 # Ausgangsbefund: von den sieben offenen Nestlé-Petitionen verwies keine
@@ -248,6 +260,16 @@ def compute_related(by_platform: dict[str, list[dict]]) -> int:
     # Schlagwörter, die fast überall kleben, bringen keine Verwandtschaft.
     common = {t for t, lst in index.items() if len(lst) > SIM_TAG_MAX_MEMBERS}
 
+    # Zweiter Index über die TITELWÖRTER, nur als Rückfall. Wessen Schlagwörter
+    # im ganzen Bestand einmalig sind, wird über den Schlagwort-Index mit
+    # NIEMANDEM verglichen und bleibt als einziger ohne Verwandtschaft — am
+    # 4.8.26 traf das genau 10 Petitionen. Der Index kostet einmalig ~70.000
+    # Einträge; abgefragt wird er nur, wenn oben nichts herauskam.
+    wort_index = defaultdict(list)
+    for i, it in enumerate(items):
+        for t in it["title_tok"]:
+            wort_index[t].append(i)
+
     written = 0
     for i, it in enumerate(items):
         cand: set[int] = set()
@@ -256,6 +278,12 @@ def compute_related(by_platform: dict[str, list[dict]]) -> int:
                 continue
             cand.update(index[t])
         cand.discard(i)
+        if not cand:
+            for t in it["title_tok"]:
+                lst = wort_index[t]
+                if len(lst) <= SIM_TAG_MAX_MEMBERS:
+                    cand.update(lst)
+            cand.discard(i)
         scored = []
         schwaechster = None    # bester Treffer UNTERHALB der Schwelle
         for j in cand:
@@ -442,18 +470,20 @@ def main() -> None:
 
     # Scraper-Dashboard als Status-Snapshot mit auf GitHub Pages ausliefern
     # (read-only: die "Jetzt scrapen"-Buttons brauchen den lokalen Server).
+    # Die Datei ist gitignoriert und entsteht ausschließlich zur Laufzeit.
+    # Fehlte sie, lieferte der Pages-Deploy die Status-Ansicht nicht mit und
+    # die URL antwortete 404 — das blieb tagelang unbemerkt, weil publish.py
+    # sie stillschweigend übersprang. Nur zu MELDEN reicht aber auch nicht:
+    # geschrieben wird sie von monitor.py, und wenn dessen Lauf in der Frist
+    # abgebrochen wird oder publish.py allein läuft, hat sie niemand erzeugt.
+    # Deshalb erzeugt publish.py sie hier notfalls selbst — die Zahlen stehen
+    # ohnehin in denselben Stores, aus denen dieses Skript gerade gelesen hat.
     dash = Path("dashboard.html")
-    if dash.exists():
-        shutil.copy(dash, OUT_DIR.parent / "dashboard.html")
-        print("dashboard.html → webapp/ (Status-Ansicht via Pages-URL)")
-    else:
-        # Nicht still übergehen: die Datei ist gitignoriert, entsteht also
-        # ausschließlich zur Laufzeit. Fehlt sie, liefert der Pages-Deploy die
-        # Status-Ansicht nicht mit und die URL antwortet 404 — genau das blieb
-        # tagelang unbemerkt, weil hier nichts gemeldet wurde.
-        print("  ! dashboard.html fehlt – Status-Ansicht wird NICHT "
-              "ausgeliefert. Erzeugt wird sie von monitor.py; zur Not "
-              "genügt 'python3 monitor.py --html-only'.")
+    if not dash.exists():
+        print("dashboard.html fehlt – wird jetzt aus den Stores erzeugt.")
+        core.write_dashboard(monitor.PLATFORMS)
+    shutil.copy(dash, OUT_DIR.parent / "dashboard.html")
+    print("dashboard.html → webapp/ (Status-Ansicht via Pages-URL)")
 
     live = [p for p in manifest["platforms"] if p["live"]]
     total = sum(p["count"] for p in live)
