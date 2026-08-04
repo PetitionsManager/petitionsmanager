@@ -20,6 +20,8 @@
 from __future__ import annotations
 
 import argparse
+import os
+import time
 from pathlib import Path
 
 import petitions_core as core
@@ -114,6 +116,9 @@ def parse_args():
     return p.parse_args()
 
 
+CHECK_RETRY_PAUSE = 5.0   # Sekunden bis zum zweiten Versuch einer roten Quelle
+
+
 def run_checks(args) -> None:
     """Health-Check aller Live-Plattformen: prüft je Plattform die
     Entdeckungsquelle (wenige Requests). Erkennt kaputte Quellen (Umbau,
@@ -126,22 +131,62 @@ def run_checks(args) -> None:
     targets = [p for p in PLATFORMS if p.is_live
                and (not args.platform or p.key == args.platform)]
     core.log(f"Health-Check: {len(targets)} Plattform(en) …")
-    failed = []
+
+    def einmal(p) -> tuple[bool, str]:
+        try:
+            return p.check(fetcher)
+        except Exception as exc:
+            return False, f"Ausnahme: {exc!r}"
+
+    failed: list[tuple[str, str, str]] = []   # (key, Name, Grund)
     for p in targets:
         if not p.check:
             print(f"  ??   {p.name:24} (kein Check definiert)")
             continue
-        try:
-            ok, detail = p.check(fetcher)
-        except Exception as exc:
-            ok, detail = False, f"Ausnahme: {exc!r}"
+        ok, detail = einmal(p)
+        if not ok:
+            # Zweiter Versuch nach kurzer Pause. Mehrere Quellen liegen hinter
+            # Cloudflare und antworten aus einem Rechenzentrum heraus sprunghaft
+            # mit 403/503; ein einzelner Aussetzer ist noch kein kaputte Quelle.
+            # Genau das erklärt, warum der Check am 1. und 3.8.26 rot war, am
+            # 4.8. aber grün — und hier lokal ebenfalls grün.
+            time.sleep(CHECK_RETRY_PAUSE)
+            ok2, detail2 = einmal(p)
+            if ok2:
+                print(f"  OK   {p.name:24} {detail2}  (erst im 2. Versuch)")
+                continue
+            detail = f"{detail} | 2. Versuch: {detail2}"
         print(f"  {'OK  ' if ok else 'FAIL'} {p.name:24} {detail}")
         if not ok:
-            failed.append(p.key)
-    if failed:
-        core.log(f"FEHLGESCHLAGEN ({len(failed)}): {', '.join(failed)}")
-        raise SystemExit(1)
-    core.log("Alle Entdeckungsquellen erreichbar. ✓")
+            failed.append((p.key, p.name, detail))
+
+    if not failed:
+        core.log("Alle Entdeckungsquellen erreichbar. ✓")
+        return
+
+    core.log(f"FEHLGESCHLAGEN ({len(failed)}): "
+             f"{', '.join(k for k, _, _ in failed)}")
+    # In der CI läuft dieser Schritt bewusst mit continue-on-error: eine
+    # blockierte Quelle darf den Tageslauf nicht aufhalten. Ohne die Zeilen
+    # hier blieb davon aber nur ein nacktes „Process completed with exit
+    # code 1" übrig — der Schritt galt als grün und ein DAUERHAFT roter Check
+    # wäre nie aufgefallen. Deshalb schreibt er sein Ergebnis jetzt so, dass
+    # GitHub es als benannte Warnung auf die Lauf-Übersicht hebt.
+    if os.environ.get("GITHUB_ACTIONS") == "true":
+        for key, name, grund in failed:
+            einzeilig = " ".join(grund.split())[:400]
+            print(f"::warning title=Entdeckungsquelle {name}::{key}: {einzeilig}")
+        pfad = os.environ.get("GITHUB_STEP_SUMMARY")
+        if pfad:
+            with open(pfad, "a", encoding="utf-8") as fh:
+                fh.write(f"### Health-Check: {len(failed)} Quelle(n) rot\n\n")
+                fh.write("| Plattform | Grund |\n|---|---|\n")
+                for _, name, grund in failed:
+                    # Senkrechte Striche kommen im Grund vor („… | 2. Versuch:")
+                    # und würden sonst eine zusätzliche Tabellenspalte öffnen.
+                    zelle = " ".join(grund.split())[:200].replace("|", "\\|")
+                    fh.write(f"| {name} | {zelle} |\n")
+    raise SystemExit(1)
 
 
 def main() -> None:

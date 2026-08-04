@@ -12,6 +12,14 @@ on:
         description: 'Einmalige Nacharbeit mitlaufen lassen (Bundestag-Phasen 3+4, Avaaz-Archiv)'
         type: boolean
         default: false
+      # Veröffentlicht den zuletzt gescrapten Stand aus dem Cache neu, ohne
+      # eine einzige Quelle anzufassen: ~3 statt ~300 Minuten. Gedacht für
+      # Änderungen, die nur die Web-App oder publish.py betreffen — sonst
+      # müsste man auf den Nachtlauf warten, um sie live zu sehen.
+      nur_veroeffentlichen:
+        description: 'Nur veröffentlichen (nicht scrapen) – letzten Stand aus dem Cache neu ausliefern'
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -42,6 +50,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: "Scraper-Zustand aus Cache holen (Fallback: Stand im Repo)"
+        id: zustand
         uses: actions/cache/restore@v4
         with:
           # texts_index.json MUSS mitwandern: er hält fest, in welchem
@@ -54,6 +63,20 @@ jobs:
           key: petition-stores-${{ github.run_id }}
           restore-keys: |
             petition-stores-
+
+      # Ohne Cache fällt der Lauf auf den im Repo liegenden Stand zurück. Beim
+      # normalen Lauf ist das gewollt (danach wird ja gescrapt), bei "nur
+      # veröffentlichen" wäre es ein RÜCKSCHRITT: die App bekäme den alten
+      # Repo-Stand statt der aktuellen Zahlen. Deshalb hier abbrechen, bevor
+      # irgendetwas ausgeliefert wird.
+      - name: "Ohne Cache nicht veröffentlichen"
+        if: ${{ inputs.nur_veroeffentlichen &&
+                !steps.zustand.outputs.cache-matched-key }}
+        run: |
+          echo "::error::Kein Scraper-Zustand im Cache (Caches verfallen nach 7 Tagen)."
+          echo "Ein reiner Veröffentlichungslauf würde den veralteten Repo-Stand"
+          echo "ausliefern. Bitte einen vollen Lauf ohne diesen Haken starten."
+          exit 1
 
       # Gemeinsame Frist für die beiden langen Schritte. Das Job-Limit liegt bei
       # 350 min; die letzten 50 min gehören fest publish.py und dem Pages-Deploy.
@@ -68,6 +91,7 @@ jobs:
         run: echo "FRIST=$(( $(date +%s) + 300*60 ))" >> "$GITHUB_ENV"
 
       - name: Health-Check der Entdeckungsquellen (nicht blockierend)
+        if: ${{ !inputs.nur_veroeffentlichen }}
         continue-on-error: true
         run: python3 monitor.py --check
 
@@ -84,7 +108,7 @@ jobs:
       # archive_todo) im _meta des Stores; die täglichen Läufe arbeiten sie
       # danach von allein in Portionen ab (300 bzw. 120 pro Lauf).
       - name: "Nacharbeit auf Anforderung (Bundestag-Phasen 3+4, Avaaz-Archiv)"
-        if: ${{ inputs.nacharbeit }}
+        if: ${{ inputs.nacharbeit && !inputs.nur_veroeffentlichen }}
         run: |
           # Höchstens 60 min je Aufruf: die Nacharbeit darf dem Tages-Scrape
           # und dem Deploy nicht das gemeinsame Zeitbudget wegnehmen.
@@ -107,6 +131,7 @@ jobs:
           done
 
       - name: Scrapen (alle Live-Plattformen; überspringt <24 h Geprüftes)
+        if: ${{ !inputs.nur_veroeffentlichen }}
         run: |
           rest=$(( FRIST - $(date +%s) ))
           # Bewusst als if: GitHub führt run-Blöcke mit "bash -e" aus, und
@@ -129,6 +154,7 @@ jobs:
           fi
 
       - name: "Change.org aufholen (500/Lauf, wiederholt bis zur gemeinsamen Frist)"
+        if: ${{ !inputs.nur_veroeffentlichen }}
         run: |
           while ! python3 ci_changeorg_done.py; do
             if [ "$(date +%s)" -ge "$FRIST" ]; then
