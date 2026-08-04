@@ -168,12 +168,21 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
   padding-top:.5rem}
 .bottomacc>.acc-head{color:var(--muted);font-size:.9375rem;font-weight:750}
 .bottomacc>.acc-head .fa-circle-xmark{color:var(--amp1)}
-.flag{font-size:1.05em;line-height:1;flex:none}
-/* Flagge steht hinter dem Namen/Titel → Abstand links.
+/* Flaggen als Kreis (Nutzerwunsch 3.8.26) — dasselbe Rezept wie schon bei
+   .grp-ic in den Sprachgruppen, jetzt für ALLE Fundstellen. Emoji-Flaggen sind
+   quer (5:3); rund werden sie nur, indem ein Kreis sie beschneidet. Deshalb
+   wird das Zeichen GRÖSSER gesetzt als der Kreis (1.5 gegen 1.125rem) und von
+   overflow:hidden zurechtgeschnitten — ohne das Übermaß blieben oben und unten
+   Lücken. In rem, nicht in em: width und font-size beziehen sich sonst auf
+   verschiedene Bezugsgrößen und der Kreis wüchse mit dem Zeichen mit. */
+.flag{display:inline-flex;align-items:center;justify-content:center;flex:none;
+  width:1.125rem;height:1.125rem;border-radius:50%;overflow:hidden;
+  font-size:1.5rem;line-height:1;vertical-align:-.25rem}
+/* Flagge steht hinter dem Namen/Titel → Abstand links. Die font-size, die hier
+   früher stand, ist entfallen: sie hätte das Übermaß von oben aufgehoben.
    .plat__name ist hier NICHT mehr aufgeführt: die Plattform-Kachel trägt
    keine eigene Flagge mehr, die Gruppenüberschrift zeigt sie einmal. */
-.opt__name .flag,.acc-title .flag,.simrow__p .flag{
-  margin-left:.4375rem;font-size:1em}
+.opt__name .flag,.acc-title .flag,.simrow__p .flag{margin-left:.4375rem}
 
 /* ---- Plattform-Kacheln (Liste) ----
    Jede Zeile bekommt eine eigene, sehr zurückgenommene Markentönung (10 %)
@@ -234,19 +243,37 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
 /* ---- Petitionsliste (Plattform-Detail) ---- */
 /* Marke ganz oben auf der Plattformseite. Grosszuegiges Bezugsmass: hier ist
    sie der Aufmacher, nicht ein Listensymbol. */
-.phead{display:flex;align-items:center;margin:0 0 .625rem}
-.phead .plogo{--logo-h:3.5rem}
+/* Logo links, Name rechts (Nutzerwunsch 3.8.26). space-between schiebt beide
+   an ihre Kante; die Lücke dazwischen gehört keinem von beiden und wächst mit
+   dem Fenster. gap greift erst, wenn die Zeile umbricht. */
+.phead{display:flex;align-items:center;justify-content:space-between;
+  gap:.75rem 1rem;flex-wrap:wrap;margin:0 0 .875rem}
+/* Kein h2-Wildwuchs: Browser geben einer Überschrift eigene Größe und
+   Außenabstände mit, beides würde die Zeile sprengen. Der Name ist hier eine
+   Bildunterschrift zur Marke, keine Kapitelüberschrift — deshalb ruhig und
+   klein. text-align:right zieht ihn bei mehrzeiligem Umbruch an die Kante. */
+.phead__name{margin:0;font-size:1rem;font-weight:800;letter-spacing:-.01em;
+  line-height:1.25;color:var(--muted);text-align:right}
+/* 3.5 → 4.75rem (Nutzerwunsch 3.8.26). Das ist das Bezugsmaß, NICHT die fertige
+   Höhe: --logo-k normiert daraus die Fläche, sonst nähme der Bundestag-Schriftzug
+   (6,17:1) rund das Vierfache der WeAct-Marke (1,42:1) ein. */
+.phead .plogo{--logo-h:4.75rem}
 .subhead{display:flex;align-items:center;justify-content:space-between;gap:.375rem;
   margin:-.125rem 0 .75rem}
 .backbtn{border:0;background:transparent;color:var(--accent);font-weight:700;
   font-size:.875rem;cursor:pointer;display:flex;align-items:center;gap:.25rem;
   padding:.5rem .5rem .5rem 0}
+/* Seit 3.8.26 ein sichtbarer Knopf, nicht mehr ein Textlink: er steht neben dem
+   Favoritenstern, der längst einer ist, und wurde als Link übersehen. */
 .archlink{display:inline-flex;align-items:center;gap:.375rem;color:var(--muted);
-  font-weight:650;font-size:.8125rem;text-decoration:none;padding:.5rem .125rem}
+  font-weight:650;font-size:.8125rem;text-decoration:none;
+  padding:.5rem .875rem;border-radius:999px;border:.0625rem solid var(--line);
+  background:var(--surface)}
 /* Rechte Seite der Kopfzeile: Favoriten-Stern + Archiv-Link.
    .subhead verteilt mit space-between, ohne diese Klammer wanderte der Stern
    in die Mitte. */
-.subhead__r{display:flex;align-items:center;gap:.125rem}
+/* .125 → .625rem: Stern und Archiv-Knopf klebten aneinander (Nutzerwunsch). */
+.subhead__r{display:flex;align-items:center;gap:.625rem}
 /* Der Stern ist hier kleiner als in den Einstellungen: dort ist er das
    Hauptbedienelement der Zeile, hier steht er neben einer Textzeile. */
 .favbtn--head{width:2.25rem;height:2.25rem;font-size:1.0625rem}
@@ -258,16 +285,74 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
 .swipe-hint p{margin:0 0 .75rem}
 .swipe-hint b{color:var(--accent)}
 .swipe-hint .hint-note{color:var(--muted)}
+/* Gruppenkopf der plattformübergreifenden Suche: Marke hinter dem Namen, wie in
+   der Einstellungszeile und der Plattformliste. Nur .crossgroup — dieselbe
+   .acc-head trägt in der Hauptliste die Sprachgruppen („Deutschsprachige
+   Plattformen"), die zu keiner einzelnen Marke gehören. */
+.crossgroup .acc-head{position:relative;overflow:hidden}
+.crossgroup .acc-head .plogo{--logo-h:1.75rem;position:absolute;right:2.75rem;
+  top:50%;transform:translateY(-50%);z-index:0;pointer-events:none}
+.crossgroup .acc-title{position:relative;z-index:1;padding-right:6rem}
+/* Überschrift der Hinweis-/Tipp-Kästen (Wisch-Hinweis, Favoriten-Tipp). Als <h3>
+   ausgezeichnet, damit die Kästen für Screenreader eine Struktur haben — deshalb
+   müssen hier die Browser-Vorgaben für Schriftgröße und Außenabstand zurück-
+   genommen werden, sonst sprengt die Vorgabe (1.17em, 1em Abstand) den Kasten. */
+.hint-title{margin:0 0 .375rem;font-size:.9375rem;font-weight:700;
+  line-height:1.35;color:var(--ink)}
 /* Primäre Aktion = dunkle Pille (siehe auch .io__btn, .support__btn,
    .mainsearch__btn, .filterbar__cross, .pet__extlink, .wiz__next). */
 .hint-dismiss{display:inline-flex;align-items:center;gap:.4375rem;border:0;
   background:var(--ink);color:var(--bg);font:inherit;font-weight:700;
   font-size:.8125rem;border-radius:999px;padding:.625rem 1rem;cursor:pointer}
 .hint-dismiss:active{opacity:.82}
-.search{width:100%;padding:.875rem 1.125rem;border:.0625rem solid var(--line);
-  border-radius:999px;font-size:.9375rem;background:var(--surface);
-  margin-bottom:.875rem;box-shadow:var(--shadow)}
+/* Suchzeile der Plattformseite: Feld + Lupenknopf, gebaut wie .mainsearch.
+   Der Außenabstand sitzt jetzt an der Zeile, nicht mehr am Feld — sonst
+   schöbe er den Knopf mit nach unten und beide stünden versetzt.
+   --ctl ist die Höhe der Bedienelemente dieser Zeile und steht bewusst an
+   EINER Stelle: das Feld nimmt sie als Höhe, der Knopf als Durchmesser. Ohne
+   feste Höhe streckt der Flexcontainer den Knopf auf die Feldhöhe, und aus
+   dem Kreis wird ein Oval — gemessen 48 × 49 px hier und 48 × 54,5 px auf der
+   Hauptseite (Nutzerbefund 3.8.26 „Button ist nicht rund"). */
+.searchrow{--ctl:3.375rem;display:flex;gap:.5625rem;margin-bottom:.875rem}
+/* font:inherit fehlte hier als einzigem der Suchfelder: das Feld schrieb in
+   Arial statt in der Systemschrift der App. Daher kam auch die abweichende
+   Zeilenhöhe (normal statt 1.5) und damit der Höhenunterschied zur
+   Hauptseite. Die Kurzform muss VOR font-size stehen, sonst setzt sie die
+   Größe wieder auf den geerbten Wert zurück (wie in .mainsearch__in). */
+.search{flex:1;min-width:0;height:var(--ctl);padding:.875rem 1.125rem;
+  border:.0625rem solid var(--line);
+  border-radius:999px;font:inherit;font-size:.9375rem;background:var(--surface);
+  box-shadow:var(--shadow)}
 .search:focus{outline:.125rem solid var(--accent);outline-offset:.0625rem}
+/* Quadratisch statt breit: der Knopf trägt nur die Lupe. */
+.searchrow__btn{flex:none;width:var(--ctl);height:var(--ctl);
+  display:inline-flex;align-items:center;
+  justify-content:center;border:0;cursor:pointer;border-radius:999px;
+  background:var(--ink);color:var(--bg);font-size:.9375rem}
+.searchrow__btn:active{opacity:.82}
+
+/* ---- Vorschlagsliste beim Tippen (app.js → attachAutocomplete) ----
+   Sie liegt ÜBER dem Inhalt, nicht in der Seite: absolut positioniert, damit
+   sich beim Tippen nichts verschiebt. Stünde sie im Fluss, hüpfte die halbe
+   Seite bei jedem Tastendruck. Die drei Suchzeilen bekommen dafür den
+   Bezugspunkt — position:relative ist hier reine Bühnentechnik. */
+.mainsearch,.searchrow,.signed__searchwrap{position:relative}
+.ac{position:absolute;left:0;right:0;top:calc(100% + .375rem);z-index:30;
+  background:var(--surface);border:.0625rem solid var(--line);
+  border-radius:1rem;box-shadow:var(--shadow);
+  max-height:19rem;overflow-y:auto;overscroll-behavior:contain}
+.ac__i{display:block;padding:.625rem .875rem;cursor:pointer}
+.ac__i + .ac__i{border-top:.0625rem solid var(--line)}
+/* Tastatur und Maus zeigen dasselbe: .is-on setzt app.js beim Wandern mit den
+   Pfeiltasten, :hover kommt vom Zeiger. */
+.ac__i.is-on,.ac__i:hover{background:var(--accent-soft)}
+/* Ein Petitionstitel ist oft zwei Zeilen lang; in der Vorschlagsliste zählt
+   der Anfang, deshalb eine Zeile mit Auslassungspunkten. */
+.ac__t{display:block;font-size:.875rem;font-weight:650;color:var(--ink);
+  line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ac__s{display:block;font-size:.75rem;color:var(--muted);margin-top:.125rem}
+.ac__t mark{background:var(--hot-soft);color:var(--ink);
+  border-radius:.1875rem;padding:0 .125rem}
 
 /* Unterstützungs-Bereich (Hauptseite, farblich abgetrennt unten) */
 .support{margin:1.75rem 0 .375rem;background:var(--accent-soft);
@@ -357,14 +442,18 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
 .support__btn--ghost:active{opacity:1;background:var(--accent-soft)}
 
 /* Volltext-Suchleiste auf der Hauptseite (Feld + Button) */
-.mainsearch{display:flex;gap:.5625rem;margin-bottom:1rem}
-.mainsearch__in{flex:1;min-width:0;padding:.875rem 1.125rem;
+/* --ctl wie in .searchrow — Feldhöhe und Knopfdurchmesser aus einer Quelle. */
+.mainsearch{--ctl:3.375rem;display:flex;gap:.5625rem;margin-bottom:1rem}
+.mainsearch__in{flex:1;min-width:0;height:var(--ctl);padding:.875rem 1.125rem;
   border:.0625rem solid var(--line);border-radius:999px;font:inherit;
   font-size:.9375rem;background:var(--surface);box-shadow:var(--shadow)}
 .mainsearch__in:focus{outline:.125rem solid var(--accent);outline-offset:.0625rem}
-.mainsearch__btn{display:inline-flex;align-items:center;gap:.4375rem;flex:none;
+/* Quadratisch, seit nur noch die Lupe darin steht (3.8.26). Mit padding statt
+   fester Breite säße das Symbol sonst in einer 5rem breiten Pille. */
+.mainsearch__btn{display:inline-flex;align-items:center;justify-content:center;
+  flex:none;width:var(--ctl);height:var(--ctl);
   border:0;background:var(--ink);color:var(--bg);font:inherit;font-weight:700;
-  font-size:.875rem;border-radius:999px;padding:0 1.25rem;cursor:pointer}
+  font-size:.9375rem;border-radius:999px;cursor:pointer}
 .mainsearch__btn:active{opacity:.82}
 
 /* Swipe-Wrapper: Aktions-Hintergrund hinter der verschiebbaren Karte */
@@ -413,12 +502,37 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
   letter-spacing:-.005em}
 .pet__row{display:flex;align-items:center;gap:.5rem;margin-top:.375rem;
   flex-wrap:wrap}
-.pet__ext{color:var(--accent);flex:none;width:2.25rem;height:2.25rem;display:flex;
+/* Gefüllt statt nur farbige Schrift (Nutzerwunsch 3.8.26): der Knopf saß neben
+   dem gleich großen Aufklapp-Pfeil und war von ihm kaum zu unterscheiden — beide
+   waren randlos. Der Aufklapp-Pfeil bleibt bewusst unauffällig, er ist die
+   Nebenhandlung. */
+.pet__ext{background:var(--accent);color:var(--on-accent);flex:none;
+  width:2.25rem;height:2.25rem;display:flex;
   align-items:center;justify-content:center;font-size:1rem;text-decoration:none;
   border-radius:.625rem}
-.pet__ext:active{background:var(--accent-soft)}
+.pet__ext:active{opacity:.82}
 .pet__toggle{color:var(--muted);flex:none;font-size:.9375rem;
   transition:transform .2s}
+/* Symbole mittig in den runden Knöpfen (Nutzerbefund 3.8.26). Der <i>-Kasten
+   war schon exakt zentriert — gemessen: Versatz 0,00 px in beide Richtungen.
+   Danebengelegen hat das ZEICHEN darin: mit line-height:normal ist der Kasten
+   rund 1,15 em hoch, und diese Zusatzhöhe verteilt sich nicht symmetrisch um
+   die Zeichenfläche, weil sie der Schriftlinie folgt. Unter der Lupe (Knopf auf
+   120 px, Fadenkreuz durch die Mitte) saß der Aufklapp-Pfeil sichtbar zu tief.
+   line-height:1 macht den Kasten genau ein Em hoch; darin zeichnet FontAwesome
+   seine Symbole mittig. */
+.pet__toggle i,.pet__ext i,.plat__chev i,.favbtn i,.to-top i,
+.searchrow__btn i,.mainsearch__btn i{display:block;line-height:1}
+/* Danach war ein einziges Symbol noch daneben. Nachgemessen auf der
+   Zeichenfläche (canvas, 100-px-Schnitt, actualBoundingBox): Lupe, Archiv und
+   Fremdlink-Pfeil liegen mit ihrer Tintenmitte exakt auf der Mitte des
+   Em-Kastens (Versatz 0,0), der Stern 2,8 % daneben — der Chevron aber 6 % zu
+   tief UND 6 % zu weit links. Deshalb genau ein Korrekturwert für genau dieses
+   Zeichen; eine pauschale Verschiebung zöge die anderen erst schief.
+   Der Wert steht in em, damit er jede Knopfgröße mitnimmt. Das rotate der
+   aufgeklappten Karte sitzt am Elternelement und multipliziert sich sauber
+   dazu: gedreht wandert die Korrektur mit dem Zeichen. */
+.pet__toggle i,.plat__chev i{transform:translate(.06em,-.06em)}
 .pet.open .pet__toggle{transform:rotate(180deg)}
 .pet__body{display:none;padding:0 1rem 1rem}
 .pet.open .pet__body{display:block}
@@ -468,7 +582,17 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
    img/figure/figcaption durchlassen). max-width statt fester Breite, damit ein
    2310px-Foto die Karte nicht aufreisst; height:auto haelt das Seitenverhaeltnis. */
 .pet__desc figure{margin:.75rem 0}
-.pet__desc img{display:block;max-width:100%;height:auto;border-radius:.5rem}
+/* Nachgeladene Bilder aus dem Aufruf-Text (Nutzerwunsch 3.8.26: „nicht zu groß
+   darstellen"). max-width allein reichte nicht — die Quellen sind Pressefotos
+   und Partnerlogos in Originalgröße (bis 2310 px breit), die auf voller
+   Kachelbreite mehrere hundert Pixel hoch wurden und den Text auseinanderrissen.
+   max-height deckelt die Höhe; width:auto lässt das Seitenverhältnis in Ruhe,
+   deshalb ist KEIN object-fit nötig und es wird nichts beschnitten. Hochformate
+   werden dadurch schmaler statt gestaucht.
+   object-fit wäre hier sogar falsch: es setzt eine feste Kastengröße voraus,
+   die wir nicht kennen — bei height:auto hat es gar keine Wirkung. */
+.pet__desc img{display:block;max-width:100%;width:auto;height:auto;
+  max-height:18rem;border-radius:.5rem}
 .pet__desc figcaption{margin-top:.375rem;font-size:.8125rem;color:var(--muted)}
 .descacc{margin-top:.875rem}
 .descacc>summary{cursor:pointer;list-style:none;display:flex;align-items:center;
@@ -485,8 +609,13 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
   border-radius:0 0 .875rem .875rem;padding:1rem;font-size:.875rem;
   line-height:1.65}
 .pet__meta{color:var(--muted);font-size:.75rem;margin-top:.75rem}
-.pet__extlink{display:inline-flex;align-items:center;gap:.5rem;margin-top:1rem;
-  background:var(--ink);color:var(--bg);font-weight:700;text-decoration:none;
+/* Der Weg zur Petition ist die eigentliche Aufgabe der App und trägt seit dem
+   3.8.26 deshalb die Akzentfarbe statt des neutralen --ink (Nutzerwunsch: er
+   soll sich von den übrigen Knöpfen abheben). --on-accent ist der geprüfte
+   Gegenpart, reines Weiß käme auf dem hellen Akzent nur auf 2,26:1. */
+.pet__extlink{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.25rem;
+  background:var(--accent);color:var(--on-accent);font-weight:700;
+  text-decoration:none;
   font-size:.875rem;padding:.8125rem 1.375rem;border-radius:999px}
 .pet__extlink:active{opacity:.82}
 
@@ -526,8 +655,11 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
    wie ein Wizard-Chip (dünner Umriss statt gefüllt). Beide sind jetzt an ihren
    Container gebunden; eine neue Chip-Art bitte ebenso scopen. */
 
-/* Schlagwörter (Tags) – im ausgeklappten Bereich; Klick verlinkt/filtert. */
-.pet__tags{margin-top:1rem}
+/* Schlagwörter (Tags) – im ausgeklappten Bereich; Klick verlinkt/filtert.
+   1 → 1.75rem (Nutzerwunsch 3.8.26: „mehr Abstand zwischen den Elementen"
+   im Ausklapper — Beschreibung, Schlagwörter, Unterschriftenzahl und der
+   Knopf standen als ein Block ohne Zäsur untereinander). */
+.pet__tags{margin-top:1.75rem}
 .pet__tags-lbl{display:flex;align-items:center;gap:.5rem;font-size:.75rem;
   letter-spacing:.05em;text-transform:uppercase;color:var(--muted);
   margin-bottom:.5rem}
@@ -543,7 +675,9 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
    Zugeklappt, sonst schöbe es die Liste weit nach unten. <details> statt
    eigener Schalterlogik – dasselbe Muster wie .descacc in der Karte.
    Ist etwas eingestellt, sagt das die Zeile im zugeklappten Zustand. */
-.ptools{margin:0 0 .625rem}
+/* .625 → 1.25rem: Bedienfeld, Zählerzeile („25 von 26 Petitionen") und die
+   erste Kachel klebten aneinander (Nutzerwunsch 3.8.26). */
+.ptools{margin:0 0 1.25rem}
 .ptools__sum{cursor:pointer;list-style:none;display:flex;align-items:center;
   gap:.625rem;background:var(--surface);border:.0625rem solid var(--line);
   border-radius:.875rem;padding:.8125rem 1rem;font-size:.875rem;font-weight:700;
@@ -666,7 +800,8 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
 .crosshead b{color:var(--accent)}
 .sig{font-size:.8125rem;color:var(--muted);font-variant-numeric:tabular-nums}
 .sig b{color:var(--ink)}
-.count-note{color:var(--muted);font-size:.75rem;margin:.125rem .125rem .75rem}
+/* Zählerzeile zwischen Bedienfeld und Liste — beidseitig Luft (3.8.26). */
+.count-note{color:var(--muted);font-size:.75rem;margin:.125rem .125rem 1.125rem}
 
 /* ---- Einstellungen ---- */
 .settings-note{color:var(--muted);font-size:.875rem;margin:0 .125rem 1.25rem;
@@ -698,19 +833,30 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
   box-shadow:inset .375rem 0 0 0 var(--veil-rail),
              inset .375rem 0 0 0 var(--brand,var(--line)),
              var(--shadow)}
-.opt__body{flex:1;min-width:0;position:relative;z-index:1}
+/* padding-right = Schutzzone vor dem Logo (siehe Rechnung an .opt .plogo).
+   Seit der vierten Wurzel (3.8.26) ist die breiteste Marke 8,8rem statt
+   6,2rem breit; sie endet 8.5rem vor der Kante und beginnt damit bei 17,3rem.
+   Mit 8rem lag der Text gemessen 24,8 px darüber — 11.25rem halten ihn mit
+   rund 27 px Luft davor. */
+.opt__body{flex:1;min-width:0;position:relative;z-index:1;padding-right:11.25rem}
 /* Logo HINTER der Beschriftung statt daneben.
    Nachgemessen, warum nicht daneben: auf 375 px Breite teilen sich Text, Logo,
    Stern und Schalter eine Zeile. Weil .plogo nicht schrumpft (flex:none),
    blieben dem Text nur 52–86 px — „Bundestag ePetitionen" wurde abgeschnitten
    und die Zeile wuchs von 88 auf 145 px. Absolut gesetzt beansprucht das Logo
    keine Breite, der Name behält die ganze Zeile.
-   Zurückhaltende Deckung, damit die Marke erkennbar bleibt, ohne mit der
-   Schrift zu konkurrieren: sie liegt darunter, nicht darüber.
    Der Abstand rechts hält die Marke aus Stern und Schalter heraus (zusammen
-   rund 6 rem), sie liegt also im Feld hinter der Beschriftung. */
+   rund 6 rem), sie liegt also im Feld hinter der Beschriftung.
+   VOLLE MARKENFARBE (Nutzerwunsch 3.8.26, vorher opacity:.22). Die gedimmte
+   Fassung gab es nur, damit die Schrift über der Marke lesbar blieb — --ink auf
+   dem schwarzen Bundestag-Logo sind 1,03:1. Statt zu dimmen bekommt der Text
+   jetzt eine Schutzzone: .opt__body endet vor dem Logo, nichts überlappt mehr,
+   lange Namen brechen um statt auf der Marke zu liegen. Die Zone muss die
+   BREITESTE normierte Marke fassen — Bundestag, Seitenverhältnis 6,17:
+   seit 3.8.26 ist das 6,17^0,75 × --logo-h(2.25rem in „relief") = 8,8rem,
+   vorher mit der zweiten Wurzel 6,2rem. */
 .opt .plogo{position:absolute;right:8.5rem;top:50%;
-  transform:translateY(-50%);z-index:0;opacity:.22;pointer-events:none}
+  transform:translateY(-50%);z-index:0;opacity:1;pointer-events:none}
 /* Stern und Schalter müssen über dem Logo liegen und bedienbar bleiben. */
 .opt .favbtn,.opt .switch{position:relative;z-index:1}
 .opt__name{font-weight:700;font-size:.9375rem;line-height:1.3}
@@ -981,7 +1127,26 @@ body.wizard-open{overflow:hidden}
   padding-left:1.375rem;
   box-shadow:inset .375rem 0 0 0 var(--veil-rail),
              inset .375rem 0 0 0 var(--brand,var(--accent))}
-.wplat__body{flex:1;min-width:0}
+/* Logo HINTER die Beschriftung, wie in Plattformliste, Einstellungen und
+   Cross-Suche (Nutzerwunsch 3.8.26). Vorher stand es als erstes Flexkind links
+   und schob den Text nach rechts; weil .plogo mit flex:none nicht schrumpft,
+   begann jede Zeile woanders — bei der schmalen WeAct-Marke früher, beim
+   Bundestag-Schriftzug erst weit rechts.
+   Die Zahlen: der Haken ist 1.625rem breit und sitzt 1rem vor der Kante, mit
+   .875rem Luft endet die Marke also 3.5rem vor dem Rand. Die breiteste Marke
+   misst bei --logo-h 1.75rem noch AR^0,75 × 1.75 = 6,85rem (Bundestag) und
+   beginnt damit 10,35rem vor der Kante; der Textblock endet 3.5 + 8.5 =
+   12rem davor. */
+.wplat{position:relative;overflow:hidden}
+.wplat .plogo{--logo-h:1.75rem;position:absolute;right:3.5rem;top:50%;
+  transform:translateY(-50%);z-index:0;pointer-events:none}
+.wplat__body{flex:1;min-width:0;position:relative;z-index:1;padding-right:8.5rem}
+/* Auf dem Telefon bliebe dem Namen sonst zu wenig: Marke und Schutzzone
+   zusammen schrumpfen, das Verhältnis bleibt (4,89 + 3.5 gegen 3.5 + 6.25). */
+@media (max-width:30rem){
+  .wplat .plogo{--logo-h:1.25rem}
+  .wplat__body{padding-right:6.25rem}
+}
 .wplat__n{display:block;font-weight:750;font-size:.9375rem}
 .wplat__m{display:block;color:var(--muted);font-size:.75rem;margin-top:.125rem}
 .wplat__check{flex:none;width:1.625rem;height:1.625rem;border-radius:50%;
@@ -1108,6 +1273,8 @@ body.wizard-open{overflow:hidden}
   background:var(--surface);color:var(--ink);border-radius:999px;
   padding:.8125rem 1rem .8125rem 2.5rem;font:inherit;font-size:.9375rem}
 .signed__search:focus{outline:none;border-color:var(--accent)}
+.signed__hint{color:var(--muted);font-size:.75rem;line-height:1.5;
+  margin:0 .25rem .375rem}
 .signed__count{color:var(--muted);font-size:.75rem;margin:0 .25rem .5rem}
 /* Der Abschnitt ist immer offen – die alte Akkordion-Regel aushebeln. */
 .signed .signed-list{display:block;border-top:.0625rem solid var(--line);
@@ -1119,8 +1286,28 @@ body.wizard-open{overflow:hidden}
   background-image:linear-gradient(var(--veil-1),var(--veil-1));
   box-shadow:inset .375rem 0 0 0 var(--veil-rail),
              inset .375rem 0 0 0 var(--brand,transparent)}
+/* Feste Logo-Spalte, damit die Titel bündig untereinander anfangen.
+   Breite nachgerechnet, nicht geschätzt: die normierte Logobreite ist seit der
+   Umstellung auf die vierte Wurzel (3.8.26) Seitenverhältnis^0,75 × --logo-h.
+   Bei 1.25rem reicht das von 1,63rem (WeAct, 1,42:1) bis 4,89rem (Bundestag,
+   6,17:1) — 5rem fasst also auch die breiteste Marke. Das Bezugsmaß ist dafür
+   von 1.5 auf 1.25rem heruntergegangen: mit 1.5rem bräuchte die Spalte 6rem
+   und der Titel begänne auf dem Telefon erst im letzten Drittel.
+   Zentriert, damit schmale Marken nicht links kleben. */
+.signed-item__logo{flex:none;width:5rem;--logo-h:1.25rem;
+  display:flex;align-items:center;justify-content:center}
 .signed-item__body{flex:1;min-width:0}
-.signed .signed-item__t,.signed .signed-item__meta{display:block}
+.signed .signed-item__t{display:block}
+/* Plattform · Unterschriften · Startdatum in einer Zeile. Flex statt „ · "
+   zwischen den Angaben: die Trennzeichen müssten sonst je nach vorhandenen
+   Feldern ein- und ausgeschaltet werden, und beim Umbruch stünde ein Punkt
+   allein am Zeilenanfang. */
+.signed .signed-item__meta{display:flex;flex-wrap:wrap;align-items:center;
+  gap:.125rem .625rem}
+/* Vom Nutzer, nicht von der Plattform: eigene Zeile, mit einer Linie und
+   etwas Luft abgesetzt (Nutzerwunsch 3.8.26). */
+.signed-item__signed{display:block;margin-top:.4375rem;padding-top:.4375rem;
+  border-top:.0625rem solid var(--line);font-size:.75rem;color:var(--muted)}
 .signed-item__t mark,.signed-item__meta mark{background:var(--hot-soft);
   color:var(--ink);border-radius:.1875rem;padding:0 .125rem}
 .signed .signed-empty{text-align:center;padding:1.75rem 1rem}

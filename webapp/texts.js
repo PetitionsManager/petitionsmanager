@@ -47,12 +47,14 @@ window.PM_TEXTS = {
 
   favorites: {
     title: "Favoriten",
+    howTitle: "Favoriten anlegen",
     how: "Tippe auf den Stern neben einer Plattform, um sie zu einem Favoriten zu machen. Favoriten erscheinen immer ganz oben in der Liste.",
     empty: "Noch keine Favoriten. Tippe auf den Stern neben einer Plattform, um sie hier abzulegen."
   },
 
   petition: {
     favHint: "Tippe auf das Lesezeichen-Symbol in der Petition, um sie zu merken.",
+    swipeHintTitle: "Petitionen wischen",
     swipeHint: "Wische nach rechts, um eine Petition als unterschrieben zu markieren. Nochmal wischen setzt das zurück. Wische nach links, um sie zu archivieren.",
     signedBadge: "Unterschrieben",
     similarTitle: "Gleiche / Ähnliche Petitionen",
@@ -64,6 +66,7 @@ window.PM_TEXTS = {
     intro: "Hier sind alle Petitionen, bei denen du deine Unterschrift gesetzt hast.",
     empty: "Noch nichts hier. Wenn du eine Petition unterzeichnest, wische sie in der Liste nach rechts — sie landet dann hier.",
     searchPlaceholder: "Unterzeichnete Petitionen durchsuchen …",
+    searchHint: "Durchsucht Titel, Plattform und Adresse (URL) der Petition — nicht den Aufruftext.",
     countOne: "1 Petition",
     countMany: "{n} Petitionen",
     milestones: {
@@ -112,14 +115,13 @@ window.PM_TEXTS = {
     themeDark: "Dunkel",
     themeAuto: "Automatisch",
     layoutLabel: "Layout",
-    layoutClassic: "Klassisch",
     layoutRelief: "Relief",
     layoutMag: "Magazin",
-    layoutHint: "Ändert nur das Aussehen, nicht die Inhalte. „Klassisch“ ist die bisherige Ansicht. „Relief“ ist im Stil des Neumorphismus gebaut („Soft UI“): Karten, Knöpfe und Felder haben dieselbe Farbe wie der Hintergrund und werden nur durch Licht und Schatten geformt – angetippt oder eingeschaltet sinken sie ein. „Magazin“ ordnet die Plattformen als Kachelraster in ihren echten Markenfarben an und stellt das Bild der Petition groß nach oben.",
+    layoutHint: "Ändert nur das Aussehen, nicht die Inhalte. „Relief“ ist im Stil des Neumorphismus gebaut („Soft UI“): Karten, Knöpfe und Felder haben dieselbe Farbe wie der Hintergrund und werden nur durch Licht und Schatten geformt – angetippt oder eingeschaltet sinken sie ein. „Magazin“ ordnet die Plattformen als Kachelraster in ihren echten Markenfarben an und stellt das Bild der Petition groß nach oben.",
     autoDark: "Systemeinstellung folgen",
     descImagesLabel: "Bilder in Beschreibungen laden",
-    descImagesOn: "Fotos und Logos aus dem Aufruf werden geladen – einzelne sind mehrere Megabyte groß.",
-    descImagesOff: "Nur Text. Es werden keine Bilddateien abgerufen.",
+    descImagesOn: "Fotos und Logos werden beim Öffnen einer Petition aus dem Internet nachgeladen. Das setzt eine Internetverbindung voraus und verbraucht Datenvolumen – einzelne Bilder sind mehrere Megabyte groß. Unterwegs am besten nur im WLAN einschalten.",
+    descImagesOff: "Nur Text. Es werden keine Bilddateien aus dem Internet abgerufen, es entsteht also kein Datenverbrauch für Bilder.",
     refresh: "Daten aktualisieren",
     refreshHint: "Lädt die aktuellen Petitionsdaten neu von der Quelle.",
     source: "Datenquelle",
