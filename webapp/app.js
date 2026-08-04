@@ -1650,6 +1650,11 @@
      Messung, an der die allgemeine Seltenheits-Gewichtung gescheitert ist
      (98 % aller Wörter kommen in höchstens 25 Petitionen vor). */
   var SIM_W_NAME = 0.36, SIM_NAME_EXP = 3;
+  /* Wie viele Verwandte der Abschnitt höchstens zeigt. Muss zu
+     publish.SIM_MAX_PER_PETITION passen: publish.py legt so viele Einträge in
+     die Daten, hier stand vorher fest 6 — die Einträge 7 und 8 wären mit
+     ausgeliefert, aber nie sichtbar gewesen. */
+  var SIM_SHOW_MAX = 8;
   function similarityScore(a, b, w) {
     var sameTitle = (a.title && (a.title || "").trim().toLowerCase() ===
       (b.title || "").trim().toLowerCase()) ? 1 : 0;
@@ -1694,7 +1699,7 @@
 
   // Findet gleiche/ähnliche Petitionen und sortiert nach (unsichtbarem) Score.
   function findSimilar(r, all, max) {
-    max = max || 6;
+    max = max || SIM_SHOW_MAX;
 
     // Zukunfts-Hook: vorab berechnete Verwandtschaft (z. B. via Claude) nutzen.
     if (Array.isArray(r.related) && r.related.length) {
@@ -1907,7 +1912,7 @@
         '<div class="count-note" style="margin:0">Suche über alle ' +
         "Plattformen …</div>";
       ensureAllData().then(function (all) {
-        renderSimilar(simBox, findSimilar(r, all, 6));
+        renderSimilar(simBox, findSimilar(r, all, SIM_SHOW_MAX));
       }).catch(function () {
         simBox.innerHTML = "";
       });

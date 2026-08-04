@@ -158,15 +158,25 @@ def main() -> None:
             return
         targets = [p for p in PLATFORMS if p.is_live
                    and (not args.platform or p.key == args.platform)]
-        for p in targets:
-            core.log(f"=== Scrape: {p.name} ===")
-            try:
-                p.run(args)
-            except Exception as exc:   # eine Plattform darf den Lauf nicht kippen
-                core.log(f"!! {p.name} fehlgeschlagen: {exc!r} – übersprungen, "
-                         "die übrigen Plattformen laufen weiter.")
-        core.write_dashboard(PLATFORMS)
-        core.write_placeholder_pages(PLATFORMS)
+        try:
+            for p in targets:
+                core.log(f"=== Scrape: {p.name} ===")
+                try:
+                    p.run(args)
+                except Exception as exc:   # eine Plattform darf den Lauf nicht kippen
+                    core.log(f"!! {p.name} fehlgeschlagen: {exc!r} – übersprungen, "
+                             "die übrigen Plattformen laufen weiter.")
+        finally:
+            # AUCH BEI ABBRUCH schreiben. Der CI-Lauf schickt SIGINT, sobald die
+            # gemeinsame Frist erreicht ist (scrape.yml, "Zeitrahmen beim
+            # Scrapen erreicht") – vorher standen diese beiden Zeilen hinter der
+            # Schleife und wurden dann übersprungen. Folge: dashboard.html
+            # entstand gar nicht erst, publish.py fand nichts zu kopieren und
+            # ließ die Status-Ansicht still weg. Auf GitHub Pages war sie
+            # dadurch nach jedem Lauf mit ausgeschöpfter Frist verschwunden
+            # (am 2026-08-04 als HTTP 404 nachgemessen).
+            core.write_dashboard(PLATFORMS)
+            core.write_placeholder_pages(PLATFORMS)
     except KeyboardInterrupt:
         print("\nAbgebrochen.")
 

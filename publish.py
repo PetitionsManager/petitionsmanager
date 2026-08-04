@@ -72,8 +72,29 @@ SLIM_FIELDS = ("title", "url", "signatures", "goal", "category", "status",
 # Einträge kosten nichts an Qualität — die Nestlé-Probe fällt mit vier genauso
 # aus wie mit sechs — und drücken die Daten auf 6,9 MB.
 SIM_MIN_SCORE = 0.24      # darunter ist es kein sinnvoller Treffer mehr
-SIM_MAX_PER_PETITION = 4
+SIM_MAX_PER_PETITION = 8
 SIM_TAG_MAX_MEMBERS = 900  # Allerwelts-Schlagwörter beim Vergleichen auslassen
+# Hat eine Petition NICHTS über der Schwelle, bekommt sie trotzdem ihren besten
+# Treffer — lieber ein schwacher Vorschlag als ein leerer Abschnitt.
+SIM_FILL_WEAKEST = True
+
+# ---- Wie weit die Abdeckung überhaupt reichen kann (4.8.26 durchgemessen)
+# Die Schwelle ist NICHT der Engpass. Von 0,24 auf 0,00 gesenkt bringt sie bei
+# gleichem Deckel nur 97,2 → 97,6 % und kostet 0,6 MB; fast jede Petition hat
+# ohnehin genug Treffer über der Schwelle. Dieselben 97,6 % erreicht das
+# Auffüllen oben für 0,01 MB und ohne die Güte der übrigen Listen zu verwässern
+# (Ø 0,37 statt 0,36) — deshalb Auffüllen statt Schwelle senken.
+#
+# 97,6 % ist zugleich die BAUARTBEDINGTE OBERGRENZE: verglichen wird nur, wer
+# mindestens ein Schlagwort teilt, und Schlagwörter entstehen aus dem Text.
+# Die fehlenden 212 Petitionen haben zu 191 GAR KEINEN TITEL — 184 davon von
+# WeMove, dessen Bot-Schutz statt der Kampagne eine leere Vorlage ausliefert
+# („[% inititator_name %]"). Das ist kein Ähnlichkeitsproblem: diese Sätze
+# stehen in der App ohnehin als „(ohne Titel)". Wer über 97,6 % hinaus will,
+# muss WeMove reparieren, nicht an diesen Zahlen drehen.
+#
+# Der Deckel ist der teure Regler: 4 → 6,9 MB · 6 → 10,1 · 8 → 12,9 · 12 → 17,3.
+# Acht ist die Stufe, auf der die Nestlé-Probe von 5/7 auf 6/7 steigt.
 
 # ---- Zuschlag für ein seltenes gemeinsames SCHLAGWORT (Nutzerwunsch 3.8.26)
 # Ausgangsbefund: von den sieben offenen Nestlé-Petitionen verwies keine
@@ -236,11 +257,19 @@ def compute_related(by_platform: dict[str, list[dict]]) -> int:
             cand.update(index[t])
         cand.discard(i)
         scored = []
+        schwaechster = None    # bester Treffer UNTERHALB der Schwelle
         for j in cand:
             other = items[j]
             s = _score(it, other, gewicht, w_max)
             if s >= SIM_MIN_SCORE:
                 scored.append((s, other))
+            elif SIM_FILL_WEAKEST and (schwaechster is None
+                                       or s > schwaechster[0]):
+                schwaechster = (s, other)
+        # Auffüllen greift nur bei einer sonst LEEREN Liste. Wer schon Treffer
+        # über der Schwelle hat, bekommt keine schwachen dazugemischt.
+        if not scored and schwaechster is not None:
+            scored = [schwaechster]
         if not scored:
             continue
         scored.sort(key=lambda x: (-x[0], -(x[1]["rec"].get("signatures") or 0)))
@@ -417,6 +446,14 @@ def main() -> None:
     if dash.exists():
         shutil.copy(dash, OUT_DIR.parent / "dashboard.html")
         print("dashboard.html → webapp/ (Status-Ansicht via Pages-URL)")
+    else:
+        # Nicht still übergehen: die Datei ist gitignoriert, entsteht also
+        # ausschließlich zur Laufzeit. Fehlt sie, liefert der Pages-Deploy die
+        # Status-Ansicht nicht mit und die URL antwortet 404 — genau das blieb
+        # tagelang unbemerkt, weil hier nichts gemeldet wurde.
+        print("  ! dashboard.html fehlt – Status-Ansicht wird NICHT "
+              "ausgeliefert. Erzeugt wird sie von monitor.py; zur Not "
+              "genügt 'python3 monitor.py --html-only'.")
 
     live = [p for p in manifest["platforms"] if p["live"]]
     total = sum(p["count"] for p in live)
