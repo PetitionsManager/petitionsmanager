@@ -270,6 +270,24 @@ def _meta(soup: BeautifulSoup, prop: str) -> str | None:
     return None
 
 
+def _doc_title(soup: BeautifulSoup) -> str | None:
+    """<title> der Seite, ohne die Marken-Zutat.
+
+    Avaaz schreibt dort "Avaaz - <Überschrift>" (gelegentlich mit
+    Gedankenstrich oder umgekehrter Reihenfolge). Ohne das Abschneiden stünde
+    in der App bei jedem so gewonnenen Titel ein führendes "Avaaz - ".
+    Bleibt nach dem Abschneiden nichts oder nur noch der Markenname übrig,
+    lieber None zurückgeben als eine leere Überschrift zu schreiben.
+    """
+    if not soup.title or not soup.title.string:
+        return None
+    t = re.sub(r"\s+", " ", soup.title.string).strip()
+    t = re.sub(r"^\s*Avaaz\s*[-–—|:]\s*", "", t, flags=re.I)
+    t = re.sub(r"\s*[-–—|]\s*Avaaz\s*$", "", t, flags=re.I)
+    t = t.strip()
+    return t or None
+
+
 def parse_detail(html: str, url: str) -> dict:
     soup = BeautifulSoup(html, "html.parser")
     rec: dict = {}
@@ -409,7 +427,16 @@ def parse_campaign(html: str, url: str) -> dict:
     h1_text = h1.get_text(strip=True) if h1 else None
     if h1_text and h1_text.lower().strip() in _GENERIC_H1:
         h1_text = None
-    title = h1_text or _meta(soup, "og:title")
+    # <title> VOR og:title (2026-08-03). Bei den Dauerkampagnen
+    # ("..._evergreen_...") verwendet Avaaz dieselbe URL für wechselnde
+    # Inhalte und pflegt dabei den og:title nicht nach -- der beschreibt dann
+    # eine Kampagne, die auf der Seite gar nicht mehr vorkommt, während
+    # <title> aktuell ist. Am gemeldeten Fall land_rights_evergreen_2026
+    # nachgezählt: og:title "Ermordet, weil sie ihr Land verteidigen" taucht im
+    # sichtbaren Text 0-mal auf, der <title>-Gegenstand "Lula" 7-mal.
+    # og:title bleibt als Rückfall, weil er bei den normalen Kampagnen die
+    # sauberere Überschrift liefert (kein Marken-Präfix, keine Kürzung).
+    title = h1_text or _doc_title(soup) or _meta(soup, "og:title")
     if title:
         import html as _html
         title = re.sub(r"\s+", " ", _html.unescape(title)).strip()
