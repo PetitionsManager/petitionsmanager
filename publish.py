@@ -35,6 +35,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import re
 import shutil
 from collections import Counter, defaultdict
@@ -62,11 +63,40 @@ SLIM_FIELDS = ("title", "url", "signatures", "goal", "category", "status",
                "started_by", "recipient", "start_date", "image_url", "kind",
                "summary", "tags", "closed", "deadline")
 
-# Verwandtschaft: dieselbe Gewichtung wie die Notlösung in der App
-# (app.js → similarityScore), damit sich das Verhalten nicht ändert.
-SIM_MIN_SCORE = 0.18      # darunter ist es kein sinnvoller Treffer mehr
-SIM_MAX_PER_PETITION = 6
+# Verwandtschaft. Die App trägt dieselbe Rechnung als Notlösung
+# (app.js → similarityScore); beide müssen zusammen geändert werden.
+# 0.18 → 0.24 und 6 → 4 zusammen mit dem Zuschlag unten (3.8.26). Der Zuschlag
+# hebt viele Paare über die alte Schwelle; gemessen am Gesamtbestand stieg die
+# Zahl der Petitionen mit Verwandtschaft von 2.891 (32 %) auf 8.716 (97 %) und
+# die ausgelieferten related-Listen von 1,8 auf 10,1 MB. Vier statt sechs
+# Einträge kosten nichts an Qualität — die Nestlé-Probe fällt mit vier genauso
+# aus wie mit sechs — und drücken die Daten auf 6,9 MB.
+SIM_MIN_SCORE = 0.24      # darunter ist es kein sinnvoller Treffer mehr
+SIM_MAX_PER_PETITION = 4
 SIM_TAG_MAX_MEMBERS = 900  # Allerwelts-Schlagwörter beim Vergleichen auslassen
+
+# ---- Zuschlag für ein seltenes gemeinsames SCHLAGWORT (Nutzerwunsch 3.8.26)
+# Ausgangsbefund: von den sieben offenen Nestlé-Petitionen verwies keine
+# einzige auf eine andere, obwohl fünf „Nestlé" als Schlagwort tragen. Die
+# Rechnung erklärt es — ein gemeinsames Schlagwort unter elf ergibt 0,09, mal
+# 0,45 sind das 0,04 Punkte, weit unter der Schwelle von 0,18. Das
+# aussagekräftige Wort ging im Durchschnitt aller anderen unter.
+#
+# Der erste Versuch, JEDES Wort nach Seltenheit zu gewichten, ist an den Daten
+# gescheitert und die Messung steht hier, damit niemand sie wiederholt:
+# 98,3 % aller 34.775 Wörter kommen in höchstens 25 Petitionen vor, die Hälfte
+# in genau einer. „stillen" (4 Petitionen) ist SELTENER als „nestle" (8).
+# Seltenheit allein trennt eine Marke also nicht von einem beliebigen Wort —
+# sie hob nur alle Paare gleichmäßig an: 96 % der Petitionen bekamen
+# Verwandte und die ausgelieferten Daten wuchsen von 1,8 auf 10 MB.
+#
+# Was trennt, ist das SCHLAGWORT. Es ist die verdichtete Aussage der Petition
+# (core.make_tags), nicht jedes Wort ihres Titels. „nestle" als Schlagwort
+# führt acht Petitionen zusammen — darunter „Finger weg von unserem Wasser!",
+# die Nestlé nicht einmal im Titel nennt. Deshalb: klassische Bewertung wie
+# bisher, plus ein Zuschlag, wenn beide dasselbe SELTENE Schlagwort tragen.
+SIM_W_NAME  = 0.36   # Höhe des Zuschlags bei einem sehr seltenen Schlagwort
+SIM_NAME_EXP = 3.0   # Steilheit: hoch potenziert zählt nur das wirklich Seltene
 
 _SIM_STOP = set((
     "und oder für mit von den der die das ein eine einen eines dem des im in "
@@ -75,6 +105,18 @@ _SIM_STOP = set((
     "sollen muss müssen kann können the and for with from this that are our "
     "you your not petition petitionen deutschland").split())
 _SIM_SPLIT = re.compile(r"[^a-zäöüßà-ÿ]+")
+# Akzente einebnen, damit „Nestlé" und „Nestle" dasselbe Wort sind — beide
+# Schreibweisen stehen im Bestand (WeAct schreibt „Nestle", Avaaz „Nestlé").
+# ä, ö, ü und ß bleiben BEWUSST stehen: im Deutschen tragen sie Bedeutung,
+# „schön" und „schon" wären sonst dasselbe Wort.
+_SIM_DIA = str.maketrans({
+    "á": "a", "à": "a", "â": "a", "ã": "a", "å": "a",
+    "é": "e", "è": "e", "ê": "e", "ë": "e",
+    "í": "i", "ì": "i", "î": "i", "ï": "i",
+    "ó": "o", "ò": "o", "ô": "o", "õ": "o",
+    "ú": "u", "ù": "u", "û": "u",
+    "ý": "y", "ÿ": "y", "ñ": "n", "ç": "c", "č": "c",
+})
 
 
 def slim(rec: dict) -> dict:
@@ -92,7 +134,8 @@ def slim(rec: dict) -> dict:
 # Verwandtschaft vorab berechnen
 # ----------------------------------------------------------------------------
 def _tokens(text: str) -> set[str]:
-    return {w for w in _SIM_SPLIT.split((text or "").lower())
+    return {w.translate(_SIM_DIA)
+            for w in _SIM_SPLIT.split((text or "").lower())
             if len(w) >= 4 and w not in _SIM_STOP}
 
 
@@ -103,8 +146,11 @@ def _jaccard(a: set, b: set) -> float:
     return len(a & b) / union if union else 0.0
 
 
-def _score(a: dict, b: dict) -> float:
-    """0..1 – identischer Titel zählt als dieselbe Petition."""
+def _score(a: dict, b: dict, w: dict, w_max: float) -> float:
+    """0..1 – identischer Titel zählt als dieselbe Petition.
+
+    Die vier klassischen Anteile sind unverändert; NEU ist allein der Zuschlag
+    für ein seltenes gemeinsames Schlagwort (Begründung bei den Konstanten)."""
     ta = (a["title_norm"], b["title_norm"])
     if ta[0] and ta[0] == ta[1]:
         return 1.0
@@ -112,14 +158,27 @@ def _score(a: dict, b: dict) -> float:
     title_j = _jaccard(a["title_tok"], b["title_tok"])
     content_j = _jaccard(a["content_tok"], b["content_tok"])
     same_cat = 1.0 if (a["cat"] and a["cat"] == b["cat"]) else 0.0
-    return tag_j * 0.45 + title_j * 0.30 + content_j * 0.15 + same_cat * 0.10
+    klassisch = (tag_j * 0.45 + title_j * 0.30 +
+                 content_j * 0.15 + same_cat * 0.10)
+    # Zuschlag: das SELTENSTE Schlagwort, das beide tragen. Maximum und nicht
+    # Durchschnitt — ein einziger starker Beleg („nestle") darf nicht von
+    # schwachen Treffern („kinder") verwässert werden. Hoch potenziert, damit
+    # nur wirklich seltene Schlagwörter zählen: bei 8 von 8.968 Petitionen
+    # kommt gut die Hälfte des Zuschlags an, bei 500 von 8.968 fast nichts.
+    gemeinsam = a["tagset"] & b["tagset"]
+    if not gemeinsam:
+        return klassisch
+    selten = max(w.get(t, 0.0) for t in gemeinsam) / w_max
+    if selten > 1.0:
+        selten = 1.0
+    return klassisch + (selten ** SIM_NAME_EXP) * SIM_W_NAME
 
 
 def compute_related(by_platform: dict[str, list[dict]]) -> int:
     """Schreibt "related" in die Datensätze (an Ort und Stelle).
 
     Verglichen wird nur, was mindestens ein Schlagwort teilt – ein voller
-    Alle-gegen-alle-Vergleich wären bei ~6.000 Petitionen 36 Mio. Paare."""
+    Alle-gegen-alle-Vergleich wären bei ~9.000 Petitionen 40 Mio. Paare."""
     items = []
     for key, recs in by_platform.items():
         for rec in recs:
@@ -131,18 +190,35 @@ def compute_related(by_platform: dict[str, list[dict]]) -> int:
             # machten allein 4,8 MB der App-Daten aus.
             if rec.get("closed"):
                 continue
-            tags = [str(t).lower() for t in (rec.get("tags") or [])]
-            if not tags:
+            # Schlagwörter wie Titelwörter behandeln: kleingeschrieben,
+            # akzentfrei. Sonst wäre das Schlagwort „Nestlé" ein anderes Wort
+            # als „nestle" aus dem Titel der Nachbarpetition und die beiden
+            # Felder könnten einander nie bestätigen.
+            tags = {str(t).lower().translate(_SIM_DIA)
+                    for t in (rec.get("tags") or []) if str(t).strip()}
+            title_tok = _tokens(rec.get("title"))
+            if not tags and not title_tok:
                 continue
             items.append({
                 "rec": rec, "platform": key,
-                "tagset": set(tags),
+                "tagset": tags,
                 "title_norm": (rec.get("title") or "").strip().lower(),
-                "title_tok": _tokens(rec.get("title")),
+                "title_tok": title_tok,
                 "content_tok": _tokens((rec.get("title") or "") + " " +
                                        (rec.get("summary") or "")),
                 "cat": (rec.get("category") or "").lower() or None,
             })
+
+    # Häufigkeit jedes SCHLAGWORTS im Gesamtbestand → Gewicht für den Zuschlag.
+    # Ein Schlagwort auf 8 von 8.968 Petitionen wiegt 7,0, eines auf 900 nur
+    # 2,3; die Bezugsgröße w_max ist das seltenste überhaupt teilbare (2).
+    n = max(1, len(items))
+    df: Counter = Counter()
+    for it in items:
+        for t in it["tagset"]:
+            df[t] += 1
+    gewicht = {t: math.log(n / c) for t, c in df.items() if c}
+    w_max = math.log(n / 2) if n > 2 else 1.0
 
     index = defaultdict(list)
     for i, it in enumerate(items):
@@ -162,7 +238,7 @@ def compute_related(by_platform: dict[str, list[dict]]) -> int:
         scored = []
         for j in cand:
             other = items[j]
-            s = _score(it, other)
+            s = _score(it, other, gewicht, w_max)
             if s >= SIM_MIN_SCORE:
                 scored.append((s, other))
         if not scored:

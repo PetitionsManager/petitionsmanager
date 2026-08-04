@@ -97,6 +97,15 @@
 .plogo--v-marke{background-color:var(--brand-dark,var(--brand,var(--accent)));
   --pl-b1:var(--brand-dark,var(--brand,var(--accent)));
   --pl-b2:var(--brand2-dark,var(--brand2,var(--brand-dark,var(--brand,var(--accent)))))}
+/* ... aber NICHT hinter die EINGEBETTETE Marke. Die Regel darueber ist fuer
+   die Maskenvariante gedacht (dort IST der Hintergrund das Logo); bei
+   .plogo--svg liegt das Zeichen als <use> im Vordergrund und traegt seine
+   Farben in --pl-b1/--pl-b2. style.css stellt den Grund deshalb auf
+   transparent, wird hier aber mit (0,1,0) gegen (0,3,0) ueberstimmt — sichtbar
+   als vollflaechiger Markenblock hinter dem Schriftzug. Gemessen am
+   3.8.2026 auf der Plattformseite von Change.org: rgb(248,158,155) statt
+   durchsichtig, nur im Dunkelmodus. */
+:root[data-theme="dark"] .plogo--svg{background-color:transparent}
 
 
 /* ---- Verbleibende Overrides ----------------------------------------------
@@ -187,6 +196,9 @@
   .plogo--v-marke{background-color:var(--brand-dark,var(--brand,var(--accent)));
     --pl-b1:var(--brand-dark,var(--brand,var(--accent)));
     --pl-b2:var(--brand2-dark,var(--brand2,var(--brand-dark,var(--brand,var(--accent)))))}
+  /* Gegenstueck zur Zeile im Zweig data-theme="dark": kein Markenblock hinter
+     der eingebetteten Marke (Begruendung dort). */
+  :root[data-theme="auto"] .plogo--svg{background-color:transparent}
 
 
   /* Petitionsbilder */

@@ -4,11 +4,13 @@
  * Zweite Gestaltungsebene neben dem Hell/Dunkel-Design. Gesteuert genau wie
  * theme.css, nur über ein eigenes Attribut:
  *
- *   document.documentElement.dataset.layout = "klassisch" | "relief" | "magazin"
- *   → "klassisch" : KEINE Regel in dieser Datei. Es greift allein style.css,
- *                   das bisherige Erscheinungsbild bleibt unverändert. Genau
- *                   deshalb steht der Rückweg immer offen: eine Auswahl in den
- *                   Einstellungen, kein Zurückspielen von Dateien.
+ *   document.documentElement.dataset.layout = "relief" | "magazin"
+ *   → "klassisch" : ENTFALLEN am 3.8.2026 auf Nutzerwunsch. Der Wert stand für
+ *                   „keine Regel in dieser Datei", es griff allein style.css.
+ *                   Gespeicherte Einstellungen tragen ihn noch, deshalb schreibt
+ *                   loadPrefs() in app.js ihn beim Laden auf "relief" um — ohne
+ *                   das bliebe data-layout="klassisch" stehen und die App zeigte
+ *                   ein Layout, das nicht mehr wählbar ist.
  *   → "relief"    : Neumorphismus (Soft UI). EINE einzige Fläche für Grund,
  *                   Karte, Zeile und Knopf; Tiefe entsteht allein aus zwei
  *                   Schlagschatten. Rahmen, Trennlinien und farbige Füllungen
@@ -36,9 +38,9 @@
  *   Fußleiste  angesetzt, aktiv = Delle  schwebendes Milchglas
  *
  * „Relief" ist der Name in der App. Der Fachbegriff Neumorphismus passt nicht
- * in einen Drittel-Schalter (drei Beschriftungen auf ~110 px) und sagt einer
- * nicht-fachlichen Leserin nichts; das Wort steht deshalb im Erklärtext unter
- * dem Schalter (texts.js → settings.layoutHint).
+ * in eine Schalterhälfte und sagt einer nicht-fachlichen Leserin nichts; das
+ * Wort steht deshalb im Erklärtext unter dem Schalter
+ * (texts.js → settings.layoutHint).
  *
  * Reihenfolge im <head>: style.css → theme.css → layouts.css. Diese Datei
  * kommt zuletzt und kann deshalb beide überschreiben.
@@ -211,6 +213,12 @@
      Stufen kombinieren lässt. Steht in der Liste VORNE und wird deshalb
      zuoberst gezeichnet. */
   --nu-rim:inset 0 0 0 .0625rem var(--nu-edge);
+  /* Nur der dunkle Halbschatten, ohne das Gegenlicht. Auf einer Fläche in
+     --bg ergeben beide Hälften zusammen die Wölbung; auf einer GEFÜLLTEN
+     Fläche (Akzentfarbe) wird das Gegenlicht dagegen zu einem hellen Schein
+     rundherum, der die Farbe ausfranst (Nutzerbefund 3.8.26). Für solche
+     Knöpfe deshalb diese Stufe. */
+  --nu-drop:.375rem .375rem .8125rem var(--nu-lo);
 
   /* Auffangnetz: --shadow steckt in style.css in gut einem Dutzend Regeln
      (.pet, .srow, .io, .plat, .search …). Es hier umzulegen heißt,
@@ -364,10 +372,10 @@
 [data-layout="relief"] .hint-dismiss,
 [data-layout="relief"] .mainsearch__btn,
 [data-layout="relief"] .support__btn,
+[data-layout="relief"] .searchrow__btn,
 [data-layout="relief"] .io__btn,
 [data-layout="relief"] .filterbar__cross,
 [data-layout="relief"] .filterbar__reset,
-[data-layout="relief"] .pet__extlink,
 [data-layout="relief"] .wiz__next,
 [data-layout="relief"] .btn-secondary,
 [data-layout="relief"] .pabout__link,
@@ -380,10 +388,10 @@
 [data-layout="relief"] .hint-dismiss:active,
 [data-layout="relief"] .mainsearch__btn:active,
 [data-layout="relief"] .support__btn:active,
+[data-layout="relief"] .searchrow__btn:active,
 [data-layout="relief"] .io__btn:active,
 [data-layout="relief"] .filterbar__cross:active,
 [data-layout="relief"] .filterbar__reset:active,
-[data-layout="relief"] .pet__extlink:active,
 [data-layout="relief"] .wiz__next:active,
 [data-layout="relief"] .btn-secondary:active,
 [data-layout="relief"] .pabout__link:active,
@@ -391,9 +399,21 @@
 [data-layout="relief"] .to-top:active{opacity:1;filter:none;
   background:var(--bg);box-shadow:var(--nu-rim),var(--nu-in-s)}
 /* Die Hauptaktion einer Seite bleibt die Hauptaktion: größeres Relief und
-   fettere Schrift, nicht eine andere Farbe. */
-[data-layout="relief"] .wiz__next,
-[data-layout="relief"] .pet__extlink{box-shadow:var(--nu-rim),var(--nu-out)}
+   fettere Schrift. */
+[data-layout="relief"] .wiz__next{box-shadow:var(--nu-rim),var(--nu-out)}
+/* AUSNAHME seit 3.8.26 (Nutzerwunsch): „Petition öffnen" trägt als einziger
+   Knopf die gefüllte Akzentfarbe. Er muss aus der Reihe der gleichfarbigen
+   Relief-Knöpfe herausstechen — im Neumorphismus sind alle Flächen in --bg,
+   ein Knopf mehr oder weniger Relief reicht dafür nicht. Deshalb steht die
+   Regel HINTER dem Sammelselektor oben, sonst gewinnt dessen
+   background:var(--bg).
+   Ohne jedes Relief, und zwar genau wie der kleine runde Bruder .pet__ext
+   (Nutzerwunsch 3.8.26: „hover / klick wie beim Icon"). Beide sind dieselbe
+   Handlung an zwei Stellen; unterschiedliche Rückmeldungen ließen sie wie
+   zwei verschiedene Knöpfe wirken. Das Antippen meldet style.css mit
+   opacity:.82 zurück — deshalb hier KEIN eigener :active-Zweig mehr. */
+[data-layout="relief"] .pet__extlink{background:var(--accent);
+  color:var(--on-accent);box-shadow:none}
 [data-layout="relief"] .wiz__next:disabled{opacity:.45;
   box-shadow:var(--nu-rim),var(--nu-in-s)}
 /* Spenden: das Orange bleibt als SCHRIFT erhalten (--on-hot-soft, AA-fest in
@@ -443,7 +463,32 @@
    Ruckeln, und die Mulde allein ist deutlicher. */
 [data-layout="relief"] .acc-body--plats .plat:active{transform:none;
   box-shadow:var(--nu-rim),var(--nu-in)}
-[data-layout="relief"] .plat .plogo{--logo-h:2.5rem}
+/* Logo HINTER die Beschriftung, wie in der Einstellungszeile (.opt) —
+   Nutzerwunsch 3.8.26. Vorher stand es als erstes Flex-Kind links und schob den
+   Text nach rechts; weil .plogo mit flex:none nicht schrumpft, war die
+   Textbreite je Marke unterschiedlich. Absolut gesetzt beansprucht es keine
+   Breite mehr, alle Zeilen fangen an derselben Stelle an.
+   Nur für „relief": „magazin" ordnet dieselbe .plat als Bento-Kachel mit großem
+   Logo an (siehe unten), dort wäre die absolute Platzierung falsch.
+   right:4.5rem hält die Marke aus dem Pfeil heraus. Die 3.5rem, die hier
+   zuerst standen, rechneten mit einem 2.25rem breiten Pfeil und vergaßen den
+   Innenabstand der Zeile: der Pfeil ist in „relief" 2.5rem breit (siehe
+   .plat__chev unten) und beginnt damit 1.125rem + 2.5rem = 3.625rem vor der
+   Kante — gemessen lagen Logo und Pfeil in allen zehn sichtbaren Zeilen 2 px
+   ÜBEREINANDER (Nutzerbefund 3.8.26 „Abstand Logo und Button fehlt").
+   4.5rem = 1.125 Innenabstand + 2.5 Pfeil + .875 Lücke. */
+[data-layout="relief"] .acc-body--plats .plat{position:relative;overflow:hidden}
+[data-layout="relief"] .acc-body--plats .plat .plogo{--logo-h:2.5rem;
+  position:absolute;right:4.5rem;top:50%;transform:translateY(-50%);
+  z-index:0;pointer-events:none}
+/* Schutzzone für den Text. Mit der vierten Wurzel (app.js → logoVars, 3.8.26)
+   ist die normierte Breite AR^0,75 × --logo-h; die breiteste Marke
+   (Bundestag, 6,17:1) misst damit 3,914 × 2.5rem = 9,79rem statt vorher
+   6,2rem. Ihr linker Rand liegt bei 4.5rem + 9,79rem = 14,29rem von der
+   Kante. Der Textblock endet 4,625rem vor der Kante plus dieser Zone, also
+   bei 4,625 + 11.5 = 16,125rem — rund 1,8rem Luft vor der Marke. */
+[data-layout="relief"] .acc-body--plats .plat__body{position:relative;z-index:1;
+  padding-right:11.5rem}
 [data-layout="relief"] .plat__name{font-size:1.0625rem;font-weight:750}
 /* Der Pfeil wird eine ausgefräste Buchse mit dem Symbol im Akzentton. Auf
    einer erhabenen Karte ist eine Mulde das Richtige: ein zweiter Buckel
@@ -487,26 +532,40 @@
 [data-layout="relief"] .pet__head:active{background:transparent}
 /* Kein Relief am Bild: randlos ist die Kante keine mehr, und ein Schatten
    ließe sich hier ohnehin nicht vertiefen (siehe Kopf dieses Abschnitts). */
+/* 4 → 6rem (Nutzerwunsch 3.8.26: „Bildstreifen etwas größer / mehr Höhe").
+   Gilt nur für die ZUgeklappte Karte — aufgeklappt setzt sizeThumb() die Höhe
+   aus den echten Bildmaßen, damit nichts beschnitten wird. */
 [data-layout="relief"] .pet__thumb{order:-1;flex:0 0 100%;width:100%;
-  height:4rem;border-radius:0;margin:0 0 1rem;box-shadow:none}
+  height:6rem;border-radius:0;margin:0 0 1rem;box-shadow:none}
 /* Aufgeklappt wächst dasselbe Band weiter, statt (wie in „klassisch") erst
    von der Briefmarke nach oben zu springen. Die 11rem aus style.css bleiben
    der Rückfall, solange die Bildmaße fehlen (loading="lazy"). */
 [data-layout="relief"] .pet.open .pet__head{padding:0 0 1rem}
 [data-layout="relief"] .pet.open .pet__main{padding-left:1.125rem}
-/* Ohne Bild bleibt das Band flach. Der Platzhalter kennt kein
-   Seitenverhältnis, sizeThumb() lässt ihn deshalb auf dem CSS-Wert stehen –
-   aufgeklappt wären das die 11rem aus style.css, also ein leerer Streifen mit
-   einem kleinen Logo darin. Und das ist hier nicht der Ausnahmefall: Bundestag
-   und Europäisches Parlament liefern grundsätzlich keine Bilder, zusammen
-   8.001 Petitionen. Das Logo wächst mit, bleibt aber flächennormiert. */
-[data-layout="relief"] .pet.open .pet__thumb--ph{height:6rem}
-/* Die Bezugsmaße sind am flachsten Logo abgemessen, nicht am Durchschnitt:
-   --logo-h ergibt die Höhe --logo-h/Wurzel(Seitenverhältnis), beim
-   Bundestag-Schriftzug (6,17:1) also nur 40 % davon. Mit 1.5rem wären das
-   9,7 px in einem 64 px hohen Band gewesen – unlesbar. */
-[data-layout="relief"] .pet__thumb--ph .plogo{--logo-h:2rem}
-[data-layout="relief"] .pet.open .pet__thumb--ph .plogo{--logo-h:3.25rem}
+/* Ohne Bild KEIN Band (Nutzerwunsch 3.8.26: „kein Bild soll auch kein Logo
+   haben"). Vorher stand hier ein 6rem hoher leerer Streifen mit einem kleinen
+   Plattform-Logo darin – gedacht als Ersatz, damit die Kacheln einer
+   gemischten Liste dieselbe Rhythmik behalten. Nur ist das nicht der
+   Ausnahmefall, sondern die Mehrheit: Bundestag und Europäisches Parlament
+   liefern grundsätzlich keine Bilder, zusammen 8.001 Petitionen. Der leere
+   Streifen kostete dort 112 px Höhe (96 + 1rem Abstand), ohne etwas zu zeigen,
+   was nicht schon im Kopf der Plattformseite steht.
+   Nur für „relief": im Magazin ist das Bild die halbe Kachel, dort bliebe an
+   seiner Stelle ein Loch – der Platzhalter bleibt da.
+   Ausgeblendet statt weggelassen, aus zwei Gründen: app.js setzt ihn auch
+   nachträglich ein, wenn ein Fremdbild nicht lädt (petCard → onerror), und die
+   nächste Regel braucht ihn als Nachbarn im Markup. */
+[data-layout="relief"] .pet__thumb--ph{display:none}
+/* Die Kopfzeile gibt ihren oberen Innenabstand an das randlose Band ab
+   (padding:0 oben, siehe weiter oben). Fällt das Band weg, klebte der Titel an
+   der Kartenkante – der Textblock holt sich den Abstand deshalb selbst. */
+[data-layout="relief"] .pet__thumb--ph + .pet__main{padding-top:1rem}
+/* Es sei denn, die Kategorie-Fahne hängt schon oben in der Karte: sie bringt
+   ihren unteren Außenabstand mit, beides zusammen wäre doppelt. Die Fahne
+   steht im Markup VOR .pet__head (app.js → petCard), der Nachbarschafts-
+   selektor greift also. */
+[data-layout="relief"] .pet__catbar + .pet__head .pet__thumb--ph
+  + .pet__main{padding-top:0}
 [data-layout="relief"] .pet__title{font-size:.9375rem;font-weight:700;
   line-height:1.4}
 /* Aufklapper und Fremdlink als Buchsen, wie der Pfeil in der Plattformzeile.
@@ -514,25 +573,49 @@
 [data-layout="relief"] .pet__toggle{width:2.125rem;height:2.125rem;
   border-radius:50%;display:flex;align-items:center;justify-content:center;
   color:var(--accent);box-shadow:var(--nu-in-s);font-size:.8125rem}
-[data-layout="relief"] .pet__ext{border-radius:50%;color:var(--accent);
-  box-shadow:var(--nu-in-s);font-size:.875rem}
+/* Gefüllt wie die große Schwester .pet__extlink (Nutzerwunsch 3.8.26), aber
+   OHNE Buchse: --nu-in-s legt sein Gegenlicht als hellen Bogen an den unteren
+   rechten Innenrand, und auf 36 px Durchmesser sah das aus wie ein heller
+   Verlauf um den Knopf herum statt wie Tiefe (Nutzerbefund 3.8.26). Eine
+   gefüllte Fläche in Akzentfarbe braucht die Reliefsprache hier nicht — sie
+   sticht schon durch die Farbe heraus. Das Antippen meldet style.css mit
+   opacity:.82 zurück; der Reliefzweig dafür ist bewusst entfallen. */
+[data-layout="relief"] .pet__ext{border-radius:50%;
+  background:var(--accent);color:var(--on-accent);
+  box-shadow:none;font-size:.875rem}
 /* Der rechte Innenabstand der Kopfzeile ist für das randlose Band gefallen –
    die letzte Buchse in der Zeile bringt ihn selbst mit. Beide Fälle: mit
    Fremdlink ist .pet__ext das letzte Kind, ohne ihn .pet__toggle. */
 [data-layout="relief"] .pet__head>.pet__ext:last-child,
 [data-layout="relief"] .pet__head>.pet__toggle:last-child{
   margin-right:1.125rem}
-[data-layout="relief"] .pet__ext:active{background:transparent;
-  box-shadow:var(--nu-out-s)}
+/* Die beiden Knöpfe standen 8 px auseinander (die Spaltenlücke der Kopfzeile)
+   und wirkten wie ein Paar statt wie zwei getrennte Handlungen — Aufklappen
+   bleibt in der App, der Fremdlink führt hinaus. Nutzerwunsch 3.8.26: mehr
+   Abstand. Als eigener Außenabstand statt über die Lücke der Zeile, die auch
+   zwischen Bild und Text gilt. */
+[data-layout="relief"] .pet__head>.pet__toggle + .pet__ext{margin-left:.5rem}
+/* Kein Reliefzweig mehr fürs Antippen: --nu-out-s brächte dasselbe Gegenlicht
+   zurück, das oben entfallen ist. Es bleibt bei opacity:.82 aus style.css. */
 /* Kategorie: vom randlosen Balken zur kleinen erhabenen Plakette oben in der
    Karte. Der Balken lief über die ganze Breite und trug eine Fläche in
    --accent-soft – beides fällt. width:auto plus Außenabstand genügt, .pet ist
    kein Flex-Container. */
+/* Seit 3.8.26 eine FAHNE statt einer freistehenden Pille (Nutzerwunsch): sie
+   sitzt oben bündig am Kartenrand und hängt nach unten. Deshalb margin-top:0
+   und oben eckig / unten rund — eine rundum runde Pille kann nicht am Rand
+   kleben, sie sähe dort abgeschnitten aus. Der Abstand nach UNTEN war der
+   zweite Punkt: vorher zog -.25rem die Fahne sogar ins Bild hinein.
+   Der linke Abstand ist seit 3.8.26 an --radius gebunden statt fest 1.125rem:
+   die Kartenecke ist 1.5rem rund, die Fahne begann also noch INNERHALB des
+   Bogens. Der sichtbare Spalt war dadurch oben schmal und lief nach unten
+   auseinander. Mit --radius fängt die Fahne genau dort an, wo der Bogen endet,
+   und der Spalt ist über ihre ganze Höhe gleich. */
 [data-layout="relief"] .pet__catbar,
 [data-layout="relief"] .pet__catbar:active{width:auto;border-bottom:0;
-  display:inline-flex;margin:1rem 0 -.25rem 1.125rem;padding:.375rem .8125rem;
-  border-radius:999px;background:var(--bg);color:var(--accent);filter:none;
-  box-shadow:var(--nu-rim),var(--nu-out-s)}
+  display:inline-flex;margin:0 0 .875rem var(--radius);padding:.5rem .8125rem;
+  border-radius:0 0 .75rem .75rem;background:var(--bg);color:var(--accent);
+  filter:none;box-shadow:var(--nu-rim),var(--nu-out-s)}
 [data-layout="relief"] .pet__catbar:active{
   box-shadow:var(--nu-rim),var(--nu-in-s)}
 /* Abzeichen „unterschrieben" / „beendet": Mulden, Farbe bleibt in der
@@ -654,6 +737,14 @@
 [data-layout="relief"] .favbtn:active{transform:none;
   box-shadow:var(--nu-out-s)}
 [data-layout="relief"] .favbtn:disabled{box-shadow:none}
+/* „Zum Archiv" steht direkt neben diesem Stern und war als flacher Textlink
+   nicht als Bedienelement zu erkennen (Nutzerwunsch 3.8.26). Gleiche
+   Reliefsprache: herausstehend, beim Antippen eingedrückt. Der Rahmen aus
+   style.css muss weg — im Neumorphismus formt Licht die Kante, nicht eine
+   Linie. */
+[data-layout="relief"] .archlink{background:var(--bg);border:0;
+  box-shadow:var(--nu-out-s)}
+[data-layout="relief"] .archlink:active{box-shadow:var(--nu-in-s)}
 
 /* ---- Logo ÜBER der Beschriftung (schmale Geräte) ----------------------------
    Nebeneinander geht auf einem Telefon nicht auf, nachgemessen bei 375 px:
@@ -683,13 +774,20 @@
 @media (max-width:30rem){
   [data-layout="relief"] .acc-body--plats .plat{flex-wrap:wrap;
     gap:.875rem 1rem}
+  /* position/padding nehmen zurück, was oben für breite Ansichten gilt: hier
+     steht das Logo ÜBER dem Text und braucht wieder seinen Platz im Fluss. */
+  [data-layout="relief"] .acc-body--plats .plat__body{padding-right:0}
   [data-layout="relief"] .acc-body--plats .plat .plogo{
+    position:static;transform:none;
     order:-1;flex:0 0 100%;width:auto;height:2.125rem;margin:0;
     -webkit-mask-size:calc(var(--logo-ar,4) * var(--logo-h,1.75rem)
                            * var(--logo-k,.5)) auto;
             mask-size:calc(var(--logo-ar,4) * var(--logo-h,1.75rem)
                            * var(--logo-k,.5)) auto}
   [data-layout="relief"] .opt{flex-wrap:wrap;gap:.75rem 1rem}
+  /* Hier steht das Logo ÜBER dem Text, nichts überlappt — die Schutzzone aus
+     style.css würde dem Namen also nur grundlos Breite wegnehmen. */
+  [data-layout="relief"] .opt__body{padding-right:0}
   /* Hier fällt zugleich die absolute Platzierung aus style.css: dort lag das
      Logo HINTER der Beschriftung und war auf 22 % gedimmt, damit die Schrift
      darüber lesbar blieb (--ink auf Bundestag-Schwarz wären sonst 1,03:1
@@ -763,6 +861,23 @@
 [data-layout="relief"] .signed-item__t mark,
 [data-layout="relief"] .signed-item__meta mark{background:transparent;
   color:var(--on-hot-soft);font-weight:750}
+/* „Unterschrieben am": abgesetzt, aber ohne Linie — in einer Oberfläche ohne
+   Kanten trennt der Abstand (dasselbe Rezept wie zwischen den Sprachgruppen).
+   Die Haarlinie aus style.css deshalb weg, der Abstand dafür größer. */
+[data-layout="relief"] .signed-item__signed{border-top:0;padding-top:0;
+  margin-top:.6875rem}
+
+/* Vorschlagsliste: eine erhabene Fläche über der Seite. Die Trennlinien
+   zwischen den Einträgen fallen weg (Gesetz 4), der ausgewählte Eintrag sinkt
+   ein statt sich einzufärben (Gesetz 5) — dieselbe Sprache wie bei den
+   Listenzeilen. */
+[data-layout="relief"] .ac{background:var(--bg);border:0;border-radius:1.25rem;
+  box-shadow:var(--nu-rim),var(--nu-out);padding:.375rem}
+[data-layout="relief"] .ac__i{border-radius:.875rem}
+[data-layout="relief"] .ac__i + .ac__i{border-top:0}
+[data-layout="relief"] .ac__i.is-on,
+[data-layout="relief"] .ac__i:hover{background:var(--bg);
+  box-shadow:var(--nu-in-s)}
 [data-layout="relief"] .signed-empty,
 [data-layout="relief"] .signed .signed-empty{box-shadow:var(--nu-in-s);
   border-radius:var(--radius)}
@@ -933,10 +1048,12 @@
   [data-layout="relief"] .io__btn,
   [data-layout="relief"] .filterbar__cross,
   [data-layout="relief"] .filterbar__reset,
-  [data-layout="relief"] .pet__extlink,
   [data-layout="relief"] .wiz__next,
   [data-layout="relief"] .to-top{outline:.0625rem solid var(--ink);
     outline-offset:-.0625rem}
+  /* .pet__extlink und .pet__ext stehen hier NICHT mehr: sie sind gefüllt und
+     tragen ihren Kontrast in der Fläche, eine zusätzliche Kante machte daraus
+     einen doppelt gerahmten Knopf. */
   /* Gewählt/gedrückt muss auch hier zu erkennen sein, und zwar nicht über
      Tiefe: doppelte Kante. */
   [data-layout="relief"] .seg__b.on,
@@ -1046,11 +1163,17 @@
    bleibt davon unberührt — nur die Platzierung im Raster ändert sich. */
 [data-layout="magazin"] .accordion.open>.acc-body--plats{display:grid}
 [data-layout="magazin"] .acc-body--plats{
-  /* Zeilenhöhe gemessen aufgebaut, nicht geschätzt. Seit die Flaggen von den
-     Kacheln weg sind, hat der Name die volle Breite und bricht seltener um:
-     der Text endet jetzt spätestens bei 126 px (Change.org), Logo und unterer
-     Rand belegen 54. 12rem = 192 px lassen dazwischen 12 px Luft. */
-  grid-template-columns:1fr 1fr;grid-auto-rows:12rem;
+  /* Zeilenhöhe gemessen aufgebaut, nicht geschätzt. Die alte Rechnung
+     (Text endet bei 126 px, 12rem reichen) galt für die Zahlen vom 28.7. —
+     mit den Live-Daten vom 3.8.26 bricht „N Petitionen" auf der 116 px
+     breiten Innenfläche IMMER um (schon „26 Petitionen" misst 127 px), und
+     der vollste Fall (OpenPetition: Name 2 Zeilen + Zahl 2 Zeilen +
+     „+neu"-Zeile) lief 25 px ins Logo (WeAct 8, WeMove 3, nachgemessen).
+     13.5rem = 216 px plus line-height 1.2 der Meta-Zeile decken ihn mit
+     ≥6 px Luft. MESSKRITERIUM für künftige Datenlagen: Unterkante
+     .plat__body bleibt ≥6 px über der Logo-Oberkante der vollsten Kachel;
+     die Kacheln bleiben untereinander gleich groß. */
+  grid-template-columns:1fr 1fr;grid-auto-rows:13.5rem;
   grid-auto-flow:row dense;gap:.75rem;padding:0 0 .5rem}
 
 /* Vollton statt Tönung: die Kachel trägt die echte Markenfarbe, --brand
@@ -1080,6 +1203,16 @@
   background-color:var(--brand);background-image:none;color:var(--on-brand);
   box-shadow:inset 0 0 0 .0625rem var(--tile-edge),
              0 .25rem .75rem rgba(40,30,15,.10)}
+/* Fühlbares Antippen: die Kachel sinkt minimal ein. Hinter dem
+   Bewegungs-Guard, damit die Einstellung „Bewegung reduzieren" des
+   Geräts respektiert wird; ohne Übergang bleibt der Tipp trotzdem
+   funktional. */
+@media (prefers-reduced-motion:no-preference){
+  [data-layout="magazin"] .acc-body--plats .plat{
+    transition:transform .12s ease}
+  [data-layout="magazin"] .acc-body--plats .plat:active{
+    transform:scale(.98)}
+}
 /* Das selbstgebaute Monogramm weicht dem echten Logo. Auf der Kachel wird es
    WEISS gesetzt, weil die Fläche im Vollton der Hausfarbe steht — die Marke
    in ihrer eigenen Farbe wäre darauf unsichtbar. Ein <img> könnte das nicht:
@@ -1087,13 +1220,18 @@
    Inzwischen hat jede der elf Plattformen eine Datei. */
 [data-layout="magazin"] .acc-body--plats .plat .plogo{
   position:absolute;bottom:var(--pad);left:var(--pad);
-  --logo-h:3rem;background-color:#ffffff;
-  /* Zwei Wege, dieselbe Aussage: background-color färbt die Maske, color und
-     die Rollenvariablen die eingebettete Marke (style.css, Abschnitt
-     „Eingebettete Marke"). Fehlte das Zweite, kämen mehrfarbige Marken hier
-     in ihrer Hausfarbe auf der eigenen Hausfarbe heraus. */
+  --logo-h:3rem;
+  /* color und die Rollenvariablen setzen die EINGEBETTETE Marke auf Weiß —
+     ohne sie kämen mehrfarbige Marken in ihrer Hausfarbe auf der eigenen
+     Hausfarbe heraus (style.css, Abschnitt „Eingebettete Marke"). */
   color:#ffffff;--pl-b1:#ffffff;--pl-b2:#ffffff;
   max-width:calc(100% - 2 * var(--pad))}
+/* Die weiße FLÄCHE gehört allein zur Masken-Rückfallebene — dort IST der
+   background die Logoform. Auf der eingebetteten Marke (--svg) stand er als
+   voller weißer Kasten VOR der weißen Zeichnung: so sah der Fehler vom
+   3.8.26 aus, weiße Rechtecke statt Logos auf allen Magazin-Kacheln. */
+[data-layout="magazin"] .acc-body--plats .plat .plogo:not(.plogo--svg){
+  background-color:#ffffff}
 /* Auf den großen Kacheln nur GRÖSSER, nicht anders eingerückt. Rechts bleibt
    Platz für den Pfeil, deshalb dort mehr Abzug. */
 [data-layout="magazin"] .acc-body--plats .plat--xl .plogo,
@@ -1114,7 +1252,24 @@
 [data-layout="magazin"] .acc-body--plats .plat__name{font-size:1.375rem;
   font-weight:800;letter-spacing:-.03em;line-height:1.15}
 [data-layout="magazin"] .acc-body--plats .plat__meta{color:inherit;
-  font-size:1.25rem;font-weight:700;letter-spacing:-.02em;margin-top:.125rem}
+  font-size:1.25rem;font-weight:700;letter-spacing:-.02em;margin-top:0;
+  line-height:1.2}
+/* Bento-Kennzahl (3.8.26): Zahl als Blickfang, Einheit darunter — beendet
+   den Fransen-Umbruch („735 / Petitionen"), den die 116-px-Innenfläche
+   erzwang. BEIDE Stufen bleiben Großtext im Sinne der WCAG (≥18,66 px
+   fett), das 3:1-Kalkül der Kacheln bleibt unangetastet; deshalb ist die
+   Einheit nicht kleiner als 1.1875rem. Das „+neu"-Abzeichen rutscht durch
+   die Block-Einheit von selbst auf eine eigene Zeile. */
+[data-layout="magazin"] .acc-body--plats .plat__num{display:block;
+  font-size:1.75rem;line-height:1.05;letter-spacing:-.03em}
+[data-layout="magazin"] .acc-body--plats .plat__unit{display:block;
+  font-size:1.1875rem;line-height:1.15}
+/* Abstand und Schrift des Abzeichens knapp gehalten: mit der eigenen
+   Abzeichen-Zeile stand die vollste Kachel (OpenPetition) sonst bei nur
+   3–4 px über dem Logo. .75rem ist auf dem EIGENEN Abzeichen-Grund
+   zulässiger Kleintext (dort gemessen ≥8:1, nicht auf der Markenfarbe). */
+[data-layout="magazin"] .acc-body--plats .plat__new{margin:.125rem 0 0;
+  font-size:.75rem;line-height:1.1}
 /* In der kleinen Kachel bleibt Platz für Name und Zahl – der Untertitel
    käme auf vier Zeilen. Nur die große Kachel zeigt ihn (siehe unten). */
 [data-layout="magazin"] .acc-body--plats .plat__tag{display:none}
@@ -1137,6 +1292,19 @@
   top:auto;left:auto;width:2.5rem;height:2.5rem;border:0;
   background-color:var(--on-brand);background-image:none;
   color:var(--brand);font-size:.875rem}
+/* „+neu" in der Kachelecke — NUR auf den großen Kacheln. Auf der 116 px
+   schmalen Innenfläche der kleinen gibt es keinen kollisionsfreien
+   Eckplatz (oben läuft der Name bis zweizeilig voll, unten das Logo bis
+   zur vollen Breite); dort bleibt das Abzeichen als eigene Zeile im
+   Fluss (siehe Kennzahl-Kommentar). Der padding-Schutz am Namen hält die
+   Ecke auch für künftige lange Wide-Namen frei („Europäisches Parlament"
+   bräche sonst ins Abzeichen). */
+[data-layout="magazin"] .acc-body--plats .plat--xl .plat__new,
+[data-layout="magazin"] .acc-body--plats .plat--wide .plat__new{
+  position:absolute;top:var(--pad);right:var(--pad);margin:0}
+[data-layout="magazin"] .acc-body--plats .plat--xl .plat__name,
+[data-layout="magazin"] .acc-body--plats .plat--wide .plat__name{
+  padding-right:4.5rem}
 /* Hier stand die Regel für .plat--xl/.--wide .plogo ein ZWEITES Mal, wörtlich
    wie weiter oben. Beim Vereinheitlichen des Innenabstands hätte die späte
    Kopie die neue Variante wieder überschrieben — entfernt. */
@@ -1147,6 +1315,12 @@
 [data-layout="magazin"] .acc-body--plats .plat--xl{
   grid-column:span 2;grid-row:span 2}   /* Innenabstand kommt aus --pad */
 [data-layout="magazin"] .acc-body--plats .plat--xl .plat__name{font-size:2rem}
+/* Auf der 2×2-Kachel füllt die groß gesetzte Kennzahl die gemessene Leere
+   (189 px zwischen Untertitel und Logo). Ein größeres Logo könnte das
+   nicht: die Bundestagsmarke (Verhältnis 6,17) steht mit ihrer Breite
+   längst am max-width-Anschlag, mehr Bezugshöhe verpufft dort. */
+[data-layout="magazin"] .acc-body--plats .plat--xl .plat__num{
+  font-size:3.25rem;line-height:1;letter-spacing:-.04em}
 [data-layout="magazin"] .acc-body--plats .plat--xl .plat__meta{font-size:1.5rem}
 [data-layout="magazin"] .acc-body--plats .plat--xl .plat__tag{display:block;
   color:inherit;font-size:1.25rem;font-weight:700;line-height:1.35;
@@ -1217,3 +1391,32 @@
   -webkit-backdrop-filter:blur(1.25rem) saturate(1.6);
   backdrop-filter:blur(1.25rem) saturate(1.6);
   box-shadow:0 .5rem 1.75rem rgba(40,30,15,.16)}
+
+/* ---- Abstands-/Tipp-Feinschliff (3.8.26, gemessene Inventur) ----
+   1. Abschnittsgrenzen gleichrhythmisch: Liste→Unterstützung misst 28 px,
+      Unterstützung→Rechtliches klebte bei 12 — beide Grenzen gleich.
+   2. Sortier-Chips (30 px), Schlagwort-Knöpfe (30) und der Zurück-Knopf
+      (35) lagen unter der App-eigenen Systemhöhe der Segment-Knöpfe
+      (40 px) und unter jeder Tipp-Empfehlung; min-height hebt nur die
+      Trefffläche, Schrift und Pillenform bleiben. Einstellungen/Profil
+      sind layoutneutral und bleiben unangetastet (Relief-Verbot). */
+[data-layout="magazin"] .support--legal{margin-top:1.75rem}
+[data-layout="magazin"] .chip,
+[data-layout="magazin"] .tag,
+[data-layout="magazin"] .backbtn{min-height:2.5rem}
+/* Aufklapper als gleichwertige Tippfläche neben dem Fremdlink-Kasten.
+   In der Basis ist .pet__toggle nur ein nacktes 23×15-px-Zeichen, das 4 px
+   neben dem gefüllten 36-px-Kasten hing (Nutzerbefund 3.8.26 per
+   Bildschirmfoto; die Mitten stimmten, Gestalt und Abstand nicht — das
+   Relief hat seit v27 eine eigene Buchsen-Regel, das Magazin ging leer
+   aus). Neutral gefüllt als Zweitrang neben der Akzent-Primäraktion, in
+   der Kastensprache des Magazins. */
+[data-layout="magazin"] .pet__toggle{width:2.25rem;height:2.25rem;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:.625rem;background:var(--line);color:var(--ink);
+  font-size:.8125rem;margin-right:.75rem}
+/* Ohne Fremdlink ist der Aufklapper das letzte Kind — der Trennabstand
+   entfällt. Und das padding-left, das den NACKTEN Chevron beim Aufklappen
+   ausglich (style.css), schöbe das Zeichen im Kasten aus der Mitte. */
+[data-layout="magazin"] .pet__head>.pet__toggle:last-child{margin-right:0}
+[data-layout="magazin"] .pet.open .pet__toggle{padding-left:0}

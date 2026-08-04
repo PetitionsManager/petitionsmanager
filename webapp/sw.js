@@ -115,8 +115,135 @@
    Mit v26 kommt außerdem der Abschnitt „Rechtliches" auf die Hauptseite:
    Impressum und „Rechte an den Inhalten" mit einer Tabelle je Plattform. Kein
    eigener Versionssprung nötig, weil v26 noch nicht ausgeliefert war — die
-   geänderten app.js/style.css reisen mit (app.js/style.css) */
-var CACHE = "pm-cache-v26";
+   geänderten app.js/style.css reisen mit (app.js/style.css)
+   v27 (2026-08-03): Sammelrunde aus 16 Oberflächenwünschen des Nutzers.
+   Layout „klassisch" ENTFERNT — alte gespeicherte Werte schreibt loadPrefs()
+   auf „relief" um, sonst hinge man in einer Ansicht fest, die es nicht mehr
+   zur Auswahl gibt. Außerdem: Überschriften über den Tipp-Kästen, erweiterter
+   Hinweis zum Datenverbrauch der Bilder, Plattform-Logos in voller Markenfarbe
+   (mit Schutzzone für den Text statt opacity:.22), Logo hinter der Beschriftung
+   auch in Plattformliste und Cross-Suche, größeres Logo im Seitenkopf,
+   „Über diese Plattform" ohne eigenes Logo und über die Knöpfe gerückt,
+   Archiv-Knopf mit Relief, „Petition öffnen" in Akzentfarbe (7,69 hell /
+   7,91 dunkel), Sortier-Chips ohne Vor-Icons mit 45°-Pfeilen, Lupenknopf an
+   beiden Suchen, höherer Bildstreifen mit Kategorie-Fahne, gedeckelte
+   Bildhöhe in Beschreibungen, mehr Abstände.
+   Dazu die Seite „Meine unterzeichneten Petitionen": Logospalte fester Breite,
+   damit die Titel bündig beginnen (die Marken sind flächen-, nicht
+   breitengleich), und ein Hinweis, worüber die Suche dort läuft — sie erfasst
+   Titel, Plattformname UND Adresse, nicht nur den Titel.
+   Nachtrag aus drei Nutzerbefunden am Bildschirm (v27 war noch nicht
+   ausgeliefert, deshalb kein eigener Versionssprung):
+   1. Die Lupenknöpfe waren Ovale (48 × 54,5 bzw. 48 × 49 px) — ohne feste Höhe
+      streckt der Flexcontainer sie auf die Feldhöhe. Feldhöhe und Durchmesser
+      kommen jetzt aus einer Variablen --ctl je Suchzeile. Dabei fiel auf, dass
+      .search als einziges Suchfeld kein font:inherit hatte und in Arial
+      schrieb; daher auch die zwei verschiedenen Höhen.
+   2. In der Plattformliste lagen Logo und Pfeil 2 px übereinander: right:3.5rem
+      rechnete mit einem 2.25rem breiten Pfeil und ohne den Innenabstand der
+      Zeile. Jetzt 4.5rem, Schutzzone um dieselbe 1rem mit.
+   3. Ohne Vorschaubild entfällt in „relief" der ganze Bildstreifen. Er war ein
+      leerer 112-px-Balken mit kleinem Logo — bei Bundestag und Europäischem
+      Parlament (8.001 Petitionen) der Normalfall. „Magazin" behält ihn, dort
+      ist das Bild die halbe Kachel.
+   Zweiter Nachtrag, neun weitere Punkte vom Bildschirm:
+   4. „Petition öffnen" (rund) verliert seine Buchse — das Gegenlicht von
+      --nu-in-s sah auf 36 px aus wie ein heller Schein um den Knopf. Für die
+      große Schwester gibt es dafür --nu-drop: Schatten ohne Gegenlicht.
+   5. Plattform-Kopf neu geordnet: Zurück-Zeile oben, darunter Logo links und
+      Name rechts. Der Name steht damit auch im Inhalt; syncPageTitle() blendet
+      den doppelten Seitentitel aus (Selektor um .phead__name erweitert).
+   6. Kategorie-Fahne beginnt jetzt bei --radius statt 1.125rem — vorher fing
+      sie noch innerhalb des Eckbogens an.
+   7. Sortier-Chips: „Datum ↑/↓" und „Unterschriften ↑/↓" mit geraden Pfeilen,
+      Bedeutung im aria-label.
+   8. Startdatum hinter der Unterschriftenzahl in der Kachel.
+   9. Unterzeichnete Petitionen tragen Unterschriftenzahl und Startdatum;
+      „Unterschrieben am" steht abgesetzt darunter. Beides wird beim Markieren
+      mitgespeichert (toggleSigned), weil der Profiltab keine Listen nachlädt;
+      liegt die Liste doch im Speicher, gilt die frischere Zahl.
+   10. Autocomplete an allen drei Suchfeldern (attachAutocomplete). Die
+      Hauptsuche lädt die Listen beim ersten Antippen nach.
+   11. NICHT bestellt, beim Messen gefunden: im Dunkelmodus lag hinter jeder
+      eingebetteten Marke ein vollflächiger Farbblock. theme.css setzt den
+      Grund für .plogo--v-marke (0,3,0) und überstimmt damit das
+      background-color:transparent von .plogo--svg (0,1,0) aus style.css.
+      Gegenzeile in BEIDEN Theme-Zweigen ergänzt.
+   Dritter Nachtrag, zehn weitere Punkte:
+   12. „Petition öffnen" jetzt flach gefüllt wie der kleine runde Bruder
+      .pet__ext — beide aus den Relief-Sammelselektoren genommen.
+   13. Aufklapp- und Fremdlink-Knopf 16 statt 8 px auseinander.
+   14. Symbole in den runden Knöpfen: line-height:1 macht den Kasten ein Em
+      hoch. Danach lag nur noch der Chevron daneben (gemessen 6 % zu tief und
+      zu weit links), der bekommt einen eigenen Korrekturwert.
+   15. Kalender-Icon steht hinter dem Datum, wie die Feder hinter der Zahl.
+   16. Kicker „SUCHE: …" und der ganze Begrüßungsblock der Hauptseite sind weg
+      (Nutzerwunsch). .pagekick:empty blendet die leere Zeile aus.
+   17. LOGONORMIERUNG: --logo-k rechnet mit der VIERTEN statt der zweiten
+      Wurzel des Seitenverhältnisses. Breite Schriftzüge wachsen dadurch um
+      rund die Hälfte (Bundestag von 40 auf 63 % der Bezugshöhe). Alle
+      Schutzzonen dahinter neu gemessen und nachgezogen: .plat__body 7.75 →
+      11.5rem, .opt__body 8 → 11.25rem, .signed-item__logo 3.75 → 5rem bei
+      kleinerem Bezugsmaß.
+   18. Assistenten-Zeile: Logo hinter den Text, wie in allen anderen Listen.
+   19. Flaggen überall als Kreis — dasselbe Rezept wie bei .grp-ic: Zeichen
+      größer als die Blende, overflow:hidden schneidet zu.
+   20. europarl_scraper.py: die Kurzbeschreibung war die Überschrift. „Petition
+      Summary" steht zweimal auf der Seite, die alte Suche brach schon beim
+      ersten Vorkommen ab. Wirkt erst nach dem nächsten Scrape-Lauf.
+   Vierter Nachtrag (andere Sitzung, 3.8.26 abends), nur Magazin:
+   21. Auf den Bento-Kacheln standen weiße Rechtecke statt der Marken: die
+      Magazin-Regel füllte .plogo weiter mit background-color:#ffffff — bei
+      der CSS-Maske WAR das die Logoform, vor der eingebetteten Marke ist es
+      ein Kasten davor (dasselbe Muster wie Punkt 11). Die weiße Fläche gilt
+      jetzt nur noch der Masken-Rückfallebene (:not(.plogo--svg)).
+   22. Kachelraster 12rem → 13.5rem plus Meta-Zeile auf line-height 1.2:
+      „N Petitionen" bricht auf der 116-px-Innenfläche immer um, und der
+      vollste Textblock (OpenPetition, Name zweizeilig + „+neu") lief 25 px
+      ins Logo. Messkriterium steht am Rasterkommentar in layouts.css;
+      Relief-Zeilen nachgemessen unverändert (146/149 px).
+   23. Bento-Feinschliff (vier Nutzerwünsche): Zahl und Einheit im
+      Kachel-Markup getrennt (plat__num/plat__unit — in den anderen
+      Layouts ungestylte Inline-Spans, Relief-Zeilen weiter 146/149 px
+      bei wortgleichem Text); im Magazin Zahl 1.75rem als Kennzahl, auf
+      der 2×2-Kachel 3.25rem (füllt die 189-px-Leere — ein größeres Logo
+      könnte das nicht, die Bundestagsmarke steht am max-width-Anschlag);
+      „+neu" auf xl/wide als Ecke oben rechts mit padding-Schutz am Namen
+      (auf der 116-px-Kachel gibt es KEINEN kollisionsfreien Eckplatz —
+      dort eigene Zeile unter der Einheit); Antipp-Feedback scale(.98)
+      hinter prefers-reduced-motion. Vollste Kachel danach +7 px Luft.
+   24. Abstands-/Tipp-Inventur über alle Magazin-Ansichten (gemessen, nicht
+      geschaut): Abschnittsgrenze Unterstützung→Rechtliches von 12 auf die
+      28 px der übrigen Grenzen; Sortier-Chips, Schlagwort-Knöpfe und
+      Zurück-Knopf per min-height auf die 40-px-Systemhöhe der
+      Segment-Knöpfe (waren 30/30/35 — zu kleine Tippflächen). Einstellungen
+      und Profil sind layoutneutral konsistent (32er-Abschnitte) und bleiben
+      unangetastet; Relief gegen­gemessen unverändert (28/35/12).
+   25. Gleiche/Ähnliche Petitionen bekommen einen Zuschlag, wenn beide dasselbe
+      SELTENE Schlagwort tragen (publish.py → _score; dieselbe Rechnung steht
+      in app.js → similarityScore als Notlösung, beide müssen zusammen
+      geändert werden). Ausgangsbefund: von sieben offenen Nestlé-Petitionen
+      verwies keine einzige auf eine andere, obwohl fünf „Nestlé" als
+      Schlagwort tragen — ein gemeinsames Schlagwort unter elf ergab nur 0,04
+      Punkte. Jetzt finden fünf von sieben einander. Der Weg über die
+      Seltenheit JEDES Wortes ist an den Daten gescheitert (98 % aller Wörter
+      kommen in ≤ 25 Petitionen vor, „stillen" ist seltener als „nestle") —
+      die Messung steht als Warnung im Kopf von publish.py.
+      Wirkt erst nach dem nächsten publish-Lauf; die ausgelieferten
+      related-Listen wachsen dabei von 1,8 auf 6,9 MB (Schwelle 0.18→0.24,
+      höchstens 4 statt 6 Einträge je Petition).
+   26. (andere Sitzung) Magazin-Aufklapper als Kasten: .pet__toggle war dort
+      noch das nackte 23×15-px-Zeichen der Basis, 4 px neben dem gefüllten
+      36-px-Fremdlink-Kasten (Nutzerbefund per Bildschirmfoto; das Relief
+      hat seit Punkt 14 seine Buchsen-Regel, das Magazin ging leer aus).
+      Jetzt 36×36 auf var(--line) mit dem 10-px-Radius des Nachbarn,
+      16 px Kastenabstand, Zeichen bleibt beim Drehen zentriert
+      (padding-left-Ausgleich der Basis im Kasten aufgehoben); ohne
+      Fremdlink entfällt der Trennabstand. Relief gegengemessen 34×34
+      rund unverändert. (layouts.css)
+   (app.js/style.css/layouts.css/texts.js/theme.css
+    + europarl_scraper.py/publish.py) */
+var CACHE = "pm-cache-v27";
 /* Versionsunabhängig – überlebt das Hochzählen von CACHE. Diese Zahl sollte ab
    jetzt NICHT mehr steigen: seit die Pakete eine Inhaltskennung tragen ("?v=",
    siehe oben) holt sich jedes geänderte Paket von selbst neu. Ein Sprung wäre

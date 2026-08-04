@@ -208,9 +208,20 @@
        Buchführung war am 29.7.26 die Fehlerquelle: der Wert dort stand für
        innn.it auf 2,64, die Datei zeichnete 3,65. */
     var ar = LOGO_AR[key] || info.logoAR || 4;
+    /* Normierung, seit 3.8.26 mit der VIERTEN Wurzel statt der zweiten
+       (Nutzerwunsch: „Bundestag-Logo größer, openPetition auch, WeMove auch").
+       Die zweite Wurzel macht die FLÄCHE aller Marken gleich — mathematisch
+       sauber, in der Zeile aber zu streng: die breiten Schriftzüge wurden so
+       flach, dass sie nicht mehr lesbar waren. Der Bundestag (6,17:1) stand
+       auf 40 % der Bezugshöhe, WeMove (4,55:1) auf 47 %, openPetition auf 48 %.
+       Mit der vierten Wurzel liegt die Höhe zwischen gleicher Fläche und
+       gleicher Höhe: Bundestag 63 %, WeMove 68 %, openPetition 69 %, die
+       schmale WeAct-Marke (1,42:1) bleibt bei 92 % statt 84 %. Breiter werden
+       sie dabei um rund die Hälfte — die Schutzzonen in layouts.css sind
+       darauf nachgerechnet. */
     return "--logo:url(" + esc(info.logoFile) +
            ");--logo-ar:" + (Math.round(ar * 1000) / 1000) +
-           ";--logo-k:" + (1 / Math.sqrt(ar)).toFixed(3);
+           ";--logo-k:" + Math.pow(ar, -0.25).toFixed(3);
   }
   /* variante: "marke" | "weiss" | "schwarz" | "auto" (Vorgabe "marke") */
   function platLogo(key, name, variante) {
@@ -261,7 +272,7 @@
   function defaultPrefs() {
     return {
       theme: "auto",              // "light" | "dark" | "auto"
-      layout: "klassisch",        // "klassisch" | "relief" | "magazin" (layouts.css)
+      layout: "relief",           // "relief" | "magazin" (layouts.css)
       /* Bilder in den Aufruf-Texten. Vorgabe an: sie gehören zum Aufruf.
          Wer über Mobilfunk spart, schaltet sie aus — dann werden die <img>
          beim Aufbau der Beschreibung ENTFERNT statt versteckt (siehe
@@ -291,6 +302,14 @@
              Nachfolger des SELBEN Wunsches („nicht die Standardansicht"),
              deshalb wird umgestellt und nicht zurückgesetzt. */
           if (o.layout === "band") o.layout = "relief";
+          /* „klassisch" ist am 2026-08-03 auf Nutzerwunsch aus der Auswahl
+             genommen worden. Der Wert steht bei allen im localStorage, die nie
+             umgestellt haben — das war die bisherige Vorgabe. Ohne Umschreiben
+             bliebe data-layout="klassisch" stehen, und weil layouts.css dazu
+             (wie schon immer) keine Regel kennt, sähen genau diese Nutzer
+             weiterhin die alte Ansicht, ohne sie in den Einstellungen noch
+             auswählen oder verlassen zu können. */
+          if (o.layout === "klassisch") o.layout = "relief";
           if (o.layout) p.layout = o.layout;
           if (typeof o.descImages === "boolean") p.descImages = o.descImages;
           if (o.wizardDone) p.wizardDone = true;
@@ -330,10 +349,11 @@
   // Layout anwenden. Zweite Ebene neben dem Hell/Dunkel-Design und nach
   // demselben Muster gebaut: das CSS in layouts.css hängt an
   // <html data-layout="…">, die Farben bleiben in beiden Fällen dieselben
-  // Variablen. „klassisch" setzt bewusst KEINE Regeln – dann greift allein
-  // style.css, und das ursprüngliche Erscheinungsbild bleibt unangetastet.
+  // Variablen. Seit dem 3.8.26 gibt es nur noch „relief" und „magazin";
+  // „klassisch" (= gar keine Regel, es griff allein style.css) ist entfallen,
+  // alte gespeicherte Werte schreibt loadPrefs() auf „relief" um.
   function applyLayout() {
-    var l = (state.prefs && state.prefs.layout) || "klassisch";
+    var l = (state.prefs && state.prefs.layout) || "relief";
     document.documentElement.setAttribute("data-layout", l);
   }
 
@@ -376,8 +396,13 @@
   }
   function saveSet(k, s) { LS.setItem(k, JSON.stringify(Array.from(s))); }
 
-  // Unterschrieben: Map url -> {ts, title, platform}. Der Zeitstempel (ts) hält
-  // fest, WANN als "unterschrieben" markiert wurde (für die Liste im Profil).
+  // Unterschrieben: Map url -> {ts, title, platform, signatures, date}. Der
+  // Zeitstempel (ts) hält fest, WANN als "unterschrieben" markiert wurde (für
+  // die Liste im Profil). signatures/date sind ein Abzug des Datensatzes aus
+  // demselben Moment und seit 3.8.26 dabei: der Profiltab lädt keine
+  // Plattformlisten nach, ohne den Abzug stünde die Zeile dort sonst ohne Zahl
+  // und ohne Datum da. Ältere Einträge haben beides nicht — dann bleiben die
+  // Felder null und die Anzeige lässt sie weg (siehe drawSigned).
   function loadSigned() {
     var raw = LS.getItem("signedPetitions"), m = new Map();
     if (raw) {
@@ -386,7 +411,9 @@
         if (Array.isArray(arr)) arr.forEach(function (x) {
           if (typeof x === "string") m.set(x, { ts: null });      // altes Format
           else if (x && x.url) m.set(x.url, {
-            ts: x.ts || null, title: x.title || null, platform: x.platform || null });
+            ts: x.ts || null, title: x.title || null, platform: x.platform || null,
+            signatures: (typeof x.signatures === "number") ? x.signatures : null,
+            date: x.date || null });
         });
       } catch (e) {}
     }
@@ -396,7 +423,9 @@
     var arr = [];
     state.signed.forEach(function (v, k) {
       arr.push({ url: k, ts: v.ts || null, title: v.title || null,
-                 platform: v.platform || null });
+                 platform: v.platform || null,
+                 signatures: (typeof v.signatures === "number") ? v.signatures : null,
+                 date: v.date || null });
     });
     LS.setItem("signedPetitions", JSON.stringify(arr));
   }
@@ -411,9 +440,23 @@
     else state.signed.set(u, {
       ts: new Date().toISOString(),
       title: (meta && meta.title) || null,
-      platform: (meta && meta.platform) || null
+      platform: (meta && meta.platform) || null,
+      signatures: (meta && typeof meta.signatures === "number")
+        ? meta.signatures : null,
+      date: (meta && meta.date) || null
     });
     saveSigned();
+  }
+  /* Zu einer gespeicherten Unterschrift den AKTUELLEN Datensatz suchen. Der
+     Abzug in der Unterschrift ist vom Tag des Markierens; liegt die Liste der
+     Plattform schon im Speicher, ist ihre Unterschriftenzahl die frischere.
+     state.dataCache füllt sich nur, wenn die Liste in dieser Sitzung geöffnet
+     wurde — sonst gibt es hier nichts und der Abzug bleibt stehen. */
+  function signedRecord(url, v) {
+    var arr = (v && v.platform) ? state.dataCache[v.platform] : null;
+    if (!arr) return null;
+    for (var i = 0; i < arr.length; i++) if (arr[i].url === url) return arr[i];
+    return null;
   }
   function setArchived(u, on) {
     if (on) state.archived.add(u); else state.archived.delete(u);
@@ -564,16 +607,14 @@
     }
     content.innerHTML = "";
 
-    // Begrüßung: erklärt in zwei Zeilen, worum es geht, und führt zur Suche.
-    var hello = T("app.welcomeTitle", "Willkommen im PetitionsManager");
-    var name = (state.prefs.name || "").trim();
-    content.appendChild(el('<div class="welcome">' +
-      '<h1 class="welcome__t">' +
-        esc(name ? "Schön, dass du da bist, " + name + "." : hello) + "</h1>" +
-      '<p class="welcome__s">' +
-        esc(T("app.welcomeText",
-              "Mit der Suche findest du aktuelle Petitionen – " +
-              "plattformübergreifend an einem Ort.")) + "</p></div>"));
+    /* Der Begrüßungsblock ist am 3.8.26 auf Nutzerwunsch ganz entfallen —
+       Kicker, Überschrift und Fließtext. Die Seite beginnt jetzt unmittelbar
+       mit der Suche: wer die App öffnet, will suchen, nicht begrüßt werden.
+       Der Kicker wird dafür hier geleert; .pagekick:empty blendet sich in
+       style.css selbst aus, sonst bliebe eine leere Zeile stehen.
+       Die Texte app.welcomeTitle/app.welcomeText bleiben in texts.js: der
+       Einrichtungsassistent benutzt sie weiter. */
+    titleEl.textContent = "";
 
     // Volltextsuche über alle aktivierten Plattformen (Feld + Button).
     var searchRow = el('<form class="mainsearch" role="search">' +
@@ -581,11 +622,35 @@
       'placeholder="' + esc(T("liste.searchPlaceholder",
         "Alle Petitionen durchsuchen …")) + '" value="' +
       esc(state.mainQuery) + '">' +
+      /* Nur die Lupe, kein Wort (Nutzerwunsch 3.8.26) — das aria-label trägt
+         die Bedeutung für Screenreader, das Symbol ist deshalb aria-hidden. */
       '<button class="mainsearch__btn" type="submit" aria-label="Suchen">' +
-      '<i class="fa-solid fa-magnifying-glass"></i> Suchen</button></form>');
+      '<i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>' +
+      "</button></form>");
     var searchIn = searchRow.querySelector(".mainsearch__in");
+    /* Vorschläge über alle aktivierten Plattformen. Beim Start liegt dafür
+       nichts bereit: state.dataCache füllt sich erst, wenn eine Plattform
+       geöffnet wird — auf der Hauptseite ist er also leer. Das erste Antippen
+       des Feldes stößt deshalb das Laden an und zeichnet nach jeder
+       eintreffenden Liste nach. Dieselben Dateien holt die Volltextsuche beim
+       Absenden ohnehin; danach liegen sie im Cache des Service Workers. */
+    var acMain = attachAutocomplete(searchIn, function (q) {
+      return sucheVorschlaege(q, live.filter(function (p) {
+        return isEnabled(p.key);
+      }).map(function (p) { return p.key; }));
+    });
+    var acGeladen = false;
+    searchIn.addEventListener("focus", function () {
+      if (acGeladen) return;
+      acGeladen = true;
+      live.forEach(function (p) {
+        if (!isEnabled(p.key)) return;
+        loadPlatformData(p.key).then(acMain.refresh, function () {});
+      });
+    });
     searchRow.addEventListener("submit", function (e) {
       e.preventDefault();
+      acMain.close();
       var q = searchIn.value.trim();
       if (!q) return;
       state.mainQuery = q;
@@ -1033,8 +1098,13 @@
              Sprache gruppiert, und die Gruppenüberschrift trägt sie einmal
              für alle. An jeder Kachel wiederholt, war sie nur Rauschen. */
           '<span class="plat__name">' + esc(p.name) + "</span>" +
-          '<span class="plat__meta">' + nf.format(p.online) +
-            " Petitionen" + newLabel + '</span>' +
+          /* Zahl und Einheit getrennt ausgezeichnet: das Magazin setzt die
+             Zahl als Bento-Kennzahl gross und die Einheit darunter. In den
+             anderen Layouts sind beide Spans ungestylte Inline-Elemente,
+             der Textfluss bleibt woertlich derselbe. */
+          '<span class="plat__meta"><span class="plat__num">' +
+            nf.format(p.online) + '</span><span class="plat__unit"> ' +
+            "Petitionen</span>" + newLabel + '</span>' +
           (tagline ? '<span class="plat__tag">' + esc(tagline) + "</span>" : "") +
         '</span>' +
         '<span class="plat__chev">' +
@@ -1100,6 +1170,145 @@
     return b;
   }
 
+  /* ---- Vorschlagsliste beim Tippen (Autocomplete) ---------------------------
+     Eine Mechanik für alle drei Suchfelder der App (Nutzerwunsch 3.8.26):
+     Hauptseite, Plattformseite und unterzeichnete Petitionen. Was
+     vorgeschlagen wird, steckt allein in `quelle` – einer Funktion, die das
+     kleingeschriebene Suchwort bekommt und [{t, sub, pick}] liefert.
+
+     KEIN <datalist>: das wäre die eingebaute Lösung, lässt sich aber nicht
+     gestalten, zeigt auf Android nur den nackten Text und trägt keine zweite
+     Zeile. Die Plattform gehört aber dazu – bei gleichlautenden Titeln wüsste
+     man sonst nicht, welche Petition gemeint ist.
+
+     Zurück kommt {refresh, close}: refresh() für Quellen, die erst nachladen
+     (Hauptseite), close() fürs Aufräumen von außen. */
+  var AC_MIN = 2;      // ab so vielen Zeichen wird vorgeschlagen
+  var AC_MAX = 8;      // so viele Vorschläge stehen höchstens da
+  var AC_POOL = 400;   // so viele Treffer werden zum Sortieren gesammelt
+  var acLfd = 0;       // laufende Nummer für eindeutige Element-Kennungen
+  function attachAutocomplete(input, quelle) {
+    var wrap = input.parentNode;
+    var leer = { refresh: function () {}, close: function () {} };
+    if (!wrap) return leer;
+    var kennung = "ac" + (++acLfd);
+    var box = el('<div class="ac" role="listbox" id="' + kennung + '"></div>');
+    box.hidden = true;
+    wrap.appendChild(box);
+    var eintraege = [], aktiv = -1;
+
+    /* role="combobox" ohne die Zustandsangaben wäre eine Falschauskunft: ein
+       Screenreader kündigte damit eine Liste an, die es die meiste Zeit gar
+       nicht gibt. Deshalb vollständig – und aria-expanded wird bei jedem
+       Öffnen und Schließen mitgeführt. */
+    input.setAttribute("autocomplete", "off");
+    input.setAttribute("role", "combobox");
+    input.setAttribute("aria-autocomplete", "list");
+    input.setAttribute("aria-expanded", "false");
+    input.setAttribute("aria-controls", kennung);
+
+    function zu() {
+      box.hidden = true; box.innerHTML = ""; eintraege = []; aktiv = -1;
+      input.setAttribute("aria-expanded", "false");
+      input.removeAttribute("aria-activedescendant");
+    }
+    function aktivZeigen() {
+      var kinder = box.querySelectorAll(".ac__i");
+      for (var i = 0; i < kinder.length; i++) {
+        var an = (i === aktiv);
+        kinder[i].classList.toggle("is-on", an);
+        kinder[i].setAttribute("aria-selected", an ? "true" : "false");
+      }
+      if (aktiv > -1) {
+        input.setAttribute("aria-activedescendant", kennung + "-" + aktiv);
+        kinder[aktiv].scrollIntoView({ block: "nearest" });
+      } else input.removeAttribute("aria-activedescendant");
+    }
+    function waehlen(i) {
+      var e = eintraege[i];
+      zu();
+      if (e && e.pick) e.pick();
+    }
+    function zeichnen() {
+      var q = input.value.trim().toLowerCase();
+      if (q.length < AC_MIN) { zu(); return; }
+      eintraege = quelle(q).slice(0, AC_MAX);
+      aktiv = -1;
+      if (!eintraege.length) { zu(); return; }
+      box.innerHTML = eintraege.map(function (e, i) {
+        return '<div class="ac__i" role="option" aria-selected="false" id="' +
+          kennung + "-" + i + '" data-i="' + i + '">' +
+          '<span class="ac__t">' + highlight(e.t, q) + "</span>" +
+          (e.sub ? '<span class="ac__s">' + esc(e.sub) + "</span>" : "") +
+          "</div>";
+      }).join("");
+      box.hidden = false;
+      input.setAttribute("aria-expanded", "true");
+    }
+
+    input.addEventListener("input", zeichnen);
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") { zu(); return; }
+      if (box.hidden) return;
+      if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+        /* preventDefault ist hier Pflicht und nicht Kosmetik: ohne ihn springt
+           der Schreibzeiger im Feld an Anfang oder Ende, während die Auswahl
+           wandert. -1 ist ein gültiger Zustand (nichts ausgewählt) – so kommt
+           man aus der Liste auch wieder heraus, ohne sie zu schließen. */
+        e.preventDefault();
+        aktiv += (e.key === "ArrowDown" ? 1 : -1);
+        if (aktiv < -1) aktiv = eintraege.length - 1;
+        if (aktiv >= eintraege.length) aktiv = -1;
+        aktivZeigen();
+      } else if (e.key === "Enter" && aktiv > -1) {
+        e.preventDefault(); waehlen(aktiv);
+      }
+    });
+    /* pointerdown abfangen, damit das Feld den Fokus NICHT verliert: sonst
+       schlösse blur die Liste, bevor der Klick beim Eintrag ankommt – der
+       klassische Fehler bei selbstgebauten Vorschlagslisten. */
+    box.addEventListener("pointerdown", function (e) { e.preventDefault(); });
+    box.addEventListener("click", function (e) {
+      var t = e.target.closest(".ac__i");
+      if (t) waehlen(parseInt(t.getAttribute("data-i"), 10));
+    });
+    input.addEventListener("blur", function () { setTimeout(zu, 150); });
+
+    return {
+      refresh: function () { if (document.activeElement === input) zeichnen(); },
+      close: zu
+    };
+  }
+
+  /* Titel-Treffer für die Vorschlagsliste, quer über die übergebenen
+     Plattformen. Titel, die MIT dem Suchwort beginnen, stehen vorn: wer
+     „Nestlé" tippt, will nicht zuerst einen Titel sehen, in dem das Wort
+     hinten steht. Bei gleicher Fundstelle entscheidet das Alphabet, damit die
+     Reihenfolge zwischen zwei Tastendrücken stabil bleibt.
+     Die Sammlung bricht bei AC_POOL ab. Bei zwei Zeichen passt fast jeder
+     Titel, und für acht Vorschläge lohnt es nicht, 17.000 Treffer zu
+     sortieren — die Grenze liegt bewusst weit über AC_MAX, damit die Auswahl
+     trotzdem aus einem breiten Feld kommt. */
+  function sucheVorschlaege(q, keys) {
+    var pool = [];
+    for (var k = 0; k < keys.length && pool.length < AC_POOL; k++) {
+      var arr = state.dataCache[keys[k]];
+      if (!arr) continue;
+      for (var i = 0; i < arr.length && pool.length < AC_POOL; i++) {
+        var t = arr[i].title || "";
+        var p = t.toLowerCase().indexOf(q);
+        if (p > -1) pool.push({ t: t, pos: p, key: keys[k], url: arr[i].url });
+      }
+    }
+    pool.sort(function (a, b) {
+      return (a.pos - b.pos) || a.t.localeCompare(b.t);
+    });
+    return pool.map(function (e) {
+      return { t: e.t, sub: platformName(e.key),
+               pick: function () { openPetitionInApp(e.key, e.url); } };
+    });
+  }
+
   /* Höhe des aufgeklappten Vorschaubildes auf sein echtes Seitenverhältnis
      setzen. Vorher stand dort feste 11rem und object-fit:cover – bei einem
      breiten Aufmacher wie dem von 350.org schnitt das unten sichtbar ab.
@@ -1148,6 +1357,16 @@
     var sig = (typeof r.signatures === "number")
       ? '<span class="sig"><b>' + nf.format(r.signatures) + "</b> " +
         '<i class="fa-solid fa-pen"></i></span>' : "";
+    /* Datum HINTER der Unterschriftenzahl (Nutzerwunsch 3.8.26). Es ist das
+       Startdatum — dasselbe, nach dem die Chips „Datum ↑/↓" sortieren. Der
+       title sagt das, weil eine nackte Datumsangabe neben einer
+       Unterschriftenzahl sonst auch das Ende meinen könnte; das Ende steht,
+       wenn es eins gibt, im Abzeichen „beendet". Nicht jede Plattform liefert
+       ein Startdatum (siehe Lückenhinweis in buildTools), deshalb bedingt. */
+    var datum = r.start_date
+      ? '<span class="sig pet__date" title="Start der Petition">' +
+        esc(fmtDate(r.start_date)) +
+        ' <i class="fa-solid fa-calendar-day" aria-hidden="true"></i></span>' : "";
     var signedBadge = isSigned(r.url)
       ? '<span class="pet-signed"><i class="fa-solid fa-circle-check"></i>' +
         " unterschrieben</span>" : "";
@@ -1185,7 +1404,8 @@
     var head = el('<div class="pet__head">' + thumb +
       '<div class="pet__main">' +
         '<div class="pet__title">' + esc(r.title || "(ohne Titel)") + "</div>" +
-        '<div class="pet__row">' + signedBadge + closedBadge + sig + "</div>" +
+        '<div class="pet__row">' + signedBadge + closedBadge + sig + datum +
+        "</div>" +
       "</div>" +
       '<span class="pet__toggle"><i class="fa-solid fa-chevron-down"></i></span>' +
       ext +
@@ -1263,7 +1483,8 @@
       if (horiz && Math.abs(dx) >= THRESHOLD) {
         if (dx > 0) {
           // Rechts: unterschreiben – im Archiv genauso wie in der Liste.
-          toggleSigned(r.url, { title: r.title, platform: platKey });
+          toggleSigned(r.url, { title: r.title, platform: platKey,
+                                signatures: r.signatures, date: r.start_date });
           reset(); ctx.redraw();
         } else {
           // Links: archivieren, im Archiv zurückholen. Beide Male verlässt
@@ -1388,10 +1609,31 @@
       .forEach(function (w) { s[w] = 1; });
     return s;
   })();
+  /* Akzente einebnen — „Nestlé" und „Nestle" müssen dasselbe Wort sein, beide
+     Schreibweisen stehen im Bestand. ä/ö/ü/ß bleiben stehen: im Deutschen
+     tragen sie Bedeutung. Gleiche Tabelle wie publish.py → _SIM_DIA. */
+  var SIM_DIA = { "á":"a","à":"a","â":"a","ã":"a","å":"a",
+                  "é":"e","è":"e","ê":"e","ë":"e",
+                  "í":"i","ì":"i","î":"i","ï":"i",
+                  "ó":"o","ò":"o","ô":"o","õ":"o",
+                  "ú":"u","ù":"u","û":"u",
+                  "ý":"y","ÿ":"y","ñ":"n","ç":"c","č":"c" };
+  function simFold(w) {
+    return w.replace(/[áàâãåéèêëíìîïóòôõúùûýÿñçč]/g, function (c) {
+      return SIM_DIA[c] || c;
+    });
+  }
   function simTokens(str) {
     var out = {};
     (str || "").toLowerCase().split(/[^a-zäöüßà-ÿ]+/).forEach(function (w) {
-      if (w.length >= 4 && !SIM_STOP[w]) out[w] = 1;
+      if (w.length >= 4 && !SIM_STOP[w]) out[simFold(w)] = 1;
+    });
+    return out;
+  }
+  function simTagSet(r) {
+    var out = {};
+    (r.tags || []).forEach(function (t) {
+      if (t) out[simFold(String(t).toLowerCase())] = 1;
     });
     return out;
   }
@@ -1402,10 +1644,17 @@
     var uni = 0; for (k in seen) uni++;
     return uni ? inter / uni : 0;
   }
-  function similarityScore(a, b) {
-    var at = {}, bt = {};
-    (a.tags || []).forEach(function (t) { at[t.toLowerCase()] = 1; });
-    (b.tags || []).forEach(function (t) { bt[t.toLowerCase()] = 1; });
+  /* Zuschlag für ein seltenes gemeinsames SCHLAGWORT. Die vier klassischen
+     Anteile bleiben, wie sie waren; neu ist allein dieser Zuschlag. Warum das
+     Schlagwort und nicht jedes seltene Wort: siehe publish.py, dort steht die
+     Messung, an der die allgemeine Seltenheits-Gewichtung gescheitert ist
+     (98 % aller Wörter kommen in höchstens 25 Petitionen vor). */
+  var SIM_W_NAME = 0.36, SIM_NAME_EXP = 3;
+  function similarityScore(a, b, w) {
+    var sameTitle = (a.title && (a.title || "").trim().toLowerCase() ===
+      (b.title || "").trim().toLowerCase()) ? 1 : 0;
+    if (sameTitle) return 1;                    // exakt gleiche Petition
+    var at = simTagSet(a), bt = simTagSet(b);
     var tagJac = jaccard(at, bt);
     var titleJac = jaccard(simTokens(a.title), simTokens(b.title));
     var contentJac = jaccard(
@@ -1413,10 +1662,34 @@
       simTokens((b.title || "") + " " + (b.summary || "")));
     var sameCat = (a.category && b.category &&
       a.category.toLowerCase() === b.category.toLowerCase()) ? 1 : 0;
-    var sameTitle = (a.title && (a.title || "").trim().toLowerCase() ===
-      (b.title || "").trim().toLowerCase()) ? 1 : 0;
-    if (sameTitle) return 1;                    // exakt gleiche Petition
-    return tagJac * 0.45 + titleJac * 0.30 + contentJac * 0.15 + sameCat * 0.10;
+    var klassisch = tagJac * 0.45 + titleJac * 0.30 +
+                    contentJac * 0.15 + sameCat * 0.10;
+    if (!w || !w.max) return klassisch;
+    // Das seltenste Schlagwort, das beide tragen. Maximum, nicht
+    // Durchschnitt: ein starker Beleg („nestle") darf nicht von schwachen
+    // („kinder") verwässert werden.
+    var best = 0, k;
+    for (k in at) if (bt[k] && w.gew[k] > best) best = w.gew[k];
+    if (!best) return klassisch;
+    return klassisch + Math.pow(Math.min(1, best / w.max), SIM_NAME_EXP) *
+                       SIM_W_NAME;
+  }
+  /* Häufigkeit der Schlagwörter über die gerade geladene Liste. Einmal je
+     Aufruf gerechnet — die Notlösung greift ohnehin nur, wenn die vorab
+     gerechnete Verwandtschaft aus publish.py fehlt. */
+  function simWeights(all) {
+    var df = {}, n = 0, k;
+    all.forEach(function (grp) {
+      grp.arr.forEach(function (c) {
+        n++;
+        var t = simTagSet(c);
+        for (k in t) df[k] = (df[k] || 0) + 1;
+      });
+    });
+    if (!n) return { gew: {}, max: 0 };
+    var gewichte = {};
+    for (k in df) gewichte[k] = Math.log(n / df[k]);
+    return { gew: gewichte, max: n > 2 ? Math.log(n / 2) : 0 };
   }
 
   // Findet gleiche/ähnliche Petitionen und sortiert nach (unsichtbarem) Score.
@@ -1444,20 +1717,28 @@
       }
     }
 
-    // Kandidaten: teilen mind. ein Schlagwort, sind online und nicht archiviert.
-    var mine = {};
-    (r.tags || []).forEach(function (t) { mine[t.toLowerCase()] = 1; });
-    if (!Object.keys(mine).length) return [];
+    /* Kandidaten: teilen mindestens ein Schlagwort ODER ein Titelwort, sind
+       online und nicht archiviert. Das Titelwort ist seit 3.8.26 dabei — ohne
+       es kämen zwei Petitionen zur selben Marke nie in Berührung, wenn ihre
+       Schlagwortlisten sich nicht überschneiden. Genau daran scheiterten die
+       sieben Nestlé-Petitionen. */
+    var mine = simTagSet(r), mineTitle = simTokens(r.title), k;
+    var haveKey = false;
+    for (k in mine) { haveKey = true; break; }
+    if (!haveKey) for (k in mineTitle) { haveKey = true; break; }
+    if (!haveKey) return [];
+    var w = simWeights(all);
     var cands = [];
     all.forEach(function (grp) {
       grp.arr.forEach(function (c) {
         if (c.url === r.url || isArchived(c.url) || isClosed(c) ||
             (c.status || "online") === "offline") return;
-        var tags = c.tags || [], shares = false;
-        for (var i = 0; i < tags.length; i++)
-          if (mine[tags[i].toLowerCase()]) { shares = true; break; }
+        var ct = simTagSet(c), ctitle = simTokens(c.title), t, shares = false;
+        for (t in ct) if (mine[t] || mineTitle[t]) { shares = true; break; }
+        if (!shares) for (t in ctitle)
+          if (mine[t] || mineTitle[t]) { shares = true; break; }
         if (!shares) return;
-        var score = similarityScore(r, c);
+        var score = similarityScore(r, c, w);
         cands.push({ c: c, plat: grp.p, score: score, same: score >= 0.8 });
       });
     });
@@ -1644,16 +1925,17 @@
     var box = el('<div class="pabout"' +
       (brand ? ' style="--brand:' + esc(brand) + '"' : "") + ">" +
       '<button class="pabout__head" type="button">' +
-      platLogo(key, manifestEntry.name) +
       '<span class="pabout__lbl">' +
         esc(T("platform.aboutBtn", "Über diese Plattform")) + "</span>" +
       '<i class="fa-solid fa-chevron-down pabout__chev"></i></button>' +
       '<div class="pabout__body"></div></div>');
     var body = box.querySelector(".pabout__body");
-    /* Kein zweites Logo mehr im Aufklapp-Bereich: seit platLogo() selbst die
-       echte Marke ausgibt, steht sie schon in der Kopfzeile darüber. Vorher
-       waren es Monogramm oben + Marke unten, also dieselbe Plattform zweimal
-       gekennzeichnet. */
+    /* Gar kein Logo mehr an diesem Baustein (Nutzerwunsch 3.8.26). Erst fiel das
+       zweite Logo im Aufklapp-Bereich weg, seit dem 3.8. auch das in der
+       Kopfzeile des Knopfes: der Baustein sitzt jetzt direkt unter dem großen
+       Logo der Plattformseite, dieselbe Marke stand also zweimal untereinander.
+       manifestEntry wird hier weiterhin für nichts anderes gebraucht - falls
+       das Logo je zurückkehrt, ist es die Quelle für den Namen. */
     box.querySelector(".pabout__head").addEventListener("click", function () {
       state.aboutPlatform = !box.classList.contains("open");
       box.classList.toggle("open", state.aboutPlatform);
@@ -1736,11 +2018,23 @@
        Plattform gerade durchsieht, entscheidet genau dann, ob sie oben in der
        Übersicht stehen soll. Gleiche Mechanik wie dort (state.favorites +
        saveFavorites), nur an einer zweiten Stelle bedienbar. */
-    /* Marke oben auf der Seite: der Seitentitel nennt die Plattform nur als
-       Text. Das Logo steht in ihrer eigenen Farbe darüber, damit auf einen
-       Blick klar ist, wo man gelandet ist. */
-    content.appendChild(el('<div class="phead">' +
-      platLogo(key, platformName(key)) + "</div>"));
+    /* Marke oben auf der Seite: das Logo steht in der eigenen Farbe der
+       Plattform, damit auf einen Blick klar ist, wo man gelandet ist. Der Name
+       steht seit 3.8.26 daneben (Nutzerwunsch) — Logo linksbündig, Name
+       rechtsbündig. Das ist die einzige Marke der App, die ihren Namen
+       AUSGESCHRIEBEN daneben trägt; in den Listen steht er stattdessen im
+       Text und das Logo dahinter.
+       Damit steht der Name zweimal auf der Seite, denn der Seitentitel über dem
+       Inhalt nennt ihn auch. syncPageTitle() blendet den Seitentitel aus, wenn
+       er wörtlich mit einer Überschrift im Inhalt übereinstimmt — .phead__name
+       ist dort mit aufgenommen. */
+    var phead = el('<div class="phead">' + platLogo(key, platformName(key)) +
+      '<h2 class="phead__name">' + esc(platformName(key)) + "</h2></div>");
+    /* Reihenfolge seit 3.8.26 (Nutzerwunsch): Zurück-Zeile mit Favoritenstern
+       und Archiv-Knopf · Marke · „Über diese Plattform". Die Bausteine werden
+       deshalb HIER gebaut, aber erst weiter unten eingehängt — die Zurück-Zeile
+       braucht ihre Ereignis-Zuhörer vorher. */
+    var aboutBox = platformAbout(key);
     var head = el('<div class="subhead">' +
       '<button class="backbtn"><i class="fa-solid fa-chevron-left"></i> ' +
         "Alle Plattformen</button>" +
@@ -1774,11 +2068,13 @@
       if (a) a.scrollIntoView({ behavior: "smooth", block: "start" });
     });
     content.appendChild(head);
-
-    content.appendChild(platformAbout(key));
+    content.appendChild(phead);
+    content.appendChild(aboutBox);
 
     if (!LS.getItem("swipeHintDismissed")) {
       var hint = el('<div class="swipe-hint">' +
+        '<h3 class="hint-title">' +
+        esc(T("petition.swipeHintTitle", "Petitionen wischen")) + "</h3>" +
         '<p>Wische eine Petition nach <b>rechts</b>, um sie als ' +
         '„unterschrieben" zu markieren. <span class="hint-note"><b>Wichtig:</b> ' +
         'Sie wird dadurch <u>nicht</u> automatisch unterschrieben – das musst ' +
@@ -1793,9 +2089,28 @@
       content.appendChild(hint);
     }
 
+    /* Lupenknopf wie bei der Hauptsuche (Nutzerwunsch 3.8.26). Die Liste
+       filtert weiterhin bei jedem Tastendruck — der Knopf ist für alle, die
+       eine Suche abschließen wollen; er schließt auf dem Telefon die Tastatur.
+       Ohne preventDefault würde das Formular die Seite neu laden und die App
+       von vorn starten. */
+    var searchForm = el('<form class="searchrow" role="search"></form>');
     var searchBox = el('<input class="search" type="search" ' +
       'placeholder="In dieser Plattform suchen …" value="' + esc(state.search) + '">');
-    content.appendChild(searchBox);
+    searchForm.appendChild(searchBox);
+    searchForm.appendChild(el('<button class="searchrow__btn" type="submit" ' +
+      'aria-label="Suchen"><i class="fa-solid fa-magnifying-glass" ' +
+      'aria-hidden="true"></i></button>'));
+    /* Vorschläge aus DIESER Plattform. Anders als auf der Hauptseite muss
+       nichts nachgeladen werden — die Liste steht schon im Speicher, sonst
+       gäbe es diese Seite nicht. */
+    var acPlat = attachAutocomplete(searchBox, function (q) {
+      return sucheVorschlaege(q, [key]);
+    });
+    searchForm.addEventListener("submit", function (e) {
+      e.preventDefault(); acPlat.close(); searchBox.blur();
+    });
+    content.appendChild(searchForm);
 
     // Ausklapper direkt unter der Suche: Sortierung und die Kategorien DIESER
     // Plattform. Zugeklappt, weil er sonst die Liste nach unten drückt.
@@ -1856,15 +2171,30 @@
       var mitDatum = arr.filter(function (r) { return !!r.start_date; }).length;
       var mitZahl = arr.filter(function (r) {
         return typeof r.signatures === "number"; }).length;
-      var opts = [["", "Standardreihenfolge", "fa-list"]];
-      if (mitDatum) opts.push(["neu", "Neueste zuerst", "fa-arrow-down-wide-short"],
-                              ["alt", "Älteste zuerst", "fa-arrow-up-wide-short"]);
-      if (mitZahl) opts.push(["viel", "Meiste Unterschriften", "fa-arrow-down-9-1"],
-                             ["wenig", "Wenigste Unterschriften", "fa-arrow-up-1-9"]);
+      /* [Wert, Beschriftung, Icon HINTER der Beschriftung, Vorlesetext].
+         Seit 3.8.26 (Nutzerwunsch) tragen beide Paare dieselbe Beschriftung und
+         unterscheiden sich allein durch den Pfeil: „Datum ↑/↓" und
+         „Unterschriften ↑/↓". Der Pfeil zeigt in beiden Paaren dasselbe an —
+         nach OBEN heißt „das Größte zuerst": das neueste Datum, die meisten
+         Unterschriften. Weil jede Beschriftung damit doppelt vorkommt, braucht
+         jeder Chip ein aria-label; ein Screenreader läse sonst zweimal
+         dasselbe Wort, der Pfeil ist für ihn nicht da.
+         Gerade Pfeile statt der 45°-Trendpfeile von vorhin (Nutzerwunsch
+         3.8.26); fa-arrow-up/-down liegen im lokalen FontAwesome-Bündel
+         (nachgesehen). */
+      var opts = [["", "Standard", "", ""]];
+      if (mitDatum) opts.push(
+        ["neu", "Datum", "fa-arrow-up", "Neueste zuerst"],
+        ["alt", "Datum", "fa-arrow-down", "Älteste zuerst"]);
+      if (mitZahl) opts.push(
+        ["viel", "Unterschriften", "fa-arrow-up", "Meiste Unterschriften zuerst"],
+        ["wenig", "Unterschriften", "fa-arrow-down", "Wenigste Unterschriften zuerst"]);
       var h = '<div class="ptools__grp"><span class="ptools__h">Sortierung</span>' +
         '<div class="chiprow">' + opts.map(function (o) {
-          return '<button class="chip" type="button" data-sort="' + o[0] + '">' +
-            '<i class="fa-solid ' + o[2] + '"></i> ' + o[1] + "</button>";
+          return '<button class="chip" type="button" data-sort="' + o[0] + '"' +
+            (o[3] ? ' aria-label="' + esc(o[3]) + '"' : "") + ">" + esc(o[1]) +
+            (o[2] ? ' <i class="fa-solid ' + o[2] + '" aria-hidden="true"></i>'
+                  : "") + "</button>";
         }).join("") + "</div>";
       // Ehrlich benennen, wenn die Sortierung nur einen Teil erfassen kann.
       var luecken = [];
@@ -2177,7 +2507,11 @@
 
   function renderCrossSearch() {
     var f = state.cross;
-    titleEl.textContent = "Suche: " + f.value;
+    /* Kein Seitentitel mehr (Nutzerwunsch 3.8.26): „SUCHE: WASSER" stand
+       unmittelbar über einer Zeile, die dasselbe noch einmal sagt — die
+       Brotkrume darunter nennt Art und Wort der Suche vollständig
+       („Volltextsuche: Wasser"). .pagekick:empty blendet sich selbst aus. */
+    titleEl.textContent = "";
     content.innerHTML = "";
 
     var backLabel = f.fromPlatform
@@ -2201,7 +2535,6 @@
 
     function drawCross() {
       var v = String(state.cross.value).toLowerCase();
-      titleEl.textContent = "Suche: " + state.cross.value;
       crumb.innerHTML = (state.cross.type === "cat"
         ? '<i class="fa-solid fa-tag"></i> Kategorie'
         : state.cross.type === "tag"
@@ -2236,9 +2569,17 @@
         nPlat++; total += hits.length;
         var info = langInfo(p.language || "de");
         var sec = el('<section class="accordion langgroup crossgroup open"></section>');
-        var hd = el('<button class="acc-head"><span class="acc-title">' +
+        /* Logo hinter dem Namen wie auf den anderen Übersichtsseiten
+           (Nutzerwunsch 3.8.26). --brand muss am Kopf selbst stehen: die
+           Farbrollen des Logos lesen die Variable, und anders als bei .plat
+           gibt es hier kein umgebendes Element, das sie schon setzt. */
+        var pcol = (platInfo(p.key) || {}).color;
+        var hd = el('<button class="acc-head"' +
+          (pcol ? ' style="--brand:' + esc(pcol) + '"' : "") +
+          '><span class="acc-title">' +
           esc(p.name) + '<span class="flag">' + info.flag + "</span>" +
           '<span class="acc-count">' + hits.length + "</span></span>" +
+          platLogo(p.key, p.name) +
           '<i class="fa-solid fa-chevron-down acc-chev"></i></button>');
         hd.addEventListener("click", function () {
           sec.classList.toggle("open", !sec.classList.contains("open"));
@@ -2348,15 +2689,14 @@
     content.appendChild(el('<div class="srow__lbl">' +
       esc(T("settings.layoutLabel", "Layout")) + "</div>"));
     content.appendChild(segControl("Layout",
-      [["klassisch", T("settings.layoutClassic", "Klassisch"), "fa-list"],
-       ["relief", T("settings.layoutRelief", "Relief"), "fa-cube"],
+      [["relief", T("settings.layoutRelief", "Relief"), "fa-cube"],
        ["magazin", T("settings.layoutMag", "Magazin"), "fa-image"]],
       state.prefs.layout,
       function (v) { state.prefs.layout = v; savePrefs(); applyLayout(); }));
     content.appendChild(el('<div class="srow__note">' +
       esc(T("settings.layoutHint",
-            "Ändert nur das Aussehen der Listen, nicht die Inhalte. " +
-            "„Klassisch“ ist die bisherige Ansicht.")) + "</div>"));
+            "Ändert nur das Aussehen der Listen, nicht die Inhalte.")) +
+      "</div>"));
 
     /* WARUM ES DIESE OPTION BRAUCHT (am 29.7.26 nachgemessen): die Plattformen
        setzen unverkleinerte Pressebilder in den Aufruf-Text. 35 abrufbare
@@ -2392,10 +2732,13 @@
     function refreshImgNote() {
       imgNote.textContent = state.prefs.descImages
         ? T("settings.descImagesOn",
-            "Fotos und Logos aus dem Aufruf werden geladen – einzelne sind "
-            + "mehrere Megabyte groß.")
+            "Fotos und Logos werden beim Öffnen einer Petition aus dem Internet "
+            + "nachgeladen. Das setzt eine Internetverbindung voraus und "
+            + "verbraucht Datenvolumen – einzelne Bilder sind mehrere Megabyte "
+            + "groß. Unterwegs am besten nur im WLAN einschalten.")
         : T("settings.descImagesOff",
-            "Nur Text. Es werden keine Bilddateien abgerufen.");
+            "Nur Text. Es werden keine Bilddateien aus dem Internet abgerufen, "
+            + "es entsteht also kein Datenverbrauch für Bilder.");
     }
     refreshImgNote();
     imgRow.querySelector("input").addEventListener("change", function () {
@@ -2415,7 +2758,9 @@
     if (!LS.getItem("favTipDismissed")) {
       var favTip = el('<div class="favtip">' +
         '<i class="fa-solid fa-star"></i>' +
-        '<div><p>' + esc(T("favorites.how",
+        '<div><h3 class="hint-title">' +
+        esc(T("favorites.howTitle", "Favoriten anlegen")) + "</h3>" +
+        "<p>" + esc(T("favorites.how",
           "Tippe auf den Stern neben einer Plattform, um sie zu einem " +
           "Favoriten zu machen. Favoriten erscheinen immer ganz oben in " +
           "der Liste.")) + "</p>" +
@@ -3186,6 +3531,13 @@
       '</i><input class="signed__search" type="search" placeholder="' +
         esc(T("signed.searchPlaceholder", "In deinen Unterschriften suchen …")) +
         '" value="' + esc(state.signedQuery) + '"></div>' +
+      /* Sagt, worüber die Suche läuft. Der Filter unten verkettet Titel,
+         Plattformnamen und URL — der Aufruftext ist bewusst NICHT dabei, er
+         liegt nur in den Volltext-Paketen und nicht in state.signed. */
+      '<div class="signed__hint">' +
+        esc(T("signed.searchHint",
+              "Durchsucht Titel, Plattform und Adresse der Petition — " +
+              "nicht den Aufruftext.")) + "</div>" +
       '<div class="signed__count"></div>' +
       '<div class="signed-list"></div></section>');
     var sList = sec.querySelector(".signed-list");
@@ -3225,16 +3577,49 @@
         var url = e[0], v = e[1];
         var pn = v.platform ? platformName(v.platform) : "";
         var brand = v.platform ? platColor(v.platform) : null;
+        /* Zahl und Datum wie in der Kachel (Nutzerwunsch 3.8.26). Vorrang hat
+           der aktuelle Datensatz: der Abzug in der Unterschrift ist vom Tag des
+           Markierens, die Unterschriftenzahl von damals wäre heute zu niedrig.
+           Ohne geladene Liste und ohne Abzug (Einträge vor 3.8.26) bleibt die
+           Angabe einfach weg — lieber nichts als eine erfundene Zahl. */
+        var rec = signedRecord(url, v);
+        var zahl = (rec && typeof rec.signatures === "number") ? rec.signatures
+                 : ((typeof v.signatures === "number") ? v.signatures : null);
+        var dat = (rec && rec.start_date) || v.date || null;
+        var fakten = "";
+        if (zahl !== null)
+          fakten += '<span class="sig"><b>' + nf.format(zahl) + "</b> " +
+            '<i class="fa-solid fa-pen" aria-hidden="true"></i></span>';
+        if (dat)
+          fakten += '<span class="sig" title="Start der Petition">' +
+            esc(fmtDate(dat)) +
+            ' <i class="fa-solid fa-calendar-day" aria-hidden="true"></i></span>';
         var row = el('<button class="signed-item" type="button"' +
           (brand ? ' style="--brand:' + esc(brand) + '"' : "") + ">" +
-          (v.platform ? platLogo(v.platform, pn) : "") +
+          /* Logo in einem Kasten FESTER Breite (Nutzerwunsch 3.8.26), damit
+             alle Titel an derselben Stelle beginnen. Die Marken sind bewusst
+             flächen- und nicht breitengleich (--logo-k), der Bundestag-Schriftzug
+             ist dadurch doppelt so breit wie die WeAct-Marke — ohne Kasten
+             begänne jede Zeile woanders. Der Kasten steht auch ohne Plattform,
+             sonst rutschte genau diese eine Zeile aus der Spalte. */
+          '<span class="signed-item__logo">' +
+          (v.platform ? platLogo(v.platform, pn) : "") + "</span>" +
           '<span class="signed-item__body">' +
           '<span class="signed-item__t">' +
             highlight(v.title || url, state.signedQuery) + "</span>" +
           '<span class="signed-item__meta">' +
-            (pn ? highlight(pn, state.signedQuery) + " · " : "") +
+            (pn ? '<span class="signed-item__plat">' +
+                  highlight(pn, state.signedQuery) + "</span>" : "") +
+            fakten + "</span>" +
+          /* „Unterschrieben am" steht seit 3.8.26 abgesetzt in einer eigenen
+             Zeile (Nutzerwunsch): es ist die einzige Angabe der Zeile, die vom
+             NUTZER stammt und nicht von der Plattform. Vorher hing der
+             Zeitpunkt hinter dem Plattformnamen in derselben grauen Zeile und
+             war von den Daten der Petition nicht zu unterscheiden. */
+          '<span class="signed-item__signed">Unterschrieben am ' +
             '<span class="signed-item__when">' + esc(fmtDateTime(v.ts)) +
-          "</span></span></span></button>");
+          "</span></span>" +
+          "</span></button>");
         if (v.platform) {
           row.addEventListener("click", function () {
             openPetitionInApp(v.platform, url);
@@ -3243,6 +3628,24 @@
         sList.appendChild(row);
       });
     }
+    /* Vorschläge aus den eigenen Unterschriften. Die Liste darunter filtert
+       ohnehin schon beim Tippen — der Nutzen liegt hier im Sprung: ein Antippen
+       öffnet die Petition direkt in ihrer Plattform, statt sie nur zu zeigen.
+       Einträge ohne Plattform (Altbestand) sind wie die Zeilen unten kein
+       Sprungziel und bekommen deshalb kein pick. */
+    attachAutocomplete(sSearch, function (q) {
+      var out = [];
+      signedSorted.forEach(function (e) {
+        var v = e[1], t = v.title || e[0];
+        if (t.toLowerCase().indexOf(q) === -1) return;
+        out.push({
+          t: t, sub: v.platform ? platformName(v.platform) : "",
+          pick: v.platform
+            ? function () { openPetitionInApp(v.platform, e[0]); } : null
+        });
+      });
+      return out;
+    });
     sSearch.addEventListener("input", function () {
       state.signedQuery = sSearch.value; drawSigned();
     });
@@ -3381,7 +3784,9 @@
           return (p.language || "de") === code; }).length;
         var chip = el('<button class="chip' +
           (wizardSel.langs.has(code) ? " on" : "") + '" type="button">' +
-          '<span class="chip__flag">' + info.flag + "</span>" +
+          /* flag mit dazu: die runde Blende steckt in .flag (style.css),
+             chip__flag trägt nur noch den Abstand im Chip. */
+          '<span class="chip__flag flag">' + info.flag + "</span>" +
           '<span class="chip__l">' + esc(info.name) + "</span>" +
           '<span class="chip__n">' + n + "</span></button>");
         chip.addEventListener("click", function () {
@@ -3501,7 +3906,7 @@
   // für Ansichten, die später dazukommen.
   function syncPageTitle() {
     function norm(s) { return String(s || "").trim().toLowerCase(); }
-    var h1 = content.querySelector(".welcome__t");
+    var h1 = content.querySelector(".welcome__t, .phead__name");
     titleEl.classList.toggle("is-dup",
       !!h1 && norm(h1.textContent) === norm(titleEl.textContent));
   }

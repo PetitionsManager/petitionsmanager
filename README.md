@@ -14,11 +14,16 @@ und eine mobile Web-App (PWA/APK), die diese Daten offline durchsuchbar macht.
 ### App (`webapp/`)
 
 - Petitionen aus allen aktivierten Plattformen in einer scrollbaren Liste
-- Plattformübergreifende Volltextsuche
-- Ähnliche Petitionen (Empfehlungen anhand gemeinsamer Schlagwörter)
+- Plattformübergreifende Volltextsuche, mit Vorschlagsliste beim Tippen
+  (Hauptseite, Plattformseite und Liste der unterzeichneten Petitionen)
+- Ähnliche Petitionen: gemeinsame Schlagwörter, Titel- und Textüberschneidung,
+  mit Zuschlag für ein *seltenes* gemeinsames Schlagwort — so finden sich auch
+  Petitionen zur selben Marke über Plattformgrenzen hinweg
 - Petitionen nach Tags filtern; Tags werden automatisch aus Titeln und Texten abgeleitet
 - Favoriten-Plattformen anpinnen, Petitionen als „unterschrieben" oder archiviert markieren
 - Wischgesten: rechts = unterschrieben, links = archivieren
+- Zwei Layouts (Relief im Stil des Neumorphismus, Magazin als Kachelraster)
+  und ein Dunkelmodus, der auch der Systemeinstellung folgen kann
 - Persönliche Daten (Favoriten, Status) exportieren und importieren
 - Offline-fähig dank Service Worker; installierbar als PWA (Android/iOS)
 - Konfigurierbare Datenquelle: Standard ist GitHub Pages, kann auf eigenen Host umgestellt werden
@@ -46,7 +51,7 @@ und eine mobile Web-App (PWA/APK), die diese Daten offline durchsuchbar macht.
 | OpenPetition | de | https://www.openpetition.de/petitionen | 5 — sehr offen |
 | Change.org | de | https://www.change.org/?lang=de-DE | 3 — mittel |
 | Bundestag ePetitionen | de | https://epetitionen.bundestag.de/epet/petuebersicht/mz.nc.html | 2 — eingeschränkt |
-| Eko | de | https://eko.org/de/campaigns | 3 — mittel |
+| Ekō | de | https://eko.org/de/campaigns | 3 — mittel |
 | Innn.it | de | https://innn.it/ | 3 — mittel |
 | WeMove Europe | de | https://wemove.eu/de/campaigns | 3 — mittel |
 | Europäisches Parlament | en | https://www.europarl.europa.eu/petitions/en/home | 4 — offen |
@@ -69,7 +74,8 @@ robots.txt. 1 = keine Liste, Bot-Schutz, keine maschinenlesbaren Daten.
   ist per robots.txt gesperrt und wird nicht genutzt
 - **Bundestag** — offizielle Daten, aber JS-Portal mit Session-Cookies und verstecktem
   AJAX-Fragment (Reverse-Engineering erforderlich)
-- **Eko** — deutsche Kampagnen über Startseite und Suche, Vollständigkeit nicht garantiert
+- **Ekō** — deutsche Kampagnen über Startseite und Suche, Vollständigkeit nicht
+  garantiert (Eigenschreibweise mit Makron, seit der Umbenennung von SumOfUs 2023)
 - **Innn.it** — vollständige Liste nur über verstecktes internes API (per Reverse-Engineering
   gefunden); liefert dafür vollständige Datensätze inkl. Volltext
 - **WeMove Europe** — Kampagnen inkl. Archiv, Zähler über separaten Progress-Endpoint
@@ -242,9 +248,15 @@ PetitionsManager/
 ├── webapp/
 │   ├── index.html         App-Einstieg
 │   ├── app.js             Komplette App-Logik (Vanilla JS, kein Framework)
-│   ├── style.css          App-Styles
+│   ├── texts.js           Alle sichtbaren Texte an einer Stelle
+│   ├── platforms.js       Marken je Plattform: Farben, Logodatei, Seitenverhältnis
+│   ├── style.css          Grundgestaltung (gilt immer)
+│   ├── theme.css          Dunkelmodus, hängt an <html data-theme>
+│   ├── layouts.css        Layouts Relief/Magazin, hängt an <html data-layout>
 │   ├── manifest.webmanifest  PWA-Manifest
 │   ├── sw.js              Service Worker (Offline-Cache)
+│   ├── logos/             Plattform-Logos als SVG-Sprite
+│   ├── icons/             App-Symbole für Startbildschirm und Manifest
 │   └── data/              Von publish.py erzeugte App-Daten
 │       ├── manifest.json  Plattform-Metadaten + Zähler
 │       └── <key>.json     Petitionen je Plattform
@@ -255,6 +267,18 @@ PetitionsManager/
     ├── scrape.yml         Täglicher Scrape + GitHub-Pages-Deploy
     └── build-apk.yml      Cloud-APK-Build (manuell oder bei Push)
 ```
+
+**Reihenfolge der drei Stylesheets im `<head>`:** `style.css` → `theme.css` →
+`layouts.css`. Bei gleicher Spezifität gewinnt die zuletzt geladene Datei —
+`layouts.css` steht deshalb hinten und kann die beiden anderen überschreiben.
+Wer sie vorzieht, dreht das um und verliert die Layout-Korrekturen im
+Dunkelmodus. Ungleiche Spezifität sticht die Reihenfolge allerdings weiterhin:
+eine Regel `:root[data-theme="dark"] .foo` (0,3,0) in `theme.css` schlägt
+`.foo` (0,1,0) aus `style.css`, obwohl `style.css` weiter vorn steht.
+
+**Nach jeder Änderung an `webapp/`** die Fassung im Kopf von `sw.js`
+hochzählen und den Grund darunter notieren — sonst liefert der Service Worker
+installierten Geräten weiter die alte Datei aus.
 
 ---
 
