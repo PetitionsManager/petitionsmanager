@@ -197,7 +197,7 @@ def record_from_card(slug: str, card: dict) -> dict:
                              if card.get("summary") else None),
         "image_url": card.get("image_url"),
         "url": f"{BASE_URL}/a/{slug}",
-        "started_by": "Eko",
+        "started_by": "Ekō",
         "kind": "petition",
         "category": classify(card.get("cta") or "", card.get("title") or ""),
     }
@@ -257,7 +257,7 @@ def _parse_next_template(props: dict, html: str, url: str) -> dict | None:
     soup = BeautifulSoup(html, "html.parser")
     rec["image_url"] = _meta(soup, "og:image")
     rec["url"] = url
-    rec["started_by"] = "Eko"
+    rec["started_by"] = "Ekō"
     rec["kind"] = "petition"
     tags = [t.get("name") for t in props.get("tags") or []
             if isinstance(t, dict) and t.get("name")]
@@ -303,7 +303,7 @@ def _parse_legacy_template(html: str, url: str) -> dict | None:
             bad.decompose()
         rec["description_full"] = sanitize_fragment(content, BASE_URL) or None
 
-    rec["started_by"] = "Eko"
+    rec["started_by"] = "Ekō"
     rec["kind"] = "petition"
     return rec
 
@@ -433,8 +433,12 @@ PLATFORM = Platform(
                   "(je Begriff auf 27 gedeckelt → Union vieler Begriffe) "
                   "abgedeckt; zwei Seiten-Templates, Gesamt-Sitemap ohne "
                   "Sprachkennung — Vollständigkeit nicht garantiert.",
-    name="Eko",
-    eyebrow="Eko · Kampagnen (deutsch)",
+    # Eigenschreibweise der Plattform ist „Ekō" (mit Makron, seit der
+    # Umbenennung von SumOfUs 2023) — der Name steht hier zentral und läuft
+    # über publish.py ins Manifest; wirkt also erst mit dem nächsten
+    # publish-/CI-Lauf, nicht sofort in webapp/data.
+    name="Ekō",
+    eyebrow="Ekō · Kampagnen (deutsch)",
     source_url="https://eko.org/de/campaigns",
     data_file=DATA_FILE,
     html_file=HTML_FILE,
