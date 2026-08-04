@@ -61,7 +61,18 @@ LOC_RE  = re.compile(r"<loc>https://www\.change\.org/p/([^<]+)</loc>")
 TRENDING_RE = re.compile(r'"trendingTopics":\[(.*?)\]', re.S)
 TOPIC_SLUG_RE = re.compile(r'"name":"[^"]*","slug":"([a-z0-9-]+)"')
 # Themenseite /t/<slug>: server-gerenderte Petitions-Links (je ~21).
-PETITION_SLUG_RE = re.compile(r'/p/([a-z0-9%-]+)')
+#
+# ⚠️ Die Prozent-Kodierung muss als GANZES gefasst werden. Die frühere Fassung
+# r'/p/([a-z0-9%-]+)' kannte keine Großbuchstaben — deutsche Slugs enthalten
+# aber kodierte Umlaute, und deren Hex-Ziffern sind groß: „vermögens" steht als
+# „verm%C3%B6gens" in der Seite. Der Ausdruck nahm „verm%" und brach am „C" ab.
+# Folge (4.8.26 gemessen): 81 Datensätze mit abgeschnittener Adresse, die
+# kürzesten nur noch ein Zeichen lang („k", „h", „r"). Sie liefern 404, und
+# recheck_missing schloss daraus, die Petition sei gelöscht — dabei war unser
+# eigener Link kaputt. Gegenprobe: von 1.938 Sätzen MIT Titel tragen 1.543 eine
+# vollständige Prozent-Kodierung im Slug (die kommen über LOC_RE aus der
+# Sitemap), von den 81 titellosen kein einziger.
+PETITION_SLUG_RE = re.compile(r'/p/((?:[a-z0-9-]|%[0-9A-Fa-f]{2})+)')
 # /t/<slug> paginiert die restlichen Petitionen nur über /api-proxy/, das
 # robots.txt SPERRT – daher bewusst nur die ~21 der gerenderten Seite.
 # Deutsche Signalwörter im Slug (inkl. URL-encodeter Umlaute %C3%A4/ö/ü/ß).
@@ -216,6 +227,61 @@ def scrape_petition(fetcher: core.Fetcher, slug: str) -> tuple[str, dict | None]
 # ----------------------------------------------------------------------------
 # Ablauf eines Laufs
 # ----------------------------------------------------------------------------
+def heile_abgeschnittene(store: dict, discovered: dict, save) -> list[str]:
+    """Datensätze reparieren, deren Slug ein früherer Fehler abgeschnitten hat.
+
+    Bis zum 4.8.26 brach PETITION_SLUG_RE an der Prozent-Kodierung deutscher
+    Umlaute ab (siehe dort). Zurück blieben 81 Datensätze mit einer Adresse wie
+    „barrierefreiheit-in-k" statt „barrierefreiheit-in-k%C3%B6ln-porz-…". Die
+    liefern 404, und recheck_missing hat daraus geschlossen, die Petition sei
+    gelöscht — dabei war unser Link kaputt. Der reparierte Ausdruck verhindert
+    NEUE Fälle; die vorhandenen bekommt nur diese Zusammenführung zurück, und
+    sie muss im Scraper stehen, weil der Live-Bestand im Actions-Cache liegt
+    und nicht im Repo.
+
+    Sicherheitsnetz: angefasst wird ausschließlich, was KEINEN Titel hat und
+    echter Präfix von GENAU EINEM entdeckten Slug ist. Ein gesunder Datensatz
+    kann damit nicht getroffen werden, und bei mehreren Kandidaten wird nichts
+    geraten. Am 4.8.26 gemessen: von 81 kaputten Slugs 49 eindeutig auflösbar
+    (29 davon Duplikate eines bereits vorhandenen Satzes, 20 echte Neuzugänge),
+    24 mehrdeutig, 8 gar nicht in den Sitemaps."""
+    kaputt = [s for s, r in store.items()
+              if not s.startswith("_") and not (r.get("title") or "").strip()]
+    if not kaputt:
+        return []
+    vervollstaendigt: list[str] = []
+    verschmolzen = 0
+    for s in kaputt:
+        kandidaten = [v for v in discovered if v != s and v.startswith(s)]
+        if len(kandidaten) != 1:
+            continue
+        voll = kandidaten[0]
+        if voll in store:
+            # Der richtige Datensatz existiert schon – der abgeschnittene ist
+            # ein Duplikat und kann weg. Die Unterschriften-Historie des
+            # Torsos ist wertlos: er wurde nie erfolgreich abgerufen.
+            del store[s]
+            verschmolzen += 1
+        else:
+            rec = store.pop(s)
+            rec["slug"] = voll
+            rec["url"] = f"{BASE_URL}/p/{voll}"
+            # „offline" war die Fehldiagnose aus dem 404 unserer eigenen
+            # kaputten Adresse – zurücknehmen, damit der Satz wieder geprüft
+            # wird. last_checked entfernen, sonst sperrt skip_recent ihn 24 h.
+            for feld in ("status", "offline_since", "offline_misses",
+                         "last_checked"):
+                rec.pop(feld, None)
+            store[voll] = rec
+            vervollstaendigt.append(voll)
+    if verschmolzen or vervollstaendigt:
+        log(f"Abgeschnittene Adressen repariert: {len(vervollstaendigt)} "
+            f"Slug(s) vervollständigt, {verschmolzen} Dublette(n) entfernt "
+            f"(von {len(kaputt)} kaputten).")
+        save()
+    return vervollstaendigt
+
+
 def run(args) -> None:
     store = core.load_store(DATA_FILE)
     fetcher = core.Fetcher(delay=args.delay, headers=FETCH_HEADERS)
@@ -249,7 +315,13 @@ def run(args) -> None:
 
     log("Scanne Sitemaps nach deutschen Kandidaten …")
     discovered = discover_slugs(fetcher)
-    new_slugs = [s for s in discovered if s not in store][:MAX_NEW_PER_RUN]
+    # Die reparierten Slugs stehen jetzt im Store und fielen deshalb aus der
+    # Auswahl unten heraus ("s not in store"). Die Schleife über die bekannten
+    # Petitionen ist aber längst durch – ohne sie hier voranzustellen, bliebe
+    # ihr Inhalt bis zum nächsten Lauf leer.
+    repariert = heile_abgeschnittene(store, discovered, save)
+    new_slugs = repariert + [s for s in discovered
+                             if s not in store][:MAX_NEW_PER_RUN]
     if args.limit:
         new_slugs = new_slugs[:args.limit]
     log(f"{len(new_slugs)} Kandidaten zum Prüfen "
