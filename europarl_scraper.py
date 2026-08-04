@@ -26,6 +26,7 @@
 from __future__ import annotations
 
 import re
+from html import unescape as html_unescape
 from pathlib import Path
 
 from bs4 import BeautifulSoup
@@ -125,14 +126,29 @@ def parse_detail(html: str, url: str, slug: str) -> dict:
     status_seg = next((s for s in segs if s.startswith("Status:")), "")
     status_txt = status_seg.removeprefix("Status:").strip()
 
-    # Zusammenfassung: erstes langes Segment nach einer
-    # "Petition Summary"-Überschrift.
-    summary = None
+    # Zusammenfassung. Die Überschrift "Petition Summary" steht MEHRFACH auf der
+    # Seite: einmal im Sprungmenü am Kopf, einmal über dem eigentlichen Text.
+    # Auf das erste Vorkommen folgt der Titel der Petition ("Petition No …"),
+    # und der ist mit über 120 Zeichen lang genug, um die frühere Suche schon
+    # dort zu beenden — gespeichert wurde dann der Titel statt der
+    # Zusammenfassung. Nachgewiesen am 3.8.26 an 0474/2026: in der App stand
+    # als Kurzbeschreibung wörtlich die Überschrift.
+    # Jetzt werden ALLE Vorkommen eingesammelt, Titelwiederholungen verworfen
+    # und der längste Rest genommen; die eigentliche Zusammenfassung ist auf
+    # dieser Seite immer der längste Textblock.
+    kandidaten: list[str] = []
     for i, s in enumerate(segs):
-        if s == "Petition Summary":
-            summary = next((t for t in segs[i + 1:i + 4] if len(t) > 120), None)
-            if summary:
-                break
+        if s != "Petition Summary":
+            continue
+        for t in segs[i + 1:i + 5]:
+            if len(t) > 120 and not t.startswith("Petition No "):
+                kandidaten.append(t)
+    summary = max(kandidaten, key=len) if kandidaten else None
+    # Der Text ist auf der Seite DOPPELT maskiert ("&amp;#39;" im Quelltext).
+    # get_text() löst eine Stufe auf, übrig bleibt sichtbares "&#39;" mitten im
+    # Satz. Die zweite Stufe deshalb hier.
+    if summary and "&" in summary:
+        summary = html_unescape(summary)
     if summary:
         rec["description_full"] = f"<p>{core._esc(summary)}</p>"
         rec["summary"] = (summary[:200] + "…") if len(summary) > 200 else summary
