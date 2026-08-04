@@ -152,6 +152,25 @@ _SIM_DIA = str.maketrans({
 })
 
 
+# ActionKit (WeMove, 350.org) beantwortet auch unfertige und Testseiten mit
+# HTTP 200 — der Titel lautet dann „Enter a Title for <seitenname>". Solche
+# Seiten sind keine Petitionen; ohne diese Prüfung standen am 4.8.26 zwanzig
+# davon in der App, darunter „…michal-test12…" und „…postactiontest3…".
+PLATZHALTER_TITEL = re.compile(r"^\s*enter a title\b", re.I)
+
+
+def brauchbarer_titel(rec: dict) -> bool:
+    """Hat der Datensatz einen Titel, mit dem sich jemand etwas anfangen kann?
+
+    Ohne Titel ist eine Petition in der App nicht lesbar, nicht suchbar und
+    nicht sortierbar — sie erschien als leere Zeile „(ohne Titel)". Am 4.8.26
+    betraf das 276 der 16.914 ausgelieferten Datensätze, 184 davon bei WeMove.
+    Sie bleiben im Store (ein späterer Lauf kann sie noch füllen), aber
+    ausgeliefert werden sie erst, wenn sie einen Titel haben."""
+    titel = (rec.get("title") or "").strip()
+    return bool(titel) and not PLATZHALTER_TITEL.match(titel)
+
+
 def slim(rec: dict) -> dict:
     out = {k: rec.get(k) for k in SLIM_FIELDS if rec.get(k) is not None}
     # Fallback: Ältere Datensätze ohne gespeicherte Tags bekommen sie hier beim
@@ -420,10 +439,17 @@ def main() -> None:
             meta = data.pop("_meta", {})
             entry["generated_at"] = meta.get("generated_at")
             entry["new"] = len(meta.get("new_petitions_last_run") or [])
+            # Titellose Datensätze bleiben im Store, gehen aber nicht in die
+            # App — siehe brauchbarer_titel().
+            brauchbar = [r for r in data.values() if brauchbarer_titel(r)]
+            verworfen = len(data) - len(brauchbar)
+            if verworfen:
+                print(f"  {p.key}: {verworfen} Datensatz/Datensätze ohne "
+                      f"brauchbaren Titel nicht ausgeliefert")
             # Nach Unterschriften absteigend; Volltext getrennt mitführen,
             # damit Reihenfolge und Paketnummern zusammenpassen.
             pairs = sorted(
-                ((slim(r), r.get("description_full")) for r in data.values()),
+                ((slim(r), r.get("description_full")) for r in brauchbar),
                 key=lambda t: t[0].get("signatures") or -1, reverse=True)
             items = [a for a, _ in pairs]
             by_platform[p.key] = items
