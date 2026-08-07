@@ -405,8 +405,49 @@
       abends und 6.8. an einer Petition mit ungecachten Bildern: im Sichtfeld
       lädt sofort, weiter unten beim Hinscrollen). Der Platzhalter verschwindet
       nach dem Laden wieder, sonst bekämen kleine Partnerlogos (105×59) einen
-      zu hohen Kasten. */
-var CACHE = "pm-cache-v31";
+      zu hohen Kasten.
+
+   33. Acht weitere Nutzerwünsche vom 6.8.2026 (abends):
+      a) AUSGEBLENDET, NICHT GELÖSCHT — neuer Schalterblock ZEIGE in app.js:
+      der Profil-Kopf (Avatar, Bild, Namensfeld) und der Datenquelle-Umschalter
+      werden nicht mehr eingebaut. Der Code bleibt vollständig stehen, ein
+      `true` holt beides unverändert zurück. Solange der Umschalter ruht, steht
+      die Quelle FEST auf QUELLE_FEST und der in localStorage gespeicherte Wert
+      wird bewusst übergangen — sonst hinge eine frühere Wahl unsichtbar nach.
+      b) OHNE INTERNET erklärt die App sich jetzt selbst: Band über der
+      Fußleiste (#offbar, wegklickbar, kommt beim nächsten Zustandswechsel von
+      selbst wieder), `data-offline` an <html>, und statt kaputter Bildsymbole
+      Platzhalter — in der Liste das Plattform-Logo, im Aufruftext ein
+      beschrifteter Kasten. Die Bilder werden dabei GAR NICHT erst angefordert:
+      bilderAlsPlatzhalter() geht über DOMParser, dessen Dokument ist inert.
+      Gemessen mit simuliertem Ausfall: 0 echte Bilder / 15 Platzhalter in der
+      Liste, 0/3 im Aufruftext, Band exakt auf der Fußleiste; zurück im Netz
+      sind die 15 Bilder wieder da, Wegklicken lässt den Zustand unberührt.
+      c) STECKBRIEF für alle Plattformen gleich (STECKBRIEF + steckbriefHtml).
+      Fehlt ein Wert, steht „–" statt dass die Zeile verschwindet — vorher
+      hatte jede Plattform einen anders langen Steckbrief und die Zeilen
+      verrutschten beim Vergleich. Hinter jeder Angabe ein Quellsymbol auf
+      about.quelle; einzelne Zeilen dürfen später about.quellen[feld] bekommen,
+      ohne dass sich am Code etwas ändert. Alle elf Quellen am 6.8. abgerufen
+      und gegen eine ERFUNDENE Schwester-Adresse gegengeprüft.
+      d) IMPRESSUM kommt aus dem eigenen Feld about.impressum statt aus einer
+      Regex über Beschriftung und Adresse. Die traf mal zu viel, mal zu wenig,
+      und was sie nicht traf, fehlte wortlos. `null` heißt jetzt ausdrücklich
+      „gibt es nicht" (Change.org, Avaaz, Ekō, 350.org sitzen in den USA).
+      e) Plattformen ALPHABETISCH — die Sortierung sitzt jetzt zentral in
+      livePlatforms(). Sie stand vorher an zwei Stellen einzeln und fehlte in
+      Rechte-Tabelle, Ersteinrichtung und Cross-Suche, die deshalb nach
+      Aufnahmedatum liefen.
+      f) „– wir nehmen sie heraus." ist raus; der Satz gab eine Zusage ab,
+      bevor jemand geprüft hat, worum es geht. Stattdessen ein Kontakt-Knopf.
+      g) BROWSER-ZURÜCK in der Web-App gegengeprüft: Plattform → Profil →
+      zurück → Plattform → zurück → Übersicht.
+      h) ABSTÄNDE: echter Befund in der Rechte-Tabelle — die elf Blöcke standen
+      8 px auseinander, INNEN waren es 6. Damit war die Gruppierung praktisch
+      aufgehoben. Jetzt 20 außen gegen 10 innen (Regel: außen > innen),
+      Zählzeile → Unterschriftenliste 8 → 14 px. Bewusst nur diese Stellen —
+      der Nutzer hat „lieber größer" gleich um „nicht zu groß" ergänzt. */
+var CACHE = "pm-cache-v32";
 /* Versionsunabhängig – überlebt das Hochzählen von CACHE. Diese Zahl sollte ab
    jetzt NICHT mehr steigen: seit die Pakete eine Inhaltskennung tragen ("?v=",
    siehe oben) holt sich jedes geänderte Paket von selbst neu. Ein Sprung wäre

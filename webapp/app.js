@@ -32,8 +32,33 @@
   var HINT_KEYS = ["swipeHintDismissed", "favTipDismissed"];
   var nf = new Intl.NumberFormat("de-DE");
 
+  /* ---- Vorerst ausgeblendete Teile (Nutzerwunsch 6.8.2026) -----------------
+     „Kann erstmal ausgeblendet werden (NICHT gelöscht), brauchen wir aktuell
+     nicht." Der Code bleibt deshalb vollständig stehen — nur diese Schalter
+     entscheiden, ob er gezeigt wird. Zum Zurückholen genügt ein `true`, es
+     muss nichts wiederhergestellt werden.
+     An EINER Stelle gesammelt, aus demselben Grund wie HINT_KEYS darüber: ein
+     verstreutes `if (false)` findet später niemand wieder. */
+  var ZEIGE = {
+    // Avatar, Bild-Knopf und Namensfeld auf der Profilseite. Der Name wird
+    // weiterhin gespeichert und im Export verwendet, nur die Eingabe ruht.
+    profilKopf: false,
+    // Umschalter Automatisch/Mitgeliefert/Live samt „Eigene Quelle".
+    // Ist er aus, steht die Quelle FEST (siehe QUELLE_FEST unten) — der
+    // gespeicherte Wert aus localStorage wird dann bewusst übergangen.
+    datenquelle: false
+  };
+  /* Die feste Quelle, solange der Umschalter ruht: „Automatisch" nimmt die
+     tagesaktuellen Daten, wenn sie erreichbar und neuer sind als die
+     mitgelieferten — und fällt ohne Verbindung von selbst auf das App-Paket
+     zurück. Genau das Verhalten, das der Nutzer beschrieben hat („wenn es kein
+     Internet gibt, können halt keine Updates geladen werden"). */
+  var QUELLE_FEST = DEFAULT_BASE;
+
   var state = {
-    baseSetting: LS.getItem("dataBase") || DEFAULT_BASE,  // "auto" | "./data" | URL
+    baseSetting: ZEIGE.datenquelle
+      ? (LS.getItem("dataBase") || DEFAULT_BASE)   // "auto" | "./data" | URL
+      : QUELLE_FEST,
     base: BUNDLED_BASE,   // tatsächlich benutzte Quelle; resolveBase() setzt sie
     baseAuto: null,       // bei "auto": "live" | "bundled"
     baseWhy: null,        // Kurzbegründung für die Zeile in den Einstellungen
@@ -58,6 +83,10 @@
     archiveOpen: false,   // Archiv-Akkordion (Plattform-Detail) offen?
     offlineOpen: false,   // Offline-Akkordion offen?
     closedOpen: false,    // Akkordion "Beendet" offen? (Frist abgelaufen)
+    // Verbindungszustand. navigator.onLine ist die einzige Angabe, die ohne
+    // eigenen Netzabruf zu haben ist; sie ist grob (WLAN ohne Internet gilt
+    // als online), aber für „Bilder gar nicht erst anfordern" genau richtig.
+    online: (typeof navigator === "undefined" || navigator.onLine !== false),
     prefs: null,          // persönliche Einstellungen (siehe loadPrefs)
     signedQuery: "",      // Suchwort in "Meine unterzeichneten Petitionen"
     aboutPlatform: false, // Info-Panel "Über diese Plattform" offen?
@@ -462,8 +491,22 @@
     if (on) state.archived.add(u); else state.archived.delete(u);
     saveSet("archivedPetitions", state.archived);
   }
+  /* Alle Live-Plattformen, IMMER alphabetisch (Nutzerwunsch 6.8.2026).
+     Die Sortierung sitzt hier und nicht bei den Aufrufern: sie stand vorher an
+     drei Stellen einzeln (Liste, Einstellungen) und fehlte an mehreren anderen
+     — Rechte-Tabelle, Ersteinrichtung und Cross-Suche liefen in der Reihenfolge
+     des Manifests, also nach Aufnahmedatum. Eine Kopie mit slice(), damit die
+     Reihenfolge im Manifest unangetastet bleibt.
+     localeCompare mit „de": sonst stünde „Ekō" hinter „Innn.it" und „Über…"
+     hinter „Zeit". Ziffern kommen davor, 350.org steht also zuerst. */
   function livePlatforms() {
-    return state.manifest.platforms.filter(function (p) { return p.live; });
+    return state.manifest.platforms
+      .filter(function (p) { return p.live; })
+      .slice()
+      .sort(function (a, b) {
+        return String(a.name || a.key).localeCompare(
+               String(b.name || b.key), "de", { numeric: true });
+      });
   }
 
   // ---- Daten laden -----------------------------------------------------------
@@ -830,6 +873,63 @@
   /* Tabelle je Plattform. Bewusst gestapelt und nicht als <table>: bei rund
      380 px Breite läuft eine fünfspaltige Tabelle über den Rand, und ein
      querscrollender Rechtstext wird nicht gelesen. */
+  /* ---- Steckbrief einer Plattform ------------------------------------------
+     EINE Liste für ALLE Plattformen (Nutzerwunsch 6.8.2026: „schreibe bei
+     allen Plattformen den gleichen Steckbrief … so kann man später den
+     Steckbrief erweitern und das gilt dann für alle Plattformen"). Wer hier
+     eine Zeile ergänzt, ergänzt sie damit überall — genau das war der Wunsch.
+
+     ⚠️ Fehlt ein Wert, steht „–", statt dass die Zeile verschwindet. Vorher
+     filterte der Code leere Werte heraus; dadurch hatte jede Plattform einen
+     anders langen Steckbrief, und beim Blättern verrutschten die Zeilen
+     gegeneinander. Eine leere Angabe ist außerdem selbst eine Information
+     („nicht bekannt"), eine fehlende Zeile ist nur eine Lücke, die man für ein
+     Versehen hält. */
+  var STECKBRIEF = [
+    { feld: "operator",  label: "Träger" },
+    { feld: "seat",      label: "Sitz" },
+    { feld: "founded",   label: "Gegründet" },
+    { feld: "financing", label: "Finanzierung" },
+    { feld: "impressum", label: "Impressum", alsLink: true }
+  ];
+
+  // Aus einer Adresse den Gastgebernamen — als Linktext lesbarer als die
+  // vollständige URL, die in der schmalen Spalte ohnehin umbräche.
+  function kurzUrl(u) {
+    var m = String(u).match(/^https?:\/\/([^/]+)/i);
+    return m ? m[1].replace(/^www\./, "") : String(u);
+  }
+
+  /* Baut die Steckbrief-Liste. Das kleine Symbol hinter jeder Angabe führt auf
+     die Seite, auf der sie sich nachprüfen lässt (platforms.js →
+     about.quelle). Einzelne Zeilen dürfen später eine eigene Quelle bekommen
+     (about.quellen[feld]) — ohne dass sich hier etwas ändern muss.
+     Zeilen, die selbst schon ein Link sind (Impressum), bekommen KEIN
+     zusätzliches Quellsymbol: der Wert ist dort die Quelle. */
+  function steckbriefHtml(about) {
+    var quellen = about.quellen || {};
+    return '<dl class="pabout__facts">' + STECKBRIEF.map(function (z) {
+      var wert = about[z.feld];
+      var leer = wert === null || wert === undefined || wert === "";
+      var inhalt, src = "";
+      if (leer) {
+        inhalt = '<span class="fact-leer" title="nicht bekannt">–</span>';
+      } else if (z.alsLink) {
+        inhalt = '<a href="' + esc(String(wert)) + '" target="_blank" ' +
+          'rel="noopener">' + esc(kurzUrl(wert)) +
+          ' <i class="fa-solid fa-arrow-up-right-from-square"></i></a>';
+      } else {
+        inhalt = esc(String(wert));
+        var q = quellen[z.feld] || about.quelle;
+        if (q) src = ' <a class="fact-src" href="' + esc(q) +
+          '" target="_blank" rel="noopener" title="Quelle für diese Angabe" ' +
+          'aria-label="Quelle für ' + esc(z.label) + '">' +
+          '<i class="fa-solid fa-arrow-up-right-from-square"></i></a>';
+      }
+      return "<dt>" + esc(z.label) + "</dt><dd>" + inhalt + src + "</dd>";
+    }).join("") + "</dl>";
+  }
+
   function rechtePlattformen() {
     var plats = (state.manifest && state.manifest.platforms)
       ? livePlatforms() : [];
@@ -843,8 +943,21 @@
       ].map(function (z) {
         return "<dt>" + esc(z[0]) + "</dt><dd>" + esc(z[1]) + "</dd>";
       }).join("");
-      var links = (about.links || []).filter(function (l) {
-        return /impressum|datenschutz|privacy|legal/i.test(l.label + l.url);
+      /* Impressum aus dem eigenen Feld about.impressum statt wie früher über
+         eine Regex auf Beschriftung und Adresse. Die Regex traf mal zu viel,
+         mal zu wenig — „Impressum & Kontakt" ja, „Richtlinien" nein, obwohl
+         beides die Rechtsangaben sind —, und was sie nicht traf, fehlte
+         wortlos. Der Nutzer hat genau das am 6.8.2026 bemerkt.
+         null heißt: es GIBT keine — Change.org, Avaaz, Ekō und 350.org sitzen
+         in den USA und kennen kein Impressum nach deutschem Vorbild. Das steht
+         jetzt ausdrücklich da, statt eine Lücke zu lassen. */
+      var links = about.impressum
+        ? '<a href="' + esc(about.impressum) + '" target="_blank" ' +
+          'rel="noopener">Impressum</a>'
+        : '<span class="legal__none">Kein Impressum – Betreiber außerhalb ' +
+          "des deutschen Rechtsraums</span>";
+      links += (about.links || []).filter(function (l) {
+        return /datenschutz|privacy/i.test(l.label + l.url);
       }).map(function (l) {
         return '<a href="' + esc(l.url) + '" target="_blank" rel="noopener">' +
                esc(l.label) + "</a>";
@@ -877,9 +990,17 @@
       "Veröffentlichung werden alle Betreiber angefragt; die Tabelle zeigt " +
       "je Plattform, wie weit das ist.</p>" +
       '<div class="legal__tbl">' + rechtePlattformen() + "</div>" +
+      /* „– wir nehmen sie heraus." ist auf Wunsch des Nutzers (6.8.2026)
+         gestrichen: der Satz gab eine Zusage ab, bevor überhaupt jemand
+         geprüft hat, worum es geht. Stattdessen der Weg dorthin — ein Knopf,
+         der schreibt, statt eines Versprechens. */
       '<p class="legal__note">Wenn Sie für eine der genannten Plattformen ' +
       "sprechen und mit der Darstellung Ihrer Inhalte nicht einverstanden " +
-      "sind, schreiben Sie uns – wir nehmen sie heraus.</p>";
+      "sind, schreiben Sie uns.</p>" +
+      '<div class="legal__btns"><a class="support__btn" href="mailto:' +
+      SUPPORT_MAIL + "?subject=" +
+      encodeURIComponent("[PetitionsManager] Rechte an den Inhalten") +
+      '"><i class="fa-solid fa-envelope"></i> Kontakt aufnehmen</a></div>';
   }
 
   var IMPRESSUM_HTML =
@@ -1428,7 +1549,12 @@
        und bricht dabei die Zeigerereignisse ab. In „klassisch" fiel das kaum
        auf (54×40 großes Bildchen), im Magazin füllt das Bild die halbe Karte –
        dort ging das Wischen deshalb fast immer ins Leere. */
-    var thumb = r.image_url
+    /* Ohne Internet direkt den Platzhalter: alle Vorschaubilder liegen auf
+       fremden Servern, ein <img> darauf zeigte offline nur ein kaputtes
+       Symbol — und der onerror-Ersatz weiter unten greift bei Bildern
+       ausserhalb des Sichtfensters gar nicht erst, weil loading="lazy" sie
+       nie anfordert und deshalb auch kein error feuert. */
+    var thumb = (r.image_url && state.online)
       ? '<img class="pet__thumb" src="' + esc(r.image_url) + '" alt="" ' +
         'loading="lazy" draggable="false">'
       : thumbPh;
@@ -1825,8 +1951,12 @@
      sowohl der schon im Datensatz stehende als auch der nachgeladene. */
   function descHtml(html) {
     if (!html) return html;
-    return (state.prefs && state.prefs.descImages === false)
-      ? stripImages(html) : html;
+    if (state.prefs && state.prefs.descImages === false)
+      return stripImages(html);
+    // Ohne Internet gar nicht erst versuchen: die Bilder liegen ausnahmslos
+    // auf fremden Servern. Statt kaputter Symbole ein beschrifteter Kasten.
+    if (!state.online) return bilderAlsPlatzhalter(html);
+    return html;
   }
 
   /* Reserviert Platz für Bilder im Aufruftext, bis sie da sind, und räumt den
@@ -2030,21 +2160,9 @@
 
     if (about.text) body.appendChild(el("<p>" + esc(about.text) + "</p>"));
 
-    // Kennzahlen nur zeigen, was wirklich hinterlegt ist.
-    var facts = [
-      [T("platform.operatorLabel", "Träger"), about.operator],
-      [T("platform.seatLabel", "Sitz"), about.seat],
-      [T("platform.foundedLabel", "Gegründet"), about.founded],
-      [T("platform.financingLabel", "Finanzierung"), about.financing]
-    ].filter(function (f) { return f[1]; });
-    if (facts.length) {
-      var dl = el('<dl class="pabout__facts"></dl>');
-      facts.forEach(function (f) {
-        dl.appendChild(el("<dt>" + esc(f[0]) + "</dt>"));
-        dl.appendChild(el("<dd>" + esc(f[1]) + "</dd>"));
-      });
-      body.appendChild(dl);
-    }
+    // Steckbrief: für jede Plattform dieselben Zeilen, „–" wo nichts vorliegt,
+    // Quellsymbol hinter jeder Angabe (siehe STECKBRIEF/steckbriefHtml oben).
+    body.appendChild(el(steckbriefHtml(about)));
 
     var links = (about.links || []).slice();
     if (!links.length && manifestEntry.source_url)
@@ -2975,6 +3093,15 @@
     });
     content.appendChild(refreshRow);
 
+    /* ⚠️ Ausgesetzt, nicht entfernt (Nutzerwunsch 6.8.2026: „das versteht man
+       schlecht … die Quelle soll immer festgeschrieben sein"). Der ganze Block
+       bleibt stehen; ZEIGE.datenquelle auf `true` bringt ihn unverändert
+       zurück. Solange er ruht, steht die Quelle auf QUELLE_FEST — und der in
+       localStorage gespeicherte Wert wird bewusst übergangen, sonst hinge ein
+       früher gewählter Wert unsichtbar nach.
+       Was ohne Verbindung passiert, erklärt jetzt der Offline-Hinweis am
+       unteren Rand statt dieses Umschalters. */
+    if (ZEIGE.datenquelle) {
     content.appendChild(el('<div class="srow__lbl">' +
       esc(T("settings.source", "Datenquelle")) + "</div>"));
     content.appendChild(segControl("Datenquelle",
@@ -3013,6 +3140,7 @@
           LS.setItem("dataBase", state.baseSetting);
           reloadData();
         } }));
+    }   // Ende ZEIGE.datenquelle
 
     content.appendChild(setRow("fa-circle-info",
       T("settings.about", "Über die App"), null,
@@ -3601,7 +3729,13 @@
       });
       head.appendChild(rm);
     }
-    content.appendChild(head);
+    /* ⚠️ Ausgesetzt, nicht entfernt (Nutzerwunsch 6.8.2026: „brauchen wir
+       aktuell nicht"). Ausgesetzt ist NUR der Einbau — der Block darüber wird
+       weiter vollständig gebaut und bleibt funktionsfähig; ein `true` bei
+       ZEIGE.profilKopf holt ihn unverändert zurück. Der gespeicherte Name
+       bleibt erhalten und wandert weiterhin in den Export-Dateinamen und in
+       die Sicherung, er lässt sich nur gerade nicht ändern. */
+    if (ZEIGE.profilKopf) content.appendChild(head);
 
     // ---- Wirkungs-Karte ------------------------------------------------------
     var total = state.signed.size;
@@ -3987,6 +4121,59 @@
     document.body.appendChild(ov);
   }
 
+  /* ---- Ohne Internet --------------------------------------------------------
+     Die Datenquelle steht fest (siehe ZEIGE.datenquelle). Damit ist „kein
+     Netz" kein Einstellungsproblem mehr, sondern ein Zustand, den die App
+     erklären muss: es kommen keine Aktualisierungen, und die Bilder fehlen —
+     die liegen ALLE auf fremden Servern (19 verschiedene), kein einziges im
+     App-Paket.
+
+     Zwei sichtbare Folgen, beide gewollt:
+       1. ein Hinweisband am unteren Rand (index.html → #offbar), wegklickbar,
+          das beim nächsten Wechsel des Zustands von selbst wiederkommt;
+       2. statt kaputter Bildsymbole überall Platzhalter — in der Liste das
+          Plattform-Logo, im Aufruftext ein beschrifteter Kasten.
+     Das Attribut an <html> ist der Schalter für alles Weitere im CSS. */
+  function setzeOnline(jetztOnline) {
+    var vorher = state.online;
+    state.online = !!jetztOnline;
+    if (vorher === state.online) return;      // nichts hat sich geändert
+    document.documentElement.setAttribute("data-offline",
+      state.online ? "" : "1");
+    if (!state.online) offbarZeigen(true);    // Zustandswechsel → wieder zeigen
+    else offbarZeigen(false);
+    /* Neu zeichnen, weil die Bild-Entscheidung im Markup steckt und nicht im
+       CSS: ein <img> mit fremder Adresse würde offline ein kaputtes Symbol
+       zeigen, noch bevor eine Regel greifen könnte. */
+    if (state.manifest) render();
+  }
+
+  function offbarZeigen(zeigen) {
+    var bar = document.getElementById("offbar");
+    if (bar) bar.hidden = !zeigen;
+    document.body.classList.toggle("hat-offbar", !!zeigen);
+  }
+
+  /* Bilder im Aufruftext durch beschriftete Platzhalter ersetzen — OHNE sie zu
+     laden. Derselbe DOMParser-Weg wie stripImages(): das entstehende Dokument
+     ist „inert" und holt keine Dateien. Ein losgelöstes <div> mit innerHTML
+     täte es NICHT, dort startet ein gesetztes img.src den Abruf trotzdem. */
+  function bilderAlsPlatzhalter(html) {
+    if (!html || html.indexOf("<img") < 0 || !window.DOMParser) return html;
+    try {
+      var doc = new DOMParser().parseFromString(
+        "<!DOCTYPE html><body>" + html, "text/html");
+      var bilder = doc.body.querySelectorAll("img");
+      for (var i = 0; i < bilder.length; i++) {
+        var ph = doc.createElement("div");
+        ph.className = "img-off";
+        ph.textContent = "Bild – ohne Internet nicht verfügbar";
+        bilder[i].parentNode.replaceChild(ph, bilder[i]);
+      }
+      return doc.body.innerHTML;
+    } catch (e) { return html; }
+  }
+
   /* ---- Zurück-Navigation ----------------------------------------------------
      Die App ist eine einzige Seite. Ohne Zutun kennt der Browser deshalb genau
      EINEN History-Eintrag – und auf Android hieß das: die Zurücktaste des
@@ -4177,6 +4364,21 @@
       if (mq.addEventListener) mq.addEventListener("change", applyTheme);
       else if (mq.addListener) mq.addListener(applyTheme);
     }
+
+    /* Verbindungszustand mitführen. Der Startwert steht schon im state; hier
+       wird nur das Attribut an <html> gesetzt und das Band gezeigt, falls es
+       beim Start schon kein Netz gibt. */
+    document.documentElement.setAttribute("data-offline",
+      state.online ? "" : "1");
+    if (!state.online) offbarZeigen(true);
+    window.addEventListener("online", function () { setzeOnline(true); });
+    window.addEventListener("offline", function () { setzeOnline(false); });
+    var offx = document.getElementById("offbarx");
+    if (offx) offx.addEventListener("click", function () {
+      /* Nur wegklicken, den Zustand NICHT ändern: die App bleibt offline, das
+         Band kommt beim nächsten Wechsel von selbst wieder. */
+      offbarZeigen(false);
+    });
 
     // Nach-oben-Button: erscheint nach dem Scrollen, scrollt sanft hoch.
     var toTop = document.getElementById("to-top");

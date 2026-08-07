@@ -48,6 +48,11 @@ window.PM_PLATFORMS = {
     wikipedia: "https://de.wikipedia.org/wiki/Campact",
     tagline: "Petitionsplattform von Campact",
     about: {
+      /* Quelle des Steckbriefs: hier sind Traeger, Sitz, Gruendung und
+         Finanzierung nachpruefbar. Am 6.8.2026 abgerufen und gegen eine
+         ERFUNDENE Schwester-Adresse gegengeprueft (Soft-404-Falle). */
+      quelle: "https://www.campact.de/ueber-campact/impressum/",
+      impressum: "https://www.campact.de/ueber-campact/impressum/",
       text: "WeAct ist die Petitionsplattform des gemeinnützigen Vereins Campact e. V. und richtet sich an alle, die eine gesellschaftspolitische Petition starten oder unterstützen möchten. Die Plattform bietet professionelle Kampagnenunterstützung durch das Campact-Team. Besonders geeignet für Anliegen mit gesellschaftspolitischer Dimension, die eine breite Unterstützung anstreben.",
       operator: "Campact e. V.",
       seat: "Verden (Aller), Deutschland",
@@ -73,6 +78,11 @@ window.PM_PLATFORMS = {
     wikipedia: "https://de.wikipedia.org/wiki/OpenPetition",
     tagline: "Bürgerplattform für Petitionen",
     about: {
+      /* Quelle des Steckbriefs: hier sind Traeger, Sitz, Gruendung und
+         Finanzierung nachpruefbar. Am 6.8.2026 abgerufen und gegen eine
+         ERFUNDENE Schwester-Adresse gegengeprueft (Soft-404-Falle). */
+      quelle: "https://www.openpetition.de/content/legal_details",
+      impressum: "https://www.openpetition.de/content/legal_details",
       text: "OpenPetition ist eine gemeinnützige Online-Plattform, auf der Bürgerinnen und Bürger Petitionen zu politischen, gesellschaftlichen und lokalen Themen starten und unterzeichnen können. Die Plattform wird von der openPetition gGmbH betrieben und versteht sich als unabhängige, werbefreie Infrastruktur für demokratische Beteiligung. Sie gehört zu den meistgenutzten Petitionsplattformen im deutschsprachigen Raum.",
       operator: "openPetition gGmbH",
       seat: "Berlin, Deutschland",
@@ -97,6 +107,11 @@ window.PM_PLATFORMS = {
     wikipedia: "https://de.wikipedia.org/wiki/Change.org",
     tagline: "Globale Petitionsplattform",
     about: {
+      /* Quelle des Steckbriefs: hier sind Traeger, Sitz, Gruendung und
+         Finanzierung nachpruefbar. Am 6.8.2026 abgerufen und gegen eine
+         ERFUNDENE Schwester-Adresse gegengeprueft (Soft-404-Falle). */
+      quelle: "https://www.change.org/about",
+      impressum: "https://www.change.org/policies",
       text: "Change.org ist eine der weltweit größten Petitionsplattformen und ermöglicht es Einzelpersonen, Petitionen zu jedem Thema zu starten und zu unterzeichnen. Die Plattform ist weltweit aktiv und in zahlreichen Sprachen verfügbar. Betrieben wird sie von Change.org PBC, einer amerikanischen Public Benefit Corporation mit Sitz in San Francisco.",
       operator: "Change.org, PBC",
       seat: "San Francisco, USA",
@@ -130,6 +145,11 @@ window.PM_PLATFORMS = {
     logoAR:   3.650,
     tagline: "Petitionen für Deutschland",
     about: {
+      /* Quelle des Steckbriefs: hier sind Traeger, Sitz, Gruendung und
+         Finanzierung nachpruefbar. Am 6.8.2026 abgerufen und gegen eine
+         ERFUNDENE Schwester-Adresse gegengeprueft (Soft-404-Falle). */
+      quelle: "https://innn.it/impressum",
+      impressum: "https://innn.it/impressum",
       text: "innn.it ist eine gemeinnützige Petitionsplattform mit Schwerpunkt auf deutschen politischen und gesellschaftlichen Themen. Der Trägerverein innn.it e. V. wurde 2022 als eigenständige Organisation gegründet, nachdem die Plattform zunächst im Netzwerk von Change.org betrieben worden war. Die Finanzierung erfolgt vollständig durch Spenden.",
       operator: "innn.it e. V.",
       seat: "Berlin, Deutschland",
@@ -138,7 +158,8 @@ window.PM_PLATFORMS = {
       links: [
         { label: "Website",     url: "https://innn.it" },
         { label: "Transparenz", url: "https://innn.it/transparenz" },
-        { label: "Impressum & Kontakt", url: "https://innn.it/impressum" }
+        { label: "Impressum & Kontakt", url: "https://innn.it/impressum" },
+        { label: "Datenschutz", url: "https://innn.it/datenschutz" }
       ]
     }
   },
@@ -154,6 +175,11 @@ window.PM_PLATFORMS = {
     wikipedia: "https://de.wikipedia.org/wiki/Avaaz",
     tagline: "Globale Bürgerbewegung",
     about: {
+      /* Quelle des Steckbriefs: hier sind Traeger, Sitz, Gruendung und
+         Finanzierung nachpruefbar. Am 6.8.2026 abgerufen und gegen eine
+         ERFUNDENE Schwester-Adresse gegengeprueft (Soft-404-Falle). */
+      quelle: "https://secure.avaaz.org/en/about.php",
+      impressum: null,
       text: "Avaaz ist eine globale Online-Bürgerbewegung, die sich für Demokratie, Menschenrechte, Tierschutz, Korruptionsbekämpfung und Klimaschutz einsetzt. Die Organisation wurde 2007 gegründet, ist vollständig mitgliederfinanziert und lehnt Unternehmens- und Regierungsgelder ab. Sie gehört zu den großen internationalen Kampagnen-Netzwerken.",
       operator: "Avaaz Foundation",
       seat: "London, Vereinigtes Königreich",
@@ -179,6 +205,11 @@ window.PM_PLATFORMS = {
     wikipedia: "https://de.wikipedia.org/wiki/Petitionsausschuss_(Deutscher_Bundestag)",
     tagline: "Offizielle Petitionen an den Bundestag",
     about: {
+      /* Quelle des Steckbriefs: hier sind Traeger, Sitz, Gruendung und
+         Finanzierung nachpruefbar. Am 6.8.2026 abgerufen und gegen eine
+         ERFUNDENE Schwester-Adresse gegengeprueft (Soft-404-Falle). */
+      quelle: "https://epetitionen.bundestag.de/epet/service.nc.$$$.rubrik.impressum.html",
+      impressum: "https://epetitionen.bundestag.de/epet/service.nc.$$$.rubrik.impressum.html",
       text: "Das ePetitions-Portal des Deutschen Bundestages ermöglicht Bürgerinnen und Bürgern, offizielle Petitionen an den Petitionsausschuss zu richten. Öffentliche Petitionen können online mitgezeichnet werden und führen ab 50.000 Mitzeichnungen innerhalb von vier Wochen zu einer öffentlichen Sitzung des Ausschusses. Das Portal wird vom Deutschen Bundestag als staatliche Institution betrieben.",
       operator: "Deutscher Bundestag",
       seat: "Berlin, Deutschland",
@@ -206,6 +237,11 @@ window.PM_PLATFORMS = {
     wikipedia: "https://de.wikipedia.org/wiki/Petitionsausschuss_des_Europäischen_Parlaments",
     tagline: "Petitionen ans EU-Parlament",
     about: {
+      /* Quelle des Steckbriefs: hier sind Traeger, Sitz, Gruendung und
+         Finanzierung nachpruefbar. Am 6.8.2026 abgerufen und gegen eine
+         ERFUNDENE Schwester-Adresse gegengeprueft (Soft-404-Falle). */
+      quelle: "https://www.europarl.europa.eu/legal-notice/de/",
+      impressum: "https://www.europarl.europa.eu/legal-notice/de/",
       text: "Das Petitionsportal des Europäischen Parlaments (Ausschuss PETI) ermöglicht allen EU-Bürgerinnen und -Bürgern sowie in der EU ansässigen Personen, Petitionen zu Themen einzureichen, die in den Zuständigkeitsbereich der EU fallen. Eingereichte Petitionen werden vom Petitionsausschuss geprüft, der über Zulässigkeit und weitere Behandlung entscheidet. Das Portal ist mehrsprachig und wird vom Europäischen Parlament betrieben.",
       operator: "Europäisches Parlament",
       seat: "Straßburg / Brüssel, EU",
@@ -235,6 +271,11 @@ window.PM_PLATFORMS = {
     logoNote: "https://wemove.eu/en/about-us",
     tagline: "Europäische Bürgerbewegung",
     about: {
+      /* Quelle des Steckbriefs: hier sind Traeger, Sitz, Gruendung und
+         Finanzierung nachpruefbar. Am 6.8.2026 abgerufen und gegen eine
+         ERFUNDENE Schwester-Adresse gegengeprueft (Soft-404-Falle). */
+      quelle: "https://wemove.eu/de/impressum",
+      impressum: "https://wemove.eu/de/impressum",
       text: "WeMove Europe ist eine europäische Bürgerbewegung, die sich für Demokratie, Klimagerechtigkeit und soziale Rechte in der EU einsetzt. Die Organisation wurde 2015 gegründet und ist als Europäische Genossenschaft (SCE) mit Sitz in Berlin registriert. Die Finanzierung erfolgt über Spenden von Mitgliedern; Gelder von Konzernen oder staatlichen Stellen werden abgelehnt.",
       operator: "WeMove Europe SCE mbH",
       seat: "Berlin, Deutschland",
@@ -260,6 +301,11 @@ window.PM_PLATFORMS = {
     wikipedia: "https://de.wikipedia.org/wiki/SumOfUs",
     tagline: "Konzernkritische Kampagnenplattform",
     about: {
+      /* Quelle des Steckbriefs: hier sind Traeger, Sitz, Gruendung und
+         Finanzierung nachpruefbar. Am 6.8.2026 abgerufen und gegen eine
+         ERFUNDENE Schwester-Adresse gegengeprueft (Soft-404-Falle). */
+      quelle: "https://eko.org/about",
+      impressum: null,
       text: "Ekō (bis 2023 bekannt als SumOfUs) ist eine internationale Kampagnenorganisation, die sich für Bürgerinnen- und Verbraucherrechte gegenüber Konzernen einsetzt. Die Organisation wurde 2011 gegründet, 2023 umbenannt und betreibt Petitionen sowie Aktionen zu Themen wie Klimaschutz, Lebensmittelsicherheit und Unternehmensverantwortung. Ekō ist als gemeinnützige 501(c)4-Organisation in den USA registriert.",
       operator: "Ekō (ehemals SumOfUs), 501(c)4",
       seat: "San Francisco, USA",
@@ -287,6 +333,11 @@ window.PM_PLATFORMS = {
     wikipedia: "https://de.wikipedia.org/wiki/Foodwatch",
     tagline: "Verbraucherrechte im Lebensmittelbereich",
     about: {
+      /* Quelle des Steckbriefs: hier sind Traeger, Sitz, Gruendung und
+         Finanzierung nachpruefbar. Am 6.8.2026 abgerufen und gegen eine
+         ERFUNDENE Schwester-Adresse gegengeprueft (Soft-404-Falle). */
+      quelle: "https://www.foodwatch.org/de/impressum",
+      impressum: "https://www.foodwatch.org/de/impressum",
       text: "foodwatch e. V. ist eine gemeinnützige Verbraucherrechtsorganisation, die sich für gesunde, sichere und ehrlich gekennzeichnete Lebensmittel einsetzt. Der Verein wurde 2002 von Thilo Bode in Berlin gegründet und finanziert sich ausschließlich durch Mitgliedsbeiträge und Spenden — staatliche Gelder und Wirtschaftsspenden werden abgelehnt. Petitionen und Kampagnen richten sich an Lebensmittelhersteller und politische Entscheidungsträger.",
       operator: "foodwatch e. V.",
       seat: "Berlin, Deutschland",
@@ -312,6 +363,11 @@ window.PM_PLATFORMS = {
     wikipedia: "https://de.wikipedia.org/wiki/350.org",
     tagline: "Klimabewegung gegen fossile Brennstoffe",
     about: {
+      /* Quelle des Steckbriefs: hier sind Traeger, Sitz, Gruendung und
+         Finanzierung nachpruefbar. Am 6.8.2026 abgerufen und gegen eine
+         ERFUNDENE Schwester-Adresse gegengeprueft (Soft-404-Falle). */
+      quelle: "https://350.org/about/",
+      impressum: null,
       text: "350.org ist eine internationale Klimaschutzorganisation, die sich für das Ende der Nutzung fossiler Brennstoffe und eine gerechte Energiewende einsetzt. Die Organisation wurde 2007–2008 gegründet und betreibt ein globales Netzwerk lokaler Gruppen. Sie ist als gemeinnützige 501(c)3-Organisation in den USA registriert und finanziert sich durch Spenden.",
       operator: "350.org, 501(c)3",
       seat: "Boston, USA (mit globalem Netzwerk)",

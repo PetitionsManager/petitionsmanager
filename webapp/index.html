@@ -91,6 +91,22 @@
     </button>
   </nav>
 
+  <!-- Offline-Hinweis. Liegt ueber der Fussleiste am unteren Rand, weil die
+       Meldung waehrend des Lesens gelten muss und nicht nur beim Seitenaufruf.
+       Wegklickbar: wer es gelesen hat, soll weiterlesen koennen. Beim naechsten
+       Wechsel des Verbindungszustands kommt er von selbst wieder (app.js →
+       setzeOnline). Steht hier statt in #content, weil app.js dessen Inhalt bei
+       jedem Rendern neu schreibt. -->
+  <div class="offbar" id="offbar" hidden role="status">
+    <i class="fa-solid fa-plug-circle-xmark" aria-hidden="true"></i>
+    <span class="offbar__t">Kein Internet. Du siehst gespeicherte Daten –
+      Bilder und Aktualisierungen fehlen.</span>
+    <button class="offbar__x" type="button" id="offbarx"
+            aria-label="Hinweis schließen">
+      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+    </button>
+  </div>
+
   <!-- Nach-oben-Button (erscheint nach dem Scrollen) -->
   <button class="to-top" id="to-top" type="button" aria-label="Nach oben">
     <i class="fa-solid fa-arrow-up"></i>
