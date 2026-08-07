@@ -228,11 +228,26 @@ Eine native Android-APK lässt sich ohne lokale Android-Toolchain über GitHub
 Actions bauen:
 
 1. Actions-Tab → **„Build APK"** → **„Run workflow"**
-2. Nach ~3–5 Minuten das Artefakt **`PetitionsManager-debug-apk`** herunterladen
+2. Nach ~3–5 Minuten das Artefakt **`PetitionsManager-debug-apk-Daten-JJJJ-MM-TT`**
+   herunterladen — der Datenstand steht im Namen
 3. APK auf dem Gerät installieren (Installation aus „unbekannten Quellen" erlauben)
 
-Vor dem Build `python3 publish.py` ausführen, damit die APK frische Daten enthält.
-Die Daten werden direkt aus `webapp/` gebündelt — keine separate Kopie.
+**Die Daten holt der Bau selbst.** Vor dem Gradle-Lauf lädt
+`hole_live_daten.py` den veröffentlichten Stand von GitHub Pages nach
+`webapp/data` und prüft ihn: Anzahl je Plattform gegen das Manifest, jeder
+Volltext-Verweis auf ein vorhandenes Paket, Stichprobe auf den Text selbst.
+Stimmt etwas nicht oder ist Pages nicht erreichbar, **bricht der Bau ab** —
+eine APK mit altem Datenstand sähe fertig aus und wäre es nicht. Für den
+Notfall gibt es beim manuellen Start den Haken „mit den Daten aus dem Repo
+bauen"; der Lauf meldet dann ausdrücklich, dass er den älteren Stand nimmt.
+
+Damit ist `webapp/data` im Repo nur noch die Fassung für die lokale
+Entwicklung (`python3 publish.py` erzeugt sie). Ob sie alt ist, spielt für die
+APK keine Rolle mehr. Das war vorher anders und der Grund für eine stille
+Lücke: Pages wird per Artefakt beliefert, nicht per Commit — am 7.8.2026 trug
+die APK 14.354 Petitionen, live waren es 17.383. Regelmäßig zu committen wäre
+keine Lösung: `webapp/data` stellt mit 68,9 MB schon 67 % des Repos, bei vier
+Ständen in der Historie.
 
 Details und lokaler Build (Android Studio / Gradle): [`android/README-APK.md`](android/README-APK.md)
 
@@ -265,6 +280,8 @@ PetitionsManager/
 ├── monitor.py             Zentraler Einstiegspunkt; bindet alle Scraper zusammen
 ├── petitions_core.py      Gemeinsames Kernmodul: Fetcher, Datenhaltung, HTML-Erzeugung
 ├── publish.py             Erzeugt webapp/data/*.json aus den lokalen JSON-Stores
+├── hole_live_daten.py     Holt den veröffentlichten Datenstand von GitHub Pages
+│                          nach webapp/data (der APK-Bau ruft ihn auf)
 ├── *_scraper.py           Ein Modul pro Plattform (z. B. weact_scraper.py)
 ├── *_petitions.json       Lokale Datenstores (werden von Git ignoriert / gecacht)
 ├── *_petitions.html       Lokale Listen-Ansichten (eine pro Plattform)
