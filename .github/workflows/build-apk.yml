@@ -2,13 +2,38 @@ name: Build APK
 
 # Baut die PetitionsManager-APK in der Cloud (kein lokales Android-SDK nötig).
 # Manuell startbar (Actions-Tab → "Build APK" → "Run workflow") oder bei Push.
+#
+# ---- Woher die APK ihre Daten bekommt (geändert am 7.8.2026) ----------------
+# Die APK bündelt den Ordner `webapp/` als Assets (android/app/build.gradle).
+# Bis hierher kam er aus dem Repo-Checkout — und dort veraltete er, weil
+# `scrape.yml` seine Ergebnisse über actions/deploy-pages als ARTEFAKT
+# ausliefert und nicht per Commit. Pages war tagesaktuell, die APK trug den
+# Stand des letzten Handgriffs: am 7.8.2026 waren das 14.354 gegen 17.383
+# Petitionen, über ein Monat Rückstand, der täglich weiterwuchs.
+#
+# Der naheliegende Weg — den Datenstand einfach täglich committen — scheidet
+# aus: `webapp/data` stellt mit 68,9 MB schon 67 % des ganzen Repos, bei
+# gerade vier Ständen in der Historie; ein Stand kostet gepackt rund 17 MB,
+# wöchentliche Commits wären ~880 MB im Jahr. Der Kopf von scrape.yml hält
+# dieselbe Regel fest: der Scraper-Zustand lebt im Actions-Cache, damit das
+# Repo nicht mit jedem Lauf wächst.
+#
+# Also andersherum: der Bau holt sich die Daten dort, wo sie ohnehin täglich
+# frisch liegen. `webapp/data` im Repo ist seitdem nur noch die Fassung für die
+# lokale Entwicklung; ob sie alt ist, spielt für die APK keine Rolle mehr.
 on:
   workflow_dispatch:
+    inputs:
+      daten_aus_dem_repo:
+        description: 'Notfall: mit den Daten aus dem Repo bauen (nur wenn Pages nicht erreichbar ist)'
+        type: boolean
+        default: false
   push:
     branches: [ main, master ]
     paths:
       - 'android/**'
       - 'webapp/**'
+      - 'hole_live_daten.py'
       - '.github/workflows/build-apk.yml'
 
 jobs:
@@ -17,6 +42,32 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      # VOR dem Bauen, nicht danach: schlägt der Schritt fehl, soll gar keine
+      # APK entstehen. Eine APK mit altem Datenstand sieht fertig aus und ist
+      # es nicht — genau dieser stille Fehler soll hier aufhören.
+      # Das Skript prüft den geholten Stand auf Vollständigkeit (Listen gegen
+      # Manifest, jeder tc-Verweis auf ein vorhandenes Paket, Stichprobe auf
+      # den Volltext selbst) und bricht ab, bevor es etwas überschreibt.
+      - name: Veröffentlichten Datenstand holen und prüfen
+        id: daten
+        if: ${{ !inputs.daten_aus_dem_repo }}
+        run: python3 hole_live_daten.py
+
+      # Notfallweg für den Fall, dass Pages nicht erreichbar ist. Der
+      # Datenstand wird trotzdem benannt, damit man der fertigen APK ansieht,
+      # was in ihr steckt.
+      - name: Datenstand aus dem Repo benennen
+        id: repodaten
+        if: ${{ inputs.daten_aus_dem_repo }}
+        run: |
+          echo "::warning::Gebaut mit den Daten AUS DEM REPO – die sind in der Regel älter als der veröffentlichte Stand."
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          m = json.load(open("webapp/data/manifest.json"))
+          print("stand=" + str(m.get("generated_at", "unbekannt"))[:10])
+          print("petitionen=" + str(sum(p.get("count", 0) for p in m["platforms"])))
+          PY
 
       - name: JDK 17 einrichten
         uses: actions/setup-java@v4
@@ -36,9 +87,24 @@ jobs:
         working-directory: android
         run: gradle assembleDebug --no-daemon --stacktrace
 
+      # Der Datenstand steht im Namen des Artefakts: sonst liegen im
+      # Actions-Tab mehrere gleichnamige APKs und man weiß bei keiner, welche
+      # Petitionen darin stecken.
       - name: APK als Artefakt hochladen
         uses: actions/upload-artifact@v4
         with:
-          name: PetitionsManager-debug-apk
+          name: PetitionsManager-debug-apk-Daten-${{ steps.daten.outputs.stand || steps.repodaten.outputs.stand }}
           path: android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
+
+      - name: Zusammenfassung
+        run: |
+          {
+            echo "### APK gebaut"
+            echo ""
+            echo "| | |"
+            echo "|---|---|"
+            echo "| Datenstand | ${{ steps.daten.outputs.stand || steps.repodaten.outputs.stand }} |"
+            echo "| Petitionen | ${{ steps.daten.outputs.petitionen || steps.repodaten.outputs.petitionen }} |"
+            echo "| Quelle | ${{ inputs.daten_aus_dem_repo && 'Repo (Notfallweg)' || 'GitHub Pages' }} |"
+          } >> "$GITHUB_STEP_SUMMARY"
