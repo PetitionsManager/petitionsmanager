@@ -131,6 +131,37 @@ button,input,select,textarea{color:inherit}
   text-transform:uppercase;line-height:1;padding:.1875rem .4375rem;
   border-radius:999px;background:var(--hot);color:var(--on-hot)}
 
+/* ---- Ohne Internet ----
+   Band über der Fußleiste. Nicht oben: die Kopfleiste ist sticky und trägt
+   schon Wortmarke und Melde-Knopf, ein drittes Element dort verdrängte den
+   Inhalt bei jedem Scrollen. Unten steht es im Blick, ohne etwas zu verdecken —
+   .hat-offbar am body gibt dem Inhalt den nötigen Fuß dazu.
+   Warnfarbe --hot statt Rot: „kein Netz" ist kein Fehler, sondern ein
+   Zustand; rot stünde für etwas Kaputtes. */
+.offbar{position:fixed;left:0;right:0;z-index:21;
+  bottom:calc(var(--tabbar-h) + env(safe-area-inset-bottom,0px));
+  display:flex;align-items:center;gap:.625rem;
+  padding:.75rem 1rem .75rem 1.125rem;
+  background:var(--hot-soft);color:var(--ink);
+  border-top:.0625rem solid var(--hot);
+  font-size:.8125rem;line-height:1.4}
+.offbar[hidden]{display:none}
+.offbar > i{flex:none;color:var(--on-hot-soft,var(--hot));font-size:1rem}
+.offbar__t{flex:1;min-width:0}
+.offbar__x{flex:none;border:0;background:transparent;color:var(--muted);
+  cursor:pointer;width:2.25rem;height:2.25rem;margin:-.5rem -.5rem -.5rem 0;
+  border-radius:50%;display:flex;align-items:center;justify-content:center}
+.offbar__x:active{background:var(--line);color:var(--ink)}
+/* Solange das Band steht, endet der Inhalt darüber statt darunter. */
+body.hat-offbar .content{padding-bottom:calc(var(--tabbar-h) + 5.5rem)}
+/* Platzhalter für ein Bild im Aufruftext, das ohne Internet nicht kommt.
+   Beschriftet statt leer: ein grauer Kasten ohne Text sieht aus wie ein
+   Ladefehler der App, dabei fehlt nur die Verbindung. */
+.img-off{display:flex;align-items:center;justify-content:center;
+  min-height:5rem;margin:.75rem 0;padding:1rem;border-radius:.5rem;
+  background:var(--line);color:var(--muted);
+  font-size:.75rem;text-align:center}
+
 .iconbtn{border:0;background:transparent;color:inherit;cursor:pointer;
   width:2.75rem;height:2.75rem;border-radius:50%;display:flex;align-items:center;
   justify-content:center}
@@ -483,13 +514,24 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
 }
 .legal__lead{margin:0 0 .75rem;font-size:.875rem;line-height:1.55;
   color:var(--muted)}
-.legal__tbl{display:flex;flex-direction:column;gap:.5rem;margin:.75rem 0}
-.legal__plat{background:var(--bg);border-radius:.625rem;padding:.75rem}
+/* Elf Plattform-Blöcke untereinander. Der Abstand ZWISCHEN ihnen muss größer
+   sein als jeder Abstand DARIN, sonst sieht man nicht, wo einer endet — am
+   6.8.2026 nachgemessen waren es 8 px außen gegen 6 px innen, die Gruppierung
+   war damit praktisch aufgehoben. Jetzt 20 außen gegen 10 innen; die Polsterung
+   im Block zieht mit, sonst klebt die Schrift an der eigenen Kante. */
+.legal__tbl{display:flex;flex-direction:column;gap:1.25rem;margin:1rem 0}
+.legal__plat{background:var(--bg);border-radius:.625rem;padding:1rem}
 .legal__pname{font-weight:800;font-size:.875rem;color:var(--ink);
-  margin-bottom:.375rem}
-.legal__links{display:flex;flex-wrap:wrap;gap:.75rem;font-size:.75rem}
-.legal__note{margin:.75rem 0 0;font-size:.75rem;line-height:1.5;
+  margin-bottom:.625rem}
+.legal__links{display:flex;flex-wrap:wrap;gap:.75rem;font-size:.75rem;
+  margin-top:.625rem}
+/* „Kein Impressum" ist eine Aussage, kein Link — deshalb ohne Akzentfarbe und
+   ohne Unterstreichung, sonst tippt man dagegen. */
+.legal__none{color:var(--muted);font-style:italic}
+.legal__note{margin:1rem 0 0;font-size:.75rem;line-height:1.5;
   color:var(--muted)}
+/* Der Kontakt-Knopf, der die frühere Zusage „wir nehmen sie heraus" ersetzt. */
+.legal__btns{margin-top:1rem}
 /* Aufnahmekodex (app.js → KODEX_HTML). Laengster Text der App, deshalb in
    beschriftete Gruppen zerlegt statt als Textwand. Die Ausschlussgruppe traegt
    eine eigene Kante in --amp1 (das Rot des Projekts, in theme.css fuer den
@@ -1375,7 +1417,10 @@ body.wizard-open{overflow:hidden}
 .signed__search:focus{outline:none;border-color:var(--accent)}
 .signed__hint{color:var(--muted);font-size:.75rem;line-height:1.5;
   margin:0 .25rem .375rem}
-.signed__count{color:var(--muted);font-size:.75rem;margin:0 .25rem .5rem}
+/* Die Zählzeile gehört zum Hinweis darüber, aber NICHT zur Liste darunter —
+   sie zählt sie nur. Deshalb unten mehr Luft als oben (gemessen waren es
+   8 px, das las sich wie eine Kopfzeile der ersten Zeile). */
+.signed__count{color:var(--muted);font-size:.75rem;margin:0 .25rem .875rem}
 /* Der Abschnitt ist immer offen – die alte Akkordion-Regel aushebeln. */
 .signed .signed-list{display:block;border-top:.0625rem solid var(--line);
   border-radius:1.125rem}
@@ -1453,10 +1498,24 @@ body.wizard-open{overflow:hidden}
 .pabout.open .pabout__body{display:block}
 .pabout__body p{margin:0 0 .875rem;font-size:.8125rem;line-height:1.65;
   color:var(--ink)}
-.pabout__facts{display:grid;grid-template-columns:auto 1fr;gap:.25rem .875rem;
-  margin:0 0 .875rem;font-size:.8125rem}
+/* Steckbrief. Zeilenabstand .5rem statt .25rem: seit jede Plattform ALLE
+   Zeilen zeigt (auch die leeren mit „–") stehen hier immer fünf Paare
+   untereinander, und bei 4 px Zeilenluft verschwimmen sie zu einem Block. */
+.pabout__facts{display:grid;grid-template-columns:auto 1fr;gap:.5rem .875rem;
+  margin:0 0 1.25rem;font-size:.8125rem;align-items:baseline}
 .pabout__facts dt{color:var(--muted)}
 .pabout__facts dd{margin:0;font-weight:650}
+/* Fehlende Angabe. Gedämpft, damit „–" nicht wie ein Wert aussieht — aber
+   vorhanden, damit die Zeilen aller Plattformen auf gleicher Höhe stehen. */
+.fact-leer{color:var(--muted);font-weight:400;opacity:.7}
+/* Quellsymbol hinter einer Angabe. Bewusst klein und blass: es beantwortet
+   „woher wisst ihr das?", ist aber nichts, wonach jemand sucht. Die
+   Trefffläche ist trotzdem 24 px hoch (Polsterung + negativer Rand), sonst
+   wäre es auf dem Telefon nicht zu treffen. */
+.fact-src{display:inline-flex;align-items:center;color:var(--muted);
+  opacity:.65;font-size:.625rem;text-decoration:none;
+  padding:.375rem;margin:-.375rem -.25rem -.375rem .125rem}
+.fact-src:active{opacity:1;color:var(--accent)}
 .pabout__links{display:flex;flex-wrap:wrap;gap:.5rem}
 .pabout__link{display:inline-flex;align-items:center;gap:.375rem;
   border:.0625rem solid var(--line);background:var(--surface);border-radius:999px;
