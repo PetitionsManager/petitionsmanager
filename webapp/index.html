@@ -52,6 +52,21 @@
         <span class="brand__beta">Beta</span>
       </span>
     </button>
+
+    <!-- Fehler melden. Sitzt rechts oben, weil die Kopfleiste dort ohnehin
+         frei ist (space-between mit bisher nur einem Kind) und weil der Weg
+         aus JEDER Ansicht erreichbar sein soll — die Melde-Knoepfe im
+         Abschnitt „Unterstuetzen" stehen nur auf der Uebersicht, ganz unten.
+         Die vollstaendige Aufforderung steht in title und aria-label;
+         sichtbar waere der ganze Satz in einer Kopfleiste zu lang.
+         Kein eigenes Formular: die App hat bewusst keinen Server, ein
+         Formular braeuchte einen (app.js → reportbug). -->
+    <button class="reportbtn" type="button" id="reportbug"
+            title="Fehler gefunden? Bitte melden!"
+            aria-label="Fehler gefunden? Bitte melden">
+      <i class="fa-solid fa-bug" aria-hidden="true"></i>
+      <span class="reportbtn__t">Fehler melden</span>
+    </button>
   </header>
 
   <!-- Seitentitel. Stand frueher in der Kopfleiste; dort sitzt jetzt die

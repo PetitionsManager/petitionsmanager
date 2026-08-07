@@ -1135,6 +1135,45 @@
     render();
   }
 
+  /* Freier Streifen oben: die Kopfleiste steht sticky über dem Inhalt. Wer auf
+     die nackte Oberkante eines Elements rollt, schiebt genau diesen Streifen
+     darunter. Die Höhe wird GELESEN, nicht angenommen – sie unterscheidet sich
+     zwischen den Layouts, und „position" ebenso (nur sticky/fixed verdecken). */
+  function stickyOben() {
+    var tb = document.querySelector(".topbar");
+    if (!tb) return 0;
+    var pos = window.getComputedStyle(tb).position;
+    if (pos !== "sticky" && pos !== "fixed") return 0;
+    return tb.getBoundingClientRect().height;
+  }
+
+  /* Rollt ein Element so, dass seine OBERKANTE unter der Kopfleiste steht.
+     Ersatz für scrollIntoView({block:"center"}) bei hohen Zielen: eine
+     aufgeklappte Petitionskarte misst schnell über 1.400 px (gemessen am
+     6.8.2026: 1.419 px bei 812 px Bildhöhe). „center" setzt dann die Mitte der
+     KARTE in die Bildmitte – man landet mitten im Beschreibungstext bei den
+     Schlagworten, der Titel steht weit über dem Bildrand. Genau das hat der
+     Nutzer als „springt zu tief" gemeldet.
+     Die Oberkante ist außerdem der stabilere Anker: die Karte wächst nach dem
+     Aufklappen weiter (Volltext wird nachgeladen, sizeThumb zieht die Bildhöhe
+     über 0,3 s auf das echte Seitenverhältnis). Alles davon passiert UNTERHALB
+     der Oberkante und verschiebt sie deshalb nicht – bei „center" wandert das
+     Ziel dagegen mit jeder Nachladung weiter.
+
+     ⚠️ Bewusst weiter scrollIntoView und NICHT window.scrollTo({top,behavior}):
+     scrollIntoView ist das Mittel, das hier vorher stand und auf dem Gerät des
+     Nutzers nachweislich rollt – nur eben an die falsche Stelle. Getauscht wird
+     deshalb allein die Zielposition, nicht das Werkzeug. Den von der Kopfleiste
+     verdeckten Streifen hält scroll-margin-top frei; der Wert wird aus der
+     gemessenen Leistenhöhe gesetzt, weil sie je Layout abweicht. Als Inline-
+     Angabe statt CSS-Regel: die Karten werden bei jedem Zeichnen neu gebaut,
+     der Wert überlebt also nicht und muss nirgends zurückgenommen werden. */
+  function scrollToTop(elm, luft) {
+    elm.style.scrollMarginTop =
+      (stickyOben() + (luft == null ? 12 : luft)) + "px";
+    elm.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
   /* Sprungmarke: kleiner Knopf, der zu einer Stelle in der Liste rollt und sie
      kurz hervorhebt. `ziel` ist eine FUNKTION, kein Element – die Liste wird
      bei jedem Filter neu gezeichnet, ein beim Bauen gemerktes Element wäre
@@ -1790,6 +1829,47 @@
       ? stripImages(html) : html;
   }
 
+  /* Reserviert Platz für Bilder im Aufruftext, bis sie da sind, und räumt den
+     Platzhalter wieder weg. Grund ist der SPRUNG, nicht das Laden:
+
+     Ein Bild aus dem Aufruf-Text hat vor dem Laden keine Maße — die Scraper
+     schreiben nur loading="lazy" ins <img>, Breite und Höhe kennt niemand.
+     Mit width:auto ist so ein Element 0×0; kommt das Bild an, wächst es auf
+     317×178, und der ganze Text darunter rutscht um diesen Betrag nach unten.
+
+     ⚠️ NICHT verwechseln mit dem Befund „Bilder erscheinen nie" vom Vormittag
+     des 3.8.2026. Der ist ZWEIMAL widerlegt — am Abend desselben Tages und
+     erneut am 6.8.2026 an einer Petition, deren Bilder in der Sitzung noch nie
+     geholt worden waren: ein 0×0-Bild im Sichtfeld lädt (y=711 bei 948 px
+     Fensterhöhe), eines weit darunter lädt beim Hinscrollen. Wer hier etwas
+     ändert, misst vorher selbst — und prüft dabei zwei Fallen, die beide schon
+     zugeschlagen haben: Bilder aus dem HTTP-Cache melden „geladen", bevor
+     irgendetwas geprüft wurde, und auf einer Seite mit visibilityState
+     "hidden" feuert loading="lazy" ÜBERHAUPT nicht, auch nicht mit Maßen.
+
+     ⚠️ loading="lazy" bleibt: foodwatch liefert ein einzelnes PNG mit
+     17,25 MB, das darf nicht ungefragt über die Mobilverbindung gehen.
+     Der Platzhalter verschwindet mit .img-da wieder — bliebe die Mindesthöhe
+     stehen, bekämen kleine Partnerlogos (gemessen 105×59 und 105×51) einen zu
+     hohen Kasten oder würden verzerrt. */
+  function bilderBeobachten(box) {
+    if (!box) return;
+    var bilder = box.querySelectorAll("img");
+    for (var i = 0; i < bilder.length; i++) {
+      (function (img) {
+        if (img.complete && img.naturalWidth > 0) {
+          img.classList.add("img-da");
+          return;
+        }
+        img.addEventListener("load", function () { img.classList.add("img-da"); });
+        /* Auch der Fehlerfall muss den Platzhalter räumen: ein Bild von einem
+           fremden Server, das nicht kommt, hinterließe sonst dauerhaft einen
+           leeren Kasten mitten im Text. */
+        img.addEventListener("error", function () { img.classList.add("img-da"); });
+      })(bilder[i]);
+    }
+  }
+
   /* Bilder herausnehmen, OHNE sie zu laden.
      Der Umweg über DOMParser ist der Kern der Sache: das entstehende Dokument
      ist „inert", es holt keine Dateien. Schreibt man den Text stattdessen per
@@ -1866,6 +1946,7 @@
     var hasTags = Array.isArray(r.tags) && r.tags.length;
     if (hasTags) h += '<div class="pet__similar"></div>';
     body.innerHTML = h;
+    bilderBeobachten(body.querySelector(".pet__desc"));
 
     if (ctx && ctx.setTag)
       body.querySelectorAll(".tag").forEach(function (tEl) {
@@ -1882,6 +1963,7 @@
         if (html) {
           r.description_full = html;            // im Speicher merken: MIT Bildern,
           descBox.innerHTML = descHtml(html);   // gefiltert wird erst beim Anzeigen
+          bilderBeobachten(descBox);            // Platzhalter räumen, sobald da
         } else {
           // Eigene Klasse: .count-note ist im Petitionstext der pulsierende
           // Ladehinweis – eine Meldung darf nicht blinken.
@@ -2469,9 +2551,10 @@
             if (!petEl.classList.contains("open"))
               petEl.querySelector(".pet__head").click();
             (function (elm) {
-              setTimeout(function () {
-                elm.scrollIntoView({ behavior: "smooth", block: "center" });
-              }, 80);
+              /* Oberkante statt Mitte – siehe scrollToTop(): die Karte ist
+                 gerade eben aufgeklappt und damit um ein Vielfaches höher als
+                 das Bild. */
+              setTimeout(function () { scrollToTop(elm); }, 80);
             })(petEl);
             break;
           }
@@ -3460,7 +3543,19 @@
 
   function renderProfil() {
     titleEl.textContent = "Profil";
-    content.innerHTML = "";
+    /* Seitenüberschrift wie in den Einstellungen (Nutzerwunsch 6.8.2026):
+       dort trägt die Seite über eine große Überschrift mit Beschreibung, hier
+       stand bisher nur das kleine Versalien-Etikett der schmalen Titelzeile.
+       Der Untertitel ist KEIN neuer Text — profile.intro liegt seit jeher in
+       texts.js und wurde bislang nirgends angezeigt.
+       Das Etikett oben verschwindet von selbst: syncPageTitle() blendet die
+       Titelzeile aus, sobald der Inhalt eine gleichlautende Überschrift trägt
+       (dieselbe Mechanik wie auf der Einstellungsseite). */
+    content.innerHTML =
+      '<div class="welcome"><h1 class="welcome__t">Profil</h1>' +
+      '<p class="welcome__s">' + esc(T("profile.intro",
+        "Du kannst einen Namen und ein Bild hinterlegen — zum Beispiel damit " +
+        "du deine exportierten Daten leichter wiederfindest.")) + "</p></div>";
     var p = state.prefs;
 
     // ---- Kopf: Bild, Name, Datenschutz-Hinweis ------------------------------
@@ -3719,6 +3814,11 @@
       ? livePlatforms().map(function (p) { return p.key; })
       : Array.from(state.enabled));
     renderWizard();
+    /* Ein eigener History-Eintrag für den Assistenten. Ohne ihn gäbe es beim
+       allerersten Start nur den Starteintrag, die Zurücktaste fände nichts zum
+       Zurückgehen und schlösse die App mitten in der Einrichtung. Der Eintrag
+       wird in popstate wieder verbraucht (siehe dort). */
+    try { history.pushState({ pmWizard: true }, ""); } catch (e) {}
   }
 
   function closeWizard(save) {
@@ -3887,6 +3987,72 @@
     document.body.appendChild(ov);
   }
 
+  /* ---- Zurück-Navigation ----------------------------------------------------
+     Die App ist eine einzige Seite. Ohne Zutun kennt der Browser deshalb genau
+     EINEN History-Eintrag – und auf Android hieß das: die Zurücktaste des
+     Telefons schließt die App, statt eine Ebene zurückzugehen. MainActivity
+     fragt web.canGoBack(), und das war immer false, weil hier nie jemand einen
+     Eintrag angelegt hat (Nutzerbefund 6.8.2026).
+
+     Gegenmittel: jeder Ansichtswechsel bekommt einen eigenen Eintrag. Damit
+     wird canGoBack() wahr, goBack() löst popstate aus, und der Java-Teil bleibt
+     unverändert – Browser und installierte PWA gewinnen dasselbe mit.
+
+     Aufgehängt am Router, dem einzigen Punkt, durch den jede Ansicht geht.
+     Verglichen wird der Abzug mit dem zuletzt geschriebenen: nur eine ECHTE
+     Änderung legt einen Eintrag an. Ohne diesen Vergleich zählte jedes
+     Neuzeichnen mit – Schalter umlegen, Petition unterschreiben, Daten
+     aktualisieren – und man müsste zehnmal zurück, um eine Ebene zu verlassen.
+
+     Im Abzug stehen bewusst NUR tab/platform/cross, nicht die Filter
+     (catFilter, tagFilter, sort): die werden von draw() geändert, das den
+     Router gar nicht durchläuft. Sie wären damit nur zufällig richtig, und
+     ein Rückschritt würde einen gesetzten Filter still wegräumen. So bleiben
+     sie unangetastet; beim Betreten einer Plattform setzt die App sie ohnehin
+     selbst zurück (platCard und der Zurück-Knopf im Plattformkopf). */
+  var navLetzte = null;     // zuletzt geschriebener Abzug, als Zeichenkette
+  var navZurueck = false;   // true, während popstate die Ansicht zurückstellt
+
+  function navSnap() {
+    return { tab: state.tab, platform: state.platform, cross: state.cross };
+  }
+
+  function navAnwenden(s) {
+    state.tab = s.tab;
+    state.platform = s.platform;
+    state.cross = s.cross;
+  }
+
+  function navTrack() {
+    var snap = navSnap();
+    var jetzt = JSON.stringify(snap);
+    if (jetzt === navLetzte) return;
+    var erster = navLetzte === null;
+    navLetzte = jetzt;
+    if (navZurueck) return;   // popstate hat die Ansicht schon selbst gestellt
+    /* Der allererste Abzug ERSETZT den Starteintrag, statt einen zweiten
+       anzulegen. Sonst bräuchte es auf der Übersicht – dem Ausgangspunkt –
+       erst einen Rückschritt ins Leere, bevor die App sich schließen darf. */
+    try {
+      history[erster ? "replaceState" : "pushState"]({ pmNav: snap }, "");
+    } catch (e) { /* ohne History-API läuft die App wie bisher weiter */ }
+  }
+
+  window.addEventListener("popstate", function (e) {
+    /* Liegt die Ersteinrichtung über der App, gilt der Rückweg zuerst ihr:
+       sonst navigierte die App unter einem Fenster, das sichtbar stehen
+       bleibt. Zurück wirkt dort wie „Überspringen" – bewusst nicht als
+       Schritt-für-Schritt-Rückweg, dafür hat der Assistent eigene Knöpfe.
+       Den nötigen Eintrag legt startWizard() an. */
+    if (document.getElementById("wizard")) { closeWizard(false); return; }
+    var s = e.state && e.state.pmNav;
+    if (!s) return;           // fremder oder leerer Eintrag – nicht anfassen
+    navZurueck = true;
+    navAnwenden(s);
+    render();
+    navZurueck = false;
+  });
+
   // ---- Router ----------------------------------------------------------------
   function render() {
     document.querySelectorAll(".tab").forEach(function (t) {
@@ -3901,6 +4067,9 @@
     else if (state.tab === "einstellungen") renderEinstellungen();
     else if (state.tab === "profil") renderProfil();
     syncPageTitle();
+    // Erst nachdem die Ansicht steht: sonst schriebe der frühe Ausstieg
+    // oben („Lade Daten …") schon einen Eintrag, den es nie gab.
+    navTrack();
     window.scrollTo(0, 0);
   }
 
@@ -3953,6 +4122,45 @@
   // einer Website). Erreicht man aus jeder Ansicht, auch aus Einstellungen.
   var brandHome = document.getElementById("brandhome");
   if (brandHome) brandHome.addEventListener("click", goHome);
+
+  /* „Fehler gefunden? Bitte melden!" (Nutzerwunsch 6.8.2026, Knopf rechts in
+     der Kopfleiste). Führt auf dieselbe Adresse wie die Melde-Knöpfe im
+     Abschnitt „Unterstützen"; neu ist allein, dass er aus JEDER Ansicht
+     erreichbar ist statt nur unten auf der Übersicht.
+     Die technischen Angaben werden erst beim Klick zusammengestellt – sie
+     sollen die Ansicht beschreiben, in der der Fehler aufgetreten ist, nicht
+     die beim Start. Sie stehen im Text und nicht in einem stillen Anhang:
+     was mitgeschickt wird, soll vor dem Absenden lesbar und kürzbar sein.
+     Geöffnet über einen kurzlebigen Anker statt location.href – dasselbe
+     Muster wie beim Datenexport weiter oben, und es funktioniert auch dort,
+     wo eine Zuweisung an location von einer Sperre abgefangen würde. */
+  var reportBtn = document.getElementById("reportbug");
+  if (reportBtn) reportBtn.addEventListener("click", function () {
+    var ansicht = state.cross ? "Suche über alle Plattformen"
+                : state.platform ? "Plattform " + platformName(state.platform)
+                : state.tab === "einstellungen" ? "Einstellungen"
+                : state.tab === "profil" ? "Profil"
+                : "Übersicht";
+    var stand = state.manifest && state.manifest.generated_at
+      ? String(state.manifest.generated_at).slice(0, 10) : "unbekannt";
+    var prefs = state.prefs || {};
+    var text =
+      "Was hast du getan?\n\n\n" +
+      "Was ist passiert?\n\n\n" +
+      "Was hättest du erwartet?\n\n\n" +
+      "--- Technische Angaben (helfen beim Suchen, gerne kürzen) ---\n" +
+      "Ansicht: " + ansicht + "\n" +
+      "Daten: " + (state.baseAuto || state.baseSetting) +
+        ", Stand " + stand + "\n" +
+      "Darstellung: " + (prefs.theme || "?") + " / " + (prefs.layout || "?") +
+        "\n" +
+      "Gerät: " + navigator.userAgent + "\n";
+    var a = document.createElement("a");
+    a.href = "mailto:" + SUPPORT_MAIL +
+      "?subject=" + encodeURIComponent("[PetitionsManager] Fehlerbericht") +
+      "&body=" + encodeURIComponent(text);
+    document.body.appendChild(a); a.click(); a.remove();
+  });
 
   // ---- Start -----------------------------------------------------------------
   function boot() {

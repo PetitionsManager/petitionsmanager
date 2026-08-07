@@ -41,7 +41,18 @@ und eine mobile Web-App (PWA/APK), die diese Daten offline durchsuchbar macht.
   hinter Cloudflare sind häufig) und danach in der CI namentlich als Warnung gemeldet
 - Lokaler Dashboard-Server (`--serve`) mit „Jetzt scrapen"-Schaltflächen
 - Täglicher Lauf via GitHub Actions, Veröffentlichung über GitHub Pages
-- Datensatz-Warnung bei unerwartetem Einbruch des Online-Bestands
+- **Selbstmeldung: die Scraper melden Teilausfälle selbst.** Ein Lauf kann grün
+  aussehen und trotzdem halb kaputt sein — genau das ist dreimal passiert (eine
+  Entdeckungsquelle lieferte monatelang null Treffer, ein Ausdruck schnitt Adressen
+  ab und erzeugte 81 vermeintlich gelöschte Petitionen, eine Warteschlange brach bei
+  Position 30 von 261 ab). Nach jedem Lauf wird der fertige Bestand deshalb auf die
+  Spuren dieser Fälle geprüft: leerer Entdeckungszweig · Zuwachs an Datensätzen ohne
+  Titel · Slugs, die Anfang eines anderen sind und keinen Titel haben (die Signatur
+  einer abgeschnittenen Adresse) · Einbruch des Online-Bestands.
+  **Gemeldet wird nur, was sich gegenüber dem Vorlauf verschlechtert hat** — ein
+  Hinweis, der täglich steht, wird nach drei Tagen überlesen. Die Kennzahlen jedes
+  Laufs stehen als Zeitreihe im `_meta` der Datendatei, die Befunde auf der
+  Dashboard-Kachel und im CI als Annotation plus Tabelle in der Lauf-Zusammenfassung.
 - Offline-Bestätigung: eine Petition wird erst nach mehreren Fehlschlägen auf „offline" gesetzt
 
 ---

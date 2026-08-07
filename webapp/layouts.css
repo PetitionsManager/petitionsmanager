@@ -539,9 +539,27 @@
   height:6rem;border-radius:0;margin:0 0 1rem;box-shadow:none}
 /* Aufgeklappt wächst dasselbe Band weiter, statt (wie in „klassisch") erst
    von der Briefmarke nach oben zu springen. Die 11rem aus style.css bleiben
-   der Rückfall, solange die Bildmaße fehlen (loading="lazy"). */
-[data-layout="relief"] .pet.open .pet__head{padding:0 0 1rem}
+   der Rückfall, solange die Bildmaße fehlen (loading="lazy").
+   ⚠️ gap:0 .5rem MUSS hier wiederholt werden. style.css setzt für die offene
+   Karte .pet.open .pet__head{gap:0} — mit drei Klassen (0,3,0) schlägt das die
+   Grundregel dieses Layouts (0,2,0) weiter oben, und diese Zeile hier nannte
+   bisher nur das padding. Folge: die Spaltenlücke fiel beim Aufklappen von
+   8 px auf 0, der Textblock sprang in die Breite. Gemessen am 6.8.2026
+   (350.org, erste Karte): .pet__main 227 → 243 px, Titel 209 → 225 px, der
+   Aufklapp-Knopf wanderte 8 px nach rechts. Vom Nutzer als „beim Aufklappen
+   verändert sich die Textbreite" gemeldet. Dasselbe Muster wie beim
+   Chevron-Innenabstand direkt darunter: eine fremde Regel überschreiben
+   heißt JEDE abhängige Eigenschaft zurücknehmen. */
+[data-layout="relief"] .pet.open .pet__head{padding:0 0 1rem;gap:0 .5rem}
 [data-layout="relief"] .pet.open .pet__main{padding-left:1.125rem}
+/* Gegenstück zur Magazin-Zeile am Dateiende: style.css gibt dem Aufklapper
+   beim Öffnen padding-left:.5rem, damit der NACKTE Chevron dort nicht am Text
+   klebt. Hier ist er kein nacktes Zeichen mehr, sondern eine Buchse mit fester
+   Breite (2.125rem, box-sizing:border-box) — der Innenabstand schiebt das
+   Zeichen dann aus der Mitte des Kreises. Gemessen: 4,8 px zu weit rechts,
+   nur im aufgeklappten Zustand. Das Magazin hat diesen Ausgleich seit dem
+   3.8.2026, das Relief blieb übersehen. */
+[data-layout="relief"] .pet.open .pet__toggle{padding-left:0}
 /* Ohne Bild KEIN Band (Nutzerwunsch 3.8.26: „kein Bild soll auch kein Logo
    haben"). Vorher stand hier ein 6rem hoher leerer Streifen mit einem kleinen
    Plattform-Logo darin – gedacht als Ersatz, damit die Kacheln einer
@@ -1174,7 +1192,10 @@
      .plat__body bleibt ≥6 px über der Logo-Oberkante der vollsten Kachel;
      die Kacheln bleiben untereinander gleich groß. */
   grid-template-columns:1fr 1fr;grid-auto-rows:13.5rem;
-  grid-auto-flow:row dense;gap:.75rem;padding:0 0 .5rem}
+  /* Fuge 12 → 16 (7.8.26, Nutzerwunsch „lieber größer"): wirkt nur
+     ZWISCHEN den Kacheln, die Zeilenhöhe oben ist fest — das
+     ≥6-px-Kriterium bleibt davon unberührt. */
+  grid-auto-flow:row dense;gap:1rem;padding:0 0 .5rem}
 
 /* Vollton statt Tönung: die Kachel trägt die echte Markenfarbe, --brand
    kommt je Kachel als style-Attribut aus app.js.
@@ -1322,11 +1343,22 @@
 [data-layout="magazin"] .acc-body--plats .plat--xl .plat__num{
   font-size:3.25rem;line-height:1;letter-spacing:-.04em}
 [data-layout="magazin"] .acc-body--plats .plat--xl .plat__meta{font-size:1.5rem}
+/* Der Untertitel klebte unter der Kennzahl, darunter ~190 px Leere bis zum
+   Logo (im Screenshot 7.8.26 sichtbar). Bento-üblich wird verteilt statt
+   gestapelt: der Körper füllt die Kachel, margin-top:auto schiebt den
+   Untertitel nach unten. margin-bottom 3.5rem hält ihn über dem absolut
+   sitzenden Logo (bottom 24 + Höhe ~41 + 16 Luft). */
+[data-layout="magazin"] .acc-body--plats .plat--xl .plat__body{
+  display:flex;flex-direction:column;flex:1 1 auto}
 [data-layout="magazin"] .acc-body--plats .plat--xl .plat__tag{display:block;
   color:inherit;font-size:1.25rem;font-weight:700;line-height:1.35;
-  margin-top:.5rem;max-width:24ch}
-[data-layout="magazin"] .acc-body--plats .plat--xl .plat__chev{
-  top:1.5rem;right:1.5rem;width:2.5rem;height:2.5rem;font-size:.875rem}
+  margin-top:auto;margin-bottom:3.5rem;max-width:24ch}
+/* KEINE eigene Pfeil-Position mehr für --xl: eine frühere Fassung hob den
+   Pfeil auf top:1.5rem — genau in die Ecke, die das „+neu"-Abzeichen bekam
+   (im ersten gelungenen Screenshot 7.8.26 lagen beide 40 px überlappend
+   aufeinander; auf --wide fiel es nie auf, weil der Pfeil dort unten
+   blieb). Unten rechts ist der Platz konstruktionsbedingt frei: .plogo
+   trägt max-width:calc(100% - 96px), Rand (24) + Pfeil (40) brauchen 64. */
 [data-layout="magazin"] .acc-body--plats .plat--wide{grid-column:span 2}
 [data-layout="magazin"] .acc-body--plats .plat--wide .plat__name{
   font-size:1.625rem}
@@ -1335,7 +1367,7 @@
 [data-layout="magazin"] .pet-wrap,
 [data-layout="magazin"] .pet-bg,
 [data-layout="magazin"] .pet{border-radius:var(--radius)}
-[data-layout="magazin"] .pet-wrap{margin-bottom:1.25rem}
+[data-layout="magazin"] .pet-wrap{margin-bottom:1.5rem} /* Kartenfuge, s. u. */
 [data-layout="magazin"] .pet{border:0;
   box-shadow:0 .75rem 1.75rem rgba(40,30,15,.10)}
 [data-layout="magazin"] .pet__head{flex-wrap:wrap;gap:0;padding:0 0 1.125rem;
@@ -1347,15 +1379,15 @@
    springen. */
 [data-layout="magazin"] .pet.open .pet__thumb{height:15rem}
 [data-layout="magazin"] .pet.open .pet__head{padding:0 0 1.125rem}
-[data-layout="magazin"] .pet.open .pet__main{padding-left:1.25rem}
+[data-layout="magazin"] .pet.open .pet__main{padding-left:1.5rem}
 [data-layout="magazin"] .pet__thumb--ph .plogo{width:3.5rem;height:3.5rem}
-[data-layout="magazin"] .pet__main{padding-left:1.25rem}
+[data-layout="magazin"] .pet__main{padding-left:1.5rem}
 [data-layout="magazin"] .pet__title{font-size:1.125rem;font-weight:750;
   line-height:1.3;letter-spacing:-.015em}
 [data-layout="magazin"] .pet__toggle{padding-left:.5rem}
 [data-layout="magazin"] .pet__ext{margin:0 .625rem 0 .25rem}
 [data-layout="magazin"] .pet__head>.pet__toggle:last-child{margin-right:1rem}
-[data-layout="magazin"] .pet__body{padding:0 1.25rem 1.25rem}
+[data-layout="magazin"] .pet__body{padding:0 1.5rem 1.5rem}
 
 /* ---- Kategorie als Milchglas-Etikett auf dem Bild ----
    .pet ist position:relative und overflow:hidden (style.css), der Balken ist
@@ -1400,7 +1432,7 @@
       (40 px) und unter jeder Tipp-Empfehlung; min-height hebt nur die
       Trefffläche, Schrift und Pillenform bleiben. Einstellungen/Profil
       sind layoutneutral und bleiben unangetastet (Relief-Verbot). */
-[data-layout="magazin"] .support--legal{margin-top:1.75rem}
+[data-layout="magazin"] .support--legal{margin-top:2rem}
 [data-layout="magazin"] .chip,
 [data-layout="magazin"] .tag,
 [data-layout="magazin"] .backbtn{min-height:2.5rem}
@@ -1420,3 +1452,114 @@
    ausglich (style.css), schöbe das Zeichen im Kasten aus der Mitte. */
 [data-layout="magazin"] .pet__head>.pet__toggle:last-child{margin-right:0}
 [data-layout="magazin"] .pet.open .pet__toggle{padding-left:0}
+
+/* ---- Abstandsraster (7.8.26, nach Best-Practice-Recherche; vom Nutzer
+   nachjustiert: „lieber größer als zu klein, nicht zu groß") ----
+   Den SEITENFLUSS trägt seit 6.8.26 der layoutneutrale Block
+   „Grundrhythmus" in style.css (andere Sitzung, gleicher Nutzerwunsch):
+   24 px zwischen den Blöcken einer Seite, 32 im Profil, Einstellungen
+   bewusst eng. Eine erste Magazin-Fassung dieses Blocks hatte eigene
+   16er darunter — die kollabierten unter den 24ern zu totem Gewicht,
+   und die Profil-/Einstellungs-Werte hätten die dort GEMESSENEN
+   Entscheidungen der Basis unterboten; deshalb weggelassen, nicht neu
+   erfinden. Hier steht nur noch, was die Basis nicht abdeckt:
+     16 px  Zählzeile→Liste (Bildunterschrift-Logik: die Zeile gehört
+            zur Liste darunter, enger als der 24er-Fluss)
+     24 px  Kartenfuge (.pet-wrap oben) und Mosaik-Fuge 16, --pad 24
+     32 px  Unterstützung/Rechtliches (Abschnittsgrenze, deckungsgleich
+            mit den 32ern der Einstellungs-Sektionen)
+   .content>-Scope, weil dieselben Klassen auch verschachtelt vorkommen
+   (.pet__desc .count-note steht auf margin:0 und darf keinen
+   Fußabstand erben). */
+[data-layout="magazin"] .content>.count-note{margin-bottom:1rem}
+[data-layout="magazin"] .content>.support{margin-top:2rem}
+
+/* ================= Magazin 2.0 — Einstellungen, Profil, Einzelansicht
+   (7.8.26) =================
+   Nutzerauftrag: „verändere grundlegend alles in der magazin darstellung
+   inkl. einstellungsseite und profilseite, einzelansichten". Der messbare
+   Kern der Kritik „sieht aus wie vorher": Einstellungen und Profil waren
+   LAYOUTNEUTRAL — beim Umschalten änderten sich nur die Listen, diese
+   Seiten blieben pixelgleich Relief. Richtung aus der Trend-Recherche
+   (Muzli-2026-Patterns, Toptal Settings-UX, Karten-Best-Practices):
+   1. Editoriale Typographie — große, eng gesetzte Überschriften statt
+      Versal-Etiketten; Hierarchie über Größe, nicht über GROSSBUCHSTABEN.
+   2. Karten in der Magazin-Sprache — randlos mit weichem Schatten und
+      großem Radius (wie .pet), NICHT die 1-px-Rahmenkästen der Basis.
+   3. Dunkelmodus als eigene Fläche — Tiefe über Hairline + Flächenstufe
+      statt Schatten (Schatten säuft auf dunklem Grund ab).
+   Glas bleibt chirurgisch (nur die schwebende Tabbar), Bedienbares bleibt
+   unten. Alles magazin-only; Relief-Verbot gilt. */
+
+/* -- 1. Editoriale Überschriften -- */
+[data-layout="magazin"] .welcome__t{font-size:2.25rem;font-weight:850;
+  letter-spacing:-.035em;line-height:1.05}
+[data-layout="magazin"] .welcome__s{font-size:1rem;line-height:1.5}
+/* Abschnitts-Etikett wird Abschnitts-ÜBERSCHRIFT: aus 12-px-Versalien
+   werden echte Zwischentitel mit Haarlinie davor — der Leserhythmus einer
+   Zeitschrift, zugleich die geforderte klare Gruppierung (Settings-UX:
+   wenige, deutlich getrennte Kategorien). */
+[data-layout="magazin"] .content>.sect{font-size:1.375rem;font-weight:800;
+  letter-spacing:-.02em;text-transform:none;color:var(--ink);
+  border-top:.0625rem solid var(--line);padding-top:1.25rem}
+[data-layout="magazin"] .signed__head h2{font-size:1.75rem;font-weight:850;
+  letter-spacing:-.03em;line-height:1.1}
+[data-layout="magazin"] .io__lbl{font-size:1.125rem;font-weight:800;
+  letter-spacing:-.015em}
+
+/* -- 2. Karten in der Magazin-Sprache (hell: randlos + Schatten) -- */
+[data-layout="magazin"] .seg,
+[data-layout="magazin"] .srow,
+[data-layout="magazin"] .io,
+[data-layout="magazin"] .signed-list,
+[data-layout="magazin"] .accordion:not(.langgroup){border:0;
+  border-radius:var(--radius);
+  box-shadow:0 .375rem 1rem rgba(40,30,15,.08)}
+[data-layout="magazin"] .srow{padding:1.125rem 1.25rem}
+[data-layout="magazin"] .signed-list{background:var(--surface);
+  padding:.25rem 1.25rem}
+/* Gefahrenzone: Rot bleibt als Rahmen — die WARNUNG ist hier die
+   Gestalt, nicht die Karte. Nur der Radius zieht mit. */
+[data-layout="magazin"] .danger{border-radius:var(--radius)}
+/* Der Favoriten-Tipp war nackter Fließtext zwischen Karten; als weiche
+   Akzentfläche (wie .support) gehört er sichtbar zur Karten-Familie. */
+[data-layout="magazin"] .favtip{background:var(--accent-soft);
+  border-radius:var(--radius);padding:1rem 1.25rem}
+
+/* -- 3. Profil: Hero + Kennzahl in Bento-Größe -- */
+[data-layout="magazin"] .avatar{width:6.5rem;height:6.5rem;
+  font-size:2.75rem}
+[data-layout="magazin"] .profile-namein{font-size:1.625rem;
+  letter-spacing:-.02em}
+/* Dieselbe Kennzahl-Stimme wie die 2×2-Bento-Kachel (3.25rem, eng):
+   die Zahl IST die Aussage der Wirkungs-Karte. */
+[data-layout="magazin"] .impact{border-radius:var(--radius)}
+[data-layout="magazin"] .impact__n{font-size:3.25rem;line-height:1;
+  letter-spacing:-.04em}
+
+/* -- 4. Einzelansicht: Zurück-Weg und Info-Feld in Kartensprache -- */
+[data-layout="magazin"] .backbtn{background:var(--surface);border:0;
+  border-radius:999px;padding:.5rem 1rem;
+  box-shadow:0 .375rem 1rem rgba(40,30,15,.08)}
+[data-layout="magazin"] .pabout{border-radius:var(--radius)}
+
+/* -- 5. Dunkelmodus: Hairline statt Schatten (zwei Zweige wie in
+   theme.css: fest „dark" + „auto" bei dunklem System) -- */
+html[data-theme="dark"][data-layout="magazin"] .seg,
+html[data-theme="dark"][data-layout="magazin"] .srow,
+html[data-theme="dark"][data-layout="magazin"] .io,
+html[data-theme="dark"][data-layout="magazin"] .signed-list,
+html[data-theme="dark"][data-layout="magazin"] .accordion:not(.langgroup),
+html[data-theme="dark"][data-layout="magazin"] .backbtn,
+html[data-theme="dark"][data-layout="magazin"] .pet{
+  border:.0625rem solid var(--line);box-shadow:none}
+@media (prefers-color-scheme:dark){
+  html[data-theme="auto"][data-layout="magazin"] .seg,
+  html[data-theme="auto"][data-layout="magazin"] .srow,
+  html[data-theme="auto"][data-layout="magazin"] .io,
+  html[data-theme="auto"][data-layout="magazin"] .signed-list,
+  html[data-theme="auto"][data-layout="magazin"] .accordion:not(.langgroup),
+  html[data-theme="auto"][data-layout="magazin"] .backbtn,
+  html[data-theme="auto"][data-layout="magazin"] .pet{
+    border:.0625rem solid var(--line);box-shadow:none}
+}

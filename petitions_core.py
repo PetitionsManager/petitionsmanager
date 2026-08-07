@@ -31,6 +31,7 @@ from __future__ import annotations
 
 import datetime as _dt
 import json
+import os
 import re
 import threading
 import time
@@ -600,25 +601,41 @@ def save_store(store: dict, data_file: Path, extra_meta: dict | None = None,
     nie eine kaputte Datei. Wird bei jedem Scrape-Fortschritt aufgerufen, damit
     bei Absturz/Timeout nichts verloren geht.
 
-    Beim Abschluss-Speichern (quiet=False) wird zusätzlich geprüft, ob die Zahl
-    der Online-Petitionen gegenüber dem letzten Lauf eingebrochen ist. Das ist
-    fast nie echt, sondern ein Zeichen für eine blockierende/kaputte Quelle
-    (WAF-Seite, Umbau, Rate-Limit) – dann wird eine Warnung ins _meta
-    geschrieben, die das Dashboard anzeigt."""
+    Beim Abschluss-Speichern (quiet=False) läuft zusätzlich die Selbstmeldung
+    (siehe Abschnitt „Selbstmeldung der Scraper"): der fertige Bestand wird auf
+    die Spuren bekannter Ausfälle geprüft, die Kennzahlen des Laufs wandern in
+    eine Zeitreihe, und was sich VERSCHLECHTERT hat, geht ins CI. Dieser eine
+    Punkt erreicht alle elf Scraper — jeder von ihnen endet hier."""
     online_now = sum(1 for r in store.values()
                      if isinstance(r, dict) and r.get("status") == "online")
     meta_extra = dict(extra_meta or {})
     if not quiet:
         prev = load_meta(data_file)
-        prev_online = prev.get("online_count")
-        warn = None
-        if (isinstance(prev_online, int) and prev_online >= 20
-                and online_now < prev_online * 0.5):
-            warn = (f"Online-Bestand von {prev_online} auf {online_now} "
-                    f"gefallen – Quelle vermutlich blockiert oder umgebaut.")
-            log(f"WARNUNG: {warn}")
-        meta_extra["health_warning"] = warn
+        vor_kennzahlen = prev.get("kennzahlen") or {}
+        # Rückfall für Bestände, die noch vor der Selbstmeldung entstanden
+        # sind: dort gibt es nur online_count. Ohne das wäre der erste Lauf
+        # nach der Umstellung blind für den Online-Einbruch.
+        if "online" not in vor_kennzahlen and isinstance(prev.get("online_count"), int):
+            vor_kennzahlen = {**vor_kennzahlen, "online": prev["online_count"]}
+
+        neue_befunde, kennzahlen = _bestandspruefung(store, vor_kennzahlen)
+        key = getattr(_TLS, "platform", None) or "_cli"
+        with BEFUND_LOCK:
+            gemeldet = list(BEFUNDE.pop(key, []))
+        befunde = gemeldet + neue_befunde
+
+        verlauf = list(prev.get("lauf_verlauf") or [])
+        verlauf.append(kennzahlen)
+        meta_extra["lauf_verlauf"] = verlauf[-VERLAUF_MAX:]
+        meta_extra["kennzahlen"] = kennzahlen
+        meta_extra["befunde"] = befunde
+        # health_warning bleibt als Feld erhalten: die Dashboard-Kachel und
+        # ältere Bestände lesen es. Es trägt jetzt den ersten Befund.
+        erste = next((b for b in befunde if b.get("stufe") == "warnung"), None)
+        meta_extra["health_warning"] = (
+            f"{erste['thema']}: {erste['text']}" if erste else None)
         meta_extra["online_count"] = online_now
+        _melde_an_ci(data_file.stem.replace("_petitions", ""), befunde)
 
     out = {"_meta": {**FIELD_META, "generated_at": now_iso(),
                      "petition_count": len(store), **meta_extra}}
@@ -778,6 +795,208 @@ def progress_snapshot() -> dict:
     running = [k for k, v in platforms.items() if v.get("running")]
     return {"running": bool(running), "count_running": len(running),
             "running_platforms": running, "platforms": platforms}
+
+
+# ----------------------------------------------------------------------------
+# Selbstmeldung der Scraper
+# ----------------------------------------------------------------------------
+# WARUM ES DAS GIBT (Auftrag des Nutzers vom 4.8.2026). An einem einzigen Tag
+# kamen drei Ausfälle ans Licht, die alle unbemerkt WEITERLIEFEN, weil niemand
+# sie meldete:
+#   1. Change.orgs Themen-Entdeckung lieferte seit unbekannter Zeit null Themen
+#      — der Lauf war trotzdem grün, weil die Sitemaps die Lücke füllten.
+#   2. Ein abschneidender regulärer Ausdruck erzeugte 81 Datensätze, die als
+#      „gelöscht" galten; darunter eine Petition mit 72.111 Unterschriften.
+#   3. WeMoves Warteschlange brach seit dem 6.7. bei Position 30 von 261 ab.
+#      Die Abbruchmeldung stand im Protokoll — aber niemand liest 300 Minuten
+#      Lauf-Log.
+#
+# Zwei Wege, absichtlich getrennt:
+#   befund()/entdeckung()  der Scraper meldet selbst, was ihm auffällt
+#   _bestandspruefung()    läuft OHNE Zutun der Scraper über den fertigen
+#                          Bestand und sucht die Spuren, die genau diese Fälle
+#                          hinterlassen. Deshalb greift sie für ALLE elf
+#                          Plattformen, auch für die, die nie etwas melden.
+#
+# WOHIN ES GEHT: ins _meta der Datendatei (überdauert den Lauf und liegt im
+# Actions-Cache), auf die Dashboard-Kachel und — im CI — als ::warning:: plus
+# Tabelle in die Zusammenfassung des Laufs. Der letzte Weg ist derselbe wie in
+# monitor.run_checks(); dort ist er erprobt.
+#
+# ⚠️ ALARM NUR BEI VERÄNDERUNG. „Nur zu melden reicht nicht, wenn niemand
+# hinsieht" gilt auch andersherum: ein Warnhinweis, der bei jedem Lauf steht,
+# wird nach drei Tagen überlesen. Ins CI geht deshalb ausschließlich, was sich
+# gegenüber dem Vorlauf VERSCHLECHTERT hat; der Dauerzustand (WeMove trägt
+# systembedingt 208 titellose Sätze) steht still auf dem Dashboard.
+
+BEFUNDE: dict[str, list[dict]] = {}
+BEFUND_LOCK = threading.Lock()
+VERLAUF_MAX = 30       # so viele Läufe hält die Zeitreihe je Plattform
+
+
+def befund(stufe: str, thema: str, text: str) -> None:
+    """Eine Auffälligkeit melden; `stufe` ist "warnung" oder "hinweis".
+    Die Zuordnung zur Plattform läuft über denselben Thread-Kontext wie prog()
+    — monitor.py --all scrapt mehrere Plattformen nebenläufig, ein einfaches
+    Modul-Global würde ihre Meldungen vermischen."""
+    key = getattr(_TLS, "platform", None) or "_cli"
+    eintrag = {"stufe": stufe, "thema": thema,
+               "text": " ".join(str(text).split())[:300], "zeit": now_iso()}
+    with BEFUND_LOCK:
+        BEFUNDE.setdefault(key, []).append(eintrag)
+    log(f"BEFUND [{stufe}] {thema}: {eintrag['text']}")
+
+
+def entdeckung(name: str, treffer: int, erwartet_min: int = 1) -> int:
+    """Einen Entdeckungszweig zählen und melden, wenn er (fast) leer bleibt.
+
+    Genau hier fiel Change.org durch (Fall 1 oben): ein Zweig, der NICHTS mehr
+    findet, ist selten eine Randnotiz — meist ist er die erste Stufe eines
+    Ausfalls, den ein zweiter Zweig noch verdeckt. Gibt `treffer` unverändert
+    zurück, damit sich der Aufruf um einen bestehenden Ausdruck legen lässt:
+        topics = core.entdeckung("Themenseiten", len(discover_topics(f)))"""
+    if treffer < erwartet_min:
+        befund("warnung", f"Entdeckung „{name}“",
+               f"{treffer} Treffer – erwartet mindestens {erwartet_min}. "
+               f"Zweig vermutlich ausgefallen (Seitenumbau?).")
+    return treffer
+
+
+def _torsi(store: dict, ohne_titel: set) -> list[str]:
+    """Slugs, die ANFANG eines anderen Slugs sind UND keinen Titel haben —
+    die Signatur einer abgeschnittenen Adresse (Fall 2 oben).
+
+    Beide Bedingungen sind nötig, das ist gemessen und nicht geschätzt
+    (6.8.2026, elf Bestände): „Präfix" ALLEIN meldet bei innn.it 50 völlig
+    gesunde Slugs, die zufällig Anfang eines längeren sind. Zusammen mit
+    „ohne Titel" bleiben dort 0 übrig, während bei Change.org 21 der 23
+    Präfix-Slugs übrig bleiben — genau die kaputten.
+
+    Die sortierte Liste macht das billig: steht ein Slug am Anfang eines
+    anderen, dann auch am Anfang seines unmittelbaren Nachfolgers."""
+    slugs = sorted(k for k, v in store.items() if isinstance(v, dict))
+    treffer = []
+    for i in range(len(slugs) - 1):
+        s, t = slugs[i], slugs[i + 1]
+        if t != s and t.startswith(s) and s in ohne_titel:
+            treffer.append(s)
+    return treffer
+
+
+def _bestandspruefung(store: dict, vorher: dict) -> tuple[list[dict], dict]:
+    """Prüft den FERTIGEN Bestand auf die Spuren bekannter Ausfälle.
+    Liefert (neue Befunde, Kennzahlen). Die Kennzahlen wandern ins _meta und
+    sind beim nächsten Lauf der Vergleichswert — ohne sie gäbe es keinen
+    Vorher-Nachher, und ohne den keine Unterscheidung zwischen Dauerzustand
+    und frischem Ausfall."""
+    saetze = [v for v in store.values() if isinstance(v, dict)]
+    gesamt = len(saetze)
+    online = sum(1 for r in saetze if r.get("status", "online") == "online")
+    ohne_titel = {str(r.get("slug") or "") for r in saetze
+                  if not str(r.get("title") or "").strip()}
+    torsi = _torsi(store, ohne_titel)
+    # Mehrere Datensätze auf DERSELBEN Adresse. Am 6.8.2026 über alle elf
+    # Bestände gezählt: 0 von 14.354 — die Fehlalarmquote dieser Schwelle ist
+    # also gemessen null, jede Dublette ist ein echter Befund. Bekannt ist der
+    # Fall von Avaaz, wo sieben titellose Sätze auf der Übersichtsseite der
+    # Plattform stehen statt auf je einer Petition; die Ursache ist offen (die
+    # naheliegende Vermutung „gelöschte Petition leitet auf die Übersicht um"
+    # ist widerlegt: Avaaz antwortet dort sauber mit 404).
+    nach_url: dict[str, list[str]] = {}
+    for r in saetze:
+        u = str(r.get("url") or "")
+        if u:
+            nach_url.setdefault(u, []).append(str(r.get("slug") or ""))
+    dubletten = {u: s for u, s in nach_url.items() if len(s) > 1}
+    kennzahlen = {"zeit": now_iso(), "gesamt": gesamt, "online": online,
+                  "offline": gesamt - online, "ohne_titel": len(ohne_titel),
+                  "torsi": len(torsi), "dubletten": len(dubletten)}
+
+    neu: list[dict] = []
+    def merke(stufe, thema, text):
+        neu.append({"stufe": stufe, "thema": thema,
+                    "text": " ".join(text.split())[:300], "zeit": kennzahlen["zeit"]})
+        log(f"BEFUND [{stufe}] {thema}: {text}")
+
+    v_ohne = vorher.get("ohne_titel")
+    v_torsi = vorher.get("torsi")
+    v_online = vorher.get("online")
+
+    # (a) Titellose Sätze. Gemeldet wird der ZUWACHS, nicht der Stand: WeMove
+    #     trägt bauartbedingt 208 titellose Sätze (Testvorlagen der Plattform),
+    #     das ist bekannt und darf nicht täglich blinken. Doppelte Schwelle,
+    #     damit weder ein großer Bestand (10 von 7.903 = Rauschen) noch ein
+    #     kleiner (10 von 15 = Totalausfall) falsch bewertet wird.
+    if isinstance(v_ohne, int) and gesamt:
+        zuwachs = len(ohne_titel) - v_ohne
+        anteil = zuwachs / gesamt
+        if zuwachs >= 10 and anteil >= 0.02:
+            merke("warnung", "Datensätze ohne Titel",
+                  f"{v_ohne} → {len(ohne_titel)} von {gesamt} (+{zuwachs}). "
+                  f"Titel werden vermutlich nicht mehr gelesen.")
+
+    # (b) Abgeschnittene Adressen. Beim ersten Lauf gibt es keinen Vergleich —
+    #     dann zählt der Stand, ab 3 (Bundestag hat dauerhaft 1, das ist der
+    #     gemessene Grundpegel).
+    if v_torsi is None:
+        if len(torsi) >= 3:
+            merke("warnung", "Abgeschnittene Adressen",
+                  f"{len(torsi)} Slugs sind Anfang eines anderen und haben "
+                  f"keinen Titel, z. B. {', '.join(torsi[:3])}. Prüfe den "
+                  f"Ausdruck, der die Adresse aus der Seite zieht.")
+    elif len(torsi) > v_torsi:
+        merke("warnung", "Abgeschnittene Adressen",
+              f"{v_torsi} → {len(torsi)}, neu z. B. {', '.join(torsi[:3])}. "
+              f"Prüfe den Ausdruck, der die Adresse aus der Seite zieht.")
+
+    # (c) Doppelt vergebene Adressen. Grundpegel gemessen 0 — deshalb genügt
+    #     hier eine einzige, es braucht keinen Puffer. merge_records() liegt
+    #     bereit, um zwei Sätze zusammenzuführen.
+    v_dub = vorher.get("dubletten")
+    if dubletten and (v_dub is None or len(dubletten) > v_dub):
+        beispiel = next(iter(dubletten.items()))
+        merke("warnung", "Mehrere Sätze auf derselben Adresse",
+              f"{len(dubletten)} Adresse(n) doppelt vergeben, z. B. "
+              f"{beispiel[0][:70]} für {', '.join(beispiel[1][:3])}. "
+              f"Entweder wurde umbenannt (merge_records) oder eine Seite ohne "
+              f"Petition ist in den Bestand geraten.")
+
+    # (d) Einbruch des Online-Bestands (Fall 3: die Quelle blockt oder wurde
+    #     umgebaut, die Petitionen sind gar nicht weg).
+    if isinstance(v_online, int) and v_online >= 20 and online < v_online * 0.5:
+        merke("warnung", "Online-Bestand eingebrochen",
+              f"{v_online} → {online}. Quelle vermutlich blockiert oder "
+              f"umgebaut – fast nie ein echtes Verschwinden.")
+
+    return neu, kennzahlen
+
+
+def _melde_an_ci(name: str, befunde: list[dict]) -> None:
+    """Befunde dorthin schreiben, wo man sie OHNE ABSICHT sieht: als Annotation
+    am Lauf und als Tabelle in seiner Zusammenfassung. Außerhalb von GitHub
+    Actions passiert nichts — dort steht schon alles im Protokoll.
+    Der senkrechte Strich muss maskiert werden, sonst zerreißt er die
+    Markdown-Tabelle (in monitor.run_checks am 4.8.2026 genau so passiert)."""
+    warnungen = [b for b in befunde if b.get("stufe") == "warnung"]
+    if not warnungen or os.environ.get("GITHUB_ACTIONS") != "true":
+        return
+    for b in warnungen:
+        einzeilig = " ".join(f"{b['thema']}: {b['text']}".split())[:400]
+        print(f"::warning title=Scraper {name}::{einzeilig}")
+    pfad = os.environ.get("GITHUB_STEP_SUMMARY")
+    if not pfad:
+        return
+    try:
+        with open(pfad, "a", encoding="utf-8") as fh:
+            fh.write(f"### {name}: {len(warnungen)} Auffälligkeit(en)\n\n")
+            fh.write("| Thema | Befund |\n|---|---|\n")
+            for b in warnungen:
+                zelle = " ".join(b["text"].split())[:200].replace("|", "\\|")
+                thema = b["thema"].replace("|", "\\|")
+                fh.write(f"| {thema} | {zelle} |\n")
+            fh.write("\n")
+    except OSError as exc:
+        log(f"WARNUNG: Zusammenfassung nicht schreibbar ({exc}).")
 
 
 # ----------------------------------------------------------------------------
@@ -1348,9 +1567,31 @@ def _live_card(platform: Platform) -> str:
 
     # Einbruch des Online-Bestands = fast immer ein Quellenproblem, kein echtes
     # Verschwinden der Petitionen (siehe save_store).
-    warning = meta.get("health_warning")
-    warn_html = (f'<div class="healthwarn">⚠ {_esc(warning)}</div>'
-                 if warning else "")
+    # Selbstmeldung des letzten Laufs. Warnungen zuerst und rot; darunter der
+    # stille Dauerzustand, damit man ihn beim Suchen findet, ohne dass er die
+    # frische Warnung überstrahlt (siehe Abschnitt „Selbstmeldung der Scraper").
+    befunde = meta.get("befunde")
+    if befunde:
+        warn_html = "".join(
+            f'<div class="healthwarn"><b>⚠ {_esc(b.get("thema"))}</b>'
+            f'{_esc(b.get("text"))}</div>'
+            for b in befunde if b.get("stufe") == "warnung")
+    else:
+        # Bestände von vor der Selbstmeldung tragen nur das alte Einzelfeld.
+        warning = meta.get("health_warning")
+        warn_html = (f'<div class="healthwarn">⚠ {_esc(warning)}</div>'
+                     if warning else "")
+
+    kz = meta.get("kennzahlen") or {}
+    dauer = []
+    if kz.get("ohne_titel"):
+        anteil = round(kz["ohne_titel"] / max(1, kz.get("gesamt") or 1) * 100)
+        dauer.append(f"{kz['ohne_titel']} ohne Titel ({anteil} %)")
+    if kz.get("torsi"):
+        dauer.append(f"{kz['torsi']} abgeschnittene Adresse(n)")
+    if dauer:
+        warn_html += ('<div class="healthnote">Dauerzustand: '
+                      + _esc(" · ".join(dauer)) + "</div>")
 
     return f"""
     <a class="card" href="{platform.html_file.name}" data-platform="{_esc(platform.key)}">
@@ -1481,6 +1722,14 @@ _DASHBOARD_TEMPLATE = """<!DOCTYPE html>
   .healthwarn{margin:0 0 12px;padding:8px 10px;border-radius:8px;font-size:12px;
               line-height:1.4;background:#fdeceb;color:#8d2f28;
               border:1px solid #f3c3bf}
+  .healthwarn b{display:block;font-weight:700}
+  .healthwarn + .healthwarn{margin-top:-6px}
+  /* Dauerzustand statt frischer Ausfall: sichtbar, aber ohne Alarmfarbe —
+     sonst blinkt WeMoves bauartbedingter Titelmangel jeden Tag rot und man
+     sieht die echte Warnung daneben nicht mehr. */
+  .healthnote{margin:0 0 12px;padding:6px 10px;border-radius:8px;font-size:11.5px;
+              line-height:1.4;background:var(--bg);color:var(--muted);
+              border:1px solid var(--line)}
   .completeness.full  .completeness__head b{color:var(--online)}
   .completeness.low   .completeness__head b{color:var(--offline)}
   .card-btn{display:inline-block;font-weight:650;color:var(--indigo)}

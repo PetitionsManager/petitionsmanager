@@ -56,6 +56,7 @@ window.PM_PLATFORMS = {
       links: [
         { label: "Website",     url: "https://weact.campact.de" },
         { label: "Über uns",    url: "https://weact.campact.de/s/warum-weact-die-beste-plattform-fuer-deine-petition-ist" },
+        { label: "Kontakt",     url: "https://www.campact.de/ueber-campact/kontakt/" },
         { label: "Datenschutz", url: "https://www.campact.de/campact/ueber-campact/datenschutz/" }
       ]
     }
@@ -79,7 +80,7 @@ window.PM_PLATFORMS = {
       financing: "Spenden",
       links: [
         { label: "Website",     url: "https://www.openpetition.de" },
-        { label: "Impressum",   url: "https://www.openpetition.de/content/legal_details" },
+        { label: "Impressum & Kontakt", url: "https://www.openpetition.de/content/legal_details" },
         { label: "Datenschutz", url: "https://www.openpetition.de/content/data_privacy" }
       ]
     }
@@ -103,6 +104,7 @@ window.PM_PLATFORMS = {
       financing: null,
       links: [
         { label: "Website",     url: "https://www.change.org" },
+        { label: "Hilfe & Kontakt", url: "https://help.change.org/contact-us" },
         { label: "Datenschutz", url: "https://www.change.org/policies/privacy" }
       ]
     }
@@ -135,7 +137,8 @@ window.PM_PLATFORMS = {
       financing: "Spenden",
       links: [
         { label: "Website",     url: "https://innn.it" },
-        { label: "Transparenz", url: "https://innn.it/transparenz" }
+        { label: "Transparenz", url: "https://innn.it/transparenz" },
+        { label: "Impressum & Kontakt", url: "https://innn.it/impressum" }
       ]
     }
   },
@@ -159,6 +162,7 @@ window.PM_PLATFORMS = {
       links: [
         { label: "Website",     url: "https://avaaz.org" },
         { label: "Über uns",    url: "https://secure.avaaz.org/en/about.php" },
+        { label: "Hilfe & Kontakt", url: "https://avaazhelp.zendesk.com/hc/de" },
         { label: "Datenschutz", url: "https://secure.avaaz.org/en/privacy/" }
       ]
     }
@@ -183,6 +187,9 @@ window.PM_PLATFORMS = {
       links: [
         { label: "Website",     url: "https://epetitionen.bundestag.de" },
         { label: "Impressum",   url: "https://epetitionen.bundestag.de/epet/service.nc.$$$.rubrik.impressum.html" },
+        /* Der Kontakt steht NICHT auf dem Petitionsportal, sondern beim
+           Ausschuss selbst (post.pet@bundestag.de, Anschrift, Telefon). */
+        { label: "Petitionsausschuss (Kontakt)", url: "https://www.bundestag.de/ausschuesse/a02_Petitionsausschuss" },
         { label: "Datenschutz", url: "https://epetitionen.bundestag.de/epet/service.$$$.rubrik.datenschutz.html" }
       ]
     }
@@ -207,6 +214,7 @@ window.PM_PLATFORMS = {
       links: [
         { label: "Website",     url: "https://www.europarl.europa.eu/petitions/" },
         { label: "Über das Verfahren", url: "https://www.europarl.europa.eu/petitions/de/artcl/Welcome+to+the+Petitions+Web+Portal/det/20220906CDT10122" },
+        { label: "Kontakt",     url: "https://www.europarl.europa.eu/portal/de/contact" },
         { label: "Datenschutz", url: "https://www.europarl.europa.eu/petitions/de/artcl/Privacy+Policy+Statements/det/20240115CDT12863" }
       ]
     }
@@ -235,6 +243,7 @@ window.PM_PLATFORMS = {
       links: [
         { label: "Website",           url: "https://www.wemove.eu" },
         { label: "Finanzierung",      url: "https://www.wemove.eu/en/how-we-are-funded" },
+        { label: "Impressum & Kontakt", url: "https://wemove.eu/de/impressum" },
         { label: "Datenschutz",       url: "https://www.wemove.eu/en/privacy-policy" }
       ]
     }
@@ -258,7 +267,10 @@ window.PM_PLATFORMS = {
       financing: null,
       links: [
         { label: "Website",     url: "https://eko.org" },
-        { label: "Über uns",    url: "https://eko.org/about" },
+        /* Ekō hat keine eigene Kontaktseite — /en/contact, /en/contact-us und
+           /en/imprint liefern alle die Fehlerseite. Die Adressen (info@,
+           press@, corporate@eko.org) stehen auf „Über uns". */
+        { label: "Über uns & Kontakt", url: "https://eko.org/about" },
         { label: "Datenschutz", url: "https://eko.org/en/privacy" }
       ]
     }
@@ -283,7 +295,7 @@ window.PM_PLATFORMS = {
       links: [
         { label: "Website",     url: "https://www.foodwatch.org/de/" },
         { label: "Über uns",    url: "https://www.foodwatch.org/de/ueber-uns/" },
-        { label: "Impressum",   url: "https://www.foodwatch.org/de/impressum" },
+        { label: "Impressum & Kontakt", url: "https://www.foodwatch.org/de/impressum" },
         { label: "Datenschutz", url: "https://www.foodwatch.org/de/datenschutz" }
       ]
     }
@@ -308,6 +320,7 @@ window.PM_PLATFORMS = {
       links: [
         { label: "Website",       url: "https://350.org" },
         { label: "Über uns",      url: "https://350.org/about/" },
+        { label: "Kontakt",       url: "https://350.org/contact/" },
         { label: "Datenschutz",   url: "https://350.org/privacy/" },
         { label: "Brand-Toolkit", url: "https://350.org/brand-toolkit/" }
       ]

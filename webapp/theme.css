@@ -38,6 +38,11 @@
    Erzwungener Dark Mode
    ============================================================ */
 :root[data-theme="dark"] {
+  /* Sagt dem Browser (und vor allem Android-WebView), dass diese Seite ihr
+     dunkles Design SELBST mitbringt — sonst dunkelt WebView zusätzlich nach.
+     Grundwert light steht in style.css :root; siehe die Begründung dort. */
+  color-scheme:  dark;
+
   /* Flächen */
   --bg:           #191714;   /* Hauptfläche, warmes Anthrazit */
   --surface:      #232019;   /* Karten, Akkordions, Eingabefelder */
@@ -145,6 +150,9 @@
    ============================================================ */
 @media (prefers-color-scheme: dark) {
   :root[data-theme="auto"] {
+    /* Gegenstück zu Block A — siehe dort und style.css :root. */
+    color-scheme:  dark;
+
     /* Flächen */
     --bg:           #191714;
     --surface:      #232019;

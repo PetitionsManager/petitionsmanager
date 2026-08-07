@@ -125,7 +125,13 @@ def discover_slugs(fetcher: core.Fetcher) -> dict[str, dict]:
     found: dict[str, dict] = {}
 
     # (a) Themenseiten: robuste, deutsche Kuratierung (je ~21 Petitionen).
+    # ⚠️ Dieser Zweig ist STILL AUSGEFALLEN und lief monatelang unbemerkt: die
+    # Startseite hat weder trendingTopics noch einen /t/-Link mehr, der Lauf
+    # blieb trotzdem grün, weil die Sitemaps unten die Lücke füllten. Genau
+    # dieser Fall war der Anlass für core.entdeckung() — sie meldet einen
+    # leeren Zweig, statt ihn im Protokoll verschwinden zu lassen.
     topics = discover_topics(fetcher)
+    core.entdeckung("Themenseiten (trendingTopics)", len(topics))
     prog(phase="discover", current=0, total=len(topics) + SITEMAP_COUNT,
          message="Sammle Themen …")
     for i, topic in enumerate(topics, 1):
@@ -144,6 +150,10 @@ def discover_slugs(fetcher: core.Fetcher) -> dict[str, dict]:
     resp = fetcher.get(SITEMAP_INDEX)
     maps = (re.findall(r"<loc>([^<]+sitemap-[^<]+)</loc>", resp.text)[:SITEMAP_COUNT]
             if resp is not None and resp.ok else [])
+    # Seit der Themen-Zweig tot ist, hängt die gesamte Entdeckung an den
+    # Sitemaps. Fällt auch die aus, findet der Lauf gar nichts mehr — und das
+    # darf nicht erst am eingebrochenen Bestand auffallen.
+    core.entdeckung("Sitemap-Verzeichnis", len(maps))
     for j, sm in enumerate(maps, 1):
         r = fetcher.get(sm)
         added = 0

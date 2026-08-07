@@ -85,9 +85,24 @@ public class MainActivity extends Activity {
          *   2. res/values-night/themes.xml, damit die App im Dunkelmodus
          *      überhaupt ein dunkles Thema hat — daran liest WebView ab.
          *
-         * Algorithmisches Aufhellen/Abdunkeln fasst unsere Seiten nicht an:
-         * die Web-App bringt eine eigene Dunkelregel mit, und WebView
-         * überlässt Inhalten mit eigener Unterstützung die Gestaltung. */
+         * ⚠️ Hier stand: "Algorithmisches Abdunkeln fasst unsere Seiten nicht
+         * an, die Web-App bringt ja eigene Dunkelregeln mit." Das ist FALSCH
+         * und hat einen Fehler gedeckt. WebView sieht unsere Dunkelregeln
+         * nicht — es liest ausschließlich die CSS-Eigenschaft `color-scheme`
+         * bzw. das gleichnamige Meta-Tag. Die hatte die Web-App nirgends
+         * (nur `prefers-color-scheme`-Medienabfragen und `theme-color`, beides
+         * etwas anderes). Folge bei dunkel gestelltem Gerät: WebView färbte
+         * die Seite nach, auch wenn in der App ausdrücklich "hell" gewählt war
+         * — data-theme="light" ist ein App-Attribut, das WebView nicht kennt.
+         * Vom Nutzer am 4.8.26 gemeldet ("sieht fast aus wie der Dunkelmodus").
+         *
+         * Seitdem deklariert die Web-App `color-scheme` an drei Stellen:
+         * style.css :root (light) sowie theme.css Block A und Block C (dark).
+         * Damit bleibt `true` hier richtig: es hält `prefers-color-scheme`
+         * am Leben (siehe oben), und das Nachdunkeln unterbleibt, weil die
+         * Seite ihre Unterstützung jetzt ausweist. `false` wäre der falsche
+         * Hebel — dann meldete WebView wieder dauerhaft "hell" und das
+         * Farbdesign "Automatisch" wäre erneut wirkungslos. */
         if (WebViewFeature.isFeatureSupported(WebViewFeature.ALGORITHMIC_DARKENING)) {
             WebSettingsCompat.setAlgorithmicDarkeningAllowed(s, true);
         }
