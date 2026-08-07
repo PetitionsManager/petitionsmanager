@@ -9,3 +9,17 @@ threefifty_petitions.html
 
 # Scratch / lokal
 *.log
+
+# App-Daten (webapp/data) — ERZEUGTE AUSGABE, keine Quelle.
+# Erzeugt von publish.py aus den lokalen Scraper-Bestaenden; im CI holt
+# hole_live_daten.py den veroeffentlichten Stand von GitHub Pages, und der
+# APK-Bau ruft genau das vor dem Gradle-Lauf auf.
+#
+# Warum das hier steht (7.8.2026): der Ordner lag jahrelang mit im Repo, weil
+# der APK-Bau ihn aus dem Checkout las. Er stellte damit 68,9 MB = 67 % des
+# gesamten Repos - bei nur VIER Datenstaenden in der Historie, je ~17 MB. Seit
+# der Bau sich die Daten selbst holt, hat eine eingecheckte Kopie keinen Zweck
+# mehr: sie waere ab dem naechsten Tag wieder veraltet.
+#
+# Fuer die lokale Vorschau einmal `python3 hole_live_daten.py` aufrufen.
+webapp/data/

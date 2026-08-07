@@ -107,6 +107,13 @@ robots.txt. 1 = keine Liste, Bot-Schutz, keine maschinenlesbaren Daten.
 **Voraussetzungen:** Python 3.12, `pip install -r requirements.txt`
 (installiert `requests` und `beautifulsoup4`).
 
+**Nach einem frischen Klon zuerst die App-Daten holen** – sie liegen bewusst
+nicht im Repo (siehe „Android-APK"), die Web-App bliebe sonst leer:
+
+```bash
+python3 hole_live_daten.py      # ~60 MB, dauert etwa eine halbe Minute
+```
+
 ```bash
 # Alle Live-Plattformen scrapen
 python3 monitor.py
@@ -237,17 +244,19 @@ Actions bauen:
 `webapp/data` und prüft ihn: Anzahl je Plattform gegen das Manifest, jeder
 Volltext-Verweis auf ein vorhandenes Paket, Stichprobe auf den Text selbst.
 Stimmt etwas nicht oder ist Pages nicht erreichbar, **bricht der Bau ab** —
-eine APK mit altem Datenstand sähe fertig aus und wäre es nicht. Für den
-Notfall gibt es beim manuellen Start den Haken „mit den Daten aus dem Repo
-bauen"; der Lauf meldet dann ausdrücklich, dass er den älteren Stand nimmt.
+eine APK mit altem Datenstand sähe fertig aus und wäre es nicht.
 
-Damit ist `webapp/data` im Repo nur noch die Fassung für die lokale
-Entwicklung (`python3 publish.py` erzeugt sie). Ob sie alt ist, spielt für die
-APK keine Rolle mehr. Das war vorher anders und der Grund für eine stille
-Lücke: Pages wird per Artefakt beliefert, nicht per Commit — am 7.8.2026 trug
-die APK 14.354 Petitionen, live waren es 17.383. Regelmäßig zu committen wäre
-keine Lösung: `webapp/data` stellt mit 68,9 MB schon 67 % des Repos, bei vier
-Ständen in der Historie.
+`webapp/data` liegt deshalb **nicht mehr im Repo** (`.gitignore`): der Ordner
+ist erzeugte Ausgabe, keine Quelle. Es gibt genau einen Weg zu den Daten, und
+der ist immer aktuell.
+
+Das war lange anders und der Grund für eine stille Lücke: Pages wird per
+Artefakt beliefert, nicht per Commit, der APK-Bau las aber aus dem Checkout —
+am 7.8.2026 trug die APK 14.354 Petitionen, live waren es 17.383. Regelmäßig
+zu committen wäre keine Lösung gewesen, sondern ein zweites Problem: der
+Ordner stellte mit 68,9 MB bereits 67 % des Repos, bei nur vier Ständen in der
+Historie (~17 MB je Stand). Die Historie ist am selben Tag bereinigt worden,
+das Repo dadurch von 102 MB auf 11 MB geschrumpft.
 
 Details und lokaler Build (Android Studio / Gradle): [`android/README-APK.md`](android/README-APK.md)
 
@@ -281,7 +290,8 @@ PetitionsManager/
 ├── petitions_core.py      Gemeinsames Kernmodul: Fetcher, Datenhaltung, HTML-Erzeugung
 ├── publish.py             Erzeugt webapp/data/*.json aus den lokalen JSON-Stores
 ├── hole_live_daten.py     Holt den veröffentlichten Datenstand von GitHub Pages
-│                          nach webapp/data (der APK-Bau ruft ihn auf)
+│                          nach webapp/data. Der APK-Bau ruft ihn auf; nach
+│                          einem frischen Klon einmal selbst aufrufen
 ├── *_scraper.py           Ein Modul pro Plattform (z. B. weact_scraper.py)
 ├── *_petitions.json       Lokale Datenstores (werden von Git ignoriert / gecacht)
 ├── *_petitions.html       Lokale Listen-Ansichten (eine pro Plattform)
@@ -299,7 +309,8 @@ PetitionsManager/
 │   ├── sw.js              Service Worker (Offline-Cache)
 │   ├── logos/             Plattform-Logos als SVG-Sprite
 │   ├── icons/             App-Symbole für Startbildschirm und Manifest
-│   └── data/              Von publish.py erzeugte App-Daten
+│   └── data/              App-Daten – NICHT im Repo (.gitignore):
+│                          publish.py erzeugt sie, hole_live_daten.py holt sie
 │       ├── manifest.json  Plattform-Metadaten + Zähler
 │       └── <key>.json     Petitionen je Plattform
 ├── android/
