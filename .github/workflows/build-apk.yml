@@ -19,15 +19,14 @@ name: Build APK
 # Repo nicht mit jedem Lauf wächst.
 #
 # Also andersherum: der Bau holt sich die Daten dort, wo sie ohnehin täglich
-# frisch liegen. `webapp/data` im Repo ist seitdem nur noch die Fassung für die
-# lokale Entwicklung; ob sie alt ist, spielt für die APK keine Rolle mehr.
+# frisch liegen. Seit dem Aufräumen der Historie am selben Tag liegt `webapp/data`
+# gar nicht mehr im Repo (.gitignore) — es ist erzeugte Ausgabe, keine Quelle.
+# Damit gibt es genau EINEN Weg zu den Daten, und der ist immer aktuell; einen
+# Rückfall auf eine eingecheckte Kopie kann es nicht mehr geben, weil es keine
+# gibt. Ist Pages nicht erreichbar, bricht der Bau ab — das ist die ehrliche
+# Antwort, eine APK mit altem Stand sähe fertig aus und wäre es nicht.
 on:
   workflow_dispatch:
-    inputs:
-      daten_aus_dem_repo:
-        description: 'Notfall: mit den Daten aus dem Repo bauen (nur wenn Pages nicht erreichbar ist)'
-        type: boolean
-        default: false
   push:
     branches: [ main, master ]
     paths:
@@ -51,23 +50,7 @@ jobs:
       # den Volltext selbst) und bricht ab, bevor es etwas überschreibt.
       - name: Veröffentlichten Datenstand holen und prüfen
         id: daten
-        if: ${{ !inputs.daten_aus_dem_repo }}
         run: python3 hole_live_daten.py
-
-      # Notfallweg für den Fall, dass Pages nicht erreichbar ist. Der
-      # Datenstand wird trotzdem benannt, damit man der fertigen APK ansieht,
-      # was in ihr steckt.
-      - name: Datenstand aus dem Repo benennen
-        id: repodaten
-        if: ${{ inputs.daten_aus_dem_repo }}
-        run: |
-          echo "::warning::Gebaut mit den Daten AUS DEM REPO – die sind in der Regel älter als der veröffentlichte Stand."
-          python3 - <<'PY' >> "$GITHUB_OUTPUT"
-          import json
-          m = json.load(open("webapp/data/manifest.json"))
-          print("stand=" + str(m.get("generated_at", "unbekannt"))[:10])
-          print("petitionen=" + str(sum(p.get("count", 0) for p in m["platforms"])))
-          PY
 
       - name: JDK 17 einrichten
         uses: actions/setup-java@v4
@@ -93,7 +76,7 @@ jobs:
       - name: APK als Artefakt hochladen
         uses: actions/upload-artifact@v4
         with:
-          name: PetitionsManager-debug-apk-Daten-${{ steps.daten.outputs.stand || steps.repodaten.outputs.stand }}
+          name: PetitionsManager-debug-apk-Daten-${{ steps.daten.outputs.stand }}
           path: android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
 
@@ -104,7 +87,7 @@ jobs:
             echo ""
             echo "| | |"
             echo "|---|---|"
-            echo "| Datenstand | ${{ steps.daten.outputs.stand || steps.repodaten.outputs.stand }} |"
-            echo "| Petitionen | ${{ steps.daten.outputs.petitionen || steps.repodaten.outputs.petitionen }} |"
-            echo "| Quelle | ${{ inputs.daten_aus_dem_repo && 'Repo (Notfallweg)' || 'GitHub Pages' }} |"
+            echo "| Datenstand | ${{ steps.daten.outputs.stand }} |"
+            echo "| Petitionen | ${{ steps.daten.outputs.petitionen }} |"
+            echo "| Quelle | GitHub Pages |"
           } >> "$GITHUB_STEP_SUMMARY"
