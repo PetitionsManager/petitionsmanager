@@ -264,8 +264,149 @@
       schickt aber SIGINT, sobald die gemeinsame Frist erreicht ist, und dann
       wurde die Zeile übersprungen. publish.py fand nichts zu kopieren und
       schwieg dazu. Jetzt steht das Schreiben in einem finally, und publish.py
-      meldet das Fehlen. (monitor.py/publish.py, nicht in der App sichtbar) */
-var CACHE = "pm-cache-v28";
+      meldet das Fehlen. (monitor.py/publish.py, nicht in der App sichtbar)
+
+   --- v29 -------------------------------------------------------------------
+   29. „Hell" war auf Android nicht hell (Nutzermeldung 4.8.26: „sieht fast aus
+      wie der Dunkelmodus"). Die Ursache liegt NICHT im Farbdesign — das ist in
+      Ordnung und im Browser mit emuliertem System-Dunkelmodus nachgemessen:
+      data-theme="light" liefert #f7f4ec, "dark" und "auto" liefern #191714.
+      ⚠️ Android-WebView erkennt an KEINER Stelle an vorhandenen Dunkelregeln,
+      ob eine Seite ihr Farbdesign selbst beherrscht — es liest allein die
+      CSS-Eigenschaft `color-scheme` bzw. das gleichnamige Meta-Tag. Die hatte
+      die App nirgends: die Treffer für „color-scheme" waren durchweg
+      `prefers-color-scheme` (Medienabfrage) und `theme-color`
+      (Statusleistenfarbe), beides etwas anderes. Bei dunkel gestelltem Gerät
+      färbte WebView deshalb nach — auch bei ausdrücklich gewähltem „hell",
+      denn data-theme ist ein App-Attribut, von dem WebView nichts weiß.
+      Jetzt an den drei zusammengehörigen Stellen deklariert: style.css :root
+      (light), theme.css Block A und Block C (dark).
+      ⚠️ Der Kommentar in MainActivity.java behauptete das Gegenteil („fasst
+      unsere Seiten nicht an, die Web-App bringt ja eigene Dunkelregeln mit")
+      und hat den Fehler gedeckt; er ist richtiggestellt.
+      setAlgorithmicDarkeningAllowed bleibt auf true — false wäre der falsche
+      Hebel, dann meldete WebView wieder dauerhaft „hell" und das Farbdesign
+      „Automatisch" wäre erneut wirkungslos.
+      ⚠️ Auf dem Gerät NICHT gegengeprüft: die APK lädt ihre Dateien aus dem
+      Paket (appassets.androidplatform.net/assets/), nicht von Pages — dort
+      wirkt die Reparatur erst nach einem neuen APK-Bau.
+      (style.css/theme.css + android/MainActivity.java)
+
+   --- v30 -------------------------------------------------------------------
+   30. (andere Sitzung) Magazin-Abstände systematisiert (Nutzerauftrag
+      „Best-Practice-Beispiele ansehen", nachjustiert mit „lieber größer als
+      zu klein"): im selben Seitenfluss standen 12/14/18/20/28 px
+      nebeneinander. Den Seitenfluss trägt seitdem der layoutneutrale
+      „Grundrhythmus"-Block in style.css (parallel in der Schwester-Sitzung
+      entstanden, 24 px zwischen Blöcken); magazin-only obendrauf: Zählzeile→Liste 16
+      (Bildunterschrift-Logik), Kartenfuge 24 statt 20, Bento-Fuge 16 statt
+      12 (Zeilenhöhe fest, ≥6-px-Kachelkriterium unberührt: knappste
+      gerenderte Kachel 24 px), Karten-Innenpolster 20 → 24,
+      Unterstützung/Rechtliches beide 32 (deckungsgleich mit den
+      Einstellungs-Sektionen). Eine erste Fassung mit eigenen Magazin-16ern
+      im Fluss ist BEWUSST wieder raus — sie kollabierte unter den
+      Basis-24ern zu totem Gewicht und hätte Profil (32) und Einstellungen
+      (bewusst eng) unterboten.
+      Dazu zwei Sichtbefunde, gefunden im ERSTEN gelungenen Screenshot
+      (preview_screenshot kam nach Wochen Timeout einmal durch):
+      a) „+7 neu"-Abzeichen und Pfeilkreis lagen auf der 2×2-Kachel 40 px
+      überlappend BEIDE oben rechts — eine späte XL-Regel hob den Pfeil von
+      unten nach oben; Regel gestrichen, Pfeil sitzt wie auf --wide unten
+      rechts (dort konstruktionsbedingt frei: .plogo trägt
+      max-width:calc(100% - 96px), Rand 24 + Pfeil 40 = 64).
+      b) Unter dem XL-Untertitel klafften ~190 px Leere bis zum Logo;
+      bento-üblich wird jetzt verteilt: .plat__body als flex-Spalte über die
+      Kachelhöhe, der Untertitel rutscht per margin-top:auto nach unten
+      (margin-bottom 3.5rem hält ihn 15 px überm absolut sitzenden Logo).
+      Relief gegengemessen ohne Leck: count-note 18, Karteninnen 18/16,
+      Chip 28, Aufklapper 34×34, Kartenfuge 16 aus EIGENER Relief-Regel.
+      (nur layouts.css)
+
+   31. (andere Sitzung) „Magazin 2.0": Einstellungen, Profil und
+      Einzelansicht bekommen erstmals eine EIGENE Magazin-Gestalt.
+      Messbarer Kern der Nutzerkritik „das design sieht aus wie vorher":
+      beide Seiten waren layoutneutral — der Layoutschalter änderte dort
+      exakt nichts. Richtung nach Trend-Recherche (Muzli-2026-Patterns,
+      Toptal Settings-UX, Karten-Best-Practices): editoriale Typographie
+      (Seitentitel 2.25rem/850/eng, Abschnitts-Etiketten werden echte
+      1.375rem-Zwischentitel mit Haarlinie davor), Karten in der
+      Magazin-Sprache (randlos, weicher Schatten, var(--radius) — statt
+      der 1-px-Rahmenkästen der Basis; Gefahrenzone behält ihren roten
+      Rahmen, nur der Radius zieht mit), Profil als Hero (Avatar 6.5rem,
+      Wirkungs-Kennzahl 3.25rem wie die 2×2-Bento-Kachel), Zurück-Knopf
+      als schwebende Pille, Favoriten-Tipp als Akzentfläche. Dunkelmodus
+      nach 2026-Regel „Tiefe über Hairline + Flächenstufe, nicht über
+      Schatten": zwei Zweige (data-theme=dark fest + auto per
+      Medienabfrage), Karten dort mit var(--line)-Hairline und ohne
+      Schatten. Per Screenshot hell+dunkel abgenommen. Relief-Leckprobe:
+      dort gelten inzwischen die NEUEN Neumorphismus-Regeln der
+      Schwester-Sitzung (harte Offset-Schatten, Flächen im
+      Hintergrundton) — keiner meiner Magazin-Werte (weiße Fläche,
+      Blur-Schatten, 22-px-sect) taucht dort auf. (nur layouts.css)
+
+   32. Acht Nutzerwünsche vom 6.8.2026, alle im Browser nachgemessen:
+      a) ZURÜCKTASTE (Android). Die SPA legte nie einen History-Eintrag an,
+      MainActivity.canGoBack() war deshalb immer false und die Taste schloss
+      die App. Jeder Ansichtswechsel schreibt jetzt einen Eintrag
+      (app.js → navTrack am Ende von render(); Abzug aus tab/platform/cross,
+      Filter bewusst NICHT, weil draw() den Router umgeht). Gemessen:
+      Übersicht → Plattform → Einstellungen → 2× zurück landet wieder auf
+      der Plattform bzw. der Übersicht; vier Neuzeichnungen (Farbdesign,
+      Favorit) legen KEINEN Eintrag an. Der Ersteinrichtungs-Assistent
+      bekommt einen eigenen Eintrag, „zurück" wirkt dort wie
+      „Überspringen". Am Java-Teil war nichts zu ändern.
+      ⚠️ Nur im Browser belegt — in der APK erst mit einem neuen Bau.
+      b) SPRUNGMARKE aus den unterzeichneten Petitionen landete mitten im
+      Text: die aufgeklappte Karte ist über 1.400 px hoch, block:"center"
+      setzt deren MITTE in die Bildmitte. Jetzt Oberkante über
+      scroll-margin-top aus der gemessenen Leistenhöhe (app.js →
+      scrollToTop). Karte landet bei 71,7 px statt −741, Titel sichtbar.
+      Werkzeug bewusst scrollIntoView geblieben — das rollt auf dem Gerät
+      nachweislich, getauscht wurde allein die Zielposition.
+      c) AUFKLAPPEN im Relief: Textbreite sprang 227 → 243 px und der
+      Chevron saß 4,8 px aus der Mitte. Ursache beide Male dieselbe —
+      style.css setzt für .pet.open gap:0 und padding-left:.5rem, das
+      Magazin nahm beides am 3.8. zurück, das Relief blieb übersehen.
+      Nachgezogen (layouts.css); jetzt in beiden Zuständen 227 px.
+      d) PROFIL bekommt die große Überschrift der Einstellungen. Untertitel
+      ist profile.intro — lag seit jeher ungenutzt in texts.js. Das kleine
+      Versalien-Etikett blendet syncPageTitle() von selbst aus.
+      e) ABSTÄNDE: Übersicht 16 → 24, Plattformseite 12/16 → 24, Profil
+      24 → 32, Support→Rechtliches 12 → 28 (der am 3.8. nur fürs Magazin
+      behobene Rest). ⚠️ NICHT als pauschales .content > * + * — der erste
+      Versuch riss auf der Einstellungsseite Schalter und Erklärtext auf
+      24 px auseinander; die Blöcke werden jetzt einzeln benannt, und die
+      Einstellungen sind nachgewiesen unberührt (kein Selektor trifft dort).
+      f) LOGO in der Unterschriftenliste: gleiche Höhe statt gleicher
+      Fläche. --logo-k dort auf 1 zu setzen wirkt NICHT (platLogo schreibt
+      den Wert inline ans Element), deshalb Höhe und Breite unmittelbar.
+      Bundestag 78×13 → 111×18, alle elf Marken auf 18 px; Kasten 7rem,
+      weil die breiteste Marke 6,171 × 18 = 111,1 px braucht — aus den
+      SVG-Dateien geprüft, nicht aus dem Rückfallwert in platforms.js.
+      g) „FEHLER MELDEN" rechts in der Kopfleiste (index.html + app.js):
+      mailto an SUPPORT_MAIL mit Textgerüst und den technischen Angaben
+      der GERADE offenen Ansicht. 126×44 px bei 375, nur das Zeichen unter
+      360 px (die Wortmarke hat Vorrang, sie ist auch der Weg zurück).
+      h) KONTAKT bei „Über diese Plattform": alle elf Plattformen haben
+      jetzt einen Kontaktweg (platforms.js). Jede Adresse gegen eine
+      ERFUNDENE Schwester-Adresse geprüft, sonst hätte man Soft-404s
+      übernommen: innn.it/kontakt und eko.org/en/contact liefern beide 200,
+      sind aber von /gibtsnicht123 nicht zu unterscheiden — dort steht
+      jetzt Impressum bzw. „Über uns". Der Bundestag-Kontakt liegt beim
+      Ausschuss, nicht im Petitionsportal.
+      ⚠️ Eigener Fehlalarm: die VORHANDENEN Bundestag-Links schienen auf
+      „Cookies nicht aktiviert" zu laufen — mit Keksglas antworten sie
+      einwandfrei. Nicht anfassen.
+      i) BILDER IM AUFRUFTEXT reservieren jetzt Platz, bis sie da sind
+      (.pet__desc img:not(.img-da) + bilderBeobachten() in app.js). Es geht um
+      den SPRUNG: ein ungeladenes Bild ist 0×0 und schiebt beim Ankommen den
+      ganzen Text um 178 px nach unten. ⚠️ NICHT zu verwechseln mit dem alten
+      Befund „Bilder erscheinen nie" — der ist jetzt zweimal widerlegt (3.8.
+      abends und 6.8. an einer Petition mit ungecachten Bildern: im Sichtfeld
+      lädt sofort, weiter unten beim Hinscrollen). Der Platzhalter verschwindet
+      nach dem Laden wieder, sonst bekämen kleine Partnerlogos (105×59) einen
+      zu hohen Kasten. */
+var CACHE = "pm-cache-v31";
 /* Versionsunabhängig – überlebt das Hochzählen von CACHE. Diese Zahl sollte ab
    jetzt NICHT mehr steigen: seit die Pakete eine Inhaltskennung tragen ("?v=",
    siehe oben) holt sich jedes geänderte Paket von selbst neu. Ein Sprung wäre

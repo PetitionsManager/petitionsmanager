@@ -21,6 +21,17 @@
    sonst greift der Dark Mode in theme.css nicht.
    =========================================================================== */
 :root{
+  /* ⚠️ Nicht kosmetisch, sondern die Bremse gegen Androids Nachdunkeln.
+     Android-WebView erkennt NICHT an vorhandenen Dunkelregeln, ob eine Seite
+     ihr Farbdesign selbst beherrscht — es liest allein diese Eigenschaft
+     (bzw. das gleichnamige Meta-Tag). Fehlt sie und ist das Gerät dunkel
+     gestellt, färbt WebView den Inhalt algorithmisch nach. Unser
+     data-theme="light" ist ein App-Attribut, von dem WebView nichts weiß:
+     die Wahl „hell" wurde deshalb in der APK überstimmt, die App sah fast aus
+     wie im Dunkelmodus (Nutzermeldung 4.8.26).
+     Gegenstück in theme.css, Block A UND Block C — dort auf dark. */
+  color-scheme:light;
+
   /* Warme Neutrale */
   --bg:#f7f4ec; --surface:#ffffff; --ink:#1e1c18; --muted:#6b665c;
   --line:#e9e3d7; --accent:#1c5d50; --accent-soft:#e4ede8;
@@ -125,6 +136,26 @@ button,input,select,textarea{color:inherit}
   justify-content:center}
 .iconbtn:active{background:var(--line)}
 
+/* ---- „Fehler melden" in der Kopfleiste ----
+   Zurückhaltend gesetzt: gedämpfte Schrift, keine Fläche. Der Knopf steht auf
+   jeder Seite, darf der Wortmarke daneben aber nicht die Schau stehlen — er
+   ist ein Ausweg, keine Hauptaktion. min-height statt mehr Polsterung bringt
+   ihn auf die 44 px Trefffläche, die Android für Bedienelemente vorsieht —
+   aus der Schrift allein wären es nur 34 (gemessen 6.8.2026). Der negative
+   Außenabstand nimmt die Polsterung optisch wieder zurück, damit er bündig
+   zum rechten Rand sitzt (dasselbe Rezept wie bei .brand). */
+.reportbtn{display:inline-flex;align-items:center;gap:.375rem;flex:none;
+  border:0;background:transparent;color:var(--muted);cursor:pointer;
+  font:inherit;font-size:.75rem;font-weight:700;line-height:1;
+  min-height:2.75rem;
+  padding:.625rem .625rem;margin-right:-.25rem;border-radius:999px}
+.reportbtn i{font-size:.875rem}
+.reportbtn:active{background:var(--line);color:var(--ink)}
+/* Auf sehr schmalen Geräten bleibt nur das Zeichen stehen. Die Wortmarke
+   links ist einzeilig und darf nicht abgeschnitten werden; sie hat Vorrang,
+   weil sie zugleich der Weg zurück zur Übersicht ist. */
+@media (max-width:22.5rem){.reportbtn__t{display:none}}
+
 /* ---- Inhaltsbereich ---- */
 /* Seitentitel, früher in der Kopfleiste. Maße wie .content, damit die Zeile
    bündig mit dem Inhalt beginnt. Leer oder als Dublette zur Überschrift
@@ -135,6 +166,61 @@ button,input,select,textarea{color:inherit}
 .pagekick:empty,.pagekick.is-dup{display:none}
 .content{max-width:37.5rem;margin:0 auto;
   padding:.5rem 1.125rem calc(var(--tabbar-h) + 2rem);min-height:60vh}
+
+/* ---- Grundrhythmus zwischen den Blöcken einer Seite ----------------------
+   Nutzerwunsch 6.8.2026: „mehr Abstand zwischen den Elementen, damit sie
+   besser voneinander getrennt sind, auch auf anderen Seiten."
+   Vorher gemessen (Relief, 375 px): Übersicht 8/16/16, Plattformseite
+   12/16/16/16/16, Profil 24/24/24, Abschnittsköpfe der Einstellungen 32.
+   Der Sprung zwischen den Seiten war größer als der Sprung zwischen den
+   Blöcken — deshalb ein gemeinsames MINDESTMASS statt vieler Einzelwerte.
+
+   Warum das als margin-top trägt und nichts doppelt zählt: benachbarte
+   Geschwister-Außenabstände fallen zusammen, es gilt also der größere von
+   beiden. Bestehende weitere Abstände (die Support-Blöcke mit 32 px) bleiben
+   dadurch unverändert, engere werden auf 24 px angehoben. Voraussetzung ist,
+   dass alle direkten Kinder im normalen Fluss stehen — am 6.8.2026 auf allen
+   drei Seiten nachgemessen: durchweg position static bzw. relative, kein
+   float, nichts absolut positioniert.
+
+   ⚠️ NICHT als pauschales `.content > * + *`. Das war der erste Versuch und
+   ist gemessen falsch: auf der Einstellungsseite sind die direkten Kinder
+   keine Blöcke, sondern einzelne Zeilen — Schalterleiste, Beschriftung und
+   Erklärtext standen danach 24 px auseinander statt 8, obwohl sie
+   zusammengehören. Der Abstand wird deshalb an den Blöcken benannt, die ihn
+   bekommen sollen, und die Einstellungen behalten ihren eigenen Rhythmus
+   (32 px zwischen den Abschnitten, eng darin).
+
+   Geschrieben als „was folgt auf DIESEN Block", nicht als Abstand am Block
+   selbst: nur der Vorgänger sagt eindeutig, auf welcher Seite man ist —
+   .accordion etwa steht auf der Übersicht UND in den Einstellungen. */
+
+/* Übersicht: die Sprachgruppen und der Hinweis über ihnen. */
+.content > .mainsearch__hint + .accordion,
+.content > .accordion + .accordion{margin-top:1.5rem}
+/* Der Übergang „Unterstützen" → „Rechtliches" am Seitenende. Am 3.8.2026 war
+   schon einmal befunden, dass die beiden Blöcke bei 12 px aneinanderkleben,
+   während darüber 28 px stehen — behoben wurde damals aber nur das Magazin,
+   das Relief blieb ausdrücklich unangetastet. Jetzt nachgezogen, auf denselben
+   Wert wie der Abstand darüber. */
+.content > .support + .support{margin-top:1.75rem}
+
+/* Plattformseite: Kopf, Info-Feld, Wischhinweis, Suche, Bedienfeld. */
+.content > .subhead + .phead,
+.content > .phead + *,
+.content > .pabout + *,
+.content > .swipe-hint + *,
+.content > .searchrow + *,
+.content > .ptools + *{margin-top:1.5rem}
+
+/* Profil: wenige große Karten statt vieler kleiner Zeilen — hier fiel die zu
+   knappe Trennung dem Nutzer zuerst auf (Bildschirmfoto: „Meine
+   unterzeichneten Petitionen" klebt an der Karte darüber). Eine Stufe mehr,
+   gleichauf mit den Abschnittsköpfen der Einstellungen. */
+.content > .welcome + .profile-head{margin-top:1.5rem}
+.content > .profile-head + *,
+.content > .impact + *,
+.content > .signed + *{margin-top:2rem}
 .page-title{font-size:.75rem;font-weight:800;letter-spacing:.08em;
   text-transform:uppercase;color:var(--muted);margin:.25rem .125rem 1rem}
 
@@ -593,6 +679,20 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
    die wir nicht kennen — bei height:auto hat es gar keine Wirkung. */
 .pet__desc img{display:block;max-width:100%;width:auto;height:auto;
   max-height:18rem;border-radius:.5rem}
+/* Platzhalterfläche, solange das Bild noch nicht da ist. Die Regel darüber
+   lässt ein ungeladenes Bild bei 0×0 stehen (width:auto ohne natürliche
+   Breite = 0); kommt es an, wächst es auf 317×178 und schiebt den ganzen Text
+   darunter weg. Der Platzhalter nimmt diesen Sprung vorweg.
+   Es geht hier NICHT darum, dass Bilder gar nicht erschienen — dieser Befund
+   vom 3.8.2026 ist zweimal widerlegt, siehe bilderBeobachten() in app.js.
+   NUR bis zum Laden und nicht dauerhaft: eine bleibende Mindesthöhe verzerrte
+   kleine Partnerlogos (gemessen 105×59) oder gäbe ihnen einen zu hohen
+   Kasten — und genau deswegen braucht es hier auch kein object-fit (siehe
+   oben). width:100%, weil ein Platzhalter ohne Breite wieder keine Fläche
+   hätte; die Pressefotos sind ohnehin breiter als die Karte, für sie ändert
+   sich beim Laden nichts. */
+.pet__desc img:not(.img-da){width:100%;min-height:5rem;
+  background:var(--line)}
 .pet__desc figcaption{margin-top:.375rem;font-size:.8125rem;color:var(--muted)}
 .descacc{margin-top:.875rem}
 .descacc>summary{cursor:pointer;list-style:none;display:flex;align-items:center;
@@ -1294,8 +1394,29 @@ body.wizard-open{overflow:hidden}
    von 1.5 auf 1.25rem heruntergegangen: mit 1.5rem bräuchte die Spalte 6rem
    und der Titel begänne auf dem Telefon erst im letzten Drittel.
    Zentriert, damit schmale Marken nicht links kleben. */
-.signed-item__logo{flex:none;width:5rem;--logo-h:1.25rem;
+/* Logokasten fester Breite, damit alle Titel an derselben Stelle beginnen.
+   GLEICHE HÖHE statt gleicher Fläche (Nutzerentscheidung 6.8.2026): --logo-k
+   ist sonst AR^-0,25 und normiert die Marken teilweise auf Fläche — der
+   Bundestag-Schriftzug (6,17:1) kam damit auf 78×13 px, während 350.org
+   daneben 42×16 stand. Bei 13 px Höhe ist der Adler nur noch ein grauer
+   Fleck, und die Zeilen wirken ungleich.
+   ⚠️ --logo-k hier auf 1 zu setzen wirkt NICHT: platLogo() schreibt den Wert
+   je Marke als INLINE-Stil an das Element (app.js → logoVars), und der
+   schlägt jede geerbte Variable. Gemessen: die Marken wurden dadurch sogar
+   kleiner statt größer (78×13 → 70×11). Deshalb werden Höhe und Breite hier
+   unmittelbar gesetzt und --logo-k umgangen — der Selektor mit zwei Klassen
+   schlägt die Grundregel .plogo mit einer.
+   Die Kastenbreite folgt daraus zwingend: die breiteste Marke braucht
+   AR × Höhe = 6,171 × 18 px = 111,1 px, also 7rem. Das kostet die Textspalte
+   32 px (215 → 183) — der Preis für „größer und gleich hoch" bei einer
+   Wortmarke dieses Seitenverhältnisses; ohne breiteren Kasten ließe sich
+   der Bundestag nicht vergrößern.
+   max-width ist nur das Sicherheitsnetz: stimmte ein Seitenverhältnis nicht,
+   liefe die Marke sonst aus der Spalte. */
+.signed-item__logo{flex:none;width:7rem;--logo-h:1.125rem;
   display:flex;align-items:center;justify-content:center}
+.signed-item__logo .plogo{height:var(--logo-h);
+  width:calc(var(--logo-ar,4) * var(--logo-h));max-width:100%}
 .signed-item__body{flex:1;min-width:0}
 .signed .signed-item__t{display:block}
 /* Plattform · Unterschriften · Startdatum in einer Zeile. Flex statt „ · "
