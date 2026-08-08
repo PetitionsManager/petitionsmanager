@@ -745,27 +745,48 @@
        (CLS-Lehre: nichts nachträglich einschieben) und füllt sich, wenn
        die Listen eintreffen. Bundestag/Europarl liefern nie Bilder,
        darum werden so viele Plattformen angefragt, bis genug Folien da
-       sind — sortiert nach Bestandsgröße, gedeckelt auf vier Abrufe. */
+       sind — sortiert nach Bestandsgröße.
+
+       ⚠️ ANZAHL-LOGIK vom Nutzer vorgegeben (8.8.2026): bei HÖCHSTENS
+       fünf aktivierten Plattformen je ZWEI Petitionen, bei mehr als
+       fünf je EINE. Gedanke dahinter: wer wenige Plattformen gewählt
+       hat, soll trotzdem einen gefüllten Slider sehen; wer viele
+       gewählt hat, bekommt Vielfalt statt Wiederholung. `live` ist
+       bereits auf die aktivierten gefiltert (siehe oben), seine Länge
+       ist also genau die Zahl, die der Nutzer in den Einstellungen
+       sieht.
+       Der frühere feste Deckel („nur die vier größten Plattformen,
+       höchstens sechs Folien") ist damit HINFÄLLIG — er würde die neue
+       Regel sofort wieder aushebeln: bei fünf Plattformen à zwei
+       Folien hätte er von zehn Folien vier weggeschnitten und aus
+       „je zwei pro Plattform" wieder eine willkürliche Auswahl
+       gemacht. */
     if (state.prefs.layout === "magazin" && state.online) {
       var mzBox = el('<div class="mz-herobox mz-herobox--ph"></div>');
       content.appendChild(mzBox);
+      var mzProPlat = (live.length <= 5) ? 2 : 1;
       var mzQuellen = live.slice().sort(function (a, b) {
-        return (b.online || 0) - (a.online || 0); }).slice(0, 4);
+        return (b.online || 0) - (a.online || 0); });
       Promise.all(mzQuellen.map(function (p) {
         return loadPlatformData(p.key).then(function (arr) {
-          /* Je Plattform die zwei stärksten nach Trend (Unterschriften
-             je Tag, siehe mzTrend) — zwei statt drei, damit keine
-             Plattform den Slider dominiert. */
+          /* Je Plattform die stärksten nach Trend (Unterschriften je
+             Tag, siehe mzTrend) — wie viele, entscheidet mzProPlat
+             oben: zwei bei bis zu fünf Plattformen, sonst eine. So
+             dominiert keine Plattform den Slider. */
           return arr.filter(mzSliderKandidat)
             .map(function (r) { return { r: r, plat: p.key,
               score: mzTrend(r) }; })
             .sort(function (a, b) { return b.score - a.score; })
-            .slice(0, 2);
+            .slice(0, mzProPlat);
         }, function () { return []; });
       })).then(function (teile) {
         var rows = [].concat.apply([], teile);
+        /* Reihenfolge im Slider nach Trend über alle Plattformen
+           hinweg; WIE VIELE je Plattform hineinkommen, hat mzProPlat
+           schon oben entschieden. Hier wird bewusst NICHT mehr
+           gedeckelt (früher: sechs) — der Deckel würde die vom Nutzer
+           gewünschte Verteilung wieder zerschneiden. */
         rows.sort(function (a, b) { return b.score - a.score; });
-        rows = rows.slice(0, 6);
         if (!rows.length) { mzBox.remove(); return; }
         var hero = mzHero(rows.map(function (e) {
           return {
@@ -1683,9 +1704,26 @@
     var hero = el('<div class="mz-hero"></div>');
     var sc = el('<div class="mz-hero__scroll"></div>');
     var dots = el('<div class="mz-hero__dots"></div>');
+    /* Schrittweite MESSEN statt rechnen (8.8.2026): seit die Folien in
+       layouts.css ein `gap` zwischen sich haben, ist eine Folie weiter
+       nicht mehr `clientWidth`, sondern `clientWidth + gap`. Wer weiter
+       durch die Containerbreite teilt, bekommt einen Index, der mit
+       jeder Folie ein Stück weiter danebenliegt — bei sechs Folien
+       zeigte der aktive Punkt am Ende auf die falsche.
+       Der Abstand zweier benachbarter Folien ist die ehrliche Antwort:
+       er enthält den gap automatisch und überlebt jede spätere Änderung
+       an Breite oder Abstand, ohne dass hier etwas nachgezogen werden
+       muss. Nur eine einzige Folie → Rückfall auf die Containerbreite. */
+    function schritt() {
+      var a = sc.children[0], b = sc.children[1];
+      if (a && b) {
+        var d = b.offsetLeft - a.offsetLeft;
+        if (d > 0) return d;
+      }
+      return sc.clientWidth || 1;
+    }
     function zuFolie(idx) {
-      sc.scrollTo({ left: idx * (sc.clientWidth || 1),
-        behavior: "smooth" });
+      sc.scrollTo({ left: idx * schritt(), behavior: "smooth" });
     }
     /* Punkte sind BEDIENELEMENTE, nicht nur Anzeige (7.8.26): am
        Desktop gibt es keine Wischgeste, dort sind sie der zweite Weg
@@ -1740,7 +1778,7 @@
       zieh.an = false;
       if (!zieh.bewegt) return;          // reiner Klick: nichts rasten
       sc.style.scrollSnapType = "";
-      zuFolie(Math.round(sc.scrollLeft / (sc.clientWidth || 1)));
+      zuFolie(Math.round(sc.scrollLeft / schritt()));
     }
     sc.addEventListener("pointerup", ziehEnde);
     sc.addEventListener("pointercancel", ziehEnde);
@@ -1769,7 +1807,7 @@
     /* Aktiven Punkt direkt nachführen — der frühere Umweg über
        requestAnimationFrame verschluckte Aktualisierungen. */
     sc.addEventListener("scroll", function () {
-      var idx = Math.round(sc.scrollLeft / (sc.clientWidth || 1));
+      var idx = Math.round(sc.scrollLeft / schritt());
       for (var i = 0; i < dots.children.length; i++)
         dots.children[i].classList.toggle("on", i === idx);
     });
@@ -2610,6 +2648,16 @@
         }));
         if (!hero) { mzDetailBox.remove(); return; }
         mzDetailBox.classList.remove("mz-herobox--ph");
+        /* Überschrift „Neuste" ÜBER dem Slider (8.8.2026, Nutzerwunsch
+           „der slider soll auch eine überschrift bekommen") — dieselbe
+           Bauform wie auf der Startseite, wo mz-sechead über dem Slider
+           „Im Trend" steht. Der Text sitzt in texts.js unter
+           platform.heroTitle und passt zur Sortierung dieses Sliders:
+           oben mitBild.sort() ordnet nach start_date absteigend.
+           Reihenfolge beachten: erst die Überschrift anhängen, dann den
+           Slider, sonst steht sie darunter. */
+        mzDetailBox.appendChild(el('<div class="mz-sechead">' +
+          esc(T("platform.heroTitle", "Neuste")) + "</div>"));
         mzDetailBox.appendChild(hero);
         /* Ohne Zwischentitel „Alle Petitionen" (Nutzerwunsch 7.8.26):
            die Zählzeile darunter sagt dasselbe genauer. */

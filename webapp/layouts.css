@@ -1372,9 +1372,18 @@
 [data-layout="magazin"] .acc-body--plats .plat__num{font-weight:750;
   color:var(--ink)}
 /* „+N neu" als Abzeichen auf eigener Tönung — Zeile für sich, damit es
-   auf der halben Kachelbreite nie mit der Zahl kollidiert. */
+   auf der halben Kachelbreite nie mit der Zahl kollidiert.
+   ⚠️ KORREKTUR 8.8.2026 (Nutzerbefund „abstand petitionen anzahl zu pille
+   neu ist zu eng", mit Bild belegt): die Kurzform `margin:.25rem 0 0`
+   hat den `margin-left:.5rem` aus style.css:374 stillschweigend mit
+   genullt. Gemessen stand die Pille dadurch mit GENAU 0 px neben der
+   Zahl — der beabsichtigte Umbruch auf eine eigene Zeile tritt nur ein,
+   wenn die Kachel zu schmal wird; passt beides nebeneinander, klebte es.
+   Der linke Abstand steht jetzt ausdrücklich in der Kurzform mit drin,
+   damit beide Fälle stimmen. Merke: eine Kurzform setzt IMMER alle vier
+   Seiten, auch die, die man gar nicht meinte. */
 [data-layout="magazin"] .acc-body--plats .plat__new{
-  display:inline-block;margin:.25rem 0 0;padding:.1875rem .625rem;
+  display:inline-block;margin:.25rem 0 0 .5rem;padding:.1875rem .625rem;
   border-radius:999px;background:var(--mz-soft);color:var(--mz-ink-on-soft);
   font-size:.75rem;font-weight:750;line-height:1.4}
 [data-layout="magazin"] .acc-body--plats .plat__tag{
@@ -1498,7 +1507,19 @@
    nicht abgebaut: beim Lösen des Filters ist er sofort wieder da. */
 [data-layout="magazin"] .mz-herobox--aus{display:none}
 [data-layout="magazin"] .mz-hero{margin:.25rem 0 1.5rem}
-[data-layout="magazin"] .mz-hero__scroll{display:flex;overflow-x:auto;
+/* Abstand zwischen den Folien (8.8.2026, Nutzerbefund „es gibt keinen
+   abstand zwischen den petitionen"): gemessen lagen zwei Folien mit
+   GENAU 0 px aneinander, beim Wischen ging ein Bild unmittelbar ins
+   nächste über. Der Zwischenraum ist nur während der Bewegung sichtbar
+   — im Ruhezustand füllt eine Folie die volle Breite.
+   ⚠️ Der `gap` verschiebt die Rechnung im JS: eine Folie weiter sind
+   jetzt `clientWidth + gap` Pixel, nicht mehr `clientWidth`. app.js
+   misst den Schritt deshalb an den Folien selbst (Funktion `schritt()`
+   in mzHero) statt ihn aus der Containerbreite abzuleiten. Wer diesen
+   Wert ändert, muss dort nichts nachziehen — wohl aber, wer die Folien
+   auf eine andere Breite als 100 % setzt. */
+[data-layout="magazin"] .mz-hero__scroll{display:flex;gap:.625rem;
+  overflow-x:auto;
   scroll-snap-type:x mandatory;border-radius:var(--radius);
   scrollbar-width:none;-webkit-overflow-scrolling:touch}
 [data-layout="magazin"] .mz-hero__scroll::-webkit-scrollbar{display:none}
@@ -1511,8 +1532,21 @@
    beschnitten (object-position:top), breitere seitlich minimal.
    aspect-ratio erst ab Chrome 88 — die feste Höhe davor ist die
    Rückfallebene für alte Android-WebViews (minSdk 24). */
+/* ⚠️ `scroll-snap-stop:always` ist der Kern gegen „der slider springt zu
+   schnell, über zu viele petitionen" (8.8.2026). Ein Slider OHNE diese
+   Angabe rastet zwar an jeder Folie ein, der Schwung eines kräftigen
+   Wischs trägt ihn aber über beliebig viele Rastpunkte hinweg — man
+   wischt einmal und ist vier Petitionen weiter. `always` verbietet dem
+   Scrollcontainer, einen Rastpunkt zu überfliegen: ein Wisch = genau
+   eine Folie, unabhängig von der Wischstärke.
+   Bewusst CSS und nicht JS: eine Nachbildung per Touch-Ereignis müsste
+   gegen das native Scrollen anarbeiten, und genau dort sind an diesem
+   Slider schon zweimal die Klicks kaputtgegangen (siehe die Hinweise
+   zum Zeiger-Einfangen in app.js). Unterstützt ab Chrome 75; ältere
+   WebViews ignorieren die Zeile und verhalten sich wie bisher. */
 [data-layout="magazin"] .mz-hero__slide{position:relative;flex:0 0 100%;
-  scroll-snap-align:center;border:0;padding:0;background:none;
+  scroll-snap-align:center;scroll-snap-stop:always;
+  border:0;padding:0;background:none;
   cursor:pointer;display:flex;flex-direction:column;text-align:left}
 /* Bild trägt das gemessene 16:9, nicht mehr die ganze Folie: die
    Textbox steht seit 7.8.26 UNTER dem Bild (Nutzerwunsch „bau die

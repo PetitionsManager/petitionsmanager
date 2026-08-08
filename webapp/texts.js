@@ -93,6 +93,12 @@ window.PM_TEXTS = {
   ],
 
   platform: {
+    /* Überschrift über dem Slider der Plattformseite (8.8.2026,
+       Nutzerwunsch). Der Slider dort ist nach Startdatum absteigend
+       sortiert — „Neuste" beschreibt ihn also wörtlich. Auf der
+       Startseite heißt der Slider weiterhin liste.heroTitle
+       („Im Trend"), weil der nach Unterschriften je Tag sortiert. */
+    heroTitle: "Neuste",
     aboutBtn: "Über diese Plattform",
     aboutIntro: "Hier findest du Informationen zu Träger, Sitz und Finanzierung dieser Plattform.",
     linksTitle: "Links",
