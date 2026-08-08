@@ -23,3 +23,17 @@ threefifty_petitions.html
 #
 # Fuer die lokale Vorschau einmal `python3 hole_live_daten.py` aufrufen.
 webapp/data/
+
+# Design-Vorlagen und Arbeits-Screenshots - ARBEITSMATERIAL, keine Quelle.
+# Entwuerfe, nach denen gebaut wird, und Bildschirmfotos aus dem Bauen. Sie
+# werden nicht ausgeliefert und nach dem Umbau nie wieder angefasst.
+#
+# Warum das hier steht (8.8.2026): der Ordner brachte 2,7 MB in 16 Bilddateien
+# mit. Das Repo faellt am 7.8. gerade erst von 102 auf 11 MB - einmal
+# eingecheckt blieben die Bilder fuer immer in der Historie stehen, auch wenn
+# man sie spaeter loescht. Derselbe Grund wie bei webapp/data oben, nur eine
+# Groessenordnung kleiner.
+#
+# Der Ordner bleibt lokal liegen und ist nicht verloren; er gehoert nur nicht
+# in die Versionsgeschichte.
+design-vorlagen/
