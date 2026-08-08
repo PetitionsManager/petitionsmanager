@@ -29,7 +29,8 @@
      "favTipDismissed" für den Favoriten-Hinweis dazukam, wurde es an keiner
      dieser Stellen nachgetragen: der Hinweis ließ sich nicht zurückholen,
      fehlte in der Sicherung und überlebte sogar „alles löschen". */
-  var HINT_KEYS = ["swipeHintDismissed", "favTipDismissed"];
+  var HINT_KEYS = ["swipeHintDismissed", "favTipDismissed",
+                   "toolNoteDismissed"];
   var nf = new Intl.NumberFormat("de-DE");
 
   /* ---- Vorerst ausgeblendete Teile (Nutzerwunsch 6.8.2026) -----------------
@@ -77,6 +78,9 @@
     catFilter: null,      // aktiver Kategorie-Filter (Plattform-Detail)
     tagFilter: null,      // aktiver Schlagwort-Filter (Plattform-Detail)
     sort: null,           // Sortierung der Liste: null|"neu"|"alt"|"viel"|"wenig"
+    /* Zeigt NUR die Petitionen, denen ein Wert fehlt: null|"start_date"|
+       "signatures". Erklaerung in buildTools bei der Luecken-Meldung. */
+    gapFilter: null,
     mainQuery: "",        // letzte Volltextsuche auf der Hauptseite
     cross: null,          // plattformübergreifende Suche {type,value,fromPlatform}
     openPetitionUrl: null,// nach Navigation diese Petition automatisch aufklappen
@@ -302,6 +306,15 @@
     return {
       theme: "auto",              // "light" | "dark" | "auto"
       layout: "relief",           // "relief" | "magazin" (layouts.css)
+      /* Akzentfarbe des Magazin-Layouts (7.8.26, Nutzerwunsch „muss nicht
+         koralle sein … aus einer palette"). Werte = ACCENTS unten; die
+         Farben selbst stehen in layouts.css unter [data-accent="…"] und
+         wirken nur im Magazin — Relief ignoriert das Attribut. */
+      accent: "koralle",
+      /* Schriftfarbe auf gefüllten Akzentflächen: "auto" folgt der
+         gerechneten Empfehlung je Farbe, "light"/"dark" überschreiben
+         sie (Nutzerwunsch 7.8.26). */
+      accentInk: "auto",
       /* Bilder in den Aufruf-Texten. Vorgabe an: sie gehören zum Aufruf.
          Wer über Mobilfunk spart, schaltet sie aus — dann werden die <img>
          beim Aufbau der Beschreibung ENTFERNT statt versteckt (siehe
@@ -340,6 +353,19 @@
              auswählen oder verlassen zu können. */
           if (o.layout === "klassisch") o.layout = "relief";
           if (o.layout) p.layout = o.layout;
+          /* Nur bekannte Palettenwerte übernehmen: ein Tippfehler im
+             Speicher hieße sonst data-accent="…" ohne CSS-Regel, und das
+             Magazin fiele still auf die :root-Vorgabe (Koralle) zurück —
+             gleiches Muster wie die layout-Umschreibungen oben. */
+          /* Gültig sind „koralle" und jeder Plattform-Schlüssel — die
+             Farbwerte stehen in platforms.js, die Paletten dazu in
+             layouts.css. Unbekanntes fällt auf Koralle zurück, sonst
+             stünde data-accent ohne passende Regel da. */
+          if (o.accent && (o.accent === "koralle" ||
+              (window.PM_PLATFORMS && window.PM_PLATFORMS[o.accent])))
+            p.accent = o.accent;
+          if (["auto", "light", "dark"].indexOf(o.accentInk) !== -1)
+            p.accentInk = o.accentInk;
           if (typeof o.descImages === "boolean") p.descImages = o.descImages;
           if (o.wizardDone) p.wizardDone = true;
           if (typeof o.name === "string") p.name = o.name;
@@ -384,6 +410,13 @@
   function applyLayout() {
     var l = (state.prefs && state.prefs.layout) || "relief";
     document.documentElement.setAttribute("data-layout", l);
+    /* Akzentfarbe hängt am selben Schalter: layouts.css kennt die Paletten
+       nur unter [data-layout="magazin"], in Relief ist das Attribut
+       wirkungslos — deshalb kein eigenes applyAccent. */
+    document.documentElement.setAttribute("data-accent",
+      (state.prefs && state.prefs.accent) || "koralle");
+    document.documentElement.setAttribute("data-accent-ink",
+      (state.prefs && state.prefs.accentInk) || "auto");
   }
 
   // ---- Hilfen ----------------------------------------------------------------
@@ -706,6 +739,97 @@
         esc(T("liste.searchHint", "")) + "</p>"));
     }
 
+    /* NUR MAGAZIN: Aufmacher-Slider über den Gruppen (siehe mzHero).
+       Die Daten liegen beim Start bewusst NICHT vor (Lazy-Prinzip der
+       Hauptseite) — der Kasten reserviert deshalb sofort seine Höhe
+       (CLS-Lehre: nichts nachträglich einschieben) und füllt sich, wenn
+       die Listen eintreffen. Bundestag/Europarl liefern nie Bilder,
+       darum werden so viele Plattformen angefragt, bis genug Folien da
+       sind — sortiert nach Bestandsgröße, gedeckelt auf vier Abrufe. */
+    if (state.prefs.layout === "magazin" && state.online) {
+      var mzBox = el('<div class="mz-herobox mz-herobox--ph"></div>');
+      content.appendChild(mzBox);
+      var mzQuellen = live.slice().sort(function (a, b) {
+        return (b.online || 0) - (a.online || 0); }).slice(0, 4);
+      Promise.all(mzQuellen.map(function (p) {
+        return loadPlatformData(p.key).then(function (arr) {
+          /* Je Plattform die zwei stärksten nach Trend (Unterschriften
+             je Tag, siehe mzTrend) — zwei statt drei, damit keine
+             Plattform den Slider dominiert. */
+          return arr.filter(mzSliderKandidat)
+            .map(function (r) { return { r: r, plat: p.key,
+              score: mzTrend(r) }; })
+            .sort(function (a, b) { return b.score - a.score; })
+            .slice(0, 2);
+        }, function () { return []; });
+      })).then(function (teile) {
+        var rows = [].concat.apply([], teile);
+        rows.sort(function (a, b) { return b.score - a.score; });
+        rows = rows.slice(0, 6);
+        if (!rows.length) { mzBox.remove(); return; }
+        var hero = mzHero(rows.map(function (e) {
+          return {
+            image_url: e.r.image_url, title: e.r.title,
+            chip: platformName(e.plat),
+            /* Der Trend darf sich zeigen: „~N/Tag" nur, wenn er aus
+               echten Werten gerechnet ist (Unterschriften UND Datum). */
+            meta: (typeof e.r.signatures === "number")
+              ? nf.format(e.r.signatures) + " Unterschriften" +
+                (e.r.start_date && e.score >= 1
+                  ? " · ~" + nf.format(Math.round(e.score)) + "/Tag"
+                  : "")
+              : "",
+            /* Öffnet die ANGEKLICKTE PETITION, nicht bloß ihre
+               Plattform (Nutzerbefund 7.8.26: „ich komme auf den
+               falschen Bereich, es erscheint nicht die angeklickte
+               Petition"). openPetitionInApp setzt state.openPetitionUrl;
+               der Zeichner zieht die Petition damit an den Listenanfang
+               — sonst läge sie womöglich hinter dem LIST_MAX-Deckel —,
+               klappt sie auf und rollt hin, notfalls sogar in einem
+               Bottom-Akkordion. */
+            onTap: function () { openPetitionInApp(e.plat, e.r.url); }
+          };
+        }));
+        if (!hero) { mzBox.remove(); return; }
+        mzBox.classList.remove("mz-herobox--ph");
+        mzBox.appendChild(el('<div class="mz-sechead">' +
+          esc(T("liste.heroTitle", "Aktuelle Petitionen")) + "</div>"));
+        mzBox.appendChild(hero);
+      });
+    }
+
+    /* NUR MAGAZIN (7.8.26, Nutzerwunsch): EIN durchgehendes Bento-Raster
+       statt der Akkordeon-Gruppen — keine Trennung Favoriten/Deutsch/
+       Englisch/künftige. Favoriten stehen vorn, laufen über beide Spalten
+       und tragen Stern + eigenen Pfeil; alle übrigen Kacheln tragen nur
+       die Kreisflagge ihrer Sprache (die Information der früheren
+       Gruppenköpfe wandert damit an die Kachel). Nur horizontal gespannt:
+       vertikales Spannen bräuchte wieder feste Zeilenhöhen, die Magazin
+       3.0 bewusst abgeschafft hat (Text lief hinein). Danach return —
+       der Akkordeon-Pfad darunter bleibt für Relief wörtlich
+       unverändert. */
+    if (state.prefs.layout === "magazin") {
+      var grid = el('<div class="mz-platgrid acc-body--plats"></div>');
+      live.filter(function (p) { return isFav(p.key); })
+        .forEach(function (p) {
+          var favCard = platCard(p, "plat--wide plat--fav");
+          favCard.appendChild(el('<span class="plat__favstar">' +
+            '<i class="fa-solid fa-star"></i></span>'));
+          grid.appendChild(favCard);
+        });
+      live.filter(function (p) { return !isFav(p.key); })
+        .forEach(function (p) {
+          var normCard = platCard(p, "");
+          normCard.appendChild(el('<span class="plat__flag">' +
+            langInfo(p.language || "de").flag + "</span>"));
+          grid.appendChild(normCard);
+        });
+      content.appendChild(grid);
+      content.appendChild(supportSection());
+      content.appendChild(legalSection());
+      return;
+    }
+
     // Gruppen aufbauen: (1) Favoriten zuerst, (2) danach nach Sprache.
     var groupDefs = [];
     var favs = live.filter(function (p) { return isFav(p.key); });
@@ -890,7 +1014,18 @@
     { feld: "seat",      label: "Sitz" },
     { feld: "founded",   label: "Gegründet" },
     { feld: "financing", label: "Finanzierung" },
-    { feld: "impressum", label: "Impressum", alsLink: true }
+    { feld: "impressum", label: "Impressum", alsLink: true },
+    /* Nutzungsbedingungen/AGB — nur der LINK, keine Auswertung: was darin
+       steht, liest der Nutzer selbst. Eine aus AGB-Fragmenten abgeleitete
+       Rechtslage wäre schlechter als der Verweis auf die Quelle.
+       Sieben der elf haben welche, vier nachweislich NICHT (7.8.2026 geprüft):
+       Ekō führt 93 Seiten in seiner Sitemap und keine davon ist eine;
+       WeMove und foodwatch verlinken von ihren eigenen Rechtsseiten nur
+       Impressum und Datenschutz; beim Europäischen Parlament ist der
+       „Rechtliche Hinweis" das Äquivalent und steht schon in der Zeile
+       darüber. Dort erscheint „–" — das heißt „gibt es nicht", nicht „noch
+       nicht nachgesehen". */
+    { feld: "agb", label: "Nutzungsbedingungen", alsLink: true }
   ];
 
   // Aus einer Adresse den Gastgebernamen — als Linktext lesbarer als die
@@ -1234,7 +1369,7 @@
     card.addEventListener("click", function () {
       state.platform = p.key; state.search = "";
       state.catFilter = null; state.tagFilter = null;
-      state.sort = null; render();
+      state.sort = null; state.gapFilter = null; render();
     });
     return card;
   }
@@ -1252,6 +1387,7 @@
     state.platform = platKey;
     state.search = "";
     state.catFilter = null; state.tagFilter = null; state.sort = null;
+    state.gapFilter = null;
     state.openPetitionUrl = url;
     render();
   }
@@ -1295,13 +1431,23 @@
     elm.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
-  /* Sprungmarke: kleiner Knopf, der zu einer Stelle in der Liste rollt und sie
+  /* ⚠️ DERZEIT UNBENUTZT (Stand 7.8.2026). Die einzige Einsatzstelle war die
+     Lücken-Meldung im Bedienfeld; sie hat den Sprung gegen einen Filter
+     getauscht, weil er dort PRINZIPBEDINGT nicht greifen konnte — gesucht wird
+     in der gezeichneten Liste, und die ist auf LIST_MAX (300) gedeckelt,
+     während die gesuchten Sätze ans Ende sortiert werden. Bei openPetition
+     (1.908) oder Change.org (2.019) lagen sie damit immer dahinter.
+     Bewusst STEHENGELASSEN statt gelöscht: die Mechanik ist für andere Ziele
+     brauchbar, die sicher in den ersten 300 liegen. Wer sie wiederverwendet,
+     prüft zuerst genau das. Dazugehörige CSS-Regeln: .jump, .jump--miss,
+     .jump-hit in style.css sowie der Relief-Zweig in layouts.css.
+
+     Sprungmarke: kleiner Knopf, der zu einer Stelle in der Liste rollt und sie
      kurz hervorhebt. `ziel` ist eine FUNKTION, kein Element – die Liste wird
      bei jedem Filter neu gezeichnet, ein beim Bauen gemerktes Element wäre
      danach nicht mehr im Dokument.
-     Findet sich nichts (die Liste ist auf LIST_MAX gedeckelt, das Ziel kann
-     also jenseits davon liegen), sagt der Knopf das, statt stumm nichts zu
-     tun – ein Klick ohne Wirkung wäre als Fehler nicht erkennbar. */
+     Findet sich nichts, sagt der Knopf das, statt stumm nichts zu tun – ein
+     Klick ohne Wirkung wäre als Fehler nicht erkennbar. */
   function jumpBtn(label, ziel) {
     var b = el('<button class="jump" type="button">' +
       '<i class="fa-solid fa-arrow-turn-down"></i>' +
@@ -1499,6 +1645,139 @@
      Vorher lag das Wiederherstellen rechts und links bot im Archiv noch
      einmal „Archivieren" an, was dort nichts bewirken konnte.
      ctx.redraw() zeichnet die Liste neu. */
+  /* NUR MAGAZIN (7.8.26, Nutzerauftrag „orientiere dich stärker an den
+     Beispielbildern … das sliding verhalten, die bilder groß oben"):
+     Aufmacher-Slider nach dem Muster der News-App-Vorlage — Bild groß,
+     weiße Karte unten aufgelegt (Kategorie-Chip, Titel, Meta), seitlich
+     wischbar mit Scroll-Snap, Punkte darunter. KEIN Markup in Relief:
+     alle Aufrufer stehen hinter state.prefs.layout === "magazin".
+     items: [{image_url,title,chip,meta,onTap}] — nur Sätze MIT Bild.
+     Scheitert ein Bild, fliegt die Folie raus (gleiche Logik wie der
+     onerror-Ersatz in petCard, nur dass der Slider keinen Platzhalter
+     braucht — er zeigt dann eben eine Folie weniger). */
+  /* Folien-Auswahl der Slider (7.8.26, Nutzerwunsch): NIE archivierte,
+     unterschriebene oder beendete Sätze — der Slider wirbt, und was ich
+     unterschrieben oder weggelegt habe, braucht keine Werbung mehr. */
+  function mzSliderKandidat(r) {
+    return r.image_url && !isClosed(r) && !isArchived(r.url) &&
+      !isSigned(r.url);
+  }
+  /* Trend-Maß „meiste Unterschriften in kurzer Zeit": Unterschriften je
+     Tag seit Start. Ohne Unterschriftenzahl (Europarl) oder ohne
+     Startdatum (WeAct teilweise) zählt ersatzweise die Neuheit als
+     schwaches Signal — so bleibt jede Plattform vertreten, ohne dass
+     ein fehlender Wert eine Ordnung vortäuscht (gleiche Vorsicht wie
+     bei den Sortier-Chips). */
+  function mzTrend(r) {
+    var tage = 1;
+    if (r.start_date) {
+      var t = (Date.now() - new Date(r.start_date).getTime()) / 864e5;
+      if (t > 1) tage = t;
+    }
+    if (typeof r.signatures === "number") return r.signatures / tage;
+    return r.start_date ? 1 / tage : 0;
+  }
+
+  function mzHero(items) {
+    if (!items.length) return null;
+    var hero = el('<div class="mz-hero"></div>');
+    var sc = el('<div class="mz-hero__scroll"></div>');
+    var dots = el('<div class="mz-hero__dots"></div>');
+    function zuFolie(idx) {
+      sc.scrollTo({ left: idx * (sc.clientWidth || 1),
+        behavior: "smooth" });
+    }
+    /* Punkte sind BEDIENELEMENTE, nicht nur Anzeige (7.8.26): am
+       Desktop gibt es keine Wischgeste, dort sind sie der zweite Weg
+       neben dem Maus-Ziehen unten. */
+    function malDots(aktiv) {
+      dots.innerHTML = "";
+      var n = sc.children.length;
+      dots.style.display = (n < 2) ? "none" : "";
+      for (var i = 0; i < n; i++) (function (i2) {
+        var d = el('<button class="mz-hero__dot' +
+          (i2 === (aktiv || 0) ? " on" : "") + '" type="button" ' +
+          'aria-label="Folie ' + (i2 + 1) + '"></button>');
+        d.addEventListener("click", function () { zuFolie(i2); });
+        dots.appendChild(d);
+      })(i);
+    }
+    /* Maus-Ziehen (7.8.26, Nutzerbefund „funktionieren die slider?"):
+       eine native Scrollfläche folgt am Desktop KEINEM Mausziehen —
+       am Telefon wischt der Daumen nativ, mit der Maus passierte
+       schlicht nichts. Nur pointerType "mouse": Touch scrollt selbst,
+       ein eigener Zieh-Pfad daneben ergäbe doppelte Bewegung.
+       Während des Ziehens ist das Einrasten (scroll-snap) abgeschaltet,
+       sonst kämpft es gegen jede scrollLeft-Zuweisung; beim Loslassen
+       wird von Hand auf die nächste Folie gerastet. Ein Zug ist KEIN
+       Klick: bewegt sich die Maus >6 px, schluckt der Folien-Klick
+       das anschließende click-Ereignis. */
+    var zieh = { an: false, bewegt: false, x0: 0, s0: 0 };
+    sc.addEventListener("pointerdown", function (ev) {
+      if (ev.pointerType !== "mouse") return;
+      zieh.an = true; zieh.bewegt = false;
+      zieh.x0 = ev.clientX; zieh.s0 = sc.scrollLeft;
+    });
+    sc.addEventListener("pointermove", function (ev) {
+      if (!zieh.an) return;
+      var dx = ev.clientX - zieh.x0;
+      if (!zieh.bewegt) {
+        if (Math.abs(dx) <= 6) return;
+        /* Zeiger ERST JETZT einfangen und das Einrasten abschalten.
+           Beides schon beim pointerdown zu tun war der Fehler: ein
+           gefangener Zeiger lenkt auch das folgende click-Ereignis auf
+           die Scrollfläche um — die Folien waren dadurch überhaupt
+           nicht mehr anklickbar (Nutzerbefund 7.8.26). Ohne Bewegung
+           bleibt der Zeiger frei und der Klick erreicht seine Folie. */
+        zieh.bewegt = true;
+        sc.style.scrollSnapType = "none";
+        try { sc.setPointerCapture(ev.pointerId); } catch (e) {}
+      }
+      sc.scrollLeft = zieh.s0 - dx;
+    });
+    function ziehEnde() {
+      if (!zieh.an) return;
+      zieh.an = false;
+      if (!zieh.bewegt) return;          // reiner Klick: nichts rasten
+      sc.style.scrollSnapType = "";
+      zuFolie(Math.round(sc.scrollLeft / (sc.clientWidth || 1)));
+    }
+    sc.addEventListener("pointerup", ziehEnde);
+    sc.addEventListener("pointercancel", ziehEnde);
+    items.forEach(function (it) {
+      var s = el('<button class="mz-hero__slide" type="button">' +
+        '<img class="mz-hero__img" src="' + esc(it.image_url) + '" alt="" ' +
+          'loading="lazy" draggable="false">' +
+        '<span class="mz-hero__card">' +
+          (it.chip ? '<span class="mz-hero__chip">' + esc(it.chip) +
+            "</span>" : "") +
+          '<span class="mz-hero__t">' + esc(it.title || "") + "</span>" +
+          (it.meta ? '<span class="mz-hero__m">' + esc(it.meta) +
+            "</span>" : "") +
+        "</span></button>");
+      s.addEventListener("click", function () {
+        if (zieh.bewegt) { zieh.bewegt = false; return; }
+        it.onTap();
+      });
+      s.querySelector("img").addEventListener("error", function () {
+        s.remove(); malDots(0);
+        if (!sc.children.length) hero.remove();
+      });
+      sc.appendChild(s);
+    });
+    malDots(0);
+    /* Aktiven Punkt direkt nachführen — der frühere Umweg über
+       requestAnimationFrame verschluckte Aktualisierungen. */
+    sc.addEventListener("scroll", function () {
+      var idx = Math.round(sc.scrollLeft / (sc.clientWidth || 1));
+      for (var i = 0; i < dots.children.length; i++)
+        dots.children[i].classList.toggle("on", i === idx);
+    });
+    hero.appendChild(sc);
+    hero.appendChild(dots);
+    return hero;
+  }
+
   function petCard(r, ctx, platKey) {
     var wrap = el('<div class="pet-wrap"></div>');
     var imArchiv = isArchived(r.url);
@@ -1929,15 +2208,35 @@
     }
     // Volle Breite (gestapelt); Flagge hinter dem Plattformnamen.
     // Klick öffnet die Petition IN DER APP.
-    box.innerHTML = lbl + sim.map(function (s) {
+    /* Nur die ersten fünf zeigen, der Rest hinter „Mehr anzeigen"
+       (Nutzerwunsch 7.8.26): bis zu acht Zeilen schoben die restliche
+       Karte weit nach unten, und die schwächsten Treffer stehen ohnehin
+       hinten. Die Zeilen werden alle GEBAUT und nur verborgen — so
+       braucht der Knopf keinen zweiten Zeichenweg und die Zuhörer
+       hängen schon dran. */
+    var SIM_VORAB = 5;
+    box.innerHTML = lbl + sim.map(function (s, i) {
       var info = langInfo(s.plat.language || "de");
       var same = s.same ? '<span class="sim-same">gleich</span>' : "";
-      return '<button class="simrow" type="button" data-key="' + esc(s.plat.key) +
+      return '<button class="simrow' + (i >= SIM_VORAB ? " simrow--rest" : "") +
+        '" type="button" data-key="' + esc(s.plat.key) +
         '" data-url="' + esc(s.c.url) + '"><span class="simrow__t">' +
         esc(s.c.title || "(ohne Titel)") + same + "</span>" +
         '<span class="simrow__p">' + esc(s.plat.name) +
         '<span class="flag">' + info.flag + "</span></span></button>";
     }).join("");
+    if (sim.length > SIM_VORAB) {
+      var mehr = el('<button class="simmore" type="button">' +
+        "Mehr anzeigen (" + (sim.length - SIM_VORAB) + ")</button>");
+      mehr.addEventListener("click", function (e) {
+        e.stopPropagation();
+        box.querySelectorAll(".simrow--rest").forEach(function (r) {
+          r.classList.remove("simrow--rest");
+        });
+        mehr.remove();
+      });
+      box.appendChild(mehr);
+    }
     box.querySelectorAll(".simrow").forEach(function (btn) {
       btn.addEventListener("click", function (e) {
         e.stopPropagation();
@@ -2252,7 +2551,7 @@
     head.querySelector(".backbtn").addEventListener("click", function () {
       state.platform = null;
       state.catFilter = null; state.tagFilter = null;
-      state.sort = null; render();
+      state.sort = null; state.gapFilter = null; render();
     });
     var favBtn = head.querySelector(".favbtn");
     favBtn.setAttribute("aria-pressed", isFav(key) ? "true" : "false");
@@ -2275,6 +2574,47 @@
     content.appendChild(head);
     content.appendChild(phead);
     content.appendChild(aboutBox);
+
+    /* NUR MAGAZIN: Aufmacher-Slider der Plattform (siehe mzHero) —
+       die fünf neuesten laufenden Petitionen MIT Bild, groß über der
+       Liste; Antippen springt zur Karte und klappt sie auf. Kasten
+       reserviert die Höhe sofort (CLS); Plattformen ohne Bilder
+       (Bundestag, Europarl) bekommen schlicht keinen Slider. listWrap
+       ist als var gehoben und beim Eintreffen der Daten längst gesetzt. */
+    var mzDetailBox = null;
+    if (state.prefs.layout === "magazin" && state.online) {
+      mzDetailBox = el('<div class="mz-herobox mz-herobox--ph"></div>');
+      content.appendChild(mzDetailBox);
+      loadPlatformData(key).then(function (arr) {
+        var mitBild = arr.filter(mzSliderKandidat);
+        mitBild.sort(function (a, b) {
+          return String(b.start_date || "")
+            .localeCompare(String(a.start_date || ""));
+        });
+        mitBild = mitBild.slice(0, 5);
+        if (!mitBild.length) { mzDetailBox.remove(); return; }
+        var hero = mzHero(mitBild.map(function (r) {
+          return {
+            image_url: r.image_url, title: r.title,
+            chip: r.category || platformName(key),
+            meta: (typeof r.signatures === "number")
+              ? nf.format(r.signatures) + " Unterschriften" : "",
+            /* Auch hier über openPetitionInApp statt über eine eigene
+               DOM-Suche (Nutzerbefund 7.8.26): die Suche in listWrap
+               fand nichts, sobald die Petition hinter dem
+               LIST_MAX-Deckel oder in einem zugeklappten Abschnitt lag —
+               dann geschah entweder nichts oder man landete an falscher
+               Stelle. state.openPetitionUrl kann all das. */
+            onTap: function () { openPetitionInApp(key, r.url); }
+          };
+        }));
+        if (!hero) { mzDetailBox.remove(); return; }
+        mzDetailBox.classList.remove("mz-herobox--ph");
+        mzDetailBox.appendChild(hero);
+        /* Ohne Zwischentitel „Alle Petitionen" (Nutzerwunsch 7.8.26):
+           die Zählzeile darunter sagt dasselbe genauer. */
+      }, function () { if (mzDetailBox) mzDetailBox.remove(); });
+    }
 
     if (!LS.getItem("swipeHintDismissed")) {
       var hint = el('<div class="swipe-hint">' +
@@ -2422,13 +2762,35 @@
         luecken.push({ text: "Diese Plattform liefert keine Startdaten." });
       if (!mitZahl)
         luecken.push({ text: "Diese Plattform liefert keine Unterschriftenzahlen." });
-      if (luecken.length)
-        h += '<div class="ptools__note"><i class="fa-solid fa-circle-info"></i>' +
-             '<span class="ptools__notetext">' +
+      /* Die Meldung lässt sich ausblenden („Infos deaktivieren", Nutzerwunsch
+         7.8.2026) und kommt über „Hilfe-Hinweise zurücksetzen" wieder — der
+         Schlüssel steht dafür in HINT_KEYS, das deckt Zurücksetzen, Sicherung
+         und „alles löschen" in einem ab. */
+      if (luecken.length && !LS.getItem("toolNoteDismissed")) {
+        /* Je Lücke eine eigene ZEILE mit der Aktion rechts daneben. Vorher
+           waren es Inline-Spans in einem gemeinsamen Textblock: die Sätze
+           liefen ineinander, und der Knopf rutschte auf eine eigene Zeile,
+           sobald der Text umbrach (Nutzerbefund 7.8.2026). */
+        h += '<div class="ptools__note">' +
+             '<i class="fa-solid fa-circle-info ptools__noteicon"></i>' +
+             '<div class="ptools__notebody">' +
              luecken.map(function (l) {
-               return '<span data-luecke="' + esc(l.feld || "") + '">' +
-                      esc(l.text) + "</span>";
-             }).join("") + "</span></div>";
+               var aktiv = l.feld && state.gapFilter === l.feld;
+               return '<div class="ptools__notezeile">' +
+                 '<span class="ptools__notetext">' + esc(l.text) + "</span>" +
+                 (l.feld
+                   ? '<button class="gapbtn' + (aktiv ? " on" : "") +
+                     '" type="button" data-luecke="' + esc(l.feld) + '">' +
+                     '<i class="fa-solid ' +
+                     (aktiv ? "fa-arrow-rotate-left" : "fa-filter") + '"></i> ' +
+                     (aktiv ? "Alle zeigen" : "Nur diese zeigen") + "</button>"
+                   : "") +
+                 "</div>";
+             }).join("") +
+             '<button class="ptools__noteoff" type="button">' +
+             "Infos deaktivieren</button>" +
+             "</div></div>";
+      }
       h += "</div>";
 
       // Kategorien dieser Plattform, häufigste zuerst.
@@ -2462,25 +2824,27 @@
           draw(arr); window.scrollTo(0, 0);
         });
       });
-      /* Sprungmarke je Lücke: führt zur ersten Petition, der der Wert fehlt.
-         Die Adressen werden einmal gesammelt; gesucht wird erst beim Klick in
-         der gerade gezeichneten Liste, denn Filter und Sortierung ändern
-         laufend, welche Karte die erste ist. */
-      tbody.querySelectorAll("[data-luecke]").forEach(function (sp) {
-        var feld = sp.dataset.luecke;
-        if (!feld) return;                       // Satz ohne Ziel
-        var fehlend = {};
-        arr.forEach(function (r) {
-          var leer = feld === "signatures"
-            ? typeof r.signatures !== "number" : !r.start_date;
-          if (leer && r.url) fehlend[r.url] = 1;
+      /* Je Lücke ein Filter statt der früheren Sprungmarke. Er schaltet um:
+         nochmal darauf tippen zeigt wieder alles. buildTools läuft nur EINMAL
+         (toolsBuilt), deshalb baut der Klick den Ausklapper neu — sonst
+         behielte der Knopf seine alte Beschriftung. */
+      tbody.querySelectorAll(".gapbtn").forEach(function (b) {
+        b.addEventListener("click", function () {
+          var feld = b.dataset.luecke;
+          state.gapFilter = state.gapFilter === feld ? null : feld;
+          toolsBuilt = false;                    // Beschriftung neu setzen
+          draw(arr);
+          window.scrollTo(0, 0);
         });
-        sp.appendChild(jumpBtn("Zur ersten", function () {
-          var karten = listWrap.querySelectorAll(".pet");
-          for (var i = 0; i < karten.length; i++)
-            if (fehlend[karten[i].dataset.url]) return karten[i];
-          return null;
-        }));
+      });
+      var aus = tbody.querySelector(".ptools__noteoff");
+      if (aus) aus.addEventListener("click", function () {
+        LS.setItem("toolNoteDismissed", "1");
+        /* Einen aktiven Lücken-Filter mit auflösen: sonst bliebe die Liste
+           gefiltert, und der Hinweis, der das erklärt, wäre gerade weg. */
+        state.gapFilter = null;
+        toolsBuilt = false;
+        draw(arr);
       });
     }
 
@@ -2491,6 +2855,10 @@
       var aktiv = [];
       if (state.sort) aktiv.push(namen[state.sort]);
       if (state.catFilter) aktiv.push(state.catFilter);
+      // Auch der Lücken-Filter muss am ZUGEKLAPPTEN Bedienfeld ablesbar sein —
+      // sonst sitzt man vor einer stark verkürzten Liste ohne sichtbaren Grund.
+      if (state.gapFilter) aktiv.push(state.gapFilter === "signatures"
+        ? "ohne Unterschriftenzahl" : "ohne Startdatum");
       var st = tools.querySelector(".ptools__state");
       st.textContent = aktiv.join(" · ");
       tools.classList.toggle("is-active", aktiv.length > 0);
@@ -2503,10 +2871,31 @@
     function draw(arr) {
       if (!toolsBuilt) { buildTools(arr); toolsBuilt = true; }
       markTools();
+      /* Aufmacher-Slider tritt zurück, solange gefiltert oder gesucht
+         wird (Nutzerwunsch 7.8.26): wer filtert, will die Treffer sehen,
+         nicht die Trend-Werbung. Er kommt zurück, sobald der Filter
+         gelöst ist — deshalb nur ausblenden, nicht abbauen. */
+      if (mzDetailBox) {
+        var filtert = !!(state.catFilter || state.tagFilter ||
+          state.gapFilter || state.search.trim());
+        mzDetailBox.classList.toggle("mz-herobox--aus", filtert);
+      }
       var term = state.search.trim().toLowerCase();
       var rows = sortRows(arr.filter(function (r) {
         if (state.catFilter && r.category !== state.catFilter) return false;
         if (state.tagFilter && (r.tags || []).indexOf(state.tagFilter) < 0) return false;
+        /* Lücken-Filter: zeigt genau die Sätze, denen der Wert fehlt.
+           Er hat den Sprungknopf „Zur ersten" abgelöst, der PRINZIPBEDINGT
+           nicht greifen konnte: gesucht wurde in der gezeichneten Liste, und
+           die ist auf LIST_MAX (300) gedeckelt — während die fehlenden Sätze
+           per Definition ans Ende sortiert werden. Bei openPetition (1.908)
+           oder Change.org (2.019) lagen sie damit immer dahinter, der Knopf
+           meldete „Nicht in der angezeigten Liste" (Nutzerbefund 7.8.2026).
+           Ein Filter kennt diese Grenze nicht: er verkleinert die Liste, statt
+           in ihr zu suchen. */
+        if (state.gapFilter === "start_date" && r.start_date) return false;
+        if (state.gapFilter === "signatures" &&
+            typeof r.signatures === "number") return false;
         if (!term) return true;
         return ((r.title || "") + " " + (r.category || "") + " " +
                 (r.started_by || "")).toLowerCase().indexOf(term) > -1;
@@ -2530,7 +2919,15 @@
       if (closedRows.length) gruende.push(zahl(closedRows.length, "beendet", "beendet"));
       if (archived.length) gruende.push(zahl(archived.length, "im Archiv", "im Archiv"));
       if (offline.length) gruende.push(zahl(offline.length, "offline", "offline"));
-      note.textContent = state.catFilter
+      note.textContent = state.gapFilter
+        ? zahl(active.length,
+               state.gapFilter === "signatures"
+                 ? "Petition ohne Unterschriftenzahl"
+                 : "Petition ohne Startdatum",
+               state.gapFilter === "signatures"
+                 ? "Petitionen ohne Unterschriftenzahl"
+                 : "Petitionen ohne Startdatum")
+        : state.catFilter
         ? zahl(active.length, "Petition in dieser Kategorie",
                "Petitionen in dieser Kategorie")
         : state.tagFilter
@@ -2903,6 +3300,74 @@
       esc(T("settings.layoutHint",
             "Ändert nur das Aussehen der Listen, nicht die Inhalte.")) +
       "</div>"));
+
+    /* Akzentfarbe des Magazins (7.8.26). Immer sichtbar, auch in Relief:
+       die Seite wird beim Layout-Umschalten NICHT neu gezeichnet (pick()
+       wendet nur an), eine erst-im-Magazin-Fassung erschiene also nie.
+       Der Hinweis darunter benennt den Geltungsbereich. Die Punkte zeigen
+       die HELLE Stufe (--mz-accent) — die ist wiedererkennbar; gefüllte
+       Bedienflächen nutzen intern die dunklere (Kontrast, layouts.css). */
+    /* Zur Auswahl stehen die ECHTEN Markenfarben der Plattformen
+       (Nutzerwunsch 7.8.26). Die Liste kommt deshalb aus PM_PLATFORMS
+       und wächst mit jeder neuen Plattform von selbst mit — nachzutragen
+       ist dann nur die Palette in layouts.css.
+       Die Gruppen „kräftig" und „hell" sind keine Geschmacksfrage: auf
+       kräftigen Marken steht die Schrift weiß, auf hellen dunkel
+       (--mz-on-accent). Eingeteilt wird nach relativer Helligkeit
+       (WCAG-Formel), damit ein künftiger Eintrag ohne Handarbeit im
+       richtigen Block landet.
+       Die Schwelle ist NICHT geschätzt, sondern der ausgerechnete
+       Umschlagpunkt: dort ist der Kontrast zu Weiß genauso groß wie der
+       zu --ink (#1e1c18, Leuchtdichte 0,0117), also
+       √(1,05 × 0,0617) − 0,05 = 0,2046. Ein erster Versuch mit 0,16
+       sortierte WeAct (0,181) und Avaaz (0,177) falsch nach „hell",
+       obwohl auf beiden Weiß besser liest (4,5 gegen 3,7) — die
+       Gruppierung widersprach damit den Paletten in layouts.css. */
+    function relLum(hex) {
+      var f = function (paar) {
+        var v = parseInt(paar, 16) / 255;
+        return v <= 0.04045 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+      };
+      return 0.2126 * f(hex.substr(1, 2)) + 0.7152 * f(hex.substr(3, 2)) +
+             0.0722 * f(hex.substr(5, 2));
+    }
+    var ACCENTS = [["koralle", "#e15b52",
+      T("settings.accentKoralle", "Koralle"), false]];
+    Object.keys(window.PM_PLATFORMS || {}).forEach(function (k) {
+      var p = window.PM_PLATFORMS[k];
+      if (!p || !p.color) return;
+      ACCENTS.push([k, p.color, platformName(k) || k,
+                    relLum(p.color) > 0.2046]);
+    });
+    content.appendChild(el('<div class="srow__lbl">' +
+      esc(T("settings.accentLabel", "Akzentfarbe")) + "</div>"));
+    /* EINE Reihe mit allen Farben, darunter die Schriftfarbe zur freien
+       Wahl (Nutzerwunsch 7.8.26 — vorher zwei benannte Gruppen mit
+       Erklärtexten drumherum). Die gerechnete Empfehlung steckt jetzt
+       in „Automatisch": sie nimmt je Farbe die besser lesbare Seite
+       (siehe Schwelle oben). Wer will, überschreibt sie. */
+    var acbar = el('<div class="acbar" role="group" aria-label="' +
+      esc(T("settings.accentLabel", "Akzentfarbe")) + '"></div>');
+    ACCENTS.forEach(function (a) {
+      var b = el('<button class="acbtn' +
+        (state.prefs.accent === a[0] ? " on" : "") +
+        '" type="button" style="--sw:' + a[1] + '" aria-label="' +
+        esc(a[2]) + '" title="' + esc(a[2]) + '"></button>');
+      b.addEventListener("click", function () {
+        state.prefs.accent = a[0]; savePrefs(); applyLayout();
+        acbar.querySelectorAll(".acbtn").forEach(function (x) {
+          x.classList.remove("on"); });
+        b.classList.add("on");
+      });
+      acbar.appendChild(b);
+    });
+    content.appendChild(acbar);
+    content.appendChild(segControl(T("settings.accentInkLabel", "Schrift"),
+      [["auto", T("settings.accentInkAuto", "Automatisch"), "fa-wand-magic-sparkles"],
+       ["light", T("settings.accentInkLight", "Hell"), "fa-sun"],
+       ["dark", T("settings.accentInkDark", "Dunkel"), "fa-moon"]],
+      state.prefs.accentInk || "auto",
+      function (v) { state.prefs.accentInk = v; savePrefs(); applyLayout(); }));
 
     /* WARUM ES DIESE OPTION BRAUCHT (am 29.7.26 nachgemessen): die Plattformen
        setzen unverkleinerte Pressebilder in den Aufruf-Text. 35 abrufbare
@@ -3672,18 +4137,18 @@
   function renderProfil() {
     titleEl.textContent = "Profil";
     /* Seitenüberschrift wie in den Einstellungen (Nutzerwunsch 6.8.2026):
-       dort trägt die Seite über eine große Überschrift mit Beschreibung, hier
-       stand bisher nur das kleine Versalien-Etikett der schmalen Titelzeile.
-       Der Untertitel ist KEIN neuer Text — profile.intro liegt seit jeher in
-       texts.js und wurde bislang nirgends angezeigt.
+       dort trägt die Seite über eine große Überschrift, hier stand bisher nur
+       das kleine Versalien-Etikett der schmalen Titelzeile.
        Das Etikett oben verschwindet von selbst: syncPageTitle() blendet die
        Titelzeile aus, sobald der Inhalt eine gleichlautende Überschrift trägt
-       (dieselbe Mechanik wie auf der Einstellungsseite). */
+       (dieselbe Mechanik wie auf der Einstellungsseite).
+       OHNE Untertitel: hier stand `profile.intro` („Du kannst einen Namen und
+       ein Bild hinterlegen …"). Der Satz beschrieb genau den Profil-Kopf, der
+       seit ZEIGE.profilKopf ruht — er kündigte also etwas an, das auf der Seite
+       gar nicht zu finden ist. Der Eintrag bleibt in texts.js stehen; wer den
+       Profil-Kopf zurückholt, holt diese Zeile mit zurück. */
     content.innerHTML =
-      '<div class="welcome"><h1 class="welcome__t">Profil</h1>' +
-      '<p class="welcome__s">' + esc(T("profile.intro",
-        "Du kannst einen Namen und ein Bild hinterlegen — zum Beispiel damit " +
-        "du deine exportierten Daten leichter wiederfindest.")) + "</p></div>";
+      '<div class="welcome"><h1 class="welcome__t">Profil</h1></div>';
     var p = state.prefs;
 
     // ---- Kopf: Bild, Name, Datenschutz-Hinweis ------------------------------
@@ -4290,6 +4755,7 @@
   function goHome() {
     state.platform = null; state.cross = null;
     state.catFilter = null; state.tagFilter = null; state.sort = null;
+    state.gapFilter = null;
     state.openPetitionUrl = null;
     state.tab = "liste";
     render();

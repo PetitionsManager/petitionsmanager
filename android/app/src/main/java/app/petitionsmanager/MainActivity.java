@@ -97,12 +97,23 @@ public class MainActivity extends Activity {
          * Vom Nutzer am 4.8.26 gemeldet ("sieht fast aus wie der Dunkelmodus").
          *
          * Seitdem deklariert die Web-App `color-scheme` an drei Stellen:
-         * style.css :root (light) sowie theme.css Block A und Block C (dark).
+         * style.css :root sowie theme.css Block A und Block C.
+         *
+         * ⚠️ ZWEITER ANLAUF (7.8.2026). Der erste Versuch stand auf
+         * `color-scheme:light` und HALF NICHT — der Nutzer meldete, dass
+         * "hell" weiterhin dunkel ankommt. `light` allein heißt nämlich
+         * "diese Seite kann ausschließlich hell", woraufhin WebView
+         * hilfsbereit nachdunkelt; es ist wirkungsgleich mit gar keiner
+         * Angabe. Jetzt steht dort `only light` ("fass mich nicht an"),
+         * und in theme.css `dark` ("ich kann das selbst"). Beides in Chrome
+         * mit --enable-features=WebContentsForceDark an echten Pixeln
+         * nachgemessen; Einzelheiten im Kopf von webapp/sw.js.
+         *
          * Damit bleibt `true` hier richtig: es hält `prefers-color-scheme`
          * am Leben (siehe oben), und das Nachdunkeln unterbleibt, weil die
-         * Seite ihre Unterstützung jetzt ausweist. `false` wäre der falsche
-         * Hebel — dann meldete WebView wieder dauerhaft "hell" und das
-         * Farbdesign "Automatisch" wäre erneut wirkungslos. */
+         * Seite ihre Unterstützung jetzt korrekt ausweist. `false` wäre der
+         * falsche Hebel — dann meldete WebView wieder dauerhaft "hell" und
+         * das Farbdesign "Automatisch" wäre erneut wirkungslos. */
         if (WebViewFeature.isFeatureSupported(WebViewFeature.ALGORITHMIC_DARKENING)) {
             WebSettingsCompat.setAlgorithmicDarkeningAllowed(s, true);
         }

@@ -21,16 +21,36 @@
    sonst greift der Dark Mode in theme.css nicht.
    =========================================================================== */
 :root{
-  /* ⚠️ Nicht kosmetisch, sondern die Bremse gegen Androids Nachdunkeln.
-     Android-WebView erkennt NICHT an vorhandenen Dunkelregeln, ob eine Seite
-     ihr Farbdesign selbst beherrscht — es liest allein diese Eigenschaft
-     (bzw. das gleichnamige Meta-Tag). Fehlt sie und ist das Gerät dunkel
-     gestellt, färbt WebView den Inhalt algorithmisch nach. Unser
-     data-theme="light" ist ein App-Attribut, von dem WebView nichts weiß:
-     die Wahl „hell" wurde deshalb in der APK überstimmt, die App sah fast aus
-     wie im Dunkelmodus (Nutzermeldung 4.8.26).
-     Gegenstück in theme.css, Block A UND Block C — dort auf dark. */
-  color-scheme:light;
+  /* ⚠️⚠️ Die Bremse gegen Androids Nachdunkeln — und `only` ist daran der
+     entscheidende Teil, nicht Beiwerk.
+
+     WebView erkennt NICHT an vorhandenen Dunkelregeln, ob eine Seite ihr
+     Farbdesign selbst beherrscht; es liest allein diese Eigenschaft. Hier
+     stand zuerst nur `light` — und das ist die FALSCHE Auskunft: „light"
+     allein heißt „diese Seite kann ausschließlich hell", woraufhin der
+     Browser hilfsbereit für einen nachdunkelt. Wirkungsgleich mit gar keiner
+     Angabe. Das Nachdunkeln unterbleibt nur, wenn die Seite entweder `dark`
+     mitanbietet („ich kann das selbst") oder mit `only` sagt „fass mich
+     nicht an".
+
+     Am 7.8.2026 in Chrome mit --enable-features=WebContentsForceDark
+     gemessen, Hintergrund #f7f4ec = (247,244,236):
+       keine Angabe   → (37,35,29)    nachgedunkelt
+       light          → (37,35,29)    nachgedunkelt  ← der alte Wert
+       light dark     → (247,244,236) hell
+       only light     → (247,244,236) hell
+       dark light     → (247,244,236) hell
+     Von den drei wirksamen ist `only light` das richtige: `light dark` und
+     `dark light` sagen „ich kann beides", woraufhin die UA ihre eigenen
+     Flächen (Scrollbalken, Formularfelder) nach der SYSTEM-Einstellung
+     zeichnet — bei dunklem Gerät also dunkle Bedienelemente auf heller
+     Seite. `only light` hält alles hell und verbietet zugleich das
+     Nachfärben.
+
+     Gegenstück in theme.css, Block A UND Block C: dort `dark`, das enthält
+     `dark` und schaltet das Nachdunkeln damit ebenfalls ab (nachgemessen:
+     dunkler Grund bleibt bei (25,23,20) unangetastet). */
+  color-scheme:only light;
 
   /* Warme Neutrale */
   --bg:#f7f4ec; --surface:#ffffff; --ink:#1e1c18; --muted:#6b665c;
@@ -249,6 +269,13 @@ body.hat-offbar .content{padding-bottom:calc(var(--tabbar-h) + 5.5rem)}
    unterzeichneten Petitionen" klebt an der Karte darüber). Eine Stufe mehr,
    gleichauf mit den Abschnittsköpfen der Einstellungen. */
 .content > .welcome + .profile-head{margin-top:1.5rem}
+/* Ruht der Profil-Kopf (ZEIGE.profilKopf), folgt die Wirkungs-Karte direkt auf
+   die Überschrift — und fiel dann auf ihren eigenen Außenabstand von 20 px
+   zurück, während die Karten untereinander 32 haben. Die Überschrift klebte
+   damit enger an der ersten Karte als die Karten aneinander, also genau
+   verkehrt herum. Der Selektor nennt .impact und nicht `*`, weil `.welcome + *`
+   auch die Einstellungsseite träfe und deren 36 px verkleinern würde. */
+.content > .welcome + .impact{margin-top:2rem}
 .content > .profile-head + *,
 .content > .impact + *,
 .content > .signed + *{margin-top:2rem}
@@ -845,12 +872,51 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
   margin-bottom:.5625rem}
 /* Steht bewusst da, wo die Sortierung gewählt wird: bei WeAct fehlt jedes
    Startdatum, bei Europarl jede Unterschriftenzahl. */
-.ptools__note{display:flex;gap:.5rem;margin-top:.75rem;background:var(--bg);
-  border-radius:.625rem;padding:.5rem .625rem;font-size:.75rem;line-height:1.45;
+/* Lücken-Meldung im Bedienfeld. Umgebaut am 7.8.2026: vorher standen die
+   Sätze als Inline-Spans in EINEM Textblock, liefen ineinander, und der
+   Aktionsknopf rutschte auf eine eigene Zeile, sobald der Satz umbrach.
+   Jetzt je Lücke eine Zeile, die Aktion rechts daneben und beim Umbruch
+   darunter statt daneben eingerückt. */
+.ptools__note{display:flex;gap:.625rem;margin-top:.875rem;background:var(--bg);
+  border-radius:.625rem;padding:.75rem .875rem;font-size:.75rem;line-height:1.45;
   color:var(--muted)}
-.ptools__note i{flex:none;margin-top:.125rem;font-size:.6875rem;opacity:.75}
-.ptools__notetext span{display:block}
-.ptools__notetext span+span{margin-top:.1875rem}
+.ptools__noteicon{flex:none;margin-top:.1875rem;font-size:.6875rem;opacity:.75}
+.ptools__notebody{flex:1;min-width:0;display:flex;flex-direction:column;
+  gap:.625rem}
+/* align-items:flex-start hält den Knopf an der ERSTEN Textzeile, auch wenn
+   der Satz dreizeilig wird — mittig sähe er wie zum Absatz gehörend aus. */
+.ptools__notezeile{display:flex;flex-wrap:wrap;align-items:flex-start;
+  gap:.5rem .75rem}
+/* Auf dem Telefon passt der Knopf nicht neben den zweizeiligen Satz und
+   rutscht darunter (gemessen bei 375 px: Text 282 px, Knopf 133). Stehen zwei
+   Lücken untereinander, wäre dann nicht mehr zu sehen, welcher Knopf zu
+   welchem Satz gehört — die Haarlinie beantwortet das an jeder Breite. */
+.ptools__notezeile + .ptools__notezeile{border-top:.0625rem solid var(--line);
+  padding-top:.75rem}
+.ptools__notetext{flex:1;min-width:11rem}
+/* Aktionsknopf. Zurückhaltend, aber als Knopf erkennbar: die Meldung ist ein
+   Hinweis, der Filter darin die Ausnahme — nicht umgekehrt. */
+.gapbtn{flex:none;display:inline-flex;align-items:center;gap:.375rem;
+  border:.0625rem solid var(--line);background:var(--surface);
+  color:var(--accent);border-radius:999px;cursor:pointer;
+  font:inherit;font-size:.6875rem;font-weight:700;
+  /* 36 px Trefffläche: mehr als die 30, die am 3.8.2026 schon einmal als zu
+     klein befunden wurden, und weniger als die 40 der Sortier-Chips — die
+     Rangfolge bleibt so ablesbar. */
+  padding:.5rem .75rem;min-height:2.25rem;white-space:nowrap}
+.gapbtn i{font-size:.5625rem;opacity:.8}
+.gapbtn:active{opacity:.75}
+/* Aktiv: gefüllt, damit man beim Blick auf die verkürzte Liste sofort sieht,
+   woher die Verkürzung kommt. */
+.gapbtn.on{background:var(--accent);border-color:var(--accent);
+  color:var(--on-accent)}
+.gapbtn.on i{opacity:1}
+/* „Infos deaktivieren" — bewusst der leiseste Ton im Kasten: es ist ein
+   Ausweg, keine angebotene Handlung. */
+.ptools__noteoff{align-self:flex-start;background:none;border:0;cursor:pointer;
+  font:inherit;font-size:.6875rem;color:var(--muted);text-decoration:underline;
+  text-underline-offset:.125rem;padding:.375rem .25rem;margin:-.25rem}
+.ptools__noteoff:active{color:var(--ink)}
 
 /* Sprungmarke (app.js → jumpBtn). Sitzt im Fliesstext, deshalb inline und in
    Akzentfarbe wie ein Link – ein gefuellter Knopf wuerde den Hinweis
@@ -911,6 +977,16 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
   border:.0625rem solid var(--line);border-radius:.875rem;margin-bottom:.5rem;
   text-decoration:none;color:inherit;text-align:left;cursor:pointer}
 .simrow:active{background:var(--accent-soft)}
+/* Über die ersten fünf hinaus: gebaut, aber verborgen, bis „Mehr
+   anzeigen" gedrückt wird (app.js → renderSimilar, Nutzerwunsch
+   7.8.26 — acht Zeilen schoben die halbe Karte nach unten). Bewusst
+   layoutneutral: die Deckelung gilt in beiden Designs. */
+.simrow--rest{display:none}
+.simmore{display:block;width:100%;box-sizing:border-box;border:0;
+  border-radius:.875rem;padding:.75rem 1rem;margin-top:.25rem;
+  background:var(--accent-soft);color:var(--accent);font:inherit;
+  font-weight:700;font-size:.8125rem;cursor:pointer}
+.simmore:active{opacity:.82}
 .simrow__t{font-size:.875rem;font-weight:650;color:var(--ink);line-height:1.4;
   width:100%}
 .simrow__p{display:flex;align-items:center;gap:.375rem;font-size:.75rem;
@@ -1335,6 +1411,24 @@ body.wizard-open{overflow:hidden}
   font-size:.8125rem;font-weight:650;color:var(--muted);padding:.625rem .25rem;
   cursor:pointer;white-space:nowrap}
 .seg__b.on{background:var(--accent-soft);color:var(--accent);font-weight:700}
+
+/* ---- Akzentfarben-Palette (Einstellungen → Darstellung, 7.8.26) ----
+   Runde Farbpunkte; die Farbe kommt als --sw inline aus app.js (ACCENTS),
+   die Auswahl wirkt nur im Magazin (layouts.css, [data-accent="…"]).
+   Aktiv = Ring in Schriftfarbe mit Luftspalt zum Punkt — funktioniert in
+   beiden Themen ohne eigene Dunkelregel. */
+.acbar{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;
+  margin:.25rem .125rem .625rem}
+/* Gruppenbeschriftung „Kräftig"/„Hell" über den Farbpunkten (7.8.26):
+   die Einteilung entscheidet, ob die Schrift auf der Fläche hell oder
+   dunkel steht — sie ist deshalb benannt, nicht nur sortiert. */
+.acbar__lbl{font-size:.75rem;color:var(--muted);margin:.625rem .125rem .25rem}
+.acbtn{width:2.25rem;height:2.25rem;flex:none;border-radius:999px;
+  border:0;background:var(--sw,var(--accent));cursor:pointer;
+  box-shadow:inset 0 0 0 .0625rem rgba(0,0,0,.12)}
+.acbtn.on{outline:.1875rem solid var(--ink);outline-offset:.1875rem}
+.acbtn:focus-visible{outline:.1875rem solid var(--accent);
+  outline-offset:.1875rem}
 
 /* ---- Benachrichtigungen ---- */
 .nbox__detail{border-left:.125rem solid var(--line);margin-left:.75rem;
