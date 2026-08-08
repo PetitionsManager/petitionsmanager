@@ -1384,11 +1384,25 @@ body.wizard-open{overflow:hidden}
 /* ---- Einstellungen: Abschnitte und Listenzeilen ---- */
 .sect{margin:2rem .125rem .625rem;font-size:.75rem;font-weight:800;
   letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.srow{display:flex;align-items:center;gap:.875rem;width:100%;text-align:left;
+/* position:relative traegt den Fortschrittsbalken (.srow__bar) beim
+   Aktualisieren der Daten. Ohne Wirkung auf alle uebrigen Zeilen: ein
+   relativ positionierter Flex-Container verhaelt sich wie zuvor. */
+.srow{position:relative;display:flex;align-items:center;gap:.875rem;
+  width:100%;text-align:left;
   background:var(--surface);border:.0625rem solid var(--line);
   border-radius:1.125rem;padding:1rem;margin-bottom:.5rem;font:inherit;
   color:var(--ink);cursor:pointer;box-shadow:var(--shadow)}
 .srow--static{cursor:default}
+/* Fortschrittsbalken beim Datenabgleich (8.8.2026, Nutzerbefund: „es passiert
+   nichts, kein Dialog, keine Fortschrittsbalken, kein Prozess"). Er sitzt am
+   unteren Rand der Zeile und waechst mit den fertig geladenen Plattformen.
+   Die Rundung folgt der Zeilenecke, damit er nicht darueber hinauslaeuft;
+   ein overflow:hidden auf .srow waere einfacher gewesen, haette aber den
+   Schatten abgeschnitten. */
+.srow__bar{position:absolute;left:.0625rem;bottom:.0625rem;height:.1875rem;
+  width:0;max-width:calc(100% - .125rem);
+  background:var(--accent);border-radius:0 999px 999px 1.125rem;
+  transition:width .3s ease;pointer-events:none}
 .srow__ic{flex:none;width:1.5rem;text-align:center;color:var(--accent);
   font-size:1.125rem}
 .srow__body{flex:1;min-width:0}
@@ -1398,8 +1412,17 @@ body.wizard-open{overflow:hidden}
 .srow__end{flex:none;display:flex;align-items:center;color:var(--muted)}
 .srow__go{color:var(--muted);font-size:.875rem}
 .srow--done .srow__ic,.srow--done .srow__go{color:var(--online)}
+/* ⚠️ Oberer Abstand ergänzt am 8.8.2026 (Nutzerbefund: „abstand über
+   ‚Gesendet …' ist kleiner als der Text vor dem absenden").
+   Ursache war die Asymmetrie `margin:0 … .75rem` — oben NULL, unten .75rem.
+   Solange die Rückmeldung leer ist, hat ihr Element Höhe 0, sein unterer
+   Abstand wirkt aber trotzdem und schiebt den Hinweistext darunter weg.
+   Füllt sich die Zeile mit „Gesendet …", erscheint der Text mit Abstand 0
+   und klebt am Knopf — der Block wirkt beim Absenden zusammengesprungen.
+   Oben und unten derselbe Wert; zwischen zwei Hinweisen bleibt es durch
+   Margin-Kollaps bei .75rem, es wird also nirgends doppelt. */
 .srow__note{color:var(--muted);font-size:.75rem;line-height:1.55;
-  margin:0 .25rem .75rem}
+  margin:.75rem .25rem}
 /* Zwischenüberschrift innerhalb eines Abschnitts – trennt in „Darstellung"
    die beiden Schalterleisten (Farbdesign / Layout) voneinander. */
 .srow__lbl{font-size:.8125rem;font-weight:700;color:var(--ink);

@@ -128,7 +128,12 @@ window.PM_TEXTS = {
     layoutHint: "Ändert nur das Aussehen, nicht die Inhalte. „Relief“ ist im Stil des Neumorphismus gebaut („Soft UI“): Karten, Knöpfe und Felder haben dieselbe Farbe wie der Hintergrund und werden nur durch Licht und Schatten geformt – angetippt oder eingeschaltet sinken sie ein. „Magazin“ ist im Stil moderner Nachrichten-Apps gehalten: weiße Karten auf hellem Grund, die Logos der Plattformen in ihren echten Markenfarben, eine Korallfarbe für alles Aktive und das Bild der Petition groß nach oben.",
     accentLabel: "Akzentfarbe",
     accentKoralle: "Koralle",
-    accentInkLabel: "Schrift",
+    /* Sichtbare Ueberschrift ueber der Schriftfarben-Auswahl (8.8.2026,
+       Nutzerwunsch „hier auch eine Überschrift wie Akzentfarbe"). Der Text
+       war vorher „Schrift" und wurde von segControl NUR als aria-label
+       gesetzt, also nie angezeigt — die Auswahl stand ueberschriftenlos
+       unter den Farbknoepfen. */
+    accentInkLabel: "Akzent-Schriftfarbe",
     accentInkAuto: "Automatisch",
     accentInkLight: "Hell",
     accentInkDark: "Dunkel",
