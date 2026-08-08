@@ -103,9 +103,34 @@ jobs:
             require("./webapp/platforms.js");
             const T = global.window.PM_TEXTS, P = global.window.PM_PLATFORMS;
             const fehlt = [];
-            for (const k of ["app","wizard","liste","signed","platform",
-                             "settings","notify","reset","profile","about"])
-              if (!T[k]) fehlt.push("texts.js: Abschnitt " + k);
+            // texts.js traegt seit 8.8.2026 eine SPRACHEBENE: PM_TEXTS.de.app
+            // statt PM_TEXTS.app. Geprueft wird deshalb jede Sprache einzeln -
+            // und zusaetzlich, dass keine Uebersetzung Schluessel verliert:
+            // eine unvollstaendige Sprache faellt in der App still auf Deutsch
+            // zurueck, was beim Entwickeln erwuenscht ist, beim Ausliefern
+            // aber unbemerkt bliebe.
+            const ABSCHNITTE = ["app","wizard","liste","signed","platform",
+                                "settings","notify","reset","profile","about"];
+            const sprachen = Object.keys(T);
+            if (!sprachen.length) fehlt.push("texts.js: keine Sprache gefunden");
+            for (const s of sprachen)
+              for (const k of ABSCHNITTE)
+                if (!T[s][k]) fehlt.push(`texts.js [${s}]: Abschnitt ${k}`);
+            // Schluesselvergleich gegen Deutsch als Bezugsgroesse
+            const pfade = (o, p = "") => Object.entries(o).flatMap(([k, v]) =>
+              (v && typeof v === "object" && !Array.isArray(v))
+                ? pfade(v, p + k + ".") : [p + k]);
+            if (T.de) {
+              const soll = new Set(pfade(T.de));
+              for (const s of sprachen.filter(x => x !== "de")) {
+                const ist = new Set(pfade(T[s]));
+                const weg = [...soll].filter(x => !ist.has(x));
+                const neu = [...ist].filter(x => !soll.has(x));
+                if (weg.length) fehlt.push(`texts.js [${s}]: ${weg.length} Schluessel fehlen (${weg.slice(0,5).join(", ")}${weg.length>5?", …":""})`);
+                if (neu.length) fehlt.push(`texts.js [${s}]: ${neu.length} unbekannte Schluessel (${neu.slice(0,5).join(", ")}${neu.length>5?", …":""})`);
+              }
+              console.log(`texts.js: ${sprachen.length} Sprachen, ${soll.size} Schluessel je Sprache`);
+            }
             // Geprueft wird logoFile, NICHT mehr logo. Das Feld logo war ein
             // selbstgebautes Monogramm-Badge und ist am 29.7.26 entfallen,
             // seit alle elf Plattformen ihre echte Marke haben; diese Zeile

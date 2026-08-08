@@ -185,7 +185,31 @@ def parse_detail(html: str, url: str) -> dict:
     soup = BeautifulSoup(html, "html.parser")
     rec: dict = {}
 
-    box = soup.select_one(".titel-begruedung-container")
+    # ⚠️ KORREKTUR 8.8.2026 (Nutzerbefund: "die begründung fehlt in der
+    # beschreibung bei bundestagspetition. hier nimmt der scraper wohl nicht
+    # alle inhalte von der seite mit"). Er hatte recht.
+    #
+    # Der Name ".titel-begruedung-container" verspricht Titel UND Begruendung,
+    # haelt aber nur den ersten Teil. Die Seite ist so gebaut:
+    #
+    #   div.read-more__text-box                 <- alles zusammen
+    #   ├── div.titel-begruedung-container      <- nur "Text der Petition"
+    #   │   ├── p.h3  "Text der Petition"
+    #   │   └── p     ~130 Zeichen
+    #   ├── p.h3      "Begruendung"             <- GESCHWISTER, nicht Kind
+    #   └── p         ~3000 Zeichen
+    #
+    # Die Begruendung liegt also NEBEN dem bisherigen Container, nicht darin -
+    # und sie ist der weitaus groessere Teil. An Petition 194593 gemessen:
+    # 149 Zeichen bisher gegen 3129 Zeichen jetzt, Faktor 21.
+    #
+    # Der aeussere Kasten ist auf der Seite eindeutig (genau ein Vorkommen)
+    # und enthaelt nur p/div/br, also keine Navigation, die mitgeschleppt
+    # wuerde. Der alte Selektor bleibt als Rueckfall stehen, falls der
+    # Bundestag das Geruest aendert - dann fehlt wieder die Begruendung, aber
+    # der Datensatz bleibt brauchbar statt leer.
+    box = (soup.select_one(".read-more__text-box")
+           or soup.select_one(".titel-begruedung-container"))
     if box:
         rec["description_full"] = sanitize_fragment(box, BASE_URL) or None
         text = box.get_text(" ", strip=True)
