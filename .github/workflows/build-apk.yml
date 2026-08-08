@@ -66,6 +66,38 @@ jobs:
         with:
           gradle-version: '8.9'
 
+      # Signaturschluessel aus dem Secret herstellen. Er liegt NICHT im Repo:
+      # die App soll nach Google Play und F-Droid, und ein Schluessel, der je
+      # oeffentlich war, taugt dafuer nicht mehr.
+      #
+      # Fehlt das Secret (Fork), wird NICHT ersatzweise einer erzeugt - ein
+      # zufaelliger Schluessel je Lauf ist genau der Fehler, der hier behoben
+      # wurde. Der Lauf geht weiter, aber die APK laesst sich dann nicht ueber
+      # eine vorhandene Installation legen; darum die deutliche Warnung.
+      - name: Signaturschluessel herstellen
+        id: signatur
+        env:
+          KS_B64: ${{ secrets.SIGNING_KEYSTORE_BASE64 }}
+        run: |
+          if [ -z "$KS_B64" ]; then
+            echo "::warning::SIGNING_KEYSTORE_BASE64 fehlt - die APK wird mit "\
+          "Gradles Wegwerf-Debugschluessel signiert und laesst sich NICHT "\
+          "ueber eine vorhandene Installation legen."
+            echo "vorhanden=nein" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          printf '%s' "$KS_B64" | base64 -d > android/app/signing.p12
+          # Groesse pruefen: ein abgeschnitten eingefuegtes Secret ergibt eine
+          # Datei, die base64 -d klaglos schreibt, die aber unbrauchbar ist.
+          GROESSE=$(stat -c%s android/app/signing.p12)
+          echo "Keystore hergestellt: $GROESSE Bytes"
+          if [ "$GROESSE" -lt 1000 ]; then
+            echo "::error::Keystore ist nur $GROESSE Bytes gross - das Secret "\
+          "ist vermutlich unvollstaendig eingefuegt."
+            exit 1
+          fi
+          echo "vorhanden=ja" >> "$GITHUB_OUTPUT"
+
       # VERSION_CODE macht jede APK unterscheidbar (build.gradle liest die
       # Variable). github.run_number zaehlt je Workflow monoton hoch und
       # springt nie zurueck - genau das verlangt Android von einem Update.
@@ -75,7 +107,15 @@ jobs:
         env:
           VERSION_CODE: ${{ github.run_number }}
           VERSION_NAME: 1.0.${{ github.run_number }}
+          SIGNING_KEYSTORE_PASSWORD: ${{ secrets.SIGNING_KEYSTORE_PASSWORD }}
         run: gradle assembleDebug --no-daemon --stacktrace
+
+      # Der Schluessel hat auf dem Runner nichts mehr verloren, sobald signiert
+      # ist. Kostet nichts und verhindert, dass er in einem spaeteren Schritt
+      # versehentlich in ein Artefakt wandert.
+      - name: Schluessel wieder entfernen
+        if: always()
+        run: rm -f android/app/signing.p12
 
       # Beweist, dass alle APKs aus debug.p12 stammen und nicht aus einem
       # zufaellig erzeugten Runner-Schluessel. Weicht der Fingerabdruck eines
