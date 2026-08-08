@@ -1468,7 +1468,50 @@
 /* Beim Aufklappen wächst der Aufmacher weiter, statt zu springen. */
 [data-layout="magazin"] .pet.open .pet__thumb{height:14rem}
 [data-layout="magazin"] .pet.open .pet__head{padding:0 0 1rem}
-[data-layout="magazin"] .pet__thumb--ph .plogo{width:3rem;height:3rem}
+/* ⚠️ VERGROESSERT 8.8.2026 (Nutzerbefund mit Bild: „wenn kein bild da ist,
+   muss das logo entweder größer oder das bild weg. so sieht es nicht gut
+   aus"). Gemessen lag das Logo bei 48 × 48 px auf einer Fläche von
+   564 × 317 px — 15 % der Höhe, verloren in der Leere.
+
+   Zweiter, stiller Fehler an derselben Zeile: `width:3rem;height:3rem`
+   erzwang ein QUADRAT und hat damit die Formel in style.css:1214
+   ausgehebelt, die die Breite aus dem Seitenverhältnis des Logos rechnet
+   (--logo-ar). Breite Wortmarken wie AVAAZ wurden dadurch gestaucht. Statt
+   fester Maße wird jetzt nur noch --logo-h gesetzt, die Formel macht den
+   Rest und das Seitenverhältnis stimmt wieder.
+
+   Bewusst das Logo vergrößert und NICHT die Fläche entfernt: die Fläche
+   hält alle Karten einer gemischten Liste auf gleicher Höhe — die
+   Begründung dafür steht ausführlich in app.js über `thumbPh`. */
+/* ⚠️ --logo-k NICHT anfassen. Der Faktor kommt als Inline-Stil aus app.js
+   (`Math.pow(ar, -0.25)`) und gleicht die FLÄCHE der Marken aus: ein sehr
+   breiter Schriftzug wie der des Bundestags (Seitenverhältnis 6,17) wird
+   bewusst niedriger gezeichnet als ein kompaktes Zeichen, sonst wirkte er
+   doppelt so groß. Ein erster Versuch setzte hier --logo-k:1 — wirkungslos,
+   weil der Inline-Stil gewinnt, und es wäre auch falsch gewesen.
+   Gesteuert wird deshalb nur über --logo-h.
+
+   Zugleich wird die FLÄCHE niedriger: ein Logo mit Seitenverhältnis 6,17
+   kann auf 16:9 gar nicht hoch werden, ohne seitlich hinauszulaufen —
+   „Logo größer" allein hätte 51 auf 61 px gebracht und das Grundproblem
+   gelassen. Mit 8rem statt 16:9 stimmt das Verhältnis wieder, und die Karte
+   verliert die leere Fläche, die der Nutzer bemängelt hat. sizeThumb() in
+   app.js rührt Platzhalter ausdrücklich nicht an („feste Höhe aus dem CSS"),
+   die Angabe hier ist also die einzige Quelle. */
+[data-layout="magazin"] .pet__thumb--ph{height:8rem;aspect-ratio:auto}
+[data-layout="magazin"] .pet.open .pet__thumb--ph{height:10rem;
+  aspect-ratio:auto}
+[data-layout="magazin"] .pet__thumb--ph .plogo{--logo-h:6rem;max-width:72%}
+/* Aufgeklappt wächst das Logo mit der Fläche. Höhere Spezifität als die
+   Regel darüber UND als `.pet.open .pet__thumb--ph .plogo` aus
+   style.css:709, die sonst mit 3.25rem gewinnen würde. */
+[data-layout="magazin"] .pet.open .pet__thumb--ph .plogo{--logo-h:7.5rem}
+/* Mittig statt linksbündig: .plogo steht global auf mask-position:left
+   center, was passt, solange das Element exakt so breit ist wie die Maske.
+   Greift hier aber max-width, schrumpft mask-size:contain das Zeichen im
+   Element — und dann klebte es links statt in der Mitte der Fläche. */
+[data-layout="magazin"] .pet__thumb--ph .plogo{
+  -webkit-mask-position:center;mask-position:center}
 [data-layout="magazin"] .pet__main{padding-left:1.125rem}
 [data-layout="magazin"] .pet.open .pet__main{padding-left:1.125rem}
 [data-layout="magazin"] .pet__title{font-size:1.0625rem;font-weight:750;
@@ -1489,8 +1532,23 @@
   backdrop-filter:none}
 /* Aufklapper und Fremdlink als gleichwertige runde Tasten (Kastenpaar-
    Lehre vom 3.8.26 bleibt: beide gefüllt, beide 36 px). */
+/* ⚠️ `padding-left:.5rem` ENTFERNT am 8.8.2026 (Nutzerbefund „der aufklapper
+   ist immernoch nicht mittig zentriert" — „immer noch", weil die Zeile 1521
+   darunter das Padding bisher NUR im aufgeklappten Zustand zurücknahm; offen
+   saß der Pfeil mittig, geschlossen nicht, und geschlossen sieht man ihn
+   meistens).
+   Am Verhalten nachgemessen statt aus dem CSS abgeleitet: Padding auf 0 setzen
+   verschob den Pfeil um exakt 4,00 px — die Hälfte der 8 px, weil
+   justify-content:center im verkleinerten Inhaltsbereich zentriert. Übrig
+   blieben 0,78 px, und die sind Absicht: der .06em-Versatz aus style.css:690
+   gleicht aus, dass FontAwesome das Chevron-Zeichen selbst 6 % versetzt
+   zeichnet.
+   Ein Padding hat hier ohnehin nichts verloren — der Knopf hat feste 36 px,
+   und den Abstand zu den Nachbarn regeln margin-right hier sowie die Margins
+   von .pet__ext. Zeile mit `padding-left:0` für .pet.open bleibt trotzdem
+   stehen: sie nimmt style.css:723 zurück, das dort weiterhin .5rem setzt. */
 [data-layout="magazin"] .pet__toggle{width:2.25rem;height:2.25rem;
-  display:flex;align-items:center;justify-content:center;padding-left:.5rem;
+  display:flex;align-items:center;justify-content:center;
   border-radius:999px;background:var(--mz-soft);color:var(--mz-ink-on-soft);
   font-size:.8125rem;margin-right:.75rem}
 [data-layout="magazin"] .pet__ext{margin:0 .625rem 0 .25rem;

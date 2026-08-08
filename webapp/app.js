@@ -3410,6 +3410,12 @@
       acbar.appendChild(b);
     });
     content.appendChild(acbar);
+    /* Ueberschrift ueber der Schriftfarbe (8.8.2026, Nutzerwunsch). segControl
+       verwendet sein erstes Argument ausschliesslich als aria-label und
+       zeichnet es NICHT — sichtbar wird es erst durch dieses srow__lbl,
+       dieselbe Bauform wie „Akzentfarbe" ein paar Zeilen darueber. */
+    content.appendChild(el('<div class="srow__lbl">' +
+      esc(T("settings.accentInkLabel", "Akzent-Schriftfarbe")) + "</div>"));
     content.appendChild(segControl(T("settings.accentInkLabel", "Schrift"),
       [["auto", T("settings.accentInkAuto", "Automatisch"), "fa-wand-magic-sparkles"],
        ["light", T("settings.accentInkLight", "Hell"), "fa-sun"],
@@ -3586,23 +3592,77 @@
           (state.baseAuto === "live" ? "live" : "mitgeliefert")
         : T("settings.refreshHint", "Petitionen neu von der Quelle laden"),
       { end: '<i class="fa-solid fa-chevron-right srow__go"></i>' });
+    /* ⚠️ UMGEBAUT 8.8.2026 (Nutzerbefund: „wenn ich auf Daten aktualisieren
+       klicke, springt die Seite nur nach oben, es passiert nichts, kein
+       Dialog, keine Fortschrittsbalken, kein Prozess").
+
+       Der alte Handler war nicht kaputt — er war nur unsichtbar. Er lud
+       ausschliesslich das MANIFEST (Sekundenbruchteil), leerte den Cache und
+       rief sofort render(). Die Petitionslisten selbst kamen gar nicht neu,
+       sondern erst beim nächsten Zugriff über loadPlatformData(). Die Meldung
+       „Wird geladen …" war weg, bevor man sie lesen konnte, und render()
+       setzte die Ansicht neu auf — das war der Sprung nach oben. Aus
+       Nutzersicht: ein Klick ohne Wirkung.
+
+       Jetzt passiert wirklich etwas Sichtbares:
+       - die aktivierten Plattformen werden TATSAECHLICH neu geholt,
+       - jede fertige Plattform schiebt den Balken weiter,
+       - am Ende steht die Zahl der geladenen Petitionen,
+       - und die Scrollposition bleibt erhalten (Muster wie in draw()).
+       Eine einzelne Plattform darf scheitern, ohne den Lauf abzubrechen:
+       ihr Fehler wird gezaehlt, nicht geworfen — sonst reisst ein
+       Funkloch bei einer Quelle den ganzen Abgleich mit. */
     refreshRow.addEventListener("click", function () {
       var sub = refreshRow.querySelector(".srow__s");
-      sub.textContent = "Wird geladen …";
+      if (refreshRow.dataset.laeuft === "ja") return;   // Doppelklick abwehren
+      refreshRow.dataset.laeuft = "ja";
+      var balken = refreshRow.querySelector(".srow__bar");
+      if (!balken) {
+        balken = el('<span class="srow__bar"></span>');
+        refreshRow.appendChild(balken);
+      }
+      function stand(txt, anteil) {
+        sub.textContent = txt;
+        balken.style.width = Math.round((anteil || 0) * 100) + "%";
+      }
       // Auch die Quelle neu bestimmen: wer vorher im Funkloch startete, sitzt
       // sonst bis zum nächsten App-Start auf den mitgelieferten Daten fest.
       state.dataCache = {}; textChunks = {};
+      stand("Verbindung prüfen …", .05);
       resolveBase().then(loadManifest).then(function () {
-        /* Die Listen hängen an state.dataCache, nicht am Manifest. Das Leeren
-           allein macht nichts sichtbar — die Petitionen kommen erst beim
-           nächsten Zeichnen neu. Ohne das hier behauptete die Zeile
-           „aktualisiert", während die Ansicht unverändert alt blieb.
-           Das Ergebnis geht in den Zustand, nicht in dieses DOM-Element:
-           render() ersetzt den Inhalt, danach ist `sub` nicht mehr im
-           Dokument und ein Schreiben darauf wäre unsichtbar. */
+        var plats = livePlatforms().filter(function (p) {
+          return isEnabled(p.key);
+        });
+        if (!plats.length) { stand("Keine Plattform aktiviert.", 1); return 0; }
+        var fertig = 0, kaputt = 0;
+        stand("Lade 0 von " + plats.length + " …", .1);
+        return Promise.all(plats.map(function (p) {
+          return loadPlatformData(p.key).then(function (arr) {
+            return arr.length;
+          }, function () { kaputt++; return 0; }).then(function (n) {
+            fertig++;
+            stand("Lade " + fertig + " von " + plats.length + " …",
+              .1 + .9 * (fertig / plats.length));
+            return n;
+          });
+        })).then(function (zahlen) {
+          var summe = zahlen.reduce(function (a, b) { return a + b; }, 0);
+          stand(nf.format(summe) + " Petitionen geladen" +
+            (kaputt ? " · " + kaputt + " Quelle(n) nicht erreichbar" : ""), 1);
+          return summe;
+        });
+      }).then(function () {
         state.lastRefresh = new Date().toISOString();
-        render();
-      }).catch(function () { sub.textContent = "Nicht erreichbar."; });
+        /* Kurz stehen lassen, damit die Fertigmeldung lesbar ist — ohne die
+           Pause waere der Umbau genauso unsichtbar wie vorher. Danach neu
+           zeichnen UND zurueckrollen: render() setzt sonst an den Anfang,
+           und genau das hat der Nutzer als „springt nach oben" gemeldet. */
+        var y = window.scrollY;
+        setTimeout(function () { render(); window.scrollTo(0, y); }, 1200);
+      }).catch(function () {
+        refreshRow.dataset.laeuft = "";
+        stand("Nicht erreichbar.", 0);
+      });
     });
     content.appendChild(refreshRow);
 
