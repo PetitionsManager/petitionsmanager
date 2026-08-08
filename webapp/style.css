@@ -1430,6 +1430,14 @@ body.wizard-open{overflow:hidden}
 .seg{display:flex;gap:.25rem;background:var(--surface);
   border:.0625rem solid var(--line);border-radius:1.125rem;padding:.25rem;
   margin-bottom:.5rem}
+/* Sprachwahl auf dem Begrüßungsbildschirm des Assistenten (8.8.2026).
+   Übernimmt bewusst die Bauform von .seg, damit sie sich nicht als
+   Fremdkörper anfühlt — die Knöpfe darin sind dieselben .seg__b. Eigene
+   Klasse statt .seg, weil hier oben mehr Luft nötig ist und keine
+   Beschriftungszeile darübersteht. */
+.wiz__langbar{display:flex;gap:.25rem;background:var(--surface);
+  border:.0625rem solid var(--line);border-radius:1.125rem;padding:.25rem;
+  margin:1.5rem auto 0;max-width:20rem}
 .seg__b{flex:1;border:0;background:none;border-radius:.875rem;font:inherit;
   font-size:.8125rem;font-weight:650;color:var(--muted);padding:.625rem .25rem;
   cursor:pointer;white-space:nowrap}

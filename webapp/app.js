@@ -124,17 +124,93 @@
   // Sämtliche Bildschirmtexte stehen in texts.js, die Marken-Daten der
   // Plattformen in platforms.js. Beide werden vor app.js geladen. Fehlt eine
   // der Dateien, läuft die App weiter – dann greifen die Rückfalltexte.
-  var TX = window.PM_TEXTS || {};
+  /* ---- Sprachen (8.8.2026) ------------------------------------------------
+     texts.js liefert seit heute nicht mehr EINEN Textbaum, sondern einen je
+     Sprache: window.PM_TEXTS = { de: {…}, en: {…} }. Eine weitere Sprache ist
+     damit ein weiterer Block dort plus ein Eintrag in SPRACHEN hier — am Code
+     muss nichts angefasst werden.
+
+     SPRACHEN ist bewusst die einzige Liste: Auswahl in den Einstellungen,
+     Schritt im Einrichtungs-Assistenten und die Erkennung der Systemsprache
+     lesen alle daraus. Zwei Listen wären zwei Gelegenheiten, sie
+     auseinanderlaufen zu lassen.
+
+     DE bleibt Rückfallebene: fehlt ein Schlüssel in einer Übersetzung,
+     erscheint der deutsche Text statt einer leeren Fläche. Das ist beim
+     schrittweisen Übersetzen der Normalfall, nicht die Ausnahme — rund 120
+     Texte stehen noch hartkodiert im Code und werden erst nach und nach
+     hierher gezogen. */
+  var SPRACHEN = [
+    { code: "de", name: "Deutsch",  flagge: "🇩🇪" },
+    { code: "en", name: "English",  flagge: "🇬🇧" }
+  ];
+  var STANDARDSPRACHE = "de";
+
+  function spracheUnterstuetzt(code) {
+    for (var i = 0; i < SPRACHEN.length; i++)
+      if (SPRACHEN[i].code === code) return true;
+    return false;
+  }
+
+  /* Systemsprache ermitteln — Vorgabe beim ersten Start (Nutzerwunsch:
+     „Default ist die Systemsprache (wenn auslesbar)").
+     navigator.languages steht zuerst, weil es die vollständige Rangfolge des
+     Nutzers enthält; navigator.language ist nur der erste Eintrag davon und
+     fehlt in alten WebViews gelegentlich ganz. Aus "de-AT" wird "de" — die
+     Region interessiert hier nicht, nur die Sprache.
+     Findet sich nichts Unterstütztes, bleibt es bei Deutsch. Das ist der
+     ehrliche Rückfall: die App ist auf Deutsch vollständig. */
+  function systemSprache() {
+    var kandidaten = [];
+    try {
+      if (navigator.languages && navigator.languages.length)
+        kandidaten = kandidaten.concat(Array.prototype.slice.call(navigator.languages));
+      if (navigator.language) kandidaten.push(navigator.language);
+    } catch (e) { /* alte WebViews: dann eben die Standardsprache */ }
+    for (var i = 0; i < kandidaten.length; i++) {
+      var kurz = String(kandidaten[i] || "").toLowerCase().split("-")[0];
+      if (spracheUnterstuetzt(kurz)) return kurz;
+    }
+    return STANDARDSPRACHE;
+  }
+
+  var ALLE_TEXTE = window.PM_TEXTS || {};
+  /* Aktueller Textbaum. Wird von setzeSprache() ausgetauscht; alle T()-Aufrufe
+     lesen danach automatisch die neue Sprache, ohne dass sie es merken. */
+  var TX = ALLE_TEXTE[STANDARDSPRACHE] || ALLE_TEXTE || {};
+  var TX_FALLBACK = ALLE_TEXTE[STANDARDSPRACHE] || {};
+
+  function setzeSprache(code) {
+    if (!spracheUnterstuetzt(code)) code = STANDARDSPRACHE;
+    TX = ALLE_TEXTE[code] || TX_FALLBACK;
+    try { document.documentElement.setAttribute("lang", code); } catch (e) {}
+    return code;
+  }
   var PLATS = window.PM_PLATFORMS || {};
 
   // T("wizard.lang.title", "Rückfalltext") – holt einen Text über seinen Pfad.
-  function T(path, fallback) {
-    var cur = TX, parts = String(path).split("."), i;
+  /* Einen Pfad wie "liste.heroTitle" in einem Textbaum nachschlagen. */
+  function ausBaum(baum, path) {
+    var cur = baum, parts = String(path).split("."), i;
     for (i = 0; i < parts.length; i++) {
-      if (cur == null || typeof cur !== "object") return fallback || "";
+      if (cur == null || typeof cur !== "object") return null;
       cur = cur[parts[i]];
     }
-    return (cur == null || cur === "") ? (fallback || "") : cur;
+    return (cur == null || cur === "") ? null : cur;
+  }
+  /* ⚠️ DREISTUFIGER RÜCKFALL (8.8.2026, mit den Sprachen dazugekommen):
+     gewählte Sprache → Deutsch → der im Aufruf mitgegebene Ersatztext.
+     Die mittlere Stufe ist die wichtige: Solange eine Übersetzung
+     unvollständig ist, erscheint der deutsche Satz statt einer leeren
+     Fläche. Ohne sie hätte jede noch nicht übersetzte Zeile ein Loch in die
+     Oberfläche gerissen — und beim schrittweisen Übersetzen ist das der
+     Normalfall, nicht der Ausnahmefall. */
+  function T(path, fallback) {
+    var wert = ausBaum(TX, path);
+    if (wert != null) return wert;
+    wert = ausBaum(TX_FALLBACK, path);
+    if (wert != null) return wert;
+    return fallback || "";
   }
   // Platzhalter der Form {n} ersetzen: fill("Schritt {n}", {n: 2}).
   function fill(str, vals) {
@@ -304,6 +380,14 @@
   var PREFS_KEY = "prefs";
   function defaultPrefs() {
     return {
+      /* Oberflächensprache. Vorgabe ist die SYSTEMSPRACHE, sofern sie
+         auslesbar und unterstützt ist (Nutzerwunsch 8.8.2026) — siehe
+         systemSprache(). Deshalb ein Funktionsaufruf und kein fester Wert:
+         defaultPrefs() läuft beim ersten Start, und genau dann soll das
+         Gerät entscheiden. Sobald jemand die Sprache in den Einstellungen
+         oder im Assistenten wählt, steht sie hier fest und das System
+         redet nicht mehr hinein. */
+      lang: systemSprache(),      // "de" | "en" (siehe SPRACHEN)
       theme: "auto",              // "light" | "dark" | "auto"
       layout: "relief",           // "relief" | "magazin" (layouts.css)
       /* Akzentfarbe des Magazin-Layouts (7.8.26, Nutzerwunsch „muss nicht
@@ -335,6 +419,14 @@
       try {
         var o = JSON.parse(raw);
         if (o && typeof o === "object") {
+          /* Gespeicherte Sprache nur übernehmen, wenn sie noch unterstützt
+             wird. Sonst bliebe ein Wert stehen, zu dem es keinen Textbaum
+             gibt — dieselbe Vorsicht wie bei layout und accent weiter
+             unten. Ohne Eintrag greift die Vorgabe aus defaultPrefs(), also
+             die Systemsprache; wer schon einmal gewählt hat, behält seine
+             Wahl auch dann, wenn das Gerät auf eine andere Sprache
+             umgestellt wird. */
+          if (o.lang && spracheUnterstuetzt(o.lang)) p.lang = o.lang;
           if (o.theme) p.theme = o.theme;
           /* „band" (Farbband) ist am 2026-07-29 durch „relief"
              (Neumorphismus) ersetzt worden. Wer das alte Layout gewählt
@@ -408,6 +500,13 @@
   // „klassisch" (= gar keine Regel, es griff allein style.css) ist entfallen,
   // alte gespeicherte Werte schreibt loadPrefs() auf „relief" um.
   function applyLayout() {
+    /* Sprache zuerst: sie tauscht den Textbaum aus, den alle folgenden
+       T()-Aufrufe lesen. applyLayout() läuft ohnehin nach jeder Änderung an
+       den Einstellungen und nach loadPrefs() — damit ist genau EIN Ort dafür
+       zuständig, dass Gespeichertes und Angezeigtes zusammenpassen. Der
+       Funktionsname sagt „Layout", die Funktion setzt aber schon länger auch
+       Akzent und Schriftfarbe; die Sprache reiht sich dort ein. */
+    setzeSprache((state.prefs && state.prefs.lang) || STANDARDSPRACHE);
     var l = (state.prefs && state.prefs.layout) || "relief";
     document.documentElement.setAttribute("data-layout", l);
     /* Akzentfarbe hängt am selben Schalter: layouts.css kennt die Paletten
@@ -3313,9 +3412,15 @@
       var seg = el('<div class="seg" role="group" aria-label="' +
         esc(label) + '"></div>');
       items.forEach(function (it) {
+        /* Icon ist optional (seit der Sprachwahl 8.8.2026): dort trägt die
+           Beschriftung schon eine Flagge, ein FontAwesome-Zeichen daneben
+           wäre doppelt. Ohne diese Abfrage entstünde `<i class="fa-solid ">`
+           — ein leeres Icon-Element, das je nach Schriftstand einen
+           Platzhalter oder eine Lücke zeichnet. */
         var b = el('<button class="seg__b' +
           (current === it[0] ? " on" : "") + '" type="button">' +
-          '<i class="fa-solid ' + it[2] + '"></i> ' + esc(it[1]) + "</button>");
+          (it[2] ? '<i class="fa-solid ' + it[2] + '"></i> ' : "") +
+          esc(it[1]) + "</button>");
         b.addEventListener("click", function () {
           pick(it[0]);
           seg.querySelectorAll(".seg__b").forEach(function (x) {
@@ -3327,7 +3432,32 @@
       return seg;
     }
 
-    content.appendChild(segControl("Farbdesign",
+    /* SPRACHE zuerst — sie ändert alles Weitere auf dem Bildschirm, deshalb
+       steht sie über Farbdesign und Layout (8.8.2026, Nutzerwunsch).
+       Die Knöpfe tragen bewusst KEINE übersetzte Beschriftung: „Deutsch" und
+       „English" stehen in ihrer eigenen Sprache, sonst müsste man die
+       gesuchte Sprache erst finden können, um sie einzustellen. Die Liste
+       kommt aus SPRACHEN ganz oben — eine neue Sprache erscheint hier von
+       selbst.
+       Nach der Wahl ein volles render(): Die Oberfläche ist bereits gezeichnet,
+       und T() wird beim Zeichnen ausgewertet, nicht laufend beobachtet — ohne
+       Neuzeichnen bliebe der alte Text stehen, bis man die Ansicht wechselt. */
+    content.appendChild(el('<div class="srow__lbl">' +
+      esc(T("settings.langLabel", "Sprache")) + "</div>"));
+    content.appendChild(segControl(T("settings.langLabel", "Sprache"),
+      SPRACHEN.map(function (s) { return [s.code, s.flagge + " " + s.name, ""]; }),
+      state.prefs.lang || STANDARDSPRACHE,
+      function (v) {
+        state.prefs.lang = v; savePrefs(); applyLayout(); render();
+      }));
+    content.appendChild(el('<div class="srow__note">' +
+      esc(T("settings.langHint",
+            "Beim ersten Start folgt die App der Sprache deines Geräts.")) +
+      "</div>"));
+
+    content.appendChild(el('<div class="srow__lbl">' +
+      esc(T("settings.themeLabel", "Farbdesign")) + "</div>"));
+    content.appendChild(segControl(T("settings.themeLabel", "Farbdesign"),
       [["light", T("settings.themeLight", "Hell"), "fa-sun"],
        ["dark", T("settings.themeDark", "Dunkel"), "fa-moon"],
        ["auto", T("settings.themeAuto", "Automatisch"), "fa-circle-half-stroke"]],
@@ -4581,6 +4711,37 @@
         esc(T("wizard.intro.text",
               "Petitionen vieler Plattformen an einem Ort – such dir aus, " +
               "was du sehen möchtest.")) + "</p></div>"));
+
+      /* OBERFLÄCHENSPRACHE auf dem Begrüßungsbildschirm (8.8.2026,
+         Nutzerwunsch „bei der Einrichtung soll die Sprache ausgewählt werden
+         können").
+
+         Bewusst HIER und nicht als eigener Schritt: Der Assistent zählt
+         TOTAL = 3, ein vierter Schritt hätte alle Nummern und die
+         Fortschrittspunkte verschoben — viel Risiko für nichts. Vor allem
+         aber gehört die Sprache VOR die erste Frage: Wer den Assistenten
+         nicht lesen kann, soll ihn nicht erst durchklicken müssen, um ihn
+         umzustellen. Vorbelegt ist sie mit der Systemsprache, die meisten
+         tippen hier also gar nichts.
+
+         ⚠️ NICHT verwechseln mit Schritt 1 („wizard.lang"): der fragt, welche
+         PLATTFORM-Sprachen jemand sehen will (deutschsprachige, englisch-
+         sprachige Petitionen) — eine ganz andere Frage. Die Namensähnlichkeit
+         ist eine Falle; deshalb heißt dieser Block hier uiLang.
+
+         renderWizard() nach der Wahl neu aufrufen, sonst bliebe der
+         Assistent in der alten Sprache stehen, bis man weiterblättert. */
+      var uiLang = el('<div class="wiz__langbar"></div>');
+      SPRACHEN.forEach(function (s) {
+        var an = (state.prefs.lang || STANDARDSPRACHE) === s.code;
+        var b = el('<button class="seg__b' + (an ? " on" : "") +
+          '" type="button">' + esc(s.flagge + " " + s.name) + "</button>");
+        b.addEventListener("click", function () {
+          state.prefs.lang = s.code; savePrefs(); applyLayout(); renderWizard();
+        });
+        uiLang.appendChild(b);
+      });
+      main.appendChild(uiLang);
 
     } else if (step === 1) {
       main.appendChild(el('<h1 class="wiz__title">' +
