@@ -18,24 +18,27 @@
  *                   Vorbild: freefrontend.com/css-neumorphism-examples/.
  *                   Ersetzt das frühere Layout „Farbband" (Commit-Stand davor:
  *                   siehe git log dieser Datei).
- *   → "magazin"   : Bento & Glas. Plattformen als Kachelraster im Vollton
- *                   ihrer echten Markenfarbe, zwei Kacheln über mehrere
- *                   Felder, Petitionen als große Bildkarten mit Milchglas-
- *                   Etikett, schwebende Milchglas-Fußleiste.
- *                   Vorbilder: Finanz-App (Bento) und Self-care-App (Glas).
+ *   → "magazin"   : News-App-Stil (Magazin 3.0, 7.8.26). Weiße Karten auf
+ *                   hellem Grund, EINE Koralle-Akzentfarbe, Logos in echten
+ *                   Markenfarben auf Weiß, Petitionen als Bild-Karten mit
+ *                   Kategorie-Chip, Fußleiste als weiße Schwebe-Karte mit
+ *                   aktivem Pill-Tab. Vorbilder: sechs Referenzbilder des
+ *                   Nutzers (News-App „Revent" + Art-Gallery-UI-Kit).
+ *                   Ersetzt „Bento & Glas" (Vollton-Markenkacheln,
+ *                   Milchglas; Stand davor: git log dieser Datei).
  *
  * Die beiden Entwürfe sollen sich NICHT ähneln. Sie unterscheiden sich
  * absichtlich in jeder Hauptachse:
  *
  *              Relief                    Magazin
- *   Fläche     Karte = Grund, ein Ton    Karte hebt sich ab
- *   Kante      keine, nur Licht/Schatten Haarlinie + Schlagschatten
- *   Plattform  erhabene Zeile, Logo      Bento-Raster, Markenfarbe im Vollton
- *              in der Markenfarbe
- *   Farbe      nur in Schrift/Symbol     ganze Flächen im Markenton
- *   Zustand    eingedrückt (inset)       Füllung wechselt
- *   Suche      vertieftes Feld           Pille mit Schlagschatten
- *   Fußleiste  angesetzt, aktiv = Delle  schwebendes Milchglas
+ *   Fläche     Karte = Grund, ein Ton    weiße Karte hebt sich vom Grund ab
+ *   Kante      keine, nur Licht/Schatten weicher Schatten (dunkel: Haarlinie)
+ *   Plattform  erhabene Zeile, Logo      weiße Karte im 2er-Raster, Logo in
+ *              in der Markenfarbe        Markenfarben, Aufmacher volle Breite
+ *   Farbe      nur in Schrift/Symbol     EINE Koralle für Aktives/Abzeichen
+ *   Zustand    eingedrückt (inset)       Koralle-Füllung wechselt
+ *   Suche      vertieftes Feld           weiße Pille mit Schlagschatten
+ *   Fußleiste  angesetzt, aktiv = Delle  weiße Schwebe-Karte, aktiv = Pille
  *
  * „Relief" ist der Name in der App. Der Fachbegriff Neumorphismus passt nicht
  * in eine Schalterhälfte und sagt einer nicht-fachlichen Leserin nichts; das
@@ -1103,463 +1106,673 @@
 }
 
 
+
 /* ===========================================================================
-   LAYOUT „MAGAZIN" — Bento & Glas
+   LAYOUT „MAGAZIN" — News-App-Stil (Magazin 3.0, 7.8.26)
    ---------------------------------------------------------------------------
-   Zwei Vorbilder, zwei Bausteine:
-   • Bento (Finanz-App): die Plattformen werden ein Kachelraster mit
-     unterschiedlich großen Blöcken. Die erste Kachel jeder Gruppe läuft über
-     beide Spalten und wird zur Kopfkachel — das ist der eigentliche
-     Bento-Griff, ein gleichförmiges 2×N-Raster wäre nur eine schmalere Liste.
-   • Glas (Self-care-App): Etikett und Fußleiste schweben als milchige Flächen
-     über dem Inhalt.
+   Komplettes Redesign nach sechs Referenzbildern des Nutzers (News-App
+   „Revent" + Art-Gallery-UI-Kit): weiße Karten auf hellem Grund, EINE
+   Akzentfarbe (Koralle) für Aktives und Abzeichen, Kategorie-Chips als
+   Pillen (aktiv gefüllt), Bild-Karten mit weicher Rundung, Einstellungs-
+   zeilen mit Icon-Kachel links, Profil mit Statistik-Karte, schwebende
+   weiße Fußleiste mit aktivem Pill-Tab.
 
-   Das Vorschaubild wandert aus der Zeile heraus und wird zum Aufmacher über
-   dem Titel. Möglich ohne Eingriff ins Markup: .pet__head ist ein Flex-
-   Container, das Bild bekommt volle Breite und per order:-1 den ersten Platz,
-   der Rest bricht darunter um.
+   Ersetzt das Bento-&-Glas-Magazin (Vollton-Markenkacheln, Milchglas) auf
+   ausdrücklichen Nutzerwunsch „komplettes redesign auf basis der Bilder" —
+   die früheren Bento-Entscheidungen (alles weiß auf Markenfarbe, gleiche
+   Kachelhöhen 13.5rem, Glas-Etikett) gelten HIER nicht mehr; Logos stehen
+   wieder in ihren echten Markenfarben auf Weiß. Relief bleibt unberührt.
 
-   Für Petitionen ohne Bild greift derselbe Platzhalter wie sonst (siehe
-   app.js → petCard), nur größer: über die Hälfte des Bestands hat kein Bild,
-   ein Aufmacher-Layout muss diesen Fall aushalten.
+   Kontrast-Kalkül der Koralle:
+   • --mz-accent-deep #c9423a: Weiß darauf ≈ 4,9:1 → auch Kleintext AA.
+     Alle GEFÜLLTEN Bedienflächen (aktive Chips/Tabs/Segmente, Banner)
+     nutzen deshalb deep, nie die helle Füllung.
+   • --mz-accent #e15b52: nur Schmuck (Zahlen ≥1.5rem fett = Großtext,
+     Icons, Ränder), nie Grund für kleinen weißen Text.
+   • --mz-soft (helle Tönung): Grund für Abzeichen — Text darauf ist
+     --mz-ink-on-soft #a03830 (≈ 5,6:1).
+
+   Mechanik, die aus dem Vorgänger übernommen ist (bewährt, nicht neu
+   erfinden): display:grid über .accordion.open>, Aufmacherbild per
+   order:-1, Wachsen des Bildes beim Aufklappen, 36-px-Aufklapp-Kasten
+   samt :last-child-Regeln, Abstandsraster (Zählzeile 16 / support 32),
+   Dunkel = Hairline statt Schatten.
    =========================================================================== */
 :root[data-layout="magazin"]{
-  --radius:1.75rem;
-  --tabbar-h:5.75rem;              /* schwebende Glasleiste braucht Fußraum */
-  --glass-bar:rgba(255,255,255,.74);
-  /* Kachelkante. Die Kacheln tragen die echte Markenfarbe im Vollton, und die
-     ist mal heller, mal dunkler als der Grund: hell verschwindet foodwatch-Gelb
-     (1,84 gegen den cremefarbenen Grund) und openPetition-Türkis (2,34), dunkel
-     verschwinden WeMove-Marine (1,12 gegen #191714), Bundestagsblau (1,56) und
-     EU-Blau (1,65). Es braucht deshalb in BEIDEN Designs eine Haarlinie, nur in
-     entgegengesetzter Richtung: hell ein schwarzer, dunkel ein weißer Schleier.
-     Bei .26 kommt die schwächste Linie (foodwatch) auf 3,28. */
-  --tile-edge:rgba(0,0,0,.26);
+  --radius:1.25rem;                 /* Kartenrundung der Vorlagen (~20 px) */
+  --tabbar-h:5.75rem;               /* schwebende Leiste braucht Fußraum   */
+  /* Grundpalette = Koralle der Vorlagen; die elf Markenpaletten weiter
+     unten überschreiben sie über [data-accent]. --mz-on-accent ist die
+     Schriftfarbe AUF gefüllten Flächen und wechselt je Palette mit
+     (helle Marke → dunkle Schrift, dunkle Marke → helle Schrift). */
+  --mz-accent:#e15b52;
+  --mz-accent-deep:#c9423a;
+  --mz-on-accent:#ffffff;
+  --mz-soft:#fbe9e7;
+  --mz-ink-on-soft:#a03830;
+  --mz-card:#ffffff;
+  --mz-shadow:0 .375rem 1.125rem rgba(60,35,30,.08);
+  /* TOKEN-REBASE (Magazin 3.1, 7.8.26 nach Screenshot-Vergleich mit den
+     Vorlagen): Karten neu zu stylen reichte nicht — die ALTE Farbwelt
+     schien überall durch, wo Bauteile die Basistoken tragen: cremefarbener
+     Grund, grüne Wortmarke (.bm-badge: var(--accent)), grüner Schalter,
+     grün getönter Avatar und Unterstützungs-Kasten. Deshalb werden hier
+     die Basistoken selbst umgehängt; --accent zeigt per var() auf die
+     Palette, Farb- und Dunkelwechsel laufen damit automatisch mit.
+     Achtung Kaskade: layouts.css lädt NACH theme.css — ohne die
+     Wiederholung in den zwei Dunkelzweigen unten schlüge dieses helle
+     --bg auch den Dunkelmodus. */
+  --bg:#fbfaf8;                     /* Vorlagen: fast weiß, warm */
+  --accent:var(--mz-accent-deep);
+  --accent-soft:var(--mz-soft);
 }
 :root[data-layout="magazin"][data-theme="dark"]{
-  --glass-bar:rgba(35,32,25,.74);
-  --tile-edge:rgba(255,255,255,.34);
+  --mz-soft:rgba(225,91,82,.16);
+  --mz-ink-on-soft:#f2a49e;
+  --mz-card:var(--surface);
+  --mz-shadow:none;
+  --bg:#191714;                     /* Wert aus theme.css, s. Rebase oben */
+  --accent:var(--mz-accent);        /* dunkel braucht die HELLE Stufe:
+                                       4,7:1 als Text auf dem Anthrazit */
+  --accent-soft:var(--mz-soft);
 }
 @media (prefers-color-scheme:dark){
   :root[data-layout="magazin"][data-theme="auto"]{
-    --glass-bar:rgba(35,32,25,.74);
-    --tile-edge:rgba(255,255,255,.34);
+    --mz-soft:rgba(225,91,82,.16);
+    --mz-ink-on-soft:#f2a49e;
+    --mz-card:var(--surface);
+    --mz-shadow:none;
+    --bg:#191714;
+    --accent:var(--mz-accent);
+    --accent-soft:var(--mz-soft);
   }
 }
 
-/* ---- Kopf: ruhige Überschrift, kräftiger Fließtext ----
-   Bewusst umgekehrt zu „Band": dort trägt die Überschrift die Seite, hier der
-   Text darunter. */
-[data-layout="magazin"] .pagekick{text-transform:none;letter-spacing:0;
-  font-size:.8125rem;font-weight:650}
-[data-layout="magazin"] .welcome{padding:1rem .125rem 1.5rem}
-[data-layout="magazin"] .welcome__t{font-size:1.75rem;letter-spacing:-.02em;
-  line-height:1.15}
-[data-layout="magazin"] .welcome__s{font-size:1rem;color:var(--ink);
-  opacity:.75;line-height:1.65}
+/* ---- Akzent-Paletten aus den ECHTEN Markenfarben (7.8.26,
+   Nutzerwunsch „nutze als akzentfarben die farbe(n) der plattformen …
+   unterteile in helle und dunkle farben"). Die Werte stammen aus
+   platforms.js (color/colorSoft/colorDark), sind also dieselben, die
+   Logos und Kacheln tragen — hier nur um zwei Rollen ergänzt, die es
+   für Bedienflächen braucht:
+     --mz-accent-deep  Füllfläche, notfalls nachgedunkelt/aufgehellt,
+                       bis die Schrift darauf 4,5:1 erreicht
+     --mz-on-accent    Schrift DARAUF: dunkle Marken tragen Weiß,
+                       helle Marken dunkle Schrift — genau die vom
+                       Nutzer gewünschte Unterteilung.
+   Alle Werte einmal gerechnet und geprüft (Kontrast auf Füllfläche und
+   auf der Tönung je ≥ 4,5). ⚠️ Neue Plattform = neue Palette hier UND
+   Werteliste in app.js/loadPrefs; die Auswahlpunkte selbst baut app.js
+   aus PM_PLATFORMS, die wachsen von allein mit. */
+:root[data-layout="magazin"][data-accent="bundestag"]{
+  --mz-accent:#191919;--mz-accent-deep:#191919;
+  --mz-on-accent:#ffffff;--mz-soft:#ededed;
+  --mz-ink-on-soft:#191919}
+:root[data-layout="magazin"][data-accent="wemove"]{
+  --mz-accent:#21194f;--mz-accent-deep:#21194f;
+  --mz-on-accent:#ffffff;--mz-soft:#ededf1;
+  --mz-ink-on-soft:#21194f}
+:root[data-layout="magazin"][data-accent="europarl"]{
+  --mz-accent:#003399;--mz-accent-deep:#003399;
+  --mz-on-accent:#ffffff;--mz-soft:#e5e8f4;
+  --mz-ink-on-soft:#003399}
+:root[data-layout="magazin"][data-accent="eko"]{
+  --mz-accent:#6400ff;--mz-accent-deep:#6400ff;
+  --mz-on-accent:#ffffff;--mz-soft:#f3ebff;
+  --mz-ink-on-soft:#6400ff}
+:root[data-layout="magazin"][data-accent="avaaz"]{
+  --mz-accent:#e40a68;--mz-accent-deep:#e40a68;
+  --mz-on-accent:#ffffff;--mz-soft:#fdebf3;
+  --mz-ink-on-soft:#c8085b}
+:root[data-layout="magazin"][data-accent="weact"]{
+  --mz-accent:#e9005f;--mz-accent-deep:#dd005a;
+  --mz-on-accent:#ffffff;--mz-soft:#fdebf2;
+  --mz-ink-on-soft:#cd0053}
+:root[data-layout="magazin"][data-accent="threefifty"]{
+  --mz-accent:#0f81e8;--mz-accent-deep:#1b87e9;
+  --mz-on-accent:#1e1c18;--mz-soft:#e6f0fc;
+  --mz-ink-on-soft:#0c69be}
+:root[data-layout="magazin"][data-accent="changeorg"]{
+  --mz-accent:#f34e49;--mz-accent-deep:#f34e49;
+  --mz-on-accent:#1e1c18;--mz-soft:#fef1f0;
+  --mz-ink-on-soft:#b83b37}
+:root[data-layout="magazin"][data-accent="innnit"]{
+  --mz-accent:#f7661e;--mz-accent-deep:#f7661e;
+  --mz-on-accent:#1e1c18;--mz-soft:#fff3ed;
+  --mz-ink-on-soft:#bb4d16}
+:root[data-layout="magazin"][data-accent="openpetition"]{
+  --mz-accent:#29b0cc;--mz-accent-deep:#29b0cc;
+  --mz-on-accent:#1e1c18;--mz-soft:#eef9fb;
+  --mz-ink-on-soft:#1a7082}
+:root[data-layout="magazin"][data-accent="foodwatch"]{
+  --mz-accent:#f7a600;--mz-accent-deep:#f7a600;
+  --mz-on-accent:#1e1c18;--mz-soft:#fef8eb;
+  --mz-ink-on-soft:#8f6000}
+:root[data-layout="magazin"][data-accent="bundestag"][data-theme="dark"]{
+  --mz-soft:rgba(25,25,25,.20);--mz-ink-on-soft:#808080}
+:root[data-layout="magazin"][data-accent="wemove"][data-theme="dark"]{
+  --mz-soft:rgba(33,25,79,.20);--mz-ink-on-soft:#85809e}
+:root[data-layout="magazin"][data-accent="europarl"][data-theme="dark"]{
+  --mz-soft:rgba(0,51,153,.20);--mz-ink-on-soft:#4d7acc}
+:root[data-layout="magazin"][data-accent="eko"][data-theme="dark"]{
+  --mz-soft:rgba(100,0,255,.20);--mz-ink-on-soft:#aa73ff}
+:root[data-layout="magazin"][data-accent="avaaz"][data-theme="dark"]{
+  --mz-soft:rgba(228,10,104,.20);--mz-ink-on-soft:#f078ac}
+:root[data-layout="magazin"][data-accent="weact"][data-theme="dark"]{
+  --mz-soft:rgba(233,0,95,.20);--mz-ink-on-soft:#f373a7}
+:root[data-layout="magazin"][data-accent="threefifty"][data-theme="dark"]{
+  --mz-soft:rgba(15,129,232,.20);--mz-ink-on-soft:#5ab0ff}
+:root[data-layout="magazin"][data-accent="changeorg"][data-theme="dark"]{
+  --mz-soft:rgba(243,78,73,.20);--mz-ink-on-soft:#f89e9b}
+:root[data-layout="magazin"][data-accent="innnit"][data-theme="dark"]{
+  --mz-soft:rgba(247,102,30,.20);--mz-ink-on-soft:#fdac84}
+:root[data-layout="magazin"][data-accent="openpetition"][data-theme="dark"]{
+  --mz-soft:rgba(41,176,204,.20);--mz-ink-on-soft:#89d4e3}
+:root[data-layout="magazin"][data-accent="foodwatch"][data-theme="dark"]{
+  --mz-soft:rgba(247,166,0,.20);--mz-ink-on-soft:#fbce73}
+@media (prefers-color-scheme:dark){
+  :root[data-layout="magazin"][data-accent="bundestag"][data-theme="auto"]{
+    --mz-soft:rgba(25,25,25,.20);--mz-ink-on-soft:#808080}
+  :root[data-layout="magazin"][data-accent="wemove"][data-theme="auto"]{
+    --mz-soft:rgba(33,25,79,.20);--mz-ink-on-soft:#85809e}
+  :root[data-layout="magazin"][data-accent="europarl"][data-theme="auto"]{
+    --mz-soft:rgba(0,51,153,.20);--mz-ink-on-soft:#4d7acc}
+  :root[data-layout="magazin"][data-accent="eko"][data-theme="auto"]{
+    --mz-soft:rgba(100,0,255,.20);--mz-ink-on-soft:#aa73ff}
+  :root[data-layout="magazin"][data-accent="avaaz"][data-theme="auto"]{
+    --mz-soft:rgba(228,10,104,.20);--mz-ink-on-soft:#f078ac}
+  :root[data-layout="magazin"][data-accent="weact"][data-theme="auto"]{
+    --mz-soft:rgba(233,0,95,.20);--mz-ink-on-soft:#f373a7}
+  :root[data-layout="magazin"][data-accent="threefifty"][data-theme="auto"]{
+    --mz-soft:rgba(15,129,232,.20);--mz-ink-on-soft:#5ab0ff}
+  :root[data-layout="magazin"][data-accent="changeorg"][data-theme="auto"]{
+    --mz-soft:rgba(243,78,73,.20);--mz-ink-on-soft:#f89e9b}
+  :root[data-layout="magazin"][data-accent="innnit"][data-theme="auto"]{
+    --mz-soft:rgba(247,102,30,.20);--mz-ink-on-soft:#fdac84}
+  :root[data-layout="magazin"][data-accent="openpetition"][data-theme="auto"]{
+    --mz-soft:rgba(41,176,204,.20);--mz-ink-on-soft:#89d4e3}
+  :root[data-layout="magazin"][data-accent="foodwatch"][data-theme="auto"]{
+    --mz-soft:rgba(247,166,0,.20);--mz-ink-on-soft:#fbce73}
+}
 
-/* ---- Suche als randlose Pille ---- */
+/* Schriftfarbe auf gefüllten Akzentflächen frei wählbar (7.8.26):
+   „Automatisch" lässt die Palette entscheiden (Regeln oben), sonst
+   überschreibt die Wahl. MUSS nach den Paletten stehen, um zu gewinnen. */
+:root[data-layout="magazin"][data-accent-ink="light"]{
+  --mz-on-accent:#ffffff}
+:root[data-layout="magazin"][data-accent-ink="dark"]{
+  --mz-on-accent:#1e1c18}
+
+/* ---- Kopf und Seitentitel: ruhig, freundlich, keine Versalien ---- */
+[data-layout="magazin"] .pagekick{text-transform:none;letter-spacing:0;
+  font-size:.8125rem;font-weight:650;color:var(--muted)}
+[data-layout="magazin"] .welcome{padding:.75rem .125rem 1rem}
+[data-layout="magazin"] .welcome__t{font-size:1.625rem;font-weight:800;
+  letter-spacing:-.02em;line-height:1.2}
+[data-layout="magazin"] .welcome__s{font-size:.9375rem;color:var(--muted);
+  line-height:1.6}
+[data-layout="magazin"] .content>.sect{font-size:1.125rem;font-weight:800;
+  letter-spacing:-.015em;text-transform:none;color:var(--ink)}
+[data-layout="magazin"] .signed__head h2{font-size:1.25rem;font-weight:800;
+  letter-spacing:-.015em}
+
+/* ---- Suche als weiße Pille mit weichem Schatten ---- */
 [data-layout="magazin"] .mainsearch__in,
 [data-layout="magazin"] .search{border-radius:999px;padding:1rem 1.25rem;
-  border-color:transparent;background:var(--surface);box-shadow:var(--shadow)}
+  border-color:transparent;background:var(--mz-card);
+  box-shadow:var(--mz-shadow)}
 [data-layout="magazin"] .mainsearch__btn{border-radius:999px;
-  padding-left:1.25rem;padding-right:1.25rem}
+  padding-left:1.25rem;padding-right:1.25rem;
+  background:var(--mz-accent-deep);color:var(--mz-on-accent)}
 
-/* ---- Plattformen als Bento-Raster ----
-   Die Zusatzklasse kommt aus app.js (groupAccordion); .acc-body allein träfe
-   auch die Schalterlisten in den Einstellungen.
+/* ---- Chips (Sortieren/Schlagworte): Pille, aktiv gefüllt ----
+   Vorlage: inaktive Chips weiß mit Haarlinie, der aktive ist die einzige
+   gefüllte Fläche der Zeile. deep statt hell: 13-px-Beschriftung. */
+[data-layout="magazin"] .chip,
+[data-layout="magazin"] .tag{min-height:2.5rem;border-radius:999px;
+  background:var(--mz-card);border:.0625rem solid var(--line)}
+[data-layout="magazin"] .chiprow .chip.on,
+[data-layout="magazin"] .tag.on{background:var(--mz-accent-deep);
+  border-color:var(--mz-accent-deep);color:var(--mz-on-accent)}
 
-   Das display MUSS über .accordion.open mitgenommen werden: style.css
-   schaltet die Gruppe mit display:none/block auf und zu. Eine Regel nur auf
-   .acc-body--plats verliert dagegen und die Kacheln blieben untereinander. */
-/* Raster: EIN Grundmaß, alle Kacheln sind ganze Vielfache davon. Die feste
-   Zeilenhöhe aus grid-auto-rows ist der Kern davon — ohne sie zieht die
-   inhaltsreichste Kachel ihre ganze Zeile auf und die Reihen werden
-   unterschiedlich hoch. „dense" füllt die Lücken, die neben den großen
-   Kacheln entstehen, mit nachfolgenden kleinen; ohne das bliebe rechts neben
-   jeder großen Kachel ein Loch. Die Reihenfolge im Markup (alphabetisch)
-   bleibt davon unberührt — nur die Platzierung im Raster ändert sich. */
+/* ---- Plattform-Karten (Hauptseite) ----
+   Statt Vollton-Bento: weiße Karten im 2er-Raster, Logo in ECHTEN
+   Markenfarben oben, Name fett, Meta gedämpft, „+N neu" als Koralle-
+   Abzeichen. Größte Plattform der Gruppe (--xl) und Zweitgrößte (--wide)
+   laufen wie die Aufmacher der Vorlage über die volle Breite. */
 [data-layout="magazin"] .accordion.open>.acc-body--plats{display:grid}
 [data-layout="magazin"] .acc-body--plats{
-  /* Zeilenhöhe gemessen aufgebaut, nicht geschätzt. Die alte Rechnung
-     (Text endet bei 126 px, 12rem reichen) galt für die Zahlen vom 28.7. —
-     mit den Live-Daten vom 3.8.26 bricht „N Petitionen" auf der 116 px
-     breiten Innenfläche IMMER um (schon „26 Petitionen" misst 127 px), und
-     der vollste Fall (OpenPetition: Name 2 Zeilen + Zahl 2 Zeilen +
-     „+neu"-Zeile) lief 25 px ins Logo (WeAct 8, WeMove 3, nachgemessen).
-     13.5rem = 216 px plus line-height 1.2 der Meta-Zeile decken ihn mit
-     ≥6 px Luft. MESSKRITERIUM für künftige Datenlagen: Unterkante
-     .plat__body bleibt ≥6 px über der Logo-Oberkante der vollsten Kachel;
-     die Kacheln bleiben untereinander gleich groß. */
-  grid-template-columns:1fr 1fr;grid-auto-rows:13.5rem;
-  /* Fuge 12 → 16 (7.8.26, Nutzerwunsch „lieber größer"): wirkt nur
-     ZWISCHEN den Kacheln, die Zeilenhöhe oben ist fest — das
-     ≥6-px-Kriterium bleibt davon unberührt. */
-  grid-auto-flow:row dense;gap:1rem;padding:0 0 .5rem}
-
-/* Vollton statt Tönung: die Kachel trägt die echte Markenfarbe, --brand
-   kommt je Kachel als style-Attribut aus app.js.
-   --on-brand ist seit dem 2026-07-28 FEST WEISS (Nutzerentscheidung „alle
-   Schriften/Logos weiß") und gilt für Beschriftung, Logo-Maske, Eckflagge
-   und die Pfeilfläche. Vorher rechnete app.js je Marke die kontraststärkere
-   Seite aus. Der Preis steht in Zahlen: auf foodwatch-Bernstein erreicht
-   Weiß nur 2,02, auf openPetition-Türkis 2,57, auf innn.it-Orange 2,92 –
-   alle drei unter den 3:1, die WCAG selbst für Großtext verlangt. Die
-   übrigen acht liegen zwischen 3,50 und 17,58. */
+  grid-template-columns:1fr 1fr;gap:1rem;padding:0 0 .5rem}
 [data-layout="magazin"] .acc-body--plats .plat{
-  --brand:var(--accent); --on-brand:#ffffff;
-  /* Beschriftung oben, Logo unten links (Nutzerwunsch). Das löst nebenbei
-     einen Platzkonflikt: solange das Logo oben links stand, teilte es sich
-     die Zeile mit der Flagge in der Ecke, und eine 5:1 breite Wortmarke
-     musste sich dafür verkleinern. Unten hat sie die ganze Kachelbreite. */
-  position:relative;flex-direction:column;align-items:flex-start;
-  justify-content:flex-start;gap:.25rem;margin:0;min-height:0;overflow:hidden;
-  /* EIN Innenabstand für alle Kachelgrößen. Vorher .875rem bei den kleinen
-     und 1.5rem bei den großen — Logos und Beschriftung saßen dadurch je nach
-     Kachel unterschiedlich weit vom Rand. Alle Positionen unten leiten sich
-     von dieser Variablen ab, damit sie nicht wieder auseinanderlaufen.
-     Der Abstand ZWISCHEN den Kacheln bleibt unberührt bei .75rem (gap). */
-  --pad:1.5rem;
-  padding:var(--pad);border:0;border-radius:var(--radius);
-  background-color:var(--brand);background-image:none;color:var(--on-brand);
-  box-shadow:inset 0 0 0 .0625rem var(--tile-edge),
-             0 .25rem .75rem rgba(40,30,15,.10)}
-/* Fühlbares Antippen: die Kachel sinkt minimal ein. Hinter dem
-   Bewegungs-Guard, damit die Einstellung „Bewegung reduzieren" des
-   Geräts respektiert wird; ohne Übergang bleibt der Tipp trotzdem
-   funktional. */
-@media (prefers-reduced-motion:no-preference){
-  [data-layout="magazin"] .acc-body--plats .plat{
-    transition:transform .12s ease}
-  [data-layout="magazin"] .acc-body--plats .plat:active{
-    transform:scale(.98)}
-}
-/* Das selbstgebaute Monogramm weicht dem echten Logo. Auf der Kachel wird es
-   WEISS gesetzt, weil die Fläche im Vollton der Hausfarbe steht — die Marke
-   in ihrer eigenen Farbe wäre darauf unsichtbar. Ein <img> könnte das nicht:
-   es brächte seine eigenen Farben mit und säuft ab.
-   Inzwischen hat jede der elf Plattformen eine Datei. */
+  position:relative;display:flex;flex-direction:column;align-items:flex-start;
+  justify-content:flex-start;gap:.375rem;margin:0;min-height:9.5rem;
+  padding:1.125rem;overflow:hidden;border:0;border-radius:var(--radius);
+  background:var(--mz-card);color:var(--ink);box-shadow:var(--mz-shadow)}
+[data-layout="magazin"] .acc-body--plats .plat--xl,
+[data-layout="magazin"] .acc-body--plats .plat--wide{grid-column:1/-1}
+/* Logo zuerst (order:-1), in Markenfarben, auf eigener Zeile. KEINE
+   festen Maße: Breite und Höhe rechnet style.css aus --logo-ar/--logo-k
+   (Flächennormierung); hier wird nur das Bezugsmaß --logo-h gesetzt.
+   Die weiße Masken-Rückfallebene der Bento-Ära entfällt: auf Weiß
+   zeichnet die CSS-Maske in der Markenfarbe aus --brand. */
 [data-layout="magazin"] .acc-body--plats .plat .plogo{
-  position:absolute;bottom:var(--pad);left:var(--pad);
-  --logo-h:3rem;
-  /* color und die Rollenvariablen setzen die EINGEBETTETE Marke auf Weiß —
-     ohne sie kämen mehrfarbige Marken in ihrer Hausfarbe auf der eigenen
-     Hausfarbe heraus (style.css, Abschnitt „Eingebettete Marke"). */
-  color:#ffffff;--pl-b1:#ffffff;--pl-b2:#ffffff;
-  max-width:calc(100% - 2 * var(--pad))}
-/* Die weiße FLÄCHE gehört allein zur Masken-Rückfallebene — dort IST der
-   background die Logoform. Auf der eingebetteten Marke (--svg) stand er als
-   voller weißer Kasten VOR der weißen Zeichnung: so sah der Fehler vom
-   3.8.26 aus, weiße Rechtecke statt Logos auf allen Magazin-Kacheln. */
-[data-layout="magazin"] .acc-body--plats .plat .plogo:not(.plogo--svg){
-  background-color:#ffffff}
-/* Auf den großen Kacheln nur GRÖSSER, nicht anders eingerückt. Rechts bleibt
-   Platz für den Pfeil, deshalb dort mehr Abzug. */
-[data-layout="magazin"] .acc-body--plats .plat--xl .plogo,
-[data-layout="magazin"] .acc-body--plats .plat--wide .plogo{
-  --logo-h:4rem;max-width:calc(100% - var(--pad) - 4.5rem)}
-/* Hier stand eine Sonderregel fuer Hochkant-Symbole (Seitenverhaeltnis
-   < 1,2). Keine der elf Marken liegt darunter - die Regel war tot. */
-[data-layout="magazin"] .acc-body--plats .plat__body{flex:none;width:100%}
-/* „OpenPetition" und „foodwatch" sind einzelne Wörter, die breiter sind als
-   die schmale Kachel — ohne Umbruchpunkt schössen sie über den Rand. */
-[data-layout="magazin"] .acc-body--plats .plat__name{overflow-wrap:anywhere}
-/* KEINE der elf Markenfarben trägt im Vollton Kleintext auf AA – weder unter
-   Weiß noch unter Dunkel (Change.org 4,24, WeAct 4,35, 350.org 4,31, jeweils
-   im besseren der beiden Fälle). Auf der Kachel steht deshalb ausschließlich
-   Großtext im Sinne der WCAG (ab 18,66 px fett gilt 3:1), und damit liegt
-   der schwächste Fall mit 4,24 klar darüber. Aus demselben Grund hier kein
-   opacity: das würde den gerechneten Abstand wieder auffressen. */
-[data-layout="magazin"] .acc-body--plats .plat__name{font-size:1.375rem;
-  font-weight:800;letter-spacing:-.03em;line-height:1.15}
-[data-layout="magazin"] .acc-body--plats .plat__meta{color:inherit;
-  font-size:1.25rem;font-weight:700;letter-spacing:-.02em;margin-top:0;
-  line-height:1.2}
-/* Bento-Kennzahl (3.8.26): Zahl als Blickfang, Einheit darunter — beendet
-   den Fransen-Umbruch („735 / Petitionen"), den die 116-px-Innenfläche
-   erzwang. BEIDE Stufen bleiben Großtext im Sinne der WCAG (≥18,66 px
-   fett), das 3:1-Kalkül der Kacheln bleibt unangetastet; deshalb ist die
-   Einheit nicht kleiner als 1.1875rem. Das „+neu"-Abzeichen rutscht durch
-   die Block-Einheit von selbst auf eine eigene Zeile. */
-[data-layout="magazin"] .acc-body--plats .plat__num{display:block;
-  font-size:1.75rem;line-height:1.05;letter-spacing:-.03em}
-[data-layout="magazin"] .acc-body--plats .plat__unit{display:block;
-  font-size:1.1875rem;line-height:1.15}
-/* Abstand und Schrift des Abzeichens knapp gehalten: mit der eigenen
-   Abzeichen-Zeile stand die vollste Kachel (OpenPetition) sonst bei nur
-   3–4 px über dem Logo. .75rem ist auf dem EIGENEN Abzeichen-Grund
-   zulässiger Kleintext (dort gemessen ≥8:1, nicht auf der Markenfarbe). */
-[data-layout="magazin"] .acc-body--plats .plat__new{margin:.125rem 0 0;
-  font-size:.75rem;line-height:1.1}
-/* In der kleinen Kachel bleibt Platz für Name und Zahl – der Untertitel
-   käme auf vier Zeilen. Nur die große Kachel zeigt ihn (siehe unten). */
-[data-layout="magazin"] .acc-body--plats .plat__tag{display:none}
-[data-layout="magazin"] .acc-body--plats .plat__new{font-size:.8125rem;
-  margin-left:.4375rem;vertical-align:.0625rem}
-/* Pfeil unten rechts, gefüllt statt Kontur: Fläche in der Schriftfarbe der
-   Kachel, Pfeil in der Markenfarbe. Beide Werte liegen als --on-brand und
-   --brand schon an der Kachel an — keine dritte Variable, kein Gegenpart in
-   theme.css nötig.
-   NUR auf den großen Kacheln. Auf der 164 px schmalen Kachel konkurriert er
-   direkt mit dem Logo um dieselbe Zeile: mit Pfeil bleiben der Wortmarke
-   94 px Breite, und weil mask-size:contain proportional verkleinert, wäre
-   foodwatch damit 18 px hoch — NIEDRIGER als die 24 px vor der
-   Vergrößerung. Ohne Pfeil sind es 128 px Breite und 24 px Höhe. Die kleine
-   Kachel ist als Ganzes der Schalter; der Pfeil erklärt daran nichts. */
+  order:-1;position:static;--logo-h:2.5rem;max-width:75%;
+  margin:0 0 .375rem;background-color:var(--brand,var(--ink))}
+[data-layout="magazin"] .acc-body--plats .plat .plogo--svg{
+  background-color:transparent}
+[data-layout="magazin"] .acc-body--plats .plat--xl .plogo{--logo-h:3.25rem}
+[data-layout="magazin"] .acc-body--plats .plat__body{
+  display:flex;flex-direction:column;gap:.25rem;align-items:flex-start}
+[data-layout="magazin"] .acc-body--plats .plat__name{
+  font-size:1rem;font-weight:750;letter-spacing:-.01em;line-height:1.25;
+  color:var(--ink)}
+[data-layout="magazin"] .acc-body--plats .plat--xl .plat__name{
+  font-size:1.375rem}
+[data-layout="magazin"] .acc-body--plats .plat__meta{
+  font-size:.8125rem;color:var(--muted);line-height:1.35}
+[data-layout="magazin"] .acc-body--plats .plat__num{font-weight:750;
+  color:var(--ink)}
+/* „+N neu" als Abzeichen auf eigener Tönung — Zeile für sich, damit es
+   auf der halben Kachelbreite nie mit der Zahl kollidiert. */
+[data-layout="magazin"] .acc-body--plats .plat__new{
+  display:inline-block;margin:.25rem 0 0;padding:.1875rem .625rem;
+  border-radius:999px;background:var(--mz-soft);color:var(--mz-ink-on-soft);
+  font-size:.75rem;font-weight:750;line-height:1.4}
+[data-layout="magazin"] .acc-body--plats .plat__tag{
+  display:none;color:var(--muted);font-size:.875rem;line-height:1.45;
+  max-width:38ch}
+[data-layout="magazin"] .acc-body--plats .plat--xl .plat__tag{display:block}
+/* Pfeil nur auf den Aufmacher-Karten: Koralle-Kreis oben rechts (das Logo
+   bleibt links, der Name hat max-width — die Ecke ist frei). */
 [data-layout="magazin"] .acc-body--plats .plat__chev{display:none}
 [data-layout="magazin"] .acc-body--plats .plat--xl .plat__chev,
 [data-layout="magazin"] .acc-body--plats .plat--wide .plat__chev{
-  display:flex;position:absolute;bottom:var(--pad);right:var(--pad);
-  top:auto;left:auto;width:2.5rem;height:2.5rem;border:0;
-  background-color:var(--on-brand);background-image:none;
-  color:var(--brand);font-size:.875rem}
-/* „+neu" in der Kachelecke — NUR auf den großen Kacheln. Auf der 116 px
-   schmalen Innenfläche der kleinen gibt es keinen kollisionsfreien
-   Eckplatz (oben läuft der Name bis zweizeilig voll, unten das Logo bis
-   zur vollen Breite); dort bleibt das Abzeichen als eigene Zeile im
-   Fluss (siehe Kennzahl-Kommentar). Der padding-Schutz am Namen hält die
-   Ecke auch für künftige lange Wide-Namen frei („Europäisches Parlament"
-   bräche sonst ins Abzeichen). */
-[data-layout="magazin"] .acc-body--plats .plat--xl .plat__new,
-[data-layout="magazin"] .acc-body--plats .plat--wide .plat__new{
-  position:absolute;top:var(--pad);right:var(--pad);margin:0}
+  display:flex;position:absolute;top:1.125rem;right:1.125rem;left:auto;
+  bottom:auto;width:2.5rem;height:2.5rem;align-items:center;
+  justify-content:center;border:0;border-radius:999px;
+  background-color:var(--mz-accent-deep);background-image:none;color:var(--mz-on-accent);
+  font-size:.875rem}
 [data-layout="magazin"] .acc-body--plats .plat--xl .plat__name,
-[data-layout="magazin"] .acc-body--plats .plat--wide .plat__name{
-  padding-right:4.5rem}
-/* Hier stand die Regel für .plat--xl/.--wide .plogo ein ZWEITES Mal, wörtlich
-   wie weiter oben. Beim Vereinheitlichen des Innenabstands hätte die späte
-   Kopie die neue Variante wieder überschrieben — entfernt. */
+[data-layout="magazin"] .acc-body--plats .plat--wide .plat__name,
+[data-layout="magazin"] .acc-body--plats .plat--xl .plogo,
+[data-layout="magazin"] .acc-body--plats .plat--wide .plogo{
+  max-width:calc(100% - 3.5rem)}
 
-/* Die beiden großen Kacheln. Welche das sind, entscheidet app.js nach der
-   Zahl der Petitionen (größte → --xl, zweitgrößte → --wide); die Klassen
-   sind in den anderen Layouts wirkungslos. */
-[data-layout="magazin"] .acc-body--plats .plat--xl{
-  grid-column:span 2;grid-row:span 2}   /* Innenabstand kommt aus --pad */
-[data-layout="magazin"] .acc-body--plats .plat--xl .plat__name{font-size:2rem}
-/* Auf der 2×2-Kachel füllt die groß gesetzte Kennzahl die gemessene Leere
-   (189 px zwischen Untertitel und Logo). Ein größeres Logo könnte das
-   nicht: die Bundestagsmarke (Verhältnis 6,17) steht mit ihrer Breite
-   längst am max-width-Anschlag, mehr Bezugshöhe verpufft dort. */
-[data-layout="magazin"] .acc-body--plats .plat--xl .plat__num{
-  font-size:3.25rem;line-height:1;letter-spacing:-.04em}
-[data-layout="magazin"] .acc-body--plats .plat--xl .plat__meta{font-size:1.5rem}
-/* Der Untertitel klebte unter der Kennzahl, darunter ~190 px Leere bis zum
-   Logo (im Screenshot 7.8.26 sichtbar). Bento-üblich wird verteilt statt
-   gestapelt: der Körper füllt die Kachel, margin-top:auto schiebt den
-   Untertitel nach unten. margin-bottom 3.5rem hält ihn über dem absolut
-   sitzenden Logo (bottom 24 + Höhe ~41 + 16 Luft). */
-[data-layout="magazin"] .acc-body--plats .plat--xl .plat__body{
-  display:flex;flex-direction:column;flex:1 1 auto}
-[data-layout="magazin"] .acc-body--plats .plat--xl .plat__tag{display:block;
-  color:inherit;font-size:1.25rem;font-weight:700;line-height:1.35;
-  margin-top:auto;margin-bottom:3.5rem;max-width:24ch}
-/* KEINE eigene Pfeil-Position mehr für --xl: eine frühere Fassung hob den
-   Pfeil auf top:1.5rem — genau in die Ecke, die das „+neu"-Abzeichen bekam
-   (im ersten gelungenen Screenshot 7.8.26 lagen beide 40 px überlappend
-   aufeinander; auf --wide fiel es nie auf, weil der Pfeil dort unten
-   blieb). Unten rechts ist der Platz konstruktionsbedingt frei: .plogo
-   trägt max-width:calc(100% - 96px), Rand (24) + Pfeil (40) brauchen 64. */
-[data-layout="magazin"] .acc-body--plats .plat--wide{grid-column:span 2}
-[data-layout="magazin"] .acc-body--plats .plat--wide .plat__name{
-  font-size:1.625rem}
+/* Gruppenkopf: Überschrift wie die Abschnittsköpfe der Vorlage.
+   (Seit dem akkordeonfreien Raster unten nur noch Rückfallebene, falls
+   eine Ansicht die Gruppen doch nutzt — die Hauptseite tut es im
+   Magazin nicht mehr.) */
+[data-layout="magazin"] .langgroup>.acc-head{font-size:1.125rem;
+  font-weight:800;letter-spacing:-.015em;padding:1.25rem .25rem .875rem}
 
-/* ---- Petition als Bildkarte ---- */
+/* ---- EIN Bento-Raster ohne Akkordeons (7.8.26, Nutzerwunsch) ----
+   .mz-platgrid trägt zusätzlich .acc-body--plats, damit alle
+   Kachelregeln oben greifen; nur das display braucht es hier selbst
+   (das Gitter der Gruppen hängt an .accordion.open>). Favoriten laufen
+   über beide Spalten (plat--wide kommt aus app.js) und tragen Stern +
+   Pfeil; normale Kacheln tragen statt Pfeil die Kreisflagge ihrer
+   Sprache. */
+[data-layout="magazin"] .mz-platgrid{display:grid;margin-bottom:.5rem}
+[data-layout="magazin"] .mz-platgrid .plat__favstar{position:absolute;
+  top:1.125rem;right:4.25rem;width:2.5rem;height:2.5rem;display:flex;
+  align-items:center;justify-content:center;border-radius:999px;
+  background:var(--mz-soft);color:var(--mz-ink-on-soft);
+  font-size:.875rem}
+[data-layout="magazin"] .mz-platgrid .plat__flag{position:absolute;
+  top:1.125rem;right:1.125rem;width:2.25rem;height:2.25rem;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:999px;background:var(--mz-soft);font-size:1.0625rem;
+  line-height:1}
+/* Stern + Pfeil brauchen zusammen 2×2.5rem + Fugen Platz nach rechts. */
+[data-layout="magazin"] .mz-platgrid .plat--fav .plat__name,
+[data-layout="magazin"] .mz-platgrid .plat--fav .plogo{
+  max-width:calc(100% - 6.75rem)}
+[data-layout="magazin"] .mz-platgrid .plat:not(.plat--fav) .plat__name{
+  max-width:calc(100% - 2.75rem)}
+/* Favoriten dürfen zeigen, was sie sind: Untertitel an + Logo größer. */
+[data-layout="magazin"] .mz-platgrid .plat--fav .plat__tag{display:block}
+[data-layout="magazin"] .mz-platgrid .plat--fav .plogo{--logo-h:3rem}
+
+/* ---- Petition als Bild-Karte (Vorlage „Latest News"/Artikel) ---- */
 [data-layout="magazin"] .pet-wrap,
 [data-layout="magazin"] .pet-bg,
 [data-layout="magazin"] .pet{border-radius:var(--radius)}
-[data-layout="magazin"] .pet-wrap{margin-bottom:1.5rem} /* Kartenfuge, s. u. */
-[data-layout="magazin"] .pet{border:0;
-  box-shadow:0 .75rem 1.75rem rgba(40,30,15,.10)}
-[data-layout="magazin"] .pet__head{flex-wrap:wrap;gap:0;padding:0 0 1.125rem;
+[data-layout="magazin"] .pet-wrap{margin-bottom:1.25rem}
+[data-layout="magazin"] .pet{border:0;background:var(--mz-card);
+  box-shadow:var(--mz-shadow)}
+[data-layout="magazin"] .pet__head{flex-wrap:wrap;gap:0;padding:0 0 1rem;
   align-items:center}
+/* Vorschaubild im selben 16:9 wie die Slider-Folien (gemessener
+   Bestands-Median, s. o.); Bildausschnitt IMMER oben verankert, damit
+   Überschriften auf den Motiven nicht abgeschnitten werden. Beim
+   Aufklappen wird der Rahmen höher (4:3) — es kommt also unten mehr
+   vom selben Bild dazu, nichts springt (Nutzerwunsch 7.8.26). */
 [data-layout="magazin"] .pet__thumb{order:-1;flex:0 0 100%;width:100%;
-  height:11rem;border-radius:0;margin-bottom:1rem}
-/* Hier ist das Bild schon im Ruhezustand der Aufmacher – beim Aufklappen
-   wächst es weiter, statt (wie in „klassisch") überhaupt erst nach oben zu
-   springen. */
-[data-layout="magazin"] .pet.open .pet__thumb{height:15rem}
-[data-layout="magazin"] .pet.open .pet__head{padding:0 0 1.125rem}
-[data-layout="magazin"] .pet.open .pet__main{padding-left:1.5rem}
-[data-layout="magazin"] .pet__thumb--ph .plogo{width:3.5rem;height:3.5rem}
-[data-layout="magazin"] .pet__main{padding-left:1.5rem}
-[data-layout="magazin"] .pet__title{font-size:1.125rem;font-weight:750;
-  line-height:1.3;letter-spacing:-.015em}
-[data-layout="magazin"] .pet__toggle{padding-left:.5rem}
-[data-layout="magazin"] .pet__ext{margin:0 .625rem 0 .25rem}
-[data-layout="magazin"] .pet__head>.pet__toggle:last-child{margin-right:1rem}
-[data-layout="magazin"] .pet__body{padding:0 1.5rem 1.5rem}
-
-/* ---- Kategorie als Milchglas-Etikett auf dem Bild ----
-   .pet ist position:relative und overflow:hidden (style.css), der Balken ist
-   das erste Kind – er lässt sich deshalb ohne Markup-Änderung über den
-   Aufmacher legen.
-
-   --glass ist ABSICHTLICH in beiden Designs dieselbe helle Fläche und wird
-   nicht mit umgeschaltet: das Etikett liegt nicht auf einer App-Fläche,
-   sondern auf einem fremden Foto beliebiger Helligkeit. Weiß mit 80 % Deckung
-   ergibt auch über einem tiefschwarzen Bild noch rund 8,9:1 zu dunklem Text –
-   eine dunkle Glasfläche hätte über hellen Fotos keine vergleichbare Garantie.
-   Deshalb steht hier ausnahmsweise ein fester Farbwert. */
+  height:10rem;border-radius:0;margin-bottom:1rem;
+  object-position:top center}
+[data-layout="magazin"] .pet.open .pet__thumb{height:13.5rem;
+  object-position:top center}
+@supports (aspect-ratio:16/9){
+  [data-layout="magazin"] .pet__thumb{height:auto;aspect-ratio:16/9}
+  [data-layout="magazin"] .pet.open .pet__thumb{height:auto;
+    aspect-ratio:4/3}
+}
+/* Beim Aufklappen wächst der Aufmacher weiter, statt zu springen. */
+[data-layout="magazin"] .pet.open .pet__thumb{height:14rem}
+[data-layout="magazin"] .pet.open .pet__head{padding:0 0 1rem}
+[data-layout="magazin"] .pet__thumb--ph .plogo{width:3rem;height:3rem}
+[data-layout="magazin"] .pet__main{padding-left:1.125rem}
+[data-layout="magazin"] .pet.open .pet__main{padding-left:1.125rem}
+[data-layout="magazin"] .pet__title{font-size:1.0625rem;font-weight:750;
+  line-height:1.35;letter-spacing:-.01em}
+[data-layout="magazin"] .pet__body{padding:0 1.125rem 1.125rem}
+/* Kategorie: kein Glas mehr auf dem Bild, sondern das Chip-Muster der
+   Vorlage IN der Karte — helle Tönung, Koralle-Text, über dem Titel. */
+/* Der Chip klebte mit 2 px an der Kartenoberkante (gemessen 7.8.26,
+   Nutzerbefund) — er sitzt jetzt auf derselben Fluchtlinie wie Titel
+   und Text (18 px) und hat oben wie unten Luft. */
 [data-layout="magazin"] .pet__catbar,
-[data-layout="magazin"] .pet__catbar:active{position:absolute;z-index:2;
-  top:.875rem;left:.875rem;width:auto;border:0;border-radius:999px;
-  padding:.4375rem .8125rem;font-size:.6875rem;
-  background:rgba(255,255,255,.80);color:#191714;filter:none;
-  -webkit-backdrop-filter:blur(.75rem) saturate(1.6);
-  backdrop-filter:blur(.75rem) saturate(1.6);
-  box-shadow:0 .125rem .5rem rgba(0,0,0,.14)}
-
-/* ---- Gruppenüberschrift größer, Akkordions weicher ---- */
-[data-layout="magazin"] .langgroup>.acc-head{font-size:1.25rem;font-weight:800;
-  letter-spacing:-.02em;padding:1.5rem .25rem 1rem}
-[data-layout="magazin"] .accordion:not(.langgroup){border-radius:var(--radius)}
-
-/* ---- Fußleiste als schwebendes Milchglas ----
-   Text- und Symbolfarben bleiben die Theme-Variablen, die Fläche wechselt
-   über --glass-bar mit (drei Stellen, siehe Kopf). */
-[data-layout="magazin"] .tabbar{left:.875rem;right:.875rem;
-  bottom:calc(.75rem + env(safe-area-inset-bottom));height:4rem;
-  padding-bottom:0;border:0;border-radius:1.5rem;background:var(--glass-bar);
-  -webkit-backdrop-filter:blur(1.25rem) saturate(1.6);
-  backdrop-filter:blur(1.25rem) saturate(1.6);
-  box-shadow:0 .5rem 1.75rem rgba(40,30,15,.16)}
-
-/* ---- Abstands-/Tipp-Feinschliff (3.8.26, gemessene Inventur) ----
-   1. Abschnittsgrenzen gleichrhythmisch: Liste→Unterstützung misst 28 px,
-      Unterstützung→Rechtliches klebte bei 12 — beide Grenzen gleich.
-   2. Sortier-Chips (30 px), Schlagwort-Knöpfe (30) und der Zurück-Knopf
-      (35) lagen unter der App-eigenen Systemhöhe der Segment-Knöpfe
-      (40 px) und unter jeder Tipp-Empfehlung; min-height hebt nur die
-      Trefffläche, Schrift und Pillenform bleiben. Einstellungen/Profil
-      sind layoutneutral und bleiben unangetastet (Relief-Verbot). */
-[data-layout="magazin"] .support--legal{margin-top:2rem}
-[data-layout="magazin"] .chip,
-[data-layout="magazin"] .tag,
-[data-layout="magazin"] .backbtn{min-height:2.5rem}
-/* Aufklapper als gleichwertige Tippfläche neben dem Fremdlink-Kasten.
-   In der Basis ist .pet__toggle nur ein nacktes 23×15-px-Zeichen, das 4 px
-   neben dem gefüllten 36-px-Kasten hing (Nutzerbefund 3.8.26 per
-   Bildschirmfoto; die Mitten stimmten, Gestalt und Abstand nicht — das
-   Relief hat seit v27 eine eigene Buchsen-Regel, das Magazin ging leer
-   aus). Neutral gefüllt als Zweitrang neben der Akzent-Primäraktion, in
-   der Kastensprache des Magazins. */
+[data-layout="magazin"] .pet__catbar:active{position:static;order:0;
+  display:inline-block;width:auto;align-self:flex-start;
+  margin:1rem 0 .75rem 1.125rem;padding:.3125rem .75rem;border:0;
+  border-radius:999px;background:var(--mz-soft);
+  color:var(--mz-ink-on-soft);font-size:.6875rem;font-weight:750;
+  filter:none;box-shadow:none;-webkit-backdrop-filter:none;
+  backdrop-filter:none}
+/* Aufklapper und Fremdlink als gleichwertige runde Tasten (Kastenpaar-
+   Lehre vom 3.8.26 bleibt: beide gefüllt, beide 36 px). */
 [data-layout="magazin"] .pet__toggle{width:2.25rem;height:2.25rem;
-  display:flex;align-items:center;justify-content:center;
-  border-radius:.625rem;background:var(--line);color:var(--ink);
+  display:flex;align-items:center;justify-content:center;padding-left:.5rem;
+  border-radius:999px;background:var(--mz-soft);color:var(--mz-ink-on-soft);
   font-size:.8125rem;margin-right:.75rem}
-/* Ohne Fremdlink ist der Aufklapper das letzte Kind — der Trennabstand
-   entfällt. Und das padding-left, das den NACKTEN Chevron beim Aufklappen
-   ausglich (style.css), schöbe das Zeichen im Kasten aus der Mitte. */
-[data-layout="magazin"] .pet__head>.pet__toggle:last-child{margin-right:0}
+[data-layout="magazin"] .pet__ext{margin:0 .625rem 0 .25rem;
+  border-radius:999px}
+[data-layout="magazin"] .pet__head>.pet__toggle:last-child{margin-right:1rem}
 [data-layout="magazin"] .pet.open .pet__toggle{padding-left:0}
 
-/* ---- Abstandsraster (7.8.26, nach Best-Practice-Recherche; vom Nutzer
-   nachjustiert: „lieber größer als zu klein, nicht zu groß") ----
-   Den SEITENFLUSS trägt seit 6.8.26 der layoutneutrale Block
-   „Grundrhythmus" in style.css (andere Sitzung, gleicher Nutzerwunsch):
-   24 px zwischen den Blöcken einer Seite, 32 im Profil, Einstellungen
-   bewusst eng. Eine erste Magazin-Fassung dieses Blocks hatte eigene
-   16er darunter — die kollabierten unter den 24ern zu totem Gewicht,
-   und die Profil-/Einstellungs-Werte hätten die dort GEMESSENEN
-   Entscheidungen der Basis unterboten; deshalb weggelassen, nicht neu
-   erfinden. Hier steht nur noch, was die Basis nicht abdeckt:
-     16 px  Zählzeile→Liste (Bildunterschrift-Logik: die Zeile gehört
-            zur Liste darunter, enger als der 24er-Fluss)
-     24 px  Kartenfuge (.pet-wrap oben) und Mosaik-Fuge 16, --pad 24
-     32 px  Unterstützung/Rechtliches (Abschnittsgrenze, deckungsgleich
-            mit den 32ern der Einstellungs-Sektionen)
-   .content>-Scope, weil dieselben Klassen auch verschachtelt vorkommen
-   (.pet__desc .count-note steht auf margin:0 und darf keinen
-   Fußabstand erben). */
-[data-layout="magazin"] .content>.count-note{margin-bottom:1rem}
-[data-layout="magazin"] .content>.support{margin-top:2rem}
+/* ---- Aufmacher-Slider (Vorlage: Hero-Karussell — Bild groß, weiße
+   Karte aufgelegt, Punkte darunter; Markup nur im Magazin, app.js →
+   mzHero). Kein gap zwischen den Folien: die Punktrechnung im Skript
+   teilt scrollLeft durch die Folienbreite, eine Fuge machte sie schief. */
+[data-layout="magazin"] .mz-herobox--ph{min-height:16.5rem}
+/* Weggeblendet, solange gefiltert wird (app.js → draw). Nur verborgen,
+   nicht abgebaut: beim Lösen des Filters ist er sofort wieder da. */
+[data-layout="magazin"] .mz-herobox--aus{display:none}
+[data-layout="magazin"] .mz-hero{margin:.25rem 0 1.5rem}
+[data-layout="magazin"] .mz-hero__scroll{display:flex;overflow-x:auto;
+  scroll-snap-type:x mandatory;border-radius:var(--radius);
+  scrollbar-width:none;-webkit-overflow-scrolling:touch}
+[data-layout="magazin"] .mz-hero__scroll::-webkit-scrollbar{display:none}
+/* Folienformat GEMESSEN, nicht geschätzt (7.8.26, Nutzerwunsch „bilder
+   möglichst komplett, Mittelwert, zu große unten abschneiden"): 72
+   Vorschaubilder aus neun Plattformen im Browser vermessen —
+   Seitenverhältnisse 1,00 bis 2,43, Median 1,78. Das ist exakt 16:9,
+   also bekommt der Rahmen genau dieses Verhältnis: die Hälfte der
+   Bilder passt praktisch verlustfrei, höhere werden nur unten
+   beschnitten (object-position:top), breitere seitlich minimal.
+   aspect-ratio erst ab Chrome 88 — die feste Höhe davor ist die
+   Rückfallebene für alte Android-WebViews (minSdk 24). */
+[data-layout="magazin"] .mz-hero__slide{position:relative;flex:0 0 100%;
+  scroll-snap-align:center;border:0;padding:0;background:none;
+  cursor:pointer;display:flex;flex-direction:column;text-align:left}
+/* Bild trägt das gemessene 16:9, nicht mehr die ganze Folie: die
+   Textbox steht seit 7.8.26 UNTER dem Bild (Nutzerwunsch „bau die
+   textbox unter das bild aber direkt daran"). */
+[data-layout="magazin"] .mz-hero__img{width:100%;height:12.75rem;
+  object-fit:cover;object-position:top center;display:block;
+  border-radius:var(--radius)}
+@supports (aspect-ratio:16/9){
+  [data-layout="magazin"] .mz-hero__img{height:auto;aspect-ratio:16/9}
+}
+/* „direkt daran, ganz leichte Überlagerung entsprechend dem Radius":
+   die Box zieht sich um genau ihren eigenen Eckradius nach oben und
+   deckt damit die untere Rundung des Bildes ab — mehr Überlappung
+   gibt es nicht, das Bild bleibt vollständig sichtbar. */
+[data-layout="magazin"] .mz-hero__card{display:block;text-align:left;
+  position:relative;z-index:1;margin:-1rem .75rem 0;
+  background:var(--mz-card);border-radius:1rem;padding:.875rem 1rem;
+  box-shadow:0 .375rem 1rem rgba(60,35,30,.10)}
+[data-layout="magazin"] .mz-hero__chip{display:inline-block;
+  background:var(--mz-soft);color:var(--mz-ink-on-soft);
+  border-radius:999px;padding:.125rem .5625rem;font-size:.6875rem;
+  font-weight:750;margin-bottom:.375rem}
+[data-layout="magazin"] .mz-hero__t{display:-webkit-box;
+  -webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  color:var(--ink);font-weight:750;font-size:.9375rem;line-height:1.35}
+[data-layout="magazin"] .mz-hero__m{display:block;margin-top:.25rem;
+  color:var(--muted);font-size:.75rem}
+[data-layout="magazin"] .mz-hero__dots{display:flex;gap:.375rem;
+  justify-content:center;margin-top:.625rem}
+/* Die Punkte sind seit 7.8.26 <button> (anklickbar, Desktop-Weg) —
+   Knopf-Voreinstellungen zurücksetzen; das Ziel bleibt über padding
+   größer als der sichtbare Punkt. */
+[data-layout="magazin"] .mz-hero__dot{width:.375rem;height:.375rem;
+  border-radius:999px;background:var(--line);transition:width .15s ease;
+  border:0;padding:0;cursor:pointer;box-sizing:content-box;
+  border-block:.375rem solid transparent;background-clip:padding-box}
+[data-layout="magazin"] .mz-hero__scroll{cursor:grab}
+[data-layout="magazin"] .mz-hero__scroll:active{cursor:grabbing}
+[data-layout="magazin"] .mz-hero__dot.on{background:var(--mz-accent-deep);
+  width:1rem}
+[data-layout="magazin"] .mz-sechead{font-size:1.125rem;font-weight:800;
+  letter-spacing:-.015em;color:var(--ink);margin:0 .125rem 1rem}
+/* Chips einzeilig wischbar (Vorlage: Kategorienleiste der Startseite) */
+[data-layout="magazin"] .chiprow{flex-wrap:nowrap;overflow-x:auto;
+  scrollbar-width:none;padding-bottom:.25rem}
+[data-layout="magazin"] .chiprow::-webkit-scrollbar{display:none}
+[data-layout="magazin"] .chiprow .chip{white-space:nowrap;flex:0 0 auto}
 
-/* ================= Magazin 2.0 — Einstellungen, Profil, Einzelansicht
-   (7.8.26) =================
-   Nutzerauftrag: „verändere grundlegend alles in der magazin darstellung
-   inkl. einstellungsseite und profilseite, einzelansichten". Der messbare
-   Kern der Kritik „sieht aus wie vorher": Einstellungen und Profil waren
-   LAYOUTNEUTRAL — beim Umschalten änderten sich nur die Listen, diese
-   Seiten blieben pixelgleich Relief. Richtung aus der Trend-Recherche
-   (Muzli-2026-Patterns, Toptal Settings-UX, Karten-Best-Practices):
-   1. Editoriale Typographie — große, eng gesetzte Überschriften statt
-      Versal-Etiketten; Hierarchie über Größe, nicht über GROSSBUCHSTABEN.
-   2. Karten in der Magazin-Sprache — randlos mit weichem Schatten und
-      großem Radius (wie .pet), NICHT die 1-px-Rahmenkästen der Basis.
-   3. Dunkelmodus als eigene Fläche — Tiefe über Hairline + Flächenstufe
-      statt Schatten (Schatten säuft auf dunklem Grund ab).
-   Glas bleibt chirurgisch (nur die schwebende Tabbar), Bedienbares bleibt
-   unten. Alles magazin-only; Relief-Verbot gilt. */
+/* ---- Element-Inventur der Einzelansicht (7.8.26, Nutzerauftrag „gehe
+   jedes element durch und überlege, was daran alt ist") ---- */
+/* 1. Info-Feld „Über diese Plattform": Die Basis malt eine 6-px-Marken-
+   schiene als inset-Schatten an die linke Kante — unter der großen
+   Magazin-Rundung lugte sie als SICHEL hervor (Nutzerbefund). Dazu
+   Markenfläche + Schleier: alles alte Welt. Jetzt weiße Karte wie alle
+   anderen. */
+[data-layout="magazin"] .pabout{background-color:var(--mz-card);
+  background-image:none;border:0;box-shadow:var(--mz-shadow)}
+/* 2. Versalien-Etiketten (KURZBESCHREIBUNG, GESTARTET VON, SCHLAG-
+   WÖRTER): gesperrte Großbuchstaben sind die alte Typo-Welt — die
+   Vorlagen setzen kleine fette Zwischentitel in normaler Schreibung. */
+[data-layout="magazin"] .pet__body h4{text-transform:none;
+  letter-spacing:-.01em;font-size:.8125rem;font-weight:800;
+  color:var(--ink);margin:1.125rem 0 .25rem}
+[data-layout="magazin"] .pet__tags-lbl{text-transform:none;
+  letter-spacing:-.01em;font-weight:800;color:var(--ink)}
+/* 3. Doppelter Plattformname im Kopf (Logo links, Name rechts) war die
+   alte Plakat-Zeile; das Logo allein trägt die Marke — alle elf sind
+   Wortmarken. syncPageTitle stört das nicht: es prüft den DOM-Text,
+   nicht die Sichtbarkeit. */
+[data-layout="magazin"] .phead__name{display:none}
+[data-layout="magazin"] .phead{margin-bottom:.25rem}
+/* 4. „Petition öffnen" als Pille, wie jede gefüllte Fläche im Magazin. */
+[data-layout="magazin"] .pet__extlink{border-radius:999px}
+/* 5. Wisch-Rückmeldung „Unterschrieben": das Basis-Grün (--online) war
+   die letzte fremde Farbfläche — im Ein-Akzent-Magazin füllt die
+   Palette. */
+[data-layout="magazin"] .pet-wrap.swipe-right .pet-bg{
+  background:var(--mz-accent-deep);color:var(--mz-on-accent)}
+/* 6. Beschreibungs-Aufklapper und Wisch-Unterlage auf Kartenrundung. */
+[data-layout="magazin"] .pet-bg{border-radius:var(--radius)}
 
-/* -- 1. Editoriale Überschriften -- */
-[data-layout="magazin"] .welcome__t{font-size:2.25rem;font-weight:850;
-  letter-spacing:-.035em;line-height:1.05}
-[data-layout="magazin"] .welcome__s{font-size:1rem;line-height:1.5}
-/* Abschnitts-Etikett wird Abschnitts-ÜBERSCHRIFT: aus 12-px-Versalien
-   werden echte Zwischentitel mit Haarlinie davor — der Leserhythmus einer
-   Zeitschrift, zugleich die geforderte klare Gruppierung (Settings-UX:
-   wenige, deutlich getrennte Kategorien). */
-[data-layout="magazin"] .content>.sect{font-size:1.375rem;font-weight:800;
-  letter-spacing:-.02em;text-transform:none;color:var(--ink);
-  border-top:.0625rem solid var(--line);padding-top:1.25rem}
-[data-layout="magazin"] .signed__head h2{font-size:1.75rem;font-weight:850;
-  letter-spacing:-.03em;line-height:1.1}
-[data-layout="magazin"] .io__lbl{font-size:1.125rem;font-weight:800;
-  letter-spacing:-.015em}
+/* ---- Einzelansicht: Kopf, Info-Feld, Zurück-Pille ---- */
+[data-layout="magazin"] .backbtn{background:var(--mz-card);border:0;
+  border-radius:999px;padding:.5rem 1rem;min-height:2.5rem;
+  box-shadow:var(--mz-shadow)}
+/* Der 4.75rem-Logo-Kopf war das alte Plakat-Layout — in den Vorlagen ist
+   der Seitenkopf klein und ruhig, die Karten tragen die Seite. */
+[data-layout="magazin"] .phead .plogo{--logo-h:3rem}
+[data-layout="magazin"] .searchrow__btn{background:var(--mz-accent-deep);
+  color:var(--mz-on-accent);border-radius:999px}
+[data-layout="magazin"] .pabout{border-radius:var(--radius)}
+[data-layout="magazin"] .accordion:not(.langgroup){border:0;
+  border-radius:var(--radius);background:var(--mz-card);
+  box-shadow:var(--mz-shadow)}
 
-/* -- 2. Karten in der Magazin-Sprache (hell: randlos + Schatten) -- */
+/* ---- Einstellungen: Zeilen mit Icon-Kachel links (Vorlage „Account
+   Settings"), Schalter/Segmente in Koralle ---- */
 [data-layout="magazin"] .seg,
 [data-layout="magazin"] .srow,
 [data-layout="magazin"] .io,
 [data-layout="magazin"] .signed-list,
-[data-layout="magazin"] .accordion:not(.langgroup){border:0;
-  border-radius:var(--radius);
-  box-shadow:0 .375rem 1rem rgba(40,30,15,.08)}
-[data-layout="magazin"] .srow{padding:1.125rem 1.25rem}
-[data-layout="magazin"] .signed-list{background:var(--surface);
-  padding:.25rem 1.25rem}
-/* Gefahrenzone: Rot bleibt als Rahmen — die WARNUNG ist hier die
-   Gestalt, nicht die Karte. Nur der Radius zieht mit. */
+[data-layout="magazin"] .nbox .srow{border:0;border-radius:var(--radius);
+  background:var(--mz-card);box-shadow:var(--mz-shadow)}
+[data-layout="magazin"] .srow{padding:1rem 1.125rem}
+[data-layout="magazin"] .signed-list{padding:.25rem 1.125rem}
+[data-layout="magazin"] .seg{border-radius:999px;padding:.25rem}
+[data-layout="magazin"] .seg__b{border-radius:999px}
+[data-layout="magazin"] .seg__b.on{background:var(--mz-accent-deep);
+  color:var(--mz-on-accent)}
+[data-layout="magazin"] .srow__ic{width:2.5rem;height:2.5rem;flex:none;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:.875rem;background:var(--mz-soft);
+  color:var(--mz-ink-on-soft)}
+
+/* ---- Farbige Markenklammer raus (7.8.26, Nutzerbefund) ----
+   style.css malt an jeder Marken-Zeile eine 6–7-px-Schiene als
+   inset-Schatten plus getönte Markenfläche (.opt in den Einstellungen,
+   .signed-item im Profil, .wplat.on im Assistenten, .plat als Basis).
+   Im Magazin trägt die Marke allein das Logo — die Zeilen sind weiße
+   Karten wie alle anderen. box-shadow MUSS ganz überschrieben werden:
+   die drei Schatten stehen in EINER Eigenschaft, einzeln lässt sich
+   die Schiene nicht abziehen. */
+[data-layout="magazin"] .opt,
+[data-layout="magazin"] .signed .signed-item,
+[data-layout="magazin"] .wplat.on{
+  background-color:var(--mz-card);background-image:none;border:0;
+  box-shadow:var(--mz-shadow);padding-left:1.125rem}
+[data-layout="magazin"] .opt{border-radius:var(--radius);
+  margin-bottom:.75rem}
+/* Die Basis stellt dem dekorativen Logo eine Schutzzone von 11.25rem
+   (180 px) frei. Auf einem 402-px-Gerät bleiben dem Text davon 42 px —
+   „Deutsch · 26 Petitionen" brach dort in drei Zeilen (gemessen
+   7.8.26). Relief umgeht das seit v23 mit dem Logo ÜBER der
+   Beschriftung; im Magazin bekommt die Marke stattdessen einen
+   Mindestplatz: unter 27rem Zeilenbreite tritt sie zurück, Name,
+   Sprache und Anzahl stehen einzeilig. Ab 27rem ist Raum für beides. */
+[data-layout="magazin"] .opt .plogo{display:none}
+[data-layout="magazin"] .opt .opt__body{padding-right:0}
+@media (min-width:27rem){
+  [data-layout="magazin"] .opt .plogo{display:inline-block;
+    --logo-h:2.25rem;right:7.5rem}
+  [data-layout="magazin"] .opt .opt__body{padding-right:9rem}
+}
+[data-layout="magazin"] .wplat,
+[data-layout="magazin"] .wplat.on{border-radius:var(--radius)}
+html[data-theme="dark"][data-layout="magazin"] .opt,
+html[data-theme="dark"][data-layout="magazin"] .signed .signed-item,
+html[data-theme="dark"][data-layout="magazin"] .wplat.on{
+  border:.0625rem solid var(--line);box-shadow:none}
+@media (prefers-color-scheme:dark){
+  html[data-theme="auto"][data-layout="magazin"] .opt,
+  html[data-theme="auto"][data-layout="magazin"] .signed .signed-item,
+  html[data-theme="auto"][data-layout="magazin"] .wplat.on{
+    border:.0625rem solid var(--line);box-shadow:none}
+}
 [data-layout="magazin"] .danger{border-radius:var(--radius)}
-/* Der Favoriten-Tipp war nackter Fließtext zwischen Karten; als weiche
-   Akzentfläche (wie .support) gehört er sichtbar zur Karten-Familie. */
-[data-layout="magazin"] .favtip{background:var(--accent-soft);
-  border-radius:var(--radius);padding:1rem 1.25rem}
+/* Favoriten-Tipp: HELLE Tönung statt Vollton (7.8.26, Nutzerbefund
+   „heller machen, damit es besser lesbar ist"). Ein ganzer Absatz in
+   Weiß auf kräftiger Fläche liest sich schlechter als dunkel auf hell —
+   und die Vorlagen halten Hinweiskästen ebenfalls hell. Die Farbe bleibt
+   über Tönung und Symbol erkennbar, der Knopf trägt sie als Pille. */
+[data-layout="magazin"] .favtip{background:var(--mz-soft);
+  border-radius:var(--radius);padding:1.25rem;color:var(--ink);
+  gap:1rem}
+[data-layout="magazin"] .favtip>i{color:var(--mz-ink-on-soft)}
+[data-layout="magazin"] .favtip .hint-title{color:var(--mz-ink-on-soft);
+  font-size:1rem;margin-bottom:.5rem}
+[data-layout="magazin"] .favtip p{color:var(--ink);line-height:1.6}
+[data-layout="magazin"] .favtip .hint-dismiss{margin-top:1rem;
+  border-radius:999px;background:var(--mz-accent-deep);color:var(--mz-on-accent);
+  padding:.625rem 1.125rem}
+/* Derselbe Wisch-Hinweis auf der Plattformseite. */
+[data-layout="magazin"] .swipe-hint{background:var(--mz-soft);
+  border-radius:var(--radius);padding:1.25rem;color:var(--ink)}
+[data-layout="magazin"] .swipe-hint .hint-title{
+  color:var(--mz-ink-on-soft);font-size:1rem;margin-bottom:.5rem}
+[data-layout="magazin"] .swipe-hint .hint-dismiss{margin-top:1rem;
+  border-radius:999px;background:var(--mz-accent-deep);color:var(--mz-on-accent);
+  padding:.625rem 1.125rem}
 
-/* -- 3. Profil: Hero + Kennzahl in Bento-Größe -- */
-[data-layout="magazin"] .avatar{width:6.5rem;height:6.5rem;
-  font-size:2.75rem}
-[data-layout="magazin"] .profile-namein{font-size:1.625rem;
-  letter-spacing:-.02em}
-/* Dieselbe Kennzahl-Stimme wie die 2×2-Bento-Kachel (3.25rem, eng):
-   die Zahl IST die Aussage der Wirkungs-Karte. */
-[data-layout="magazin"] .impact{border-radius:var(--radius)}
-[data-layout="magazin"] .impact__n{font-size:3.25rem;line-height:1;
-  letter-spacing:-.04em}
+/* ---- Profil: Hero-Karte + Kennzahl (Vorlage „Publisher Profile") ---- */
+[data-layout="magazin"] .profile-head{background:var(--mz-card);
+  border-radius:var(--radius);box-shadow:var(--mz-shadow);
+  padding:1.5rem 1rem 1.25rem}
+[data-layout="magazin"] .avatar{width:5.5rem;height:5.5rem;
+  font-size:2.25rem}
+/* Wirkungs-Karte: weiß mit Koralle-Kennzahl statt Farbfläche — die Zahl
+   trägt, wie die Statistikzeile der Vorlage. */
+[data-layout="magazin"] .impact{background:var(--mz-card);color:var(--ink);
+  border-radius:var(--radius);box-shadow:var(--mz-shadow)}
+[data-layout="magazin"] .impact__n{color:var(--mz-accent-deep);
+  font-size:2.5rem;line-height:1.05;letter-spacing:-.03em}
+[data-layout="magazin"] .impact__q{background:var(--mz-soft);
+  color:var(--mz-ink-on-soft);border-radius:.875rem}
+[data-layout="magazin"] .io__lbl{font-weight:750}
+[data-layout="magazin"] .io__lbl i{color:var(--mz-accent-deep)}
 
-/* -- 4. Einzelansicht: Zurück-Weg und Info-Feld in Kartensprache -- */
-[data-layout="magazin"] .backbtn{background:var(--surface);border:0;
-  border-radius:999px;padding:.5rem 1rem;
-  box-shadow:0 .375rem 1rem rgba(40,30,15,.08)}
-[data-layout="magazin"] .pabout{border-radius:var(--radius)}
+/* ---- Unterstützung/Rechtliches in Kartensprache ---- */
+[data-layout="magazin"] .support{border-radius:var(--radius)}
 
-/* -- 5. Dunkelmodus: Hairline statt Schatten (zwei Zweige wie in
-   theme.css: fest „dark" + „auto" bei dunklem System) -- */
+/* ---- Fußleiste: weiße Schwebe-Karte, aktiver Tab als Koralle-Pille
+   mit Beschriftung, inaktive nur als Symbol (Vorlage „Bookmark") ---- */
+[data-layout="magazin"] .tabbar{left:.875rem;right:.875rem;
+  bottom:calc(.75rem + env(safe-area-inset-bottom));height:4rem;
+  padding:0 .625rem;border:0;border-radius:1.375rem;
+  background:var(--mz-card);
+  box-shadow:0 .5rem 1.5rem rgba(60,35,30,.14);
+  display:flex;align-items:center}
+[data-layout="magazin"] .tab{flex:1;flex-direction:row;gap:.4375rem;
+  align-items:center;justify-content:center;padding:.5rem 0}
+[data-layout="magazin"] .tab span{display:none}
+[data-layout="magazin"] .tab i{background:none;color:var(--muted)}
+[data-layout="magazin"] .tab.active{flex:1.6;background:var(--mz-accent-deep);
+  color:var(--mz-on-accent);border-radius:999px;padding:.5625rem .5rem}
+[data-layout="magazin"] .tab.active i{background:none;color:var(--mz-on-accent)}
+[data-layout="magazin"] .tab.active span{display:inline;color:var(--mz-on-accent);
+  font-size:.8125rem;font-weight:700}
+
+/* ---- Abstandsraster (aus Magazin 2.0 übernommen; Fluss trägt der
+   layoutneutrale „Grundrhythmus" in style.css) ---- */
+[data-layout="magazin"] .content>.count-note{margin-bottom:1rem}
+[data-layout="magazin"] .content>.support{margin-top:2rem}
+
+/* ---- Antippen: kurzes Einsinken (unverändert aus dem Vorgänger) ---- */
+@media (prefers-reduced-motion:no-preference){
+  [data-layout="magazin"] .plat,
+  [data-layout="magazin"] .pet{transition:transform .12s ease}
+  [data-layout="magazin"] .plat:active,
+  [data-layout="magazin"] .pet:active{transform:scale(.98)}
+}
+
+/* ---- Dunkelmodus: Tiefe über Hairline + Flächenstufe statt Schatten
+   (zwei Zweige wie in theme.css: fest „dark" + „auto") ---- */
+html[data-theme="dark"][data-layout="magazin"] .acc-body--plats .plat,
+html[data-theme="dark"][data-layout="magazin"] .pet,
 html[data-theme="dark"][data-layout="magazin"] .seg,
 html[data-theme="dark"][data-layout="magazin"] .srow,
 html[data-theme="dark"][data-layout="magazin"] .io,
 html[data-theme="dark"][data-layout="magazin"] .signed-list,
 html[data-theme="dark"][data-layout="magazin"] .accordion:not(.langgroup),
 html[data-theme="dark"][data-layout="magazin"] .backbtn,
-html[data-theme="dark"][data-layout="magazin"] .pet{
+html[data-theme="dark"][data-layout="magazin"] .profile-head,
+html[data-theme="dark"][data-layout="magazin"] .impact,
+html[data-theme="dark"][data-layout="magazin"] .mainsearch__in,
+html[data-theme="dark"][data-layout="magazin"] .search,
+html[data-theme="dark"][data-layout="magazin"] .tabbar{
   border:.0625rem solid var(--line);box-shadow:none}
 @media (prefers-color-scheme:dark){
+  html[data-theme="auto"][data-layout="magazin"] .acc-body--plats .plat,
+  html[data-theme="auto"][data-layout="magazin"] .pet,
   html[data-theme="auto"][data-layout="magazin"] .seg,
   html[data-theme="auto"][data-layout="magazin"] .srow,
   html[data-theme="auto"][data-layout="magazin"] .io,
   html[data-theme="auto"][data-layout="magazin"] .signed-list,
   html[data-theme="auto"][data-layout="magazin"] .accordion:not(.langgroup),
   html[data-theme="auto"][data-layout="magazin"] .backbtn,
-  html[data-theme="auto"][data-layout="magazin"] .pet{
+  html[data-theme="auto"][data-layout="magazin"] .profile-head,
+  html[data-theme="auto"][data-layout="magazin"] .impact,
+  html[data-theme="auto"][data-layout="magazin"] .mainsearch__in,
+  html[data-theme="auto"][data-layout="magazin"] .search,
+  html[data-theme="auto"][data-layout="magazin"] .tabbar{
     border:.0625rem solid var(--line);box-shadow:none}
 }

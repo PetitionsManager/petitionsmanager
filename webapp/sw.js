@@ -446,8 +446,324 @@
       8 px auseinander, INNEN waren es 6. Damit war die Gruppierung praktisch
       aufgehoben. Jetzt 20 außen gegen 10 innen (Regel: außen > innen),
       Zählzeile → Unterschriftenliste 8 → 14 px. Bewusst nur diese Stellen —
-      der Nutzer hat „lieber größer" gleich um „nicht zu groß" ergänzt. */
-var CACHE = "pm-cache-v32";
+      der Nutzer hat „lieber größer" gleich um „nicht zu groß" ergänzt.
+
+   --- v33 -------------------------------------------------------------------
+   34. (andere Sitzung) MAGAZIN 3.0 — komplettes Redesign nach sechs
+      Referenzbildern des Nutzers (News-App „Revent" + Art-Gallery-UI-Kit),
+      Auftrag: „komplettes redesign des magazin design auf basis der Bilder
+      … Relief Anordnung gleich lassen". Der gesamte Magazin-Block in
+      layouts.css (vorher „Bento & Glas", 463 Zeilen) ist ersetzt (318
+      Zeilen); Zeilen 1–1105 (Basis + Relief) sind bis auf den
+      Dateikopf-Kommentar byteidentisch, 330 Relief-Selektoren gezählt
+      unverändert. Kern des neuen Stils:
+      • Weiße Karten auf hellem Grund statt Vollton-Markenkacheln; die
+        Plattform-Logos stehen wieder in ECHTEN Markenfarben auf Weiß
+        (--logo-h-Bezugsmaß statt fester Maße, sonst kollabiert die
+        Maskenvariante auf 0 Breite — Größenrechnung liegt in style.css).
+      • EINE Akzentfarbe Koralle in zwei Stufen: #c9423a (deep, Weiß
+        darauf ≈4,9:1 → alle gefüllten Bedienflächen: aktive Chips/
+        Segmente/Tabs, Banner, Suchknopf) und #e15b52 nur als Schmuck
+        (Kennzahl, Icons). Helle Tönung --mz-soft für Abzeichen mit
+        Text #a03830 (≈5,6:1).
+      • Fußleiste: weiße Schwebe-Karte, aktiver Tab als Koralle-Pille MIT
+        Beschriftung, inaktive nur Symbol (Vorlage „Bookmark"-Leiste).
+      • Kategorie-Etikett: kein Milchglas auf dem Bild mehr, sondern
+        Chip IN der Karte über dem Titel (Vorlage Artikelkarte).
+      • Einstellungen: srow__ic als Koralle-Icon-Kachel links (Vorlage
+        „Account Settings"), Favoriten-Tipp als deep-Banner in Weiß.
+      • Profil: profile-head als Hero-Karte, Wirkungs-Kennzahl koralle
+        auf Weiß statt weiß auf Grün.
+      Bewährte Mechanik übernommen: display:grid über .accordion.open>,
+      Aufmacherbild order:-1 + Wachsen beim Aufklappen, 36-px-Kastenpaar
+      Aufklapper/Fremdlink, Dunkel = Hairline statt Schatten (Zweige
+      dark + auto), Abstandsraster (Zählzeile 16, support 32), Einsinken
+      hinter prefers-reduced-motion. texts.js → layoutHint neu (beschrieb
+      noch Markenfarben-Kacheln), Dateikopf-Tabelle mitgezogen.
+      Die Bento-Sonderregeln (13.5rem-Zeilen, ≥6-px-Logo-Kriterium,
+      Badge-Ecke, XL-Kennzahl 3.25rem, --tile-edge-Schleier) entfallen
+      ERSATZLOS — bei künftigen Messungen nicht dagegen prüfen.
+      ⚠️ Statisch verifiziert (Klammer-/Kommentarbilanz, Relief-Byte-
+      vergleich); Browser-Sichtprüfung stand beim Schreiben nicht zur
+      Verfügung (Preview-Werkzeuge getrennt) — hell/dunkel-Abnahme steht
+      aus. (layouts.css, texts.js)
+
+   --- v34 -------------------------------------------------------------------
+   35. (andere Sitzung) Akzentfarbe des Magazins als Palette wählbar
+      (Nutzerwunsch 7.8.26: „muss nicht koralle sein, sondern kann
+      vielleicht im design aus einer palette gewählt werden"). Fünf
+      Paletten: Koralle (Vorgabe), Blau, Grün, Violett, Petrol.
+      • prefs.accent (app.js: defaultPrefs/loadPrefs mit Werteliste —
+        unbekannte Werte fallen auf Koralle zurück, Muster wie die
+        layout-Umschreibungen) → data-accent-Attribut in applyLayout.
+      • Farbpunkte-Reihe in Einstellungen → Darstellung (.acbar/.acbtn,
+        Grundoptik in style.css); IMMER sichtbar, auch in Relief, weil
+        die Seite beim Layout-Umschalten nicht neu gezeichnet wird —
+        der Hinweis „Gilt für das Layout Magazin" benennt es.
+      • layouts.css: Palettenwerte NUR unter [data-layout="magazin"]
+        [data-accent="…"] — Relief ignoriert das Attribut komplett.
+        Kontrast-Kalkül je Palette eingehalten (deep unter Weiß:
+        blau 5,1 / grün 5,0 / violett 5,7 / petrol 5,5); dunkel je
+        Palette nur soft/ink-on-soft, Zweige dark + auto synchron.
+      • Referenzbilder des Redesigns liegen jetzt als Dateien in
+        design-vorlagen/2026-08-07-magazin-redesign/ (AUSSERHALB von
+        webapp/, sonst wanderten sie als Assets in die APK).
+      ⚠️ Wie Punkt 34 nur statisch geprüft (kein JS-Parser, keine
+      Browser-Werkzeuge in der Sitzung) — Abnahme im Browser steht aus;
+      checks.yml (node --check) fängt Syntaxfehler beim Push.
+      (app.js, texts.js, style.css, layouts.css)
+
+   --- v35 -------------------------------------------------------------------
+   36. (andere Sitzung) MAGAZIN 4.0 — nach Nutzerkritik an v33/v34
+      („vieeeeel zu nah am alten layout … schau dir jeden einzelnen screen
+      auf den vorlagen an. das sliding verhalten, die bilder groß oben")
+      diesmal MIT Screenshot-Vergleich gegen die sechs Vorlagen (Chrome
+      headless über eine Scratchpad-Kopie der App, weil preview-MCP und
+      Chrome-Erweiterung erst tot waren bzw. Screenshot-Injection weiter
+      timeoutet; Screenshots liegen in design-vorlagen/
+      2026-08-07-magazin-redesign/2026-08-07-screenshots-magazin4/).
+      Zwei Bausteine:
+      a) TOKEN-REBASE (nur layouts.css): der Sichtvergleich zeigte, dass
+         nicht die Karten das Problem waren, sondern die durchscheinende
+         ALTE Farbwelt — cremefarbener Grund, grüne Wortmarke/Schalter/
+         Avatar/Support-Kästen (alles Basistoken). Magazin hängt jetzt
+         --bg (#fbfaf8), --accent und --accent-soft selbst um; --accent
+         zeigt per var() auf die gewählte Palette (Punkt 35), dunkel in
+         beiden Zweigen restatet (sonst schlüge das helle --bg als
+         späteres Stylesheet den Dunkelmodus). Dazu Suchknöpfe in
+         Akzent, Plattform-Kopflogo 4.75 → 3rem.
+      b) AUFMACHER-SLIDER (app.js → mzHero, nur hinter
+         state.prefs.layout==="magazin"; Relief-Markup unverändert,
+         per Screenshot gegengeprüft): das Vorlagen-Karussell — Bild
+         groß, weiße Karte aufgelegt (Chip + Titel + Unterschriften),
+         Scroll-Snap seitlich wischbar, mitlaufende Punkte.
+         · Hauptseite „Aktuelle Petitionen": bis 4 größte aktivierte
+           Plattformen laden je bis 3 laufende Sätze MIT Bild, neueste 6
+           als Folien; Antippen öffnet die Plattformseite. Kasten
+           reserviert seine Höhe sofort (CLS-Lehre), verschwindet ohne
+           Bilder (Bundestag/Europarl liefern keine).
+         · Plattformseite: die 5 neuesten laufenden MIT Bild über der
+           Liste, Abschnittskopf „Alle Petitionen" darunter; Antippen
+           springt zur Karte und klappt sie auf (Suche über
+           pet.dataset.url, kein CSS.escape nötig).
+         · Chip-Leisten (Sortieren/Schlagworte) einzeilig wischbar.
+         Bildfehler entfernt die Folie (kein Platzhalter im Slider);
+         Punkte rechnen scrollLeft/Folienbreite — deshalb hat der
+         Scroller KEINEN gap. Texte: liste.heroTitle,
+         petition.heroListTitle.
+      Sichtprüfung diesmal ERFOLGT: hell (Haupt+Detail+Einstellungen+
+      Profil), dunkel (Flächenstufen + Hairlines), Relief-Gegenprobe
+      (kein Slider, grüne Welt, Soft-UI unverändert — beweist nebenbei,
+      dass app.js fehlerfrei läuft). (app.js, texts.js, layouts.css)
+
+   --- v36 -------------------------------------------------------------------
+   37. (andere Sitzung) Element-Inventur der Einzelansicht (Nutzerauftrag:
+      „gehe jedes element durch und überlege, was daran alt ist"), alles
+      magazin-only, per Screenshot abgenommen:
+      a) SICHEL am Info-Feld (Nutzerbefund): style.css malt an .pabout
+         eine 6-px-Markenschiene als inset-box-shadow an die linke Kante;
+         unter der 1.25rem-Magazin-Rundung lugte sie als Bogen hervor.
+         Im Magazin jetzt weiße Karte ohne Schiene/Markenfläche/Schleier.
+      b) Versalien-Etiketten der offenen Karte (KURZBESCHREIBUNG,
+         GESTARTET VON, SCHLAGWÖRTER; .pet__body h4 + .pet__tags-lbl)
+         → kleine fette Zwischentitel in normaler Schreibung, mehr Luft
+         davor (margin-top 1.125rem).
+      c) Doppelter Plattformname im Kopf raus (.phead__name display:none
+         — Logo allein trägt, alle elf sind Wortmarken; syncPageTitle
+         prüft DOM-Text, nicht Sichtbarkeit, bleibt also stumm).
+      d) „Petition öffnen" als Pille; Wisch-Unterlage auf Kartenradius;
+         Wisch-Rückmeldung „Unterschrieben" von Basis-Grün (--online)
+         auf die Palette — letzte fremde Farbfläche im Ein-Akzent-Layout.
+      ⚠️⚠️ MESSFALLE dokumentiert: die „riesige Leerfläche" in
+      gescrollten Headless-Screenshots war KEIN Layoutfehler. Chrome legt
+      zugeklappten <details>-Inhalt seit der ::details-content-Umstellung
+      mit content-visibility aus — .pet__desc meldet clientHeight 5214,
+      obwohl das details selbst nur 49 px (Kopfzeile) einnimmt. Wer
+      „Loch im Layout" vermutet: IMMER die Höhe des details messen,
+      nicht die des Inhalts; und gescrollte Screenshots unter
+      --virtual-time-budget zeigen ungerasterte (weiße) Kacheln.
+      (nur layouts.css)
+
+   --- v37 -------------------------------------------------------------------
+   38. (andere Sitzung) Slider-Logik + akkordeonfreies Bento (drei
+      Nutzerwünsche 7.8.26), alles magazin-only, Relief per Screenshot
+      gegengeprüft (Akkordeons/Grün unverändert):
+      a) SLIDER-AUSWAHL (mzSliderKandidat): nie archivierte,
+         unterschriebene oder beendete Sätze — vorher fehlte
+         „unterschrieben" im Filter. Gilt für BEIDE Slider.
+      b) TREND-LOGIK des Hauptseiten-Sliders (mzTrend, Überschrift jetzt
+         „Im Trend"): Unterschriften je Tag seit Start; je Plattform die
+         zwei stärksten (statt drei erstbeste — keine Plattform soll
+         dominieren), global nach Trend sortiert, Deckel 6. Ohne
+         Unterschriftenzahl (Europarl) oder Startdatum (WeAct z. T.)
+         zählt ersatzweise Neuheit als schwaches Signal — fehlende Werte
+         täuschen keine Ordnung vor (Vorsicht wie bei den Sortier-Chips).
+         Meta zeigt „~N/Tag" nur bei echt gerechnetem Trend. Der
+         Plattform-Slider bleibt „neueste zuerst" (zweiter Nutzerwunsch).
+      c) EIN BENTO-RASTER statt Akkordeon-Gruppen (renderListe-Zweig mit
+         return; der Gruppenpfad bleibt für Relief wörtlich bestehen):
+         Favoriten vorn über beide Spalten mit Stern-Buchse + Pfeil,
+         Untertitel sichtbar, Logo 3rem; alle übrigen alphabetisch als
+         Halbkacheln, statt Pfeil die KREISFLAGGE ihrer Sprache (die
+         Information der Gruppenköpfe wandert an die Kachel; Sprachen
+         trennen nichts mehr, auch künftige nicht). Nur horizontal
+         gespannt: vertikal bräuchte feste Zeilenhöhen, die Magazin 3.0
+         wegen Textüberlauf bewusst abgeschafft hat.
+      (app.js, texts.js, layouts.css)
+
+   --- v38 -------------------------------------------------------------------
+   39. (andere Sitzung) Slider am Desktop bedienbar (Nutzerfrage
+      „funktionieren die slider bei dir?" — berechtigt):
+      a) MAUS-ZIEHEN: eine native Scrollfläche folgt am Desktop keinem
+         Mausziehen — am Telefon wischt der Daumen nativ, mit der Maus
+         passierte NICHTS. Jetzt pointer-Ziehen (nur pointerType
+         "mouse", Touch scrollt weiter selbst), Einrasten während des
+         Zugs abgeschaltet (sonst kämpft scroll-snap gegen jede
+         scrollLeft-Zuweisung), beim Loslassen Rasten von Hand, Zug
+         >6 px schluckt den Folgeklick der Folie. cursor:grab/grabbing.
+      b) PUNKTE sind jetzt <button> und springen zur Folie — zweiter
+         Desktop-Weg neben dem Ziehen; Trefffläche über transparente
+         Blockränder vergrößert, aria-hidden am Punktecontainer weg.
+      c) Punkt-Nachführung ohne requestAnimationFrame (direkt im
+         scroll-Ereignis) — der Umweg konnte Aktualisierungen
+         verschlucken.
+      ⚠️⚠️ MESSFALLE (dieselbe wie beim lazy-loading am 6.8., neues
+      Gewand): mein Prüf-Chrome-Fenster lief mit visibilityState
+      "hidden" — dort dispatcht Chrome KEINE scroll-Ereignisse (sie sind
+      rAF-getaktet), sanftes scrollTo animiert nie, CDP-Züge bewegen
+      nichts. Der Slider WAR funktionsfähig; blind war die Messbank.
+      Zieh-Pfad synthetisch bewiesen (PointerEvents: 150 px Zug →
+      scrollLeft 150, synchron); Rest braucht ein sichtbares Fenster.
+      (app.js, layouts.css)
+
+   ⚠️ NACHTRAG zur Hell-Reparatur: `color-scheme:light` war der FALSCHE Wert.
+      Der Nutzer meldete am 7.8.2026, dass „hell" in der APK weiterhin dunkel
+      ist — und das stimmte. `light` allein heißt „diese Seite kann
+      ausschließlich hell", woraufhin der Browser hilfsbereit nachdunkelt; es
+      ist wirkungsgleich mit gar keiner Angabe. Abgeschaltet wird das
+      Nachdunkeln nur, wenn die Seite `dark` mitanbietet oder mit `only` sagt
+      „fass mich nicht an".
+      ERSTMALS SIMULIERT statt vermutet: Chrome mit
+      --enable-features=WebContentsForceDark ist derselbe Mechanismus wie
+      Androids algorithmisches Nachdunkeln. ⚠️ Es wirkt beim ZEICHNEN, nicht im
+      CSSOM — getComputedStyle sieht davon nichts, man MUSS Pixel messen
+      (headless Screenshot + PIL). Gemessen am Laborfall (#f7f4ec):
+        keine Angabe (37,35,29) · light (37,35,29) · light dark (247,244,236)
+        · only light (247,244,236) · dark light (247,244,236)
+      Und an der echten App auf „hell": vorher (36,34,28), nachher
+      (246,243,235). Gegenprobe, dass nichts mitgerissen wurde: „automatisch"
+      bei dunklem System (24,22,19) und „dunkel" gewählt (24,22,19) — der
+      eigene Dunkelmodus greift also weiter, `only light` hebelt
+      prefers-color-scheme NICHT aus.
+      Von den drei wirksamen Werten ist `only light` das richtige: `light dark`
+      und `dark light` sagen „ich kann beides", woraufhin die UA Scrollbalken
+      und Formularfelder nach der SYSTEM-Einstellung zeichnet — dunkle
+      Bedienelemente auf heller Seite. (style.css)
+
+   --- v40 -------------------------------------------------------------------
+   40. (andere Sitzung) Fünf Nutzerbefunde vom 7.8.26, alle im Browser
+      gemessen statt geschätzt:
+      a) FOLIENFORMAT GEMESSEN: 72 Vorschaubilder aus neun Plattformen im
+         Browser vermessen — Seitenverhältnisse 1,00 bis 2,43, Median
+         1,78. Das ist exakt 16:9, also bekommen Slider-Folien UND
+         Kartenbilder genau dieses Verhältnis (aspect-ratio, feste Höhe
+         als Rückfallebene für WebViews vor Chrome 88) plus
+         object-position:top — höhere Bilder werden nur UNTEN
+         beschnitten, wie gewünscht. Vorher feste 14.5rem, mittiger
+         Beschnitt.
+      b) ÄHNLICHE PETITIONEN gedeckelt: fünf Zeilen, Rest hinter „Mehr
+         anzeigen (N)". Die Zeilen werden alle gebaut und nur verborgen
+         (.simrow--rest) — ein Zeichenweg, Zuhörer hängen schon dran.
+         Bewusst layoutneutral: gilt in beiden Designs.
+      c) KATEGORIE-CHIP klebte 2 px unter der Kartenoberkante (gemessen);
+         jetzt 16 px Luft oben, 12 zum Bild, Bild→Titel 16, und er steht
+         auf der Fluchtlinie von Titel und Text.
+      d) HINWEISKÄSTEN hell statt Vollton (Nutzerwunsch „heller, damit
+         besser lesbar"): favtip und swipe-hint auf --mz-soft mit dunklem
+         Text, Überschrift in --mz-ink-on-soft, Knopf als gefüllte Pille.
+         Ein ganzer Absatz Weiß auf kräftiger Fläche liest sich schlechter
+         als dunkel auf hell — und die Vorlagen halten Hinweise hell.
+      e) MARKENKLAMMER RAUS: style.css malt an .opt (Einstellungen),
+         .signed-item (Profil) und .wplat.on (Assistent) eine 6-px-Schiene
+         als inset-Schatten plus getönte Markenfläche. Im Magazin sind das
+         jetzt weiße Karten; box-shadow muss GANZ überschrieben werden
+         (drei Schatten in einer Eigenschaft). Dabei gefunden: die Basis
+         reserviert dem Logo 11.25rem Schutzzone — auf 402 px blieben dem
+         Text 42 px, „Deutsch · 26 Petitionen" brach dreizeilig. Im
+         Magazin tritt die Marke unter 27rem Zeilenbreite zurück
+         (Relief löst dasselbe seit v23 mit dem Logo über der Zeile);
+         bei 402 und bei 600 px gegengeprüft.
+      (app.js, style.css, layouts.css)
+
+   --- v41 -------------------------------------------------------------------
+   41. (andere Sitzung) Sechs Nutzerbefunde vom 7.8.26 abends:
+      a) ⚠️ SLIDER-FOLIEN WAREN NICHT KLICKBAR — mein eigener Fehler von
+         Punkt 39: das Maus-Ziehen rief setPointerCapture schon beim
+         pointerdown auf. Ein gefangener Zeiger lenkt auch das folgende
+         click-Ereignis auf die Scrollfläche um, der Folien-Button sah
+         es nie. Jetzt wird erst nach 6 px Bewegung gefangen (und erst
+         dann scroll-snap abgeschaltet); ohne Bewegung bleibt alles
+         unangetastet. Im Prüfstand beide Slider getestet: Hauptseite →
+         Plattformseite öffnet, Plattformseite → Karte klappt auf.
+      b) TEXTBOX UNTER DAS BILD: die Karte lag als Overlay auf dem Foto
+         und verdeckte es. Jetzt trägt das BILD das 16:9, die Karte
+         steht darunter und zieht sich um genau ihren eigenen Eckradius
+         (1rem) nach oben — die vom Nutzer gewünschte „ganz leichte
+         Überlagerung entsprechend dem border radius", das Motiv bleibt
+         vollständig sichtbar.
+      c) SLIDER TRITT BEIM FILTERN ZURÜCK (.mz-herobox--aus): wer
+         filtert oder sucht, will Treffer sehen, keine Trend-Werbung.
+         Nur verborgen, nicht abgebaut — Filter lösen bringt ihn zurück
+         (im Prüfstand hin und zurück gemessen).
+      d) Zwischentitel „Alle Petitionen" entfernt (die Zählzeile sagt
+         dasselbe genauer).
+      e) Bilder oben verankert; beim Aufklappen wechselt der Rahmen von
+         16:9 auf 4:3 — es kommt UNTEN mehr vom selben Bild dazu, statt
+         den Ausschnitt zu verschieben.
+      f) AKZENTFARBEN SIND JETZT DIE ECHTEN MARKENFARBEN (elf Paletten
+         aus platforms.js) statt fünf erfundener Töne. Je Palette werden
+         --mz-accent, --mz-accent-deep (Füllfläche, notfalls verschoben
+         bis 4,5:1), --mz-on-accent (Schrift darauf), --mz-soft und
+         --mz-ink-on-soft gesetzt; alle elf einmal durchgerechnet, jeder
+         Wert ≥ 4,5:1. Dafür wurden die elf hartkodierten `color:#fff`
+         im Magazin-Block durch var(--mz-on-accent) ersetzt — sonst
+         stünde auf foodwatch-Gelb weiter Weiß (2,02).
+         Die Auswahl in den Einstellungen baut app.js aus PM_PLATFORMS
+         (wächst mit) und teilt in „Kräftig — helle Schrift" und
+         „Hell — dunkle Schrift".
+         ⚠️ Die Trennschwelle ist der AUSGERECHNETE Umschlagpunkt
+         √(1,05 × (L_ink + 0,05)) − 0,05 = 0,2046, nicht geschätzt: mit
+         einem ersten 0,16-Versuch landeten WeAct (0,181) und Avaaz
+         (0,177) in der falschen Gruppe, obwohl auf beiden Weiß besser
+         liest — die Anzeige hätte den Paletten widersprochen.
+      Gemessen statt geschaut: die Pfeilfarbe auf foodwatch-Gelb sah im
+      verkleinerten Screenshot weiß aus; die Pixelmessung ergab
+      rgb(30,28,24). Bei Farbverdacht immer Pixel oder getComputedStyle
+      lesen. (app.js, texts.js, style.css, layouts.css)
+
+   --- v42 -------------------------------------------------------------------
+   42. (andere Sitzung) Zwei Nutzerbefunde vom 7.8.26 spätabends:
+      a) ⚠️ SLIDER FÜHRTE AUF DEN FALSCHEN BEREICH: der Hauptseiten-
+         Slider öffnete nur die PLATTFORM statt der angeklickten
+         Petition, der Plattform-Slider suchte die Karte per
+         `dataset.url` im DOM — und fand sie nicht, sobald sie hinter
+         dem LIST_MAX-Deckel (300) oder in einem zugeklappten Abschnitt
+         lag. Beide gehen jetzt über openPetitionInApp(): das setzt
+         state.openPetitionUrl, und der Zeichner zieht die Petition an
+         den Listenanfang, klappt sie auf und rollt hin — inklusive
+         Bottom-Akkordion. Im Prüfstand Titel der Folie gegen den Titel
+         der aufgeklappten Karte verglichen: Treffer auf beiden Seiten.
+         MERKE: für „öffne genau diese Petition" gibt es EINEN Weg
+         (openPetitionInApp) — keine zweite DOM-Suche danebenbauen.
+      b) Farbauswahl entrümpelt (Nutzerwunsch): alle zwölf Akzentfarben
+         in EINER Reihe, darunter die Schriftfarbe zur freien Wahl
+         (Automatisch/Hell/Dunkel), Erklärtexte drumherum entfernt.
+         prefs.accentInk → data-accent-ink; die CSS-Regeln stehen NACH
+         den Paletten, damit die Wahl gewinnt. „Automatisch" behält die
+         gerechnete Empfehlung je Farbe. Alle vier Fälle gemessen
+         (foodwatch auto→dunkel/hell→weiß, bundestag auto→weiß/
+         dunkel→dunkel). (app.js, texts.js, layouts.css) */
+var CACHE = "pm-cache-v42";
 /* Versionsunabhängig – überlebt das Hochzählen von CACHE. Diese Zahl sollte ab
    jetzt NICHT mehr steigen: seit die Pakete eine Inhaltskennung tragen ("?v=",
    siehe oben) holt sich jedes geänderte Paket von selbst neu. Ein Sprung wäre
