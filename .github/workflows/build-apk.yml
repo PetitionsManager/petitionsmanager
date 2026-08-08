@@ -66,9 +66,28 @@ jobs:
         with:
           gradle-version: '8.9'
 
+      # VERSION_CODE macht jede APK unterscheidbar (build.gradle liest die
+      # Variable). github.run_number zaehlt je Workflow monoton hoch und
+      # springt nie zurueck - genau das verlangt Android von einem Update.
+      # Ohne die Variable stand dauerhaft versionCode 1 in jeder Fassung.
       - name: Debug-APK bauen
         working-directory: android
+        env:
+          VERSION_CODE: ${{ github.run_number }}
+          VERSION_NAME: 1.0.${{ github.run_number }}
         run: gradle assembleDebug --no-daemon --stacktrace
+
+      # Beweist, dass alle APKs aus debug.p12 stammen und nicht aus einem
+      # zufaellig erzeugten Runner-Schluessel. Weicht der Fingerabdruck eines
+      # Tages ab, laesst sich die APK nicht mehr ueberinstallieren - dann ist
+      # es besser, es steht hier im Protokoll als erst auf dem Telefon.
+      - name: Signatur ausweisen
+        working-directory: android
+        run: |
+          APK=app/build/outputs/apk/debug/app-debug.apk
+          echo "SHA-256 des Signaturzertifikats:"
+          "$ANDROID_HOME"/build-tools/34.0.0/apksigner verify --print-certs "$APK" \
+            | grep -i "SHA-256" || echo "apksigner nicht gefunden - uebersprungen"
 
       # Der Datenstand steht im Namen des Artefakts: sonst liegen im
       # Actions-Tab mehrere gleichnamige APKs und man weiß bei keiner, welche

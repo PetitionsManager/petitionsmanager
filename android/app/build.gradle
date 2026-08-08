@@ -6,12 +6,44 @@ android {
     namespace 'app.petitionsmanager'
     compileSdk 34
 
+    // FESTER SIGNATURSCHLUESSEL (8.8.2026) — der Grund, warum es ihn gibt:
+    // Ohne eigene signingConfig erzeugt Gradle sich beim Bauen selbst einen
+    // Debug-Schluessel unter ~/.android/debug.keystore. Auf einem GitHub-Runner
+    // ist das jedes Mal eine frische Maschine, also war JEDE APK anders
+    // signiert. Android hielt sie deshalb fuer eine fremde App mit demselben
+    // Namen und verweigerte das Ueberinstallieren:
+    // "Das Paket steht in einem Konflikt mit einem bestehenden Paket."
+    // Der Nutzer musste vor jeder neuen Fassung deinstallieren und verlor
+    // dabei Merkliste und Einstellungen.
+    //
+    // debug.p12 ist mit openssl erzeugt (RSA 2048, selbstsigniert, gueltig bis
+    // 2056) — auf diesem Rechner gibt es kein keytool, aber Java 17 liest
+    // PKCS12 nativ. Passwort ist das uebliche "android": ein Debug-Schluessel
+    // SCHUETZT nichts, er identifiziert nur. Er darf im oeffentlichen Repo
+    // liegen; wer die App unter demselben Namen bauen will, kann das ohnehin.
+    // ⚠️ Fuer eine Veroeffentlichung im Play Store braucht es einen ANDEREN,
+    // geheimen Release-Schluessel — dieser hier taugt dafuer NICHT.
+    signingConfigs {
+        debug {
+            storeFile file('debug.p12')
+            storeType 'PKCS12'
+            storePassword 'android'
+            keyAlias 'petitionsmanager'
+            keyPassword 'android'
+        }
+    }
+
     defaultConfig {
         applicationId "app.petitionsmanager"
         minSdk 24
         targetSdk 34
-        versionCode 1
-        versionName "1.0"
+        // versionCode zaehlt mit der Nummer des Bau-Laufs hoch (im Workflow als
+        // VERSION_CODE gesetzt). Vorher stand hier dauerhaft 1: in den
+        // App-Infos war dadurch nie zu erkennen, welcher Stand installiert ist,
+        // und Android sah in einer neuen APK kein Update. Ohne die Variable
+        // (lokaler Bau) bleibt es bei 1.
+        versionCode (System.getenv("VERSION_CODE") ?: "1").toInteger()
+        versionName System.getenv("VERSION_NAME") ?: "1.0"
     }
 
     // Die komplette Web-App (inkl. webapp/data/*.json) wird als Asset gebündelt.
@@ -24,6 +56,12 @@ android {
     }
 
     buildTypes {
+        // AGP nimmt fuer den Debug-Typ zwar automatisch signingConfigs.debug,
+        // aber ausgeschrieben ist es eindeutig: hier haengt die Frage dran, ob
+        // sich die APK ueberinstallieren laesst. Das soll niemand suchen muessen.
+        debug {
+            signingConfig signingConfigs.debug
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
