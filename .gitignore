@@ -37,3 +37,18 @@ webapp/data/
 # Der Ordner bleibt lokal liegen und ist nicht verloren; er gehoert nur nicht
 # in die Versionsgeschichte.
 design-vorlagen/
+
+# ⚠️ SIGNATURSCHLUESSEL - darf NIE ins Repo.
+# Der Workflow schreibt ihn zur Bauzeit aus dem Secret
+# SIGNING_KEYSTORE_BASE64 hierher; danach ist die Datei Wegwerfware.
+#
+# Warum das streng ist (8.8.2026): der erste Anlauf legte den Schluessel offen
+# ins Repo. Fuer einen reinen Debug-Schluessel war das vertretbar, aber die App
+# soll nach Google Play und F-Droid - und ein Schluessel, der je oeffentlich
+# war, ist dafuer verbrannt. Er laesst sich auch nicht nachtraeglich retten:
+# einmal in der Historie, immer in der Historie. Der alte debug.p12 gilt als
+# kompromittiert und wurde ersetzt.
+android/app/signing.p12
+*.p12
+*.jks
+*.keystore

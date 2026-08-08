@@ -16,20 +16,37 @@ android {
     // Der Nutzer musste vor jeder neuen Fassung deinstallieren und verlor
     // dabei Merkliste und Einstellungen.
     //
-    // debug.p12 ist mit openssl erzeugt (RSA 2048, selbstsigniert, gueltig bis
-    // 2056) — auf diesem Rechner gibt es kein keytool, aber Java 17 liest
-    // PKCS12 nativ. Passwort ist das uebliche "android": ein Debug-Schluessel
-    // SCHUETZT nichts, er identifiziert nur. Er darf im oeffentlichen Repo
-    // liegen; wer die App unter demselben Namen bauen will, kann das ohnehin.
-    // ⚠️ Fuer eine Veroeffentlichung im Play Store braucht es einen ANDEREN,
-    // geheimen Release-Schluessel — dieser hier taugt dafuer NICHT.
+    // ⚠️ ZWEITER ANLAUF, GEHEIM STATT IM REPO. Der erste Versuch legte
+    // debug.p12 offen ins Repo — fuer einen reinen Debug-Schluessel vertretbar,
+    // aber der Nutzer will spaeter in Google Play und F-Droid. Ein Schluessel,
+    // der je oeffentlich war, ist dafuer verbrannt: jeder koennte Pakete
+    // bauen, die sich als diese App ausgeben. Deshalb liegt er jetzt als
+    // GitHub-Secret (SIGNING_KEYSTORE_BASE64), der Workflow schreibt ihn zur
+    // Bauzeit nach android/app/signing.p12, und dieser Pfad steht in
+    // .gitignore. Der alte debug.p12 ist entfernt und gilt als kompromittiert.
+    //
+    // Faellt das Secret weg (Fork, lokaler Bau), greift KEIN Ersatzschluessel:
+    // ein automatisch erzeugter waere wieder bei jedem Lauf ein anderer und
+    // brächte genau das Problem zurueck, das hier geloest wird. Stattdessen
+    // bleibt signingConfig null — Gradle nimmt dann seinen eigenen
+    // Debug-Schluessel, was fuer einen lokalen Testbau richtig ist, und der
+    // Workflow warnt ausdruecklich davor.
+    //
+    // Erzeugt mit openssl (RSA 4096, selbstsigniert, gueltig bis 2061) — auf
+    // dem Entwicklungsrechner gibt es kein keytool, aber Java 17 liest PKCS12
+    // nativ.
+    def ksDatei    = file('signing.p12')
+    def ksPasswort = System.getenv("SIGNING_KEYSTORE_PASSWORD")
+    def ksDa       = ksDatei.exists() && ksPasswort
     signingConfigs {
         debug {
-            storeFile file('debug.p12')
-            storeType 'PKCS12'
-            storePassword 'android'
-            keyAlias 'petitionsmanager'
-            keyPassword 'android'
+            if (ksDa) {
+                storeFile ksDatei
+                storeType 'PKCS12'
+                storePassword ksPasswort
+                keyAlias 'petitionsmanager'
+                keyPassword ksPasswort
+            }
         }
     }
 
@@ -42,8 +59,18 @@ android {
         // App-Infos war dadurch nie zu erkennen, welcher Stand installiert ist,
         // und Android sah in einer neuen APK kein Update. Ohne die Variable
         // (lokaler Bau) bleibt es bei 1.
-        versionCode (System.getenv("VERSION_CODE") ?: "1").toInteger()
-        versionName System.getenv("VERSION_NAME") ?: "1.0"
+        // ⚠️ ZUWEISUNG MIT "=", NICHT die Kurzform ohne Gleichheitszeichen.
+        // Der erste Anlauf am 8.8.2026 stand hier als
+        //     versionCode (System.getenv("VERSION_CODE") ?: "1").toInteger()
+        // und hat den Bau nach 50 Sekunden in der KONFIGURATIONSPHASE
+        // getoetet. Groovy liest ein Leerzeichen vor der Klammer als
+        // Methodenaufruf: aus dem Ausdruck wird versionCode("1").toInteger()
+        // - also versionCode mit einem STRING aufgerufen und .toInteger()
+        // auf dessen Rueckgabewert. Mit "=" ist es eindeutig eine Zuweisung.
+        // Merke: in build.gradle jede berechnete Eigenschaft mit "=" setzen,
+        // die Kurzform nur fuer schlichte Literale.
+        versionCode = (System.getenv("VERSION_CODE") ?: "1").toInteger()
+        versionName = System.getenv("VERSION_NAME") ?: "1.0"
     }
 
     // Die komplette Web-App (inkl. webapp/data/*.json) wird als Asset gebündelt.
