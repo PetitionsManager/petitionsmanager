@@ -206,6 +206,16 @@ def main() -> None:
         try:
             for p in targets:
                 core.log(f"=== Scrape: {p.name} ===")
+                # Befunde an DIESE Plattform binden. Ohne das laufen sie unter
+                # dem Sammelschlüssel "_cli" (befund() und save_store() lesen
+                # beide _TLS.platform). Sequenziell ginge das meist gut — bis
+                # eine Plattform abbricht, BEVOR ihr save_store(quiet=False)
+                # sie einsammelt: dann bleiben ihre Befunde liegen und die
+                # NÄCHSTE Plattform holt sie sich und schreibt sie in ihr
+                # _meta. Der CI-Lauf schickt bei Zeitüberschreitung SIGINT
+                # (scrape.yml), ein Abbruch mitten im Lauf ist hier also der
+                # Normalfall, nicht der Ausnahmefall.
+                core.set_progress_platform(p.key)
                 try:
                     p.run(args)
                 except Exception as exc:   # eine Plattform darf den Lauf nicht kippen
