@@ -1416,7 +1416,43 @@ def _desc_html(text) -> str:
     return "".join(f"<p>{_esc(p)}</p>" for p in parts) or '<p class="muted">—</p>'
 
 
-def _detail_panel(slug: str, r: dict) -> str:
+def _veroeffentlichte_daten(platform: Platform) -> dict[str, dict]:
+    """Was publish.py zuletzt für die App ausgeliefert hat, nach Adresse.
+
+    Nur für zwei Dinge, die es NUR dort gibt: die vorberechnete Verwandtschaft
+    („Gleiche / Ähnliche Petitionen" in der App) und die nachgerechneten
+    Schlagwörter. Beides entsteht plattformübergreifend beim Export, nicht beim
+    Scrapen — die Listenseite kann es also nicht selbst berechnen, ohne alle elf
+    Bestände zu laden.
+
+    ⚠️ Der Stand ist der des LETZTEN publish-Laufs: im CI schreibt monitor.py
+    die Listen, bevor publish.py läuft. Für frisch entdeckte Petitionen fehlt
+    die Verwandtschaft also einen Lauf lang. Fehlt die Datei ganz (frischer
+    Klon, publish nie gelaufen), bleiben die Abschnitte einfach weg."""
+    datei = Path("webapp/data") / f"{platform.key}.json"
+    if not datei.exists():
+        return {}
+    try:
+        daten = json.loads(datei.read_text(encoding="utf-8"))
+    except (ValueError, OSError):
+        log(f"{datei} nicht lesbar – Verwandtschaft bleibt auf der Liste leer.")
+        return {}
+    return {str(e.get("url")): e for e in daten if isinstance(e, dict) and e.get("url")}
+
+
+def _kategorie_zelle(kategorie: str | None) -> str:
+    """Die Kategorie als Knopf statt als totem Etikett.
+
+    In der App filtert ein Klick auf die Kategorie plattformweit; in der Liste
+    war dieselbe Angabe eine reine Beschriftung, obwohl die Auswahlliste
+    darüber genau diesen Filter schon kann. Gleiche Angabe, gleiche Geste."""
+    if not kategorie:
+        return "—"
+    return (f'<button type="button" class="pill catchip" '
+            f'data-cat="{_esc(kategorie)}">{_esc(kategorie)}</button>')
+
+
+def _detail_panel(slug: str, r: dict, ausgeliefert: dict | None = None) -> str:
     img = _img_tag(r.get("image_url"), "detail-pic")
     summary = _esc(r.get("summary") or "—")
     recipient = _esc(r.get("recipient") or "—")
@@ -1440,6 +1476,29 @@ def _detail_panel(slug: str, r: dict) -> str:
         f'{_fmt_int(h.get("count"))}</li>' for h in hist
     ) or '<li class="muted">—</li>'
 
+    # Schlagwörter. Im Store stehen sie nur, wenn der Scraper sie beim Anlegen
+    # erzeugt hat (bei WeMove 53 von 261, bei innn.it gar keine) — publish.py
+    # rechnet sie beim Export nach. Dieselbe Rückfallebene hier, sonst zeigte
+    # die Liste weniger als die App aus denselben Daten macht.
+    tags = r.get("tags") or make_tags(r)
+    tag_html = "".join(
+        f'<button type="button" class="tagchip" data-tag="{_esc(t)}">'
+        f'{_esc(t)}</button>' for t in tags[:10])
+    tag_block = (f'<div class="field">'
+                 f'{_zs("Schlagwörter", "Tags", tag="h4")}'
+                 f'<div class="tagrow">{tag_html}</div></div>') if tags else ""
+
+    # „Gleiche / Ähnliche Petitionen" — in der App der Fuß jeder Petition.
+    # Die Liste zeigt dasselbe, sofern publish.py schon einmal gelaufen ist.
+    verwandt = ((ausgeliefert or {}).get(r.get("url") or "") or {}).get("related") or []
+    verw_html = "".join(
+        f'<li><a href="{_esc(v.get("url"))}" target="_blank" rel="noopener">'
+        f'{_esc(v.get("title") or v.get("url"))}</a></li>'
+        for v in verwandt[:8] if v.get("url"))
+    verw_block = (f'<div class="field">'
+                  f'{_zs("Gleiche / Ähnliche Petitionen", "Same / similar petitions", tag="h4")}'
+                  f'<ul class="verwandt">{verw_html}</ul></div>') if verw_html else ""
+
     pid = r.get("petition_id")
     url = r.get("url") or ""
     caturl = r.get("category_url") or ""
@@ -1448,17 +1507,23 @@ def _detail_panel(slug: str, r: dict) -> str:
         ("ID", _esc(pid) if pid is not None else "—"),
         ("URL", f'<a href="{_esc(url)}" target="_blank" rel="noopener">{_esc(url)}</a>'
                 if url else "—"),
-        ("Kategorie", f'<a href="{_esc(caturl)}" target="_blank" rel="noopener">'
+        (_zs("Kategorie", "Category"), f'<a href="{_esc(caturl)}" target="_blank" rel="noopener">'
                       f'{_esc(r.get("category") or caturl)}</a>' if caturl
                       else _esc(r.get("category") or "—")),
     ]
     if r.get("goal"):
-        meta.append(("Ziel", _fmt_int(r.get("goal"))))
+        meta.append((_zs("Ziel", "Goal"), _fmt_int(r.get("goal"))))
+    # Frist und Art zeigt die App, die Liste bisher nicht. „Beendet" stand hier
+    # nur als Abzeichen, ohne das Datum dazu.
+    if r.get("deadline"):
+        meta.append((_zs("Frist", "Deadline"), _fmt_date(r.get("deadline"))))
+    if r.get("kind"):
+        meta.append((_zs("Art", "Kind"), _esc(r.get("kind"))))
     meta += [
-        ("Erstmals erfasst", _fmt_dt(r.get("first_seen"))),
-        ("Zuletzt online", _fmt_dt(r.get("last_seen"))),
-        ("Zuletzt geprüft", _fmt_dt(r.get("last_checked"))),
-        ("Offline seit", _fmt_dt(r.get("offline_since"))
+        (_zs("Erstmals erfasst", "First seen"), _fmt_dt(r.get("first_seen"))),
+        (_zs("Zuletzt online", "Last online"), _fmt_dt(r.get("last_seen"))),
+        (_zs("Zuletzt geprüft", "Last checked"), _fmt_dt(r.get("last_checked"))),
+        (_zs("Offline seit", "Offline since"), _fmt_dt(r.get("offline_since"))
                           if r.get("offline_since") else "—"),
     ]
     meta_html = "".join(f"<dt>{k}</dt><dd>{v}</dd>" for k, v in meta)
@@ -1471,6 +1536,7 @@ def _detail_panel(slug: str, r: dict) -> str:
         f'<p>{summary}</p></div>'
         f'<div class="field">{_zs("Adressat", "Addressed to", tag="h4")}'
         f'<p>{recipient}</p></div>'
+        f'{tag_block}'
         f'<details class="fulltext">'
         f'{_zs("Komplette Beschreibung", "Full description", tag="summary")}'
         f'<div class="ft-body">{full}</div></details>'
@@ -1480,6 +1546,7 @@ def _detail_panel(slug: str, r: dict) -> str:
         f'<div>{_zs("Unterschriften-Verlauf", "Signature history", tag="h4")}'
         f'<ul>{hist_html}</ul></div>'
         '</div>'
+        f'{verw_block}'
         f'<dl class="kv">{meta_html}</dl>'
         '</div>'
         '</div>'
@@ -1487,6 +1554,7 @@ def _detail_panel(slug: str, r: dict) -> str:
 
 
 def build_list_html(store: dict, platform: Platform) -> str:
+    ausgeliefert = _veroeffentlichte_daten(platform)
     rows = []
     online = offline = 0
     cols = 9
@@ -1529,6 +1597,7 @@ def build_list_html(store: dict, platform: Platform) -> str:
             f'data-title="{_esc((r.get("title") or "").lower())}" '
             f'data-starter="{_esc((r.get("started_by") or "").lower())}" '
             f'data-category="{_esc((r.get("category") or "").lower())}" '
+            f'data-tags="{_esc(" ".join(r.get("tags") or make_tags(r)).lower())}" '
             f'data-signatures="{sig if isinstance(sig, int) else -1}" '
             f'data-start="{_esc(r.get("start_date") or "")}" '
             f'data-checked="{_esc(r.get("last_checked") or "")}">'
@@ -1547,18 +1616,26 @@ def build_list_html(store: dict, platform: Platform) -> str:
             f'rel="noopener">{_esc(r.get("title") or slug)}</a>'
             f'<div class="recipient">{_esc(r.get("recipient") or "")}</div></td>'
             f'<td>{_esc(r.get("started_by") or "—")}</td>'
-            f'<td>{("<span class=pill>"+_esc(r.get("category"))+"</span>") if r.get("category") else "—"}</td>'
+            f'<td>{_kategorie_zelle(r.get("category"))}</td>'
             f'<td class="num">{_fmt_int(sig)}</td>'
             f'<td class="mono">{_fmt_date(r.get("start_date"))}</td>'
             f'<td class="mono">{_fmt_dt(r.get("last_checked"))}</td>'
             f'</tr>'
-            f'<tr class="detail"><td colspan="{cols}">{_detail_panel(slug, r)}</td></tr>'
+            f'<tr class="detail"><td colspan="{cols}">'
+            f'{_detail_panel(slug, r, ausgeliefert)}</td></tr>'
         )
 
     tmpl = _LIST_TEMPLATE
     tmpl = tmpl.replace("{{KEY}}", _esc(platform.key))
     tmpl = tmpl.replace("{{NAME}}", _esc(platform.name))
-    tmpl = tmpl.replace("{{EYEBROW}}", _esc(platform.eyebrow or platform.name))
+    # Die Rubrikzeile beschreibt die Plattform („Avaaz · Bürgerpetitionen &
+    # Kampagnen (deutsch)") und ist damit deutscher Text, kein Eigenname.
+    # Sie liegt in der Plattformdefinition; sobald dort ein Feld `eyebrow_en`
+    # auftaucht, nimmt die Liste es von selbst — wie bei name_en und
+    # openness_note_en. Bis dahin steht in beiden Sprachen dasselbe.
+    eb = platform.eyebrow or platform.name
+    tmpl = tmpl.replace("{{EYEBROW}}",
+                        _zs(eb, getattr(platform, "eyebrow_en", "") or eb))
     tmpl = tmpl.replace("{{GENERATED}}", _esc(now_iso()))
     # Die Filter "Laufend"/"Beendet" nur zeigen, wo es überhaupt beendete
     # Einträge gibt (bisher nur Bundestag) – sonst bliebe die Leiste leer.
@@ -1636,14 +1713,7 @@ _LIST_TEMPLATE = """<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{NAME}} · Petitions-Monitor</title>
 <style>
-  :root{
-    --bg:#eef0f4; --surface:#ffffff; --ink:#161a22; --muted:#5d6675;
-    --line:#e2e5ec; --indigo:#2f3f86; --indigo-soft:#eaeefb;
-    --online:#1f7a4d; --online-bg:#e6f3ec; --offline:#b23b3b; --offline-bg:#f7e8e8;
-    --closed:#6b5a2e; --closed-bg:#f4eeda;
-    --mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
-    --sans:ui-sans-serif,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  }
+{{FARBEN}}
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
        font-size:14px;line-height:1.45}
@@ -1675,19 +1745,20 @@ _LIST_TEMPLATE = """<!DOCTYPE html>
        overflow:hidden;background:var(--surface)}
   .seg button{border:0;background:transparent;padding:9px 14px;cursor:pointer;
               font:inherit;color:var(--muted)}
-  .seg button[aria-pressed=true]{background:var(--indigo);color:#fff}
+  .seg button[aria-pressed=true]{background:var(--indigo);color:var(--on-accent)}
   #catFilter{padding:9px 12px;border:1px solid var(--line);border-radius:10px;
              font-size:14px;background:var(--surface);color:var(--ink)}
   #catFilter:focus{outline:2px solid var(--indigo);outline-offset:1px}
   .count{font-family:var(--mono);font-size:12px;color:var(--muted)}
   .run-btn{display:inline-flex;align-items:center;gap:8px;border:0;
-           background:var(--indigo);color:#fff;font:inherit;font-weight:650;
+           background:var(--indigo);color:var(--on-accent);font:inherit;font-weight:650;
            padding:10px 16px;border-radius:10px;cursor:pointer}
-  .run-btn:hover{background:#26326b}
+  .run-btn:hover{background:var(--indigo-hover)}
   .run-btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
   .run-btn:disabled{opacity:.6;cursor:default}
   .run-btn .sp{width:14px;height:14px;border-radius:50%;display:none;
-       border:2px solid rgba(255,255,255,.45);border-top-color:#fff}
+       border:2px solid color-mix(in srgb,var(--on-accent) 45%,transparent);
+       border-top-color:var(--on-accent)}
   .run-btn.busy .sp{display:inline-block;animation:spin .8s linear infinite}
   .run-status{font-family:var(--mono);font-size:12px;color:var(--muted)}
   @keyframes spin{to{transform:rotate(360deg)}}
@@ -1726,17 +1797,19 @@ _LIST_TEMPLATE = """<!DOCTYPE html>
   .chev{display:inline-block;transition:transform .15s}
   tr.main.open .chev{transform:rotate(90deg)}
   .thumb{width:64px;height:42px;object-fit:cover;border-radius:7px;
-         border:1px solid var(--line);display:block;background:#dfe3ec}
-  .thumb.ph{background:repeating-linear-gradient(45deg,#e9ecf3,#e9ecf3 6px,#eef1f7 6px,#eef1f7 12px)}
+         border:1px solid var(--line);display:block;background:var(--thumb-bg)}
+  .thumb.ph{background:repeating-linear-gradient(45deg,var(--raster-a),
+      var(--raster-a) 6px,var(--raster-b) 6px,var(--raster-b) 12px)}
   .thumb.broken,.detail-pic.broken{display:none}
   tr.detail{display:none}
-  tr.detail>td{background:#f6f7fb;border-top:0;padding:0}
+  tr.detail>td{background:var(--detail-bg);border-top:0;padding:0}
   .detail-panel{padding:18px clamp(14px,3vw,26px);display:grid;gap:18px;
                 grid-template-columns:minmax(0,1fr)}
   .detail-body{display:grid;gap:14px;min-width:0}
   .detail-pic{width:100%;border-radius:10px;border:1px solid var(--line);display:block}
   .detail-img .ph{display:block;width:100%;aspect-ratio:725/300;border-radius:10px;
-       background:repeating-linear-gradient(45deg,#e9ecf3,#e9ecf3 8px,#eef1f7 8px,#eef1f7 16px)}
+       background:repeating-linear-gradient(45deg,var(--raster-a),
+      var(--raster-a) 8px,var(--raster-b) 8px,var(--raster-b) 16px)}
   .detail-body h4{margin:0 0 4px;font-size:12px;letter-spacing:.05em;
                   text-transform:uppercase;color:var(--muted)}
   .detail-body .field p{margin:0;max-width:74ch}
@@ -1766,6 +1839,19 @@ _LIST_TEMPLATE = """<!DOCTYPE html>
   .empty{text-align:center;color:var(--muted);padding:40px}
   footer{padding:18px clamp(16px,4vw,40px);color:var(--muted);font-size:12px}
   @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+  /* Schlagwörter und Verwandtschaft — beides zeigt die App, die Liste bisher
+     nicht. Die Chips sind Knöpfe, weil sie etwas TUN (filtern); ein <span>
+     wäre für die Tastatur unerreichbar. */
+  .catchip{font:inherit;cursor:pointer;border:1px solid transparent}
+  .catchip:hover{border-color:var(--indigo);color:var(--indigo)}
+  .tagrow{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+  .tagchip{appearance:none;border:1px solid var(--line);background:var(--bg);
+      color:var(--ink);font:inherit;font-size:11px;line-height:1;cursor:pointer;
+      padding:5px 9px;border-radius:999px}
+  .tagchip:hover{background:var(--indigo-soft);border-color:var(--indigo);
+      color:var(--indigo)}
+  .verwandt{margin:4px 0 0;padding-left:18px;font-size:12.5px;line-height:1.6}
+  .verwandt a{color:var(--indigo)}
 {{LANGCSS}}
 </style>
 </head>
@@ -1796,8 +1882,8 @@ _LIST_TEMPLATE = """<!DOCTYPE html>
            placeholder="Filtern nach Titel, Starter*in, Kategorie …">
     <div class="seg" role="group" aria-label="Status">
       <button data-f="all" aria-pressed="true">{{F_ALL}}</button>
-      <button data-f="online" aria-pressed="false">Online</button>
-      <button data-f="offline" aria-pressed="false">Offline</button>{{CLOSEDFILTERS}}
+      <button data-f="online" aria-pressed="false">{{F_ONLINE}}</button>
+      <button data-f="offline" aria-pressed="false">{{F_OFFLINE}}</button>{{CLOSEDFILTERS}}
     </div>
     <select id="catFilter" aria-label="Kategorie / Category">
       <option value="">{{F_ALLCATS}}</option>
@@ -1858,7 +1944,8 @@ _LIST_TEMPLATE = """<!DOCTYPE html>
     var term=q.value.trim().toLowerCase(), cat=catFilter.value, shown=0;
     rows.forEach(function(r){
       var okText=!term || (r.dataset.title+" "+r.dataset.starter+" "+
-                           r.dataset.category).indexOf(term)>-1;
+                           r.dataset.category+" "+
+                           (r.dataset.tags||"")).indexOf(term)>-1;
       var okStatus = statusFilter==="all" ? true
         : statusFilter==="closed"  ? r.dataset.closed==="1"
         : statusFilter==="running" ? (r.dataset.status==="online" &&
@@ -1870,8 +1957,35 @@ _LIST_TEMPLATE = """<!DOCTYPE html>
       if(r._detail)r._detail.style.display=(ok&&r.classList.contains("open"))?"table-row":"none";
       if(ok)shown++;
     });
-    count.textContent=shown+" von "+rows.length+" sichtbar";
+    count.textContent=PM_T(shown+" von "+rows.length+" sichtbar",
+                           shown+" of "+rows.length+" shown");
   }
+  // Klick auf die Kategorie stellt die Auswahlliste darüber — die App filtert
+  // bei derselben Geste plattformweit, hier eben innerhalb der Plattform.
+  document.addEventListener("click",function(e){
+    var chip=e.target.closest?e.target.closest(".catchip"):null;
+    if(!chip)return;
+    e.stopPropagation();
+    catFilter.value=chip.getAttribute("data-cat").toLowerCase();
+    apply();
+    window.scrollTo({top:0,behavior:"smooth"});
+  });
+  // Klick auf ein Schlagwort filtert danach — dieselbe Geste wie in der App.
+  // Der Klick darf die Zeile nicht zuklappen, daher stopPropagation.
+  document.addEventListener("click",function(e){
+    var chip=e.target.closest?e.target.closest(".tagchip"):null;
+    if(!chip)return;
+    e.stopPropagation();
+    q.value=chip.getAttribute("data-tag");
+    apply();
+    window.scrollTo({top:0,behavior:"smooth"});
+  });
+  // Nach einem Sprachwechsel den Zähler neu schreiben — er entsteht in JS und
+  // wird vom data-de/data-en-Tausch nicht erfasst.
+  document.addEventListener("click",function(e){
+    if(e.target.closest && e.target.closest(".langsel__b[data-lang]"))
+      setTimeout(apply,0);
+  });
   q.addEventListener("input",apply);
   catFilter.addEventListener("change",apply);
   document.querySelectorAll(".seg button").forEach(function(b){
@@ -1969,6 +2083,227 @@ _LIST_TEMPLATE = """<!DOCTYPE html>
 # ----------------------------------------------------------------------------
 # HTML: Dashboard (Übersicht aller Plattformen) + Platzhalter-Seiten
 # ----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
+# Farben: EIN Satz für Dashboard, Listen und Platzhalterseiten
+# ----------------------------------------------------------------------------
+# Vorher hatte jede der drei Vorlagen ihren eigenen :root-Block — 15, 7 und 30
+# Variablen, teils mit denselben Werten, und der Dunkelmodus existierte nur im
+# Dashboard. Die Listen blieben deshalb hell, auch wenn das System dunkel steht.
+#
+# Beide Fassungen entstehen aus DIESEN ZWEI Wörterbüchern. Der dunkle Satz muss
+# an zwei Stellen im CSS stehen (einmal für die Systemeinstellung, einmal für
+# die ausdrückliche Wahl) — von Hand wären das zwei Gelegenheiten, sie
+# auseinanderlaufen zu lassen; erzeugt sind sie zwangsläufig gleich.
+_FARBEN_HELL = {
+    "bg": "#eef0f4", "surface": "#ffffff", "ink": "#161a22", "muted": "#5d6675",
+    "line": "#e2e5ec",
+    "indigo": "#2f3f86", "indigo-soft": "#eaeefb", "indigo-hover": "#26326b",
+    "on-accent": "#ffffff",
+    "online": "#1f7a4d", "online-bg": "#e6f3ec",
+    "offline": "#b23b3b", "offline-bg": "#f7e8e8",
+    "closed": "#6b5a2e", "closed-bg": "#f4eeda",
+    "grow": "#c98a20",
+    # Aufgeklapptes Detailfeld und Vorschaubilder. Standen fest im
+    # Listen-Regelwerk — im Dunkelmodus blieb das aufgeklappte Feld
+    # deshalb fast weiß, mit heller Schrift darauf.
+    "detail-bg": "#f6f7fb", "thumb-bg": "#dfe3ec",
+    "raster-a": "#e9ecf3", "raster-b": "#eef1f7",
+    "warn-bg": "#fdeceb", "warn-ink": "#8d2f28", "warn-line": "#f3c3bf",
+    "info-bg": "#eaf1fb", "info-ink": "#254a7d", "info-line": "#c3d6f0",
+    # Ampel: Punktfarbe und Schriftfarbe getrennt — Gelb und Hellgrün taugen als
+    # Fläche, aber nicht als Schrift. Die drei -ink-Werte sind nachgedunkelt,
+    # weil .amp-label mit 11px fett als Kleintext zählt (4,5:1 statt 3:1).
+    "amp5": "#1f7a4d", "amp5-ink": "#1f7a4d",
+    "amp4": "#7cb342", "amp4-ink": "#5b812d",
+    "amp3": "#e0a80f", "amp3-ink": "#96710a",
+    "amp2": "#e07b39", "amp2-ink": "#bb5c1e",
+    "amp1": "#b23b3b", "amp1-ink": "#b23b3b",
+}
+_FARBEN_DUNKEL = {
+    "bg": "#12151b", "surface": "#1a1e26", "ink": "#e7eaf0", "muted": "#9aa4b4",
+    "line": "#2b313c",
+    # --indigo ist hier BEIDES: Schrift auf der Fläche und Fläche unter der
+    # Schrift. Deshalb wird es hell und --on-accent kippt auf dunkel.
+    "indigo": "#93a8f0", "indigo-soft": "#222a3f", "indigo-hover": "#aab9f5",
+    "on-accent": "#12151b",
+    "online": "#4cc38a", "online-bg": "#15291f",
+    "offline": "#f2867d", "offline-bg": "#2f1a18",
+    "closed": "#e0c98a", "closed-bg": "#2a2416",
+    "grow": "#e2a93c",
+    "detail-bg": "#151922", "thumb-bg": "#232833",
+    "raster-a": "#1e232d", "raster-b": "#242a36",
+    "warn-bg": "#2f1a18", "warn-ink": "#ffb3ab", "warn-line": "#5b302b",
+    "info-bg": "#17222f", "info-ink": "#a9c9f2", "info-line": "#2d4056",
+    "amp5": "#3aa972", "amp5-ink": "#5cc48e",
+    "amp4": "#8cc457", "amp4-ink": "#9ed36a",
+    "amp3": "#e0a80f", "amp3-ink": "#e8bb44",
+    "amp2": "#e07b39", "amp2-ink": "#ef9a63",
+    "amp1": "#d05a56", "amp1-ink": "#f2867d",
+}
+_SCHRIFTEN = ('--mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;'
+              '--sans:ui-sans-serif,system-ui,"Segoe UI",Roboto,Helvetica,'
+              'Arial,sans-serif;')
+
+
+def _farben_css() -> str:
+    """Der Farbsatz als CSS — hell, systemdunkel und ausdrücklich dunkel.
+
+    Die Reihenfolge ist wesentlich: die Systemregel greift nur, solange NICHT
+    ausdrücklich hell gewählt wurde (`:not([data-theme="light"])`), und die
+    ausdrückliche Wahl steht danach und gewinnt in jedem Fall. Ohne das
+    `:not(…)` könnte man auf einem dunkel eingestellten System nicht auf Hell
+    schalten — die Systemregel überschriebe die Wahl."""
+    def satz(d):
+        return "".join(f"--{k}:{v};" for k, v in d.items())
+    return (f"  :root{{{satz(_FARBEN_HELL)}{_SCHRIFTEN}}}\n"
+            f"  @media (prefers-color-scheme:dark){{\n"
+            f"    :root:not([data-theme=\"light\"]){{{satz(_FARBEN_DUNKEL)}}}\n"
+            f"  }}\n"
+            f"  :root[data-theme=\"dark\"]{{{satz(_FARBEN_DUNKEL)}}}")
+
+
+# Nur diese Adressform liefert der Monitor-Server als Datei aus.
+LOGO_PFAD_RE = re.compile(r"/webapp/logos/[a-z0-9_]+\.svg")
+
+_STECKBRIEF_FELDER = ("tagline", "color", "operator", "seat", "founded",
+                      "financing")
+
+
+def _js_block(text: str, key: str) -> str | None:
+    """Den Objektblock eines Schlüssels aus JS-Quelltext schneiden."""
+    m = re.search(rf"^  {re.escape(key)}:\s*\{{", text, re.M)
+    if not m:
+        return None
+    tiefe, j = 0, m.end() - 1
+    while j < len(text):
+        if text[j] == "{":
+            tiefe += 1
+        elif text[j] == "}":
+            tiefe -= 1
+            if tiefe == 0:
+                return text[m.start():j + 1]
+        j += 1
+    return None
+
+
+def _app_steckbriefe() -> dict[str, dict]:
+    """Hausfarbe, Kurzbeschreibung und Steckbrief je Plattform — GELESEN aus
+    ``webapp/platforms.js``, derselben Datei, aus der auch die App sie nimmt.
+
+    Bewusst gelesen und nicht nach Python kopiert: zwei Fassungen derselben
+    Angaben laufen auseinander, und man merkt es erst, wenn jemand die falsche
+    liest. Der Preis ist eine Kopplung an das Dateiformat — deshalb ist jeder
+    Zugriff einzeln abgesichert, und ein Fehlschlag kostet nur die Anzeige.
+
+    ⚠️ ZWEI FALLEN, beide beim Bauen erlebt:
+    1. **Der eigene Kommentar erschlägt das Suchmuster.** „PM_PLATFORMS_EN"
+       steht schon im Kopfkommentar der Datei (Zeile 3). Wer am ersten
+       Vorkommen schneidet, trifft den Kommentar und hält anschließend die
+       DEUTSCHEN Daten für die englischen. Deshalb `^window\\.…` am
+       ZEILENANFANG verankert.
+    2. **Der englische Block ist eine TEIL-Überschreibung**, kein Vollsatz: er
+       trägt nur das Übersetzbare (tagline, seat, financing), weder Farbe noch
+       Gründungsjahr. Der Rückfall gilt deshalb je FELD, nicht je Plattform.
+
+    Findet sich gar nichts, wird das gemeldet statt verschwiegen — eine leere
+    Rückgabe sähe sonst aus, als hätten die Plattformen keinen Steckbrief."""
+    datei = Path("webapp/platforms.js")
+    if not datei.exists():
+        return {}
+    try:
+        s = datei.read_text(encoding="utf-8")
+    except OSError:
+        return {}
+    m_de = re.search(r"^window\.PM_PLATFORMS\s*=", s, re.M)
+    m_en = re.search(r"^window\.PM_PLATFORMS_EN\s*=", s, re.M)
+    if not m_de:
+        log(f"{datei}: window.PM_PLATFORMS nicht gefunden – die Kacheln "
+            f"bleiben ohne Steckbrief.")
+        return {}
+    teil_de = s[m_de.start():m_en.start() if m_en else len(s)]
+    teil_en = s[m_en.start():] if m_en else ""
+
+    def feld(block: str | None, name: str) -> str:
+        if not block:
+            return ""
+        m = (re.search(rf'\b{name}:\s*"([^"]*)"', block)
+             or re.search(rf"\b{name}:\s*(\d+)", block))
+        return m.group(1).strip() if m else ""
+
+    aus: dict[str, dict] = {}
+    for key in re.findall(r"^  ([a-z0-9_]+):\s*\{", teil_de, re.M):
+        b_de, b_en = _js_block(teil_de, key), _js_block(teil_en, key)
+        eintrag = {f: (feld(b_de, f), feld(b_en, f) or feld(b_de, f))
+                   for f in _STECKBRIEF_FELDER}
+        if any(w for w, _ in eintrag.values()):
+            aus[key] = eintrag
+    if not aus:
+        log(f"{datei}: kein einziger Steckbrief lesbar – Format geändert? "
+            f"Die Kacheln bleiben ohne.")
+    return aus
+
+
+def _logo_chip(platform: Platform, schnappschuss: bool, farbe: str) -> str:
+    """Das Plattform-Logo auf der Kachel — das auffälligste Element, das die
+    App hat und die Kachel bisher nicht.
+
+    Als ``<img>`` eingebunden, NICHT eingebettet: die elf Bögen wiegen zusammen
+    165 KB, WeMove allein 87 KB. Eingebettet vervierfachte das den Pages-
+    Schnappschuss, den der Nutzer auf dem Handy öffnet; als Verweis lädt der
+    Browser sie einzeln und behält sie im Cache.
+
+    ⚠️ Der Pfad hängt davon ab, WO die Datei liegt: der Schnappschuss landet in
+    ``webapp/`` (also neben ``logos/``), die Server-Fassung im Projektwurzel-
+    verzeichnis (also eine Ebene darüber). Derselbe Fehler wie bei den
+    Listen-Links, nur andersherum.
+
+    ⚠️ Die Bögen tragen teils ``currentColor``. In einem ``<img>`` erbt das
+    nichts von der Seite und wird schwarz — auf einer dunklen Kachel also
+    unsichtbar. Deshalb sitzt das Logo auf einer FESTEN hellen Fläche, in
+    beiden Designs gleich; die Hausfarbe rahmt sie."""
+    datei = Path("webapp/logos") / f"{platform.key}.svg"
+    if not datei.exists():
+        return ""
+    pfad = f"logos/{platform.key}.svg" if schnappschuss \
+        else f"webapp/logos/{platform.key}.svg"
+    rahmen = f'border-color:{_esc(farbe)}' if farbe else ""
+    return (f'<span class="plogo" style="{rahmen}">'
+            f'<img src="{_esc(pfad)}" alt="" loading="lazy"></span>')
+
+
+def _steckbrief_teile(key: str, steckbriefe: dict) -> tuple[str, str, str]:
+    """(Punktfarbe, Kurzbeschreibung, Steckbriefzeile) für eine Kachel.
+
+    Alles drei zeigt die App längst — die Kachel bisher nicht. Die Punktfarbe
+    steht als Inline-Stil im Markup, obwohl Inline-Farben sonst in diesem
+    Regelwerk verpönt sind: hier ist die Farbe ein DATENWERT je Plattform, den
+    keine Klasse abbilden kann, und sie ist eine Hausfarbe — sie soll sich mit
+    dem Dunkelmodus ausdrücklich NICHT ändern."""
+    e = steckbriefe.get(key)
+    if not e:
+        return "", "", ""
+    farbe = e["color"][0]
+    tl_de, tl_en = e["tagline"]
+    tagline = (f'<p class="tagline" data-de="{_esc(tl_de)}" '
+               f'data-en="{_esc(tl_en)}">{_esc(tl_de)}</p>') if tl_de else ""
+
+    paare = (("Träger", "Operator", "operator"),
+             ("Sitz", "Based in", "seat"),
+             ("Gegründet", "Founded", "founded"),
+             ("Finanzierung", "Funding", "financing"))
+    stuecke_de, stuecke_en = [], []
+    for lab_de, lab_en, feld in paare:
+        w_de, w_en = e[feld]
+        if not w_de:
+            continue
+        stuecke_de.append(f"{lab_de} {w_de}")
+        stuecke_en.append(f"{lab_en} {w_en}")
+    zeile = (f'<p class="steckbrief">'
+             + _zs(" · ".join(stuecke_de), " · ".join(stuecke_en))
+             + "</p>") if stuecke_de else ""
+    return farbe, tagline, zeile
+
+
 def _plattformname(platform: Platform) -> str:
     """Die Überschrift der Kachel.
 
@@ -2013,7 +2348,8 @@ def _kachel_rahmen(platform: Platform, schnappschuss: bool,
             _zs("Zur Liste →", "View list →", klasse="card-btn"))
 
 
-def _live_card(platform: Platform, schnappschuss: bool = False) -> str:
+def _live_card(platform: Platform, schnappschuss: bool = False,
+               steckbriefe: dict | None = None) -> str:
     store = load_store(platform.data_file)
     online = sum(1 for r in store.values() if r.get("status", "online") == "online")
     offline = len(store) - online
@@ -2117,11 +2453,17 @@ def _live_card(platform: Platform, schnappschuss: bool = False) -> str:
 
     auf, zu, pille, balken, knopf = _kachel_rahmen(platform, schnappschuss)
     stand = _fmt_dt(generated) if generated else "—"
+    farbe, tagline, steckbrief = _steckbrief_teile(platform.key,
+                                                   steckbriefe or {})
+    punkt = _logo_chip(platform, schnappschuss, farbe) or (
+        f'<span class="card-dot" style="background:{_esc(farbe)}"></span>'
+        if farbe else '<span class="card-dot weact"></span>')
 
     return f"""
     {auf}
-      <div class="card-head"><span class="card-dot weact"></span>{_plattformname(platform)}
+      <div class="card-head">{punkt}{_plattformname(platform)}
         {pille}</div>
+      {tagline}
       {_openness_badge(platform)}
       <div class="card-stats">
         <div class="cs"><div class="n">{len(store)}</div>{_zs("Petitionen", "Petitions", klasse="l", tag="div")}</div>
@@ -2137,6 +2479,7 @@ def _live_card(platform: Platform, schnappschuss: bool = False) -> str:
              klasse="completeness__sub")}
       </div>
       {warn_html}
+      {steckbrief}
       {balken}
       <p class="card-sub">{_zs(
           f"{new_count} neue Petition(en) im letzten Lauf · Datenstand {stand}",
@@ -2168,8 +2511,9 @@ def _i18n_einsetzen(tmpl: str) -> str:
     """Die drei gemeinsamen Bausteine der Zweisprachigkeit in eine Vorlage
     setzen: Wähler, Stil, Skript. Jede Seite, die {{LANGSEL}}, {{LANGCSS}} und
     {{I18N}} enthält, ist damit umschaltbar."""
-    return (tmpl.replace("{{LANGSEL}}", _LANGSEL)
+    return (tmpl.replace("{{LANGSEL}}", _THEMESEL + "\n    " + _LANGSEL)
                 .replace("{{LANGCSS}}", _LANGSEL_CSS)
+                .replace("{{FARBEN}}", _farben_css())
                 .replace("{{I18N}}", _I18N_SCRIPT))
 
 
@@ -2200,8 +2544,9 @@ def build_dashboard(platforms: list[Platform], schnappschuss: bool = False) -> s
     Warn- und Hinweiskasten sind zusätzlich am gerenderten Pixel nachgemessen
     (getComputedStyle im Headless, beide Modi): 7,15/9,59 und 7,85/9,43 —
     Rechnung und Browser kommen auf dieselben Werte."""
+    steckbriefe = _app_steckbriefe()
     cards = "\n".join(
-        _live_card(p, schnappschuss) if p.is_live
+        _live_card(p, schnappschuss, steckbriefe) if p.is_live
         else _placeholder_card(p, schnappschuss) for p in platforms)
     tmpl = _DASHBOARD_TEMPLATE
     tmpl = tmpl.replace("{{MODUS}}", ' data-modus="schnappschuss"'
@@ -2275,6 +2620,20 @@ _SUB_SCHNAPPSCHUSS = (
 # stehen bewusst in der JEWEILIGEN Sprache („Deutsch"/„English") und werden
 # NICHT mitübersetzt — wer die aktuelle Sprache nicht versteht, muss seine
 # eigene trotzdem finden.
+# Oben rechts stehen zwei Umschalter nebeneinander: Design und Sprache. Beide
+# als Zweiergruppe mit `aria-pressed`, damit sie sich gleich anfühlen und die
+# Tastatur beide gleich bedient. Die Designknöpfe tragen Symbole statt Wörtern —
+# ☀/☾ braucht keine Übersetzung und keine Breite.
+_THEMESEL = """<div class="langsel themesel" role="group"
+         aria-label="Design / Appearance">
+      <button type="button" class="langsel__b" data-theme-set="light"
+              aria-pressed="true" data-de="Hell" data-en="Light"
+              data-titel="1" title="Hell"><span aria-hidden="true">☀</span></button>
+      <button type="button" class="langsel__b" data-theme-set="dark"
+              aria-pressed="false" data-de="Dunkel" data-en="Dark"
+              data-titel="1" title="Dunkel"><span aria-hidden="true">☾</span></button>
+    </div>"""
+
 _LANGSEL = """<div class="langsel" role="group" aria-label="Sprache · Language">
       <button type="button" class="langsel__b" data-lang="de" lang="de"
               aria-pressed="true">Deutsch</button>
@@ -2300,6 +2659,10 @@ _LANGSEL_CSS = """  /* Kopfzeile: Rubrik links, Sprachwähler rechts. */
   .langsel__b[aria-pressed="true"]{background:var(--indigo);color:var(--on-accent)}
   .langsel__b:hover:not([aria-pressed="true"]){background:var(--indigo-soft);
       color:var(--indigo)}
+  /* Die beiden Leisten sitzen nebeneinander und dürfen auf schmalen Schirmen
+     umbrechen, ohne die Rubrikzeile mitzureißen. */
+  .head-top{gap:10px}
+  .themesel .langsel__b{font-size:14px;padding:6px 10px;line-height:1}
   /* Tastaturbedienung sichtbar machen. :focus-visible statt :focus, damit der
      Ring nur bei Tastatur erscheint und nicht nach jedem Mausklick. */
   a:focus-visible,button:focus-visible{outline:2px solid var(--indigo);
@@ -2318,6 +2681,57 @@ _I18N_SCRIPT = """<script>
 window.PM_T = function(de, en){
   return document.documentElement.getAttribute("lang") === "en" ? en : de;
 };
+
+// Hell/Dunkel. Ohne gespeicherte Wahl steht KEIN data-theme am <html> — dann
+// gilt die Systemeinstellung über die Medienabfrage im Farbsatz. Erst ein
+// Klick schreibt die Wahl fest; sie überstimmt das System dann in beide
+// Richtungen (deshalb im CSS das :not([data-theme="light"]) an der Systemregel).
+(function(){
+  var SPEICHER = "pmDashTheme";
+
+  function aktiv(){
+    var gesetzt = document.documentElement.getAttribute("data-theme");
+    if (gesetzt) return gesetzt;
+    return (window.matchMedia
+            && window.matchMedia("(prefers-color-scheme: dark)").matches)
+           ? "dark" : "light";
+  }
+
+  function knoepfeStellen(){
+    var jetzt = aktiv();
+    var b = document.querySelectorAll("[data-theme-set]");
+    for (var i = 0; i < b.length; i++){
+      b[i].setAttribute("aria-pressed",
+        b[i].getAttribute("data-theme-set") === jetzt ? "true" : "false");
+    }
+  }
+
+  try {
+    var w = localStorage.getItem(SPEICHER);
+    if (w === "light" || w === "dark")
+      document.documentElement.setAttribute("data-theme", w);
+  } catch (e) {}
+  knoepfeStellen();
+
+  document.addEventListener("click", function(ev){
+    var b = ev.target.closest ? ev.target.closest("[data-theme-set]") : null;
+    if (!b) return;
+    var wahl = b.getAttribute("data-theme-set");
+    document.documentElement.setAttribute("data-theme", wahl);
+    try { localStorage.setItem(SPEICHER, wahl); } catch (e) {}
+    knoepfeStellen();
+  });
+
+  // Ohne eigene Wahl folgt die Seite dem System auch WÄHREND sie offen ist.
+  if (window.matchMedia){
+    var mq = window.matchMedia("(prefers-color-scheme: dark)");
+    var reagieren = function(){
+      if (!document.documentElement.getAttribute("data-theme")) knoepfeStellen();
+    };
+    if (mq.addEventListener) mq.addEventListener("change", reagieren);
+    else if (mq.addListener) mq.addListener(reagieren);
+  }
+})();
 
 (function(){
   var SPRACHEN = ["de", "en"];
@@ -2368,7 +2782,13 @@ window.PM_T = function(de, en){
     var t = wurzel.getAttribute("data-title-" + lang)
             || wurzel.getAttribute("data-title-de");
     if (t) document.title = t;
-    var knoepfe = document.querySelectorAll(".langsel__b");
+    // ⚠️ NUR die Sprachknöpfe. Vorher stand hier ".langsel__b", und weil die
+    // Designknöpfe dieselbe Klasse tragen (damit sie gleich aussehen), aber
+    // kein data-lang, verglich der Ausdruck `null === lang` — beide wurden bei
+    // JEDEM Sprachwechsel auf „nicht gedrückt" gesetzt. Da dieses Skript nach
+    // dem Design-Skript läuft, war der Design-Umschalter schon beim Laden ohne
+    // aktiven Zustand.
+    var knoepfe = document.querySelectorAll(".langsel__b[data-lang]");
     for (var j = 0; j < knoepfe.length; j++){
       knoepfe[j].setAttribute("aria-pressed",
         knoepfe[j].getAttribute("data-lang") === lang ? "true" : "false");
@@ -2379,7 +2799,12 @@ window.PM_T = function(de, en){
   setze(aktuell);
 
   document.addEventListener("click", function(ev){
-    var b = ev.target.closest ? ev.target.closest(".langsel__b") : null;
+    // ⚠️ Auch hier NUR die Sprachknöpfe. Ohne [data-lang] fing dieser Fänger
+    // die Klicks auf die Designknöpfe mit (gleiche Klasse), las deren
+    // data-lang als null und rief setze(null) — das schrieb lang="null" ans
+    // <html> und löschte den aktiven Zustand der Sprachwahl. Erst beim
+    // Nachmessen aufgefallen: „Dunkel" anklicken machte die Sprache leer.
+    var b = ev.target.closest ? ev.target.closest(".langsel__b[data-lang]") : null;
     if (!b) return;
     aktuell = b.getAttribute("data-lang");
     try { localStorage.setItem(SPEICHER, aktuell); } catch (e) {}
@@ -2411,6 +2836,8 @@ _LIST_I18N_BLOECKE = {
                      klasse="l"),
     "{{RUNNOW}}": _zs("Jetzt scrapen", "Scrape now"),
     "{{F_ALL}}": _zs("Alle", "All"),
+    "{{F_ONLINE}}": _zs("Online", "Online"),
+    "{{F_OFFLINE}}": _zs("Offline", "Offline"),
     "{{F_ALLCATS}}": _zs("Alle Kategorien", "All categories"),
     "{{TH_IMG}}": _zs("Bild", "Image"),
     "{{TH_STATUS}}": _zs("Status", "Status"),
@@ -2472,32 +2899,7 @@ _DASHBOARD_TEMPLATE = """<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Petitions-Monitor · Dashboard</title>
 <style>
-  :root{
-    --bg:#eef0f4; --surface:#ffffff; --ink:#161a22; --muted:#5d6675;
-    --line:#e2e5ec; --indigo:#2f3f86; --indigo-soft:#eaeefb;
-    --indigo-hover:#26326b; --on-accent:#ffffff;
-    --online:#1f7a4d; --offline:#b23b3b; --grow:#c98a20;
-    /* Warn- und Hinweiskasten. Standen bis zum 8.8.2026 als feste Farben im
-       Regelwerk und waren damit das Einzige, was einen Dunkelmodus verhindert
-       hätte. */
-    --warn-bg:#fdeceb; --warn-ink:#8d2f28; --warn-line:#f3c3bf;
-    --info-bg:#eaf1fb; --info-ink:#254a7d; --info-line:#c3d6f0;
-    /* Ampel: Punktfarbe und Schriftfarbe getrennt — Gelb und Hellgrün taugen
-       als Fläche, aber nicht als Schrift auf Weiß. */
-    /* Drei der Schriftfarben verfehlten die AA-Schwelle und niemand hatte je
-       nachgemessen: .amp-label ist 11px fett, also KLEINTEXT — 4,5:1 ist
-       Pflicht, nicht 3:1. Gemessen auf Weiß waren es 3,58 (Stufe 4), 3,67
-       (Stufe 3) und 4,29 (Stufe 2). Nachgedunkelt bei gleichem Farbton und
-       gleicher Sättigung, bis 4,5 erreicht war; die PUNKTE behalten ihre
-       kräftige Farbe, nur die Schrift wurde dunkler. */
-    --amp5:#1f7a4d; --amp5-ink:#1f7a4d;
-    --amp4:#7cb342; --amp4-ink:#5b812d;
-    --amp3:#e0a80f; --amp3-ink:#96710a;
-    --amp2:#e07b39; --amp2-ink:#bb5c1e;
-    --amp1:#b23b3b; --amp1-ink:#b23b3b;
-    --mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
-    --sans:ui-sans-serif,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  }
+{{FARBEN}}
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
        font-size:14px;line-height:1.45}
@@ -2530,6 +2932,29 @@ _DASHBOARD_TEMPLATE = """<!DOCTYPE html>
   .card-dot.weact{background:var(--indigo)}
   .card-dot.other{background:var(--muted)}
   .card-head h2{margin:0;font-size:18px}
+  /* Kurzbeschreibung und Steckbrief — beides steht in der App unter „Über
+     diese Plattform" und fehlte auf der Kachel. Der Steckbrief sitzt unten
+     und abgesetzt: er ändert sich fast nie, die Zahlen darüber täglich. */
+  /* Feste helle Fläche unter dem Logo: die Bögen tragen teils currentColor,
+     das in einem <img> zu Schwarz wird — auf dunkler Kachel unsichtbar. */
+  /* Feste helle Fläche unter dem Logo: die Bögen tragen teils currentColor,
+     das in einem <img> zu Schwarz wird — auf dunkler Kachel unsichtbar.
+     ⚠️ Die Maße sind ABSICHTLICH ganzzahlig und am Bild wie am Rahmen fest
+     gesetzt. Mit `max-width:100%` ergab sich die Bildgröße aus dem Innenraum
+     und war bei einem Seitenverhältnis von 1,423 gebrochen; während der
+     Schwebe-Bewegung der Kachel (`translateY(-2px)`) landete der Bogen dann
+     jeden Frame auf anderen Gerätepunkten und wurde neu gerastert — das sah
+     aus, als wackle das Logo. `translateZ(0)` gibt ihm zusätzlich eine eigene
+     Ebene, sodass die Bewegung ihn nur verschiebt statt ihn neu zu zeichnen.
+     Größe von 38×26 auf 60×38 — vorher blieben dem Bogen netto 30×18. */
+  .plogo{display:inline-flex;align-items:center;justify-content:center;
+      width:60px;height:38px;flex:none;background:#ffffff;border-radius:7px;
+      border:1px solid var(--line);padding:5px;
+      transform:translateZ(0);backface-visibility:hidden}
+  .plogo img{width:48px;height:26px;object-fit:contain;display:block}
+  .tagline{margin:-8px 0 10px;font-size:12.5px;color:var(--muted)}
+  .steckbrief{margin:0 0 12px;padding-top:10px;border-top:1px solid var(--line);
+      font-size:11px;line-height:1.5;color:var(--muted)}
   .card-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
   .cs .n{font-family:var(--mono);font-size:20px;font-weight:700}
   .cs .l{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
@@ -2613,28 +3038,6 @@ _DASHBOARD_TEMPLATE = """<!DOCTYPE html>
   .lg-5{background:var(--amp5)} .lg-4{background:var(--amp4)}
   .lg-3{background:var(--amp3)} .lg-2{background:var(--amp2)}
   .lg-1{background:var(--amp1)}
-  /* Dunkelmodus (8.8.2026). Folgt dem Systemwunsch, ohne eigenen Schalter:
-     das Dashboard ist eine Statusseite, die man nachts kurz aufmacht — ein
-     zweiter Schalter neben der Sprache wäre mehr Bedienung als Nutzen.
-     Umgesetzt allein über die Variablen oben; alle Kontraste sind gemessen
-     und stehen im Kopf von build_dashboard. --indigo wird hell, weil es hier
-     BEIDES ist: Schrift auf der Fläche und Fläche unter der Schrift — dafür
-     kippt --on-accent auf dunkel (dasselbe Muster wie in der Web-App). */
-  @media (prefers-color-scheme:dark){
-    :root{
-      --bg:#12151b; --surface:#1a1e26; --ink:#e7eaf0; --muted:#9aa4b4;
-      --line:#2b313c; --indigo:#93a8f0; --indigo-soft:#222a3f;
-      --indigo-hover:#aab9f5; --on-accent:#12151b;
-      --online:#4cc38a; --offline:#f2867d; --grow:#e2a93c;
-      --warn-bg:#2f1a18; --warn-ink:#ffb3ab; --warn-line:#5b302b;
-      --info-bg:#17222f; --info-ink:#a9c9f2; --info-line:#2d4056;
-      --amp5:#3aa972; --amp5-ink:#5cc48e;
-      --amp4:#8cc457; --amp4-ink:#9ed36a;
-      --amp3:#e0a80f; --amp3-ink:#e8bb44;
-      --amp2:#e07b39; --amp2-ink:#ef9a63;
-      --amp1:#d05a56; --amp1-ink:#f2867d;
-    }
-  }
   .legend-note{margin:10px 0 0;max-width:70ch;font-size:11px;line-height:1.5;
       color:var(--muted)}
   .legend-note b{color:var(--ink);font-weight:700}
@@ -2761,11 +3164,7 @@ _PLACEHOLDER_TEMPLATE = """<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{NAME}} · Petitions-Monitor</title>
 <style>
-  :root{
-    --bg:#eef0f4; --surface:#ffffff; --ink:#161a22; --muted:#5d6675;
-    --line:#e2e5ec; --indigo:#2f3f86;
-    --sans:ui-sans-serif,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  }
+{{FARBEN}}
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
        font-size:14px;line-height:1.5}
@@ -2914,6 +3313,22 @@ class MonitorHandler(BaseHTTPRequestHandler):
                 self._send(404, json.dumps({"error": "unbekannte Plattform"}))
             else:
                 self._start_run(target)
+        elif LOGO_PFAD_RE.fullmatch(path):
+            # Die Plattform-Logos auf der Kachel. Der Server ist sonst eine
+            # reine Positivliste ohne Dateiauslieferung — genau deshalb kam
+            # das <img> zunächst als 404 zurück, obwohl die Datei existierte.
+            #
+            # Eng gefasst: nur Kleinbuchstaben, Ziffern und Unterstrich vor
+            # „.svg", und ausgeliefert wird ausschließlich, was WIRKLICH in
+            # webapp/logos liegt. Damit gibt es keinen Weg aus dem Ordner
+            # heraus, auch nicht über kodierte Punkte.
+            datei = Path("webapp/logos") / Path(path).name
+            if datei.is_file() and datei.parent.resolve() == \
+                    Path("webapp/logos").resolve():
+                self._send(200, datei.read_text(encoding="utf-8"),
+                           "image/svg+xml")
+            else:
+                self._send(404, json.dumps({"error": "not found"}))
         elif data_platform is not None:
             txt = (data_platform.data_file.read_text(encoding="utf-8")
                    if data_platform.data_file.exists() else "{}")

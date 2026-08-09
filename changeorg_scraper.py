@@ -85,6 +85,24 @@ ASK_RE      = re.compile(r'"ask":"((?:[^"\\]|\\.)*)"')
 SIG_RE      = re.compile(r'"signatureCount":\{"displayed":(\d+)')
 GOAL_RE     = re.compile(r'"signatureGoal":\{"displayed":(\d+)')
 DESC_RE     = re.compile(r'"description":"((?:[^"\\]|\\.)*)"')
+# ⚠️ Auf der Seite stehen MEHRERE "description"-Felder, und das ERSTE ist das
+# falsche. Am 9.8.2026 an der Petition „Sexualisierte KI-Darstellungen stoppen"
+# ausgezählt — sechs Stück:
+#   #1   395 Zeichen, endet auf „…"  → schema.org-Block "@type":"Article",
+#                                      also der SEO-Anrisstext
+#   #2  5012 Zeichen                 → die Petition selbst, direkt hinter
+#                                      "ask":"<Titel>"
+#   #3–#5                            → die Neuigkeiten der Petition
+#                                      (davor steht jeweils "title", nicht "ask")
+#
+# `DESC_RE.search(html)` nahm #1. Folge: 370 von 376 Change.org-Sätzen (98 %)
+# trugen einen abgeschnittenen Text, im Median 396 Zeichen — bei allen zehn
+# anderen Plattformen liegt der Anteil bei 0–1 %. Auch die Kurzbeschreibung
+# war betroffen, sie wird aus demselben Text gebildet.
+#
+# Die Verankerung am "ask" ist die Struktur der Seite, keine Heuristik: das
+# Petitionsobjekt trägt erst seinen Titel, dann seinen Text. An sechs Live-
+# Petitionen gegengeprüft, Zuwachs zwischen dem 4- und dem 46-Fachen.
 CREATED_RE  = re.compile(r'"createdAt":"(\d{4}-\d{2}-\d{2})')
 STARTER_RE  = re.compile(r'"displayName":"((?:[^"\\]|\\.)*)"')
 COUNTRY_RE  = re.compile(r'"country":\{"countryCode":"([A-Z]{2})"')
@@ -183,6 +201,20 @@ def discover_slugs(fetcher: core.Fetcher) -> dict[str, dict]:
 # ----------------------------------------------------------------------------
 # Detailseite parsen
 # ----------------------------------------------------------------------------
+def _volltext_treffer(html: str):
+    """Das "description"-Feld der PETITION, nicht das des SEO-Blocks.
+
+    Gesucht wird ab dem "ask" (dem Titel im Petitionsobjekt) — siehe die
+    Begründung bei DESC_RE. Findet sich dort keins, gilt wie früher das erste;
+    lieber ein verkürzter Text als gar keiner."""
+    a = ASK_RE.search(html)
+    if a:
+        m = DESC_RE.search(html, a.end())
+        if m and m.group(1).strip():
+            return m
+    return DESC_RE.search(html)
+
+
 def parse_detail(html: str, url: str) -> dict | None:
     """None = keine deutsche Petition (skip)."""
     m_c = COUNTRY_RE.search(html)
@@ -208,7 +240,7 @@ def parse_detail(html: str, url: str) -> dict | None:
     if m:
         rec["started_by"] = _junescape(m.group(1))[:200]
 
-    m = DESC_RE.search(html)
+    m = _volltext_treffer(html)
     if m:
         desc_html = _junescape(m.group(1))
         frag = BeautifulSoup(desc_html, "html.parser")
