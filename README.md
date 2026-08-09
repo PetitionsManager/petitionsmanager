@@ -376,10 +376,11 @@ Der Monitor hält sich bewusst an folgende Regeln:
   Regeln gilt die längste, wie in RFC 9309 vorgesehen. Nur HTTP 200 (Regeln
   gelten) und 404/410 (es gibt keine robots.txt) sind Freigaben. Alles andere —
   401, 403, 429, 5xx, Zeitüberschreitung — heißt „wir wissen es nicht": Der Host
-  wird nach einem Wiederholversuch **komplett ausgelassen**, mit einer eigenen
-  Protokollzeile, damit ein Aussetzer nicht wie „nichts Neues" aussieht.
-  Führt eine Anfrage auf einen **anderen Host** weiter, wird auch dessen
-  robots.txt geprüft.
+  wird nach einem Wiederholversuch **komplett ausgelassen**. Das meldet der
+  Scraper als eigenen Befund (CI-Zusammenfassung und Dashboard-Kachel), denn ein
+  ausgelassener Host verändert den Bestand nicht und sähe sonst aus wie „nichts
+  Neues gefunden". Führt eine Anfrage auf einen **anderen Host** weiter, wird
+  auch dessen robots.txt geprüft.
 - **Pause zwischen Anfragen** — Standard 1,5 Sekunden, konfigurierbar per
   `--delay`. API-Endpoints oder ressourcenintensive Seiten bekommen mehr Abstand.
 - **24-Stunden-Mindestabstand pro Petition** — eine bereits bekannte Petition

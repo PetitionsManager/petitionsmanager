@@ -679,11 +679,22 @@ class Fetcher:
                     time.sleep(self.delay * versuch * 2)
                     continue
 
-        # Laut protokollieren: ein stiller Aussetzer sähe sonst aus wie
-        # „nichts Neues gefunden", obwohl gar nichts abgerufen wurde.
-        log(f"⚠️ robots.txt von {netloc} nicht lesbar ({letzter}) – "
-            f"dieser Host wird für diesen Lauf KOMPLETT ausgelassen "
-            f"(konservativ nach Kodex).")
+        # ⚠️ Als BEFUND melden, nicht nur ins Protokoll schreiben. Am 8.8.2026
+        # nachgemessen: Ein komplett ausgelassener Host erzeugt in
+        # _bestandspruefung() NULL Befunde – jeder Scraper wertet ein
+        # ausbleibendes Ergebnis als "error", upsert schreibt dann nichts, und
+        # der Bestand ist am Ende byte-gleich. Damit sind alle fünf Melder
+        # blind: gesamt, online, ohne_titel, torsi und dubletten stehen
+        # unverändert da. Der Lauf sähe aus wie „nichts Neues" – der
+        # gefährlichste aller Zustände, weil er nach Erfolg aussieht.
+        befund("warnung", "Host ausgelassen (robots.txt nicht lesbar)",
+               f"{netloc}: {letzter}. Der Host wurde für diesen Lauf komplett "
+               f"ausgelassen; von dort stammen KEINE frischen Daten. Der "
+               f"Bestand bleibt unverändert stehen.",
+               thema_en="Host skipped (robots.txt unreadable)",
+               text_en=f"{netloc}: {letzter}. The host was skipped entirely for "
+                       f"this run; no fresh data came from it. The existing "
+                       f"records stay as they are.")
         self._robots[netloc] = RobotsRules.BLOCK_ALL
         return self._robots[netloc]
 
