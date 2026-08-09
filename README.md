@@ -372,8 +372,14 @@ Beide Stores sind angedacht, beide sind noch offen. Was dafür zu klären ist:
 Der Monitor hält sich bewusst an folgende Regeln:
 
 - **robots.txt wird geladen und respektiert** — jede gesperrte URL wird
-  stillschweigend übersprungen. Ist die robots.txt nicht abrufbar (z. B. wegen
-  Cloudflare), verhält sich der Scraper konservativ.
+  übersprungen, einschließlich Regeln mit `*` und `$`; bei mehreren passenden
+  Regeln gilt die längste, wie in RFC 9309 vorgesehen. Nur HTTP 200 (Regeln
+  gelten) und 404/410 (es gibt keine robots.txt) sind Freigaben. Alles andere —
+  401, 403, 429, 5xx, Zeitüberschreitung — heißt „wir wissen es nicht": Der Host
+  wird nach einem Wiederholversuch **komplett ausgelassen**, mit einer eigenen
+  Protokollzeile, damit ein Aussetzer nicht wie „nichts Neues" aussieht.
+  Führt eine Anfrage auf einen **anderen Host** weiter, wird auch dessen
+  robots.txt geprüft.
 - **Pause zwischen Anfragen** — Standard 1,5 Sekunden, konfigurierbar per
   `--delay`. API-Endpoints oder ressourcenintensive Seiten bekommen mehr Abstand.
 - **24-Stunden-Mindestabstand pro Petition** — eine bereits bekannte Petition
@@ -384,6 +390,28 @@ Der Monitor hält sich bewusst an folgende Regeln:
   eine Plattform blockiert, bleibt der vorhandene Datenstand erhalten.
 - **Kein Massendownload auf Vorrat** — es werden nur Petitionen abgerufen,
   die wirklich neu sind oder deren letzte Prüfung mehr als 24 Stunden zurückliegt.
+
+### Warum nicht `urllib.robotparser`
+
+Bis zum 8.8.2026 wertete der Monitor robots.txt mit `urllib.robotparser` aus.
+Das Protokoll meldete „geladen und wird beachtet", tatsächlich fielen drei
+Regelarten durch:
+
+1. **`*` mitten im Pfad wird ignoriert** — `RuleLine.applies_to` ist reines
+   Präfix-Matching. `Disallow: /a/*/follow-up` traf damit nur eine URL, die ein
+   echtes Sternchen enthält. Betroffen waren rund 98 Regeln, allein 84 bei
+   Change.org.
+2. **`$` am Regelende wird ignoriert** — `Disallow: /*.pdf$` griff nie.
+3. **Die erste passende Regel gewann statt der längsten** — ein `Allow: /` am
+   Anfang überschattete jede spätere Sperre. Bei act.350.org betraf das
+   `Disallow: /act/`, eine ganz gewöhnliche Regel ohne Wildcard.
+
+Ersetzt durch einen eigenen Matcher nach RFC 9309 (`RobotsRules` in
+`petitions_core.py`), ohne zusätzliche Abhängigkeit. **Gemessene Folge: keine.**
+An 9.451 prüfbaren Petitions-URLs des Bestands und 17 Listen-URLs ändert sich
+kein einziges Urteil — die Sperrregeln der Plattformen zielen auf Admin-, Such-
+und API-Pfade, nicht auf Petitionsseiten. Die strengere Auslegung kostet also
+keine Daten; sie hält nur ein, was hier ohnehin zugesagt war.
 
 ### Der Fall Ekō: ein möglicher Weg, den wir nicht gehen
 

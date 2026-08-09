@@ -35,13 +35,13 @@ import os
 import re
 import threading
 import time
-import urllib.robotparser
 import webbrowser
 from dataclasses import dataclass, field
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Callable
-from urllib.parse import urljoin, urlparse, parse_qs, urlencode as _urlencode
+from urllib.parse import (urljoin, urlparse, parse_qs, quote, unquote,
+                          urlencode as _urlencode)
 
 import requests
 from bs4 import BeautifulSoup, Comment
@@ -53,6 +53,9 @@ REQUEST_DELAY   = 1.5          # Sekunden Pause zwischen Anfragen (höflich!)
 REQUEST_TIMEOUT = 30
 MAX_RETRIES     = 3
 RESPECT_ROBOTS  = True
+ROBOTS_RETRIES  = 2            # Versuche für robots.txt selbst. Ein einzelner
+                               # 5xx darf keine ganze Plattform aussetzen lassen
+                               # – danach gilt aber konservativ „gesperrt".
 
 # Wie viele Archiv-Kandidaten ein Lauf höchstens prüft (siehe wayback_slugs).
 # Bei Avaaz stehen rund 1.700 Kandidaten an – die alle in einem Lauf zu prüfen
@@ -501,6 +504,121 @@ def make_tags(rec: dict, max_tags: int = 10) -> list[str]:
 
 
 # ----------------------------------------------------------------------------
+# robots.txt nach RFC 9309 — eigener Matcher statt urllib.robotparser
+# ----------------------------------------------------------------------------
+#  urllib.robotparser sah lange nach der bequemen Wahl aus, wertet robots.txt
+#  aber in DREI Punkten falsch aus. Am 8.8.2026 gegen die echten robots.txt der
+#  elf Plattformen gemessen:
+#
+#   1. `*` mitten im Pfad wird ignoriert. RuleLine.applies_to ist
+#      `self.path == "*" or filename.startswith(self.path)` – reines
+#      Präfix-Matching. `Disallow: /a/*/follow-up` trifft damit nur eine URL,
+#      die ein echtes Sternchen enthält. Betroffen: ~98 Regeln, allein 84 bei
+#      Change.org.
+#   2. `$` am Regelende wird ignoriert, `Disallow: /*.pdf$` greift nie.
+#   3. ⚠️ Die ERSTE passende Regel gewinnt statt der LÄNGSTEN. Ein `Allow: /`
+#      am Anfang überschattet damit jede spätere Disallow-Regel. Genau das
+#      passiert bei act.350.org: `Disallow: /act/` ist gar keine
+#      Wildcard-Regel und wurde trotzdem nicht durchgesetzt.
+#
+#  Punkt 3 ist der folgenreichste und war am wenigsten offensichtlich.
+#
+#  ⚠️ Gemessene Folgen des Wechsels: An den 9.451 prüfbaren Petitions-URLs des
+#  Bestands und 17 Listen-URLs ändert sich NICHTS – die Sperrregeln der
+#  Plattformen zielen auf Admin-, Such- und API-Pfade. Der strengere Matcher
+#  kostet also keine Daten; er hält nur das ein, was der Kodex im README ohnehin
+#  zusagt.
+# ----------------------------------------------------------------------------
+class RobotsRules:
+    """Eine ausgewertete robots.txt. `None` als Regelsatz heißt „keine
+    Einschränkungen", `RobotsRules.BLOCK_ALL` heißt „im Zweifel nichts"."""
+
+    __slots__ = ("groups", "block_all")
+
+    def __init__(self, block_all: bool = False):
+        self.groups: dict[str, list[tuple[bool, str, re.Pattern, int]]] = {}
+        self.block_all = block_all
+
+    # -- Muster → Regulärausdruck -----------------------------------------
+    @staticmethod
+    def _to_regex(pattern: str) -> re.Pattern:
+        anchored = pattern.endswith("$")
+        if anchored:
+            pattern = pattern[:-1]
+        parts = [".*" if ch == "*" else re.escape(ch) for ch in pattern]
+        return re.compile("^" + "".join(parts) + ("$" if anchored else ""))
+
+    @staticmethod
+    def _norm(path: str) -> str:
+        """Einmal dekodieren, dann einheitlich kodieren – sonst verfehlen
+        Regel und URL einander bei %2D & Co."""
+        try:
+            return quote(unquote(path), safe="/*$~:@&=+,;?-._!()'")
+        except Exception:
+            return path
+
+    # -- Parsen ------------------------------------------------------------
+    @classmethod
+    def parse(cls, text: str) -> "RobotsRules":
+        self = cls()
+        current: list[str] = []
+        saw_rule = False          # danach beginnt ein User-agent eine NEUE Gruppe
+        for raw in text.splitlines():
+            line = raw.split("#", 1)[0].strip()
+            if not line or ":" not in line:
+                continue
+            field, _, value = line.partition(":")
+            field, value = field.strip().lower(), value.strip()
+            if field in ("user-agent", "useragent"):
+                if saw_rule:
+                    current, saw_rule = [], False
+                current.append(value.lower())
+                self.groups.setdefault(value.lower(), [])
+            elif field in ("allow", "disallow"):
+                if not current:
+                    continue
+                saw_rule = True
+                if not value:     # "Disallow:" ohne Wert = ausdrücklich alles frei
+                    continue
+                allow = field == "allow"
+                rx = cls._to_regex(cls._norm(value))
+                for agent in current:
+                    self.groups[agent].append((allow, value, rx, len(value)))
+        return self
+
+    # -- Gruppenwahl: spezifischster Treffer, sonst "*" ---------------------
+    def _group_for(self, user_agent: str):
+        ua = user_agent.lower()
+        best, best_len = None, -1
+        for name in self.groups:
+            if name and name != "*" and name in ua and len(name) > best_len:
+                best, best_len = name, len(name)
+        return self.groups[best] if best is not None else self.groups.get("*", [])
+
+    # -- Abfrage: längste Regel gewinnt, bei Gleichstand Allow -------------
+    def can_fetch(self, user_agent: str, url: str) -> bool:
+        if self.block_all:
+            return False
+        parsed = urlparse(url)
+        path = parsed.path or "/"
+        if parsed.query:
+            path += "?" + parsed.query
+        path = self._norm(path)
+        winner = None
+        for rule in self._group_for(user_agent):
+            allow, _pattern, rx, length = rule
+            if not rx.match(path):
+                continue
+            if (winner is None or length > winner[3]
+                    or (length == winner[3] and allow and not winner[0])):
+                winner = rule
+        return True if winner is None else winner[0]
+
+
+RobotsRules.BLOCK_ALL = RobotsRules(block_all=True)
+
+
+# ----------------------------------------------------------------------------
 # HTTP-Schicht (robots.txt wird je Host gecacht → mehrere Hosts pro Plattform)
 # ----------------------------------------------------------------------------
 class Fetcher:
@@ -513,46 +631,73 @@ class Fetcher:
         if headers:
             self.session.headers.update(headers)
         self.user_agent = self.session.headers["User-Agent"]
-        self._robots: dict[str, urllib.robotparser.RobotFileParser | None] = {}
+        self._robots: dict[str, RobotsRules | None] = {}
 
     def _robots_for(self, url: str):
+        """Regelsatz für den Host. None = keine Einschränkungen.
+
+        ⚠️ Die Fallunterscheidung ist die eigentliche Zusage des Kodex:
+        NUR 200 (Regeln gelten) und 404/410 (es gibt keine robots.txt, alles
+        frei) sind Freigaben. Alles andere – 401, 403, 429, 5xx, Zeitüberschreitung
+        – heißt „wir wissen es nicht" und wird konservativ als Sperre gewertet.
+        Früher fiel alles außer 401/403 in einen else-Zweig, der „keine
+        Einschränkungen" protokollierte; ein 429 auf robots.txt hat den Host
+        damit faktisch freigegeben – das Gegenteil der Zusage im README.
+        """
         netloc = urlparse(url).netloc
-        if netloc not in self._robots:
-            # robots.txt über die eigene Session laden (richtiger User-Agent):
-            # rp.read() nutzt urllib mit "Python-urllib/x.y", das z. B.
-            # Cloudflare mit 403 beantwortet – robotparser wertet 403 als
-            # "alles verboten" und würde fälschlich jeden Abruf blockieren.
-            rp = urllib.robotparser.RobotFileParser()
+        if netloc in self._robots:
+            return self._robots[netloc]
+
+        # robots.txt über die eigene Session laden (richtiger User-Agent):
+        # ein nacktes urllib meldet sich als "Python-urllib/x.y", was z. B.
+        # Cloudflare mit 403 beantwortet – dann hielten wir eine erreichbare
+        # robots.txt fälschlich für gesperrt.
+        letzter = "?"
+        for versuch in range(1, ROBOTS_RETRIES + 1):
             try:
                 resp = self.session.get(f"https://{netloc}/robots.txt",
                                         timeout=REQUEST_TIMEOUT)
+                letzter = f"HTTP {resp.status_code}"
                 if resp.status_code == 200:
-                    rp.parse(resp.text.splitlines())
-                    self._robots[netloc] = rp
+                    if "charset" not in resp.headers.get("Content-Type", "").lower():
+                        resp.encoding = "utf-8"
+                    self._robots[netloc] = RobotsRules.parse(resp.text)
                     log(f"robots.txt von {netloc} geladen und wird beachtet.")
-                elif resp.status_code in (401, 403):
-                    rp.disallow_all = True
-                    self._robots[netloc] = rp
-                    log(f"robots.txt von {netloc}: HTTP {resp.status_code} – Zugriff gesperrt.")
-                else:
-                    # 404 u. ä.: keine robots.txt → alles erlaubt.
+                    return self._robots[netloc]
+                if resp.status_code in (404, 410):
                     self._robots[netloc] = None
-                    log(f"robots.txt von {netloc}: HTTP {resp.status_code} – keine Einschränkungen.")
-            except Exception as exc:
-                log(f"robots.txt von {netloc} nicht lesbar ({exc}) – fahre vorsichtig fort.")
-                self._robots[netloc] = None
+                    log(f"robots.txt von {netloc}: HTTP {resp.status_code} – "
+                        f"es gibt keine, alles erlaubt.")
+                    return None
+                # 401/403/429/5xx: einmal nachfassen, dann konservativ.
+                if versuch < ROBOTS_RETRIES:
+                    time.sleep(self.delay * versuch * 2)
+                    continue
+            except requests.RequestException as exc:
+                letzter = str(exc)
+                if versuch < ROBOTS_RETRIES:
+                    time.sleep(self.delay * versuch * 2)
+                    continue
+
+        # Laut protokollieren: ein stiller Aussetzer sähe sonst aus wie
+        # „nichts Neues gefunden", obwohl gar nichts abgerufen wurde.
+        log(f"⚠️ robots.txt von {netloc} nicht lesbar ({letzter}) – "
+            f"dieser Host wird für diesen Lauf KOMPLETT ausgelassen "
+            f"(konservativ nach Kodex).")
+        self._robots[netloc] = RobotsRules.BLOCK_ALL
         return self._robots[netloc]
 
     def allowed(self, url: str) -> bool:
         if not RESPECT_ROBOTS:
             return True
-        rp = self._robots_for(url)
-        if not rp:
+        rules = self._robots_for(url)
+        if rules is None:
             return True
         try:
-            return rp.can_fetch(self.user_agent, url)
+            return rules.can_fetch(self.user_agent, url)
         except Exception:
-            return True
+            # Ein Fehler im Auswerten darf nicht zur Freigabe führen.
+            return False
 
     def get(self, url: str, timeout: int | None = None):
         """requests.Response oder None bei endgültigem Fehler.
@@ -561,6 +706,7 @@ class Fetcher:
         if not self.allowed(url):
             log(f"robots.txt verbietet: {url}")
             return None
+        start_host = urlparse(url).netloc
         for attempt in range(1, MAX_RETRIES + 1):
             try:
                 resp = self.session.get(url,
@@ -574,6 +720,16 @@ class Fetcher:
                     return resp
                 if resp.status_code >= 500:
                     raise requests.HTTPError(f"{resp.status_code}")
+                # Weiterleitung auf einen ANDEREN Host: dessen robots.txt hat
+                # bisher nie jemand gefragt, weil requests dem 301 selbst folgt
+                # und allowed() nur die Startadresse sieht. Aufgefallen bei Ekō:
+                # actions.eko.org/a/<slug> leitet auf action.eko.org um, wo ein
+                # Bot-Schutz sitzt und die robots.txt nicht lesbar ist.
+                if resp.history and urlparse(resp.url).netloc != start_host:
+                    if not self.allowed(resp.url):
+                        log(f"robots.txt des Weiterleitungsziels verbietet: "
+                            f"{resp.url}")
+                        return None
                 return resp
             except requests.RequestException as exc:
                 wait = self.delay * attempt * 2
