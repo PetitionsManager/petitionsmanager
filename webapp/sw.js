@@ -780,7 +780,7 @@
       ⚠️ Ohne diesen Sprung sähe das Telefon weiter index.html, texts.js,
       platforms.js und app.js aus dem alten Cache — die Sprachumschaltung
       käme dort gar nicht an. (index.html, texts.js, platforms.js, app.js) */
-var CACHE = "pm-cache-v45";
+var CACHE = "pm-cache-v46";
 /* Versionsunabhängig – überlebt das Hochzählen von CACHE. Diese Zahl sollte ab
    jetzt NICHT mehr steigen: seit die Pakete eine Inhaltskennung tragen ("?v=",
    siehe oben) holt sich jedes geänderte Paket von selbst neu. Ein Sprung wäre

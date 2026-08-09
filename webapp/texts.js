@@ -411,6 +411,14 @@ window.PM_TEXTS = {
       /* Der Kodex-Eintrag steht bewusst ganz oben im Ausklapper. Nur
          Ueberschrift, Anreisser und Knopf — der Kodex selbst ist
          legal.kodexHtml und bleibt deutsch. */
+      /* Hinweis auf die Android-Fassung. Erscheint NUR im Browser - in der
+         App selbst waere er sinnlos (app.js prueft auf window.AndroidBackup).
+         Genannt werden die drei Dinge, die im Browser wirklich fehlen, nicht
+         allgemeines Lob: vollstaendig offline, Erinnerung im Hintergrund,
+         Sicherung als Datei. */
+      appTitle: "Die App zum Installieren",
+      appText: "Im Browser lädt die App die Petitionen erst beim Ansehen nach. Die Android-Fassung bringt alle Petitionen schon mit: sie funktioniert vollständig ohne Verbindung, kann dich täglich erinnern und deine Daten als Datei sichern.",
+      appBtn: "Zur Android-App",
       kodexTitle: "Wen wir aufnehmen – unser Kodex",
       kodexText: "Nach diesen Regeln entscheiden wir, welche Petitionsplattform in die App kommt und welche nicht.",
       kodexBtn: "Verstoß melden",
@@ -944,6 +952,13 @@ window.PM_TEXTS = {
         a: "Share PetitionsManager with others who want to keep an eye on petitions from several platforms.",
         btn: "Share app"
       },
+      /* Pointer to the Android build. Shown in the browser ONLY - inside the
+         app it would be pointless (app.js checks window.AndroidBackup).
+         Names the three things genuinely missing in the browser rather than
+         generic praise: fully offline, background reminder, backup to file. */
+      appTitle: "Get the installable app",
+      appText: "In the browser the app loads petitions as you view them. The Android build already includes all of them: it works completely without a connection, can remind you daily and save your data to a file.",
+      appBtn: "Get the Android app",
       kodexTitle: "Who we include — our code",
       kodexText: "These are the rules by which we decide which petition platform goes into the app and which does not.",
       kodexBtn: "Report a violation",

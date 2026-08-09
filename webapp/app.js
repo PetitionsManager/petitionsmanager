@@ -1438,7 +1438,24 @@
     /* Die vier unteren Einträge benutzen die support.*-Schlüssel, die in
        texts.js längst standen und bisher niemand las — nicht neue, doppelte.
        Der Kodex-Eintrag ist der einzige, der eigene Schlüssel brauchte. */
-    var items = [
+    var items = [];
+    /* NUR IM BROWSER (8.8.2026, Nutzerwunsch): In der Web-Fassung erfaehrt
+       sonst niemand, dass es die App auch zum Installieren gibt - und genau
+       dort fehlen drei Dinge wirklich (vollstaendig offline, taegliche
+       Erinnerung, Sicherung als Datei).
+       Geprueft wird auf window.AndroidBackup, weil diese Bruecke in JEDER
+       Android-Fassung angemeldet wird - anders als AndroidUpdate, das der
+       Bauschalter mitUpdater fuer F-Droid weglaesst. Mit AndroidUpdate zu
+       pruefen haette den Hinweis in der F-Droid-App wieder eingeblendet.
+       Ganz oben, weil er nur den erreicht, der die App noch nicht hat. */
+    if (!window.AndroidBackup) {
+      items.push(["fa-mobile-screen",
+        T("support.appTitle", "Die App zum Installieren"),
+        T("support.appText", ""),
+        T("support.appBtn", "Zur Android-App"),
+        { url: GITHUB_URL + "/releases/latest" }]);
+    }
+    items = items.concat([
       ["fa-scale-balanced",
        T("support.kodexTitle", "Wen wir aufnehmen – unser Kodex"),
        T("support.kodexText",
@@ -1477,7 +1494,7 @@
          "Plattformen im Blick behalten wollen."),
        T("support.share.btn", "App teilen"),
        { share: true }]
-    ];
+    ]);
 
     items.forEach(function (it) {
       var item = el('<div class="support__item">' +
@@ -1504,6 +1521,12 @@
           '<i class="fa-solid fa-share-nodes"></i> ' + esc(it[3]) + "</button>");
         sBtn.addEventListener("click", function () { shareApp(sBtn); });
         btns.appendChild(sBtn);
+      } else if (opt.url) {
+        /* Externer Link statt mailto - bisher kannte der Bereich nur
+           E-Mail-Knoepfe. Gebraucht fuer den Hinweis auf die Android-App. */
+        btns.appendChild(el('<a class="support__btn" href="' + esc(opt.url) +
+          '" target="_blank" rel="noopener">' +
+          '<i class="fa-solid fa-android"></i> ' + esc(it[3]) + "</a>"));
       } else {
         var href = "mailto:" + SUPPORT_MAIL + "?subject=" +
           encodeURIComponent("[PetitionsManager] " + opt.mailto);
