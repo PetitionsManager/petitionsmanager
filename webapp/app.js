@@ -250,6 +250,18 @@
     var paket = PLATS_LANG[SPRACHE];
     return paket ? paket[key] : null;
   }
+  /* Wikipedia-Adresse in der gewaehlten Sprache. Eigene Funktion, weil das
+     Feld auf der OBERSTEN Ebene der Plattform liegt und nicht in `about` -
+     platAbout() ueberlagert nur das about-Unterobjekt und wuerde es nie
+     sehen. Fehlt eine englische Fassung (OpenPetition, Bundestag haben
+     keinen englischen Artikel), bleibt die deutsche Adresse: ein deutscher
+     Artikel ist besser als gar keiner. */
+  function platWiki(key) {
+    var paket = PLATS_LANG[SPRACHE];
+    var ueb = paket && paket[key] && paket[key].wikipedia;
+    return ueb || platInfo(key).wikipedia || "";
+  }
+
   function platAbout(key) {
     var basis = platInfo(key).about || {};
     var paket = PLATS_LANG[SPRACHE];
@@ -2774,10 +2786,24 @@
     // gleich der Plattform heißt – Eko führt zu „SumOfUs" (Umbenennung), WeAct
     // zum Träger „Campact". Für innn.it und WeMove Europe gibt es keinen
     // deutschen Artikel; dort fehlt das Feld und damit der Link.
-    if (info.wikipedia) {
-      var artikel = decodeURIComponent(info.wikipedia.split("/wiki/")[1] || "")
+    /* ⚠️ Wikipedia-Adresse SPRACHABHAENGIG (8.8.2026). platInfo() liefert
+       Farben und Logos sprachfrei - die Wikipedia-Adresse gehoert aber nicht
+       dazu: sieben der neun Plattformen haben einen englischen Artikel, und
+       wer die App auf Englisch nutzt, soll nicht auf de.wikipedia.org landen.
+       Welche das sind, wurde ueber die langlinks-Schnittstelle von Wikipedia
+       ermittelt, nicht geraten. Fuer OpenPetition und den Petitionsausschuss
+       des Bundestages gibt es keinen englischen Artikel; dort fehlt das Feld
+       im EN-Block, und `||` faellt auf die deutsche Adresse zurueck - ein
+       deutscher Artikel ist besser als gar keiner.
+       Der Artikelname steht mit im Etikett, weil er nicht ueberall gleich der
+       Plattform heisst: Eko fuehrt im Deutschen zu "SumOfUs" (Umbenennung,
+       englisch schon "Eko (organization)"), WeAct zum Traeger "Campact".
+       Fuer innn.it und WeMove Europe gibt es gar keinen Artikel. */
+    var wikiAdresse = platWiki(key);
+    if (wikiAdresse) {
+      var artikel = decodeURIComponent(wikiAdresse.split("/wiki/")[1] || "")
         .replace(/_/g, " ");
-      links.push({ label: "Wikipedia: " + artikel, url: info.wikipedia });
+      links.push({ label: "Wikipedia: " + artikel, url: wikiAdresse });
     }
     if (links.length) {
       var ul = el('<div class="pabout__links"></div>');

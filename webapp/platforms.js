@@ -475,6 +475,7 @@ window.PM_PLATFORMS_EN = {
   },
 
   weact: {
+    wikipedia: "https://en.wikipedia.org/wiki/Campact",
     tagline: "Petition platform run by Campact",
     about: {
       text: "WeAct is the petition platform of the non-profit association Campact e. V. and is aimed at everyone who wants to start or support a socio-political petition. The platform offers professional campaign support from the Campact team. It is particularly suited to causes with a socio-political dimension that seek broad backing.",
@@ -493,6 +494,7 @@ window.PM_PLATFORMS_EN = {
   },
 
   changeorg: {
+    wikipedia: "https://en.wikipedia.org/wiki/Change.org",
     tagline: "Global petition platform",
     about: {
       /* seat und financing fehlen mit Absicht: "San Francisco, USA" lautet
@@ -511,6 +513,7 @@ window.PM_PLATFORMS_EN = {
   },
 
   avaaz: {
+    wikipedia: "https://en.wikipedia.org/wiki/Avaaz",
     tagline: "Global citizens' movement",
     about: {
       text: "Avaaz is a global online citizens' movement campaigning for democracy, human rights, animal welfare, the fight against corruption and climate protection. The organization was founded in 2007, is funded entirely by its members and turns down corporate and government money. It is one of the large international campaign networks.",
@@ -532,6 +535,7 @@ window.PM_PLATFORMS_EN = {
   },
 
   europarl: {
+    wikipedia: "https://en.wikipedia.org/wiki/European_Parliament_Committee_on_Petitions",
     tagline: "Petitions to the EU Parliament",
     about: {
       text: "The petitions portal of the European Parliament (PETI committee) lets all EU citizens and people resident in the EU submit petitions on matters that fall within the EU's remit. Submitted petitions are examined by the Committee on Petitions, which decides on admissibility and on how they are handled further. The portal is multilingual and is run by the European Parliament.",
@@ -551,6 +555,7 @@ window.PM_PLATFORMS_EN = {
   },
 
   eko: {
+    wikipedia: "https://en.wikipedia.org/wiki/Ek%C5%8D_%28organization%29",
     tagline: "Campaign platform critical of corporations",
     about: {
       text: "Ekō (known as SumOfUs until 2023) is an international campaigning organization that stands up for citizens' and consumers' rights in the face of corporations. It was founded in 2011, renamed in 2023 and runs petitions and actions on issues such as climate protection, food safety and corporate accountability. Ekō is registered in the USA as a non-profit 501(c)4 organization.",
@@ -559,6 +564,7 @@ window.PM_PLATFORMS_EN = {
   },
 
   foodwatch: {
+    wikipedia: "https://en.wikipedia.org/wiki/Foodwatch",
     tagline: "Consumer rights in the food sector",
     about: {
       text: "foodwatch e. V. is a non-profit consumer rights organization campaigning for healthy, safe and honestly labeled food. The association was founded in Berlin in 2002 by Thilo Bode and is funded exclusively by membership fees and donations — state money and corporate donations are turned down. Petitions and campaigns are addressed to food producers and political decision-makers.",
@@ -568,6 +574,7 @@ window.PM_PLATFORMS_EN = {
   },
 
   threefifty: {
+    wikipedia: "https://en.wikipedia.org/wiki/350.org",
     tagline: "Climate movement against fossil fuels",
     about: {
       text: "350.org is an international climate protection organization campaigning for an end to the use of fossil fuels and a just energy transition. It was founded in 2007–2008 and runs a global network of local groups. It is registered in the USA as a non-profit 501(c)3 organization and is funded by donations.",

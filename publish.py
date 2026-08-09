@@ -37,7 +37,6 @@ import hashlib
 import json
 import math
 import re
-import shutil
 from collections import Counter, defaultdict
 from datetime import datetime
 from pathlib import Path
@@ -494,22 +493,23 @@ def main() -> None:
     (OUT_DIR / "manifest.json").write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
 
-    # Scraper-Dashboard als Status-Snapshot mit auf GitHub Pages ausliefern
-    # (read-only: die "Jetzt scrapen"-Buttons brauchen den lokalen Server).
+    # Scraper-Dashboard als Status-Snapshot mit auf GitHub Pages ausliefern.
     # Die Datei ist gitignoriert und entsteht ausschließlich zur Laufzeit.
     # Fehlte sie, lieferte der Pages-Deploy die Status-Ansicht nicht mit und
     # die URL antwortete 404 — das blieb tagelang unbemerkt, weil publish.py
     # sie stillschweigend übersprang. Nur zu MELDEN reicht aber auch nicht:
     # geschrieben wird sie von monitor.py, und wenn dessen Lauf in der Frist
     # abgebrochen wird oder publish.py allein läuft, hat sie niemand erzeugt.
-    # Deshalb erzeugt publish.py sie hier notfalls selbst — die Zahlen stehen
+    #
+    # Deshalb wird die Pages-Fassung hier NEU GEBAUT statt kopiert (8.8.2026).
+    # Kopieren war der Fehler: die Server-Fassung trägt Bedienelemente, die es
+    # auf Pages nicht geben kann — elf Listen-Links ins 404, ein Startknopf
+    # ohne Server und ein 2-Sekunden-Polling, das dauerhaft ins Leere lief.
+    # ``schnappschuss=True`` lässt genau diese Teile weg; die Zahlen stehen
     # ohnehin in denselben Stores, aus denen dieses Skript gerade gelesen hat.
-    dash = Path("dashboard.html")
-    if not dash.exists():
-        print("dashboard.html fehlt – wird jetzt aus den Stores erzeugt.")
-        core.write_dashboard(monitor.PLATFORMS)
-    shutil.copy(dash, OUT_DIR.parent / "dashboard.html")
-    print("dashboard.html → webapp/ (Status-Ansicht via Pages-URL)")
+    core.write_dashboard(monitor.PLATFORMS, ziel=OUT_DIR.parent / "dashboard.html",
+                         schnappschuss=True)
+    print("dashboard.html → webapp/ (Nur-Lesen-Schnappschuss via Pages-URL)")
 
     live = [p for p in manifest["platforms"] if p["live"]]
     total = sum(p["count"] for p in live)

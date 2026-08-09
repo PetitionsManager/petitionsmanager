@@ -1545,7 +1545,38 @@ _LIST_TEMPLATE = """<!DOCTYPE html>
 # ----------------------------------------------------------------------------
 # HTML: Dashboard (Übersicht aller Plattformen) + Platzhalter-Seiten
 # ----------------------------------------------------------------------------
-def _live_card(platform: Platform) -> str:
+def _kachel_rahmen(platform: Platform, schnappschuss: bool,
+                   extra_klasse: str = "") -> tuple[str, str, str, str, str]:
+    """Hülle und Bedienteile einer Kachel — (auf, zu, Laufpille, Laufbalken,
+    Listenknopf).
+
+    Der Unterschied zwischen Server-Ansicht und Pages-Schnappschuss steckt
+    ausschließlich hier. Anlass war ein am 8.8.2026 im Browser nachgeklickter
+    Fehler: der Schnappschuss verlinkte auf ``<key>_petitions.html``, diese
+    Listenseiten liegen aber gar nicht auf Pages — alle elf Kacheln führten auf
+    GitHubs 404-Seite, von der aus nur die Zurück-Taste zurückführt. Sie
+    mitzukopieren ist keine Lösung: die elf Dateien wiegen zusammen rund 45 MB
+    (bundestag allein 22) und lägen als Assets in JEDER APK, weil
+    ``build.gradle`` den ganzen ``webapp``-Ordner einbindet.
+
+    Ohne Server sind Laufpille und Fortschrittsbalken ebenfalls sinnlos: sie
+    werden nur von ``/status`` befüllt, das es dort nicht gibt."""
+    if schnappschuss:
+        return (f'<div class="card{extra_klasse}" '
+                f'data-platform="{_esc(platform.key)}">',
+                "</div>", "", "", "")
+    return (f'<a class="card{extra_klasse}" href="{platform.html_file.name}" '
+            f'data-platform="{_esc(platform.key)}">',
+            "</a>",
+            '<span class="run-pill">läuft …</span>',
+            '<div class="mini-progress">'
+            '<div class="mini-progress__bar">'
+            '<div class="mini-progress__fill"></div></div>'
+            '<span class="mini-progress__text"></span></div>',
+            '<span class="card-btn">Zur Liste →</span>')
+
+
+def _live_card(platform: Platform, schnappschuss: bool = False) -> str:
     store = load_store(platform.data_file)
     online = sum(1 for r in store.values() if r.get("status", "online") == "online")
     offline = len(store) - online
@@ -1593,10 +1624,12 @@ def _live_card(platform: Platform) -> str:
         warn_html += ('<div class="healthnote">Dauerzustand: '
                       + _esc(" · ".join(dauer)) + "</div>")
 
+    auf, zu, pille, balken, knopf = _kachel_rahmen(platform, schnappschuss)
+
     return f"""
-    <a class="card" href="{platform.html_file.name}" data-platform="{_esc(platform.key)}">
+    {auf}
       <div class="card-head"><span class="card-dot weact"></span><h2>{_esc(platform.name)}</h2>
-        <span class="run-pill">läuft …</span></div>
+        {pille}</div>
       {_openness_badge(platform)}
       <div class="card-stats">
         <div class="cs"><div class="n">{len(store)}</div><div class="l">Petitionen</div></div>
@@ -1610,19 +1643,18 @@ def _live_card(platform: Platform) -> str:
         <span class="completeness__sub">{len(store)} von ~{available} entdeckten · {comp_lbl}</span>
       </div>
       {warn_html}
-      <div class="mini-progress">
-        <div class="mini-progress__bar"><div class="mini-progress__fill"></div></div>
-        <span class="mini-progress__text"></span>
-      </div>
+      {balken}
       <p class="card-sub">{new_count} neue Petition(en) im letzten Lauf ·
         Datenstand {_fmt_dt(generated) if generated else "—"}</p>
-      <span class="card-btn">Zur Liste →</span>
-    </a>"""
+      {knopf}
+    {zu}"""
 
 
-def _placeholder_card(platform: Platform) -> str:
+def _placeholder_card(platform: Platform, schnappschuss: bool = False) -> str:
+    auf, zu, _pille, _balken, knopf = _kachel_rahmen(platform, schnappschuss,
+                                                     extra_klasse=" placeholder")
     return f"""
-    <a class="card placeholder" href="{platform.html_file.name}" data-platform="{_esc(platform.key)}">
+    {auf}
       <div class="card-head"><span class="card-dot other"></span><h2>{_esc(platform.name)}</h2></div>
       {_openness_badge(platform)}
       <div class="card-stats">
@@ -1632,23 +1664,37 @@ def _placeholder_card(platform: Platform) -> str:
         <div class="cs"><div class="n">—</div><div class="l">Kategorien</div></div>
       </div>
       <p class="card-sub">Noch keine Daten – Scraper in Vorbereitung.</p>
-      <span class="card-btn">Zur Liste →</span>
-    </a>"""
+      {knopf}
+    {zu}"""
 
 
-def build_dashboard(platforms: list[Platform]) -> str:
+def build_dashboard(platforms: list[Platform], schnappschuss: bool = False) -> str:
+    """Das Dashboard in zwei Ausprägungen aus EINER Vorlage.
+
+    Vorgabe ist die Server-Ansicht (``monitor.py --serve``). Mit
+    ``schnappschuss=True`` entsteht die Fassung für GitHub Pages: dort gibt es
+    keinen Server, also auch nichts zu bedienen — siehe ``_kachel_rahmen``."""
     cards = "\n".join(
-        _live_card(p) if p.is_live else _placeholder_card(p) for p in platforms)
+        _live_card(p, schnappschuss) if p.is_live
+        else _placeholder_card(p, schnappschuss) for p in platforms)
     tmpl = _DASHBOARD_TEMPLATE
+    tmpl = tmpl.replace("{{MODUS}}", ' data-modus="schnappschuss"'
+                        if schnappschuss else "")
+    tmpl = tmpl.replace("{{SUBNOTE}}", _SUB_SCHNAPPSCHUSS if schnappschuss
+                        else _SUB_SERVER)
+    tmpl = tmpl.replace("{{RUNALL}}", "" if schnappschuss else _RUNALL_ROW)
     tmpl = tmpl.replace("{{GENERATED}}", _esc(now_iso()))
     tmpl = tmpl.replace("{{CARDS}}", cards)
     tmpl = tmpl.replace("{{TOTOP}}", _TOTOP)
     return tmpl
 
 
-def write_dashboard(platforms: list[Platform]) -> None:
-    DASHBOARD_FILE.write_text(build_dashboard(platforms), encoding="utf-8")
-    log(f"{DASHBOARD_FILE} geschrieben.")
+def write_dashboard(platforms: list[Platform], ziel: Path | None = None,
+                    schnappschuss: bool = False) -> None:
+    datei = ziel or DASHBOARD_FILE
+    datei.write_text(build_dashboard(platforms, schnappschuss),
+                     encoding="utf-8")
+    log(f"{datei} geschrieben{' (Schnappschuss)' if schnappschuss else ''}.")
 
 
 def build_placeholder_page(platform: Platform) -> str:
@@ -1669,8 +1715,25 @@ def write_placeholder_pages(platforms: list[Platform]) -> None:
         log(f"Platzhalter-Seiten geschrieben ({', '.join(names)}).")
 
 
+# Kopfzeile und Bedienleiste unterscheiden sich zwischen den beiden Fassungen
+# (siehe build_dashboard). Der Schnappschuss sagt ausdrücklich, dass er nur
+# liest — vorher versprach er „Wähle eine Plattform für die Detailliste" und
+# löste das Versprechen mit elf 404-Seiten ein. Der Weg weiter führt dort in
+# die App, die im selben Ordner liegt (relativ, damit es lokal wie auf Pages
+# stimmt).
+_SUB_SERVER = "Wähle eine Plattform für die Detailliste."
+_SUB_SCHNAPPSCHUSS = ('Nur-Lesen-Schnappschuss des letzten Laufs — die '
+                      'Detaillisten und die Scraper-Steuerung gibt es nur im '
+                      'lokalen Monitor. <a class="sub-link" href="./">Zur App '
+                      '→</a>')
+_RUNALL_ROW = """<div class="runall-row">
+    <button id="run-all" class="runall-btn" type="button">
+      <span class="sp"></span>Alle Scraper starten</button>
+    <span class="runall-status" id="run-all-status"></span>
+  </div>"""
+
 _DASHBOARD_TEMPLATE = """<!DOCTYPE html>
-<html lang="de">
+<html lang="de"{{MODUS}}>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -1698,7 +1761,11 @@ _DASHBOARD_TEMPLATE = """<!DOCTYPE html>
   .card{display:block;background:var(--surface);border:1px solid var(--line);
         border-radius:14px;padding:20px;text-decoration:none;color:inherit;
         transition:box-shadow .15s,transform .15s}
-  .card:hover{box-shadow:0 6px 20px rgba(22,26,34,.1);transform:translateY(-2px)}
+  /* Nur die verlinkte Kachel darf sich beim Überfahren heben. Im
+     Schnappschuss ist die Kachel ein div ohne Ziel — dort wäre die Bewegung
+     ein Versprechen, das kein Klick einlöst. */
+  a.card:hover{box-shadow:0 6px 20px rgba(22,26,34,.1);transform:translateY(-2px)}
+  .sub-link{color:var(--indigo);font-weight:650}
   .card-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
   .card-dot{width:12px;height:12px;border-radius:50%;display:inline-block}
   .card-dot.weact{background:var(--indigo)}
@@ -1780,13 +1847,8 @@ _DASHBOARD_TEMPLATE = """<!DOCTYPE html>
 <header>
   <p class="eyebrow">Petitions-Monitor — Dashboard</p>
   <h1>Übersicht</h1>
-  <p class="sub">Datenstand {{GENERATED}} · Wähle eine Plattform für die
-     Detailliste.</p>
-  <div class="runall-row">
-    <button id="run-all" class="runall-btn" type="button">
-      <span class="sp"></span>Alle Scraper starten</button>
-    <span class="runall-status" id="run-all-status"></span>
-  </div>
+  <p class="sub">Datenstand {{GENERATED}} · {{SUBNOTE}}</p>
+  {{RUNALL}}
   <div class="legend"><b>Ampel — Datenfreigabe:</b>
     <span class="lg"><i style="background:#1f7a4d"></i>sehr offen (volle Liste, alles im HTML)</span>
     <span class="lg"><i style="background:#7cb342"></i>offen (volle Liste, kleine Hürden)</span>
@@ -1802,6 +1864,13 @@ _DASHBOARD_TEMPLATE = """<!DOCTYPE html>
 </main>
 <script>
 (function(){
+  // Ohne Server gibt es nichts abzufragen. Der Schnappschuss auf GitHub Pages
+  // fragte trotzdem alle 2 s /status ab; die Antwort war GitHubs 404-Seite mit
+  // 5.442 Bytes, die der catch-Zweig still verschluckte — am 8.8.2026 an der
+  // echten Seite gemessen: 5 Abrufe in 10 s, rund 9,8 MB je Stunde geöffneter
+  // Seite, auf dem Handy dauerhaft und ohne jede Aussicht auf Erfolg. Der
+  // catch-Kommentar rechnete nur mit file://, nicht mit Pages.
+  if (document.documentElement.getAttribute("data-modus") === "schnappschuss") return;
   var allBtn = document.getElementById("run-all");
   var allStatus = document.getElementById("run-all-status");
   var wasRunning = false;
