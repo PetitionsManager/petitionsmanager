@@ -39,6 +39,9 @@ DATA_FILE = Path("foodwatch_petitions.json")
 HTML_FILE = Path("foodwatch_petitions.html")
 
 ACTION_HREF_RE = re.compile(r'href="(/de/mitmachen/[a-z0-9\-]+)"')
+# Eine Aktionsseite hat unterhalb von /de/mitmachen noch ein Wegstück; die
+# Übersicht selbst hat keins. Maßstab für core.eigene_adresse.
+DETAILADRESSE_RE = re.compile(r"/de/mitmachen/[^/?#]+", re.I)
 
 FETCH_HEADERS = {
     "User-Agent": ("Mozilla/5.0 (X11; Linux x86_64; rv:128.0) "
@@ -86,9 +89,15 @@ def parse_detail(html: str, url: str) -> dict:
                     else _meta(soup, "og:title"))
     rec["summary"] = _meta(soup, "og:description")
     rec["image_url"] = _meta(soup, "og:image")
+    # Nur eine echte Aktionsseite darf die angefragte Adresse ersetzen — siehe
+    # core.eigene_adresse. Dieselbe ungeprüfte Übernahme hat bei WeAct und bei
+    # Avaaz je einen Schwung Phantomsätze mit gemeinsamer Adresse erzeugt.
+    # foodwatch antwortet heute sauber mit 404 (8.8.2026 gemessen: HTTP 404,
+    # canonical auf …/de/sorry-die-seite…), der Riegel ist hier Vorsorge.
     canon = soup.find("link", rel="canonical")
-    rec["url"] = (canon["href"].strip() if canon and canon.get("href")
-                  else _meta(soup, "og:url") or url)
+    rec["url"] = core.eigene_adresse(
+        (canon.get("href") if canon else None) or _meta(soup, "og:url"), url,
+        DETAILADRESSE_RE)
 
     counter = soup.select_one("#form-counter")
     if counter:

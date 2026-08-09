@@ -72,6 +72,36 @@ HTML_FILE    = Path("avaaz_petitions.html")
 PETITION_HREF_RE = re.compile(r"/community_petitions/de/([a-z0-9_]+)", re.I)
 CAMPAIGN_HREF_RE = re.compile(r"/campaign/de/([a-z0-9_]+)", re.I)
 
+# ⚠️ Avaaz beantwortet einen ungültigen Slug NICHT immer mit 404. Am 8.8.2026
+# an drei Proben gemessen:
+#   Bundesregierung_Schluss_mit_dem   → HTTP 404, 23.569 Zeichen (echte Fehlerseite)
+#   Beendigung_der_Diskriminierung_…  → HTTP 200, 503 Zeichen
+#   frei erfundener Slug              → HTTP 404, 23.569 Zeichen
+# Die 503 Bytes sind eine Weiterleitungshülle: „This page is not valid", ein
+# <meta http-equiv="Refresh"> und ein window.location auf die Übersichtsseite.
+# Sie hat keinen Titel und kein <link rel=canonical> — WOHL ABER
+# <meta property="og:url" content=".../community_petitions/de/">.
+#
+# Genau daran ist der Bestand erkrankt: parse_detail nimmt canonical, sonst
+# og:url — und bekam so die ÜBERSICHTSSEITE als Petitionsadresse. Alle so
+# entstandenen Sätze teilten sich eine Adresse (Dashboard-Warnung „Mehrere
+# Sätze auf derselben Adresse") und blieben titellos (die 28 „ohne Titel").
+# Beide offenen Avaaz-Punkte hatten damit dieselbe eine Ursache.
+#
+# Die frühere Notiz „Avaaz antwortet dort sauber mit 404" war nicht falsch,
+# sondern hat die andere Hälfte getroffen: es gibt BEIDE Verhaltensweisen.
+UNGUELTIG_TEXT_RE = re.compile(r"This page is not valid", re.I)
+META_REFRESH_RE = re.compile(
+    r'http-equiv=["\']?refresh["\']?[^>]*?url=\s*["\']?([^"\'>\s]+)', re.I)
+# Eine Detailadresse hat unterhalb von /community_petitions/de/ bzw.
+# /campaign/de/ noch ein Wegstück. Alles andere ist eine Übersichtsseite.
+# Eine Detailadresse hat unterhalb von /community_petitions/de/ bzw.
+# /campaign/de/ noch ein Wegstück. Alles andere ist eine Übersichtsseite.
+# Geprüft wird mit core.eigene_adresse — dort steht, warum.
+DETAILADRESSE_RE = re.compile(
+    r"/(?:community_petitions|campaign)/de/[^/?#]+", re.I)
+
+
 # Seiten unterhalb von /community_petitions/de/, die keine Petitionen sind.
 # (popular_/recent_petitions tauchen nur bei der Archiv-Suche auf – dort steht
 # der Dateiname ohne Endung als vermeintlicher Slug im Pfad.)
@@ -303,8 +333,9 @@ def parse_detail(html: str, url: str) -> dict:
     rec["summary"] = _meta(soup, "og:description")
     rec["image_url"] = _meta(soup, "og:image")
     canon = soup.find("link", rel="canonical")
-    rec["url"] = (canon["href"].strip() if canon and canon.get("href")
-                  else _meta(soup, "og:url") or url)
+    rec["url"] = core.eigene_adresse(
+        (canon.get("href") if canon else None) or _meta(soup, "og:url"), url,
+        DETAILADRESSE_RE)
 
     # Interne Petitions-ID (für stats.json) aus dem Inline-JS.
     m_id = PETITION_ID_RE.search(html)
@@ -356,8 +387,30 @@ def fetch_signatures(fetcher: core.Fetcher, petition_id: int) -> int | None:
     return int(val) if val is not None else None
 
 
+def ungueltige_seite(html: str, url: str) -> bool:
+    """Ist das Avaaz' „This page is not valid"-Hülle statt einer Petition?
+
+    Zwei unabhängige Merkmale, es genügt eines:
+    (a) der englische Satz im Rumpf — kurz und eindeutig, aber übersetzbar;
+    (b) eine Meta-Weiterleitung WEG von der angeforderten Adresse. Eine echte
+        Petitionsseite leitet nirgendwohin; das Merkmal überlebt daher auch
+        eine Übersetzung oder eine Textänderung.
+
+    Absichtlich NICHT über die Länge (503 Zeichen) — eine Zahl, die die Quelle
+    jederzeit ändert, wäre ein Erkenner mit Verfallsdatum."""
+    if UNGUELTIG_TEXT_RE.search(html):
+        return True
+    m = META_REFRESH_RE.search(html)
+    return bool(m and m.group(1).rstrip("/") != url.rstrip("/"))
+
+
 def scrape_petition(fetcher: core.Fetcher, slug: str) -> tuple[str, dict | None]:
-    """(status, record) – status: online | offline | error."""
+    """(status, record) – status: online | offline | error | skip.
+
+    „skip" heißt: die Adresse gibt es, sie trägt aber keine Petition. Der
+    Aufrufer entfernt solche Sätze aus dem Bestand — dieselbe Behandlung wie
+    bei Kampagnen ohne Aktion. Damit räumt der nächste Lauf die Altlast von
+    selbst weg, ohne dass jemand am Datenbestand herumschneidet."""
     url = f"{BASE_URL}/community_petitions/de/{slug}/"
     resp = fetcher.get(url)
     if resp is None:
@@ -366,6 +419,8 @@ def scrape_petition(fetcher: core.Fetcher, slug: str) -> tuple[str, dict | None]
         return "offline", None
     if not resp.ok:
         return "error", None
+    if ungueltige_seite(resp.text, url):
+        return "skip", None
 
     rec = parse_detail(resp.text, url)
     if rec.get("petition_id"):
@@ -444,8 +499,9 @@ def parse_campaign(html: str, url: str) -> dict:
     rec["summary"] = _meta(soup, "og:description")
     rec["image_url"] = _meta(soup, "og:image")
     canon = soup.find("link", rel="canonical")
-    rec["url"] = (canon["href"].strip() if canon and canon.get("href")
-                  else _meta(soup, "og:url") or url)
+    rec["url"] = core.eigene_adresse(
+        (canon.get("href") if canon else None) or _meta(soup, "og:url"), url,
+        DETAILADRESSE_RE)
 
     # Interne Kampagnen-ID (für stats.json) aus dem MCounter-Inline-JS.
     m_id = CAMPAIGN_ID_RE.search(html)
@@ -504,6 +560,8 @@ def scrape_campaign(fetcher: core.Fetcher, slug: str) -> tuple[str, dict | None]
         return "offline", None
     if not resp.ok:
         return "error", None
+    if ungueltige_seite(resp.text, url):
+        return "skip", None
 
     rec = parse_campaign(resp.text, url)
     if not rec.get("petition_id"):

@@ -51,6 +51,9 @@ HTML_FILE = Path("openpetition_petitions.html")
 MAX_LIST_PAGES = 200            # Sicherheitslimit für die Paginierung
 
 PETITION_HREF_RE = re.compile(r"/petition/online/([a-z0-9\-]+)")
+# Eine Detailadresse hat unterhalb von /petition/online/ noch ein Wegstück.
+# Maßstab für core.eigene_adresse.
+DETAILADRESSE_RE = re.compile(r"/petition/online/[^/?#]+", re.I)
 CATEGORY_RE = re.compile(r"/petitionen\?category=(\d+)")
 # "470.240 Unterschriften" bzw. "500.000 für Sammelziel"
 SIG_RE  = re.compile(r"([\d.]+)\s*Unterschrift", re.I)
@@ -127,9 +130,15 @@ def parse_detail(html: str, url: str) -> dict:
                         " - Online-Petition") or None)
     rec["summary"] = _meta(soup, "og:description")
     rec["image_url"] = _meta(soup, "og:image")
+    # Nur eine echte Petitionsseite darf die angefragte Adresse ersetzen —
+    # siehe core.eigene_adresse. Dieselbe ungeprüfte Übernahme hat bei WeAct
+    # und bei Avaaz je einen Schwung Phantomsätze mit gemeinsamer Adresse
+    # erzeugt. OpenPetition antwortet heute sauber mit 404 (8.8.2026
+    # gemessen), der Riegel ist hier Vorsorge.
     canon = soup.find("link", rel="canonical")
-    rec["url"] = (canon["href"].strip() if canon and canon.get("href")
-                  else _meta(soup, "og:url") or url)
+    rec["url"] = core.eigene_adresse(
+        (canon.get("href") if canon else None) or _meta(soup, "og:url"), url,
+        DETAILADRESSE_RE)
 
     # Adressat aus der "richtet sich an:"-Zeile.
     node = soup.find(string=re.compile(r"Petition richtet sich an:"))

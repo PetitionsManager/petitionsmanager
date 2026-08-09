@@ -888,6 +888,38 @@ BEFUND_LOCK = threading.Lock()
 VERLAUF_MAX = 30       # so viele Läufe hält die Zeitreihe je Plattform
 
 
+def eigene_adresse(kandidat: str | None, url: str,
+                   muster: "re.Pattern[str]") -> str:
+    """Die Adresse eines Datensatzes — aber nur, wenn sie zu IHM gehört.
+
+    ``canonical`` und ``og:url`` sind Angaben der Gegenseite. Sie sind bequem
+    (sie liefern die kanonische Schreibweise), aber sie sind FREMDE Angaben,
+    und eine Quelle, die eine entfernte Petition auf eine Sammelseite
+    umleitet, schreibt genau diese Sammelseite in unseren Datensatz. Danach
+    tragen mehrere Petitionen dieselbe Adresse.
+
+    Das ist in diesem Projekt inzwischen DREIMAL passiert und deshalb kein
+    Einzelfall mehr, sondern eine Fehlerklasse:
+      · WeAct — entfernte Petitionen wurden auf die Startseite umgeleitet; in
+        der App standen Phantomsätze „WeAct – Die Petitionsplattform von
+        Campact", mehrere mit derselben Adresse. Repariert mit einer eigenen
+        Prüfung (``weact_scraper.ist_petitionsseite``, die zusätzlich einen
+        Fremdhost kennt und deshalb dort bleibt).
+      · Avaaz — die „This page is not valid"-Hülle nennt als ``og:url`` die
+        Übersichtsseite. Repariert am 8.8.2026, zugleich Anlass für diese
+        gemeinsame Fassung.
+      · foodwatch und openpetition trugen denselben ungeprüften Zugriff. Ihre
+        Quellen antworten heute mit sauberem 404 — der Fehler war dort also
+        nur nicht scharf. Auf das Wohlverhalten einer fremden Seite zu bauen,
+        ist aber keine Absicherung, sondern Glück.
+
+    ``muster`` beschreibt, wie eine Detailadresse dieser Plattform aussieht.
+    Passt der Kandidat nicht, gilt die angefragte Adresse — die ist per
+    Konstruktion die richtige."""
+    k = (kandidat or "").strip()
+    return k if k and muster.search(k) else url
+
+
 def befund(stufe: str, thema: str, text: str,
            thema_en: str = "", text_en: str = "") -> None:
     """Eine Auffälligkeit melden; `stufe` ist "warnung" oder "hinweis".
