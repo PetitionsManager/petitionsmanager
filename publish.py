@@ -151,23 +151,15 @@ _SIM_DIA = str.maketrans({
 })
 
 
-# ActionKit (WeMove, 350.org) beantwortet auch unfertige und Testseiten mit
-# HTTP 200 — der Titel lautet dann „Enter a Title for <seitenname>". Solche
-# Seiten sind keine Petitionen; ohne diese Prüfung standen am 4.8.26 zwanzig
-# davon in der App, darunter „…michal-test12…" und „…postactiontest3…".
-PLATZHALTER_TITEL = re.compile(r"^\s*enter a title\b", re.I)
-
-
-def brauchbarer_titel(rec: dict) -> bool:
-    """Hat der Datensatz einen Titel, mit dem sich jemand etwas anfangen kann?
-
-    Ohne Titel ist eine Petition in der App nicht lesbar, nicht suchbar und
-    nicht sortierbar — sie erschien als leere Zeile „(ohne Titel)". Am 4.8.26
-    betraf das 276 der 16.914 ausgelieferten Datensätze, 184 davon bei WeMove.
-    Sie bleiben im Store (ein späterer Lauf kann sie noch füllen), aber
-    ausgeliefert werden sie erst, wenn sie einen Titel haben."""
-    titel = (rec.get("title") or "").strip()
-    return bool(titel) and not PLATZHALTER_TITEL.match(titel)
+# Was ausgeliefert wird, entscheidet core.brauchbarer_titel — dieselbe Regel,
+# nach der das Dashboard seine Meldung baut. Sie stand bis zum 8.8.2026 nur
+# hier, weshalb die Kachel die Hälfte des Ausfalls verschwieg (WeMove meldete
+# 13 titellose Sätze, es fehlten 54). Ein Satz ohne brauchbaren Titel ist in
+# der App nicht lesbar, nicht suchbar und nicht sortierbar; er bleibt im Store,
+# damit ein späterer Lauf ihn füllen kann. Am 4.8.26 betraf das 276 der 16.914
+# Datensätze, 184 davon bei WeMove.
+brauchbarer_titel = core.brauchbarer_titel
+PLATZHALTER_TITEL = core.PLATZHALTER_TITEL
 
 
 def slim(rec: dict) -> dict:

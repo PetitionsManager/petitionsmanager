@@ -618,7 +618,15 @@ def save_store(store: dict, data_file: Path, extra_meta: dict | None = None,
         if "online" not in vor_kennzahlen and isinstance(prev.get("online_count"), int):
             vor_kennzahlen = {**vor_kennzahlen, "online": prev["online_count"]}
 
-        neue_befunde, kennzahlen = _bestandspruefung(store, vor_kennzahlen)
+        # Erst aufräumen, dann prüfen — die entfernten Bruchstücke werden der
+        # Prüfung ausdrücklich mitgegeben, damit ein frischer Rückfall trotz
+        # Aufräumen gemeldet wird (siehe _entferne_bruchstuecke).
+        entfernt = _entferne_bruchstuecke(store)
+        if entfernt:
+            log(f"{len(entfernt)} abgeschnittene Adresse(n) aus dem Bestand "
+                f"entfernt, z. B. {', '.join(entfernt[:3])}.")
+        neue_befunde, kennzahlen = _bestandspruefung(store, vor_kennzahlen,
+                                                     entfernt)
         key = getattr(_TLS, "platform", None) or "_cli"
         with BEFUND_LOCK:
             gemeldet = list(BEFUNDE.pop(key, []))
@@ -847,19 +855,56 @@ def befund(stufe: str, thema: str, text: str) -> None:
     log(f"BEFUND [{stufe}] {thema}: {eintrag['text']}")
 
 
-def entdeckung(name: str, treffer: int, erwartet_min: int = 1) -> int:
+def entdeckung(name: str, treffer: int, erwartet_min: int = 1,
+               aufgegeben: bool = False) -> int:
     """Einen Entdeckungszweig zählen und melden, wenn er (fast) leer bleibt.
 
     Genau hier fiel Change.org durch (Fall 1 oben): ein Zweig, der NICHTS mehr
     findet, ist selten eine Randnotiz — meist ist er die erste Stufe eines
     Ausfalls, den ein zweiter Zweig noch verdeckt. Gibt `treffer` unverändert
     zurück, damit sich der Aufruf um einen bestehenden Ausdruck legen lässt:
-        topics = core.entdeckung("Themenseiten", len(discover_topics(f)))"""
+        topics = core.entdeckung("Themenseiten", len(discover_topics(f)))
+
+    ``aufgegeben=True`` ist für den Fall, dass die QUELLE den Zweig abgeschafft
+    hat — nicht wir. Dann ist die Null keine Störung, sondern der Normalfall,
+    und eine tägliche Warnung darüber ist bloß Lärm, der die echten Warnungen
+    entwertet. Umgekehrt wird die Rückkehr des Zweigs gemeldet: sie ist selten,
+    sie ist gute Nachricht, und sie verlangt eine Handlung (Erwartung wieder
+    scharf stellen)."""
+    if aufgegeben:
+        if treffer:
+            befund("hinweis", f"Entdeckung „{name}“",
+                   f"{treffer} Treffer – dieser Zweig galt als von der Quelle "
+                   f"aufgegeben und liefert wieder. Erwartung wieder scharf "
+                   f"stellen (aufgegeben=False).")
+        return treffer
     if treffer < erwartet_min:
         befund("warnung", f"Entdeckung „{name}“",
                f"{treffer} Treffer – erwartet mindestens {erwartet_min}. "
                f"Zweig vermutlich ausgefallen (Seitenumbau?).")
     return treffer
+
+
+# ActionKit (WeMove, 350.org) beantwortet auch unfertige und Testseiten mit
+# HTTP 200 — der Titel lautet dann „Enter a Title for <seitenname>". Solche
+# Seiten sind keine Petitionen.
+#
+# Die Regel steht hier und nicht mehr in publish.py, weil BEIDE sie brauchen
+# und sie auseinandergelaufen sind: publish verwarf die Platzhalter, das
+# Dashboard kannte nur den LEEREN Titel. Am 8.8.2026 stand WeMove deshalb mit
+# „13 ohne Titel" und „Vollständigkeit 100 %" da, während tatsächlich 54 von
+# 263 Sätzen die App nie erreichten — die 41 Platzhalter zählte niemand. Eine
+# Meldung, die den halben Ausfall verschweigt, ist schlimmer als keine.
+PLATZHALTER_TITEL = re.compile(r"^\s*enter a title\b", re.I)
+
+
+def brauchbarer_titel(rec: dict) -> bool:
+    """Hat der Datensatz einen Titel, mit dem sich jemand etwas anfangen kann?
+
+    Maßstab dafür, was publish.py ausliefert. Ohne Titel ist eine Petition in
+    der App nicht lesbar, nicht suchbar und nicht sortierbar."""
+    titel = (rec.get("title") or "").strip()
+    return bool(titel) and not PLATZHALTER_TITEL.match(titel)
 
 
 def _torsi(store: dict, ohne_titel: set) -> list[str]:
@@ -883,7 +928,38 @@ def _torsi(store: dict, ohne_titel: set) -> list[str]:
     return treffer
 
 
-def _bestandspruefung(store: dict, vorher: dict) -> tuple[list[dict], dict]:
+def _entferne_bruchstuecke(store: dict) -> list[str]:
+    """Abgeschnittene Adressen aus dem Bestand nehmen und zurückmelden.
+
+    Das sind Slugs, die eine frühere Fassung von ``PETITION_SLUG_RE`` an der
+    Prozent-Kodierung abgeschnitten hat (change.org, bis 4.8.2026): aus
+    „…register-f%C3%BCr-waffen" wurde „…register-f%". Sie liefern 404, bleiben
+    deshalb für immer titellos, werden nie ausgeliefert — und meldeten sich
+    trotzdem jeden Tag als Dauerzustand, obwohl die Ursache längst behoben ist.
+    Stand 8.8.2026 noch 23 Stück bei Change.org, von 81 am 4.8.
+
+    Warum das gefahrlos ist: der Erkenner ist derselbe wie in der Meldung, und
+    er ist gemessen — über elf Bestände am 6.8.2026 blieb bei „Präfix UND
+    titellos" kein einziger gesunder Satz hängen. Entfernt wird ohnehin nur,
+    was die App nie zu sehen bekommt; taucht der Slug doch wieder auf, holt ihn
+    der nächste Lauf über die Sitemap zurück.
+
+    ⚠️ Der Aufrufer muss ZUERST melden und DANN aufräumen (siehe save_store).
+    Andersherum verdeckt das Aufräumen genau den Rückfall, für den die Meldung
+    da ist: ein neu kaputter Ausdruck erzeugt Bruchstücke, die stillschweigend
+    verschwinden, und niemand erfährt davon."""
+    ohne_titel = {str(r.get("slug") or "") for r in store.values()
+                  if isinstance(r, dict)
+                  and not str(r.get("title") or "").strip()}
+    weg = _torsi(store, ohne_titel)
+    for slug in weg:
+        store.pop(slug, None)
+    return weg
+
+
+def _bestandspruefung(store: dict, vorher: dict,
+                      entfernte_torsi: list[str] | None = None
+                      ) -> tuple[list[dict], dict]:
     """Prüft den FERTIGEN Bestand auf die Spuren bekannter Ausfälle.
     Liefert (neue Befunde, Kennzahlen). Die Kennzahlen wandern ins _meta und
     sind beim nächsten Lauf der Vergleichswert — ohne sie gäbe es keinen
@@ -894,7 +970,17 @@ def _bestandspruefung(store: dict, vorher: dict) -> tuple[list[dict], dict]:
     online = sum(1 for r in saetze if r.get("status", "online") == "online")
     ohne_titel = {str(r.get("slug") or "") for r in saetze
                   if not str(r.get("title") or "").strip()}
-    torsi = _torsi(store, ohne_titel)
+    # Platzhaltertitel getrennt zählen: sie sind KEIN „ohne Titel" (der Satz
+    # hat einen), werden von publish.py aber genauso verworfen. Erst beide
+    # zusammen ergeben die Zahl, die den Nutzer interessiert — wie viele Sätze
+    # es nicht in die App schaffen.
+    platzhalter = {str(r.get("slug") or "") for r in saetze
+                   if PLATZHALTER_TITEL.match(str(r.get("title") or ""))}
+    nicht_ausgeliefert = sum(1 for r in saetze if not brauchbarer_titel(r))
+    # Hat der Aufrufer schon aufgeräumt, sind die Bruchstücke nicht mehr im
+    # Bestand — gemeldet werden trotzdem die, die er entfernt hat.
+    torsi = (_torsi(store, ohne_titel) if entfernte_torsi is None
+             else entfernte_torsi)
     # Mehrere Datensätze auf DERSELBEN Adresse. Am 6.8.2026 über alle elf
     # Bestände gezählt: 0 von 14.354 — die Fehlalarmquote dieser Schwelle ist
     # also gemessen null, jede Dublette ist ein echter Befund. Bekannt ist der
@@ -910,6 +996,8 @@ def _bestandspruefung(store: dict, vorher: dict) -> tuple[list[dict], dict]:
     dubletten = {u: s for u, s in nach_url.items() if len(s) > 1}
     kennzahlen = {"zeit": now_iso(), "gesamt": gesamt, "online": online,
                   "offline": gesamt - online, "ohne_titel": len(ohne_titel),
+                  "platzhalter": len(platzhalter),
+                  "nicht_ausgeliefert": nicht_ausgeliefert,
                   "torsi": len(torsi), "dubletten": len(dubletten)}
 
     neu: list[dict] = []
@@ -935,19 +1023,33 @@ def _bestandspruefung(store: dict, vorher: dict) -> tuple[list[dict], dict]:
                   f"{v_ohne} → {len(ohne_titel)} von {gesamt} (+{zuwachs}). "
                   f"Titel werden vermutlich nicht mehr gelesen.")
 
-    # (b) Abgeschnittene Adressen. Beim ersten Lauf gibt es keinen Vergleich —
-    #     dann zählt der Stand, ab 3 (Bundestag hat dauerhaft 1, das ist der
-    #     gemessene Grundpegel).
-    if v_torsi is None:
-        if len(torsi) >= 3:
-            merke("warnung", "Abgeschnittene Adressen",
-                  f"{len(torsi)} Slugs sind Anfang eines anderen und haben "
-                  f"keinen Titel, z. B. {', '.join(torsi[:3])}. Prüfe den "
-                  f"Ausdruck, der die Adresse aus der Seite zieht.")
-    elif len(torsi) > v_torsi:
+    # (a2) Platzhaltertitel („Enter a Title for …"). Gleiche Schwellen wie (a),
+    #      gleiche Begründung: WeMove trägt bauartbedingt Dutzende Testvorlagen,
+    #      der Stand darf nicht blinken, der Zuwachs schon. Beim ersten Lauf mit
+    #      dieser Kennzahl ist ``v_platz`` None — der Umstieg löst also keinen
+    #      Fehlalarm aus, obwohl die Zahl neu im _meta auftaucht.
+    v_platz = vorher.get("platzhalter")
+    if isinstance(v_platz, int) and gesamt:
+        zuwachs = len(platzhalter) - v_platz
+        if zuwachs >= 10 and zuwachs / gesamt >= 0.02:
+            merke("warnung", "Platzhaltertitel statt Petitionen",
+                  f"{v_platz} → {len(platzhalter)} von {gesamt} (+{zuwachs}). "
+                  f"Die Quelle liefert unfertige Seiten mit HTTP 200; sie "
+                  f"werden nicht ausgeliefert.")
+
+    # (b) Abgeschnittene Adressen. Seit dem 8.8.2026 räumt der Lauf sie weg
+    #     (_entferne_bruchstuecke), der Bestand trägt sie also nicht mehr vor
+    #     sich her. Damit ändert sich, was die Zahl bedeutet: nicht mehr ein
+    #     Dauerzustand, sondern was DIESER Lauf gefunden hat. Ab 3 ist es ein
+    #     Ausdrucksfehler (Bundestag hat dauerhaft 1, gemessener Grundpegel);
+    #     nach dem Aufräumen steht sie im Normalfall auf 0, jeder Wert darüber
+    #     ist frisch entstanden und deshalb einen Hinweis wert.
+    if len(torsi) >= 3 and (v_torsi is None or len(torsi) > v_torsi):
         merke("warnung", "Abgeschnittene Adressen",
-              f"{v_torsi} → {len(torsi)}, neu z. B. {', '.join(torsi[:3])}. "
-              f"Prüfe den Ausdruck, der die Adresse aus der Seite zieht.")
+              f"{len(torsi)} Slugs sind Anfang eines anderen und haben keinen "
+              f"Titel, z. B. {', '.join(torsi[:3])}. Sie wurden entfernt — "
+              f"prüfe den Ausdruck, der die Adresse aus der Seite zieht, sonst "
+              f"entstehen sie beim nächsten Lauf neu.")
 
     # (c) Doppelt vergebene Adressen. Grundpegel gemessen 0 — deshalb genügt
     #     hier eine einzige, es braucht keinen Puffer. merge_records() liegt
@@ -1586,27 +1688,46 @@ def _live_card(platform: Platform, schnappschuss: bool = False) -> str:
     generated = meta.get("generated_at")
     cats = str(cat_count) if cat_count else "—"
 
-    # Vollständigkeitsgrad: wie viele der bei der Entdeckung gefundenen
-    # Kandidaten (Feld "available") stecken schon im Store? Zeigt z. B. den
-    # großen Change.org-Backlog. Ohne "available" (Altbestand vor diesem
-    # Feature) Rückfall auf 100 % (= als vollständig angenommen).
+    # Wie viele der bei der Entdeckung gefundenen Kandidaten (Feld "available")
+    # stecken schon im Store? Zeigt z. B. den großen Change.org-Rückstand.
+    # Ohne "available" (Altbestand vor diesem Feature) Rückfall auf 100 %.
+    #
+    # ⚠️ Das hieß bis zum 8.8.2026 „Vollständigkeit", und das war eine falsche
+    # Auskunft: verglichen wird mit dem, was DIESER LAUF gefunden hat, nicht
+    # mit dem Bestand der Quelle. Bei zehn von elf Plattformen setzt „available"
+    # der Lauf selbst — der Balken stand also zwangsläufig auf 100 %, egal wie
+    # viel die Quelle wirklich führt. Sichtbar wurde der Unsinn an WeAct:
+    # „1899 von ~1879 entdeckten · vollständig", also mehr als alles. Nur
+    # innn.it nennt eine echte Quell-Gesamtzahl (API-totalCount); zwei
+    # Gegenproben am 3.8.2026: innn.it 2.040 Quelle / 2.045 bei uns, Europarl
+    # 100 / 98. Wer echte Vollständigkeit wissen will, muss die Quellzahl je
+    # Plattform holen — bis dahin sagt der Balken, was er kann: abgearbeitet.
     available = meta.get("available") or len(store) or 1
     pct = min(100, round(len(store) / available * 100)) if available else 100
-    comp_cls, comp_lbl = (("full", "vollständig") if pct >= 95 else
-                          ("grow", "wächst noch") if pct >= 50 else
-                          ("low", "großer Backlog"))
+    comp_cls, comp_lbl = (("full", "alle gefundenen abgearbeitet") if pct >= 95
+                          else ("grow", "Rückstand") if pct >= 50
+                          else ("low", "großer Rückstand"))
 
     # Einbruch des Online-Bestands = fast immer ein Quellenproblem, kein echtes
     # Verschwinden der Petitionen (siehe save_store).
     # Selbstmeldung des letzten Laufs. Warnungen zuerst und rot; darunter der
     # stille Dauerzustand, damit man ihn beim Suchen findet, ohne dass er die
     # frische Warnung überstrahlt (siehe Abschnitt „Selbstmeldung der Scraper").
+    # Warnungen rot, Hinweise leise — aber BEIDE sichtbar. Bis zum 8.8.2026
+    # zeigte die Kachel nur „warnung"; die Stufe „hinweis" war zwar in befund()
+    # dokumentiert, wurde aber nirgends gerendert und tauchte auch im CI nicht
+    # auf. Ein Meldeweg, der nichts meldet, ist schlimmer als keiner: er lädt
+    # dazu ein, etwas hineinzuschreiben, das nie jemand liest.
     befunde = meta.get("befunde")
     if befunde:
         warn_html = "".join(
             f'<div class="healthwarn"><b>⚠ {_esc(b.get("thema"))}</b>'
             f'{_esc(b.get("text"))}</div>'
             for b in befunde if b.get("stufe") == "warnung")
+        warn_html += "".join(
+            f'<div class="healthinfo"><b>ℹ {_esc(b.get("thema"))}</b>'
+            f'{_esc(b.get("text"))}</div>'
+            for b in befunde if b.get("stufe") == "hinweis")
     else:
         # Bestände von vor der Selbstmeldung tragen nur das alte Einzelfeld.
         warning = meta.get("health_warning")
@@ -1615,11 +1736,30 @@ def _live_card(platform: Platform, schnappschuss: bool = False) -> str:
 
     kz = meta.get("kennzahlen") or {}
     dauer = []
-    if kz.get("ohne_titel"):
-        anteil = round(kz["ohne_titel"] / max(1, kz.get("gesamt") or 1) * 100)
-        dauer.append(f"{kz['ohne_titel']} ohne Titel ({anteil} %)")
+    # Gemeldet wird die AUSWIRKUNG, nicht das Symptom: „13 ohne Titel" ließ
+    # niemanden ahnen, dass in Wahrheit 54 Sätze in der App fehlen. Die Arten
+    # stehen dahinter in Klammern, aber die erste Zahl ist die, die zählt.
+    # Bestände von vor dieser Kennzahl tragen nur ohne_titel — dann gilt die.
+    fehlt = kz.get("nicht_ausgeliefert")
+    if fehlt is None:
+        fehlt = kz.get("ohne_titel") or 0
+    if fehlt:
+        anteil = round(fehlt / max(1, kz.get("gesamt") or 1) * 100)
+        arten = []
+        if kz.get("ohne_titel"):
+            arten.append(("ohne Titel", kz["ohne_titel"]))
+        if kz.get("platzhalter"):
+            arten.append(("Platzhaltertitel", kz["platzhalter"]))
+        if len(arten) > 1:
+            auf = " (" + ", ".join(f"{n} {w}" for w, n in arten) + ")"
+        elif arten:
+            auf = f" ({arten[0][0]})"
+        else:
+            auf = ""
+        dauer.append(f"{fehlt} von {kz.get('gesamt') or '?'} erreichen die App "
+                     f"nicht{f' – {anteil} %' if anteil >= 1 else ''}{auf}")
     if kz.get("torsi"):
-        dauer.append(f"{kz['torsi']} abgeschnittene Adresse(n)")
+        dauer.append(f"{kz['torsi']} abgeschnittene Adresse(n) entfernt")
     if dauer:
         warn_html += ('<div class="healthnote">Dauerzustand: '
                       + _esc(" · ".join(dauer)) + "</div>")
@@ -1638,9 +1778,10 @@ def _live_card(platform: Platform, schnappschuss: bool = False) -> str:
         <div class="cs"><div class="n">{cats}</div><div class="l">Kategorien</div></div>
       </div>
       <div class="completeness {comp_cls}">
-        <div class="completeness__head"><span>Vollständigkeit</span><b>{pct}%</b></div>
+        <div class="completeness__head"><span>Abgearbeitet</span><b>{pct}%</b></div>
         <div class="completeness__bar"><div class="completeness__fill" style="width:{pct}%"></div></div>
-        <span class="completeness__sub">{len(store)} von ~{available} entdeckten · {comp_lbl}</span>
+        <span class="completeness__sub">{len(store)} von ~{available} gefundenen
+          Kandidaten · {comp_lbl}</span>
       </div>
       {warn_html}
       {balken}
@@ -1791,6 +1932,14 @@ _DASHBOARD_TEMPLATE = """<!DOCTYPE html>
               border:1px solid #f3c3bf}
   .healthwarn b{display:block;font-weight:700}
   .healthwarn + .healthwarn{margin-top:-6px}
+  /* Hinweis: etwas ist anders als erwartet, aber nichts ist kaputt — z. B.
+     ein aufgegebener Entdeckungszweig, der wieder liefert. Blau statt rot,
+     damit er die echten Warnungen nicht verwässert. */
+  .healthinfo{margin:0 0 12px;padding:8px 10px;border-radius:8px;font-size:12px;
+              line-height:1.4;background:#eaf1fb;color:#254a7d;
+              border:1px solid #c3d6f0}
+  .healthinfo b{display:block;font-weight:700}
+  .healthinfo + .healthinfo{margin-top:-6px}
   /* Dauerzustand statt frischer Ausfall: sichtbar, aber ohne Alarmfarbe —
      sonst blinkt WeMoves bauartbedingter Titelmangel jeden Tag rot und man
      sieht die echte Warnung daneben nicht mehr. */
@@ -1840,6 +1989,9 @@ _DASHBOARD_TEMPLATE = """<!DOCTYPE html>
   .legend b{font-weight:700;letter-spacing:.03em}
   .legend .lg{display:inline-flex;align-items:center;gap:5px}
   .legend .lg i{width:9px;height:9px;border-radius:50%;display:inline-block}
+  .legend-note{margin:10px 0 0;max-width:70ch;font-size:11px;line-height:1.5;
+      color:var(--muted)}
+  .legend-note b{color:var(--ink);font-weight:700}
   @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
@@ -1856,6 +2008,10 @@ _DASHBOARD_TEMPLATE = """<!DOCTYPE html>
     <span class="lg"><i style="background:#e07b39"></i>eingeschränkt (nur kuratierte Auswahl/Heuristik)</span>
     <span class="lg"><i style="background:#b23b3b"></i>verschlossen (keine öffentliche Liste/Blockade)</span>
   </div>
+  <p class="legend-note"><b>„Abgearbeitet"</b> vergleicht den Bestand mit dem,
+     was derselbe Lauf gefunden hat — nicht mit dem Gesamtbestand der Quelle.
+     Eine echte Quell-Gesamtzahl nennt bislang nur innn.it. 100 % heißt also:
+     nichts liegt in der Warteschlange, nicht: wir haben alles.</p>
 </header>
 <main>
   <div class="grid">

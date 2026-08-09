@@ -130,8 +130,17 @@ def discover_slugs(fetcher: core.Fetcher) -> dict[str, dict]:
     # blieb trotzdem grün, weil die Sitemaps unten die Lücke füllten. Genau
     # dieser Fall war der Anlass für core.entdeckung() — sie meldet einen
     # leeren Zweig, statt ihn im Protokoll verschwinden zu lassen.
+    #
+    # Am 8.8.2026 nachgemessen und als aufgegeben eingestuft: die deutsche
+    # Startseite (266.305 Zeichen) enthält „trendingTopics" 0-mal und keinen
+    # einzigen /t/-Link. Das ist keine Störung, die vorbeigeht, sondern eine
+    # Entscheidung der Quelle — und eine Warnung, die jeden Tag dasselbe sagt,
+    # wird überlesen und nimmt die echten Warnungen daneben mit. Der Abruf
+    # bleibt trotzdem stehen (eine Anfrage): kehrt der Zweig zurück, meldet
+    # entdeckung() das als Hinweis, und dann gehört „aufgegeben" wieder weg.
     topics = discover_topics(fetcher)
-    core.entdeckung("Themenseiten (trendingTopics)", len(topics))
+    core.entdeckung("Themenseiten (trendingTopics)", len(topics),
+                    aufgegeben=True)
     prog(phase="discover", current=0, total=len(topics) + SITEMAP_COUNT,
          message="Sammle Themen …")
     for i, topic in enumerate(topics, 1):
