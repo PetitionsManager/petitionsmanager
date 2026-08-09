@@ -17,25 +17,48 @@
 #
 #  DETAIL/ZÄHLER:
 #    Jede Aktion zeigt auf act.350.org/cms/view_by_page_id/<id>, das auf die
-#    eigentliche Seite weiterleitet (/sign/<slug> oder /act/<slug>). Der
-#    Unterschriftenstand kommt über act.350.org/progress/<slug> (JSONP
-#    onProgressLoaded → total.actions + goal) – identisch zu WeMove.
+#    eigentliche Seite weiterleitet. Der Unterschriftenstand kommt über
+#    act.350.org/progress/<slug> (JSONP onProgressLoaded → total.actions +
+#    goal) – identisch zu WeMove.
 #
-#  TEXTE (seit 2026-07-29):
+#  ZIELFORMEN (am 2026-08-08 an ALLEN 26 Aktionen einzeln aufgelöst):
+#    19 × /sign/, 5 × /letter/, 1 × /signup/, 1 × /survey/ – und KEIN EINZIGES
+#    /act/ mehr. Das Muster kannte bis dahin nur (sign|act), also genau eine
+#    ausgestorbene Form und eine der vier lebenden: die anderen sieben fielen
+#    durch, bekamen nie einen Slug und damit nie eine Unterschriftenzahl
+#    (gemessen bis 20.711) und keinen Volltext. TARGET_RE ist deshalb jetzt
+#    offen – siehe dort, warum ein geschlossenes Muster hier der falsche Weg
+#    ist. Der /progress/-Zähler funktioniert für alle vier Formen (nachgemessen,
+#    auch /survey/ und /signup/ liefern total.actions).
+#
+#  TEXTE (seit 2026-07-29, Formen ergänzt 2026-08-08):
 #    Das Feld "description" der API ist bei einem Teil der Aktionen LEER (am
 #    2026-07-29: 6 von 20 im Feed), und wo es gefüllt ist, steht darin nur ein
-#    Anreißer von ~250 Zeichen. Der eigentliche Text steht auf der /sign/-Seite:
-#      #action-description-text → Einleitung (die "Beschreibung"),
-#      #petition-text          → der ganze Aufruf (auf der Seite hinter dem
-#                                Link „Den ganzen Text des Aufrufs lesen").
-#    Beides wird von dort geholt (fetch_detail) und ersetzt den API-Anreißer.
+#    Anreißer von ~250 Zeichen. Der eigentliche Text steht auf der Aktionsseite,
+#    je nach Form woanders:
+#      /sign/    #action-description-text → Einleitung ("Beschreibung"),
+#                #petition-text           → ganzer Aufruf (auf der Seite hinter
+#                                           „Den ganzen Text des Aufrufs lesen")
+#      /letter/  #action-description      → Einleitung,
+#                textarea#letter-content  → der Brief-/Mailtext selbst. ⚠️ Das
+#                                           ist KLARTEXT mit echten Umbrüchen,
+#                                           kein HTML (siehe _brieftext_html).
+#      /signup/  #action-description      → nur die Einleitung, kein Aufruftext
+#      /survey/  nichts davon – dort steht nur das Formular. Kein Fehler.
+#    ⚠️ #action-description ist auf /sign/-Seiten die KLAMMER um Einleitung UND
+#    Aufruf (gemessen 4.204 gegen 522 Zeichen) und taugt dort NICHT als
+#    Einleitung – fetch_detail prüft das ausdrücklich.
 #
-#  ROBOTS (act.350.org: Disallow /act/, /login/, /share/, /cms/unsubscribe):
-#    /sign/, /progress/ und /cms/view_by_page_id sind erlaubt, /act/ nicht.
+#  ROBOTS (act.350.org: Disallow /act/, /login/, /share/, /cms/unsubscribe;
+#  sonst "Allow: /"):
+#    /sign/, /letter/, /signup/, /survey/, /progress/ und /cms/view_by_page_id
+#    sind damit erlaubt, /act/ nicht. Am 2026-08-08 gegen die echte robots.txt
+#    geprüft, bevor die neuen Formen überhaupt angefasst wurden.
 #    Welche Form vorliegt, verrät die Weiterleitung, BEVOR etwas geladen wird:
-#    resolve_target liest nur den "Location"-Header. Nur bei /sign/ wird die
-#    Aktionsseite abgerufen – eine /act/-Adresse fasst der Scraper nie an.
-#    Der Zähler läuft über den separat erlaubten /progress/-Endpunkt.
+#    resolve_target liest nur den "Location"-Header. Eine /act/-Adresse fasst
+#    der Scraper nie an (ROBOTS_GESPERRT, dazu die Prüfung in fetcher.get).
+#    Der Zähler läuft über den separat erlaubten /progress/-Endpunkt – deshalb
+#    braucht auch eine gesperrte Form ihren Slug.
 #    getinvolved350.vercel.app hat keine robots-Einschränkung.
 #
 #  FORMAT-KENNZEICHNUNG:
@@ -77,9 +100,11 @@ TIME_FILTERS = ["Get involved page: low bar",
                 "Get involved page: medium bar",
                 "Get involved page: high bar"]
 
-# Textbausteine der /sign/-Seite (siehe Kopf, Abschnitt TEXTE).
-INTRO_SEL  = "#action-description-text"
-APPEAL_SEL = "#petition-text"
+# Textbausteine der Aktionsseiten (siehe Kopf, Abschnitt TEXTE).
+INTRO_SEL  = "#action-description-text"   # /sign/
+INTRO_ALT  = "#action-description"        # /letter/, /signup/ – Vorsicht, s. o.
+APPEAL_SEL = "#petition-text"             # /sign/
+LETTER_SEL = "#letter-content"            # /letter/ – <textarea>, Klartext!
 
 # So viele leere Antworten hintereinander gelten als „Bot-Schutz aktiv" (siehe
 # run). Fünf, weil einzelne Aussetzer vorkommen, eine Sperre aber nicht endet.
@@ -87,7 +112,24 @@ ABBRUCH_NACH_LEEREN = 5
 
 PROGRESS_RE = re.compile(r"onProgressLoaded\((.*)\)\s*;?\s*$", re.S)
 PAGE_ID_RE  = re.compile(r"view_by_page_id/(\d+)")
-TARGET_RE   = re.compile(r"/(sign|act)/([^/?#]+)")
+
+# Form und Slug der Zielseite. BEWUSST OFFEN: welche Formen act.350.org anlegt,
+# steht nirgends geschrieben, und ein geschlossenes Muster verliert jede neue
+# still. Genau das ist hier passiert – r"/(sign|act)/" kannte /letter/,
+# /signup/ und /survey/ nicht, also 7 von 26 Aktionen –, und vorher schon bei
+# Change.org (PETITION_SLUG_RE ohne Großbuchstaben → 81 angeblich gelöschte
+# Petitionen). Die Form wird deshalb auch groß/klein-tolerant gelesen.
+TARGET_RE   = re.compile(r"https?://[^/]+/([A-Za-z][A-Za-z_-]*)/([^/?#]+)")
+
+# Erste Pfadsegmente, die KEINE Aktionsseite bezeichnen. /cms/ muss hier stehen,
+# sonst nähme das offene Muster schon die Einstiegsadresse selbst als Treffer
+# ("cms" + "view_by_page_id") und resolve_target käme nie bis zur Weiterleitung.
+KEIN_ZIEL = {"cms", "progress"}
+
+# Formen, deren SEITE nicht abgerufen werden darf (robots.txt von act.350.org).
+# Der Slug wird trotzdem ermittelt: der Zähler hängt am eigenen, ausdrücklich
+# erlaubten /progress/-Zweig, nicht an der Aktionsseite.
+ROBOTS_GESPERRT = {"act", "share", "login"}
 
 FETCH_HEADERS = {
     "User-Agent": ("Mozilla/5.0 (X11; Linux x86_64; rv:128.0) "
@@ -177,13 +219,25 @@ def resolve_target(fetcher: core.Fetcher, page_id: str
     leeren 202 OHNE Location – am 2026-07-29 nachgemessen, dieselbe Seite hatte
     Minuten vorher noch sauber weitergeleitet. Wer das als „weg" verbucht,
     schiebt bei jeder Drosselung reihenweise lebende Aktionen ins Archiv."""
+
+    def ziel(u: str):
+        m = TARGET_RE.match(u)
+        if m and m.group(1).lower() not in KEIN_ZIEL:
+            return m.group(1).lower(), m.group(2)
+        return None
+
     url = f"{BASE_URL}/cms/view_by_page_id/{page_id}"
     for _ in range(4):
+        # ⚠️ Reihenfolge: erst die erreichte Adresse AUSWERTEN, dann die
+        # robots-Frage für die NÄCHSTE Anfrage stellen. Andersherum (so stand es
+        # bis 2026-08-08) verlor eine gesperrte Form ihren Slug und damit den
+        # Zähler, obwohl der über den erlaubten /progress/-Zweig läuft: den
+        # Location-Header zu lesen ist kein Abruf der Zielseite.
+        t = ziel(url)
+        if t:
+            return t[0], t[1], False
         if not fetcher.allowed(url):
             return None, None, False
-        m = TARGET_RE.search(url)
-        if m:
-            return m.group(1), m.group(2), False
         try:
             resp = fetcher.session.get(url, timeout=core.REQUEST_TIMEOUT,
                                        allow_redirects=False)
@@ -195,8 +249,8 @@ def resolve_target(fetcher: core.Fetcher, page_id: str
         if not loc:
             return None, None, False
         url = urljoin(url, loc)
-    m = TARGET_RE.search(url)
-    return (m.group(1), m.group(2), False) if m else (None, None, False)
+    t = ziel(url)
+    return (t[0], t[1], False) if t else (None, None, False)
 
 
 def fetch_progress(fetcher: core.Fetcher, slug: str) -> tuple[int, int | None] | None:
@@ -216,23 +270,47 @@ def fetch_progress(fetcher: core.Fetcher, slug: str) -> tuple[int, int | None] |
     return int(actions), goal
 
 
-def fetch_detail(fetcher: core.Fetcher, slug: str) -> dict:
-    """Einleitung + ganzen Aufruf-Text von der /sign/-Seite holen.
+def _brieftext_html(text: str) -> str:
+    """Klartext aus dem <textarea> der /letter/-Seiten in Absätze fassen.
 
-    Nur für /sign/ aufrufen! /act/ ist per robots.txt gesperrt; welche Form
-    vorliegt, steht schon fest, bevor hier etwas geladen wird (resolve_target
-    liest allein den Location-Header). fetcher.get prüft robots.txt zusätzlich
-    selbst – doppelter Boden, keine Ausrede.
+    Der Brieftext ist KEIN HTML – im Textfeld stehen echte Zeilenumbrüche.
+    Durch sanitize_fragment gejagt käme er als ein einziger Klumpen heraus,
+    Anrede, Absätze und Grußformel in derselben Zeile."""
+    absaetze = []
+    for block in re.split(r"\n\s*\n", text.strip()):
+        zeilen = [core._esc(z.strip()) for z in block.splitlines() if z.strip()]
+        if zeilen:
+            absaetze.append("<p>" + "<br>".join(zeilen) + "</p>")
+    return "\n".join(absaetze)
+
+
+def fetch_detail(fetcher: core.Fetcher, kind: str, slug: str) -> dict:
+    """Einleitung + Aufruftext der Aktionsseite holen – je nach Form woanders.
+
+    Gesperrte Formen kommen hier gar nicht erst an (ROBOTS_GESPERRT, geprüft
+    schon beim Aufrufer); welche Form vorliegt, steht fest, bevor hier etwas
+    geladen wird – resolve_target liest allein den Location-Header. fetcher.get
+    prüft robots.txt zusätzlich selbst – doppelter Boden, keine Ausrede.
 
     Warum überhaupt: das API-Feld "description" ist bei einem Teil der Aktionen
     leer, die standen in der App dann ganz ohne Text da. Siehe Kopf, TEXTE.
     """
-    resp = fetcher.get(f"{BASE_URL}/sign/{slug}/")
+    if kind in ROBOTS_GESPERRT:
+        return {}
+    resp = fetcher.get(f"{BASE_URL}/{kind}/{slug}/")
     if resp is None or not resp.ok:
         return {}
     soup = BeautifulSoup(resp.text, "html.parser")
     intro = soup.select_one(INTRO_SEL)
     appeal = soup.select_one(APPEAL_SEL)
+    if intro is None:
+        kandidat = soup.select_one(INTRO_ALT)
+        # ⚠️ Auf /sign/-Seiten ist #action-description die KLAMMER um Einleitung
+        # UND Aufruf (gemessen 4.204 gegen 522 Zeichen) – als Einleitung taugt
+        # sie nur, wenn der Aufruf nicht darin steckt, sonst stünde er zweimal
+        # im Text. Auf /letter/ und /signup/ ist sie die richtige Wahl.
+        if kandidat is not None and kandidat.select_one(APPEAL_SEL) is None:
+            intro = kandidat
     # Klartext VOR dem Bereinigen abnehmen: sanitize_fragment baut den Knoten um.
     kurz = intro.get_text(" ", strip=True) if intro else ""
     teile = []
@@ -245,6 +323,14 @@ def fetch_detail(fetcher: core.Fetcher, slug: str) -> dict:
         # Forderungszeile (.petition-target) als ersten Absatz.
         teile.append("<h3>Der ganze Text des Aufrufs</h3>")
         teile.append(core.sanitize_fragment(appeal, BASE_URL))
+    else:
+        # /letter/: kein #petition-text, dafür der Brief-/Mailtext im Textfeld –
+        # das ist genau das, was die Aktion im Namen der Teilnehmenden abschickt.
+        brief = soup.select_one(LETTER_SEL)
+        brieftext = _brieftext_html(brief.get_text()) if brief else ""
+        if brieftext:
+            teile.append("<h3>Der Text der Nachricht</h3>")
+            teile.append(brieftext)
     rec: dict = {}
     html = "\n".join(t for t in teile if t)
     if html:
@@ -290,8 +376,8 @@ def scrape_action(fetcher: core.Fetcher, page_id: str, obj: dict,
             # je 24 h, siehe skip_recent beim Aufrufer): der Aufruf-Text ändert
             # sich selten, aber er ändert sich – die Aktionen tragen
             # Aktualisierungen mitten im Text nach.
-            if kind == "sign":
-                rec.update(fetch_detail(fetcher, slug))
+            if kind and kind not in ROBOTS_GESPERRT:
+                rec.update(fetch_detail(fetcher, kind, slug))
         else:
             unklar = not weg
     return "online", rec, unklar
@@ -419,10 +505,11 @@ PLATFORM = Platform(
     openness=3,
     openness_note="Mittel: keine offene Liste; Aktionen über eine externe "
                   "JSON-API (im Seiten-JS gefunden), Zähler über /progress/, "
-                  "Texte von der /sign/-Seite. /act/-Aktionsseiten sind per "
-                  "robots gesperrt und werden nicht geladen – dort bleibt nur "
-                  "der Anreißer der API, das Format leitet sich aus dem "
-                  "Button-Text ab.",
+                  "Texte von der Aktionsseite (/sign/, /letter/, /signup/). "
+                  "/act/-Aktionsseiten sind per robots gesperrt und werden "
+                  "nicht geladen – dort bleibt nur der Anreißer der API; der "
+                  "Zähler kommt trotzdem, er hängt am erlaubten /progress/. "
+                  "Das Format leitet sich aus dem Button-Text ab.",
     name="350.org",
     eyebrow="350.org · Klima-Aktionen (deutsch): Petitionen, E-Mail- & Brief-Aktionen",
     source_url="https://350.org/de/mitmachen/",
