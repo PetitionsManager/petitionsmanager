@@ -88,6 +88,28 @@ PHASES: dict[int, tuple[str, bool, str]] = {
 }
 BACKFILL_STATUSES = (3, 4)        # was `--backfill` einliest
 
+# Untergrenze je Liste für die Selbstmeldung (core.entdeckung unten).
+# Alle drei am 8.8.2026 in einem vollen Durchlauf gemessen: status.2 = 73,
+# status.3 = 824, status.4 = 7.035. Zusammen mit den 587 Seiten aus dem
+# Kommentar oben ergibt das rund 12 Petitionen je Listenseite — und daran
+# hängen die Schwellen: der realistische Teilausfall ist nicht „die Liste ist
+# leer", sondern „die Paginierung bricht nach den ersten Seiten ab". Die
+# Schleife endet dann bei added == 0 ordentlich und ohne Fehler.
+# Deshalb liegt schon status.2 bei 15 und nicht bei 10: ein Abbruch nach der
+# ersten Seite hinterlässt ~12 Treffer und bliebe unter 10 unbemerkt. Nach oben
+# begrenzt bleibt die Schwelle dadurch, dass status.2 täglich läuft — 15 von
+# gemessenen 73 lässt dem normalen Zu- und Abgang der Mitzeichnungsfristen
+# reichlich Luft, und ein Melder, der täglich anschlägt, wird überlesen.
+ERWARTET_MIN: dict[int, int] = {2: 15, 3: 50, 4: 500}
+
+# Englische Fassung der PHASES-Klartexte. Bewusst ein eigenes Dict statt eines
+# vierten Felds in PHASES: das wird oben als Dreiertupel entpackt.
+PHASEN_EN: dict[int, str] = {
+    2: "within the signing period",
+    3: "with an expired deadline",
+    4: "in the archive",
+}
+
 DETAIL_HREF_RE = re.compile(
     r'href="(/petitionen/_(\d{4})/_(\d{2})/_(\d{2})/Petition_(\d+)\.nc\.html)"')
 MZ_COUNT_RE = re.compile(r"Anzahl Online-Mitzeichnungen\s*([\d.]+)")
@@ -175,6 +197,12 @@ def discover_slugs(fetcher: core.Fetcher, status: int = 2) -> dict[str, dict]:
         log(f"WARNUNG: status.{status} bei {MAX_LIST_PAGES} Seiten abgeschnitten "
             "– MAX_LIST_PAGES erhöhen.")
     log(f"Liste status.{status}: {len(found)} Petitionen {label}.")
+    # Je Status ein eigener Zweig: --backfill liest status.3 und status.4, der
+    # Tageslauf nur status.2. Eine gemeinsame Schwelle über alle drei wäre
+    # sinnlos, ihre Größenordnungen liegen um Faktor 100 auseinander.
+    core.entdeckung(f"Liste {label}", len(found),
+                    erwartet_min=ERWARTET_MIN[status],
+                    name_en=f"list {PHASEN_EN[status]}")
     return found
 
 

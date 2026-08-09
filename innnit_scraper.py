@@ -180,6 +180,28 @@ def run(args) -> None:
             break
     log(f"API: {len(seen)} Petitionen übernommen "
         f"(gemeldeter Gesamtbestand: {total_count}).")
+    # Dieses API IST die Entdeckung – innn.it hat keinen zweiten Weg, der einen
+    # Ausfall auffangen (und damit verdecken) würde. Gefährlich ist weniger die
+    # tote Schnittstelle als der stille Abbruch mittendrin: jedes `break` oben
+    # beendet die Schleife ORDENTLICH, der Lauf meldet keinen Fehler und
+    # übernimmt einfach weniger.
+    #
+    # ⚠️ Die Schwelle liegt bewusst NICHT auf 100 oder 200. Gemessen am
+    # 8.8.2026: 2.054 Petitionen über 21 Seiten, API_LIMIT = 100 je Seite. Ein
+    # Abbruch nach Seite 1 hinterlässt also exakt 100, nach Seite 2 exakt 200 –
+    # und die Bedingung in entdeckung() ist `treffer < erwartet_min`. Mit 100
+    # oder 200 als Schwelle wäre 100 < 100 bzw. 200 < 200 falsch, der Melder
+    # bliebe bei genau dem Fall stumm, für den er da ist. 250 fängt den Abbruch
+    # in den ersten beiden Seiten und liegt zugleich weit unter dem echten
+    # Bestand. Gegenprobe fürs Protokoll ist der gemeldete Gesamtbestand oben.
+    #
+    # Bei --limit wird nicht gemeldet: dort bricht die Schleife absichtlich
+    # früh ab (siehe oben), ein Befund wäre dann ein Fehlalarm aus einem
+    # Testlauf.
+    if not args.limit:
+        core.entdeckung("Listen-API (/api/v2/posts/initiatives)", len(seen),
+                        erwartet_min=250,
+                        name_en="list API (/api/v2/posts/initiatives)")
 
     # Bekannte Einträge, die nicht mehr im API auftauchen → direkt prüfen.
     missing = [s for s in store if s not in seen]

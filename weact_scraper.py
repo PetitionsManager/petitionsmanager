@@ -243,6 +243,20 @@ def discover_slugs(fetcher: core.Fetcher, category_slugs: list[str]) -> dict[str
         log(f"Kategorie '{cat}': insgesamt {len(found)} Slugs gesammelt.")
         bump(f"Kategorie „{cat}“ geprüft")
 
+    # Am 8.8.2026 über alle drei Wege gemessen — die Last liegt sehr ungleich:
+    #   Sitemap (a)      0 URLs (beide Adressen; sie loggt nur, wenn sie etwas
+    #                    findet, und blieb still — hier ist `found` noch leer,
+    #                    die Null ist also echt und nicht bloß „nichts Neues")
+    #   Startseite (b)   +9
+    #   Kategorien (c)   +1.870  → zusammen 1.879
+    # Der Zweig hängt damit praktisch vollständig an den Kategorieseiten. Genau
+    # deshalb steht die Schwelle bei 200 und nicht höher am Messwert: fallen die
+    # Kategorien aus, bleibt ein zweistelliger Rest übrig, und den fängt 200
+    # sicher. Weiter hinauf wäre sie kein Ausfallmelder mehr, sondern eine
+    # Wette auf den Bestand — einzelne leere Kategorien sind normal.
+    core.entdeckung("Sitemap + Startseite + Kategorieseiten", len(found),
+                    erwartet_min=200,
+                    name_en="sitemap + home page + category pages")
     return found
 
 
@@ -576,6 +590,17 @@ def run(args) -> None:
     prog(phase="categories", current=0, total=0, message="Prüfe Kategorien …")
     prev_categories = load_known_categories()
     live_categories = discover_categories(fetcher)
+    # Der Fallback unten fängt den Ausfall dieses Zweigs auf — und verdeckt ihn
+    # damit zugleich: der Lauf geht mit der festen Liste weiter, meldet keinen
+    # Fehler und sieht von außen gesund aus. Genau dieses Muster (ein zweiter
+    # Weg füllt die Lücke) war bei Change.org der Anlass für entdeckung().
+    # Schwelle gemessen am 8.8.2026: 24 Kategorien. 10 darf hier näher am
+    # Messwert liegen als bei den Petitionslisten, weil eine Navigation eine
+    # STABILE Struktur ist und nicht mit dem Kampagnenbestand schwankt — so
+    # fällt auch der Teilausfall auf, bei dem das Muster nur noch einen Rest
+    # der Einträge erkennt.
+    core.entdeckung("Kategorie-Navigation", len(live_categories),
+                    erwartet_min=10, name_en="category navigation")
     if live_categories:
         categories = live_categories
         category_slugs = sorted(categories)
