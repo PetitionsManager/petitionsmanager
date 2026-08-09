@@ -122,24 +122,26 @@ jobs:
                 ? pfade(v, p + k + ".") : [p + k]);
             if (T.de) {
               const soll = new Set(pfade(T.de));
-              // ⚠️ Der Abschnitt "legal" ist AUSGENOMMEN. Kodex, Impressum,
-              // Nutzungsrecht und die Anfragestaende werden bewusst nur auf
-              // Deutsch gepflegt: es sind juristisch ungepruefte Entwuerfe,
-              // eine Uebersetzung waere eine zweite ungepruefte Fassung
-              // (Nutzerentscheidung 8.8.2026). T() faellt dafuer auf Deutsch
-              // zurueck. Ohne diese Ausnahme meldete die Pruefung 16
-              // "fehlende" Schluessel und wurde rot - genau das ist beim
-              // ersten Lauf passiert.
-              // Nicht pauschal abgeschaltet: fuer alles ausserhalb von
-              // "legal" gilt die Vollstaendigkeitspflicht weiter, und wie
-              // viele Texte einsprachig sind, wird unten ausgewiesen.
-              const einsprachig = (k) => k.startsWith("legal.");
+              // ⚠️ GENAU EIN Schluessel ist ausgenommen: legal.impressumHtml.
+              // Es ist eine Pflichtangabe mit echter Anschrift; eine zweite
+              // Sprachfassung waere eine zweite Pflichtangabe, die
+              // auseinanderlaufen kann. T() faellt dafuer auf Deutsch zurueck.
+              //
+              // Vorher stand hier k.startsWith("legal.") und nahm den ganzen
+              // Abschnitt heraus - Kodex, Nutzungsrecht und die Anfrage-
+              // staende inbegriffen. Die sind seit dem 8.8.2026 abends
+              // uebersetzt (Nutzerentscheidung: alles ausser dem Impressum),
+              // und die pauschale Ausnahme haette jede kuenftige Luecke im
+              // Rechtsbereich stillschweigend durchgelassen - auch eine
+              // versehentliche. Deshalb der Vergleich auf Gleichheit: was
+              // nicht genau dieser eine Schluessel ist, muss uebersetzt sein.
+              const einsprachig = (k) => k === "legal.impressumHtml";
               for (const s of sprachen.filter(x => x !== "de")) {
                 const ist = new Set(pfade(T[s]));
                 const weg = [...soll].filter(x => !ist.has(x) && !einsprachig(x));
                 const nurDe = [...soll].filter(x => !ist.has(x) && einsprachig(x));
                 if (nurDe.length)
-                  console.log(`texts.js [${s}]: ${nurDe.length} Rechtstexte bewusst nur auf Deutsch`);
+                  console.log(`texts.js [${s}]: ${nurDe.length} Text bewusst nur auf Deutsch (${nurDe.join(", ")})`);
                 const neu = [...ist].filter(x => !soll.has(x));
                 if (weg.length) fehlt.push(`texts.js [${s}]: ${weg.length} Schluessel fehlen (${weg.slice(0,5).join(", ")}${weg.length>5?", …":""})`);
                 if (neu.length) fehlt.push(`texts.js [${s}]: ${neu.length} unbekannte Schluessel (${neu.slice(0,5).join(", ")}${neu.length>5?", …":""})`);

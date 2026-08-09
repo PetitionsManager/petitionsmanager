@@ -763,7 +763,24 @@
          gerechnete Empfehlung je Farbe. Alle vier Fälle gemessen
          (foodwatch auto→dunkel/hell→weiß, bundestag auto→weiß/
          dunkel→dunkel). (app.js, texts.js, layouts.css) */
-var CACHE = "pm-cache-v43";
+/* v44 — 8.8.2026 abends: die letzten Übersetzungslücken geschlossen.
+      a) Die festen deutschen Texte aus index.html (Kopf- und Fußleiste,
+         Offline-Band, Nach-oben-Knopf) stehen jetzt als Abschnitt „shell"
+         in texts.js; app.js setzt sie beim Start und nach jedem
+         Sprachwechsel (setzeRahmenTexte(), aus applyLayout() gerufen).
+         Die deutschen Worte bleiben im HTML als Rückfall stehen.
+      b) platforms.js hat eine Sprachebene bekommen: window.PM_PLATFORMS
+         (deutsch, unverändert) + window.PM_PLATFORMS_EN als paralleler,
+         absichtlich lückenhafter Block. platAbout()/platTagline() in app.js
+         legen ihn über die deutschen Werte — was fehlt, bleibt deutsch.
+      c) Der Rechtsbereich ist übersetzt, bis auf legal.impressumHtml:
+         Pflichtangabe mit echter Anschrift, die es nur einmal geben soll.
+         checks.yml nimmt seitdem genau diesen einen Schlüssel aus statt des
+         ganzen Abschnitts "legal".
+      ⚠️ Ohne diesen Sprung sähe das Telefon weiter index.html, texts.js,
+      platforms.js und app.js aus dem alten Cache — die Sprachumschaltung
+      käme dort gar nicht an. (index.html, texts.js, platforms.js, app.js) */
+var CACHE = "pm-cache-v44";
 /* Versionsunabhängig – überlebt das Hochzählen von CACHE. Diese Zahl sollte ab
    jetzt NICHT mehr steigen: seit die Pakete eine Inhaltskennung tragen ("?v=",
    siehe oben) holt sich jedes geänderte Paket von selbst neu. Ein Sprung wäre

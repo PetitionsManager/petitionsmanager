@@ -1,6 +1,7 @@
 /* platforms.js — Marken-Farben, Logos und Hintergrundinfos je Plattform.
-   Wird vor app.js geladen und stellt window.PM_PLATFORMS bereit.
-   Letzte Aktualisierung: 2026-07-29
+   Wird vor app.js geladen und stellt window.PM_PLATFORMS (deutsch) sowie
+   window.PM_PLATFORMS_EN (englisch, ganz unten) bereit.
+   Letzte Aktualisierung: 2026-08-08 (Sprachebene)
 
    ---- Corporate Design: was hier steht und was in der Logodatei ----------
    Am 29.7.26 sind alle elf Marken gegen den Kopf ihrer eigenen Website
@@ -411,6 +412,167 @@ window.PM_PLATFORMS = {
         { label: "Datenschutz",   url: "https://350.org/privacy/" },
         { label: "Brand-Toolkit", url: "https://350.org/brand-toolkit/" }
       ]
+    }
+  }
+
+};
+
+/* ============================================================================
+   SPRACHEBENE (8.8.2026)
+   ============================================================================
+   Oben stehen die Stammdaten auf DEUTSCH — unveraendert, Wert fuer Wert an
+   derselben Stelle wie vorher. Hier folgt die englische Fassung als eigener,
+   PARALLELER Block mit denselben Schluesseln.
+
+   WARUM SO und nicht `text_en` neben jedem `text`:
+     • Der deutsche Block bleibt unangetastet. Er traegt die aufwaendig
+       belegten Farb- und Logo-Kommentare (Rollen der SVG-Fuellungen,
+       Kontrastwerte, die Korrektur an innn.it); jedes Feld dort anzufassen
+       hiesse, diese Begruendungen zu zerschneiden.
+     • Es ist derselbe Bauplan wie in texts.js: EIN Baum je Sprache, gleiche
+       Schluessel. Wer das eine verstanden hat, versteht das andere — statt
+       zweier Muster fuer dasselbe Problem.
+     • Eine dritte Sprache ist ein dritter Block plus eine Zeile in app.js
+       (PLATS_LANG). Mit `text_en`/`text_fr`/`text_es` waeren es 11 Stellen
+       mit je drei Feldern, zwischen denen die Farbkommentare stehen.
+
+   RUECKFALL AUF DEUTSCH: Dieser Block ist mit Absicht LUECKENHAFT. Es steht
+   nur drin, was auf Englisch WIRKLICH anders lautet. Was fehlt — Eigennamen
+   wie "Campact e. V." oder "Change.org, PBC", "San Francisco, USA", ein
+   fehlendes financing —, holt app.js aus dem deutschen Block; platAbout()
+   legt die Uebersetzung ueber die deutschen Werte statt sie zu ersetzen.
+   Fehlt der ganze Block (alte Datei im Cache), laeuft die App auf Deutsch
+   weiter, so wie sie es vor dem 8.8.2026 getan hat.
+
+   NICHT uebersetzt, weil es keine Sprache hat: color/colorSoft/colorDark,
+   logoFile, logoAR, wikipedia, founded und saemtliche URLs (quelle,
+   impressum, agb, links[].url). Sie stehen weiterhin nur oben.
+
+   ⚠️ _linkLabels ist KEINE Plattform. Der Unterstrich sagt das; Code, der
+   ueber diesen Block laeuft, darf ihn nicht als zwoelfte Plattform lesen.
+   Die Beschriftungen wiederholen sich quer ueber die Plattformen
+   ("Datenschutz" elfmal, "Website" elfmal) — als Woerterbuch sind es 12
+   Zeilen statt 45, und die Reihenfolge der Links darf sich aendern, ohne
+   dass eine Uebersetzung verrutscht. Nachgeschlagen wird ueber die DEUTSCHE
+   Beschriftung; was nicht drinsteht, bleibt deutsch stehen.
+   "Website" fehlt bewusst: gleiches Wort, der Rueckfall liefert dasselbe. */
+
+window.PM_PLATFORMS_EN = {
+
+  _linkLabels: {
+    "Über uns":                    "About us",
+    "Über uns & Kontakt":          "About us & contact",
+    "Über das Verfahren":          "About the procedure",
+    "Kontakt":                     "Contact",
+    "Hilfe & Kontakt":             "Help & contact",
+    "Impressum":                   "Legal notice",
+    "Impressum & Kontakt":         "Legal notice & contact",
+    "Datenschutz":                 "Privacy",
+    "Transparenz":                 "Transparency",
+    "Finanzierung":                "Funding",
+    "Brand-Toolkit":               "Brand toolkit",
+    "Petitionsausschuss (Kontakt)": "Petitions Committee (contact)"
+  },
+
+  weact: {
+    tagline: "Petition platform run by Campact",
+    about: {
+      text: "WeAct is the petition platform of the non-profit association Campact e. V. and is aimed at everyone who wants to start or support a socio-political petition. The platform offers professional campaign support from the Campact team. It is particularly suited to causes with a socio-political dimension that seek broad backing.",
+      seat: "Verden (Aller), Germany",
+      financing: "Donations"
+    }
+  },
+
+  openpetition: {
+    tagline: "Citizens' platform for petitions",
+    about: {
+      text: "OpenPetition is a non-profit online platform where citizens can start and sign petitions on political, social and local issues. The platform is run by openPetition gGmbH and sees itself as independent, ad-free infrastructure for democratic participation. It is one of the most widely used petition platforms in the German-speaking world.",
+      seat: "Berlin, Germany",
+      financing: "Donations"
+    }
+  },
+
+  changeorg: {
+    tagline: "Global petition platform",
+    about: {
+      /* seat und financing fehlen mit Absicht: "San Francisco, USA" lautet
+         auf Englisch gleich, financing ist auch im deutschen Block null. */
+      text: "Change.org is one of the largest petition platforms in the world and lets individuals start and sign petitions on any topic. The platform operates worldwide and is available in numerous languages. It is run by Change.org PBC, an American public benefit corporation based in San Francisco."
+    }
+  },
+
+  innnit: {
+    tagline: "Petitions for Germany",
+    about: {
+      text: "innn.it is a non-profit petition platform focusing on German political and social issues. The supporting association innn.it e. V. was founded in 2022 as an independent organization, after the platform had at first been run within the Change.org network. It is funded entirely by donations.",
+      seat: "Berlin, Germany",
+      financing: "Donations"
+    }
+  },
+
+  avaaz: {
+    tagline: "Global citizens' movement",
+    about: {
+      text: "Avaaz is a global online citizens' movement campaigning for democracy, human rights, animal welfare, the fight against corruption and climate protection. The organization was founded in 2007, is funded entirely by its members and turns down corporate and government money. It is one of the large international campaign networks.",
+      seat: "London, United Kingdom",
+      financing: "Membership fees and donations"
+    }
+  },
+
+  bundestag: {
+    tagline: "Official petitions to the Bundestag",
+    about: {
+      text: "The ePetitions portal of the German Bundestag lets citizens address official petitions to the Petitions Committee. Public petitions can be co-signed online and, from 50,000 co-signatures within four weeks, lead to a public session of the committee. The portal is run by the German Bundestag as a state institution.",
+      /* Eigenname mit amtlicher englischer Fassung — anders als
+         "Campact e. V.", das auch auf Englisch so heisst. */
+      operator: "German Bundestag",
+      seat: "Berlin, Germany",
+      financing: "Public (state)"
+    }
+  },
+
+  europarl: {
+    tagline: "Petitions to the EU Parliament",
+    about: {
+      text: "The petitions portal of the European Parliament (PETI committee) lets all EU citizens and people resident in the EU submit petitions on matters that fall within the EU's remit. Submitted petitions are examined by the Committee on Petitions, which decides on admissibility and on how they are handled further. The portal is multilingual and is run by the European Parliament.",
+      operator: "European Parliament",
+      seat: "Strasbourg / Brussels, EU",
+      financing: "Public (EU)"
+    }
+  },
+
+  wemove: {
+    tagline: "European citizens' movement",
+    about: {
+      text: "WeMove Europe is a European citizens' movement campaigning for democracy, climate justice and social rights in the EU. The organization was founded in 2015 and is registered as a European Cooperative Society (SCE) based in Berlin. It is funded by donations from its members; money from corporations or state bodies is turned down.",
+      seat: "Berlin, Germany",
+      financing: "Member donations and foundations"
+    }
+  },
+
+  eko: {
+    tagline: "Campaign platform critical of corporations",
+    about: {
+      text: "Ekō (known as SumOfUs until 2023) is an international campaigning organization that stands up for citizens' and consumers' rights in the face of corporations. It was founded in 2011, renamed in 2023 and runs petitions and actions on issues such as climate protection, food safety and corporate accountability. Ekō is registered in the USA as a non-profit 501(c)4 organization.",
+      operator: "Ekō (formerly SumOfUs), 501(c)4"
+    }
+  },
+
+  foodwatch: {
+    tagline: "Consumer rights in the food sector",
+    about: {
+      text: "foodwatch e. V. is a non-profit consumer rights organization campaigning for healthy, safe and honestly labeled food. The association was founded in Berlin in 2002 by Thilo Bode and is funded exclusively by membership fees and donations — state money and corporate donations are turned down. Petitions and campaigns are addressed to food producers and political decision-makers.",
+      seat: "Berlin, Germany",
+      financing: "Membership fees and donations"
+    }
+  },
+
+  threefifty: {
+    tagline: "Climate movement against fossil fuels",
+    about: {
+      text: "350.org is an international climate protection organization campaigning for an end to the use of fossil fuels and a just energy transition. It was founded in 2007–2008 and runs a global network of local groups. It is registered in the USA as a non-profit 501(c)3 organization and is funded by donations.",
+      seat: "Boston, USA (with a global network)",
+      financing: "Donations"
     }
   }
 

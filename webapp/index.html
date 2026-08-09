@@ -26,6 +26,14 @@
 <link rel="stylesheet" href="layouts.css">
 </head>
 <body>
+<!-- ⚠️ SPRACHE (8.8.2026): Alle deutschen Worte in diesem Dokument sind nur
+     der RÜCKFALL. Diese Datei wird geladen, bevor es texts.js oder app.js
+     gibt, und kann T() deshalb nicht aufrufen; app.js überschreibt sie beim
+     Start und nach jedem Sprachwechsel (setzeRahmenTexte(), gerufen aus
+     applyLayout()). Die Texte selbst stehen in texts.js unter „shell".
+     Wer hier ein Wort ändert, ändert es dort mit — sonst springt die
+     Beschriftung beim Start um. Neue sichtbare Texte in dieser Datei
+     brauchen einen Schlüssel und eine Zeile in setzeRahmenTexte(). -->
 <div class="app">
 
   <!-- Kopfleiste: traegt jetzt die Wortmarke statt des Seitentitels.

@@ -185,14 +185,26 @@
      lesen danach automatisch die neue Sprache, ohne dass sie es merken. */
   var TX = ALLE_TEXTE[STANDARDSPRACHE] || ALLE_TEXTE || {};
   var TX_FALLBACK = ALLE_TEXTE[STANDARDSPRACHE] || {};
+  /* Die gewählte Sprache als Code. Wird gebraucht, wo nicht T() nachschlägt,
+     sondern ein ganzer Datenblock ausgewählt wird — die Stammdaten der
+     Plattformen (PLATS_LANG weiter unten). */
+  var SPRACHE = STANDARDSPRACHE;
 
   function setzeSprache(code) {
     if (!spracheUnterstuetzt(code)) code = STANDARDSPRACHE;
     TX = ALLE_TEXTE[code] || TX_FALLBACK;
+    SPRACHE = code;
     try { document.documentElement.setAttribute("lang", code); } catch (e) {}
     return code;
   }
   var PLATS = window.PM_PLATFORMS || {};
+  /* ---- Stammdaten der Plattformen je Sprache (8.8.2026) -------------------
+     platforms.js liefert den deutschen Baum (PM_PLATFORMS) und daneben einen
+     absichtlich lückenhaften Übersetzungsbaum (PM_PLATFORMS_EN) — dort steht
+     nur, was auf Englisch wirklich anders lautet. Begründung für diesen
+     Aufbau steht ausführlich im Kopf des Blocks in platforms.js.
+     Eine weitere Sprache ist hier EINE Zeile und dort ein Block. */
+  var PLATS_LANG = { en: window.PM_PLATFORMS_EN || {} };
 
   // T("wizard.lang.title", "Rückfalltext") – holt einen Text über seinen Pfad.
   /* Einen Pfad wie "liste.heroTitle" in einem Textbaum nachschlagen. */
@@ -225,6 +237,45 @@
     });
   }
   function platInfo(key) { return PLATS[key] || {}; }
+
+  /* ---- Plattform-Stammdaten in der gewählten Sprache ----------------------
+     platInfo() bleibt die Quelle für alles Sprachlose (Farben, Logodatei,
+     Seitenverhältnis, Wikipedia-Adresse). Für die TEXTE gehen alle Aufrufer
+     über platAbout()/platTagline() — sie legen die Übersetzung ÜBER die
+     deutschen Werte, statt sie zu ersetzen. Deshalb ist der englische Block
+     lückenhaft gepflegt: was dort fehlt (Eigennamen, "San Francisco, USA",
+     ein nicht vorhandenes financing), bleibt automatisch deutsch stehen,
+     und eine fehlende platforms.js-Sprachebene fällt gar nicht auf. */
+  function uebersetzung(key) {
+    var paket = PLATS_LANG[SPRACHE];
+    return paket ? paket[key] : null;
+  }
+  function platAbout(key) {
+    var basis = platInfo(key).about || {};
+    var paket = PLATS_LANG[SPRACHE];
+    if (!paket) return basis;                      // Deutsch: nichts zu tun
+    var ueb = (paket[key] && paket[key].about) || null;
+    var woerter = paket._linkLabels || null;
+    if (!ueb && !woerter) return basis;
+    var out = {}, k, hat = Object.prototype.hasOwnProperty;
+    for (k in basis) if (hat.call(basis, k)) out[k] = basis[k];
+    /* Leere Felder überschreiben nichts: ein "" in der Übersetzung wäre
+       sonst schlechter als der deutsche Satz, den es verdrängt. */
+    if (ueb) for (k in ueb)
+      if (hat.call(ueb, k) && ueb[k] != null && ueb[k] !== "") out[k] = ueb[k];
+    /* Linkbeschriftungen kommen aus dem gemeinsamen Wörterbuch, nachgeschlagen
+       über die deutsche Beschriftung. Die Adresse bleibt unangetastet — auch
+       weil rechtePlattformen() die Datenschutz-Zeile daran erkennt. */
+    if (woerter && basis.links) out.links = basis.links.map(function (l) {
+      var t = l && woerter[l.label];
+      return t ? { label: t, url: l.url } : l;
+    });
+    return out;
+  }
+  function platTagline(key) {
+    var ueb = uebersetzung(key);
+    return (ueb && ueb.tagline) || platInfo(key).tagline;
+  }
   // Marken-Monogramm; ohne platforms.js ein schlichtes Buchstaben-Badge.
   /* ---- Logo-Register ------------------------------------------------------
      EINE Stelle, die ein Plattform-Logo ausgibt. Vorher lieferte platLogo ein
@@ -522,6 +573,60 @@
       (state.prefs && state.prefs.accent) || "koralle");
     document.documentElement.setAttribute("data-accent-ink",
       (state.prefs && state.prefs.accentInk) || "auto");
+    setzeRahmenTexte();
+  }
+
+  /* ---- Texte des Bedienrahmens (8.8.2026) --------------------------------
+     Kopfleiste, Fußleiste, Offline-Band und Nach-oben-Knopf stehen als festes
+     Markup in index.html. Die Datei wird geladen, bevor es texts.js oder
+     app.js gibt, und kann T() deshalb nicht aufrufen — die deutschen Worte
+     bleiben dort als Rückfall stehen (fällt app.js aus, ist die Bedienung
+     trotzdem beschriftet) und werden hier überschrieben.
+
+     WARUM AUS applyLayout() HERAUS und nicht aus boot(): applyLayout() ist
+     schon die Stelle, an der setzeSprache() den Textbaum austauscht. Von dort
+     gerufen greift es beim Start UND nach jedem Sprachwechsel, ohne dass
+     jemand daran denken muss. Aus render() heraus ginge es nicht — diese vier
+     Elemente liegen außerhalb von #content und überleben jedes Zeichnen; sie
+     würden also nie neu beschriftet.
+
+     Die Reiter „Einstellungen" und „Profil" lesen aus nav.settings/
+     nav.profile: dieselben Worte wie an den Überschriften, und so bleibt es
+     auch. Nur „Liste" hat einen eigenen Schlüssel, weil nav.petitions
+     „Petitionen" heißt. */
+  function setzeRahmenTexte() {
+    function txt(sel, wert) {
+      var n = document.querySelector(sel);
+      if (n) n.textContent = wert;
+    }
+    function attr(sel, name, wert) {
+      var n = document.querySelector(sel);
+      if (n) n.setAttribute(name, wert);
+    }
+    attr("#brandhome", "aria-label", T("shell.brandHome", "Zur Übersicht"));
+    txt(".reportbtn__t", T("shell.reportBtn", "Fehler melden"));
+    attr("#reportbug", "title",
+         T("shell.reportTitle", "Fehler gefunden? Bitte melden!"));
+    attr("#reportbug", "aria-label",
+         T("shell.reportAria", "Fehler gefunden? Bitte melden"));
+    txt(".offbar__t", T("shell.offline",
+      "Kein Internet. Du siehst gespeicherte Daten – " +
+      "Bilder und Aktualisierungen fehlen."));
+    attr("#offbarx", "aria-label",
+         T("shell.offlineClose", "Hinweis schließen"));
+    attr("#to-top", "aria-label", T("shell.toTop", "Nach oben"));
+    var reiter = { liste:         T("shell.tabList", "Liste"),
+                   einstellungen: T("nav.settings", "Einstellungen"),
+                   profil:        T("nav.profile", "Profil") };
+    document.querySelectorAll(".tab").forEach(function (t) {
+      var wort = reiter[t.dataset.tab];
+      if (!wort) return;
+      /* aria-label UND die sichtbare Beschriftung: sie tragen denselben Text,
+         ein Screenreader läse sonst das deutsche Wort zum englischen Knopf. */
+      t.setAttribute("aria-label", wort);
+      var s = t.querySelector("span");
+      if (s) s.textContent = wort;
+    });
   }
 
   // ---- Hilfen ----------------------------------------------------------------
@@ -1034,8 +1139,9 @@
      noch der alte Text, waehrend der Rest der Oberflaeche schon umgestellt
      waere. supportSection() baut seine Liste bei jedem Zeichnen neu, der
      Aufruf kostet also nichts.
-     Der Text selbst wird bewusst nur auf Deutsch gepflegt - Begruendung steht
-     bei dem Eintrag in texts.js. */
+     Seit dem 8.8.2026 abends gibt es ihn auch auf Englisch (woertlich
+     uebertragen); wer den deutschen Wortlaut aendert, zieht die englische
+     Fassung in texts.js im selben Zug nach. */
   function kodexHtml() { return T("legal.kodexHtml", ""); }
 
   /* ---- Rechtliches -------------------------------------------------------
@@ -1083,10 +1189,14 @@
     return t.length === 3 ? t[2] + "." + t[1] + "." + t[0] : String(iso);
   }
 
-  /* ⚠️ Die Texte liegen in texts.js NUR auf Deutsch (legal.stand…) — sie sind
-     eine Auskunft über die Rechtslage, und die soll nicht in einer zweiten,
-     ebenfalls ungeprüften Fassung herumstehen. T() fällt deshalb auch in der
-     englischen Oberfläche auf Deutsch zurück; das ist gewollt. */
+  /* Die Texte liegen in texts.js (legal.stand…), seit dem 8.8.2026 abends in
+     beiden Sprachen. Es ist eine Auskunft über die Rechtslage: „ungeklärt"
+     und "unresolved" müssen dasselbe sagen, sonst steht in einer Sprache eine
+     andere Zusage als in der anderen.
+     ⬜ OFFEN: {datum} kommt aus dmy() und ist damit auch auf Englisch die
+     deutsche Schreibweise (08.08.2026). Fällt heute nicht auf, weil in
+     RECHTE_STAND noch kein einziges Datum steht — sobald die erste Antwort
+     eingetragen wird, gehört hier eine sprachabhängige Datumsform hin. */
   function rechteStandText(r) {
     if (!r || !r.asked)
       return T("legal.standUngeklaert", "ungeklärt – noch nicht angefragt");
@@ -1190,7 +1300,7 @@
       ? livePlatforms() : [];
     if (!plats.length) return "";
     return plats.map(function (p) {
-      var about = platInfo(p.key).about || {};
+      var about = platAbout(p.key);
       var unbekannt = T("legal.platUnbekannt", "nicht bekannt");
       var zeilen = [
         [T("legal.platBetreiber", "Betreiber"), about.operator || unbekannt],
@@ -1230,10 +1340,10 @@
     }).join("");
   }
 
-  /* ⚠️ Der Fließtext steht seit 8.8.2026 in texts.js — und dort NUR auf
-     Deutsch (legal.rechteLead / legal.rechteNote, Nutzerentscheidung wie bei
-     kodexHtml). Zwei Texte statt einem, weil die Plattform-Tabelle
-     dazwischensteht; jeder für sich bleibt ein zusammenhängender Absatz.
+  /* Der Fließtext steht seit 8.8.2026 in texts.js (legal.rechteLead /
+     legal.rechteNote), seit demselben Tag abends in beiden Sprachen.
+     Zwei Texte statt einem, weil die Plattform-Tabelle dazwischensteht;
+     jeder für sich bleibt ein zusammenhängender Absatz.
      Der Rückfall ist leer statt der ganze deutsche Text: derselbe Weg wie bei
      kodexHtml()/impressumHtml() — 1,5 KB Rechtstext ein zweites Mal im Code
      wären zwei Fassungen, die auseinanderlaufen können. */
@@ -1270,9 +1380,10 @@
       "</i> " + esc(T("legal.title", "Rechtliches")) + "</div>" +
       '<div class="support__acc"></div></section>');
     var acc = sec.querySelector(".support__acc");
-    /* Überschriften und Anreißer sind Wegweiser, keine Rechtsaussage — sie
-       stehen deshalb in BEIDEN Sprachen. Nur der Inhalt dahinter
-       (impressumHtml/rechteHtml) bleibt deutsch. */
+    /* Beides steht in beiden Sprachen. Einzige Ausnahme im ganzen Abschnitt
+       ist der INHALT des Impressums (legal.impressumHtml): Pflichtangabe mit
+       echter Anschrift, die es nur einmal geben soll — dort greift der
+       Rückfall auf Deutsch. */
     [["fa-address-card", T("legal.impressumTitle", "Impressum"),
       T("legal.impressumTeaser",
         "Wer diese App anbietet und wie er erreichbar ist."), impressumHtml()],
@@ -1481,7 +1592,7 @@
        hält Weiß nicht einmal die 3:1 für Großtext (foodwatch #f7a600 → 2,02,
        openPetition #29b0cc → 2,57, innn.it #fc691f → 2,92). Wer das zurück
        will, holt platInk aus der Versionsgeschichte (Commit ae4ab06). */
-    var tagline = platInfo(p.key).tagline;
+    var tagline = platTagline(p.key);
     // Echtes Plattform-Logo (platforms.js → logoFile). Liegt als CSS-Maske vor
     // der Textfarbe der Kachel, ist also immer einfarbig im richtigen Ton –
     // ein <img> brächte seine eigene Farbe mit. Standardmäßig ausgeblendet;
@@ -2626,7 +2737,7 @@
   // dieser Plattform, wie finanziert sie sich, wo steht das Original?
   function platformAbout(key) {
     var info = platInfo(key);
-    var about = info.about || {};
+    var about = platAbout(key);
     var manifestEntry = state.manifest.platforms.find(function (x) {
       return x.key === key; }) || {};
     var brand = info.color;

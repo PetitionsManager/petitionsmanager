@@ -14,36 +14,44 @@
    Einrichtungs-Assistenten und die Erkennung der Systemsprache lesen alle
    aus SPRACHEN.
 
-   ⚠️ Rund 120 weitere Texte stehen noch HARTKODIERT in app.js (Kodex,
-   Impressum, Nutzungsrecht, Fehlermeldungen). Sie sind bewusst noch nicht
-   hier: sie muessen erst herausgezogen werden. Bis dahin erscheinen sie in
-   jeder Sprache auf Deutsch. */
+   ⚠️ EINE Ausnahme von "alle mit denselben Schluesseln": legal.impressumHtml
+   gibt es nur auf Deutsch. Begruendung steht bei dem Eintrag; checks.yml
+   kennt genau diesen einen Schluessel als erlaubte Luecke.
+
+   NICHT HIER stehen die Stammdaten der Plattformen (Kurzzeile, Steckbrief-
+   Text, Sitz, Traeger, Finanzierung, Linkbeschriftungen). Sie gehoeren zu
+   platforms.js und haben dort seit dem 8.8.2026 ihre eigene Sprachebene:
+   window.PM_PLATFORMS (deutsch) + window.PM_PLATFORMS_EN. */
 window.PM_TEXTS = {
   de: {
 
-    /* ⚠️ RECHTSTEXT, bewusst NUR auf Deutsch gepflegt (Nutzerentscheidung
-       8.8.2026). Im Code stand darueber: "ENTWURF - juristisch NICHT
-       geprueft ... vor der Veroeffentlichung pruefen lassen". Eine
-       Uebersetzung waere doppelt ungeprueft, und Fehler in Ausschluss-
-       gruenden wiegen schwerer als in Knopfbeschriftungen. Der dreistufige
-       Rueckfall in T() zeigt den Text in der englischen Oberflaeche
-       weiterhin auf Deutsch - das ist hier gewollt, nicht versehentlich.
-       Uebersetzen, sobald der deutsche Text juristisch geprueft ist.
+    /* ⚠️ RECHTSTEXT. Im Code stand darueber: "ENTWURF - juristisch NICHT
+       geprueft ... vor der Veroeffentlichung pruefen lassen"; das gilt
+       weiter. Seit dem 8.8.2026 abends ist er trotzdem uebersetzt
+       (Nutzerentscheidung: alles ausser impressumHtml) — woertlich und ohne
+       Abschwaechung, weil Fehler in Ausschlussgruenden schwerer wiegen als in
+       Knopfbeschriftungen. Wer den deutschen Wortlaut aendert, aendert die
+       englische Fassung im selben Zug mit; sonst zeigt die App zwei
+       verschiedene Regelwerke.
        Bleibt EIN zusammenhaengender Text, wie es der Kommentar in app.js
        verlangt hat ("wird als Ganzes redigiert") - nur eben je Sprache. */
     legal: {
       kodexHtml: "<div class=\"kodex\"><div class=\"kodex__grp\"><div class=\"kodex__h\"><i class=\"fa-solid fa-circle-check\"></i> Was eine Plattform mitbringen muss</div><ul class=\"kodex__list\"><li>Sie macht öffentlich, wer sie betreibt – Impressum oder eine gleichwertige Angabe.</li><li>Ihre Petitionen sind ohne Konto lesbar.</li><li>Sie erlaubt automatisiertes Auslesen. Sperren in der robots.txt und Botschutz halten wir ein; wir umgehen sie nicht.</li><li>Sie steht grundsätzlich allen offen und ist nicht die Bühne einer einzelnen Kampagne.</li><li>Sie legt nachvollziehbar dar, wie Unterschriften gezählt werden.</li></ul></div><div class=\"kodex__grp kodex__grp--stop\"><div class=\"kodex__h\"><i class=\"fa-solid fa-ban\"></i> Was zum Ausschluss führt</div><p>Ohne Abwägung ausgeschlossen sind Plattformen, die Inhalte verbreiten oder dulden, die</p><ul class=\"kodex__list\"><li>Menschen wegen Herkunft, Hautfarbe, Staatsangehörigkeit, Religion, Geschlecht, sexueller Orientierung, Behinderung, Alter oder sozialer Stellung herabwürdigen;</li><li>zu Hass, Gewalt oder Ausgrenzung gegen Personen oder Gruppen aufrufen;</li><li>den Holocaust oder andere Völkermorde leugnen oder verharmlosen;</li><li>verfassungswidrige oder verbotene Kennzeichen verwenden;</li><li>Menschen gezielt einschüchtern, bloßstellen oder zur Zielscheibe machen.</li></ul><p>Das gilt unabhängig davon, ob die Plattform solche Inhalte selbst veröffentlicht oder sie nur stehen lässt.</p></div><div class=\"kodex__grp\"><div class=\"kodex__h\"><i class=\"fa-solid fa-gavel\"></i> Wie wir entscheiden</div><ul class=\"kodex__list\"><li>Jeden Vorschlag prüfen wir von Hand, bevor eine Plattform aufgenommen wird.</li><li>Bei einem begründeten Hinweis prüfen wir erneut – und nehmen eine Plattform auch wieder heraus.</li><li>Einzelne Petitionen, die gegen diesen Kodex verstoßen, entfernen wir aus der App, auch wenn die Plattform bleibt.</li></ul></div><p class=\"kodex__note\"><i class=\"fa-solid fa-circle-info\"></i> <span><strong>Was die Aufnahme nicht bedeutet:</strong> PetitionsManager zeigt, was auf den Plattformen öffentlich steht. Die Aufnahme einer Plattform ist keine Empfehlung und keine Zustimmung zu einzelnen Petitionen. Für den Inhalt einer Petition stehen ihre Urheberinnen und Urheber sowie die jeweilige Plattform ein. Wir prüfen nicht jede einzelne Petition im Voraus – sag uns Bescheid, was dir auffällt.</span></p></div>",
-      /* Ebenfalls nur Deutsch: Pflichtangabe mit echter Anschrift.
+      /* ⚠️ DER EINZIGE Text, der bewusst NUR auf Deutsch steht: Pflichtangabe
+         mit echter Anschrift. Eine zweite Sprachfassung waere eine zweite
+         Pflichtangabe, die auseinanderlaufen kann - und der Anbieter sitzt in
+         Deutschland. Der Rueckfall in T() zeigt ihn auch in der englischen
+         Oberflaeche auf Deutsch; checks.yml nimmt genau diesen Schluessel von
+         der Vollstaendigkeitspflicht aus.
          {mail} und {github} werden zur Laufzeit aus SUPPORT_MAIL bzw.
          GITHUB_URL in app.js gefuellt (fill()) - die Adressen stehen dort
          genau einmal und sollen nicht in jeder Sprachfassung doppelt
          gepflegt werden muessen. */
       impressumHtml: "<dl class=\"legal__dl\"><dt>Anbieter</dt><dd>Matthias Drees</dd><dt>Anschrift</dt><dd>Tempelhof 3<br>74594 Kreßberg<br>Deutschland</dd><dt>Kontakt</dt><dd><a href=\"mailto:{mail}\">{mail}</a></dd><dt>Verantwortlich für den Inhalt</dt><dd>Matthias Drees</dd></dl><p class=\"legal__note\">PetitionsManager ist ein privates, nicht-kommerzielles Projekt. Der Quellcode ist offen: <a href=\"{github}\" target=\"_blank\" rel=\"noopener\">GitHub</a>.</p>",
 
-      /* Wegweiser DRUMHERUM — Ueberschriften, Anreisser, Knopf. Die sind
-         KEINE Rechtsaussage, sondern Navigation, und stehen deshalb auch
-         im en-Block. Wer auf Englisch liest, soll wenigstens finden, wo
-         das Impressum steht; der Text darin bleibt deutsch. */
+      /* Wegweiser DRUMHERUM — Ueberschriften, Anreisser, Knopf. Sie standen
+         als erste im en-Block, weil sie Navigation sind und keine
+         Rechtsaussage; inzwischen ist der Rest nachgezogen. */
       title: "Rechtliches",
       impressumTitle: "Impressum",
       impressumTeaser: "Wer diese App anbietet und wie er erreichbar ist.",
@@ -51,13 +59,12 @@ window.PM_TEXTS = {
       rechteTeaser: "Wem die Petitionstexte und Bilder gehören und was mit den Plattformen abgestimmt ist.",
       kontaktBtn: "Kontakt aufnehmen",
 
-      /* ⚠️ AB HIER WIEDER RECHTSTEXT, bewusst NUR auf Deutsch (dieselbe
-         Nutzerentscheidung wie bei kodexHtml/impressumHtml, 8.8.2026).
-         rechteLead und rechteNote umschliessen die Plattform-Tabelle, die
-         app.js dazwischen setzt — deshalb zwei Texte statt einem.
-         Die Zeilen plat… und stand… gehoeren zu derselben Tabelle:
-         „Nutzungsrecht ungeklaert" falsch uebersetzt waere eine falsche
-         Rechtsauskunft. */
+      /* ⚠️ AB HIER WIEDER RECHTSTEXT — seit 8.8.2026 abends ebenfalls
+         uebersetzt (siehe oben). rechteLead und rechteNote umschliessen die
+         Plattform-Tabelle, die app.js dazwischen setzt — deshalb zwei Texte
+         statt einem. Die Zeilen plat… und stand… gehoeren zu derselben
+         Tabelle; „Nutzungsrecht ungeklaert" ist eine Auskunft ueber die
+         Rechtslage und muss in beiden Sprachen dasselbe sagen. */
       rechteLead: "<p class=\"legal__lead\">Die Petitionen in dieser App stammen von fremden Plattformen. Das Urheberrecht an ihren Inhalten – Titel, Aufruf-Texte, Bilder – liegt bei den jeweiligen Urheberinnen und Urhebern beziehungsweise bei der Plattform. PetitionsManager erwirbt daran keine Rechte und räumt keine ein.</p><p class=\"legal__lead\">Was davon kopiert wird und was nicht: Titel, Kurzfassung, Aufruf-Text, Unterschriftenzahl und Datum werden abgerufen und in der App gespeichert. Die <strong>Bilder werden nicht kopiert</strong>, sondern von den Servern der Plattformen eingebunden – sie bleiben dort liegen und werden beim Anzeigen von dort geholt.</p><p class=\"legal__lead\"><strong>Das Nutzungsrecht ist ungeklärt.</strong> Die Inhalte sind öffentlich zugänglich, und diese App ist nicht-kommerziell und ihr Quellcode offen – eine Erlaubnis der Plattformen ist damit aber nicht gegeben. Im Zuge der Veröffentlichung werden alle Betreiber angefragt; die Tabelle zeigt je Plattform, wie weit das ist.</p>",
       rechteNote: "<p class=\"legal__note\">Wenn Sie für eine der genannten Plattformen sprechen und mit der Darstellung Ihrer Inhalte nicht einverstanden sind, schreiben Sie uns.</p>",
       platBetreiber: "Betreiber",
@@ -452,6 +459,29 @@ window.PM_TEXTS = {
       backTo: "Zurück zu {name}"
     },
 
+    /* ---- Bedienrahmen aus index.html (8.8.2026) --------------------------
+       Kopfleiste, Fussleiste, Offline-Band und Nach-oben-Knopf stehen als
+       festes Markup in index.html — die Datei wird geladen, bevor es texts.js
+       oder app.js gibt, und kann T() deshalb nicht aufrufen. Die deutschen
+       Worte bleiben dort als Rueckfall stehen (faellt app.js aus, ist die
+       Bedienung trotzdem beschriftet); app.js ueberschreibt sie beim Start
+       und bei jedem Sprachwechsel (setzeRahmenTexte(), aufgerufen aus
+       applyLayout()).
+       Die Reiter „Einstellungen" und „Profil" fehlen hier mit Absicht: sie
+       tragen dieselben Worte wie nav.settings/nav.profile und lesen von dort,
+       damit die Beschriftung nicht an zwei Stellen gepflegt werden muss. */
+    shell: {
+      tabList: "Liste",
+      brandHome: "Zur Übersicht",
+      reportBtn: "Fehler melden",
+      reportTitle: "Fehler gefunden? Bitte melden!",
+      reportAria: "Fehler gefunden? Bitte melden",
+      offline: "Kein Internet. Du siehst gespeicherte Daten – " +
+               "Bilder und Aktualisierungen fehlen.",
+      offlineClose: "Hinweis schließen",
+      toTop: "Nach oben"
+    },
+
     msg: {
       loading: "Lade Daten …",
       loadingShort: "Lade …",
@@ -562,22 +592,40 @@ window.PM_TEXTS = {
 
   en: {
 
-    /* ⚠️ ABSICHTLICH UNVOLLSTAENDIG. Hier stehen NUR die Wegweiser des
-       Rechtsbereichs — Ueberschriften, Anreisser, Knopf. Die Rechtstexte
-       selbst (kodexHtml, impressumHtml, rechteLead, rechteNote sowie die
-       Tabellenzeilen plat…/stand…) fehlen hier BEWUSST: es sind juristisch
-       ungepruefte Entwuerfe, eine Uebersetzung waere doppelt ungeprueft.
-       Der dreistufige Rueckfall in T() zeigt sie damit auch in der
-       englischen Oberflaeche auf Deutsch — genau so gewollt
-       (Nutzerentscheidung 8.8.2026). Ergaenzen, sobald der deutsche
-       Wortlaut geprueft ist. */
+    /* ⚠️ EIN Schluessel fehlt hier mit Absicht: impressumHtml. Es ist eine
+       Pflichtangabe mit echter Anschrift; eine uebersetzte Fassung waere eine
+       zweite Pflichtangabe, die auseinanderlaufen kann. T() faellt dafuer auf
+       Deutsch zurueck — genau so gewollt (Nutzerentscheidung 8.8.2026), und
+       checks.yml nimmt genau diesen einen Schluessel von der
+       Vollstaendigkeitspflicht aus.
+       Alles UEBRIGE ist seit 8.8.2026 uebersetzt (vorher stand hier nur der
+       Wegweiser). kodexHtml ist woertlich uebertragen, ohne Abschwaechung:
+       die Ausschlussgruende sind der Kern des Textes, ein weicherer
+       englischer Satz waere eine andere Aussage. */
     legal: {
+      kodexHtml: "<div class=\"kodex\"><div class=\"kodex__grp\"><div class=\"kodex__h\"><i class=\"fa-solid fa-circle-check\"></i> What we require of a platform</div><ul class=\"kodex__list\"><li>It makes public who operates it – a legal notice or an equivalent statement.</li><li>Its petitions can be read without an account.</li><li>It permits automated reading. We respect blocks in robots.txt and bot protection; we do not circumvent them.</li><li>It is open to everyone in principle and is not the stage for a single campaign.</li><li>It sets out in a comprehensible way how signatures are counted.</li></ul></div><div class=\"kodex__grp kodex__grp--stop\"><div class=\"kodex__h\"><i class=\"fa-solid fa-ban\"></i> What leads to exclusion</div><p>Excluded without any weighing up are platforms that spread or tolerate content that</p><ul class=\"kodex__list\"><li>demeans people because of their origin, skin color, nationality, religion, gender, sexual orientation, disability, age or social standing;</li><li>calls for hatred, violence or exclusion against individuals or groups;</li><li>denies or plays down the Holocaust or other genocides;</li><li>uses unconstitutional or banned symbols;</li><li>deliberately intimidates people, exposes them or makes them a target.</li></ul><p>This applies regardless of whether the platform publishes such content itself or merely lets it stand.</p></div><div class=\"kodex__grp\"><div class=\"kodex__h\"><i class=\"fa-solid fa-gavel\"></i> How we decide</div><ul class=\"kodex__list\"><li>We check every suggestion by hand before a platform is added.</li><li>If there is a substantiated report, we check again – and we do take a platform out again.</li><li>Individual petitions that breach this code we remove from the app, even if the platform stays.</li></ul></div><p class=\"kodex__note\"><i class=\"fa-solid fa-circle-info\"></i> <span><strong>What inclusion does not mean:</strong> PetitionsManager shows what is publicly available on the platforms. Including a platform is not a recommendation and not an endorsement of individual petitions. The authors of a petition and the platform in question are answerable for its content. We do not check every single petition in advance – tell us what you notice.</span></p></div>",
+
       title: "Legal",
       impressumTitle: "Legal notice",
       impressumTeaser: "Who provides this app and how to reach them.",
       rechteTitle: "Rights to the content",
       rechteTeaser: "Who owns the petition texts and images, and what has been agreed with the platforms.",
-      kontaktBtn: "Get in touch"
+      kontaktBtn: "Get in touch",
+
+      rechteLead: "<p class=\"legal__lead\">The petitions in this app come from third-party platforms. The copyright in their content – titles, appeal texts, images – lies with the respective authors or with the platform. PetitionsManager acquires no rights in it and grants none.</p><p class=\"legal__lead\">What is copied and what is not: title, summary, appeal text, signature count and date are fetched and stored in the app. The <strong>images are not copied</strong> but embedded from the platforms' servers – they stay there and are fetched from there when they are displayed.</p><p class=\"legal__lead\"><strong>The right of use is unresolved.</strong> The content is publicly accessible, and this app is non-commercial and its source code is open – but that does not amount to permission from the platforms. In the course of publication all operators are being asked; the table shows for each platform how far that has come.</p>",
+      rechteNote: "<p class=\"legal__note\">If you speak for one of the platforms named here and you do not agree with the way your content is presented, write to us.</p>",
+      platBetreiber: "Operator",
+      platSitz: "Based in",
+      platNutzungsrecht: "Right of use",
+      platUnbekannt: "not known",
+      keinImpressum: "No legal notice – operator outside German jurisdiction",
+      standUngeklaert: "unresolved – not yet asked",
+      standAngefragt: "asked on {datum} – no reply yet",
+      standErlaubt: "use granted",
+      standEingeschraenkt: "granted with restrictions",
+      standAbgelehnt: "declined",
+      standAntwort: "reply received",
+      standAm: "{wort} on {datum}"
     },
 
     app: {
@@ -940,6 +988,18 @@ window.PM_TEXTS = {
       toArchive: "To the archive",
       backOverview: "Back to the overview",
       backTo: "Back to {name}"
+    },
+
+    shell: {
+      tabList: "List",
+      brandHome: "To the overview",
+      reportBtn: "Report a bug",
+      reportTitle: "Found a bug? Please report it!",
+      reportAria: "Found a bug? Please report it",
+      offline: "No internet. You are seeing saved data – " +
+               "images and updates are missing.",
+      offlineClose: "Close notice",
+      toTop: "Back to top"
     },
 
     msg: {
