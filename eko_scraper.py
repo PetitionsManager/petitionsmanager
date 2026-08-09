@@ -12,6 +12,34 @@
 #    - https://eko.org/de/campaigns              kuratierte deutsche Liste
 #    - https://actions.eko.org/a/<slug>          Detailseite
 #
+#  BOT-SCHUTZ: ZWEI HOSTS, und der ID-Weg ist BEWUSST VERWORFEN
+#  ---------------------------------------------------------------------------
+#  Ekō zieht von Champaign auf eine Vercel-Anwendung um. Dabei sind zwei Hosts
+#  im Spiel, die sich nur durch ein "s" unterscheiden:
+#    - actions.eko.org  (PLURAL)   altes Champaign, nginx, robots.txt lesbar
+#    - action.eko.org   (SINGULAR) neu, Vercel, "Security Checkpoint" (HTTP 429)
+#
+#  Gemessen am 8.8.2026, dieselbe Aktion im selben Moment:
+#    /a/osceola-gegen-nestle  → 301 auf action.eko.org//a/…  → 429 Checkpoint
+#    /a/3204                  → 200 auf actions.eko.org, echter Inhalt
+#    action.eko.org/a/3204    → 429  ← ENTSCHEIDEND
+#
+#  Die letzte Zeile ist der Grund, warum die numerische ID hier NICHT benutzt
+#  wird. Auf dem neuen Host ist auch sie gesperrt: Ekō schützt den INHALT, nicht
+#  die Schreibweise der URL. Dass die Zahlform auf dem Altsystem noch antwortet,
+#  ist ein Rest der unfertigen Migration (die Weiterleitung baut sogar einen
+#  doppelten Schrägstrich "//a/"). Sie zu benutzen wäre eine Umgehung des
+#  Bot-Schutzes – der Kodex im README ("Fairness beim Scrapen") sagt dessen
+#  Einhaltung ausdrücklich zu. Nutzerentscheidung vom 8.8.2026: verwerfen.
+#
+#  Stattdessen: bei 429 bleibt der Bestand stehen und neue Aktionen werden aus
+#  der Kampagnenkarte der deutschen Übersicht übernommen (record_from_card) –
+#  mit Titel, Kurztext und Bild, ohne Unterschriftenstand und Volltext.
+#
+#  ⚠️ BEOBACHTEN: Ist die Migration abgeschlossen, fällt der ID-Weg ohnehin weg.
+#  Antwortet actions.eko.org/a/<slug> wieder direkt mit 200, kann der normale
+#  Detailabruf zurück – dann diesen Block hier mit aufräumen.
+#
 #  BESONDERHEITEN:
 #  - Es existiert eine Gesamt-Sitemap (actions.eko.org/sitemap/prosecco.txt,
 #    ~8.000 URLs), aber OHNE Sprachkennung – alle Sprachen gemischt. Die
@@ -428,11 +456,20 @@ def check(fetcher):
 
 PLATFORM = Platform(
     key="eko",
-    openness=3,
-    openness_note="Mittel: deutsche Kampagnen über Startseite + Suche "
-                  "(je Begriff auf 27 gedeckelt → Union vieler Begriffe) "
-                  "abgedeckt; zwei Seiten-Templates, Gesamt-Sitemap ohne "
-                  "Sprachkennung — Vollständigkeit nicht garantiert.",
+    # Ampel von 3 auf 2 gesenkt (8.8.2026): Die kuratierte deutsche Liste ist
+    # weiter offen, aber die Detailseiten liegen seit dem Umzug auf
+    # action.eko.org hinter einem Bot-Schutz. Das ist dieselbe Lage wie bei
+    # Avaaz, das dafür seit jeher eine 2 trägt — die Skala nennt „Bot-Schutz“
+    # ausdrücklich als Merkmal des unteren Endes.
+    openness=2,
+    openness_note="Eingeschränkt: die deutsche Kampagnenliste ist offen, aber "
+                  "die Detailseiten liegen seit 8.8.2026 hinter einem "
+                  "Bot-Schutz (Umzug auf action.eko.org, HTTP 429). Für neue "
+                  "Aktionen übernehmen wir deshalb Titel, Kurztext und Bild "
+                  "aus der Kampagnenkarte; Unterschriftenstand und Volltext "
+                  "fehlen dann. Ein technisch möglicher Umweg über die "
+                  "numerische Seiten-ID wäre eine Umgehung des Bot-Schutzes "
+                  "und wird bewusst nicht genutzt.",
     # Eigenschreibweise der Plattform ist „Ekō" (mit Makron, seit der
     # Umbenennung von SumOfUs 2023) — der Name steht hier zentral und läuft
     # über publish.py ins Manifest; wirkt also erst mit dem nächsten

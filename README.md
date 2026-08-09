@@ -73,7 +73,7 @@ und eine mobile Web-App (PWA/APK), die diese Daten offline durchsuchbar macht.
 | OpenPetition | de | https://www.openpetition.de/petitionen | 5 — sehr offen |
 | Change.org | de | https://www.change.org/?lang=de-DE | 3 — mittel |
 | Bundestag ePetitionen | de | https://epetitionen.bundestag.de/epet/petuebersicht/mz.nc.html | 2 — eingeschränkt |
-| Ekō | de | https://eko.org/de/campaigns | 3 — mittel |
+| Ekō | de | https://eko.org/de/campaigns | 2 — eingeschränkt |
 | Innn.it | de | https://innn.it/ | 3 — mittel |
 | WeMove Europe | de | https://wemove.eu/de/campaigns | 3 — mittel |
 | Europäisches Parlament | en | https://www.europarl.europa.eu/petitions/en/home | 4 — offen |
@@ -97,7 +97,9 @@ robots.txt. 1 = keine Liste, Bot-Schutz, keine maschinenlesbaren Daten.
 - **Bundestag** — offizielle Daten, aber JS-Portal mit Session-Cookies und verstecktem
   AJAX-Fragment (Reverse-Engineering erforderlich)
 - **Ekō** — deutsche Kampagnen über Startseite und Suche, Vollständigkeit nicht
-  garantiert (Eigenschreibweise mit Makron, seit der Umbenennung von SumOfUs 2023)
+  garantiert (Eigenschreibweise mit Makron, seit der Umbenennung von SumOfUs 2023);
+  seit 8.8.2026 liegen die Detailseiten hinter einem Bot-Schutz, neue Aktionen
+  kommen deshalb aus der Kampagnenkarte — siehe „Fairness beim Scrapen"
 - **Innn.it** — vollständige Liste nur über verstecktes internes API (per Reverse-Engineering
   gefunden); liefert dafür vollständige Datensätze inkl. Volltext
 - **WeMove Europe** — Kampagnen inkl. Archiv, Zähler über separaten Progress-Endpoint
@@ -382,6 +384,41 @@ Der Monitor hält sich bewusst an folgende Regeln:
   eine Plattform blockiert, bleibt der vorhandene Datenstand erhalten.
 - **Kein Massendownload auf Vorrat** — es werden nur Petitionen abgerufen,
   die wirklich neu sind oder deren letzte Prüfung mehr als 24 Stunden zurückliegt.
+
+### Der Fall Ekō: ein möglicher Weg, den wir nicht gehen
+
+Weil die Regel „keine Umgehung von Bot-Schutz" abstrakt bleibt, hier der Fall,
+an dem sie zum ersten Mal wirklich etwas gekostet hat.
+
+Ekō zieht von der Champaign-Plattform auf eine Vercel-Anwendung um. Dabei sind
+zwei Hosts im Spiel, die sich nur durch ein „s" unterscheiden:
+`actions.eko.org` (alt, nginx) und `action.eko.org` (neu, mit „Vercel Security
+Checkpoint"). Gemessen am 8.8.2026, dieselbe Aktion im selben Moment:
+
+| Abruf | Ergebnis |
+|---|---|
+| `actions.eko.org/a/osceola-gegen-nestle` | 301 → `action.eko.org` → **429** Checkpoint |
+| `actions.eko.org/a/3204` | **200**, echter Inhalt |
+| `action.eko.org/a/3204` | **429** |
+
+Über die numerische Seiten-ID käme man also weiterhin an alle Inhalte. Ein
+Erhebungslauf mit 59 numerischen Abrufen ergab null Checkpoints, während von 17
+Slug-Abrufen 14 blockiert wurden. Die robots.txt von `actions.eko.org` erlaubt
+`/a/*` sogar ausdrücklich.
+
+**Wir nutzen den Weg trotzdem nicht.** Ausschlaggebend ist die dritte Zeile der
+Tabelle: Auf dem neuen Host ist auch die ID gesperrt. Ekō schützt damit den
+*Inhalt*, nicht die *Schreibweise* der URL. Dass die Zahlform auf dem Altsystem
+noch antwortet, ist ein Rest der unfertigen Migration — die Weiterleitung baut
+sogar einen doppelten Schrägstrich (`//a/`). Diesen Rest zu benutzen hieße,
+sich bewusst um eine Schutzmaßnahme herumzubewegen, die der Betreiber gerade
+aufbaut. Dass jede einzelne Anfrage für sich harmlos aussieht, ändert daran
+nichts.
+
+Der Preis: Für neue Ekō-Aktionen gibt es Titel, Kurztext und Bild aus der
+Kampagnenkarte, aber **keinen Unterschriftenstand und keinen Volltext**. Der
+vorhandene Datenstand bleibt unangetastet stehen. Die Offenheits-Ampel steht
+deshalb seit dem 8.8.2026 auf 2 statt 3.
 
 ---
 
