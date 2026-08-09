@@ -1467,14 +1467,18 @@ def _detail_panel(slug: str, r: dict) -> str:
         '<div class="detail-panel">'
         f'<div class="detail-img">{img}</div>'
         '<div class="detail-body">'
-        f'<div class="field"><h4>Kurzbeschreibung</h4><p>{summary}</p></div>'
-        f'<div class="field"><h4>Adressat</h4><p>{recipient}</p></div>'
-        '<details class="fulltext"><summary>Komplette Beschreibung</summary>'
+        f'<div class="field">{_zs("Kurzbeschreibung", "Summary", tag="h4")}'
+        f'<p>{summary}</p></div>'
+        f'<div class="field">{_zs("Adressat", "Addressed to", tag="h4")}'
+        f'<p>{recipient}</p></div>'
+        f'<details class="fulltext">'
+        f'{_zs("Komplette Beschreibung", "Full description", tag="summary")}'
         f'<div class="ft-body">{full}</div></details>'
         '<div class="lists">'
-        f'<div><h4>Meilensteine</h4><ul>{ms_html}</ul></div>'
-        f'<div><h4>Neuigkeiten</h4><ul>{up_html}</ul></div>'
-        f'<div><h4>Unterschriften-Verlauf</h4><ul>{hist_html}</ul></div>'
+        f'<div>{_zs("Meilensteine", "Milestones", tag="h4")}<ul>{ms_html}</ul></div>'
+        f'<div>{_zs("Neuigkeiten", "Updates", tag="h4")}<ul>{up_html}</ul></div>'
+        f'<div>{_zs("Unterschriften-Verlauf", "Signature history", tag="h4")}'
+        f'<ul>{hist_html}</ul></div>'
         '</div>'
         f'<dl class="kv">{meta_html}</dl>'
         '</div>'
@@ -1492,10 +1496,13 @@ def build_list_html(store: dict, platform: Platform) -> str:
     new_categories = meta.get("new_categories_last_run", [])
     notes = []
     if new_petitions:
-        notes.append(f"+{len(new_petitions)} neue Petition(en) im letzten Lauf")
+        notes.append(_zs(f"+{len(new_petitions)} neue Petition(en) im letzten Lauf",
+                         f"+{len(new_petitions)} new petition(s) in the last run"))
     if new_categories:
-        notes.append(f"+{len(new_categories)} neue Kategorie(n): "
-                     f"{_esc(', '.join(new_categories))}")
+        katliste = ", ".join(new_categories)
+        notes.append(_zs(f"+{len(new_categories)} neue Kategorie(n): {katliste}",
+                         f"+{len(new_categories)} new categor"
+                         f"{'y' if len(new_categories) == 1 else 'ies'}: {katliste}"))
     new_note = (f'<p class="sub new-note">{" · ".join(notes)}</p>'
                if notes else "")
 
@@ -1526,13 +1533,15 @@ def build_list_html(store: dict, platform: Platform) -> str:
             f'data-start="{_esc(r.get("start_date") or "")}" '
             f'data-checked="{_esc(r.get("last_checked") or "")}">'
             f'<td class="c-toggle"><button class="toggle" type="button" '
-            f'aria-expanded="false" aria-label="Details ein-/ausklappen">'
+            f'aria-expanded="false" aria-label="Details">'
             f'<span class="chev">›</span></button></td>'
             f'<td class="c-thumb">{_img_tag(r.get("image_url"), "thumb")}</td>'
             f'<td class="c-status"><span class="badge '
             f'{"closed" if closed else status}">'
             f'<span class="dot"></span>'
-            f'{"Beendet" if closed else ("Online" if status=="online" else "Offline")}'
+            + (_zs("Beendet", "Ended") if closed
+               else _zs("Online", "Online") if status == "online"
+               else _zs("Offline", "Offline")) +
             f'</span></td>'
             f'<td class="c-title"><a href="{_esc(r.get("url"))}" target="_blank" '
             f'rel="noopener">{_esc(r.get("title") or slug)}</a>'
@@ -1556,9 +1565,11 @@ def build_list_html(store: dict, platform: Platform) -> str:
     n_closed = sum(1 for r in store.values()
                    if isinstance(r, dict) and r.get("closed"))
     tmpl = tmpl.replace("{{CLOSEDFILTERS}}",
-                        '<button data-f="running" aria-pressed="false">Laufend'
-                        '</button><button data-f="closed" aria-pressed="false">'
-                        'Beendet</button>' if n_closed else "")
+                        ('<button data-f="running" aria-pressed="false">'
+                         + _zs("Laufend", "Running") + '</button>'
+                         '<button data-f="closed" aria-pressed="false">'
+                         + _zs("Beendet", "Ended") + '</button>')
+                        if n_closed else "")
     tmpl = tmpl.replace("{{TOTAL}}", str(len(store)))
     tmpl = tmpl.replace("{{ONLINE}}", str(online))
     tmpl = tmpl.replace("{{OFFLINE}}", str(offline))
@@ -1566,9 +1577,13 @@ def build_list_html(store: dict, platform: Platform) -> str:
     tmpl = tmpl.replace("{{NEW_NOTE}}", new_note)
     tmpl = tmpl.replace("{{CAT_OPTIONS}}", cat_options)
     tmpl = tmpl.replace("{{ROWS}}", "\n".join(rows) or
-                        f'<tr><td colspan="{cols}" class="empty">Noch keine Daten – '
-                        'erst scrapen.</td></tr>')
+                        f'<tr><td colspan="{cols}" class="empty">'
+                        + _zs("Noch keine Daten – erst scrapen.",
+                              "No data yet – scrape first.") + '</td></tr>')
     tmpl = tmpl.replace("{{TOTOP}}", _TOTOP)
+    tmpl = _i18n_einsetzen(tmpl)
+    for platzhalter, inhalt in _LIST_I18N_BLOECKE.items():
+        tmpl = tmpl.replace(platzhalter, inhalt)
     return tmpl
 
 
@@ -1613,7 +1628,9 @@ _TOTOP = """
 
 
 _LIST_TEMPLATE = """<!DOCTYPE html>
-<html lang="de">
+<html lang="de"
+      data-title-de="{{NAME}} · Petitions-Monitor"
+      data-title-en="{{NAME}} · Petition Monitor">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -1749,35 +1766,41 @@ _LIST_TEMPLATE = """<!DOCTYPE html>
   .empty{text-align:center;color:var(--muted);padding:40px}
   footer{padding:18px clamp(16px,4vw,40px);color:var(--muted);font-size:12px}
   @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+{{LANGCSS}}
 </style>
 </head>
 <body>
 <header>
-  <a class="back" href="dashboard.html">← Dashboard</a>
-  <p class="eyebrow">{{EYEBROW}} — Datenstand {{GENERATED}}</p>
-  <h1>Petitions-Monitor</h1>
-  <p class="sub">Lokal gescrapte Übersicht. Status zeigt, ob eine Petition beim
-     letzten Lauf noch erreichbar war.</p>
+  <div class="head-top">
+    <a class="back" href="dashboard.html">{{BACK}}</a>
+    {{LANGSEL}}
+  </div>
+  <p class="eyebrow">{{EYEBROW}} — {{STANDLABEL}} {{GENERATED}}</p>
+  {{H1}}
+  <p class="sub">{{LISTSUB}}</p>
   <div class="board">
-    <div class="stat"><div class="n">{{TOTAL}}</div><div class="l">Petitionen</div></div>
-    <div class="stat online"><div class="n">{{ONLINE}}</div><div class="l">Online</div></div>
-    <div class="stat offline"><div class="n">{{OFFLINE}}</div><div class="l">Offline</div></div>
-    <div class="stat new"><div class="n">{{NEW}}</div><div class="l">Neu (letzter Lauf)</div></div>
+    <div class="stat"><div class="n">{{TOTAL}}</div>{{L_PETITIONS}}</div>
+    <div class="stat online"><div class="n">{{ONLINE}}</div>{{L_ONLINE}}</div>
+    <div class="stat offline"><div class="n">{{OFFLINE}}</div>{{L_OFFLINE}}</div>
+    <div class="stat new"><div class="n">{{NEW}}</div>{{L_NEW}}</div>
   </div>
   {{NEW_NOTE}}
 </header>
 <main>
   <div class="toolbar">
-    <button id="run" class="run-btn" type="button"><span class="sp"></span>Jetzt scrapen</button>
+    <button id="run" class="run-btn" type="button"><span class="sp"></span>{{RUNNOW}}</button>
     <span class="run-status" id="run-status"></span>
-    <input id="q" type="search" placeholder="Filtern nach Titel, Starter*in, Kategorie …" aria-label="Filter">
-    <div class="seg" role="group" aria-label="Status filtern">
-      <button data-f="all" aria-pressed="true">Alle</button>
+    <input id="q" type="search" aria-label="Filter"
+           data-ph-de="Filtern nach Titel, Starter*in, Kategorie …"
+           data-ph-en="Filter by title, starter, category …"
+           placeholder="Filtern nach Titel, Starter*in, Kategorie …">
+    <div class="seg" role="group" aria-label="Status">
+      <button data-f="all" aria-pressed="true">{{F_ALL}}</button>
       <button data-f="online" aria-pressed="false">Online</button>
       <button data-f="offline" aria-pressed="false">Offline</button>{{CLOSEDFILTERS}}
     </div>
-    <select id="catFilter" aria-label="Kategorie filtern">
-      <option value="">Alle Kategorien</option>
+    <select id="catFilter" aria-label="Kategorie / Category">
+      <option value="">{{F_ALLCATS}}</option>
 {{CAT_OPTIONS}}
     </select>
     <span class="count" id="count"></span>
@@ -1786,14 +1809,14 @@ _LIST_TEMPLATE = """<!DOCTYPE html>
     <table id="t">
       <thead><tr>
         <th class="c-toggle" aria-hidden="true"></th>
-        <th class="c-thumb">Bild</th>
-        <th data-k="status">Status</th>
-        <th data-k="title">Titel</th>
-        <th data-k="starter">Gestartet von</th>
-        <th data-k="category">Kategorie</th>
-        <th data-k="signatures" class="num">Unterschriften</th>
-        <th data-k="start">Start</th>
-        <th data-k="checked">Zuletzt geprüft</th>
+        <th class="c-thumb">{{TH_IMG}}</th>
+        <th data-k="status">{{TH_STATUS}}</th>
+        <th data-k="title">{{TH_TITLE}}</th>
+        <th data-k="starter">{{TH_STARTER}}</th>
+        <th data-k="category">{{TH_CATEGORY}}</th>
+        <th data-k="signatures" class="num">{{TH_SIGS}}</th>
+        <th data-k="start">{{TH_START}}</th>
+        <th data-k="checked">{{TH_CHECKED}}</th>
       </tr></thead>
       <tbody>
 {{ROWS}}
@@ -1801,8 +1824,8 @@ _LIST_TEMPLATE = """<!DOCTYPE html>
     </table>
   </div>
 </main>
-<footer>Erzeugt vom Petitions-Monitor · Daten werden bei jedem Lauf aktualisiert,
-  nicht überschrieben.</footer>
+<footer>{{FOOTER}}</footer>
+{{I18N}}
 <script>
 (function(){
   var tbody=document.querySelector("#t tbody");
@@ -1890,32 +1913,36 @@ _LIST_TEMPLATE = """<!DOCTYPE html>
       if(s.running){
         var p=s.total?" ("+s.current+"/"+s.total+" · "+
               Math.round(s.current/s.total*100)+"%)":"";
-        runStatus.textContent=(s.message||"läuft …")+p;
+        runStatus.textContent=(s.message||PM_T("läuft …","running …"))+p;
         setTimeout(poll,1500);
       }else if(s.error){
-        runStatus.textContent="Fehler: "+s.error;
+        runStatus.textContent=PM_T("Fehler: ","Error: ")+s.error;
         runBtn.disabled=false; runBtn.classList.remove("busy");
       }else{
-        runStatus.textContent="Fertig – Seite wird aktualisiert …";
+        runStatus.textContent=PM_T("Fertig – Seite wird aktualisiert …",
+                                 "Done – reloading the page …");
         setTimeout(function(){location.reload();},600);
       }
     }).catch(function(){
-      runStatus.textContent="Verbindung zum Server verloren.";
+      runStatus.textContent=PM_T("Verbindung zum Server verloren.",
+                                 "Lost the connection to the server.");
       runBtn.disabled=false; runBtn.classList.remove("busy");
     });
   }
   if(runBtn){
     if(fileMode){
-      runBtn.title="Funktioniert nur über den lokalen Server: "+
+      runBtn.title=PM_T("Funktioniert nur über den lokalen Server: ",
+                        "Only works via the local server: ")+
                    "python3 monitor.py --serve";
     }
     runBtn.addEventListener("click",function(){
       if(fileMode){
-        runStatus.textContent="Nur über den Server: python3 monitor.py --serve";
+        runStatus.textContent=PM_T("Nur über den Server: ","Only via the server: ")+
+                              "python3 monitor.py --serve";
         return;
       }
       runBtn.disabled=true; runBtn.classList.add("busy");
-      runStatus.textContent="Starte …";
+      runStatus.textContent=PM_T("Starte …","Starting …");
       fetch("/run?platform="+platformKey).then(function(r){return r.json();})
         .then(function(){poll();})
         .catch(function(){
@@ -2137,6 +2164,15 @@ def _placeholder_card(platform: Platform, schnappschuss: bool = False) -> str:
     {zu}"""
 
 
+def _i18n_einsetzen(tmpl: str) -> str:
+    """Die drei gemeinsamen Bausteine der Zweisprachigkeit in eine Vorlage
+    setzen: Wähler, Stil, Skript. Jede Seite, die {{LANGSEL}}, {{LANGCSS}} und
+    {{I18N}} enthält, ist damit umschaltbar."""
+    return (tmpl.replace("{{LANGSEL}}", _LANGSEL)
+                .replace("{{LANGCSS}}", _LANGSEL_CSS)
+                .replace("{{I18N}}", _I18N_SCRIPT))
+
+
 def build_dashboard(platforms: list[Platform], schnappschuss: bool = False) -> str:
     """Das Dashboard in zwei Ausprägungen aus EINER Vorlage.
 
@@ -2173,6 +2209,7 @@ def build_dashboard(platforms: list[Platform], schnappschuss: bool = False) -> s
     tmpl = tmpl.replace("{{SUBNOTE}}", _SUB_SCHNAPPSCHUSS if schnappschuss
                         else _SUB_SERVER)
     tmpl = tmpl.replace("{{RUNALL}}", "" if schnappschuss else _RUNALL_ROW)
+    tmpl = _i18n_einsetzen(tmpl)
     for platzhalter, inhalt in _I18N_BLOECKE.items():
         tmpl = tmpl.replace(platzhalter, inhalt)
     tmpl = tmpl.replace("{{GENERATED}}", _esc(now_iso()))
@@ -2191,6 +2228,16 @@ def write_dashboard(platforms: list[Platform], ziel: Path | None = None,
 
 def build_placeholder_page(platform: Platform) -> str:
     tmpl = _PLACEHOLDER_TEMPLATE
+    tmpl = tmpl.replace("{{PH_TEXT}}", _zs(
+        f"Für {platform.name} gibt es noch keinen Scraper und keine Daten. "
+        f"Dieser Bereich ist als Platzhalter für die geplante Anbindung angelegt.",
+        f"There is no scraper and no data for {platform.name} yet. This page is "
+        f"a placeholder for the planned connection."))
+    tmpl = tmpl.replace("{{PH_SOURCE}}", _zs("Quelle:", "Source:"))
+    tmpl = tmpl.replace("{{PH_STAND}}", _zs("Datenstand dieser Seite:",
+                                            "This page is current as of:"))
+    tmpl = tmpl.replace("{{BACK}}", _LIST_I18N_BLOECKE["{{BACK}}"])
+    tmpl = _i18n_einsetzen(tmpl)
     tmpl = tmpl.replace("{{NAME}}", _esc(platform.name))
     tmpl = tmpl.replace("{{SOURCE_URL}}", _esc(platform.source_url))
     tmpl = tmpl.replace("{{GENERATED}}", _esc(now_iso()))
@@ -2235,8 +2282,152 @@ _LANGSEL = """<div class="langsel" role="group" aria-label="Sprache · Language"
               aria-pressed="false">English</button>
     </div>"""
 
+# Das Umschalt-Skript. Steht als Konstante hier, weil es Dashboard UND
+# Listenseiten bedient — zweimal derselbe Code wäre zweimal Gelegenheit,
+# ihn auseinanderlaufen zu lassen. Der Seitentitel kommt aus
+# data-title-de/-en am <html>, damit jede Seite ihren eigenen mitbringt.
+# Stil des Sprachwählers samt Fokusring. Wie das Skript geteilt, damit
+# Dashboard und Listenseiten gleich aussehen und gleich bedienbar sind.
+_LANGSEL_CSS = """  /* Kopfzeile: Rubrik links, Sprachwähler rechts. */
+  .head-top{display:flex;align-items:flex-start;justify-content:space-between;
+      gap:16px;flex-wrap:wrap}
+  .langsel{display:inline-flex;border:1px solid var(--line);border-radius:8px;
+      overflow:hidden;background:var(--surface);flex:none}
+  .langsel__b{appearance:none;border:0;background:transparent;cursor:pointer;
+      font:inherit;font-size:12px;font-weight:650;color:var(--muted);
+      padding:6px 12px;min-height:32px;line-height:1}
+  .langsel__b + .langsel__b{border-left:1px solid var(--line)}
+  .langsel__b[aria-pressed="true"]{background:var(--indigo);color:var(--on-accent)}
+  .langsel__b:hover:not([aria-pressed="true"]){background:var(--indigo-soft);
+      color:var(--indigo)}
+  /* Tastaturbedienung sichtbar machen. :focus-visible statt :focus, damit der
+     Ring nur bei Tastatur erscheint und nicht nach jedem Mausklick. */
+  a:focus-visible,button:focus-visible{outline:2px solid var(--indigo);
+      outline-offset:2px;border-radius:6px}"""
+
+
+_I18N_SCRIPT = """<script>
+// Sprachumschaltung. Steht bewusst HIER — direkt hinter dem Inhalt und nicht
+// am Dateiende: an dieser Stelle existieren alle [data-de]-Knoten schon, das
+// Skript läuft während des Parsens und tauscht die Texte in aller Regel vor
+// dem ersten Bild. Am Dateiende (nach dem Status-Skript) sähe man erst Deutsch
+// und dann den Sprung.
+// Laufzeit-Meldungen („läuft …", „Kein Server erreichbar.") entstehen erst beim
+// Anzeigen und können deshalb nicht als data-de/data-en im Markup stehen. Dafür
+// dieser Zwerg: er liest die Sprache dort ab, wo der Umschalter sie hinschreibt.
+window.PM_T = function(de, en){
+  return document.documentElement.getAttribute("lang") === "en" ? en : de;
+};
+
+(function(){
+  var SPRACHEN = ["de", "en"];
+  var SPEICHER = "pmDashLang";
+
+  function systemSprache(){
+    var liste = (navigator.languages && navigator.languages.length)
+                ? navigator.languages : [navigator.language || "de"];
+    for (var i = 0; i < liste.length; i++){
+      var kurz = String(liste[i] || "").toLowerCase().split("-")[0];
+      if (SPRACHEN.indexOf(kurz) !== -1) return kurz;
+    }
+    return "de";
+  }
+
+  function gewaehlt(){
+    try {
+      var eigen = localStorage.getItem(SPEICHER);
+      if (SPRACHEN.indexOf(eigen) !== -1) return eigen;
+      // Auf GitHub Pages liegt die App unter derselben Herkunft. Wer dort
+      // Englisch gewählt hat, soll das Dashboard nicht auf Deutsch bekommen.
+      // Geschrieben wird prefs NICHT — eine Statusseite verstellt nichts.
+      var p = JSON.parse(localStorage.getItem("prefs") || "{}");
+      if (p && SPRACHEN.indexOf(p.lang) !== -1) return p.lang;
+    } catch (e) {}
+    return systemSprache();
+  }
+
+  function setze(lang){
+    var knoten = document.querySelectorAll("[data-de]");
+    for (var i = 0; i < knoten.length; i++){
+      var el = knoten[i];
+      var txt = el.getAttribute("data-" + lang) || el.getAttribute("data-de");
+      // Knoten mit data-titel tragen ihren Text im Tooltip, nicht im Inhalt.
+      if (el.getAttribute("data-titel")) el.setAttribute("title", txt);
+      else el.textContent = txt;
+    }
+    // Eingabefelder tragen ihren Text im placeholder — der ist kein Inhalt und
+    // fiele bei textContent unter den Tisch.
+    var felder = document.querySelectorAll("[data-ph-de]");
+    for (var f = 0; f < felder.length; f++){
+      felder[f].setAttribute("placeholder",
+        felder[f].getAttribute("data-ph-" + lang)
+        || felder[f].getAttribute("data-ph-de"));
+    }
+    document.documentElement.setAttribute("lang", lang);
+    var wurzel = document.documentElement;
+    var t = wurzel.getAttribute("data-title-" + lang)
+            || wurzel.getAttribute("data-title-de");
+    if (t) document.title = t;
+    var knoepfe = document.querySelectorAll(".langsel__b");
+    for (var j = 0; j < knoepfe.length; j++){
+      knoepfe[j].setAttribute("aria-pressed",
+        knoepfe[j].getAttribute("data-lang") === lang ? "true" : "false");
+    }
+  }
+
+  var aktuell = gewaehlt();
+  setze(aktuell);
+
+  document.addEventListener("click", function(ev){
+    var b = ev.target.closest ? ev.target.closest(".langsel__b") : null;
+    if (!b) return;
+    aktuell = b.getAttribute("data-lang");
+    try { localStorage.setItem(SPEICHER, aktuell); } catch (e) {}
+    setze(aktuell);
+  });
+})();
+</script>
+"""
+
+
+# Textbausteine der Listenseite. Gleicher Mechanismus wie beim Dashboard: der
+# Knoten trägt beide Sprachen, der gemeinsame Umschalter tauscht den Inhalt.
+# „Online", „Offline", „Status" und „Start" stehen mit drin, obwohl sie gleich
+# lauten — sonst müsste man beim Lesen jedes Mal prüfen, ob eine Beschriftung
+# vergessen wurde oder nur zufällig in beiden Sprachen gleich heißt.
+_LIST_I18N_BLOECKE = {
+    "{{BACK}}": _zs("← Dashboard", "← Dashboard"),
+    "{{H1}}": _zs("Petitions-Monitor", "Petition Monitor", tag="h1"),
+    "{{STANDLABEL}}": _zs("Datenstand", "Data as of"),
+    "{{LISTSUB}}": _zs(
+        "Lokal gescrapte Übersicht. Status zeigt, ob eine Petition beim letzten "
+        "Lauf noch erreichbar war.",
+        "Locally scraped overview. Status shows whether a petition was still "
+        "reachable during the last run."),
+    "{{L_PETITIONS}}": _zs("Petitionen", "Petitions", tag="div", klasse="l"),
+    "{{L_ONLINE}}": _zs("Online", "Online", tag="div", klasse="l"),
+    "{{L_OFFLINE}}": _zs("Offline", "Offline", tag="div", klasse="l"),
+    "{{L_NEW}}": _zs("Neu (letzter Lauf)", "New (last run)", tag="div",
+                     klasse="l"),
+    "{{RUNNOW}}": _zs("Jetzt scrapen", "Scrape now"),
+    "{{F_ALL}}": _zs("Alle", "All"),
+    "{{F_ALLCATS}}": _zs("Alle Kategorien", "All categories"),
+    "{{TH_IMG}}": _zs("Bild", "Image"),
+    "{{TH_STATUS}}": _zs("Status", "Status"),
+    "{{TH_TITLE}}": _zs("Titel", "Title"),
+    "{{TH_STARTER}}": _zs("Gestartet von", "Started by"),
+    "{{TH_CATEGORY}}": _zs("Kategorie", "Category"),
+    "{{TH_SIGS}}": _zs("Unterschriften", "Signatures"),
+    "{{TH_START}}": _zs("Start", "Start"),
+    "{{TH_CHECKED}}": _zs("Zuletzt geprüft", "Last checked"),
+    "{{FOOTER}}": _zs(
+        "Erzeugt vom Petitions-Monitor · Daten werden bei jedem Lauf "
+        "aktualisiert, nicht überschrieben.",
+        "Generated by the Petition Monitor · data is updated on every run, "
+        "not overwritten."),
+}
+
 _I18N_BLOECKE = {
-    "{{LANGSEL}}": _LANGSEL,
     "{{EYEBROW}}": _zs("Petitions-Monitor — Dashboard",
                        "Petition Monitor — Dashboard", tag="p",
                        klasse="eyebrow"),
@@ -2273,7 +2464,9 @@ _RUNALL_ROW = f"""<div class="runall-row">
   </div>"""
 
 _DASHBOARD_TEMPLATE = """<!DOCTYPE html>
-<html lang="de"{{MODUS}}>
+<html lang="de"{{MODUS}}
+      data-title-de="Petitions-Monitor · Dashboard"
+      data-title-en="Petition Monitor · Dashboard">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -2445,22 +2638,7 @@ _DASHBOARD_TEMPLATE = """<!DOCTYPE html>
   .legend-note{margin:10px 0 0;max-width:70ch;font-size:11px;line-height:1.5;
       color:var(--muted)}
   .legend-note b{color:var(--ink);font-weight:700}
-  /* Kopfzeile: Rubrik links, Sprachwähler rechts. */
-  .head-top{display:flex;align-items:flex-start;justify-content:space-between;
-      gap:16px;flex-wrap:wrap}
-  .langsel{display:inline-flex;border:1px solid var(--line);border-radius:8px;
-      overflow:hidden;background:var(--surface);flex:none}
-  .langsel__b{appearance:none;border:0;background:transparent;cursor:pointer;
-      font:inherit;font-size:12px;font-weight:650;color:var(--muted);
-      padding:6px 12px;min-height:32px;line-height:1}
-  .langsel__b + .langsel__b{border-left:1px solid var(--line)}
-  .langsel__b[aria-pressed="true"]{background:var(--indigo);color:var(--on-accent)}
-  .langsel__b:hover:not([aria-pressed="true"]){background:var(--indigo-soft);
-      color:var(--indigo)}
-  /* Tastaturbedienung sichtbar machen. :focus-visible statt :focus, damit der
-     Ring nur bei Tastatur erscheint und nicht nach jedem Mausklick. */
-  a:focus-visible,button:focus-visible{outline:2px solid var(--indigo);
-      outline-offset:2px;border-radius:6px}
+{{LANGCSS}}
   /* Zahlen untereinander bündig — ohne tabellarische Ziffern tanzen die
      Spalten „Petitionen/Online/Offline" von Kachel zu Kachel. */
   .cs .n,.completeness__head b{font-variant-numeric:tabular-nums}
@@ -2490,70 +2668,7 @@ _DASHBOARD_TEMPLATE = """<!DOCTYPE html>
 {{CARDS}}
   </div>
 </main>
-<script>
-// Sprachumschaltung. Steht bewusst HIER — direkt hinter dem Inhalt und nicht
-// am Dateiende: an dieser Stelle existieren alle [data-de]-Knoten schon, das
-// Skript läuft während des Parsens und tauscht die Texte in aller Regel vor
-// dem ersten Bild. Am Dateiende (nach dem Status-Skript) sähe man erst Deutsch
-// und dann den Sprung.
-(function(){
-  var SPRACHEN = ["de", "en"];
-  var SPEICHER = "pmDashLang";
-
-  function systemSprache(){
-    var liste = (navigator.languages && navigator.languages.length)
-                ? navigator.languages : [navigator.language || "de"];
-    for (var i = 0; i < liste.length; i++){
-      var kurz = String(liste[i] || "").toLowerCase().split("-")[0];
-      if (SPRACHEN.indexOf(kurz) !== -1) return kurz;
-    }
-    return "de";
-  }
-
-  function gewaehlt(){
-    try {
-      var eigen = localStorage.getItem(SPEICHER);
-      if (SPRACHEN.indexOf(eigen) !== -1) return eigen;
-      // Auf GitHub Pages liegt die App unter derselben Herkunft. Wer dort
-      // Englisch gewählt hat, soll das Dashboard nicht auf Deutsch bekommen.
-      // Geschrieben wird prefs NICHT — eine Statusseite verstellt nichts.
-      var p = JSON.parse(localStorage.getItem("prefs") || "{}");
-      if (p && SPRACHEN.indexOf(p.lang) !== -1) return p.lang;
-    } catch (e) {}
-    return systemSprache();
-  }
-
-  function setze(lang){
-    var knoten = document.querySelectorAll("[data-de]");
-    for (var i = 0; i < knoten.length; i++){
-      var el = knoten[i];
-      var txt = el.getAttribute("data-" + lang) || el.getAttribute("data-de");
-      // Knoten mit data-titel tragen ihren Text im Tooltip, nicht im Inhalt.
-      if (el.getAttribute("data-titel")) el.setAttribute("title", txt);
-      else el.textContent = txt;
-    }
-    document.documentElement.setAttribute("lang", lang);
-    document.title = (lang === "en")
-      ? "Petition Monitor · Dashboard" : "Petitions-Monitor · Dashboard";
-    var knoepfe = document.querySelectorAll(".langsel__b");
-    for (var j = 0; j < knoepfe.length; j++){
-      knoepfe[j].setAttribute("aria-pressed",
-        knoepfe[j].getAttribute("data-lang") === lang ? "true" : "false");
-    }
-  }
-
-  var aktuell = gewaehlt();
-  setze(aktuell);
-
-  document.addEventListener("click", function(ev){
-    var b = ev.target.closest ? ev.target.closest(".langsel__b") : null;
-    if (!b) return;
-    aktuell = b.getAttribute("data-lang");
-    try { localStorage.setItem(SPEICHER, aktuell); } catch (e) {}
-    setze(aktuell);
-  });
-})();
-</script>
+{{I18N}}
 <script>
 (function(){
   // Ohne Server gibt es nichts abzufragen. Der Schnappschuss auf GitHub Pages
@@ -2584,19 +2699,21 @@ _DASHBOARD_TEMPLATE = """<!DOCTYPE html>
           fill.style.width = pct + "%";
           text.textContent = e.total
             ? (e.current + "/" + e.total + " · " + pct + "%")
-            : (e.message || "läuft …");
+            : (e.message || PM_T("läuft …", "running …"));
         }
       });
       if (allBtn){
         if (s.running){
           allBtn.disabled = true; allBtn.classList.add("busy");
-          allStatus.textContent = s.count_running + " Scraper laufen: " +
+          allStatus.textContent = s.count_running +
+            PM_T(" Scraper laufen: ", " scrapers running: ") +
             (s.running_platforms || []).join(", ");
           wasRunning = true;
         } else {
           allBtn.disabled = false; allBtn.classList.remove("busy");
           if (wasRunning){
-            allStatus.textContent = "Alle fertig – Seite wird aktualisiert …";
+            allStatus.textContent = PM_T("Alle fertig – Seite wird aktualisiert …",
+                                         "All done – reloading the page …");
             setTimeout(function(){ location.reload(); }, 800);
           }
         }
@@ -2606,19 +2723,22 @@ _DASHBOARD_TEMPLATE = """<!DOCTYPE html>
   if (allBtn){
     allBtn.addEventListener("click", function(){
       if (location.protocol === "file:"){
-        allStatus.textContent = "Nur über den Server: python3 monitor.py --serve";
+        allStatus.textContent = PM_T("Nur über den Server: ", "Only via the server: ")
+                              + "python3 monitor.py --serve";
         return;
       }
       allBtn.disabled = true; allBtn.classList.add("busy");
-      allStatus.textContent = "Starte alle Scraper …";
+      allStatus.textContent = PM_T("Starte alle Scraper …", "Starting all scrapers …");
       fetch("/run?platform=all").then(function(r){ return r.json(); })
         .then(function(res){
           if (!res.started && res.running){
-            allStatus.textContent = "Es läuft bereits ein Scrape.";
+            allStatus.textContent = PM_T("Es läuft bereits ein Scrape.",
+                                         "A scrape is already running.");
           }
         })
         .catch(function(){
-          allStatus.textContent = "Kein Server erreichbar.";
+          allStatus.textContent = PM_T("Kein Server erreichbar.",
+                                       "No server reachable.");
           allBtn.disabled = false; allBtn.classList.remove("busy");
         });
     });
@@ -2633,7 +2753,9 @@ _DASHBOARD_TEMPLATE = """<!DOCTYPE html>
 """
 
 _PLACEHOLDER_TEMPLATE = """<!DOCTYPE html>
-<html lang="de">
+<html lang="de"
+      data-title-de="{{NAME}} · Petitions-Monitor"
+      data-title-en="{{NAME}} · Petition Monitor">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -2655,21 +2777,25 @@ _PLACEHOLDER_TEMPLATE = """<!DOCTYPE html>
   .box{background:var(--surface);border:1px solid var(--line);border-radius:14px;
        padding:28px;color:var(--muted)}
   .box a{color:var(--indigo)}
+{{LANGCSS}}
 </style>
 </head>
 <body>
 <header>
-  <a class="back" href="dashboard.html">← Dashboard</a>
+  <div class="head-top">
+    <a class="back" href="dashboard.html">{{BACK}}</a>
+    {{LANGSEL}}
+  </div>
   <h1>{{NAME}}</h1>
 </header>
 <main>
   <div class="box">
-    <p>Für {{NAME}} gibt es noch keinen Scraper und keine Daten. Dieser
-       Bereich ist als Platzhalter für die geplante Anbindung angelegt.</p>
-    <p>Quelle: <a href="{{SOURCE_URL}}" target="_blank" rel="noopener">{{SOURCE_URL}}</a></p>
-    <p>Datenstand dieser Seite: {{GENERATED}}</p>
+    <p>{{PH_TEXT}}</p>
+    <p>{{PH_SOURCE}} <a href="{{SOURCE_URL}}" target="_blank" rel="noopener">{{SOURCE_URL}}</a></p>
+    <p>{{PH_STAND}} {{GENERATED}}</p>
   </div>
 </main>
+{{I18N}}
 </body>
 </html>
 """
