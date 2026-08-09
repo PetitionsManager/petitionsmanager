@@ -37,6 +37,7 @@ from pathlib import Path
 
 from bs4 import BeautifulSoup
 
+import i18n_helfer as i18n
 import petitions_core as core
 from petitions_core import Platform, log, now_iso, prog, sanitize_fragment
 
@@ -102,6 +103,16 @@ def discover_slugs(fetcher: core.Fetcher) -> dict[str, dict]:
         page += 1
 
     log(f"Liste: {len(found)} Petitionen auf {page - 1} Seiten.")
+    # Die Abbruchbedingung oben (added == 0) ist bequem und zugleich die
+    # Schwachstelle: liefert die Paginierung nach wenigen Seiten nur noch
+    # Wiederholungen, endet der Lauf ORDENTLICH – mit einem Bruchteil des
+    # Bestands und ohne Fehler. Das sieht von außen aus wie ein gesunder Lauf.
+    # Schwelle gemessen am 8.8.2026: 1.658 Petitionen auf 93 Seiten, also rund
+    # 18 je Seite. 100 liegt bei etwa fünf Seiten — ein früher Abbruch fällt
+    # damit auf, während der echte Bestand (die größte deutsche Plattform)
+    # dieser Schwelle nie auch nur nahe kommt.
+    core.entdeckung("Paginierte Gesamtliste", len(found), erwartet_min=100,
+                    name_en="paginated full list")
     return found
 
 
@@ -120,7 +131,15 @@ def _num(s: str) -> int:
     return int(re.sub(r"\D", "", s) or 0)
 
 
-def parse_detail(html: str, url: str) -> dict:
+# Die Zwischenüberschrift über .petition-reason steht NICHT im Fragment, wir
+# setzen sie selbst — sie muss deshalb der Sprache des Textes folgen. Der
+# Wortlaut ist nicht erfunden, sondern von der Seite abgelesen: die englische
+# Fassung überschreibt den Abschnitt mit „Reason" (8.8.2026 geprüft an
+# /petition/online/strengthening-democracy-citizen-veto-right-…).
+BEGRUENDUNG_UEBERSCHRIFT = {"de": "Begründung", "en": "Reason"}
+
+
+def parse_detail(html: str, url: str, lang: str = "de") -> dict:
     soup = BeautifulSoup(html, "html.parser")
     rec: dict = {}
 
@@ -160,7 +179,8 @@ def parse_detail(html: str, url: str) -> dict:
         parts.append(sanitize_fragment(desc, BASE_URL))
     reason = soup.select_one(".petition-reason")
     if reason:
-        parts.append("<h3>Begründung</h3>")
+        parts.append("<h3>" + BEGRUENDUNG_UEBERSCHRIFT.get(
+            lang, BEGRUENDUNG_UEBERSCHRIFT["de"]) + "</h3>")
         parts.append(sanitize_fragment(reason, BASE_URL))
     rec["description_full"] = "\n".join(p for p in parts if p) or None
 
@@ -198,6 +218,103 @@ def parse_detail(html: str, url: str) -> dict:
     return rec
 
 
+# ---------------------------------------------------------------------------
+# SPRACHFASSUNGEN
+#
+# OpenPetition ist von allen elf Plattformen der sauberste Fall: die Seite
+# nennt ihre Übersetzungen SELBST, in einem Block „module-petition-translations":
+#
+#   <h4>Diese Petition wurde in folgende Sprachen übersetzt</h4>
+#   <a href="/petition/online/strengthening-democracy-citizen-veto-right-…"
+#      title="Petition auf Englisch anzeigen">Englisch</a>
+#
+# Der Block steht in dem HTML, das dieser Scraper OHNEHIN holt — die Erkennung
+# kostet also keinen einzigen Zusatzabruf, nur das Nachladen der Übersetzung
+# selbst. Am 8.8.2026 an einer Stichprobe von 40 laufenden Petitionen gemessen:
+# 5 mit Übersetzung (~12,5 %), darunter auch Russisch, Türkisch, Arabisch,
+# Ukrainisch und Spanisch — nicht nur Englisch.
+#
+# ⚠️ Die übersetzte Fassung hat einen EIGENEN Slug und ist damit eine eigene
+# Adresse. Sie kann deshalb auch eigenständig entdeckt werden und als zweiter
+# Satz im Bestand landen; genau dafür trägt der Datensatz `campaign_id` (den
+# deutschen Slug), damit publish._uebersetzungen_verknuepfen() die beiden
+# hinterher als Übersetzung ausweist statt als „ähnlich".
+#
+# ⚠️ Ein `?language=en_GB.utf8` bewirkt NICHTS (Antwort byte-identisch); der
+# Accept-Language-Kopf schaltet nur die OBERFLÄCHE um, nicht den Petitionstext.
+# Der Link im Block ist der einzige Weg.
+TRANSLATIONS_BLOCK_RE = re.compile(
+    r'module-petition-translations(.{0,1200}?)</(?:div|section)>', re.S | re.I)
+TRANSLATION_LINK_RE = re.compile(
+    r'<a[^>]+href="(/petition/online/[^"]+)"[^>]*title="[^"]*auf\s+'
+    r'([^"]+?)\s+anzeigen"', re.I)
+# Sprachname im title-Attribut → Sprachcode. Bewusst nur die, die wir in der
+# App auch anzeigen können; alles andere wird erkannt, aber nicht geladen.
+SPRACHNAME_ZU_CODE = {"englisch": "en"}
+
+
+def _uebersetzungen_finden(html: str) -> dict[str, str]:
+    """{sprachcode: slug} aus dem Übersetzungsblock der Seite."""
+    block = TRANSLATIONS_BLOCK_RE.search(html)
+    if not block:
+        return {}
+    gefunden: dict[str, str] = {}
+    for pfad, sprachname in TRANSLATION_LINK_RE.findall(block.group(1)):
+        code = SPRACHNAME_ZU_CODE.get(sprachname.strip().lower())
+        if not code or code in gefunden:
+            continue
+        gefunden[code] = pfad.rsplit("/", 1)[-1]
+    return gefunden
+
+
+def _kampagne(slug: str, verlinkt: dict[str, str]) -> str:
+    """Kennung, die von JEDER Sprachfassung aus gleich ausfällt.
+
+    ⚠️ Der eigene Slug allein taugt NICHT. Die übersetzte Fassung liegt unter
+    einer eigenen Adresse und kann über die Listenseite eigenständig entdeckt
+    werden — dann stünden zwei Sätze im Bestand, der deutsche mit
+    „openpetition:demokratie-staerken-…", der englische mit
+    „openpetition:strengthening-democracy-…". Verschiedene Kennungen, keine
+    Verknüpfung: genau die Lücke, die diese Funktion schließt.
+
+    Weil der Block BEIDSEITIG verlinkt (am 8.8.2026 nachgeprüft: die englische
+    Seite verweist zurück auf den deutschen Slug), kennt jede Seite dieselbe
+    Menge {eigener Slug} ∪ {verlinkte Slugs}. Der alphabetisch kleinste daraus
+    ist von beiden Seiten aus derselbe — ohne dass eine Seite wissen müsste,
+    welche das Original ist."""
+    alle = {slug} | set(verlinkt.values())
+    return f"openpetition:{min(alle)}"
+
+
+def _fremdsprachen_holen(fetcher: core.Fetcher, rec: dict, slug: str,
+                         html: str) -> None:
+    """Übersetzungen laut Seitenblock nachladen und an `rec` hängen."""
+    i18n.setze_hauptsprache(rec, "de")
+    verlinkt = _uebersetzungen_finden(html)
+    rec["campaign_id"] = _kampagne(slug, verlinkt)
+    for lang in ("en",):
+        fremd_slug = verlinkt.get(lang)
+        if not fremd_slug:
+            # Der Block ist da oder nicht — fehlt der Sprachlink, hat
+            # OpenPetition für diese Petition keine solche Übersetzung. Das ist
+            # eine Aussage der Quelle, kein gescheiterter Abruf.
+            i18n.setze_sprachfassung(rec, lang, "fehlt")
+            continue
+        url = f"{BASE_URL}/petition/online/{fremd_slug}"
+        resp = fetcher.get(url)
+        if resp is None or not resp.ok:
+            i18n.setze_sprachfassung(
+                rec, lang,
+                "fehlt" if resp is not None
+                and resp.status_code in (404, 410) else "ungeklärt")
+            continue
+        fremd = parse_detail(resp.text, url, lang)
+        if (fremd.get("title") or "").strip():
+            i18n.setze_sprachfassung(rec, lang, "vorhanden", fremd)
+        else:
+            i18n.setze_sprachfassung(rec, lang, "ungeklärt")
+
+
 def scrape_petition(fetcher: core.Fetcher, slug: str) -> tuple[str, dict | None]:
     """(status, record) – status: online | offline | error."""
     url = f"{BASE_URL}/petition/online/{slug}"
@@ -208,7 +325,9 @@ def scrape_petition(fetcher: core.Fetcher, slug: str) -> tuple[str, dict | None]
         return "offline", None
     if not resp.ok:
         return "error", None
-    return "online", parse_detail(resp.text, url)
+    rec = parse_detail(resp.text, url)
+    _fremdsprachen_holen(fetcher, rec, slug, resp.text)
+    return "online", rec
 
 
 # ----------------------------------------------------------------------------

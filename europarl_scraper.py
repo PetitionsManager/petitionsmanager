@@ -44,15 +44,86 @@ HTML_FILE = Path("europarl_petitions.html")
 # Paginierung läuft über ein WACHSENDES pageSize ("Load more"-Button), nicht
 # über page=N (das wird ignoriert). Daher direkt mit großem pageSize anfragen
 # und bei Bedarf weiter erhöhen.
-LIST_URL = (f"{BASE_URL}/petitions/en/show-petitions?keyWords=&_years=1"
+LIST_URL = (f"{BASE_URL}/petitions/de/show-petitions?keyWords=&_years=1"
             "&_searchThemes=1&_statuses=1&statuses=AVAILABLE&_countries=1"
             "&countries=DE&searchRequest=true&resSize=20&pageSize={size}")
 PAGE_SIZE_START = 200
 PAGE_SIZE_MAX   = 1000
 
 NUMBER_HREF_RE = re.compile(r"petitionNumber=(\d{4})%25?2F(\d{4})")
-TITLE_RE = re.compile(
-    r"Petition No\s+(\d{4}/\d{4})\s+by\s+(.+?)\s+on\s+(.+)", re.S)
+
+# ---------------------------------------------------------------------------
+# SPRACHFASSUNGEN
+#
+# Das EU-Parlament veröffentlicht jede Petition in allen 24 Amtssprachen; die
+# Adresse unterscheidet sich nur im Sprachsegment. Bis zum 8.8.2026 holte
+# dieser Scraper ausschließlich /en/ – deshalb standen ALLE Petitionen auch
+# deutschen Nutzern englisch in der App. Das war kein Merkmal der Quelle,
+# sondern unsere eigene Festlegung an zwei Stellen.
+#
+# Jetzt ist Deutsch die Hauptsprache (flache Felder) und Englisch wandert nach
+# rec["i18n"]["en"]. Am 8.8.2026 an ALLEN 91 gelisteten Petitionen gemessen,
+# nicht an einer Stichprobe:
+#   · /petitions/de/show-petitions und /petitions/en/… liefern dieselbe MENGE
+#     Petitionsnummern (91 = 91, Mengenvergleich) – die Sprache der Liste ist
+#     also belanglos, sie steht hier nur der Einheitlichkeit halber auf de
+#   · die Feldtabelle trägt "Themenbereiche" und "Name" bei 91 von 91
+#   · das Titelmuster unten erkennt 85 von 85 vorhandenen Titeln
+#   · 6 Seiten tragen GAR KEINEN Titelabschnitt – auf Deutsch wie auf Englisch
+#     gleichermaßen. Das ist keine Übersetzungslücke, sondern ein anderer
+#     Seitentyp; für sie greift der Rückfall in parse_detail wie bisher.
+#
+# ⚠️ Der deutsche Titel ist ANDERS gebaut als der englische, und zwar
+# unregelmäßiger. Englisch: "Petition No N/J by X (German) on Y" – die
+# Staatsangehörigkeit steht in Klammern, das Bindewort ist immer "on".
+# Deutsch: "Petition Nr. N/J, eingereicht von X, deutscher
+# Staatsangehörigkeit[, im Namen der Z], zu Y". Aus sechs Stichproben hätte man
+# ein Muster abgeleitet, das an zwölf Petitionen scheitert. Erst der Lauf über
+# alle 91 zeigte vier weitere Formen:
+#   · "0174/2014 ," – Leerzeichen VOR dem Komma
+#   · "1386/2024 eingereicht" – gar kein Komma
+#   · "über das Fischsterben", "betreffend Botulismus" – das Bindewort ist
+#     nicht immer "zu/zur/zum"
+#   · "im Namen des Bundesverbandes … e. V. zur Umsetzung" – vor dem Bindewort
+#     steht kein Komma
+# Deshalb: Komma überall optional, fünf Bindewörter. Und weil die nächste
+# Petition eine sechste Form mitbringen kann, FÄLLT parse_detail bei einem
+# Fehlschlag auf den vollen Titelsatz zurück statt ihn wegzuwerfen.
+HAUPTSPRACHE = "de"
+SPRACHEN = ("de", "en")
+
+SPRACHE = {
+    "de": {
+        "titel_marker": "Petition Nr",
+        "titel_re": re.compile(
+            r"Petition Nr\.\s*(\d{4}/\d{4})\s*,?\s*eingereicht von\s+(.+?)"
+            r"(?:,\s*|\s+)((?:zur?m?|über|betreffend)\s+.+)", re.S),
+        "themen": "Themenbereiche",
+        "summary_h": "Zusammenfassung der Petition",
+        "empfaenger": "Petitionsausschuss des Europäischen Parlaments (PETI)",
+    },
+    "en": {
+        "titel_marker": "Petition No",
+        # ⚠️ Das "(?!behalf\b)" behebt einen Fehler, den es seit dem ersten Lauf
+        # gibt und der erst beim Sprachvergleich am 8.8.2026 auffiel: reicht
+        # jemand "on behalf of <Verein>" ein, trennte das Muster am ERSTEN
+        # " on " – also mitten in der Einreicherangabe. In der App stand dann
+        # als Titel "Petition 0855/2016: behalf of the Interessensgemeinschaft
+        # Botulismus …" statt des eigentlichen Gegenstands. An allen 91
+        # gelisteten Petitionen nachgezählt: 10 von 78 englischen Titeln
+        # betroffen, alle 10 durch diesen Ausschluss geheilt.
+        # Das optionale Komma und "calling for" fangen zwei weitere Formen, die
+        # das alte Muster gar nicht erkannte ("Petition No 1969/2014, by …",
+        # "… (German) calling for a legal regulation …"). Sie fielen bisher auf
+        # den nackten "Petition 1969/2014" zurück und verloren den Titel ganz.
+        "titel_re": re.compile(
+            r"Petition No\s+(\d{4}/\d{4})\s*,?\s*by\s+(.+?)\s+"
+            r"(?:on(?!\s+behalf\b)|calling for)\s+(.+)", re.S),
+        "themen": "Topics",
+        "summary_h": "Petition Summary",
+        "empfaenger": "Committee on Petitions of the European Parliament (PETI)",
+    },
+}
 
 FETCH_HEADERS = {
     "User-Agent": ("Mozilla/5.0 (X11; Linux x86_64; rv:128.0) "
@@ -62,9 +133,9 @@ FETCH_HEADERS = {
 }
 
 
-def _detail_url(slug: str) -> str:
+def _detail_url(slug: str, lang: str = HAUPTSPRACHE) -> str:
     num, year = slug.split("-")
-    return (f"{BASE_URL}/petitions/en/petition/content/html?"
+    return (f"{BASE_URL}/petitions/{lang}/petition/content/html?"
             f"petitionNumber={num}%252F{year}")
 
 
@@ -99,30 +170,46 @@ def discover_slugs(fetcher: core.Fetcher) -> dict[str, dict]:
 # ----------------------------------------------------------------------------
 # Detailseite parsen
 # ----------------------------------------------------------------------------
-def parse_detail(html: str, url: str, slug: str) -> dict:
+def parse_detail(html: str, url: str, slug: str,
+                 lang: str = HAUPTSPRACHE) -> dict:
     """Die Detailseite hat kaum nutzbare CSS-Klassen; geparst wird über die
     Text-Segmente (get_text mit |-Trenner). Der Titel ist das erste Segment
-    "Petition No …"; die Zusammenfassung folgt auf das ZWEITE Vorkommen der
-    Überschrift "Petition Summary" (das erste gehört zur Kopf-Wiederholung)."""
+    "Petition Nr. …" bzw. "Petition No …"; die Zusammenfassung folgt auf das
+    ZWEITE Vorkommen der Überschrift "Zusammenfassung der Petition" /
+    "Petition Summary" (das erste gehört zur Kopf-Wiederholung).
+
+    `lang` wählt die Beschriftungen aus SPRACHE – die Seitenstruktur ist in
+    allen Amtssprachen dieselbe, nur die Wörter wechseln."""
+    L = SPRACHE[lang]
     soup = BeautifulSoup(html, "html.parser")
     rec: dict = {}
     text = soup.get_text("|", strip=True)
     segs = [s.strip() for s in text.split("|") if s.strip()]
 
-    title_seg = next((s for s in segs if s.startswith("Petition No ")), None)
-    m = TITLE_RE.match(title_seg) if title_seg else None
+    title_seg = next((s for s in segs
+                      if s.startswith(L["titel_marker"])), None)
+    m = L["titel_re"].match(title_seg) if title_seg else None
     if m:
         rec["title"] = f"Petition {m.group(1)}: {m.group(3).strip()[:250]}"
         rec["started_by"] = m.group(2).strip()[:200]
+    elif title_seg:
+        # Muster griff nicht, aber ein Titelsatz IST da: lieber den ganzen,
+        # etwas behördlichen Satz zeigen als ihn gegen "Petition 0855/2016"
+        # einzutauschen. Eine neue Formulierung der Quelle kostet dann Schönheit,
+        # nicht Inhalt.
+        rec["title"] = title_seg.strip()[:280]
     else:
         rec["title"] = f"Petition {slug.replace('-', '/')}"
 
-    # Feld-Paare ("Topics|:|Wert") aus dem Fließtext ziehen.
+    # Feld-Paare ("Themenbereiche|:|Wert") aus dem Fließtext ziehen.
+    # Diese Tabelle ist der VERLÄSSLICHE Teil der Seite: am 8.8.2026 trugen
+    # 91 von 91 Petitionen sowohl "Themenbereiche" als auch "Name" – anders
+    # als der Titelsatz, dessen Formulierung schwankt.
     def field(label: str) -> str | None:
-        m2 = re.search(rf"{label}\|:\|+([^|]+)", text)
+        m2 = re.search(rf"{re.escape(label)}\|:\|+([^|]+)", text)
         return m2.group(1).strip() if m2 else None
 
-    rec["category"] = field("Topics")
+    rec["category"] = field(L["themen"])
     status_seg = next((s for s in segs if s.startswith("Status:")), "")
     status_txt = status_seg.removeprefix("Status:").strip()
 
@@ -138,10 +225,10 @@ def parse_detail(html: str, url: str, slug: str) -> dict:
     # dieser Seite immer der längste Textblock.
     kandidaten: list[str] = []
     for i, s in enumerate(segs):
-        if s != "Petition Summary":
+        if s != L["summary_h"]:
             continue
         for t in segs[i + 1:i + 5]:
-            if len(t) > 120 and not t.startswith("Petition No "):
+            if len(t) > 120 and not t.startswith(L["titel_marker"]):
                 kandidaten.append(t)
     summary = max(kandidaten, key=len) if kandidaten else None
     # Der Text ist auf der Seite DOPPELT maskiert ("&amp;#39;" im Quelltext).
@@ -153,7 +240,12 @@ def parse_detail(html: str, url: str, slug: str) -> dict:
         rec["description_full"] = f"<p>{core._esc(summary)}</p>"
         rec["summary"] = (summary[:200] + "…") if len(summary) > 200 else summary
 
-    rec["recipient"] = "Petitionsausschuss des Europäischen Parlaments (PETI)"
+    rec["recipient"] = L["empfaenger"]
+    # Gemeinsame Kennung aller Sprachfassungen: die Petitionsnummer. Sie ist
+    # in jeder der 24 Amtssprachen dieselbe. Gebraucht wird sie nur, falls je
+    # zwei Sprachfassungen als GETRENNTE Sätze in den Bestand geraten — der
+    # Regelfall ist, dass scrape_petition beide in einen Satz legt.
+    rec["campaign_id"] = f"europarl:{slug}"
     year = slug.split("-")[1]
     rec["start_date"] = f"{year}-01-01"
     rec["url"] = url
@@ -164,24 +256,72 @@ def parse_detail(html: str, url: str, slug: str) -> dict:
     return rec
 
 
-def scrape_petition(fetcher: core.Fetcher, slug: str) -> tuple[str, dict | None]:
-    url = _detail_url(slug)
+# Welche Felder eine Fremdsprache mitbringt. Alles andere (Unterschriften,
+# Status, Datum, Kategorie) ist entweder eine Zahl oder wird zum Filtern per
+# Zeichenkettenvergleich benutzt und bleibt deshalb einsprachig – siehe die
+# Notiz zu "category" in publish.compute_related.
+I18N_FELDER = ("title", "summary", "description_full", "url")
+
+
+def _hole_sprache(fetcher: core.Fetcher, slug: str, lang: str):
+    """Eine Sprachfassung abrufen. Gibt (zustand, rec) zurück, wobei zustand
+    aus "vorhanden" | "fehlt" | "ungeklärt" | "offline" | "error" stammt.
+
+    ⚠️ Die Unterscheidung zwischen "fehlt" und "ungeklärt" ist nicht Kosmetik:
+    die App zeigt zu einer fehlenden deutschen Fassung ein Abzeichen mit dem
+    Satz, die Petition liege dort nicht vor. Steht dahinter in Wahrheit ein
+    gescheiterter Abruf, behauptet die Oberfläche etwas Falsches. Ein leeres
+    Feld ist KEIN Beleg für ein fehlendes Original – bei WeMove stammen die
+    leeren Titel nachweislich vom Bot-Checkpoint, während die deutsche Seite
+    einen guten Titel trägt."""
+    url = _detail_url(slug, lang)
     resp = fetcher.get(url)
     if resp is None:
-        return "error", None
+        return "ungeklärt", None
     if resp.status_code in (404, 410):
-        return "offline", None
+        return "fehlt", None
     if not resp.ok:
-        return "error", None
+        return "ungeklärt", None
     # Ein 200 OHNE Petitionsinhalt ist kein Beleg für "verschwunden": das
     # Portal liefert bei Störungen/Sperren ebenfalls 200 mit Fehlerseite.
-    # Solche Antworten daher als Fehler behandeln (Datensatz unverändert),
+    # Solche Antworten daher als ungeklärt behandeln (Datensatz unverändert),
     # NICHT als offline – sonst kippt ein Ausfall den ganzen Bestand.
-    if "Petition No" not in resp.text:
+    if SPRACHE[lang]["titel_marker"] not in resp.text:
+        return "ungeklärt", None
+    return "vorhanden", parse_detail(resp.text, url, slug, lang)
+
+
+def scrape_petition(fetcher: core.Fetcher, slug: str) -> tuple[str, dict | None]:
+    """Hauptsprache holen, danach die übrigen Sprachen nach rec["i18n"].
+
+    Die Hauptsprache entscheidet über den Datensatz: fehlt sie, gibt es nichts
+    auszuliefern. Eine fehlgeschlagene Fremdsprache kostet dagegen nur die
+    Übersetzung, nie den Satz."""
+    zustand, rec = _hole_sprache(fetcher, slug, HAUPTSPRACHE)
+    if zustand == "fehlt":
+        return "offline", None
+    if zustand != "vorhanden":
         log(f"  unerwartete Antwort für {slug} (kein Petitionstext) – "
             "als Fehler gewertet, Datensatz bleibt unverändert.")
         return "error", None
-    return "online", parse_detail(resp.text, url, slug)
+
+    rec["lang"] = HAUPTSPRACHE
+    i18n: dict[str, dict] = {}
+    i18n_state: dict[str, str] = {}
+    for lang in SPRACHEN:
+        if lang == HAUPTSPRACHE:
+            continue
+        st, fremd = _hole_sprache(fetcher, slug, lang)
+        i18n_state[lang] = st
+        if fremd:
+            block = {k: fremd[k] for k in I18N_FELDER if fremd.get(k)}
+            if block:
+                i18n[lang] = block
+    if i18n:
+        rec["i18n"] = i18n
+    if i18n_state:
+        rec["i18n_state"] = i18n_state
+    return "online", rec
 
 
 # ----------------------------------------------------------------------------
@@ -249,14 +389,18 @@ def check(fetcher):
 
 PLATFORM = Platform(
     key="europarl",
-    language="en",   # PETI-Petitionstexte sind auf Englisch
+    # Bis zum 8.8.2026 stand hier "en" mit der Begründung "PETI-Petitionstexte
+    # sind auf Englisch". Das stimmte nur für UNSEREN Abruf: das EU-Parlament
+    # veröffentlicht in allen 24 Amtssprachen, wir holten bloß /en/. Seit der
+    # Umstellung ist Deutsch die Hauptsprache, Englisch liegt in rec["i18n"].
+    language="de",
     openness=4,
     openness_note="Offen: offizielle Suche mit Länder-/Statusfilter, server-"
                   "gerendert; Eigenheiten (Load-more-Paginierung, doppelt kodierte "
                   "URLs) und keine öffentliche Unterstützerzahl.",
     name="Europäisches Parlament",
     eyebrow="EU-Parlament (PETI) · Petitionen aus Deutschland, offen zur Unterstützung",
-    source_url="https://www.europarl.europa.eu/petitions/en/home",
+    source_url="https://www.europarl.europa.eu/petitions/de/home",
     data_file=DATA_FILE,
     html_file=HTML_FILE,
     run=run,

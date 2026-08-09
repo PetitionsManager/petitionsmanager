@@ -27,6 +27,7 @@ from pathlib import Path
 
 from bs4 import BeautifulSoup
 
+import i18n_helfer as i18n
 import petitions_core as core
 from petitions_core import Platform, log, now_iso, prog, sanitize_fragment
 
@@ -66,6 +67,14 @@ def discover_slugs(fetcher: core.Fetcher) -> dict[str, dict]:
     log(f"Übersicht: {len(found)} Aktionen gefunden.")
     prog(current=1, total=1,
          message=f"Übersicht geprüft · {len(found)} Aktionen")
+    # Diese eine Seite IST die gesamte Entdeckung — es gibt keinen zweiten
+    # Zweig, der einen Ausfall auffangen (und damit verdecken) würde.
+    # Schwelle gemessen am 8.8.2026: die Übersicht lieferte 15 Aktionen. 3 liegt
+    # tief genug, dass ein normales Auslaufen von Kampagnen nie meldet, fängt
+    # aber den realistischen Teilausfall: nach einem Markup-Umbau passt das
+    # Muster nur noch auf einzelne Treffer statt auf alle.
+    core.entdeckung("Mitmachen-Übersicht", len(found), erwartet_min=3,
+                    name_en="campaign overview page")
     return found
 
 
@@ -137,7 +146,97 @@ def scrape_petition(fetcher: core.Fetcher, slug: str) -> tuple[str, dict | None]
     rec = parse_detail(resp.text, url)
     if rec.get("signatures") is None:
         return "skip", None
+    _fremdsprachen_holen(fetcher, rec, slug)
     return "online", rec
+
+
+# ---------------------------------------------------------------------------
+# SPRACHFASSUNGEN
+#
+# foodwatch betreibt Länderseiten (/de/ /en/ /fr/ /nl/ /at/, laut robots.txt).
+# ⚠️ Die englische Fassung hat einen EIGENEN Slug UND ein anderes Wegstück:
+# /de/mitmachen/aspartam-verbieten ↔ /en/no-to-aspartame-in-our-food-and-drinks
+# — kein /mitmachen/, kein gemeinsamer Wortstamm. Ein simpler Tausch des
+# Sprachsegments ergibt 404 (am 8.8.2026 geprüft). Es gibt also KEINEN
+# ableitbaren Weg und auch keine gemeinsame Kampagnen-ID: die Formular-IDs
+# unterscheiden sich (action-form-tel-de-53262 gegen action-form-en-50163).
+#
+# ⚠️⚠️ WAS BLEIBT, IST EINE HEURISTIK: der UNTERSCHRIFTENZÄHLER ist auf beiden
+# Seiten identisch und zeitgleich (Aspartam 401.614/401.614, Mineralöl
+# 157.331/157.331). Das ist ein starkes, aber kein zwingendes Merkmal — zwei
+# verschiedene Aktionen KÖNNTEN denselben Stand haben. Deshalb:
+#   · zugeordnet wird nur, wenn der Stand im englischen Baum GENAU EINMAL
+#     vorkommt; bei zwei Kandidaten wird nichts geraten
+#   · Zähler unter MIN_ZAEHLER bleiben außen vor, weil kleine Zahlen leicht
+#     zufällig zusammenfallen
+# Von den 15 laufenden Aktionen hatten am 8.8.2026 fünf einen englischen
+# Zwilling. Eine englische Aktion (/en/supermarkets-stop-the-toxic-harvest)
+# hat KEINE deutsche Entsprechung — die Zuordnung ist also nicht 1:1.
+EN_LIST_URL = f"{BASE_URL}/en"
+MIN_ZAEHLER = 1000
+FREMDSPRACHEN = ("en",)
+_EN_INDEX: dict[str, dict[int, str]] = {}
+
+
+def _en_index(fetcher: core.Fetcher) -> dict[int, str]:
+    """{unterschriften: slug} des englischen Baums, einmal je Lauf geholt.
+
+    Mehrdeutige Stände (zweimal derselbe Zähler) fliegen ganz heraus — lieber
+    keine Zuordnung als eine falsche."""
+    if "en" in _EN_INDEX:
+        return _EN_INDEX["en"]
+    index: dict[int, str] = {}
+    doppelt: set[int] = set()
+    resp = fetcher.get(EN_LIST_URL)
+    if resp is not None and resp.ok:
+        slugs = {m.rsplit("/", 1)[-1]
+                 for m in re.findall(r'href="(/en/[a-z0-9\-]+)"', resp.text)}
+        for slug in sorted(slugs):
+            r2 = fetcher.get(f"{BASE_URL}/en/{slug}")
+            if r2 is None or not r2.ok:
+                continue
+            rec = parse_detail(r2.text, f"{BASE_URL}/en/{slug}")
+            zahl = rec.get("signatures")
+            if not isinstance(zahl, int) or zahl < MIN_ZAEHLER:
+                continue
+            if zahl in index:
+                doppelt.add(zahl)
+            index[zahl] = slug
+    for z in doppelt:
+        index.pop(z, None)
+    log(f"Englischer Baum: {len(index)} eindeutige Zählerstände"
+        + (f", {len(doppelt)} mehrdeutige verworfen" if doppelt else ""))
+    _EN_INDEX["en"] = index
+    return index
+
+
+def _fremdsprachen_holen(fetcher: core.Fetcher, rec: dict, slug: str) -> None:
+    i18n.setze_hauptsprache(rec, "de")
+    for lang in FREMDSPRACHEN:
+        zahl = rec.get("signatures")
+        if not isinstance(zahl, int) or zahl < MIN_ZAEHLER:
+            i18n.setze_sprachfassung(rec, lang, "ungeklärt")
+            continue
+        fremd_slug = _en_index(fetcher).get(zahl)
+        if not fremd_slug:
+            # Kein Zwilling mit gleichem Stand. Das heißt NICHT sicher „gibt es
+            # nicht" — der Stand kann sich zwischen beiden Abrufen bewegt
+            # haben. Deshalb ungeklärt und kein Abzeichen in der App.
+            i18n.setze_sprachfassung(rec, lang, "ungeklärt")
+            continue
+        url = f"{BASE_URL}/en/{fremd_slug}"
+        resp = fetcher.get(url)
+        if resp is None or not resp.ok:
+            i18n.setze_sprachfassung(rec, lang, "ungeklärt")
+            continue
+        fremd = parse_detail(resp.text, url)
+        if (fremd.get("title") or "").strip():
+            i18n.setze_sprachfassung(rec, lang, "vorhanden", fremd)
+            # Erst JETZT gibt es eine belastbare gemeinsame Kennung: das Paar
+            # ist über den Zähler belegt, nicht bloß vermutet.
+            rec["campaign_id"] = f"foodwatch:{slug}"
+        else:
+            i18n.setze_sprachfassung(rec, lang, "ungeklärt")
 
 
 # ----------------------------------------------------------------------------

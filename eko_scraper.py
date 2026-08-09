@@ -63,6 +63,7 @@ from pathlib import Path
 
 from bs4 import BeautifulSoup
 
+import i18n_helfer as i18n
 import petitions_core as core
 from petitions_core import Platform, log, now_iso, prog, sanitize_fragment
 
@@ -212,6 +213,16 @@ def discover_slugs(fetcher: core.Fetcher) -> dict[str, dict]:
     german = sum(1 for d in found.values() if d.get("german"))
     log(f"Kampagnen-Suche: {len(found)} eindeutige Aktionen gefunden "
         f"({german} davon deutschsprachig).")
+    # Der Zweig bündelt 26 Abrufe (Startseite + 25 Suchbegriffe) und hat mit
+    # _parse_card und ACTION_HREF_RE zwei Ebenen — fällt die Karte aus, fängt
+    # das Muster noch etwas auf. Genau das macht einen Teilausfall hier LEISE:
+    # es kommt weiter etwas, nur viel weniger.
+    # Schwelle gemessen am 8.8.2026: 42 eindeutige Aktionen. 5 ist bewusst weit
+    # darunter — die Zahl schwankt mit dem Kampagnenbestand, aber dass 26
+    # Abfragen zusammen unter 5 Treffer ergeben, ist kein Kampagnenstand mehr,
+    # sondern ein Defekt.
+    core.entdeckung("Kampagnen-Suche", len(found), erwartet_min=5,
+                    name_en="campaign search")
     return found
 
 
@@ -240,6 +251,47 @@ def _meta(soup: BeautifulSoup, prop: str) -> str | None:
     if tag and tag.get("content"):
         return tag["content"].strip()
     return None
+
+
+# ---------------------------------------------------------------------------
+# SPRACHFASSUNGEN — bei Ekō gibt es KEINEN Weg zur Übersetzung, nur eine Klammer
+#
+# Am 8.8.2026 durchgemessen: Ekō führt dieselbe Kampagne in mehreren Sprachen,
+# aber sie ist von der deutschen Seite aus NICHT erreichbar.
+#   · kein Sprachsegment, kein Sprachsuffix — der englische Slug ist frei
+#     formuliert (nestle-osceola-wasser ↔ nestle-drop-your-plans-in-osceola-township)
+#   · kein Sprachumschalter auf der Aktionsseite: 0 hreflang, 0 og:locale,
+#     kein „English"-Link. hreflang gibt es nur auf eko.org/de/campaigns, und
+#     zwar für die LISTE, nicht je Petition
+#   · Accept-Language ändert nichts (dreimal 57.889 Byte, I18n.locale bleibt de)
+#   · kein Index und kein API: /api/campaigns/<id> leitet auf die Startseite um,
+#     /api/pages/<id> antwortet mit HTTP 500
+#
+# Verbindend ist allein die `campaign_id` im eingebetteten Seiten-JSON: die
+# deutsche und die englische Fassung von Kampagne 91 tragen beide 91. Sie wird
+# deshalb hier mitgeschrieben — dann verknüpft publish._uebersetzungen_verknuepfen
+# die beiden Sätze, FALLS je beide in den Bestand geraten. Aktiv suchen kann
+# der Scraper die Übersetzung nicht.
+#
+# ⚠️ Die Kennung fehlt bei rund 44 % der Seiten (59 gescannt, 30 mit Wert, 24
+# mit null). Ohne sie bleibt der Satz einsprachig — das ist kein Fehler.
+#
+# ⚠️ Und der Bot-Schutz steht ohnehin davor: actions.eko.org (Plural) leitet
+# per 301 auf action.eko.org (Singular, Vercel), und dort antwortet der
+# Checkpoint mit HTTP 429. Der Weg über die numerische Seiten-ID sah zunächst
+# wie eine Umgehung aus, ist es aber nicht — auf dem neuen Host ist die ID
+# ebenfalls 429. Der Checkpoint wird NICHT umgangen.
+CAMPAIGN_ID_RE = re.compile(r'"campaign_id"\s*:\s*(\d+)')
+
+
+def _kampagne_aus_html(html: str, props: dict | None = None) -> str | None:
+    """Gemeinsame Kennung der Sprachfassungen, wenn die Seite eine nennt."""
+    if props:
+        wert = props.get("campaign_id")
+        if wert:
+            return f"eko:{wert}"
+    m = CAMPAIGN_ID_RE.search(html)
+    return f"eko:{m.group(1)}" if m else None
 
 
 def parse_detail(html: str, url: str) -> dict | None:
@@ -349,6 +401,15 @@ def scrape_petition(fetcher: core.Fetcher, slug: str) -> tuple[str, dict | None]
     rec = parse_detail(resp.text, url)
     if rec is None:
         return "skip", None
+    i18n.setze_hauptsprache(rec, "de")
+    kennung = _kampagne_aus_html(resp.text)
+    if kennung:
+        rec["campaign_id"] = kennung
+    # „ungeklärt" und nicht „fehlt": dass wir die englische Fassung nicht finden
+    # KÖNNEN, ist eine Aussage über uns, nicht über Ekō. Kampagne 91 hat
+    # nachweislich eine (nestle-drop-your-plans-in-osceola-township) — sie ist
+    # von hier aus nur nicht adressierbar. Die App zeigt deshalb kein Abzeichen.
+    i18n.setze_sprachfassung(rec, "en", "ungeklärt")
     return "online", rec
 
 

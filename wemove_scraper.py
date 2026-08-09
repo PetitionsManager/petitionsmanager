@@ -34,6 +34,7 @@ from pathlib import Path
 
 from bs4 import BeautifulSoup
 
+import i18n_helfer as i18n
 import petitions_core as core
 from petitions_core import Platform, log, now_iso, prog, sanitize_fragment
 
@@ -125,6 +126,44 @@ def discover_slugs(fetcher: core.Fetcher) -> dict[str, dict]:
 # ----------------------------------------------------------------------------
 # Detailseite + Live-Zähler
 # ----------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# SPRACHFASSUNGEN
+#
+# Jeder WeMove-Slug endet auf ein Sprachkürzel; im Bestand vom 8.8.2026 tragen
+# ALLE 261 die Endung „-DE". Tauscht man sie gegen „-EN", antwortet dieselbe
+# Kampagne auf Englisch — an zehn zufälligen Sätzen geprüft, neun lieferten
+# eine echte Übersetzung („Stoppen Sie Volkswagens gefährlichen neuen Deal" →
+# „Stop Volkswagen's dangerous new deal", html lang de → en). Der zehnte war
+# ein kaputter Slug (2024-5--DE), der in BEIDEN Sprachen 404 liefert.
+#
+# ⚠️ KOSTEN: das VERDOPPELT die Detailabrufe, und action.wemove.eu schaltet
+# nach einigen Dutzend Abrufen einen Checkpoint davor (siehe scrape_petition).
+# Deshalb der Schalter unten: er lässt sich abstellen, ohne den Code
+# anzufassen, und DETAIL_BUDGET in run() begrenzt weiterhin den ganzen Lauf.
+SPRACHSUFFIX = "-DE"
+FREMDSPRACHEN = ("en",)
+SUFFIX_JE_SPRACHE = {"en": "-EN"}
+WARUM_UEBERSCHRIFT = {
+    "de": "Warum ist das wichtig?",
+    "en": "Why is this important?",
+}
+
+
+def _fremd_slug(page: str, lang: str) -> str | None:
+    """Slug der Fremdsprache, oder None wenn der Slug nicht dem Muster folgt."""
+    suffix = SUFFIX_JE_SPRACHE.get(lang)
+    if not suffix or not page.upper().endswith(SPRACHSUFFIX):
+        return None
+    return page[:-len(SPRACHSUFFIX)] + suffix
+
+
+def _kampagne(page: str) -> str:
+    """Gemeinsame Kennung aller Sprachfassungen: der Slug OHNE Sprachkürzel."""
+    rumpf = page[:-len(SPRACHSUFFIX)] if page.upper().endswith(SPRACHSUFFIX) \
+        else page
+    return f"wemove:{rumpf}"
+
+
 def _meta(soup: BeautifulSoup, prop: str) -> str | None:
     tag = (soup.find("meta", property=prop)
            or soup.find("meta", attrs={"name": prop}))
@@ -133,7 +172,7 @@ def _meta(soup: BeautifulSoup, prop: str) -> str | None:
     return None
 
 
-def parse_detail(html: str, url: str, page: str) -> dict:
+def parse_detail(html: str, url: str, page: str, lang: str = "de") -> dict:
     soup = BeautifulSoup(html, "html.parser")
     rec: dict = {}
 
@@ -158,7 +197,13 @@ def parse_detail(html: str, url: str, page: str) -> dict:
         parts.append(sanitize_fragment(art, BASE_URL))
     why = soup.select_one(".why-is-important--text")
     if why:
-        parts.append("<h3>Warum ist das wichtig?</h3>")
+        # ⚠️ Diese Zwischenüberschrift steht NICHT auf der Seite, wir setzen sie
+        # selbst. Sie muss deshalb der Sprache des Textes folgen, den sie
+        # überschreibt — sonst steht ein deutscher Satz über einem englischen
+        # Absatz. WeMove selbst nennt den Abschnitt auf der englischen Seite
+        # „Why is this important?".
+        parts.append("<h3>" + WARUM_UEBERSCHRIFT.get(lang,
+                     WARUM_UEBERSCHRIFT["de"]) + "</h3>")
         parts.append(sanitize_fragment(why, BASE_URL))
     rec["description_full"] = "\n".join(p for p in parts if p) or None
     if art:
@@ -240,7 +285,47 @@ def scrape_petition(fetcher: core.Fetcher, page: str) -> tuple[str, dict | None]
     if sig is not None:
         rec["signatures"] = sig
         rec["goal"] = _goal_for(sig)
+
+    i18n.setze_hauptsprache(rec, "de")
+    rec["campaign_id"] = _kampagne(page)
+    _fremdsprachen_holen(fetcher, rec, page)
     return "online", rec
+
+
+def _fremdsprachen_holen(fetcher: core.Fetcher, rec: dict, page: str) -> None:
+    """Die übrigen Sprachfassungen an `rec` hängen.
+
+    Fehlschläge kosten hier nur die Übersetzung, nie den Datensatz — die
+    deutsche Fassung steht zu diesem Zeitpunkt schon fest. Der Zustand wird
+    trotzdem festgehalten, weil „abgerufen und nicht vorhanden" etwas anderes
+    ist als „nicht abgerufen"; nur das Erste rechtfertigt das Abzeichen in der
+    App (siehe i18n_helfer)."""
+    for lang in FREMDSPRACHEN:
+        fremd_page = _fremd_slug(page, lang)
+        if not fremd_page:
+            i18n.setze_sprachfassung(rec, lang, "ungeklärt")
+            continue
+        url = f"{BASE_URL}/sign/{fremd_page}"
+        resp = fetcher.get(url)
+        if resp is None or not resp.ok:
+            i18n.setze_sprachfassung(
+                rec, lang,
+                "fehlt" if resp is not None
+                and resp.status_code in (404, 410) else "ungeklärt")
+            continue
+        fremd = parse_detail(resp.text, url, fremd_page, lang)
+        hat_h1 = fremd.pop("_hat_h1", False)
+        f_titel = (fremd.get("title") or "").strip()
+        # Dieselbe Messlatte wie oben für die deutsche Seite: ohne <h1> ist es
+        # der Checkpoint (ungeklärt), mit <h1> aber ohne brauchbaren Titel ist
+        # es eine unfertige ActionKit-Seite — die gibt es dann wirklich nicht
+        # als lesbare Kampagne.
+        if not hat_h1:
+            i18n.setze_sprachfassung(rec, lang, "ungeklärt")
+        elif not f_titel or PLATZHALTER_TITEL_RE.match(f_titel):
+            i18n.setze_sprachfassung(rec, lang, "fehlt")
+        else:
+            i18n.setze_sprachfassung(rec, lang, "vorhanden", fremd)
 
 
 # ----------------------------------------------------------------------------

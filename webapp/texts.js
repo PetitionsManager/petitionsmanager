@@ -161,6 +161,16 @@ window.PM_TEXTS = {
       closed: "beendet",
       closedOn: "beendet {datum}",
       noTitle: "(ohne Titel)",
+      /* Abzeichen ueber dem Petitionstext, wenn die gewaehlte Sprache bei der
+         Plattform NICHT vorliegt. Bewusst "Fassung auf X" und nicht
+         "uebersetzt aus X": wir uebersetzen nichts — WeMove, Avaaz und das
+         EU-Parlament veroeffentlichen beide Fassungen selbst. Erscheint nur,
+         wenn der Scraper nachgesehen HAT (i18n_state == "fehlt"); ein bloss
+         leeres Feld ist kein Beleg fuer eine fehlende Fassung. */
+      langFallback: "Fassung auf {sprache}",
+      langFallbackHint: "In der gewählten Sprache liegt diese Petition bei " +
+        "{plattform} nicht vor. Angezeigt wird der Text der Plattform auf " +
+        "{sprache}.",
       startTitle: "Start der Petition",
       openExternAria: "Petition extern öffnen",
       summary: "Kurzbeschreibung",
@@ -175,6 +185,11 @@ window.PM_TEXTS = {
       similarNone: "Keine ähnlichen Petitionen gefunden.",
       similarSearching: "Suche über alle Plattformen …",
       similarSame: "gleich",
+      /* ⚠️ NICHT dasselbe wie "gleich": "gleich" leitet sich aus einem
+         Ähnlichkeitswert ab und kann irren, "Übersetzung" stammt aus einer
+         ausdrücklichen Kennung der Quelle (gleiche Kampagnennummer, gleicher
+         Slug, verlinkter Sprachwechsel). */
+      similarTranslation: "Übersetzung ({sprache})",
       similarMore: "Mehr anzeigen ({n})",
       notInData: "Diese Petition steht nicht mehr in den Daten dieser Plattform. Vermutlich hat sich ihre Adresse geändert.",
       /* Der ausfuehrliche Wisch-Hinweis ueber der Liste. Bleibt EIN Text
@@ -713,6 +728,10 @@ window.PM_TEXTS = {
       closed: "closed",
       closedOn: "closed {datum}",
       noTitle: "(untitled)",
+      langFallback: "{sprache} version",
+      langFallbackHint: "This petition is not available from {plattform} in " +
+        "the language you selected. Shown is the platform's own text in " +
+        "{sprache}.",
       startTitle: "Start of the petition",
       openExternAria: "Open petition externally",
       summary: "Summary",
@@ -727,6 +746,7 @@ window.PM_TEXTS = {
       similarNone: "No similar petitions found.",
       similarSearching: "Searching all platforms…",
       similarSame: "same",
+      similarTranslation: "Translation ({sprache})",
       similarMore: "Show more ({n})",
       notInData: "This petition is no longer in this platform's data. Its address has probably changed.",
       swipeHintHtml: "Swipe a petition to the <b>right</b> to mark it as “signed”. <span class=\"hint-note\"><b>Important:</b> that does <u>not</u> sign it automatically – you have to do that yourself on the platform in question.</span> Swiping to the <b>left</b> archives the petition.",

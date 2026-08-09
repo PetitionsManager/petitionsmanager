@@ -57,6 +57,7 @@ from pathlib import Path
 
 from bs4 import BeautifulSoup
 
+import i18n_helfer as i18n
 import petitions_core as core
 from petitions_core import Platform, log, now_iso, prog, sanitize_fragment
 
@@ -217,6 +218,19 @@ def discover_slugs(fetcher: core.Fetcher) -> tuple[dict[str, dict], set[str]]:
              message=f"{label} geprüft · {len(found)} Petitionen, "
                      f"{len(campaigns)} Kampagnen bisher")
 
+    # Beide Zweige bleiben bewusst auf der Standardschwelle 1, also „meldet nur
+    # den Totalausfall". Gemessen am 8.8.2026: 7 Petitionen, 7 Kampagnen –
+    # Avaaz zeigt öffentlich nur kuratierte Inhalte, der Bestand wächst per
+    # Upsert. Bei einstelligen Zahlen ist jede höhere Schwelle geraten: aus 7
+    # können morgen legitim 3 werden, und eine Warnung, die bei normaler
+    # Kuratierung anschlägt, entwertet die echten Warnungen daneben. Was hier
+    # zählt, ist der Sprung auf null.
+    core.entdeckung("Petitions-Quellen", len(found),
+                    name_en="petition sources")
+    # Die Kampagnen hängen an EINER Quelle (nur die Startseite verlinkt sie) –
+    # der Zweig kann still verschwinden, ohne dass die Petitionen es zeigen.
+    core.entdeckung("Avaaz-eigene Kampagnen", len(campaigns),
+                    name_en="Avaaz’s own campaigns")
     return found, campaigns
 
 
@@ -404,6 +418,67 @@ def ungueltige_seite(html: str, url: str) -> bool:
     return bool(m and m.group(1).rstrip("/") != url.rstrip("/"))
 
 
+# ---------------------------------------------------------------------------
+# SPRACHFASSUNGEN
+#
+# Avaaz führt die Sprache als Segment im Pfad, und zwar in BEIDEN Adressformen:
+# /community_petitions/de/<slug>/ und /campaign/de/<slug>/. Der Slug selbst
+# bleibt in allen Sprachen gleich — er ist damit die gemeinsame Kennung.
+# Am 8.8.2026 an je einer live Petition geprüft:
+#   /campaign/de/land_rights_evergreen_2026/
+#       „Lula da Silvas Unterschrift für unseren Planeten"
+#   /campaign/en/land_rights_evergreen_2026/
+#       „Lula's Signature to Protect Our Planet"
+#   /community_petitions/de/Stand_with_the_Philippines/
+#       „Seite an Seite mit den Philippinen"
+#   /community_petitions/en/Stand_with_the_Philippines/
+#       „Stand with the Philippines"
+#
+# ⚠️ EIN ERSTER VERSUCH SCHLUG FEHL UND WAR TROTZDEM KEIN GEGENBEWEIS: die
+# Probe traf eine GELÖSCHTE Petition, die in beiden Sprachen 404 lieferte. Wer
+# hier misst, muss einen Satz mit status == "online" nehmen.
+#
+# ⚠️ Und Avaaz beantwortet einen ungültigen Slug nicht immer mit 404, sondern
+# teils mit HTTP 200 und einer 503 Byte großen Weiterleitungshülle. Deshalb
+# läuft die Fremdsprache durch dieselbe ungueltige_seite()-Prüfung wie die
+# Hauptsprache — sonst landete die Übersichtsseite als „englische Fassung" im
+# Datensatz.
+FREMDSPRACHEN = ("en",)
+
+
+def _fremdsprachen_holen(fetcher: core.Fetcher, rec: dict, slug: str,
+                         bereich: str, parser) -> None:
+    """Die übrigen Sprachfassungen an `rec` hängen.
+
+    `bereich` ist „community_petitions" oder „campaign", `parser` der passende
+    Parser — die beiden Seitenformen sind verschieden aufgebaut, die
+    Sprachlogik ist dieselbe."""
+    i18n.setze_hauptsprache(rec, "de")
+    rec["campaign_id"] = f"avaaz:{bereich}:{slug}"
+    for lang in FREMDSPRACHEN:
+        url = f"{BASE_URL}/{bereich}/{lang}/{slug}/"
+        resp = fetcher.get(url)
+        if resp is None:
+            i18n.setze_sprachfassung(rec, lang, "ungeklärt")
+            continue
+        if resp.status_code in (404, 410):
+            i18n.setze_sprachfassung(rec, lang, "fehlt")
+            continue
+        if not resp.ok:
+            i18n.setze_sprachfassung(rec, lang, "ungeklärt")
+            continue
+        if ungueltige_seite(resp.text, url):
+            # Die Hülle „This page is not valid" — die Sprachfassung gibt es
+            # nicht. Das ist ein Befund, kein Fehler.
+            i18n.setze_sprachfassung(rec, lang, "fehlt")
+            continue
+        fremd = parser(resp.text, url)
+        if (fremd.get("title") or "").strip():
+            i18n.setze_sprachfassung(rec, lang, "vorhanden", fremd)
+        else:
+            i18n.setze_sprachfassung(rec, lang, "ungeklärt")
+
+
 def scrape_petition(fetcher: core.Fetcher, slug: str) -> tuple[str, dict | None]:
     """(status, record) – status: online | offline | error | skip.
 
@@ -428,6 +503,8 @@ def scrape_petition(fetcher: core.Fetcher, slug: str) -> tuple[str, dict | None]
         if sig is not None:
             rec["signatures"] = sig
             rec["goal"] = _goal_for(sig)
+    _fremdsprachen_holen(fetcher, rec, slug, "community_petitions",
+                         parse_detail)
     return "online", rec
 
 
@@ -436,7 +513,20 @@ def scrape_petition(fetcher: core.Fetcher, slug: str) -> tuple[str, dict | None]
 # ----------------------------------------------------------------------------
 # h1-Texte, die KEIN Kampagnentitel sind: Im "Offener Brief"-Layout mancher
 # Kampagnen ist das einzige h1 die Überschrift der Teilen-Sektion.
-_GENERIC_H1 = {"weitersagen", "teilen", "share", "jetzt unterschreiben"}
+#
+# ⚠️ Diese Liste war bis zum 8.8.2026 rein DEUTSCH — und fiel genau in dem
+# Moment auf, als der Scraper anfing, auch die englische Seite zu holen:
+# /campaign/en/land_rights_evergreen_2026/ lieferte als Titel „Tell Your
+# Friends", also die Überschrift des Teilen-Blocks, während die deutsche Seite
+# („WEITERSAGEN") sauber gefiltert wurde. Wer hier eine Sprache ergänzt, muss
+# ihre Entsprechungen mit aufnehmen, sonst wandert eine Bedienbeschriftung als
+# Petitionstitel in die App.
+_GENERIC_H1 = {
+    # deutsch
+    "weitersagen", "teilen", "jetzt unterschreiben",
+    # englisch
+    "share", "tell your friends", "sign now", "sign the petition",
+}
 
 
 # Bausteine der Seitenform „Offener Brief". Avaaz benutzt sie für einen Teil
@@ -570,6 +660,7 @@ def scrape_campaign(fetcher: core.Fetcher, slug: str) -> tuple[str, dict | None]
     if sig is not None:
         rec["signatures"] = sig
         rec["goal"] = target if target else _goal_for(sig)
+    _fremdsprachen_holen(fetcher, rec, slug, "campaign", parse_campaign)
     return "online", rec
 
 

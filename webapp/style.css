@@ -817,6 +817,17 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
   border-radius:.75rem;padding:.75rem .875rem;font-size:.8125rem;
   line-height:1.45}
 
+/* Abzeichen „Fassung auf X" – ganz oben im aufgeklappten Bereich, wenn die
+   Petition in der gewählten Sprache bei der Plattform nicht vorliegt.
+   Bewusst zurückhaltend wie .pet__desc-note und nicht wie .tag: es ist eine
+   Herkunftsangabe, kein Bedienelement. Erklärt wird es über title/aria-label,
+   deshalb cursor:help statt pointer. */
+.pet__langbadge{display:inline-flex;align-items:center;gap:.375rem;
+  background:var(--bg);color:var(--muted);border:.0625rem solid var(--line);
+  border-radius:999px;padding:.25rem .625rem;margin:0 0 .75rem;
+  font-size:.75rem;line-height:1.3;cursor:help}
+.pet__langbadge .fa-circle-info{opacity:.65}
+
 /* Hier stand eine dritte, ungenutzte .chip-Regel. Es gibt genau ZWEI
    Chip-Familien, und sie sind bewusst verschieden: die kleinen im Bedienfeld
    (.chiprow) und die großen im Onboarding (.wiz__chips). Beide hießen einfach
@@ -995,6 +1006,14 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
   color:var(--on-hot);font-size:.625rem;font-weight:800;letter-spacing:.03em;
   text-transform:uppercase;border-radius:999px;padding:.0625rem .4375rem;
   vertical-align:middle}
+/* „Übersetzung" muss sich von „gleich" auf den ersten Blick unterscheiden:
+   „gleich" ist geraten (Ähnlichkeitswert ≥ 0,8), die Übersetzung ist belegt
+   (gemeinsame Kennung der Quelle). Deshalb dieselbe Form, aber ruhiger Umriss
+   statt Signalfarbe — die Aussage ist sicherer, nicht lauter. */
+.sim-trans{display:inline-block;margin-left:.4375rem;background:transparent;
+  color:var(--accent);border:.0625rem solid currentColor;font-size:.625rem;
+  font-weight:800;letter-spacing:.03em;text-transform:uppercase;
+  border-radius:999px;padding:0 .375rem;vertical-align:middle}
 .filterbar{display:flex;align-items:center;flex-wrap:wrap;gap:.625rem;
   background:var(--accent-soft);border-radius:1rem;
   padding:.875rem .875rem .875rem 1rem;margin-bottom:.75rem}

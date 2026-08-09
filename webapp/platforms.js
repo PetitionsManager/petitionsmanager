@@ -474,7 +474,21 @@ window.PM_PLATFORMS_EN = {
     "Petitionsausschuss (Kontakt)": "Petitions Committee (contact)"
   },
 
+  /* ---- name / opennessNote (8.8.2026) -------------------------------------
+     Diese beiden Felder stammen sonst aus dem MANIFEST, das der Scraper
+     erzeugt — also serverseitig und einsprachig deutsch. In der englischen
+     Oberflaeche stand deshalb "Europaeisches Parlament" mitten im englischen
+     Satz, und die elf "Fuer Nerds"-Saetze blieben komplett deutsch.
+
+     `name` steht nur da, wo der deutsche Name ein GATTUNGSBEGRIFF ist
+     (Europaeisches Parlament, Bundestag ePetitionen). Marken bleiben, wie sie
+     sind: WeAct, Avaaz, Change.org, Eko, Innn.it, WeMove Europe, foodwatch,
+     350.org und OpenPetition heissen auf Englisch genauso. Was hier fehlt,
+     faellt wie ueberall in diesem Block auf das Deutsche zurueck. */
   weact: {
+    opennessNote: "Open: complete listings via categories + pagination, but " +
+      "technical hurdles (custom elements instead of links, a hidden cpage " +
+      "parameter, two different page templates).",
     wikipedia: "https://en.wikipedia.org/wiki/Campact",
     tagline: "Petition platform run by Campact",
     about: {
@@ -485,6 +499,7 @@ window.PM_PLATFORMS_EN = {
   },
 
   openpetition: {
+    opennessNote: "Exemplary: complete public listing (~1,600, paginated), everything server-rendered (count, target, status, full text), generous robots.txt with sitemap.",
     tagline: "Citizens' platform for petitions",
     about: {
       text: "OpenPetition is a non-profit online platform where citizens can start and sign petitions on political, social and local issues. The platform is run by openPetition gGmbH and sees itself as independent, ad-free infrastructure for democratic participation. It is one of the most widely used petition platforms in the German-speaking world.",
@@ -494,6 +509,7 @@ window.PM_PLATFORMS_EN = {
   },
 
   changeorg: {
+    opennessNote: "Moderate: German topic pages /t/<slug> return curated petitions (~21 each; \u201eShow more\u201c goes through the robots-blocked /api-proxy/ and stays out of reach), supplemented by sitemap heuristics. The petition pages themselves are freely accessible.",
     wikipedia: "https://en.wikipedia.org/wiki/Change.org",
     tagline: "Global petition platform",
     about: {
@@ -504,6 +520,7 @@ window.PM_PLATFORMS_EN = {
   },
 
   innnit: {
+    opennessNote: "Moderate: a complete listing exists, but only through a hidden internal API (found by reverse engineering); no sitemap, search is merely a redirect to Google. In return the API delivers complete records including the full text.",
     tagline: "Petitions for Germany",
     about: {
       text: "innn.it is a non-profit petition platform focusing on German political and social issues. The supporting association innn.it e. V. was founded in 2022 as an independent organization, after the platform had at first been run within the Change.org network. It is funded entirely by donations.",
@@ -513,6 +530,7 @@ window.PM_PLATFORMS_EN = {
   },
 
   avaaz: {
+    opennessNote: "Limited: no public overall listing (only ~5-10 curated/popular/new ones), counts only via a stats JSON, Cloudflare blocks non-browser clients. Older campaigns come in through the Internet Archive (--archive), in portions across several runs.",
     wikipedia: "https://en.wikipedia.org/wiki/Avaaz",
     tagline: "Global citizens' movement",
     about: {
@@ -523,6 +541,8 @@ window.PM_PLATFORMS_EN = {
   },
 
   bundestag: {
+    name: "Bundestag e-Petitions",
+    opennessNote: "Limited: official data, but a JS portal with session cookies and a hidden AJAX fragment (the status.2 parameter is required, batch size is capped) \u2014 not accessible without reverse engineering.",
     tagline: "Official petitions to the Bundestag",
     about: {
       text: "The ePetitions portal of the German Bundestag lets citizens address official petitions to the Petitions Committee. Public petitions can be co-signed online and, from 50,000 co-signatures within four weeks, lead to a public session of the committee. The portal is run by the German Bundestag as a state institution.",
@@ -535,6 +555,8 @@ window.PM_PLATFORMS_EN = {
   },
 
   europarl: {
+    name: "European Parliament",
+    opennessNote: "Open: official search with country and status filters, server-rendered; quirks (load-more pagination, doubly encoded URLs) and no public supporter count.",
     wikipedia: "https://en.wikipedia.org/wiki/European_Parliament_Committee_on_Petitions",
     tagline: "Petitions to the EU Parliament",
     about: {
@@ -546,6 +568,7 @@ window.PM_PLATFORMS_EN = {
   },
 
   wemove: {
+    opennessNote: "Moderate: campaigns including the archive are linked, but counts only come from a separate progress endpoint, and responses are throttled on series of requests.",
     tagline: "European citizens' movement",
     about: {
       text: "WeMove Europe is a European citizens' movement campaigning for democracy, climate justice and social rights in the EU. The organization was founded in 2015 and is registered as a European Cooperative Society (SCE) based in Berlin. It is funded by donations from its members; money from corporations or state bodies is turned down.",
@@ -555,6 +578,7 @@ window.PM_PLATFORMS_EN = {
   },
 
   eko: {
+    opennessNote: "Moderate: German campaigns are covered via the home page + search (capped at 27 per term \u2192 union of many terms); two page templates, an overall sitemap without a language marker \u2014 completeness is not guaranteed.",
     wikipedia: "https://en.wikipedia.org/wiki/Ek%C5%8D_%28organization%29",
     tagline: "Campaign platform critical of corporations",
     about: {
@@ -564,6 +588,7 @@ window.PM_PLATFORMS_EN = {
   },
 
   foodwatch: {
+    opennessNote: "Very open: the complete list of actions, counts and full texts are directly in the server-rendered HTML, and robots.txt permits practically everything.",
     wikipedia: "https://en.wikipedia.org/wiki/Foodwatch",
     tagline: "Consumer rights in the food sector",
     about: {
@@ -574,6 +599,7 @@ window.PM_PLATFORMS_EN = {
   },
 
   threefifty: {
+    opennessNote: "Moderate: no open listing; actions come from an external JSON API (found in the page's JS), counts from /progress/, texts from the /sign/ page. The /act/ action pages are blocked by robots and are not loaded \u2014 for those only the API teaser remains, and the format is derived from the button text.",
     wikipedia: "https://en.wikipedia.org/wiki/350.org",
     tagline: "Climate movement against fossil fuels",
     about: {

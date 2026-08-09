@@ -84,6 +84,7 @@ from urllib.parse import urlencode, urljoin
 
 from bs4 import BeautifulSoup
 
+import i18n_helfer as i18n
 import petitions_core as core
 from petitions_core import Platform, log, now_iso, prog
 
@@ -332,6 +333,59 @@ def _brieftext_html(text: str) -> str:
     return "\n".join(absaetze)
 
 
+# ---------------------------------------------------------------------------
+# SPRACHFASSUNGEN
+#
+# Jede Aktionsseite trägt einen Sprachumschalter im Server-HTML:
+#     <a class="lang lang-en" href="/act/<en-slug>/">English</a>
+# Die aktuelle Sprache steht als class="disabled lang" ohne href. Am 8.8.2026
+# an vier live Aktionen geprüft, alle vier hatten eine englische Fassung
+# („Schluss mit den Rekordprofiten aus Öl und Gas…" → „Slash oil and gas
+# profits, make the polluters pay!").
+#
+# ⚠️⚠️ DER UMSCHALTER IST NICHT EINDEUTIG. /sign/we-pay-they-profit_DE/ listet
+# DREI englische Ziele: /act/we-pay-they-profit/, /act/they-profit-we-pay/ und
+# /act/david-test-petition/. Wer „den englischen Link" nimmt, holt sich mit
+# einem Drittel Wahrscheinlichkeit eine Testseite in die App. Deshalb wird nur
+# übernommen, was zum RUMPF des deutschen Slugs passt (Slug ohne Sprachkürzel);
+# passt nichts, bleibt die Sprache „ungeklärt". Lieber keine Übersetzung als
+# eine falsche.
+#
+# ⚠️ Die Umschalter-Links zeigen auf /act/ — das ist per robots.txt für alle
+# gesperrt und wird NICHT geladen. Dieselbe Seite liegt unter /sign/<slug>/,
+# und /sign/ ist ausdrücklich erlaubt; genau diesen Weg nimmt der Scraper auch
+# für die deutschen Seiten.
+#
+# ⚠️ Das Sprachkürzel im Slug ist uneinheitlich: in vier Stichproben kamen
+# `_DE`, `-de`, `-DE` und `_de` vor. Deshalb wird es mit einem Ausdruck
+# abgeschnitten und nicht mit einer festen Zeichenkette.
+SPRACHLINK_RE = re.compile(
+    r'<a[^>]+class="[^"]*\blang-([a-z]{2})\b[^"]*"[^>]*href="([^"]+)"', re.I)
+SLUG_SPRACHSUFFIX_RE = re.compile(r"[-_](?:de|en|fr|nl|es|pt|tr)$", re.I)
+FREMDSPRACHEN = ("en",)
+
+
+def _slug_rumpf(slug: str) -> str:
+    return SLUG_SPRACHSUFFIX_RE.sub("", slug or "")
+
+
+def _sprachlinks(html: str, slug: str) -> dict[str, str]:
+    """{sprachcode: slug} aus dem Umschalter — nur eindeutige Treffer.
+
+    Eindeutig heißt: der Rumpf des Ziel-Slugs stimmt mit dem Rumpf des eigenen
+    überein. Alles andere wird verworfen, siehe die Warnung oben."""
+    rumpf = _slug_rumpf(slug).lower()
+    treffer: dict[str, str] = {}
+    for code, href in SPRACHLINK_RE.findall(html):
+        code = code.lower()
+        if code not in FREMDSPRACHEN or code in treffer:
+            continue
+        ziel = href.rstrip("/").rsplit("/", 1)[-1]
+        if _slug_rumpf(ziel).lower() == rumpf:
+            treffer[code] = ziel
+    return treffer
+
+
 def fetch_detail(fetcher: core.Fetcher, kind: str, slug: str) -> dict:
     """Einleitung + Aufruftext der Aktionsseite holen – je nach Form woanders.
 
@@ -385,6 +439,8 @@ def fetch_detail(fetcher: core.Fetcher, kind: str, slug: str) -> dict:
         rec["description_full"] = html
     if kurz:
         rec["summary"] = (kurz[:200] + "…") if len(kurz) > 200 else kurz
+    # Merker für scrape_action; wird dort wieder entfernt.
+    rec["_sprachlinks"] = _sprachlinks(resp.text, slug)
     return rec
 
 
@@ -433,6 +489,27 @@ def scrape_action(fetcher: core.Fetcher, page_id: str, obj: dict,
             # Aktualisierungen mitten im Text nach.
             if kind and kind not in ROBOTS_GESPERRT:
                 rec.update(fetch_detail(fetcher, kind, slug))
+                links = rec.pop("_sprachlinks", {})
+                i18n.setze_hauptsprache(rec, "de")
+                rec["campaign_id"] = f"threefifty:{_slug_rumpf(slug).lower()}"
+                for lang in FREMDSPRACHEN:
+                    ziel = links.get(lang)
+                    if not ziel:
+                        # Kein eindeutiger Umschalter-Treffer. Das kann heißen
+                        # „gibt es nicht" ODER „der Link war mehrdeutig" — wir
+                        # wissen es nicht, also „ungeklärt". Nur ein belegtes
+                        # Fehlen rechtfertigt das Abzeichen in der App.
+                        i18n.setze_sprachfassung(rec, lang, "ungeklärt")
+                        continue
+                    # ⚠️ Immer über /sign/ laden: der Umschalter zeigt auf
+                    # /act/, das ist per robots gesperrt.
+                    fremd = fetch_detail(fetcher, "sign", ziel)
+                    fremd.pop("_sprachlinks", None)
+                    fremd["url"] = f"{BASE_URL}/sign/{ziel}/"
+                    if fremd.get("description_full") or fremd.get("summary"):
+                        i18n.setze_sprachfassung(rec, lang, "vorhanden", fremd)
+                    else:
+                        i18n.setze_sprachfassung(rec, lang, "ungeklärt")
         else:
             unklar = not weg
     # ⚠️ Die ermittelte Form schlägt jede Schätzung – aber ohne Form wird nur

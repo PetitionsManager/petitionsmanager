@@ -195,6 +195,10 @@
     TX = ALLE_TEXTE[code] || TX_FALLBACK;
     SPRACHE = code;
     try { document.documentElement.setAttribute("lang", code); } catch (e) {}
+    // Die Plattformnamen stehen im Manifest und nicht in texts.js; sie werden
+    // deshalb hier nachgezogen. Beim ersten Aufruf gibt es noch kein Manifest
+    // – dann tut die Funktion nichts und der Aufruf nach dem Laden erledigt es.
+    manifestNamenSetzen();
     return code;
   }
   var PLATS = window.PM_PLATFORMS || {};
@@ -235,6 +239,61 @@
     return String(str).replace(/\{(\w+)\}/g, function (m, k) {
       return Object.prototype.hasOwnProperty.call(vals, k) ? vals[k] : m;
     });
+  }
+
+  /* ---- Sprachfassung einer PETITION (8.8.2026) ----------------------------
+     T() übersetzt die Oberfläche, txt() den Inhalt. Beide fallen gleich
+     zurück: gewählte Sprache → Deutsch → nichts. Die flachen Felder eines
+     Datensatzes (title, summary, …) sind immer die Hauptsprache; steht daneben
+     ein Block r.i18n[code], hat der Vorrang.
+
+     Der Aufbau ist bewusst additiv: älterer Datenbestand hat kein "i18n" und
+     verhält sich unverändert, eine dritte Sprache ist ein weiterer Schlüssel.
+     Und weil die flachen Felder stehen bleiben, mussten die rund 40 Stellen,
+     die .title lesen, NICHT alle angefasst werden — nur die, die wirklich
+     etwas anzeigen.
+
+     ⚠️ Nicht alles ist übersetzbar: "category" bleibt einsprachig, weil danach
+     per Zeichenkettenvergleich gefiltert wird (state.catFilter) und ein
+     übersetzter Wert den Filter ins Leere laufen ließe. */
+  function txt(r, feld) {
+    if (!r) return "";
+    var blk = r.i18n && r.i18n[SPRACHE];
+    var wert = blk && blk[feld];
+    if (wert != null && wert !== "") return wert;
+    return r[feld];
+  }
+
+  /* Gibt es zu diesem Datensatz eine Fassung in der gewählten Sprache, und
+     wenn nein: wissen wir überhaupt, dass es keine gibt?
+
+     ⚠️ Der Unterschied ist der Kern des Abzeichens weiter unten. "fehlt" heißt,
+     der Scraper hat die Sprachfassung abgerufen und sie gibt es nachweislich
+     nicht. "ungeklärt" heißt, der Abruf ist gescheitert — geblockt, gestört,
+     nie versucht. Ein leeres Feld allein beweist GAR NICHTS: bei WeMove
+     stammen die leeren Titel nachweislich vom Bot-Checkpoint, während die
+     deutsche Seite einen guten Titel trägt. Würde die App daraus "liegt nicht
+     vor" machen, behauptete sie etwas Falsches. */
+  /* Titel und Kurzbeschreibung in ALLEN vorhandenen Sprachen, für die Suche.
+     Gesucht wird bewusst sprachübergreifend: wer die App auf Englisch benutzt,
+     kennt eine Petition womöglich unter ihrem deutschen Namen — und umgekehrt.
+     Ein Treffer, den man nur in der gerade nicht gewählten Sprache fände, wäre
+     für den Suchenden schlicht nicht vorhanden. */
+  function sucheText(r) {
+    var s = (r.title || "") + " " + (r.summary || "");
+    var i18n = r.i18n;
+    if (i18n) for (var code in i18n) {
+      if (!Object.prototype.hasOwnProperty.call(i18n, code)) continue;
+      s += " " + (i18n[code].title || "") + " " + (i18n[code].summary || "");
+    }
+    return s;
+  }
+
+  function sprachStand(r) {
+    if (!r || SPRACHE === STANDARDSPRACHE) return "haupt";
+    if (r.i18n && r.i18n[SPRACHE]) return "vorhanden";
+    var st = r.i18n_state && r.i18n_state[SPRACHE];
+    return st === "fehlt" ? "fehlt" : "ungeklärt";
   }
   function platInfo(key) { return PLATS[key] || {}; }
 
@@ -804,6 +863,7 @@
   function loadManifest() {
     return fetchData("manifest.json").then(function (m) {
       state.manifest = m;
+      manifestNamenSetzen();  // Plattformnamen in die gewählte Sprache bringen
       pruneTextLibrary();   // erst jetzt möglich: braucht die Kennungen
       return m;
     });
@@ -1019,7 +1079,7 @@
         if (!rows.length) { mzBox.remove(); return; }
         var hero = mzHero(rows.map(function (e) {
           return {
-            image_url: e.r.image_url, title: e.r.title,
+            image_url: e.r.image_url, title: txt(e.r, "title"),
             chip: platformName(e.plat),
             /* Der Trend darf sich zeigen: „~N/Tag" nur, wenn er aus
                echten Werten gerechnet ist (Unterschriften UND Datum). */
@@ -1667,9 +1727,38 @@
     return card;
   }
 
+  /* ⚠️ Name und "Für Nerds"-Satz kommen aus dem MANIFEST, das der Scraper
+     erzeugt — also serverseitig und einsprachig deutsch. In der englischen
+     Oberfläche stand deshalb „Europäisches Parlament" mitten im englischen
+     Satz, und die elf openness_note-Sätze blieben komplett deutsch. Sie
+     gehören nicht in texts.js (das hält Beschriftungen der App), sondern zu
+     den Stammdaten der Plattformen in platforms.js — dieselbe Sprachebene wie
+     tagline und about, mit derselben Regel: was dort fehlt, bleibt deutsch. */
+  /* Die Namen im geladenen Manifest EINMAL überlagern, statt an den rund acht
+     Stellen einzeln nachzuschlagen, die `p.name` lesen (Kacheln, Steckbrief,
+     Auswahllisten, Rechte-Tabelle). Der Originalwert wird in `_nameQuelle`
+     festgehalten, damit ein Sprachwechsel nicht auf einer schon übersetzten
+     Fassung aufsetzt und beim Zurückschalten der deutsche Name fehlte. */
+  function manifestNamenSetzen() {
+    var plats = (state.manifest && state.manifest.platforms) || [];
+    plats.forEach(function (p) {
+      if (p._nameQuelle == null) p._nameQuelle = p.name;
+      var ueb = uebersetzung(p.key);
+      p.name = (ueb && ueb.name) || p._nameQuelle;
+    });
+  }
   function platformName(key) {
-    var p = state.manifest.platforms.find(function (x) { return x.key === key; });
-    return p ? p.name : key;
+    var p = state.manifest && state.manifest.platforms
+      ? state.manifest.platforms.find(function (x) { return x.key === key; })
+      : null;
+    if (p) return p.name;
+    var ueb = uebersetzung(key);
+    return (ueb && ueb.name) || key;
+  }
+  /* Der Satz hinter dem Offenheits-Balken („Für Nerds"). */
+  function platOpennessNote(key, ausManifest) {
+    var ueb = uebersetzung(key);
+    return (ueb && ueb.opennessNote) || ausManifest || "";
   }
 
   // Öffnet eine bestimmte Petition IN DER APP: wechselt in die Ziel-Plattform
@@ -1894,7 +1983,7 @@
       var arr = state.dataCache[keys[k]];
       if (!arr) continue;
       for (var i = 0; i < arr.length && pool.length < AC_POOL; i++) {
-        var t = arr[i].title || "";
+        var t = txt(arr[i], "title") || "";
         var p = t.toLowerCase().indexOf(q);
         if (p > -1) pool.push({ t: t, pos: p, key: keys[k], url: arr[i].url });
       }
@@ -2167,7 +2256,8 @@
     var head = el('<div class="pet__head">' + thumb +
       '<div class="pet__main">' +
         '<div class="pet__title">' +
-          esc(r.title || T("petition.noTitle", "(ohne Titel)")) + "</div>" +
+          esc(txt(r, "title") || T("petition.noTitle", "(ohne Titel)")) +
+        "</div>" +
         '<div class="pet__row">' + signedBadge + closedBadge + sig + datum +
         "</div>" +
       "</div>" +
@@ -2282,7 +2372,8 @@
       if (!plat || !isEnabled(plat.key)) return;
       var sc = typeof rel.score === "number" ? rel.score : 0;
       out.push({ c: { url: rel.url, title: rel.title }, plat: plat,
-                 score: sc, same: sc >= 0.8 });
+                 score: sc, same: sc >= 0.8,
+                 uebersetzung: rel.rel === "translation", relLang: rel.lang });
     });
     return out.length ? out : null;
   }
@@ -2300,16 +2391,25 @@
      Adresse, ein geändertes Paket wird also von selbst neu geholt und alle
      unveränderten bleiben liegen. Fehlt "tv" (älteres Manifest), läuft alles
      wie vorher – ohne Kennung, ohne Fehler. */
-  function chunkRev(key, n) {
+  /* `lang` wählt die fremdsprachige Paketreihe <key>.<lang>.t<N>.json, deren
+     Kennungen im Manifest unter "tvl" stehen. Ohne `lang` bleibt alles beim
+     Alten — die deutschen Pakete behalten Namen UND Nummern, sonst müsste
+     jedes Gerät seine ganze Bibliothek neu laden. */
+  function chunkRev(key, n, lang) {
     var plats = (state.manifest && state.manifest.platforms) || [];
     var p = plats.find(function (x) { return x.key === key; });
-    return (p && p.tv && p.tv[String(n)]) || null;
+    if (!p) return null;
+    if (lang) return (p.tvl && p.tvl[lang] && p.tvl[lang][String(n)]) || null;
+    return (p.tv && p.tv[String(n)]) || null;
   }
-  function loadTextChunk(key, n) {
-    var id = key + "." + n;
+  function chunkFile(key, n, lang) {
+    return key + (lang ? "." + lang : "") + ".t" + n + ".json";
+  }
+  function loadTextChunk(key, n, lang) {
+    var id = key + "." + (lang || "") + "." + n;
     if (!textChunks[id]) {
-      var rev = chunkRev(key, n);
-      textChunks[id] = fetchData(key + ".t" + n + ".json" +
+      var rev = chunkRev(key, n, lang);
+      textChunks[id] = fetchData(chunkFile(key, n, lang) +
         (rev ? "?v=" + encodeURIComponent(rev) : ""));
     }
     return textChunks[id];
@@ -2328,6 +2428,15 @@
       var tv = p.tv || {};
       Object.keys(tv).forEach(function (n) {
         soll[p.key + ".t" + n + ".json"] = tv[n];
+      });
+      // Fremdsprachige Reihen genauso aufräumen. Ohne das läge nach jeder
+      // Textänderung eine tote englische Fassung dauerhaft im Cache — der
+      // Fehler, den "tv" für die deutschen Pakete längst behebt.
+      var tvl = p.tvl || {};
+      Object.keys(tvl).forEach(function (lg) {
+        Object.keys(tvl[lg] || {}).forEach(function (n) {
+          soll[p.key + "." + lg + ".t" + n + ".json"] = tvl[lg][n];
+        });
       });
     });
     if (!Object.keys(soll).length) return;
@@ -2478,7 +2587,9 @@
         var c = grp.arr.find(function (x) { return x.url === rel.url; });
         if (!c || isArchived(c.url)) return;
         var sc = typeof rel.score === "number" ? rel.score : 0;
-        pre.push({ c: c, plat: grp.p, score: sc, same: sc >= 0.8 });
+        pre.push({ c: c, plat: grp.p, score: sc, same: sc >= 0.8,
+                   uebersetzung: rel.rel === "translation",
+                   relLang: rel.lang });
       });
       if (pre.length) {
         pre.sort(function (a, b) { return b.score - a.score; });
@@ -2538,13 +2649,24 @@
        hängen schon dran. */
     var SIM_VORAB = 5;
     box.innerHTML = lbl + sim.map(function (s, i) {
-      var info = langInfo(s.plat.language || "de");
-      var same = s.same ? '<span class="sim-same">' +
-        esc(T("petition.similarSame", "gleich")) + "</span>" : "";
+      var info = langInfo(s.relLang || s.plat.language || "de");
+      /* Eine ÜBERSETZUNG ist etwas anderes als ein thematisch ähnlicher
+         Treffer, und der Unterschied muss man sehen: „gleich" leitet sich aus
+         einem Ähnlichkeitswert ab (score ≥ 0,8) und kann danebenliegen, die
+         Übersetzung dagegen stammt aus einer ausdrücklichen Kennung der
+         Quelle — gleiche Kampagnennummer, gleicher Slug, verlinkter
+         Sprachwechsel. Deshalb ein eigenes Abzeichen statt einer Abstufung
+         desselben; siehe _uebersetzungen_verknuepfen in publish.py. */
+      var same = s.uebersetzung
+        ? '<span class="sim-trans">' +
+          esc(fill(T("petition.similarTranslation", "Übersetzung ({sprache})"),
+            { sprache: langInfo(s.relLang || "de").name || "" })) + "</span>"
+        : (s.same ? '<span class="sim-same">' +
+           esc(T("petition.similarSame", "gleich")) + "</span>" : "");
       return '<button class="simrow' + (i >= SIM_VORAB ? " simrow--rest" : "") +
         '" type="button" data-key="' + esc(s.plat.key) +
         '" data-url="' + esc(s.c.url) + '"><span class="simrow__t">' +
-        esc(s.c.title || T("petition.noTitle", "(ohne Titel)")) + same +
+        esc(txt(s.c, "title") || T("petition.noTitle", "(ohne Titel)")) + same +
         "</span>" +
         '<span class="simrow__p">' + esc(s.plat.name) +
         '<span class="flag">' + info.flag + "</span></span></button>";
@@ -2656,14 +2778,61 @@
     return html.replace(/<img\b[^>]*>/gi, "");
   }
 
+  /* Aus welcher Sprachreihe kommt der Volltext? Gibt den Sprachcode zurück,
+     oder null für die deutsche Reihe. Es reicht nicht, auf SPRACHE zu sehen:
+     eine Petition kann in der gewählten Sprache einen Titel haben, aber keinen
+     Volltext — dann bleibt es beim deutschen Text. */
+  function descSprache(r) {
+    if (!r || SPRACHE === STANDARDSPRACHE) return null;
+    var blk = r.i18n && r.i18n[SPRACHE];
+    return blk && typeof blk.tc === "number" ? SPRACHE : null;
+  }
+  function descChunk(r, lang) {
+    if (!r) return null;
+    if (lang) return (r.i18n[lang] || {}).tc;
+    return r.tc;
+  }
+
+  /* Das Abzeichen über dem aufgeklappten Text.
+
+     📌 Wortlaut vom Nutzer entschieden (8.8.2026): "Englische Fassung", NICHT
+     "Übersetzt aus dem Englischen". Wir übersetzen nichts — WeMove, Avaaz und
+     das EU-Parlament veröffentlichen beide Fassungen selbst. Der Tooltip nennt
+     deshalb die Plattform als Urheberin.
+
+     ⚠️ Gezeigt wird es NUR bei sprachStand() === "fehlt", also wenn der
+     Scraper nachgesehen hat und die Fassung nachweislich nicht existiert.
+     Bei "ungeklärt" schweigt die App: dort wäre jeder Satz über das Fehlen
+     eine Behauptung über etwas, das wir nicht gemessen haben. */
+  function sprachHinweis(r, platKey) {
+    if (sprachStand(r) !== "fehlt") return "";
+    // Welche Sprache steht hier tatsächlich? Die des Datensatzes, nicht die
+    // gewählte — und "lang" fehlt bei älteren Beständen, dann ist es Deutsch.
+    var gezeigt = langInfo((r && r.lang) || STANDARDSPRACHE);
+    var name = gezeigt.name || (r && r.lang) || STANDARDSPRACHE;
+    var pname = platformName(platKey) || platKey;
+    var hinweis = fill(T("petition.langFallbackHint",
+      "In der gewählten Sprache liegt diese Petition bei {plattform} nicht " +
+      "vor. Angezeigt wird der Text der Plattform auf {sprache}."),
+      { plattform: pname, sprache: name });
+    var label = fill(T("petition.langFallback", "Fassung auf {sprache}"),
+      { sprache: name });
+    return '<div class="pet__langbadge" title="' + esc(hinweis) +
+      '" aria-label="' + esc(label + " – " + hinweis) + '">' +
+      '<span class="flag" aria-hidden="true">' + (gezeigt.flag || "") +
+      "</span> " + esc(label) +
+      ' <i class="fa-solid fa-circle-info" aria-hidden="true"></i></div>';
+  }
+
   function buildPetBody(body, r, ctx, platKey) {
     // Kein Bild mehr an dieser Stelle: hier stand früher ein ZWEITES <img> mit
     // derselben Adresse wie das Vorschaubild der Kachel – dasselbe Motiv zweimal
     // untereinander, und zweimal über das Netz geholt. Stattdessen wächst beim
     // Aufklappen das vorhandene Vorschaubild zum Aufmacher (style.css, .pet.open).
-    var h = "";
-    if (r.summary) h += "<h4>" + esc(T("petition.summary", "Kurzbeschreibung")) +
-      "</h4><p>" + esc(r.summary) + "</p>";
+    var h = sprachHinweis(r, platKey);
+    var kurz = txt(r, "summary");
+    if (kurz) h += "<h4>" + esc(T("petition.summary", "Kurzbeschreibung")) +
+      "</h4><p>" + esc(kurz) + "</p>";
     if (r.recipient) h += "<h4>" + esc(T("petition.recipient", "Adressat")) +
       "</h4><p>" + esc(r.recipient) + "</p>";
     if (r.started_by) h += "<h4>" +
@@ -2671,13 +2840,18 @@
       "</h4><p>" + esc(r.started_by) + "</p>";
     // Beschreibung: entweder schon im Datensatz (alte Datenstände) oder als
     // Paketnummer "tc" hinterlegt – dann wird sie unten nachgeladen.
-    var textPending = !r.description_full && typeof r.tc === "number";
-    if (r.description_full || textPending)
+    // In einer Fremdsprache steht die Nummer im Sprachblock (i18n[…].tc);
+    // fehlt dort eine, greift die deutsche Fassung.
+    var descLang = descSprache(r);
+    var descText = descLang ? (r.i18n[descLang] || {}).description_full
+                            : r.description_full;
+    var textPending = !descText && typeof descChunk(r, descLang) === "number";
+    if (descText || textPending)
       h += '<details class="descacc"><summary>' +
         '<span class="descacc__lbl"><i class="fa-solid fa-align-left"></i> ' +
         esc(T("petition.description", "Beschreibung")) + "</span>" +
         '<i class="fa-solid fa-chevron-down descacc__chev"></i></summary>' +
-        '<div class="pet__desc">' + (descHtml(r.description_full) ||
+        '<div class="pet__desc">' + (descHtml(descText) ||
           '<div class="count-note">' +
           esc(T("petition.textLoading", "Text wird geladen …")) + "</div>") +
         "</div></details>";
@@ -2719,10 +2893,16 @@
     // Beschreibung nachladen, sobald sie gebraucht wird.
     if (textPending && platKey) {
       var descBox = body.querySelector(".pet__desc");
-      loadTextChunk(platKey, r.tc).then(function (map) {
+      loadTextChunk(platKey, descChunk(r, descLang), descLang)
+        .then(function (map) {
+        // Auch das fremdsprachige Paket ist über die Adresse des Datensatzes
+        // geschlüsselt (die deutsche) – siehe write_texts in publish.py.
         var html = map[r.url];
         if (html) {
-          r.description_full = html;            // im Speicher merken: MIT Bildern,
+          // Gemerkt wird je Sprache getrennt, sonst zeigte ein Sprachwechsel
+          // den zuerst geladenen Text weiter an.
+          if (descLang) r.i18n[descLang].description_full = html;
+          else r.description_full = html;
           descBox.innerHTML = descHtml(html);   // gefiltert wird erst beim Anzeigen
           bilderBeobachten(descBox);            // Platzhalter räumen, sobald da
         } else {
@@ -2844,10 +3024,11 @@
     // wenige, deshalb jetzt eingeklappt. <details> statt eigener Schalterlogik,
     // dasselbe Muster wie die Beschreibung in der Petitionskarte (.descacc).
     var nerdInhalt = "";
-    if (manifestEntry.openness_note)
+    var offenheitSatz = platOpennessNote(key, manifestEntry.openness_note);
+    if (offenheitSatz)
       nerdInhalt += '<div class="pabout__open ' +
         ampClass(manifestEntry.openness) + '">' +
-        esc(manifestEntry.openness_note) + "</div>";
+        esc(offenheitSatz) + "</div>";
     if (manifestEntry.source_url)
       nerdInhalt += '<div class="nerd__row"><b>' +
         esc(T("platform.dataSource", "Quelle der Daten")) + "</b> " +
@@ -3295,7 +3476,7 @@
         if (state.gapFilter === "signatures" &&
             typeof r.signatures === "number") return false;
         if (!term) return true;
-        return ((r.title || "") + " " + (r.category || "") + " " +
+        return (sucheText(r) + " " + (r.category || "") + " " +
                 (r.started_by || "")).toLowerCase().indexOf(term) > -1;
       }));
       var notArch = rows.filter(function (r) { return !isArchived(r.url); });
@@ -3524,7 +3705,7 @@
   function crossMatch(r, v) {
     if ((r.tags || []).some(function (t) { return t.toLowerCase() === v; })) return true;
     if ((r.category || "").toLowerCase() === v) return true;
-    var hay = ((r.title || "") + " " + (r.summary || "") + " " +
+    var hay = (sucheText(r) + " " +
                (r.category || "") + " " + (r.started_by || "") + " " +
                (r.tags || []).join(" ")).toLowerCase();
     return hay.indexOf(v) > -1;

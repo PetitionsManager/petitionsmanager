@@ -60,7 +60,18 @@ INDEX_FILE = Path("texts_index.json")
 # hier bewusst – es wandert in die Volltext-Pakete (siehe oben).
 SLIM_FIELDS = ("title", "url", "signatures", "goal", "category", "status",
                "started_by", "recipient", "start_date", "image_url", "kind",
-               "summary", "tags", "closed", "deadline")
+               "summary", "tags", "closed", "deadline",
+               # Sprachebene (seit 8.8.2026). "lang" nennt die Sprache der
+               # FLACHEN Felder, "i18n_state" hält je Fremdsprache fest, ob sie
+               # vorhanden ist, nachweislich fehlt oder ungeklärt blieb — nur
+               # damit darf die App behaupten, es gebe dort keine Fassung.
+               # Der Block "i18n" selbst wird in slim() gesondert behandelt,
+               # weil der Volltext daraus in ein eigenes Paket gehört.
+               # Gemeinsame Kennung zweier Sprachfassungen derselben Kampagne.
+               # Sie kommt vom Scraper (Slug ohne Sprachsuffix, Petitionsnummer,
+               # verlinkter Übersetzungs-Slug) und ist die EINZIGE Grundlage,
+               # auf der _uebersetzungen_verknuepfen() zwei Sätze zusammenführt.
+               "lang", "i18n_state", "campaign_id")
 
 # Verwandtschaft. Die App trägt dieselbe Rechnung als Notlösung
 # (app.js → similarityScore); beide müssen zusammen geändert werden.
@@ -170,6 +181,17 @@ def slim(rec: dict) -> dict:
         tags = core.make_tags(rec)
         if tags:
             out["tags"] = tags
+    # Sprachfassungen: Titel und Kurzbeschreibung wiegen wenig und wandern mit
+    # in den Datensatz. Der VOLLTEXT nicht – er geht wie der deutsche in ein
+    # eigenes Paket (write_texts mit sprache=…), sonst bläht die Liste auf.
+    i18n = rec.get("i18n")
+    if isinstance(i18n, dict):
+        knapp = {lg: {k: v for k, v in (blk or {}).items()
+                      if k != "description_full" and v is not None}
+                 for lg, blk in i18n.items()}
+        knapp = {lg: blk for lg, blk in knapp.items() if blk}
+        if knapp:
+            out["i18n"] = knapp
     return out
 
 
@@ -317,7 +339,62 @@ def compute_related(by_platform: dict[str, list[dict]]) -> int:
             for s, o in scored[:SIM_MAX_PER_PETITION]
         ]
         written += 1
+    _uebersetzungen_verknuepfen(items)
     return written
+
+
+# ----------------------------------------------------------------------------
+# Sprachfassungen als solche kennzeichnen
+# ----------------------------------------------------------------------------
+# ⚠️ ZWEI SPRACHFASSUNGEN SIND NICHT ÜBER TEXTÄHNLICHKEIT ERKENNBAR. Deutscher
+# und englischer Text teilen kaum ein Wort; _score() findet sie nie. Deshalb
+# entsteht diese Verknüpfung ausschließlich aus einer AUSDRÜCKLICHEN Kennung,
+# die der jeweilige Scraper mitgebracht hat — nie aus einer Vermutung:
+#   · WeMove   Slug ohne das Sprachsuffix (…-DE / …-EN)
+#   · Avaaz    der Slug selbst, er ist in allen Sprachen gleich
+#   · Europarl die Petitionsnummer
+#   · OpenPetition der Link aus dem Block "module-petition-translations"
+#
+# Der Regelfall ist allerdings, dass es GAR KEINE zwei Einträge gibt: wo die
+# englische Adresse aus der deutschen herleitbar oder direkt verlinkt ist, holt
+# der Scraper beide Fassungen und legt sie in EINEN Datensatz (rec["i18n"]).
+# Diese Funktion greift nur, wenn zwei Sätze getrennt in den Bestand geraten
+# sind — etwa weil beide Sprachfassungen eigenständig entdeckt wurden.
+def _uebersetzungen_verknuepfen(items: list[dict]) -> int:
+    """Sätze mit gleicher `campaign_id` gegenseitig als Übersetzung eintragen.
+
+    Der Eintrag trägt `rel: "translation"` und einen Höchstwert; die App zeigt
+    ihn dadurch mit eigenem Abzeichen und nicht als „bloß ähnlich". Er wird
+    VORNE eingefügt und zählt nicht gegen SIM_MAX_PER_PETITION — eine
+    Übersetzung derselben Petition ist nie weniger wichtig als der zwölfte
+    thematische Treffer."""
+    gruppen: dict[str, list[dict]] = defaultdict(list)
+    for it in items:
+        kennung = it["rec"].get("campaign_id")
+        if kennung:
+            gruppen[str(kennung)].append(it)
+    n = 0
+    for mitglieder in gruppen.values():
+        if len(mitglieder) < 2:
+            continue
+        for it in mitglieder:
+            rec = it["rec"]
+            eigene = rec.get("lang") or "de"
+            fremde = [o for o in mitglieder if o is not it
+                      and (o["rec"].get("lang") or "de") != eigene]
+            if not fremde:
+                continue          # gleiche Sprache: keine Übersetzung
+            vorhandene = [e for e in (rec.get("related") or [])
+                          if e.get("url") not in
+                          {o["rec"].get("url") for o in fremde}]
+            rec["related"] = [
+                {"url": o["rec"].get("url"), "title": o["rec"].get("title"),
+                 "platform": o["platform"], "score": 1.0,
+                 "rel": "translation", "lang": o["rec"].get("lang") or "de"}
+                for o in fremde
+            ] + vorhandene
+            n += 1
+    return n
 
 
 # ----------------------------------------------------------------------------
@@ -333,9 +410,18 @@ def load_text_index() -> dict[str, dict[str, int]]:
 
 
 def write_texts(key: str, items: list[dict], texts: list[str | None],
-                index: dict[str, dict[str, int]]) -> dict[str, str]:
+                index: dict[str, dict[str, int]],
+                sprache: str | None = None) -> dict[str, str]:
     """Schreibt <key>.t<N>.json und vermerkt die Paketnummer als "tc" am
     Datensatz. Rückgabe: {"<N>": "<Kennung>"} für das Manifest.
+
+    ⚠️ `sprache` schreibt eine EIGENE Reihe <key>.<sprache>.t<N>.json mit
+    eigener Nummernzuordnung, und das ist keine Ordnungsliebe: die Pakete sind
+    absichtlich byteweise stabil (siehe unten), damit ein Gerät nur nachlädt,
+    was sich geändert hat. Englische Texte in die deutschen Pakete zu mischen
+    änderte JEDES Paket auf einen Schlag — alle Geräte lüden die vollen ~16 MB
+    erneut. Getrennt bleiben die deutschen Pakete unberührt, und wer die App
+    auf Deutsch benutzt, lädt die englischen Texte nie.
 
     Die Paketnummer hängt bewusst NICHT an der Position in `items`: die Liste
     ist nach Unterschriften sortiert, und die ändern sich täglich. Über die
@@ -355,7 +441,9 @@ def write_texts(key: str, items: list[dict], texts: list[str | None],
     beim Laden als "?v=" an, und da der Cache auf der vollständigen Adresse
     liegt, holt sich ein GEÄNDERTES Paket von selbst neu, während alle
     unveränderten liegen bleiben."""
-    zuordnung = index.setdefault(key, {})
+    namensraum = key if sprache is None else f"{key}:{sprache}"
+    dateibasis = key if sprache is None else f"{key}.{sprache}"
+    zuordnung = index.setdefault(namensraum, {})
     belegung = Counter(zuordnung.values())   # auch gelöschte zählen mit, damit
     chunks: dict[int, dict[str, str]] = defaultdict(dict)   # Nummern nie rücken
     for rec, html in zip(items, texts):
@@ -369,14 +457,21 @@ def write_texts(key: str, items: list[dict], texts: list[str | None],
             zuordnung[url] = n
             belegung[n] += 1
         chunks[n][url] = html
-        rec["tc"] = n
+        if sprache is None:
+            rec["tc"] = n
+        else:
+            # Der Datensatz wird über die DEUTSCHE Adresse geschlüsselt, auch
+            # im fremdsprachigen Paket — sonst fände die App ihren eigenen Text
+            # nicht wieder.
+            rec.setdefault("i18n", {}).setdefault(sprache, {})["tc"] = n
     kennungen: dict[str, str] = {}
     for n, mapping in chunks.items():
         # sort_keys, damit ein inhaltlich unverändertes Paket auch byteweise
         # unverändert bleibt (sonst wechselt allein die Reihenfolge im JSON)
         # – und damit die Kennung darunter reproduzierbar ist.
         payload = json.dumps(mapping, ensure_ascii=False, sort_keys=True)
-        (OUT_DIR / f"{key}.t{n}.json").write_text(payload, encoding="utf-8")
+        (OUT_DIR / f"{dateibasis}.t{n}.json").write_text(payload,
+                                                        encoding="utf-8")
         kennungen[str(n)] = hashlib.sha1(
             payload.encode("utf-8")).hexdigest()[:8]
     return kennungen
@@ -404,6 +499,9 @@ def main() -> None:
     manifest = {"platforms": [], "generated_at": None, "format": 2}
     by_platform: dict[str, list[dict]] = {}
     texts_by_platform: dict[str, list[str | None]] = {}
+    # Je Plattform eine Liste, gleich lang und gleich sortiert wie items:
+    # {sprache: volltext} pro Petition.
+    i18n_texts_by_platform: dict[str, list[dict[str, str | None]]] = {}
 
     # Alte Volltext-Pakete wegräumen, sonst bleiben Reste liegen, wenn eine
     # Plattform schrumpft.
@@ -440,11 +538,15 @@ def main() -> None:
             # Nach Unterschriften absteigend; Volltext getrennt mitführen,
             # damit Reihenfolge und Paketnummern zusammenpassen.
             pairs = sorted(
-                ((slim(r), r.get("description_full")) for r in brauchbar),
+                ((slim(r), r.get("description_full"),
+                  {lg: (blk or {}).get("description_full")
+                   for lg, blk in (r.get("i18n") or {}).items()})
+                 for r in brauchbar),
                 key=lambda t: t[0].get("signatures") or -1, reverse=True)
-            items = [a for a, _ in pairs]
+            items = [a for a, _, _ in pairs]
             by_platform[p.key] = items
-            texts_by_platform[p.key] = [b for _, b in pairs]
+            texts_by_platform[p.key] = [b for _, b, _ in pairs]
+            i18n_texts_by_platform[p.key] = [c for _, _, c in pairs]
             entry["count"] = len(items)
             entry["online"] = sum(1 for r in items
                                   if r.get("status", "online") == "online")
@@ -476,6 +578,20 @@ def main() -> None:
         chunks_total += len(kennungen)
         if key in eintrag_je_key:
             eintrag_je_key[key]["tv"] = kennungen
+        # Fremdsprachige Volltexte: je Sprache eine eigene Paketreihe. Welche
+        # Sprachen vorkommen, sagen die Daten – nicht eine Liste hier, die
+        # stillschweigend veralten könnte, sobald ein Scraper eine dritte
+        # Sprache mitbringt.
+        je_sprache = i18n_texts_by_platform.get(key) or []
+        sprachen = sorted({lg for eintrag in je_sprache for lg in eintrag})
+        for lg in sprachen:
+            texte = [(eintrag or {}).get(lg) for eintrag in je_sprache]
+            if not any(texte):
+                continue
+            kenn_lg = write_texts(key, items, texte, text_index, sprache=lg)
+            chunks_total += len(kenn_lg)
+            if key in eintrag_je_key:
+                eintrag_je_key[key].setdefault("tvl", {})[lg] = kenn_lg
         (OUT_DIR / f"{key}.json").write_text(
             json.dumps(items, ensure_ascii=False), encoding="utf-8")
     INDEX_FILE.write_text(
