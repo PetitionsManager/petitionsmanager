@@ -120,6 +120,17 @@ def discover_slugs(fetcher: core.Fetcher) -> dict[str, dict]:
         log(f"{label}: +{added} (gesamt {len(found)}).")
         prog(current=i, total=len(sources),
              message=f"{label} geprüft · {len(found)} Kampagnen bisher")
+    # Ein Melder über beide Quellen, nicht einer je Quelle. Die Messung am
+    # 8.8.2026 zeigt, warum: die Startseite brachte +263, die Kampagnen-Seite
+    # danach +0. Das sieht nach einem toten Zweig aus, ist aber keiner – `added`
+    # oben zählt nur NEUE Slugs (page not in found), und die Übersicht listet
+    # eben dieselben Kampagnen, die die Startseite schon hatte. Aus +0 lässt
+    # sich hier nichts über die Gesundheit einer einzelnen Quelle ablesen.
+    # Schwelle: 263 Kampagnen gemessen; 25 liegt eine Größenordnung darunter
+    # und meldet damit erst, wenn BEIDE Listen nichts mehr hergeben.
+    core.entdeckung("Startseite + Kampagnen-Übersicht", len(found),
+                    erwartet_min=25,
+                    name_en="home page + campaign overview")
     return found
 
 

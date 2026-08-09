@@ -248,6 +248,21 @@ def discover(fetcher: core.Fetcher) -> dict[str, dict]:
         log(f"  {region or 'ohne Region'} / {tf}: +{added} (gesamt {len(found)}).")
         prog(current=i, total=len(abfragen),
              message=f"{len(found)} Aktionen bisher")
+    # Bewusst EIN Melder über alle sechs Abfragen statt einer je Unterzweig.
+    # Zwei Gründe, beide am 8.8.2026 gemessen:
+    #  1. Die Unterzweige liefern regulär nichts Neues – Europe/low bar brachte
+    #     +20, Europe/high bar, ohne-Region/medium und ohne-Region/high je +0.
+    #     Ein Melder je Unterzweig hätte also am ersten Tag dreimal Fehlalarm
+    #     geschlagen, und ein Melder, der täglich meldet, wird überlesen.
+    #  2. `added` oben zählt nur NEUE Seiten (pid not in found). Eine Abfrage
+    #     mit +0 kann 20 Treffer geliefert haben, die eine frühere Abfrage schon
+    #     kannte – aus +0 lässt sich über die Gesundheit eines Unterzweigs
+    #     schlicht nichts ablesen. Messbar ist nur die Summe.
+    # Schwelle: 26 Aktionen gemessen; unter 5 liefern alle sechs Abfragen
+    # zusammen fast nichts, und das ist kein Aktionsstand mehr.
+    core.entdeckung("Aktionslisten (Region × Zeitstufe)", len(found),
+                    erwartet_min=5,
+                    name_en="action lists (region × time filter)")
     return found
 
 
