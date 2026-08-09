@@ -126,6 +126,31 @@
     var i = LANG_ORDER.indexOf(code); return i < 0 ? 99 : i;
   }
 
+  /* ---- Sprachen EINER PLATTFORM (8.8.2026) --------------------------------
+     ⚠️ Zwei Fragen, die man auseinanderhalten muss:
+
+       „In welcher Sprache ist diese Plattform?"   → p.language, EINE Sprache.
+           Danach wird die Kachelliste GRUPPIERT und die Flagge gewählt. Eine
+           zweisprachige Plattform darf hier nicht in zwei Gruppen stehen,
+           sonst erschiene dieselbe Kachel zweimal.
+
+       „Welche Sprachen BIETET diese Plattform?"   → platLanguages(), MEHRERE.
+           Danach filtert der Einrichtungs-Assistent. Wer nur Englisch
+           ausgewählt hat, soll europarl bekommen — dessen Petitionen liegen
+           englisch vor, auch wenn die Hauptsprache Deutsch ist.
+
+     Vor dieser Trennung gab es nur die erste Frage, und als europarl von "en"
+     auf "de" umgestellt wurde, verschwand die Gruppe „Englischsprachige
+     Plattformen" ersatzlos — samt der Möglichkeit, danach zu filtern.
+
+     `languages` liefert publish.py aus den Daten (Hauptsprache zuerst); fehlt
+     es (älteres Manifest), bleibt es bei der einen Sprache. */
+  function platLanguages(p) {
+    if (p && Array.isArray(p.languages) && p.languages.length)
+      return p.languages;
+    return [(p && p.language) || "de"];
+  }
+
   // ---- Texte & Plattform-Stammdaten ------------------------------------------
   // Sämtliche Bildschirmtexte stehen in texts.js, die Marken-Daten der
   // Plattformen in platforms.js. Beide werden vor app.js geladen. Fehlt eine
@@ -1673,6 +1698,25 @@
 
   function platCard(p, size) {
     var info = langInfo(p.language || "de");
+    /* ⚠️ Hinweis auf WEITERE Sprachen — behebt eine echte Irreführung.
+       Gruppiert wird nach der HAUPTsprache, und seit alle elf Plattformen
+       deutsch geführt sind, gibt es nur noch EINE Gruppe. Wer im Assistenten
+       „Englisch" auswählt, bekommt sechs Plattformen unter der Überschrift
+       „Deutschsprachige Plattformen" — sachlich richtig (deren Hauptsprache
+       IST Deutsch), aber es erklärt nicht, warum gerade diese sechs da sind.
+       Die zusätzliche Flagge auf der Kachel sagt es.
+       Steht in platCard und nicht im Magazin-Zweig: platCard baut die Kachel
+       für ALLE Layouts, der Zweig dort nur für eines. */
+    var weitere = platLanguages(p).filter(function (c) {
+      return c !== (p.language || "de"); });
+    var mehrsprachig = weitere.length
+      ? '<span class="plat__langs" title="' +
+        esc(fill(T("liste.alsoIn", "Liegt auch auf {sprachen} vor"),
+                 { sprachen: weitere.map(function (c) {
+                     return langInfo(c).name; }).join(", ") })) + '">' +
+        weitere.map(function (c) { return langInfo(c).flag; }).join("") +
+        "</span>"
+      : "";
     var newN = p["new"] || 0;
     var newLabel = newN > 0
       ? '<span class="plat__new">' +
@@ -1713,7 +1757,7 @@
           '<span class="plat__meta"><span class="plat__num">' +
             nf.format(p.online) + '</span><span class="plat__unit"> ' +
             esc(T("liste.petitionsUnit", "Petitionen")) + "</span>" +
-            newLabel + '</span>' +
+            newLabel + mehrsprachig + '</span>' +
           (tagline ? '<span class="plat__tag">' + esc(tagline) + "</span>" : "") +
         '</span>' +
         '<span class="plat__chev">' +
@@ -2249,10 +2293,18 @@
         'rel="noopener" aria-label="' +
         esc(T("petition.openExternAria", "Petition extern öffnen")) + '">' +
         '<i class="fa-solid fa-arrow-up-right-from-square"></i></a>' : "";
-    // Kategorie als Balken oben an der Kachel (klickbar → filtert).
+    /* Kategorie als Balken oben an der Kachel (klickbar → filtert).
+       ⚠️ Angezeigt wird die ÜBERSETZUNG, gefiltert wird über den Rohwert
+       r.category (siehe der Klick-Zuhörer weiter unten und state.catFilter).
+       Beides auseinanderzuhalten ist der ganze Trick: der Rohwert bleibt die
+       Kennung, die Übersetzung ist nur Beschriftung. Wo keine Übersetzung
+       vorliegt — und das ist der Regelfall, etwa bei den 859 amtlichen
+       Sachgebieten des Bundestags —, fällt txt() auf den deutschen Wert
+       zurück. Die sind Eigennamen und sollen auch gar nicht übersetzt werden. */
     var catBar = r.category
       ? '<button class="pet__catbar" type="button">' +
-        '<i class="fa-solid fa-tag"></i> ' + esc(r.category) + "</button>" : "";
+        '<i class="fa-solid fa-tag"></i> ' + esc(txt(r, "category")) +
+        "</button>" : "";
     var head = el('<div class="pet__head">' + thumb +
       '<div class="pet__main">' +
         '<div class="pet__title">' +
@@ -3366,12 +3418,24 @@
       }
       h += "</div>";
 
-      // Kategorien dieser Plattform, häufigste zuerst.
-      var zaehler = {};
+      /* Kategorien dieser Plattform, häufigste zuerst.
+         ⚠️ Gezählt und gefiltert wird über den ROHWERT (data-cat unten,
+         state.catFilter), beschriftet wird übersetzt. `katLabel` sammelt die
+         Beschriftung beim ersten Datensatz ein, der diese Kategorie trägt —
+         eine eigene Übersetzungstabelle wäre hier falsch: es gibt 953
+         verschiedene Kategorien, 859 davon amtliche Sachgebiete des
+         Bundestags („Straßenverkehrs-Ordnung"), und die sind Eigennamen. */
+      var zaehler = {}, katLabel = {};
       arr.forEach(function (r) {
-        if (r.category) zaehler[r.category] = (zaehler[r.category] || 0) + 1; });
+        if (!r.category) return;
+        zaehler[r.category] = (zaehler[r.category] || 0) + 1;
+        if (!katLabel[r.category]) katLabel[r.category] = txt(r, "category");
+      });
+      // Sortiert wird nach der ANGEZEIGTEN Beschriftung, sonst stünde die
+      // Liste in der englischen Oberfläche in deutscher Reihenfolge.
       var kats = Object.keys(zaehler).sort(function (a, b) {
-        return zaehler[b] - zaehler[a] || a.localeCompare(b, "de"); });
+        return zaehler[b] - zaehler[a] ||
+          String(katLabel[a] || a).localeCompare(String(katLabel[b] || b)); });
       if (kats.length) {
         h += '<div class="ptools__grp"><span class="ptools__h">' +
           '<i class="fa-solid fa-tag"></i> ' +
@@ -3382,7 +3446,7 @@
           esc(T("tools.catAll", "Alle")) + "</button>" +
           kats.map(function (c) {
             return '<button class="chip" type="button" data-cat="' + esc(c) +
-              '">' + esc(c) + '<span class="chip__n">' +
+              '">' + esc(katLabel[c] || c) + '<span class="chip__n">' +
               nf.format(zaehler[c]) + "</span></button>";
           }).join("") + "</div></div>";
       }
@@ -5268,7 +5332,12 @@
 
   function wizardLanguages() {
     var seen = {};
-    livePlatforms().forEach(function (p) { seen[p.language || "de"] = true; });
+    // Angeboten wird jede Sprache, die IRGENDEINE Plattform liefert — nicht
+    // nur die Hauptsprachen. Sonst ließe sich nach Englisch gar nicht filtern,
+    // obwohl sieben Plattformen englische Texte mitbringen.
+    livePlatforms().forEach(function (p) {
+      platLanguages(p).forEach(function (c) { seen[c] = true; });
+    });
     return Object.keys(seen).sort(function (a, b) {
       return langRank(a) - langRank(b) || a.localeCompare(b);
     });
@@ -5386,7 +5455,7 @@
       wizardLanguages().forEach(function (code) {
         var info = langInfo(code);
         var n = livePlatforms().filter(function (p) {
-          return (p.language || "de") === code; }).length;
+          return platLanguages(p).indexOf(code) > -1; }).length;
         var chip = el('<button class="chip' +
           (wizardSel.langs.has(code) ? " on" : "") + '" type="button">' +
           /* flag mit dazu: die runde Blende steckt in .flag (style.css),
@@ -5414,8 +5483,10 @@
         esc(T("wizard.platforms.text",
               "Tippe an, was dich interessiert – alle sind vorausgewählt."))
         + "</p>"));
+      // Eine Plattform kommt durch, sobald EINE ihrer Sprachen gewählt ist.
       var pl = livePlatforms().filter(function (p) {
-        return wizardSel.langs.has(p.language || "de");
+        return platLanguages(p).some(function (c) {
+          return wizardSel.langs.has(c); });
       }).sort(function (a, b) { return a.name.localeCompare(b.name, "de"); });
       // Plattformen aus abgewählten Sprachen fliegen aus der Auswahl.
       Array.from(wizardSel.plats).forEach(function (k) {

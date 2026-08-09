@@ -507,7 +507,10 @@ def scrape_action(fetcher: core.Fetcher, page_id: str, obj: dict,
                 links = rec.pop("_sprachlinks", {})
                 i18n.setze_hauptsprache(rec, "de")
                 rec["campaign_id"] = f"threefifty:{_slug_rumpf(slug).lower()}"
-                for lang in FREMDSPRACHEN:
+                # Fremdsprachen sind abschaltbar (siehe i18n_helfer). Die
+                # Kennung oben bleibt trotzdem stehen — sie kostet nichts und
+                # verbindet die Fassungen, sobald sie da sind.
+                for lang in (FREMDSPRACHEN if i18n.aktiv() else ()):
                     ziel = links.get(lang)
                     if not ziel:
                         # Kein eindeutiger Umschalter-Treffer. Das kann heißen

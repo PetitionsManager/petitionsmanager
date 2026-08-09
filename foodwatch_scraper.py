@@ -211,6 +211,10 @@ def _en_index(fetcher: core.Fetcher) -> dict[int, str]:
 
 
 def _fremdsprachen_holen(fetcher: core.Fetcher, rec: dict, slug: str) -> None:
+    # Fremdsprachen sind abschaltbar (siehe i18n_helfer) — der
+    # Tageslauf verzichtet darauf, ein eigener Lauf holt sie nach.
+    if not i18n.aktiv():
+        return
     i18n.setze_hauptsprache(rec, "de")
     for lang in FREMDSPRACHEN:
         zahl = rec.get("signatures")

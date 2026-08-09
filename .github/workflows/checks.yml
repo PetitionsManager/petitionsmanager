@@ -80,8 +80,42 @@ jobs:
                                   for r in recs if r.get("url") == u})
                   fehler.append(f"{key}: URL {n}× vorhanden – {u} "
                                 f"({' | '.join(titel)})")
+              # ---- Sprachebene (seit 8.8.2026) ------------------------------
+              # Die App entscheidet an "i18n_state", ob sie behauptet, eine
+              # Petition liege in der gewählten Sprache nicht vor. Ein
+              # Tippfehler dort schaltet dieses Abzeichen still ab — oder,
+              # schlimmer, falsch an: dann steht eine unbelegte Tatsachen-
+              # behauptung auf dem Bildschirm. Deshalb sind nur genau drei
+              # Werte zulässig (siehe i18n_helfer.ZUSTAENDE).
+              ZUSTAENDE = {"vorhanden", "fehlt", "ungeklärt"}
+              schlecht = {z for r in recs
+                          for z in (r.get("i18n_state") or {}).values()
+                          if z not in ZUSTAENDE}
+              if schlecht:
+                  fehler.append(f"{key}: unbekannter i18n_state "
+                                f"{sorted(schlecht)} – erlaubt: {sorted(ZUSTAENDE)}")
+              # Wer eine Fremdsprache mitbringt, muss auch sagen, in welcher
+              # Sprache die FLACHEN Felder stehen. Ohne "lang" weiß die App
+              # nicht, welche Sprache sie ersatzweise anzeigt, und das
+              # Abzeichen hieße „Fassung auf (unbekannt)".
+              ohne_lang = sum(1 for r in recs if r.get("i18n") and not r.get("lang"))
+              if ohne_lang:
+                  fehler.append(f"{key}: {ohne_lang} Datensätze mit i18n-Block, "
+                                f"aber ohne 'lang'")
+              # Fremdsprachige Volltext-Pakete: dieselbe Prüfung wie oben für
+              # "tc", nur je Sprachreihe. Ein fehlendes Paket lässt die App
+              # beim Aufklappen ins Leere laufen — auf Englisch genauso wie
+              # auf Deutsch.
+              for r in recs:
+                  for lg, blk in (r.get("i18n") or {}).items():
+                      n = (blk or {}).get("tc")
+                      if isinstance(n, int) and not (data / f"{key}.{lg}.t{n}.json").exists():
+                          fehler.append(f"{key}: Volltext-Paket {lg}.t{n} fehlt")
+                          break
+              sprachig = sum(1 for r in recs if r.get("i18n"))
               print(f"{key}: {len(recs)} Petitionen, "
                     f"{sum(1 for r in recs if r.get('related'))} mit Verwandtschaft"
+                    f"{f', {sprachig} mit Sprachfassung' if sprachig else ''}"
                     f"{f', {len(doppelt)} doppelte URLs' if doppelt else ''}")
 
           for f in sorted(data.glob("*.t[0-9]*.json")):
@@ -155,6 +189,18 @@ jobs:
             for (const [key, v] of Object.entries(P))
               for (const f of ["color","logoFile","about"])
                 if (!v[f]) fehlt.push(`platforms.js: ${key}.${f}`);
+            // Plattformname und "Fuer Nerds"-Satz kommen sonst aus dem
+            // MANIFEST, das der Scraper erzeugt - also serverseitig und
+            // einsprachig deutsch. In der englischen Oberflaeche stand
+            // deshalb "Europaeisches Parlament" mitten im englischen Satz.
+            // Der Uebersetzungsbaum ist ABSICHTLICH lueckenhaft (Marken wie
+            // WeAct oder foodwatch heissen ueberall gleich), aber die
+            // opennessNote muss jede Plattform haben: sie ist ein ganzer
+            // deutscher Satz und faellt sonst als einziger Fremdkoerper auf.
+            const PEN = global.window.PM_PLATFORMS_EN || {};
+            for (const key of Object.keys(P))
+              if (!(PEN[key] || {}).opennessNote)
+                fehlt.push(`platforms.js: PM_PLATFORMS_EN.${key}.opennessNote`);
             // Ein Pfad, hinter dem keine Datei liegt, faellt sonst erst auf
             // dem Handy auf: die Marke bleibt dann einfach leer.
             const fs = require("fs");

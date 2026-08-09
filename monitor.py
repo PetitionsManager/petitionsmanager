@@ -24,6 +24,7 @@ import os
 import time
 from pathlib import Path
 
+import i18n_helfer as i18n
 import petitions_core as core
 from petitions_core import Platform
 
@@ -109,6 +110,18 @@ def parse_args():
     p.add_argument("--backfill-batch", type=int, default=core.BACKFILL_BATCH,
                    help="wie viele fehlende Volltexte pro Lauf nachgeladen "
                         f"werden (Default {core.BACKFILL_BATCH}; 0 = keine)")
+    # ⚠️ Die Fremdsprachen VERDOPPELN die Detailabrufe (rund 1.800 zusätzliche
+    # über alle Plattformen, Avaaz allein ~1.186). Der Tageslauf teilt sich ein
+    # Budget von 350 Minuten und schöpft es heute schon nicht immer aus — die
+    # Frische der Plattformen ist deshalb gestaffelt. Käme die Verdopplung
+    # ungefragt dazu, fielen hinten Plattformen heraus, ohne dass jemand einen
+    # Fehler sähe. Deshalb ruft der Tageslauf mit --keine-sprachen, und ein
+    # eigener, seltener Lauf holt die Übersetzungen nach; dasselbe Muster wie
+    # --backfill beim Bundestag.
+    p.add_argument("--keine-sprachen", dest="keine_sprachen",
+                   action="store_true",
+                   help="fremdsprachige Fassungen NICHT mitholen (halbiert die "
+                        "Detailabrufe; die Hauptsprache kommt weiterhin)")
     p.add_argument("--serve", action="store_true",
                    help="Monitor lokal ausliefern, inkl. 'Jetzt scrapen'-Buttons")
     p.add_argument("--port", type=int, default=8000,
@@ -191,6 +204,12 @@ def run_checks(args) -> None:
 
 def main() -> None:
     args = parse_args()
+    # Muss VOR dem ersten Scraper-Aufruf stehen: die Plattform-Module lesen den
+    # Schalter zur Laufzeit über i18n_helfer.aktiv().
+    i18n.setze_aktiv(not args.keine_sprachen)
+    if args.keine_sprachen:
+        core.log("Fremdsprachige Fassungen werden übersprungen "
+                 "(--keine-sprachen).")
     try:
         if args.check:
             run_checks(args)

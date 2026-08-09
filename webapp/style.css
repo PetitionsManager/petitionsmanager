@@ -374,6 +374,12 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
 .plat__new{display:inline-block;margin-left:.5rem;background:var(--bg);
   color:var(--online);border-radius:999px;padding:.0625rem .5625rem;
   font-size:.75rem;font-weight:700;vertical-align:middle}
+/* Weitere Sprachen der Plattform. Bewusst NUR die Flagge und ohne Rahmen:
+   die Kachel traegt schon Name, Zahl, "+N neu" und die Kurzzeile — ein
+   weiteres Abzeichen mit Kasten wuerde mit .plat__new konkurrieren. Der
+   Klartext steht im title. */
+.plat__langs{display:inline-block;margin-left:.375rem;font-size:.8125rem;
+  vertical-align:middle;cursor:help;opacity:.9}
 /* Pfeil-Kreis: kräftigere Markentönung (22 %), Symbol in Textfarbe. */
 .plat__chev{flex:none;width:2.25rem;height:2.25rem;border-radius:50%;
   background-color:var(--brand,var(--accent-soft));

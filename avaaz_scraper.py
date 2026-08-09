@@ -453,6 +453,10 @@ def _fremdsprachen_holen(fetcher: core.Fetcher, rec: dict, slug: str,
     `bereich` ist „community_petitions" oder „campaign", `parser` der passende
     Parser — die beiden Seitenformen sind verschieden aufgebaut, die
     Sprachlogik ist dieselbe."""
+    # Fremdsprachen sind abschaltbar (siehe i18n_helfer) — der
+    # Tageslauf verzichtet darauf, ein eigener Lauf holt sie nach.
+    if not i18n.aktiv():
+        return
     i18n.setze_hauptsprache(rec, "de")
     rec["campaign_id"] = f"avaaz:{bereich}:{slug}"
     for lang in FREMDSPRACHEN:

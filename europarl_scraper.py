@@ -31,6 +31,7 @@ from pathlib import Path
 
 from bs4 import BeautifulSoup
 
+import i18n_helfer as i18nh
 import petitions_core as core
 from petitions_core import Platform, log, now_iso, prog
 
@@ -164,6 +165,16 @@ def discover_slugs(fetcher: core.Fetcher) -> dict[str, dict]:
             break                        # alle Ergebnisse erfasst
         size *= 2
     log(f"Suche: {len(found)} deutsche Petitionen (AVAILABLE).")
+    # Diese Suche ist die einzige Entdeckung – es gibt keinen zweiten Zweig,
+    # der ihren Ausfall auffangen und damit verdecken würde. Heikel ist dabei
+    # die Abbruchbedingung oben: greift NUMBER_HREF_RE nach einem Umbau der
+    # Trefferliste nicht mehr, ist added == 0, die Schleife endet ORDENTLICH,
+    # und der Lauf meldet keinen Fehler – er findet nur nichts.
+    # Schwelle gemessen am 8.8.2026: 91 deutsche Petitionen im Status
+    # AVAILABLE. 10 liegt weit genug darunter, dass der normale Zu- und Abgang
+    # (Petitionen werden geschlossen, neue kommen dazu) nie meldet.
+    core.entdeckung("DE-Suche (Status AVAILABLE)", len(found), erwartet_min=10,
+                    name_en="German-language search (status AVAILABLE)")
     return found
 
 
@@ -256,10 +267,32 @@ def parse_detail(html: str, url: str, slug: str,
     return rec
 
 
-# Welche Felder eine Fremdsprache mitbringt. Alles andere (Unterschriften,
-# Status, Datum, Kategorie) ist entweder eine Zahl oder wird zum Filtern per
-# Zeichenkettenvergleich benutzt und bleibt deshalb einsprachig – siehe die
-# Notiz zu "category" in publish.compute_related.
+# Welche Felder eine Fremdsprache mitbringt.
+#
+# ⚠️⚠️ "category" gehört NICHT dazu, und der Versuch ist am 8.8.2026 GEMESSEN
+# gescheitert — nicht vermutet. Er sah zunächst gut aus: die Quelle liefert das
+# Feld in beiden Sprachen, wir holen die englische Seite ohnehin, und in
+# app.js sind Anzeige und Filter getrennt (der Klick übergibt den Rohwert).
+# Nur stimmt die Zuordnung nicht:
+#
+#   Das Feld ist MEHRWERTIG. Petition 2517/2025 trägt fünf Themenbereiche, und
+#   parse_detail nimmt je Sprache den ERSTEN. Die Reihenfolge ist aber je
+#   Sprache eine andere — an fünf Petitionen nachgezählt, alle mit gleich
+#   langen Listen und durchweg abweichender Ordnung:
+#
+#     DE 0: Grundrechte                    EN 0: Equal Opportunities and Gender
+#     DE 1: Persönliche Angelegenheiten    EN 1: Personal Matter
+#     DE 2: Justiz                         EN 2: Fundamental Rights
+#
+#   Gepaart würde also "Grundrechte" mit "Equal Opportunities and Gender" —
+#   eine falsche Übersetzung, und die ist schlechter als gar keine. Ein
+#   gemeinsamer Schlüssel (Themen-ID) steht auf der Seite nicht; über die
+#   Position lässt sich nichts retten.
+#
+# ⬜ NEBENBEFUND, ÄLTER ALS DIESE SITZUNG: dass nur der erste von bis zu fünf
+# Themenbereichen gespeichert wird, ist auch einsprachig eine willkürliche
+# Auswahl. Wer das angeht, muss `category` zu einer Liste machen — das berührt
+# Filter, Zählung und Verwandtschaftsrechnung und ist eine eigene Aufgabe.
 I18N_FELDER = ("title", "summary", "description_full", "url")
 
 
@@ -306,6 +339,10 @@ def scrape_petition(fetcher: core.Fetcher, slug: str) -> tuple[str, dict | None]
         return "error", None
 
     rec["lang"] = HAUPTSPRACHE
+    # ⚠️ Der Schalter betrifft NUR die Fremdsprachen. Die Hauptsprache ist oben
+    # schon geholt – ohne sie gäbe es gar keinen Datensatz.
+    if not i18nh.aktiv():
+        return "online", rec
     i18n: dict[str, dict] = {}
     i18n_state: dict[str, str] = {}
     for lang in SPRACHEN:

@@ -311,6 +311,10 @@ def _fremdsprachen_holen(fetcher: core.Fetcher, rec: dict, page: str) -> None:
     trotzdem festgehalten, weil „abgerufen und nicht vorhanden" etwas anderes
     ist als „nicht abgerufen"; nur das Erste rechtfertigt das Abzeichen in der
     App (siehe i18n_helfer)."""
+    # Fremdsprachen sind abschaltbar (siehe i18n_helfer) — der
+    # Tageslauf verzichtet darauf, ein eigener Lauf holt sie nach.
+    if not i18n.aktiv():
+        return
     for lang in FREMDSPRACHEN:
         fremd_page = _fremd_slug(page, lang)
         if not fremd_page:

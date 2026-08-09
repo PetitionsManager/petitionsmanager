@@ -129,6 +129,10 @@ window.PM_TEXTS = {
       /* „Petitionen" steht in der Kachel in einem EIGENEN Span unter der
          Zahl (Magazin setzt die Zahl gross) — deshalb nur die Einheit. */
       petitionsUnit: "Petitionen",
+      /* Flaggen-Hinweis auf der Plattform-Kachel. Zeigt die WEITEREN
+         Sprachen, in denen diese Plattform ihre Petitionen fuehrt —
+         die Gruppenueberschrift nennt nur die Hauptsprache. */
+      alsoIn: "Liegt auch auf {sprachen} vor",
       newBadge: "+{n} neu",
       countOf: "{n} von {total} Petitionen",
       reasonClosed: "beendet",
@@ -696,6 +700,7 @@ window.PM_TEXTS = {
       emptyFiltered: "No petitions found. Change your search term or check your filters.",
       loading: "Loading petitions…",
       petitionsUnit: "petitions",
+      alsoIn: "Also available in {sprachen}",
       newBadge: "+{n} new",
       countOf: "{n} of {total} petitions",
       reasonClosed: "closed",

@@ -289,6 +289,10 @@ def _kampagne(slug: str, verlinkt: dict[str, str]) -> str:
 def _fremdsprachen_holen(fetcher: core.Fetcher, rec: dict, slug: str,
                          html: str) -> None:
     """Übersetzungen laut Seitenblock nachladen und an `rec` hängen."""
+    # Fremdsprachen sind abschaltbar (siehe i18n_helfer) — der
+    # Tageslauf verzichtet darauf, ein eigener Lauf holt sie nach.
+    if not i18n.aktiv():
+        return
     i18n.setze_hauptsprache(rec, "de")
     verlinkt = _uebersetzungen_finden(html)
     rec["campaign_id"] = _kampagne(slug, verlinkt)

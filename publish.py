@@ -550,6 +550,26 @@ def main() -> None:
             entry["count"] = len(items)
             entry["online"] = sum(1 for r in items
                                   if r.get("status", "online") == "online")
+            # ---- Welche Sprachen liefert diese Plattform WIRKLICH? ---------
+            # "language" nennt EINE Sprache je Plattform und war bis zum
+            # 8.8.2026 richtig. Seither liefern sieben der elf zwei Sprachen,
+            # und das Feld wurde mehrdeutig: die App gruppiert danach die
+            # Kacheln UND filtert danach im Einrichtungs-Assistenten ("welche
+            # Sprachen willst du sehen"). Als europarl von "en" auf "de"
+            # wechselte, verschwand deshalb die ganze Gruppe
+            # "Englischsprachige Plattformen" — obwohl europarl seine
+            # englischen Texte weiter mitbringt, nur eben als i18n-Block.
+            #
+            # "languages" wird deshalb aus den DATEN abgeleitet statt von Hand
+            # gepflegt: Hauptsprache zuerst, dann alles, was als i18n-Block
+            # tatsächlich vorkommt. Eine Plattform, deren Übersetzungen noch
+            # nicht geholt wurden (--keine-sprachen), meldet hier ehrlich nur
+            # ihre eine Sprache.
+            haupt = p.language or "de"
+            sprachen = {r.get("lang") or haupt for r in items}
+            sprachen |= {lg for r in items for lg in (r.get("i18n") or {})}
+            entry["languages"] = ([haupt] +
+                                  sorted(s for s in sprachen if s != haupt))
             # Jüngster Plattform-Stempel, nicht der erste, der vorbeikommt:
             # vorher stand hier der Stempel der ERSTEN Live-Plattform in
             # monitor.PLATFORMS. Nach einem publish-Lauf am 29.7.26 um 18:59

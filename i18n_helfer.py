@@ -41,6 +41,39 @@ I18N_FELDER = ("title", "summary", "description_full", "url")
 
 ZUSTAENDE = ("vorhanden", "fehlt", "ungeklärt")
 
+# ---------------------------------------------------------------------------
+# SCHALTER: Fremdsprachen holen oder nicht
+#
+# ⚠️ Die Fremdsprache VERDOPPELT die Detailabrufe. Über alle Plattformen sind
+# das rund 1.800 zusätzliche Abrufe (Avaaz allein ~1.186), und der Tageslauf
+# in .github/workflows/scrape.yml teilt sich ein Budget von 350 Minuten, das
+# er heute schon nicht immer ausschöpfen kann — die Frische der Plattformen
+# ist deshalb gestaffelt. Käme die Verdopplung ungefragt dazu, fielen hinten
+# Plattformen heraus, ohne dass jemand einen Fehler sähe.
+#
+# Deshalb: der Tageslauf ruft mit --keine-sprachen, und ein eigener, seltener
+# Lauf holt die Übersetzungen nach. Dasselbe Muster wie --backfill beim
+# Bundestag und --archive bei Avaaz.
+#
+# ⚠️ Der Schalter betrifft NUR Fremdsprachen. Die Hauptsprache eines
+# Datensatzes wird immer geholt — bei Europarl ist das seit dem 8.8.2026
+# Deutsch, und ohne sie gäbe es gar keinen Datensatz.
+#
+# Wird die Fremdsprache übersprungen, bleibt `i18n_state` LEER und nicht etwa
+# auf „fehlt". Kein Eintrag heißt „nie nachgesehen", und die App zeigt dann
+# richtigerweise kein Abzeichen.
+FREMDSPRACHEN_AKTIV = True
+
+
+def aktiv() -> bool:
+    """Sollen Fremdsprachen geholt werden? Von monitor.py gesetzt."""
+    return FREMDSPRACHEN_AKTIV
+
+
+def setze_aktiv(wert: bool) -> None:
+    global FREMDSPRACHEN_AKTIV
+    FREMDSPRACHEN_AKTIV = bool(wert)
+
 
 def zustand_aus_antwort(resp, marker_da: bool = True) -> str:
     """Aus einer HTTP-Antwort den Sprachzustand ableiten.

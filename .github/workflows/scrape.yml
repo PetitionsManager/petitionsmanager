@@ -20,6 +20,15 @@ on:
         description: 'Nur veröffentlichen (nicht scrapen) – letzten Stand aus dem Cache neu ausliefern'
         type: boolean
         default: false
+      # Holt die fremdsprachigen Fassungen nach. Der Tageslauf lässt sie
+      # bewusst aus (--keine-sprachen), weil sie die Detailabrufe verdoppeln.
+      # Sieben der elf Plattformen veröffentlichen ihre Petitionen in mehr als
+      # einer Sprache; ohne diesen Schritt bleibt die App in der englischen
+      # Oberfläche bei deutschen Petitionstexten.
+      sprachen:
+        description: 'Übersetzungen nachholen (verdoppelt die Detailabrufe, eigener Schritt)'
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -142,7 +151,13 @@ jobs:
           # SIGINT statt SIGKILL: die Scraper schreiben ihren Zustand laufend
           # über eine temporäre Datei, ein sauberer Abbruch verliert nur den
           # angefangenen Block.
-          timeout --signal=INT "$rest" python3 monitor.py
+          # --keine-sprachen: die fremdsprachigen Fassungen VERDOPPELN die
+          # Detailabrufe (~1.800 zusätzliche, Avaaz allein ~1.186). Der
+          # Tageslauf schöpft sein Budget schon heute nicht immer aus — die
+          # Frische der Plattformen ist gestaffelt. Ungefragt dazugenommen
+          # fielen hinten Plattformen heraus, ohne dass jemand einen Fehler
+          # sähe. Die Übersetzungen holt der eigene Schritt unten.
+          timeout --signal=INT "$rest" python3 monitor.py --keine-sprachen
           code=$?
           set -e
           # 124/130 = Frist erreicht; alles andere ist ein echter Fehler und
@@ -152,6 +167,43 @@ jobs:
           elif [ $code -ne 0 ]; then
             exit $code
           fi
+
+      # Haken "sprachen". Sieben Plattformen veröffentlichen ihre Petitionen in
+      # mehr als einer Sprache (am 8.8.2026 alle elf mit echtem Abruf gemessen).
+      # Der Tageslauf lässt sie aus, weil sie die Detailabrufe verdoppeln; hier
+      # werden sie nachgeholt. Je Plattform ein eigener Aufruf mit --force,
+      # sonst überspringt skip_recent genau die Sätze, die der Tageslauf gerade
+      # ohne Übersetzung angefasst hat.
+      #
+      # ⚠️ Reihenfolge ist Absicht: die billigen zuerst. Europarl kostet KEINEN
+      # Zusatzabruf (es holt die deutsche statt der englischen Seite),
+      # openpetition/threefifty/foodwatch lesen den Sprachhinweis aus dem HTML,
+      # das sie ohnehin holen. Avaaz steht hinten — allein ~1.186 Abrufe. Reißt
+      # die Frist, fehlt so das Billigste zuletzt und nicht zuerst.
+      #
+      # ⚠️ Ekō fehlt bewusst: dort gibt es keinen Weg zur Übersetzung (kein
+      # Sprachsegment, kein Umschalter, kein Index), nur die campaign_id als
+      # Klammer. Ein Aufruf brächte nichts als Last.
+      - name: "Übersetzungen nachholen (auf Anforderung)"
+        if: ${{ inputs.sprachen && !inputs.nur_veroeffentlichen }}
+        run: |
+          for plat in europarl openpetition threefifty foodwatch wemove avaaz; do
+            rest=$(( FRIST - $(date +%s) ))
+            if [ "$rest" -gt 3600 ]; then rest=3600; fi
+            if [ "$rest" -lt 60 ]; then
+              echo "::warning::Zeitrahmen erschöpft – Übersetzungen für $plat übersprungen."
+              continue
+            fi
+            set +e
+            timeout --signal=INT "$rest" python3 monitor.py --platform "$plat" --force
+            code=$?
+            set -e
+            if [ $code -eq 124 ] || [ $code -eq 130 ]; then
+              echo "::warning::Zeitrahmen bei den Übersetzungen erreicht ($plat) – Rest folgt beim nächsten Anfordern."
+            elif [ $code -ne 0 ]; then
+              exit $code
+            fi
+          done
 
       - name: "Change.org aufholen (500/Lauf, wiederholt bis zur gemeinsamen Frist)"
         if: ${{ !inputs.nur_veroeffentlichen }}
