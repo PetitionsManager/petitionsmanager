@@ -27,6 +27,7 @@
 
 from __future__ import annotations
 
+import datetime as _dt
 import json
 import re
 from pathlib import Path
@@ -71,6 +72,21 @@ FETCH_HEADERS = {
 # Rest beim naechsten Tageslauf. Der Rueckstand baut sich so ueber einige Tage
 # ab - langsamer, aber ohne dem Betreiber zur Last zu fallen.
 DETAIL_BUDGET = 120        # erfolgreiche Detailabrufe pro Lauf
+# So lange gilt eine als unbrauchbar erkannte Seite als erledigt, bevor sie
+# erneut geprüft wird (siehe Merkzettel in run()).
+UNBRAUCHBAR_ERNEUT_NACH_TAGEN = 30
+
+
+def _merk_abgelaufen(zeitstempel: str) -> bool:
+    """Ist der Merkzettel-Eintrag alt genug für eine erneute Prüfung?
+    Ein unlesbarer Stempel gilt als abgelaufen — im Zweifel lieber einmal zu
+    viel prüfen als eine Seite für immer abschreiben."""
+    try:
+        alt = _dt.datetime.fromisoformat(str(zeitstempel))
+    except (TypeError, ValueError):
+        return True
+    jetzt = _dt.datetime.now(alt.tzinfo)
+    return (jetzt - alt).days >= UNBRAUCHBAR_ERNEUT_NACH_TAGEN
 ABBRUCH_NACH_FEHLERN = 5   # Leerantworten in Folge = Checkpoint erreicht
 
 
@@ -235,8 +251,29 @@ def run(args) -> None:
     fetcher = core.Fetcher(delay=args.delay, headers=FETCH_HEADERS)
     ts = now_iso()
 
+    # Merkzettel unbrauchbarer Seiten. Ohne ihn kostete die Reparatur vom
+    # 4.8.2026 die Hälfte des Laufs: „unbrauchbar" zählte als Erfolg, also
+    # gegen DETAIL_BUDGET, und `known.sort()` schiebt Sätze ohne Volltext nach
+    # VORN — Test- und Entwurfsseiten bekommen nie einen Volltext und standen
+    # damit jeden Lauf wieder ganz oben. Am 8.8.2026 gemessen: 54 der 263
+    # Seiten sind unbrauchbar, das sind 54 von 120 Abrufen (45 %) für Seiten,
+    # die nie eine Petition werden. Dieselbe Verstopfung wie beim Ausfall
+    # davor, nur ohne den Abbruch.
+    #
+    # Der Merkzettel läuft ab: nach UNBRAUCHBAR_ERNEUT_NACH_TAGEN wird eine
+    # Seite wieder geprüft. Eine unfertige Kampagne, die jemand später
+    # ausfüllt, kommt so von selbst zurück — ohne Ablauf wäre der Merkzettel
+    # ein endgültiges Urteil über eine Seite, die sich ändern darf.
+    unbrauchbare = dict(core.load_meta(DATA_FILE).get("unbrauchbare") or {})
+    unbrauchbare = {p: z for p, z in unbrauchbare.items()
+                    if not _merk_abgelaufen(z)}
+
     def save(quiet=True, **extra):
-        core.save_store(store, DATA_FILE, extra_meta=extra, quiet=quiet)
+        # unbrauchbare MUSS bei jedem Speichern mitgehen: save_store baut
+        # _meta neu auf, alles nicht Übergebene fiele weg.
+        core.save_store(store, DATA_FILE,
+                        extra_meta={"unbrauchbare": unbrauchbare, **extra},
+                        quiet=quiet)
 
     known = list(store.keys())
     # Datensaetze ohne Volltext nach vorne. Der Checkpoint deckelt die Menge pro
@@ -270,13 +307,20 @@ def run(args) -> None:
                 continue
             if status == "unbrauchbar":
                 # Die Seite hat geantwortet, wir sind also NICHT geblockt –
-                # der Zähler geht zurück auf null. Nur abstempeln, damit sie
-                # 24 h lang nicht wieder vorne in der Warteschlange steht.
+                # der Zähler geht zurück auf null.
+                #
+                # Der Satz wird ENTFERNT, nicht abgestempelt (8.8.2026). Vorher
+                # blieb er als „online" liegen, obwohl derselbe Code ihn beim
+                # Entdecken gar nicht erst angelegt hätte — der Bestand trug
+                # also 54 Sätze, die er nach eigenen Regeln nicht tragen darf,
+                # meldete 263 statt 209 und schleppte sie täglich mit. Der
+                # Merkzettel verhindert, dass die Entdeckung sie sofort wieder
+                # als „neu" vorlegt.
                 unbrauchbar += 1
                 fehler_in_folge = 0
                 erfolge += 1
-                core.upsert(store, page, {}, {}, "online", ts,
-                            f"{BASE_URL}/sign/{page}")
+                unbrauchbare[page] = ts
+                store.pop(page, None)
                 save()
                 continue
             fehler_in_folge = 0
@@ -293,7 +337,17 @@ def run(args) -> None:
 
     log("Sammle Kampagnen (Startseite + Übersicht) …")
     discovered = discover_slugs(fetcher)
-    new_pages = [p for p in discovered if p not in store]
+    # WeMove verlinkt seine Test- und Entwurfsseiten auf der Startseite mit,
+    # die Entdeckung findet sie also jeden Tag wieder. Ohne den Merkzettel
+    # würden sie hier als „neu" gelten und das Abrufbudget genauso auffressen
+    # wie vorher im bekannten Bestand — verschoben, nicht behoben.
+    uebersprungen = [p for p in discovered if p not in store and p in unbrauchbare]
+    new_pages = [p for p in discovered
+                 if p not in store and p not in unbrauchbare]
+    if uebersprungen:
+        log(f"{len(uebersprungen)} bekannte Test-/Entwurfsseite(n) übersprungen "
+            f"(Merkzettel, erneute Prüfung nach "
+            f"{UNBRAUCHBAR_ERNEUT_NACH_TAGEN} Tagen).")
     if args.limit:
         new_pages = new_pages[:args.limit]
     log(f"{len(new_pages)} neue Kampagnen zum Scrapen "
@@ -306,8 +360,13 @@ def run(args) -> None:
         prog(current=i, total=len(new_pages), message=page)
         status, rec = scrape_petition(fetcher, page)
         # "unbrauchbar" hier ebenfalls überspringen: eine Test- oder
-        # Entwurfsseite soll gar nicht erst als Datensatz entstehen.
-        if status in ("error", "unbrauchbar"):
+        # Entwurfsseite soll gar nicht erst als Datensatz entstehen. Sie kommt
+        # zusätzlich auf den Merkzettel, damit der nächste Lauf sie nicht
+        # erneut abruft.
+        if status == "unbrauchbar":
+            unbrauchbare[page] = ts
+            continue
+        if status == "error":
             continue
         core.upsert(store, page, rec or {}, {}, status, ts,
                     f"{BASE_URL}/sign/{page}")
@@ -318,8 +377,13 @@ def run(args) -> None:
         log(f"NEU: {len(new_petitions)} neue Kampagne(n) in diesem Lauf.")
 
     prog(message="Speichere & baue HTML …")
+    # „available" ist der Maßstab des Vollständigkeitsbalkens. Gezählt wird,
+    # was überhaupt eine Petition werden kann — die bekannten Test- und
+    # Entwurfsseiten gehören nicht dazu. Sonst stünde WeMove dauerhaft bei
+    # 209 von 263 = 79 % und meldete Rückstand für einen korrekten Zustand.
+    erreichbar = [p for p in discovered if p not in unbrauchbare]
     save(quiet=False, new_petitions_last_run=new_petitions,
-         available=len(discovered))
+         available=len(erreichbar))
     core.write_list_html(PLATFORM)
     log("Fertig (WeMove Europe).")
 
