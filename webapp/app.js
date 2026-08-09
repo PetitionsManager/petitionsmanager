@@ -1300,6 +1300,12 @@
       '<div class="support__title"><i class="fa-solid fa-hand-holding-heart">' +
       "</i> " + esc(T("support.title", "Unterstütze PetitionsManager")) +
       ".</div>" +
+      /* support.intro stand seit jeher in texts.js, wurde aber NIE gezeichnet -
+         beim Herausziehen der Texte am 8.8.2026 aufgefallen. Der Satz
+         "PetitionsManager ist ein freies Projekt…" fehlte dadurch in der
+         Oberflaeche, obwohl er gepflegt und sogar uebersetzt war. Jetzt steht
+         er unter der Ueberschrift, wo er hingehoert. */
+      '<p class="support__intro">' + esc(T("support.intro", "")) + "</p>" +
       '<div class="support__acc"></div></section>');
     var acc = sec.querySelector(".support__acc");
 

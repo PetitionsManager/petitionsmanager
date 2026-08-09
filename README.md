@@ -25,6 +25,9 @@ und eine mobile Web-App (PWA/APK), die diese Daten offline durchsuchbar macht.
 - Petitionen nach Tags filtern; Tags werden automatisch aus Titeln und Texten abgeleitet
 - Favoriten-Plattformen anpinnen, Petitionen als „unterschrieben" oder archiviert markieren
 - Wischgesten: rechts = unterschrieben, links = archivieren
+- Tägliche Erinnerung mit einstellbarer Uhrzeit; auf Wunsch nur, wenn es neue
+  Petitionen gibt. In der Android-Fassung übernimmt das ein Weckruf des Systems,
+  im Browser erscheint die Meldung beim nächsten Öffnen der App
 - Zwei Layouts (Relief im Stil des Neumorphismus, Magazin als Kachelraster)
   und ein Dunkelmodus, der auch der Systemeinstellung folgen kann
 - Zweisprachige Oberfläche (Deutsch, Englisch); Vorgabe ist die Systemsprache,
@@ -116,6 +119,8 @@ nicht im Repo (siehe „Android-APK"), die Web-App bliebe sonst leer:
 
 ```bash
 python3 hole_live_daten.py      # ~60 MB, dauert etwa eine halbe Minute
+python3 hole_live_daten.py --pruefen   # nur holen und prüfen, nichts schreiben
+python3 hole_live_daten.py --ziel PFAD # in einen anderen Ordner als webapp/data
 ```
 
 ```bash

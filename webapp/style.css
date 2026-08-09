@@ -1399,6 +1399,10 @@ body.wizard-open{overflow:hidden}
    Die Rundung folgt der Zeilenecke, damit er nicht darueber hinauslaeuft;
    ein overflow:hidden auf .srow waere einfacher gewesen, haette aber den
    Schatten abgeschnitten. */
+/* Einleitung des Unterstuetzungs-Bereichs. Der Text lag seit jeher in
+   texts.js, wurde aber nie gezeichnet (8.8.2026 aufgefallen). */
+.support__intro{margin:.375rem .125rem 1rem;font-size:.8125rem;
+  line-height:1.55;color:var(--muted)}
 .srow__bar{position:absolute;left:.0625rem;bottom:.0625rem;height:.1875rem;
   width:0;max-width:calc(100% - .125rem);
   background:var(--accent);border-radius:0 999px 999px 1.125rem;
