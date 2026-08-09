@@ -140,7 +140,8 @@ def discover_slugs(fetcher: core.Fetcher) -> dict[str, dict]:
     # entdeckung() das als Hinweis, und dann gehört „aufgegeben" wieder weg.
     topics = discover_topics(fetcher)
     core.entdeckung("Themenseiten (trendingTopics)", len(topics),
-                    aufgegeben=True)
+                    aufgegeben=True,
+                    name_en="topic pages (trendingTopics)")
     prog(phase="discover", current=0, total=len(topics) + SITEMAP_COUNT,
          message="Sammle Themen …")
     for i, topic in enumerate(topics, 1):
@@ -162,7 +163,8 @@ def discover_slugs(fetcher: core.Fetcher) -> dict[str, dict]:
     # Seit der Themen-Zweig tot ist, hängt die gesamte Entdeckung an den
     # Sitemaps. Fällt auch die aus, findet der Lauf gar nichts mehr — und das
     # darf nicht erst am eingebrochenen Bestand auffallen.
-    core.entdeckung("Sitemap-Verzeichnis", len(maps))
+    core.entdeckung("Sitemap-Verzeichnis", len(maps),
+                    name_en="sitemap index")
     for j, sm in enumerate(maps, 1):
         r = fetcher.get(sm)
         added = 0

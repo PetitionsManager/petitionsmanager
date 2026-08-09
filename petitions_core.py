@@ -123,20 +123,66 @@ OPENNESS_LABELS = {
     2: "eingeschränkt",
     1: "verschlossen",
 }
+OPENNESS_LABELS_EN = {
+    5: "very open",
+    4: "open",
+    3: "moderate",
+    2: "restricted",
+    1: "closed",
+}
+
+
+# ----------------------------------------------------------------------------
+# Zweisprachigkeit des Dashboards (de/en)
+# ----------------------------------------------------------------------------
+# EIN Mechanismus für alles: jeder übersetzbare Knoten trägt seinen Text in
+# beiden Sprachen als data-de/data-en und zeigt zunächst Deutsch. Der Umschalter
+# tauscht nur noch textContent aus.
+#
+# Warum nicht Schlüssel + Wörterbuch wie in webapp/texts.js: dort erzeugt
+# JavaScript den Text zur Laufzeit, hier erzeugt ihn Python beim Bauen — die
+# Sätze mit Zahlen („54 von 263 erreichen die App nicht") sind fertig, sobald
+# die Seite entsteht. Ein Schlüsselregister bräuchte zusätzlich eine
+# Platzhalter-Mechanik und könnte auseinanderlaufen; hier ist es unmöglich,
+# dass ein Schlüssel ohne Text existiert oder umgekehrt.
+#
+# Der dreistufige Rückfall aus T() gilt sinngemäß weiter: fehlt data-en, bleibt
+# der deutsche Inhalt stehen — sichtbar unübersetzt statt leer.
+def _zs(de: str, en: str, tag: str = "span", klasse: str = "",
+        attrs: str = "") -> str:
+    """Ein zweisprachiger Textknoten."""
+    k = f' class="{klasse}"' if klasse else ""
+    return (f'<{tag}{k}{attrs} data-de="{_esc(de)}" data-en="{_esc(en)}">'
+            f'{_esc(de)}</{tag}>')
+
+
+def _zt(de: str, en: str) -> str:
+    """Nur die Attribute — für Elemente, die schon existieren (z. B. ein
+    ``title``-Tooltip oder ein Knopf mit eigener Klasse)."""
+    return f' data-de="{_esc(de)}" data-en="{_esc(en)}"'
 
 
 def _openness_badge(platform: Platform) -> str:
     """Ampel-Badge für die Dashboard-Kachel: 5 Punkte, gefüllt bis zum Level,
-    eingefärbt über .amp-<level>; Kurzbegründung als Tooltip."""
+    eingefärbt über .amp-<level>; Kurzbegründung als Tooltip.
+
+    Der Tooltip (``openness_note``) und der Plattformname bleiben vorerst
+    deutsch: beide gehören zum laufenden Auftrag „mehrsprachige Scraper" und
+    werden dort in den elf Scraper-Dateien übersetzt. Sobald die Felder
+    ``openness_note_en``/``name_en`` existieren, nimmt das Dashboard sie von
+    selbst — deshalb hier getattr statt einer festen Zuordnung."""
     lvl = platform.openness
     if not 1 <= lvl <= 5:
         return ""
     dots = "".join(f'<i class="{"on" if i <= lvl else ""}"></i>'
                    for i in range(1, 6))
-    return (f'<div class="amp amp-{lvl}" '
-            f'title="{_esc(platform.openness_note)}">'
+    notiz = platform.openness_note
+    notiz_en = getattr(platform, "openness_note_en", "") or notiz
+    return (f'<div class="amp amp-{lvl}" title="{_esc(notiz)}"'
+            f'{_zt(notiz, notiz_en)} data-titel="1">'
             f'<span class="amp-dots">{dots}</span>'
-            f'<span class="amp-label">{OPENNESS_LABELS[lvl]}</span></div>')
+            f'{_zs(OPENNESS_LABELS[lvl], OPENNESS_LABELS_EN[lvl], klasse="amp-label")}'
+            f'</div>')
 
 
 # ----------------------------------------------------------------------------
@@ -842,21 +888,35 @@ BEFUND_LOCK = threading.Lock()
 VERLAUF_MAX = 30       # so viele Läufe hält die Zeitreihe je Plattform
 
 
-def befund(stufe: str, thema: str, text: str) -> None:
+def befund(stufe: str, thema: str, text: str,
+           thema_en: str = "", text_en: str = "") -> None:
     """Eine Auffälligkeit melden; `stufe` ist "warnung" oder "hinweis".
     Die Zuordnung zur Plattform läuft über denselben Thread-Kontext wie prog()
     — monitor.py --all scrapt mehrere Plattformen nebenläufig, ein einfaches
-    Modul-Global würde ihre Meldungen vermischen."""
+    Modul-Global würde ihre Meldungen vermischen.
+
+    Die englische Fassung wird MITGESCHRIEBEN, nicht später übersetzt: der
+    Befund entsteht beim Scrapen und liegt danach als fertiger Satz im _meta.
+    Wer ihn erst im Dashboard übersetzen wollte, bräuchte dort eine Tabelle
+    aller je erzeugten Sätze samt Zahlen darin. Fehlt die englische Fassung
+    (Bestände von vor dem 8.8.2026), zeigt das Dashboard den deutschen Satz —
+    sichtbar unübersetzt statt leer, und nach einem Lauf von selbst behoben."""
     key = getattr(_TLS, "platform", None) or "_cli"
+    def kurz(t):
+        return " ".join(str(t).split())[:300]
     eintrag = {"stufe": stufe, "thema": thema,
-               "text": " ".join(str(text).split())[:300], "zeit": now_iso()}
+               "text": kurz(text), "zeit": now_iso()}
+    if thema_en:
+        eintrag["thema_en"] = thema_en
+    if text_en:
+        eintrag["text_en"] = kurz(text_en)
     with BEFUND_LOCK:
         BEFUNDE.setdefault(key, []).append(eintrag)
     log(f"BEFUND [{stufe}] {thema}: {eintrag['text']}")
 
 
 def entdeckung(name: str, treffer: int, erwartet_min: int = 1,
-               aufgegeben: bool = False) -> int:
+               aufgegeben: bool = False, name_en: str = "") -> int:
     """Einen Entdeckungszweig zählen und melden, wenn er (fast) leer bleibt.
 
     Genau hier fiel Change.org durch (Fall 1 oben): ein Zweig, der NICHTS mehr
@@ -871,17 +931,25 @@ def entdeckung(name: str, treffer: int, erwartet_min: int = 1,
     entwertet. Umgekehrt wird die Rückkehr des Zweigs gemeldet: sie ist selten,
     sie ist gute Nachricht, und sie verlangt eine Handlung (Erwartung wieder
     scharf stellen)."""
+    zweig_en = name_en or name
     if aufgegeben:
         if treffer:
             befund("hinweis", f"Entdeckung „{name}“",
                    f"{treffer} Treffer – dieser Zweig galt als von der Quelle "
                    f"aufgegeben und liefert wieder. Erwartung wieder scharf "
-                   f"stellen (aufgegeben=False).")
+                   f"stellen (aufgegeben=False).",
+                   thema_en=f"Discovery “{zweig_en}”",
+                   text_en=f"{treffer} hits – this branch was considered "
+                           f"abandoned by the source and is delivering again. "
+                           f"Re-arm the expectation (aufgegeben=False).")
         return treffer
     if treffer < erwartet_min:
         befund("warnung", f"Entdeckung „{name}“",
                f"{treffer} Treffer – erwartet mindestens {erwartet_min}. "
-               f"Zweig vermutlich ausgefallen (Seitenumbau?).")
+               f"Zweig vermutlich ausgefallen (Seitenumbau?).",
+               thema_en=f"Discovery “{zweig_en}”",
+               text_en=f"{treffer} hits – expected at least {erwartet_min}. "
+                       f"The branch has probably failed (page redesign?).")
     return treffer
 
 
@@ -1001,9 +1069,15 @@ def _bestandspruefung(store: dict, vorher: dict,
                   "torsi": len(torsi), "dubletten": len(dubletten)}
 
     neu: list[dict] = []
-    def merke(stufe, thema, text):
-        neu.append({"stufe": stufe, "thema": thema,
-                    "text": " ".join(text.split())[:300], "zeit": kennzahlen["zeit"]})
+    def merke(stufe, thema, text, thema_en="", text_en=""):
+        eintrag = {"stufe": stufe, "thema": thema,
+                   "text": " ".join(text.split())[:300],
+                   "zeit": kennzahlen["zeit"]}
+        if thema_en:
+            eintrag["thema_en"] = thema_en
+        if text_en:
+            eintrag["text_en"] = " ".join(text_en.split())[:300]
+        neu.append(eintrag)
         log(f"BEFUND [{stufe}] {thema}: {text}")
 
     v_ohne = vorher.get("ohne_titel")
@@ -1021,7 +1095,11 @@ def _bestandspruefung(store: dict, vorher: dict,
         if zuwachs >= 10 and anteil >= 0.02:
             merke("warnung", "Datensätze ohne Titel",
                   f"{v_ohne} → {len(ohne_titel)} von {gesamt} (+{zuwachs}). "
-                  f"Titel werden vermutlich nicht mehr gelesen.")
+                  f"Titel werden vermutlich nicht mehr gelesen.",
+                  thema_en="Records without a title",
+                  text_en=f"{v_ohne} → {len(ohne_titel)} of {gesamt} "
+                          f"(+{zuwachs}). Titles are probably no longer being "
+                          f"read.")
 
     # (a2) Platzhaltertitel („Enter a Title for …"). Gleiche Schwellen wie (a),
     #      gleiche Begründung: WeMove trägt bauartbedingt Dutzende Testvorlagen,
@@ -1035,7 +1113,11 @@ def _bestandspruefung(store: dict, vorher: dict,
             merke("warnung", "Platzhaltertitel statt Petitionen",
                   f"{v_platz} → {len(platzhalter)} von {gesamt} (+{zuwachs}). "
                   f"Die Quelle liefert unfertige Seiten mit HTTP 200; sie "
-                  f"werden nicht ausgeliefert.")
+                  f"werden nicht ausgeliefert.",
+                  thema_en="Placeholder titles instead of petitions",
+                  text_en=f"{v_platz} → {len(platzhalter)} of {gesamt} "
+                          f"(+{zuwachs}). The source returns unfinished pages "
+                          f"with HTTP 200; they are not published.")
 
     # (b) Abgeschnittene Adressen. Seit dem 8.8.2026 räumt der Lauf sie weg
     #     (_entferne_bruchstuecke), der Bestand trägt sie also nicht mehr vor
@@ -1049,7 +1131,13 @@ def _bestandspruefung(store: dict, vorher: dict,
               f"{len(torsi)} Slugs sind Anfang eines anderen und haben keinen "
               f"Titel, z. B. {', '.join(torsi[:3])}. Sie wurden entfernt — "
               f"prüfe den Ausdruck, der die Adresse aus der Seite zieht, sonst "
-              f"entstehen sie beim nächsten Lauf neu.")
+              f"entstehen sie beim nächsten Lauf neu.",
+              thema_en="Truncated addresses",
+              text_en=f"{len(torsi)} slugs are the beginning of another one and "
+                      f"have no title, e.g. {', '.join(torsi[:3])}. They were "
+                      f"removed — check the expression that extracts the "
+                      f"address from the page, otherwise they come back on the "
+                      f"next run.")
 
     # (c) Doppelt vergebene Adressen. Grundpegel gemessen 0 — deshalb genügt
     #     hier eine einzige, es braucht keinen Puffer. merge_records() liegt
@@ -1061,14 +1149,22 @@ def _bestandspruefung(store: dict, vorher: dict,
               f"{len(dubletten)} Adresse(n) doppelt vergeben, z. B. "
               f"{beispiel[0][:70]} für {', '.join(beispiel[1][:3])}. "
               f"Entweder wurde umbenannt (merge_records) oder eine Seite ohne "
-              f"Petition ist in den Bestand geraten.")
+              f"Petition ist in den Bestand geraten.",
+              thema_en="Several records on the same address",
+              text_en=f"{len(dubletten)} address(es) used more than once, e.g. "
+                      f"{beispiel[0][:70]} for {', '.join(beispiel[1][:3])}. "
+                      f"Either something was renamed (merge_records) or a page "
+                      f"without a petition ended up in the store.")
 
     # (d) Einbruch des Online-Bestands (Fall 3: die Quelle blockt oder wurde
     #     umgebaut, die Petitionen sind gar nicht weg).
     if isinstance(v_online, int) and v_online >= 20 and online < v_online * 0.5:
         merke("warnung", "Online-Bestand eingebrochen",
               f"{v_online} → {online}. Quelle vermutlich blockiert oder "
-              f"umgebaut – fast nie ein echtes Verschwinden.")
+              f"umgebaut – fast nie ein echtes Verschwinden.",
+              thema_en="Online count collapsed",
+              text_en=f"{v_online} → {online}. The source is probably blocking "
+                      f"or was rebuilt – hardly ever a real disappearance.")
 
     return neu, kennzahlen
 
@@ -1647,6 +1743,19 @@ _LIST_TEMPLATE = """<!DOCTYPE html>
 # ----------------------------------------------------------------------------
 # HTML: Dashboard (Übersicht aller Plattformen) + Platzhalter-Seiten
 # ----------------------------------------------------------------------------
+def _plattformname(platform: Platform) -> str:
+    """Die Überschrift der Kachel.
+
+    Zehn der elf Namen sind Eigennamen und bleiben in jeder Sprache gleich
+    (WeAct, Avaaz, foodwatch …). Der Ausreißer ist „Europäisches Parlament" —
+    der gehört zum laufenden Auftrag „mehrsprachige Scraper" und wird dort in
+    der Plattformdefinition übersetzt, nicht hier. Sobald das Feld ``name_en``
+    auftaucht, nimmt die Kachel es von selbst; bis dahin steht in beiden
+    Sprachen derselbe Name."""
+    name = platform.name
+    return _zs(name, getattr(platform, "name_en", "") or name, tag="h2")
+
+
 def _kachel_rahmen(platform: Platform, schnappschuss: bool,
                    extra_klasse: str = "") -> tuple[str, str, str, str, str]:
     """Hülle und Bedienteile einer Kachel — (auf, zu, Laufpille, Laufbalken,
@@ -1670,12 +1779,12 @@ def _kachel_rahmen(platform: Platform, schnappschuss: bool,
     return (f'<a class="card{extra_klasse}" href="{platform.html_file.name}" '
             f'data-platform="{_esc(platform.key)}">',
             "</a>",
-            '<span class="run-pill">läuft …</span>',
+            _zs("läuft …", "running …", klasse="run-pill"),
             '<div class="mini-progress">'
             '<div class="mini-progress__bar">'
             '<div class="mini-progress__fill"></div></div>'
             '<span class="mini-progress__text"></span></div>',
-            '<span class="card-btn">Zur Liste →</span>')
+            _zs("Zur Liste →", "View list →", klasse="card-btn"))
 
 
 def _live_card(platform: Platform, schnappschuss: bool = False) -> str:
@@ -1704,9 +1813,11 @@ def _live_card(platform: Platform, schnappschuss: bool = False) -> str:
     # Plattform holen — bis dahin sagt der Balken, was er kann: abgearbeitet.
     available = meta.get("available") or len(store) or 1
     pct = min(100, round(len(store) / available * 100)) if available else 100
-    comp_cls, comp_lbl = (("full", "alle gefundenen abgearbeitet") if pct >= 95
-                          else ("grow", "Rückstand") if pct >= 50
-                          else ("low", "großer Rückstand"))
+    comp_cls, comp_lbl, comp_lbl_en = (
+        ("full", "alle gefundenen abgearbeitet", "all found items processed")
+        if pct >= 95 else
+        ("grow", "Rückstand", "backlog") if pct >= 50 else
+        ("low", "großer Rückstand", "large backlog"))
 
     # Einbruch des Online-Bestands = fast immer ein Quellenproblem, kein echtes
     # Verschwinden der Petitionen (siehe save_store).
@@ -1718,16 +1829,23 @@ def _live_card(platform: Platform, schnappschuss: bool = False) -> str:
     # dokumentiert, wurde aber nirgends gerendert und tauchte auch im CI nicht
     # auf. Ein Meldeweg, der nichts meldet, ist schlimmer als keiner: er lädt
     # dazu ein, etwas hineinzuschreiben, das nie jemand liest.
+    def _befund_html(b: dict, klasse: str, zeichen: str) -> str:
+        # thema_en/text_en tragen Befunde erst seit dem 8.8.2026. Ältere
+        # Bestände fallen auf Deutsch zurück — sichtbar unübersetzt statt leer,
+        # und nach einem Lauf ist es von selbst behoben.
+        thema = b.get("thema") or ""
+        text = b.get("text") or ""
+        thema_en = b.get("thema_en") or thema
+        text_en = b.get("text_en") or text
+        kopf = _zs(f"{zeichen} {thema}", f"{zeichen} {thema_en}", tag="b")
+        return f'<div class="{klasse}">{kopf}{_zs(text, text_en)}</div>'
+
     befunde = meta.get("befunde")
     if befunde:
-        warn_html = "".join(
-            f'<div class="healthwarn"><b>⚠ {_esc(b.get("thema"))}</b>'
-            f'{_esc(b.get("text"))}</div>'
-            for b in befunde if b.get("stufe") == "warnung")
-        warn_html += "".join(
-            f'<div class="healthinfo"><b>ℹ {_esc(b.get("thema"))}</b>'
-            f'{_esc(b.get("text"))}</div>'
-            for b in befunde if b.get("stufe") == "hinweis")
+        warn_html = "".join(_befund_html(b, "healthwarn", "⚠")
+                            for b in befunde if b.get("stufe") == "warnung")
+        warn_html += "".join(_befund_html(b, "healthinfo", "ℹ")
+                             for b in befunde if b.get("stufe") == "hinweis")
     else:
         # Bestände von vor der Selbstmeldung tragen nur das alte Einzelfeld.
         warning = meta.get("health_warning")
@@ -1740,53 +1858,63 @@ def _live_card(platform: Platform, schnappschuss: bool = False) -> str:
     # niemanden ahnen, dass in Wahrheit 54 Sätze in der App fehlen. Die Arten
     # stehen dahinter in Klammern, aber die erste Zahl ist die, die zählt.
     # Bestände von vor dieser Kennzahl tragen nur ohne_titel — dann gilt die.
+    dauer_en = []
     fehlt = kz.get("nicht_ausgeliefert")
     if fehlt is None:
         fehlt = kz.get("ohne_titel") or 0
     if fehlt:
+        gesamt_kz = kz.get("gesamt") or "?"
         anteil = round(fehlt / max(1, kz.get("gesamt") or 1) * 100)
         arten = []
         if kz.get("ohne_titel"):
-            arten.append(("ohne Titel", kz["ohne_titel"]))
+            arten.append(("ohne Titel", "without a title", kz["ohne_titel"]))
         if kz.get("platzhalter"):
-            arten.append(("Platzhaltertitel", kz["platzhalter"]))
+            arten.append(("Platzhaltertitel", "placeholder titles",
+                          kz["platzhalter"]))
         if len(arten) > 1:
-            auf = " (" + ", ".join(f"{n} {w}" for w, n in arten) + ")"
+            auf = " (" + ", ".join(f"{n} {w}" for w, _e, n in arten) + ")"
+            auf_en = " (" + ", ".join(f"{n} {e}" for _w, e, n in arten) + ")"
         elif arten:
-            auf = f" ({arten[0][0]})"
+            auf, auf_en = f" ({arten[0][0]})", f" ({arten[0][1]})"
         else:
-            auf = ""
-        dauer.append(f"{fehlt} von {kz.get('gesamt') or '?'} erreichen die App "
-                     f"nicht{f' – {anteil} %' if anteil >= 1 else ''}{auf}")
+            auf = auf_en = ""
+        pz = f" – {anteil} %" if anteil >= 1 else ""
+        dauer.append(f"{fehlt} von {gesamt_kz} erreichen die App nicht{pz}{auf}")
+        dauer_en.append(f"{fehlt} of {gesamt_kz} never reach the app{pz}{auf_en}")
     if kz.get("torsi"):
         dauer.append(f"{kz['torsi']} abgeschnittene Adresse(n) entfernt")
+        dauer_en.append(f"{kz['torsi']} truncated address(es) removed")
     if dauer:
-        warn_html += ('<div class="healthnote">Dauerzustand: '
-                      + _esc(" · ".join(dauer)) + "</div>")
+        warn_html += '<div class="healthnote">' + _zs(
+            "Dauerzustand: " + " · ".join(dauer),
+            "Steady state: " + " · ".join(dauer_en)) + "</div>"
 
     auf, zu, pille, balken, knopf = _kachel_rahmen(platform, schnappschuss)
+    stand = _fmt_dt(generated) if generated else "—"
 
     return f"""
     {auf}
-      <div class="card-head"><span class="card-dot weact"></span><h2>{_esc(platform.name)}</h2>
+      <div class="card-head"><span class="card-dot weact"></span>{_plattformname(platform)}
         {pille}</div>
       {_openness_badge(platform)}
       <div class="card-stats">
-        <div class="cs"><div class="n">{len(store)}</div><div class="l">Petitionen</div></div>
-        <div class="cs"><div class="n">{online}</div><div class="l">Online</div></div>
-        <div class="cs"><div class="n">{offline}</div><div class="l">Offline</div></div>
-        <div class="cs"><div class="n">{cats}</div><div class="l">Kategorien</div></div>
+        <div class="cs"><div class="n">{len(store)}</div>{_zs("Petitionen", "Petitions", klasse="l", tag="div")}</div>
+        <div class="cs"><div class="n">{online}</div>{_zs("Online", "Online", klasse="l", tag="div")}</div>
+        <div class="cs"><div class="n">{offline}</div>{_zs("Offline", "Offline", klasse="l", tag="div")}</div>
+        <div class="cs"><div class="n">{cats}</div>{_zs("Kategorien", "Categories", klasse="l", tag="div")}</div>
       </div>
       <div class="completeness {comp_cls}">
-        <div class="completeness__head"><span>Abgearbeitet</span><b>{pct}%</b></div>
+        <div class="completeness__head">{_zs("Abgearbeitet", "Processed")}<b>{pct}%</b></div>
         <div class="completeness__bar"><div class="completeness__fill" style="width:{pct}%"></div></div>
-        <span class="completeness__sub">{len(store)} von ~{available} gefundenen
-          Kandidaten · {comp_lbl}</span>
+        {_zs(f"{len(store)} von ~{available} gefundenen Kandidaten · {comp_lbl}",
+             f"{len(store)} of ~{available} discovered candidates · {comp_lbl_en}",
+             klasse="completeness__sub")}
       </div>
       {warn_html}
       {balken}
-      <p class="card-sub">{new_count} neue Petition(en) im letzten Lauf ·
-        Datenstand {_fmt_dt(generated) if generated else "—"}</p>
+      <p class="card-sub">{_zs(
+          f"{new_count} neue Petition(en) im letzten Lauf · Datenstand {stand}",
+          f"{new_count} new petition(s) in the last run · data as of {stand}")}</p>
       {knopf}
     {zu}"""
 
@@ -1796,15 +1924,16 @@ def _placeholder_card(platform: Platform, schnappschuss: bool = False) -> str:
                                                      extra_klasse=" placeholder")
     return f"""
     {auf}
-      <div class="card-head"><span class="card-dot other"></span><h2>{_esc(platform.name)}</h2></div>
+      <div class="card-head"><span class="card-dot other"></span>{_plattformname(platform)}</div>
       {_openness_badge(platform)}
       <div class="card-stats">
-        <div class="cs"><div class="n">—</div><div class="l">Petitionen</div></div>
-        <div class="cs"><div class="n">—</div><div class="l">Online</div></div>
-        <div class="cs"><div class="n">—</div><div class="l">Offline</div></div>
-        <div class="cs"><div class="n">—</div><div class="l">Kategorien</div></div>
+        <div class="cs"><div class="n">—</div>{_zs("Petitionen", "Petitions", klasse="l", tag="div")}</div>
+        <div class="cs"><div class="n">—</div>{_zs("Online", "Online", klasse="l", tag="div")}</div>
+        <div class="cs"><div class="n">—</div>{_zs("Offline", "Offline", klasse="l", tag="div")}</div>
+        <div class="cs"><div class="n">—</div>{_zs("Kategorien", "Categories", klasse="l", tag="div")}</div>
       </div>
-      <p class="card-sub">Noch keine Daten – Scraper in Vorbereitung.</p>
+      <p class="card-sub">{_zs("Noch keine Daten – Scraper in Vorbereitung.",
+                               "No data yet – scraper in preparation.")}</p>
       {knopf}
     {zu}"""
 
@@ -1814,7 +1943,28 @@ def build_dashboard(platforms: list[Platform], schnappschuss: bool = False) -> s
 
     Vorgabe ist die Server-Ansicht (``monitor.py --serve``). Mit
     ``schnappschuss=True`` entsteht die Fassung für GitHub Pages: dort gibt es
-    keinen Server, also auch nichts zu bedienen — siehe ``_kachel_rahmen``."""
+    keinen Server, also auch nichts zu bedienen — siehe ``_kachel_rahmen``.
+
+    ZWEISPRACHIG: jeder übersetzbare Knoten trägt data-de/data-en, der
+    Umschalter oben rechts tauscht nur textContent. Siehe ``_zs``.
+
+    GEMESSENE KONTRASTE (8.8.2026, WCAG-Verhältnis hell / dunkel). Ziel ist
+    4,5:1, denn die kleinste Schrift der Seite (.amp-label, 11px fett) zählt
+    als Kleintext — die 3:1-Ausnahme gilt erst ab 18,66px fett:
+
+        Fließtext auf Kachel     17,43 / 13,86   Warnschrift im Kasten  7,15 / 9,59
+        Fließtext auf Grund      15,27 / 15,17   Hinweisschrift         7,85 / 9,43
+        Gedämpft auf Kachel       5,80 /  6,63   Online-Zahl            5,32 / 7,54
+        Gedämpft auf Grund        5,08 /  7,26   Offline-Zahl           5,86 / 6,74
+        Akzentschrift             9,65 /  7,24   Ampel 5                5,32 / 7,75
+        Knopfschrift auf Akzent   9,65 /  7,92   Ampel 4                4,54 / 9,53
+                                                 Ampel 3                4,50 / 9,24
+                                                 Ampel 2                4,50 / 7,53
+                                                 Ampel 1                5,86 / 6,74
+
+    Warn- und Hinweiskasten sind zusätzlich am gerenderten Pixel nachgemessen
+    (getComputedStyle im Headless, beide Modi): 7,15/9,59 und 7,85/9,43 —
+    Rechnung und Browser kommen auf dieselben Werte."""
     cards = "\n".join(
         _live_card(p, schnappschuss) if p.is_live
         else _placeholder_card(p, schnappschuss) for p in platforms)
@@ -1824,6 +1974,8 @@ def build_dashboard(platforms: list[Platform], schnappschuss: bool = False) -> s
     tmpl = tmpl.replace("{{SUBNOTE}}", _SUB_SCHNAPPSCHUSS if schnappschuss
                         else _SUB_SERVER)
     tmpl = tmpl.replace("{{RUNALL}}", "" if schnappschuss else _RUNALL_ROW)
+    for platzhalter, inhalt in _I18N_BLOECKE.items():
+        tmpl = tmpl.replace(platzhalter, inhalt)
     tmpl = tmpl.replace("{{GENERATED}}", _esc(now_iso()))
     tmpl = tmpl.replace("{{CARDS}}", cards)
     tmpl = tmpl.replace("{{TOTOP}}", _TOTOP)
@@ -1862,14 +2014,62 @@ def write_placeholder_pages(platforms: list[Platform]) -> None:
 # löste das Versprechen mit elf 404-Seiten ein. Der Weg weiter führt dort in
 # die App, die im selben Ordner liegt (relativ, damit es lokal wie auf Pages
 # stimmt).
-_SUB_SERVER = "Wähle eine Plattform für die Detailliste."
-_SUB_SCHNAPPSCHUSS = ('Nur-Lesen-Schnappschuss des letzten Laufs — die '
-                      'Detaillisten und die Scraper-Steuerung gibt es nur im '
-                      'lokalen Monitor. <a class="sub-link" href="./">Zur App '
-                      '→</a>')
-_RUNALL_ROW = """<div class="runall-row">
+_SUB_SERVER = _zs("Wähle eine Plattform für die Detailliste.",
+                  "Pick a platform to see its detailed list.")
+_SUB_SCHNAPPSCHUSS = (
+    _zs("Nur-Lesen-Schnappschuss des letzten Laufs — die Detaillisten und die "
+        "Scraper-Steuerung gibt es nur im lokalen Monitor.",
+        "Read-only snapshot of the last run — detailed lists and scraper "
+        "controls exist only in the local monitor.")
+    + ' ' + _zs("Zur App →", "Open the app →", tag="a", klasse="sub-link",
+                attrs=' href="./"'))
+# Der Sprachwähler sitzt oben rechts, weil ihn dort jeder sucht. Als
+# `role="group"` mit `aria-pressed` statt als <select>: zwei Sprachen sind mit
+# einem Griff erreichbar, ein Auswahlfeld bräuchte zwei. Die Beschriftungen
+# stehen bewusst in der JEWEILIGEN Sprache („Deutsch"/„English") und werden
+# NICHT mitübersetzt — wer die aktuelle Sprache nicht versteht, muss seine
+# eigene trotzdem finden.
+_LANGSEL = """<div class="langsel" role="group" aria-label="Sprache · Language">
+      <button type="button" class="langsel__b" data-lang="de" lang="de"
+              aria-pressed="true">Deutsch</button>
+      <button type="button" class="langsel__b" data-lang="en" lang="en"
+              aria-pressed="false">English</button>
+    </div>"""
+
+_I18N_BLOECKE = {
+    "{{LANGSEL}}": _LANGSEL,
+    "{{EYEBROW}}": _zs("Petitions-Monitor — Dashboard",
+                       "Petition Monitor — Dashboard", tag="p",
+                       klasse="eyebrow"),
+    "{{H1}}": _zs("Übersicht", "Overview", tag="h1"),
+    "{{STANDLABEL}}": _zs("Datenstand", "Data as of"),
+    "{{LEGENDTITLE}}": _zs("Ampel — Datenfreigabe:", "Traffic light — data access:",
+                           tag="b"),
+    "{{LG5}}": _zs("sehr offen (volle Liste, alles im HTML)",
+                   "very open (full list, everything in the HTML)"),
+    "{{LG4}}": _zs("offen (volle Liste, kleine Hürden)",
+                   "open (full list, minor hurdles)"),
+    "{{LG3}}": _zs("mittel (begrenzte Listen/Extra-Endpoints)",
+                   "moderate (limited lists / extra endpoints)"),
+    "{{LG2}}": _zs("eingeschränkt (nur kuratierte Auswahl/Heuristik)",
+                   "restricted (curated selection / heuristics only)"),
+    "{{LG1}}": _zs("verschlossen (keine öffentliche Liste/Blockade)",
+                   "closed (no public list / blocked)"),
+    "{{LEGENDNOTE}}": (
+        _zs("„Abgearbeitet“", "“Processed”", tag="b") + " " +
+        _zs("vergleicht den Bestand mit dem, was derselbe Lauf gefunden hat — "
+            "nicht mit dem Gesamtbestand der Quelle. Eine echte Quell-Gesamtzahl "
+            "nennt bislang nur innn.it. 100 % heißt also: nichts liegt in der "
+            "Warteschlange, nicht: wir haben alles.",
+            "compares what we hold against what the same run discovered — not "
+            "against everything the source carries. So far only innn.it reports "
+            "a real source total. So 100% means nothing is queued, not that we "
+            "have it all.")),
+}
+
+_RUNALL_ROW = f"""<div class="runall-row">
     <button id="run-all" class="runall-btn" type="button">
-      <span class="sp"></span>Alle Scraper starten</button>
+      <span class="sp"></span>{_zs("Alle Scraper starten", "Run all scrapers")}</button>
     <span class="runall-status" id="run-all-status"></span>
   </div>"""
 
@@ -1883,7 +2083,26 @@ _DASHBOARD_TEMPLATE = """<!DOCTYPE html>
   :root{
     --bg:#eef0f4; --surface:#ffffff; --ink:#161a22; --muted:#5d6675;
     --line:#e2e5ec; --indigo:#2f3f86; --indigo-soft:#eaeefb;
-    --online:#1f7a4d; --offline:#b23b3b;
+    --indigo-hover:#26326b; --on-accent:#ffffff;
+    --online:#1f7a4d; --offline:#b23b3b; --grow:#c98a20;
+    /* Warn- und Hinweiskasten. Standen bis zum 8.8.2026 als feste Farben im
+       Regelwerk und waren damit das Einzige, was einen Dunkelmodus verhindert
+       hätte. */
+    --warn-bg:#fdeceb; --warn-ink:#8d2f28; --warn-line:#f3c3bf;
+    --info-bg:#eaf1fb; --info-ink:#254a7d; --info-line:#c3d6f0;
+    /* Ampel: Punktfarbe und Schriftfarbe getrennt — Gelb und Hellgrün taugen
+       als Fläche, aber nicht als Schrift auf Weiß. */
+    /* Drei der Schriftfarben verfehlten die AA-Schwelle und niemand hatte je
+       nachgemessen: .amp-label ist 11px fett, also KLEINTEXT — 4,5:1 ist
+       Pflicht, nicht 3:1. Gemessen auf Weiß waren es 3,58 (Stufe 4), 3,67
+       (Stufe 3) und 4,29 (Stufe 2). Nachgedunkelt bei gleichem Farbton und
+       gleicher Sättigung, bis 4,5 erreicht war; die PUNKTE behalten ihre
+       kräftige Farbe, nur die Schrift wurde dunkler. */
+    --amp5:#1f7a4d; --amp5-ink:#1f7a4d;
+    --amp4:#7cb342; --amp4-ink:#5b812d;
+    --amp3:#e0a80f; --amp3-ink:#96710a;
+    --amp2:#e07b39; --amp2-ink:#bb5c1e;
+    --amp1:#b23b3b; --amp1-ink:#b23b3b;
     --mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
     --sans:ui-sans-serif,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   }
@@ -1897,8 +2116,15 @@ _DASHBOARD_TEMPLATE = """<!DOCTYPE html>
   h1{margin:0;font-size:clamp(20px,3vw,28px);font-weight:800;letter-spacing:-.01em}
   .sub{color:var(--muted);margin-top:4px}
   main{padding:clamp(16px,4vw,40px)}
-  .grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-        max-width:1320px}
+  /* Volle Breite (8.8.2026). Vorher deckelte max-width:1320px das Raster: auf
+     einem 2560er Schirm standen drei Kacheln und rechts daneben nichts. Der
+     Deckel ist weg, dafür wächst die Mindestbreite der Spalte von 280 auf
+     320px — sonst entstehen bei voller Breite sehr viele sehr schmale
+     Kacheln, in denen „26 Petitionen" umbricht (dieselbe Enge, die im
+     Magazin-Layout die 13.5rem-Zeilenhöhe nötig machte). Gemessen: 1280px
+     ergibt 3 Spalten, 1920px 5, 2560px 7. */
+  .grid{display:grid;gap:20px;
+        grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}
   .card{display:block;background:var(--surface);border:1px solid var(--line);
         border-radius:14px;padding:20px;text-decoration:none;color:inherit;
         transition:box-shadow .15s,transform .15s}
@@ -1925,19 +2151,19 @@ _DASHBOARD_TEMPLATE = """<!DOCTYPE html>
   .completeness__fill{height:100%;border-radius:999px;transition:width .3s}
   .completeness__sub{font-size:11px;color:var(--muted)}
   .completeness.full  .completeness__fill{background:var(--online)}
-  .completeness.grow  .completeness__fill{background:#c98a20}
+  .completeness.grow  .completeness__fill{background:var(--grow)}
   .completeness.low   .completeness__fill{background:var(--offline)}
   .healthwarn{margin:0 0 12px;padding:8px 10px;border-radius:8px;font-size:12px;
-              line-height:1.4;background:#fdeceb;color:#8d2f28;
-              border:1px solid #f3c3bf}
+              line-height:1.4;background:var(--warn-bg);color:var(--warn-ink);
+              border:1px solid var(--warn-line)}
   .healthwarn b{display:block;font-weight:700}
   .healthwarn + .healthwarn{margin-top:-6px}
   /* Hinweis: etwas ist anders als erwartet, aber nichts ist kaputt — z. B.
      ein aufgegebener Entdeckungszweig, der wieder liefert. Blau statt rot,
      damit er die echten Warnungen nicht verwässert. */
   .healthinfo{margin:0 0 12px;padding:8px 10px;border-radius:8px;font-size:12px;
-              line-height:1.4;background:#eaf1fb;color:#254a7d;
-              border:1px solid #c3d6f0}
+              line-height:1.4;background:var(--info-bg);color:var(--info-ink);
+              border:1px solid var(--info-line)}
   .healthinfo b{display:block;font-weight:700}
   .healthinfo + .healthinfo{margin-top:-6px}
   /* Dauerzustand statt frischer Ausfall: sichtbar, aber ohne Alarmfarbe —
@@ -1951,7 +2177,7 @@ _DASHBOARD_TEMPLATE = """<!DOCTYPE html>
   .card-btn{display:inline-block;font-weight:650;color:var(--indigo)}
   .card.placeholder .cs .n{color:var(--muted)}
   .run-pill{display:none;align-items:center;font-size:10px;font-weight:700;
-      color:#fff;background:var(--indigo);border-radius:999px;padding:3px 9px;
+      color:var(--on-accent);background:var(--indigo);border-radius:999px;padding:3px 9px;
       letter-spacing:.04em;text-transform:uppercase;margin-left:auto}
   .mini-progress{display:none;align-items:center;gap:8px;margin:-2px 0 12px}
   .mini-progress__bar{flex:1;height:5px;background:var(--bg);border-radius:999px;
@@ -1967,20 +2193,21 @@ _DASHBOARD_TEMPLATE = """<!DOCTYPE html>
       display:inline-block}
   .amp-label{font-size:11px;font-weight:700;letter-spacing:.04em;
       text-transform:uppercase}
-  .amp-5 .amp-dots i.on,.amp-5 .amp-label{background:#1f7a4d;color:#1f7a4d}
-  .amp-4 .amp-dots i.on,.amp-4 .amp-label{background:#7cb342;color:#689433}
-  .amp-3 .amp-dots i.on,.amp-3 .amp-label{background:#e0a80f;color:#a97f0b}
-  .amp-2 .amp-dots i.on,.amp-2 .amp-label{background:#e07b39;color:#c05f1f}
-  .amp-1 .amp-dots i.on,.amp-1 .amp-label{background:#b23b3b;color:#b23b3b}
+  .amp-5 .amp-dots i.on,.amp-5 .amp-label{background:var(--amp5);color:var(--amp5-ink)}
+  .amp-4 .amp-dots i.on,.amp-4 .amp-label{background:var(--amp4);color:var(--amp4-ink)}
+  .amp-3 .amp-dots i.on,.amp-3 .amp-label{background:var(--amp3);color:var(--amp3-ink)}
+  .amp-2 .amp-dots i.on,.amp-2 .amp-label{background:var(--amp2);color:var(--amp2-ink)}
+  .amp-1 .amp-dots i.on,.amp-1 .amp-label{background:var(--amp1);color:var(--amp1-ink)}
   .amp .amp-label{background:transparent!important}
   .runall-row{display:flex;align-items:center;gap:12px;margin-top:14px}
   .runall-btn{display:inline-flex;align-items:center;gap:8px;border:0;
-      background:var(--indigo);color:#fff;font:inherit;font-weight:650;
+      background:var(--indigo);color:var(--on-accent);font:inherit;font-weight:650;
       padding:10px 16px;border-radius:10px;cursor:pointer}
-  .runall-btn:hover{background:#26326b}
+  .runall-btn:hover{background:var(--indigo-hover)}
   .runall-btn:disabled{opacity:.6;cursor:default}
   .runall-btn .sp{width:14px;height:14px;border-radius:50%;display:none;
-      border:2px solid rgba(255,255,255,.45);border-top-color:#fff}
+      border:2px solid color-mix(in srgb,var(--on-accent) 45%,transparent);
+      border-top-color:var(--on-accent)}
   .runall-btn.busy .sp{display:inline-block;animation:spin .8s linear infinite}
   .runall-status{font-family:var(--mono);font-size:12px;color:var(--muted)}
   @keyframes spin{to{transform:rotate(360deg)}}
@@ -1989,35 +2216,145 @@ _DASHBOARD_TEMPLATE = """<!DOCTYPE html>
   .legend b{font-weight:700;letter-spacing:.03em}
   .legend .lg{display:inline-flex;align-items:center;gap:5px}
   .legend .lg i{width:9px;height:9px;border-radius:50%;display:inline-block}
+  /* Die fünf Punkte standen als style="background:#…" im Markup und waren
+     damit dem Dunkelmodus entzogen — Inline-Stil schlägt jede Regel. */
+  .lg-5{background:var(--amp5)} .lg-4{background:var(--amp4)}
+  .lg-3{background:var(--amp3)} .lg-2{background:var(--amp2)}
+  .lg-1{background:var(--amp1)}
+  /* Dunkelmodus (8.8.2026). Folgt dem Systemwunsch, ohne eigenen Schalter:
+     das Dashboard ist eine Statusseite, die man nachts kurz aufmacht — ein
+     zweiter Schalter neben der Sprache wäre mehr Bedienung als Nutzen.
+     Umgesetzt allein über die Variablen oben; alle Kontraste sind gemessen
+     und stehen im Kopf von build_dashboard. --indigo wird hell, weil es hier
+     BEIDES ist: Schrift auf der Fläche und Fläche unter der Schrift — dafür
+     kippt --on-accent auf dunkel (dasselbe Muster wie in der Web-App). */
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#12151b; --surface:#1a1e26; --ink:#e7eaf0; --muted:#9aa4b4;
+      --line:#2b313c; --indigo:#93a8f0; --indigo-soft:#222a3f;
+      --indigo-hover:#aab9f5; --on-accent:#12151b;
+      --online:#4cc38a; --offline:#f2867d; --grow:#e2a93c;
+      --warn-bg:#2f1a18; --warn-ink:#ffb3ab; --warn-line:#5b302b;
+      --info-bg:#17222f; --info-ink:#a9c9f2; --info-line:#2d4056;
+      --amp5:#3aa972; --amp5-ink:#5cc48e;
+      --amp4:#8cc457; --amp4-ink:#9ed36a;
+      --amp3:#e0a80f; --amp3-ink:#e8bb44;
+      --amp2:#e07b39; --amp2-ink:#ef9a63;
+      --amp1:#d05a56; --amp1-ink:#f2867d;
+    }
+  }
   .legend-note{margin:10px 0 0;max-width:70ch;font-size:11px;line-height:1.5;
       color:var(--muted)}
   .legend-note b{color:var(--ink);font-weight:700}
+  /* Kopfzeile: Rubrik links, Sprachwähler rechts. */
+  .head-top{display:flex;align-items:flex-start;justify-content:space-between;
+      gap:16px;flex-wrap:wrap}
+  .langsel{display:inline-flex;border:1px solid var(--line);border-radius:8px;
+      overflow:hidden;background:var(--surface);flex:none}
+  .langsel__b{appearance:none;border:0;background:transparent;cursor:pointer;
+      font:inherit;font-size:12px;font-weight:650;color:var(--muted);
+      padding:6px 12px;min-height:32px;line-height:1}
+  .langsel__b + .langsel__b{border-left:1px solid var(--line)}
+  .langsel__b[aria-pressed="true"]{background:var(--indigo);color:var(--on-accent)}
+  .langsel__b:hover:not([aria-pressed="true"]){background:var(--indigo-soft);
+      color:var(--indigo)}
+  /* Tastaturbedienung sichtbar machen. :focus-visible statt :focus, damit der
+     Ring nur bei Tastatur erscheint und nicht nach jedem Mausklick. */
+  a:focus-visible,button:focus-visible{outline:2px solid var(--indigo);
+      outline-offset:2px;border-radius:6px}
+  /* Zahlen untereinander bündig — ohne tabellarische Ziffern tanzen die
+     Spalten „Petitionen/Online/Offline" von Kachel zu Kachel. */
+  .cs .n,.completeness__head b{font-variant-numeric:tabular-nums}
   @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
 <header>
-  <p class="eyebrow">Petitions-Monitor — Dashboard</p>
-  <h1>Übersicht</h1>
-  <p class="sub">Datenstand {{GENERATED}} · {{SUBNOTE}}</p>
-  {{RUNALL}}
-  <div class="legend"><b>Ampel — Datenfreigabe:</b>
-    <span class="lg"><i style="background:#1f7a4d"></i>sehr offen (volle Liste, alles im HTML)</span>
-    <span class="lg"><i style="background:#7cb342"></i>offen (volle Liste, kleine Hürden)</span>
-    <span class="lg"><i style="background:#e0a80f"></i>mittel (begrenzte Listen/Extra-Endpoints)</span>
-    <span class="lg"><i style="background:#e07b39"></i>eingeschränkt (nur kuratierte Auswahl/Heuristik)</span>
-    <span class="lg"><i style="background:#b23b3b"></i>verschlossen (keine öffentliche Liste/Blockade)</span>
+  <div class="head-top">
+    {{EYEBROW}}
+    {{LANGSEL}}
   </div>
-  <p class="legend-note"><b>„Abgearbeitet"</b> vergleicht den Bestand mit dem,
-     was derselbe Lauf gefunden hat — nicht mit dem Gesamtbestand der Quelle.
-     Eine echte Quell-Gesamtzahl nennt bislang nur innn.it. 100 % heißt also:
-     nichts liegt in der Warteschlange, nicht: wir haben alles.</p>
+  {{H1}}
+  <p class="sub">{{STANDLABEL}} {{GENERATED}} · {{SUBNOTE}}</p>
+  {{RUNALL}}
+  <div class="legend">{{LEGENDTITLE}}
+    <span class="lg"><i class="lg-5"></i>{{LG5}}</span>
+    <span class="lg"><i class="lg-4"></i>{{LG4}}</span>
+    <span class="lg"><i class="lg-3"></i>{{LG3}}</span>
+    <span class="lg"><i class="lg-2"></i>{{LG2}}</span>
+    <span class="lg"><i class="lg-1"></i>{{LG1}}</span>
+  </div>
+  <p class="legend-note">{{LEGENDNOTE}}</p>
 </header>
 <main>
   <div class="grid">
 {{CARDS}}
   </div>
 </main>
+<script>
+// Sprachumschaltung. Steht bewusst HIER — direkt hinter dem Inhalt und nicht
+// am Dateiende: an dieser Stelle existieren alle [data-de]-Knoten schon, das
+// Skript läuft während des Parsens und tauscht die Texte in aller Regel vor
+// dem ersten Bild. Am Dateiende (nach dem Status-Skript) sähe man erst Deutsch
+// und dann den Sprung.
+(function(){
+  var SPRACHEN = ["de", "en"];
+  var SPEICHER = "pmDashLang";
+
+  function systemSprache(){
+    var liste = (navigator.languages && navigator.languages.length)
+                ? navigator.languages : [navigator.language || "de"];
+    for (var i = 0; i < liste.length; i++){
+      var kurz = String(liste[i] || "").toLowerCase().split("-")[0];
+      if (SPRACHEN.indexOf(kurz) !== -1) return kurz;
+    }
+    return "de";
+  }
+
+  function gewaehlt(){
+    try {
+      var eigen = localStorage.getItem(SPEICHER);
+      if (SPRACHEN.indexOf(eigen) !== -1) return eigen;
+      // Auf GitHub Pages liegt die App unter derselben Herkunft. Wer dort
+      // Englisch gewählt hat, soll das Dashboard nicht auf Deutsch bekommen.
+      // Geschrieben wird prefs NICHT — eine Statusseite verstellt nichts.
+      var p = JSON.parse(localStorage.getItem("prefs") || "{}");
+      if (p && SPRACHEN.indexOf(p.lang) !== -1) return p.lang;
+    } catch (e) {}
+    return systemSprache();
+  }
+
+  function setze(lang){
+    var knoten = document.querySelectorAll("[data-de]");
+    for (var i = 0; i < knoten.length; i++){
+      var el = knoten[i];
+      var txt = el.getAttribute("data-" + lang) || el.getAttribute("data-de");
+      // Knoten mit data-titel tragen ihren Text im Tooltip, nicht im Inhalt.
+      if (el.getAttribute("data-titel")) el.setAttribute("title", txt);
+      else el.textContent = txt;
+    }
+    document.documentElement.setAttribute("lang", lang);
+    document.title = (lang === "en")
+      ? "Petition Monitor · Dashboard" : "Petitions-Monitor · Dashboard";
+    var knoepfe = document.querySelectorAll(".langsel__b");
+    for (var j = 0; j < knoepfe.length; j++){
+      knoepfe[j].setAttribute("aria-pressed",
+        knoepfe[j].getAttribute("data-lang") === lang ? "true" : "false");
+    }
+  }
+
+  var aktuell = gewaehlt();
+  setze(aktuell);
+
+  document.addEventListener("click", function(ev){
+    var b = ev.target.closest ? ev.target.closest(".langsel__b") : null;
+    if (!b) return;
+    aktuell = b.getAttribute("data-lang");
+    try { localStorage.setItem(SPEICHER, aktuell); } catch (e) {}
+    setze(aktuell);
+  });
+})();
+</script>
 <script>
 (function(){
   // Ohne Server gibt es nichts abzufragen. Der Schnappschuss auf GitHub Pages
