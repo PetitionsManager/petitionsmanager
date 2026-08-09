@@ -62,10 +62,17 @@
 #    getinvolved350.vercel.app hat keine robots-Einschränkung.
 #
 #  FORMAT-KENNZEICHNUNG:
-#    350.org-Aktionen sind teils Petitionen, teils E-Mail-/Brief-Aktionen. Das
-#    Format wird aus Button-Text + Titel abgeleitet und als Kategorie gesetzt
-#    (Petition / E-Mail-Aktion / Brief-Aktion / Aktion) → der Kategorie-Filter
-#    der App wirkt als Format-Umschalter.
+#    350.org-Aktionen sind teils Petitionen, teils Brief-/E-Mail-Aktionen,
+#    Anmeldungen oder Umfragen. Das Format wird als Kategorie gesetzt → der
+#    Kategorie-Filter der App wirkt als Format-Umschalter. ⚠️ 350.org ist die
+#    einzige Plattform, die dieses Feld so benutzt; überall sonst stehen dort
+#    Sachthemen (Umwelt, Gesundheit …).
+#    Maßgeblich ist die FORM der Zielseite (FORMAT_JE_FORM), nicht mehr der
+#    Knopftext: am 2026-08-08 an allen 26 Aktionen gegengerechnet lag die
+#    Schätzung aus dem Knopf bei 8 daneben (31 %) – „Submit"/„Take Action"
+#    machten aus fünf Petitionen bloße „Aktionen", „Absenden" aus der Umfrage
+#    eine E-Mail-Aktion. classify() bleibt als Rückfallebene für den Fall, dass
+#    der Bot-Schutz die Weiterleitung gerade nicht preisgibt.
 # =============================================================================
 
 from __future__ import annotations
@@ -140,9 +147,50 @@ FETCH_HEADERS = {
 
 
 # ----------------------------------------------------------------------------
-# Format-Kennzeichnung (Petition / E-Mail / Brief / Aktion) aus CTA + Titel
+# Format-Kennzeichnung (Petition / Brief / E-Mail / Anmeldung / Umfrage)
 # ----------------------------------------------------------------------------
+# Das Format steckt in der FORM, auf die act.350.org weiterleitet – nicht im
+# Knopftext. Am 2026-08-08 an allen 26 Aktionen gegengerechnet: die Schätzung
+# aus dem Knopf lag bei 8 daneben (31 %). Fünf echte /sign/-Petitionen galten
+# als bloße „Aktion", weil ihr Knopf englisch beschriftet ist („Submit", „Take
+# Action"), und die /survey/-Umfrage galt als E-Mail-Aktion, weil „Ab-SENDE-n"
+# die Mail-Regel traf. Die Form weiß es besser und kostet nichts extra: sie
+# steht ohnehin im Location-Header, den resolve_target für den Zähler liest.
+FORMAT_JE_FORM = {
+    "sign":   "Petition",
+    "letter": "Brief-Aktion",
+    "signup": "Anmeldung",
+    "survey": "Umfrage",
+}
+
+
+def kategorie_fuer(kind: str | None, obj: dict) -> str:
+    """Format aus der Zielform. Nur wo die Form es offenlässt, redet der Knopf
+    mit; ist die Form unbekannt, bleibt die alte Schätzung (classify).
+
+    /letter/ heißt bei 350.org „Brief" – die Aktionsseite von 23884 schreibt
+    wörtlich „Schreibe jetzt einen Brief an die Ministerin …". Auf E-Mail-Aktion
+    wird deshalb nur umgestellt, wenn der Knopf das ausdrücklich sagt. „SEND",
+    „SENDEN" und „Absenden" heißen bloß „abschicken" und sagen nichts über den
+    Weg – genau daran ist die alte Schätzung gescheitert.
+    """
+    if kind not in FORMAT_JE_FORM:
+        return classify(obj)
+    if kind == "letter":
+        t = ((obj.get("button_cta") or "") + " "
+             + (obj.get("title") or "")).lower()
+        if "mail" in t or "nachricht" in t:
+            return "E-Mail-Aktion"
+    return FORMAT_JE_FORM[kind]
+
+
 def classify(obj: dict) -> str:
+    """Rückfallebene: Format aus Knopfbeschriftung + Titel raten.
+
+    Nur noch nötig, solange die Zielform unbekannt ist – also bei einer neuen
+    Aktion, deren Weiterleitung der Bot-Schutz gerade nicht preisgibt. Sobald
+    die Form vorliegt, entscheidet kategorie_fuer().
+    """
     t = ((obj.get("button_cta") or "") + " " + (obj.get("title") or "")).lower()
     # Petition zuerst prüfen: "unterschreiben" enthält "schreib" und würde sonst
     # fälschlich als Brief-Aktion gelten.
@@ -344,8 +392,9 @@ def fetch_detail(fetcher: core.Fetcher, kind: str, slug: str) -> dict:
 # Datensatz aus einem API-Objekt bauen
 # ----------------------------------------------------------------------------
 def build_rec(page_id: str, obj: dict) -> dict:
-    rec: dict = {"kind": "petition", "started_by": "350.org",
-                 "category": classify(obj)}
+    # Die Kategorie setzt scrape_action – sie hängt an der Zielform, und die
+    # steht hier noch nicht fest.
+    rec: dict = {"kind": "petition", "started_by": "350.org"}
     if obj.get("title"):
         rec["title"] = obj["title"].strip()
     desc = (obj.get("description") or "").strip()
@@ -359,11 +408,17 @@ def build_rec(page_id: str, obj: dict) -> dict:
 
 
 def scrape_action(fetcher: core.Fetcher, page_id: str, obj: dict,
-                  with_count: bool = True) -> tuple[str, dict, bool]:
+                  with_count: bool = True,
+                  existing: dict | None = None) -> tuple[str, dict, bool]:
     """(status, rec, unklar). ``unklar`` = die Weiterleitung war nicht zu lesen
-    und es war kein klares 404 – Zeichen für den Bot-Schutz (resolve_target)."""
+    und es war kein klares 404 – Zeichen für den Bot-Schutz (resolve_target).
+
+    ``existing`` ist der schon gespeicherte Satz. Er wird nur für die Kategorie
+    gebraucht: siehe unten, warum eine Auffrischung ohne Zähler die ermittelte
+    Form nicht wieder durch eine Schätzung ersetzen darf."""
     rec = build_rec(page_id, obj)
     unklar = False
+    kind = None
     if with_count:
         kind, slug, weg = resolve_target(fetcher, page_id)
         if slug:
@@ -380,6 +435,14 @@ def scrape_action(fetcher: core.Fetcher, page_id: str, obj: dict,
                 rec.update(fetch_detail(fetcher, kind, slug))
         else:
             unklar = not weg
+    # ⚠️ Die ermittelte Form schlägt jede Schätzung – aber ohne Form wird nur
+    # dann geraten, wenn noch gar keine Kategorie gespeichert ist. Sonst
+    # überschriebe jeder Auffrischungslauf ohne Zähler (skip_recent, Bot-Schutz)
+    # die belastbare Angabe wieder mit dem Ratewert aus dem Knopftext.
+    if kind:
+        rec["category"] = kategorie_fuer(kind, obj)
+    elif not (existing or {}).get("category"):
+        rec["category"] = classify(obj)
     return "online", rec, unklar
 
 
@@ -469,7 +532,8 @@ def run(args) -> None:
         if gebremst:
             with_count = False
         status, rec, unklar = scrape_action(fetcher, page_id, obj,
-                                           with_count=with_count)
+                                           with_count=with_count,
+                                           existing=existing)
         leere = leere + 1 if unklar else 0
         if leere >= ABBRUCH_NACH_LEEREN and not gebremst:
             gebremst = True
