@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Welche Ordner der FileProvider nach aussen geben darf (AndroidManifest →
+     androidx.core.content.FileProvider).
+
+     Bewusst NUR der Unterordner "updates" im app-eigenen Cache:
+     - cache-path liegt in getCacheDir(), also im privaten Bereich der App.
+       Kein Speicher-Recht noetig, und das System raeumt bei Platzmangel selbst
+       auf - eine liegengebliebene 20-MB-APK verstopft also nichts dauerhaft.
+     - Der Pfad ist so eng wie moeglich gefasst. Ein weiter Eintrag wie
+       path="." wuerde den GESAMTEN Cache freigeben, auch Dateien, die den
+       Paketinstallierer nichts angehen. Freigegeben wird nur, was
+       ausgeliefert werden soll.
+
+     Gelesen wird das hier ausschliesslich von MainActivity beim Weiterreichen
+     der heruntergeladenen APK. -->
+<paths>
+    <cache-path name="updates" path="updates/" />
+</paths>

@@ -763,7 +763,7 @@
          gerechnete Empfehlung je Farbe. Alle vier Fälle gemessen
          (foodwatch auto→dunkel/hell→weiß, bundestag auto→weiß/
          dunkel→dunkel). (app.js, texts.js, layouts.css) */
-var CACHE = "pm-cache-v42";
+var CACHE = "pm-cache-v43";
 /* Versionsunabhängig – überlebt das Hochzählen von CACHE. Diese Zahl sollte ab
    jetzt NICHT mehr steigen: seit die Pakete eine Inhaltskennung tragen ("?v=",
    siehe oben) holt sich jedes geänderte Paket von selbst neu. Ein Sprung wäre

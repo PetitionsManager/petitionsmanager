@@ -82,14 +82,37 @@ android {
         }
     }
 
+    // SCHALTER FUER DIE EIGENE AKTUALISIERUNG (8.8.2026).
+    // true  = Fassung fuer die Direktverteilung (GitHub-Release), mit Updater
+    // false = Fassung fuer F-Droid und spaeter Google Play, ohne Updater
+    //
+    // Umschalten beim Bauen:  gradle assembleDebug -PmitUpdater=false
+    //
+    // ⚠️ Was der Schalter WIRKLICH tut: Er setzt BuildConfig.MIT_UPDATER.
+    // MainActivity meldet die JS-Bruecke dann gar nicht erst an, und die
+    // Oberflaeche blendet den Menuepunkt aus - die Funktion ist also tot.
+    // Die Zeile REQUEST_INSTALL_PACKAGES bleibt dabei im Manifest stehen.
+    // Fuer Google Play reicht das NICHT: dort wird die Berechtigung selbst
+    // beanstandet, nicht nur ihre Nutzung. Vor einer Play-Fassung braucht es
+    // deshalb zusaetzlich zwei productFlavors mit eigenem Manifest-Zweig
+    // (tools:node="remove"). Fuer F-Droid genuegt der Schalter, weil dort der
+    // eingebaute Updater das Problem ist und nicht die Berechtigung.
+    def mitUpdater = (project.findProperty("mitUpdater") ?: "true").toString() == "true"
+
+    buildFeatures {
+        buildConfig = true
+    }
+
     buildTypes {
         // AGP nimmt fuer den Debug-Typ zwar automatisch signingConfigs.debug,
         // aber ausgeschrieben ist es eindeutig: hier haengt die Frage dran, ob
         // sich die APK ueberinstallieren laesst. Das soll niemand suchen muessen.
         debug {
             signingConfig signingConfigs.debug
+            buildConfigField "boolean", "MIT_UPDATER", "${mitUpdater}"
         }
         release {
+            buildConfigField "boolean", "MIT_UPDATER", "${mitUpdater}"
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
                     'proguard-rules.pro'
@@ -107,4 +130,9 @@ android {
 
 dependencies {
     implementation 'androidx.webkit:webkit:1.11.0'
+    // FileProvider (AndroidManifest) - wird von webkit zwar transitiv
+    // mitgezogen, aber darauf soll sich niemand verlassen muessen: faellt die
+    // Abhaengigkeit dort einmal weg, scheitert der Bau an einer Klasse, die
+    // hier gar nicht angefordert wurde.
+    implementation 'androidx.core:core:1.13.1'
 }

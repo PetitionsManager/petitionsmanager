@@ -18,6 +18,13 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import androidx.core.content.FileProvider;
 import androidx.webkit.WebSettingsCompat;
 import androidx.webkit.WebViewAssetLoader;
 import androidx.webkit.WebViewFeature;
@@ -122,6 +129,15 @@ public class MainActivity extends Activity {
         web.addJavascriptInterface(new BackupBridge(), "AndroidBackup");
         // Benachrichtigungen: JS ruft window.AndroidNotify.* (siehe NotifyBridge).
         web.addJavascriptInterface(new NotifyBridge(), "AndroidNotify");
+        /* Eigene Aktualisierung: NUR in der Fassung fuer die Direktverteilung.
+           Steht der Bauschalter mitUpdater auf false (F-Droid, spaeter Play),
+           wird die Bruecke gar nicht erst angemeldet - window.AndroidUpdate
+           existiert dann nicht, und die Oberflaeche blendet den Menuepunkt
+           aus, weil sie genau darauf prueft. Kein toter Knopf, der beim
+           Antippen nichts tut. */
+        if (BuildConfig.MIT_UPDATER) {
+            web.addJavascriptInterface(new UpdateBridge(), "AndroidUpdate");
+        }
         NotifyReceiver.kanalAnlegen(this);
 
         web.setWebChromeClient(new WebChromeClient() {
@@ -313,5 +329,180 @@ public class MainActivity extends Activity {
                 Toast.makeText(MainActivity.this, msg, Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    /* ---- Eigene Aktualisierung ------------------------------------------
+       Warum es sie gibt: Die App wird als APK von GitHub verteilt. Ohne
+       eigenen Weg muesste jeder von Hand nachsehen, ob es etwas Neues gibt -
+       und die meisten taeten es nie.
+
+       Die App installiert NICHTS selbst. Sie laedt die Datei und uebergibt
+       sie dem Paketinstallierer des Systems; installiert wird erst nach
+       ausdruecklicher Zustimmung im Systemdialog. REQUEST_INSTALL_PACKAGES
+       erlaubt genau das - den Dialog zu oeffnen, nicht mehr.
+
+       ⚠️ Nur in der Direktverteilungs-Fassung vorhanden (BuildConfig.MIT_UPDATER,
+       siehe app/build.gradle). F-Droid bringt einen eigenen Updater mit,
+       Google Play untersagt Selbstaktualisierung ausserhalb des Stores. */
+    private class UpdateBridge {
+
+        /* Neueste veroeffentlichte Fassung abfragen. Antwortet mit JSON:
+           {"version":"1.0.24","apk":"https://…","hinweis":"…"} oder
+           {"fehler":"…"}. Die Auswertung macht JS - hier wird bewusst nichts
+           entschieden, damit die Texte in app.js/texts.js liegen und
+           uebersetzbar sind.
+
+           Laeuft in einem eigenen Thread: Netzwerkzugriff auf dem
+           Hauptthread wirft NetworkOnMainThreadException, und die JS-Bruecke
+           wird auf einem Binder-Thread aufgerufen, nicht zwingend im
+           Hintergrund. Das Ergebnis geht per JavaScript-Rueckruf zurueck. */
+        @JavascriptInterface
+        public void pruefe(final String rueckruf) {
+            new Thread(new Runnable() {
+                @Override public void run() {
+                    String ergebnis;
+                    HttpURLConnection v = null;
+                    try {
+                        URL u = new URL("https://api.github.com/repos/"
+                                + "PetitionsManager/petitionsmanager/releases/latest");
+                        v = (HttpURLConnection) u.openConnection();
+                        v.setConnectTimeout(15000);
+                        v.setReadTimeout(15000);
+                        v.setRequestProperty("Accept", "application/vnd.github+json");
+                        /* GitHub weist Anfragen ohne User-Agent ab (403). */
+                        v.setRequestProperty("User-Agent", "PetitionsManager-App");
+                        int code = v.getResponseCode();
+                        if (code != 200) {
+                            ergebnis = "{\"fehler\":\"HTTP " + code + "\"}";
+                        } else {
+                            StringBuilder sb = new StringBuilder();
+                            InputStream in = v.getInputStream();
+                            byte[] puffer = new byte[8192];
+                            int n;
+                            while ((n = in.read(puffer)) > 0) {
+                                sb.append(new String(puffer, 0, n, "UTF-8"));
+                            }
+                            in.close();
+                            ergebnis = sb.toString();
+                        }
+                    } catch (Exception e) {
+                        /* Kein Netz, DNS weg, Zeitueberschreitung: als Fehler
+                           melden statt still nichts zu tun - sonst haengt die
+                           Oberflaeche ewig bei "wird geprueft". */
+                        ergebnis = "{\"fehler\":\"offline\"}";
+                    } finally {
+                        if (v != null) v.disconnect();
+                    }
+                    final String antwort = ergebnis;
+                    runOnUiThread(new Runnable() {
+                        @Override public void run() {
+                            web.evaluateJavascript(
+                                rueckruf + "(" + jsText(antwort) + ")", null);
+                        }
+                    });
+                }
+            }).start();
+        }
+
+        /* APK laden und dem Systeminstallierer uebergeben.
+           Fortschritt geht waehrenddessen an JS - ohne Rueckmeldung sieht ein
+           20-MB-Download aus wie eine eingefrorene App. */
+        @JavascriptInterface
+        public void hole(final String adresse, final String fortschritt) {
+            new Thread(new Runnable() {
+                @Override public void run() {
+                    HttpURLConnection v = null;
+                    try {
+                        /* In den app-eigenen Cache, nicht in Downloads: kein
+                           Speicherrecht noetig, und das System raeumt selbst
+                           auf. Der Ordner ist in res/xml/file_paths.xml als
+                           einziger freigegeben. */
+                        File ordner = new File(getCacheDir(), "updates");
+                        if (!ordner.exists()) ordner.mkdirs();
+                        File ziel = new File(ordner, "update.apk");
+                        if (ziel.exists()) ziel.delete();
+
+                        URL u = new URL(adresse);
+                        v = (HttpURLConnection) u.openConnection();
+                        v.setConnectTimeout(20000);
+                        v.setInstanceFollowRedirects(true);
+                        v.setRequestProperty("User-Agent", "PetitionsManager-App");
+                        int gesamt = v.getContentLength();
+                        InputStream in = v.getInputStream();
+                        FileOutputStream aus = new FileOutputStream(ziel);
+                        byte[] puffer = new byte[16384];
+                        int n, summe = 0, zuletzt = -1;
+                        while ((n = in.read(puffer)) > 0) {
+                            aus.write(puffer, 0, n);
+                            summe += n;
+                            if (gesamt > 0) {
+                                final int p = (int) (100L * summe / gesamt);
+                                /* Nur bei Aenderung melden: sonst tausende
+                                   JS-Aufrufe fuer dieselbe Zahl. */
+                                if (p != zuletzt) {
+                                    zuletzt = p;
+                                    meldeFortschritt(fortschritt, p);
+                                }
+                            }
+                        }
+                        aus.close();
+                        in.close();
+
+                        /* Ab Android 7 darf keine file://-Adresse nach aussen;
+                           der Installierer bekommt eine content://-Adresse und
+                           ein befristetes Leserecht. */
+                        Uri uri = FileProvider.getUriForFile(MainActivity.this,
+                                getPackageName() + ".fileprovider", ziel);
+                        Intent i = new Intent(Intent.ACTION_VIEW);
+                        i.setDataAndType(uri, "application/vnd.android.package-archive");
+                        i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION
+                                | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(i);
+                        meldeFortschritt(fortschritt, 100);
+                    } catch (Exception e) {
+                        meldeFortschritt(fortschritt, -1);   // -1 = Fehler
+                    } finally {
+                        if (v != null) v.disconnect();
+                    }
+                }
+            }).start();
+        }
+
+        /* Fassung, die gerade laeuft - damit JS vergleichen kann, ohne dass
+           die Versionsnummer doppelt gepflegt werden muss. */
+        @JavascriptInterface
+        public String fassung() {
+            try {
+                return getPackageManager()
+                        .getPackageInfo(getPackageName(), 0).versionName;
+            } catch (Exception e) {
+                return "";
+            }
+        }
+    }
+
+    private void meldeFortschritt(final String rueckruf, final int prozent) {
+        runOnUiThread(new Runnable() {
+            @Override public void run() {
+                web.evaluateJavascript(rueckruf + "(" + prozent + ")", null);
+            }
+        });
+    }
+
+    /* Beliebigen Text als JavaScript-Zeichenkette einbetten. Ohne das Maskieren
+       wuerde ein Anfuehrungszeichen im Text den Aufruf zerreissen - und der
+       Text kommt hier von einem fremden Server. */
+    private static String jsText(String s) {
+        if (s == null) return "\"\"";
+        StringBuilder b = new StringBuilder("\"");
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c == '"' || c == '\\') b.append('\\').append(c);
+            else if (c == '\n') b.append("\\n");
+            else if (c == '\r') b.append("\\r");
+            else if (c < 0x20) b.append(String.format("\\u%04x", (int) c));
+            else b.append(c);
+        }
+        return b.append('"').toString();
     }
 }

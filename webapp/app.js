@@ -113,8 +113,14 @@
     it: { name: "Italienisch", flag: "🇮🇹" }
   };
   var LANG_ORDER = ["de", "en", "fr", "es", "it"];
+  /* ⚠️ Der ANZEIGENAME wird bei jedem Aufruf frisch aus texts.js geholt
+     (lang.<code>), nicht aus LANG selbst: LANG ist ein `var` und wird beim
+     Laden GENAU EINMAL ausgewertet — ein Sprachwechsel käme dort nie an.
+     Die Flagge bleibt in LANG, die ist in jeder Sprache dieselbe. */
   function langInfo(code) {
-    return LANG[code] || { name: (code || "Andere"), flag: "🏳️" };
+    var e = LANG[code];
+    if (e) return { name: T("lang." + code, e.name), flag: e.flag };
+    return { name: (code || T("lang.other", "Andere")), flag: "🏳️" };
   }
   function langRank(code) {
     var i = LANG_ORDER.indexOf(code); return i < 0 ? 99 : i;
@@ -738,17 +744,20 @@
       var mLive = r[0], mEigen = r[1];
       if (!mLive) {
         state.baseAuto = "bundled";
-        state.baseWhy = mEigen ? "Live-Daten nicht erreichbar" : "Keine Verbindung";
+        state.baseWhy = mEigen
+          ? T("settings.whyLiveUnreachable", "Live-Daten nicht erreichbar")
+          : T("settings.whyNoConnection", "Keine Verbindung");
         return;
       }
       if (mEigen && manifestStamp(mEigen) > manifestStamp(mLive)) {
         state.baseAuto = "bundled";
-        state.baseWhy = "Mitgelieferte Daten sind neuer";
+        state.baseWhy = T("settings.whyBundledNewer",
+                          "Mitgelieferte Daten sind neuer");
         return;
       }
       state.base = LIVE_BASE;
       state.baseAuto = "live";
-      state.baseWhy = "Tagesaktuell von GitHub Pages";
+      state.baseWhy = T("settings.whyLive", "Tagesaktuell von GitHub Pages");
     });
   }
   /* Quelle gewechselt: alles Geladene verwerfen und neu auflösen. textChunks
@@ -757,27 +766,30 @@
      das hängt bei jedem Aufruf erneut Scroll- und matchMedia-Horcher an. */
   function reloadData() {
     state.dataCache = {}; state.manifest = null; textChunks = {};
-    content.innerHTML = '<div class="empty">Lade Daten …</div>';
+    content.innerHTML = '<div class="empty">' +
+      esc(T("msg.loading", "Lade Daten …")) + "</div>";
     return resolveBase().then(loadManifest).then(function () { render(); })
       .catch(function () {
-        content.innerHTML = '<div class="empty">Daten konnten nicht geladen ' +
-          'werden.<br>Prüfe die <b>Datenquelle</b> in den Einstellungen.</div>';
+        content.innerHTML = '<div class="empty">' +
+          T("msg.loadError", "Daten konnten nicht geladen werden.<br>" +
+            "Prüfe die <b>Datenquelle</b> in den Einstellungen.") + "</div>";
       });
   }
 
   // ---- Rendering: Liste ------------------------------------------------------
   function renderListe() {
     titleEl.textContent = state.platform ? platformName(state.platform)
-                                         : "Petitionen";
+                                         : T("nav.petitions", "Petitionen");
     if (state.platform) return renderPlatformDetail(state.platform);
 
     var live = livePlatforms().filter(function (p) { return isEnabled(p.key); })
       .sort(function (a, b) { return a.name.localeCompare(b.name, "de"); });
     if (!live.length) {
       content.innerHTML = "";
-      content.appendChild(el(
-        '<div class="empty">Keine Plattform aktiviert.<br>' +
-        'Wähle in den <b>Einstellungen</b> aus, welche du sehen möchtest.</div>'));
+      content.appendChild(el('<div class="empty">' +
+        T("msg.noPlatforms", "Keine Plattform aktiviert.<br>" +
+          "Wähle in den <b>Einstellungen</b> aus, welche du sehen möchtest.") +
+        "</div>"));
       return;
     }
     content.innerHTML = "";
@@ -799,7 +811,8 @@
       esc(state.mainQuery) + '">' +
       /* Nur die Lupe, kein Wort (Nutzerwunsch 3.8.26) — das aria-label trägt
          die Bedeutung für Screenreader, das Symbol ist deshalb aria-hidden. */
-      '<button class="mainsearch__btn" type="submit" aria-label="Suchen">' +
+      '<button class="mainsearch__btn" type="submit" aria-label="' +
+      esc(T("msg.search", "Suchen")) + '">' +
       '<i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>' +
       "</button></form>");
     var searchIn = searchRow.querySelector(".mainsearch__in");
@@ -894,9 +907,11 @@
             /* Der Trend darf sich zeigen: „~N/Tag" nur, wenn er aus
                echten Werten gerechnet ist (Unterschriften UND Datum). */
             meta: (typeof e.r.signatures === "number")
-              ? nf.format(e.r.signatures) + " Unterschriften" +
+              ? fill(T("platform.signatures", "{n} Unterschriften"),
+                     { n: nf.format(e.r.signatures) }) +
                 (e.r.start_date && e.score >= 1
-                  ? " · ~" + nf.format(Math.round(e.score)) + "/Tag"
+                  ? " · " + fill(T("platform.perDay", "~{n}/Tag"),
+                                 { n: nf.format(Math.round(e.score)) })
                   : "")
               : "",
             /* Öffnet die ANGEKLICKTE PETITION, nicht bloß ihre
@@ -953,7 +968,8 @@
     // Gruppen aufbauen: (1) Favoriten zuerst, (2) danach nach Sprache.
     var groupDefs = [];
     var favs = live.filter(function (p) { return isFav(p.key); });
-    if (favs.length) groupDefs.push({ key: "__fav", label: "Favoriten", plats: favs });
+    if (favs.length) groupDefs.push({ key: "__fav",
+      label: T("favorites.title", "Favoriten"), plats: favs });
     /* Die Erklärung, wie man einen Favoriten setzt, stand früher hier auf der
        Hauptliste. Sie steht jetzt in den Einstellungen direkt über der
        Plattform-Liste – also dort, wo die Sterne tatsächlich sind – und ist
@@ -968,7 +984,13 @@
     Object.keys(groups).sort(function (a, b) {
       return langRank(a) - langRank(b) || a.localeCompare(b);
     }).forEach(function (code) {
-      groupDefs.push({ key: code, label: langInfo(code).name + "sprachige Plattformen",
+      /* „Deutsch" + „sprachige Plattformen" — im Englischen dagegen
+         „German-language platforms". Deshalb ein Platzhalter statt einer
+         Verkettung: die Wortstellung ist nicht in jeder Sprache dieselbe. */
+      groupDefs.push({ key: code,
+                       label: fill(T("lang.groupLabel",
+                                     "{lang}sprachige Plattformen"),
+                                   { lang: langInfo(code).name }),
                        plats: groups[code] });
     });
 
@@ -1006,59 +1028,15 @@
      Steht hier im Code statt in texts.js, weil texts.js kurze Beschriftungen
      hält; dieser Block ist ein zusammenhängender Text, der als Ganzes
      redigiert wird. */
-  var KODEX_HTML =
-    '<div class="kodex">' +
-      '<div class="kodex__grp">' +
-        '<div class="kodex__h"><i class="fa-solid fa-circle-check"></i>' +
-        " Was eine Plattform mitbringen muss</div><ul class=\"kodex__list\">" +
-          "<li>Sie macht öffentlich, wer sie betreibt – Impressum oder eine " +
-            "gleichwertige Angabe.</li>" +
-          "<li>Ihre Petitionen sind ohne Konto lesbar.</li>" +
-          "<li>Sie erlaubt automatisiertes Auslesen. Sperren in der " +
-            "robots.txt und Botschutz halten wir ein; wir umgehen sie " +
-            "nicht.</li>" +
-          "<li>Sie steht grundsätzlich allen offen und ist nicht die Bühne " +
-            "einer einzelnen Kampagne.</li>" +
-          "<li>Sie legt nachvollziehbar dar, wie Unterschriften gezählt " +
-            "werden.</li>" +
-        "</ul></div>" +
-      '<div class="kodex__grp kodex__grp--stop">' +
-        '<div class="kodex__h"><i class="fa-solid fa-ban"></i>' +
-        " Was zum Ausschluss führt</div>" +
-        "<p>Ohne Abwägung ausgeschlossen sind Plattformen, die Inhalte " +
-          "verbreiten oder dulden, die</p><ul class=\"kodex__list\">" +
-          "<li>Menschen wegen Herkunft, Hautfarbe, Staatsangehörigkeit, " +
-            "Religion, Geschlecht, sexueller Orientierung, Behinderung, " +
-            "Alter oder sozialer Stellung herabwürdigen;</li>" +
-          "<li>zu Hass, Gewalt oder Ausgrenzung gegen Personen oder Gruppen " +
-            "aufrufen;</li>" +
-          "<li>den Holocaust oder andere Völkermorde leugnen oder " +
-            "verharmlosen;</li>" +
-          "<li>verfassungswidrige oder verbotene Kennzeichen verwenden;</li>" +
-          "<li>Menschen gezielt einschüchtern, bloßstellen oder zur " +
-            "Zielscheibe machen.</li>" +
-        "</ul>" +
-        "<p>Das gilt unabhängig davon, ob die Plattform solche Inhalte selbst " +
-          "veröffentlicht oder sie nur stehen lässt.</p></div>" +
-      '<div class="kodex__grp">' +
-        '<div class="kodex__h"><i class="fa-solid fa-gavel"></i>' +
-        " Wie wir entscheiden</div><ul class=\"kodex__list\">" +
-          "<li>Jeden Vorschlag prüfen wir von Hand, bevor eine Plattform " +
-            "aufgenommen wird.</li>" +
-          "<li>Bei einem begründeten Hinweis prüfen wir erneut – und nehmen " +
-            "eine Plattform auch wieder heraus.</li>" +
-          "<li>Einzelne Petitionen, die gegen diesen Kodex verstoßen, " +
-            "entfernen wir aus der App, auch wenn die Plattform bleibt.</li>" +
-        "</ul></div>" +
-      '<p class="kodex__note"><i class="fa-solid fa-circle-info"></i> ' +
-        "<span><strong>Was die Aufnahme nicht bedeutet:</strong> " +
-        "PetitionsManager zeigt, was auf den Plattformen öffentlich steht. " +
-        "Die Aufnahme einer Plattform ist keine Empfehlung und keine " +
-        "Zustimmung zu einzelnen Petitionen. Für den Inhalt einer Petition " +
-        "stehen ihre Urheberinnen und Urheber sowie die jeweilige Plattform " +
-        "ein. Wir prüfen nicht jede einzelne Petition im Voraus – sag uns " +
-        "Bescheid, was dir auffällt.</span></p>" +
-    "</div>";
+  /* Der Kodextext liegt seit 8.8.2026 in texts.js (legal.kodexHtml), damit er
+     uebersetzbar ist. FUNKTION und nicht `var`: eine Variable auf Modulebene
+     wird EINMAL beim Laden ausgewertet - nach einem Sprachwechsel stuende hier
+     noch der alte Text, waehrend der Rest der Oberflaeche schon umgestellt
+     waere. supportSection() baut seine Liste bei jedem Zeichnen neu, der
+     Aufruf kostet also nichts.
+     Der Text selbst wird bewusst nur auf Deutsch gepflegt - Begruendung steht
+     bei dem Eintrag in texts.js. */
+  function kodexHtml() { return T("legal.kodexHtml", ""); }
 
   /* ---- Rechtliches -------------------------------------------------------
      ENTWURF – am 2026-07-29 vom Nutzer beauftragt, juristisch NICHT geprüft.
@@ -1105,13 +1083,25 @@
     return t.length === 3 ? t[2] + "." + t[1] + "." + t[0] : String(iso);
   }
 
+  /* ⚠️ Die Texte liegen in texts.js NUR auf Deutsch (legal.stand…) — sie sind
+     eine Auskunft über die Rechtslage, und die soll nicht in einer zweiten,
+     ebenfalls ungeprüften Fassung herumstehen. T() fällt deshalb auch in der
+     englischen Oberfläche auf Deutsch zurück; das ist gewollt. */
   function rechteStandText(r) {
-    if (!r || !r.asked) return "ungeklärt – noch nicht angefragt";
-    if (!r.answer) return "angefragt am " + dmy(r.asked) + " – noch keine Antwort";
-    var wort = { erlaubt: "Nutzung zugesagt",
-                 eingeschraenkt: "eingeschränkt zugesagt",
-                 abgelehnt: "abgelehnt" };
-    return (wort[r.result] || "Antwort erhalten") + " am " + dmy(r.answer);
+    if (!r || !r.asked)
+      return T("legal.standUngeklaert", "ungeklärt – noch nicht angefragt");
+    if (!r.answer)
+      return fill(T("legal.standAngefragt",
+                    "angefragt am {datum} – noch keine Antwort"),
+                  { datum: dmy(r.asked) });
+    var wort = { erlaubt: T("legal.standErlaubt", "Nutzung zugesagt"),
+                 eingeschraenkt: T("legal.standEingeschraenkt",
+                                   "eingeschränkt zugesagt"),
+                 abgelehnt: T("legal.standAbgelehnt", "abgelehnt") };
+    return fill(T("legal.standAm", "{wort} am {datum}"),
+                { wort: wort[r.result] ||
+                        T("legal.standAntwort", "Antwort erhalten"),
+                  datum: dmy(r.answer) });
   }
 
   /* Tabelle je Plattform. Bewusst gestapelt und nicht als <table>: bei rund
@@ -1129,12 +1119,16 @@
      gegeneinander. Eine leere Angabe ist außerdem selbst eine Information
      („nicht bekannt"), eine fehlende Zeile ist nur eine Lücke, die man für ein
      Versehen hält. */
+  /* `key` zeigt auf texts.js, `label` ist nur noch der Rückfall. Aufgelöst
+     wird ERST in steckbriefHtml() — diese Liste ist ein `var` und würde die
+     Sprache des Startzeitpunkts festhalten. */
   var STECKBRIEF = [
-    { feld: "operator",  label: "Träger" },
-    { feld: "seat",      label: "Sitz" },
-    { feld: "founded",   label: "Gegründet" },
-    { feld: "financing", label: "Finanzierung" },
-    { feld: "impressum", label: "Impressum", alsLink: true },
+    { feld: "operator",  key: "platform.operatorLabel",  label: "Träger" },
+    { feld: "seat",      key: "platform.seatLabel",      label: "Sitz" },
+    { feld: "founded",   key: "platform.foundedLabel",   label: "Gegründet" },
+    { feld: "financing", key: "platform.financingLabel", label: "Finanzierung" },
+    { feld: "impressum", key: "platform.impressumLabel", label: "Impressum",
+      alsLink: true },
     /* Nutzungsbedingungen/AGB — nur der LINK, keine Auswertung: was darin
        steht, liest der Nutzer selbst. Eine aus AGB-Fragmenten abgeleitete
        Rechtslage wäre schlechter als der Verweis auf die Quelle.
@@ -1145,7 +1139,8 @@
        „Rechtliche Hinweis" das Äquivalent und steht schon in der Zeile
        darüber. Dort erscheint „–" — das heißt „gibt es nicht", nicht „noch
        nicht nachgesehen". */
-    { feld: "agb", label: "Nutzungsbedingungen", alsLink: true }
+    { feld: "agb", key: "platform.termsLabel", label: "Nutzungsbedingungen",
+      alsLink: true }
   ];
 
   // Aus einer Adresse den Gastgebernamen — als Linktext lesbarer als die
@@ -1165,10 +1160,12 @@
     var quellen = about.quellen || {};
     return '<dl class="pabout__facts">' + STECKBRIEF.map(function (z) {
       var wert = about[z.feld];
+      var lbl = T(z.key, z.label);
       var leer = wert === null || wert === undefined || wert === "";
       var inhalt, src = "";
       if (leer) {
-        inhalt = '<span class="fact-leer" title="nicht bekannt">–</span>';
+        inhalt = '<span class="fact-leer" title="' +
+          esc(T("platform.unknown", "nicht bekannt")) + '">–</span>';
       } else if (z.alsLink) {
         inhalt = '<a href="' + esc(String(wert)) + '" target="_blank" ' +
           'rel="noopener">' + esc(kurzUrl(wert)) +
@@ -1177,11 +1174,14 @@
         inhalt = esc(String(wert));
         var q = quellen[z.feld] || about.quelle;
         if (q) src = ' <a class="fact-src" href="' + esc(q) +
-          '" target="_blank" rel="noopener" title="Quelle für diese Angabe" ' +
-          'aria-label="Quelle für ' + esc(z.label) + '">' +
+          '" target="_blank" rel="noopener" title="' +
+          esc(T("platform.sourceFor", "Quelle für diese Angabe")) +
+          '" aria-label="' +
+          esc(fill(T("platform.sourceForAria", "Quelle für {label}"),
+                   { label: lbl })) + '">' +
           '<i class="fa-solid fa-arrow-up-right-from-square"></i></a>';
       }
-      return "<dt>" + esc(z.label) + "</dt><dd>" + inhalt + src + "</dd>";
+      return "<dt>" + esc(lbl) + "</dt><dd>" + inhalt + src + "</dd>";
     }).join("") + "</dl>";
   }
 
@@ -1191,10 +1191,12 @@
     if (!plats.length) return "";
     return plats.map(function (p) {
       var about = platInfo(p.key).about || {};
+      var unbekannt = T("legal.platUnbekannt", "nicht bekannt");
       var zeilen = [
-        ["Betreiber", about.operator || "nicht bekannt"],
-        ["Sitz", about.seat || "nicht bekannt"],
-        ["Nutzungsrecht", rechteStandText(RECHTE_STAND[p.key])]
+        [T("legal.platBetreiber", "Betreiber"), about.operator || unbekannt],
+        [T("legal.platSitz", "Sitz"), about.seat || unbekannt],
+        [T("legal.platNutzungsrecht", "Nutzungsrecht"),
+         rechteStandText(RECHTE_STAND[p.key])]
       ].map(function (z) {
         return "<dt>" + esc(z[0]) + "</dt><dd>" + esc(z[1]) + "</dd>";
       }).join("");
@@ -1208,9 +1210,12 @@
          jetzt ausdrücklich da, statt eine Lücke zu lassen. */
       var links = about.impressum
         ? '<a href="' + esc(about.impressum) + '" target="_blank" ' +
-          'rel="noopener">Impressum</a>'
-        : '<span class="legal__none">Kein Impressum – Betreiber außerhalb ' +
-          "des deutschen Rechtsraums</span>";
+          'rel="noopener">' + esc(T("legal.impressumTitle", "Impressum")) +
+          "</a>"
+        : '<span class="legal__none">' +
+          esc(T("legal.keinImpressum",
+                "Kein Impressum – Betreiber außerhalb des deutschen " +
+                "Rechtsraums")) + "</span>";
       links += (about.links || []).filter(function (l) {
         return /datenschutz|privacy/i.test(l.label + l.url);
       }).map(function (l) {
@@ -1225,64 +1230,56 @@
     }).join("");
   }
 
+  /* ⚠️ Der Fließtext steht seit 8.8.2026 in texts.js — und dort NUR auf
+     Deutsch (legal.rechteLead / legal.rechteNote, Nutzerentscheidung wie bei
+     kodexHtml). Zwei Texte statt einem, weil die Plattform-Tabelle
+     dazwischensteht; jeder für sich bleibt ein zusammenhängender Absatz.
+     Der Rückfall ist leer statt der ganze deutsche Text: derselbe Weg wie bei
+     kodexHtml()/impressumHtml() — 1,5 KB Rechtstext ein zweites Mal im Code
+     wären zwei Fassungen, die auseinanderlaufen können. */
   function rechteHtml() {
     return "" +
-      '<p class="legal__lead">Die Petitionen in dieser App stammen von ' +
-      "fremden Plattformen. Das Urheberrecht an ihren Inhalten – Titel, " +
-      "Aufruf-Texte, Bilder – liegt bei den jeweiligen Urheberinnen und " +
-      "Urhebern beziehungsweise bei der Plattform. PetitionsManager " +
-      "erwirbt daran keine Rechte und räumt keine ein.</p>" +
-      '<p class="legal__lead">Was davon kopiert wird und was nicht: Titel, ' +
-      "Kurzfassung, Aufruf-Text, Unterschriftenzahl und Datum werden " +
-      "abgerufen und in der App gespeichert. Die <strong>Bilder werden " +
-      "nicht kopiert</strong>, sondern von den Servern der Plattformen " +
-      "eingebunden – sie bleiben dort liegen und werden beim Anzeigen von " +
-      "dort geholt.</p>" +
-      '<p class="legal__lead"><strong>Das Nutzungsrecht ist ungeklärt.</strong> ' +
-      "Die Inhalte sind öffentlich zugänglich, und diese App ist " +
-      "nicht-kommerziell und ihr Quellcode offen – eine Erlaubnis der " +
-      "Plattformen ist damit aber nicht gegeben. Im Zuge der " +
-      "Veröffentlichung werden alle Betreiber angefragt; die Tabelle zeigt " +
-      "je Plattform, wie weit das ist.</p>" +
+      T("legal.rechteLead", "") +
       '<div class="legal__tbl">' + rechtePlattformen() + "</div>" +
       /* „– wir nehmen sie heraus." ist auf Wunsch des Nutzers (6.8.2026)
          gestrichen: der Satz gab eine Zusage ab, bevor überhaupt jemand
          geprüft hat, worum es geht. Stattdessen der Weg dorthin — ein Knopf,
          der schreibt, statt eines Versprechens. */
-      '<p class="legal__note">Wenn Sie für eine der genannten Plattformen ' +
-      "sprechen und mit der Darstellung Ihrer Inhalte nicht einverstanden " +
-      "sind, schreiben Sie uns.</p>" +
+      T("legal.rechteNote", "") +
       '<div class="legal__btns"><a class="support__btn" href="mailto:' +
       SUPPORT_MAIL + "?subject=" +
-      encodeURIComponent("[PetitionsManager] Rechte an den Inhalten") +
-      '"><i class="fa-solid fa-envelope"></i> Kontakt aufnehmen</a></div>';
+      encodeURIComponent("[PetitionsManager] " +
+                         T("mail.rights", "Rechte an den Inhalten")) +
+      '"><i class="fa-solid fa-envelope"></i> ' +
+      esc(T("legal.kontaktBtn", "Kontakt aufnehmen")) + "</a></div>";
   }
 
-  var IMPRESSUM_HTML =
-    '<dl class="legal__dl">' +
-      "<dt>Anbieter</dt><dd>Matthias Drees</dd>" +
-      "<dt>Anschrift</dt><dd>Tempelhof 3<br>74594 Kreßberg<br>Deutschland</dd>" +
-      '<dt>Kontakt</dt><dd><a href="mailto:' + SUPPORT_MAIL + '">' +
-        SUPPORT_MAIL + "</a></dd>" +
-      "<dt>Verantwortlich für den Inhalt</dt><dd>Matthias Drees</dd>" +
-    "</dl>" +
-    '<p class="legal__note">PetitionsManager ist ein privates, ' +
-    'nicht-kommerzielles Projekt. Der Quellcode ist offen: ' +
-    '<a href="' + GITHUB_URL + '" target="_blank" rel="noopener">' +
-    "GitHub</a>.</p>";
+  /* Wie kodexHtml(): Funktion statt `var`, damit ein Sprachwechsel greift.
+     {mail}/{github} werden hier gefuellt - die Adressen stehen weiter oben
+     genau einmal (SUPPORT_MAIL, GITHUB_URL) und bleiben damit auch bei
+     weiteren Sprachen eine einzige Quelle. */
+  function impressumHtml() {
+    return fill(T("legal.impressumHtml", ""),
+                { mail: SUPPORT_MAIL, github: GITHUB_URL });
+  }
 
   // Rechtlicher Bereich: Impressum und Rechte an den Inhalten.
   function legalSection() {
     var sec = el('<section class="support support--legal">' +
       '<div class="support__title"><i class="fa-solid fa-scale-balanced">' +
-      "</i> Rechtliches</div>" +
+      "</i> " + esc(T("legal.title", "Rechtliches")) + "</div>" +
       '<div class="support__acc"></div></section>');
     var acc = sec.querySelector(".support__acc");
-    [["fa-address-card", "Impressum",
-      "Wer diese App anbietet und wie er erreichbar ist.", IMPRESSUM_HTML],
-     ["fa-copyright", "Rechte an den Inhalten",
-      "Wem die Petitionstexte und Bilder gehören und was mit den Plattformen " +
-      "abgestimmt ist.", rechteHtml()]
+    /* Überschriften und Anreißer sind Wegweiser, keine Rechtsaussage — sie
+       stehen deshalb in BEIDEN Sprachen. Nur der Inhalt dahinter
+       (impressumHtml/rechteHtml) bleibt deutsch. */
+    [["fa-address-card", T("legal.impressumTitle", "Impressum"),
+      T("legal.impressumTeaser",
+        "Wer diese App anbietet und wie er erreichbar ist."), impressumHtml()],
+     ["fa-copyright", T("legal.rechteTitle", "Rechte an den Inhalten"),
+      T("legal.rechteTeaser",
+        "Wem die Petitionstexte und Bilder gehören und was mit den " +
+        "Plattformen abgestimmt ist."), rechteHtml()]
     ].forEach(function (it) {
       var item = el('<div class="support__item">' +
         '<button class="support__head" type="button"><span>' +
@@ -1301,38 +1298,55 @@
   function supportSection() {
     var sec = el('<section class="support">' +
       '<div class="support__title"><i class="fa-solid fa-hand-holding-heart">' +
-      "</i> Unterstütze PetitionsManager.</div>" +
+      "</i> " + esc(T("support.title", "Unterstütze PetitionsManager")) +
+      ".</div>" +
       '<div class="support__acc"></div></section>');
     var acc = sec.querySelector(".support__acc");
 
     /* Der Kodex steht bewusst ganz oben: er beantwortet die Frage, nach
        welchen Regeln überhaupt entschieden wird — wer eine Plattform
        vorschlägt, soll sie vorher gelesen haben, nicht hinterher. */
+    /* Die vier unteren Einträge benutzen die support.*-Schlüssel, die in
+       texts.js längst standen und bisher niemand las — nicht neue, doppelte.
+       Der Kodex-Eintrag ist der einzige, der eigene Schlüssel brauchte. */
     var items = [
-      ["fa-scale-balanced", "Wen wir aufnehmen – unser Kodex",
-       "Nach diesen Regeln entscheiden wir, welche Petitionsplattform in die " +
-       "App kommt und welche nicht.",
-       "Verstoß melden",
-       { mailto: "Verstoß gegen den Kodex", html: KODEX_HTML }],
-      ["fa-layer-group", "Fehlt eine Plattform?",
-       "Kennst du eine Petitionsplattform, die hier noch fehlt? Sag uns " +
-       "Bescheid – wir prüfen die Aufnahme.",
-       "Plattform vorschlagen",
-       { mailto: "Plattform-Vorschlag" }],
-      ["fa-file-circle-plus", "Fehlt eine Petition?",
-       "Eine wichtige Petition wird nicht angezeigt? Melde sie uns am besten " +
-       "mit Link.",
-       "Petition melden",
-       { mailto: "Fehlende Petition" }],
-      ["fa-hands-helping", "Möchtest du helfen?",
-       "PetitionsManager ist ein freies Projekt. Hilf mit – mit Feedback, " +
-       "Ideen, Übersetzungen oder finanzieller Unterstützung über Liberapay.",
-       "Mithelfen",
-       { mailto: "Ich möchte unterstützen", donate: true }],
-      ["fa-share-nodes", "Möchtest du die App teilen?",
-       "Teile PetitionsManager mit anderen, die Petitionen mehrerer " +
-       "Plattformen im Blick behalten wollen.",
-       "App teilen",
+      ["fa-scale-balanced",
+       T("support.kodexTitle", "Wen wir aufnehmen – unser Kodex"),
+       T("support.kodexText",
+         "Nach diesen Regeln entscheiden wir, welche Petitionsplattform in " +
+         "die App kommt und welche nicht."),
+       T("support.kodexBtn", "Verstoß melden"),
+       { mailto: T("mail.kodexViolation", "Verstoß gegen den Kodex"),
+         html: kodexHtml() }],
+      ["fa-layer-group",
+       T("support.missingPlatform.q", "Fehlt eine Plattform?"),
+       T("support.missingPlatform.a",
+         "Kennst du eine Petitionsplattform, die hier noch fehlt? Sag uns " +
+         "Bescheid – wir prüfen die Aufnahme."),
+       T("support.missingPlatform.btn", "Plattform vorschlagen"),
+       { mailto: T("mail.platformSuggestion", "Plattform-Vorschlag") }],
+      ["fa-file-circle-plus",
+       T("support.missingPetition.q", "Fehlt eine Petition?"),
+       T("support.missingPetition.a",
+         "Eine wichtige Petition wird nicht angezeigt? Melde sie uns am " +
+         "besten mit Link."),
+       T("support.missingPetition.btn", "Petition melden"),
+       { mailto: T("mail.missingPetition", "Fehlende Petition") }],
+      ["fa-hands-helping",
+       T("support.help.q", "Möchtest du helfen?"),
+       T("support.help.a",
+         "PetitionsManager ist ein freies Projekt. Hilf mit – mit Feedback, " +
+         "Ideen, Übersetzungen oder finanzieller Unterstützung über " +
+         "Liberapay."),
+       T("support.help.btn", "Mithelfen"),
+       { mailto: T("mail.wantToSupport", "Ich möchte unterstützen"),
+         donate: true }],
+      ["fa-share-nodes",
+       T("support.share.q", "Möchtest du die App teilen?"),
+       T("support.share.a",
+         "Teile PetitionsManager mit anderen, die Petitionen mehrerer " +
+         "Plattformen im Blick behalten wollen."),
+       T("support.share.btn", "App teilen"),
        { share: true }]
     ];
 
@@ -1353,7 +1367,8 @@
       if (opt.donate) {
         btns.appendChild(el('<a class="support__btn support__btn--donate" href="' +
           esc(SUPPORT_DONATE) + '" target="_blank" rel="noopener">' +
-          '<i class="fa-solid fa-heart"></i> Finanziell unterstützen</a>'));
+          '<i class="fa-solid fa-heart"></i> ' +
+          esc(T("support.donate", "Finanziell unterstützen")) + "</a>"));
       }
       if (opt.share) {
         var sBtn = el('<button class="support__btn" type="button">' +
@@ -1376,21 +1391,24 @@
   // App teilen: native Share-Sheet, sonst Link in die Zwischenablage.
   function shareApp(btn) {
     var data = {
-      title: "PetitionsManager",
-      text: "Behalte Petitionen mehrerer Plattformen im Blick.",
+      title: T("app.name", "PetitionsManager"),
+      text: T("support.shareText",
+              "Behalte Petitionen mehrerer Plattformen im Blick."),
       url: location.href
     };
     if (navigator.share) { navigator.share(data).catch(function () {}); return; }
     var done = function () {
       var old = btn.innerHTML;
-      btn.innerHTML = '<i class="fa-solid fa-check"></i> Link kopiert';
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> ' +
+        esc(T("support.linkCopied", "Link kopiert"));
       setTimeout(function () { btn.innerHTML = old; }, 2000);
     };
+    var frage = T("support.copyPrompt", "Link kopieren:");
     if (navigator.clipboard && navigator.clipboard.writeText)
       navigator.clipboard.writeText(location.href).then(done, function () {
-        window.prompt("Link kopieren:", location.href);
+        window.prompt(frage, location.href);
       });
-    else window.prompt("Link kopieren:", location.href);
+    else window.prompt(frage, location.href);
   }
 
   // Aufklappbares Gruppen-Akkordion (Favoriten oder Sprache) mit Karten.
@@ -1445,7 +1463,9 @@
     var info = langInfo(p.language || "de");
     var newN = p["new"] || 0;
     var newLabel = newN > 0
-      ? '<span class="plat__new">+' + nf.format(newN) + " neu</span>" : "";
+      ? '<span class="plat__new">' +
+        esc(fill(T("liste.newBadge", "+{n} neu"), { n: nf.format(newN) })) +
+        "</span>" : "";
     var brand = platColor(p.key);
     /* Die Kachel gibt KEINE eigene Schriftfarbe mehr vor: --on-brand kommt
        einheitlich aus layouts.css und ist überall Weiß (Nutzerentscheidung
@@ -1480,7 +1500,8 @@
              der Textfluss bleibt woertlich derselbe. */
           '<span class="plat__meta"><span class="plat__num">' +
             nf.format(p.online) + '</span><span class="plat__unit"> ' +
-            "Petitionen</span>" + newLabel + '</span>' +
+            esc(T("liste.petitionsUnit", "Petitionen")) + "</span>" +
+            newLabel + '</span>' +
           (tagline ? '<span class="plat__tag">' + esc(tagline) + "</span>" : "") +
         '</span>' +
         '<span class="plat__chev">' +
@@ -1578,7 +1599,7 @@
       var treffer = ziel();
       if (!treffer) {
         b.classList.add("jump--miss");
-        lbl.textContent = "Nicht in der angezeigten Liste";
+        lbl.textContent = T("tools.jumpMiss", "Nicht in der angezeigten Liste");
         setTimeout(function () {
           b.classList.remove("jump--miss"); lbl.textContent = label;
         }, 2400);
@@ -1918,8 +1939,12 @@
   function petCard(r, ctx, platKey) {
     var wrap = el('<div class="pet-wrap"></div>');
     var imArchiv = isArchived(r.url);
-    var rechtsLabel = isSigned(r.url) ? "Zurücksetzen" : "Unterschrieben";
-    var linksLabel = imArchiv ? "Wiederherstellen" : "Archivieren";
+    var rechtsLabel = isSigned(r.url)
+      ? esc(T("petition.swipeUndo", "Zurücksetzen"))
+      : esc(T("petition.swipeSign", "Unterschrieben"));
+    var linksLabel = imArchiv
+      ? esc(T("petition.swipeRestore", "Wiederherstellen"))
+      : esc(T("petition.swipeArchive", "Archivieren"));
     var linksIcon = imArchiv ? "fa-rotate-left" : "fa-box-archive";
     var bg = el('<div class="pet-bg">' +
       '<span class="pet-bg__l"><i class="fa-solid fa-circle-check"></i> ' +
@@ -1940,15 +1965,19 @@
        wenn es eins gibt, im Abzeichen „beendet". Nicht jede Plattform liefert
        ein Startdatum (siehe Lückenhinweis in buildTools), deshalb bedingt. */
     var datum = r.start_date
-      ? '<span class="sig pet__date" title="Start der Petition">' +
+      ? '<span class="sig pet__date" title="' +
+        esc(T("petition.startTitle", "Start der Petition")) + '">' +
         esc(fmtDate(r.start_date)) +
         ' <i class="fa-solid fa-calendar-day" aria-hidden="true"></i></span>' : "";
     var signedBadge = isSigned(r.url)
-      ? '<span class="pet-signed"><i class="fa-solid fa-circle-check"></i>' +
-        " unterschrieben</span>" : "";
+      ? '<span class="pet-signed"><i class="fa-solid fa-circle-check"></i> ' +
+        esc(T("petition.signedInline", "unterschrieben")) + "</span>" : "";
     var closedBadge = isClosed(r)
       ? '<span class="pet-closed"><i class="fa-solid fa-flag-checkered"></i> ' +
-        (r.deadline ? "beendet " + fmtDate(r.deadline) : "beendet") + "</span>"
+        esc(r.deadline
+              ? fill(T("petition.closedOn", "beendet {datum}"),
+                     { datum: fmtDate(r.deadline) })
+              : T("petition.closed", "beendet")) + "</span>"
       : "";
     // Vorschaubild. Über die Hälfte des Bestands hat gar keins – Bundestag
     // (7.903 Sätze) und Europarl liefern grundsätzlich keine Bilder. Ohne
@@ -1976,7 +2005,8 @@
       : thumbPh;
     var ext = r.url
       ? '<a class="pet__ext" href="' + esc(r.url) + '" target="_blank" ' +
-        'rel="noopener" aria-label="Petition extern öffnen">' +
+        'rel="noopener" aria-label="' +
+        esc(T("petition.openExternAria", "Petition extern öffnen")) + '">' +
         '<i class="fa-solid fa-arrow-up-right-from-square"></i></a>' : "";
     // Kategorie als Balken oben an der Kachel (klickbar → filtert).
     var catBar = r.category
@@ -1984,7 +2014,8 @@
         '<i class="fa-solid fa-tag"></i> ' + esc(r.category) + "</button>" : "";
     var head = el('<div class="pet__head">' + thumb +
       '<div class="pet__main">' +
-        '<div class="pet__title">' + esc(r.title || "(ohne Titel)") + "</div>" +
+        '<div class="pet__title">' +
+          esc(r.title || T("petition.noTitle", "(ohne Titel)")) + "</div>" +
         '<div class="pet__row">' + signedBadge + closedBadge + sig + datum +
         "</div>" +
       "</div>" +
@@ -2337,10 +2368,12 @@
 
   function renderSimilar(box, sim) {
     var lbl = '<div class="pet__similar-lbl"><i class="fa-solid fa-link"></i> ' +
-      "Gleiche / Ähnliche Petitionen</div>";
+      esc(T("petition.similarTitle", "Gleiche / Ähnliche Petitionen")) +
+      "</div>";
     if (!sim.length) {
       box.innerHTML = lbl + '<div class="count-note" style="margin:0">' +
-        "Keine ähnlichen Petitionen gefunden.</div>";
+        esc(T("petition.similarNone", "Keine ähnlichen Petitionen gefunden.")) +
+        "</div>";
       return;
     }
     // Volle Breite (gestapelt); Flagge hinter dem Plattformnamen.
@@ -2354,17 +2387,20 @@
     var SIM_VORAB = 5;
     box.innerHTML = lbl + sim.map(function (s, i) {
       var info = langInfo(s.plat.language || "de");
-      var same = s.same ? '<span class="sim-same">gleich</span>' : "";
+      var same = s.same ? '<span class="sim-same">' +
+        esc(T("petition.similarSame", "gleich")) + "</span>" : "";
       return '<button class="simrow' + (i >= SIM_VORAB ? " simrow--rest" : "") +
         '" type="button" data-key="' + esc(s.plat.key) +
         '" data-url="' + esc(s.c.url) + '"><span class="simrow__t">' +
-        esc(s.c.title || "(ohne Titel)") + same + "</span>" +
+        esc(s.c.title || T("petition.noTitle", "(ohne Titel)")) + same +
+        "</span>" +
         '<span class="simrow__p">' + esc(s.plat.name) +
         '<span class="flag">' + info.flag + "</span></span></button>";
     }).join("");
     if (sim.length > SIM_VORAB) {
       var mehr = el('<button class="simmore" type="button">' +
-        "Mehr anzeigen (" + (sim.length - SIM_VORAB) + ")</button>");
+        esc(fill(T("petition.similarMore", "Mehr anzeigen ({n})"),
+                 { n: sim.length - SIM_VORAB })) + "</button>");
       mehr.addEventListener("click", function (e) {
         e.stopPropagation();
         box.querySelectorAll(".simrow--rest").forEach(function (r) {
@@ -2474,24 +2510,30 @@
     // untereinander, und zweimal über das Netz geholt. Stattdessen wächst beim
     // Aufklappen das vorhandene Vorschaubild zum Aufmacher (style.css, .pet.open).
     var h = "";
-    if (r.summary) h += "<h4>Kurzbeschreibung</h4><p>" + esc(r.summary) + "</p>";
-    if (r.recipient) h += "<h4>Adressat</h4><p>" + esc(r.recipient) + "</p>";
-    if (r.started_by) h += "<h4>Gestartet von</h4><p>" + esc(r.started_by) + "</p>";
+    if (r.summary) h += "<h4>" + esc(T("petition.summary", "Kurzbeschreibung")) +
+      "</h4><p>" + esc(r.summary) + "</p>";
+    if (r.recipient) h += "<h4>" + esc(T("petition.recipient", "Adressat")) +
+      "</h4><p>" + esc(r.recipient) + "</p>";
+    if (r.started_by) h += "<h4>" +
+      esc(T("petition.startedBy", "Gestartet von")) +
+      "</h4><p>" + esc(r.started_by) + "</p>";
     // Beschreibung: entweder schon im Datensatz (alte Datenstände) oder als
     // Paketnummer "tc" hinterlegt – dann wird sie unten nachgeladen.
     var textPending = !r.description_full && typeof r.tc === "number";
     if (r.description_full || textPending)
       h += '<details class="descacc"><summary>' +
         '<span class="descacc__lbl"><i class="fa-solid fa-align-left"></i> ' +
-        "Beschreibung</span>" +
+        esc(T("petition.description", "Beschreibung")) + "</span>" +
         '<i class="fa-solid fa-chevron-down descacc__chev"></i></summary>' +
         '<div class="pet__desc">' + (descHtml(r.description_full) ||
-          '<div class="count-note">Text wird geladen …</div>') +
+          '<div class="count-note">' +
+          esc(T("petition.textLoading", "Text wird geladen …")) + "</div>") +
         "</div></details>";
     // Schlagwörter (Tags) – aus dem Text abgeleitet; Klick verlinkt/filtert.
     if (Array.isArray(r.tags) && r.tags.length) {
       h += '<div class="pet__tags"><span class="pet__tags-lbl">' +
-        '<i class="fa-solid fa-hashtag"></i> Schlagwörter</span>' +
+        '<i class="fa-solid fa-hashtag"></i> ' +
+        esc(T("petition.tags", "Schlagwörter")) + "</span>" +
         '<div class="taglist">' +
         r.tags.slice(0, 10).map(function (t) {
           return '<button class="tag" type="button" data-tag="' + esc(t) +
@@ -2499,7 +2541,8 @@
         }).join("") + "</div></div>";
     }
     var meta = [];
-    if (r.start_date) meta.push("Start: " + esc(String(r.start_date).slice(0, 10)));
+    if (r.start_date) meta.push(esc(fill(T("petition.metaStart", "Start: {datum}"),
+      { datum: String(r.start_date).slice(0, 10) })));
     if (typeof r.signatures === "number")
       meta.push(nf.format(r.signatures) +
         ' <i class="fa-solid fa-pen"></i>');
@@ -2507,7 +2550,7 @@
     if (r.url)
       h += '<a class="pet__extlink" href="' + esc(r.url) + '" target="_blank" ' +
         'rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> ' +
-        "Petition öffnen</a>";
+        esc(T("petition.openExtern", "Petition öffnen")) + "</a>";
     // Footer: gleiche/ähnliche Petitionen (nur wenn Tags vorhanden sind).
     var hasTags = Array.isArray(r.tags) && r.tags.length;
     if (hasTags) h += '<div class="pet__similar"></div>';
@@ -2533,12 +2576,15 @@
         } else {
           // Eigene Klasse: .count-note ist im Petitionstext der pulsierende
           // Ladehinweis – eine Meldung darf nicht blinken.
-          descBox.innerHTML = '<div class="pet__desc-note">Für diese Petition ' +
-            "liegt kein ausführlicher Text vor.</div>";
+          descBox.innerHTML = '<div class="pet__desc-note">' +
+            esc(T("petition.noText",
+                  "Für diese Petition liegt kein ausführlicher Text vor.")) +
+            "</div>";
         }
       }).catch(function () {
-        descBox.innerHTML = '<div class="pet__desc-note">Der Text konnte ' +
-          "nicht geladen werden. Prüfe deine Verbindung.</div>";
+        descBox.innerHTML = '<div class="pet__desc-note">' +
+          esc(T("petition.textError", "Der Text konnte nicht geladen werden. " +
+                "Prüfe deine Verbindung.")) + "</div>";
       });
     }
 
@@ -2556,9 +2602,12 @@
         return;
       }
       simBox.innerHTML = '<div class="pet__similar-lbl"><i class="fa-solid ' +
-        'fa-link"></i> Gleiche / Ähnliche Petitionen</div>' +
-        '<div class="count-note" style="margin:0">Suche über alle ' +
-        "Plattformen …</div>";
+        'fa-link"></i> ' +
+        esc(T("petition.similarTitle", "Gleiche / Ähnliche Petitionen")) +
+        "</div>" +
+        '<div class="count-note" style="margin:0">' +
+        esc(T("petition.similarSearching", "Suche über alle Plattformen …")) +
+        "</div>";
       ensureAllData().then(function (all) {
         renderSimilar(simBox, findSimilar(r, all, SIM_SHOW_MAX));
       }).catch(function () {
@@ -2602,7 +2651,8 @@
 
     var links = (about.links || []).slice();
     if (!links.length && manifestEntry.source_url)
-      links.push({ label: "Website", url: manifestEntry.source_url });
+      links.push({ label: T("platform.website", "Website"),
+                   url: manifestEntry.source_url });
     // Wikipedia. Der Artikelname steht mit im Etikett, weil er nicht überall
     // gleich der Plattform heißt – Eko führt zu „SumOfUs" (Umbenennung), WeAct
     // zum Träger „Campact". Für innn.it und WeMove Europe gibt es keinen
@@ -2633,10 +2683,12 @@
         ampClass(manifestEntry.openness) + '">' +
         esc(manifestEntry.openness_note) + "</div>";
     if (manifestEntry.source_url)
-      nerdInhalt += '<div class="nerd__row"><b>Quelle der Daten</b> ' +
+      nerdInhalt += '<div class="nerd__row"><b>' +
+        esc(T("platform.dataSource", "Quelle der Daten")) + "</b> " +
         '<a href="' + esc(manifestEntry.source_url) + '" target="_blank" ' +
         'rel="noopener">' + esc(manifestEntry.source_url) + "</a></div>";
-    nerdInhalt += '<div class="nerd__row"><b>Quellcode dieser App</b> ' +
+    nerdInhalt += '<div class="nerd__row"><b>' +
+      esc(T("platform.appSource", "Quellcode dieser App")) + "</b> " +
       '<a href="' + esc(GITHUB_URL) + '" target="_blank" rel="noopener">' +
       esc(GITHUB_URL.replace(/^https:\/\//, "")) +
       ' <i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>';
@@ -2647,7 +2699,8 @@
         "</p>"));
     }
     body.appendChild(el('<details class="nerd"><summary class="nerd__sum">' +
-      '<span><i class="fa-solid fa-flask"></i> Für Nerds</span>' +
+      '<span><i class="fa-solid fa-flask"></i> ' +
+      esc(T("platform.nerds", "Für Nerds")) + "</span>" +
       '<i class="fa-solid fa-chevron-down nerd__chev"></i></summary>' +
       '<div class="nerd__body">' + nerdInhalt + "</div></details>"));
     return box;
@@ -2678,13 +2731,13 @@
     var aboutBox = platformAbout(key);
     var head = el('<div class="subhead">' +
       '<button class="backbtn"><i class="fa-solid fa-chevron-left"></i> ' +
-        "Alle Plattformen</button>" +
+        esc(T("nav.allPlatforms", "Alle Plattformen")) + "</button>" +
       '<span class="subhead__r">' +
         '<button class="favbtn favbtn--head' + (isFav(key) ? " on" : "") +
           '" type="button"><i class="' + (isFav(key) ? "fa-solid" : "fa-regular") +
           ' fa-star"></i></button>' +
         '<a class="archlink" href="#"><i class="fa-solid fa-box-archive"></i> ' +
-          "Zum Archiv</a></span></div>");
+          esc(T("nav.toArchive", "Zum Archiv")) + "</a></span></div>");
     head.querySelector(".backbtn").addEventListener("click", function () {
       state.platform = null;
       state.catFilter = null; state.tagFilter = null;
@@ -2692,7 +2745,8 @@
     });
     var favBtn = head.querySelector(".favbtn");
     favBtn.setAttribute("aria-pressed", isFav(key) ? "true" : "false");
-    favBtn.setAttribute("aria-label", "Plattform als Favorit merken");
+    favBtn.setAttribute("aria-label",
+      T("platform.favAria", "Plattform als Favorit merken"));
     favBtn.addEventListener("click", function () {
       if (isFav(key)) state.favorites["delete"](key);
       else state.favorites.add(key);
@@ -2735,7 +2789,8 @@
             image_url: r.image_url, title: r.title,
             chip: r.category || platformName(key),
             meta: (typeof r.signatures === "number")
-              ? nf.format(r.signatures) + " Unterschriften" : "",
+              ? fill(T("platform.signatures", "{n} Unterschriften"),
+                     { n: nf.format(r.signatures) }) : "",
             /* Auch hier über openPetitionInApp statt über eine eigene
                DOM-Suche (Nutzerbefund 7.8.26): die Suche in listWrap
                fand nichts, sobald die Petition hinter dem
@@ -2767,14 +2822,18 @@
       var hint = el('<div class="swipe-hint">' +
         '<h3 class="hint-title">' +
         esc(T("petition.swipeHintTitle", "Petitionen wischen")) + "</h3>" +
-        '<p>Wische eine Petition nach <b>rechts</b>, um sie als ' +
-        '„unterschrieben" zu markieren. <span class="hint-note"><b>Wichtig:</b> ' +
-        'Sie wird dadurch <u>nicht</u> automatisch unterschrieben – das musst ' +
-        'du selbst auf der jeweiligen Plattform tun.</span> Nach <b>links</b> ' +
-        'wischen archiviert die Petition.</p>' +
+        "<p>" + T("petition.swipeHintHtml",
+          "Wische eine Petition nach <b>rechts</b>, um sie als " +
+          "„unterschrieben\" zu markieren. <span class=\"hint-note\">" +
+          "<b>Wichtig:</b> Sie wird dadurch <u>nicht</u> automatisch " +
+          "unterschrieben – das musst du selbst auf der jeweiligen Plattform " +
+          "tun.</span> Nach <b>links</b> wischen archiviert die Petition.") +
+        "</p>" +
         '<button class="hint-dismiss" type="button">' +
-        '<i class="fa-solid fa-check"></i> Verstanden, zukünftig nicht mehr ' +
-        'anzeigen</button></div>');
+        '<i class="fa-solid fa-check"></i> ' +
+        esc(T("petition.hintDismiss",
+              "Verstanden, zukünftig nicht mehr anzeigen")) +
+        "</button></div>");
       hint.querySelector(".hint-dismiss").addEventListener("click", function () {
         LS.setItem("swipeHintDismissed", "1"); hint.remove();
       });
@@ -2787,11 +2846,13 @@
        Ohne preventDefault würde das Formular die Seite neu laden und die App
        von vorn starten. */
     var searchForm = el('<form class="searchrow" role="search"></form>');
-    var searchBox = el('<input class="search" type="search" ' +
-      'placeholder="In dieser Plattform suchen …" value="' + esc(state.search) + '">');
+    var searchBox = el('<input class="search" type="search" placeholder="' +
+      esc(T("tools.searchPlatform", "In dieser Plattform suchen …")) +
+      '" value="' + esc(state.search) + '">');
     searchForm.appendChild(searchBox);
     searchForm.appendChild(el('<button class="searchrow__btn" type="submit" ' +
-      'aria-label="Suchen"><i class="fa-solid fa-magnifying-glass" ' +
+      'aria-label="' + esc(T("msg.search", "Suchen")) +
+      '"><i class="fa-solid fa-magnifying-glass" ' +
       'aria-hidden="true"></i></button>'));
     /* Vorschläge aus DIESER Plattform. Anders als auf der Hauptseite muss
        nichts nachgeladen werden — die Liste steht schon im Speicher, sonst
@@ -2809,7 +2870,7 @@
     var tools = el('<details class="ptools">' +
       '<summary class="ptools__sum">' +
         '<span class="ptools__lbl"><i class="fa-solid fa-sliders"></i> ' +
-        'Sortieren und filtern</span>' +
+        esc(T("tools.title", "Sortieren und filtern")) + "</span>" +
         '<span class="ptools__state"></span>' +
         '<i class="fa-solid fa-chevron-down ptools__chev"></i></summary>' +
       '<div class="ptools__body"></div></details>');
@@ -2819,7 +2880,8 @@
     // übergreifende Suche + Zurück-Navigation überstehen.
     var filterBar = el('<div class="filterbar" style="display:none"></div>');
     content.appendChild(filterBar);
-    var note = el('<div class="count-note">Lade …</div>');
+    var note = el('<div class="count-note">' +
+      esc(T("msg.loadingShort", "Lade …")) + "</div>");
     content.appendChild(note);
     var listWrap = el('<div id="petlist"></div>');
     content.appendChild(listWrap);
@@ -2874,14 +2936,19 @@
          Gerade Pfeile statt der 45°-Trendpfeile von vorhin (Nutzerwunsch
          3.8.26); fa-arrow-up/-down liegen im lokalen FontAwesome-Bündel
          (nachgesehen). */
-      var opts = [["", "Standard", "", ""]];
+      var opts = [["", T("tools.sortDefault", "Standard"), "", ""]];
       if (mitDatum) opts.push(
-        ["neu", "Datum", "fa-arrow-up", "Neueste zuerst"],
-        ["alt", "Datum", "fa-arrow-down", "Älteste zuerst"]);
+        ["neu", T("tools.date", "Datum"), "fa-arrow-up",
+         T("tools.newestFirst", "Neueste zuerst")],
+        ["alt", T("tools.date", "Datum"), "fa-arrow-down",
+         T("tools.oldestFirst", "Älteste zuerst")]);
       if (mitZahl) opts.push(
-        ["viel", "Unterschriften", "fa-arrow-up", "Meiste Unterschriften zuerst"],
-        ["wenig", "Unterschriften", "fa-arrow-down", "Wenigste Unterschriften zuerst"]);
-      var h = '<div class="ptools__grp"><span class="ptools__h">Sortierung</span>' +
+        ["viel", T("tools.signatures", "Unterschriften"), "fa-arrow-up",
+         T("tools.mostFirst", "Meiste Unterschriften zuerst")],
+        ["wenig", T("tools.signatures", "Unterschriften"), "fa-arrow-down",
+         T("tools.fewestFirst", "Wenigste Unterschriften zuerst")]);
+      var h = '<div class="ptools__grp"><span class="ptools__h">' +
+        esc(T("tools.sortHeading", "Sortierung")) + "</span>" +
         '<div class="chiprow">' + opts.map(function (o) {
           return '<button class="chip" type="button" data-sort="' + o[0] + '"' +
             (o[3] ? ' aria-label="' + esc(o[3]) + '"' : "") + ">" + esc(o[1]) +
@@ -2894,21 +2961,31 @@
          leere Werte ans Ende, die Standardreihenfolge lässt sie, wo sie sind.
          Vorher stand der Satz unbedingt da und behauptete damit eine Ordnung,
          die ohne Sortierung gar nicht besteht. */
+      /* Ein GANZER Satz je Sprache statt der früheren Verkettung aus fünf
+         Stücken: „steht sie"/„stehen sie" mitten im Satz ist ein deutsches
+         Problem, das andere Sprachen an anderer Stelle haben. */
       function fehlt(n, was, feld) {
-        return { text: "Bei " + nf.format(n) +
-                   (n === 1 ? " Petition fehlt " : " Petitionen fehlt ") + was +
-                   " – beim Sortieren " + (n === 1 ? "steht sie" : "stehen sie") +
-                   " am Ende.",
+        return { text: fill(T(n === 1 ? "tools.gapOne" : "tools.gapMany",
+                              n === 1
+                                ? "Bei {n} Petition fehlt {was} – beim " +
+                                  "Sortieren steht sie am Ende."
+                                : "Bei {n} Petitionen fehlt {was} – beim " +
+                                  "Sortieren stehen sie am Ende."),
+                            { n: nf.format(n), was: was }),
                  feld: feld, anzahl: n };
       }
       if (mitDatum && mitDatum < arr.length)
-        luecken.push(fehlt(arr.length - mitDatum, "das Startdatum", "start_date"));
+        luecken.push(fehlt(arr.length - mitDatum,
+          T("tools.gapStartDate", "das Startdatum"), "start_date"));
       if (mitZahl && mitZahl < arr.length)
-        luecken.push(fehlt(arr.length - mitZahl, "die Unterschriftenzahl", "signatures"));
+        luecken.push(fehlt(arr.length - mitZahl,
+          T("tools.gapSignatures", "die Unterschriftenzahl"), "signatures"));
       if (!mitDatum)
-        luecken.push({ text: "Diese Plattform liefert keine Startdaten." });
+        luecken.push({ text: T("tools.noStartDates",
+          "Diese Plattform liefert keine Startdaten.") });
       if (!mitZahl)
-        luecken.push({ text: "Diese Plattform liefert keine Unterschriftenzahlen." });
+        luecken.push({ text: T("tools.noCounts",
+          "Diese Plattform liefert keine Unterschriftenzahlen.") });
       /* Die Meldung lässt sich ausblenden („Infos deaktivieren", Nutzerwunsch
          7.8.2026) und kommt über „Hilfe-Hinweise zurücksetzen" wieder — der
          Schlüssel steht dafür in HINT_KEYS, das deckt Zurücksetzen, Sicherung
@@ -2930,12 +3007,14 @@
                      '" type="button" data-luecke="' + esc(l.feld) + '">' +
                      '<i class="fa-solid ' +
                      (aktiv ? "fa-arrow-rotate-left" : "fa-filter") + '"></i> ' +
-                     (aktiv ? "Alle zeigen" : "Nur diese zeigen") + "</button>"
+                     esc(aktiv ? T("tools.showAll", "Alle zeigen")
+                               : T("tools.showOnlyThese", "Nur diese zeigen")) +
+                     "</button>"
                    : "") +
                  "</div>";
              }).join("") +
              '<button class="ptools__noteoff" type="button">' +
-             "Infos deaktivieren</button>" +
+             esc(T("tools.notesOff", "Infos deaktivieren")) + "</button>" +
              "</div></div>";
       }
       h += "</div>";
@@ -2948,9 +3027,12 @@
         return zaehler[b] - zaehler[a] || a.localeCompare(b, "de"); });
       if (kats.length) {
         h += '<div class="ptools__grp"><span class="ptools__h">' +
-          '<i class="fa-solid fa-tag"></i> Kategorien (' + kats.length +
-          ')</span><div class="chiprow">' +
-          '<button class="chip" type="button" data-cat="">Alle</button>' +
+          '<i class="fa-solid fa-tag"></i> ' +
+          esc(fill(T("tools.categories", "Kategorien ({n})"),
+                   { n: kats.length })) +
+          '</span><div class="chiprow">' +
+          '<button class="chip" type="button" data-cat="">' +
+          esc(T("tools.catAll", "Alle")) + "</button>" +
           kats.map(function (c) {
             return '<button class="chip" type="button" data-cat="' + esc(c) +
               '">' + esc(c) + '<span class="chip__n">' +
@@ -2997,15 +3079,18 @@
 
     // Zeigt am zugeklappten Ausklapper, ob gerade etwas eingestellt ist.
     function markTools() {
-      var namen = { neu: "Neueste zuerst", alt: "Älteste zuerst",
-                    viel: "Meiste Unterschriften", wenig: "Wenigste Unterschriften" };
+      var namen = { neu: T("tools.newestFirst", "Neueste zuerst"),
+                    alt: T("tools.oldestFirst", "Älteste zuerst"),
+                    viel: T("tools.mostShort", "Meiste Unterschriften"),
+                    wenig: T("tools.fewestShort", "Wenigste Unterschriften") };
       var aktiv = [];
       if (state.sort) aktiv.push(namen[state.sort]);
       if (state.catFilter) aktiv.push(state.catFilter);
       // Auch der Lücken-Filter muss am ZUGEKLAPPTEN Bedienfeld ablesbar sein —
       // sonst sitzt man vor einer stark verkürzten Liste ohne sichtbaren Grund.
       if (state.gapFilter) aktiv.push(state.gapFilter === "signatures"
-        ? "ohne Unterschriftenzahl" : "ohne Startdatum");
+        ? T("tools.withoutCount", "ohne Unterschriftenzahl")
+        : T("tools.withoutDate", "ohne Startdatum"));
       var st = tools.querySelector(".ptools__state");
       st.textContent = aktiv.join(" · ");
       tools.classList.toggle("is-active", aktiv.length > 0);
@@ -3063,38 +3148,54 @@
         return nf.format(n) + " " + (n === 1 ? ein : mehr);
       }
       var gruende = [];
-      if (closedRows.length) gruende.push(zahl(closedRows.length, "beendet", "beendet"));
-      if (archived.length) gruende.push(zahl(archived.length, "im Archiv", "im Archiv"));
-      if (offline.length) gruende.push(zahl(offline.length, "offline", "offline"));
+      var wortBeendet = T("liste.reasonClosed", "beendet");
+      var wortArchiv = T("liste.reasonArchived", "im Archiv");
+      var wortOffline = T("liste.reasonOffline", "offline");
+      if (closedRows.length)
+        gruende.push(zahl(closedRows.length, wortBeendet, wortBeendet));
+      if (archived.length)
+        gruende.push(zahl(archived.length, wortArchiv, wortArchiv));
+      if (offline.length)
+        gruende.push(zahl(offline.length, wortOffline, wortOffline));
       note.textContent = state.gapFilter
         ? zahl(active.length,
                state.gapFilter === "signatures"
-                 ? "Petition ohne Unterschriftenzahl"
-                 : "Petition ohne Startdatum",
+                 ? T("tools.gapCountOne", "Petition ohne Unterschriftenzahl")
+                 : T("tools.gapDateOne", "Petition ohne Startdatum"),
                state.gapFilter === "signatures"
-                 ? "Petitionen ohne Unterschriftenzahl"
-                 : "Petitionen ohne Startdatum")
+                 ? T("tools.gapCountMany", "Petitionen ohne Unterschriftenzahl")
+                 : T("tools.gapDateMany", "Petitionen ohne Startdatum"))
         : state.catFilter
-        ? zahl(active.length, "Petition in dieser Kategorie",
-               "Petitionen in dieser Kategorie")
+        ? zahl(active.length,
+               T("tools.catOne", "Petition in dieser Kategorie"),
+               T("tools.catMany", "Petitionen in dieser Kategorie"))
         : state.tagFilter
-        ? zahl(active.length, "Petition mit diesem Schlagwort",
-               "Petitionen mit diesem Schlagwort")
-        : nf.format(active.length) + " von " + nf.format(arr.length) + " Petitionen" +
+        ? zahl(active.length,
+               T("tools.tagOne", "Petition mit diesem Schlagwort"),
+               T("tools.tagMany", "Petitionen mit diesem Schlagwort"))
+        : fill(T("liste.countOf", "{n} von {total} Petitionen"),
+               { n: nf.format(active.length), total: nf.format(arr.length) }) +
           (gruende.length ? " (" + gruende.join(", ") + ")" : "");
 
       // Filter-Leiste über der Liste, wenn Kategorie ODER Schlagwort aktiv ist.
       if (state.catFilter || state.tagFilter) {
         filterBar.style.display = "";
         var flabel = state.catFilter
-          ? '<i class="fa-solid fa-tag"></i> Kategorie: <b>' + esc(state.catFilter) + "</b>"
-          : '<i class="fa-solid fa-hashtag"></i> Schlagwort: <b>' + esc(state.tagFilter) + "</b>";
+          ? '<i class="fa-solid fa-tag"></i> ' +
+            esc(T("tools.catLabel", "Kategorie")) + ": <b>" +
+            esc(state.catFilter) + "</b>"
+          : '<i class="fa-solid fa-hashtag"></i> ' +
+            esc(T("tools.tagLabel", "Schlagwort")) + ": <b>" +
+            esc(state.tagFilter) + "</b>";
         filterBar.innerHTML = '<span class="filterbar__cat">' + flabel + "</span>" +
           '<div class="filterbar__actions">' +
           '<button class="filterbar__cross" type="button">' +
-          '<i class="fa-solid fa-layer-group"></i> Plattformübergreifend suchen</button>' +
+          '<i class="fa-solid fa-layer-group"></i> ' +
+          esc(T("tools.crossSearch", "Plattformübergreifend suchen")) +
+          "</button>" +
           '<button class="filterbar__reset" type="button">' +
-          '<i class="fa-solid fa-xmark"></i> Filter zurücksetzen</button></div>';
+          '<i class="fa-solid fa-xmark"></i> ' +
+          esc(T("tools.resetFilter", "Filter zurücksetzen")) + "</button></div>";
         filterBar.querySelector(".filterbar__reset").addEventListener("click",
           function () { state.catFilter = null; state.tagFilter = null;
                         var y = window.scrollY; draw(arr); window.scrollTo(0, y); });
@@ -3130,8 +3231,9 @@
         var ti = active.findIndex(function (r) { return r.url === state.openPetitionUrl; });
         if (ti > 0) active.unshift(active.splice(ti, 1)[0]);
       }
-      var restNote = 'Es werden die ersten ' + LIST_MAX +
-        ' angezeigt – Suche eingrenzen für mehr.';
+      var restNote = esc(fill(T("liste.restNote",
+        "Es werden die ersten {n} angezeigt – Suche eingrenzen für mehr."),
+        { n: LIST_MAX }));
       active.slice(0, LIST_MAX).forEach(function (r) { listWrap.appendChild(petCard(r, ctx, key)); });
       if (active.length > LIST_MAX)
         listWrap.appendChild(el('<div class="count-note">' + restNote + "</div>"));
@@ -3190,12 +3292,16 @@
       }
       // Nur zeigen, wo die Quelle beendete Petitionen kennt (bisher Bundestag).
       if (closedRows.length)
-        bottomSection("pet-beendet", "fa-flag-checkered", "Beendet", closedRows,
-          "closedOpen", "Keine beendeten Petitionen.");
-      bottomSection("pet-archiv", "fa-box-archive", "Archiv", archived,
-        "archiveOpen", "Noch nichts archiviert. Wische eine Petition nach links.");
-      bottomSection("pet-offline", "fa-circle-xmark", "Offline", offline,
-        "offlineOpen", "Keine Offline-Petitionen.");
+        bottomSection("pet-beendet", "fa-flag-checkered",
+          esc(T("bottom.closed", "Beendet")), closedRows, "closedOpen",
+          esc(T("bottom.closedEmpty", "Keine beendeten Petitionen.")));
+      bottomSection("pet-archiv", "fa-box-archive",
+        esc(T("bottom.archive", "Archiv")), archived, "archiveOpen",
+        esc(T("bottom.archiveEmpty",
+              "Noch nichts archiviert. Wische eine Petition nach links.")));
+      bottomSection("pet-offline", "fa-circle-xmark",
+        esc(T("bottom.offline", "Offline")), offline, "offlineOpen",
+        esc(T("bottom.offlineEmpty", "Keine Offline-Petitionen.")));
 
       /* Nach Navigation aus „Ähnliche Petitionen" oder aus den unterschriebenen
          Petitionen: Ziel aufklappen + hinscrollen. Die Abfrage umfasst auch die
@@ -3226,9 +3332,11 @@
            sehen; ein Klick ohne jede Wirkung ist als Fehler nicht erkennbar
            (gleiche Überlegung wie bei jumpBtn). */
         if (!gefunden)
-          listWrap.insertBefore(el('<div class="count-note">Diese Petition ' +
-            "steht nicht mehr in den Daten dieser Plattform. Vermutlich hat " +
-            "sich ihre Adresse geändert.</div>"), listWrap.firstChild);
+          listWrap.insertBefore(el('<div class="count-note">' +
+            esc(T("petition.notInData",
+                  "Diese Petition steht nicht mehr in den Daten dieser " +
+                  "Plattform. Vermutlich hat sich ihre Adresse geändert.")) +
+            "</div>"), listWrap.firstChild);
       }
     }
 
@@ -3238,7 +3346,8 @@
     });
 
     loadPlatformData(key).then(draw).catch(function () {
-      note.textContent = "Daten konnten nicht geladen werden.";
+      note.textContent = T("msg.loadErrorShort",
+                           "Daten konnten nicht geladen werden.");
     });
   }
 
@@ -3265,7 +3374,9 @@
     content.innerHTML = "";
 
     var backLabel = f.fromPlatform
-      ? "Zurück zu " + platformName(f.fromPlatform) : "Zurück zur Übersicht";
+      ? fill(T("nav.backTo", "Zurück zu {name}"),
+             { name: platformName(f.fromPlatform) })
+      : T("nav.backOverview", "Zurück zur Übersicht");
     var head = el('<div class="subhead">' +
       '<button class="backbtn"><i class="fa-solid fa-chevron-left"></i> ' +
       esc(backLabel) + "</button></div>");
@@ -3276,7 +3387,8 @@
 
     var crumb = el('<div class="crosshead"></div>');
     content.appendChild(crumb);
-    var note = el('<div class="count-note">Suche über alle Plattformen …</div>');
+    var note = el('<div class="count-note">' +
+      esc(T("cross.searching", "Suche über alle Plattformen …")) + "</div>");
     content.appendChild(note);
     var listWrap = el('<div id="crosslist"></div>');
     content.appendChild(listWrap);
@@ -3286,10 +3398,13 @@
     function drawCross() {
       var v = String(state.cross.value).toLowerCase();
       crumb.innerHTML = (state.cross.type === "cat"
-        ? '<i class="fa-solid fa-tag"></i> Kategorie'
+        ? '<i class="fa-solid fa-tag"></i> ' +
+          esc(T("cross.typeCat", "Kategorie"))
         : state.cross.type === "tag"
-        ? '<i class="fa-solid fa-hashtag"></i> Schlagwort'
-        : '<i class="fa-solid fa-magnifying-glass"></i> Volltextsuche') +
+        ? '<i class="fa-solid fa-hashtag"></i> ' +
+          esc(T("cross.typeTag", "Schlagwort"))
+        : '<i class="fa-solid fa-magnifying-glass"></i> ' +
+          esc(T("cross.typeText", "Volltextsuche"))) +
         ': <b>' + esc(state.cross.value) + "</b>";
 
       var ctx = {
@@ -3341,18 +3456,21 @@
       });
 
       note.textContent = total
-        ? nf.format(total) + " Treffer auf " + nPlat + " Plattform(en)"
-        : "Keine Treffer.";
+        ? fill(T("cross.hits", "{n} Treffer auf {p} Plattform(en)"),
+               { n: nf.format(total), p: nPlat })
+        : T("cross.noHits", "Keine Treffer.");
       if (!total)
-        listWrap.appendChild(el('<div class="empty">Zu „' +
-          esc(state.cross.value) + '" wurde auf den aktivierten Plattformen ' +
-          "nichts gefunden.</div>"));
+        listWrap.appendChild(el('<div class="empty">' +
+          fill(T("cross.empty", "Zu „{q}“ wurde auf den aktivierten " +
+                 "Plattformen nichts gefunden."),
+               { q: esc(state.cross.value) }) + "</div>"));
     }
 
     Promise.all(plats.map(function (p) {
       return loadPlatformData(p.key).catch(function () { return []; });
     })).then(function () { drawCross(); }).catch(function () {
-      note.textContent = "Daten konnten nicht geladen werden.";
+      note.textContent = T("msg.loadErrorShort",
+                           "Daten konnten nicht geladen werden.");
     });
   }
 
@@ -3385,7 +3503,7 @@
   }
 
   function renderEinstellungen() {
-    titleEl.textContent = "Einstellungen";
+    titleEl.textContent = T("nav.settings", "Einstellungen");
     var live = livePlatforms()
       .sort(function (a, b) { return a.name.localeCompare(b.name, "de"); });
     var activeCount = live.filter(function (p) { return isEnabled(p.key); }).length;
@@ -3394,7 +3512,8 @@
     // Seitenüberschrift wie auf der Liste: die Seite soll über die Überschrift
     // tragen, nicht über die schmale Kopfleiste.
     content.innerHTML =
-      '<div class="welcome"><h1 class="welcome__t">Einstellungen</h1>' +
+      '<div class="welcome"><h1 class="welcome__t">' +
+      esc(T("nav.settings", "Einstellungen")) + "</h1>" +
       '<p class="welcome__s">' +
       esc(T("settings.intro", "Wähle, welche Petitionsplattformen in der " +
                               "Liste erscheinen sollen.")) + "</p></div>";
@@ -3469,7 +3588,7 @@
 
     content.appendChild(el('<div class="srow__lbl">' +
       esc(T("settings.layoutLabel", "Layout")) + "</div>"));
-    content.appendChild(segControl("Layout",
+    content.appendChild(segControl(T("settings.layoutLabel", "Layout"),
       [["relief", T("settings.layoutRelief", "Relief"), "fa-cube"],
        ["magazin", T("settings.layoutMag", "Magazin"), "fa-image"]],
       state.prefs.layout,
@@ -3620,7 +3739,8 @@
           "Favoriten zu machen. Favoriten erscheinen immer ganz oben in " +
           "der Liste.")) + "</p>" +
         '<button class="hint-dismiss" type="button">' +
-        '<i class="fa-solid fa-check"></i> Verstanden, nicht mehr anzeigen' +
+        '<i class="fa-solid fa-check"></i> ' +
+        esc(T("favorites.hintDismiss", "Verstanden, nicht mehr anzeigen")) +
         "</button></div></div>");
       favTip.querySelector(".hint-dismiss").addEventListener("click", function () {
         LS.setItem("favTipDismissed", "1"); favTip.remove();
@@ -3631,9 +3751,11 @@
     // Akkordion "Plattformen"
     var acc = el('<section class="accordion' +
       (state.settingsOpen ? " open" : "") + '"></section>');
-    var head = el('<button class="acc-head"><span class="acc-title">Plattformen' +
-      '<span class="acc-count">' + activeCount + "/" + live.length +
-      ' aktiv</span></span>' +
+    var head = el('<button class="acc-head"><span class="acc-title">' +
+      esc(T("settings.platformsTitle", "Plattformen")) +
+      '<span class="acc-count">' +
+      esc(fill(T("settings.activeCount", "{n}/{total} aktiv"),
+               { n: activeCount, total: live.length })) + "</span></span>" +
       '<i class="fa-solid fa-chevron-down acc-chev"></i></button>');
     head.addEventListener("click", function () {
       state.settingsOpen = !state.settingsOpen;
@@ -3645,7 +3767,8 @@
 
     // "Alle deaktivieren / Alle aktivieren"-Button (wird UNTER die Liste gesetzt)
     var toggleAll = el('<button class="btn-secondary">' +
-      (allOn ? "Alle deaktivieren" : "Alle aktivieren") + "</button>");
+      esc(allOn ? T("settings.allOff", "Alle deaktivieren")
+                : T("settings.allOn", "Alle aktivieren")) + "</button>");
     toggleAll.addEventListener("click", function () {
       if (allOn) state.enabled = new Set();          // alle aus
       else state.enabled = new Set(live.map(function (x) { return x.key; }));
@@ -3665,12 +3788,15 @@
            für Screenreader: erst der Name, dann „Logo <Name>". */
         '<div class="opt__body"><div class="opt__name">' + esc(p.name) +
           '<span class="flag">' + finfo.flag + '</span></div>' +
-        '<div class="opt__meta">' + (p.live
-          ? finfo.name + " · " + nf.format(p.online) + " Petitionen"
-          : finfo.name + " · in Vorbereitung") + '</div></div>' +
+        '<div class="opt__meta">' + esc(p.live
+          ? fill(T("settings.platMeta", "{lang} · {n} Petitionen"),
+                 { lang: finfo.name, n: nf.format(p.online) })
+          : fill(T("settings.platSoon", "{lang} · in Vorbereitung"),
+                 { lang: finfo.name })) + "</div></div>" +
         platLogo(p.key, p.name) +
         '<button class="favbtn' + (fav ? " on" : "") + '"' +
-          (p.live ? "" : " disabled") + ' aria-label="Als Favorit markieren">' +
+          (p.live ? "" : " disabled") + ' aria-label="' +
+          esc(T("settings.favMark", "Als Favorit markieren")) + '">' +
           '<i class="' + (fav ? "fa-solid" : "fa-regular") + ' fa-star"></i></button>' +
         '<label class="switch"><input type="checkbox"' +
           (on ? " checked" : "") + (p.live ? "" : " disabled") +
@@ -3696,9 +3822,12 @@
         saveEnabled();
         // Kopf-Zähler live aktualisieren, ohne komplettes Neuzeichnen
         var n = live.filter(function (x) { return isEnabled(x.key); }).length;
-        head.querySelector(".acc-count").textContent = n + "/" + live.length + " aktiv";
-        toggleAll.textContent = (n === live.length) ? "Alle deaktivieren"
-                                                    : "Alle aktivieren";
+        head.querySelector(".acc-count").textContent =
+          fill(T("settings.activeCount", "{n}/{total} aktiv"),
+               { n: n, total: live.length });
+        toggleAll.textContent = (n === live.length)
+          ? T("settings.allOff", "Alle deaktivieren")
+          : T("settings.allOn", "Alle aktivieren");
         allOn = (n === live.length);
       });
       body.appendChild(opt);
@@ -3715,11 +3844,119 @@
 
     // ---- Daten ---------------------------------------------------------------
     content.appendChild(setSection(T("settings.sections.data", "Daten")));
+
+    /* ---- Nach Updates suchen (8.8.2026) ---------------------------------
+       Erscheint NUR, wenn window.AndroidUpdate existiert - also in der
+       Android-Fassung fuer die Direktverteilung. Im Browser und in der
+       F-Droid-Fassung (Bauschalter mitUpdater=false, Bruecke wird gar nicht
+       angemeldet) fehlt die Zeile ganz. Bewusst so herum geprueft: ein
+       sichtbarer Knopf, der nichts tut, ist schlimmer als gar keiner.
+
+       Die App installiert nichts selbst - sie laedt die Datei und uebergibt
+       sie dem Paketinstallierer, der ausdruecklich nachfragt. */
+    if (window.AndroidUpdate) {
+      var upRow = setRow("fa-cloud-arrow-down",
+        T("settings.update", "Nach Updates suchen"),
+        T("settings.updateHint", "Prüft, ob eine neuere Fassung der App vorliegt."),
+        { end: '<i class="fa-solid fa-chevron-right srow__go"></i>' });
+      upRow.addEventListener("click", function () {
+        var sub = upRow.querySelector(".srow__s");
+        if (upRow.dataset.laeuft === "ja") return;
+        upRow.dataset.laeuft = "ja";
+        var balken = upRow.querySelector(".srow__bar");
+        if (!balken) {
+          balken = el('<span class="srow__bar"></span>');
+          upRow.appendChild(balken);
+        }
+        function stand(txt, anteil) {
+          sub.textContent = txt;
+          balken.style.width = Math.round((anteil || 0) * 100) + "%";
+        }
+        stand(T("settings.updateChecking", "Wird geprüft …"), .15);
+
+        /* Rueckrufe haengen an window, weil die Java-Seite sie per Namen
+           aufruft (evaluateJavascript). Eindeutige Namen, damit sich zwei
+           Aufrufe nicht in die Quere kommen. */
+        window.__pmUpdateAntwort = function (roh) {
+          var d = null;
+          try { d = JSON.parse(roh); } catch (e) { d = null; }
+          if (!d || d.fehler || !d.tag_name) {
+            upRow.dataset.laeuft = "";
+            stand(T("settings.updateOffline",
+                    "Nicht erreichbar. Später noch einmal versuchen."), 0);
+            return;
+          }
+          var neu = String(d.tag_name).replace(/^v/, "");
+          var hier = "";
+          try { hier = window.AndroidUpdate.fassung() || ""; } catch (e) {}
+          /* Zahlenweiser Vergleich statt Textvergleich: "1.0.9" ist als
+             Zeichenkette groesser als "1.0.24", als Fassung aber aelter. */
+          function teile(v) {
+            return String(v).split(".").map(function (x) {
+              return parseInt(x, 10) || 0; });
+          }
+          function neuer(a, b) {
+            var A = teile(a), B = teile(b);
+            for (var i = 0; i < Math.max(A.length, B.length); i++) {
+              if ((A[i] || 0) !== (B[i] || 0)) return (A[i] || 0) > (B[i] || 0);
+            }
+            return false;
+          }
+          if (hier && !neuer(neu, hier)) {
+            upRow.dataset.laeuft = "";
+            stand(fill(T("settings.updateAktuell",
+                         "Du hast die neueste Fassung ({v})."), { v: hier }), 1);
+            return;
+          }
+          var apk = null;
+          if (d.assets) {
+            for (var i = 0; i < d.assets.length; i++) {
+              if (/\.apk$/i.test(d.assets[i].name || "")) {
+                apk = d.assets[i].browser_download_url; break;
+              }
+            }
+          }
+          if (!apk) {
+            upRow.dataset.laeuft = "";
+            stand(T("settings.updateKeineDatei",
+                    "Neue Fassung gefunden, aber keine Installationsdatei."), 0);
+            return;
+          }
+          stand(fill(T("settings.updateLaedt", "Fassung {v} wird geladen …"),
+                     { v: neu }), .2);
+          window.AndroidUpdate.hole(apk, "window.__pmUpdateFortschritt");
+        };
+        window.__pmUpdateFortschritt = function (p) {
+          if (p < 0) {
+            upRow.dataset.laeuft = "";
+            stand(T("settings.updateFehler", "Download fehlgeschlagen."), 0);
+            return;
+          }
+          if (p >= 100) {
+            stand(T("settings.updateBereit",
+                    "Geladen. Bestätige die Installation."), 1);
+            return;
+          }
+          stand(fill(T("settings.updateLaedtProzent", "Wird geladen … {p} %"),
+                     { p: p }), .2 + .8 * (p / 100));
+        };
+        try { window.AndroidUpdate.pruefe("window.__pmUpdateAntwort"); }
+        catch (e) {
+          upRow.dataset.laeuft = "";
+          stand(T("settings.updateFehler", "Download fehlgeschlagen."), 0);
+        }
+      });
+      content.appendChild(upRow);
+    }
     var refreshRow = setRow("fa-arrows-rotate",
       T("settings.refresh", "Daten aktualisieren"),
       state.lastRefresh
-        ? "Aktualisiert am " + fmtDateTime(state.lastRefresh) + " · Quelle: " +
-          (state.baseAuto === "live" ? "live" : "mitgeliefert")
+        ? fill(T("settings.refreshedAt",
+                 "Aktualisiert am {zeit} · Quelle: {quelle}"),
+               { zeit: fmtDateTime(state.lastRefresh),
+                 quelle: state.baseAuto === "live"
+                   ? T("settings.srcLiveShort", "live")
+                   : T("settings.srcBundledShort", "mitgeliefert") })
         : T("settings.refreshHint", "Petitionen neu von der Quelle laden"),
       { end: '<i class="fa-solid fa-chevron-right srow__go"></i>' });
     /* ⚠️ UMGEBAUT 8.8.2026 (Nutzerbefund: „wenn ich auf Daten aktualisieren
@@ -3758,27 +3995,36 @@
       // Auch die Quelle neu bestimmen: wer vorher im Funkloch startete, sitzt
       // sonst bis zum nächsten App-Start auf den mitgelieferten Daten fest.
       state.dataCache = {}; textChunks = {};
-      stand("Verbindung prüfen …", .05);
+      stand(T("settings.refreshChecking", "Verbindung prüfen …"), .05);
       resolveBase().then(loadManifest).then(function () {
         var plats = livePlatforms().filter(function (p) {
           return isEnabled(p.key);
         });
-        if (!plats.length) { stand("Keine Plattform aktiviert.", 1); return 0; }
+        if (!plats.length) {
+          stand(T("settings.refreshNoPlatforms", "Keine Plattform aktiviert."), 1);
+          return 0;
+        }
         var fertig = 0, kaputt = 0;
-        stand("Lade 0 von " + plats.length + " …", .1);
+        var fortschritt = function (n) {
+          return fill(T("settings.refreshProgress", "Lade {n} von {total} …"),
+                      { n: n, total: plats.length });
+        };
+        stand(fortschritt(0), .1);
         return Promise.all(plats.map(function (p) {
           return loadPlatformData(p.key).then(function (arr) {
             return arr.length;
           }, function () { kaputt++; return 0; }).then(function (n) {
             fertig++;
-            stand("Lade " + fertig + " von " + plats.length + " …",
-              .1 + .9 * (fertig / plats.length));
+            stand(fortschritt(fertig), .1 + .9 * (fertig / plats.length));
             return n;
           });
         })).then(function (zahlen) {
           var summe = zahlen.reduce(function (a, b) { return a + b; }, 0);
-          stand(nf.format(summe) + " Petitionen geladen" +
-            (kaputt ? " · " + kaputt + " Quelle(n) nicht erreichbar" : ""), 1);
+          stand(fill(T("settings.refreshDone", "{n} Petitionen geladen"),
+                     { n: nf.format(summe) }) +
+            (kaputt ? " · " + fill(T("settings.refreshBroken",
+                                     "{n} Quelle(n) nicht erreichbar"),
+                                   { n: kaputt }) : ""), 1);
           return summe;
         });
       }).then(function () {
@@ -3791,7 +4037,7 @@
         setTimeout(function () { render(); window.scrollTo(0, y); }, 1200);
       }).catch(function () {
         refreshRow.dataset.laeuft = "";
-        stand("Nicht erreichbar.", 0);
+        stand(T("settings.refreshFailed", "Nicht erreichbar."), 0);
       });
     });
     content.appendChild(refreshRow);
@@ -3807,7 +4053,7 @@
     if (ZEIGE.datenquelle) {
     content.appendChild(el('<div class="srow__lbl">' +
       esc(T("settings.source", "Datenquelle")) + "</div>"));
-    content.appendChild(segControl("Datenquelle",
+    content.appendChild(segControl(T("settings.source", "Datenquelle"),
       [[AUTO, T("settings.srcAuto", "Automatisch"), "fa-wand-magic-sparkles"],
        [BUNDLED_BASE, T("settings.srcBundled", "Mitgeliefert"), "fa-box-archive"],
        [LIVE_BASE, T("settings.srcLive", "Live"), "fa-cloud-arrow-down"]],
@@ -3819,15 +4065,21 @@
       }));
     content.appendChild(el('<div class="srow__note">' + esc(
       state.baseSetting === AUTO
-        ? "Aktiv: " + (state.baseAuto === "live" ? "Live" : "Mitgeliefert") +
-          (state.baseWhy ? " – " + state.baseWhy : "") +
-          ". „Automatisch“ nimmt die tagesaktuellen Daten, wenn sie erreichbar " +
-          "und neuer sind als die mitgelieferten."
+        ? fill(T("settings.sourceNoteAuto",
+                 "Aktiv: {aktiv}{grund}. „Automatisch“ nimmt die " +
+                 "tagesaktuellen Daten, wenn sie erreichbar und neuer sind " +
+                 "als die mitgelieferten."),
+               { aktiv: state.baseAuto === "live"
+                          ? T("settings.srcLive", "Live")
+                          : T("settings.srcBundled", "Mitgeliefert"),
+                 grund: state.baseWhy ? " – " + state.baseWhy : "" })
         : state.baseSetting === BUNDLED_BASE
-          ? "Nur die Daten aus dem App-Paket. Sie veralten, bis eine neue " +
-            "Fassung der App kommt."
-          : "Immer aus dem Netz. Ohne Verbindung greift die App auf die " +
-            "mitgelieferten Daten zurück."
+          ? T("settings.sourceNoteBundled",
+              "Nur die Daten aus dem App-Paket. Sie veralten, bis eine neue " +
+              "Fassung der App kommt.")
+          : T("settings.sourceNoteLive",
+              "Immer aus dem Netz. Ohne Verbindung greift die App auf die " +
+              "mitgelieferten Daten zurück.")
       ) + "</div>"));
     content.appendChild(setRow("fa-database",
       T("settings.sourceCustom", "Eigene Quelle"),
@@ -3836,8 +4088,9 @@
         : T("settings.sourceCustomHint", "Für Tests: eigener Basis-Ordner"),
       { end: '<i class="fa-solid fa-chevron-right srow__go"></i>',
         onClick: function () {
-          var v = prompt("URL der Datenquelle (Basis-Ordner mit manifest.json):",
-                         state.base);
+          var v = prompt(T("settings.sourcePrompt",
+            "URL der Datenquelle (Basis-Ordner mit manifest.json):"),
+            state.base);
           if (v == null) return;
           state.baseSetting = v.trim() || DEFAULT_BASE;
           LS.setItem("dataBase", state.baseSetting);
@@ -3870,7 +4123,7 @@
       HINT_KEYS.forEach(function (k) { LS.removeItem(k); });
       hintRow.classList.add("srow--done");
       hintRow.querySelector(".srow__s").textContent =
-        "Zurückgesetzt – die Hinweise erscheinen wieder.";
+        T("reset.hintsDone", "Zurückgesetzt – die Hinweise erscheinen wieder.");
       hintRow.querySelector(".srow__go").className = "fa-solid fa-check srow__go";
       /* Neu zeichnen, damit der Favoriten-Hinweis sofort wieder auftaucht: er
          steht auf DIESER Seite, ohne Neuzeichnen bliebe die Rückmeldung
@@ -3921,7 +4174,8 @@
     go.addEventListener("click", function () {
       if (!window.confirm(T("reset.allWarnTitle",
             "Das lässt sich nicht rückgängig machen.") + "\n\n" +
-            T("reset.allWarnText", "") + "\n\nWirklich alles löschen?")) return;
+            T("reset.allWarnText", "") + "\n\n" +
+            T("reset.allConfirmQuestion", "Wirklich alles löschen?"))) return;
       wipeEverything();
       box.classList.add("danger--done");
       body.innerHTML = '<div class="danger__done"><i class="fa-solid fa-check"></i> ' +
@@ -4016,14 +4270,16 @@
 
     function refreshState() {
       if (!notifySupported()) {
-        stateLbl.textContent = "Dieses Gerät unterstützt keine Benachrichtigungen.";
+        stateLbl.textContent = T("notify.notSupported",
+          "Dieses Gerät unterstützt keine Benachrichtigungen.");
       } else if (notifyPermission() === "denied") {
         stateLbl.textContent = T("notify.permissionDenied",
           "In den Geräte-Einstellungen gesperrt.");
       } else if (n.on) {
-        stateLbl.textContent = "Täglich um " + n.time + " Uhr";
+        stateLbl.textContent = fill(T("notify.dailyAt", "Täglich um {zeit} Uhr"),
+                                    { zeit: n.time });
       } else {
-        stateLbl.textContent = "Aus";
+        stateLbl.textContent = T("notify.off", "Aus");
       }
     }
 
@@ -4093,35 +4349,42 @@
     function sagen(text) { testMsg.textContent = text; }
     testBtn.addEventListener("click", function () {
       if (!notifySupported()) {
-        sagen("Diese Umgebung kennt keine Benachrichtigungen — weder über den " +
-              "Browser noch über die Android-Brücke.");
+        sagen(T("notify.testUnsupported",
+                "Diese Umgebung kennt keine Benachrichtigungen — weder über " +
+                "den Browser noch über die Android-Brücke."));
         return;
       }
       var senden = function () {
         showNotification(T("notify.sampleTitle", "PetitionsManager"),
           fill(T("notify.sampleBodyNew", "{n} neue Petitionen warten auf dich."),
                { n: countNew() })).then(function (ok) {
-          sagen(ok ? "Gesendet. Erscheint sie nicht, sind Benachrichtigungen " +
-                     "für den Browser in den Systemeinstellungen abgeschaltet."
-                   : "Konnte nicht gesendet werden.");
+          sagen(ok
+            ? T("notify.testSent",
+                "Gesendet. Erscheint sie nicht, sind Benachrichtigungen für " +
+                "den Browser in den Systemeinstellungen abgeschaltet.")
+            : T("notify.testFailed", "Konnte nicht gesendet werden."));
         });
       };
       var recht = notifyPermission();
       if (recht === "granted") { senden(); return; }
       if (recht === "denied") {
         sagen(AN
-          ? "Benachrichtigungen sind für diese App gesperrt. Das lässt sich " +
-            "nur in den Android-Einstellungen der App zurücknehmen."
-          : "Du hast Benachrichtigungen für diese Seite abgelehnt. Das lässt " +
-            "sich nur in den Einstellungen des Browsers zurücknehmen.");
+          ? T("notify.deniedAndroid",
+              "Benachrichtigungen sind für diese App gesperrt. Das lässt " +
+              "sich nur in den Android-Einstellungen der App zurücknehmen.")
+          : T("notify.deniedBrowser",
+              "Du hast Benachrichtigungen für diese Seite abgelehnt. Das " +
+              "lässt sich nur in den Einstellungen des Browsers " +
+              "zurücknehmen."));
         return;
       }
       // "default" – vorher scheiterte der Test hier stumm, weil das Recht nur
       // beim Einschalten des Schalters erfragt wurde.
-      sagen("Warte auf deine Erlaubnis …");
+      sagen(T("notify.waiting", "Warte auf deine Erlaubnis …"));
       notifyRequest().then(function (perm) {
         if (perm === "granted") { notifySyncAlarm(); senden(); }
-        else sagen("Ohne Erlaubnis keine Benachrichtigung.");
+        else sagen(T("notify.noPermission",
+                     "Ohne Erlaubnis keine Benachrichtigung."));
       });
     });
     detail.appendChild(testBtn);
@@ -4130,16 +4393,19 @@
     /* Der Hinweis muss die Wahrheit für die jeweilige Umgebung sagen: mit der
        Android-Brücke weckt ein AlarmManager auch bei geschlossener App, im
        Browser gibt es nur den Minutentakt einer laufenden Seite. */
-    detail.appendChild(el('<div class="srow__note">' + (AN
-      ? "Die Erinnerung kommt zur gewählten Uhrzeit, auch wenn die App " +
-        "geschlossen ist. Android darf sie um einige Minuten verschieben, um " +
-        "Akku zu sparen. Wie viele Petitionen neu sind, steht in der App – die " +
-        "Meldung selbst kennt die Daten nicht."
-      : "Hinweis: Die Meldung erscheint, sobald du die App nach der gewählten " +
-        "Uhrzeit das nächste Mal öffnest oder sie im Hintergrund noch läuft. " +
-        "Eine Erinnerung bei komplett geschlossener App bräuchte einen eigenen " +
-        "Server – den hat diese App im Browser bewusst nicht. In der " +
-        "Android-App übernimmt das ein Weckruf des Systems.") + "</div>"));
+    detail.appendChild(el('<div class="srow__note">' + esc(AN
+      ? T("notify.hintAndroid",
+          "Die Erinnerung kommt zur gewählten Uhrzeit, auch wenn die App " +
+          "geschlossen ist. Android darf sie um einige Minuten verschieben, " +
+          "um Akku zu sparen. Wie viele Petitionen neu sind, steht in der " +
+          "App – die Meldung selbst kennt die Daten nicht.")
+      : T("notify.hintBrowser",
+          "Hinweis: Die Meldung erscheint, sobald du die App nach der " +
+          "gewählten Uhrzeit das nächste Mal öffnest oder sie im Hintergrund " +
+          "noch läuft. Eine Erinnerung bei komplett geschlossener App " +
+          "bräuchte einen eigenen Server – den hat diese App im Browser " +
+          "bewusst nicht. In der Android-App übernimmt das ein Weckruf des " +
+          "Systems.")) + "</div>"));
 
     box.appendChild(detail);
     refreshState();
@@ -4262,9 +4528,10 @@
   }
 
   function fmtDateTime(iso) {
-    if (!iso) return "Zeitpunkt unbekannt";
+    var unbekannt = T("msg.timeUnknown", "Zeitpunkt unbekannt");
+    if (!iso) return unbekannt;
     var d = new Date(iso);
-    if (isNaN(d.getTime())) return "Zeitpunkt unbekannt";
+    if (isNaN(d.getTime())) return unbekannt;
     var p = function (n) { return (n < 10 ? "0" : "") + n; };
     return p(d.getDate()) + "." + p(d.getMonth() + 1) + "." + d.getFullYear() +
       ", " + p(d.getHours()) + ":" + p(d.getMinutes()) + " Uhr";
@@ -4313,7 +4580,8 @@
   function applyBackup(obj) {
     var data = obj && obj.data;
     if (!data || typeof data !== "object")
-      throw new Error("Keine gültige PetitionsManager-Sicherung.");
+      throw new Error(T("io.invalidBackup",
+                        "Keine gültige PetitionsManager-Sicherung."));
     var oldBase = state.baseSetting;
     BACKUP_KEYS.forEach(function (k) {
       if (Object.prototype.hasOwnProperty.call(data, k)) {
@@ -4353,7 +4621,9 @@
         } else onDone(true, stats);
       } catch (e) { onDone(false, e.message); }
     };
-    reader.onerror = function () { onDone(false, "Datei nicht lesbar."); };
+    reader.onerror = function () {
+      onDone(false, T("io.unreadable", "Datei nicht lesbar."));
+    };
     reader.readAsText(file);
   }
 
@@ -4373,7 +4643,7 @@
   }
 
   function renderProfil() {
-    titleEl.textContent = "Profil";
+    titleEl.textContent = T("profile.title", "Profil");
     /* Seitenüberschrift wie in den Einstellungen (Nutzerwunsch 6.8.2026):
        dort trägt die Seite über eine große Überschrift, hier stand bisher nur
        das kleine Versalien-Etikett der schmalen Titelzeile.
@@ -4386,7 +4656,8 @@
        gar nicht zu finden ist. Der Eintrag bleibt in texts.js stehen; wer den
        Profil-Kopf zurückholt, holt diese Zeile mit zurück. */
     content.innerHTML =
-      '<div class="welcome"><h1 class="welcome__t">Profil</h1></div>';
+      '<div class="welcome"><h1 class="welcome__t">' +
+      esc(T("profile.title", "Profil")) + "</h1></div>";
     var p = state.prefs;
 
     // ---- Kopf: Bild, Name, Datenschutz-Hinweis ------------------------------
@@ -4443,7 +4714,8 @@
     // ---- Wirkungs-Karte ------------------------------------------------------
     var total = state.signed.size;
     var impacts = TX.impact && TX.impact.length ? TX.impact
-      : ["Jede Unterschrift macht ein Anliegen ein Stück sichtbarer."];
+      : [T("profile.impactFallback",
+           "Jede Unterschrift macht ein Anliegen ein Stück sichtbarer.")];
     var impact = impacts[Math.floor(Date.now() / 86400000) % impacts.length];
     content.appendChild(el('<div class="impact">' +
       '<div class="impact__n">' + nf.format(total) + "</div>" +
@@ -4451,7 +4723,7 @@
         esc(total === 1 ? T("signed.countOne", "1 Petition")
                         : fill(T("signed.countMany", "{n} Petitionen"),
                                { n: nf.format(total) })) +
-        " unterzeichnet</div>" +
+        " " + esc(T("profile.signedSuffix", "unterzeichnet")) + "</div>" +
       (milestoneFor(total)
         ? '<div class="impact__m">' + esc(milestoneFor(total)) + "</div>" : "") +
       '<div class="impact__q">' + esc(impact) + "</div></div>"));
@@ -4500,14 +4772,16 @@
           .toLowerCase().indexOf(q) > -1;
       });
       sCount.textContent = q
-        ? rows.length + " von " + signedSorted.length + " Treffern"
+        ? fill(T("signed.hitsOf", "{n} von {total} Treffern"),
+               { n: rows.length, total: signedSorted.length })
         : (signedSorted.length === 1
             ? T("signed.countOne", "1 Petition")
             : fill(T("signed.countMany", "{n} Petitionen"),
                    { n: nf.format(signedSorted.length) }));
       if (!rows.length) {
-        sList.appendChild(el('<div class="signed-empty"><p>Keine Treffer für ' +
-          "„" + esc(state.signedQuery) + "“.</p></div>"));
+        sList.appendChild(el('<div class="signed-empty"><p>' +
+          fill(T("signed.noHits", "Keine Treffer für „{q}“."),
+               { q: esc(state.signedQuery) }) + "</p></div>"));
         return;
       }
       rows.forEach(function (e) {
@@ -4528,7 +4802,8 @@
           fakten += '<span class="sig"><b>' + nf.format(zahl) + "</b> " +
             '<i class="fa-solid fa-pen" aria-hidden="true"></i></span>';
         if (dat)
-          fakten += '<span class="sig" title="Start der Petition">' +
+          fakten += '<span class="sig" title="' +
+            esc(T("petition.startTitle", "Start der Petition")) + '">' +
             esc(fmtDate(dat)) +
             ' <i class="fa-solid fa-calendar-day" aria-hidden="true"></i></span>';
         var row = el('<button class="signed-item" type="button"' +
@@ -4553,7 +4828,8 @@
              NUTZER stammt und nicht von der Plattform. Vorher hing der
              Zeitpunkt hinter dem Plattformnamen in derselben grauen Zeile und
              war von den Daten der Petition nicht zu unterscheiden. */
-          '<span class="signed-item__signed">Unterschrieben am ' +
+          '<span class="signed-item__signed">' +
+            esc(T("signed.signedOn", "Unterschrieben am")) + " " +
             '<span class="signed-item__when">' + esc(fmtDateTime(v.ts)) +
           "</span></span>" +
           "</span></button>");
@@ -4592,35 +4868,44 @@
     // Daten sichern: Export / Import (Favoriten, unterschrieben/archiviert,
     // Plattform-Auswahl & Einstellungen).
     var io = el('<div class="io">' +
-      '<div class="io__lbl"><i class="fa-solid fa-database"></i> Deine Daten sichern</div>' +
-      '<div class="io__note">Favoriten, unterschrieben/archiviert, Plattform-' +
-      'Auswahl und Einstellungen als Datei sichern oder wiederherstellen.</div>' +
+      '<div class="io__lbl"><i class="fa-solid fa-database"></i> ' +
+      esc(T("io.title", "Deine Daten sichern")) + "</div>" +
+      '<div class="io__note">' + esc(T("io.note",
+        "Favoriten, unterschrieben/archiviert, Plattform-Auswahl und " +
+        "Einstellungen als Datei sichern oder wiederherstellen.")) + "</div>" +
       '<div class="io__btns"></div></div>');
     var ioBtns = io.querySelector(".io__btns");
     var ioNote = io.querySelector(".io__note");
     var exBtn = el('<button class="io__btn" type="button">' +
-      '<i class="fa-solid fa-file-export"></i> Exportieren</button>');
+      '<i class="fa-solid fa-file-export"></i> ' +
+      esc(T("io.exportBtn", "Exportieren")) + "</button>");
     var imBtn = el('<button class="io__btn io__btn--ghost" type="button">' +
-      '<i class="fa-solid fa-file-import"></i> Importieren</button>');
+      '<i class="fa-solid fa-file-import"></i> ' +
+      esc(T("io.importBtn", "Importieren")) + "</button>");
     var fileIn = el('<input type="file" accept="application/json,.json" ' +
       'style="display:none">');
     exBtn.addEventListener("click", function () {
       exportData();
-      ioNote.textContent = "✓ Sicherung exportiert (" +
-        (state.favorites.size) + " Favoriten, " + state.signed.size +
-        " unterschrieben, " + state.archived.size + " archiviert).";
+      ioNote.textContent = fill(T("io.exported",
+        "✓ Sicherung exportiert ({fav} Favoriten, {sig} unterschrieben, " +
+        "{arch} archiviert)."),
+        { fav: state.favorites.size, sig: state.signed.size,
+          arch: state.archived.size });
     });
     imBtn.addEventListener("click", function () { fileIn.click(); });
     fileIn.addEventListener("change", function () {
       if (!fileIn.files || !fileIn.files[0]) return;
       importData(fileIn.files[0], function (ok, res) {
         if (ok) {
-          ioNote.textContent = "✓ Importiert: " + res.favoriten + " Favoriten, " +
-            res.unterschrieben + " unterschrieben, " + res.archiviert +
-            " archiviert.";
+          ioNote.textContent = fill(T("io.imported",
+            "✓ Importiert: {fav} Favoriten, {sig} unterschrieben, " +
+            "{arch} archiviert."),
+            { fav: res.favoriten, sig: res.unterschrieben,
+              arch: res.archiviert });
           io.classList.add("io--done");
         } else {
-          ioNote.textContent = "Import fehlgeschlagen: " + res;
+          ioNote.textContent = fill(T("io.importFailed",
+            "Import fehlgeschlagen: {fehler}"), { fehler: res });
         }
       });
       fileIn.value = "";
@@ -4798,8 +5083,9 @@
           (color ? ' style="--brand:' + esc(color) + '"' : "") + ">" +
           platLogo(p.key, p.name) +
           '<span class="wplat__body"><span class="wplat__n">' + esc(p.name) +
-          "</span><span class=\"wplat__m\">" + nf.format(p.online) +
-          " Petitionen</span></span>" +
+          "</span><span class=\"wplat__m\">" +
+          esc(fill(T("wizard.platCount", "{n} Petitionen"),
+                   { n: nf.format(p.online) })) + "</span></span>" +
           '<span class="wplat__check"><i class="fa-solid fa-check"></i></span>' +
           "</button>");
         row.addEventListener("click", function () {
@@ -4901,7 +5187,8 @@
       for (var i = 0; i < bilder.length; i++) {
         var ph = doc.createElement("div");
         ph.className = "img-off";
-        ph.textContent = "Bild – ohne Internet nicht verfügbar";
+        ph.textContent = T("offline.imageMissing",
+                           "Bild – ohne Internet nicht verfügbar");
         bilder[i].parentNode.replaceChild(ph, bilder[i]);
       }
       return doc.body.innerHTML;
@@ -4980,7 +5267,8 @@
       t.classList.toggle("active", t.dataset.tab === state.tab);
     });
     if (!state.manifest) { content.innerHTML =
-      '<div class="empty">Lade Daten …</div>'; return; }
+      '<div class="empty">' + esc(T("msg.loading", "Lade Daten …")) +
+      "</div>"; return; }
     if (state.tab === "liste") {
       if (state.cross) renderCrossSearch();
       else renderListe();
@@ -5058,28 +5346,40 @@
      wo eine Zuweisung an location von einer Sperre abgefangen würde. */
   var reportBtn = document.getElementById("reportbug");
   if (reportBtn) reportBtn.addEventListener("click", function () {
-    var ansicht = state.cross ? "Suche über alle Plattformen"
-                : state.platform ? "Plattform " + platformName(state.platform)
-                : state.tab === "einstellungen" ? "Einstellungen"
-                : state.tab === "profil" ? "Profil"
-                : "Übersicht";
+    var ansicht = state.cross
+                ? T("mail.viewCrossSearch", "Suche über alle Plattformen")
+                : state.platform
+                ? fill(T("mail.viewPlatform", "Plattform {name}"),
+                       { name: platformName(state.platform) })
+                : state.tab === "einstellungen"
+                ? T("nav.settings", "Einstellungen")
+                : state.tab === "profil"
+                ? T("profile.title", "Profil")
+                : T("nav.overview", "Übersicht");
     var stand = state.manifest && state.manifest.generated_at
-      ? String(state.manifest.generated_at).slice(0, 10) : "unbekannt";
+      ? String(state.manifest.generated_at).slice(0, 10)
+      : T("mail.unknown", "unbekannt");
     var prefs = state.prefs || {};
-    var text =
+    /* EIN Text mit Platzhaltern statt zehn verketteter Zeilen: „Ansicht:"
+       und „Stand" stehen mitten im Satzbau der jeweiligen Sprache. */
+    var text = fill(T("mail.bugBody",
       "Was hast du getan?\n\n\n" +
       "Was ist passiert?\n\n\n" +
       "Was hättest du erwartet?\n\n\n" +
       "--- Technische Angaben (helfen beim Suchen, gerne kürzen) ---\n" +
-      "Ansicht: " + ansicht + "\n" +
-      "Daten: " + (state.baseAuto || state.baseSetting) +
-        ", Stand " + stand + "\n" +
-      "Darstellung: " + (prefs.theme || "?") + " / " + (prefs.layout || "?") +
-        "\n" +
-      "Gerät: " + navigator.userAgent + "\n";
+      "Ansicht: {ansicht}\n" +
+      "Daten: {daten}, Stand {stand}\n" +
+      "Darstellung: {darstellung}\n" +
+      "Gerät: {geraet}\n"),
+      { ansicht: ansicht,
+        daten: state.baseAuto || state.baseSetting,
+        stand: stand,
+        darstellung: (prefs.theme || "?") + " / " + (prefs.layout || "?"),
+        geraet: navigator.userAgent });
     var a = document.createElement("a");
     a.href = "mailto:" + SUPPORT_MAIL +
-      "?subject=" + encodeURIComponent("[PetitionsManager] Fehlerbericht") +
+      "?subject=" + encodeURIComponent("[PetitionsManager] " +
+        T("mail.bugSubject", "Fehlerbericht")) +
       "&body=" + encodeURIComponent(text);
     document.body.appendChild(a); a.click(); a.remove();
   });
@@ -5143,8 +5443,9 @@
       if (!state.prefs.wizardDone) startWizard();
       scheduleNotify();
     }).catch(function () {
-      content.innerHTML = '<div class="empty">Daten konnten nicht geladen ' +
-        'werden.<br>Prüfe die <b>Datenquelle</b> in den Einstellungen.</div>';
+      content.innerHTML = '<div class="empty">' +
+        T("msg.loadError", "Daten konnten nicht geladen werden.<br>" +
+          "Prüfe die <b>Datenquelle</b> in den Einstellungen.") + "</div>";
     });
   }
 

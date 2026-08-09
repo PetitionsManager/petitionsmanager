@@ -17,6 +17,22 @@
          ohnehin nicht entscheidend. -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
+    <!-- Eigene Aktualisierung: die App laedt die neue APK und uebergibt sie
+         dem Paketinstallierer des Systems. Installiert wird NICHT von der App,
+         sondern vom System nach ausdruecklicher Zustimmung - das Recht erlaubt
+         nur, den Installationsdialog zu OEFFNEN.
+         Gebraucht wird das fuer die Direktverteilung: eine APK von GitHub kann
+         sich sonst nicht selbst erneuern.
+         ⚠️ Fuer eine spaetere Fassung im Google Play Store muss diese Zeile
+         RAUS - Selbstaktualisierung ausserhalb des Stores ist dort untersagt.
+         Bei F-Droid ist sie unerwuenscht, weil F-Droid einen eigenen Updater
+         mitbringt.
+         ⚠️ Der Bauschalter `mitUpdater` in app/build.gradle schaltet die
+         FUNKTION ab (BuildConfig.MIT_UPDATER), entfernt diese Zeile aber
+         NICHT - fuer F-Droid reicht das, fuer Google Play nicht. Dort braucht
+         es zusaetzlich productFlavors mit eigenem Manifest-Zweig. -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -24,6 +40,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <!-- Ab Android 7 darf keine file://-Adresse mehr an eine fremde App
+             gereicht werden (FileUriExposedException). Der Paketinstallierer
+             bekommt deshalb eine content://-Adresse aus diesem Provider.
+             Die Pfade stehen in res/xml/file_paths.xml. -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
         <activity
             android:name=".MainActivity"

@@ -5,6 +5,7 @@ und eine mobile Web-App (PWA/APK), die diese Daten offline durchsuchbar macht.
 
 [![Scrape & Publish](https://github.com/PetitionsManager/petitionsmanager/actions/workflows/scrape.yml/badge.svg)](https://github.com/PetitionsManager/petitionsmanager/actions/workflows/scrape.yml)
 [![Build APK](https://github.com/PetitionsManager/petitionsmanager/actions/workflows/build-apk.yml/badge.svg)](https://github.com/PetitionsManager/petitionsmanager/actions/workflows/build-apk.yml)
+[![Checks](https://github.com/PetitionsManager/petitionsmanager/actions/workflows/checks.yml/badge.svg)](https://github.com/PetitionsManager/petitionsmanager/actions/workflows/checks.yml)
 [![Lizenz: GPL v3](https://img.shields.io/badge/Lizenz-GPL%20v3-blue.svg)](LICENSE)
 
 ---
@@ -26,6 +27,9 @@ und eine mobile Web-App (PWA/APK), die diese Daten offline durchsuchbar macht.
 - Wischgesten: rechts = unterschrieben, links = archivieren
 - Zwei Layouts (Relief im Stil des Neumorphismus, Magazin als Kachelraster)
   und ein Dunkelmodus, der auch der Systemeinstellung folgen kann
+- Zweisprachige Oberfläche (Deutsch, Englisch); Vorgabe ist die Systemsprache,
+  umstellbar in den Einstellungen und im Einrichtungs-Assistenten
+  (siehe „Neue Sprache beisteuern")
 - Persönliche Daten (Favoriten, Status) exportieren und importieren
 - Offline-fähig dank Service Worker; installierbar als PWA (Android/iOS)
 - Konfigurierbare Datenquelle: Standard ist GitHub Pages, kann auf eigenen Host umgestellt werden
@@ -258,7 +262,101 @@ Ordner stellte mit 68,9 MB bereits 67 % des Repos, bei nur vier Ständen in der
 Historie (~17 MB je Stand). Die Historie ist am selben Tag bereinigt worden,
 das Repo dadurch von 102 MB auf 11 MB geschrumpft.
 
+**Jede APK trägt eine eigene Fassung.** Der Workflow setzt `VERSION_CODE` auf
+`github.run_number` und `VERSION_NAME` auf `1.0.<Lauf>`; `android/app/build.gradle`
+liest beides aus der Umgebung. Die Lauf-Nummer zählt monoton hoch und springt
+nie zurück — genau das verlangt Android von einem Update. Ohne die Variablen
+(lokaler Bau) bleibt es bei `versionCode 1` und `versionName 1.0`.
+
 Details und lokaler Build (Android Studio / Gradle): [`android/README-APK.md`](android/README-APK.md)
+
+### Signaturschlüssel einrichten
+
+Android erlaubt das Überinstallieren nur, wenn die neue APK **mit demselben
+Schlüssel** signiert ist wie die alte. Ohne festen Schlüssel erzeugt Gradle sich
+auf jedem GitHub-Runner einen neuen — jede APK galt dann als fremde App
+(„Das Paket steht in einem Konflikt mit einem bestehenden Paket"), und vor
+jeder neuen Fassung musste man deinstallieren und verlor Merkliste und
+Einstellungen.
+
+Der Schlüssel liegt deshalb als **Repository-Secret**, nicht im Repo:
+
+| Secret | Inhalt |
+|---|---|
+| `SIGNING_KEYSTORE_BASE64` | PKCS12-Keystore, base64-kodiert in **einer** Zeile |
+| `SIGNING_KEYSTORE_PASSWORD` | Das Passwort dieses Keystores |
+
+`build-apk.yml` schreibt den Schlüssel zur Bauzeit nach
+`android/app/signing.p12` und entfernt ihn nach dem Signieren wieder;
+`*.p12`, `*.jks` und `*.keystore` stehen in `.gitignore`.
+
+**Ohne die Secrets läuft der Bau weiter**, warnt aber deutlich: die APK ist dann
+mit Gradles Wegwerf-Debugschlüssel signiert und lässt sich **nicht** über eine
+vorhandene Installation legen. Für einen lokalen Testbau ist das richtig, für
+eine Auslieferung nicht.
+
+**Eigenen Keystore erzeugen** — mit `openssl`, ein `keytool` wird nicht
+gebraucht (Java 17 liest PKCS12 nativ):
+
+```bash
+# 1. Schlüssel + selbstsigniertes Zertifikat (RSA 4096, ~35 Jahre gültig).
+#    Das Zertifikat muss die gesamte Lebensdauer der App abdecken – ist es
+#    abgelaufen, lässt sich nie wieder ein Update signieren.
+openssl req -x509 -newkey rsa:4096 -sha256 -days 12800 -nodes \
+  -keyout schluessel.pem -out zertifikat.pem \
+  -subj "/CN=PetitionsManager/O=PetitionsManager/C=DE"
+
+# 2. Beides in einen PKCS12-Keystore packen.
+#    ⚠️ Der Alias MUSS "petitionsmanager" heißen – genau den erwartet
+#    android/app/build.gradle (keyAlias).
+openssl pkcs12 -export -name petitionsmanager \
+  -inkey schluessel.pem -in zertifikat.pem \
+  -out signing.p12 -passout pass:DEIN_PASSWORT
+
+# 3. In EINE base64-Zeile umwandeln. Ohne -w0 bricht base64 um, und ein
+#    umgebrochen eingefügtes Secret ergibt eine unbrauchbare Datei.
+base64 -w0 signing.p12 > signing.p12.b64     # macOS: base64 -i signing.p12
+```
+
+Inhalt von `signing.p12.b64` als `SIGNING_KEYSTORE_BASE64` hinterlegen
+(Settings → Secrets and variables → Actions), das Passwort als
+`SIGNING_KEYSTORE_PASSWORD`. Danach die `.pem`-Dateien löschen — die
+`signing.p12` dagegen **sicher aufbewahren**: Geht sie verloren, lässt sich
+keine bestehende Installation je wieder aktualisieren.
+
+Der Workflow prüft die hergestellte Datei auf Mindestgröße (1.000 Bytes) und
+bricht ab, wenn das Secret unvollständig eingefügt wurde — `base64 -d` schreibt
+ein abgeschnittenes Secret sonst klaglos in eine kaputte Datei. Nach dem Bau
+weist er den SHA-256-Fingerabdruck des Signaturzertifikats im Protokoll aus:
+weicht er eines Tages ab, steht es dort und nicht erst auf dem Telefon.
+
+> Der erste Anlauf legte den Schlüssel offen ins Repo. Für einen reinen
+> Debug-Schlüssel war das vertretbar, für Google Play und F-Droid nicht: ein
+> Schlüssel, der je öffentlich war, ist verbrannt und lässt sich nicht
+> nachträglich retten. Der alte `debug.p12` gilt als kompromittiert und wurde
+> ersetzt.
+
+### Geplant: Google Play und F-Droid
+
+Beide Stores sind angedacht, beide sind noch offen. Was dafür zu klären ist:
+
+- **Google Play verlangt ein AAB**, kein APK — also `bundleRelease` statt
+  `assembleDebug`, und damit ein Release-Buildtyp mit eigener `signingConfig`.
+- **Play App Signing** verwahrt den Auslieferungsschlüssel bei Google; man lädt
+  nur noch mit dem Upload-Schlüssel hoch. Das ist eine Einbahnstraße und
+  entscheidet mit, was aus dem Schlüssel oben wird.
+- **F-Droid baut aus dem Quellcode** und signiert mit **eigenem** Schlüssel. Die
+  F-Droid-Fassung ist damit zwangsläufig eine andere Signatur als die
+  APK von hier — nebeneinander installieren geht nicht, ein Wechsel bedeutet
+  deinstallieren. Zusätzlich muss der Bau ohne Secrets reproduzierbar sein,
+  und `hole_live_daten.py` lädt beim Bauen aus dem Netz — F-Droid mag das nicht.
+- **In-App-Aktualisierung ↔ Play-Richtlinie:** eine App, die sich selbst
+  aktualisiert, verstößt gegen Googles Regeln zur Selbstaktualisierung. Für die
+  Sideload- und F-Droid-Wege ist sie sinnvoll, für Play müsste sie abgeschaltet
+  werden. Die Grundlage dafür steht schon: der Workflow legt beim manuellen
+  Start ein GitHub-Release `v1.0.<Lauf>` mit der APK an — Release-Dateien sind
+  ohne Login erreichbar und laufen nicht ab, Actions-Artefakte dagegen schon
+  (90 Tage, Login nötig).
 
 ---
 
@@ -297,28 +395,38 @@ PetitionsManager/
 ├── *_petitions.html       Lokale Listen-Ansichten (eine pro Plattform)
 ├── dashboard.html         Übersicht aller Plattformen (lokal + via Pages)
 ├── requirements.txt       Python-Abhängigkeiten (requests, beautifulsoup4)
+├── texts_index.json       Volltext-Index, von publish.py gepflegt
+├── ci_changeorg_done.py   Abbruchkriterium der Change.org-Aufholschleife im CI
 ├── webapp/
 │   ├── index.html         App-Einstieg
 │   ├── app.js             Komplette App-Logik (Vanilla JS, kein Framework)
-│   ├── texts.js           Alle sichtbaren Texte an einer Stelle
+│   ├── texts.js           Bildschirmtexte, ein Textbaum je Sprache
+│   │                      (window.PM_TEXTS = { de: {…}, en: {…} })
 │   ├── platforms.js       Marken je Plattform: Farben, Logodatei, Seitenverhältnis
 │   ├── style.css          Grundgestaltung (gilt immer)
 │   ├── theme.css          Dunkelmodus, hängt an <html data-theme>
 │   ├── layouts.css        Layouts Relief/Magazin, hängt an <html data-layout>
 │   ├── manifest.webmanifest  PWA-Manifest
 │   ├── sw.js              Service Worker (Offline-Cache)
+│   ├── dashboard.html     Plattform-Überblick, mit auf Pages veröffentlicht
 │   ├── logos/             Plattform-Logos als SVG-Sprite
 │   ├── icons/             App-Symbole für Startbildschirm und Manifest
+│   ├── fontawesome/       Mitgelieferte Symbolschrift (offline nutzbar)
 │   └── data/              App-Daten – NICHT im Repo (.gitignore):
 │                          publish.py erzeugt sie, hole_live_daten.py holt sie
 │       ├── manifest.json  Plattform-Metadaten + Zähler
 │       └── <key>.json     Petitionen je Plattform
 ├── android/
 │   ├── README-APK.md      Bauanleitung für die Android-APK
+│   ├── app/signing.p12    Signaturschlüssel – NICHT im Repo (.gitignore):
+│   │                      der Workflow schreibt ihn zur Bauzeit aus dem Secret
 │   └── …                  Android-Projektdateien (Gradle, WebView-Wrapper)
 └── .github/workflows/
     ├── scrape.yml         Täglicher Scrape + GitHub-Pages-Deploy
-    └── build-apk.yml      Cloud-APK-Build (manuell oder bei Push)
+    ├── build-apk.yml      Cloud-APK-Build (manuell oder bei Push)
+    └── checks.yml         Grundprüfung bei jedem Push: JS-Syntax (node --check),
+                           Python-Kompilat, App-Daten als JSON, Vollständigkeit
+                           von texts.js (je Sprache) und platforms.js
 ```
 
 **Reihenfolge der drei Stylesheets im `<head>`:** `style.css` → `theme.css` →
@@ -386,6 +494,48 @@ eintragen. `python3 monitor.py --check` zeigt, ob der Health-Check funktioniert.
 Die vollständige API (Fetcher, upsert, save_store, check_source, make_tags …)
 ist in `petitions_core.py` dokumentiert.
 
+### Neue Sprache beisteuern
+
+`webapp/texts.js` enthält seit dem 8.8.2026 nicht mehr einen Textbaum, sondern
+**einen je Sprache**, alle mit denselben Schlüsseln:
+
+```js
+window.PM_TEXTS = {
+  de: { app: { name: "PetitionsManager", … }, wizard: { … }, … },
+  en: { app: { name: "PetitionsManager", … }, wizard: { … }, … }
+};
+```
+
+Eine weitere Sprache sind zwei Handgriffe — am Code selbst ist nichts zu
+ändern:
+
+1. In `webapp/texts.js` einen Block mit denselben Schlüsseln anlegen,
+   z. B. `fr: { … }`
+2. In `webapp/app.js` die Liste `SPRACHEN` um einen Eintrag ergänzen:
+   `{ code: "fr", name: "Français", flagge: "🇫🇷" }`
+
+`SPRACHEN` ist bewusst die einzige Liste: die Auswahl in den Einstellungen, der
+Schritt im Einrichtungs-Assistenten und die Erkennung der Systemsprache lesen
+alle daraus. Vorgabe beim ersten Start ist die Systemsprache, sofern sie
+unterstützt wird; eine einmal getroffene Wahl bleibt bestehen.
+
+**Deutsch ist die Rückfallebene.** Fehlt ein Schlüssel in einer Übersetzung,
+erscheint der deutsche Text statt einer leeren Fläche — beim schrittweisen
+Übersetzen ist das der Normalfall, nicht die Ausnahme. Rund 120 Texte stehen
+noch hartkodiert in `app.js` und werden erst nach und nach nach `texts.js`
+gezogen; bis dahin erscheinen sie in jeder Sprache auf Deutsch.
+
+**Die Rechtstexte bleiben absichtlich einsprachig.** Aufnahme-Kodex und
+Impressum liegen nur auf Deutsch vor: es sind juristisch ungeprüfte Entwürfe,
+und eine Übersetzung wäre doppelt ungeprüft — ein Fehler in einem
+Ausschlussgrund wiegt schwerer als einer in einer Knopfbeschriftung. Sie werden
+übersetzt, sobald der deutsche Text geprüft ist.
+
+Der Workflow `checks.yml` vergleicht jede Übersetzung Schlüssel für Schlüssel
+gegen Deutsch und meldet fehlende wie unbekannte Pfade. Der stille Rückfall auf
+Deutsch ist beim Entwickeln erwünscht — beim Ausliefern bliebe er sonst
+unbemerkt.
+
 ---
 
 ## Lizenz
@@ -401,4 +551,8 @@ APK) for tracking petitions across eleven German-language and European platforms
 The scraper runs daily via GitHub Actions, respects robots.txt and rate limits,
 and publishes slim JSON data to GitHub Pages. The app loads those data files,
 works offline, and supports cross-platform search, tag filtering, swipe gestures,
-and personal bookmarks.
+and personal bookmarks. The interface is available in German and English and
+defaults to the system language; adding another one means adding a block to
+`webapp/texts.js` and an entry to the `SPRACHEN` list in `webapp/app.js`.
+The APK is built in the cloud, fetches its data from GitHub Pages at build time,
+and is signed with a keystore supplied through repository secrets.

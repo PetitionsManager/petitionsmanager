@@ -35,6 +35,12 @@ on:
       - 'hole_live_daten.py'
       - '.github/workflows/build-apk.yml'
 
+# Schreibrechte NUR fuer Releases. Der Standard-GITHUB_TOKEN darf ohne diesen
+# Block nichts veroeffentlichen - `gh release create` waere mit einem 403
+# gescheitert, und zwar erst nach dem kompletten Gradle-Lauf.
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -138,6 +144,32 @@ jobs:
           name: PetitionsManager-debug-apk-Daten-${{ steps.daten.outputs.stand }}
           path: android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
+
+      # Als Release veroeffentlichen - die Grundlage der In-App-Aktualisierung.
+      #
+      # WARUM RELEASE UND NICHT DAS ARTEFAKT: Actions-Artefakte brauchen einen
+      # GitHub-Login und laufen nach 90 Tagen ab. Eine App kann sie also nicht
+      # herunterladen. Release-Dateien sind bei einem oeffentlichen Repo ohne
+      # Anmeldung erreichbar, und /releases/latest liefert immer die neueste -
+      # genau das fragt die App ab.
+      #
+      # Nur beim manuellen Start (workflow_dispatch): sonst entstuende bei
+      # jedem Push auf webapp/ ein Release, und die Nutzer bekaemen ein
+      # Update angeboten, das nur eine Kommentaraenderung enthaelt.
+      - name: Als Release veroeffentlichen
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="v1.0.${{ github.run_number }}"
+          APK=android/app/build/outputs/apk/debug/app-debug.apk
+          cp "$APK" "PetitionsManager-$TAG.apk"
+          gh release create "$TAG" "PetitionsManager-$TAG.apk" \
+            --title "PetitionsManager $TAG" \
+            --notes "Datenstand: ${{ steps.daten.outputs.stand }} · ${{ steps.daten.outputs.petitionen }} Petitionen
+
+          Ueber die App aktualisierbar (Einstellungen -> Nach Updates suchen)."
+          echo "Release $TAG veroeffentlicht" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Zusammenfassung
         run: |
