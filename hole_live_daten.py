@@ -47,6 +47,7 @@ import re
 import shutil
 import sys
 import tempfile
+import time
 import urllib.error
 import urllib.request
 from pathlib import Path
@@ -55,6 +56,8 @@ BASIS = "https://petitionsmanager.github.io/petitionsmanager/data/"
 ZIEL_VORGABE = Path(__file__).resolve().parent / "webapp" / "data"
 PARALLEL = 8
 ZEITLIMIT = 120
+VERSUCHE = 3          # je Datei, siehe hol_bytes
+WARTE_BASIS = 2.0     # Sekunden; verdoppelt sich je Versuch (2 s, 4 s)
 
 # Erlaubte Dateinamen aus dem Manifest. Alles andere (Schraegstrich, "..",
 # absolute Pfade) koennte beim Schreiben aus webapp/data ausbrechen: ein
@@ -71,9 +74,35 @@ def log(text: str) -> None:
     print(text, flush=True)
 
 
-def hol_bytes(url: str) -> bytes:
-    with urllib.request.urlopen(url, timeout=ZEITLIMIT) as antwort:
-        return antwort.read()
+def hol_bytes(url: str, versuche: int = VERSUCHE) -> bytes:
+    """Eine Datei holen, mit Wiederholung bei vorübergehenden Störungen.
+
+    ⚠️ WARUM DAS SEIN MUSS (10.8.2026): vorher stand hier ein einzelner
+    urlopen ohne jede Wiederholung. Der Bau lädt aber ÜBER HUNDERT Dateien,
+    und es genügt EINE, die einmal danebengeht, um den ganzen APK-Lauf
+    abzubrechen — genau das ist an dem Tag passiert (Lauf #32, „1 Datei(en)
+    nicht ladbar"). Nachgemessen waren Minuten später wieder alle 102 Dateien
+    mit HTTP 200 da; es war also kein fehlender Datenstand, sondern ein
+    Aussetzer. Bei 102 Einzelabrufen ist selbst eine Fehlerquote von 0,5 % je
+    Datei mit rund 40 % Wahrscheinlichkeit einmal dabei.
+
+    Nicht wiederholt wird bei 404/410: was es nicht gibt, gibt es auch beim
+    dritten Versuch nicht — das wäre ein echter Befund und soll sofort
+    auffallen."""
+    letzter: Exception | None = None
+    for n in range(versuche):
+        try:
+            with urllib.request.urlopen(url, timeout=ZEITLIMIT) as antwort:
+                return antwort.read()
+        except urllib.error.HTTPError as exc:
+            if exc.code in (404, 410):
+                raise
+            letzter = exc
+        except (urllib.error.URLError, OSError) as exc:
+            letzter = exc
+        if n + 1 < versuche:
+            time.sleep(WARTE_BASIS * (2 ** n))
+    raise letzter if letzter else RuntimeError(f"unerreichbar: {url}")
 
 
 def lade_manifest() -> dict:
@@ -122,9 +151,19 @@ def lade_alles(namen: list[str], ordner: Path) -> int:
             except Exception as exc:                      # noqa: BLE001
                 fehler.append(f"{auftraege[fertig]}: {exc}")
     if fehler:
-        for f in fehler[:5]:
+        for f in fehler:
             log(f"  FEHLER {f}")
-        raise SystemExit(f"::error::{len(fehler)} Datei(en) nicht ladbar – Abbruch.")
+        # ⚠️ Die Namen gehören IN die ::error::-Zeile, nicht nur ins Protokoll.
+        # Am 10.8.2026 stand in der Anmerkung nur „1 Datei(en) nicht ladbar";
+        # welche und warum, hätte im Protokoll gestanden — und das ist ohne
+        # GitHub-Token nicht abrufbar (HTTP 403). Die Anmerkung dagegen liest
+        # jeder über /commits/<sha>/check-runs. Eine Fehlermeldung, die den
+        # Fehler nicht benennt, kostet genau die Zeit, die sie sparen soll.
+        raise SystemExit(
+            f"::error::{len(fehler)} von {len(namen)} Datei(en) nicht ladbar "
+            f"(nach je {VERSUCHE} Versuchen) – Abbruch. "
+            + " · ".join(fehler[:3])
+            + (f" · … und {len(fehler) - 3} weitere" if len(fehler) > 3 else ""))
     return bytes_gesamt
 
 
