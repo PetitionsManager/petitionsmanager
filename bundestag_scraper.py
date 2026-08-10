@@ -245,8 +245,9 @@ def parse_detail(html: str, url: str) -> dict:
         rec["summary"] = (text[:200] + "…") if len(text) > 200 else text or None
 
     m = MZ_COUNT_RE.search(soup.get_text(" ", strip=True))
-    if m:
-        rec["signatures"] = int(re.sub(r"\D", "", m.group(1)))
+    sig = core.zahl(m.group(1)) if m else None
+    if sig is not None:
+        rec["signatures"] = sig
         rec["goal"] = QUORUM
 
     rec["recipient"] = "Deutscher Bundestag · Petitionsausschuss"

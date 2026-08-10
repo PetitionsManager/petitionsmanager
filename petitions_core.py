@@ -327,11 +327,62 @@ def _fmt_dt(iso: str | None) -> str:
     return str(iso)[:16].replace("T", " ")
 
 
+def zahl(wert, default=None):
+    """Robuste Ganzzahl aus einem fremden Wert – Zahl, String mit Tausender-
+    Trennern („1.234", „1,234") oder None. Gibt `default` zurück, wenn nichts
+    Zählbares übrig bleibt, und wirft NIE.
+
+    Warum: Zähl- und Zielwerte (Unterschriften, Ziele) kommen aus fremdem
+    JSON/HTML und sind nicht vertrauenswürdig. Ein nacktes int() darauf wirft
+    bei „1.234", bei einem Objekt oder bei einem leeren Regex-Rest („."/"") –
+    und riss so den betroffenen Plattformlauf täglich an derselben Stelle ab.
+    monitor.py fängt die Ausnahme zwar ab, aber der Rest der Schleife entfällt:
+    ein stiller Teilausfall, getarnt als eine Logzeile."""
+    if wert is None or isinstance(wert, bool):
+        return default
+    if isinstance(wert, int):
+        return wert
+    if isinstance(wert, float):
+        return int(wert)
+    if not isinstance(wert, str):
+        # dict/list/bytes NICHT über str() zur Zahl verstümmeln: str({"x":1})
+        # enthielte die „1" und ergäbe stillschweigend 1.
+        return default
+    ziffern = re.sub(r"\D", "", wert)
+    return int(ziffern) if ziffern else default
+
+
 def _esc(s) -> str:
     if s is None:
         return ""
     return (str(s).replace("&", "&amp;").replace("<", "&lt;")
-            .replace(">", "&gt;").replace('"', "&quot;"))
+            .replace(">", "&gt;").replace('"', "&quot;").replace("'", "&#39;"))
+
+
+_ERLAUBTE_LINK_SCHEMATA = frozenset(("http", "https", "mailto"))
+_ERLAUBTE_BILD_SCHEMATA = frozenset(("http", "https"))
+
+
+def _sichere_url(href, base_url: str, schemata=_ERLAUBTE_LINK_SCHEMATA):
+    """Macht eine Adresse aus Fremdinhalt absolut und lässt nur harmlose
+    Schemata durch. Gibt None zurück, wenn die Adresse verworfen werden soll –
+    also bei javascript:, data:, vbscript: und allem sonst Unbekannten.
+
+    Warum überhaupt: die Petitionstexte gehören beliebigen Dritten. urljoin()
+    reicht ein 'javascript:alert(1)' unverändert durch; landet der Link per
+    innerHTML in der App, führt ein Klick fremden Code im App-Origin aus.
+    Kontrollzeichen (Tab/Zeilenumbruch) werden vorher entfernt, weil ein
+    Browser 'java\\tscript:' trotzdem als javascript: liest – das Schema-Raten
+    darf sich davon nicht täuschen lassen."""
+    if not href:
+        return None
+    roh = "".join(c for c in str(href) if c not in "\t\r\n").strip()
+    if not roh:
+        return None
+    absolut = urljoin(base_url, roh)
+    if urlparse(absolut).scheme.lower() in schemata:
+        return absolut
+    return None
 
 
 def sanitize_fragment(node, base_url: str) -> str:
@@ -357,24 +408,31 @@ def sanitize_fragment(node, base_url: str) -> str:
             t.unwrap()
             continue
         if t.name == "a":
-            href = t.get("href")
+            # Nur Adresse behalten und auf ein harmloses Schema einschränken.
+            # javascript:/data:/vbscript: werden verworfen; der Text bleibt als
+            # gewöhnlicher Absatz erhalten (unwrap), nur eben ohne Link.
+            ziel = _sichere_url(t.get("href"), base_url)
             t.attrs = {}
-            if href:
-                t["href"] = urljoin(base_url, href)
+            if ziel:
+                t["href"] = ziel
                 t["target"] = "_blank"
                 t["rel"] = "noopener"
+            else:
+                t.unwrap()
+                continue
         elif t.name == "img":
             # Nur Quelle und Beschriftung behalten. Die Adresse muss absolut
-            # sein, sonst zeigte sie später auf die App selbst. Bilder ohne
-            # brauchbare Quelle fliegen ganz raus (Platzhalter, 1x1-Pixel);
-            # data:-URLs bleiben ebenfalls draußen, die blähen die Texte auf.
+            # sein, sonst zeigte sie später auf die App selbst. Nur http/https
+            # zulassen: Bilder ohne brauchbare Quelle (Platzhalter, 1x1-Pixel)
+            # sowie data:- und javascript:-Quellen fliegen ganz raus.
             src = (t.get("src") or t.get("data-src") or "").strip()
             alt = (t.get("alt") or "").strip()
+            ziel = _sichere_url(src, base_url, _ERLAUBTE_BILD_SCHEMATA)
             t.attrs = {}
-            if not src or src.startswith("data:"):
+            if not ziel:
                 t.decompose()
                 continue
-            t["src"] = urljoin(base_url, src)
+            t["src"] = ziel
             if alt:
                 t["alt"] = alt
             t["loading"] = "lazy"
@@ -1087,6 +1145,31 @@ def eigene_adresse(kandidat: str | None, url: str,
     return k if k and muster.search(k) else url
 
 
+def eigener_link(href, base_url: str, muster: "re.Pattern[str]") -> str | None:
+    """Einen auf der Seite gefundenen Link übernehmen — aber nur, wenn er auf
+    der eigenen Plattform bleibt. Sonst None.
+
+    Dieselbe Fehlerklasse wie bei ``eigene_adresse`` oben, nur eine Ebene
+    tiefer: dort geht es um die Adresse des Datensatzes, hier um einen Link
+    DARIN (bisher: die Kategorie).
+
+    Die Falle steckt in ``urljoin``: der Name sagt „mit dem Basiswert
+    zusammensetzen", aber das geschieht nur bei einem RELATIVEN Verweis. Ist
+    der href absolut, gibt urljoin ihn unverändert zurück und der Basiswert
+    bleibt ungenutzt. Ein Kategorie-Link, der im Petitionstext steht — und den
+    Text schreibt ein beliebiger Dritter —, landete so als unsere
+    Kategorieadresse in der App.
+
+    ``muster`` beschreibt eine FERTIGE Adresse dieser Plattform und muss
+    deshalb am Host verankert sein (``^https://…``). Das Suchmuster, mit dem
+    der Link auf der Seite überhaupt gefunden wird, darf und soll lockerer
+    bleiben: es muss auch relative Formen wie ``/categories/klima`` treffen.
+
+    Das Schema prüft ``_sichere_url`` mit, damit kein ``javascript:`` durchkommt."""
+    ziel = _sichere_url(href, base_url)
+    return ziel if ziel and muster.match(ziel) else None
+
+
 def befund(stufe: str, thema: str, text: str,
            thema_en: str = "", text_en: str = "") -> None:
     """Eine Auffälligkeit melden; `stufe` ist "warnung" oder "hinweis".
@@ -1150,6 +1233,51 @@ def entdeckung(name: str, treffer: int, erwartet_min: int = 1,
                text_en=f"{treffer} hits – expected at least {erwartet_min}. "
                        f"The branch has probably failed (page redesign?).")
     return treffer
+
+
+# Notbremse gegen Massen-Löschung durch "skip". Ein "skip" heißt "gehört nicht
+# mehr in den Bestand" (nicht DE, kein Unterschriften-Formular mehr, keine
+# Aktions-Kampagne …). Dieses Urteil stammt aus einer Heuristik auf FREMDEM
+# HTML; ändert die Plattform ihren Seitenaufbau, fällt es für ALLE geprüften
+# Sätze gleich aus. Früher löschte jeder Scraper solche Sätze sofort einzeln —
+# ein einziger Lauf hätte so den ganzen Plattformbestand samt
+# Unterschriften-Historie ausgelöscht (der Live-Bestand liegt nur im
+# Actions-Cache, nicht im Repo). Deshalb wird ab einem auffälligen Anteil gar
+# nicht gelöscht, sondern gewarnt.
+SKIP_LOESCH_ANTEIL_MAX = 0.30   # >30 % skip unter den geprüften = Verdacht
+SKIP_LOESCH_MIN_ABS = 10        # darunter greift die Bremse nicht (kleine Bestände)
+
+
+def entferne_skip(store: dict, slugs, geprueft: int, plattform: str,
+                  grund_de: str, grund_en: str = "", save=None) -> int:
+    """Entfernt die als "skip" gesammelten Datensätze – aber nur, wenn ihr
+    Anteil an den TATSÄCHLICH geprüften Sätzen unauffällig bleibt. `geprueft`
+    ist die Zahl der Sätze mit echtem Ergebnis (online/offline/skip), NICHT die
+    Gesamtzahl der bekannten: durch skip_recent läuft pro Tag nur ein Teil, und
+    ein an der Gesamtzahl gemessener Anteil verschleierte den Markup-Bruch.
+
+    Rückgabe: Zahl der wirklich gelöschten Sätze (0, wenn die Bremse griff)."""
+    if not slugs:
+        return 0
+    anteil = len(slugs) / max(geprueft, 1)
+    if len(slugs) >= SKIP_LOESCH_MIN_ABS and anteil > SKIP_LOESCH_ANTEIL_MAX:
+        befund("warnung", f"{plattform}: Massen-Löschung verhindert",
+               f"{len(slugs)} von {geprueft} geprüften Einträgen als "
+               f"„{grund_de}“ eingestuft ({anteil:.0%}). Das deutet auf einen "
+               f"geänderten Seitenaufbau hin, nicht auf so viele entfernte "
+               f"Petitionen – es wurde nichts gelöscht, die Sätze bleiben.",
+               thema_en=f"{plattform}: mass deletion prevented",
+               text_en=f"{len(slugs)} of {geprueft} checked entries flagged as "
+                       f"“{grund_en or grund_de}” ({anteil:.0%}). This points to "
+                       f"a changed page layout rather than that many removed "
+                       f"petitions – nothing was deleted, the records stay.")
+        return 0
+    for s in slugs:
+        store.pop(s, None)
+    log(f"  {len(slugs)} Eintrag/Einträge entfernt ({grund_de}).")
+    if save:
+        save()
+    return len(slugs)
 
 
 # ActionKit (WeMove, 350.org) beantwortet auch unfertige und Testseiten mit

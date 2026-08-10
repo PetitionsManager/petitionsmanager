@@ -96,11 +96,9 @@ META_REFRESH_RE = re.compile(
     r'http-equiv=["\']?refresh["\']?[^>]*?url=\s*["\']?([^"\'>\s]+)', re.I)
 # Eine Detailadresse hat unterhalb von /community_petitions/de/ bzw.
 # /campaign/de/ noch ein Wegstück. Alles andere ist eine Übersichtsseite.
-# Eine Detailadresse hat unterhalb von /community_petitions/de/ bzw.
-# /campaign/de/ noch ein Wegstück. Alles andere ist eine Übersichtsseite.
 # Geprüft wird mit core.eigene_adresse — dort steht, warum.
 DETAILADRESSE_RE = re.compile(
-    r"/(?:community_petitions|campaign)/de/[^/?#]+", re.I)
+    r"^https://secure\.avaaz\.org/(?:community_petitions|campaign)/de/[^/?#]+", re.I)
 
 
 # Seiten unterhalb von /community_petitions/de/, die keine Petitionen sind.
@@ -398,7 +396,7 @@ def fetch_signatures(fetcher: core.Fetcher, petition_id: int) -> int | None:
     except ValueError:
         return None
     val = data.get("signatures", data.get("count"))
-    return int(val) if val is not None else None
+    return core.zahl(val)
 
 
 def ungueltige_seite(html: str, url: str) -> bool:
@@ -636,8 +634,7 @@ def fetch_campaign_stats(fetcher: core.Fetcher,
         return None, None
     sig = data.get("signatures")
     target = data.get("target")
-    return (int(sig) if sig is not None else None,
-            int(target) if target is not None else None)
+    return core.zahl(sig), core.zahl(target)
 
 
 def scrape_campaign(fetcher: core.Fetcher, slug: str) -> tuple[str, dict | None]:
@@ -702,6 +699,7 @@ def run(args) -> None:
         log(f"Prüfe {len(known_slugs)} bekannte Einträge …")
         prog(phase="check-known", current=0, total=len(known_slugs),
              message="Prüfe bekannte Einträge …")
+        skip_slugs, geprueft = [], 0
         for k, slug in enumerate(known_slugs, 1):
             prog(current=k, total=len(known_slugs), message=slug)
             if core.skip_recent(store.get(slug), args):
@@ -710,15 +708,19 @@ def run(args) -> None:
             status, rec, url = _scrape_any(fetcher, slug, kind)
             if status == "error":
                 continue
+            geprueft += 1
             if status == "skip":
-                del store[slug]        # Info-Seite, keine Aktions-Kampagne
-                log(f"  ENTFERNT (keine Aktions-Kampagne): {slug}")
-                save()
+                # Info-Seite, keine Aktions-Kampagne. Nicht sofort löschen: ein
+                # Seitenumbau ließe die Erkennung überall gleich fehlschlagen.
+                skip_slugs.append(slug)
                 continue
             core.upsert(store, slug, rec or {}, {}, status, ts, url)
             save()
             if status == "offline":
                 log(f"  OFFLINE: {slug}")
+        core.entferne_skip(store, skip_slugs, geprueft, "Avaaz",
+                           grund_de="keine Aktions-Kampagne",
+                           grund_en="not an action campaign", save=save)
     elif args.no_recheck:
         log("Prüfung bekannter Einträge übersprungen (--no-recheck).")
 

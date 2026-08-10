@@ -316,13 +316,13 @@ def parse_detail(html: str, url: str) -> dict | None:
 def _parse_next_template(props: dict, html: str, url: str) -> dict | None:
     if props.get("language") != "de":
         return None
-    count = props.get("action_count")
+    count = core.zahl(props.get("action_count"))
     if count is None:
         return None
     rec: dict = {}
     rec["title"] = props.get("title")
-    rec["signatures"] = int(count)
-    rec["goal"] = _goal_for(int(count))
+    rec["signatures"] = count
+    rec["goal"] = _goal_for(count)
     rec["summary"] = props.get("meta_description") or None
     created = props.get("created_at")
     if created:
@@ -435,6 +435,7 @@ def run(args) -> None:
         log(f"Prüfe {len(known)} bekannte Aktion(en) …")
         prog(phase="check-known", current=0, total=len(known),
              message="Prüfe bekannte Aktionen …")
+        skip_slugs, geprueft = [], 0
         for k, slug in enumerate(known, 1):
             prog(current=k, total=len(known), message=slug)
             if core.skip_recent(store.get(slug), args):
@@ -451,16 +452,20 @@ def run(args) -> None:
                                 "online", ts, f"{BASE_URL}/a/{slug}")
                     save()
                 continue
+            geprueft += 1
             if status == "skip":
-                del store[slug]
-                log(f"  ENTFERNT (keine deutsche Unterschriften-Aktion): {slug}")
-                save()
+                # Nicht sofort löschen: Ekō wechselt gerade sein Template – ein
+                # Umbau ließe die Sprach-/Aktionsprüfung überall fehlschlagen.
+                skip_slugs.append(slug)
                 continue
             core.upsert(store, slug, rec or {}, {}, status, ts,
                         f"{BASE_URL}/a/{slug}")
             save()
             if status == "offline":
                 log(f"  OFFLINE: {slug}")
+        core.entferne_skip(store, skip_slugs, geprueft, "Ekō",
+                           grund_de="keine deutsche Unterschriften-Aktion",
+                           grund_en="not a German signature action", save=save)
 
     new_slugs = [s for s in discovered if s not in store]
     if args.limit:

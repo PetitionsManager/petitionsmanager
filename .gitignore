@@ -52,3 +52,16 @@ android/app/signing.p12
 *.p12
 *.jks
 *.keystore
+
+# Oertliche Werkzeug-Einstellungen (Rechte-Freigaben fuer Claude Code).
+# Sie gelten fuer EINEN Rechner und gehoeren niemandem sonst.
+#
+# Warum es hier trotzdem stehen muss (10.8.2026): die Datei war bereits
+# geschuetzt - aber nur durch die persoenliche git-Konfiguration dieses
+# Rechners (~/.config/git/ignore). In einem frischen Klon, auf einem zweiten
+# Rechner und im CI fehlt dieser Schutz ersatzlos; dort taucht die Datei als
+# unverfolgt auf, wo ein `git add -A` sie mitnimmt. Ein Repo soll sich selbst
+# schuetzen und sich nicht auf die Einrichtung des Arbeitsplatzes verlassen.
+# `.claude/launch.json` bleibt bewusst versioniert: der Vorschau-Server
+# gehoert zum Projekt.
+.claude/settings.local.json

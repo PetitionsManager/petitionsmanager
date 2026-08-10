@@ -49,6 +49,25 @@ MAX_API_PAGES = 60                 # Sicherheitslimit (~6.000 Petitionen)
 DATA_FILE = Path("innnit_petitions.json")
 HTML_FILE = Path("innnit_petitions.html")
 
+# Der Slug kommt aus dem API-Feld "name" und baut unten die Petitionsadresse
+# (f"{BASE_URL}/{slug}") — er ist also eine FREMDE Angabe an einer Stelle, an
+# der sie zur Adresse wird.
+#
+# ⚠️ Hier wird bewusst NICHT aufgezählt, was erlaubt ist. Am Bestand gemessen
+# (10.8.2026, 1.977 Sätze): neben Buchstaben und Ziffern kommt als
+# Sonderzeichen ausschließlich der Bindestrich vor — aber es gibt Umlaute
+# ("Präventivhaft", "MehrPsychotherapieplätze") und führende Bindestriche
+# ("-lebensmittel-froschmafia"). Das naheliegende Muster ^[a-z0-9-]+$ hätte
+# 16 echte Petitionen still verworfen. Gesperrt wird deshalb nur das Wenige,
+# das wirklich schadet: Zeichen, die die Adresse zerlegen, und der Rückschritt.
+SLUG_VERBOTEN_RE = re.compile(r"[/?#\\\s]")
+SLUG_MAX = 300                     # längster echter Slug am 10.8.2026: 194
+
+
+def slug_ok(slug) -> bool:
+    return (isinstance(slug, str) and 0 < len(slug) <= SLUG_MAX
+            and not SLUG_VERBOTEN_RE.search(slug) and ".." not in slug)
+
 NEXT_DATA_RE = re.compile(
     r'<script id="__NEXT_DATA__" type="application/json">(.*?)</script>', re.S)
 
@@ -88,12 +107,12 @@ def record_from_signable(sig: dict) -> dict:
     tag = sig.get("tag") or {}
     rec["category"] = tag.get("title")
 
-    count = sig.get("signatureCount")
+    count = core.zahl(sig.get("signatureCount"))
     if count is not None:
-        rec["signatures"] = int(count)
-    target = sig.get("signatureTarget")
+        rec["signatures"] = count
+    target = core.zahl(sig.get("signatureTarget"))
     if target:
-        rec["goal"] = int(target)
+        rec["goal"] = target
 
     created = sig.get("createdAt")
     if created:
@@ -149,6 +168,7 @@ def run(args) -> None:
     log("Lade Gesamtbestand über /api/v2/posts/initiatives …")
     prog(phase="discover", current=0, total=0, message="Lade API-Seiten …")
     seen: set[str] = set()
+    verworfen = 0
     offset, total_count, page = 0, None, 0
     while page < MAX_API_PAGES:
         resp = fetcher.get(API_URL.format(limit=API_LIMIT, offset=offset))
@@ -164,7 +184,13 @@ def run(args) -> None:
             break
         for sig in items:
             slug = sig.get("name")
-            if not slug or slug in seen:
+            # Zuerst prüfen, dann erst `in seen`: ein Nicht-Text (etwa ein
+            # verschachteltes Objekt) ließe die Mengenabfrage abstürzen.
+            if not slug_ok(slug):
+                if slug:
+                    verworfen += 1
+                continue
+            if slug in seen:
                 continue
             seen.add(slug)
             core.upsert(store, slug, record_from_signable(sig), {},
@@ -180,6 +206,19 @@ def run(args) -> None:
             break
     log(f"API: {len(seen)} Petitionen übernommen "
         f"(gemeldeter Gesamtbestand: {total_count}).")
+    # Verworfenes wird GEMELDET, nicht stillschweigend übergangen: eine
+    # geänderte Slug-Form von innn.it sähe sonst wie ein schrumpfender Bestand
+    # aus, und niemand wüsste, dass unsere eigene Prüfung sie aussortiert.
+    if verworfen:
+        core.befund("warnung", "innn.it: Slugs verworfen",
+                    f"{verworfen} Petition(en) haben einen Slug mit Zeichen, die "
+                    f"eine Adresse zerlegen (/ ? # \\ Leerraum) oder mit '..' – "
+                    f"sie fehlen im Bestand. Prüfen, ob innn.it die Form "
+                    f"geändert hat (siehe SLUG_VERBOTEN_RE).",
+                    thema_en="innn.it: slugs rejected",
+                    text_en=f"{verworfen} petition(s) have a slug containing "
+                            f"characters that break a URL – they are missing "
+                            f"from the store.")
     # Dieses API IST die Entdeckung – innn.it hat keinen zweiten Weg, der einen
     # Ausfall auffangen (und damit verdecken) würde. Gefährlich ist weniger die
     # tote Schnittstelle als der stille Abbruch mittendrin: jedes `break` oben

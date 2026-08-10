@@ -35,18 +35,31 @@ on:
       - 'hole_live_daten.py'
       - '.github/workflows/build-apk.yml'
 
-# Schreibrechte NUR fuer Releases. Der Standard-GITHUB_TOKEN darf ohne diesen
-# Block nichts veroeffentlichen - `gh release create` waere mit einem 403
-# gescheitert, und zwar erst nach dem kompletten Gradle-Lauf.
+# Grundrecht fuer ALLE Jobs: nur lesen. Schreiben darf allein der Job
+# `release` weiter unten, und der laeuft nur beim manuellen Start.
+#
+# ⚠️ Vorher stand hier `contents: write` - fuer den ganzen Workflow. Der
+# Veroeffentlichungs-Schritt lief zwar nur bei workflow_dispatch, der TOKEN
+# trug das Schreibrecht aber bei JEDEM Lauf, also auch bei jedem Push auf
+# webapp/. Waehrend eines solchen Laufs arbeiten Gradle, das Android-SDK und
+# deren Abhaengigkeiten auf demselben Runner; eine davon haette in das Repo
+# schreiben koennen. Rechte lassen sich in GitHub Actions nicht je Schritt
+# vergeben, nur je JOB - deshalb die Teilung.
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Der Release-Job unten baut daraus Artefaktnamen und Release-Text; ueber
+    # Job-Grenzen hinweg geht das nur so.
+    outputs:
+      stand: ${{ steps.daten.outputs.stand }}
+      petitionen: ${{ steps.daten.outputs.petitionen }}
+      artefakt: PetitionsManager-apk-Daten-${{ steps.daten.outputs.stand }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4
 
       # VOR dem Bauen, nicht danach: schlägt der Schritt fehl, soll gar keine
       # APK entstehen. Eine APK mit altem Datenstand sieht fertig aus und ist
@@ -59,16 +72,16 @@ jobs:
         run: python3 hole_live_daten.py
 
       - name: JDK 17 einrichten
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3  # v4
         with:
           distribution: temurin
           java-version: '17'
 
       - name: Android-SDK einrichten
-        uses: android-actions/setup-android@v3
+        uses: android-actions/setup-android@9fc6c4e9069bf8d3d10b2204b1fb8f6ef7065407  # v3
 
       - name: Gradle einrichten
-        uses: gradle/actions/setup-gradle@v4
+        uses: gradle/actions/setup-gradle@ed408507eac070d1f99cc633dbcf757c94c7933a  # v4
         with:
           gradle-version: '8.9'
 
@@ -108,13 +121,24 @@ jobs:
       # Variable). github.run_number zaehlt je Workflow monoton hoch und
       # springt nie zurueck - genau das verlangt Android von einem Update.
       # Ohne die Variable stand dauerhaft versionCode 1 in jeder Fassung.
-      - name: Debug-APK bauen
+      #
+      # ⚠️ RELEASE, NICHT DEBUG (umgestellt am 10.8.2026). Vorher lief hier
+      # `assembleDebug`, und ausgeliefert wurde eine APK mit
+      # android:debuggable="true". Damit liest auf jedem Geraet mit
+      # eingeschaltetem USB-Debugging ein `adb run-as app.petitionsmanager`
+      # das private Datenverzeichnis aus - also die Liste der unterschriebenen
+      # Petitionen. Google Play weist solche APKs ausserdem ab, F-Droid
+      # ebenfalls.
+      # Der Schluessel bleibt derselbe (siehe app/build.gradle, buildTypes.release),
+      # die App-Identitaet aendert sich also nicht: vorhandene Installationen
+      # lassen sich weiter ueberinstallieren.
+      - name: APK bauen (Release)
         working-directory: android
         env:
           VERSION_CODE: ${{ github.run_number }}
           VERSION_NAME: 1.0.${{ github.run_number }}
           SIGNING_KEYSTORE_PASSWORD: ${{ secrets.SIGNING_KEYSTORE_PASSWORD }}
-        run: gradle assembleDebug --no-daemon --stacktrace
+        run: gradle assembleRelease --no-daemon --stacktrace
 
       # Der Schluessel hat auf dem Runner nichts mehr verloren, sobald signiert
       # ist. Kostet nichts und verhindert, dass er in einem spaeteren Schritt
@@ -130,7 +154,17 @@ jobs:
       - name: Signatur ausweisen
         working-directory: android
         run: |
-          APK=app/build/outputs/apk/debug/app-debug.apk
+          APK=app/build/outputs/apk/release/app-release.apk
+          # ⚠️ Fehlt der Schluessel, legt AGP nur app-release-UNSIGNED.apk an.
+          # Ohne diese Abfrage faellt das erst beim Hochladen auf, und die
+          # Fehlermeldung dort ("no files found") laesst etwas anderes
+          # vermuten. Beim frueheren Debug-Bau gab es den Fall nicht: dort
+          # sprang Gradles Wegwerf-Schluessel ein.
+          if [ ! -f "$APK" ]; then
+            echo "::error::$APK fehlt - vermutlich unsigniert gebaut. Vorhanden:"
+            ls -l app/build/outputs/apk/release/ || true
+            exit 1
+          fi
           echo "SHA-256 des Signaturzertifikats:"
           "$ANDROID_HOME"/build-tools/34.0.0/apksigner verify --print-certs "$APK" \
             | grep -i "SHA-256" || echo "apksigner nicht gefunden - uebersprungen"
@@ -139,46 +173,89 @@ jobs:
       # Actions-Tab mehrere gleichnamige APKs und man weiß bei keiner, welche
       # Petitionen darin stecken.
       - name: APK als Artefakt hochladen
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02  # v4
         with:
-          name: PetitionsManager-debug-apk-Daten-${{ steps.daten.outputs.stand }}
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          name: PetitionsManager-apk-Daten-${{ steps.daten.outputs.stand }}
+          path: android/app/build/outputs/apk/release/app-release.apk
           if-no-files-found: error
 
-      # Als Release veroeffentlichen - die Grundlage der In-App-Aktualisierung.
-      #
-      # WARUM RELEASE UND NICHT DAS ARTEFAKT: Actions-Artefakte brauchen einen
-      # GitHub-Login und laufen nach 90 Tagen ab. Eine App kann sie also nicht
-      # herunterladen. Release-Dateien sind bei einem oeffentlichen Repo ohne
-      # Anmeldung erreichbar, und /releases/latest liefert immer die neueste -
-      # genau das fragt die App ab.
-      #
-      # Nur beim manuellen Start (workflow_dispatch): sonst entstuende bei
-      # jedem Push auf webapp/ ein Release, und die Nutzer bekaemen ein
-      # Update angeboten, das nur eine Kommentaraenderung enthaelt.
-      - name: Als Release veroeffentlichen
-        if: github.event_name == 'workflow_dispatch'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          TAG="v1.0.${{ github.run_number }}"
-          APK=android/app/build/outputs/apk/debug/app-debug.apk
-          cp "$APK" "PetitionsManager-$TAG.apk"
-          gh release create "$TAG" "PetitionsManager-$TAG.apk" \
-            --title "PetitionsManager $TAG" \
-            --notes "Datenstand: ${{ steps.daten.outputs.stand }} · ${{ steps.daten.outputs.petitionen }} Petitionen
-
-          Ueber die App aktualisierbar (Einstellungen -> Nach Updates suchen)."
-          echo "Release $TAG veroeffentlicht" >> "$GITHUB_STEP_SUMMARY"
-
       - name: Zusammenfassung
+        env:
+          STAND: ${{ steps.daten.outputs.stand }}
+          PETITIONEN: ${{ steps.daten.outputs.petitionen }}
         run: |
           {
             echo "### APK gebaut"
             echo ""
             echo "| | |"
             echo "|---|---|"
-            echo "| Datenstand | ${{ steps.daten.outputs.stand }} |"
-            echo "| Petitionen | ${{ steps.daten.outputs.petitionen }} |"
+            echo "| Datenstand | $STAND |"
+            echo "| Petitionen | $PETITIONEN |"
             echo "| Quelle | GitHub Pages |"
           } >> "$GITHUB_STEP_SUMMARY"
+
+  # --------------------------------------------------------------------------
+  # Veroeffentlichen - die Grundlage der In-App-Aktualisierung.
+  #
+  # WARUM EIN EIGENER JOB: nur hier braucht der Token Schreibrechte. Als
+  # Schritt im Bau-Job (so stand es bis 10.8.2026) galt das Schreibrecht fuer
+  # den GANZEN Lauf, also auch fuer die vielen Push-Builds, die gar nichts
+  # veroeffentlichen. GitHub Actions vergibt Rechte nur je Job, nicht je
+  # Schritt - die Teilung ist der einzige Weg.
+  #
+  # WARUM RELEASE UND NICHT DAS ARTEFAKT: Actions-Artefakte brauchen einen
+  # GitHub-Login und laufen nach 90 Tagen ab. Eine App kann sie also nicht
+  # herunterladen. Release-Dateien sind bei einem oeffentlichen Repo ohne
+  # Anmeldung erreichbar, und /releases/latest liefert immer die neueste -
+  # genau das fragt die App ab.
+  #
+  # Nur beim manuellen Start: sonst entstuende bei jedem Push auf webapp/ ein
+  # Release, und die Nutzer bekaemen ein Update angeboten, das nur eine
+  # Kommentaraenderung enthaelt.
+  # --------------------------------------------------------------------------
+  release:
+    needs: build
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write          # nur hier, und nur dafuer
+    steps:
+      # Die APK kommt aus dem Bau-Job. Nicht neu bauen: sonst entstuende eine
+      # ZWEITE, anders zusammengesetzte Datei, und veroeffentlicht waere nicht
+      # die, deren Signatur oben im Protokoll ausgewiesen wurde.
+      - name: APK aus dem Bau-Job holen
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093  # v4
+        with:
+          name: ${{ needs.build.outputs.artefakt }}
+          path: apk
+
+      - name: Als Release veroeffentlichen
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # ⚠️ Dieser Job holt das Repo NICHT aus (er braucht nur die APK aus
+          # dem Artefakt). Damit fehlt `gh` die Fernverbindung, aus der es
+          # sonst ablas, um welches Repo es geht - ohne diese Zeile scheiterte
+          # es mit "could not determine repository".
+          GH_REPO: ${{ github.repository }}
+          # Werte NICHT direkt in den Shell-Text interpolieren, sondern ueber die
+          # Umgebung: ein "$(…)" oder Anfuehrungszeichen im Wert wuerde sonst
+          # ausgefuehrt. Hier ungefaehrlich (stand=Datum aus eigenem Code,
+          # petitionen=Ganzzahl), aber die sichere Form kostet nichts.
+          STAND: ${{ needs.build.outputs.stand }}
+          PETITIONEN: ${{ needs.build.outputs.petitionen }}
+          LAUF: ${{ github.run_number }}
+        run: |
+          TAG="v1.0.$LAUF"
+          APK=apk/app-release.apk
+          if [ ! -f "$APK" ]; then
+            echo "::error::$APK fehlt im Artefakt. Vorhanden:"
+            ls -lR apk || true
+            exit 1
+          fi
+          cp "$APK" "PetitionsManager-$TAG.apk"
+          gh release create "$TAG" "PetitionsManager-$TAG.apk" \
+            --title "PetitionsManager $TAG" \
+            --notes "Datenstand: $STAND · $PETITIONEN Petitionen
+
+          Ueber die App aktualisierbar (Einstellungen -> Nach Updates suchen)."
+          echo "Release $TAG veroeffentlicht" >> "$GITHUB_STEP_SUMMARY"

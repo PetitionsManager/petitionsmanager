@@ -43,6 +43,11 @@ from petitions_core import (Platform, log, now_iso, prog, sanitize_fragment,
 # Konfiguration
 # ----------------------------------------------------------------------------
 BASE_URL   = "https://weact.campact.de"
+# Prüfmuster für eine FERTIGE Kategorieadresse — am eigenen Host verankert.
+# Das Suchmuster weiter unten bleibt bewusst lockerer, es muss auch die
+# relative Form "/categories/klima" finden. Siehe core.eigener_link.
+EIGENE_KATEGORIE_RE = re.compile(
+    r"^https://weact\.campact\.de/categories/[a-z0-9-]+", re.I)
 DATA_FILE  = Path("weact_petitions.json")
 HTML_FILE  = Path("weact_petitions.html")
 
@@ -278,12 +283,17 @@ def _sanitize_desc(node) -> str:
             t.unwrap()
             continue
         if t.name == "a":
-            href = t.get("href")
+            # Schema-Prüfung wie in core.sanitize_fragment: javascript:/data:
+            # verwerfen, Link auflösen (Text bleibt), sonst absolut machen.
+            ziel = core._sichere_url(t.get("href"), BASE_URL)
             t.attrs = {}
-            if href:
-                t["href"] = urljoin(BASE_URL, href)
+            if ziel:
+                t["href"] = ziel
                 t["target"] = "_blank"
                 t["rel"] = "noopener"
+            else:
+                t.unwrap()
+                continue
         else:
             t.attrs = {}
     if node.name not in ALLOWED_DESC_TAGS:
@@ -424,7 +434,10 @@ def parse_detail(html: str, url: str) -> dict:
     cat_link = soup.find("a", href=re.compile(r"/categories/[a-z0-9\-]+", re.I))
     if cat_link:
         rec["category"] = cat_link.get_text(strip=True) or None
-        rec["category_url"] = urljoin(BASE_URL, cat_link["href"])
+        # Der Name ist bloßer Text und wird beim Anzeigen maskiert; die
+        # ADRESSE wird angeklickt und muss deshalb die unsere sein.
+        rec["category_url"] = core.eigener_link(
+            cat_link.get("href"), BASE_URL, EIGENE_KATEGORIE_RE)
     else:
         rec["category"] = rec["category_url"] = None
 
@@ -454,9 +467,9 @@ def parse_detail(html: str, url: str) -> dict:
         text = container.get_text(" ", strip=True) if container else str(node)
         text = TS_RE.sub("", text).strip(" -– ")
         m_ms = MILESTONE_RE.search(text)
-        if m_ms:
-            milestones.append({"threshold": int(re.sub(r"\D", "", m_ms.group(1))),
-                               "timestamp": ts})
+        schwelle = core.zahl(m_ms.group(1)) if m_ms else None
+        if schwelle is not None:
+            milestones.append({"threshold": schwelle, "timestamp": ts})
         elif text:
             updates.append({"timestamp": ts, "text": text[:500]})
 
@@ -483,14 +496,21 @@ def parse_json_variant(text: str) -> dict:
     except (ValueError, TypeError):
         return out
     obj = data.get("petition", data) if isinstance(data, dict) else {}
+    # ⚠️ Alles hier ist FREMDES JSON. Ohne Typprüfung wanderte auch ein Objekt
+    # oder eine Liste ungefiltert in den Datensatz — "signatures" wäre dann
+    # keine Zahl mehr, und die App rechnet und vergleicht damit. Der Wert kam
+    # bis hierher nur deshalb heil an, weil WeAct sich gut benimmt; das ist
+    # keine Absicherung, sondern Glück (siehe core.eigene_adresse).
     if isinstance(obj, dict):
-        if "id" in obj:
+        if isinstance(obj.get("id"), (int, str)) and not isinstance(obj.get("id"), bool):
             out["petition_id"] = obj["id"]
-        for src, dst in (("signature_count", "signatures"),
-                         ("signatures_count", "signatures"),
-                         ("title", "title")):
-            if obj.get(src) is not None:
-                out[dst] = obj[src]
+        # Reihenfolge wie bisher: sind BEIDE Felder da, gewinnt das letzte.
+        for src in ("signature_count", "signatures_count"):
+            n = core.zahl(obj.get(src))
+            if n is not None:
+                out["signatures"] = n
+        if isinstance(obj.get("title"), str) and obj["title"].strip():
+            out["title"] = obj["title"].strip()
     return out
 
 

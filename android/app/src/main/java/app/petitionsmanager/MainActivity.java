@@ -46,6 +46,50 @@ import java.nio.charset.StandardCharsets;
 public class MainActivity extends Activity {
 
     private static final String APP_HOST = "appassets.androidplatform.net";
+
+    /* ⚠️ Woher die App eine APK annehmen darf.
+       UpdateBridge.hole() ist die einzige Stelle, an der die App eine
+       AUSFÜHRBARE Datei entgegennimmt und dem Systeminstallierer vorlegt – und
+       die Adresse kommt aus JavaScript. Geprüft wird deshalb der ganze
+       Pfadanfang, nicht bloß der Host: auf github.com darf JEDER ein Release
+       anlegen, ein reiner Host-Vergleich ließe also jede fremde APK durch. */
+    private static final String APK_QUELLE =
+            "https://github.com/PetitionsManager/petitionsmanager/releases/download/";
+
+    /* Zwei Prüfungen, von denen keine allein genügt:
+       1. Der Pfadanfang muss unser Release-Ordner sein (siehe oben).
+       2. Der Rest darf nur „tag/dateiname.apk" sein. Ohne das käme man mit
+          …/releases/download/../../fremd/repo/böse.apk am ersten Riegel vorbei:
+          der Anfang stimmt, und den Rückschritt löst erst GitHubs Server auf –
+          java.net.URL normalisiert ihn NICHT weg.
+       Groß-/Kleinschreibung ist beim Vergleich egal, weil GitHub Eigentümer und
+       Repo ohnehin unabhängig davon auflöst; ein anderes Repo lässt sich damit
+       nicht treffen. Erwartet wird, was build-apk.yml erzeugt, z. B.
+       …/download/v1.0.42/PetitionsManager-v1.0.42.apk */
+    private static boolean apkAdresseOk(String adresse) {
+        if (adresse == null || !adresse.regionMatches(
+                true, 0, APK_QUELLE, 0, APK_QUELLE.length())) {
+            return false;
+        }
+        String rest = adresse.substring(APK_QUELLE.length());
+        return !rest.contains("..")
+                && rest.matches("[A-Za-z0-9._-]+/[A-Za-z0-9._-]+\\.apk");
+    }
+
+    /* Erlaubtes Ziel NACH den Umleitungen: GitHub schickt den Download auf
+       seinen Dateispeicher weiter. Wohin genau, bestimmt dann GitHub – nicht
+       der Aufrufer, denn der Einstieg ist oben auf unseren Release-Ordner
+       festgenagelt. Klein geschrieben wird mit Locale.ROOT, weil "GITHUB" ein
+       I enthält und in türkischer Gebietsschema-Einstellung sonst zu "gıthub"
+       würde – der Vergleich schlüge dann fehl. */
+    private static boolean gitHubZiel(URL u) {
+        if (u == null || !"https".equalsIgnoreCase(u.getProtocol())) return false;
+        String h = u.getHost();
+        if (h == null) return false;
+        h = h.toLowerCase(java.util.Locale.ROOT);
+        return h.equals("github.com") || h.endsWith(".githubusercontent.com");
+    }
+
     private static final int FILE_CHOOSER_REQ = 1;
     private static final int NOTIFY_PERM_REQ = 2;
     private WebView web;
@@ -163,11 +207,28 @@ public class MainActivity extends Activity {
                 return assetLoader.shouldInterceptRequest(request.getUrl());
             }
 
+            /* ⚠️ Entscheidend ist hier, was NICHT durchgelassen wird.
+               Die Adressen stammen aus fremden Petitionstexten – auf allen elf
+               Plattformen kann jeder eine Petition mit beliebigem Link anlegen.
+               Vorher reichte diese Methode JEDES Schema ungeprüft an das System
+               weiter, und unter Android ist `intent://…#Intent;…;end` kein Link,
+               sondern ein Bauplan für den Aufruf einer BELIEBIGEN anderen App
+               samt Extras; `file://` und `content://` greifen auf lokale Dateien
+               zu. Erlaubt sind deshalb nur die drei Schemata, die ein Link in
+               einer Petition überhaupt braucht.
+               Die Web-App filtert dieselben Adressen schon beim Zeichnen
+               (sichereUrl in webapp/app.js) – hier steht der zweite Riegel, weil
+               ein einziger übersehener href sonst genügte. */
             @Override
             public boolean shouldOverrideUrlLoading(WebView view,
                                                     WebResourceRequest request) {
                 Uri uri = request.getUrl();
                 if (APP_HOST.equals(uri.getHost())) return false;   // interne Seite
+                String schema = uri.getScheme();
+                boolean erlaubt = "http".equalsIgnoreCase(schema)
+                        || "https".equalsIgnoreCase(schema)
+                        || "mailto".equalsIgnoreCase(schema);
+                if (!erlaubt) return true;          // stumm verwerfen, nicht öffnen
                 try {
                     startActivity(new Intent(Intent.ACTION_VIEW, uri));
                 } catch (Exception ignored) { }
@@ -223,11 +284,27 @@ public class MainActivity extends Activity {
         else super.onBackPressed();
     }
 
+    /* Der Dateiname der Sicherung kommt aus JavaScript. Auf API 28 und älter
+       schreibt die Brücke unten mit `new File(dir, name)` – ein "../" darin
+       löste sich dort zum übergeordneten Ordner auf. Alles außer Buchstaben,
+       Ziffern, Punkt, Strich und Unterstrich wird deshalb ersetzt, und führende
+       Punkte fallen weg (sonst bliebe ".." als Name stehen und bezeichnete den
+       Elternordner). */
+    private static String sichererDateiname(String roh) {
+        String n = (roh == null ? "" : roh).replaceAll("[^A-Za-z0-9._-]", "_")
+                                           .replace("..", "_");
+        while (n.startsWith(".")) n = n.substring(1);
+        /* Bleibt nichts Kennzeichnendes übrig, ist ein sprechender Name besser
+           als eine Datei namens „_" in den Downloads. */
+        return n.matches(".*[A-Za-z0-9].*") ? n : "sicherung.json";
+    }
+
     /** Speichert die Backup-JSON in „Downloads" (API 29+) bzw. app-spezifisch. */
     private class BackupBridge {
         @JavascriptInterface
-        public void saveBackup(final String filename, final String json) {
+        public void saveBackup(final String rohname, final String json) {
             String where;
+            final String filename = sichererDateiname(rohname);
             try {
                 byte[] bytes = json.getBytes(StandardCharsets.UTF_8);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -413,6 +490,16 @@ public class MainActivity extends Activity {
                 @Override public void run() {
                     HttpURLConnection v = null;
                     try {
+                        /* ⚠️ Vor allem anderen: stammt die Adresse aus UNSEREM
+                           Release-Ordner? Ohne diese Zeile genügte eine einzige
+                           eingeschleuste Zeile JavaScript, um der App eine
+                           beliebige APK unterzuschieben – der Nutzer sähe nur
+                           den gewohnten Installationsdialog. */
+                        if (!apkAdresseOk(adresse)) {
+                            meldeFortschritt(fortschritt, -1);
+                            return;
+                        }
+
                         /* In den app-eigenen Cache, nicht in Downloads: kein
                            Speicherrecht noetig, und das System raeumt selbst
                            auf. Der Ordner ist in res/xml/file_paths.xml als
@@ -425,8 +512,19 @@ public class MainActivity extends Activity {
                         URL u = new URL(adresse);
                         v = (HttpURLConnection) u.openConnection();
                         v.setConnectTimeout(20000);
+                        v.setReadTimeout(30000);
                         v.setInstanceFollowRedirects(true);
                         v.setRequestProperty("User-Agent", "PetitionsManager-App");
+                        /* Zwei Prüfungen, bevor auch nur ein Byte geschrieben wird:
+                           Führte die Umleitungskette noch zu GitHub? Und ist die
+                           Antwort überhaupt eine Datei? Ohne das Zweite landete
+                           eine Fehlerseite als "update.apk" auf der Platte und
+                           von dort im Installationsdialog. */
+                        int code = v.getResponseCode();
+                        if (code != 200 || !gitHubZiel(v.getURL())) {
+                            meldeFortschritt(fortschritt, -1);
+                            return;
+                        }
                         int gesamt = v.getContentLength();
                         InputStream in = v.getInputStream();
                         FileOutputStream aus = new FileOutputStream(ziel);

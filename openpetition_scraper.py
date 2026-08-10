@@ -54,8 +54,19 @@ MAX_LIST_PAGES = 200            # Sicherheitslimit für die Paginierung
 PETITION_HREF_RE = re.compile(r"/petition/online/([a-z0-9\-]+)")
 # Eine Detailadresse hat unterhalb von /petition/online/ noch ein Wegstück.
 # Maßstab für core.eigene_adresse.
-DETAILADRESSE_RE = re.compile(r"/petition/online/[^/?#]+", re.I)
+DETAILADRESSE_RE = re.compile(
+    r"^https://(www\.)?openpetition\.de/([a-z]{2}/)?petition/online/[^/?#]+", re.I)
+# Suchmuster: findet den Kategorie-Link auf der Seite, auch in relativer Form.
 CATEGORY_RE = re.compile(r"/petitionen\?category=(\d+)")
+# Prüfmuster für die FERTIGE Adresse — am eigenen Host verankert. Ohne das
+# übernähme ein Kategorie-Link mit absoluter fremder Adresse (jeder darf hier
+# Text einstellen) diese fremde Adresse als unsere. Siehe core.eigener_link.
+# ⚠️ Das Länderstück (/at/, /ch/, /it/, /be/, /es/, /lu/, /us/, /hr/, /au/) muss
+# mit hinein: am Bestand gemessen (10.8.2026) tragen 267 von 1.903 echten
+# Kategorieadressen eines. Ohne es hätte dieses Muster sie still verworfen —
+# dieselbe Falle wie bei TARGET_RE in threefifty_scraper.py.
+EIGENE_KATEGORIE_RE = re.compile(
+    r"^https://(www\.)?openpetition\.de/([a-z]{2}/)?petitionen\?category=\d+", re.I)
 # "470.240 Unterschriften" bzw. "500.000 für Sammelziel"
 SIG_RE  = re.compile(r"([\d.]+)\s*Unterschrift", re.I)
 GOAL_RE = re.compile(r"([\d.]+)\s*für Sammelziel", re.I)
@@ -195,7 +206,10 @@ def parse_detail(html: str, url: str, lang: str = "de") -> dict:
         name = cat_link.get_text(" ", strip=True)
         if name:
             rec["category"] = name
-            rec["category_url"] = core.urljoin(BASE_URL, cat_link["href"])
+            # Der Name ist bloßer Text und wird beim Anzeigen maskiert; die
+            # ADRESSE wird angeklickt und muss deshalb die unsere sein.
+            rec["category_url"] = core.eigener_link(
+                cat_link.get("href"), BASE_URL, EIGENE_KATEGORIE_RE)
 
     # Unterschriften + Sammelziel aus der Fortschrittsbox.
     box = soup.select_one(".progress-box")

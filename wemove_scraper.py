@@ -240,7 +240,7 @@ def fetch_progress(fetcher: core.Fetcher, page: str) -> int | None:
     except ValueError:
         return None
     actions = (data.get("total") or {}).get("actions")
-    return int(actions) if actions is not None else None
+    return core.zahl(actions)
 
 
 def scrape_petition(fetcher: core.Fetcher, page: str) -> tuple[str, dict | None]:

@@ -42,7 +42,8 @@ HTML_FILE = Path("foodwatch_petitions.html")
 ACTION_HREF_RE = re.compile(r'href="(/de/mitmachen/[a-z0-9\-]+)"')
 # Eine Aktionsseite hat unterhalb von /de/mitmachen noch ein Wegstück; die
 # Übersicht selbst hat keins. Maßstab für core.eigene_adresse.
-DETAILADRESSE_RE = re.compile(r"/de/mitmachen/[^/?#]+", re.I)
+DETAILADRESSE_RE = re.compile(
+    r"^https://(www\.)?foodwatch\.org/de/mitmachen/[^/?#]+", re.I)
 
 FETCH_HEADERS = {
     "User-Agent": ("Mozilla/5.0 (X11; Linux x86_64; rv:128.0) "
@@ -259,6 +260,7 @@ def run(args) -> None:
         log(f"Prüfe {len(known_slugs)} bekannte Aktion(en) …")
         prog(phase="check-known", current=0, total=len(known_slugs),
              message="Prüfe bekannte Aktionen …")
+        skip_slugs, geprueft = [], 0
         for k, slug in enumerate(known_slugs, 1):
             prog(current=k, total=len(known_slugs), message=slug)
             if core.skip_recent(store.get(slug), args):
@@ -266,16 +268,20 @@ def run(args) -> None:
             status, rec = scrape_petition(fetcher, slug)
             if status == "error":
                 continue
+            geprueft += 1
             if status == "skip":
-                del store[slug]
-                log(f"  ENTFERNT (kein Unterschriften-Formular mehr): {slug}")
-                save()
+                # Nicht sofort löschen: ein geänderter Seitenaufbau ließe das
+                # Unterschriften-Formular überall „verschwinden". Sammeln.
+                skip_slugs.append(slug)
                 continue
             core.upsert(store, slug, rec or {}, {}, status, ts,
                         f"{LIST_URL}/{slug}")
             save()
             if status == "offline":
                 log(f"  OFFLINE: {slug}")
+        core.entferne_skip(store, skip_slugs, geprueft, "foodwatch",
+                           grund_de="kein Unterschriften-Formular mehr",
+                           grund_en="no signature form anymore", save=save)
 
     log("Sammle Aktionen von der Mitmachen-Übersicht …")
     discovered = discover_slugs(fetcher)

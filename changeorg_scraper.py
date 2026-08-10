@@ -348,6 +348,7 @@ def run(args) -> None:
         log(f"Prüfe {len(known)} bekannte Petition(en) …")
         prog(phase="check-known", current=0, total=len(known),
              message="Prüfe bekannte Petitionen …")
+        skip_slugs, geprueft = [], 0
         for k, slug in enumerate(known, 1):
             prog(current=k, total=len(known), message=slug[:60])
             if core.skip_recent(store.get(slug), args):
@@ -355,16 +356,19 @@ def run(args) -> None:
             status, rec = scrape_petition(fetcher, slug)
             if status == "error":
                 continue
+            geprueft += 1
             if status == "skip":
-                del store[slug]
-                log(f"  ENTFERNT (nicht DE): {slug[:60]}")
-                save()
+                # Nicht sofort löschen: bei einem Seitenumbau lieferten ALLE
+                # bekannten Petitionen „nicht DE". Sammeln, unten mit Notbremse.
+                skip_slugs.append(slug)
                 continue
             core.upsert(store, slug, rec or {}, {}, status, ts,
                         f"{BASE_URL}/p/{slug}")
             save()
             if status == "offline":
                 log(f"  OFFLINE: {slug[:60]}")
+        core.entferne_skip(store, skip_slugs, geprueft, "Change.org",
+                           grund_de="nicht DE", grund_en="not DE", save=save)
 
     log("Scanne Sitemaps nach deutschen Kandidaten …")
     discovered = discover_slugs(fetcher)

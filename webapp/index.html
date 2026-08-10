@@ -2,6 +2,14 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
+<!-- Zweite Verteidigungslinie gegen XSS aus fremden Petitionsinhalten: die
+     Volltexte werden serverseitig in sanitize_fragment bereinigt; scheitert das
+     einmal, verhindert script-src 'self' trotzdem die Ausfuehrung. Bewusst OHNE
+     'unsafe-inline' im script-src (index.html hat keine Inline-Skripte und keine
+     onclick-Attribute). img-src ist absichtlich weit: die Petitionsbilder liegen
+     auf beliebigen fremden Servern und sollen geladen werden. connect-src laesst
+     zusaetzlich die veroeffentlichten Datenpakete zu (LIVE_BASE in app.js). -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https: data: blob:; font-src 'self'; connect-src 'self' https://petitionsmanager.github.io; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <!-- Startwerte; app.js zieht das je nach gewaehltem Design nach. -->
 <meta name="theme-color" content="#f7f4ec" media="(prefers-color-scheme: light)">

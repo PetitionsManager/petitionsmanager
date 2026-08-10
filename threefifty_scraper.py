@@ -82,6 +82,7 @@ import re
 from pathlib import Path
 from urllib.parse import urlencode, urljoin
 
+import requests
 from bs4 import BeautifulSoup
 
 import i18n_helfer as i18n
@@ -120,6 +121,15 @@ ABBRUCH_NACH_LEEREN = 5
 
 PROGRESS_RE = re.compile(r"onProgressLoaded\((.*)\)\s*;?\s*$", re.S)
 PAGE_ID_RE  = re.compile(r"view_by_page_id/(\d+)")
+
+# Die Petitions-URL zeigt IMMER auf einen 350.org-Host (siehe Kopf: act.350.org/
+# cms/view_by_page_id/<id>). obj["url"] stammt aber aus der Drittanbieter-API
+# getinvolved350.vercel.app — eine FREMDE Angabe. core.eigene_adresse übernimmt
+# sie nur, wenn sie auf 350.org zeigt; sonst gilt die selbst gebaute Adresse.
+# Ohne diese Bindung könnte eine umgebaute/gekaperte API beliebige fremde Links
+# als Petitionsziel in App und Dashboard schleusen (Fehlerklasse „fremde
+# Adressangabe übernehmen", siehe core.eigene_adresse).
+EIGENE_URL_RE = re.compile(r"^https://([a-z0-9-]+\.)?350\.org/", re.I)
 
 # Form und Slug der Zielseite. BEWUSST OFFEN: welche Formen act.350.org anlegt,
 # steht nirgends geschrieben, und ein geschlossenes Muster verliert jede neue
@@ -305,7 +315,11 @@ def resolve_target(fetcher: core.Fetcher, page_id: str
         try:
             resp = fetcher.session.get(url, timeout=core.REQUEST_TIMEOUT,
                                        allow_redirects=False)
-        except Exception:
+        # Nur Netzprobleme abfangen (Zeitüberschreitung, DNS, Verbindung).
+        # Ein pauschales `except Exception` verschluckte auch einen Tippfehler
+        # in dieser Funktion und meldete ihn als „heute nicht zu klären" —
+        # der Scraper liefe jahrelang scheinbar sauber weiter.
+        except requests.RequestException:
             return None, None, False
         if resp.status_code in (404, 410):
             return None, None, True
@@ -313,6 +327,16 @@ def resolve_target(fetcher: core.Fetcher, page_id: str
         if not loc:
             return None, None, False
         url = urljoin(url, loc)
+        # ⚠️ Die Weiterleitung ist eine ANGABE DER GEGENSEITE. Ohne diese
+        # Bindung folgte die Schleife ihr auf einen beliebigen Host: der
+        # nächste Durchgang fragte dort robots.txt ab, holte dort den nächsten
+        # Location-Header — und TARGET_RE, das bewusst jeden Host zulässt,
+        # machte aus dem fremden Pfad einen 350.org-Slug. Der landete danach
+        # als /progress/<slug> beim echten 350.org und als Kennung im
+        # Datensatz. Dieselbe Fehlerklasse wie bei EIGENE_URL_RE, nur auf dem
+        # Weg dorthin statt am Ziel.
+        if not EIGENE_URL_RE.match(url):
+            return None, None, False
     t = ziel(url)
     return (t[0], t[1], False) if t else (None, None, False)
 
@@ -326,12 +350,13 @@ def fetch_progress(fetcher: core.Fetcher, slug: str) -> tuple[int, int | None] |
         data = json.loads(m.group(1) if m else resp.text)
     except (ValueError, AttributeError):
         return None
-    actions = (data.get("total") or {}).get("actions")
+    actions = core.zahl((data.get("total") or {}).get("actions"))
     if actions is None:
         return None
-    goal = data.get("goal")
-    goal = int(goal) if goal not in (None, 0, 1) else None
-    return int(actions), goal
+    goal = core.zahl(data.get("goal"))
+    if goal in (0, 1):
+        goal = None
+    return actions, goal
 
 
 def _brieftext_html(text: str) -> str:
@@ -474,7 +499,8 @@ def build_rec(page_id: str, obj: dict) -> dict:
         rec["description_full"] = "<p>" + core._esc(desc) + "</p>"
     if obj.get("image"):
         rec["image_url"] = obj["image"]
-    rec["url"] = obj.get("url") or f"{BASE_URL}/cms/view_by_page_id/{page_id}"
+    rec["url"] = core.eigene_adresse(
+        obj.get("url"), f"{BASE_URL}/cms/view_by_page_id/{page_id}", EIGENE_URL_RE)
     return rec
 
 

@@ -503,11 +503,6 @@ def main() -> None:
     # {sprache: volltext} pro Petition.
     i18n_texts_by_platform: dict[str, list[dict[str, str | None]]] = {}
 
-    # Alte Volltext-Pakete wegräumen, sonst bleiben Reste liegen, wenn eine
-    # Plattform schrumpft.
-    for old in OUT_DIR.glob("*.t[0-9]*.json"):
-        old.unlink()
-
     for p in monitor.PLATFORMS:
         entry = {
             "key": p.key,
@@ -524,7 +519,14 @@ def main() -> None:
             "generated_at": None,
         }
         if p.is_live and p.data_file and p.data_file.exists():
-            data = json.loads(p.data_file.read_text(encoding="utf-8"))
+            try:
+                data = json.loads(p.data_file.read_text(encoding="utf-8"))
+            except (ValueError, OSError) as e:
+                # Ein einziger kaputter Bestand darf nicht den ganzen Export
+                # kippen. Plattform überspringen; die alten Pakete werden erst
+                # NACH dieser Schleife weggeräumt, gehen hier also nicht verloren.
+                print(f"  {p.key}: Bestand unlesbar ({e}) – übersprungen.")
+                continue
             meta = data.pop("_meta", {})
             entry["generated_at"] = meta.get("generated_at")
             entry["new"] = len(meta.get("new_petitions_last_run") or [])
@@ -593,6 +595,14 @@ def main() -> None:
     # nach write_texts passieren (die Kennung entsteht erst beim Schreiben) und
     # vor dem Schreiben des Manifests.
     eintrag_je_key = {e["key"]: e for e in manifest["platforms"]}
+    # Alte Volltext-Pakete jetzt wegräumen – NACH dem erfolgreichen Laden aller
+    # Bestände und unmittelbar vor dem Neuschreiben. Früher stand das ganz am
+    # Anfang von main(); ein kaputtes JSON in der Ladeschleife ließ die Pakete
+    # dann gelöscht, aber nicht neu geschrieben zurück (webapp/data ohne Texte).
+    # So bleiben Reste geschrumpfter Plattformen weg, ein Ladefehler kostet aber
+    # keine Textpakete mehr.
+    for old in OUT_DIR.glob("*.t[0-9]*.json"):
+        old.unlink()
     for key, items in by_platform.items():
         kennungen = write_texts(key, items, texts_by_platform[key], text_index)
         chunks_total += len(kennungen)

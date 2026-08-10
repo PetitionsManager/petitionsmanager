@@ -43,6 +43,7 @@ import argparse
 import concurrent.futures
 import json
 import os
+import re
 import shutil
 import sys
 import tempfile
@@ -54,6 +55,16 @@ BASIS = "https://petitionsmanager.github.io/petitionsmanager/data/"
 ZIEL_VORGABE = Path(__file__).resolve().parent / "webapp" / "data"
 PARALLEL = 8
 ZEITLIMIT = 120
+
+# Erlaubte Dateinamen aus dem Manifest. Alles andere (Schraegstrich, "..",
+# absolute Pfade) koennte beim Schreiben aus webapp/data ausbrechen: ein
+# manipuliertes Pages-Manifest duerfte sonst beliebige .json-Dateien auf den
+# Runner schreiben, unmittelbar bevor webapp/ in die APK gebuendelt wird.
+_SICHERER_NAME = re.compile(r"^[a-z0-9][a-z0-9._-]*\.json$", re.I)
+
+
+def _sicherer_dateiname(name: str) -> bool:
+    return bool(_SICHERER_NAME.match(name)) and name == Path(name).name
 
 
 def log(text: str) -> None:
@@ -86,6 +97,12 @@ def dateiliste(manifest: dict) -> list[str]:
         namen.append(f"{p['key']}.json")
         for nummer in (p.get("tv") or {}):
             namen.append(f"{p['key']}.t{nummer}.json")
+    unsicher = [n for n in namen if not _sicherer_dateiname(n)]
+    if unsicher:
+        for n in unsicher[:5]:
+            log(f"  UNSICHER {n!r}")
+        raise SystemExit(f"::error::Manifest nennt unsichere Dateinamen "
+                         f"({len(unsicher)}) – Abbruch, nichts geladen.")
     return namen
 
 
@@ -163,11 +180,22 @@ def pruefe(manifest: dict, ordner: Path) -> int:
 
 
 def uebernimm(quelle: Path, ziel: Path, namen: list[str]) -> tuple[int, int]:
-    """Dateien umhängen. Das Manifest ZULETZT (siehe Kopfkommentar)."""
+    """Dateien umhängen. Das Manifest ZULETZT (siehe Kopfkommentar).
+
+    Jede Datei wird ATOMAR ersetzt: erst als .tmp im Zielordner ablegen, dann
+    per os.replace an ihren Platz. So findet ein Abbruch nie eine halb
+    geschriebene Datei vor; ein echter Verzeichnis-Tausch scheidet aus, weil der
+    Zwischenordner im System-Temp auf einem anderen Dateisystem liegt."""
     ziel.mkdir(parents=True, exist_ok=True)
+
+    def atomar(von: Path, nach: Path) -> None:
+        tmp = nach.with_name(nach.name + ".tmp")
+        shutil.copyfile(von, tmp)
+        os.replace(tmp, nach)          # gleicher Ordner → atomarer Tausch
+
     for name in sorted(set(namen)):
-        shutil.copyfile(quelle / name, ziel / name)
-    shutil.copyfile(quelle / "manifest.json", ziel / "manifest.json")
+        atomar(quelle / name, ziel / name)
+    atomar(quelle / "manifest.json", ziel / "manifest.json")
 
     gehoert_dazu = set(namen) | {"manifest.json"}
     verwaist = sorted(n for n in os.listdir(ziel) if n not in gehoert_dazu)

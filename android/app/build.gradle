@@ -86,7 +86,10 @@ android {
     // true  = Fassung fuer die Direktverteilung (GitHub-Release), mit Updater
     // false = Fassung fuer F-Droid und spaeter Google Play, ohne Updater
     //
-    // Umschalten beim Bauen:  gradle assembleDebug -PmitUpdater=false
+    // Umschalten beim Bauen:  gradle assembleRelease -PmitUpdater=false
+    // (ausgeliefert wird seit 10.8.2026 der Release-Zweig; assembleDebug ist
+    //  weiterhin der richtige Befehl fuer einen oertlichen Testbau, etwa wenn
+    //  man den WebView per chrome://inspect ansehen will)
     //
     // ⚠️ Was der Schalter WIRKLICH tut: Er setzt BuildConfig.MIT_UPDATER.
     // MainActivity meldet die JS-Bruecke dann gar nicht erst an, und die
@@ -112,6 +115,20 @@ android {
             buildConfigField "boolean", "MIT_UPDATER", "${mitUpdater}"
         }
         release {
+            // ⚠️ Ohne diese Zeile erzeugte `assembleRelease` eine UNSIGNIERTE
+            // APK (app-release-unsigned.apk), die sich auf keinem Geraet
+            // installieren laesst — der Release-Zweig war nie gebaut worden
+            // und fiel deshalb nicht auf.
+            //
+            // Der Block heisst "debug", enthaelt aber den ECHTEN, festen
+            // Schluessel aus dem Secret (siehe Kopf). Der NAME bleibt mit
+            // Absicht: AGP kennt genau diesen Block und faellt ohne
+            // Schluesseldatei auf seinen eigenen Wegwerf-Debugschluessel
+            // zurueck. Das ist fuer einen lokalen Testbau richtig und ginge
+            // bei einem selbst benannten Block verloren. Weil es derselbe
+            // Schluessel ist wie bisher, laesst sich eine vorhandene
+            // Installation weiterhin ueberinstallieren.
+            signingConfig signingConfigs.debug
             buildConfigField "boolean", "MIT_UPDATER", "${mitUpdater}"
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),

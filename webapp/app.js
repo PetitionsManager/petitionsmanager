@@ -730,7 +730,17 @@
     t.innerHTML = html.trim(); return t.content.firstChild; }
   function esc(s) { return (s == null ? "" : String(s))
     .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;"); }
+    .replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
+
+  /* Nur harmlose Schemata als Navigationsziel zulassen. Die Petitions-URL
+     gehört beliebigen Dritten; esc() verhindert nur den Ausbruch aus dem
+     Attribut, nicht ein href="javascript:…". Kontrollzeichen werden entfernt,
+     sonst täuscht "java\tscript:" das Schema vor. Serverseitig filtert
+     sanitize_fragment bereits; dies ist die zweite Verteidigungslinie. */
+  function sichereUrl(u) {
+    var s = (u == null ? "" : String(u)).replace(/[\t\n\r]/g, "").trim();
+    return /^(https?:|mailto:)/i.test(s) ? s : "#";
+  }
   function ampClass(o) { return "amp" + (o >= 1 && o <= 5 ? o : 0); }
 
   function loadEnabled() {
@@ -2289,7 +2299,7 @@
         'loading="lazy" draggable="false">'
       : thumbPh;
     var ext = r.url
-      ? '<a class="pet__ext" href="' + esc(r.url) + '" target="_blank" ' +
+      ? '<a class="pet__ext" href="' + esc(sichereUrl(r.url)) + '" target="_blank" ' +
         'rel="noopener" aria-label="' +
         esc(T("petition.openExternAria", "Petition extern öffnen")) + '">' +
         '<i class="fa-solid fa-arrow-up-right-from-square"></i></a>' : "";
@@ -2926,7 +2936,7 @@
         ' <i class="fa-solid fa-pen"></i>');
     if (meta.length) h += '<div class="pet__meta">' + meta.join(" · ") + "</div>";
     if (r.url)
-      h += '<a class="pet__extlink" href="' + esc(r.url) + '" target="_blank" ' +
+      h += '<a class="pet__extlink" href="' + esc(sichereUrl(r.url)) + '" target="_blank" ' +
         'rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> ' +
         esc(T("petition.openExtern", "Petition öffnen")) + "</a>";
     // Footer: gleiche/ähnliche Petitionen (nur wenn Tags vorhanden sind).
@@ -3084,7 +3094,7 @@
     if (manifestEntry.source_url)
       nerdInhalt += '<div class="nerd__row"><b>' +
         esc(T("platform.dataSource", "Quelle der Daten")) + "</b> " +
-        '<a href="' + esc(manifestEntry.source_url) + '" target="_blank" ' +
+        '<a href="' + esc(sichereUrl(manifestEntry.source_url)) + '" target="_blank" ' +
         'rel="noopener">' + esc(manifestEntry.source_url) + "</a></div>";
     nerdInhalt += '<div class="nerd__row"><b>' +
       esc(T("platform.appSource", "Quellcode dieser App")) + "</b> " +
