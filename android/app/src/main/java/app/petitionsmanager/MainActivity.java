@@ -387,6 +387,39 @@ public class MainActivity extends Activity {
                 public void run() { finishAndRemoveTask(); }
             });
         }
+
+        /* Fassung und Baunummer fuer "Ueber die App".
+           ⚠️ Bewusst HIER und nicht in UpdateBridge, wo fassung() auch steht:
+           die Bruecke meldet sich nur bei BuildConfig.MIT_UPDATER an. In der
+           F-Droid-Fassung gaebe es die Versionsnummer sonst gar nicht - und
+           ausgerechnet dort ist sie wichtig, weil es keinen Update-Knopf gibt,
+           der sie nebenbei nennt. Die Dopplung ist zwei Zeilen; eine gemeinsame
+           Hilfsmethode waere hier mehr Umweg als Ersparnis.
+
+           Beide Werte kommen aus dem PackageManager, nicht aus BuildConfig:
+           so steht das, was WIRKLICH installiert ist, und nicht das, womit
+           uebersetzt wurde. */
+        @JavascriptInterface
+        public String fassung() {
+            try {
+                return getPackageManager()
+                        .getPackageInfo(getPackageName(), 0).versionName;
+            } catch (Exception e) {
+                return "";
+            }
+        }
+
+        /* Als Text, nicht als int: JS bekommt sonst bei einem Fehlschlag eine 0
+           und zeigte "Bau 0" an. Leer laesst sich sauber ausblenden. */
+        @JavascriptInterface
+        public String bau() {
+            try {
+                return String.valueOf(getPackageManager()
+                        .getPackageInfo(getPackageName(), 0).versionCode);
+            } catch (Exception e) {
+                return "";
+            }
+        }
     }
 
     private class NotifyBridge {

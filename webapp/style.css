@@ -378,8 +378,11 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
    die Kachel traegt schon Name, Zahl, "+N neu" und die Kurzzeile — ein
    weiteres Abzeichen mit Kasten wuerde mit .plat__new konkurrieren. Der
    Klartext steht im title. */
-.plat__langs{display:inline-block;margin-left:.375rem;font-size:.8125rem;
-  vertical-align:middle;cursor:help;opacity:.9}
+/* Zweitsprachen an der Kachel. Seit 12.8.2026 sind die Flaggen darin runde
+   .flag-Kreise statt nackter Emojis; inline-flex mit gap, damit zwei davon
+   nicht aneinanderkleben. */
+.plat__langs{display:inline-flex;align-items:center;gap:.1875rem;
+  margin-left:.375rem;vertical-align:middle;cursor:help;opacity:.9}
 /* Pfeil-Kreis: kräftigere Markentönung (22 %), Symbol in Textfarbe. */
 .plat__chev{flex:none;width:2.25rem;height:2.25rem;border-radius:50%;
   background-color:var(--brand,var(--accent-soft));
@@ -1055,7 +1058,11 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
 .acc-head{width:100%;display:flex;align-items:center;justify-content:space-between;
   gap:.625rem;border:0;background:transparent;cursor:pointer;padding:1.125rem 1rem;
   font-size:1.0625rem;font-weight:750;color:var(--ink);text-align:left}
-.acc-title{display:flex;align-items:center;gap:.625rem}
+/* flex-wrap: der Zähler („11/11 aktiv") rutscht bei Enge in eine eigene
+   Zeile und wieder hinter den Namen, sobald Platz ist (Nutzerwunsch
+   12.8.2026). Vorher stand er starr daneben und quetschte die Überschrift —
+   die Schriftgröße bleibt dadurch unangetastet. */
+.acc-title{display:flex;align-items:center;gap:.625rem;flex-wrap:wrap}
 .acc-count{font-size:.75rem;font-weight:700;color:var(--accent);
   background:var(--accent-soft);border-radius:999px;padding:.125rem .625rem}
 .acc-chev{color:var(--muted);flex:none;font-size:1rem;transition:transform .2s}
@@ -1494,8 +1501,36 @@ body.wizard-open{overflow:hidden}
 .wiz__next:disabled{opacity:.4}
 
 /* ---- Einstellungen: Abschnitte und Listenzeilen ---- */
-.sect{margin:2rem .125rem .625rem;font-size:.75rem;font-weight:800;
+/* 2.75rem statt 2rem darüber (Nutzerwunsch 12.8.2026: „mehr Abstand zwischen
+   den einzelnen Sektionen"). ⚠️ Nur der OBERE Wert wächst: benachbarte
+   Außenabstände fallen zusammen, der größere gewinnt — der Grundrhythmus von
+   24 px weiter oben in dieser Datei bleibt damit unangetastet und zählt
+   nichts doppelt. Der untere Wert bleibt klein, damit die Überschrift bei
+   ihrem Abschnitt steht und nicht in der Mitte schwebt. */
+.sect{margin:2.75rem .125rem .625rem;font-size:.75rem;font-weight:800;
+  /* Fortsetzung unten: .welcome + .sect nimmt den Abstand oben zurück. */
   letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+/* ⚠️ Die ERSTE Überschrift bekommt den großen Abstand NICHT: sie folgt direkt
+   auf den Einleitungstext der Seite, dort wirkte er als Loch (Nutzerhinweis
+   12.8.2026). .welcome + .sect trifft genau sie — der Einleitungsblock steht
+   als erstes Kind, die Überschrift unmittelbar dahinter. */
+/* ⚠️ Gilt für BEIDES, was als erstes unter dem Einleitungstext stehen kann:
+   die erste Abschnittsüberschrift und — seit der Plattformen-Ausklapper
+   ganz oben steht — auch der. Sonst riss der Abschnittsabstand dort ein
+   Loch (Nutzerhinweis 12.8.2026, zweimal an derselben Stelle). */
+.welcome + .sect,
+/* ⚠️ Der lange Selektor ist nötig: .content > .accordion:not(.langgroup)
+   weiter unten wiegt (0,3,0) und schlüge ein kurzes .welcome + .accordion
+   (0,2,0). Gemessen, nicht geschätzt — die kurze Fassung blieb wirkungslos. */
+.content > .welcome + .accordion:not(.langgroup){margin-top:1rem}
+/* Der Plattformen-Ausklapper in den Einstellungen ist selbst ein Abschnitt —
+   seine Kopfzeile trägt den Namen und den Zähler. Damit er auch so WIRKT,
+   bekommt er denselben Abstand über sich wie eine Abschnittsüberschrift
+   (Nutzerwunsch 12.8.2026). Vorher stand er wie ein weiterer Punkt von
+   „Darstellung" da.
+   ⚠️ :not(.langgroup) grenzt auf die Einstellungen ein — dieselbe Klasse
+   trägt auf der Übersicht jede Sprachgruppe, dort gilt der Grundrhythmus. */
+.content > .accordion:not(.langgroup){margin-top:2.75rem}
 /* position:relative traegt den Fortschrittsbalken (.srow__bar) beim
    Aktualisieren der Daten. Ohne Wirkung auf alle uebrigen Zeilen: ein
    relativ positionierter Flex-Container verhaelt sich wie zuvor. */
@@ -1541,8 +1576,25 @@ body.wizard-open{overflow:hidden}
   margin:.75rem .25rem}
 /* Zwischenüberschrift innerhalb eines Abschnitts – trennt in „Darstellung"
    die beiden Schalterleisten (Farbdesign / Layout) voneinander. */
+/* 1.75rem statt .875rem darüber (Nutzerwunsch 12.8.2026): die Unterabschnitte
+   von „Darstellung" klebten an der Schalterleiste des vorigen. Unten bleibt es
+   eng, damit die Beschriftung bei ihrem Bedienelement steht. */
 .srow__lbl{font-size:.8125rem;font-weight:700;color:var(--ink);
-  margin:.875rem .25rem .375rem}
+  margin:1.75rem .25rem .375rem}
+/* ⚠️ Ausser der ERSTEN direkt unter einer Abschnittsüberschrift: dort trennt
+   die Überschrift schon, der grosse Abstand riss ein Loch zwischen
+   „Darstellung" und „Sprache" (Nutzerhinweis 12.8.2026). Übrig bleibt der
+   Fussabstand der Überschrift selbst. */
+.sect + .srow__lbl{margin-top:0}
+/* Beschriftung mit Info-Symbol (12.8.2026): der Erklärtext liegt darunter und
+   kommt erst auf Antippen. Das Symbol steht direkt hinter dem Wort, nicht am
+   Zeilenende — sonst sähe es aus, als gehörte es zum Bedienelement darunter. */
+.srow__lbl.lblinfo{display:flex;align-items:center;gap:.375rem}
+.lblinfo__b{border:0;background:none;padding:0;line-height:1;cursor:pointer;
+  color:var(--muted);font-size:.875rem;display:inline-flex}
+.lblinfo__b.on{color:var(--accent)}
+.lblinfo__t{display:none}
+.lblinfo__t.open{display:block}
 .seg{display:flex;gap:.25rem;background:var(--surface);
   border:.0625rem solid var(--line);border-radius:1.125rem;padding:.25rem;
   margin-bottom:.5rem}
@@ -1742,6 +1794,26 @@ body.wizard-open{overflow:hidden}
 /* Steckbrief. Zeilenabstand .5rem statt .25rem: seit jede Plattform ALLE
    Zeilen zeigt (auch die leeren mit „–") stehen hier immer fünf Paare
    untereinander, und bei 4 px Zeilenluft verschwimmen sie zu einem Block. */
+/* ---- „Über die App" (12.8.2026) ----
+   Klappt unter der Einstellungszeile auf. Bewusst ohne eigenen Kasten: die
+   Zeile darüber ist schon eine Karte, ein zweiter Rahmen ergäbe eine Schachtel
+   in der Schachtel — dieselbe Überlegung wie bei den Sprachgruppen.
+   Die Fakten-Liste benutzt .pabout__facts unverändert mit (unten definiert);
+   sie ist nicht an .pabout gebunden und trägt hier dasselbe Raster. */
+.aboutbox{display:none;padding:.25rem .25rem 0}
+.aboutbox.open{display:block}
+.aboutbox__p{margin:0 0 .875rem;font-size:.8125rem;line-height:1.55;
+  color:var(--muted)}
+.aboutbox__links{display:flex;flex-wrap:wrap;gap:.5rem .875rem;
+  font-size:.8125rem;font-weight:650}
+.aboutbox__links a{color:var(--accent);text-decoration:none;
+  display:inline-flex;align-items:center;gap:.375rem}
+.aboutbox__links i{font-size:.6875rem;opacity:.7}
+/* Der Pfeil der Zeile dreht sich beim Aufklappen — er verspricht damit
+   „hier geht etwas auf" und nicht „hier geht es weiter". */
+.srow--open .srow__go{transform:rotate(180deg)}
+.srow__go{transition:transform .2s}
+@media (prefers-reduced-motion:reduce){.srow__go{transition:none}}
 .pabout__facts{display:grid;grid-template-columns:auto 1fr;gap:.5rem .875rem;
   margin:0 0 1.25rem;font-size:.8125rem;align-items:baseline}
 .pabout__facts dt{color:var(--muted)}

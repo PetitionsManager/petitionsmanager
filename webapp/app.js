@@ -73,7 +73,6 @@
     favorites: null,      // Set der favorisierten Plattform-Keys
     signed: null,         // Set unterschriebener Petitionen (per URL)
     archived: null,       // Set archivierter Petitionen (per URL)
-    settingsOpen: true,   // Akkordion "Plattformen" auf-/zugeklappt
     openGroup: null,      // aktuell offene Listen-Gruppe (exklusiv); Key/"__fav"
     catFilter: null,      // aktiver Kategorie-Filter (Plattform-Detail)
     tagFilter: null,      // aktiver Schlagwort-Filter (Plattform-Detail)
@@ -602,6 +601,11 @@
          Am 29.7.26 gemessen: 21 verlinkte Bilder, zusammen 24,5 MB, im
          Schnitt 1,2 MB je Bild, das größte 4,9 MB. */
       descImages: true,
+      /* Plattformen-Ausklapper auf oder zu. Liegt in den prefs und nicht
+         mehr im state: nur so überlebt der Zustand den App-Start. Ein
+         Ansichtswechsel überstand er schon vorher (state bleibt im
+         Speicher), ein Neustart nicht. */
+      settingsOpen: true,
       wizardDone: false,
       name: "",
       photo: null,                // Data-URL des Profilbilds
@@ -655,6 +659,7 @@
           if (["auto", "light", "dark"].indexOf(o.accentInk) !== -1)
             p.accentInk = o.accentInk;
           if (typeof o.descImages === "boolean") p.descImages = o.descImages;
+          if (typeof o.settingsOpen === "boolean") p.settingsOpen = o.settingsOpen;
           if (o.wizardDone) p.wizardDone = true;
           if (typeof o.name === "string") p.name = o.name;
           if (typeof o.photo === "string") p.photo = o.photo;
@@ -999,21 +1004,37 @@
       var mLive = r[0], mEigen = r[1];
       if (!mLive) {
         state.baseAuto = "bundled";
-        state.baseWhy = mEigen
-          ? T("settings.whyLiveUnreachable", "Live-Daten nicht erreichbar")
-          : T("settings.whyNoConnection", "Keine Verbindung");
+        state.baseWhy = mEigen ? "settings.whyLiveUnreachable"
+                               : "settings.whyNoConnection";
         return;
       }
       if (mEigen && manifestStamp(mEigen) > manifestStamp(mLive)) {
         state.baseAuto = "bundled";
-        state.baseWhy = T("settings.whyBundledNewer",
-                          "Mitgelieferte Daten sind neuer");
+        state.baseWhy = "settings.whyBundledNewer";
         return;
       }
       state.base = LIVE_BASE;
       state.baseAuto = "live";
-      state.baseWhy = T("settings.whyLive", "Tagesaktuell von GitHub Pages");
+      state.baseWhy = "settings.whyLive";
     });
+  }
+
+  /* ⚠️ state.baseWhy hält seit 12.8.2026 den SCHLÜSSEL, nicht den fertigen
+     Text. Vorher stand dort das Ergebnis von T(...), und resolveBase() läuft
+     genau einmal beim Start: nach einem Sprachwechsel blieb die Begründung in
+     der alten Sprache stehen. Sichtbar wurde das erst, als „Über die App" sie
+     anzeigte — der Datenquellen-Umschalter, der sie sonst zeigt, ist
+     ausgeblendet (ZEIGE.datenquelle). Die Rückfalltexte stehen hier an einer
+     Stelle, damit sie nicht an jeder Fundstelle abweichen können. */
+  var BASE_WHY_FALLBACK = {
+    "settings.whyLiveUnreachable": "Live-Daten nicht erreichbar",
+    "settings.whyNoConnection":    "Keine Verbindung",
+    "settings.whyBundledNewer":    "Mitgelieferte Daten sind neuer",
+    "settings.whyLive":            "Tagesaktuell von GitHub Pages"
+  };
+  function baseWhyText() {
+    if (!state.baseWhy) return "";
+    return T(state.baseWhy, BASE_WHY_FALLBACK[state.baseWhy] || "");
   }
   /* Quelle gewechselt: alles Geladene verwerfen und neu auflösen. textChunks
      MUSS mit weg, sonst behält die App die Volltexte der alten Quelle — das
@@ -1207,6 +1228,12 @@
             '<i class="fa-solid fa-star"></i></span>'));
           grid.appendChild(favCard);
         });
+      /* ⚠️ Hier stand kurzzeitig eine Bento-Logik, die Karten mit langem Namen
+         oder „+N neu"-Abzeichen über beide Spalten legte, damit neben ihnen
+         keine halbleere Kachel steht. Vom Nutzer am 12.8.2026 verworfen
+         („kein Bento, mache alle Kacheln gleich groß") — die Gleichheit
+         besorgt jetzt grid-auto-rows:1fr in layouts.css, ganz ohne Sonderfälle
+         beim Bauen. */
       live.filter(function (p) { return !isFav(p.key); })
         .forEach(function (p) {
           var normCard = platCard(p, "");
@@ -1767,8 +1794,9 @@
         esc(fill(T("liste.alsoIn", "Liegt auch auf {sprachen} vor"),
                  { sprachen: weitere.map(function (c) {
                      return langInfo(c).name; }).join(", ") })) + '">' +
-        weitere.map(function (c) { return langInfo(c).flag; }).join("") +
-        "</span>"
+        weitere.map(function (c) {
+          return '<span class="flag">' + langInfo(c).flag + "</span>";
+        }).join("") + "</span>"
       : "";
     var newN = p["new"] || 0;
     var newLabel = newN > 0
@@ -3949,6 +3977,34 @@
   function setSection(label) {
     return el('<div class="sect">' + esc(label) + "</div>");
   }
+
+  /* Beschriftung mit Info-Symbol, Erklärtext erst auf Antippen (12.8.2026).
+     Gedacht für LANGE Erklärungen: die zum Layout nahm drei Zeilen ein und
+     schob die Farbwahl aus dem Bild. Kurze Hinweise („Automatisch folgt der
+     Einstellung deines Geräts") bleiben bewusst sichtbar — ein Symbol, hinter
+     dem ein Halbsatz steckt, ist mehr Arbeit als Ersparnis.
+
+     ⚠️ Antippen, nicht Überfahren: `title` bzw. :hover gibt es auf dem Telefon
+     nicht, und die App ist zuerst eine Telefon-App.
+
+     Liefert Beschriftung und Text GETRENNT zurück, weil der Text unter das
+     Bedienelement gehört und nicht zwischen Beschriftung und Schalter — die
+     Lesefolge Beschriftung → Schalter → Erklärung bleibt so, wie sie war. */
+  function lblMitInfo(label, text) {
+    var lbl = el('<div class="srow__lbl lblinfo"><span>' + esc(label) + "</span></div>");
+    var knopf = el('<button class="lblinfo__b" type="button" aria-expanded="false"' +
+      ' aria-label="' + esc(T("settings.infoShow", "Erklärung anzeigen")) + '">' +
+      '<i class="fa-solid fa-circle-info"></i></button>');
+    var note = el('<div class="srow__note lblinfo__t">' + esc(text) + "</div>");
+    knopf.addEventListener("click", function () {
+      var auf = !note.classList.contains("open");
+      note.classList.toggle("open", auf);
+      knopf.classList.toggle("on", auf);
+      knopf.setAttribute("aria-expanded", auf ? "true" : "false");
+    });
+    lbl.appendChild(knopf);
+    return { lbl: lbl, note: note };
+  }
   // Eine Zeile im Listen-Layout: Icon, Titel, Untertitel, rechts ein Element.
   function setRow(icon, title, sub, opts) {
     opts = opts || {};
@@ -4000,9 +4056,14 @@
            wäre doppelt. Ohne diese Abfrage entstünde `<i class="fa-solid ">`
            — ein leeres Icon-Element, das je nach Schriftstand einen
            Platzhalter oder eine Lücke zeichnet. */
+        /* it[3] ist eine FLAGGE. Sie steht in einem eigenen <span class="flag">
+           und nicht im Beschriftungstext, weil sie sonst als nacktes Emoji
+           erschiene — quer statt rund (Nutzerwunsch 12.8.2026: „Flaggen
+           überall als Kreis"). Der Text selbst bleibt escaped. */
         var b = el('<button class="seg__b' +
           (current === it[0] ? " on" : "") + '" type="button">' +
           (it[2] ? '<i class="fa-solid ' + it[2] + '"></i> ' : "") +
+          (it[3] ? '<span class="flag">' + it[3] + "</span> " : "") +
           esc(it[1]) + "</button>");
         b.addEventListener("click", function () {
           pick(it[0]);
@@ -4028,7 +4089,8 @@
     content.appendChild(el('<div class="srow__lbl">' +
       esc(T("settings.langLabel", "Sprache")) + "</div>"));
     content.appendChild(segControl(T("settings.langLabel", "Sprache"),
-      SPRACHEN.map(function (s) { return [s.code, s.flagge + " " + s.name, ""]; }),
+      // Flagge als eigener Platz (it[3]), damit sie rund beschnitten wird.
+      SPRACHEN.map(function (s) { return [s.code, s.name, "", s.flagge]; }),
       state.prefs.lang || STANDARDSPRACHE,
       function (v) {
         state.prefs.lang = v; savePrefs(); applyLayout(); render();
@@ -4050,17 +4112,32 @@
       esc(T("settings.darkModeHint",
             "„Automatisch“ folgt der Einstellung deines Geräts.")) + "</div>"));
 
-    content.appendChild(el('<div class="srow__lbl">' +
-      esc(T("settings.layoutLabel", "Layout")) + "</div>"));
+    /* Blendet die Akzent-Einstellungen ein oder aus. Steht als Deklaration
+       hier oben, damit der Layout-Schalter sie aufrufen kann, obwohl der
+       Block selbst erst weiter unten gebaut wird (Funktionsdeklarationen
+       werden hochgezogen, die Variable ist beim KLICK längst gesetzt). */
+    function akzentSichtbar() {
+      akzentBox.hidden = state.prefs.layout !== "magazin";
+    }
+
+    /* Die Layout-Erklärung steckt hinter dem Info-Symbol (Nutzerwunsch
+       12.8.2026). Sie ist der mit Abstand längste Hinweis der Seite und stand
+       dauerhaft zwischen Layout-Schalter und Farbwahl. */
+    var layoutLbl = lblMitInfo(T("settings.layoutLabel", "Layout"),
+      T("settings.layoutHint",
+        "Ändert nur das Aussehen der Listen, nicht die Inhalte."));
+    content.appendChild(layoutLbl.lbl);
     content.appendChild(segControl(T("settings.layoutLabel", "Layout"),
       [["relief", T("settings.layoutRelief", "Relief"), "fa-cube"],
        ["magazin", T("settings.layoutMag", "Magazin"), "fa-image"]],
       state.prefs.layout,
-      function (v) { state.prefs.layout = v; savePrefs(); applyLayout(); }));
-    content.appendChild(el('<div class="srow__note">' +
-      esc(T("settings.layoutHint",
-            "Ändert nur das Aussehen der Listen, nicht die Inhalte.")) +
-      "</div>"));
+      function (v) {
+        state.prefs.layout = v; savePrefs(); applyLayout();
+        // Akzentwahl gibt es nur im Magazin — sofort mitziehen, nicht erst
+        // beim nächsten Betreten der Seite.
+        akzentSichtbar();
+      }));
+    content.appendChild(layoutLbl.note);
 
     /* Akzentfarbe des Magazins (7.8.26). Immer sichtbar, auch in Relief:
        die Seite wird beim Layout-Umschalten NICHT neu gezeichnet (pick()
@@ -4100,7 +4177,22 @@
       ACCENTS.push([k, p.color, platformName(k) || k,
                     relLum(p.color) > 0.2046]);
     });
-    content.appendChild(el('<div class="srow__lbl">' +
+    /* ⚠️ Akzentfarbe und Akzent-Schriftfarbe wirken NUR im Magazin — alle 36
+       [data-accent]-Regeln in layouts.css hängen unter
+       :root[data-layout="magazin"], und in Relief ändert ein anderer Akzent
+       nachweislich nichts (am 12.8.2026 gemessen: --accent bleibt #4bbfa4,
+       --mz-accent ist nicht einmal gesetzt). Deshalb sind sie in Relief ganz
+       ausgeblendet (Nutzerwunsch 12.8.2026) statt nur mit einem Hinweis
+       versehen.
+
+       ⚠️⚠️ Hier stand vorher „Immer sichtbar, auch in Relief: die Seite wird
+       beim Layout-Umschalten NICHT neu gezeichnet, eine erst-im-Magazin-Fassung
+       erschiene also nie." Das Argument war richtig — deshalb blendet der
+       Layout-Schalter diesen Block jetzt ausdrücklich um (akzentSichtbar()).
+       Bewusst per hidden statt per Neuzeichnen: renderEinstellungen() würde
+       den Scrollstand und jede offene Fläche mitreißen. */
+    var akzentBox = el('<div class="akzentbox"></div>');
+    akzentBox.appendChild(el('<div class="srow__lbl">' +
       esc(T("settings.accentLabel", "Akzentfarbe")) + "</div>"));
     /* EINE Reihe mit allen Farben, darunter die Schriftfarbe zur freien
        Wahl (Nutzerwunsch 7.8.26 — vorher zwei benannte Gruppen mit
@@ -4122,19 +4214,21 @@
       });
       acbar.appendChild(b);
     });
-    content.appendChild(acbar);
+    akzentBox.appendChild(acbar);
     /* Ueberschrift ueber der Schriftfarbe (8.8.2026, Nutzerwunsch). segControl
        verwendet sein erstes Argument ausschliesslich als aria-label und
        zeichnet es NICHT — sichtbar wird es erst durch dieses srow__lbl,
        dieselbe Bauform wie „Akzentfarbe" ein paar Zeilen darueber. */
-    content.appendChild(el('<div class="srow__lbl">' +
+    akzentBox.appendChild(el('<div class="srow__lbl">' +
       esc(T("settings.accentInkLabel", "Akzent-Schriftfarbe")) + "</div>"));
-    content.appendChild(segControl(T("settings.accentInkLabel", "Schrift"),
+    akzentBox.appendChild(segControl(T("settings.accentInkLabel", "Schrift"),
       [["auto", T("settings.accentInkAuto", "Automatisch"), "fa-wand-magic-sparkles"],
        ["light", T("settings.accentInkLight", "Hell"), "fa-sun"],
        ["dark", T("settings.accentInkDark", "Dunkel"), "fa-moon"]],
       state.prefs.accentInk || "auto",
       function (v) { state.prefs.accentInk = v; savePrefs(); applyLayout(); }));
+    content.appendChild(akzentBox);
+    akzentSichtbar();
 
     /* WARUM ES DIESE OPTION BRAUCHT (am 29.7.26 nachgemessen): die Plattformen
        setzen unverkleinerte Pressebilder in den Aufruf-Text. 35 abrufbare
@@ -4188,10 +4282,23 @@
       render();
       window.scrollTo(0, y);
     });
-    content.appendChild(imgRow);
+    /* ⚠️ imgRow wird hier NICHT angehängt, sondern weiter unten unter „Daten"
+       (Nutzerentscheidung 12.8.2026). Die Zeile stand unter „Darstellung",
+       ihr eigener Erklärtext argumentiert aber fast nur mit Verbrauch:
+       „setzt eine Internetverbindung voraus und verbraucht Datenvolumen —
+       einzelne Bilder sind mehrere Megabyte groß". Das ist keine Frage des
+       Aussehens. Gebaut wird sie weiter hier, weil sie auf imgNote und
+       refreshImgNote() zugreift, die in diesem Abschnitt entstehen. */
 
-    /* Favoriten-Erklärung: steht direkt über der Plattform-Liste, also dort,
-       wo die Sterne sind. Wegklickbar wie der Wisch-Hinweis, mit demselben
+    /* ⚠️ KEINE eigene Abschnittsüberschrift „Plattformen" (12.8.2026): die
+       Kopfzeile des Akkordions sagt bereits „Plattformen 11/11 aktiv" und ist
+       damit selbst die Überschrift. Ein setSection() darüber hat das Wort
+       schlicht zweimal gezeigt — erst gebaut, vom Nutzer gesehen, wieder
+       entfernt. Das Akkordion trägt den Abschnitt allein.
+
+       Favoriten-Erklärung: wird hier GEBAUT, aber unten IN den Ausklapper
+       gehängt (Nutzerwunsch) — sie erklärt die Sterne, die erst in der Liste
+       darin auftauchen. Wegklickbar wie der Wisch-Hinweis, mit demselben
        Muster (eigener localStorage-Schlüssel, Element entfernen). */
     if (!LS.getItem("favTipDismissed")) {
       var favTip = el('<div class="favtip">' +
@@ -4209,12 +4316,13 @@
       favTip.querySelector(".hint-dismiss").addEventListener("click", function () {
         LS.setItem("favTipDismissed", "1"); favTip.remove();
       });
-      content.appendChild(favTip);
+      // Nicht hier anhängen — siehe unten, der Hinweis gehört IN den Ausklapper.
     }
 
-    // Akkordion "Plattformen"
+    // Akkordion "Plattformen" — die Abschnittsüberschrift dazu steht weiter
+    // oben, VOR der Favoriten-Erklärung.
     var acc = el('<section class="accordion' +
-      (state.settingsOpen ? " open" : "") + '"></section>');
+      (state.prefs.settingsOpen !== false ? " open" : "") + '"></section>');
     var head = el('<button class="acc-head"><span class="acc-title">' +
       esc(T("settings.platformsTitle", "Plattformen")) +
       '<span class="acc-count">' +
@@ -4222,12 +4330,20 @@
                { n: activeCount, total: live.length })) + "</span></span>" +
       '<i class="fa-solid fa-chevron-down acc-chev"></i></button>');
     head.addEventListener("click", function () {
-      state.settingsOpen = !state.settingsOpen;
-      acc.classList.toggle("open", state.settingsOpen);
+      state.prefs.settingsOpen = !state.prefs.settingsOpen;
+      savePrefs();          // merken, sonst ist er nach dem Neustart wieder auf
+      acc.classList.toggle("open", state.prefs.settingsOpen);
     });
     acc.appendChild(head);
 
     var body = el('<div class="acc-body"></div>');
+    /* Favoriten-Erklärung als ERSTES im Ausklapper, direkt unter
+       „Plattformen 11/11 aktiv" (Nutzerwunsch 12.8.2026). Sie erklärt die
+       Sterne, und die stehen an den Zeilen darunter — außerhalb des
+       Ausklappers erklärte sie etwas, das man gar nicht sieht.
+       `favTip` ist undefined, wenn der Hinweis schon weggeklickt wurde: `var`
+       wird auf Funktionsebene hochgezogen, die Zuweisung steht im if. */
+    if (favTip) body.appendChild(favTip);
 
     // "Alle deaktivieren / Alle aktivieren"-Button (wird UNTER die Liste gesetzt)
     var toggleAll = el('<button class="btn-secondary">' +
@@ -4334,7 +4450,14 @@
 
     body.appendChild(toggleAll);          // Button unter der Plattform-Liste
     acc.appendChild(body);
-    content.appendChild(acc);
+    /* Ganz nach oben (Nutzerwunsch 12.8.2026): WELCHE Plattformen man sieht,
+       ist die wichtigste Einstellung der App und stand bisher hinter Sprache,
+       Farbdesign und Layout. Eingefügt statt angehängt — der Block wird
+       weiterhin hier gebaut, weil er auf live/activeCount/allOn zugreift, die
+       oben in dieser Funktion entstehen. Ziel ist die Stelle direkt hinter dem
+       Einleitungsblock (.welcome), der als einziges per innerHTML gesetzt wird
+       und deshalb sicher das erste Kind ist. */
+    content.insertBefore(acc, content.firstElementChild.nextSibling);
 
     // ---- Benachrichtigungen --------------------------------------------------
     content.appendChild(setSection(
@@ -4343,6 +4466,8 @@
 
     // ---- Daten ---------------------------------------------------------------
     content.appendChild(setSection(T("settings.sections.data", "Daten")));
+    // Hierher gehört „Bilder in Beschreibungen laden" (siehe oben bei imgRow).
+    content.appendChild(imgRow);
 
     /* ---- Nach Updates suchen (8.8.2026) ---------------------------------
        Erscheint NUR, wenn window.AndroidUpdate existiert - also in der
@@ -4571,7 +4696,7 @@
                { aktiv: state.baseAuto === "live"
                           ? T("settings.srcLive", "Live")
                           : T("settings.srcBundled", "Mitgeliefert"),
-                 grund: state.baseWhy ? " – " + state.baseWhy : "" })
+                 grund: baseWhyText() ? " – " + baseWhyText() : "" })
         : state.baseSetting === BUNDLED_BASE
           ? T("settings.sourceNoteBundled",
               "Nur die Daten aus dem App-Paket. Sie veralten, bis eine neue " +
@@ -4597,10 +4722,33 @@
         } }));
     }   // Ende ZEIGE.datenquelle
 
-    content.appendChild(setRow("fa-circle-info",
+    /* Eigener Abschnitt (Nutzerentscheidung 12.8.2026). „Über die App" stand
+       unter „Daten", weil dort zufällig der letzte Platz frei war — mit dem
+       Datenstand der App hat es aber nichts zu tun. */
+    content.appendChild(setSection(T("settings.sections.about", "Über")));
+
+    /* „Über die App" klappt an Ort und Stelle auf. Bis zum 12.8.2026 war es ein
+       alert(); der WebView zeigt dafür seinen SYSTEM-Dialog, und der setzt
+       immer „Auf der Seite <adresse> steht:" darüber (Nutzerfrage: warum steht
+       das da?). Die Adresse ist nur der virtuelle Host des
+       WebViewAssetLoader — erklären lässt sich das dem Leser trotzdem nicht,
+       und für Angaben wie Fassung oder Datenstand war in einem Textkasten
+       ohnehin kein Platz.
+       ⚠️ Der Pfeil zeigt jetzt nach UNTEN und dreht sich beim Aufklappen: er
+       verspricht damit „hier geht etwas auf" statt „hier geht es weiter". */
+    var aboutBox = aboutPanel();
+    var aboutRow = setRow("fa-circle-info",
       T("settings.about", "Über die App"), null,
-      { end: '<i class="fa-solid fa-chevron-right srow__go"></i>',
-        onClick: showAbout }));
+      { end: '<i class="fa-solid fa-chevron-down srow__go"></i>',
+        onClick: function () {
+          var auf = !aboutBox.classList.contains("open");
+          aboutBox.classList.toggle("open", auf);
+          aboutRow.classList.toggle("srow--open", auf);
+          aboutRow.setAttribute("aria-expanded", auf ? "true" : "false");
+        } });
+    aboutRow.setAttribute("aria-expanded", "false");
+    content.appendChild(aboutRow);
+    content.appendChild(aboutBox);
 
     // ---- Zurücksetzen --------------------------------------------------------
     content.appendChild(setSection(T("settings.sections.reset", "Zurücksetzen")));
@@ -4999,11 +5147,104 @@
     tick();
   }
 
-  function showAbout() {
-    alert(T("about.title", "Über die App") + "\n\n" +
-      T("about.text", "PetitionsManager bündelt Petitionen mehrerer Plattformen.") +
-      "\n\n" + T("about.dataNote", "") +
-      "\n\n" + T("about.disclaimer", ""));
+  /* ---- „Über die App": die Fläche (12.8.2026) ------------------------------
+     Erklärtexte oben, darunter eine Fakten-Liste und Verweise.
+
+     ⚠️ Jede Angabe hat eine Rückfallebene, und zwar eine SICHTBARE: fehlt ein
+     Wert, steht dort die Web-Fassung bzw. „—". Die Alternative wäre eine Zeile,
+     die einfach fehlt — und dann sucht man den Fehler in der Anzeige statt in
+     der Quelle. Im Browser gibt es die Android-Brücke nicht, dort ist das der
+     Normalfall und keine Störung. */
+  function aboutFakten() {
+    var zeilen = [];
+
+    // Fassung: nur die Android-Fassung kennt eine. Der Browser sagt das auch so.
+    var v = "", b = "";
+    try {
+      if (window.AndroidApp && window.AndroidApp.fassung) {
+        v = window.AndroidApp.fassung() || "";
+        b = window.AndroidApp.bau ? (window.AndroidApp.bau() || "") : "";
+      }
+    } catch (e) { /* Brücke da, aber unwillig — dann gilt der Rückfall unten */ }
+    zeilen.push([T("about.factVersion", "Fassung"),
+      v ? (b ? fill(T("about.versionMitBau", "{v} (Bau {b})"), { v: v, b: b }) : v)
+        : T("about.versionWeb", "Web-Fassung")]);
+
+    /* Datenstand aus dem Manifest, in der Zeitzone des Geräts — die rechnet
+       toLocale… von selbst um, das Manifest trägt UTC.
+
+       ⚠️ Mit MONATSNAMEN, nicht in Ziffern: „8/12/2026" heißt in den USA der
+       12. August und fast überall sonst der 8. Dezember. Bei einer Angabe,
+       deren ganzer Zweck „wie alt sind die Daten?" ist, wäre das die
+       schlechteste Stelle zum Raten.
+       Die Sprache folgt der WAHL in den Einstellungen, nicht dem Gerät: die
+       Beschriftung daneben tut es auch, sonst stünde „Datenstand" neben einem
+       englischen Monat.
+       try/catch, weil dateStyle/timeStyle ein jüngeres Intl braucht — bei
+       minSdk 24 kann ein sehr alter WebView darunterliegen. Dann eben das
+       schlichte Format statt einer leeren Zeile. */
+    var m = state.manifest;
+    var stand = "—";
+    if (m && m.generated_at) {
+      var d = new Date(m.generated_at);
+      if (!isNaN(d.getTime())) {
+        var loc = (state.prefs.lang === "en") ? "en-GB" : "de-DE";
+        try {
+          stand = d.toLocaleString(loc, { dateStyle: "medium", timeStyle: "short" });
+        } catch (e) { stand = d.toLocaleString(loc); }
+      }
+    }
+    zeilen.push([T("about.factData", "Datenstand"), stand]);
+
+    // Umfang: zählt NUR die Live-Plattformen, so wie die Liste sie auch zeigt.
+    var pl = (m && m.platforms) ? m.platforms.filter(function (p) { return p.live; }) : [];
+    var summe = pl.reduce(function (s, p) { return s + (p.count || 0); }, 0);
+    zeilen.push([T("about.factScope", "Umfang"),
+      fill(T("about.scopeWert", "{n} Petitionen auf {m} Plattformen"),
+           { n: nf.format(summe), m: pl.length })]);
+
+    /* Datenquelle: state.baseAuto/baseWhy rechnet resolveBase() längst aus,
+       gezeigt wurde es bisher nirgends — außer im ausgeblendeten
+       Datenquellen-Umschalter (ZEIGE.datenquelle). */
+    var q = state.baseAuto === "live" ? T("about.quelleLive", "Tagesaktuell von GitHub Pages")
+          : state.baseAuto === "bundled" ? T("about.quellePaket", "Aus dem App-Paket")
+          : T("about.quelleFest", "Fest eingestellt");
+    /* Der Grund kommt NUR beim App-Paket dazu. Bei „live" ist er wortgleich
+       mit der Beschriftung — beide stammen aus derselben Wendung —, und die
+       Zeile las sich „Tagesaktuell von GitHub Pages (Tagesaktuell von GitHub
+       Pages)". Am Zustand entschieden und nicht am Textvergleich: der ginge
+       schief, sobald die Übersetzungen auseinanderlaufen. */
+    if (state.baseAuto === "bundled" && baseWhyText())
+      q += " (" + baseWhyText() + ")";
+    zeilen.push([T("about.factSource", "Datenquelle"), q]);
+
+    return '<dl class="pabout__facts">' + zeilen.map(function (z) {
+      return "<dt>" + esc(z[0]) + "</dt><dd>" + esc(z[1]) + "</dd>";
+    }).join("") + "</dl>";
+  }
+
+  function aboutPanel() {
+    var box = el('<div class="aboutbox"></div>');
+    [T("about.text", ""), T("about.dataNote", ""), T("about.disclaimer", "")]
+      .forEach(function (t) {
+        if (t) box.appendChild(el('<p class="aboutbox__p">' + esc(t) + "</p>"));
+      });
+    box.appendChild(el(aboutFakten()));
+    /* Verweise. Das Impressum steht bewusst NICHT hier, sondern bleibt im
+       Rechtsbereich unten auf der Liste — 1,5 KB Rechtstext ein zweites Mal
+       im Code wäre genau die Dopplung, vor der dort schon gewarnt wird. */
+    box.appendChild(el('<div class="aboutbox__links">' +
+      '<a href="' + esc(GITHUB_URL) + '" target="_blank" rel="noopener">' +
+      esc(T("about.linkCode", "Quellcode")) +
+      ' <i class="fa-solid fa-arrow-up-right-from-square"></i></a>' +
+      '<a href="' + esc(GITHUB_URL + "/blob/main/LICENSE") +
+      '" target="_blank" rel="noopener">' +
+      esc(T("about.linkLizenz", "Lizenz: GPL-3.0")) +
+      ' <i class="fa-solid fa-arrow-up-right-from-square"></i></a>' +
+      '<a href="mailto:' + esc(SUPPORT_MAIL) + '">' +
+      esc(T("about.linkKontakt", "Kontakt")) +
+      ' <i class="fa-solid fa-envelope"></i></a></div>'));
+    return box;
   }
 
   // ---- Rendering: Profil (Platzhalter) --------------------------------------
@@ -5600,8 +5841,11 @@
       var uiLang = el('<div class="wiz__langbar"></div>');
       SPRACHEN.forEach(function (s) {
         var an = (state.prefs.lang || STANDARDSPRACHE) === s.code;
+        // Flagge im eigenen .flag-Span, wie im Sprachumschalter der
+        // Einstellungen — sonst stünde hier ein quer laufendes Emoji.
         var b = el('<button class="seg__b' + (an ? " on" : "") +
-          '" type="button">' + esc(s.flagge + " " + s.name) + "</button>");
+          '" type="button"><span class="flag">' + s.flagge + "</span> " +
+          esc(s.name) + "</button>");
         b.addEventListener("click", function () {
           state.prefs.lang = s.code; savePrefs(); applyLayout(); renderWizard();
         });

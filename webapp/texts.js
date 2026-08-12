@@ -270,6 +270,7 @@ window.PM_TEXTS = {
         data: "Daten",
         notify: "Benachrichtigungen",
         appearance: "Darstellung",
+        about: "Über",
         reset: "Zurücksetzen"
       },
       /* Sprachwahl (8.8.2026). langLabel dient zugleich als Ueberschrift und
@@ -280,14 +281,15 @@ window.PM_TEXTS = {
       langHint: "Beim ersten Start folgt die App der Sprache deines Geräts.",
       themeLabel: "Farbdesign",
       darkMode: "Dunkles Design",
-      darkModeHint: "Wähle helles oder dunkles Design. „Automatisch“ folgt der Einstellung deines Geräts.",
+      darkModeHint: "Wähle helles oder dunkles Design. „Auto“ folgt der Einstellung deines Geräts.",
       themeLight: "Hell",
       themeDark: "Dunkel",
-      themeAuto: "Automatisch",
+      themeAuto: "Auto",
       layoutLabel: "Layout",
       layoutRelief: "Relief",
       layoutMag: "Magazin",
-      layoutHint: "Ändert nur das Aussehen, nicht die Inhalte. „Relief“ ist im Stil des Neumorphismus gebaut („Soft UI“): Karten, Knöpfe und Felder haben dieselbe Farbe wie der Hintergrund und werden nur durch Licht und Schatten geformt – angetippt oder eingeschaltet sinken sie ein. „Magazin“ ist im Stil moderner Nachrichten-Apps gehalten: weiße Karten auf hellem Grund, die Logos der Plattformen in ihren echten Markenfarben, eine Korallfarbe für alles Aktive und das Bild der Petition groß nach oben.",
+      infoShow: "Erklärung anzeigen",
+      layoutHint: "Ändert nur das Aussehen, nicht die Inhalte. „Relief“ ist im Stil des Neumorphismus gebaut („Soft UI“): Karten, Knöpfe und Felder haben dieselbe Farbe wie der Hintergrund und werden nur durch Licht und Schatten geformt – angetippt oder eingeschaltet sinken sie ein. „Magazin“ ist im Stil moderner Nachrichten-Apps gehalten: abgesetzte Karten mit weichem Schatten, die Logos der Plattformen in ihren echten Markenfarben, eine frei wählbare Akzentfarbe für alles Aktive und das Bild der Petition groß nach oben.",
       accentLabel: "Akzentfarbe",
       accentKoralle: "Koralle",
       /* Sichtbare Ueberschrift ueber der Schriftfarben-Auswahl (8.8.2026,
@@ -296,7 +298,7 @@ window.PM_TEXTS = {
          gesetzt, also nie angezeigt — die Auswahl stand ueberschriftenlos
          unter den Farbknoepfen. */
       accentInkLabel: "Akzent-Schriftfarbe",
-      accentInkAuto: "Automatisch",
+      accentInkAuto: "Auto",
       accentInkLight: "Hell",
       accentInkDark: "Dunkel",
       autoDark: "Systemeinstellung folgen",
@@ -463,7 +465,23 @@ window.PM_TEXTS = {
       title: "Über die App",
       text: "PetitionsManager bündelt Petitionen von 11 unabhängigen Plattformen an einem Ort. Du kannst filtern, suchen, Petitionen als unterzeichnet markieren und archivieren. Die App ist kostenlos, enthält keine Werbung und speichert alle deine Daten ausschließlich lokal auf deinem Gerät — es gibt kein Konto und keinen Server.",
       dataNote: "Die Petitionsdaten werden einmal täglich automatisch von den jeweiligen Plattformen abgeglichen und stehen danach offline zur Verfügung.",
-      disclaimer: "Der PetitionsManager ist ein unabhängiges Werkzeug und gehört zu keiner der gelisteten Plattformen. Petitionen werden ausschließlich auf der jeweiligen Plattform selbst unterzeichnet — die App übermittelt keine Unterschriften und handelt nicht in deinem Namen."
+      disclaimer: "Der PetitionsManager ist ein unabhängiges Werkzeug und gehört zu keiner der gelisteten Plattformen. Petitionen werden ausschließlich auf der jeweiligen Plattform selbst unterzeichnet — die App übermittelt keine Unterschriften und handelt nicht in deinem Namen.",
+      /* Fakten-Liste (12.8.2026). „Bau" ist der versionCode: er zaehlt mit
+         jedem Bau-Lauf hoch und unterscheidet zwei APKs, die dieselbe Fassung
+         tragen. */
+      factVersion: "Fassung",
+      versionMitBau: "{v} (Bau {b})",
+      versionWeb: "Web-Fassung",
+      factData: "Datenstand",
+      factScope: "Umfang",
+      scopeWert: "{n} Petitionen auf {m} Plattformen",
+      factSource: "Datenquelle",
+      quelleLive: "Tagesaktuell von GitHub Pages",
+      quellePaket: "Aus dem App-Paket",
+      quelleFest: "Fest eingestellt",
+      linkCode: "Quellcode",
+      linkLizenz: "Lizenz: GPL-3.0",
+      linkKontakt: "Kontakt"
     },
 
     /* ---- Am 8.8.2026 aus app.js herausgezogen -------------------------------
@@ -836,6 +854,7 @@ window.PM_TEXTS = {
         data: "Data",
         notify: "Notifications",
         appearance: "Appearance",
+        about: "About",
         reset: "Reset"
       },
       /* Language picker (8 Aug 2026). langLabel doubles as heading and as the
@@ -845,14 +864,15 @@ window.PM_TEXTS = {
       langHint: "On first launch the app follows your device language.",
       themeLabel: "Color scheme",
       darkMode: "Dark theme",
-      darkModeHint: "Choose a light or dark theme. “Automatic” follows your device setting.",
+      darkModeHint: "Choose a light or dark theme. “Auto” follows your device setting.",
       themeLight: "Light",
       themeDark: "Dark",
-      themeAuto: "Automatic",
+      themeAuto: "Auto",
       layoutLabel: "Layout",
       layoutRelief: "Relief",
       layoutMag: "Magazine",
-      layoutHint: "Changes only the look, not the content. “Relief” is built in the neumorphism style (“soft UI”): cards, buttons and fields have the same color as the background and are shaped by light and shadow alone – tapped or switched on, they sink in. “Magazine” follows the style of modern news apps: white cards on a light background, the platform logos in their real brand colors, a coral color for everything active, and the petition image large at the top.",
+      infoShow: "Show explanation",
+      layoutHint: "Changes only the look, not the content. “Relief” is built in the neumorphism style (“soft UI”): cards, buttons and fields have the same color as the background and are shaped by light and shadow alone – tapped or switched on, they sink in. “Magazine” follows the style of modern news apps: cards set off with a soft shadow, the platform logos in their real brand colors, an accent color of your choice for everything active, and the petition image large at the top.",
       accentLabel: "Accent color",
       accentKoralle: "Coral",
       /* Visible heading above the text-color choice (8 Aug 2026, the user
@@ -861,7 +881,7 @@ window.PM_TEXTS = {
          it was never displayed — the choice sat below the color buttons
          with no heading at all. */
       accentInkLabel: "Accent text color",
-      accentInkAuto: "Automatic",
+      accentInkAuto: "Auto",
       accentInkLight: "Light",
       accentInkDark: "Dark",
       autoDark: "Follow system setting",
@@ -1015,7 +1035,20 @@ window.PM_TEXTS = {
       title: "About the app",
       text: "PetitionsManager brings together petitions from 11 independent platforms in one place. You can filter, search, mark petitions as signed and archive them. The app is free, contains no advertising and stores all your data locally on your device only — there is no account and no server.",
       dataNote: "The petition data is synchronized automatically once a day with the respective platforms and is available offline afterwards.",
-      disclaimer: "PetitionsManager is an independent tool and does not belong to any of the platforms listed. Petitions are signed exclusively on the respective platform itself — the app does not transmit any signatures and does not act on your behalf."
+      disclaimer: "PetitionsManager is an independent tool and does not belong to any of the platforms listed. Petitions are signed exclusively on the respective platform itself — the app does not transmit any signatures and does not act on your behalf.",
+      factVersion: "Version",
+      versionMitBau: "{v} (build {b})",
+      versionWeb: "Web version",
+      factData: "Data as of",
+      factScope: "Scope",
+      scopeWert: "{n} petitions across {m} platforms",
+      factSource: "Data source",
+      quelleLive: "Updated daily from GitHub Pages",
+      quellePaket: "From the app package",
+      quelleFest: "Fixed setting",
+      linkCode: "Source code",
+      linkLizenz: "License: GPL-3.0",
+      linkKontakt: "Contact"
     },
 
     /* ---- Pulled out of app.js on 8 Aug 2026 ---------------------------------

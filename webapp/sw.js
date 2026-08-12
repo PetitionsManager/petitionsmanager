@@ -812,7 +812,32 @@
       Telefon weiter das alte app.js aus dem Shell-Cache, die Funktion fehlte,
       und die App beendete sich wie bisher ohne Nachfrage.
       (app.js, style.css, texts.js) */
-var CACHE = "pm-cache-v49";
+/* v50 — 12.8.2026: „Über die App" ist keine alert()-Meldung mehr, sondern eine
+      Fläche in den Einstellungen (.aboutbox). Damit verschwindet der Kopf
+      „Auf der Seite <adresse> steht:", den Androids System-Dialog immer
+      voranstellt — die Adresse ist nur der virtuelle Host des
+      WebViewAssetLoader, erklären lässt sie sich dem Leser trotzdem nicht.
+      Neu darin: Fassung samt Baunummer (aus der AppBridge, die im Gegensatz
+      zur UpdateBridge in JEDER Fassung angemeldet ist), Datenstand, Umfang,
+      Datenquelle und Verweise auf Quellcode, Lizenz und Kontakt.
+      ⚠️ Mitgefixt: state.baseWhy hielt den fertigen ÜBERSETZTEN Text, und
+      resolveBase() läuft nur beim Start — nach einem Sprachwechsel blieb die
+      Begründung in der alten Sprache stehen. Jetzt steht dort der Schlüssel.
+      Sichtbar wurde das erst, weil die neue Fläche sie anzeigt.
+      Dazu zwei Aufräumarbeiten in „Darstellung": die dreizeilige
+      Layout-Erklärung steckt hinter einem Info-Symbol an der Überschrift
+      (.lblinfo, Antippen statt Überfahren — auf dem Telefon gibt es kein
+      :hover), und Akzentfarbe samt Akzent-Schriftfarbe sind in Relief ganz
+      ausgeblendet. Sie wirken dort nachweislich nicht: alle [data-accent]-
+      Regeln hängen unter [data-layout="magazin"]. Der Layout-Schalter blendet
+      den Block sofort um, ohne die Seite neu zu zeichnen.
+      Und: Flaggen sind jetzt ÜBERALL runde .flag-Kreise. Drei Stellen gaben
+      sie noch als nacktes Emoji aus (Sprachumschalter in den Einstellungen,
+      Sprachwahl auf dem Begrüßungsbildschirm, Zweitsprachen an der Kachel);
+      segControl hat dafür einen eigenen Flaggen-Platz bekommen, weil die
+      Beschriftung escaped wird. Nachgemessen: null eckige Flaggen mehr.
+      (app.js, style.css, texts.js) */
+var CACHE = "pm-cache-v50";
 /* Versionsunabhängig – überlebt das Hochzählen von CACHE. Diese Zahl sollte ab
    jetzt NICHT mehr steigen: seit die Pakete eine Inhaltskennung tragen ("?v=",
    siehe oben) holt sich jedes geänderte Paket von selbst neu. Ein Sprung wäre

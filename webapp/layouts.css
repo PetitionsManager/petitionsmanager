@@ -1302,6 +1302,29 @@
 :root[data-layout="magazin"][data-accent-ink="dark"]{
   --mz-on-accent:#1e1c18}
 
+/* Häkchen und Unterstrich der Wortmarke folgen im Magazin der gewählten
+   Akzent-Schriftfarbe (Nutzerwunsch 12.8.2026: „oder zumindest mit
+   Akzentschrift auf hell auch hell werden"). Sie standen auf --on-accent,
+   und das ist der GEPRÜFTE Festwert — die Einstellung ging an ihnen vorbei.
+
+   ⚠️ Nur im Magazin, ausdrücklich so entschieden. In Relief bleibt es bei
+   --on-accent: dort trägt das Häkchen 7,91:1 gegen das Türkis und ist hell
+   wie dunkel gut lesbar. Weiß käme dort auf 2,26:1 — genau die Zahl, mit der
+   theme.css begründet, warum auf Akzentflächen dunkler Text steht.
+
+   ⚠️⚠️ Die Regel greift NUR bei ausdrücklichem Hell oder Dunkel, nicht bei
+   „Automatisch". Ein erster Versuch ohne diese Eingrenzung hat das Häkchen
+   auch im Normalfall auf --mz-on-accent gezogen — und das ist bei Koralle
+   weiß: der Kontrast fiel von 4,96:1 auf 3,61:1, ohne dass jemand etwas
+   umgestellt hätte. Gemessen, nicht überlegt. „Automatisch" bleibt deshalb
+   auf dem geprüften --on-accent. */
+[data-layout="magazin"][data-accent-ink="light"] .bm-check,
+[data-layout="magazin"][data-accent-ink="dark"] .bm-check{
+  stroke:var(--mz-on-accent)}
+[data-layout="magazin"][data-accent-ink="light"] .bm-line,
+[data-layout="magazin"][data-accent-ink="dark"] .bm-line{
+  fill:var(--mz-on-accent)}
+
 /* ---- Kopf und Seitentitel: ruhig, freundlich, keine Versalien ---- */
 [data-layout="magazin"] .pagekick{text-transform:none;letter-spacing:0;
   font-size:.8125rem;font-weight:650;color:var(--muted)}
@@ -1342,6 +1365,36 @@
 [data-layout="magazin"] .accordion.open>.acc-body--plats{display:grid}
 [data-layout="magazin"] .acc-body--plats{
   grid-template-columns:1fr 1fr;gap:1rem;padding:0 0 .5rem}
+/* Schmale Geräte: EINE Spalte statt 50/50 (Nutzerwunsch 12.8.2026). Bei 360 px
+   blieben je Kachel nur 154 px, in die ein Name wie „Bundestag e-Petitions"
+   dreizeilig umbrach und das Logo neben dem Flaggenkreis kaum noch Platz
+   hatte.
+   ⚠️ In rem statt px, obwohl 420 px genannt war: 26.25rem sind bei der
+   Standardschrift genau diese 420 px, wandern aber mit, wenn jemand die
+   Schrift seines Geräts größer stellt — dann wird es früher einspaltig, und
+   genau dann braucht man es. */
+@media (max-width:26.25rem){
+  [data-layout="magazin"] .acc-body--plats{grid-template-columns:1fr}
+  /* Bei voller Breite ist Platz für den Untertitel — der ist im Bento sonst
+     ausgeblendet und nur bei Favoriten zu sehen (Nutzerwunsch 12.8.2026).
+     Bewusst NUR hier: zweispaltig bleiben je Kachel 189 px, dort bräche
+     „Klimabewegung gegen fossile Brennstoffe" über drei Zeilen um und triebe
+     alle Kacheln in die Höhe — grid-auto-rows:1fr gibt die Höhe an jede
+     weiter.
+     ⚠️ Der Selektor ist absichtlich lang: das display:none für .plat__tag
+     steht weiter unten in der Datei und gewinnt sonst bei gleicher
+     Spezifität. */
+  [data-layout="magazin"] .mz-platgrid .plat .plat__body .plat__tag{
+    display:block}
+
+  /* ⚠️⚠️ Und der Grund, warum der Titel trotz voller Kachelbreite umbrach:
+     .plat setzt align-items:flex-start, also schrumpft JEDES Kind auf seine
+     Inhaltsbreite. In einer 324 px breiten Kachel war .plat__body nur 173 px
+     — dem Titel blieben davon 141 px, und „Bundestag e-Petitions" braucht
+     173 px. Die Kachel war breit, der Textkasten darin nicht.
+     align-self:stretch gibt ihm die volle Breite zurück. */
+  [data-layout="magazin"] .mz-platgrid .plat .plat__body{align-self:stretch}
+}
 [data-layout="magazin"] .acc-body--plats .plat{
   position:relative;display:flex;flex-direction:column;align-items:flex-start;
   justify-content:flex-start;gap:.375rem;margin:0;min-height:9.5rem;
@@ -1420,23 +1473,56 @@
    über beide Spalten (plat--wide kommt aus app.js) und tragen Stern +
    Pfeil; normale Kacheln tragen statt Pfeil die Kreisflagge ihrer
    Sprache. */
-[data-layout="magazin"] .mz-platgrid{display:grid;margin-bottom:.5rem}
+/* ALLE Kacheln gleich groß (Nutzerwunsch 12.8.2026: „kein Bento, mache alle
+   Kacheln gleich groß").
+
+   grid-auto-rows:1fr gibt jeder Reihe dieselbe Höhe — die der inhaltsreichsten
+   Kachel. Zusammen mit dem voreingestellten align-items:stretch ist damit jede
+   Kachel gleich hoch, über das ganze Raster hinweg. Vorher unterschieden sich
+   die Reihen (gemessen bei 349 px: 152, 158, 160 px), und in der jeweils
+   kürzeren Kachel blieben bis zu 40 px leer.
+
+   ⚠️ Bewusst 1fr und KEINE feste Höhe in rem: feste Zeilenhöhen hatte Magazin
+   3.0 abgeschafft, weil der Text hineinlief. 1fr rechnet die Höhe aus dem
+   Inhalt und wächst mit, wenn ein Name umbricht oder die Schrift größer
+   gestellt wird.
+
+   grid-auto-flow:dense bleibt für die Favoriten: die laufen über beide Spalten
+   und hinterlassen sonst eine leere Zelle, wenn sie nicht mehr neben die
+   vorige Kachel passen. */
+[data-layout="magazin"] .mz-platgrid{display:grid;grid-auto-flow:dense;
+  grid-auto-rows:1fr;margin-bottom:.5rem}
 [data-layout="magazin"] .mz-platgrid .plat__favstar{position:absolute;
   top:1.125rem;right:4.25rem;width:2.5rem;height:2.5rem;display:flex;
   align-items:center;justify-content:center;border-radius:999px;
   background:var(--mz-soft);color:var(--mz-ink-on-soft);
   font-size:.875rem}
+/* Die Flagge FÜLLT den Kreis, statt klein darin zu stehen (Nutzerwunsch
+   12.8.2026). Dasselbe Rezept wie .flag und .grp-ic in style.css: Emoji-
+   Flaggen sind quer (5:3), rund werden sie nur, indem ein Kreis sie
+   beschneidet — dafür muss das Zeichen GRÖSSER gesetzt werden als der Kreis
+   (3rem gegen 2.25rem, dasselbe Verhältnis 1:1,33 wie dort) und overflow
+   schneidet zu. Ohne das Übermaß blieben oben und unten Lücken und der
+   Hintergrund schaute durch.
+   background bleibt als Rückfallebene stehen: zeichnet ein Gerät die Flagge
+   nicht, ist dort ein Kreis und kein Loch. */
 [data-layout="magazin"] .mz-platgrid .plat__flag{position:absolute;
-  top:1.125rem;right:1.125rem;width:2.25rem;height:2.25rem;
+  top:1.125rem;right:1.125rem;width:1.5rem;height:1.5rem;
   display:flex;align-items:center;justify-content:center;
-  border-radius:999px;background:var(--mz-soft);font-size:1.0625rem;
-  line-height:1}
+  border-radius:50%;overflow:hidden;background:var(--mz-soft);
+  font-size:2rem;line-height:1}
 /* Stern + Pfeil brauchen zusammen 2×2.5rem + Fugen Platz nach rechts. */
 [data-layout="magazin"] .mz-platgrid .plat--fav .plat__name,
 [data-layout="magazin"] .mz-platgrid .plat--fav .plogo{
   max-width:calc(100% - 6.75rem)}
+/* Freihalten für den Flaggenkreis oben rechts. ⚠️ Die Zahl gehört zur Größe
+   von .plat__flag: 1.5rem Kreis + 0.5rem Fuge = 2rem. Vorher standen hier
+   2.75rem, passend zum damals 2.25rem großen Kreis — nach dem Verkleinern
+   blieb die alte Reserve stehen und verschenkte dem Titel 0.75rem
+   (Nutzerhinweis 12.8.2026: „Titel länger, da mehr Platz"). Wer den Kreis
+   wieder ändert, ändert auch diese Zeile. */
 [data-layout="magazin"] .mz-platgrid .plat:not(.plat--fav) .plat__name{
-  max-width:calc(100% - 2.75rem)}
+  max-width:calc(100% - 2rem)}
 /* Favoriten dürfen zeigen, was sie sind: Untertitel an + Logo größer. */
 [data-layout="magazin"] .mz-platgrid .plat--fav .plat__tag{display:block}
 [data-layout="magazin"] .mz-platgrid .plat--fav .plogo{--logo-h:3rem}
@@ -1817,11 +1903,22 @@ html[data-theme="dark"][data-layout="magazin"] .wplat.on{
   align-items:center;justify-content:center;padding:.5rem 0}
 [data-layout="magazin"] .tab span{display:none}
 [data-layout="magazin"] .tab i{background:none;color:var(--muted)}
-[data-layout="magazin"] .tab.active{flex:1.6;background:var(--mz-accent-deep);
+/* ⚠️ Alle drei Reiter gleich breit (flex:1), die Pille trägt NUR das Symbol.
+   Vorgeschichte: mit flex:1.6 war sie randvoll, mit flex:2 nahm sie 52 % der
+   Leiste — und weil nur der aktive Reiter beschriftet wird, sprang die Breite
+   beim Wechseln (bei „Liste" schmal, bei „Einstellungen" doppelt so breit).
+   Die Beschriftung ist damit ganz entfallen: sie war der einzige Grund für
+   beides, und welcher Reiter aktiv ist, sagt die Akzentfarbe deutlich genug.
+   Nebenbei hängt die Leiste jetzt an keiner Wortlänge mehr — „Einstellungen"
+   ist im Englischen kürzer, in anderen Sprachen könnte es länger sein. */
+[data-layout="magazin"] .tab.active{flex:1;background:var(--mz-accent-deep);
   color:var(--mz-on-accent);border-radius:999px;padding:.5625rem .5rem}
 [data-layout="magazin"] .tab.active i{background:none;color:var(--mz-on-accent)}
-[data-layout="magazin"] .tab.active span{display:inline;color:var(--mz-on-accent);
-  font-size:.8125rem;font-weight:700}
+/* Die Beschriftung bleibt auch beim aktiven Reiter aus — siehe oben. Die
+   Regel steht weiterhin hier (statt gelöscht), damit die Farbe stimmt, falls
+   sie jemand mit display:inline zurückholen will. */
+[data-layout="magazin"] .tab.active span{display:none;color:var(--mz-on-accent);
+  font-size:.75rem;font-weight:700}
 
 /* ---- Abstandsraster (aus Magazin 2.0 übernommen; Fluss trägt der
    layoutneutrale „Grundrhythmus" in style.css) ---- */
