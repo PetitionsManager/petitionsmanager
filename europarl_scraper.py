@@ -90,7 +90,20 @@ NUMBER_HREF_RE = re.compile(r"petitionNumber=(\d{4})%25?2F(\d{4})")
 # Deshalb: Komma überall optional, fünf Bindewörter. Und weil die nächste
 # Petition eine sechste Form mitbringen kann, FÄLLT parse_detail bei einem
 # Fehlschlag auf den vollen Titelsatz zurück statt ihn wegzuwerfen.
-HAUPTSPRACHE = "de"
+# ⚠️ 11.8.2026 zurück auf "en" (Nutzerentscheidung). Am 8.8. war auf "de"
+# umgestellt worden, weil das EU-Parlament in allen 24 Amtssprachen
+# veröffentlicht und der deutsche Abruf echtes Deutsch liefert. Fachlich
+# stimmte das; für die App war es die falsche Einordnung: Europarl ist dort
+# die einzige nicht-deutschsprachige Plattform, und mit "de" gab es im
+# Einrichtungs-Assistenten überhaupt keine englische Auswahl mehr — der
+# Schritt „In welchen Sprachen suchst du?" zeigte einen einzigen Chip.
+# Deutsch geht dabei NICHT verloren: es wandert nach rec["i18n"]["de"],
+# denselben Weg, den vorher Englisch genommen hat. Die Schleife unten
+# überspringt nur die Hauptsprache, sie ist richtungsblind.
+# ⚠️ LIST_URL bleibt auf /de/ — die Entdeckung liefert in beiden Sprachen
+# dieselbe MENGE (oben belegt), und der Filter ist ein LÄNDER-Filter
+# (countries=DE), kein Sprachfilter.
+HAUPTSPRACHE = "en"
 SPRACHEN = ("de", "en")
 
 SPRACHE = {
@@ -426,18 +439,24 @@ def check(fetcher):
 
 PLATFORM = Platform(
     key="europarl",
-    # Bis zum 8.8.2026 stand hier "en" mit der Begründung "PETI-Petitionstexte
-    # sind auf Englisch". Das stimmte nur für UNSEREN Abruf: das EU-Parlament
-    # veröffentlicht in allen 24 Amtssprachen, wir holten bloß /en/. Seit der
-    # Umstellung ist Deutsch die Hauptsprache, Englisch liegt in rec["i18n"].
-    language="de",
+    # 8.8.2026 auf "de", 11.8.2026 zurück auf "en" — Begründung bei
+    # HAUPTSPRACHE oben. Kurz: fachlich waren beide Werte vertretbar (das
+    # EU-Parlament veröffentlicht in allen 24 Amtssprachen), für die App ist
+    # "en" der richtige, weil die Sprache dort eine Auswahldimension ist und
+    # Europarl die einzige nicht-deutschsprachige Plattform stellt.
+    # ⚠️ Dieser Wert MUSS zu HAUPTSPRACHE passen: er landet als "language" im
+    # Manifest, und die App richtet Kachelgruppen, Flagge und die Sprachwahl
+    # im Einrichtungs-Assistenten danach aus. Ein Auseinanderlaufen führt zu
+    # einer Plattform, die als deutsch beschriftet ist und Englisch anzeigt —
+    # genau der Zustand, der live vom 8. bis 11.8.2026 sichtbar war.
+    language=HAUPTSPRACHE,
     openness=4,
     openness_note="Offen: offizielle Suche mit Länder-/Statusfilter, server-"
                   "gerendert; Eigenheiten (Load-more-Paginierung, doppelt kodierte "
                   "URLs) und keine öffentliche Unterstützerzahl.",
     name="Europäisches Parlament",
     eyebrow="EU-Parlament (PETI) · Petitionen aus Deutschland, offen zur Unterstützung",
-    source_url="https://www.europarl.europa.eu/petitions/de/home",
+    source_url=f"https://www.europarl.europa.eu/petitions/{HAUPTSPRACHE}/home",
     data_file=DATA_FILE,
     html_file=HTML_FILE,
     run=run,

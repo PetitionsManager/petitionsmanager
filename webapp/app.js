@@ -135,13 +135,17 @@
            sonst erschiene dieselbe Kachel zweimal.
 
        „Welche Sprachen BIETET diese Plattform?"   → platLanguages(), MEHRERE.
-           Danach filtert der Einrichtungs-Assistent. Wer nur Englisch
-           ausgewählt hat, soll europarl bekommen — dessen Petitionen liegen
-           englisch vor, auch wenn die Hauptsprache Deutsch ist.
+           Trägt die zweite Flagge an der Kachel („gibt es auch auf Englisch").
 
-     Vor dieser Trennung gab es nur die erste Frage, und als europarl von "en"
-     auf "de" umgestellt wurde, verschwand die Gruppe „Englischsprachige
-     Plattformen" ersatzlos — samt der Möglichkeit, danach zu filtern.
+     ⚠️ 11.8.2026 GEÄNDERT: der Einrichtungs-Assistent filtert NICHT mehr
+     danach, sondern nach p.language (siehe platMainLanguage weiter unten).
+     Hier stand vorher das Gegenteil, und es war für den 8.8.-Stand richtig:
+     damals war europarl deutsch mit englischer Übersetzung, und ohne
+     platLanguages() hätte man nach Englisch gar nicht filtern können.
+     Seit europarl wieder englisch ist und die Sprache eine eigene
+     Auswahldimension wird (künftig je Sprache ein eigener Plattform-Eintrag),
+     ist die Hauptsprache das richtige Kriterium — sonst stünden unter
+     „Englisch" sechs Plattformen, deren Petitionen deutsch sind.
 
      `languages` liefert publish.py aus den Daten (Hauptsprache zuerst); fehlt
      es (älteres Manifest), bleibt es bei der einen Sprache. */
@@ -149,6 +153,45 @@
     if (p && Array.isArray(p.languages) && p.languages.length)
       return p.languages;
     return [(p && p.language) || "de"];
+  }
+  // Die EINE Sprache einer Plattform — das Kriterium, nach dem der
+  // Einrichtungs-Assistent und die Einstellungen gliedern.
+  function platMainLanguage(p) { return (p && p.language) || "de"; }
+
+  /* ---- Sprachgruppe mit Flaggenkreis (11.8.2026) --------------------------
+     Gemeinsames Bauteil für Schritt 2 des Einrichtungs-Assistenten UND die
+     Plattformliste in den Einstellungen. Der Nutzer soll die Aufteilung dort
+     wiedererkennen — deshalb EINE Funktion und nicht zwei ähnliche Blöcke,
+     die beim nächsten Eingriff auseinanderlaufen.
+
+     Bewusst flacher als .accordion aus der Hauptliste: beide Einsatzorte
+     stecken schon in einem Rahmen (Overlay bzw. das Akkordion „Plattformen"),
+     ein zweiter Kasten ergäbe eine Schachtel in der Schachtel.
+
+     Die Flagge trägt die Gliederung, deshalb steht sie NUR in der Kopfzeile —
+     dieselbe Regel wie bei den Sprachgruppen der Hauptliste (siehe .flag in
+     style.css: „die Gruppenüberschrift zeigt sie einmal").
+
+     `offen` ist nur der Startzustand; geklappt wird danach ohne Neuzeichnen,
+     damit weder Auswahl noch Scrollstand springen. */
+  function langSection(code, anzahl, offen) {
+    var info = langInfo(code);
+    var sec = el('<section class="langsec' + (offen ? " open" : "") + '"></section>');
+    var kopf = el('<button class="langsec__h" type="button" aria-expanded="' +
+      (offen ? "true" : "false") + '">' +
+      '<span class="langsec__t"><span class="flag">' + info.flag + "</span>" +
+      esc(fill(T("lang.groupLabel", "{lang}sprachige Plattformen"),
+               { lang: info.name })) +
+      '<span class="langsec__n">' + anzahl + "</span></span>" +
+      '<i class="fa-solid fa-chevron-down langsec__c"></i></button>');
+    kopf.addEventListener("click", function () {
+      var jetzt = !sec.classList.contains("open");
+      sec.classList.toggle("open", jetzt);
+      kopf.setAttribute("aria-expanded", jetzt ? "true" : "false");
+    });
+    var body = el('<div class="langsec__b"></div>');
+    sec.appendChild(kopf); sec.appendChild(body);
+    return { sec: sec, body: body };
   }
 
   // ---- Texte & Plattform-Stammdaten ------------------------------------------
@@ -4197,8 +4240,40 @@
       renderEinstellungen();                         // neu zeichnen
     });
 
-    live.concat(state.manifest.platforms.filter(function (p) { return !p.live; }))
-        .forEach(function (p) {
+    /* ---- Nach Sprache gegliedert (Nutzerwunsch 11.8.2026) -----------------
+       „Schritt 2 soll sich von der Aufteilung wiedererkennbar in den
+       Einstellungen widerspiegeln." Also dieselbe Gliederung wie im
+       Einrichtungs-Assistenten: je Sprache eine Gruppe mit Flaggenkreis,
+       das Naheliegende offen, der Rest eingeklappt.
+
+       Was im Assistenten die GEWÄHLTEN Sprachen sind, sind hier die Sprachen
+       mit mindestens einer aktiven Plattform — die Entsprechung, die ohne
+       einen zusätzlichen gespeicherten Zustand auskommt. Wer nur deutsche
+       Plattformen aktiv hat, sieht die englische Gruppe also zugeklappt und
+       kommt trotzdem mit einem Tipp daran.
+
+       Plattformen „in Vorbereitung" (p.live === false) laufen in derselben
+       Gliederung mit; sie zählen nur nicht als aktiv, ihre Gruppe kann
+       dadurch zugeklappt starten. Aktuell gibt es keine. */
+    var alleP = live.concat(
+      state.manifest.platforms.filter(function (p) { return !p.live; }));
+    var sGruppen = {};
+    alleP.forEach(function (p) {
+      var c = platMainLanguage(p);
+      (sGruppen[c] = sGruppen[c] || []).push(p);
+    });
+    var sNachRang = function (a, b) {
+      return langRank(a) - langRank(b) || a.localeCompare(b); };
+    var hatAktive = function (c) {
+      return sGruppen[c].some(function (p) { return p.live && isEnabled(p.key); }); };
+    var sCodes = Object.keys(sGruppen).filter(hatAktive).sort(sNachRang)
+      .concat(Object.keys(sGruppen).filter(function (c) { return !hatAktive(c); })
+                .sort(sNachRang));
+
+    sCodes.forEach(function (code) {
+      var grp = langSection(code, sGruppen[code].length, hatAktive(code));
+      body.appendChild(grp.sec);
+      sGruppen[code].forEach(function (p) {
       var on = p.live && isEnabled(p.key);
       var finfo = langInfo(p.language || "de");
       var fav = p.live && isFav(p.key);
@@ -4207,8 +4282,10 @@
         (brand ? ' style="--brand:' + esc(brand) + '"' : "") + ">" +
         /* Logo NACH der Beschriftung. Das ist zugleich die bessere Lesefolge
            für Screenreader: erst der Name, dann „Logo <Name>". */
-        '<div class="opt__body"><div class="opt__name">' + esc(p.name) +
-          '<span class="flag">' + finfo.flag + '</span></div>' +
+        /* Keine Flagge mehr an der Zeile: die trägt jetzt die
+           Gruppenüberschrift, einmal statt elfmal — dieselbe Regel wie bei den
+           Sprachgruppen der Hauptliste (siehe .flag in style.css). */
+        '<div class="opt__body"><div class="opt__name">' + esc(p.name) + '</div>' +
         '<div class="opt__meta">' + esc(p.live
           ? fill(T("settings.platMeta", "{lang} · {n} Petitionen"),
                  { lang: finfo.name, n: nf.format(p.online) })
@@ -4251,7 +4328,8 @@
           : T("settings.allOn", "Alle aktivieren");
         allOn = (n === live.length);
       });
-      body.appendChild(opt);
+        grp.body.appendChild(opt);
+      });
     });
 
     body.appendChild(toggleAll);          // Button unter der Plattform-Liste
@@ -4593,15 +4671,37 @@
       go.disabled = !this.checked;
     });
     go.addEventListener("click", function () {
-      if (!window.confirm(T("reset.allWarnTitle",
-            "Das lässt sich nicht rückgängig machen.") + "\n\n" +
-            T("reset.allWarnText", "") + "\n\n" +
-            T("reset.allConfirmQuestion", "Wirklich alles löschen?"))) return;
-      wipeEverything();
-      box.classList.add("danger--done");
-      body.innerHTML = '<div class="danger__done"><i class="fa-solid fa-check"></i> ' +
-        esc(T("reset.doneToast", "Alle Daten wurden gelöscht.")) + "</div>";
-      setTimeout(function () { startWizard(); }, 900);
+      /* Eigener Dialog statt window.confirm — dieselbe Machart wie die
+         Beenden-Nachfrage (qboxFragen). window.confirm funktioniert im WebView
+         durchaus, zeigt aber die Herkunfts-URL und folgt der SYSTEM-Sprache,
+         nicht der in den Einstellungen gewählten.
+         ⚠️ Der Umbau macht aus einer synchronen Abfrage einen Rückruf: alles
+         nach der Bestätigung MUSS in onJa stehen. Ein `return` wie beim alten
+         `if (!confirm(...)) return;` gäbe es hier nicht mehr — es käme zu spät
+         und löschte trotzdem.
+         gefahr: true färbt den Knopf in die Warnfarbe; anders als beim Beenden
+         geht hier wirklich alles verloren. */
+      qboxFragen({
+        titel: T("reset.allWarnTitle", "Wirklich alles löschen?"),
+        /* Die Frage steht in der Überschrift, hier gehört die AUFZÄHLUNG hin —
+           was genau verloren geht. Der Systemdialog konnte beides nur
+           aneinandergeklebt in einem Textblock zeigen. */
+        text: T("reset.allWarnText",
+                "Dabei werden unwiderruflich gelöscht: deine Favoriten, alle " +
+                "als unterzeichnet markierten Petitionen, das Archiv, deine " +
+                "Plattform-Auswahl sowie Name und Profilbild. Die App startet " +
+                "anschließend neu wie beim ersten Mal."),
+        nein: T("reset.cancel", "Abbrechen"),
+        ja: T("reset.allConfirmBtn", "Endgültig löschen"),
+        gefahr: true,
+        onJa: function () {
+          wipeEverything();
+          box.classList.add("danger--done");
+          body.innerHTML = '<div class="danger__done"><i class="fa-solid fa-check"></i> ' +
+            esc(T("reset.doneToast", "Alle Daten wurden gelöscht.")) + "</div>";
+          setTimeout(function () { startWizard(); }, 900);
+        }
+      });
     });
     body.appendChild(chk);
     body.appendChild(go);
@@ -5338,16 +5438,37 @@
   // ---- Ersteinrichtung (Wizard) ----------------------------------------------
   // Drei Schritte beim ersten Start: Begrüßung → Sprachen → Plattformen.
   // Liegt als Overlay über der App, damit auch die Fußleiste verdeckt ist.
-  var wizardSel = { langs: null, plats: null };   // Auswahl während des Wizards
+  /* Auswahl während des Wizards.
+       langs   – die in Schritt 1 gewählten Sprachen
+       plats   – die angehakten Plattformen (das Ergebnis)
+       gesehen – Sprachen, deren Plattformen schon einmal vorausgewählt wurden
+       manuell – Plattformen, die der Nutzer SELBST an- oder abgetippt hat
+     `manuell` ist der Vorrang-Vermerk: nur damit lässt sich „vom Sprachwechsel
+     gesetzt" von „vom Nutzer entschieden" unterscheiden. Ohne ihn würde jeder
+     Sprachwechsel die Handauswahl überfahren — und im Ausklapper wäre keine
+     einzelne fremdsprachige Plattform dauerhaft mitzunehmen. */
+  var wizardSel = { langs: null, plats: null, gesehen: null, manuell: null };
 
+  /* ⚠️ 11.8.2026 umgestellt (Nutzerentscheidung): Schritt 1 fragt nach der
+     HAUPTSPRACHE einer Plattform, nicht mehr danach, welche Übersetzungen sie
+     mitbringt. Vorher stand hier platLanguages(); „Englisch" umfasste damit
+     sechs Plattformen, weil sechs englische Fassungen ihrer deutschen
+     Petitionen anbieten.
+
+     Der Grund für die Umstellung ist die geplante Richtung: Plattformen wie
+     Avaaz oder Change.org sollen künftig je Sprache EINEN eigenen Eintrag
+     bekommen (deutsch, englisch, später weitere). Sprache wird damit eine
+     Auswahldimension über Plattform-EINTRÄGE — und die Frage „welche Sprache
+     hat dieser Eintrag?" ist genau p.language. Übersetzungen bleiben davon
+     unberührt: platLanguages() lebt weiter und trägt die zweite Flagge an der
+     Kachel (siehe dort), nur die AUSWAHL hängt nicht mehr daran.
+
+     Heute ergibt das: Deutsch = zehn Plattformen, Englisch = Europarl.
+     platMainLanguage() steht oben bei platLanguages(), weil auch die
+     Einstellungen danach gliedern. */
   function wizardLanguages() {
     var seen = {};
-    // Angeboten wird jede Sprache, die IRGENDEINE Plattform liefert — nicht
-    // nur die Hauptsprachen. Sonst ließe sich nach Englisch gar nicht filtern,
-    // obwohl sieben Plattformen englische Texte mitbringen.
-    livePlatforms().forEach(function (p) {
-      platLanguages(p).forEach(function (c) { seen[c] = true; });
-    });
+    livePlatforms().forEach(function (p) { seen[platMainLanguage(p)] = true; });
     return Object.keys(seen).sort(function (a, b) {
       return langRank(a) - langRank(b) || a.localeCompare(b);
     });
@@ -5355,18 +5476,42 @@
 
   function startWizard() {
     state.wizardStep = 0;
-    // Vorbelegung: bereits aktive Plattformen bzw. alles Deutschsprachige.
+    /* Vorbelegung: bereits aktive Plattformen bzw. alles Deutschsprachige.
+       Deutsch als Start ist gesetzt (Nutzervorgabe „Start soll in Deutschland
+       sein"); erst wenn es gar keine deutsche Plattform gibt, greift die
+       erste vorhandene Sprache. */
     var langs = wizardLanguages();
     wizardSel.langs = new Set(langs.indexOf("de") >= 0 ? ["de"] : langs.slice(0, 1));
     wizardSel.plats = new Set(state.enabled === null
       ? livePlatforms().map(function (p) { return p.key; })
       : Array.from(state.enabled));
+    wizardSel.gesehen = new Set();   // Sprachen, deren Plattformen schon vorausgewählt wurden
+    wizardSel.manuell = new Set();   // von Hand an-/abgetippte Plattformen
     renderWizard();
-    /* Ein eigener History-Eintrag für den Assistenten. Ohne ihn gäbe es beim
-       allerersten Start nur den Starteintrag, die Zurücktaste fände nichts zum
-       Zurückgehen und schlösse die App mitten in der Einrichtung. Der Eintrag
-       wird in popstate wieder verbraucht (siehe dort). */
-    try { history.pushState({ pmWizard: true }, ""); } catch (e) {}
+    wizardEintragLegen();
+  }
+
+  /* ---- Zurücktaste im Assistenten (11.8.2026) -----------------------------
+     Vorher schloss ein Rückschritt den Assistenten sofort — aus Schritt 3
+     heraus war die halbe Einrichtung weg. Jetzt geht die Zurücktaste Schritt
+     für Schritt zurück und schließt erst auf dem Begrüßungsbildschirm.
+
+     ⚠️ Umgesetzt mit GENAU EINEM History-Eintrag, der bei jedem abgefangenen
+     Rückschritt erneuert wird — nicht mit einem Eintrag je Schritt. Ein
+     Eintrag je Schritt wäre naheliegender, hinterließe beim „Überspringen"
+     aber drei tote Einträge: die Zurücktaste täte danach dreimal scheinbar
+     nichts, bevor die App reagiert.
+
+     wizardEintrag sagt, ob unser Eintrag noch auf dem Stapel liegt. Ohne
+     dieses Wissen ließe sich „der Browser hat ihn gerade verbraucht" (popstate)
+     nicht von „wir räumen ihn selbst ab" (Überspringen/Fertig) unterscheiden,
+     und einer der beiden Fälle würde doppelt zurückgehen. */
+  var wizardEintrag = false;      // liegt unser History-Eintrag noch auf dem Stapel?
+  var wizardRuecknahme = false;   // true, während closeWizard() ihn selbst abräumt
+
+  function wizardEintragLegen() {
+    try { history.pushState({ pmWizard: true }, ""); wizardEintrag = true; }
+    catch (e) { /* ohne History-API bleiben die Knöpfe im Assistenten */ }
   }
 
   function closeWizard(save) {
@@ -5379,6 +5524,16 @@
     var ov = document.getElementById("wizard");
     if (ov) ov.remove();
     document.body.classList.remove("wizard-open");
+    /* Eigenen Eintrag abräumen, wenn er noch steht (Überspringen/Fertig).
+       Sonst bräuchte die Zurücktaste danach einen Leerschritt, bevor sie die
+       App überhaupt erreicht. Kommt der Aufruf AUS popstate, ist der Eintrag
+       schon verbraucht und wizardEintrag steht auf false — dann passiert hier
+       nichts, und genau darum geht es. */
+    if (wizardEintrag) {
+      wizardEintrag = false;
+      wizardRuecknahme = true;
+      try { history.back(); } catch (e) { wizardRuecknahme = false; }
+    }
     render();
   }
 
@@ -5465,7 +5620,7 @@
       wizardLanguages().forEach(function (code) {
         var info = langInfo(code);
         var n = livePlatforms().filter(function (p) {
-          return platLanguages(p).indexOf(code) > -1; }).length;
+          return platMainLanguage(p) === code; }).length;
         var chip = el('<button class="chip' +
           (wizardSel.langs.has(code) ? " on" : "") + '" type="button">' +
           /* flag mit dazu: die runde Blende steckt in .flag (style.css),
@@ -5474,10 +5629,34 @@
           '<span class="chip__l">' + esc(info.name) + "</span>" +
           '<span class="chip__n">' + n + "</span></button>");
         chip.addEventListener("click", function () {
-          if (wizardSel.langs.has(code)) wizardSel.langs["delete"](code);
-          else wizardSel.langs.add(code);
+          /* ⚠️ Mindestens EINE Sprache muss angewählt bleiben (Nutzerwunsch
+             11.8.2026). Vorher ließ sich die letzte Sprache abwählen; „Weiter"
+             wurde dann deaktiviert und die Einrichtung saß fest — der einzige
+             Ausweg war „Zurück" oder „Überspringen", ohne dass irgendwo stand,
+             warum es nicht weitergeht.
+
+             Das ist keine Randlage: gerade liefert das Manifest bei ALLEN elf
+             Plattformen nur `languages: ["de"]`, hier steht also ein einziger
+             Chip. Ein Fehlklick darauf ist die Sackgasse. Die Sperre gilt
+             deshalb für den letzten angewählten Chip, egal wie viele es sind.
+
+             Statt still zu schlucken kurz rütteln (.chip--locked, CSS), sonst
+             wirkt der Chip kaputt. Die Klasse wird am Ende der Animation
+             wieder entfernt, damit ein zweiter Klick erneut rüttelt. */
+          if (wizardSel.langs.has(code)) {
+            if (wizardSel.langs.size <= 1) {
+              chip.classList.remove("chip--locked");
+              void chip.offsetWidth;            // Neustart der Animation erzwingen
+              chip.classList.add("chip--locked");
+              return;
+            }
+            wizardSel.langs["delete"](code);
+          } else wizardSel.langs.add(code);
           chip.classList.toggle("on", wizardSel.langs.has(code));
           foot.querySelector(".wiz__next").disabled = !wizardSel.langs.size;
+        });
+        chip.addEventListener("animationend", function () {
+          chip.classList.remove("chip--locked");
         });
         lgrid.appendChild(chip);
       });
@@ -5493,18 +5672,73 @@
         esc(T("wizard.platforms.text",
               "Tippe an, was dich interessiert – alle sind vorausgewählt."))
         + "</p>"));
-      // Eine Plattform kommt durch, sobald EINE ihrer Sprachen gewählt ist.
-      var pl = livePlatforms().filter(function (p) {
-        return platLanguages(p).some(function (c) {
-          return wizardSel.langs.has(c); });
-      }).sort(function (a, b) { return a.name.localeCompare(b.name, "de"); });
-      // Plattformen aus abgewählten Sprachen fliegen aus der Auswahl.
-      Array.from(wizardSel.plats).forEach(function (k) {
-        if (!pl.some(function (p) { return p.key === k; }))
-          wizardSel.plats["delete"](k);
+      /* ---- Gliederung nach Sprache (Nutzerwunsch 11.8.2026) ---------------
+         Schritt 2 FILTERT die anderen Sprachen nicht mehr weg, sondern legt
+         sie eine Ebene tiefer: die in Schritt 1 gewählten Sprachen stehen
+         oben und offen, alle übrigen darunter als eingeklappte Ausklapper,
+         nach Sprache sortiert. Erreichbar bleibt damit alles — wer eine
+         einzelne fremdsprachige Plattform mitnehmen will, muss nicht erst
+         zurück in Schritt 1.
+
+         Jede Gruppe trägt ihren Flaggenkreis (.flag, dieselbe runde Blende
+         wie in der Hauptliste): ohne ihn liefen die Kacheln optisch in einem
+         Block durch, und die Trennung wäre nur an der Überschrift zu ahnen. */
+      var gruppen = {};
+      livePlatforms().forEach(function (p) {
+        var c = platMainLanguage(p);
+        (gruppen[c] = gruppen[c] || []).push(p);
       });
-      var pgrid = el('<div class="wiz__plats"></div>');
-      pl.forEach(function (p) {
+      Object.keys(gruppen).forEach(function (c) {
+        gruppen[c].sort(function (a, b) {
+          return a.name.localeCompare(b.name, "de"); });
+      });
+      var nachRang = function (a, b) {
+        return langRank(a) - langRank(b) || a.localeCompare(b); };
+      var codesAn  = Object.keys(gruppen).filter(function (c) {
+        return wizardSel.langs.has(c); }).sort(nachRang);
+      var codesAus = Object.keys(gruppen).filter(function (c) {
+        return !wizardSel.langs.has(c); }).sort(nachRang);
+
+      /* Die Auswahl an die Sprachwahl angleichen — symmetrisch, und in beide
+         Richtungen mit Vorrang für die Handauswahl (wizardSel.manuell).
+
+         Nach oben: eine NEU gewählte Sprache bringt ihre Plattformen mit.
+         Ohne das stünde ihre Gruppe zwar offen, aber vollständig abgehakt —
+         wer in Schritt 1 Englisch dazunimmt, bekäme das Europaparlament
+         angezeigt und trotzdem nicht geliefert, obwohl der Text darüber
+         „alle sind vorausgewählt" verspricht.
+
+         Nach unten: eine NICHT gewählte Sprache nimmt ihre Plattformen aus der
+         Auswahl. Das muss ohne `gesehen` auskommen, weil die Startbelegung
+         gar nicht aus einem Sprachwechsel stammt: startWizard() legt beim
+         ersten Start ALLE Plattformen an. Genau daran ist eine frühere Fassung
+         gescheitert — Europarl blieb angehakt, obwohl nur Deutsch gewählt war. */
+      wizardSel.langs.forEach(function (c) {
+        if (wizardSel.gesehen.has(c)) return;
+        wizardSel.gesehen.add(c);
+        (gruppen[c] || []).forEach(function (p) {
+          if (!wizardSel.manuell.has(p.key)) wizardSel.plats.add(p.key);
+        });
+      });
+      Object.keys(gruppen).forEach(function (c) {
+        if (wizardSel.langs.has(c)) return;
+        wizardSel.gesehen["delete"](c);
+        gruppen[c].forEach(function (p) {
+          if (!wizardSel.manuell.has(p.key)) wizardSel.plats["delete"](p.key);
+        });
+      });
+      /* ⚠️ Sicherheitsnetz: bleibt NICHTS ausgewählt, die gewählten Sprachen
+         wieder vorauswählen. Sonst stünde ein deaktiviertes „Weiter" da, ohne
+         dass irgendwo steht, warum — dieselbe Sackgasse, die die Sperre an
+         den Kacheln gerade beseitigt hat, nur eine Ecke weiter. */
+      if (!wizardSel.plats.size)
+        codesAn.forEach(function (c) {
+          gruppen[c].forEach(function (p) { wizardSel.plats.add(p.key); }); });
+
+      /* Eine Kachel bauen. Steckt in einer Funktion, weil sie in beiden
+         Bereichen gebraucht wird (oben offen, unten im Ausklapper) — zwei
+         Kopien liefen beim nächsten Eingriff auseinander. */
+      function wizPlatRow(p) {
         var on = wizardSel.plats.has(p.key);
         var color = platColor(p.key);
         var row = el('<button class="wplat' + (on ? " on" : "") + '" type="button"' +
@@ -5517,14 +5751,53 @@
           '<span class="wplat__check"><i class="fa-solid fa-check"></i></span>' +
           "</button>");
         row.addEventListener("click", function () {
-          if (wizardSel.plats.has(p.key)) wizardSel.plats["delete"](p.key);
-          else wizardSel.plats.add(p.key);
+          /* Dieselbe Sperre wie bei den Sprachen eine Ebene höher: die LETZTE
+             angewählte Plattform bleibt an, sonst deaktiviert sich „Weiter"
+             und die Einrichtung sitzt fest. Hier ist die Sackgasse leichter
+             zu erreichen als bei den Sprachen — es sind alle vorausgewählt,
+             und wer sich seine eine Plattform heraussucht, wählt der Reihe
+             nach ab und trifft dabei zwangsläufig die letzte.
+             ⚠️ Die Sperre zählt über ALLE Gruppen, nicht je Gruppe: die letzte
+             deutsche Plattform darf abgewählt werden, solange oben oder im
+             Ausklapper noch eine andere an ist. Maßgeblich ist, was am Ende
+             gespeichert wird, und das ist wizardSel.plats als Ganzes.
+             ⚠️ Nicht mit den Schleifen oben verwechseln: die schalten
+             Plattformen bei einem SPRACHWECHSEL um und dürfen dabei bis auf
+             null leeren — das Sicherheitsnetz dort fängt es ab. */
+          if (wizardSel.plats.has(p.key)) {
+            if (wizardSel.plats.size <= 1) {
+              row.classList.remove("wplat--locked");
+              void row.offsetWidth;             // Neustart der Animation erzwingen
+              row.classList.add("wplat--locked");
+              return;
+            }
+            wizardSel.plats["delete"](p.key);
+          } else wizardSel.plats.add(p.key);
+          /* Ab jetzt gilt für diese Plattform die Entscheidung des Nutzers,
+             nicht mehr die Sprachwahl. Auch beim ABWÄHLEN vermerken: sonst
+             hakte ein Sprachwechsel sie wieder an. */
+          wizardSel.manuell.add(p.key);
           row.classList.toggle("on", wizardSel.plats.has(p.key));
           foot.querySelector(".wiz__next").disabled = !wizardSel.plats.size;
         });
-        pgrid.appendChild(row);
-      });
-      main.appendChild(pgrid);
+        row.addEventListener("animationend", function () {
+          row.classList.remove("wplat--locked");
+        });
+        return row;
+      }
+
+      /* Eine Sprachgruppe. Machart und Kopfzeile kommen aus langSection() —
+         demselben Bauteil, das die Einstellungen benutzen. Hier kommt nur
+         .wiz__plats dazu, das die Kacheln als Spalte mit Abstand setzt. */
+      function wizLangGruppe(code, offen) {
+        var g = langSection(code, gruppen[code].length, offen);
+        g.body.classList.add("wiz__plats");
+        gruppen[code].forEach(function (p) { g.body.appendChild(wizPlatRow(p)); });
+        return g.sec;
+      }
+
+      codesAn.forEach(function (c) { main.appendChild(wizLangGruppe(c, true)); });
+      codesAus.forEach(function (c) { main.appendChild(wizLangGruppe(c, false)); });
       main.appendChild(el('<p class="wiz__hint">' +
         esc(T("wizard.platforms.hint",
               "Später jederzeit in den Einstellungen änderbar.")) + "</p>"));
@@ -5548,6 +5821,13 @@
         '<i class="fa-solid fa-chevron-left"></i> ' +
         esc(T("wizard.back", "Zurück")) + "</button>");
       back.addEventListener("click", function () {
+        /* Bewusst über history.back(): dann gehen Bildschirm-Knopf und
+           Zurücktaste des Telefons durch dieselbe Stelle (popstate), und der
+           History-Eintrag wird dabei richtig verbraucht und erneuert. Ein
+           eigener Rückweg hier hätte den Stapel mit jedem Klick wachsen
+           lassen — man müsste danach so oft zurückdrücken, wie man geklickt
+           hat. Ohne History-API bleibt der direkte Weg als Rückfallebene. */
+        if (wizardEintrag) { history.back(); return; }
         state.wizardStep--; renderWizard();
       });
       foot.appendChild(back);
@@ -5675,12 +5955,27 @@
   }
 
   window.addEventListener("popstate", function (e) {
+    /* Unser eigener Rückschritt aus closeWizard() – der Eintrag ist schon
+       abgeräumt, die Ansicht steht. Nichts weiter tun, sonst ginge die App
+       eine Ebene zu weit zurück. */
+    if (wizardRuecknahme) { wizardRuecknahme = false; return; }
+
     /* Liegt die Ersteinrichtung über der App, gilt der Rückweg zuerst ihr:
        sonst navigierte die App unter einem Fenster, das sichtbar stehen
-       bleibt. Zurück wirkt dort wie „Überspringen" – bewusst nicht als
-       Schritt-für-Schritt-Rückweg, dafür hat der Assistent eigene Knöpfe.
-       Den nötigen Eintrag legt startWizard() an. */
-    if (document.getElementById("wizard")) { closeWizard(false); return; }
+       bleibt. Innerhalb des Assistenten geht es SCHRITT FÜR SCHRITT zurück
+       (Nutzerwunsch 11.8.2026) und erst auf dem Begrüßungsbildschirm zu.
+       Den nötigen Eintrag legt startWizard() an, erneuert wird er hier. */
+    if (document.getElementById("wizard")) {
+      wizardEintrag = false;          // den hat der Browser gerade verbraucht
+      if (state.wizardStep > 0) {
+        state.wizardStep--;
+        renderWizard();
+        wizardEintragLegen();         // damit die nächste Zurücktaste wieder hier landet
+        return;
+      }
+      closeWizard(false);
+      return;
+    }
     var s = e.state && e.state.pmNav;
     if (!s) return;           // fremder oder leerer Eintrag – nicht anfassen
     navZurueck = true;
@@ -5688,6 +5983,110 @@
     render();
     navZurueck = false;
   });
+
+  /* ---- Nachfrage vor dem Beenden (11.8.2026) --------------------------------
+     Am Ende des Verlaufs fragt MainActivity.onBackPressed() hier nach, statt
+     die App sofort zu schließen. Rückgabe `true` heißt „ich übernehme" — dann
+     beendet Java NICHT.
+
+     Bewusst KEIN window.confirm(): ein eigener Dialog spricht die in den
+     Einstellungen gewählte Sprache, trägt beide Layouts mit und nennt keine
+     Herkunfts-URL. Der Systemdialog kann das alles nicht.
+     ⚠️ Nicht etwa, weil window.confirm im WebView nicht ginge — es geht (am
+     Quelltext von WebViewContentsClientAdapter geprüft: liefert onJsConfirm
+     false, zeigt der WebView seinen eigenen Dialog). Es ist eine Entscheidung
+     für die Gestaltung, kein Ausweichen vor einem Fehler.
+
+     ⚠️ Steht der Dialog schon, liefert die Funktion `false` — dann beendet
+     Java. Das ist die übliche Android-Geste „zweimal Zurück zum Beenden", und
+     der Text im Dialog kündigt sie an. Ohne diese Regel käme man mit der
+     Zurücktaste allein nie aus der App: sie öffnete und schlösse den Dialog
+     immer abwechselnd. */
+  /* ---- Der Nachfrage-Dialog, EINMAL --------------------------------------
+     Benutzt von der Beenden-Nachfrage und von der Warnung vor „Alles
+     zurücksetzen". Beide brauchen dieselbe Form: Überschrift, Erklärung, zwei
+     Knöpfe. Zwei Kopien liefen beim nächsten Eingriff auseinander.
+
+     `gefahr: true` färbt den bestätigenden Knopf in die Warnfarbe — für den
+     zerstörerischen Fall. Ohne diesen Unterschied sähen „App beenden" (nichts
+     geht verloren) und „Alles löschen" (alles geht verloren) gleich aus.
+
+     Es steht immer HÖCHSTENS EINER offen: `qboxOffen()` beantwortet das, und
+     die Zurücktaste braucht die Antwort (siehe beendenNachfrage). */
+  var QBOX_ID = "pmquest";
+  function qboxOffen() { return document.getElementById(QBOX_ID); }
+
+  function qboxZu() {
+    var d = qboxOffen();
+    if (d) d.remove();
+    document.removeEventListener("keydown", qboxTaste);
+  }
+  function qboxTaste(e) { if (e.key === "Escape") qboxZu(); }
+
+  /* o = { titel, text, ja, nein, gefahr, onJa }. Liefert true, wenn geöffnet. */
+  function qboxFragen(o) {
+    qboxZu();                                  // nie zwei übereinander
+    var ov = el('<div class="qbox" id="' + QBOX_ID +
+      '" role="dialog" aria-modal="true">' +
+      '<div class="qbox__in">' +
+      '<h2 class="qbox__t">' + esc(o.titel) + "</h2>" +
+      '<p class="qbox__x">' + esc(o.text) + "</p>" +
+      '<div class="qbox__row"></div></div></div>');
+    var reihe = ov.querySelector(".qbox__row");
+    var nein = el('<button class="qbox__no" type="button">' +
+      esc(o.nein) + "</button>");
+    var ja = el('<button class="qbox__yes' + (o.gefahr ? " qbox__yes--danger" : "") +
+      '" type="button">' + esc(o.ja) + "</button>");
+    nein.addEventListener("click", qboxZu);
+    ja.addEventListener("click", function () { qboxZu(); o.onJa(); });
+    reihe.appendChild(nein); reihe.appendChild(ja);
+    /* Daneben getippt = abbrechen. Der folgenreiche Weg braucht einen Treffer.
+       Der Abbrechen-Knopf bekommt den Fokus, aus demselben Grund. */
+    ov.addEventListener("click", function (e) { if (e.target === ov) qboxZu(); });
+    document.addEventListener("keydown", qboxTaste);
+    document.body.appendChild(ov);
+    nein.focus();
+    return true;
+  }
+
+  function beendenNachfrage() {
+    /* ⚠️ Steht schon ein Dialog, entscheidet WELCHER:
+         - die Beenden-Nachfrage selbst → `false`, Java beendet. Das ist die
+           übliche Android-Geste „zweimal Zurück zum Beenden", und der Text im
+           Dialog kündigt sie an. Ohne diese Regel käme man mit der Zurücktaste
+           allein nie aus der App: sie öffnete und schlösse ihn abwechselnd.
+         - eine ANDERE Nachfrage (etwa die Löschwarnung) → schließen und `true`.
+           Sie ist das Oberste auf dem Schirm, also gilt der Rückweg ihr. Ohne
+           diese Unterscheidung schlösse die Zurücktaste bei offener
+           Löschwarnung die ganze App. */
+    var offen = qboxOffen();
+    if (offen) {
+      if (offen.dataset.pmBeenden === "1") return false;
+      qboxZu();
+      return true;
+    }
+    qboxFragen({
+      titel: T("beenden.title", "App beenden?"),
+      text: T("beenden.text", "Du bist am Anfang. Noch einmal zurück schließt " +
+              "den PetitionsManager."),
+      nein: T("beenden.abbrechen", "Bleiben"),
+      ja: T("beenden.ok", "Beenden"),
+      onJa: function () {
+        /* Im Browser gibt es die Brücke nicht — window.close() wirkt dort nur
+           bei Fenstern, die ein Skript geöffnet hat. Dann bleibt es beim
+           Schließen des Dialogs, statt einen Knopf anzubieten, der nichts tut. */
+        if (window.AndroidApp && window.AndroidApp.beenden)
+          window.AndroidApp.beenden();
+      }
+    });
+    // Kennzeichen für den nächsten Rückschritt (siehe oben).
+    qboxOffen().dataset.pmBeenden = "1";
+    return true;
+  }
+  /* Der Name ist der Vertrag mit MainActivity.onBackPressed() — wird er hier
+     geändert, beendet sich die App wieder ohne Nachfrage, ohne dass irgendwo
+     ein Fehler auftaucht. */
+  window.pmFrageBeenden = beendenNachfrage;
 
   // ---- Router ----------------------------------------------------------------
   function render() {

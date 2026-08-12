@@ -173,6 +173,11 @@ public class MainActivity extends Activity {
         web.addJavascriptInterface(new BackupBridge(), "AndroidBackup");
         // Benachrichtigungen: JS ruft window.AndroidNotify.* (siehe NotifyBridge).
         web.addJavascriptInterface(new NotifyBridge(), "AndroidNotify");
+        /* App beenden: JS ruft window.AndroidApp.beenden(), nachdem der Nutzer
+           die Nachfrage der Zurücktaste bestätigt hat (siehe onBackPressed).
+           Die Brücke ist die Gegenrichtung dazu – ohne sie könnte die Web-App
+           die Nachfrage zwar zeigen, aber ihr „Ja" nicht ausführen. */
+        web.addJavascriptInterface(new AppBridge(), "AndroidApp");
         /* Eigene Aktualisierung: NUR in der Fassung fuer die Direktverteilung.
            Steht der Bauschalter mitUpdater auf false (F-Droid, spaeter Play),
            wird die Bruecke gar nicht erst angemeldet - window.AndroidUpdate
@@ -278,10 +283,34 @@ public class MainActivity extends Activity {
         if (web != null) web.saveState(outState);
     }
 
+    /* Zurücktaste. Solange die Web-App noch etwas zum Zurückgehen hat, geht sie
+       zurück (den Verlauf legt app.js an – ohne ihn wäre canGoBack() immer
+       false und die App schlösse aus jeder Ansicht heraus sofort).
+
+       Am Ende des Verlaufs wird seit 11.8.2026 NACHGEFRAGT statt beendet.
+       Gefragt wird die Web-App, nicht ein AlertDialog hier: nur sie kennt die
+       gewählte Sprache und das gewählte Layout, ein Systemdialog spräche in
+       fest verdrahtetem Java-Text.
+
+       ⚠️ Der Rückfall ist die eigentliche Arbeit an dieser Stelle. Antwortet
+       die Web-App NICHT mit true – weil sie alt ist, klemmt, gar nicht geladen
+       hat oder JavaScript nichts liefert –, beendet sich die App wie bisher.
+       Eine App, die sich nicht mehr schließen lässt, weil eine JS-Funktion
+       fehlt, wäre der schlimmere Fehler. evaluateJavascript liefert "null" für
+       alles Unerwartete; verlangt wird deshalb ausdrücklich der Wert "true". */
     @Override
     public void onBackPressed() {
-        if (web != null && web.canGoBack()) web.goBack();
-        else super.onBackPressed();
+        if (web != null && web.canGoBack()) { web.goBack(); return; }
+        if (web == null) { super.onBackPressed(); return; }
+        web.evaluateJavascript(
+                "(function(){try{return !!(window.pmFrageBeenden"
+                        + " && window.pmFrageBeenden());}catch(e){return false;}})()",
+                new ValueCallback<String>() {
+                    public void onReceiveValue(String wert) {
+                        // Der Rückruf kommt auf dem UI-Thread.
+                        if (!"true".equals(wert)) MainActivity.super.onBackPressed();
+                    }
+                });
     }
 
     /* Der Dateiname der Sicherung kommt aus JavaScript. Auf API 28 und älter
@@ -341,6 +370,25 @@ public class MainActivity extends Activity {
      * Alle Methoden laufen auf einem WebView-Thread, nicht auf dem UI-Thread;
      * SharedPreferences und AlarmManager sind damit einverstanden.
      */
+    /* Beenden auf Wunsch der Web-App. Gegenstück zur Nachfrage in
+       onBackPressed(): dort fragt Java, hier antwortet der Nutzer.
+
+       ⚠️ runOnUiThread ist Pflicht, nicht Zierde: Methoden einer JS-Brücke
+       laufen auf einem eigenen Thread des WebView, und finishAndRemoveTask()
+       gehört wie jeder Eingriff in die Activity auf den UI-Thread.
+
+       finishAndRemoveTask statt finish(): der Rückschritt soll die App aus der
+       Übersicht der zuletzt benutzten Apps nehmen, so wie es die Zurücktaste
+       vorher auch getan hat. */
+    private class AppBridge {
+        @JavascriptInterface
+        public void beenden() {
+            runOnUiThread(new Runnable() {
+                public void run() { finishAndRemoveTask(); }
+            });
+        }
+    }
+
     private class NotifyBridge {
         /** "granted" | "denied" | "default" – gleiche Wörter wie im Web, damit
          *  die App keine zweite Begriffswelt braucht. */

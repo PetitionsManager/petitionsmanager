@@ -780,7 +780,39 @@
       ⚠️ Ohne diesen Sprung sähe das Telefon weiter index.html, texts.js,
       platforms.js und app.js aus dem alten Cache — die Sprachumschaltung
       käme dort gar nicht an. (index.html, texts.js, platforms.js, app.js) */
-var CACHE = "pm-cache-v48";
+/* v49 — 11.8.2026: im Einrichtungs-Assistenten lässt sich die LETZTE
+      angewählte Sprache nicht mehr abwählen (Schritt 1). Vorher führte ein
+      Klick darauf in eine Sackgasse: „Weiter" wurde deaktiviert, ohne dass
+      irgendwo stand, warum. Der gesperrte Chip rüttelt jetzt kurz
+      (.chip--locked). ⚠️ Kein Randfall — das Manifest liefert derzeit bei
+      allen elf Plattformen nur `languages: ["de"]`, dort steht also ein
+      EINZIGER Chip, und ein Fehlklick darauf ist die Sackgasse.
+      Dasselbe gilt seit demselben Sprung für Schritt 2: die letzte angewählte
+      PLATTFORM bleibt an (.wplat--locked). Dort ist die Sackgasse sogar
+      leichter zu erreichen — es sind alle vorausgewählt, wer sich eine
+      heraussucht, wählt der Reihe nach ab.
+      Im selben Sprung: Schritt 1 fragt nach der HAUPTSPRACHE statt nach
+      angebotenen Übersetzungen (Europarl ist wieder englisch), und Schritt 2
+      filtert die übrigen Sprachen nicht mehr weg, sondern legt sie als
+      eingeklappte Ausklapper darunter — je Sprache eine Gruppe mit
+      Flaggenkreis. Dieselbe Gliederung bekommt die Plattformliste in den
+      EINSTELLUNGEN (gemeinsames Bauteil langSection(), Klassen .langsec*);
+      dort sind offen die Sprachen mit mindestens einer aktiven Plattform.
+      Die Zeilen tragen dadurch keine eigene Flagge und keinen Sprachnamen
+      mehr — beides steht einmal in der Überschrift (settings.platMeta/
+      platSoon in texts.js gekürzt).
+      Ebenfalls neu: die Zurücktaste geht IM Assistenten Schritt für Schritt
+      zurück und schließt ihn erst auf dem Begrüßungsbildschirm. Ein einziger
+      History-Eintrag, bei jedem abgefangenen Rückschritt erneuert und beim
+      Schließen abgeräumt — history.length bleibt gemessen konstant.
+      Am Ende des Verlaufs fragt die App vor dem Beenden nach — eigener Dialog
+      .qbox statt window.confirm, wegen Sprache, Layout und der Herkunfts-URL,
+      die der Systemdialog anzeigt. MainActivity
+      ruft dafür window.pmFrageBeenden(); ⚠️ ohne diesen Sprung sähe ein
+      Telefon weiter das alte app.js aus dem Shell-Cache, die Funktion fehlte,
+      und die App beendete sich wie bisher ohne Nachfrage.
+      (app.js, style.css, texts.js) */
+var CACHE = "pm-cache-v49";
 /* Versionsunabhängig – überlebt das Hochzählen von CACHE. Diese Zahl sollte ab
    jetzt NICHT mehr steigen: seit die Pakete eine Inhaltskennung tragen ("?v=",
    siehe oben) holt sich jedes geänderte Paket von selbst neu. Ein Sprung wäre

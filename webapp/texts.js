@@ -337,8 +337,12 @@ window.PM_TEXTS = {
       activeCount: "{n}/{total} aktiv",
       allOff: "Alle deaktivieren",
       allOn: "Alle aktivieren",
-      platMeta: "{lang} · {n} Petitionen",
-      platSoon: "{lang} · in Vorbereitung",
+      /* Ohne die Sprache: seit 11.8.2026 stehen die Plattformen in den
+         Einstellungen unter einer Sprachüberschrift, die sie einmal nennt.
+         {lang} wird weiter übergeben und bleibt hier verfügbar — wer die
+         Sprache je Zeile zurückhaben will, ergänzt nur diesen Text. */
+      platMeta: "{n} Petitionen",
+      platSoon: "in Vorbereitung",
       favMark: "Als Favorit markieren"
     },
 
@@ -369,6 +373,15 @@ window.PM_TEXTS = {
       hintBrowser: "Hinweis: Die Meldung erscheint, sobald du die App nach der gewählten Uhrzeit das nächste Mal öffnest oder sie im Hintergrund noch läuft. Eine Erinnerung bei komplett geschlossener App bräuchte einen eigenen Server – den hat diese App im Browser bewusst nicht. In der Android-App übernimmt das ein Weckruf des Systems."
     },
 
+    /* Nachfrage der Zurücktaste am Ende des Verlaufs (11.8.2026). Steht in
+       texts.js und nicht in Java, damit sie der Sprachwahl folgt. */
+    beenden: {
+      title: "App beenden?",
+      text: "Du bist am Anfang. Noch einmal zurück schließt den PetitionsManager.",
+      ok: "Beenden",
+      abbrechen: "Bleiben"
+    },
+
     reset: {
       intro: "Hier kannst du einzelne Teile der App zurücksetzen oder alles auf den Ausgangszustand bringen.",
       wizard: "Einrichtungs-Assistent erneut zeigen",
@@ -383,7 +396,6 @@ window.PM_TEXTS = {
       allConfirmBtn: "Endgültig löschen",
       cancel: "Abbrechen",
       doneToast: "Alles zurückgesetzt. Die App startet neu.",
-      allConfirmQuestion: "Wirklich alles löschen?",
       hintsDone: "Zurückgesetzt – die Hinweise erscheinen wieder."
     },
 
@@ -887,8 +899,8 @@ window.PM_TEXTS = {
       activeCount: "{n}/{total} on",
       allOff: "Switch all off",
       allOn: "Switch all on",
-      platMeta: "{lang} · {n} petitions",
-      platSoon: "{lang} · in preparation",
+      platMeta: "{n} petitions",
+      platSoon: "in preparation",
       favMark: "Mark as a favorite"
     },
 
@@ -919,6 +931,13 @@ window.PM_TEXTS = {
       hintBrowser: "Please note: the message appears the next time you open the app after the time you chose, or while it is still running in the background. A reminder with the app completely closed would need a server of its own – which this app deliberately does not have in the browser. In the Android app a system alarm takes care of it."
     },
 
+    beenden: {
+      title: "Close the app?",
+      text: "You are back at the start. Pressing back again closes PetitionsManager.",
+      ok: "Close",
+      abbrechen: "Stay"
+    },
+
     reset: {
       intro: "Here you can reset individual parts of the app or put everything back to its original state.",
       wizard: "Show setup assistant again",
@@ -933,7 +952,6 @@ window.PM_TEXTS = {
       allConfirmBtn: "Delete permanently",
       cancel: "Cancel",
       doneToast: "Everything reset. The app is restarting.",
-      allConfirmQuestion: "Really delete everything?",
       hintsDone: "Reset – the hints will appear again."
     },
 

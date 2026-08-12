@@ -1325,6 +1325,34 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
 
 /* ---- Ersteinrichtung (Wizard) ---- */
 body.wizard-open{overflow:hidden}
+/* ---- Nachfrage vor dem Beenden (11.8.2026) ----
+   Eigener Dialog statt window.confirm(): der WebView zeigt das gar nicht
+   (onJsConfirm ist im WebChromeClient nicht überschrieben), und ein eigener
+   spricht die gewählte Sprache. Nur Grundtoken, keine Layout-Zweige — damit
+   sieht er in Relief und Magazin jeweils richtig aus, ohne dass layouts.css
+   etwas davon wissen muss.
+   z-index über .wiz (200): die Nachfrage darf auch über der Ersteinrichtung
+   stehen, sonst käme sie dort unsichtbar hinter dem Assistenten. */
+.qbox{position:fixed;inset:0;z-index:300;display:flex;align-items:center;
+  justify-content:center;padding:1.25rem;background:rgba(0,0,0,.5)}
+.qbox__in{width:100%;max-width:22rem;background:var(--surface);
+  border:.0625rem solid var(--line);border-radius:1.25rem;
+  padding:1.5rem 1.375rem 1.25rem;box-shadow:0 1.25rem 3rem rgba(0,0,0,.35)}
+.qbox__t{margin:0 0 .5rem;font-size:1.25rem;font-weight:800;color:var(--ink)}
+.qbox__x{margin:0 0 1.25rem;font-size:.9375rem;line-height:1.5;color:var(--muted)}
+.qbox__row{display:flex;gap:.625rem;justify-content:flex-end;flex-wrap:wrap}
+.qbox__no,.qbox__yes{flex:1 1 8rem;border-radius:999px;padding:.75rem 1.25rem;
+  font:inherit;font-size:.9375rem;font-weight:700;cursor:pointer}
+.qbox__no{border:.0625rem solid var(--line);background:var(--surface);color:var(--ink)}
+/* Der bestätigende Knopf trägt die Akzentfarbe — nicht Rot: beim Beenden geht
+   nichts verloren, die App wird nur geschlossen. --on-accent ist der geprüfte
+   Gegenwert dazu (siehe oben bei den Grundtoken), nicht --surface: bei den
+   helleren Markenfarben wäre Weiß auf Akzent nicht mehr lesbar. */
+.qbox__yes{border:0;background:var(--accent);color:var(--on-accent)}
+/* Zerstörerischer Fall (Alles löschen): dieselbe Warnfarbe wie .danger__btn
+   in den Einstellungen — gleiche Bedeutung, gleiches Aussehen. Das Paar ist
+   --amp1 mit --on-danger; ein Token namens --danger gibt es NICHT. */
+.qbox__yes--danger{background:var(--amp1);color:var(--on-danger)}
 .wiz{position:fixed;inset:0;z-index:200;background:var(--bg);
   overflow-y:auto;-webkit-overflow-scrolling:touch}
 .wiz__inner{max-width:37.5rem;margin:0 auto;min-height:100%;
@@ -1359,7 +1387,66 @@ body.wizard-open{overflow:hidden}
 .wiz__chips .chip__n{background:var(--bg);border-radius:999px;
   padding:.0625rem .5rem;font-size:.75rem;font-weight:700;color:var(--muted)}
 .wiz__chips .chip.on .chip__n{background:var(--surface);color:var(--accent)}
+/* Letzte verbliebene Sprache: Abwählen ist gesperrt (app.js), der Chip rüttelt
+   kurz. Ohne diese Rückmeldung sähe der Chip nach einem toten Knopf aus.
+   `prefers-reduced-motion` schaltet nur die Bewegung ab — der animationend-
+   Horcher in app.js hängt an der Animation, deshalb bleibt sie bestehen und
+   wird lediglich auf eine unbewegte Tönung reduziert. */
+@keyframes wizChipLock{
+  0%,100%{transform:translateX(0)}
+  20%{transform:translateX(-.25rem)}
+  40%{transform:translateX(.25rem)}
+  60%{transform:translateX(-.1875rem)}
+  80%{transform:translateX(.1875rem)}}
+.wiz__chips .chip--locked{animation:wizChipLock .32s ease}
+/* Letzte verbliebene Plattform: gleiche Sperre, gleiche Rückmeldung. */
+.wplat--locked{animation:wizChipLock .32s ease}
+@media (prefers-reduced-motion:reduce){
+  .wiz__chips .chip--locked,.wplat--locked{animation:wizChipLock .32s step-end}}
 .wiz__plats{display:flex;flex-direction:column;gap:.625rem}
+/* ---- Sprachgruppen (11.8.2026) ----
+   EIN Bauteil für zwei Orte: Schritt 2 des Einrichtungs-Assistenten und die
+   Plattformliste in den Einstellungen. Der Nutzer soll die Aufteilung dort
+   wiedererkennen, deshalb dieselben Klassen und nicht zwei ähnliche Blöcke.
+   Das Naheliegende steht offen oben, der Rest eingeklappt darunter.
+
+   Bewusst FLACH gehalten (kein Kasten, keine Rahmen wie bei .accordion in der
+   Hauptliste): beide Einsatzorte stecken schon in einem Rahmen — das Overlay
+   bzw. das Akkordion „Plattformen" —, ein zweiter Kasten ergäbe eine Schachtel
+   in der Schachtel. Getrennt wird über die Kopfzeile mit Flaggenkreis und eine
+   feine Linie. */
+.langsec+.langsec{margin-top:.25rem}
+/* ⚠️ text-align:left ist Pflicht, nicht Geschmack: <button> setzt von sich aus
+   mittig. Auf 375 px bricht „Deutschsprachige Plattformen" auf zwei Zeilen um,
+   und die standen dann zentriert neben der linksbündigen Flagge. Auf breiten
+   Fenstern fällt es nicht auf, weil nichts umbricht — .acc-head hat dieselbe
+   Zeile aus demselben Grund. */
+.langsec__h{display:flex;align-items:center;justify-content:space-between;
+  width:100%;gap:.5rem;padding:1rem .25rem .625rem;border:0;background:none;
+  font:inherit;font-size:1rem;font-weight:800;color:var(--ink);cursor:pointer;
+  text-align:left;border-bottom:.0625rem solid var(--line)}
+/* Auf 375 px bricht der Titel um; die Anzahl steht dann oben rechts neben dem
+   Pfeil statt hinter dem Wort. Das ist gewollt so belassen — .acc-title/
+   .acc-count in der Hauptliste verhalten sich genauso, und ein margin-right:auto
+   hier ändert daran nachweislich nichts (gemessen: Abzeichen bleibt bei 291 px). */
+.langsec__t{display:flex;align-items:center;gap:.5625rem;min-width:0}
+/* Der Flaggenkreis. .flag bringt die runde Blende mit (siehe dort); hier nur
+   etwas größer als im Fließtext, weil er die Gliederung TRÄGT. */
+.langsec__t .flag{width:1.375rem;height:1.375rem;font-size:1.8125rem;
+  vertical-align:0;margin-left:0}
+.langsec__n{background:var(--accent-soft);color:var(--accent);border-radius:999px;
+  padding:.0625rem .4375rem;font-size:.75rem;font-weight:700}
+.langsec__c{color:var(--muted);flex:none;font-size:.875rem;transition:transform .2s}
+.langsec.open .langsec__c{transform:rotate(180deg)}
+/* Zwei Öffnungs-Regeln, weil die Inhalte verschieden sind: in den
+   Einstellungen stehen Block-Zeilen (.opt), im Assistenten eine Flex-Spalte
+   (.wiz__plats). Die zweite Regel MUSS die spezifischere sein, sonst überstimmt
+   die erste das display:flex von .wiz__plats und die Kacheln verlören ihre
+   Abstände. */
+.langsec__b{display:none;padding-top:.75rem}
+.langsec.open>.langsec__b{display:block}
+.langsec.open>.langsec__b.wiz__plats{display:flex}
+@media (prefers-reduced-motion:reduce){.langsec__c{transition:none}}
 /* Ausgewählte Plattform: Markenkante + Markentönung wie in der Liste. */
 .wplat{display:flex;align-items:center;gap:.875rem;width:100%;text-align:left;
   border:.0625rem solid var(--line);background:var(--surface);
