@@ -1,0 +1,59 @@
+name: Netzdiagnose
+
+# Misst, was GitHubs Rechenzentrum von einer Quelle sieht — und NUR das.
+# Kein Scrape, kein Schreiben, kein Veröffentlichen: sechs Abrufe mit Pausen.
+#
+# ANLASS (12.8.2026): europarl liefert seit Tagen keine frischen Daten, weil
+# petitions_core.Fetcher._robots_for die robots.txt mit "HTTP 202" nicht lesen
+# kann und den Host daraufhin komplett auslässt. Vom Entwicklungsrechner
+# antwortet dieselbe Datei mit HTTP 200 — der Fehler ist also nur DORT
+# messbar, wo er auftritt.
+#
+# Zu trennen sind zwei Fälle, die aus den bisherigen Protokollen nicht zu
+# unterscheiden sind, weil der Riegel zuschlägt, BEVOR je eine Inhaltsseite
+# versucht wurde:
+#   (a) nur die robots.txt ist gesperrt → ein Rückfall auf die zuletzt
+#       gelesene Fassung holt die Plattform zurück;
+#   (b) die Quelle sperrt den Standort ganz (JavaScript-Prüfung) → dann ist
+#       am robots-Riegel nichts zu reparieren, und die Entscheidung ist eine
+#       andere.
+#
+# ⚠️ Die Ergebnisse gehen als ::notice::/::warning:: in die ANMERKUNGEN. Die
+# Lauf-Protokolle brauchen einen Token (HTTP 403), die Anmerkungen über
+# /commits/<sha>/check-runs stehen jedem offen.
+
+on:
+  workflow_dispatch:
+  # Damit die Messung auch aus einem ZWEIG heraus laufen kann, ohne dass dafür
+  # erst der Hauptzweig angefasst werden muss: workflow_dispatch gibt es nur
+  # für Dateien, die bereits auf dem Standardzweig liegen.
+  push:
+    branches:
+      - 'diagnose/**'
+
+# Reine Messung — Lesezugriff genügt.
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7
+
+      - name: Python einrichten
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7
+        with:
+          python-version: '3.12'
+
+      - name: Abhängigkeiten
+        run: pip install -r requirements.txt
+
+      # ⚠️ KEIN "|| echo übersprungen" und kein continue-on-error: ein Schritt,
+      # der auch dann grün wird, wenn er nie gelaufen ist, hat schon einmal
+      # eine nie durchgeführte Signaturprüfung als bestanden ausgewiesen.
+      # Das Skript meldet seinen Befund selbst und gibt 0 zurück, solange es
+      # durchlief; ein gesperrter Host ist ein Ergebnis, kein Skriptfehler.
+      - name: "Quelle aus dem Rechenzentrum messen (europarl)"
+        run: python3 ci_netzdiagnose.py
