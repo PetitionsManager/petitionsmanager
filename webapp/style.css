@@ -1384,6 +1384,30 @@ body.wizard-open{overflow:hidden}
 .wiz__text{margin:0 0 1.75rem;color:var(--muted);font-size:.9375rem;
   line-height:1.6}
 .wiz__hint{margin:1rem 0 0;color:var(--muted);font-size:.75rem;text-align:center}
+/* Import-Knopf auf dem Begrüßungsbildschirm (12.8.2026). Bewusst
+   ZURÜCKHALTEND — Umriss statt gefüllt: der Hauptweg ist „Los geht's", der
+   Import die Ausnahme für Umsteiger. Zwei kräftige Knöpfe nebeneinander böten
+   zwei gleichrangige Wege an, von denen einer für die meisten ins Leere
+   führt. Breite wie .wiz__langbar darüber, damit beide eine Kante bilden. */
+.wiz__imp{margin:1.75rem auto 0;max-width:20rem;text-align:center}
+.wiz__imp-n{color:var(--muted);font-size:.75rem;line-height:1.5;
+  margin-bottom:.625rem}
+/* Fehlermeldung in der Warnfarbe. Das Paar ist --amp1/--on-danger; hier steht
+   der Text auf dem Seitengrund, deshalb nur die Vordergrundfarbe. */
+.wiz__imp--err .wiz__imp-n{color:var(--amp1)}
+.wiz__imp-b{border:.0625rem solid var(--line);background:var(--surface);
+  color:var(--ink);border-radius:999px;font:inherit;font-size:.8125rem;
+  font-weight:650;padding:.625rem 1.125rem;cursor:pointer}
+.wiz__imp-b[disabled]{opacity:.55;cursor:default}
+/* Die Einstellungs-Bauteile (Schalterleiste, Beschriftung mit ⓘ, Schaltzeile)
+   erscheinen seit dem 12.8.2026 auch im Assistenten. Ihre Abstände sind für
+   eine dicht gepackte Liste gemacht; auf einer Assistentenseite mit zwei
+   Blöcken darf es luftiger sein. Nur der Abstand wird angefasst — Aussehen
+   und Bedienung bleiben identisch, sonst wäre der Wiedererkennungswert weg,
+   der der eigentliche Grund für die gemeinsamen Bauteile ist. */
+.wiz__main .srow__lbl{margin-top:2rem;font-size:.875rem}
+.wiz__main > .srow__lbl:first-child{margin-top:0}
+.wiz__main .srow{margin-top:.5rem}
 .wiz__chips{display:flex;flex-wrap:wrap;gap:.625rem}
 .wiz__chips .chip{display:inline-flex;align-items:center;gap:.5rem;
   border:.125rem solid var(--line);background:var(--surface);border-radius:999px;

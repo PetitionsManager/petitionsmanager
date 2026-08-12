@@ -4005,6 +4005,123 @@
     lbl.appendChild(knopf);
     return { lbl: lbl, note: note };
   }
+
+  /* Schalterleiste (Segment-Knöpfe). Stand bis zum 12.8.2026 INNERHALB von
+     renderEinstellungen() und war damit für den Assistenten unerreichbar —
+     seit der Assistent Farbdesign und Layout mitabfragt, brauchen beide
+     dieselbe Leiste. Herausgezogen statt kopiert: zwei Fassungen liefen beim
+     nächsten Eingriff auseinander, und die Knöpfe hier tragen inzwischen drei
+     Sonderfälle (Icon optional, Flagge in eigenem Span, Text escaped).
+     Schließt über nichts aus der Einstellungsseite — nur el() und esc(). */
+  function segControl(label, items, current, pick) {
+    var seg = el('<div class="seg" role="group" aria-label="' +
+      esc(label) + '"></div>');
+    items.forEach(function (it) {
+      /* Icon ist optional (seit der Sprachwahl 8.8.2026): dort trägt die
+         Beschriftung schon eine Flagge, ein FontAwesome-Zeichen daneben
+         wäre doppelt. Ohne diese Abfrage entstünde `<i class="fa-solid ">`
+         — ein leeres Icon-Element, das je nach Schriftstand einen
+         Platzhalter oder eine Lücke zeichnet. */
+      /* it[3] ist eine FLAGGE. Sie steht in einem eigenen <span class="flag">
+         und nicht im Beschriftungstext, weil sie sonst als nacktes Emoji
+         erschiene — quer statt rund (Nutzerwunsch 12.8.2026: „Flaggen
+         überall als Kreis"). Der Text selbst bleibt escaped. */
+      var b = el('<button class="seg__b' +
+        (current === it[0] ? " on" : "") + '" type="button">' +
+        (it[2] ? '<i class="fa-solid ' + it[2] + '"></i> ' : "") +
+        (it[3] ? '<span class="flag">' + it[3] + "</span> " : "") +
+        esc(it[1]) + "</button>");
+      b.addEventListener("click", function () {
+        pick(it[0]);
+        seg.querySelectorAll(".seg__b").forEach(function (x) {
+          x.classList.remove("on"); });
+        b.classList.add("on");
+      });
+      seg.appendChild(b);
+    });
+    return seg;
+  }
+
+  /* „Bilder in Beschreibungen laden" als fertige Zeile. Ebenfalls
+     herausgezogen (12.8.2026), weil der Assistent sie im letzten Schritt
+     zeigt: der Erklärtext wechselt mit dem Schalter (refresh), und
+     genau diese Kopplung wäre in einer zweiten Fassung als Erstes
+     auseinandergelaufen.
+
+     WARUM ES DIESE OPTION BRAUCHT (am 29.7.26 nachgemessen): die Plattformen
+     setzen unverkleinerte Pressebilder in den Aufruf-Text. 35 abrufbare
+     Bilder, zusammen 27,5 MB, im Mittel 804 KB — das größte ein einzelnes
+     foodwatch-PNG mit 17,25 MB, mehr als ein Achtel aller 14.036 Volltexte
+     zusammen. Da die Bilder EINGEBETTET sind, kann die App sie nicht
+     verkleinern; abschalten ist der einzige Schutz. Deshalb ist die Option
+     kein Beiwerk, sondern die Gegenmaßnahme.
+
+     EIN EIGENES BILD-PAKET (Kopien selbst ausliefern, umkodiert auf 800 px)
+     wurde gebaut und wieder verworfen: es nützte nur foodwatch — 24,5 MB
+     wären auf 0,92 MB geschrumpft —, aber images.avaaz.org beantwortet
+     robots.txt mit HTTP 403, seine 16 Bilder dürfen wir nicht kopieren. Für
+     eine Plattform lohnte die Mechanik nicht, und eigene Kopien fremder
+     Bilder zu verbreiten ist rechtlich etwas anderes als einbetten. Die
+     6.037 Vorschaubilder der Listenansicht bleiben aus demselben Grund
+     eingebettet; selbst ausgeliefert wären sie auch umkodiert rund 83 MB.
+
+     Anders als Farbdesign und Layout hängt das nicht nur an CSS:
+     ausgeschaltet werden die <img> beim Aufbau der Beschreibung entfernt
+     (stripImages), deshalb muss die Ansicht danach neu gezeichnet werden.
+     Aufgeklappte Petitionen bleiben dabei offen, weil der Zustand in state
+     und nicht im DOM steht. */
+  /* kurz=true zeigt statt der ausführlichen Begründung nur den Zustand.
+     Gebraucht im Assistenten: dort steht das WARUM bereits hinter dem
+     Info-Symbol, und der lange Text lief darunter in der 168 px schmalen
+     Textspalte über zehn Zeilen — zweimal dasselbe Argument untereinander.
+     Auf der Einstellungsseite bleibt es beim langen Text: dort gibt es kein
+     Info-Symbol an dieser Zeile, die Begründung hat sonst keinen Ort. */
+  function bilderZeile(kurz) {
+    var row = el('<div class="srow srow--static">' +
+      '<span class="srow__ic"><i class="fa-solid fa-image"></i></span>' +
+      '<span class="srow__body"><span class="srow__t">' +
+      esc(T("settings.descImagesLabel", "Bilder in Beschreibungen laden")) +
+      "</span>" +
+      '<span class="srow__s srow__imgnote"></span></span>' +
+      '<span class="srow__end"><label class="switch"><input type="checkbox"' +
+      (state.prefs.descImages ? " checked" : "") +
+      '><span class="slider"></span></label></span></div>');
+    var note = row.querySelector(".srow__imgnote");
+    function refresh() {
+      if (kurz) {
+        note.textContent = state.prefs.descImages
+          ? T("wizard.imagesOn", "Bilder werden mitgeladen.")
+          : T("wizard.imagesOff", "Nur Text – spart Datenvolumen.");
+        return;
+      }
+      note.textContent = state.prefs.descImages
+        ? T("settings.descImagesOn",
+            "Fotos und Logos werden beim Öffnen einer Petition aus dem Internet "
+            + "nachgeladen. Das setzt eine Internetverbindung voraus und "
+            + "verbraucht Datenvolumen – einzelne Bilder sind mehrere Megabyte "
+            + "groß. Unterwegs am besten nur im WLAN einschalten.")
+        : T("settings.descImagesOff",
+            "Nur Text. Es werden keine Bilddateien aus dem Internet abgerufen, "
+            + "es entsteht also kein Datenverbrauch für Bilder.");
+    }
+    refresh();
+    row.querySelector("input").addEventListener("change", function () {
+      state.prefs.descImages = this.checked;
+      savePrefs(); refresh();
+      /* Im Assistenten NICHT neu zeichnen: render() räumt die Liste unter dem
+         Overlay auf, das kostet dort nur Zeit — und mit scrollTo(0,0) am Ende
+         zöge es den Hintergrund nach oben, während der Assistent darüber
+         stehen bleibt. Auf der Einstellungsseite ist das Neuzeichnen dagegen
+         nötig (stripImages greift beim Aufbau), und der Scrollstand muss
+         gemerkt werden, sonst stünde man danach wieder ganz oben. */
+      if (document.getElementById("wizard")) return;
+      var y = window.pageYOffset || document.documentElement.scrollTop || 0;
+      render();
+      window.scrollTo(0, y);
+    });
+    return row;
+  }
+
   // Eine Zeile im Listen-Layout: Icon, Titel, Untertitel, rechts ein Element.
   function setRow(icon, title, sub, opts) {
     opts = opts || {};
@@ -4044,37 +4161,11 @@
     // unauffindbar.
     content.appendChild(setSection(T("settings.sections.appearance", "Darstellung")));
 
-    // Zwei Schalterleisten nach demselben Muster: Farbdesign und Layout.
-    // Beide setzen nur ein Attribut auf <html> und speichern die Wahl – kein
-    // Neuzeichnen nötig, weil ausschließlich CSS daran hängt.
-    function segControl(label, items, current, pick) {
-      var seg = el('<div class="seg" role="group" aria-label="' +
-        esc(label) + '"></div>');
-      items.forEach(function (it) {
-        /* Icon ist optional (seit der Sprachwahl 8.8.2026): dort trägt die
-           Beschriftung schon eine Flagge, ein FontAwesome-Zeichen daneben
-           wäre doppelt. Ohne diese Abfrage entstünde `<i class="fa-solid ">`
-           — ein leeres Icon-Element, das je nach Schriftstand einen
-           Platzhalter oder eine Lücke zeichnet. */
-        /* it[3] ist eine FLAGGE. Sie steht in einem eigenen <span class="flag">
-           und nicht im Beschriftungstext, weil sie sonst als nacktes Emoji
-           erschiene — quer statt rund (Nutzerwunsch 12.8.2026: „Flaggen
-           überall als Kreis"). Der Text selbst bleibt escaped. */
-        var b = el('<button class="seg__b' +
-          (current === it[0] ? " on" : "") + '" type="button">' +
-          (it[2] ? '<i class="fa-solid ' + it[2] + '"></i> ' : "") +
-          (it[3] ? '<span class="flag">' + it[3] + "</span> " : "") +
-          esc(it[1]) + "</button>");
-        b.addEventListener("click", function () {
-          pick(it[0]);
-          seg.querySelectorAll(".seg__b").forEach(function (x) {
-            x.classList.remove("on"); });
-          b.classList.add("on");
-        });
-        seg.appendChild(b);
-      });
-      return seg;
-    }
+    /* Zwei Schalterleisten nach demselben Muster: Farbdesign und Layout.
+       Beide setzen nur ein Attribut auf <html> und speichern die Wahl – kein
+       Neuzeichnen nötig, weil ausschließlich CSS daran hängt.
+       segControl() steht seit dem 12.8.2026 oben im Modul, weil der
+       Assistent dieselben Leisten zeigt. */
 
     /* SPRACHE zuerst — sie ändert alles Weitere auf dem Bildschirm, deshalb
        steht sie über Farbdesign und Layout (8.8.2026, Nutzerwunsch).
@@ -4230,65 +4321,6 @@
     content.appendChild(akzentBox);
     akzentSichtbar();
 
-    /* WARUM ES DIESE OPTION BRAUCHT (am 29.7.26 nachgemessen): die Plattformen
-       setzen unverkleinerte Pressebilder in den Aufruf-Text. 35 abrufbare
-       Bilder, zusammen 27,5 MB, im Mittel 804 KB — das größte ein einzelnes
-       foodwatch-PNG mit 17,25 MB, mehr als ein Achtel aller 14.036 Volltexte
-       zusammen. Da die Bilder EINGEBETTET sind, kann die App sie nicht
-       verkleinern; abschalten ist der einzige Schutz. Deshalb ist die Option
-       kein Beiwerk, sondern die Gegenmaßnahme.
-       EIN EIGENES BILD-PAKET (Kopien selbst ausliefern, umkodiert auf 800 px)
-       wurde gebaut und wieder verworfen: es nützte nur foodwatch — 24,5 MB
-       wären auf 0,92 MB geschrumpft —, aber images.avaaz.org beantwortet
-       robots.txt mit HTTP 403, seine 16 Bilder dürfen wir nicht kopieren. Für
-       eine Plattform lohnte die Mechanik nicht, und eigene Kopien fremder
-       Bilder zu verbreiten ist rechtlich etwas anderes als einbetten. Die
-       6.037 Vorschaubilder der Listenansicht bleiben aus demselben Grund
-       eingebettet; selbst ausgeliefert wären sie auch umkodiert rund 83 MB.
-
-       Anders als Farbdesign und Layout hängt das
-       nicht nur an CSS: ausgeschaltet werden die <img> beim Aufbau der
-       Beschreibung entfernt (stripImages), deshalb muss die Ansicht danach neu
-       gezeichnet werden. Aufgeklappte Petitionen bleiben dabei offen, weil der
-       Zustand in state und nicht im DOM steht. */
-    var imgRow = el('<div class="srow srow--static">' +
-      '<span class="srow__ic"><i class="fa-solid fa-image"></i></span>' +
-      '<span class="srow__body"><span class="srow__t">' +
-      esc(T("settings.descImagesLabel", "Bilder in Beschreibungen laden")) +
-      "</span>" +
-      '<span class="srow__s srow__imgnote"></span></span>' +
-      '<span class="srow__end"><label class="switch"><input type="checkbox"' +
-      (state.prefs.descImages ? " checked" : "") +
-      '><span class="slider"></span></label></span></div>');
-    var imgNote = imgRow.querySelector(".srow__imgnote");
-    function refreshImgNote() {
-      imgNote.textContent = state.prefs.descImages
-        ? T("settings.descImagesOn",
-            "Fotos und Logos werden beim Öffnen einer Petition aus dem Internet "
-            + "nachgeladen. Das setzt eine Internetverbindung voraus und "
-            + "verbraucht Datenvolumen – einzelne Bilder sind mehrere Megabyte "
-            + "groß. Unterwegs am besten nur im WLAN einschalten.")
-        : T("settings.descImagesOff",
-            "Nur Text. Es werden keine Bilddateien aus dem Internet abgerufen, "
-            + "es entsteht also kein Datenverbrauch für Bilder.");
-    }
-    refreshImgNote();
-    imgRow.querySelector("input").addEventListener("change", function () {
-      state.prefs.descImages = this.checked;
-      savePrefs(); refreshImgNote();
-      // render() endet mit scrollTo(0,0) — ohne das Merken stünde man nach dem
-      // Umschalten wieder oben in den Einstellungen statt am Schalter.
-      var y = window.pageYOffset || document.documentElement.scrollTop || 0;
-      render();
-      window.scrollTo(0, y);
-    });
-    /* ⚠️ imgRow wird hier NICHT angehängt, sondern weiter unten unter „Daten"
-       (Nutzerentscheidung 12.8.2026). Die Zeile stand unter „Darstellung",
-       ihr eigener Erklärtext argumentiert aber fast nur mit Verbrauch:
-       „setzt eine Internetverbindung voraus und verbraucht Datenvolumen —
-       einzelne Bilder sind mehrere Megabyte groß". Das ist keine Frage des
-       Aussehens. Gebaut wird sie weiter hier, weil sie auf imgNote und
-       refreshImgNote() zugreift, die in diesem Abschnitt entstehen. */
 
     /* ⚠️ KEINE eigene Abschnittsüberschrift „Plattformen" (12.8.2026): die
        Kopfzeile des Akkordions sagt bereits „Plattformen 11/11 aktiv" und ist
@@ -4466,8 +4498,14 @@
 
     // ---- Daten ---------------------------------------------------------------
     content.appendChild(setSection(T("settings.sections.data", "Daten")));
-    // Hierher gehört „Bilder in Beschreibungen laden" (siehe oben bei imgRow).
-    content.appendChild(imgRow);
+    /* „Bilder in Beschreibungen laden" gehört hierher und nicht unter
+       „Darstellung" (Nutzerentscheidung 12.8.2026): der eigene Erklärtext
+       der Zeile argumentiert fast nur mit Verbrauch — „setzt eine
+       Internetverbindung voraus und verbraucht Datenvolumen, einzelne Bilder
+       sind mehrere Megabyte groß". Das ist keine Frage des Aussehens.
+       Gebaut wird sie oben im Modul (bilderZeile), weil der Assistent sie im
+       letzten Schritt ebenfalls zeigt. */
+    content.appendChild(bilderZeile());
 
     /* ---- Nach Updates suchen (8.8.2026) ---------------------------------
        Erscheint NUR, wenn window.AndroidUpdate existiert - also in der
@@ -4916,14 +4954,20 @@
     }
   }
 
-  function renderNotifyBox() {
+  /* ohneIntro=true lässt die Einleitungszeile weg. Gebraucht im Assistenten:
+     dort steht dieselbe Aussage ausführlicher hinter dem Info-Symbol, und
+     zweimal dasselbe untereinander liest sich wie ein Fehler. Als Parameter
+     statt „im Aufrufer das erste Kind entfernen" — das hinge daran, dass die
+     Einleitung das erste Kind BLEIBT. */
+  function renderNotifyBox(ohneIntro) {
     var n = state.prefs.notify;
     var box = el('<div class="nbox"></div>');
 
-    box.appendChild(el('<div class="srow__note">' +
-      esc(T("notify.intro",
-            "Einmal am Tag eine kurze Info über neue Petitionen.")) +
-      "</div>"));
+    if (!ohneIntro)
+      box.appendChild(el('<div class="srow__note">' +
+        esc(T("notify.intro",
+              "Einmal am Tag eine kurze Info über neue Petitionen.")) +
+        "</div>"));
 
     var main = el('<div class="srow srow--static">' +
       '<span class="srow__ic"><i class="fa-solid fa-bell"></i></span>' +
@@ -5677,8 +5721,15 @@
   }
 
   // ---- Ersteinrichtung (Wizard) ----------------------------------------------
-  // Drei Schritte beim ersten Start: Begrüßung → Sprachen → Plattformen.
-  // Liegt als Overlay über der App, damit auch die Fußleiste verdeckt ist.
+  /* Beim ersten Start: Begrüßung → Sprachen → Farbdesign+Layout → Plattformen
+     → Benachrichtigungen+Bilder → Fertig. Liegt als Overlay über der App,
+     damit auch die Fußleiste verdeckt ist.
+
+     ⚠️ Am 12.8.2026 von drei auf fünf gezählte Schritte erweitert
+     (Nutzerwunsch). Die Schrittzahl steckt an VIER Stellen in renderWizard():
+     TOTAL, die Fortschrittspunkte, isLast und die Sperren am „Weiter"-Knopf.
+     Sie hängen jetzt alle an TOTAL, damit ein sechster Schritt nicht wieder
+     drei Zahlen von Hand nachzieht. */
   /* Auswahl während des Wizards.
        langs   – die in Schritt 1 gewählten Sprachen
        plats   – die angehakten Plattformen (das Ergebnis)
@@ -5688,7 +5739,8 @@
      gesetzt" von „vom Nutzer entschieden" unterscheiden. Ohne ihn würde jeder
      Sprachwechsel die Handauswahl überfahren — und im Ausklapper wäre keine
      einzelne fremdsprachige Plattform dauerhaft mitzunehmen. */
-  var wizardSel = { langs: null, plats: null, gesehen: null, manuell: null };
+  var wizardSel = { langs: null, plats: null, gesehen: null, manuell: null,
+                   langsManuell: false };
 
   /* ⚠️ 11.8.2026 umgestellt (Nutzerentscheidung): Schritt 1 fragt nach der
      HAUPTSPRACHE einer Plattform, nicht mehr danach, welche Übersetzungen sie
@@ -5715,14 +5767,38 @@
     });
   }
 
+  /* Vorbelegung der PLATTFORM-Sprache aus der OBERFLÄCHEN-Sprache
+     (Nutzerwunsch 12.8.2026: „wer Englisch wählt, soll auch englisch
+     vorausgewählte Plattformen bekommen, genauso bei Deutsch").
+
+     Vorher stand hier fest „de", unabhängig davon, was auf dem
+     Begrüßungsbildschirm gewählt wurde — wer auf Englisch umstellte, bekam
+     trotzdem die deutschen Plattformen vorgeschlagen.
+
+     ⚠️ Zwei verschiedene Sprachen, die man auseinanderhalten muss:
+     state.prefs.lang ist die Sprache der OBERFLÄCHE, wizardSel.langs die der
+     PLATTFORMEN. Sie fallen nur zufällig zusammen; deshalb der Abgleich gegen
+     wizardLanguages(), das aus p.language kommt (platMainLanguage) und nicht
+     aus den Übersetzungen.
+
+     Rückfall, wenn es zur Oberflächensprache gar keine Plattform gibt: erst
+     Deutsch, dann die erste vorhandene. Sonst stünde der Assistent mit einer
+     leeren Auswahl da. */
+  function wizardSprachvorwahl() {
+    if (wizardSel.langsManuell) return;   // Handauswahl in Schritt 1 gewinnt
+    var da = wizardLanguages();
+    var ui = state.prefs.lang || STANDARDSPRACHE;
+    var wahl = da.indexOf(ui) >= 0 ? ui
+             : (da.indexOf("de") >= 0 ? "de" : da[0]);
+    wizardSel.langs = new Set(wahl ? [wahl] : []);
+    // Die Plattform-Vorauswahl muss neu greifen, sonst bliebe sie beim Alten.
+    wizardSel.gesehen = new Set();
+  }
+
   function startWizard() {
     state.wizardStep = 0;
-    /* Vorbelegung: bereits aktive Plattformen bzw. alles Deutschsprachige.
-       Deutsch als Start ist gesetzt (Nutzervorgabe „Start soll in Deutschland
-       sein"); erst wenn es gar keine deutsche Plattform gibt, greift die
-       erste vorhandene Sprache. */
-    var langs = wizardLanguages();
-    wizardSel.langs = new Set(langs.indexOf("de") >= 0 ? ["de"] : langs.slice(0, 1));
+    wizardSel.langsManuell = false;
+    wizardSprachvorwahl();
     wizardSel.plats = new Set(state.enabled === null
       ? livePlatforms().map(function (p) { return p.key; })
       : Array.from(state.enabled));
@@ -5755,7 +5831,22 @@
     catch (e) { /* ohne History-API bleiben die Knöpfe im Assistenten */ }
   }
 
-  function closeWizard(save) {
+  /* zielListe=false lässt die Ansicht stehen, aus der der Assistent geöffnet
+     wurde. Das gilt für GENAU EINEN Ausgang: die Zurücktaste auf dem
+     Begrüßungsbildschirm. „Zurück" heißt zurück — dort auf die Liste zu
+     springen wäre keine Rücknahme, sondern eine neue Navigation.
+
+     Alle anderen Ausgänge sind ein ABSCHLUSS und führen auf die Liste
+     (Nutzerwunsch 12.8.2026): Fertig, Überspringen und der Import. Wer den
+     Assistenten aus den Einstellungen heraus geöffnet hatte, landete sonst
+     wieder in den Einstellungen und bekam von seiner frischen Auswahl nichts
+     zu sehen.
+
+     goHome() statt nur state.tab: es räumt zusätzlich Plattform-, Kategorie-
+     und Tag-Filter weg. Nach einer neuen Plattform-Auswahl wäre ein noch
+     stehender Filter aus der Zeit davor das Erste, was man sieht — und er
+     könnte auf eine Plattform zeigen, die man gerade abgewählt hat. */
+  function closeWizard(save, zielListe) {
     if (save) {
       state.enabled = new Set(wizardSel.plats);
       saveEnabled();
@@ -5775,7 +5866,9 @@
       wizardRuecknahme = true;
       try { history.back(); } catch (e) { wizardRuecknahme = false; }
     }
-    render();
+    // goHome() zeichnet selbst und scrollt nach oben – kein zweites render().
+    if (zielListe === false) render();
+    else goHome();
   }
 
   function renderWizard() {
@@ -5783,7 +5876,10 @@
     if (old) old.remove();
     document.body.classList.add("wizard-open");
 
-    var TOTAL = 3;                       // gezählte Schritte (ohne Begrüßung)
+    /* Gezählte Schritte OHNE die Begrüßung (die trägt keine Punkte):
+       1 Sprachen · 2 Farbdesign+Layout · 3 Plattformen ·
+       4 Benachrichtigungen+Bilder · 5 Fertig. */
+    var TOTAL = 5;
     var step = state.wizardStep;
     var ov = el('<div class="wiz" id="wizard"><div class="wiz__inner">' +
       '<div class="wiz__top"></div>' +
@@ -5847,11 +5943,70 @@
           '" type="button"><span class="flag">' + s.flagge + "</span> " +
           esc(s.name) + "</button>");
         b.addEventListener("click", function () {
-          state.prefs.lang = s.code; savePrefs(); applyLayout(); renderWizard();
+          state.prefs.lang = s.code; savePrefs(); applyLayout();
+          /* Die Plattform-Vorauswahl folgt der Oberflächensprache mit —
+             es sei denn, in Schritt 1 wurde schon von Hand gewählt. */
+          wizardSprachvorwahl();
+          renderWizard();
         });
         uiLang.appendChild(b);
       });
       main.appendChild(uiLang);
+
+      /* ---- Sicherung importieren statt einrichten (Nutzerwunsch 12.8.2026)
+         „auf der ersten seite unter sprachen soll auch ein import button sein
+         … der dann den Einrichtungsassistenten überspringt, weil alle
+         informationen ja schon im import sind."
+
+         Und genau so ist es: applyBackup() schreibt Plattform-Auswahl,
+         Favoriten, unterschrieben/archiviert und prefs zurück — prefs trägt
+         Sprache, Farbdesign, Layout und Benachrichtigungen. Jede Frage des
+         Assistenten wäre danach eine Frage nach etwas, das schon
+         beantwortet ist.
+
+         ⚠️ closeWizard(FALSE), nicht true: true würde wizardSel.plats
+         speichern — die Vorauswahl des Assistenten, die die eben
+         eingespielte Plattform-Auswahl wieder überschriebe. Der Import hat
+         state.enabled bereits gesetzt, hier ist nichts mehr zu sichern.
+         Der Assistent gilt trotzdem als erledigt: das setzt closeWizard()
+         unabhängig vom Argument.
+
+         Die Rückmeldung bleibt bei einem FEHLER im Assistenten stehen, statt
+         ihn zu schließen — eine fehlgeschlagene Datei darf nicht dazu
+         führen, dass man ohne Einrichtung und ohne Erklärung in der App
+         landet. */
+      var imp = el('<div class="wiz__imp"><div class="wiz__imp-n">' +
+        esc(T("wizard.importHint",
+              "Du hast schon eine Sicherung? Dann übernehmen wir alles " +
+              "daraus und du bist sofort fertig.")) + "</div></div>");
+      var impNote = imp.querySelector(".wiz__imp-n");
+      var impBtn = el('<button class="wiz__imp-b" type="button">' +
+        '<i class="fa-solid fa-file-import"></i> ' +
+        esc(T("wizard.importBtn", "Sicherung importieren")) + "</button>");
+      var impFile = el('<input type="file" accept="application/json,.json" ' +
+        'style="display:none">');
+      impBtn.addEventListener("click", function () { impFile.click(); });
+      impFile.addEventListener("change", function () {
+        if (!impFile.files || !impFile.files[0]) return;
+        var datei = impFile.files[0];
+        // Vor dem Lesen leeren: sonst löst dieselbe Datei beim zweiten Anlauf
+        // kein `change` mehr aus, und der Knopf wirkte kaputt.
+        impFile.value = "";
+        impBtn.disabled = true;
+        importData(datei, function (ok, res) {
+          impBtn.disabled = false;
+          if (!ok) {
+            imp.classList.add("wiz__imp--err");
+            impNote.textContent = fill(T("io.importFailed",
+              "Import fehlgeschlagen: {fehler}"), { fehler: res });
+            return;
+          }
+          closeWizard(false);
+        });
+      });
+      imp.appendChild(impBtn);
+      imp.appendChild(impFile);
+      main.appendChild(imp);
 
     } else if (step === 1) {
       main.appendChild(el('<h1 class="wiz__title">' +
@@ -5896,6 +6051,8 @@
             }
             wizardSel.langs["delete"](code);
           } else wizardSel.langs.add(code);
+          // Ab jetzt gilt die Wahl des Nutzers, nicht mehr die Oberflächensprache.
+          wizardSel.langsManuell = true;
           chip.classList.toggle("on", wizardSel.langs.has(code));
           foot.querySelector(".wiz__next").disabled = !wizardSel.langs.size;
         });
@@ -5909,6 +6066,61 @@
         esc(T("wizard.lang.hint", "Das lässt sich jederzeit ändern.")) + "</p>"));
 
     } else if (step === 2) {
+      /* ---- Farbdesign + Layout (Nutzerwunsch 12.8.2026) -------------------
+         „farbdesign und layout können zusammen abgefragt werden im
+         assistenten" — beide beantworten dieselbe Frage („wie soll es
+         aussehen?") und ändern beide nur ein Attribut an <html>. Der Effekt
+         ist sofort sichtbar, weil der Assistent selbst aus denselben
+         CSS-Variablen gezeichnet wird: man sieht die Wahl an der Seite, auf
+         der man sie trifft.
+
+         Gebaut aus DENSELBEN Bauteilen wie die Einstellungsseite
+         (segControl, lblMitInfo) — deshalb wurden die beiden herausgezogen.
+         Eine zweite Fassung der Schalterleiste wäre beim nächsten Eingriff
+         auseinandergelaufen, und ausgerechnet hier fiele es nicht auf: den
+         Assistenten sieht man genau einmal.
+
+         Die AKZENTFARBE bleibt bewusst draußen. Sie wirkt nur im Magazin
+         (alle 36 [data-accent]-Regeln hängen unter [data-layout="magazin"]),
+         und eine Farbwahl, die je nach Layout eine Wirkung hat oder nicht,
+         ist nichts für den ersten Start. In den Einstellungen steht sie
+         weiter — dort blendet der Layout-Schalter sie passend um. */
+      main.appendChild(el('<h1 class="wiz__title">' +
+        esc(T("wizard.look.title", "Wie soll die App aussehen?")) + "</h1>"));
+      main.appendChild(el('<p class="wiz__text">' +
+        esc(T("wizard.look.text",
+              "Wähle, was dir besser gefällt – beides lässt sich später " +
+              "jederzeit umstellen.")) + "</p>"));
+
+      /* Beide Erklärungen hinter dem Info-Symbol (Nutzerwunsch: „mit
+         tooltips wie bei layout"). Auf der Einstellungsseite steht der
+         Farbdesign-Hinweis noch offen, weil er dort ein Halbsatz zwischen
+         zwei Leisten ist; hier sind es zwei Blöcke direkt untereinander,
+         und offene Hinweistexte schöben den zweiten Schalter aus dem Bild. */
+      var themeLbl = lblMitInfo(T("settings.themeLabel", "Farbdesign"),
+        T("settings.darkModeHint",
+          "„Automatisch“ folgt der Einstellung deines Geräts."));
+      main.appendChild(themeLbl.lbl);
+      main.appendChild(segControl(T("settings.themeLabel", "Farbdesign"),
+        [["light", T("settings.themeLight", "Hell"), "fa-sun"],
+         ["dark", T("settings.themeDark", "Dunkel"), "fa-moon"],
+         ["auto", T("settings.themeAuto", "Auto"), "fa-circle-half-stroke"]],
+        state.prefs.theme,
+        function (v) { state.prefs.theme = v; savePrefs(); applyTheme(); }));
+      main.appendChild(themeLbl.note);
+
+      var layoutLbl2 = lblMitInfo(T("settings.layoutLabel", "Layout"),
+        T("settings.layoutHint",
+          "Ändert nur das Aussehen der Listen, nicht die Inhalte."));
+      main.appendChild(layoutLbl2.lbl);
+      main.appendChild(segControl(T("settings.layoutLabel", "Layout"),
+        [["relief", T("settings.layoutRelief", "Relief"), "fa-cube"],
+         ["magazin", T("settings.layoutMag", "Magazin"), "fa-image"]],
+        state.prefs.layout,
+        function (v) { state.prefs.layout = v; savePrefs(); applyLayout(); }));
+      main.appendChild(layoutLbl2.note);
+
+    } else if (step === 3) {
       main.appendChild(el('<h1 class="wiz__title">' +
         esc(T("wizard.platforms.title", "Welche Plattformen möchtest du sehen?"))
         + "</h1>"));
@@ -6046,6 +6258,56 @@
         esc(T("wizard.platforms.hint",
               "Später jederzeit in den Einstellungen änderbar.")) + "</p>"));
 
+    } else if (step === 4) {
+      /* ---- Benachrichtigungen + Bilder (Nutzerwunsch 12.8.2026) -----------
+         Die letzten beiden Fragen vor dem Schlussbild. Beide kosten den
+         Nutzer etwas — die eine eine Systemfreigabe, die andere
+         Datenvolumen —, deshalb stehen sie hier und nicht versteckt in den
+         Einstellungen: wer sie beim ersten Start bewusst beantwortet, wird
+         später nicht überrascht.
+
+         ⚠️ Der Schalter fragt die Android-Freigabe wirklich an
+         (notifyRequest im Schalter von renderNotifyBox). Das ist gewollt:
+         eine Zusage, die erst beim nächsten App-Start eingeholt wird, käme
+         ohne jeden Zusammenhang. */
+      main.appendChild(el('<h1 class="wiz__title">' +
+        esc(T("wizard.extras.title", "Zwei Kleinigkeiten noch")) + "</h1>"));
+      main.appendChild(el('<p class="wiz__text">' +
+        esc(T("wizard.extras.text",
+              "Beides ist freiwillig und jederzeit umstellbar.")) + "</p>"));
+
+      /* Erklärungen hinter dem Info-Symbol, wie beim Layout (ausdrücklicher
+         Nutzerwunsch). Bei den Bildern trägt der ⓘ-Text bewusst etwas
+         ANDERES als die Zeile darunter: die Zeile sagt, was gerade
+         passiert (und wechselt mit dem Schalter), der ⓘ-Text sagt, warum es
+         die Option überhaupt gibt. */
+      var notLbl = lblMitInfo(T("settings.sections.notify", "Benachrichtigungen"),
+        T("wizard.notifyInfo",
+          "Einmal am Tag eine kurze Info über neue Petitionen deiner " +
+          "Plattformen. Dein Gerät fragt dafür einmalig um Erlaubnis. " +
+          "Es werden dabei keine Daten verschickt – die App zählt nur, was " +
+          "sie ohnehin schon geladen hat."));
+      main.appendChild(notLbl.lbl);
+      main.appendChild(notLbl.note);
+      // ohne die eigene Einleitungszeile: die steht hier im ⓘ-Text.
+      main.appendChild(renderNotifyBox(true));
+
+      /* ⚠️ Die Überschrift heißt „Bilder", NICHT „Bilder in Beschreibungen
+         laden": die Zeile darunter trägt den vollen Namen bereits, und beides
+         untereinander las sich wie ein Fehler (am 12.8.2026 im Prüfstand
+         gesehen — derselbe Doppelbefund wie zuvor bei „Plattformen" in den
+         Einstellungen). Die beiden Überschriften dieser Seite wirken als
+         Abschnittsköpfe, genau wie setSection() in den Einstellungen. */
+      var imgLbl = lblMitInfo(T("wizard.imagesLabel", "Bilder"),
+        T("wizard.imagesInfo",
+          "Die Plattformen betten unverkleinerte Pressebilder in ihre " +
+          "Aufruftexte ein – einzelne sind über 17 MB groß. Die App kann sie " +
+          "nicht verkleinern, weil sie mitten im Text stecken; abschalten " +
+          "ist der einzige Weg, Datenvolumen zu sparen."));
+      main.appendChild(imgLbl.lbl);
+      main.appendChild(imgLbl.note);
+      main.appendChild(bilderZeile(true));   // kurzer Zustandstext, s. ⓘ oben
+
     } else {
       main.appendChild(el('<div class="wiz__hero">' +
         '<div class="wiz__mark wiz__mark--done">' +
@@ -6060,7 +6322,8 @@
     }
 
     // Fußzeile: Zurück / Weiter
-    if (step > 0 && step < 3) {
+    // Auf dem Schlussbild kein „Zurück" — dort steht nur noch „Los geht's".
+    if (step > 0 && step < TOTAL) {
       var back = el('<button class="wiz__back" type="button">' +
         '<i class="fa-solid fa-chevron-left"></i> ' +
         esc(T("wizard.back", "Zurück")) + "</button>");
@@ -6076,14 +6339,19 @@
       });
       foot.appendChild(back);
     }
-    var isLast = step === 3;
+    var isLast = step === TOTAL;
     var nextLabel = step === 0 ? T("wizard.intro.cta", "Los geht's")
                   : isLast     ? T("wizard.finish", "Los geht's")
                                : T("wizard.next", "Weiter");
     var next = el('<button class="wiz__next" type="button">' + esc(nextLabel) +
       ' <i class="fa-solid fa-arrow-right"></i></button>');
+    /* Die beiden Auswahlschritte lassen sich nicht leer verlassen. Die
+       Sperren an den Kacheln selbst verhindern das schon (mindestens eine
+       Sprache, mindestens eine Plattform) — das hier ist die zweite Reihe
+       für den Fall, dass die Auswahl aus einem Sprachwechsel leer hervorgeht.
+       ⚠️ Schrittnummern: 1 = Sprachen, 3 = Plattformen (seit 12.8.2026). */
     if ((step === 1 && !wizardSel.langs.size) ||
-        (step === 2 && !wizardSel.plats.size)) next.disabled = true;
+        (step === 3 && !wizardSel.plats.size)) next.disabled = true;
     next.addEventListener("click", function () {
       if (isLast) { closeWizard(true); return; }
       state.wizardStep++; renderWizard();
@@ -6217,7 +6485,9 @@
         wizardEintragLegen();         // damit die nächste Zurücktaste wieder hier landet
         return;
       }
-      closeWizard(false);
+      // Zurücktaste auf dem Begrüßungsbildschirm: zurück, wo man herkam —
+      // NICHT auf die Liste. Der einzige Ausgang mit zielListe=false.
+      closeWizard(false, false);
       return;
     }
     var s = e.state && e.state.pmNav;

@@ -105,11 +105,49 @@ window.PM_TEXTS = {
         text: "Wähle die Plattform-Sprachen aus, die du sehen möchtest. Du kannst das jederzeit in den Einstellungen ändern.",
         hint: "Mindestens eine Sprache wählen."
       },
+      /* Schritt 2: Farbdesign und Layout zusammen. Die Beschriftungen der
+         beiden Schalterleisten kommen aus settings.* — es sind dieselben
+         Bedienelemente wie in den Einstellungen, und zwei getrennte
+         Übersetzungen desselben Wortes wären eine Fehlerquelle. */
+      look: {
+        title: "Wie soll die App aussehen?",
+        text: "Wähle, was dir besser gefällt – beides lässt sich später jederzeit umstellen."
+      },
       platforms: {
         title: "Welche Plattformen möchtest du beobachten?",
         text: "Wähle aus, welche Plattformen dir in der Liste angezeigt werden. Deaktivierte Plattformen kannst du jederzeit wieder einblenden.",
         hint: "Du kannst die Auswahl jederzeit in den Einstellungen ändern."
       },
+      /* Schritt 4: Benachrichtigungen und Bilder. */
+      extras: {
+        title: "Zwei Kleinigkeiten noch",
+        text: "Beides ist freiwillig und jederzeit umstellbar."
+      },
+      /* Hinter dem ⓘ an „Benachrichtigungen". Ausführlicher als
+         notify.intro auf der Einstellungsseite: hier wird zum ersten Mal
+         danach gefragt, und der Satz muss die Systemabfrage ankündigen, die
+         gleich darauf erscheint. */
+      notifyInfo: "Einmal am Tag eine kurze Info über neue Petitionen deiner Plattformen. Dein Gerät fragt dafür einmalig um Erlaubnis. Es werden dabei keine Daten verschickt – die App zählt nur, was sie ohnehin schon geladen hat.",
+      /* Abschnittskopf über der Bilder-Zeile. Bewusst KURZ: die Zeile darunter
+         heißt schon „Bilder in Beschreibungen laden", derselbe Satz zweimal
+         untereinander liest sich wie ein Fehler. */
+      imagesLabel: "Bilder",
+      /* Zustandszeile im Assistenten – KURZ. Die Begründung steht dort hinter
+         dem ⓘ (imagesInfo); der lange Text von settings.descImagesOn/Off lief
+         daneben über zehn Zeilen und sagte dasselbe ein zweites Mal. */
+      imagesOn: "Bilder werden mitgeladen.",
+      imagesOff: "Nur Text – spart Datenvolumen.",
+      /* Hinter dem ⓘ an „Bilder". Sagt bewusst etwas anderes als die Zeile
+         darunter: die sagt, was gerade passiert, dieser Text sagt, warum es
+         die Option gibt. */
+      imagesInfo: "Die Plattformen betten unverkleinerte Pressebilder in ihre Aufruftexte ein – einzelne sind über 17 MB groß. Die App kann sie nicht verkleinern, weil sie mitten im Text stecken; abschalten ist der einzige Weg, Datenvolumen zu sparen.",
+      /* Import auf dem Begrüßungsbildschirm: übernimmt eine Sicherung und
+         überspringt damit die ganze Einrichtung. */
+      /* „importieren", nicht „einspielen" (Nutzerentscheidung 12.8.2026) —
+         dasselbe Wort wie der Knopf im Profil (io.importBtn). Zwei Wörter für
+         denselben Vorgang lassen ihn wie zwei verschiedene aussehen. */
+      importBtn: "Sicherung importieren",
+      importHint: "Du hast schon eine Sicherung? Dann übernehmen wir alles daraus und du bist sofort fertig.",
       done: {
         title: "Alles bereit.",
         text: "Deine Auswahl ist gespeichert. Tippe auf eine Plattform, um ihre aktuellen Petitionen zu sehen — und wische eine Petition nach rechts, wenn du unterschrieben hast."
@@ -709,11 +747,26 @@ window.PM_TEXTS = {
         text: "Choose the platform languages you want to see. You can change this at any time in the settings.",
         hint: "Choose at least one language."
       },
+      look: {
+        title: "How should the app look?",
+        text: "Pick whichever you prefer – you can change both at any time later."
+      },
       platforms: {
         title: "Which platforms would you like to follow?",
         text: "Choose which platforms are shown to you in the list. Platforms you switch off can be brought back at any time.",
         hint: "You can change your selection at any time in the settings."
       },
+      extras: {
+        title: "Two last things",
+        text: "Both are optional and can be changed at any time."
+      },
+      notifyInfo: "A short daily note about new petitions on your platforms. Your device will ask for permission once. No data is sent – the app only counts what it has already downloaded.",
+      imagesLabel: "Images",
+      imagesOn: "Images are loaded too.",
+      imagesOff: "Text only – saves data.",
+      imagesInfo: "The platforms embed full-size press photos in their appeal texts – some are over 17 MB. The app cannot shrink them because they sit inside the text; switching them off is the only way to save data.",
+      importBtn: "Import a backup",
+      importHint: "Already have a backup? Then we take everything from it and you are done right away.",
       done: {
         title: "All set.",
         text: "Your selection is saved. Tap a platform to see its current petitions — and swipe a petition to the right once you have signed it."
@@ -916,7 +969,7 @@ window.PM_TEXTS = {
       refreshBroken: "{n} source(s) not reachable",
       refreshFailed: "Not reachable.",
       platformsTitle: "Platforms",
-      activeCount: "{n}/{total} on",
+      activeCount: "{n}/{total} active",
       allOff: "Switch all off",
       allOn: "Switch all on",
       platMeta: "{n} petitions",

@@ -837,7 +837,30 @@
       segControl hat dafür einen eigenen Flaggen-Platz bekommen, weil die
       Beschriftung escaped wird. Nachgemessen: null eckige Flaggen mehr.
       (app.js, style.css, texts.js) */
-var CACHE = "pm-cache-v50";
+/* v51 — Einrichtungsassistent umgebaut (Nutzerwunsch 12.8.2026).
+      Die Oberflächensprache steuert jetzt die Plattform-Vorauswahl: wer auf
+      Englisch stellt, bekommt englischsprachige Plattformen vorausgewählt
+      statt fest „de". Eine Handauswahl im Sprachschritt behält Vorrang
+      (wizardSel.langsManuell), sonst überführe ein späterer Sprachwechsel
+      eine bewusst getroffene Entscheidung.
+      Aus drei gezählten Schritten sind fünf geworden: Sprachen →
+      Farbdesign+Layout → Plattformen → Benachrichtigungen+Bilder → Fertig.
+      Die beiden neuen Seiten benutzen DIESELBEN Bauteile wie die
+      Einstellungen (segControl, lblMitInfo, bilderZeile, renderNotifyBox) —
+      dafür wurden die ersten drei aus renderEinstellungen herausgezogen. Die
+      Schrittzahl hängt jetzt überall an TOTAL statt an vier Zahlen von Hand.
+      Neu auf dem Begrüßungsbildschirm: „Sicherung importieren". Der Import
+      beantwortet jede Frage des Assistenten im Voraus (prefs trägt Sprache,
+      Farbdesign, Layout, Benachrichtigungen), deshalb schließt er ihn
+      danach — mit closeWizard(FALSE), sonst überschriebe die Vorauswahl des
+      Assistenten die eben importierte Plattform-Auswahl.
+      Und: nach dem Assistenten landet man auf der LISTE (goHome statt render).
+      Wer ihn aus den Einstellungen heraus geöffnet hatte, kam sonst dorthin
+      zurück und sah von seiner frischen Auswahl nichts. Ausgenommen ist genau
+      EIN Ausgang — die Zurücktaste auf dem Begrüßungsbildschirm; „zurück"
+      heißt zurück, nicht woanders hin.
+      (app.js, style.css, texts.js) */
+var CACHE = "pm-cache-v51";
 /* Versionsunabhängig – überlebt das Hochzählen von CACHE. Diese Zahl sollte ab
    jetzt NICHT mehr steigen: seit die Pakete eine Inhaltskennung tragen ("?v=",
    siehe oben) holt sich jedes geänderte Paket von selbst neu. Ein Sprung wäre
