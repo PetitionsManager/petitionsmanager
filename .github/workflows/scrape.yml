@@ -29,6 +29,25 @@ on:
         description: 'Übersetzungen nachholen (verdoppelt die Detailabrufe, eigener Schritt)'
         type: boolean
         default: false
+      # Speist einen im REPO gepflegten Scraper-Zustand einmalig in den Cache
+      # ein. Anlass (12.8.2026): europarl ist aus GitHubs Rechenzentrum heraus
+      # nicht scrapebar – das EU-Parlament antwortet dort auf JEDE Adresse mit
+      # einer AWS-WAF-Sperrseite (HTTP 202, 6 von 6 Abrufen gemessen). Der
+      # Bestand fror deshalb auf einem alten Stand ein, samt 47 Zusammen-
+      # fassungen aus der Zeit vor der Parser-Korrektur vom 3.8.2026.
+      #
+      # ⚠️ Ohne diesen Schalter nützt ein reparierter, committeter Store
+      # NICHTS: der Schritt "Scraper-Zustand aus Cache holen" überschreibt
+      # ALLE *_petitions.json mit den Fassungen aus dem Cache.
+      #
+      # Bewusst ein EINMALIGER Eingriff und keine Dauerregel: nach dem Lauf
+      # trägt der Cache den reparierten Stand von allein weiter. Eine feste
+      # Regel "Repo schlägt Cache" würde einen später doch erfolgreichen
+      # CI-Scrape still überschreiben.
+      store_aus_repo:
+        description: 'Diese Scraper-Zustände aus dem Repo statt aus dem Cache nehmen (Plattform-Schlüssel, mit Komma getrennt, z. B. "europarl")'
+        type: string
+        default: ''
 
 permissions:
   contents: read
@@ -72,6 +91,60 @@ jobs:
           key: petition-stores-${{ github.run_id }}
           restore-keys: |
             petition-stores-
+
+      # ⚠️ MUSS nach dem Cache-Restore stehen – der überschreibt sonst genau
+      # das, was hier eingespielt wird. Siehe die Begründung bei der Eingabe.
+      - name: "Scraper-Zustand aus dem Repo einspeisen (einmalig, auf Anforderung)"
+        if: ${{ inputs.store_aus_repo != '' }}
+        env:
+          SCHLUESSEL: ${{ inputs.store_aus_repo }}
+        run: |
+          python3 - <<'PY'
+          import json, os, subprocess, sys
+
+          def zaehle(pfad):
+              """Datensätze im Store – die Zahl ist der Beleg, dass der
+              Austausch gewirkt hat. Ein unlesbarer Store ergibt None statt 0:
+              0 sähe aus wie ein leerer Bestand und wäre eine falsche Aussage."""
+              try:
+                  with open(pfad, encoding="utf-8") as f:
+                      d = json.load(f)
+                  return sum(1 for v in d.values()
+                             if isinstance(v, dict) and v.get("slug"))
+              except Exception:
+                  return None
+
+          keys = [k.strip() for k in os.environ["SCHLUESSEL"].split(",") if k.strip()]
+          # Geprüft wird gegen den ECHTEN Bestand der versionierten Dateien,
+          # nicht gegen ein selbstgebautes Namensmuster. Eine Allowlist verwirft
+          # still, und ein Tippfehler sähe hinterher aus wie "hat nichts
+          # gefunden" statt wie ein Fehler.
+          bekannt = subprocess.run(["git", "ls-files", "*_petitions.json"],
+                                   capture_output=True, text=True, check=True
+                                   ).stdout.split()
+          fehler = []
+          for k in keys:
+              ziel = f"{k}_petitions.json"
+              if ziel not in bekannt:
+                  fehler.append(f"{k!r} (im Repo gibt es {ziel} nicht)")
+                  continue
+              vorher = zaehle(ziel)
+              subprocess.run(["git", "checkout", "HEAD", "--", ziel], check=True)
+              nachher = zaehle(ziel)
+              print(f"::warning title=Store aus Repo::{ziel}: aus dem Cache "
+                    f"{vorher} Datensätze -> aus dem Repo {nachher} Datensätze.")
+          if fehler:
+              # Hart abbrechen: ein durchgewinkter Tippfehler hieße, der Lauf
+              # veröffentlicht klaglos weiter den alten Stand.
+              print("::error title=Store aus Repo::Unbekannte Schlüssel: "
+                    + "; ".join(fehler) + ". Bekannt sind: "
+                    + ", ".join(b.replace("_petitions.json", "") for b in bekannt))
+              sys.exit(1)
+          if not keys:
+              print("::error title=Store aus Repo::Eingabe gesetzt, aber leer "
+                    "ausgewertet – nichts eingespielt.")
+              sys.exit(1)
+          PY
 
       # Ohne Cache fällt der Lauf auf den im Repo liegenden Stand zurück. Beim
       # normalen Lauf ist das gewollt (danach wird ja gescrapt), bei "nur
