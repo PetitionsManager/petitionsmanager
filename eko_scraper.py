@@ -388,8 +388,14 @@ def _parse_legacy_template(html: str, url: str) -> dict | None:
     return rec
 
 
-def scrape_petition(fetcher: core.Fetcher, slug: str) -> tuple[str, dict | None]:
-    """(status, record) – status: online | offline | error | skip."""
+def scrape_petition(fetcher: core.Fetcher, slug: str,
+                    sprache: str = "de") -> tuple[str, dict | None]:
+    """(status, record) – status: online | offline | error | skip.
+
+    `sprache` ist die Hauptsprache des Datensatzes: "de" für den deutschen
+    Eintrag, "en" für den englischen Zwilling (PLATFORM_EN). Die Detailseite
+    selbst ist dieselbe — Ekō adressiert Aktionen sprachneutral unter
+    /a/<slug>; welche Sprache herauskommt, entscheidet der Slug."""
     url = f"{BASE_URL}/a/{slug}"
     resp = fetcher.get(url)
     if resp is None:
@@ -401,15 +407,21 @@ def scrape_petition(fetcher: core.Fetcher, slug: str) -> tuple[str, dict | None]
     rec = parse_detail(resp.text, url)
     if rec is None:
         return "skip", None
-    i18n.setze_hauptsprache(rec, "de")
+    i18n.setze_hauptsprache(rec, sprache)
+    # Sprachneutral: die Zahl steht in window.champaign.page und ist bei allen
+    # Fassungen derselben Kampagne dieselbe. Genau daran hängt die Verknüpfung
+    # „gleiche Kampagne, andere Sprache" zwischen den beiden Plattform-Einträgen
+    # (nachgerechnet: nestle-osceola-wasser und
+    # nestle-drop-your-plans-in-osceola-township ergeben beide eko:91).
     kennung = _kampagne_aus_html(resp.text)
     if kennung:
         rec["campaign_id"] = kennung
-    # „ungeklärt" und nicht „fehlt": dass wir die englische Fassung nicht finden
-    # KÖNNEN, ist eine Aussage über uns, nicht über Ekō. Kampagne 91 hat
-    # nachweislich eine (nestle-drop-your-plans-in-osceola-township) — sie ist
-    # von hier aus nur nicht adressierbar. Die App zeigt deshalb kein Abzeichen.
-    i18n.setze_sprachfassung(rec, "en", "ungeklärt")
+    if sprache == "de":
+        # „ungeklärt" und nicht „fehlt": dass wir die englische Fassung nicht
+        # finden KÖNNEN, ist eine Aussage über uns, nicht über Ekō. Seit es den
+        # eigenen englischen Eintrag gibt, übernimmt die Verknüpfung über
+        # campaign_id diese Aufgabe — der i18n-Block bleibt leer.
+        i18n.setze_sprachfassung(rec, "en", "ungeklärt")
     return "online", rec
 
 
@@ -547,6 +559,128 @@ PLATFORM = Platform(
     html_file=HTML_FILE,
     run=run,
     check=check,
+)
+
+
+# ----------------------------------------------------------------------------
+# Der englische Eintrag
+# ----------------------------------------------------------------------------
+# ⚠️ Die englische Liste ist PAGINIERT und braucht darum keine Suchbegriffe:
+# 4 Abrufe decken sie vollständig ab, gegen 26 im deutschen Zweig (Startseite
+# plus 25 Suchbegriffe). Am 12.8.2026 gemessen: 9 + 9 + 9 + 3 = 30 Kampagnen.
+#
+# ⚠️⚠️ ABBRUCH AN DER KARTENZAHL, NICHT AM STATUSCODE. Seite 5 antwortet mit
+# HTTP **200** und 153.740 Byte, enthält aber NULL Kampagnenkarten. Wer auf
+# einen 404 wartet, läuft bis zum Sicherheitsnetz durch und hält das für
+# normal.
+EN_DATA_FILE = Path("eko_en_petitions.json")
+EN_HTML_FILE = Path("eko_en_petitions.html")
+EN_LIST_URL = f"{WWW_URL}/en/campaigns"
+EN_MAX_SEITEN = 12          # Sicherheitsnetz, falls der Abbruch nie greift
+FETCH_HEADERS_EN = dict(FETCH_HEADERS, **{"Accept-Language": "en-US,en;q=0.9"})
+
+
+def discover_en_slugs(fetcher: core.Fetcher) -> dict[str, dict]:
+    """{slug: karten-daten} des englischen Kampagnenbaums."""
+    found: dict[str, dict] = {}
+    prog(phase="discover", current=0, total=EN_MAX_SEITEN,
+         message="Englische Kampagnen …")
+    seite = 0
+    while seite < EN_MAX_SEITEN:
+        seite += 1
+        url = EN_LIST_URL if seite == 1 else f"{EN_LIST_URL}/page/{seite}"
+        resp = fetcher.get(url)
+        if resp is None or not resp.ok:
+            break
+        karten = BeautifulSoup(resp.text, "html.parser").select(CARD_SEL)
+        if not karten:
+            break
+        for card in karten:
+            parsed = _parse_card(card)
+            if parsed and parsed[0] not in found:
+                found[parsed[0]] = parsed[1]
+        prog(current=seite, total=EN_MAX_SEITEN,
+             message=f"Seite {seite} · {len(found)} Kampagnen bisher")
+    log(f"Englische Kampagnen-Liste: {len(found)} Aktionen auf {seite} Seite(n).")
+    # Gemessen am 12.8.2026: 30. Die Schwelle liegt bewusst weit darunter — der
+    # Bestand schwankt, aber unter 5 ist kein Kampagnenstand mehr, sondern ein
+    # Defekt (dieselbe Logik wie im deutschen Zweig).
+    core.entdeckung("Englische Kampagnen-Liste", len(found), erwartet_min=5,
+                    name_en="English campaign list")
+    return found
+
+
+def run_en(args) -> None:
+    store = core.load_store(EN_DATA_FILE)
+    fetcher = core.Fetcher(delay=args.delay, headers=FETCH_HEADERS_EN)
+    ts = now_iso()
+
+    def save(quiet=True, **extra):
+        core.save_store(store, EN_DATA_FILE, extra_meta=extra, quiet=quiet)
+
+    karten = discover_en_slugs(fetcher)
+    log(f"{len(karten)} englische Kampagne(n) (Gesamt im Store: {len(store)}).")
+    prog(phase="scrape", current=0, total=len(karten), message="Beginne …")
+
+    aus_karte = 0
+    for i, (slug, card) in enumerate(sorted(karten.items()), 1):
+        prog(current=i, total=len(karten), message=slug)
+        if core.skip_recent(store.get(slug), args):
+            continue
+        status, rec = scrape_petition(fetcher, slug, sprache="en")
+        if status == "skip":
+            continue
+        if status == "error":
+            # Detailseite blockiert (der Checkpoint auf action.eko.org). Für
+            # BEKANNTE Sätze nichts anfassen — sonst überschriebe ein
+            # Notdatensatz einen vollständigen. Nur Neuzugänge bekommen die
+            # Karte, und die trägt keine campaign_id: die steht ausschließlich
+            # auf der Detailseite. Ohne sie gibt es keine Sprachverknüpfung,
+            # und das ist richtig so — geraten wird hier nichts.
+            if slug in store:
+                continue
+            rec = record_from_card(slug, card)
+            i18n.setze_hauptsprache(rec, "en")
+            status, aus_karte = "online", aus_karte + 1
+        core.upsert(store, slug, rec or {}, {}, status, ts,
+                    f"{BASE_URL}/a/{slug}")
+        save()
+
+    neu = [s for s, r in store.items() if r.get("first_seen") == ts]
+    if neu:
+        log(f"NEU: {len(neu)} neue englische Kampagne(n) in diesem Lauf.")
+    if aus_karte:
+        log(f"  {aus_karte} Satz/Sätze nur aus der Kampagnenkarte "
+            f"(Detailseite blockiert, ohne campaign_id).")
+
+    prog(message="Speichere & baue HTML …")
+    save(quiet=False, new_petitions_last_run=neu, available=len(karten))
+    core.write_list_html(PLATFORM_EN)
+    log("Fertig (Ekō English).")
+
+
+def check_en(fetcher):
+    return core.check_source(fetcher, EN_LIST_URL, ACTION_HREF_RE, 3,
+                             "Aktionen")
+
+
+PLATFORM_EN = Platform(
+    key="eko_en",
+    openness=2,
+    openness_note="Eingeschränkt: die englische Kampagnenliste ist offen und "
+                  "sogar paginiert (4 Abrufe decken sie ab), aber die "
+                  "Detailseiten liegen hinter demselben Bot-Schutz wie im "
+                  "deutschen Zweig (action.eko.org, HTTP 429). Fehlt die "
+                  "Detailseite, übernehmen wir Titel, Kurztext und Bild aus "
+                  "der Kampagnenkarte.",
+    name="Ekō (English)",
+    eyebrow="Ekō · Kampagnen (englisch)",
+    source_url="https://eko.org/en/campaigns",
+    data_file=EN_DATA_FILE,
+    html_file=EN_HTML_FILE,
+    run=run_en,
+    check=check_en,
+    language="en",
 )
 
 

@@ -1,0 +1,300 @@
+{
+  "_meta": {
+    "_README": "Petitions-Monitor. Datensaetze werden aktualisiert, nie ueberschrieben.",
+    "fields": {
+      "slug": "ID/Schluessel aus der URL",
+      "merged_slugs": "frühere Schluessel, die auf diesen umgeleitet wurden",
+      "url": "kanonische Petitions-URL",
+      "petition_id": "interne numerische ID der Plattform oder null",
+      "title": "Titel",
+      "started_by": "Gestartet von",
+      "recipient": "Adressat",
+      "category": "Thema/Kategorie (falls die Plattform Kategorien hat)",
+      "category_url": "Link zur Kategorieseite",
+      "tags": "bis zu 10 aus dem Text abgeleitete Schlagwörter (zum Verlinken)",
+      "summary": "Kurzbeschreibung (og:description)",
+      "description_full": "komplette, gegliederte Beschreibung als bereinigtes HTML",
+      "image_url": "Petitionsbild",
+      "signatures": "aktueller Unterschriftenstand",
+      "signatures_history": "Zeitreihe [{checked_at,count}]",
+      "milestones": "Meilenstein-Marken [{threshold,timestamp}]",
+      "updates": "Neuigkeiten [{timestamp,text}]",
+      "goal": "aktuelles Unterschriften-Ziel (falls die Plattform eines zeigt)",
+      "start_date": "Startdatum (plattformabhängig ermittelt)",
+      "deadline": "Ende der Mitzeichnungs-/Unterschriftenfrist oder null",
+      "closed": "true = nicht mehr mitzeichenbar (Frist abgelaufen/archiviert)",
+      "phase": "Verfahrensstand der Plattform (z. B. mitzeichnung|beendet|archiv)",
+      "status": "online | offline (erreichbar die Seite noch?)",
+      "first_seen": "erstmals gescrapt (unveraenderlich)",
+      "last_seen": "zuletzt online",
+      "last_checked": "zuletzt geprueft",
+      "offline_since": "seit wann offline oder null"
+    },
+    "generated_at": "2026-08-12T19:54:10-06:00",
+    "petition_count": 6,
+    "new_petitions_last_run": [
+      "25513",
+      "25434",
+      "25357",
+      "25275",
+      "25180",
+      "25027"
+    ],
+    "available": 42,
+    "lauf_verlauf": [
+      {
+        "zeit": "2026-08-12T19:54:10-06:00",
+        "gesamt": 6,
+        "online": 6,
+        "offline": 0,
+        "ohne_titel": 0,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 0,
+        "torsi": 0,
+        "dubletten": 0
+      }
+    ],
+    "kennzahlen": {
+      "zeit": "2026-08-12T19:54:10-06:00",
+      "gesamt": 6,
+      "online": 6,
+      "offline": 0,
+      "ohne_titel": 0,
+      "platzhalter": 0,
+      "nicht_ausgeliefert": 0,
+      "torsi": 0,
+      "dubletten": 0
+    },
+    "befunde": [],
+    "health_warning": null,
+    "online_count": 6
+  },
+  "25513": {
+    "slug": "25513",
+    "first_seen": "2026-08-12T19:53:18-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-08-12T19:53:18-06:00",
+        "count": 25385
+      }
+    ],
+    "kind": "petition",
+    "started_by": "350.org",
+    "title": "The global tax treaty that can make polluters pay",
+    "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/un_tax_convention.png",
+    "url": "https://act.350.org/cms/view_by_page_id/25513?source=get_involved_dynamic",
+    "signatures": 25385,
+    "goal": 5000,
+    "description_full": "<p>Every time oil and gas prices spike, from war, shortage, or plain market panic, big oil and gas companies cash in. <strong>We pay more at the pump and on our energy bills. They pay almost nothing extra in tax.</strong></p>\n<p>But a new treaty is taking shape that could fix that and help fund the future we all want. <strong>For the first time ever, every country gets an equal say in global tax rules.</strong> And there's a real chance that higher, permanent taxes on fossil fuel profits get written into the treaty, reclaiming trillions for climate protection and affordable clean energy for the people who need it most.</p>\n<p><strong>Tell world governments to make sure this time, the worst and the wealthiest polluters pay for the damage they've caused.</strong></p><p>\n\n\n\n<img alt=\"Eurodad logo\" loading=\"lazy\" src=\"https://dbqvwi2zcv14h.cloudfront.net/images/eurodad-logo-trnsprnt.png\"/>\n<img alt=\"Global Witness logo\" loading=\"lazy\" src=\"https://dbqvwi2zcv14h.cloudfront.net/images/GW_Logo_Slim_RGB.png\"/>\n\n\n\n</p><p>350 in partnership with Eurodad and Global Witness</p>\n<!-- ak.wysiwyg=code -->\n<h3>Der ganze Text des Aufrufs</h3>\n<p><strong>To: the UK Prime Minister Andy Burnham and all participating governments of the UN Tax Convention negotiations</strong></p>\n<p>We call on you to:</p>\n<ol>\n<li>Write a permanent surtax on fossil fuel corporations' global profits into the UN Tax Convention, aligned with the polluters-pay principle, so companies making billions from the climate crisis pay for it long after this year's price spikes are forgotten.</li>\n<li>Direct that revenue to the communities and countries hit hardest by climate disasters, energy poverty and fossil-fuel price shocks, and to a fast, fair shift to renewable energy, not just to plug rich countries' own budgets.</li>\n</ol>\n<p>To illustrate what would be possible it is worth noting that: A 20% surtax on the world's 100 biggest oil and gas companies, applied since the Paris Agreement, would have raised an estimated $1.08 trillion (Eurodad / Global Alliance for Tax Justice).</p>",
+    "summary": "Every time oil and gas prices spike, from war, shortage, or plain market panic, big oil and gas companies cash in. We pay more at the pump and on our energy bills. They pay almost nothing extra in tax…",
+    "lang": "en",
+    "campaign_id": "threefifty:treaty-to-make-polluters-pay-ads-uk-actions",
+    "category": "Petition",
+    "status": "online",
+    "last_seen": "2026-08-12T19:53:18-06:00",
+    "offline_since": null,
+    "tags": [
+      "Energy",
+      "Global",
+      "Companies",
+      "Time",
+      "Climate",
+      "Treaty",
+      "Every",
+      "Governments",
+      "Convention",
+      "Countries"
+    ],
+    "last_checked": "2026-08-12T19:53:18-06:00"
+  },
+  "25434": {
+    "slug": "25434",
+    "first_seen": "2026-08-12T19:53:18-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-08-12T19:53:18-06:00",
+        "count": 12850
+      }
+    ],
+    "kind": "petition",
+    "started_by": "350.org",
+    "title": "Slash oil and gas profits, make the polluters pay!",
+    "summary": "Fossil fuel companies keep raking in obscene profits while our bills shoot up, and our planet gets hotter. We can’t keep paying while they profit. Our governments must break free from oil and gas. Tem…",
+    "description_full": "<p>Fossil fuel companies keep raking in obscene profits while our bills shoot up, and our planet gets hotter. <strong>We can’t keep paying while they profit. </strong></p>\n<p>Our governments must break free from oil and gas. Temporary windfall taxes aren't enough. </p>\n<p><strong>We're calling on the EU and its member states for stronger, permanent taxes on all oil and gas profits</strong> – taxes that make these destructive industries less profitable and redirect investment away from fossil fuels. </p>\n<p>The money from these taxes could shield households from rising energy costs, fund renewable energy, and support communities facing the worst impacts of climate change. </p>\n<p><strong>Polluters must pay – not us. We can't leave this to the market. It’s time for Europe to act. </strong></p>\n<p>Are you with us? Add your name.</p><p>\n\n\n\n<img loading=\"lazy\" src=\"https://dbqvwi2zcv14h.cloudfront.net/images/CAN_Europe_logo_circle.png\"/>\n<img alt=\"Logo of the European Network of Debt and Development\" loading=\"lazy\" src=\"https://dbqvwi2zcv14h.cloudfront.net/images/Logo_Eurodad_350_round.png\"/>\n<img alt=\"Laudato Si\" loading=\"lazy\" src=\"https://dbqvwi2zcv14h.cloudfront.net/images/logo-round-laudatosi.png\"/>\n\n\n\n</p><p>350 in Partnership with Climate Action Network Europe, Eurodad, and the Laudato Si' Movement</p>\n<h3>Der ganze Text des Aufrufs</h3>\n<p>Tell European Commissioner Hoekstra and EU Member State Finance Ministers</p>\n<!-- ak.wysiwyg=code -->\n<p>We call for: </p>\n<ol>\n<li>Governments from EU member states to implement stronger, permanent taxes on oil profits at the national level, immediately</li>\n<li>The EU Commission to play a coordinating role, on how to use proceeds from these taxes and setting a minimum tax rate</li>\n<li>Governments from EU member states should champion “Polluter Pays Tax on Fossil Fuel Profits” in the UN Tax Convention</li>\n</ol>",
+    "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/Europe_Taxes_campaign_2026.v1png",
+    "url": "https://act.350.org/cms/view_by_page_id/25434?source=get_involved_dynamic",
+    "signatures": 12850,
+    "goal": 1000,
+    "lang": "en",
+    "campaign_id": "threefifty:tell-europe-slash-profits-polluters-pay",
+    "category": "Petition",
+    "status": "online",
+    "last_seen": "2026-08-12T19:53:18-06:00",
+    "offline_since": null,
+    "tags": [
+      "Profits",
+      "Taxes",
+      "Governments",
+      "Fossil",
+      "Member",
+      "While",
+      "Keep",
+      "States",
+      "Fuel",
+      "Must"
+    ],
+    "last_checked": "2026-08-12T19:53:18-06:00"
+  },
+  "25357": {
+    "slug": "25357",
+    "first_seen": "2026-08-12T19:53:18-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-08-12T19:53:18-06:00",
+        "count": 30923
+      }
+    ],
+    "kind": "petition",
+    "started_by": "350.org",
+    "title": "We pay. They profit. It’s time for a Great Power Shift!",
+    "summary": "Every day, we are paying for a crisis we didn’t create, through higher energy bills, rising food prices, and the growing cost of climate disasters hitting our communities. Meanwhile, fossil fuel compa…",
+    "description_full": "<p>Every day, we are paying for a crisis we didn’t create, through higher energy bills, rising food prices, and the growing cost of climate disasters hitting our communities.</p>\n<p>Meanwhile, fossil fuel companies continue to profit, backed by billions in public subsidies.</p>\n<p><strong>The cost of living crisis and the climate crisis are not separate; they are driven by the same system.</strong></p>\n<p>As long as our economies depend on coal, oil, and gas, prices will remain unstable, bills will keep rising, and communities will keep paying the cost.</p>\n<p><strong>Fossil fuels don’t just heat the planet, they make life more expensive. </strong><strong>Add your name and demand governments create a fair, affordable energy system for all.</strong></p>\n<h3>Der ganze Text des Aufrufs</h3>\n<p><strong>To President Emmanuel Macron (G7 President, France), Minister Murat Kurum (COP31 President, Türkiye), Minister Chris Bowen (COP31 President of Negotiations, Australia), UK Prime Minister Keir Starmer and all governments</strong></p>\n<!-- ak.wysiwyg=code -->\n<p>We call on governments to ensure affordable renewable energy for all by shifting money away from fossil fuels and towards clean, safe renewable energy for homes, communities and businesses. They should do this by:</p>\n<ul>\n<li>Implementing a permanent windfall tax on fossil fuel profits, and using the revenue to directly support households and reduce energy costs worldwide;</li>\n<li>Ending fossil fuel subsidies and replacing them with direct support for vulnerable households and investment in renewable energy systems that deliver affordable, reliable power for everyone.</li>\n</ul>\n<p>People everywhere are struggling to afford the basics – from rising energy bills to increasing food prices and the growing costs of climate disasters.</p>\n<p>These crises are driven by the same system, one that depends on coal, oil, and gas, while fossil fuel companies continue to make record profits.</p>\n<p>Clean, safe, and affordable energy is not a privilege; it is a right.</p>",
+    "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/tgps-share.png",
+    "url": "https://act.350.org/cms/view_by_page_id/25357?source=get_involved_dynamic",
+    "signatures": 30923,
+    "goal": 1000,
+    "lang": "en",
+    "campaign_id": "threefifty:we-pay-they-profit-ads-uk",
+    "category": "Petition",
+    "status": "online",
+    "last_seen": "2026-08-12T19:53:18-06:00",
+    "offline_since": null,
+    "tags": [
+      "Energy",
+      "Fossil",
+      "Fuel",
+      "Communities",
+      "Affordable",
+      "President",
+      "Climate",
+      "Crisis",
+      "Prices",
+      "Rising"
+    ],
+    "last_checked": "2026-08-12T19:53:18-06:00"
+  },
+  "25275": {
+    "slug": "25275",
+    "first_seen": "2026-08-12T19:53:18-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-08-12T19:53:18-06:00",
+        "count": 10665
+      }
+    ],
+    "kind": "petition",
+    "started_by": "350.org",
+    "title": "Make Green Energy Fair: Affordable Renewables for All!",
+    "summary": "The cost of energy has created a poverty and health crisis in the UK. If everyone had a fair share of renewable energy, we could all afford heating, lighting, washing, and cooking. But profits, unfair…",
+    "description_full": "<p>The cost of energy has created a poverty and health crisis in the UK. If everyone had a fair share of renewable energy, we could all afford heating, lighting, washing, and cooking.</p>\n<p>But profits, unfair regulations, and waste mean ordinary people aren’t enjoying the benefits of energy that is cheap to produce. And climate change-denying politicians funded by the oil lobby are taking advantage of this.</p>\n<p>That’s why we’re calling on the UK government to guarantee everyone in the country will get a fair share of the benefits of renewable energy.</p>\n<p><strong>We demand affordable, homegrown, renewable energy that benefits people – not polluters. </strong></p>\n<p><strong>With us? Add your name to demand our fair share.</strong></p>\n<p><strong><img alt=\"350.org's logo: white text of the numbers 350 with an arrow pointing left.\" loading=\"lazy\" src=\"https://dbqvwi2zcv14h.cloudfront.net/images/350-logo-v3-white.png\"/> </strong><a href=\"https://www.fuelpovertyaction.org.uk/\" rel=\"noopener\" target=\"_blank\"><strong><img alt=\"Fuel Poverty Action logo\" loading=\"lazy\" src=\"https://dbqvwi2zcv14h.cloudfront.net/images/LOGO_HI_RES_2024_nb.png\"/></strong></a></p>\n<p><em>In partnership with Fuel Poverty Action.</em></p>\n<!-- ak.wysiwyg=code -->\n<h3>Der ganze Text des Aufrufs</h3>\n<p>To Miatta Fahnbulleh, Secretary of State for Energy Security and Net Zero and Jonathan Brearley, Permanent Secretary at the Department of Energy Security and Net Zero</p>\n<!-- ak.wysiwyg=code -->\n<p>Dear Miatta Fahnbulleh and Jonathan Brearley,</p>\n<p>We, the undersigned organisations working against poverty and the climate crisis, ask you both to commit to a guarantee that everyone in the UK will get a fair share of the benefits of renewable energy.</p>\n<p>Such a commitment, embedded into policy, will greatly improve standards of living and social cohesion in the UK. It is an opportunity we cannot afford to miss.</p>\n<p><a href=\"https://www.renewableuk.com/news-and-resources/press-releases/record-breaking-stats-show-renewables-generated-over-half-uk-s-electricity-for-the-second-year-running/\" rel=\"noopener\" target=\"_blank\">50% of electricity comes from “clean”, mostly renewable, sources, and this Government intends this to be 95% by 2030</a>. You have pledged to reduce our energy bills by £300.</p>\n<p>We should all be getting our fair share of cheap, clean energy from our wind and sun, to guarantee essential heating, hot water, washing, lighting and cooking for everyone.</p>\n<p>Instead, in its present delivery, energy inequality is getting worse and green measures mainly benefit the well-off. One in five UK households struggle to heat their homes. Due to market distortions, profits, subsidies, levies, and waste, they are paying higher bills for energy that is produced at a cheaper cost.</p>\n<p>The Warm Homes Plan promises expanded access to renewables and a “universal offer for all households” to upgrade. But cliff edges in the plan mean that those just above unjust income cut-offs will be pushed into debt to pay for panels and batteries, with no guarantee of actual bill savings. Without a Warm Homes Guarantee, the plan is destined for the same pitfalls as all other well-intentioned government schemes, namely, huge variations in the actual warmth and savings delivered.</p>\n<p>These failures are deepening a damaging political divide, where real injustices are seized upon by the far right and become a pretext for distorted narratives and misinformation. To turn this around, this Government must focus on how clean energy from the wind and sun can be equally distributed, to support a mission of eradicating fuel poverty in the UK.</p>\n<p>We ask that you:</p>\n<ul>\n<li><strong><strong>Commit to embedding the principle of equitable benefits from the energy transition into all Government and Ofgem policies and plans.</strong></strong></li>\n</ul>\n<ul>\n<li><strong>Agree to meet with the undersigned organisations to discuss how this principle can be best delivered in practice.</strong></li>\n</ul>\n<ul>\n<li><strong>Incorporate an energy saving guarantee into the Warm Homes Plan, to ensure that work delivers on the improvements and bill savings promised.</strong></li>\n</ul>\n<p>The following recommendations outline a vision for a system committed to fairness in energy provision:</p>\n<p><strong>F</strong>: <strong>Fair distribution</strong> and sufficient energy to guarantee everyone’s basic needs should be the end goal of our energy system. Renewable energy makes this deliverable today. Sharing cheap or free renewable electricity could ensure that <a href=\"https://energyforall.org.uk/manifesto.html\" rel=\"noopener\" target=\"_blank\">we can all afford adequate heating, lighting, washing and cooking</a>.</p>\n<p><strong>A:</strong> <strong>Affordable pricing</strong>, free from market distortions, that delivers the benefits of renewables to households. This means breaking the link between the cost of cheaply generated electricity from the wind and sun with the high cost of running gas-fired power stations. This Government must end marginal cost pricing, implementing <a href=\"https://www.greenpeace.org.uk/resources/power-shift-report/\" rel=\"noopener\" target=\"_blank\">Power Shift</a>, or a <a href=\"https://assets.ctfassets.net/fpr6c52ci39f/1qhwcfCIKN8dEvn3VRyhR9/74ed56d9162867b44ea951cf17ea7481/GBF-BreakingTheLinkReport-April.pdf\" rel=\"noopener\" target=\"_blank\">pay-as-bid system, saving £365 per household</a>.</p>\n<p><strong>I:</strong> <strong>Improve homes</strong> with safe, non-toxic, non-flammable insulation appropriate to the building, installed by skilled workers in consultation with and with accountability to residents of all tenures; private ownership, private rentals and social housing. Ventilation must go hand-in-hand with insulation to avoid promoting mould growth and poor air quality.</p>\n<p><strong>R:</strong> <strong>Reduce Profiteering </strong>in Britain’s energy system across generation, transmission and distribution. The <a href=\"https://www.unitetheunion.org/news-events/news/2025/october/unite-report-uk-energy-companies-making-30-billion-a-year-in-profits\" rel=\"noopener\" target=\"_blank\">average household pays £500 a year towards energy profits</a>. This is driving a poverty and ill health crisis. </p>\n<p><strong>S:</strong> <strong>Storage heater </strong>users with hot water tanks, and customers on legacy tariffs like <a href=\"https://www.gocompare.com/gas-and-electricity/economy-7/\" rel=\"noopener\" target=\"_blank\">Economy 7</a>, who are among the most affected by fuel poverty, must be offered the same rates by suppliers as affluent customers (such as those on <a href=\"https://www.gocompare.com/gas-and-electricity/ev-tariff-comparison/\" rel=\"noopener\" target=\"_blank\">cheaper EV Tariffs</a>). This would create a saving of around 50% on heating and hot water costs.</p>\n<p><strong>H:</strong> <strong>Heat networks </strong>must deliver promised savings and genuine efficiency to residents, and store excess energy at a local level for cheap or free distribution. To avoid past mistakes, which resulted in residents facing bill hikes, heat networks should form part of a wider development of community energy distributed locally to bring down bills.</p>\n<p><strong>A:</strong> <strong>Affordable heat pumps </strong>must guarantee cheaper heat to residents through good quality installs and applying best value tariffs. <a href=\"https://heatpumpmonitor.org/\" rel=\"noopener\" target=\"_blank\">A badly fitted heat pump on the standard Ofgem price cap can more than double bills</a>. Without this guarantee, the Warm Homes Plan risks pushing people into fuel poverty.</p>\n<p><strong>R:</strong> <strong>Rooftop solar </strong>must guarantee savings for residents rather than money being skimmed off by companies or landlords. Whilst some people enjoy low or zero bills, others are getting little benefit because of bad installs, lost export credit and lack of home storage and control.</p>\n<p><strong>E:</strong> <strong>Excess wind energy </strong>should be distributed for use by people who need it. “Curtailment” already costs bill payers <a href=\"https://wastedwind.energy/2026-02-03\" rel=\"noopener\" target=\"_blank\">£1.5 billion a year</a> to switch off wind farms during periods of high production, leaving nearby homes cold. Yet the amount of ultra-cheap, clean energy wasted could give every UK household 10% of its electricity free or power three million homes year round.</p>\n<p><strong>Signed by:</strong></p>\n<p>Fuel Poverty Action</p>\n<p>350.org</p>\n<p>End Fuel Poverty Coalition</p>\n<p>Greenpeace</p>\n<p>Climate Justice Coalition</p>\n<p>PCS Union</p>\n<p>Bakers Food and Allied Workers Union</p>\n<p>War on Want</p>\n<p>National Pensioners Convention</p>\n<p>Disabled People Against Cuts</p>\n<p>Platform</p>\n<p>Green New Deal Rising</p>\n<p>Parents For Future UK</p>\n<p>Students Organising for Sustainability UK</p>\n<p>Tipping Point UK</p>\n<p>Campaign Against Climate Change</p>\n<p>Greener Jobs Alliance</p>\n<p>Workers Planet</p>\n<p>The Poverty Alliance</p>\n<p>Friends of the Earth Scotland</p>\n<p>Wen (Women’s Environment Network)</p>\n<p>Global Women’s Strike</p>\n<p>Winvisible (women with visible &amp; invisible disabilities)</p>\n<p>Women Against Rape</p>\n<p>Women of Colour Global Women’s Strike</p>\n<p>English Collective of Prostitutes</p>\n<p>Single Mothers’ Self-Defence</p>\n<p>Single Parents Support and Advice Services</p>\n<p>Payday Men’s Network</p>\n<p>Queer Strike</p>\n<p>Fair By Design</p>\n<p>Positive Money</p>\n<p>Fairer Housing</p>\n<p>Stop Burning Trees Coalition</p>\n<p>Biofuelwatch</p>\n<p>Solace</p>\n<p>Nature Over Natter</p>\n<p>Stop Climate Chaos Scotland</p>\n<p>Scottish Communities Climate Action Network</p>\n<p>Scottish Women’s Budget Group</p>\n<p>Environmental Rights Centre for Scotland</p>\n<p>London Tenants Federation</p>\n<p>Degrowth London</p>\n<p>Edinburgh Climate Coalition</p>\n<p>Clean Heat Edinburgh Forum</p>\n<p>Extinction Rebellion Edinburgh</p>\n<p>Dundee and Angus Scottish Greens</p>\n<p>Aberdeen Trades Union Council</p>\n<p>Blackpool, Fylde &amp; Wyre Trades Union Council</p>\n<p>Climate Action Durham</p>\n<p>Climate Action Leicester and Leicestershire</p>\n<p>Croydon Community Energy</p>\n<p>Lambeth Tenants Heat Campaign</p>\n<p>Lambeth Pensioners Action Group</p>\n<p>Unison Grampian Health Branch</p>\n<p>Unite Retired Members Croydon Branch</p>\n<p>Unite Retired Members Fife Branch</p>\n<p>Transition Crich</p>\n<p>Keresley Village Residents Association</p>\n<!-- ak.wysiwyg=code -->",
+    "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/windmills-used_83dbe2f4f18210b5.jpg",
+    "url": "https://act.350.org/cms/view_by_page_id/25275?source=get_involved_dynamic",
+    "signatures": 10665,
+    "goal": 5000,
+    "lang": "en",
+    "campaign_id": "threefifty:make-green-fair",
+    "category": "Petition",
+    "status": "online",
+    "last_seen": "2026-08-12T19:53:18-06:00",
+    "offline_since": null,
+    "tags": [
+      "Energy",
+      "Renewable",
+      "Fair",
+      "Guarantee",
+      "Government",
+      "Benefits",
+      "Everyone",
+      "Cost",
+      "Poverty",
+      "Homes"
+    ],
+    "last_checked": "2026-08-12T19:53:18-06:00"
+  },
+  "25180": {
+    "slug": "25180",
+    "first_seen": "2026-08-12T19:53:18-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-08-12T19:53:18-06:00",
+        "count": 29271
+      }
+    ],
+    "kind": "petition",
+    "started_by": "350.org",
+    "title": "End Fossil Fuels Forever",
+    "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/1000x751px-660740-renewable-energy-460-67-kb-13-03-2015.jpg",
+    "url": "https://act.350.org/cms/view_by_page_id/25180?source=get_involved_dynamic",
+    "signatures": 29271,
+    "goal": 1000,
+    "description_full": "<p>Time is running out. <strong>Our planet is hitting record temperatures, while coal, oil and gas giants rake in billions, and our energy bills skyrocket. </strong>But we finally have a chance to break the cycle.</p>\n<p><strong>Over 80 countries are joining forces to phase out coal, oil, and gas. </strong>This is a historic opportunity to end the fossil fuel era and ensure a transition away from dirty fuels that protects communities, workers and the planet.</p>\n<p><strong>But to win, we need more world leaders on board. </strong>We’re calling on governments to turn words into concrete roadmaps that end fossil fuels for good.</p>\n<p>Public pressure can move the needle. Let’s make the transition to renewable energy inevitable so that even Trump and the oil lobby can’t save fossil fuels.</p>\n<p><strong>With us? Demand an end to fossil fuels forever.</strong></p>\n<!-- ak.wysiwyg=code -->\n<h3>Der ganze Text des Aufrufs</h3>\n<p>To: Governments yet to join the coalition for a Fossil Fuel Phase Out Roadmap including Japan, Indonesia, and South Africa</p>\n<!-- ak.wysiwyg=code -->\n<p>The climate emergency demands leadership - not delay.</p>\n<p>You have a historic opportunity to help build an equitable, science-based Fossil Fuel Phase-Out Roadmap that protects people and the planet. As major economies and regional leaders, your governments have the responsibility and the power to step up and join this coalition that can reclaim our shared future.</p>\n<p>We call on you to:</p>\n<ul>\n<li>Publicly commit to and fully engage in the process to develop a global Fossil Fuel Phase-Out Roadmap.</li>\n<li>Commit to a clear, time-bound phase-out of all fossil fuel production and use.</li>\n<li>Support a just transition through international cooperation, adequate climate finance, and rights-based protections for workers, communities, and vulnerable countries.</li>\n</ul>\n<p>There is no credible climate strategy that doesn’t start with phasing out fossil fuels. The world is watching. Act with urgency, and with justice.</p>\n<!-- ak.wysiwyg=code -->",
+    "summary": "Time is running out. Our planet is hitting record temperatures, while coal, oil and gas giants rake in billions, and our energy bills skyrocket. But we finally have a chance to break the cycle. Over 8…",
+    "lang": "en",
+    "campaign_id": "threefifty:end-fossil-fuels-forever",
+    "category": "Petition",
+    "status": "online",
+    "last_seen": "2026-08-12T19:53:18-06:00",
+    "offline_since": null,
+    "tags": [
+      "Fossil",
+      "Fuels",
+      "Fuel",
+      "Planet",
+      "Governments",
+      "Transition",
+      "Phase-Out",
+      "Climate",
+      "Roadmap",
+      "Energy"
+    ],
+    "last_checked": "2026-08-12T19:53:18-06:00"
+  },
+  "25027": {
+    "slug": "25027",
+    "first_seen": "2026-08-12T19:53:18-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-08-12T19:53:18-06:00",
+        "count": 27153
+      }
+    ],
+    "kind": "petition",
+    "started_by": "350.org",
+    "title": "No Blood for Oil: Demand a Fossil-Free Future!",
+    "image_url": "https://dbqvwi2zcv14h.cloudfront.net/images/No_Blood_For_Oil_-_Open_Letter_Graphic_Jan_2026.png",
+    "url": "https://act.350.org/cms/view_by_page_id/25027?source=get_involved_dynamic",
+    "signatures": 27153,
+    "goal": 1000,
+    "description_full": "<p>Recent events in Venezuela and the Middle East are the latest proof: clinging to fossil fuels locks us into a cycle of violence, volatility, and authoritarianism.<br/><br/>Lives are being taken, families are being ripped apart, communities are bearing the costs of a conflict they didn’t create. At the same time, people everywhere are paying the price through skyrocketing energy bills.</p>\n<p>True security doesn’t come from controlling pipelines or launching strikes; it comes from home-grown renewable energy that serves communities, not billionaires and war-makers.<br/><br/>Over 80 countries committed to a roadmap for a fossil-free future at COP30. Let’s demand that leaders reject the wars of the past and commit to a future built on peace, justice, and renewable energy.</p>\n<p> </p>\n<!-- ak.wysiwyg=code -->\n<h3>Der ganze Text des Aufrufs</h3>\n<p>Add your name to the open letter🖌 </p>\n<!-- ak.wysiwyg=code -->\n<p>As recent global events show, we are witnessing fossil fuels once again acting as upstream drivers of instability, repression, and conflict. Fossil fuel price shocks fuel wars abroad and inflation at home. Dependence on volatile energy markets leaves economies brittle, exposed to sudden cost-of-living crises and the political backlash that follows.</p>\n<p>From Russia’s invasion of Ukraine to the latest U.S. action in Venezuela, control over fossil resources repeatedly triggers confrontation. Much of the world’s oil and gas lies beneath politically fragile states, turning energy supply into a permanent geopolitical chokehold. In this system, fossil fuel interests benefit from chaos, weak accountability, and militarized solutions, while ordinary people pay the price through higher costs, lost security, and the erosion of democratic norms and human rights.</p>\n<p>For countries dependent on imports, the lesson is stark. Continued reliance on oil and gas leaves economies exposed to coercion, price shocks, and war. In a world where energy supply is increasingly controlled by a handful of powerful states and corporations, sovereignty becomes fragile.</p>\n<p>The alternative is already emerging: Solar panels don’t start wars, wind turbines don’t need military protection, renewables don’t destabilize entire regions. According to the International Energy Agency, global renewable power capacity is set to expand by nearly 4,600 gigawatts between 2025 and 2030, double the growth of the previous five years. Wind, solar, battery storage, and electric vehicles are not just climate solutions; they are security strategies. </p>\n<p>More than 80 countries signaled support for a global fossil fuel phaseout at COP30 last November. Phasing out fossil fuels is not a niche climate demand; it is a stabilization strategy, it reclaims power from industries that profit from disorder. The energy transition, already accelerating through renewables, storage, and electrification, offers a pathway to sovereignty and security. The lesson, for world leaders, is increasingly hard to ignore: dependence on fossil fuels produces insecurity, not strength, that the world needs right now. </p>\n<!-- ak.wysiwyg=code -->",
+    "summary": "Recent events in Venezuela and the Middle East are the latest proof: clinging to fossil fuels locks us into a cycle of violence, volatility, and authoritarianism. Lives are being taken, families are b…",
+    "lang": "en",
+    "campaign_id": "threefifty:no-blood-oil-fossil-free-future",
+    "category": "Petition",
+    "status": "online",
+    "last_seen": "2026-08-12T19:53:18-06:00",
+    "offline_since": null,
+    "tags": [
+      "Fossil",
+      "Energy",
+      "Fuels",
+      "Security",
+      "Price",
+      "World",
+      "Fuel",
+      "Countries",
+      "Renewable",
+      "Venezuela"
+    ],
+    "last_checked": "2026-08-12T19:53:18-06:00"
+  }
+}

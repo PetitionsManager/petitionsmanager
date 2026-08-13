@@ -1,0 +1,372 @@
+{
+  "_meta": {
+    "_README": "Petitions-Monitor. Datensaetze werden aktualisiert, nie ueberschrieben.",
+    "fields": {
+      "slug": "ID/Schluessel aus der URL",
+      "merged_slugs": "frühere Schluessel, die auf diesen umgeleitet wurden",
+      "url": "kanonische Petitions-URL",
+      "petition_id": "interne numerische ID der Plattform oder null",
+      "title": "Titel",
+      "started_by": "Gestartet von",
+      "recipient": "Adressat",
+      "category": "Thema/Kategorie (falls die Plattform Kategorien hat)",
+      "category_url": "Link zur Kategorieseite",
+      "tags": "bis zu 10 aus dem Text abgeleitete Schlagwörter (zum Verlinken)",
+      "summary": "Kurzbeschreibung (og:description)",
+      "description_full": "komplette, gegliederte Beschreibung als bereinigtes HTML",
+      "image_url": "Petitionsbild",
+      "signatures": "aktueller Unterschriftenstand",
+      "signatures_history": "Zeitreihe [{checked_at,count}]",
+      "milestones": "Meilenstein-Marken [{threshold,timestamp}]",
+      "updates": "Neuigkeiten [{timestamp,text}]",
+      "goal": "aktuelles Unterschriften-Ziel (falls die Plattform eines zeigt)",
+      "start_date": "Startdatum (plattformabhängig ermittelt)",
+      "deadline": "Ende der Mitzeichnungs-/Unterschriftenfrist oder null",
+      "closed": "true = nicht mehr mitzeichenbar (Frist abgelaufen/archiviert)",
+      "phase": "Verfahrensstand der Plattform (z. B. mitzeichnung|beendet|archiv)",
+      "status": "online | offline (erreichbar die Seite noch?)",
+      "first_seen": "erstmals gescrapt (unveraenderlich)",
+      "last_seen": "zuletzt online",
+      "last_checked": "zuletzt geprueft",
+      "offline_since": "seit wann offline oder null"
+    },
+    "generated_at": "2026-08-12T20:35:34-06:00",
+    "petition_count": 7,
+    "new_petitions_last_run": [
+      "the_world_a_call_for_petition_for_anti_colonial_water_agreements",
+      "congresso_naciona_assine_a_peticao_para_proibir_o_desmatamento_na_amazonia_por_pelo_menos_5_anos_2",
+      "the_governments_of_germany_france_the_united_kingd_stop_eu_arms_exports_to_saudi_arabia_and_the_united_arab_emirates",
+      "cites_and_iucn_let_them_be_free_stop_live_elephant_exports_to_china_ban_trade_in_ivory_permanently",
+      "el_fasher_emergency_loc",
+      "no_death_penalty_for_palestinians_loc",
+      "land_rights_evergreen_2026"
+    ],
+    "available": 26,
+    "lauf_verlauf": [
+      {
+        "zeit": "2026-08-12T20:35:34-06:00",
+        "gesamt": 7,
+        "online": 7,
+        "offline": 0,
+        "ohne_titel": 0,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 0,
+        "torsi": 0,
+        "dubletten": 0
+      }
+    ],
+    "kennzahlen": {
+      "zeit": "2026-08-12T20:35:34-06:00",
+      "gesamt": 7,
+      "online": 7,
+      "offline": 0,
+      "ohne_titel": 0,
+      "platzhalter": 0,
+      "nicht_ausgeliefert": 0,
+      "torsi": 0,
+      "dubletten": 0
+    },
+    "befunde": [],
+    "health_warning": null,
+    "online_count": 7
+  },
+  "the_world_a_call_for_petition_for_anti_colonial_water_agreements": {
+    "slug": "the_world_a_call_for_petition_for_anti_colonial_water_agreements",
+    "first_seen": "2026-08-12T20:35:00-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-08-12T20:35:00-06:00",
+        "count": 70701
+      }
+    ],
+    "title": "Sign the Petition Against Colonial Water Agreements",
+    "summary": "Ethiopia is the land of mankind, which is earmarked by 3.5 million years old fossil, Dinknesh (Lucy) in 1974, at the site of Hadar/ Ethiopia. Ethiopia",
+    "image_url": "https://avaazdoimages.avaaz.org/c8d19280d39b4667945cbc689c521bd1_meme.jpeg?1722090982",
+    "url": "https://secure.avaaz.org/community_petitions/en/the_world_a_call_for_petition_for_anti_colonial_water_agreements/",
+    "petition_id": 1055530,
+    "description_full": "<p>\n       It is obvious that Ethiopia is the land of mankind, which is earmarked by 3.5 million years old fossil, Dinknesh (Lucy) in 1974, at the site of Hadar/ Ethiopia. Ethiopia is known as a land of diverse linguistic society.  Carlo Conti Rossini's describes Ethiopia as \"un museo di popoli \"- a museum of peoples- characterized the evolution of multiethnic Ethiopian living through maintaining unity with diversity. Ethiopia is also the home of different religious faiths. According to Haggai Erlich who is a citizen of Israeli, coined Ethiopia as the land of religious peaceful coexistence. The first Hegira of Christianity took place in Ethiopia before Constantinople and Armenia. And also the first Hegira of Islam took place in Ethiopia before Mecca to Medina. Since the first quarter of the 7th  century, Christianity and Islam religions met and communicated in Ethiopia; the followers of these religions have been celebrating their diversity and unity through inter-ethnic and inter-religious marriages and living together without any strife.\n       <br/>\n<br>\n        The victory of Ethiopian troops over the Italians colonial power at Adwa in 1896, orchestrated Ethiopia as un colonized state in Africa and also Ethiopia was represented as a symbol for the then colonized Africa and for all the oppressed black people in the entire world. Ethiopia also established a pan-African policy to liberate the black peoples and, called blacks to come to Ethiopia to struggle colonialism. Then peoples from 15 Caribbean and African American states come to Ethiopia and Emperor Haile Selassie of Ethiopia granted to them 200 hectares of land in Shashemene, nowadays known as “Jamaica sefer”.  Because of Ethiopian integrity and cooperation, Marcus Garvey urged black people to see God in their own image, that is, “to see God through the spectacles of Ethiopia.  Ethiopia is also the water tower of the horn of Africa. The world longest river Nile steams from Ethiopia. Over the entire year, about 86 percent of the Nile’s water originates from Ethiopia while Egypt consumes 86 percent of the water. It is not without reason; therefore, that the Greek historian Herodotus (c.486–425) called that “Nile is a gift of Ethiopia and Egypt is a gift of the Nile”.\n        <br/>\n<br/>\n        Broadly speaking, international rivers are often the subjects of treaties providing for their shared use. According to the international water law, the riparian states of international waterway should use the waters in a \"reasonable  and  equitable manner,\"  and  the  obligation  not  to cause  \"significant  harm,\"  In doing so, the Nile basin countries—Burundi, Congo, Egypt, Ethiopia, Kenya, Rwanda, Sudan, Tanzania, and Uganda have agreed to unite in common pursuit of sustainable development and management of the Nile, since 1989. But, Egypt influenced the riparian states by different mechanisms to utilize the water as it was in the past. Beyond this, there have been meetings between the officials of Egypt and Ethiopia in particular, aimed at exploring the possibilities of cooperation to utilize the waters of the Blue Nile in equitable and reasonable way, between the two countries. While Ethiopia advocated the principle of negotiation on water sharing; Egypt has a strong stand to utilize alone by using its colonizer’s agreement.\n        <br/>\n<br/>\n        For this reason, Egypt claimed Ethiopia to apply the 19th century, the colonial agreements. The first one was the 15 May 1902 Anglo-Ethiopian Treaty, on the Nile water issues which had made Egypt’s interests and  did not  allow Ethiopia, to construct anything on the Nile. But it was never ratified, either by the Ethiopian and the British Parliament. The second was the 1929 Agreement between Egypt and Britain. It stipulated that no irrigation or power works or measures are to be constructed or taken on the River Nile without British authorization, which would entail prejudice to the interests of Egypt. It argued that the agreements that made no reference to this fact could have no binding force. The last Agreement was the November 1959 between Egypt and Sudan on the division of the waters of the Nile. The agreement gave Egypt 75 percent of the waters of the river (i.e., 55.5 billion m3) and 25 percent to the Sudan (18.5 billion m3) while neglecting Ethiopia which is the source of Nile and 86% contributor of the river. Similarly, Ethiopia declined to recognize the Agreement.\n        <br/>\n        Despite Ethiopia’s protest, Egypt went ahead with the construction of the Aswan High Dam. Then Egypt has brought some 800,000 feddans under permanent irrigation and village communities have been provided with a full water and electricity. To be sure, out of the ultimate irrigable land of some 5,000,000 hectares, Egypt has already managed to irrigate nearly 3,000,000 hectares. Paradoxically, Ethiopia not only utilize the Nile water equally with that of Egypt, but also it never utilizes the river for any purpose. Because of this xx% of the people of Ethiopia lives in severe poverty and above 60 percent of its citizens live without electric power. Entirely, Ethiopia had had no concrete irrigational schemes at this particular epoch in history. Instead, Egypt would never permit Ethiopia to exploit the waters of the Blue Nile.\n        <br/>\n<br/>\n        Even recently, Egypt has designed to open the way for 3,000,000 or more Egyptians eventually to populate a region that is now home to only some 250,000 without consulting any riparian states. Nowadays, the Ethiopia government has begun building a dam on the Nile River, which Ethiopians alone have been financing. Since we began the construction of the Great Ethiopia Renaissance Dam (GERD) on Nile River, Egypt has also started a wage of war on Ethiopia, the womb of the blue gold. But the dam is an Ethiopian dam, it is our blood! IT IS MY DAM! So it is impossible to colonize Ethiopia in the era of globalization; in reality, they know that we Ethiopians are never colonized.\n        <br/>\n        To sum-up, the overall objectives of our petition are to inform the following key points to the community in the entire world.\n        <br/>\n<br/>\n<ol>\n<li>\n          As we are a womb of Nile River, we are highly initiated to utilize our resource without the goodwill of anybody. Therefore, we are eager and committed to finalize the construction of the GERD by paying any needed scarification.\n         </li>\n<li>\n          In the journey of utilization of our given resource, our country has never intended to impose any significant harm to all riparian states.\n         </li>\n<li>\n          As we are the owner and involved Ethiopian intellectuals group, we wrote a stance to the world community, particularly, for a States which had been on side of our anti-colonial time, to recognize that the Ethiopian egalitarian commitment on the Nile water is like as a wage of contemporary anti colonialism. So we will never and ever accept neo-colonial tactics. That has ended up through the blood of our forefathers.\n         </li>\n<li>\n          We Ethiopians had been grew and fed by our ancestors as we have historical and socio-political ties through Nile River. This reminds us to call solidarity for our Egyptian brothers and sisters to clearly think and to come to fair, reasonable resource utilization and civilized dialogue instead of Nightmare scaremonger.\n         </li>\n</ol>\n<b> “Nile is the Gift of All of Us while Grand Ethiopian Renaissance Dam is Our Blood”<br/>IT IS MY DAM! It is my lifeblood!</b>\n<br/>\n<br/>\n</br>\n</p>",
+    "start_date": "2020-06-20T08:25:57-06:00",
+    "updates": [
+      {
+        "timestamp": "2021-02-16T23:59:11-06:00",
+        "text": "Petitionstext aktualisiert"
+      }
+    ],
+    "kind": "petition",
+    "category": "Bürgerpetition",
+    "signatures": 70701,
+    "goal": 75000,
+    "lang": "en",
+    "campaign_id": "avaaz:community_petitions:the_world_a_call_for_petition_for_anti_colonial_water_agreements",
+    "status": "online",
+    "last_seen": "2026-08-12T20:35:00-06:00",
+    "offline_since": null,
+    "tags": [
+      "Ethiopia",
+      "Egypt",
+      "Nile",
+      "Water",
+      "River",
+      "Land",
+      "Agreement",
+      "Ethiopian",
+      "Percent",
+      "Without"
+    ],
+    "last_checked": "2026-08-12T20:35:00-06:00"
+  },
+  "congresso_naciona_assine_a_peticao_para_proibir_o_desmatamento_na_amazonia_por_pelo_menos_5_anos_2": {
+    "slug": "congresso_naciona_assine_a_peticao_para_proibir_o_desmatamento_na_amazonia_por_pelo_menos_5_anos_2",
+    "first_seen": "2026-08-12T20:35:00-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-08-12T20:35:00-06:00",
+        "count": 9813
+      }
+    ],
+    "title": "Sign the petition to ban deforestation in the Amazon for at least 5 years!",
+    "summary": "The Amazon rainforest plays a vital part in maintaining healthy living conditions. It balances climatic conditions and biodiversity, providing moisture for the entire planet. According to recent data from the system of detection of deforestation in real time, from Inpe, the average area deforested in the Amazon over the last two years between 2018 and 2020 was 74% higher than the average in the same period two years previously between 2016 and 2018. Such deforestation is often accompanied by an increase in violence, forest fires, the expansion of illegal mining, an increase i...",
+    "image_url": "https://avaazdoimages.avaaz.org/c43ad3aa685544128aa48f36cd56278b_meme.jpeg?1722086931",
+    "url": "https://secure.avaaz.org/community_petitions/en/congresso_naciona_assine_a_peticao_para_proibir_o_desmatamento_na_amazonia_por_pelo_menos_5_anos_2/",
+    "petition_id": 1127710,
+    "description_full": "<p>The Amazon rainforest plays a vital part in\nmaintaining healthy living conditions. It balances climatic conditions and\nbiodiversity, providing moisture for the entire planet. </p>\n<p>According to recent data from the system of\ndetection of deforestation in real time, from Inpe, the average area deforested\nin the Amazon over the last two years between 2018 and 2020 was 74% higher than\nthe average in the same period two years previously between 2016 and 2018. Such\ndeforestation is often accompanied by an increase in violence, forest fires,\nthe expansion of illegal mining, an increase in the seizing of public land and\nother illegal activities, with emphasis on the invasion of indigenous lands and\nprotected areas. </p>\n<p>If the fires in the Amazon carry on\nburning, in 15 years it will no longer be the Amazon as we know it and will\nbecome a barren savanna. We need to act quickly to save the biodiversity. </p>\n<p>Let’s reinforce the population’s commitment\nto the world’s largest tropical forest. <b>This petition endorses 5 emergency\nmeasures in combating the deforestation crisis in the Amazon </b>and calls for a\ntotal ban of deforestation for at least 5 years. </p>\n<p>We ask for:</p>\n<p><b>Moratorium of deforestation of the Amazon.</b></p>\n<p>Prohibition of any deforestation of the\nAmazon for a minimum of 5 (five) years, with exception to subsistence and\ntraditional populations, family farming, management planning, public works and\nnational security.  </p>\n<p><b>Sign and share! </b>Let’s get the highest\nnumber of signatures possible and take this petition to Brazilian National\nCongress.   </p>",
+    "start_date": "2020-10-06T12:28:25-06:00",
+    "updates": [
+      {
+        "timestamp": "2021-04-15T04:35:21-06:00",
+        "text": "Petitionstext aktualisiert"
+      }
+    ],
+    "kind": "petition",
+    "category": "Bürgerpetition",
+    "signatures": 9813,
+    "goal": 10000,
+    "lang": "en",
+    "campaign_id": "avaaz:community_petitions:congresso_naciona_assine_a_peticao_para_proibir_o_desmatamento_na_amazonia_por_pelo_menos_5_anos_2",
+    "status": "online",
+    "last_seen": "2026-08-12T20:35:00-06:00",
+    "offline_since": null,
+    "tags": [
+      "Amazon",
+      "Deforestation",
+      "Years",
+      "Conditions",
+      "Increase",
+      "Average",
+      "Between",
+      "Biodiversity",
+      "Illegal",
+      "Forest"
+    ],
+    "last_checked": "2026-08-12T20:35:00-06:00"
+  },
+  "the_governments_of_germany_france_the_united_kingd_stop_eu_arms_exports_to_saudi_arabia_and_the_united_arab_emirates": {
+    "slug": "the_governments_of_germany_france_the_united_kingd_stop_eu_arms_exports_to_saudi_arabia_and_the_united_arab_emirates",
+    "first_seen": "2026-08-12T20:35:00-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-08-12T20:35:00-06:00",
+        "count": 10797
+      }
+    ],
+    "title": "STOP European arms exports to Saudi Arabia and the United Arab Emirates!",
+    "summary": "To the governments of Germany, France, the United Kingdom, Italy and Spain:\"We demand that you immediately issue legally binding export bans on arms trade with Saudi Arabia and the United Arab Emirates. European weaponry is actively being used by the Saudi-led military coalition against civilians in its war on Yemen. The officials who licensed the exports and the corporate actors who carried them out must be criminally investigated. We demand that you fully support investigations at the level of the International Criminal Court.\" European corporate co...",
+    "image_url": "https://avaazdoimages.avaaz.org/fa79fde5f2ec4a38b80547fadd451b2e_meme.jpeg?1722086606",
+    "url": "https://secure.avaaz.org/community_petitions/en/the_governments_of_germany_france_the_united_kingd_stop_eu_arms_exports_to_saudi_arabia_and_the_united_arab_emirates/",
+    "petition_id": 1152116,
+    "description_full": "<p>\n       To the governments of Germany, France, the United Kingdom, Italy and Spain:\n       <br/>\n<br>\n<b>\"We demand\nthat you immediately issue legally binding export bans on arms trade with Saudi\nArabia and the United Arab Emirates.</b>\n        European weaponry is actively being\nused by the Saudi-led military coalition against  civilians in its war on Yemen.\nThe officials who licensed the exports and the corporate actors who carried\nthem out must be criminally investigated.\n        <b>We demand that you fully support investigations at the level of the International\nCriminal Court.\"</b>\n<br/>\n<br/>\n        European corporate complicity in war crimes is an outrage, but together we can put a stop to it.\n        <b>Support our call for a criminal investigation and demand </b>\n<b>your government ban these criminal exports now. </b>\n<br/>\n<br/>\n        Thousands of civilians are being killed by indiscriminate attacks carried out by the Saudi-led coalition, which heavily relies on European-made fighter jets and weapons. They bomb the homes of innocent families, their hospitals and schools, and destroy centuries old cultural heritage sites.\n        <br/>\n<br/>\n        Arms exporters and governments in Europe pretend that this has nothing to do with them. They deny their involvement, but they continue to profit through sales and continued servicing of arms to Saudi Arabia and the UAE, even providing the maintenance needed to keep the coalition’s fighter jets in the air.\n        <b><br/></b>\n<br/>\n        All that could change if the Office of the Prosecutor at the International Criminal Court launched an investigation into corporate responsibility for war crimes in Yemen!\n        <br/>\n<b><br/></b>\n<b>Sign the petition!</b>\n        Together, we can end morally corrupt and illegal arms exports!\n       </br>\n</p>",
+    "start_date": "2020-12-02T04:48:55-06:00",
+    "updates": [
+      {
+        "timestamp": "2021-04-19T13:53:28-06:00",
+        "text": "Petitionstext aktualisiert"
+      }
+    ],
+    "kind": "petition",
+    "category": "Bürgerpetition",
+    "signatures": 10797,
+    "goal": 20000,
+    "lang": "en",
+    "campaign_id": "avaaz:community_petitions:the_governments_of_germany_france_the_united_kingd_stop_eu_arms_exports_to_saudi_arabia_and_the_united_arab_emirates",
+    "status": "online",
+    "last_seen": "2026-08-12T20:35:00-06:00",
+    "offline_since": null,
+    "tags": [
+      "Arms",
+      "Corporate",
+      "Criminal",
+      "European",
+      "Exports",
+      "Demand",
+      "United",
+      "Coalition",
+      "Arabia",
+      "Saudi"
+    ],
+    "last_checked": "2026-08-12T20:35:00-06:00"
+  },
+  "cites_and_iucn_let_them_be_free_stop_live_elephant_exports_to_china_ban_trade_in_ivory_permanently": {
+    "slug": "cites_and_iucn_let_them_be_free_stop_live_elephant_exports_to_china_ban_trade_in_ivory_permanently",
+    "first_seen": "2026-08-12T20:35:00-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-08-12T20:35:00-06:00",
+        "count": 5728
+      }
+    ],
+    "title": "Let them be free: stop live elephant exports to China, ban trade in ivory permanently",
+    "summary": "We, the nature-loving people of Namibia and like-minded international friends:Record our utter dismay at the intention of Namibia, Botswana, Zimbabwe and Zambia to re-instate international trade in ivory over the clear objections from the other 14 elephant range countries in Africa;Are shocked and disappointed at their threat to break away from CITES, should their demand the right to auction off their official ivory stockpiles;Are dismayed at their strong-arming tactics that are tantamount to political blackmail of CITES, espe...",
+    "image_url": "https://avaazdoimages.avaaz.org/be817a12cf8b4218b7a91ffc8dc343d2_meme.jpeg?1722080861",
+    "url": "https://secure.avaaz.org/community_petitions/en/cites_and_iucn_let_them_be_free_stop_live_elephant_exports_to_china_ban_trade_in_ivory_permanently/",
+    "petition_id": 1239455,
+    "description_full": "<p>\n<b>We, the nature-loving people of Namibia and like-minded international friends:</b>\n</p><ul>\n<li>\n         Record our utter dismay at the intention of Namibia, Botswana, Zimbabwe and Zambia\n         <b>to re-instate international trade in ivory</b>\n         over the clear objections from the other 14 elephant range countries in Africa;\n         <br/>\n</li>\n<li>\n         Are shocked and disappointed at\n         <b>their threat to break away from CITES</b>\n         , should their demand the right to auction off their official ivory stockpiles;\n         <br/>\n</li>\n<li>\n         Are dismayed at their strong-arming tactics that are tantamount to\n         <b>political blackmail of CITES</b>\n         , especially after their trade proposal was overwhelmingly rejected at the last COP meeting;\n         <br/>\n</li>\n<li>\n         Remind the responsible officials that the\n         <b>past two ivory auctions were a complete failure</b>\n         because the Asian buyers colluded to keep the prices ridiculously low;\n         <br/>\n</li>\n<li>\n         Remind them that this\n         <b>led to increased trade and speculation that saw a massive surge in elephant poaching</b>\n         since then;\n         <br/>\n</li>\n<li>\n         Object to Namibia's plans to remove and sell off 170 elephants from their natural habitats in Namibia to Chinese and other buyers\n         <b>for US$5,500 a piece,</b>\n         while an elephant is worth\n         <b>US$1.6 million in eco-tourism</b>\n         opportunities it generates in its life-time;\n         <br/>\n</li>\n<li>\n         Object to the\n         <b>continued falsification and gross inflation of Namibia's resident elephant population data </b>\n         by the Min of Environment, Forestry and Tourism to\n         <b>keep justifying unsustainable levels of trophy hunting</b>\n         ;\n         <br/>\n</li>\n<li>\n         Express our\n         <b>deep concern over the true state of our wildlife heritage and key protected species </b>\n         such as elephants, black rhinos, giraffes and other endangered wildlife, the loss of which will\n         <b>destroy our country's tourism economy</b>\n         which contributes one-third of the national GDP and thousands of direct and indirect job opportunities;\n         <br/>\n</li>\n<li>\n         Caution that these reckless actions by Minister Pohamba Shifeta and MEFT management officials amount to\n         <b>wilful acts of environmental and economic despoliation</b>\n         , and are in violation of the legal imperatives imposed by Art. 95 of the Constitution to maintain and protect bio-diversity;\n         <br/>\n</li>\n<li>\n         Caution the responsible officials that we reserve the right to\n         <b>hold them liable in their personal capacity</b>\n         for financial losses caused by their reckless mismanagement of a priceless resource.\n        </li>\n</ul><p>\n<br/>\n<b>Background:</b>\n<br/>\n       Namibia's wildlife is its single-biggest tourism asset, attracting thousands of with visitors flocking from all over the world to see especially iconic big-game species such as elephants, black rhinos, lion, giraffe and other game.\n       <br/>\n<br/>\n       One of the most unique attractions is the opportunity to see elephants in their natural environment outside of the national parks in the surrounding communal areas, managed by the MEFT under the communal conservancy model.\n       <br/>\n<br/>\n       Under this model first implemented in 1996, rural conservancies are granted the right to issue tourism and/or hunting concessions. Because trophy hunting generates large annual fees to the government and the communal conservancies, this led to a proliferation of the hunting conservancy model in rural areas, an approach widely lauded by the WWF as an example of an African conservation success story.\n       <br/>\n<br/>\n       These concessional rights includes elephant trophy hunting rights within the boundaries of the KAZA trans-frontier park, located along the elephants' seasonal migratory route between the Okavango Delta and the Quito floodplains in Angola.\n       <br/>\n<br/>\n       From 1996 to 1999, the new 500 km-long Trans-Caprivi Highway was constructed across the length of the West Caprivi, further interceding the trans-frontier elephant herd's seasonal migratory routes.\n       <br/>\n<br/>\n       In late 1999, the Angolan Army used the new highway to launch an attack on their former rebel foes UNITA, using local recruits to conduct a scorched earth campaign along the common border.  This influx of weapons triggered a surge in poaching in especially the West Caprivi, with armed gangs running rampant in the area and on one occasion, gunning down an entire herd with automatic weapons in full sight of shocked tourists at a lodge on the opposite Namibian side of the Kavango river border.\n       <br/>\n<br/>\n       From the early 2000s, the over-concentration of elephants in Botswana was becoming evident in Chobe Park as the increase in heavy road traffic and human settlement along the Trans-Caprivi Highway scared away especially breeding herds with small calves.\n       <br/>\n<br/>\n       In order to prevent the spread of bovine lung-disease, Botswana erected a 700km-long game-proof fence along their north-eastern and northern border with Namibia to replace the collapsed old Namibian fence in 2009.\n       <br/>\n<br/>\n       Two 15-km-wide openings were left in the fence on the western and eastern end to allow for the elephants' seasonal migration, both located opposite elephant hunting concession areas in Namibia.\n       <br/>\n<br/>\n       The combined impact of the Trans-Caprivi Highway and the fence thus stopped any seasonal migration between Botswana, Namibia and Angola, with tracking data showing only the odd bull occasionally crossing the border at those gaps in the fence. This led to the MEFT allowing trophy hunting operators to hunt elephant cows in 2017 to recover their trophy fees paid in advance to the communal conservancies.\n       <br/>\n<br/>\n       By late 2020, elephants have all but disappeared from the West Caprivi and adjacent communal areas. Elsewhere in north-western Namibia, a severe drought and increased poaching has also taken a severe toll, with only an estimated 250 elephants left in the arid Kunene and Erongo regions.\n       <br/>\n<br/>\n       In 1999 and 2008, the MEFT held two CITES-sanctioned auctions of the best ivory in the official stockpile in misguided attempt to flood and depress the black market demand for ivory and generate income for conservation efforts.\n       <br/>\n<br/>\n       This proved to be an abject failure. The Chinese and Japanese buyers colluded to keep prices low, paying only USD$100 and US$157 per kilogram respectively, and instead of releasing the stocks into the carving markets, drip-fed their new stock at USD$1,500 per kilogram over the following years.\n       <br/>\n<br/>\n       This triggered a 66% surge in elephant poaching and 71% increase in ivory smuggling over the following decade that saw elephant herds decimated in East and central Africa. As result, the African savannah and forest elephant species were declared as endangered and critically-endangered earlier this year.\n       <br/>\n<br/>\n       Meanwhile, the communal conservancy model had started to fail. Due to their tendency to inflate annual game counts and so justify high, cash-generating hunting quotas and a disastrous shoot-and-sell permit system that allowed them to sell off entire herds for cash to local butchers, the once-abundant wildlife in communal areas have all but disappeared.\n       <br/>\n<br/>\n       The elephants' Appendix I status also thus became an obstacle to the demand from conservancies for ever more cash from elephant hunting due to the limitations it imposed on the number of trophies that may be legally exported.\n       <br/>\n<br/>\n       Because CITES has thus far allowed and facilitated the export of live elephants to Chinese buyers, the MEFT therefore is now resorting to auctioning off entire herds of elephants in order to generate cash to the conservancies, as well as re-open the ivory trade that has historically wiped out over 95% of Africa's elephant herds over the past 100 years.\n       <br/>\n<br/>\n       This reckless and short-sighted humans-first approach by the Namibian authorities and their colleagues in Botswana, Zambia and Zimbabwe poses a dire threat to the last surviving elephant herds in the KAZA Park.\n       <br/>\n<br/>\n       The MEFT continues to falsely claim that there are 22,000 - 24,000 elephants in Namibia, based on a 1995 base count of 7,000 animals that they claim grew at a biologically improbably and mathematically impossible exponential rate of 3.3% since then.\n       <br/>\n<br/>\n       This fraudulent claims of a huge increase in numbers is immediately obvious from the fact that none of the factors outlined above are in any way reflected in their purported official elephant counts. Claims by Minister Pohamba Shifeta of a rampant rise human-elephant conflict is flatly contradicted by the fact that just one case of human-elephant conflict was reported in 2020.\n       <br/>\n<br/>\n       The official elephant population estimates, inflated by over-counting and systematic inflation of population density factors, are clearly only intended to keep the trophy hunting in business and the ruling party's rural support base appeased with regular cash hand-outs.\n       <br/>\n<br/>\n       The fact is that Namibia is losing the battle against organised crime and syndicated poaching, with 80% of all rhino poaching since 2005 occurring over the past five years. This largely due to the MEFT's humans-first conservation policies and poor management of resources, not to mention their obvious ignorance of their own Ministry's track record in respect of past ivory auctions.\n       <br/>\n<br/>\n<b>We remind these authorities that they are merely custodians, not the private owners of our common wildlife heritage and that the elephants are not theirs to dispose of as they see fit. </b>\n<br/>\n<br/>\n       Their plan to resume ivory trading, combined with their poor management, poses a dire threat to the last elephants left in the sub-region and the tourism industry that is an economic mainstay in all four countries involved in this deplorable and reckless attempt to cash in on the elephants for what will likely be one last and final time.\n       <br/>\n<br/>\n<b>We, the nature-loving people of Namibia and like-minded international friends therefore demand that:</b>\n</p><ol>\n<li>\n<b>CITES immediately commission an independent audit of all official ivory stockpiles held by Namibia, Botswana, Zambia and Zimbabwe;</b>\n<br/>\n</li>\n<li>\n<b>CITES demand an independent and verified elephant census in all four countries before granting any further export permits for live elephants;</b>\n<br/>\n</li>\n<li>\n<b>CITES and the IUCN conduct a full Environmental Impact Assessment on the impact of the Trans-Caprivi highway and the Botswana border fence on the elephants' seasonal migratory routes and patterns;</b>\n<br/>\n</li>\n<li>\n<b>CITES and the IUCN require that Namibia and Botswana implement measures to re-establish migratory routes and wildlife corridors across the West Caprivi;</b>\n<br/>\n</li>\n<li>\n<b>CITES and the IUCN suspend all elephant hunting in the KAZA area until such time that the elephants can freely and without impedance regain access to all their historical range areas within the KAZA Park.</b>\n</li>\n</ol><p>\n<b><br/>References:</b>\n<br/>\n       https://www.bloomberg.com/news/articles/2021-06-18/southern-africa-nations-mull-cites-split-to-allow-ivory-trade\n       <br/>\n       https://therevelator.org/southern-africas-ivory-delusion/\n       <br/>\n       https://news.mongabay.com/2019/02/it-pays-but-does-it-stay-hunting-in-namibias-community-conservation-system/\n       <br/>\n</p>",
+    "start_date": "2021-06-21T15:28:49-06:00",
+    "updates": [
+      {
+        "timestamp": "2021-06-21T15:29:47-06:00",
+        "text": "Petitionstext aktualisiert"
+      }
+    ],
+    "kind": "petition",
+    "category": "Bürgerpetition",
+    "signatures": 5728,
+    "goal": 7500,
+    "lang": "en",
+    "campaign_id": "avaaz:community_petitions:cites_and_iucn_let_them_be_free_stop_live_elephant_exports_to_china_ban_trade_in_ivory_permanently",
+    "status": "online",
+    "last_seen": "2026-08-12T20:35:00-06:00",
+    "offline_since": null,
+    "tags": [
+      "Namibia",
+      "Elephant",
+      "Elephants",
+      "Hunting",
+      "Ivory",
+      "Botswana",
+      "Trophy",
+      "Fence",
+      "Trade",
+      "International"
+    ],
+    "last_checked": "2026-08-12T20:35:00-06:00"
+  },
+  "el_fasher_emergency_loc": {
+    "slug": "el_fasher_emergency_loc",
+    "first_seen": "2026-08-12T20:35:00-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-08-12T20:35:00-06:00",
+        "count": 70502
+      }
+    ],
+    "title": "Sudan Emergency Appeal: Help Keep Hope Alive",
+    "summary": "Community-run kitchens and clinics have become a lifeline for countless families escaping extreme violence and famine in Sudan. But with little support from governments or aid agencies, they are running out of supplies, and many have been forced to close. This is an emergency appeal for donations.",
+    "image_url": "https://images.avaaz.org/55556-53537-sudan-2.jpeg",
+    "url": "https://secure.avaaz.org/campaign/en/el_fasher_emergency_loc/",
+    "petition_id": 55556,
+    "kind": "campaign",
+    "category": "Avaaz-Kampagne (Unterschriften)",
+    "started_by": "Avaaz-Team",
+    "description_full": "<p><strong>Sudan is facing the deadliest humanitarian crisis on Earth. <br/></strong><br/>A vicious civil war has now killed over 150,000 people and created the biggest refugee crisis on the planet. Healthcare is collapsing, children are dying of hunger, and world governments are doing almost nothing.<br/><br/><strong>Yet amid the horror and heartbreak, something beautiful is happening. <br/></strong><br/>Across the country, ordinary citizens are pulling together, running hundreds of community kitchens and clinics.  Offering food, medicine and shelter, <strong>these Emergency Response Rooms have become a lifeline for countless families</strong> escaping extreme violence and famine. They're so effective, they were nominated for a Nobel Peace Prize.<br/><br/><strong>But now even these fragile lifelines are unravelling.</strong> With little support from governments or aid agencies, community kitchens are running out of supplies, and many have been forced to close.<br/><br/><strong>This is an emergency appeal for donations</strong>.<br/><br/><strong>Together, we can help to keep these Emergency Response Rooms open, rushing food and medicine to families who have nothing left.</strong> And we won’t stop there -- we'll also shine a massive media spotlight onto the suffering in Sudan, and accelerate our global campaign for action.<br/><br/><strong>Every single donation will help keep hope alive in Sudan. Please give what you can now.</strong><br/><br/><strong>-------- </strong><br/><strong><em>Note</em></strong><em>:<strong> </strong>Avaaz is very careful about when and how we use photos of children, and the overall circumstances surrounding their depiction. In this case we felt it was important for the world to see the horror of what's happening in Sudan -- but opted for a photo that hides the identities of mother and child. The photo was taken at the Mother of Mercy Hospital in Sudan's South Kordofan state.</em><br/><br/></p>",
+    "start_date": "2025-09-26T22:00:00-06:00",
+    "signatures": 70502,
+    "goal": 100000,
+    "lang": "en",
+    "campaign_id": "avaaz:campaign:el_fasher_emergency_loc",
+    "status": "online",
+    "last_seen": "2026-08-12T20:35:00-06:00",
+    "offline_since": null,
+    "tags": [
+      "Sudan",
+      "Emergency",
+      "Governments",
+      "Families",
+      "Kitchens",
+      "Running",
+      "Appeal",
+      "Help",
+      "Keep",
+      "Community"
+    ],
+    "last_checked": "2026-08-12T20:35:00-06:00"
+  },
+  "no_death_penalty_for_palestinians_loc": {
+    "slug": "no_death_penalty_for_palestinians_loc",
+    "first_seen": "2026-08-12T20:35:00-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-08-12T20:35:00-06:00",
+        "count": 553461
+      }
+    ],
+    "title": "No death penalty for Palestinians!",
+    "summary": "URGENT: Israel is already preparing a death row for Palestinians.",
+    "image_url": "https://images.avaaz.org/57456-ben-gvir-12w.jpeg",
+    "url": "https://secure.avaaz.org/campaign/en/no_death_penalty_for_palestinians_loc/",
+    "petition_id": 57456,
+    "kind": "campaign",
+    "category": "Avaaz-Kampagne (Unterschriften)",
+    "started_by": "Avaaz-Team",
+    "description_full": "<p>\n         To EU leaders:\n        </p>\n<p>\n<i>\"As Israel's largest trading partner, you have the power to make Netanyahu listen. The European Council has already condemned Israel's new discriminatory death penalty. It's time to put your money where your mouth is and <strong>suspend EU trade deals with Israel to prevent more Palestinian deaths.</strong>\"</i>\n</p>\n<p>\n                            ---\n<br/>\n<br/>Champagne bottle raised, a golden noose pinned to his chest like a badge of honour.<br/><br/>This is Israel’s far right minister Ben-Gvir, who has championed a push for one of the most extreme death penalty laws in the world. <strong>And now, it’s passed.</strong><br/><br/>Under this new law, Palestinians convicted of lethal attacks will be executed by hanging - within 90 days of sentencing and with no right to a pardon.<br/><br/>In occupied Palestine, where arbritary arrests and torture are already common, this is a terrifying escalation in the war on human rights - and <strong>we must do what we can to stop it.</strong><br/><br/><strong>The death penalty is wrong in all circumstances -- and this is a position long held by the EU.</strong> They say their trade deals are reliant on partners respecting human rights — and they’ve considered sanctioning Israel before. Let’s make this petition impossible to ignore.\n<br/>\n<br/>Photo: March 30, 2026 REUTERS/Oren Ben Hakoon\n</p>",
+    "start_date": "2026-04-07T22:00:00-06:00",
+    "signatures": 553461,
+    "goal": 750000,
+    "lang": "en",
+    "campaign_id": "avaaz:campaign:no_death_penalty_for_palestinians_loc",
+    "status": "online",
+    "last_seen": "2026-08-12T20:35:00-06:00",
+    "offline_since": null,
+    "tags": [
+      "Israel",
+      "Death",
+      "Penalty",
+      "Palestinians",
+      "Already",
+      "Rights",
+      "Deals",
+      "Human",
+      "Right",
+      "Trade"
+    ],
+    "last_checked": "2026-08-12T20:35:00-06:00"
+  },
+  "land_rights_evergreen_2026": {
+    "slug": "land_rights_evergreen_2026",
+    "first_seen": "2026-08-12T20:35:00-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-08-12T20:35:00-06:00",
+        "count": 1083752
+      }
+    ],
+    "title": "Lula's Signature to Protect Our Planet",
+    "summary": "Join this call to grant them land rights and protection now!",
+    "image_url": "https://images.avaaz.org/55571-brloc-5.jpg",
+    "url": "https://secure.avaaz.org/campaign/en/land_rights_evergreen_2026/",
+    "petition_id": 57785,
+    "kind": "campaign",
+    "category": "Avaaz-Kampagne (Unterschriften)",
+    "started_by": "Avaaz-Team",
+    "description_full": "<p>\n         To Brazil’s President Lula and relevant Brazilian authorities:\n        </p>\n<p>\n<i>\"We call on you to ensure that the land rights of Indigenous Peoples and local communities are fully recognised by the end of 2026 in multilateral agreements, national legal frameworks and land tenure processes. Formally recognising their territories is necessary to uphold their rights, sustain the forests, and ensure their survival. It is also one of the most effective ways to address the biodiversity and climate crises humanity faces.\"</i>\n</p>\n<p>\n<strong>More Information: </strong>\n<br/>\n<br/><strong>With the stroke of a pen, Brazil’s President Lula can safeguard thousands of hectares of Indigenous territories</strong> — a step that would shield communities, remove invaders, preserve culture, and protect our forests. But powerful interests are pushing back, while Earth Defenders remain at terrible risk.\n<br/>\n<br/><strong>More than 2,250 have been killed</strong> globally in recent years for standing up to the ranchers, loggers, and miners who invade their sacred lands and forests for profit. Many of these Earth Defenders still lack full legal recognition of the territories they protect with their lives. This can change now:\n<br/>\n<br/>Indigenous Peoples and local communities need our support! Call on President Lula to formally recognise Indigenous territories before his presidency ends this year. <br/>\n<br/><strong>Sign now and spread the word to make their call for justice unstoppable </strong>— together we can get to 1.5 million voices!\n<br/>\n<br/>\n<br/>\n<br/>\n\n</p><h3>This campaign is a collaboration with the following organisations and signed by the following individuals</h3><p>\n\n<br/>\n\n\n<img loading=\"lazy\" src=\"https://images.avaaz.org/apib.png\"/>\n<br/>\n<a href=\"https://apiboficial.org\" rel=\"noopener\" target=\"_blank\"><strong>Articulação dos Povos Indígenas do Brasil</strong></a>\n\n\n\n<img loading=\"lazy\" src=\"https://images.avaaz.org/apoinme.png\"/>\n<br/>\nArticulação dos Povos e Organizações Indígenas do Nordeste, Minas Gerais e Espírito Santo\n\n\n<img loading=\"lazy\" src=\"https://images.avaaz.org/sudeste.png\"/>\n<br/>\nArticulação dos Povos Indígenas da Região Sudeste\n\n\n<img loading=\"lazy\" src=\"https://images.avaaz.org/arpinsul.png\"/>\n<br/>\nArticulação dos Povos Indígenas da Região Sul\n\n\n\n\n<img loading=\"lazy\" src=\"https://images.avaaz.org/Kaiowá.png\"/>\n<br/>\nAty Guasu Guarani Kaiowá\n\n\n<img loading=\"lazy\" src=\"https://images.avaaz.org/Yvyrupa.png\"/>\n<br/>\nComissão Guarani Yvyrupa\n\n\n<img loading=\"lazy\" src=\"https://images.avaaz.org/AmazôniaBrasileira.png\"/>\n<br/>\nCoordenação das Organizações Indígenas da Amazônia Brasileira\n\n<!-- COPY THIS CODE - START OF CODE -->\n\n<img loading=\"lazy\" src=\"https://images.avaaz.org/Terena.png\"/>\n<br/>\nConselho do Povo Terena\n\n\n\n<br/>\n\n\n\n\n<img loading=\"lazy\" src=\"https://images.avaaz.org/Hindou_Portrait-600x800-modified.png\"/>\n<br/>\n<a href=\"https://x.com/hindououmar\" rel=\"noopener\" target=\"_blank\"><strong>Hindou Oumarou Ibrahim</strong></a>\n<br/>\nChair of UN Permanent Forum on Indigenous Issues and member of the Mbororo people of Chad\n\n\n\n<img loading=\"lazy\" src=\"https://images.avaaz.org/TheTerritory_Txai-SuruiI__09_main-modified.png\"/>\n<br/>\n<a href=\"https://www.instagram.com/txaisurui/\" rel=\"noopener\" target=\"_blank\"><strong>Txai Suruí</strong></a>\n<br/>\nIndigenous leader and activist of the Paiter Suruí people of Brazil\n\n\n<img loading=\"lazy\" src=\"https://images.avaaz.org/1664901180633c603cd81bf_1664901180_3x2_md-modified.png\"/>\n<br/>\n<a href=\"https://x.com/celiaxakriaba\" rel=\"noopener\" target=\"_blank\"><strong>Célia Xakriabá</strong></a>\n<br/>\nFirst Indigenous woman elected Federal Deputy of Minas Gerais state and member of the Xakriabá people of Brazil\n\n\n\n\n<img loading=\"lazy\" src=\"https://images.avaaz.org/Jessica Pacheco, indigenous Colombia, indigenous territories expert-modified.png\"/>\n<br/><a href=\"https://x.com/jessikpache\" rel=\"noopener\" target=\"_blank\"><strong>Jessica Pacheco</strong></a>\n<br/>\nIndigenous technical expert of Sierra de Santa Marta and member of the Kankuama people of Colombia\n\n\n<img loading=\"lazy\" src=\"https://images.avaaz.org/olivia-bisa-pic.png\"/>\n<br/><a href=\"https://x.com/CuencasSagradas\" rel=\"noopener\" target=\"_blank\"><strong>Olivia Bisa</strong></a>\n<br/>\nPresident of Chapra Indigenous Nation\n\n<!-- COPY THIS CODE - START OF CODE -->\n\n<img loading=\"lazy\" src=\"https://images.avaaz.org/Ingry Paola Mojanajunsoy.png\"/>\n<br/><a href=\"https://acimvip.org/\" rel=\"noopener\" target=\"_blank\"><strong>Ingry Paola Mojanajinsoy</strong></a>\n<br/>\nPresident of Acimvip, Putumayo, Colombia\n\n<!-- COPY THIS CODE - END OF CODE -->\n\n<img loading=\"lazy\" src=\"https://images.avaaz.org/Nemonte-modified.png\"/>\n<br/><a href=\"https://www.instagram.com/nemonte.nenquimo/?hl=en\" rel=\"noopener\" target=\"_blank\"><strong>Nemonte Nenquimo</strong></a>\n<br/>\nGoldman Prize winner and first female president of the Waorani people of Pastaza, Ecuador\n\n\n\n\n<br/>\n\n\n\n<img loading=\"lazy\" src=\"https://images.avaaz.org/opiac.png\"/>\n<br/>\n<a href=\"https://www.facebook.com/opiac.oficial/?locale=es_LA\" rel=\"noopener\" target=\"_blank\"><strong>OPIAC</strong></a>\n\n\n<img loading=\"lazy\" src=\"https://images.avaaz.org/awatch.jpeg\"/>\n<br/>\n<a href=\"https://amazonwatch.org\" rel=\"noopener\" target=\"_blank\"><strong>Amazon Watch</strong></a>\n\n\n<img loading=\"lazy\" src=\"https://images.avaaz.org/afrontlines-logo.jpg\"/>\n<br/>\n<a href=\"https://amazonfrontlines.org\" rel=\"noopener\" target=\"_blank\"><strong>Amazon Frontlines</strong></a>\n\n\n<img loading=\"lazy\" src=\"https://images.avaaz.org/aceibo.jpeg\"/>\n<br/>\n<a href=\"https://www.alianzaceibo.org/\" rel=\"noopener\" target=\"_blank\"><strong>Alianza Ceibo</strong></a>\n\n\n\n\n<img loading=\"lazy\" src=\"https://images.avaaz.org/barranquilla-circle-logo.png\"/>\n<br/>\n<a href=\"https://barranquillamas20.com/\" rel=\"noopener\" target=\"_blank\"><strong>Fundación Barranquilla</strong></a>\n\n\n<img loading=\"lazy\" src=\"https://images.avaaz.org/Sacred%20Headwaters%202020_Outlines-01.jpg\"/>\n<br/>\n<a href=\"https://cuencasagradas.org/\" rel=\"noopener\" target=\"_blank\"><strong>Cuencas Sagradas</strong></a>\n\n\n<img loading=\"lazy\" src=\"https://images.avaaz.org/cyb.png\"/>\n<br/>\n<a href=\"https://x.com/gybn_cbd\" rel=\"noopener\" target=\"_blank\"><strong>Colombian Youth Biodiversity</strong></a>\n\n\n<img loading=\"lazy\" src=\"https://images.avaaz.org/LiL_Red_Stacked%20(4).png\"/>\n<br/>\n<a href=\"https://www.landislife.org/\" rel=\"noopener\" target=\"_blank\"><strong>Land is Life</strong></a>\n\n\n<img loading=\"lazy\" src=\"https://images.avaaz.org/EarthRights Color Logo PRINT prueba.png\"/>\n<br/>\n<a href=\"https://earthrights.org/\" rel=\"noopener\" target=\"_blank\"><strong>EarthRights</strong></a>\n\n<!-- COPY THIS CODE - START OF CODE -->\n\n<img loading=\"lazy\" src=\"https://images.avaaz.org/Nawe - Logo.png\"/>\n<br/>\n<a href=\"https://www.facebook.com/nawewaorani/?locale=es_LA\" rel=\"noopener\" target=\"_blank\"><strong>Nacionalidad Waorani del Ecuador</strong></a>\n\n\n<br/>\n\n<!-- COPY THIS CODE - END OF CODE -->\n\n</p>",
+    "signatures": 1083752,
+    "goal": 1500000,
+    "lang": "en",
+    "campaign_id": "avaaz:campaign:land_rights_evergreen_2026",
+    "status": "online",
+    "last_seen": "2026-08-12T20:35:00-06:00",
+    "offline_since": null,
+    "tags": [
+      "Indigenous",
+      "President",
+      "Indígenas",
+      "People",
+      "Articulação",
+      "Territories",
+      "Brazil",
+      "Povos",
+      "Call",
+      "Lula"
+    ],
+    "last_checked": "2026-08-12T20:35:00-06:00"
+  }
+}

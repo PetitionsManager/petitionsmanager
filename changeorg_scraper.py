@@ -35,6 +35,7 @@ from pathlib import Path
 
 from bs4 import BeautifulSoup
 
+import i18n_helfer as i18n
 import petitions_core as core
 from petitions_core import Platform, log, now_iso, prog, sanitize_fragment
 
@@ -106,6 +107,9 @@ DESC_RE     = re.compile(r'"description":"((?:[^"\\]|\\.)*)"')
 CREATED_RE  = re.compile(r'"createdAt":"(\d{4}-\d{2}-\d{2})')
 STARTER_RE  = re.compile(r'"displayName":"((?:[^"\\]|\\.)*)"')
 COUNTRY_RE  = re.compile(r'"country":\{"countryCode":"([A-Z]{2})"')
+# Die SPRACHE der Petition (nicht ihr Land) — Grundlage des englischen Eintrags.
+ORIGINAL_LOCALE_RE = re.compile(
+    r'"originalLocale":\{"localeCode":"([A-Za-z\-]+)"')
 TAG_RE      = re.compile(r'"slug":"([a-z0-9\-]+)","name":"((?:[^"\\]|\\.)*)"')
 
 FETCH_HEADERS = {
@@ -215,11 +219,27 @@ def _volltext_treffer(html: str):
     return DESC_RE.search(html)
 
 
-def parse_detail(html: str, url: str) -> dict | None:
-    """None = keine deutsche Petition (skip)."""
-    m_c = COUNTRY_RE.search(html)
-    if not m_c or m_c.group(1) != "DE":
-        return None
+def parse_detail(html: str, url: str, sprache: str = "de") -> dict | None:
+    """None = Petition der falschen Sprache (skip).
+
+    ⚠️ ZWEI VERSCHIEDENE FELDER, und der Unterschied ist wichtig:
+      · "country":{"countryCode":"DE"}          — das LAND der Petition
+      · "originalLocale":{"localeCode":"en-US"} — die SPRACHE, in der sie
+                                                  verfasst wurde
+    Der deutsche Zweig prüft historisch das Land; das trifft hier zusammen,
+    weil deutschsprachige Petitionen fast alle aus Deutschland kommen. Für den
+    englischen Zweig taugt es NICHT — englische Petitionen kommen aus US, GB,
+    AU, CA, IN. Deshalb prüft er die Sprache, und das ist ohnehin das
+    genauere Feld (am 12.8.2026 an beiden Sprachen gemessen).
+    """
+    if sprache == "de":
+        m_c = COUNTRY_RE.search(html)
+        if not m_c or m_c.group(1) != "DE":
+            return None
+    else:
+        m_l = ORIGINAL_LOCALE_RE.search(html)
+        if not m_l or not m_l.group(1).lower().startswith(sprache):
+            return None
 
     rec: dict = {}
     m = ASK_RE.search(html)
@@ -258,10 +278,19 @@ def parse_detail(html: str, url: str) -> dict | None:
     rec["image_url"] = og["content"].strip() if og and og.get("content") else None
     rec["url"] = url
     rec["kind"] = "petition"
+    # ⚠️ Beim Quervergleich der sechs Sprach-Zwillinge am 12.8.2026 aufgefallen:
+    # Change.org war die EINZIGE Plattform ohne lang-Vermerk am Datensatz —
+    # 0 von 10 englischen Sätzen trugen einen, während alle anderen fünf ihn
+    # setzten. Die App richtet Flagge und Sprachhinweis danach
+    # (app.js: langInfo(s.relLang || s.plat.language)), und publish.py leitet
+    # das languages-Feld des Manifests daraus ab. Der Wert ist hier BELEGT,
+    # nicht geraten: er stammt aus "originalLocale" der Seite selbst.
+    i18n.setze_hauptsprache(rec, sprache)
     return rec
 
 
-def scrape_petition(fetcher: core.Fetcher, slug: str) -> tuple[str, dict | None]:
+def scrape_petition(fetcher: core.Fetcher, slug: str,
+                    sprache: str = "de") -> tuple[str, dict | None]:
     """(status, record) – status: online | offline | error | skip."""
     url = f"{BASE_URL}/p/{slug}"
     resp = fetcher.get(url)
@@ -271,7 +300,7 @@ def scrape_petition(fetcher: core.Fetcher, slug: str) -> tuple[str, dict | None]
         return "offline", None
     if not resp.ok:
         return "error", None
-    rec = parse_detail(resp.text, url)
+    rec = parse_detail(resp.text, url, sprache)
     if rec is None:
         return "skip", None
     return "online", rec
@@ -433,6 +462,159 @@ PLATFORM = Platform(
     html_file=HTML_FILE,
     run=run,
     check=check,
+)
+
+
+# ----------------------------------------------------------------------------
+# Der englische Eintrag
+# ----------------------------------------------------------------------------
+# ⚠️⚠️ BEI CHANGE.ORG GIBT ES KEINE SPRACHPAARE — und deshalb bewusst KEINE
+# campaign_id. Am 12.8.2026 gemessen: jede Petition existiert in GENAU EINER
+# Sprache ("originalLocale"), kein Feld und kein hreflang zeigt auf eine
+# andere Fassung, und der Umschalter ?lang=de-DE tauscht nur die
+# Bedienoberfläche — der Petitionstext bleibt Zeichen für Zeichen derselbe
+# (description-md5 identisch). Der englische Eintrag bringt also eigenständige
+# Petitionen, aber keine Übersetzungsverknüpfung. Wer hier eine Paarung
+# einbaut, behauptet etwas, das es nicht gibt.
+#
+# ENTDECKUNG über die Ortsseiten statt über die Sitemap: die Monats-Sitemaps
+# kennzeichnen die Sprache NICHT (nur <loc> und <lastmod>), weshalb der
+# deutsche Zweig eine Wort-Heuristik braucht. Die 4.579 Ortsseiten aus
+# sitemap-location_pages.xml enden ALLE auf „--us" und sind damit sprachlich
+# sortenrein — ganz ohne Raten. Eine einzelne Ortsseite lieferte 24
+# Petitions-Slugs.
+EN_DATA_FILE = Path("changeorg_en_petitions.json")
+EN_HTML_FILE = Path("changeorg_en_petitions.html")
+LOCATION_SITEMAP = f"{BASE_URL}/sitemap-location_pages.xml"
+LOCATION_LOC_RE = re.compile(r"<loc>(https://www\.change\.org/r/[^<]+)</loc>")
+# ⚠️ Deckel. 4.579 Ortsseiten × ~24 Slugs wären ein Vielfaches des gesamten
+# Tagesbudgets. Der Lauf nimmt ein WANDERNDES Fenster und merkt sich die
+# Stelle im _meta — so ist jeder Lauf gleich teuer und der Bestand wächst
+# über die Zeit, ohne dass irgendwo still etwas wegfällt.
+EN_ORTE_JE_LAUF = 25
+EN_NEUE_JE_LAUF = 300
+
+
+def discover_en_slugs(fetcher: core.Fetcher,
+                      offset: int = 0) -> tuple[dict[str, dict], int]:
+    """({slug: {}}, neuer_offset) aus einem wandernden Fenster von Ortsseiten."""
+    resp = fetcher.get(LOCATION_SITEMAP)
+    orte = LOCATION_LOC_RE.findall(resp.text) if (resp and resp.ok) else []
+    if not orte:
+        log("  Ortsliste leer – Lauf ohne Entdeckung.")
+        core.entdeckung("Ortsseiten-Sitemap", 0, erwartet_min=100,
+                        name_en="location sitemap")
+        return {}, offset
+    core.entdeckung("Ortsseiten-Sitemap", len(orte), erwartet_min=100,
+                    name_en="location sitemap")
+    offset %= len(orte)
+    fenster = [orte[(offset + i) % len(orte)] for i in range(EN_ORTE_JE_LAUF)]
+    found: dict[str, dict] = {}
+    prog(phase="discover", current=0, total=len(fenster),
+         message="Lade Ortsseiten …")
+    for i, url in enumerate(fenster, 1):
+        resp = fetcher.get(url)
+        if resp is not None and resp.ok:
+            for m in PETITION_SLUG_RE.finditer(resp.text):
+                found.setdefault(m.group(1), {})
+        prog(current=i, total=len(fenster),
+             message=f"{len(found)} Slugs bisher")
+    log(f"{len(fenster)} Ortsseite(n) ab Platz {offset} von {len(orte)}: "
+        f"{len(found)} Petitions-Slugs.")
+    return found, (offset + EN_ORTE_JE_LAUF) % len(orte)
+
+
+def run_en(args) -> None:
+    store = core.load_store(EN_DATA_FILE)
+    fetcher = core.Fetcher(delay=args.delay, headers=FETCH_HEADERS)
+    ts = now_iso()
+    offset = int(core.load_meta(EN_DATA_FILE).get("orte_offset") or 0)
+
+    def save(quiet=True, **extra):
+        core.save_store(store, EN_DATA_FILE,
+                        extra_meta={"orte_offset": offset, **extra},
+                        quiet=quiet)
+
+    known = list(store.keys())
+    if known and not args.no_recheck and not args.limit:
+        log(f"Prüfe {len(known)} bekannte englische Petition(en) …")
+        prog(phase="check-known", current=0, total=len(known), message="…")
+        weg = []
+        for k, slug in enumerate(known, 1):
+            prog(current=k, total=len(known), message=slug)
+            if core.skip_recent(store.get(slug), args):
+                continue
+            status, rec = scrape_petition(fetcher, slug, "en")
+            if status == "error":
+                continue
+            if status == "skip":
+                weg.append(slug)
+                continue
+            core.upsert(store, slug, rec or {}, {}, status, ts,
+                        f"{BASE_URL}/p/{slug}")
+            save()
+        for slug in weg:
+            store.pop(slug, None)
+        if weg:
+            log(f"  {len(weg)} Satz/Sätze ohne englische Petition entfernt.")
+
+    entdeckt, offset = discover_en_slugs(fetcher, offset)
+    neu = [s for s in entdeckt if s not in store][:args.limit or EN_NEUE_JE_LAUF]
+    log(f"{len(neu)} neue englische Petition(en) zum Scrapen "
+        f"(Gesamt im Store: {len(store)}).")
+    prog(phase="scrape", current=0, total=len(neu), message="Beginne …")
+
+    fremdsprachig = 0
+    for i, slug in enumerate(neu, 1):
+        prog(current=i, total=len(neu), message=slug)
+        status, rec = scrape_petition(fetcher, slug, "en")
+        if status == "error":
+            continue
+        if status == "skip":
+            # Die Ortsseiten sind US-Seiten, aber nicht jede dort verlinkte
+            # Petition ist englisch verfasst. Das ist kein Fehler, sondern
+            # genau der Zweck der Sprachprüfung — nur zählen wollen wir es.
+            fremdsprachig += 1
+            continue
+        core.upsert(store, slug, rec or {}, {}, status, ts,
+                    f"{BASE_URL}/p/{slug}")
+        save()
+
+    neue = [s for s, r in store.items() if r.get("first_seen") == ts]
+    if neue:
+        log(f"NEU: {len(neue)} neue englische Petition(en) in diesem Lauf.")
+    if fremdsprachig:
+        log(f"  {fremdsprachig} übersprungen (nicht englisch verfasst).")
+    prog(message="Speichere & baue HTML …")
+    save(quiet=False, new_petitions_last_run=neue, available=len(entdeckt))
+    core.write_list_html(PLATFORM_EN)
+    log("Fertig (Change.org English).")
+
+
+def check_en(fetcher):
+    resp = fetcher.get(LOCATION_SITEMAP)
+    if resp is None or not resp.ok:
+        return False, "Ortsseiten-Sitemap nicht erreichbar"
+    n = len(LOCATION_LOC_RE.findall(resp.text))
+    return n >= 100, f"{n} Ortsseiten"
+
+
+PLATFORM_EN = Platform(
+    key="changeorg_en",
+    openness=3,
+    openness_note="Mittel: die Ortsseiten /local/<stadt>--<state>--us sind "
+                  "server-gerendert, von robots.txt erlaubt und sprachlich "
+                  "sortenrein — anders als im deutschen Zweig braucht es "
+                  "hier keine Wort-Heuristik. Weiterblättern ginge nur über "
+                  "/api-proxy/, und das ist gesperrt.",
+    name="Change.org (English)",
+    eyebrow="Change.org · englische Petitionen (Ortsseiten)",
+    source_url="https://www.change.org/?lang=en-US",
+    data_file=EN_DATA_FILE,
+    html_file=EN_HTML_FILE,
+    run=run_en,
+    check=check_en,
+    language="en",
 )
 
 

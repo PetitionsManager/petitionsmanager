@@ -105,6 +105,16 @@ HTML_FILE = Path("threefifty_petitions.html")
 # Last ohne Ertrag. None = Parameter weglassen.
 REGIONS   = ["Region: Europe", None]
 LANG_CODE = "Language: German"
+
+# ---- Der englische Eintrag (12.8.2026) --------------------------------------
+# Derselbe Endpunkt, nur ein anderer Filterwert. ⚠️ Der Filter wirkt wirklich —
+# Negativkontrolle: ein erfundenes „Language: Klingon" liefert HTTP 200 mit
+# **2 Byte** und null Einträgen, „Language: English" dagegen 20 Aktionen aus
+# einer einzigen Abfrage. Ohne diese Gegenprobe wäre nicht zu unterscheiden,
+# ob der Parameter ignoriert wird.
+EN_LANG_CODE = "Language: English"
+EN_DATA_FILE = Path("threefifty_en_petitions.json")
+EN_HTML_FILE = Path("threefifty_en_petitions.html")
 TIME_FILTERS = ["Get involved page: low bar",
                 "Get involved page: medium bar",
                 "Get involved page: high bar"]
@@ -155,6 +165,7 @@ FETCH_HEADERS = {
     "Accept": "application/json, text/html;q=0.9,*/*;q=0.8",
     "Accept-Language": "de-DE,de;q=0.9",
 }
+FETCH_HEADERS_EN = dict(FETCH_HEADERS, **{"Accept-Language": "en-US,en;q=0.9"})
 
 
 # ----------------------------------------------------------------------------
@@ -218,8 +229,9 @@ def classify(obj: dict) -> str:
 # ----------------------------------------------------------------------------
 # Entdeckung über die JSON-API (alle drei Zeitstufen zusammenführen)
 # ----------------------------------------------------------------------------
-def _api_url(time_filter: str, region: str | None = REGIONS[0]) -> str:
-    params = {"time_filter": time_filter, "lang_code": LANG_CODE}
+def _api_url(time_filter: str, region: str | None = REGIONS[0],
+             lang_code: str = LANG_CODE) -> str:
+    params = {"time_filter": time_filter, "lang_code": lang_code}
     if region:
         params["region"] = region
     return API_URL + "?" + urlencode(params)
@@ -230,14 +242,20 @@ def _page_id(obj: dict) -> str | None:
     return m.group(1) if m else None
 
 
-def discover(fetcher: core.Fetcher) -> dict[str, dict]:
-    """{page_id: api_obj} über alle Zeitstufen × Regionsvarianten (Deutsch)."""
+def discover(fetcher: core.Fetcher, lang_code: str = LANG_CODE,
+             sprachname: str = "Deutsch") -> dict[str, dict]:
+    """{page_id: api_obj} über alle Zeitstufen × Regionsvarianten.
+
+    `lang_code` ist der Filterwert der Quelle („Language: German" bzw.
+    „Language: English"). ⚠️ Er wirkt wirklich — Negativkontrolle am
+    12.8.2026: ein erfundenes „Language: Klingon" liefert HTTP 200 mit
+    **2 Byte** und null Einträgen, Englisch dagegen 20 Aktionen."""
     found: dict[str, dict] = {}
     abfragen = [(r, tf) for r in REGIONS for tf in TIME_FILTERS]
     prog(phase="discover", current=0, total=len(abfragen),
-         message="Lade Aktionsliste (Deutsch) …")
+         message=f"Lade Aktionsliste ({sprachname}) …")
     for i, (region, tf) in enumerate(abfragen, 1):
-        resp = fetcher.get(_api_url(tf, region))
+        resp = fetcher.get(_api_url(tf, region, lang_code))
         added = 0
         if resp is not None and resp.ok:
             try:
@@ -506,7 +524,8 @@ def build_rec(page_id: str, obj: dict) -> dict:
 
 def scrape_action(fetcher: core.Fetcher, page_id: str, obj: dict,
                   with_count: bool = True,
-                  existing: dict | None = None) -> tuple[str, dict, bool]:
+                  existing: dict | None = None,
+                  sprache: str = "de") -> tuple[str, dict, bool]:
     """(status, rec, unklar). ``unklar`` = die Weiterleitung war nicht zu lesen
     und es war kein klares 404 – Zeichen für den Bot-Schutz (resolve_target).
 
@@ -531,12 +550,21 @@ def scrape_action(fetcher: core.Fetcher, page_id: str, obj: dict,
             if kind and kind not in ROBOTS_GESPERRT:
                 rec.update(fetch_detail(fetcher, kind, slug))
                 links = rec.pop("_sprachlinks", {})
-                i18n.setze_hauptsprache(rec, "de")
+                i18n.setze_hauptsprache(rec, sprache)
+                # Sprachneutral: SLUG_SPRACHSUFFIX_RE streicht JEDES Kürzel
+                # (de|en|fr|nl|es|pt|tr), beide Fassungen ergeben denselben
+                # Wert. ⚠️ Anders als bei WeMove war das hier von Anfang an
+                # symmetrisch — dort strich die Regel nur „-DE" und lieferte
+                # deshalb null Sprachpaare (12.8.2026 gemessen).
                 rec["campaign_id"] = f"threefifty:{_slug_rumpf(slug).lower()}"
                 # Fremdsprachen sind abschaltbar (siehe i18n_helfer). Die
                 # Kennung oben bleibt trotzdem stehen — sie kostet nichts und
                 # verbindet die Fassungen, sobald sie da sind.
-                for lang in (FREMDSPRACHEN if i18n.aktiv() else ()):
+                # Nur der deutsche Eintrag holt die zweite Fassung IN denselben
+                # Satz; seit es PLATFORM_EN gibt, entsteht sie als eigener Satz
+                # und wird über campaign_id verknüpft.
+                for lang in (FREMDSPRACHEN
+                             if (sprache == "de" and i18n.aktiv()) else ()):
                     ziel = links.get(lang)
                     if not ziel:
                         # Kein eindeutiger Umschalter-Treffer. Das kann heißen
@@ -590,20 +618,30 @@ def recheck_missing(fetcher: core.Fetcher, page_id: str
 # ----------------------------------------------------------------------------
 # Ablauf eines Laufs
 # ----------------------------------------------------------------------------
-def run(args) -> None:
-    store = core.load_store(DATA_FILE)
-    fetcher = core.Fetcher(delay=args.delay, headers=FETCH_HEADERS)
+def _lauf(args, data_file, plattform, lang_code: str, sprache: str,
+          sprachname: str) -> None:
+    """Ein Lauf für EINEN Sprach-Eintrag.
+
+    Deutsch und Englisch teilen den ganzen Ablauf; verschieden sind nur der
+    Sprachfilter der Quelle, der Zustandsspeicher und der lang-Vermerk am
+    Datensatz. Bewusst EINE Funktion statt zweier ähnlicher — sonst driften
+    die Notbremse und die skip_recent-Logik über die Zeit auseinander."""
+    store = core.load_store(data_file)
+    fetcher = core.Fetcher(delay=args.delay,
+                           headers=FETCH_HEADERS if sprache == "de"
+                           else FETCH_HEADERS_EN)
     ts = now_iso()
 
     def save(quiet=True, **extra):
-        core.save_store(store, DATA_FILE, extra_meta=extra, quiet=quiet)
+        core.save_store(store, data_file, extra_meta=extra, quiet=quiet)
 
     def rec_url(page_id: str) -> str:
         return (store.get(page_id, {}).get("url")
                 or f"{BASE_URL}/cms/view_by_page_id/{page_id}")
 
-    log("Sammle deutsche 350.org-Aktionen (Europa + ohne Regionsfilter) …")
-    discovered = discover(fetcher)
+    log(f"Sammle {sprachname.lower()}sprachige 350.org-Aktionen "
+        f"(Europa + ohne Regionsfilter) …")
+    discovered = discover(fetcher, lang_code, sprachname)
 
     # (1) Bekannte, die nicht mehr im Feed sind → Offline-Prüfung.
     missing = [k for k in store if k not in discovered]
@@ -654,7 +692,8 @@ def run(args) -> None:
             with_count = False
         status, rec, unklar = scrape_action(fetcher, page_id, obj,
                                            with_count=with_count,
-                                           existing=existing)
+                                           existing=existing,
+                                           sprache=sprache)
         leere = leere + 1 if unklar else 0
         if leere >= ABBRUCH_NACH_LEEREN and not gebremst:
             gebremst = True
@@ -670,8 +709,16 @@ def run(args) -> None:
     prog(message="Speichere & baue HTML …")
     save(quiet=False, new_petitions_last_run=new_petitions,
          available=len(discovered))
-    core.write_list_html(PLATFORM)
-    log("Fertig (350.org).")
+    core.write_list_html(plattform)
+    log(f"Fertig (350.org {sprachname}).")
+
+
+def run(args) -> None:
+    _lauf(args, DATA_FILE, PLATFORM, LANG_CODE, "de", "Deutsch")
+
+
+def run_en(args) -> None:
+    _lauf(args, EN_DATA_FILE, PLATFORM_EN, EN_LANG_CODE, "en", "Englisch")
 
 
 def check(fetcher):
@@ -702,6 +749,36 @@ PLATFORM = Platform(
     html_file=HTML_FILE,
     run=run,
     check=check,
+)
+
+
+def check_en(fetcher):
+    resp = fetcher.get(_api_url(TIME_FILTERS[0], REGIONS[0], EN_LANG_CODE))
+    if resp is None or not resp.ok:
+        return False, "JSON-API nicht erreichbar"
+    try:
+        n = len(json.loads(resp.text))
+    except ValueError:
+        return False, "API liefert kein JSON"
+    return n > 0, f"{n} Schlüssel in der englischen Antwort"
+
+
+PLATFORM_EN = Platform(
+    key="threefifty_en",
+    language="en",
+    openness=3,
+    openness_note="Mittel: keine offene Liste; Aktionen über dieselbe externe "
+                  "JSON-API wie im deutschen Zweig, nur mit dem Sprachfilter "
+                  "„Language: English\". Zähler über /progress/, Texte von der "
+                  "Aktionsseite (/sign/, /letter/, /signup/). /act/ ist per "
+                  "robots gesperrt und wird nicht geladen.",
+    name="350.org (English)",
+    eyebrow="350.org · Klima-Aktionen (englisch): Petitionen, E-Mail- & Brief-Aktionen",
+    source_url="https://350.org/",
+    data_file=EN_DATA_FILE,
+    html_file=EN_HTML_FILE,
+    run=run_en,
+    check=check_en,
 )
 
 

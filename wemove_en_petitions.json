@@ -1,0 +1,378 @@
+{
+  "_meta": {
+    "_README": "Petitions-Monitor. Datensaetze werden aktualisiert, nie ueberschrieben.",
+    "fields": {
+      "slug": "ID/Schluessel aus der URL",
+      "merged_slugs": "frühere Schluessel, die auf diesen umgeleitet wurden",
+      "url": "kanonische Petitions-URL",
+      "petition_id": "interne numerische ID der Plattform oder null",
+      "title": "Titel",
+      "started_by": "Gestartet von",
+      "recipient": "Adressat",
+      "category": "Thema/Kategorie (falls die Plattform Kategorien hat)",
+      "category_url": "Link zur Kategorieseite",
+      "tags": "bis zu 10 aus dem Text abgeleitete Schlagwörter (zum Verlinken)",
+      "summary": "Kurzbeschreibung (og:description)",
+      "description_full": "komplette, gegliederte Beschreibung als bereinigtes HTML",
+      "image_url": "Petitionsbild",
+      "signatures": "aktueller Unterschriftenstand",
+      "signatures_history": "Zeitreihe [{checked_at,count}]",
+      "milestones": "Meilenstein-Marken [{threshold,timestamp}]",
+      "updates": "Neuigkeiten [{timestamp,text}]",
+      "goal": "aktuelles Unterschriften-Ziel (falls die Plattform eines zeigt)",
+      "start_date": "Startdatum (plattformabhängig ermittelt)",
+      "deadline": "Ende der Mitzeichnungs-/Unterschriftenfrist oder null",
+      "closed": "true = nicht mehr mitzeichenbar (Frist abgelaufen/archiviert)",
+      "phase": "Verfahrensstand der Plattform (z. B. mitzeichnung|beendet|archiv)",
+      "status": "online | offline (erreichbar die Seite noch?)",
+      "first_seen": "erstmals gescrapt (unveraenderlich)",
+      "last_seen": "zuletzt online",
+      "last_checked": "zuletzt geprueft",
+      "offline_since": "seit wann offline oder null"
+    },
+    "generated_at": "2026-08-12T19:41:16-06:00",
+    "petition_count": 8,
+    "unbrauchbare": {},
+    "new_petitions_last_run": [
+      "2026-07-ban-coral-killers-sunscreen-petition-EN",
+      "2026-06-StopVW-Israel-Airshield-petition-EN",
+      "2026-05-only-yes-means-yes-petition-EN",
+      "2026-06-phone-hacking-petition-EN",
+      "2026-06-dont-send-our-data-to-the-US-petition-EN",
+      "2026-05-green-data-centres-petition-EN",
+      "2018-09-Kodaikanal-petition-EN",
+      "2019-08-Mercosur-petition-EN"
+    ],
+    "available": 692,
+    "lauf_verlauf": [
+      {
+        "zeit": "2026-08-12T19:41:16-06:00",
+        "gesamt": 8,
+        "online": 8,
+        "offline": 0,
+        "ohne_titel": 0,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 0,
+        "torsi": 0,
+        "dubletten": 0
+      }
+    ],
+    "kennzahlen": {
+      "zeit": "2026-08-12T19:41:16-06:00",
+      "gesamt": 8,
+      "online": 8,
+      "offline": 0,
+      "ohne_titel": 0,
+      "platzhalter": 0,
+      "nicht_ausgeliefert": 0,
+      "torsi": 0,
+      "dubletten": 0
+    },
+    "befunde": [],
+    "health_warning": null,
+    "online_count": 8
+  },
+  "2026-07-ban-coral-killers-sunscreen-petition-EN": {
+    "slug": "2026-07-ban-coral-killers-sunscreen-petition-EN",
+    "first_seen": "2026-08-12T19:40:30-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-08-12T19:40:30-06:00",
+        "count": 65171
+      }
+    ],
+    "title": "Ban coral-killing sunscreen!",
+    "image_url": "https://wemove.cdn.actionkit.com/images/Ban_Coral_Killer_Sunscreen_WeMove_Europe_Petition_compressed.jpg",
+    "url": "https://action.wemove.eu/sign/2026-07-ban-coral-killers-sunscreen-petition-EN",
+    "description_full": "<p>\n\n<!-- Remove this if you don't want popins like \"This page also in English\" -->\n\n\n<img alt=\"Language selector\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/icon_translate_eeaca63123.svg\"/>\n\n          \n            \n              \n              English\n\n              \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n        \n\n</p><ul>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-07-ban-coral-killers-sunscreen-petition-FR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Français\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-07-ban-coral-killers-sunscreen-petition-DE\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Deutsch\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-07-ban-coral-killers-sunscreen-petition-ES\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Español\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-07-ban-coral-killers-sunscreen-petition-IT\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Italiano\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-07-ban-coral-killers-sunscreen-petition-NL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Nederlands\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-07-ban-coral-killers-sunscreen-petition-PL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Polski\n\n                    \n                    </a>\n</li>\n</ul><p>\n\n\n          Ban coral-killing sunscreen!\n        \n\n<img alt=\"Ban coral-killing sunscreen!\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/Ban_Coral_Killer_Sunscreen_WeMove_Europe_Petition_compressed.jpg\"/>\n\n</p><h3>\n<p>To Jessika Roswall, European Commissioner for Environment, Water Resilience and a Competitive Circular Economy, Stéphane Séjourné, Executive Vice-President for Prosperity and Industrial Strategy, and Costas Kadis, European Commissioner for Fisheries and Oceans. </p>\n</h3>\n\n<h2>\n            Petition\n          </h2>\n<p>Protecting our skin shouldn't come at the expense of the sea. We're calling on you to make sunscreen safer for people and marine life by:<br/></p>\n<ul>\n<li><strong>Phasing out and banning harmful UV filters from sunscreen products</strong> sold in the European Union, including oxybenzone, octinoxate, octocrylene, benzophenone-1, benzophenone-8, nano titanium dioxide and 4-Methylbenzylidene Camphor (4-MBC).</li>\n<li><strong>Restricting the use of these toxic UV filters</strong> in Marine Protected Areas and other ecologically sensitive coastal zones. </li>\n<li><strong>Introducing mandatory marine ecotoxicity assessments</strong> for all UV filters authorised under EU cosmetic legislation, and ensuring environmental claims such as “marine-safe” or “reef-safe” are scientifically verified and legally regulated.</li>\n<li><strong>Promoting safer alternatives</strong>, including mineral-based UV filters with demonstrated and lower environmental impacts.</li>\n<li><strong>Creating a dedicated EU funding programme</strong> for the conservation, restoration and recovery of coral ecosystems, including coralligenous reefs, red coral habitats and gorgonian forests.</li>\n</ul>\n\n\n<h2>\n            \n              Why is this important?\n            \n          </h2>\n<p>This summer, millions of people are reaching for sunscreen - slathering it on before going for a swim or enjoying the beach. Many of us choose bottles labelled <strong>\"reef safe\" or \"reef friendly\", thinking we're helping to protect the sea</strong>. </p>\n<p>But in Europe, most of these labels mean <em>nothing at all</em>.</p>\n<p><strong>Sunscreen brands don't have to prove their products are safe for marine life before selling them to us</strong>. [1]</p>\n<p>Several common ingredients in sun lotions accumulate in marine environments and contribute to <strong>coral stress, bleaching, and broader coastal damage</strong>. [2] Some of them could also cause <strong>lower fertility and hormonal disruption in humans</strong>. [3]</p>\n<p>Our seas are under threat. Every summer that passes without proper laws protecting them causes damage we can't undo. [4] <strong>Hawaii and Palau have already acted to restrict sunscreen ingredients that threaten marine wildlife</strong>. [5] The EU hasn’t.</p>\n<p>We should be able to protect both our skin and the sea with confidence. But that will only happen if enough of us demand change.</p>\n<p><strong>Sign the petition:</strong> call on the EU to ban harmful sunscreen ingredients and put an end to misleading \"reef safe\" labels!</p>\n<!-- ak.wysiwyg=code -->\n<h4>\n            References:\n          </h4>\n\n<ol>\n<li>https://savethereef.org/about-reef-save-sunscreen.html </li>\n<li>https://www.reefsafety.com.au/ ; https://oceanservice.noaa.gov/news/sunscreen-corals.html</li>\n<li>https://suntribesunscreen.com/en-es/pages/toxic-sunscreen-ingredients-to-avoid</li>\n<li>https://www.icm.csic.es/en/news/climate-crisis-drives-mediterranean-coral-populations-collapse</li>\n<li>Hawaii Senate Bill 2571 (effective 2021) prohibits the sale of sunscreens containing oxybenzone and octinoxate. The Palau Responsible Tourism Education Act (2020) bans several reef-toxic sunscreen ingredients. https://www.reefsafety.com.au/blog/what-hawaii-palau-teach-australia</li>\n</ol>\n<p>Picture credits: Arnau Argemí</p>\n\n\n\n<h3>In partnership with:</h3>\n\n<p><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/Logo_Blue.png\"/></p>",
+    "summary": "English Français Deutsch Español Italiano Nederlands Polski Ban coral-killing sunscreen! To Jessika Roswall, European Commissioner for Environment, Water Resilience and a Competitive Circular Economy,…",
+    "start_date": "2026-07-01",
+    "started_by": "WeMove Europe",
+    "kind": "petition",
+    "signatures": 65171,
+    "goal": 75000,
+    "lang": "en",
+    "campaign_id": "wemove:2026-07-ban-coral-killers-sunscreen-petition",
+    "status": "online",
+    "last_seen": "2026-08-12T19:40:30-06:00",
+    "offline_since": null,
+    "tags": [
+      "Sunscreen",
+      "Marine",
+      "Ingredients",
+      "European",
+      "Filters",
+      "Coral-killing",
+      "Commissioner",
+      "Including",
+      "Coral",
+      "Reef"
+    ],
+    "last_checked": "2026-08-12T19:40:30-06:00"
+  },
+  "2026-06-StopVW-Israel-Airshield-petition-EN": {
+    "slug": "2026-06-StopVW-Israel-Airshield-petition-EN",
+    "first_seen": "2026-08-12T19:40:30-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-08-12T19:40:30-06:00",
+        "count": 77347
+      }
+    ],
+    "title": "Stop Volkswagen’s dangerous new deal",
+    "image_url": "https://wemove.cdn.actionkit.com/images/VW_draft_1.png",
+    "url": "https://action.wemove.eu/sign/2026-06-StopVW-Israel-Airshield-petition-EN",
+    "description_full": "<p>\n\n<!-- Remove this if you don't want popins like \"This page also in English\" -->\n\n\n<img alt=\"Language selector\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/icon_translate_eeaca63123.svg\"/>\n\n          \n            \n              \n              English\n\n              \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n        \n\n</p><ul>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-06-StopVW-Israel-Airshield-petition-FR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Français\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-06-StopVW-Israel-Airshield-petition-DE\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Deutsch\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-06-StopVW-Israel-Airshield-petition-ES\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Español\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-06-StopVW-Israel-Airshield-petition-IT\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Italiano\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-06-StopVW-Israel-Airshield-petition-NL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Nederlands\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-06-StopVW-Israel-Airshield-petition-PL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Polski\n\n                    \n                    </a>\n</li>\n</ul><p>\n\n\n          Stop Volkswagen’s dangerous new deal\n        \n\n<img alt=\"Stop Volkswagen’s dangerous new deal\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/VW_draft_1.png\"/>\n\n</p><h3>\n<p><em>To Volkswagen leadership, the German Government, the European Commission, European Parliament, and EU governments</em></p>\n</h3>\n\n<h2>\n            Petition\n          </h2>\n<p><strong>Volkswagen</strong> <strong>wants to move from building cars to supplying systems used in warfare at its Osnabrück factory </strong>- and make billions from it.</p>\n<p><strong>The deal is not done yet. </strong>We call on Volkswagen to:</p>\n<ul>\n<li>Stop negotiations on this deadly deal immediately</li>\n<li>Rule out producing parts linked to Israeli military technology;</li>\n<li>Keep the Osnabrück site focused on civilian manufacturing;</li>\n<li>Publish full transparency on any talks with military contractors</li>\n</ul>\n\n\n<h2>\n            \n              Why is this important?\n            \n          </h2>\n<p><strong>Volkswagen</strong> built its reputation making <strong>cars. Now they want to build war machines.</strong> [1]</p>\n<p>Eight billion euros in profits isn’t enough - so they’re considering a deal that would put its factory floors to work <strong>for Israeli military technology.</strong> Building parts of the Iron Dome - a critical <strong>tool for Netanyahu’s war chest</strong>. [2]</p>\n<p><strong>Deadly air strikes. Unlawful use of white phosphorus in Lebanon. Children killed in Gaza. </strong>If Volkswagen agrees to this deal, they are complicit in genocide. [3] </p>\n<p>The decision is not final yet - there is still <strong>a window to stop Volkswagen before it commits.</strong> </p>\n<p>And we must. Because this deal goes beyond one company. <strong>If Volkswagen signs, it opens the door for other European companies to profit from war too.</strong>  </p>\n<p>Across Germany people are already fighting to stop companies from fuelling Israel’s war. [4] Now <strong>they need the rest of Europe behind them to stop Volkswagen</strong> before this dangerous deal goes ahead.</p>\n<p>That’s why they need to hear from us. Before <strong>Europe’s biggest companies start treating war like another business opportunity.</strong></p>\n<h4>\n            References:\n          </h4>\n\n<p>[1] https://www.euronews.com/business/2026/03/25/from-cars-to-air-defence-will-volkswagen-soon-be-producing-parts-for-israels-iron-dome ; https://www.middleeastmonitor.com/20260430-israeli-defense-firm-rafael-eyes-takeover-of-vws-osnabruck-factory-german-lawmaker-says/</p>\n<p>[2] The Iron Dome is Israel’s air defence system, designed to intercept incoming rockets, missiles, and drones. It’s “99% effective” - helping shield Israel from attacks and enabling it to sustain military operations and launch counter-strikes. <br/>https://news.sky.com/story/what-is-israels-iron-dome-defence-system-and-why-is-it-so-effective-13114992 ; https://www.volkswagen-group.com/en/press-releases/volkswagen-group-strengthens-financial-resilience-in-2025-strong-fourth-quarter-in-a-challenging-environment-20202</p>\n<p>[3] https://www.bbc.com/news/articles/c36y16nkr5no ;  https://www.npr.org/2026/06/06/nx-s1-5848668/israel-lebanon-white-phosphorus ; https://www.hrw.org/news/2026/03/09/lebanon-israel-unlawfully-using-white-phosphorus ; https://www.reuters.com/world/middle-east/lebanese-pm-says-israel-has-bombed-lebanon-nearly-3500-times-during-ceasefire-2026-06-08/</p>\n<p>[4] Almost 75% of all Germans support stricter controls on arms exports to Israel. More than half of the country opposes any kind of arms deliveries to Israel. Citizens have staged protests targeting companies supplying weapons to Israel, while politicians, trade union members, AND former Volkswagen workers have also launched public calls opposing a shift towards military production. <br/>https://www.reuters.com/business/media-telecom/large-majority-germans-want-tighter-controls-arms-exports-israel-2025-06-04/ ; https://www.aa.com.tr/en/europe/majority-of-germans-oppose-weapons-exports-to-israel-poll/3580402 ; https://www.middleeastmonitor.com/20260325-protesters-target-rheinmetall-headquarters-in-berlin-over-defense-exports/ ; https://www.freitag.de/autoren/sebastian-friedrich/von-der-werkbank-in-den-bundestag-vw-arbeiter-cem-ince-tritt-fuer-die-linke-an</p>",
+    "summary": "English Français Deutsch Español Italiano Nederlands Polski Stop Volkswagen’s dangerous new deal To Volkswagen leadership, the German Government, the European Commission, European Parliament, and EU g…",
+    "start_date": "2026-06-01",
+    "started_by": "WeMove Europe",
+    "kind": "petition",
+    "signatures": 77347,
+    "goal": 100000,
+    "lang": "en",
+    "campaign_id": "wemove:2026-06-StopVW-Israel-Airshield-petition",
+    "status": "online",
+    "last_seen": "2026-08-12T19:40:30-06:00",
+    "offline_since": null,
+    "tags": [
+      "Volkswagen",
+      "Deal",
+      "Stop",
+      "Israel",
+      "European",
+      "Military",
+      "Companies",
+      "Dangerous",
+      "Before",
+      "Commission"
+    ],
+    "last_checked": "2026-08-12T19:40:30-06:00"
+  },
+  "2026-05-only-yes-means-yes-petition-EN": {
+    "slug": "2026-05-only-yes-means-yes-petition-EN",
+    "first_seen": "2026-08-12T19:40:30-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-08-12T19:40:30-06:00",
+        "count": 47494
+      }
+    ],
+    "title": "EU: Only Yes Means Yes!",
+    "image_url": "https://wemove.cdn.actionkit.com/images/Only_yes_means_yes_EN.jpg",
+    "url": "https://action.wemove.eu/sign/2026-05-only-yes-means-yes-petition-EN",
+    "description_full": "<p>\n\n<!-- Remove this if you don't want popins like \"This page also in English\" -->\n\n\n<img alt=\"Language selector\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/icon_translate_eeaca63123.svg\"/>\n\n          \n            \n              \n              English\n\n              \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n        \n\n</p><ul>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-05-only-yes-means-yes-petition-FR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Français\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-05-only-yes-means-yes-petition-DE\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Deutsch\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-05-only-yes-means-yes-petition-ES\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Español\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-05-only-yes-means-yes-petition-IT\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Italiano\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-05-only-yes-means-yes-petition-NL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Nederlands\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-05-only-yes-means-yes-petition-PL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Polski\n\n                    \n                    </a>\n</li>\n</ul><p>\n\n\n          EU: Only Yes Means Yes!\n        \n\n<img alt=\"EU: Only Yes Means Yes!\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/Only_yes_means_yes_EN.jpg\"/>\n\n</p><h3>\n<p>To the European Commission and EU Member States</p>\n</h3>\n\n<h2>\n            Petition\n          </h2>\n<p>We call on you to: </p>\n<ul>\n<li>introduce an EU-wide law that defines rape based on consent - making clear that only yes means yes. </li>\n<li>ensure that all EU countries adopt a consent-based definition of rape, and close the legal gaps that fail survivors.</li>\n</ul>\n\n\n<h2>\n            \n              Why is this important?\n            \n          </h2>\n<p>Do you remember Gisèle Pelicot? [1]</p>\n<p>For years, Gisèle’s husband drugged her and then “offered” her to dozens of men that raped her while she was unconscious. [2] </p>\n<p>When the truth came out, she chose to speak publicly. </p>\n<p>Her case exposed something deeply wrong. Before justice finally believed her, <strong>she had to spend days on end proving she had been raped. </strong>With videos, texts and testimonies.  And it was a close call.</p>\n<p>Why does the law still ask survivors to prove they fought back, <strong>instead of asking one simple thing: </strong><strong><em>Did she agree to this?</em></strong> </p>\n<p>Because in parts of Europe, that is still how rape is defined. <strong>Rape survivors - even the ones that were drugged, asleep or speechless - have to prove that they </strong><strong><em>resisted</em></strong>. Nobody cares if they <em>wanted to</em>. [3]</p>\n<p>But just days ago, a window for change opened. Lawmakers want to update the EU-wide definition: <strong>only “yes” means consent</strong>. [4]</p>\n<p>This window won’t stay open for long. Gisèle Pelicot spoke out. Now it’s up to us to join her. Sign now to make sure only yes means yes - for everyone in Europe!</p>\n<h4>\n            References:\n          </h4>\n\n<p>[1] [2] https://www.lemonde.fr/en/global-issues/article/2026/02/11/gisele-pelicot-publishes-memoirs-after-mass-rape-trial_6750362_199.html ; https://www.bbc.com/afrique/articles/cjd9emv3e8zo</p>\n<p>[3] https://www.eunews.it/en/2026/03/03/gender-based-violence-one-in-three-women-in-the-eu-is-a-victim-of-abuse-only-6-per-cent-of-them-report-it/</p>\n<p>[4] https://www.theguardian.com/world/2026/apr/28/european-parliament-urges-eu-draw-up-standardised-consent-based-definition-rape ; https://edition.cnn.com/2026/04/28/europe/rape-consent-yes-europe-latam-intl</p>",
+    "summary": "English Français Deutsch Español Italiano Nederlands Polski EU: Only Yes Means Yes! To the European Commission and EU Member States Petition We call on you to: introduce an EU-wide law that defines ra…",
+    "start_date": "2026-05-01",
+    "started_by": "WeMove Europe",
+    "kind": "petition",
+    "signatures": 47494,
+    "goal": 50000,
+    "lang": "en",
+    "campaign_id": "wemove:2026-05-only-yes-means-yes-petition",
+    "status": "online",
+    "last_seen": "2026-08-12T19:40:30-06:00",
+    "offline_since": null,
+    "tags": [
+      "Means",
+      "Rape",
+      "Survivors",
+      "EU-wide",
+      "Gisèle",
+      "Call",
+      "Commission",
+      "Definition",
+      "Nederlands",
+      "Introduce"
+    ],
+    "last_checked": "2026-08-12T19:40:30-06:00"
+  },
+  "2026-06-phone-hacking-petition-EN": {
+    "slug": "2026-06-phone-hacking-petition-EN",
+    "first_seen": "2026-08-12T19:40:30-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-08-12T19:40:30-06:00",
+        "count": 57913
+      }
+    ],
+    "title": "Stop the phone hackers",
+    "image_url": "https://wemove.cdn.actionkit.com/images/petition_image_v2_2_200.jpg",
+    "url": "https://action.wemove.eu/sign/2026-06-phone-hacking-petition-EN",
+    "description_full": "<p>\n\n<!-- Remove this if you don't want popins like \"This page also in English\" -->\n\n\n<img alt=\"Language selector\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/icon_translate_eeaca63123.svg\"/>\n\n          \n            \n              \n              English\n\n              \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n        \n\n</p><ul>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-06-phone-hacking-petition-FR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Français\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-06-phone-hacking-petition-DE\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Deutsch\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-06-phone-hacking-petition-ES\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Español\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-06-phone-hacking-petition-IT\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Italiano\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-06-phone-hacking-petition-NL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Nederlands\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-06-phone-hacking-petition-PL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Polski\n\n                    \n                    </a>\n</li>\n</ul><p>\n\n\n          Stop the phone hackers\n        \n\n<img alt=\"Stop the phone hackers\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/petition_image_v2_2_200.jpg\"/>\n\n</p><h3>\n<p>To the European Commission, the European Parliament and EU Member States</p>\n</h3>\n\n<h2>\n            Petition\n          </h2>\n<p>We call on the EU to <strong>stop funding or investing in phone hacking technology or spyware</strong> from both Israeli companies and the wider commercial spyware industry.<br/></p>\n<p><strong>Public money must never be used</strong> to support tools that can monitor journalists, activists, migrant-rights defenders, or ordinary people through their own phones.<br/></p>\n<p>The EU must ban spyware, cut all financial ties to the industry behind it, and <strong>protect people across Europe and our communications from unlawful digital surveillance</strong>.</p>\n\n\n<h2>\n            \n              Why is this important?\n            \n          </h2>\n<p>Right now, <strong>someone could read your messages, watch through your camera or track you. </strong>All without you knowing. [1] </p>\n<p>This isn't science fiction. Across Europe, powerful spyware has been used against journalists, activists and people who dared to challenge those in power<strong>.</strong> [2] </p>\n<p>Israeli corporations behind this technology are making billions selling tools that can secretly take control of your phone. [3] </p>\n<p>It gets worse: a new scandal just revealed that the <strong>EU is funding this tech to monitor people like you and me. </strong>[4] And they refuse to stop.</p>\n<p>Momentum is building to challenge them. Journalists are exposing the spyware industry. Individual politicians are demanding answers.</p>\n<p>But unless citizens speak up, decision-makers will keep treating this as a problem for a few journalists rather than a threat to everyone’s rights.<br/><br/><strong>Every signature added pushes these hackers away from our private lives!</strong><br/></p>\n<h4>\n            References:\n          </h4>\n\n<ol>\n<li>https://www.scientificamerican.com/article/what-is-pegasus-how-surveillance-spyware-invades-phones </li>\n<li>https://www.theguardian.com/world/2025/mar/27/italian-government-approved-use-of-spyware-on-members-of-refugee-ngo-mps-told </li>\n<li>https://www.wired.com/story/ice-paragon-solutions-contract/ <br/>Three quarters of governments that acquired phone hacking tech and spyware bought it from companies based in or linked to Israel. <br/>https://carnegieendowment.org/research/2023/03/why-does-the-global-spyware-industry-continue-to-thrive-trends-explanations-and-responses <br/></li>\n<li>https://techcrunch.com/2025/09/02/ice-reactivates-contract-with-spyware-maker-paragon/ <br/>https://edri.org/our-work/its-not-just-spyware-scandals-eu-is-funding-the-industry-that-spies-on-europeans/ <br/>https://www.ftm.eu/articles/spyware-industry-eu-subsidies-surveillance-concers <br/>https://euobserver.com/215485/eu-investment-body-stands-by-past-financial-support-for-israeli-spyware-firm</li>\n</ol>\n\n\n\n<h3>In partnership with:</h3>\n\n<p><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/EDRi-newlogo-color-700x378_whiteBG.png\"/><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/djnd_logo_black.png\"/><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/politiscope.png\"/><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/Osservatorio_Nessuno_Logo.png\"/><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/SHARE-Foundation_400x400.jpg\"/><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/Homo_Digitalis_Transp.png\"/></p>",
+    "summary": "English Français Deutsch Español Italiano Nederlands Polski Stop the phone hackers To the European Commission, the European Parliament and EU Member States Petition We call on the EU to stop funding o…",
+    "start_date": "2026-06-01",
+    "started_by": "WeMove Europe",
+    "kind": "petition",
+    "signatures": 57913,
+    "goal": 75000,
+    "lang": "en",
+    "campaign_id": "wemove:2026-06-phone-hacking-petition",
+    "status": "online",
+    "last_seen": "2026-08-12T19:40:30-06:00",
+    "offline_since": null,
+    "tags": [
+      "Spyware",
+      "Phone",
+      "Stop",
+      "Journalists",
+      "European",
+      "Hackers",
+      "People",
+      "Industry",
+      "Funding",
+      "Commission"
+    ],
+    "last_checked": "2026-08-12T19:40:30-06:00"
+  },
+  "2026-06-dont-send-our-data-to-the-US-petition-EN": {
+    "slug": "2026-06-dont-send-our-data-to-the-US-petition-EN",
+    "first_seen": "2026-08-12T19:40:30-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-08-12T19:40:30-06:00",
+        "count": 113987
+      }
+    ],
+    "title": "EU: Don’t send our data to the US!",
+    "image_url": "https://wemove.cdn.actionkit.com/images/Data_sharing_launch.jpg",
+    "url": "https://action.wemove.eu/sign/2026-06-dont-send-our-data-to-the-US-petition-EN",
+    "description_full": "<p>\n\n<!-- Remove this if you don't want popins like \"This page also in English\" -->\n\n\n<img alt=\"Language selector\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/icon_translate_eeaca63123.svg\"/>\n\n          \n            \n              \n              English\n\n              \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n        \n\n</p><ul>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-06-dont-send-our-data-to-the-US-petition-FR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Français\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-06-dont-send-our-data-to-the-US-petition-DE\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Deutsch\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-06-dont-send-our-data-to-the-US-petition-ES\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Español\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-06-dont-send-our-data-to-the-US-petition-IT\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Italiano\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-06-dont-send-our-data-to-the-US-petition-NL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Nederlands\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-06-dont-send-our-data-to-the-US-petition-PL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Polski\n\n                    \n                    </a>\n</li>\n</ul><p>\n\n\n          EU: Don’t send our data to the US!\n        \n\n<img alt=\"EU: Don’t send our data to the US!\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/Data_sharing_launch.jpg\"/>\n\n</p><h3>\n<p>To the European Commission, the European Parliament and the Member States of the EU</p>\n</h3>\n\n<h2>\n            Petition\n          </h2>\n<p>Under a new agreement, the EU would open up European police databases to the US, handing over huge amounts of sensitive personal data, including fingerprints and facial images, on millions of Europeans, in exchange for keeping visa-free travel.</p>\n<p>We call on you to: </p>\n<ul>\n<li>Withdraw and/or reject the <em>Enhanced Border Security Partnership agreement</em> in its current form.</li>\n<li>Reject any agreement that does not properly safeguard the private data of people in Europe</li>\n</ul>\n\n\n<h2>\n            \n              Why is this important?\n            \n          </h2>\n<p><strong>Imagine attending a peaceful protest, and your fingerprints and facial images ending up in Trump’s hands.</strong> [1]</p>\n<p>Right now, the EU is quietly working on a deal that could give Trump and the US access to sensitive police databases across Europe. These databases contain information about completely innocent people like you and me, including protesters, activists, and asylum seekers.  </p>\n<p>If the EU doesn’t give in, the <strong>US Government is threatening to remove visa-free travel to the US.</strong></p>\n<p><strong>Giving Trump access to our data in Europe, could put anyone who speaks out against him at risk. </strong>Trump has already arrested - and even defended the murder of - protesters in the US. [2]</p>\n<p>Civil liberties organisations and some politicians are sounding the alarm. One MEP has called it <strong>“a clear case of blackmail”</strong>. [3]</p>\n<p>But so far, it’s received almost no attention at all. Few articles in newspapers, barely any social media posts. Because <strong>once people across Europe learn what’s happening, public outrage could spread fast.</strong> And that pressure could stop this deal. </p>\n<p>Tell the EU: NO to US blackmail. <strong>NO to giving Trump access to our fingerprints and facial images. </strong></p>\n<h4>\n            References:\n          </h4>\n\n<p>[1], [3] https://www.dw.com/en/eu-weighs-giving-us-data-for-fewer-travel-restrictions/a-76912370 </p>\n<p>[2] https://www.nytimes.com/2026/01/08/us/politics/trump-minnesota-ice-shooting-video.html </p>\n<p> </p>",
+    "summary": "English Français Deutsch Español Italiano Nederlands Polski EU: Don’t send our data to the US! To the European Commission, the European Parliament and the Member States of the EU Petition Under a new …",
+    "start_date": "2026-06-01",
+    "started_by": "WeMove Europe",
+    "kind": "petition",
+    "signatures": 113987,
+    "goal": 150000,
+    "lang": "en",
+    "campaign_id": "wemove:2026-06-dont-send-our-data-to-the-US-petition",
+    "status": "online",
+    "last_seen": "2026-08-12T19:40:30-06:00",
+    "offline_since": null,
+    "tags": [
+      "Data",
+      "European",
+      "Trump",
+      "Europe",
+      "Fingerprints",
+      "Agreement",
+      "Databases",
+      "Access",
+      "Facial",
+      "Images"
+    ],
+    "last_checked": "2026-08-12T19:40:30-06:00"
+  },
+  "2026-05-green-data-centres-petition-EN": {
+    "slug": "2026-05-green-data-centres-petition-EN",
+    "first_seen": "2026-08-12T19:40:30-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-08-12T19:40:30-06:00",
+        "count": 95627
+      }
+    ],
+    "title": "Run EU data centres on 100% renewables!",
+    "image_url": "https://wemove.cdn.actionkit.com/images/Campaign_images_Matilda_1.jpg",
+    "url": "https://action.wemove.eu/sign/2026-05-green-data-centres-petition-EN",
+    "description_full": "<p>\n\n<!-- Remove this if you don't want popins like \"This page also in English\" -->\n\n\n<img alt=\"Language selector\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/icon_translate_eeaca63123.svg\"/>\n\n          \n            \n              \n              English\n\n              \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n        \n\n</p><ul>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-05-green-data-centres-petition-FR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Français\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-05-green-data-centres-petition-DE\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Deutsch\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-05-green-data-centres-petition-ES\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Español\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-05-green-data-centres-petition-IT\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Italiano\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-05-green-data-centres-petition-NL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Nederlands\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-05-green-data-centres-petition-PL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Polski\n\n                    \n                    </a>\n</li>\n</ul><p>\n\n\n          Run EU data centres on 100% renewables!\n        \n\n<img alt=\"Run EU data centres on 100% renewables!\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/Campaign_images_Matilda_1.jpg\"/>\n\n</p><h3>\n<p>To the European Commission, European Parliament and Council of the European Union</p>\n</h3>\n\n<h2>\n            Petition\n          </h2>\n<p>We demand that: </p>\n<ul>\n<li>All new data centres in Europe must meet their energy demand with 100% new, local and additional renewable energy </li>\n<li>Companies must be made to be transparent on energy demand projections, real energy use and emissions per site for planned and existing data centres</li>\n<li>No new data centres in Europe until they are made compatible with Europe’s energy transition and climate goals</li>\n</ul>\n\n\n<h2>\n            \n              Why is this important?\n            \n          </h2>\n<p><strong>Thousands of enormous, energy-hungry data centres, forcing up electricity prices for all of us</strong>. That’s what risks happening unless we demand an alternative.</p>\n<p>Data centres use huge amounts of energy. In Ireland alone, they already consume 20% of the country’s electricity. [1] Now, driven by skyrocketing AI use, Big Tech wants to <strong>build thousands more in Europe. </strong>[2]</p>\n<p><strong>New data centres in Europe should only be built if they can be powered by renewable energy.</strong> We could fight climate change and <strong>bring down bills for everyone by making Big Tech invest in wind and solar.</strong> </p>\n<p><strong>Decisions are being made in Brussels right now </strong>on how to make sure data centres are energy efficient. These decisions will have <strong>real impacts on our bills, our lives, and our local communities. </strong></p>\n<p>Our planet should be the priority, not AI company profits. We need decisionmakers to <strong>be bolder and require all data centres to run on 100% new, renewable energy.  </strong></p>\n<p>They need to know that people across Europe are behind them. <strong>Sign the petition now to tell the EU: Data centres must be powered by 100% new renewable energy.</strong></p>\n<h4>\n            References:\n          </h4>\n\n<p>1: https://www.iiea.com/blog/data-centres-in-ireland-the-state-of-play</p>\n<p>2: https://www.politico.eu/article/eu-data-center-where-will-they-go/</p>",
+    "summary": "English Français Deutsch Español Italiano Nederlands Polski Run EU data centres on 100% renewables! To the European Commission, European Parliament and Council of the European Union Petition We demand…",
+    "start_date": "2026-05-01",
+    "started_by": "WeMove Europe",
+    "kind": "petition",
+    "signatures": 95627,
+    "goal": 100000,
+    "lang": "en",
+    "campaign_id": "wemove:2026-05-green-data-centres-petition",
+    "status": "online",
+    "last_seen": "2026-08-12T19:40:30-06:00",
+    "offline_since": null,
+    "tags": [
+      "Centres",
+      "Data",
+      "Energy",
+      "European",
+      "Europe",
+      "Demand",
+      "Renewable",
+      "Renewables",
+      "Made",
+      "Must"
+    ],
+    "last_checked": "2026-08-12T19:40:30-06:00"
+  },
+  "2018-09-Kodaikanal-petition-EN": {
+    "slug": "2018-09-Kodaikanal-petition-EN",
+    "first_seen": "2026-08-12T19:40:30-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-08-12T19:40:30-06:00",
+        "count": 2
+      }
+    ],
+    "title": "Unilever, clean up Kodaikanal!",
+    "url": "https://action.wemove.eu/sign/2018-09-Kodaikanal-petition-EN",
+    "description_full": "<p>\n\n<!-- Remove this if you don't want popins like \"This page also in English\" -->\n\n\n<img alt=\"Language selector\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/icon_translate_eeaca63123.svg\"/>\n\n          \n            \n              \n              English\n\n              \n            \n          \n            \n          \n        \n\n</p><ul>\n<li>\n<a href=\"https://action.wemove.eu/sign/2018-09-Kodaikanal-petition-FR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Français\n\n                    \n                    </a>\n</li>\n</ul><p>\n\n\n          Unilever, clean up Kodaikanal!\n        \n\n<img alt=\"Unilever, clean up Kodaikanal!\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/Featured-Image-Replace-Me.png\"/>\n\n</p><h3>\n<p>To Paul Polman, CEO, Unilever</p>\n</h3>\n\n<h2>\n            Petition\n          </h2>\n<p>Clean up Kodaikanal to global standards! Europeans won't stand behind multinational corporations that poison people and environment, whether here in Europe or abroad. Commit to a world-class clean-up now.</p>\n\n\n<h2>\n            \n              Why is this important?\n            \n          </h2>\n<p>In 2001, <strong>Unilever dumped toxic mercury in the south Indian hill town of Kodaikanal, poisoning its workers and the forest.</strong> [1]</p>\n<p><strong>To this day, the mercury-tainted factory site continues to leak the deadly neurotoxin</strong> into the environment and the forests nearby, even though the factory has been closed for seventeen years. Local activists and non-profit groups have called on Unilever to clean up its mess, [2] but so far their calls are falling on deaf ears.</p>\n<p><strong>If Unilever dumped a deadly neurotoxin somewhere in Europe that made people sick and destroyed the environment, authorities would demand Unilever clean up the site to proper standards. </strong>But since the damage was done far away in the developing world and involves marginalised communities, Unilever is refusing to clean up to standards that we, as Europeans, would be afforded.</p>\n<p>Late last year, in attempts to appease locals, Unilever used a substandard clean-up process that likely ended up <strong>releasing more mercury into the environment than it recovered. </strong>[3] This would never have even been allowed in Europe!</p>\n<p><strong>Unilever is a European company, so as Europeans we are uniquely placed to speak out against this double-standard, and to hold Unilever to account. </strong>Local and international pressure has been mounting over the past year, and if Unilever is faced with a mobilisation here at home, they'll have to take real action to avoid losing face. With our help, Kodaikanal could be a healthy, habitable place once again.</p>\n<p><strong>Indian activists have already achieved what they thought was unthinkable:</strong> after 15 years of campaigning, Unilever finally caved and agreed to compensate workers at the site for being poisoned with mercury. [4] <strong>But the forest in Kodaikanal is still suffering. </strong>Paul Polman, Unilever’s CEO, committed to cleaning up the factory site. [5] <strong>But these have remained empty words.</strong></p>\n<h4>\n            References:\n          </h4>\n\n<ol>\n<li>[1] https://indianexpress.com/article/cities/mumbai/mercury-pollution-former-workers-from-tn-unit-protest-outside-hul-head-office/\r\nhttps://www.thehindu.com/news/national/tamil-nadu/study-indicates-high-level-of-mercury-in-fish-at-kodai-lake/article20406597.ece\r\nhttps://www.thehindu.com/news/national/tamil-nadu/two-important-bird-areas-in-tn-face-threat-says-survey/article22987324.ece</li>\n<li>[2] https://act.jhatkaa.org/campaigns/Unilever-racism</li>\n<li>[3] http://www.newindianexpress.com/states/tamil-nadu/2018/jan/17/unending-fallout-of-defunct-thermometer-factory-at-kodaikanal-in-tamil-nadu-1755564.html\r\nhttps://www.business-standard.com/article/companies/hindustan-unilever-limited-begins-soil-remediation-at-kodaikanal-117082000007_1.html</li>\n<li>[4] https://www.theguardian.com/environment/2016/mar/09/unilever-settles-dispute-over-mercury-poisoning-in-india </li>\n<li>[5] https://twitter.com/PaulPolman/status/629373407910567936?s=17%20</li>\n<li>Image modified from original by Amolmande18 [<a href=\"https://creativecommons.org/licenses/by-sa/4.0\" rel=\"noopener\" target=\"_blank\">CC BY-SA 4.0</a>], from <a href=\"https://commons.wikimedia.org/wiki/File:Kookal_Lake_Kodaikanal_India.jpg\" rel=\"noopener\" target=\"_blank\">Wikimedia Commons</a>\n</li></ol>\n<!-- ak.wysiwyg=code -->",
+    "summary": "English Français Unilever, clean up Kodaikanal! To Paul Polman, CEO, Unilever Petition Clean up Kodaikanal to global standards! Europeans won't stand behind multinational corporations that poison peop…",
+    "start_date": "2018-09-01",
+    "started_by": "WeMove Europe",
+    "kind": "petition",
+    "signatures": 2,
+    "goal": 1000,
+    "lang": "en",
+    "campaign_id": "wemove:2018-09-Kodaikanal-petition",
+    "status": "online",
+    "last_seen": "2026-08-12T19:40:30-06:00",
+    "offline_since": null,
+    "tags": [
+      "Unilever",
+      "Kodaikanal",
+      "Clean",
+      "Environment",
+      "Europeans",
+      "Standards",
+      "Site",
+      "Factory",
+      "Mercury",
+      "Europe"
+    ],
+    "last_checked": "2026-08-12T19:40:30-06:00"
+  },
+  "2019-08-Mercosur-petition-EN": {
+    "slug": "2019-08-Mercosur-petition-EN",
+    "first_seen": "2026-08-12T19:40:30-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-08-12T19:40:30-06:00",
+        "count": 18422
+      }
+    ],
+    "title": "Protect local farmers: stop EU-MERCOSUR trade deal!",
+    "image_url": "https://strapi.wemove.eu/uploads/Farmers_protest_2024_4ac31d921c.jpg",
+    "url": "https://action.wemove.eu/sign/2019-08-Mercosur-petition-EN",
+    "description_full": "<p>\n\n<!-- Remove this if you don't want popins like \"This page also in English\" -->\n\n\n<img alt=\"Language selector\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/icon_translate_eeaca63123.svg\"/>\n\n          \n            \n          \n            \n              \n              English\n\n              \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n        \n\n</p><ul>\n<li>\n<a href=\"https://action.wemove.eu/sign/2019-08-Mercosur-petition-PT\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Português\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2019-08-Mercosur-petition-FR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Français\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2019-08-Mercosur-petition-DE\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Deutsch\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2019-08-Mercosur-petition-ES\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Español\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2019-08-Mercosur-petition-IT\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Italiano\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2019-08-Mercosur-petition-NL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Nederlands\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2019-08-Mercosur-petition-PL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Polski\n\n                    \n                    </a>\n</li>\n</ul><p>\n\n\n          Protect local farmers: stop EU-MERCOSUR trade deal!\n        \n\n<img alt=\"Protect local farmers: stop EU-MERCOSUR trade deal!\" loading=\"lazy\" src=\"https://fortunate-amusement-51cebc741b.media.strapiapp.com/Farmers_protest_2024_4ac31d921c.jpg\"/>\n\n</p><h3>\n\n<p>European Commission, EU Council, European Parliament, national governments and parliaments</p>\n<!-- ak.wysiwyg=code -->\n</h3>\n\n<h2>\n            Petition\n          </h2>\n<p>Given the well documented high level of deforestation of the Amazon and human rights violations, we call on all European leaders to stop the EU-Mercosur trade agreement.</p>\n\n\n<h2>\n            \n              Why is this important?\n            \n          </h2>\n\n\n<p>Millions of farmers have taken to the streets all over Europe. Tractors are filling up the roads, demanding urgent solutions for a sector in crisis. [1] The European farming model has been unsustainable for a long time. Now, more than ever, <strong>we need to speak up for policies that help transition to sustainable agriculture, taking care of our planet and ensuring decent lives for those working in agriculture.</strong></p>\n<p>The free trade agreement known as EU-Mercosur spells trouble and puts European farmers at risk! [2] Imagine this: cheap beef flooding our markets, but at what cost? Local farmers going out of business and the destruction of forests in the Amazon. </p>\n<p><strong>Sign now to stop this harmful treaty. </strong></p>\n<p><em>*This petition was updated in February 2024 due to protests from farmers across Europe</em></p>\n\n<h4>\n            References:\n          </h4>\n\n<p>[1] <a href=\"https://www.bbc.com/news/world-europe-68249099\" rel=\"noopener\" target=\"_blank\">https://www.bbc.com/news/world-europe-68249099</a> and <br/>“As social justice and environmental activists [...] we hear the frustrations of farmers who grapple with low incomes, a lack of future prospects, and the consequences of decades of unsustainable policies. We share their fight for a fairer agriculture system and their call to end the EU-Mercosur free-trade deal.” <a href=\"https://www.euronews.com/green/2024/02/02/this-is-why-green-activists-joined-farmers-protests-for-fairer-eu-farming-policies\" rel=\"noopener\" target=\"_blank\">https://www.euronews.com/green/2024/02/02/this-is-why-green-activists-joined-farmers-protests-for-fairer-eu-farming-policies</a> </p>\n<p><br/>[2] The EU-Mercosur deal is a trade agreement between the European Union and Argentina, Brazil, Paraguay and Uruguay – collectively known as the Mercosur countries. Read more here: <a href=\"https://viacampesina.org/en/eu-mercosur-fta-a-political-agreement-at-the-expense-of-farmers/\" rel=\"noopener\" target=\"_blank\">https://viacampesina.org/en/eu-mercosur-fta-a-political-agreement-at-the-expense-of-farmers/</a></p>\n\n\n\n<h3>In partnership with:</h3>\n\n<p><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/sumofus_0.jpg\"/><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/powershift.jpg\"/></p>",
+    "summary": "English Português Français Deutsch Español Italiano Nederlands Polski Protect local farmers: stop EU-MERCOSUR trade deal! European Commission, EU Council, European Parliament, national governments and…",
+    "start_date": "2019-08-01",
+    "started_by": "WeMove Europe",
+    "kind": "petition",
+    "signatures": 18422,
+    "goal": 20000,
+    "lang": "en",
+    "campaign_id": "wemove:2019-08-Mercosur-petition",
+    "status": "online",
+    "last_seen": "2026-08-12T19:40:30-06:00",
+    "offline_since": null,
+    "tags": [
+      "European",
+      "Farmers",
+      "EU-MERCOSUR",
+      "Trade",
+      "Deal",
+      "Stop",
+      "Local",
+      "Agriculture",
+      "Agreement",
+      "Protect"
+    ],
+    "last_checked": "2026-08-12T19:40:30-06:00"
+  }
+}

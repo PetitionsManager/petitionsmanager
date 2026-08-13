@@ -228,10 +228,16 @@ window.PM_TEXTS = {
       similarSearching: "Suche über alle Plattformen …",
       similarSame: "gleich",
       /* ⚠️ NICHT dasselbe wie "gleich": "gleich" leitet sich aus einem
-         Ähnlichkeitswert ab und kann irren, "Übersetzung" stammt aus einer
+         Ähnlichkeitswert ab und kann irren, dieser Hinweis stammt aus einer
          ausdrücklichen Kennung der Quelle (gleiche Kampagnennummer, gleicher
-         Slug, verlinkter Sprachwechsel). */
-      similarTranslation: "Übersetzung ({sprache})",
+         Slug, verlinkter Sprachwechsel).
+         ⚠️ Wortlaut 12.8.2026 geändert, vorher "Übersetzung ({sprache})".
+         Seit jede Quelle je Sprache einen EIGENEN Plattform-Eintrag hat
+         ("Avaaz" und "Avaaz (English)"), verbindet der Hinweis zwei Einträge
+         DERSELBEN Plattform. "Übersetzung" behauptete dabei zu viel — wir
+         übersetzen nichts, die Plattform veröffentlicht beide Fassungen
+         selbst; und die Zeile daneben nennt bereits die Plattform. */
+      similarTranslation: "Dieselbe Petition auf {sprache}",
       similarMore: "Mehr anzeigen ({n})",
       notInData: "Diese Petition steht nicht mehr in den Daten dieser Plattform. Vermutlich hat sich ihre Adresse geändert.",
       /* Der ausfuehrliche Wisch-Hinweis ueber der Liste. Bleibt EIN Text
@@ -834,7 +840,7 @@ window.PM_TEXTS = {
       similarNone: "No similar petitions found.",
       similarSearching: "Searching all platforms…",
       similarSame: "same",
-      similarTranslation: "Translation ({sprache})",
+      similarTranslation: "Same petition in {sprache}",
       similarMore: "Show more ({n})",
       notInData: "This petition is no longer in this platform's data. Its address has probably changed.",
       swipeHintHtml: "Swipe a petition to the <b>right</b> to mark it as “signed”. <span class=\"hint-note\"><b>Important:</b> that does <u>not</u> sign it automatically – you have to do that yourself on the platform in question.</span> Swiping to the <b>left</b> archives the petition.",

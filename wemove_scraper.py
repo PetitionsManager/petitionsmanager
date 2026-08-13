@@ -154,6 +154,20 @@ def discover_slugs(fetcher: core.Fetcher) -> dict[str, dict]:
 SPRACHSUFFIX = "-DE"
 FREMDSPRACHEN = ("en",)
 SUFFIX_JE_SPRACHE = {"en": "-EN"}
+
+# ⚠️⚠️ _kampagne() muss JEDES Sprachkürzel abstreifen, nicht nur "-DE".
+# Am 12.8.2026 nachgerechnet (kein Abruf nötig, die Funktion selbst aufgerufen):
+# solange nur "-DE" fiel, ergab dieselbe Kampagne je Sprachfassung eine ANDERE
+# Kennung — „wemove:2023-03-stop-rio-tinto" gegen
+# „wemove:2023-03-stop-rio-tinto-EN", 3 von 3 geprüften Paaren. Solange beide
+# Sprachen in EINEM Satz lagen, fiel das nicht auf; seit es je Sprache einen
+# eigenen Plattform-Eintrag gibt, wäre damit KEINE einzige Übersetzung
+# verknüpft worden.
+# Die sieben Sprachen sind am 12.8.2026 an wemove.eu gemessen (Umschalter:
+# Deutsch, English, Español, Français, Italiano, Nederlands, Polski;
+# Positivkontrolle /pl → lang="pl", /it → lang="it", Negativkontrolle
+# /km → HTTP 404).
+ALLE_SPRACHSUFFIXE = ("-DE", "-EN", "-ES", "-FR", "-IT", "-NL", "-PL")
 WARUM_UEBERSCHRIFT = {
     "de": "Warum ist das wichtig?",
     "en": "Why is this important?",
@@ -169,10 +183,15 @@ def _fremd_slug(page: str, lang: str) -> str | None:
 
 
 def _kampagne(page: str) -> str:
-    """Gemeinsame Kennung aller Sprachfassungen: der Slug OHNE Sprachkürzel."""
-    rumpf = page[:-len(SPRACHSUFFIX)] if page.upper().endswith(SPRACHSUFFIX) \
-        else page
-    return f"wemove:{rumpf}"
+    """Gemeinsame Kennung aller Sprachfassungen: der Slug OHNE Sprachkürzel.
+
+    Muss aus JEDER Sprachrichtung denselben Wert ergeben — siehe den Block
+    über ALLE_SPRACHSUFFIXE."""
+    oben = page.upper()
+    for suffix in ALLE_SPRACHSUFFIXE:
+        if oben.endswith(suffix):
+            return f"wemove:{page[:-len(suffix)]}"
+    return f"wemove:{page}"
 
 
 def _meta(soup: BeautifulSoup, prop: str) -> str | None:
@@ -243,7 +262,12 @@ def fetch_progress(fetcher: core.Fetcher, page: str) -> int | None:
     return core.zahl(actions)
 
 
-def scrape_petition(fetcher: core.Fetcher, page: str) -> tuple[str, dict | None]:
+def scrape_petition(fetcher: core.Fetcher, page: str,
+                    sprache: str = "de") -> tuple[str, dict | None]:
+    """`sprache` ist die Hauptsprache des Datensatzes: "de" für den deutschen
+    Eintrag, "en" für den englischen Zwilling (PLATFORM_EN). Sie steuert nur
+    die Zwischenüberschrift und den lang-Vermerk — die Adresse ergibt sich
+    ohnehin aus dem Sprachkürzel im Seitennamen."""
     url = f"{BASE_URL}/sign/{page}"
     resp = fetcher.get(url)
     if resp is None:
@@ -252,7 +276,7 @@ def scrape_petition(fetcher: core.Fetcher, page: str) -> tuple[str, dict | None]
         return "offline", None
     if not resp.ok:
         return "error", None
-    rec = parse_detail(resp.text, url, page)
+    rec = parse_detail(resp.text, url, page, lang=sprache)
     hat_h1 = rec.pop("_hat_h1", False)
 
     # Bot-Schutz erkennen und als FEHLER behandeln, nicht als Erfolg.
@@ -297,9 +321,17 @@ def scrape_petition(fetcher: core.Fetcher, page: str) -> tuple[str, dict | None]
         rec["signatures"] = sig
         rec["goal"] = _goal_for(sig)
 
-    i18n.setze_hauptsprache(rec, "de")
+    i18n.setze_hauptsprache(rec, sprache)
+    # Sprachneutral: _kampagne() streicht JEDES Sprachkürzel, beide Fassungen
+    # ergeben denselben Wert. Genau daran hängt die Verknüpfung „gleiche
+    # Kampagne, andere Sprache" zwischen den beiden Plattform-Einträgen.
     rec["campaign_id"] = _kampagne(page)
-    _fremdsprachen_holen(fetcher, rec, page)
+    if sprache == "de":
+        # Die zweite Fassung IN denselben Satz zu holen, lohnt nur noch für
+        # den deutschen Eintrag; seit es PLATFORM_EN gibt, entsteht die
+        # englische Fassung als eigener Satz und wird über campaign_id
+        # verknüpft.
+        _fremdsprachen_holen(fetcher, rec, page)
     return "online", rec
 
 
@@ -367,6 +399,28 @@ def run(args) -> None:
     unbrauchbare = dict(core.load_meta(DATA_FILE).get("unbrauchbare") or {})
     unbrauchbare = {p: z for p, z in unbrauchbare.items()
                     if not _merk_abgelaufen(z)}
+
+    # ⚠️⚠️ Die Kennung braucht KEINEN Abruf. `_kampagne()` ist eine reine
+    # Funktion des Seitennamens, und der Seitenname IST der Schlüssel im
+    # Bestand — sie lässt sich also für jeden vorhandenen Satz sofort
+    # ausrechnen.
+    #
+    # Am 12.8.2026 teuer gelernt: nach dem Umbau auf eigene Sprach-Einträge
+    # fehlte 222 von 241 Sätzen die Kennung, weil sie nur beim erfolgreichen
+    # DETAILABRUF geschrieben wurde. Ein Aufhollauf schaffte 21 Sätze, dann
+    # stoppte ihn der Checkpoint („5 Fehlschläge in Folge") — neun weitere
+    # Läufe wären nötig gewesen, alle gegen eine Seite, die uns ausdrücklich
+    # bremst. Hier kostet dasselbe null Abrufe.
+    #
+    # Gefahrlos, weil nur GESETZT und nie überschrieben wird: der Trockenlauf
+    # über den echten Bestand ergab 189 neue und 0 abweichende Werte.
+    nachgetragen = 0
+    for page, satz in store.items():
+        if not satz.get("campaign_id"):
+            satz["campaign_id"] = _kampagne(page)
+            nachgetragen += 1
+    if nachgetragen:
+        log(f"{nachgetragen} Kennung(en) ohne Abruf nachgetragen.")
 
     def save(quiet=True, **extra):
         # unbrauchbare MUSS bei jedem Speichern mitgehen: save_store baut
@@ -505,6 +559,172 @@ PLATFORM = Platform(
     html_file=HTML_FILE,
     run=run,
     check=check,
+)
+
+
+# ----------------------------------------------------------------------------
+# Der englische Eintrag
+# ----------------------------------------------------------------------------
+# Am 12.8.2026 an der echten Übersicht gemessen: wemove.eu/en/campaigns listet
+# den GANZEN mehrsprachigen Katalog — 2.288 Adressen, davon 666 auf „-EN",
+# 268 „-FR", 254 „-ES", 249 „-DE", 237 „-IT", 209 „-NL". Nach campaign_id
+# gruppiert sind das 1.056 Kampagnen:
+#
+#     mit deutscher Fassung   248
+#     mit englischer Fassung  666
+#     MIT BEIDEN              197   <- so viele Sprachpaare sind zu erwarten
+#     nur englisch            469
+#     nur deutsch              51
+#
+# ⚠️⚠️ Diese 197 gibt es NUR mit der reparierten _kampagne(): mit der alten
+# Fassung, die bloß „-DE" strich, waren es gemessen **0** — englische Seiten
+# behielten ihr „-EN" und trafen nie auf ihr deutsches Gegenstück.
+#
+# ⚠️ 666 Kampagnen bei DETAIL_BUDGET = 120 heißt: der Bestand füllt sich über
+# mehrere Läufe. Das ist dieselbe Lage wie im deutschen Zweig und kein Fehler —
+# nur darf niemand nach dem ersten Lauf „da fehlen ja welche" melden.
+EN_DATA_FILE = Path("wemove_en_petitions.json")
+EN_HTML_FILE = Path("wemove_en_petitions.html")
+EN_SPRACHSUFFIX = "-EN"
+FETCH_HEADERS_EN = dict(FETCH_HEADERS, **{"Accept-Language": "en-US,en;q=0.9"})
+
+
+def discover_en_slugs(fetcher: core.Fetcher) -> dict[str, dict]:
+    """{page_name: {}} aus englischer Startseite + Kampagnen-Übersicht (nur *-EN)."""
+    found: dict[str, dict] = {}
+    sources = [("Startseite (en)", f"{WWW_URL}/en"),
+               ("Kampagnen (en)", f"{WWW_URL}/en/campaigns")]
+    prog(phase="discover", current=0, total=len(sources),
+         message="Sammle englische Kampagnen …")
+    for i, (label, url) in enumerate(sources, 1):
+        resp = fetcher.get(url)
+        added = 0
+        if resp is not None and resp.ok:
+            for m in SIGN_HREF_RE.finditer(resp.text):
+                page = m.group(1).rstrip("/")
+                if page.upper().endswith(EN_SPRACHSUFFIX) and page not in found:
+                    found[page] = {}
+                    added += 1
+        log(f"{label}: +{added} (gesamt {len(found)}).")
+        prog(current=i, total=len(sources),
+             message=f"{label} geprüft · {len(found)} Kampagnen bisher")
+    # Gemessen am 12.8.2026: 666. Die Schwelle liegt eine Größenordnung
+    # darunter und meldet erst, wenn beide Listen praktisch nichts hergeben.
+    core.entdeckung("Startseite + Kampagnen-Übersicht (englisch)", len(found),
+                    erwartet_min=25,
+                    name_en="English home page + campaign overview")
+    return found
+
+
+def run_en(args) -> None:
+    store = core.load_store(EN_DATA_FILE)
+    fetcher = core.Fetcher(delay=args.delay, headers=FETCH_HEADERS_EN)
+    ts = now_iso()
+
+    unbrauchbare = dict(core.load_meta(EN_DATA_FILE).get("unbrauchbare") or {})
+    unbrauchbare = {p: z for p, z in unbrauchbare.items()
+                    if not _merk_abgelaufen(z)}
+
+    def save(quiet=True, **extra):
+        core.save_store(store, EN_DATA_FILE,
+                        extra_meta={"unbrauchbare": unbrauchbare, **extra},
+                        quiet=quiet)
+
+    def hole(page: str) -> str:
+        """Ein Detailabruf samt Buchführung; gibt den Status zurück."""
+        status, rec = scrape_petition(fetcher, page, sprache="en")
+        if status == "unbrauchbar":
+            unbrauchbare[page] = ts
+            store.pop(page, None)
+        elif status != "error":
+            core.upsert(store, page, rec or {}, {}, status, ts,
+                        f"{BASE_URL}/sign/{page}")
+        return status
+
+    known = list(store.keys())
+    # Wie im deutschen Zweig: Sätze ohne Volltext nach vorn, damit das knappe
+    # Budget dort landet, wo es etwas ändert.
+    known.sort(key=lambda p: bool((store.get(p) or {}).get("description_full")))
+    erfolge = fehler_in_folge = 0
+    if known and not args.no_recheck and not args.limit:
+        log(f"Prüfe {len(known)} bekannte englische Kampagne(n) …")
+        prog(phase="check-known", current=0, total=len(known), message="…")
+        for k, page in enumerate(known, 1):
+            if erfolge >= DETAIL_BUDGET:
+                log(f"  Budget von {DETAIL_BUDGET} Abrufen erreicht – "
+                    f"Rest folgt beim nächsten Lauf.")
+                break
+            prog(current=k, total=len(known), message=page)
+            if page in unbrauchbare or core.skip_recent(store.get(page), args):
+                continue
+            status = hole(page)
+            if status == "error":
+                fehler_in_folge += 1
+                if fehler_in_folge >= ABBRUCH_NACH_FEHLERN:
+                    log(f"  {fehler_in_folge} Fehlschläge in Folge – vermutlich "
+                        f"der Checkpoint von WeMove. Lauf hier beendet.")
+                    break
+                continue
+            fehler_in_folge = 0
+            erfolge += 1
+            save()
+
+    entdeckt = discover_en_slugs(fetcher)
+    neu_slugs = [p for p in entdeckt
+                 if p not in store and p not in unbrauchbare]
+    if args.limit:
+        neu_slugs = neu_slugs[:args.limit]
+    log(f"{len(neu_slugs)} neue englische Kampagne(n) zum Scrapen "
+        f"(Gesamt im Store: {len(store)}).")
+    prog(phase="scrape", current=0, total=len(neu_slugs), message="Beginne …")
+
+    for i, page in enumerate(neu_slugs, 1):
+        if erfolge >= DETAIL_BUDGET:
+            log(f"  Budget von {DETAIL_BUDGET} Abrufen erreicht – "
+                f"Rest folgt beim nächsten Lauf.")
+            break
+        prog(current=i, total=len(neu_slugs), message=page)
+        status = hole(page)
+        if status == "error":
+            fehler_in_folge += 1
+            if fehler_in_folge >= ABBRUCH_NACH_FEHLERN:
+                log(f"  {fehler_in_folge} Fehlschläge in Folge – Lauf beendet.")
+                break
+            continue
+        fehler_in_folge = 0
+        erfolge += 1
+        save()
+
+    neu = [s for s, r in store.items() if r.get("first_seen") == ts]
+    if neu:
+        log(f"NEU: {len(neu)} neue englische Kampagne(n) in diesem Lauf.")
+    prog(message="Speichere & baue HTML …")
+    save(quiet=False, new_petitions_last_run=neu, available=len(entdeckt))
+    core.write_list_html(PLATFORM_EN)
+    log(f"Fertig (WeMove English, {erfolge} Detailabruf(e) erfolgreich).")
+
+
+def check_en(fetcher):
+    return core.check_source(fetcher, f"{WWW_URL}/en/campaigns", SIGN_HREF_RE,
+                             3, "Kampagnen")
+
+
+PLATFORM_EN = Platform(
+    key="wemove_en",
+    openness=3,
+    openness_note="Mittel: die englische Kampagnen-Übersicht ist offen und "
+                  "listet sogar den ganzen mehrsprachigen Katalog, aber die "
+                  "Detailseiten liegen hinter einem Checkpoint, der nach "
+                  "einigen Dutzend Abrufen greift. Der Bestand füllt sich "
+                  "deshalb über mehrere Läufe.",
+    name="WeMove Europe (English)",
+    eyebrow="WeMove Europe · Kampagnen (englisch)",
+    source_url="https://wemove.eu/en/campaigns",
+    data_file=EN_DATA_FILE,
+    html_file=EN_HTML_FILE,
+    run=run_en,
+    check=check_en,
+    language="en",
 )
 
 

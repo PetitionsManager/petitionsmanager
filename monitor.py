@@ -55,6 +55,16 @@ PLATFORMS: list[Platform] = [
     europarl_scraper.PLATFORM,
     foodwatch_scraper.PLATFORM,
     threefifty_scraper.PLATFORM,
+    # Englische Zwillinge: eigener Eintrag je Sprache, damit die App nach
+    # Sprache filtern kann. Sie stehen bewusst am ENDE — der Tageslauf
+    # arbeitet die Liste der Reihe nach ab und ist heute schon am
+    # Zeitanschlag; die deutschen Bestände dürfen dadurch nicht wegfallen.
+    foodwatch_scraper.PLATFORM_EN,
+    eko_scraper.PLATFORM_EN,
+    wemove_scraper.PLATFORM_EN,
+    threefifty_scraper.PLATFORM_EN,
+    avaaz_scraper.PLATFORM_EN,
+    changeorg_scraper.PLATFORM_EN,
 ]
 
 

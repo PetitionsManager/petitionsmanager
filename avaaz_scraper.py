@@ -100,6 +100,33 @@ META_REFRESH_RE = re.compile(
 DETAILADRESSE_RE = re.compile(
     r"^https://secure\.avaaz\.org/(?:community_petitions|campaign)/de/[^/?#]+", re.I)
 
+# ---- Der englische Eintrag (12.8.2026) --------------------------------------
+# Bei Avaaz ist die Sprache ein eigenes PFADSEGMENT und der Slug in allen
+# Sprachen derselbe — deshalb genügt es, die Adressen und Muster je Sprache zu
+# bauen. Genau das macht die Kennung _kampagne() symmetrisch.
+# ⚠️ robots.txt erlaubt /community_petitions/ (UNTERSTRICH) und /campaign/
+# (SINGULAR); gesperrt sind /api/, /campaigns/ (Plural) und der Legacy-Pfad
+# mit Bindestrich. Zwei Spenden-Testseiten unter /campaign/en/ sind dort
+# ausdrücklich gesperrt — der Fetcher beachtet die robots.txt ohnehin, es
+# braucht dafür also keine eigene Ausnahmeliste.
+EN_HOME_URL = "https://avaaz.org/en/"
+EN_LIST_URL = f"{BASE_URL}/community_petitions/en/"
+EN_DATA_FILE = Path("avaaz_en_petitions.json")
+EN_HTML_FILE = Path("avaaz_en_petitions.html")
+EN_PETITION_HREF_RE = re.compile(r"/community_petitions/en/([a-z0-9_]+)", re.I)
+EN_CAMPAIGN_HREF_RE = re.compile(r"/campaign/en/([a-z0-9_]+)", re.I)
+EN_DETAILADRESSE_RE = re.compile(
+    r"^https://secure\.avaaz\.org/(?:community_petitions|campaign)/en/[^/?#]+", re.I)
+
+
+def _sprachteile(sprache: str):
+    """(home, list, petition_re, campaign_re, detail_re) für eine Sprache."""
+    if sprache == "en":
+        return (EN_HOME_URL, EN_LIST_URL, EN_PETITION_HREF_RE,
+                EN_CAMPAIGN_HREF_RE, EN_DETAILADRESSE_RE)
+    return (HOME_URL, LIST_URL, PETITION_HREF_RE,
+            CAMPAIGN_HREF_RE, DETAILADRESSE_RE)
+
 
 # Seiten unterhalb von /community_petitions/de/, die keine Petitionen sind.
 # (popular_/recent_petitions tauchen nur bei der Archiv-Suche auf – dort steht
@@ -129,6 +156,11 @@ FETCH_HEADERS = {
                    "Gecko/20100101 Firefox/128.0"),
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
 }
+# ⚠️ Muss NACH FETCH_HEADERS stehen. Weiter oben führte dieselbe Zeile beim
+# Import zu einem NameError — und py_compile findet das nicht, weil es erst
+# zur Laufzeit auffällt.
+FETCH_HEADERS_EN = dict(FETCH_HEADERS,
+                        **{"Accept-Language": "en-US,en;q=0.9"})
 
 CREATED_RE = re.compile(r"createdAtTimestamp\s*=\s*(\d+)")
 UPDATED_RE = re.compile(r"updatedAtTimestamp\s*=\s*(\d+)")
@@ -160,7 +192,8 @@ def _ms_to_iso(ms: str | int) -> str | None:
 # ----------------------------------------------------------------------------
 # Entdeckung der Petitionen
 # ----------------------------------------------------------------------------
-def discover_slugs(fetcher: core.Fetcher) -> tuple[dict[str, dict], set[str]]:
+def discover_slugs(fetcher: core.Fetcher,
+                   sprache: str = "de") -> tuple[dict[str, dict], set[str]]:
     """(petitionen, kampagnen) aus Startseite, Übersicht und den
     popular/recent-JSON-Endpoints. petitionen = {slug: hint};
     kampagnen = {slug, …} (Avaaz-eigene Kampagnen, nur auf der Startseite
@@ -168,11 +201,12 @@ def discover_slugs(fetcher: core.Fetcher) -> tuple[dict[str, dict], set[str]]:
     wächst über die Zeit per Upsert."""
     found: dict[str, dict] = {}
     campaigns: set[str] = set()
+    home, liste, PET_RE, CAMP_RE, _ = _sprachteile(sprache)
     sources = [
-        ("Startseite", HOME_URL, "html"),
-        ("Übersicht", LIST_URL, "html"),
-        ("Beliebt-Feed", f"{LIST_URL}popular_petitions.json", "json"),
-        ("Neu-Feed", f"{LIST_URL}recent_petitions.json", "json"),
+        ("Startseite", home, "html"),
+        ("Übersicht", liste, "html"),
+        ("Beliebt-Feed", f"{liste}popular_petitions.json", "json"),
+        ("Neu-Feed", f"{liste}recent_petitions.json", "json"),
     ]
     prog(phase="discover", current=0, total=len(sources),
          message="Sammle Petitionen …")
@@ -187,7 +221,7 @@ def discover_slugs(fetcher: core.Fetcher) -> tuple[dict[str, dict], set[str]]:
                 except ValueError:
                     data = {}
                 for pet in data.get("petitions", []):
-                    m = PETITION_HREF_RE.search(pet.get("petition_url", ""))
+                    m = PET_RE.search(pet.get("petition_url", ""))
                     if not m:
                         continue
                     slug = m.group(1)
@@ -200,13 +234,13 @@ def discover_slugs(fetcher: core.Fetcher) -> tuple[dict[str, dict], set[str]]:
                         hint["petition_id"] = pet["id"]
                     added += 1
             else:
-                for m in PETITION_HREF_RE.finditer(resp.text):
+                for m in PET_RE.finditer(resp.text):
                     slug = m.group(1)
                     if slug in NON_PETITION_SLUGS or slug in found:
                         continue
                     found[slug] = {}
                     added += 1
-                for m in CAMPAIGN_HREF_RE.finditer(resp.text):
+                for m in CAMP_RE.finditer(resp.text):
                     slug = m.group(1)
                     if slug not in NON_CAMPAIGN_SLUGS:
                         campaigns.add(slug)
@@ -330,7 +364,8 @@ def _doc_title(soup: BeautifulSoup) -> str | None:
     return t or None
 
 
-def parse_detail(html: str, url: str) -> dict:
+def parse_detail(html: str, url: str,
+                 muster: re.Pattern = None) -> dict:
     soup = BeautifulSoup(html, "html.parser")
     rec: dict = {}
 
@@ -347,7 +382,7 @@ def parse_detail(html: str, url: str) -> dict:
     canon = soup.find("link", rel="canonical")
     rec["url"] = core.eigene_adresse(
         (canon.get("href") if canon else None) or _meta(soup, "og:url"), url,
-        DETAILADRESSE_RE)
+        muster if muster is not None else DETAILADRESSE_RE)
 
     # Interne Petitions-ID (für stats.json) aus dem Inline-JS.
     m_id = PETITION_ID_RE.search(html)
@@ -444,19 +479,40 @@ def ungueltige_seite(html: str, url: str) -> bool:
 FREMDSPRACHEN = ("en",)
 
 
+def _kampagne(bereich: str, slug: str) -> str:
+    """Gemeinsame Kennung aller Sprachfassungen.
+
+    Das Sprachkürzel ist bei Avaaz ein eigenes Pfadsegment, der Slug bleibt in
+    allen Sprachen gleich — beide Richtungen ergeben denselben Wert:
+        /community_petitions/de/<slug>/  ->  avaaz:community_petitions:<slug>
+        /community_petitions/en/<slug>/  ->  avaaz:community_petitions:<slug>
+    ⚠️ Groß-/Kleinschreibung NICHT anfassen: der Bestand enthält beide Formen
+    (z. B. „Stand_with_the_Philippines")."""
+    return f"avaaz:{bereich}:{slug}"
+
+
 def _fremdsprachen_holen(fetcher: core.Fetcher, rec: dict, slug: str,
-                         bereich: str, parser) -> None:
+                         bereich: str, parser, sprache: str = "de") -> None:
     """Die übrigen Sprachfassungen an `rec` hängen.
 
     `bereich` ist „community_petitions" oder „campaign", `parser` der passende
     Parser — die beiden Seitenformen sind verschieden aufgebaut, die
     Sprachlogik ist dieselbe."""
-    # Fremdsprachen sind abschaltbar (siehe i18n_helfer) — der
+    # ⚠️⚠️ Hauptsprache und Kennung stehen VOR dem Schalter, nicht dahinter.
+    # Bis zum 12.8.2026 lagen beide darunter — und weil der Tageslauf mit
+    # --keine-sprachen fährt, hätte dort JEDER neue Avaaz-Satz ohne
+    # campaign_id geendet und wäre nie mit seiner Fassung in der anderen
+    # Sprache verknüpft worden. Lokal fiel das nicht auf (30 von 30 Sätzen
+    # haben eine, sie stammen aus Läufen MIT Sprachen). 350.org macht es
+    # richtig und begründet es dort auch: die Kennung kostet nichts und
+    # verbindet die Fassungen, sobald sie da sind.
+    i18n.setze_hauptsprache(rec, sprache)
+    rec["campaign_id"] = _kampagne(bereich, slug)
+    # Die zweite Fassung IN denselben Satz zu holen, lohnt nur für den
+    # deutschen Eintrag und ist zudem abschaltbar (siehe i18n_helfer): der
     # Tageslauf verzichtet darauf, ein eigener Lauf holt sie nach.
-    if not i18n.aktiv():
+    if sprache != "de" or not i18n.aktiv():
         return
-    i18n.setze_hauptsprache(rec, "de")
-    rec["campaign_id"] = f"avaaz:{bereich}:{slug}"
     for lang in FREMDSPRACHEN:
         url = f"{BASE_URL}/{bereich}/{lang}/{slug}/"
         resp = fetcher.get(url)
@@ -481,14 +537,15 @@ def _fremdsprachen_holen(fetcher: core.Fetcher, rec: dict, slug: str,
             i18n.setze_sprachfassung(rec, lang, "ungeklärt")
 
 
-def scrape_petition(fetcher: core.Fetcher, slug: str) -> tuple[str, dict | None]:
+def scrape_petition(fetcher: core.Fetcher, slug: str,
+                    sprache: str = "de") -> tuple[str, dict | None]:
     """(status, record) – status: online | offline | error | skip.
 
     „skip" heißt: die Adresse gibt es, sie trägt aber keine Petition. Der
     Aufrufer entfernt solche Sätze aus dem Bestand — dieselbe Behandlung wie
     bei Kampagnen ohne Aktion. Damit räumt der nächste Lauf die Altlast von
     selbst weg, ohne dass jemand am Datenbestand herumschneidet."""
-    url = f"{BASE_URL}/community_petitions/de/{slug}/"
+    url = f"{BASE_URL}/community_petitions/{sprache}/{slug}/"
     resp = fetcher.get(url)
     if resp is None:
         return "error", None
@@ -499,14 +556,14 @@ def scrape_petition(fetcher: core.Fetcher, slug: str) -> tuple[str, dict | None]
     if ungueltige_seite(resp.text, url):
         return "skip", None
 
-    rec = parse_detail(resp.text, url)
+    rec = parse_detail(resp.text, url, _sprachteile(sprache)[4])
     if rec.get("petition_id"):
         sig = fetch_signatures(fetcher, rec["petition_id"])
         if sig is not None:
             rec["signatures"] = sig
             rec["goal"] = _goal_for(sig)
     _fremdsprachen_holen(fetcher, rec, slug, "community_petitions",
-                         parse_detail)
+                         parse_detail, sprache)
     return "online", rec
 
 
@@ -564,7 +621,8 @@ def _offener_brief(soup) -> str | None:
     return "\n".join(t for t in teile if t) or None
 
 
-def parse_campaign(html: str, url: str) -> dict:
+def parse_campaign(html: str, url: str,
+                   muster: re.Pattern = None) -> dict:
     soup = BeautifulSoup(html, "html.parser")
     rec: dict = {}
 
@@ -593,7 +651,7 @@ def parse_campaign(html: str, url: str) -> dict:
     canon = soup.find("link", rel="canonical")
     rec["url"] = core.eigene_adresse(
         (canon.get("href") if canon else None) or _meta(soup, "og:url"), url,
-        DETAILADRESSE_RE)
+        muster if muster is not None else DETAILADRESSE_RE)
 
     # Interne Kampagnen-ID (für stats.json) aus dem MCounter-Inline-JS.
     m_id = CAMPAIGN_ID_RE.search(html)
@@ -637,13 +695,14 @@ def fetch_campaign_stats(fetcher: core.Fetcher,
     return core.zahl(sig), core.zahl(target)
 
 
-def scrape_campaign(fetcher: core.Fetcher, slug: str) -> tuple[str, dict | None]:
+def scrape_campaign(fetcher: core.Fetcher, slug: str,
+                    sprache: str = "de") -> tuple[str, dict | None]:
     """(status, record) für eine Avaaz-eigene Kampagne.
 
     status "skip" = Seite existiert, ist aber keine Aktions-Kampagne (kein
     MCounter/keine campaign_id, z. B. CEO-Brief oder Berichte-Hub) – nicht
     aufnehmen bzw. aus dem Bestand entfernen."""
-    url = f"{BASE_URL}/campaign/de/{slug}/"
+    url = f"{BASE_URL}/campaign/{sprache}/{slug}/"
     resp = fetcher.get(url)
     if resp is None:
         return "error", None
@@ -654,14 +713,15 @@ def scrape_campaign(fetcher: core.Fetcher, slug: str) -> tuple[str, dict | None]
     if ungueltige_seite(resp.text, url):
         return "skip", None
 
-    rec = parse_campaign(resp.text, url)
+    rec = parse_campaign(resp.text, url, _sprachteile(sprache)[4])
     if not rec.get("petition_id"):
         return "skip", None
     sig, target = fetch_campaign_stats(fetcher, rec["petition_id"])
     if sig is not None:
         rec["signatures"] = sig
         rec["goal"] = target if target else _goal_for(sig)
-    _fremdsprachen_holen(fetcher, rec, slug, "campaign", parse_campaign)
+    _fremdsprachen_holen(fetcher, rec, slug, "campaign", parse_campaign,
+                         sprache)
     return "online", rec
 
 
@@ -847,6 +907,118 @@ PLATFORM = Platform(
     html_file=HTML_FILE,
     run=run,
     check=check,
+)
+
+
+# ----------------------------------------------------------------------------
+# Der englische Eintrag
+# ----------------------------------------------------------------------------
+# Bewusst OHNE die Archiv-Warteschlange (--archive): die ist ein Nachhol-Werk
+# für den deutschen Altbestand aus dem Internet Archive und hat mit der
+# Sprachauswahl nichts zu tun. Der englische Eintrag sammelt schlicht, was
+# Avaaz gerade kuratiert zeigt, und wächst wie der deutsche per Upsert.
+def run_en(args) -> None:
+    store = core.load_store(EN_DATA_FILE)
+    fetcher = core.Fetcher(delay=args.delay, headers=FETCH_HEADERS_EN)
+    ts = now_iso()
+
+    def save(quiet=True, **extra):
+        core.save_store(store, EN_DATA_FILE, extra_meta=extra, quiet=quiet)
+
+    def adresse(slug: str, kind: str) -> str:
+        teil = "campaign" if kind == "campaign" else "community_petitions"
+        return f"{BASE_URL}/{teil}/en/{slug}/"
+
+    known = list(store.keys())
+    if known and not args.no_recheck and not args.limit:
+        log(f"Prüfe {len(known)} bekannte englische Einträge …")
+        prog(phase="check-known", current=0, total=len(known), message="…")
+        weg = []
+        for k, slug in enumerate(known, 1):
+            prog(current=k, total=len(known), message=slug)
+            if core.skip_recent(store.get(slug), args):
+                continue
+            kind = (store.get(slug) or {}).get("kind") or "petition"
+            if kind == "campaign":
+                status, rec = scrape_campaign(fetcher, slug, "en")
+            else:
+                status, rec = scrape_petition(fetcher, slug, "en")
+            if status == "error":
+                continue
+            if status == "skip":
+                weg.append(slug)
+                continue
+            core.upsert(store, slug, rec or {}, {}, status, ts,
+                        adresse(slug, kind))
+            save()
+        for slug in weg:
+            store.pop(slug, None)
+        if weg:
+            log(f"  {len(weg)} Eintrag/Einträge ohne Petition entfernt.")
+
+    log("Sammle englische Petitionen und Kampagnen …")
+    petitionen, kampagnen = discover_slugs(fetcher, "en")
+    neu_pet = [s for s in petitionen if s not in store]
+    neu_kamp = [s for s in kampagnen if s not in store]
+    if args.limit:
+        neu_pet, neu_kamp = neu_pet[:args.limit], neu_kamp[:args.limit]
+    gesamt = len(neu_pet) + len(neu_kamp)
+    log(f"{gesamt} neue englische Einträge zum Scrapen "
+        f"(Gesamt im Store: {len(store)}).")
+    prog(phase="scrape", current=0, total=gesamt, message="Beginne …")
+
+    i = 0
+    for slug, kind in ([(s, "petition") for s in neu_pet]
+                       + [(s, "campaign") for s in neu_kamp]):
+        i += 1
+        prog(current=i, total=gesamt, message=slug)
+        if kind == "campaign":
+            status, rec = scrape_campaign(fetcher, slug, "en")
+        else:
+            status, rec = scrape_petition(fetcher, slug, "en")
+        if status in ("error", "skip"):
+            continue
+        if rec is not None and petitionen.get(slug):
+            # Der Feed liefert Zähler und ID gratis mit — sie zu verwerfen
+            # kostete einen zusätzlichen Stats-Abruf.
+            for f, w in petitionen[slug].items():
+                rec.setdefault(f, w)
+        core.upsert(store, slug, rec or {}, {}, status, ts, adresse(slug, kind))
+        save()
+
+    neu = [s for s, r in store.items() if r.get("first_seen") == ts]
+    if neu:
+        log(f"NEU: {len(neu)} neue englische Einträge in diesem Lauf.")
+    prog(message="Speichere & baue HTML …")
+    save(quiet=False, new_petitions_last_run=neu,
+         available=len(petitionen) + len(kampagnen))
+    core.write_list_html(PLATFORM_EN)
+    log("Fertig (Avaaz English).")
+
+
+def check_en(fetcher):
+    resp = fetcher.get(EN_HOME_URL)
+    if resp is None or not resp.ok:
+        return False, "Startseite nicht erreichbar"
+    n = len(set(EN_PETITION_HREF_RE.findall(resp.text)) |
+            set(EN_CAMPAIGN_HREF_RE.findall(resp.text)))
+    return (n >= 1), f"{n} Aktionen (englische Startseite)"
+
+
+PLATFORM_EN = Platform(
+    key="avaaz_en",
+    openness=2,
+    openness_note="Eingeschränkt: keine öffentliche Gesamtliste (nur ~5-10 "
+                  "kuratierte/beliebte/neue), Zähler nur via Stats-JSON, "
+                  "Cloudflare blockt Nicht-Browser-Clients.",
+    name="Avaaz (English)",
+    eyebrow="Avaaz · Bürgerpetitionen & Kampagnen (englisch)",
+    source_url="https://secure.avaaz.org/community_petitions/en/",
+    data_file=EN_DATA_FILE,
+    html_file=EN_HTML_FILE,
+    run=run_en,
+    check=check_en,
+    language="en",
 )
 
 

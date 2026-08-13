@@ -52,6 +52,18 @@ FETCH_HEADERS = {
     "Accept-Language": "de-DE,de;q=0.9",
 }
 
+# ---- Der englische Zwilling als EIGENER Plattform-Eintrag (12.8.2026) -------
+# ⚠️ Der englische Baum liegt flach unter /en/<slug> — KEIN /mitmachen/ wie im
+# Deutschen (siehe den Block „SPRACHFASSUNGEN" weiter unten). Deshalb ein
+# eigenes Adressmuster; mit dem deutschen fiele core.eigene_adresse immer auf
+# die angefragte Adresse zurück und der Riegel liefe leer mit.
+EN_DATA_FILE = Path("foodwatch_en_petitions.json")
+EN_HTML_FILE = Path("foodwatch_en_petitions.html")
+EN_ACTION_HREF_RE = re.compile(r'href="(/en/[a-z0-9\-]+)"')
+EN_DETAILADRESSE_RE = re.compile(
+    r"^https://(www\.)?foodwatch\.org/en/[^/?#]+", re.I)
+FETCH_HEADERS_EN = dict(FETCH_HEADERS, **{"Accept-Language": "en-US,en;q=0.9"})
+
 
 # ----------------------------------------------------------------------------
 # Entdeckung
@@ -90,7 +102,11 @@ def _meta(soup: BeautifulSoup, prop: str) -> str | None:
     return None
 
 
-def parse_detail(html: str, url: str) -> dict:
+def parse_detail(html: str, url: str, muster: re.Pattern = None) -> dict:
+    """`muster` ist der Maßstab für core.eigene_adresse; ohne Angabe der
+    deutsche Baum. Der englische Baum hat ein anderes Wegstück und braucht
+    deshalb EN_DETAILADRESSE_RE, sonst greift der Riegel dort nie."""
+    muster = muster if muster is not None else DETAILADRESSE_RE
     soup = BeautifulSoup(html, "html.parser")
     rec: dict = {}
 
@@ -107,7 +123,7 @@ def parse_detail(html: str, url: str) -> dict:
     canon = soup.find("link", rel="canonical")
     rec["url"] = core.eigene_adresse(
         (canon.get("href") if canon else None) or _meta(soup, "og:url"), url,
-        DETAILADRESSE_RE)
+        muster)
 
     counter = soup.select_one("#form-counter")
     if counter:
@@ -173,10 +189,46 @@ def scrape_petition(fetcher: core.Fetcher, slug: str) -> tuple[str, dict | None]
 # Von den 15 laufenden Aktionen hatten am 8.8.2026 fünf einen englischen
 # Zwilling. Eine englische Aktion (/en/supermarkets-stop-the-toxic-harvest)
 # hat KEINE deutsche Entsprechung — die Zuordnung ist also nicht 1:1.
-EN_LIST_URL = f"{BASE_URL}/en"
+# ⚠️ ZWEI Einstiege, und das ist kein Übereifer: am 12.8.2026 gemessen listet
+# /en NUR FÜNF der sieben englischen Aktionen. Es fehlten
+# „restrict-food-speculation-feed-people-not-banks" (119.237 Unterschriften)
+# und „supermarkets-stop-the-toxic-harvest" (105.356) — beide HTTP 200 mit
+# gültigem Zähler, also echte Aktionen, bloß von der Startseite nicht
+# verlinkt. Über /en allein fehlten 2 von 7 (29 %). Die Vereinigung beider
+# Listen kostet einen Abruf und schließt die Lücke.
+EN_LIST_URLS = (f"{BASE_URL}/en/take-action-1", f"{BASE_URL}/en")
 MIN_ZAEHLER = 1000
 FREMDSPRACHEN = ("en",)
 _EN_INDEX: dict[str, dict[int, str]] = {}
+_EN_SEITEN: dict[str, dict[str, dict]] = {}
+
+
+def _en_seiten(fetcher: core.Fetcher) -> dict[str, dict]:
+    """{slug: datensatz} des ganzen englischen Baums, einmal je Prozess.
+
+    ⚠️ Diese Abrufe fielen schon immer an: _en_index() hat jede englische Seite
+    geholt, geparst und alles außer dem Zählerstand weggeworfen. Seit es einen
+    eigenen englischen Plattform-Eintrag gibt (run_en), wird das Ergebnis
+    behalten — der Zähler-Index und der englische Lauf teilen sich denselben
+    Abruf, statt den Baum zweimal zu holen.
+    """
+    if "en" in _EN_SEITEN:
+        return _EN_SEITEN["en"]
+    seiten: dict[str, dict] = {}
+    slugs: set[str] = set()
+    for liste in EN_LIST_URLS:
+        resp = fetcher.get(liste)
+        if resp is not None and resp.ok:
+            slugs |= {m.rsplit("/", 1)[-1]
+                      for m in EN_ACTION_HREF_RE.findall(resp.text)}
+    for slug in sorted(slugs):
+        url = f"{BASE_URL}/en/{slug}"
+        r2 = fetcher.get(url)
+        if r2 is None or not r2.ok:
+            continue
+        seiten[slug] = parse_detail(r2.text, url, EN_DETAILADRESSE_RE)
+    _EN_SEITEN["en"] = seiten
+    return seiten
 
 
 def _en_index(fetcher: core.Fetcher) -> dict[int, str]:
@@ -188,21 +240,13 @@ def _en_index(fetcher: core.Fetcher) -> dict[int, str]:
         return _EN_INDEX["en"]
     index: dict[int, str] = {}
     doppelt: set[int] = set()
-    resp = fetcher.get(EN_LIST_URL)
-    if resp is not None and resp.ok:
-        slugs = {m.rsplit("/", 1)[-1]
-                 for m in re.findall(r'href="(/en/[a-z0-9\-]+)"', resp.text)}
-        for slug in sorted(slugs):
-            r2 = fetcher.get(f"{BASE_URL}/en/{slug}")
-            if r2 is None or not r2.ok:
-                continue
-            rec = parse_detail(r2.text, f"{BASE_URL}/en/{slug}")
-            zahl = rec.get("signatures")
-            if not isinstance(zahl, int) or zahl < MIN_ZAEHLER:
-                continue
-            if zahl in index:
-                doppelt.add(zahl)
-            index[zahl] = slug
+    for slug, rec in sorted(_en_seiten(fetcher).items()):
+        zahl = rec.get("signatures")
+        if not isinstance(zahl, int) or zahl < MIN_ZAEHLER:
+            continue
+        if zahl in index:
+            doppelt.add(zahl)
+        index[zahl] = slug
     for z in doppelt:
         index.pop(z, None)
     log(f"Englischer Baum: {len(index)} eindeutige Zählerstände"
@@ -229,12 +273,12 @@ def _fremdsprachen_holen(fetcher: core.Fetcher, rec: dict, slug: str) -> None:
             # haben. Deshalb ungeklärt und kein Abzeichen in der App.
             i18n.setze_sprachfassung(rec, lang, "ungeklärt")
             continue
-        url = f"{BASE_URL}/en/{fremd_slug}"
-        resp = fetcher.get(url)
-        if resp is None or not resp.ok:
+        # Die Seite liegt aus _en_seiten() schon geparst vor — der frühere
+        # Zweitabruf derselben Adresse entfällt.
+        fremd = _en_seiten(fetcher).get(fremd_slug)
+        if not fremd:
             i18n.setze_sprachfassung(rec, lang, "ungeklärt")
             continue
-        fremd = parse_detail(resp.text, url)
         if (fremd.get("title") or "").strip():
             i18n.setze_sprachfassung(rec, lang, "vorhanden", fremd)
             # Erst JETZT gibt es eine belastbare gemeinsame Kennung: das Paar
@@ -332,6 +376,99 @@ PLATFORM = Platform(
     html_file=HTML_FILE,
     run=run,
     check=check,
+)
+
+
+# ----------------------------------------------------------------------------
+# Der englische Eintrag — eine eigene Plattform, keine Übersetzungsspalte
+# ----------------------------------------------------------------------------
+# ⚠️ Bewusst OHNE campaign_id. Die einzige Zuordnung, die foodwatch hergibt,
+# ist der Unterschriftenzähler (siehe der Block „SPRACHFASSUNGEN" oben), und
+# der ist am 9.8.2026 schon einmal zwischen zwei Abrufen gewandert. Eine
+# geratene Zuordnung ließe die App eine falsche Tatsache behaupten — kein
+# Abzeichen ist besser als ein falsches. Ob sich ein Paar INHALTLICH belegen
+# lässt, wird getrennt gemessen (Etappe 4 des Plans), an den Plattformen mit
+# echter Kennung als Prüfstand.
+#
+# Zwei englische Aktionen haben nachweislich gar kein deutsches Gegenstück
+# (u. a. /en/supermarkets-stop-the-toxic-harvest) — der englische Baum ist
+# also eine eigenständige Menge und keine Übersetzungsspalte des deutschen.
+def run_en(args) -> None:
+    store = core.load_store(EN_DATA_FILE)
+    fetcher = core.Fetcher(delay=args.delay, headers=FETCH_HEADERS_EN)
+    ts = now_iso()
+
+    def save(quiet=True, **extra):
+        core.save_store(store, EN_DATA_FILE, extra_meta=extra, quiet=quiet)
+
+    log("Sammle englische Aktionen …")
+    prog(phase="scrape", current=0, total=0, message="Hole englischen Baum …")
+    seiten = _en_seiten(fetcher)
+    log(f"{len(seiten)} englische Aktion(en) gefunden "
+        f"(Gesamt im Store: {len(store)}).")
+
+    gesehen = 0
+    for i, (slug, rec) in enumerate(sorted(seiten.items()), 1):
+        prog(current=i, total=len(seiten), message=slug)
+        # Ohne Zähler ist es keine Mitzeichnungs-Aktion, sondern eine
+        # Inhaltsseite — dieselbe Bedingung wie im deutschen Lauf.
+        if rec.get("signatures") is None:
+            continue
+        satz = dict(rec)
+        i18n.setze_hauptsprache(satz, "en")
+        core.upsert(store, slug, satz, {}, "online", ts,
+                    f"{BASE_URL}/en/{slug}")
+        gesehen += 1
+        save()
+
+    # Was der Baum nicht mehr listet, ist damit NICHT offline — die Übersicht
+    # kann sich umbauen. Einzeln nachfragen; nur eine 404/410 ist ein Beleg.
+    verschwunden = [s for s in store if s not in seiten]
+    for slug in verschwunden:
+        url = f"{BASE_URL}/en/{slug}"
+        resp = fetcher.get(url)
+        if resp is None:
+            continue
+        if resp.status_code in (404, 410):
+            core.upsert(store, slug, {}, {}, "offline", ts, url)
+            log(f"  OFFLINE: {slug}")
+            save()
+        elif resp.ok:
+            satz = parse_detail(resp.text, url, EN_DETAILADRESSE_RE)
+            if satz.get("signatures") is not None:
+                i18n.setze_hauptsprache(satz, "en")
+                core.upsert(store, slug, satz, {}, "online", ts, url)
+                gesehen += 1
+                save()
+
+    neu = [s for s, r in store.items() if r.get("first_seen") == ts]
+    if neu:
+        log(f"NEU: {len(neu)} neue englische Aktion(en) in diesem Lauf.")
+
+    prog(message="Speichere & baue HTML …")
+    save(quiet=False, new_petitions_last_run=neu, available=len(seiten))
+    core.write_list_html(PLATFORM_EN)
+    log(f"Fertig (foodwatch English, {gesehen} Aktion(en) bestätigt).")
+
+
+def check_en(fetcher):
+    return core.check_source(fetcher, EN_LIST_URLS[0], EN_ACTION_HREF_RE, 3,
+                             "Aktionen")
+
+
+PLATFORM_EN = Platform(
+    key="foodwatch_en",
+    openness=5,
+    openness_note="Sehr offen: komplette Aktionsliste, Zähler und Volltexte direkt "
+                  "im server-gerenderten HTML, robots.txt erlaubt praktisch alles.",
+    name="foodwatch (English)",
+    eyebrow="foodwatch · Mitmach-Aktionen (englisch)",
+    source_url="https://www.foodwatch.org/en",
+    data_file=EN_DATA_FILE,
+    html_file=EN_HTML_FILE,
+    run=run_en,
+    check=check_en,
+    language="en",
 )
 
 

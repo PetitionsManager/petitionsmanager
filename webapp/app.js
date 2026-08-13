@@ -2792,7 +2792,8 @@
          desselben; siehe _uebersetzungen_verknuepfen in publish.py. */
       var same = s.uebersetzung
         ? '<span class="sim-trans">' +
-          esc(fill(T("petition.similarTranslation", "Übersetzung ({sprache})"),
+          esc(fill(T("petition.similarTranslation",
+                     "Dieselbe Petition auf {sprache}"),
             { sprache: langInfo(s.relLang || "de").name || "" })) + "</span>"
         : (s.same ? '<span class="sim-same">' +
            esc(T("petition.similarSame", "gleich")) + "</span>" : "");
