@@ -2536,6 +2536,27 @@ def _live_card(platform: Platform, schnappschuss: bool = False,
             comp_sub_en = (f"{len(store)} on record · the run was cut off "
                            f"before finishing, the number of candidates is "
                            f"unknown")
+    elif available < len(store):
+        # ⚠️ „1906 von ~1871 gefundenen Kandidaten" ist arithmetisch unmöglich
+        # und las sich, als nenne die Zahl hinter dem ~ den Gesamtbestand der
+        # QUELLE. Sie nennt aber nur, was DIESER Lauf gesehen hat — und das ist
+        # bei mehreren Plattformen von Haus aus weniger als unser Bestand:
+        #   · bundestag: der Tageslauf entdeckt nur die laufende Mitzeichnungs-
+        #     frist (57), die 7.903 beendeten stammen aus --backfill.
+        #   · avaaz: nur die ~10 verlinkten, der Rest kam aus dem Archiv.
+        #   · weact/openpetition: offline gegangene Sätze fallen aus der Liste,
+        #     bleiben aber im Bestand stehen.
+        # Ein Anteil lässt sich daraus nicht bilden. Was man sagen kann, ist:
+        # es liegt nichts in der Warteschlange — deshalb bleibt es grün.
+        pct = 100
+        comp_cls = "full"
+        comp_wert = comp_wert_en = "100%"
+        comp_sub = (f"alle {available} in diesem Lauf gefundenen Kandidaten "
+                    f"sind im Bestand · der Bestand ({len(store)}) ist größer "
+                    f"als das, was dieser Lauf gesehen hat")
+        comp_sub_en = (f"all {available} candidates found in this run are on "
+                       f"record · the record ({len(store)}) is larger than "
+                       f"what this run saw")
     else:
         pct = min(100, round(len(store) / available * 100))
         comp_wert, comp_wert_en = f"{pct}%", f"{pct}%"
