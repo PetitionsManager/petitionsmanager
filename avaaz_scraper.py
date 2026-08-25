@@ -583,9 +583,32 @@ def scrape_petition(fetcher: core.Fetcher, slug: str,
 _GENERIC_H1 = {
     # deutsch
     "weitersagen", "teilen", "jetzt unterschreiben",
+    "freunde und bekannte informieren",
     # englisch
     "share", "tell your friends", "sign now", "sign the petition",
 }
+# ⚠️ „freunde und bekannte informieren" ergänzt am 24.8.2026. Es ist die
+# deutsche Entsprechung von „tell your friends", das seit dem 8.8. drinsteht —
+# diesmal fehlte also die DEUTSCHE Seite, während die englische sauber
+# gefiltert wurde. Genau der Fall, vor dem der Absatz oben warnt, nur
+# andersherum.
+#
+# Am ausgelieferten Bestand gemessen, bevor die Zeile eingebaut wurde:
+# 95 der 2.408 Avaaz-Sätze (3,9 %) trugen diesen Text als Titel — mit
+# 95 VERSCHIEDENEN URLs, also 95 verschiedene Kampagnen unter einer
+# Bedienbeschriftung. In der App standen sie untereinander als „gleiche
+# Petitionen", weil die Ähnlichkeit über den Titel läuft.
+# An der Quelle gegengeprüft (secure.avaaz.org/campaign/de/save_the_bees_
+# canada_loc/): <h1> = „FREUNDE UND BEKANNTE INFORMIEREN", <title> =
+# „Avaaz - Kanada: Rettet die Bienen". Der richtige Titel war also da, nur
+# eine Ebene weiter — _doc_title() holt ihn jetzt.
+#
+# ⚠️ Die übrigen Mehrfachtitel im Bestand sind KEINE Fehler und gehören
+# NICHT hierher: „Geheimes Abkommen TISA stoppen!" (10×), „EU-Verbot für
+# Privatjets" (9×) usw. sind echte Kampagnen, die Avaaz unter mehreren
+# Slugs führt. Die anderen drei großen Plattformen haben keinen einzigen
+# Titel, der viermal oder öfter vorkommt — der Befund ist also auf Avaaz
+# und auf diesen einen Wortlaut begrenzt.
 
 
 # Bausteine der Seitenform „Offener Brief". Avaaz benutzt sie für einen Teil
