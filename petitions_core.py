@@ -908,7 +908,16 @@ def save_store(store: dict, data_file: Path, extra_meta: dict | None = None,
     Punkt erreicht alle elf Scraper — jeder von ihnen endet hier."""
     online_now = sum(1 for r in store.values()
                      if isinstance(r, dict) and r.get("status") == "online")
-    meta_extra = dict(extra_meta or {})
+    # ⚠️ Zentrales Lauf-Wissen (24.8.2026): was der laufende Scrape über sich
+    # selbst gemeldet hat (lauf_meta_setzen: available nach der Entdeckung;
+    # upsert: jeder neue Slug), wandert bei JEDER Speicherung mit ins _meta.
+    # Ohne das würfe die nächste Zwischenspeicherung es weg, und ein Abbruch
+    # (SIGINT der CI-Frist) hinterließe „unbekannt", obwohl die Entdeckung
+    # längst gezählt hatte. Ausdrückliche extra_meta-Felder des Aufrufers
+    # GEWINNEN: avaaz/bundestag/weact/wemove reichen eigene Felder durch, und
+    # der Abschluss-Save nennt seine endgültigen Werte selbst.
+    meta_extra = {**(getattr(_TLS, "lauf_meta", None) or {}),
+                  **(extra_meta or {})}
     if not quiet:
         prev = load_meta(data_file)
         vor_kennzahlen = prev.get("kennzahlen") or {}
@@ -958,6 +967,15 @@ def save_store(store: dict, data_file: Path, extra_meta: dict | None = None,
 def upsert(store: dict, slug: str, new: dict, list_hint: dict,
            status: str, ts: str, default_url: str) -> None:
     """Fügt ein/aktualisiert einen Datensatz, ohne Bestehendes zu verlieren."""
+    if slug not in store:
+        # Neu-Meldung ZENTRAL statt in 16 Scraper-Zweigen (24.8.2026): jeder
+        # neue Satz landet sofort im Lauf-Wissen dieses Threads; save_store
+        # schreibt es bei jeder Zwischenspeicherung mit, die Meldung überlebt
+        # damit einen Abbruch. Nur unter monitor.py aktiv (set_progress_platform
+        # legt das Dict an) — Standalone-Aufrufe verhalten sich unverändert.
+        _lm = getattr(_TLS, "lauf_meta", None)
+        if _lm is not None:
+            _lm.setdefault("new_petitions_last_run", []).append(slug)
     rec = store.get(slug, {})
     rec.setdefault("slug", slug)
     rec.setdefault("first_seen", ts)
@@ -1088,6 +1106,21 @@ _TLS = threading.local()
 def set_progress_platform(key: str) -> None:
     """Bindet nachfolgende prog()-Aufrufe dieses Threads an eine Plattform."""
     _TLS.platform = key
+    # ⚠️ Lauf-Wissen hier ZURÜCKSETZEN: sonst erbte die nächste Plattform des
+    # Sammellaufs available/Neu-Liste der vorigen und schriebe sie in ihr
+    # eigenes _meta (save_store nimmt _TLS.lauf_meta bei jedem Schreiben mit).
+    _TLS.lauf_meta = {}
+
+
+def lauf_meta_setzen(**felder) -> None:
+    """Merkt, was DIESER Lauf über sich weiß (z. B. available direkt nach der
+    Entdeckung). save_store schreibt die Felder ab sofort bei jeder
+    Speicherung mit ins _meta; ausdrückliche extra_meta gewinnen. Ohne
+    vorheriges set_progress_platform (Standalone-Aufruf eines Scrapers) ohne
+    Wirkung — bewusst, damit Einzelläufe sich nicht anders verhalten."""
+    d = getattr(_TLS, "lauf_meta", None)
+    if d is not None:
+        d.update(felder)
 
 
 def prog(**kw) -> None:

@@ -405,6 +405,9 @@ def run(args) -> None:
 
     log("Sammle deutsche Petitionen (Status AVAILABLE) …")
     discovered = discover_slugs(fetcher)
+    # Überlebt jeden Abbruch: save_store schreibt _TLS.lauf_meta bei jeder
+    # Zwischenspeicherung mit (24.8.2026); der Abschluss-Save gewinnt.
+    core.lauf_meta_setzen(available=len(discovered))
     new_slugs = [s for s in discovered if s not in store]
     if args.limit:
         new_slugs = new_slugs[:args.limit]

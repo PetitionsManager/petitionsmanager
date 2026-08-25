@@ -491,6 +491,9 @@ def run(args) -> None:
 
     log("Sammle Kampagnen (Startseite + Übersicht) …")
     discovered = discover_slugs(fetcher)
+    # Vorläufiger Wert, überlebt jeden Abbruch; der Abschluss-Save ersetzt ihn
+    # durch len(erreichbar) (s. save_store: _TLS.lauf_meta, 24.8.2026).
+    core.lauf_meta_setzen(available=len(discovered))
     # WeMove verlinkt seine Test- und Entwurfsseiten auf der Startseite mit,
     # die Entdeckung findet sie also jeden Tag wieder. Ohne den Merkzettel
     # würden sie hier als „neu" gelten und das Abrufbudget genauso auffressen
@@ -670,6 +673,7 @@ def run_en(args) -> None:
             save()
 
     entdeckt = discover_en_slugs(fetcher)
+    core.lauf_meta_setzen(available=len(entdeckt))   # überlebt Abbruch
     neu_slugs = [p for p in entdeckt
                  if p not in store and p not in unbrauchbare]
     if args.limit:

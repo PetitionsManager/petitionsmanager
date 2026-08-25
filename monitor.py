@@ -172,6 +172,45 @@ def rotiere_auf_aeltestes(targets: list[Platform]) -> list[Platform]:
     return gedreht
 
 
+EINGEFROREN_TAGE = 6
+# ⚠️ Schwelle bewusst ÜBER der Zykluslänge des Rundlaufs: 17 Einträge bei ~4
+# durchlaufenen je Nacht ≈ 4–5 Tage, bis jeder wieder dran war. Wer den Wert
+# senkt, meldet den Normalbetrieb als Ausfall.
+
+
+def melde_eingefrorene() -> None:
+    """Warnt, wenn eine Plattform seit EINGEFROREN_TAGE keinen ABGESCHLOSSENEN
+    Lauf hatte (letzter Eintrag in lauf_verlauf) oder ihre Entdeckung zuletzt
+    NICHTS fand (available == 0: Host gesperrt oder ausgelassen).
+
+    Genau daran ist Europarl wochenlang unbemerkt eingefroren: der Bestand
+    blieb unverändert stehen und sah dadurch gesund aus (24.8.2026). Als
+    ::warning, weil Anmerkungen ohne Token lesbar sind — die Lauf-Protokolle
+    nicht (Lehre vom 10.8.2026). Bestände ohne _meta werden übergangen: noch
+    nie gelaufen ist der Anfangszustand, kein Ausfall."""
+    jetzt = datetime.now(timezone.utc)
+    for p in PLATFORMS:
+        if not p.is_live:
+            continue
+        meta = core.load_meta(p.data_file)
+        if not meta:
+            continue
+        gruende = []
+        verlauf = meta.get("lauf_verlauf") or []
+        if verlauf:
+            alter = (jetzt - _zeitpunkt(verlauf[-1].get("zeit"))).days
+            if alter >= EINGEFROREN_TAGE:
+                gruende.append(f"letzter abgeschlossener Lauf {alter} Tage her")
+        if meta.get("available") == 0:
+            gruende.append("die Entdeckung fand zuletzt NICHTS "
+                           "(Host gesperrt oder ausgelassen?)")
+        if gruende:
+            text = f"{p.name}: " + " · ".join(gruende)
+            core.log(f"⚠️ {text}")
+            if os.environ.get("GITHUB_ACTIONS") == "true":
+                print(f"::warning title=Plattform liefert nichts::{text}")
+
+
 def parse_args():
     p = argparse.ArgumentParser(
         description="Petitions-Monitor: mehrere Plattformen scrapen (Upsert + HTML).")
@@ -362,6 +401,10 @@ def main() -> None:
             # (am 2026-08-04 als HTTP 404 nachgemessen).
             core.write_dashboard(PLATFORMS)
             core.write_placeholder_pages(PLATFORMS)
+            # Ebenfalls auch bei Abbruch: der Melder liest nur die _meta und
+            # kostet nichts — und ein abgeschnittener Lauf ist genau der
+            # Moment, in dem eingefrorene Plattformen auffallen müssen.
+            melde_eingefrorene()
     except KeyboardInterrupt:
         print("\nAbgebrochen.")
 

@@ -381,6 +381,8 @@ def run(args) -> None:
 
     log("Sammle Petitions-Slugs aus der Gesamtliste …")
     discovered = discover_slugs(fetcher)
+    # Überlebt jeden Abbruch (s. save_store: _TLS.lauf_meta, 24.8.2026).
+    core.lauf_meta_setzen(available=len(discovered))
     known_set = set(known_slugs)
     new_slugs = [s for s in discovered if s not in known_set]
     if args.limit:

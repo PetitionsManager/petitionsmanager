@@ -606,6 +606,8 @@ def run_en(args) -> None:
             log(f"  {len(weg)} Satz/Sätze ohne englische Petition entfernt.")
 
     entdeckt, offset = discover_en_slugs(fetcher, offset)
+    # Überlebt jeden Abbruch (s. save_store: _TLS.lauf_meta, 24.8.2026).
+    core.lauf_meta_setzen(available=len(entdeckt))
     neu = [s for s in entdeckt if s not in store][:args.limit or EN_NEUE_JE_LAUF]
     log(f"{len(neu)} neue englische Petition(en) zum Scrapen "
         f"(Gesamt im Store: {len(store)}).")

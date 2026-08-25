@@ -693,6 +693,9 @@ def run(args) -> None:
         if key in hints and slug != key:
             continue
         hints[key] = hint
+    # Überlebt jeden Abbruch (s. save_store: _TLS.lauf_meta, 24.8.2026) —
+    # bewusst NACH der Alias-Auflösung, wie im Abschluss-Save.
+    core.lauf_meta_setzen(available=len(hints))
 
     known_set = set(store)     # nach dem Recheck: die kanonischen Schlüssel
     # Bereits geprüfte Petitionen nicht nochmal laden – nur Listen-Infos

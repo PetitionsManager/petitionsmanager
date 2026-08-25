@@ -358,6 +358,9 @@ def run(args) -> None:
     # Liste zuerst: liefert Titel/Kategorie/Zähler UND die Detail-URLs.
     log("Sammle Petitionen in der Mitzeichnungsfrist …")
     discovered = discover_slugs(fetcher, status=2)
+    # Vorläufiger Wert, überlebt jeden Abbruch; der Abschluss-Save ersetzt ihn
+    # durch die endgültige Zählung (s. save_store: _TLS.lauf_meta, 24.8.2026).
+    core.lauf_meta_setzen(available=len(discovered))
 
     # Bekannte Einträge auffrischen (Zähler aus Liste; Detail-Re-Scrape nur
     # für Einträge, die nicht mehr gelistet sind → Fristende/offline).

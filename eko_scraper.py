@@ -441,6 +441,9 @@ def run(args) -> None:
     # Detailseiten hinter dem Bot-Schutz liegen.
     log("Sammle Aktionen von der deutschen Kampagnenliste …")
     discovered = discover_slugs(fetcher)
+    # Vorläufiger Wert, überlebt jeden Abbruch; der Abschluss-Save ersetzt ihn
+    # durch die endgültige Zählung (s. save_store: _TLS.lauf_meta, 24.8.2026).
+    core.lauf_meta_setzen(available=len(discovered))
 
     known = list(store.keys())
     if known and not args.no_recheck and not args.limit:
@@ -619,6 +622,7 @@ def run_en(args) -> None:
         core.save_store(store, EN_DATA_FILE, extra_meta=extra, quiet=quiet)
 
     karten = discover_en_slugs(fetcher)
+    core.lauf_meta_setzen(available=len(karten))   # überlebt Abbruch
     log(f"{len(karten)} englische Kampagne(n) (Gesamt im Store: {len(store)}).")
     prog(phase="scrape", current=0, total=len(karten), message="Beginne …")
 
