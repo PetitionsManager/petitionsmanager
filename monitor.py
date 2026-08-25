@@ -22,6 +22,7 @@ from __future__ import annotations
 import argparse
 import os
 import time
+from datetime import datetime, timezone
 from pathlib import Path
 
 import i18n_helfer as i18n
@@ -59,6 +60,14 @@ PLATFORMS: list[Platform] = [
     # Sprache filtern kann. Sie stehen bewusst am ENDE — der Tageslauf
     # arbeitet die Liste der Reihe nach ab und ist heute schon am
     # Zeitanschlag; die deutschen Bestände dürfen dadurch nicht wegfallen.
+    #
+    # ⚠️ SEIT DEM RUNDLAUF (rotiere_auf_aeltestes, 24.8.2026) trägt „am Ende
+    # stehen" nicht mehr allein. Die Liste wird zyklisch gedreht, damit kein
+    # Eintrag verhungert — ein englischer Zwilling kann also durchaus als
+    # ERSTER drankommen, wenn er am längsten nicht durchgelaufen ist. Erhalten
+    # bleibt nur die RELATIVE Reihenfolge. Wer die deutschen Bestände hart
+    # bevorzugen will, muss das in _abschlussmarke() ausdrücken (z. B. Sprache
+    # als erstes Feld des Sortierschlüssels) — nicht über die Listenposition.
     foodwatch_scraper.PLATFORM_EN,
     eko_scraper.PLATFORM_EN,
     wemove_scraper.PLATFORM_EN,
@@ -74,6 +83,93 @@ def write_all_html() -> None:
             core.write_list_html(p)
     core.write_dashboard(PLATFORMS)
     core.write_placeholder_pages(PLATFORMS)
+
+
+# ----------------------------------------------------------------------------
+# Reihenfolge: Rundlauf statt immer wieder von vorn
+# ----------------------------------------------------------------------------
+# ⚠️ Der Anlass (24.8.2026 gemessen): der CI-Lauf schöpft seine Frist von 300 min
+# aus und kam an zwei Tagen hintereinander nur durch die ERSTEN VIER der elf
+# Plattformen. Die Schleife in main() lief bis dahin immer in derselben festen
+# Reihenfolge los — der Rest der Liste wurde also nie erreicht. Im Manifest vom
+# 24.8. standen weact/avaaz/openpetition/changeorg auf dem 24.8., die übrigen
+# sieben unverändert auf dem 22.8. Die Meldung „Rest folgt beim nächsten Lauf"
+# aus scrape.yml stimmte für die PLATTFORMLISTE nicht: der nächste Lauf fing
+# wieder bei Position 1 an.
+#
+# Hier wird die Liste deshalb zyklisch so gedreht, dass sie bei der Plattform
+# beginnt, die am längsten nicht mehr durchgelaufen ist. Die relative
+# Reihenfolge bleibt erhalten (die englischen Zwillinge stehen weiter hinten),
+# nur der Einstiegspunkt wandert.
+#
+# ⚠️ Bewusst OHNE neue Zustandsdatei: der Actions-Cache trägt nur
+# „*_petitions.json" und „texts_index.json" (scrape.yml). Eine zusätzliche Datei
+# ginge zwischen den Läufen verloren und der Rundlauf stünde still, ohne dass
+# es auffiele. Alles Nötige steht schon im _meta der Bestände.
+def _zeitpunkt(wert) -> datetime:
+    """ISO-Zeitstempel als echter Zeitpunkt – NICHT als Zeichenkette vergleichen.
+
+    ⚠️ Die Bestände tragen je nach Herkunft verschiedene Zonen: die im CI
+    erzeugten enden auf „+00:00", die vom Rechner des Nutzers auf „-06:00".
+    Als Text verglichen stünde „2026-08-09T07:43:14-06:00" (= 13:43 UTC) vor
+    „2026-08-09T08:00:00+00:00", obwohl es später ist. Genau diese Mischung
+    entsteht, wenn scrape.yml ohne Cache auf den Stand im Repo zurückfällt.
+    """
+    if not wert:
+        return datetime.min.replace(tzinfo=timezone.utc)
+    try:
+        zp = datetime.fromisoformat(wert)
+    except (TypeError, ValueError):
+        return datetime.min.replace(tzinfo=timezone.utc)
+    # Zonenlose Altbestände als UTC lesen – sonst wirft der Vergleich
+    # „can't compare offset-naive and offset-aware datetimes".
+    return zp if zp.tzinfo else zp.replace(tzinfo=timezone.utc)
+
+
+def _abschlussmarke(p) -> tuple[int, datetime]:
+    """Sortierschlüssel: (abgeschlossen?, zuletzt gespeichert).
+
+    ⚠️ „generated_at" allein genügt NICHT. Es wird bei JEDER Speicherung neu
+    gesetzt, auch bei den Zwischenspeicherungen mitten im Lauf — eine Plattform,
+    die nach 29 von 52 nötigen Minuten abgeschnitten wurde, trüge also einen
+    taufrischen Zeitstempel und käme beim nächsten Mal wieder ganz nach hinten.
+    Genau das ist Change.org am 24.8.2026 passiert.
+
+    „kennzahlen" schreibt dagegen nur der Abschluss-Save (save_store mit
+    quiet=False), und weil save_store das _meta bei jedem Schreiben neu aufbaut,
+    fehlt das Feld nach einem Abbruch. Sein Fehlen ist damit der genaue Beleg
+    „dieser Lauf ist nicht zu Ende gekommen" — solche Plattformen kommen zuerst.
+    """
+    meta = core.load_meta(p.data_file)
+    abgeschlossen = 0 if not meta.get("kennzahlen") else 1
+    # Fehlender Zeitstempel = noch nie gelaufen = höchste Dringlichkeit.
+    return (abgeschlossen, _zeitpunkt(meta.get("generated_at")))
+
+
+def rotiere_auf_aeltestes(targets: list[Platform]) -> list[Platform]:
+    if len(targets) < 2:
+        return targets
+    marken = [_abschlussmarke(p) for p in targets]
+    # min() liefert bei Gleichstand den ERSTEN Treffer – damit bleibt die
+    # ursprüngliche Reihenfolge erhalten, solange nichts hinterherhinkt
+    # (frischer Klon: alle Marken gleich → start = 0 → keine Drehung).
+    start = min(range(len(targets)), key=lambda i: marken[i])
+    if start == 0:
+        return targets
+    gedreht = targets[start:] + targets[:start]
+    core.log(f"Rundlauf: Beginn bei {gedreht[0].name} "
+             f"(Position {start + 1} von {len(targets)}) – dort hat der letzte "
+             f"Lauf aufgehört.")
+    if os.environ.get("GITHUB_ACTIONS") == "true":
+        # Als Anmerkung, nicht nur ins Protokoll: das Lauf-Protokoll braucht
+        # einen Token, Anmerkungen nicht (siehe die Lehre vom 10.8.2026).
+        offen = [p.name for p, m in zip(targets, marken) if not m[0]]
+        print(f"::notice title=Rundlauf::Beginn bei {gedreht[0].name} "
+              f"(Position {start + 1}/{len(targets)}). Reihenfolge: "
+              + ", ".join(p.key for p in gedreht)
+              + (f". Ohne Abschluss im letzten Lauf: {', '.join(offen)}."
+                 if offen else "."))
+    return gedreht
 
 
 def parse_args():
@@ -232,6 +328,11 @@ def main() -> None:
             return
         targets = [p for p in PLATFORMS if p.is_live
                    and (not args.platform or p.key == args.platform)]
+        # Nur beim Sammellauf drehen. Bei --platform gibt es nichts zu drehen,
+        # und die Aufholschritte in scrape.yml (Change.org, Übersetzungen)
+        # rufen bewusst EINE Plattform auf – die soll auch die sein.
+        if not args.platform:
+            targets = rotiere_auf_aeltestes(targets)
         try:
             for p in targets:
                 core.log(f"=== Scrape: {p.name} ===")
