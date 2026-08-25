@@ -2132,6 +2132,21 @@
   function sizeThumb(pet) {
     var img = pet.querySelector("img.pet__thumb");
     if (!img) return;                       // Platzhalter: feste Höhe aus dem CSS
+    /* ⚠️ Im Magazin NICHT anfassen (Nutzerentscheidung 24.8.2026: das Bild
+       soll beim Aufklappen unverändert bleiben). Dort bestimmt allein das
+       aspect-ratio aus layouts.css die Höhe, geschlossen wie aufgeklappt.
+       Ein Pixelwert von hier würde es überstimmen und war die halbe Ursache
+       des gemeldeten Sprungs: gemessen sprang das Bild beim Aufklappen erst
+       schlagartig 250 → 224 px (eine CSS-Regel, siehe layouts.css) und
+       wanderte dann über 300 ms auf die 234 px, die diese Funktion aus dem
+       NATÜRLICHEN Seitenverhältnis rechnete. Der Knopf darunter machte die
+       Bewegung mit — erst 34 px hoch, dann zurück.
+       Eine schon gesetzte Höhe wird geräumt, sonst bliebe sie beim Wechsel
+       von Relief nach Magazin an einer offenen Karte hängen. */
+    if (state.prefs && state.prefs.layout === "magazin") {
+      if (img.style.height) img.style.height = "";
+      return;
+    }
     if (!pet.classList.contains("open")) { img.style.height = ""; return; }
     var breite = img.parentNode.clientWidth;
     if (!img.naturalWidth || !img.naturalHeight || !breite) return;
@@ -2781,34 +2796,125 @@
        braucht der Knopf keinen zweiten Zeichenweg und die Zuhörer
        hängen schon dran. */
     var SIM_VORAB = 5;
-    box.innerHTML = lbl + sim.map(function (s, i) {
+
+    /* Gleiche Petitionen bündeln (Nutzerwunsch 24.8.2026: „gleiche
+       petitionen müssen gebündelt werden, ggf in einem weiteren ausklapper
+       und mit anzahl badge rechts").
+
+       Anlass: Avaaz führt dieselbe Kampagne unter mehreren Slugs. Am
+       ausgelieferten Bestand gezählt: „Geheimes Abkommen TISA stoppen!"
+       10×, „EU-Verbot für Privatjets" 9×, „EU: Durchgreifen für die
+       Natur!" 6×. Untereinander gelistet füllten sie das sichtbare
+       Kontingent von fünf Zeilen und verdrängten die echten Treffer.
+
+       ⚠️ Gebündelt wird NUR innerhalb DERSELBEN Plattform. Dieselbe
+       Petition auf einer anderen Plattform zu zeigen ist der Kernzweck
+       dieser App — fielen die zusammen, verschwände genau die Auskunft,
+       für die es den Abschnitt gibt.
+
+       ⚠️ Ohne Titel wird NICHT gebündelt (Schlüssel fällt auf die Adresse
+       zurück): sonst landeten alle titellosen Sätze einer Plattform in
+       einem Bündel, das nichts gemeinsam hat.
+
+       ⚠️ Die drei anderen großen Plattformen haben keinen einzigen Titel,
+       der viermal oder öfter vorkommt (24.8. gemessen) — die Bündelung
+       greift dort also praktisch nie und kostet dort nichts. */
+    var gruppen = [], gIndex = {};
+    sim.forEach(function (s) {
+      var t = (txt(s.c, "title") || "").toLowerCase().replace(/\s+/g, " ").trim();
+      var key = t ? s.plat.key + " " + t : " url " + s.c.url;
+      if (gIndex[key]) { gIndex[key].alle.push(s); return; }
+      gIndex[key] = { kopf: s, alle: [s] };
+      gruppen.push(gIndex[key]);
+    });
+
+    /* Eine einzelne Zeile. `kind` = steckt in einem Bündel: dort ist der
+       Plattformname überflüssig (alle gleich) und die Unterschriftenzahl
+       das Einzige, was die Sätze unterscheidet. */
+    function simZeile(s, extra, kind) {
       var info = langInfo(s.relLang || s.plat.language || "de");
-      /* Eine ÜBERSETZUNG ist etwas anderes als ein thematisch ähnlicher
-         Treffer, und der Unterschied muss man sehen: „gleich" leitet sich aus
-         einem Ähnlichkeitswert ab (score ≥ 0,8) und kann danebenliegen, die
-         Übersetzung dagegen stammt aus einer ausdrücklichen Kennung der
-         Quelle — gleiche Kampagnennummer, gleicher Slug, verlinkter
-         Sprachwechsel. Deshalb ein eigenes Abzeichen statt einer Abstufung
-         desselben; siehe _uebersetzungen_verknuepfen in publish.py. */
       var same = s.uebersetzung
         ? '<span class="sim-trans">' +
           esc(fill(T("petition.similarTranslation",
                      "Dieselbe Petition auf {sprache}"),
             { sprache: langInfo(s.relLang || "de").name || "" })) + "</span>"
-        : (s.same ? '<span class="sim-same">' +
+        : (s.same && !kind ? '<span class="sim-same">' +
            esc(T("petition.similarSame", "gleich")) + "</span>" : "");
-      return '<button class="simrow' + (i >= SIM_VORAB ? " simrow--rest" : "") +
+      /* In einem Bündel sind Titel UND Plattform bei allen gleich — beides
+         noch einmal zu zeigen hätte das Problem nur eine Ebene tiefer
+         wiederholt. Unterscheidbar sind die Sätze über die
+         Unterschriftenzahl und, wenn die fehlt oder gleich ist, über den
+         Slug: „offener_brief_an_merz_1_0" gegen „…_excl_germany" (am
+         24.8.2026 an einem echten Bündel abgelesen). Deshalb beides. */
+      var unten;
+      if (kind) {
+        var slug = decodeURIComponent(
+          String(s.c.url || "").replace(/\/+$/, "").split("/").pop() || "");
+        unten = '<span class="simrow__p">' +
+          (s.c.signatures != null
+            ? '<span class="sig"><b>' + nf.format(s.c.signatures) + "</b> " +
+              '<i class="fa-solid fa-pen" aria-hidden="true"></i></span>' : "") +
+          (slug ? '<span class="simrow__slug">' + esc(slug) + "</span>" : "") +
+          "</span>";
+      } else {
+        unten = '<span class="simrow__p">' + esc(s.plat.name) +
+          '<span class="flag">' + info.flag + "</span></span>";
+      }
+      return '<button class="simrow' + (extra || "") +
         '" type="button" data-key="' + esc(s.plat.key) +
         '" data-url="' + esc(s.c.url) + '"><span class="simrow__t">' +
         esc(txt(s.c, "title") || T("petition.noTitle", "(ohne Titel)")) + same +
-        "</span>" +
-        '<span class="simrow__p">' + esc(s.plat.name) +
-        '<span class="flag">' + info.flag + "</span></span></button>";
+        "</span>" + unten + "</button>";
+    }
+
+    box.innerHTML = lbl + gruppen.map(function (g, i) {
+      var versteckt = i >= SIM_VORAB ? " simrow--rest" : "";
+      if (g.alle.length < 2) return simZeile(g.kopf, versteckt, false);
+      var s = g.kopf;
+      var info = langInfo(s.relLang || s.plat.language || "de");
+      /* Kopfzeile des Bündels: KEIN data-url — sie öffnet keine Petition,
+         sondern klappt auf. Ein echter <button> mit aria-expanded, damit
+         Tastatur und Sprachausgabe mitkommen. */
+      return '<div class="simgrp' + versteckt + '">' +
+        '<button class="simrow simrow--grp" type="button" aria-expanded="false">' +
+          '<span class="simrow__t">' +
+            esc(txt(s.c, "title") || T("petition.noTitle", "(ohne Titel)")) +
+            (s.same ? '<span class="sim-same">' +
+              esc(T("petition.similarSame", "gleich")) + "</span>" : "") +
+          "</span>" +
+          '<span class="simrow__p">' + esc(s.plat.name) +
+            '<span class="flag">' + info.flag + "</span>" +
+            '<span class="simcount">' + g.alle.length + "</span>" +
+          "</span>" +
+        "</button>" +
+        '<div class="simgrp__kinder" hidden>' +
+          g.alle.map(function (k) { return simZeile(k, " simrow--kind", true); }).join("") +
+        "</div>" +
+      "</div>";
     }).join("");
-    if (sim.length > SIM_VORAB) {
+
+    box.querySelectorAll(".simrow--grp").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        var kinder = btn.nextElementSibling;
+        var auf = kinder.hasAttribute("hidden");
+        /* hidden statt nur optisch verbergen: sonst blieben die Zeilen per
+           Tabulator erreichbar, obwohl sie niemand sieht. */
+        if (auf) { kinder.removeAttribute("hidden"); }
+        else { kinder.setAttribute("hidden", ""); }
+        btn.setAttribute("aria-expanded", auf ? "true" : "false");
+        btn.classList.toggle("simrow--grp-auf", auf);
+      });
+    });
+
+    /* ⚠️ Gezählt werden seit der Bündelung GRUPPEN, nicht Einzelsätze.
+       Mit sim.length stünde hier „Mehr anzeigen (12)", während nur drei
+       weitere Zeilen erscheinen — die restlichen neun stecken in Bündeln,
+       die schon sichtbar sind. */
+    if (gruppen.length > SIM_VORAB) {
       var mehr = el('<button class="simmore" type="button">' +
         esc(fill(T("petition.similarMore", "Mehr anzeigen ({n})"),
-                 { n: sim.length - SIM_VORAB })) + "</button>");
+                 { n: gruppen.length - SIM_VORAB })) + "</button>");
       mehr.addEventListener("click", function (e) {
         e.stopPropagation();
         box.querySelectorAll(".simrow--rest").forEach(function (r) {
@@ -2818,7 +2924,10 @@
       });
       box.appendChild(mehr);
     }
-    box.querySelectorAll(".simrow").forEach(function (btn) {
+    /* ⚠️ Die Kopfzeile eines Bündels ausdrücklich AUSNEHMEN: sie trägt kein
+       data-url und würde openPetitionInApp(undefined, undefined) aufrufen.
+       Ihren eigenen Zuhörer hat sie oben schon. */
+    box.querySelectorAll(".simrow:not(.simrow--grp)").forEach(function (btn) {
       btn.addEventListener("click", function (e) {
         e.stopPropagation();
         openPetitionInApp(btn.dataset.key, btn.dataset.url);

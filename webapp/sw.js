@@ -860,7 +860,12 @@
       EIN Ausgang — die Zurücktaste auf dem Begrüßungsbildschirm; „zurück"
       heißt zurück, nicht woanders hin.
       (app.js, style.css, texts.js) */
-var CACHE = "pm-cache-v51";
+/* v52: Magazin – Vorschaubild bleibt beim Aufklappen unverändert (die
+   Höhenregel HINTER dem @supports-Block hatte das aspect-ratio still
+   überstimmt); „Gleiche/Ähnliche Petitionen": Sätze derselben Plattform
+   mit gleichem Titel gebündelt – Kopfzeile mit Anzahl klappt auf, Kinder
+   zeigen Unterschriftenstand und Slug (app.js/layouts.css/style.css) */
+var CACHE = "pm-cache-v52";
 /* Versionsunabhängig – überlebt das Hochzählen von CACHE. Diese Zahl sollte ab
    jetzt NICHT mehr steigen: seit die Pakete eine Inhaltskennung tragen ("?v=",
    siehe oben) holt sich jedes geänderte Paket von selbst neu. Ein Sprung wäre

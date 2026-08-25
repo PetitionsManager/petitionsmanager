@@ -1538,21 +1538,44 @@
   align-items:center}
 /* Vorschaubild im selben 16:9 wie die Slider-Folien (gemessener
    Bestands-Median, s. o.); Bildausschnitt IMMER oben verankert, damit
-   Überschriften auf den Motiven nicht abgeschnitten werden. Beim
-   Aufklappen wird der Rahmen höher (4:3) — es kommt also unten mehr
-   vom selben Bild dazu, nichts springt (Nutzerwunsch 7.8.26). */
+   Überschriften auf den Motiven nicht abgeschnitten werden.
+
+   ⚠️⚠️ Das Bild bleibt beim Aufklappen UNVERÄNDERT (Nutzerentscheidung
+   24.8.2026: „Bild soll gar nicht wachsen"). Die `.pet.open`-Regel hält
+   deshalb genau dieselben Werte wie der geschlossene Zustand — sie ist
+   NICHT überflüssig: `.pet.open .pet__thumb` in style.css:716 trägt drei
+   Klassen und schlägt damit die Grundregel hier (Attribut + eine Klasse).
+   Ohne die Gegenregel gewönne von dort `height:11rem`, und das Bild
+   schrumpfte beim Aufklappen von 250 auf 176 px (am 24.8. gemessen,
+   nachdem die alten Wachstums-Regeln entfernt waren).
+
+   Vorgeschichte, damit das nicht zurückgebaut wird: bis zum 24.8. standen
+   hier drei Regeln, die einander widersprachen und zusammen genau den
+   Sprung erzeugten, den sie verhindern sollten.
+     · `.pet.open .pet__thumb{height:13.5rem}`  (Rückfall ohne aspect-ratio)
+     · im @supports-Block `height:auto;aspect-ratio:4/3`
+     · und DANACH nochmals `.pet.open .pet__thumb{height:14rem}`
+   Die letzte stand HINTER dem @supports-Block und hat dessen `height:auto`
+   bei gleicher Spezifität überstimmt — das `aspect-ratio:4/3` wurde für die
+   Höhe also nie wirksam. Gemessen am 24.8.: nimmt man die Inline-Höhe weg,
+   meldet der Browser `height:224px` (= 14rem) BEI `aspect-ratio:4/3`; die
+   beabsichtigten 4:3 wären 334 px gewesen. Das Bild wurde beim Aufklappen
+   also KLEINER (250 → 224 px) statt größer, und `sizeThumb()` in app.js zog
+   es danach über 300 ms auf 234 px. Der Ausklapp-Knopf machte beides mit —
+   erst 34 px hoch, dann zurück.
+   ⚠️ Jede Höhe für `.pet.open` gehört INNERHALB des @supports-Blocks —
+   steht sie dahinter, tötet sie erneut still das aspect-ratio. */
 [data-layout="magazin"] .pet__thumb{order:-1;flex:0 0 100%;width:100%;
   height:10rem;border-radius:0;margin-bottom:1rem;
   object-position:top center}
-[data-layout="magazin"] .pet.open .pet__thumb{height:13.5rem;
-  object-position:top center}
+/* Gleiche Werte wie geschlossen — hält nur style.css:716 ab. */
+[data-layout="magazin"] .pet.open .pet__thumb{height:10rem;
+  margin-bottom:1rem}
 @supports (aspect-ratio:16/9){
   [data-layout="magazin"] .pet__thumb{height:auto;aspect-ratio:16/9}
   [data-layout="magazin"] .pet.open .pet__thumb{height:auto;
-    aspect-ratio:4/3}
+    aspect-ratio:16/9}
 }
-/* Beim Aufklappen wächst der Aufmacher weiter, statt zu springen. */
-[data-layout="magazin"] .pet.open .pet__thumb{height:14rem}
 [data-layout="magazin"] .pet.open .pet__head{padding:0 0 1rem}
 /* ⚠️ VERGROESSERT 8.8.2026 (Nutzerbefund mit Bild: „wenn kein bild da ist,
    muss das logo entweder größer oder das bild weg. so sieht es nicht gut

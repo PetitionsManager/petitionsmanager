@@ -1011,6 +1011,29 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
   width:100%}
 .simrow__p{display:flex;align-items:center;gap:.375rem;font-size:.75rem;
   color:var(--muted)}
+/* Bündel gleicher Petitionen (app.js → renderSimilar, Nutzerwunsch
+   24.8.2026). Die Kopfzeile öffnet KEINE Petition, sie klappt auf — der
+   Chevron rechts sagt das, die Anzahl daneben nennt den Umfang.
+   Die Unterzeile spannt auf volle Breite, damit die Anzahl rechts steht
+   und nicht am Plattformnamen klebt. */
+.simrow--grp .simrow__p{width:100%;justify-content:space-between}
+.simcount{display:inline-flex;align-items:center;gap:.3125rem;margin-left:auto;
+  background:var(--accent-soft);color:var(--accent);font-size:.6875rem;
+  font-weight:800;border-radius:999px;padding:.0625rem .5rem}
+.simcount::after{content:"\f078";font-family:"Font Awesome 6 Free";
+  font-weight:900;font-size:.5625rem;transition:transform .2s}
+.simrow--grp-auf .simcount::after{transform:rotate(180deg)}
+/* Kinder eines Bündels: eingerückt und ruhiger, damit man sieht, dass sie
+   zur Zeile darüber gehören. Verborgen wird über das hidden-Attribut in
+   app.js, NICHT hier — sonst blieben sie per Tabulator erreichbar. */
+.simgrp__kinder{padding-left:.875rem;border-left:.125rem solid var(--line);
+  margin:0 0 .5rem .375rem}
+.simrow--kind{background:transparent;margin-bottom:.375rem}
+/* Der Slug ist das Einzige, was zwei Sätze eines Bündels sicher trennt —
+   er darf deshalb nicht wegfallen, aber auch nicht die Zeile sprengen. */
+.simrow--kind .simrow__p{width:100%;gap:.5rem}
+.simrow__slug{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  font-family:var(--mono,monospace);font-size:.6875rem;opacity:.85;min-width:0}
 .sim-same{display:inline-block;margin-left:.4375rem;background:var(--hot);
   color:var(--on-hot);font-size:.625rem;font-weight:800;letter-spacing:.03em;
   text-transform:uppercase;border-radius:999px;padding:.0625rem .4375rem;
