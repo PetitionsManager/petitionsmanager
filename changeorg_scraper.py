@@ -369,10 +369,83 @@ def run(args) -> None:
     fetcher = core.Fetcher(delay=args.delay, headers=FETCH_HEADERS)
     ts = now_iso()
 
-    def save(quiet=True, **extra):
-        core.save_store(store, DATA_FILE, extra_meta=extra, quiet=quiet)
+    # ⚠️⚠️ Was dieser Lauf über sich selbst weiß, wandert bei JEDER Speicherung
+    # mit ins _meta. Grund: save_store baut das _meta bei jedem Schreiben neu
+    # auf (nur FIELD_META + generated_at + petition_count + extra_meta). Ohne
+    # das würden die Zwischenspeicherungen der Nachprüfung genau die Felder
+    # wieder wegwerfen, für die die Entdeckung eben gelaufen ist — und ein
+    # abgebrochener Lauf hinterließe einen Bestand ohne "available", den das
+    # Dashboard laut write_dashboard() als „alle gefundenen abgearbeitet"
+    # ausweist (available = meta.get("available") or len(store)). Genau so kam
+    # am 24.8.2026 die Falschauskunft „2067 von ~2067 · 0 neue" zustande.
+    lauf_meta: dict = {}
 
+    def save(quiet=True, **extra):
+        core.save_store(store, DATA_FILE, extra_meta={**lauf_meta, **extra},
+                        quiet=quiet)
+
+    # Vor der Entdeckung festhalten: „bekannt" meint den Stand zu LAUFBEGINN.
+    # Sonst zählten die gleich frisch angelegten Petitionen als nachzuprüfen
+    # (sie fielen zwar über skip_recent wieder heraus, aber die Zahl im
+    # Protokoll wäre falsch).
     known = list(store.keys())
+
+    # ------------------------------------------------------------------
+    # 1. ENTDECKUNG — bewusst VOR der Nachprüfung
+    # ------------------------------------------------------------------
+    # ⚠️⚠️ Die Reihenfolge war bis zum 24.8.2026 umgekehrt, und das hat die
+    # Plattform still zum Erliegen gebracht: erst wurden alle ~2067 bekannten
+    # Sätze nachgeprüft (bei 1,5 s Pause rund 52 min), erst danach kam die
+    # Entdeckung. Change.org steht im Sammellauf an vierter Stelle und bekam
+    # am 24.8. nur noch 29 der 300 Minuten — der Lauf wurde also mitten in der
+    # Nachprüfung abgeschnitten und erreichte die Entdeckung NIE. Gemessen:
+    # die jüngste ausgelieferte Petition startete am 8.8., während die
+    # August-Sitemap 255 Kandidaten führte, die uns fehlten.
+    #
+    # Der Tausch kostet bei Zeitnot die Auffrischung der Unterschriftenzahlen
+    # (die holt der nächste Lauf über skip_recent nach) und rettet dafür das,
+    # was sonst gar nicht mehr ankommt: neue Petitionen. Die Sitemaps stehen im
+    # Index nach Monaten absteigend, die neuesten Kandidaten liegen also vorn
+    # und fallen nicht unter den Deckel MAX_NEW_PER_RUN.
+    log("Scanne Sitemaps nach deutschen Kandidaten …")
+    discovered = discover_slugs(fetcher)
+    lauf_meta["available"] = len(discovered)
+    repariert = heile_abgeschnittene(store, discovered, save)
+    new_slugs = repariert + [s for s in discovered
+                             if s not in store][:MAX_NEW_PER_RUN]
+    if args.limit:
+        new_slugs = new_slugs[:args.limit]
+    log(f"{len(new_slugs)} Kandidaten zum Prüfen "
+        f"(Gesamt im Store: {len(store)}).")
+    prog(phase="scrape", current=0, total=len(new_slugs),
+         message="Beginne Scrape …")
+
+    for i, slug in enumerate(new_slugs, 1):
+        log(f"({i}/{len(new_slugs)}) {slug[:70]}")
+        prog(current=i, total=len(new_slugs), message=slug[:60])
+        status, rec = scrape_petition(fetcher, slug)
+        if status == "error":
+            continue
+        if status == "skip":
+            log("  übersprungen (nicht DE).")
+            continue
+        core.upsert(store, slug, rec or {}, {}, status, ts, f"{BASE_URL}/p/{slug}")
+        save()
+
+    # Ergebnis der Entdeckung leise festschreiben, BEVOR die lange Nachprüfung
+    # beginnt. Ein Abbruch dort lässt den Bestand dann mit richtigen Zahlen
+    # zurück statt mit einem leeren _meta.
+    # ⚠️ Bewusst quiet=True: save_store(quiet=False) hängt einen Eintrag an
+    # lauf_verlauf und stößt die Selbstmeldung an. Zweimal je Lauf aufgerufen
+    # verglichen die Kennzahlen sich mit sich selbst, und der Melder für
+    # Bestandseinbrüche wäre blind.
+    lauf_meta["new_petitions_last_run"] = [
+        s for s, r in store.items() if r.get("first_seen") == ts]
+    save()
+
+    # ------------------------------------------------------------------
+    # 2. NACHPRÜFUNG der bekannten Petitionen
+    # ------------------------------------------------------------------
     if known and not args.no_recheck and not args.limit:
         log(f"Prüfe {len(known)} bekannte Petition(en) …")
         prog(phase="check-known", current=0, total=len(known),
@@ -399,41 +472,15 @@ def run(args) -> None:
         core.entferne_skip(store, skip_slugs, geprueft, "Change.org",
                            grund_de="nicht DE", grund_en="not DE", save=save)
 
-    log("Scanne Sitemaps nach deutschen Kandidaten …")
-    discovered = discover_slugs(fetcher)
-    # Die reparierten Slugs stehen jetzt im Store und fielen deshalb aus der
-    # Auswahl unten heraus ("s not in store"). Die Schleife über die bekannten
-    # Petitionen ist aber längst durch – ohne sie hier voranzustellen, bliebe
-    # ihr Inhalt bis zum nächsten Lauf leer.
-    repariert = heile_abgeschnittene(store, discovered, save)
-    new_slugs = repariert + [s for s in discovered
-                             if s not in store][:MAX_NEW_PER_RUN]
-    if args.limit:
-        new_slugs = new_slugs[:args.limit]
-    log(f"{len(new_slugs)} Kandidaten zum Prüfen "
-        f"(Gesamt im Store: {len(store)}).")
-    prog(phase="scrape", current=0, total=len(new_slugs),
-         message="Beginne Scrape …")
-
-    for i, slug in enumerate(new_slugs, 1):
-        log(f"({i}/{len(new_slugs)}) {slug[:70]}")
-        prog(current=i, total=len(new_slugs), message=slug[:60])
-        status, rec = scrape_petition(fetcher, slug)
-        if status == "error":
-            continue
-        if status == "skip":
-            log("  übersprungen (nicht DE).")
-            continue
-        core.upsert(store, slug, rec or {}, {}, status, ts, f"{BASE_URL}/p/{slug}")
-        save()
-
+    # Neu zählen: die Nachprüfung kann über heile_abgeschnittene/merge_records
+    # weitere Sätze angelegt haben.
     new_petitions = [s for s, r in store.items() if r.get("first_seen") == ts]
+    lauf_meta["new_petitions_last_run"] = new_petitions
     if new_petitions:
         log(f"NEU: {len(new_petitions)} neue Petition(en) in diesem Lauf.")
 
     prog(message="Speichere & baue HTML …")
-    save(quiet=False, new_petitions_last_run=new_petitions,
-         available=len(discovered))
+    save(quiet=False)
     core.write_list_html(PLATFORM)
     log("Fertig (Change.org).")
 
