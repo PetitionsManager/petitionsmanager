@@ -56,6 +56,23 @@ RESPECT_ROBOTS  = True
 ROBOTS_RETRIES  = 2            # Versuche für robots.txt selbst. Ein einzelner
                                # 5xx darf keine ganze Plattform aussetzen lassen
                                # – danach gilt aber konservativ „gesperrt".
+# ⚠️ Ein VERBINDUNGSFEHLER ist etwas anderes als ein Statuscode, und bis zum
+# 24.8.2026 wurden beide gleich behandelt: zwei Versuche, ~3 s Pause, dann ist
+# der Host für den ganzen Lauf weg. Am 24.8. an den echten Antworten gemessen:
+#   · action.eko.org         HTTP 429, 31 KB HTML, KEIN Retry-After — die
+#     Prüfseite des Vercel-„Security Checkpoint", auch vom Rechner des Nutzers
+#     aus. Konstant. Mehr Versuche brächten nichts als Last.
+#   · www.europarl.europa.eu HTTP 202, AWS-WAF-JS-Prüfung. Ebenfalls konstant
+#     (siehe pm_europarl_waf_gesperrt: 3 Versuche, eine Session, null Cookies).
+#   · www.openpetition.de    „Network is unreachable" — von hier aus HTTP 200,
+#     in der CI aber in 3 von 12 Nachtläufen tot. Also SPRUNGHAFT.
+# Ein Statuscode ist eine Antwort und wiederholt sich; ein Verbindungsabbruch
+# ist keine und kann beim nächsten Versuch weg sein. Deshalb bekommt nur der
+# zweite mehr Anläufe. Die Ursache des openPetition-Ausfalls ist damit NICHT
+# geklärt — die naheliegende IPv6-Vermutung trägt nicht: weact, avaaz und
+# 350.org haben ebenfalls AAAA-Einträge und fallen nie aus.
+ROBOTS_NETZ_RETRIES = 4        # Versuche, wenn gar keine Antwort ankommt
+ROBOTS_NETZ_PAUSE   = 5.0      # Sekunden Grundpause, wächst je Versuch
 
 # Wie viele Archiv-Kandidaten ein Lauf höchstens prüft (siehe wayback_slugs).
 # Bei Avaaz stehen rund 1.700 Kandidaten an – die alle in einem Lauf zu prüfen
@@ -711,7 +728,14 @@ class Fetcher:
         # Cloudflare mit 403 beantwortet – dann hielten wir eine erreichbare
         # robots.txt fälschlich für gesperrt.
         letzter = "?"
-        for versuch in range(1, ROBOTS_RETRIES + 1):
+        # Die Grenze hängt davon ab, WORAN es scheitert (siehe die Begründung
+        # bei ROBOTS_NETZ_RETRIES): eine Antwort — auch eine abweisende — ist
+        # eine Auskunft und wiederholt sich; ein Verbindungsabbruch ist keine
+        # und kann beim nächsten Anlauf weg sein. Sie wird deshalb in jedem
+        # Durchgang neu gesetzt, nicht einmal vorab.
+        grenze, versuch = ROBOTS_RETRIES, 0
+        while versuch < grenze:
+            versuch += 1
             try:
                 resp = self.session.get(f"https://{netloc}/robots.txt",
                                         timeout=REQUEST_TIMEOUT)
@@ -727,15 +751,20 @@ class Fetcher:
                     log(f"robots.txt von {netloc}: HTTP {resp.status_code} – "
                         f"es gibt keine, alles erlaubt.")
                     return None
-                # 401/403/429/5xx: einmal nachfassen, dann konservativ.
-                if versuch < ROBOTS_RETRIES:
+                # 401/403/429/5xx: einmal nachfassen, dann konservativ. Der
+                # Server hat geantwortet — mehr Anläufe holen dieselbe Antwort.
+                grenze = ROBOTS_RETRIES
+                if versuch < grenze:
                     time.sleep(self.delay * versuch * 2)
-                    continue
             except requests.RequestException as exc:
+                # Gar keine Antwort: zäher nachfassen und länger warten.
                 letzter = str(exc)
-                if versuch < ROBOTS_RETRIES:
-                    time.sleep(self.delay * versuch * 2)
-                    continue
+                grenze = ROBOTS_NETZ_RETRIES
+                if versuch < grenze:
+                    log(f"robots.txt von {netloc}: Verbindung fehlgeschlagen "
+                        f"(Versuch {versuch}/{grenze}) – neuer Anlauf in "
+                        f"{ROBOTS_NETZ_PAUSE * versuch:.0f}s.")
+                    time.sleep(ROBOTS_NETZ_PAUSE * versuch)
 
         # ⚠️ Als BEFUND melden, nicht nur ins Protokoll schreiben. Am 8.8.2026
         # nachgemessen: Ein komplett ausgelassener Host erzeugt in
