@@ -278,15 +278,21 @@ jobs:
             fi
           done
 
-      - name: "Change.org aufholen (500/Lauf, wiederholt bis zur gemeinsamen Frist)"
+      - name: "Change.org aufholen (500/Lauf, eigener Zuschlag über die Frist hinaus)"
         if: ${{ !inputs.nur_veroeffentlichen }}
         run: |
+          # ⚠️ Eigener Zuschlag von 15 min ÜBER die gemeinsame FRIST (24.8.2026):
+          # vorher hing die Schleife an derselben FRIST, die der Sammellauf am
+          # 23./24.8. bereits restlos aufgebraucht hatte – der Schritt lief dann
+          # 0 Sekunden, genau wenn das Aufholen gebraucht wurde. 315 min plus
+          # Veröffentlichen bleiben unter timeout-minutes: 350.
+          AUFHOL=$(( FRIST + 15*60 ))
           while ! python3 ci_changeorg_done.py; do
-            if [ "$(date +%s)" -ge "$FRIST" ]; then
+            if [ "$(date +%s)" -ge "$AUFHOL" ]; then
               echo "::warning::Zeitrahmen erreicht – Change.org-Rest folgt beim nächsten Lauf."
               break
             fi
-            rest=$(( FRIST - $(date +%s) ))
+            rest=$(( AUFHOL - $(date +%s) ))
             set +e
             timeout --signal=INT "$rest" python3 monitor.py --platform changeorg
             code=$?
