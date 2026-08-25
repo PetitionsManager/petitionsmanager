@@ -2501,13 +2501,53 @@ def _live_card(platform: Platform, schnappschuss: bool = False,
     # Gegenproben am 3.8.2026: innn.it 2.040 Quelle / 2.045 bei uns, Europarl
     # 100 / 98. Wer echte Vollständigkeit wissen will, muss die Quellzahl je
     # Plattform holen — bis dahin sagt der Balken, was er kann: abgearbeitet.
-    available = meta.get("available") or len(store) or 1
-    pct = min(100, round(len(store) / available * 100)) if available else 100
-    comp_cls, comp_lbl, comp_lbl_en = (
-        ("full", "alle gefundenen abgearbeitet", "all found items processed")
-        if pct >= 95 else
-        ("grow", "Rückstand", "backlog") if pct >= 50 else
-        ("low", "großer Rückstand", "large backlog"))
+    # ⚠️⚠️ 24.8.2026: der Rückfall „available or len(store)" war eine
+    # FALSCHAUSKUNFT, und zwar in den beiden Fällen, in denen die Kachel
+    # gebraucht wird:
+    #   · available FEHLT      → der Lauf ist vor seinem Abschluss-Save
+    #     abgebrochen (save_store baut das _meta bei jedem Schreiben neu auf).
+    #     Change.org zeigte so „2067 von ~2067 · alle gefundenen abgearbeitet",
+    #     obwohl es die Entdeckung nie erreicht hatte.
+    #   · available ist 0      → die Entdeckung hat nichts gefunden, weil der
+    #     Host ausgelassen wurde (robots.txt nicht lesbar) oder der Zweig tot
+    #     ist. openPetition zeigte so „2031 von ~2031", ohne dass von dort ein
+    #     einziger frischer Satz kam. 0 ist falsy und lief in denselben
+    #     Rückfall.
+    # Beides sah wie Vollständigkeit aus. Es ist aber „wir wissen es nicht" —
+    # und das muss dranstehen, sonst versteckt die Kachel genau den Ausfall,
+    # den sie melden soll. Zwei Wochen Stillstand sind so unbemerkt geblieben.
+    available = meta.get("available")
+    if not available:
+        pct = 0
+        comp_cls = "unbekannt"
+        comp_wert, comp_wert_en = "—", "—"
+        if "available" in meta:
+            # 0 gefunden: die Quelle wurde erreicht, hat aber nichts geliefert.
+            comp_sub = (f"{len(store)} im Bestand · die Entdeckung fand in "
+                        f"diesem Lauf NICHTS – Quelle ausgelassen oder Zweig "
+                        f"ausgefallen; die Zahlen stammen aus früheren Läufen")
+            comp_sub_en = (f"{len(store)} on record · discovery found NOTHING "
+                           f"in this run – source skipped or branch broken; "
+                           f"the numbers are from earlier runs")
+        else:
+            comp_sub = (f"{len(store)} im Bestand · der Lauf ist vor seinem "
+                        f"Abschluss abgebrochen, wie viele Kandidaten es gibt "
+                        f"ist unbekannt")
+            comp_sub_en = (f"{len(store)} on record · the run was cut off "
+                           f"before finishing, the number of candidates is "
+                           f"unknown")
+    else:
+        pct = min(100, round(len(store) / available * 100))
+        comp_wert, comp_wert_en = f"{pct}%", f"{pct}%"
+        comp_cls, comp_lbl, comp_lbl_en = (
+            ("full", "alle gefundenen abgearbeitet", "all found items processed")
+            if pct >= 95 else
+            ("grow", "Rückstand", "backlog") if pct >= 50 else
+            ("low", "großer Rückstand", "large backlog"))
+        comp_sub = (f"{len(store)} von ~{available} gefundenen Kandidaten "
+                    f"· {comp_lbl}")
+        comp_sub_en = (f"{len(store)} of ~{available} discovered candidates "
+                       f"· {comp_lbl_en}")
 
     # Einbruch des Online-Bestands = fast immer ein Quellenproblem, kein echtes
     # Verschwinden der Petitionen (siehe save_store).
@@ -2600,11 +2640,10 @@ def _live_card(platform: Platform, schnappschuss: bool = False,
         <div class="cs"><div class="n">{cats}</div>{_zs("Kategorien", "Categories", klasse="l", tag="div")}</div>
       </div>
       <div class="completeness {comp_cls}">
-        <div class="completeness__head">{_zs("Abgearbeitet", "Processed")}<b>{pct}%</b></div>
+        <div class="completeness__head">{_zs("Abgearbeitet", "Processed")}
+          {_zs(comp_wert, comp_wert_en, tag="b")}</div>
         <div class="completeness__bar"><div class="completeness__fill" style="width:{pct}%"></div></div>
-        {_zs(f"{len(store)} von ~{available} gefundenen Kandidaten · {comp_lbl}",
-             f"{len(store)} of ~{available} discovered candidates · {comp_lbl_en}",
-             klasse="completeness__sub")}
+        {_zs(comp_sub, comp_sub_en, klasse="completeness__sub")}
       </div>
       {warn_html}
       {steckbrief}
@@ -3098,6 +3137,15 @@ _DASHBOARD_TEMPLATE = """<!DOCTYPE html>
   .completeness.full  .completeness__fill{background:var(--online)}
   .completeness.grow  .completeness__fill{background:var(--grow)}
   .completeness.low   .completeness__fill{background:var(--offline)}
+  /* „unbekannt" = available fehlt (Lauf abgebrochen) oder ist 0 (Quelle
+     ausgelassen). Bewusst KEIN leerer Balken: 0 % läse sich wie eine Messung,
+     und genau diese Verwechslung hat den Ausfall vom 24.8.2026 zwei Wochen
+     lang versteckt. Die Schraffur sagt „hier wurde nichts gemessen", der
+     Wert steht als „—" in der Warnfarbe. */
+  .completeness.unbekannt .completeness__bar{
+      background:repeating-linear-gradient(135deg,
+        var(--line) 0 6px, var(--bg) 6px 12px)}
+  .completeness.unbekannt .completeness__head b{color:var(--warn-ink)}
   .healthwarn{margin:0 0 12px;padding:8px 10px;border-radius:8px;font-size:12px;
               line-height:1.4;background:var(--warn-bg);color:var(--warn-ink);
               border:1px solid var(--warn-line)}
