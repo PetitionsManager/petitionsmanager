@@ -19,7 +19,8 @@
 #    Text stehen direkt im HTML (kein XHR nötig).
 #  - .progress-box: "470.240 Unterschriften 94 % 500.000 für Sammelziel"
 #    → Unterschriften + Sammelziel.
-#  - Statusleiste: "Gestartet Januar 2025 …" → Startdatum (Monatsgenau).
+#  - Statusleiste: "Gestartet 28.08.2026 …" → Startdatum. ⚠️ Die GENAUIGKEIT
+#    hängt am Alter der Petition, siehe STARTED_TAG_RE.
 #  - .petition-description: Petitionstext; erste Zeile "Petition richtet
 #    sich an: <Empfänger>" wird als Adressat extrahiert. Die "Begründung"
 #    steht in einem weiteren .unfold-container-text direkt darunter.
@@ -32,6 +33,7 @@
 
 from __future__ import annotations
 
+import datetime as _dt
 import re
 from pathlib import Path
 
@@ -70,7 +72,23 @@ EIGENE_KATEGORIE_RE = re.compile(
 # "470.240 Unterschriften" bzw. "500.000 für Sammelziel"
 SIG_RE  = re.compile(r"([\d.]+)\s*Unterschrift", re.I)
 GOAL_RE = re.compile(r"([\d.]+)\s*für Sammelziel", re.I)
-STARTED_RE = re.compile(r"Gestartet\s+([A-Za-zäöü]+)\s+(\d{4})")
+# Die Statusleiste nennt das Startdatum in DREI Genauigkeiten, je nach Alter
+# der Petition (29.8.2026 an echten Seiten abgelesen):
+#     "Gestartet 28.08.2026"   frisch gestartet    → tagesgenau
+#     "Gestartet Mai 2026"     einige Monate alt   → monatsgenau
+#     "Gestartet 2024"         alt                 → nur das Jahr
+# ⚠️⚠️ Bis zum 29.8.2026 kannte der Ausdruck NUR die mittlere Form — und das
+# war kein bloßes Loch, sondern ein STILLER Ausfall genau am frischen Ende:
+# die tagesgenauen (also die neuesten) Petitionen fielen heraus, das jüngste
+# start_date im Bestand stand deshalb seit dem 1.5.2026 still, während der
+# Lauf weiter neue Petitionen fand. Der Beweis kam aus dem Bestand selbst:
+# Mai 2026 wuchs zwischen dem 9.8. und 29.8. von 84 auf 291 Sätze, weil
+# Mai-Petitionen in dieser Zeit die Altersschwelle überschritten und von
+# "28.05.2026" auf "Mai 2026" umsprangen.
+# ⚠️ Wer hier etwas ändert, prüfe ALLE DREI Formen. Eine Stichprobe aus einer
+# einzigen Altersklasse zeigt immer nur eine davon und sieht dabei heil aus.
+STARTED_TAG_RE   = re.compile(r"Gestartet\s+(\d{1,2})\.(\d{1,2})\.(\d{4})")
+STARTED_MONAT_RE = re.compile(r"Gestartet\s+([A-Za-zÄÖÜäöüß]+)\s+(\d{4})")
 STARTER_RE = re.compile(r"Vielen Dank für Ihre Unterstützung,\s*(.+?)\s*$")
 RECIPIENT_RE = re.compile(r"Petition richtet sich an:\s*(.+)", re.S)
 
@@ -140,6 +158,32 @@ def _meta(soup: BeautifulSoup, prop: str) -> str | None:
 
 def _num(s: str) -> int:
     return int(re.sub(r"\D", "", s) or 0)
+
+
+def _startdatum(text: str) -> str | None:
+    """ISO-Startdatum aus dem Text der Statusleiste – oder None.
+
+    Nimmt die genaueste Form, die dasteht (siehe STARTED_TAG_RE). Die
+    monatsgenaue Form füllt den Tag mit 01 auf; das tat sie schon immer und
+    steht so auch im Bestand.
+
+    ⚠️ Die JAHRESform bleibt bewusst unbeantwortet. Ein "Gestartet 2024" auf
+    2024-01-01 zu runden erfände einen Monat, der bis zu elf Monate daneben
+    liegt — und die App zeigt den Wert tagesgenau an ("Start: 2024-01-01").
+    Ein fehlender Wert ist sichtbar, ein erfundener nicht.
+    """
+    m = STARTED_TAG_RE.search(text)
+    if m:
+        tag, monat, jahr = (int(g) for g in m.groups())
+        try:
+            return _dt.date(jahr, monat, tag).isoformat()
+        except ValueError:      # 31.02. o. ä. – lieber nichts als Unsinn
+            return None
+    m = STARTED_MONAT_RE.search(text)
+    if m and m.group(1).lower() in GERMAN_MONTHS:
+        return (f"{int(m.group(2)):04d}-"
+                f"{GERMAN_MONTHS[m.group(1).lower()]:02d}-01")
+    return None
 
 
 # Die Zwischenüberschrift über .petition-reason steht NICHT im Fragment, wir
@@ -222,13 +266,14 @@ def parse_detail(html: str, url: str, lang: str = "de") -> dict:
         if m:
             rec["goal"] = _num(m.group(1))
 
-    # Startdatum (monatsgenau) aus der Statusleiste.
+    # Startdatum aus der Statusleiste (Genauigkeit je nach Alter, s. o.).
+    # Nur bei Erfolg setzen: upsert() überginge ein None zwar ohnehin, aber so
+    # trägt auch die Übersetzungsfassung keinen leeren Schlüssel.
     bar = soup.select_one(".module-petition-status-bar")
     if bar:
-        m = STARTED_RE.search(bar.get_text(" ", strip=True))
-        if m and m.group(1).lower() in GERMAN_MONTHS:
-            rec["start_date"] = (f"{int(m.group(2)):04d}-"
-                                 f"{GERMAN_MONTHS[m.group(1).lower()]:02d}-01")
+        datum = _startdatum(bar.get_text(" ", strip=True))
+        if datum:
+            rec["start_date"] = datum
     return rec
 
 

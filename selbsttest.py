@@ -22,6 +22,7 @@ from __future__ import annotations
 import sys
 from datetime import date, timedelta
 
+import openpetition_scraper as openpetition
 import petitions_core as core
 
 fehler: list[str] = []
@@ -164,6 +165,51 @@ pruefe("Lösch-Bremse zwischen 10 % und 50 %",
        0.10 <= core.SKIP_LOESCH_ANTEIL_MAX <= 0.50, True)
 pruefe("absolute Untergrenze der Bremse zwischen 5 und 50",
        5 <= core.SKIP_LOESCH_MIN_ABS <= 50, True)
+
+
+# ---------------------------------------------------------------------------
+# 3. openpetition._startdatum() — die drei Genauigkeiten der Statusleiste
+#
+# Warum das hier steht (29.8.2026): Der Ausdruck kannte vier Monate lang NUR
+# die monatsgenaue Form. Weil openPetition frische Petitionen TAGESGENAU
+# auszeichnet, fiel dabei ausgerechnet das Neueste heraus — das jüngste
+# start_date im Bestand stand seit dem 1.5.2026 still, während der Lauf weiter
+# neue Petitionen fand. Kein Melder schlug an, denn der Abruf klappte ja.
+#
+# ⚠️ Die Fälle decken bewusst ALLE DREI Formen ab. Ein Test, der nur die
+# monatsgenaue prüft, wäre die ganzen vier Monate über grün geblieben — er
+# hätte die Lücke nicht bloß übersehen, sondern beglaubigt.
+# ⚠️ Die Textbausteine sind ABGELESEN, nicht erfunden: alle drei stammen von
+# echten Detailseiten (29.8.2026 abgerufen).
+# ---------------------------------------------------------------------------
+print()
+print("openpetition._startdatum() — drei Datumsformate der Statusleiste")
+
+for text, soll, was in [
+    # muss greifen
+    ("Gestartet 28.08.2026 Sammlung noch > 5 Monate Einreichung",
+     "2026-08-28", "tagesgenau (frische Petition)"),
+    ("Gestartet Mai 2026 Sammlung noch > 9 Wochen Einreichung",
+     "2026-05-01", "monatsgenau → Tag 01"),
+    ("Gestartet März 2025 Sammlung", "2025-03-01", "Monat mit Umlaut"),
+    ("Gestartet 01.01.2020 Sammlung", "2020-01-01", "einstellige Tage/Monate"),
+    # darf NICHT greifen — die Gegenproben
+    ("Gestartet 2024 Sammlung noch > 4 Monate", None,
+     "nur Jahr → bewusst kein Datum statt erfundenem Monat"),
+    ("Gestartet 31.02.2026 Sammlung", None, "unmöglicher Tag → nichts"),
+    ("Gestartet 28.13.2026 Sammlung", None, "Monat 13 → nichts"),
+    ("Gestartet Frühling 2026", None, "kein Monatsname → nichts"),
+    ("Sammlung noch > 5 Monate Einreichung", None,
+     "ohne das Wort Gestartet → nichts"),
+    ("", None, "leerer Text → nichts"),
+]:
+    pruefe(was, openpetition._startdatum(text), soll)
+
+# Die Reihenfolge im Ausdruck ist keine Geschmacksfrage: stünde die
+# monatsgenaue Form zuerst und wäre sie etwas großzügiger geschnitten, griffe
+# sie in „Gestartet 28.08.2026" nach der falschen Zahl.
+pruefe("tagesgenau schlägt monatsgenau (Reihenfolge)",
+       openpetition._startdatum("Gestartet 28.08.2026"), "2026-08-28")
 
 
 # ---------------------------------------------------------------------------
