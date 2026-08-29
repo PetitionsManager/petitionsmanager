@@ -362,7 +362,30 @@
     var st = r.i18n_state && r.i18n_state[SPRACHE];
     return st === "fehlt" ? "fehlt" : "ungeklärt";
   }
-  function platInfo(key) { return PLATS[key] || {}; }
+  /* ---- Sprachzwillinge erben die Marke (29.8.2026) ------------------------
+     Seit 1b7cf8c liefert der Sammellauf je Quelle einen Eintrag PRO SPRACHE:
+     neben "changeorg" auch "changeorg_en". platforms.js führt aber weiterhin
+     nur die elf Grundschlüssel — und das soll so bleiben, denn Logo,
+     Hausfarben, Gründungsjahr und Wikipedia-Artikel gelten für beide
+     Einträge: es ist dieselbe Organisation, nur die Sprachhälfte ihres
+     Bestandes. Ohne diese Auflösung lief platInfo() für die sechs
+     _en-Einträge ins leere Objekt; sie standen als nackter Anfangsbuchstabe
+     ("3", "A", "C", "E", "F", "W") und OHNE Markenfarbe in der Liste. Nur
+     "European Parliament" sah richtig aus — das ist ein Grundschlüssel.
+
+     ⚠️ Abgeschnitten wird nur, wenn der Rest WIRKLICH eine bekannte
+     Plattform ist. Sonst würde ein künftiger Schlüssel mit Unterstrich still
+     auf einen fremden Eintrag zeigen und die falsche Marke tragen — ein
+     unbekannter Schlüssel behält lieber seine Initiale. Damit trägt die
+     Regel auch für _fr/_es, ohne dass hier etwas nachzupflegen wäre. */
+  function basisKey(key) {
+    var k = String(key || "");
+    if (PLATS[k]) return k;
+    var i = k.lastIndexOf("_");
+    var basis = i > 0 ? k.slice(0, i) : "";
+    return PLATS[basis] ? basis : k;
+  }
+  function platInfo(key) { return PLATS[basisKey(key)] || {}; }
 
   /* ---- Plattform-Stammdaten in der gewählten Sprache ----------------------
      platInfo() bleibt die Quelle für alles Sprachlose (Farben, Logodatei,
@@ -456,8 +479,11 @@
      weiter die Maske. Die App kann daran also nicht scheitern. */
   var LOGO_READY = {};   // key -> true, sobald die Marke im Bogen steht
   var LOGO_AR = {};      // key -> Seitenverhältnis AUS DER DATEI
+  /* Über basisKey(): der Bogen wird aus PLATS gebaut, trägt also nur die elf
+     Grundschlüssel. "changeorg_en" muss auf dasselbe <symbol> zeigen, sonst
+     zeigt <use> ins Leere — sichtbar als leeres Kästchen statt der Marke. */
   function logoSymbolId(key) {
-    return "pl-" + String(key).replace(/[^A-Za-z0-9_-]/g, "");
+    return "pl-" + basisKey(key).replace(/[^A-Za-z0-9_-]/g, "");
   }
   function loadLogoSprite() {
     var keys = [], k;
@@ -511,7 +537,7 @@
        logoAR in platforms.js ist nur der Rückfall. Genau diese doppelte
        Buchführung war am 29.7.26 die Fehlerquelle: der Wert dort stand für
        innn.it auf 2,64, die Datei zeichnete 3,65. */
-    var ar = LOGO_AR[key] || info.logoAR || 4;
+    var ar = LOGO_AR[basisKey(key)] || info.logoAR || 4;
     /* Normierung, seit 3.8.26 mit der VIERTEN Wurzel statt der zweiten
        (Nutzerwunsch: „Bundestag-Logo größer, openPetition auch, WeMove auch").
        Die zweite Wurzel macht die FLÄCHE aller Marken gleich — mathematisch
@@ -551,7 +577,7 @@
        hängt xlink:href von selbst in den richtigen Namensraum, eine eigene
        Namensraum-Angabe braucht es dafür nicht. */
     var ziel = "#" + logoSymbolId(key);
-    var marke = LOGO_READY[key]
+    var marke = LOGO_READY[basisKey(key)]
       ? '<svg class="plogo__i" aria-hidden="true" focusable="false"><use href="' +
         ziel + '" xlink:href="' + ziel + '"/></svg>'
       : "";
@@ -2890,7 +2916,14 @@
 
        ⚠️ Ohne Titel wird NICHT gebündelt (Schlüssel fällt auf die Adresse
        zurück): sonst landeten alle titellosen Sätze einer Plattform in
-       einem Bündel, das nichts gemeinsam hat.
+       einem Bündel, das nichts gemeinsam hat. Der Plattformschlüssel steht
+       dabei VOR der Fallunterscheidung, gilt also für beide Zweige — bis
+       29.8.2026 fehlte er im Adress-Rückfall, womit zwei titellose Sätze
+       verschiedener Plattformen mit gleicher Adresse entgegen der Regel oben
+       zusammengefallen wären. Am echten Bestand folgenlos (78.763 Sätze
+       geprüft: 0 ohne Titel, 0 Adresse unter mehreren Plattformen), weil
+       relatedFromData leere Adressen schon vorher aussortiert — aber die
+       Regel darf nicht davon abhängen, dass die Daten sie nicht verletzen.
 
        ⚠️ Die drei anderen großen Plattformen haben keinen einzigen Titel,
        der viermal oder öfter vorkommt (24.8. gemessen) — die Bündelung
@@ -2906,7 +2939,7 @@
     var gruppen = [], gIndex = {};
     sim.forEach(function (s) {
       var t = (txt(s.c, "title") || "").toLowerCase().replace(/\s+/g, " ").trim();
-      var key = t ? s.plat.key + "\x1f" + t : "\x1furl\x1f" + s.c.url;
+      var key = s.plat.key + "\x1f" + (t || "url\x1f" + s.c.url);
       if (gIndex[key]) { gIndex[key].alle.push(s); return; }
       gIndex[key] = { kopf: s, alle: [s] };
       gruppen.push(gIndex[key]);
@@ -3550,6 +3583,64 @@
       '<div class="ptools__body"></div></details>');
     content.appendChild(tools);
     var toolsBuilt = false;
+
+    /* ---- Abkürzung zu den Neuzugängen (Nutzerwunsch 29.8.2026) ------------
+       Ein Knopf, der die Sortierung auf „Datum, neueste zuerst" stellt —
+       dieselbe Wirkung wie der Chip im Ausklapper, nur ohne ihn aufklappen
+       zu müssen.
+
+       ⚠️ Bewusst NICHT als „zeigt dir die N neuen" beschriftet: `new` zählt,
+       was der letzte Lauf ENTDECKT hat, sortiert wird aber nach start_date.
+       Ein Nachtrag (--backfill beim Bundestag) bringt alte Petitionen neu
+       herein, die danach weit unten stehen. Der Knopf nennt die Zahl deshalb
+       als ANLASS und die Sortierung als WIRKUNG, getrennt durch den
+       Mittelpunkt — er verspricht keine Auswahl, die er nicht trifft.
+
+       ⚠️⚠️ Bedingung ist die FRISCHE der Startdaten, nicht ihre Menge. Am
+       29.8.2026 an den ausgelieferten Daten gemessen:
+
+         changeorg_en  298 neu  100 %   jüngstes 2026-08-27   trägt
+         changeorg       8 neu  100 %   jüngstes 2026-08-29   trägt
+         innnit          2 neu  100 %   jüngstes 2026-08-29   trägt
+         openpetition   12 neu   57 %   jüngstes 2026-05-01   trägt NICHT
+         weact           3 neu  0,1 %   jüngstes 2026-05-10   trägt NICHT
+
+       Die naheliegende Regel „die Mehrheit muss ein Datum haben" stand hier
+       zuerst und war falsch: sie fängt WeAct (0,1 %), lässt aber
+       openPetition durch — dessen Startdaten enden vier Monate vor dem
+       Scrape-Zeitpunkt. In beiden Fällen hängt sortRows() die undatierten
+       Sätze ans ENDE. Der Knopf schöbe die Neuzugänge dort also nach unten
+       statt nach oben und täte das Gegenteil seiner Beschriftung.
+
+       Die Chips im Ausklapper dürfen die Sortierung trotzdem anbieten — sie
+       stehen neben der Lückenmeldung („Bei 1905 Petitionen fehlt das
+       Startdatum"). Ein herausgestellter Knopf ohne diesen Beipackzettel
+       darf es nicht.
+
+       ⚠️ Verglichen wird auf TAGESEBENE (die ersten zehn Zeichen). Die
+       Zeitstempel tragen gemischte Zonen (+02:00 im Bestand, +00:00 aus der
+       CI); als ganze Zeichenketten verglichen käme die falsche Reihenfolge
+       heraus. Gegen ein 14-Tage-Fenster ist ein Zonenversatz von höchstens
+       einem Tag ohne Belang.
+       ⚠️ Bezugspunkt ist generated_at DIESER Plattform, nicht die Uhr des
+       Geräts: sonst verlöre ein lange offline genutztes Gerät den Knopf,
+       obwohl seine Daten in sich stimmig sind.
+       Die Entscheidung fällt erst in buildTools(), wo die Daten vorliegen. */
+    var pMeta = ((state.manifest && state.manifest.platforms) || [])
+      .filter(function (p) { return p.key === key; })[0] || {};
+    var neuN = pMeta["new"] || 0;
+    var neuBtn = null;
+    if (neuN > 0) {
+      neuBtn = el('<button class="newsort" type="button" hidden aria-label="' +
+        esc(T("tools.newSortAria",
+              "Nach Startdatum sortieren, neueste zuerst")) + '">' +
+        '<i class="fa-solid fa-arrow-up" aria-hidden="true"></i> ' +
+        esc(fill(T(neuN === 1 ? "tools.newSortOne" : "tools.newSortMany",
+                   neuN === 1 ? "1 neue Petition · neueste zuerst"
+                              : "{n} neue Petitionen · neueste zuerst"),
+                 { n: nf.format(neuN) })) + "</button>");
+      content.appendChild(neuBtn);
+    }
     // Filter (Kategorie/Schlagwort) liegen im State, damit sie eine plattform-
     // übergreifende Suche + Zurück-Navigation überstehen.
     var filterBar = el('<div class="filterbar" style="display:none"></div>');
@@ -3599,6 +3690,26 @@
       var mitDatum = arr.filter(function (r) { return !!r.start_date; }).length;
       var mitZahl = arr.filter(function (r) {
         return typeof r.signatures === "number"; }).length;
+      /* Der Neuzugangs-Knopf lebt außerhalb dieses Ausklappers. Seine
+         Bedingung ist strenger als die der Datums-Chips (siehe oben): die
+         Startdaten müssen AKTUELL sein, sonst verspricht er eine Ordnung,
+         die die Daten nicht hergeben. buildTools() läuft genau einmal. */
+      var neuestesDatum = "";
+      arr.forEach(function (r) {
+        var d = r.start_date ? String(r.start_date).slice(0, 10) : "";
+        if (d > neuestesDatum) neuestesDatum = d;
+      });
+      var bezug = Date.parse(pMeta.generated_at || "") || Date.now();
+      var frischGrenze = new Date(bezug - 14 * 864e5).toISOString().slice(0, 10);
+      if (neuBtn) {
+        if (neuestesDatum && neuestesDatum >= frischGrenze) {
+          neuBtn.hidden = false;
+          neuBtn.addEventListener("click", function () {
+            state.sort = "neu";
+            draw(arr); window.scrollTo(0, 0);
+          });
+        } else neuBtn.remove();
+      }
       /* [Wert, Beschriftung, Icon HINTER der Beschriftung, Vorlesetext].
          Seit 3.8.26 (Nutzerwunsch) tragen beide Paare dieselbe Beschriftung und
          unterscheiden sich allein durch den Pfeil: „Datum ↑/↓" und
@@ -3782,6 +3893,12 @@
       tools.classList.toggle("is-active", aktiv.length > 0);
       tools.querySelectorAll("[data-sort]").forEach(function (b) {
         b.classList.toggle("on", (b.dataset.sort || null) === state.sort); });
+      // Der Knopf zeigt mit, ob seine Sortierung gerade steht — sonst tippt
+      // man ein zweites Mal und sieht nicht, dass er schon gewirkt hat.
+      if (neuBtn) {
+        neuBtn.classList.toggle("on", state.sort === "neu");
+        neuBtn.setAttribute("aria-pressed", state.sort === "neu" ? "true" : "false");
+      }
       tools.querySelectorAll("[data-cat]").forEach(function (b) {
         b.classList.toggle("on", (b.dataset.cat || null) === state.catFilter); });
     }

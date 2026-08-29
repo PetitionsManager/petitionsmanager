@@ -890,6 +890,31 @@ section.langgroup:not(.bottomacc):not(.crossgroup)
 .ptools__h{display:flex;align-items:center;gap:.4375rem;font-size:.75rem;
   letter-spacing:.05em;text-transform:uppercase;color:var(--muted);
   margin-bottom:.5625rem}
+/* Abkürzung zu den Neuzugängen (29.8.2026). Sitzt zwischen Bedienfeld und
+   Liste, weil er genau dazwischen wirkt: er stellt eine Sortierung ein, die
+   man sonst im Ausklapper wählen müsste. Die Formensprache ist die des Chips
+   (Rahmen in der Akzentfarbe, gefüllt sobald aktiv), nur über die volle
+   Breite — er ist eine Aufforderung, keine Auswahl unter mehreren.
+   ⚠️ Die [hidden]-Regel MUSS HINTER der display-Regel stehen. Sonst
+   überstimmt display:flex das hidden-Attribut aus dem Browser-Stylesheet, und
+   der Knopf stünde schon da, bevor feststeht, ob die Plattform überhaupt
+   Startdaten liefert. */
+.newsort{display:flex;align-items:center;justify-content:center;gap:.5rem;
+  width:100%;margin:0 0 1.25rem;padding:.75rem 1rem;font:inherit;
+  font-size:.875rem;font-weight:700;line-height:1.25;cursor:pointer;
+  color:var(--ink);background:var(--surface);
+  border:.0625rem solid var(--accent);border-radius:.875rem;
+  transition:background .15s,border-color .15s,color .15s}
+.newsort[hidden]{display:none}
+.newsort i{font-size:.75rem;color:var(--accent)}
+.newsort:hover{background:var(--accent-soft)}
+.newsort:active{background:var(--accent-soft);opacity:.85}
+.newsort:focus-visible{outline:.1875rem solid var(--accent);
+  outline-offset:.125rem}
+.newsort.on{background:var(--accent);border-color:var(--accent);
+  color:var(--on-accent)}
+.newsort.on i{color:inherit;opacity:.75}
+
 /* Steht bewusst da, wo die Sortierung gewählt wird: bei WeAct fehlt jedes
    Startdatum, bei Europarl jede Unterschriftenzahl. */
 /* Lücken-Meldung im Bedienfeld. Umgebaut am 7.8.2026: vorher standen die

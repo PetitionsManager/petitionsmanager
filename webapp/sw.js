@@ -871,7 +871,13 @@
    meldete deren Neuzugänge („Heute nichts Neues", obwohl 358 vorlagen).
    Jetzt frischt sie bei Wiederaufnahme auf, höchstens alle fünf Minuten und
    nur, wenn der geholte Stand wirklich neuer ist (app.js) */
-var CACHE = "pm-cache-v53";
+/* v54: Die Sprachzwillinge (changeorg_en & Co.) erben Logo und Hausfarben vom
+   Grundschlüssel — sie standen als nackter Anfangsbuchstabe ohne Markenfarbe
+   in der Liste, weil platforms.js nur die elf Grundschlüssel führt. Dazu auf
+   der Plattformseite ein Knopf, der die Sortierung auf „Datum, neueste
+   zuerst" stellt, sofern der letzte Lauf Neuzugänge fand UND die Plattform
+   überhaupt Startdaten liefert (app.js/style.css/texts.js) */
+var CACHE = "pm-cache-v54";
 /* Versionsunabhängig – überlebt das Hochzählen von CACHE. Diese Zahl sollte ab
    jetzt NICHT mehr steigen: seit die Pakete eine Inhaltskennung tragen ("?v=",
    siehe oben) holt sich jedes geänderte Paket von selbst neu. Ein Sprung wäre
