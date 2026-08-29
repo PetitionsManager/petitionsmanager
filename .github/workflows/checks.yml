@@ -40,6 +40,19 @@ jobs:
       - name: Python-Dateien übersetzen
         run: python3 -m compileall -q *.py
 
+      # Bis 29.8.2026 kam Checks ohne Abhängigkeiten aus (compileall importiert
+      # nicht). Der Selbsttest darunter importiert petitions_core wirklich und
+      # braucht deshalb requests/bs4. Aus requirements.txt, damit hier keine
+      # zweite, abweichende Fassung der Versionen entsteht.
+      - name: Abhängigkeiten für den Selbsttest
+        run: pip install -r requirements.txt
+
+      # Prüft die Wächter mit Kunstdaten: die Massen-Lösch-Bremse und die
+      # Startdatum-Prüfung. Beide sollen im Betrieb möglichst nie auslösen —
+      # genau deshalb sagt ein grüner Nachtlauf nichts über sie aus.
+      - name: Selbsttest der Wächter
+        run: python3 selbsttest.py
+
       - name: App-Daten als JSON validieren
         run: |
           python3 - <<'PY'

@@ -1306,6 +1306,11 @@ def entdeckung(name: str, treffer: int, erwartet_min: int = 1,
 # Unterschriften-Historie ausgelöscht (der Live-Bestand liegt nur im
 # Actions-Cache, nicht im Repo). Deshalb wird ab einem auffälligen Anteil gar
 # nicht gelöscht, sondern gewarnt.
+STARTDATUM_MAX_ALTER = 30
+# Tage, die das jüngste start_date eines Bestandes alt sein darf, bevor NEUE
+# Sätze als verdächtig gelten (Prüfung (e) in _bestandspruefung). Am 29.8.2026
+# an allen 17 Beständen gemessen; die Begründung der Zahl steht dort.
+
 SKIP_LOESCH_ANTEIL_MAX = 0.30   # >30 % skip unter den geprüften = Verdacht
 SKIP_LOESCH_MIN_ABS = 10        # darunter greift die Bremse nicht (kleine Bestände)
 
@@ -1451,11 +1456,21 @@ def _bestandspruefung(store: dict, vorher: dict,
         if u:
             nach_url.setdefault(u, []).append(str(r.get("slug") or ""))
     dubletten = {u: s for u, s in nach_url.items() if len(s) > 1}
+    # Startdaten: jüngstes Datum und Deckung. Beides wandert in die Zeitreihe,
+    # weil erst der Vorher-Nachher-Vergleich die Stagnation sichtbar macht
+    # (Prüfung (e) unten). Auf TAGESEBENE geschnitten: die Zeitstempel tragen
+    # gemischte Zonen ("+02:00" lokal, "+00:00" aus der CI), als ganze
+    # Zeichenketten verglichen käme die falsche Reihenfolge heraus.
+    startdaten = [str(r.get("start_date") or "")[:10] for r in saetze]
+    startdaten = [d for d in startdaten if len(d) == 10 and d[4] == "-"]
+    juengstes_start = max(startdaten) if startdaten else None
     kennzahlen = {"zeit": now_iso(), "gesamt": gesamt, "online": online,
                   "offline": gesamt - online, "ohne_titel": len(ohne_titel),
                   "platzhalter": len(platzhalter),
                   "nicht_ausgeliefert": nicht_ausgeliefert,
-                  "torsi": len(torsi), "dubletten": len(dubletten)}
+                  "torsi": len(torsi), "dubletten": len(dubletten),
+                  "mit_start": len(startdaten),
+                  "juengstes_start": juengstes_start}
 
     neu: list[dict] = []
     def merke(stufe, thema, text, thema_en="", text_en=""):
@@ -1554,6 +1569,67 @@ def _bestandspruefung(store: dict, vorher: dict,
               thema_en="Online count collapsed",
               text_en=f"{v_online} → {online}. The source is probably blocking "
                       f"or was rebuilt – hardly ever a real disappearance.")
+
+    # (e) Das Startdatum steht still, obwohl neue Sätze dazukamen (29.8.2026).
+    #     Bis dahin fragte JEDE Prüfung hier nur „hat der Abruf geklappt?" —
+    #     keine, ob das Angekommene noch aktuell ist. Genau darin ist
+    #     openPetition unbemerkt verrottet: am 29.8. lieferte der Lauf zwölf
+    #     neue Petitionen, das jüngste start_date im Bestand stand trotzdem
+    #     seit dem 1.5.2026 still. Alle Melder blieben grün, weil der Abruf ja
+    #     funktionierte.
+    #
+    #     Die Bedingung ist bewusst eng, damit sie sich selbst kalibriert und
+    #     keine Schwellentabelle je Plattform braucht:
+    #       · Es kamen NEUE Sätze dazu. Eine Plattform, die gerade nichts
+    #         veröffentlicht, schweigt damit von allein — sonst blänke Avaaz
+    #         (75 Tage ohne neues Datum, aber auch ohne neuen Satz) täglich.
+    #       · Das jüngste Datum ist ÄLTER als STARTDATUM_MAX_ALTER. Neue Sätze
+    #         mit alten Daten: genau das ist der Ausfall.
+    #       · Mindestens ein Fünftel der Sätze trägt überhaupt ein Datum.
+    #         WeAct hat 2 von 1907 (0,1 %) — dort fehlt das Feld im Schema der
+    #         Quelle, das ist kein Ausfall und darf nicht blinken.
+    #
+    #     ⚠️ Ein erster Entwurf prüfte stattdessen „das jüngste Datum ist seit
+    #     dem letzten Lauf nicht VORGERÜCKT". Der Prüfstand am echten Bestand
+    #     hat ihn widerlegt: Change.org und innn.it hätten gemeldet, obwohl ihr
+    #     jüngstes Datum von HEUTE war — mehrere Petitionen desselben Tages
+    #     lassen das Tagesdatum eben stehen. Auf das Alter zu prüfen ist die
+    #     Aussage, die gemeint war.
+    #
+    #     Beide Schwellen liegen in einer breiten Lücke der echten Werte,
+    #     gemessen am 29.8.2026 über alle 17 Bestände:
+    #       Deckung : 0 %, 0,1 %  →  dann erst wieder ab 56 %
+    #       Alter   : 0, 0, 2, 3 Tage  →  dann erst wieder 40, 59, 75, 110, 120
+    #     ⚠️ Der Bundestag liegt mit 40 Tagen als erster ÜBER der Schwelle: er
+    #     meldet, sobald ein Lauf dort neue Sätze aufnimmt. Das ist Absicht —
+    #     entweder das Feld hakt oder es startete wirklich seit 40 Tagen keine
+    #     Petition; beides gehört gesehen. Wer die Schwelle anhebt, verliert
+    #     genau diesen Fall und sollte die Zahlen oben neu messen.
+    neu_dazu = len((getattr(_TLS, "lauf_meta", None) or {})
+                   .get("new_petitions_last_run") or [])
+    deckung = len(startdaten) / gesamt if gesamt else 0
+    alter = None
+    if juengstes_start:
+        try:
+            alter = (_dt.date.fromisoformat(kennzahlen["zeit"][:10])
+                     - _dt.date.fromisoformat(juengstes_start)).days
+        except ValueError:          # unerwartetes Format – lieber nicht raten
+            alter = None
+    if (neu_dazu > 0 and deckung >= 0.2
+            and alter is not None and alter > STARTDATUM_MAX_ALTER):
+        merke("warnung", "Startdatum rückt nicht nach",
+              f"{neu_dazu} neue Sätze aufgenommen, das jüngste Startdatum im "
+              f"Bestand ist aber {alter} Tage alt ({juengstes_start}). "
+              f"Entweder wird das Feld nicht mehr gelesen – dann prüfe den "
+              f"Ausdruck, der start_date aus der Seite zieht – oder die Quelle "
+              f"liefert wirklich nichts Neues.",
+              thema_en="Start date is not catching up",
+              text_en=f"{neu_dazu} new records added, but the newest start "
+                      f"date in the store is {alter} days old "
+                      f"({juengstes_start}). Either the field is no longer "
+                      f"being read – then check the expression that extracts "
+                      f"start_date from the page – or the source really has "
+                      f"nothing new.")
 
     return neu, kennzahlen
 

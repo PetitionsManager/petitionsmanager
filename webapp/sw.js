@@ -877,7 +877,10 @@
    der Plattformseite ein Knopf, der die Sortierung auf „Datum, neueste
    zuerst" stellt, sofern der letzte Lauf Neuzugänge fand UND die Plattform
    überhaupt Startdaten liefert (app.js/style.css/texts.js) */
-var CACHE = "pm-cache-v54";
+/* v55: „Über die App" verlinkt jetzt den Zustandsbericht der Quellen. Er lag
+   veröffentlicht da und zeigte seine Warnungen an niemanden — die App
+   verwies nirgends darauf (app.js/texts.js) */
+var CACHE = "pm-cache-v55";
 /* Versionsunabhängig – überlebt das Hochzählen von CACHE. Diese Zahl sollte ab
    jetzt NICHT mehr steigen: seit die Pakete eine Inhaltskennung tragen ("?v=",
    siehe oben) holt sich jedes geänderte Paket von selbst neu. Ein Sprung wäre

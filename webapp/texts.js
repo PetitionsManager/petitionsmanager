@@ -525,6 +525,7 @@ window.PM_TEXTS = {
       quelleFest: "Fest eingestellt",
       linkCode: "Quellcode",
       linkLizenz: "Lizenz: GPL-3.0",
+      linkStatus: "Zustand der Quellen",
       linkKontakt: "Kontakt"
     },
 
@@ -1110,6 +1111,7 @@ window.PM_TEXTS = {
       quelleFest: "Fixed setting",
       linkCode: "Source code",
       linkLizenz: "License: GPL-3.0",
+      linkStatus: "Source health",
       linkKontakt: "Contact"
     },
 

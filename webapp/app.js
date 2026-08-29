@@ -1400,6 +1400,16 @@
      vor der Veröffentlichung muss das Postfach also wirklich existieren. */
   var SUPPORT_MAIL = "mail@petitionsmanager.app";
   var GITHUB_URL = "https://github.com/PetitionsManager/petitionsmanager";
+  /* Der Zustandsbericht der Scraper (29.8.2026). Bis dahin verlinkte die App
+     ihn NIRGENDS — er lag veröffentlicht da und zeigte seine Warnungen
+     („Host ausgelassen", „Entdeckung fand 0 Treffer") an niemanden. Genau
+     deshalb fiel ein monatelang eingefrorener Bestand erst über „es kommen
+     keine neuen Petitionen" auf.
+     ⚠️ Bewusst die LIVE-Adresse und nicht das mitgelieferte dashboard.html:
+     das im App-Paket stammt vom Bauzeitpunkt und zeigte einen Gesundheits-
+     zustand von vor Monaten — bei einer Seite, deren ganzer Zweck „wie geht
+     es den Quellen JETZT" ist, wäre das schlechter als kein Link. */
+  var DASHBOARD_URL = LIVE_BASE.replace(/\/data$/, "/dashboard.html");
   var SUPPORT_DONATE = "https://liberapay.com/Timeras/donate";
   /* Aufnahmekodex für Petitionsplattformen.
      ENTWURF – vom Nutzer am 2026-07-28 beauftragt, aber juristisch NICHT
@@ -5595,6 +5605,9 @@
       '<a href="' + esc(GITHUB_URL + "/blob/main/LICENSE") +
       '" target="_blank" rel="noopener">' +
       esc(T("about.linkLizenz", "Lizenz: GPL-3.0")) +
+      ' <i class="fa-solid fa-arrow-up-right-from-square"></i></a>' +
+      '<a href="' + esc(DASHBOARD_URL) + '" target="_blank" rel="noopener">' +
+      esc(T("about.linkStatus", "Zustand der Quellen")) +
       ' <i class="fa-solid fa-arrow-up-right-from-square"></i></a>' +
       '<a href="mailto:' + esc(SUPPORT_MAIL) + '">' +
       esc(T("about.linkKontakt", "Kontakt")) +
