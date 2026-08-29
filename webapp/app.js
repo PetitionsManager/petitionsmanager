@@ -943,13 +943,21 @@
       return fetchFrom(BUNDLED_BASE, path);
     });
   }
+  /* Wann das Manifest zuletzt geholt wurde, in Millisekunden. 0 = noch nie.
+     Steuert die Auffrischung bei Wiederaufnahme, siehe refreshIfStale(). */
+  var manifestGeholt = 0;
+
+  /* Bewusst getrennt vom Holen: refreshManifest() muss den neuen Stand erst
+     VERGLEICHEN dürfen, bevor er den alten ersetzt. */
+  function uebernehmeManifest(m) {
+    state.manifest = m;
+    manifestGeholt = Date.now();
+    manifestNamenSetzen();  // Plattformnamen in die gewählte Sprache bringen
+    pruneTextLibrary();   // erst jetzt möglich: braucht die Kennungen
+    return m;
+  }
   function loadManifest() {
-    return fetchData("manifest.json").then(function (m) {
-      state.manifest = m;
-      manifestNamenSetzen();  // Plattformnamen in die gewählte Sprache bringen
-      pruneTextLibrary();   // erst jetzt möglich: braucht die Kennungen
-      return m;
-    });
+    return fetchData("manifest.json").then(uebernehmeManifest);
   }
   function loadPlatformData(key) {
     if (state.dataCache[key]) return Promise.resolve(state.dataCache[key]);
@@ -1050,6 +1058,74 @@
           T("msg.loadError", "Daten konnten nicht geladen werden.<br>" +
             "Prüfe die <b>Datenquelle</b> in den Einstellungen.") + "</div>";
       });
+  }
+
+  /* ---- Datenstand auffrischen, wenn die App zurückkommt (29.8.2026) --------
+     loadManifest() lief bis hierher NUR beim Kaltstart. Eine App, die im
+     Hintergrund liegt statt neu zu starten — auf dem Telefon der Regelfall —
+     behielt ihren Datenstand damit unbegrenzt: die Kacheln zeigten die Zahlen
+     des letzten Kaltstarts, und countNew() meldete dessen Neuzugänge. So kam
+     die Tagesmeldung auf „Heute nichts Neues", während im ausgelieferten
+     Manifest 358 Neuzugänge standen. Vom Nutzer am 29.8.2026 daran bemerkt,
+     dass er „manuell refreshen" musste.
+
+     ⚠️ Ein NICHT neueres Manifest wird verworfen, samt Quelle. Ohne das wäre
+     die Auffrischung ein Rückschritt: resolveBase() fällt ohne Netz auf das
+     App-Paket zurück, und dessen Stand ist älter als der, der schon geladen
+     war — die Zahlen sprängen beim Wiederaufnehmen auf den Bauzeitpunkt der
+     App. Deshalb läuft uebernehmeManifest() erst NACH dem Vergleich: sonst
+     hätte pruneTextLibrary() längst die Textpakete der Plattformen aus dem
+     Cache geräumt, die im App-Paket noch fehlen.
+
+     ⚠️ dataCache und textChunks müssen mit weg, sobald der Stand wechselt —
+     sonst nennt die Kachel die neue Anzahl und die Liste darunter zeigt die
+     alte. Denselben Grund nennt reloadData() für den Quellenwechsel. */
+  var REFRESH_MIN_MS = 5 * 60 * 1000;   // höchstens alle fünf Minuten fragen
+  var refreshLaeuft = false;
+
+  function refreshManifest() {
+    var altStamp = manifestStamp(state.manifest);
+    var vorher = { base: state.base, auto: state.baseAuto, why: state.baseWhy };
+    var zurueck = function () {
+      state.base = vorher.base;
+      state.baseAuto = vorher.auto;
+      state.baseWhy = vorher.why;
+      return false;
+    };
+    return resolveBase().then(function () {
+      return fetchData("manifest.json");
+    }).then(function (m) {
+      // Auch ohne Änderung merken, sonst fragt jeder Tabwechsel erneut.
+      manifestGeholt = Date.now();
+      if (!(manifestStamp(m) > altStamp)) return zurueck();
+      uebernehmeManifest(m);
+      state.dataCache = {}; textChunks = {};
+      return true;
+    })["catch"](zurueck);
+  }
+
+  /* Drei Auslöser, weil keiner davon überall feuert: sichtbar geworden, aus
+     dem bfcache zurück, Fenster wieder im Vordergrund. In der APK bekommt der
+     WebView kein onPause/onResume gesetzt (MainActivity hat die Methoden gar
+     nicht) — dort ist „focus" oft das einzige Signal. Mehrfaches Auslösen
+     kostet nichts, refreshLaeuft und REFRESH_MIN_MS fangen es ab. */
+  function refreshIfStale() {
+    if (!state.manifest) return;          // der Erststart lädt noch selbst
+    if (document.visibilityState === "hidden") return;
+    if (refreshLaeuft) return;
+    if (Date.now() - manifestGeholt < REFRESH_MIN_MS) return;
+    // Den Assistenten nicht unter den Händen wegziehen.
+    if (document.body.classList.contains("wizard-open")) return;
+    refreshLaeuft = true;
+    refreshManifest().then(function (geaendert) {
+      refreshLaeuft = false;
+      if (!geaendert) return;
+      render();
+      /* Die Tagesmeldung neu bewerten — sie hängt an genau den Zahlen, die
+         sich gerade geändert haben. Zweimal meldet sie deswegen nicht: tick()
+         steigt bei n.lastDate === today sofort wieder aus. */
+      scheduleNotify();
+    });
   }
 
   // ---- Rendering: Liste ------------------------------------------------------
@@ -2818,11 +2894,19 @@
 
        ⚠️ Die drei anderen großen Plattformen haben keinen einzigen Titel,
        der viermal oder öfter vorkommt (24.8. gemessen) — die Bündelung
-       greift dort also praktisch nie und kostet dort nichts. */
+       greift dort also praktisch nie und kostet dort nichts.
+
+       ⚠️ Das Trennzeichen steht als ESCAPE-SEQUENZ im Quelltext, nie als
+       echtes Byte. Bis 29.8.2026 lagen hier drei literale 0x00 in der Datei;
+       app.js galt Werkzeugen damit als BINÄR, und der grep-Wrapper (ugrep -I)
+       lieferte für die größte Datei des Projekts stumm null Treffer statt
+       einer Fehlermeldung. 0x1F kann in keinem Plattformschlüssel vorkommen
+       (alles Kleinbuchstaben-Bezeichner) — und trennzeichenfrei muss nur der
+       LINKE Teil sein, damit die Zerlegung eindeutig bleibt. */
     var gruppen = [], gIndex = {};
     sim.forEach(function (s) {
       var t = (txt(s.c, "title") || "").toLowerCase().replace(/\s+/g, " ").trim();
-      var key = t ? s.plat.key + " " + t : " url " + s.c.url;
+      var key = t ? s.plat.key + "\x1f" + t : "\x1furl\x1f" + s.c.url;
       if (gIndex[key]) { gIndex[key].alle.push(s); return; }
       gIndex[key] = { kopf: s, alle: [s] };
       gruppen.push(gIndex[key]);
@@ -6906,6 +6990,13 @@
       navigator.serviceWorker.register("sw.js").catch(function () {});
     });
   }
+
+  /* Wiederaufnahme-Horcher. Am Modulende und nicht in boot(), damit sie genau
+     einmal hängen — denselben Grund nennt reloadData() dafür, dass es nicht
+     boot() ruft. */
+  document.addEventListener("visibilitychange", refreshIfStale);
+  window.addEventListener("pageshow", refreshIfStale);
+  window.addEventListener("focus", refreshIfStale);
 
   boot();
 })();

@@ -865,7 +865,13 @@
    überstimmt); „Gleiche/Ähnliche Petitionen": Sätze derselben Plattform
    mit gleichem Titel gebündelt – Kopfzeile mit Anzahl klappt auf, Kinder
    zeigen Unterschriftenstand und Slug (app.js/layouts.css/style.css) */
-var CACHE = "pm-cache-v52";
+/* v53: Datenstand friert nicht mehr ein. Das Manifest wurde bis dahin NUR beim
+   Kaltstart geholt – eine App, die im Hintergrund liegt statt neu zu starten,
+   behielt die Zahlen des letzten Kaltstarts unbegrenzt, und die Tagesmeldung
+   meldete deren Neuzugänge („Heute nichts Neues", obwohl 358 vorlagen).
+   Jetzt frischt sie bei Wiederaufnahme auf, höchstens alle fünf Minuten und
+   nur, wenn der geholte Stand wirklich neuer ist (app.js) */
+var CACHE = "pm-cache-v53";
 /* Versionsunabhängig – überlebt das Hochzählen von CACHE. Diese Zahl sollte ab
    jetzt NICHT mehr steigen: seit die Pakete eine Inhaltskennung tragen ("?v=",
    siehe oben) holt sich jedes geänderte Paket von selbst neu. Ein Sprung wäre
