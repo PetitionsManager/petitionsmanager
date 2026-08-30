@@ -20,10 +20,14 @@ Dutzend Fälle ist eine Abhängigkeit mehr der schlechtere Tausch. Aufruf:
 from __future__ import annotations
 
 import sys
+import tempfile
 from datetime import date, timedelta
+from pathlib import Path
+from types import SimpleNamespace
 
 from bs4 import BeautifulSoup
 
+import changeorg_scraper as changeorg
 import openpetition_scraper as openpetition
 import petitions_core as core
 
@@ -517,6 +521,250 @@ core.felder_melden(set())
 text = (core.BEFUNDE.get("selbsttest") or [{}])[0].get("text", "")
 pruefe("leere Ernte zählt als geprüfte Seite (1/2, nicht 1/1)",
        "A (1/2)" in text, True)
+
+
+# ---------------------------------------------------------------------------
+# 8. Register verworfener Kandidaten (Change.org) und seine Notbremse
+# ---------------------------------------------------------------------------
+# Der Einsatz ist hier ein anderer als bei entferne_skip: das Register LÖSCHT
+# nichts. Bricht es, bleibt der Bestand unversehrt und es kommen nur nie wieder
+# neue Petitionen dazu — ein Ausfall, den niemand sieht. Deshalb wird jeder
+# Zweig einzeln nachgewiesen, samt Gegenprobe dicht an der Schwelle.
+print("\nRegister verworfener Kandidaten (merke_verworfene)")
+
+
+def register_lauf(bekannt, neu, belegt, max_gesamt=core.VERWORFEN_MAX):
+    core._TLS.platform = "selbsttest"
+    core.BEFUNDE.pop("selbsttest", None)
+    ergebnis = core.merke_verworfene(bekannt, neu, belegt, "Testplattform",
+                                     "nicht DE", "not DE",
+                                     max_gesamt=max_gesamt)
+    warnungen = [b for b in core.BEFUNDE.get("selbsttest", [])
+                 if b.get("stufe") == "warnung"]
+    return ergebnis, bool(warnungen)
+
+
+erg, warn = register_lauf(["a"], ["b", "c"], belegt=200)
+pruefe("normaler Lauf erweitert das Register", erg, ["a", "b", "c"])
+pruefe("normaler Lauf warnt nicht", warn, False)
+
+# Der Ernstfall: die Sprachprüfung ist gebrochen, alles gilt als „nicht DE".
+erg, warn = register_lauf(["a"], ["b", "c"], belegt=0)
+pruefe("Bremse greift ohne Positivkontrolle", erg, ["a"])
+pruefe("Bremse meldet sich", warn, True)
+
+# Gegenprobe DICHT AN DER SCHWELLE — ohne sie bewiese der Fall oben nur, dass
+# die Funktion manchmal nichts tut.
+erg, _ = register_lauf(["a"], ["b"], belegt=core.VERWORFEN_BELEG_MIN - 1)
+pruefe("Bremse greift eins unter der Schwelle", erg, ["a"])
+erg, warn = register_lauf(["a"], ["b"], belegt=core.VERWORFEN_BELEG_MIN)
+pruefe("Bremse lässt AUF der Schwelle durch", erg, ["a", "b"])
+pruefe("… und warnt dabei nicht", warn, False)
+
+# Nichts zu vermerken ist kein Ausfall: hier darf die Bremse nicht schreien,
+# sonst stünde bei jedem ereignislosen Lauf eine Warnung im Dashboard.
+erg, warn = register_lauf(["a"], [], belegt=0)
+pruefe("leere Verwerfungsliste warnt nicht", warn, False)
+pruefe("leere Verwerfungsliste lässt das Register unberührt", erg, ["a"])
+
+erg, _ = register_lauf(["a", "b"], ["b", "c", "c"], belegt=200)
+pruefe("keine Dubletten im Register", erg, ["a", "b", "c"])
+
+# Deckel: was herausfällt, wird wieder abgerufen — es darf nur nicht STILL
+# herausfallen, und es müssen die ÄLTESTEN sein.
+erg, _ = register_lauf(["a", "b", "c"], ["d"], belegt=200, max_gesamt=2)
+pruefe("Deckel wirft die ältesten heraus", erg, ["c", "d"])
+
+print("\nUnlesbare Seiten (melde_unklare)")
+
+
+def unklar_lauf(unklar, gelesen):
+    core._TLS.platform = "selbsttest"
+    core.BEFUNDE.pop("selbsttest", None)
+    core.melde_unklare(unklar, gelesen, "Testplattform")
+    return bool([b for b in core.BEFUNDE.get("selbsttest", [])
+                 if b.get("stufe") == "warnung"])
+
+
+pruefe("Seitenumbau wird gemeldet", unklar_lauf(90, 100), True)
+pruefe("wenige Einzelfälle bleiben still", unklar_lauf(9, 10), False)
+pruefe("viele absolut, aber kleiner Anteil bleibt still",
+       unklar_lauf(20, 200), False)
+
+print("\nTrennung skip/unklar (scrape_petition)")
+# ⚠️ Der Kern der Sache: NUR eine belegte Fremdsprache darf einen Kandidaten
+# dauerhaft aus dem Vorrat nehmen. Jede andere Art von „kein Datensatz" muss
+# folgenlos bleiben, sonst schreibt ein Parser-Fehler den Vorrat unwiderruflich
+# leer.
+class FakeAntwort:
+    def __init__(self, text, status_code=200):
+        self.text, self.status_code = text, status_code
+        self.ok = 200 <= status_code < 300
+
+
+class FakeFetcher:
+    def __init__(self, text, status_code=200):
+        self._a = FakeAntwort(text, status_code)
+
+    def get(self, url):
+        return self._a
+
+
+core._TLS.platform = "selbsttest"
+LAND = '"country":{"countryCode":"%s"}'
+TITEL = '"ask":"Ein Titel"'
+faelle = [
+    ("vollständige DE-Seite → online", f'{LAND % "DE"}{TITEL}', "online"),
+    ("belegt anderes Land → skip", f'{LAND % "TR"}{TITEL}', "skip"),
+    ("DE, aber kein Titel → unklar (NICHT skip)", LAND % "DE", "unklar"),
+    ("Länderfeld fehlt ganz → unklar (NICHT skip)", TITEL, "unklar"),
+]
+for name, html, soll in faelle:
+    status, _ = changeorg.scrape_petition(FakeFetcher(html), "x")
+    pruefe(name, status, soll)
+
+pruefe("404 bleibt offline",
+       changeorg.scrape_petition(FakeFetcher("", 404), "x")[0], "offline")
+pruefe("500 bleibt error",
+       changeorg.scrape_petition(FakeFetcher("", 500), "x")[0], "error")
+
+print("\nDas Fenster wandert (offene_kandidaten)")
+entdeckt = ["a", "b", "c", "d", "e"]
+pruefe("Bestand und Register fallen heraus",
+       changeorg.offene_kandidaten(entdeckt, {"a": {}}, ["b", "c"]), ["d", "e"])
+pruefe("ohne Register bleibt alles Ungespeicherte stehen",
+       changeorg.offene_kandidaten(entdeckt, {"a": {}}, []),
+       ["b", "c", "d", "e"])
+# Die eigentliche Aussage: mit Register kommt der Lauf an ANDERE Kandidaten als
+# ohne. Genau das stand vorher still.
+pruefe("mit Register kommen andere Kandidaten dran",
+       changeorg.offene_kandidaten(entdeckt, {}, [])[:2]
+       != changeorg.offene_kandidaten(entdeckt, {}, ["a", "b"])[:2], True)
+
+print("\nDas Register übersteht eine Speicherung")
+# ⚠️ Die Falle, die den ganzen Mechanismus lautlos aushebeln würde: save_store
+# baut das _meta bei JEDEM Schreiben neu auf. Wer das Register nicht bei jeder
+# Speicherung durchreicht, setzt den Vorrat nach einem Lauf auf null zurück —
+# ohne dass irgendetwas kaputtginge.
+core._TLS.platform = "selbsttest"
+core._TLS.lauf_meta = None
+with tempfile.TemporaryDirectory() as ordner:
+    pfad = Path(ordner) / "test_petitions.json"
+    inhalt = {"a": {"slug": "a", "title": "T", "status": "online"}}
+    core.save_store(inhalt, pfad, extra_meta={"verworfen": ["x", "y"]},
+                    quiet=True)
+    pruefe("mit extra_meta überlebt es", core.load_meta(pfad).get("verworfen"),
+           ["x", "y"])
+    core.save_store(inhalt, pfad, quiet=True)
+    pruefe("ohne extra_meta ist es WEG (deshalb die Zeile in run())",
+           core.load_meta(pfad).get("verworfen"), None)
+
+
+# ---------------------------------------------------------------------------
+# 9. Drei echte run()-Durchläufe mit erfundener Quelle
+# ---------------------------------------------------------------------------
+# ⚠️⚠️ Warum es diesen Abschnitt zusätzlich zu den Einzelfällen braucht: Die
+# Einzelfälle prüfen Bausteine. Ob das Register den WEG durch einen ganzen Lauf
+# übersteht, prüfen sie nicht — und genau dort liegt die stille Falle. Nimmt
+# jemand die frühe Zeile `lauf_meta["verworfen"] = verworfen` heraus, bestehen
+# alle Einzelfälle weiter; erst ein Lauf, der MITTENDRIN abbricht (die CI-Frist
+# schickt SIGINT, so geschehen am 30.8.2026), verliert dann das Register. Ohne
+# Fehlermeldung, ohne Datenverlust — es kämen nur nie wieder neue Petitionen
+# dazu. Am Original nachgewiesen: ohne diesen Abschnitt bleibt das Entfernen
+# der Zeile von allen anderen Fällen unbemerkt.
+print("\nDrei run()-Durchläufe an einer erfundenen Quelle")
+
+LAND, TITEL = '"country":{"countryCode":"%s"}', '"ask":"Titel %s"'
+SEITEN = {s: (LAND % s[:2].upper()) + (TITEL % s)
+          for s in ("de1", "de2", "tr1", "tr2", "hu1", "tr3", "tr4", "hu2")}
+# 12 bekannte deutsche Sätze: sie liefern die Positivkontrolle des Registers
+# (core.VERWORFEN_BELEG_MIN = 10), ohne die es nicht wachsen darf.
+SEITEN.update({f"alt{i}": (LAND % "DE") + (TITEL % f"alt{i}")
+               for i in range(12)})
+ERSTE = ["de1", "de2", "tr1", "tr2", "hu1"]
+SPAETER = ERSTE + ["tr3", "tr4", "hu2"]
+abgerufen: list[str] = []
+grenze = [10 ** 9]
+
+
+class _Antwort:
+    def __init__(self, text):
+        self.text, self.status_code, self.ok = text, 200, True
+
+
+class _Fetcher:
+    def __init__(self, *a, **k):
+        pass
+
+    def get(self, url):
+        abgerufen.append(url.rsplit("/", 1)[-1])
+        if len(abgerufen) > grenze[0]:
+            raise KeyboardInterrupt("CI-Frist erreicht")
+        return _Antwort(SEITEN.get(abgerufen[-1], ""))
+
+
+_echte = (core.Fetcher, changeorg.discover_slugs, changeorg.heile_abgeschnittene,
+          changeorg.DATA_FILE, core.write_list_html)
+runde = [0]
+core.Fetcher = _Fetcher
+core.write_list_html = lambda *a, **k: None
+changeorg.heile_abgeschnittene = lambda store, discovered, save: []
+
+
+def _entdecke(fetcher):
+    runde[0] += 1
+    return {s: {} for s in (ERSTE if runde[0] == 1 else SPAETER)}
+
+
+changeorg.discover_slugs = _entdecke
+# ⚠️ 99 Stunden: skip_recent hält damit JEDEN bekannten Satz zurück – die Lage
+# beim zweiten Lauf eines Tages. Genau dort darf die Notbremse nicht grundlos
+# anschlagen, dafür ist die Mindeststichprobe in run() da.
+_args = SimpleNamespace(delay=0, limit=0, no_recheck=False,
+                        min_interval_hours=99)
+try:
+    with tempfile.TemporaryDirectory() as ordner:
+        changeorg.DATA_FILE = Path(ordner) / "changeorg_petitions.json"
+        core.save_store({s: {"slug": s, "title": f"Titel {s}",
+                             "status": "online"}
+                         for s in SEITEN if s.startswith("alt")},
+                        changeorg.DATA_FILE, quiet=True)
+        changeorg.run(_args)
+        meta1 = core.load_meta(changeorg.DATA_FILE)
+
+        abgerufen.clear()
+        changeorg.run(_args)
+        kand2 = sorted({s for s in abgerufen if s in SPAETER})
+        meta2 = core.load_meta(changeorg.DATA_FILE)
+
+        runde[0] = 0                    # Lauf 3 entdeckt wieder von vorn
+        abgerufen.clear()
+        grenze[0] = 4                   # Abbruch nach vier Abrufen
+        try:
+            changeorg.run(_args)
+        except KeyboardInterrupt:
+            pass
+        grenze[0] = 10 ** 9
+        meta3 = core.load_meta(changeorg.DATA_FILE)
+finally:
+    (core.Fetcher, changeorg.discover_slugs, changeorg.heile_abgeschnittene,
+     changeorg.DATA_FILE, core.write_list_html) = _echte
+
+soll1 = ["hu1", "tr1", "tr2"]
+soll2 = sorted(soll1 + ["hu2", "tr3", "tr4"])
+pruefe("Lauf 1 merkt sich die drei fremdsprachigen",
+       sorted(meta1.get("verworfen") or []), soll1)
+pruefe("Lauf 2 rührt die verworfenen nicht mehr an",
+       sorted(s for s in kand2 if s in soll1), [])
+pruefe("Lauf 2 arbeitet genau die NEUEN Kandidaten ab", kand2,
+       ["hu2", "tr3", "tr4"])
+pruefe("Lauf 2 warnt nicht, obwohl skip_recent alles sperrt",
+       [b["thema"] for b in (meta2.get("befunde") or [])
+        if b.get("stufe") == "warnung"], [])
+pruefe("Register wächst über die Läufe",
+       sorted(meta2.get("verworfen") or []), soll2)
+pruefe("Register übersteht einen ABGEBROCHENEN Lauf",
+       sorted(meta3.get("verworfen") or []), soll2)
 
 
 # ---------------------------------------------------------------------------

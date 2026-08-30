@@ -249,8 +249,30 @@ BEKANNTE_FELDER = {
 }
 
 
+def falsche_sprache(html: str, sprache: str = "de") -> bool:
+    """Ist die Seite BELEGT einer anderen Sprache/eines anderen Landes?
+
+    ⚠️⚠️ Der Unterschied zur Prüfung in parse_detail ist der FEHLENDE Wert, und
+    er entscheidet über einen stillen Totalausfall. parse_detail verwirft auch,
+    wenn das Feld gar nicht da ist („nicht DE, also weg"). Hier heißt ein
+    fehlendes Feld ausdrücklich NEIN: nicht belegt, also keine Aussage.
+    Benennt Change.org "country" um, liefert diese Funktion für JEDE Seite
+    False — der Aufrufer bekommt „unklar" statt „skip", und damit wandert
+    weder etwas ins Register verworfener Kandidaten noch wird etwas gelöscht.
+    Der Bruch bleibt folgenlos und wird über core.melde_unklare() gemeldet."""
+    if sprache == "de":
+        m_c = COUNTRY_RE.search(html)
+        return bool(m_c) and m_c.group(1) != "DE"
+    m_l = ORIGINAL_LOCALE_RE.search(html)
+    return bool(m_l) and not m_l.group(1).lower().startswith(sprache)
+
+
 def parse_detail(html: str, url: str, sprache: str = "de") -> dict | None:
-    """None = Petition der falschen Sprache (skip).
+    """None = Petition der falschen Sprache ODER unlesbare Seite.
+
+    ⚠️ Welcher der beiden Fälle vorliegt, klärt scrape_petition über
+    falsche_sprache() — hier bleibt es bewusst bei einem gemeinsamen None,
+    damit sich am Verhalten der Funktion selbst nichts ändert.
 
     ⚠️ ZWEI VERSCHIEDENE FELDER, und der Unterschied ist wichtig:
       · "country":{"countryCode":"DE"}          — das LAND der Petition
@@ -261,6 +283,10 @@ def parse_detail(html: str, url: str, sprache: str = "de") -> dict | None:
     englischen Zweig taugt es NICHT — englische Petitionen kommen aus US, GB,
     AU, CA, IN. Deshalb prüft er die Sprache, und das ist ohnehin das
     genauere Feld (am 12.8.2026 an beiden Sprachen gemessen).
+    ⚠️ Am 30.8.2026 an 60 Kandidaten nachgemessen: 11 davon waren deutschSPRACHIG,
+    kamen aber aus AT, CL, IT, UA oder IN und fielen deshalb durch — mehr als das
+    Elffache der einen angenommenen DE-Petition. Das ist eine Entscheidung über
+    den Zuschnitt der App, keine Panne, und steht bewusst unverändert hier.
     """
     if sprache == "de":
         m_c = COUNTRY_RE.search(html)
@@ -323,7 +349,19 @@ def parse_detail(html: str, url: str, sprache: str = "de") -> dict | None:
 
 def scrape_petition(fetcher: core.Fetcher, slug: str,
                     sprache: str = "de") -> tuple[str, dict | None]:
-    """(status, record) – status: online | offline | error | skip."""
+    """(status, record) – status: online | offline | error | skip | unklar.
+
+    ⚠️⚠️ „skip" und „unklar" auseinanderzuhalten ist die Voraussetzung dafür,
+    dass eine Verwerfung DAUERHAFT vermerkt werden darf (core.merke_verworfene):
+      · skip   — die Seite hat ihr Land/ihre Sprache genannt, und es passt
+                 nicht. Ein Urteil, das sich nicht mehr ändert.
+      · unklar — die Seite hat geladen, ergab aber weder einen Datensatz noch
+                 eine erkennbare Sprache. Das ist kein Urteil über die
+                 Petition, sondern eines über unser Auswerten.
+    Vor dem 30.8.2026 fielen beide unter „skip". Ein fehlender Titel — also ein
+    Parser-Problem — hätte damit eine deutsche Petition für immer aus dem Vorrat
+    genommen. Unter 60 gemessenen Kandidaten kam der Fall zwar nicht vor, aber
+    er kostet nichts, ihn auszuschließen, und alles, ihn zu übersehen."""
     url = f"{BASE_URL}/p/{slug}"
     resp = fetcher.get(url)
     if resp is None:
@@ -333,9 +371,9 @@ def scrape_petition(fetcher: core.Fetcher, slug: str,
     if not resp.ok:
         return "error", None
     rec = parse_detail(resp.text, url, sprache)
-    if rec is None:
-        return "skip", None
-    return "online", rec
+    if rec is not None:
+        return "online", rec
+    return ("skip" if falsche_sprache(resp.text, sprache) else "unklar"), None
 
 
 # ----------------------------------------------------------------------------
@@ -396,6 +434,16 @@ def heile_abgeschnittene(store: dict, discovered: dict, save) -> list[str]:
     return vervollstaendigt
 
 
+def offene_kandidaten(discovered, store, verworfen) -> list[str]:
+    """Kandidaten, die weder im Bestand noch im Register verworfener stehen.
+
+    Eigene Funktion, damit der Selbsttest genau DIESEN Ausdruck prüft und nicht
+    einen Nachbau davon — ein Test, der die Logik noch einmal aufschreibt,
+    beweist nur, dass zweimal dasselbe gedacht wurde."""
+    schon = set(verworfen or ())
+    return [s for s in discovered if s not in store and s not in schon]
+
+
 def run(args) -> None:
     store = core.load_store(DATA_FILE)
     fetcher = core.Fetcher(delay=args.delay, headers=FETCH_HEADERS)
@@ -415,6 +463,15 @@ def run(args) -> None:
     def save(quiet=True, **extra):
         core.save_store(store, DATA_FILE, extra_meta={**lauf_meta, **extra},
                         quiet=quiet)
+
+    # ⚠️⚠️ Das Register verworfener Kandidaten MUSS hier ins lauf_meta, VOR der
+    # ersten Speicherung — und heile_abgeschnittene() speichert bereits. Fehlte
+    # die Zeile, würfe der erste save_store das Register weg (es baut das _meta
+    # bei jedem Schreiben neu auf, siehe oben), und der Vorrat stünde nach einem
+    # einzigen Lauf wieder bei null. Der Fehler wäre dabei völlig stumm: der
+    # Bestand bliebe unversehrt, das Fenster stünde nur wieder still.
+    verworfen = list(core.load_meta(DATA_FILE).get("verworfen") or [])
+    lauf_meta["verworfen"] = verworfen
 
     # Vor der Entdeckung festhalten: „bekannt" meint den Stand zu LAUFBEGINN.
     # Sonst zählten die gleich frisch angelegten Petitionen als nachzuprüfen
@@ -443,24 +500,49 @@ def run(args) -> None:
     discovered = discover_slugs(fetcher)
     lauf_meta["available"] = len(discovered)
     repariert = heile_abgeschnittene(store, discovered, save)
-    new_slugs = repariert + [s for s in discovered
-                             if s not in store][:MAX_NEW_PER_RUN]
+    # ⚠️⚠️ Der Register-Filter ist der Unterschied zwischen „langsam" und „nie".
+    # Ohne ihn lieferte die Entdeckung dieselben verworfenen Kandidaten in
+    # derselben Reihenfolge wieder ganz vorn, und der Deckel MAX_NEW_PER_RUN
+    # verbrauchte sich an ihnen: am 30.8.2026 gemessen 59 von 60 Kandidaten am
+    # Kopf des Fensters „nicht DE" (34 davon türkisch — GERMAN_SLUG_RE trifft
+    # über %C3%B6/%C3%BC auch Türkisch, Ungarisch und Aserbaidschanisch).
+    # Rund 493 der 500 Abrufe je Lauf gingen so an bereits gelesene Seiten,
+    # und die 13.826 nie geprüften Kandidaten wurden nie erreicht.
+    kandidaten = offene_kandidaten(discovered, store, verworfen)
+    new_slugs = repariert + kandidaten[:MAX_NEW_PER_RUN]
     if args.limit:
         new_slugs = new_slugs[:args.limit]
-    log(f"{len(new_slugs)} Kandidaten zum Prüfen "
-        f"(Gesamt im Store: {len(store)}).")
+    log(f"{len(new_slugs)} Kandidaten zum Prüfen (Gesamt im Store: "
+        f"{len(store)}; {len(verworfen)} früher verworfen, "
+        f"{len(kandidaten)} ungeprüft im Vorrat).")
     prog(phase="scrape", current=0, total=len(new_slugs),
          message="Beginne Scrape …")
 
+    # belegt/gelesen/unklar laufen über BEIDE Phasen und werden erst nach der
+    # Nachprüfung ausgewertet: `belegt` ist die Positivkontrolle des Registers
+    # (core.VERWORFEN_BELEG_MIN), und die trägt erst, wenn auch die bekannten
+    # Sätze durch sind — unter den Neuzugängen wurde am 30.8.2026 genau EINER
+    # von 60 angenommen.
+    neu_verworfen: list[str] = []
+    belegt = gelesen = unklar = 0
     for i, slug in enumerate(new_slugs, 1):
         log(f"({i}/{len(new_slugs)}) {slug[:70]}")
         prog(current=i, total=len(new_slugs), message=slug[:60])
         status, rec = scrape_petition(fetcher, slug)
         if status == "error":
             continue
+        if status in ("online", "skip", "unklar"):
+            gelesen += 1
+        if status == "unklar":
+            unklar += 1
+            log("  Seite nicht auswertbar – bleibt im Vorrat.")
+            continue
         if status == "skip":
             log("  übersprungen (nicht DE).")
+            neu_verworfen.append(slug)
             continue
+        if status == "online":
+            belegt += 1
         core.upsert(store, slug, rec or {}, {}, status, ts, f"{BASE_URL}/p/{slug}")
         save()
 
@@ -485,10 +567,31 @@ def run(args) -> None:
         skip_slugs, geprueft = [], 0
         for k, slug in enumerate(known, 1):
             prog(current=k, total=len(known), message=slug[:60])
-            if core.skip_recent(store.get(slug), args):
+            # ⚠️⚠️ Die Bedingung ist bewusst NICHT nur skip_recent. Solange die
+            # Positivkontrolle des Registers noch nicht steht, wird geprüft,
+            # auch wenn der Satz erst vor Stunden dran war. Ohne das schlüge die
+            # Notbremse beim ZWEITEN Lauf eines Tages grundlos an: skip_recent
+            # hält dann fast alle bekannten Sätze zurück, `belegt` bliebe bei
+            # den ~7 Neuzugängen — unter der Schwelle 10 —, und im Dashboard
+            # stünde täglich eine Warnung, die nichts bedeutet. Eine Warnung,
+            # die jeden Tag dasselbe sagt, wird überlesen und nimmt die echten
+            # daneben mit.
+            # Der Preis ist gedeckelt und klein: höchstens 10 zusätzliche
+            # Abrufe, also 15 Sekunden, und nur in Läufen, die sonst gar keine
+            # Kontrolle hätten.
+            if (belegt >= core.VERWORFEN_BELEG_MIN
+                    and core.skip_recent(store.get(slug), args)):
                 continue
             status, rec = scrape_petition(fetcher, slug)
             if status == "error":
+                continue
+            if status in ("online", "skip", "unklar"):
+                gelesen += 1
+            if status == "unklar":
+                # Unlesbare Seite: kein Urteil über die Petition. Zählt bewusst
+                # NICHT als geprüft — sonst verwässerte sie den Nenner der
+                # Massen-Lösch-Bremse genau dann, wenn die gebraucht wird.
+                unklar += 1
                 continue
             geprueft += 1
             if status == "skip":
@@ -496,6 +599,12 @@ def run(args) -> None:
                 # bekannten Petitionen „nicht DE". Sammeln, unten mit Notbremse.
                 skip_slugs.append(slug)
                 continue
+            if status == "online":
+                # ⚠️ Hier entsteht die Positivkontrolle des Registers: ein
+                # bekannter Satz ist per Konstruktion deutsch, denn er wurde
+                # einmal als solcher angenommen. Erkennt die Prüfung ihn
+                # weiterhin, funktioniert sie.
+                belegt += 1
             core.upsert(store, slug, rec or {}, {}, status, ts,
                         f"{BASE_URL}/p/{slug}")
             save()
@@ -503,6 +612,12 @@ def run(args) -> None:
                 log(f"  OFFLINE: {slug[:60]}")
         core.entferne_skip(store, skip_slugs, geprueft, "Change.org",
                            grund_de="nicht DE", grund_en="not DE", save=save)
+
+    # Erst JETZT — die Positivkontrolle steht erst nach der Nachprüfung fest.
+    core.melde_unklare(unklar, gelesen, "Change.org")
+    lauf_meta["verworfen"] = core.merke_verworfene(
+        verworfen, neu_verworfen, belegt, "Change.org",
+        grund_de="nicht DE", grund_en="not DE")
 
     # Neu zählen: die Nachprüfung kann über heile_abgeschnittene/merge_records
     # weitere Sätze angelegt haben.
@@ -624,6 +739,10 @@ def run_en(args) -> None:
                         quiet=quiet)
 
     known = list(store.keys())
+    # ⚠️ „unklar" MUSS hier eigens abgefangen werden: der Status ist neu (siehe
+    # scrape_petition), und ohne den Zweig fiele er in den upsert darunter und
+    # legte einen LEEREN Datensatz an (rec ist None). Gilt für beide Schleifen.
+    gelesen = unklar = 0
     if known and not args.no_recheck and not args.limit:
         log(f"Prüfe {len(known)} bekannte englische Petition(en) …")
         prog(phase="check-known", current=0, total=len(known), message="…")
@@ -634,6 +753,11 @@ def run_en(args) -> None:
                 continue
             status, rec = scrape_petition(fetcher, slug, "en")
             if status == "error":
+                continue
+            if status in ("online", "skip", "unklar"):
+                gelesen += 1
+            if status == "unklar":
+                unklar += 1
                 continue
             if status == "skip":
                 weg.append(slug)
@@ -660,6 +784,11 @@ def run_en(args) -> None:
         status, rec = scrape_petition(fetcher, slug, "en")
         if status == "error":
             continue
+        if status in ("online", "skip", "unklar"):
+            gelesen += 1
+        if status == "unklar":
+            unklar += 1
+            continue
         if status == "skip":
             # Die Ortsseiten sind US-Seiten, aber nicht jede dort verlinkte
             # Petition ist englisch verfasst. Das ist kein Fehler, sondern
@@ -670,6 +799,7 @@ def run_en(args) -> None:
                     f"{BASE_URL}/p/{slug}")
         save()
 
+    core.melde_unklare(unklar, gelesen, "Change.org (English)")
     neue = [s for s, r in store.items() if r.get("first_seen") == ts]
     if neue:
         log(f"NEU: {len(neue)} neue englische Petition(en) in diesem Lauf.")

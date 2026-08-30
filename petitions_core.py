@@ -1564,6 +1564,132 @@ def entferne_skip(store: dict, slugs, geprueft: int, plattform: str,
     return len(slugs)
 
 
+# ---------------------------------------------------------------------------
+# Register verworfener Kandidaten
+# ---------------------------------------------------------------------------
+# ⚠️⚠️ Wofür das gut ist (30.8.2026 gemessen, Anlass Change.org): Ein Kandidat,
+# den die Sprachprüfung verwirft, wurde bis dahin NIRGENDS vermerkt. Beim
+# nächsten Lauf war er wieder „nicht im Bestand", die Entdeckung lieferte ihn in
+# derselben Reihenfolge, und er belegte erneut einen der 500 Plätze des Deckels.
+# Das Fenster stand also still: von 500 Abrufen je Lauf gingen rund 493 an
+# Adressen, deren Antwort schon einmal gelesen und verworfen worden war — 12
+# Minuten Serverlast pro Lauf, jeden Tag dieselbe, und die 13.826 nie geprüften
+# Kandidaten wurden NIE erreicht. Nicht „langsam", sondern gar nicht.
+#
+# Das Register hält die Verwerfungen fest, die Kandidatenliste filtert damit vor,
+# und das Fenster wandert. Es liegt im _meta des Bestandes und nicht in einer
+# eigenen Datei, weil der Actions-Cache ausschließlich *_petitions.json sichert
+# (.github/workflows/scrape.yml) — eine Extradatei wäre nach jedem Lauf weg.
+VERWORFEN_MAX = 25000
+# Obergrenze. Change.org kennt rund 16.100 Kandidaten, das Register kann also
+# gar nicht darüber hinauswachsen; der Deckel ist ein Netz gegen eine Quelle,
+# die eines Tages sehr viel mehr Adressen ausspielt. Bei ~64 Zeichen je Slug
+# entspricht er rund 1,7 MB im Bestand.
+
+VERWORFEN_BELEG_MIN = 10
+# ⚠️⚠️ DIE NOTBREMSE, und sie ist wichtiger als der Nutzen des Registers.
+# Bricht die Sprachprüfung (Change.org benennt "country" um, der Seitenaufbau
+# ändert sich), liefert JEDE Seite „verworfen". Ohne Bremse schriebe ein
+# einziger solcher Lauf den kompletten Kandidatenvorrat ins Register — und
+# anders als beim Löschen von Datensätzen fiele das nie auf: der Bestand bliebe
+# unverändert, es kämen nur nie wieder neue Petitionen dazu. Ein stiller,
+# dauerhafter Totalausfall.
+#
+# Die Kontrolle ist deshalb bewusst KEINE Quote auf den Neuzugängen. Am
+# 30.8.2026 an 60 echten Kandidaten gemessen: 59 verworfen, 1 angenommen
+# (98,3 %). Bei einem so hohen Grundpegel ist „alles verworfen" von „fast alles
+# verworfen" nicht zu unterscheiden — eine Quotenbremse hätte hier keine
+# Trennschärfe.
+#
+# Stattdessen dient die NACHPRÜFUNG als Positivkontrolle: die bekannten Sätze
+# sind per Konstruktion in der gesuchten Sprache, sie wurden ja einmal als
+# solche angenommen. Erkennt der Parser sie weiterhin, funktioniert er. `belegt`
+# zählt genau das — die Sätze, die dieser Lauf als gültig ANERKANNT hat. Im
+# Normalfall sind das Hunderte, bei kaputtem Parser ist es 0.
+# Die Frage „was zeigte diese Messung, wenn der Mechanismus kaputt wäre?" hat
+# hier also eine klare Antwort, und das ist der ganze Zweck der Zahl.
+
+
+def merke_verworfene(bekannt, neu, belegt: int, plattform: str,
+                     grund_de: str, grund_en: str = "",
+                     max_gesamt: int = VERWORFEN_MAX) -> list[str]:
+    """Erweitert das Register verworfener Kandidaten – aber nur, wenn derselbe
+    Lauf auch BELEGT hat, dass die Prüfung noch funktioniert.
+
+    `bekannt` ist das bisherige Register, `neu` die in diesem Lauf verworfenen
+    Slugs, `belegt` die Zahl der in diesem Lauf als gültig anerkannten Sätze
+    (Positivkontrolle, siehe VERWORFEN_BELEG_MIN).
+
+    Rückgabe: das neue Register. Bei greifender Bremse unverändert das alte –
+    lieber ein Lauf ohne Fortschritt als ein dauerhaft vergifteter Vorrat."""
+    vorher = list(dict.fromkeys(bekannt or []))
+    schon = set(vorher)
+    frisch = [s for s in dict.fromkeys(neu or []) if s not in schon]
+    if not frisch:
+        return vorher
+    if belegt < VERWORFEN_BELEG_MIN:
+        befund("warnung", f"{plattform}: Register nicht erweitert",
+               f"{len(frisch)} Kandidat(en) als „{grund_de}“ eingestuft, aber "
+               f"nur {belegt} Satz/Sätze in diesem Lauf als gültig anerkannt "
+               f"(nötig: {VERWORFEN_BELEG_MIN}). Das deutet auf eine gebrochene "
+               f"Sprachprüfung hin – die Kandidaten bleiben im Vorrat und "
+               f"werden erneut geprüft.",
+               thema_en=f"{plattform}: registry not extended",
+               text_en=f"{len(frisch)} candidate(s) flagged as “"
+                       f"{grund_en or grund_de}”, but only {belegt} record(s) "
+                       f"accepted as valid in this run (required: "
+                       f"{VERWORFEN_BELEG_MIN}). This points to a broken "
+                       f"language check – the candidates stay in the pool and "
+                       f"will be checked again.")
+        return vorher
+    liste = vorher + frisch
+    if len(liste) > max_gesamt:
+        # ⚠️ Nie still kürzen: was hier herausfällt, wird wieder abgerufen.
+        entfallen = len(liste) - max_gesamt
+        liste = liste[entfallen:]
+        log(f"  Register am Deckel ({max_gesamt}): {entfallen} älteste "
+            f"Eintrag/Einträge entfallen und werden erneut geprüft.")
+    log(f"  Register: +{len(frisch)} verworfen ({grund_de}), "
+        f"gesamt {len(liste)}.")
+    return liste
+
+
+UNKLAR_MIN_ABS = 10        # darunter ist es Rauschen (einzelne kaputte Seiten)
+UNKLAR_ANTEIL_MAX = 0.30   # >30 % unlesbare Seiten = der Seitenaufbau hat sich geändert
+
+
+def melde_unklare(unklar: int, gelesen: int, plattform: str) -> None:
+    """Meldet Seiten, die geladen haben, aber WEDER einen Datensatz ergaben NOCH
+    eine andere Sprache belegten.
+
+    ⚠️⚠️ Warum es diese Meldung geben MUSS: Solange eine unlesbare Seite als
+    „andere Sprache“ galt, schlug bei einem Bruch der Sprachprüfung die
+    Massen-Lösch-Bremse an – laut, sichtbar, im Dashboard. Seit die beiden Fälle
+    getrennt sind (scrape_petition: „skip“ nur bei BELEGTER Fremdsprache), kann
+    derselbe Bruch nicht mehr löschen und nicht mehr ins Register schreiben –
+    er wäre aber auch stumm. Ein Ausfall, der nichts kaputt macht und nichts
+    sagt, ist keiner, den man bemerkt. Diese Funktion ist der Ersatz für den
+    Alarm, den die Trennung weggenommen hat.
+
+    `gelesen` sind die Seiten, die mit HTTP 200 antworteten – nur an denen ist
+    der Anteil aussagekräftig. Netzfehler und 404 gehören nicht dazu."""
+    if unklar < UNKLAR_MIN_ABS:
+        return
+    anteil = unklar / max(gelesen, 1)
+    if anteil <= UNKLAR_ANTEIL_MAX:
+        return
+    befund("warnung", f"{plattform}: Seiten nicht mehr auswertbar",
+           f"{unklar} von {gelesen} geladenen Seiten ergaben weder einen "
+           f"Datensatz noch eine erkennbare Sprache ({anteil:.0%}). Das deutet "
+           f"auf einen geänderten Seitenaufbau hin – es wurde nichts gelöscht "
+           f"und nichts als verworfen vermerkt.",
+           thema_en=f"{plattform}: pages no longer parsable",
+           text_en=f"{unklar} of {gelesen} loaded pages yielded neither a "
+                   f"record nor a recognisable language ({anteil:.0%}). This "
+                   f"points to a changed page layout – nothing was deleted and "
+                   f"nothing was recorded as rejected.")
+
+
 # ActionKit (WeMove, 350.org) beantwortet auch unfertige und Testseiten mit
 # HTTP 200 — der Titel lautet dann „Enter a Title for <seitenname>". Solche
 # Seiten sind keine Petitionen.
