@@ -377,6 +377,65 @@ pruefe("leerer Bestand → still", code_lauf(0, 0), False)
 
 
 # ---------------------------------------------------------------------------
+# 5. host_gesperrt() — Folgemeldungen bei ausgelassenem Host
+# ---------------------------------------------------------------------------
+# Anlass (30.8.2026): Das Dashboard zählte eine Ursache mehrfach — Europarl mit
+# „Host ausgelassen" UND „Entdeckung 0 Treffer", Ekō mit „Host ausgelassen" UND
+# „Startdatum rückt nicht nach". Die zweiten Zeilen sind garantierte Folgen der
+# ersten. ⚠️ Der Riegel-Befund selbst darf NIE stumm werden; genau das prüft
+# der letzte Fall unten, sonst hätte man die Sperre statt des Lärms entfernt.
+def gesperrt_lauf(mit, ohne, datum, neue, available, gesperrt):
+    core._TLS.platform = "selbsttest"
+    core.BEFUNDE.pop("selbsttest", None)
+    if gesperrt:
+        core.befund("warnung", core.THEMA_HOST_AUSGELASSEN, "x.test: HTTP 429")
+    core._TLS.lauf_meta = {"new_petitions_last_run": [f"n{i}" for i in range(neue)],
+                           "available": available}
+    befunde, _ = core._bestandspruefung(datums_bestand(mit, ohne, datum), {})
+    return {b["thema"] for b in befunde}
+
+
+def entdeckung_meldet(gesperrt) -> bool:
+    core._TLS.platform = "selbsttest"
+    core.BEFUNDE.pop("selbsttest", None)
+    if gesperrt:
+        core.befund("warnung", core.THEMA_HOST_AUSGELASSEN, "x.test: HTTP 202")
+    core.entdeckung("Testzweig", 0, erwartet_min=10)
+    return any(b["thema"].startswith("Entdeckung")
+               for b in core.BEFUNDE.get("selbsttest", []))
+
+
+print()
+print("host_gesperrt() — Folgemeldungen unterdrücken")
+# ⚠️ Ekō hat available = 39 TROTZ Sperre (der Riegel greift erst nach der
+# Entdeckung). Ein Test, der available == 0 als Kennzeichen unterstellt, ginge
+# an genau diesem Fall vorbei — deshalb steht hier überall available > 0.
+pruefe("gesperrt + neue Sätze (Ekō-Fall) → Stufe 1 still",
+       "Startdatum rückt nicht nach" in gesperrt_lauf(100, 0, TAG(225), 1, 39, True),
+       False)
+pruefe("gesperrt + keine neuen Sätze → auch Stufe 2 still",
+       "Bestand altert" in gesperrt_lauf(100, 0, TAG(225), 0, 39, True), False)
+pruefe("NICHT gesperrt + neue Sätze (openPetition-Fall) → meldet",
+       "Startdatum rückt nicht nach" in gesperrt_lauf(100, 0, TAG(121), 12, 2000, False),
+       True)
+pruefe("NICHT gesperrt, nichts Neues, sehr alt → Stufe 2 meldet",
+       "Bestand altert" in gesperrt_lauf(100, 0, TAG(121), 0, 2000, False), True)
+pruefe("gesperrt + 0 Treffer (Europarl-Fall) → Entdeckung still",
+       entdeckung_meldet(True), False)
+pruefe("NICHT gesperrt + 0 Treffer → Entdeckung meldet",
+       entdeckung_meldet(False), True)
+# Die Sperrmeldung selbst muss überleben — sonst wäre das Aufräumen ein
+# Zudecken.
+core._TLS.platform = "selbsttest"
+core.BEFUNDE.pop("selbsttest", None)
+core.befund("warnung", core.THEMA_HOST_AUSGELASSEN, "x.test: HTTP 429")
+core.entdeckung("Testzweig", 0, erwartet_min=10)
+pruefe("die Sperrmeldung selbst bleibt stehen",
+       any(b["thema"] == core.THEMA_HOST_AUSGELASSEN
+           for b in core.BEFUNDE.get("selbsttest", [])), True)
+
+
+# ---------------------------------------------------------------------------
 print()
 if fehler:
     print(f"::error::selbsttest.py: {len(fehler)} Fall/Fälle fehlgeschlagen "

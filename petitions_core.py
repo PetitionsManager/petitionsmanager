@@ -798,7 +798,7 @@ class Fetcher:
         # blind: gesamt, online, ohne_titel, torsi und dubletten stehen
         # unverändert da. Der Lauf sähe aus wie „nichts Neues" – der
         # gefährlichste aller Zustände, weil er nach Erfolg aussieht.
-        befund("warnung", "Host ausgelassen (robots.txt nicht lesbar)",
+        befund("warnung", THEMA_HOST_AUSGELASSEN,
                f"{netloc}: {letzter}. Der Host wurde für diesen Lauf komplett "
                f"ausgelassen; von dort stammen KEINE frischen Daten. Der "
                f"Bestand bleibt unverändert stehen.",
@@ -1198,6 +1198,41 @@ BEFUNDE: dict[str, list[dict]] = {}
 BEFUND_LOCK = threading.Lock()
 VERLAUF_MAX = 30       # so viele Läufe hält die Zeitreihe je Plattform
 
+# Thema, unter dem der robots-Riegel einen ausgelassenen Host meldet. Steht als
+# Konstante hier, weil zwei Stellen sich darauf verlassen (siehe host_gesperrt).
+THEMA_HOST_AUSGELASSEN = "Host ausgelassen (robots.txt nicht lesbar)"
+
+
+def host_gesperrt() -> bool:
+    """Wurde für DIESE Plattform in DIESEM Lauf ein Host ausgelassen?
+
+    Anlass (30.8.2026): Das Dashboard zählte eine Ursache mehrfach. Europarl
+    stand mit „Host ausgelassen (HTTP 202)" da UND mit „Entdeckung: 0 Treffer",
+    Ekō mit „Host ausgelassen (HTTP 429)" UND mit „Startdatum rückt nicht
+    nach". Die zweite Zeile ist in beiden Fällen die garantierte Folge der
+    ersten und sagt nichts Eigenes — wer täglich sieben Warnungen sieht, von
+    denen drei dieselbe Sache meinen, sieht bald gar nicht mehr hin.
+
+    ⚠️⚠️ Das naheliegende Kennzeichen `available == 0` trägt NICHT, obwohl es
+    sich anbietet. Am 30.8. an den vier gesperrten Plattformen gemessen:
+    Europarl 0, aber Ekō 39, Ekō (EN) 30, WeMove (EN) 698. Der Riegel greift
+    dort erst NACH der Entdeckung (anderer Host bzw. spätere Phase), die
+    Entdeckungszahl steht also längst. Wer auf available prüft, legt genau die
+    Meldung nicht stumm, um die es geht.
+
+    Deshalb das direkte Kennzeichen: der robots-Befund liegt beim Aufruf schon
+    in BEFUNDE — er entsteht beim ersten Abruf, lange bevor eine Bestands-
+    prüfung läuft. Unter dem Lock gelesen, weil monitor.py --all mehrere
+    Plattformen nebenläufig scrapt und eine Liste, die gerade wächst, sonst
+    mitten in der Iteration umkippen kann.
+
+    ⚠️ Der Riegel-Befund selbst wird NIE unterdrückt — er ist die eigentliche
+    Aussage. Stumm werden nur die Folgemeldungen."""
+    key = getattr(_TLS, "platform", None) or "_cli"
+    with BEFUND_LOCK:
+        eintraege = list(BEFUNDE.get(key) or ())
+    return any(b.get("thema") == THEMA_HOST_AUSGELASSEN for b in eintraege)
+
 
 def eigene_adresse(kandidat: str | None, url: str,
                    muster: "re.Pattern[str]") -> str:
@@ -1311,7 +1346,12 @@ def entdeckung(name: str, treffer: int, erwartet_min: int = 1,
                            f"abandoned by the source and is delivering again. "
                            f"Re-arm the expectation (aufgegeben=False).")
         return treffer
-    if treffer < erwartet_min:
+    # ⚠️ Bei ausgelassenem Host schweigen: dass ein Zweig nichts findet, wenn
+    # gar nicht abgerufen werden durfte, ist keine Erkenntnis. Europarl stand
+    # am 30.8.2026 mit BEIDEN Zeilen im Dashboard („HTTP 202" und „0 Treffer –
+    # erwartet mindestens 10") und lieferte damit zweimal dieselbe Auskunft.
+    # Die Sperrmeldung bleibt, sie ist die eigentliche.
+    if treffer < erwartet_min and not host_gesperrt():
         befund("warnung", f"Entdeckung „{name}“",
                f"{treffer} Treffer – erwartet mindestens {erwartet_min}. "
                f"Zweig vermutlich ausgefallen (Seitenumbau?).",
@@ -1692,7 +1732,13 @@ def _bestandspruefung(store: dict, vorher: dict,
     #     sind über available == 0 ausgenommen. Wer die Zahl ändert, misst
     #     diese Reihe bitte neu — sie ist der ganze Grund für ihre Höhe.
     verfuegbar = (getattr(_TLS, "lauf_meta", None) or {}).get("available")
-    if deckung >= 0.2 and alter is not None:
+    # ⚠️ Wurde ein Host ausgelassen, schweigen BEIDE Stufen. Ein veraltetes
+    # Startdatum ist dann die garantierte Folge der Sperre und keine eigene
+    # Auskunft; die Sperrmeldung steht ohnehin daneben. Der Riegel sitzt VOR
+    # beiden Stufen, nicht nur vor Stufe 1: Ekō hat available = 39, Stufe 2
+    # verlangt available > 0 — nur Stufe 1 stumm zu schalten hätte die
+    # Warnung also bloß durch die andere ersetzt.
+    if deckung >= 0.2 and alter is not None and not host_gesperrt():
         if neu_dazu > 0 and alter > STARTDATUM_MAX_ALTER:
             merke("warnung", "Startdatum rückt nicht nach",
                   f"{neu_dazu} neue Sätze aufgenommen, das jüngste Startdatum "
