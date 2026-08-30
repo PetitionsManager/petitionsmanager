@@ -255,8 +255,33 @@ def run(args) -> None:
             status, rec = scrape_petition(fetcher, slug)
             if status == "error":
                 continue
-            core.upsert(store, slug, rec or {}, {}, status, ts,
-                        f"{BASE_URL}/{slug}")
+            # Umbenennung erkennen (30.8.2026). innn.it vergibt beim Anlegen
+            # einen aus dem TITEL gekürzten Slug (gemessen: 30 Zeichen, 529
+            # von 1977 Sätzen liegen genau darauf) und stellt bei einer
+            # Umbenennung eine 301 auf den neuen. An der Quelle nachgemessen:
+            # /keine-rentenkurzungen-fur-pfle → 301 → /pflegende-angehoerige.
+            #
+            # Die Anfrage folgt der Weiterleitung still, und das Ergebnis
+            # landete bisher unter dem ANGEFRAGTEN Slug — dieselbe Petition
+            # also zweimal im Bestand. Sichtbar wurde es erst am Befund
+            # „Mehrere Sätze auf derselben Adresse" (3 Adressen am 30.8.),
+            # denn record_from_signable() trägt die KANONISCHE URL ein: beide
+            # Sätze zeigen am Ende auf dieselbe Adresse und teilen sich im
+            # Export einen Volltext-Eintrag — einer der Texte geht verloren.
+            #
+            # Der kanonische Slug steckt schon in rec["url"] (aus sig["name"]),
+            # es braucht also KEINEN zweiten Abruf. Gleiches Vorgehen wie in
+            # weact_scraper.store_result().
+            ziel = slug
+            if status == "online" and rec:
+                kanon = str(rec.get("url") or "").rsplit("/", 1)[-1]
+                if kanon and kanon != slug and slug_ok(kanon):
+                    ziel = kanon
+                    if core.merge_records(store, slug, ziel):
+                        log(f"  UMBENANNT: {slug} → {ziel} (Weiterleitung) – "
+                            f"Datensätze zusammengeführt.")
+            core.upsert(store, ziel, rec or {}, {}, status, ts,
+                        f"{BASE_URL}/{ziel}")
             save()
             if status == "offline":
                 log(f"  OFFLINE: {slug}")
