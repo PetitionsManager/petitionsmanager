@@ -890,7 +890,11 @@
    zusätzlich eine layoutneutrale Regel in style.css (scale(.99)), die sonst
    zurückschlüge. Am CSSOM nachgemessen — keine scale-Regel mehr, beide
    Kachelarten stehen auf none, kein !important im Spiel (layouts.css) */
-var CACHE = "pm-cache-v57";
+/* v58: europarl liefert ein REINES Jahr als Startdatum statt eines erfundenen
+   1. Januar. fmtDate() musste mitwachsen — ohne den Jahres-Zweig griff der
+   Regex (YYYY-MM-DD) nicht und die Petition zeigte GAR KEIN Datum, was wie ein
+   fehlender Wert aussieht statt wie ein ungenauer (app.js) */
+var CACHE = "pm-cache-v58";
 /* Versionsunabhängig – überlebt das Hochzählen von CACHE. Diese Zahl sollte ab
    jetzt NICHT mehr steigen: seit die Pakete eine Inhaltskennung tragen ("?v=",
    siehe oben) holt sich jedes geänderte Paket von selbst neu. Ein Sprung wäre

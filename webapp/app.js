@@ -5650,11 +5650,19 @@
       "-" + p(d.getHours()) + "-" + p(d.getMinutes());
   }
 
-  // "DD.MM.YYYY, HH:MM Uhr" aus einem ISO-Zeitstempel.
-  // "2026-07-20" → "20.07.2026" (leer, wenn unbrauchbar)
+  // "2026-07-20" → "20.07.2026", "2026" → "2026" (leer, wenn unbrauchbar)
+  //
+  // ⚠️ Der Jahres-Zweig ist kein Schönheitswunsch: seit dem 30.8.2026 liefert
+  // europarl ein REINES Jahr, weil die Quelle nicht mehr hergibt (vorher stand
+  // dort ein erfundener 1. Januar). Ohne diesen Zweig griffe der Regex nicht
+  // und die Funktion gäbe "" zurück — die Petition zeigte dann GAR KEIN Datum
+  // an, was wie ein fehlender Wert aussieht statt wie ein ungenauer.
+  // Geprüft werden muss die Länge mit: /^\d{4}/ allein träfe auch "20260720".
   function fmtDate(iso) {
-    var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(iso || ""));
-    return m ? m[3] + "." + m[2] + "." + m[1] : "";
+    var s = String(iso || "");
+    var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(s);
+    if (m) return m[3] + "." + m[2] + "." + m[1];
+    return /^\d{4}$/.test(s) ? s : "";
   }
 
   function fmtDateTime(iso) {

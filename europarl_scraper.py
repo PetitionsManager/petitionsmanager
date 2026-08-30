@@ -15,11 +15,18 @@
 #      (Achtung: der Schrägstrich der Petitionsnummer ist DOPPELT kodiert)
 #
 #  BESONDERHEITEN:
-#  - Es gibt KEINE öffentliche Unterstützerzahl → signatures bleibt leer.
+#  - signatures bleibt leer. ⚠️ Die frühere Begründung „es gibt KEINE
+#    öffentliche Unterstützerzahl" stimmt seit dem 30.8.2026 nicht mehr: das
+#    öffentliche PDF (siehe _pdf_url) führt „Number of supporters". Genutzt
+#    wird es trotzdem nicht — Nutzerentscheidung, die PDF-Inhalte gelten als
+#    nicht verlässlich. Wer das ändert, prüft die Zahl erst gegen die Seite.
 #  - Titel-Muster: "Petition No 0232/2026 by T. A. (German) on <Thema>"
 #    → daraus werden Petent*in ("T. A. (German)") und Thema extrahiert.
 #  - "Topics" der Detailseite wird als Kategorie übernommen.
-#  - Startdatum ≈ Jahr aus der Petitionsnummer (01.01.).
+#  - Startdatum = NUR das Jahr aus der Petitionsnummer ("2026"). Bis zum
+#    30.8.2026 stand dort ein erfundener 1. Januar; siehe parse_detail.
+#  - Die amtliche PDF-Fassung wird in der Beschreibung VERLINKT (nicht
+#    ausgelesen), siehe _pdf_url.
 #  - Slug = "NNNN-YYYY" (aus der Petitionsnummer).
 # =============================================================================
 
@@ -153,6 +160,26 @@ def _detail_url(slug: str, lang: str = HAUPTSPRACHE) -> str:
             f"petitionNumber={num}%252F{year}")
 
 
+def _pdf_url(slug: str, lang: str = HAUPTSPRACHE) -> str:
+    """Adresse der amtlichen PDF-Fassung — dieselbe Nummer, anderer Endpunkt.
+
+    Das PDF ist OHNE Login abrufbar (30.8.2026 an sechs Jahrgängen geprüft,
+    6 von 6 mit HTTP 200) und trägt die Petition als einseitiges Dokument.
+
+    ⚠️ Es wird bewusst NUR VERLINKT, nicht ausgelesen. Sein Feld „Creation
+    date" sähe wie ein besseres Startdatum aus — der Nutzer hat am 30.8.2026
+    entschieden, dass die PDF-Inhalte nicht stimmen. Die Zuordnung stimmt
+    dagegen nachweislich (6 von 6 PDFs meldeten die angeforderte Nummer), der
+    Link führt also nicht in die Irre.
+
+    ⚠️ Die doppelte Kodierung `%252F` ist kein Versehen: die Quelle erwartet
+    den Schrägstrich der Petitionsnummer zweifach kodiert, genau wie in
+    _detail_url."""
+    num, year = slug.split("-")
+    return (f"{BASE_URL}/petitions/{lang}/petition/content/pdf?"
+            f"petitionNumber={num}%252F{year}")
+
+
 # ----------------------------------------------------------------------------
 # Entdeckung
 # ----------------------------------------------------------------------------
@@ -264,14 +291,65 @@ def parse_detail(html: str, url: str, slug: str,
         rec["description_full"] = f"<p>{core._esc(summary)}</p>"
         rec["summary"] = (summary[:200] + "…") if len(summary) > 200 else summary
 
+    # Amtliche PDF-Fassung verlinken (Nutzerwunsch 30.8.2026). Sie enthält den
+    # Wortlaut als Dokument und ist ohne Login abrufbar.
+    #
+    # ⚠️ Der Link hängt AUSSERHALB des `if summary`-Zweigs: er steht auch dann
+    # zu, wenn die Zusammenfassung fehlt — gerade dann ist er am nützlichsten,
+    # weil die Beschreibung sonst leer bliebe.
+    # ⚠️ Adresse selbst gebaut, nicht von der Seite übernommen: dann kann keine
+    # fremde Adresse aus fremdem Inhalt hier landen (dieselbe Vorsorge wie
+    # core.eigene_adresse). `_esc` bleibt trotzdem drum herum — die Adresse
+    # geht in ein Attribut, und `&` darin muss maskiert sein, sonst zerfällt
+    # das HTML still.
+    # ⚠️ rel="noopener" gehört dazu, target="_blank" öffnet sonst ein Fenster
+    # mit Zugriff auf window.opener. sanitize_fragment setzt für fremde Texte
+    # dasselbe Paar; hier bauen wir den Link selbst, also auch die Absicherung.
+    # ⚠️⚠️ Die Beschriftung ist ABSICHTLICH so knapp — „PDF" plus Nummer.
+    # core.make_tags() leitet die Schlagwörter aus title + summary +
+    # description_full ab, dieser Linktext landet also mit darin. Eine schöne
+    # Beschriftung erzeugt prompt Müll-Schlagwörter: am echten Bestand gemessen
+    # hätte „Official version of this petition as PDF" bei 17 von 98 Sätzen
+    # „Official" und „Version" als Schlagwort erzeugt, „Amtliche Fassung …"
+    # entsprechend „Amtliche", „Original-PDF" sogar sich selbst.
+    # Mit „PDF 0474/2026" sind es 0: „PDF" bleibt unter der Mindestlänge von
+    # vier Zeichen, die Zahlen fallen als Ziffernfolgen heraus.
+    # ➡️ Wer das hier hübscher formulieren will, misst vorher make_tags() gegen
+    # den echten Bestand — sonst stehen die neuen Wörter danach in der
+    # Schlagwortwolke und sind über die Filter anklickbar.
+    num, jahr = slug.split("-")
+    pdf = core._esc(_pdf_url(slug, lang))
+    rec["description_full"] = (rec.get("description_full") or "") + (
+        f'<p><a href="{pdf}" target="_blank" rel="noopener">'
+        f'PDF {core._esc(num)}/{core._esc(jahr)}</a></p>')
+
     rec["recipient"] = L["empfaenger"]
     # Gemeinsame Kennung aller Sprachfassungen: die Petitionsnummer. Sie ist
     # in jeder der 24 Amtssprachen dieselbe. Gebraucht wird sie nur, falls je
     # zwei Sprachfassungen als GETRENNTE Sätze in den Bestand geraten — der
     # Regelfall ist, dass scrape_petition beide in einen Satz legt.
     rec["campaign_id"] = f"europarl:{slug}"
-    year = slug.split("-")[1]
-    rec["start_date"] = f"{year}-01-01"
+    # Startdatum: NUR das Jahr. Mehr gibt die Quelle an dieser Stelle nicht her —
+    # die Zahl stammt aus der Petitionsnummer (0474/2026), nicht von der Seite.
+    #
+    # ⚠️⚠️ Bis zum 30.8.2026 stand hier f"{year}-01-01" und behauptete damit den
+    # 1. Januar. Das ist kein Rundungsfehler, sondern eine Tatsachenbehauptung:
+    # die App zeigt den Wert tagesgenau an, und gemessen an sechs Jahrgängen lag
+    # er um +1 bis +345 Tage daneben. Ein fehlender Monat ist sichtbar, ein
+    # erfundener nicht — dieselbe Entscheidung wie bei der Jahresform von
+    # openPetition (siehe openpetition_scraper._startdatum).
+    #
+    # ⚠️ Folgen, vor der Umstellung gemessen und bewusst so gewollt:
+    #   · `date.fromisoformat("2026")` wirft ValueError → Prüfung (e) in
+    #     petitions_core setzt alter=None und überspringt europarl still. Das
+    #     ist hier richtig: ein Jahreswert kann per Bauart nie „frisch" sein und
+    #     hätte den Melder sonst neun von zwölf Monaten blinken lassen.
+    #   · Der Stringvergleich trägt weiter ("2026" > "2025-12-31"), Sortierung
+    #     und der Frische-Vergleich der App bleiben also heil.
+    #   · fmtDate() in der App musste mitwachsen, sonst zeigte sie GAR NICHTS
+    #     statt "2026" (der Regex verlangte YYYY-MM-DD).
+    if re.fullmatch(r"\d{4}", year := slug.split("-")[1]):
+        rec["start_date"] = year
     rec["url"] = url
     rec["kind"] = "petition"
     if status_txt:
