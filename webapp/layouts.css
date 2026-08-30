@@ -814,7 +814,18 @@
      darüber lesbar blieb (--ink auf Bundestag-Schwarz wären sonst 1,03:1
      gewesen). Über dem Text braucht es beides nicht mehr – nichts überlappt,
      also volle Markenfarbe. */
-  [data-layout="relief"] .opt .plogo{position:static;opacity:1;
+  /* ⚠️ transform:none gehört ZWINGEND dazu, nicht nur position:static.
+     style.css setzt an .opt .plogo beides zusammen — absolut platziert MIT
+     translateY(-50%), weil top:50% sonst die Oberkante statt der Mitte
+     ausrichtet. Wird hier nur die Position zurückgenommen, bleibt der Versatz
+     stehen und zieht das Logo um die halbe eigene Höhe nach oben: bei 2rem
+     sind das 16 px, also genau das Polster der Zeile — gemessen saß die
+     Oberkante bei 0 statt bei 16, das Logo klebte am oberen Rand. Unten
+     stimmte es weiter, was den Fehler so schwer zu sehen macht.
+     Die Nachbarregel für die Kacheln (weiter oben) macht es seit jeher
+     richtig; hier hat es von Anfang an gefehlt. Siehe
+     global_feedback_css_override_completeness. */
+  [data-layout="relief"] .opt .plogo{position:static;transform:none;opacity:1;
     order:-1;flex:0 0 100%;width:auto;height:2rem;margin:0;
     -webkit-mask-size:calc(var(--logo-ar,4) * var(--logo-h,1.75rem)
                            * var(--logo-k,.5)) auto;

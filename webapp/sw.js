@@ -880,7 +880,11 @@
 /* v55: „Über die App" verlinkt jetzt den Zustandsbericht der Quellen. Er lag
    veröffentlicht da und zeigte seine Warnungen an niemanden — die App
    verwies nirgends darauf (app.js/texts.js) */
-var CACHE = "pm-cache-v55";
+/* v56: relief, schmale Ansicht — das Logo in den Einstellungszeilen klebte am
+   oberen Rand. Die Regel nahm position:absolute zurück, aber nicht das dazu
+   gehörende translateY(-50%); der Versatz zog es um die halbe Höhe (16 px)
+   über sein Polster. Gemessen 0 statt 16 (layouts.css) */
+var CACHE = "pm-cache-v56";
 /* Versionsunabhängig – überlebt das Hochzählen von CACHE. Diese Zahl sollte ab
    jetzt NICHT mehr steigen: seit die Pakete eine Inhaltskennung tragen ("?v=",
    siehe oben) holt sich jedes geänderte Paket von selbst neu. Ein Sprung wäre
