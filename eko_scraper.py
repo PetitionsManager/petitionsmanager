@@ -183,6 +183,35 @@ def _parse_card(card) -> tuple[str, dict] | None:
     return m.group(1), data
 
 
+# Meta-Namen, die wir GESEHEN und ENTSCHIEDEN haben. Was hier fehlt, meldet
+# core.felder_melden() als „Neues Feld auf der Quellseite".
+#
+# ⚠️⚠️ eko ist der Sonderfall unter den elf, aus einem gemessenen Grund: von 18
+# angefragten Detailseiten (eko + eko_en, 30.8.2026) antwortete **eine** mit
+# HTTP 200; die anderen 17 leiten auf den neuen Vercel-Host um, der mit 429
+# sperrt. Der alte Champaign-Host wandert gerade ab.
+#
+# Deshalb wird an ZWEI Stellen geerntet, mit sehr verschiedener Trefferchance:
+#   · in discover_slugs, an der KAMPAGNENÜBERSICHT — sie läuft bei jedem Lauf
+#     und ist seit dem Bot-Schutz die Quelle der Sätze (record_from_card).
+#     12 Namen, auf beiden geprüften Varianten identisch.
+#   · in parse_detail, falls doch einmal eine Detailseite antwortet. Diese
+#     Hälfte ruht auf n=1 — mehr war nicht zu holen, und das ist eine Aussage
+#     über die Migration, keine Nachlässigkeit.
+#
+# ⚠️ Antwortet actions.eko.org/a/<slug> wieder verlässlich mit 200 (siehe
+# „BEOBACHTEN" im Kopf), gehört diese Liste an echten Seiten nachgemessen.
+BEKANNTE_FELDER = {
+    # Kampagnenübersicht (eko.org/de/campaigns), zwei Varianten geprüft
+    "description", "next-size-adjust", "og:description", "og:image",
+    "og:site_name", "og:title", "og:type", "twitter:card",
+    "twitter:description", "twitter:image", "twitter:title", "viewport",
+    # Detailseite, altes Champaign-Muster (nur noch 1 von 18 erreichbar)
+    "csrf-param", "csrf-token", "fb:app_id", "liquid_layout", "og:url",
+    "optimization_tags", "twitter:creator", "twitter:domain", "twitter:site",
+}
+
+
 def discover_slugs(fetcher: core.Fetcher) -> dict[str, dict]:
     """Kandidaten aus der Kampagnen-Startseite PLUS der Union vieler deutscher
     Suchbegriffe (die Suche cappt bei 27/Begriff, liefert aber je nach Begriff
@@ -199,6 +228,9 @@ def discover_slugs(fetcher: core.Fetcher) -> dict[str, dict]:
         resp = fetcher.get(f"{WWW_URL}/de/campaigns{qs}")
         if resp is not None and resp.ok:
             soup = BeautifulSoup(resp.text, "html.parser")
+            # Die Übersicht ist bei eko die Stelle, die WIRKLICH jeden Lauf
+            # gesehen wird — die Detailseiten sind fast alle abgewandert.
+            core.felder_aus_meta(soup)
             for card in soup.select(CARD_SEL):
                 parsed = _parse_card(card)
                 if parsed and parsed[0] not in found:
@@ -300,6 +332,9 @@ def parse_detail(html: str, url: str) -> dict | None:
     Eko hat ZWEI Templates: actions.eko.org (alt, Champaign-Server-HTML mit
     Thermometer-JSON) und action.eko.org (neu, Next.js – ältere Kampagnen
     werden dorthin umgeleitet; Daten in __NEXT_DATA__.props.pageProps)."""
+    # Zweite Ernte-Stelle, siehe BEKANNTE_FELDER: greift nur, wenn eine
+    # Detailseite überhaupt noch antwortet (1 von 18 am 30.8.2026).
+    core.felder_aus_meta(BeautifulSoup(html, "html.parser"))
     m_next = NEXT_DATA_RE.search(html)
     if m_next:
         try:
@@ -512,6 +547,10 @@ def run(args) -> None:
             continue
         core.upsert(store, slug, rec or {}, {}, status, ts, f"{BASE_URL}/a/{slug}")
         save()
+
+    # Einmal je Lauf, VOR dem Abschluss-Save — sonst fehlte der Befund im _meta
+    # und damit im Dashboard.
+    core.felder_melden(BEKANNTE_FELDER)
 
     new_petitions = [s for s, r in store.items() if r.get("first_seen") == ts]
     if new_petitions:
