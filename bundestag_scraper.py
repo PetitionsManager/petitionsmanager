@@ -209,8 +209,32 @@ def discover_slugs(fetcher: core.Fetcher, status: int = 2) -> dict[str, dict]:
 # ----------------------------------------------------------------------------
 # Detailseite parsen
 # ----------------------------------------------------------------------------
+# Meta-Namen, die wir GESEHEN und ENTSCHIEDEN haben. Was hier fehlt, meldet
+# core.felder_melden() als „Neues Feld auf der Quellseite".
+#
+# ⚠️ Am 30.8.2026 über 11 echte Detailseiten abgelesen, nicht über eine.
+# Genutzt wird davon nur ein Teil (og:description, og:image, og:title …); der
+# Rest steht als bewusst VERWORFEN dabei — Seitentechnik, keine Inhalte. Ein
+# Eintrag hier heißt „gesehen und entschieden", nicht „genutzt".
+BEKANNTE_FELDER = {
+    "SmartView_Page",
+    "WT.cg_n",
+    "WT.ti",
+    "apple-mobile-web-app-capable",
+    "apple-mobile-web-app-status-bar-style",
+    "content-language",
+    "description",
+    "format-detection",
+    "mobile-web-app-capable",
+    "robots",
+    "viewport",
+}
+
+
 def parse_detail(html: str, url: str) -> dict:
     soup = BeautifulSoup(html, "html.parser")
+    # Feldraum dieser Quelle sind die Meta-Tags (siehe BEKANNTE_FELDER).
+    core.felder_aus_meta(soup)
     rec: dict = {}
 
     # ⚠️ KORREKTUR 8.8.2026 (Nutzerbefund: "die begründung fehlt in der
@@ -443,6 +467,10 @@ def run(args) -> None:
     elif todo:
         log(f"Volltext-Warteschlange: {len(todo)} offen (in diesem Lauf "
             "übersprungen).")
+
+    # Einmal je Lauf, VOR dem Abschluss-Save — sonst fehlte
+    # der Befund im _meta und damit im Dashboard.
+    core.felder_melden(BEKANNTE_FELDER)
 
     new_petitions = [s for s, r in store.items() if r.get("first_seen") == ts]
     if new_petitions:

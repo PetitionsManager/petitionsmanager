@@ -364,9 +364,36 @@ def _doc_title(soup: BeautifulSoup) -> str | None:
     return t or None
 
 
+# Meta-Namen, die wir GESEHEN und ENTSCHIEDEN haben. Was hier fehlt, meldet
+# core.felder_melden() als „Neues Feld auf der Quellseite".
+#
+# ⚠️ Am 30.8.2026 über 14 echte Detailseiten abgelesen, nicht über eine.
+# Genutzt wird davon nur ein Teil (og:description, og:image, og:title …); der
+# Rest steht als bewusst VERWORFEN dabei — Seitentechnik, keine Inhalte. Ein
+# Eintrag hier heißt „gesehen und entschieden", nicht „genutzt".
+BEKANNTE_FELDER = {
+    "description",
+    "fb:app_id",
+    "og:description",
+    "og:image",
+    "og:site_name",
+    "og:title",
+    "og:ttl",
+    "og:type",
+    "og:url",
+    "robots",
+    "twitter:card",
+    "twitter:creator",
+    "twitter:site",
+    "viewport",
+}
+
+
 def parse_detail(html: str, url: str,
                  muster: re.Pattern = None) -> dict:
     soup = BeautifulSoup(html, "html.parser")
+    # Feldraum dieser Quelle sind die Meta-Tags (siehe BEKANNTE_FELDER).
+    core.felder_aus_meta(soup)
     rec: dict = {}
 
     h1 = soup.select_one("h1.petition-page-title")
@@ -885,6 +912,10 @@ def run(args) -> None:
         log(f"Archiv: {gefunden} wiedergefunden, {weg} endgültig weg, "
             f"{len(arch_todo)} bleiben offen.")
         save()
+
+    # Einmal je Lauf, VOR dem Abschluss-Save — sonst fehlte
+    # der Befund im _meta und damit im Dashboard.
+    core.felder_melden(BEKANNTE_FELDER)
 
     new_petitions = [s for s, r in store.items() if r.get("first_seen") == ts]
     if new_petitions:

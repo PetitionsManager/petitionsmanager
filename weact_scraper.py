@@ -397,8 +397,43 @@ def _extract_aktion_content(soup: BeautifulSoup) -> str | None:
     return html or None
 
 
+# Meta-Namen, die wir GESEHEN und ENTSCHIEDEN haben. Was hier fehlt, meldet
+# core.felder_melden() als „Neues Feld auf der Quellseite".
+#
+# ⚠️ Am 30.8.2026 über 22 echte Detailseiten abgelesen, nicht über eine.
+# Genutzt wird davon nur ein Teil (og:description, og:image, og:title …); der
+# Rest steht als bewusst VERWORFEN dabei — Seitentechnik, keine Inhalte. Ein
+# Eintrag hier heißt „gesehen und entschieden", nicht „genutzt".
+BEKANNTE_FELDER = {
+    "appsignal-frontend-api-key",
+    "appsignal-revision",
+    "csp-nonce",
+    "csrf-param",
+    "csrf-token",
+    "description",
+    "fb:app_id",
+    "format-detection",
+    "msapplication-TileImage",
+    "og:description",
+    "og:image",
+    "og:site_name",
+    "og:title",
+    "og:type",
+    "og:url",
+    "twitter:card",
+    "twitter:description",
+    "twitter:image",
+    "twitter:image:alt",
+    "twitter:site",
+    "twitter:title",
+    "viewport",
+}
+
+
 def parse_detail(html: str, url: str) -> dict:
     soup = BeautifulSoup(html, "html.parser")
+    # Feldraum dieser Quelle sind die Meta-Tags (siehe BEKANNTE_FELDER).
+    core.felder_aus_meta(soup)
     rec: dict = {}
 
     # Aktion-Template: og:title ist oft gekürzt – volle Überschrift im
@@ -722,6 +757,10 @@ def run(args) -> None:
         store_result(slug, key, rec, hints.get(key) or hints.get(slug) or {},
                      status)
         save()
+
+    # Einmal je Lauf, VOR dem Abschluss-Save — sonst fehlte
+    # der Befund im _meta und damit im Dashboard.
+    core.felder_melden(BEKANNTE_FELDER)
 
     new_petitions = [s for s, r in store.items() if r.get("first_seen") == ts]
     if new_petitions:

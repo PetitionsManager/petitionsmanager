@@ -1360,6 +1360,27 @@ def felder_gesehen(labels) -> None:
                     if (s := str(x).strip())})
 
 
+def felder_aus_meta(soup) -> None:
+    """Erntet die Namen aller <meta>-Tags einer Detailseite.
+
+    Der gemeinsame Feldraum der HTML-Plattformen. Am 30.8.2026 über je sechs
+    bis neun echte Seiten je Plattform gemessen — er ist klein und erstaunlich
+    stabil: changeorg 19 Namen auf 19 von 19 Seiten, bundestag 11 von 11,
+    openPetition 10 von 10. Ein neuer og:-Eintrag ist dort also ein Signal und
+    kein Rauschen.
+
+    ⚠️ Geerntet werden NAMEN, nie Werte. WeAct liefert `csrf-token` und
+    `csp-nonce` mit bei jedem Abruf wechselndem Inhalt — als Wert wäre das
+    reines Rauschen, als Name ist es eine feste Größe.
+
+    ⚠️ Diese Ernte ersetzt NICHT die plattformeigene: europarl hat eine
+    Label-Wert-Tabelle, innn.it ein JSON-Objekt. Beide tragen mehr als ihre
+    Meta-Tags, und beide behalten deshalb ihre eigene Ernte.
+    """
+    felder_gesehen((m.get("property") or m.get("name") or "").strip()
+                   for m in soup.find_all("meta"))
+
+
 def felder_zuruecksetzen() -> None:
     """Leert die Feld-Ernte dieses Threads.
 

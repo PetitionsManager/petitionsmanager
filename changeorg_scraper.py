@@ -219,6 +219,36 @@ def _volltext_treffer(html: str):
     return DESC_RE.search(html)
 
 
+# Meta-Namen, die wir GESEHEN und ENTSCHIEDEN haben. Was hier fehlt, meldet
+# core.felder_melden() als „Neues Feld auf der Quellseite".
+#
+# ⚠️ Am 30.8.2026 über 19 echte Detailseiten abgelesen, nicht über eine.
+# Genutzt wird davon nur ein Teil (og:description, og:image, og:title …); der
+# Rest steht als bewusst VERWORFEN dabei — Seitentechnik, keine Inhalte. Ein
+# Eintrag hier heißt „gesehen und entschieden", nicht „genutzt".
+BEKANNTE_FELDER = {
+    "description",
+    "fb:app_id",
+    "og:description",
+    "og:image",
+    "og:image:height",
+    "og:image:secure_url",
+    "og:image:width",
+    "og:locale",
+    "og:site_name",
+    "og:title",
+    "og:ttl",
+    "og:type",
+    "og:url",
+    "twitter:card",
+    "twitter:creator",
+    "twitter:image",
+    "twitter:image:alt",
+    "twitter:site",
+    "viewport",
+}
+
+
 def parse_detail(html: str, url: str, sprache: str = "de") -> dict | None:
     """None = Petition der falschen Sprache (skip).
 
@@ -274,6 +304,8 @@ def parse_detail(html: str, url: str, sprache: str = "de") -> dict | None:
     rec["category"] = themed[0] if themed else None
 
     soup = BeautifulSoup(html, "html.parser")
+    # Feldraum dieser Quelle sind die Meta-Tags (siehe BEKANNTE_FELDER).
+    core.felder_aus_meta(soup)
     og = soup.find("meta", property="og:image")
     rec["image_url"] = og["content"].strip() if og and og.get("content") else None
     rec["url"] = url
@@ -474,6 +506,10 @@ def run(args) -> None:
 
     # Neu zählen: die Nachprüfung kann über heile_abgeschnittene/merge_records
     # weitere Sätze angelegt haben.
+    # Einmal je Lauf, VOR dem Abschluss-Save — sonst fehlte
+    # der Befund im _meta und damit im Dashboard.
+    core.felder_melden(BEKANNTE_FELDER)
+
     new_petitions = [s for s, r in store.items() if r.get("first_seen") == ts]
     lauf_meta["new_petitions_last_run"] = new_petitions
     if new_petitions:

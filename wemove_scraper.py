@@ -202,8 +202,32 @@ def _meta(soup: BeautifulSoup, prop: str) -> str | None:
     return None
 
 
+# Meta-Namen, die wir GESEHEN und ENTSCHIEDEN haben. Was hier fehlt, meldet
+# core.felder_melden() als „Neues Feld auf der Quellseite".
+#
+# ⚠️ Am 30.8.2026 über 11 echte Detailseiten abgelesen, nicht über eine.
+# Genutzt wird davon nur ein Teil (og:description, og:image, og:title …); der
+# Rest steht als bewusst VERWORFEN dabei — Seitentechnik, keine Inhalte. Ein
+# Eintrag hier heißt „gesehen und entschieden", nicht „genutzt".
+BEKANNTE_FELDER = {
+    "description",
+    "og:description",
+    "og:image",
+    "og:site_name",
+    "og:title",
+    "og:type",
+    "og:url",
+    "robots",
+    "twitter:card",
+    "twitter:image",
+    "viewport",
+}
+
+
 def parse_detail(html: str, url: str, page: str, lang: str = "de") -> dict:
     soup = BeautifulSoup(html, "html.parser")
+    # Feldraum dieser Quelle sind die Meta-Tags (siehe BEKANNTE_FELDER).
+    core.felder_aus_meta(soup)
     rec: dict = {}
 
     # Das erste h1 der Seite steckt in <noscript> ("JavaScript is disabled")
@@ -528,6 +552,10 @@ def run(args) -> None:
         core.upsert(store, page, rec or {}, {}, status, ts,
                     f"{BASE_URL}/sign/{page}")
         save()
+
+    # Einmal je Lauf, VOR dem Abschluss-Save — sonst fehlte
+    # der Befund im _meta und damit im Dashboard.
+    core.felder_melden(BEKANNTE_FELDER)
 
     new_petitions = [s for s, r in store.items() if r.get("first_seen") == ts]
     if new_petitions:

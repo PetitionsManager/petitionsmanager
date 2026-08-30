@@ -444,6 +444,33 @@ def _sprachlinks(html: str, slug: str) -> dict[str, str]:
     return treffer
 
 
+# Meta-Namen, die wir GESEHEN und ENTSCHIEDEN haben. Was hier fehlt, meldet
+# core.felder_melden() als „Neues Feld auf der Quellseite".
+#
+# ⚠️ Am 30.8.2026 über 16 echte Detailseiten abgelesen, nicht über eine.
+# Genutzt wird davon nur ein Teil (og:description, og:image, og:title …); der
+# Rest steht als bewusst VERWORFEN dabei — Seitentechnik, keine Inhalte. Ein
+# Eintrag hier heißt „gesehen und entschieden", nicht „genutzt".
+BEKANNTE_FELDER = {
+    "fb:app_id",
+    "google-site-verification",
+    "og:description",
+    "og:image",
+    "og:locale",
+    "og:title",
+    "og:type",
+    "og:url",
+    "twitter:card",
+    "twitter:description",
+    "twitter:image",
+    "twitter:site",
+    "twitter:site:id",
+    "twitter:title",
+    "twitter:url",
+    "viewport",
+}
+
+
 def fetch_detail(fetcher: core.Fetcher, kind: str, slug: str) -> dict:
     """Einleitung + Aufruftext der Aktionsseite holen – je nach Form woanders.
 
@@ -461,6 +488,8 @@ def fetch_detail(fetcher: core.Fetcher, kind: str, slug: str) -> dict:
     if resp is None or not resp.ok:
         return {}
     soup = BeautifulSoup(resp.text, "html.parser")
+    # Feldraum dieser Quelle sind die Meta-Tags (siehe BEKANNTE_FELDER).
+    core.felder_aus_meta(soup)
     intro = soup.select_one(INTRO_SEL)
     appeal = soup.select_one(APPEAL_SEL)
     if intro is None:
@@ -703,6 +732,10 @@ def _lauf(args, data_file, plattform, lang_code: str, sprache: str,
                 "drosselt. Hole für den Rest des Laufs nur noch Metadaten.")
         core.upsert(store, page_id, rec, {}, status, ts, rec["url"])
         save()
+
+    # Einmal je Lauf, VOR dem Abschluss-Save — sonst fehlte
+    # der Befund im _meta und damit im Dashboard.
+    core.felder_melden(BEKANNTE_FELDER)
 
     new_petitions = [s for s, r in store.items() if r.get("first_seen") == ts]
     if new_petitions:

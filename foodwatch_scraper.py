@@ -102,12 +102,51 @@ def _meta(soup: BeautifulSoup, prop: str) -> str | None:
     return None
 
 
+# Meta-Namen, die wir GESEHEN und ENTSCHIEDEN haben. Was hier fehlt, meldet
+# core.felder_melden() als „Neues Feld auf der Quellseite".
+#
+# ⚠️ Am 30.8.2026 über 26 echte Detailseiten abgelesen, nicht über eine.
+# Genutzt wird davon nur ein Teil (og:description, og:image, og:title …); der
+# Rest steht als bewusst VERWORFEN dabei — Seitentechnik, keine Inhalte. Ein
+# Eintrag hier heißt „gesehen und entschieden", nicht „genutzt".
+BEKANNTE_FELDER = {
+    "description",
+    "format-detection",
+    "generator",
+    "google-site-verification",
+    "msapplication-TileColor",
+    "msapplication-TileImage",
+    "msapplication-config",
+    "msapplication-tilecolor",
+    "msapplication-tileimage",
+    "og:description",
+    "og:image",
+    "og:image:alt",
+    "og:image:height",
+    "og:image:url",
+    "og:image:width",
+    "og:site_name",
+    "og:title",
+    "og:type",
+    "og:url",
+    "theme-color",
+    "twitter:card",
+    "twitter:description",
+    "twitter:image",
+    "twitter:image:alt",
+    "twitter:title",
+    "viewport",
+}
+
+
 def parse_detail(html: str, url: str, muster: re.Pattern = None) -> dict:
     """`muster` ist der Maßstab für core.eigene_adresse; ohne Angabe der
     deutsche Baum. Der englische Baum hat ein anderes Wegstück und braucht
     deshalb EN_DETAILADRESSE_RE, sonst greift der Riegel dort nie."""
     muster = muster if muster is not None else DETAILADRESSE_RE
     soup = BeautifulSoup(html, "html.parser")
+    # Feldraum dieser Quelle sind die Meta-Tags (siehe BEKANNTE_FELDER).
+    core.felder_aus_meta(soup)
     rec: dict = {}
 
     h1 = soup.find("h1")
@@ -351,6 +390,10 @@ def run(args) -> None:
             continue
         core.upsert(store, slug, rec or {}, {}, status, ts, f"{LIST_URL}/{slug}")
         save()
+
+    # Einmal je Lauf, VOR dem Abschluss-Save — sonst fehlte
+    # der Befund im _meta und damit im Dashboard.
+    core.felder_melden(BEKANNTE_FELDER)
 
     new_petitions = [s for s, r in store.items() if r.get("first_seen") == ts]
     if new_petitions:
