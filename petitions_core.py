@@ -2666,11 +2666,29 @@ def _logo_chip(platform: Platform, schnappschuss: bool, farbe: str) -> str:
     nichts von der Seite und wird schwarz — auf einer dunklen Kachel also
     unsichtbar. Deshalb sitzt das Logo auf einer FESTEN hellen Fläche, in
     beiden Designs gleich; die Hausfarbe rahmt sie."""
-    datei = Path("webapp/logos") / f"{platform.key}.svg"
+    # ⚠️ Sprachzwillinge erben die Marke vom Grundschlüssel (30.8.2026). Der
+    # Sammellauf führt neben "changeorg" auch "changeorg_en", eine eigene
+    # Logodatei gibt es dafür nicht — die sechs englischen Kacheln standen
+    # deshalb OHNE Logo da, während die elf deutschen eines trugen (am
+    # ausgelieferten Dashboard gezählt: 11 plogo bei 17 Karten).
+    # Dieselbe Lücke hatte die App; dort ist sie am 29.8. mit basisKey()
+    # geschlossen worden. Sie steckt hier ein ZWEITES Mal, weil das Dashboard
+    # einen eigenen Weg geht — eine Reparatur im JS erreicht dieses Python nie.
+    # ⚠️ Abgeschnitten wird nur, wenn zum Rest WIRKLICH eine Datei existiert.
+    # Sonst borgte sich ein künftiger Schlüssel mit Unterstrich stillschweigend
+    # eine fremde Marke; ohne Treffer bleibt es beim leeren Rückgabewert wie
+    # bisher. Trägt damit auch für _fr/_es, ohne Nachpflege an dieser Stelle.
+    schluessel = platform.key
+    if not (Path("webapp/logos") / f"{schluessel}.svg").exists() \
+            and "_" in schluessel:
+        stamm = schluessel.rsplit("_", 1)[0]
+        if stamm and (Path("webapp/logos") / f"{stamm}.svg").exists():
+            schluessel = stamm
+    datei = Path("webapp/logos") / f"{schluessel}.svg"
     if not datei.exists():
         return ""
-    pfad = f"logos/{platform.key}.svg" if schnappschuss \
-        else f"webapp/logos/{platform.key}.svg"
+    pfad = f"logos/{schluessel}.svg" if schnappschuss \
+        else f"webapp/logos/{schluessel}.svg"
     rahmen = f'border-color:{_esc(farbe)}' if farbe else ""
     return (f'<span class="plogo" style="{rahmen}">'
             f'<img src="{_esc(pfad)}" alt="" loading="lazy"></span>')
