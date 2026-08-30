@@ -22,6 +22,8 @@ from __future__ import annotations
 import sys
 from datetime import date, timedelta
 
+from bs4 import BeautifulSoup
+
 import openpetition_scraper as openpetition
 import petitions_core as core
 
@@ -123,13 +125,29 @@ def datums_bestand(mit: int, ohne: int, datum: str) -> dict:
     return s
 
 
-def datums_lauf(mit: int, ohne: int, datum: str, neue: int) -> bool:
+def datums_lauf(mit: int, ohne: int, datum: str, neue: int,
+                available=2000) -> bool:
+    """True, wenn Stufe 1 („Startdatum rückt nicht nach") meldet."""
+    return _datums_lauf(mit, ohne, datum, neue, available)[0]
+
+
+def _datums_lauf(mit, ohne, datum, neue, available):
+    """(Stufe 1, Stufe 2) — beide Meldungen der Prüfung (e)."""
     core._TLS.platform = "selbsttest"
     core._TLS.lauf_meta = {"new_petitions_last_run": [f"n{i}"
                                                       for i in range(neue)]}
+    if available is not None:
+        core._TLS.lauf_meta["available"] = available
     core.BEFUNDE.pop("selbsttest", None)
     befunde, _ = core._bestandspruefung(datums_bestand(mit, ohne, datum), {})
-    return any(b["thema"] == "Startdatum rückt nicht nach" for b in befunde)
+    themen = [b["thema"] for b in befunde]
+    return ("Startdatum rückt nicht nach" in themen,
+            "Bestand altert" in themen)
+
+
+def altert(mit, ohne, datum, neue=0, available=2000) -> bool:
+    """True, wenn Stufe 2 („Bestand altert") meldet."""
+    return _datums_lauf(mit, ohne, datum, neue, available)[1]
 
 
 print()
@@ -159,6 +177,44 @@ pruefe("unbekanntes Datumsformat → still",
 # am 29.8.2026 genau so beobachtet). Deshalb zusätzlich eine Spanne statt
 # eines festen Werts: sie lässt eine begründete Nachjustierung zu und fängt
 # trotzdem das versehentliche Stilllegen.
+
+# ---------------------------------------------------------------------------
+# Prüfung (e), STUFE 2: „Bestand altert" — ohne Neuzugänge, dafür älter
+# ---------------------------------------------------------------------------
+# Die erste Stufe hatte eine Lücke an genau dem Fall, für den sie gebaut wurde:
+# im Lauf vom 30.8.2026 meldete sie für eko und schwieg für openPetition, weil
+# dort nichts Neues dazukam (Bedingung `neu > 0`). Stufe 2 schließt das —
+# gemessene Grundpegel am 30.8.: 41 (bundestag), 60 (wemove), 76 (avaaz),
+# 121 (openpetition), 225 (eko), 241 (europarl) Tage.
+print()
+print("_bestandspruefung() (e) Stufe 2 — Bestand altert")
+alt = core.STARTDATUM_ALT_TAGE
+pruefe(f"{alt + 1} Tage, keine Neuzugänge, Plattform läuft → meldet",
+       altert(56, 44, TAG(alt + 1)), True)
+pruefe(f"{alt - 1} Tage → still",
+       altert(100, 0, TAG(alt - 1)), False)
+# 76 Tage ist der echte Avaaz-Wert: er darf NICHT melden, sonst blinkt jede
+# Plattform, die eine Weile nichts veröffentlicht hat.
+pruefe("76 Tage (echter Avaaz-Wert) → still", altert(79, 21, TAG(76)), False)
+pruefe("41 Tage (echter Bundestag-Wert) → still", altert(100, 0, TAG(41)), False)
+# Gesperrter Host: available == 0. Der bekommt schon zwei andere Meldungen,
+# eine dritte wäre Lärm.
+pruefe("Host gesperrt (available 0) → still",
+       altert(56, 44, TAG(200), available=0), False)
+pruefe("available unbekannt → still",
+       altert(56, 44, TAG(200), available=None), False)
+pruefe("Deckung 0,1 % (WeAct) → still", altert(2, 1905, TAG(200)), False)
+# Kommen Neuzugänge dazu, ist Stufe 1 die schärfere Aussage — dann darf NUR
+# sie melden, sonst stünde zweimal dasselbe am Lauf.
+s1, s2 = _datums_lauf(56, 44, TAG(200), 3, 2000)
+pruefe("mit Neuzugängen → Stufe 1 meldet", s1, True)
+pruefe("mit Neuzugängen → Stufe 2 schweigt", s2, False)
+
+pruefe("zweite Schwelle liegt über der ersten",
+       core.STARTDATUM_ALT_TAGE > core.STARTDATUM_MAX_ALTER, True)
+pruefe("zweite Schwelle in vernünftiger Spanne (60–180 Tage)",
+       60 <= core.STARTDATUM_ALT_TAGE <= 180, True)
+
 pruefe("Schwelle liegt in vernünftiger Spanne (14–60 Tage)",
        14 <= core.STARTDATUM_MAX_ALTER <= 60, True)
 pruefe("Lösch-Bremse zwischen 10 % und 50 %",
@@ -210,6 +266,50 @@ for text, soll, was in [
 # sie in „Gestartet 28.08.2026" nach der falschen Zahl.
 pruefe("tagesgenau schlägt monatsgenau (Reihenfolge)",
        openpetition._startdatum("Gestartet 28.08.2026"), "2026-08-28")
+
+
+# ---------------------------------------------------------------------------
+# 4. sanitize_fragment() — <style>/<script> müssen GANZ weg
+#
+# Warum das hier steht (30.8.2026): Nutzermeldung, die Avaaz-Petition „Welt an
+# Trump" zeige mitten im Text ihr Seiten-CSS („#sign_the_letter_disclaimer {
+# margin-top: 40px; … }"). Ursache war unwrap() für alles Unerlaubte — richtig
+# für <div>/<span>, falsch für Elemente, deren INHALT Quelltext ist. Über alle
+# 19.919 ausgelieferten Volltexte gemessen: 25 betroffen (0,13 %).
+#
+# ⚠️ Der dritte Fall ist die eigentliche Falle: find_all() liefert eine
+# MOMENTAUFNAHME. Wird ein <svg> entfernt, hängt sein <path> noch in dieser
+# Liste, aber nicht mehr im Baum — ein unwrap() darauf wirft. Ohne die
+# decomposed-Sperre stirbt hier die ganze Beschreibung, nicht nur das CSS.
+# ---------------------------------------------------------------------------
+print()
+print("sanitize_fragment() — Quelltext-Elemente")
+
+
+def sanitiert(html: str) -> str:
+    node = BeautifulSoup(html, "html.parser").div
+    return core.sanitize_fragment(node, "https://x.test")
+
+
+pruefe("<style> verschwindet samt Inhalt",
+       sanitiert("<div><p>Hallo</p><style>#a { color: red; }</style></div>"),
+       "<p>Hallo</p>")
+pruefe("<script> verschwindet samt Inhalt",
+       sanitiert("<div><p>Hi</p><script>var x = 1;</script></div>"),
+       "<p>Hi</p>")
+pruefe("<svg> mit Kind reisst nichts mit (decomposed-Sperre)",
+       sanitiert("<div><svg><path d='M0 0'/></svg><p>X</p></div>"), "<p>X</p>")
+pruefe("<iframe> verschwindet",
+       sanitiert("<div><iframe src='https://y.test'></iframe><p>Y</p></div>"),
+       "<p>Y</p>")
+# Gegenprobe: ein GEWÖHNLICHER unerlaubter Tag wird weiterhin AUSGEPACKT, sein
+# Text bleibt. Ohne diesen Fall bewiese das Obige nur, dass die Funktion
+# irgendetwas wegwirft.
+pruefe("<div>/<span> werden weiter ausgepackt, Text bleibt",
+       sanitiert("<div><span>Text bleibt</span></div>"), "<p>Text bleibt</p>")
+pruefe("erlaubte Tags bleiben unangetastet",
+       sanitiert("<div><p>A</p><ul><li>B</li></ul></div>"),
+       "<p>A</p><ul><li>B</li></ul>")
 
 
 # ---------------------------------------------------------------------------

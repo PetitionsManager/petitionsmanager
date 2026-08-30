@@ -100,6 +100,20 @@ DASHBOARD_FILE  = Path("dashboard.html")
 ALLOWED_DESC_TAGS = {"h2", "h3", "h4", "p", "ul", "ol", "li",
                      "strong", "em", "b", "i", "br", "a", "blockquote",
                      "img", "figure", "figcaption"}
+# ⚠️⚠️ Tags, deren INHALT Quelltext ist und kein Text. Sie müssen GANZ weg
+# (decompose), nicht ausgepackt (unwrap) werden — sonst steht ihr Rumpf als
+# sichtbarer Absatz in der Beschreibung. Gemessen am 30.8.2026 über alle
+# 19.919 ausgelieferten Volltexte: 25 betroffen (0,13 %), darunter die
+# Avaaz-Petition „Welt an Trump", die dem Leser ihr komplettes Seiten-CSS
+# zeigte („#sign_the_letter_disclaimer { margin-top: 40px; … }").
+#
+# ⚠️ Der Fehler ist genau deshalb so lange unbemerkt geblieben, weil unwrap()
+# für JEDEN ANDEREN Tag richtig ist: <div>, <span>, <table> auspacken heißt
+# den Text behalten und die Hülle wegwerfen. Nur bei <style>/<script> ist der
+# Inhalt selbst die Hülle. Wer hier etwas ergänzt, prüfe dieselbe Frage:
+# steht im Element Text für Menschen oder Anweisungen für den Browser?
+CODE_DESC_TAGS = {"style", "script", "noscript", "template", "iframe",
+                  "object", "embed", "applet", "svg", "math", "canvas"}
 # Davon die Block-Elemente: steht eines an der Wurzel eines Fragments, darf
 # sanitize_fragment kein <p> mehr darumlegen (siehe dort).
 BLOCK_DESC_TAGS = {"h2", "h3", "h4", "p", "ul", "ol", "blockquote", "figure"}
@@ -421,6 +435,16 @@ def sanitize_fragment(node, base_url: str) -> str:
     weglässt, verliert den Absatz um den losen Text – deshalb bekommt jede
     zusammenhängende Folge loser Stücke ihren eigenen Absatz."""
     for t in list(node.find_all(True)):
+        # ⚠️ Die Liste ist eine MOMENTAUFNAHME. Wird ein <svg>/<iframe> unten
+        # decompose()t, hängen seine Kinder noch in dieser Liste, aber nicht
+        # mehr im Baum — ein unwrap() darauf wirft ("not part of a tree").
+        if getattr(t, "decomposed", False):
+            continue
+        if t.name in CODE_DESC_TAGS:
+            # Erst der Inhalt, dann die Hülle: unwrap() würde den Quelltext
+            # als Absatz stehen lassen (siehe CODE_DESC_TAGS).
+            t.decompose()
+            continue
         if t.name not in ALLOWED_DESC_TAGS:
             t.unwrap()
             continue
@@ -1306,6 +1330,11 @@ def entdeckung(name: str, treffer: int, erwartet_min: int = 1,
 # Unterschriften-Historie ausgelöscht (der Live-Bestand liegt nur im
 # Actions-Cache, nicht im Repo). Deshalb wird ab einem auffälligen Anteil gar
 # nicht gelöscht, sondern gewarnt.
+STARTDATUM_ALT_TAGE = 90
+# Zweite, langsamere Stufe: so alt darf das jüngste start_date sein, bevor eine
+# LAUFENDE Plattform auch ohne Neuzugänge gemeldet wird (Prüfung (e), Stufe 2).
+# Am 30.8.2026 gemessen; die Begründung der Höhe steht dort.
+
 STARTDATUM_MAX_ALTER = 30
 # Tage, die das jüngste start_date eines Bestandes alt sein darf, bevor NEUE
 # Sätze als verdächtig gelten (Prüfung (e) in _bestandspruefung). Am 29.8.2026
@@ -1615,21 +1644,61 @@ def _bestandspruefung(store: dict, vorher: dict,
                      - _dt.date.fromisoformat(juengstes_start)).days
         except ValueError:          # unerwartetes Format – lieber nicht raten
             alter = None
-    if (neu_dazu > 0 and deckung >= 0.2
-            and alter is not None and alter > STARTDATUM_MAX_ALTER):
-        merke("warnung", "Startdatum rückt nicht nach",
-              f"{neu_dazu} neue Sätze aufgenommen, das jüngste Startdatum im "
-              f"Bestand ist aber {alter} Tage alt ({juengstes_start}). "
-              f"Entweder wird das Feld nicht mehr gelesen – dann prüfe den "
-              f"Ausdruck, der start_date aus der Seite zieht – oder die Quelle "
-              f"liefert wirklich nichts Neues.",
-              thema_en="Start date is not catching up",
-              text_en=f"{neu_dazu} new records added, but the newest start "
-                      f"date in the store is {alter} days old "
-                      f"({juengstes_start}). Either the field is no longer "
-                      f"being read – then check the expression that extracts "
-                      f"start_date from the page – or the source really has "
-                      f"nothing new.")
+    #
+    #     ⚠️⚠️ ZWEITE STUFE, nachgerüstet am 30.8.2026 — die erste hatte eine
+    #     Lücke, und zwar genau an dem Fall, für den sie gebaut wurde. Im Lauf
+    #     vom 30.8. meldete sie für eko (1 neuer Satz, Datum 225 Tage alt) und
+    #     SCHWIEG für openPetition, dessen Daten seit 121 Tagen stehen — weil
+    #     dort an dem Tag nichts Neues dazukam und die Bedingung `neu > 0`
+    #     verlangt. Diese Bedingung schützt vor täglichem Blinken bei ruhigen
+    #     Plattformen; sie blendet aber aus, was gerade still verrottet.
+    #
+    #     Zweite Stufe deshalb OHNE `neu > 0`, dafür mit deutlich höherer
+    #     Altersschwelle und nur für Plattformen, die WIRKLICH gelaufen sind:
+    #     `available > 0` heißt, die Entdeckung hat etwas gefunden. Ein
+    #     gesperrter Host hat available == 0 und bekommt seine eigene Meldung
+    #     (robots-Riegel und melde_eingefrorene) — der Bestand altert dort
+    #     zwangsläufig, das ein drittes Mal zu melden wäre Lärm.
+    #
+    #     Grundpegel am 30.8.2026 über alle 17 Bestände, Alter des jüngsten
+    #     Startdatums in Tagen:
+    #       0, 0, 1, 4  ·  41 (bundestag) · 60 (wemove, wemove_en) · 76 (avaaz)
+    #       ·  112 (weact, unter der Deckungsschwelle) · 121 (openpetition)
+    #       ·  225 (eko) · 241 (europarl)
+    #     Die 90 liegen in der Lücke 76 → 121. Damit meldet heute genau
+    #     openPetition; bundestag/wemove/avaaz bleiben still, eko und europarl
+    #     sind über available == 0 ausgenommen. Wer die Zahl ändert, misst
+    #     diese Reihe bitte neu — sie ist der ganze Grund für ihre Höhe.
+    verfuegbar = (getattr(_TLS, "lauf_meta", None) or {}).get("available")
+    if deckung >= 0.2 and alter is not None:
+        if neu_dazu > 0 and alter > STARTDATUM_MAX_ALTER:
+            merke("warnung", "Startdatum rückt nicht nach",
+                  f"{neu_dazu} neue Sätze aufgenommen, das jüngste Startdatum "
+                  f"im Bestand ist aber {alter} Tage alt ({juengstes_start}). "
+                  f"Entweder wird das Feld nicht mehr gelesen – dann prüfe den "
+                  f"Ausdruck, der start_date aus der Seite zieht – oder die "
+                  f"Quelle liefert wirklich nichts Neues.",
+                  thema_en="Start date is not catching up",
+                  text_en=f"{neu_dazu} new records added, but the newest start "
+                          f"date in the store is {alter} days old "
+                          f"({juengstes_start}). Either the field is no longer "
+                          f"being read – then check the expression that "
+                          f"extracts start_date from the page – or the source "
+                          f"really has nothing new.")
+        elif (alter > STARTDATUM_ALT_TAGE
+                and isinstance(verfuegbar, int) and verfuegbar > 0):
+            merke("warnung", "Bestand altert",
+                  f"Die Entdeckung fand {verfuegbar} Sätze, das jüngste "
+                  f"Startdatum im Bestand ist aber {alter} Tage alt "
+                  f"({juengstes_start}) – und es kam in diesem Lauf nichts "
+                  f"Neues dazu. Die Plattform läuft also, ihr Bestand steht "
+                  f"trotzdem still.",
+                  thema_en="Store is ageing",
+                  text_en=f"Discovery found {verfuegbar} records, but the "
+                          f"newest start date in the store is {alter} days old "
+                          f"({juengstes_start}) – and nothing new arrived in "
+                          f"this run. The platform is running, yet its store "
+                          f"stands still.")
 
     return neu, kennzahlen
 
