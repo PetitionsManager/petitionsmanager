@@ -455,7 +455,7 @@ print("felder_melden() — Neues Feld auf der Quellseite")
 def feld_lauf(gesehen, bekannt):
     """(unbekannte Felder, Zahl der Befunde)."""
     core._TLS.platform = "selbsttest"
-    core._TLS.felder = set()
+    core.felder_zuruecksetzen()
     core.BEFUNDE.pop("selbsttest", None)
     core.felder_gesehen(gesehen)
     neu = core.felder_melden(bekannt)
@@ -486,13 +486,37 @@ pruefe("Leerraum wird abgeschnitten, Leeres verworfen", n, 0)
 
 # ⚠️ Der Nachhall-Fall, s. o.
 core._TLS.platform = "selbsttest"
-core._TLS.felder = set()
+core.felder_zuruecksetzen()
 core.BEFUNDE.pop("selbsttest", None)
 core.felder_gesehen(["Neues Feld"])
 core.felder_melden(BEKANNT)
 zweiter = core.felder_melden(BEKANNT)
 pruefe("zweiter Lauf ohne neue Ernte → still (Menge wurde geleert)",
        zweiter, set())
+
+# ⚠️ Die HÄUFIGKEIT ist die Entscheidungshilfe im Bericht: an innn.it gemessen
+# standen über acht Seiten 31 Schlüssel, aber nur 22 auf allen — darunter
+# `gclid` und `mtm_campaign`, also Tracking-Parameter statt Inhalte. Ohne die
+# Zahl im Text ist ein Ausreißer von einem echten neuen Feld nicht zu
+# unterscheiden. Deshalb zählt jede geerntete Seite mit, auch eine LEERE.
+core._TLS.platform = "selbsttest"
+core.felder_zuruecksetzen()
+core.BEFUNDE.pop("selbsttest", None)
+for i in range(5):
+    core.felder_gesehen(["Immer"] + (["Selten"] if i < 2 else []))
+core.felder_melden({"Immer"})
+text = (core.BEFUNDE.get("selbsttest") or [{}])[0].get("text", "")
+pruefe("Bericht nennt die Häufigkeit (2 von 5 Seiten)", "Selten (2/5)" in text, True)
+
+core._TLS.platform = "selbsttest"
+core.felder_zuruecksetzen()
+core.BEFUNDE.pop("selbsttest", None)
+core.felder_gesehen(["A"])
+core.felder_gesehen([])            # leere Ernte MUSS als Seite zählen
+core.felder_melden(set())
+text = (core.BEFUNDE.get("selbsttest") or [{}])[0].get("text", "")
+pruefe("leere Ernte zählt als geprüfte Seite (1/2, nicht 1/1)",
+       "A (1/2)" in text, True)
 
 
 # ---------------------------------------------------------------------------

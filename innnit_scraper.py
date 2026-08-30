@@ -82,7 +82,37 @@ FETCH_HEADERS = {
 # ----------------------------------------------------------------------------
 # signable-JSON → Datensatz (gilt für API-Items UND Detailseiten-JSON)
 # ----------------------------------------------------------------------------
+# Alle Schlüssel des signable-Objekts, die wir GESEHEN und ENTSCHIEDEN haben —
+# genutzte wie verworfene. Was hier fehlt, meldet core.felder_melden() als
+# „Neues Feld auf der Quellseite".
+#
+# ⚠️⚠️ Abgelesen über ACHT echte Petitionen, nicht über eine. Genau das war
+# nötig: eine einzelne Seite trug 28 Schlüssel, die Vereinigung über acht
+# dagegen 31 — und nur 22 standen auf allen. Wer die Liste aus einer Stichprobe
+# von 1 baut, lässt den Melder wochenlang Nachzügler melden.
+#
+# ⚠️ Vier davon sind gar keine Inhalte, sondern Tracking-Parameter der Quelle
+# (`gclid` kommt von Google-Anzeigen, `mtm_*` von Matomo). Sie stehen hier als
+# ausdrücklich VERWORFEN — nicht, weil sie unbekannt wären, sondern damit der
+# Melder sie nicht täglich wiederholt.
+BEKANNTE_FELDER = {
+    # auf allen acht Seiten
+    "_id", "_initiators", "authorId", "canEdit", "content", "createdAt",
+    "featuredImage", "hashtag", "hidden", "highlight", "id",
+    "initiativeStatus", "initiators", "name", "signatureCount", "status",
+    "success", "tag", "targets", "title", "type", "updatedAt",
+    # nur auf manchen — echte Inhalte
+    "optionalFields", "sharingImage", "sharingImageStatus", "signatureTarget",
+    "cleverreachSegment", "highlightPriority",
+    # verworfen: Tracking, keine Petitionsinhalte
+    "gclid", "mtm_campaign", "tracked_campaign",
+}
+
+
 def record_from_signable(sig: dict) -> dict:
+    # Die Schlüssel des Quellobjekts einsammeln, bevor wir auswählen — sonst
+    # sähe der Melder nur, wonach ohnehin gesucht wird.
+    core.felder_gesehen(sig)
     rec: dict = {}
     rec["title"] = sig.get("title")
     rec["petition_id"] = sig.get("id") or sig.get("_id")
@@ -285,6 +315,10 @@ def run(args) -> None:
             save()
             if status == "offline":
                 log(f"  OFFLINE: {slug}")
+
+    # Einmal je Lauf, VOR dem Abschluss-Save — sonst fehlte der Befund im _meta
+    # und damit im Dashboard.
+    core.felder_melden(BEKANNTE_FELDER)
 
     new_petitions = [s for s, r in store.items() if r.get("first_seen") == ts]
     if new_petitions:

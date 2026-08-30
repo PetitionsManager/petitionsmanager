@@ -29,6 +29,7 @@
 
 from __future__ import annotations
 
+import collections as _collections
 import datetime as _dt
 import json
 import os
@@ -1340,13 +1341,35 @@ def felder_gesehen(labels) -> None:
     mehrere Plattformen nebenläufig, ein Modul-Global würde ihre Felder
     vermischen. Dieselbe Überlegung wie bei `befund()` — nur braucht es hier
     kein Lock, weil `threading.local()` je Thread eine eigene Menge führt.
+
+    ⚠️⚠️ Gezählt wird, nicht nur gesammelt (30.8.2026, nach der Messung an
+    innn.it). Eine reine Menge verschweigt das Entscheidende: dort standen über
+    acht Seiten **31** Schlüssel, aber nur 22 auf allen. Unter den Wackligen
+    waren `gclid`, `mtm_campaign` und `tracked_campaign` — Tracking-Parameter,
+    keine Inhalte. Ohne die Häufigkeit im Bericht ist ein einmaliger Ausreißer
+    von einem echten neuen Feld nicht zu unterscheiden, und genau diese
+    Unterscheidung soll der Melder dem Menschen abnehmen.
     """
-    if not labels:
-        return
-    menge = getattr(_TLS, "felder", None)
-    if menge is None:
-        menge = _TLS.felder = set()
-    menge.update(str(x).strip() for x in labels if str(x).strip())
+    zaehler = getattr(_TLS, "felder", None)
+    if zaehler is None:
+        zaehler = _TLS.felder = _collections.Counter()
+    # Auch eine LEERE Ernte zählt als gesehene Seite — sonst stünde ein Feld,
+    # das auf 3 von 2000 Seiten vorkommt, hinterher als „3 von 3".
+    _TLS.felder_seiten = getattr(_TLS, "felder_seiten", 0) + 1
+    zaehler.update({s for x in (labels or ())
+                    if (s := str(x).strip())})
+
+
+def felder_zuruecksetzen() -> None:
+    """Leert die Feld-Ernte dieses Threads.
+
+    Ruft `felder_melden()` am Laufende ohnehin selbst; hier steht sie für
+    Aufrufer, die VOR einer Ernte einen sauberen Stand brauchen — vor allem
+    `selbsttest.py`. Damit muss niemand den internen Typ von `_TLS.felder`
+    kennen; genau daran ist der Selbsttest beim Umbau auf Zählen zerbrochen.
+    """
+    _TLS.felder = _collections.Counter()
+    _TLS.felder_seiten = 0
 
 
 def felder_melden(bekannt, plattform_en: str = "") -> set[str]:
@@ -1368,21 +1391,32 @@ def felder_melden(bekannt, plattform_en: str = "") -> set[str]:
 
     Rückgabe: die unbekannten Beschriftungen (leer, wenn alles bekannt ist).
     """
-    gesehen = getattr(_TLS, "felder", None) or set()
-    _TLS.felder = set()                     # nächster Lauf beginnt bei null
+    gesehen = getattr(_TLS, "felder", None) or _collections.Counter()
+    seiten = getattr(_TLS, "felder_seiten", 0)
+    _TLS.felder = _collections.Counter()    # nächster Lauf beginnt bei null
+    _TLS.felder_seiten = 0
     neu = {f for f in gesehen if f not in bekannt}
     if not neu:
         return set()
-    liste = ", ".join(sorted(neu)[:8]) + (" …" if len(neu) > 8 else "")
+    # Nach Häufigkeit sortiert: das Verbreitete zuerst. Ein Feld, das die
+    # Quelle wirklich neu ausrollt, steht auf VIELEN Seiten; ein Ausreißer wie
+    # `gclid` auf wenigen. Die Zahl dahinter ist die Entscheidungshilfe — ohne
+    # sie ist beides derselbe Satz.
+    geordnet = sorted(neu, key=lambda f: (-gesehen[f], f))
+    liste = ", ".join(f"{f} ({gesehen[f]}/{seiten})" for f in geordnet[:6])
+    if len(geordnet) > 6:
+        liste += f" … und {len(geordnet) - 6} weitere"
     befund("hinweis", "Neues Feld auf der Quellseite",
            f"{len(neu)} Beschriftung(en) stehen auf den Detailseiten, die der "
-           f"Scraper nicht kennt: {liste}. Prüfen, ob sich daraus Inhalte "
-           f"holen lassen — und die Entscheidung danach in BEKANNTE_FELDER "
-           f"eintragen (auch ein „verworfen“ gehört dort hinein), sonst "
-           f"meldet dieser Hinweis bei jedem Lauf erneut.",
+           f"Scraper nicht kennt (Zahl = auf wie vielen der {seiten} "
+           f"geprüften Seiten): {liste}. Prüfen, ob sich daraus Inhalte holen "
+           f"lassen — und die Entscheidung danach in BEKANNTE_FELDER eintragen "
+           f"(auch ein „verworfen“ gehört dort hinein), sonst meldet dieser "
+           f"Hinweis bei jedem Lauf erneut.",
            thema_en="New field on the source page",
            text_en=f"{len(neu)} label(s) appear on the detail pages that the "
-                   f"scraper does not know: {liste}. Check whether they carry "
+                   f"scraper does not know (the number says on how many of the "
+                   f"{seiten} pages checked): {liste}. Check whether they carry "
                    f"usable content – then record the decision in "
                    f"BEKANNTE_FELDER (a deliberate „ignore“ belongs there "
                    f"too), otherwise this note returns on every run.")
