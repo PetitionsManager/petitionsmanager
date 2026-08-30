@@ -543,6 +543,13 @@ PLATFORM = Platform(
     # Avaaz, das dafür seit jeher eine 2 trägt — die Skala nennt „Bot-Schutz“
     # ausdrücklich als Merkmal des unteren Endes.
     openness=2,
+    openness_wunsch="Die deutsche Kampagnenliste auf eko.org ist frei. Die "
+                    "Kampagnenseiten selbst leiten von actions.eko.org per HTTP 301 "
+                    "auf action.eko.org, und dort antwortet ein Bot-Checkpoint mit "
+                    "HTTP 429 — auch für gewöhnliche Browser außerhalb von "
+                    "Rechenzentren. Im Bestand fehlt deshalb bei allen 39 Sätzen der "
+                    "Volltext. Eine Ausnahme für Lesezugriffe oder ein "
+                    "maschinenlesbarer Index würde genügen.",
     openness_note="Eingeschränkt: die deutsche Kampagnenliste ist offen, aber "
                   "die Detailseiten liegen seit 8.8.2026 hinter einem "
                   "Bot-Schutz (Umzug auf action.eko.org, HTTP 429). Für neue "
@@ -671,6 +678,11 @@ def check_en(fetcher):
 PLATFORM_EN = Platform(
     key="eko_en",
     openness=2,
+    openness_wunsch="Die englische Kampagnenliste ist offen und paginiert — vier "
+                    "Abrufe decken sie ab. Die Detailseiten liegen aber hinter "
+                    "demselben Bot-Checkpoint wie im deutschen Zweig (action.eko.org, "
+                    "HTTP 429); ohne sie bleiben nur Titel, Kurztext und Bild aus der "
+                    "Kampagnenkarte. Eine Ausnahme für Lesezugriffe würde genügen.",
     openness_note="Eingeschränkt: die englische Kampagnenliste ist offen und "
                   "sogar paginiert (4 Abrufe decken sie ab), aber die "
                   "Detailseiten liegen hinter demselben Bot-Schutz wie im "

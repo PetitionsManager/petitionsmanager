@@ -918,6 +918,10 @@ def check(fetcher):
 PLATFORM = Platform(
     key="avaaz",
     openness=2,
+    openness_wunsch="Eine öffentliche Gesamtliste fehlt; sichtbar sind nur rund 5 bis "
+                    "10 kuratierte Kampagnen, ältere nur über das Internet Archive. "
+                    "Cloudflare weist Clients ab, die kein Browser sind. Eine "
+                    "paginierte Liste oder eine Sitemap würde beides erübrigen.",
     openness_note="Eingeschränkt: keine öffentliche Gesamtliste (nur ~5-10 "
                   "kuratierte/beliebte/neue), Zähler nur via Stats-JSON, "
                   "Cloudflare blockt Nicht-Browser-Clients. Der Altbestand "
@@ -1031,6 +1035,10 @@ def check_en(fetcher):
 PLATFORM_EN = Platform(
     key="avaaz_en",
     openness=2,
+    openness_wunsch="Eine öffentliche Gesamtliste fehlt; sichtbar sind nur rund 5 bis "
+                    "10 kuratierte Kampagnen, ältere nur über das Internet Archive. "
+                    "Cloudflare weist Clients ab, die kein Browser sind. Eine "
+                    "paginierte Liste oder eine Sitemap würde beides erübrigen.",
     openness_note="Eingeschränkt: keine öffentliche Gesamtliste (nur ~5-10 "
                   "kuratierte/beliebte/neue), Zähler nur via Stats-JSON, "
                   "Cloudflare blockt Nicht-Browser-Clients.",

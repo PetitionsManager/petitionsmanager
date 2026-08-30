@@ -737,6 +737,10 @@ PLATFORM = Platform(
     key="threefifty",
     language="de",
     openness=3,
+    openness_wunsch="Eine offene Liste fehlt; die Aktionen kommen über eine externe "
+                    "JSON-API, die erst im Seiten-JavaScript zu finden war. Ein "
+                    "verlinkter Index oder eine Sitemap würde denselben Zweck ohne "
+                    "Suchen erfüllen.",
     openness_note="Mittel: keine offene Liste; Aktionen über eine externe "
                   "JSON-API (im Seiten-JS gefunden), Zähler über /progress/, "
                   "Texte von der Aktionsseite (/sign/, /letter/, /signup/). "
@@ -769,6 +773,10 @@ PLATFORM_EN = Platform(
     key="threefifty_en",
     language="en",
     openness=3,
+    openness_wunsch="Die Aktionen laufen über dieselbe externe JSON-API wie im "
+                    "deutschen Zweig, nur mit Sprachfilter. Sie ist nirgends verlinkt "
+                    "und war erst im Seiten-JavaScript zu finden — ein dokumentierter "
+                    "Einstieg oder eine Sitemap würde das Suchen ersparen.",
     openness_note="Mittel: keine offene Liste; Aktionen über dieselbe externe "
                   "JSON-API wie im deutschen Zweig, nur mit dem Sprachfilter "
                   "„Language: English\". Zähler über /progress/, Texte von der "

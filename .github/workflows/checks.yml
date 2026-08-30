@@ -215,10 +215,18 @@ jobs:
             // WeAct oder foodwatch heissen ueberall gleich), aber die
             // opennessNote muss jede Plattform haben: sie ist ein ganzer
             // deutscher Satz und faellt sonst als einziger Fremdkoerper auf.
+            // Dasselbe gilt seit 30.8.2026 fuer opennessWunsch (der zweite
+            // Satz im Nerd-Bereich: was die Plattform vorbildlich macht bzw.
+            // welche Sperre fallen muesste). Ohne diese Pruefung faellt eine
+            // fehlende Uebersetzung nicht auf — die App zeigt dann still den
+            // deutschen Satz, und zwar nur englischen Nutzern.
             const PEN = global.window.PM_PLATFORMS_EN || {};
-            for (const key of Object.keys(P))
+            for (const key of Object.keys(P)) {
               if (!(PEN[key] || {}).opennessNote)
                 fehlt.push(`platforms.js: PM_PLATFORMS_EN.${key}.opennessNote`);
+              if (!(PEN[key] || {}).opennessWunsch)
+                fehlt.push(`platforms.js: PM_PLATFORMS_EN.${key}.opennessWunsch`);
+            }
             // Ein Pfad, hinter dem keine Datei liegt, faellt sonst erst auf
             // dem Handy auf: die Marke bleibt dann einfach leer.
             const fs = require("fs");

@@ -552,6 +552,11 @@ def check(fetcher):
 PLATFORM = Platform(
     key="wemove",
     openness=3,
+    openness_wunsch="Kampagnen samt Archiv sind verlinkt, der Unterschriftenstand "
+                    "liegt aber auf einem eigenen Progress-Endpunkt. Aus Rechenzentren "
+                    "heraus antwortet action.wemove.eu mit HTTP 202 statt mit Inhalt, "
+                    "von gewöhnlichen Anschlüssen aus nicht. Der Zähler im HTML der "
+                    "Kampagnenseite würde den zweiten Abruf sparen.",
     openness_note="Mittel: Kampagnen inkl. Archiv verlinkt, aber Zähler nur über "
                   "separaten Progress-Endpoint und gedrosselte Antworten bei "
                   "Serien-Abrufen.",
@@ -716,6 +721,12 @@ def check_en(fetcher):
 PLATFORM_EN = Platform(
     key="wemove_en",
     openness=3,
+    openness_wunsch="Die englische Übersicht ist offen und listet den ganzen "
+                    "mehrsprachigen Katalog. Die Detailseiten laufen aber nach einigen "
+                    "Dutzend Abrufen in einen Checkpoint; im Bestand stehen deshalb "
+                    "erst 8 von rund 698 Sätzen. Ein höheres Abruflimit für "
+                    "Lesezugriffe oder der Zähler direkt im Übersichts-HTML würde "
+                    "reichen.",
     openness_note="Mittel: die englische Kampagnen-Übersicht ist offen und "
                   "listet sogar den ganzen mehrsprachigen Katalog, aber die "
                   "Detailseiten liegen hinter einem Checkpoint, der nach "

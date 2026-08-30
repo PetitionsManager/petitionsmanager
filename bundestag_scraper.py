@@ -476,6 +476,11 @@ PLATFORM = Platform(
     run=run,
     check=check,
     openness=2,
+    openness_wunsch="Amtliche Daten hinter einem JS-Portal mit Session-Cookies und "
+                    "einem versteckten AJAX-Fragment; der Parameter status.2 ist "
+                    "Pflicht, die Portionsgröße gedeckelt. Ein offener, paginierter "
+                    "Endpunkt ohne Sitzung würde die Nachbau-Schritte überflüssig "
+                    "machen.",
     openness_note="Eingeschränkt: offizielle Daten, aber JS-Portal mit "
                   "Session-Cookies und verstecktem AJAX-Fragment (status.2-"
                   "Parameter nötig, Batchgröße gedeckelt) — ohne Reverse-"

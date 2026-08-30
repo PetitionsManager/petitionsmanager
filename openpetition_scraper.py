@@ -468,6 +468,11 @@ def check(fetcher):
 PLATFORM = Platform(
     key="openpetition",
     openness=5,
+    openness_wunsch="Liste ohne Anmeldung und ohne JavaScript, mit Pagination; "
+                    "Unterschriftenstand, Ziel, Status und Volltext stehen im "
+                    "ausgelieferten HTML. Die robots.txt erlaubt großzügig und nennt "
+                    "eine Sitemap. Das Startdatum steht je nach Alter tages-, monats- "
+                    "oder jahresgenau — wer es ausliest, muss alle drei Formen kennen.",
     openness_note="Vorbildlich: vollständige öffentliche Liste (~1.600, paginiert), "
                   "alles server-gerendert (Stand, Ziel, Status, Volltext), "
                   "großzügige robots.txt mit Sitemap.",

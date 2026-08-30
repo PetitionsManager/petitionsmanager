@@ -486,6 +486,9 @@ window.PM_PLATFORMS_EN = {
      350.org und OpenPetition heissen auf Englisch genauso. Was hier fehlt,
      faellt wie ueberall in diesem Block auf das Deutsche zurueck. */
   weact: {
+    opennessWunsch: "The records carry no start date: two of 1,907 have one, so sorting by "
+                      + "recency is impossible. A date in the markup — or a sitemap with "
+                      + "lastmod — would be enough.",
     opennessNote: "Open: complete listings via categories + pagination, but " +
       "technical hurdles (custom elements instead of links, a hidden cpage " +
       "parameter, two different page templates).",
@@ -499,6 +502,11 @@ window.PM_PLATFORMS_EN = {
   },
 
   openpetition: {
+    opennessWunsch: "Listing without login and without JavaScript, with pagination; "
+                      + "signature count, goal, status and full text are in the delivered "
+                      + "HTML. The robots.txt is generous and names a sitemap. The start date "
+                      + "appears day-, month- or year-precise depending on age — whoever reads "
+                      + "it must know all three forms.",
     opennessNote: "Exemplary: complete public listing (~1,600, paginated), everything server-rendered (count, target, status, full text), generous robots.txt with sitemap.",
     tagline: "Citizens' platform for petitions",
     about: {
@@ -509,6 +517,10 @@ window.PM_PLATFORMS_EN = {
   },
 
   changeorg: {
+    opennessWunsch: "Topic pages show about 21 petitions each; “Show more” goes through "
+                      + "/api-proxy/, which robots.txt blocks. Sitemaps do expose some 16,000 "
+                      + "addresses, but the path to their content stays narrow. A paginated "
+                      + "listing without the blocked detour would solve it.",
     opennessNote: "Moderate: German topic pages /t/<slug> return curated petitions (~21 each; \u201eShow more\u201c goes through the robots-blocked /api-proxy/ and stays out of reach), supplemented by sitemap heuristics. The petition pages themselves are freely accessible.",
     wikipedia: "https://en.wikipedia.org/wiki/Change.org",
     tagline: "Global petition platform",
@@ -520,6 +532,11 @@ window.PM_PLATFORMS_EN = {
   },
 
   innnit: {
+    opennessWunsch: "The complete listing exists only through an internal API that was "
+                      + "found by rebuilding the page; there is no sitemap and the search is a "
+                      + "redirect to Google. In return the API delivers complete records "
+                      + "including the full text — documenting it publicly would be the whole "
+                      + "step.",
     opennessNote: "Moderate: a complete listing exists, but only through a hidden internal API (found by reverse engineering); no sitemap, search is merely a redirect to Google. In return the API delivers complete records including the full text.",
     tagline: "Petitions for Germany",
     about: {
@@ -530,6 +547,10 @@ window.PM_PLATFORMS_EN = {
   },
 
   avaaz: {
+    opennessWunsch: "There is no public complete listing; only some 5 to 10 curated "
+                      + "campaigns are visible, older ones only through the Internet Archive. "
+                      + "Cloudflare turns away clients that are not a browser. A paginated "
+                      + "listing or a sitemap would remove both obstacles.",
     opennessNote: "Limited: no public overall listing (only ~5-10 curated/popular/new ones), counts only via a stats JSON, Cloudflare blocks non-browser clients. Older campaigns come in through the Internet Archive (--archive), in portions across several runs.",
     wikipedia: "https://en.wikipedia.org/wiki/Avaaz",
     tagline: "Global citizens' movement",
@@ -542,6 +563,10 @@ window.PM_PLATFORMS_EN = {
 
   bundestag: {
     name: "Bundestag e-Petitions",
+    opennessWunsch: "Official data behind a JS portal with session cookies and a hidden "
+                      + "AJAX fragment; the status.2 parameter is mandatory and the batch size "
+                      + "is capped. An open, paginated endpoint without a session would make "
+                      + "the reverse-engineering steps unnecessary.",
     opennessNote: "Limited: official data, but a JS portal with session cookies and a hidden AJAX fragment (the status.2 parameter is required, batch size is capped) \u2014 not accessible without reverse engineering.",
     tagline: "Official petitions to the Bundestag",
     about: {
@@ -556,6 +581,11 @@ window.PM_PLATFORMS_EN = {
 
   europarl: {
     name: "European Parliament",
+    opennessWunsch: "The search is server-rendered and freely accessible. From data "
+                      + "centres, however, the host answers with HTTP 202 (AWS-WAF) instead of "
+                      + "content, from ordinary connections it does not — an exception for "
+                      + "read access would suffice. There is also no public supporter count, "
+                      + "and the start date is only year-precise.",
     opennessNote: "Open: official search with country and status filters, server-rendered; quirks (load-more pagination, doubly encoded URLs) and no public supporter count.",
     wikipedia: "https://en.wikipedia.org/wiki/European_Parliament_Committee_on_Petitions",
     tagline: "Petitions to the EU Parliament",
@@ -568,6 +598,11 @@ window.PM_PLATFORMS_EN = {
   },
 
   wemove: {
+    opennessWunsch: "Campaigns including the archive are linked, but the signature count "
+                      + "sits on a separate progress endpoint. From data centres "
+                      + "action.wemove.eu answers with HTTP 202 instead of content, from "
+                      + "ordinary connections it does not. The counter in the campaign page's "
+                      + "HTML would save the second request.",
     opennessNote: "Moderate: campaigns including the archive are linked, but counts only come from a separate progress endpoint, and responses are throttled on series of requests.",
     tagline: "European citizens' movement",
     about: {
@@ -578,6 +613,12 @@ window.PM_PLATFORMS_EN = {
   },
 
   eko: {
+    opennessWunsch: "The German campaign listing on eko.org is open. The campaign pages "
+                      + "themselves redirect from actions.eko.org via HTTP 301 to "
+                      + "action.eko.org, where a bot checkpoint answers with HTTP 429 — for "
+                      + "ordinary browsers outside data centres as well. That is why all 39 "
+                      + "records lack the full text. An exception for read access or a "
+                      + "machine-readable index would be enough.",
     opennessNote: "Moderate: German campaigns are covered via the home page + search (capped at 27 per term \u2192 union of many terms); two page templates, an overall sitemap without a language marker \u2014 completeness is not guaranteed.",
     wikipedia: "https://en.wikipedia.org/wiki/Ek%C5%8D_%28organization%29",
     tagline: "Campaign platform critical of corporations",
@@ -588,6 +629,9 @@ window.PM_PLATFORMS_EN = {
   },
 
   foodwatch: {
+    opennessWunsch: "Complete action listing, signature count and full text directly in "
+                      + "the server-rendered HTML: no key, no session, no JavaScript needed. "
+                      + "One request per page is enough and everything necessary is in it.",
     opennessNote: "Very open: the complete list of actions, counts and full texts are directly in the server-rendered HTML, and robots.txt permits practically everything.",
     wikipedia: "https://en.wikipedia.org/wiki/Foodwatch",
     tagline: "Consumer rights in the food sector",
@@ -599,6 +643,9 @@ window.PM_PLATFORMS_EN = {
   },
 
   threefifty: {
+    opennessWunsch: "There is no open listing; the actions come through an external JSON "
+                      + "API that had to be found in the page's JavaScript. A linked index or "
+                      + "a sitemap would serve the same purpose without the search.",
     opennessNote: "Moderate: no open listing; actions come from an external JSON API (found in the page's JS), counts from /progress/, texts from the /sign/ page. The /act/ action pages are blocked by robots and are not loaded \u2014 for those only the API teaser remains, and the format is derived from the button text.",
     wikipedia: "https://en.wikipedia.org/wiki/350.org",
     tagline: "Climate movement against fossil fuels",

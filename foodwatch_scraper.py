@@ -369,6 +369,10 @@ def check(fetcher):
 PLATFORM = Platform(
     key="foodwatch",
     openness=5,
+    openness_wunsch="Komplette Aktionsliste, Unterschriftenzahl und Volltext direkt im "
+                    "server-gerenderten HTML: kein Schlüssel, keine Sitzung, kein "
+                    "JavaScript nötig. Ein Abruf je Seite genügt, und alles Nötige "
+                    "steht darin.",
     openness_note="Sehr offen: komplette Aktionsliste, Zähler und Volltexte direkt "
                   "im server-gerenderten HTML, robots.txt erlaubt praktisch alles.",
     name="foodwatch",
@@ -462,6 +466,10 @@ def check_en(fetcher):
 PLATFORM_EN = Platform(
     key="foodwatch_en",
     openness=5,
+    openness_wunsch="Komplette Aktionsliste, Unterschriftenzahl und Volltext direkt im "
+                    "server-gerenderten HTML: kein Schlüssel, keine Sitzung, kein "
+                    "JavaScript nötig. Ein Abruf je Seite genügt, und alles Nötige "
+                    "steht darin.",
     openness_note="Sehr offen: komplette Aktionsliste, Zähler und Volltexte direkt "
                   "im server-gerenderten HTML, robots.txt erlaubt praktisch alles.",
     name="foodwatch (English)",

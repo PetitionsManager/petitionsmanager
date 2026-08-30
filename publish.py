@@ -510,6 +510,7 @@ def main() -> None:
             "source_url": p.source_url,
             "openness": p.openness,
             "openness_note": p.openness_note,
+            "openness_wunsch": p.openness_wunsch,
             "eyebrow": p.eyebrow,
             "language": p.language,
             "live": p.is_live,

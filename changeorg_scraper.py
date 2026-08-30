@@ -498,6 +498,11 @@ def check(fetcher):
 PLATFORM = Platform(
     key="changeorg",
     openness=3,
+    openness_wunsch="Die Themenseiten zeigen je rund 21 Petitionen; „Mehr anzeigen“ "
+                    "läuft über /api-proxy/, das die robots.txt sperrt. Über Sitemaps "
+                    "sind zwar rund 16.000 Adressen auffindbar, der Weg zu ihren "
+                    "Inhalten bleibt aber eng. Eine paginierte Liste ohne den "
+                    "gesperrten Zwischenweg würde das lösen.",
     openness_note="Mittel: deutsche Themenseiten /t/<slug> liefern kuratierte "
                   "Petitionen (je ~21; „Mehr anzeigen“ läuft über das robots-"
                   "gesperrte /api-proxy/ und bleibt außen vor), ergänzt um "
@@ -651,6 +656,11 @@ def check_en(fetcher):
 PLATFORM_EN = Platform(
     key="changeorg_en",
     openness=3,
+    openness_wunsch="Die Ortsseiten sind server-gerendert und von der robots.txt "
+                    "erlaubt — das ist der offene Teil. Weiterblättern führt aber "
+                    "wieder über /api-proxy/, das gesperrt ist. Eine Pagination auf "
+                    "demselben offenen Weg würde den Katalog vollständig erreichbar "
+                    "machen.",
     openness_note="Mittel: die Ortsseiten /local/<stadt>--<state>--us sind "
                   "server-gerendert, von robots.txt erlaubt und sprachlich "
                   "sortenrein — anders als im deutschen Zweig braucht es "

@@ -318,6 +318,11 @@ PLATFORM = Platform(
     run=run,
     check=check,
     openness=3,
+    openness_wunsch="Die vollständige Liste gibt es nur über ein internes API, das "
+                    "erst durch Nachbauen der Seite gefunden wurde; eine Sitemap "
+                    "fehlt, die Suche ist eine Weiterleitung zu Google. Das API "
+                    "liefert dafür vollständige Sätze samt Volltext — es öffentlich zu "
+                    "dokumentieren wäre der ganze Schritt.",
     openness_note="Mittel: vollständige Liste existiert, aber nur über ein "
                   "verstecktes internes API (per Reverse-Engineering gefunden); "
                   "keine Sitemap, Suche nur als Google-Weiterleitung. Dafür "

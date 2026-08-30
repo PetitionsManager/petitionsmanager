@@ -746,6 +746,9 @@ def check(fetcher):
 PLATFORM = Platform(
     key="weact",
     openness=4,
+    openness_wunsch="Im Datensatz fehlt ein Startdatum: von 1.907 Sätzen tragen zwei "
+                    "eines. Nach Aktualität sortieren lässt sich damit nicht. Ein "
+                    "Datum im Markup — oder eine Sitemap mit lastmod — würde genügen.",
     openness_note="Offen: vollständige Listen über Kategorien + Pagination, aber "
                   "technische Hürden (Custom-Elemente statt Links, verstecktes "
                   "cpage-Parameter, zwei verschiedene Seiten-Templates).",

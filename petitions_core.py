@@ -141,6 +141,17 @@ class Platform:
     openness: int = 0              # Ampel 1(rot)–5(grün): Wie kooperativ gibt
                                    # die Plattform ihre Petitionen frei? 0=unbewertet
     openness_note: str = ""        # Kurzbegründung (Tooltip auf der Kachel)
+    # Zweiter Satz im Nerd-Bereich (30.8.2026): was die Plattform VORBILDLICH
+    # macht (Ampel 5) bzw. welche konkrete Sperre fallen müsste, damit ein
+    # sauberer maschineller Zugriff möglich wäre.
+    # ⚠️ Bewusst ein EIGENES Feld statt einer Verlängerung von openness_note:
+    # dort steht der IST-Zustand, hier eine Bewertung bzw. eine Bitte. Beides
+    # in einem Satz wurde beim Entwurf unlesbar (openPetition kam auf über 300
+    # Zeichen), und getrennt lässt sich jedes für sich fortschreiben.
+    # ⚠️ Nur BELEGTES hier hinein — gemessene Statuscodes, fehlende Felder,
+    # abwesende Indizes. Keine Mutmaßung über Absichten der Plattform: warum
+    # jemand eine Sperre betreibt, wissen wir nicht.
+    openness_wunsch: str = ""
     language: str = "de"           # Sprache der angezeigten Petitionen (ISO 639-1;
                                    # für Gruppierung/Flagge in der App)
 

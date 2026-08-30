@@ -1997,6 +1997,15 @@
     var ueb = uebersetzung(key);
     return (ueb && ueb.opennessNote) || ausManifest || "";
   }
+  /* Der zweite Satz darunter: was die Plattform vorbildlich macht bzw. welche
+     Sperre fallen müsste. Gleiche Mechanik wie oben — die Übersetzung liegt in
+     platforms.js, der deutsche Satz kommt aus dem Manifest. Fehlt beides
+     (ältere Datenstände, die das Feld noch nicht kennen), bleibt es leer und
+     der Block entfällt ganz. */
+  function platOpennessWunsch(key, ausManifest) {
+    var ueb = uebersetzung(key);
+    return (ueb && ueb.opennessWunsch) || ausManifest || "";
+  }
 
   // Öffnet eine bestimmte Petition IN DER APP: wechselt in die Ziel-Plattform
   // und klappt die Petition (per URL) nach dem Zeichnen automatisch auf.
@@ -3399,6 +3408,17 @@
       nerdInhalt += '<div class="pabout__open ' +
         ampClass(manifestEntry.openness) + '">' +
         esc(offenheitSatz) + "</div>";
+    /* Zweiter Block: bei Ampel 5 ein Lob, sonst die konkrete Sperre, die
+       fallen müsste. Die Überschrift wechselt mit der Ampelstufe — „Was
+       vorbildlich ist" über einer Mängelliste wäre Hohn, „Was helfen würde"
+       über einer vorbildlichen Plattform eine Unterstellung. */
+    var wunschSatz = platOpennessWunsch(key, manifestEntry.openness_wunsch);
+    if (wunschSatz)
+      nerdInhalt += '<div class="nerd__row"><b>' +
+        esc(manifestEntry.openness >= 5
+              ? T("platform.opennessGood", "Was vorbildlich ist")
+              : T("platform.opennessWish", "Was helfen würde")) + "</b> " +
+        esc(wunschSatz) + "</div>";
     if (manifestEntry.source_url)
       nerdInhalt += '<div class="nerd__row"><b>' +
         esc(T("platform.dataSource", "Quelle der Daten")) + "</b> " +

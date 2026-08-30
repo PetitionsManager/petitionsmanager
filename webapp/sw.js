@@ -894,7 +894,12 @@
    1. Januar. fmtDate() musste mitwachsen — ohne den Jahres-Zweig griff der
    Regex (YYYY-MM-DD) nicht und die Petition zeigte GAR KEIN Datum, was wie ein
    fehlender Wert aussieht statt wie ein ungenauer (app.js) */
-var CACHE = "pm-cache-v58";
+/* v59: „Für Nerds" nennt jetzt bei jeder Plattform, was sie vorbildlich
+   macht bzw. welche konkrete Sperre fallen müsste, damit ein sauberer
+   maschineller Zugriff möglich wäre — neues Feld openness_wunsch aus dem
+   Manifest, englische Fassung in platforms.js
+   (app.js/texts.js/platforms.js) */
+var CACHE = "pm-cache-v59";
 /* Versionsunabhängig – überlebt das Hochzählen von CACHE. Diese Zahl sollte ab
    jetzt NICHT mehr steigen: seit die Pakete eine Inhaltskennung tragen ("?v=",
    siehe oben) holt sich jedes geänderte Paket von selbst neu. Ein Sprung wäre

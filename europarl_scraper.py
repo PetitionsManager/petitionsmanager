@@ -576,6 +576,12 @@ PLATFORM = Platform(
     # genau der Zustand, der live vom 8. bis 11.8.2026 sichtbar war.
     language=HAUPTSPRACHE,
     openness=4,
+    openness_wunsch="Die Suche ist server-gerendert und frei zugänglich. Aus "
+                    "Rechenzentren heraus antwortet der Host allerdings mit HTTP 202 "
+                    "(AWS-WAF) statt mit Inhalt, von gewöhnlichen Anschlüssen aus "
+                    "nicht — eine Ausnahme für Lesezugriffe würde reichen. Dazu fehlt "
+                    "eine öffentliche Unterstützerzahl, und das Startdatum liegt nur "
+                    "jahresgenau vor.",
     openness_note="Offen: offizielle Suche mit Länder-/Statusfilter, server-"
                   "gerendert; Eigenheiten (Load-more-Paginierung, doppelt kodierte "
                   "URLs) und keine öffentliche Unterstützerzahl.",
