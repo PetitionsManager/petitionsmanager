@@ -60,6 +60,36 @@ PAGE_SIZE_MAX   = 1000
 
 NUMBER_HREF_RE = re.compile(r"petitionNumber=(\d{4})%25?2F(\d{4})")
 
+# Erntet JEDE Beschriftung der Feldtabelle ("…|Label|:|Wert|…" im get_text mit
+# |-Trenner). Bewusst NICHT an SPRACHE gebunden: gesucht wird das Unbekannte.
+FELD_LABEL_RE = re.compile(r"(?:^|\|)([^|]{2,40})\|:\|")
+
+# Alle Beschriftungen, die wir GESEHEN und ENTSCHIEDEN haben — genutzte wie
+# verworfene. Was hier fehlt, meldet core.felder_melden() am Laufende als
+# „Neues Feld auf der Quellseite".
+#
+# ⚠️ Abgelesen, nicht ausgedacht: am 30.8.2026 an vier echten Seiten in beiden
+# Sprachen geerntet (0474/2026, 1428/2016, 2716/2013). Dabei kam prompt ein
+# sechstes Feld zum Vorschein, das vorher niemand kannte — „Name of association"
+# / „Name der Vereinigung" steht nur bei Petitionen von Verbänden. Genau dieser
+# Fall ist der Grund für den Melder.
+#
+# ⚠️ Die Liste führt BEIDE Sprachen, weil parse_detail für de und en läuft.
+# Verworfen (bewusst, nicht vergessen):
+#   · Land / Country      — konstant „Germany", die Liste filtert countries=DE;
+#                           als Schlagwort wäre es auf allen Sätzen gleich und
+#                           verdrängte nur ein echtes Stichwort
+#   · Nummer der Petition — steckt schon im Slug
+#   · Kurztitel / Summary title — daraus entsteht bereits der Titel
+BEKANNTE_FELDER = {
+    # deutsch
+    "Kurztitel", "Land", "Name", "Name der Vereinigung",
+    "Nummer der Petition", "Themenbereiche",
+    # englisch
+    "Country", "Name of association", "Petition number",
+    "Summary title", "Topics",
+}
+
 # ---------------------------------------------------------------------------
 # SPRACHFASSUNGEN
 #
@@ -259,6 +289,15 @@ def parse_detail(html: str, url: str, slug: str,
     def field(label: str) -> str | None:
         m2 = re.search(rf"{re.escape(label)}\|:\|+([^|]+)", text)
         return m2.group(1).strip() if m2 else None
+
+    # Dieselbe Tabelle einmal VOLLSTÄNDIG ernten, nicht nur die zwei Felder, die
+    # wir lesen. Kostet keinen Zusatzabruf und ist die Grundlage für den Melder
+    # „Neues Feld auf der Quellseite" (core.felder_melden am Laufende).
+    # ⚠️ Die Ernte darf NICHT von SPRACHE abhängen: sonst fände sie nur, wonach
+    # ohnehin schon gesucht wird — und ein neues Feld ist per Definition eines,
+    # nach dem niemand sucht.
+    core.felder_gesehen(m3.group(1).strip()
+                        for m3 in FELD_LABEL_RE.finditer(text))
 
     rec["category"] = field(L["themen"])
     status_seg = next((s for s in segs if s.startswith("Status:")), "")
@@ -502,6 +541,11 @@ def run(args) -> None:
             continue
         core.upsert(store, slug, rec or {}, {}, status, ts, _detail_url(slug))
         save()
+
+    # Einmal je Lauf, nicht je Petition: sonst stünde derselbe Fund 91-mal am
+    # Lauf. Steht VOR dem Abschluss-Save, damit der Befund noch ins _meta und
+    # damit ins Dashboard wandert.
+    core.felder_melden(BEKANNTE_FELDER)
 
     new_petitions = [s for s, r in store.items() if r.get("first_seen") == ts]
     if new_petitions:

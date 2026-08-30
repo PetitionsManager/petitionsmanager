@@ -1318,6 +1318,66 @@ def befund(stufe: str, thema: str, text: str,
     log(f"BEFUND [{stufe}] {thema}: {eintrag['text']}")
 
 
+def felder_gesehen(labels) -> None:
+    """Sammelt die Feld-Beschriftungen, die auf einer Detailseite standen.
+
+    Wird beim Parsen JEDER Petition gerufen und kostet nichts extra — das HTML
+    liegt ohnehin vor. Gemeldet wird nicht hier, sondern einmal am Laufende
+    über `felder_melden()`; sonst stünde derselbe Fund 91-mal am Lauf.
+
+    ⚠️ Die Menge hängt am THREAD, nicht am Modul: `monitor.py --all` scrapt
+    mehrere Plattformen nebenläufig, ein Modul-Global würde ihre Felder
+    vermischen. Dieselbe Überlegung wie bei `befund()` — nur braucht es hier
+    kein Lock, weil `threading.local()` je Thread eine eigene Menge führt.
+    """
+    if not labels:
+        return
+    menge = getattr(_TLS, "felder", None)
+    if menge is None:
+        menge = _TLS.felder = set()
+    menge.update(str(x).strip() for x in labels if str(x).strip())
+
+
+def felder_melden(bekannt, plattform_en: str = "") -> set[str]:
+    """Meldet Feld-Beschriftungen, die der Scraper NICHT kennt. Einmal je Lauf.
+
+    Warum es das gibt (30.8.2026, Auftrag des Users): ALLE bisherigen Melder
+    fragen „fehlt etwas?" — `entdeckung()`, die Bestandsprüfungen (a)–(f), die
+    Lösch-Bremse. Keiner fragt „ist etwas NEU da?". Deshalb stand bei europarl
+    seit jeher ein Feld `Country` ungenutzt auf jeder Detailseite, und
+    aufgefallen ist es erst, als der User danach fragte. Ein neues Feld der
+    Quelle ist aber genau der Moment, in dem man entscheiden will, ob man es
+    mitnimmt.
+
+    ⚠️ `bekannt` muss BEIDES enthalten: die genutzten Felder UND die bewusst
+    verworfenen. Sonst blinkt der Melder täglich für etwas, das längst
+    entschieden ist — dieselbe Falle, für die `entdeckung()` sein
+    `aufgegeben=True` hat. Ein Eintrag dort heißt „gesehen und entschieden",
+    nicht „genutzt".
+
+    Rückgabe: die unbekannten Beschriftungen (leer, wenn alles bekannt ist).
+    """
+    gesehen = getattr(_TLS, "felder", None) or set()
+    _TLS.felder = set()                     # nächster Lauf beginnt bei null
+    neu = {f for f in gesehen if f not in bekannt}
+    if not neu:
+        return set()
+    liste = ", ".join(sorted(neu)[:8]) + (" …" if len(neu) > 8 else "")
+    befund("hinweis", "Neues Feld auf der Quellseite",
+           f"{len(neu)} Beschriftung(en) stehen auf den Detailseiten, die der "
+           f"Scraper nicht kennt: {liste}. Prüfen, ob sich daraus Inhalte "
+           f"holen lassen — und die Entscheidung danach in BEKANNTE_FELDER "
+           f"eintragen (auch ein „verworfen“ gehört dort hinein), sonst "
+           f"meldet dieser Hinweis bei jedem Lauf erneut.",
+           thema_en="New field on the source page",
+           text_en=f"{len(neu)} label(s) appear on the detail pages that the "
+                   f"scraper does not know: {liste}. Check whether they carry "
+                   f"usable content – then record the decision in "
+                   f"BEKANNTE_FELDER (a deliberate „ignore“ belongs there "
+                   f"too), otherwise this note returns on every run.")
+    return neu
+
+
 def entdeckung(name: str, treffer: int, erwartet_min: int = 1,
                aufgegeben: bool = False, name_en: str = "") -> int:
     """Einen Entdeckungszweig zählen und melden, wenn er (fast) leer bleibt.

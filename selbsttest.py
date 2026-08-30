@@ -436,6 +436,66 @@ pruefe("die Sperrmeldung selbst bleibt stehen",
 
 
 # ---------------------------------------------------------------------------
+# 6. felder_gesehen()/felder_melden() — „Neues Feld auf der Quellseite"
+#
+# Warum es das gibt (30.8.2026): ALLE anderen Melder fragen „fehlt etwas?".
+# Keiner fragte „ist etwas NEU da?" — deshalb stand bei europarl seit jeher ein
+# ungenutztes Feld `Country` auf jeder Detailseite, und aufgefallen ist es erst
+# auf Nachfrage des Users.
+#
+# ⚠️ Der wichtigste Fall ist der DRITTE: die Menge muss nach dem Melden leer
+# sein. Bliebe sie stehen, meldete der nächste Lauf dieselben Felder erneut —
+# und weil `monitor.py --all` mehrere Plattformen nebenläufig scrapt, stünden
+# fremde Felder in der Meldung der falschen Plattform.
+# ---------------------------------------------------------------------------
+print()
+print("felder_melden() — Neues Feld auf der Quellseite")
+
+
+def feld_lauf(gesehen, bekannt):
+    """(unbekannte Felder, Zahl der Befunde)."""
+    core._TLS.platform = "selbsttest"
+    core._TLS.felder = set()
+    core.BEFUNDE.pop("selbsttest", None)
+    core.felder_gesehen(gesehen)
+    neu = core.felder_melden(bekannt)
+    return neu, len(core.BEFUNDE.get("selbsttest", []))
+
+
+BEKANNT = {"Topics", "Country", "Name"}
+neu, n = feld_lauf(["Topics", "Country", "Name"], BEKANNT)
+pruefe("alles bekannt → keine unbekannten Felder", neu, set())
+pruefe("alles bekannt → still", n, 0)
+
+neu, n = feld_lauf(["Topics", "Country", "Name", "Date of admissibility"], BEKANNT)
+pruefe("neues Feld → wird benannt", neu, {"Date of admissibility"})
+pruefe("neues Feld → wird gemeldet", n, 1)
+
+# Ein bewusst VERWORFENES Feld steht in der Liste und darf nicht mehr melden —
+# sonst blinkt der Hinweis täglich für etwas, das längst entschieden ist.
+neu, n = feld_lauf(["Topics", "Country"], BEKANNT)
+pruefe("verworfenes Feld steht in der Liste → still", n, 0)
+
+# Leere Ernte ist kein Ausfall, sondern der Normalfall bei Seiten ohne Tabelle.
+neu, n = feld_lauf([], BEKANNT)
+pruefe("nichts geerntet → still", n, 0)
+
+# Leerraum und leere Einträge dürfen die Menge nicht aufblähen.
+neu, n = feld_lauf(["  Topics  ", "", "   "], BEKANNT)
+pruefe("Leerraum wird abgeschnitten, Leeres verworfen", n, 0)
+
+# ⚠️ Der Nachhall-Fall, s. o.
+core._TLS.platform = "selbsttest"
+core._TLS.felder = set()
+core.BEFUNDE.pop("selbsttest", None)
+core.felder_gesehen(["Neues Feld"])
+core.felder_melden(BEKANNT)
+zweiter = core.felder_melden(BEKANNT)
+pruefe("zweiter Lauf ohne neue Ernte → still (Menge wurde geleert)",
+       zweiter, set())
+
+
+# ---------------------------------------------------------------------------
 print()
 if fehler:
     print(f"::error::selbsttest.py: {len(fehler)} Fall/Fälle fehlgeschlagen "
