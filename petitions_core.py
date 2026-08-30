@@ -1331,6 +1331,28 @@ def entdeckung(name: str, treffer: int, erwartet_min: int = 1,
 # Actions-Cache, nicht im Repo). Deshalb wird ab einem auffälligen Anteil gar
 # nicht gelöscht, sondern gewarnt.
 STARTDATUM_ALT_TAGE = 90
+
+# Erkennt QUELLTEXT, der als sichtbarer Text in einer Beschreibung gelandet ist
+# (Prüfung (f) in _bestandspruefung). Am 30.8.2026 gegen alle 19.919
+# ausgelieferten Volltexte gemessen: 25 Treffer, alle EINZELN angesehen und
+# durchweg echt — kein Fehlalarm.
+#
+# ⚠️ Bewusst eng geschnitten, weil Fließtext durchaus geschweifte Klammern
+# enthält. Ein CSS-Block zählt erst mit einer VOLLSTÄNDIGEN Deklaration
+# („eigenschaft: wert;"), nicht schon bei einer Klammer. Die JS-Zweige nennen
+# nur Formen, die in einem Petitionstext nichts verloren haben.
+# ⚠️ Der Tag-Zweig ist die billigste Hälfte: nach sanitize_fragment DARF gar
+# kein <style>/<script> mehr dastehen. Er allein hätte den Anlassfall aber
+# NICHT gefunden — dort war das Tag ja weg und nur sein Inhalt übrig. Beide
+# Hälften braucht es.
+CODE_IM_TEXT_RE = re.compile(
+    r"\{[^{}]{0,400}?[a-z-]{2,30}\s*:\s*[^{};]{1,160};[^{}]{0,400}?\}"
+    r"|\bfunction\s*\([^)]{0,80}\)\s*\{"
+    r"|\bdocument\.(?:getElementById|querySelector|write)\s*\("
+    r"|\bwindow\.(?:location|addEventListener)\s*[.(=]"
+    r"|\bvar\s+[A-Za-z_$][\w$]*\s*=\s*(?:function|\{|\[)"
+    r"|<\s*(?:style|script|iframe|object|embed)\b",
+    re.I)
 # Zweite, langsamere Stufe: so alt darf das jüngste start_date sein, bevor eine
 # LAUFENDE Plattform auch ohne Neuzugänge gemeldet wird (Prüfung (e), Stufe 2).
 # Am 30.8.2026 gemessen; die Begründung der Höhe steht dort.
@@ -1699,6 +1721,54 @@ def _bestandspruefung(store: dict, vorher: dict,
                           f"({juengstes_start}) – and nothing new arrived in "
                           f"this run. The platform is running, yet its store "
                           f"stands still.")
+
+    # (f) Quelltext im Petitionstext (30.8.2026). Anlass: die Avaaz-Petition
+    #     „Welt an Trump" zeigte dem Leser ihr komplettes Seiten-CSS, weil
+    #     sanitize_fragment() <style> AUSGEPACKT statt entfernt hat — der
+    #     Inhalt eines <style> ist aber Quelltext, kein Text. Behoben über
+    #     CODE_DESC_TAGS; diese Prüfung ist der Melder dazu.
+    #
+    #     ⚠️⚠️ Warum ein eigener Melder und nicht „der Fix genügt": Der Bruch
+    #     war vier Jahre lang unsichtbar, weil er nur 0,13 % der Texte traf und
+    #     KEINEN Fehler auslöste — der Abruf klappte, die Länge stimmte, die
+    #     App zeigte brav an, was dastand. Gefunden hat ihn ein Nutzer, nicht
+    #     der Lauf. Genau dafür ist ein Melder da.
+    #
+    #     Die Schwelle ist 0 und braucht keine Feinjustierung: nach dem Fix
+    #     DARF kein Text mehr Quelltext enthalten. Am 30.8.2026 über alle
+    #     19.919 ausgelieferten Volltexte gemessen — 14 der 17 Bestände lagen
+    #     schon damals bei exakt 0, die Ausreißer waren avaaz 22, wemove 2,
+    #     changeorg_en 1. Alle 25 Treffer wurden EINZELN angesehen: durchweg
+    #     echtes CSS, jQuery-Aufrufe und ein Word-Einfügerest
+    #     (`mso-style-name`), kein einziger Fehlalarm. Ein Muster, das nur
+    #     gezählt und nicht angesehen wurde, ist nicht gemessen.
+    #
+    #     ⚠️ Der Melder schlägt bis zum nächsten Scrape dieser drei Plattformen
+    #     weiter an — die alten Texte tragen den Quelltext ja noch. Das ist
+    #     Absicht: der Befund ist wahr, solange er wahr ist.
+    mit_code, beispiel = 0, None
+    for rec in store.values():
+        text = rec.get("description_full") or ""
+        if not text:
+            continue
+        if CODE_IM_TEXT_RE.search(text):
+            mit_code += 1
+            if beispiel is None:
+                beispiel = rec.get("url") or rec.get("slug") or "?"
+    kennzahlen["mit_code_im_text"] = mit_code
+    if mit_code:
+        merke("warnung", "Quelltext im Petitionstext",
+              f"{mit_code} Beschreibung(en) enthalten CSS oder JavaScript als "
+              f"sichtbaren Text, z. B. {beispiel}. Entweder packt "
+              f"sanitize_fragment() ein Element aus, dessen INHALT Quelltext "
+              f"ist – dann gehört sein Name in CODE_DESC_TAGS –, oder die "
+              f"Quelle liefert eine neue Bauform. Sollwert ist 0.",
+              thema_en="Source code inside petition text",
+              text_en=f"{mit_code} description(s) contain CSS or JavaScript as "
+                      f"visible text, e.g. {beispiel}. Either "
+                      f"sanitize_fragment() unwraps an element whose CONTENT "
+                      f"is code – then its name belongs in CODE_DESC_TAGS – or "
+                      f"the source introduced a new shape. Target value is 0.")
 
     return neu, kennzahlen
 

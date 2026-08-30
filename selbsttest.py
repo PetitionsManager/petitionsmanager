@@ -313,6 +313,70 @@ pruefe("erlaubte Tags bleiben unangetastet",
 
 
 # ---------------------------------------------------------------------------
+# 5. CODE_IM_TEXT_RE — Prüfung (f): Quelltext im Petitionstext
+#
+# Die Textbausteine sind ABGELESEN, nicht erfunden: alle „muss greifen"-Fälle
+# stammen wörtlich aus den am 30.8.2026 gemessenen 25 echten Fundstellen.
+#
+# ⚠️ Die Gegenproben sind hier wichtiger als die Treffer. Das Muster läuft über
+# JEDE Beschreibung im Bestand; ein Fehlalarm bedeutet eine Warnung, die täglich
+# blinkt und niemandem gehört. Deshalb steht zu jedem „muss greifen" ein
+# Fließtext-Fall dicht daneben, der NICHT greifen darf.
+# ---------------------------------------------------------------------------
+print()
+print("CODE_IM_TEXT_RE — Quelltext im Petitionstext")
+
+for text, soll, was in [
+    # muss greifen — alle wörtlich aus dem echten Bestand
+    ("<p>Bitte unterschreiben</p>{\nmargin-top: 40px;\nmargin-left: 20px;\n}",
+     True, "CSS-Block (der Anlassfall „Welt an Trump“)"),
+    ('{mso-style-name:"Table Normal"; mso-tstyle-rowband-size:0;}', True,
+     "Word-Einfügerest mso-style-name"),
+    ("<p>Text</p>function(){ etwas(); }", True, "function(){ …"),
+    ("<p>A</p>{ display:none; }", True, "einzeilige CSS-Regel"),
+    ("<p>A</p><style>#x{color:red}</style>", True,
+     "übrig gebliebenes <style>-Tag"),
+    ("<p>A</p>document.getElementById('x')", True, "DOM-Zugriff"),
+    # darf NICHT greifen — Fließtext, der nur so AUSSIEHT
+    ("<p>Wir fordern: {Platzhalter} einsetzen</p>", False,
+     "geschweifte Klammer im Fließtext"),
+    ("<p>Erstens: mehr Geld; zweitens: mehr Zeit</p>", False,
+     "Doppelpunkt und Semikolon ohne Klammern"),
+    ("<p>Die Funktion der Verwaltung ist unklar</p>", False,
+     "das Wort Funktion im Fließtext"),
+    ("<p>Öffnungszeiten: 9:00 bis 17:00 Uhr</p>", False, "Uhrzeiten"),
+    ("<p>A</p><ul><li>B</li></ul>", False, "gewöhnliches Listen-HTML"),
+    ("", False, "leerer Text"),
+]:
+    pruefe(was, bool(core.CODE_IM_TEXT_RE.search(text)), soll)
+
+
+# Das Muster zu prüfen genügt NICHT: es beweist nicht, dass der Melder auch
+# feuert. Deshalb derselbe Weg wie bei (e) — über _bestandspruefung.
+def code_lauf(mit_code: int, sauber: int) -> bool:
+    """True, wenn Prüfung (f) meldet."""
+    core._TLS.platform = "selbsttest"
+    core._TLS.lauf_meta = {"new_petitions_last_run": [], "available": 100}
+    core.BEFUNDE.pop("selbsttest", None)
+    store = {}
+    for i in range(mit_code):
+        store[f"c{i}"] = {"slug": f"c{i}", "url": f"https://x.test/c{i}",
+                          "title": f"C{i}", "status": "online",
+                          "description_full": "<p>Text</p>{ margin-top: 40px; }"}
+    for i in range(sauber):
+        store[f"s{i}"] = {"slug": f"s{i}", "url": f"https://x.test/s{i}",
+                          "title": f"S{i}", "status": "online",
+                          "description_full": "<p>Ganz gewöhnlicher Text</p>"}
+    befunde, _ = core._bestandspruefung(store, {})
+    return "Quelltext im Petitionstext" in [b["thema"] for b in befunde]
+
+
+pruefe("ein einziger Satz mit Quelltext → meldet", code_lauf(1, 99), True)
+pruefe("Bestand ganz ohne Quelltext → still", code_lauf(0, 100), False)
+pruefe("leerer Bestand → still", code_lauf(0, 0), False)
+
+
+# ---------------------------------------------------------------------------
 print()
 if fehler:
     print(f"::error::selbsttest.py: {len(fehler)} Fall/Fälle fehlgeschlagen "

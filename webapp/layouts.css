@@ -1959,13 +1959,24 @@ html[data-theme="dark"][data-layout="magazin"] .wplat.on{
 [data-layout="magazin"] .content>.count-note{margin-bottom:1rem}
 [data-layout="magazin"] .content>.support{margin-top:2rem}
 
-/* ---- Antippen: kurzes Einsinken (unverändert aus dem Vorgänger) ---- */
-@media (prefers-reduced-motion:no-preference){
-  [data-layout="magazin"] .plat,
-  [data-layout="magazin"] .pet{transition:transform .12s ease}
-  [data-layout="magazin"] .plat:active,
-  [data-layout="magazin"] .pet:active{transform:scale(.98)}
-}
+/* ---- Antippen: KEIN Einsinken mehr (Nutzerwunsch 30.8.2026) ----
+   Vorher sank die Kachel beim Antippen auf scale(.98) ein und wirkte dadurch
+   wie ein Knopf. Beides ist entfallen: die Zustandsregel und die zugehörige
+   transition, die sonst wirkungslos stehen bliebe.
+
+   ⚠️ `transform:none` ist hier NICHT überflüssig, sondern trägt die halbe
+   Änderung: `.plat` sinkt zusätzlich über eine LAYOUTNEUTRALE Regel ein
+   (style.css: `.plat:active{transform:scale(.99)}`). Nur den Magazin-Block zu
+   löschen hätte die Plattformkacheln also weiter schrumpfen lassen, bloß um
+   einen Hundertstel weniger — ein Unterschied, den im Bildschirmfoto niemand
+   sieht. `.pet` hat keine solche Regel und käme auch ohne aus; die Zeile nennt
+   beide, damit die Absicht („in dieser Ansicht sinkt nichts ein") an einer
+   Stelle steht und ein künftiges `.pet:active` nicht still zurückkehrt.
+
+   Hover, Fokus und Tastaturbedienung bleiben unberührt — hier fällt nur das
+   `transform`, keine Rückmeldung, auf die man angewiesen ist. */
+[data-layout="magazin"] .plat:active,
+[data-layout="magazin"] .pet:active{transform:none}
 
 /* ---- Dunkelmodus: Tiefe über Hairline + Flächenstufe statt Schatten
    (zwei Zweige wie in theme.css: fest „dark" + „auto") ---- */
