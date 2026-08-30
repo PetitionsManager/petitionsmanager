@@ -92,6 +92,24 @@ STARTED_MONAT_RE = re.compile(r"Gestartet\s+([A-Za-zÄÖÜäöüß]+)\s+(\d{4})"
 STARTER_RE = re.compile(r"Vielen Dank für Ihre Unterstützung,\s*(.+?)\s*$")
 RECIPIENT_RE = re.compile(r"Petition richtet sich an:\s*(.+)", re.S)
 
+# Meta-Namen, die wir GESEHEN und ENTSCHIEDEN haben. Was hier fehlt, meldet
+# core.felder_melden() als „Neues Feld auf der Quellseite".
+#
+# ⚠️ Über NEUN echte Detailseiten abgelesen (30.8.2026), nicht über eine — und
+# das Ergebnis ist ungewöhnlich sauber: alle zehn Namen standen auf allen neun
+# Seiten, null Streuung. Damit ist jede künftige Ergänzung ein echtes Signal
+# und kein Rauschen. (Zum Vergleich innn.it: dort trugen acht Seiten 31
+# Schlüssel, aber nur 22 auf allen.)
+#
+# Genutzt werden davon og:description (summary), og:image, og:title und
+# og:url; der Rest steht als bewusst verworfen dabei — Seitentechnik, keine
+# Petitionsinhalte.
+BEKANNTE_FELDER = {
+    "description", "keywords", "msapplication-TileColor",
+    "og:description", "og:image", "og:site_name", "og:title",
+    "robots", "theme-color", "viewport",
+}
+
 GERMAN_MONTHS = {"januar": 1, "februar": 2, "märz": 3, "april": 4, "mai": 5,
                  "juni": 6, "juli": 7, "august": 8, "september": 9,
                  "oktober": 10, "november": 11, "dezember": 12}
@@ -196,6 +214,15 @@ BEGRUENDUNG_UEBERSCHRIFT = {"de": "Begründung", "en": "Reason"}
 
 def parse_detail(html: str, url: str, lang: str = "de") -> dict:
     soup = BeautifulSoup(html, "html.parser")
+    # Feldraum dieser Quelle sind die META-TAGS: openPetition liest seine
+    # Kurzbeschreibung, das Bild und die kanonische Adresse daraus, und ein
+    # neues og:-Feld ist eine echte Änderung der Seitenvorlage.
+    # ⚠️ Es gibt hier KEINE Label-Wert-Tabelle wie bei europarl und kein
+    # JSON-Objekt wie bei innn.it — am 30.8.2026 gemessen: weder JSON-LD noch
+    # __NEXT_DATA__. Die Meta-Namen sind der einzige abzählbare Raum, und ein
+    # kleiner: zwei Detailseiten trugen exakt dieselben zehn.
+    core.felder_gesehen((m.get("property") or m.get("name") or "").strip()
+                        for m in soup.find_all("meta"))
     rec: dict = {}
 
     h1 = soup.find("h1")
@@ -447,6 +474,10 @@ def run(args) -> None:
         core.upsert(store, slug, rec or {}, {}, status, ts,
                     f"{BASE_URL}/petition/online/{slug}")
         save()
+
+    # Einmal je Lauf, VOR dem Abschluss-Save — sonst fehlte der Befund im _meta
+    # und damit im Dashboard.
+    core.felder_melden(BEKANNTE_FELDER)
 
     new_petitions = [s for s, r in store.items() if r.get("first_seen") == ts]
     if new_petitions:
