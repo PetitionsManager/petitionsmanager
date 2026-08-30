@@ -654,6 +654,76 @@ window.PM_PLATFORMS_EN = {
       seat: "Boston, USA (with a global network)",
       financing: "Donations"
     }
-  }
+  },
 
+  /* ---- Sprachzwillinge (30.8.2026) ------------------------------------
+     Bis hierher fuehrte diese Ebene nur die elf Grundschluessel, und
+     uebersetzung() loest den Grundschluessel NICHT auf — englische Nutzer
+     sahen bei den sechs _en-Plattformen deshalb den deutschen Satz.
+     ⚠️ basisKey() waere hier der FALSCHE Weg: fuenf der sechs beschreiben
+     einen anderen Zugangsweg als ihre Basis (changeorg_en Ortsseiten statt
+     Themenseiten, eko_en eine paginierte Liste), sie bekaemen also den Text
+     einer anderen Lage. Deshalb eigene Eintraege.
+     ⚠️ Bewusst NUR die beiden Offenheitsfelder: ein `name` hier wuerde
+     "foodwatch (English)" aus dem Manifest ueberschreiben. */
+  avaaz_en: {
+    opennessWunsch: "There is no public complete listing; only some 5 to 10 curated "
+                      + "campaigns are visible, older ones only through the Internet Archive. "
+                      + "Cloudflare turns away clients that are not a browser. A paginated "
+                      + "listing or a sitemap would remove both obstacles.",
+    opennessNote: "Limited: no public overall listing (only ~5-10 curated/popular/new "
+                    + "ones), counts only via a stats JSON, Cloudflare blocks non-browser "
+                    + "clients."
+  },
+  changeorg_en: {
+    opennessWunsch: "The local pages are server-rendered and permitted by robots.txt — that "
+                      + "is the open part. Paging further leads back through /api-proxy/, which "
+                      + "is blocked. Pagination on the same open path would make the whole "
+                      + "catalogue reachable.",
+    opennessNote: "Moderate: the local pages /local/<city>--<state>--us are "
+                    + "server-rendered, permitted by robots.txt and linguistically clean — "
+                    + "unlike the German branch, no word heuristics are needed here. Paging "
+                    + "further would only work through /api-proxy/, and that is blocked."
+  },
+  eko_en: {
+    opennessWunsch: "The English campaign listing is open and paginated — four requests "
+                      + "cover it. The detail pages, however, sit behind the same bot checkpoint "
+                      + "as the German branch (action.eko.org, HTTP 429); without them only "
+                      + "title, summary and image from the campaign card remain. An exception "
+                      + "for read access would be enough.",
+    opennessNote: "Limited: the English campaign listing is open and even paginated (four "
+                    + "requests cover it), but the detail pages sit behind the same bot "
+                    + "protection as the German branch (action.eko.org, HTTP 429). Where the "
+                    + "detail page is missing, title, summary and image are taken from the "
+                    + "campaign card."
+  },
+  foodwatch_en: {
+    opennessWunsch: "Complete action listing, signature count and full text directly in the "
+                      + "server-rendered HTML: no key, no session, no JavaScript needed. One "
+                      + "request per page is enough and everything necessary is in it.",
+    opennessNote: "Very open: the complete list of actions, counts and full texts are "
+                    + "directly in the server-rendered HTML, and robots.txt permits "
+                    + "practically everything."
+  },
+  threefifty_en: {
+    opennessWunsch: "The actions run through the same external JSON API as the German "
+                      + "branch, only with a language filter. It is linked nowhere and had to be "
+                      + "found in the page's JavaScript — a documented entry point or a sitemap "
+                      + "would spare the search.",
+    opennessNote: "Moderate: no open listing; actions come through the same external JSON "
+                    + "API as the German branch, only with the language filter “Language: "
+                    + "English”. Counts via /progress/, texts from the action page (/sign/, "
+                    + "/letter/, /signup/). /act/ is blocked by robots and is not loaded."
+  },
+  wemove_en: {
+    opennessWunsch: "The English overview is open and lists the entire multilingual "
+                      + "catalogue. The detail pages, however, run into a checkpoint after a few "
+                      + "dozen requests; the record therefore holds only 8 of some 698 entries. "
+                      + "A higher request limit for read access, or the counter directly in the "
+                      + "overview HTML, would be enough.",
+    opennessNote: "Moderate: the English campaign overview is open and even lists the "
+                    + "entire multilingual catalogue, but the detail pages sit behind a "
+                    + "checkpoint that kicks in after a few dozen requests. The record "
+                    + "therefore fills up across several runs."
+  },
 };
