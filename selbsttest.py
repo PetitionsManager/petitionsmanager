@@ -28,6 +28,7 @@ from types import SimpleNamespace
 from bs4 import BeautifulSoup
 
 import changeorg_scraper as changeorg
+import europarl_scraper as europarl
 import openpetition_scraper as openpetition
 import petitions_core as core
 
@@ -544,36 +545,72 @@ def register_lauf(bekannt, neu, belegt, max_gesamt=core.VERWORFEN_MAX):
     return ergebnis, bool(warnungen)
 
 
-erg, warn = register_lauf(["a"], ["b", "c"], belegt=200)
-pruefe("normaler Lauf erweitert das Register", erg, ["a", "b", "c"])
+erg, warn = register_lauf({"a": ""}, {"b": "tr/TR", "c": "de/AT"}, belegt=200)
+pruefe("normaler Lauf erweitert das Register", sorted(erg), ["a", "b", "c"])
 pruefe("normaler Lauf warnt nicht", warn, False)
+# ⚠️ Das ist die ERHEBUNG: der Befund muss den Lauf überleben, sonst ist das
+# Register nur eine Sperrliste und die Frage „was steckt da drin?" bleibt offen.
+pruefe("der Befund wandert mit ins Register", erg.get("c"), "de/AT")
 
 # Der Ernstfall: die Sprachprüfung ist gebrochen, alles gilt als „nicht DE".
-erg, warn = register_lauf(["a"], ["b", "c"], belegt=0)
-pruefe("Bremse greift ohne Positivkontrolle", erg, ["a"])
+erg, warn = register_lauf({"a": ""}, {"b": "", "c": ""}, belegt=0)
+pruefe("Bremse greift ohne Positivkontrolle", sorted(erg), ["a"])
 pruefe("Bremse meldet sich", warn, True)
 
 # Gegenprobe DICHT AN DER SCHWELLE — ohne sie bewiese der Fall oben nur, dass
 # die Funktion manchmal nichts tut.
-erg, _ = register_lauf(["a"], ["b"], belegt=core.VERWORFEN_BELEG_MIN - 1)
-pruefe("Bremse greift eins unter der Schwelle", erg, ["a"])
-erg, warn = register_lauf(["a"], ["b"], belegt=core.VERWORFEN_BELEG_MIN)
-pruefe("Bremse lässt AUF der Schwelle durch", erg, ["a", "b"])
+erg, _ = register_lauf({"a": ""}, {"b": ""},
+                       belegt=core.VERWORFEN_BELEG_MIN - 1)
+pruefe("Bremse greift eins unter der Schwelle", sorted(erg), ["a"])
+erg, warn = register_lauf({"a": ""}, {"b": ""},
+                          belegt=core.VERWORFEN_BELEG_MIN)
+pruefe("Bremse lässt AUF der Schwelle durch", sorted(erg), ["a", "b"])
 pruefe("… und warnt dabei nicht", warn, False)
 
 # Nichts zu vermerken ist kein Ausfall: hier darf die Bremse nicht schreien,
 # sonst stünde bei jedem ereignislosen Lauf eine Warnung im Dashboard.
-erg, warn = register_lauf(["a"], [], belegt=0)
+erg, warn = register_lauf({"a": ""}, {}, belegt=0)
 pruefe("leere Verwerfungsliste warnt nicht", warn, False)
-pruefe("leere Verwerfungsliste lässt das Register unberührt", erg, ["a"])
+pruefe("leere Verwerfungsliste lässt das Register unberührt", sorted(erg),
+       ["a"])
 
-erg, _ = register_lauf(["a", "b"], ["b", "c", "c"], belegt=200)
-pruefe("keine Dubletten im Register", erg, ["a", "b", "c"])
+erg, _ = register_lauf({"a": "", "b": "x"}, {"b": "NEU", "c": ""}, belegt=200)
+pruefe("keine Dubletten im Register", sorted(erg), ["a", "b", "c"])
+pruefe("ein vorhandener Befund wird NICHT überschrieben", erg.get("b"), "x")
 
 # Deckel: was herausfällt, wird wieder abgerufen — es darf nur nicht STILL
 # herausfallen, und es müssen die ÄLTESTEN sein.
-erg, _ = register_lauf(["a", "b", "c"], ["d"], belegt=200, max_gesamt=2)
-pruefe("Deckel wirft die ältesten heraus", erg, ["c", "d"])
+erg, _ = register_lauf({"a": "", "b": "", "c": ""}, {"d": ""}, belegt=200,
+                       max_gesamt=2)
+pruefe("Deckel wirft die ältesten heraus", sorted(erg), ["c", "d"])
+
+# ⚠️ Rückfall auf die frühere reine LISTE (Bestände aus `2b49f13`). Ohne ihn
+# verlöre ein solcher Bestand sein ganzes Register, lautlos.
+erg, _ = register_lauf(["a", "b"], {"c": "de/AT"}, belegt=200)
+pruefe("altes Listen-Register wird übernommen", sorted(erg),
+       ["a", "b", "c"])
+pruefe("… und ist danach eine Tabelle", erg.get("c"), "de/AT")
+
+# sprachbefund(): die Erhebung selbst
+pruefe("sprachbefund liest Sprache UND Land",
+       changeorg.sprachbefund('"originalLocale":{"localeCode":"de-AT"}'
+                              '"country":{"countryCode":"AT"}'), "de/AT")
+pruefe("sprachbefund ohne Felder bleibt leer",
+       changeorg.sprachbefund("nichts davon"), "")
+
+# Das Land am Datensatz — bei beiden Plattformen. Heute ist es überall dasselbe
+# (die Auswahl lässt ja nur Deutschland durch); erst wenn das Feld verschwindet,
+# wird die spätere Erweiterung wieder teuer. ⚠️ Und es darf NICHT ausgeliefert
+# werden: die App soll unverändert nur deutsche Petitionen zeigen.
+_rec = changeorg.parse_detail(
+    '"country":{"countryCode":"DE"}"ask":"Ein Titel"', "https://x.test/p/a")
+pruefe("Change.org schreibt das Land mit", (_rec or {}).get("country"), "DE")
+import publish as _publish                                       # noqa: E402
+pruefe("… liefert es aber NICHT an die App aus",
+       "country" in _publish.SLIM_FIELDS, False)
+pruefe("europarl kennt die Feldbeschriftung in beiden Sprachen",
+       [europarl.SPRACHE[s]["land"] for s in ("de", "en")],
+       ["Land", "Country"])
 
 print("\nUnlesbare Seiten (melde_unklare)")
 
@@ -675,12 +712,21 @@ with tempfile.TemporaryDirectory() as ordner:
 print("\nDrei run()-Durchläufe an einer erfundenen Quelle")
 
 LAND, TITEL = '"country":{"countryCode":"%s"}', '"ask":"Titel %s"'
-SEITEN = {s: (LAND % s[:2].upper()) + (TITEL % s)
+LOCALE = '"originalLocale":{"localeCode":"%s"}'
+
+
+def _seite(slug: str) -> str:
+    """Kunstseite; das Sprachkürzel steckt in den ersten zwei Zeichen des Slugs."""
+    k = slug[:2]
+    return (LOCALE % f"{k}-{k.upper()}") + (LAND % k.upper()) + (TITEL % slug)
+
+
+SEITEN = {s: _seite(s)
           for s in ("de1", "de2", "tr1", "tr2", "hu1", "tr3", "tr4", "hu2")}
 # 12 bekannte deutsche Sätze: sie liefern die Positivkontrolle des Registers
 # (core.VERWORFEN_BELEG_MIN = 10), ohne die es nicht wachsen darf.
-SEITEN.update({f"alt{i}": (LAND % "DE") + (TITEL % f"alt{i}")
-               for i in range(12)})
+SEITEN.update({f"alt{i}": (LOCALE % "de-DE") + (LAND % "DE")
+                          + (TITEL % f"alt{i}") for i in range(12)})
 ERSTE = ["de1", "de2", "tr1", "tr2", "hu1"]
 SPAETER = ERSTE + ["tr3", "tr4", "hu2"]
 abgerufen: list[str] = []
@@ -763,6 +809,12 @@ pruefe("Lauf 2 warnt nicht, obwohl skip_recent alles sperrt",
         if b.get("stufe") == "warnung"], [])
 pruefe("Register wächst über die Läufe",
        sorted(meta2.get("verworfen") or []), soll2)
+# ⚠️ Ohne diesen Fall bliebe unbemerkt, wenn die ERHEBUNG still leer liefe: das
+# Register spränge weiter richtig an, nur wüsste hinterher niemand, WAS in den
+# verworfenen Kandidaten steckte. Am Mutationstest aufgefallen, nicht erdacht.
+pruefe("Register hält den Befund je Kandidat fest",
+       [(meta2.get("verworfen") or {}).get(s) for s in ("tr1", "hu2")],
+       ["tr/TR", "hu/HU"])
 pruefe("Register übersteht einen ABGEBROCHENEN Lauf",
        sorted(meta3.get("verworfen") or []), soll2)
 

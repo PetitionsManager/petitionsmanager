@@ -329,6 +329,15 @@ def parse_detail(html: str, url: str, sprache: str = "de") -> dict | None:
               if not re.match(r"^[a-z\-]+-\d+$", s)]
     rec["category"] = themed[0] if themed else None
 
+    # Das Land MITSCHREIBEN, obwohl es heute bei jedem angenommenen Satz „DE"
+    # lautet — der deutsche Zweig lässt ja nur DE durch. Es kostet nichts (die
+    # Seite ist geholt, das Feld gelesen) und macht eine spätere Erweiterung um
+    # weitere Länder zu einer Frage der Auswahl statt zu einer Frage der Daten.
+    # ⚠️ Ausgeliefert wird es NICHT: publish.SLIM_FIELDS führt es nicht, die App
+    # sieht also unverändert nur deutsche Petitionen ohne Länderangabe.
+    m_land = COUNTRY_RE.search(html)
+    rec["country"] = m_land.group(1) if m_land else None
+
     soup = BeautifulSoup(html, "html.parser")
     # Feldraum dieser Quelle sind die Meta-Tags (siehe BEKANNTE_FELDER).
     core.felder_aus_meta(soup)
@@ -347,8 +356,29 @@ def parse_detail(html: str, url: str, sprache: str = "de") -> dict | None:
     return rec
 
 
-def scrape_petition(fetcher: core.Fetcher, slug: str,
-                    sprache: str = "de") -> tuple[str, dict | None]:
+def sprachbefund(html: str) -> str:
+    """„<sprache>/<land>" der Seite, z. B. „de/AT" — leer, wenn nichts dasteht.
+
+    ⚠️⚠️ Das ist die ERHEBUNG, die im Register landet (30.8.2026). Der Lauf holt
+    die Seite ohnehin; ihr Land und ihre Sprache mitzuschreiben kostet zwei
+    Regex-Suchen und keine einzige zusätzliche Anfrage. Wenn später ein weiteres
+    Land dazukommen soll, steht damit schon fest, WELCHE Adressen zu holen sind
+    — statt den ganzen Vorrat noch einmal zu durchkriechen.
+
+    ⚠️ Land und Sprache sind NICHT dasselbe, und der Unterschied ist der Grund
+    für dieses Feld: am 30.8.2026 an 150 Kandidaten gemessen waren 30
+    deutschSPRACHIG, davon nur 13 aus Deutschland — 8 aus Österreich, der Rest
+    einzeln aus CL, IN, IT, FR, US, BE, ES, GH. Umgekehrt gab es NULL Fälle
+    „Land DE, aber nicht deutschsprachig"."""
+    ml = ORIGINAL_LOCALE_RE.search(html)
+    mc = COUNTRY_RE.search(html)
+    spr = ml.group(1).split("-")[0].lower() if ml else ""
+    land = mc.group(1) if mc else ""
+    return f"{spr}/{land}" if (spr or land) else ""
+
+
+def scrape_petition(fetcher: core.Fetcher, slug: str, sprache: str = "de",
+                    merker: dict | None = None) -> tuple[str, dict | None]:
     """(status, record) – status: online | offline | error | skip | unklar.
 
     ⚠️⚠️ „skip" und „unklar" auseinanderzuhalten ist die Voraussetzung dafür,
@@ -370,6 +400,8 @@ def scrape_petition(fetcher: core.Fetcher, slug: str,
         return "offline", None
     if not resp.ok:
         return "error", None
+    if merker is not None:
+        merker["befund"] = sprachbefund(resp.text)
     rec = parse_detail(resp.text, url, sprache)
     if rec is not None:
         return "online", rec
@@ -470,7 +502,7 @@ def run(args) -> None:
     # bei jedem Schreiben neu auf, siehe oben), und der Vorrat stünde nach einem
     # einzigen Lauf wieder bei null. Der Fehler wäre dabei völlig stumm: der
     # Bestand bliebe unversehrt, das Fenster stünde nur wieder still.
-    verworfen = list(core.load_meta(DATA_FILE).get("verworfen") or [])
+    verworfen = core.als_register(core.load_meta(DATA_FILE).get("verworfen"))
     lauf_meta["verworfen"] = verworfen
 
     # Vor der Entdeckung festhalten: „bekannt" meint den Stand zu LAUFBEGINN.
@@ -523,12 +555,13 @@ def run(args) -> None:
     # (core.VERWORFEN_BELEG_MIN), und die trägt erst, wenn auch die bekannten
     # Sätze durch sind — unter den Neuzugängen wurde am 30.8.2026 genau EINER
     # von 60 angenommen.
-    neu_verworfen: list[str] = []
+    neu_verworfen: dict[str, str] = {}
     belegt = gelesen = unklar = 0
     for i, slug in enumerate(new_slugs, 1):
         log(f"({i}/{len(new_slugs)}) {slug[:70]}")
         prog(current=i, total=len(new_slugs), message=slug[:60])
-        status, rec = scrape_petition(fetcher, slug)
+        merker: dict = {}
+        status, rec = scrape_petition(fetcher, slug, merker=merker)
         if status == "error":
             continue
         if status in ("online", "skip", "unklar"):
@@ -538,8 +571,13 @@ def run(args) -> None:
             log("  Seite nicht auswertbar – bleibt im Vorrat.")
             continue
         if status == "skip":
-            log("  übersprungen (nicht DE).")
-            neu_verworfen.append(slug)
+            # ⚠️ Der Befund („de/AT") wandert MIT ins Register. Angezeigt wird
+            # weiterhin nur Deutschland – aber die Erhebung, was in den
+            # verworfenen Kandidaten steckt, entsteht dabei von selbst und
+            # kostet keine zusätzliche Anfrage.
+            befund = merker.get("befund") or ""
+            log(f"  übersprungen (nicht DE{', ' + befund if befund else ''}).")
+            neu_verworfen[slug] = befund
             continue
         if status == "online":
             belegt += 1

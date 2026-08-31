@@ -1610,21 +1610,38 @@ VERWORFEN_BELEG_MIN = 10
 # hier also eine klare Antwort, und das ist der ganze Zweck der Zahl.
 
 
+def als_register(wert) -> dict:
+    """Register als {slug: befund} – nimmt auch die frühere reine Liste an.
+
+    ⚠️ Der Rückfall ist kein Zierrat: das Register wurde am 30.8.2026 zuerst als
+    Liste ausgeliefert (`2b49f13`) und noch am selben Abend zur Tabelle
+    erweitert. Ein Bestand, der dazwischen entstanden ist, trägt die Liste – ohne
+    diese Zeile verlöre er sein ganzes Register, und zwar lautlos."""
+    if isinstance(wert, dict):
+        return dict(wert)
+    return {s: "" for s in (wert or [])}
+
+
 def merke_verworfene(bekannt, neu, belegt: int, plattform: str,
                      grund_de: str, grund_en: str = "",
-                     max_gesamt: int = VERWORFEN_MAX) -> list[str]:
+                     max_gesamt: int = VERWORFEN_MAX) -> dict:
     """Erweitert das Register verworfener Kandidaten – aber nur, wenn derselbe
     Lauf auch BELEGT hat, dass die Prüfung noch funktioniert.
 
-    `bekannt` ist das bisherige Register, `neu` die in diesem Lauf verworfenen
-    Slugs, `belegt` die Zahl der in diesem Lauf als gültig anerkannten Sätze
-    (Positivkontrolle, siehe VERWORFEN_BELEG_MIN).
+    `bekannt` ist das bisherige Register, `neu` ein {slug: befund} der in diesem
+    Lauf verworfenen Kandidaten, `belegt` die Zahl der als gültig anerkannten
+    Sätze (Positivkontrolle, siehe VERWORFEN_BELEG_MIN).
+
+    ⚠️ Der `befund` (bei Change.org „<sprache>/<land>", z. B. „de/AT") ist die
+    ERHEBUNG für später: er entsteht beim ohnehin nötigen Abruf und beantwortet
+    ohne eine einzige Zusatzanfrage, was in den verworfenen Kandidaten steckt.
+    Soll eines Tages ein weiteres Land dazukommen, steht damit schon fest,
+    welche Adressen zu holen sind.
 
     Rückgabe: das neue Register. Bei greifender Bremse unverändert das alte –
     lieber ein Lauf ohne Fortschritt als ein dauerhaft vergifteter Vorrat."""
-    vorher = list(dict.fromkeys(bekannt or []))
-    schon = set(vorher)
-    frisch = [s for s in dict.fromkeys(neu or []) if s not in schon]
+    vorher = als_register(bekannt)
+    frisch = {s: b for s, b in als_register(neu).items() if s not in vorher}
     if not frisch:
         return vorher
     if belegt < VERWORFEN_BELEG_MIN:
@@ -1642,16 +1659,21 @@ def merke_verworfene(bekannt, neu, belegt: int, plattform: str,
                        f"language check – the candidates stay in the pool and "
                        f"will be checked again.")
         return vorher
-    liste = vorher + frisch
-    if len(liste) > max_gesamt:
+    register = {**vorher, **frisch}
+    if len(register) > max_gesamt:
         # ⚠️ Nie still kürzen: was hier herausfällt, wird wieder abgerufen.
-        entfallen = len(liste) - max_gesamt
-        liste = liste[entfallen:]
+        # dict hält die Einfügereihenfolge, vorn stehen also die ältesten.
+        entfallen = len(register) - max_gesamt
+        register = dict(list(register.items())[entfallen:])
         log(f"  Register am Deckel ({max_gesamt}): {entfallen} älteste "
             f"Eintrag/Einträge entfallen und werden erneut geprüft.")
+    # Die Erhebung mitprotokollieren — sonst steht sie zwar im Bestand, aber
+    # niemand sieht sie im Lauf.
+    verteilung = _collections.Counter(b for b in frisch.values() if b)
+    spitze = ", ".join(f"{k} {v}" for k, v in verteilung.most_common(6))
     log(f"  Register: +{len(frisch)} verworfen ({grund_de}), "
-        f"gesamt {len(liste)}.")
-    return liste
+        f"gesamt {len(register)}." + (f" Befunde: {spitze}" if spitze else ""))
+    return register
 
 
 UNKLAR_MIN_ABS = 10        # darunter ist es Rauschen (einzelne kaputte Seiten)

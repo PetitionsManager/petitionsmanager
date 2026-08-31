@@ -76,9 +76,13 @@ FELD_LABEL_RE = re.compile(r"(?:^|\|)([^|]{2,40})\|:\|")
 #
 # ⚠️ Die Liste führt BEIDE Sprachen, weil parse_detail für de und en läuft.
 # Verworfen (bewusst, nicht vergessen):
-#   · Land / Country      — konstant „Germany", die Liste filtert countries=DE;
-#                           als Schlagwort wäre es auf allen Sätzen gleich und
-#                           verdrängte nur ein echtes Stichwort
+#   · Nummer der Petition — steckt schon im Slug
+#   · Kurztitel / Summary title — daraus entsteht bereits der Titel
+# ⚠️ 30.8.2026 GEÄNDERT: „Land / Country" stand hier als verworfen, weil es
+# konstant „Germany" ist. Es wird jetzt als rec["country"] MITGESCHRIEBEN —
+# nicht als Schlagwort (dort verdrängte es nur ein echtes Stichwort), sondern
+# als eigenes Feld. Solange countries=DE in LIST_URL steht, ändert das nichts;
+# es macht nur die spätere Lockerung des Filters umsonst statt teuer.
 #   · Nummer der Petition — steckt schon im Slug
 #   · Kurztitel / Summary title — daraus entsteht bereits der Titel
 BEKANNTE_FELDER = {
@@ -150,6 +154,7 @@ SPRACHE = {
             r"Petition Nr\.\s*(\d{4}/\d{4})\s*,?\s*eingereicht von\s+(.+?)"
             r"(?:,\s*|\s+)((?:zur?m?|über|betreffend)\s+.+)", re.S),
         "themen": "Themenbereiche",
+        "land": "Land",
         "summary_h": "Zusammenfassung der Petition",
         "empfaenger": "Petitionsausschuss des Europäischen Parlaments (PETI)",
     },
@@ -171,6 +176,7 @@ SPRACHE = {
             r"Petition No\s+(\d{4}/\d{4})\s*,?\s*by\s+(.+?)\s+"
             r"(?:on(?!\s+behalf\b)|calling for)\s+(.+)", re.S),
         "themen": "Topics",
+        "land": "Country",
         "summary_h": "Petition Summary",
         "empfaenger": "Committee on Petitions of the European Parliament (PETI)",
     },
@@ -300,6 +306,17 @@ def parse_detail(html: str, url: str, slug: str,
                         for m3 in FELD_LABEL_RE.finditer(text))
 
     rec["category"] = field(L["themen"])
+    # ⚠️ Heute steht hier bei JEDER Petition dasselbe („Deutschland"/„Germany"),
+    # weil die Trefferliste schon auf countries=DE filtert (LIST_URL). Der Wert
+    # wird trotzdem mitgeschrieben, und das ist der ganze Zweck: er kostet
+    # nichts, die Seite wird ohnehin geholt, und sobald der Filter gelockert
+    # wird, ist die Angabe von Anfang an da. Am 30.8.2026 an der Trefferliste
+    # gemessen, was dahintersteckt: DE 91, AT 19, ES 467, ohne Filter ≥ 999
+    # (pageSize=1000 ist der Deckel, die echte Zahl kann höher liegen).
+    # ⚠️ Bewusst der WORTLAUT der Seite, kein ISO-Kürzel: die Quelle nennt
+    # „Deutschland"/„Germany", je nach Sprachfassung. Daraus ein „DE“ zu machen
+    # wäre eine Zuordnung, die niemand geprüft hat.
+    rec["country"] = field(L["land"])
     status_seg = next((s for s in segs if s.startswith("Status:")), "")
     status_txt = status_seg.removeprefix("Status:").strip()
 
