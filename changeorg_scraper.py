@@ -260,9 +260,8 @@ def falsche_sprache(html: str, sprache: str = "de") -> bool:
     False — der Aufrufer bekommt „unklar" statt „skip", und damit wandert
     weder etwas ins Register verworfener Kandidaten noch wird etwas gelöscht.
     Der Bruch bleibt folgenlos und wird über core.melde_unklare() gemeldet."""
-    if sprache == "de":
-        m_c = COUNTRY_RE.search(html)
-        return bool(m_c) and m_c.group(1) != "DE"
+    # ⚠️ 4.9.2026: BEIDE Zweige prüfen jetzt die SPRACHE. Vorher fragte der
+    # deutsche nach dem LAND (country == DE) — Begründung bei parse_detail.
     m_l = ORIGINAL_LOCALE_RE.search(html)
     return bool(m_l) and not m_l.group(1).lower().startswith(sprache)
 
@@ -278,24 +277,24 @@ def parse_detail(html: str, url: str, sprache: str = "de") -> dict | None:
       · "country":{"countryCode":"DE"}          — das LAND der Petition
       · "originalLocale":{"localeCode":"en-US"} — die SPRACHE, in der sie
                                                   verfasst wurde
-    Der deutsche Zweig prüft historisch das Land; das trifft hier zusammen,
-    weil deutschsprachige Petitionen fast alle aus Deutschland kommen. Für den
-    englischen Zweig taugt es NICHT — englische Petitionen kommen aus US, GB,
-    AU, CA, IN. Deshalb prüft er die Sprache, und das ist ohnehin das
-    genauere Feld (am 12.8.2026 an beiden Sprachen gemessen).
-    ⚠️ Am 30.8.2026 an 60 Kandidaten nachgemessen: 11 davon waren deutschSPRACHIG,
-    kamen aber aus AT, CL, IT, UA oder IN und fielen deshalb durch — mehr als das
-    Elffache der einen angenommenen DE-Petition. Das ist eine Entscheidung über
-    den Zuschnitt der App, keine Panne, und steht bewusst unverändert hier.
+    ⚠️⚠️ 4.9.2026 UMGESTELLT (Nutzerauftrag „alles holen was da ist"): der
+    deutsche Zweig prüfte bis dahin das LAND (country == DE), der englische die
+    SPRACHE. Jetzt prüfen beide die Sprache.
+
+    Die alte Begründung lautete, bei Deutsch fielen Land und Sprache zusammen.
+    Am 30.8.2026 an 60 Kandidaten nachgemessen stimmte das nicht: 11 waren
+    deutschSPRACHIG, kamen aber aus AT, CL, IT, UA oder IN — das Elffache der
+    EINEN angenommenen DE-Petition. Sie wurden verworfen, obwohl ein deutscher
+    Leser sie versteht. Seit es eine eigene Landachse gibt, ist das Verwerfen
+    nicht mehr nötig: die Sprache entscheidet über die AUFNAHME, das Land steht
+    als `rec["country"]` daneben und entscheidet über die ANZEIGE.
+
+    ⚠️ Kostet KEINE zusätzliche Anfrage: die Seite ist an dieser Stelle längst
+    geholt, es wurde bloß weggeworfen, was darin stand.
     """
-    if sprache == "de":
-        m_c = COUNTRY_RE.search(html)
-        if not m_c or m_c.group(1) != "DE":
-            return None
-    else:
-        m_l = ORIGINAL_LOCALE_RE.search(html)
-        if not m_l or not m_l.group(1).lower().startswith(sprache):
-            return None
+    m_l = ORIGINAL_LOCALE_RE.search(html)
+    if not m_l or not m_l.group(1).lower().startswith(sprache):
+        return None
 
     rec: dict = {}
     m = ASK_RE.search(html)

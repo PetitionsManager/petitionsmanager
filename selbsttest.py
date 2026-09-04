@@ -685,12 +685,51 @@ pruefe("sprachbefund ohne Felder bleibt leer",
 # anzeigen). Seit der Länderauswahl im Assistenten ist die Auslieferung der
 # ganze Zweck — ohne den Eintrag in SLIM_FIELDS erreicht rec["country"] die App
 # nie, und der Selektor hätte nichts zu filtern.
+# ⚠️ Seit 4.9.2026 braucht der Kunstfall ein SPRACHfeld: über die Aufnahme
+# entscheidet die Sprache, das Land steht nur noch daneben.
 _rec = changeorg.parse_detail(
-    '"country":{"countryCode":"DE"}"ask":"Ein Titel"', "https://x.test/p/a")
-pruefe("Change.org schreibt das Land mit", (_rec or {}).get("country"), "DE")
+    '"originalLocale":{"localeCode":"de-AT"}"country":{"countryCode":"AT"}'
+    '"ask":"Ein Titel"', "https://x.test/p/a")
+pruefe("Change.org schreibt das Land mit", (_rec or {}).get("country"), "AT")
 import publish as _publish                                       # noqa: E402
 pruefe("… und liefert es jetzt auch an die App aus",
        "country" in _publish.SLIM_FIELDS, True)
+# ---------------------------------------------------------------------------
+# Change.org: Aufnahme nach SPRACHE statt nach Land (4.9.2026)
+#
+# Bis dahin prüfte der deutsche Zweig `country == DE`, der englische die
+# Sprache. Am 30.8. gemessen: 11 von 60 Kandidaten waren deutschSPRACHIG aus
+# AT/CL/IT/UA/IN und fielen durch — das Elffache der EINEN angenommenen
+# DE-Petition. Jetzt entscheidet die Sprache über die AUFNAHME, das Land steht
+# als rec["country"] daneben und entscheidet über die ANZEIGE.
+for _html, _soll, _was in [
+    ('"originalLocale":{"localeCode":"de-DE"}"country":{"countryCode":"DE"}"ask":"T"',
+     True, "Change.org: deutsch aus Deutschland (wie bisher)"),
+    ('"originalLocale":{"localeCode":"de-AT"}"country":{"countryCode":"AT"}"ask":"T"',
+     True, "… deutsch aus Österreich — NEU aufgenommen"),
+    ('"originalLocale":{"localeCode":"de-CH"}"country":{"countryCode":"CH"}"ask":"T"',
+     True, "… deutsch aus der Schweiz — NEU aufgenommen"),
+    # ⚠️⚠️ Der wichtigste Fall: der ALTE Landfilter hätte diese Petition
+    # ANGENOMMEN, weil sie in Deutschland eingereicht wurde. Ein deutscher
+    # Leser versteht sie trotzdem nicht.
+    ('"originalLocale":{"localeCode":"tr-TR"}"country":{"countryCode":"DE"}"ask":"T"',
+     False, "… türkisch aus Deutschland bleibt draußen"),
+    ('"originalLocale":{"localeCode":"en-US"}"country":{"countryCode":"US"}"ask":"T"',
+     False, "… englisch nicht in den deutschen Zweig"),
+    # Fehlt das Sprachfeld, wird NICHT aufgenommen und NICHT verworfen — der
+    # Satz bleibt „unklar" im Vorrat. Sonst löschte ein Umbenennen des Feldes
+    # bei Change.org lautlos den ganzen Bestand.
+    ('"country":{"countryCode":"DE"}"ask":"T"',
+     False, "… ohne Sprachfeld keine Aufnahme"),
+]:
+    pruefe(_was,
+           changeorg.parse_detail(_html, "https://www.change.org/p/x") is not None,
+           _soll)
+# Und die Kehrseite: ohne Sprachfeld darf auch nichts als „falsche Sprache"
+# VERWORFEN werden, sonst wandert der ganze Bestand ins Register.
+pruefe("… und wird auch nicht als falsche Sprache verworfen",
+       changeorg.falsche_sprache('"country":{"countryCode":"DE"}', "de"), False)
+
 pruefe("europarl kennt die Feldbeschriftung in beiden Sprachen",
        [europarl.SPRACHE[s]["land"] for s in ("de", "en")],
        ["Land", "Country"])
@@ -766,12 +805,29 @@ class FakeFetcher:
 
 core._TLS.platform = "selbsttest"
 LAND = '"country":{"countryCode":"%s"}'
+# ⚠️ 4.9.2026: Über die Aufnahme entscheidet seither die SPRACHE, nicht das
+# Land. Die Kunstfälle brauchen deshalb ein Sprachfeld — vorher trugen sie nur
+# ein Länderfeld, und genau daran sind sie beim Umbau gefallen. Das Länderfeld
+# bleibt daneben stehen: es entscheidet jetzt über die Anzeige, nicht über die
+# Aufnahme, und die Fälle prüfen beides zusammen.
+SPRACHE = '"originalLocale":{"localeCode":"%s"}'
 TITEL = '"ask":"Ein Titel"'
 faelle = [
-    ("vollständige DE-Seite → online", f'{LAND % "DE"}{TITEL}', "online"),
-    ("belegt anderes Land → skip", f'{LAND % "TR"}{TITEL}', "skip"),
-    ("DE, aber kein Titel → unklar (NICHT skip)", LAND % "DE", "unklar"),
-    ("Länderfeld fehlt ganz → unklar (NICHT skip)", TITEL, "unklar"),
+    ("vollständige DE-Seite → online",
+     f'{SPRACHE % "de-DE"}{LAND % "DE"}{TITEL}', "online"),
+    # NEU aufgenommen statt verworfen — deutschsprachig, nur nicht aus DE.
+    ("deutschsprachig aus Österreich → online",
+     f'{SPRACHE % "de-AT"}{LAND % "AT"}{TITEL}', "online"),
+    # ⚠️⚠️ Hier stand „belegt anderes LAND → skip" mit tr-Land-Feld. Der Fall
+    # kehrt sich um: ein anderes Land ist kein Grund mehr, eine andere SPRACHE
+    # schon. Der alte Filter hätte diese türkische Petition aus Deutschland
+    # sogar angenommen.
+    ("belegt andere Sprache → skip",
+     f'{SPRACHE % "tr-TR"}{LAND % "DE"}{TITEL}', "skip"),
+    ("deutsch, aber kein Titel → unklar (NICHT skip)",
+     f'{SPRACHE % "de-DE"}{LAND % "DE"}', "unklar"),
+    ("Sprachfeld fehlt ganz → unklar (NICHT skip)", f'{LAND % "DE"}{TITEL}',
+     "unklar"),
 ]
 for name, html, soll in faelle:
     status, _ = changeorg.scrape_petition(FakeFetcher(html), "x")
