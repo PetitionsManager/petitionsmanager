@@ -1558,6 +1558,10 @@ body.wizard-open{overflow:hidden}
 }
 .wplat__n{display:block;font-weight:750;font-size:.9375rem}
 .wplat__m{display:block;color:var(--muted);font-size:.75rem;margin-top:.125rem}
+/* Landzeichen in der Meta-Zeile der Assistenten-Kachel (4.9.2026). Nur Abstand
+   und Groesse — die Glyphe faerbt sich selbst (Flaggen-Emoji). Ohne die Regel
+   klebte sie unmittelbar an der Petitionszahl. */
+.wplat__land{margin-left:.375rem;font-size:.8125rem;line-height:1}
 .wplat__check{flex:none;width:1.625rem;height:1.625rem;border-radius:50%;
   border:.125rem solid var(--line);color:transparent;font-size:.6875rem;
   display:flex;align-items:center;justify-content:center}

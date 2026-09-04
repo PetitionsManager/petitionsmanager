@@ -198,9 +198,14 @@
      Laden genau einmal ausgewertet, und ein Sprachwechsel käme dort nie an.
      Fehlt ein Name, steht das Kürzel da. Das ist Absicht: lieber „PL" als eine
      leere Fläche oder ein erfundener Name. */
+  /* ⚠️ Der Pseudo-Eintrag hieß bis zum 4.9.2026 „International" und wurde
+     prompt falsch verstanden: der Nutzer erwartete darunter fremdsprachige
+     Plattformen und bekam deutsche. Er bedeutet aber „die QUELLE nennt kein
+     Land" — Avaaz auf Deutsch ist eine internationale Plattform mit deutschen
+     Petitionen und steht zu Recht darin. Der Name sagt das jetzt. */
   function landInfo(code) {
     if (code === LAND_INTL)
-      return { name: T("land.intl", "International"), flag: "🌍" };
+      return { name: T("land.intl", "Ohne Landangabe"), flag: "🌍" };
     return { name: T("land." + code, code || "—"), flag: landFlagge(code) };
   }
 
@@ -208,6 +213,22 @@
   // Acht Einträge: Avaaz, WeMove, Ekō, 350.org (je de/en).
   function platLandneutral(p) {
     return !p || p.country_scope === "keine" || !p.country_scope;
+  }
+
+  /* Trägt das Manifest die Landachse überhaupt? Das ist NICHT dasselbe wie
+     „alle Einträge sind landneutral", und die Unterscheidung ist der ganze
+     Punkt: fehlt das Feld `country_scope` durchgehend, stammt das Manifest von
+     VOR der Landachse — dann ist der Länderschritt nicht etwa leer, sondern
+     unwissend, und er muss das sagen statt einen einzelnen wirkungslosen Chip
+     zu zeigen.
+
+     ⚠️ Genau dieser Fall stand am 4.9.2026 in der Vorschau: das ausgelieferte
+     Manifest hatte bei 17 von 17 Einträgen kein Landfeld, weil „Scrape &
+     Publish" mit dem neuen publish.py noch nicht gelaufen war. Der Schritt sah
+     dadurch aus wie ein Fehler im Filter. */
+  function manifestKenntLaender() {
+    var ps = (state.manifest && state.manifest.platforms) || [];
+    return ps.some(function (p) { return !!p.country_scope; });
   }
   /* Die Länder, die dieser Eintrag WIRKLICH führt. Leer heißt je nach scope
      zweierlei — siehe platPasstZuLand(), dort wird der Unterschied ausgewertet. */
@@ -221,6 +242,34 @@
     if (platLandneutral(p)) return LAND_INTL;
     var da = platCountries(p);
     return da.length === 1 ? da[0] : ((p && p.country) || null);
+  }
+
+  /* Das Landzeichen an der Plattformkachel — DREI Fälle, drei Glyphen. Ohne
+     das war in Schritt 4 nicht zu sehen, warum ein Eintrag drin oder draußen
+     ist; die Kachel nannte nur Logo, Name und Zahl.
+
+     ⚠️ Der dritte Fall braucht ein EIGENES Zeichen. „mehrländrig, Land noch
+     nicht erhoben" (openPetition, foodwatch) mit derselben Weltkugel zu malen
+     wie „die Quelle nennt kein Land" (Avaaz) würde eine Wissenslücke als
+     Eigenschaft der Plattform ausgeben — und genau diese Verwechslung hat den
+     Länderschritt am 4.9.2026 unverständlich gemacht. */
+  function platLandZeichen(p) {
+    /* ⚠️ ZUERST fragen, ob das Manifest die Achse überhaupt führt. Ohne diese
+       Zeile behauptet die Kachel bei einem alten Manifest „Diese Plattform
+       nennt kein Land" — auch beim Bundestag, der fest auf DE steht. Das wäre
+       nicht bloß nutzlos, sondern nachweislich falsch: platLandneutral() kann
+       „kein Land" und „Feld fehlt" nicht unterscheiden, das ist gerade seine
+       Aufgabe als Rückfall. Kein Zeichen ist besser als ein unwahres. */
+    if (!manifestKenntLaender()) return null;
+    if (platLandneutral(p))
+      return { text: "🌍", titel: T("land.intlTitle",
+        "Diese Plattform nennt kein Land") };
+    var da = platCountries(p);
+    if (da.length)
+      return { text: da.map(landFlagge).join(""),
+               titel: da.map(function (c) { return landInfo(c).name; }).join(", ") };
+    return { text: "🏳️", titel: T("land.unknownTitle",
+      "Land bei dieser Plattform noch nicht erhoben") };
   }
 
   /* Passt dieser Plattform-EINTRAG zur Länderauswahl?
@@ -6649,8 +6698,16 @@
         cgrid.appendChild(chip);
       });
       main.appendChild(cgrid);
-      main.appendChild(el('<p class="wiz__hint">' +
-        esc(T("wizard.land.hint", "Das lässt sich jederzeit ändern.")) + "</p>"));
+      /* Zwei verschiedene Fußzeilen, und die Unterscheidung ist wichtiger als
+         sie aussieht: „ein Chip, der nichts bewirkt" und „die Landangaben sind
+         noch nicht geholt" sehen auf dem Schirm gleich aus, sind aber
+         verschiedene Lagen. Schweigt der Schritt darüber, liest sich der zweite
+         Fall wie ein kaputter Filter. */
+      main.appendChild(el('<p class="wiz__hint">' + esc(manifestKenntLaender()
+        ? T("wizard.land.hint", "Das lässt sich jederzeit ändern.")
+        : T("wizard.land.nodata",
+            "Die Landangaben kommen mit dem nächsten Datenlauf – bis dahin "
+            + "steht hier nur „Ohne Landangabe“.")) + "</p>"));
 
     } else if (step === 3) {
       /* ---- Farbdesign + Layout (Nutzerwunsch 12.8.2026) -------------------
@@ -6816,7 +6873,15 @@
           '<span class="wplat__body"><span class="wplat__n">' + esc(p.name) +
           "</span><span class=\"wplat__m\">" +
           esc(fill(T("wizard.platCount", "{n} Petitionen"),
-                   { n: nf.format(p.online) })) + "</span></span>" +
+                   { n: nf.format(p.online) })) +
+          /* Das Landzeichen sitzt IN der Meta-Zeile, nicht als eigene Zeile:
+             die Kachel trägt schon Logo, Name und Zahl, eine vierte Zeile
+             hätte die Liste auf mobilen Geräten unnötig gestreckt.
+             null = das Manifest führt die Landachse noch nicht (siehe dort). */
+          (function (z) {
+            return z ? '<span class="wplat__land" title="' + esc(z.titel) +
+                       '">' + z.text + "</span>" : "";
+          })(platLandZeichen(p)) + "</span></span>" +
           '<span class="wplat__check"><i class="fa-solid fa-check"></i></span>' +
           "</button>");
         row.addEventListener("click", function () {

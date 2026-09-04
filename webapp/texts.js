@@ -114,7 +114,12 @@ window.PM_TEXTS = {
       land: {
         title: "Aus welchen Ländern?",
         text: "Viele Plattformen sammeln über Ländergrenzen hinweg — eine deutschsprachige Petition kann aus Österreich oder der Schweiz kommen. Wähle, welche Länder dich interessieren.",
-        hint: "„International“ steht für Plattformen, die kein Land angeben."
+        hint: "„Ohne Landangabe“ steht für Plattformen, deren Quelle kein Land nennt – sie zeigen trotzdem Petitionen in deiner Sprache.",
+        /* Steht anstelle von `hint`, solange das Manifest die Landachse gar
+           nicht führt. Ohne diesen Satz zeigt der Schritt einen einzigen Chip,
+           der nichts bewirkt, und sieht aus wie ein kaputter Filter — genau so
+           ist er am 4.9.2026 gemeldet worden. */
+        nodata: "Die Landangaben kommen mit dem nächsten Datenlauf – bis dahin steht hier nur „Ohne Landangabe“."
       },
       /* Schritt 3: Farbdesign und Layout zusammen. Die Beschriftungen der
          beiden Schalterleisten kommen aus settings.* — es sind dieselben
@@ -571,7 +576,11 @@ window.PM_TEXTS = {
        ⚠️ Fehlt ein Kürzel hier, zeigt die App das Kürzel selbst an — sichtbar
        unfertig, aber nie leer und nie erfunden. */
     land: {
-      intl: "International",
+      /* ⚠️ Hieß bis 4.9.2026 „International" und wurde prompt als
+         „fremdsprachig" gelesen. Gemeint ist: die Quelle nennt kein Land. */
+      intl: "Ohne Landangabe",
+      intlTitle: "Diese Plattform nennt kein Land",
+      unknownTitle: "Land bei dieser Plattform noch nicht erhoben",
       AT: "Österreich", BE: "Belgien", BG: "Bulgarien", CH: "Schweiz",
       CL: "Chile", CY: "Zypern", CZ: "Tschechien", DE: "Deutschland",
       DK: "Dänemark", EE: "Estland", ES: "Spanien", FI: "Finnland",
@@ -793,7 +802,8 @@ window.PM_TEXTS = {
       land: {
         title: "Which countries?",
         text: "Many platforms collect signatures across borders — a German-language petition can come from Austria or Switzerland. Choose the countries you are interested in.",
-        hint: "“International” covers platforms that do not state a country."
+        hint: "“No country given” covers platforms whose source states no country — they still show petitions in your language.",
+        nodata: "Country data arrives with the next data run — until then only “No country given” appears here."
       },
       look: {
         title: "How should the app look?",
@@ -1177,7 +1187,9 @@ window.PM_TEXTS = {
     /* Country names — twin of lang.*; the flag is computed from the ISO code
        in app.js/landFlagge(), not stored here. US spelling throughout. */
     land: {
-      intl: "International",
+      intl: "No country given",
+      intlTitle: "This platform states no country",
+      unknownTitle: "Country not yet collected for this platform",
       AT: "Austria", BE: "Belgium", BG: "Bulgaria", CH: "Switzerland",
       CL: "Chile", CY: "Cyprus", CZ: "Czechia", DE: "Germany",
       DK: "Denmark", EE: "Estonia", ES: "Spain", FI: "Finland",
