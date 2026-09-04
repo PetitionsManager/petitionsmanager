@@ -4,8 +4,17 @@ name: Scrape & Publish
 # Der Scraper-Zustand (die *_petitions.json) lebt im Actions-Cache – so wächst
 # das Repo NICHT mit jedem Lauf. Manuell startbar über "Run workflow".
 on:
+  # Zwei Läufe pro Tag (4.9.2026): seit das Verworfenen-Register wirkt, reißen
+  # die Läufe die 300-min-Frist täglich (#50–#54 alle exakt 316 min) —
+  # openpetition fiel am 4.9. ganz heraus, die Change.org-Aufholschleife bekam
+  # nur noch ihre 15 Zuschlagsminuten. Der zweite Lauf verdoppelt das Fenster;
+  # skip_recent (24 h) verhindert doppelte Nachprüfungen, seine Zeit fließt
+  # also in Entdeckung und Aufholen. Läuft der erste Lauf noch (Cron startet
+  # real bis zu Stunden später), stellt die concurrency-Gruppe den zweiten
+  # hinten an statt ihn parallel loszulassen.
   schedule:
     - cron: '17 3 * * *'      # täglich 03:17 UTC
+    - cron: '17 15 * * *'     # zweiter Lauf 15:17 UTC
   workflow_dispatch:
     inputs:
       nacharbeit:
