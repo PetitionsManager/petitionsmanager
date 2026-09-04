@@ -1457,6 +1457,15 @@ body.wizard-open{overflow:hidden}
 .wiz__main > .srow__lbl:first-child{margin-top:0}
 .wiz__main .srow{margin-top:.5rem}
 .wiz__chips{display:flex;flex-wrap:wrap;gap:.625rem}
+/* Einspaltig untereinander — fuer den Laenderschritt (Nutzerwunsch 4.9.2026).
+   Beim Sprachschritt bleibt es beim Umbruch: dort stehen zwei Chips, die
+   nebeneinander passen.
+   ⚠️ Muss HINTER .wiz__chips stehen (gleiche Spezifitaet, es entscheidet die
+   Position) und EINklassig bleiben — als .wiz__chips.wiz__chips--spalte
+   gewaenne sie auch dort, wo sie verlieren soll.
+   align-items:flex-start, nicht stretch: die Chips behalten ihre natuerliche
+   Breite und bleiben Pillen; gestreckt saehen sie wie Listenzeilen aus. */
+.wiz__chips--spalte{flex-direction:column;flex-wrap:nowrap;align-items:flex-start}
 .wiz__chips .chip{display:inline-flex;align-items:center;gap:.5rem;
   border:.125rem solid var(--line);background:var(--surface);border-radius:999px;
   padding:.6875rem 1.125rem;font:inherit;font-size:.9375rem;font-weight:700;

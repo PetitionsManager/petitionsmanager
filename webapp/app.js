@@ -187,8 +187,13 @@
      es ist kein Land und soll nicht zwischen den Ländern stehen. */
   var LAND_ORDER = ["DE", "AT", "CH", "ES", "FR", "IT", "NL", "PL", "GB", "US"];
   function landRank(code) {
-    if (code === LAND_INTL) return 998;          // immer hinter alle Länder
-    if (code === LAND_UNERHOBEN) return 999;     // und die Wissenslücke zuletzt
+    /* „Weltweit" steht GANZ OBEN (Nutzerwunsch 4.9.2026) — es ist die größte
+       Gruppe (acht Einträge) und die einzige, die unabhängig von jeder
+       Länderwahl gilt. Vorher stand es hinter allen Ländern, also je nach
+       Datenlage irgendwo unter zehn Zeilen.
+       Die Wissenslücke bleibt dagegen unten: sie ist ein Restposten. */
+    if (code === LAND_INTL) return -1;
+    if (code === LAND_UNERHOBEN) return 999;
     var i = LAND_ORDER.indexOf(code); return i < 0 ? 99 : i;
   }
   /* Die Flagge wird BERECHNET, nicht in einer Tabelle geführt: ein ISO-Kürzel
@@ -6710,7 +6715,10 @@
         esc(T("wizard.land.text",
               "Viele Plattformen sammeln über Ländergrenzen hinweg. Wähle, " +
               "welche Länder dich interessieren.")) + "</p>"));
-      var cgrid = el('<div class="wiz__chips"></div>');
+      /* Einspaltig (Nutzerwunsch 4.9.2026): mit zehn Ländern lief die Reihe
+         vorher über vier Zeilen unterschiedlicher Länge und war schwer zu
+         überfliegen. Der Sprachschritt behält den Umbruch — dort sind es zwei. */
+      var cgrid = el('<div class="wiz__chips wiz__chips--spalte"></div>');
       wizardCountries().forEach(function (code) {
         var info = landInfo(code);
         // Zahl unter dem Chip: wie viele EINTRÄGE dieses Land führen. Nicht die
