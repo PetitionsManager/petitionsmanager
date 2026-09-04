@@ -69,6 +69,12 @@ CATEGORY_RE = re.compile(r"/petitionen\?category=(\d+)")
 # dieselbe Falle wie bei TARGET_RE in threefifty_scraper.py.
 EIGENE_KATEGORIE_RE = re.compile(
     r"^https://(www\.)?openpetition\.de/([a-z]{2}/)?petitionen\?category=\d+", re.I)
+# Das Länderstück AUS dem fertigen Kategorie-Link ziehen (siehe parse_detail).
+# ⚠️ Am eigenen Host verankert, sonst könnte ein fremder Link ein Land setzen —
+# EIGENE_KATEGORIE_RE hat den Link zwar schon geprüft, aber dieses Muster läuft
+# über das Ergebnis und darf sich nicht darauf verlassen, dass das so bleibt.
+LAND_IM_KATEGORIELINK_RE = re.compile(
+    r"^https://(?:www\.)?openpetition\.de/([a-z]{2})/petitionen\?category=\d+", re.I)
 # "470.240 Unterschriften" bzw. "500.000 für Sammelziel"
 SIG_RE  = re.compile(r"([\d.]+)\s*Unterschrift", re.I)
 GOAL_RE = re.compile(r"([\d.]+)\s*für Sammelziel", re.I)
@@ -281,6 +287,31 @@ def parse_detail(html: str, url: str, lang: str = "de") -> dict:
             # ADRESSE wird angeklickt und muss deshalb die unsere sein.
             rec["category_url"] = core.eigener_link(
                 cat_link.get("href"), BASE_URL, EIGENE_KATEGORIE_RE)
+
+    # ---- Land (4.9.2026) ----------------------------------------------------
+    # ⚠️ Die Petitionsadresse taugt dafür NICHT: sie heißt immer
+    # /petition/online/<slug>, ohne Länderstück. Genau daran ist die frühere
+    # Einschätzung „bei openPetition ist das Land nicht ableitbar" hängen
+    # geblieben. Der KATEGORIE-Link trägt es dagegen sehr wohl: openPetition
+    # rendert ihn länderbezogen, /at/petitionen?category=N für österreichische
+    # Petitionen.
+    #
+    # Am 4.9.2026 über alle 1.903 Sätze des Bestands gemessen:
+    #   AT 181 · CH 76 · IT 3 · BE 2 · HR/ES/LU/US/AU je 1 · ohne Stück 1.636
+    #
+    # Der Rückfall „kein Länderstück ⇒ DE" ist FALSIFIZIEREND geprüft, nicht
+    # bloß plausibel: ein Detektor für eindeutig österreichische bzw.
+    # schweizerische Adressaten schlägt in den Kontrollgruppen an (92/181 bzw.
+    # 52/76, dabei je NULL Treffer der anderen Seite), in den 1.636 dagegen nur
+    # bei 8 Sätzen = 0,49 % — und die sind bei Einzelsicht sämtlich Fehlalarme
+    # (Wort „Österreich" im Fließtext einer Bundestagspetition; „Bundesversamm-
+    # lung", die es in Deutschland auch gibt). Belegt an den Adressaten:
+    # /at/ → ÖGK, Wiener Gemeinderat; /ch/ → Kanton Bern; ohne → Bundestag.
+    #
+    # Kostet NULL zusätzliche Abrufe: der Link steht auf der Seite, die wir
+    # ohnehin schon geholt haben.
+    land = LAND_IM_KATEGORIELINK_RE.search(rec.get("category_url") or "")
+    rec["country"] = land.group(1).upper() if land else "DE"
 
     # Unterschriften + Sammelziel aus der Fortschrittsbox.
     box = soup.select_one(".progress-box")

@@ -609,14 +609,29 @@ def main() -> None:
             #                dort nicht ableitbar ist. Eine leere Liste bei
             #                scope=="mehrere" heißt „noch unbekannt", NICHT
             #                „kein Land" — die App darf danach nicht ausblenden.
+            # Dazu die ZAHL je Land. Die Liste allein reicht nicht: die App
+            # muss unterscheiden können, ob ein Land den Bestand trägt oder ein
+            # Streuner ist. Ohne diese Zahl hat die Ländervorwahl am 4.9.2026
+            # „Vereinigte Staaten" mit EINER Petition vorausgewählt, weil das
+            # Gerät auf en-US stand — gemessen bei openPetition:
+            # DE 1.636 · AT 181 · CH 76 · IT 3 · BE 2 · HR/ES/LU/US/AU je 1.
             if p.country_scope == "fest":
                 entry["countries"] = [p.country] if p.country else []
+                entry["country_counts"] = ({p.country: entry["online"]}
+                                           if p.country else {})
             elif p.country_scope == "mehrere":
-                laender = {c for c in (core.land_code(r.get("country"))
-                                       for r in items) if c}
-                entry["countries"] = sorted(laender)
+                zaehl: dict[str, int] = {}
+                for r in items:
+                    if r.get("status", "online") != "online":
+                        continue
+                    c = core.land_code(r.get("country"))
+                    if c:
+                        zaehl[c] = zaehl.get(c, 0) + 1
+                entry["countries"] = sorted(zaehl)
+                entry["country_counts"] = zaehl
             else:
                 entry["countries"] = []
+                entry["country_counts"] = {}
             # Jüngster Plattform-Stempel, nicht der erste, der vorbeikommt:
             # vorher stand hier der Stempel der ERSTEN Live-Plattform in
             # monitor.PLATFORMS. Nach einem publish-Lauf am 29.7.26 um 18:59

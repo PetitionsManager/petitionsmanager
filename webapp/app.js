@@ -214,9 +214,9 @@
      Petitionen und steht zu Recht darin. Der Name sagt das jetzt. */
   function landInfo(code) {
     if (code === LAND_INTL)
-      return { name: T("land.intl", "Ohne Landangabe"), flag: "🌍" };
+      return { name: T("land.intl", "Weltweit"), flag: "🌍" };
     if (code === LAND_UNERHOBEN)
-      return { name: T("land.offen", "Land nicht erhoben"), flag: "🏳️" };
+      return { name: T("land.offen", "Noch nicht zugeordnet"), flag: "🏳️" };
     return { name: T("land." + code, code || "—"), flag: landFlagge(code) };
   }
 
@@ -248,6 +248,28 @@
       return p.countries;
     return (p && p.country) ? [p.country] : [];
   }
+  /* Wie viele Petitionen stehen insgesamt hinter einem Land? Summiert über
+     alle Einträge; publish.py liefert `country_counts` je Plattform.
+
+     ⚠️ Gebraucht wird das NUR für die Vorauswahl, nicht für den Filter. Ein
+     Land mit einer einzigen Petition bleibt anwählbar — es wird bloß nicht von
+     selbst angehakt. Anlass (4.9.2026): die Ländervorwahl nahm die Region des
+     Geräts, sobald sie in der Liste stand, und wählte auf einem en-US-Gerät
+     „Vereinigte Staaten" mit EINER Petition vor statt Deutschland. */
+  function landBestand(code) {
+    return livePlatforms().reduce(function (summe, p) {
+      var z = p && p.country_counts;
+      return summe + ((z && z[code]) || 0);
+    }, 0);
+  }
+  /* Ab wann trägt ein Land genug Bestand, um vorausgewählt zu werden?
+     ⚠️ Nicht geraten, sondern an der Lücke abgelesen. Bei openPetition am
+     4.9.2026 gemessen: DE 1.636 · AT 181 · CH 76 — dann fällt es auf IT 3,
+     BE 2 und fünf Länder mit je EINER Petition. Zwischen 76 und 3 liegt ein
+     Faktor 25; die Schwelle sitzt also mitten in einer breiten Lücke und nicht
+     an einer Kante, wo ein einzelner neuer Satz sie kippen könnte. */
+  var LAND_MINDEST = 50;
+
   // Das EINE Land eines Eintrags, sofern er auf eines festgelegt ist.
   function platMainCountry(p) {
     if (platLandneutral(p)) return LAND_INTL;
@@ -280,7 +302,7 @@
       return { text: da.map(landFlagge).join(""),
                titel: da.map(function (c) { return landInfo(c).name; }).join(", ") };
     return { text: "🏳️", titel: T("land.unknownTitle",
-      "Land bei dieser Plattform noch nicht erhoben") };
+      "Diese Plattform kennt Länder – wir haben sie noch nicht erhoben") };
   }
 
   /* Passt dieser Plattform-EINTRAG zur Länderauswahl?
@@ -6373,7 +6395,12 @@
     var da = wizardCountries();
     var region = systemLand();
     var wahl = [];
-    if (region && da.indexOf(region) >= 0) wahl.push(region);
+    /* ⚠️ Die Geräteregion zählt nur, wenn sie auch Bestand hat. Ohne die
+       zweite Bedingung genügte EINE australische Petition, damit ein Gerät mit
+       australischer Region die ganze Einrichtung auf Australien stellt — und
+       der Nutzer sähe eine fast leere App, ohne zu wissen warum. */
+    if (region && da.indexOf(region) >= 0 && landBestand(region) >= LAND_MINDEST)
+      wahl.push(region);
     else if (da.indexOf("DE") >= 0) wahl.push("DE");
     if (da.indexOf(LAND_INTL) >= 0) wahl.push(LAND_INTL);
     /* Ebenfalls vorausgewählt, aus demselben Grund wie „Ohne Landangabe":
@@ -6689,9 +6716,13 @@
         // Zahl unter dem Chip: wie viele EINTRÄGE dieses Land führen. Nicht die
         // Petitionen — die stehen erst nach dem Laden der Pakete fest, und eine
         // Zahl, die sich beim Weiterklicken ändert, wäre schlimmer als keine.
-        /* Die drei Zweige müssen sich zu allen Einträgen ergänzen — sonst
-           stimmt die Summe der Chip-Zahlen nicht mit der Plattformzahl
-           überein, und genau daran ist der Schritt schon einmal aufgefallen. */
+        /* Die drei Zweige müssen JEDEN Eintrag erfassen — ein Eintrag, der in
+           keinen fällt, wäre wieder unsichtbar und dauerhaft an.
+           ⚠️ Die Summe der Chip-Zahlen ist dabei NICHT die Zahl der
+           Plattformen. Ich hatte das am 4.9.2026 kurz als Kontrolle benutzt;
+           sie galt nur, solange jeder Eintrag höchstens EIN Land führte. Seit
+           openPetition zehn Länder mitbringt, zählt es in zehn Chips mit —
+           richtig so, aber als Prüfgleichung wertlos. */
         var n = livePlatforms().filter(function (p) {
           if (code === LAND_INTL) return platLandneutral(p);
           if (platLandneutral(p)) return false;
@@ -6744,7 +6775,7 @@
         ? T("wizard.land.hint", "Das lässt sich jederzeit ändern.")
         : T("wizard.land.nodata",
             "Die Landangaben kommen mit dem nächsten Datenlauf – bis dahin "
-            + "steht hier nur „Ohne Landangabe“.")) + "</p>"));
+            + "steht hier nur „Weltweit“.")) + "</p>"));
 
     } else if (step === 3) {
       /* ---- Farbdesign + Layout (Nutzerwunsch 12.8.2026) -------------------

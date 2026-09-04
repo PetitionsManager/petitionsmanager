@@ -274,6 +274,42 @@ pruefe("tagesgenau schlägt monatsgenau (Reihenfolge)",
 
 
 # ---------------------------------------------------------------------------
+# openpetition: Land aus dem KATEGORIE-Link (4.9.2026)
+#
+# Die Petitionsadresse trägt nie ein Länderstück (/petition/online/<slug>) —
+# daran ist die frühere Einschätzung „nicht ableitbar" hängen geblieben. Der
+# Kategorie-Link trägt es. Am Bestand gemessen: AT 181, CH 76, IT 3, BE 2,
+# HR/ES/LU/US/AU je 1, ohne Stück 1.636 (Summe 1.903, kein Satz verloren).
+_LAND_RE = openpetition.LAND_IM_KATEGORIELINK_RE
+
+
+def _land_aus(link):
+    m = _LAND_RE.search(link or "")
+    return m.group(1).upper() if m else "DE"
+
+
+for link, soll, was in [
+    ("https://www.openpetition.de/at/petitionen?category=5", "AT",
+     "Länderstück /at/ wird gelesen"),
+    ("https://www.openpetition.de/ch/petitionen?category=12", "CH",
+     "… ebenso /ch/"),
+    ("https://openpetition.de/it/petitionen?category=1", "IT",
+     "… auch ohne www"),
+    ("https://www.openpetition.de/petitionen?category=5", "DE",
+     "ohne Länderstück ⇒ Deutschland"),
+    ("", "DE", "ohne Kategorie-Link ⇒ Deutschland"),
+    # ⚠️ Negativkontrolle: ein fremder Host darf KEIN Land setzen können.
+    # Ohne die Verankerung stünde hier AT, und ein beliebiger Fremdlink im
+    # Seitentext könnte die Landzuordnung einer Petition bestimmen.
+    ("https://boese.de/at/petitionen?category=5", "DE",
+     "fremder Host setzt kein Land"),
+    ("https://openpetition.de.boese.de/at/petitionen?category=5", "DE",
+     "… auch nicht als Sub-Domain-Trick"),
+]:
+    pruefe(was, _land_aus(link), soll)
+
+
+# ---------------------------------------------------------------------------
 # 4. sanitize_fragment() — <style>/<script> müssen GANZ weg
 #
 # Warum das hier steht (30.8.2026): Nutzermeldung, die Avaaz-Petition „Welt an

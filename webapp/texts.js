@@ -100,9 +100,16 @@ window.PM_TEXTS = {
         text: "Diese App bündelt Petitionen von 11 Plattformen an einem Ort. Du entscheidest, welche du siehst — und kannst jederzeit filtern, suchen und deine Unterschriften festhalten.",
         cta: "Einrichten"
       },
+      /* ⚠️ Dieser Schritt fragt nach den Sprachen der PETITIONEN, nicht nach der
+         Bediensprache — die steht auf dem Begrüßungsbildschirm. Beides
+         hintereinander „Sprache" zu nennen hat den Nutzer am 4.9.2026 dazu
+         gebracht, den Schritt für eine Wiederholung zu halten und den ganzen
+         Ablauf für unlogisch. Titel und Text sagen den Unterschied jetzt
+         ausdrücklich; die Vorbelegung aus der Oberflächensprache bleibt
+         (Entscheidung 12.8.2026, am 4.9. bestätigt). */
       lang: {
-        title: "Welche Sprachen interessieren dich?",
-        text: "Wähle die Plattform-Sprachen aus, die du sehen möchtest. Du kannst das jederzeit in den Einstellungen ändern.",
+        title: "In welchen Sprachen sollen die Petitionen sein?",
+        text: "Nicht zu verwechseln mit der Bediensprache der App — die hast du eben gewählt und sie bleibt, was sie ist. Hier geht es um die Sprache der Petitionen selbst.",
         hint: "Mindestens eine Sprache wählen."
       },
       /* Schritt 2: Länder (4.9.2026). Bewusst ein eigener Schritt neben der
@@ -114,12 +121,12 @@ window.PM_TEXTS = {
       land: {
         title: "Aus welchen Ländern?",
         text: "Viele Plattformen sammeln über Ländergrenzen hinweg — eine deutschsprachige Petition kann aus Österreich oder der Schweiz kommen. Wähle, welche Länder dich interessieren.",
-        hint: "„Ohne Landangabe“ steht für Plattformen, deren Quelle kein Land nennt – sie zeigen trotzdem Petitionen in deiner Sprache.",
+        hint: "„Weltweit“ steht für Plattformen, die länderübergreifend sammeln – sie zeigen trotzdem Petitionen in deiner Sprache.",
         /* Steht anstelle von `hint`, solange das Manifest die Landachse gar
            nicht führt. Ohne diesen Satz zeigt der Schritt einen einzigen Chip,
            der nichts bewirkt, und sieht aus wie ein kaputter Filter — genau so
            ist er am 4.9.2026 gemeldet worden. */
-        nodata: "Die Landangaben kommen mit dem nächsten Datenlauf – bis dahin steht hier nur „Ohne Landangabe“."
+        nodata: "Die Landangaben kommen mit dem nächsten Datenlauf – bis dahin steht hier nur „Weltweit“."
       },
       /* Schritt 3: Farbdesign und Layout zusammen. Die Beschriftungen der
          beiden Schalterleisten kommen aus settings.* — es sind dieselben
@@ -578,12 +585,15 @@ window.PM_TEXTS = {
     land: {
       /* ⚠️ Hieß bis 4.9.2026 „International" und wurde prompt als
          „fremdsprachig" gelesen. Gemeint ist: die Quelle nennt kein Land. */
-      intl: "Ohne Landangabe",
-      intlTitle: "Diese Plattform nennt kein Land",
-      /* ⚠️ NICHT dasselbe wie `intl`. Dort nennt die Quelle kein Land, hier
-         kennt sie eines und wir haben es nicht erhoben. */
-      offen: "Land nicht erhoben",
-      unknownTitle: "Land bei dieser Plattform noch nicht erhoben",
+      /* ⚠️ 4.9.2026 umbenannt. Vorher hießen die beiden „Ohne Landangabe" und
+         „Land nicht erhoben" — Nutzer: „klingt wie das gleiche". Sachlich sind
+         es zwei Dinge, aber die Wörter gaben das nicht her. Jetzt beschreibt
+         das erste die PLATTFORM (sie sammelt länderübergreifend), das zweite
+         unseren KENNTNISSTAND. */
+      intl: "Weltweit",
+      intlTitle: "Diese Plattform sammelt länderübergreifend und nennt kein einzelnes Land",
+      offen: "Noch nicht zugeordnet",
+      unknownTitle: "Diese Plattform kennt Länder – wir haben sie noch nicht erhoben",
       AT: "Österreich", BE: "Belgien", BG: "Bulgarien", CH: "Schweiz",
       CL: "Chile", CY: "Zypern", CZ: "Tschechien", DE: "Deutschland",
       DK: "Dänemark", EE: "Estland", ES: "Spanien", FI: "Finnland",
@@ -592,7 +602,12 @@ window.PM_TEXTS = {
       IT: "Italien", LT: "Litauen", LU: "Luxemburg", LV: "Lettland",
       MT: "Malta", NL: "Niederlande", PL: "Polen", PT: "Portugal",
       RO: "Rumänien", SE: "Schweden", SI: "Slowenien", SK: "Slowakei",
-      UA: "Ukraine", US: "Vereinigte Staaten"
+      UA: "Ukraine", US: "Vereinigte Staaten",
+      /* Nachgetragen 4.9.2026, als openPetition seine Länder hergab und im
+         Selektor ein nacktes „AU" stand. Belegt in den Daten: AU. Dazu LI als
+         deutschsprachiger Nachbar und TR, weil bei Change.org 34 von 60
+         geprüften Kandidaten türkisch waren. */
+      AU: "Australien", LI: "Liechtenstein", TR: "Türkei"
     },
 
     nav: {
@@ -798,15 +813,15 @@ window.PM_TEXTS = {
         cta: "Set up"
       },
       lang: {
-        title: "Which languages are you interested in?",
-        text: "Choose the platform languages you want to see. You can change this at any time in the settings.",
+        title: "Which languages should the petitions be in?",
+        text: "Not to be confused with the app's interface language — you just picked that one and it stays as it is. This is about the language of the petitions themselves.",
         hint: "Choose at least one language."
       },
       land: {
         title: "Which countries?",
         text: "Many platforms collect signatures across borders — a German-language petition can come from Austria or Switzerland. Choose the countries you are interested in.",
-        hint: "“No country given” covers platforms whose source states no country — they still show petitions in your language.",
-        nodata: "Country data arrives with the next data run — until then only “No country given” appears here."
+        hint: "“Worldwide” covers platforms that collect across borders — they still show petitions in your language.",
+        nodata: "Country data arrives with the next data run — until then only “Worldwide” appears here."
       },
       look: {
         title: "How should the app look?",
@@ -1190,10 +1205,10 @@ window.PM_TEXTS = {
     /* Country names — twin of lang.*; the flag is computed from the ISO code
        in app.js/landFlagge(), not stored here. US spelling throughout. */
     land: {
-      intl: "No country given",
-      intlTitle: "This platform states no country",
-      offen: "Country not collected",
-      unknownTitle: "Country not yet collected for this platform",
+      intl: "Worldwide",
+      intlTitle: "This platform collects across borders and states no single country",
+      offen: "Not yet assigned",
+      unknownTitle: "This platform does have countries — we have not collected them yet",
       AT: "Austria", BE: "Belgium", BG: "Bulgaria", CH: "Switzerland",
       CL: "Chile", CY: "Cyprus", CZ: "Czechia", DE: "Germany",
       DK: "Denmark", EE: "Estonia", ES: "Spain", FI: "Finland",
@@ -1202,7 +1217,8 @@ window.PM_TEXTS = {
       IT: "Italy", LT: "Lithuania", LU: "Luxembourg", LV: "Latvia",
       MT: "Malta", NL: "Netherlands", PL: "Poland", PT: "Portugal",
       RO: "Romania", SE: "Sweden", SI: "Slovenia", SK: "Slovakia",
-      UA: "Ukraine", US: "United States"
+      UA: "Ukraine", US: "United States",
+      AU: "Australia", LI: "Liechtenstein", TR: "Türkiye"
     },
 
     nav: {
