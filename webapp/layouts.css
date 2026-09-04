@@ -424,7 +424,7 @@
 [data-layout="relief"] .support__btn--donate{color:var(--on-hot-soft)}
 [data-layout="relief"] .support__btn--donate i{color:inherit}
 [data-layout="relief"] .to-top{border-radius:50%;
-  width:3rem;height:3rem;font-size:1.125rem}
+  width:3rem;height:3rem}
 /* MIT :root davor, nicht ohne. theme.css setzt für den Dunkelmodus
    `:root[data-theme="dark"] .to-top{box-shadow:…}` – das sind zwei Klassen
    plus Pseudoklasse und schlägt ein einfaches [data-layout] .to-top. Ohne den
@@ -603,7 +603,7 @@
    opacity:.82 zurück; der Reliefzweig dafür ist bewusst entfallen. */
 [data-layout="relief"] .pet__ext{border-radius:50%;
   background:var(--accent);color:var(--on-accent);
-  box-shadow:none;font-size:.875rem}
+  box-shadow:none}
 /* Der rechte Innenabstand der Kopfzeile ist für das randlose Band gefallen –
    die letzte Buchse in der Zeile bringt ihn selbst mit. Beide Fälle: mit
    Fremdlink ist .pet__ext das letzte Kind, ohne ihn .pet__toggle. */
@@ -722,7 +722,19 @@
 [data-layout="relief"] .srow:not(.srow--static):active{background:var(--bg);
   box-shadow:var(--nu-rim),var(--nu-in-s)}
 [data-layout="relief"] .srow--static{box-shadow:var(--nu-in-s)}
-[data-layout="relief"] .srow__lbl{margin:1.25rem .25rem .5rem}
+/* ⚠️⚠️ GILT FÜR BEIDE LAYOUTS (4.9.2026) — sonst springt die Bedienung.
+   Stand hier bis dahin nur unter [data-layout="relief"]; im Magazin griff
+   dadurch die Assistenten-Basis `.wiz__main .srow__lbl{margin-top:2rem}`
+   aus style.css:1456, also 32 px statt 20 px oben und 6 px statt 8 px
+   unten. Beim Umschalten wanderten „Farbdesign" und „Layout" deshalb nach
+   unten, obwohl an ihnen selbst nichts geändert wurde.
+   ⚠️ Gleiche Ursache wie bei den sechs Schriftregeln im Sammelblock am
+   Dateiende: eine Regel, die es NUR für relief gibt, ist ein Sprung —
+   auch wenn im Magazin-Block nichts danebensteht. Beide Selektoren
+   ausschreiben statt das Attribut wegzulassen: die Position im Blatt (und
+   damit der Vorrang vor style.css:1456) bleibt so nachweislich gleich. */
+[data-layout="relief"] .srow__lbl,
+[data-layout="magazin"] .srow__lbl{margin:1.25rem .25rem .5rem}
 
 /* Schalterleiste (Farbdesign, Layout): vertiefte Rinne, die gewählte Taste
    ein Buckel darin. Das ist die Bauform aus „Soft UI Radio Buttons and
@@ -732,7 +744,7 @@
   padding:.375rem;gap:.375rem;box-shadow:var(--nu-in)}
 [data-layout="relief"] .seg__b{border-radius:999px;padding:.625rem .375rem}
 [data-layout="relief"] .seg__b.on{background:var(--bg);color:var(--accent);
-  font-weight:750;box-shadow:var(--nu-rim),var(--nu-out-s)}
+  box-shadow:var(--nu-rim),var(--nu-out-s)}
 
 /* Schalter: Spur vertieft, Knopf erhaben. „An" färbt den Knopf in den
    Akzentton und legt die Spur in --accent-soft — die Form allein wäre bei
@@ -892,7 +904,7 @@
   opacity:.85}
 [data-layout="relief"] .signed-item__t mark,
 [data-layout="relief"] .signed-item__meta mark{background:transparent;
-  color:var(--on-hot-soft);font-weight:750}
+  color:var(--on-hot-soft)}
 /* „Unterschrieben am": abgesetzt, aber ohne Linie — in einer Oberfläche ohne
    Kanten trennt der Abstand (dasselbe Rezept wie zwischen den Sprachgruppen).
    Die Haarlinie aus style.css deshalb weg, der Abstand dafür größer. */
@@ -978,7 +990,7 @@
 [data-layout="relief"] .chiprow .chip:active{background:var(--bg);
   box-shadow:var(--nu-rim),var(--nu-in-s)}
 [data-layout="relief"] .chiprow .chip.on{background:var(--bg);
-  color:var(--accent);font-weight:750;
+  color:var(--accent);
   box-shadow:var(--nu-rim),var(--nu-in-s)}
 [data-layout="relief"] .chiprow .chip.on i{color:inherit;opacity:1}
 [data-layout="relief"] .chiprow .chip__n{background:transparent;
@@ -994,7 +1006,8 @@
 [data-layout="relief"] .wiz__mark{border-radius:2rem;background:var(--bg);
   color:var(--accent);box-shadow:var(--nu-out-l)}
 [data-layout="relief"] .wiz__mark--done{color:var(--on-hot-soft)}
-[data-layout="relief"] .wiz__title{letter-spacing:-.025em}
+/* letter-spacing des Assistententitels: siehe Sammelblock „Typografie in
+   beiden Layouts gleich" am Dateiende (4.9.2026). */
 /* Fortschrittspunkte: leere Punkte sind Rinnen, der erreichte ist gefüllt. */
 [data-layout="relief"] .wiz__dot{background:transparent;
   box-shadow:var(--nu-in-s)}
@@ -1336,18 +1349,26 @@
 [data-layout="magazin"][data-accent-ink="dark"] .bm-line{
   fill:var(--mz-on-accent)}
 
-/* ---- Kopf und Seitentitel: ruhig, freundlich, keine Versalien ---- */
-[data-layout="magazin"] .pagekick{text-transform:none;letter-spacing:0;
-  font-size:.8125rem;font-weight:650;color:var(--muted)}
-[data-layout="magazin"] .welcome{padding:.75rem .125rem 1rem}
-[data-layout="magazin"] .welcome__t{font-size:1.625rem;font-weight:800;
-  letter-spacing:-.02em;line-height:1.2}
+/* ---- Kopf und Seitentitel ----
+   ⚠️ TYPOGRAFIE AN RELIEF ANGEGLICHEN (Nutzerauftrag 4.9.2026: „die Schrift
+   springt beim Umschalten zwischen Relief und Magazin"). Größe, Gewicht,
+   Laufweite und Versalien liefert jetzt style.css bzw. die Relief-Regel;
+   hier bleibt nur, was die Magazin-FARBWELT und die Abstände brauchen.
+   Der frühere Magazin-Satz (.pagekick .8125rem/650 ohne Versalien,
+   .welcome__t 1.625rem, .content>.sect 1.125rem gemischt, .signed__head h2
+   1.25rem) ist damit bewusst entfallen — nicht versehentlich verloren.
+   ⚠️ .pagekick braucht die .1em ausdrücklich: die Basis in style.css hat
+   .08em, die Relief-Regel hebt auf .1em. Löschen allein träfe daneben. */
+[data-layout="magazin"] .pagekick{letter-spacing:.1em;color:var(--muted)}
+/* ⚠️ Polster auf den Relief-Wert (4.9.2026, „die 4 px auch weg"): vorher
+   .75rem/1rem, Relief hat .5rem/1.5rem. Der Block steht ganz oben auf der
+   Seite, seine Höhe verschiebt ALLES darunter. */
+[data-layout="magazin"] .welcome{padding:.5rem .125rem 1.5rem}
+[data-layout="magazin"] .welcome__t{font-size:2rem;font-weight:800;
+  letter-spacing:-.025em;line-height:1.1}
 [data-layout="magazin"] .welcome__s{font-size:.9375rem;color:var(--muted);
-  line-height:1.6}
-[data-layout="magazin"] .content>.sect{font-size:1.125rem;font-weight:800;
-  letter-spacing:-.015em;text-transform:none;color:var(--ink)}
-[data-layout="magazin"] .signed__head h2{font-size:1.25rem;font-weight:800;
-  letter-spacing:-.015em}
+  line-height:1.65}
+[data-layout="magazin"] .content>.sect{color:var(--ink)}
 
 /* ---- Suche als weiße Pille mit weichem Schatten ---- */
 [data-layout="magazin"] .mainsearch__in,
@@ -1426,15 +1447,17 @@
 [data-layout="magazin"] .acc-body--plats .plat--xl .plogo{--logo-h:3.25rem}
 [data-layout="magazin"] .acc-body--plats .plat__body{
   display:flex;flex-direction:column;gap:.25rem;align-items:flex-start}
+/* ⚠️ TYPOGRAFIE AN RELIEF ANGEGLICHEN (4.9.2026) — siehe Kopfblock oben.
+   Entfallen sind: .plat__name 1rem (Relief hat 1.0625rem), die Sonderröße
+   1.375rem der XL-Kachel, .plat__meta line-height 1.35 und das
+   font-weight:750 auf .plat__num. Gerade das letzte war der auffälligste
+   Sprung — die Zahl stand im Magazin dreiviertelfett, in Relief normal. */
 [data-layout="magazin"] .acc-body--plats .plat__name{
-  font-size:1rem;font-weight:750;letter-spacing:-.01em;line-height:1.25;
+  font-size:1.0625rem;font-weight:750;letter-spacing:-.01em;line-height:1.25;
   color:var(--ink)}
-[data-layout="magazin"] .acc-body--plats .plat--xl .plat__name{
-  font-size:1.375rem}
 [data-layout="magazin"] .acc-body--plats .plat__meta{
-  font-size:.8125rem;color:var(--muted);line-height:1.35}
-[data-layout="magazin"] .acc-body--plats .plat__num{font-weight:750;
-  color:var(--ink)}
+  color:var(--muted)}
+[data-layout="magazin"] .acc-body--plats .plat__num{color:var(--ink)}
 /* „+N neu" als Abzeichen auf eigener Tönung — Zeile für sich, damit es
    auf der halben Kachelbreite nie mit der Zahl kollidiert.
    ⚠️ KORREKTUR 8.8.2026 (Nutzerbefund „abstand petitionen anzahl zu pille
@@ -1448,11 +1471,12 @@
    Seiten, auch die, die man gar nicht meinte. */
 [data-layout="magazin"] .acc-body--plats .plat__new{
   display:inline-block;margin:.25rem 0 0 .5rem;padding:.1875rem .625rem;
-  border-radius:999px;background:var(--mz-soft);color:var(--mz-ink-on-soft);
-  font-size:.75rem;font-weight:750;line-height:1.4}
+  border-radius:999px;background:var(--mz-soft);color:var(--mz-ink-on-soft)}
+/* ⚠️ Schriftgröße/-gewicht der Pille und des Schlagworts bewusst entfallen
+   (4.9.2026): .plat__new stand auf 750 statt 700, .plat__tag auf .875rem
+   statt .75rem. Beides kommt jetzt aus style.css, wie in Relief. */
 [data-layout="magazin"] .acc-body--plats .plat__tag{
-  display:none;color:var(--muted);font-size:.875rem;line-height:1.45;
-  max-width:38ch}
+  display:none;color:var(--muted);max-width:38ch}
 [data-layout="magazin"] .acc-body--plats .plat--xl .plat__tag{display:block}
 /* Pfeil nur auf den Aufmacher-Karten: Koralle-Kreis oben rechts (das Logo
    bleibt links, der Name hat max-width — die Ecke ist frei). */
@@ -1462,8 +1486,7 @@
   display:flex;position:absolute;top:1.125rem;right:1.125rem;left:auto;
   bottom:auto;width:2.5rem;height:2.5rem;align-items:center;
   justify-content:center;border:0;border-radius:999px;
-  background-color:var(--mz-accent-deep);background-image:none;color:var(--mz-on-accent);
-  font-size:.875rem}
+  background-color:var(--mz-accent-deep);background-image:none;color:var(--mz-on-accent)}
 [data-layout="magazin"] .acc-body--plats .plat--xl .plat__name,
 [data-layout="magazin"] .acc-body--plats .plat--wide .plat__name,
 [data-layout="magazin"] .acc-body--plats .plat--xl .plogo,
@@ -1474,8 +1497,11 @@
    (Seit dem akkordeonfreien Raster unten nur noch Rückfallebene, falls
    eine Ansicht die Gruppen doch nutzt — die Hauptseite tut es im
    Magazin nicht mehr.) */
+/* ⚠️ letter-spacing auf den Relief-Wert -.01em gesetzt (4.9.2026); vorher
+   -.015em. Nur 0,09 px je Zeichen, aber es lief über die ganze
+   Gruppenüberschrift mit und war beim Umschalten sichtbar. */
 [data-layout="magazin"] .langgroup>.acc-head{font-size:1.125rem;
-  font-weight:800;letter-spacing:-.015em;padding:1.25rem .25rem .875rem}
+  font-weight:800;letter-spacing:-.01em;padding:1.25rem .25rem .875rem}
 
 /* ---- EIN Bento-Raster ohne Akkordeons (7.8.26, Nutzerwunsch) ----
    .mz-platgrid trägt zusätzlich .acc-body--plats, damit alle
@@ -1634,8 +1660,11 @@
   -webkit-mask-position:center;mask-position:center}
 [data-layout="magazin"] .pet__main{padding-left:1.125rem}
 [data-layout="magazin"] .pet.open .pet__main{padding-left:1.125rem}
-[data-layout="magazin"] .pet__title{font-size:1.0625rem;font-weight:750;
-  line-height:1.35;letter-spacing:-.01em}
+/* ⚠️ TYPOGRAFIE AN RELIEF ANGEGLICHEN (4.9.2026): vorher 1.0625rem/750,
+   Relief setzt .9375rem/700. Der Titel war im Magazin also 2 px größer und
+   spürbar fetter — der zweitgrößte Sprung nach der Kachelzahl. */
+[data-layout="magazin"] .pet__title{font-size:.9375rem;font-weight:700;
+  line-height:1.4;letter-spacing:-.005em}
 [data-layout="magazin"] .pet__body{padding:0 1.125rem 1.125rem}
 /* Kategorie: kein Glas mehr auf dem Bild, sondern das Chip-Muster der
    Vorlage IN der Karte — helle Tönung, Koralle-Text, über dem Titel. */
@@ -1647,7 +1676,7 @@
   display:inline-block;width:auto;align-self:flex-start;
   margin:1rem 0 .75rem 1.125rem;padding:.3125rem .75rem;border:0;
   border-radius:999px;background:var(--mz-soft);
-  color:var(--mz-ink-on-soft);font-size:.6875rem;font-weight:750;
+  color:var(--mz-ink-on-soft);
   filter:none;box-shadow:none;-webkit-backdrop-filter:none;
   backdrop-filter:none}
 /* Aufklapper und Fremdlink als gleichwertige runde Tasten (Kastenpaar-
@@ -1782,14 +1811,17 @@
    anderen. */
 [data-layout="magazin"] .pabout{background-color:var(--mz-card);
   background-image:none;border:0;box-shadow:var(--mz-shadow)}
-/* 2. Versalien-Etiketten (KURZBESCHREIBUNG, GESTARTET VON, SCHLAG-
-   WÖRTER): gesperrte Großbuchstaben sind die alte Typo-Welt — die
-   Vorlagen setzen kleine fette Zwischentitel in normaler Schreibung. */
-[data-layout="magazin"] .pet__body h4{text-transform:none;
-  letter-spacing:-.01em;font-size:.8125rem;font-weight:800;
-  color:var(--ink);margin:1.125rem 0 .25rem}
-[data-layout="magazin"] .pet__tags-lbl{text-transform:none;
-  letter-spacing:-.01em;font-weight:800;color:var(--ink)}
+/* 2. Versalien-Etiketten (KURZBESCHREIBUNG, GESTARTET VON, SCHLAGWÖRTER).
+   ⚠️⚠️ ZURÜCKGENOMMEN am 4.9.2026 auf ausdrückliche Nutzerentscheidung
+   („die Schrift springt beim Layoutwechsel", Umfang: alle 23 Stellen).
+   Hier stand bis dahin die Begründung, gesperrte Großbuchstaben seien die
+   alte Typo-Welt und die Vorlagen setzten gemischte Zwischentitel — das
+   galt für den Redesign-Auftrag vom 7.8.2026 und ist damit überholt.
+   Magazin zeigt jetzt wieder Versalien wie Relief; bleibt nur die Farbe
+   und der Abstand. Wer das zurückdreht, bringt den Sprung zurück. */
+[data-layout="magazin"] .pet__body h4{color:var(--ink);
+  margin:1.125rem 0 .25rem}
+[data-layout="magazin"] .pet__tags-lbl{color:var(--ink)}
 /* 3. Doppelter Plattformname im Kopf (Logo links, Name rechts) war die
    alte Plakat-Zeile; das Logo allein trägt die Marke — alle elf sind
    Wortmarken. syncPageTitle stört das nicht: es prüft den DOM-Text,
@@ -1828,10 +1860,42 @@
 [data-layout="magazin"] .signed-list,
 [data-layout="magazin"] .nbox .srow{border:0;border-radius:var(--radius);
   background:var(--mz-card);box-shadow:var(--mz-shadow)}
-[data-layout="magazin"] .srow{padding:1rem 1.125rem}
+/* ⚠️⚠️ ABSTÄNDE AN RELIEF ANGEGLICHEN (4.9.2026) — Nutzerauftrag „die 4 px
+   auch weg". Auf der Einstellungsseite wanderte der Layout-Knopf beim
+   Umschalten um 4 px; das war der Rest einer ZWEITEN Abstandsordnung, die
+   sich fast aufhob. Gemessen Relief → Magazin (vorher): .welcome-Polster
+   8/24 → 12/16, .accordion margin-bottom 20 → 12, .sect margin-top 36 → 44,
+   .srow margin-bottom 16 → 8 und Polster 18 → 16, .acc-count 3 → 2.
+   ⚠️ Die Icon-Kachel .srow__ic BLEIBT (40 px gegen 27 px in Relief) — sie
+   bestimmt die Zeilenhöhe nicht: der Inhalt ist in beiden Layouts 60 px
+   hoch, die Kachel passt hinein. Gleiche Polsterung ⇒ gleiche Zeilenhöhe,
+   ohne dass der Magazin-Entwurf seine Kacheln verliert. Vor einer Änderung
+   hier erst nachmessen, ob das noch gilt.
+   ⚠️⚠️ NICHT angefasst: die relief-eigene Sammelregel weiter oben, die auch
+   .plat/.pet/.simrow einen margin-bottom gibt. Im Magazin sitzen die
+   Kacheln im Bento-RASTER — ein margin-bottom daran zerreißt es. Deshalb
+   hier nur .srow, ausdrücklich einzeln. */
+[data-layout="magazin"] .srow{padding:1.125rem;margin-bottom:1rem}
+[data-layout="magazin"] .sect{margin-top:2.25rem}
+[data-layout="magazin"] .accordion{margin-bottom:1.25rem}
+[data-layout="magazin"] .acc-count{padding:.1875rem .6875rem}
 [data-layout="magazin"] .signed-list{padding:.25rem 1.125rem}
-[data-layout="magazin"] .seg{border-radius:999px;padding:.25rem}
-[data-layout="magazin"] .seg__b{border-radius:999px}
+/* ⚠️⚠️ POLSTERUNG AN RELIEF ANGEGLICHEN (4.9.2026) — sonst SPRINGT die
+   Bedienung beim Layoutwechsel. Gemessen im Assistenten Schritt 3: mit
+   padding/gap .25rem war die Leiste 47,5 px hoch, in Relief 51,5 px. Zwei
+   Leisten übereinander ⇒ die Beschriftung „Layout" wanderte um 10 px, und
+   der Knopf, den man gerade gedrückt hat, rutscht unter dem Finger weg.
+   ⚠️ Das war der Sprung, den der Nutzer gemeldet hatte — NICHT die
+   Typografie. Die war schon gleich (0 Unterschiede über sechs Ansichten);
+   ich hatte „springt" als Schriftfrage gelesen und nur dort gemessen.
+   ⚠️ Der gap muss ausdrücklich mit: die Basis in style.css:1670 setzt
+   .25rem, die Relief-Regel hebt auf .375rem. Nur padding anzugleichen
+   ließe 2 px Unterschied stehen.
+   ⚠️ .seg__b braucht sein eigenes padding: ohne die Zeile gilt die Basis
+   (.625rem .25rem) statt des Relief-Werts (.625rem .375rem) — das waren
+   die 2 px, um die die Knöpfe seitlich sprangen. */
+[data-layout="magazin"] .seg{border-radius:999px;padding:.375rem;gap:.375rem}
+[data-layout="magazin"] .seg__b{border-radius:999px;padding:.625rem .375rem}
 [data-layout="magazin"] .seg__b.on{background:var(--mz-accent-deep);
   color:var(--mz-on-accent)}
 [data-layout="magazin"] .srow__ic{width:2.5rem;height:2.5rem;flex:none;
@@ -1890,9 +1954,12 @@ html[data-theme="dark"][data-layout="magazin"] .wplat.on{
   border-radius:var(--radius);padding:1.25rem;color:var(--ink);
   gap:1rem}
 [data-layout="magazin"] .favtip>i{color:var(--mz-ink-on-soft)}
+/* ⚠️ Schriftgrößen der Hinweiskästen an Relief angeglichen (4.9.2026):
+   .hint-title stand auf 1rem (Basis .9375rem), .favtip p auf line-height
+   1.6 (Basis 1.55). Farbe und Abstand bleiben Magazin. */
 [data-layout="magazin"] .favtip .hint-title{color:var(--mz-ink-on-soft);
-  font-size:1rem;margin-bottom:.5rem}
-[data-layout="magazin"] .favtip p{color:var(--ink);line-height:1.6}
+  margin-bottom:.5rem}
+[data-layout="magazin"] .favtip p{color:var(--ink)}
 [data-layout="magazin"] .favtip .hint-dismiss{margin-top:1rem;
   border-radius:999px;background:var(--mz-accent-deep);color:var(--mz-on-accent);
   padding:.625rem 1.125rem}
@@ -1900,7 +1967,7 @@ html[data-theme="dark"][data-layout="magazin"] .wplat.on{
 [data-layout="magazin"] .swipe-hint{background:var(--mz-soft);
   border-radius:var(--radius);padding:1.25rem;color:var(--ink)}
 [data-layout="magazin"] .swipe-hint .hint-title{
-  color:var(--mz-ink-on-soft);font-size:1rem;margin-bottom:.5rem}
+  color:var(--mz-ink-on-soft);margin-bottom:.5rem}
 [data-layout="magazin"] .swipe-hint .hint-dismiss{margin-top:1rem;
   border-radius:999px;background:var(--mz-accent-deep);color:var(--mz-on-accent);
   padding:.625rem 1.125rem}
@@ -1909,14 +1976,18 @@ html[data-theme="dark"][data-layout="magazin"] .wplat.on{
 [data-layout="magazin"] .profile-head{background:var(--mz-card);
   border-radius:var(--radius);box-shadow:var(--mz-shadow);
   padding:1.5rem 1rem 1.25rem}
-[data-layout="magazin"] .avatar{width:5.5rem;height:5.5rem;
-  font-size:2.25rem}
+/* ⚠️ font-size:2.25rem entfallen (4.9.2026) — Basis und Relief haben
+   2.375rem. Die MASSE der Buchse (5.5rem) ist Layout, keine Typografie,
+   und bleibt deshalb stehen. */
+[data-layout="magazin"] .avatar{width:5.5rem;height:5.5rem}
 /* Wirkungs-Karte: weiß mit Koralle-Kennzahl statt Farbfläche — die Zahl
    trägt, wie die Statistikzeile der Vorlage. */
 [data-layout="magazin"] .impact{background:var(--mz-card);color:var(--ink);
   border-radius:var(--radius);box-shadow:var(--mz-shadow)}
-[data-layout="magazin"] .impact__n{color:var(--mz-accent-deep);
-  font-size:2.5rem;line-height:1.05;letter-spacing:-.03em}
+/* ⚠️ Kennzahl an Relief angeglichen (4.9.2026): vorher 2.5rem/1.05, Basis
+   ist 3rem/1. Die Zahl ist damit im Magazin wieder 8 px größer — gewollt,
+   sie soll in beiden Layouts gleich groß stehen. */
+[data-layout="magazin"] .impact__n{color:var(--mz-accent-deep)}
 [data-layout="magazin"] .impact__q{background:var(--mz-soft);
   color:var(--mz-ink-on-soft);border-radius:.875rem}
 [data-layout="magazin"] .io__lbl{font-weight:750}
@@ -1951,8 +2022,11 @@ html[data-theme="dark"][data-layout="magazin"] .wplat.on{
 /* Die Beschriftung bleibt auch beim aktiven Reiter aus — siehe oben. Die
    Regel steht weiterhin hier (statt gelöscht), damit die Farbe stimmt, falls
    sie jemand mit display:inline zurückholen will. */
-[data-layout="magazin"] .tab.active span{display:none;color:var(--mz-on-accent);
-  font-size:.75rem;font-weight:700}
+/* ⚠️ font-size/-weight hier entfallen (4.9.2026): sie lagen auf einem
+   display:none-Element, konnten also nie springen. Weg müssen sie
+   trotzdem — holt jemand das Etikett wie oben beschrieben mit
+   display:inline zurück, stünde es sonst sofort wieder abweichend da. */
+[data-layout="magazin"] .tab.active span{display:none;color:var(--mz-on-accent)}
 
 /* ---- Abstandsraster (aus Magazin 2.0 übernommen; Fluss trägt der
    layoutneutrale „Grundrhythmus" in style.css) ---- */
@@ -1979,7 +2053,20 @@ html[data-theme="dark"][data-layout="magazin"] .wplat.on{
 [data-layout="magazin"] .pet:active{transform:none}
 
 /* ---- Dunkelmodus: Tiefe über Hairline + Flächenstufe statt Schatten
-   (zwei Zweige wie in theme.css: fest „dark" + „auto") ---- */
+   (zwei Zweige wie in theme.css: fest „dark" + „auto") ----
+   ⚠️⚠️ Die Haarlinie liegt seit 4.9.2026 als EINGESETZTER SCHATTEN an, nicht
+   mehr als `border`. Grund: ein border nimmt Platz ein. Gemessen im dunklen
+   Modus, Einstellungsseite — Magazin .seg 53,5 px gegen Relief 51,5 px,
+   .srow 98,3 gegen 96,3; je Bauteil 2 px, die sich nach unten summierten:
+   die Abschnittsüberschrift „Zurücksetzen" stand 31 px tiefer als in Relief.
+   In HELL fiel das nie auf, weil dort keiner dieser Rahmen gesetzt wird.
+   `inset 0 0 0 .0625rem` zeichnet dieselbe 1-px-Linie, folgt demselben
+   border-radius und kostet NULL Layout. Die Optik des dunklen Magazins
+   bleibt damit unverändert — sie war nie das Problem.
+   ⚠️ `border:0` muss ausdrücklich mit: die Basis in style.css setzt an .srow
+   und .seg eine Linie, ohne das Zurücksetzen bliebe sie stehen.
+   ⚠️ Wer hier etwas ergänzt, muss BEIDE Zweige anfassen (fest „dark" und
+   „auto" im @media-Block) — sie müssen synchron bleiben. */
 html[data-theme="dark"][data-layout="magazin"] .acc-body--plats .plat,
 html[data-theme="dark"][data-layout="magazin"] .pet,
 html[data-theme="dark"][data-layout="magazin"] .seg,
@@ -1993,7 +2080,7 @@ html[data-theme="dark"][data-layout="magazin"] .impact,
 html[data-theme="dark"][data-layout="magazin"] .mainsearch__in,
 html[data-theme="dark"][data-layout="magazin"] .search,
 html[data-theme="dark"][data-layout="magazin"] .tabbar{
-  border:.0625rem solid var(--line);box-shadow:none}
+  border:0;box-shadow:inset 0 0 0 .0625rem var(--line)}
 @media (prefers-color-scheme:dark){
   html[data-theme="auto"][data-layout="magazin"] .acc-body--plats .plat,
   html[data-theme="auto"][data-layout="magazin"] .pet,
@@ -2008,5 +2095,39 @@ html[data-theme="dark"][data-layout="magazin"] .tabbar{
   html[data-theme="auto"][data-layout="magazin"] .mainsearch__in,
   html[data-theme="auto"][data-layout="magazin"] .search,
   html[data-theme="auto"][data-layout="magazin"] .tabbar{
-    border:.0625rem solid var(--line);box-shadow:none}
+    border:0;box-shadow:inset 0 0 0 .0625rem var(--line)}
 }
+
+/* ======================================================================
+   TYPOGRAFIE IN BEIDEN LAYOUTS GLEICH — Nutzerauftrag 4.9.2026
+   ======================================================================
+   Anlass: „when I switch between relief and magazine, I see the font
+   jumping." Entschieden wurde, dass Magazin die RELIEF-Werte übernimmt,
+   und zwar an allen Stellen (nicht nur auf den Plattformkacheln).
+
+   Der größte Teil davon steckt oben in den jeweiligen Magazin-Blöcken:
+   dort sind die abweichenden Schriftangaben entfallen oder auf den
+   Relief-Wert gesetzt. Hier stehen nur die sechs Fälle mit der
+   UMGEKEHRTEN Ursache: Regeln, die es bis dahin ausschließlich unter
+   [data-layout="relief"] gab. Magazin fiel dort auf die Basis aus
+   style.css zurück — also sprang die Schrift, obwohl im Magazin-Block
+   gar nichts stand. Genau diese Richtung hatte ich beim ersten
+   Durchgang übersehen; gefunden hat sie erst die Nachmessung.
+
+   ⚠️ Die Schriftangaben stehen deshalb jetzt OHNE Layout-Attribut, die
+   Farben/Radien/Schatten der Relief-Optik dagegen unverändert oben mit
+   [data-layout="relief"]. Es gibt nur zwei lebende Layouts — „band" und
+   „klassisch" migriert app.js (Z. 664/672) auf „relief" —, ohne Attribut
+   heißt hier also wirklich „in beiden".
+   ⚠️ Der Block steht am DATEIENDE, damit ihn kein späterer Media- oder
+   Dunkelmodus-Block derselben Spezifität mehr überstimmt.
+   ⚠️ Die Spezifität ist je Regel eine Stufe NIEDRIGER als vorher (das
+   Attribut fehlt). Das trägt nur, weil layouts.css nach style.css lädt —
+   wer diese Zeilen nach style.css verschiebt, bricht sie still. */
+.to-top{font-size:1.125rem}
+.pet__ext{font-size:.875rem}
+.seg__b.on{font-weight:750}
+.signed-item__t mark,
+.signed-item__meta mark{font-weight:750}
+.chiprow .chip.on{font-weight:750}
+.wiz__title{letter-spacing:-.025em}

@@ -903,7 +903,7 @@
    opennessNote und opennessWunsch. Vorher fuehrte PM_PLATFORMS_EN nur die
    elf Grundschluessel, und uebersetzung() loest den Grundschluessel nicht
    auf — englische Nutzer sahen dort den deutschen Satz (platforms.js) */
-var CACHE = "pm-cache-v60";
+var CACHE = "pm-cache-v61";
 /* Versionsunabhängig – überlebt das Hochzählen von CACHE. Diese Zahl sollte ab
    jetzt NICHT mehr steigen: seit die Pakete eine Inhaltskennung tragen ("?v=",
    siehe oben) holt sich jedes geänderte Paket von selbst neu. Ein Sprung wäre
