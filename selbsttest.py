@@ -310,6 +310,47 @@ for link, soll, was in [
 
 
 # ---------------------------------------------------------------------------
+# foodwatch: der österreichische Baum (4.9.2026)
+#
+# /at/ ist DEUTSCHsprachig wie /de/, aber ein anderes Land. Die Adressstruktur
+# musste gemessen werden — Österreich liegt eine Ebene tiefer:
+#   DE  /de/mitmachen/<slug>            AT  /at/mitmachen/petitionen/<slug>
+import foodwatch_scraper as _fw                                  # noqa: E402
+
+pruefe("foodwatch: deutscher Schlüssel → deutsche Adresse",
+       _fw._url_fuer("aspartam-verbieten"),
+       "https://www.foodwatch.org/de/mitmachen/aspartam-verbieten")
+pruefe("foodwatch: at-Präfix → österreichische Adresse",
+       _fw._url_fuer("at/aspartam-verbieten"),
+       "https://www.foodwatch.org/at/mitmachen/petitionen/aspartam-verbieten")
+pruefe("foodwatch: Land am Schlüssel ablesbar",
+       [_fw._land_fuer("aspartam-verbieten"), _fw._land_fuer("at/x")],
+       ["DE", "AT"])
+# ⚠️⚠️ Der Kern der Sache: `aspartam-verbieten` gibt es in BEIDEN Ländern, und
+# beide teilen sich EINE Bestandsdatei. Ohne den Präfix überschriebe ein Satz
+# den anderen lautlos — ein verlorener Datensatz, den keine Zählung meldet.
+pruefe("foodwatch: gleicher Slug, verschiedene Länder ⇒ verschiedene Adressen",
+       _fw._url_fuer("aspartam-verbieten") != _fw._url_fuer("at/aspartam-verbieten"),
+       True)
+# Jeder Länderbaum braucht seinen eigenen Maßstab, sonst greift der Riegel
+# core.eigene_adresse im anderen Baum nie.
+pruefe("foodwatch: je Baum ein eigenes Prüfmuster",
+       [_fw._muster_fuer("x") is _fw.DETAILADRESSE_RE,
+        _fw._muster_fuer("at/x") is _fw.AT_DETAILADRESSE_RE], [True, True])
+for u, soll, was in [
+    ("https://www.foodwatch.org/at/mitmachen/petitionen/echt", True,
+     "AT-Muster nimmt die echte Adresse"),
+    ("https://boese.de/at/mitmachen/petitionen/x", False,
+     "… und keinen fremden Host"),
+    ("https://foodwatch.org.boese.de/at/mitmachen/petitionen/x", False,
+     "… auch nicht als Sub-Domain-Trick"),
+    ("https://www.foodwatch.org/de/mitmachen/x", False,
+     "… und nicht den deutschen Baum"),
+]:
+    pruefe(was, bool(_fw.AT_DETAILADRESSE_RE.match(u)), soll)
+
+
+# ---------------------------------------------------------------------------
 # 4. sanitize_fragment() — <style>/<script> müssen GANZ weg
 #
 # Warum das hier steht (30.8.2026): Nutzermeldung, die Avaaz-Petition „Welt an
@@ -669,14 +710,19 @@ pruefe("land_code: Unfug wird nicht zu einem Land", core.land_code("Absurdistan"
 pruefe("… sondern gemeldet", "Absurdistan" in core.land_unbekannt(), True)
 pruefe("land_code verträgt Nichtstrings", core.land_code(None), None)
 
-# Der Dreizustand über ALLE Einträge — die Erhebung vom 30.8.2026 festgeschrieben:
-# drei einländrig, acht ohne Landbegriff an der Quelle, sechs mehrländrig.
+# Der Dreizustand über ALLE Einträge.
+# ⚠️ 4.9.2026 von 3/8/6 auf 3/9/5 geändert, und das ist eine KORREKTUR, keine
+# Anpassung an neuen Code: `foodwatch_en` stand auf "mehrere" mit leerer
+# Länderliste und landete dadurch unter „Noch nicht zugeordnet". Das behauptete
+# eine Wissenslücke, die es nicht gibt — `/en/` ist der internationale
+# englischsprachige Baum, kein Land; foodwatch hat keine britische Organisation.
+# Der deutsche foodwatch-Eintrag bleibt "mehrere" und führt seit heute DE + AT.
 import monitor as _monitor                                       # noqa: E402
 _scopes: dict[str, int] = {}
 for _p in _monitor.PLATFORMS:
     _scopes[_p.country_scope] = _scopes.get(_p.country_scope, 0) + 1
-pruefe("Landachse: 3 fest / 8 keine / 6 mehrere",
-       _scopes, {"fest": 3, "keine": 8, "mehrere": 6})
+pruefe("Landachse: 3 fest / 9 keine / 5 mehrere",
+       _scopes, {"fest": 3, "keine": 9, "mehrere": 5})
 # ⚠️ Ein „fest" ohne Land wäre ein stiller Fehler: die Plattform fiele aus jeder
 # Länderauswahl heraus, ohne je als landneutral zu gelten.
 pruefe("Landachse: fest ⇔ country gesetzt",

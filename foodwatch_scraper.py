@@ -8,8 +8,12 @@
 #  foodwatch.org/de. Nutzt petitions_core.py; Einstieg monitor.py.
 #
 #  QUELLEN (robots.txt erlaubt alles außer Suche/Privatem; Sitemap vorhanden):
-#    - https://www.foodwatch.org/de/mitmachen              Übersicht
-#    - https://www.foodwatch.org/de/mitmachen/<slug>       Detailseite
+#    - https://www.foodwatch.org/de/mitmachen              Übersicht (DE)
+#    - https://www.foodwatch.org/de/mitmachen/<slug>       Detailseite (DE)
+#    - https://www.foodwatch.org/at/mitmachen/petitionen   Übersicht (AT)
+#    - .../at/mitmachen/petitionen/<slug>                  Detailseite (AT)
+#      ⚠️ Der österreichische Baum liegt eine Ebene TIEFER als der deutsche;
+#      ein Tausch des Ländersegments ergibt 404. Details bei AT_LIST_URL.
 #
 #  BESONDERHEITEN:
 #  - TYPO3, komplett server-gerendert. Unterschriftenzähler steht direkt im
@@ -44,6 +48,54 @@ ACTION_HREF_RE = re.compile(r'href="(/de/mitmachen/[a-z0-9\-]+)"')
 # Übersicht selbst hat keins. Maßstab für core.eigene_adresse.
 DETAILADRESSE_RE = re.compile(
     r"^https://(www\.)?foodwatch\.org/de/mitmachen/[^/?#]+", re.I)
+
+# ----------------------------------------------------------------------------
+# ÖSTERREICH (4.9.2026)
+# ----------------------------------------------------------------------------
+# foodwatch betreibt eigene Landesorganisationen. /at/ ist DEUTSCHsprachig wie
+# /de/, aber ein anderes LAND — genau der Fall, für den die Landachse gebaut
+# wurde („deutsch/Deutschland" gegen „deutsch/Österreich").
+#
+# ⚠️ Die Adressstruktur ist NICHT ableitbar, sie musste gemessen werden:
+#     Deutschland   /de/mitmachen/<slug>                 (drei Ebenen)
+#     Österreich    /at/mitmachen/petitionen/<slug>       (VIER Ebenen)
+# Ein Tausch des Ländersegments ergibt 404. Am 4.9.2026 abgerufen; die Übersicht
+# /at/mitmachen zeigt nur EINEN Teaser, die vollständige Liste steht unter
+# /at/mitmachen/petitionen (dort 10 Aktionen). robots.txt sperrt nur /at/suche.
+#
+# ⚠️⚠️ Der Bestand ist nach Schlüssel verschlüsselt, und Deutschland und
+# Österreich teilen sich EINE Datei (der englische Zwilling hat eine eigene).
+# `aspartam-verbieten` gibt es in BEIDEN Ländern — bei nacktem Slug hätte ein
+# Satz den anderen still überschrieben. Österreichische Sätze tragen deshalb den
+# Präfix „at/". Die 15 bestehenden deutschen Schlüssel bleiben unangetastet,
+# es ist also keine Wanderung des Bestands nötig.
+AT_PREFIX       = "at/"
+AT_LIST_URL     = f"{BASE_URL}/at/mitmachen/petitionen"
+AT_ACTION_HREF_RE = re.compile(
+    r'href="(/at/mitmachen/petitionen/[a-z0-9\-]+)"')
+AT_DETAILADRESSE_RE = re.compile(
+    r"^https://(www\.)?foodwatch\.org/at/mitmachen/petitionen/[^/?#]+", re.I)
+
+
+def _ist_at(key: str) -> bool:
+    return key.startswith(AT_PREFIX)
+
+
+def _url_fuer(key: str) -> str:
+    """Store-Schlüssel → Detailadresse. Der Schlüssel trägt das Land."""
+    if _ist_at(key):
+        return f"{AT_LIST_URL}/{key[len(AT_PREFIX):]}"
+    return f"{LIST_URL}/{key}"
+
+
+def _muster_fuer(key: str) -> re.Pattern:
+    """Maßstab für core.eigene_adresse — je Länderbaum ein eigener."""
+    return AT_DETAILADRESSE_RE if _ist_at(key) else DETAILADRESSE_RE
+
+
+def _land_fuer(key: str) -> str:
+    return "AT" if _ist_at(key) else "DE"
+
 
 FETCH_HEADERS = {
     "User-Agent": ("Mozilla/5.0 (X11; Linux x86_64; rv:128.0) "
@@ -88,6 +140,25 @@ def discover_slugs(fetcher: core.Fetcher) -> dict[str, dict]:
     # Muster nur noch auf einzelne Treffer statt auf alle.
     core.entdeckung("Mitmachen-Übersicht", len(found), erwartet_min=3,
                     name_en="campaign overview page")
+
+    # ---- Österreich (4.9.2026) ---------------------------------------------
+    # ⚠️ EIGENE Meldung, nicht in die deutsche Zahl eingerechnet: sonst
+    # verdeckte der eine Länderbaum den Totalausfall des anderen. Fiele
+    # Österreich weg, stünden immer noch 15 deutsche Treffer da und keine
+    # Schwelle würde anschlagen.
+    at_gefunden: dict[str, dict] = {}
+    resp_at = fetcher.get(AT_LIST_URL)
+    if resp_at is not None and resp_at.ok:
+        for m in AT_ACTION_HREF_RE.finditer(resp_at.text):
+            slug = m.group(1).rsplit("/", 1)[-1]
+            at_gefunden.setdefault(AT_PREFIX + slug, {})
+    # Schwelle am 4.9.2026 gemessen: die Liste lieferte 10 Aktionen. 3 liegt
+    # tief genug für normales Auslaufen von Kampagnen, fängt aber den
+    # Markup-Umbau, nach dem das Muster nur noch einzeln greift.
+    core.entdeckung("Österreich-Petitionsliste", len(at_gefunden),
+                    erwartet_min=3, name_en="Austrian petition list")
+    log(f"Österreich: {len(at_gefunden)} Aktionen gefunden.")
+    found.update(at_gefunden)
     return found
 
 
@@ -190,8 +261,12 @@ def parse_detail(html: str, url: str, muster: re.Pattern = None) -> dict:
 
 def scrape_petition(fetcher: core.Fetcher, slug: str) -> tuple[str, dict | None]:
     """(status, record) – status: online | offline | error | skip.
-    skip = Seite ohne Unterschriften-Formular (keine Mitzeichnungs-Aktion)."""
-    url = f"{LIST_URL}/{slug}"
+    skip = Seite ohne Unterschriften-Formular (keine Mitzeichnungs-Aktion).
+
+    `slug` ist der STORE-SCHLÜSSEL, nicht der nackte Slug: bei österreichischen
+    Sätzen trägt er den Präfix „at/" und bestimmt damit Adresse, Prüfmuster und
+    Land (siehe oben)."""
+    url = _url_fuer(slug)
     resp = fetcher.get(url)
     if resp is None:
         return "error", None
@@ -199,10 +274,17 @@ def scrape_petition(fetcher: core.Fetcher, slug: str) -> tuple[str, dict | None]
         return "offline", None
     if not resp.ok:
         return "error", None
-    rec = parse_detail(resp.text, url)
+    rec = parse_detail(resp.text, url, _muster_fuer(slug))
     if rec.get("signatures") is None:
         return "skip", None
-    _fremdsprachen_holen(fetcher, rec, slug)
+    rec["country"] = _land_fuer(slug)
+    # ⚠️ Die Fremdsprachen-Heuristik NUR für den deutschen Baum. Sie ordnet über
+    # den identischen Unterschriftenstand zu (siehe dort) und wurde am 8.8.2026
+    # ausschließlich gegen /de/ gemessen. Auf österreichische Aktionen
+    # losgelassen, würde sie denselben Zähler-Vergleich gegen den ENGLISCHEN
+    # Baum fahren und Zuordnungen behaupten, die niemand geprüft hat.
+    if not _ist_at(slug):
+        _fremdsprachen_holen(fetcher, rec, slug)
     return "online", rec
 
 
@@ -358,7 +440,7 @@ def run(args) -> None:
                 skip_slugs.append(slug)
                 continue
             core.upsert(store, slug, rec or {}, {}, status, ts,
-                        f"{LIST_URL}/{slug}")
+                        _url_fuer(slug))
             save()
             if status == "offline":
                 log(f"  OFFLINE: {slug}")
@@ -388,7 +470,7 @@ def run(args) -> None:
         if status == "skip":
             log("  übersprungen (keine Mitzeichnungs-Aktion).")
             continue
-        core.upsert(store, slug, rec or {}, {}, status, ts, f"{LIST_URL}/{slug}")
+        core.upsert(store, slug, rec or {}, {}, status, ts, _url_fuer(slug))
         save()
 
     # Einmal je Lauf, VOR dem Abschluss-Save — sonst fehlte
@@ -411,9 +493,12 @@ def check(fetcher):
 
 PLATFORM = Platform(
     key="foodwatch",
-    # ⚠️ Wie openPetition: Länderseiten /de/ /en/ /fr/ /nl/ /at/ existieren an
-    # der Quelle, unsere 15 Sätze stehen aber alle unter /de/. Nicht ableitbar,
-    # `countries` bleibt bis zu einer eigenen Entdeckung leer.
+    # ✅ 4.9.2026 aufgelöst: Deutschland UND Österreich werden erhoben, der
+    # Bestand liefert `countries` = ["AT", "DE"]. Hier stand vorher „nicht
+    # ableitbar, countries bleibt leer" — das galt nur, solange die Entdeckung
+    # bei /de/mitmachen aufhörte.
+    # ⏰ ⬜ Offen bleiben /fr/ und /nl/: das wären neue SPRACHEN und damit
+    # eigene Plattform-Einträge, kein bloßer zweiter Länderbaum.
     country_scope="mehrere",
     openness=5,
     openness_wunsch="Komplette Aktionsliste, Unterschriftenzahl und Volltext direkt im "
@@ -512,8 +597,12 @@ def check_en(fetcher):
 
 PLATFORM_EN = Platform(
     key="foodwatch_en",
-    # Wie der deutsche Zwilling: Quelle kennt Länder, unser Bestand nicht.
-    country_scope="mehrere",
+    # ⚠️ 4.9.2026 auf "keine" korrigiert. `/en/` ist KEIN Länderbaum, sondern
+    # der internationale englischsprachige — foodwatch hat keine britische
+    # Organisation. Als "mehrere" mit leerer Länderliste landete der Eintrag
+    # unter „Noch nicht zugeordnet", was eine Wissenslücke behauptet, die es
+    # nicht gibt: hier ist nichts zu erheben. Gehört unter „Weltweit".
+    country_scope="keine",
     openness=5,
     openness_wunsch="Komplette Aktionsliste, Unterschriftenzahl und Volltext direkt im "
                     "server-gerenderten HTML: kein Schlüssel, keine Sitzung, kein "
