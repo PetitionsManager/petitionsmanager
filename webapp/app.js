@@ -6408,6 +6408,24 @@
     return wizardSel.langs.has(platMainLanguage(p));
   }
 
+  /* Gehört dieser Eintrag unter diesen Länder-Chip?
+
+     ⚠️ EINE Funktion für drei Verwendungen: die Chip-Liste, die Zahl am Chip
+     und die Kacheln darunter. Drei Kopien derselben Bedingung wären drei
+     Gelegenheiten, sie auseinanderlaufen zu lassen — und das fiele erst auf,
+     wenn eine Zahl nicht zur Liste darunter passt.
+
+     Die drei Zweige müssen sich zu ALLEN Einträgen ergänzen: ein Eintrag, der
+     in keinen fällt, wäre unsichtbar und trotzdem dauerhaft angewählt. */
+  function platGehoertZuLand(p, code) {
+    if (!landRelevant(p)) return false;
+    if (code === LAND_INTL) return platLandneutral(p);
+    if (platLandneutral(p)) return false;
+    var da = platCountries(p);
+    if (code === LAND_UNERHOBEN) return !da.length;
+    return da.indexOf(code) >= 0;
+  }
+
   function wizardCountries() {
     var seen = {};
     livePlatforms().forEach(function (p) {
@@ -6596,7 +6614,7 @@
      Sinn der Zusammenlegung: Land und Plattformen sind DIESELBE Frage in zwei
      Schaerfegraden — "woher" und "von wem genau". Wer die Vorauswahl
      akzeptiert, klappt gar nicht erst auf. */
-  function plattformAuswahl(main, foot) {
+  function plattformAuswahl(foot) {
       /* ---- Gliederung nach Sprache (Nutzerwunsch 11.8.2026) ---------------
          Schritt 2 FILTERT die anderen Sprachen nicht mehr weg, sondern legt
          sie eine Ebene tiefer: die in Schritt 1 gewählten Sprachen stehen
@@ -6703,10 +6721,34 @@
              die Kachel trägt schon Logo, Name und Zahl, eine vierte Zeile
              hätte die Liste auf mobilen Geräten unnötig gestreckt.
              null = das Manifest führt die Landachse noch nicht (siehe dort). */
+          /* ⚠️ Bei MEHRLÄNDRIGEN Einträgen KEINE Flaggenkette. platLandZeichen()
+             reiht sonst alle Länder aneinander — bei openPetition zehn Stück
+             („🇦🇹🇦🇺🇧🇪🇨🇭🇩🇪🇪🇸🇭🇷…"), und das an einer Kachel, die ohnehin unter
+             ihrem Land steht. Die Zahl darunter sagt dasselbe lesbar. */
           (function (z) {
-            return z ? '<span class="wplat__land" title="' + esc(z.titel) +
-                       '">' + z.text + "</span>" : "";
-          })(platLandZeichen(p)) + "</span></span>" +
+            if (!z || (!platLandneutral(p) && platCountries(p).length > 1))
+              return "";
+            return '<span class="wplat__land" title="' + esc(z.titel) +
+                   '">' + z.text + "</span>";
+          })(platLandZeichen(p)) +
+          /* ⚠️ Hinweis bei MEHRLÄNDRIGEN Einträgen (4.9.2026). Seit die
+             Kacheln unter ihrem Land stehen, erscheint openPetition unter
+             ZEHN Ländern — dieselbe Kachel, derselbe Schlüssel. Ein Klick
+             wählt sie deshalb überall zugleich ab, und ohne diesen Satz wäre
+             das eine böse Überraschung. Steht nur an der Kachel, nicht am
+             Chip: die Zahl am Chip zählt Einträge, nicht Länder. */
+          /* ⚠️ Einzahl und Mehrzahl getrennt. „auch in 1 weiteren Ländern"
+             stand am 4.9.2026 wirklich so da (foodwatch, zwei Länder) — eine
+             Zahl in einen festen Satz zu schieben geht bei 1 schief. */
+          (function (n) {
+            if (n <= 1) return "";
+            var rest = n - 1;
+            return '<span class="wplat__mehr">' + esc(fill(
+              rest === 1 ? T("wizard.land.auchIn1", "auch in einem weiteren Land")
+                         : T("wizard.land.auchIn", "auch in {n} weiteren Ländern"),
+              { n: rest })) + "</span>";
+          })(platLandneutral(p) ? 0 : platCountries(p).length) +
+          "</span></span>" +
           '<span class="wplat__check"><i class="fa-solid fa-check"></i></span>' +
           "</button>");
         row.addEventListener("click", function () {
@@ -6748,19 +6790,14 @@
       /* Eine Sprachgruppe. Machart und Kopfzeile kommen aus langSection() —
          demselben Bauteil, das die Einstellungen benutzen. Hier kommt nur
          .wiz__plats dazu, das die Kacheln als Spalte mit Abstand setzt. */
-      function wizLangGruppe(code, offen) {
-        var g = langSection(code, gruppen[code].length, offen);
-        g.body.classList.add("wiz__plats");
-        gruppen[code].forEach(function (p) { g.body.appendChild(wizPlatRow(p)); });
-        return g.sec;
-      }
-
-      codesAn.forEach(function (c) { main.appendChild(wizLangGruppe(c, true)); });
-      codesAus.forEach(function (c) { main.appendChild(wizLangGruppe(c, false)); });
-      main.appendChild(el('<p class="wiz__hint">' +
-        esc(T("wizard.platforms.hint",
-              "Später jederzeit in den Einstellungen änderbar.")) + "</p>"));
-
+      /* ⚠️ 4.9.2026: die Gliederung nach SPRACHE ist hier entfallen. Die
+         Kacheln stehen jetzt unter dem jeweiligen Länder-Button (Nutzerwunsch
+         „die plattformen sollen direkt unter dem Button des Landes stehen").
+         Was BLEIBT, ist alles oberhalb: die Vorbelegung aus Sprache und Land
+         und die drei Sicherheitsnetze. Sie müssen laufen, egal wie gezeichnet
+         wird — deshalb baut diese Funktion kein DOM mehr, sondern liefert nur
+         den Kachelbauer zurück. */
+      return wizPlatRow;
   }
 
     if (step === 0) {
@@ -6949,6 +6986,11 @@
          Auswahl wäre unsichtbar falsch, und der Plattformschritt filterte
          gegen etwas, das kein Chip mehr zeigt. Bleibt dabei nichts übrig,
          greift die Vorwahl erneut; sonst stünde ein totes „Weiter" da. */
+      /* ⚠️⚠️ MUSS hier laufen, vor dem Zeichnen: plattformAuswahl() enthält
+         die Vorbelegung aus Sprache und Land und drei Sicherheitsnetze gegen
+         eine leere Auswahl. Sie liefert den Kachelbauer zurück; die Kacheln
+         selbst hängt die Chip-Schleife unten unter ihr Land. */
+      var platZeile = plattformAuswahl(foot);
       var landListe = wizardCountries();
       if (wizardSel.lands) {
         Array.from(wizardSel.lands).forEach(function (c) {
@@ -6971,16 +7013,9 @@
            sie galt nur, solange jeder Eintrag höchstens EIN Land führte. Seit
            openPetition zehn Länder mitbringt, zählt es in zehn Chips mit —
            richtig so, aber als Prüfgleichung wertlos. */
-        var n = livePlatforms().filter(function (p) {
-          // ⚠️ Dieselbe Sprachbedingung wie in wizardCountries(). Ohne sie
-          // stünde am Chip eine Zahl, die zur angebotenen Liste nicht passt.
-          if (!landRelevant(p)) return false;
-          if (code === LAND_INTL) return platLandneutral(p);
-          if (platLandneutral(p)) return false;
-          var da = platCountries(p);
-          if (code === LAND_UNERHOBEN) return !da.length;
-          return da.indexOf(code) >= 0;
-        }).length;
+        var meine = livePlatforms().filter(function (p) {
+          return platGehoertZuLand(p, code); });
+        var n = meine.length;
         var chip = el('<button class="chip' +
           (wizardSel.lands.has(code) ? " on" : "") + '" type="button">' +
           '<span class="chip__flag flag">' + info.flag + "</span>" +
@@ -7014,7 +7049,32 @@
         chip.addEventListener("animationend", function () {
           chip.classList.remove("chip--locked");
         });
-        cgrid.appendChild(chip);
+        /* ---- Die Kacheln DIREKT unter ihrem Land (Nutzerwunsch 4.9.2026)
+           „die plattformen sollen direkt unter dem Button des Landes stehen".
+
+           ⚠️ Der Chip behält seine EINE Aufgabe: an- und abwählen. Das
+           Auf- und Zuklappen liegt auf einem eigenen Knopf daneben. Beides auf
+           denselben Chip zu legen hieße, dass ein Fehlgriff die Auswahl
+           ändert, obwohl man nur nachsehen wollte. */
+        var sek = el('<div class="wiz__landsek"></div>');
+        var zeile = el('<div class="wiz__landzeile"></div>');
+        var liste = el('<div class="wiz__landplats"></div>');
+        meine.forEach(function (pl) { liste.appendChild(platZeile(pl)); });
+        var auf = el('<button class="wiz__landauf" type="button" ' +
+          'aria-expanded="false" aria-label="' +
+          esc(fill(T("wizard.land.zeigen", "Plattformen für {land} zeigen"),
+                   { land: info.name })) + '">' +
+          '<i class="fa-solid fa-chevron-down"></i></button>');
+        auf.addEventListener("click", function () {
+          var jetzt = !sek.classList.contains("open");
+          sek.classList.toggle("open", jetzt);
+          auf.setAttribute("aria-expanded", jetzt ? "true" : "false");
+        });
+        zeile.appendChild(chip);
+        zeile.appendChild(auf);
+        sek.appendChild(zeile);
+        sek.appendChild(liste);
+        cgrid.appendChild(sek);
       });
       main.appendChild(cgrid);
       /* Zwei verschiedene Fußzeilen, und die Unterscheidung ist wichtiger als
@@ -7027,41 +7087,6 @@
         : T("wizard.land.nodata",
             "Die Landangaben kommen mit dem nächsten Datenlauf – bis dahin "
             + "steht hier nur „Weltweit“.")) + "</p>"));
-
-      /* ---- Plattformen als Ausklapper (Nutzerwunsch 4.9.2026) -------------
-         Der eigene Schritt 4 ist dafür weggefallen. Zugeklappt, weil die
-         Auswahl aus Sprache und Land bereits vollständig vorbelegt ist — wer
-         sie akzeptiert, soll sie nicht erst wegklicken müssen.
-
-         ⚠️ Der Kopf nennt die ZAHL, und das ist der Punkt: „31 von 41" sagt
-         auf einen Blick, dass eine Auswahl getroffen wurde, ohne dass man
-         aufklappen muss. Ohne Zahl wäre der zugeklappte Bereich eine
-         Blackbox — und genau deshalb war die Auswahl vorher ein eigener
-         Schritt.
-
-         ⚠️⚠️ plattformAuswahl() muss LAUFEN, auch wenn niemand aufklappt: in
-         ihr stecken die Vorauswahl aus Sprache und Land und die drei
-         Sicherheitsnetze gegen eine leere Auswahl. Sie deshalb NICHT erst
-         beim Öffnen aufrufen. */
-      var pWrap = el('<section class="langsec"></section>');
-      var pBody = el('<div class="langsec__b"></div>');
-      plattformAuswahl(pBody, foot);
-      var pAn = livePlatforms().filter(function (p) {
-        return wizardSel.plats.has(p.key); }).length;
-      var pKopf = el('<button class="langsec__h" type="button" ' +
-        'aria-expanded="false"><span class="langsec__t">' +
-        '<span class="flag"><i class="fa-solid fa-list-check"></i></span>' +
-        esc(T("wizard.platforms.title", "Welche Plattformen möchtest du beobachten?")) +
-        '<span class="langsec__n">' + pAn + "</span></span>" +
-        '<i class="fa-solid fa-chevron-down langsec__c"></i></button>');
-      pKopf.addEventListener("click", function () {
-        var jetzt = !pWrap.classList.contains("open");
-        pWrap.classList.toggle("open", jetzt);
-        pKopf.setAttribute("aria-expanded", jetzt ? "true" : "false");
-      });
-      pWrap.appendChild(pKopf);
-      pWrap.appendChild(pBody);
-      main.appendChild(pWrap);
 
     } else if (step === 3) {
       /* ---- Farbdesign + Layout (Nutzerwunsch 12.8.2026) -------------------

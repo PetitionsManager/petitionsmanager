@@ -1473,6 +1473,40 @@ body.wizard-open{overflow:hidden}
 /* Die Zahl an die rechte Kante, sonst klebt sie mitten in der leeren Flaeche
    am Text und die gewonnene Breite sieht nach einem Fehler aus. */
 .wiz__chips .chip__n{margin-left:auto}
+
+/* ---- Kacheln direkt unter ihrem Land (4.9.2026) --------------------------
+   Nutzerwunsch "die plattformen sollen direkt unter dem Button des Landes
+   stehen". Jedes Land ist eine Sektion aus Chip-Zeile + Kachelliste.
+   ⚠️ Der Chip behaelt seine EINE Aufgabe (an-/abwaehlen); das Auf- und
+   Zuklappen liegt auf einem eigenen Knopf daneben. Beides auf denselben Chip
+   zu legen hiesse, dass ein Fehlgriff die Auswahl aendert, obwohl man nur
+   nachsehen wollte. */
+.wiz__landsek{display:flex;flex-direction:column;gap:.5rem}
+.wiz__landzeile{display:flex;align-items:stretch;gap:.5rem}
+/* Der Chip nimmt den Platz, der Aufklapp-Knopf bleibt schmal. */
+.wiz__landzeile>.chip{flex:1 1 auto;min-width:0}
+.wiz__landauf{flex:none;width:2.75rem;border:.125rem solid var(--line);
+  background:var(--surface);border-radius:999px;color:var(--muted);
+  font:inherit;cursor:pointer;display:flex;align-items:center;
+  justify-content:center}
+/* ⚠️ Hover UND Fokus mitbauen — ein selbstgebauter Knopf ohne sichtbaren
+   Fokus ist per Tastatur unbedienbar. */
+.wiz__landauf:hover{color:var(--ink);border-color:var(--accent)}
+.wiz__landauf:focus-visible{outline:.125rem solid var(--accent);
+  outline-offset:.125rem}
+.wiz__landauf i{transition:transform .18s ease}
+.wiz__landsek.open .wiz__landauf i{transform:rotate(180deg)}
+/* ⚠️ display:none, nicht max-height:0 — ohne overflow:hidden faellt der
+   Inhalt sonst aus seiner Box, ueberdeckt alles darunter und faengt dort die
+   Klicks ab. Und per Tab erreichbar bliebe er auch. */
+.wiz__landplats{display:none;flex-direction:column;gap:.5rem;
+  padding:0 0 .25rem .75rem}
+.wiz__landsek.open>.wiz__landplats{display:flex}
+/* Mehrlaendrige Kachel: der Hinweis steht in der Meta-Zeile, klein und
+   zurueckhaltend — er erklaert, warum ein Klick weiter reicht als gedacht. */
+.wplat__mehr{display:block;color:var(--muted);font-size:.6875rem;
+  margin-top:.0625rem;font-style:italic}
+@media (prefers-reduced-motion:reduce){.wiz__landauf i{transition:none}}
 .wiz__chips .chip{display:inline-flex;align-items:center;gap:.5rem;
   border:.125rem solid var(--line);background:var(--surface);border-radius:999px;
   padding:.6875rem 1.125rem;font:inherit;font-size:.9375rem;font-weight:700;

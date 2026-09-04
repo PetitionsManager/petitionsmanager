@@ -126,7 +126,14 @@ window.PM_TEXTS = {
            nicht führt. Ohne diesen Satz zeigt der Schritt einen einzigen Chip,
            der nichts bewirkt, und sieht aus wie ein kaputter Filter — genau so
            ist er am 4.9.2026 gemeldet worden. */
-        nodata: "Die Landangaben kommen mit dem nächsten Datenlauf – bis dahin steht hier nur „Weltweit“."
+        nodata: "Die Landangaben kommen mit dem nächsten Datenlauf – bis dahin steht hier nur „Weltweit“.",
+        /* Beschriftung des Aufklapp-Knopfes neben jedem Länder-Chip. Nur für
+           Vorlesegeräte sichtbar — der Knopf zeigt bloß einen Pfeil. */
+        zeigen: "Plattformen für {land} zeigen",
+        /* ⚠️ An der Kachel, nicht am Chip: openPetition steht unter zehn
+           Ländern, und ein Klick wählt sie überall zugleich ab. */
+        auchIn: "auch in {n} weiteren Ländern",
+        auchIn1: "auch in einem weiteren Land"
       },
       /* Schritt 3: Farbdesign und Layout zusammen. Die Beschriftungen der
          beiden Schalterleisten kommen aus settings.* — es sind dieselben
@@ -841,7 +848,10 @@ window.PM_TEXTS = {
         title: "Which countries?",
         text: "Many platforms collect signatures across borders — a German-language petition can come from Austria or Switzerland. Choose the countries you are interested in.",
         hint: "“Worldwide” covers platforms that collect across borders — they still show petitions in your language.",
-        nodata: "Country data arrives with the next data run — until then only “Worldwide” appears here."
+        nodata: "Country data arrives with the next data run — until then only “Worldwide” appears here.",
+        zeigen: "Show platforms for {land}",
+        auchIn: "also in {n} more countries",
+        auchIn1: "also in one more country"
       },
       look: {
         title: "How should the app look?",
