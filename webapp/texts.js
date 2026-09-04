@@ -133,7 +133,12 @@ window.PM_TEXTS = {
         /* ⚠️ An der Kachel, nicht am Chip: openPetition steht unter zehn
            Ländern, und ein Klick wählt sie überall zugleich ab. */
         auchIn: "auch in {n} weiteren Ländern",
-        auchIn1: "auch in einem weiteren Land"
+        auchIn1: "auch in einem weiteren Land",
+        /* ⚠️ Steht an einer Kachel unter einem NICHT gewählten Land. Sie ist
+           trotzdem angehakt, weil sie über ein anderes Land hereinkommt —
+           das sah wie ein Fehler aus und ist keiner. */
+        ueber: "über {land} gewählt",
+        vonHand: "von Hand gewählt"
       },
       /* Schritt 3: Farbdesign und Layout zusammen. Die Beschriftungen der
          beiden Schalterleisten kommen aus settings.* — es sind dieselben
@@ -851,7 +856,9 @@ window.PM_TEXTS = {
         nodata: "Country data arrives with the next data run — until then only “Worldwide” appears here.",
         zeigen: "Show platforms for {land}",
         auchIn: "also in {n} more countries",
-        auchIn1: "also in one more country"
+        auchIn1: "also in one more country",
+        ueber: "selected via {land}",
+        vonHand: "selected by hand"
       },
       look: {
         title: "How should the app look?",

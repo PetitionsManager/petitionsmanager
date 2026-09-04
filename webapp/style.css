@@ -1506,6 +1506,15 @@ body.wizard-open{overflow:hidden}
    zurueckhaltend — er erklaert, warum ein Klick weiter reicht als gedacht. */
 .wplat__mehr{display:block;color:var(--muted);font-size:.6875rem;
   margin-top:.0625rem;font-style:italic}
+/* Land NICHT gewaehlt: Chip und Kacheln zuruecknehmen. Die Kacheln bleiben
+   angehakt, weil sie ueber ein ANDERES Land hereinkommen — ausgegraut plus
+   Begruendung, damit das nicht wie ein Fehler aussieht.
+   ⚠️ opacity NICHT auf die ganze Sektion: der Aufklapp-Knopf muss bedienbar
+   und lesbar bleiben, sonst kaeme man an die Begruendung gar nicht heran. */
+.wiz__landsek--aus>.wiz__landzeile>.chip{opacity:.72}
+.wplat--fremd{opacity:.55;cursor:default}
+.wplat__ueber{display:block;color:var(--muted);font-size:.6875rem;
+  margin-top:.0625rem}
 @media (prefers-reduced-motion:reduce){.wiz__landauf i{transition:none}}
 .wiz__chips .chip{display:inline-flex;align-items:center;gap:.5rem;
   border:.125rem solid var(--line);background:var(--surface);border-radius:999px;

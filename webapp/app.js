@@ -6327,7 +6327,12 @@
                       Sprache und Land sind zwei Fragen, und sie zu vermengen
                       war genau der Fehler, der am 30.8.2026 elf deutsch-
                       sprachige Petitionen aus Österreich verwarf. */
-                   lands: null, landsManuell: false };
+                   lands: null, landsManuell: false,
+                   /* Welche Länder sind AUFGEKLAPPT. Muss ein Neuzeichnen
+                      überleben: seit der Länder-Chip den Schritt neu zeichnet
+                      (sonst blieben die Kacheln darunter veraltet), klappte
+                      sonst bei jedem Klick alles wieder zu. */
+                   landOffen: null };
 
   /* ⚠️ 11.8.2026 umgestellt (Nutzerentscheidung): Schritt 1 fragt nach der
      HAUPTSPRACHE einer Plattform, nicht mehr danach, welche Übersetzungen sie
@@ -6497,6 +6502,7 @@
     wizardSel.plats = new Set(state.enabled === null
       ? livePlatforms().map(function (p) { return p.key; })
       : Array.from(state.enabled));
+    wizardSel.landOffen = new Set();  // aufgeklappte Länder im Landschritt
     wizardSel.gesehen = new Set();   // Sprachen, deren Plattformen schon vorausgewählt wurden
     wizardSel.manuell = new Set();   // von Hand an-/abgetippte Plattformen
     renderWizard();
@@ -7043,8 +7049,13 @@
              Ohne dieses Zurücksetzen bliebe die Auswahl beim Alten und der
              Länderschritt wäre folgenlos. */
           wizardSel.gesehen = new Set();
-          chip.classList.toggle("on", wizardSel.lands.has(code));
-          foot.querySelector(".wiz__next").disabled = !wizardSel.lands.size;
+          /* ⚠️ NEU ZEICHNEN, nicht bloß die Klasse umschalten. Seit die
+             Kacheln unter ihrem Land stehen, hängt an der Landwahl auch, was
+             darunter angehakt ist und welche Abschnitte ausgegraut sind. Ein
+             bloßes classList.toggle() ließ beides veraltet stehen — die
+             Vorauswahl greift erst beim nächsten Zeichnen.
+             Der Aufklappzustand überlebt das über wizardSel.landOffen. */
+          renderWizard();
         });
         chip.addEventListener("animationend", function () {
           chip.classList.remove("chip--locked");
@@ -7056,19 +7067,50 @@
            Auf- und Zuklappen liegt auf einem eigenen Knopf daneben. Beides auf
            denselben Chip zu legen hieße, dass ein Fehlgriff die Auswahl
            ändert, obwohl man nur nachsehen wollte. */
-        var sek = el('<div class="wiz__landsek"></div>');
+        var anGewaehlt = wizardSel.lands.has(code);
+        var sek = el('<div class="wiz__landsek' +
+          (anGewaehlt ? "" : " wiz__landsek--aus") +
+          (wizardSel.landOffen.has(code) ? " open" : "") + '"></div>');
         var zeile = el('<div class="wiz__landzeile"></div>');
         var liste = el('<div class="wiz__landplats"></div>');
-        meine.forEach(function (pl) { liste.appendChild(platZeile(pl)); });
+        meine.forEach(function (pl) {
+          var k = platZeile(pl);
+          /* ⚠️ Unter einem NICHT gewählten Land steht die Kachel trotzdem
+             angehakt — sie hängt an einem ANDEREN, gewählten Land (openPetition
+             kommt über Deutschland herein). Das ist sachlich richtig und las
+             sich trotzdem wie ein Fehler: „Kroatien ist aus, die Plattform aber
+             an." Deshalb hier ausgegraut, mit dem Grund daneben, und nicht
+             bedienbar: ein Klick würde den Eintrag GLOBAL abwählen, also auch
+             unter Deutschland — aus einem Abschnitt heraus, der behauptet, gar
+             nicht gewählt zu sein. */
+          if (!anGewaehlt && wizardSel.plats.has(pl.key)) {
+            k.classList.add("wplat--fremd");
+            k.disabled = true;
+            var ueber = landListe.filter(function (c) {
+              return wizardSel.lands.has(c) && platGehoertZuLand(pl, c); });
+            var b = k.querySelector(".wplat__m");
+            if (b) b.appendChild(el('<span class="wplat__ueber">' +
+              esc(ueber.length
+                ? fill(T("wizard.land.ueber", "über {land} gewählt"),
+                       { land: landInfo(ueber[0]).name })
+                : T("wizard.land.vonHand", "von Hand gewählt")) + "</span>"));
+          }
+          liste.appendChild(k);
+        });
         var auf = el('<button class="wiz__landauf" type="button" ' +
           'aria-expanded="false" aria-label="' +
           esc(fill(T("wizard.land.zeigen", "Plattformen für {land} zeigen"),
                    { land: info.name })) + '">' +
           '<i class="fa-solid fa-chevron-down"></i></button>');
+        auf.setAttribute("aria-expanded",
+                         wizardSel.landOffen.has(code) ? "true" : "false");
         auf.addEventListener("click", function () {
           var jetzt = !sek.classList.contains("open");
           sek.classList.toggle("open", jetzt);
           auf.setAttribute("aria-expanded", jetzt ? "true" : "false");
+          // Über das Neuzeichnen retten, das der Länder-Chip auslöst.
+          if (jetzt) wizardSel.landOffen.add(code);
+          else wizardSel.landOffen["delete"](code);
         });
         zeile.appendChild(chip);
         zeile.appendChild(auf);
