@@ -498,6 +498,14 @@ def check(fetcher):
 
 PLATFORM = Platform(
     key="openpetition",
+    # ⚠️ „mehrere" beschreibt die QUELLE, nicht unseren Bestand: die Länderpfade
+    # /at/ /ch/ /it/ /be/ /es/ /lu/ /us/ /hr/ /au/ gibt es (Kommentar oben bei
+    # DETAILADRESSE_RE), aber alle 1.903 Sätze bei uns stehen unter /petition/,
+    # ohne Kürzel. Das Land ist aus unseren Daten NICHT ableitbar; es bräuchte
+    # eine eigene Entdeckung je Länderliste. Bis dahin bleibt `countries` im
+    # Manifest leer — und ein leeres `countries` darf die Plattform NICHT
+    # ausblenden, sonst verschwindet sie, weil uns Daten fehlen.
+    country_scope="mehrere",
     openness=5,
     openness_wunsch="Liste ohne Anmeldung und ohne JavaScript, mit Pagination; "
                     "Unterschriftenstand, Ziel, Status und Volltext stehen im "

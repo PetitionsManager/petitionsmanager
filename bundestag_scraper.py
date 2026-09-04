@@ -495,6 +495,9 @@ def check(fetcher):
 
 PLATFORM = Platform(
     key="bundestag",
+    # Amtliche deutsche Stelle — ein Land von Natur aus, nichts zu trennen.
+    country="DE",
+    country_scope="fest",
     name="Bundestag ePetitionen",
     eyebrow="Deutscher Bundestag · Petitionen in der Mitzeichnungsfrist, "
             "beendete und archivierte",

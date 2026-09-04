@@ -157,6 +157,104 @@
   // Einrichtungs-Assistent und die Einstellungen gliedern.
   function platMainLanguage(p) { return (p && p.language) || "de"; }
 
+  /* ---- LAND EINER PLATTFORM (4.9.2026) ------------------------------------
+     Zwillingsachse zur Sprache, mit EINEM Unterschied, der die ganze Form
+     bestimmt: jede Plattform hat eine Sprache, aber nur sechs von 17 Einträgen
+     kennen überhaupt die Größe „Land". Ein bloßes Länderkürzel je Eintrag
+     würde deshalb nicht reichen — „kein Land" wäre nicht von „Land noch nicht
+     geholt" zu unterscheiden, und der Filter müsste raten.
+
+     Das Manifest liefert deshalb drei Angaben (publish.py):
+       country_scope  "keine" | "fest" | "mehrere"  — WARUM ein Land fehlt
+       country        nur bei "fest" gesetzt
+       countries      aus den DATEN abgeleitet, wie languages
+
+     Anlass war ein gemessener Fehler: Change.org verwarf am 30.8.2026 elf von
+     60 deutschSPRACHIGEN Petitionen, weil sie aus AT/CL/IT/UA/IN kamen. Sprache
+     und Land sind zwei Fragen, und die App hat bis heute nur die erste gestellt. */
+  var LAND_INTL = "intl";   // Pseudo-Code für „ohne Landbezug" im Selektor
+  /* Reihenfolge im Selektor. Deutschland zuerst (Hauptzielgruppe), dann die
+     deutschsprachigen Nachbarn, dann die bei europarl gemessenen Größen. Alles
+     Übrige sortiert sich alphabetisch dahinter, „International" ganz ans Ende:
+     es ist kein Land und soll nicht zwischen den Ländern stehen. */
+  var LAND_ORDER = ["DE", "AT", "CH", "ES", "FR", "IT", "NL", "PL", "GB", "US"];
+  function landRank(code) {
+    if (code === LAND_INTL) return 998;          // immer hinter alle Länder
+    var i = LAND_ORDER.indexOf(code); return i < 0 ? 99 : i;
+  }
+  /* Die Flagge wird BERECHNET, nicht in einer Tabelle geführt: ein ISO-Kürzel
+     ist genau das Paar regionaler Indikatoren (U+1F1E6 + Buchstabenabstand).
+     Eine Tabelle hätte für jedes neue Land gepflegt werden müssen und wäre
+     genau dann veraltet gewesen, wenn der Länderfilter gelockert wird. Ein
+     unbelegtes Kürzel zeigt der Browser als zwei Buchstabenkästchen — sichtbar
+     unfertig, aber nicht kaputt. */
+  function landFlagge(code) {
+    if (!/^[A-Z]{2}$/.test(code || "")) return "🏳️";
+    return String.fromCodePoint(0x1F1E6 + code.charCodeAt(0) - 65,
+                                0x1F1E6 + code.charCodeAt(1) - 65);
+  }
+  /* ⚠️ Wie bei langInfo(): der ANZEIGENAME kommt bei jedem Aufruf frisch aus
+     texts.js (land.<code>), nie aus einer var auf Modulebene — die würde beim
+     Laden genau einmal ausgewertet, und ein Sprachwechsel käme dort nie an.
+     Fehlt ein Name, steht das Kürzel da. Das ist Absicht: lieber „PL" als eine
+     leere Fläche oder ein erfundener Name. */
+  function landInfo(code) {
+    if (code === LAND_INTL)
+      return { name: T("land.intl", "International"), flag: "🌍" };
+    return { name: T("land." + code, code || "—"), flag: landFlagge(code) };
+  }
+
+  // Kennt die QUELLE dieser Plattform die Größe Land überhaupt nicht?
+  // Acht Einträge: Avaaz, WeMove, Ekō, 350.org (je de/en).
+  function platLandneutral(p) {
+    return !p || p.country_scope === "keine" || !p.country_scope;
+  }
+  /* Die Länder, die dieser Eintrag WIRKLICH führt. Leer heißt je nach scope
+     zweierlei — siehe platPasstZuLand(), dort wird der Unterschied ausgewertet. */
+  function platCountries(p) {
+    if (p && Array.isArray(p.countries) && p.countries.length)
+      return p.countries;
+    return (p && p.country) ? [p.country] : [];
+  }
+  // Das EINE Land eines Eintrags, sofern er auf eines festgelegt ist.
+  function platMainCountry(p) {
+    if (platLandneutral(p)) return LAND_INTL;
+    var da = platCountries(p);
+    return da.length === 1 ? da[0] : ((p && p.country) || null);
+  }
+
+  /* Passt dieser Plattform-EINTRAG zur Länderauswahl?
+
+     ⚠️ Die dritte Zeile ist die wichtige: ein Eintrag mit scope "mehrere" und
+     LEERER Länderliste darf NICHT ausgeblendet werden. Das trifft heute
+     openPetition (1.903 Sätze) und foodwatch — bei beiden kennt die Quelle
+     Länder, unsere Daten aber nicht, weil alle Sätze unter /petition/ bzw.
+     /de/ stehen. Ein Ausblenden hieße: eine Plattform verschwindet, weil UNS
+     etwas fehlt, nicht weil sie nicht passt. */
+  function platPasstZuLand(p, wahl) {
+    if (!wahl || !wahl.size) return true;         // ohne Auswahl keine Einschränkung
+    if (platLandneutral(p)) return wahl.has(LAND_INTL);
+    var da = platCountries(p);
+    if (!da.length) return true;                  // Land noch unbekannt → zeigen
+    return da.some(function (c) { return wahl.has(c); });
+  }
+
+  /* Passt diese einzelne PETITION zur Länderauswahl? Zweite Ebene, für die
+     mehrländrigen Einträge: europarl trägt 27 Mitgliedstaaten in EINEM Eintrag
+     (gemessen DE 91, AT 19, ES 467), Change.org entsprechend.
+
+     ⚠️ Ein Satz OHNE Landangabe passt immer. Bei „fest" und „keine" trägt keine
+     Petition ein Land, und bei „mehrere" ist eine Lücke eine Scrape-Lücke, kein
+     Ausschluss — Change.orgs COUNTRY_RE greift nicht auf jeder Seite. Sätze
+     wegen einer Lücke in unseren Daten zu verstecken wäre derselbe Fehler wie
+     oben, nur eine Ebene tiefer. */
+  function petitionPasstZuLand(r, p, wahl) {
+    if (!wahl || !wahl.size) return true;
+    if (platLandneutral(p)) return wahl.has(LAND_INTL);
+    if (!r || !r.country) return true;
+    return wahl.has(r.country);
+  }
+
   /* ---- Sprachgruppe mit Flaggenkreis (11.8.2026) --------------------------
      Gemeinsames Bauteil für Schritt 2 des Einrichtungs-Assistenten UND die
      Plattformliste in den Einstellungen. Der Nutzer soll die Aufteilung dort
@@ -6092,7 +6190,13 @@
      Sprachwechsel die Handauswahl überfahren — und im Ausklapper wäre keine
      einzelne fremdsprachige Plattform dauerhaft mitzunehmen. */
   var wizardSel = { langs: null, plats: null, gesehen: null, manuell: null,
-                   langsManuell: false };
+                   langsManuell: false,
+                   /* Landachse (4.9.2026), Zwilling zu langs/langsManuell.
+                      Bewusst ein EIGENES Feld und kein Anhängsel an langs:
+                      Sprache und Land sind zwei Fragen, und sie zu vermengen
+                      war genau der Fehler, der am 30.8.2026 elf deutsch-
+                      sprachige Petitionen aus Österreich verwarf. */
+                   lands: null, landsManuell: false };
 
   /* ⚠️ 11.8.2026 umgestellt (Nutzerentscheidung): Schritt 1 fragt nach der
      HAUPTSPRACHE einer Plattform, nicht mehr danach, welche Übersetzungen sie
@@ -6147,10 +6251,68 @@
     wizardSel.gesehen = new Set();
   }
 
+  /* ---- Landachse im Assistenten (4.9.2026) --------------------------------
+     Welche Länder stehen überhaupt zur Wahl? Abgeleitet aus dem, was die
+     Einträge WIRKLICH führen — nie aus einer festen Liste, sonst stünde ein
+     Land im Selektor, zu dem es keine einzige Petition gibt.
+
+     ⚠️ Einträge mit scope "mehrere", deren Länderliste leer ist (heute
+     openPetition und foodwatch), steuern hier NICHTS bei. Das ist richtig: sie
+     lassen sich keinem Land zuordnen, also dürfen sie auch keins in die Liste
+     bringen. Ausgeblendet werden sie deswegen trotzdem nicht — das entscheidet
+     platPasstZuLand(). */
+  function wizardCountries() {
+    var seen = {};
+    livePlatforms().forEach(function (p) {
+      if (platLandneutral(p)) { seen[LAND_INTL] = true; return; }
+      platCountries(p).forEach(function (c) { seen[c] = true; });
+    });
+    return Object.keys(seen).sort(function (a, b) {
+      return landRank(a) - landRank(b) || a.localeCompare(b);
+    });
+  }
+
+  /* Die Region des Geräts — anders als systemSprache(), die sie WEGWIRFT
+     (`de-AT` → `de`). Genau dieser abgeschnittene Teil ist hier die Antwort:
+     wer sein Gerät auf de-AT stehen hat, ist Österreicher und soll nicht
+     Deutschland vorausgewählt bekommen. */
+  function systemLand() {
+    var liste = (navigator.languages && navigator.languages.length)
+      ? navigator.languages : [navigator.language || ""];
+    for (var i = 0; i < liste.length; i++) {
+      var m = /^[a-z]{2,3}[-_]([A-Za-z]{2})$/.exec(String(liste[i] || ""));
+      if (m) return m[1].toUpperCase();
+    }
+    return null;
+  }
+
+  /* Vorbelegung der Länderauswahl.
+
+     ⚠️ „International" ist IMMER dabei. Ohne diese Zeile verlöre ein frisch
+     eingerichteter Nutzer acht der 17 Einträge (Avaaz, WeMove, Ekō, 350.org je
+     de/en) — sie führen an der Quelle kein Land und fielen aus jeder Länder-
+     auswahl heraus. Sie sind abwählbar, aber nicht versehentlich. */
+  function wizardLandvorwahl() {
+    if (wizardSel.landsManuell) return;   // Handauswahl im Landschritt gewinnt
+    var da = wizardCountries();
+    var region = systemLand();
+    var wahl = [];
+    if (region && da.indexOf(region) >= 0) wahl.push(region);
+    else if (da.indexOf("DE") >= 0) wahl.push("DE");
+    if (da.indexOf(LAND_INTL) >= 0) wahl.push(LAND_INTL);
+    // Rückfall: gäbe es weder die Region noch DE noch International, stünde der
+    // Assistent mit leerer Auswahl und totem „Weiter" da.
+    if (!wahl.length && da.length) wahl.push(da[0]);
+    wizardSel.lands = new Set(wahl);
+    wizardSel.gesehen = new Set();
+  }
+
   function startWizard() {
     state.wizardStep = 0;
     wizardSel.langsManuell = false;
+    wizardSel.landsManuell = false;
     wizardSprachvorwahl();
+    wizardLandvorwahl();
     wizardSel.plats = new Set(state.enabled === null
       ? livePlatforms().map(function (p) { return p.key; })
       : Array.from(state.enabled));
@@ -6229,9 +6391,15 @@
     document.body.classList.add("wizard-open");
 
     /* Gezählte Schritte OHNE die Begrüßung (die trägt keine Punkte):
-       1 Sprachen · 2 Farbdesign+Layout · 3 Plattformen ·
-       4 Benachrichtigungen+Bilder · 5 Fertig. */
-    var TOTAL = 5;
+       1 Sprachen · 2 Länder · 3 Farbdesign+Layout · 4 Plattformen ·
+       5 Benachrichtigungen+Bilder · 6 Fertig.
+
+       ⚠️ 4.9.2026 von 5 auf 6: der Länderschritt ist dazwischengerutscht, und
+       damit haben sich die Nummern ALLER folgenden Schritte verschoben. Die
+       Zweige unten hängen an `step === n` — wer hier eine Zahl ändert, muss
+       jede einzelne mitziehen, auch die beiden Sperren am „Weiter"-Knopf ganz
+       unten (Sprachen bei 1, Länder bei 2, Plattformen bei 4). */
+    var TOTAL = 6;
     var step = state.wizardStep;
     var ov = el('<div class="wiz" id="wizard"><div class="wiz__inner">' +
       '<div class="wiz__top"></div>' +
@@ -6418,6 +6586,73 @@
         esc(T("wizard.lang.hint", "Das lässt sich jederzeit ändern.")) + "</p>"));
 
     } else if (step === 2) {
+      /* ---- Länder (Nutzerentscheidung 4.9.2026) ---------------------------
+         Bewusst ein EIGENER Schritt neben der Sprache, nicht eine zweite Reihe
+         Chips im Sprachschritt. Anlass war ein gemessener Fehler: Change.org
+         verwarf elf von 60 deutschSPRACHIGEN Petitionen, weil sie aus AT, CL,
+         IT, UA und IN kamen. Sprache und Land sind zwei Fragen — „deutsch /
+         Deutschland" und „deutsch / Österreich" sind verschiedene Antworten,
+         und ein gemeinsames Bedienelement legt nahe, dass sie es nicht sind.
+
+         Der Chip „International" ist kein Land, sondern die ehrliche Antwort
+         für die acht Einträge, deren Quelle die Größe Land gar nicht führt.
+         Er steht deshalb hinten (landRank) und trägt ein eigenes Zeichen. */
+      main.appendChild(el('<h1 class="wiz__title">' +
+        esc(T("wizard.land.title", "Aus welchen Ländern?")) + "</h1>"));
+      main.appendChild(el('<p class="wiz__text">' +
+        esc(T("wizard.land.text",
+              "Viele Plattformen sammeln über Ländergrenzen hinweg. Wähle, " +
+              "welche Länder dich interessieren.")) + "</p>"));
+      var cgrid = el('<div class="wiz__chips"></div>');
+      wizardCountries().forEach(function (code) {
+        var info = landInfo(code);
+        // Zahl unter dem Chip: wie viele EINTRÄGE dieses Land führen. Nicht die
+        // Petitionen — die stehen erst nach dem Laden der Pakete fest, und eine
+        // Zahl, die sich beim Weiterklicken ändert, wäre schlimmer als keine.
+        var n = livePlatforms().filter(function (p) {
+          return code === LAND_INTL ? platLandneutral(p)
+               : (!platLandneutral(p) && platCountries(p).indexOf(code) >= 0);
+        }).length;
+        var chip = el('<button class="chip' +
+          (wizardSel.lands.has(code) ? " on" : "") + '" type="button">' +
+          '<span class="chip__flag flag">' + info.flag + "</span>" +
+          '<span class="chip__l">' + esc(info.name) + "</span>" +
+          '<span class="chip__n">' + n + "</span></button>");
+        chip.addEventListener("click", function () {
+          /* ⚠️ Dieselbe Sperre wie bei den Sprachen: der letzte angewählte Chip
+             lässt sich nicht abwählen. Ohne sie säße die Einrichtung fest —
+             „Weiter" wäre tot, und nirgends stünde, warum. Hier ist das keine
+             Randlage, sondern der Normalfall: heute liefert das Manifest genau
+             zwei Chips (Deutschland und International). */
+          if (wizardSel.lands.has(code)) {
+            if (wizardSel.lands.size <= 1) {
+              chip.classList.remove("chip--locked");
+              void chip.offsetWidth;            // Neustart der Animation erzwingen
+              chip.classList.add("chip--locked");
+              return;
+            }
+            wizardSel.lands["delete"](code);
+          } else wizardSel.lands.add(code);
+          // Ab jetzt gilt die Wahl des Nutzers, nicht mehr die Geräteregion.
+          wizardSel.landsManuell = true;
+          /* Die Plattform-Vorauswahl in Schritt 4 muss neu greifen: eine
+             abgewählte Landgruppe darf ihre Plattformen nicht angehakt lassen.
+             Ohne dieses Zurücksetzen bliebe die Auswahl beim Alten und der
+             Länderschritt wäre folgenlos. */
+          wizardSel.gesehen = new Set();
+          chip.classList.toggle("on", wizardSel.lands.has(code));
+          foot.querySelector(".wiz__next").disabled = !wizardSel.lands.size;
+        });
+        chip.addEventListener("animationend", function () {
+          chip.classList.remove("chip--locked");
+        });
+        cgrid.appendChild(chip);
+      });
+      main.appendChild(cgrid);
+      main.appendChild(el('<p class="wiz__hint">' +
+        esc(T("wizard.land.hint", "Das lässt sich jederzeit ändern.")) + "</p>"));
+
+    } else if (step === 3) {
       /* ---- Farbdesign + Layout (Nutzerwunsch 12.8.2026) -------------------
          „farbdesign und layout können zusammen abgefragt werden im
          assistenten" — beide beantworten dieselbe Frage („wie soll es
@@ -6472,7 +6707,7 @@
         function (v) { state.prefs.layout = v; savePrefs(); applyLayout(); }));
       main.appendChild(layoutLbl2.note);
 
-    } else if (step === 3) {
+    } else if (step === 4) {
       main.appendChild(el('<h1 class="wiz__title">' +
         esc(T("wizard.platforms.title", "Welche Plattformen möchtest du sehen?"))
         + "</h1>"));
@@ -6525,7 +6760,8 @@
         if (wizardSel.gesehen.has(c)) return;
         wizardSel.gesehen.add(c);
         (gruppen[c] || []).forEach(function (p) {
-          if (!wizardSel.manuell.has(p.key)) wizardSel.plats.add(p.key);
+          if (!wizardSel.manuell.has(p.key) &&
+              platPasstZuLand(p, wizardSel.lands)) wizardSel.plats.add(p.key);
         });
       });
       Object.keys(gruppen).forEach(function (c) {
@@ -6535,10 +6771,35 @@
           if (!wizardSel.manuell.has(p.key)) wizardSel.plats["delete"](p.key);
         });
       });
+      /* Dasselbe für die Landachse, und zwar QUER zu den Sprachgruppen: ein
+         abgewähltes Land nimmt seine Plattformen aus der Auswahl, egal in
+         welcher Sprachgruppe sie stehen. Ohne diesen Block wäre der
+         Länderschritt bloße Zierde — die Kacheln blieben angehakt.
+
+         ⚠️ Die Gegenrichtung („Land dazugewählt → Plattformen dazu") steckt
+         schon oben: der Klick auf einen Landchip setzt wizardSel.gesehen
+         zurück, womit die Sprachschleife erneut greift und ihr `platPasstZuLand`
+         diesmal wahr wird. Ein zweiter Block hier würde die Handauswahl doppelt
+         überfahren. */
+      livePlatforms().forEach(function (p) {
+        if (wizardSel.manuell.has(p.key)) return;
+        if (!platPasstZuLand(p, wizardSel.lands)) wizardSel.plats["delete"](p.key);
+      });
       /* ⚠️ Sicherheitsnetz: bleibt NICHTS ausgewählt, die gewählten Sprachen
          wieder vorauswählen. Sonst stünde ein deaktiviertes „Weiter" da, ohne
          dass irgendwo steht, warum — dieselbe Sackgasse, die die Sperre an
-         den Kacheln gerade beseitigt hat, nur eine Ecke weiter. */
+         den Kacheln gerade beseitigt hat, nur eine Ecke weiter.
+         ⚠️ Auch hier gilt die Landwahl mit: ohne sie holte das Netz genau die
+         Plattformen zurück, die der Block darüber gerade entfernt hat, und die
+         Länderwahl wäre bei leerer Auswahl still wirkungslos. */
+      if (!wizardSel.plats.size)
+        codesAn.forEach(function (c) {
+          gruppen[c].forEach(function (p) {
+            if (platPasstZuLand(p, wizardSel.lands)) wizardSel.plats.add(p.key);
+          }); });
+      /* Letzte Reihe: passt zur Landwahl NICHTS, wäre die Auswahl trotz beider
+         Netze leer. Dann gilt die Sprachwahl allein — lieber zu viel zeigen als
+         den Nutzer in einem toten „Weiter" sitzen zu lassen. */
       if (!wizardSel.plats.size)
         codesAn.forEach(function (c) {
           gruppen[c].forEach(function (p) { wizardSel.plats.add(p.key); }); });
@@ -6610,7 +6871,7 @@
         esc(T("wizard.platforms.hint",
               "Später jederzeit in den Einstellungen änderbar.")) + "</p>"));
 
-    } else if (step === 4) {
+    } else if (step === 5) {
       /* ---- Benachrichtigungen + Bilder (Nutzerwunsch 12.8.2026) -----------
          Die letzten beiden Fragen vor dem Schlussbild. Beide kosten den
          Nutzer etwas — die eine eine Systemfreigabe, die andere
@@ -6697,13 +6958,17 @@
                                : T("wizard.next", "Weiter");
     var next = el('<button class="wiz__next" type="button">' + esc(nextLabel) +
       ' <i class="fa-solid fa-arrow-right"></i></button>');
-    /* Die beiden Auswahlschritte lassen sich nicht leer verlassen. Die
+    /* Die drei Auswahlschritte lassen sich nicht leer verlassen. Die
        Sperren an den Kacheln selbst verhindern das schon (mindestens eine
-       Sprache, mindestens eine Plattform) — das hier ist die zweite Reihe
+       Sprache, ein Land, eine Plattform) — das hier ist die zweite Reihe
        für den Fall, dass die Auswahl aus einem Sprachwechsel leer hervorgeht.
-       ⚠️ Schrittnummern: 1 = Sprachen, 3 = Plattformen (seit 12.8.2026). */
+       ⚠️ Schrittnummern: 1 = Sprachen, 2 = Länder, 4 = Plattformen. Seit dem
+       Länderschritt (4.9.2026) ist die Plattformzahl von 3 auf 4 gerückt —
+       diese Zeile stand vorher auf 3 und hätte lautlos den falschen Schritt
+       gesperrt: „Weiter" wäre im Farbdesign-Schritt tot gewesen. */
     if ((step === 1 && !wizardSel.langs.size) ||
-        (step === 3 && !wizardSel.plats.size)) next.disabled = true;
+        (step === 2 && !wizardSel.lands.size) ||
+        (step === 4 && !wizardSel.plats.size)) next.disabled = true;
     next.addEventListener("click", function () {
       if (isLast) { closeWizard(true); return; }
       state.wizardStep++; renderWizard();

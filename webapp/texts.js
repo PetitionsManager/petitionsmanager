@@ -105,7 +105,18 @@ window.PM_TEXTS = {
         text: "Wähle die Plattform-Sprachen aus, die du sehen möchtest. Du kannst das jederzeit in den Einstellungen ändern.",
         hint: "Mindestens eine Sprache wählen."
       },
-      /* Schritt 2: Farbdesign und Layout zusammen. Die Beschriftungen der
+      /* Schritt 2: Länder (4.9.2026). Bewusst ein eigener Schritt neben der
+         Sprache: „deutsch / Deutschland" und „deutsch / Österreich" sind
+         verschiedene Antworten. Der Text muss erklären, warum hier NOCH eine
+         Frage kommt, die der vorigen ähnelt — sonst liest sie sich wie eine
+         Wiederholung. Deshalb nennt er den Grund („über Ländergrenzen hinweg")
+         statt bloß zur Auswahl aufzufordern. */
+      land: {
+        title: "Aus welchen Ländern?",
+        text: "Viele Plattformen sammeln über Ländergrenzen hinweg — eine deutschsprachige Petition kann aus Österreich oder der Schweiz kommen. Wähle, welche Länder dich interessieren.",
+        hint: "„International“ steht für Plattformen, die kein Land angeben."
+      },
+      /* Schritt 3: Farbdesign und Layout zusammen. Die Beschriftungen der
          beiden Schalterleisten kommen aus settings.* — es sind dieselben
          Bedienelemente wie in den Einstellungen, und zwei getrennte
          Übersetzungen desselben Wortes wären eine Fehlerquelle. */
@@ -552,6 +563,26 @@ window.PM_TEXTS = {
       groupLabel: "{lang}sprachige Plattformen"
     },
 
+    /* Ländernamen (4.9.2026). Zwilling zu lang.* — die Flagge kommt NICHT von
+       hier, die rechnet app.js/landFlagge() aus dem ISO-Kürzel aus.
+       Geführt sind die 27 EU-Mitgliedstaaten (weil europarl genau sie liefern
+       kann), die deutschsprachigen Nachbarn und die fünf Länder, die am
+       30.8.2026 bei Change.org auffielen (AT, CL, IT, UA, IN).
+       ⚠️ Fehlt ein Kürzel hier, zeigt die App das Kürzel selbst an — sichtbar
+       unfertig, aber nie leer und nie erfunden. */
+    land: {
+      intl: "International",
+      AT: "Österreich", BE: "Belgien", BG: "Bulgarien", CH: "Schweiz",
+      CL: "Chile", CY: "Zypern", CZ: "Tschechien", DE: "Deutschland",
+      DK: "Dänemark", EE: "Estland", ES: "Spanien", FI: "Finnland",
+      FR: "Frankreich", GB: "Vereinigtes Königreich", GR: "Griechenland",
+      HR: "Kroatien", HU: "Ungarn", IE: "Irland", IN: "Indien",
+      IT: "Italien", LT: "Litauen", LU: "Luxemburg", LV: "Lettland",
+      MT: "Malta", NL: "Niederlande", PL: "Polen", PT: "Portugal",
+      RO: "Rumänien", SE: "Schweden", SI: "Slowenien", SK: "Slowakei",
+      UA: "Ukraine", US: "Vereinigte Staaten"
+    },
+
     nav: {
       petitions: "Petitionen",
       settings: "Einstellungen",
@@ -758,6 +789,11 @@ window.PM_TEXTS = {
         title: "Which languages are you interested in?",
         text: "Choose the platform languages you want to see. You can change this at any time in the settings.",
         hint: "Choose at least one language."
+      },
+      land: {
+        title: "Which countries?",
+        text: "Many platforms collect signatures across borders — a German-language petition can come from Austria or Switzerland. Choose the countries you are interested in.",
+        hint: "“International” covers platforms that do not state a country."
       },
       look: {
         title: "How should the app look?",
@@ -1136,6 +1172,21 @@ window.PM_TEXTS = {
       it: "Italian",
       other: "Other",
       groupLabel: "{lang}-language platforms"
+    },
+
+    /* Country names — twin of lang.*; the flag is computed from the ISO code
+       in app.js/landFlagge(), not stored here. US spelling throughout. */
+    land: {
+      intl: "International",
+      AT: "Austria", BE: "Belgium", BG: "Bulgaria", CH: "Switzerland",
+      CL: "Chile", CY: "Cyprus", CZ: "Czechia", DE: "Germany",
+      DK: "Denmark", EE: "Estonia", ES: "Spain", FI: "Finland",
+      FR: "France", GB: "United Kingdom", GR: "Greece",
+      HR: "Croatia", HU: "Hungary", IE: "Ireland", IN: "India",
+      IT: "Italy", LT: "Lithuania", LU: "Luxembourg", LV: "Latvia",
+      MT: "Malta", NL: "Netherlands", PL: "Poland", PT: "Portugal",
+      RO: "Romania", SE: "Sweden", SI: "Slovenia", SK: "Slovakia",
+      UA: "Ukraine", US: "United States"
     },
 
     nav: {

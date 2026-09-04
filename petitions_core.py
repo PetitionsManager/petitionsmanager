@@ -156,6 +156,40 @@ class Platform:
     language: str = "de"           # Sprache der angezeigten Petitionen (ISO 639-1;
                                    # für Gruppierung/Flagge in der App)
 
+    # ---- Landachse (4.9.2026) ------------------------------------------------
+    # Zwilling zu `language`, aber mit einem Unterschied, der alles trägt:
+    # JEDE Plattform hat eine Sprache, aber nur SECHS von 17 Einträgen kennen
+    # überhaupt die Größe „Land". Deshalb reicht ein Kürzel-Feld nicht — ohne
+    # die Angabe, WARUM ein Land fehlt, wäre „kein Land" nicht von „Land noch
+    # nicht geholt" zu unterscheiden, und die App müsste raten.
+    #
+    #   country_scope = "keine"    Die Quelle führt die Größe Land nicht.
+    #                              Avaaz, WeMove, Ekō, 350.org (je de/en) — acht
+    #                              Einträge. Dort ist NICHTS nachzurüsten; die
+    #                              Angabe existiert an der Quelle nicht.
+    #                              → in der App „International".
+    #   country_scope = "fest"     Genau ein Land, von Natur aus. `country` sagt
+    #                              welches. Bundestag (amtliche deutsche Stelle),
+    #                              WeAct (Campact), innn.it — drei Einträge;
+    #                              bei innn.it an 2.056 Adressen geprüft, kein
+    #                              einziges Länderstück.
+    #   country_scope = "mehrere"  Die Quelle kennt Länder, und sie stehen je
+    #                              PETITION in rec["country"]. Change.org/_en,
+    #                              europarl, openPetition, foodwatch/_en.
+    #
+    # ⚠️ „mehrere" heißt NICHT, dass wir die Länder schon haben. Bei openPetition
+    # und foodwatch stehen alle Sätze unter /petition/ bzw. /de/ — das Land ist
+    # dort aus unseren Daten NICHT ableitbar und bräuchte eine eigene Entdeckung
+    # je Länderliste. Die abgeleitete Liste `countries` im Manifest ist deshalb
+    # bei ihnen heute leer, und die App darf einen Eintrag mit leerer Liste NICHT
+    # wegfiltern (sonst verschwände eine Plattform, weil uns Daten fehlen).
+    country: str | None = None     # ISO-3166-1 alpha-2, GROSS. Nur bei "fest"
+                                   # gesetzt; bei "mehrere" steht das Land je
+                                   # Petition, bei "keine" gibt es keins.
+    country_scope: str = "keine"   # "keine" | "fest" | "mehrere"; Vorgabe ist
+                                   # bewusst "keine" — ein erfundenes Land wäre
+                                   # schlimmer als ein fehlendes.
+
     @property
     def is_live(self) -> bool:
         return self.run is not None and self.data_file is not None
@@ -393,6 +427,101 @@ def zahl(wert, default=None):
         return default
     ziffern = re.sub(r"\D", "", wert)
     return int(ziffern) if ziffern else default
+
+
+# ----------------------------------------------------------------------------
+# Landangaben vereinheitlichen (4.9.2026)
+# ----------------------------------------------------------------------------
+# Die Quellen schreiben dasselbe Land verschieden auf:
+#   Change.org   „DE"            ISO-Kürzel aus dem eingebetteten JSON
+#   europarl     „Deutschland"   der WORTLAUT der Seite, je Sprachfassung auch
+#                „Germany" — bewusst so gescrapt, weil ein selbstgemachtes „DE"
+#                eine ungeprüfte Zuordnung gewesen wäre (Kommentar dort).
+# Ohne Vereinheitlichung stünden beide nebeneinander im Manifest, und die App
+# hielte sie für zwei Länder.
+#
+# ⚠️ Diese Tabelle ist am 4.9.2026 gegen NICHTS gemessen worden, denn es gibt
+# noch keine Daten: das country-Feld kam am 30.8. in den Code, seither lief kein
+# Scrape. Belegt ist nur der eine Fall, den europarl heute erzeugt
+# („Deutschland"/„Germany", weil die Trefferliste auf countries=DE filtert).
+# Alles andere ist Vorrat. Deshalb verwirft land_code() nichts, was es nicht
+# kennt, sondern MELDET es — eine stille Allowlist hätte den ganzen Rest der
+# EU-Länder unbemerkt weggeworfen, sobald der Filter gelockert wird.
+_LAND_NAMEN = {
+    # de / en → ISO-3166-1 alpha-2. Die 27 Mitgliedstaaten, weil europarl genau
+    # sie führen kann, plus die drei deutschsprachigen Nachbarn und die Länder,
+    # die bei Change.org am 30.8. auffielen (AT, CL, IT, UA, IN).
+    "belgien": "BE", "belgium": "BE",
+    "bulgarien": "BG", "bulgaria": "BG",
+    "dänemark": "DK", "danemark": "DK", "denmark": "DK",
+    "deutschland": "DE", "germany": "DE",
+    "estland": "EE", "estonia": "EE",
+    "finnland": "FI", "finland": "FI",
+    "frankreich": "FR", "france": "FR",
+    "griechenland": "GR", "greece": "GR",
+    "irland": "IE", "ireland": "IE",
+    "italien": "IT", "italy": "IT",
+    "kroatien": "HR", "croatia": "HR",
+    "lettland": "LV", "latvia": "LV",
+    "litauen": "LT", "lithuania": "LT",
+    "luxemburg": "LU", "luxembourg": "LU",
+    "malta": "MT",
+    "niederlande": "NL", "netherlands": "NL",
+    "österreich": "AT", "osterreich": "AT", "austria": "AT",
+    "polen": "PL", "poland": "PL",
+    "portugal": "PT",
+    "rumänien": "RO", "rumanien": "RO", "romania": "RO",
+    "schweden": "SE", "sweden": "SE",
+    "slowakei": "SK", "slovakia": "SK",
+    "slowenien": "SI", "slovenia": "SI",
+    "spanien": "ES", "spain": "ES",
+    "tschechien": "CZ", "czechia": "CZ", "czech republic": "CZ",
+    "ungarn": "HU", "hungary": "HU",
+    "zypern": "CY", "cyprus": "CY",
+    # Nicht-EU, aber in unseren Daten belegt bzw. naheliegend:
+    "schweiz": "CH", "switzerland": "CH",
+    "vereinigtes königreich": "GB", "united kingdom": "GB",
+    "chile": "CL",
+    "ukraine": "UA",
+    "indien": "IN", "india": "IN",
+    "vereinigte staaten": "US", "united states": "US",
+}
+# Was land_code() nicht zuordnen konnte — je Rohwert einmal. publish.py liest
+# das aus und meldet es; so wird aus einem stillen Verlust eine Zeile im Lauf.
+_LAND_UNBEKANNT: dict[str, int] = {}
+
+
+def land_code(wert) -> str | None:
+    """Bringt eine fremde Landangabe auf ISO-3166-1 alpha-2 (GROSS).
+
+    Nimmt sowohl das Kürzel („DE", „de") als auch den ausgeschriebenen Namen in
+    Deutsch oder Englisch („Deutschland", „Germany"). Gibt None zurück, wenn
+    nichts Landartiges übrig bleibt, und wirft NIE.
+
+    ⚠️ Ein zweibuchstabiger Wert wird NICHT gegen eine Länderliste geprüft,
+    sondern durchgereicht. Grund: die Liste der Kürzel, die Change.org verwendet,
+    ist unbekannt (das Feld kommt aus fremdem JSON), und ein unbekanntes, aber
+    echtes Kürzel wegzuwerfen wäre schlimmer als eines durchzulassen — die App
+    zeigt es dann als eigenes Land an, statt die Petition zu verlieren."""
+    if not isinstance(wert, str):
+        return None
+    roh = wert.strip()
+    if not roh:
+        return None
+    if len(roh) == 2 and roh.isalpha():
+        return roh.upper()
+    code = _LAND_NAMEN.get(roh.casefold())
+    if code:
+        return code
+    # Nicht zuordenbar: merken statt schlucken. Der Rohwert bleibt erhalten,
+    # damit die Meldung sagt, WAS nicht zugeordnet werden konnte.
+    _LAND_UNBEKANNT[roh] = _LAND_UNBEKANNT.get(roh, 0) + 1
+    return None
+
+
+def land_unbekannt() -> dict[str, int]:
+    """Die Rohwerte, die land_code() nicht zuordnen konnte, mit Häufigkeit."""
+    return dict(_LAND_UNBEKANNT)
 
 
 def _esc(s) -> str:

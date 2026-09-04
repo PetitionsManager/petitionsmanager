@@ -344,6 +344,9 @@ def check(fetcher):
 
 PLATFORM = Platform(
     key="innnit",
+    # 2.056 Adressen am 30.8.2026 geprüft: kein einziges Länderstück im Pfad.
+    country="DE",
+    country_scope="fest",
     name="Innn.it",
     eyebrow="Innn.it · alle Petitionen (via internem Listen-API)",
     source_url="https://innn.it/",

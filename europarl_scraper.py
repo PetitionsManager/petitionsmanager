@@ -581,6 +581,11 @@ def check(fetcher):
 
 PLATFORM = Platform(
     key="europarl",
+    # Land steht je Petition in rec["country"], als WORTLAUT der Seite
+    # („Deutschland"/„Germany"); core.land_code() vereinheitlicht das beim
+    # Veröffentlichen. Heute liefert die Trefferliste nur DE (countries=DE im
+    # LIST_URL) — dahinter liegen 27 Mitgliedstaaten, gemessen AT 19, ES 467.
+    country_scope="mehrere",
     # 8.8.2026 auf "de", 11.8.2026 zurück auf "en" — Begründung bei
     # HAUPTSPRACHE oben. Kurz: fachlich waren beide Werte vertretbar (das
     # EU-Parlament veröffentlicht in allen 24 Amtssprachen), für die App ist

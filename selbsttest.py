@@ -600,17 +600,52 @@ pruefe("sprachbefund ohne Felder bleibt leer",
 
 # Das Land am Datensatz — bei beiden Plattformen. Heute ist es überall dasselbe
 # (die Auswahl lässt ja nur Deutschland durch); erst wenn das Feld verschwindet,
-# wird die spätere Erweiterung wieder teuer. ⚠️ Und es darf NICHT ausgeliefert
-# werden: die App soll unverändert nur deutsche Petitionen zeigen.
+# wird die spätere Erweiterung wieder teuer.
+#
+# ⚠️ 4.9.2026 UMGEKEHRT. Hier stand bis eben das Gegenteil: „… liefert es aber
+# NICHT an die App aus", mit der Begründung „die App soll unverändert nur
+# deutsche Petitionen zeigen". Das war der Stand vom 30.8. (mitschreiben, nicht
+# anzeigen). Seit der Länderauswahl im Assistenten ist die Auslieferung der
+# ganze Zweck — ohne den Eintrag in SLIM_FIELDS erreicht rec["country"] die App
+# nie, und der Selektor hätte nichts zu filtern.
 _rec = changeorg.parse_detail(
     '"country":{"countryCode":"DE"}"ask":"Ein Titel"', "https://x.test/p/a")
 pruefe("Change.org schreibt das Land mit", (_rec or {}).get("country"), "DE")
 import publish as _publish                                       # noqa: E402
-pruefe("… liefert es aber NICHT an die App aus",
-       "country" in _publish.SLIM_FIELDS, False)
+pruefe("… und liefert es jetzt auch an die App aus",
+       "country" in _publish.SLIM_FIELDS, True)
 pruefe("europarl kennt die Feldbeschriftung in beiden Sprachen",
        [europarl.SPRACHE[s]["land"] for s in ("de", "en")],
        ["Land", "Country"])
+
+# ---- Landachse: Vereinheitlichung und Dreizustand (4.9.2026) ----------------
+# ⚠️ Der Kern der Sache: europarl liefert den WORTLAUT der Seite, Change.org das
+# ISO-Kürzel. Ohne Vereinheitlichung stünden „Deutschland" und „DE" als zwei
+# Länder nebeneinander im Manifest.
+pruefe("land_code: Wortlaut deutsch → Kürzel", core.land_code("Deutschland"), "DE")
+pruefe("land_code: Wortlaut englisch → dasselbe Kürzel",
+       core.land_code("Germany"), "DE")
+pruefe("land_code: Kürzel bleibt Kürzel", core.land_code("de"), "DE")
+pruefe("land_code: Unfug wird nicht zu einem Land", core.land_code("Absurdistan"),
+       None)
+# ⚠️ Und er wird auch nicht STILL verworfen — sonst fiele beim Lockern des
+# Länderfilters der halbe Kontinent lautlos heraus.
+pruefe("… sondern gemeldet", "Absurdistan" in core.land_unbekannt(), True)
+pruefe("land_code verträgt Nichtstrings", core.land_code(None), None)
+
+# Der Dreizustand über ALLE Einträge — die Erhebung vom 30.8.2026 festgeschrieben:
+# drei einländrig, acht ohne Landbegriff an der Quelle, sechs mehrländrig.
+import monitor as _monitor                                       # noqa: E402
+_scopes: dict[str, int] = {}
+for _p in _monitor.PLATFORMS:
+    _scopes[_p.country_scope] = _scopes.get(_p.country_scope, 0) + 1
+pruefe("Landachse: 3 fest / 8 keine / 6 mehrere",
+       _scopes, {"fest": 3, "keine": 8, "mehrere": 6})
+# ⚠️ Ein „fest" ohne Land wäre ein stiller Fehler: die Plattform fiele aus jeder
+# Länderauswahl heraus, ohne je als landneutral zu gelten.
+pruefe("Landachse: fest ⇔ country gesetzt",
+       [p.key for p in _monitor.PLATFORMS
+        if (p.country_scope == "fest") != bool(p.country)], [])
 
 print("\nUnlesbare Seiten (melde_unklare)")
 

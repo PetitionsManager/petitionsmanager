@@ -71,7 +71,13 @@ SLIM_FIELDS = ("title", "url", "signatures", "goal", "category", "status",
                # Sie kommt vom Scraper (Slug ohne Sprachsuffix, Petitionsnummer,
                # verlinkter Übersetzungs-Slug) und ist die EINZIGE Grundlage,
                # auf der _uebersetzungen_verknuepfen() zwei Sätze zusammenführt.
-               "lang", "i18n_state", "campaign_id")
+               "lang", "i18n_state", "campaign_id",
+               # Landachse (4.9.2026). Ohne diesen Eintrag schreiben die
+               # Scraper rec["country"] zwar, es erreicht die App aber nie —
+               # slim() nimmt ausschließlich, was hier steht. Der Wert wird in
+               # slim() über core.land_code() auf ISO-Kürzel vereinheitlicht,
+               # weil europarl den Wortlaut liefert und Change.org das Kürzel.
+               "country")
 
 # Verwandtschaft. Die App trägt dieselbe Rechnung als Notlösung
 # (app.js → similarityScore); beide müssen zusammen geändert werden.
@@ -175,6 +181,17 @@ PLATZHALTER_TITEL = core.PLATZHALTER_TITEL
 
 def slim(rec: dict) -> dict:
     out = {k: rec.get(k) for k in SLIM_FIELDS if rec.get(k) is not None}
+    # Landangabe vereinheitlichen: europarl liefert „Deutschland"/„Germany",
+    # Change.org „DE". Unvereinheitlicht stünden zwei Schreibweisen desselben
+    # Landes im Paket, und die App hielte sie für zwei Länder. Was land_code()
+    # nicht zuordnen kann, fällt hier heraus — aber nicht still: der Rohwert
+    # steht in core.land_unbekannt() und wird am Ende des Laufs gemeldet.
+    if out.get("country") is not None:
+        code = core.land_code(out["country"])
+        if code:
+            out["country"] = code
+        else:
+            del out["country"]
     # Fallback: Ältere Datensätze ohne gespeicherte Tags bekommen sie hier beim
     # Export nachträglich (identische Logik wie beim Scrapen).
     if not out.get("tags"):
@@ -513,6 +530,13 @@ def main() -> None:
             "openness_wunsch": p.openness_wunsch,
             "eyebrow": p.eyebrow,
             "language": p.language,
+            # Landachse (4.9.2026), Zwilling zu language/languages weiter unten.
+            # "country_scope" sagt, WARUM ein Land fehlt, wenn eines fehlt —
+            # ohne diese Angabe könnte die App „die Quelle kennt kein Land"
+            # nicht von „wir haben es noch nicht geholt" unterscheiden und
+            # müsste raten. "country" ist nur bei scope=="fest" gesetzt.
+            "country": p.country,
+            "country_scope": p.country_scope,
             "live": p.is_live,
             "count": 0,
             "online": 0,
@@ -573,6 +597,26 @@ def main() -> None:
             sprachen |= {lg for r in items for lg in (r.get("i18n") or {})}
             entry["languages"] = ([haupt] +
                                   sorted(s for s in sprachen if s != haupt))
+            # ---- Welche LÄNDER liefert diese Plattform wirklich? -------------
+            # Genau wie bei den Sprachen aus den DATEN abgeleitet, nicht von
+            # Hand gepflegt. Drei Fälle, und der dritte ist der heikle:
+            #   "fest"     → das eine deklarierte Land (die Sätze tragen keins)
+            #   "keine"    → leer, und das ist eine AUSSAGE: die Quelle kennt
+            #                die Größe Land nicht. Die App zeigt sie unter
+            #                „International".
+            #   "mehrere"  → das, was in den Sätzen steht. Heute ist das bei
+            #                openPetition und foodwatch NICHTS, weil das Land
+            #                dort nicht ableitbar ist. Eine leere Liste bei
+            #                scope=="mehrere" heißt „noch unbekannt", NICHT
+            #                „kein Land" — die App darf danach nicht ausblenden.
+            if p.country_scope == "fest":
+                entry["countries"] = [p.country] if p.country else []
+            elif p.country_scope == "mehrere":
+                laender = {c for c in (core.land_code(r.get("country"))
+                                       for r in items) if c}
+                entry["countries"] = sorted(laender)
+            else:
+                entry["countries"] = []
             # Jüngster Plattform-Stempel, nicht der erste, der vorbeikommt:
             # vorher stand hier der Stempel der ERSTEN Live-Plattform in
             # monitor.PLATFORMS. Nach einem publish-Lauf am 29.7.26 um 18:59
@@ -660,6 +704,21 @@ def main() -> None:
     print(f"  Listen: {list_mb:.1f} MB · Volltexte: {text_mb:.1f} MB "
           f"in {chunks_total} Paketen")
     print(f"  Verwandtschaft vorberechnet für {related_n} Petitionen")
+
+    # Landachse: was gefunden wurde, und was nicht zugeordnet werden konnte.
+    # ⚠️ Die zweite Zeile ist die wichtigere. Eine Zuordnungstabelle, die
+    # unbekannte Werte still verwirft, sieht bis zum Tag der Lockerung des
+    # Länderfilters vollkommen gesund aus — und wirft dann 26 Mitgliedstaaten
+    # weg, ohne dass jemand etwas merkt. Deshalb steht der Rohwert hier.
+    mit_land = sorted({c for p in live for c in (p.get("countries") or [])})
+    print(f"  Länder im Bestand: {', '.join(mit_land) if mit_land else '—'}")
+    offen = core.land_unbekannt()
+    if offen:
+        proben = ", ".join(f"{k!r}×{n}" for k, n in
+                           sorted(offen.items(), key=lambda kv: -kv[1])[:8])
+        print(f"::warning::Landangabe nicht zuordenbar bei "
+              f"{sum(offen.values())} Sätzen ({len(offen)} verschiedene): "
+              f"{proben} – core._LAND_NAMEN ergänzen.")
 
 
 if __name__ == "__main__":

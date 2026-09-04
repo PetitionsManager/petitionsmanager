@@ -784,6 +784,9 @@ def check(fetcher):
 
 PLATFORM = Platform(
     key="weact",
+    # Plattform von Campact e. V. (Verden/Aller) — ein Land von Natur aus.
+    country="DE",
+    country_scope="fest",
     openness=4,
     openness_wunsch="Im Datensatz fehlt ein Startdatum: von 1.907 Sätzen tragen zwei "
                     "eines. Nach Aktualität sortieren lässt sich damit nicht. Ein "

@@ -411,6 +411,10 @@ def check(fetcher):
 
 PLATFORM = Platform(
     key="foodwatch",
+    # ⚠️ Wie openPetition: Länderseiten /de/ /en/ /fr/ /nl/ /at/ existieren an
+    # der Quelle, unsere 15 Sätze stehen aber alle unter /de/. Nicht ableitbar,
+    # `countries` bleibt bis zu einer eigenen Entdeckung leer.
+    country_scope="mehrere",
     openness=5,
     openness_wunsch="Komplette Aktionsliste, Unterschriftenzahl und Volltext direkt im "
                     "server-gerenderten HTML: kein Schlüssel, keine Sitzung, kein "
@@ -508,6 +512,8 @@ def check_en(fetcher):
 
 PLATFORM_EN = Platform(
     key="foodwatch_en",
+    # Wie der deutsche Zwilling: Quelle kennt Länder, unser Bestand nicht.
+    country_scope="mehrere",
     openness=5,
     openness_wunsch="Komplette Aktionsliste, Unterschriftenzahl und Volltext direkt im "
                     "server-gerenderten HTML: kein Schlüssel, keine Sitzung, kein "

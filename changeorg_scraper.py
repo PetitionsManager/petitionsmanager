@@ -686,6 +686,9 @@ def check(fetcher):
 
 PLATFORM = Platform(
     key="changeorg",
+    # Land steht je Petition in rec["country"] (ISO-Kürzel aus dem
+    # eingebetteten JSON, COUNTRY_RE). Die AUSWAHL filtert weiter auf DE.
+    country_scope="mehrere",
     openness=3,
     openness_wunsch="Die Themenseiten zeigen je rund 21 Petitionen; „Mehr anzeigen“ "
                     "läuft über /api-proxy/, das die robots.txt sperrt. Über Sitemaps "
@@ -859,6 +862,8 @@ def check_en(fetcher):
 
 PLATFORM_EN = Platform(
     key="changeorg_en",
+    # Wie der deutsche Zwilling: Land je Petition, ISO-Kürzel.
+    country_scope="mehrere",
     openness=3,
     openness_wunsch="Die Ortsseiten sind server-gerendert und von der robots.txt "
                     "erlaubt — das ist der offene Teil. Weiterblättern führt aber "
