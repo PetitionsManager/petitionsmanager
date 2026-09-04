@@ -136,6 +136,12 @@ window.PM_TEXTS = {
         title: "Wie soll die App aussehen?",
         text: "Wähle, was dir besser gefällt – beides lässt sich später jederzeit umstellen."
       },
+      /* ⚠️ Seit 4.9.2026 KEIN eigener Schritt mehr, sondern ein Ausklapper in
+         Schritt 2 (Länder). `title` steht am Klappkopf. `text` ist damit
+         verwaist — die Einleitung „alle sind vorausgewählt" stand über einer
+         offenen Liste und ergibt über einem zugeklappten Bereich keinen Sinn.
+         Der Schlüssel bleibt, damit die englische Fassung ihn nicht verliert;
+         checks.yml vergleicht die Schlüsselmengen. */
       platforms: {
         title: "Welche Plattformen möchtest du beobachten?",
         text: "Wähle aus, welche Plattformen dir in der Liste angezeigt werden. Deaktivierte Plattformen kannst du jederzeit wieder einblenden.",

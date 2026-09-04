@@ -6554,7 +6554,7 @@
        Zweige unten hängen an `step === n` — wer hier eine Zahl ändert, muss
        jede einzelne mitziehen, auch die beiden Sperren am „Weiter"-Knopf ganz
        unten (Sprachen bei 1, Länder bei 2, Plattformen bei 4). */
-    var TOTAL = 6;
+    var TOTAL = 5;
     var step = state.wizardStep;
     var ov = el('<div class="wiz" id="wizard"><div class="wiz__inner">' +
       '<div class="wiz__top"></div>' +
@@ -6579,6 +6579,181 @@
       esc(T("wizard.skip", "Überspringen")) + "</button>");
     skip.addEventListener("click", function () { closeWizard(false); });
     top.appendChild(skip);
+
+  /* ---- Plattformauswahl (4.9.2026 aus Schritt 4 hierher gezogen) ---------
+     Nutzerwunsch: "schritt 4 soll wegfallen und in schritt 2 aufgenommen
+     werden (aufklapper)". Der Rumpf ist unveraendert uebernommen; die
+     Parameter heissen deshalb weiter `main` und `foot`.
+
+     Sinn der Zusammenlegung: Land und Plattformen sind DIESELBE Frage in zwei
+     Schaerfegraden — "woher" und "von wem genau". Wer die Vorauswahl
+     akzeptiert, klappt gar nicht erst auf. */
+  function plattformAuswahl(main, foot) {
+      /* ---- Gliederung nach Sprache (Nutzerwunsch 11.8.2026) ---------------
+         Schritt 2 FILTERT die anderen Sprachen nicht mehr weg, sondern legt
+         sie eine Ebene tiefer: die in Schritt 1 gewählten Sprachen stehen
+         oben und offen, alle übrigen darunter als eingeklappte Ausklapper,
+         nach Sprache sortiert. Erreichbar bleibt damit alles — wer eine
+         einzelne fremdsprachige Plattform mitnehmen will, muss nicht erst
+         zurück in Schritt 1.
+
+         Jede Gruppe trägt ihren Flaggenkreis (.flag, dieselbe runde Blende
+         wie in der Hauptliste): ohne ihn liefen die Kacheln optisch in einem
+         Block durch, und die Trennung wäre nur an der Überschrift zu ahnen. */
+      var gruppen = {};
+      livePlatforms().forEach(function (p) {
+        var c = platMainLanguage(p);
+        (gruppen[c] = gruppen[c] || []).push(p);
+      });
+      Object.keys(gruppen).forEach(function (c) {
+        gruppen[c].sort(function (a, b) {
+          return a.name.localeCompare(b.name, "de"); });
+      });
+      var nachRang = function (a, b) {
+        return langRank(a) - langRank(b) || a.localeCompare(b); };
+      var codesAn  = Object.keys(gruppen).filter(function (c) {
+        return wizardSel.langs.has(c); }).sort(nachRang);
+      var codesAus = Object.keys(gruppen).filter(function (c) {
+        return !wizardSel.langs.has(c); }).sort(nachRang);
+
+      /* Die Auswahl an die Sprachwahl angleichen — symmetrisch, und in beide
+         Richtungen mit Vorrang für die Handauswahl (wizardSel.manuell).
+
+         Nach oben: eine NEU gewählte Sprache bringt ihre Plattformen mit.
+         Ohne das stünde ihre Gruppe zwar offen, aber vollständig abgehakt —
+         wer in Schritt 1 Englisch dazunimmt, bekäme das Europaparlament
+         angezeigt und trotzdem nicht geliefert, obwohl der Text darüber
+         „alle sind vorausgewählt" verspricht.
+
+         Nach unten: eine NICHT gewählte Sprache nimmt ihre Plattformen aus der
+         Auswahl. Das muss ohne `gesehen` auskommen, weil die Startbelegung
+         gar nicht aus einem Sprachwechsel stammt: startWizard() legt beim
+         ersten Start ALLE Plattformen an. Genau daran ist eine frühere Fassung
+         gescheitert — Europarl blieb angehakt, obwohl nur Deutsch gewählt war. */
+      wizardSel.langs.forEach(function (c) {
+        if (wizardSel.gesehen.has(c)) return;
+        wizardSel.gesehen.add(c);
+        (gruppen[c] || []).forEach(function (p) {
+          if (!wizardSel.manuell.has(p.key) &&
+              platPasstZuLand(p, wizardSel.lands)) wizardSel.plats.add(p.key);
+        });
+      });
+      Object.keys(gruppen).forEach(function (c) {
+        if (wizardSel.langs.has(c)) return;
+        wizardSel.gesehen["delete"](c);
+        gruppen[c].forEach(function (p) {
+          if (!wizardSel.manuell.has(p.key)) wizardSel.plats["delete"](p.key);
+        });
+      });
+      /* Dasselbe für die Landachse, und zwar QUER zu den Sprachgruppen: ein
+         abgewähltes Land nimmt seine Plattformen aus der Auswahl, egal in
+         welcher Sprachgruppe sie stehen. Ohne diesen Block wäre der
+         Länderschritt bloße Zierde — die Kacheln blieben angehakt.
+
+         ⚠️ Die Gegenrichtung („Land dazugewählt → Plattformen dazu") steckt
+         schon oben: der Klick auf einen Landchip setzt wizardSel.gesehen
+         zurück, womit die Sprachschleife erneut greift und ihr `platPasstZuLand`
+         diesmal wahr wird. Ein zweiter Block hier würde die Handauswahl doppelt
+         überfahren. */
+      livePlatforms().forEach(function (p) {
+        if (wizardSel.manuell.has(p.key)) return;
+        if (!platPasstZuLand(p, wizardSel.lands)) wizardSel.plats["delete"](p.key);
+      });
+      /* ⚠️ Sicherheitsnetz: bleibt NICHTS ausgewählt, die gewählten Sprachen
+         wieder vorauswählen. Sonst stünde ein deaktiviertes „Weiter" da, ohne
+         dass irgendwo steht, warum — dieselbe Sackgasse, die die Sperre an
+         den Kacheln gerade beseitigt hat, nur eine Ecke weiter.
+         ⚠️ Auch hier gilt die Landwahl mit: ohne sie holte das Netz genau die
+         Plattformen zurück, die der Block darüber gerade entfernt hat, und die
+         Länderwahl wäre bei leerer Auswahl still wirkungslos. */
+      if (!wizardSel.plats.size)
+        codesAn.forEach(function (c) {
+          gruppen[c].forEach(function (p) {
+            if (platPasstZuLand(p, wizardSel.lands)) wizardSel.plats.add(p.key);
+          }); });
+      /* Letzte Reihe: passt zur Landwahl NICHTS, wäre die Auswahl trotz beider
+         Netze leer. Dann gilt die Sprachwahl allein — lieber zu viel zeigen als
+         den Nutzer in einem toten „Weiter" sitzen zu lassen. */
+      if (!wizardSel.plats.size)
+        codesAn.forEach(function (c) {
+          gruppen[c].forEach(function (p) { wizardSel.plats.add(p.key); }); });
+
+      /* Eine Kachel bauen. Steckt in einer Funktion, weil sie in beiden
+         Bereichen gebraucht wird (oben offen, unten im Ausklapper) — zwei
+         Kopien liefen beim nächsten Eingriff auseinander. */
+      function wizPlatRow(p) {
+        var on = wizardSel.plats.has(p.key);
+        var color = platColor(p.key);
+        var row = el('<button class="wplat' + (on ? " on" : "") + '" type="button"' +
+          (color ? ' style="--brand:' + esc(color) + '"' : "") + ">" +
+          platLogo(p.key, p.name) +
+          '<span class="wplat__body"><span class="wplat__n">' + esc(p.name) +
+          "</span><span class=\"wplat__m\">" +
+          esc(fill(T("wizard.platCount", "{n} Petitionen"),
+                   { n: nf.format(p.online) })) +
+          /* Das Landzeichen sitzt IN der Meta-Zeile, nicht als eigene Zeile:
+             die Kachel trägt schon Logo, Name und Zahl, eine vierte Zeile
+             hätte die Liste auf mobilen Geräten unnötig gestreckt.
+             null = das Manifest führt die Landachse noch nicht (siehe dort). */
+          (function (z) {
+            return z ? '<span class="wplat__land" title="' + esc(z.titel) +
+                       '">' + z.text + "</span>" : "";
+          })(platLandZeichen(p)) + "</span></span>" +
+          '<span class="wplat__check"><i class="fa-solid fa-check"></i></span>' +
+          "</button>");
+        row.addEventListener("click", function () {
+          /* Dieselbe Sperre wie bei den Sprachen eine Ebene höher: die LETZTE
+             angewählte Plattform bleibt an, sonst deaktiviert sich „Weiter"
+             und die Einrichtung sitzt fest. Hier ist die Sackgasse leichter
+             zu erreichen als bei den Sprachen — es sind alle vorausgewählt,
+             und wer sich seine eine Plattform heraussucht, wählt der Reihe
+             nach ab und trifft dabei zwangsläufig die letzte.
+             ⚠️ Die Sperre zählt über ALLE Gruppen, nicht je Gruppe: die letzte
+             deutsche Plattform darf abgewählt werden, solange oben oder im
+             Ausklapper noch eine andere an ist. Maßgeblich ist, was am Ende
+             gespeichert wird, und das ist wizardSel.plats als Ganzes.
+             ⚠️ Nicht mit den Schleifen oben verwechseln: die schalten
+             Plattformen bei einem SPRACHWECHSEL um und dürfen dabei bis auf
+             null leeren — das Sicherheitsnetz dort fängt es ab. */
+          if (wizardSel.plats.has(p.key)) {
+            if (wizardSel.plats.size <= 1) {
+              row.classList.remove("wplat--locked");
+              void row.offsetWidth;             // Neustart der Animation erzwingen
+              row.classList.add("wplat--locked");
+              return;
+            }
+            wizardSel.plats["delete"](p.key);
+          } else wizardSel.plats.add(p.key);
+          /* Ab jetzt gilt für diese Plattform die Entscheidung des Nutzers,
+             nicht mehr die Sprachwahl. Auch beim ABWÄHLEN vermerken: sonst
+             hakte ein Sprachwechsel sie wieder an. */
+          wizardSel.manuell.add(p.key);
+          row.classList.toggle("on", wizardSel.plats.has(p.key));
+          foot.querySelector(".wiz__next").disabled = !wizardSel.plats.size;
+        });
+        row.addEventListener("animationend", function () {
+          row.classList.remove("wplat--locked");
+        });
+        return row;
+      }
+
+      /* Eine Sprachgruppe. Machart und Kopfzeile kommen aus langSection() —
+         demselben Bauteil, das die Einstellungen benutzen. Hier kommt nur
+         .wiz__plats dazu, das die Kacheln als Spalte mit Abstand setzt. */
+      function wizLangGruppe(code, offen) {
+        var g = langSection(code, gruppen[code].length, offen);
+        g.body.classList.add("wiz__plats");
+        gruppen[code].forEach(function (p) { g.body.appendChild(wizPlatRow(p)); });
+        return g.sec;
+      }
+
+      codesAn.forEach(function (c) { main.appendChild(wizLangGruppe(c, true)); });
+      codesAus.forEach(function (c) { main.appendChild(wizLangGruppe(c, false)); });
+      main.appendChild(el('<p class="wiz__hint">' +
+        esc(T("wizard.platforms.hint",
+              "Später jederzeit in den Einstellungen änderbar.")) + "</p>"));
+
+  }
 
     if (step === 0) {
       main.appendChild(el('<div class="wiz__hero">' +
@@ -6845,6 +7020,41 @@
             "Die Landangaben kommen mit dem nächsten Datenlauf – bis dahin "
             + "steht hier nur „Weltweit“.")) + "</p>"));
 
+      /* ---- Plattformen als Ausklapper (Nutzerwunsch 4.9.2026) -------------
+         Der eigene Schritt 4 ist dafür weggefallen. Zugeklappt, weil die
+         Auswahl aus Sprache und Land bereits vollständig vorbelegt ist — wer
+         sie akzeptiert, soll sie nicht erst wegklicken müssen.
+
+         ⚠️ Der Kopf nennt die ZAHL, und das ist der Punkt: „31 von 41" sagt
+         auf einen Blick, dass eine Auswahl getroffen wurde, ohne dass man
+         aufklappen muss. Ohne Zahl wäre der zugeklappte Bereich eine
+         Blackbox — und genau deshalb war die Auswahl vorher ein eigener
+         Schritt.
+
+         ⚠️⚠️ plattformAuswahl() muss LAUFEN, auch wenn niemand aufklappt: in
+         ihr stecken die Vorauswahl aus Sprache und Land und die drei
+         Sicherheitsnetze gegen eine leere Auswahl. Sie deshalb NICHT erst
+         beim Öffnen aufrufen. */
+      var pWrap = el('<section class="langsec"></section>');
+      var pBody = el('<div class="langsec__b"></div>');
+      plattformAuswahl(pBody, foot);
+      var pAn = livePlatforms().filter(function (p) {
+        return wizardSel.plats.has(p.key); }).length;
+      var pKopf = el('<button class="langsec__h" type="button" ' +
+        'aria-expanded="false"><span class="langsec__t">' +
+        '<span class="flag"><i class="fa-solid fa-list-check"></i></span>' +
+        esc(T("wizard.platforms.title", "Welche Plattformen möchtest du beobachten?")) +
+        '<span class="langsec__n">' + pAn + "</span></span>" +
+        '<i class="fa-solid fa-chevron-down langsec__c"></i></button>');
+      pKopf.addEventListener("click", function () {
+        var jetzt = !pWrap.classList.contains("open");
+        pWrap.classList.toggle("open", jetzt);
+        pKopf.setAttribute("aria-expanded", jetzt ? "true" : "false");
+      });
+      pWrap.appendChild(pKopf);
+      pWrap.appendChild(pBody);
+      main.appendChild(pWrap);
+
     } else if (step === 3) {
       /* ---- Farbdesign + Layout (Nutzerwunsch 12.8.2026) -------------------
          „farbdesign und layout können zusammen abgefragt werden im
@@ -6901,178 +7111,6 @@
       main.appendChild(layoutLbl2.note);
 
     } else if (step === 4) {
-      main.appendChild(el('<h1 class="wiz__title">' +
-        esc(T("wizard.platforms.title", "Welche Plattformen möchtest du sehen?"))
-        + "</h1>"));
-      main.appendChild(el('<p class="wiz__text">' +
-        esc(T("wizard.platforms.text",
-              "Tippe an, was dich interessiert – alle sind vorausgewählt."))
-        + "</p>"));
-      /* ---- Gliederung nach Sprache (Nutzerwunsch 11.8.2026) ---------------
-         Schritt 2 FILTERT die anderen Sprachen nicht mehr weg, sondern legt
-         sie eine Ebene tiefer: die in Schritt 1 gewählten Sprachen stehen
-         oben und offen, alle übrigen darunter als eingeklappte Ausklapper,
-         nach Sprache sortiert. Erreichbar bleibt damit alles — wer eine
-         einzelne fremdsprachige Plattform mitnehmen will, muss nicht erst
-         zurück in Schritt 1.
-
-         Jede Gruppe trägt ihren Flaggenkreis (.flag, dieselbe runde Blende
-         wie in der Hauptliste): ohne ihn liefen die Kacheln optisch in einem
-         Block durch, und die Trennung wäre nur an der Überschrift zu ahnen. */
-      var gruppen = {};
-      livePlatforms().forEach(function (p) {
-        var c = platMainLanguage(p);
-        (gruppen[c] = gruppen[c] || []).push(p);
-      });
-      Object.keys(gruppen).forEach(function (c) {
-        gruppen[c].sort(function (a, b) {
-          return a.name.localeCompare(b.name, "de"); });
-      });
-      var nachRang = function (a, b) {
-        return langRank(a) - langRank(b) || a.localeCompare(b); };
-      var codesAn  = Object.keys(gruppen).filter(function (c) {
-        return wizardSel.langs.has(c); }).sort(nachRang);
-      var codesAus = Object.keys(gruppen).filter(function (c) {
-        return !wizardSel.langs.has(c); }).sort(nachRang);
-
-      /* Die Auswahl an die Sprachwahl angleichen — symmetrisch, und in beide
-         Richtungen mit Vorrang für die Handauswahl (wizardSel.manuell).
-
-         Nach oben: eine NEU gewählte Sprache bringt ihre Plattformen mit.
-         Ohne das stünde ihre Gruppe zwar offen, aber vollständig abgehakt —
-         wer in Schritt 1 Englisch dazunimmt, bekäme das Europaparlament
-         angezeigt und trotzdem nicht geliefert, obwohl der Text darüber
-         „alle sind vorausgewählt" verspricht.
-
-         Nach unten: eine NICHT gewählte Sprache nimmt ihre Plattformen aus der
-         Auswahl. Das muss ohne `gesehen` auskommen, weil die Startbelegung
-         gar nicht aus einem Sprachwechsel stammt: startWizard() legt beim
-         ersten Start ALLE Plattformen an. Genau daran ist eine frühere Fassung
-         gescheitert — Europarl blieb angehakt, obwohl nur Deutsch gewählt war. */
-      wizardSel.langs.forEach(function (c) {
-        if (wizardSel.gesehen.has(c)) return;
-        wizardSel.gesehen.add(c);
-        (gruppen[c] || []).forEach(function (p) {
-          if (!wizardSel.manuell.has(p.key) &&
-              platPasstZuLand(p, wizardSel.lands)) wizardSel.plats.add(p.key);
-        });
-      });
-      Object.keys(gruppen).forEach(function (c) {
-        if (wizardSel.langs.has(c)) return;
-        wizardSel.gesehen["delete"](c);
-        gruppen[c].forEach(function (p) {
-          if (!wizardSel.manuell.has(p.key)) wizardSel.plats["delete"](p.key);
-        });
-      });
-      /* Dasselbe für die Landachse, und zwar QUER zu den Sprachgruppen: ein
-         abgewähltes Land nimmt seine Plattformen aus der Auswahl, egal in
-         welcher Sprachgruppe sie stehen. Ohne diesen Block wäre der
-         Länderschritt bloße Zierde — die Kacheln blieben angehakt.
-
-         ⚠️ Die Gegenrichtung („Land dazugewählt → Plattformen dazu") steckt
-         schon oben: der Klick auf einen Landchip setzt wizardSel.gesehen
-         zurück, womit die Sprachschleife erneut greift und ihr `platPasstZuLand`
-         diesmal wahr wird. Ein zweiter Block hier würde die Handauswahl doppelt
-         überfahren. */
-      livePlatforms().forEach(function (p) {
-        if (wizardSel.manuell.has(p.key)) return;
-        if (!platPasstZuLand(p, wizardSel.lands)) wizardSel.plats["delete"](p.key);
-      });
-      /* ⚠️ Sicherheitsnetz: bleibt NICHTS ausgewählt, die gewählten Sprachen
-         wieder vorauswählen. Sonst stünde ein deaktiviertes „Weiter" da, ohne
-         dass irgendwo steht, warum — dieselbe Sackgasse, die die Sperre an
-         den Kacheln gerade beseitigt hat, nur eine Ecke weiter.
-         ⚠️ Auch hier gilt die Landwahl mit: ohne sie holte das Netz genau die
-         Plattformen zurück, die der Block darüber gerade entfernt hat, und die
-         Länderwahl wäre bei leerer Auswahl still wirkungslos. */
-      if (!wizardSel.plats.size)
-        codesAn.forEach(function (c) {
-          gruppen[c].forEach(function (p) {
-            if (platPasstZuLand(p, wizardSel.lands)) wizardSel.plats.add(p.key);
-          }); });
-      /* Letzte Reihe: passt zur Landwahl NICHTS, wäre die Auswahl trotz beider
-         Netze leer. Dann gilt die Sprachwahl allein — lieber zu viel zeigen als
-         den Nutzer in einem toten „Weiter" sitzen zu lassen. */
-      if (!wizardSel.plats.size)
-        codesAn.forEach(function (c) {
-          gruppen[c].forEach(function (p) { wizardSel.plats.add(p.key); }); });
-
-      /* Eine Kachel bauen. Steckt in einer Funktion, weil sie in beiden
-         Bereichen gebraucht wird (oben offen, unten im Ausklapper) — zwei
-         Kopien liefen beim nächsten Eingriff auseinander. */
-      function wizPlatRow(p) {
-        var on = wizardSel.plats.has(p.key);
-        var color = platColor(p.key);
-        var row = el('<button class="wplat' + (on ? " on" : "") + '" type="button"' +
-          (color ? ' style="--brand:' + esc(color) + '"' : "") + ">" +
-          platLogo(p.key, p.name) +
-          '<span class="wplat__body"><span class="wplat__n">' + esc(p.name) +
-          "</span><span class=\"wplat__m\">" +
-          esc(fill(T("wizard.platCount", "{n} Petitionen"),
-                   { n: nf.format(p.online) })) +
-          /* Das Landzeichen sitzt IN der Meta-Zeile, nicht als eigene Zeile:
-             die Kachel trägt schon Logo, Name und Zahl, eine vierte Zeile
-             hätte die Liste auf mobilen Geräten unnötig gestreckt.
-             null = das Manifest führt die Landachse noch nicht (siehe dort). */
-          (function (z) {
-            return z ? '<span class="wplat__land" title="' + esc(z.titel) +
-                       '">' + z.text + "</span>" : "";
-          })(platLandZeichen(p)) + "</span></span>" +
-          '<span class="wplat__check"><i class="fa-solid fa-check"></i></span>' +
-          "</button>");
-        row.addEventListener("click", function () {
-          /* Dieselbe Sperre wie bei den Sprachen eine Ebene höher: die LETZTE
-             angewählte Plattform bleibt an, sonst deaktiviert sich „Weiter"
-             und die Einrichtung sitzt fest. Hier ist die Sackgasse leichter
-             zu erreichen als bei den Sprachen — es sind alle vorausgewählt,
-             und wer sich seine eine Plattform heraussucht, wählt der Reihe
-             nach ab und trifft dabei zwangsläufig die letzte.
-             ⚠️ Die Sperre zählt über ALLE Gruppen, nicht je Gruppe: die letzte
-             deutsche Plattform darf abgewählt werden, solange oben oder im
-             Ausklapper noch eine andere an ist. Maßgeblich ist, was am Ende
-             gespeichert wird, und das ist wizardSel.plats als Ganzes.
-             ⚠️ Nicht mit den Schleifen oben verwechseln: die schalten
-             Plattformen bei einem SPRACHWECHSEL um und dürfen dabei bis auf
-             null leeren — das Sicherheitsnetz dort fängt es ab. */
-          if (wizardSel.plats.has(p.key)) {
-            if (wizardSel.plats.size <= 1) {
-              row.classList.remove("wplat--locked");
-              void row.offsetWidth;             // Neustart der Animation erzwingen
-              row.classList.add("wplat--locked");
-              return;
-            }
-            wizardSel.plats["delete"](p.key);
-          } else wizardSel.plats.add(p.key);
-          /* Ab jetzt gilt für diese Plattform die Entscheidung des Nutzers,
-             nicht mehr die Sprachwahl. Auch beim ABWÄHLEN vermerken: sonst
-             hakte ein Sprachwechsel sie wieder an. */
-          wizardSel.manuell.add(p.key);
-          row.classList.toggle("on", wizardSel.plats.has(p.key));
-          foot.querySelector(".wiz__next").disabled = !wizardSel.plats.size;
-        });
-        row.addEventListener("animationend", function () {
-          row.classList.remove("wplat--locked");
-        });
-        return row;
-      }
-
-      /* Eine Sprachgruppe. Machart und Kopfzeile kommen aus langSection() —
-         demselben Bauteil, das die Einstellungen benutzen. Hier kommt nur
-         .wiz__plats dazu, das die Kacheln als Spalte mit Abstand setzt. */
-      function wizLangGruppe(code, offen) {
-        var g = langSection(code, gruppen[code].length, offen);
-        g.body.classList.add("wiz__plats");
-        gruppen[code].forEach(function (p) { g.body.appendChild(wizPlatRow(p)); });
-        return g.sec;
-      }
-
-      codesAn.forEach(function (c) { main.appendChild(wizLangGruppe(c, true)); });
-      codesAus.forEach(function (c) { main.appendChild(wizLangGruppe(c, false)); });
-      main.appendChild(el('<p class="wiz__hint">' +
-        esc(T("wizard.platforms.hint",
-              "Später jederzeit in den Einstellungen änderbar.")) + "</p>"));
-
-    } else if (step === 5) {
       /* ---- Benachrichtigungen + Bilder (Nutzerwunsch 12.8.2026) -----------
          Die letzten beiden Fragen vor dem Schlussbild. Beide kosten den
          Nutzer etwas — die eine eine Systemfreigabe, die andere
@@ -7168,8 +7206,8 @@
        diese Zeile stand vorher auf 3 und hätte lautlos den falschen Schritt
        gesperrt: „Weiter" wäre im Farbdesign-Schritt tot gewesen. */
     if ((step === 1 && !wizardSel.langs.size) ||
-        (step === 2 && !wizardSel.lands.size) ||
-        (step === 4 && !wizardSel.plats.size)) next.disabled = true;
+        (step === 2 && (!wizardSel.lands.size || !wizardSel.plats.size)))
+      next.disabled = true;
     next.addEventListener("click", function () {
       if (isLast) { closeWizard(true); return; }
       state.wizardStep++; renderWizard();
