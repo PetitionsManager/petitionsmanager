@@ -172,7 +172,15 @@
      Anlass war ein gemessener Fehler: Change.org verwarf am 30.8.2026 elf von
      60 deutschSPRACHIGEN Petitionen, weil sie aus AT/CL/IT/UA/IN kamen. Sprache
      und Land sind zwei Fragen, und die App hat bis heute nur die erste gestellt. */
-  var LAND_INTL = "intl";   // Pseudo-Code für „ohne Landbezug" im Selektor
+  /* ZWEI Pseudo-Codes, nicht einer — und das ist keine Spitzfindigkeit:
+       LAND_INTL      die Quelle nennt kein Land (Avaaz, WeMove, Ekō, 350.org)
+       LAND_UNERHOBEN die Quelle kennt Länder, WIR haben sie nicht erhoben
+     Beides in einen Topf zu werfen hieße, eine Wissenslücke als Eigenschaft
+     der Plattform auszugeben. Genau diese Verwechslung hat den Länderschritt
+     am 4.9.2026 zweimal unverständlich gemacht — einmal im Chip-Namen, einmal
+     an der Kachel. */
+  var LAND_INTL = "intl";        // Pseudo-Code für „ohne Landbezug"
+  var LAND_UNERHOBEN = "offen";  // Pseudo-Code für „Land noch nicht erhoben"
   /* Reihenfolge im Selektor. Deutschland zuerst (Hauptzielgruppe), dann die
      deutschsprachigen Nachbarn, dann die bei europarl gemessenen Größen. Alles
      Übrige sortiert sich alphabetisch dahinter, „International" ganz ans Ende:
@@ -180,6 +188,7 @@
   var LAND_ORDER = ["DE", "AT", "CH", "ES", "FR", "IT", "NL", "PL", "GB", "US"];
   function landRank(code) {
     if (code === LAND_INTL) return 998;          // immer hinter alle Länder
+    if (code === LAND_UNERHOBEN) return 999;     // und die Wissenslücke zuletzt
     var i = LAND_ORDER.indexOf(code); return i < 0 ? 99 : i;
   }
   /* Die Flagge wird BERECHNET, nicht in einer Tabelle geführt: ein ISO-Kürzel
@@ -206,6 +215,8 @@
   function landInfo(code) {
     if (code === LAND_INTL)
       return { name: T("land.intl", "Ohne Landangabe"), flag: "🌍" };
+    if (code === LAND_UNERHOBEN)
+      return { name: T("land.offen", "Land nicht erhoben"), flag: "🏳️" };
     return { name: T("land." + code, code || "—"), flag: landFlagge(code) };
   }
 
@@ -284,7 +295,17 @@
     if (!wahl || !wahl.size) return true;         // ohne Auswahl keine Einschränkung
     if (platLandneutral(p)) return wahl.has(LAND_INTL);
     var da = platCountries(p);
-    if (!da.length) return true;                  // Land noch unbekannt → zeigen
+    /* ⚠️ 4.9.2026 GEÄNDERT. Hier stand `return true` — ein Eintrag mit
+       unerhobenem Land passierte JEDE Auswahl. Der Gedanke war richtig (eine
+       Plattform darf nicht verschwinden, weil UNS Daten fehlen), die Umsetzung
+       aber still: drei Einträge waren dauerhaft an, ohne im Schritt
+       aufzutauchen, und die Chip-Zahlen ergaben 14 statt 17. Genau das ist dem
+       Nutzer aufgefallen.
+
+       Jetzt hängen sie an einem eigenen Chip, der VORAUSGEWÄHLT ist. Die
+       Vorgabe verhält sich damit wie vorher, aber sie ist sichtbar und
+       abwählbar — aus einem verschwiegenen Automatismus wird eine Entscheidung. */
+    if (!da.length) return wahl.has(LAND_UNERHOBEN);
     return da.some(function (c) { return wahl.has(c); });
   }
 
@@ -6314,7 +6335,13 @@
     var seen = {};
     livePlatforms().forEach(function (p) {
       if (platLandneutral(p)) { seen[LAND_INTL] = true; return; }
-      platCountries(p).forEach(function (c) { seen[c] = true; });
+      var da = platCountries(p);
+      /* Mehrländrig, aber ohne erhobenes Land: eigener Chip statt gar keiner.
+         Vorher steuerten diese Einträge NICHTS bei — die Summe der Chips war
+         dadurch kleiner als die Zahl der Plattformen (14 von 17), ohne dass
+         irgendwo stand, wo die fehlenden geblieben sind. */
+      if (!da.length) { seen[LAND_UNERHOBEN] = true; return; }
+      da.forEach(function (c) { seen[c] = true; });
     });
     return Object.keys(seen).sort(function (a, b) {
       return landRank(a) - landRank(b) || a.localeCompare(b);
@@ -6349,6 +6376,10 @@
     if (region && da.indexOf(region) >= 0) wahl.push(region);
     else if (da.indexOf("DE") >= 0) wahl.push("DE");
     if (da.indexOf(LAND_INTL) >= 0) wahl.push(LAND_INTL);
+    /* Ebenfalls vorausgewählt, aus demselben Grund wie „Ohne Landangabe":
+       sonst verlöre ein frisch eingerichteter Nutzer openPetition mit 2.140
+       Petitionen, nur weil wir deren Land nicht erhoben haben. */
+    if (da.indexOf(LAND_UNERHOBEN) >= 0) wahl.push(LAND_UNERHOBEN);
     // Rückfall: gäbe es weder die Region noch DE noch International, stünde der
     // Assistent mit leerer Auswahl und totem „Weiter" da.
     if (!wahl.length && da.length) wahl.push(da[0]);
@@ -6658,9 +6689,15 @@
         // Zahl unter dem Chip: wie viele EINTRÄGE dieses Land führen. Nicht die
         // Petitionen — die stehen erst nach dem Laden der Pakete fest, und eine
         // Zahl, die sich beim Weiterklicken ändert, wäre schlimmer als keine.
+        /* Die drei Zweige müssen sich zu allen Einträgen ergänzen — sonst
+           stimmt die Summe der Chip-Zahlen nicht mit der Plattformzahl
+           überein, und genau daran ist der Schritt schon einmal aufgefallen. */
         var n = livePlatforms().filter(function (p) {
-          return code === LAND_INTL ? platLandneutral(p)
-               : (!platLandneutral(p) && platCountries(p).indexOf(code) >= 0);
+          if (code === LAND_INTL) return platLandneutral(p);
+          if (platLandneutral(p)) return false;
+          var da = platCountries(p);
+          if (code === LAND_UNERHOBEN) return !da.length;
+          return da.indexOf(code) >= 0;
         }).length;
         var chip = el('<button class="chip' +
           (wizardSel.lands.has(code) ? " on" : "") + '" type="button">' +

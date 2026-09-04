@@ -580,6 +580,9 @@ window.PM_TEXTS = {
          „fremdsprachig" gelesen. Gemeint ist: die Quelle nennt kein Land. */
       intl: "Ohne Landangabe",
       intlTitle: "Diese Plattform nennt kein Land",
+      /* ⚠️ NICHT dasselbe wie `intl`. Dort nennt die Quelle kein Land, hier
+         kennt sie eines und wir haben es nicht erhoben. */
+      offen: "Land nicht erhoben",
       unknownTitle: "Land bei dieser Plattform noch nicht erhoben",
       AT: "Österreich", BE: "Belgien", BG: "Bulgarien", CH: "Schweiz",
       CL: "Chile", CY: "Zypern", CZ: "Tschechien", DE: "Deutschland",
@@ -1189,6 +1192,7 @@ window.PM_TEXTS = {
     land: {
       intl: "No country given",
       intlTitle: "This platform states no country",
+      offen: "Country not collected",
       unknownTitle: "Country not yet collected for this platform",
       AT: "Austria", BE: "Belgium", BG: "Bulgaria", CH: "Switzerland",
       CL: "Chile", CY: "Cyprus", CZ: "Czechia", DE: "Germany",
