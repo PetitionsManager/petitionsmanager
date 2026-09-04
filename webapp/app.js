@@ -109,9 +109,14 @@
     en: { name: "Englisch", flag: "🇬🇧" },
     fr: { name: "Französisch", flag: "🇫🇷" },
     es: { name: "Spanisch", flag: "🇪🇸" },
-    it: { name: "Italienisch", flag: "🇮🇹" }
+    it: { name: "Italienisch", flag: "🇮🇹" },
+    /* 4.9.2026 dazu: WeMove liefert seine Kampagnen in sieben Sprachen, seither
+       hat jede einen eigenen Plattform-Eintrag. Ohne diese beiden Zeilen stünde
+       im Sprachschritt „nl" und „pl" statt eines Namens, mit weißer Fahne. */
+    nl: { name: "Niederländisch", flag: "🇳🇱" },
+    pl: { name: "Polnisch", flag: "🇵🇱" }
   };
-  var LANG_ORDER = ["de", "en", "fr", "es", "it"];
+  var LANG_ORDER = ["de", "en", "fr", "es", "it", "nl", "pl"];
   /* ⚠️ Der ANZEIGENAME wird bei jedem Aufruf frisch aus texts.js geholt
      (lang.<code>), nicht aus LANG selbst: LANG ist ein `var` und wird beim
      Laden GENAU EINMAL ausgewertet — ein Sprachwechsel käme dort nie an.

@@ -571,6 +571,8 @@ window.PM_TEXTS = {
       fr: "Französisch",
       es: "Spanisch",
       it: "Italienisch",
+      nl: "Niederländisch",
+      pl: "Polnisch",
       other: "Andere",
       groupLabel: "{lang}sprachige Plattformen"
     },
@@ -1198,6 +1200,8 @@ window.PM_TEXTS = {
       fr: "French",
       es: "Spanish",
       it: "Italian",
+      nl: "Dutch",
+      pl: "Polish",
       other: "Other",
       groupLabel: "{lang}-language platforms"
     },

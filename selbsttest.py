@@ -757,11 +757,28 @@ pruefe("land_code verträgt Nichtstrings", core.land_code(None), None)
 # englischsprachige Baum, kein Land; foodwatch hat keine britische Organisation.
 # Der deutsche foodwatch-Eintrag bleibt "mehrere" und führt seit heute DE + AT.
 import monitor as _monitor                                       # noqa: E402
-_scopes: dict[str, int] = {}
-for _p in _monitor.PLATFORMS:
-    _scopes[_p.country_scope] = _scopes.get(_p.country_scope, 0) + 1
-pruefe("Landachse: 3 fest / 9 keine / 5 mehrere",
-       _scopes, {"fest": 3, "keine": 9, "mehrere": 5})
+# ⚠️ 4.9.2026 von einer blossen ZÄHLUNG (3/9/5) auf eine Tabelle je Eintrag
+# umgestellt. Die Zählung brach bei jeder neuen Plattform, ohne zu sagen
+# welche — und sie hätte eine falsch eingestufte Plattform durchgelassen,
+# solange nur die Summen stimmten. Jetzt zwingt jeder neue Eintrag zu einer
+# ausdrücklichen Entscheidung, und genau das ist der Zweck.
+_SOLL_SCOPE = {
+    # einländrig von Natur aus
+    "bundestag": "fest", "weact": "fest", "innnit": "fest",
+    # Quelle kennt Länder, wir werten sie aus
+    "openpetition": "mehrere", "foodwatch": "mehrere",
+    "changeorg": "mehrere", "changeorg_en": "mehrere", "europarl": "mehrere",
+    # Quelle kennt die Größe Land nicht
+    "avaaz": "keine", "avaaz_en": "keine",
+    "eko": "keine", "eko_en": "keine",
+    "threefifty": "keine", "threefifty_en": "keine",
+    "foodwatch_en": "keine",          # /en/ ist international, kein Land
+    "wemove": "keine", "wemove_en": "keine", "wemove_es": "keine",
+    "wemove_fr": "keine", "wemove_it": "keine", "wemove_nl": "keine",
+    "wemove_pl": "keine",
+}
+_ist_scope = {p.key: p.country_scope for p in _monitor.PLATFORMS}
+pruefe("Landachse: jeder Eintrag hat die erwartete Art", _ist_scope, _SOLL_SCOPE)
 # ⚠️ Ein „fest" ohne Land wäre ein stiller Fehler: die Plattform fiele aus jeder
 # Länderauswahl heraus, ohne je als landneutral zu gelten.
 pruefe("Landachse: fest ⇔ country gesetzt",

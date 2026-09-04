@@ -727,3 +727,27 @@ window.PM_PLATFORMS_EN = {
                     + "therefore fills up across several runs."
   },
 };
+
+/* ---- WeMove: die fuenf weiteren Sprachen (4.9.2026) ----------------------
+   Sie teilen sich Uebersicht, Checkpoint und Abrufbudget mit dem englischen
+   Zweig — der Offenheitstext ist deshalb fuer alle derselbe, und ihn fuenfmal
+   abzutippen waere fuenfmal die Gelegenheit, ihn auseinanderlaufen zu lassen.
+
+   ⚠️ Ohne diese Eintraege loest uebersetzung() den Schluessel nicht auf und
+   faellt auf das Manifest zurueck — englische Nutzer saehen dort den DEUTSCHEN
+   Satz, und zwar nur sie. Genau dafuer gibt es die Pruefung in checks.yml;
+   die erfasst allerdings nur die elf Grundschluessel, diese hier also nicht. */
+(function (block) {
+  var note = "Moderate: the campaign overview is open and even lists the "
+    + "entire multilingual catalogue, but the detail pages sit behind a "
+    + "checkpoint that kicks in after a few dozen requests. The record "
+    + "therefore fills up across several runs.";
+  var wunsch = "The overview is open and lists the entire multilingual "
+    + "catalogue. The detail pages, however, run into a checkpoint after a "
+    + "few dozen requests; after three weeks the English record held only 8 "
+    + "of some 692 entries. A higher request limit for read access, or the "
+    + "counter directly in the overview HTML, would be enough.";
+  ["es", "fr", "it", "nl", "pl"].forEach(function (lang) {
+    block["wemove_" + lang] = { opennessNote: note, opennessWunsch: wunsch };
+  });
+})(window.PM_PLATFORMS_EN);

@@ -152,8 +152,18 @@ def discover_slugs(fetcher: core.Fetcher) -> dict[str, dict]:
 # Deshalb der Schalter unten: er lässt sich abstellen, ohne den Code
 # anzufassen, und DETAIL_BUDGET in run() begrenzt weiterhin den ganzen Lauf.
 SPRACHSUFFIX = "-DE"
+# ⚠️ ZWEI verschiedene Dinge, die man auseinanderhalten muss:
+#   FREMDSPRACHEN      welche Übersetzungen an einen DEUTSCHEN Satz gehängt
+#                      werden (rec["i18n"]). Bleibt bei „en" — jede weitere
+#                      Sprache hier verdoppelte die Abrufe des deutschen
+#                      Zweigs, und die Sprachen haben seit 4.9.2026 eigene
+#                      Plattform-Einträge, in denen sie ohnehin stehen.
+#   SUFFIX_JE_SPRACHE  das Slug-Suffix je Sprache. Wird von _fremd_slug() für
+#                      die Übersetzungen UND von discover_sprache_slugs() für
+#                      die eigenen Zweige gelesen; deshalb alle sechs.
 FREMDSPRACHEN = ("en",)
-SUFFIX_JE_SPRACHE = {"en": "-EN"}
+SUFFIX_JE_SPRACHE = {"en": "-EN", "es": "-ES", "fr": "-FR",
+                     "it": "-IT", "nl": "-NL", "pl": "-PL"}
 
 # ⚠️⚠️ _kampagne() muss JEDES Sprachkürzel abstreifen, nicht nur "-DE".
 # Am 12.8.2026 nachgerechnet (kein Abruf nötig, die Funktion selbst aufgerufen):
@@ -619,56 +629,104 @@ PLATFORM = Platform(
 # ⚠️ 666 Kampagnen bei DETAIL_BUDGET = 120 heißt: der Bestand füllt sich über
 # mehrere Läufe. Das ist dieselbe Lage wie im deutschen Zweig und kein Fehler —
 # nur darf niemand nach dem ersten Lauf „da fehlen ja welche" melden.
-EN_DATA_FILE = Path("wemove_en_petitions.json")
-EN_HTML_FILE = Path("wemove_en_petitions.html")
-EN_SPRACHSUFFIX = "-EN"
-FETCH_HEADERS_EN = dict(FETCH_HEADERS, **{"Accept-Language": "en-US,en;q=0.9"})
+# ----------------------------------------------------------------------------
+# Fremdsprachige Zweige (4.9.2026 von „nur englisch" verallgemeinert)
+# ----------------------------------------------------------------------------
+# Bis dahin gab es EINEN fremdsprachigen Zweig, und alles Englische steckte in
+# eigenen Konstanten und einer eigenen run_en(). Fünf weitere Sprachen als
+# Kopien davon wären fünf Gelegenheiten gewesen, sie auseinanderlaufen zu
+# lassen. Jetzt hängt alles am Sprachkürzel.
+#
+# Die sieben Sprachen sind am 12.8.2026 an wemove.eu gemessen (Umschalter:
+# Deutsch, English, Español, Français, Italiano, Nederlands, Polski;
+# Positivkontrolle /pl → lang="pl", /it → lang="it", Negativkontrolle
+# /km → HTTP 404) — siehe ALLE_SPRACHSUFFIXE oben.
+#
+# ⚠️⚠️ KOSTEN, unbedingt lesen: die Detailseiten liegen hinter einem
+# Checkpoint, DETAIL_BUDGET deckelt bei 120 erfolgreichen Abrufen je Lauf, und
+# der englische Zweig ist zusätzlich aus der CI gesperrt (HTTP 202). Nach drei
+# Wochen standen dort 8 von 692 Sätzen. Jede weitere Sprache teilt dasselbe
+# Budget. Der Nutzer hat das am 4.9.2026 ausdrücklich in Kauf genommen: der
+# Code soll bereitstehen, wenn der Engpass fällt.
+FREMDZWEIGE = ("en", "es", "fr", "it", "nl", "pl")
 
 
-def discover_en_slugs(fetcher: core.Fetcher) -> dict[str, dict]:
-    """{page_name: {}} aus englischer Startseite + Kampagnen-Übersicht (nur *-EN)."""
+def _sprach_dateien(lang: str) -> tuple[Path, Path]:
+    return (Path(f"wemove_{lang}_petitions.json"),
+            Path(f"wemove_{lang}_petitions.html"))
+
+
+def _sprach_headers(lang: str) -> dict:
+    return dict(FETCH_HEADERS, **{"Accept-Language": f"{lang};q=0.9"})
+
+
+def discover_sprache_slugs(fetcher: core.Fetcher, lang: str) -> dict[str, dict]:
+    """{page_name: {}} aus Startseite + Kampagnen-Übersicht EINER Sprache."""
+    suffix = SUFFIX_JE_SPRACHE[lang]
     found: dict[str, dict] = {}
-    sources = [("Startseite (en)", f"{WWW_URL}/en"),
-               ("Kampagnen (en)", f"{WWW_URL}/en/campaigns")]
+    sources = [(f"Startseite ({lang})", f"{WWW_URL}/{lang}"),
+               (f"Kampagnen ({lang})", f"{WWW_URL}/{lang}/campaigns")]
     prog(phase="discover", current=0, total=len(sources),
-         message="Sammle englische Kampagnen …")
+         message=f"Sammle Kampagnen ({lang}) …")
     for i, (label, url) in enumerate(sources, 1):
         resp = fetcher.get(url)
         added = 0
         if resp is not None and resp.ok:
             for m in SIGN_HREF_RE.finditer(resp.text):
                 page = m.group(1).rstrip("/")
-                if page.upper().endswith(EN_SPRACHSUFFIX) and page not in found:
+                if page.upper().endswith(suffix) and page not in found:
                     found[page] = {}
                     added += 1
         log(f"{label}: +{added} (gesamt {len(found)}).")
         prog(current=i, total=len(sources),
              message=f"{label} geprüft · {len(found)} Kampagnen bisher")
-    # Gemessen am 12.8.2026: 666. Die Schwelle liegt eine Größenordnung
-    # darunter und meldet erst, wenn beide Listen praktisch nichts hergeben.
-    core.entdeckung("Startseite + Kampagnen-Übersicht (englisch)", len(found),
+    # Englisch am 12.8.2026 gemessen: 666. Die Schwelle liegt eine
+    # Größenordnung darunter und meldet erst, wenn beide Listen praktisch
+    # nichts hergeben.
+    # ⚠️ Für die fünf neuen Sprachen ist der Sockel NICHT gemessen — sie sind
+    # am 4.9.2026 dazugekommen, ohne dass je ein Lauf stattfand. Dieselbe
+    # Schwelle ist deshalb eine Annahme; steht sie zu hoch, meldet der erste
+    # Lauf einen Fehlalarm statt eines Befunds. Nach dem ersten echten Lauf
+    # gehört sie je Sprache nachgezogen.
+    core.entdeckung(f"Startseite + Kampagnen-Übersicht ({lang})", len(found),
                     erwartet_min=25,
-                    name_en="English home page + campaign overview")
+                    name_en=f"home page + campaign overview ({lang})")
     return found
 
 
-def run_en(args) -> None:
-    store = core.load_store(EN_DATA_FILE)
-    fetcher = core.Fetcher(delay=args.delay, headers=FETCH_HEADERS_EN)
+def discover_en_slugs(fetcher: core.Fetcher) -> dict[str, dict]:
+    """Rückwärtskompatibler Name für den englischen Zweig."""
+    return discover_sprache_slugs(fetcher, "en")
+
+
+EN_DATA_FILE, EN_HTML_FILE = _sprach_dateien("en")
+EN_SPRACHSUFFIX = "-EN"
+FETCH_HEADERS_EN = _sprach_headers("en")
+
+
+def run_sprache(args, lang: str = "en") -> None:
+    """Ein fremdsprachiger Zweig. `lang` bestimmt Bestandsdatei, Kopfzeilen,
+    Entdeckung und die Hauptsprache der Datensätze.
+
+    ⚠️ War bis 4.9.2026 run_en() mit fest verdrahtetem Englisch. Fünf Kopien
+    davon wären fünf Gelegenheiten gewesen, sie auseinanderlaufen zu lassen."""
+    data_file, _ = _sprach_dateien(lang)
+    store = core.load_store(data_file)
+    fetcher = core.Fetcher(delay=args.delay, headers=_sprach_headers(lang))
     ts = now_iso()
 
-    unbrauchbare = dict(core.load_meta(EN_DATA_FILE).get("unbrauchbare") or {})
+    unbrauchbare = dict(core.load_meta(data_file).get("unbrauchbare") or {})
     unbrauchbare = {p: z for p, z in unbrauchbare.items()
                     if not _merk_abgelaufen(z)}
 
     def save(quiet=True, **extra):
-        core.save_store(store, EN_DATA_FILE,
+        core.save_store(store, data_file,
                         extra_meta={"unbrauchbare": unbrauchbare, **extra},
                         quiet=quiet)
 
     def hole(page: str) -> str:
         """Ein Detailabruf samt Buchführung; gibt den Status zurück."""
-        status, rec = scrape_petition(fetcher, page, sprache="en")
+        status, rec = scrape_petition(fetcher, page, sprache=lang)
         if status == "unbrauchbar":
             unbrauchbare[page] = ts
             store.pop(page, None)
@@ -705,13 +763,13 @@ def run_en(args) -> None:
             erfolge += 1
             save()
 
-    entdeckt = discover_en_slugs(fetcher)
+    entdeckt = discover_sprache_slugs(fetcher, lang)
     core.lauf_meta_setzen(available=len(entdeckt))   # überlebt Abbruch
     neu_slugs = [p for p in entdeckt
                  if p not in store and p not in unbrauchbare]
     if args.limit:
         neu_slugs = neu_slugs[:args.limit]
-    log(f"{len(neu_slugs)} neue englische Kampagne(n) zum Scrapen "
+    log(f"{len(neu_slugs)} neue Kampagne(n) ({lang}) zum Scrapen "
         f"(Gesamt im Store: {len(store)}).")
     prog(phase="scrape", current=0, total=len(neu_slugs), message="Beginne …")
 
@@ -734,41 +792,76 @@ def run_en(args) -> None:
 
     neu = [s for s, r in store.items() if r.get("first_seen") == ts]
     if neu:
-        log(f"NEU: {len(neu)} neue englische Kampagne(n) in diesem Lauf.")
+        log(f"NEU: {len(neu)} neue Kampagne(n) ({lang}) in diesem Lauf.")
     prog(message="Speichere & baue HTML …")
     save(quiet=False, new_petitions_last_run=neu, available=len(entdeckt))
-    core.write_list_html(PLATFORM_EN)
-    log(f"Fertig (WeMove English, {erfolge} Detailabruf(e) erfolgreich).")
+    core.write_list_html(PLATFORM_JE_SPRACHE[lang])
+    log(f"Fertig (WeMove {lang}, {erfolge} Detailabruf(e) erfolgreich).")
+
+
+def run_en(args) -> None:
+    """Rückwärtskompatibler Name für den englischen Zweig."""
+    run_sprache(args, "en")
+
+
+def check_sprache(fetcher, lang: str = "en"):
+    return core.check_source(fetcher, f"{WWW_URL}/{lang}/campaigns",
+                             SIGN_HREF_RE, 3, "Kampagnen")
 
 
 def check_en(fetcher):
-    return core.check_source(fetcher, f"{WWW_URL}/en/campaigns", SIGN_HREF_RE,
-                             3, "Kampagnen")
+    return check_sprache(fetcher, "en")
 
 
-PLATFORM_EN = Platform(
-    key="wemove_en",
-    openness=3,
-    openness_wunsch="Die englische Übersicht ist offen und listet den ganzen "
-                    "mehrsprachigen Katalog. Die Detailseiten laufen aber nach einigen "
-                    "Dutzend Abrufen in einen Checkpoint; im Bestand stehen deshalb "
-                    "erst 8 von rund 698 Sätzen. Ein höheres Abruflimit für "
-                    "Lesezugriffe oder der Zähler direkt im Übersichts-HTML würde "
-                    "reichen.",
-    openness_note="Mittel: die englische Kampagnen-Übersicht ist offen und "
-                  "listet sogar den ganzen mehrsprachigen Katalog, aber die "
-                  "Detailseiten liegen hinter einem Checkpoint, der nach "
-                  "einigen Dutzend Abrufen greift. Der Bestand füllt sich "
-                  "deshalb über mehrere Läufe.",
-    name="WeMove Europe (English)",
-    eyebrow="WeMove Europe · Kampagnen (englisch)",
-    source_url="https://wemove.eu/en/campaigns",
-    data_file=EN_DATA_FILE,
-    html_file=EN_HTML_FILE,
-    run=run_en,
-    check=check_en,
-    language="en",
-)
+# ----------------------------------------------------------------------------
+# Ein Plattform-Eintrag je Sprache
+# ----------------------------------------------------------------------------
+# ⚠️ Die Namen stehen hier in der JEWEILIGEN Sprache („WeMove Europe
+# (Español)"), nicht übersetzt — so heißt der Umschalter auf wemove.eu, und
+# ein Nutzer, der Spanisch sucht, erkennt „Español" auch dann, wenn die App
+# gerade deutsch läuft.
+SPRACHNAME = {"en": "English", "es": "Español", "fr": "Français",
+              "it": "Italiano", "nl": "Nederlands", "pl": "Polski"}
+# ⚠️ Der Offenheitstext gilt für ALLE fremdsprachigen Zweige gleichermaßen:
+# dieselbe Übersicht, derselbe Checkpoint, dasselbe Budget.
+_FREMD_NOTE = ("Mittel: die Kampagnen-Übersicht ist offen und listet sogar den "
+               "ganzen mehrsprachigen Katalog, aber die Detailseiten liegen "
+               "hinter einem Checkpoint, der nach einigen Dutzend Abrufen "
+               "greift. Der Bestand füllt sich deshalb über mehrere Läufe.")
+_FREMD_WUNSCH = ("Die Übersicht ist offen und listet den ganzen mehrsprachigen "
+                 "Katalog. Die Detailseiten laufen aber nach einigen Dutzend "
+                 "Abrufen in einen Checkpoint; im englischen Bestand standen "
+                 "nach drei Wochen erst 8 von rund 692 Sätzen. Ein höheres "
+                 "Abruflimit für Lesezugriffe oder der Zähler direkt im "
+                 "Übersichts-HTML würde reichen.")
+
+
+def _platform_fuer(lang: str) -> Platform:
+    data_file, html_file = _sprach_dateien(lang)
+    return Platform(
+        key=f"wemove_{lang}",
+        openness=3,
+        openness_wunsch=_FREMD_WUNSCH,
+        openness_note=_FREMD_NOTE,
+        name=f"WeMove Europe ({SPRACHNAME[lang]})",
+        eyebrow=f"WeMove Europe · Kampagnen ({SPRACHNAME[lang]})",
+        source_url=f"https://wemove.eu/{lang}/campaigns",
+        data_file=data_file,
+        html_file=html_file,
+        # ⚠️ lang=lang als Vorgabewert BINDEN, nicht die Schleifenvariable
+        # einfangen: sonst führten am Ende alle sechs Einträge dieselbe letzte
+        # Sprache aus — ein klassischer Late-Binding-Fehler, der erst im Lauf
+        # aufgefallen wäre.
+        run=lambda args, _l=lang: run_sprache(args, _l),
+        check=lambda fetcher, _l=lang: check_sprache(fetcher, _l),
+        language=lang,
+        # WeMove kennt an der Quelle kein Land, nur Sprache (Erhebung 4.9.2026).
+        country_scope="keine",
+    )
+
+
+PLATFORM_JE_SPRACHE = {lang: _platform_fuer(lang) for lang in FREMDZWEIGE}
+PLATFORM_EN = PLATFORM_JE_SPRACHE["en"]
 
 
 if __name__ == "__main__":

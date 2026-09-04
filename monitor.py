@@ -74,6 +74,17 @@ PLATFORMS: list[Platform] = [
     threefifty_scraper.PLATFORM_EN,
     avaaz_scraper.PLATFORM_EN,
     changeorg_scraper.PLATFORM_EN,
+    # ---- WeMove: fünf weitere Sprachen (4.9.2026) ---------------------------
+    # ⚠️⚠️ GANZ am Ende, und das ist wichtig: sie teilen sich mit dem englischen
+    # Zweig dasselbe DETAIL_BUDGET und denselben Checkpoint. Der englische stand
+    # nach drei Wochen bei 8 von 692 Sätzen; diese fünf werden noch länger
+    # brauchen. Sie dürfen unter keinen Umständen vor den deutschen Beständen
+    # laufen. (Der Rundlauf dreht die Liste zwar, erhält aber die RELATIVE
+    # Reihenfolge — siehe oben.)
+    # Nutzerentscheidung 4.9.2026: ausdrücklich in Kauf genommen, damit der Code
+    # bereitsteht, falls der Engpass fällt.
+    *[wemove_scraper.PLATFORM_JE_SPRACHE[lang]
+      for lang in ("es", "fr", "it", "nl", "pl")],
 ]
 
 
