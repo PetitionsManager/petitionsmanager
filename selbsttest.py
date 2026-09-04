@@ -773,6 +773,8 @@ _SOLL_SCOPE = {
     "eko": "keine", "eko_en": "keine",
     "threefifty": "keine", "threefifty_en": "keine",
     "foodwatch_en": "keine",          # /en/ ist international, kein Land
+    # ⚠️ … die Landesorganisationen dagegen SIND je ein Land:
+    "foodwatch_fr": "fest", "foodwatch_nl": "fest",
     "wemove": "keine", "wemove_en": "keine", "wemove_es": "keine",
     "wemove_fr": "keine", "wemove_it": "keine", "wemove_nl": "keine",
     "wemove_pl": "keine",

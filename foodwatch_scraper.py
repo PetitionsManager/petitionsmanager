@@ -595,6 +595,153 @@ def check_en(fetcher):
                              "Aktionen")
 
 
+# ----------------------------------------------------------------------------
+# Frankreich und Niederlande (4.9.2026)
+# ----------------------------------------------------------------------------
+# ⚠️⚠️ JEDER Sprachbaum von foodwatch ist ANDERS gebaut. Am 4.9.2026 gemessen:
+#
+#   DE  /de/mitmachen/<slug>                              3 Ebenen
+#   EN  /en/<slug>                                        2 Ebenen, flach
+#   AT  /at/mitmachen/petitionen/<slug>                   4 Ebenen
+#   NL  /nl/doe-mee/doe-mee-aan-online-acties/<slug>      5 Ebenen
+#   FR  /fr/sinformer/nos-campagnes/<thema>/…/<slug>      VARIABEL (5–6)
+#
+# „Mitmachen" heißt auf Französisch `agir`, auf Niederländisch `doe-mee`, und
+# die Petitionen liegen bei beiden noch eine Ebene tiefer. Ein Tausch des
+# Sprachsegments ergibt überall 404 — hier ist nichts ableitbar, jeder Zweig
+# musste einzeln abgerufen werden.
+#
+# ⚠️ Frankreich hat KEINE flache Aktionsliste: die Petitionen hängen im
+# Themenbaum unter /fr/sinformer/nos-campagnes/, gemischt mit Kategorieseiten
+# (…/additifs, …/contaminants). Sie lassen sich am Pfad NICHT auseinanderhalten
+# — die Entscheidung fällt am Unterschriftenzähler, genau wie im deutschen
+# Zweig ("skip", wenn kein Formular da ist). Deshalb werden dort auch
+# Kategorieseiten abgerufen; bei 37 Kandidaten ist das vertretbar.
+ZWEIGE = {
+    "fr": {
+        "name": "foodwatch (Français)",
+        "eyebrow": "foodwatch · Pétitions (français)",
+        "liste": (f"{BASE_URL}/fr/agir/signez-nos-petitions",),
+        # Variable Tiefe → der Pfad darf Schrägstriche enthalten.
+        "href": re.compile(r'href="(/fr/sinformer/nos-campagnes/[a-z0-9\-/]+)"'),
+        "detail": re.compile(
+            r"^https://(www\.)?foodwatch\.org/fr/sinformer/nos-campagnes/[^?#]+",
+            re.I),
+        "source_url": f"{BASE_URL}/fr/agir/signez-nos-petitions",
+        "accept": "fr-FR,fr;q=0.9",
+        # Am 4.9.2026 gemessen: 37 Adressen mit ≥ 4 Ebenen im Themenbaum,
+        # davon ist ein Teil Kategorieseite. Schwelle bewusst tief.
+        "min": 5,
+    },
+    "nl": {
+        "name": "foodwatch (Nederlands)",
+        "eyebrow": "foodwatch · Acties (Nederlands)",
+        "liste": (f"{BASE_URL}/nl/doe-mee/doe-mee-aan-online-acties",),
+        "href": re.compile(
+            r'href="(/nl/doe-mee/doe-mee-aan-online-acties/[a-z0-9\-]+)"'),
+        "detail": re.compile(
+            r"^https://(www\.)?foodwatch\.org/nl/doe-mee/"
+            r"doe-mee-aan-online-acties/[^/?#]+", re.I),
+        "source_url": f"{BASE_URL}/nl/doe-mee/doe-mee-aan-online-acties",
+        "accept": "nl-NL,nl;q=0.9",
+        # Am 4.9.2026 gemessen: 15 Aktionen.
+        "min": 3,
+    },
+}
+
+
+def _zweig_dateien(lang: str) -> tuple[Path, Path]:
+    return (Path(f"foodwatch_{lang}_petitions.json"),
+            Path(f"foodwatch_{lang}_petitions.html"))
+
+
+def run_zweig(args, lang: str) -> None:
+    """Ein eigenständiger Sprachbaum (fr/nl). Der Aufbau folgt dem deutschen
+    Lauf; die Unterschiede stecken alle in ZWEIGE[lang]."""
+    z = ZWEIGE[lang]
+    data_file, _ = _zweig_dateien(lang)
+    store = core.load_store(data_file)
+    fetcher = core.Fetcher(delay=args.delay,
+                           headers=dict(FETCH_HEADERS,
+                                        **{"Accept-Language": z["accept"]}))
+    ts = now_iso()
+
+    def save(quiet=True, **extra):
+        core.save_store(store, data_file, extra_meta=extra, quiet=quiet)
+
+    # ---- Entdeckung
+    pfade: set[str] = set()
+    for url in z["liste"]:
+        resp = fetcher.get(url)
+        if resp is not None and resp.ok:
+            pfade |= {m.group(1) for m in z["href"].finditer(resp.text)}
+    core.entdeckung(f"foodwatch {lang}", len(pfade), erwartet_min=z["min"],
+                    name_en=f"foodwatch {lang} action list")
+    core.lauf_meta_setzen(available=len(pfade))
+    log(f"{lang}: {len(pfade)} Kandidat(en) gefunden "
+        f"(Gesamt im Store: {len(store)}).")
+
+    # ---- Abrufen. Der Schlüssel ist das LETZTE Wegstück; der volle Pfad steht
+    # im Datensatz. ⚠️ Bei Frankreich ist der Pfad variabel tief, der Schlüssel
+    # aber eindeutig — am 4.9.2026 an den 37 Kandidaten geprüft.
+    gesehen = 0
+    for i, pfad in enumerate(sorted(pfade), 1):
+        slug = pfad.rstrip("/").rsplit("/", 1)[-1]
+        prog(current=i, total=len(pfade), message=slug)
+        url = f"{BASE_URL}{pfad}"
+        resp = fetcher.get(url)
+        if resp is None or not resp.ok:
+            continue
+        rec = parse_detail(resp.text, url, z["detail"])
+        # Ohne Zähler ist es eine Inhalts- oder Kategorieseite, keine Aktion.
+        if rec.get("signatures") is None:
+            continue
+        i18n.setze_hauptsprache(rec, lang)
+        core.upsert(store, slug, rec, {}, "online", ts, url)
+        gesehen += 1
+        save()
+
+    neu = [s for s, r in store.items() if r.get("first_seen") == ts]
+    if neu:
+        log(f"NEU: {len(neu)} neue Aktion(en) ({lang}) in diesem Lauf.")
+    prog(message="Speichere & baue HTML …")
+    save(quiet=False, new_petitions_last_run=neu, available=len(pfade))
+    core.write_list_html(PLATFORM_JE_ZWEIG[lang])
+    log(f"Fertig (foodwatch {lang}, {gesehen} Aktion(en) bestätigt).")
+
+
+def _platform_zweig(lang: str) -> Platform:
+    z = ZWEIGE[lang]
+    data_file, html_file = _zweig_dateien(lang)
+    return Platform(
+        key=f"foodwatch_{lang}",
+        openness=5,
+        openness_wunsch="Komplette Aktionsliste, Unterschriftenzahl und "
+                        "Volltext direkt im Markup, ohne Anmeldung und ohne "
+                        "JavaScript.",
+        openness_note="Sehr offen: vollständige Aktionsliste, Zähler und "
+                      "Volltext server-gerendert.",
+        name=z["name"],
+        eyebrow=z["eyebrow"],
+        source_url=z["source_url"],
+        data_file=data_file,
+        html_file=html_file,
+        # ⚠️ lang binden, nicht die Schleifenvariable einfangen.
+        run=lambda args, _l=lang: run_zweig(args, _l),
+        check=lambda fetcher, _l=lang: core.check_source(
+            fetcher, ZWEIGE[_l]["liste"][0], ZWEIGE[_l]["href"],
+            ZWEIGE[_l]["min"], "Aktionen"),
+        language=lang,
+        # Ein Sprachbaum EINES Landes: /fr/ ist foodwatch France, /nl/ ist
+        # foodwatch Nederland. Anders als /en/, das international ist.
+        country=("FR" if lang == "fr" else "NL"),
+        country_scope="fest",
+    )
+
+
+PLATFORM_JE_ZWEIG = {lang: _platform_zweig(lang) for lang in ZWEIGE}
+
+
 PLATFORM_EN = Platform(
     key="foodwatch_en",
     # ⚠️ 4.9.2026 auf "keine" korrigiert. `/en/` ist KEIN Länderbaum, sondern

@@ -85,6 +85,12 @@ PLATFORMS: list[Platform] = [
     # bereitsteht, falls der Engpass fällt.
     *[wemove_scraper.PLATFORM_JE_SPRACHE[lang]
       for lang in ("es", "fr", "it", "nl", "pl")],
+    # ---- foodwatch: eigene Landesorganisationen (4.9.2026) ------------------
+    # Anders als bei WeMove ist hier jeder Zweig ein LAND mit eigener Sprache:
+    # /fr/ ist foodwatch France, /nl/ foodwatch Nederland. Klein und offen
+    # (Zähler und Volltext server-gerendert), also kein Budgetproblem.
+    foodwatch_scraper.PLATFORM_JE_ZWEIG["fr"],
+    foodwatch_scraper.PLATFORM_JE_ZWEIG["nl"],
 ]
 
 

@@ -750,4 +750,15 @@ window.PM_PLATFORMS_EN = {
   ["es", "fr", "it", "nl", "pl"].forEach(function (lang) {
     block["wemove_" + lang] = { opennessNote: note, opennessWunsch: wunsch };
   });
+  /* foodwatch France und Nederland (4.9.2026). Eigene Landesorganisationen,
+     genauso offen wie der deutsche Zweig — Zaehler und Volltext stehen
+     server-gerendert im Markup. */
+  ["fr", "nl"].forEach(function (lang) {
+    block["foodwatch_" + lang] = {
+      opennessNote: "Very open: complete action list, counter and full text "
+        + "rendered server-side.",
+      opennessWunsch: "Complete action list, signature count and full text "
+        + "straight from the markup, without a login and without JavaScript."
+    };
+  });
 })(window.PM_PLATFORMS_EN);
