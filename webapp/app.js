@@ -114,9 +114,30 @@
        hat jede einen eigenen Plattform-Eintrag. Ohne diese beiden Zeilen stünde
        im Sprachschritt „nl" und „pl" statt eines Namens, mit weißer Fahne. */
     nl: { name: "Niederländisch", flag: "🇳🇱" },
-    pl: { name: "Polnisch", flag: "🇵🇱" }
+    pl: { name: "Polnisch", flag: "🇵🇱" },
+    /* Avaaz führt seine Bürgerpetitionen in 21 Sprachen (4.9.2026 aus dem
+       Petitionsbereich selbst ausgelesen). Diese zwölf sind dazugekommen.
+       ⚠️ Die Flagge ist ein BEHELF: eine Sprache ist kein Land. Wo die
+       Zuordnung eindeutig genug ist, steht die übliche Flagge; bei Suaheli,
+       das in mehreren Staaten Amtssprache ist, wäre jede Wahl eine Behauptung
+       — dort steht die Weltkugel. */
+    pt: { name: "Portugiesisch", flag: "🇵🇹" },
+    ru: { name: "Russisch", flag: "🇷🇺" },
+    uk: { name: "Ukrainisch", flag: "🇺🇦" },
+    tr: { name: "Türkisch", flag: "🇹🇷" },
+    ro: { name: "Rumänisch", flag: "🇷🇴" },
+    el: { name: "Griechisch", flag: "🇬🇷" },
+    ja: { name: "Japanisch", flag: "🇯🇵" },
+    ko: { name: "Koreanisch", flag: "🇰🇷" },
+    zh: { name: "Chinesisch", flag: "🇨🇳" },
+    id: { name: "Indonesisch", flag: "🇮🇩" },
+    ms: { name: "Malaiisch", flag: "🇲🇾" },
+    sw: { name: "Suaheli", flag: "🌍" }
   };
-  var LANG_ORDER = ["de", "en", "fr", "es", "it", "nl", "pl"];
+  /* Reihenfolge im Sprachschritt: Deutsch und Englisch zuerst (die Oberfläche
+     kennt nur diese beiden), dann die europäischen Nachbarn, dann der Rest. */
+  var LANG_ORDER = ["de", "en", "fr", "es", "it", "nl", "pl", "pt", "ro",
+                    "el", "uk", "ru", "tr", "id", "ms", "sw", "ja", "ko", "zh"];
   /* ⚠️ Der ANZEIGENAME wird bei jedem Aufruf frisch aus texts.js geholt
      (lang.<code>), nicht aus LANG selbst: LANG ist ein `var` und wird beim
      Laden GENAU EINMAL ausgewertet — ein Sprachwechsel käme dort nie an.

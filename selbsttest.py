@@ -775,10 +775,23 @@ _SOLL_SCOPE = {
     "foodwatch_en": "keine",          # /en/ ist international, kein Land
     # ⚠️ … die Landesorganisationen dagegen SIND je ein Land:
     "foodwatch_fr": "fest", "foodwatch_nl": "fest",
-    "wemove": "keine", "wemove_en": "keine", "wemove_es": "keine",
-    "wemove_fr": "keine", "wemove_it": "keine", "wemove_nl": "keine",
-    "wemove_pl": "keine",
+    "wemove": "keine",
 }
+# ⚠️ Die drei Sprachfamilien kommen aus Fabriken — dort fällt die Entscheidung
+# EINMAL je Familie, nicht je Eintrag. Sie hier einzeln abzutippen hieße, eine
+# Fabrik von Hand nachzurechnen; stattdessen wird die Regel geprüft.
+# Was NICHT aus einer Fabrik kommt, steht oben und muss dort einzeln stehen.
+import wemove_scraper as _wm                                     # noqa: E402
+import avaaz_scraper as _av                                      # noqa: E402
+for _l in _wm.FREMDZWEIGE:
+    _SOLL_SCOPE[f"wemove_{_l}"] = "keine"      # WeMove kennt kein Land
+for _l in _av.AVAAZ_SPRACHEN:
+    _SOLL_SCOPE[f"avaaz_{_l}"] = "keine"       # Avaaz ebenso
+# ⚠️⚠️ Und die Gegenprobe zur RTL-Entscheidung: Arabisch und Hebräisch dürfen
+# NICHT dabei sein, solange die App keine RTL-Unterstützung hat. Ohne diese
+# Zeile käme eine spätere Ergänzung von AVAAZ_SPRACHEN lautlos durch.
+pruefe("Avaaz: kein RTL, solange die App keins kann",
+       sorted(set(_av.AVAAZ_SPRACHEN) & {"ar", "he"}), [])
 _ist_scope = {p.key: p.country_scope for p in _monitor.PLATFORMS}
 pruefe("Landachse: jeder Eintrag hat die erwartete Art", _ist_scope, _SOLL_SCOPE)
 # ⚠️ Ein „fest" ohne Land wäre ein stiller Fehler: die Plattform fiele aus jeder

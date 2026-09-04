@@ -753,6 +753,20 @@ window.PM_PLATFORMS_EN = {
   /* foodwatch France und Nederland (4.9.2026). Eigene Landesorganisationen,
      genauso offen wie der deutsche Zweig — Zaehler und Volltext stehen
      server-gerendert im Markup. */
+  /* Avaaz in 17 weiteren Sprachen (4.9.2026). Alle teilen Quelle und
+     Offenheit mit dem englischen Zweig: dieselbe kuratierte Uebersicht,
+     dieselbe fehlende Gesamtliste. */
+  ["el", "es", "fr", "id", "it", "ja", "ko", "ms", "nl", "pl", "pt", "ro",
+   "ru", "sw", "tr", "uk", "zh"].forEach(function (lang) {
+    block["avaaz_" + lang] = {
+      opennessNote: "Restricted: there is no public complete list, only some "
+        + "5 to 10 curated petitions and campaigns are visible. The record "
+        + "grows over time.",
+      opennessWunsch: "A public complete list is missing; only some 5 to 10 "
+        + "curated campaigns are visible, older ones only via the Internet "
+        + "Archive. A paginated index or a sitemap would be enough."
+    };
+  });
   ["fr", "nl"].forEach(function (lang) {
     block["foodwatch_" + lang] = {
       opennessNote: "Very open: complete action list, counter and full text "

@@ -91,6 +91,13 @@ PLATFORMS: list[Platform] = [
     # (Zähler und Volltext server-gerendert), also kein Budgetproblem.
     foodwatch_scraper.PLATFORM_JE_ZWEIG["fr"],
     foodwatch_scraper.PLATFORM_JE_ZWEIG["nl"],
+    # ---- Avaaz in 17 weiteren Sprachen (4.9.2026) ---------------------------
+    # ⚠️ Arabisch und Hebräisch fehlen bewusst: sie laufen von rechts nach
+    # links, und die App hat keine RTL-Unterstützung. Siehe AVAAZ_SPRACHEN.
+    # Klein und ohne Abrufbremse (der deutsche Zweig steht bei 100 %), aber
+    # 17 Einträge — deshalb hinter allem anderen.
+    *[avaaz_scraper.PLATFORM_JE_SPRACHE[s]
+      for s in avaaz_scraper.AVAAZ_SPRACHEN],
 ]
 
 
