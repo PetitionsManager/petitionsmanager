@@ -1456,22 +1456,23 @@ body.wizard-open{overflow:hidden}
 .wiz__main .srow__lbl{margin-top:2rem;font-size:.875rem}
 .wiz__main > .srow__lbl:first-child{margin-top:0}
 .wiz__main .srow{margin-top:.5rem}
-.wiz__chips{display:flex;flex-wrap:wrap;gap:.625rem}
-/* Einspaltig untereinander — fuer den Laenderschritt (Nutzerwunsch 4.9.2026).
-   Beim Sprachschritt bleibt es beim Umbruch: dort stehen zwei Chips, die
-   nebeneinander passen.
-   ⚠️ Muss HINTER .wiz__chips stehen (gleiche Spezifitaet, es entscheidet die
-   Position) und EINklassig bleiben — als .wiz__chips.wiz__chips--spalte
-   gewaenne sie auch dort, wo sie verlieren soll.
-   align-items:stretch (Nutzerwunsch 4.9.2026 "Buttons auf gleiche breite"):
-   erst standen sie auf flex-start und waren so breit wie ihr Text — bei zwoelf
-   Chips untereinander ergab das eine ausgefranste rechte Kante. */
-.wiz__chips--spalte{flex-direction:column;flex-wrap:nowrap;align-items:stretch}
+/* Einspaltig, volle Breite — fuer BEIDE Auswahlschritte des Assistenten
+   (Sprache und Land), Nutzerwunsch 4.9.2026.
+
+   ⚠️ War zuerst ein Modifikator .wiz__chips--spalte nur am Laenderschritt, mit
+   der Begruendung "beim Sprachschritt stehen zwei Chips, die nebeneinander
+   passen". Diese Begruendung ist mit den 19 Sprachen hinfaellig geworden —
+   die Reihe brach ueber elf Zeilen mit ausgefranster Kante um. Da es nur diese
+   zwei Verwendungen gibt, gehoert es in die Grundregel; ein Modifikator, der
+   ueberall gilt, ist keiner.
+
+   align-items:stretch statt flex-start: sonst ist jeder Chip so breit wie sein
+   Text und die rechte Kante franst aus. */
+.wiz__chips{display:flex;flex-direction:column;flex-wrap:nowrap;
+  align-items:stretch;gap:.625rem}
 /* Die Zahl an die rechte Kante, sonst klebt sie mitten in der leeren Flaeche
-   am Text und die gewonnene Breite sieht nach einem Fehler aus.
-   ⚠️ Bewusst NUR unter --spalte: im Sprachschritt sind die Chips so breit wie
-   ihr Inhalt, dort waere margin-left:auto wirkungslos bis stoerend. */
-.wiz__chips--spalte .chip__n{margin-left:auto}
+   am Text und die gewonnene Breite sieht nach einem Fehler aus. */
+.wiz__chips .chip__n{margin-left:auto}
 .wiz__chips .chip{display:inline-flex;align-items:center;gap:.5rem;
   border:.125rem solid var(--line);background:var(--surface);border-radius:999px;
   padding:.6875rem 1.125rem;font:inherit;font-size:.9375rem;font-weight:700;

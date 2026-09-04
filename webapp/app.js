@@ -6741,10 +6741,9 @@
         esc(T("wizard.land.text",
               "Viele Plattformen sammeln über Ländergrenzen hinweg. Wähle, " +
               "welche Länder dich interessieren.")) + "</p>"));
-      /* Einspaltig (Nutzerwunsch 4.9.2026): mit zehn Ländern lief die Reihe
-         vorher über vier Zeilen unterschiedlicher Länge und war schwer zu
-         überfliegen. Der Sprachschritt behält den Umbruch — dort sind es zwei. */
-      var cgrid = el('<div class="wiz__chips wiz__chips--spalte"></div>');
+      /* Einspaltig und volle Breite — das steckt seit 4.9.2026 in der
+         Grundregel .wiz__chips und gilt für beide Auswahlschritte. */
+      var cgrid = el('<div class="wiz__chips"></div>');
       wizardCountries().forEach(function (code) {
         var info = landInfo(code);
         // Zahl unter dem Chip: wie viele EINTRÄGE dieses Land führen. Nicht die
