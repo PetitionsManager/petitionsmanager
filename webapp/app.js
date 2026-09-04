@@ -831,7 +831,15 @@
          redet nicht mehr hinein. */
       lang: systemSprache(),      // "de" | "en" (siehe SPRACHEN)
       theme: "auto",              // "light" | "dark" | "auto"
-      layout: "relief",           // "relief" | "magazin" (layouts.css)
+      /* ⚠️ 4.9.2026 von "relief" auf "magazin" (Nutzerwunsch „Standardansicht
+         soll magazin layout sein"). Betrifft NUR Neuinstallationen —
+         defaultPrefs() läuft beim ersten Start; wer schon einmal gewählt hat,
+         behält seine Einstellung.
+         ⚠️ Die beiden Wanderungen unten (band/klassisch → relief) bleiben
+         bewusst auf „relief": das sind ABGESCHAFFTE Layouts, deren Nutzer
+         damals dem Relief am nächsten standen. Sie auf magazin umzubiegen
+         hieße, eine getroffene Wahl nachträglich zu überschreiben. */
+      layout: "magazin",          // "relief" | "magazin" (layouts.css)
       /* Akzentfarbe des Magazin-Layouts (7.8.26, Nutzerwunsch „muss nicht
          koralle sein … aus einer palette"). Werte = ACCENTS unten; die
          Farben selbst stehen in layouts.css unter [data-accent="…"] und
