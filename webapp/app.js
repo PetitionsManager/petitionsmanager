@@ -6384,9 +6384,26 @@
      lassen sich keinem Land zuordnen, also dürfen sie auch keins in die Liste
      bringen. Ausgeblendet werden sie deswegen trotzdem nicht — das entscheidet
      platPasstZuLand(). */
+  /* Zählt dieser Eintrag für den Länderschritt mit?
+
+     ⚠️⚠️ Nur, wenn seine Sprache in Schritt 1 gewählt wurde. Ohne diese
+     Bedingung bot der Länderschritt am 4.9.2026 „Frankreich" an, obwohl nur
+     Deutsch gewählt war — FR kommt einzig von `foodwatch_fr`, und der ist
+     französischSPRACHIG. Wer Deutsch + Frankreich wählte, bekam eine LEERE
+     Schnittmenge: kein einziger deutschsprachiger Eintrag führt FR.
+     (Nutzerfrage: „gibt es für frankreich deutsch petitionen?" — nein.)
+
+     Der Länderschritt kommt NACH dem Sprachschritt, die Auswahl steht hier
+     also fest. Umgekehrt ginge es nicht. */
+  function landRelevant(p) {
+    if (!wizardSel.langs || !wizardSel.langs.size) return true;
+    return wizardSel.langs.has(platMainLanguage(p));
+  }
+
   function wizardCountries() {
     var seen = {};
     livePlatforms().forEach(function (p) {
+      if (!landRelevant(p)) return;
       if (platLandneutral(p)) { seen[LAND_INTL] = true; return; }
       var da = platCountries(p);
       /* Mehrländrig, aber ohne erhobenes Land: eigener Chip statt gar keiner.
@@ -6744,7 +6761,22 @@
       /* Einspaltig und volle Breite — das steckt seit 4.9.2026 in der
          Grundregel .wiz__chips und gilt für beide Auswahlschritte. */
       var cgrid = el('<div class="wiz__chips"></div>');
-      wizardCountries().forEach(function (code) {
+      /* ⚠️ Aufräumen, BEVOR gezeichnet wird: wer zurückgeht und die Sprache
+         ändert, hat sonst Länder angewählt, die es nicht mehr gibt — die
+         Auswahl wäre unsichtbar falsch, und der Plattformschritt filterte
+         gegen etwas, das kein Chip mehr zeigt. Bleibt dabei nichts übrig,
+         greift die Vorwahl erneut; sonst stünde ein totes „Weiter" da. */
+      var landListe = wizardCountries();
+      if (wizardSel.lands) {
+        Array.from(wizardSel.lands).forEach(function (c) {
+          if (landListe.indexOf(c) < 0) wizardSel.lands["delete"](c);
+        });
+      }
+      if (!wizardSel.lands || !wizardSel.lands.size) {
+        wizardSel.landsManuell = false;
+        wizardLandvorwahl();
+      }
+      landListe.forEach(function (code) {
         var info = landInfo(code);
         // Zahl unter dem Chip: wie viele EINTRÄGE dieses Land führen. Nicht die
         // Petitionen — die stehen erst nach dem Laden der Pakete fest, und eine
@@ -6757,6 +6789,9 @@
            openPetition zehn Länder mitbringt, zählt es in zehn Chips mit —
            richtig so, aber als Prüfgleichung wertlos. */
         var n = livePlatforms().filter(function (p) {
+          // ⚠️ Dieselbe Sprachbedingung wie in wizardCountries(). Ohne sie
+          // stünde am Chip eine Zahl, die zur angebotenen Liste nicht passt.
+          if (!landRelevant(p)) return false;
           if (code === LAND_INTL) return platLandneutral(p);
           if (platLandneutral(p)) return false;
           var da = platCountries(p);
