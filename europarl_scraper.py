@@ -54,9 +54,50 @@ HTML_FILE = Path("europarl_petitions.html")
 # und bei Bedarf weiter erhöhen.
 LIST_URL = (f"{BASE_URL}/petitions/de/show-petitions?keyWords=&_years=1"
             "&_searchThemes=1&_statuses=1&statuses=AVAILABLE&_countries=1"
-            "&countries=DE&searchRequest=true&resSize=20&pageSize={size}")
+            "&countries={land}&searchRequest=true&resSize=20&pageSize={size}")
 PAGE_SIZE_START = 200
 PAGE_SIZE_MAX   = 1000
+
+# ----------------------------------------------------------------------------
+# Alle Mitgliedstaaten (Nutzerauftrag 4.9.2026 „alles holen was da ist")
+# ----------------------------------------------------------------------------
+# Bis dahin stand `countries=DE` fest in der Adresse und die App kannte genau
+# ein Land. Jetzt wird JE LAND gesucht.
+#
+# ⚠️ Warum je Land und nicht einfach ohne Filter: ohne `countries` liefert die
+# Suche ≥ 999 Treffer, und `pageSize` ist bei 1000 gedeckelt (PAGE_SIZE_MAX).
+# Man erführe also nie, ob noch mehr da ist — die Zahl wäre eine Obergrenze,
+# kein Ergebnis. Je Land bleibt jede Antwort weit unter dem Deckel.
+#
+# Am 4.9.2026 gemessen, mit Kontrolle gegen die dokumentierten Zahlen:
+#   DE 91 (deckt sich mit dem 8.8. und 30.8.) · AT 19 (deckt sich mit dem 30.8.)
+#   · NL 20 · ES 467 (gemessen am 30.8.)
+#
+# ⚠️⚠️ ZWEI ÜBERRASCHUNGEN, beide am 4.9.2026 gemessen und beide wichtig:
+#
+# 1. Die Ergebnismengen ÜBERSCHNEIDEN sich. DE∩AT = 5, DE∩NL = 5, AT∩NL = 3;
+#    91+19+20 = 130 Treffer ergeben nur 120 verschiedene Petitionen. Wer die
+#    Länderzahlen addiert, zählt doppelt.
+#
+# 2. `countries=X` ist NICHT das Land der Petition, sondern eine Zuordnung.
+#    Beleg: Petition 0020-2022 erscheint unter DE UND AT, ihr Landfeld sagt
+#    „Denmark". Gegenprobe an zwei Petitionen, die NUR unter DE erscheinen:
+#    beide sagen „Germany". Der bisherige Kommentar bei rec["country"], es
+#    stehe „bei JEDER Petition dasselbe, weil die Liste auf countries=DE
+#    filtert", war also eine unbelegte Annahme — und die 91 „deutschen"
+#    Petitionen waren nie durchweg deutsche.
+#
+# Folge für den Bau: die Länderschleife ist reine ENTDECKUNG (sie findet mehr
+# Petitionen), das LAND kommt weiterhin aus dem Feld der Detailseite. Diese
+# Trennung ist der ganze Grund, warum hier nichts geraten werden muss.
+#
+# ⚠️⚠️ europarl ist aus der CI NICHT scrapebar (AWS-WAF antwortet dort mit
+# HTTP 202 auf alles), vom Rechner des Nutzers dagegen mit 200. Diese
+# Erweiterung braucht deshalb einen LOKALEN Lauf und den Workflow-Schalter
+# `store_aus_repo`. Siehe pm_europarl_waf_gesperrt.
+EU_LAENDER = ("DE", "AT", "BE", "BG", "CY", "CZ", "DK", "EE", "ES", "FI",
+              "FR", "GR", "HR", "HU", "IE", "IT", "LT", "LU", "LV", "MT",
+              "NL", "PL", "PT", "RO", "SE", "SI", "SK")
 
 NUMBER_HREF_RE = re.compile(r"petitionNumber=(\d{4})%25?2F(\d{4})")
 
@@ -219,38 +260,67 @@ def _pdf_url(slug: str, lang: str = HAUPTSPRACHE) -> str:
 # ----------------------------------------------------------------------------
 # Entdeckung
 # ----------------------------------------------------------------------------
-def discover_slugs(fetcher: core.Fetcher) -> dict[str, dict]:
-    """{slug: {}} aus der DE-Suche (Status AVAILABLE); pageSize wird erhöht,
-    bis keine neuen Treffer mehr kommen."""
-    found: dict[str, dict] = {}
-    prog(phase="discover", current=0, total=0, message="Sammle Petitionen …")
+def _suche_land(fetcher: core.Fetcher, land: str,
+                found: dict[str, dict]) -> int:
+    """Eine Länder-Suche; ergänzt `found` und gibt die Zahl der Treffer zurück.
+    pageSize wird erhöht, bis keine neuen Treffer mehr kommen."""
+    vorher = len(found)
     size = PAGE_SIZE_START
     while size <= PAGE_SIZE_MAX:
-        resp = fetcher.get(LIST_URL.format(size=size))
+        resp = fetcher.get(LIST_URL.format(land=land, size=size))
         if resp is None or not resp.ok:
             break
-        added = 0
+        added = treffer = 0
         for m in NUMBER_HREF_RE.finditer(resp.text):
+            treffer += 1
             slug = f"{m.group(1)}-{m.group(2)}"
             if slug not in found:
                 found[slug] = {}
                 added += 1
-        prog(current=len(found), total=0,
-             message=f"pageSize {size} · {len(found)} Petitionen bisher")
-        if added == 0 or len(found) < size:
-            break                        # alle Ergebnisse erfasst
+        # ⚠️ Abbruch am TREFFER dieser Seite, nicht an len(found): letzteres
+        # zählt über alle Länder mit und stünde nach ein paar Ländern immer
+        # über `size` — die Schleife liefe dann für jedes Land bis zum Deckel.
+        if added == 0 or treffer < size:
+            break                        # alle Ergebnisse dieses Landes erfasst
         size *= 2
-    log(f"Suche: {len(found)} deutsche Petitionen (AVAILABLE).")
+    return len(found) - vorher
+
+
+def discover_slugs(fetcher: core.Fetcher) -> dict[str, dict]:
+    """{slug: {}} über ALLE Mitgliedstaaten (Status AVAILABLE).
+
+    ⚠️ Je Land eine eigene Suche — Begründung bei EU_LAENDER: ohne Länderfilter
+    deckelt pageSize bei 1000 und man erführe nie, ob mehr da ist."""
+    found: dict[str, dict] = {}
+    prog(phase="discover", current=0, total=len(EU_LAENDER),
+         message="Sammle Petitionen …")
+    je_land: dict[str, int] = {}
+    for i, land in enumerate(EU_LAENDER, 1):
+        je_land[land] = _suche_land(fetcher, land, found)
+        prog(current=i, total=len(EU_LAENDER),
+             message=f"{land} · {len(found)} Petitionen bisher")
+    # Die Aufschlüsselung gehört ins Protokoll: ein Land, das plötzlich 0
+    # liefert, ist in einer Gesamtzahl nicht zu sehen.
+    log("Suche je Land: " + " ".join(f"{k}·{v}" for k, v in je_land.items() if v))
+    leer = [k for k, v in je_land.items() if not v]
+    if leer:
+        log(f"  ohne Treffer: {', '.join(leer)}")
+    log(f"Suche: {len(found)} Petitionen aus {len(EU_LAENDER)} Ländern "
+        f"(AVAILABLE).")
     # Diese Suche ist die einzige Entdeckung – es gibt keinen zweiten Zweig,
     # der ihren Ausfall auffangen und damit verdecken würde. Heikel ist dabei
     # die Abbruchbedingung oben: greift NUMBER_HREF_RE nach einem Umbau der
     # Trefferliste nicht mehr, ist added == 0, die Schleife endet ORDENTLICH,
     # und der Lauf meldet keinen Fehler – er findet nur nichts.
-    # Schwelle gemessen am 8.8.2026: 91 deutsche Petitionen im Status
-    # AVAILABLE. 10 liegt weit genug darunter, dass der normale Zu- und Abgang
-    # (Petitionen werden geschlossen, neue kommen dazu) nie meldet.
-    core.entdeckung("DE-Suche (Status AVAILABLE)", len(found), erwartet_min=10,
-                    name_en="German-language search (status AVAILABLE)")
+    # Schwelle: bis 4.9.2026 stand hier 10, gemessen an den 91 deutschen
+    # Petitionen. Mit 27 Ländern ist der Sockel deutlich höher — allein DE 91,
+    # AT 19, NL 20, ES 467 (gemessen). 50 liegt weit unter jeder plausiblen
+    # Summe und meldet trotzdem, wenn die Suche reihenweise ausfällt.
+    # ⚠️ Eine Gesamtzahl verdeckt den Ausfall EINZELNER Länder; die stehen
+    # deshalb oben im Protokoll, Land für Land.
+    core.entdeckung("Länder-Suche (Status AVAILABLE)", len(found),
+                    erwartet_min=50,
+                    name_en="per-country search (status AVAILABLE)")
     return found
 
 
@@ -306,13 +376,10 @@ def parse_detail(html: str, url: str, slug: str,
                         for m3 in FELD_LABEL_RE.finditer(text))
 
     rec["category"] = field(L["themen"])
-    # ⚠️ Heute steht hier bei JEDER Petition dasselbe („Deutschland"/„Germany"),
-    # weil die Trefferliste schon auf countries=DE filtert (LIST_URL). Der Wert
-    # wird trotzdem mitgeschrieben, und das ist der ganze Zweck: er kostet
-    # nichts, die Seite wird ohnehin geholt, und sobald der Filter gelockert
-    # wird, ist die Angabe von Anfang an da. Am 30.8.2026 an der Trefferliste
-    # gemessen, was dahintersteckt: DE 91, AT 19, ES 467, ohne Filter ≥ 999
-    # (pageSize=1000 ist der Deckel, die echte Zahl kann höher liegen).
+    # ✅ 4.9.2026: Der Filter IST gelockert (Suche je Land, siehe EU_LAENDER) —
+    # hier steht jetzt wirklich das Land der Petition, nicht mehr bei jeder
+    # dasselbe. Genau dafür wurde der Wert am 30.8. vorsorglich mitgeschrieben,
+    # als die Trefferliste noch auf countries=DE stand.
     # ⚠️ Bewusst der WORTLAUT der Seite, kein ISO-Kürzel: die Quelle nennt
     # „Deutschland"/„Germany", je nach Sprachfassung. Daraus ein „DE“ zu machen
     # wäre eine Zuordnung, die niemand geprüft hat.
@@ -576,8 +643,12 @@ def run(args) -> None:
 
 
 def check(fetcher):
-    return core.check_source(fetcher, LIST_URL.format(size=20), NUMBER_HREF_RE, 10,
-                             "DE-Petitionen")
+    # ⚠️ Die Erreichbarkeitsprüfung bleibt bewusst auf DEUTSCHLAND: sie soll
+    # billig sein (eine Anfrage) und eine bekannte Sollzahl haben. Seit dem
+    # 8.8.2026 sind das 91 Petitionen, die Schwelle 10 liegt weit darunter.
+    # Über alle 27 Länder zu prüfen kostete 27 Anfragen für dieselbe Aussage.
+    return core.check_source(fetcher, LIST_URL.format(land="DE", size=20),
+                             NUMBER_HREF_RE, 10, "DE-Petitionen")
 
 PLATFORM = Platform(
     key="europarl",
