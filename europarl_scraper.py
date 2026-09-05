@@ -33,6 +33,11 @@
 from __future__ import annotations
 
 import re
+import shutil
+import subprocess
+import tempfile
+import time
+from datetime import date
 from html import unescape as html_unescape
 from pathlib import Path
 
@@ -255,6 +260,272 @@ def _pdf_url(slug: str, lang: str = HAUPTSPRACHE) -> str:
     num, year = slug.split("-")
     return (f"{BASE_URL}/petitions/{lang}/petition/content/pdf?"
             f"petitionNumber={num}%252F{year}")
+
+
+# ----------------------------------------------------------------------------
+# Mitteilung an die Mitglieder (Notice to Members) → Zulässigkeitsdatum
+# ----------------------------------------------------------------------------
+# Das Portal zeigt weder Start- noch Enddatum. Die Auskunft des PETI-Helpdesks
+# an den Nutzer (5.9.2026) nennt zwei andere Quellen: das ZULÄSSIGKEITSdatum
+# steht in der „Notice to Members", das Abschlussdatum in den Tagesordnungen.
+# Umgesetzt ist nur das erste. Das zweite steht in den Sitzungsprotokollen als
+# PROSA — elf verschiedene Formulierungen in fünf Protokollen, dieselbe Nummer
+# einmal als Abschluss und einmal als Fristsetzung — und ist eine eigene
+# Aufgabe, kein Nebenbei.
+#
+# ⚠️⚠️ Die Datei liegt unter /RegData/, NICHT unter /doceo/. Beide Pfade führen
+# dasselbe Dokument, aber /doceo/ antwortet auf ALLES mit HTTP 202 und einer
+# AWS-WAF-Abfrage — auch lokal, auch als HTML, auch mit Referer-Kopf (am
+# 5.9.2026 in vier Varianten gemessen). Ein 202 von dort heißt „falscher Pfad",
+# nicht „nicht erreichbar".
+REGISTER_URL = f"{BASE_URL}/RegistreWeb/en/services/search"
+
+_MONAT_EN = {"january": 1, "february": 2, "march": 3, "april": 4, "may": 5,
+             "june": 6, "july": 7, "august": 8, "september": 9, "october": 10,
+             "november": 11, "december": 12}
+
+_DATUM = r"(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})"
+# Form B: die Nummer steht HINTER dem Datum. ⚠️ Der Abschnitt muss AM STÜCK
+# gelesen werden — vor dem zweiten Datum steht kein „declared admissible on"
+# mehr („… on 12 December 2025 for petition 1268/2025 AND 16 January 2026 for
+# petition 1559/2025"). Ein Ausdruck, der je Datum die Einleitung verlangt,
+# findet nur das erste; genau daran ist die zweite Fassung gescheitert.
+_ADMIS_SPAN_RE = re.compile(r"declared\s+admissible\s+on\s+(.{0,400})",
+                            re.I | re.S)
+_PAAR_RE = re.compile(rf"{_DATUM}(?:\s+for\s+petition\s+(\d{{4}}/\d{{4}}))?",
+                      re.I)
+# Form C: die Nummer steht DAVOR, eine Zeile je Petition („Petition 0063/2017
+# declared admissible on 31 May 2017.").
+_ADMIS_VOR_RE = re.compile(
+    rf"Petition\s+(?:No\.?\s*)?(\d{{4}}/\d{{4}})\s+declared\s+admissible\s+on\s+{_DATUM}",
+    re.I)
+# Der Betreff nennt, WELCHE Petitionen das Dokument behandelt — die Zahl
+# entscheidet, ob ein Datum ohne Zuordnung überhaupt verwertbar ist.
+_BETREFF_RE = re.compile(r"Subject:(.*?)(?:\n\s*1\.\s|Summary of petition)",
+                         re.S | re.I)
+_NUMMER_RE = re.compile(r"Petition\s+No\.?\s*(\d{4}/\d{4})", re.I)
+
+_PDFTOTEXT_GEMELDET = False
+
+
+def _iso(tag: str, monat: str, jahr: str) -> str | None:
+    try:
+        return date(int(jahr), _MONAT_EN[monat.lower()], int(tag)).isoformat()
+    except (ValueError, KeyError):
+        return None
+
+
+def _zulaessig_ab(text: str, nummer: str) -> str | None:
+    """Zulässigkeitsdatum als ISO-Datum aus dem Text der Mitteilung.
+
+    ⚠️⚠️ EIN Dokument kann MEHRERE Petitionen behandeln — bis zu 32 gemessen —
+    und der Vermerk hat dafür VIER Formen. Am 5.9.2026 am echten Bestand
+    aufgeflogen, nachdem eine erste Fassung nur Form A und B kannte und
+    51 Sätzen ein fremdes Datum verpasst hatte:
+
+      A einzeln       „Declared admissible on 12 December 2025."
+      B qualifiziert  „… on 12 December 2025 for petition 1268/2025 and
+                        16 January 2026 for petition 1559/2025."
+      C nummernvoran  „Petition 0063/2017 declared admissible on 31 May 2017."
+                      (eine Zeile je Petition, PETI_CM(2020)615340: 32 Stück)
+      D stellungsab-  zwei Sätze „Declared admissible on …" hintereinander,
+        hängig        OHNE jede Nennung; nur die Reihenfolge im Betreff
+                      verknüpft sie (PETI_CM(2020)658751).
+
+    ⚠️⚠️ **Form D wird bewusst NICHT ausgewertet.** Sie ließe sich über die
+    Position im Betreff paaren, aber genau diese Paarung ist im Projekt schon
+    einmal gescheitert (siehe die `category`-Begründung weiter unten): eine
+    Reihenfolge, die man nicht geprüft hat, ist eine Annahme. Ein fehlendes
+    Datum ist sichtbar, ein erfundenes nicht.
+
+    Reihenfolge der Auswertung: erst die beiden Formen, die die Nummer
+    ausdrücklich nennen (C, B) — sie sind eindeutig. Ein Datum OHNE Zuordnung
+    (A) gilt nur, wenn das Dokument nachweislich genau EINE Petition behandelt
+    und genau EIN Datum nennt."""
+    # C: Nummer steht vor dem Datum.
+    for num, tag, monat, jahr in _ADMIS_VOR_RE.findall(text):
+        if num == nummer:
+            return _iso(tag, monat, jahr)
+    # B: Nummer steht hinter dem Datum, irgendwo im selben Satz.
+    abschnitte = []
+    for treffer in _ADMIS_SPAN_RE.finditer(text):
+        # Zeilenumbrüche und eingeschobene Seitenköpfe zerreißen den Satz; am
+        # Satzende abschneiden, sonst zieht der Folgeabschnitt („Commission
+        # reply, received on 20 June 2025") ein fremdes Datum herein.
+        satz = re.split(r"\.\s", re.sub(r"\s+", " ", treffer.group(1)))[0]
+        paare = [p for p in _PAAR_RE.findall(satz) if p[1].lower() in _MONAT_EN]
+        abschnitte.append(paare)
+        for tag, monat, jahr, num in paare:
+            if num == nummer:
+                return _iso(tag, monat, jahr)
+    # A: nur wenn das Dokument nachweislich EINE Petition behandelt und es
+    # genau EINEN Vermerk mit genau EINEM Datum gibt.
+    betreff = _BETREFF_RE.search(text)
+    nummern = set(_NUMMER_RE.findall(betreff.group(1) if betreff else text[:1500]))
+    if (nummern == {nummer} and len(abschnitte) == 1
+            and len(abschnitte[0]) == 1 and not abschnitte[0][0][3]):
+        tag, monat, jahr, _ = abschnitte[0][0]
+        return _iso(tag, monat, jahr)
+    return None
+
+
+def _notice_finden(fetcher: core.Fetcher, num: str, jahr: str) -> dict:
+    """Die Mitteilung an die Mitglieder im Dokumentenregister suchen.
+
+    Rückgabe: ``{"pdf": {sprache: adresse}, "ref": …}`` oder ``{}``.
+
+    ⚠️⚠️ Die Anführungszeichen um die Nummer sind tragend: `0884/2022` als
+    Volltext liefert 10.000 Treffer fast reines Rauschen, `"0884/2022"` als
+    Phrase zehn, alle aus dem Petitionsausschuss. Die naheliegende Titelsuche
+    (`title` statt `fulltext`) ist die SCHLECHTERE — sie zerlegt die Nummer
+    ebenfalls: 10.000 Treffer, einer davon richtig.
+
+    ⚠️ Ein Treffer kann eine FREMDE Petition betreffen (bei 0733/2024 kam eine
+    Mitteilung zu 1140/2022 mit), deshalb wird der englische Titel gegen die
+    angeforderte Nummer geprüft — nicht „nimm das erste CM"."""
+    if not fetcher.allowed(REGISTER_URL):
+        log(f"  robots.txt verbietet das Dokumentenregister: {REGISTER_URL}")
+        return {}
+    nummer = f"{num}/{jahr}"
+    try:
+        resp = fetcher.session.post(
+            REGISTER_URL,
+            json={"fulltext": {"value": f'"{nummer}"'},
+                  "currentPage": 1, "nbRows": 50},
+            timeout=core.REQUEST_TIMEOUT)
+        time.sleep(fetcher.delay)
+    except Exception as exc:                     # Netzfehler jeder Art
+        log(f"  Dokumentenregister nicht erreichbar ({exc}) – "
+            f"kein Zulässigkeitsdatum für {nummer}.")
+        return {}
+    if not resp.ok:
+        return {}
+    try:
+        daten = resp.json()
+    except ValueError:
+        return {}
+
+    bester: dict = {}
+    for eintrag in daten.get("references") or []:
+        if eintrag.get("codeFamily") != "CM":
+            continue
+        pdf: dict[str, str] = {}
+        passt = False
+        for fragment in eintrag.get("fragments") or []:
+            for fassung in fragment.get("versions") or []:
+                sprache = (fassung.get("language") or "").lower()
+                # ⚠️ Die Titel kommen in wechselnden Sprachen zurück
+                # (bulgarisch, tschechisch, dänisch …). Ohne die Einschränkung
+                # auf EN vergleicht man gegen einen Titel, in dem die Nummer
+                # anders geschrieben steht.
+                if sprache == "en" and f"Petition No {nummer}" in (
+                        fassung.get("title") or ""):
+                    passt = True
+                for datei in fassung.get("fileInfos") or []:
+                    if (datei.get("typeDoc") == "application/pdf"
+                            and datei.get("url")):
+                        # ⚠️ Ältere Einträge nennen die Datei noch mit http:// —
+                        # ohne diese Berichtigung endet der Abruf in einem 301
+                        # und liefert nichts (so ist mir 0855/2016 als „fehlt"
+                        # durchgerutscht).
+                        pdf[sprache] = datei["url"].replace(
+                            "http://", "https://", 1)
+        # Zu einer Petition kann es MEHRERE Mitteilungen geben (Erst- und
+        # Folgefassung, bei 0884/2022 gemessen). Die jüngste gewinnt.
+        if passt and pdf and (eintrag.get("dateDocu") or 0) >= bester.get("stand", -1):
+            bester = {"pdf": pdf, "ref": eintrag.get("reference"),
+                      "stand": eintrag.get("dateDocu") or 0}
+    return bester
+
+
+def _pdf_text(fetcher: core.Fetcher, url: str) -> str:
+    """Text eines PDFs. Leer, wenn Abruf oder Werkzeug fehlen — nie ein Abbruch:
+    ein fehlendes Datum ist hinnehmbar, ein abgebrochener Lauf nicht."""
+    global _PDFTOTEXT_GEMELDET
+    if not shutil.which("pdftotext"):
+        if not _PDFTOTEXT_GEMELDET:
+            log("  pdftotext fehlt (Paket poppler-utils) – Zulässigkeitsdaten "
+                "werden übersprungen, alles andere läuft normal weiter.")
+            _PDFTOTEXT_GEMELDET = True
+        return ""
+    resp = fetcher.get(url)
+    # ⚠️ Auf den Inhalt prüfen, nicht auf den Statuscode: eine Sperrseite kommt
+    # mit HTTP 200/202 und läse sich sonst wie ein Erfolg.
+    if resp is None or not resp.ok or not resp.content.startswith(b"%PDF"):
+        return ""
+    with tempfile.NamedTemporaryFile(suffix=".pdf") as tmp:
+        tmp.write(resp.content)
+        tmp.flush()
+        try:
+            fertig = subprocess.run(["pdftotext", "-layout", tmp.name, "-"],
+                                    capture_output=True, text=True, timeout=60)
+        except (OSError, subprocess.SubprocessError):
+            return ""
+    return fertig.stdout if fertig.returncode == 0 else ""
+
+
+def _mitteilung_anreichern(fetcher: core.Fetcher, rec: dict, slug: str,
+                           vorher: dict | None = None) -> None:
+    """`start_date` auf das Zulässigkeitsdatum setzen und die amtliche
+    Mitteilung verlinken — beides nur, wenn es sie gibt.
+
+    ⚠️⚠️ Die Übernahme aus `vorher` ist nicht bloß Sparsamkeit: ohne sie
+    schriebe der nächste Lauf das JAHR aus parse_detail zurück. `core.upsert`
+    übernimmt jeden Schlüssel, den der neue Satz mitbringt — ein einmal
+    gefundenes tagesgenaues Datum wäre also nach dem nächsten Lauf wieder weg.
+
+    ⚠️ Ohne Fund wird NICHTS gesetzt: `start_date` bleibt das Jahr aus der
+    Petitionsnummer. Der Bestand ist damit bewusst gemischt (tagesgenau, wo es
+    eine Mitteilung gibt, sonst jahresgenau) — die Mitteilung entsteht erst mit
+    der Kommissionsantwort, also Monate nach der Zulässigkeit, und für frische
+    Petitionen gibt es sie gar nicht."""
+    num, jahr = slug.split("-")
+    nummer = f"{num}/{jahr}"
+    alt = vorher or {}
+    datum = alt.get("start_date")
+    adressen = alt.get("notice_url")
+    if not (isinstance(datum, str) and len(datum) == 10
+            and isinstance(adressen, dict) and adressen):
+        fund = _notice_finden(fetcher, num, jahr)
+        adressen = fund.get("pdf") or {}
+        datum = None
+        if adressen:
+            # ⚠️ Ausgewertet wird die ENGLISCHE Fassung – der Ausdruck kennt nur
+            # englische Monatsnamen. Verlinkt wird gleich trotzdem die Fassung
+            # in der Sprache des Datensatzes.
+            text = _pdf_text(fetcher, adressen.get("en")
+                             or next(iter(adressen.values())))
+            datum = _zulaessig_ab(text, nummer) if text else None
+            if not datum:
+                log(f"  {nummer}: Mitteilung {fund.get('ref')} gefunden, aber "
+                    f"kein eindeutiges Zulässigkeitsdatum – bleibe beim Jahr.")
+    if not adressen:
+        return
+    rec["notice_url"] = adressen
+    if datum:
+        rec["start_date"] = datum
+
+    def anhaengen(ziel: dict, sprache: str) -> None:
+        # 11 von 12 Mitteilungen haben eine deutsche Fassung (gemessen
+        # 5.9.2026); wo nicht, führt der Link auf die englische.
+        adresse = (adressen.get(sprache) or adressen.get("en")
+                   or next(iter(adressen.values())))
+        if not ziel.get("description_full"):
+            return
+        # ⚠️⚠️ Die Beschriftung ist ABSICHTLICH so knapp wie beim Petitions-PDF
+        # darüber: core.make_tags() liest description_full mit, und Wörter ab
+        # VIER Zeichen werden zu anklickbaren Schlagwörtern (petitions_core.py,
+        # Wortlänge < 4 wird übersprungen). „CM" und Ziffernfolgen können das
+        # per Bauart nicht — eine wortreichere Beschriftung („Mitteilung",
+        # „Notice") wäre dagegen ein Schlagwort-Kandidat und müsste vorher
+        # gegen den echten Bestand gemessen werden.
+        ziel["description_full"] += (
+            f'<p><a href="{core._esc(adresse)}" target="_blank" '
+            f'rel="noopener">CM {core._esc(num)}/{core._esc(jahr)}</a></p>')
+
+    anhaengen(rec, rec.get("lang") or HAUPTSPRACHE)
+    for sprache, block in (rec.get("i18n") or {}).items():
+        anhaengen(block, sprache)
 
 
 # ----------------------------------------------------------------------------
@@ -538,12 +809,17 @@ def _hole_sprache(fetcher: core.Fetcher, slug: str, lang: str):
     return "vorhanden", parse_detail(resp.text, url, slug, lang)
 
 
-def scrape_petition(fetcher: core.Fetcher, slug: str) -> tuple[str, dict | None]:
+def scrape_petition(fetcher: core.Fetcher, slug: str,
+                    vorher: dict | None = None) -> tuple[str, dict | None]:
     """Hauptsprache holen, danach die übrigen Sprachen nach rec["i18n"].
 
     Die Hauptsprache entscheidet über den Datensatz: fehlt sie, gibt es nichts
     auszuliefern. Eine fehlgeschlagene Fremdsprache kostet dagegen nur die
-    Übersetzung, nie den Satz."""
+    Übersetzung, nie den Satz.
+
+    `vorher` ist der bisher gespeicherte Satz (oder None). Er dient allein
+    dazu, ein bereits gefundenes Zulässigkeitsdatum nicht erneut nachzuschlagen
+    — und, wichtiger, es nicht zu verlieren; siehe _mitteilung_anreichern."""
     zustand, rec = _hole_sprache(fetcher, slug, HAUPTSPRACHE)
     if zustand == "fehlt":
         return "offline", None
@@ -555,23 +831,26 @@ def scrape_petition(fetcher: core.Fetcher, slug: str) -> tuple[str, dict | None]
     rec["lang"] = HAUPTSPRACHE
     # ⚠️ Der Schalter betrifft NUR die Fremdsprachen. Die Hauptsprache ist oben
     # schon geholt – ohne sie gäbe es gar keinen Datensatz.
-    if not i18nh.aktiv():
-        return "online", rec
-    i18n: dict[str, dict] = {}
-    i18n_state: dict[str, str] = {}
-    for lang in SPRACHEN:
-        if lang == HAUPTSPRACHE:
-            continue
-        st, fremd = _hole_sprache(fetcher, slug, lang)
-        i18n_state[lang] = st
-        if fremd:
-            block = {k: fremd[k] for k in I18N_FELDER if fremd.get(k)}
-            if block:
-                i18n[lang] = block
-    if i18n:
-        rec["i18n"] = i18n
-    if i18n_state:
-        rec["i18n_state"] = i18n_state
+    if i18nh.aktiv():
+        i18n: dict[str, dict] = {}
+        i18n_state: dict[str, str] = {}
+        for lang in SPRACHEN:
+            if lang == HAUPTSPRACHE:
+                continue
+            st, fremd = _hole_sprache(fetcher, slug, lang)
+            i18n_state[lang] = st
+            if fremd:
+                block = {k: fremd[k] for k in I18N_FELDER if fremd.get(k)}
+                if block:
+                    i18n[lang] = block
+        if i18n:
+            rec["i18n"] = i18n
+        if i18n_state:
+            rec["i18n_state"] = i18n_state
+    # ⚠️ ZULETZT, nach den Fremdsprachen: der Link wird an JEDE Sprachfassung
+    # angehängt, die es gibt. Stünde das weiter oben, bekäme ihn nur die
+    # Hauptsprache.
+    _mitteilung_anreichern(fetcher, rec, slug, vorher)
     return "online", rec
 
 
@@ -595,7 +874,7 @@ def run(args) -> None:
             prog(current=k, total=len(known), message=slug)
             if core.skip_recent(store.get(slug), args):
                 continue
-            status, rec = scrape_petition(fetcher, slug)
+            status, rec = scrape_petition(fetcher, slug, store.get(slug))
             if status == "error":
                 continue
             core.upsert(store, slug, rec or {}, {}, status, ts,

@@ -1027,6 +1027,10 @@ FIELD_META = {
         "updates": "Neuigkeiten [{timestamp,text}]",
         "goal": "aktuelles Unterschriften-Ziel (falls die Plattform eines zeigt)",
         "start_date": "Startdatum (plattformabhängig ermittelt)",
+        "notice_url": "amtliches Begleitdokument je Sprache {sprache: adresse}; "
+                      "bei europarl die Mitteilung an die Mitglieder, aus der "
+                      "das Zulaessigkeitsdatum stammt. Bleibt im Store, geht "
+                      "NICHT in die App (der Link steckt in description_full)",
         "deadline": "Ende der Mitzeichnungs-/Unterschriftenfrist oder null",
         "closed": "true = nicht mehr mitzeichenbar (Frist abgelaufen/archiviert)",
         "phase": "Verfahrensstand der Plattform (z. B. mitzeichnung|beendet|archiv)",
@@ -1657,6 +1661,25 @@ STARTDATUM_MAX_ALTER = 30
 # Sätze als verdächtig gelten (Prüfung (e) in _bestandspruefung). Am 29.8.2026
 # an allen 17 Beständen gemessen; die Begründung der Zahl steht dort.
 
+# Plattformen, deren start_date ein VERFAHRENSdatum ist statt „seit wann läuft
+# die Petition". Für sie schweigen BEIDE Stufen von Prüfung (e); an ihre Stelle
+# tritt ein Hinweis (Stufe „hinweis"), damit die Ausnahme im Betrieb sichtbar
+# bleibt und nicht nur im Code steht.
+#
+# ⚠️⚠️ Warum überhaupt eine Ausnahme: Bei europarl ist start_date seit dem
+# 5.9.2026 das ZULÄSSIGKEITSdatum aus der Mitteilung an die Mitglieder. Dieses
+# Dokument entsteht erst mit der Kommissionsantwort, also Monate nach der
+# Zulässigkeit — am 5.9.2026 an den zwölf jüngsten Petitionen gemessen: das
+# frischeste Zulässigkeitsdatum war 82 Tage alt. Stufe 1 (30 Tage) hätte damit
+# bei praktisch jedem Lauf gemeldet, Stufe 2 (90 Tage) stand acht Tage davor.
+# Das ist kein Befund, sondern die Bauart der Quelle: der Melder fragt
+# „veraltet der Bestand?", das Feld antwortet „wann wurde sie zulässig?".
+#
+# ⚠️ Preis dieser Ausnahme, bewusst in Kauf genommen: bräche die
+# Datumsermittlung, fiele es diesem Melder nicht mehr auf. Die übrigen
+# Prüfungen (Deckung, Titel, Torsi, Quelltext im Text) bleiben scharf.
+STARTDATUM_VERFAHRENSDATUM = {"europarl"}
+
 SKIP_LOESCH_ANTEIL_MAX = 0.30   # >30 % skip unter den geprüften = Verdacht
 SKIP_LOESCH_MIN_ABS = 10        # darunter greift die Bremse nicht (kleine Bestände)
 
@@ -2141,7 +2164,29 @@ def _bestandspruefung(store: dict, vorher: dict,
     # beiden Stufen, nicht nur vor Stufe 1: Ekō hat available = 39, Stufe 2
     # verlangt available > 0 — nur Stufe 1 stumm zu schalten hätte die
     # Warnung also bloß durch die andere ersetzt.
-    if deckung >= 0.2 and alter is not None and not host_gesperrt():
+    # ⚠️ Der Riegel für Verfahrensdaten sitzt VOR beiden Stufen und ersetzt sie
+    # durch einen Hinweis — siehe STARTDATUM_VERFAHRENSDATUM. Ohne den `elif`
+    # liefe die Plattform in die Warnungen hinein, die hier gerade nicht
+    # gemeint sind.
+    if (getattr(_TLS, "platform", None) or "") in STARTDATUM_VERFAHRENSDATUM:
+        if alter is not None and not host_gesperrt():
+            merke("hinweis", "Startdatum ist ein Verfahrensdatum",
+                  f"Tagesgenaues Datum bei {len(startdaten)} von {gesamt} "
+                  f"Sätzen; es ist das Zulässigkeitsdatum aus der "
+                  f"Mitteilung an die Mitglieder, nicht der Start der "
+                  f"Petition. Das jüngste ist {alter} Tage alt "
+                  f"({juengstes_start}) — bauartbedingt, weil das Dokument "
+                  f"erst mit der Kommissionsantwort entsteht. Der Altersmelder "
+                  f"ist hier deshalb ausgenommen.",
+                  thema_en="Start date is a procedural date",
+                  text_en=f"Day-exact date on {len(startdaten)} of {gesamt} "
+                          f"records; it is the date of admissibility "
+                          f"from the Notice to Members, not the start of the "
+                          f"petition. The newest is {alter} days old "
+                          f"({juengstes_start}) — by design, as the document "
+                          f"is only drawn up once the Commission has replied. "
+                          f"The ageing check is therefore skipped here.")
+    elif deckung >= 0.2 and alter is not None and not host_gesperrt():
         if neu_dazu > 0 and alter > STARTDATUM_MAX_ALTER:
             merke("warnung", "Startdatum rückt nicht nach",
                   f"{neu_dazu} neue Sätze aufgenommen, das jüngste Startdatum "
