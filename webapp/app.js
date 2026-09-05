@@ -4852,8 +4852,10 @@
         "Ändert nur das Aussehen der Listen, nicht die Inhalte."));
     content.appendChild(layoutLbl.lbl);
     content.appendChild(segControl(T("settings.layoutLabel", "Layout"),
-      [["relief", T("settings.layoutRelief", "Relief"), "fa-cube"],
-       ["magazin", T("settings.layoutMag", "Magazin"), "fa-image"]],
+      /* ⚠️ Magazin ZUERST (Nutzerwunsch 4.9.2026): es ist seit 514b8b8 die
+         Vorgabe, und die Vorgabe gehoert an die erste Stelle. */
+      [["magazin", T("settings.layoutMag", "Magazin"), "fa-image"],
+       ["relief", T("settings.layoutRelief", "Relief"), "fa-cube"]],
       state.prefs.layout,
       function (v) {
         state.prefs.layout = v; savePrefs(); applyLayout();
@@ -6386,6 +6388,19 @@
     wizardSel.langs = new Set(wahl ? [wahl] : []);
     // Die Plattform-Vorauswahl muss neu greifen, sonst bliebe sie beim Alten.
     wizardSel.gesehen = new Set();
+    /* ⚠️⚠️ Und die LÄNDERvorwahl mit. Welche Länder überhaupt zur Wahl stehen,
+       hängt an der Sprache (landRelevant) — nach einem Sprachwechsel passt eine
+       Auswahl, die für die alte Sprache getroffen wurde, nicht mehr.
+
+       Gemessen am 4.9.2026: der Assistent startet mit der GERÄTEsprache. Auf
+       einem en-US-Gerät stand damit Englisch, und Deutschland war dort gar
+       nicht im Angebot. Wer dann auf dem Begrüßungsbildschirm „Deutsch" wählte,
+       behielt die englische Ländervorwahl — Deutschland blieb ABGEWÄHLT,
+       obwohl es die 5 stärksten Einträge stellt.
+
+       wizardLandvorwahl() kehrt bei Handauswahl von selbst um (landsManuell),
+       eine bewusste Wahl wird also nicht überfahren. */
+    if (wizardSel.lands) wizardLandvorwahl();
   }
 
   /* ---- Landachse im Assistenten (4.9.2026) --------------------------------
@@ -6955,6 +6970,10 @@
           } else wizardSel.langs.add(code);
           // Ab jetzt gilt die Wahl des Nutzers, nicht mehr die Oberflächensprache.
           wizardSel.langsManuell = true;
+          /* Dieselbe Auffrischung wie in wizardSprachvorwahl(): eine andere
+             Sprache heißt andere Länder. Ohne das stünde im nächsten Schritt
+             eine Auswahl, die zur neuen Sprache nicht passt. */
+          wizardLandvorwahl();
           chip.classList.toggle("on", wizardSel.langs.has(code));
           foot.querySelector(".wiz__next").disabled = !wizardSel.langs.size;
         });
@@ -7180,8 +7199,9 @@
           "Ändert nur das Aussehen der Listen, nicht die Inhalte."));
       main.appendChild(layoutLbl2.lbl);
       main.appendChild(segControl(T("settings.layoutLabel", "Layout"),
-        [["relief", T("settings.layoutRelief", "Relief"), "fa-cube"],
-         ["magazin", T("settings.layoutMag", "Magazin"), "fa-image"]],
+        // ⚠️ Magazin zuerst, wie in den Einstellungen — es ist die Vorgabe.
+        [["magazin", T("settings.layoutMag", "Magazin"), "fa-image"],
+         ["relief", T("settings.layoutRelief", "Relief"), "fa-cube"]],
         state.prefs.layout,
         /* ⚠️ NEU ZEICHNEN: der Akzent-Block darunter gilt nur im Magazin.
            Ohne das bliebe er beim Wechsel auf Relief stehen (oder erschiene
