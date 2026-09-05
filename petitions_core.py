@@ -3231,6 +3231,22 @@ def _live_card(platform: Platform, schnappschuss: bool = False,
     generated = meta.get("generated_at")
     cats = str(cat_count) if cat_count else "—"
 
+    # Verworfene Kandidaten (nur Change.org führt ein solches Register): sie
+    # sind GEPRÜFT und bewusst aussortiert (fremdsprachig), gehören also zum
+    # Abgearbeiteten. Ohne sie bliebe die Kachel dauerhaft im Rückstand, obwohl
+    # der Vorrat durch ist — das Register wächst auf ~13.500 (siehe unten, die
+    # Abgearbeitet-Rechnung, und [[pm_changeorg_kandidatenfenster]]).
+    verworfen_n = len(als_register(meta.get("verworfen")))
+    # Wurde der Host in DIESEM Lauf ausgelassen (robots.txt nicht lesbar)? Dann
+    # ist der Bestand eingefroren; "alle abgearbeitet" wäre eine Falschaussage,
+    # weil von hier gar nichts Frisches kam. host_gesperrt() liest zur Laufzeit
+    # die noch flüchtigen BEFUNDE — auf der veröffentlichten Kachel gibt es die
+    # nicht mehr, deshalb hier die im _meta gespeicherte Fassung.
+    host_ausgelassen = any(
+        b.get("stufe") == "warnung"
+        and b.get("thema") == THEMA_HOST_AUSGELASSEN
+        for b in (meta.get("befunde") or []))
+
     # Wie viele der bei der Entdeckung gefundenen Kandidaten (Feld "available")
     # stecken schon im Store? Zeigt z. B. den großen Change.org-Rückstand.
     # Ohne "available" (Altbestand vor diesem Feature) Rückfall auf 100 %.
@@ -3261,7 +3277,20 @@ def _live_card(platform: Platform, schnappschuss: bool = False,
     # und das muss dranstehen, sonst versteckt die Kachel genau den Ausfall,
     # den sie melden soll. Zwei Wochen Stillstand sind so unbemerkt geblieben.
     available = meta.get("available")
-    if not available:
+    if host_ausgelassen:
+        # Vorrang vor available/Bestand: von diesem Host kam in diesem Lauf
+        # nichts Frisches, egal was die Zahlen nahelegen. eko zeigte so „39 von
+        # ~39 · alle gefundenen abgearbeitet" (grün) neben der roten Sperr-
+        # Warnung. Balken als Schraffur ohne Füllung (wie „unbekannt") und in
+        # Warnfarbe — nicht als grüner Erfolg lesbar.
+        pct = 0
+        comp_cls = "gesperrt"
+        comp_wert, comp_wert_en = "—", "—"
+        comp_sub = (f"Host in diesem Lauf gesperrt · die {len(store)} Sätze "
+                    f"und ihre Zahlen stammen aus früheren Läufen")
+        comp_sub_en = (f"source blocked in this run · the {len(store)} records "
+                       f"and their numbers are from earlier runs")
+    elif not available:
         pct = 0
         comp_cls = "unbekannt"
         comp_wert, comp_wert_en = "—", "—"
@@ -3302,17 +3331,30 @@ def _live_card(platform: Platform, schnappschuss: bool = False,
                        f"record · the record ({len(store)}) is larger than "
                        f"what this run saw")
     else:
-        pct = min(100, round(len(store) / available * 100))
+        # Abgearbeitet = übernommen + geprüft-und-verworfen. Ein verworfener
+        # Kandidat ist bearbeitet (geholt, sprachlich geprüft, aussortiert) und
+        # darf nicht als Rückstand zählen — sonst bliebe Change.org für immer
+        # rot, obwohl der Vorrat durch ist. Für alle anderen Plattformen ist
+        # verworfen_n == 0, die Rechnung bleibt unverändert.
+        erfasst = len(store) + verworfen_n
+        pct = min(100, round(erfasst / available * 100))
         comp_wert, comp_wert_en = f"{pct}%", f"{pct}%"
         comp_cls, comp_lbl, comp_lbl_en = (
             ("full", "alle gefundenen abgearbeitet", "all found items processed")
             if pct >= 95 else
             ("grow", "Rückstand", "backlog") if pct >= 50 else
             ("low", "großer Rückstand", "large backlog"))
-        comp_sub = (f"{len(store)} von ~{available} gefundenen Kandidaten "
-                    f"· {comp_lbl}")
-        comp_sub_en = (f"{len(store)} of ~{available} discovered candidates "
-                       f"· {comp_lbl_en}")
+        if verworfen_n:
+            offen = max(0, available - erfasst)
+            comp_sub = (f"{len(store)} übernommen · {verworfen_n} geprüft und "
+                        f"verworfen · {offen} offen von ~{available} · {comp_lbl}")
+            comp_sub_en = (f"{len(store)} taken · {verworfen_n} checked and "
+                           f"rejected · {offen} open of ~{available} · {comp_lbl_en}")
+        else:
+            comp_sub = (f"{len(store)} von ~{available} gefundenen Kandidaten "
+                        f"· {comp_lbl}")
+            comp_sub_en = (f"{len(store)} of ~{available} discovered candidates "
+                           f"· {comp_lbl_en}")
 
     # Einbruch des Online-Bestands = fast immer ein Quellenproblem, kein echtes
     # Verschwinden der Petitionen (siehe save_store).
@@ -3349,23 +3391,34 @@ def _live_card(platform: Platform, schnappschuss: bool = False,
 
     kz = meta.get("kennzahlen") or {}
     dauer = []
+    dauer_en = []
     # Gemeldet wird die AUSWIRKUNG, nicht das Symptom: „13 ohne Titel" ließ
     # niemanden ahnen, dass in Wahrheit 54 Sätze in der App fehlen. Die Arten
     # stehen dahinter in Klammern, aber die erste Zahl ist die, die zählt.
-    # Bestände von vor dieser Kennzahl tragen nur ohne_titel — dann gilt die.
-    dauer_en = []
-    fehlt = kz.get("nicht_ausgeliefert")
-    if fehlt is None:
-        fehlt = kz.get("ohne_titel") or 0
+    # ⚠️ Direkt aus dem geladenen Store zählen, NICHT aus kennzahlen: die
+    # schreibt nur der Abschluss-Save (save_store quiet=False). Genau die von
+    # der CI-Frist dauerhaft abgeschnittenen Plattformen (Change.org) erreichen
+    # ihn nie — ihre „erreicht die App nicht"-Zahl fehlte deshalb ganz auf der
+    # Kachel, obwohl sie am größten war. Maßstab ist brauchbarer_titel(), genau
+    # wie in publish.py; die beiden Arten werden disjunkt gezählt.
+    ohne_titel_live = platzhalter_live = 0
+    for r in store.values():
+        if not isinstance(r, dict):
+            continue
+        titel = (r.get("title") or "").strip()
+        if not titel:
+            ohne_titel_live += 1
+        elif PLATZHALTER_TITEL.match(titel):
+            platzhalter_live += 1
+    fehlt = ohne_titel_live + platzhalter_live
     if fehlt:
-        gesamt_kz = kz.get("gesamt") or "?"
-        anteil = round(fehlt / max(1, kz.get("gesamt") or 1) * 100)
+        anteil = round(fehlt / max(1, len(store)) * 100)
         arten = []
-        if kz.get("ohne_titel"):
-            arten.append(("ohne Titel", "without a title", kz["ohne_titel"]))
-        if kz.get("platzhalter"):
+        if ohne_titel_live:
+            arten.append(("ohne Titel", "without a title", ohne_titel_live))
+        if platzhalter_live:
             arten.append(("Platzhaltertitel", "placeholder titles",
-                          kz["platzhalter"]))
+                          platzhalter_live))
         if len(arten) > 1:
             auf = " (" + ", ".join(f"{n} {w}" for w, _e, n in arten) + ")"
             auf_en = " (" + ", ".join(f"{n} {e}" for _w, e, n in arten) + ")"
@@ -3374,8 +3427,8 @@ def _live_card(platform: Platform, schnappschuss: bool = False,
         else:
             auf = auf_en = ""
         pz = f" – {anteil} %" if anteil >= 1 else ""
-        dauer.append(f"{fehlt} von {gesamt_kz} erreichen die App nicht{pz}{auf}")
-        dauer_en.append(f"{fehlt} of {gesamt_kz} never reach the app{pz}{auf_en}")
+        dauer.append(f"{fehlt} von {len(store)} erreichen die App nicht{pz}{auf}")
+        dauer_en.append(f"{fehlt} of {len(store)} never reach the app{pz}{auf_en}")
     if kz.get("torsi"):
         dauer.append(f"{kz['torsi']} abgeschnittene Adresse(n) entfernt")
         dauer_en.append(f"{kz['torsi']} truncated address(es) removed")
@@ -3386,6 +3439,16 @@ def _live_card(platform: Platform, schnappschuss: bool = False,
 
     auf, zu, pille, balken, knopf = _kachel_rahmen(platform, schnappschuss)
     stand = _fmt_dt(generated) if generated else "—"
+    # generated_at frischt bei JEDEM Speichern auf — auch wenn der Host in
+    # diesem Lauf ausgelassen wurde und kein einziger frischer Satz kam. „Daten-
+    # stand heute" wäre dann eine Frische-Behauptung ohne Deckung. Deshalb bei
+    # Sperre keine Datumszahl, sondern die Sperre benennen.
+    if host_ausgelassen:
+        stand_de = "Host derzeit gesperrt – in diesem Lauf keine frischen Daten"
+        stand_en = "source currently blocked – no fresh data in this run"
+    else:
+        stand_de = f"Datenstand {stand}"
+        stand_en = f"data as of {stand}"
     farbe, tagline, steckbrief = _steckbrief_teile(platform.key,
                                                    steckbriefe or {})
     punkt = _logo_chip(platform, schnappschuss, farbe) or (
@@ -3414,8 +3477,8 @@ def _live_card(platform: Platform, schnappschuss: bool = False,
       {steckbrief}
       {balken}
       <p class="card-sub">{_zs(
-          f"{new_count} neue Petition(en) im letzten Lauf · Datenstand {stand}",
-          f"{new_count} new petition(s) in the last run · data as of {stand}")}</p>
+          f"{new_count} neue Petition(en) im letzten Lauf · {stand_de}",
+          f"{new_count} new petition(s) in the last run · {stand_en}")}</p>
       {knopf}
     {zu}"""
 
@@ -3911,6 +3974,14 @@ _DASHBOARD_TEMPLATE = """<!DOCTYPE html>
       background:repeating-linear-gradient(135deg,
         var(--line) 0 6px, var(--bg) 6px 12px)}
   .completeness.unbekannt .completeness__head b{color:var(--warn-ink)}
+  /* „gesperrt" = der Host wurde in diesem Lauf ausgelassen (robots.txt nicht
+     lesbar). Wie „unbekannt" geschrafft und in Warnfarbe – ein blockierter
+     Bestand darf nicht als grüne „alle abgearbeitet"-Vollständigkeit erscheinen
+     (eko zeigte genau das). */
+  .completeness.gesperrt .completeness__bar{
+      background:repeating-linear-gradient(135deg,
+        var(--line) 0 6px, var(--bg) 6px 12px)}
+  .completeness.gesperrt .completeness__head b{color:var(--warn-ink)}
   .healthwarn{margin:0 0 12px;padding:8px 10px;border-radius:8px;font-size:12px;
               line-height:1.4;background:var(--warn-bg);color:var(--warn-ink);
               border:1px solid var(--warn-line)}
