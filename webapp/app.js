@@ -4709,6 +4709,69 @@
     return row;
   }
 
+  /* ---- Akzentfarbe: EIN Bauteil fuer Einstellungen UND Assistent ----------
+     ⚠️ 4.9.2026 herausgezogen. Seit Magazin die Vorgabe ist, gehoert die
+     Farbwahl auch in den Assistenten — und zwei Fassungen desselben Blocks
+     waeren beim naechsten Eingriff auseinandergelaufen. */
+  function relLum(hex) {
+    var f = function (paar) {
+      var v = parseInt(paar, 16) / 255;
+      return v <= 0.04045 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+  };
+    return 0.2126 * f(hex.substr(1, 2)) + 0.7152 * f(hex.substr(3, 2)) +
+           0.0722 * f(hex.substr(5, 2));
+  }
+
+  function akzentFarben() {
+    var liste = [["koralle", "#e15b52",
+      T("settings.accentKoralle", "Koralle"), false]];
+    Object.keys(window.PM_PLATFORMS || {}).forEach(function (k) {
+      var pl = window.PM_PLATFORMS[k];
+      if (!pl || !pl.color) return;
+      liste.push([k, pl.color, platformName(k) || k,
+                  relLum(pl.color) > 0.2046]);
+    });
+    return liste;
+  }
+
+  /* Baut den Block „Akzentfarbe + Akzent-Schriftfarbe". `beiAenderung` laeuft
+     nach jeder Wahl — die Einstellungen brauchen nichts, der Assistent zeichnet
+     damit seinen Schritt neu. */
+  function akzentBereich(beiAenderung) {
+    var box = el('<div class="akzentbox"></div>');
+    box.appendChild(el('<div class="srow__lbl">' +
+      esc(T("settings.accentLabel", "Akzentfarbe")) + "</div>"));
+    var acbar = el('<div class="acbar" role="group" aria-label="' +
+      esc(T("settings.accentLabel", "Akzentfarbe")) + '"></div>');
+    akzentFarben().forEach(function (a) {
+      var b = el('<button class="acbtn' +
+        (state.prefs.accent === a[0] ? " on" : "") +
+        '" type="button" style="--sw:' + a[1] + '" aria-label="' +
+        esc(a[2]) + '" title="' + esc(a[2]) + '"></button>');
+      b.addEventListener("click", function () {
+        state.prefs.accent = a[0]; savePrefs(); applyLayout();
+        acbar.querySelectorAll(".acbtn").forEach(function (x) {
+          x.classList.remove("on"); });
+        b.classList.add("on");
+        if (beiAenderung) beiAenderung();
+      });
+      acbar.appendChild(b);
+    });
+    box.appendChild(acbar);
+    box.appendChild(el('<div class="srow__lbl">' +
+      esc(T("settings.accentInkLabel", "Akzent-Schriftfarbe")) + "</div>"));
+    box.appendChild(segControl(T("settings.accentInkLabel", "Schrift"),
+      [["auto", T("settings.accentInkAuto", "Automatisch"), "fa-wand-magic-sparkles"],
+       ["light", T("settings.accentInkLight", "Hell"), "fa-sun"],
+       ["dark", T("settings.accentInkDark", "Dunkel"), "fa-moon"]],
+      state.prefs.accentInk || "auto",
+      function (v) {
+        state.prefs.accentInk = v; savePrefs(); applyLayout();
+        if (beiAenderung) beiAenderung();
+      }));
+    return box;
+  }
+
   function renderEinstellungen() {
     titleEl.textContent = T("nav.settings", "Einstellungen");
     var live = livePlatforms()
@@ -4822,72 +4885,10 @@
        sortierte WeAct (0,181) und Avaaz (0,177) falsch nach „hell",
        obwohl auf beiden Weiß besser liest (4,5 gegen 3,7) — die
        Gruppierung widersprach damit den Paletten in layouts.css. */
-    function relLum(hex) {
-      var f = function (paar) {
-        var v = parseInt(paar, 16) / 255;
-        return v <= 0.04045 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
-      };
-      return 0.2126 * f(hex.substr(1, 2)) + 0.7152 * f(hex.substr(3, 2)) +
-             0.0722 * f(hex.substr(5, 2));
-    }
-    var ACCENTS = [["koralle", "#e15b52",
-      T("settings.accentKoralle", "Koralle"), false]];
-    Object.keys(window.PM_PLATFORMS || {}).forEach(function (k) {
-      var p = window.PM_PLATFORMS[k];
-      if (!p || !p.color) return;
-      ACCENTS.push([k, p.color, platformName(k) || k,
-                    relLum(p.color) > 0.2046]);
-    });
-    /* ⚠️ Akzentfarbe und Akzent-Schriftfarbe wirken NUR im Magazin — alle 36
-       [data-accent]-Regeln in layouts.css hängen unter
-       :root[data-layout="magazin"], und in Relief ändert ein anderer Akzent
-       nachweislich nichts (am 12.8.2026 gemessen: --accent bleibt #4bbfa4,
-       --mz-accent ist nicht einmal gesetzt). Deshalb sind sie in Relief ganz
-       ausgeblendet (Nutzerwunsch 12.8.2026) statt nur mit einem Hinweis
-       versehen.
-
-       ⚠️⚠️ Hier stand vorher „Immer sichtbar, auch in Relief: die Seite wird
-       beim Layout-Umschalten NICHT neu gezeichnet, eine erst-im-Magazin-Fassung
-       erschiene also nie." Das Argument war richtig — deshalb blendet der
-       Layout-Schalter diesen Block jetzt ausdrücklich um (akzentSichtbar()).
-       Bewusst per hidden statt per Neuzeichnen: renderEinstellungen() würde
-       den Scrollstand und jede offene Fläche mitreißen. */
-    var akzentBox = el('<div class="akzentbox"></div>');
-    akzentBox.appendChild(el('<div class="srow__lbl">' +
-      esc(T("settings.accentLabel", "Akzentfarbe")) + "</div>"));
-    /* EINE Reihe mit allen Farben, darunter die Schriftfarbe zur freien
-       Wahl (Nutzerwunsch 7.8.26 — vorher zwei benannte Gruppen mit
-       Erklärtexten drumherum). Die gerechnete Empfehlung steckt jetzt
-       in „Automatisch": sie nimmt je Farbe die besser lesbare Seite
-       (siehe Schwelle oben). Wer will, überschreibt sie. */
-    var acbar = el('<div class="acbar" role="group" aria-label="' +
-      esc(T("settings.accentLabel", "Akzentfarbe")) + '"></div>');
-    ACCENTS.forEach(function (a) {
-      var b = el('<button class="acbtn' +
-        (state.prefs.accent === a[0] ? " on" : "") +
-        '" type="button" style="--sw:' + a[1] + '" aria-label="' +
-        esc(a[2]) + '" title="' + esc(a[2]) + '"></button>');
-      b.addEventListener("click", function () {
-        state.prefs.accent = a[0]; savePrefs(); applyLayout();
-        acbar.querySelectorAll(".acbtn").forEach(function (x) {
-          x.classList.remove("on"); });
-        b.classList.add("on");
-      });
-      acbar.appendChild(b);
-    });
-    akzentBox.appendChild(acbar);
-    /* Ueberschrift ueber der Schriftfarbe (8.8.2026, Nutzerwunsch). segControl
-       verwendet sein erstes Argument ausschliesslich als aria-label und
-       zeichnet es NICHT — sichtbar wird es erst durch dieses srow__lbl,
-       dieselbe Bauform wie „Akzentfarbe" ein paar Zeilen darueber. */
-    akzentBox.appendChild(el('<div class="srow__lbl">' +
-      esc(T("settings.accentInkLabel", "Akzent-Schriftfarbe")) + "</div>"));
-    akzentBox.appendChild(segControl(T("settings.accentInkLabel", "Schrift"),
-      [["auto", T("settings.accentInkAuto", "Automatisch"), "fa-wand-magic-sparkles"],
-       ["light", T("settings.accentInkLight", "Hell"), "fa-sun"],
-       ["dark", T("settings.accentInkDark", "Dunkel"), "fa-moon"]],
-      state.prefs.accentInk || "auto",
-      function (v) { state.prefs.accentInk = v; savePrefs(); applyLayout(); }));
+    /* ⚠️ 4.9.2026: der Block steckt jetzt in akzentBereich() weiter oben —
+       seit Magazin die Vorgabe ist, braucht ihn auch der Assistent, und zwei
+       Fassungen waeren beim naechsten Eingriff auseinandergelaufen. */
+    var akzentBox = akzentBereich(null);
     content.appendChild(akzentBox);
     akzentSichtbar();
 
@@ -7182,8 +7183,28 @@
         [["relief", T("settings.layoutRelief", "Relief"), "fa-cube"],
          ["magazin", T("settings.layoutMag", "Magazin"), "fa-image"]],
         state.prefs.layout,
-        function (v) { state.prefs.layout = v; savePrefs(); applyLayout(); }));
+        /* ⚠️ NEU ZEICHNEN: der Akzent-Block darunter gilt nur im Magazin.
+           Ohne das bliebe er beim Wechsel auf Relief stehen (oder erschiene
+           beim Zurückschalten nie) — genau die Falle, die in den Einstellungen
+           mit akzentSichtbar() gelöst ist. Hier ist Neuzeichnen billiger: der
+           Assistent hat keinen Scrollstand zu retten. */
+        function (v) {
+          state.prefs.layout = v; savePrefs(); applyLayout(); renderWizard();
+        }));
       main.appendChild(layoutLbl2.note);
+
+      /* ---- Akzentfarbe (Nutzerwunsch 4.9.2026) ---------------------------
+         ⚠️ Hier stand bis heute die Begründung, die Farbwahl bleibe „bewusst
+         draußen", weil sie nur im Magazin wirke und „eine Farbwahl, die je
+         nach Layout eine Wirkung hat oder nicht, ist nichts für den ersten
+         Start". Das galt, solange RELIEF die Vorgabe war. Seit Magazin die
+         Vorgabe ist, wirkt sie bei jedem Neuling — die Begründung ist damit
+         hinfällig geworden, nicht falsch gewesen.
+
+         Gezeigt wird sie deshalb nur unter Magazin. Dasselbe Bauteil wie in
+         den Einstellungen (akzentBereich), damit beide nicht auseinanderlaufen. */
+      if (state.prefs.layout === "magazin")
+        main.appendChild(akzentBereich(null));
 
     } else if (step === 4) {
       /* ---- Benachrichtigungen + Bilder (Nutzerwunsch 12.8.2026) -----------
