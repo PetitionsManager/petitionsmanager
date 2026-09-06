@@ -193,11 +193,28 @@ BEKANNTE_FELDER = {
 HAUPTSPRACHE = "en"
 SPRACHEN = ("de", "en")
 
+# ⚠️⚠️ Die Seite wird NICHT mehr am Titel als echt erkannt, sondern an einem
+# Bauteil: dem Sprunganker "petition-data".  Grund (gemessen 5.9.2026 über ALLE
+# 1897 gelisteten Petitionen): der Titel kommt in mehreren Formen, und
+# "Petition No"/"Petition Nr" trifft nur 91 % bzw. 94 % davon.  Die übrigen
+# tragen die Nummer OHNE das Kürzel ("Petition 2716/2013, eingereicht von …",
+# "Petition 0301/2025 by …") — 138 englische und 83 deutsche Sätze, die der
+# Lauf als "kein Petitionstext" verwarf, obwohl die Seite tadellos war.
+# Aufgefallen ist es erst, als die Länder-Suche den Bestand von 91 auf 1862
+# hob: der Jahrgang 2013 trägt die Kurzform fast geschlossen (EN 0 von 104).
+# Kontrollen für den neuen Marker: auf allen 12 erreichbaren Prüfseiten
+# vorhanden (auch dort, wo der alte fehlt), auf der 404-Seite einer erfundenen
+# Nummer 0-mal.  Er ist zudem sprachunabhängig, weil er ein Anker ist und
+# keine Übersetzung.
+SEITE_MARKER = "petition-data"
+
 SPRACHE = {
     "de": {
-        "titel_marker": "Petition Nr",
+        # Erkennt den Titelsatz unter den Textsegmenten. Das Kürzel "Nr." ist
+        # optional — siehe die Messung bei SEITE_MARKER.
+        "titel_start": re.compile(r"Petition\s+(?:Nr\.?\s*)?\d{4}/\d{4}"),
         "titel_re": re.compile(
-            r"Petition Nr\.\s*(\d{4}/\d{4})\s*,?\s*eingereicht von\s+(.+?)"
+            r"Petition\s+(?:Nr\.?\s*)?(\d{4}/\d{4})\s*,?\s*eingereicht von\s+(.+?)"
             r"(?:,\s*|\s+)((?:zur?m?|über|betreffend)\s+.+)", re.S),
         "themen": "Themenbereiche",
         "land": "Land",
@@ -205,7 +222,7 @@ SPRACHE = {
         "empfaenger": "Petitionsausschuss des Europäischen Parlaments (PETI)",
     },
     "en": {
-        "titel_marker": "Petition No",
+        "titel_start": re.compile(r"Petition\s+(?:No\.?\s*)?\d{4}/\d{4}"),
         # ⚠️ Das "(?!behalf\b)" behebt einen Fehler, den es seit dem ersten Lauf
         # gibt und der erst beim Sprachvergleich am 8.8.2026 auffiel: reicht
         # jemand "on behalf of <Verein>" ein, trennte das Muster am ERSTEN
@@ -218,9 +235,11 @@ SPRACHE = {
         # das alte Muster gar nicht erkannte ("Petition No 1969/2014, by …",
         # "… (German) calling for a legal regulation …"). Sie fielen bisher auf
         # den nackten "Petition 1969/2014" zurück und verloren den Titel ganz.
+        # "filed by", "concerning" und "regarding" kamen am 5.9.2026 dazu; sie
+        # stehen in den älteren Jahrgängen ("Petition 2716/2013, filed by …").
         "titel_re": re.compile(
-            r"Petition No\s+(\d{4}/\d{4})\s*,?\s*by\s+(.+?)\s+"
-            r"(?:on(?!\s+behalf\b)|calling for)\s+(.+)", re.S),
+            r"Petition\s+(?:No\.?\s*)?(\d{4}/\d{4})\s*,?\s*(?:filed\s+)?by\s+(.+?)\s+"
+            r"(?:on(?!\s+behalf\b)|calling for|concerning|regarding)\s+(.+)", re.S),
         "themen": "Topics",
         "land": "Country",
         "summary_h": "Petition Summary",
@@ -369,6 +388,25 @@ def _zulaessig_ab(text: str, nummer: str) -> str | None:
     return None
 
 
+def _TITEL_NENNT(nummer: str) -> re.Pattern:
+    """Nennt ein Registertitel DIESE Petition?
+
+    ⚠️⚠️ Die Zeichenkette `f"Petition No {nummer}"` war zu eng und hat am
+    6.9.2026 gemessen **9 von 31** vorhandenen Mitteilungen still verworfen.
+    Der Registertitel kennt dieselbe Formvielfalt wie die Petitionsseite:
+
+        NOTICE TO MEMBERS Petition No 0179/2022 by …      (traf schon)
+        NOTICE TO MEMBERS Petition 0643/2013 by …         (ohne „No", 10 von 12)
+        NOTICE TO MEMBERS Petition No. 1989/2014 by …     (mit Punkt)
+        Petition 0169/2019, by P. T. (Bulgarian), …       (ohne Kopfzeile)
+
+    Die Nummer bleibt Pflicht — sie ist der ganze Grund für die Prüfung: ein
+    Suchtreffer kann eine FREMDE Petition betreffen (bei 0733/2024 kam eine
+    Mitteilung zu 1140/2022 mit). Gelockert wird nur das Kürzel davor.
+    `re.escape`, weil die Nummer einen Schrägstrich enthält."""
+    return re.compile(r"Petition\s+(?:No\.?\s*)?" + re.escape(nummer))
+
+
 def _notice_finden(fetcher: core.Fetcher, num: str, jahr: str) -> dict:
     """Die Mitteilung an die Mitglieder im Dokumentenregister suchen.
 
@@ -418,7 +456,7 @@ def _notice_finden(fetcher: core.Fetcher, num: str, jahr: str) -> dict:
                 # (bulgarisch, tschechisch, dänisch …). Ohne die Einschränkung
                 # auf EN vergleicht man gegen einen Titel, in dem die Nummer
                 # anders geschrieben steht.
-                if sprache == "en" and f"Petition No {nummer}" in (
+                if sprache == "en" and _TITEL_NENNT(nummer).search(
                         fassung.get("title") or ""):
                     passt = True
                 for datei in fassung.get("fileInfos") or []:
@@ -615,7 +653,7 @@ def parse_detail(html: str, url: str, slug: str,
     segs = [s.strip() for s in text.split("|") if s.strip()]
 
     title_seg = next((s for s in segs
-                      if s.startswith(L["titel_marker"])), None)
+                      if L["titel_start"].match(s)), None)
     m = L["titel_re"].match(title_seg) if title_seg else None
     if m:
         rec["title"] = f"Petition {m.group(1)}: {m.group(3).strip()[:250]}"
@@ -673,7 +711,7 @@ def parse_detail(html: str, url: str, slug: str,
         if s != L["summary_h"]:
             continue
         for t in segs[i + 1:i + 5]:
-            if len(t) > 120 and not t.startswith(L["titel_marker"]):
+            if len(t) > 120 and not L["titel_start"].match(t):
                 kandidaten.append(t)
     summary = max(kandidaten, key=len) if kandidaten else None
     # Der Text ist auf der Seite DOPPELT maskiert ("&amp;#39;" im Quelltext).
@@ -804,7 +842,7 @@ def _hole_sprache(fetcher: core.Fetcher, slug: str, lang: str):
     # Portal liefert bei Störungen/Sperren ebenfalls 200 mit Fehlerseite.
     # Solche Antworten daher als ungeklärt behandeln (Datensatz unverändert),
     # NICHT als offline – sonst kippt ein Ausfall den ganzen Bestand.
-    if SPRACHE[lang]["titel_marker"] not in resp.text:
+    if SEITE_MARKER not in resp.text:
         return "ungeklärt", None
     return "vorhanden", parse_detail(resp.text, url, slug, lang)
 
