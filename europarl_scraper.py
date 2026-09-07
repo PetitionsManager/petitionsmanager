@@ -309,7 +309,12 @@ _DATUM = r"(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})"
 # mehr („… on 12 December 2025 for petition 1268/2025 AND 16 January 2026 for
 # petition 1559/2025"). Ein Ausdruck, der je Datum die Einleitung verlangt,
 # findet nur das erste; genau daran ist die zweite Fassung gescheitert.
-_ADMIS_SPAN_RE = re.compile(r"declared\s+admissible\s+on\s+(.{0,400})",
+# ⚠️⚠️ Der LOOKAHEAD ist tragend. Ohne ihn verbraucht der erste Treffer bis zu
+# 400 Zeichen, und ein direkt folgender zweiter Vermerk verschwindet darin —
+# das Dokument sieht dann aus, als nenne es nur EIN Datum, und Form A unten
+# haelt ein fremdes Datum fuer zugeordnet. Genau so bekam 2098/2014 den
+# 22.5.2012 der Petition 0070/2012 (gemessen 6.9.2026).
+_ADMIS_SPAN_RE = re.compile(r"(?=declared\s+admissible\s+on\s+(.{0,400}))",
                             re.I | re.S)
 _PAAR_RE = re.compile(rf"{_DATUM}(?:\s+for\s+petition\s+(\d{{4}}/\d{{4}}))?",
                       re.I)
@@ -322,7 +327,13 @@ _ADMIS_VOR_RE = re.compile(
 # entscheidet, ob ein Datum ohne Zuordnung überhaupt verwertbar ist.
 _BETREFF_RE = re.compile(r"Subject:(.*?)(?:\n\s*1\.\s|Summary of petition)",
                          re.S | re.I)
-_NUMMER_RE = re.compile(r"Petition\s+No\.?\s*(\d{4}/\d{4})", re.I)
+# ⚠️⚠️ Das Kuerzel ist OPTIONAL, sonst zaehlt der Betreff eines Sammeldokuments
+# zu wenige Petitionen: „Petition 0070/2012 by …" (ohne „No") wurde uebersehen,
+# das Dokument galt als Einzelfall, und Form A gab dessen Datum an die falsche
+# Petition. Gemessen 6.9.2026 ueber alle 929 Dokumente des Bestands: mit dem
+# Lookahead oben zusammen verschwinden 3 Fehlzuordnungen und 51 korrekte Daten
+# kommen hinzu (0 Daten aendern sich auf einen anderen Wert).
+_NUMMER_RE = re.compile(r"Petition\s+(?:No\.?\s*)?(\d{4}/\d{4})", re.I)
 
 _PDFTOTEXT_GEMELDET = False
 
