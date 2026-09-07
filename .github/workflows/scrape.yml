@@ -101,8 +101,19 @@ jobs:
           restore-keys: |
             petition-stores-
 
+      # Automatische Übernahme lokal gepflegter Stores: europarl/wemove werden
+      # auf dem Rechner des Nutzers gescrapt (WAF sperrt Rechenzentren) und
+      # gepusht. Genommen wird die Repo-Fassung NUR, wenn ihr letzter
+      # ABGESCHLOSSENER Lauf (lauf_verlauf, nicht generated_at!) jünger ist
+      # als der des Cache-Stands — ein später doch erfolgreicher CI-Scrape
+      # gewinnt damit von allein wieder. Der Schritt darf den Lauf nie kippen.
+      - name: "Jüngere Repo-Stores übernehmen (automatisch)"
+        run: python3 ci_stores_uebernehmen.py || echo "::warning title=Store-Übernahme::Skript scheiterte – Lauf geht mit dem Cache-Stand weiter"
+
       # ⚠️ MUSS nach dem Cache-Restore stehen – der überschreibt sonst genau
       # das, was hier eingespielt wird. Siehe die Begründung bei der Eingabe.
+      # Läuft bewusst NACH der automatischen Übernahme: der manuelle Schalter
+      # ist der Zwangs-Override und behält das letzte Wort.
       - name: "Scraper-Zustand aus dem Repo einspeisen (einmalig, auf Anforderung)"
         if: ${{ inputs.store_aus_repo != '' }}
         env:
