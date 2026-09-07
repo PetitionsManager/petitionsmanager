@@ -150,12 +150,27 @@ def versenden(betreff: str, text: str) -> bool:
 
 
 def main() -> int:
-    betreff, text = bericht_bauen()
+    # Alles Diagnostische gehört in die ::error::-Zeile selbst — die
+    # Lauf-Protokolle sind ohne Token nicht lesbar (HTTP 403), Anmerkungen
+    # über /commits/<sha>/check-runs stehen jedem offen. Ein nackter
+    # Traceback wäre hier ein unlesbares „exit code 1".
+    try:
+        betreff, text = bericht_bauen()
+    except Exception as e:
+        print(f"::error title=Wochenbericht::Bericht-Bau scheiterte: "
+              f"{type(e).__name__}: {e}")
+        return 1
     print(betreff)
     print()
     print(text)
     print()
-    versenden(betreff, text)
+    try:
+        versenden(betreff, text)
+    except Exception as e:
+        # Fehlertext nennt Host/Login-Umstände, nie das Passwort.
+        print(f"::error title=Wochenbericht::Versand scheiterte: "
+              f"{type(e).__name__}: {e}")
+        return 1
     return 0
 
 
