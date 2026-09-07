@@ -28,6 +28,7 @@ import sys
 import urllib.request
 from datetime import datetime, timezone
 from email.message import EmailMessage
+from email.utils import formatdate, make_msgid
 
 BASIS = "https://petitionsmanager.github.io/petitionsmanager"
 
@@ -134,6 +135,12 @@ def versenden(betreff: str, text: str) -> bool:
     msg["Subject"] = betreff
     msg["From"] = user
     msg["To"] = an
+    # Date ist nach RFC 5322 Pflicht, Message-ID de facto auch — gesetzt wird
+    # weder das eine noch das andere von EmailMessage oder send_message().
+    # Ohne sie quittiert amavis die Mail mit "BAD HEADER SECTION, Missing
+    # required header field: Date" und sie sammelt Spam-Punkte.
+    msg["Date"] = formatdate(localtime=True)
+    msg["Message-ID"] = make_msgid(domain=user.rsplit("@", 1)[-1])
     msg.set_content(text)
     if port == 465:
         with smtplib.SMTP_SSL(host, port, timeout=30,
