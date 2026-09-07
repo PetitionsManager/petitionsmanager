@@ -1,0 +1,13 @@
+# PetitionsManager: täglicher lokaler Pflege-Lauf (europarl + WeMove-Zweige).
+# Gehört zusammen mit petitionsmanager-pflege.timer nach
+# ~/.config/systemd/user/ — Installationsschritte in INSTALL.md daneben.
+[Unit]
+Description=PetitionsManager: lokaler Pflege-Lauf (Stores scrapen und pushen)
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /home/timeras/Claude/PetitionsManager-cron/lokaler_pflege_lauf.sh
+# europarl prüft im Vollausbau ~1.700 Petitionen mit 1,5 s Abstand — das
+# darf dauern. Nach 5 h ist trotzdem Schluss.
+TimeoutStartSec=5h
+Nice=10
