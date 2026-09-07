@@ -40,6 +40,7 @@ import time
 from datetime import date
 from html import unescape as html_unescape
 from pathlib import Path
+from urllib.parse import quote
 
 from bs4 import BeautifulSoup
 
@@ -829,10 +830,51 @@ def parse_detail(html: str, url: str, slug: str,
 # Filter, Zählung und Verwandtschaftsrechnung und ist eine eigene Aufgabe.
 I18N_FELDER = ("title", "summary", "description_full", "url")
 
+# Titel + Nummer aus einer Trefferliste. Beides in EINEM Ausdruck, damit die
+# Zuordnung nicht über die Reihenfolge läuft — die Suche liefert auch fremde
+# Nummern (bei „0532/2015" kamen 0532/2020 und 0532/2021 mit).
+_LIST_TITEL_RE = re.compile(
+    r'petitionNumber=(\d{4})%252F(\d{4})"[^>]*>\s*'
+    r'<span class="petition_title">(.*?)</span>', re.S)
+# Wortlaut der Login-Schranke; steht so auf der Seite und dient als Beleg,
+# dass wirklich sie es ist und nicht irgendeine andere leere Antwort.
+_LOGIN_MARKER = "You must create a user account"
+
+
+def _listentitel(fetcher: core.Fetcher, slug: str, lang: str) -> str | None:
+    """Titel aus der öffentlichen Trefferliste holen — der Rückfall, wenn die
+    Detailseite eine Anmeldung verlangt.
+
+    ⚠️ Gemessen 7.9.2026: sechs Petitionen (0227/2022 und fünf aus 2015)
+    liefern statt der Petition eine Login-Aufforderung — HTTP 200, überall
+    dieselben 78.783 Zeichen, kein `petition-data`. Ihr **Titel steht aber
+    öffentlich in der Trefferliste**. Ohne diesen Rückfall fehlen sie im
+    Bestand ganz (fünf von ihnen) oder bleiben ein Rumpf (0227/2022, seit dem
+    6.7.2026 nur „Petition 0227/2022" ohne Text).
+
+    Kostet EINEN Abruf und nur im Fehlerfall: die Liste wird über `keyWords`
+    gezielt nach der Nummer gefragt, nicht Land für Land geholt.
+    ⚠️ Die Suche liefert auch ähnliche Nummern — deshalb wird die Nummer
+    verglichen, statt den ersten Treffer zu nehmen."""
+    num, jahr = slug.split("-")
+    url = (LIST_URL.format(land="", size=20)
+           .replace("/petitions/de/", f"/petitions/{lang}/", 1)
+           .replace("keyWords=", f"keyWords={quote(f'{num}/{jahr}')}", 1))
+    resp = fetcher.get(url)
+    if resp is None or not resp.ok:
+        return None
+    for a, b, roh in _LIST_TITEL_RE.findall(resp.text):
+        if a == num and b == jahr:
+            titel = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", roh)).strip()
+            return titel.replace("\xa0", " ") or None
+    return None
+
 
 def _hole_sprache(fetcher: core.Fetcher, slug: str, lang: str):
     """Eine Sprachfassung abrufen. Gibt (zustand, rec) zurück, wobei zustand
-    aus "vorhanden" | "fehlt" | "ungeklärt" | "offline" | "error" stammt.
+    aus "vorhanden" | "fehlt" | "login" | "ungeklärt" | "offline" | "error"
+    stammt. "login" heißt: die Seite existiert, verlangt aber eine Anmeldung —
+    dann trägt die öffentliche Trefferliste immerhin noch den Titel.
 
     ⚠️ Die Unterscheidung zwischen "fehlt" und "ungeklärt" ist nicht Kosmetik:
     die App zeigt zu einer fehlenden deutschen Fassung ein Abzeichen mit dem
@@ -854,8 +896,46 @@ def _hole_sprache(fetcher: core.Fetcher, slug: str, lang: str):
     # Solche Antworten daher als ungeklärt behandeln (Datensatz unverändert),
     # NICHT als offline – sonst kippt ein Ausfall den ganzen Bestand.
     if SEITE_MARKER not in resp.text:
+        # ⚠️⚠️ Die Login-Schranke wird EIGENS gemeldet und nicht mit einer
+        # Störung in einen Topf geworfen. Sonst deckte der Titel-Rückfall
+        # jeden Ausfall zu: der Satz bekäme „online" statt eines Fehlers, und
+        # ein reihenweiser Ausfall der Detailseiten bliebe unsichtbar.
+        if _LOGIN_MARKER in resp.text:
+            return "login", None
         return "ungeklärt", None
     return "vorhanden", parse_detail(resp.text, url, slug, lang)
+
+
+def _nur_listentitel(fetcher: core.Fetcher, slug: str) -> dict | None:
+    """Rumpf-Datensatz aus dem Listentitel, wenn die Detailseite gesperrt ist.
+
+    Gibt None zurück, wenn auch die Liste nichts hergibt — dann bleibt es beim
+    bisherigen Verhalten (Fehler, Datensatz unverändert).
+
+    ⚠️⚠️ Gesetzt wird NUR der Titel (plus Einreicher und das Jahr aus der
+    Nummer), ausdrücklich KEIN Beschreibungstext. Ein selbstgeschriebener
+    Hinweis wie „nur nach Anmeldung einsehbar" landete sonst in
+    `description_full` — und `core.make_tags()` liest genau dieses Feld und
+    machte daraus Schlagwörter. Genau so entstanden am 30.8.2026 bei 17 von 98
+    Sätzen Müll-Schlagwörter aus einer gut gemeinten Linkbeschriftung.
+    Ein leeres Textfeld ist ehrlich; ein erfundenes wäre es nicht."""
+    titel = _listentitel(fetcher, slug, HAUPTSPRACHE)
+    if not titel:
+        return None
+    L = SPRACHE[HAUPTSPRACHE]
+    rec: dict = {"lang": HAUPTSPRACHE}
+    m = L["titel_re"].match(titel)
+    if m:
+        # Gleiche Zerlegung wie in parse_detail, damit der Satz sich von einem
+        # normal gescrapten nicht unterscheidet.
+        rec["title"] = f"Petition {m.group(1)}: {m.group(3).strip()[:250]}"
+        rec["started_by"] = m.group(2).strip()[:200]
+    else:
+        rec["title"] = titel[:280]
+    rec["start_date"] = slug.split("-")[1]
+    log(f"  {slug}: Detailseite verlangt Anmeldung – Titel aus der "
+        f"Trefferliste übernommen, ohne Beschreibungstext.")
+    return rec
 
 
 def scrape_petition(fetcher: core.Fetcher, slug: str,
@@ -872,6 +952,10 @@ def scrape_petition(fetcher: core.Fetcher, slug: str,
     zustand, rec = _hole_sprache(fetcher, slug, HAUPTSPRACHE)
     if zustand == "fehlt":
         return "offline", None
+    if zustand == "login":
+        rec = _nur_listentitel(fetcher, slug)
+        if rec:
+            return "online", rec
     if zustand != "vorhanden":
         log(f"  unerwartete Antwort für {slug} (kein Petitionstext) – "
             "als Fehler gewertet, Datensatz bleibt unverändert.")
