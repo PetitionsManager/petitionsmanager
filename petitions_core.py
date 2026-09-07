@@ -1367,9 +1367,10 @@ def host_gesperrt() -> bool:
 
     Deshalb das direkte Kennzeichen: der robots-Befund liegt beim Aufruf schon
     in BEFUNDE — er entsteht beim ersten Abruf, lange bevor eine Bestands-
-    prüfung läuft. Unter dem Lock gelesen, weil monitor.py --all mehrere
-    Plattformen nebenläufig scrapt und eine Liste, die gerade wächst, sonst
-    mitten in der Iteration umkippen kann.
+    prüfung läuft. Unter dem Lock gelesen — rein vorsorglich: monitor.py
+    arbeitet die Plattformen strikt sequenziell ab (kein --all, keine Threads;
+    Stand 5.9.2026). Das Lock bleibt für den Fall künftiger Nebenläufigkeit
+    und kostet nichts.
 
     ⚠️ Der Riegel-Befund selbst wird NIE unterdrückt — er ist die eigentliche
     Aussage. Stumm werden nur die Folgemeldungen."""
@@ -3265,6 +3266,21 @@ def _kachel_rahmen(platform: Platform, schnappschuss: bool,
             _zs("Zur Liste →", "View list →", klasse="card-btn"))
 
 
+# Plattformen, deren Quelle automatische Abrufe aus der CI sperrt (WAF), die
+# aber von einem gewöhnlichen Anschluss aus erreichbar sind: ihr Bestand wird
+# per lokalem monitor.py-Lauf + store_aus_repo gepflegt. eko gehört NICHT
+# hierher — dort sperrt der Checkpoint jeden, ein lokaler Lauf hilft nicht.
+LOKALE_PFLEGE = {"europarl", "wemove_en", "wemove_fr", "wemove_it",
+                 "wemove_nl", "wemove_pl"}
+
+# Wächter für den PC-Upload: der Timer auf dem Rechner des Nutzers läuft
+# täglich (Persistent=true holt Verpasstes nach). Liegt der letzte
+# ABGESCHLOSSENE Lauf (lauf_verlauf — generated_at frischt auch ohne frische
+# Daten auf) weiter zurück, klemmt die Kette PC → Push → Auto-Übernahme,
+# und die Kachel muss es sagen, statt still zu altern.
+LOKALE_PFLEGE_MAX_TAGE = 4
+
+
 def _live_card(platform: Platform, schnappschuss: bool = False,
                steckbriefe: dict | None = None) -> str:
     store = load_store(platform.data_file)
@@ -3384,8 +3400,13 @@ def _live_card(platform: Platform, schnappschuss: bool = False,
         erfasst = len(store) + verworfen_n
         pct = min(100, round(erfasst / available * 100))
         comp_wert, comp_wert_en = f"{pct}%", f"{pct}%"
+        # „alle" nur bei ECHTEM Gleichstand — bei 220 von 222 stand hier bis
+        # 5.9.2026 „alle gefundenen abgearbeitet", und die zwei fehlenden waren
+        # damit unsichtbar. Grün (full) bleibt ab 95 %, nur das Wort wird ehrlich.
         comp_cls, comp_lbl, comp_lbl_en = (
             ("full", "alle gefundenen abgearbeitet", "all found items processed")
+            if erfasst >= available else
+            ("full", "fast alle abgearbeitet", "nearly all processed")
             if pct >= 95 else
             ("grow", "Rückstand", "backlog") if pct >= 50 else
             ("low", "großer Rückstand", "large backlog"))
@@ -3482,6 +3503,44 @@ def _live_card(platform: Platform, schnappschuss: bool = False,
             "Dauerzustand: " + " · ".join(dauer),
             "Steady state: " + " · ".join(dauer_en)) + "</div>"
 
+    pflege_html = ""
+    if platform.key in LOKALE_PFLEGE:
+        pflege_html = '<div class="healthnote">' + _zs(
+            "🔄 Die Quelle sperrt automatische Abrufe aus der CI – dieser "
+            "Bestand wird manuell per lokalem Lauf aufgefüllt.",
+            "🔄 The source blocks automated fetches from CI – this data set "
+            "is replenished manually via local runs.") + "</div>"
+        # Altert der Bestand, ist die Kette PC → Push → Übernahme gerissen.
+        letzter = None
+        try:
+            letzter = _dt.datetime.fromisoformat(
+                (meta.get("lauf_verlauf") or [])[-1]["zeit"])
+        except (KeyError, IndexError, TypeError, ValueError):
+            pass
+        if letzter is not None and letzter.tzinfo is None:
+            # Naiver Stempel: nicht mit aware-now verrechenbar — lieber als
+            # „unbekannt" warnen, als den ganzen Dashboard-Bau zu kippen.
+            letzter = None
+        alter_tage = (None if letzter is None else
+                      (_dt.datetime.now(_dt.timezone.utc) - letzter).days)
+        if alter_tage is None or alter_tage > LOKALE_PFLEGE_MAX_TAGE:
+            wann = (f"vor {alter_tage} Tagen" if alter_tage is not None
+                    else "nie verzeichnet")
+            wann_en = (f"{alter_tage} days ago" if alter_tage is not None
+                       else "never recorded")
+            pflege_html = ('<div class="healthwarn">'
+                           + _zs("⚠ Lokale Pflege überfällig",
+                                 "⚠ Local maintenance overdue", tag="b")
+                           + _zs(f"Letzter abgeschlossener Lauf {wann} "
+                                 f"(Schwelle {LOKALE_PFLEGE_MAX_TAGE} Tage). "
+                                 f"Läuft der Timer auf dem Pflege-Rechner, "
+                                 f"und geht sein Push durch?",
+                                 f"Last completed run {wann_en} (threshold "
+                                 f"{LOKALE_PFLEGE_MAX_TAGE} days). Is the "
+                                 f"maintenance machine's timer running and "
+                                 f"its push getting through?")
+                           + "</div>") + pflege_html
+
     auf, zu, pille, balken, knopf = _kachel_rahmen(platform, schnappschuss)
     stand = _fmt_dt(generated) if generated else "—"
     # generated_at frischt bei JEDEM Speichern auf — auch wenn der Host in
@@ -3519,6 +3578,7 @@ def _live_card(platform: Platform, schnappschuss: bool = False,
         {_zs(comp_sub, comp_sub_en, klasse="completeness__sub")}
       </div>
       {warn_html}
+      {pflege_html}
       {steckbrief}
       {balken}
       <p class="card-sub">{_zs(
