@@ -149,6 +149,18 @@ AVAAZ_PFADKUERZEL = {"pt": "po", "ko": "kr", "ja": "jp", "zh": "ct"}
 AVAAZ_SPRACHEN = ("el", "es", "fr", "id", "it", "ko", "ms", "nl", "pl",
                   "pt", "ro", "ru", "sw", "tr", "uk", "zh", "ja")
 
+# Zweige, die bei einzelnen Sprachen an der QUELLE leer sind — gemessen
+# 5.9.2026, nicht geraten: avaaz.org/ms/ leitet auf die englische Startseite
+# um, die ms-Übersicht („Petisyen Komuniti Avaaz") verlinkt ausschließlich
+# Navigation (about, my_account, …) und recent_petitions.json liefert
+# {"petitions": []}. Die Startseiten von id und sw verlinken keine
+# /campaign/-Slugs (id: 5 Petitions-Links, 0 Kampagnen; sw: 0/0 — sw-Petitionen
+# kommen aus Übersicht und Feeds). entdeckung(aufgegeben=True) meldet die
+# RÜCKKEHR eines solchen Zweigs als Hinweis — liefert Avaaz dort wieder etwas,
+# gehört die Sprache hier gestrichen.
+KEINE_PETITIONEN = {"ms"}
+KEINE_KAMPAGNEN = {"ms", "id", "sw"}
+
 
 def _pfad(sprache: str) -> str:
     """ISO-Kürzel → das Wegstück, das Avaaz in der Adresse benutzt."""
@@ -302,10 +314,12 @@ def discover_slugs(fetcher: core.Fetcher,
     # Kuratierung anschlägt, entwertet die echten Warnungen daneben. Was hier
     # zählt, ist der Sprung auf null.
     core.entdeckung("Petitions-Quellen", len(found),
+                    aufgegeben=sprache in KEINE_PETITIONEN,
                     name_en="petition sources")
     # Die Kampagnen hängen an EINER Quelle (nur die Startseite verlinkt sie) –
     # der Zweig kann still verschwinden, ohne dass die Petitionen es zeigen.
     core.entdeckung("Avaaz-eigene Kampagnen", len(campaigns),
+                    aufgegeben=sprache in KEINE_KAMPAGNEN,
                     name_en="Avaaz’s own campaigns")
     return found, campaigns
 
@@ -1101,8 +1115,12 @@ def run_sprache(args, sprache: str = "en") -> None:
     prog(message="Speichere & baue HTML …")
     save(quiet=False, new_petitions_last_run=neu,
          available=len(petitionen) + len(kampagnen))
-    core.write_list_html(PLATFORM_EN)
-    log("Fertig (Avaaz English).")
+    # ⚠️ Bis 5.9.2026 stand hier fest PLATFORM_EN — die Listen-HTMLs der 16
+    # anderen Sprachzweige wurden dadurch nie geschrieben (Kachel-Link lief
+    # ins Leere), stattdessen überschrieb jeder Zweig die englische Liste.
+    core.write_list_html(PLATFORM_EN if sprache == "en"
+                         else PLATFORM_JE_SPRACHE[sprache])
+    log(f"Fertig (Avaaz {sprache}).")
 
 
 def check_en(fetcher):
