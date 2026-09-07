@@ -1,0 +1,35 @@
+# Wöchentlicher Zustandsbericht per E-Mail (wochenbericht.py).
+# Liest nur die eigene veröffentlichte Seite; misst KEINE Fremd-Hosts.
+# Secrets: SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, BERICHT_AN —
+# fehlen sie, läuft der Bericht ins Protokoll und warnt nur.
+name: Wochenbericht
+
+on:
+  schedule:
+    - cron: '17 6 * * 1'          # montags 06:17 UTC
+  workflow_dispatch: {}            # für den Erstversand-Test von Hand
+
+permissions:
+  contents: read
+
+jobs:
+  bericht:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7
+
+      - name: Python einrichten
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7
+        with:
+          python-version: '3.12'
+
+      - name: Bericht bauen und versenden
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          BERICHT_AN: ${{ secrets.BERICHT_AN }}
+        run: python3 wochenbericht.py
