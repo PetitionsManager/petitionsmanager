@@ -21,6 +21,7 @@
       "updates": "Neuigkeiten [{timestamp,text}]",
       "goal": "aktuelles Unterschriften-Ziel (falls die Plattform eines zeigt)",
       "start_date": "Startdatum (plattformabhängig ermittelt)",
+      "notice_url": "amtliches Begleitdokument je Sprache {sprache: adresse}; bei europarl die Mitteilung an die Mitglieder, aus der das Zulaessigkeitsdatum stammt. Bleibt im Store, geht NICHT in die App (der Link steckt in description_full)",
       "deadline": "Ende der Mitzeichnungs-/Unterschriftenfrist oder null",
       "closed": "true = nicht mehr mitzeichenbar (Frist abgelaufen/archiviert)",
       "phase": "Verfahrensstand der Plattform (z. B. mitzeichnung|beendet|archiv)",
@@ -30,7 +31,7 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-06T13:12:28-06:00",
+    "generated_at": "2026-09-07T01:13:21-06:00",
     "petition_count": 167,
     "available": 219,
     "unbrauchbare": {
@@ -116,10 +117,24 @@
         "mit_start": 158,
         "juengstes_start": "2026-08-01",
         "mit_code_im_text": 0
+      },
+      {
+        "zeit": "2026-09-07T01:13:21-06:00",
+        "gesamt": 167,
+        "online": 167,
+        "offline": 0,
+        "ohne_titel": 1,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 1,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 158,
+        "juengstes_start": "2026-08-01",
+        "mit_code_im_text": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-06T13:12:28-06:00",
+      "zeit": "2026-09-07T01:13:21-06:00",
       "gesamt": 167,
       "online": 167,
       "offline": 0,
@@ -132,8 +147,17 @@
       "juengstes_start": "2026-08-01",
       "mit_code_im_text": 0
     },
-    "befunde": [],
-    "health_warning": null,
+    "befunde": [
+      {
+        "stufe": "warnung",
+        "thema": "Host ausgelassen (robots.txt nicht lesbar)",
+        "text": "action.wemove.eu: HTTP 202. Der Host wurde für diesen Lauf komplett ausgelassen; von dort stammen KEINE frischen Daten. Der Bestand bleibt unverändert stehen.",
+        "zeit": "2026-09-07T01:13:15-06:00",
+        "thema_en": "Host skipped (robots.txt unreadable)",
+        "text_en": "action.wemove.eu: HTTP 202. The host was skipped entirely for this run; no fresh data came from it. The existing records stay as they are."
+      }
+    ],
+    "health_warning": "Host ausgelassen (robots.txt nicht lesbar): action.wemove.eu: HTTP 202. Der Host wurde für diesen Lauf komplett ausgelassen; von dort stammen KEINE frischen Daten. Der Bestand bleibt unverändert stehen.",
     "online_count": 167
   },
   "2026-08-protect-europe-make-polluters-pay-petition-NL": {
