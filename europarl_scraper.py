@@ -213,9 +213,9 @@ SPRACHE = {
     "de": {
         # Erkennt den Titelsatz unter den Textsegmenten. Das Kürzel "Nr." ist
         # optional — siehe die Messung bei SEITE_MARKER.
-        "titel_start": re.compile(r"Petition\s+(?:Nr\.?\s*)?\d{4}/\d{4}"),
+        "titel_start": re.compile(r"Petition\s+(?:[Nn]r\.?\s*)?\d{4}/\d{4}"),
         "titel_re": re.compile(
-            r"Petition\s+(?:Nr\.?\s*)?(\d{4}/\d{4})\s*,?\s*eingereicht von\s+(.+?)"
+            r"Petition\s+(?:[Nn]r\.?\s*)?(\d{4}/\d{4})\s*,?\s*eingereicht von\s+(.+?)"
             r"(?:,\s*|\s+)((?:zur?m?|über|betreffend)\s+.+)", re.S),
         "themen": "Themenbereiche",
         "land": "Land",
@@ -223,7 +223,7 @@ SPRACHE = {
         "empfaenger": "Petitionsausschuss des Europäischen Parlaments (PETI)",
     },
     "en": {
-        "titel_start": re.compile(r"Petition\s+(?:No\.?\s*)?\d{4}/\d{4}"),
+        "titel_start": re.compile(r"Petition\s+(?:[Nn]o\.?\s*)?\d{4}/\d{4}"),
         # ⚠️ Das "(?!behalf\b)" behebt einen Fehler, den es seit dem ersten Lauf
         # gibt und der erst beim Sprachvergleich am 8.8.2026 auffiel: reicht
         # jemand "on behalf of <Verein>" ein, trennte das Muster am ERSTEN
@@ -239,7 +239,7 @@ SPRACHE = {
         # "filed by", "concerning" und "regarding" kamen am 5.9.2026 dazu; sie
         # stehen in den älteren Jahrgängen ("Petition 2716/2013, filed by …").
         "titel_re": re.compile(
-            r"Petition\s+(?:No\.?\s*)?(\d{4}/\d{4})\s*,?\s*(?:filed\s+)?by\s+(.+?)\s+"
+            r"Petition\s+(?:[Nn]o\.?\s*)?(\d{4}/\d{4})\s*,?\s*(?:[Ff]iled\s+)?by\s+(.+?)\s+"
             r"(?:on(?!\s+behalf\b)|calling for|concerning|regarding)\s+(.+)", re.S),
         "themen": "Topics",
         "land": "Country",
