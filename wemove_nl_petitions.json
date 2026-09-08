@@ -31,9 +31,9 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-07T01:13:21-06:00",
+    "generated_at": "2026-09-07T21:21:44-06:00",
     "petition_count": 167,
-    "available": 219,
+    "available": 220,
     "unbrauchbare": {
       "2023-01-lucas-ig-wrapper-test-petition-NL": "2026-09-05T15:11:04-06:00",
       "2023-07-simon-1-NL": "2026-09-05T16:38:40-06:00",
@@ -131,10 +131,24 @@
         "mit_start": 158,
         "juengstes_start": "2026-08-01",
         "mit_code_im_text": 0
+      },
+      {
+        "zeit": "2026-09-07T21:21:44-06:00",
+        "gesamt": 167,
+        "online": 167,
+        "offline": 0,
+        "ohne_titel": 1,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 1,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 158,
+        "juengstes_start": "2026-08-01",
+        "mit_code_im_text": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-07T01:13:21-06:00",
+      "zeit": "2026-09-07T21:21:44-06:00",
       "gesamt": 167,
       "online": 167,
       "offline": 0,
@@ -152,7 +166,7 @@
         "stufe": "warnung",
         "thema": "Host ausgelassen (robots.txt nicht lesbar)",
         "text": "action.wemove.eu: HTTP 202. Der Host wurde für diesen Lauf komplett ausgelassen; von dort stammen KEINE frischen Daten. Der Bestand bleibt unverändert stehen.",
-        "zeit": "2026-09-07T01:13:15-06:00",
+        "zeit": "2026-09-07T21:21:37-06:00",
         "thema_en": "Host skipped (robots.txt unreadable)",
         "text_en": "action.wemove.eu: HTTP 202. The host was skipped entirely for this run; no fresh data came from it. The existing records stay as they are."
       }
