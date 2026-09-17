@@ -781,6 +781,12 @@ PLATFORM = Platform(
                   "nicht geladen – dort bleibt nur der Anreißer der API; der "
                   "Zähler kommt trotzdem, er hängt am erlaubten /progress/. "
                   "Das Format leitet sich aus dem Button-Text ab.",
+    openness_note_en="Moderate: no open listing; actions come from an external "
+                     "JSON API (found in the page's JS), counts from "
+                     "/progress/, texts from the /sign/ page. The /act/ action "
+                     "pages are blocked by robots and are not loaded — for "
+                     "those only the API teaser remains, and the format is "
+                     "derived from the button text.",
     name="350.org",
     eyebrow="350.org · Klima-Aktionen (deutsch): Petitionen, E-Mail- & Brief-Aktionen",
     source_url="https://350.org/de/mitmachen/",
@@ -815,6 +821,12 @@ PLATFORM_EN = Platform(
                   "„Language: English\". Zähler über /progress/, Texte von der "
                   "Aktionsseite (/sign/, /letter/, /signup/). /act/ ist per "
                   "robots gesperrt und wird nicht geladen.",
+    openness_note_en="Moderate: no open listing; actions come through the same "
+                     "external JSON API as the German branch, only with the "
+                     "language filter “Language: English”. Counts via "
+                     "/progress/, texts from the action page (/sign/, "
+                     "/letter/, /signup/). /act/ is blocked by robots and is "
+                     "not loaded.",
     name="350.org (English)",
     eyebrow="350.org · Klima-Aktionen (englisch): Petitionen, E-Mail- & Brief-Aktionen",
     source_url="https://350.org/",

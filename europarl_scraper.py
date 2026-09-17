@@ -1090,6 +1090,9 @@ PLATFORM = Platform(
     openness_note="Offen: offizielle Suche mit Länder-/Statusfilter, server-"
                   "gerendert; Eigenheiten (Load-more-Paginierung, doppelt kodierte "
                   "URLs) und keine öffentliche Unterstützerzahl.",
+    openness_note_en="Open: official search with country and status filters, "
+                     "server-rendered; quirks (load-more pagination, doubly "
+                     "encoded URLs) and no public supporter count.",
     name="Europäisches Parlament",
     eyebrow="EU-Parlament (PETI) · Petitionen aus Deutschland, offen zur Unterstützung",
     source_url=f"https://www.europarl.europa.eu/petitions/{HAUPTSPRACHE}/home",

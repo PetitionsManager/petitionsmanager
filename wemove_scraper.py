@@ -598,6 +598,9 @@ PLATFORM = Platform(
     openness_note="Mittel: Kampagnen inkl. Archiv verlinkt, aber Zähler nur über "
                   "separaten Progress-Endpoint und gedrosselte Antworten bei "
                   "Serien-Abrufen.",
+    openness_note_en="Moderate: campaigns including the archive are linked, "
+                     "but counts only come from a separate progress endpoint, "
+                     "and responses are throttled on series of requests.",
     name="WeMove Europe",
     eyebrow="WeMove Europe · Kampagnen (deutsch)",
     source_url="https://wemove.eu/de/campaigns",
@@ -828,6 +831,25 @@ _FREMD_NOTE = ("Mittel: die Kampagnen-Übersicht ist offen und listet sogar den 
                "ganzen mehrsprachigen Katalog, aber die Detailseiten liegen "
                "hinter einem Checkpoint, der nach einigen Dutzend Abrufen "
                "greift. Der Bestand füllt sich deshalb über mehrere Läufe.")
+# Wortgleich aus webapp/platforms.js (IIFE am Dateiende, eine Fassung für
+# alle fünf fremdsprachigen Zweige).
+_FREMD_NOTE_EN = ("Moderate: the campaign overview is open and even lists the "
+                  "entire multilingual catalogue, but the detail pages sit "
+                  "behind a checkpoint that kicks in after a few dozen "
+                  "requests. The record therefore fills up across several "
+                  "runs.")
+# ⚠️ EINE Ausnahme, und sie ist kein Versehen: für „wemove_en" führt
+# platforms.js einen EIGENEN englischen Satz — er nennt die Übersicht
+# ausdrücklich „English". Deutsch teilen sich alle sechs Zweige _FREMD_NOTE,
+# englisch tun es nur fünf. Wer hier vereinheitlicht, weicht von der Fassung
+# ab, die englische Nutzer in der App sehen.
+_NOTE_EN_JE_SPRACHE = {
+    "en": ("Moderate: the English campaign overview is open and even "
+           "lists the entire multilingual catalogue, but the detail "
+           "pages sit behind a checkpoint that kicks in after a few "
+           "dozen requests. The record therefore fills up across "
+           "several runs."),
+}
 _FREMD_WUNSCH = ("Die Übersicht ist offen und listet den ganzen mehrsprachigen "
                  "Katalog. Die Detailseiten laufen aber nach einigen Dutzend "
                  "Abrufen in einen Checkpoint; im englischen Bestand standen "
@@ -843,6 +865,7 @@ def _platform_fuer(lang: str) -> Platform:
         openness=3,
         openness_wunsch=_FREMD_WUNSCH,
         openness_note=_FREMD_NOTE,
+        openness_note_en=_NOTE_EN_JE_SPRACHE.get(lang, _FREMD_NOTE_EN),
         name=f"WeMove Europe ({SPRACHNAME[lang]})",
         eyebrow=f"WeMove Europe · Kampagnen ({SPRACHNAME[lang]})",
         source_url=f"https://wemove.eu/{lang}/campaigns",

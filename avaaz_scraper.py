@@ -1018,6 +1018,11 @@ PLATFORM = Platform(
                   "Cloudflare blockt Nicht-Browser-Clients. Der Altbestand "
                   "kommt über das Internet Archive herein (--archive), "
                   "portionsweise über mehrere Läufe.",
+    openness_note_en="Limited: no public overall listing (only ~5-10 "
+                     "curated/popular/new ones), counts only via a stats JSON, "
+                     "Cloudflare blocks non-browser clients. Older campaigns "
+                     "come in through the Internet Archive (--archive), in "
+                     "portions across several runs.",
     name="Avaaz",
     eyebrow="Avaaz · Bürgerpetitionen & Kampagnen (deutsch)",
     source_url="https://secure.avaaz.org/community_petitions/de/",
@@ -1166,6 +1171,9 @@ PLATFORM_EN = Platform(
     openness_note="Eingeschränkt: keine öffentliche Gesamtliste (nur ~5-10 "
                   "kuratierte/beliebte/neue), Zähler nur via Stats-JSON, "
                   "Cloudflare blockt Nicht-Browser-Clients.",
+    openness_note_en="Limited: no public overall listing (only ~5-10 "
+                     "curated/popular/new ones), counts only via a stats JSON, "
+                     "Cloudflare blocks non-browser clients.",
     name="Avaaz (English)",
     eyebrow="Avaaz · Bürgerpetitionen & Kampagnen (englisch)",
     source_url="https://secure.avaaz.org/community_petitions/en/",
@@ -1195,6 +1203,11 @@ SPRACHNAME = {
 _FREMD_NOTE = ("Eingeschränkt: es gibt keine öffentliche Gesamtliste, sichtbar "
                "sind nur rund 5 bis 10 kuratierte Petitionen und Kampagnen. "
                "Der Bestand wächst über die Zeit.")
+# Wortgleich aus webapp/platforms.js (dort erzeugt das IIFE am Dateiende
+# denselben Satz für alle 17 Sprachen).
+_FREMD_NOTE_EN = ("Restricted: there is no public complete list, only some 5 "
+                  "to 10 curated petitions and campaigns are visible. The "
+                  "record grows over time.")
 _FREMD_WUNSCH = ("Eine öffentliche Gesamtliste fehlt; sichtbar sind nur rund 5 "
                  "bis 10 kuratierte Kampagnen, ältere nur über das Internet "
                  "Archive. Ein paginierter Index oder eine Sitemap würde reichen.")
@@ -1207,6 +1220,7 @@ def _platform_fuer(sprache: str) -> Platform:
         openness=2,
         openness_wunsch=_FREMD_WUNSCH,
         openness_note=_FREMD_NOTE,
+        openness_note_en=_FREMD_NOTE_EN,
         name=f"Avaaz ({SPRACHNAME[sprache]})",
         eyebrow=f"Avaaz · Bürgerpetitionen & Kampagnen ({SPRACHNAME[sprache]})",
         source_url=f"{BASE_URL}/community_petitions/{_pfad(sprache)}/",

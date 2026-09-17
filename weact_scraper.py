@@ -794,6 +794,9 @@ PLATFORM = Platform(
     openness_note="Offen: vollständige Listen über Kategorien + Pagination, aber "
                   "technische Hürden (Custom-Elemente statt Links, verstecktes "
                   "cpage-Parameter, zwei verschiedene Seiten-Templates).",
+    openness_note_en="Open: complete listings via categories + pagination, but "
+                     "technical hurdles (custom elements instead of links, a "
+                     "hidden cpage parameter, two different page templates).",
     name="WeAct",
     eyebrow="WeAct · Campact",
     source_url=BASE_URL,

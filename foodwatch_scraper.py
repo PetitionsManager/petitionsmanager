@@ -507,6 +507,9 @@ PLATFORM = Platform(
                     "steht darin.",
     openness_note="Sehr offen: komplette Aktionsliste, Zähler und Volltexte direkt "
                   "im server-gerenderten HTML, robots.txt erlaubt praktisch alles.",
+    openness_note_en="Very open: the complete list of actions, counts and full "
+                     "texts are directly in the server-rendered HTML, and "
+                     "robots.txt permits practically everything.",
     name="foodwatch",
     eyebrow="foodwatch · Mitmach-Aktionen (deutsch)",
     source_url="https://www.foodwatch.org/de/mitmachen",
@@ -721,6 +724,8 @@ def _platform_zweig(lang: str) -> Platform:
                         "JavaScript.",
         openness_note="Sehr offen: vollständige Aktionsliste, Zähler und "
                       "Volltext server-gerendert.",
+        openness_note_en="Very open: complete action list, counter and full "
+                         "text rendered server-side.",
         name=z["name"],
         eyebrow=z["eyebrow"],
         source_url=z["source_url"],
@@ -757,6 +762,9 @@ PLATFORM_EN = Platform(
                     "steht darin.",
     openness_note="Sehr offen: komplette Aktionsliste, Zähler und Volltexte direkt "
                   "im server-gerenderten HTML, robots.txt erlaubt praktisch alles.",
+    openness_note_en="Very open: the complete list of actions, counts and full "
+                     "texts are directly in the server-rendered HTML, and "
+                     "robots.txt permits practically everything.",
     name="foodwatch (English)",
     eyebrow="foodwatch · Mitmach-Aktionen (englisch)",
     source_url="https://www.foodwatch.org/en",

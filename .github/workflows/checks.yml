@@ -238,3 +238,67 @@ jobs:
             console.log(`texts.js und platforms.js vollständig `
               + `(${Object.keys(P).length} Plattformen)`);
           '
+
+      # ⚠️ Seit 17.9.2026 steht jeder ENGLISCHE Offenheitssatz ZWEIMAL im Repo:
+      # in platforms.js liest ihn die App, in openness_note_en das Dashboard
+      # (petitions_core._openness_badge). Zwei Fassungen derselben Angabe laufen
+      # auseinander, und man merkt es erst, wenn jemand die falsche liest — beim
+      # Tooltip hiesse das: englische Nutzer sehen still den deutschen Satz.
+      # Genau dieser Zustand lag bis dahin auf ALLEN 41 Kacheln vor, weil das
+      # Feld openness_note_en gar nicht existierte und der Rueckfall griff.
+      #
+      # ⚠️⚠️ Warum das Dashboard platforms.js nicht einfach selbst liest (wie es
+      # _app_steckbriefe() fuer den Steckbrief tut): nur 17 der 41 Schluessel
+      # stehen dort flach, die anderen 24 erzeugt ein IIFE am Dateiende (5x
+      # wemove, 17x avaaz, 2x foodwatch). Ein Regex kaeme daran nicht heran,
+      # node schon — und im Scrape-Lauf gibt es kein node, hier aber sehr wohl.
+      - name: Englische Offenheitstexte gegen platforms.js abgleichen
+        run: |
+          node -e '
+            global.window = {};
+            require("./webapp/platforms.js");
+            const EN = global.window.PM_PLATFORMS_EN || {};
+            const aus = {};
+            for (const [k, v] of Object.entries(EN))
+              if (v && v.opennessNote) aus[k] = v.opennessNote;
+            require("fs").writeFileSync("/tmp/openness_en.json", JSON.stringify(aus));
+            console.log(`platforms.js: ${Object.keys(aus).length} englische Offenheitstexte gelesen`);
+          '
+          python3 - <<'PY'
+          import json
+          import sys
+
+          import monitor
+
+          js = json.load(open("/tmp/openness_en.json", encoding="utf-8"))
+          fehler, geprueft = [], 0
+          for p in monitor.PLATFORMS:
+              # Ohne Ampelstufe zeichnet _openness_badge() gar kein Badge, es
+              # gibt also auch keinen Tooltip zu uebersetzen. Ein Platzhalter
+              # ohne Bewertung darf die Pruefung deshalb nicht rot machen.
+              if not 1 <= p.openness <= 5:
+                  continue
+              geprueft += 1
+              soll, ist = js.get(p.key), p.openness_note_en
+              if not ist:
+                  fehler.append(f"{p.key}: openness_note_en fehlt im Scraper – "
+                                f"der Tooltip faellt auf Deutsch zurueck")
+              elif soll is None:
+                  fehler.append(f"{p.key}: platforms.js fuehrt kein "
+                                f"PM_PLATFORMS_EN.{p.key}.opennessNote")
+              elif ist != soll:
+                  fehler.append(f"{p.key}: die beiden Fassungen laufen auseinander\n"
+                                f"      Scraper     : {ist}\n"
+                                f"      platforms.js: {soll}")
+
+          if fehler:
+              print("Englische Offenheitstexte stimmen nicht ueberein:",
+                    file=sys.stderr)
+              for f in fehler:
+                  print("  -", f, file=sys.stderr)
+              print("\nBeide Orte muessen denselben Satz fuehren: den Scraper "
+                    "(openness_note_en) UND webapp/platforms.js.", file=sys.stderr)
+              sys.exit(1)
+          print(f"Offenheitstexte: {geprueft} Plattformen, Scraper und "
+                f"platforms.js wortgleich.")
+          PY

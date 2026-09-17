@@ -516,6 +516,10 @@ PLATFORM = Platform(
                   "Session-Cookies und verstecktem AJAX-Fragment (status.2-"
                   "Parameter nötig, Batchgröße gedeckelt) — ohne Reverse-"
                   "Engineering nicht zugänglich.",
+    openness_note_en="Limited: official data, but a JS portal with session "
+                     "cookies and a hidden AJAX fragment (the status.2 "
+                     "parameter is required, batch size is capped) — not "
+                     "accessible without reverse engineering.",
 )
 
 

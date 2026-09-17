@@ -546,6 +546,9 @@ PLATFORM = Platform(
     openness_note="Vorbildlich: vollständige öffentliche Liste (~1.600, paginiert), "
                   "alles server-gerendert (Stand, Ziel, Status, Volltext), "
                   "großzügige robots.txt mit Sitemap.",
+    openness_note_en="Exemplary: complete public listing (~1,600, paginated), "
+                     "everything server-rendered (count, target, status, full "
+                     "text), generous robots.txt with sitemap.",
     name="OpenPetition",
     eyebrow="OpenPetition · laufende Petitionen (deutsch)",
     source_url="https://www.openpetition.de/petitionen",

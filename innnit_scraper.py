@@ -364,6 +364,11 @@ PLATFORM = Platform(
                   "verstecktes internes API (per Reverse-Engineering gefunden); "
                   "keine Sitemap, Suche nur als Google-Weiterleitung. Dafür "
                   "liefert das API komplette Datensätze inkl. Volltext.",
+    openness_note_en="Moderate: a complete listing exists, but only through a "
+                     "hidden internal API (found by reverse engineering); no "
+                     "sitemap, search is merely a redirect to Google. In "
+                     "return the API delivers complete records including the "
+                     "full text.",
 )
 
 

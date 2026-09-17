@@ -142,6 +142,16 @@ class Platform:
     openness: int = 0              # Ampel 1(rot)–5(grün): Wie kooperativ gibt
                                    # die Plattform ihre Petitionen frei? 0=unbewertet
     openness_note: str = ""        # Kurzbegründung (Tooltip auf der Kachel)
+    # Englische Fassung von openness_note (17.9.2026). Ohne sie stand der
+    # Tooltip der Ampel auf allen 41 Dashboard-Kacheln in BEIDEN Sprachen
+    # deutsch — data-de und data-en trugen denselben Satz.
+    # ⚠️ Die Texte sind KEINE Neuschöpfung: sie stehen wortgleich in
+    # webapp/platforms.js als PM_PLATFORMS_EN[key].opennessNote, wo die App sie
+    # schon seit dem 8.8.2026 liest. Hier stehen sie ein zweites Mal, weil das
+    # Dashboard reines Python ist und die 24 sprachabhängigen Schlüssel dort
+    # von einem JS-IIFE erzeugt werden — ein Python-Parser käme an sie nicht
+    # heran. ⚠️ Wer einen der beiden Orte ändert, muss den anderen mitziehen.
+    openness_note_en: str = ""
     # Zweiter Satz im Nerd-Bereich (30.8.2026): was die Plattform VORBILDLICH
     # macht (Ampel 5) bzw. welche konkrete Sperre fallen müsste, damit ein
     # sauberer maschineller Zugriff möglich wäre.
@@ -246,18 +256,24 @@ def _openness_badge(platform: Platform) -> str:
     """Ampel-Badge für die Dashboard-Kachel: 5 Punkte, gefüllt bis zum Level,
     eingefärbt über .amp-<level>; Kurzbegründung als Tooltip.
 
-    Der Tooltip (``openness_note``) und der Plattformname bleiben vorerst
-    deutsch: beide gehören zum laufenden Auftrag „mehrsprachige Scraper" und
-    werden dort in den elf Scraper-Dateien übersetzt. Sobald die Felder
-    ``openness_note_en``/``name_en`` existieren, nimmt das Dashboard sie von
-    selbst — deshalb hier getattr statt einer festen Zuordnung."""
+    Der Tooltip nimmt seit dem 17.9.2026 ``openness_note_en``; bis dahin gab es
+    das Feld nicht und der Rückfall ``or notiz`` griff auf ALLEN 41 Kacheln —
+    data-de und data-en trugen denselben deutschen Satz.
+
+    ⚠️ Der Rückfall bleibt trotzdem stehen: fehlt die englische Fassung bei
+    einer neuen Plattform, ist ein sichtbar deutscher Tooltip besser als ein
+    leerer. Er darf nur nicht mehr der Normalfall sein.
+
+    ⚠️ Der Plattformname (``platform.name``) ist weiterhin einsprachig — dafür
+    gibt es kein ``name_en``, und die App löst ihn über
+    ``PM_PLATFORMS_EN[key].name`` auf."""
     lvl = platform.openness
     if not 1 <= lvl <= 5:
         return ""
     dots = "".join(f'<i class="{"on" if i <= lvl else ""}"></i>'
                    for i in range(1, 6))
     notiz = platform.openness_note
-    notiz_en = getattr(platform, "openness_note_en", "") or notiz
+    notiz_en = platform.openness_note_en or notiz
     return (f'<div class="amp amp-{lvl}" title="{_esc(notiz)}"'
             f'{_zt(notiz, notiz_en)} data-titel="1">'
             f'<span class="amp-dots">{dots}</span>'

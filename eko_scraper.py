@@ -597,6 +597,10 @@ PLATFORM = Platform(
                   "fehlen dann. Ein technisch möglicher Umweg über die "
                   "numerische Seiten-ID wäre eine Umgehung des Bot-Schutzes "
                   "und wird bewusst nicht genutzt.",
+    openness_note_en="Moderate: German campaigns are covered via the home page "
+                     "+ search (capped at 27 per term → union of many terms); "
+                     "two page templates, an overall sitemap without a "
+                     "language marker — completeness is not guaranteed.",
     # Eigenschreibweise der Plattform ist „Ekō" (mit Makron, seit der
     # Umbenennung von SumOfUs 2023) — der Name steht hier zentral und läuft
     # über publish.py ins Manifest; wirkt also erst mit dem nächsten
@@ -728,6 +732,12 @@ PLATFORM_EN = Platform(
                   "deutschen Zweig (action.eko.org, HTTP 429). Fehlt die "
                   "Detailseite, übernehmen wir Titel, Kurztext und Bild aus "
                   "der Kampagnenkarte.",
+    openness_note_en="Limited: the English campaign listing is open and even "
+                     "paginated (four requests cover it), but the detail pages "
+                     "sit behind the same bot protection as the German branch "
+                     "(action.eko.org, HTTP 429). Where the detail page is "
+                     "missing, title, summary and image are taken from the "
+                     "campaign card.",
     name="Ekō (English)",
     eyebrow="Ekō · Kampagnen (englisch)",
     source_url="https://eko.org/en/campaigns",
