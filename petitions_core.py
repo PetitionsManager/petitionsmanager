@@ -4634,10 +4634,19 @@ def _ablaufschema(platforms: list | None = None,
           "UTC, täglich", "UTC, daily", zustand="plan",
           z_de=f"{plan_de}. Nächster Start {_schema_datum(n_scrape)}",
           z_en=f"{plan_en}. Next start {_schema_datum(n_scrape)}"),
-        k(272, 46, 132, 46, "trig", "Timer 20:15", "Timer 20:15",
+        # ⚠️ Seit 17.9.2026 KEINE feste Uhrzeit mehr: der Timer startet 20 min
+        # nach dem ENDE des letzten Laufs (OnUnitInactiveSec), solange der
+        # Rechner an ist. Hier eine Uhrzeit zu nennen wäre Scheingenauigkeit —
+        # und die frühere Angabe „20:15" war nach der Umstellung schlicht
+        # falsch, also schädlicher als gar keine. Angegeben wird der ABSTAND.
+        k(272, 46, 132, 46, "trig", "Timer, laufend", "Timer, continuous",
           "dein Rechner", "your computer", zustand="plan",
-          z_de=plan_de + ". Schätzung: 20:15 Ortszeit + bis zu 15 min",
-          z_en=plan_en + ". Estimate: 20:15 local time + up to 15 min"),
+          z_de=plan_de + ". Kein fester Termin: 20 min nach dem Ende des "
+                         "letzten Laufs, solange der Rechner an ist "
+                         "(ein Lauf dauert rund 2 h)",
+          z_en=plan_en + ". No fixed time: 20 min after the previous run ends, "
+                         "for as long as the computer is on "
+                         "(a run takes about 2 h)"),
         k(418, 46, 122, 46, "trig", "Jeder Push", "Every push",
           "ins Repository", "to the repository", zustand="plan",
           z_de="Nicht planbar — ein Push kommt, wenn jemand pusht",
@@ -4915,15 +4924,18 @@ def _ablaufschema(platforms: list | None = None,
                           "not a fault of this page.")
     rows.append(zeile(
         st_lokal,
-        "Timer 20:15 · git pull · 6 gesperrte Zweige · Stände pushen",
-        "Timer 20:15 · git pull · 6 blocked branches · push the stores",
+        "Timer laufend · git pull · 6 gesperrte Zweige · Stände pushen",
+        "Continuous timer · git pull · 6 blocked branches · push the stores",
         "Lokale Pflege", "Local maintenance",
-        zl_de + "." + grund_lokal_de + " Nächster Lauf: 20:15 Ortszeit plus "
-        "bis zu 15 Minuten — eine Schätzung, kein Termin: verpasste Läufe "
-        "holt der Timer beim nächsten Aufwachen nach.",
-        zl_en + "." + grund_lokal_en + " Next run: 20:15 local time plus up "
-        "to 15 minutes — an estimate, not an appointment: the timer catches "
-        "up missed runs when the machine next wakes.",
+        zl_de + "." + grund_lokal_de + " Ein nächster Termin lässt sich nicht "
+        "angeben: der Timer startet 20 Minuten nach dem Ende des letzten Laufs "
+        "und nur, solange der Rechner an ist. Bei rund 2 Stunden Laufdauer sind "
+        "das etwa 7 Läufe an einem 16-Stunden-Tag — aber wann der Rechner "
+        "läuft, weiß diese Seite nicht.",
+        zl_en + "." + grund_lokal_en + " A next time cannot be given: the timer "
+        "starts 20 minutes after the previous run ends, and only while the "
+        "computer is on. At roughly 2 hours per run that is about 7 runs on a "
+        "16-hour day — but this page cannot know when the computer is running.",
         f"Quelle: lauf_verlauf der {len(LOKALE_PFLEGE)} lokal gepflegten "
         f"Bestände, Schwelle {LOKALE_PFLEGE_MAX_TAGE} Tage — dieselbe, mit der "
         f"auch die Kacheln warnen. Diese Seite entsteht in der Cloud und kann "
