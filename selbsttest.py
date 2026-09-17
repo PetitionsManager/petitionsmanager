@@ -19,6 +19,7 @@ Dutzend Fälle ist eine Abhängigkeit mehr der schlechtere Tausch. Aufruf:
 """
 from __future__ import annotations
 
+import json
 import sys
 import tempfile
 from datetime import date, timedelta
@@ -29,6 +30,7 @@ from bs4 import BeautifulSoup
 
 import changeorg_scraper as changeorg
 import europarl_scraper as europarl
+import hole_live_daten as hld
 import openpetition_scraper as openpetition
 import petitions_core as core
 
@@ -1022,6 +1024,145 @@ pruefe("Register hält den Befund je Kandidat fest",
        ["tr/TR", "hu/HU"])
 pruefe("Register übersteht einen ABGEBROCHENEN Lauf",
        sorted(meta3.get("verworfen") or []), soll2)
+
+
+# ---------------------------------------------------------------------------
+# 10. hole_live_daten — die Sprachpakete und die Prüfung, die sie sehen muss
+# ---------------------------------------------------------------------------
+# Warum es diesen Abschnitt gibt (17.9.2026): `dateiliste()` baute die
+# Downloadliste allein aus dem Manifest-Feld `tv` und ließ damit die
+# fremdsprachigen Pakete `<key>.<lg>.t<n>.json` (Feld `tvl`) weg — 15 Dateien,
+# 3,0 MB, 1.922 Datensätze fehlten in JEDER gebauten APK, während auf Pages
+# alles bereitlag. Aufgefallen ist es monatelang nicht, weil `pruefe()` die
+# tc-Verweise gegen `tv` hielt: gegen dieselbe Quelle, aus der `dateiliste()`
+# ihre Auswahl bildet. Das Prüfwerkzeug maß seine eigene Auswahl und meldete
+# „alle Listen und Volltext-Verweise stimmig".
+#
+# Deshalb prüfen die Fälle unten BEIDE Hälften: dass die Sprachpakete in der
+# Downloadliste stehen, und dass ihr Fehlen auffällt. Gegen das Netz läuft
+# nichts — `dateiliste()` und `pruefe()` sind reine Rechnung auf einem
+# Kunstbestand im Temp-Ordner.
+KUNST_MANIFEST = {
+    "generated_at": "2026-09-17T00:00:00+00:00", "format": 2,
+    "platforms": [{"key": "kunst", "count": 2,
+                   "tv": {"0": "aaaaaaaa"},
+                   "tvl": {"en": {"0": "bbbbbbbb"}}}],
+}
+KUNST_SAETZE = [{"url": "https://x.test/a", "tc": 0, "i18n": {"en": {"tc": 0}}},
+                {"url": "https://x.test/b", "tc": 0, "i18n": {"en": {"tc": 0}}}]
+
+
+def kunst_bestand(ordner: Path) -> None:
+    """Heiler Mini-Datenstand: Liste, deutsches Paket, englisches Paket."""
+    (ordner / "kunst.json").write_text(json.dumps(KUNST_SAETZE))
+    texte = json.dumps({r["url"]: f"<p>{r['url']}</p>" for r in KUNST_SAETZE})
+    (ordner / "kunst.t0.json").write_text(texte)
+    (ordner / "kunst.en.t0.json").write_text(texte)
+
+
+def _ohne_ausgabe(arbeit):
+    """hld.log stilllegen und einsammeln – sonst redet die Prüfung dazwischen."""
+    gesagt: list[str] = []
+    echtes = hld.log
+    hld.log = gesagt.append
+    try:
+        arbeit()
+    finally:
+        hld.log = echtes
+    return gesagt
+
+
+def hld_grund(beschaedigen=None) -> str:
+    """Ein Wort für das, WORAN die Prüfung sich stört. "gruen" = keine Klage.
+
+    Nicht bloß grün/rot: eine Prüfung, die aus dem FALSCHEN Grund rot wird,
+    ist von einer richtigen nicht zu unterscheiden. Ein leeres Paket muss über
+    die Stichprobe auffallen, nicht über die Existenzprüfung.
+    """
+    def lauf():
+        with tempfile.TemporaryDirectory() as tmp:
+            ordner = Path(tmp)
+            kunst_bestand(ordner)
+            if beschaedigen:
+                beschaedigen(ordner)
+            try:
+                hld.pruefe(KUNST_MANIFEST, ordner)
+            except SystemExit:
+                pass
+    text = " ".join(z for z in _ohne_ausgabe(lauf) if "PROBLEM" in z)
+    if not text:
+        return "gruen"
+    for kennwort, klasse in (("unsichere Paketnamen", "unsicher"),
+                             ("nicht geladen", "fehlt"),
+                             ("keinem Manifest-Feld", "ungenannt"),
+                             ("Volltext von", "leer")):
+        if kennwort in text:
+            return klasse
+    return f"unerwartet: {text[:60]}"
+
+
+def _verweis_auf_paket_1(ordner: Path) -> None:
+    """Satz zeigt auf t1; die Datei gibt es, das Manifest nennt sie nicht."""
+    saetze = json.loads((ordner / "kunst.json").read_text())
+    saetze[0]["tc"] = 1
+    (ordner / "kunst.json").write_text(json.dumps(saetze))
+    (ordner / "kunst.t1.json").write_text(
+        json.dumps({saetze[0]["url"]: "<p>x</p>"}))
+
+
+def _boeses_sprachkuerzel(ordner: Path) -> None:
+    """Das Kürzel kommt aus fremden Daten und landet in einem Dateinamen."""
+    saetze = json.loads((ordner / "kunst.json").read_text())
+    saetze[0]["i18n"] = {"../../heimlich": {"tc": 0}}
+    (ordner / "kunst.json").write_text(json.dumps(saetze))
+
+
+pruefe("hld: dateiliste nimmt die Sprachpakete mit",
+       sorted(hld.dateiliste(KUNST_MANIFEST)),
+       ["kunst.en.t0.json", "kunst.json", "kunst.t0.json"])
+# Gegenprobe: ohne `tvl` darf NICHTS dazukommen – sonst bewiese der Fall
+# darüber nur, dass irgendein zweiter Name entsteht.
+pruefe("hld: ohne tvl bleibt es bei der Basissprache",
+       sorted(hld.dateiliste(
+           {"platforms": [{k: v for k, v in KUNST_MANIFEST["platforms"][0].items()
+                           if k != "tvl"}]})),
+       ["kunst.json", "kunst.t0.json"])
+def _dateiliste_bricht_ab(tvl: dict) -> bool:
+    """Bricht dateiliste() bei diesem `tvl` ab, statt den Namen zu bauen?"""
+    manifest = {"platforms": [{"key": "kunst", "tv": {}, "tvl": tvl}]}
+    ergebnis: list[bool] = []
+
+    def lauf():
+        try:
+            hld.dateiliste(manifest)
+            ergebnis.append(False)
+        except SystemExit:
+            ergebnis.append(True)
+    _ohne_ausgabe(lauf)
+    return ergebnis[0]
+
+
+# Das Kürzel steht im Manifest, das Manifest kommt über das Netz: ein Name mit
+# "/" oder ".." schriebe beim Laden aus webapp/data heraus – unmittelbar bevor
+# der Ordner in die APK gebündelt wird.
+pruefe("hld: unsicheres Sprachkürzel im Manifest bricht den Download ab",
+       _dateiliste_bricht_ab({"../../weg": {"0": "x"}}), True)
+pruefe("hld: harmloses Sprachkürzel bricht NICHT ab",
+       _dateiliste_bricht_ab({"pt-br": {"0": "x"}}), False)
+pruefe("hld: heiler Kunstbestand ist grün", hld_grund(), "gruen")
+# DER Fall, der den Befund vom 17.9.2026 gefangen hätte.
+pruefe("hld: fehlendes SPRACHpaket fällt auf",
+       hld_grund(lambda o: (o / "kunst.en.t0.json").unlink()), "fehlt")
+# Gegenprobe dazu: die alte Fehlerklasse muss weiter greifen. Ohne sie wäre
+# „Sprachpaket fehlt = rot" auch damit erklärbar, dass jetzt alles rot ist.
+pruefe("hld: fehlendes BASISpaket fällt weiter auf",
+       hld_grund(lambda o: (o / "kunst.t0.json").unlink()), "fehlt")
+pruefe("hld: LEERES Sprachpaket fällt auf (Stichprobe je Paketreihe)",
+       hld_grund(lambda o: (o / "kunst.en.t0.json").write_text("{}")), "leer")
+pruefe("hld: benutztes Paket, das kein Manifest-Feld nennt",
+       hld_grund(_verweis_auf_paket_1), "ungenannt")
+pruefe("hld: Sprachkürzel aus fremden Daten kommt nicht in einen Pfad",
+       hld_grund(_boeses_sprachkuerzel), "unsicher")
 
 
 # ---------------------------------------------------------------------------

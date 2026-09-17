@@ -120,12 +120,24 @@ def dateiliste(manifest: dict) -> list[str]:
     Die Liste wird AUS dem Manifest abgeleitet und nicht geraten: `tv` nennt je
     Plattform die Nummern der Volltext-Pakete samt Inhaltskennung. Was dort
     nicht steht, gehört nicht dazu — genau daran erkennt man auch die
-    verwaisten Pakete früherer Stände."""
+    verwaisten Pakete früherer Stände.
+
+    ⚠️ `tv` deckt aber NUR die Basissprache ab. Die fremdsprachigen Pakete
+    heißen `<key>.<lg>.t<n>.json` und stehen unter `tvl` (publish.py,
+    write_texts mit `sprache=`). Bis zum 17.9.2026 las diese Funktion nur
+    `tv` — damit fehlten 15 Pakete mit 3,0 MB in jeder gebauten APK
+    (europarl.de 13, openpetition.en 1, avaaz.en 1; zusammen 1.922
+    Datensätze). Auf Pages lagen sie die ganze Zeit mit HTTP 200 bereit; wer
+    eine europarl-Petition auf Deutsch aufklappte, sah trotzdem keinen Text.
+    Wer hier ein Feld ergänzt, ergänzt es auch in `verweise_aus_saetzen`."""
     namen = []
     for p in manifest["platforms"]:
         namen.append(f"{p['key']}.json")
         for nummer in (p.get("tv") or {}):
             namen.append(f"{p['key']}.t{nummer}.json")
+        for sprache, kennungen in (p.get("tvl") or {}).items():
+            for nummer in (kennungen or {}):
+                namen.append(f"{p['key']}.{sprache}.t{nummer}.json")
     unsicher = [n for n in namen if not _sicherer_dateiname(n)]
     if unsicher:
         for n in unsicher[:5]:
@@ -167,6 +179,38 @@ def lade_alles(namen: list[str], ordner: Path) -> int:
     return bytes_gesamt
 
 
+def verweise_aus_saetzen(key: str, saetze: list) -> dict[str, tuple[str, dict]]:
+    """Welche Volltext-Pakete verlangen DIE DATENSÄTZE selbst?
+
+    Rückgabe: {dateiname: (paketreihe, erster verweisender Satz)}. Die
+    Basissprache meldet sich über `tc`, jede Fremdsprache über
+    `i18n[<lg>].tc`; die Reihe ist `<key>` bzw. `<key>.<lg>`.
+
+    ⚠️ WARUM AUS DEN SÄTZEN UND NICHT AUS DEM MANIFEST (17.9.2026): `pruefe`
+    las vorher `tv` — also genau die Quelle, aus der `dateiliste()` ihre
+    Auswahl bildet. Damit prüfte sie ihre eigene Auswahl und konnte per
+    Bauart nichts vermissen: sie meldete „alle Listen und Volltext-Verweise
+    stimmig", während 15 fremdsprachige Pakete fehlten. Die Datensätze sind
+    die unabhängige Quelle — sie nennen ihren Text, ganz gleich, was das
+    Manifest aufzählt. Wer hier ein Feld ergänzt, ergänzt es auch in
+    `dateiliste`."""
+    gebraucht: dict[str, tuple[str, dict]] = {}
+    for r in saetze:
+        if not isinstance(r, dict):
+            continue
+        paare: list[tuple[str | None, object]] = [(None, r.get("tc"))]
+        for lg, blk in (r.get("i18n") or {}).items():
+            if isinstance(lg, str) and isinstance(blk, dict):
+                paare.append((lg, blk.get("tc")))
+        for lg, nummer in paare:
+            # bool ist in Python ein int – ein "tc": true wäre sonst Paket 1.
+            if not isinstance(nummer, int) or isinstance(nummer, bool):
+                continue
+            reihe = key if lg is None else f"{key}.{lg}"
+            gebraucht.setdefault(f"{reihe}.t{nummer}.json", (reihe, r))
+    return gebraucht
+
+
 def pruefe(manifest: dict, ordner: Path) -> int:
     """Vollständigkeit und innere Stimmigkeit. Gibt die Zahl der Sätze zurück."""
     probleme: list[str] = []
@@ -185,30 +229,60 @@ def pruefe(manifest: dict, ordner: Path) -> int:
         if p.get("count") is not None and len(saetze) != p["count"]:
             probleme.append(f"{key}: {len(saetze)} Sätze, Manifest sagt {p['count']}")
 
-        tv = p.get("tv") or {}
-        verweise = {r.get("tc") for r in saetze
-                    if isinstance(r, dict) and isinstance(r.get("tc"), int)}
-        ohne_paket = sorted(t for t in verweise
-                            if str(t) not in tv or not (ordner / f"{key}.t{t}.json").exists())
-        if ohne_paket:
-            probleme.append(f"{key}: tc-Verweise ohne Paket: {ohne_paket[:5]}")
+        gebraucht = verweise_aus_saetzen(key, saetze)
+
+        # Die Namen entstehen hier aus FREMDEN Daten (Sprachkürzel und
+        # Paketnummer kommen aus dem Datensatz). Ohne diese Sperre läse ein
+        # manipulierter Satz über "../.." aus dem Zielordner heraus.
+        unsicher = sorted(n for n in gebraucht if not _sicherer_dateiname(n))
+        if unsicher:
+            probleme.append(f"{key}: unsichere Paketnamen im Datensatz: "
+                            f"{unsicher[:3]}")
             continue
 
-        # Stichprobe: steht der Volltext des ersten verweisenden Satzes wirklich
-        # in seinem Paket? Ein vorhandenes, aber leeres Paket fiele oben nicht auf.
-        probe = next((r for r in saetze
-                      if isinstance(r, dict) and isinstance(r.get("tc"), int)), None)
-        if probe:
+        # (1) Liegt jedes verlangte Paket wirklich auf der Platte? Das ist die
+        # Frage, an der die alte Prüfung vorbeisah – sie verglich die Sätze
+        # gegen `tv` und damit gegen ihre eigene Auswahl.
+        fehlend = sorted(n for n in gebraucht if not (ordner / n).exists())
+        if fehlend:
+            probleme.append(f"{key}: {len(fehlend)} Volltext-Paket(e) nicht "
+                            f"geladen: {fehlend[:5]}"
+                            + (f" … +{len(fehlend) - 5}" if len(fehlend) > 5 else ""))
+            continue
+
+        # (2) Kennt das Manifest sie auch? Eigene Fehlerklasse: hier stimmt
+        # nicht der Download, sondern publish.py hat ein Paket geschrieben,
+        # ohne es unter `tv`/`tvl` zu nennen. Fiele sonst erst beim nächsten
+        # Lauf auf, wenn uebernimm() es als verwaist löscht.
+        bekannt = {f"{key}.t{n}.json" for n in (p.get("tv") or {})}
+        for lg, kennungen in (p.get("tvl") or {}).items():
+            bekannt |= {f"{key}.{lg}.t{n}.json" for n in (kennungen or {})}
+        ungenannt = sorted(set(gebraucht) - bekannt)
+        if ungenannt:
+            probleme.append(f"{key}: {len(ungenannt)} benutzte(s) Paket(e) "
+                            f"stehen in keinem Manifest-Feld: {ungenannt[:5]}")
+            continue
+
+        # (3) Stichprobe je PAKETREIHE – Basissprache und jede Fremdsprache
+        # einzeln. Ein vorhandenes, aber leeres Paket fiele oben nicht auf,
+        # und eine je Plattform reichte nicht: sie träfe immer die deutsche
+        # Reihe und ließe die fremdsprachige ungeprüft.
+        proben: dict[str, tuple[str, dict]] = {}
+        for name, (reihe, satz) in gebraucht.items():
+            proben.setdefault(reihe, (name, satz))
+        for reihe, (name, satz) in sorted(proben.items()):
             try:
-                paket = json.loads(
-                    (ordner / f"{key}.t{probe['tc']}.json").read_text(encoding="utf-8"))
+                paket = json.loads((ordner / name).read_text(encoding="utf-8"))
             except (ValueError, OSError) as exc:
-                probleme.append(f"{key}: Paket t{probe['tc']} unlesbar ({exc})")
+                probleme.append(f"{key}: Paket {name} unlesbar ({exc})")
                 continue
-            if probe.get("url") not in paket:
+            # Auch im fremdsprachigen Paket ist der Schlüssel die Adresse des
+            # Datensatzes (publish.write_texts) – sonst fände die App ihren
+            # eigenen Text nicht wieder.
+            if not isinstance(paket, dict) or satz.get("url") not in paket:
                 probleme.append(
-                    f"{key}: Volltext von {str(probe.get('url'))[:50]} fehlt in "
-                    f"t{probe['tc']}")
+                    f"{key}: Volltext von {str(satz.get('url'))[:50]} fehlt in "
+                    f"{name}")
 
     if probleme:
         for p in probleme:
