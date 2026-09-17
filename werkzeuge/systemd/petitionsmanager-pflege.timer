@@ -1,6 +1,31 @@
-# Startet den täglichen Pflege-Lauf. Persistent=true holt einen verpassten
-# Lauf nach, sobald der Rechner wieder läuft — feste Uhrzeiten sind damit
-# unkritisch.
+# Startet den Pflege-Lauf immer wieder, solange der Rechner läuft.
+#
+# ⚠️⚠️ Umgestellt am 17.9.2026 auf Wunsch des Nutzers („soll immer im
+# Hintergrund laufen, wann immer der Rechner an ist"). Vorher: OnCalendar
+# 20:15 + RandomizedDelaySec=900 + Persistent=true, also einmal am Tag.
+#
+# Warum OnUnitInactiveSec und nicht OnUnitActiveSec: „active" zählt ab dem
+# START des Laufs. Da ein Lauf rund 2 h dauert, wäre der Abstand zwischen zwei
+# Läufen damit nicht steuerbar — der Timer feuerte mitten hinein. „inactive"
+# zählt ab dem ENDE, der Abstand ist also wirklich eine Pause.
+#
+# Überlappung ist dadurch von selbst ausgeschlossen: systemd startet dieselbe
+# Unit nie zweimal gleichzeitig, und der Timer feuert ohnehin erst, wenn sie
+# inaktiv ist. Eine eigene Sperrdatei wäre überflüssig und eine zweite Stelle,
+# an der etwas klemmen kann.
+#
+# ⚠️ Persistent= ist ENTFALLEN: es wirkt nur auf OnCalendar. Nachzuholen gibt es
+# hier nichts mehr — ohne feste Uhrzeit kann nichts „verpasst" werden, der Lauf
+# beginnt nach dem Aufwachen einfach wieder. Damit ist auch der Hauptgrund für
+# die vier Fehlläufe unten strukturell weg; die Pull-Wiederholung im Skript
+# bleibt trotzdem, weil auch ein OnBootSec-Start vor dem Netz liegen kann.
+#
+# ⚠️⚠️ Der Durchsatz hängt NICHT an diesem Abstand, sondern an skip_recent:
+# bekannte Sätze werden 24 h lang nicht erneut geprüft (DEFAULT_MIN_INTERVAL_
+# HOURS in petitions_core.py). Ein zweiter Lauf am selben Tag macht deshalb fast
+# nur noch Entdeckung und ist billig. Und findet er nichts, bricht das Skript
+# vor Commit und Push ab („Keine Store-Änderungen – fertig") — häufige Läufe
+# blähen die Repo-Historie also nicht auf.
 #
 # ⚠️⚠️ Gemessen 17.9.2026: der Nachhollauf startet 1–2 s nach dem AUFWACHEN aus
 # dem Suspend, NICHT erst beim Booten — alle vier Fehlläufe (10.9. 05:51,
@@ -13,12 +38,17 @@
 # System-Manager wird es nur EINMAL beim Booten erreicht und bleibt über jeden
 # Suspend hinweg aktiv — als Bedingung wäre es wirkungslos.
 [Unit]
-Description=Täglicher PetitionsManager-Pflege-Lauf
+Description=PetitionsManager-Pflege-Lauf (laufend, solange der Rechner an ist)
 
 [Timer]
-OnCalendar=*-*-* 20:15
-RandomizedDelaySec=900
-Persistent=true
+# Nach dem Hochfahren kurz warten, damit Netz und Anmeldung stehen.
+OnBootSec=5min
+# Danach 20 min Pause nach jedem ENDE, dann wieder. Bei rund 2 h Laufzeit sind
+# das etwa 5–6 Läufe je 24 h Wachzeit statt bisher einem.
+OnUnitInactiveSec=20min
+# Die Streuung bleibt, damit nicht alle Läufe auf dieselbe Minute fallen —
+# gegenüber den Quellen freundlicher, und ein Muster ist schwerer zu sperren.
+RandomizedDelaySec=120
 
 [Install]
 WantedBy=timers.target

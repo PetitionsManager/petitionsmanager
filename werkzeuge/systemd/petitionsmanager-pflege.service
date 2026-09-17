@@ -1,6 +1,9 @@
-# PetitionsManager: täglicher lokaler Pflege-Lauf (europarl + WeMove-Zweige).
+# PetitionsManager: laufender lokaler Pflege-Lauf (europarl + WeMove-Zweige).
 # Gehört zusammen mit petitionsmanager-pflege.timer nach
 # ~/.config/systemd/user/ — Installationsschritte in INSTALL.md daneben.
+#
+# Seit 17.9.2026 startet der Timer ihn immer wieder, solange der Rechner an ist
+# (OnUnitInactiveSec=20min), nicht mehr einmal täglich um 20:15.
 [Unit]
 Description=PetitionsManager: lokaler Pflege-Lauf (Stores scrapen und pushen)
 
@@ -9,5 +12,18 @@ Type=oneshot
 ExecStart=/bin/bash /home/timeras/Claude/PetitionsManager-cron/lokaler_pflege_lauf.sh
 # europarl prüft im Vollausbau ~1.700 Petitionen mit 1,5 s Abstand — das
 # darf dauern. Nach 5 h ist trotzdem Schluss.
+#
+# ⚠️ Der Wert BLEIBT bei 5 h, obwohl der Timer jetzt laufend startet — gegen die
+# naheliegende Versuchung, ihn zu senken. Die gemessene aktive Laufzeit liegt
+# konstant bei ~2,1 h und die Grenze wurde nie erreicht; sie zählt ohnehin in
+# CLOCK_MONOTONIC, also nur Wachzeit. Ausschlaggebend ist aber: das Skript
+# committet erst am ENDE. Ein per Timeout getöteter Lauf ließe den gescrapten
+# Stand uncommittet im Klon liegen, und der nächste begänne mit
+# `git pull --ff-only` auf einem schmutzigen Baum. Ein knapper Timeout erzeugte
+# also genau den Schaden, den er verhindern soll.
 TimeoutStartSec=5h
+# Ein laufender Scrape darf die Arbeit am Rechner nicht ausbremsen. Nice allein
+# regelt nur die CPU — die Platte ist bei den großen JSON-Beständen der engere
+# Hals, deshalb zusätzlich die E/A-Klasse.
 Nice=10
+IOSchedulingClass=idle
