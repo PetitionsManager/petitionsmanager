@@ -9,6 +9,12 @@ threefifty_petitions.html
 
 # Scratch / lokal
 *.log
+# Laufzeit-Protokolle: laufzeiten.tsv schreibt lokaler_pflege_lauf.sh je Lauf,
+# ci-laufzeiten.tsv fuehrt laufzeiten.py aus der GitHub-API nach. Beides sind
+# Messwerte DIESES Rechners, keine Quelle — und ci-laufzeiten.tsv waechst
+# dauerhaft, weil alte Actions-Laeufe bei GitHub geloescht werden.
+laufzeiten.tsv
+ci-laufzeiten.tsv
 
 # App-Daten (webapp/data) — ERZEUGTE AUSGABE, keine Quelle.
 # Erzeugt von publish.py aus den lokalen Scraper-Bestaenden; im CI holt

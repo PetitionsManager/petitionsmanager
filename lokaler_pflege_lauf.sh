@@ -24,6 +24,48 @@ PLATTFORMEN=(europarl wemove_en wemove_fr wemove_it wemove_nl wemove_pl)
 
 sag() { echo "[$(date '+%F %T')] $*" | tee -a "$LOG"; }
 
+# --- Laufzeiten ------------------------------------------------------------
+# Wanduhr und AKTIVE Zeit getrennt festhalten, weil der Rechner mitten im Lauf
+# schläft: am 15./16.9.2026 lagen 12,53 h zwischen "Starting" und "Finished"
+# im Journal, davon 12,46 h ohne eine einzige Logzeile. systemd rechnet
+# TimeoutStartSec in CLOCK_MONOTONIC, und die steht im Suspend still — deshalb
+# hat die 5-h-Grenze bei 14,7 h nicht gegriffen, und deshalb ist
+# Ende-minus-Start aus dem Journal KEINE Laufzeit. CLOCK_BOOTTIME zählt den
+# Schlaf mit, CLOCK_MONOTONIC nicht; die Differenz ist die Schlafzeit
+# (nachgemessen 17.9.2026: 7,76 h seit Boot, davon 4,77 h wach).
+ZEITEN="$KLON/laufzeiten.tsv"
+uhren() { python3 -c 'import time; print(f"{time.time():.0f} {time.monotonic():.1f}")'; }
+
+# zeitzeile <was> <start-wanduhr> <start-monoton> <exitcode>
+zeitzeile() {
+    [ -s "$ZEITEN" ] || printf 'was\tstart\tende\twanduhr_s\taktiv_s\tschlaf_s\tcode\n' >>"$ZEITEN"
+    python3 - "$@" >>"$ZEITEN" 2>/dev/null <<'PY'
+import sys, time, datetime
+was, w0, m0, code = sys.argv[1], float(sys.argv[2]), float(sys.argv[3]), sys.argv[4]
+w1, m1 = time.time(), time.monotonic()
+wand, aktiv = w1 - w0, m1 - m0
+iso = lambda t: datetime.datetime.fromtimestamp(t).strftime('%F %T')
+print(f"{was}\t{iso(w0)}\t{iso(w1)}\t{wand:.0f}\t{aktiv:.0f}\t{max(0.0, wand - aktiv):.0f}\t{code}")
+PY
+}
+
+read -r T0_WALL T0_MONO < <(uhren)
+# EXIT deckt auch die frühen Abbrüche ab (exit 1 bei git-Fehlern).
+# Die drei Signal-Traps sind NICHT dafür da, dass überhaupt eine Zeile entsteht
+# — bash führt den EXIT-Trap bei SIGTERM ohnehin aus (am 17.9.2026 auf dem
+# Prüfstand gegengemessen). Sie sorgen für den RICHTIGEN Exitcode: ohne sie
+# wird ein getöteter Lauf als code 0 verbucht und sähe im Log aus wie ein
+# geglückter. Genau so endete der Lauf vom 16.9. ("Failed with result 'signal'",
+# der Rechner bootete eine Sekunde später neu).
+# Nebenwirkung, bewusst in Kauf genommen: mit TERM-Trap wartet bash das laufende
+# Vordergrundkind ab, die letzte Zeitzeile kann dadurch etwas zu lang ausfallen.
+# Beim systemd-Stopp trifft das Signal die ganze cgroup, monitor.py endet also
+# gleichzeitig.
+trap 'ENDE=$?; zeitzeile lauf "$T0_WALL" "$T0_MONO" "$ENDE"' EXIT
+trap 'exit 143' TERM
+trap 'exit 130' INT
+trap 'exit 129' HUP
+
 cd "$KLON" || exit 1
 if [ -e "$MARKER" ]; then
     sag "Markerdatei vorhanden ($MARKER) – Lauf ausgesetzt, bitte den dort beschriebenen Konflikt ansehen."
@@ -43,10 +85,18 @@ fi
 if [ "${PFLEGE_NUR_PRUEFEN:-0}" != "1" ]; then
     for k in "${PLATTFORMEN[@]}"; do
         sag "Scrape $k …"
+        read -r ZW_WALL ZW_MONO < <(uhren)
         # Ein Fehlschlag (z. B. WAF-Fenster zu) beendet nur diesen Zweig;
         # „5 Fehlschläge in Folge" im Scraper speichert vorher Erreichtes.
-        python3 monitor.py --platform "$k" >>"$LOG" 2>&1 \
-            || sag "$k: Lauf endete mit Fehler – weiter mit dem nächsten Zweig."
+        if python3 monitor.py --platform "$k" >>"$LOG" 2>&1; then
+            ZCODE=0
+        else
+            ZCODE=$?
+            sag "$k: Lauf endete mit Fehler – weiter mit dem nächsten Zweig."
+        fi
+        # Je Zweig eine eigene Zeile: europarl trägt den Löwenanteil, und nur
+        # so ist später zu sehen, WELCHER Zweig den Lauf lang macht.
+        zeitzeile "zweig:$k" "$ZW_WALL" "$ZW_MONO" "$ZCODE"
     done
 else
     sag "PFLEGE_NUR_PRUEFEN=1 – Scrapen übersprungen."
