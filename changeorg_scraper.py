@@ -57,6 +57,15 @@ MAX_NEW_PER_RUN = 500             # neue Detail-Scrapes pro Lauf (2026-07-27
                                  # GitHub-Actions-Workflow ruft den Lauf so oft
                                  # neu auf, bis der Backlog abgearbeitet ist)
 
+# Takt der Verwerfungs-Diagnose (17.9.2026, siehe run()): alle so viele
+# Kandidaten wird EINMAL gespeichert, auch wenn der Lauf sonst nichts zu
+# speichern hätte. ⚠️ Ohne das misst die Diagnose genau den Fall nicht, für
+# den sie gebaut ist: ein verworfener Kandidat löst keinen upsert und damit
+# keine Speicherung aus, und am 17.9. ist der Aufhol-Durchgang nachweislich
+# 11,2 Minuten ohne eine einzige Speicherung gelaufen. 50 Kandidaten sind bei
+# REQUEST_DELAY = 1,5 s rund 75 Sekunden.
+DIAGNOSE_TAKT = 50
+
 LOC_RE  = re.compile(r"<loc>https://www\.change\.org/p/([^<]+)</loc>")
 # Startseite: aktuelle deutsche Themen (rotieren) im eingebetteten State.
 TRENDING_RE = re.compile(r'"trendingTopics":\[(.*?)\]', re.S)
@@ -556,11 +565,113 @@ def run(args) -> None:
     # von 60 angenommen.
     neu_verworfen: dict[str, str] = {}
     belegt = gelesen = unklar = 0
+
+    # ------------------------------------------------------------------
+    # MESSUNG (17.9.2026) — noch KEINE Reparatur
+    # ------------------------------------------------------------------
+    # Zu klären ist ein Widerspruch: _meta.verworfen bleibt leer (die
+    # Kachel-Rechnung erfasst = len(store) + verworfen_n ging exakt auf den
+    # Bestand auf, also verworfen_n = 0), obwohl am echten Codepfad gemessen
+    # wurde, dass die Spracherkennung greift, neu_verworfen sich füllt und
+    # `belegt` über core.VERWORFEN_BELEG_MIN käme. merke_verworfene() unten
+    # wird also in keinem der beiden CI-Durchgänge erreicht. Für den
+    # Aufhol-Durchgang ist das belegt (11,2 min ohne eine einzige
+    # Speicherung); der Sammellauf-Durchgang startet mit ~298 min Vorrat und
+    # müsste durchkommen — der ist unerklärt. Diese vier Zahlen fehlen, um
+    # ihn zu erklären: Verwerfungen, `belegt`, die Statusverteilung der
+    # Urteile, und ob merke_verworfene() erreicht wurde.
+    #
+    # ⚠️⚠️ Der AUSGABEWEG ist der schwierige Teil — daran ist schon eine
+    # Messung gescheitert. Deshalb drei Wege nebeneinander, die VERSCHIEDEN
+    # versagen:
+    #  1. _meta["verwerfungs_diagnose"] über lauf_meta: wandert bei JEDER
+    #     Zwischenspeicherung mit und übersteht damit den SIGINT der Frist
+    #     (scrape.yml schickt INT, nicht KILL). Vollständig, aber ⚠️ NICHT
+    #     öffentlich: publish.py wirft das _meta weg (data.pop("_meta")),
+    #     und Pages liefert nur webapp/. Die Annahme „_meta ist über die
+    #     veröffentlichten Daten ohne Token lesbar" trägt also nicht — der
+    #     Weg bleibt für den Actions-Cache und lokale Läufe.
+    #  2. _meta["befunde"] als Hinweis, denselben Weg: write_dashboard
+    #     rendert Befunde als freien Text, und dashboard.html LIEGT auf
+    #     Pages (17.9.2026 geprüft, HTTP 200). Damit ohne Token lesbar.
+    #     ⚠️ Nur solange der Lauf NICHT durchkommt — der Abschluss-Save
+    #     überschreibt "befunde" mit den echten. Der unerklärte Fall ist
+    #     aber genau der abgebrochene, also trägt der Weg dort, wo er
+    #     gebraucht wird. Eine Stufe „hinweis" (ℹ), keine Warnung: hier ist
+    #     nichts kaputt, hier wird gemessen.
+    #  3. ::notice-Anmerkung: ohne Token über die check-runs-API lesbar.
+    #     ⚠️ GitHub deckelt Anmerkungen je Schritt, daran ist die
+    #     ::warning „Zeitrahmen beim Scrapen erreicht" gestorben. Gemessen
+    #     an Lauf #79 (23 Anmerkungen): 21 Warnungen, 1 failure und GENAU
+    #     EINE notice im ganzen Lauf. Der notice-Eimer ist also praktisch
+    #     leer, der warning-Eimer übervoll — deshalb notice. Trotzdem
+    #     gedeckelt auf drei Messpunkte je Lauf.
+    #
+    # Kosten im Bestand: ein Dutzend Zahlen, < 1 KB je Store — gegen 593 KB
+    # Bestand und ein Register, das auf ~0,94 MB zugeht, nicht messbar.
+    urteile: dict[str, int] = {}
+    diagnose: dict = {"phase": "0-start", "verwerfungen": 0, "belegt": 0,
+                      "schwelle": core.VERWORFEN_BELEG_MIN, "gelesen": 0,
+                      "unklar": 0, "urteile": {},
+                      "register_vorher": len(verworfen),
+                      "register_nachher": None}
+    # ⚠️ Gleiche dict-INSTANZ, nicht Kopie: save() reicht lauf_meta flach
+    # weiter, die verschachtelte Diagnose wandert also mit jeder beliebigen
+    # Speicherung im frischesten Stand mit — ohne dass hier extra geschrieben
+    # werden müsste.
+    lauf_meta["verwerfungs_diagnose"] = diagnose
+
+    def stand(phase: str | None = None) -> str:
+        """Zähler in die Diagnose spiegeln. Reine Rechnung, kein Schreiben."""
+        if phase:
+            diagnose["phase"] = phase
+        diagnose.update(verwerfungen=len(neu_verworfen), belegt=belegt,
+                        gelesen=gelesen, unklar=unklar,
+                        urteile=dict(sorted(urteile.items())))
+        verteilung = " ".join(f"{k}={v}" for k, v
+                              in diagnose["urteile"].items()) or "keine"
+        reg = (str(diagnose["register_vorher"])
+               if diagnose["register_nachher"] is None else
+               f"{diagnose['register_vorher']}→{diagnose['register_nachher']}")
+        text = (f"Phase {diagnose['phase']} · Verwerfungen "
+                f"{len(neu_verworfen)} · belegt "
+                f"{belegt}/{core.VERWORFEN_BELEG_MIN} · gelesen {gelesen} · "
+                f"unklar {unklar} · Urteile {verteilung} · Register {reg}")
+        lauf_meta["befunde"] = [{"stufe": "hinweis",
+                                 "thema": "Verwerfungs-Diagnose",
+                                 "thema_en": "Discard diagnostics",
+                                 "text": text, "text_en": text}]
+        return text
+
+    def takt(n: int, phase: str) -> None:
+        """Im Lauf mitschreiben — ohne Anmerkung, die ist gedeckelt.
+
+        ⚠️ Läuft VOR der Auswertung des gerade geholten Satzes: `urteile`
+        ist schon fortgeschrieben, `belegt`/`gelesen`/`unklar` noch nicht.
+        Ein Zwischenstand kann deshalb um EINEN Satz hinterherhinken; die
+        Messpunkte an den Phasengrenzen sind exakt.
+        """
+        stand(phase)
+        if n % DIAGNOSE_TAKT == 0:
+            save()
+
+    def messpunkt(phase: str) -> None:
+        """Phasengrenze: alle drei Wege bedienen und sofort sichern."""
+        text = stand(phase)
+        log(f"Verwerfungs-Diagnose: {text}")
+        print(f"::notice title=Verwerfungs-Diagnose::Change.org: {text}")
+        save()
+
     for i, slug in enumerate(new_slugs, 1):
         log(f"({i}/{len(new_slugs)}) {slug[:70]}")
         prog(current=i, total=len(new_slugs), message=slug[:60])
         merker: dict = {}
         status, rec = scrape_petition(fetcher, slug, merker=merker)
+        # Statusverteilung getrennt nach Phase: `belegt` entsteht fast nur
+        # aus bekannt/online, die Verwerfungen fast nur aus neu/skip. In
+        # einem Topf wären beide Aussagen nicht mehr trennbar.
+        urteile[f"neu/{status}"] = urteile.get(f"neu/{status}", 0) + 1
+        takt(i, "1-entdeckung läuft")
         if status == "error":
             continue
         if status in ("online", "skip", "unklar"):
@@ -593,6 +704,7 @@ def run(args) -> None:
     lauf_meta["new_petitions_last_run"] = [
         s for s, r in store.items() if r.get("first_seen") == ts]
     save()
+    messpunkt("1-entdeckung")
 
     # ------------------------------------------------------------------
     # 2. NACHPRÜFUNG der bekannten Petitionen
@@ -620,6 +732,9 @@ def run(args) -> None:
                     and core.skip_recent(store.get(slug), args)):
                 continue
             status, rec = scrape_petition(fetcher, slug)
+            urteile[f"bekannt/{status}"] = (
+                urteile.get(f"bekannt/{status}", 0) + 1)
+            takt(k, "2-nachprüfung läuft")
             if status == "error":
                 continue
             if status in ("online", "skip", "unklar"):
@@ -650,11 +765,22 @@ def run(args) -> None:
         core.entferne_skip(store, skip_slugs, geprueft, "Change.org",
                            grund_de="nicht DE", grund_en="not DE", save=save)
 
+    # Bewusst AUSSERHALB des if-Blocks: auch ein Lauf, der die Nachprüfung
+    # gar nicht angefasst hat (--limit, --no-recheck), muss hier vorbeikommen
+    # — sonst wäre ein fehlender Messpunkt 2 doppeldeutig.
+    messpunkt("2-nachpruefung")
+
     # Erst JETZT — die Positivkontrolle steht erst nach der Nachprüfung fest.
     core.melde_unklare(unklar, gelesen, "Change.org")
     lauf_meta["verworfen"] = core.merke_verworfene(
         verworfen, neu_verworfen, belegt, "Change.org",
         grund_de="nicht DE", grund_en="not DE")
+    # Der POSITIVE Beleg, dass merke_verworfene() erreicht wurde. Ein
+    # fehlender Messpunkt 3 allein wäre von einer verschluckten Anmerkung
+    # nicht zu unterscheiden; diese Zahl steht im _meta und übersteht alles,
+    # was danach noch abbrechen kann.
+    diagnose["register_nachher"] = len(lauf_meta["verworfen"])
+    messpunkt("3-register")
 
     # Neu zählen: die Nachprüfung kann über heile_abgeschnittene/merge_records
     # weitere Sätze angelegt haben.
@@ -698,6 +824,11 @@ PLATFORM = Platform(
                   "Petitionen (je ~21; „Mehr anzeigen“ läuft über das robots-"
                   "gesperrte /api-proxy/ und bleibt außen vor), ergänzt um "
                   "Sitemap-Heuristik. Petitionsseiten selbst frei zugänglich.",
+    openness_note_en="Moderate: German topic pages /t/<slug> return curated "
+                     "petitions (~21 each; „Show more“ goes through the "
+                     "robots-blocked /api-proxy/ and stays out of reach), "
+                     "supplemented by sitemap heuristics. The petition pages "
+                     "themselves are freely accessible.",
     name="Change.org",
     eyebrow="Change.org · deutsche Petitionen (Sitemap-Heuristik + DE-Verifikation)",
     source_url="https://www.change.org/?lang=de-DE",
@@ -874,6 +1005,11 @@ PLATFORM_EN = Platform(
                   "sortenrein — anders als im deutschen Zweig braucht es "
                   "hier keine Wort-Heuristik. Weiterblättern ginge nur über "
                   "/api-proxy/, und das ist gesperrt.",
+    openness_note_en="Moderate: the local pages /local/<city>--<state>--us are "
+                     "server-rendered, permitted by robots.txt and "
+                     "linguistically clean — unlike the German branch, no word "
+                     "heuristics are needed here. Paging further would only "
+                     "work through /api-proxy/, and that is blocked.",
     name="Change.org (English)",
     eyebrow="Change.org · englische Petitionen (Ortsseiten)",
     source_url="https://www.change.org/?lang=en-US",
