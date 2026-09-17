@@ -41,10 +41,21 @@
 Description=PetitionsManager-Pflege-Lauf (laufend, solange der Rechner an ist)
 
 [Timer]
+# ⚠️⚠️ OnActiveSec ist KEIN Beiwerk, sondern bricht eine Blockade — am
+# 17.9.2026 beim ersten Installieren gemessen: der Timer stand auf
+# SubState=elapsed mit NextElapseUSecMonotonic=infinity und wäre NIE gelaufen.
+# Grund: OnUnitInactiveSec rechnet ab dem ENDE des letzten Laufs, und
+# InactiveEnterTimestamp war leer (der letzte Lauf wurde vom Neustart getötet).
+# OnBootSec war zu dem Zeitpunkt längst abgelaufen. Damit wartete der Timer auf
+# ein Laufende, das nur ein Lauf erzeugen kann, den er selbst auslösen müsste.
+# OnActiveSec zählt ab dem Start des TIMERS und hat diesen Bezugspunkt immer —
+# beim Installieren mitten im Betrieb genauso wie nach einem Neustart.
+OnActiveSec=2min
 # Nach dem Hochfahren kurz warten, damit Netz und Anmeldung stehen.
 OnBootSec=5min
 # Danach 20 min Pause nach jedem ENDE, dann wieder. Bei rund 2 h Laufzeit sind
 # das etwa 5–6 Läufe je 24 h Wachzeit statt bisher einem.
+# systemd nimmt von mehreren Terminen den nächstliegenden.
 OnUnitInactiveSec=20min
 # Die Streuung bleibt, damit nicht alle Läufe auf dieselbe Minute fallen —
 # gegenüber den Quellen freundlicher, und ein Muster ist schwerer zu sperren.
