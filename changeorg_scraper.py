@@ -824,11 +824,6 @@ PLATFORM = Platform(
                   "Petitionen (je ~21; „Mehr anzeigen“ läuft über das robots-"
                   "gesperrte /api-proxy/ und bleibt außen vor), ergänzt um "
                   "Sitemap-Heuristik. Petitionsseiten selbst frei zugänglich.",
-    openness_note_en="Moderate: German topic pages /t/<slug> return curated "
-                     "petitions (~21 each; „Show more“ goes through the "
-                     "robots-blocked /api-proxy/ and stays out of reach), "
-                     "supplemented by sitemap heuristics. The petition pages "
-                     "themselves are freely accessible.",
     name="Change.org",
     eyebrow="Change.org · deutsche Petitionen (Sitemap-Heuristik + DE-Verifikation)",
     source_url="https://www.change.org/?lang=de-DE",
@@ -1005,11 +1000,6 @@ PLATFORM_EN = Platform(
                   "sortenrein — anders als im deutschen Zweig braucht es "
                   "hier keine Wort-Heuristik. Weiterblättern ginge nur über "
                   "/api-proxy/, und das ist gesperrt.",
-    openness_note_en="Moderate: the local pages /local/<city>--<state>--us are "
-                     "server-rendered, permitted by robots.txt and "
-                     "linguistically clean — unlike the German branch, no word "
-                     "heuristics are needed here. Paging further would only "
-                     "work through /api-proxy/, and that is blocked.",
     name="Change.org (English)",
     eyebrow="Change.org · englische Petitionen (Ortsseiten)",
     source_url="https://www.change.org/?lang=en-US",
