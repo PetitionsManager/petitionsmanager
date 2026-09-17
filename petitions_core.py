@@ -1127,9 +1127,32 @@ def save_store(store: dict, data_file: Path, extra_meta: dict | None = None,
         befunde = gemeldet + neue_befunde
 
         verlauf = list(prev.get("lauf_verlauf") or [])
-        verlauf.append(kennzahlen)
+        # Lauf-Metadaten NEBEN die Bestandskennzahlen (17.9.2026): woher der
+        # Lauf kam und wie viele Sätze er neu brachte. Beides bewusst nur im
+        # VERLAUFSEINTRAG, nicht in meta_extra["kennzahlen"] — das ist der
+        # Vorher-Nachher-Vergleichswert des nächsten Laufs (vor_kennzahlen
+        # oben) und soll reine Bestandszahlen enthalten. "neu" hat dort ohnehin
+        # keinen Sinn: der Vergleich sucht Einbrüche, keine Zuwächse.
+        eintrag = {**kennzahlen,
+                   "herkunft": lauf_herkunft(),
+                   "neu": _neuzugaenge(meta_extra)}
+        verlauf.append(eintrag)
         meta_extra["lauf_verlauf"] = verlauf[-VERLAUF_MAX:]
         meta_extra["kennzahlen"] = kennzahlen
+        # ⚠️⚠️ Ab wann tragen die Einträge "herkunft" und "neu"? Die Grenze muss
+        # im Bestand STEHEN, sonst kann ein späterer Auswerter „vor der
+        # Umstellung" nicht von „Feld ging verloren" unterscheiden — und würde
+        # die bis zu VERLAUF_MAX Alt-Einträge stillschweigend als lokal/0
+        # verbuchen. Einmal gesetzt, wandert der Wert nicht mehr: alles mit
+        # zeit < verlauf_felder_ab ist rückwirkend nicht mehr zu ermitteln.
+        # ⚠️ Die Marke ist zum ANZEIGEN da („Herkunft erst ab …"), NICHT zum
+        # Aussortieren: die Zeitstempel tragen gemischte Zonen (+02:00 lokal,
+        # +00:00 aus der CI), ein String-Vergleich zeit < marke liefert an der
+        # Stundengrenze das falsche Ergebnis (dieselbe Falle wie bei den
+        # Startdaten in _bestandspruefung). Wer je Eintrag entscheiden will,
+        # nimmt verlauf_herkunft()/verlauf_neu() — die prüfen das FELD.
+        meta_extra["verlauf_felder_ab"] = (prev.get("verlauf_felder_ab")
+                                           or eintrag["zeit"])
         meta_extra["befunde"] = befunde
         # health_warning bleibt als Feld erhalten: die Dashboard-Kachel und
         # ältere Bestände lesen es. Es trägt jetzt den ersten Befund.
@@ -1358,6 +1381,120 @@ def progress_snapshot() -> dict:
 BEFUNDE: dict[str, list[dict]] = {}
 BEFUND_LOCK = threading.Lock()
 VERLAUF_MAX = 30       # so viele Läufe hält die Zeitreihe je Plattform
+
+# -----------------------------------------------------------------------------
+#  HERKUNFT EINES LAUFS (17.9.2026)
+# -----------------------------------------------------------------------------
+# Zwei verschiedene Fragen, die vorher beide als os.environ["GITHUB_ACTIONS"]
+# dastanden und deshalb leicht verwechselt wurden:
+#
+#   in_github_actions()  „Versteht mich hier jemand, wenn ich ::warning:: rufe?"
+#                        Eine Frage an den AUSGABEKANAL. Genau das meinten alle
+#                        vier bisherigen Fundstellen (monitor.rotiere_auf_
+#                        aeltestes, monitor.melde_eingefrorene, monitor.
+#                        run_checks, _melde_an_ci) — sie schreiben ausnahmslos
+#                        Workflow-Kommandos bzw. GITHUB_STEP_SUMMARY. Sie durften
+#                        deshalb zusammengelegt werden.
+#   lauf_herkunft()      „Wer hat diesen Lauf angestoßen?" Eine Frage an die
+#                        HERKUNFT. Sie wird in den lauf_verlauf geschrieben und
+#                        ist NICHT dasselbe: ein Ausgabekanal sagt nichts
+#                        darüber, ob der Rechner des Nutzers oder ein Runner
+#                        gescrapt hat.
+#
+# ⚠️ Warum der lokale Lauf ZWEI Werte hat: der Timer-Lauf läuft im dedizierten
+# Klon PetitionsManager-cron (lokaler_pflege_lauf.sh, systemd-User-Timer), ein
+# Handstart dagegen im geteilten Sitzungsbaum. Beide sehen kein GITHUB_ACTIONS,
+# beide laufen über denselben Anschluss — als KANAL sind sie dasselbe. Für die
+# Auswertung sind sie es nicht: der Timer-Lauf ist der regelmäßige Ertrag, ein
+# Handstart ist meist ein Test (--limit, --platform, abgebrochen) und würde die
+# Tageskurve verfälschen. Getrennt festhalten, zusammenrechnen kann der Leser
+# immer noch (beide beginnen mit "lokal").
+HERKUNFT_CI = "ci"                  # GitHub Actions
+HERKUNFT_CRON = "lokal_cron"        # systemd-Timer im Klon PetitionsManager-cron
+HERKUNFT_HAND = "lokal_hand"        # von Hand gestartet (Sitzungsbaum, Test)
+HERKUNFT_UNBEKANNT = "unbekannt"    # ⚠️ NUR für Alt-Einträge, siehe verlauf_herkunft()
+HERKUNFT_LIVE = (HERKUNFT_CI, HERKUNFT_CRON, HERKUNFT_HAND)
+HERKUNFT_WERTE = HERKUNFT_LIVE + (HERKUNFT_UNBEKANNT,)
+
+# Verzeichnisname des Pflege-Klons. Kein geratener Wert: derselbe Pfad steht
+# fest verdrahtet in werkzeuge/systemd/petitionsmanager-pflege.service
+# (ExecStart=…/PetitionsManager-cron/lokaler_pflege_lauf.sh).
+PFLEGE_KLON_NAME = "PetitionsManager-cron"
+
+# Ausdrückliche Übersteuerung, falls der Klon einmal anders heißt: eine Zeile
+# `Environment=PM_HERKUNFT=lokal_cron` in der .service-Datei genügt dann. Nur
+# HERKUNFT_LIVE ist zulässig — ein laufender Lauf ist nie "unbekannt".
+HERKUNFT_ENV = "PM_HERKUNFT"
+
+
+def in_github_actions() -> bool:
+    """Läuft dieser Prozess in GitHub Actions, verstehen also ::notice::/
+    ::warning:: und GITHUB_STEP_SUMMARY? Einzige Fundstelle der Abfrage."""
+    return os.environ.get("GITHUB_ACTIONS") == "true"
+
+
+def lauf_herkunft() -> str:
+    """Woher kommt DIESER Lauf? Liefert immer einen Wert aus HERKUNFT_LIVE —
+    ein laufender Prozess weiß über sich selbst Bescheid. HERKUNFT_UNBEKANNT
+    kommt hier bewusst NICHT vor; den gibt es nur beim LESEN von Alt-Einträgen."""
+    if in_github_actions():
+        return HERKUNFT_CI
+    gesetzt = os.environ.get(HERKUNFT_ENV)
+    if gesetzt in HERKUNFT_LIVE:
+        return gesetzt
+    try:
+        if Path(__file__).resolve().parent.name == PFLEGE_KLON_NAME:
+            return HERKUNFT_CRON
+    except OSError:
+        pass
+    return HERKUNFT_HAND
+
+
+def verlauf_herkunft(eintrag: dict | None) -> str:
+    """Herkunft eines lauf_verlauf-Eintrags SICHER lesen.
+
+    ⚠️⚠️ Der Grund, warum es diese Funktion gibt: bis zum 17.9.2026 trugen die
+    Einträge gar keine Herkunft, und in jedem Bestand stehen bis zu VERLAUF_MAX
+    solcher Alt-Einträge. Ein fehlendes Feld heißt „kenne ich nicht" — es darf
+    NICHT als „lokal" durchgehen, sonst schreibt die Auswertung dem Rechner des
+    Nutzers bis zu 30 Läufe gut, die in Wahrheit aus der CI kamen. Rückwirkend
+    ist die Herkunft nicht zu ermitteln und wird auch nicht geraten.
+    Ab wann es sie gibt, sagt _meta["verlauf_felder_ab"]."""
+    wert = (eintrag or {}).get("herkunft")
+    return wert if wert in HERKUNFT_WERTE else HERKUNFT_UNBEKANNT
+
+
+def verlauf_neu(eintrag: dict | None) -> int | None:
+    """Neuzugänge eines lauf_verlauf-Eintrags SICHER lesen: None heißt
+    „nicht gemessen", 0 heißt „gemessen, es waren keine".
+
+    ⚠️ Dieselbe Falle wie bei der Herkunft, nur teurer: eine Summe über eine
+    Liste, in der die Alt-Einträge als 0 gelten, sieht völlig plausibel aus.
+    Wer summiert, muss die None-Einträge ZÄHLEN und die Lücke ausweisen.
+    (bool ist in Python ein int — deshalb ausdrücklich ausgeschlossen.)"""
+    wert = (eintrag or {}).get("neu")
+    if isinstance(wert, bool) or not isinstance(wert, int) or wert < 0:
+        return None
+    return wert
+
+
+def _neuzugaenge(lauf_meta: dict) -> int | None:
+    """Wie viele Sätze kamen in diesem Lauf NEU dazu? Quelle ist das vorhandene
+    new_petitions_last_run (upsert füllt es zentral, die Abschluss-Saves der
+    Scraper reichen ihre eigene Liste durch) — keine zweite Zählung.
+
+    ⚠️ „Feld fehlt" ist NICHT „0 neue" (dieselbe Lehre wie in
+    ci_changeorg_done.py): fehlt der Schlüssel, hat niemand gezählt → None."""
+    if "new_petitions_last_run" not in lauf_meta:
+        return None
+    wert = lauf_meta.get("new_petitions_last_run")
+    if isinstance(wert, bool):
+        return None
+    if isinstance(wert, int):
+        return wert if wert >= 0 else None
+    if isinstance(wert, (list, tuple, set, dict)):
+        return len(wert)
+    return None
 
 # Thema, unter dem der robots-Riegel einen ausgelassenen Host meldet. Steht als
 # Konstante hier, weil zwei Stellen sich darauf verlassen (siehe host_gesperrt).
@@ -2291,7 +2428,7 @@ def _melde_an_ci(name: str, befunde: list[dict]) -> None:
     Der senkrechte Strich muss maskiert werden, sonst zerreißt er die
     Markdown-Tabelle (in monitor.run_checks am 4.8.2026 genau so passiert)."""
     warnungen = [b for b in befunde if b.get("stufe") == "warnung"]
-    if not warnungen or os.environ.get("GITHUB_ACTIONS") != "true":
+    if not warnungen or not in_github_actions():
         return
     for b in warnungen:
         einzeilig = " ".join(f"{b['thema']}: {b['text']}".split())[:400]
@@ -3633,6 +3770,192 @@ def _i18n_einsetzen(tmpl: str) -> str:
                 .replace("{{I18N}}", _I18N_SCRIPT))
 
 
+# --- Zuwachs je Tag --------------------------------------------------------
+# Wie viele Petitionen an einem Tag dazugekommen sind, getrennt danach, ob sie
+# über die Cloud oder über den Rechner des Nutzers kamen.
+#
+# ⚠️⚠️ Die Trennung nach Herkunft gibt es erst seit dem 17.9.2026 (Felder
+# `herkunft` und `neu` je lauf_verlauf-Eintrag). Ältere Einträge sind NICHT
+# nachträglich zuzuordnen — sie zählen als „unbekannt" und bekommen eine eigene
+# Farbe. Wer sie stillschweigend als „Cloud" verbucht, erfindet Daten; wer sie
+# weglässt, erfindet einen Einbruch. Beides wäre schlimmer als die graue Säule.
+#
+# ⚠️ VERLAUF_MAX deckelt die Reihe je Plattform auf 30 Läufe. Das ist eine
+# Grenze in LÄUFEN, nicht in Tagen: schnelle Zweige decken damit weniger Tage ab
+# als langsame. Ein Tag am linken Rand kann deshalb niedrig aussehen, weil dort
+# nur noch die langsamen Plattformen hinreichen — darum steht die Zahl der
+# beitragenden Zweige je Tag im Tooltip, und der Text unter dem Diagramm nennt
+# den Effekt ausdrücklich.
+_ZUWACHS_TAGE = 21          # Fensterbreite; mehr deckt VERLAUF_MAX nicht ab
+_ZUWACHS_H = 120            # Höhe der Zeichenfläche in SVG-Einheiten
+
+
+def _zuwachs_reihe(platforms: list, tage: int = _ZUWACHS_TAGE) -> dict:
+    """Zuwachs je Tag und Herkunft, plus was daran unsicher ist."""
+    jetzt = _dt.datetime.now(_dt.timezone.utc)
+    erster = (jetzt - _dt.timedelta(days=tage - 1)).date()
+    tage_map: dict = {}
+    zweige_je_tag: dict = {}
+    ohne_neu = 0            # Einträge im Fenster, die keine Zahl tragen
+    mit_neu = 0
+    frueheste_marke = None  # ab wann überhaupt erfasst wird
+
+    for p in platforms:
+        if not getattr(p, "is_live", False):
+            continue
+        try:
+            meta = load_meta(p.data_file)
+        except (OSError, ValueError):
+            continue
+        marke = _schema_zeit((meta or {}).get("verlauf_felder_ab"))
+        if marke and (frueheste_marke is None or marke < frueheste_marke):
+            frueheste_marke = marke
+        for eintrag in ((meta or {}).get("lauf_verlauf") or []):
+            zeit = _schema_zeit(eintrag.get("zeit"))
+            if zeit is None:
+                continue
+            tag = zeit.astimezone(_dt.timezone.utc).date()
+            if tag < erster or tag > jetzt.date():
+                continue
+            neu = verlauf_neu(eintrag)
+            if neu is None:
+                ohne_neu += 1
+                continue
+            mit_neu += 1
+            if neu <= 0:
+                zweige_je_tag.setdefault(tag, set()).add(p.key)
+                tage_map.setdefault(tag, {})
+                continue
+            herkunft = verlauf_herkunft(eintrag)
+            # lokal_cron und lokal_hand fallen für die Anzeige zusammen: den
+            # Nutzer interessiert „von meinem Rechner", nicht welcher Startweg.
+            spalte = ("ci" if herkunft == HERKUNFT_CI
+                      else "unbekannt" if herkunft == HERKUNFT_UNBEKANNT
+                      else "lokal")
+            # ⚠️ setdefault MUSS auf einer eigenen Zeile stehen. In
+            # `d.setdefault(k, {})[s] = d[k].get(s, 0) + n` wertet Python die
+            # RECHTE Seite zuerst aus — `d[k]` läuft also, bevor setdefault den
+            # Schlüssel anlegt, und wirft KeyError.
+            eintraege_tag = tage_map.setdefault(tag, {})
+            eintraege_tag[spalte] = eintraege_tag.get(spalte, 0) + neu
+            zweige_je_tag.setdefault(tag, set()).add(p.key)
+
+    reihe = []
+    for i in range(tage):
+        tag = (jetzt - _dt.timedelta(days=tage - 1 - i)).date()
+        werte = tage_map.get(tag, {})
+        reihe.append({
+            "tag": tag,
+            "ci": werte.get("ci", 0),
+            "lokal": werte.get("lokal", 0),
+            "unbekannt": werte.get("unbekannt", 0),
+            "summe": sum(werte.values()),
+            "zweige": len(zweige_je_tag.get(tag, ())),
+            # Vor der Grenzmarke wurde gar nicht erfasst — das ist etwas
+            # anderes als „an dem Tag kam nichts".
+            "vor_erfassung": bool(frueheste_marke
+                                  and tag < frueheste_marke.astimezone(
+                                      _dt.timezone.utc).date()),
+        })
+    return {"reihe": reihe, "ohne_neu": ohne_neu, "mit_neu": mit_neu,
+            "marke": frueheste_marke, "jetzt": jetzt}
+
+
+def _zuwachs_diagramm(platforms: list) -> str:
+    """Säulendiagramm des Tageszuwachses, gestapelt nach Herkunft."""
+    daten = _zuwachs_reihe(platforms)
+    reihe = daten["reihe"]
+    hoechst = max((z["summe"] for z in reihe), default=0)
+    breite, luecke = 34, 6
+    gesamt_b = len(reihe) * (breite + luecke)
+    teile = []
+
+    if hoechst == 0:
+        # ⚠️ Kein Balken heißt hier NICHT „kein Zuwachs" — meist heißt es, dass
+        # die Zählung gerade erst begonnen hat. Das muss dastehen.
+        teile.append(_zs(
+            "Noch keine Zahlen im Fenster. Die Zählung je Lauf beginnt mit dem "
+            "ersten Lauf nach dem 17.9.2026 — vorher wurde nicht erfasst.",
+            "No figures in this window yet. Per-run counting starts with the "
+            "first run after 17 Sept 2026 — before that nothing was recorded.",
+            tag="p", klasse="zuwachs-leer"))
+    else:
+        for i, z in enumerate(reihe):
+            x = i * (breite + luecke)
+            unten = _ZUWACHS_H
+            if z["vor_erfassung"]:
+                teile.append(f'<rect class="zw-vor" x="{x}" y="0" '
+                             f'width="{breite}" height="{_ZUWACHS_H}"/>')
+            for spalte, klasse in (("ci", "zw-ci"), ("lokal", "zw-lokal"),
+                                   ("unbekannt", "zw-unbek")):
+                wert = z[spalte]
+                if wert <= 0:
+                    continue
+                h = max(2, round(wert / hoechst * (_ZUWACHS_H - 4)))
+                unten -= h
+                teile.append(f'<rect class="{klasse}" x="{x}" y="{unten}" '
+                             f'width="{breite}" height="{h}"><title>'
+                             f'{_esc(z["tag"].strftime("%d.%m."))}: {wert}'
+                             f'</title></rect>')
+            if i % 3 == 0 or i == len(reihe) - 1:
+                teile.append(f'<text class="zw-tag" x="{x + breite / 2}" '
+                             f'y="{_ZUWACHS_H + 13}" text-anchor="middle">'
+                             f'{z["tag"].strftime("%d.%m.")}</text>')
+
+    # Was an den Zahlen unsicher ist, steht unter dem Bild — nicht darin.
+    hinweise = []
+    if daten["ohne_neu"]:
+        hinweise.append(_zs(
+            f"{daten['ohne_neu']} Lauf/Läufe im Fenster tragen keine Zahl "
+            f"(vor der Umstellung) und fehlen deshalb in den Säulen.",
+            f"{daten['ohne_neu']} run(s) in this window carry no figure "
+            f"(from before the change) and are therefore missing from the bars.",
+            tag="li"))
+    hinweise.append(_zs(
+        "Die Reihe endet, wo die gespeicherten Läufe enden — je Plattform "
+        "höchstens 30. Schnelle Zweige reichen deshalb weniger Tage zurück als "
+        "langsame; ein niedriger Tag am linken Rand kann daran liegen.",
+        "The series ends where the stored runs end — at most 30 per platform. "
+        "Fast branches therefore reach back fewer days than slow ones; a low "
+        "day at the left edge may be down to that.", tag="li"))
+    hinweise.append(_zs(
+        "Grau = Läufe ohne festgehaltene Herkunft. Sie nachträglich einer "
+        "Seite zuzuschlagen wäre geraten, nicht gemessen.",
+        "Grey = runs with no recorded origin. Assigning them to one side "
+        "afterwards would be guesswork, not measurement.", tag="li"))
+
+    svg = ""
+    if hoechst:
+        svg = (f'<div class="zuwachs-scroll"><svg viewBox="0 0 {gesamt_b} '
+               f'{_ZUWACHS_H + 18}" xmlns="http://www.w3.org/2000/svg" '
+               f'role="img" aria-label="'
+               + _esc("Zuwachs je Tag, gestapelt nach Herkunft") + '">'
+               + "".join(teile) + '</svg></div>')
+    else:
+        svg = "".join(teile)
+
+    return (
+        '<details class="schema zuwachs">\n'
+        '  <summary>' + _zs("Zuwachs je Tag", "Growth per day") + '</summary>\n'
+        '  <div class="schema-body">\n'
+        '    <p class="schema-hint">'
+        + _zs(f"Neue Petitionen der letzten {_ZUWACHS_TAGE} Tage, getrennt "
+              "danach, ob sie über die Cloud oder über den Rechner kamen.",
+              f"New petitions over the last {_ZUWACHS_TAGE} days, split by "
+              "whether they arrived via the cloud or via the computer.")
+        + '</p>\n'
+        '    <p class="zw-legende">'
+        + '<span class="zw-punkt zw-ci"></span>' + _zs("Cloud", "Cloud")
+        + '<span class="zw-punkt zw-lokal"></span>' + _zs("Rechner", "Computer")
+        + '<span class="zw-punkt zw-unbek"></span>'
+        + _zs("Herkunft nicht erfasst", "origin not recorded")
+        + '</p>\n    ' + svg + '\n'
+        '    <ul class="zw-hinweise">' + "".join(hinweise) + '</ul>\n'
+        '  </div>\n'
+        '</details>'
+    )
+
+
 # --- Ablaufschema ----------------------------------------------------------
 # Eine Seite, auf der Außenstehende sehen, was in welcher Reihenfolge läuft.
 # Kuratiert aus einer Vollkartierung des Codes (70 Knoten, jeder mit Beleg) auf
@@ -3648,6 +3971,188 @@ def _i18n_einsetzen(tmpl: str) -> str:
 # offline funktionieren. Farben ausschließlich aus den vorhandenen Variablen
 # ({{FARBEN}}), damit das Schema den Themenwechsel hell/dunkel mitmacht.
 # ⚠️ Jeder Text über _zs(), sonst bleibt das Schema beim Sprachwechsel deutsch.
+
+# ----------------------------------------------------------------------------
+# Zustand der Ablauf-Punkte
+# ----------------------------------------------------------------------------
+# ⚠️⚠️ Die Grenze, die diesen ganzen Abschnitt bestimmt: das Dashboard auf
+# GitHub Pages ist ein SCHNAPPSCHUSS. Er entsteht IM CI-Lauf (publish.py ruft
+# write_dashboard(schnappschuss=True)) und liegt danach unverändert herum, bis
+# der nächste Lauf ihn ersetzt — heute zweimal am Tag. Daraus folgt dreierlei:
+#
+#   1. „läuft gerade" darf im Schnappschuss NICHT stehen. Es wäre in der
+#      Sekunde falsch, in der der Lauf endet — und gelesen wird die Seite fast
+#      nur danach. Nur die Server-Fassung (monitor.py --serve) hat über
+#      /status echten Live-Zustand.
+#   2. Der Schnappschuss kann den lokalen systemd-Timer NICHT sehen. Er
+#      entsteht in der GitHub-Cloud; der Rechner des Nutzers ist von dort
+#      unerreichbar. Was der lokale Lauf getan hat, weiß diese Seite
+#      ausschließlich aus dem, was er in die Bestände geschrieben hat.
+#   3. Ein toter Lauf kann seinen eigenen Tod nicht melden. Hört das CI auf,
+#      entsteht kein neuer Schnappschuss — die alte Seite bleibt liegen und
+#      behauptet weiter, was am letzten guten Tag stimmte. Dagegen hilft nur
+#      eine Uhr, die NICHT zur Anlage gehört: die des Lesers. Deshalb trägt
+#      die Seite ihren Bauzeitpunkt maschinenlesbar mit und rechnet das Alter
+#      im Browser aus (siehe _SCHEMA_STANDSKRIPT).
+#
+# ⚠️ Gemessen am 17.9.2026, nicht angenommen: laufzeiten.tsv und
+# ci-laufzeiten.tsv liegen im Cron-Klon und sind gitignoriert (.gitignore
+# Z. 16/17). Im CI-Lauf existieren sie NICHT. Auf ihnen darf hier deshalb
+# nichts stehen, sonst wäre die Anzeige auf Pages dauerhaft leer und lokal
+# gefüllt — der schlimmste aller Fälle, weil er beim Entwickeln gut aussieht.
+#
+# Belegbar ist genau das, was in den Beständen steht; die wandern als Datei
+# mit und werden im CI aus dem Actions-Cache zurückgeholt.
+
+# Erwartungsfenster des Sammellaufs: scrape.yml startet 03:17 und 15:17 UTC,
+# also alle 12 h. Ein Lauf braucht im Median 5,2 h (siehe
+# [[pm_laufzeiten_protokoll]]), der Abschluss-Save liegt also gegen 08:30 bzw.
+# 20:30 UTC. 36 h sind damit drei verpasste Fenster — auffällig, aber noch
+# erklärbar; 72 h sind sechs und damit ein Ausfall.
+SAMMELLAUF_AUFFAELLIG_H = 36
+SAMMELLAUF_AUSFALL_H = 72
+
+
+def _schema_zeit(wert) -> "_dt.datetime | None":
+    """Ein ISO-Zeitstempel aus einem Bestand als aware datetime — oder None.
+
+    ⚠️ Nie mit einem Rückfall auf „jetzt" oder auf das Dateidatum: ein
+    unlesbarer Zeitstempel ist „unbekannt" und muss als solcher durchschlagen.
+    Ein Rückfall auf jetzt machte aus jedem kaputten Feld einen frischen Lauf."""
+    if not isinstance(wert, str) or not wert:
+        return None
+    try:
+        d = _dt.datetime.fromisoformat(wert)
+    except ValueError:
+        return None
+    return d if d.tzinfo else d.replace(tzinfo=_dt.timezone.utc)
+
+
+def _schema_letzter_lauf(meta: dict) -> "_dt.datetime | None":
+    """Der letzte ABGESCHLOSSENE Lauf einer Plattform.
+
+    ⚠️⚠️ Quelle ist ``lauf_verlauf``, NICHT ``generated_at``. generated_at
+    frischt bei JEDER Zwischenspeicherung auf, auch wenn kein einziger frischer
+    Satz ankam — ein komplett gesperrter Host sah dadurch grün und taufrisch
+    aus. Ein Eintrag in lauf_verlauf entsteht dagegen nur beim Abschluss-Save
+    (save_store mit quiet=False), ist also ein echter Lauf-Beleg."""
+    verlauf = meta.get("lauf_verlauf")
+    if not isinstance(verlauf, list) or not verlauf:
+        return None
+    letzter = verlauf[-1]
+    if not isinstance(letzter, dict):
+        return None
+    return _schema_zeit(letzter.get("zeit"))
+
+
+def _schema_fakten(platforms: list) -> dict:
+    """Alle Belege für das Ablaufschema, einmal aus den Beständen gelesen.
+
+    Gibt ausdrücklich auch zurück, was NICHT belegbar ist (``ohne_verlauf``) —
+    eine Plattform ohne lauf_verlauf ist „unbekannt", nicht „null Läufe"."""
+    jetzt = _dt.datetime.now(_dt.timezone.utc)
+    f = {
+        "jetzt": jetzt,
+        "cloud": None,        # jüngster Lauf der NICHT lokal gepflegten Zweige
+        "lokal": None,        # jüngster Lauf der LOKALE_PFLEGE-Zweige
+        "changeorg": None,
+        "gesperrt": [],       # Plattform-Schlüssel mit ausgelassenem Host
+        "ohne_verlauf": 0,    # live, aber ohne einen einzigen Abschluss-Beleg
+        "live": 0,
+        "herkunft_bekannt": False,
+    }
+    for p in platforms:
+        if not getattr(p, "is_live", False):
+            continue
+        f["live"] += 1
+        try:
+            meta = load_meta(p.data_file)
+        except (OSError, ValueError):
+            continue
+        key = getattr(p, "key", "")
+        # Gesperrter Host: das Kennzeichen ist der BEFUND, nicht available == 0.
+        # eko trug 39 verfügbare Sätze bei gesperrtem Host; nur europarl stand
+        # auf 0. Wer auf die Null prüft, übersieht die Sperre fast überall.
+        if any(isinstance(b, dict) and b.get("thema") == THEMA_HOST_AUSGELASSEN
+               for b in (meta.get("befunde") or [])):
+            f["gesperrt"].append(key)
+        letzter = _schema_letzter_lauf(meta)
+        if letzter is None:
+            f["ohne_verlauf"] += 1
+            continue
+        # ⚠️ Das Feld „herkunft" (ci/lokal) entsteht parallel in einer anderen
+        # Sitzung. Es ist hier NICHT vorausgesetzt: ohne das Feld trennen wir
+        # nach dem, was ohnehin feststeht — die sechs LOKALE_PFLEGE-Zweige kann
+        # die Cloud gar nicht holen, alle anderen holt sie. Das ist gröber als
+        # eine echte Herkunft, aber es ist wahr. Sobald das Feld da ist, wird
+        # es zusätzlich ausgewertet und die Anzeige genauer.
+        verlauf = meta.get("lauf_verlauf") or []
+        if isinstance(verlauf[-1], dict) and verlauf[-1].get("herkunft"):
+            f["herkunft_bekannt"] = True
+        eimer = "lokal" if key in LOKALE_PFLEGE else "cloud"
+        if f[eimer] is None or letzter > f[eimer]:
+            f[eimer] = letzter
+        if key.startswith("changeorg"):
+            if f["changeorg"] is None or letzter > f["changeorg"]:
+                f["changeorg"] = letzter
+    return f
+
+
+def _schema_stufe(letzter, jetzt, auffaellig_h, ausfall_h) -> str:
+    """Zustandsstufe aus dem Alter eines Belegs.
+
+    ``unbekannt`` ist ausdrücklich KEINE Zwischenstufe zwischen gut und
+    schlecht, sondern eine eigene Aussage: wir haben keinen Beleg."""
+    if letzter is None:
+        return "unbekannt"
+    stunden = (jetzt - letzter).total_seconds() / 3600.0
+    if stunden > ausfall_h:
+        return "ausfall"
+    if stunden > auffaellig_h:
+        return "auffaellig"
+    return "frisch"
+
+
+def _schema_alter(letzter, jetzt) -> tuple:
+    """Alter als zweisprachiges Wortpaar — grob, aber nie beschönigend."""
+    if letzter is None:
+        return ("Zeitpunkt unbekannt", "time unknown")
+    sek = max(0, int((jetzt - letzter).total_seconds()))
+    std, tage = sek // 3600, sek // 86400
+    if tage >= 2:
+        return (f"vor {tage} Tagen", f"{tage} days ago")
+    if std >= 2:
+        return (f"vor {std} Stunden", f"{std} hours ago")
+    return ("vor unter 2 Stunden", "less than 2 hours ago")
+
+
+def _schema_datum(letzter) -> str:
+    """Der Beleg-Zeitpunkt als kurzes, sprachneutrales Datum (UTC)."""
+    if letzter is None:
+        return "—"
+    return letzter.astimezone(_dt.timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+
+
+def _schema_naechster_taeglich(jetzt, zeiten) -> "_dt.datetime":
+    """Nächster Termin aus festen UTC-Uhrzeiten (Stunde, Minute)."""
+    kandidaten = []
+    for tag in (0, 1):
+        basis = (jetzt + _dt.timedelta(days=tag)).date()
+        for std, minute in zeiten:
+            kandidaten.append(_dt.datetime.combine(
+                basis, _dt.time(std, minute), tzinfo=_dt.timezone.utc))
+    return min(k for k in kandidaten if k > jetzt)
+
+
+def _schema_naechster_montag(jetzt, std, minute) -> "_dt.datetime":
+    """Nächster Montagstermin (UTC) — für den Wochenbericht."""
+    ziel = _dt.datetime.combine(jetzt.date(), _dt.time(std, minute),
+                                tzinfo=_dt.timezone.utc)
+    vor = (0 - jetzt.weekday()) % 7
+    if vor == 0 and ziel <= jetzt:
+        vor = 7
+    return ziel + _dt.timedelta(days=vor)
+
 
 _SCHEMA_CSS = """
     details.schema{margin-top:28px;background:var(--surface);
@@ -3690,11 +4195,339 @@ _SCHEMA_CSS = """
         opacity:.75}
     .s-note{fill:var(--indigo);font-size:9px;font-weight:700}
     .s-nc{fill:none;stroke:var(--indigo);stroke-width:1}
+    /* Zustandsstreifen am linken Rand eines Knotens. Bewusst ein Streifen und
+       keine Einfärbung der Fläche: die Kästen tragen schon Titel, Untertitel
+       und teils ein Merkzeichen — eine vierte farbige Fläche machte das
+       Diagramm unlesbar. Der Streifen kollidiert mit keinem Text.
+       ⚠️ Farbe ist hier NIE die einzige Aussage: jeder Knoten mit Streifen
+       trägt zusätzlich einen <title>-Tooltip im Klartext, und die Tabelle
+       unter dem Diagramm sagt dasselbe noch einmal in ganzen Sätzen. */
+    .s-z-frisch{fill:var(--online)}
+    .s-z-auffaellig{fill:var(--grow)}
+    .s-z-ausfall{fill:var(--offline)}
+    .s-z-unbekannt{fill:var(--muted);opacity:.45}
+    /* „Plan" ist KEIN Zustand — der Punkt hat hier keinen Beleg, nur einen
+       Fahrplan. Deshalb sichtbar anders: schmal, blass, ohne Ampelfarbe. */
+    .s-z-plan{fill:var(--line)}
+    /* Der Stand-Streifen in der Zusammenfassung: immer sichtbar, auch
+       zugeklappt. Er trägt die einzige Angabe, die einen toten Lauf verrät. */
+    .schema-stand{margin-left:auto;display:flex;align-items:center;gap:8px;
+        font-weight:500;font-size:12px;color:var(--muted)}
+    .schema-stand b{font-weight:650;font-variant-numeric:tabular-nums}
+    .schema-stand.ist-alt{color:var(--warn-ink)}
+    .schema-punkt{width:9px;height:9px;border-radius:50%;flex:0 0 auto;
+        background:var(--muted)}
+    .schema-stand.ist-frisch .schema-punkt{background:var(--online)}
+    .schema-stand.ist-alt .schema-punkt{background:var(--offline)}
+    /* Zustandstabelle. Als Liste aus Zeilen statt <table>: auf 380px bricht
+       eine vierspaltige Tabelle entweder um oder scrollt, beides schlechter
+       als gestapelte Blöcke. */
+    .zust{margin:18px 0 0;display:grid;gap:10px}
+    .zust h4{margin:0 0 2px;font-size:13px}
+    .zust-z{border:1px solid var(--line);border-radius:10px;padding:10px 12px;
+        border-left-width:4px}
+    .zust-z.z-frisch{border-left-color:var(--online)}
+    .zust-z.z-auffaellig{border-left-color:var(--grow)}
+    .zust-z.z-ausfall{border-left-color:var(--offline)}
+    .zust-z.z-unbekannt{border-left-color:var(--muted)}
+    .zust-z.z-plan{border-left-color:var(--line)}
+    .zust-k{font-size:12px;color:var(--muted);margin:0 0 3px}
+    .zust-t{font-size:13px;font-weight:650;margin:0 0 4px}
+    .zust-s{font-size:12.5px;margin:0;line-height:1.45}
+    .zust-q{font-size:11.5px;color:var(--muted);margin:5px 0 0}
+    .zust-q b{font-weight:650}
+    /* Der Warnsatz, der die Grenze der ganzen Anzeige benennt. Er steht
+       bewusst NICHT klein und grau. */
+    .schema-grenze{margin:14px 0 0;padding:10px 12px;border-radius:10px;
+        background:var(--info-bg);color:var(--info-ink);
+        border:1px solid var(--info-line);font-size:12.5px;line-height:1.45}
+    /* --- Zuwachs je Tag --- */
+    .zuwachs-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+    .zuwachs-scroll>svg{display:block;width:100%;min-width:640px;height:auto}
+    .zw-ci{fill:var(--indigo)}
+    .zw-lokal{fill:var(--ink);opacity:.62}
+    .zw-unbek{fill:var(--muted);opacity:.38}
+    /* Streifen für Tage VOR der Erfassung — bewusst kein leerer Balken, sonst
+       liest man „nichts dazugekommen", wo „nicht gemessen" gilt. */
+    .zw-vor{fill:var(--muted);opacity:.07}
+    .zw-tag{fill:var(--muted);font-size:9px}
+    .zw-legende{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;
+        color:var(--muted);font-size:12px;margin:0 0 10px}
+    .zw-punkt{width:11px;height:11px;border-radius:3px;display:inline-block;
+        margin-right:-10px}
+    span.zw-punkt.zw-ci{background:var(--indigo)}
+    span.zw-punkt.zw-lokal{background:var(--ink);opacity:.62}
+    span.zw-punkt.zw-unbek{background:var(--muted);opacity:.38}
+    .zw-hinweise{color:var(--muted);font-size:12px;margin:12px 0 0;
+        padding-left:18px}
+    .zw-hinweise li{margin-top:5px}
+    .zuwachs-leer{color:var(--muted);font-size:13px;margin:0}
 """
 
 
-def _s_kasten(x, y, w, h, art, de, en, sub_de="", sub_en="", marke=""):
-    """Ein Knoten des Schemas: Rahmen, Titel, optionaler Untertitel, Merkzeichen."""
+# ⚠️⚠️ Das einzige Stück dieser Seite, das einen STILLSTAND der ganzen Anlage
+# aufdecken kann — und der einzige Grund, warum hier überhaupt Skript steht.
+#
+# Alles andere auf dieser Seite stammt aus dem Lauf, der sie erzeugt hat. Hört
+# der Lauf auf, entsteht kein neuer Schnappschuss: die alte Datei bleibt auf
+# Pages liegen und behauptet in alle Ewigkeit, was am letzten guten Tag stimmte.
+# Eine serverseitig eingesetzte Altersangabe wäre dagegen wirkungslos, denn sie
+# altert ja nicht mit. Gebraucht wird eine Uhr, die NICHT zur Anlage gehört —
+# und die einzige erreichbare ist die des Lesers.
+#
+# Deshalb: Bauzeitpunkt als data-stand mitgeben, Alter im Browser rechnen.
+# Ohne Netz, ohne Server, ohne Abruf — das funktioniert auch offline.
+#
+# ⚠️ Das Skript schreibt data-de UND data-en und erst dann den Text. Der
+# Sprachumschalter am Dateiende läuft NACH diesem Skript und setzt textContent
+# aus genau diesen Attributen; wer nur textContent setzte, dessen Angabe wäre
+# beim ersten Sprachwechsel wieder weg.
+_SCHEMA_STANDSKRIPT = """<script>
+(function(){
+  var el = document.getElementById("schema-stand");
+  var ziel = document.getElementById("schema-stand-text");
+  if (!el || !ziel) return;
+  var t = Date.parse(el.getAttribute("data-stand") || "");
+  if (!t) return;
+  // Negative Werte kommen vor: die Uhr des Lesers kann nachgehen. Dann ist
+  // "0" die ehrlichste Aussage, nicht eine Zukunftsangabe.
+  var std = Math.max(0, (Date.now() - t) / 3600000);
+  var auff = parseFloat(el.getAttribute("data-auff")) || 36;
+  var aus  = parseFloat(el.getAttribute("data-aus"))  || 72;
+  var tage = Math.floor(std / 24), de, en;
+  if (tage >= 2)      { de = "vor " + tage + " Tagen";  en = tage + " days ago"; }
+  else if (std >= 2)  { de = "vor " + Math.floor(std) + " Stunden";
+                        en = Math.floor(std) + " hours ago"; }
+  else                { de = "vor unter 2 Stunden";     en = "less than 2 hours ago"; }
+  var wann = new Date(t).toLocaleString();
+  var stufe = std > aus ? "ausfall" : (std > auff ? "auffaellig" : "frisch");
+  var vde = "Stand " + wann + " \\u00b7 " + de;
+  var ven = "As of " + wann + " \\u00b7 " + en;
+  if (stufe !== "frisch") {
+    vde += " \\u2014 \\u00fcberf\\u00e4llig: es sollte zweimal am Tag eine "
+         + "neue Seite geben. Der Lauf steht vermutlich still.";
+    ven += " \\u2014 overdue: a new page is due twice a day. The run has "
+         + "probably stopped.";
+  }
+  function setz(k, a, b){
+    if (!k) return;
+    k.setAttribute("data-de", a);
+    k.setAttribute("data-en", b);
+    k.textContent =
+      (document.documentElement.getAttribute("lang") === "en") ? b : a;
+  }
+  setz(ziel, vde, ven);
+  el.className = "schema-stand " + (stufe === "frisch" ? "ist-frisch" : "ist-alt");
+  var zeile = document.getElementById("zust-seite");
+  if (zeile) {
+    zeile.className = "zust-z z-" + stufe;
+    setz(document.getElementById("zust-seite-alter"),
+         "Gebaut " + wann + " \\u00b7 " + de + ".",
+         "Built " + wann + " \\u00b7 " + en + ".");
+  }
+})();
+</script>"""
+
+
+# Öffentliche REST-API von GitHub. Kein Token: das Repo ist öffentlich, und
+# ein Token in einer statischen Seite wäre ein verschenktes Geheimnis.
+# ⚠️ Gemessen am 17.9.2026, nicht angenommen:
+#   · access-control-allow-origin: *  → aus dem Browser abrufbar.
+#   · 60 Abrufe je Stunde und IP, unangemeldet. Deshalb HÖCHSTENS ein Abruf je
+#     Seitenaufruf, Ergebnis in sessionStorage.
+#   · per_page=30 über alle Workflows = 484 KB. Eine einzelne Workflow-Abfrage
+#     mit per_page=1 = 17 KB roh, 2,7 KB gzip. Nur die wird benutzt.
+_SCHEMA_API = ("https://api.github.com/repos/PetitionsManager/petitionsmanager"
+               "/actions/workflows/scrape.yml/runs"
+               "?per_page=1&exclude_pull_requests=true")
+
+# ⚠️⚠️ Live-Abfrage — die Aufwertung, NICHT der Boden.
+#
+# Der gebackene Zustand bleibt in jedem Fehlerfall stehen und behält seine
+# Farbe. Das ist die zentrale Eigenschaft: eine kaputte Abfrage darf einen
+# echten Ausfall niemals zudecken. Deshalb gibt es drei streng getrennte
+# Darstellungen — gebacken (mit Bauzeit), live (mit Abrufzeit), nicht
+# ermittelbar (mit Grund) — und die Live-Zeile überschreibt nie die gebackene.
+#
+# ⚠️ Der teure Vorgänger-Fehler, der sich hier NICHT wiederholen darf: der
+# Schnappschuss fragte früher alle 2 s /status ab, bekam GitHubs 404-Seite mit
+# 5.442 B und verschluckte sie still — rund 9,8 MB je Stunde. Gegenmittel hier:
+# genau ein Abruf je Seitenaufruf, kein Intervall, kein Wiederholen nach einem
+# Fehlschlag, Abbruch nach 6 s, und bei erschöpftem Limit eine Sperre für die
+# ganze Sitzung.
+#
+# ⚠️ Offline ist der Normalfall, nicht die Ausnahme: die Seite wird auch ohne
+# Netz gelesen. navigator.onLine === false überspringt den Abruf sofort — es
+# bleibt kein Platzhalter stehen und nichts lädt endlos.
+_SCHEMA_LIVESKRIPT = """<script>
+(function(){
+  var zeile = document.getElementById("zust-live");
+  var text  = document.getElementById("zust-live-text");
+  var quelle = document.getElementById("streifen-quelle");
+  if (!zeile || !text) return;
+  var API = "__API__", SCHL = "pm-schema-live", SPERRE = "pm-schema-live-stopp";
+  var AUFF = 36, AUS = 72;
+
+  function setz(k, de, en){
+    if (!k) return;
+    k.setAttribute("data-de", de);
+    k.setAttribute("data-en", en);
+    k.textContent =
+      (document.documentElement.getAttribute("lang") === "en") ? en : de;
+  }
+  // Ein Fehlschlag faerbt die Zeile NEUTRAL, nie gruen und nie rot: ueber den
+  // Lauf sagt er nichts. Rot waere eine Falschmeldung ueber die Anlage, gruen
+  // erst recht. Der gebackene Zustand daneben bleibt unberuehrt stehen.
+  function nichtErmittelbar(de, en){
+    zeile.className = "zust-z z-unbekannt";
+    setz(text, "Nicht ermittelbar: " + de
+         + " Der Zustand oben bleibt der gebackene.",
+         "Not available: " + en + " The state above remains the baked one.");
+  }
+  function zeitwort(std){
+    var t = Math.floor(std / 24);
+    if (t >= 2) return ["vor " + t + " Tagen", t + " days ago"];
+    if (std >= 2) return ["vor " + Math.floor(std) + " Stunden",
+                          Math.floor(std) + " hours ago"];
+    return ["vor unter 2 Stunden", "less than 2 hours ago"];
+  }
+
+  function zeige(d, abgerufen, ausSpeicher){
+    var r = (d && d.workflow_runs && d.workflow_runs[0]) || null;
+    if (!r || typeof r.status !== "string") {
+      nichtErmittelbar("GitHub hat geantwortet, aber nicht in der erwarteten "
+                       + "Form.",
+                       "GitHub answered, but not in the expected shape.");
+      return;
+    }
+    var wann = new Date(abgerufen).toLocaleTimeString();
+    var vor = ausSpeicher ? " (aus dem Zwischenspeicher dieser Sitzung)" : "";
+    var vorEn = ausSpeicher ? " (from this session's cache)" : "";
+    var nr = r.run_number ? "#" + r.run_number : "";
+    var laeuft = (r.status === "in_progress" || r.status === "queued");
+    var stufe, de, en;
+    if (laeuft) {
+      // „laeuft gerade" steht NUR hier: live gemessen, mit Abrufzeit daneben.
+      // Im gebackenen Text darf es nie stehen — dort waere es in der Sekunde
+      // falsch, in der der Lauf endet.
+      var seit = new Date(r.run_started_at || r.created_at).toLocaleTimeString();
+      stufe = "frisch";
+      de = "Lauf " + nr + " laeuft gerade, gestartet " + seit + ".";
+      en = "Run " + nr + " is running right now, started " + seit + ".";
+    } else {
+      var ende = Date.parse(r.updated_at || r.created_at);
+      var std = Math.max(0, (Date.now() - ende) / 3600000);
+      var w = zeitwort(std);
+      var gut = (r.conclusion === "success");
+      stufe = !gut ? "ausfall"
+              : (std > AUS ? "ausfall" : (std > AUFF ? "auffaellig" : "frisch"));
+      de = "Letzter Lauf " + nr + ": " + (gut ? "erfolgreich" : "FEHLGESCHLAGEN ("
+           + (r.conclusion || "unklar") + ")") + ", " + w[0] + ".";
+      en = "Last run " + nr + ": " + (gut ? "succeeded" : "FAILED ("
+           + (r.conclusion || "unknown") + ")") + ", " + w[1] + ".";
+      if (!gut) {
+        de += " Das ist der Grund, warum nichts Frisches ankommt.";
+        en += " That is why nothing fresh is arriving.";
+      }
+    }
+    zeile.className = "zust-z z-" + stufe;
+    setz(text, de + " Abgerufen " + wann + vor + ".",
+         en + " Fetched at " + wann + vorEn + ".");
+    // Erst JETZT duerfen die Streifen im Bild live bedeuten - und die
+    // Bildunterschrift sagt in derselben Sekunde, dass sie es tun.
+    var knoten = document.querySelectorAll('[data-lg="sammellauf"] rect[class^="s-z-"]');
+    for (var i = 0; i < knoten.length; i++) knoten[i].setAttribute("class", "s-z-" + stufe);
+    setz(quelle,
+         "Streifen im Bild: Live-Stand der Cloud-Kette, abgerufen " + wann
+         + ". Die Bahn „Auf deinem Rechner\\u201c bleibt gebacken.",
+         "Stripes in the diagram: live state of the cloud chain, fetched at "
+         + wann + ". The „on your computer\\u201c lane stays baked.");
+  }
+
+  // --- Ab hier die Fehlerfaelle, jeder mit eigener Anzeige ----------------
+  try {
+    if (sessionStorage.getItem(SPERRE)) {
+      nichtErmittelbar("Die Abrufgrenze von GitHub ist erreicht (60 Abrufe je "
+                       + "Stunde und Adresse).",
+                       "GitHub's rate limit is reached (60 requests per hour "
+                       + "per address).");
+      return;
+    }
+    var roh = sessionStorage.getItem(SCHL);
+    if (roh) {
+      var c = JSON.parse(roh);
+      zeige(c.d, c.t, true);
+      return;
+    }
+  } catch (e) {}
+
+  if (navigator.onLine === false) {
+    nichtErmittelbar("Kein Netz — der Abruf wurde gar nicht erst versucht.",
+                     "No network — the request was not even attempted.");
+    return;
+  }
+  if (!window.fetch || !window.AbortController) {
+    nichtErmittelbar("Dieser Browser kann die Abfrage nicht ausfuehren.",
+                     "This browser cannot perform the query.");
+    return;
+  }
+  var ab = new AbortController();
+  var uhr = setTimeout(function(){ ab.abort(); }, 6000);
+  fetch(API, {signal: ab.signal, headers: {"Accept": "application/vnd.github+json"}})
+    .then(function(r){
+      clearTimeout(uhr);
+      if (r.status === 403 || r.status === 429) {
+        // Nach einem erschoepften Limit NICHT wiederholen - sonst ist die
+        // Seite die Ursache ihres eigenen Fehlers.
+        var rest = r.headers.get("x-ratelimit-remaining");
+        try { if (rest === "0") sessionStorage.setItem(SPERRE, "1"); } catch (e) {}
+        var bis = r.headers.get("x-ratelimit-reset");
+        var wann = bis ? new Date(parseInt(bis, 10) * 1000).toLocaleTimeString() : "";
+        nichtErmittelbar("Die Abrufgrenze von GitHub ist erreicht (60 je Stunde "
+                         + "und Adresse)." + (wann ? " Wieder frei ab " + wann + "." : ""),
+                         "GitHub's rate limit is reached (60 per hour per "
+                         + "address)." + (wann ? " Free again at " + wann + "." : ""));
+        return null;
+      }
+      if (!r.ok) {
+        nichtErmittelbar("GitHub antwortete mit " + r.status + ".",
+                         "GitHub answered with " + r.status + ".");
+        return null;
+      }
+      return r.json();
+    })
+    .then(function(d){
+      if (!d) return;
+      var t = Date.now();
+      try { sessionStorage.setItem(SCHL, JSON.stringify({d: d, t: t})); } catch (e) {}
+      zeige(d, t, false);
+    })
+    .catch(function(e){
+      clearTimeout(uhr);
+      var abgebrochen = (e && e.name === "AbortError");
+      nichtErmittelbar(
+        abgebrochen ? "Der Abruf hat laenger als 6 Sekunden gebraucht und wurde "
+                      + "abgebrochen."
+                    : "Der Abruf hat nicht geklappt (kein Netz, oder er wurde "
+                      + "blockiert).",
+        abgebrochen ? "The request took longer than 6 seconds and was aborted."
+                    : "The request failed (no network, or it was blocked).");
+    });
+})();
+</script>"""
+
+
+def _s_kasten(x, y, w, h, art, de, en, sub_de="", sub_en="", marke="",
+              zustand="", z_de="", z_en="", livegruppe=""):
+    """Ein Knoten des Schemas: Rahmen, Titel, optionaler Untertitel, Merkzeichen.
+
+    ``zustand`` hängt einen Zustandsstreifen an den linken Rand und legt den
+    Klartext als <title> darüber (Tooltip beim Zeigen, und Screenreader lesen
+    ihn als zugänglichen Namen der Gruppe).
+
+    ⚠️ Der Streifen ist nur eine Abkürzung für das Auge. Die Aussage steht im
+    Tooltip UND in der Zustandstabelle unter dem Diagramm — ein Punkt, der nur
+    durch seine Farbe spräche, wäre für jeden zweiten Leser stumm."""
     teile = [f'<rect class="s-{art}" x="{x}" y="{y}" width="{w}" height="{h}" rx="6"/>',
              _zs(de, en, tag="text", klasse="s-ttl",
                  attrs=f' x="{x + 10}" y="{y + 20}"')]
@@ -3704,12 +4537,81 @@ def _s_kasten(x, y, w, h, art, de, en, sub_de="", sub_en="", marke=""):
     if marke:
         teile.append(f'<circle class="s-nc" cx="{x + w - 8}" cy="{y + 8}" r="7"/>'
                      f'<text class="s-note" x="{x + w - 11}" y="{y + 11}">{marke}</text>')
-    return "".join(teile)
+    if zustand:
+        teile.insert(1, f'<rect class="s-z-{zustand}" x="{x + 1}" y="{y + 1}" '
+                        f'width="3" height="{h - 2}" rx="1.5"/>')
+    if not z_de:
+        return "".join(teile)
+    # data-lg kennzeichnet Knoten, deren Zustand eine Live-Abfrage später
+    # AUFWERTEN darf. Nur die Cloud-Kette trägt es: den Timer auf dem Rechner
+    # des Nutzers kann kein Browser abfragen (siehe _SCHEMA_LIVESKRIPT).
+    lg = f' data-lg="{livegruppe}"' if livegruppe else ""
+    # <title> als erstes Kind der Gruppe — so liest es jeder Browser als
+    # Tooltip der ganzen Gruppe, nicht nur des Rechtecks darunter.
+    return (f'<g{lg}>' + _zs(z_de, z_en, tag="title") + "".join(teile) + '</g>')
 
 
-def _ablaufschema() -> str:
-    """Der aufklappbare Abschnitt mit dem Ablaufdiagramm."""
+def _ablaufschema(platforms: list | None = None,
+                  schnappschuss: bool = False) -> str:
+    """Der aufklappbare Abschnitt mit dem Ablaufdiagramm und dem Zustand.
+
+    ⚠️⚠️ Drei Regeln, die hier NICHT verhandelbar sind:
+
+    · Kein „läuft gerade" im Schnappschuss. Die Seite wird fast nur gelesen,
+      wenn der Lauf längst vorbei ist; ein Laufzeichen wäre dann gelogen.
+    · Ein Punkt ohne Beleg bekommt KEINE Ampelfarbe. Er bekommt das Wort
+      „Fahrplan" oder „kein Beleg" — sonst sähe ein nie gelaufener Schritt
+      genauso aus wie ein eben gelaufener.
+    · Das Alter DIESER Seite rechnet der Browser gegen die Uhr des Lesers.
+      Es ist die einzige Angabe, die einen toten Lauf verraten kann: stirbt
+      das CI, entsteht kein neuer Schnappschuss, und alle serverseitigen
+      Angaben frieren in ihrem letzten guten Zustand ein."""
     k, teile = _s_kasten, []
+    f = _schema_fakten(platforms or [])
+    jetzt = f["jetzt"]
+
+    # --- Sammellauf (Cloud-Kette) -------------------------------------------
+    st_cloud = _schema_stufe(f["cloud"], jetzt, SAMMELLAUF_AUFFAELLIG_H,
+                             SAMMELLAUF_AUSFALL_H)
+    alt_cloud = _schema_alter(f["cloud"], jetzt)
+    dat_cloud = _schema_datum(f["cloud"])
+    n_scrape = _schema_naechster_taeglich(jetzt, [(3, 17), (15, 17)])
+    zc_de = (f"Letzter abgeschlossener Lauf: {dat_cloud} ({alt_cloud[0]})"
+             if f["cloud"] else "Kein abgeschlossener Lauf belegt")
+    zc_en = (f"Last completed run: {dat_cloud} ({alt_cloud[1]})"
+             if f["cloud"] else "No completed run on record")
+
+    # --- Lokale Pflege ------------------------------------------------------
+    # Schwelle NICHT neu erfunden: LOKALE_PFLEGE_MAX_TAGE ist die Schwelle, mit
+    # der die Kacheln schon warnen. Zwei verschiedene Schwellen für dieselbe
+    # Sache wären ein Widerspruch auf einer Seite.
+    st_lokal = _schema_stufe(f["lokal"], jetzt, LOKALE_PFLEGE_MAX_TAGE * 24 / 2,
+                             LOKALE_PFLEGE_MAX_TAGE * 24)
+    alt_lokal = _schema_alter(f["lokal"], jetzt)
+    dat_lokal = _schema_datum(f["lokal"])
+    zl_de = (f"Letzte lokale Pflege: {dat_lokal} ({alt_lokal[0]})"
+             if f["lokal"] else "Keine lokale Pflege belegt")
+    zl_en = (f"Last local maintenance: {dat_lokal} ({alt_lokal[1]})"
+             if f["lokal"] else "No local maintenance on record")
+
+    # --- Change.org ---------------------------------------------------------
+    st_co = _schema_stufe(f["changeorg"], jetzt, SAMMELLAUF_AUFFAELLIG_H,
+                          SAMMELLAUF_AUSFALL_H)
+    zo_de = (f"Letzter Abschluss: {_schema_datum(f['changeorg'])} "
+             f"({_schema_alter(f['changeorg'], jetzt)[0]})"
+             if f["changeorg"] else "Kein Abschluss belegt")
+    zo_en = (f"Last completion: {_schema_datum(f['changeorg'])} "
+             f"({_schema_alter(f['changeorg'], jetzt)[1]})"
+             if f["changeorg"] else "No completion on record")
+
+    # --- Zwei Sorten Nicht-Beleg --------------------------------------------
+    # „Fahrplan" = wir kennen den Termin, nicht die Ausführung.
+    # „kein Beleg" = dieser Schritt hinterlässt in den Beständen gar nichts.
+    plan_de = "Fahrplan, kein Beleg — ob der Start kam, steht hier nicht"
+    plan_en = "Schedule only, no evidence — this page cannot see the start"
+    ohne_de = ("Kein Beleg: dieser Schritt hinterlässt in den Beständen "
+               "keine Spur")
+    ohne_en = "No evidence: this step leaves no trace in the stores"
 
     # Bahnen als Hintergrundstreifen, Beschriftung links.
     for y, h in ((34, 74), (116, 176), (300, 84), (392, 84), (484, 84)):
@@ -3724,70 +4626,134 @@ def _ablaufschema() -> str:
                       (502, "ERGEBNIS", "RESULT")):
         teile.append(_zs(de, en, tag="text", klasse="s-lbl", attrs=f' x="10" y="{y}"'))
 
-    # Bahn 1 — Auslöser
+    # Bahn 1 — Auslöser. KEIN Auslöser hat einen eigenen Beleg: dass ein Cron
+    # gefeuert hat, steht nirgends in den Beständen. Sichtbar ist nur der
+    # Fahrplan — und genau das steht dran.
     teile += [
         k(106, 46, 152, 46, "trig", "Cron 03:17 + 15:17", "Cron 03:17 + 15:17",
-          "UTC, täglich", "UTC, daily"),
+          "UTC, täglich", "UTC, daily", zustand="plan",
+          z_de=f"{plan_de}. Nächster Start {_schema_datum(n_scrape)}",
+          z_en=f"{plan_en}. Next start {_schema_datum(n_scrape)}"),
         k(272, 46, 132, 46, "trig", "Timer 20:15", "Timer 20:15",
-          "dein Rechner", "your computer"),
+          "dein Rechner", "your computer", zustand="plan",
+          z_de=plan_de + ". Schätzung: 20:15 Ortszeit + bis zu 15 min",
+          z_en=plan_en + ". Estimate: 20:15 local time + up to 15 min"),
         k(418, 46, 122, 46, "trig", "Jeder Push", "Every push",
-          "ins Repository", "to the repository"),
+          "ins Repository", "to the repository", zustand="plan",
+          z_de="Nicht planbar — ein Push kommt, wenn jemand pusht",
+          z_en="Not schedulable — a push happens when someone pushes"),
         k(554, 46, 132, 46, "trig", "Start von Hand", "Manual start",
-          "App bauen", "build the app"),
+          "App bauen", "build the app", zustand="plan",
+          z_de="Nicht planbar — läuft nur, wenn jemand ihn auslöst",
+          z_en="Not schedulable — runs only when someone starts it"),
         k(700, 46, 142, 46, "trig", "Cron montags", "Cron on Mondays",
-          "Wochenbericht", "weekly report"),
+          "Wochenbericht", "weekly report", zustand="plan",
+          z_de=(plan_de + ". Nächster Start "
+                + _schema_datum(_schema_naechster_montag(jetzt, 6, 17))),
+          z_en=(plan_en + ". Next start "
+                + _schema_datum(_schema_naechster_montag(jetzt, 6, 17)))),
     ]
-    # Bahn 2 — GitHub Actions
+    # Bahn 2 — GitHub Actions. Nur „Sammellauf" und „Change.org" hinterlassen
+    # einen datierten Beleg (den Abschluss-Eintrag in lauf_verlauf). Cache,
+    # Frist, Checks und APK laufen spurlos an den Beständen vorbei — sie
+    # bekommen deshalb keinen grünen Streifen, sondern ein ehrliches „kein
+    # Beleg". Wer ihren Zustand wissen will, muss ins Actions-Protokoll sehen.
+    # „Veröffentlichen" ist ein Sonderfall: publish.py und Pages haben DIESE
+    # Seite erzeugt, ihr Beleg ist also ihr eigenes Alter — und das kann nur
+    # der Browser des Lesers ausrechnen (data-stand-* weiter unten).
     teile += [
         k(106, 158, 104, 44, "run", "Cache holen", "Restore cache",
-          "letzter Stand", "last known state"),
+          "letzter Stand", "last known state", zustand="plan",
+          z_de=ohne_de, z_en=ohne_en),
         k(224, 158, 118, 44, "run", "Lokales", "Adopt local",
-          "übernehmen", "stores if newer"),
+          "übernehmen", "stores if newer", zustand="plan",
+          z_de=ohne_de + " (Wirkung sichtbar an der lokalen Pflege)",
+          z_en=ohne_en + " (its effect shows in local maintenance)"),
         k(356, 158, 104, 44, "run", "Frist setzen", "Set deadline",
-          "300 min", "300 min", marke="3"),
+          "300 min", "300 min", marke="3", zustand="plan",
+          z_de=ohne_de, z_en=ohne_en),
         k(474, 158, 118, 44, "run", "Sammellauf", "Main run",
-          "41 Zweige", "41 branches"),
+          "41 Zweige", "41 branches", zustand=st_cloud,
+          z_de=zc_de, z_en=zc_en, livegruppe="sammellauf"),
         k(606, 158, 118, 44, "run", "Change.org", "Change.org",
-          "aufholen", "catch up"),
+          "aufholen", "catch up", zustand=st_co, z_de=zo_de, z_en=zo_en,
+          livegruppe="sammellauf"),
         k(738, 158, 104, 44, "run", "publish.py", "publish.py",
-          "App-Daten", "app data"),
+          "App-Daten", "app data", zustand="plan",
+          z_de="Beleg ist das Alter dieser Seite — siehe Zustandstabelle",
+          z_en="Its evidence is this page's own age — see the state table"),
         k(856, 158, 94, 44, "box", "Pages", "Pages",
-          "ausliefern", "deliver"),
+          "ausliefern", "deliver", zustand="plan",
+          z_de="Beleg ist das Alter dieser Seite — siehe Zustandstabelle",
+          z_en="Its evidence is this page's own age — see the state table"),
         k(418, 238, 174, 40, "run", "Checks", "Checks",
-          "Syntax · Selbsttest · Texte", "syntax · self-test · texts"),
+          "Syntax · Selbsttest · Texte", "syntax · self-test · texts",
+          zustand="plan", z_de=ohne_de, z_en=ohne_en),
         k(606, 238, 236, 40, "run", "APK bauen", "Build the APK",
-          "holt die Daten zuerst von Pages", "fetches the data from Pages first"),
+          "holt die Daten zuerst von Pages", "fetches the data from Pages first",
+          zustand="plan", z_de=ohne_de, z_en=ohne_en),
     ]
-    # Bahn 3 — lokal
+    # Bahn 3 — lokal. Diese drei Punkte laufen auf dem Rechner des Nutzers.
+    # Der Schnappschuss entsteht in der Cloud und kann dorthin NICHT sehen: was
+    # er weiß, weiß er allein daraus, dass ein lokaler Lauf einen Abschluss in
+    # die sechs LOKALE_PFLEGE-Bestände geschrieben und sie hochgeschoben hat.
     teile += [
         k(106, 318, 132, 44, "run", "git pull", "git pull",
-          "6 Anläufe", "6 attempts"),
+          "6 Anläufe", "6 attempts", zustand=st_lokal, z_de=zl_de, z_en=zl_en),
         k(272, 318, 188, 44, "run", "6 gesperrte Zweige", "6 blocked branches",
-          "europarl · 5× WeMove", "europarl · 5× WeMove", marke="2"),
+          "europarl · 5× WeMove", "europarl · 5× WeMove", marke="2",
+          zustand=st_lokal, z_de=zl_de, z_en=zl_en),
         k(494, 318, 152, 44, "run", "Stände pushen", "Push the stores",
-          "nur Daten", "data only"),
+          "nur Daten", "data only", zustand=st_lokal, z_de=zl_de, z_en=zl_en),
     ]
-    # Bahn 4 — gemeinsamer Kern
+    # ⚠️ Diese Bahn trägt ausdrücklich den Hinweis, dass sie NICHT live
+    # abfragbar ist. Ohne ihn liest man das Fehlen einer Live-Angabe als
+    # Ausfall — dabei steht dort nur ein Rechner, den kein Browser erreicht.
+    teile.append(_zs("aus dem Browser nicht abfragbar — Stand nur aus dem, "
+                     "was der Lauf in die Bestände geschrieben hat",
+                     "cannot be queried from a browser — state comes only "
+                     "from what the run wrote into the stores",
+                     tag="text", klasse="s-sub", attrs=' x="106" y="374"'))
+    # Bahn 4 — gemeinsamer Kern. Kein eigener Beleg: der Kern läuft genau dann,
+    # wenn einer der beiden Läufe ihn aufruft. Sein Zustand IST deren Zustand,
+    # deshalb trägt er denselben Streifen wie der Sammellauf — und nicht etwa
+    # einen eigenen, der Frische vortäuschte.
     teile += [
         k(106, 410, 132, 44, "run", "monitor.py", "monitor.py",
-          "41 Einträge", "41 entries"),
+          "41 Einträge", "41 entries", zustand=st_cloud, z_de=zc_de, z_en=zc_en,
+          livegruppe="sammellauf"),
         k(272, 410, 152, 44, "run", "Rundlauf", "Round-robin",
-          "Ältestes zuerst", "stalest first", marke="1"),
+          "Ältestes zuerst", "stalest first", marke="1",
+          zustand=st_cloud, z_de=zc_de, z_en=zc_en,
+          livegruppe="sammellauf"),
         k(458, 410, 160, 44, "run", "11 Scraper", "11 scrapers",
-          "bedienen 41 Zweige", "serve 41 branches"),
+          "bedienen 41 Zweige", "serve 41 branches",
+          zustand=st_cloud, z_de=zc_de, z_en=zc_en,
+          livegruppe="sammellauf"),
         k(652, 410, 190, 44, "run", "petitions_core.py", "petitions_core.py",
-          "holen · zusammenführen", "fetch · merge"),
+          "holen · zusammenführen", "fetch · merge",
+          zustand=st_cloud, z_de=zc_de, z_en=zc_en,
+          livegruppe="sammellauf"),
     ]
-    # Bahn 5 — Ergebnis
+    # Bahn 5 — Ergebnis. Die Bestände tragen den Beleg selbst; alles danach
+    # (App-Daten, Dashboard, Web-App) ist so frisch wie DIESE Seite und damit
+    # nur gegen die Uhr des Lesers zu beurteilen.
+    seite_de = "So frisch wie diese Seite — siehe Zustandstabelle"
+    seite_en = "As fresh as this page — see the state table"
     teile += [
         k(106, 502, 152, 44, "box", "41 Bestände", "41 stores",
-          "*_petitions.json", "*_petitions.json"),
+          "*_petitions.json", "*_petitions.json",
+          zustand=st_cloud, z_de=zc_de, z_en=zc_en,
+          livegruppe="sammellauf"),
         k(292, 502, 152, 44, "box", "App-Daten", "App data",
-          "nur auf Pages", "on Pages only", marke="4"),
+          "nur auf Pages", "on Pages only", marke="4", zustand="plan",
+          z_de=seite_de, z_en=seite_en),
         k(478, 502, 132, 44, "box", "Dashboard", "Dashboard",
-          "diese Seite", "this page"),
+          "diese Seite", "this page", zustand="plan",
+          z_de=seite_de, z_en=seite_en),
         k(644, 502, 198, 44, "box", "Web-App · PWA · APK", "Web app · PWA · APK",
-          "beim Nutzer", "on the device"),
+          "beim Nutzer", "on the device", zustand="plan",
+          z_de=seite_de, z_en=seite_en),
     ]
 
     # Kanten. Durchgezogen = ruft auf/erzeugt, gestrichelt = liest.
@@ -3828,6 +4794,23 @@ def _ablaufschema() -> str:
                  + _zs("liest", "reads", tag="text", klasse="s-sub",
                        attrs=' x="584" y="10"')
                  + '</g>')
+    # Zweite Legendenzeile: was die Zustandsstreifen am linken Rand bedeuten.
+    # „Fahrplan/kein Beleg" steht ausdrücklich mit dabei und nicht als Lücke —
+    # ein Streifen ohne Erklärung würde als „alles in Ordnung" gelesen.
+    teile.append('<g transform="translate(106,624)">'
+                 '<rect class="s-z-frisch" x="0" y="0" width="3" height="13" rx="1.5"/>'
+                 '<rect class="s-z-auffaellig" x="112" y="0" width="3" height="13" rx="1.5"/>'
+                 '<rect class="s-z-ausfall" x="244" y="0" width="3" height="13" rx="1.5"/>'
+                 '<rect class="s-z-plan" x="360" y="0" width="3" height="13" rx="1.5"/>'
+                 + _zs("im Takt", "on schedule", tag="text", klasse="s-sub",
+                       attrs=' x="11" y="10"')
+                 + _zs("überfällig", "overdue", tag="text", klasse="s-sub",
+                       attrs=' x="123" y="10"')
+                 + _zs("ausgefallen", "stopped", tag="text", klasse="s-sub",
+                       attrs=' x="255" y="10"')
+                 + _zs("Fahrplan / kein Beleg", "schedule only / no evidence",
+                       tag="text", klasse="s-sub", attrs=' x="371" y="10"')
+                 + '</g>')
 
     # Die vier Stellen, die ohne Erklärung falsch verstanden werden.
     fussnoten = [
@@ -3865,10 +4848,275 @@ def _ablaufschema() -> str:
         dl.append(f'<dt><span class="marke">{nr}</span>'
                   + _zs(t_de, t_en) + '</dt><dd>' + _zs(b_de, b_en) + '</dd>')
 
+    # ------------------------------------------------------------------
+    # Zustandstabelle: dasselbe noch einmal in ganzen Sätzen.
+    # ------------------------------------------------------------------
+    # Gruppiert nach BELEG, nicht nach Knoten. Sechs Punkte, die alle aus
+    # demselben Abschluss-Eintrag folgen, sechsmal einzeln aufzuführen hieße,
+    # eine Messung als sechs Messungen auszugeben.
+    # ⚠️ ``extra`` hängt einen EIGENEN Knoten an, nie ein Kind in einen der
+    # data-de-Absätze: der Sprachumschalter setzt textContent: eingehängte
+    # Kinder wären beim ersten Sprachwechsel spurlos weg.
+    def zeile(stufe, kn_de, kn_en, t_de, t_en, s_de, s_en, q_de, q_en,
+              attrs="", extra=""):
+        return (f'<div class="zust-z z-{stufe}"{attrs}>'
+                + _zs(kn_de, kn_en, tag="p", klasse="zust-k")
+                + _zs(t_de, t_en, tag="p", klasse="zust-t")
+                + _zs(s_de, s_en, tag="p", klasse="zust-s")
+                + extra
+                + _zs(q_de, q_en, tag="p", klasse="zust-q")
+                + '</div>')
+
+    grund_cloud_de = grund_cloud_en = ""
+    if st_cloud == "ausfall":
+        grund_cloud_de = (" Seit über "
+                          f"{SAMMELLAUF_AUSFALL_H} Stunden kein Abschluss — "
+                          "bei zwei Läufen am Tag sind das mindestens sechs "
+                          "verpasste. Der Lauf startet nicht oder bricht ab.")
+        grund_cloud_en = (f" No completion for over {SAMMELLAUF_AUSFALL_H} "
+                          "hours — at two runs a day that is at least six "
+                          "missed. The run is not starting, or it aborts.")
+    elif st_cloud == "auffaellig":
+        grund_cloud_de = (" Älter als erwartet — ein Lauf kann bis zu fünf "
+                          "Stunden dauern, mehrere verpasste Fenster sind das "
+                          "aber nicht mehr.")
+        grund_cloud_en = (" Older than expected — a run can take up to five "
+                          "hours, but several missed windows is more than that.")
+
+    rows = [zeile(
+        st_cloud,
+        "Sammellauf · monitor.py · Rundlauf · 11 Scraper · petitions_core.py "
+        "· 41 Bestände",
+        "Main run · monitor.py · round-robin · 11 scrapers · petitions_core.py "
+        "· 41 stores",
+        "Sammeln", "Collecting",
+        zc_de + "." + grund_cloud_de + " Nächster planmäßiger Start: "
+        + _schema_datum(n_scrape) + ".",
+        zc_en + "." + grund_cloud_en + " Next scheduled start: "
+        + _schema_datum(n_scrape) + ".",
+        f"Quelle: _meta.lauf_verlauf der Bestände — ein Eintrag entsteht nur "
+        f"beim Abschluss eines Laufs, nicht beim Zwischenspeichern. "
+        f"{f['ohne_verlauf']} von {f['live']} Zweigen tragen hier gar keinen "
+        f"Abschluss-Beleg; für sie ist der Zustand unbekannt, nicht gut.",
+        f"Source: _meta.lauf_verlauf in the stores — an entry is written only "
+        f"when a run completes, never on an intermediate save. "
+        f"{f['ohne_verlauf']} of {f['live']} branches carry no completion "
+        f"record at all; for those the state is unknown, not good.")]
+
+    grund_lokal_de = grund_lokal_en = ""
+    if st_lokal == "ausfall":
+        grund_lokal_de = (" Überfällig: die Kette Timer → Push → "
+                          "Auto-Übernahme ist gerissen. Das ist ein Fall für "
+                          "den Rechner (läuft der Timer? kam der Push "
+                          "durch?), kein Fehler dieser Seite.")
+        grund_lokal_en = (" Overdue: the chain timer → push → auto-adoption is "
+                          "broken. That is something to check on the computer "
+                          "(is the timer running? did the push get through?), "
+                          "not a fault of this page.")
+    rows.append(zeile(
+        st_lokal,
+        "Timer 20:15 · git pull · 6 gesperrte Zweige · Stände pushen",
+        "Timer 20:15 · git pull · 6 blocked branches · push the stores",
+        "Lokale Pflege", "Local maintenance",
+        zl_de + "." + grund_lokal_de + " Nächster Lauf: 20:15 Ortszeit plus "
+        "bis zu 15 Minuten — eine Schätzung, kein Termin: verpasste Läufe "
+        "holt der Timer beim nächsten Aufwachen nach.",
+        zl_en + "." + grund_lokal_en + " Next run: 20:15 local time plus up "
+        "to 15 minutes — an estimate, not an appointment: the timer catches "
+        "up missed runs when the machine next wakes.",
+        f"Quelle: lauf_verlauf der {len(LOKALE_PFLEGE)} lokal gepflegten "
+        f"Bestände, Schwelle {LOKALE_PFLEGE_MAX_TAGE} Tage — dieselbe, mit der "
+        f"auch die Kacheln warnen. Diese Seite entsteht in der Cloud und kann "
+        f"den Timer nicht sehen; sie schließt allein daraus, dass ein lokaler "
+        f"Lauf etwas hochgeschoben hat.",
+        f"Source: lauf_verlauf of the {len(LOKALE_PFLEGE)} locally maintained "
+        f"stores, threshold {LOKALE_PFLEGE_MAX_TAGE} days — the same one the "
+        f"cards warn with. This page is built in the cloud and cannot see the "
+        f"timer; it infers only from a local run having pushed something up."))
+
+    if f["gesperrt"]:
+        g_liste = ", ".join(sorted(f["gesperrt"]))
+        rows.append(zeile(
+            "auffaellig", "6 gesperrte Zweige", "6 blocked branches",
+            "Warum etwas nicht läuft", "Why something is not running",
+            f"{len(f['gesperrt'])} Zweige meldeten zuletzt einen ausgelassenen "
+            f"Host: {g_liste}. Dort sperrt die Quelle den Abruf; der Bestand "
+            f"bleibt eingefroren, bis ein Lauf von einem gewöhnlichen "
+            f"Anschluss ihn auffüllt.",
+            f"{len(f['gesperrt'])} branches last reported a skipped host: "
+            f"{g_liste}. The source blocks the request there; the store stays "
+            f"frozen until a run from an ordinary connection refills it.",
+            "Quelle: _meta.befunde, Thema „Host ausgelassen“. Nicht an "
+            "available == 0 erkannt — das trägt nicht (eko hatte 39 bei "
+            "gesperrtem Host).",
+            "Source: _meta.befunde, topic „host skipped“. Not "
+            "detected via available == 0 — that test does not hold (eko had "
+            "39 with a blocked host)."))
+
+    rows.append(zeile(
+        st_co, "Change.org aufholen", "Change.org catch-up",
+        "Nacharbeit", "Catch-up",
+        zo_de + ". Läuft als eigener Schritt nach dem Sammellauf.",
+        zo_en + ". Runs as its own step after the main run.",
+        "Quelle: lauf_verlauf der Change.org-Bestände.",
+        "Source: lauf_verlauf of the Change.org stores."))
+
+    # ⚠️⚠️ Die wichtigste Zeile der Tabelle — und die einzige, die ein totes
+    # CI überhaupt verraten kann. Alles andere auf dieser Seite stammt aus dem
+    # Lauf, der sie erzeugt hat: hört der auf, friert es in seinem letzten
+    # guten Zustand ein und sieht für immer gesund aus. Das Alter der Seite
+    # rechnet deshalb der Browser gegen die Uhr des LESERS aus.
+    if schnappschuss:
+        rows.append(zeile(
+            "plan", "publish.py · Pages · App-Daten · Dashboard · Web-App",
+            "publish.py · Pages · app data · dashboard · web app",
+            "Veröffentlichen", "Publishing",
+            "Diese Seite ist das Ergebnis dieses Schritts — er lief also, als "
+            "sie entstand. Wie lange das her ist, rechnet dein Gerät aus: ",
+            "This page is the result of that step, so it ran when the page was "
+            "made. How long ago that was is worked out by your device: ",
+            "Quelle: Bauzeitpunkt dieser Seite gegen die Uhr deines Geräts. "
+            "Bewusst nicht gegen eine Angabe vom Server — käme die Kette zum "
+            "Erliegen, entstünde gar keine neue Seite mehr, und jede "
+            "Server-Angabe darauf bliebe für immer auf ihrem letzten guten "
+            "Wert stehen.",
+            "Source: this page's build time against your device's clock. "
+            "Deliberately not against a server value — if the chain stopped, "
+            "no new page would be produced at all, and every server value on "
+            "it would stay frozen at its last good reading.",
+            attrs=' id="zust-seite"',
+            extra=_zs("(dein Gerät rechnet das gleich aus)",
+                      "(your device is working this out)",
+                      tag="p", klasse="zust-s",
+                      attrs=' id="zust-seite-alter"')))
+    else:
+        rows.append(zeile(
+            "plan", "publish.py · Pages · App-Daten · Web-App",
+            "publish.py · Pages · app data · web app",
+            "Veröffentlichen", "Publishing",
+            "Kein Beleg. Du siehst die Server-Fassung: sie entsteht bei jedem "
+            "Abruf neu und sagt deshalb nichts darüber, wann zuletzt "
+            "veröffentlicht wurde. Das steht nur auf der Seite, die auf Pages "
+            "liegt.",
+            "No evidence. You are looking at the server version: it is rebuilt "
+            "on every request and therefore says nothing about when publishing "
+            "last happened. Only the page served from Pages can say that.",
+            "Quelle: keine. Ausdrücklich leer gelassen statt geraten.",
+            "Source: none. Deliberately left empty rather than guessed."))
+
+    rows.append(zeile(
+        "plan",
+        "Cache holen · Frist setzen · Checks · APK bauen · Jeder Push · "
+        "Start von Hand",
+        "Restore cache · set deadline · checks · build the APK · every push · "
+        "manual start",
+        "Ohne Beleg von hier", "No evidence from here",
+        "Diese Schritte hinterlassen in den Beständen keine Spur. Ob sie "
+        "liefen, steht ausschließlich im Actions-Protokoll bei GitHub — diese "
+        "Seite weiß es nicht und behauptet es deshalb auch nicht.",
+        "These steps leave no trace in the stores. Whether they ran is "
+        "recorded only in the Actions log at GitHub — this page does not know, "
+        "and so does not claim to.",
+        "Quelle: keine.", "Source: none."))
+
+    # ⚠️⚠️ Die Live-Zeile steht OBEN und ist eine EIGENE Zeile — sie
+    # überschreibt die gebackene nie. Genau daran hängt die Ehrlichkeit des
+    # ganzen Aufbaus: fällt die Abfrage aus, bleibt der gebackene Zustand mit
+    # seiner Farbe stehen, und ein Netzfehler kann keinen echten Ausfall
+    # zudecken. Beide Zeilen nennen ihre Herkunft im Text.
+    if schnappschuss:
+        rows.insert(0, zeile(
+            "plan",
+            "Sammellauf · Change.org · Kern · Bestände — nur die Cloud-Kette",
+            "Main run · Change.org · core · stores — the cloud chain only",
+            "Live-Abfrage bei GitHub", "Live query at GitHub",
+            "Fragt beim Öffnen dieser Seite einmal die GitHub-API, ob der "
+            "Sammellauf gerade läuft, wann er zuletzt lief und wie er "
+            "ausging. Höchstens ein Abruf je Seitenaufruf; ohne Netz "
+            "unterbleibt er, und es bleibt beim gebackenen Stand darunter.",
+            "On opening this page it asks the GitHub API once whether the "
+            "main run is going, when it last ran and how it ended. At most "
+            "one request per page view; without a network it is skipped and "
+            "the baked state below stands.",
+            "Quelle: öffentliche GitHub-REST-API, ohne Anmeldung. Grenze 60 "
+            "Abrufe je Stunde und Adresse — deshalb ein Abruf je Aufruf und "
+            "ein Zwischenspeicher für die Sitzung. Den Timer auf deinem "
+            "Rechner erreicht diese Abfrage NICHT.",
+            "Source: public GitHub REST API, unauthenticated. Limit 60 "
+            "requests per hour per address — hence one request per view and a "
+            "per-session cache. This query does NOT reach the timer on your "
+            "computer.",
+            attrs=' id="zust-live"',
+            extra=_zs("Noch nicht abgefragt.", "Not queried yet.",
+                      tag="p", klasse="zust-s",
+                      attrs=' id="zust-live-text"')))
+
+    # Stand-Anzeige in der Zusammenfassung — sichtbar auch zugeklappt.
+    stand_iso = now_iso()
+    if schnappschuss:
+        stand = ('<span class="schema-stand" id="schema-stand" '
+                 f'data-stand="{_esc(stand_iso)}" '
+                 f'data-auff="{SAMMELLAUF_AUFFAELLIG_H}" '
+                 f'data-aus="{SAMMELLAUF_AUSFALL_H}">'
+                 '<span class="schema-punkt" aria-hidden="true"></span>'
+                 + _zs("Stand wird berechnet …", "working out how old this is …",
+                       tag="b", klasse="", attrs=' id="schema-stand-text"')
+                 + '</span>')
+    else:
+        stand = ('<span class="schema-stand">'
+                 '<span class="schema-punkt" aria-hidden="true"></span>'
+                 + _zs("Server-Fassung · bei jedem Abruf neu",
+                       "server version · rebuilt on every request", tag="b")
+                 + '</span>')
+
+    grenze = ('<p class="schema-grenze">' + _zs(
+        "Was diese Seite NICHT weiß: sie entsteht selbst im Lauf. Steht der "
+        "Lauf still, entsteht keine neue Seite — die alte bleibt liegen und "
+        "zeigt weiter den letzten guten Stand. Der einzige Hinweis darauf ist "
+        "das Alter oben; alles andere hier stammt aus der Anlage, die es zu "
+        "prüfen gilt.",
+        "What this page does NOT know: it is produced by the run itself. If "
+        "the run stops, no new page is made — the old one stays up and keeps "
+        "showing the last good state. The only clue is the age shown above; "
+        "everything else here comes from the very system it is meant to "
+        "check.") + '</p>')
+
+    # Bildunterschrift: sie sagt in JEDEM Moment, was die Streifen gerade
+    # bedeuten. Solange keine Live-Antwort da ist, steht hier „gebacken" samt
+    # Bauzeitpunkt; erst wenn die Abfrage geglückt ist, schreibt das Skript sie
+    # auf „live, abgerufen um HH:MM" um. Ohne diese Zeile wäre nach einer
+    # Live-Aufwertung nicht mehr erkennbar, woher die Farbe stammt.
+    if schnappschuss:
+        streifen_quelle = (
+            '    <p class="schema-hint">'
+            + _zs("Streifen im Bild: gebackener Stand vom " + stand_iso[:16]
+                  + " — sie stammen aus den Beständen, nicht aus einer "
+                    "Live-Abfrage.",
+                  "Stripes in the diagram: baked state from " + stand_iso[:16]
+                  + " — they come from the stores, not from a live query.",
+                  attrs=' id="streifen-quelle"')
+            + '</p>\n')
+    else:
+        streifen_quelle = (
+            '    <p class="schema-hint">'
+            + _zs("Streifen im Bild: Stand der Bestände zum Zeitpunkt dieses "
+                  "Abrufs. Den laufenden Lauf zeigen die Kacheln oben.",
+                  "Stripes in the diagram: state of the stores at the time of "
+                  "this request. The cards above show the run in progress.")
+            + '</p>\n')
+
+    zustand_block = (
+        '    <div class="zust">'
+        + _zs("Zustand je Punkt", "State of each step", tag="h4")
+        + "".join(rows) + '</div>\n' + '    ' + grenze + '\n'
+        + ('    ' + _SCHEMA_STANDSKRIPT + '\n'
+           + '    ' + _SCHEMA_LIVESKRIPT.replace("__API__", _SCHEMA_API) + '\n'
+           if schnappschuss else ''))
+
     return (
         '<details class="schema">\n'
         '  <summary>' + _zs("So läuft die Sammlung ab",
-                            "How the collection works") + '</summary>\n'
+                            "How the collection works") + stand + '</summary>\n'
         '  <div class="schema-body">\n'
         '    <p class="schema-hint">'
         + _zs("Fünf Bahnen von oben nach unten: was startet, was in der Cloud "
@@ -3891,8 +5139,10 @@ def _ablaufschema() -> str:
         '        <g>' + "".join(teile) + '</g>\n'
         '      </svg>\n'
         '    </div>\n'
-        '    <dl>' + "".join(dl) + '</dl>\n'
-        '  </div>\n'
+        + streifen_quelle
+        + '    <dl>' + "".join(dl) + '</dl>\n'
+        + zustand_block
+        + '  </div>\n'
         '</details>'
     )
 
@@ -3943,7 +5193,8 @@ def build_dashboard(platforms: list[Platform], schnappschuss: bool = False) -> s
     # Bedienelement, und gerade der Schnappschuss auf Pages ist die Fassung,
     # die Außenstehende zu sehen bekommen.
     tmpl = tmpl.replace("{{SCHEMA_CSS}}", _SCHEMA_CSS)
-    tmpl = tmpl.replace("{{SCHEMA}}", _ablaufschema())
+    tmpl = tmpl.replace("{{SCHEMA}}", _ablaufschema(platforms, schnappschuss)
+                        + "\n" + _zuwachs_diagramm(platforms))
     tmpl = tmpl.replace("{{TOTOP}}", _TOTOP)
     return tmpl
 

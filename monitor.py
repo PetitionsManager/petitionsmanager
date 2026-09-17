@@ -187,7 +187,7 @@ def rotiere_auf_aeltestes(targets: list[Platform]) -> list[Platform]:
     core.log(f"Rundlauf: Beginn bei {gedreht[0].name} "
              f"(Position {start + 1} von {len(targets)}) – dort hat der letzte "
              f"Lauf aufgehört.")
-    if os.environ.get("GITHUB_ACTIONS") == "true":
+    if core.in_github_actions():
         # Als Anmerkung, nicht nur ins Protokoll: das Lauf-Protokoll braucht
         # einen Token, Anmerkungen nicht (siehe die Lehre vom 10.8.2026).
         offen = [p.name for p, m in zip(targets, marken) if not m[0]]
@@ -234,7 +234,7 @@ def melde_eingefrorene() -> None:
         if gruende:
             text = f"{p.name}: " + " · ".join(gruende)
             core.log(f"⚠️ {text}")
-            if os.environ.get("GITHUB_ACTIONS") == "true":
+            if core.in_github_actions():
                 print(f"::warning title=Plattform liefert nichts::{text}")
 
 
@@ -620,7 +620,7 @@ def run_checks(args) -> None:
     # code 1" übrig — der Schritt galt als grün und ein DAUERHAFT roter Check
     # wäre nie aufgefallen. Deshalb schreibt er sein Ergebnis jetzt so, dass
     # GitHub es als benannte Warnung auf die Lauf-Übersicht hebt.
-    if os.environ.get("GITHUB_ACTIONS") == "true":
+    if core.in_github_actions():
         for key, name, grund in failed:
             einzeilig = " ".join(grund.split())[:400]
             print(f"::warning title=Entdeckungsquelle {name}::{key}: {einzeilig}")
