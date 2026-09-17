@@ -15,12 +15,15 @@
 #      python3 monitor.py --platform avaaz        # nur Avaaz scrapen
 #      python3 monitor.py --platform weact --limit 20
 #      python3 monitor.py --html-only             # nur HTML aus JSON neu bauen
+#      python3 monitor.py --vorlauf-liste         # fast fertige Zweige nennen
 # =============================================================================
 
 from __future__ import annotations
 
 import argparse
+import json
 import os
+import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -235,6 +238,247 @@ def melde_eingefrorene() -> None:
                 print(f"::warning title=Plattform liefert nichts::{text}")
 
 
+# ----------------------------------------------------------------------------
+# Vorlauf: zuerst die Zweige, denen nur noch wenig zur Vollständigkeit fehlt
+# ----------------------------------------------------------------------------
+# Anlass (17.9.2026, am Live-Dashboard gemessen, 41 von 41 Kacheln gelesen):
+# 22 der 41 Zweige stehen bei 100 %. Der gesamte Rückstand OHNE Change.org sind
+# 235 Kandidaten in zehn Zweigen — bei REQUEST_DELAY 1,5 s rund 5,9 Minuten:
+#   avaaz_it/ko/uk/zh/ja je 1 · avaaz_en 4 · foodwatch_fr 13 ·
+#   foodwatch_en 14 · wemove 34 · wemove_es 165.
+# Change.org allein steht bei 13.513 offenen Kandidaten (5,63 h) und ist genau
+# deshalb NICHT gemeint: für diesen Dauerrückstand gibt es die eigene
+# Aufholschleife in scrape.yml.
+#
+# Die zehn kommen heute trotzdem nie dran — sie stehen hinten im Rundlauf, und
+# die 300-min-Frist schlägt vorher zu. Sechs Minuten brächten 22 → 32 fertige
+# Zweige, und ein fertiger Zweig kostet den nächsten Vorlauf gar nichts mehr:
+# sein Rest ist dann 0 und er fällt aus der Auswahl heraus.
+#
+# ⚠️ Diese Funktionen SUCHEN nur aus und drucken Schlüssel — es wird nichts
+# gescrapt und nichts geschrieben. Den Zeitdeckel setzt der Aufrufer
+# (scrape.yml: `timeout --signal=INT`), wie bei jedem anderen Schritt auch;
+# hier steht ausschließlich die MENGE.
+#
+# ⚠️ Der Aufrufer soll die genannten Zweige mit --no-recheck starten: der
+# Vorlauf soll ENTDECKEN, nicht nachzählen. Am 17.9.2026 an allen 41 Zweigen
+# NACHGESEHEN statt angenommen: 37 werten das Flag aus. VIER nicht —
+# foodwatch_en (run_en), foodwatch_fr/foodwatch_nl (run_zweig) und eko_en
+# (run_en) holen ihre Liste bauartbedingt Seite für Seite; dort kostet ein
+# Lauf so viele Abrufe, wie die Entdeckung findet („available"), nicht so
+# viele, wie offen sind. Es sind die kleinsten Zweige überhaupt (available
+# 21–50 ≈ 30–75 s), und die harte Grenze zieht ohnehin der `timeout` des
+# Aufrufers — aber wer hier rechnet, darf für diese vier nicht mit dem Rest
+# rechnen.
+VORLAUF_MAX_OFFEN = 200
+# Obergrenze des offenen Restes JE ZWEIG — nicht geraten, sondern in die Lücke
+# der echten Werte gelegt. Gemessene Reste am 17.9.2026: 22 × 0, dann
+# 1,1,1,1,1,4,13,14,34,165 — und danach erst 13.513 (Change.org), Faktor 82.
+# Die 200 liegen mit Luft über den 165 von wemove_es (dort kommen täglich
+# Kandidaten dazu) und weit unter allem, was dem Sammellauf gefährlich würde:
+# 200 × 1,5 s ≈ 5 min für den teuersten einzelnen Zweig.
+
+VORLAUF_BUDGET = 400
+# ⚠️⚠️ Der wirksamste der drei Deckel: Summe der offenen Reste über ALLE
+# gewählten Zweige. Die Einzelschwelle allein genügt nicht — zwölf Zweige mit
+# je 190 offenen wären 2.280 Kandidaten = 57 min, und damit wäre der „Vorlauf"
+# ein zweiter Sammellauf und die Frist gesprengt. Gemessen sind es heute 235;
+# 400 ≈ 10 min lässt Zuwachs zu und bleibt bei rund 3 % der 300-min-Frist.
+
+VORLAUF_MAX_ZWEIGE = 12
+# Dritter Deckel, gegen die Entdeckungskosten: jeder Zweig kostet zusätzlich zu
+# seinen offenen Kandidaten seine eigene Entdeckung (je nach Plattform eine
+# Handvoll Listenabrufe). Heute kämen zehn Zweige in Frage — 12 ist die Kante
+# knapp darüber.
+
+
+def _bestand_und_meta(datei: Path | None) -> tuple[int | None, dict]:
+    """(Zahl der Sätze, _meta) eines Bestandes – EINMAL gelesen und ohne jede
+    Nebenwirkung.
+
+    ⚠️ Bewusst nicht core.load_store(): das benennt eine unlesbare Datei in
+    „.corrupt.json" um. Für einen Scrape-Lauf ist das richtig, für eine reine
+    Auswahlabfrage wäre es eine stille Änderung am Datenbestand. Hier gilt
+    unlesbar = unbekannt (None), und unbekannt fliegt weiter unten raus.
+    """
+    if not datei or not datei.exists():
+        return None, {}
+    try:
+        daten = json.loads(datei.read_text(encoding="utf-8"))
+    except (ValueError, OSError):
+        return None, {}
+    if not isinstance(daten, dict):
+        return None, {}
+    meta = daten.pop("_meta", None)
+    return len(daten), (meta if isinstance(meta, dict) else {})
+
+
+def offener_rest(p: Platform) -> tuple[int | None, str]:
+    """Wie viele entdeckte Kandidaten hat dieser Zweig noch NICHT abgearbeitet?
+
+    Rückgabe (Rest, Begründung). Rest ist None, wenn es keine belastbare Zahl
+    gibt — dann gehört der Zweig NICHT in den Vorlauf.
+
+    Die Rechnung ist absichtlich dieselbe wie auf der Dashboard-Kachel
+    (petitions_core._live_card): available − (Sätze + verworfene Kandidaten).
+
+    ⚠️⚠️ Ein FEHLENDER Wert ist kein kleiner Wert. „available" setzt jeder
+    Scraper selbst direkt nach seiner Entdeckung (core.lauf_meta_setzen, z. B.
+    openpetition_scraper.py); fehlt das Feld, ist der Lauf vorher abgebrochen
+    (heute: openpetition), und ist es 0, hat die Entdeckung nichts gefunden
+    (Host ausgelassen oder Zweig tot — heute europarl, wemove_en/fr/it/nl/pl,
+    avaaz_ms). Beides würde ohne diese Prüfung als „Rest 0" oder als winziger
+    Rest durchgehen und einen Zweig in den Vorlauf holen, über den wir nichts
+    wissen. Dieselbe Falle hat das Dashboard bis zum 24.8.2026 als „100 %
+    abgearbeitet" angezeigt; der Rückfall „available or len(store)" hat zwei
+    Wochen Stillstand verdeckt. Deshalb hier: unbekannt heißt raus.
+
+    ⚠️ „Host ausgelassen" wird EIGENS geprüft und nicht über available == 0
+    abgekürzt: von vier gesperrten Zweigen hatte am 30.8.2026 nur einer die 0,
+    die anderen trugen 39/30/698 — der robots-Riegel greift oft erst nach der
+    Entdeckung (siehe core.host_gesperrt). Ein gesperrter Host liefert auch im
+    Vorlauf nichts; seine Zahlen stammen aus früheren Läufen.
+
+    ⚠️ Ein NEGATIVER Rest ist 0, nicht eine riesige Zahl mit Vorzeichenfehler.
+    available nennt nur, was DIESER Lauf gesehen hat, und das ist bei mehreren
+    Plattformen bauartbedingt weniger als unser Bestand (bundestag entdeckt nur
+    die laufende Mitzeichnungsfrist, weact/openpetition verlieren offline
+    gegangene Sätze aus der Liste). Die Kachel sagt dazu wörtlich „alle 1896 in
+    diesem Lauf gefundenen Kandidaten sind im Bestand · der Bestand (1924) ist
+    größer". Das ist Vollständigkeit, kein Rückstand.
+    """
+    anzahl, meta = _bestand_und_meta(p.data_file)
+    if anzahl is None:
+        return None, "kein lesbarer Bestand (noch nie gelaufen?)"
+    if not meta:
+        return None, "kein _meta im Bestand"
+    if any(b.get("stufe") == "warnung"
+           and b.get("thema") == core.THEMA_HOST_AUSGELASSEN
+           for b in (meta.get("befunde") or [])):
+        return None, "Host im letzten Lauf gesperrt"
+    available = meta.get("available")
+    if not isinstance(available, int) or isinstance(available, bool):
+        return None, "kein available (Lauf abgebrochen)"
+    if available <= 0:
+        return None, "available = 0 (Entdeckung fand nichts)"
+    # Verworfene Kandidaten sind ABGEARBEITET (geholt, geprüft, aussortiert) und
+    # dürfen nicht als Rückstand zählen — sonst stünde Change.org für immer im
+    # Vorlauf, obwohl sein Vorrat durch ist, und der Zweig käme jeden Tag wieder
+    # mit demselben Rest. Für alle anderen Plattformen ist das Register leer.
+    erfasst = anzahl + len(core.als_register(meta.get("verworfen")))
+    rest = max(0, available - erfasst)
+    return rest, f"{erfasst} von ~{available} abgearbeitet"
+
+
+def vorlauf_kandidaten(platforms: list[Platform],
+                       max_offen: int = VORLAUF_MAX_OFFEN,
+                       budget: int = VORLAUF_BUDGET,
+                       max_zweige: int = VORLAUF_MAX_ZWEIGE,
+                       ) -> list[tuple[Platform, int]]:
+    """Die Zweige, die mit wenigen Abrufen fertig würden – klein sortiert,
+    dreifach gedeckelt.
+
+    ⚠️⚠️ Diese Funktion ist bewusst so gebaut, dass sie im Zweifel NICHTS
+    liefert. Der teure Fehler wäre der umgekehrte: eine Auswahl, die bei
+    unklarer Lage alle 41 Zweige zurückgibt, machte aus dem Vorlauf einen
+    zweiten Sammellauf und risse die Frist — und das fiele erst Stunden später
+    auf. Jede der drei Bedingungen kann nur AUSSCHLIESSEN:
+      · Rest unbekannt (siehe offener_rest)      → raus
+      · Rest 0 (fertig) oder > max_offen (groß)  → raus
+      · Summe über budget / mehr als max_zweige  → raus
+    Es gibt keinen Rückfall, der bei fehlenden Daten etwas hinzufügt.
+    """
+    mit_rest: list[tuple[Platform, int]] = []
+    for p in platforms:
+        if not p.is_live or not p.run:
+            continue
+        rest, _ = offener_rest(p)
+        # Rest 0 heißt fertig: ein Lauf brächte nur die Entdeckung, keinen
+        # einzigen neuen Satz. Das ist der Zustand, den der Vorlauf HERSTELLEN
+        # soll, nicht der, den er bearbeitet.
+        if rest is None or rest <= 0 or rest > max_offen:
+            continue
+        mit_rest.append((p, rest))
+    # Klein zuerst: die billigsten Zweige werden im selben Lauf fertig und
+    # fallen aus der Liste. sorted() ist stabil – bei gleichem Rest bleibt die
+    # Reihenfolge der Registry (deutsche Zweige vor den Sprachzwillingen).
+    mit_rest.sort(key=lambda t: t[1])
+    gewaehlt: list[tuple[Platform, int]] = []
+    summe = 0
+    for p, rest in mit_rest:
+        if len(gewaehlt) >= max_zweige:
+            break
+        if summe + rest > budget:
+            # Aufsteigend sortiert: was hier nicht mehr passt, passt danach
+            # erst recht nicht. Abbrechen statt überspringen.
+            break
+        gewaehlt.append((p, rest))
+        summe += rest
+    return gewaehlt
+
+
+def melde_vorlauf(platforms: list[Platform],
+                  max_offen: int = VORLAUF_MAX_OFFEN,
+                  budget: int = VORLAUF_BUDGET) -> list[str]:
+    """Druckt die gewählten Schlüssel – EINEN JE ZEILE auf die Standardausgabe,
+    sonst nichts. Alles Erklärende geht auf die Standardfehlerausgabe.
+
+    Damit ist der Aufruf aus der Shell heraus brauchbar, ohne etwas filtern zu
+    müssen:
+
+        for k in $(python3 monitor.py --vorlauf-liste); do … ; done
+
+    ⚠️ Der Exit-Code ist auch bei LEERER Liste 0. Leer ist das erwartete
+    Ergebnis, sobald kein Zweig mehr knapp vor der Vollständigkeit steht — kein
+    Fehler. Und ein Abbruch dieses Aufrufs (Exit ≠ 0, leere Ausgabe) lässt die
+    Schleife oben einfach nichts tun: die Fehlerrichtung ist „zu wenig", nie
+    „alles".
+    """
+    gewaehlt = vorlauf_kandidaten(platforms, max_offen=max_offen, budget=budget)
+    schluessel = [p.key for p, _ in gewaehlt]
+    for k in schluessel:
+        print(k)
+
+    # ---- Begründung, vollständig und auf stderr --------------------------
+    # Auch das Verworfene wird genannt: eine Auswahl, die still schweigt,
+    # ist von einer kaputten nicht zu unterscheiden.
+    dabei = {p.key for p, _ in gewaehlt}
+    zeilen, offen_gesamt = [], 0
+    for p in platforms:
+        if not p.is_live or not p.run:
+            continue
+        rest, grund = offener_rest(p)
+        if rest is None:
+            lage = f"—        unbekannt: {grund}"
+        elif p.key in dabei:
+            offen_gesamt += rest
+            lage = f"{rest:<9}VORLAUF · {grund}"
+        elif rest == 0:
+            lage = f"0        fertig · {grund}"
+        elif rest > max_offen:
+            lage = f"{rest:<9}zu groß (> {max_offen}) · {grund}"
+        else:
+            lage = f"{rest:<9}Deckel erreicht · {grund}"
+        # Leerzeichen als TRENNER, nicht als Füllung: ein ungewöhnlich langer
+        # Schlüssel soll die Spalte verschieben, nicht mit ihr verschmelzen.
+        zeilen.append(f"  {p.key:<16} {lage}")
+    print(f"Vorlauf: {len(schluessel)} Zweig(e), {offen_gesamt} offene "
+          f"Kandidaten (Schwelle je Zweig {max_offen}, Budget {budget}, "
+          f"höchstens {VORLAUF_MAX_ZWEIGE} Zweige) ≈ "
+          f"{offen_gesamt * core.REQUEST_DELAY / 60:.1f} min reine Abrufzeit.",
+          file=sys.stderr)
+    print("\n".join(zeilen), file=sys.stderr)
+    if os.environ.get("GITHUB_ACTIONS") == "true":
+        # Auf stderr, damit die Schlüsselliste auf stdout sauber bleibt; der
+        # Runner liest Arbeitsablauf-Befehle aus beiden Strömen. Falls die
+        # Anmerkung doch einmal fehlt, steht dasselbe im Schritt-Protokoll.
+        print(f"::notice title=Vorlauf::{len(schluessel)} Zweig(e) mit "
+              f"{offen_gesamt} offenen Kandidaten: "
+              + (", ".join(f"{p.key} ({r})" for p, r in gewaehlt) or "keiner"),
+              file=sys.stderr)
+    return schluessel
+
+
 def parse_args():
     p = argparse.ArgumentParser(
         description="Petitions-Monitor: mehrere Plattformen scrapen (Upsert + HTML).")
@@ -259,6 +503,28 @@ def parse_args():
                         "Scrape); Exit-Code 1, wenn eine Quelle fehlschlägt")
     p.add_argument("--html-only", action="store_true",
                    help="kein Scrape; nur HTML aus vorhandenen JSONs neu bauen")
+    # ⚠️ Bewusst nur eine AUSGABE, kein eigener Lauf: was gescrapt wird,
+    # entscheidet weiterhin --platform, und den Zeitdeckel setzt die Shell
+    # (scrape.yml arbeitet überall mit `timeout --signal=INT`). Ein
+    # eingebauter „--vorlauf"-Lauf müsste die Frist selbst kennen und wäre die
+    # zweite Stelle, an der sie steht.
+    p.add_argument("--vorlauf-liste", dest="vorlauf_liste",
+                   action="store_true",
+                   help="kein Scrape; nennt die Plattform-Schlüssel, denen nur "
+                        "noch wenig zur Vollständigkeit fehlt – einen je Zeile "
+                        "auf der Standardausgabe, die Begründung auf stderr. "
+                        "Für einen gedeckelten Vorlauf vor dem Sammellauf. "
+                        "Leere Ausgabe ist ein gültiges Ergebnis (Exit 0)")
+    p.add_argument("--vorlauf-max-offen", dest="vorlauf_max_offen", type=int,
+                   default=VORLAUF_MAX_OFFEN,
+                   help="offener Rest je Zweig, bis zu dem er in den Vorlauf "
+                        f"kommt (Default {VORLAUF_MAX_OFFEN})")
+    p.add_argument("--vorlauf-budget", dest="vorlauf_budget", type=int,
+                   default=VORLAUF_BUDGET,
+                   help="Summe der offenen Reste über alle gewählten Zweige "
+                        f"(Default {VORLAUF_BUDGET}; bei ~{core.REQUEST_DELAY} s "
+                        "je Abruf sind das die Minuten, die der Vorlauf höchstens "
+                        "kostet)")
     p.add_argument("--delay", type=float, default=core.REQUEST_DELAY,
                    help=f"Pause zwischen Anfragen in s (Default {core.REQUEST_DELAY})")
     p.add_argument("--archive", action="store_true",
@@ -380,6 +646,11 @@ def main() -> None:
         core.log("Fremdsprachige Fassungen werden übersprungen "
                  "(--keine-sprachen).")
     try:
+        if args.vorlauf_liste:
+            # Vor --check und --serve: reine Abfrage, kein Abruf, kein Schreiben.
+            melde_vorlauf(PLATFORMS, max_offen=args.vorlauf_max_offen,
+                          budget=args.vorlauf_budget)
+            return
         if args.check:
             run_checks(args)
             return

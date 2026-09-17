@@ -53,99 +53,39 @@ jobs:
       - name: Selbsttest der Wächter
         run: python3 selbsttest.py
 
-      - name: App-Daten als JSON validieren
-        run: |
-          python3 - <<'PY'
-          import json, sys
-          from collections import Counter
-          from pathlib import Path
-
-          data = Path("webapp/data")
-          if not data.exists():
-              print("webapp/data fehlt – übersprungen.")
-              sys.exit(0)
-
-          manifest = json.loads((data / "manifest.json").read_text(encoding="utf-8"))
-          keys = [p["key"] for p in manifest["platforms"] if p.get("live")]
-          fehler = []
-
-          for key in keys:
-              liste = data / f"{key}.json"
-              if not liste.exists():
-                  fehler.append(f"{key}.json fehlt, steht aber live im Manifest")
-                  continue
-              recs = json.loads(liste.read_text(encoding="utf-8"))
-              # Jedes "tc" muss ein vorhandenes Volltext-Paket bezeichnen,
-              # sonst laeuft die App beim Aufklappen ins Leere.
-              for chunk in {r["tc"] for r in recs if isinstance(r.get("tc"), int)}:
-                  if not (data / f"{key}.t{chunk}.json").exists():
-                      fehler.append(f"{key}: Volltext-Paket t{chunk} fehlt")
-              ohne_url = sum(1 for r in recs if not r.get("url"))
-              if ohne_url:
-                  fehler.append(f"{key}: {ohne_url} Datensätze ohne URL")
-              # Dieselbe URL zweimal = dieselbe Petition zweimal in der App.
-              # Ursache sind umbenannte Slugs, deren alter Pfad auf den neuen
-              # umleitet: der Scraper speichert dann unter beiden Schlüsseln,
-              # beide Datensätze tragen aber die kanonische Ziel-URL. Nebenbei
-              # überschreiben sie sich im Volltext-Paket (publish.write_texts
-              # legt je URL genau einen Eintrag an), ein Text geht verloren.
-              # Behebung: in petitions_core.merge_records zusammenführen.
-              doppelt = [(u, n) for u, n in
-                         Counter(r["url"] for r in recs if r.get("url")).items()
-                         if n > 1]
-              for u, n in sorted(doppelt):
-                  titel = sorted({r.get("title") or "?"
-                                  for r in recs if r.get("url") == u})
-                  fehler.append(f"{key}: URL {n}× vorhanden – {u} "
-                                f"({' | '.join(titel)})")
-              # ---- Sprachebene (seit 8.8.2026) ------------------------------
-              # Die App entscheidet an "i18n_state", ob sie behauptet, eine
-              # Petition liege in der gewählten Sprache nicht vor. Ein
-              # Tippfehler dort schaltet dieses Abzeichen still ab — oder,
-              # schlimmer, falsch an: dann steht eine unbelegte Tatsachen-
-              # behauptung auf dem Bildschirm. Deshalb sind nur genau drei
-              # Werte zulässig (siehe i18n_helfer.ZUSTAENDE).
-              ZUSTAENDE = {"vorhanden", "fehlt", "ungeklärt"}
-              schlecht = {z for r in recs
-                          for z in (r.get("i18n_state") or {}).values()
-                          if z not in ZUSTAENDE}
-              if schlecht:
-                  fehler.append(f"{key}: unbekannter i18n_state "
-                                f"{sorted(schlecht)} – erlaubt: {sorted(ZUSTAENDE)}")
-              # Wer eine Fremdsprache mitbringt, muss auch sagen, in welcher
-              # Sprache die FLACHEN Felder stehen. Ohne "lang" weiß die App
-              # nicht, welche Sprache sie ersatzweise anzeigt, und das
-              # Abzeichen hieße „Fassung auf (unbekannt)".
-              ohne_lang = sum(1 for r in recs if r.get("i18n") and not r.get("lang"))
-              if ohne_lang:
-                  fehler.append(f"{key}: {ohne_lang} Datensätze mit i18n-Block, "
-                                f"aber ohne 'lang'")
-              # Fremdsprachige Volltext-Pakete: dieselbe Prüfung wie oben für
-              # "tc", nur je Sprachreihe. Ein fehlendes Paket lässt die App
-              # beim Aufklappen ins Leere laufen — auf Englisch genauso wie
-              # auf Deutsch.
-              for r in recs:
-                  for lg, blk in (r.get("i18n") or {}).items():
-                      n = (blk or {}).get("tc")
-                      if isinstance(n, int) and not (data / f"{key}.{lg}.t{n}.json").exists():
-                          fehler.append(f"{key}: Volltext-Paket {lg}.t{n} fehlt")
-                          break
-              sprachig = sum(1 for r in recs if r.get("i18n"))
-              print(f"{key}: {len(recs)} Petitionen, "
-                    f"{sum(1 for r in recs if r.get('related'))} mit Verwandtschaft"
-                    f"{f', {sprachig} mit Sprachfassung' if sprachig else ''}"
-                    f"{f', {len(doppelt)} doppelte URLs' if doppelt else ''}")
-
-          for f in sorted(data.glob("*.t[0-9]*.json")):
-              json.loads(f.read_text(encoding="utf-8"))
-
-          if fehler:
-              print("\nFEHLER:")
-              for f in fehler:
-                  print(" -", f)
-              sys.exit(1)
-          print("\nAlle App-Daten in Ordnung.")
-          PY
+      # ⚠️⚠️ Hier stand bis 17.9.2026 der Schritt "App-Daten als JSON
+      # validieren". Er war seit dem 7.8.2026 WIRKUNGSLOS: seit webapp/data in
+      # .gitignore steht (Zeile 31), liegen im HEAD null Dateien darunter, und
+      # kein Schritt davor erzeugt den Ordner. Der Prüfcode stieg deshalb bei
+      # jedem Lauf sofort mit sys.exit(0) aus und setzte einen grünen Haken —
+      # bei kaputten Daten hätte er genauso ausgesehen wie bei heilen.
+      # Nachgemessen in einem frischen `git archive HEAD`-Checkout: Ausgabe
+      # "webapp/data fehlt – übersprungen.", Exit 0.
+      #
+      # ➡️ Der Schritt ist nach scrape.yml gewandert, direkt hinter
+      # "Web-App-Daten erzeugen". Dort liegt webapp/data frisch auf der Platte
+      # (alle 41 Bestände aus dem Cache), die Prüfung kostet 1,5 s ohne einen
+      # einzigen Netzabruf, und ein Befund fällt VOR dem Pages-Deploy auf.
+      # Gegen den echten Live-Stand vom 17.9.2026 gelaufen meldet sie sofort
+      # einen echten Mangel (foodwatch_fr führt eine URL doppelt).
+      #
+      # ❌ Zwei Wege, die Prüfung HIER zu retten, sind gemessen und verworfen:
+      #   · hole_live_daten.py vorschalten: +13 s und koppelt jeden Push an die
+      #     Verfügbarkeit von GitHub Pages. Das trägt die Ablehnung weiter.
+      #     ⚠️ Der zusätzlich notierte Grund ist am 17.9.2026 ENTFALLEN:
+      #     hole_live_daten.dateiliste() lud die 15 fremdsprachigen Volltext-
+      #     pakete (<key>.<lg>.t<n>.json, 3,1 MB) nicht herunter, weil sie im
+      #     Manifest unter "tvl" stehen und nicht unter "tv" — behoben, samt
+      #     Selbsttest-Abschnitt 10. Mit dem nach scrape.yml gewanderten
+      #     Prüfcode gegen den Live-Stand nachgemessen: OHNE die Pakete 1923
+      #     Befunde, MIT ihnen genau 1 — die echte foodwatch_fr-Dublette.
+      #     ⚠️ Die hier zuvor genannten "46 Phantom-Fehler" ließen sich dabei
+      #     NICHT reproduzieren; wer die Zahl braucht, misst sie neu.
+      #   · publish.py vorschalten: +45 s auf einen Lauf, der heute 20–26 s
+      #     dauert, und 20 PHANTOM-Fehler, weil nur 21 der 41 Bestände im Repo
+      #     liegen; publish.py schreibt dann ein Manifest mit 41 Live-
+      #     Plattformen, aber nur 21 Listen.
+      # Beide hätten nicht die Daten geprüft, sondern die Lücken des Prüfstands.
 
       - name: Texte und Plattform-Stammdaten auf Vollständigkeit prüfen
         run: |

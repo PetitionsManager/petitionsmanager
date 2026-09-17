@@ -328,6 +328,133 @@ jobs:
       - name: Web-App-Daten erzeugen
         run: python3 publish.py
 
+      # ⚠️⚠️ Dieser Schritt stand bis 17.9.2026 in checks.yml und war dort seit
+      # dem 7.8.2026 WIRKUNGSLOS: webapp/data steht in .gitignore, im Checkout
+      # liegen null Dateien darunter, und kein Schritt davor erzeugt den
+      # Ordner — der Code stieg also bei jedem Push sofort mit sys.exit(0) aus
+      # und setzte einen grünen Haken. Eine Prüfung, die bei kaputtem Zustand
+      # genauso aussieht wie bei heilem, ist keine.
+      #
+      # HIER sind die Daten gerade erst entstanden: publish.py hat sie eine
+      # Zeile höher geschrieben, aus allen 41 Beständen des Caches. Kosten:
+      # 1,5 s, kein einziger Netzabruf. Und der Befund kommt VOR dem
+      # Pages-Deploy statt Stunden danach.
+      #
+      # ⚠️ continue-on-error ist Absicht und keine Bequemlichkeit: hinter
+      # diesem Schritt liegen bis zu 300 Minuten Scrapen. Ein hartes Abbrechen
+      # wegen einer doppelten URL verschenkte den ganzen Lauf samt Deploy —
+      # genau das ist am 29.7.2026 schon einmal passiert (Job-Limit mitten im
+      # Lauf, ein Tag ohne Veröffentlichung). Die Befunde kommen deshalb als
+      # ::error-ANMERKUNG an den Lauf; die Schrittliste färbt sich, der Lauf
+      # läuft weiter.
+      - name: App-Daten als JSON validieren
+        continue-on-error: true
+        run: |
+          python3 - <<'PY'
+          import json, sys
+          from collections import Counter
+          from pathlib import Path
+
+          data = Path("webapp/data")
+          if not data.exists():
+              # Anders als früher in checks.yml ist das HIER ein Befund und
+              # keine Entwarnung: publish.py lief eine Zeile höher.
+              print("::error title=App-Daten::webapp/data fehlt, obwohl "
+                    "publish.py gerade gelaufen ist – nichts geprüft.")
+              sys.exit(1)
+
+          manifest = json.loads((data / "manifest.json").read_text(encoding="utf-8"))
+          keys = [p["key"] for p in manifest["platforms"] if p.get("live")]
+          fehler = []
+
+          for key in keys:
+              liste = data / f"{key}.json"
+              if not liste.exists():
+                  fehler.append(f"{key}.json fehlt, steht aber live im Manifest")
+                  continue
+              recs = json.loads(liste.read_text(encoding="utf-8"))
+              # Jedes "tc" muss ein vorhandenes Volltext-Paket bezeichnen,
+              # sonst laeuft die App beim Aufklappen ins Leere.
+              for chunk in {r["tc"] for r in recs if isinstance(r.get("tc"), int)}:
+                  if not (data / f"{key}.t{chunk}.json").exists():
+                      fehler.append(f"{key}: Volltext-Paket t{chunk} fehlt")
+              ohne_url = sum(1 for r in recs if not r.get("url"))
+              if ohne_url:
+                  fehler.append(f"{key}: {ohne_url} Datensätze ohne URL")
+              # Dieselbe URL zweimal = dieselbe Petition zweimal in der App.
+              # Ursache sind umbenannte Slugs, deren alter Pfad auf den neuen
+              # umleitet: der Scraper speichert dann unter beiden Schlüsseln,
+              # beide Datensätze tragen aber die kanonische Ziel-URL. Nebenbei
+              # überschreiben sie sich im Volltext-Paket (publish.write_texts
+              # legt je URL genau einen Eintrag an), ein Text geht verloren.
+              # Behebung: in petitions_core.merge_records zusammenführen.
+              doppelt = [(u, n) for u, n in
+                         Counter(r["url"] for r in recs if r.get("url")).items()
+                         if n > 1]
+              for u, n in sorted(doppelt):
+                  titel = sorted({r.get("title") or "?"
+                                  for r in recs if r.get("url") == u})
+                  fehler.append(f"{key}: URL {n}× vorhanden – {u} "
+                                f"({' | '.join(titel)})")
+              # ---- Sprachebene (seit 8.8.2026) ------------------------------
+              # Die App entscheidet an "i18n_state", ob sie behauptet, eine
+              # Petition liege in der gewählten Sprache nicht vor. Ein
+              # Tippfehler dort schaltet dieses Abzeichen still ab — oder,
+              # schlimmer, falsch an: dann steht eine unbelegte Tatsachen-
+              # behauptung auf dem Bildschirm. Deshalb sind nur genau drei
+              # Werte zulässig (siehe i18n_helfer.ZUSTAENDE).
+              ZUSTAENDE = {"vorhanden", "fehlt", "ungeklärt"}
+              schlecht = {z for r in recs
+                          for z in (r.get("i18n_state") or {}).values()
+                          if z not in ZUSTAENDE}
+              if schlecht:
+                  fehler.append(f"{key}: unbekannter i18n_state "
+                                f"{sorted(schlecht)} – erlaubt: {sorted(ZUSTAENDE)}")
+              # Wer eine Fremdsprache mitbringt, muss auch sagen, in welcher
+              # Sprache die FLACHEN Felder stehen. Ohne "lang" weiß die App
+              # nicht, welche Sprache sie ersatzweise anzeigt, und das
+              # Abzeichen hieße „Fassung auf (unbekannt)".
+              ohne_lang = sum(1 for r in recs if r.get("i18n") and not r.get("lang"))
+              if ohne_lang:
+                  fehler.append(f"{key}: {ohne_lang} Datensätze mit i18n-Block, "
+                                f"aber ohne 'lang'")
+              # Fremdsprachige Volltext-Pakete: dieselbe Prüfung wie oben für
+              # "tc", nur je Sprachreihe. Ein fehlendes Paket lässt die App
+              # beim Aufklappen ins Leere laufen — auf Englisch genauso wie
+              # auf Deutsch.
+              for r in recs:
+                  for lg, blk in (r.get("i18n") or {}).items():
+                      n = (blk or {}).get("tc")
+                      if isinstance(n, int) and not (data / f"{key}.{lg}.t{n}.json").exists():
+                          fehler.append(f"{key}: Volltext-Paket {lg}.t{n} fehlt")
+                          break
+              sprachig = sum(1 for r in recs if r.get("i18n"))
+              print(f"{key}: {len(recs)} Petitionen, "
+                    f"{sum(1 for r in recs if r.get('related'))} mit Verwandtschaft"
+                    f"{f', {sprachig} mit Sprachfassung' if sprachig else ''}"
+                    f"{f', {len(doppelt)} doppelte URLs' if doppelt else ''}")
+
+          for f in sorted(data.glob("*.t[0-9]*.json")):
+              json.loads(f.read_text(encoding="utf-8"))
+
+          if fehler:
+              print("\nFEHLER:")
+              for f in fehler:
+                  print(" -", f)
+              # Als Anmerkung an den Lauf, sonst sähe man bei
+              # continue-on-error nur einen gefärbten Schritt ohne Grund.
+              # Gedeckelt, weil GitHub je Schritt und Stufe nur die ersten
+              # zehn Anmerkungen anzeigt: ein systemischer Fehler mit 500
+              # Befunden verdrängte sonst alles andere am Lauf.
+              print(f"::error title=App-Daten::{len(fehler)} Befund(e) in den "
+                    f"veröffentlichten Daten – vollständige Liste im "
+                    f"Schrittprotokoll.")
+              for f in fehler[:9]:
+                  print(f"::error title=App-Daten::{f}")
+              sys.exit(1)
+          print("\nAlle App-Daten in Ordnung.")
+          PY
+
       - name: Scraper-Zustand cachen
         if: always()
         uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9  # v6
