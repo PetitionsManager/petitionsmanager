@@ -1,6 +1,17 @@
 # Startet den täglichen Pflege-Lauf. Persistent=true holt einen verpassten
-# Lauf beim nächsten Einschalten des Rechners nach — feste Uhrzeiten sind
-# damit unkritisch.
+# Lauf nach, sobald der Rechner wieder läuft — feste Uhrzeiten sind damit
+# unkritisch.
+#
+# ⚠️⚠️ Gemessen 17.9.2026: der Nachhollauf startet 1–2 s nach dem AUFWACHEN aus
+# dem Suspend, NICHT erst beim Booten — alle vier Fehlläufe (10.9. 05:51,
+# 12.9. 09:02, 14.9. 06:28, 15.9. 08:04) lagen mitten in einem laufenden Boot,
+# jeweils eine Sekunde nach „System returned from sleep operation 'suspend'".
+# Das WLAN verbindet sich dann erst neu (Netz jeweils 5–6 s später), der erste
+# `git pull` scheitert an der Namensauflösung.
+# Abgefangen wird das IM SKRIPT (6 Anläufe × 30 s), bewusst nicht hier:
+# network-online.target existiert im User-Manager gar nicht, und im
+# System-Manager wird es nur EINMAL beim Booten erreicht und bleibt über jeden
+# Suspend hinweg aktiv — als Bedingung wäre es wirkungslos.
 [Unit]
 Description=Täglicher PetitionsManager-Pflege-Lauf
 

@@ -66,67 +66,100 @@ trap 'exit 143' TERM
 trap 'exit 130' INT
 trap 'exit 129' HUP
 
-cd "$KLON" || exit 1
-if [ -e "$MARKER" ]; then
-    sag "Markerdatei vorhanden ($MARKER) – Lauf ausgesetzt, bitte den dort beschriebenen Konflikt ansehen."
-    exit 1
-fi
-# Log deckeln (2 MB), eine Vorgänger-Fassung behalten.
-if [ "$(stat -c%s "$LOG" 2>/dev/null || echo 0)" -gt 2000000 ]; then
-    mv -f "$LOG" "$LOG.alt"
-fi
-
-sag "=== Pflege-Lauf beginnt (${PFLEGE_NUR_PRUEFEN:+LEITUNGS-TEST}) ==="
-if ! git pull --ff-only >>"$LOG" 2>&1; then
-    sag "git pull --ff-only scheiterte – Abbruch, morgen neuer Versuch."
-    exit 1
-fi
-
-if [ "${PFLEGE_NUR_PRUEFEN:-0}" != "1" ]; then
-    for k in "${PLATTFORMEN[@]}"; do
-        sag "Scrape $k …"
-        read -r ZW_WALL ZW_MONO < <(uhren)
-        # Ein Fehlschlag (z. B. WAF-Fenster zu) beendet nur diesen Zweig;
-        # „5 Fehlschläge in Folge" im Scraper speichert vorher Erreichtes.
-        if python3 monitor.py --platform "$k" >>"$LOG" 2>&1; then
-            ZCODE=0
-        else
-            ZCODE=$?
-            sag "$k: Lauf endete mit Fehler – weiter mit dem nächsten Zweig."
-        fi
-        # Je Zweig eine eigene Zeile: europarl trägt den Löwenanteil, und nur
-        # so ist später zu sehen, WELCHER Zweig den Lauf lang macht.
-        zeitzeile "zweig:$k" "$ZW_WALL" "$ZW_MONO" "$ZCODE"
-    done
-else
-    sag "PFLEGE_NUR_PRUEFEN=1 – Scrapen übersprungen."
-fi
-
-GEAENDERT="$(git status --porcelain -- '*_petitions.json' texts_index.json)"
-if [ -z "$GEAENDERT" ]; then
-    sag "Keine Store-Änderungen – fertig."
-    exit 0
-fi
-# Nur genau die Store-Dateien stagen — nie pauschal (geteilte Repo-Disziplin).
-echo "$GEAENDERT" | awk '{print $NF}' | xargs -r git add --
-if ! git commit -m "Stores: lokaler Pflege-Lauf $(date '+%F')" >>"$LOG" 2>&1; then
-    sag "Commit scheiterte – Abbruch."
-    exit 1
-fi
-if ! git push >>"$LOG" 2>&1; then
-    sag "Push abgewiesen – ein Rebase-Versuch."
-    if git pull --rebase --autostash >>"$LOG" 2>&1 && git push >>"$LOG" 2>&1; then
-        sag "Push nach Rebase gelungen."
-    else
-        git rebase --abort >>"$LOG" 2>&1 || true
-        {
-            echo "Der Pflege-Lauf vom $(date '+%F %T') konnte nicht pushen"
-            echo "(Konflikt oder Zugriffsproblem). Nichts wurde erzwungen."
-            echo "Bitte in $KLON nachsehen: git status / git log origin/main..HEAD"
-            echo "Danach diese Datei löschen – der Timer läuft dann wieder."
-        } > "$MARKER"
-        sag "KONFLIKT – Markerdatei geschrieben, Timer setzt bis zur Klärung aus."
+# --- Rumpf ----------------------------------------------------------------
+# ⚠️⚠️ Der ganze Ablauf liegt bewusst in EINER Funktion, weil dieses Skript
+# sich beim `git pull` unten SELBST austauschen kann. Bash liest ein Skript
+# häppchenweise und merkt sich einen BYTE-VERSATZ; wird die Datei während des
+# Laufs länger, zeigt der alte Versatz mitten in eine Zeile der neuen Fassung.
+# Am Prüfstand (17.9.2026) reproduziert: ein Kommentarfragment wurde als Befehl
+# ausgeführt („------ command not found"), danach lief die NEUE Fassung komplett
+# durch — Traps übersprungen, Scrape-Schleife samt Commit und Push ein zweites
+# Mal. Einen Funktionsrumpf liest Bash dagegen VOLLSTÄNDIG ein, bevor er ihn
+# ausführt; ab hier ist jede Skriptänderung per Pull unkritisch.
+# ⚠️ Am Ende der Datei steht `main "$@"; exit $?` — das `exit` MUSS auf DERSELBEN
+# Zeile stehen. Steht es auf einer eigenen, kehrt Bash nach main() zum alten
+# Byte-Versatz zurück und der Fehler ist zurück (ebenfalls nachgemessen).
+main() {
+    cd "$KLON" || exit 1
+    if [ -e "$MARKER" ]; then
+        sag "Markerdatei vorhanden ($MARKER) – Lauf ausgesetzt, bitte den dort beschriebenen Konflikt ansehen."
         exit 1
     fi
-fi
-sag "=== Pflege-Lauf fertig: Stores gepusht; die CI übernimmt sie beim nächsten Lauf. ==="
+    # Log deckeln (2 MB), eine Vorgänger-Fassung behalten.
+    if [ "$(stat -c%s "$LOG" 2>/dev/null || echo 0)" -gt 2000000 ]; then
+        mv -f "$LOG" "$LOG.alt"
+    fi
+
+    sag "=== Pflege-Lauf beginnt (${PFLEGE_NUR_PRUEFEN:+LEITUNGS-TEST}) ==="
+    # ⚠️ Mehrere Anläufe statt sofortigem Abbruch: die Persistent=true-Nachhol-
+    # läufe starten 1–2 s nach dem AUFWACHEN aus dem Suspend (NICHT beim Booten),
+    # und da verbindet sich das WLAN gerade erst neu. Gemessen an allen vier
+    # Fehlläufen (10./12./14./15.9.2026): Abbruch mit „ssh: Could not resolve
+    # hostname github.com: Temporary failure in name resolution", das Netz stand
+    # jeweils 5–6 s später. 6 Anläufe × 30 s decken das mit Reserve ab.
+    # ⚠️⚠️ network-online.target hilft dagegen NICHT: im User-Manager gibt es die
+    # Unit gar nicht, und im System-Manager wird sie nur EINMAL beim Booten
+    # erreicht und bleibt über jeden Suspend hinweg aktiv.
+    PULL_ANLAUF=1
+    until git pull --ff-only >>"$LOG" 2>&1; do
+        if [ "$PULL_ANLAUF" -ge 6 ]; then
+            sag "git pull --ff-only scheiterte auch im 6. Anlauf – Abbruch, morgen neuer Versuch."
+            exit 1
+        fi
+        sag "git pull --ff-only scheiterte (Anlauf $PULL_ANLAUF) – 30 s warten, dann neuer Anlauf."
+        PULL_ANLAUF=$((PULL_ANLAUF + 1))
+        sleep 30
+    done
+
+    if [ "${PFLEGE_NUR_PRUEFEN:-0}" != "1" ]; then
+        for k in "${PLATTFORMEN[@]}"; do
+            sag "Scrape $k …"
+            read -r ZW_WALL ZW_MONO < <(uhren)
+            # Ein Fehlschlag (z. B. WAF-Fenster zu) beendet nur diesen Zweig;
+            # „5 Fehlschläge in Folge" im Scraper speichert vorher Erreichtes.
+            if python3 monitor.py --platform "$k" >>"$LOG" 2>&1; then
+                ZCODE=0
+            else
+                ZCODE=$?
+                sag "$k: Lauf endete mit Fehler – weiter mit dem nächsten Zweig."
+            fi
+            # Je Zweig eine eigene Zeile: europarl trägt den Löwenanteil, und nur
+            # so ist später zu sehen, WELCHER Zweig den Lauf lang macht.
+            zeitzeile "zweig:$k" "$ZW_WALL" "$ZW_MONO" "$ZCODE"
+        done
+    else
+        sag "PFLEGE_NUR_PRUEFEN=1 – Scrapen übersprungen."
+    fi
+
+    GEAENDERT="$(git status --porcelain -- '*_petitions.json' texts_index.json)"
+    if [ -z "$GEAENDERT" ]; then
+        sag "Keine Store-Änderungen – fertig."
+        exit 0
+    fi
+    # Nur genau die Store-Dateien stagen — nie pauschal (geteilte Repo-Disziplin).
+    echo "$GEAENDERT" | awk '{print $NF}' | xargs -r git add --
+    if ! git commit -m "Stores: lokaler Pflege-Lauf $(date '+%F')" >>"$LOG" 2>&1; then
+        sag "Commit scheiterte – Abbruch."
+        exit 1
+    fi
+    if ! git push >>"$LOG" 2>&1; then
+        sag "Push abgewiesen – ein Rebase-Versuch."
+        if git pull --rebase --autostash >>"$LOG" 2>&1 && git push >>"$LOG" 2>&1; then
+            sag "Push nach Rebase gelungen."
+        else
+            git rebase --abort >>"$LOG" 2>&1 || true
+            {
+                echo "Der Pflege-Lauf vom $(date '+%F %T') konnte nicht pushen"
+                echo "(Konflikt oder Zugriffsproblem). Nichts wurde erzwungen."
+                echo "Bitte in $KLON nachsehen: git status / git log origin/main..HEAD"
+                echo "Danach diese Datei löschen – der Timer läuft dann wieder."
+            } > "$MARKER"
+            sag "KONFLIKT – Markerdatei geschrieben, Timer setzt bis zur Klärung aus."
+            exit 1
+        fi
+    fi
+    sag "=== Pflege-Lauf fertig: Stores gepusht; die CI übernimmt sie beim nächsten Lauf. ==="
+}
+
+# ⚠️ `exit` MUSS hier hinter main() auf derselben Zeile stehen — siehe oben.
+main "$@"; exit $?
