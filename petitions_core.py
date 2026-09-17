@@ -3633,6 +3633,270 @@ def _i18n_einsetzen(tmpl: str) -> str:
                 .replace("{{I18N}}", _I18N_SCRIPT))
 
 
+# --- Ablaufschema ----------------------------------------------------------
+# Eine Seite, auf der Außenstehende sehen, was in welcher Reihenfolge läuft.
+# Kuratiert aus einer Vollkartierung des Codes (70 Knoten, jeder mit Beleg) auf
+# 25 Knoten in fünf Bahnen — mehr passt nicht lesbar auf eine Seite. Was hier
+# fehlt, fehlt absichtlich.
+#
+# Die BAHNEN sind der eigentliche Erkenntnisgewinn: sie sagen, WO etwas läuft.
+# Genau das ahnt von außen niemand — sechs Zweige laufen ausschließlich auf dem
+# Rechner des Nutzers, weil ihre Quellen Rechenzentren per WAF aussperren.
+#
+# ⚠️ Inline-SVG ohne Fremdabhängigkeit (kein Mermaid, kein CDN): die Seite wird
+# als Schnappschuss nach webapp/ gebaut und in die APK gebündelt, sie muss also
+# offline funktionieren. Farben ausschließlich aus den vorhandenen Variablen
+# ({{FARBEN}}), damit das Schema den Themenwechsel hell/dunkel mitmacht.
+# ⚠️ Jeder Text über _zs(), sonst bleibt das Schema beim Sprachwechsel deutsch.
+
+_SCHEMA_CSS = """
+    details.schema{margin-top:28px;background:var(--surface);
+        border:1px solid var(--line);border-radius:14px;padding:0}
+    details.schema>summary{cursor:pointer;padding:16px 20px;font-weight:700;
+        list-style:none;display:flex;align-items:center;gap:10px}
+    details.schema>summary::-webkit-details-marker{display:none}
+    details.schema>summary::before{content:"▸";color:var(--indigo);
+        font-size:13px;transition:transform .15s}
+    details.schema[open]>summary::before{transform:rotate(90deg)}
+    details.schema>summary:hover{color:var(--indigo)}
+    details.schema>summary:focus-visible{outline:2px solid var(--indigo);
+        outline-offset:-2px}
+    .schema-body{padding:0 20px 20px}
+    /* Auf schmalen Schirmen seitlich scrollbar statt gestaucht: ein
+       Flussdiagramm, das auf 380px zusammengequetscht wird, ist unlesbar. */
+    .schema-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+    /* color setzt currentColor für die Pfeilspitzen. Das MUSS hier stehen und
+       nicht als Präsentationsattribut am <g>: dort sind CSS-Variablen nicht
+       erlaubt, var(--muted) bliebe wirkungslos und die Spitzen erbten die
+       Schriftfarbe. */
+    .schema-scroll>svg{display:block;width:100%;min-width:900px;height:auto;
+        color:var(--muted)}
+    .schema-hint{color:var(--muted);font-size:12px;margin:0 0 10px}
+    .schema dl{margin:16px 0 0;font-size:13px}
+    .schema dt{font-weight:650;margin-top:12px}
+    .schema dd{margin:2px 0 0;color:var(--muted)}
+    .schema .marke{display:inline-block;width:17px;height:17px;line-height:16px;
+        text-align:center;border:1px solid var(--indigo);border-radius:50%;
+        color:var(--indigo);font-size:10px;font-weight:700;margin-right:6px}
+    .s-lane{fill:var(--bg)}
+    .s-lbl{fill:var(--muted);font-size:10px;font-weight:600;letter-spacing:.06em}
+    .s-box{fill:var(--surface);stroke:var(--line);stroke-width:1}
+    .s-run{fill:var(--surface);stroke:var(--indigo);stroke-width:1.4}
+    .s-trig{fill:none;stroke:var(--muted);stroke-width:1;stroke-dasharray:3 2}
+    .s-ttl{fill:var(--ink);font-size:11.5px;font-weight:600}
+    .s-sub{fill:var(--muted);font-size:10px}
+    .s-ln{stroke:var(--muted);stroke-width:1.3;fill:none}
+    .s-lnd{stroke:var(--muted);stroke-width:1.2;fill:none;stroke-dasharray:4 3;
+        opacity:.75}
+    .s-note{fill:var(--indigo);font-size:9px;font-weight:700}
+    .s-nc{fill:none;stroke:var(--indigo);stroke-width:1}
+"""
+
+
+def _s_kasten(x, y, w, h, art, de, en, sub_de="", sub_en="", marke=""):
+    """Ein Knoten des Schemas: Rahmen, Titel, optionaler Untertitel, Merkzeichen."""
+    teile = [f'<rect class="s-{art}" x="{x}" y="{y}" width="{w}" height="{h}" rx="6"/>',
+             _zs(de, en, tag="text", klasse="s-ttl",
+                 attrs=f' x="{x + 10}" y="{y + 20}"')]
+    if sub_de:
+        teile.append(_zs(sub_de, sub_en, tag="text", klasse="s-sub",
+                         attrs=f' x="{x + 10}" y="{y + 34}"'))
+    if marke:
+        teile.append(f'<circle class="s-nc" cx="{x + w - 8}" cy="{y + 8}" r="7"/>'
+                     f'<text class="s-note" x="{x + w - 11}" y="{y + 11}">{marke}</text>')
+    return "".join(teile)
+
+
+def _ablaufschema() -> str:
+    """Der aufklappbare Abschnitt mit dem Ablaufdiagramm."""
+    k, teile = _s_kasten, []
+
+    # Bahnen als Hintergrundstreifen, Beschriftung links.
+    for y, h in ((34, 74), (116, 176), (300, 84), (392, 84), (484, 84)):
+        teile.append(f'<rect class="s-lane" x="0" y="{y}" width="960" height="{h}"/>')
+    for y, de, en in ((52, "WAS STARTET", "WHAT STARTS IT"),
+                      (134, "IN DER CLOUD", "IN THE CLOUD"),
+                      (148, "(GITHUB)", "(GITHUB)"),
+                      (318, "AUF DEINEM", "ON YOUR"),
+                      (332, "RECHNER", "COMPUTER"),
+                      (410, "GEMEINSAMER", "SHARED"),
+                      (424, "KERN", "CORE"),
+                      (502, "ERGEBNIS", "RESULT")):
+        teile.append(_zs(de, en, tag="text", klasse="s-lbl", attrs=f' x="10" y="{y}"'))
+
+    # Bahn 1 — Auslöser
+    teile += [
+        k(106, 46, 152, 46, "trig", "Cron 03:17 + 15:17", "Cron 03:17 + 15:17",
+          "UTC, täglich", "UTC, daily"),
+        k(272, 46, 132, 46, "trig", "Timer 20:15", "Timer 20:15",
+          "dein Rechner", "your computer"),
+        k(418, 46, 122, 46, "trig", "Jeder Push", "Every push",
+          "ins Repository", "to the repository"),
+        k(554, 46, 132, 46, "trig", "Start von Hand", "Manual start",
+          "App bauen", "build the app"),
+        k(700, 46, 142, 46, "trig", "Cron montags", "Cron on Mondays",
+          "Wochenbericht", "weekly report"),
+    ]
+    # Bahn 2 — GitHub Actions
+    teile += [
+        k(106, 158, 104, 44, "run", "Cache holen", "Restore cache",
+          "letzter Stand", "last known state"),
+        k(224, 158, 118, 44, "run", "Lokales", "Adopt local",
+          "übernehmen", "stores if newer"),
+        k(356, 158, 104, 44, "run", "Frist setzen", "Set deadline",
+          "300 min", "300 min", marke="3"),
+        k(474, 158, 118, 44, "run", "Sammellauf", "Main run",
+          "41 Zweige", "41 branches"),
+        k(606, 158, 118, 44, "run", "Change.org", "Change.org",
+          "aufholen", "catch up"),
+        k(738, 158, 104, 44, "run", "publish.py", "publish.py",
+          "App-Daten", "app data"),
+        k(856, 158, 94, 44, "box", "Pages", "Pages",
+          "ausliefern", "deliver"),
+        k(418, 238, 174, 40, "run", "Checks", "Checks",
+          "Syntax · Selbsttest · Texte", "syntax · self-test · texts"),
+        k(606, 238, 236, 40, "run", "APK bauen", "Build the APK",
+          "holt die Daten zuerst von Pages", "fetches the data from Pages first"),
+    ]
+    # Bahn 3 — lokal
+    teile += [
+        k(106, 318, 132, 44, "run", "git pull", "git pull",
+          "6 Anläufe", "6 attempts"),
+        k(272, 318, 188, 44, "run", "6 gesperrte Zweige", "6 blocked branches",
+          "europarl · 5× WeMove", "europarl · 5× WeMove", marke="2"),
+        k(494, 318, 152, 44, "run", "Stände pushen", "Push the stores",
+          "nur Daten", "data only"),
+    ]
+    # Bahn 4 — gemeinsamer Kern
+    teile += [
+        k(106, 410, 132, 44, "run", "monitor.py", "monitor.py",
+          "41 Einträge", "41 entries"),
+        k(272, 410, 152, 44, "run", "Rundlauf", "Round-robin",
+          "Ältestes zuerst", "stalest first", marke="1"),
+        k(458, 410, 160, 44, "run", "11 Scraper", "11 scrapers",
+          "bedienen 41 Zweige", "serve 41 branches"),
+        k(652, 410, 190, 44, "run", "petitions_core.py", "petitions_core.py",
+          "holen · zusammenführen", "fetch · merge"),
+    ]
+    # Bahn 5 — Ergebnis
+    teile += [
+        k(106, 502, 152, 44, "box", "41 Bestände", "41 stores",
+          "*_petitions.json", "*_petitions.json"),
+        k(292, 502, 152, 44, "box", "App-Daten", "App data",
+          "nur auf Pages", "on Pages only", marke="4"),
+        k(478, 502, 132, 44, "box", "Dashboard", "Dashboard",
+          "diese Seite", "this page"),
+        k(644, 502, 198, 44, "box", "Web-App · PWA · APK", "Web app · PWA · APK",
+          "beim Nutzer", "on the device"),
+    ]
+
+    # Kanten. Durchgezogen = ruft auf/erzeugt, gestrichelt = liest.
+    for d in ("M182 92 L182 158", "M338 92 L338 306 L172 306 L172 318",
+              "M479 92 L479 238", "M620 92 L620 238",
+              "M210 180 L224 180", "M342 180 L356 180", "M460 180 L474 180",
+              "M592 180 L606 180", "M724 180 L738 180", "M842 180 L856 180",
+              "M238 340 L272 340", "M460 340 L494 340",
+              "M533 202 L533 218 L90 218 L90 432 L106 432",
+              "M366 362 L366 380 L96 380 L96 424 L106 424",
+              "M238 432 L272 432", "M424 432 L458 432", "M618 432 L652 432",
+              "M747 454 L747 478 L182 478 L182 502",
+              "M610 524 L644 524"):
+        teile.append(f'<path class="s-ln" d="{d}" marker-end="url(#s-a)"/>')
+    for d in ("M771 92 L771 132 L903 132 L903 158",
+              "M570 318 L570 296 L283 296 L283 202",
+              "M258 524 L292 524", "M444 524 L478 524",
+              "M903 202 L903 560 L743 560 L743 546"):
+        teile.append(f'<path class="s-lnd" d="{d}" marker-end="url(#s-a)"/>')
+    teile.append(_zs("Stände wandern in die Cloud", "stores travel to the cloud",
+                     tag="text", klasse="s-sub", attrs=' x="292" y="292"'))
+
+    # Legende
+    teile.append('<g transform="translate(106,596)">'
+                 '<rect class="s-trig" x="0" y="0" width="22" height="13" rx="3"/>'
+                 '<rect class="s-run" x="106" y="0" width="22" height="13" rx="3"/>'
+                 '<rect class="s-box" x="268" y="0" width="22" height="13" rx="3"/>'
+                 '<path class="s-ln" d="M446 7 L476 7" marker-end="url(#s-a)"/>'
+                 '<path class="s-lnd" d="M548 7 L578 7" marker-end="url(#s-a)"/>'
+                 + _zs("Auslöser", "trigger", tag="text", klasse="s-sub",
+                       attrs=' x="30" y="10"')
+                 + _zs("läuft (Skript / Schritt)", "runs (script / step)",
+                       tag="text", klasse="s-sub", attrs=' x="136" y="10"')
+                 + _zs("Ergebnis (Datei / Dienst)", "result (file / service)",
+                       tag="text", klasse="s-sub", attrs=' x="298" y="10"')
+                 + _zs("ruft auf", "calls", tag="text", klasse="s-sub",
+                       attrs=' x="482" y="10"')
+                 + _zs("liest", "reads", tag="text", klasse="s-sub",
+                       attrs=' x="584" y="10"')
+                 + '</g>')
+
+    # Die vier Stellen, die ohne Erklärung falsch verstanden werden.
+    fussnoten = [
+        ("1", "Die Reihenfolge wechselt",
+         "The order changes from run to run",
+         "Die Reihenfolge der 41 Zweige ist nicht die Listenreihenfolge. Jeder "
+         "Lauf beginnt bei dem Zweig, der am längsten nicht an der Reihe war — "
+         "sonst kämen die hinteren nie dran, wenn die Frist zuschlägt.",
+         "The order of the 41 branches is not the order of the list. Each run "
+         "starts at the branch that has waited longest — otherwise the ones at "
+         "the back would never get their turn when the deadline hits."),
+        ("2", "Sechs Zweige laufen nur auf einem gewöhnlichen Anschluss",
+         "Six branches run only on an ordinary connection",
+         "Europäisches Parlament und fünf WeMove-Sprachen sperren Rechenzentren "
+         "aus; sie laufen deshalb nicht in der Cloud. Ekō sperrt dagegen jeden — "
+         "dort hilft auch der eigene Rechner nicht.",
+         "The European Parliament and five WeMove languages block data centres, "
+         "so they cannot run in the cloud. Ekō blocks everyone, though — running "
+         "on your own machine does not help there."),
+        ("3", "Ein Lauf hat 300 Minuten",
+         "A run has 300 minutes",
+         "Was danach kommt, bleibt liegen und wird beim nächsten Mal zuerst "
+         "geholt.",
+         "Whatever comes after that is left for next time, and is picked up "
+         "first then."),
+        ("4", "Die App-Daten liegen nicht im Repository",
+         "The app data is not in the repository",
+         "Sie liegen ausschließlich auf GitHub Pages. Die Android-App holt sie "
+         "sich beim Bauen von dort. Einen zweiten Weg zu den Daten gibt es nicht.",
+         "It lives only on GitHub Pages. The Android build fetches it from there. "
+         "There is no second route to the data."),
+    ]
+    dl = []
+    for nr, t_de, t_en, b_de, b_en in fussnoten:
+        dl.append(f'<dt><span class="marke">{nr}</span>'
+                  + _zs(t_de, t_en) + '</dt><dd>' + _zs(b_de, b_en) + '</dd>')
+
+    return (
+        '<details class="schema">\n'
+        '  <summary>' + _zs("So läuft die Sammlung ab",
+                            "How the collection works") + '</summary>\n'
+        '  <div class="schema-body">\n'
+        '    <p class="schema-hint">'
+        + _zs("Fünf Bahnen von oben nach unten: was startet, was in der Cloud "
+              "läuft, was auf dem Rechner läuft, der gemeinsame Kern und das "
+              "Ergebnis.",
+              "Five lanes from top to bottom: what starts it, what runs in the "
+              "cloud, what runs on the computer, the shared core, and the result.")
+        + '</p>\n'
+        '    <div class="schema-scroll">\n'
+        '      <svg viewBox="0 0 960 660" xmlns="http://www.w3.org/2000/svg" '
+        'role="img" aria-labelledby="s-t s-d">\n'
+        '        <title id="s-t">' + _esc("Ablauf der Scraper-Kette") + '</title>\n'
+        '        <desc id="s-d">'
+        + _esc("Fünf Bahnen: Auslöser, Ablauf in der GitHub-Cloud, Ablauf auf dem "
+               "Rechner des Nutzers, der gemeinsame Kern, und die Ergebnisse.")
+        + '</desc>\n'
+        '        <defs><marker id="s-a" viewBox="0 0 8 8" refX="7" refY="4" '
+        'markerWidth="6" markerHeight="6" orient="auto">'
+        '<path d="M0 0 L8 4 L0 8 z" fill="currentColor"/></marker></defs>\n'
+        '        <g>' + "".join(teile) + '</g>\n'
+        '      </svg>\n'
+        '    </div>\n'
+        '    <dl>' + "".join(dl) + '</dl>\n'
+        '  </div>\n'
+        '</details>'
+    )
+
+
 def build_dashboard(platforms: list[Platform], schnappschuss: bool = False) -> str:
     """Das Dashboard in zwei Ausprägungen aus EINER Vorlage.
 
@@ -3675,6 +3939,11 @@ def build_dashboard(platforms: list[Platform], schnappschuss: bool = False) -> s
         tmpl = tmpl.replace(platzhalter, inhalt)
     tmpl = tmpl.replace("{{GENERATED}}", _esc(now_iso()))
     tmpl = tmpl.replace("{{CARDS}}", cards)
+    # Das Ablaufschema steht in BEIDEN Fassungen: es ist Information, kein
+    # Bedienelement, und gerade der Schnappschuss auf Pages ist die Fassung,
+    # die Außenstehende zu sehen bekommen.
+    tmpl = tmpl.replace("{{SCHEMA_CSS}}", _SCHEMA_CSS)
+    tmpl = tmpl.replace("{{SCHEMA}}", _ablaufschema())
     tmpl = tmpl.replace("{{TOTOP}}", _TOTOP)
     return tmpl
 
@@ -4016,6 +4285,7 @@ _DASHBOARD_TEMPLATE = """<!DOCTYPE html>
 <title>Petitions-Monitor · Dashboard</title>
 <style>
 {{FARBEN}}
+{{SCHEMA_CSS}}
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
        font-size:14px;line-height:1.45}
@@ -4203,6 +4473,7 @@ _DASHBOARD_TEMPLATE = """<!DOCTYPE html>
   <div class="grid">
 {{CARDS}}
   </div>
+{{SCHEMA}}
 </main>
 {{I18N}}
 <script>
