@@ -77,8 +77,29 @@ jobs:
           distribution: temurin
           java-version: '17'
 
+      # ⚠️ `packages` MUSS gesetzt bleiben. Die Vorgabe der Action lautet
+      # `tools platform-tools`, und Google liefert das Paket `tools` seit dem
+      # 15.9.2026 nicht mehr aus (gemessen am selben Tag: repository2-3.xml
+      # führt 315 Pakete, `path="tools"` kommt null mal vor, `platform-tools`
+      # einmal). sdkmanager beendet sich dann mit 1; die Action ruft ihn je
+      # Paket einzeln auf und fängt nichts ab, also stirbt der ganze Schritt.
+      # Genau daran ist Lauf #59 am 17.9.2026 nach 11 s gescheitert — ohne dass
+      # sich hier eine Zeile geändert hätte (letzte Änderung 10.8.2026).
+      #
+      # `tools` fehlt uns nicht: es war das alte SDK-Tools-26.1.1-Bündel
+      # (`android`, `monitor`, `mksdcard`). Was wir brauchen, kommt aus den
+      # cmdline-tools, die diese Action ohnehin herunterlädt und in den PATH
+      # legt, und die build-tools zieht AGP beim Bauen selbst.
+      #
+      # Bewusst NICHT auf v4.0.4 gehoben, obwohl das dieselbe Sache behebt:
+      # v4.0.2 bis v4.0.4 sind alle am 17.9.2026 entstanden, ändern
+      # dist/index.js um +645/-188 Zeilen samt TypeScript-Sprung und allen
+      # npm-Abhängigkeiten und stellen die cmdline-tools-Vorgabe auf 22.0 um.
+      # Vier Zeilen hier lösen dasselbe, ohne den Pin anzufassen.
       - name: Android-SDK einrichten
-        uses: android-actions/setup-android@40fd30fb8d7440372e1316f5d1809ec01dcd3699  # v4
+        uses: android-actions/setup-android@40fd30fb8d7440372e1316f5d1809ec01dcd3699  # v4.0.1
+        with:
+          packages: 'platform-tools'
 
       # ⚠️ ABSICHTLICH v5 und NICHT v6 (Stand 10.8.2026, neueste ist v6.3.0).
       # Mit v6 hat Gradle die Caching-Komponente aus der Action herausgeloest,
