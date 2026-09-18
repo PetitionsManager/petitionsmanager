@@ -289,7 +289,30 @@ def now_iso() -> str:
 
 
 # Standard-Mindestabstand zwischen zwei Prüfungen derselben Petition (Stunden).
-DEFAULT_MIN_INTERVAL_HOURS = 24
+#
+# ⚠️⚠️ Am 17.9.2026 von 24 auf 72 erhöht — das ist eine ABWÄGUNG, kein Feinschliff.
+# Gerechnet: die Nachprüfung aller Sätze im 24-h-Takt kostete 23.309 Abrufe je
+# Tag, verfügbar waren bei 7,16 h gemessener Laufzeit und 1,5 s Abstand nur
+# 17.175 — also 136 % des Budgets allein fürs Nachprüfen. Für Neues blieb
+# rechnerisch NICHTS übrig, und der Rückstand von 13.513 Change.org-Kandidaten
+# wäre nie abgetragen worden (hochgerechnet 2,3 Jahre). Mit 72 h fällt die
+# Nachprüfung auf rund ein Drittel und gibt etwa 12.000 Abrufe je Tag frei.
+#
+# ⚠️ DER PREIS: Unterschriftenzahlen altern jetzt bis zu drei Tage statt einem.
+# Das trifft fast alle Sätze — nach Zustand zu unterscheiden bringt nichts,
+# gemessen sind nur 0,5 % offline (86 von 17.905). Wer die Zahl in der App mit
+# der Quelle vergleicht, sieht also eher eine Abweichung als vorher.
+# ⏰ Der Melder für veraltete Unterschriftenzahlen ist seit 24.8.2026 offen
+# (siehe pm_zeitrahmen_und_rundlauf) — bis es ihn gibt, fällt das Altern nicht
+# von allein auf.
+#
+# 💡 Nebenwirkung, die niemanden kostet: der lokale Dauerlauf (seit 150f6de alle
+# ~2,4 h) prüft europarls 1.881 Sätze nur noch in jedem dritten Lauf nach. Die
+# übrigen Läufe gehen fast vollständig in die Entdeckung — genau die Arbeit, die
+# bisher an der Frist scheiterte.
+#
+# Umkehrbar über --min-interval-hours N; 0 schaltet die Sperre ganz ab.
+DEFAULT_MIN_INTERVAL_HOURS = 72
 
 # So oft muss eine bekannte Petition in aufeinanderfolgenden Läufen fehlen,
 # bevor sie wirklich als offline gilt (siehe upsert). Schützt davor, dass eine
