@@ -31,7 +31,7 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-18T15:44:42-06:00",
+    "generated_at": "2026-09-18T16:11:54-06:00",
     "petition_count": 179,
     "available": 227,
     "unbrauchbare": {
@@ -82,20 +82,6 @@
     },
     "new_petitions_last_run": [],
     "lauf_verlauf": [
-      {
-        "zeit": "2026-09-06T12:52:30-06:00",
-        "gesamt": 179,
-        "online": 179,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 167,
-        "juengstes_start": "2026-08-01",
-        "mit_code_im_text": 0
-      },
       {
         "zeit": "2026-09-07T01:13:36-06:00",
         "gesamt": 179,
@@ -545,10 +531,26 @@
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
         "neu": 0
+      },
+      {
+        "zeit": "2026-09-18T16:11:54-06:00",
+        "gesamt": 179,
+        "online": 179,
+        "offline": 0,
+        "ohne_titel": 0,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 0,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 167,
+        "juengstes_start": "2026-08-01",
+        "mit_code_im_text": 0,
+        "herkunft": "lokal_cron",
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-18T15:44:42-06:00",
+      "zeit": "2026-09-18T16:11:54-06:00",
       "gesamt": 179,
       "online": 179,
       "offline": 0,
@@ -567,7 +569,7 @@
         "stufe": "warnung",
         "thema": "Host ausgelassen (robots.txt nicht lesbar)",
         "text": "action.wemove.eu: HTTP 202. Der Host wurde für diesen Lauf komplett ausgelassen; von dort stammen KEINE frischen Daten. Der Bestand bleibt unverändert stehen.",
-        "zeit": "2026-09-18T15:44:36-06:00",
+        "zeit": "2026-09-18T16:11:48-06:00",
         "thema_en": "Host skipped (robots.txt unreadable)",
         "text_en": "action.wemove.eu: HTTP 202. The host was skipped entirely for this run; no fresh data came from it. The existing records stay as they are."
       }
