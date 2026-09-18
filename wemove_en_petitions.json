@@ -31,7 +31,7 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-17T21:03:03-06:00",
+    "generated_at": "2026-09-17T21:31:22-06:00",
     "petition_count": 601,
     "available": 708,
     "unbrauchbare": {
@@ -139,7 +139,7 @@
     "new_petitions_last_run": [],
     "lauf_verlauf": [
       {
-        "zeit": "2026-09-17T21:03:03-06:00",
+        "zeit": "2026-09-17T21:31:22-06:00",
         "gesamt": 601,
         "online": 600,
         "offline": 1,
@@ -156,7 +156,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-17T21:03:03-06:00",
+      "zeit": "2026-09-17T21:31:22-06:00",
       "gesamt": 601,
       "online": 600,
       "offline": 1,
@@ -169,7 +169,7 @@
       "juengstes_start": "2026-09-01",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-09-17T21:03:03-06:00",
+    "verlauf_felder_ab": "2026-09-17T21:31:22-06:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 600
@@ -6269,6 +6269,10 @@
       {
         "checked_at": "2026-09-06T10:42:07-06:00",
         "count": 44339
+      },
+      {
+        "checked_at": "2026-09-17T21:27:47-06:00",
+        "count": 44340
       }
     ],
     "title": "I’m voting to protect nature",
@@ -6279,12 +6283,12 @@
     "start_date": "2024-04-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 44339,
+    "signatures": 44340,
     "goal": 50000,
     "lang": "en",
     "campaign_id": "wemove:2024-04-Elections-GOTVMM-campaign-petition",
     "status": "online",
-    "last_seen": "2026-09-06T10:42:07-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "Nature",
@@ -6298,7 +6302,7 @@
       "Turning",
       "Nederlands"
     ],
-    "last_checked": "2026-09-06T10:42:07-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-04-EU-elections-GOTV-climate-message-testing-energy-hr-EN": {
     "slug": "2024-04-EU-elections-GOTV-climate-message-testing-energy-hr-EN",
@@ -6321,7 +6325,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-climate-message-testing-energy-hr",
     "status": "online",
-    "last_seen": "2026-09-06T10:42:07-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "Polski",
@@ -6335,7 +6339,7 @@
       "Climate",
       "Action"
     ],
-    "last_checked": "2026-09-06T10:42:07-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-04-EU-elections-GOTV-climate-message-testing-food-security-hr-EN": {
     "slug": "2024-04-EU-elections-GOTV-climate-message-testing-food-security-hr-EN",
@@ -6358,7 +6362,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-climate-message-testing-food-security-hr",
     "status": "online",
-    "last_seen": "2026-09-06T10:42:07-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "Polski",
@@ -6372,7 +6376,7 @@
       "Climate",
       "Action"
     ],
-    "last_checked": "2026-09-06T10:42:07-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-04-EU-elections-GOTV-climate-message-testing-nature-hr-EN": {
     "slug": "2024-04-EU-elections-GOTV-climate-message-testing-nature-hr-EN",
@@ -6395,7 +6399,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-climate-message-testing-nature-hr",
     "status": "online",
-    "last_seen": "2026-09-06T10:42:07-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "Polski",
@@ -6409,7 +6413,7 @@
       "Climate",
       "Action"
     ],
-    "last_checked": "2026-09-06T10:42:07-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-04-EU-elections-GOTV-extremists-message-testing-eu-unity-hr-EN": {
     "slug": "2024-04-EU-elections-GOTV-extremists-message-testing-eu-unity-hr-EN",
@@ -6432,7 +6436,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-extremists-message-testing-eu-unity-hr",
     "status": "online",
-    "last_seen": "2026-09-06T10:42:07-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "Nederlands",
@@ -6445,7 +6449,7 @@
       "Extremist",
       "Believe"
     ],
-    "last_checked": "2026-09-06T10:42:07-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-04-EU-elections-GOTV-extremists-message-testing-far-right-democracy-hr-EN": {
     "slug": "2024-04-EU-elections-GOTV-extremists-message-testing-far-right-democracy-hr-EN",
@@ -6468,7 +6472,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-extremists-message-testing-far-right-democracy-hr",
     "status": "online",
-    "last_seen": "2026-09-06T10:42:07-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "Nederlands",
@@ -6482,7 +6486,7 @@
       "Continent",
       "Poli"
     ],
-    "last_checked": "2026-09-06T10:42:07-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-04-EU-elections-GOTV-extremists-message-testing-far-right-feminism-hr-EN": {
     "slug": "2024-04-EU-elections-GOTV-extremists-message-testing-far-right-feminism-hr-EN",
@@ -6505,7 +6509,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-extremists-message-testing-far-right-feminism-hr",
     "status": "online",
-    "last_seen": "2026-09-06T10:42:07-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "Nederlands",
@@ -6519,7 +6523,7 @@
       "Extremist",
       "Groups"
     ],
-    "last_checked": "2026-09-06T10:42:07-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-04-EU-elections-GOTV-get-stuff-done-climate-pride-message-testing-hr-EN": {
     "slug": "2024-04-EU-elections-GOTV-get-stuff-done-climate-pride-message-testing-hr-EN",
@@ -6542,7 +6546,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-get-stuff-done-climate-pride-message-testing-hr",
     "status": "online",
-    "last_seen": "2026-09-06T10:42:07-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "Europe",
@@ -6556,7 +6560,7 @@
       "Polski",
       "European"
     ],
-    "last_checked": "2026-09-06T10:42:07-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-04-EU-elections-GOTV-get-stuff-done-future-message-testing-hr-EN": {
     "slug": "2024-04-EU-elections-GOTV-get-stuff-done-future-message-testing-hr-EN",
@@ -6579,7 +6583,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-get-stuff-done-future-message-testing-hr",
     "status": "online",
-    "last_seen": "2026-09-06T10:42:07-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "Nederlands",
@@ -6593,7 +6597,7 @@
       "Deserve",
       "Reality"
     ],
-    "last_checked": "2026-09-06T10:42:07-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-04-recognise-Palestine-petition-EN": {
     "slug": "2024-04-recognise-Palestine-petition-EN",
@@ -6602,6 +6606,10 @@
       {
         "checked_at": "2026-09-06T10:42:07-06:00",
         "count": 109489
+      },
+      {
+        "checked_at": "2026-09-17T21:27:47-06:00",
+        "count": 109515
       }
     ],
     "title": "Recognise the Palestinian voice and future!",
@@ -6612,12 +6620,12 @@
     "start_date": "2024-04-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 109489,
+    "signatures": 109515,
     "goal": 150000,
     "lang": "en",
     "campaign_id": "wemove:2024-04-recognise-Palestine-petition",
     "status": "online",
-    "last_seen": "2026-09-06T10:42:07-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -6631,7 +6639,7 @@
       "Future",
       "People"
     ],
-    "last_checked": "2026-09-06T10:42:07-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-04-trial-recognise-Palestine-trial-INT-EN": {
     "slug": "2024-04-trial-recognise-Palestine-trial-INT-EN",
@@ -6654,7 +6662,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-04-trial-recognise-Palestine-trial-INT",
     "status": "online",
-    "last_seen": "2026-09-06T10:42:07-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -6668,7 +6676,7 @@
       "Palestine",
       "Respect"
     ],
-    "last_checked": "2026-09-06T10:42:07-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-05-antoine-training-campaign-petition-EN": {
     "slug": "2024-05-antoine-training-campaign-petition-EN",
@@ -6692,7 +6700,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-05-antoine-training-campaign-petition",
     "status": "online",
-    "last_seen": "2026-09-06T10:42:07-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "Raiffeisen",
@@ -6706,7 +6714,7 @@
       "Business",
       "Already"
     ],
-    "last_checked": "2026-09-06T10:42:07-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-05-GOTV-Share-Your-Story-video-EN": {
     "slug": "2024-05-GOTV-Share-Your-Story-video-EN",
@@ -6729,7 +6737,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-05-GOTV-Share-Your-Story-video",
     "status": "online",
-    "last_seen": "2026-09-06T10:42:07-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "Maybe",
@@ -6743,7 +6751,7 @@
       "Celebrate",
       "Electoral"
     ],
-    "last_checked": "2026-09-06T10:42:07-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-05-GOTV-Use-You-Power-petition-EN": {
     "slug": "2024-05-GOTV-Use-You-Power-petition-EN",
@@ -6766,7 +6774,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-05-GOTV-Use-You-Power-petition",
     "status": "online",
-    "last_seen": "2026-09-06T10:42:07-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "Power",
@@ -6780,7 +6788,7 @@
       "June",
       "Like"
     ],
-    "last_checked": "2026-09-06T10:42:07-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-05-GOTV-Use-You-Power-petition-video-EN": {
     "slug": "2024-05-GOTV-Use-You-Power-petition-video-EN",
@@ -6803,7 +6811,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-05-GOTV-Use-You-Power-petition-video",
     "status": "online",
-    "last_seen": "2026-09-06T10:42:07-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "Voter",
@@ -6817,7 +6825,7 @@
       "Avoid",
       "Every"
     ],
-    "last_checked": "2026-09-06T10:42:07-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-05-national-laws-ecocide-youmove-petition-EN": {
     "slug": "2024-05-national-laws-ecocide-youmove-petition-EN",
@@ -6826,22 +6834,26 @@
       {
         "checked_at": "2026-09-06T10:42:07-06:00",
         "count": 88846
+      },
+      {
+        "checked_at": "2026-09-17T21:27:47-06:00",
+        "count": 88879
       }
     ],
     "title": "Make ecocide a crime!",
     "image_url": "https://wemove.cdn.actionkit.com/images/campimage_ecocidev3.jpg",
     "url": "https://action.wemove.eu/sign/2024-05-national-laws-ecocide-youmove-petition-EN",
-    "description_full": "<p>\n\n<!-- Remove this if you don't want popins like \"This page also in English\" -->\n\n\n<img alt=\"Language selector\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/icon_translate_eeaca63123.svg\"/>\n\n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n              \n              English\n\n              \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n        \n\n</p><ul>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-6-gor-ekocid-till-ett-brott-SV\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Svenska\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-6-fazer-do-ecocidio-um-crime-PT\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Português\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-6-ucinimo-ekoloski-zlocin-kaznenim-djelom-HR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Hrvatski\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-6-e-momentul-sa-incriminam-ecocidul-RO\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Română\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-6-gor-okomord-kriminelt-DA\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Dansk\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-6-tehdaan-luonnontuhonnasta-rikos-FI\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Suomalainen\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-7-kathistoume-ten-oikoktonia-egklema-EL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Ελληνικά\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-7-paverskite-ekocida-nusikaltimu-LT-OBSOLETE20240814\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Lietuvių\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-7-padariet-ekocidu-par-noziegumu-LV\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Latvian\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-8-at-je-ekocida-trestnym-cinem-CS\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Ceština\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-9-muutke-okotsiid-kuriteoks-ET\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Eesti keel\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-9-ekocid-naj-bo-kaznivo-dejanje-SL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Slovenščina\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-9-az-okocidiumot-tekintsek-buncselekmenynek-HU\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Magyar\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-7-reconnaitre-le-crime-decocide-FR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Français\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-05-national-laws-ecocide-youmove-petition-germany-DE\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Deutsch\n\n                    \n                      \n                        (Deutschland)\n                      \n</a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-05-national-laws-ecocide-youmove-petition-austria-DE\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Deutsch\n\n                    \n                      \n                        (Österreich)\n                      \n</a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-05-national-laws-ecocide-youmove-petition-ES\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Español\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-05-national-laws-ecocide-youmove-petition-IT\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Italiano\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-05-national-laws-ecocide-youmove-petition-NL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Nederlands\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-05-national-laws-ecocide-youmove-petition-PL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Polski\n\n                    \n                    </a>\n</li>\n</ul><p>\n\n\n          Make ecocide a crime!\n        \n\n\n\n\n      Please accept marketing cookies to watch this video\n    \n\n\n\n\n</p><h3>\n\n<p>To national EU governments</p>\n</h3>\n<p>\n            This petition is run by [% inititator_name %]\n          </p>\n\n<h2>\n            Petition\n          </h2>\n\n<p>We call on EU countries to introduce a standalone crime of ecocide into national penal codes and support efforts to establish ecocide as a crime at the International Criminal Court. [1]</p>\n\n\n<h2>\n            \n              Why is this important?\n            \n          </h2>\n<p><strong>We've </strong><strong>secured</strong><strong> a huge win to protect nature. </strong>The EU has introduced rules to hold <strong>those who destroy our environment on a mass scale accountable</strong>, with penalties including fines and jail time! [2]</p>\n<p>Now, countries must put these rules into national law within two years. But they can also make them stronger. </p>\n<p>These<strong> new rules </strong>are a good start but they limit the crime of ecocide to 20 specific activities. [3] This <strong>will allow those who destroy the planet to escape punishment</strong> if they just call their crimes something else. This EU law also won’t address future destructive activities based on technologies that do not exist yet.</p>\n<p><strong>Here’s a solution:</strong> <strong>we need our governments to pass national laws with a broad definition of ecocide</strong> instead of a fixed list of crimes. A broad definition will allow our courts to prosecute all kinds of mass-scale environmental destruction and finally hold those responsible to account.<strong> It could prevent many environmental disasters in the future!</strong></p>\n<p>If thousands of us join this call, our leaders will be much more likely to go beyond the minimum EU rules and pass more ambitious domestic laws that will truly protect our planet. <strong>Will you add your voice to make sure no environmental crimes go unpunished?</strong></p>\n<h4>\n            References:\n          </h4>\n\n\n<p>[1] Independent Expert Panel consensus legal definition of ecocide: https://www.stopecocide.earth/legal-definition </p>\n<p>[2] Although the revised text of the Environmental Crimes Directive does not itself include the word “ecocide”, its preamble says it intends to criminalise “cases comparable to ecocide”. These are actions that cause widespread, substantial and irreversible or long-lasting damage to large or important ecosystems, habitats or the quality of air, soil or water. </p>\n<p>https://data.consilium.europa.eu/doc/document/PE-82-2023-INIT/en/pdf </p>\n<p>[3] The full list of offences is included in Article 3 “Offences” here: https://data.consilium.europa.eu/doc/document/ST-16069-2023-INIT/en/pdf</p>\n\n\n\n<h3>In partnership with:</h3>\n\n<p><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/Logo_Ecosia_2022.svg.png\"/><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/Gallifrey_logo.png\"/></p>",
+    "description_full": "<p>\n\n<!-- Remove this if you don't want popins like \"This page also in English\" -->\n\n\n<img alt=\"Language selector\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/icon_translate_eeaca63123.svg\"/>\n\n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n              \n              English\n\n              \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n        \n\n</p><ul>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-6-gor-ekocid-till-ett-brott-SV\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Svenska\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-6-fazer-do-ecocidio-um-crime-PT\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Português\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-6-ucinimo-ekoloski-zlocin-kaznenim-djelom-HR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Hrvatski\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-6-e-momentul-sa-incriminam-ecocidul-RO\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Română\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-6-gor-okomord-kriminelt-DA\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Dansk\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-6-tehdaan-luonnontuhonnasta-rikos-FI\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Suomalainen\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-7-kathistoume-ten-oikoktonia-egklema-EL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Ελληνικά\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-7-paverskite-ekocida-nusikaltimu-LT-OBSOLETE20240814\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Lietuvių\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-7-padariet-ekocidu-par-noziegumu-LV\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Latvian\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-8-at-je-ekocida-trestnym-cinem-CS\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Ceština\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-9-muutke-okotsiid-kuriteoks-ET\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Eesti keel\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-9-ekocid-naj-bo-kaznivo-dejanje-SL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Slovenščina\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-9-az-okocidiumot-tekintsek-buncselekmenynek-HU\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Magyar\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-7-reconnaitre-le-crime-decocide-FR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Français\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-05-national-laws-ecocide-youmove-petition-germany-DE\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Deutsch\n\n                    \n                      \n                        (Deutschland)\n                      \n</a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-05-national-laws-ecocide-youmove-petition-austria-DE\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Deutsch\n\n                    \n                      \n                        (Österreich)\n                      \n</a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-05-national-laws-ecocide-youmove-petition-ES\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Español\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-05-national-laws-ecocide-youmove-petition-IT\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Italiano\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-05-national-laws-ecocide-youmove-petition-NL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Nederlands\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-05-national-laws-ecocide-youmove-petition-PL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Polski\n\n                    \n                    </a>\n</li>\n</ul><p>\n\n\n          Make ecocide a crime!\n        \n\n\n\n\n        Please accept marketing cookies to watch this video\n      \n\n\n\n\n</p><h3>\n\n<p>To national EU governments</p>\n</h3>\n<p>\n            This petition is run by [% inititator_name %]\n          </p>\n\n<h2>\n            Petition\n          </h2>\n\n<p>We call on EU countries to introduce a standalone crime of ecocide into national penal codes and support efforts to establish ecocide as a crime at the International Criminal Court. [1]</p>\n\n\n<h2>\n            \n              Why is this important?\n            \n          </h2>\n<p><strong>We've </strong><strong>secured</strong><strong> a huge win to protect nature. </strong>The EU has introduced rules to hold <strong>those who destroy our environment on a mass scale accountable</strong>, with penalties including fines and jail time! [2]</p>\n<p>Now, countries must put these rules into national law within two years. But they can also make them stronger. </p>\n<p>These<strong> new rules </strong>are a good start but they limit the crime of ecocide to 20 specific activities. [3] This <strong>will allow those who destroy the planet to escape punishment</strong> if they just call their crimes something else. This EU law also won’t address future destructive activities based on technologies that do not exist yet.</p>\n<p><strong>Here’s a solution:</strong> <strong>we need our governments to pass national laws with a broad definition of ecocide</strong> instead of a fixed list of crimes. A broad definition will allow our courts to prosecute all kinds of mass-scale environmental destruction and finally hold those responsible to account.<strong> It could prevent many environmental disasters in the future!</strong></p>\n<p>If thousands of us join this call, our leaders will be much more likely to go beyond the minimum EU rules and pass more ambitious domestic laws that will truly protect our planet. <strong>Will you add your voice to make sure no environmental crimes go unpunished?</strong></p>\n<h4>\n            References:\n          </h4>\n\n\n<p>[1] Independent Expert Panel consensus legal definition of ecocide: https://www.stopecocide.earth/legal-definition </p>\n<p>[2] Although the revised text of the Environmental Crimes Directive does not itself include the word “ecocide”, its preamble says it intends to criminalise “cases comparable to ecocide”. These are actions that cause widespread, substantial and irreversible or long-lasting damage to large or important ecosystems, habitats or the quality of air, soil or water. </p>\n<p>https://data.consilium.europa.eu/doc/document/PE-82-2023-INIT/en/pdf </p>\n<p>[3] The full list of offences is included in Article 3 “Offences” here: https://data.consilium.europa.eu/doc/document/ST-16069-2023-INIT/en/pdf</p>\n\n\n\n<h3>In partnership with:</h3>\n\n<p><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/Logo_Ecosia_2022.svg.png\"/><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/Gallifrey_logo.png\"/><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/DMS.png\"/></p>",
     "summary": "English Svenska Português Hrvatski Română Dansk Suomalainen Ελληνικά Lietuvių Latvian Ceština Eesti keel Slovenščina Magyar Français Deutsch (Deutschland) Deutsch (Österreich) Español Italiano Nederla…",
     "start_date": "2024-05-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 88846,
+    "signatures": 88879,
     "goal": 100000,
     "lang": "en",
     "campaign_id": "wemove:2024-05-national-laws-ecocide-youmove-petition",
     "status": "online",
-    "last_seen": "2026-09-06T10:42:07-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "Deutsch",
@@ -6855,7 +6867,7 @@
       "Italiano",
       "National"
     ],
-    "last_checked": "2026-09-06T10:42:07-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-05-trial-national-laws-ecocide-petition-EN": {
     "slug": "2024-05-trial-national-laws-ecocide-petition-EN",
@@ -6879,7 +6891,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-05-trial-national-laws-ecocide-petition",
     "status": "online",
-    "last_seen": "2026-09-06T10:42:07-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "Ecocide",
@@ -6893,7 +6905,7 @@
       "Directive",
       "Introduce"
     ],
-    "last_checked": "2026-09-06T10:42:07-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-05-trial-renew-no-hate-petition-EN": {
     "slug": "2024-05-trial-renew-no-hate-petition-EN",
@@ -6916,7 +6928,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-05-trial-renew-no-hate-petition",
     "status": "online",
-    "last_seen": "2026-09-06T10:42:07-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "Renew",
@@ -6930,7 +6942,7 @@
       "Vote",
       "Netherlands"
     ],
-    "last_checked": "2026-09-06T10:42:07-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-06-03-Triple-Your-Vote-petition-EN": {
     "slug": "2024-06-03-Triple-Your-Vote-petition-EN",
@@ -6954,7 +6966,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-06-03-Triple-Your-Vote-petition",
     "status": "online",
-    "last_seen": "2026-09-06T10:42:07-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "Power",
@@ -6968,7 +6980,7 @@
       "Relatives",
       "Français"
     ],
-    "last_checked": "2026-09-06T10:42:07-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-06-majid-training-campaign-petition-EN": {
     "slug": "2024-06-majid-training-campaign-petition-EN",
@@ -6992,7 +7004,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-06-majid-training-campaign-petition",
     "status": "online",
-    "last_seen": "2026-09-06T10:42:07-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "Russia",
@@ -7006,7 +7018,7 @@
       "Board",
       "Close"
     ],
-    "last_checked": "2026-09-06T10:42:07-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-06-Renew-dont-normalise-hate-petition-EN": {
     "slug": "2024-06-Renew-dont-normalise-hate-petition-EN",
@@ -7030,7 +7042,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-06-Renew-dont-normalise-hate-petition",
     "status": "online",
-    "last_seen": "2026-09-06T10:42:07-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "Renew",
@@ -7044,7 +7056,7 @@
       "Climate",
       "Power"
     ],
-    "last_checked": "2026-09-06T10:42:07-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-06-trial-ban-PVC-trial-petition-EN": {
     "slug": "2024-06-trial-ban-PVC-trial-petition-EN",
@@ -7067,7 +7079,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-06-trial-ban-PVC-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-06T12:54:03-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "Health",
@@ -7081,7 +7093,7 @@
       "Additives",
       "Human"
     ],
-    "last_checked": "2026-09-06T12:54:03-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-06-trial-big-meat-trial-INT-EN": {
     "slug": "2024-06-trial-big-meat-trial-INT-EN",
@@ -7105,7 +7117,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-06-trial-big-meat-trial-INT",
     "status": "online",
-    "last_seen": "2026-09-06T12:54:03-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -7119,7 +7131,7 @@
       "Dairy",
       "Diets"
     ],
-    "last_checked": "2026-09-06T12:54:03-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-06-trial-dont-collaborate-with-hate-climate-petition-EN": {
     "slug": "2024-06-trial-dont-collaborate-with-hate-climate-petition-EN",
@@ -7142,7 +7154,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-06-trial-dont-collaborate-with-hate-climate-petition",
     "status": "online",
-    "last_seen": "2026-09-06T12:54:03-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "Extremists",
@@ -7156,7 +7168,7 @@
       "Party",
       "Renew"
     ],
-    "last_checked": "2026-09-06T12:54:03-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-06-trial-dont-collaborate-with-hate-INT-EN": {
     "slug": "2024-06-trial-dont-collaborate-with-hate-INT-EN",
@@ -7179,7 +7191,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-06-trial-dont-collaborate-with-hate-INT",
     "status": "online",
-    "last_seen": "2026-09-06T12:54:03-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "MEPs",
@@ -7193,7 +7205,7 @@
       "Far-right",
       "Policies"
     ],
-    "last_checked": "2026-09-06T12:54:03-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-06-trial-fao-sustainable-fish-farms-petition-EN": {
     "slug": "2024-06-trial-fao-sustainable-fish-farms-petition-EN",
@@ -7216,7 +7228,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-06-trial-fao-sustainable-fish-farms-petition",
     "status": "online",
-    "last_seen": "2026-09-06T12:54:03-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "Fish",
@@ -7230,7 +7242,7 @@
       "Policy",
       "Food"
     ],
-    "last_checked": "2026-09-06T12:54:03-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-06-trial-fao-sustainable-fish-farms-second-trial-petition-EN": {
     "slug": "2024-06-trial-fao-sustainable-fish-farms-second-trial-petition-EN",
@@ -7254,7 +7266,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-06-trial-fao-sustainable-fish-farms-second-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-06T12:54:03-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "Fish",
@@ -7268,7 +7280,7 @@
       "Policy",
       "Food"
     ],
-    "last_checked": "2026-09-06T12:54:03-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-06-trial-fao-sustainable-fish-farms-third-trial-petition-EN": {
     "slug": "2024-06-trial-fao-sustainable-fish-farms-third-trial-petition-EN",
@@ -7281,7 +7293,7 @@
     ],
     "title": "Protect Our Oceans from Unsustainable Fish Farms",
     "url": "https://action.wemove.eu/sign/2024-06-trial-fao-sustainable-fish-farms-third-trial-petition-EN",
-    "description_full": "<p>\n\n\n          Protect Our Oceans from Unsustainable Fish Farms\n        \n\n\n\n\n      Please accept marketing cookies to watch this video\n    \n\n\n\n\n</p><h3>\n<p>To the United Nations Food &amp; Agriculture Organization (FAO) - Aquaculture Division</p>\n</h3>\n<p>\n            This petition is run by [% inititator_name %]\n          </p>\n\n<h2>\n            Petition\n          </h2>\n<p>Ask the UN FAO to EXCLUDE Carnivorous Fish Farming from Sustainable Aquaculture Policy</p>\n\n\n<h2>\n            \n              Why is this important?\n            \n          </h2>\n<p>The Food and Agriculture Organization (FAO) is an agency of the United Nations whose goal is <strong>achieving food security for all</strong>. For some time, the FAO has been calling for an aggressive increase in farmed fish (“aquaculture”) and promoting a so called “blue agenda.” Its goal is to increase what it calls “sustainable aquaculture” by 75% by 2040. However, “sustainable aquaculture” is an ambiguous term, and the <strong>FAO’s own research acknowledges that the production of aquatic foods is not without serious problems, including overfishing, habitat degradation and unequal access to resources and markets.</strong></p>\n<p>Some aquaculture can be sustainable, such as the farming of kelp and other aquatic plants, as well as the cultivation of a wide range of bivalve creatures like mussels, clams and oysters in small-scale operations. However, <strong>it is not the case of farming  carnivorous  fish like  salmon, sea bass, and sea bream</strong>. These species require <strong>being fed fish meal and oil from massive quantities of wild fish</strong> (more than the farms produce!) and are the most commonly farmed fish in the EU. </p>\n<p>In 2021,<strong> Argentina became the first country to ban intensive salmon farming in its waters</strong>. The practice is also <strong>banned on the West Coast of the US and in British Columbia</strong>, Canada as of 2029. Knowing that these countries, renowned for their fishing worldwide, have banned such a practice, it is inevitable to think that the rest of us should - and could - be following their example.</p>\n<p>On the occasion of World Oceans Day in June 2024,<a href=\"http://www.fishfarmsout.org/\" rel=\"noopener\" target=\"_blank\"> we collected more than 160 organizations from around the world</a> asking the FAO and world leaders to heed the evidence and EXCLUDE carnivorous fish farming from their definition of what constitutes sustainable aquaculture. Unfortunately, after a week of debates at the July meeting of FAO’s Committee on Fisheries, that body adopted<a href=\"http://www.fao.org/in-action/gsa\" rel=\"noopener\" target=\"_blank\"> Guidelines for Sustainable Aquaculture</a> that still include carnivorous fish.</p>\n<p><strong>And so we are continuing our letter-signing campaign and asking for your support in signing on.</strong></p>\n<p><strong>Why? What’s the Deal with Carnivorous Fish Farming?</strong></p>\n<p>There is more and more evidence coming to light on the unsustainability and environmentally damaging aspects of open net pen carnivorous fish farming and studies have linked it to the following problems:</p>\n<ul>\n<li>Despite FAO’s mantra that aquaculture is “feeding the world,” in fact<a href=\"https://feedbackglobal.org/wp-content/uploads/2024/01/Feedback-BlueEmpire-Jan24.pdf\" rel=\"noopener\" target=\"_blank\"> high volumes of wild-caught fish are extracted from food-insecure countries</a> to feed farmed fish. It takes between <strong>1.2 to 6 kgs of forage fish, edible for human consumption, to produce 1 kg of farmed fish destined for wealthy consumer markets</strong>. </li>\n<li><a href=\"https://www.mdpi.com/1424-2818/13/8/396\" rel=\"noopener\" target=\"_blank\">Increases in harmful algal blooms</a> and<a href=\"https://www.sciencedirect.com/science/article/abs/pii/S0025326X08003160\" rel=\"noopener\" target=\"_blank\"> negative impact on critical Posidonia meadows</a>, one of the planet’s largest carbon sinks</li>\n<li><a href=\"https://www.uvic.ca/socialsciences/info-for/faculty-staff/announcements/865-million-farmed-salmon-die-off-worldwide-2012-2022.php\" rel=\"noopener\" target=\"_blank\">Mass fish die-offs</a></li>\n<li><a href=\"https://theferret.scot/formaldehyde-used-200-times-fish-farm-industry/\" rel=\"noopener\" target=\"_blank\">Uncontrolled use of the carcinogen formaldehyde</a></li>\n<li><a href=\"https://www.ozon-ngo.gr/news_det.php?id=144\" rel=\"noopener\" target=\"_blank\">Large amounts of microplastics and debris</a> left behind in the waters under fish farms</li>\n<li><a href=\"https://www.nature.com/articles/s41598-020-78849-3\" rel=\"noopener\" target=\"_blank\">Prophylactic and overuse of antibiotics</a></li>\n</ul>\n<p>The negative impacts from industrial carnivorous fish farming will only increase as ocean temperatures continue to rise. We need concrete, enforceable international standards for the remediation of damaged environments and the expansion of genuinely sustainable aquaculture options.</p>\n<p><strong>We ask that the FAO stop supporting and promoting marine based open net carnivorous fish and that it revises its guidelines on sustainable aquaculture to EXCLUDE carnivorous fish farming.</strong></p>\n<p>Learn more at <a href=\"https://www.fishfarmsout.org/\" rel=\"noopener\" target=\"_blank\"><strong>fishfarmsout.org</strong></a></p>",
+    "description_full": "<p>\n\n\n          Protect Our Oceans from Unsustainable Fish Farms\n        \n\n\n\n\n        Please accept marketing cookies to watch this video\n      \n\n\n\n\n</p><h3>\n<p>To the United Nations Food &amp; Agriculture Organization (FAO) - Aquaculture Division</p>\n</h3>\n<p>\n            This petition is run by [% inititator_name %]\n          </p>\n\n<h2>\n            Petition\n          </h2>\n<p>Ask the UN FAO to EXCLUDE Carnivorous Fish Farming from Sustainable Aquaculture Policy</p>\n\n\n<h2>\n            \n              Why is this important?\n            \n          </h2>\n<p>The Food and Agriculture Organization (FAO) is an agency of the United Nations whose goal is <strong>achieving food security for all</strong>. For some time, the FAO has been calling for an aggressive increase in farmed fish (“aquaculture”) and promoting a so called “blue agenda.” Its goal is to increase what it calls “sustainable aquaculture” by 75% by 2040. However, “sustainable aquaculture” is an ambiguous term, and the <strong>FAO’s own research acknowledges that the production of aquatic foods is not without serious problems, including overfishing, habitat degradation and unequal access to resources and markets.</strong></p>\n<p>Some aquaculture can be sustainable, such as the farming of kelp and other aquatic plants, as well as the cultivation of a wide range of bivalve creatures like mussels, clams and oysters in small-scale operations. However, <strong>it is not the case of farming  carnivorous  fish like  salmon, sea bass, and sea bream</strong>. These species require <strong>being fed fish meal and oil from massive quantities of wild fish</strong> (more than the farms produce!) and are the most commonly farmed fish in the EU. </p>\n<p>In 2021,<strong> Argentina became the first country to ban intensive salmon farming in its waters</strong>. The practice is also <strong>banned on the West Coast of the US and in British Columbia</strong>, Canada as of 2029. Knowing that these countries, renowned for their fishing worldwide, have banned such a practice, it is inevitable to think that the rest of us should - and could - be following their example.</p>\n<p>On the occasion of World Oceans Day in June 2024,<a href=\"http://www.fishfarmsout.org/\" rel=\"noopener\" target=\"_blank\"> we collected more than 160 organizations from around the world</a> asking the FAO and world leaders to heed the evidence and EXCLUDE carnivorous fish farming from their definition of what constitutes sustainable aquaculture. Unfortunately, after a week of debates at the July meeting of FAO’s Committee on Fisheries, that body adopted<a href=\"http://www.fao.org/in-action/gsa\" rel=\"noopener\" target=\"_blank\"> Guidelines for Sustainable Aquaculture</a> that still include carnivorous fish.</p>\n<p><strong>And so we are continuing our letter-signing campaign and asking for your support in signing on.</strong></p>\n<p><strong>Why? What’s the Deal with Carnivorous Fish Farming?</strong></p>\n<p>There is more and more evidence coming to light on the unsustainability and environmentally damaging aspects of open net pen carnivorous fish farming and studies have linked it to the following problems:</p>\n<ul>\n<li>Despite FAO’s mantra that aquaculture is “feeding the world,” in fact<a href=\"https://feedbackglobal.org/wp-content/uploads/2024/01/Feedback-BlueEmpire-Jan24.pdf\" rel=\"noopener\" target=\"_blank\"> high volumes of wild-caught fish are extracted from food-insecure countries</a> to feed farmed fish. It takes between <strong>1.2 to 6 kgs of forage fish, edible for human consumption, to produce 1 kg of farmed fish destined for wealthy consumer markets</strong>. </li>\n<li><a href=\"https://www.mdpi.com/1424-2818/13/8/396\" rel=\"noopener\" target=\"_blank\">Increases in harmful algal blooms</a> and<a href=\"https://www.sciencedirect.com/science/article/abs/pii/S0025326X08003160\" rel=\"noopener\" target=\"_blank\"> negative impact on critical Posidonia meadows</a>, one of the planet’s largest carbon sinks</li>\n<li><a href=\"https://www.uvic.ca/socialsciences/info-for/faculty-staff/announcements/865-million-farmed-salmon-die-off-worldwide-2012-2022.php\" rel=\"noopener\" target=\"_blank\">Mass fish die-offs</a></li>\n<li><a href=\"https://theferret.scot/formaldehyde-used-200-times-fish-farm-industry/\" rel=\"noopener\" target=\"_blank\">Uncontrolled use of the carcinogen formaldehyde</a></li>\n<li><a href=\"https://www.ozon-ngo.gr/news_det.php?id=144\" rel=\"noopener\" target=\"_blank\">Large amounts of microplastics and debris</a> left behind in the waters under fish farms</li>\n<li><a href=\"https://www.nature.com/articles/s41598-020-78849-3\" rel=\"noopener\" target=\"_blank\">Prophylactic and overuse of antibiotics</a></li>\n</ul>\n<p>The negative impacts from industrial carnivorous fish farming will only increase as ocean temperatures continue to rise. We need concrete, enforceable international standards for the remediation of damaged environments and the expansion of genuinely sustainable aquaculture options.</p>\n<p><strong>We ask that the FAO stop supporting and promoting marine based open net carnivorous fish and that it revises its guidelines on sustainable aquaculture to EXCLUDE carnivorous fish farming.</strong></p>\n<p>Learn more at <a href=\"https://www.fishfarmsout.org/\" rel=\"noopener\" target=\"_blank\"><strong>fishfarmsout.org</strong></a></p>",
     "summary": "Protect Our Oceans from Unsustainable Fish Farms Please accept marketing cookies to watch this video To the United Nations Food & Agriculture Organization (FAO) - Aquaculture Division This petition is…",
     "start_date": "2024-06-01",
     "started_by": "WeMove Europe",
@@ -7291,7 +7303,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-06-trial-fao-sustainable-fish-farms-third-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-06T12:54:03-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "Fish",
@@ -7305,7 +7317,7 @@
       "World",
       "Food"
     ],
-    "last_checked": "2026-09-06T12:54:03-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-06-trial-houses-for-people-not-business-petition-EN": {
     "slug": "2024-06-trial-houses-for-people-not-business-petition-EN",
@@ -7328,7 +7340,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-06-trial-houses-for-people-not-business-petition",
     "status": "online",
-    "last_seen": "2026-09-06T12:54:03-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -7342,7 +7354,7 @@
       "Commissioner",
       "Businesses"
     ],
-    "last_checked": "2026-09-06T12:54:03-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-06-trial-israel-eu-agreement-trial-petition-EN": {
     "slug": "2024-06-trial-israel-eu-agreement-trial-petition-EN",
@@ -7365,7 +7377,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-06-trial-israel-eu-agreement-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-06T12:54:03-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "Agreement",
@@ -7379,7 +7391,7 @@
       "Trade",
       "Gaza"
     ],
-    "last_checked": "2026-09-06T12:54:03-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-06-trial-my-voice-my-choice-trial-petition-EN": {
     "slug": "2024-06-trial-my-voice-my-choice-trial-petition-EN",
@@ -7402,7 +7414,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-06-trial-my-voice-my-choice-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-06T12:54:03-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "Abortion",
@@ -7416,7 +7428,7 @@
       "Country",
       "Demand"
     ],
-    "last_checked": "2026-09-06T12:54:03-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-07-big-meat-petition-EN": {
     "slug": "2024-07-big-meat-petition-EN",
@@ -7425,6 +7437,10 @@
       {
         "checked_at": "2026-09-06T12:54:03-06:00",
         "count": 112513
+      },
+      {
+        "checked_at": "2026-09-17T21:27:47-06:00",
+        "count": 112516
       }
     ],
     "title": "Defend our health, fight Big Meat",
@@ -7435,12 +7451,12 @@
     "start_date": "2024-07-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 112513,
+    "signatures": 112516,
     "goal": 150000,
     "lang": "en",
     "campaign_id": "wemove:2024-07-big-meat-petition",
     "status": "online",
-    "last_seen": "2026-09-06T12:54:03-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "Meat",
@@ -7454,7 +7470,7 @@
       "Methane",
       "People"
     ],
-    "last_checked": "2026-09-06T12:54:03-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-07-kreni-promeni-invitation-handraiser-EN": {
     "slug": "2024-07-kreni-promeni-invitation-handraiser-EN",
@@ -7477,7 +7493,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-07-kreni-promeni-invitation-handraiser",
     "status": "online",
-    "last_seen": "2026-09-06T12:54:03-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "Hvala",
@@ -7491,7 +7507,7 @@
       "Primate",
       "Europe"
     ],
-    "last_checked": "2026-09-06T12:54:03-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-07-lidl-chicken-scandal-petition-EN": {
     "slug": "2024-07-lidl-chicken-scandal-petition-EN",
@@ -7500,6 +7516,10 @@
       {
         "checked_at": "2026-09-06T12:54:03-06:00",
         "count": 76708
+      },
+      {
+        "checked_at": "2026-09-17T21:27:47-06:00",
+        "count": 76710
       }
     ],
     "title": "Lidl: Free chickens from torture!",
@@ -7510,12 +7530,12 @@
     "start_date": "2024-07-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 76708,
+    "signatures": 76710,
     "goal": 100000,
     "lang": "en",
     "campaign_id": "wemove:2024-07-lidl-chicken-scandal-petition",
     "status": "online",
-    "last_seen": "2026-09-06T12:54:03-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "Lidl",
@@ -7529,7 +7549,7 @@
       "Unnecessary",
       "Commitment"
     ],
-    "last_checked": "2026-09-06T12:54:03-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-07-pesticide-free-petition-EN": {
     "slug": "2024-07-pesticide-free-petition-EN",
@@ -7538,6 +7558,10 @@
       {
         "checked_at": "2026-09-06T12:54:03-06:00",
         "count": 115056
+      },
+      {
+        "checked_at": "2026-09-17T21:27:47-06:00",
+        "count": 115057
       }
     ],
     "title": "Ban toxic pesticides!",
@@ -7547,12 +7571,12 @@
     "start_date": "2024-07-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 115056,
+    "signatures": 115057,
     "goal": 150000,
     "lang": "en",
     "campaign_id": "wemove:2024-07-pesticide-free-petition",
     "status": "online",
-    "last_seen": "2026-09-06T12:54:03-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "Pesticides",
@@ -7566,7 +7590,7 @@
       "Français",
       "Italiano"
     ],
-    "last_checked": "2026-09-06T12:54:03-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-07-trial-ban-PVC-trial-petition-EN": {
     "slug": "2024-07-trial-ban-PVC-trial-petition-EN",
@@ -7590,7 +7614,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-07-trial-ban-PVC-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-06T12:54:03-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "Health",
@@ -7604,7 +7628,7 @@
       "Additives",
       "Human"
     ],
-    "last_checked": "2026-09-06T12:54:03-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-07-trial-because-our-planet-is-blue-petition-EN": {
     "slug": "2024-07-trial-because-our-planet-is-blue-petition-EN",
@@ -7628,7 +7652,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-07-trial-because-our-planet-is-blue-petition",
     "status": "online",
-    "last_seen": "2026-09-06T12:54:03-06:00",
+    "last_seen": "2026-09-17T21:27:47-06:00",
     "offline_since": null,
     "tags": [
       "Ocean",
@@ -7642,7 +7666,7 @@
       "Because",
       "Life"
     ],
-    "last_checked": "2026-09-06T12:54:03-06:00"
+    "last_checked": "2026-09-17T21:27:47-06:00"
   },
   "2024-07-trial-housing-trial-petition-EN": {
     "slug": "2024-07-trial-housing-trial-petition-EN",
