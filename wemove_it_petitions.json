@@ -31,7 +31,7 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-18T15:14:22-06:00",
+    "generated_at": "2026-09-18T15:44:13-06:00",
     "petition_count": 209,
     "available": 258,
     "unbrauchbare": {
@@ -84,7 +84,7 @@
     "new_petitions_last_run": [],
     "lauf_verlauf": [
       {
-        "zeit": "2026-09-18T15:14:22-06:00",
+        "zeit": "2026-09-18T15:44:13-06:00",
         "gesamt": 209,
         "online": 204,
         "offline": 5,
@@ -101,7 +101,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-18T15:14:22-06:00",
+      "zeit": "2026-09-18T15:44:13-06:00",
       "gesamt": 209,
       "online": 204,
       "offline": 5,
@@ -114,7 +114,7 @@
       "juengstes_start": "2026-08-01",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-09-18T15:14:22-06:00",
+    "verlauf_felder_ab": "2026-09-18T15:44:13-06:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 204
@@ -2400,7 +2400,7 @@
     "lang": "it",
     "campaign_id": "wemove:2023-10-chiediamo-che-i-fondi-europei-siano-destinati-anche-per-i-corrid",
     "status": "online",
-    "last_seen": "2026-09-05T16:31:43-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Faunistici",
@@ -2414,7 +2414,7 @@
       "Fondi",
       "Sono"
     ],
-    "last_checked": "2026-09-05T16:31:43-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2023-10-chiediamo-un-fondoriparazione-al-governo-italiano-IT": {
     "slug": "2023-10-chiediamo-un-fondoriparazione-al-governo-italiano-IT",
@@ -2437,7 +2437,7 @@
     "lang": "it",
     "campaign_id": "wemove:2023-10-chiediamo-un-fondoriparazione-al-governo-italiano",
     "status": "online",
-    "last_seen": "2026-09-05T16:31:43-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Governo",
@@ -2451,7 +2451,7 @@
       "Permanente",
       "Preventivo"
     ],
-    "last_checked": "2026-09-05T16:31:43-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2023-10-end-the-destruction-of-romanian-forests-IT": {
     "slug": "2023-10-end-the-destruction-of-romanian-forests-IT",
@@ -2475,7 +2475,7 @@
     "lang": "it",
     "campaign_id": "wemove:2023-10-end-the-destruction-of-romanian-forests",
     "status": "online",
-    "last_seen": "2026-09-05T16:31:43-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Foreste",
@@ -2489,7 +2489,7 @@
       "Vergini",
       "Questa"
     ],
-    "last_checked": "2026-09-05T16:31:43-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2023-10-eu-parliament-stop-selling-out-people-and-nature-to-mining-petition-IT": {
     "slug": "2023-10-eu-parliament-stop-selling-out-people-and-nature-to-mining-petition-IT",
@@ -2498,6 +2498,10 @@
       {
         "checked_at": "2026-09-05T16:31:43-06:00",
         "count": 78916
+      },
+      {
+        "checked_at": "2026-09-18T15:38:42-06:00",
+        "count": 78917
       }
     ],
     "title": "UE: non svendere la natura all'industria mineraria",
@@ -2508,12 +2512,12 @@
     "start_date": "2023-10-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 78916,
+    "signatures": 78917,
     "goal": 100000,
     "lang": "it",
     "campaign_id": "wemove:2023-10-eu-parliament-stop-selling-out-people-and-nature-to-mining-petition",
     "status": "online",
-    "last_seen": "2026-09-05T16:31:43-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Dell",
@@ -2527,7 +2531,7 @@
       "Minerario",
       "Ministri"
     ],
-    "last_checked": "2026-09-05T16:31:43-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2023-10-gaza-civilians-petition-IT": {
     "slug": "2023-10-gaza-civilians-petition-IT",
@@ -2551,7 +2555,7 @@
     "lang": "it",
     "campaign_id": "wemove:2023-10-gaza-civilians-petition",
     "status": "online",
-    "last_seen": "2026-09-05T16:31:43-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Civili",
@@ -2565,7 +2569,7 @@
       "Leader",
       "Hanno"
     ],
-    "last_checked": "2026-09-05T16:31:43-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2023-11-end-tax-havens-in-the-eu-implement-the-treaty-reform-adopted-by-IT": {
     "slug": "2023-11-end-tax-havens-in-the-eu-implement-the-treaty-reform-adopted-by-IT",
@@ -2589,7 +2593,7 @@
     "lang": "it",
     "campaign_id": "wemove:2023-11-end-tax-havens-in-the-eu-implement-the-treaty-reform-adopted-by",
     "status": "online",
-    "last_seen": "2026-09-05T16:31:43-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Fiscali",
@@ -2603,7 +2607,7 @@
       "Trattati",
       "Diritto"
     ],
-    "last_checked": "2026-09-05T16:31:43-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2023-11-for-a-better-world-IT": {
     "slug": "2023-11-for-a-better-world-IT",
@@ -2622,22 +2626,26 @@
       {
         "checked_at": "2026-09-05T16:31:43-06:00",
         "count": 179710
+      },
+      {
+        "checked_at": "2026-09-18T15:38:42-06:00",
+        "count": 179717
       }
     ],
     "title": "Tassiamo i super ricchi",
     "image_url": "https://wemove.cdn.actionkit.com/images/Tax_the_rich_petition.png",
     "url": "https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-IT",
-    "description_full": "<p>\n\n<!-- Remove this if you don't want popins like \"This page also in English\" -->\n\n\n<img alt=\"Language selector\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/icon_translate_eeaca63123.svg\"/>\n\n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n              \n              Italiano\n\n              \n            \n          \n            \n          \n            \n          \n        \n\n</p><ul>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-EN\" rel=\"noopener\" target=\"_blank\">\n                    \n                    English\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-FR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Français\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-DE\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Deutsch\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-ES\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Español\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-NL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Nederlands\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-PL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Polski\n\n                    \n                    </a>\n</li>\n</ul><p>\n\n\n          Tassiamo i super ricchi\n        \n\n\n\n\n      Per favore accetta i cookie di marketing per guardare questo video\n    \n\n\n\n\n</p><h3>\n<p>Alla Commissione Europea</p>\n</h3>\n\n<h2>\n            Petizione\n          </h2>\n<p>Chiediamo alla Commissione europea di applicare <strong>una tassa europea sui grandi patrimoni</strong>, in base all’articolo 115 del Trattato sul funzionamento dell’Unione europea (TFEU). Questa tassa permetterebbe di definire delle politiche comunitarie progressiste e un'azione coordinata per massimizzarne l'impatto positivo. </p>\n\n\n<h2>\n            \n              Perché è importante?\n            \n          </h2>\n<p>Mentre <strong>migliaia di noi si trovano ad affrontare aumenti insostenibili dei costi per i beni di prima necessità </strong>e per riscaldare le nostre case, <strong>i super-ricchi diventano sempre più ricchi. </strong>Soltanto perché i miliardari non pagano una percentuale equa di tasse. [1]</p>\n<p>L’1% più ricco del pianeta possiede quasi metà della ricchezza mondiale, e <strong>a malapena pagano le tasse. </strong>Sfruttano i paradisi fiscali e utilizzano scappatoie per versare ai governi meno tasse possibili, privando tutti noi di contributi vitali per finanziare gli ospedali, il personale sanitario e gli insegnanti. [2]</p>\n<p>Ora abbiamo la possibilità di <strong>fermare questa ingiustizia. </strong>La Spagna sta già provando a tassare i patrimoni dei super-ricchi. [3] Questa tassa <strong>può portare miliardi di euro</strong> di risorse utili per finanziare i servizi essenziali di cui abbiamo un disperato bisogno. </p>\n<p>Insieme, <strong>chiediamo una tassa europea sul patrimonio dei super-ricchi per un’Europa più equa!</strong></p>\n<h4>\n            Riferimenti:\n          </h4>\n\n<p>[1] Elon Musk, uno degli uomini più ricchi del mondo, dal 2014 al 2018 ha versato le tasse con un’aliquota reale di appena poco superiore al 3%. https://oxfamilibrary.openrepository.com/bitstream/handle/10546/621477/bp-survival-of-the-richest-160123-en.pdf                                           </p>\n<p>Per altri super ricchi, le aliquote fiscali reali si aggirano attorno allo 0,6%, come spiegato in questo articolo: https://www.taxobservatory.eu/publication/global-tax-evasion-report-2024/ </p>\n<p>[2] https://www.theguardian.com/business/2023/oct/22/eu-funded-report-calls-for-wealth-of-super-rich-to-be-taxed-not-income</p>\n<p>[3] La Spagna intende aumentare le entrate di 3,14 miliardi di euro grazie alle nuove tasse. https://www.reuters.com/markets/europe/spain-hopes-gain-314-billion-euros-revenues-with-new-tax-proposals-2022-09-29/ ; https://www.taxnotes.com/featured-news/tax-justice-network-suggests-eu-wealth-tax-similar-spains/2023/09/20/7hcm</p>\n\n\n\n<h3>In collaborazione con:</h3>\n\n<p><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/logos_avaaz_logo_pink_brand.png\"/><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/editor-2023-12-05-3.png\"/></p>",
+    "description_full": "<p>\n\n<!-- Remove this if you don't want popins like \"This page also in English\" -->\n\n\n<img alt=\"Language selector\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/icon_translate_eeaca63123.svg\"/>\n\n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n              \n              Italiano\n\n              \n            \n          \n            \n          \n            \n          \n        \n\n</p><ul>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-EN\" rel=\"noopener\" target=\"_blank\">\n                    \n                    English\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-FR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Français\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-DE\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Deutsch\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-ES\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Español\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-NL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Nederlands\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-PL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Polski\n\n                    \n                    </a>\n</li>\n</ul><p>\n\n\n          Tassiamo i super ricchi\n        \n\n\n\n\n        Per favore accetta i cookie di marketing per guardare questo video\n      \n\n\n\n\n</p><h3>\n<p>Alla Commissione Europea</p>\n</h3>\n\n<h2>\n            Petizione\n          </h2>\n<p>Chiediamo alla Commissione europea di applicare <strong>una tassa europea sui grandi patrimoni</strong>, in base all’articolo 115 del Trattato sul funzionamento dell’Unione europea (TFEU). Questa tassa permetterebbe di definire delle politiche comunitarie progressiste e un'azione coordinata per massimizzarne l'impatto positivo. </p>\n\n\n<h2>\n            \n              Perché è importante?\n            \n          </h2>\n<p>Mentre <strong>migliaia di noi si trovano ad affrontare aumenti insostenibili dei costi per i beni di prima necessità </strong>e per riscaldare le nostre case, <strong>i super-ricchi diventano sempre più ricchi. </strong>Soltanto perché i miliardari non pagano una percentuale equa di tasse. [1]</p>\n<p>L’1% più ricco del pianeta possiede quasi metà della ricchezza mondiale, e <strong>a malapena pagano le tasse. </strong>Sfruttano i paradisi fiscali e utilizzano scappatoie per versare ai governi meno tasse possibili, privando tutti noi di contributi vitali per finanziare gli ospedali, il personale sanitario e gli insegnanti. [2]</p>\n<p>Ora abbiamo la possibilità di <strong>fermare questa ingiustizia. </strong>La Spagna sta già provando a tassare i patrimoni dei super-ricchi. [3] Questa tassa <strong>può portare miliardi di euro</strong> di risorse utili per finanziare i servizi essenziali di cui abbiamo un disperato bisogno. </p>\n<p>Insieme, <strong>chiediamo una tassa europea sul patrimonio dei super-ricchi per un’Europa più equa!</strong></p>\n<h4>\n            Riferimenti:\n          </h4>\n\n<p>[1] Elon Musk, uno degli uomini più ricchi del mondo, dal 2014 al 2018 ha versato le tasse con un’aliquota reale di appena poco superiore al 3%. https://oxfamilibrary.openrepository.com/bitstream/handle/10546/621477/bp-survival-of-the-richest-160123-en.pdf                                           </p>\n<p>Per altri super ricchi, le aliquote fiscali reali si aggirano attorno allo 0,6%, come spiegato in questo articolo: https://www.taxobservatory.eu/publication/global-tax-evasion-report-2024/ </p>\n<p>[2] https://www.theguardian.com/business/2023/oct/22/eu-funded-report-calls-for-wealth-of-super-rich-to-be-taxed-not-income</p>\n<p>[3] La Spagna intende aumentare le entrate di 3,14 miliardi di euro grazie alle nuove tasse. https://www.reuters.com/markets/europe/spain-hopes-gain-314-billion-euros-revenues-with-new-tax-proposals-2022-09-29/ ; https://www.taxnotes.com/featured-news/tax-justice-network-suggests-eu-wealth-tax-similar-spains/2023/09/20/7hcm</p>\n\n\n\n<h3>In collaborazione con:</h3>\n\n<p><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/logos_avaaz_logo_pink_brand.png\"/><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/editor-2023-12-05-3.png\"/></p>",
     "summary": "Italiano English Français Deutsch Español Nederlands Polski Tassiamo i super ricchi Per favore accetta i cookie di marketing per guardare questo video Alla Commissione Europea Petizione Chiediamo alla…",
     "start_date": "2023-12-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 179710,
+    "signatures": 179717,
     "goal": 200000,
     "lang": "it",
     "campaign_id": "wemove:2023-12-tax-the-rich-petition",
     "status": "online",
-    "last_seen": "2026-09-05T16:31:43-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Europea",
@@ -2651,7 +2659,7 @@
       "Chiediamo",
       "Tassiamo"
     ],
-    "last_checked": "2026-09-05T16:31:43-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2023-12-traffico-merci-su-gomma-IT": {
     "slug": "2023-12-traffico-merci-su-gomma-IT",
@@ -2674,7 +2682,7 @@
     "lang": "it",
     "campaign_id": "wemove:2023-12-traffico-merci-su-gomma",
     "status": "online",
-    "last_seen": "2026-09-05T16:31:43-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Traffico",
@@ -2685,7 +2693,7 @@
       "Scarichi",
       "Meno"
     ],
-    "last_checked": "2026-09-05T16:31:43-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "202303-proteggiamo_i_bambini_dalle_aziende_di_videogiochi_che_non_rispettano_le_regole_imposte_per_immagini_pubblicita_e_contenuti-petition-IT": {
     "slug": "202303-proteggiamo_i_bambini_dalle_aziende_di_videogiochi_che_non_rispettano_le_regole_imposte_per_immagini_pubblicita_e_contenuti-petition-IT",
@@ -2709,7 +2717,7 @@
     "lang": "it",
     "campaign_id": "wemove:202303-proteggiamo_i_bambini_dalle_aziende_di_videogiochi_che_non_rispettano_le_regole_imposte_per_immagini_pubblicita_e_contenuti-petition",
     "status": "online",
-    "last_seen": "2026-09-05T16:31:43-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Videogiochi",
@@ -2723,7 +2731,7 @@
       "Questa",
       "Salute"
     ],
-    "last_checked": "2026-09-05T16:31:43-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "202303-salviamo_gli_uccelli_protetti_divieto_di_caccia_per_le_specie_comprese_nell_allegato_i_della_direttiva_2009_147_cee-petition-IT": {
     "slug": "202303-salviamo_gli_uccelli_protetti_divieto_di_caccia_per_le_specie_comprese_nell_allegato_i_della_direttiva_2009_147_cee-petition-IT",
@@ -2747,7 +2755,7 @@
     "lang": "it",
     "campaign_id": "wemove:202303-salviamo_gli_uccelli_protetti_divieto_di_caccia_per_le_specie_comprese_nell_allegato_i_della_direttiva_2009_147_cee-petition",
     "status": "online",
-    "last_seen": "2026-09-05T16:31:43-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Uccelli",
@@ -2761,7 +2769,7 @@
       "Rischio",
       "Dell"
     ],
-    "last_checked": "2026-09-05T16:31:43-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "202305-stop_financing_putin_s_aggression_now-petition-IT": {
     "slug": "202305-stop_financing_putin_s_aggression_now-petition-IT",
@@ -2770,6 +2778,10 @@
       {
         "checked_at": "2026-09-05T16:31:43-06:00",
         "count": 18704
+      },
+      {
+        "checked_at": "2026-09-18T15:38:42-06:00",
+        "count": 18705
       }
     ],
     "title": "Smettete di finanziare l'aggressione di Putin ora!",
@@ -2780,12 +2792,12 @@
     "start_date": "2023-05-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 18704,
+    "signatures": 18705,
     "goal": 20000,
     "lang": "it",
     "campaign_id": "wemove:202305-stop_financing_putin_s_aggression_now-petition",
     "status": "online",
-    "last_seen": "2026-09-05T16:31:43-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Petrolio",
@@ -2799,7 +2811,7 @@
       "Smettete",
       "Consumo"
     ],
-    "last_checked": "2026-09-05T16:31:43-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "202307-e_ora_di_fare_la_pace_europa-petition-IT": {
     "slug": "202307-e_ora_di_fare_la_pace_europa-petition-IT",
@@ -2823,7 +2835,7 @@
     "lang": "it",
     "campaign_id": "wemove:202307-e_ora_di_fare_la_pace_europa-petition",
     "status": "online",
-    "last_seen": "2026-09-05T16:31:43-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Della",
@@ -2837,7 +2849,7 @@
       "Delle",
       "Sconfitta"
     ],
-    "last_checked": "2026-09-05T16:31:43-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "202307-save_the_great_river_of_rafina_greece-petition-IT": {
     "slug": "202307-save_the_great_river_of_rafina_greece-petition-IT",
@@ -2846,6 +2858,10 @@
       {
         "checked_at": "2026-09-05T16:31:43-06:00",
         "count": 20662
+      },
+      {
+        "checked_at": "2026-09-18T15:38:42-06:00",
+        "count": 20666
       }
     ],
     "title": "Salvate il Grande Fiume di Rafina!",
@@ -2856,12 +2872,12 @@
     "start_date": "2023-07-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 20662,
+    "signatures": 20666,
     "goal": 50000,
     "lang": "it",
     "campaign_id": "wemove:202307-save_the_great_river_of_rafina_greece-petition",
     "status": "online",
-    "last_seen": "2026-09-05T16:31:43-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Rafina",
@@ -2875,7 +2891,7 @@
       "Salvate",
       "Alveo"
     ],
-    "last_checked": "2026-09-05T16:31:43-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "202309-cerremos_el_loro_parque-petition-IT": {
     "slug": "202309-cerremos_el_loro_parque-petition-IT",
@@ -2884,6 +2900,10 @@
       {
         "checked_at": "2026-09-05T16:31:43-06:00",
         "count": 3054
+      },
+      {
+        "checked_at": "2026-09-18T15:38:42-06:00",
+        "count": 3060
       }
     ],
     "title": "Chiudiamo lo zoo Loro Parque",
@@ -2893,12 +2913,12 @@
     "start_date": "2023-09-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 3054,
+    "signatures": 3060,
     "goal": 5000,
     "lang": "it",
     "campaign_id": "wemove:202309-cerremos_el_loro_parque-petition",
     "status": "online",
-    "last_seen": "2026-09-05T16:31:43-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Loro",
@@ -2912,7 +2932,7 @@
       "Cattività",
       "Dell"
     ],
-    "last_checked": "2026-09-05T16:31:43-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "202310-act_now_to_ban_pvc-IT": {
     "slug": "202310-act_now_to_ban_pvc-IT",
@@ -2921,6 +2941,10 @@
       {
         "checked_at": "2026-09-05T16:31:43-06:00",
         "count": 68165
+      },
+      {
+        "checked_at": "2026-09-18T15:38:42-06:00",
+        "count": 68168
       }
     ],
     "title": "Agire ora per vietare il PVC",
@@ -2931,12 +2955,12 @@
     "start_date": "2023-10-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 68165,
+    "signatures": 68168,
     "goal": 75000,
     "lang": "it",
     "campaign_id": "wemove:202310-act_now_to_ban_pvc",
     "status": "online",
-    "last_seen": "2026-09-05T16:31:43-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Produzione",
@@ -2950,7 +2974,7 @@
       "Salute",
       "Agire"
     ],
-    "last_checked": "2026-09-05T16:31:43-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-01-ban-forever-chemicals-petition-IT": {
     "slug": "2024-01-ban-forever-chemicals-petition-IT",
@@ -2959,6 +2983,10 @@
       {
         "checked_at": "2026-09-05T16:31:43-06:00",
         "count": 144889
+      },
+      {
+        "checked_at": "2026-09-18T15:38:42-06:00",
+        "count": 144904
       }
     ],
     "title": "Un'Europa libera da sostanze tossiche!",
@@ -2968,12 +2996,12 @@
     "start_date": "2024-01-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 144889,
+    "signatures": 144904,
     "goal": 150000,
     "lang": "it",
     "campaign_id": "wemove:2024-01-ban-forever-chemicals-petition",
     "status": "online",
-    "last_seen": "2026-09-05T16:31:43-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Sostanze",
@@ -2987,7 +3015,7 @@
       "Europea",
       "Delle"
     ],
-    "last_checked": "2026-09-05T16:31:43-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-02-save-the-alps-IT": {
     "slug": "2024-02-save-the-alps-IT",
@@ -2996,6 +3024,10 @@
       {
         "checked_at": "2026-09-05T16:31:43-06:00",
         "count": 77921
+      },
+      {
+        "checked_at": "2026-09-18T15:38:42-06:00",
+        "count": 77922
       }
     ],
     "title": "Salviamo gli ultimi ghiacciai delle Alpi!",
@@ -3006,12 +3038,12 @@
     "start_date": "2024-02-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 77921,
+    "signatures": 77922,
     "goal": 100000,
     "lang": "it",
     "campaign_id": "wemove:2024-02-save-the-alps",
     "status": "online",
-    "last_seen": "2026-09-05T16:31:43-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Ghiacciai",
@@ -3025,7 +3057,7 @@
       "Austria",
       "Ultimi"
     ],
-    "last_checked": "2026-09-05T16:31:43-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-03-plastic-pellets-petition-IT": {
     "slug": "2024-03-plastic-pellets-petition-IT",
@@ -3034,6 +3066,10 @@
       {
         "checked_at": "2026-09-05T16:31:43-06:00",
         "count": 92648
+      },
+      {
+        "checked_at": "2026-09-18T15:38:42-06:00",
+        "count": 92651
       }
     ],
     "title": "Stop all’inquinamento da microplastica!",
@@ -3044,12 +3080,12 @@
     "start_date": "2024-03-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 92648,
+    "signatures": 92651,
     "goal": 100000,
     "lang": "it",
     "campaign_id": "wemove:2024-03-plastic-pellets-petition",
     "status": "online",
-    "last_seen": "2026-09-05T16:31:43-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Granuli",
@@ -3063,7 +3099,7 @@
       "Nell",
       "Microplastica"
     ],
-    "last_checked": "2026-09-05T16:31:43-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-03-raiffeisen-russia-petition-IT": {
     "slug": "2024-03-raiffeisen-russia-petition-IT",
@@ -3087,7 +3123,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-03-raiffeisen-russia-petition",
     "status": "online",
-    "last_seen": "2026-09-05T16:31:43-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Raiffeisen",
@@ -3101,7 +3137,7 @@
       "Hanno",
       "Putin"
     ],
-    "last_checked": "2026-09-05T16:31:43-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-03-Santander-Amazon-petition-IT": {
     "slug": "2024-03-Santander-Amazon-petition-IT",
@@ -3110,6 +3146,10 @@
       {
         "checked_at": "2026-09-05T16:31:43-06:00",
         "count": 97069
+      },
+      {
+        "checked_at": "2026-09-18T15:38:42-06:00",
+        "count": 97071
       }
     ],
     "title": "Fermiamo la distruzione della foresta amazzonica!",
@@ -3120,12 +3160,12 @@
     "start_date": "2024-03-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 97069,
+    "signatures": 97071,
     "goal": 100000,
     "lang": "it",
     "campaign_id": "wemove:2024-03-Santander-Amazon-petition",
     "status": "online",
-    "last_seen": "2026-09-05T16:31:43-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Santander",
@@ -3139,7 +3179,7 @@
       "Petizione",
       "Fermiamo"
     ],
-    "last_checked": "2026-09-05T16:31:43-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-03-world-bank-petition-IT": {
     "slug": "2024-03-world-bank-petition-IT",
@@ -3148,6 +3188,10 @@
       {
         "checked_at": "2026-09-05T16:31:43-06:00",
         "count": 104908
+      },
+      {
+        "checked_at": "2026-09-18T15:38:42-06:00",
+        "count": 104912
       }
     ],
     "title": "Basta finanziamenti agli allevamenti intensivi!",
@@ -3158,12 +3202,12 @@
     "start_date": "2024-03-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 104908,
+    "signatures": 104912,
     "goal": 150000,
     "lang": "it",
     "campaign_id": "wemove:2024-03-world-bank-petition",
     "status": "online",
-    "last_seen": "2026-09-05T16:31:43-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Allevamenti",
@@ -3177,7 +3221,7 @@
       "Nostre",
       "Questi"
     ],
-    "last_checked": "2026-09-05T16:31:43-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-04-cap-reform-petition-IT": {
     "slug": "2024-04-cap-reform-petition-IT",
@@ -3201,7 +3245,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-04-cap-reform-petition",
     "status": "online",
-    "last_seen": "2026-09-05T16:31:43-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Riforma",
@@ -3215,7 +3259,7 @@
       "Proposta",
       "Tossica"
     ],
-    "last_checked": "2026-09-05T16:31:43-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-04-Elections-GOTVMM-campaign-petition-IT": {
     "slug": "2024-04-Elections-GOTVMM-campaign-petition-IT",
@@ -3224,6 +3268,10 @@
       {
         "checked_at": "2026-09-05T16:31:43-06:00",
         "count": 44339
+      },
+      {
+        "checked_at": "2026-09-18T15:38:42-06:00",
+        "count": 44340
       }
     ],
     "title": "Voto per proteggere la natura",
@@ -3234,12 +3282,12 @@
     "start_date": "2024-04-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 44339,
+    "signatures": 44340,
     "goal": 50000,
     "lang": "it",
     "campaign_id": "wemove:2024-04-Elections-GOTVMM-campaign-petition",
     "status": "online",
-    "last_seen": "2026-09-05T16:31:43-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Natura",
@@ -3253,7 +3301,7 @@
       "Nederlands",
       "Obiettivo"
     ],
-    "last_checked": "2026-09-05T16:31:43-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-04-EU-elections-GOTV-climate-message-testing-energy-hr-IT": {
     "slug": "2024-04-EU-elections-GOTV-climate-message-testing-energy-hr-IT",
@@ -3276,7 +3324,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-climate-message-testing-energy-hr",
     "status": "online",
-    "last_seen": "2026-09-05T16:31:43-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Polski",
@@ -3290,7 +3338,7 @@
       "Corraggiosi",
       "Azioni"
     ],
-    "last_checked": "2026-09-05T16:31:43-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-04-EU-elections-GOTV-climate-message-testing-food-security-hr-IT": {
     "slug": "2024-04-EU-elections-GOTV-climate-message-testing-food-security-hr-IT",
@@ -3313,7 +3361,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-climate-message-testing-food-security-hr",
     "status": "online",
-    "last_seen": "2026-09-05T16:31:43-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Polski",
@@ -3327,7 +3375,7 @@
       "Corraggiosi",
       "Azioni"
     ],
-    "last_checked": "2026-09-05T16:31:43-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-04-EU-elections-GOTV-climate-message-testing-nature-hr-IT": {
     "slug": "2024-04-EU-elections-GOTV-climate-message-testing-nature-hr-IT",
@@ -3350,7 +3398,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-climate-message-testing-nature-hr",
     "status": "online",
-    "last_seen": "2026-09-05T16:31:43-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Polski",
@@ -3364,7 +3412,7 @@
       "Corraggiosi",
       "Azioni"
     ],
-    "last_checked": "2026-09-05T16:31:43-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-04-EU-elections-GOTV-extremists-message-testing-eu-unity-hr-IT": {
     "slug": "2024-04-EU-elections-GOTV-extremists-message-testing-eu-unity-hr-IT",
@@ -3387,7 +3435,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-extremists-message-testing-eu-unity-hr",
     "status": "online",
-    "last_seen": "2026-09-05T16:31:43-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Nederlands",
@@ -3401,7 +3449,7 @@
       "Estremisti",
       "Permettere"
     ],
-    "last_checked": "2026-09-05T16:31:43-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-04-EU-elections-GOTV-extremists-message-testing-far-right-democracy-hr-IT": {
     "slug": "2024-04-EU-elections-GOTV-extremists-message-testing-far-right-democracy-hr-IT",
@@ -3424,7 +3472,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-extremists-message-testing-far-right-democracy-hr",
     "status": "online",
-    "last_seen": "2026-09-05T16:31:43-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Nederlands",
@@ -3438,7 +3486,7 @@
       "Estremisti",
       "Permettere"
     ],
-    "last_checked": "2026-09-05T16:31:43-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-04-EU-elections-GOTV-extremists-message-testing-far-right-feminism-hr-IT": {
     "slug": "2024-04-EU-elections-GOTV-extremists-message-testing-far-right-feminism-hr-IT",
@@ -3461,7 +3509,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-extremists-message-testing-far-right-feminism-hr",
     "status": "online",
-    "last_seen": "2026-09-05T17:11:37-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Nederlands",
@@ -3475,7 +3523,7 @@
       "Estremisti",
       "Permettere"
     ],
-    "last_checked": "2026-09-05T17:11:37-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-04-GOTV-message-testing-get-stuff-done-climate-backsliding-IT": {
     "slug": "2024-04-GOTV-message-testing-get-stuff-done-climate-backsliding-IT",
@@ -3498,7 +3546,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-04-GOTV-message-testing-get-stuff-done-climate-backsliding",
     "status": "online",
-    "last_seen": "2026-09-05T17:11:37-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Nederlands",
@@ -3512,7 +3560,7 @@
       "Polski",
       "Meritiamo"
     ],
-    "last_checked": "2026-09-05T17:11:37-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-04-GOTV-message-testing-get-stuff-done-future-frame-IT": {
     "slug": "2024-04-GOTV-message-testing-get-stuff-done-future-frame-IT",
@@ -3535,7 +3583,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-04-GOTV-message-testing-get-stuff-done-future-frame",
     "status": "online",
-    "last_seen": "2026-09-05T17:11:37-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Mondo",
@@ -3549,7 +3597,7 @@
       "Polski",
       "Meritiamo"
     ],
-    "last_checked": "2026-09-05T17:11:37-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-04-recognise-Palestine-petition-IT": {
     "slug": "2024-04-recognise-Palestine-petition-IT",
@@ -3558,6 +3606,10 @@
       {
         "checked_at": "2026-09-05T17:54:03-06:00",
         "count": 109489
+      },
+      {
+        "checked_at": "2026-09-18T15:38:42-06:00",
+        "count": 109516
       }
     ],
     "title": "Diamo voce e riconosciamo il popolo palestinese",
@@ -3568,12 +3620,12 @@
     "start_date": "2024-04-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 109489,
+    "signatures": 109516,
     "goal": 150000,
     "lang": "it",
     "campaign_id": "wemove:2024-04-recognise-Palestine-petition",
     "status": "online",
-    "last_seen": "2026-09-05T17:54:03-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Voce",
@@ -3587,7 +3639,7 @@
       "Riconosciamo",
       "Europea"
     ],
-    "last_checked": "2026-09-05T17:54:03-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-05-GOTV-Use-You-Power-postcards-IT": {
     "slug": "2024-05-GOTV-Use-You-Power-postcards-IT",
@@ -3610,7 +3662,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-05-GOTV-Use-You-Power-postcards",
     "status": "online",
-    "last_seen": "2026-09-05T17:54:03-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Voto",
@@ -3624,7 +3676,7 @@
       "Nederlands",
       "Ricordare"
     ],
-    "last_checked": "2026-09-05T17:54:03-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-05-national-laws-ecocide-youmove-petition-IT": {
     "slug": "2024-05-national-laws-ecocide-youmove-petition-IT",
@@ -3633,22 +3685,26 @@
       {
         "checked_at": "2026-09-05T17:54:03-06:00",
         "count": 88841
+      },
+      {
+        "checked_at": "2026-09-18T15:38:42-06:00",
+        "count": 88879
       }
     ],
     "title": "L’ecocidio deve essere un reato!",
     "image_url": "https://wemove.cdn.actionkit.com/images/campimage_ecocidev3.jpg",
     "url": "https://action.wemove.eu/sign/2024-05-national-laws-ecocide-youmove-petition-IT",
-    "description_full": "<p>\n\n<!-- Remove this if you don't want popins like \"This page also in English\" -->\n\n\n<img alt=\"Language selector\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/icon_translate_eeaca63123.svg\"/>\n\n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n              \n              Italiano\n\n              \n            \n          \n            \n          \n            \n          \n        \n\n</p><ul>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-6-gor-ekocid-till-ett-brott-SV\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Svenska\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-6-fazer-do-ecocidio-um-crime-PT\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Português\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-6-ucinimo-ekoloski-zlocin-kaznenim-djelom-HR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Hrvatski\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-6-e-momentul-sa-incriminam-ecocidul-RO\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Română\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-6-gor-okomord-kriminelt-DA\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Dansk\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-6-tehdaan-luonnontuhonnasta-rikos-FI\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Suomalainen\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-7-kathistoume-ten-oikoktonia-egklema-EL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Ελληνικά\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-7-paverskite-ekocida-nusikaltimu-LT-OBSOLETE20240814\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Lietuvių\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-7-padariet-ekocidu-par-noziegumu-LV\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Latvian\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-8-at-je-ekocida-trestnym-cinem-CS\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Ceština\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-9-muutke-okotsiid-kuriteoks-ET\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Eesti keel\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-9-ekocid-naj-bo-kaznivo-dejanje-SL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Slovenščina\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-9-az-okocidiumot-tekintsek-buncselekmenynek-HU\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Magyar\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-05-national-laws-ecocide-youmove-petition-EN\" rel=\"noopener\" target=\"_blank\">\n                    \n                    English\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-7-reconnaitre-le-crime-decocide-FR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Français\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-05-national-laws-ecocide-youmove-petition-germany-DE\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Deutsch\n\n                    \n                      \n                        (Deutschland)\n                      \n</a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-05-national-laws-ecocide-youmove-petition-austria-DE\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Deutsch\n\n                    \n                      \n                        (Österreich)\n                      \n</a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-05-national-laws-ecocide-youmove-petition-ES\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Español\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-05-national-laws-ecocide-youmove-petition-NL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Nederlands\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-05-national-laws-ecocide-youmove-petition-PL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Polski\n\n                    \n                    </a>\n</li>\n</ul><p>\n\n\n          L’ecocidio deve essere un reato!\n        \n\n<img alt=\"L’ecocidio deve essere un reato!\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/campimage_ecocidev3.jpg\"/>\n\n</p><h3>\n<p>Al governo italiano</p>\n</h3>\n<p>\n            Questa petizione è gestita da [% inititator_name %]\n          </p>\n\n<h2>\n            Petizione\n          </h2>\n<p>Chiediamo al governo italiano di introdurre un reato di ecocidio nei codici penali nazionali e supportare gli sforzi volti a rendere l’ecocidio un reato presso il Tribunale penale internazionale. [1]</p>\n\n\n<h2>\n            \n              Perché è importante?\n            \n          </h2>\n<p><strong>Abbiamo conquistato una vittoria importante per proteggere la natura: </strong>l’UE ha introdotto delle leggi per punire <strong>chi distrugge l’ambiente su scala massiccia, </strong>con pene che vanno dalle sanzioni alla detenzione! [2]</p>\n<p>Ora, i paesi europei devono convertire queste misure in leggi nazionali entro i prossimi due anni. E possono anche renderle più severe. </p>\n<p>Le <strong>nuove regole </strong>sono un ottimo punto di partenza, anche se restringono il reato di ecocidio a 20 attività specifiche. [3] Questo limite <strong>consente a chi distrugge il pianeta di evitare le pene, </strong>semplicemente chiamando i loro reati con un nome diverso. Inoltre, questa legge europea non include le future attività distruttive che si baseranno su tecnologie ancora inesistenti.</p>\n<p><strong>Ma abbiamo una soluzione: i nostri governi devono approvare delle leggi nazionali con una definizione ampia di ecocidio, </strong>anziché limitarla a un elenco ristretto di reati. In questo modo, con una definizione più ampia i tribunali potranno perseguire ogni tipo di danno ambientale causato su larga scala e punire i responsabili. <strong>Questa misura potrebbe evitare tanti disastri ambientali in futuro!</strong></p>\n<p>Se migliaia di persone della nostra comunità si uniscono a questo appello, è molto più probabile che i leader cercheranno di andare oltre le misure europee essenziali, approvando leggi nazionali più ambiziose che davvero proteggono il pianeta. <strong>Che ne dici di aggiungere la tua voce per assicurarti che tutti i reati ambientali vengano puniti adeguatamente?</strong></p>\n<h4>\n            Riferimenti:\n          </h4>\n\n<p>[1] Definizione legale di ecocidio di un Comitato Indipendente di Esperti: <a href=\"https://www.stopecocide.earth/legal-definition\" rel=\"noopener\" target=\"_blank\">https://www.stopecocide.earth/legal-definition</a> (inglese)</p>\n<p>[2] Anche se la nuova versione del testo della Direttiva sui reati ambientali non include la parola “ecocidio”, nel preambolo si legge che intende considerare reati tutti i “casi paragonabili all’ecocidio”. Si tratta di azioni che provocano un danneggiamento diffuso, sostanziale e irreversibile o duraturo a ecosistemi o habitat grandi e importanti, o alla qualità di aria, acqua e terreno.</p>\n<p><a href=\"https://data.consilium.europa.eu/doc/document/PE-82-2023-INIT/it/pdf\" rel=\"noopener\" target=\"_blank\">https://data.consilium.europa.eu/doc/document/PE-82-2023-INIT/it/pdf</a>  </p>\n<p><br/>[3] L’elenco completo dei reati è descritto all’Articolo 3 sui “Reati” di questo documento: <a href=\"https://data.consilium.europa.eu/doc/document/ST-16069-2023-INIT/en/pdf\" rel=\"noopener\" target=\"_blank\">https://data.consilium.europa.eu/doc/document/ST-16069-2023-INIT/en/pdf</a> (inglese)</p>\n\n\n\n<h3>In collaborazione con:</h3>\n\n<p><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/Logo_Ecosia_2022.svg.png\"/><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/Gallifrey_logo.png\"/></p>",
+    "description_full": "<p>\n\n<!-- Remove this if you don't want popins like \"This page also in English\" -->\n\n\n<img alt=\"Language selector\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/icon_translate_eeaca63123.svg\"/>\n\n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n              \n              Italiano\n\n              \n            \n          \n            \n          \n            \n          \n        \n\n</p><ul>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-6-gor-ekocid-till-ett-brott-SV\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Svenska\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-6-fazer-do-ecocidio-um-crime-PT\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Português\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-6-ucinimo-ekoloski-zlocin-kaznenim-djelom-HR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Hrvatski\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-6-e-momentul-sa-incriminam-ecocidul-RO\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Română\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-6-gor-okomord-kriminelt-DA\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Dansk\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-6-tehdaan-luonnontuhonnasta-rikos-FI\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Suomalainen\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-7-kathistoume-ten-oikoktonia-egklema-EL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Ελληνικά\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-7-paverskite-ekocida-nusikaltimu-LT-OBSOLETE20240814\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Lietuvių\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-7-padariet-ekocidu-par-noziegumu-LV\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Latvian\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-8-at-je-ekocida-trestnym-cinem-CS\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Ceština\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-9-muutke-okotsiid-kuriteoks-ET\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Eesti keel\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-9-ekocid-naj-bo-kaznivo-dejanje-SL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Slovenščina\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-9-az-okocidiumot-tekintsek-buncselekmenynek-HU\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Magyar\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-05-national-laws-ecocide-youmove-petition-EN\" rel=\"noopener\" target=\"_blank\">\n                    \n                    English\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-7-reconnaitre-le-crime-decocide-FR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Français\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-05-national-laws-ecocide-youmove-petition-germany-DE\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Deutsch\n\n                    \n                      \n                        (Deutschland)\n                      \n</a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-05-national-laws-ecocide-youmove-petition-austria-DE\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Deutsch\n\n                    \n                      \n                        (Österreich)\n                      \n</a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-05-national-laws-ecocide-youmove-petition-ES\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Español\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-05-national-laws-ecocide-youmove-petition-NL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Nederlands\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2024-05-national-laws-ecocide-youmove-petition-PL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Polski\n\n                    \n                    </a>\n</li>\n</ul><p>\n\n\n          L’ecocidio deve essere un reato!\n        \n\n<img alt=\"L’ecocidio deve essere un reato!\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/campimage_ecocidev3.jpg\"/>\n\n</p><h3>\n<p>Al governo italiano</p>\n</h3>\n<p>\n            Questa petizione è gestita da [% inititator_name %]\n          </p>\n\n<h2>\n            Petizione\n          </h2>\n<p>Chiediamo al governo italiano di introdurre un reato di ecocidio nei codici penali nazionali e supportare gli sforzi volti a rendere l’ecocidio un reato presso il Tribunale penale internazionale. [1]</p>\n\n\n<h2>\n            \n              Perché è importante?\n            \n          </h2>\n<p><strong>Abbiamo conquistato una vittoria importante per proteggere la natura: </strong>l’UE ha introdotto delle leggi per punire <strong>chi distrugge l’ambiente su scala massiccia, </strong>con pene che vanno dalle sanzioni alla detenzione! [2]</p>\n<p>Ora, i paesi europei devono convertire queste misure in leggi nazionali entro i prossimi due anni. E possono anche renderle più severe. </p>\n<p>Le <strong>nuove regole </strong>sono un ottimo punto di partenza, anche se restringono il reato di ecocidio a 20 attività specifiche. [3] Questo limite <strong>consente a chi distrugge il pianeta di evitare le pene, </strong>semplicemente chiamando i loro reati con un nome diverso. Inoltre, questa legge europea non include le future attività distruttive che si baseranno su tecnologie ancora inesistenti.</p>\n<p><strong>Ma abbiamo una soluzione: i nostri governi devono approvare delle leggi nazionali con una definizione ampia di ecocidio, </strong>anziché limitarla a un elenco ristretto di reati. In questo modo, con una definizione più ampia i tribunali potranno perseguire ogni tipo di danno ambientale causato su larga scala e punire i responsabili. <strong>Questa misura potrebbe evitare tanti disastri ambientali in futuro!</strong></p>\n<p>Se migliaia di persone della nostra comunità si uniscono a questo appello, è molto più probabile che i leader cercheranno di andare oltre le misure europee essenziali, approvando leggi nazionali più ambiziose che davvero proteggono il pianeta. <strong>Che ne dici di aggiungere la tua voce per assicurarti che tutti i reati ambientali vengano puniti adeguatamente?</strong></p>\n<h4>\n            Riferimenti:\n          </h4>\n\n<p>[1] Definizione legale di ecocidio di un Comitato Indipendente di Esperti: <a href=\"https://www.stopecocide.earth/legal-definition\" rel=\"noopener\" target=\"_blank\">https://www.stopecocide.earth/legal-definition</a> (inglese)</p>\n<p>[2] Anche se la nuova versione del testo della Direttiva sui reati ambientali non include la parola “ecocidio”, nel preambolo si legge che intende considerare reati tutti i “casi paragonabili all’ecocidio”. Si tratta di azioni che provocano un danneggiamento diffuso, sostanziale e irreversibile o duraturo a ecosistemi o habitat grandi e importanti, o alla qualità di aria, acqua e terreno.</p>\n<p><a href=\"https://data.consilium.europa.eu/doc/document/PE-82-2023-INIT/it/pdf\" rel=\"noopener\" target=\"_blank\">https://data.consilium.europa.eu/doc/document/PE-82-2023-INIT/it/pdf</a>  </p>\n<p><br/>[3] L’elenco completo dei reati è descritto all’Articolo 3 sui “Reati” di questo documento: <a href=\"https://data.consilium.europa.eu/doc/document/ST-16069-2023-INIT/en/pdf\" rel=\"noopener\" target=\"_blank\">https://data.consilium.europa.eu/doc/document/ST-16069-2023-INIT/en/pdf</a> (inglese)</p>\n\n\n\n<h3>In collaborazione con:</h3>\n\n<p><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/editor-2026-09-18.png\"/><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/ecosia_logo.png\"/></p>",
     "summary": "Italiano Svenska Português Hrvatski Română Dansk Suomalainen Ελληνικά Lietuvių Latvian Ceština Eesti keel Slovenščina Magyar English Français Deutsch (Deutschland) Deutsch (Österreich) Español Nederla…",
     "start_date": "2024-05-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 88841,
+    "signatures": 88879,
     "goal": 100000,
     "lang": "it",
     "campaign_id": "wemove:2024-05-national-laws-ecocide-youmove-petition",
     "status": "online",
-    "last_seen": "2026-09-05T17:54:03-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Ecocidio",
@@ -3662,7 +3718,7 @@
       "Français",
       "Hrvatski"
     ],
-    "last_checked": "2026-09-05T17:54:03-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-06-03-Triple-Your-Vote-petition-IT": {
     "slug": "2024-06-03-Triple-Your-Vote-petition-IT",
@@ -3685,7 +3741,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-06-03-Triple-Your-Vote-petition",
     "status": "online",
-    "last_seen": "2026-09-05T17:54:03-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Potere",
@@ -3699,7 +3755,7 @@
       "Ricordare",
       "Aggiungi"
     ],
-    "last_checked": "2026-09-05T17:54:03-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-06-Renew-dont-normalise-hate-petition-IT": {
     "slug": "2024-06-Renew-dont-normalise-hate-petition-IT",
@@ -3723,7 +3779,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-06-Renew-dont-normalise-hate-petition",
     "status": "online",
-    "last_seen": "2026-09-05T17:54:03-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Renew",
@@ -3737,7 +3793,7 @@
       "Nederlands",
       "Olandese"
     ],
-    "last_checked": "2026-09-05T17:54:03-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-07-big-meat-petition-IT": {
     "slug": "2024-07-big-meat-petition-IT",
@@ -3746,6 +3802,10 @@
       {
         "checked_at": "2026-09-05T17:54:03-06:00",
         "count": 112513
+      },
+      {
+        "checked_at": "2026-09-18T15:38:42-06:00",
+        "count": 112517
       }
     ],
     "title": "Difendiamo la nostra salute, lottiamo contro l'industria della carne",
@@ -3756,12 +3816,12 @@
     "start_date": "2024-07-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 112513,
+    "signatures": 112517,
     "goal": 150000,
     "lang": "it",
     "campaign_id": "wemove:2024-07-big-meat-petition",
     "status": "online",
-    "last_seen": "2026-09-05T17:54:03-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Dell",
@@ -3775,7 +3835,7 @@
       "Salute",
       "Dalla"
     ],
-    "last_checked": "2026-09-05T17:54:03-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-07-lidl-chicken-scandal-petition-IT": {
     "slug": "2024-07-lidl-chicken-scandal-petition-IT",
@@ -3784,6 +3844,10 @@
       {
         "checked_at": "2026-09-05T17:54:03-06:00",
         "count": 76708
+      },
+      {
+        "checked_at": "2026-09-18T15:38:42-06:00",
+        "count": 76710
       }
     ],
     "title": "Lidl: Basta torturare i polli!",
@@ -3793,12 +3857,12 @@
     "start_date": "2024-07-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 76708,
+    "signatures": 76710,
     "goal": 100000,
     "lang": "it",
     "campaign_id": "wemove:2024-07-lidl-chicken-scandal-petition",
     "status": "online",
-    "last_seen": "2026-09-05T17:54:03-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Polli",
@@ -3812,7 +3876,7 @@
       "Sofferenze",
       "Eliminare"
     ],
-    "last_checked": "2026-09-05T17:54:03-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-07-pesticide-free-petition-IT": {
     "slug": "2024-07-pesticide-free-petition-IT",
@@ -3821,6 +3885,10 @@
       {
         "checked_at": "2026-09-05T17:54:03-06:00",
         "count": 115056
+      },
+      {
+        "checked_at": "2026-09-18T15:38:42-06:00",
+        "count": 115057
       }
     ],
     "title": "Divieto per i pesticidi tossici!",
@@ -3831,12 +3899,12 @@
     "start_date": "2024-07-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 115056,
+    "signatures": 115057,
     "goal": 150000,
     "lang": "it",
     "campaign_id": "wemove:2024-07-pesticide-free-petition",
     "status": "online",
-    "last_seen": "2026-09-05T17:54:03-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Pesticidi",
@@ -3850,7 +3918,7 @@
       "Nederlands",
       "Petizione"
     ],
-    "last_checked": "2026-09-05T17:54:03-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-08-Fossil-Fuel-Firewall-petition-IT": {
     "slug": "2024-08-Fossil-Fuel-Firewall-petition-IT",
@@ -3873,7 +3941,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-08-Fossil-Fuel-Firewall-petition",
     "status": "online",
-    "last_seen": "2026-09-05T17:54:03-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Industria",
@@ -3887,7 +3955,7 @@
       "Incarichi",
       "Politiche"
     ],
-    "last_checked": "2026-09-05T17:54:03-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-08-homes-for-people-not-for-profit-petition-IT": {
     "slug": "2024-08-homes-for-people-not-for-profit-petition-IT",
@@ -3911,7 +3979,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-08-homes-for-people-not-for-profit-petition",
     "status": "online",
-    "last_seen": "2026-09-05T17:54:03-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Abitativa",
@@ -3925,7 +3993,7 @@
       "Tutti",
       "Comunità"
     ],
-    "last_checked": "2026-09-05T17:54:03-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-08-language-switch-pages-petition-IT": {
     "slug": "2024-08-language-switch-pages-petition-IT",
@@ -3934,6 +4002,10 @@
       {
         "checked_at": "2026-09-05T17:54:03-06:00",
         "count": 368
+      },
+      {
+        "checked_at": "2026-09-18T15:38:42-06:00",
+        "count": 370
       }
     ],
     "title": "Grazie per essere parte di questa comunità!",
@@ -3943,12 +4015,12 @@
     "start_date": "2024-08-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 368,
+    "signatures": 370,
     "goal": 1000,
     "lang": "it",
     "campaign_id": "wemove:2024-08-language-switch-pages-petition",
     "status": "online",
-    "last_seen": "2026-09-05T17:54:03-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Italiano",
@@ -3962,7 +4034,7 @@
       "Nederlands",
       "Français"
     ],
-    "last_checked": "2026-09-05T17:54:03-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-09-ban-octopus-farming-in-the-eu-petition-IT": {
     "slug": "2024-09-ban-octopus-farming-in-the-eu-petition-IT",
@@ -3971,6 +4043,10 @@
       {
         "checked_at": "2026-09-05T17:54:03-06:00",
         "count": 133016
+      },
+      {
+        "checked_at": "2026-09-18T15:38:42-06:00",
+        "count": 133024
       }
     ],
     "title": "Vietare l'allevamento di polpi nell'UE!",
@@ -3980,12 +4056,12 @@
     "start_date": "2024-09-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 133016,
+    "signatures": 133024,
     "goal": 150000,
     "lang": "it",
     "campaign_id": "wemove:2024-09-ban-octopus-farming-in-the-eu-petition",
     "status": "online",
-    "last_seen": "2026-09-05T17:54:03-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Polpi",
@@ -3999,7 +4075,7 @@
       "Delle",
       "Hanno"
     ],
-    "last_checked": "2026-09-05T17:54:03-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-09-digital-futures-petition-IT": {
     "slug": "2024-09-digital-futures-petition-IT",
@@ -4023,7 +4099,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-09-digital-futures-petition",
     "status": "online",
-    "last_seen": "2026-09-05T17:54:03-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "PERSONE",
@@ -4037,7 +4113,7 @@
       "Digitale",
       "Priorità"
     ],
-    "last_checked": "2026-09-05T17:54:03-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-09-free-school-meals-petition-IT": {
     "slug": "2024-09-free-school-meals-petition-IT",
@@ -4061,7 +4137,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-09-free-school-meals-petition",
     "status": "online",
-    "last_seen": "2026-09-05T17:54:03-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Bambini",
@@ -4075,7 +4151,7 @@
       "Bambino",
       "Dell"
     ],
-    "last_checked": "2026-09-05T17:54:03-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-09-pour-plan-national-contre-le-viol-petition-IT": {
     "slug": "2024-09-pour-plan-national-contre-le-viol-petition-IT",
@@ -4084,6 +4160,10 @@
       {
         "checked_at": "2026-09-05T17:54:03-06:00",
         "count": 89788
+      },
+      {
+        "checked_at": "2026-09-18T15:38:42-06:00",
+        "count": 89789
       }
     ],
     "title": "Per un piano ambizioso contro lo stupro",
@@ -4094,12 +4174,12 @@
     "start_date": "2024-09-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 89788,
+    "signatures": 89789,
     "goal": 100000,
     "lang": "it",
     "campaign_id": "wemove:2024-09-pour-plan-national-contre-le-viol-petition",
     "status": "online",
-    "last_seen": "2026-09-05T17:54:03-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Stupro",
@@ -4113,7 +4193,7 @@
       "Petizione",
       "Sostenere"
     ],
-    "last_checked": "2026-09-05T17:54:03-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-09-seasonal-farm-workers-petition-IT": {
     "slug": "2024-09-seasonal-farm-workers-petition-IT",
@@ -4122,6 +4202,10 @@
       {
         "checked_at": "2026-09-05T17:54:03-06:00",
         "count": 83307
+      },
+      {
+        "checked_at": "2026-09-18T15:38:42-06:00",
+        "count": 83308
       }
     ],
     "title": "Solidarietà per i lavoratori agricoli: basta sfruttamento!",
@@ -4132,12 +4216,12 @@
     "start_date": "2024-09-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 83307,
+    "signatures": 83308,
     "goal": 100000,
     "lang": "it",
     "campaign_id": "wemove:2024-09-seasonal-farm-workers-petition",
     "status": "online",
-    "last_seen": "2026-09-05T17:54:03-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Lavoratori",
@@ -4151,7 +4235,7 @@
       "Satnam",
       "Basta"
     ],
-    "last_checked": "2026-09-05T17:54:03-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-1-federalismo-europeo-IT": {
     "slug": "2024-1-federalismo-europeo-IT",
@@ -4174,7 +4258,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-1-federalismo-europeo",
     "status": "online",
-    "last_seen": "2026-09-05T17:54:03-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Petizione",
@@ -4188,7 +4272,7 @@
       "Importante",
       "Inititator"
     ],
-    "last_checked": "2026-09-05T17:54:03-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-1-vollgeld-fur-alle-IT": {
     "slug": "2024-1-vollgeld-fur-alle-IT",
@@ -4211,7 +4295,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-1-vollgeld-fur-alle",
     "status": "online",
-    "last_seen": "2026-09-05T17:54:03-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Denaro",
@@ -4225,7 +4309,7 @@
       "Solo",
       "COMMERCIALI"
     ],
-    "last_checked": "2026-09-05T17:54:03-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-10-are-you-sick-and-tired-of-changing-the-clock-twice-a-year-IT": {
     "slug": "2024-10-are-you-sick-and-tired-of-changing-the-clock-twice-a-year-IT",
@@ -4234,6 +4318,10 @@
       {
         "checked_at": "2026-09-05T17:54:03-06:00",
         "count": 6635
+      },
+      {
+        "checked_at": "2026-09-18T15:38:42-06:00",
+        "count": 6684
       }
     ],
     "title": "SEI STANCO DI CAMBIARE L'OROLOGIO DUE VOLTE L'ANNO?",
@@ -4244,12 +4332,12 @@
     "start_date": "2024-10-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 6635,
+    "signatures": 6684,
     "goal": 10000,
     "lang": "it",
     "campaign_id": "wemove:2024-10-are-you-sick-and-tired-of-changing-the-clock-twice-a-year",
     "status": "online",
-    "last_seen": "2026-09-05T17:54:03-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Suomalainen",
@@ -4263,7 +4351,7 @@
       "Russian",
       "Svenska"
     ],
-    "last_checked": "2026-09-05T17:54:03-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-10-no-toxic-mineral-oils-in-our-food-petition-IT": {
     "slug": "2024-10-no-toxic-mineral-oils-in-our-food-petition-IT",
@@ -4272,6 +4360,10 @@
       {
         "checked_at": "2026-09-05T17:54:03-06:00",
         "count": 86124
+      },
+      {
+        "checked_at": "2026-09-18T15:38:42-06:00",
+        "count": 86126
       }
     ],
     "title": "No agli oli minerali tossici nel nostro cibo!",
@@ -4282,12 +4374,12 @@
     "start_date": "2024-10-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 86124,
+    "signatures": 86126,
     "goal": 100000,
     "lang": "it",
     "campaign_id": "wemove:2024-10-no-toxic-mineral-oils-in-our-food-petition",
     "status": "online",
-    "last_seen": "2026-09-05T17:54:03-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Tossici",
@@ -4301,7 +4393,7 @@
       "Questi",
       "Salute"
     ],
-    "last_checked": "2026-09-05T17:54:03-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-10-paul-watson-france-asylum-petition-IT": {
     "slug": "2024-10-paul-watson-france-asylum-petition-IT",
@@ -4324,7 +4416,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-10-paul-watson-france-asylum-petition",
     "status": "online",
-    "last_seen": "2026-09-05T17:54:03-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Watson",
@@ -4338,7 +4430,7 @@
       "Francia",
       "Oceano"
     ],
-    "last_checked": "2026-09-05T17:54:03-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-10-per-il-bene-dell-italia-eliminiamo-il-governo-di-centrodestra-fr-IT": {
     "slug": "2024-10-per-il-bene-dell-italia-eliminiamo-il-governo-di-centrodestra-fr-IT",
@@ -4357,6 +4449,10 @@
       {
         "checked_at": "2026-09-05T17:54:03-06:00",
         "count": 139428
+      },
+      {
+        "checked_at": "2026-09-18T15:38:42-06:00",
+        "count": 139432
       }
     ],
     "title": "Giù le mani dalle foche!",
@@ -4366,12 +4462,12 @@
     "start_date": "2024-10-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 139428,
+    "signatures": 139432,
     "goal": 150000,
     "lang": "it",
     "campaign_id": "wemove:2024-10-seals-ban-petition",
     "status": "online",
-    "last_seen": "2026-09-05T17:54:03-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Foche",
@@ -4385,7 +4481,7 @@
       "Foca",
       "Loro"
     ],
-    "last_checked": "2026-09-05T17:54:03-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-10-vietare-antifurti-che-spaccano-i-timpani-IT": {
     "slug": "2024-10-vietare-antifurti-che-spaccano-i-timpani-IT",
@@ -4408,7 +4504,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-10-vietare-antifurti-che-spaccano-i-timpani",
     "status": "online",
-    "last_seen": "2026-09-05T17:54:03-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Antifurti",
@@ -4422,7 +4518,7 @@
       "Impedire",
       "Gestita"
     ],
-    "last_checked": "2026-09-05T17:54:03-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-10-youmove-wildlife-crossings-petition-IT": {
     "slug": "2024-10-youmove-wildlife-crossings-petition-IT",
@@ -4445,7 +4541,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-10-youmove-wildlife-crossings-petition",
     "status": "online",
-    "last_seen": "2026-09-05T17:54:03-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Animali",
@@ -4459,7 +4555,7 @@
       "Selvatica",
       "Questo"
     ],
-    "last_checked": "2026-09-05T17:54:03-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-11--IT": {
     "slug": "2024-11--IT",
@@ -4492,7 +4588,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-11-marcin-test-20241120",
     "status": "online",
-    "last_seen": "2026-09-05T17:54:03-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Test",
@@ -4505,7 +4601,7 @@
       "Questa",
       "Name"
     ],
-    "last_checked": "2026-09-05T17:54:03-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-12-Amazon-workers-petition-IT": {
     "slug": "2024-12-Amazon-workers-petition-IT",
@@ -4529,7 +4625,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-12-Amazon-workers-petition",
     "status": "online",
-    "last_seen": "2026-09-05T17:54:03-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Amazon",
@@ -4543,7 +4639,7 @@
       "Loro",
       "Difendiamo"
     ],
-    "last_checked": "2026-09-05T17:54:03-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-12-Soumahoro-antiracism-petition-IT": {
     "slug": "2024-12-Soumahoro-antiracism-petition-IT",
@@ -4567,7 +4663,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-12-Soumahoro-antiracism-petition",
     "status": "online",
-    "last_seen": "2026-09-05T17:54:03-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Parlamento",
@@ -4581,7 +4677,7 @@
       "Odio",
       "Maboula"
     ],
-    "last_checked": "2026-09-05T17:54:03-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-2-free-doctor-ahmed-muhanna-and-the-awda-medical-staff-petition-IT": {
     "slug": "2024-2-free-doctor-ahmed-muhanna-and-the-awda-medical-staff-petition-IT",
@@ -4604,7 +4700,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-2-free-doctor-ahmed-muhanna-and-the-awda-medical-staff-petition",
     "status": "online",
-    "last_seen": "2026-09-05T18:34:37-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Muhanna",
@@ -4618,7 +4714,7 @@
       "Dottor",
       "Alla"
     ],
-    "last_checked": "2026-09-05T18:34:37-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-4-orto-comunale-IT": {
     "slug": "2024-4-orto-comunale-IT",
@@ -4640,7 +4736,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-4-orto-comunale",
     "status": "online",
-    "last_seen": "2026-09-05T18:34:37-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Comunale",
@@ -4654,7 +4750,7 @@
       "Piante",
       "Buono"
     ],
-    "last_checked": "2026-09-05T18:34:37-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-4-palestina-indipendente-IT": {
     "slug": "2024-4-palestina-indipendente-IT",
@@ -4676,7 +4772,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-4-palestina-indipendente",
     "status": "online",
-    "last_seen": "2026-09-05T18:34:37-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Petizione",
@@ -4689,7 +4785,7 @@
       "Questa",
       "Name"
     ],
-    "last_checked": "2026-09-05T18:34:37-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-4-proteggi-la-biodiversita-IT": {
     "slug": "2024-4-proteggi-la-biodiversita-IT",
@@ -4722,7 +4818,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-4-sfruttiamo-macchine-e-robot-per-dare-reddito-universale-ed-estin",
     "status": "online",
-    "last_seen": "2026-09-05T18:34:37-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Reddito",
@@ -4736,12 +4832,17 @@
       "Sfruttiamo",
       "Macchine"
     ],
-    "last_checked": "2026-09-05T18:34:37-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-4-stop-al-razzismo-IT": {
     "slug": "2024-4-stop-al-razzismo-IT",
     "first_seen": "2026-09-05T18:34:37-06:00",
-    "signatures_history": [],
+    "signatures_history": [
+      {
+        "checked_at": "2026-09-18T15:38:42-06:00",
+        "count": 0
+      }
+    ],
     "title": "Stop al Razzismo !!!",
     "url": "https://action.wemove.eu/sign/2024-4-stop-al-razzismo-IT",
     "description_full": "<p>\n\n\n          Stop al Razzismo !!!\n        \n\n\n</p><p>\n            Questa petizione è gestita da [% inititator_name %]\n          </p>\n\n<h2>\n            Petizione\n          </h2>\n<p>Iniziative Concrete per Superare Il Razzismo che Domina l' Europa</p>\n\n\n<h2>\n            \n              Perché è importante?\n            \n          </h2>\n<p>Nel 2024 E' Vergognoso che Ci Sia ancora il Razzismo… </p>",
@@ -4751,7 +4852,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-4-stop-al-razzismo",
     "status": "online",
-    "last_seen": "2026-09-05T18:34:37-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Razzismo",
@@ -4765,7 +4866,9 @@
       "Superare",
       "Gestita"
     ],
-    "last_checked": "2026-09-05T18:34:37-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00",
+    "signatures": 0,
+    "goal": 1000
   },
   "2024-4-tamburi-di-guerra-IT": {
     "slug": "2024-4-tamburi-di-guerra-IT",
@@ -4787,7 +4890,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-4-tamburi-di-guerra",
     "status": "online",
-    "last_seen": "2026-09-05T19:18:17-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Petizione",
@@ -4801,7 +4904,7 @@
       "RINAMGA",
       "SALVARE"
     ],
-    "last_checked": "2026-09-05T19:18:17-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-6-because-our-planet-is-blue-petition-IT": {
     "slug": "2024-6-because-our-planet-is-blue-petition-IT",
@@ -4824,7 +4927,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-6-because-our-planet-is-blue-petition",
     "status": "online",
-    "last_seen": "2026-09-05T19:18:17-06:00",
+    "last_seen": "2026-09-18T15:38:42-06:00",
     "offline_since": null,
     "tags": [
       "Delle",
@@ -4838,7 +4941,7 @@
       "Collisioni",
       "Perché"
     ],
-    "last_checked": "2026-09-05T19:18:17-06:00"
+    "last_checked": "2026-09-18T15:38:42-06:00"
   },
   "2024-6-divertiamiamoci-IT": {
     "slug": "2024-6-divertiamiamoci-IT",
