@@ -25,7 +25,7 @@ import json
 import os
 import sys
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import i18n_helfer as i18n
@@ -153,6 +153,37 @@ def _zeitpunkt(wert) -> datetime:
     return zp if zp.tzinfo else zp.replace(tzinfo=timezone.utc)
 
 
+# Ab dieser Spanne zwischen letztem Abschluss und letzter Speicherung gilt eine
+# Plattform als chronisch offen. ⚠️ Der Wert muss ÜBER dem normalen Abstand
+# zweier Läufe liegen (2 CI-Läufe/Tag, lokal seit 17.9. alle ~2,4 h), sonst
+# verliert eine einmal abgeschnittene Plattform den Vorrang sofort — und genau
+# dafür ist er da. Zwei Tage lassen mehrere Anläufe zu, bevor umgestuft wird.
+CHRONISCH_OFFEN_TAGE = 2
+
+
+def _chronisch_offen(meta: dict) -> bool:
+    """Kommt diese Plattform seit Tagen nicht mehr zum Abschluss?
+
+    Unterscheidet „einmal abgeschnitten" von „strukturell kaputt", und zwar an
+    vorhandenen Feldern statt an neuem Zustand: ``generated_at`` setzt JEDE
+    Speicherung, ``lauf_verlauf`` nur der Abschluss-Save. Liegen die beiden weit
+    auseinander, ist die Plattform mehrfach gelaufen, ohne je fertig zu werden.
+
+    ⚠️ Ohne ``lauf_verlauf`` ist die Frage NICHT beantwortbar — eine Plattform,
+    die noch nie abgeschlossen hat, kann frisch angelegt sein. Die gibt hier
+    False zurück und behält ihren Vorrang; ihr Fall gehört melde_eingefrorene().
+    """
+    verlauf = meta.get("lauf_verlauf") or []
+    if not verlauf:
+        return False
+    letzter_abschluss = _zeitpunkt(verlauf[-1].get("zeit"))
+    letzte_speicherung = _zeitpunkt(meta.get("generated_at"))
+    if letzter_abschluss == datetime.min.replace(tzinfo=timezone.utc):
+        return False
+    return (letzte_speicherung - letzter_abschluss
+            > timedelta(days=CHRONISCH_OFFEN_TAGE))
+
+
 def _abschlussmarke(p) -> tuple[int, datetime]:
     """Sortierschlüssel: (abgeschlossen?, zuletzt gespeichert).
 
@@ -169,6 +200,17 @@ def _abschlussmarke(p) -> tuple[int, datetime]:
     """
     meta = core.load_meta(p.data_file)
     abgeschlossen = 0 if not meta.get("kennzahlen") else 1
+    if not abgeschlossen and _chronisch_offen(meta):
+        # ⚠️⚠️ Der Vorrang gilt nur für KURZ Unterbrochene. Wer seit Tagen nie
+        # zum Abschluss kommt, ist nicht unterbrochen, sondern kaputt — und
+        # belegte mit dem Vorrang dauerhaft Platz 1. Gemessen am 17.9.2026:
+        # Läufe #78 und #79 begannen beide bei Change.org, identische
+        # Reihenfolge; damit traf der Fristabbruch IMMER dieselben drei am Ende
+        # (weact, avaaz, openpetition — openpetition brach nach 64 min mitten
+        # in der Entdeckung ab). Genau das sollte der Rundlauf verhindern.
+        # Solche Fälle verlieren den Vorrang und werden gemeldet; sie kommen
+        # über den Zeitstempel weiterhin dran, nur nicht mehr immer zuerst.
+        abgeschlossen = 1
     # Fehlender Zeitstempel = noch nie gelaufen = höchste Dringlichkeit.
     return (abgeschlossen, _zeitpunkt(meta.get("generated_at")))
 
@@ -196,6 +238,20 @@ def rotiere_auf_aeltestes(targets: list[Platform]) -> list[Platform]:
               + ", ".join(p.key for p in gedreht)
               + (f". Ohne Abschluss im letzten Lauf: {', '.join(offen)}."
                  if offen else "."))
+    # ⚠️ Ein chronischer Fall darf nicht STILL seinen Vorrang verlieren. Sonst
+    # verschwindet er aus dem Blick, statt aufzufallen — und dass Change.org
+    # seit Wochen keinen Abschluss schreibt, ist der eigentliche Befund, nicht
+    # die Sortierung. Als warning, damit es neben den Zustandsmeldungen steht.
+    chronisch = [p.name for p in targets
+                 if _chronisch_offen(core.load_meta(p.data_file))]
+    if chronisch:
+        hinweis = (f"Seit über {CHRONISCH_OFFEN_TAGE} Tagen ohne Abschluss, "
+                   f"daher ohne Rundlauf-Vorrang: {', '.join(chronisch)}. "
+                   f"Der Vorrang ist für kurz Unterbrochene gedacht; wer ihn "
+                   f"dauerhaft hält, verdrängt alle anderen vom Anfang.")
+        core.log(f"Rundlauf: {hinweis}")
+        if core.in_github_actions():
+            print(f"::warning title=Rundlauf::{hinweis}")
     return gedreht
 
 
