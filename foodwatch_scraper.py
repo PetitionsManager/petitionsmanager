@@ -702,6 +702,7 @@ def run_zweig(args, lang: str) -> None:
     # kleinzurechnen. (17.9.2026: foodwatch_fr meldete 64 % Abarbeitung, weil
     # 13 Kategorieseiten im Nenner standen.)
     keine_aktion = 0
+    zweitpfade = 0
     for i, pfad in enumerate(sorted(pfade), 1):
         slug = pfad.rstrip("/").rsplit("/", 1)[-1]
         prog(current=i, total=len(pfade), message=slug)
@@ -714,6 +715,24 @@ def run_zweig(args, lang: str) -> None:
         if rec.get("signatures") is None:
             keine_aktion += 1
             continue
+        # ⚠️⚠️ foodwatch verlinkt dieselbe Petition unter MEHREREN Pfaden. Am
+        # 17.9.2026 gemeldet („URL 2× vorhanden") und an der Quelle bestätigt:
+        # die fr-Liste führt .../logo-nutri-score/petition-nutri-score-... UND
+        # .../logo-nutri-score/sante-pour-un-nutri-score-... auf dieselbe
+        # Seite. Der Schlüssel kam aus dem LISTENPFAD, rec["url"] dagegen aus
+        # dem <link rel="canonical"> — also zwei Sätze für eine Petition.
+        # core.upsert() fängt das nicht ab: es vergleicht nur den Schlüssel.
+        # Deshalb hier auf die KANONISCHE Adresse umstellen; ein schon unter
+        # dem Zweitpfad angelegter Satz wandert samt signatures_history mit,
+        # sonst risse die Unterschriftenkurve an der Umstellung ab.
+        kanon = (rec.get("url") or url).rstrip("/").rsplit("/", 1)[-1]
+        if kanon and kanon != slug:
+            zweitpfade += 1
+            alt = store.pop(slug, None)
+            if alt is not None and kanon not in store:
+                alt["slug"] = kanon
+                store[kanon] = alt
+            slug = kanon
         i18n.setze_hauptsprache(rec, lang)
         core.upsert(store, slug, rec, {}, "online", ts, url)
         gesehen += 1
@@ -723,12 +742,17 @@ def run_zweig(args, lang: str) -> None:
     if neu:
         log(f"NEU: {len(neu)} neue Aktion(en) ({lang}) in diesem Lauf.")
     prog(message="Speichere & baue HTML …")
+    if zweitpfade:
+        # Nie still verwerfen: sonst sieht ein schrumpfender Bestand wie ein
+        # Datenverlust aus, obwohl nur Dubletten zusammengefallen sind.
+        log(f"{lang}: {zweitpfade} Zweitpfad(e) auf bereits erfasste "
+            f"Petitionen zusammengeführt.")
     # available ist der NENNER der Dashboard-Kachel: „x von y Kandidaten".
-    # Kategorieseiten hier abziehen, sonst meldet die Kachel dauerhaft einen
-    # Rueckstand, den es nicht gibt — und ein erfundener Rueckstand lenkt die
-    # Aufmerksamkeit von den echten ab.
+    # Kategorieseiten UND Zweitpfade hier abziehen — beide sind keine eigenen
+    # Petitionen. Sonst meldet die Kachel dauerhaft einen Rueckstand, den es
+    # nicht gibt, und ein erfundener Rueckstand lenkt von den echten ab.
     save(quiet=False, new_petitions_last_run=neu,
-         available=len(pfade) - keine_aktion)
+         available=len(pfade) - keine_aktion - zweitpfade)
     core.write_list_html(PLATFORM_JE_ZWEIG[lang])
     log(f"Fertig (foodwatch {lang}, {gesehen} Aktion(en) bestätigt).")
 
