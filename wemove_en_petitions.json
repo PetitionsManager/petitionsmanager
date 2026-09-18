@@ -31,9 +31,16 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-18T08:40:44-06:00",
-    "petition_count": 601,
+    "generated_at": "2026-09-18T09:05:21-06:00",
+    "petition_count": 606,
     "available": 708,
+    "new_petitions_last_run": [
+      "2026-09-14-trial-killer-robots-trial-EN",
+      "2026-09-Big-Food-petition-EN",
+      "2026-09-toxic-coffee-petition-EN",
+      "2026-09-trial-ticket-companies-ripping-off-fans-petition-EN",
+      "2026-09-trial2-fuelled-by-greed-petition-EN"
+    ],
     "unbrauchbare": {
       "20216-05-all-out-list-swap-petition-EN": "2026-09-05T14:05:02-06:00",
       "2023-01-lucas-ig-wrapper-test-petition-EN": "2026-09-05T15:27:48-06:00",
@@ -134,45 +141,46 @@
       "galen-tweet-test-petition-EN": "2026-09-06T16:16:33-06:00",
       "lucass-target-test-call-EN": "2026-09-06T16:16:33-06:00",
       "lucass-target-test-petition-EN": "2026-09-06T16:16:33-06:00",
-      "sign-now-test-EN": "2026-09-06T16:16:33-06:00"
+      "sign-now-test-EN": "2026-09-06T16:16:33-06:00",
+      "lucas-test-donate-petition-EN": "2026-09-18T09:03:37-06:00",
+      "lucas-test-donation-2-petition-EN": "2026-09-18T09:03:37-06:00"
     },
-    "new_petitions_last_run": [],
     "lauf_verlauf": [
       {
-        "zeit": "2026-09-18T08:40:43-06:00",
-        "gesamt": 601,
-        "online": 600,
+        "zeit": "2026-09-18T09:05:20-06:00",
+        "gesamt": 606,
+        "online": 605,
         "offline": 1,
         "ohne_titel": 1,
         "platzhalter": 0,
         "nicht_ausgeliefert": 1,
         "torsi": 0,
         "dubletten": 0,
-        "mit_start": 478,
+        "mit_start": 483,
         "juengstes_start": "2026-09-01",
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
-        "neu": 0
+        "neu": 5
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-18T08:40:43-06:00",
-      "gesamt": 601,
-      "online": 600,
+      "zeit": "2026-09-18T09:05:20-06:00",
+      "gesamt": 606,
+      "online": 605,
       "offline": 1,
       "ohne_titel": 1,
       "platzhalter": 0,
       "nicht_ausgeliefert": 1,
       "torsi": 0,
       "dubletten": 0,
-      "mit_start": 478,
+      "mit_start": 483,
       "juengstes_start": "2026-09-01",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-09-18T08:40:43-06:00",
+    "verlauf_felder_ab": "2026-09-18T09:05:20-06:00",
     "befunde": [],
     "health_warning": null,
-    "online_count": 600
+    "online_count": 605
   },
   "2026-07-ban-coral-killers-sunscreen-petition-EN": {
     "slug": "2026-07-ban-coral-killers-sunscreen-petition-EN",
@@ -22593,7 +22601,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-2-no-alle-armi-si-alla-pace",
     "status": "online",
-    "last_seen": "2026-09-06T16:02:35-06:00",
+    "last_seen": "2026-09-18T09:03:37-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -22607,7 +22615,7 @@
       "Based",
       "Revitalization"
     ],
-    "last_checked": "2026-09-06T16:02:35-06:00"
+    "last_checked": "2026-09-18T09:03:37-06:00"
   },
   "2026-2-proper-um-and-date-format-EN": {
     "slug": "2026-2-proper-um-and-date-format-EN",
@@ -22630,7 +22638,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-2-proper-um-and-date-format",
     "status": "online",
-    "last_seen": "2026-09-06T16:02:35-06:00",
+    "last_seen": "2026-09-18T09:03:37-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -22644,7 +22652,7 @@
       "Digital",
       "Metric"
     ],
-    "last_checked": "2026-09-06T16:02:35-06:00"
+    "last_checked": "2026-09-18T09:03:37-06:00"
   },
   "2026-2-urgent-petition-greenland-is-not-for-sale-trump-does-not-own-the-EN": {
     "slug": "2026-2-urgent-petition-greenland-is-not-for-sale-trump-does-not-own-the-EN",
@@ -22666,7 +22674,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-2-urgent-petition-greenland-is-not-for-sale-trump-does-not-own-the",
     "status": "online",
-    "last_seen": "2026-09-06T16:02:35-06:00",
+    "last_seen": "2026-09-18T09:03:37-06:00",
     "offline_since": null,
     "tags": [
       "GREENLAND",
@@ -22680,7 +22688,7 @@
       "Denmark",
       "Fragile"
     ],
-    "last_checked": "2026-09-06T16:02:35-06:00"
+    "last_checked": "2026-09-18T09:03:37-06:00"
   },
   "aarongiuliotest-petition-EN": {
     "slug": "aarongiuliotest-petition-EN",
@@ -22702,7 +22710,7 @@
     "lang": "en",
     "campaign_id": "wemove:aarongiuliotest-petition",
     "status": "online",
-    "last_seen": "2026-09-06T16:02:35-06:00",
+    "last_seen": "2026-09-18T09:03:37-06:00",
     "offline_since": null,
     "tags": [
       "Pesticides",
@@ -22716,7 +22724,7 @@
       "Bayer-Monsanto",
       "Commission"
     ],
-    "last_checked": "2026-09-06T16:02:35-06:00"
+    "last_checked": "2026-09-18T09:03:37-06:00"
   },
   "democratization-of-europe-EN": {
     "slug": "democratization-of-europe-EN",
@@ -22725,6 +22733,10 @@
       {
         "checked_at": "2026-09-06T16:02:35-06:00",
         "count": 92139
+      },
+      {
+        "checked_at": "2026-09-18T09:03:37-06:00",
+        "count": 92140
       }
     ],
     "title": "For the democratization of Europe",
@@ -22734,12 +22746,12 @@
     "summary": "English Français Deutsch Español Italiano Polski For the democratization of Europe European Assembly This petition is run by [% inititator_name %] Petition Manifesto We, European citizens, from differ…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 92139,
+    "signatures": 92140,
     "goal": 100000,
     "lang": "en",
     "campaign_id": "wemove:democratization-of-europe",
     "status": "online",
-    "last_seen": "2026-09-06T16:02:35-06:00",
+    "last_seen": "2026-09-18T09:03:37-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -22753,7 +22765,7 @@
       "Assembly",
       "Project"
     ],
-    "last_checked": "2026-09-06T16:02:35-06:00"
+    "last_checked": "2026-09-18T09:03:37-06:00"
   },
   "developers-testing-campaign-petition-checkbox-EN": {
     "slug": "developers-testing-campaign-petition-checkbox-EN",
@@ -22762,6 +22774,10 @@
       {
         "checked_at": "2026-09-06T16:02:35-06:00",
         "count": 2110
+      },
+      {
+        "checked_at": "2026-09-18T09:03:37-06:00",
+        "count": 2220
       }
     ],
     "title": "Make Europe a safe place for all women and girls!",
@@ -22771,12 +22787,12 @@
     "summary": "English English English English English English English English English English English English Français Deutsch Deutsch Español Italiano Polski Make Europe a safe place for all women and girls! To th…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 2110,
+    "signatures": 2220,
     "goal": 5000,
     "lang": "en",
     "campaign_id": "wemove:developers-testing-campaign-petition-checkbox",
     "status": "online",
-    "last_seen": "2026-09-06T16:02:35-06:00",
+    "last_seen": "2026-09-18T09:03:37-06:00",
     "offline_since": null,
     "tags": [
       "English",
@@ -22790,7 +22806,7 @@
       "Place",
       "Make"
     ],
-    "last_checked": "2026-09-06T16:02:35-06:00"
+    "last_checked": "2026-09-18T09:03:37-06:00"
   },
   "developers-testing-campaign-petition-EN": {
     "slug": "developers-testing-campaign-petition-EN",
@@ -22799,6 +22815,10 @@
       {
         "checked_at": "2026-09-06T16:16:33-06:00",
         "count": 2110
+      },
+      {
+        "checked_at": "2026-09-18T09:03:37-06:00",
+        "count": 2220
       }
     ],
     "title": "Make Europe a safe place for all women and girls!",
@@ -22808,12 +22828,12 @@
     "summary": "English English English English English English English English English English English English Français Deutsch Deutsch Español Italiano Polski Make Europe a safe place for all women and girls! To th…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 2110,
+    "signatures": 2220,
     "goal": 5000,
     "lang": "en",
     "campaign_id": "wemove:developers-testing-campaign-petition",
     "status": "online",
-    "last_seen": "2026-09-06T16:16:33-06:00",
+    "last_seen": "2026-09-18T09:03:37-06:00",
     "offline_since": null,
     "tags": [
       "English",
@@ -22827,7 +22847,7 @@
       "Place",
       "Make"
     ],
-    "last_checked": "2026-09-06T16:16:33-06:00"
+    "last_checked": "2026-09-18T09:03:37-06:00"
   },
   "developers-testing-campaign-petition-external-video-EN": {
     "slug": "developers-testing-campaign-petition-external-video-EN",
@@ -22836,6 +22856,10 @@
       {
         "checked_at": "2026-09-06T16:16:33-06:00",
         "count": 2110
+      },
+      {
+        "checked_at": "2026-09-18T09:03:37-06:00",
+        "count": 2220
       }
     ],
     "title": "Make Europe a safe place for all women and girls!",
@@ -22845,12 +22869,12 @@
     "summary": "English English English English English English English English English English English English Français Deutsch Deutsch Español Italiano Polski Make Europe a safe place for all women and girls! To th…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 2110,
+    "signatures": 2220,
     "goal": 5000,
     "lang": "en",
     "campaign_id": "wemove:developers-testing-campaign-petition-external-video",
     "status": "online",
-    "last_seen": "2026-09-06T16:16:33-06:00",
+    "last_seen": "2026-09-18T09:03:37-06:00",
     "offline_since": null,
     "tags": [
       "English",
@@ -22864,7 +22888,7 @@
       "Place",
       "Make"
     ],
-    "last_checked": "2026-09-06T16:16:33-06:00"
+    "last_checked": "2026-09-18T09:03:37-06:00"
   },
   "developers-testing-campaign-petition-germanic-users-EN": {
     "slug": "developers-testing-campaign-petition-germanic-users-EN",
@@ -22873,6 +22897,10 @@
       {
         "checked_at": "2026-09-06T16:16:33-06:00",
         "count": 2110
+      },
+      {
+        "checked_at": "2026-09-18T09:03:37-06:00",
+        "count": 2220
       }
     ],
     "title": "Make Europe a safe place for all women and girls!",
@@ -22882,12 +22910,12 @@
     "summary": "English English English English English English English English English English English English Français Deutsch Deutsch Español Italiano Polski Make Europe a safe place for all women and girls! To th…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 2110,
+    "signatures": 2220,
     "goal": 5000,
     "lang": "en",
     "campaign_id": "wemove:developers-testing-campaign-petition-germanic-users",
     "status": "online",
-    "last_seen": "2026-09-06T16:16:33-06:00",
+    "last_seen": "2026-09-18T09:03:37-06:00",
     "offline_since": null,
     "tags": [
       "English",
@@ -22901,7 +22929,7 @@
       "Place",
       "Make"
     ],
-    "last_checked": "2026-09-06T16:16:33-06:00"
+    "last_checked": "2026-09-18T09:03:37-06:00"
   },
   "developers-testing-campaign-petition-radio-buttons-EN": {
     "slug": "developers-testing-campaign-petition-radio-buttons-EN",
@@ -22910,6 +22938,10 @@
       {
         "checked_at": "2026-09-06T16:16:33-06:00",
         "count": 2110
+      },
+      {
+        "checked_at": "2026-09-18T09:03:37-06:00",
+        "count": 2220
       }
     ],
     "title": "Make Europe a safe place for all women and girls!",
@@ -22919,12 +22951,12 @@
     "summary": "English English English English English English English English English English English English Français Deutsch Deutsch Español Italiano Polski Make Europe a safe place for all women and girls! To th…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 2110,
+    "signatures": 2220,
     "goal": 5000,
     "lang": "en",
     "campaign_id": "wemove:developers-testing-campaign-petition-radio-buttons",
     "status": "online",
-    "last_seen": "2026-09-06T16:16:33-06:00",
+    "last_seen": "2026-09-18T09:03:37-06:00",
     "offline_since": null,
     "tags": [
       "English",
@@ -22938,7 +22970,7 @@
       "Place",
       "Make"
     ],
-    "last_checked": "2026-09-06T16:16:33-06:00"
+    "last_checked": "2026-09-18T09:03:37-06:00"
   },
   "developers-testing-campaign-petition-with-recaptcha-EN": {
     "slug": "developers-testing-campaign-petition-with-recaptcha-EN",
@@ -22947,6 +22979,10 @@
       {
         "checked_at": "2026-09-06T16:16:33-06:00",
         "count": 2110
+      },
+      {
+        "checked_at": "2026-09-18T09:03:37-06:00",
+        "count": 2220
       }
     ],
     "title": "Recaptcha - Make Europe a safe place for all women and girls!",
@@ -22956,12 +22992,12 @@
     "summary": "English English English English English English English English English English English English Français Deutsch Deutsch Español Italiano Polski Recaptcha - Make Europe a safe place for all women and …",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 2110,
+    "signatures": 2220,
     "goal": 5000,
     "lang": "en",
     "campaign_id": "wemove:developers-testing-campaign-petition-with-recaptcha",
     "status": "online",
-    "last_seen": "2026-09-06T16:16:33-06:00",
+    "last_seen": "2026-09-18T09:03:37-06:00",
     "offline_since": null,
     "tags": [
       "English",
@@ -22975,7 +23011,7 @@
       "Sexual",
       "Place"
     ],
-    "last_checked": "2026-09-06T16:16:33-06:00"
+    "last_checked": "2026-09-18T09:03:37-06:00"
   },
   "developers-testing-campaign-petition-youtube-EN": {
     "slug": "developers-testing-campaign-petition-youtube-EN",
@@ -22984,21 +23020,25 @@
       {
         "checked_at": "2026-09-06T16:16:33-06:00",
         "count": 2110
+      },
+      {
+        "checked_at": "2026-09-18T09:03:37-06:00",
+        "count": 2220
       }
     ],
     "title": "Make Europe a safe place for all women and girls!",
     "image_url": "https://wemove.cdn.actionkit.com/images/vaw_campaign_.jpg",
     "url": "https://action.wemove.eu/sign/developers-testing-campaign-petition-youtube-EN",
-    "description_full": "<p>\n\n<!-- Remove this if you don't want popins like \"This page also in English\" -->\n\n\n<img alt=\"Language selector\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/icon_translate_eeaca63123.svg\"/>\n\n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n              \n              English\n\n              \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n        \n\n</p><ul>\n<li>\n<a href=\"https://action.wemove.eu/sign/developers-testing-campaign-petition-EN\" rel=\"noopener\" target=\"_blank\">\n                    \n                    English\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/developers-testing-campaign-petition-radio-buttons-EN\" rel=\"noopener\" target=\"_blank\">\n                    \n                    English\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/developers-testing-campaign-petition-checkbox-EN\" rel=\"noopener\" target=\"_blank\">\n                    \n                    English\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/developers-testing-campaign-petition-germanic-users-EN\" rel=\"noopener\" target=\"_blank\">\n                    \n                    English\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/developers-tw-css-campaign-petition-EN\" rel=\"noopener\" target=\"_blank\">\n                    \n                    English\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/developers-testing-campaign-petition-external-video-EN\" rel=\"noopener\" target=\"_blank\">\n                    \n                    English\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/developers-testing-campaign-petition-EN_copy\" rel=\"noopener\" target=\"_blank\">\n                    \n                    English\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/developers-testing-campaign-petition-EN_userrecog\" rel=\"noopener\" target=\"_blank\">\n                    \n                    English\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/developers-testing-campaign-petition-with-recaptcha-EN\" rel=\"noopener\" target=\"_blank\">\n                    \n                    English\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/developers-testing-campaign-petition-EN_copy2\" rel=\"noopener\" target=\"_blank\">\n                    \n                    English\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/developers-testing-campaign-petition-EN_copy3\" rel=\"noopener\" target=\"_blank\">\n                    \n                    English\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/developers-testing-campaign-petition-FR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Français\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/developers-testing-campaign-petition-DE\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Deutsch\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/oceancare-demo-DE\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Deutsch\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/developers-testing-campaign-petition-ES\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Español\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/developers-testing-campaign-petition-IT\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Italiano\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/developers-testing-campaign-petition-PL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Polski\n\n                    \n                    </a>\n</li>\n</ul><p>\n\n\n          Make Europe a safe place for all women and girls!\n        \n\n\n\n\n      Please accept marketing cookies to watch this video\n    \n\n\n\n\n</p><h3>\n\n<p>To the European Commission, European Parliament and Council of the European Union</p>\n<!-- ak.wysiwyg=code -->\n</h3>\n\n<h2>\n            Petition\n          </h2>\n\n<p>We are calling on the EU to enhance and swiftly adopt the Directive on combating violence against women and domestic violence. The Directive should criminalise all forms of sexual exploitation of women, including sexual violence and abuse over women's sexuality, and all forms of online violence against women and girls. We also call to set high standards for specialised support mechanisms to protect survivors and ensure their access to justice and reparation.</p>\n<!-- ak.wysiwyg=code -->\n\n\n<h2>\n            \n              Why is this important?\n            \n          </h2>\n\n<p>Despite progress over the last decades on gender equality, <strong>there is not a single country in Europe where women and girls are free from violence. </strong>There is no area of a woman or girl's life where she is not exposed to the possibility of violence: from the home's private space to the public space, which includes the workplace and online spaces.</p>\n<p>In the EU,<strong> 1 in 3 women have suffered physical and/or sexual violence </strong>and 1 in 2 women have experienced sexual harassment since the age of 15. [1]</p>\n<p>Gender-based violence has increased for the first time in a decade and <strong>2 women each day are killed in the EU at the hands of their partners or former partners.</strong> [1] All forms of Violence against women have the same goal: to silence women and to keep them in a subordinate place. But we won't let that happen!</p>\n<p>We have a chance right now to secure a EU Directive on violence against women and domestic violence. [2] Women who have been the survivors of rape, female genital mutilation, image based sexual abuse online, cyberstalking, or cyberharassment will have the same level of protection no matter where they live. Women’s organisations are working hard to ensure that the Directive covers more forms of violence, including all forms of sexual violence and sexual and reproductive exploitation, and also to ensure that it proposes a comprehensive set of specialised measures to protect all women survivors of any form of gender-based violence and to give them access to justice and reparation.</p>\n<p><strong>If enough of us show how important it is to ensure women are safe and protected, decision makers will have to listen to us. Add your voice!</strong></p>\n<!-- ak.wysiwyg=code -->\n<h4>\n            References:\n          </h4>\n\n\n<ol>\n<li>European Union Agency for Fundamental Rights (FRA), Violence against women: an EU-wide survey. Main results report, 2014: https://fra.europa.eu/en/publication/2014/violence-against-women-eu-wide-survey-main-results-report</li>\n<li>Proposal for a Directive of the European Parliament and of the Council on combating violence against women and domestic violence, 2022: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A52022PC0105</li>\n</ol>\n<!-- ak.wysiwyg=code -->\n\n\n\n<h3>In partnership with:</h3>\n\n<p><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/european-women-s-lobby-logo_0.png\"/>  <img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/banner_fragdenstaat_1.png\"/></p>",
+    "description_full": "<p>\n\n<!-- Remove this if you don't want popins like \"This page also in English\" -->\n\n\n<img alt=\"Language selector\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/icon_translate_eeaca63123.svg\"/>\n\n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n              \n              English\n\n              \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n        \n\n</p><ul>\n<li>\n<a href=\"https://action.wemove.eu/sign/developers-testing-campaign-petition-EN\" rel=\"noopener\" target=\"_blank\">\n                    \n                    English\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/developers-testing-campaign-petition-radio-buttons-EN\" rel=\"noopener\" target=\"_blank\">\n                    \n                    English\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/developers-testing-campaign-petition-checkbox-EN\" rel=\"noopener\" target=\"_blank\">\n                    \n                    English\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/developers-testing-campaign-petition-germanic-users-EN\" rel=\"noopener\" target=\"_blank\">\n                    \n                    English\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/developers-tw-css-campaign-petition-EN\" rel=\"noopener\" target=\"_blank\">\n                    \n                    English\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/developers-testing-campaign-petition-external-video-EN\" rel=\"noopener\" target=\"_blank\">\n                    \n                    English\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/developers-testing-campaign-petition-EN_copy\" rel=\"noopener\" target=\"_blank\">\n                    \n                    English\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/developers-testing-campaign-petition-EN_userrecog\" rel=\"noopener\" target=\"_blank\">\n                    \n                    English\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/developers-testing-campaign-petition-with-recaptcha-EN\" rel=\"noopener\" target=\"_blank\">\n                    \n                    English\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/developers-testing-campaign-petition-EN_copy2\" rel=\"noopener\" target=\"_blank\">\n                    \n                    English\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/developers-testing-campaign-petition-EN_copy3\" rel=\"noopener\" target=\"_blank\">\n                    \n                    English\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/developers-testing-campaign-petition-FR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Français\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/developers-testing-campaign-petition-DE\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Deutsch\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/oceancare-demo-DE\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Deutsch\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/developers-testing-campaign-petition-ES\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Español\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/developers-testing-campaign-petition-IT\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Italiano\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/developers-testing-campaign-petition-PL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Polski\n\n                    \n                    </a>\n</li>\n</ul><p>\n\n\n          Make Europe a safe place for all women and girls!\n        \n\n\n\n\n        Please accept marketing cookies to watch this video\n      \n\n\n\n\n</p><h3>\n\n<p>To the European Commission, European Parliament and Council of the European Union</p>\n<!-- ak.wysiwyg=code -->\n</h3>\n\n<h2>\n            Petition\n          </h2>\n\n<p>We are calling on the EU to enhance and swiftly adopt the Directive on combating violence against women and domestic violence. The Directive should criminalise all forms of sexual exploitation of women, including sexual violence and abuse over women's sexuality, and all forms of online violence against women and girls. We also call to set high standards for specialised support mechanisms to protect survivors and ensure their access to justice and reparation.</p>\n<!-- ak.wysiwyg=code -->\n\n\n<h2>\n            \n              Why is this important?\n            \n          </h2>\n\n<p>Despite progress over the last decades on gender equality, <strong>there is not a single country in Europe where women and girls are free from violence. </strong>There is no area of a woman or girl's life where she is not exposed to the possibility of violence: from the home's private space to the public space, which includes the workplace and online spaces.</p>\n<p>In the EU,<strong> 1 in 3 women have suffered physical and/or sexual violence </strong>and 1 in 2 women have experienced sexual harassment since the age of 15. [1]</p>\n<p>Gender-based violence has increased for the first time in a decade and <strong>2 women each day are killed in the EU at the hands of their partners or former partners.</strong> [1] All forms of Violence against women have the same goal: to silence women and to keep them in a subordinate place. But we won't let that happen!</p>\n<p>We have a chance right now to secure a EU Directive on violence against women and domestic violence. [2] Women who have been the survivors of rape, female genital mutilation, image based sexual abuse online, cyberstalking, or cyberharassment will have the same level of protection no matter where they live. Women’s organisations are working hard to ensure that the Directive covers more forms of violence, including all forms of sexual violence and sexual and reproductive exploitation, and also to ensure that it proposes a comprehensive set of specialised measures to protect all women survivors of any form of gender-based violence and to give them access to justice and reparation.</p>\n<p><strong>If enough of us show how important it is to ensure women are safe and protected, decision makers will have to listen to us. Add your voice!</strong></p>\n<!-- ak.wysiwyg=code -->\n<h4>\n            References:\n          </h4>\n\n\n<ol>\n<li>European Union Agency for Fundamental Rights (FRA), Violence against women: an EU-wide survey. Main results report, 2014: https://fra.europa.eu/en/publication/2014/violence-against-women-eu-wide-survey-main-results-report</li>\n<li>Proposal for a Directive of the European Parliament and of the Council on combating violence against women and domestic violence, 2022: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A52022PC0105</li>\n</ol>\n<!-- ak.wysiwyg=code -->\n\n\n\n<h3>In partnership with:</h3>\n\n<p><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/european-women-s-lobby-logo_0.png\"/>  <img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/banner_fragdenstaat_1.png\"/></p>",
     "summary": "English English English English English English English English English English English English Français Deutsch Deutsch Español Italiano Polski Make Europe a safe place for all women and girls! Pleas…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 2110,
+    "signatures": 2220,
     "goal": 5000,
     "lang": "en",
     "campaign_id": "wemove:developers-testing-campaign-petition-youtube",
     "status": "online",
-    "last_seen": "2026-09-06T16:16:33-06:00",
+    "last_seen": "2026-09-18T09:03:37-06:00",
     "offline_since": null,
     "tags": [
       "English",
@@ -23012,7 +23052,7 @@
       "Place",
       "Make"
     ],
-    "last_checked": "2026-09-06T16:16:33-06:00"
+    "last_checked": "2026-09-18T09:03:37-06:00"
   },
   "developers-tw-css-campaign-petition-EN": {
     "slug": "developers-tw-css-campaign-petition-EN",
@@ -23021,6 +23061,10 @@
       {
         "checked_at": "2026-09-06T16:16:33-06:00",
         "count": 2110
+      },
+      {
+        "checked_at": "2026-09-18T09:03:37-06:00",
+        "count": 2220
       }
     ],
     "title": "Tailwind-css Make Europe a safe place for all women and girls!",
@@ -23030,12 +23074,12 @@
     "summary": "English English English English English English English English English English English English Français Deutsch Deutsch Español Italiano Polski Tailwind-css Make Europe a safe place for all women and…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 2110,
+    "signatures": 2220,
     "goal": 5000,
     "lang": "en",
     "campaign_id": "wemove:developers-tw-css-campaign-petition",
     "status": "online",
-    "last_seen": "2026-09-06T16:16:33-06:00",
+    "last_seen": "2026-09-18T09:03:37-06:00",
     "offline_since": null,
     "tags": [
       "English",
@@ -23049,7 +23093,7 @@
       "Place",
       "Tailwind-css"
     ],
-    "last_checked": "2026-09-06T16:16:33-06:00"
+    "last_checked": "2026-09-18T09:03:37-06:00"
   },
   "save-the-glaciers-petition-EN": {
     "slug": "save-the-glaciers-petition-EN",
@@ -23072,7 +23116,7 @@
     "lang": "en",
     "campaign_id": "wemove:save-the-glaciers-petition",
     "status": "online",
-    "last_seen": "2026-09-06T16:16:33-06:00",
+    "last_seen": "2026-09-18T09:03:37-06:00",
     "offline_since": null,
     "tags": [
       "Government",
@@ -23086,7 +23130,7 @@
       "Kaunertal",
       "Dornauer"
     ],
-    "last_checked": "2026-09-06T16:16:33-06:00"
+    "last_checked": "2026-09-18T09:03:37-06:00"
   },
   "sharesteptest-petition-EN": {
     "slug": "sharesteptest-petition-EN",
@@ -23109,7 +23153,7 @@
     "lang": "en",
     "campaign_id": "wemove:sharesteptest-petition",
     "status": "online",
-    "last_seen": "2026-09-06T16:16:33-06:00",
+    "last_seen": "2026-09-18T09:03:37-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -23123,7 +23167,7 @@
       "Italiano",
       "Council"
     ],
-    "last_checked": "2026-09-06T16:16:33-06:00"
+    "last_checked": "2026-09-18T09:03:37-06:00"
   },
   "trial-save-the-mackerel-petition-EN": {
     "slug": "trial-save-the-mackerel-petition-EN",
@@ -23146,7 +23190,7 @@
     "lang": "en",
     "campaign_id": "wemove:trial-save-the-mackerel-petition",
     "status": "online",
-    "last_seen": "2026-09-06T16:16:33-06:00",
+    "last_seen": "2026-09-18T09:03:37-06:00",
     "offline_since": null,
     "tags": [
       "Mackerel",
@@ -23160,6 +23204,195 @@
       "Europe",
       "Future"
     ],
-    "last_checked": "2026-09-06T16:16:33-06:00"
+    "last_checked": "2026-09-18T09:03:37-06:00"
+  },
+  "2026-09-14-trial-killer-robots-trial-EN": {
+    "slug": "2026-09-14-trial-killer-robots-trial-EN",
+    "first_seen": "2026-09-18T09:03:37-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-09-18T09:03:37-06:00",
+        "count": 506
+      }
+    ],
+    "title": "Stop Killer Robots",
+    "image_url": "https://wemove.cdn.actionkit.com/images/killer-robots-trial-image1.jpg",
+    "url": "https://action.wemove.eu/sign/2026-09-14-trial-killer-robots-trial-EN",
+    "description_full": "<p>\n\n\n          Stop Killer Robots\n        \n\n<img alt=\"Stop Killer Robots\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/killer-robots-trial-image1.jpg\"/>\n\n</p><h3>\n<p>To EU Heads of State &amp; Governments</p>\n</h3>\n\n<h2>\n            Petition\n          </h2>\n<p>Lead Europe in launching negotiations for a legally binding UN treaty on autonomous weapons.</p>\n<p>We urge you to:</p>\n<ul>\n<li>Start negotiations now at the UN Convention on <strong>Certain Conventional Weapons</strong>.</li>\n<li><strong>Prohibit autonomous weapons that target people</strong>, and ban systems whose effects cannot be reliably predicted.</li>\n<li>Adopt <strong>clear international rules ensuring meaningful human control </strong>over every use of lethal force.</li>\n</ul>\n<p>History will remember the governments that drew this moral red line.</p>\n\n\n<h2>\n            \n              Why is this important?\n            \n          </h2>\n<p>Killer robots. Machines. Deciding who lives and who dies. Children, ‘collateral damage’ in AI-led wars. </p>\n<p>That isn't a future problem. It's happening now. </p>\n<p>Governments and weapons companies are racing to develop autonomous weapons that can <strong>identify and attack people as “targets” with less and less human control.</strong> And the law is struggling to keep up. A UN expert warns that “<strong>we're dangerously close to crossing a moral red line</strong>”. [1]</p>\n<p><strong>A machine should never decide who lives and who dies</strong>. </p>\n<p>Our best chance to regulate killer robots is weeks away, as leaders meet in person to discuss the subject. [2] The technical work is done. A draft exists. Some EU leaders have even shown support. [3] But before they take meaningful action, they need pressure from the public - that’s us. </p>\n<p>Without it, negotiations could be delayed for years <strong>while these weapons kill indiscriminately.</strong></p>\n<p>When thousands of us speak with one voice, governments find the courage to act. <strong>Sign now and demand that Europe puts an end to this dystopia before it's too late.</strong> If we reach 100,000 signatures, we’ll make sure to bring them to the meeting!</p>\n<h4>\n            References:\n          </h4>\n\n<ol>\n<li>https://news.un.org/en/story/2026/08/1168196</li>\n<li>https://www.hrw.org/news/2026/09/07/un-talks-on-killer-robots-ends-with-calls-for-negotiations-growing ; https://news.un.org/en/story/2026/07/1167873</li>\n<li>https://www.diplomatie.gouv.fr/en/presse-et-ressources/decouvrir-et-informer/actualites/organisations-internationales-reunion-du-groupe-d-experts-gouvernementaux-sur-les-systemes-d-armes ; https://docs-library.unoda.org/Convention_on_Certain_Conventional_Weapons_-Group_of_Governmental_Experts_on_Lethal_Autonomous_Weapons_Systems_(2025)/Joint_statement_to_the_September_2025_session_of_the_CCW_GGE_LAWS_-_As_delivered.pdf</li>\n</ol>",
+    "summary": "Stop Killer Robots To EU Heads of State & Governments Petition Lead Europe in launching negotiations for a legally binding UN treaty on autonomous weapons. We urge you to: Start negotiations now at th…",
+    "start_date": "2026-09-01",
+    "started_by": "WeMove Europe",
+    "kind": "petition",
+    "signatures": 506,
+    "goal": 1000,
+    "lang": "en",
+    "campaign_id": "wemove:2026-09-14-trial-killer-robots-trial",
+    "status": "online",
+    "last_seen": "2026-09-18T09:03:37-06:00",
+    "offline_since": null,
+    "tags": [
+      "Weapons",
+      "Negotiations",
+      "Governments",
+      "Killer",
+      "Robots",
+      "Autonomous",
+      "Europe",
+      "Stop",
+      "Meaningful",
+      "Launching"
+    ],
+    "last_checked": "2026-09-18T09:03:37-06:00"
+  },
+  "2026-09-Big-Food-petition-EN": {
+    "slug": "2026-09-Big-Food-petition-EN",
+    "first_seen": "2026-09-18T09:03:37-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-09-18T09:03:37-06:00",
+        "count": 54330
+      }
+    ],
+    "title": "Big Food is making us sick - we need an EU sugar tax!",
+    "image_url": "https://wemove.cdn.actionkit.com/images/shutterstock_2085005953.jpg",
+    "url": "https://action.wemove.eu/sign/2026-09-Big-Food-petition-EN",
+    "description_full": "<p>\n\n<!-- Remove this if you don't want popins like \"This page also in English\" -->\n\n\n<img alt=\"Language selector\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/icon_translate_eeaca63123.svg\"/>\n\n          \n            \n              \n              English\n\n              \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n        \n\n</p><ul>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-Big-Food-petition-FR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Français\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-Big-Food-petition-DE\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Deutsch\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-Big-Food-petition-ES\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Español\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-Big-Food-petition-IT\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Italiano\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-Big-Food-petition-NL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Nederlands\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-Big-Food-petition-PL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Polski\n\n                    \n                    </a>\n</li>\n</ul><p>\n\n\n          Big Food is making us sick - we need an EU sugar tax!\n        \n\n<img alt=\"Big Food is making us sick - we need an EU sugar tax!\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/shutterstock_2085005953.jpg\"/>\n\n</p><h3>\n<p>To the European Commission, the European Parliament, the governments of EU Member States and Big Food companies including Coca-Cola, PepsiCo, Mondelēz, Kellogg’s, Ferrero and Danone</p>\n</h3>\n\n<h2>\n            Petition\n          </h2>\n<p>To the European Commission, the European Parliament, and the governments of EU Member States:</p>\n<p>We call on you to stand firm against this corporate bullying and take bold, coordinated action at the EU level:</p>\n<ul>\n<li>Introduce an EU-wide sugar tax on sugary drinks and ultra-processed foods, and ensure all Member States implement it at the national level. </li>\n<li>Combine sugar taxes with other measures like junk food marketing restrictions and mandatory front-of-pack nutrition labeling to maximize the public health impact.</li>\n<li>Invest the revenues from sugar taxes in health promotion campaigns and programs to make healthy diets more affordable and accessible for all.</li>\n</ul>\n<p>To Coca-Cola, PepsiCo, Mondelēz, Kellogg's, Ferrero, Danone and all Big Food companies:</p>\n<ul>\n<li>Stop using lawsuits, lobbying, and economic pressure to block public health measures. Instead, reformulate your products to reduce sugar levels and end the marketing of sugary products to children.</li>\n</ul>\n\n\n<h2>\n            \n              Why is this important?\n            \n          </h2>\n<p>Junk food giants like <strong>Coca-Cola, Kellogg's and Ferrero are fighting to keep our kids hooked on sugar. And blocking every rule that would stop them. </strong>[1]</p>\n<p>Investigative journalists from ten countries exposed their dirty tactics:<strong> through unrelenting legal attacks they are pressuring our governments </strong>to stop any policy that could cut sugar consumption. Blocking taxes on sugar, limits on junk food ads, and clearer labelling of what we are eating. [2]</p>\n<p>Too much sugar during childhood is linked to early <strong>obesity, diabetes and tooth decay. </strong>But these corporations are putting profits ahead of our children's health. [3]</p>\n<p>Where sugar taxes have been introduced, they work. <strong>In Portugal, a sugar tax cut calories from sugary drinks by around 11%, the equivalent of 30 fewer sugar cubes</strong> per person each month. [4]</p>\n<p>Now, imagine this across Europe. <strong>An EU-wide sugar tax would push companies toward healthier, nutritious alternatives.</strong> But Big Food will do everything it can to stop this. </p>\n<p><strong>We can't let them win. </strong>The EU already has an EU-wide sugar tax on paper, but put it in a drawer once Big Food started their legal attacks. </p>\n<p>With the truth now out in the open, your voice will give our politicians the backbone they need to stand up to corporate bullying and put our children's health first. </p>\n<h4>\n            References:\n          </h4>\n\n<p>[1] https://www.un-industria.it/notizia/90327/cocacola-hbc-italia-con-sugarplastic-tax ; https://lespresso.it/c/inchieste/2026/7/22/guerra-big-food-cibo-spazzatura-salute/63589 ;  https://www.lighthousereports.com/investigation/big-food-vs-the-people/</p>\n<p>[2] [3] https://www.ftm.eu/articles/industry-lobby-sugar-taxes-postponed-cancelled?utm_source=newsletter  ; https://www.lighthousereports.com/investigation/big-food-vs-the-people/</p>\n<p>[4] A sugar tax applies when the sugar content in a product exceeds a set threshold. To avoid the tax, companies reformulate their products to reduce sugar levels. The World Health Organisation considers sugar taxes one of the most effective measures to reduce sugar consumption. https://www.who.int/news/item/13-01-2026-cheaper-drinks-will-see-a-rise-in-noncommunicable-diseases-and-injuries ; data.europa.eu/doi/10.2778/9947154 ; https://www.thelancet.com/journals/lanpub/article/PIIS2468-2667(18)30240-8/fulltext </p>",
+    "summary": "English Français Deutsch Español Italiano Nederlands Polski Big Food is making us sick - we need an EU sugar tax! To the European Commission, the European Parliament, the governments of EU Member Stat…",
+    "start_date": "2026-09-01",
+    "started_by": "WeMove Europe",
+    "kind": "petition",
+    "signatures": 54330,
+    "goal": 75000,
+    "lang": "en",
+    "campaign_id": "wemove:2026-09-Big-Food-petition",
+    "status": "online",
+    "last_seen": "2026-09-18T09:03:37-06:00",
+    "offline_since": null,
+    "tags": [
+      "Sugar",
+      "Food",
+      "European",
+      "Health",
+      "Taxes",
+      "Governments",
+      "Companies",
+      "Member",
+      "Need",
+      "Stop"
+    ],
+    "last_checked": "2026-09-18T09:03:37-06:00"
+  },
+  "2026-09-toxic-coffee-petition-EN": {
+    "slug": "2026-09-toxic-coffee-petition-EN",
+    "first_seen": "2026-09-18T09:03:37-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-09-18T09:03:37-06:00",
+        "count": 46211
+      }
+    ],
+    "title": "No more poison in our coffee!",
+    "image_url": "https://wemove.cdn.actionkit.com/images/no-toxic-coffee-image-trial-2.jpg",
+    "url": "https://action.wemove.eu/sign/2026-09-toxic-coffee-petition-EN",
+    "description_full": "<p>\n\n<!-- Remove this if you don't want popins like \"This page also in English\" -->\n\n\n<img alt=\"Language selector\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/icon_translate_eeaca63123.svg\"/>\n\n          \n            \n              \n              English\n\n              \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n        \n\n</p><ul>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-toxic-coffee-petition-FR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Français\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-toxic-coffee-petition-DE\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Deutsch\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-toxic-coffee-petition-ES\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Español\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-toxic-coffee-petition-IT\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Italiano\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-toxic-coffee-petition-NL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Nederlands\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-toxic-coffee-petition-PL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Polski\n\n                    \n                    </a>\n</li>\n</ul><p>\n\n\n          No more poison in our coffee!\n        \n\n<img alt=\"No more poison in our coffee!\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/no-toxic-coffee-image-trial-2.jpg\"/>\n\n</p><h3>\n<p>To Olivér Várhelyi, European Commissioner for Health and Animal Welfare, and Maroš Šefčovič, European Commissioner for Trade and Economic Security, the European Coffee Federation and Coffee Traders Associations.</p>\n</h3>\n\n<h2>\n            Petition\n          </h2>\n<p>Coffee is one of the least‑tested imported commodities despite proven high pesticide contamination rates. Consumers have a right to know what is in their cup, <strong>and we won’t accept residues of toxic poisons in our coffee</strong>. That’s why we ask you to:</p>\n<ul>\n<li><strong>Require routine testing</strong> of all imported coffee, green and roasted.</li>\n<li><strong>Require disclosure of all detected residues</strong>, including multi‑residue “cocktail effects.”</li>\n<li><strong>Align import rules with export rules</strong>: if a pesticide is banned for use, it should not be tolerated as a residue.</li>\n<li>For the European Coffee Federation and Coffee Traders Associations to <strong>stop supporting or defending the use of pesticides</strong> that are prohibited in the EU, and to require that their members and suppliers stop using them.</li>\n</ul>\n\n\n<h2>\n            \n              Why is this important?\n            \n          </h2>\n<p>For millions across Europe, coffee is a daily ritual. A moment to wake up, take a break, or catch up with friends. That’s why this caught me off guard: <strong>Our coffee is being poisoned</strong>.</p>\n<p><strong>One in every five cups of coffee sold in Europe contains toxic pesticides.</strong> Often, it’s not just one pesticide, but a cocktail of chemicals - including some that Europe has already banned because they're linked to <strong>cancer, birth defects, neurological damage, and the destruction of nature</strong>. [1]</p>\n<p>How is that possible? There is a loophole: <strong>European companies can still manufacture the poisons and export them to countries where our coffee is grown</strong>. [2]</p>\n<p>Farmers, farm workers, and nearby communities are exposed to chemicals Europe decided are too dangerous for us. Water sources are polluted. Wildlife suffers. Entire ecosystems are put at risk.</p>\n<p><strong>And the poison doesn't stay there. It comes back to Europe in the coffee we drink every day</strong>.</p>\n<p>The European Coffee Federation meets in a few days at the very moment the EU is revising its rules on pesticides. [3] Until now, almost no one outside the industry has been watching. This changes if thousands of us from across Europe speak up now.</p>\n<p><strong>Let's send them a message: keep poison out of our coffee</strong>.</p>\n<h4>\n            References:\n          </h4>\n\n<ol>\n<li>https://coffeewatch.org/poison-in-your-coffee/</li>\n<li>https://www.hrw.org/news/2025/10/10/the-eus-double-standard-on-toxic-pesticides</li>\n<li>https://www.ecf-coffee.org/category/whats-new/events/ ; https://www.consilium.europa.eu/en/press/press-releases/2026/05/27/council-agrees-position-to-simplify-and-strengthen-food-and-feed-safety-requirements/</li>\n</ol>\n\n\n\n<h3>In partnership with:</h3>\n\n<p><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/images.png\"/><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/duh_logo.png\"/><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/PAN_logo_green.jpg\"/><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/INKOTA_Gw_RGB_transparent.png\"/><img alt=\"WeMove Europe Charity Logo\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/editor-2026-06-09.png\"/></p>",
+    "summary": "English Français Deutsch Español Italiano Nederlands Polski No more poison in our coffee! To Olivér Várhelyi, European Commissioner for Health and Animal Welfare, and Maroš Šefčovič, European Commissi…",
+    "start_date": "2026-09-01",
+    "started_by": "WeMove Europe",
+    "kind": "petition",
+    "signatures": 46211,
+    "goal": 50000,
+    "lang": "en",
+    "campaign_id": "wemove:2026-09-toxic-coffee-petition",
+    "status": "online",
+    "last_seen": "2026-09-18T09:03:37-06:00",
+    "offline_since": null,
+    "tags": [
+      "Coffee",
+      "European",
+      "Europe",
+      "Poison",
+      "Commissioner",
+      "Federation",
+      "Pesticides",
+      "Pesticide",
+      "Require",
+      "Rules"
+    ],
+    "last_checked": "2026-09-18T09:03:37-06:00"
+  },
+  "2026-09-trial-ticket-companies-ripping-off-fans-petition-EN": {
+    "slug": "2026-09-trial-ticket-companies-ripping-off-fans-petition-EN",
+    "first_seen": "2026-09-18T09:03:37-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-09-18T09:03:37-06:00",
+        "count": 409
+      }
+    ],
+    "title": "Stop ticket companies from ripping off fans",
+    "image_url": "https://wemove.cdn.actionkit.com/images/campaign-ticket-ripoff-2.jpg",
+    "url": "https://action.wemove.eu/sign/2026-09-trial-ticket-companies-ripping-off-fans-petition-EN",
+    "description_full": "<p>\n\n\n          Stop ticket companies from ripping off fans\n        \n\n<img alt=\"Stop ticket companies from ripping off fans\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/campaign-ticket-ripoff-2.jpg\"/>\n\n</p><h3>\n<p>To the European Commission, European Parliament and Council of the European Union</p>\n</h3>\n\n<h2>\n            Petition\n          </h2>\n<p>We call on you to use the upcoming Digital Fairness Act to keep online ticketing platforms in check and help ensure fans are protected from fraud and price gouging, by:</p>\n<ul>\n<li>Introduce a binding EU law that makes re-selling tickets above face value unlawful</li>\n<li>Issue fines linked to global, annual turnover rather than fixed amounts and introduce harsher penalties for repeated non-compliance</li>\n<li>Quicker, easier process for requesting take-down on false or illegal ticket sales, and take urgent action to address false ticket listings where a ticket may not exist when sold.</li>\n</ul>\n\n\n<h2>\n            \n              Why is this important?\n            \n          </h2>\n<p><strong>Your favourite artist is going on tour.</strong> You love their music and can’t wait to see them live. But when you check online, tickets are <strong>resold for hundreds, if not thousands, of euros</strong> above the original price. </p>\n<p><strong>Online ticket sales are out of control.</strong> Seats at the World Cup final were resold for an average price of over 13000 USD. [1] Tickets to the Italy Winter Olympics were listed at 600% their original price. [2] Fans are even sold tickets that don’t exist. [3]</p>\n<p>Some countries have restrictions in place. But <strong>with no overall EU law, fans are still at risk</strong> every time we want to see an artist or a sports team we love.</p>\n<p><strong>The EU has the power to rein in these profit-hungry ticket platforms.</strong> They could strengthen rules and introduce stricter punishment in the <strong>upcoming Digital Fairness Act.</strong> </p>\n<p>Huge artists like Rammstein are calling for stronger rules [4]. Big ticketing giants like ViaGogo are preparing for a fight. But the <strong>voices of thousands of people like you and me can get the EU to listen to fans, not profit-hungry platforms. </strong></p>\n<p><strong>Sign now to stop ticket platforms exploiting fans</strong> - so that we can all continue enjoying live events.</p>\n<p> </p>\n<h4>\n            References:\n          </h4>\n\n<p>1: https://www.beinsports.com/en-us/soccer/fifa-world-cup-2026/articles/fifa-world-cup-2026-final-ticket-prices-skyrocket-2026-07-15 </p>\n<p>2: https://www.euroconsumers.org/can-the-digital-fairness-act-finally-end-ticket-resale-turmoil/ </p>\n<p>3: https://www.bbc.com/news/entertainment-arts-39340513 </p>\n<p>4: https://www.feat-alliance.org/open-letter-from-europes-live-events-sector-to-european-commissioner-mcgrath/ </p>",
+    "summary": "Stop ticket companies from ripping off fans To the European Commission, European Parliament and Council of the European Union Petition We call on you to use the upcoming Digital Fairness Act to keep o…",
+    "start_date": "2026-09-01",
+    "started_by": "WeMove Europe",
+    "kind": "petition",
+    "signatures": 409,
+    "goal": 1000,
+    "lang": "en",
+    "campaign_id": "wemove:2026-09-trial-ticket-companies-ripping-off-fans-petition",
+    "status": "online",
+    "last_seen": "2026-09-18T09:03:37-06:00",
+    "offline_since": null,
+    "tags": [
+      "Ticket",
+      "Fans",
+      "European",
+      "Platforms",
+      "Tickets",
+      "Price",
+      "Stop",
+      "Companies",
+      "Introduce",
+      "Fairness"
+    ],
+    "last_checked": "2026-09-18T09:03:37-06:00"
+  },
+  "2026-09-trial2-fuelled-by-greed-petition-EN": {
+    "slug": "2026-09-trial2-fuelled-by-greed-petition-EN",
+    "first_seen": "2026-09-18T09:03:37-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-09-18T09:03:37-06:00",
+        "count": 661
+      }
+    ],
+    "title": "Keep clean fuel in our planes",
+    "url": "https://action.wemove.eu/sign/2026-09-trial2-fuelled-by-greed-petition-EN",
+    "description_full": "<p>\n\n\n          Keep clean fuel in our planes\n        \n\n<img alt=\"Keep clean fuel in our planes\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/fly_greener_1024x630.jpg\"/>\n\n</p><h3>\n<p>EU Commission, Members of the European Parliament, and Heads of State</p>\n</h3>\n\n<h2>\n            Petition\n          </h2>\n<p>EU leaders: uphold the law to decarbonise the aviation industry, and don't let Big Oil water it down.</p>\n<p>Planes can already fly on clean fuel made from waste instead of crude oil. This is our best chance to cut carbon emissions from flying. </p>\n<p>A handful of oil companies control almost every drop of jet fuel in Europe. They should not get to decide how fast we clean up flying. Keep this law strong.</p>\n\n\n<h2>\n            \n              Why is this important?\n            \n          </h2>\n<p>There's good news you probably haven't heard: <strong>there is a cleaner way to fly.</strong> Planes can already fly on clean fuel made from waste like used cooking oil, instead of crude oil dug from the ground.</p>\n<p><strong>It's one of the best chances we have to stop flying from wrecking the planet.</strong> With the planes we have today.</p>\n<p><strong>The EU has even passed a law to make it happen.</strong> Every plane's fuel tank must hold a growing share of clean fuel. Starting small today and rising to 70% by 2050. [1]</p>\n<p>But a handful of oil giants like <strong>BP, Shell, and Total control almost every drop of jet fuel in Europe.</strong> They own the pipelines and the tanks at the airport. And instead of building or using the clean fuel we need, they're lobbying to stop this law.  </p>\n<p>A world that flies on used cooking oil doesn't need them. <strong>That's the whole problem, for them.</strong></p>\n<p>Big Oil is counting on one thing: that a law hardly anyone has heard of can be gutted without anyone noticing. And it’s happening as you read this. [2] But<strong> if thousands of us tell EU leaders we want clean fuel, they'll know the lobbyists aren't the only ones in the room.</strong></p>\n<h4>\n            References:\n          </h4>\n\n<p>[1] https://transport.ec.europa.eu/transport-modes/air/environment/refueleu-aviation_en</p>\n<p>[2] The EU is expected to publish its proposal for the fast-track simplification of ReFuelEU Aviation – the law that would bring clean fuel to planes – in September 2026.</p>\n<p>https://www.ebaa.org/news/refueleu-simplification-what-is-really-on-the-table-for-operators</p>",
+    "summary": "Keep clean fuel in our planes EU Commission, Members of the European Parliament, and Heads of State Petition EU leaders: uphold the law to decarbonise the aviation industry, and don't let Big Oil wate…",
+    "start_date": "2026-09-01",
+    "started_by": "WeMove Europe",
+    "kind": "petition",
+    "signatures": 661,
+    "goal": 1000,
+    "lang": "en",
+    "campaign_id": "wemove:2026-09-trial2-fuelled-by-greed-petition",
+    "status": "online",
+    "last_seen": "2026-09-18T09:03:37-06:00",
+    "offline_since": null,
+    "tags": [
+      "Fuel",
+      "Clean",
+      "Planes",
+      "Keep",
+      "Aviation",
+      "Instead",
+      "Leaders",
+      "Flying",
+      "Every",
+      "Decarbonise"
+    ],
+    "last_checked": "2026-09-18T09:03:37-06:00"
   }
 }
