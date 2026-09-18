@@ -31,7 +31,7 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-18T07:46:33-06:00",
+    "generated_at": "2026-09-18T08:13:42-06:00",
     "petition_count": 601,
     "available": 708,
     "unbrauchbare": {
@@ -139,7 +139,7 @@
     "new_petitions_last_run": [],
     "lauf_verlauf": [
       {
-        "zeit": "2026-09-18T07:46:33-06:00",
+        "zeit": "2026-09-18T08:13:42-06:00",
         "gesamt": 601,
         "online": 600,
         "offline": 1,
@@ -156,7 +156,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-18T07:46:33-06:00",
+      "zeit": "2026-09-18T08:13:42-06:00",
       "gesamt": 601,
       "online": 600,
       "offline": 1,
@@ -169,7 +169,7 @@
       "juengstes_start": "2026-09-01",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-09-18T07:46:33-06:00",
+    "verlauf_felder_ab": "2026-09-18T08:13:42-06:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 600
@@ -19477,6 +19477,10 @@
       {
         "checked_at": "2026-09-06T15:34:22-06:00",
         "count": 103403
+      },
+      {
+        "checked_at": "2026-09-18T08:10:36-06:00",
+        "count": 103429
       }
     ],
     "title": "Say No to Palantir in Europe",
@@ -19487,12 +19491,12 @@
     "start_date": "2026-03-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 103403,
+    "signatures": 103429,
     "goal": 150000,
     "lang": "en",
     "campaign_id": "wemove:2026-03-palantir-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:34:22-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "Palantir",
@@ -19506,7 +19510,7 @@
       "Data",
       "Stop"
     ],
-    "last_checked": "2026-09-06T15:34:22-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-03-trial-authoritarianism-petition-EN": {
     "slug": "2026-03-trial-authoritarianism-petition-EN",
@@ -19530,7 +19534,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-03-trial-authoritarianism-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:34:22-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "People",
@@ -19544,7 +19548,7 @@
       "Security",
       "Leaders"
     ],
-    "last_checked": "2026-09-06T15:34:22-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-03-trial-energy-prices-iran-war-petition-EN": {
     "slug": "2026-03-trial-energy-prices-iran-war-petition-EN",
@@ -19567,7 +19571,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-03-trial-energy-prices-iran-war-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:34:22-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "Energy",
@@ -19581,7 +19585,7 @@
       "Fund",
       "Want"
     ],
-    "last_checked": "2026-09-06T15:34:22-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-03-trial-EU-stand-up-against-illegal-war-Iran-petition-EN": {
     "slug": "2026-03-trial-EU-stand-up-against-illegal-war-Iran-petition-EN",
@@ -19605,7 +19609,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-03-trial-EU-stand-up-against-illegal-war-Iran-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:34:22-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "Iran",
@@ -19619,7 +19623,7 @@
       "European",
       "Military"
     ],
-    "last_checked": "2026-09-06T15:34:22-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-03-trial-fearvscommunity-petition-EN": {
     "slug": "2026-03-trial-fearvscommunity-petition-EN",
@@ -19643,7 +19647,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-03-trial-fearvscommunity-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:34:22-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "Europe",
@@ -19657,7 +19661,7 @@
       "Demand",
       "Planet"
     ],
-    "last_checked": "2026-09-06T15:34:22-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-03-trial-landmines-trial-EN-petition-EN": {
     "slug": "2026-03-trial-landmines-trial-EN-petition-EN",
@@ -19681,7 +19685,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-03-trial-landmines-trial-EN-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:34:22-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "Landmines",
@@ -19695,7 +19699,7 @@
       "Member",
       "States"
     ],
-    "last_checked": "2026-09-06T15:34:22-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-03-trial-military-spending-petition-EN": {
     "slug": "2026-03-trial-military-spending-petition-EN",
@@ -19719,7 +19723,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-03-trial-military-spending-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:34:22-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "People",
@@ -19733,7 +19737,7 @@
       "Europeans",
       "Leaders"
     ],
-    "last_checked": "2026-09-06T15:34:22-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-03-trial-palantir-petition-EN": {
     "slug": "2026-03-trial-palantir-petition-EN",
@@ -19757,7 +19761,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-03-trial-palantir-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:34:22-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "Palantir",
@@ -19771,7 +19775,7 @@
       "Systems",
       "Data"
     ],
-    "last_checked": "2026-09-06T15:34:22-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-03-trial-social-media-age-limit-trial-EN": {
     "slug": "2026-03-trial-social-media-age-limit-trial-EN",
@@ -19795,7 +19799,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-03-trial-social-media-age-limit-trial",
     "status": "online",
-    "last_seen": "2026-09-06T15:34:22-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "Children",
@@ -19809,7 +19813,7 @@
       "Protect",
       "Content"
     ],
-    "last_checked": "2026-09-06T15:34:22-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-03-trial-toxic-landfills-petition-EN": {
     "slug": "2026-03-trial-toxic-landfills-petition-EN",
@@ -19833,7 +19837,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-03-trial-toxic-landfills-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:34:22-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "Landfill",
@@ -19847,7 +19851,7 @@
       "Crisis",
       "Sites"
     ],
-    "last_checked": "2026-09-06T15:34:22-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-03-trial-war-machine-petition-EN": {
     "slug": "2026-03-trial-war-machine-petition-EN",
@@ -19856,6 +19860,10 @@
       {
         "checked_at": "2026-09-06T15:34:22-06:00",
         "count": 474
+      },
+      {
+        "checked_at": "2026-09-18T08:10:36-06:00",
+        "count": 475
       }
     ],
     "title": "Fund peace not war",
@@ -19866,12 +19874,12 @@
     "start_date": "2026-03-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 474,
+    "signatures": 475,
     "goal": 1000,
     "lang": "en",
     "campaign_id": "wemove:2026-03-trial-war-machine-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:34:22-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -19885,7 +19893,7 @@
       "Leaders",
       "Want"
     ],
-    "last_checked": "2026-09-06T15:34:22-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-03-veto-power-trial-EN": {
     "slug": "2026-03-veto-power-trial-EN",
@@ -19909,7 +19917,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-03-veto-power-trial",
     "status": "online",
-    "last_seen": "2026-09-06T15:34:22-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "Security",
@@ -19923,7 +19931,7 @@
       "Sánchez",
       "United"
     ],
-    "last_checked": "2026-09-06T15:34:22-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-04-08-trial-climate-protections-corporations-EN": {
     "slug": "2026-04-08-trial-climate-protections-corporations-EN",
@@ -19947,7 +19955,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-04-08-trial-climate-protections-corporations",
     "status": "online",
-    "last_seen": "2026-09-06T15:34:22-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "Polluters",
@@ -19961,7 +19969,7 @@
       "Making",
       "Keep"
     ],
-    "last_checked": "2026-09-06T15:34:22-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-04-19-trial-equal-pay-gap-trial-petition-EN": {
     "slug": "2026-04-19-trial-equal-pay-gap-trial-petition-EN",
@@ -19985,7 +19993,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-04-19-trial-equal-pay-gap-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:34:22-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "Transparency",
@@ -19999,7 +20007,7 @@
       "Working",
       "Groups"
     ],
-    "last_checked": "2026-09-06T15:34:22-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-04-19-trial-manure-in-drinnking-water-trial-EN": {
     "slug": "2026-04-19-trial-manure-in-drinnking-water-trial-EN",
@@ -20023,7 +20031,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-04-19-trial-manure-in-drinnking-water-trial",
     "status": "online",
-    "last_seen": "2026-09-06T15:34:22-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "Water",
@@ -20037,7 +20045,7 @@
       "People",
       "Turn"
     ],
-    "last_checked": "2026-09-06T15:34:22-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-04-anti-slapps-petition-EN": {
     "slug": "2026-04-anti-slapps-petition-EN",
@@ -20046,6 +20054,10 @@
       {
         "checked_at": "2026-09-06T15:34:22-06:00",
         "count": 99633
+      },
+      {
+        "checked_at": "2026-09-18T08:10:36-06:00",
+        "count": 99664
       }
     ],
     "title": "Protect people, not corporate bullies",
@@ -20056,12 +20068,12 @@
     "start_date": "2026-04-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 99633,
+    "signatures": 99664,
     "goal": 100000,
     "lang": "en",
     "campaign_id": "wemove:2026-04-anti-slapps-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:34:22-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "People",
@@ -20075,7 +20087,7 @@
       "Corporations",
       "Greenpeace"
     ],
-    "last_checked": "2026-09-06T15:34:22-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-04-ban-landmines-europe-petition-EN": {
     "slug": "2026-04-ban-landmines-europe-petition-EN",
@@ -20084,6 +20096,10 @@
       {
         "checked_at": "2026-09-06T15:34:22-06:00",
         "count": 102760
+      },
+      {
+        "checked_at": "2026-09-18T08:10:36-06:00",
+        "count": 102778
       }
     ],
     "title": "Protect civilians - keep landmines banned",
@@ -20094,12 +20110,12 @@
     "start_date": "2026-04-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 102760,
+    "signatures": 102778,
     "goal": 150000,
     "lang": "en",
     "campaign_id": "wemove:2026-04-ban-landmines-europe-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:34:22-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "Landmines",
@@ -20113,7 +20129,7 @@
       "Union",
       "Mine"
     ],
-    "last_checked": "2026-09-06T15:34:22-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-04-trial-anti-slapps-petition-EN": {
     "slug": "2026-04-trial-anti-slapps-petition-EN",
@@ -20137,7 +20153,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-04-trial-anti-slapps-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:34:22-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "Governments",
@@ -20151,7 +20167,7 @@
       "Protects",
       "Protect"
     ],
-    "last_checked": "2026-09-06T15:34:22-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-04-trial-circular-economy-trial-EN": {
     "slug": "2026-04-trial-circular-economy-trial-EN",
@@ -20175,7 +20191,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-04-trial-circular-economy-trial",
     "status": "online",
-    "last_seen": "2026-09-06T15:34:22-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "Products",
@@ -20189,7 +20205,7 @@
       "Local",
       "Rules"
     ],
-    "last_checked": "2026-09-06T15:34:22-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-04-trial-climate-protections-energy-crisis-EN": {
     "slug": "2026-04-trial-climate-protections-energy-crisis-EN",
@@ -20212,7 +20228,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-04-trial-climate-protections-energy-crisis",
     "status": "online",
-    "last_seen": "2026-09-06T15:34:22-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "Climate",
@@ -20226,7 +20242,7 @@
       "Commission",
       "Parliament"
     ],
-    "last_checked": "2026-09-06T15:34:22-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-04-trial-climate-protections-our-win-EN": {
     "slug": "2026-04-trial-climate-protections-our-win-EN",
@@ -20249,7 +20265,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-04-trial-climate-protections-our-win",
     "status": "online",
-    "last_seen": "2026-09-06T15:48:28-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "Polluters",
@@ -20263,7 +20279,7 @@
       "Making",
       "People"
     ],
-    "last_checked": "2026-09-06T15:48:28-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-04-trial-energy-prices-windfall-tax-war-petition-EN": {
     "slug": "2026-04-trial-energy-prices-windfall-tax-war-petition-EN",
@@ -20287,7 +20303,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-04-trial-energy-prices-windfall-tax-war-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:48:28-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "People",
@@ -20301,7 +20317,7 @@
       "Again",
       "Renewables"
     ],
-    "last_checked": "2026-09-06T15:48:28-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-04-trial-EU-Israel-trial-EN": {
     "slug": "2026-04-trial-EU-Israel-trial-EN",
@@ -20325,7 +20341,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-04-trial-EU-Israel-trial",
     "status": "online",
-    "last_seen": "2026-09-06T15:48:28-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "EU-Israel",
@@ -20339,7 +20355,7 @@
       "Agreement",
       "Pressure"
     ],
-    "last_checked": "2026-09-06T15:48:28-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-04-trial-green-data-centres-trial-petition-EN": {
     "slug": "2026-04-trial-green-data-centres-trial-petition-EN",
@@ -20363,7 +20379,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-04-trial-green-data-centres-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:48:28-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "Data",
@@ -20377,7 +20393,7 @@
       "Electricity",
       "Legislation"
     ],
-    "last_checked": "2026-09-06T15:48:28-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-04-trial-hunt-fraudsters-down-trial-EN": {
     "slug": "2026-04-trial-hunt-fraudsters-down-trial-EN",
@@ -20401,7 +20417,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-04-trial-hunt-fraudsters-down-trial",
     "status": "online",
-    "last_seen": "2026-09-06T15:48:28-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -20415,7 +20431,7 @@
       "Hunt",
       "Real"
     ],
-    "last_checked": "2026-09-06T15:48:28-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-04-trial-Israel-out-Eurovision-trial-EN": {
     "slug": "2026-04-trial-Israel-out-Eurovision-trial-EN",
@@ -20439,7 +20455,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-04-trial-Israel-out-Eurovision-trial",
     "status": "online",
-    "last_seen": "2026-09-06T15:48:28-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "Eurovision",
@@ -20453,7 +20469,7 @@
       "Accountable",
       "Credibility"
     ],
-    "last_checked": "2026-09-06T15:48:28-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-04-trial-pandemic-agreement-petition-EN": {
     "slug": "2026-04-trial-pandemic-agreement-petition-EN",
@@ -20477,7 +20493,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-04-trial-pandemic-agreement-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:48:28-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "Pandemic",
@@ -20491,7 +20507,7 @@
       "Countries",
       "European"
     ],
-    "last_checked": "2026-09-06T15:48:28-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-04-trial-sexual-violence-online-petition-EN": {
     "slug": "2026-04-trial-sexual-violence-online-petition-EN",
@@ -20515,7 +20531,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-04-trial-sexual-violence-online-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:48:28-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "Platforms",
@@ -20529,7 +20545,7 @@
       "Authorities",
       "Services"
     ],
-    "last_checked": "2026-09-06T15:48:28-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-04-trial-social-media-age-limit-petition-EN": {
     "slug": "2026-04-trial-social-media-age-limit-petition-EN",
@@ -20553,7 +20569,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-04-trial-social-media-age-limit-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:48:28-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "Children",
@@ -20567,7 +20583,7 @@
       "Protect",
       "Content"
     ],
-    "last_checked": "2026-09-06T15:48:28-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-04-trial-stop-fossil-fuels-trial-EN": {
     "slug": "2026-04-trial-stop-fossil-fuels-trial-EN",
@@ -20591,7 +20607,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-04-trial-stop-fossil-fuels-trial",
     "status": "online",
-    "last_seen": "2026-09-06T15:48:28-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "Fossil",
@@ -20605,7 +20621,7 @@
       "European",
       "Funding"
     ],
-    "last_checked": "2026-09-06T15:48:28-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-05-circular-economy-petition-EN": {
     "slug": "2026-05-circular-economy-petition-EN",
@@ -20614,6 +20630,10 @@
       {
         "checked_at": "2026-09-06T15:48:28-06:00",
         "count": 97726
+      },
+      {
+        "checked_at": "2026-09-18T08:10:36-06:00",
+        "count": 97806
       }
     ],
     "title": "Longer life, lower costs!",
@@ -20624,12 +20644,12 @@
     "start_date": "2026-05-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 97726,
+    "signatures": 97806,
     "goal": 100000,
     "lang": "en",
     "campaign_id": "wemove:2026-05-circular-economy-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:48:28-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "Repair",
@@ -20643,7 +20663,7 @@
       "Member",
       "States"
     ],
-    "last_checked": "2026-09-06T15:48:28-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-05-Israel-out-Eurovision-petition-EN": {
     "slug": "2026-05-Israel-out-Eurovision-petition-EN",
@@ -20652,6 +20672,10 @@
       {
         "checked_at": "2026-09-06T15:48:28-06:00",
         "count": 65094
+      },
+      {
+        "checked_at": "2026-09-18T08:10:36-06:00",
+        "count": 65099
       }
     ],
     "title": "Israel out of Eurovision!",
@@ -20662,12 +20686,12 @@
     "start_date": "2026-05-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 65094,
+    "signatures": 65099,
     "goal": 75000,
     "lang": "en",
     "campaign_id": "wemove:2026-05-Israel-out-Eurovision-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:48:28-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "Eurovision",
@@ -20681,7 +20705,7 @@
       "Safeguard",
       "European"
     ],
-    "last_checked": "2026-09-06T15:48:28-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-05-lyle-testing-petition-EN": {
     "slug": "2026-05-lyle-testing-petition-EN",
@@ -20705,7 +20729,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-05-lyle-testing-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:48:28-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "Energy",
@@ -20719,7 +20743,7 @@
       "Demand",
       "Electricity"
     ],
-    "last_checked": "2026-09-06T15:48:28-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-05-trial-cruiseship-ban-petition-EN": {
     "slug": "2026-05-trial-cruiseship-ban-petition-EN",
@@ -20742,7 +20766,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-05-trial-cruiseship-ban-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:48:28-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "Cities",
@@ -20756,7 +20780,7 @@
       "Europe",
       "Governments"
     ],
-    "last_checked": "2026-09-06T15:48:28-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-05-trial-dont-send-data-to-trump-petition-EN": {
     "slug": "2026-05-trial-dont-send-data-to-trump-petition-EN",
@@ -20780,7 +20804,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-05-trial-dont-send-data-to-trump-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:48:28-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "Trump",
@@ -20794,7 +20818,7 @@
       "States",
       "Fingerprints"
     ],
-    "last_checked": "2026-09-06T15:48:28-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-05-trial-Israeli-phone-hacking-EN": {
     "slug": "2026-05-trial-Israeli-phone-hacking-EN",
@@ -20818,7 +20842,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-05-trial-Israeli-phone-hacking",
     "status": "online",
-    "last_seen": "2026-09-06T15:48:28-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "Phone",
@@ -20832,7 +20856,7 @@
       "Funding",
       "Israeli"
     ],
-    "last_checked": "2026-09-06T15:48:28-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-05-trial-millions-of-jobs-trial-EN": {
     "slug": "2026-05-trial-millions-of-jobs-trial-EN",
@@ -20856,7 +20880,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-05-trial-millions-of-jobs-trial",
     "status": "online",
-    "last_seen": "2026-09-06T15:48:28-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "Jobs",
@@ -20870,7 +20894,7 @@
       "Risk",
       "Stop"
     ],
-    "last_checked": "2026-09-06T15:48:28-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-05-trial-private-jets-trial-EN": {
     "slug": "2026-05-trial-private-jets-trial-EN",
@@ -20894,7 +20918,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-05-trial-private-jets-trial",
     "status": "online",
-    "last_seen": "2026-09-06T15:48:28-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "Private",
@@ -20908,7 +20932,7 @@
       "Europeans",
       "Immediate"
     ],
-    "last_checked": "2026-09-06T15:48:28-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-05-trial-social-media-age-limit-petition-EN": {
     "slug": "2026-05-trial-social-media-age-limit-petition-EN",
@@ -20932,7 +20956,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-05-trial-social-media-age-limit-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:48:28-06:00",
+    "last_seen": "2026-09-18T08:10:36-06:00",
     "offline_since": null,
     "tags": [
       "Children",
@@ -20946,7 +20970,7 @@
       "Services",
       "Digital"
     ],
-    "last_checked": "2026-09-06T15:48:28-06:00"
+    "last_checked": "2026-09-18T08:10:36-06:00"
   },
   "2026-05-trial-yes-means-yes-trial-EN": {
     "slug": "2026-05-trial-yes-means-yes-trial-EN",
