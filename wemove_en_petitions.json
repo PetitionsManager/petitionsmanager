@@ -31,7 +31,7 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-17T20:09:13-06:00",
+    "generated_at": "2026-09-17T20:35:55-06:00",
     "petition_count": 601,
     "available": 708,
     "unbrauchbare": {
@@ -139,7 +139,7 @@
     "new_petitions_last_run": [],
     "lauf_verlauf": [
       {
-        "zeit": "2026-09-17T20:09:13-06:00",
+        "zeit": "2026-09-17T20:35:55-06:00",
         "gesamt": 601,
         "online": 600,
         "offline": 1,
@@ -156,7 +156,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-17T20:09:13-06:00",
+      "zeit": "2026-09-17T20:35:55-06:00",
       "gesamt": 601,
       "online": 600,
       "offline": 1,
@@ -169,7 +169,7 @@
       "juengstes_start": "2026-09-01",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-09-17T20:09:13-06:00",
+    "verlauf_felder_ab": "2026-09-17T20:35:55-06:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 600
@@ -3296,7 +3296,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-10-end-the-destruction-of-romanian-forests",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "Forests",
@@ -3310,7 +3310,7 @@
       "Commissioner",
       "Environment"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-10-eu-parliament-stop-selling-out-people-and-nature-to-mining-EN": {
     "slug": "2023-10-eu-parliament-stop-selling-out-people-and-nature-to-mining-EN",
@@ -3319,6 +3319,10 @@
       {
         "checked_at": "2026-09-05T16:54:26-06:00",
         "count": 78916
+      },
+      {
+        "checked_at": "2026-09-17T20:32:43-06:00",
+        "count": 78917
       }
     ],
     "title": "EU - Stop selling out people and Nature to mining",
@@ -3329,12 +3333,12 @@
     "start_date": "2023-10-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 78916,
+    "signatures": 78917,
     "goal": 100000,
     "lang": "en",
     "campaign_id": "wemove:2023-10-eu-parliament-stop-selling-out-people-and-nature-to-mining",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "Mining",
@@ -3348,7 +3352,7 @@
       "Labelled",
       "Selling"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-10-eu-parliament-stop-selling-out-people-and-nature-to-mining-trial-EN": {
     "slug": "2023-10-eu-parliament-stop-selling-out-people-and-nature-to-mining-trial-EN",
@@ -3357,6 +3361,10 @@
       {
         "checked_at": "2026-09-05T17:37:50-06:00",
         "count": 78916
+      },
+      {
+        "checked_at": "2026-09-17T20:32:43-06:00",
+        "count": 78917
       }
     ],
     "title": "EU Parliament: Stop selling out people and Nature to mining",
@@ -3367,12 +3375,12 @@
     "start_date": "2023-10-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 78916,
+    "signatures": 78917,
     "goal": 100000,
     "lang": "en",
     "campaign_id": "wemove:2023-10-eu-parliament-stop-selling-out-people-and-nature-to-mining-trial",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "Mining",
@@ -3386,7 +3394,7 @@
       "Selling",
       "Europe"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-10-test-api-permissions-EN": {
     "slug": "2023-10-test-api-permissions-EN",
@@ -3409,7 +3417,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-10-test-api-permissions",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "Permissions",
@@ -3423,7 +3431,7 @@
       "Català",
       "Create"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-10-test-EN": {
     "slug": "2023-10-test-EN",
@@ -3446,7 +3454,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-10-test",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "Test",
@@ -3454,7 +3462,7 @@
       "Dasdad",
       "Name"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-10-testing-pixel-EN": {
     "slug": "2023-10-testing-pixel-EN",
@@ -3477,7 +3485,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-10-testing-pixel",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "Testing",
@@ -3488,7 +3496,7 @@
       "People",
       "Name"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-11-27-trial2-taxtheultrarich-petition-EN": {
     "slug": "2023-11-27-trial2-taxtheultrarich-petition-EN",
@@ -3512,7 +3520,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-11-27-trial2-taxtheultrarich-petition",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -3526,7 +3534,7 @@
       "Governments",
       "Directive"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-11-end-tax-havens-in-the-eu-implement-the-treaty-reform-adopted-by-EN": {
     "slug": "2023-11-end-tax-havens-in-the-eu-implement-the-treaty-reform-adopted-by-EN",
@@ -3550,7 +3558,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-11-end-tax-havens-in-the-eu-implement-the-treaty-reform-adopted-by",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -3564,7 +3572,7 @@
       "States",
       "Taxation"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-11-europe-please-include-scotland-in-enlargement-conversation-EN": {
     "slug": "2023-11-europe-please-include-scotland-in-enlargement-conversation-EN",
@@ -3588,7 +3596,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-11-europe-please-include-scotland-in-enlargement-conversation",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "SCOTLAND",
@@ -3602,7 +3610,7 @@
       "EUROPE",
       "INCLUDE"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-11-flat-incompatibility-deter-spread-firmly-EN": {
     "slug": "2023-11-flat-incompatibility-deter-spread-firmly-EN",
@@ -3625,7 +3633,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-11-flat-incompatibility-deter-spread-firmly",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "Incompatibility",
@@ -3639,7 +3647,7 @@
       "Name",
       "Important"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-11-pesticide-rebels-training-Jolanta-petition-EN": {
     "slug": "2023-11-pesticide-rebels-training-Jolanta-petition-EN",
@@ -3663,7 +3671,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-11-pesticide-rebels-training-Jolanta-petition",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "South",
@@ -3677,7 +3685,7 @@
       "Against",
       "Jolanta"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-11-this-is-not-a-spam-from-romain-2-EN": {
     "slug": "2023-11-this-is-not-a-spam-from-romain-2-EN",
@@ -3700,7 +3708,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-11-this-is-not-a-spam-from-romain-2",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "Spam",
@@ -3709,7 +3717,7 @@
       "Important",
       "Name"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-11-this-is-not-a-spam-from-romain-EN": {
     "slug": "2023-11-this-is-not-a-spam-from-romain-EN",
@@ -3732,7 +3740,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-11-this-is-not-a-spam-from-romain",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "Spam",
@@ -3742,7 +3750,7 @@
       "Name",
       "Romai"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-11-trial-forever-chemicals-coverup-petition-EN": {
     "slug": "2023-11-trial-forever-chemicals-coverup-petition-EN",
@@ -3765,7 +3773,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-11-trial-forever-chemicals-coverup-petition",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "Chemicals",
@@ -3779,7 +3787,7 @@
       "People",
       "Plan"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-11-trial-taxtherich-petition-EN": {
     "slug": "2023-11-trial-taxtherich-petition-EN",
@@ -3803,7 +3811,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-11-trial-taxtherich-petition",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -3817,7 +3825,7 @@
       "Call",
       "Establishing"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-12-iskra-testing-if-new-trello-cards-are-generated-EN": {
     "slug": "2023-12-iskra-testing-if-new-trello-cards-are-generated-EN",
@@ -3840,7 +3848,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-12-iskra-testing-if-new-trello-cards-are-generated",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "Generated",
@@ -3853,7 +3861,7 @@
       "Fdff",
       "Name"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-12-quality-access-to-care-for-people-with-multiple-sclerosis-and-ne-EN": {
     "slug": "2023-12-quality-access-to-care-for-people-with-multiple-sclerosis-and-ne-EN",
@@ -3877,7 +3885,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-12-quality-access-to-care-for-people-with-multiple-sclerosis-and-ne",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "People",
@@ -3891,7 +3899,7 @@
       "Carers",
       "Neurological"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-12-simon-sequence-petition-EN": {
     "slug": "2023-12-simon-sequence-petition-EN",
@@ -3914,7 +3922,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-12-simon-sequence-petition",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -3928,7 +3936,7 @@
       "Important",
       "Council"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-12-tax-the-rich-petition-EN": {
     "slug": "2023-12-tax-the-rich-petition-EN",
@@ -3941,22 +3949,26 @@
       {
         "checked_at": "2026-09-07T20:23:44-06:00",
         "count": 179711
+      },
+      {
+        "checked_at": "2026-09-17T20:32:43-06:00",
+        "count": 179717
       }
     ],
     "title": "Tax the Super Rich!",
     "image_url": "https://wemove.cdn.actionkit.com/images/Tax_the_rich_petition.png",
     "url": "https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-EN",
-    "description_full": "<p>\n\n<!-- Remove this if you don't want popins like \"This page also in English\" -->\n\n\n<img alt=\"Language selector\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/icon_translate_eeaca63123.svg\"/>\n\n          \n            \n              \n              English\n\n              \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n        \n\n</p><ul>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-FR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Français\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-DE\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Deutsch\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-ES\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Español\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-IT\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Italiano\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-NL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Nederlands\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-PL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Polski\n\n                    \n                    </a>\n</li>\n</ul><p>\n\n\n          Tax the Super Rich!\n        \n\n\n\n\n      Please accept marketing cookies to watch this video\n    \n\n\n\n\n</p><h3>\n<p>To the European Commission</p>\n</h3>\n\n<h2>\n            Petition\n          </h2>\n<p>We call on the European Commission to establish a <strong>European excess wealth tax</strong>, based on Article 115 TFEU. This tax will create a common policy approach and coordinated action to maximize the positive impact of excess wealth taxation. </p>\n\n\n<h2>\n            \n              Why is this important?\n            \n          </h2>\n<p>While <strong>thousands of us face the impossible rise in the cost of basic goods </strong>or heating our homes this winter,<strong> the mega rich keep getting richer.</strong> It’s because billionaires don’t pay their fair share of taxes. [1]  </p>\n<p>The <strong>richest 1% own nearly half of all the wealth, but they barely pay any tax</strong>. They exploit tax havens and use loopholes to send as little taxes as possible to our governments - depriving  all of us of vital money to finance our hospitals, teachers, and nurses. [2] </p>\n<p>But now we have an opportunity to <strong>stop this injustice.</strong> Spain is already experimenting with taxing the wealth of the super rich. [3] This <strong>tax has and can generate billions of Euros</strong>, and bring the resources to finance the essential services we desperately need.</p>\n<p>Together, let’s call for a tax on the rich for a more fair Europe! <strong>Demand a European wealth tax for the super rich! </strong></p>\n<p>This wealth tax on the super rich is already a reality in Spain: it’s currently raised over 1.8 billion Euros in 2023. [4] If adopted across Europe, we could inject billions into our healthcare systems, education and public transport. [5] </p>\n<p>And we wouldn’t just have money for our failing public services, but also<strong> use it to help those communities most affected by the climate crisis.</strong> While the super-rich are most responsible for the climate crisis, it’s young people and the poor who are most affected. [6] They face the worst of droughts, floods, heatwaves and fires. </p>\n<p>We believe we all should pay our fair share in tax and help those in need. Taxing the wealthiest more is what’s right, what’s needed, and will make a huge difference! But <strong>politicians won’t take action until they know the public is behind them.</strong> Together, let’s demand a wealth tax on the super rich!</p>\n<h4>\n            References:\n          </h4>\n\n<p>[1] Elon Musk, one of the world’s richest men, paid a ‘true tax rate’ of just over 3% from 2014 to 2018.<br/>https://oxfamilibrary.openrepository.com/bitstream/handle/10546/621477/bp-survival-of-the-richest-160123-en.pdf<br/>For some other rich people, effective tax rates are worth just 0%-0.6% of their total wealth, according to: https://www.taxobservatory.eu/publication/global-tax-evasion-report-2024/</p>\n<p>[2] https://www.theguardian.com/business/2023/oct/22/eu-funded-report-calls-for-wealth-of-super-rich-to-be-taxed-not-income</p>\n<p>[3] Spain aims to increase revenue by 3.14 bln euros with new tax plans, https://www.reuters.com/markets/europe/spain-hopes-gain-314-billion-euros-revenues-with-new-tax-proposals-2022-09-29/<br/>https://www.taxnotes.com/featured-news/tax-justice-network-suggests-eu-wealth-tax-similar-spains/2023/09/20/7hcm</p>\n<p>[4] Details of the Spanish wealth tax are here: https://www.aljazeera.com/news/2022/9/29/spain-agrees-on-new-asset-tax-for-wealthy-residents<br/>https://news.bloombergtax.com/daily-tax-report-international/spains-new-wealth-tax-beats-revenue-forecast-as-eu-mulls-stance</p>\n<p>[5] A European wealth tax could start at 2 per cent on millionaires with wealth above €4.6 million, 3 per cent on those with wealth above €45.7 million and 5 per cent on billionaires.<br/>https://www.oxfam.org/en/press-releases/eus-richest-10-emit-much-planet-heating-emissions-half-eus-poorest-population, <br/>https://www.socialeurope.eu/for-equality-and-the-climate-a-european-wealth-tax</p>\n<p>[6] The super rich emit more carbon pollution than the 3.1 billion people who make up the poorest half of humanity. <br/>https://www.oxfam.org/en/press-releases/carbon-emissions-richest-1-percent-more-double-emissions-poorest-half-humanity</p>\n\n\n\n<h3>In partnership with:</h3>\n\n<p><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/logos_avaaz_logo_pink_brand.png\"/><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/editor-2023-12-05-3.png\"/></p>",
+    "description_full": "<p>\n\n<!-- Remove this if you don't want popins like \"This page also in English\" -->\n\n\n<img alt=\"Language selector\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/icon_translate_eeaca63123.svg\"/>\n\n          \n            \n              \n              English\n\n              \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n        \n\n</p><ul>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-FR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Français\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-DE\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Deutsch\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-ES\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Español\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-IT\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Italiano\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-NL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Nederlands\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-PL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Polski\n\n                    \n                    </a>\n</li>\n</ul><p>\n\n\n          Tax the Super Rich!\n        \n\n\n\n\n        Please accept marketing cookies to watch this video\n      \n\n\n\n\n</p><h3>\n<p>To the European Commission</p>\n</h3>\n\n<h2>\n            Petition\n          </h2>\n<p>We call on the European Commission to establish a <strong>European excess wealth tax</strong>, based on Article 115 TFEU. This tax will create a common policy approach and coordinated action to maximize the positive impact of excess wealth taxation. </p>\n\n\n<h2>\n            \n              Why is this important?\n            \n          </h2>\n<p>While <strong>thousands of us face the impossible rise in the cost of basic goods </strong>or heating our homes this winter,<strong> the mega rich keep getting richer.</strong> It’s because billionaires don’t pay their fair share of taxes. [1]  </p>\n<p>The <strong>richest 1% own nearly half of all the wealth, but they barely pay any tax</strong>. They exploit tax havens and use loopholes to send as little taxes as possible to our governments - depriving  all of us of vital money to finance our hospitals, teachers, and nurses. [2] </p>\n<p>But now we have an opportunity to <strong>stop this injustice.</strong> Spain is already experimenting with taxing the wealth of the super rich. [3] This <strong>tax has and can generate billions of Euros</strong>, and bring the resources to finance the essential services we desperately need.</p>\n<p>Together, let’s call for a tax on the rich for a more fair Europe! <strong>Demand a European wealth tax for the super rich! </strong></p>\n<p>This wealth tax on the super rich is already a reality in Spain: it’s currently raised over 1.8 billion Euros in 2023. [4] If adopted across Europe, we could inject billions into our healthcare systems, education and public transport. [5] </p>\n<p>And we wouldn’t just have money for our failing public services, but also<strong> use it to help those communities most affected by the climate crisis.</strong> While the super-rich are most responsible for the climate crisis, it’s young people and the poor who are most affected. [6] They face the worst of droughts, floods, heatwaves and fires. </p>\n<p>We believe we all should pay our fair share in tax and help those in need. Taxing the wealthiest more is what’s right, what’s needed, and will make a huge difference! But <strong>politicians won’t take action until they know the public is behind them.</strong> Together, let’s demand a wealth tax on the super rich!</p>\n<h4>\n            References:\n          </h4>\n\n<p>[1] Elon Musk, one of the world’s richest men, paid a ‘true tax rate’ of just over 3% from 2014 to 2018.<br/>https://oxfamilibrary.openrepository.com/bitstream/handle/10546/621477/bp-survival-of-the-richest-160123-en.pdf<br/>For some other rich people, effective tax rates are worth just 0%-0.6% of their total wealth, according to: https://www.taxobservatory.eu/publication/global-tax-evasion-report-2024/</p>\n<p>[2] https://www.theguardian.com/business/2023/oct/22/eu-funded-report-calls-for-wealth-of-super-rich-to-be-taxed-not-income</p>\n<p>[3] Spain aims to increase revenue by 3.14 bln euros with new tax plans, https://www.reuters.com/markets/europe/spain-hopes-gain-314-billion-euros-revenues-with-new-tax-proposals-2022-09-29/<br/>https://www.taxnotes.com/featured-news/tax-justice-network-suggests-eu-wealth-tax-similar-spains/2023/09/20/7hcm</p>\n<p>[4] Details of the Spanish wealth tax are here: https://www.aljazeera.com/news/2022/9/29/spain-agrees-on-new-asset-tax-for-wealthy-residents<br/>https://news.bloombergtax.com/daily-tax-report-international/spains-new-wealth-tax-beats-revenue-forecast-as-eu-mulls-stance</p>\n<p>[5] A European wealth tax could start at 2 per cent on millionaires with wealth above €4.6 million, 3 per cent on those with wealth above €45.7 million and 5 per cent on billionaires.<br/>https://www.oxfam.org/en/press-releases/eus-richest-10-emit-much-planet-heating-emissions-half-eus-poorest-population, <br/>https://www.socialeurope.eu/for-equality-and-the-climate-a-european-wealth-tax</p>\n<p>[6] The super rich emit more carbon pollution than the 3.1 billion people who make up the poorest half of humanity. <br/>https://www.oxfam.org/en/press-releases/carbon-emissions-richest-1-percent-more-double-emissions-poorest-half-humanity</p>\n\n\n\n<h3>In partnership with:</h3>\n\n<p><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/logos_avaaz_logo_pink_brand.png\"/><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/editor-2023-12-05-3.png\"/></p>",
     "summary": "English Français Deutsch Español Italiano Nederlands Polski Tax the Super Rich! Please accept marketing cookies to watch this video To the European Commission Petition We call on the European Commissi…",
     "start_date": "2023-12-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 179711,
+    "signatures": 179717,
     "goal": 200000,
     "lang": "en",
     "campaign_id": "wemove:2023-12-tax-the-rich-petition",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "Wealth",
@@ -3970,7 +3982,7 @@
       "Spain",
       "Call"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-12-trial-gmo-rules-petition-EN": {
     "slug": "2023-12-trial-gmo-rules-petition-EN",
@@ -3994,7 +4006,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-12-trial-gmo-rules-petition",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "GMOs",
@@ -4008,7 +4020,7 @@
       "Pesticides",
       "Essential"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-8-campagne-avec-image-EN": {
     "slug": "2023-8-campagne-avec-image-EN",
@@ -4030,7 +4042,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-8-campagne-avec-image",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "Campagne",
@@ -4044,7 +4056,7 @@
       "Voyeurs",
       "Name"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-8-petition-sans-image-EN": {
     "slug": "2023-8-petition-sans-image-EN",
@@ -4066,7 +4078,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-8-petition-sans-image",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "Without",
@@ -4080,7 +4092,7 @@
       "English",
       "Español"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-9-another-sign-the-button-EN": {
     "slug": "2023-9-another-sign-the-button-EN",
@@ -4102,7 +4114,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-9-another-sign-the-button",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "Sign",
@@ -4112,7 +4124,7 @@
       "Name",
       "Page"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-9-campagne-sans-aucune-image-EN": {
     "slug": "2023-9-campagne-sans-aucune-image-EN",
@@ -4134,7 +4146,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-9-campagne-sans-aucune-image",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "Campagne",
@@ -4147,7 +4159,7 @@
       "Find",
       "Name"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-9-correctly-modeled-campaign-EN": {
     "slug": "2023-9-correctly-modeled-campaign-EN",
@@ -4169,7 +4181,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-9-correctly-modeled-campaign",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "Correctly",
@@ -4179,7 +4191,7 @@
       "Models",
       "Name"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-9-fix-checker-EN": {
     "slug": "2023-9-fix-checker-EN",
@@ -4201,7 +4213,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-9-fix-checker",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "Checker",
@@ -4212,7 +4224,7 @@
       "Works",
       "Name"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-9-image-fixer-2-EN": {
     "slug": "2023-9-image-fixer-2-EN",
@@ -4234,7 +4246,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-9-image-fixer-2",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "Fixer",
@@ -4246,7 +4258,7 @@
       "Bugs",
       "Name"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-9-image-fixer-EN": {
     "slug": "2023-9-image-fixer-EN",
@@ -4268,7 +4280,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-9-image-fixer",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "Fixer",
@@ -4280,7 +4292,7 @@
       "Bugs",
       "Name"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-9-local-ghoster-EN": {
     "slug": "2023-9-local-ghoster-EN",
@@ -4302,7 +4314,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-9-local-ghoster",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "Ghoster",
@@ -4316,7 +4328,7 @@
       "Image",
       "Name"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-9-local-image-checker-EN": {
     "slug": "2023-9-local-image-checker-EN",
@@ -4338,7 +4350,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-9-local-image-checker",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "Image",
@@ -4352,7 +4364,7 @@
       "Please",
       "Name"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-9-local-image-newbie-EN": {
     "slug": "2023-9-local-image-newbie-EN",
@@ -4374,7 +4386,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-9-local-image-newbie",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "Image",
@@ -4388,7 +4400,7 @@
       "Please",
       "Name"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-9-local-image-veteran-EN": {
     "slug": "2023-9-local-image-veteran-EN",
@@ -4410,7 +4422,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-9-local-image-veteran",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "Veteran",
@@ -4424,7 +4436,7 @@
       "Surprise",
       "Please"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-9-nth-image-debugger-EN": {
     "slug": "2023-9-nth-image-debugger-EN",
@@ -4446,7 +4458,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-9-nth-image-debugger",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "Debugger",
@@ -4458,7 +4470,7 @@
       "Help",
       "Name"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-9-quick-campaign-EN": {
     "slug": "2023-9-quick-campaign-EN",
@@ -4480,7 +4492,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-9-quick-campaign",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "Quick",
@@ -4489,7 +4501,7 @@
       "People",
       "Name"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-9-remote-image-creator-EN": {
     "slug": "2023-9-remote-image-creator-EN",
@@ -4511,7 +4523,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-9-remote-image-creator",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "Creator",
@@ -4524,7 +4536,7 @@
       "Check",
       "Name"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-9-sign-the-button-EN": {
     "slug": "2023-9-sign-the-button-EN",
@@ -4546,7 +4558,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-9-sign-the-button",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "Sign",
@@ -4557,7 +4569,7 @@
       "Check",
       "Name"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-9-titled-campaign-EN": {
     "slug": "2023-9-titled-campaign-EN",
@@ -4579,7 +4591,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-9-titled-campaign",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "Titled",
@@ -4592,7 +4604,7 @@
       "Give",
       "Name"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "2023-9-veteran-image-checker-EN": {
     "slug": "2023-9-veteran-image-checker-EN",
@@ -4614,7 +4626,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-9-veteran-image-checker",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "Checker",
@@ -4628,7 +4640,7 @@
       "Surprise",
       "Please"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "202302-ayudanos-a-detener-la-construccion-de-macro-parques-eolicos-en-el-golfo-de-roses-petition-EN": {
     "slug": "202302-ayudanos-a-detener-la-construccion-de-macro-parques-eolicos-en-el-golfo-de-roses-petition-EN",
@@ -4652,7 +4664,7 @@
     "lang": "en",
     "campaign_id": "wemove:202302-ayudanos-a-detener-la-construccion-de-macro-parques-eolicos-en-el-golfo-de-roses-petition",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "Area",
@@ -4666,7 +4678,7 @@
       "Areas",
       "FARMS"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "202303-na_ratunek_polskiej_energetyce_wiatrowej-petition-EN": {
     "slug": "202303-na_ratunek_polskiej_energetyce_wiatrowej-petition-EN",
@@ -4690,7 +4702,7 @@
     "lang": "en",
     "campaign_id": "wemove:202303-na_ratunek_polskiej_energetyce_wiatrowej-petition",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "Wind",
@@ -4704,7 +4716,7 @@
       "Council",
       "Minimum"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "202303-non_a_l_exploitation_du_fort_de_vaujours_france-petition-EN": {
     "slug": "202303-non_a_l_exploitation_du_fort_de_vaujours_france-petition-EN",
@@ -4718,7 +4730,7 @@
     "title": "Radioactive pollution at the doors of Paris: NO to the Exploitation of the Fort de Vaujours",
     "image_url": "https://drupal.wemove.eu/sites/wemove.eu/files/webform/campaign/fort-de-vaujours_img_8304.jpeg",
     "url": "https://action.wemove.eu/sign/202303-non_a_l_exploitation_du_fort_de_vaujours_france-petition-EN",
-    "description_full": "<p>\n\n<!-- Remove this if you don't want popins like \"This page also in English\" -->\n\n\n<img alt=\"Language selector\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/icon_translate_eeaca63123.svg\"/>\n\n          \n            \n              \n              English\n\n              \n            \n          \n            \n          \n            \n          \n        \n\n</p><ul>\n<li>\n<a href=\"https://action.wemove.eu/sign/202303-non_a_l_exploitation_du_fort_de_vaujours_france-petition-FR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Français\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/202303-non_a_l_exploitation_du_fort_de_vaujours_france-petition-ES\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Español\n\n                    \n                    </a>\n</li>\n</ul><p>\n\n\n          Radioactive pollution at the doors of Paris: NO to the Exploitation of the Fort de Vaujours\n        \n\n\n\n\n      Please accept marketing cookies to watch this video\n    \n\n\n\n\n</p><h3>\n<p>To the Minister for Ecological Transition and Regional Cohesion Prefect of Seine-et-Marne Prefect of Seine-Saint-Denis</p>\n</h3>\n<p>\n            This petition is run by [% inititator_name %]\n          </p>\n\n<h2>\n            Petition\n          </h2><p>\n\n          We ask that you prohibit the use of Fort de Vaujours by BPB PLACO, a subsidiary of the SAINT-GOBAIN group.<br/><br/>The Fort de Vaujours has been polluted with radioactive materials, chemicals and heavy metals for more than 40 years by the activities of the Atomic Energy Commission (CEA) as part of the development of detonators for French atomic bombs.<br/><br/>For the safety of workers and local populations, we are asking that BPB Placo's project to build an open-air quarry on this site, whose past activities are still classified as Secret Défense, be immediately terminated.<br/><br/>Instead of engaging in the recycling of plaster, this industrialist is ready, for clearly economic reasons, to take all the risks to supply its factory. This is inconsistent with the stated ambitions of the French government in the context of ecological transition.\n        \n\n</p><h2>\n            \n              Why is this important?\n            \n          </h2>\n<p>At the doors of Paris, <strong>BPB Placo</strong>, better known as Placoplâtre, a subsidiary of the <strong>Saint-Gobain</strong> group, wishes to set up an <strong>open-air plaster quarry on the land of the former Fort de Vaujours</strong>.</p>\n<p>This site, <strong>where French nuclear weapons detonators were tested</strong> from 1951 to 1997, is <strong>contaminated with Uranium</strong>, part of which comes from spent fuel from nuclear power plants (Uranium from reprocessing) <strong>containing traces of PLUTONIUM, AMERICIUM and NEPTUNIUM</strong>, and most likely <strong>Beryllium</strong> and other <strong>particularly dangerous substances</strong> and materials including <strong>unexploded ordnance</strong> from World War II.</p>\n<p>It should be noted that the <strong>Fort de Vaujours</strong> was for a long time one of the most <strong>secret sites in France</strong>. The activities that led to the pollution of this site are still classified as <strong>\"Defense Secret\"</strong> by the French State. <strong>There is no exhaustive assessment of the pollution and materials used during these experiments.</strong></p>\n<p>In 2010, when Fort de Vaujours was purchased by BPB Placo, it was first asserted by the manufacturer and by the French State that this site had been completely cleaned up and no longer presented any risk. <strong>Radioactivity measurements had to be carried out, in defiance of the danger, by association activists for the State to deign in 2014 to recognize that the site still presented significant radioactive pollution.</strong></p>\n<p><strong>Risk minimization, opacity and misinformation are at the heart of this subject.</strong></p>\n<p><strong>The French State has consistently polluted</strong> this site with radioactive and toxic materials.</p>\n<p><strong>The French State sold this site</strong> to a French industrialist BPB Placo, specialized in plaster, so that the latter could exploit the basements within the framework of a huge open-air quarry.</p>\n<p>The French State has sold a site that is still polluted and delegates the management of the de-pollution of the site to an industrialist whose job it is not, nor their specialty. <strong>This goes against the \"Polluter-Payer\" principle.</strong></p>\n<p><strong>The French State</strong>, through the Prefectures of Seine-Saint-Denis and Seine-et-Marne, <strong>authorized the start of the destruction of the site</strong>.</p>\n<p><strong>The State is preparing to issue an opinion on the proposed operation of this site by BPB Placo.</strong></p>\n<p><strong>The state polluted, the state sold, and now the state will authorize?!</strong></p>\n<p><strong>The first phases of the destruction of the Fort de Vaujours, proved by activists fighting for the truth, have already brought to light significant uranium pollution materialising in thousands of tons of contaminated land to be managed by Andra (National Agency for Radioactive Waste Management).</strong></p>\n<p>While plaster is a <strong>renewable material</strong> derived from gypsum, we see here an industrialist taking significant risks at the gates of Paris, in a highly urbanized environment, to supply the largest plaster processing plant in Europe.</p>\n<p><strong>Risking the health of workers and local populations for plaster?!</strong></p>\n<p>Instead of embarking on a real strategy of plaster recycling, this industrialist is ready, for clearly economic reasons, to take all the risks until resources are exhausted.</p>\n<p><strong>Risking the worst instead of recycling?!</strong></p>\n<p><strong>We say NO to this project.</strong></p>\n<p>We therefore strongly oppose the creation of a quarry on the Fort de Vaujours.</p>\n<p><strong>We ask the services of the French State to ban this dangerous and non-compliant project with the stated ambitions of the French government within the framework of the ecological transition.</strong></p>\n<p><strong>To know more:</strong></p>\n<ul>\n<li><strong>The website that brings together all the information: <a href=\"https://sauvons.dhuis.fr\" rel=\"noopener\" target=\"_blank\">https://sauvons.dhuis.fr</a></strong></li>\n<li><strong>Facebook page: <a href=\"https://www.facebook.com/sauvonsdhuis/\" rel=\"noopener\" target=\"_blank\">https://www.facebook.com/sauvonsdhuis/</a></strong></li>\n<li><strong>Documentary / television programs on the Fort de Vaujours:</strong>\n<ul>\n<li><strong>France2 TV news dated Monday January 30, 2023: <a href=\"https://www.francetvinfo.fr/replay-jt/france-2/20-heures/industrie-inquietude-autour-d-un-projet-de-carriere-de-gypse-au-fort-de-vaujours_5631518.html\" rel=\"noopener\" target=\"_blank\">https://www.francetvinfo.fr/replay-jt/france-2/20-heures/industrie-inquietude-autour-d-un-projet-de-carriere-de-gypse-au-fort-de-vaujours_5631518.html</a></strong></li>\n<li><strong>Fort de Vaujours: “Pollution: Citizen alerts on the net”: <a href=\"https://www.youtube.com/watch?v=pZOSlWxvwkA\" rel=\"noopener\" target=\"_blank\">https://www.youtube.com/watch?v=pZOSlWxvwkA</a></strong></li>\n<li><strong>Fort de Vaujours: Additional investigation. An explosive secret: <a href=\"https://www.youtube.com/watch?v=aJiwVpZFonk\" rel=\"noopener\" target=\"_blank\">https://www.youtube.com/watch?v=aJiwVpZFonk</a></strong></li>\n<li><strong>Fort de Vaujours: Report on Fort de Vaujours dated 06/23/1970: <a href=\"https://www.youtube.com/watch?v=cx8hj7SO1tI\" rel=\"noopener\" target=\"_blank\">https://www.youtube.com/watch?v=cx8hj7SO1tI</a></strong></li>\n<li><strong>Fort de Vaujours: Soil pollution - the hidden scandal:  <a href=\"https://www.youtube.com/watch?v=4u328IyYeHs\" rel=\"noopener\" target=\"_blank\">https://www.youtube.com/watch?v=4u328IyYeHs</a></strong></li>\n</ul>\n</li>\n</ul>\n \n<!-- ak.wysiwyg=code -->\n\n\n<h3>In partnership with:</h3><p>\n\n<img loading=\"lazy\" src=\"https://drupal.wemove.eu/sites/wemove.eu/files/webform/partners/villevaude_30102011_montjay_dhuys.jpeg\"/>\n<!-- ak.wysiwyg=code -->\n\n\n\n</p>",
+    "description_full": "<p>\n\n<!-- Remove this if you don't want popins like \"This page also in English\" -->\n\n\n<img alt=\"Language selector\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/icon_translate_eeaca63123.svg\"/>\n\n          \n            \n              \n              English\n\n              \n            \n          \n            \n          \n            \n          \n        \n\n</p><ul>\n<li>\n<a href=\"https://action.wemove.eu/sign/202303-non_a_l_exploitation_du_fort_de_vaujours_france-petition-FR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Français\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/202303-non_a_l_exploitation_du_fort_de_vaujours_france-petition-ES\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Español\n\n                    \n                    </a>\n</li>\n</ul><p>\n\n\n          Radioactive pollution at the doors of Paris: NO to the Exploitation of the Fort de Vaujours\n        \n\n\n\n\n        Please accept marketing cookies to watch this video\n      \n\n\n\n\n</p><h3>\n<p>To the Minister for Ecological Transition and Regional Cohesion Prefect of Seine-et-Marne Prefect of Seine-Saint-Denis</p>\n</h3>\n<p>\n            This petition is run by [% inititator_name %]\n          </p>\n\n<h2>\n            Petition\n          </h2><p>\n\n          We ask that you prohibit the use of Fort de Vaujours by BPB PLACO, a subsidiary of the SAINT-GOBAIN group.<br/><br/>The Fort de Vaujours has been polluted with radioactive materials, chemicals and heavy metals for more than 40 years by the activities of the Atomic Energy Commission (CEA) as part of the development of detonators for French atomic bombs.<br/><br/>For the safety of workers and local populations, we are asking that BPB Placo's project to build an open-air quarry on this site, whose past activities are still classified as Secret Défense, be immediately terminated.<br/><br/>Instead of engaging in the recycling of plaster, this industrialist is ready, for clearly economic reasons, to take all the risks to supply its factory. This is inconsistent with the stated ambitions of the French government in the context of ecological transition.\n        \n\n</p><h2>\n            \n              Why is this important?\n            \n          </h2>\n<p>At the doors of Paris, <strong>BPB Placo</strong>, better known as Placoplâtre, a subsidiary of the <strong>Saint-Gobain</strong> group, wishes to set up an <strong>open-air plaster quarry on the land of the former Fort de Vaujours</strong>.</p>\n<p>This site, <strong>where French nuclear weapons detonators were tested</strong> from 1951 to 1997, is <strong>contaminated with Uranium</strong>, part of which comes from spent fuel from nuclear power plants (Uranium from reprocessing) <strong>containing traces of PLUTONIUM, AMERICIUM and NEPTUNIUM</strong>, and most likely <strong>Beryllium</strong> and other <strong>particularly dangerous substances</strong> and materials including <strong>unexploded ordnance</strong> from World War II.</p>\n<p>It should be noted that the <strong>Fort de Vaujours</strong> was for a long time one of the most <strong>secret sites in France</strong>. The activities that led to the pollution of this site are still classified as <strong>\"Defense Secret\"</strong> by the French State. <strong>There is no exhaustive assessment of the pollution and materials used during these experiments.</strong></p>\n<p>In 2010, when Fort de Vaujours was purchased by BPB Placo, it was first asserted by the manufacturer and by the French State that this site had been completely cleaned up and no longer presented any risk. <strong>Radioactivity measurements had to be carried out, in defiance of the danger, by association activists for the State to deign in 2014 to recognize that the site still presented significant radioactive pollution.</strong></p>\n<p><strong>Risk minimization, opacity and misinformation are at the heart of this subject.</strong></p>\n<p><strong>The French State has consistently polluted</strong> this site with radioactive and toxic materials.</p>\n<p><strong>The French State sold this site</strong> to a French industrialist BPB Placo, specialized in plaster, so that the latter could exploit the basements within the framework of a huge open-air quarry.</p>\n<p>The French State has sold a site that is still polluted and delegates the management of the de-pollution of the site to an industrialist whose job it is not, nor their specialty. <strong>This goes against the \"Polluter-Payer\" principle.</strong></p>\n<p><strong>The French State</strong>, through the Prefectures of Seine-Saint-Denis and Seine-et-Marne, <strong>authorized the start of the destruction of the site</strong>.</p>\n<p><strong>The State is preparing to issue an opinion on the proposed operation of this site by BPB Placo.</strong></p>\n<p><strong>The state polluted, the state sold, and now the state will authorize?!</strong></p>\n<p><strong>The first phases of the destruction of the Fort de Vaujours, proved by activists fighting for the truth, have already brought to light significant uranium pollution materialising in thousands of tons of contaminated land to be managed by Andra (National Agency for Radioactive Waste Management).</strong></p>\n<p>While plaster is a <strong>renewable material</strong> derived from gypsum, we see here an industrialist taking significant risks at the gates of Paris, in a highly urbanized environment, to supply the largest plaster processing plant in Europe.</p>\n<p><strong>Risking the health of workers and local populations for plaster?!</strong></p>\n<p>Instead of embarking on a real strategy of plaster recycling, this industrialist is ready, for clearly economic reasons, to take all the risks until resources are exhausted.</p>\n<p><strong>Risking the worst instead of recycling?!</strong></p>\n<p><strong>We say NO to this project.</strong></p>\n<p>We therefore strongly oppose the creation of a quarry on the Fort de Vaujours.</p>\n<p><strong>We ask the services of the French State to ban this dangerous and non-compliant project with the stated ambitions of the French government within the framework of the ecological transition.</strong></p>\n<p><strong>To know more:</strong></p>\n<ul>\n<li><strong>The website that brings together all the information: <a href=\"https://sauvons.dhuis.fr\" rel=\"noopener\" target=\"_blank\">https://sauvons.dhuis.fr</a></strong></li>\n<li><strong>Facebook page: <a href=\"https://www.facebook.com/sauvonsdhuis/\" rel=\"noopener\" target=\"_blank\">https://www.facebook.com/sauvonsdhuis/</a></strong></li>\n<li><strong>Documentary / television programs on the Fort de Vaujours:</strong>\n<ul>\n<li><strong>France2 TV news dated Monday January 30, 2023: <a href=\"https://www.francetvinfo.fr/replay-jt/france-2/20-heures/industrie-inquietude-autour-d-un-projet-de-carriere-de-gypse-au-fort-de-vaujours_5631518.html\" rel=\"noopener\" target=\"_blank\">https://www.francetvinfo.fr/replay-jt/france-2/20-heures/industrie-inquietude-autour-d-un-projet-de-carriere-de-gypse-au-fort-de-vaujours_5631518.html</a></strong></li>\n<li><strong>Fort de Vaujours: “Pollution: Citizen alerts on the net”: <a href=\"https://www.youtube.com/watch?v=pZOSlWxvwkA\" rel=\"noopener\" target=\"_blank\">https://www.youtube.com/watch?v=pZOSlWxvwkA</a></strong></li>\n<li><strong>Fort de Vaujours: Additional investigation. An explosive secret: <a href=\"https://www.youtube.com/watch?v=aJiwVpZFonk\" rel=\"noopener\" target=\"_blank\">https://www.youtube.com/watch?v=aJiwVpZFonk</a></strong></li>\n<li><strong>Fort de Vaujours: Report on Fort de Vaujours dated 06/23/1970: <a href=\"https://www.youtube.com/watch?v=cx8hj7SO1tI\" rel=\"noopener\" target=\"_blank\">https://www.youtube.com/watch?v=cx8hj7SO1tI</a></strong></li>\n<li><strong>Fort de Vaujours: Soil pollution - the hidden scandal:  <a href=\"https://www.youtube.com/watch?v=4u328IyYeHs\" rel=\"noopener\" target=\"_blank\">https://www.youtube.com/watch?v=4u328IyYeHs</a></strong></li>\n</ul>\n</li>\n</ul>\n \n<!-- ak.wysiwyg=code -->\n\n\n<h3>In partnership with:</h3><p>\n\n<img loading=\"lazy\" src=\"https://drupal.wemove.eu/sites/wemove.eu/files/webform/partners/villevaude_30102011_montjay_dhuys.jpeg\"/>\n<!-- ak.wysiwyg=code -->\n\n\n\n</p>",
     "summary": "English Français Español Radioactive pollution at the doors of Paris: NO to the Exploitation of the Fort de Vaujours Please accept marketing cookies to watch this video To the Minister for Ecological …",
     "start_date": "2023-03-01",
     "started_by": "WeMove Europe",
@@ -4728,7 +4740,7 @@
     "lang": "en",
     "campaign_id": "wemove:202303-non_a_l_exploitation_du_fort_de_vaujours_france-petition",
     "status": "online",
-    "last_seen": "2026-09-07T20:23:44-06:00",
+    "last_seen": "2026-09-17T20:32:43-06:00",
     "offline_since": null,
     "tags": [
       "State",
@@ -4742,7 +4754,7 @@
       "PLACO",
       "Industrialist"
     ],
-    "last_checked": "2026-09-07T20:23:44-06:00"
+    "last_checked": "2026-09-17T20:32:43-06:00"
   },
   "202303-proteggiamo_i_bambini_dalle_aziende_di_videogiochi_che_non_rispettano_le_regole_imposte_per_immagini_pubblicita_e_contenuti-petition-EN": {
     "slug": "202303-proteggiamo_i_bambini_dalle_aziende_di_videogiochi_che_non_rispettano_le_regole_imposte_per_immagini_pubblicita_e_contenuti-petition-EN",
