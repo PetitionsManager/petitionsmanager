@@ -295,6 +295,122 @@ def melde_eingefrorene() -> None:
 
 
 # ----------------------------------------------------------------------------
+# Melder: veraltete Unterschriftenzahlen
+# ----------------------------------------------------------------------------
+# Anlass: die Nachprüfung steht seit 8815975 auf 72 statt 24 Stunden. Das war
+# nötig (das Budget war mit 136 % überzeichnet), hat aber einen Preis: Zahlen
+# altern bis zu drei Tage, und das trifft fast alle Sätze — gemessen sind nur
+# 0,5 % offline. Bis hierher gab es nichts, was das Altern bemerkt hätte; der
+# Bestand sieht auch dann gesund aus, wenn seine Zahlen Wochen alt sind. Genau
+# so ist europarl 2026 wochenlang unbemerkt eingefroren.
+#
+# ⚠️⚠️ DIE SCHWELLE IST HERGELEITET, NICHT GEMESSEN. Am Sitzungsbaum lässt sie
+# sich nicht bestimmen: dort liegen die Repo-Stände (Median 51 Tage alt), die
+# lebenden Bestände stehen im Actions-Cache, und `last_checked` wird von
+# publish.py vor dem Veröffentlichen entfernt — von außen ist das Feld also
+# nicht sichtbar. Hergeleitet aus: 72 h Mindestabstand plus eine volle
+# Plattform-Runde. Die Runde dauerte vor dem Freiwerden des Budgets 4–5 Tage,
+# sollte jetzt kürzer sein. 7 Tage lassen damit einen ganzen verpassten Zyklus
+# zu, bevor gemeldet wird.
+# ➡️ SOBALD ECHTE ZAHLEN VORLIEGEN (erster CI-Lauf mit dieser Fassung, die
+#    Verteilung steht in der Anmerkung), gehört der Wert überprüft. Er ist
+#    bewusst großzügig: ein Melder, der im Normalbetrieb schreit, wird ignoriert.
+UNTERSCHRIFTEN_VERALTET_TAGE = 7
+# Erst ab diesem Anteil wird gemeldet. Einzelne Nachzügler sind normal — eine
+# Plattform, die gerade erst wieder an der Reihe war, hat naturgemäß alte Sätze.
+UNTERSCHRIFTEN_VERALTET_ANTEIL = 0.25
+# ⚠️⚠️ GitHub deckelt die Anmerkungen je Schritt. Am 17.9.2026 ist dadurch die
+# Meldung „Zeitrahmen beim Scrapen erreicht" verschwunden — der Schritt hatte
+# vorher schon 21 Warnungen abgesetzt. Ein Melder, der im Ernstfall 41 Zeilen
+# schreibt, verdrängt genau die Meldungen, für die er gebaut wurde. Deshalb ein
+# Deckel, und die Zahl der verschwiegenen Fälle kommt in die Sammelmeldung:
+# eine still gekappte Liste liest sich wie „mehr war nicht".
+UNTERSCHRIFTEN_MAX_WARNUNGEN = 5
+
+
+def melde_veraltete_unterschriften() -> None:
+    """Warnt, wenn die Unterschriftenzahlen einer Plattform veralten.
+
+    ⚠️⚠️ Der wichtigste Fall ist NICHT „zu viele alt", sondern „nicht
+    messbar": trägt kein einziger Satz ein ``last_checked``, sieht das in einer
+    naiven Zählung aus wie „null veraltet" — also wie Gesundheit. Dieser Fall
+    wird deshalb ausdrücklich getrennt gemeldet. Wer das zusammenfallen lässt,
+    baut einen Melder, der bei kaputtem Mechanismus schweigt.
+    """
+    jetzt = datetime.now(timezone.utc)
+    grenze = timedelta(days=UNTERSCHRIFTEN_VERALTET_TAGE)
+    gesamt_alt = gesamt = 0
+    gemeldet = verschwiegen = 0
+    for p in PLATFORMS:
+        if not p.is_live:
+            continue
+        try:
+            store = core.load_store(p.data_file)
+        except (OSError, ValueError):
+            continue
+        saetze = [r for k, r in (store or {}).items()
+                  if not k.startswith("_") and isinstance(r, dict)]
+        if not saetze:
+            continue
+        alt = ohne = 0
+        aeltestes = None
+        for r in saetze:
+            zp = _zeitpunkt(r.get("last_checked"))
+            if zp == datetime.min.replace(tzinfo=timezone.utc):
+                ohne += 1
+                continue
+            if jetzt - zp > grenze:
+                alt += 1
+                if aeltestes is None or zp < aeltestes:
+                    aeltestes = zp
+        messbar = len(saetze) - ohne
+        gesamt += len(saetze)
+        gesamt_alt += alt
+        # Fall A: gar nichts messbar. Das ist ein Defekt, keine Gesundheit.
+        if messbar == 0:
+            text = (f"{p.name}: kein einziger von {len(saetze)} Sätzen trägt "
+                    f"last_checked — das Alter der Unterschriftenzahlen ist "
+                    f"hier NICHT prüfbar (nicht: alles frisch).")
+            core.log(f"⚠️ {text}")
+            if core.in_github_actions():
+                if gemeldet < UNTERSCHRIFTEN_MAX_WARNUNGEN:
+                    print(f"::warning title=Unterschriften nicht pruefbar::{text}")
+                    gemeldet += 1
+                else:
+                    verschwiegen += 1
+            continue
+        # Fall B: messbar, aber zu vieles zu alt.
+        anteil = alt / messbar
+        if anteil >= UNTERSCHRIFTEN_VERALTET_ANTEIL:
+            tage = (jetzt - aeltestes).days if aeltestes else 0
+            text = (f"{p.name}: {alt} von {messbar} Unterschriftenzahlen sind "
+                    f"älter als {UNTERSCHRIFTEN_VERALTET_TAGE} Tage "
+                    f"({anteil:.0%}), ältester Stand {tage} Tage. Der "
+                    f"Mindestabstand liegt bei "
+                    f"{core.DEFAULT_MIN_INTERVAL_HOURS} h — wenn so viel "
+                    f"darüber liegt, kommt die Nachprüfung nicht durch.")
+            core.log(f"⚠️ {text}")
+            if core.in_github_actions():
+                if gemeldet < UNTERSCHRIFTEN_MAX_WARNUNGEN:
+                    print(f"::warning title=Unterschriftenzahlen veralten::{text}")
+                    gemeldet += 1
+                else:
+                    verschwiegen += 1
+    # Eine Gesamtzahl auch ohne Ausreißer — sie ist die Grundlage, an der die
+    # oben hergeleitete Schwelle später überprüft werden kann. ⚠️ Und sie nennt
+    # ausdrücklich, wie viele Warnungen der Deckel geschluckt hat: eine still
+    # gekappte Liste liest sich wie „mehr war nicht".
+    if gesamt and core.in_github_actions():
+        rest = (f" {verschwiegen} weitere Plattform(en) betroffen, wegen des "
+                f"Anmerkungs-Deckels nicht einzeln gemeldet."
+                if verschwiegen else "")
+        print(f"::notice title=Unterschriften-Alter::{gesamt_alt} von {gesamt} "
+              f"Sätzen älter als {UNTERSCHRIFTEN_VERALTET_TAGE} Tage "
+              f"({gesamt_alt / gesamt:.1%}). Schwelle je Plattform: "
+              f"{UNTERSCHRIFTEN_VERALTET_ANTEIL:.0%}.{rest}")
+
+
+# ----------------------------------------------------------------------------
 # Vorlauf: zuerst die Zweige, denen nur noch wenig zur Vollständigkeit fehlt
 # ----------------------------------------------------------------------------
 # Anlass (17.9.2026, am Live-Dashboard gemessen, 41 von 41 Kacheln gelesen):
@@ -756,6 +872,12 @@ def main() -> None:
             # kostet nichts — und ein abgeschnittener Lauf ist genau der
             # Moment, in dem eingefrorene Plattformen auffallen müssen.
             melde_eingefrorene()
+            # Dasselbe Argument, ein anderer Blickwinkel: eingefroren heißt
+            # „die Plattform läuft nicht mehr", veraltet heißt „sie läuft, kommt
+            # aber nicht mehr durch". Der zweite Fall entstand erst durch die
+            # Umstellung auf 72 h und fiele sonst niemandem auf. ⚠️ Liest den
+            # ganzen Bestand, nicht nur _meta — deshalb NACH dem Schreiben.
+            melde_veraltete_unterschriften()
     except KeyboardInterrupt:
         print("\nAbgebrochen.")
 
