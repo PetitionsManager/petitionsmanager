@@ -31,7 +31,7 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-18T06:23:55-06:00",
+    "generated_at": "2026-09-18T06:50:55-06:00",
     "petition_count": 601,
     "available": 708,
     "unbrauchbare": {
@@ -139,7 +139,7 @@
     "new_petitions_last_run": [],
     "lauf_verlauf": [
       {
-        "zeit": "2026-09-18T06:23:55-06:00",
+        "zeit": "2026-09-18T06:50:55-06:00",
         "gesamt": 601,
         "online": 600,
         "offline": 1,
@@ -156,7 +156,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-18T06:23:55-06:00",
+      "zeit": "2026-09-18T06:50:55-06:00",
       "gesamt": 601,
       "online": 600,
       "offline": 1,
@@ -169,7 +169,7 @@
       "juengstes_start": "2026-09-01",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-09-18T06:23:55-06:00",
+    "verlauf_felder_ab": "2026-09-18T06:50:55-06:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 600
@@ -15131,7 +15131,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-08-trial-underwater-garden-youmove-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-06T14:42:24-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Underwater",
@@ -15145,7 +15145,7 @@
       "Cabildo",
       "Protect"
     ],
-    "last_checked": "2026-09-06T14:42:24-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-08-trial-USAID-contraceptives-petition-EN": {
     "slug": "2025-08-trial-USAID-contraceptives-petition-EN",
@@ -15169,7 +15169,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-08-trial-USAID-contraceptives-petition",
     "status": "online",
-    "last_seen": "2026-09-06T14:42:24-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Save",
@@ -15183,12 +15183,17 @@
       "Destruction",
       "Health"
     ],
-    "last_checked": "2026-09-06T14:42:24-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-08-USAID-contraceptives-petition-EN": {
     "slug": "2025-08-USAID-contraceptives-petition-EN",
     "first_seen": "2026-09-06T14:42:24-06:00",
-    "signatures_history": [],
+    "signatures_history": [
+      {
+        "checked_at": "2026-09-18T06:47:36-06:00",
+        "count": 115845
+      }
+    ],
     "title": "Don’t burn care: save contraceptives, save lives",
     "image_url": "https://wemove.cdn.actionkit.com/images/contraceptives_trial-min.jpg",
     "url": "https://action.wemove.eu/sign/2025-08-USAID-contraceptives-petition-EN",
@@ -15200,7 +15205,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-08-USAID-contraceptives-petition",
     "status": "online",
-    "last_seen": "2026-09-06T14:42:24-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Contraceptives",
@@ -15214,7 +15219,9 @@
       "Health",
       "Lives"
     ],
-    "last_checked": "2026-09-06T14:42:24-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00",
+    "signatures": 115845,
+    "goal": 150000
   },
   "2025-09-Global-Flotilla-petition-EN": {
     "slug": "2025-09-Global-Flotilla-petition-EN",
@@ -15238,7 +15245,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-09-Global-Flotilla-petition",
     "status": "online",
-    "last_seen": "2026-09-06T14:52:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -15252,7 +15259,7 @@
       "Humanitarian",
       "Leaders"
     ],
-    "last_checked": "2026-09-06T14:52:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-09-israelfootballban-petition-EN": {
     "slug": "2025-09-israelfootballban-petition-EN",
@@ -15261,6 +15268,10 @@
       {
         "checked_at": "2026-09-06T14:52:10-06:00",
         "count": 63444
+      },
+      {
+        "checked_at": "2026-09-18T06:47:36-06:00",
+        "count": 63445
       }
     ],
     "title": "Kick Israel out of the 2026 World Cup",
@@ -15271,12 +15282,12 @@
     "start_date": "2025-09-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 63444,
+    "signatures": 63445,
     "goal": 75000,
     "lang": "en",
     "campaign_id": "wemove:2025-09-israelfootballban-petition",
     "status": "online",
-    "last_seen": "2026-09-06T14:52:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Football",
@@ -15290,7 +15301,7 @@
       "European",
       "Crimes"
     ],
-    "last_checked": "2026-09-06T14:52:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-09-kelsey-onboarding-campaign-petition-EN": {
     "slug": "2025-09-kelsey-onboarding-campaign-petition-EN",
@@ -15314,7 +15325,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-09-kelsey-onboarding-campaign-petition",
     "status": "online",
-    "last_seen": "2026-09-06T14:52:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Google",
@@ -15328,7 +15339,7 @@
       "Time",
       "Competition"
     ],
-    "last_checked": "2026-09-06T14:52:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-09-kelsey-onboarding-trial-petition-EN": {
     "slug": "2025-09-kelsey-onboarding-trial-petition-EN",
@@ -15351,7 +15362,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-09-kelsey-onboarding-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-06T14:52:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -15365,7 +15376,7 @@
       "Important",
       "Council"
     ],
-    "last_checked": "2026-09-06T14:52:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-09-trial-Global-Flotilla-trial-EN": {
     "slug": "2025-09-trial-Global-Flotilla-trial-EN",
@@ -15389,7 +15400,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-09-trial-Global-Flotilla-trial",
     "status": "online",
-    "last_seen": "2026-09-06T14:52:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Flotilla",
@@ -15403,7 +15414,7 @@
       "Union",
       "Gaza"
     ],
-    "last_checked": "2026-09-06T14:52:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-09-trial-israelfootballban-INT-EN-petition-EN": {
     "slug": "2025-09-trial-israelfootballban-INT-EN-petition-EN",
@@ -15426,7 +15437,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-09-trial-israelfootballban-INT-EN-petition",
     "status": "online",
-    "last_seen": "2026-09-06T14:52:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Football",
@@ -15440,7 +15451,7 @@
       "World",
       "UEFA"
     ],
-    "last_checked": "2026-09-06T14:52:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-09-trial-mercosur-pesticides-kicker-petition-EN": {
     "slug": "2025-09-trial-mercosur-pesticides-kicker-petition-EN",
@@ -15463,7 +15474,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-09-trial-mercosur-pesticides-kicker-petition",
     "status": "online",
-    "last_seen": "2026-09-06T14:52:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -15477,7 +15488,7 @@
       "Toxic",
       "Standards"
     ],
-    "last_checked": "2026-09-06T14:52:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-09-trial-methane-companies-petition-EN": {
     "slug": "2025-09-trial-methane-companies-petition-EN",
@@ -15501,7 +15512,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-09-trial-methane-companies-petition",
     "status": "online",
-    "last_seen": "2026-09-06T14:52:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Methane",
@@ -15515,7 +15526,7 @@
       "European",
       "Climate"
     ],
-    "last_checked": "2026-09-06T14:52:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-09-trial-oil-gas-Baltic-petition-EN": {
     "slug": "2025-09-trial-oil-gas-Baltic-petition-EN",
@@ -15539,7 +15550,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-09-trial-oil-gas-Baltic-petition",
     "status": "online",
-    "last_seen": "2026-09-06T14:52:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Baltic",
@@ -15553,7 +15564,7 @@
       "Helsinki",
       "Poland"
     ],
-    "last_checked": "2026-09-06T14:52:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-09-trial-trump-trade-deal-trial-petition-EN": {
     "slug": "2025-09-trial-trump-trade-deal-trial-petition-EN",
@@ -15577,7 +15588,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-09-trial-trump-trade-deal-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-06T14:52:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Deal",
@@ -15591,7 +15602,7 @@
       "Climate",
       "Protect"
     ],
-    "last_checked": "2026-09-06T14:52:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-10-07-tax-the-rich-re-activation-trial-EN": {
     "slug": "2025-10-07-tax-the-rich-re-activation-trial-EN",
@@ -15605,7 +15616,7 @@
     "title": "Tax the Super Rich!",
     "image_url": "https://wemove.cdn.actionkit.com/images/Captura_de_pantalla_2025-10-07_135758.jpg",
     "url": "https://action.wemove.eu/sign/2025-10-07-tax-the-rich-re-activation-trial-EN",
-    "description_full": "<p>\n\n\n          Tax the Super Rich!\n        \n\n\n\n\n      Please accept marketing cookies to watch this video\n    \n\n\n\n\n</p><h3>\n<p>To the European Commission</p>\n</h3>\n\n<h2>\n            Petition\n          </h2>\n<p>We call on the European Commission to establish a <strong>European excess wealth tax</strong>, based on Article 115 TFEU. This tax will create a common policy approach and coordinated action to maximize the positive impact of excess wealth taxation.</p>\n\n\n<h2>\n            \n              Why is this important?\n            \n          </h2>\n<p>While <strong>thousands of us face the impossible rise in the cost of basic goods </strong>or heating our homes this winter,<strong> the mega rich keep getting richer.</strong> It’s because billionaires don’t pay their fair share of taxes. [1]  </p>\n<p>The <strong>richest 1% own nearly half of all the wealth, but they barely pay any tax</strong>. They exploit tax havens and use loopholes to send as little taxes as possible to our governments - depriving  all of us of vital money to finance our hospitals, teachers, and nurses. [2] </p>\n<p>But now we have an opportunity to <strong>stop this injustice.</strong> Spain is already experimenting with taxing the wealth of the super rich. [3] This <strong>tax has and can generate billions of Euros</strong>, and bring the resources to finance the essential services we desperately need.</p>\n<p>Together, let’s call for a tax on the rich for a more fair Europe! <strong>Demand a European wealth tax for the super rich! </strong></p>\n<p>This wealth tax on the super rich is already a reality in Spain: it’s currently raised over 1.8 billion Euros in 2023. [4] If adopted across Europe, we could inject billions into our healthcare systems, education and public transport. [5] </p>\n<p>And we wouldn’t just have money for our failing public services, but also<strong> use it to help those communities most affected by the climate crisis.</strong> While the super-rich are most responsible for the climate crisis, it’s young people and the poor who are most affected. [6] They face the worst of droughts, floods, heatwaves and fires. </p>\n<p>We believe we all should pay our fair share in tax and help those in need. Taxing the wealthiest more is what’s right, what’s needed, and will make a huge difference! But <strong>politicians won’t take action until they know the public is behind them.</strong> Together, let’s demand a wealth tax on the super rich!</p>\n<h4>\n            References:\n          </h4>\n\n<p>[1] Elon Musk, one of the world’s richest men, paid a ‘true tax rate’ of just over 3% from 2014 to 2018.<br/>https://oxfamilibrary.openrepository.com/bitstream/handle/10546/621477/bp-survival-of-the-richest-160123-en.pdf<br/>For some other rich people, effective tax rates are worth just 0%-0.6% of their total wealth, according to: https://www.taxobservatory.eu/publication/global-tax-evasion-report-2024/</p>\n<p>[2] https://www.theguardian.com/business/2023/oct/22/eu-funded-report-calls-for-wealth-of-super-rich-to-be-taxed-not-income</p>\n<p>[3] Spain aims to increase revenue by 3.14 bln euros with new tax plans, https://www.reuters.com/markets/europe/spain-hopes-gain-314-billion-euros-revenues-with-new-tax-proposals-2022-09-29/<br/>https://www.taxnotes.com/featured-news/tax-justice-network-suggests-eu-wealth-tax-similar-spains/2023/09/20/7hcm</p>\n<p>[4] Details of the Spanish wealth tax are here: https://www.aljazeera.com/news/2022/9/29/spain-agrees-on-new-asset-tax-for-wealthy-residents<br/>https://news.bloombergtax.com/daily-tax-report-international/spains-new-wealth-tax-beats-revenue-forecast-as-eu-mulls-stance</p>\n<p>[5] A European wealth tax could start at 2 per cent on millionaires with wealth above €4.6 million, 3 per cent on those with wealth above €45.7 million and 5 per cent on billionaires.<br/>https://www.oxfam.org/en/press-releases/eus-richest-10-emit-much-planet-heating-emissions-half-eus-poorest-population,<br/>https://www.socialeurope.eu/for-equality-and-the-climate-a-european-wealth-tax</p>\n<p>[6] The super rich emit more carbon pollution than the 3.1 billion people who make up the poorest half of humanity.<br/>https://www.oxfam.org/en/press-releases/carbon-emissions-richest-1-percent-more-double-emissions-poorest-half-humanity</p>",
+    "description_full": "<p>\n\n\n          Tax the Super Rich!\n        \n\n\n\n\n        Please accept marketing cookies to watch this video\n      \n\n\n\n\n</p><h3>\n<p>To the European Commission</p>\n</h3>\n\n<h2>\n            Petition\n          </h2>\n<p>We call on the European Commission to establish a <strong>European excess wealth tax</strong>, based on Article 115 TFEU. This tax will create a common policy approach and coordinated action to maximize the positive impact of excess wealth taxation.</p>\n\n\n<h2>\n            \n              Why is this important?\n            \n          </h2>\n<p>While <strong>thousands of us face the impossible rise in the cost of basic goods </strong>or heating our homes this winter,<strong> the mega rich keep getting richer.</strong> It’s because billionaires don’t pay their fair share of taxes. [1]  </p>\n<p>The <strong>richest 1% own nearly half of all the wealth, but they barely pay any tax</strong>. They exploit tax havens and use loopholes to send as little taxes as possible to our governments - depriving  all of us of vital money to finance our hospitals, teachers, and nurses. [2] </p>\n<p>But now we have an opportunity to <strong>stop this injustice.</strong> Spain is already experimenting with taxing the wealth of the super rich. [3] This <strong>tax has and can generate billions of Euros</strong>, and bring the resources to finance the essential services we desperately need.</p>\n<p>Together, let’s call for a tax on the rich for a more fair Europe! <strong>Demand a European wealth tax for the super rich! </strong></p>\n<p>This wealth tax on the super rich is already a reality in Spain: it’s currently raised over 1.8 billion Euros in 2023. [4] If adopted across Europe, we could inject billions into our healthcare systems, education and public transport. [5] </p>\n<p>And we wouldn’t just have money for our failing public services, but also<strong> use it to help those communities most affected by the climate crisis.</strong> While the super-rich are most responsible for the climate crisis, it’s young people and the poor who are most affected. [6] They face the worst of droughts, floods, heatwaves and fires. </p>\n<p>We believe we all should pay our fair share in tax and help those in need. Taxing the wealthiest more is what’s right, what’s needed, and will make a huge difference! But <strong>politicians won’t take action until they know the public is behind them.</strong> Together, let’s demand a wealth tax on the super rich!</p>\n<h4>\n            References:\n          </h4>\n\n<p>[1] Elon Musk, one of the world’s richest men, paid a ‘true tax rate’ of just over 3% from 2014 to 2018.<br/>https://oxfamilibrary.openrepository.com/bitstream/handle/10546/621477/bp-survival-of-the-richest-160123-en.pdf<br/>For some other rich people, effective tax rates are worth just 0%-0.6% of their total wealth, according to: https://www.taxobservatory.eu/publication/global-tax-evasion-report-2024/</p>\n<p>[2] https://www.theguardian.com/business/2023/oct/22/eu-funded-report-calls-for-wealth-of-super-rich-to-be-taxed-not-income</p>\n<p>[3] Spain aims to increase revenue by 3.14 bln euros with new tax plans, https://www.reuters.com/markets/europe/spain-hopes-gain-314-billion-euros-revenues-with-new-tax-proposals-2022-09-29/<br/>https://www.taxnotes.com/featured-news/tax-justice-network-suggests-eu-wealth-tax-similar-spains/2023/09/20/7hcm</p>\n<p>[4] Details of the Spanish wealth tax are here: https://www.aljazeera.com/news/2022/9/29/spain-agrees-on-new-asset-tax-for-wealthy-residents<br/>https://news.bloombergtax.com/daily-tax-report-international/spains-new-wealth-tax-beats-revenue-forecast-as-eu-mulls-stance</p>\n<p>[5] A European wealth tax could start at 2 per cent on millionaires with wealth above €4.6 million, 3 per cent on those with wealth above €45.7 million and 5 per cent on billionaires.<br/>https://www.oxfam.org/en/press-releases/eus-richest-10-emit-much-planet-heating-emissions-half-eus-poorest-population,<br/>https://www.socialeurope.eu/for-equality-and-the-climate-a-european-wealth-tax</p>\n<p>[6] The super rich emit more carbon pollution than the 3.1 billion people who make up the poorest half of humanity.<br/>https://www.oxfam.org/en/press-releases/carbon-emissions-richest-1-percent-more-double-emissions-poorest-half-humanity</p>",
     "summary": "Tax the Super Rich! Please accept marketing cookies to watch this video To the European Commission Petition We call on the European Commission to establish a European excess wealth tax , based on Arti…",
     "start_date": "2025-10-01",
     "started_by": "WeMove Europe",
@@ -15615,7 +15626,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-10-07-tax-the-rich-re-activation-trial",
     "status": "online",
-    "last_seen": "2026-09-06T14:52:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Wealth",
@@ -15629,7 +15640,7 @@
       "Euros",
       "Spain"
     ],
-    "last_checked": "2026-09-06T14:52:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-10-jessie-onboarding-campaign-petition-EN": {
     "slug": "2025-10-jessie-onboarding-campaign-petition-EN",
@@ -15653,7 +15664,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-10-jessie-onboarding-campaign-petition",
     "status": "online",
-    "last_seen": "2026-09-06T14:52:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Baltic",
@@ -15667,7 +15678,7 @@
       "Directive",
       "Drilling"
     ],
-    "last_checked": "2026-09-06T14:52:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-10-oil-Baltic-Sea-petition-EN": {
     "slug": "2025-10-oil-Baltic-Sea-petition-EN",
@@ -15676,6 +15687,10 @@
       {
         "checked_at": "2026-09-06T14:52:10-06:00",
         "count": 89228
+      },
+      {
+        "checked_at": "2026-09-18T06:47:36-06:00",
+        "count": 89285
       }
     ],
     "title": "Keep the Baltic Sea clean and safe!",
@@ -15686,12 +15701,12 @@
     "start_date": "2025-10-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 89228,
+    "signatures": 89285,
     "goal": 100000,
     "lang": "en",
     "campaign_id": "wemove:2025-10-oil-Baltic-Sea-petition",
     "status": "online",
-    "last_seen": "2026-09-06T14:52:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Baltic",
@@ -15705,7 +15720,7 @@
       "Extraction",
       "Directive"
     ],
-    "last_checked": "2026-09-06T14:52:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-10-trial-dpc-ireland-petition-2-EN": {
     "slug": "2025-10-trial-dpc-ireland-petition-2-EN",
@@ -15729,7 +15744,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-10-trial-dpc-ireland-petition-2",
     "status": "online",
-    "last_seen": "2026-09-06T14:52:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Data",
@@ -15743,7 +15758,7 @@
       "European",
       "Exploit"
     ],
-    "last_checked": "2026-09-06T14:52:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-10-trial-harmit-onboarding-petition-EN": {
     "slug": "2025-10-trial-harmit-onboarding-petition-EN",
@@ -15767,7 +15782,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-10-trial-harmit-onboarding-petition",
     "status": "online",
-    "last_seen": "2026-09-06T14:52:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Tobacco",
@@ -15781,7 +15796,7 @@
       "Generation",
       "Onboarding"
     ],
-    "last_checked": "2026-09-06T14:52:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-10-trial-jessie-onboarding-petition-EN": {
     "slug": "2025-10-trial-jessie-onboarding-petition-EN",
@@ -15805,7 +15820,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-10-trial-jessie-onboarding-petition",
     "status": "online",
-    "last_seen": "2026-09-06T14:52:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Tobacco",
@@ -15819,7 +15834,7 @@
       "Commission",
       "Generation"
     ],
-    "last_checked": "2026-09-06T14:52:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-10-trump-trade-deal-petition-EN": {
     "slug": "2025-10-trump-trade-deal-petition-EN",
@@ -15828,6 +15843,10 @@
       {
         "checked_at": "2026-09-06T14:52:10-06:00",
         "count": 115906
+      },
+      {
+        "checked_at": "2026-09-18T06:47:36-06:00",
+        "count": 115913
       }
     ],
     "title": "Say NO to Trump’s trade deal",
@@ -15838,12 +15857,12 @@
     "start_date": "2025-10-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 115906,
+    "signatures": 115913,
     "goal": 150000,
     "lang": "en",
     "campaign_id": "wemove:2025-10-trump-trade-deal-petition",
     "status": "online",
-    "last_seen": "2026-09-06T14:52:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Deal",
@@ -15857,7 +15876,7 @@
       "Parliament",
       "Energy"
     ],
-    "last_checked": "2026-09-06T14:52:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-10-yes-to-greening-no-to-mandates-EN": {
     "slug": "2025-10-yes-to-greening-no-to-mandates-EN",
@@ -15881,7 +15900,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-10-yes-to-greening-no-to-mandates",
     "status": "online",
-    "last_seen": "2026-09-06T14:52:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Suomalainen",
@@ -15895,7 +15914,7 @@
       "Hrvatski",
       "Italiano"
     ],
-    "last_checked": "2026-09-06T14:52:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-11-04-trial-housing-for-all-petition-EN": {
     "slug": "2025-11-04-trial-housing-for-all-petition-EN",
@@ -15918,7 +15937,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-11-04-trial-housing-for-all-petition",
     "status": "online",
-    "last_seen": "2026-09-06T14:52:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Housing",
@@ -15932,7 +15951,7 @@
       "Right",
       "Time"
     ],
-    "last_checked": "2026-09-06T14:52:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-11-3-trial-hurricane-names-petition-EN": {
     "slug": "2025-11-3-trial-hurricane-names-petition-EN",
@@ -15955,7 +15974,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-11-3-trial-hurricane-names-petition",
     "status": "online",
-    "last_seen": "2026-09-06T14:52:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Climate",
@@ -15969,7 +15988,7 @@
       "EUMETNET",
       "Meteorological"
     ],
-    "last_checked": "2026-09-06T14:52:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-11-3-trial-tax-the-rich-reactivation-bill-gates-petition-EN": {
     "slug": "2025-11-3-trial-tax-the-rich-reactivation-bill-gates-petition-EN",
@@ -15983,7 +16002,7 @@
     "title": "Tax the Super Rich!",
     "image_url": "https://wemove.cdn.actionkit.com/images/Captura_de_pantalla_2025-10-07_135758.jpg",
     "url": "https://action.wemove.eu/sign/2025-11-3-trial-tax-the-rich-reactivation-bill-gates-petition-EN",
-    "description_full": "<p>\n\n\n          Tax the Super Rich!\n        \n\n\n\n\n      Please accept marketing cookies to watch this video\n    \n\n\n\n\n</p><h3>\n<p>To the European Commission, European Parliament and Council of the European Union</p>\n</h3>\n\n<h2>\n            Petition\n          </h2>\n<p>We call on the European Commission to establish a <strong>European excess wealth tax</strong>, based on Article 115 TFEU. This tax will create a common policy approach and coordinated action to maximize the positive impact of excess wealth taxation.</p>\n\n\n<h2>\n            \n              Why is this important?\n            \n          </h2>\n<p>While <strong>thousands of us face the impossible rise in the cost of basic goods </strong>or heating our homes this winter,<strong> the mega rich keep getting richer.</strong> It’s because billionaires don’t pay their fair share of taxes. [1]  </p>\n<p>The <strong>richest 1% own nearly half of all the wealth, but they barely pay any tax</strong>. They exploit tax havens and use loopholes to send as little taxes as possible to our governments - depriving  all of us of vital money to finance our hospitals, teachers, and nurses. [2] </p>\n<p>But now we have an opportunity to <strong>stop this injustice.</strong> Spain is already experimenting with taxing the wealth of the super rich. [3] This <strong>tax has and can generate billions of Euros</strong>, and bring the resources to finance the essential services we desperately need.</p>\n<p>Together, let’s call for a tax on the rich for a more fair Europe! <strong>Demand a European wealth tax for the super rich! </strong></p>\n<p>This wealth tax on the super rich is already a reality in Spain: it’s currently raised over 1.8 billion Euros in 2023. [4] If adopted across Europe, we could inject billions into our healthcare systems, education and public transport. [5] </p>\n<p>And we wouldn’t just have money for our failing public services, but also<strong> use it to help those communities most affected by the climate crisis.</strong> While the super-rich are most responsible for the climate crisis, it’s young people and the poor who are most affected. [6] They face the worst of droughts, floods, heatwaves and fires. </p>\n<p>We believe we all should pay our fair share in tax and help those in need. Taxing the wealthiest more is what’s right, what’s needed, and will make a huge difference! But <strong>politicians won’t take action until they know the public is behind them.</strong> Together, let’s demand a wealth tax on the super rich!</p>\n<h4>\n            References:\n          </h4>\n\n<p>[1] Elon Musk, one of the world’s richest men, paid a ‘true tax rate’ of just over 3% from 2014 to 2018.<br/>https://oxfamilibrary.openrepository.com/bitstream/handle/10546/621477/bp-survival-of-the-richest-160123-en.pdf<br/>For some other rich people, effective tax rates are worth just 0%-0.6% of their total wealth, according to: https://www.taxobservatory.eu/publication/global-tax-evasion-report-2024/</p>\n<p>[2] https://www.theguardian.com/business/2023/oct/22/eu-funded-report-calls-for-wealth-of-super-rich-to-be-taxed-not-income</p>\n<p>[3] Spain aims to increase revenue by 3.14 bln euros with new tax plans, https://www.reuters.com/markets/europe/spain-hopes-gain-314-billion-euros-revenues-with-new-tax-proposals-2022-09-29/<br/>https://www.taxnotes.com/featured-news/tax-justice-network-suggests-eu-wealth-tax-similar-spains/2023/09/20/7hcm</p>\n<p>[4] Details of the Spanish wealth tax are here: https://www.aljazeera.com/news/2022/9/29/spain-agrees-on-new-asset-tax-for-wealthy-residents<br/>https://news.bloombergtax.com/daily-tax-report-international/spains-new-wealth-tax-beats-revenue-forecast-as-eu-mulls-stance</p>\n<p>[5] A European wealth tax could start at 2 per cent on millionaires with wealth above €4.6 million, 3 per cent on those with wealth above €45.7 million and 5 per cent on billionaires.<br/>https://www.oxfam.org/en/press-releases/eus-richest-10-emit-much-planet-heating-emissions-half-eus-poorest-population,<br/>https://www.socialeurope.eu/for-equality-and-the-climate-a-european-wealth-tax</p>\n<p>[6] The super rich emit more carbon pollution than the 3.1 billion people who make up the poorest half of humanity.<br/>https://www.oxfam.org/en/press-releases/carbon-emissions-richest-1-percent-more-double-emissions-poorest-half-humanity</p>",
+    "description_full": "<p>\n\n\n          Tax the Super Rich!\n        \n\n\n\n\n        Please accept marketing cookies to watch this video\n      \n\n\n\n\n</p><h3>\n<p>To the European Commission, European Parliament and Council of the European Union</p>\n</h3>\n\n<h2>\n            Petition\n          </h2>\n<p>We call on the European Commission to establish a <strong>European excess wealth tax</strong>, based on Article 115 TFEU. This tax will create a common policy approach and coordinated action to maximize the positive impact of excess wealth taxation.</p>\n\n\n<h2>\n            \n              Why is this important?\n            \n          </h2>\n<p>While <strong>thousands of us face the impossible rise in the cost of basic goods </strong>or heating our homes this winter,<strong> the mega rich keep getting richer.</strong> It’s because billionaires don’t pay their fair share of taxes. [1]  </p>\n<p>The <strong>richest 1% own nearly half of all the wealth, but they barely pay any tax</strong>. They exploit tax havens and use loopholes to send as little taxes as possible to our governments - depriving  all of us of vital money to finance our hospitals, teachers, and nurses. [2] </p>\n<p>But now we have an opportunity to <strong>stop this injustice.</strong> Spain is already experimenting with taxing the wealth of the super rich. [3] This <strong>tax has and can generate billions of Euros</strong>, and bring the resources to finance the essential services we desperately need.</p>\n<p>Together, let’s call for a tax on the rich for a more fair Europe! <strong>Demand a European wealth tax for the super rich! </strong></p>\n<p>This wealth tax on the super rich is already a reality in Spain: it’s currently raised over 1.8 billion Euros in 2023. [4] If adopted across Europe, we could inject billions into our healthcare systems, education and public transport. [5] </p>\n<p>And we wouldn’t just have money for our failing public services, but also<strong> use it to help those communities most affected by the climate crisis.</strong> While the super-rich are most responsible for the climate crisis, it’s young people and the poor who are most affected. [6] They face the worst of droughts, floods, heatwaves and fires. </p>\n<p>We believe we all should pay our fair share in tax and help those in need. Taxing the wealthiest more is what’s right, what’s needed, and will make a huge difference! But <strong>politicians won’t take action until they know the public is behind them.</strong> Together, let’s demand a wealth tax on the super rich!</p>\n<h4>\n            References:\n          </h4>\n\n<p>[1] Elon Musk, one of the world’s richest men, paid a ‘true tax rate’ of just over 3% from 2014 to 2018.<br/>https://oxfamilibrary.openrepository.com/bitstream/handle/10546/621477/bp-survival-of-the-richest-160123-en.pdf<br/>For some other rich people, effective tax rates are worth just 0%-0.6% of their total wealth, according to: https://www.taxobservatory.eu/publication/global-tax-evasion-report-2024/</p>\n<p>[2] https://www.theguardian.com/business/2023/oct/22/eu-funded-report-calls-for-wealth-of-super-rich-to-be-taxed-not-income</p>\n<p>[3] Spain aims to increase revenue by 3.14 bln euros with new tax plans, https://www.reuters.com/markets/europe/spain-hopes-gain-314-billion-euros-revenues-with-new-tax-proposals-2022-09-29/<br/>https://www.taxnotes.com/featured-news/tax-justice-network-suggests-eu-wealth-tax-similar-spains/2023/09/20/7hcm</p>\n<p>[4] Details of the Spanish wealth tax are here: https://www.aljazeera.com/news/2022/9/29/spain-agrees-on-new-asset-tax-for-wealthy-residents<br/>https://news.bloombergtax.com/daily-tax-report-international/spains-new-wealth-tax-beats-revenue-forecast-as-eu-mulls-stance</p>\n<p>[5] A European wealth tax could start at 2 per cent on millionaires with wealth above €4.6 million, 3 per cent on those with wealth above €45.7 million and 5 per cent on billionaires.<br/>https://www.oxfam.org/en/press-releases/eus-richest-10-emit-much-planet-heating-emissions-half-eus-poorest-population,<br/>https://www.socialeurope.eu/for-equality-and-the-climate-a-european-wealth-tax</p>\n<p>[6] The super rich emit more carbon pollution than the 3.1 billion people who make up the poorest half of humanity.<br/>https://www.oxfam.org/en/press-releases/carbon-emissions-richest-1-percent-more-double-emissions-poorest-half-humanity</p>",
     "summary": "Tax the Super Rich! Please accept marketing cookies to watch this video To the European Commission, European Parliament and Council of the European Union Petition We call on the European Commission to…",
     "start_date": "2025-11-01",
     "started_by": "WeMove Europe",
@@ -15993,7 +16012,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-11-3-trial-tax-the-rich-reactivation-bill-gates-petition",
     "status": "online",
-    "last_seen": "2026-09-06T14:52:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Wealth",
@@ -16007,7 +16026,7 @@
       "Spain",
       "Call"
     ],
-    "last_checked": "2026-09-06T14:52:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-11-ban-shark-meat-2-A-trial-petition-EN": {
     "slug": "2025-11-ban-shark-meat-2-A-trial-petition-EN",
@@ -16031,7 +16050,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-11-ban-shark-meat-2-A-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-06T14:52:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Shark",
@@ -16045,7 +16064,7 @@
       "Protect",
       "Every"
     ],
-    "last_checked": "2026-09-06T14:52:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-11-ban-shark-meat-2-B-trial-petition-EN": {
     "slug": "2025-11-ban-shark-meat-2-B-trial-petition-EN",
@@ -16069,7 +16088,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-11-ban-shark-meat-2-B-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-06T14:52:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Shark",
@@ -16083,7 +16102,7 @@
       "Europe",
       "Levels"
     ],
-    "last_checked": "2026-09-06T14:52:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-11-ban-shark-meat-EU-petition-EN": {
     "slug": "2025-11-ban-shark-meat-EU-petition-EN",
@@ -16092,6 +16111,10 @@
       {
         "checked_at": "2026-09-06T14:52:10-06:00",
         "count": 64242
+      },
+      {
+        "checked_at": "2026-09-18T06:47:36-06:00",
+        "count": 64254
       }
     ],
     "title": "Healthy oceans, safe future: stop the toxic shark trade",
@@ -16102,12 +16125,12 @@
     "start_date": "2025-11-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 64242,
+    "signatures": 64254,
     "goal": 75000,
     "lang": "en",
     "campaign_id": "wemove:2025-11-ban-shark-meat-EU-petition",
     "status": "online",
-    "last_seen": "2026-09-06T14:52:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Shark",
@@ -16121,7 +16144,7 @@
       "Every",
       "Toxic"
     ],
-    "last_checked": "2026-09-06T14:52:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-11-dare-to-solidare-europe-keep-youth-and-solidarity-alive-for-your-EN": {
     "slug": "2025-11-dare-to-solidare-europe-keep-youth-and-solidarity-alive-for-your-EN",
@@ -16145,7 +16168,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-11-dare-to-solidare-europe-keep-youth-and-solidarity-alive-for-your",
     "status": "online",
-    "last_seen": "2026-09-06T14:52:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Youth",
@@ -16159,7 +16182,7 @@
       "Commission",
       "Countries"
     ],
-    "last_checked": "2026-09-06T14:52:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-11-deportation-regulation-1-trial-EN-EN": {
     "slug": "2025-11-deportation-regulation-1-trial-EN-EN",
@@ -16183,7 +16206,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-11-deportation-regulation-1-trial-EN",
     "status": "online",
-    "last_seen": "2026-09-06T14:52:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -16197,7 +16220,7 @@
       "Welcoming",
       "Private"
     ],
-    "last_checked": "2026-09-06T14:52:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-11-deportation-regulation-2-trial-EN-EN": {
     "slug": "2025-11-deportation-regulation-2-trial-EN-EN",
@@ -16221,7 +16244,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-11-deportation-regulation-2-trial-EN",
     "status": "online",
-    "last_seen": "2026-09-06T14:52:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Europe",
@@ -16235,7 +16258,7 @@
       "Families",
       "Private"
     ],
-    "last_checked": "2026-09-06T14:52:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-11-dpc-ireland-petition-EN": {
     "slug": "2025-11-dpc-ireland-petition-EN",
@@ -16244,6 +16267,10 @@
       {
         "checked_at": "2026-09-06T14:52:10-06:00",
         "count": 75735
+      },
+      {
+        "checked_at": "2026-09-18T06:47:36-06:00",
+        "count": 75746
       }
     ],
     "title": "Don’t let Big Tech lobbyists exploit our data!",
@@ -16254,12 +16281,12 @@
     "start_date": "2025-11-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 75735,
+    "signatures": 75746,
     "goal": 100000,
     "lang": "en",
     "campaign_id": "wemove:2025-11-dpc-ireland-petition",
     "status": "online",
-    "last_seen": "2026-09-06T14:52:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Data",
@@ -16273,7 +16300,7 @@
       "Independence",
       "Lobbyists"
     ],
-    "last_checked": "2026-09-06T14:52:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-11-housing-for-all-petition-EN": {
     "slug": "2025-11-housing-for-all-petition-EN",
@@ -16282,6 +16309,10 @@
       {
         "checked_at": "2026-09-06T14:52:10-06:00",
         "count": 82689
+      },
+      {
+        "checked_at": "2026-09-18T06:47:36-06:00",
+        "count": 82701
       }
     ],
     "title": "Make Homes for People, Not for Profit",
@@ -16292,12 +16323,12 @@
     "start_date": "2025-11-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 82689,
+    "signatures": 82701,
     "goal": 100000,
     "lang": "en",
     "campaign_id": "wemove:2025-11-housing-for-all-petition",
     "status": "online",
-    "last_seen": "2026-09-06T14:52:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Housing",
@@ -16311,7 +16342,7 @@
       "Europe",
       "Right"
     ],
-    "last_checked": "2026-09-06T14:52:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-11-keep-youth-and-volunteering-alive-for-the-sake-of-europe-s-futur-EN": {
     "slug": "2025-11-keep-youth-and-volunteering-alive-for-the-sake-of-europe-s-futur-EN",
@@ -16335,7 +16366,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-11-keep-youth-and-volunteering-alive-for-the-sake-of-europe-s-futur",
     "status": "online",
-    "last_seen": "2026-09-06T14:52:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Youth",
@@ -16349,7 +16380,7 @@
       "People",
       "Young"
     ],
-    "last_checked": "2026-09-06T14:52:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-11-restore-multi-entry-visas-judge-by-individual-risk-not-by-passpo-EN": {
     "slug": "2025-11-restore-multi-entry-visas-judge-by-individual-risk-not-by-passpo-EN",
@@ -16372,7 +16403,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-11-restore-multi-entry-visas-judge-by-individual-risk-not-by-passpo",
     "status": "online",
-    "last_seen": "2026-09-06T14:52:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -16386,12 +16417,17 @@
       "Passport",
       "Security"
     ],
-    "last_checked": "2026-09-06T14:52:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-11-stop-aux-megots-les-fabricants-de-tabac-doivent-financer-le-recy-EN": {
     "slug": "2025-11-stop-aux-megots-les-fabricants-de-tabac-doivent-financer-le-recy-EN",
     "first_seen": "2026-09-06T14:52:10-06:00",
-    "signatures_history": [],
+    "signatures_history": [
+      {
+        "checked_at": "2026-09-18T06:47:36-06:00",
+        "count": 11
+      }
+    ],
     "title": "STOP butts! Tobacco manufacturers must finance recycling!",
     "image_url": "https://strapi.youmoveeurope.eu/uploads/IMG_2986_fd8d33e3ee.jpeg",
     "url": "https://action.wemove.eu/sign/2025-11-stop-aux-megots-les-fabricants-de-tabac-doivent-financer-le-recy-EN",
@@ -16403,7 +16439,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-11-stop-aux-megots-les-fabricants-de-tabac-doivent-financer-le-recy",
     "status": "online",
-    "last_seen": "2026-09-06T14:52:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Tobacco",
@@ -16417,7 +16453,9 @@
       "Commission",
       "Products"
     ],
-    "last_checked": "2026-09-06T14:52:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00",
+    "signatures": 11,
+    "goal": 1000
   },
   "2025-11-trial-deforestation-deregulation-air-petition-EN": {
     "slug": "2025-11-trial-deforestation-deregulation-air-petition-EN",
@@ -16441,7 +16479,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-11-trial-deforestation-deregulation-air-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:06:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Forests",
@@ -16455,7 +16493,7 @@
       "Late",
       "Scientists"
     ],
-    "last_checked": "2026-09-06T15:06:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-11-trial-deforestation-deregulation-right-trial-EN": {
     "slug": "2025-11-trial-deforestation-deregulation-right-trial-EN",
@@ -16479,7 +16517,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-11-trial-deforestation-deregulation-right-trial",
     "status": "online",
-    "last_seen": "2026-09-06T15:06:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Forests",
@@ -16493,7 +16531,7 @@
       "Save",
       "Time"
     ],
-    "last_checked": "2026-09-06T15:06:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-11-trial-omnibus-food-petition-EN": {
     "slug": "2025-11-trial-omnibus-food-petition-EN",
@@ -16517,7 +16555,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-11-trial-omnibus-food-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:06:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Pesticides",
@@ -16531,7 +16569,7 @@
       "Prove",
       "Toxic"
     ],
-    "last_checked": "2026-09-06T15:06:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-11-trial-pensions-petition-EN": {
     "slug": "2025-11-trial-pensions-petition-EN",
@@ -16555,7 +16593,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-11-trial-pensions-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:06:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -16569,7 +16607,7 @@
       "Demanding",
       "Everyone"
     ],
-    "last_checked": "2026-09-06T15:06:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-11-trial-silence-on-sudan-petition-EN": {
     "slug": "2025-11-trial-silence-on-sudan-petition-EN",
@@ -16593,7 +16631,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-11-trial-silence-on-sudan-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:06:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Sudan",
@@ -16607,7 +16645,7 @@
       "Discussions",
       "Commission"
     ],
-    "last_checked": "2026-09-06T15:06:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-11-trial2-omnibus-food-petition-EN": {
     "slug": "2025-11-trial2-omnibus-food-petition-EN",
@@ -16631,7 +16669,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-11-trial2-omnibus-food-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:06:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Pesticides",
@@ -16645,7 +16683,7 @@
       "Health",
       "Prove"
     ],
-    "last_checked": "2026-09-06T15:06:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-12-eu-budget-2028-2034-allocate-dedicated-funds-directly-to-roma-co-EN": {
     "slug": "2025-12-eu-budget-2028-2034-allocate-dedicated-funds-directly-to-roma-co-EN",
@@ -16669,7 +16707,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-12-eu-budget-2028-2034-allocate-dedicated-funds-directly-to-roma-co",
     "status": "online",
-    "last_seen": "2026-09-06T15:06:10-06:00",
+    "last_seen": "2026-09-18T06:47:36-06:00",
     "offline_since": null,
     "tags": [
       "Budget",
@@ -16683,7 +16721,7 @@
       "Mechanisms",
       "European"
     ],
-    "last_checked": "2026-09-06T15:06:10-06:00"
+    "last_checked": "2026-09-18T06:47:36-06:00"
   },
   "2025-12-no-deportation-petition-EN": {
     "slug": "2025-12-no-deportation-petition-EN",
