@@ -31,7 +31,7 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-18T06:50:55-06:00",
+    "generated_at": "2026-09-18T07:18:33-06:00",
     "petition_count": 601,
     "available": 708,
     "unbrauchbare": {
@@ -139,7 +139,7 @@
     "new_petitions_last_run": [],
     "lauf_verlauf": [
       {
-        "zeit": "2026-09-18T06:50:55-06:00",
+        "zeit": "2026-09-18T07:18:33-06:00",
         "gesamt": 601,
         "online": 600,
         "offline": 1,
@@ -156,7 +156,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-18T06:50:55-06:00",
+      "zeit": "2026-09-18T07:18:33-06:00",
       "gesamt": 601,
       "online": 600,
       "offline": 1,
@@ -169,7 +169,7 @@
       "juengstes_start": "2026-09-01",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-09-18T06:50:55-06:00",
+    "verlauf_felder_ab": "2026-09-18T07:18:33-06:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 600
@@ -16730,6 +16730,10 @@
       {
         "checked_at": "2026-09-06T15:06:10-06:00",
         "count": 125706
+      },
+      {
+        "checked_at": "2026-09-18T07:15:39-06:00",
+        "count": 125731
       }
     ],
     "title": "Say No to Mass Deportations in Europe",
@@ -16740,12 +16744,12 @@
     "start_date": "2025-12-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 125706,
+    "signatures": 125731,
     "goal": 150000,
     "lang": "en",
     "campaign_id": "wemove:2025-12-no-deportation-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:06:10-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -16759,7 +16763,7 @@
       "Commission",
       "Nederlands"
     ],
-    "last_checked": "2026-09-06T15:06:10-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-12-omnibus-food-petition-EN": {
     "slug": "2025-12-omnibus-food-petition-EN",
@@ -16768,6 +16772,10 @@
       {
         "checked_at": "2026-09-06T15:06:10-06:00",
         "count": 154221
+      },
+      {
+        "checked_at": "2026-09-18T07:15:39-06:00",
+        "count": 154255
       }
     ],
     "title": "Protect Our Food From Toxic Pesticides",
@@ -16778,12 +16786,12 @@
     "start_date": "2025-12-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 154221,
+    "signatures": 154255,
     "goal": 200000,
     "lang": "en",
     "campaign_id": "wemove:2025-12-omnibus-food-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:06:10-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "Pesticides",
@@ -16797,7 +16805,7 @@
       "Bayer-Monsanto",
       "Commission"
     ],
-    "last_checked": "2026-09-06T15:06:10-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-12-protect-digital-creativity-support-safe-community-driven-multipl-EN": {
     "slug": "2025-12-protect-digital-creativity-support-safe-community-driven-multipl-EN",
@@ -16821,7 +16829,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-12-protect-digital-creativity-support-safe-community-driven-multipl",
     "status": "online",
-    "last_seen": "2026-09-06T15:06:10-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "Digital",
@@ -16835,7 +16843,7 @@
       "European",
       "Young"
     ],
-    "last_checked": "2026-09-06T15:06:10-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-12-resignation-of-ursula-von-der-leyen-to-protect-the-founding-prin-EN": {
     "slug": "2025-12-resignation-of-ursula-von-der-leyen-to-protect-the-founding-prin-EN",
@@ -16844,6 +16852,10 @@
       {
         "checked_at": "2026-09-06T15:06:10-06:00",
         "count": 65
+      },
+      {
+        "checked_at": "2026-09-18T07:15:39-06:00",
+        "count": 69
       }
     ],
     "title": "Resignation of Ursula von der Leyen to Protect the Founding Principles of the EU",
@@ -16854,12 +16866,12 @@
     "start_date": "2025-12-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 65,
+    "signatures": 69,
     "goal": 1000,
     "lang": "en",
     "campaign_id": "wemove:2025-12-resignation-of-ursula-von-der-leyen-to-protect-the-founding-prin",
     "status": "online",
-    "last_seen": "2026-09-06T15:06:10-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -16873,7 +16885,7 @@
       "Union",
       "Protect"
     ],
-    "last_checked": "2026-09-06T15:06:10-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-12-save-the-wilija-neris-river-and-the-wild-baltic-salmon-stop-nucl-EN": {
     "slug": "2025-12-save-the-wilija-neris-river-and-the-wild-baltic-salmon-stop-nucl-EN",
@@ -16897,7 +16909,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-12-save-the-wilija-neris-river-and-the-wild-baltic-salmon-stop-nucl",
     "status": "online",
-    "last_seen": "2026-09-06T15:06:10-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "Baltic",
@@ -16911,7 +16923,7 @@
       "Wild",
       "Destruction"
     ],
-    "last_checked": "2026-09-06T15:06:10-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-12-support-survivors-of-sexual-violence-during-the-kosovo-war-and-b-EN": {
     "slug": "2025-12-support-survivors-of-sexual-violence-during-the-kosovo-war-and-b-EN",
@@ -16935,7 +16947,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-12-support-survivors-of-sexual-violence-during-the-kosovo-war-and-b",
     "status": "online",
-    "last_seen": "2026-09-06T15:06:10-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "Survivors",
@@ -16949,7 +16961,7 @@
       "Universities",
       "College"
     ],
-    "last_checked": "2026-09-06T15:06:10-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-12-translation-test-dpc-ireland-petition-EN": {
     "slug": "2025-12-translation-test-dpc-ireland-petition-EN",
@@ -16973,7 +16985,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-12-translation-test-dpc-ireland-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:06:10-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "Data",
@@ -16987,7 +16999,7 @@
       "Independence",
       "Lobbyists"
     ],
-    "last_checked": "2026-09-06T15:06:10-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-12-translation-test-oil-baltic-sea-petition-EN": {
     "slug": "2025-12-translation-test-oil-baltic-sea-petition-EN",
@@ -17011,7 +17023,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-12-translation-test-oil-baltic-sea-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:06:10-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "Baltic",
@@ -17025,7 +17037,7 @@
       "Convention",
       "Extraction"
     ],
-    "last_checked": "2026-09-06T15:06:10-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-12-translation-test-plastic-era-petition-EN": {
     "slug": "2025-12-translation-test-plastic-era-petition-EN",
@@ -17049,7 +17061,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-12-translation-test-plastic-era-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:06:10-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "Plastic",
@@ -17063,7 +17075,7 @@
       "Majority",
       "Leaders"
     ],
-    "last_checked": "2026-09-06T15:06:10-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-12-translation-test-plastic-era-petition-EN-EN": {
     "slug": "2025-12-translation-test-plastic-era-petition-EN-EN",
@@ -17087,7 +17099,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-12-translation-test-plastic-era-petition-EN",
     "status": "online",
-    "last_seen": "2026-09-06T15:06:10-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "Plastic",
@@ -17101,7 +17113,7 @@
       "Majority",
       "Leaders"
     ],
-    "last_checked": "2026-09-06T15:06:10-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-12-trial-deportation-ICE-trial-INT-EN-trial-EN": {
     "slug": "2025-12-trial-deportation-ICE-trial-INT-EN-trial-EN",
@@ -17125,7 +17137,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-12-trial-deportation-ICE-trial-INT-EN-trial",
     "status": "online",
-    "last_seen": "2026-09-06T15:06:10-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -17139,7 +17151,7 @@
       "Contribute",
       "Regulation"
     ],
-    "last_checked": "2026-09-06T15:06:10-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-12-trial-deportation-Spain-trial-INT-EN-trial-EN": {
     "slug": "2025-12-trial-deportation-Spain-trial-INT-EN-trial-EN",
@@ -17163,7 +17175,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-12-trial-deportation-Spain-trial-INT-EN-trial",
     "status": "online",
-    "last_seen": "2026-09-06T15:06:10-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "Europe",
@@ -17177,7 +17189,7 @@
       "Belongs",
       "Spain"
     ],
-    "last_checked": "2026-09-06T15:06:10-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-12-trial-fatal-drinks-petition-EN": {
     "slug": "2025-12-trial-fatal-drinks-petition-EN",
@@ -17201,7 +17213,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-12-trial-fatal-drinks-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:06:10-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "Drinks",
@@ -17215,7 +17227,7 @@
       "People",
       "Parliament"
     ],
-    "last_checked": "2026-09-06T15:06:10-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-12-trial-omnibus-PFAs-petition-EN": {
     "slug": "2025-12-trial-omnibus-PFAs-petition-EN",
@@ -17239,7 +17251,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-12-trial-omnibus-PFAs-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:06:10-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "PFAS",
@@ -17253,7 +17265,7 @@
       "Commission",
       "France"
     ],
-    "last_checked": "2026-09-06T15:06:10-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-12-trial-pensions-eu-budget-petition-EN": {
     "slug": "2025-12-trial-pensions-eu-budget-petition-EN",
@@ -17277,7 +17289,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-12-trial-pensions-eu-budget-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:06:10-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "Pensions",
@@ -17291,7 +17303,7 @@
       "Retirement",
       "Ensure"
     ],
-    "last_checked": "2026-09-06T15:06:10-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-12-trial-pensions-national-petition-EN": {
     "slug": "2025-12-trial-pensions-national-petition-EN",
@@ -17315,7 +17327,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-12-trial-pensions-national-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:06:10-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "Governments",
@@ -17329,7 +17341,7 @@
       "Ensure",
       "Europe"
     ],
-    "last_checked": "2026-09-06T15:06:10-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-12-trial-secret-courts-mining-petition-EN": {
     "slug": "2025-12-trial-secret-courts-mining-petition-EN",
@@ -17352,7 +17364,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-12-trial-secret-courts-mining-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:06:10-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -17366,7 +17378,7 @@
       "Parliament",
       "Settlement"
     ],
-    "last_checked": "2026-09-06T15:06:10-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-12-we-demand-the-eu-take-action-to-stop-the-genocide-in-gaza-suspen-EN": {
     "slug": "2025-12-we-demand-the-eu-take-action-to-stop-the-genocide-in-gaza-suspen-EN",
@@ -17389,7 +17401,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-12-we-demand-the-eu-take-action-to-stop-the-genocide-in-gaza-suspen",
     "status": "online",
-    "last_seen": "2026-09-06T15:06:10-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "Israel",
@@ -17403,7 +17415,7 @@
       "Continues",
       "Suspend"
     ],
-    "last_checked": "2026-09-06T15:06:10-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-2-cancelacion-inmediata-del-macro-proyecto-turistico-underwatergar-petition-EN": {
     "slug": "2025-2-cancelacion-inmediata-del-macro-proyecto-turistico-underwatergar-petition-EN",
@@ -17412,6 +17424,10 @@
       {
         "checked_at": "2026-09-06T15:06:10-06:00",
         "count": 62968
+      },
+      {
+        "checked_at": "2026-09-18T07:15:39-06:00",
+        "count": 62970
       }
     ],
     "title": "Stop destroying our coast!",
@@ -17421,12 +17437,12 @@
     "summary": "English Français Deutsch Español Italiano Nederlands Polski Stop destroying our coast! To Marc García-Durán Huet, project promoter, Rosa Dávila Mamely, president of the Tenerife Island Council, and to…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 62968,
+    "signatures": 62970,
     "goal": 75000,
     "lang": "en",
     "campaign_id": "wemove:2025-2-cancelacion-inmediata-del-macro-proyecto-turistico-underwatergar-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:06:10-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "Coast",
@@ -17440,7 +17456,7 @@
       "García-Durán",
       "Promoter"
     ],
-    "last_checked": "2026-09-06T15:06:10-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-2-this-is-another-test-EN": {
     "slug": "2025-2-this-is-another-test-EN",
@@ -17462,7 +17478,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-2-this-is-another-test",
     "status": "online",
-    "last_seen": "2026-09-06T15:06:10-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "Test",
@@ -17473,7 +17489,7 @@
       "Hair",
       "Name"
     ],
-    "last_checked": "2026-09-06T15:06:10-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-3-demand-immediate-inclusion-of-complementary-and-alternative-medi-EN": {
     "slug": "2025-3-demand-immediate-inclusion-of-complementary-and-alternative-medi-EN",
@@ -17496,7 +17512,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-3-demand-immediate-inclusion-of-complementary-and-alternative-medi",
     "status": "online",
-    "last_seen": "2026-09-06T15:06:10-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "Health",
@@ -17510,7 +17526,7 @@
       "Inclusion",
       "European"
     ],
-    "last_checked": "2026-09-06T15:06:10-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-3-erhebt-steuern-beteiligt-alle-gemass-ihrer-finanzkraft-EN": {
     "slug": "2025-3-erhebt-steuern-beteiligt-alle-gemass-ihrer-finanzkraft-EN",
@@ -17532,7 +17548,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-3-erhebt-steuern-beteiligt-alle-gemass-ihrer-finanzkraft",
     "status": "online",
-    "last_seen": "2026-09-06T15:06:10-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "Taxes",
@@ -17546,7 +17562,7 @@
       "Leyen",
       "High"
     ],
-    "last_checked": "2026-09-06T15:06:10-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-3-european-commission-vice-president-kaja-kallas-does-not-speak-fo-EN": {
     "slug": "2025-3-european-commission-vice-president-kaja-kallas-does-not-speak-fo-EN",
@@ -17569,7 +17585,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-3-european-commission-vice-president-kaja-kallas-does-not-speak-fo",
     "status": "online",
-    "last_seen": "2026-09-06T15:06:10-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "Israel",
@@ -17583,7 +17599,7 @@
       "Kaja",
       "International"
     ],
-    "last_checked": "2026-09-06T15:06:10-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-3-for-a-united-and-sovereign-european-defense-EN": {
     "slug": "2025-3-for-a-united-and-sovereign-european-defense-EN",
@@ -17606,7 +17622,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-3-for-a-united-and-sovereign-european-defense",
     "status": "online",
-    "last_seen": "2026-09-06T15:06:10-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -17620,7 +17636,7 @@
       "Union",
       "Army"
     ],
-    "last_checked": "2026-09-06T15:06:10-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-3-for-an-independent-and-peaceful-europe-EN": {
     "slug": "2025-3-for-an-independent-and-peaceful-europe-EN",
@@ -17643,7 +17659,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-3-for-an-independent-and-peaceful-europe",
     "status": "online",
-    "last_seen": "2026-09-06T15:06:10-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -17657,7 +17673,7 @@
       "Russia",
       "Union"
     ],
-    "last_checked": "2026-09-06T15:06:10-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-3-mehr-steuergerechtigkeit-nicht-nur-neue-schulden-EN": {
     "slug": "2025-3-mehr-steuergerechtigkeit-nicht-nur-neue-schulden-EN",
@@ -17680,7 +17696,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-3-mehr-steuergerechtigkeit-nicht-nur-neue-schulden",
     "status": "online",
-    "last_seen": "2026-09-06T15:06:10-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "Income",
@@ -17694,7 +17710,7 @@
       "Justice",
       "Must"
     ],
-    "last_checked": "2026-09-06T15:06:10-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-3-santa-should-wear-european-blue-EN": {
     "slug": "2025-3-santa-should-wear-european-blue-EN",
@@ -17717,7 +17733,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-3-santa-should-wear-european-blue",
     "status": "online",
-    "last_seen": "2026-09-06T15:20:14-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -17731,7 +17747,7 @@
       "Wear",
       "Manufacturers"
     ],
-    "last_checked": "2026-09-06T15:20:14-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-3-test-i-just-want-to-have-an-account-EN": {
     "slug": "2025-3-test-i-just-want-to-have-an-account-EN",
@@ -17753,7 +17769,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-3-test-i-just-want-to-have-an-account",
     "status": "online",
-    "last_seen": "2026-09-06T15:20:14-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "Test",
@@ -17763,7 +17779,7 @@
       "Important",
       "Name"
     ],
-    "last_checked": "2026-09-06T15:20:14-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-3-test-marcin-multiple-respo-20250301-EN": {
     "slug": "2025-3-test-marcin-multiple-respo-20250301-EN",
@@ -17785,7 +17801,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-3-test-marcin-multiple-respo-20250301",
     "status": "online",
-    "last_seen": "2026-09-06T15:20:14-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "Testing",
@@ -17793,7 +17809,7 @@
       "Authority",
       "Name"
     ],
-    "last_checked": "2026-09-06T15:20:14-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-3-test-marcin-multiple-respo-20250302-EN": {
     "slug": "2025-3-test-marcin-multiple-respo-20250302-EN",
@@ -17815,7 +17831,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-3-test-marcin-multiple-respo-20250302",
     "status": "online",
-    "last_seen": "2026-09-06T15:20:14-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "Testing",
@@ -17823,7 +17839,7 @@
       "Inititator",
       "Name"
     ],
-    "last_checked": "2026-09-06T15:20:14-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-4-8-mart-dunya-emekci-kadinlar-gunu-ucretli-izin-gunu-olsun-EN": {
     "slug": "2025-4-8-mart-dunya-emekci-kadinlar-gunu-ucretli-izin-gunu-olsun-EN",
@@ -17846,7 +17862,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-4-8-mart-dunya-emekci-kadinlar-gunu-ucretli-izin-gunu-olsun",
     "status": "online",
-    "last_seen": "2026-09-06T15:20:14-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "Women",
@@ -17860,7 +17876,7 @@
       "Countries",
       "Rights"
     ],
-    "last_checked": "2026-09-06T15:20:14-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-4-bring-erreway-tour-to-cyprus-EN": {
     "slug": "2025-4-bring-erreway-tour-to-cyprus-EN",
@@ -17883,7 +17899,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-4-bring-erreway-tour-to-cyprus",
     "status": "online",
-    "last_seen": "2026-09-06T15:20:14-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "CYPRUS",
@@ -17897,7 +17913,7 @@
       "Entire",
       "EUROPE"
     ],
-    "last_checked": "2026-09-06T15:20:14-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-4-do-not-deregulate-new-genomic-techniques-ngt-for-wild-plants-EN": {
     "slug": "2025-4-do-not-deregulate-new-genomic-techniques-ngt-for-wild-plants-EN",
@@ -17906,6 +17922,10 @@
       {
         "checked_at": "2026-09-06T15:20:14-06:00",
         "count": 2049
+      },
+      {
+        "checked_at": "2026-09-18T07:15:39-06:00",
+        "count": 2050
       }
     ],
     "title": "Do not deregulate New Genomic Techniques (NGT) for wild plants!",
@@ -17915,12 +17935,12 @@
     "summary": "Do not deregulate New Genomic Techniques (NGT) for wild plants! To the Members of The European Parliament, the EU Commission, and EU Council This petition is run by [% inititator_name %] Petition We c…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 2049,
+    "signatures": 2050,
     "goal": 5000,
     "lang": "en",
     "campaign_id": "wemove:2025-4-do-not-deregulate-new-genomic-techniques-ngt-for-wild-plants",
     "status": "online",
-    "last_seen": "2026-09-06T15:20:14-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "Wild",
@@ -17934,7 +17954,7 @@
       "Applications",
       "Parliament"
     ],
-    "last_checked": "2026-09-06T15:20:14-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-4-for-a-strong-and-united-european-union-closer-to-the-territories-EN": {
     "slug": "2025-4-for-a-strong-and-united-european-union-closer-to-the-territories-EN",
@@ -17957,7 +17977,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-4-for-a-strong-and-united-european-union-closer-to-the-territories",
     "status": "online",
-    "last_seen": "2026-09-06T15:20:14-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -17971,7 +17991,7 @@
       "Values",
       "Must"
     ],
-    "last_checked": "2026-09-06T15:20:14-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-4-the-us-is-not-a-safe-country-anymore-end-its-safe-country-status-EN": {
     "slug": "2025-4-the-us-is-not-a-safe-country-anymore-end-its-safe-country-status-EN",
@@ -17993,7 +18013,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-4-the-us-is-not-a-safe-country-anymore-end-its-safe-country-status",
     "status": "online",
-    "last_seen": "2026-09-06T15:20:14-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "Country",
@@ -18007,7 +18027,7 @@
       "Status",
       "Discrimination"
     ],
-    "last_checked": "2026-09-06T15:20:14-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-4-the-us-is-not-a-safe-country-end-its-safe-country-status-now-EN": {
     "slug": "2025-4-the-us-is-not-a-safe-country-end-its-safe-country-status-now-EN",
@@ -18029,7 +18049,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-4-the-us-is-not-a-safe-country-end-its-safe-country-status-now",
     "status": "online",
-    "last_seen": "2026-09-06T15:20:14-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "Political",
@@ -18043,7 +18063,7 @@
       "Status",
       "Discrimination"
     ],
-    "last_checked": "2026-09-06T15:20:14-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-5-save-shqipville-cultural-house-EN": {
     "slug": "2025-5-save-shqipville-cultural-house-EN",
@@ -18066,7 +18086,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-5-save-shqipville-cultural-house",
     "status": "online",
-    "last_seen": "2026-09-06T15:20:14-06:00",
+    "last_seen": "2026-09-18T07:15:39-06:00",
     "offline_since": null,
     "tags": [
       "SHQIPVILLE",
@@ -18080,7 +18100,7 @@
       "Community",
       "Inclusion"
     ],
-    "last_checked": "2026-09-06T15:20:14-06:00"
+    "last_checked": "2026-09-18T07:15:39-06:00"
   },
   "2025-5-stop-european-funding-for-israeli-institutions-EN": {
     "slug": "2025-5-stop-european-funding-for-israeli-institutions-EN",
