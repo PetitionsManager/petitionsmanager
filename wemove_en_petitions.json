@@ -31,7 +31,7 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-18T08:13:42-06:00",
+    "generated_at": "2026-09-18T08:40:44-06:00",
     "petition_count": 601,
     "available": 708,
     "unbrauchbare": {
@@ -139,7 +139,7 @@
     "new_petitions_last_run": [],
     "lauf_verlauf": [
       {
-        "zeit": "2026-09-18T08:13:42-06:00",
+        "zeit": "2026-09-18T08:40:43-06:00",
         "gesamt": 601,
         "online": 600,
         "offline": 1,
@@ -156,7 +156,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-18T08:13:42-06:00",
+      "zeit": "2026-09-18T08:40:43-06:00",
       "gesamt": 601,
       "online": 600,
       "offline": 1,
@@ -169,7 +169,7 @@
       "juengstes_start": "2026-09-01",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-09-18T08:13:42-06:00",
+    "verlauf_felder_ab": "2026-09-18T08:40:43-06:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 600
@@ -20994,7 +20994,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-05-trial-yes-means-yes-trial",
     "status": "online",
-    "last_seen": "2026-09-06T15:48:28-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "Means",
@@ -21008,7 +21008,7 @@
       "Introduce",
       "Survivors"
     ],
-    "last_checked": "2026-09-06T15:48:28-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-06-08-trial-Stop-ReArm-Europe-verA-EN": {
     "slug": "2026-06-08-trial-Stop-ReArm-Europe-verA-EN",
@@ -21032,7 +21032,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-06-08-trial-Stop-ReArm-Europe-verA",
     "status": "online",
-    "last_seen": "2026-09-06T15:48:28-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -21046,7 +21046,7 @@
       "Weapons",
       "Spend"
     ],
-    "last_checked": "2026-09-06T15:48:28-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-06-ban-coral-killing-sunscreen-trial-petition-EN": {
     "slug": "2026-06-ban-coral-killing-sunscreen-trial-petition-EN",
@@ -21055,6 +21055,10 @@
       {
         "checked_at": "2026-09-06T15:48:28-06:00",
         "count": 731
+      },
+      {
+        "checked_at": "2026-09-18T08:37:36-06:00",
+        "count": 733
       }
     ],
     "title": "Ban coral-killing sunscreen!",
@@ -21065,12 +21069,12 @@
     "start_date": "2026-06-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 731,
+    "signatures": 733,
     "goal": 1000,
     "lang": "en",
     "campaign_id": "wemove:2026-06-ban-coral-killing-sunscreen-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:48:28-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "Sunscreen",
@@ -21084,7 +21088,7 @@
       "Protect",
       "Coral"
     ],
-    "last_checked": "2026-09-06T15:48:28-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-06-lyle-letter-translation-petition-EN": {
     "slug": "2026-06-lyle-letter-translation-petition-EN",
@@ -21107,7 +21111,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-06-lyle-letter-translation-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:48:28-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "Housing",
@@ -21121,7 +21125,7 @@
       "Right",
       "Time"
     ],
-    "last_checked": "2026-09-06T15:48:28-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-06-lyle-opus-petition-EN": {
     "slug": "2026-06-lyle-opus-petition-EN",
@@ -21145,7 +21149,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-06-lyle-opus-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:48:28-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "Centres",
@@ -21159,7 +21163,7 @@
       "Renewables",
       "Made"
     ],
-    "last_checked": "2026-09-06T15:48:28-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-06-lyle-opus-translation-petition-EN": {
     "slug": "2026-06-lyle-opus-translation-petition-EN",
@@ -21183,7 +21187,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-06-lyle-opus-translation-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:48:28-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "Centres",
@@ -21197,7 +21201,7 @@
       "Made",
       "Must"
     ],
-    "last_checked": "2026-09-06T15:48:28-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-06-lyle-webabel-opus-petition-EN": {
     "slug": "2026-06-lyle-webabel-opus-petition-EN",
@@ -21221,7 +21225,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-06-lyle-webabel-opus-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:48:28-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "Centres",
@@ -21235,7 +21239,7 @@
       "Made",
       "Must"
     ],
-    "last_checked": "2026-09-06T15:48:28-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-06-lyle-webabel-sonnet-petition-EN": {
     "slug": "2026-06-lyle-webabel-sonnet-petition-EN",
@@ -21259,7 +21263,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-06-lyle-webabel-sonnet-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:48:28-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "Centres",
@@ -21273,7 +21277,7 @@
       "Made",
       "Must"
     ],
-    "last_checked": "2026-09-06T15:48:28-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-06-trial-maximum-working-temperature-petition-EN": {
     "slug": "2026-06-trial-maximum-working-temperature-petition-EN",
@@ -21297,7 +21301,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-06-trial-maximum-working-temperature-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:48:28-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "Heat",
@@ -21311,7 +21315,7 @@
       "States",
       "Keep"
     ],
-    "last_checked": "2026-09-06T15:48:28-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-06-trial-stop-smart-glasses-petition-EN": {
     "slug": "2026-06-trial-stop-smart-glasses-petition-EN",
@@ -21335,7 +21339,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-06-trial-stop-smart-glasses-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:48:28-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "Glasses",
@@ -21349,7 +21353,7 @@
       "European",
       "Secretly"
     ],
-    "last_checked": "2026-09-06T15:48:28-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-06-trial-verB-Stop-ReArm-Europe-petition-EN": {
     "slug": "2026-06-trial-verB-Stop-ReArm-Europe-petition-EN",
@@ -21373,7 +21377,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-06-trial-verB-Stop-ReArm-Europe-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:48:28-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -21387,7 +21391,7 @@
       "Need",
       "Wars"
     ],
-    "last_checked": "2026-09-06T15:48:28-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-06-trial-VW-Producing-Israel-Airshield-petition-EN": {
     "slug": "2026-06-trial-VW-Producing-Israel-Airshield-petition-EN",
@@ -21396,6 +21400,10 @@
       {
         "checked_at": "2026-09-06T15:48:28-06:00",
         "count": 4276
+      },
+      {
+        "checked_at": "2026-09-18T08:37:36-06:00",
+        "count": 4278
       }
     ],
     "title": "Stop Volkswagen’s dangerous new deal",
@@ -21405,12 +21413,12 @@
     "start_date": "2026-06-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 4276,
+    "signatures": 4278,
     "goal": 5000,
     "lang": "en",
     "campaign_id": "wemove:2026-06-trial-VW-Producing-Israel-Airshield-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:48:28-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "Volkswagen",
@@ -21424,7 +21432,7 @@
       "Dangerous",
       "Israeli"
     ],
-    "last_checked": "2026-09-06T15:48:28-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-07-investigate-FIFA-leader-petition-EN": {
     "slug": "2026-07-investigate-FIFA-leader-petition-EN",
@@ -21433,6 +21441,10 @@
       {
         "checked_at": "2026-09-06T15:48:28-06:00",
         "count": 80727
+      },
+      {
+        "checked_at": "2026-09-18T08:37:36-06:00",
+        "count": 80770
       }
     ],
     "title": "Investigate FIFA’s leader Gianni Infantino",
@@ -21443,12 +21455,12 @@
     "start_date": "2026-07-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 80727,
+    "signatures": 80770,
     "goal": 100000,
     "lang": "en",
     "campaign_id": "wemove:2026-07-investigate-FIFA-leader-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:48:28-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "FIFA",
@@ -21462,7 +21474,7 @@
       "Card",
       "Investigation"
     ],
-    "last_checked": "2026-09-06T15:48:28-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-07-maximum-working-temperature-petition-EN": {
     "slug": "2026-07-maximum-working-temperature-petition-EN",
@@ -21471,6 +21483,10 @@
       {
         "checked_at": "2026-09-06T15:48:28-06:00",
         "count": 55749
+      },
+      {
+        "checked_at": "2026-09-18T08:37:36-06:00",
+        "count": 55791
       }
     ],
     "title": "Keep workers safe in the heat",
@@ -21481,12 +21497,12 @@
     "start_date": "2026-07-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 55749,
+    "signatures": 55791,
     "goal": 75000,
     "lang": "en",
     "campaign_id": "wemove:2026-07-maximum-working-temperature-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:48:28-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "Heat",
@@ -21500,7 +21516,7 @@
       "Keep",
       "Like"
     ],
-    "last_checked": "2026-09-06T15:48:28-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-07-protect-europe-from-burning-trial-petition-EN": {
     "slug": "2026-07-protect-europe-from-burning-trial-petition-EN",
@@ -21509,6 +21525,10 @@
       {
         "checked_at": "2026-09-06T15:48:28-06:00",
         "count": 507
+      },
+      {
+        "checked_at": "2026-09-18T08:37:36-06:00",
+        "count": 508
       }
     ],
     "title": "Protect Europe from burning!",
@@ -21519,12 +21539,12 @@
     "start_date": "2026-07-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 507,
+    "signatures": 508,
     "goal": 1000,
     "lang": "en",
     "campaign_id": "wemove:2026-07-protect-europe-from-burning-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:48:28-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "Europe",
@@ -21538,7 +21558,7 @@
       "Every",
       "Preparedness"
     ],
-    "last_checked": "2026-09-06T15:48:28-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-07-toxic-coffee-trial-petition-EN": {
     "slug": "2026-07-toxic-coffee-trial-petition-EN",
@@ -21562,7 +21582,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-07-toxic-coffee-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-06T16:02:35-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "Coffee",
@@ -21576,7 +21596,7 @@
       "Companies",
       "Dangerous"
     ],
-    "last_checked": "2026-09-06T16:02:35-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-07-trial-big-food-trial-EN": {
     "slug": "2026-07-trial-big-food-trial-EN",
@@ -21600,7 +21620,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-07-trial-big-food-trial",
     "status": "online",
-    "last_seen": "2026-09-06T16:02:35-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "Sugar",
@@ -21614,7 +21634,7 @@
       "Investigative",
       "Consumption"
     ],
-    "last_checked": "2026-09-06T16:02:35-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-07-trial-dont-deregulate-banks-petition-EN": {
     "slug": "2026-07-trial-dont-deregulate-banks-petition-EN",
@@ -21638,7 +21658,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-07-trial-dont-deregulate-banks-petition",
     "status": "online",
-    "last_seen": "2026-09-06T16:02:35-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "Banks",
@@ -21652,7 +21672,7 @@
       "Commission",
       "Parliament"
     ],
-    "last_checked": "2026-09-06T16:02:35-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-07-trial-dont-increase-bonuses-for-bankers-petition-EN": {
     "slug": "2026-07-trial-dont-increase-bonuses-for-bankers-petition-EN",
@@ -21661,6 +21681,10 @@
       {
         "checked_at": "2026-09-06T16:02:35-06:00",
         "count": 699
+      },
+      {
+        "checked_at": "2026-09-18T08:37:36-06:00",
+        "count": 703
       }
     ],
     "title": "EU: Don’t increase bonuses for bankers!",
@@ -21671,12 +21695,12 @@
     "start_date": "2026-07-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 699,
+    "signatures": 703,
     "goal": 1000,
     "lang": "en",
     "campaign_id": "wemove:2026-07-trial-dont-increase-bonuses-for-bankers-petition",
     "status": "online",
-    "last_seen": "2026-09-06T16:02:35-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "Bankers",
@@ -21690,7 +21714,7 @@
       "Crisis",
       "Commission"
     ],
-    "last_checked": "2026-09-06T16:02:35-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-07-trial-investigate-FIFA-petition-EN": {
     "slug": "2026-07-trial-investigate-FIFA-petition-EN",
@@ -21714,7 +21738,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-07-trial-investigate-FIFA-petition",
     "status": "online",
-    "last_seen": "2026-09-06T16:02:35-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "FIFA",
@@ -21728,7 +21752,7 @@
       "Pressure",
       "Fair"
     ],
-    "last_checked": "2026-09-06T16:02:35-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-07-trial-menstrual-products-trial-petition-EN": {
     "slug": "2026-07-trial-menstrual-products-trial-petition-EN",
@@ -21752,7 +21776,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-07-trial-menstrual-products-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-06T16:02:35-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "Products",
@@ -21766,7 +21790,7 @@
       "Require",
       "Safety"
     ],
-    "last_checked": "2026-09-06T16:02:35-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-07-trial-police-racism-trial-EN": {
     "slug": "2026-07-trial-police-racism-trial-EN",
@@ -21790,7 +21814,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-07-trial-police-racism-trial",
     "status": "online",
-    "last_seen": "2026-09-06T16:02:35-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "Police",
@@ -21804,7 +21828,7 @@
       "Officers",
       "Bologna"
     ],
-    "last_checked": "2026-09-06T16:02:35-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-07-trial-protect-europe-from-burning2-petition-EN": {
     "slug": "2026-07-trial-protect-europe-from-burning2-petition-EN",
@@ -21813,6 +21837,10 @@
       {
         "checked_at": "2026-09-06T16:02:35-06:00",
         "count": 658
+      },
+      {
+        "checked_at": "2026-09-18T08:37:36-06:00",
+        "count": 659
       }
     ],
     "title": "Make Polluters Pay for Climate Disasters",
@@ -21822,12 +21850,12 @@
     "start_date": "2026-07-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 658,
+    "signatures": 659,
     "goal": 1000,
     "lang": "en",
     "campaign_id": "wemove:2026-07-trial-protect-europe-from-burning2-petition",
     "status": "online",
-    "last_seen": "2026-09-06T16:02:35-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "Climate",
@@ -21841,7 +21869,7 @@
       "European",
       "Protect"
     ],
-    "last_checked": "2026-09-06T16:02:35-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-07-trial-return-regulation-petition-EN": {
     "slug": "2026-07-trial-return-regulation-petition-EN",
@@ -21865,7 +21893,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-07-trial-return-regulation-petition",
     "status": "online",
-    "last_seen": "2026-09-06T16:02:35-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "Europe",
@@ -21879,7 +21907,7 @@
       "Court",
       "Fundamental"
     ],
-    "last_checked": "2026-09-06T16:02:35-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-07-trial-stolen-wildlife-petition-EN": {
     "slug": "2026-07-trial-stolen-wildlife-petition-EN",
@@ -21888,6 +21916,10 @@
       {
         "checked_at": "2026-09-06T16:02:35-06:00",
         "count": 700
+      },
+      {
+        "checked_at": "2026-09-18T08:37:36-06:00",
+        "count": 703
       }
     ],
     "title": "Stop traffickers. Protect wildlife",
@@ -21898,12 +21930,12 @@
     "start_date": "2026-07-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 700,
+    "signatures": 703,
     "goal": 1000,
     "lang": "en",
     "campaign_id": "wemove:2026-07-trial-stolen-wildlife-petition",
     "status": "online",
-    "last_seen": "2026-09-06T16:02:35-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "Wildlife",
@@ -21917,7 +21949,7 @@
       "Stolen",
       "Rules"
     ],
-    "last_checked": "2026-09-06T16:02:35-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-08-29-trial-food-prices-rising-trial-EN-petition-EN": {
     "slug": "2026-08-29-trial-food-prices-rising-trial-EN-petition-EN",
@@ -21926,6 +21958,10 @@
       {
         "checked_at": "2026-09-06T16:02:35-06:00",
         "count": 499
+      },
+      {
+        "checked_at": "2026-09-18T08:37:36-06:00",
+        "count": 508
       }
     ],
     "title": "Make food affordable for all",
@@ -21936,12 +21972,12 @@
     "start_date": "2026-08-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 499,
+    "signatures": 508,
     "goal": 1000,
     "lang": "en",
     "campaign_id": "wemove:2026-08-29-trial-food-prices-rising-trial-EN-petition",
     "status": "online",
-    "last_seen": "2026-09-06T16:02:35-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "Food",
@@ -21955,7 +21991,7 @@
       "Europe",
       "Sweden"
     ],
-    "last_checked": "2026-09-06T16:02:35-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-08-smart-glasses-trial-petition-EN": {
     "slug": "2026-08-smart-glasses-trial-petition-EN",
@@ -21964,6 +22000,10 @@
       {
         "checked_at": "2026-09-06T16:02:35-06:00",
         "count": 635
+      },
+      {
+        "checked_at": "2026-09-18T08:37:36-06:00",
+        "count": 647
       }
     ],
     "title": "Don’t let smart glasses secretly record us",
@@ -21974,12 +22014,12 @@
     "start_date": "2026-08-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 635,
+    "signatures": 647,
     "goal": 1000,
     "lang": "en",
     "campaign_id": "wemove:2026-08-smart-glasses-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-06T16:02:35-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "Glasses",
@@ -21993,7 +22033,7 @@
       "People",
       "Recording"
     ],
-    "last_checked": "2026-09-06T16:02:35-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-08-toxic-coffee-trial-2-petition-EN": {
     "slug": "2026-08-toxic-coffee-trial-2-petition-EN",
@@ -22002,6 +22042,10 @@
       {
         "checked_at": "2026-09-06T16:02:35-06:00",
         "count": 682
+      },
+      {
+        "checked_at": "2026-09-18T08:37:36-06:00",
+        "count": 692
       }
     ],
     "title": "No more poison in our coffee!",
@@ -22012,12 +22056,12 @@
     "start_date": "2026-08-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 682,
+    "signatures": 692,
     "goal": 1000,
     "lang": "en",
     "campaign_id": "wemove:2026-08-toxic-coffee-trial-2-petition",
     "status": "online",
-    "last_seen": "2026-09-06T16:02:35-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "Coffee",
@@ -22031,7 +22075,7 @@
       "Health",
       "Keep"
     ],
-    "last_checked": "2026-09-06T16:02:35-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-08-trial-2-AI-agents-petition-EN": {
     "slug": "2026-08-trial-2-AI-agents-petition-EN",
@@ -22055,7 +22099,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-08-trial-2-AI-agents-petition",
     "status": "online",
-    "last_seen": "2026-09-06T16:02:35-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -22069,7 +22113,7 @@
       "Livelihoods",
       "Commission"
     ],
-    "last_checked": "2026-09-06T16:02:35-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-08-trial-AI-agents-petition-EN": {
     "slug": "2026-08-trial-AI-agents-petition-EN",
@@ -22078,6 +22122,10 @@
       {
         "checked_at": "2026-09-06T16:02:35-06:00",
         "count": 195
+      },
+      {
+        "checked_at": "2026-09-18T08:37:36-06:00",
+        "count": 196
       }
     ],
     "title": "Stop rogue AI tech",
@@ -22088,12 +22136,12 @@
     "start_date": "2026-08-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 195,
+    "signatures": 196,
     "goal": 1000,
     "lang": "en",
     "campaign_id": "wemove:2026-08-trial-AI-agents-petition",
     "status": "online",
-    "last_seen": "2026-09-06T16:02:35-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -22107,7 +22155,7 @@
       "Livelihoods",
       "Commission"
     ],
-    "last_checked": "2026-09-06T16:02:35-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-08-trial-AI-hack-petition-EN": {
     "slug": "2026-08-trial-AI-hack-petition-EN",
@@ -22116,6 +22164,10 @@
       {
         "checked_at": "2026-09-06T16:02:35-06:00",
         "count": 793
+      },
+      {
+        "checked_at": "2026-09-18T08:37:36-06:00",
+        "count": 796
       }
     ],
     "title": "Stop rogue AI tech!",
@@ -22126,12 +22178,12 @@
     "start_date": "2026-08-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 793,
+    "signatures": 796,
     "goal": 1000,
     "lang": "en",
     "campaign_id": "wemove:2026-08-trial-AI-hack-petition",
     "status": "online",
-    "last_seen": "2026-09-06T16:02:35-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "Systems",
@@ -22145,7 +22197,7 @@
       "Tech",
       "Livelihoods"
     ],
-    "last_checked": "2026-09-06T16:02:35-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-08-trial-insurance-natural-disasters-petition-EN": {
     "slug": "2026-08-trial-insurance-natural-disasters-petition-EN",
@@ -22154,6 +22206,10 @@
       {
         "checked_at": "2026-09-06T16:02:35-06:00",
         "count": 584
+      },
+      {
+        "checked_at": "2026-09-18T08:37:36-06:00",
+        "count": 591
       }
     ],
     "title": "People shouldn’t pay for climate disasters",
@@ -22164,12 +22220,12 @@
     "start_date": "2026-08-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 584,
+    "signatures": 591,
     "goal": 1000,
     "lang": "en",
     "campaign_id": "wemove:2026-08-trial-insurance-natural-disasters-petition",
     "status": "online",
-    "last_seen": "2026-09-06T16:02:35-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "Disasters",
@@ -22183,7 +22239,7 @@
       "Public-private",
       "Catastrophes"
     ],
-    "last_checked": "2026-09-06T16:02:35-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-09-trial-cheaper-electricity-petition-EN": {
     "slug": "2026-09-trial-cheaper-electricity-petition-EN",
@@ -22192,6 +22248,10 @@
       {
         "checked_at": "2026-09-06T16:02:35-06:00",
         "count": 693
+      },
+      {
+        "checked_at": "2026-09-18T08:37:36-06:00",
+        "count": 706
       }
     ],
     "title": "Make Clean Energy Cheaper",
@@ -22201,12 +22261,12 @@
     "start_date": "2026-09-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 693,
+    "signatures": 706,
     "goal": 1000,
     "lang": "en",
     "campaign_id": "wemove:2026-09-trial-cheaper-electricity-petition",
     "status": "online",
-    "last_seen": "2026-09-06T16:02:35-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "Clean",
@@ -22220,7 +22280,7 @@
       "Electric",
       "Heavily"
     ],
-    "last_checked": "2026-09-06T16:02:35-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-09-trial-social-media-design-petition-EN": {
     "slug": "2026-09-trial-social-media-design-petition-EN",
@@ -22229,6 +22289,10 @@
       {
         "checked_at": "2026-09-06T16:02:35-06:00",
         "count": 225
+      },
+      {
+        "checked_at": "2026-09-18T08:37:36-06:00",
+        "count": 268
       }
     ],
     "title": "Protect our kids, not social media giants’ profits",
@@ -22238,12 +22302,12 @@
     "start_date": "2026-09-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 225,
+    "signatures": 268,
     "goal": 1000,
     "lang": "en",
     "campaign_id": "wemove:2026-09-trial-social-media-design-petition",
     "status": "online",
-    "last_seen": "2026-09-06T16:02:35-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "Children",
@@ -22257,7 +22321,7 @@
       "President",
       "Giants"
     ],
-    "last_checked": "2026-09-06T16:02:35-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-1-eu-to-boycott-2026-fifa-world-cup-EN": {
     "slug": "2026-1-eu-to-boycott-2026-fifa-world-cup-EN",
@@ -22280,7 +22344,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-1-eu-to-boycott-2026-fifa-world-cup",
     "status": "online",
-    "last_seen": "2026-09-06T16:02:35-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "World",
@@ -22294,7 +22358,7 @@
       "Parliament",
       "Important"
     ],
-    "last_checked": "2026-09-06T16:02:35-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-1-let-the-digital-euro-become-the-worldwide-standard-of-digital-mo-EN": {
     "slug": "2026-1-let-the-digital-euro-become-the-worldwide-standard-of-digital-mo-EN",
@@ -22316,7 +22380,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-1-let-the-digital-euro-become-the-worldwide-standard-of-digital-mo",
     "status": "online",
-    "last_seen": "2026-09-06T16:02:35-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "Digital",
@@ -22330,7 +22394,7 @@
       "Europe",
       "Name"
     ],
-    "last_checked": "2026-09-06T16:02:35-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-1-ma-sante-n-est-pas-a-vendre-my-health-is-not-for-sale-stop-ue-me-EN": {
     "slug": "2026-1-ma-sante-n-est-pas-a-vendre-my-health-is-not-for-sale-stop-ue-me-EN",
@@ -22352,7 +22416,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-1-ma-sante-n-est-pas-a-vendre-my-health-is-not-for-sale-stop-ue-me",
     "status": "online",
-    "last_seen": "2026-09-06T16:02:35-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "Health",
@@ -22366,7 +22430,7 @@
       "Food",
       "Name"
     ],
-    "last_checked": "2026-09-06T16:02:35-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-1-menaces-sur-l-europe-boycottons-les-produits-americains-EN": {
     "slug": "2026-1-menaces-sur-l-europe-boycottons-les-produits-americains-EN",
@@ -22389,7 +22453,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-1-menaces-sur-l-europe-boycottons-les-produits-americains",
     "status": "online",
-    "last_seen": "2026-09-06T16:02:35-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -22403,7 +22467,7 @@
       "United",
       "Boycott"
     ],
-    "last_checked": "2026-09-06T16:02:35-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-1-stop-the-trump-sports-shows-in-2026-EN": {
     "slug": "2026-1-stop-the-trump-sports-shows-in-2026-EN",
@@ -22425,7 +22489,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-1-stop-the-trump-sports-shows-in-2026",
     "status": "online",
-    "last_seen": "2026-09-06T16:02:35-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -22439,7 +22503,7 @@
       "Inititator",
       "Parliament"
     ],
-    "last_checked": "2026-09-06T16:02:35-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-1-virginia-testing-EN": {
     "slug": "2026-1-virginia-testing-EN",
@@ -22461,7 +22525,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-1-virginia-testing",
     "status": "online",
-    "last_seen": "2026-09-06T16:02:35-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "Virginia",
@@ -22469,7 +22533,7 @@
       "Inititator",
       "Name"
     ],
-    "last_checked": "2026-09-06T16:02:35-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-2-end-eu-sanctions-on-journalist-huseyin-dogru-protect-press-freed-EN": {
     "slug": "2026-2-end-eu-sanctions-on-journalist-huseyin-dogru-protect-press-freed-EN",
@@ -22492,7 +22556,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-2-end-eu-sanctions-on-journalist-huseyin-dogru-protect-press-freed",
     "status": "online",
-    "last_seen": "2026-09-06T16:02:35-06:00",
+    "last_seen": "2026-09-18T08:37:36-06:00",
     "offline_since": null,
     "tags": [
       "Journalist",
@@ -22506,7 +22570,7 @@
       "Gaza",
       "Press"
     ],
-    "last_checked": "2026-09-06T16:02:35-06:00"
+    "last_checked": "2026-09-18T08:37:36-06:00"
   },
   "2026-2-no-alle-armi-si-alla-pace-EN": {
     "slug": "2026-2-no-alle-armi-si-alla-pace-EN",
