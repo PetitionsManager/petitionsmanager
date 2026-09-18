@@ -31,9 +31,13 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-18T16:39:13-06:00",
-    "petition_count": 209,
+    "generated_at": "2026-09-18T17:02:57-06:00",
+    "petition_count": 211,
     "available": 258,
+    "new_petitions_last_run": [
+      "2026-09-Big-Food-petition-IT",
+      "2026-09-toxic-coffee-petition-IT"
+    ],
     "unbrauchbare": {
       "2023-01-lucas-ig-wrapper-test-petition-IT": "2026-09-05T14:34:12-06:00",
       "2023-07-simon-1-IT": "2026-09-05T15:44:34-06:00",
@@ -79,45 +83,46 @@
       "lucas-testing-ig-link-petition-IT": "2026-09-06T13:30:04-06:00",
       "lucass-target-test-call-IT": "2026-09-06T13:30:04-06:00",
       "lucass-target-test-petition-IT": "2026-09-06T13:30:04-06:00",
-      "sharesteptest-petition-IT": "2026-09-06T13:30:04-06:00"
+      "sharesteptest-petition-IT": "2026-09-06T13:30:04-06:00",
+      "lucas-test-donate-petition-IT": "2026-09-18T17:02:01-06:00",
+      "lucas-test-donation-2-petition-IT": "2026-09-18T17:02:01-06:00"
     },
-    "new_petitions_last_run": [],
     "lauf_verlauf": [
       {
-        "zeit": "2026-09-18T16:39:12-06:00",
-        "gesamt": 209,
-        "online": 204,
+        "zeit": "2026-09-18T17:02:56-06:00",
+        "gesamt": 211,
+        "online": 206,
         "offline": 5,
         "ohne_titel": 5,
         "platzhalter": 0,
         "nicht_ausgeliefert": 5,
         "torsi": 0,
         "dubletten": 0,
-        "mit_start": 176,
-        "juengstes_start": "2026-08-01",
+        "mit_start": 178,
+        "juengstes_start": "2026-09-01",
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
-        "neu": 0
+        "neu": 2
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-18T16:39:12-06:00",
-      "gesamt": 209,
-      "online": 204,
+      "zeit": "2026-09-18T17:02:56-06:00",
+      "gesamt": 211,
+      "online": 206,
       "offline": 5,
       "ohne_titel": 5,
       "platzhalter": 0,
       "nicht_ausgeliefert": 5,
       "torsi": 0,
       "dubletten": 0,
-      "mit_start": 176,
-      "juengstes_start": "2026-08-01",
+      "mit_start": 178,
+      "juengstes_start": "2026-09-01",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-09-18T16:39:12-06:00",
+    "verlauf_felder_ab": "2026-09-18T17:02:56-06:00",
     "befunde": [],
     "health_warning": null,
-    "online_count": 204
+    "online_count": 206
   },
   "2026-08-protect-europe-make-polluters-pay-petition-IT": {
     "slug": "2026-08-protect-europe-make-polluters-pay-petition-IT",
@@ -8024,6 +8029,10 @@
       {
         "checked_at": "2026-09-06T13:30:04-06:00",
         "count": 241
+      },
+      {
+        "checked_at": "2026-09-18T17:02:01-06:00",
+        "count": 249
       }
     ],
     "title": "FLOR BERTOTTI 2026 – European Tour Audience Demand 🇮🇹",
@@ -8033,12 +8042,12 @@
     "summary": "FLOR BERTOTTI 2026 – European Tour Audience Demand 🇮🇹 Al pubblico in Italia interessato a dichiarare ufficialmente il proprio interesse per possibili esibizioni live di Flor Bertotti. Questa petizione…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 241,
+    "signatures": 249,
     "goal": 1000,
     "lang": "it",
     "campaign_id": "wemove:2026-2-flor-bertotti-2026-european-tour-audience-initiative",
     "status": "online",
-    "last_seen": "2026-09-06T13:30:04-06:00",
+    "last_seen": "2026-09-18T17:02:01-06:00",
     "offline_since": null,
     "tags": [
       "BERTOTTI",
@@ -8052,7 +8061,7 @@
       "Esibizioni",
       "Petizione"
     ],
-    "last_checked": "2026-09-06T13:30:04-06:00"
+    "last_checked": "2026-09-18T17:02:01-06:00"
   },
   "2026-2-no-alle-armi-si-alla-pace-IT": {
     "slug": "2026-2-no-alle-armi-si-alla-pace-IT",
@@ -8075,7 +8084,7 @@
     "lang": "it",
     "campaign_id": "wemove:2026-2-no-alle-armi-si-alla-pace",
     "status": "online",
-    "last_seen": "2026-09-06T13:30:04-06:00",
+    "last_seen": "2026-09-18T17:02:01-06:00",
     "offline_since": null,
     "tags": [
       "Europeo",
@@ -8089,7 +8098,7 @@
       "Petizione",
       "Governi"
     ],
-    "last_checked": "2026-09-06T13:30:04-06:00"
+    "last_checked": "2026-09-18T17:02:01-06:00"
   },
   "democratization-of-europe-IT": {
     "slug": "democratization-of-europe-IT",
@@ -8098,6 +8107,10 @@
       {
         "checked_at": "2026-09-06T13:30:04-06:00",
         "count": 92139
+      },
+      {
+        "checked_at": "2026-09-18T17:02:01-06:00",
+        "count": 92140
       }
     ],
     "title": "Per la democratizzazione dell'Europa",
@@ -8107,12 +8120,12 @@
     "summary": "Italiano English Français Deutsch Español Polski Per la democratizzazione dell'Europa Assemblea europea Questa petizione è gestita da [% inititator_name %] Petizione Manifesto Noi, cittadini europei, …",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 92139,
+    "signatures": 92140,
     "goal": 100000,
     "lang": "it",
     "campaign_id": "wemove:democratization-of-europe",
     "status": "online",
-    "last_seen": "2026-09-06T13:30:04-06:00",
+    "last_seen": "2026-09-18T17:02:01-06:00",
     "offline_since": null,
     "tags": [
       "Europei",
@@ -8126,7 +8139,7 @@
       "Manifesto",
       "Movimenti"
     ],
-    "last_checked": "2026-09-06T13:30:04-06:00"
+    "last_checked": "2026-09-18T17:02:01-06:00"
   },
   "developers-testing-campaign-petition-IT": {
     "slug": "developers-testing-campaign-petition-IT",
@@ -8135,6 +8148,10 @@
       {
         "checked_at": "2026-09-06T13:30:04-06:00",
         "count": 2110
+      },
+      {
+        "checked_at": "2026-09-18T17:02:01-06:00",
+        "count": 2220
       }
     ],
     "title": "Europa, ferma la violenza di genere!",
@@ -8144,12 +8161,12 @@
     "summary": "Italiano English English English English English English English English English English English English Français Deutsch Deutsch Español Polski Europa, ferma la violenza di genere! Alla Commissione e…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 2110,
+    "signatures": 2220,
     "goal": 5000,
     "lang": "it",
     "campaign_id": "wemove:developers-testing-campaign-petition",
     "status": "online",
-    "last_seen": "2026-09-06T13:30:04-06:00",
+    "last_seen": "2026-09-18T17:02:01-06:00",
     "offline_since": null,
     "tags": [
       "English",
@@ -8163,7 +8180,7 @@
       "Commissione",
       "Chiediamo"
     ],
-    "last_checked": "2026-09-06T13:30:04-06:00"
+    "last_checked": "2026-09-18T17:02:01-06:00"
   },
   "2025-12-omnibus-food-petition-it": {
     "slug": "2025-12-omnibus-food-petition-it",
@@ -8172,6 +8189,10 @@
       {
         "checked_at": "2026-09-06T13:30:04-06:00",
         "count": 154221
+      },
+      {
+        "checked_at": "2026-09-18T17:02:01-06:00",
+        "count": 154255
       }
     ],
     "title": "Proteggiamo il nostro cibo dai pesticidi tossici",
@@ -8182,12 +8203,12 @@
     "start_date": "2025-12-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 154221,
+    "signatures": 154255,
     "goal": 200000,
     "lang": "it",
     "campaign_id": "wemove:2025-12-omnibus-food-petition",
     "status": "online",
-    "last_seen": "2026-09-06T13:30:04-06:00",
+    "last_seen": "2026-09-18T17:02:01-06:00",
     "offline_since": null,
     "tags": [
       "Pesticidi",
@@ -8201,6 +8222,82 @@
       "Bayer-Monsanto",
       "Commissione"
     ],
-    "last_checked": "2026-09-06T13:30:04-06:00"
+    "last_checked": "2026-09-18T17:02:01-06:00"
+  },
+  "2026-09-Big-Food-petition-IT": {
+    "slug": "2026-09-Big-Food-petition-IT",
+    "first_seen": "2026-09-18T17:02:01-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-09-18T17:02:01-06:00",
+        "count": 54434
+      }
+    ],
+    "title": "I colossi del cibo ci stanno facendo ammalare - serve una tassa europea sullo zucchero!",
+    "image_url": "https://wemove.cdn.actionkit.com/images/shutterstock_2085005953.jpg",
+    "url": "https://action.wemove.eu/sign/2026-09-Big-Food-petition-IT",
+    "description_full": "<p>\n\n<!-- Remove this if you don't want popins like \"This page also in English\" -->\n\n\n<img alt=\"Language selector\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/icon_translate_eeaca63123.svg\"/>\n\n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n              \n              Italiano\n\n              \n            \n          \n            \n          \n            \n          \n        \n\n</p><ul>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-Big-Food-petition-EN\" rel=\"noopener\" target=\"_blank\">\n                    \n                    English\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-Big-Food-petition-FR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Français\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-Big-Food-petition-DE\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Deutsch\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-Big-Food-petition-ES\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Español\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-Big-Food-petition-NL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Nederlands\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-Big-Food-petition-PL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Polski\n\n                    \n                    </a>\n</li>\n</ul><p>\n\n\n          I colossi del cibo ci stanno facendo ammalare - serve una tassa europea sullo zucchero!\n        \n\n<img alt=\"I colossi del cibo ci stanno facendo ammalare - serve una tassa europea sullo zucchero!\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/shutterstock_2085005953.jpg\"/>\n\n</p><h3>\n<p>Alla Commissione europea, al Parlamento europeo, ai governi degli Stati membri dell’UE e alle grandi aziende del settore alimentare, tra cui Coca-Cola, PepsiCo, Mondelēz, Kellogg’s, Ferrero e Danone</p>\n</h3>\n\n<h2>\n            Petizione\n          </h2>\n<p>Alla Commissione europea, al Parlamento europeo, ai governi degli Stati membri dell’UE:</p>\n<p>Vi chiediamo di opporvi con fermezza alla prepotenza aziendale dei colossi dello zucchero e di adottare misure coraggiose e coordinate a livello europeo, fra cui:</p>\n<ul>\n<li><strong>Introdurre a livello europeo una tassa sullo zucchero</strong> per le bevande zuccherate e gli alimenti ultra-processati, e garantire che tutti gli Stati membri la applichino su base nazionale.</li>\n<li><strong>Abbinare le tasse sullo zucchero ad altre misure</strong>, come i limiti alla pubblicità del cibo spazzatura e l’etichetta nutrizionale obbligatoria sulla parte anteriore delle confezioni, per massimizzare l’impatto sulla salute pubblica.</li>\n<li><strong>Investire i proventi delle tasse sullo zucchero in campagne e programmi di promozione</strong> della salute, per rendere le diete sane più accessibili e alla portata di tutte e tutti. </li>\n</ul>\n<p>Chiediamo a Coca-Cola, PepsiCo, Mondelēz, Kellogg's, Ferrero, Danone e a tutte le grandi aziende del settore alimentare di:</p>\n<ul>\n<li><strong>Smettere di ricorrere a cause legali, attività di lobbying e pressioni economiche per ostacolare le misure di salute pubblica.</strong> Al contrario, vi chiediamo di riformulare i vostri prodotti per ridurne il contenuto di zucchero e fermare la pubblicità di prodotti zuccherati destinati ai bambini.</li>\n</ul>\n\n\n<h2>\n            \n              Perché è importante?\n            \n          </h2>\n\n<p>I colossi del cibo spazzatura come <strong>Coca-Cola, Kellogg’s e Ferrero stanno facendo di tutto per tenere i nostri figli dipendenti dallo zucchero. </strong>E bloccano ogni regola che potrebbe fermarli. [1]</p>\n<p>Giornalisti investigativi da dieci paesi hanno smascherato le loro tattiche sporche: <strong>con un'offensiva legale senza sosta, stanno facendo pressione sui nostri governi </strong>per bloccare qualsiasi politica che possa ridurre il consumo di zucchero. Tasse sullo zucchero, limiti alla pubblicità di cibo spazzatura, etichette più chiare su quello che mangiamo: bloccano tutto. [2]</p>\n<p>Troppo zucchero durante l'infanzia è collegato a <strong>obesità precoce, diabete e carie. </strong>Ma per queste multinazionali i profitti vengono prima della salute dei nostri figli. [3]</p>\n<p>Dove le tasse sullo zucchero sono state introdotte, funzionano.<strong> In Portogallo, una tassa sullo zucchero ha ridotto le calorie delle bevande zuccherate di circa l'11%, l'equivalente di 30 zollette di zucchero in meno</strong> a persona ogni mese. [4]</p>\n<p>Ora immagina tutto questo su scala europea. <strong>Una tassa sullo zucchero a livello UE spingerebbe le aziende verso alternative più sane e nutrienti.</strong> Ma i colossi del cibo faranno di tutto per impedirlo.</p>\n<p><strong>Non possiamo lasciarli vincere.</strong> L'UE ha già una tassa sullo zucchero europea sulla carta, ma l'ha chiusa in un cassetto non appena i colossi del cibo hanno lanciato la loro offensiva legale.</p>\n<p>Ora che la verità è venuta a galla, la tua voce può dare ai nostri politici il coraggio di opporsi alle pressioni delle multinazionali e mettere la salute dei nostri figli al primo posto.</p>\n<h4>\n            Riferimenti:\n          </h4>\n\n<p>[1] https://www.un-industria.it/notizia/90327/cocacola-hbc-italia-con-sugarplastic-tax ; https://lespresso.it/c/inchieste/2026/7/22/guerra-big-food-cibo-spazzatura-salute/63589 ;  https://www.lighthousereports.com/investigation/big-food-vs-the-people/</p>\n<p>[2] [3] https://www.ftm.eu/articles/industry-lobby-sugar-taxes-postponed-cancelled?utm_source=newsletter  ; https://www.lighthousereports.com/investigation/big-food-vs-the-people/</p>\n<p>[4] La tassa sullo zucchero viene applicata quando il contenuto di zucchero in un prodotto supera una soglia prestabilita. Per evitare di pagare la tassa, le aziende tendono a modificare le ricette dei propri prodotti e a ridurne il contenuto di zucchero. L’Organizzazione Mondiale della Sanità considera le tasse sullo zucchero una delle misure più efficaci per diminuire il consumo di zucchero. https://www.who.int/news/item/13-01-2026-cheaper-drinks-will-see-a-rise-in-noncommunicable-diseases-and-injuries ; data.europa.eu/doi/10.2778/9947154\" ; https://www.thelancet.com/journals/lanpub/article/PIIS2468-2667(18)30240-8/fulltext </p>",
+    "summary": "Italiano English Français Deutsch Español Nederlands Polski I colossi del cibo ci stanno facendo ammalare - serve una tassa europea sullo zucchero! Alla Commissione europea, al Parlamento europeo, ai …",
+    "start_date": "2026-09-01",
+    "started_by": "WeMove Europe",
+    "kind": "petition",
+    "signatures": 54434,
+    "goal": 75000,
+    "lang": "it",
+    "campaign_id": "wemove:2026-09-Big-Food-petition",
+    "status": "online",
+    "last_seen": "2026-09-18T17:02:01-06:00",
+    "offline_since": null,
+    "tags": [
+      "Zucchero",
+      "Sullo",
+      "Europea",
+      "Cibo",
+      "Colossi",
+      "Tassa",
+      "Alla",
+      "Europeo",
+      "Facendo",
+      "Nostri"
+    ],
+    "last_checked": "2026-09-18T17:02:01-06:00"
+  },
+  "2026-09-toxic-coffee-petition-IT": {
+    "slug": "2026-09-toxic-coffee-petition-IT",
+    "first_seen": "2026-09-18T17:02:01-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-09-18T17:02:01-06:00",
+        "count": 46263
+      }
+    ],
+    "title": "Basta veleni nel nostro caffè!",
+    "image_url": "https://wemove.cdn.actionkit.com/images/no-toxic-coffee-image-trial-2.jpg",
+    "url": "https://action.wemove.eu/sign/2026-09-toxic-coffee-petition-IT",
+    "description_full": "<p>\n\n<!-- Remove this if you don't want popins like \"This page also in English\" -->\n\n\n<img alt=\"Language selector\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/icon_translate_eeaca63123.svg\"/>\n\n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n              \n              Italiano\n\n              \n            \n          \n            \n          \n            \n          \n        \n\n</p><ul>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-toxic-coffee-petition-EN\" rel=\"noopener\" target=\"_blank\">\n                    \n                    English\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-toxic-coffee-petition-FR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Français\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-toxic-coffee-petition-DE\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Deutsch\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-toxic-coffee-petition-ES\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Español\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-toxic-coffee-petition-NL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Nederlands\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-toxic-coffee-petition-PL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Polski\n\n                    \n                    </a>\n</li>\n</ul><p>\n\n\n          Basta veleni nel nostro caffè!\n        \n\n<img alt=\"Basta veleni nel nostro caffè!\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/no-toxic-coffee-image-trial-2.jpg\"/>\n\n</p><h3>\n<p>A Oligvér Várhelyi, Commissario europeo per la Salute e il benessere degli animali, e a Maroš Šefčovič, Commissario europeo per il Commercio e la sicurezza economica, la Federazione europea del caffè e le associazioni dei commercianti di caffè.</p>\n</h3>\n\n<h2>\n            Petizione\n          </h2>\n<p>Il caffè è uno dei prodotti importati meno controllati, nonostante gli alti tassi di contaminazione da pesticidi. Chi lo beve ha il diritto di sapere cosa c'è nella propria tazza, e <strong>non accetteremo residui di veleni tossici nel nostro caffè.</strong> Per questo vi chiediamo di:</p>\n<ul>\n<li><strong>Rendere obbligatori controlli </strong>sistematici su tutto il caffè importato, sia verde che tostato.</li>\n<li><strong>Rendere obbligatoria la divulgazione di tutti i residui </strong>rilevati, inclusi gli \"effetti cocktail\" derivanti dalla presenza di più residui.</li>\n<li><strong>Allineare le regole sulle importazioni a quelle sulle esportazioni</strong>: se un pesticida è vietato nell'uso, non dovrebbe essere tollerato come residuo.</li>\n<li>Chiediamo alla Federazione Europea del Caffè e alle Associazioni dei commercianti di caffè di <strong>smettere di sostenere o difendere l'uso di pesticidi </strong>vietati nell'UE, e di esigere che i loro membri e fornitori cessino di utilizzarli.</li>\n</ul>\n\n\n<h2>\n            \n              Perché è importante?\n            \n          </h2>\n\n<p>Per milioni di persone in tutta Europa, il caffè è un rituale quotidiano, una coccola al risveglio, una pausa o un ritrovo in compagnia di amici. Per questo mi ha colto di sorpresa sapere che <strong>stanno avvelenando il nostro caffè.</strong></p>\n<p><strong>Una tazza di caffè su cinque venduta in Europa contiene pesticidi tossici. </strong>Spesso non si tratta soltanto di un pesticida, ma di un mix di sostanze chimiche, fra cui alcune già vietate in Europa perché collegate all’insorgenza di <strong>tumori, malformazioni alla nascita, danni neurologici e distruzione della natura. </strong>[1]</p>\n<p>Com’è possibile? C’è un vuoto normativo: <strong>le aziende europee possono ancora produrre questi veleni ed esportarli nei paesi dove viene coltivato il caffè. </strong>[2]</p>\n<p>Agricoltori, lavoratori nelle piantagioni e comunità vicine sono esposti alle sostanze chimiche che l’Europa considera troppo pericolose per noi. Le fonti di acqua sono inquinate, la biodiversità ne soffre e interi ecosistemi vengono messi a rischio.</p>\n<p><strong>E il veleno non resta lì, ma torna in Europa finendo nel caffè che beviamo ogni giorno.</strong></p>\n<p>La Federazione europea del caffè si riunirà tra pochi giorni, proprio nel momento in cui l’UE sta rivedendo le regole sui pesticidi. [3] Fino ad ora, quasi nessuno al di fuori del settore ha prestato attenzione a questa cosa. Ma tutto può cambiare se migliaia di noi da tutta Europa si fanno sentire adesso.</p>\n<p><strong>Inviamo un messaggio forte e chiaro: no ai veleni nel nostro caffè.</strong></p>\n<h4>\n            Riferimenti:\n          </h4>\n\n<ol>\n<li>https://coffeewatch.org/poison-in-your-coffee/</li>\n<li>https://www.hrw.org/news/2025/10/10/the-eus-double-standard-on-toxic-pesticides</li>\n<li>https://www.ecf-coffee.org/category/whats-new/events/ ; https://www.consilium.europa.eu/en/press/press-releases/2026/05/27/council-agrees-position-to-simplify-and-strengthen-food-and-feed-safety-requirements/</li>\n</ol>\n\n\n\n<h3>In collaborazione con:</h3>\n\n<p><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/images.png\"/><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/duh_logo.png\"/><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/PAN_logo_green.jpg\"/><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/INKOTA_Gw_RGB_transparent.png\"/><img alt=\"WeMove Europe Charity Logo\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/editor-2026-06-09.png\"/></p>",
+    "summary": "Italiano English Français Deutsch Español Nederlands Polski Basta veleni nel nostro caffè! A Oligvér Várhelyi, Commissario europeo per la Salute e il benessere degli animali, e a Maroš Šefčovič, Commi…",
+    "start_date": "2026-09-01",
+    "started_by": "WeMove Europe",
+    "kind": "petition",
+    "signatures": 46263,
+    "goal": 50000,
+    "lang": "it",
+    "campaign_id": "wemove:2026-09-toxic-coffee-petition",
+    "status": "online",
+    "last_seen": "2026-09-18T17:02:01-06:00",
+    "offline_since": null,
+    "tags": [
+      "Caffè",
+      "Nostro",
+      "Veleni",
+      "Pesticidi",
+      "Commissario",
+      "Federazione",
+      "Europea",
+      "Europeo",
+      "Residui",
+      "Basta"
+    ],
+    "last_checked": "2026-09-18T17:02:01-06:00"
   }
 }
