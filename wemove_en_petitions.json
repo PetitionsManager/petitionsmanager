@@ -31,7 +31,7 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-17T20:35:55-06:00",
+    "generated_at": "2026-09-17T21:03:03-06:00",
     "petition_count": 601,
     "available": 708,
     "unbrauchbare": {
@@ -139,7 +139,7 @@
     "new_petitions_last_run": [],
     "lauf_verlauf": [
       {
-        "zeit": "2026-09-17T20:35:55-06:00",
+        "zeit": "2026-09-17T21:03:03-06:00",
         "gesamt": 601,
         "online": 600,
         "offline": 1,
@@ -156,7 +156,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-17T20:35:55-06:00",
+      "zeit": "2026-09-17T21:03:03-06:00",
       "gesamt": 601,
       "online": 600,
       "offline": 1,
@@ -169,7 +169,7 @@
       "juengstes_start": "2026-09-01",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-09-17T20:35:55-06:00",
+    "verlauf_felder_ab": "2026-09-17T21:03:03-06:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 600
@@ -4778,7 +4778,7 @@
     "lang": "en",
     "campaign_id": "wemove:202303-proteggiamo_i_bambini_dalle_aziende_di_videogiochi_che_non_rispettano_le_regole_imposte_per_immagini_pubblicita_e_contenuti-petition",
     "status": "online",
-    "last_seen": "2026-09-05T19:01:28-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "Health",
@@ -4792,7 +4792,7 @@
       "Youth",
       "PEGI"
     ],
-    "last_checked": "2026-09-05T19:01:28-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "202304-detengamos_la_tala_de_encinas_de_200_anos_en_el_parque_nacional_sierra_de_grazalema-petition-EN": {
     "slug": "202304-detengamos_la_tala_de_encinas_de_200_anos_en_el_parque_nacional_sierra_de_grazalema-petition-EN",
@@ -4816,7 +4816,7 @@
     "lang": "en",
     "campaign_id": "wemove:202304-detengamos_la_tala_de_encinas_de_200_anos_en_el_parque_nacional_sierra_de_grazalema-petition",
     "status": "online",
-    "last_seen": "2026-09-05T19:01:28-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "Natural",
@@ -4830,7 +4830,7 @@
       "OAKS",
       "Grazalema"
     ],
-    "last_checked": "2026-09-05T19:01:28-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "202305-stop_financing_putin_s_aggression_now-petition-EN": {
     "slug": "202305-stop_financing_putin_s_aggression_now-petition-EN",
@@ -4839,6 +4839,10 @@
       {
         "checked_at": "2026-09-05T19:01:28-06:00",
         "count": 18704
+      },
+      {
+        "checked_at": "2026-09-17T20:59:46-06:00",
+        "count": 18705
       }
     ],
     "title": "Stop financing Putin’s aggression now!",
@@ -4849,12 +4853,12 @@
     "start_date": "2023-05-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 18704,
+    "signatures": 18705,
     "goal": 20000,
     "lang": "en",
     "campaign_id": "wemove:202305-stop_financing_putin_s_aggression_now-petition",
     "status": "online",
-    "last_seen": "2026-09-05T19:01:28-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "Aggression",
@@ -4868,7 +4872,7 @@
       "Financing",
       "European"
     ],
-    "last_checked": "2026-09-05T19:01:28-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "202307-e_ora_di_fare_la_pace_europa-petition-EN": {
     "slug": "202307-e_ora_di_fare_la_pace_europa-petition-EN",
@@ -4892,7 +4896,7 @@
     "lang": "en",
     "campaign_id": "wemove:202307-e_ora_di_fare_la_pace_europa-petition",
     "status": "online",
-    "last_seen": "2026-09-05T19:01:28-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "Peace",
@@ -4906,7 +4910,7 @@
       "Countries",
       "Something"
     ],
-    "last_checked": "2026-09-05T19:01:28-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "202307-save_the_great_river_of_rafina_greece-petition-EN": {
     "slug": "202307-save_the_great_river_of_rafina_greece-petition-EN",
@@ -4915,6 +4919,10 @@
       {
         "checked_at": "2026-09-05T19:01:28-06:00",
         "count": 20662
+      },
+      {
+        "checked_at": "2026-09-17T20:59:46-06:00",
+        "count": 20666
       }
     ],
     "title": "Save the Great River of Rafina (Greece)",
@@ -4925,12 +4933,12 @@
     "start_date": "2023-07-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 20662,
+    "signatures": 20666,
     "goal": 50000,
     "lang": "en",
     "campaign_id": "wemove:202307-save_the_great_river_of_rafina_greece-petition",
     "status": "online",
-    "last_seen": "2026-09-05T19:01:28-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "River",
@@ -4944,7 +4952,7 @@
       "Water",
       "Save"
     ],
-    "last_checked": "2026-09-05T19:01:28-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "202308-urgent_help_bosnia_to_survive_all_attacks_from_bad_neighbourhood-petition-EN": {
     "slug": "202308-urgent_help_bosnia_to_survive_all_attacks_from_bad_neighbourhood-petition-EN",
@@ -4968,7 +4976,7 @@
     "lang": "en",
     "campaign_id": "wemove:202308-urgent_help_bosnia_to_survive_all_attacks_from_bad_neighbourhood-petition",
     "status": "online",
-    "last_seen": "2026-09-05T19:01:28-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "Help",
@@ -4982,7 +4990,7 @@
       "Inititator",
       "Regarding"
     ],
-    "last_checked": "2026-09-05T19:01:28-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "202309-cerremos_el_loro_parque-petition-EN": {
     "slug": "202309-cerremos_el_loro_parque-petition-EN",
@@ -4991,6 +4999,10 @@
       {
         "checked_at": "2026-09-05T19:01:28-06:00",
         "count": 3054
+      },
+      {
+        "checked_at": "2026-09-17T20:59:46-06:00",
+        "count": 3060
       }
     ],
     "title": "Close Loro Parque!",
@@ -5000,12 +5012,12 @@
     "start_date": "2023-09-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 3054,
+    "signatures": 3060,
     "goal": 5000,
     "lang": "en",
     "campaign_id": "wemove:202309-cerremos_el_loro_parque-petition",
     "status": "online",
-    "last_seen": "2026-09-05T19:01:28-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "Parque",
@@ -5019,7 +5031,7 @@
       "Captivity",
       "Breeding"
     ],
-    "last_checked": "2026-09-05T19:01:28-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "202309-demand_sanctions_against_gusan_and_his_illicit_business_empire_in_germany_and_moldova-petition-EN": {
     "slug": "202309-demand_sanctions_against_gusan_and_his_illicit_business_empire_in_germany_and_moldova-petition-EN",
@@ -5043,7 +5055,7 @@
     "lang": "en",
     "campaign_id": "wemove:202309-demand_sanctions_against_gusan_and_his_illicit_business_empire_in_germany_and_moldova-petition",
     "status": "online",
-    "last_seen": "2026-09-05T19:01:28-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -5057,7 +5069,7 @@
       "Associated",
       "Businesses"
     ],
-    "last_checked": "2026-09-05T19:01:28-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "202309-international_rejection_of_spheres_of_influence-petition-EN": {
     "slug": "202309-international_rejection_of_spheres_of_influence-petition-EN",
@@ -5080,7 +5092,7 @@
     "lang": "en",
     "campaign_id": "wemove:202309-international_rejection_of_spheres_of_influence-petition",
     "status": "online",
-    "last_seen": "2026-09-05T19:01:28-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "Influence",
@@ -5094,7 +5106,7 @@
       "European",
       "Sphere"
     ],
-    "last_checked": "2026-09-05T19:01:28-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "202310-act_now_to_ban_pvc-petition-EN": {
     "slug": "202310-act_now_to_ban_pvc-petition-EN",
@@ -5103,6 +5115,10 @@
       {
         "checked_at": "2026-09-05T19:01:28-06:00",
         "count": 68165
+      },
+      {
+        "checked_at": "2026-09-17T20:59:46-06:00",
+        "count": 68168
       }
     ],
     "title": "Act now to ban PVC",
@@ -5113,12 +5129,12 @@
     "start_date": "2023-10-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 68165,
+    "signatures": 68168,
     "goal": 75000,
     "lang": "en",
     "campaign_id": "wemove:202310-act_now_to_ban_pvc-petition",
     "status": "online",
-    "last_seen": "2026-09-05T19:01:28-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "Production",
@@ -5132,7 +5148,7 @@
       "Environmental",
       "Environment"
     ],
-    "last_checked": "2026-09-05T19:01:28-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "2024-01-ban-forever-chemicals-EN": {
     "slug": "2024-01-ban-forever-chemicals-EN",
@@ -5141,6 +5157,10 @@
       {
         "checked_at": "2026-09-05T19:01:28-06:00",
         "count": 144889
+      },
+      {
+        "checked_at": "2026-09-17T20:59:46-06:00",
+        "count": 144904
       }
     ],
     "title": "Toxic-free Europe now!",
@@ -5150,12 +5170,12 @@
     "start_date": "2024-01-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 144889,
+    "signatures": 144904,
     "goal": 150000,
     "lang": "en",
     "campaign_id": "wemove:2024-01-ban-forever-chemicals",
     "status": "online",
-    "last_seen": "2026-09-05T19:01:28-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "Chemicals",
@@ -5169,7 +5189,7 @@
       "Toxic-free",
       "Action"
     ],
-    "last_checked": "2026-09-05T19:01:28-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "2026-01-PFAS-ban-forever-chemicals-petition-EN": {
     "slug": "2026-01-PFAS-ban-forever-chemicals-petition-EN",
@@ -5178,6 +5198,10 @@
       {
         "checked_at": "2026-09-05T19:01:28-06:00",
         "count": 109716
+      },
+      {
+        "checked_at": "2026-09-17T20:59:46-06:00",
+        "count": 109733
       }
     ],
     "title": "Ban Forever Chemicals Now",
@@ -5188,12 +5212,12 @@
     "start_date": "2026-01-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 109716,
+    "signatures": 109733,
     "goal": 150000,
     "lang": "en",
     "campaign_id": "wemove:2026-01-PFAS-ban-forever-chemicals-petition",
     "status": "online",
-    "last_seen": "2026-09-05T19:01:28-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "Chemicals",
@@ -5207,7 +5231,7 @@
       "Contamination",
       "People"
     ],
-    "last_checked": "2026-09-05T19:01:28-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "2024-01-trial-ban-shark-meat-trial-petition-EN": {
     "slug": "2024-01-trial-ban-shark-meat-trial-petition-EN",
@@ -5230,7 +5254,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-01-trial-ban-shark-meat-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-05T19:01:28-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "Shark",
@@ -5244,7 +5268,7 @@
       "Education",
       "Labelling"
     ],
-    "last_checked": "2026-09-05T19:01:28-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "2024-01-trial-europe-for-scotland-petition-EN": {
     "slug": "2024-01-trial-europe-for-scotland-petition-EN",
@@ -5267,7 +5291,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-01-trial-europe-for-scotland-petition",
     "status": "online",
-    "last_seen": "2026-09-05T19:01:28-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "Scotland",
@@ -5281,7 +5305,7 @@
       "Scottish",
       "Members"
     ],
-    "last_checked": "2026-09-05T19:01:28-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "2024-01-trial-multiple-sclerosis-petition-EN": {
     "slug": "2024-01-trial-multiple-sclerosis-petition-EN",
@@ -5305,7 +5329,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-01-trial-multiple-sclerosis-petition",
     "status": "online",
-    "last_seen": "2026-09-05T19:01:28-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "People",
@@ -5319,7 +5343,7 @@
       "Carers",
       "Health"
     ],
-    "last_checked": "2026-09-05T19:01:28-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "2024-01-trial-Romanian-forests-petition-EN": {
     "slug": "2024-01-trial-Romanian-forests-petition-EN",
@@ -5342,7 +5366,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-01-trial-Romanian-forests-petition",
     "status": "online",
-    "last_seen": "2026-09-05T19:01:28-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "Forests",
@@ -5356,7 +5380,7 @@
       "Commissioner",
       "Environment"
     ],
-    "last_checked": "2026-09-05T19:01:28-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "2024-02-09-save-the-alps-youmove-launch-EN": {
     "slug": "2024-02-09-save-the-alps-youmove-launch-EN",
@@ -5365,6 +5389,10 @@
       {
         "checked_at": "2026-09-05T19:01:28-06:00",
         "count": 77921
+      },
+      {
+        "checked_at": "2026-09-17T20:59:46-06:00",
+        "count": 77922
       }
     ],
     "title": "Save the Alp’s last glaciers!",
@@ -5374,12 +5402,12 @@
     "start_date": "2024-02-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 77921,
+    "signatures": 77922,
     "goal": 100000,
     "lang": "en",
     "campaign_id": "wemove:2024-02-09-save-the-alps-youmove-launch",
     "status": "online",
-    "last_seen": "2026-09-05T19:01:28-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "Glaciers",
@@ -5393,7 +5421,7 @@
       "Nederlands",
       "Kaunertal"
     ],
-    "last_checked": "2026-09-05T19:01:28-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "2024-02-ecocide-scotland-petition-EN": {
     "slug": "2024-02-ecocide-scotland-petition-EN",
@@ -5416,7 +5444,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-02-ecocide-scotland-petition",
     "status": "online",
-    "last_seen": "2026-09-05T19:01:28-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "Ecocide",
@@ -5430,7 +5458,7 @@
       "Consultation",
       "Proposed"
     ],
-    "last_checked": "2026-09-05T19:01:28-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "2024-02-trial-factory-farming-world-bank-petition-EN": {
     "slug": "2024-02-trial-factory-farming-world-bank-petition-EN",
@@ -5453,7 +5481,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-02-trial-factory-farming-world-bank-petition",
     "status": "online",
-    "last_seen": "2026-09-05T19:01:28-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "Factory",
@@ -5467,7 +5495,7 @@
       "Stop",
       "Environmental"
     ],
-    "last_checked": "2026-09-05T19:01:28-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "2024-02-trial-farmers-solidarity-petition-EN": {
     "slug": "2024-02-trial-farmers-solidarity-petition-EN",
@@ -5491,7 +5519,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-02-trial-farmers-solidarity-petition",
     "status": "online",
-    "last_seen": "2026-09-05T19:01:28-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "Farmers",
@@ -5505,7 +5533,7 @@
       "Prices",
       "Focus"
     ],
-    "last_checked": "2026-09-05T19:01:28-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "2024-02-trial-multiple-sclerosis-petition-EN": {
     "slug": "2024-02-trial-multiple-sclerosis-petition-EN",
@@ -5529,7 +5557,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-02-trial-multiple-sclerosis-petition",
     "status": "online",
-    "last_seen": "2026-09-05T19:01:28-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "People",
@@ -5543,7 +5571,7 @@
       "Carers",
       "Health"
     ],
-    "last_checked": "2026-09-05T19:01:28-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "2024-02-trial-pledge-feminist-elections-petition-EN": {
     "slug": "2024-02-trial-pledge-feminist-elections-petition-EN",
@@ -5567,7 +5595,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-02-trial-pledge-feminist-elections-petition",
     "status": "online",
-    "last_seen": "2026-09-05T19:01:28-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "Women",
@@ -5581,7 +5609,7 @@
       "Girls",
       "Decision-makers"
     ],
-    "last_checked": "2026-09-05T19:01:28-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "2024-02-trial-santander-petition-EN": {
     "slug": "2024-02-trial-santander-petition-EN",
@@ -5604,7 +5632,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-02-trial-santander-petition",
     "status": "online",
-    "last_seen": "2026-09-05T19:01:28-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "Santander",
@@ -5618,7 +5646,7 @@
       "Bank",
       "Exploration"
     ],
-    "last_checked": "2026-09-05T19:01:28-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "2024-02-trial-test-iskra-petition-EN": {
     "slug": "2024-02-trial-test-iskra-petition-EN",
@@ -5642,7 +5670,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-02-trial-test-iskra-petition",
     "status": "online",
-    "last_seen": "2026-09-05T19:01:28-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -5656,7 +5684,7 @@
       "Council",
       "Union"
     ],
-    "last_checked": "2026-09-05T19:01:28-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "2024-03-09-trial-scotland-eu-EN": {
     "slug": "2024-03-09-trial-scotland-eu-EN",
@@ -5680,7 +5708,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-03-09-trial-scotland-eu",
     "status": "online",
-    "last_seen": "2026-09-05T19:01:28-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "Scotland",
@@ -5694,7 +5722,7 @@
       "Scottish",
       "Members"
     ],
-    "last_checked": "2026-09-05T19:01:28-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "2024-03-11-trial-unpaid-internships-petition-EN": {
     "slug": "2024-03-11-trial-unpaid-internships-petition-EN",
@@ -5718,7 +5746,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-03-11-trial-unpaid-internships-petition",
     "status": "online",
-    "last_seen": "2026-09-05T19:43:06-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "Internships",
@@ -5732,7 +5760,7 @@
       "Commission",
       "Parliament"
     ],
-    "last_checked": "2026-09-05T19:43:06-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "2024-03-amazon-workers-rights-trial-EN": {
     "slug": "2024-03-amazon-workers-rights-trial-EN",
@@ -5756,7 +5784,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-03-amazon-workers-rights-trial",
     "status": "online",
-    "last_seen": "2026-09-05T19:43:06-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "Data",
@@ -5770,7 +5798,7 @@
       "Luxembourg",
       "Violations"
     ],
-    "last_checked": "2026-09-05T19:43:06-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "2024-03-iskra-testing-mail-action-instructions-petition-EN": {
     "slug": "2024-03-iskra-testing-mail-action-instructions-petition-EN",
@@ -5793,7 +5821,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-03-iskra-testing-mail-action-instructions-petition",
     "status": "online",
-    "last_seen": "2026-09-05T19:43:06-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -5807,7 +5835,7 @@
       "TEST",
       "Explain"
     ],
-    "last_checked": "2026-09-05T19:43:06-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "2024-03-plastic-pellets-petition-EN": {
     "slug": "2024-03-plastic-pellets-petition-EN",
@@ -5816,6 +5844,10 @@
       {
         "checked_at": "2026-09-05T22:54:08-06:00",
         "count": 92648
+      },
+      {
+        "checked_at": "2026-09-17T20:59:46-06:00",
+        "count": 92651
       }
     ],
     "title": "End plastic pellet pollution!",
@@ -5826,12 +5858,12 @@
     "start_date": "2024-03-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 92648,
+    "signatures": 92651,
     "goal": 100000,
     "lang": "en",
     "campaign_id": "wemove:2024-03-plastic-pellets-petition",
     "status": "online",
-    "last_seen": "2026-09-05T22:54:08-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "Plastic",
@@ -5845,7 +5877,7 @@
       "Union",
       "Transportation"
     ],
-    "last_checked": "2026-09-05T22:54:08-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "2024-03-raiffeisen-russia-petition-EN": {
     "slug": "2024-03-raiffeisen-russia-petition-EN",
@@ -5869,7 +5901,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-03-raiffeisen-russia-petition",
     "status": "online",
-    "last_seen": "2026-09-05T22:54:08-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "Russia",
@@ -5883,7 +5915,7 @@
       "European",
       "Already"
     ],
-    "last_checked": "2026-09-05T22:54:08-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "2024-03-Santander-Amazon-petition-EN": {
     "slug": "2024-03-Santander-Amazon-petition-EN",
@@ -5892,6 +5924,10 @@
       {
         "checked_at": "2026-09-05T22:54:08-06:00",
         "count": 97069
+      },
+      {
+        "checked_at": "2026-09-17T20:59:46-06:00",
+        "count": 97071
       }
     ],
     "title": "Stop the destruction of the Amazon rainforest!",
@@ -5902,12 +5938,12 @@
     "start_date": "2024-03-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 97069,
+    "signatures": 97071,
     "goal": 100000,
     "lang": "en",
     "campaign_id": "wemove:2024-03-Santander-Amazon-petition",
     "status": "online",
-    "last_seen": "2026-09-05T22:54:08-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "Santander",
@@ -5921,7 +5957,7 @@
       "Nederlands",
       "Financing"
     ],
-    "last_checked": "2026-09-05T22:54:08-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "2024-03-trial-Free-Doctor-Ahmed-Muhanna-petition-EN": {
     "slug": "2024-03-trial-Free-Doctor-Ahmed-Muhanna-petition-EN",
@@ -5944,7 +5980,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-03-trial-Free-Doctor-Ahmed-Muhanna-petition",
     "status": "online",
-    "last_seen": "2026-09-05T22:54:08-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "Muhanna",
@@ -5958,12 +5994,17 @@
       "Medical",
       "Health"
     ],
-    "last_checked": "2026-09-05T22:54:08-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "2024-03-trial-navalny-banks-petition-EN": {
     "slug": "2024-03-trial-navalny-banks-petition-EN",
     "first_seen": "2026-09-05T22:54:08-06:00",
-    "signatures_history": [],
+    "signatures_history": [
+      {
+        "checked_at": "2026-09-17T20:59:46-06:00",
+        "count": 597
+      }
+    ],
     "title": "Raiffeisen Bank, pull out of Russia",
     "image_url": "https://wemove.cdn.actionkit.com/images/shutterstock_2132041539.jpg",
     "url": "https://action.wemove.eu/sign/2024-03-trial-navalny-banks-petition-EN",
@@ -5975,7 +6016,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-03-trial-navalny-banks-petition",
     "status": "online",
-    "last_seen": "2026-09-05T22:54:08-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "Russia",
@@ -5989,7 +6030,9 @@
       "Putin",
       "Down"
     ],
-    "last_checked": "2026-09-05T22:54:08-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00",
+    "signatures": 597,
+    "goal": 1000
   },
   "2024-03-trial-plastic-pellets-petition-EN": {
     "slug": "2024-03-trial-plastic-pellets-petition-EN",
@@ -6013,7 +6056,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-03-trial-plastic-pellets-petition",
     "status": "online",
-    "last_seen": "2026-09-06T10:42:07-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -6027,7 +6070,7 @@
       "Measures",
       "Fight"
     ],
-    "last_checked": "2026-09-06T10:42:07-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "2024-03-trial-sanctions-Israel-hunger-trial-EN": {
     "slug": "2024-03-trial-sanctions-Israel-hunger-trial-EN",
@@ -6050,7 +6093,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-03-trial-sanctions-Israel-hunger-trial",
     "status": "online",
-    "last_seen": "2026-09-06T10:42:07-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "Israel",
@@ -6064,7 +6107,7 @@
       "Europe",
       "International"
     ],
-    "last_checked": "2026-09-06T10:42:07-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "2024-03-trial-sanctions-Israel-ICJ-EN": {
     "slug": "2024-03-trial-sanctions-Israel-ICJ-EN",
@@ -6087,7 +6130,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-03-trial-sanctions-Israel-ICJ",
     "status": "online",
-    "last_seen": "2026-09-06T10:42:07-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "Israel",
@@ -6101,7 +6144,7 @@
       "People",
       "International"
     ],
-    "last_checked": "2026-09-06T10:42:07-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "2024-03-trial-sanctions-Israel-petition-EN": {
     "slug": "2024-03-trial-sanctions-Israel-petition-EN",
@@ -6124,7 +6167,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-03-trial-sanctions-Israel-petition",
     "status": "online",
-    "last_seen": "2026-09-06T10:42:07-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "Israel",
@@ -6138,7 +6181,7 @@
       "Gaza",
       "International"
     ],
-    "last_checked": "2026-09-06T10:42:07-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "2024-03-world-bank-petition-EN": {
     "slug": "2024-03-world-bank-petition-EN",
@@ -6147,6 +6190,10 @@
       {
         "checked_at": "2026-09-06T10:42:07-06:00",
         "count": 104908
+      },
+      {
+        "checked_at": "2026-09-17T20:59:46-06:00",
+        "count": 104912
       }
     ],
     "title": "Stop financing factory farming!",
@@ -6156,12 +6203,12 @@
     "start_date": "2024-03-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 104908,
+    "signatures": 104912,
     "goal": 150000,
     "lang": "en",
     "campaign_id": "wemove:2024-03-world-bank-petition",
     "status": "online",
-    "last_seen": "2026-09-06T10:42:07-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "Factory",
@@ -6175,7 +6222,7 @@
       "Funding",
       "Development"
     ],
-    "last_checked": "2026-09-06T10:42:07-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "2024-04-cap-reform-petition-EN": {
     "slug": "2024-04-cap-reform-petition-EN",
@@ -6199,7 +6246,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-04-cap-reform-petition",
     "status": "online",
-    "last_seen": "2026-09-06T10:42:07-06:00",
+    "last_seen": "2026-09-17T20:59:46-06:00",
     "offline_since": null,
     "tags": [
       "Reform",
@@ -6213,7 +6260,7 @@
       "Biodiversity",
       "Agriculture"
     ],
-    "last_checked": "2026-09-06T10:42:07-06:00"
+    "last_checked": "2026-09-17T20:59:46-06:00"
   },
   "2024-04-Elections-GOTVMM-campaign-petition-EN": {
     "slug": "2024-04-Elections-GOTVMM-campaign-petition-EN",
