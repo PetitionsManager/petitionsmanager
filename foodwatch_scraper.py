@@ -550,11 +550,16 @@ def run_en(args) -> None:
         f"(Gesamt im Store: {len(store)}).")
 
     gesehen = 0
+    # Anders als in run_zweig() ist hier kein Netzabruf mehr im Spiel: `seiten`
+    # ist bereits geparst. Eine Seite ohne Zähler ist also nachweislich keine
+    # Aktion — es gibt keinen „unbekannt"-Fall, der im Nenner bleiben müsste.
+    keine_aktion = 0
     for i, (slug, rec) in enumerate(sorted(seiten.items()), 1):
         prog(current=i, total=len(seiten), message=slug)
         # Ohne Zähler ist es keine Mitzeichnungs-Aktion, sondern eine
         # Inhaltsseite — dieselbe Bedingung wie im deutschen Lauf.
         if rec.get("signatures") is None:
+            keine_aktion += 1
             continue
         satz = dict(rec)
         i18n.setze_hauptsprache(satz, "en")
@@ -588,7 +593,9 @@ def run_en(args) -> None:
         log(f"NEU: {len(neu)} neue englische Aktion(en) in diesem Lauf.")
 
     prog(message="Speichere & baue HTML …")
-    save(quiet=False, new_petitions_last_run=neu, available=len(seiten))
+    # Inhaltsseiten aus dem Nenner — siehe die Begründung in run_zweig().
+    save(quiet=False, new_petitions_last_run=neu,
+         available=len(seiten) - keine_aktion)
     core.write_list_html(PLATFORM_EN)
     log(f"Fertig (foodwatch English, {gesehen} Aktion(en) bestätigt).")
 
@@ -688,6 +695,13 @@ def run_zweig(args, lang: str) -> None:
     # im Datensatz. ⚠️ Bei Frankreich ist der Pfad variabel tief, der Schlüssel
     # aber eindeutig — am 4.9.2026 an den 37 Kandidaten geprüft.
     gesehen = 0
+    # ⚠️ Getrennt von einem gescheiterten Abruf zu zählen ist der ganze Zweck:
+    # eine Seite OHNE Zähler ist nachweislich keine Aktion und gehört aus dem
+    # Nenner; ein Abruf, der gar nicht durchkam, ist unbekannt und bleibt drin.
+    # Beides in einen Topf zu werfen hiesse, bei Netzfehlern den Rueckstand
+    # kleinzurechnen. (17.9.2026: foodwatch_fr meldete 64 % Abarbeitung, weil
+    # 13 Kategorieseiten im Nenner standen.)
+    keine_aktion = 0
     for i, pfad in enumerate(sorted(pfade), 1):
         slug = pfad.rstrip("/").rsplit("/", 1)[-1]
         prog(current=i, total=len(pfade), message=slug)
@@ -698,6 +712,7 @@ def run_zweig(args, lang: str) -> None:
         rec = parse_detail(resp.text, url, z["detail"])
         # Ohne Zähler ist es eine Inhalts- oder Kategorieseite, keine Aktion.
         if rec.get("signatures") is None:
+            keine_aktion += 1
             continue
         i18n.setze_hauptsprache(rec, lang)
         core.upsert(store, slug, rec, {}, "online", ts, url)
@@ -708,7 +723,12 @@ def run_zweig(args, lang: str) -> None:
     if neu:
         log(f"NEU: {len(neu)} neue Aktion(en) ({lang}) in diesem Lauf.")
     prog(message="Speichere & baue HTML …")
-    save(quiet=False, new_petitions_last_run=neu, available=len(pfade))
+    # available ist der NENNER der Dashboard-Kachel: „x von y Kandidaten".
+    # Kategorieseiten hier abziehen, sonst meldet die Kachel dauerhaft einen
+    # Rueckstand, den es nicht gibt — und ein erfundener Rueckstand lenkt die
+    # Aufmerksamkeit von den echten ab.
+    save(quiet=False, new_petitions_last_run=neu,
+         available=len(pfade) - keine_aktion)
     core.write_list_html(PLATFORM_JE_ZWEIG[lang])
     log(f"Fertig (foodwatch {lang}, {gesehen} Aktion(en) bestätigt).")
 

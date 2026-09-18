@@ -501,6 +501,23 @@ _LAND_NAMEN = {
     "ukraine": "UA",
     "indien": "IN", "india": "IN",
     "vereinigte staaten": "US", "united states": "US",
+    # Am 17.9.2026 aus dem ersten Lauf MIT Daten nachgetragen: die Meldung
+    # „Landangabe nicht zuordenbar bei 34 Sätzen (6 verschiedene)" nannte
+    # genau diese Rohwerte. Vorher war die Tabelle reiner Vorrat (siehe oben).
+    "kuba": "CU", "cuba": "CU",
+    "türkei": "TR", "turkei": "TR", "turkey": "TR",
+    "gibraltar": "GI",
+    "russland": "RU", "russia": "RU",
+    # ⚠️ KEINE Staaten, sondern überstaatliche Angaben — 30 der 34 gemeldeten
+    # Sätze. ISO-3166-1 reserviert „EU" ausdrücklich für die Europäische Union,
+    # und land_code() reicht zweibuchstabige Werte ohnehin unverändert durch;
+    # ein von außen geliefertes „EU" käme also genauso an. Sie hier NICHT
+    # aufzunehmen hieße, 30 Sätze dauerhaft als „unbekannt" zu melden, obwohl
+    # ihre Herkunft bekannt ist — das ist die schlechtere von zwei Unschärfen.
+    "europäische union": "EU", "europaische union": "EU",
+    "european union": "EU",
+    "alle eu-länder": "EU", "alle eu-laender": "EU",
+    "all eu countries": "EU",
 }
 # Was land_code() nicht zuordnen konnte — je Rohwert einmal. publish.py liest
 # das aus und meldet es; so wird aus einem stillen Verlust eine Zeile im Lauf.
