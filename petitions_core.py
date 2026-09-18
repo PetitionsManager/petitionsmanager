@@ -1720,6 +1720,56 @@ def felder_zuruecksetzen() -> None:
     _TLS.felder_seiten = 0
 
 
+# --- Seitentechnik, die nie Petitionsinhalt trägt ---------------------------
+# Am 17.9.2026 eingeführt, nachdem der Melder über fünf Plattformen 64 Namen
+# gemeldet hatte und AUSNAHMSLOS alle Ballast waren: Yoast-Standardsätze,
+# Bildmaße zum ohnehin geernteten og:image, Mongoose-Interna, Sprachangaben,
+# die schon im Plattformschlüssel stecken. Einzeln eingetragen wären das 64
+# Zeilen über fünf Dateien — und beim nächsten Yoast-Update wieder neue.
+#
+# ⚠️⚠️ Die Liste ist BEWUSST ENG. Sie sperrt nur, was sicher Technik ist:
+# `og:description`, `og:title`, `title`, `description`, `keywords` und `date`
+# stehen ABSICHTLICH NICHT hier — die können Inhalt tragen, und genau dafür
+# gibt es den Melder. Wer hier großzügig ergänzt, schaltet ihn ab, statt ihn
+# zu entrauschen. Im Zweifel: nicht eintragen, dann meldet er eben einmal.
+#
+# ⚠️ Ein Eintrag hier ist KEIN Ersatz für BEKANNTE_FELDER. Dort steht die
+# plattformeigene Entscheidung („gesehen und verworfen"); hier steht, was auf
+# JEDER modernen Website vorkommt und deshalb nirgends eine Entscheidung wert
+# ist. Ein Name, der nur eine Plattform betrifft, gehört in BEKANNTE_FELDER.
+_TECHNIK_PRAEFIXE = (
+    "og:image:",        # :width :height :secure_url :type — nie og:image selbst
+    "og:locale",        # auch og:locale:alternate; Sprache steckt im Schlüssel
+    "article:",         # Yoast: publisher, modified_time, author
+    "twitter:",         # Yoast-Zwillinge der og:-Felder
+    "fb:",              # fb:app_id, fb:pages
+    "msapplication-",
+)
+# ⚠️ `__` war hier zuerst als PRÄFIX gedacht (Mongoose-Interna) und ist an der
+# Negativkontrolle gescheitert: es hätte auch `__inhalt_der_petition` geschluckt,
+# also genau den Fall, für den es den Melder gibt. Die echten Namen sind zwei,
+# und die stehen jetzt namentlich unten. Ein zu breites Muster verwirft STILL.
+_TECHNIK_NAMEN = frozenset({
+    "robots", "googlebot", "generator", "viewport", "charset",
+    "og:ttl",                       # Cache-Dauer für den Facebook-Crawler
+    "og:site_name",                 # Name der Website, nicht der Petition
+    "theme-color", "color-scheme", "format-detection",
+    "HandheldFriendly", "MobileOptimized", "apple-mobile-web-app-capable",
+    "facebook-domain-verification", "google-site-verification",
+    "csrf-token", "csp-nonce",      # wechseln bei JEDEM Abruf (siehe oben)
+    "referrer", "mobile-web-app-capable",
+    "__t", "__v",                   # Mongoose: Diskriminator (konstant
+                                    # 'petition') und Versionszähler der
+                                    # DB-Zeile — innn.it, 2158/2158 Seiten
+})
+
+
+def ist_seitentechnik(feld: str) -> bool:
+    """True für Namen, die auf jeder Website stehen und nie Inhalt tragen."""
+    f = str(feld).strip()
+    return f in _TECHNIK_NAMEN or f.startswith(_TECHNIK_PRAEFIXE)
+
+
 def felder_melden(bekannt, plattform_en: str = "") -> set[str]:
     """Meldet Feld-Beschriftungen, die der Scraper NICHT kennt. Einmal je Lauf.
 
@@ -1743,7 +1793,12 @@ def felder_melden(bekannt, plattform_en: str = "") -> set[str]:
     seiten = getattr(_TLS, "felder_seiten", 0)
     _TLS.felder = _collections.Counter()    # nächster Lauf beginnt bei null
     _TLS.felder_seiten = 0
-    neu = {f for f in gesehen if f not in bekannt}
+    unbekannt = {f for f in gesehen if f not in bekannt}
+    # Seitentechnik wird nicht gemeldet, aber GEZÄHLT: ein stiller Filter, der
+    # nirgends auftaucht, ist von einem kaputten Melder nicht zu unterscheiden.
+    # Die Zahl steht unten im Text, damit auffällt, wenn sie plötzlich wächst.
+    technik = {f for f in unbekannt if ist_seitentechnik(f)}
+    neu = unbekannt - technik
     if not neu:
         return set()
     # Nach Häufigkeit sortiert: das Verbreitete zuerst. Ein Feld, das die
@@ -1751,9 +1806,17 @@ def felder_melden(bekannt, plattform_en: str = "") -> set[str]:
     # `gclid` auf wenigen. Die Zahl dahinter ist die Entscheidungshilfe — ohne
     # sie ist beides derselbe Satz.
     geordnet = sorted(neu, key=lambda f: (-gesehen[f], f))
-    liste = ", ".join(f"{f} ({gesehen[f]}/{seiten})" for f in geordnet[:6])
-    if len(geordnet) > 6:
-        liste += f" … und {len(geordnet) - 6} weitere"
+    # ⚠️ 6 → 12 am 17.9.2026: bei fünf Plattformen standen 37 von 64 Namen nur
+    # als „… und N weitere" da — die Meldung war damit nicht abarbeitbar, man
+    # konnte die Entscheidung gar nicht treffen, die sie verlangt. Seit dem
+    # Technik-Filter sind echte Neufunde selten und wenige; 12 zeigt sie ganz,
+    # ohne die Kachel zu sprengen.
+    liste = ", ".join(f"{f} ({gesehen[f]}/{seiten})" for f in geordnet[:12])
+    if len(geordnet) > 12:
+        liste += f" … und {len(geordnet) - 12} weitere"
+    if technik:
+        liste += (f" (zusätzlich {len(technik)} Seitentechnik-Name(n) "
+                  f"herausgefiltert)")
     befund("hinweis", "Neues Feld auf der Quellseite",
            f"{len(neu)} Beschriftung(en) stehen auf den Detailseiten, die der "
            f"Scraper nicht kennt (Zahl = auf wie vielen der {seiten} "
