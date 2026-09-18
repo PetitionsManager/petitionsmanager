@@ -31,7 +31,7 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-18T07:18:33-06:00",
+    "generated_at": "2026-09-18T07:46:33-06:00",
     "petition_count": 601,
     "available": 708,
     "unbrauchbare": {
@@ -139,7 +139,7 @@
     "new_petitions_last_run": [],
     "lauf_verlauf": [
       {
-        "zeit": "2026-09-18T07:18:33-06:00",
+        "zeit": "2026-09-18T07:46:33-06:00",
         "gesamt": 601,
         "online": 600,
         "offline": 1,
@@ -156,7 +156,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-18T07:18:33-06:00",
+      "zeit": "2026-09-18T07:46:33-06:00",
       "gesamt": 601,
       "online": 600,
       "offline": 1,
@@ -169,7 +169,7 @@
       "juengstes_start": "2026-09-01",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-09-18T07:18:33-06:00",
+    "verlauf_felder_ab": "2026-09-18T07:46:33-06:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 600
@@ -18109,6 +18109,10 @@
       {
         "checked_at": "2026-09-06T15:20:14-06:00",
         "count": 7
+      },
+      {
+        "checked_at": "2026-09-18T07:43:40-06:00",
+        "count": 8
       }
     ],
     "title": "Stop the Genocide",
@@ -18118,12 +18122,12 @@
     "summary": "Stop the Genocide European Commission and the European Parliament This petition is run by [% inititator_name %] Petition Israel's war on Gaza is causing previously unseen levels of death and destructi…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 7,
+    "signatures": 8,
     "goal": 1000,
     "lang": "en",
     "campaign_id": "wemove:2025-5-stop-european-funding-for-israeli-institutions",
     "status": "online",
-    "last_seen": "2026-09-06T15:20:14-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "Israeli",
@@ -18137,7 +18141,7 @@
       "Military",
       "Stop"
     ],
-    "last_checked": "2026-09-06T15:20:14-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2025-5-stop-homework-EN": {
     "slug": "2025-5-stop-homework-EN",
@@ -18160,7 +18164,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-5-stop-homework",
     "status": "online",
-    "last_seen": "2026-09-06T15:20:14-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "Homework",
@@ -18174,7 +18178,7 @@
       "Remove",
       "Savour"
     ],
-    "last_checked": "2026-09-06T15:20:14-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2025-5-test-marcin-youmove-202501-EN": {
     "slug": "2025-5-test-marcin-youmove-202501-EN",
@@ -18196,7 +18200,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-5-test-marcin-youmove-202501",
     "status": "online",
-    "last_seen": "2026-09-06T15:20:14-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "Test",
@@ -18206,7 +18210,7 @@
       "Important",
       "Name"
     ],
-    "last_checked": "2026-09-06T15:20:14-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2025-5-test-marcin-youmove-202503-EN": {
     "slug": "2025-5-test-marcin-youmove-202503-EN",
@@ -18228,7 +18232,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-5-test-marcin-youmove-202503",
     "status": "online",
-    "last_seen": "2026-09-06T15:20:14-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "Test",
@@ -18238,7 +18242,7 @@
       "Important",
       "Name"
     ],
-    "last_checked": "2026-09-06T15:20:14-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2025-6-appeal-for-the-protection-of-the-maison-de-la-culture-albanaise-EN": {
     "slug": "2025-6-appeal-for-the-protection-of-the-maison-de-la-culture-albanaise-EN",
@@ -18260,7 +18264,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-6-appeal-for-the-protection-of-the-maison-de-la-culture-albanaise",
     "status": "online",
-    "last_seen": "2026-09-06T15:20:14-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "Shipville",
@@ -18274,7 +18278,7 @@
       "People",
       "Inititator"
     ],
-    "last_checked": "2026-09-06T15:20:14-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2025-6-cacilend-violence-strikes-again-EN": {
     "slug": "2025-6-cacilend-violence-strikes-again-EN",
@@ -18296,7 +18300,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-6-cacilend-violence-strikes-again",
     "status": "online",
-    "last_seen": "2026-09-06T15:20:14-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "Acilend",
@@ -18310,7 +18314,7 @@
       "Again",
       "Camp"
     ],
-    "last_checked": "2026-09-06T15:20:14-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2025-6-eu-must-demand-immediate-release-of-mep-rima-hassan-madleen-flot-EN": {
     "slug": "2025-6-eu-must-demand-immediate-release-of-mep-rima-hassan-madleen-flot-EN",
@@ -18333,7 +18337,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-6-eu-must-demand-immediate-release-of-mep-rima-hassan-madleen-flot",
     "status": "online",
-    "last_seen": "2026-09-06T15:20:14-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "Activists",
@@ -18347,7 +18351,7 @@
       "Rima",
       "Inititator"
     ],
-    "last_checked": "2026-09-06T15:20:14-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2025-6-mandatory-transparency-for-products-made-with-exploitation-EN": {
     "slug": "2025-6-mandatory-transparency-for-products-made-with-exploitation-EN",
@@ -18370,7 +18374,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-6-mandatory-transparency-for-products-made-with-exploitation",
     "status": "online",
-    "last_seen": "2026-09-06T15:20:14-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -18384,7 +18388,7 @@
       "Commission",
       "Reynders"
     ],
-    "last_checked": "2026-09-06T15:20:14-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2025-6-protect-the-freedom-flotilla-end-gazas-blockade-now-EN": {
     "slug": "2025-6-protect-the-freedom-flotilla-end-gazas-blockade-now-EN",
@@ -18406,7 +18410,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-6-protect-the-freedom-flotilla-end-gazas-blockade-now",
     "status": "online",
-    "last_seen": "2026-09-06T15:20:14-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "Gaza",
@@ -18420,7 +18424,7 @@
       "Protect",
       "Action"
     ],
-    "last_checked": "2026-09-06T15:20:14-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2025-6-protegeons-le-gouf-de-capbreton-pour-une-vraie-aire-marine-prote-EN": {
     "slug": "2025-6-protegeons-le-gouf-de-capbreton-pour-une-vraie-aire-marine-prote-EN",
@@ -18443,7 +18447,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-6-protegeons-le-gouf-de-capbreton-pour-une-vraie-aire-marine-prote",
     "status": "online",
-    "last_seen": "2026-09-06T15:20:14-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "Canyon",
@@ -18457,7 +18461,7 @@
       "France",
       "French"
     ],
-    "last_checked": "2026-09-06T15:20:14-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2025-7-europe-talks-equality-it-s-time-to-make-it-reality-EN": {
     "slug": "2025-7-europe-talks-equality-it-s-time-to-make-it-reality-EN",
@@ -18471,7 +18475,7 @@
     "title": "Europe talks equality, it's time to make it reality",
     "image_url": "https://strapi.youmoveeurope.eu/uploads/voice2_compressed_e2e016a5df.png",
     "url": "https://action.wemove.eu/sign/2025-7-europe-talks-equality-it-s-time-to-make-it-reality-EN",
-    "description_full": "<p>\n\n\n          Europe talks equality, it's time to make it reality\n        \n\n\n\n\n      Please accept marketing cookies to watch this video\n    \n\n\n\n\n</p><h3>\n            Ursula von der Leyen - the President of the European Commission, The European Commission, European Union institutions, national governments, and decision-makers shaping policies on gender, health, justice, education, and the environment.\n          </h3>\n<p>\n            This petition is run by [% inititator_name %]\n          </p>\n\n<h2>\n            Petition\n          </h2>\n<p>We demand that EU officials and national leaders urgently adopt and implement the recommendations from the FEM position paper, including:</p><ul><li><strong>Guarantee reproductive freedom</strong> by ensuring legal, safe, and accessible abortion in every EU country.<br/><br/> </li><li><strong>Protect all women and marginalized people</strong> from sexual and gender-based violence through stronger laws, survivor support, and prevention education.<br/><br/> </li><li><strong>Close the gender pay gap</strong> and end discrimination in hiring, pay, and promotion.<br/><br/> </li><li><strong>Ensure fair representation in politics</strong> by enforcing gender quotas and supporting women in leadership.<br/><br/> </li><li><strong>Provide free and inclusive sex education</strong> in all schools.<br/><br/> </li></ul><p><strong>Take real climate action</strong> by holding industries accountable and including women in environmental leadership.<br/> </p>\n\n\n<h2>\n            \n              Why is this important?\n            \n          </h2>\n<p><a href=\"https://fem-network.com/advocacy/\" rel=\"noopener\" target=\"_blank\">https://fem-network.com/advocacy/</a><br/><br/>Because <strong>equality is not optional — it's a right.</strong></p><p>Right now, millions of young women and non-binary people across Europe are being held back by outdated laws, stigma, discrimination, and violence. Many can’t access basic healthcare, feel unsafe in public spaces, or are excluded from leadership and opportunity.</p><p>The FEM recommendations were shaped by the voices of 900+ young women and non-binary persons from across Europe — especially those most often unheard: LBTQ+ youth, women of color, migrants, people with disabilities, and others facing marginalization.</p><p>This is a turning point. With bold action, we can build a Europe where every woman and girl lives free from violence, with full access to health, safety, equality, and opportunity.</p><p><strong>No more asking nicely. Demand your rights now.</strong></p>",
+    "description_full": "<p>\n\n\n          Europe talks equality, it's time to make it reality\n        \n\n\n\n\n        Please accept marketing cookies to watch this video\n      \n\n\n\n\n</p><h3>\n            Ursula von der Leyen - the President of the European Commission, The European Commission, European Union institutions, national governments, and decision-makers shaping policies on gender, health, justice, education, and the environment.\n          </h3>\n<p>\n            This petition is run by [% inititator_name %]\n          </p>\n\n<h2>\n            Petition\n          </h2>\n<p>We demand that EU officials and national leaders urgently adopt and implement the recommendations from the FEM position paper, including:</p><ul><li><strong>Guarantee reproductive freedom</strong> by ensuring legal, safe, and accessible abortion in every EU country.<br/><br/> </li><li><strong>Protect all women and marginalized people</strong> from sexual and gender-based violence through stronger laws, survivor support, and prevention education.<br/><br/> </li><li><strong>Close the gender pay gap</strong> and end discrimination in hiring, pay, and promotion.<br/><br/> </li><li><strong>Ensure fair representation in politics</strong> by enforcing gender quotas and supporting women in leadership.<br/><br/> </li><li><strong>Provide free and inclusive sex education</strong> in all schools.<br/><br/> </li></ul><p><strong>Take real climate action</strong> by holding industries accountable and including women in environmental leadership.<br/> </p>\n\n\n<h2>\n            \n              Why is this important?\n            \n          </h2>\n<p><a href=\"https://fem-network.com/advocacy/\" rel=\"noopener\" target=\"_blank\">https://fem-network.com/advocacy/</a><br/><br/>Because <strong>equality is not optional — it's a right.</strong></p><p>Right now, millions of young women and non-binary people across Europe are being held back by outdated laws, stigma, discrimination, and violence. Many can’t access basic healthcare, feel unsafe in public spaces, or are excluded from leadership and opportunity.</p><p>The FEM recommendations were shaped by the voices of 900+ young women and non-binary persons from across Europe — especially those most often unheard: LBTQ+ youth, women of color, migrants, people with disabilities, and others facing marginalization.</p><p>This is a turning point. With bold action, we can build a Europe where every woman and girl lives free from violence, with full access to health, safety, equality, and opportunity.</p><p><strong>No more asking nicely. Demand your rights now.</strong></p>",
     "summary": "Europe talks equality, it's time to make it reality Please accept marketing cookies to watch this video Ursula von der Leyen - the President of the European Commission, The European Commission, Europe…",
     "started_by": "WeMove Europe",
     "kind": "petition",
@@ -18480,7 +18484,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-7-europe-talks-equality-it-s-time-to-make-it-reality",
     "status": "online",
-    "last_seen": "2026-09-06T15:20:14-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "Europe",
@@ -18494,7 +18498,7 @@
       "Reality",
       "Gender"
     ],
-    "last_checked": "2026-09-06T15:20:14-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2025-7-no-to-the-submission-deal-with-the-united-states-defend-europes-EN": {
     "slug": "2025-7-no-to-the-submission-deal-with-the-united-states-defend-europes-EN",
@@ -18517,7 +18521,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-7-no-to-the-submission-deal-with-the-united-states-defend-europes",
     "status": "online",
-    "last_seen": "2026-09-06T15:20:14-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -18531,7 +18535,7 @@
       "Deal",
       "Parliament"
     ],
-    "last_checked": "2026-09-06T15:20:14-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2025-7-pumpaj-EN": {
     "slug": "2025-7-pumpaj-EN",
@@ -18554,7 +18558,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-7-pumpaj",
     "status": "online",
-    "last_seen": "2026-09-06T15:20:14-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "Protests",
@@ -18568,7 +18572,7 @@
       "Reci",
       "Anti-corruption"
     ],
-    "last_checked": "2026-09-06T15:20:14-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2025-7-pure-capitulation-of-the-eu-to-the-american-tarrifs-EN": {
     "slug": "2025-7-pure-capitulation-of-the-eu-to-the-american-tarrifs-EN",
@@ -18590,7 +18594,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-7-pure-capitulation-of-the-eu-to-the-american-tarrifs",
     "status": "online",
-    "last_seen": "2026-09-06T15:20:14-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "Deal",
@@ -18604,7 +18608,7 @@
       "Amerika",
       "DRAWING"
     ],
-    "last_checked": "2026-09-06T15:20:14-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2025-7-resignation-of-von-der-leyen-after-disastrous-deal-with-trump-EN": {
     "slug": "2025-7-resignation-of-von-der-leyen-after-disastrous-deal-with-trump-EN",
@@ -18613,6 +18617,10 @@
       {
         "checked_at": "2026-09-06T15:20:14-06:00",
         "count": 94
+      },
+      {
+        "checked_at": "2026-09-18T07:43:40-06:00",
+        "count": 97
       }
     ],
     "title": "Resignation of Von der Leyen after disastrous deal with Trump",
@@ -18622,12 +18630,12 @@
     "summary": "Resignation of Von der Leyen after disastrous deal with Trump European citizens This petition is run by [% inititator_name %] Petition We call for the immediate resignation of Ursula von der Leyen, Pr…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 94,
+    "signatures": 97,
     "goal": 1000,
     "lang": "en",
     "campaign_id": "wemove:2025-7-resignation-of-von-der-leyen-after-disastrous-deal-with-trump",
     "status": "online",
-    "last_seen": "2026-09-06T15:20:14-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "Leyen",
@@ -18641,7 +18649,7 @@
       "Disastrous",
       "Immediate"
     ],
-    "last_checked": "2026-09-06T15:20:14-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2025-8-gaza-is-starved-we-call-on-spain-and-ireland-to-send-humanitaria-EN": {
     "slug": "2025-8-gaza-is-starved-we-call-on-spain-and-ireland-to-send-humanitaria-EN",
@@ -18664,7 +18672,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-8-gaza-is-starved-we-call-on-spain-and-ireland-to-send-humanitaria",
     "status": "online",
-    "last_seen": "2026-09-06T15:20:14-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "Ireland",
@@ -18678,7 +18686,7 @@
       "Starved",
       "Planes"
     ],
-    "last_checked": "2026-09-06T15:20:14-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2025-9-suspend-the-eu-israel-association-agreement-now-EN": {
     "slug": "2025-9-suspend-the-eu-israel-association-agreement-now-EN",
@@ -18701,7 +18709,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-9-suspend-the-eu-israel-association-agreement-now",
     "status": "online",
-    "last_seen": "2026-09-06T15:20:14-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "Agreement",
@@ -18715,7 +18723,7 @@
       "EU-Israel",
       "European"
     ],
-    "last_checked": "2026-09-06T15:20:14-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2026-01-omnibus-tech-petition-EN": {
     "slug": "2026-01-omnibus-tech-petition-EN",
@@ -18724,6 +18732,10 @@
       {
         "checked_at": "2026-09-06T15:20:14-06:00",
         "count": 91982
+      },
+      {
+        "checked_at": "2026-09-18T07:43:40-06:00",
+        "count": 92011
       }
     ],
     "title": "Keep Big Tech Accountable!",
@@ -18734,12 +18746,12 @@
     "start_date": "2026-01-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 91982,
+    "signatures": 92011,
     "goal": 100000,
     "lang": "en",
     "campaign_id": "wemove:2026-01-omnibus-tech-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:20:14-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "Tech",
@@ -18753,7 +18765,7 @@
       "Europe",
       "Safety"
     ],
-    "last_checked": "2026-09-06T15:20:14-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2026-01-safe-country-petition-EN": {
     "slug": "2026-01-safe-country-petition-EN",
@@ -18762,6 +18774,10 @@
       {
         "checked_at": "2026-09-06T15:20:14-06:00",
         "count": 49194
+      },
+      {
+        "checked_at": "2026-09-18T07:43:40-06:00",
+        "count": 49196
       }
     ],
     "title": "EU, don’t deport people to unsafe countries!",
@@ -18772,12 +18788,12 @@
     "start_date": "2026-01-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 49194,
+    "signatures": 49196,
     "goal": 50000,
     "lang": "en",
     "campaign_id": "wemove:2026-01-safe-country-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:20:14-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "People",
@@ -18791,7 +18807,7 @@
       "Country",
       "Asylum"
     ],
-    "last_checked": "2026-09-06T15:20:14-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2026-01-trial-boycott-world-cup-petition-EN": {
     "slug": "2026-01-trial-boycott-world-cup-petition-EN",
@@ -18815,7 +18831,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-01-trial-boycott-world-cup-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:20:14-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "Football",
@@ -18829,7 +18845,7 @@
       "Association",
       "Players"
     ],
-    "last_checked": "2026-09-06T15:20:14-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2026-01-trial-digital-euro-petition-EN": {
     "slug": "2026-01-trial-digital-euro-petition-EN",
@@ -18852,7 +18868,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-01-trial-digital-euro-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:20:14-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "Digital",
@@ -18866,7 +18882,7 @@
       "Parliament",
       "Pressure"
     ],
-    "last_checked": "2026-09-06T15:20:14-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2026-01-trial-landfills-petition-EN": {
     "slug": "2026-01-trial-landfills-petition-EN",
@@ -18890,7 +18906,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-01-trial-landfills-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:20:14-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "Landfill",
@@ -18904,7 +18920,7 @@
       "Crisis",
       "Sites"
     ],
-    "last_checked": "2026-09-06T15:20:14-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2026-01-trial-noise-pollution-petition-EN": {
     "slug": "2026-01-trial-noise-pollution-petition-EN",
@@ -18928,7 +18944,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-01-trial-noise-pollution-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:20:14-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "Noise",
@@ -18942,7 +18958,7 @@
       "People",
       "Cure"
     ],
-    "last_checked": "2026-09-06T15:20:14-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2026-01-trial-omnibus-tech-meta-petition-EN": {
     "slug": "2026-01-trial-omnibus-tech-meta-petition-EN",
@@ -18966,7 +18982,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-01-trial-omnibus-tech-meta-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:34:22-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "Tech",
@@ -18980,7 +18996,7 @@
       "Money",
       "Rules"
     ],
-    "last_checked": "2026-09-06T15:34:22-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2026-01-trial-omnibus-tech-wins-petition-EN": {
     "slug": "2026-01-trial-omnibus-tech-wins-petition-EN",
@@ -19004,7 +19020,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-01-trial-omnibus-tech-wins-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:34:22-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "Tech",
@@ -19018,7 +19034,7 @@
       "Commission",
       "Especially"
     ],
-    "last_checked": "2026-09-06T15:34:22-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2026-01-trial-safe-country-petition-EN": {
     "slug": "2026-01-trial-safe-country-petition-EN",
@@ -19042,7 +19058,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-01-trial-safe-country-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:34:22-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "People",
@@ -19056,7 +19072,7 @@
       "MEPs",
       "Deport"
     ],
-    "last_checked": "2026-09-06T15:34:22-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2026-01-trial-secret-courts-tax-evaders-EN": {
     "slug": "2026-01-trial-secret-courts-tax-evaders-EN",
@@ -19080,7 +19096,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-01-trial-secret-courts-tax-evaders",
     "status": "online",
-    "last_seen": "2026-09-06T15:34:22-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -19094,7 +19110,7 @@
       "Parliament",
       "Settlement"
     ],
-    "last_checked": "2026-09-06T15:34:22-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2026-01-trial-stop-trump-greenland-petition-EN": {
     "slug": "2026-01-trial-stop-trump-greenland-petition-EN",
@@ -19118,7 +19134,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-01-trial-stop-trump-greenland-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:34:22-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "Greenland",
@@ -19132,7 +19148,7 @@
       "Future",
       "Grip"
     ],
-    "last_checked": "2026-09-06T15:34:22-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2026-02-boycott-world-cup-petition-EN": {
     "slug": "2026-02-boycott-world-cup-petition-EN",
@@ -19141,6 +19157,10 @@
       {
         "checked_at": "2026-09-06T15:34:22-06:00",
         "count": 88227
+      },
+      {
+        "checked_at": "2026-09-18T07:43:40-06:00",
+        "count": 88228
       }
     ],
     "title": "Boycott Trump’s World Cup",
@@ -19151,12 +19171,12 @@
     "start_date": "2026-02-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 88227,
+    "signatures": 88228,
     "goal": 100000,
     "lang": "en",
     "campaign_id": "wemove:2026-02-boycott-world-cup-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:34:22-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "Football",
@@ -19170,7 +19190,7 @@
       "Fans",
       "Associations"
     ],
-    "last_checked": "2026-09-06T15:34:22-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2026-02-deforestation-petition-EN": {
     "slug": "2026-02-deforestation-petition-EN",
@@ -19179,6 +19199,10 @@
       {
         "checked_at": "2026-09-06T15:34:22-06:00",
         "count": 53547
+      },
+      {
+        "checked_at": "2026-09-18T07:43:40-06:00",
+        "count": 53560
       }
     ],
     "title": "Healthy forests are our right!",
@@ -19189,12 +19213,12 @@
     "start_date": "2026-02-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 53547,
+    "signatures": 53560,
     "goal": 75000,
     "lang": "en",
     "campaign_id": "wemove:2026-02-deforestation-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:34:22-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -19208,7 +19232,7 @@
       "Right",
       "EUDR"
     ],
-    "last_checked": "2026-09-06T15:34:22-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2026-02-digital-euro-petition-EN": {
     "slug": "2026-02-digital-euro-petition-EN",
@@ -19217,6 +19241,10 @@
       {
         "checked_at": "2026-09-06T15:34:22-06:00",
         "count": 79101
+      },
+      {
+        "checked_at": "2026-09-18T07:43:40-06:00",
+        "count": 79106
       }
     ],
     "title": "Save the Digital Euro",
@@ -19227,12 +19255,12 @@
     "start_date": "2026-02-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 79101,
+    "signatures": 79106,
     "goal": 100000,
     "lang": "en",
     "campaign_id": "wemove:2026-02-digital-euro-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:34:22-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "Digital",
@@ -19246,7 +19274,7 @@
       "Parliament",
       "Pressure"
     ],
-    "last_checked": "2026-09-06T15:34:22-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2026-02-my-voice-my-choice-petition-EN": {
     "slug": "2026-02-my-voice-my-choice-petition-EN",
@@ -19270,7 +19298,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-02-my-voice-my-choice-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:34:22-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "Women",
@@ -19284,7 +19312,7 @@
       "Across",
       "Voice"
     ],
-    "last_checked": "2026-09-06T15:34:22-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2026-02-myvoicemychoice-trial-EN-petition-EN": {
     "slug": "2026-02-myvoicemychoice-trial-EN-petition-EN",
@@ -19308,7 +19336,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-02-myvoicemychoice-trial-EN-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:34:22-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "Abortion",
@@ -19322,7 +19350,7 @@
       "Across",
       "Initiative"
     ],
-    "last_checked": "2026-09-06T15:34:22-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2026-02-trial-child-detention-petition-EN": {
     "slug": "2026-02-trial-child-detention-petition-EN",
@@ -19346,7 +19374,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-02-trial-child-detention-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:34:22-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "Children",
@@ -19360,7 +19388,7 @@
       "Parliament",
       "Centers"
     ],
-    "last_checked": "2026-09-06T15:34:22-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2026-02-trial-no-ICE-trial-EN": {
     "slug": "2026-02-trial-no-ICE-trial-EN",
@@ -19384,7 +19412,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-02-trial-no-ICE-trial",
     "status": "online",
-    "last_seen": "2026-09-06T15:34:22-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "Security",
@@ -19398,7 +19426,7 @@
       "Streets",
       "Welcome"
     ],
-    "last_checked": "2026-09-06T15:34:22-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2026-03-Europe-against-illegal-war-in-Iran-petition-EN": {
     "slug": "2026-03-Europe-against-illegal-war-in-Iran-petition-EN",
@@ -19407,6 +19435,10 @@
       {
         "checked_at": "2026-09-06T15:34:22-06:00",
         "count": 124637
+      },
+      {
+        "checked_at": "2026-09-18T07:43:40-06:00",
+        "count": 124650
       }
     ],
     "title": "Europe: Stand up against illegal war in Iran",
@@ -19417,12 +19449,12 @@
     "start_date": "2026-03-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 124637,
+    "signatures": 124650,
     "goal": 150000,
     "lang": "en",
     "campaign_id": "wemove:2026-03-Europe-against-illegal-war-in-Iran-petition",
     "status": "online",
-    "last_seen": "2026-09-06T15:34:22-06:00",
+    "last_seen": "2026-09-18T07:43:40-06:00",
     "offline_since": null,
     "tags": [
       "Illegal",
@@ -19436,7 +19468,7 @@
       "Military",
       "Attacks"
     ],
-    "last_checked": "2026-09-06T15:34:22-06:00"
+    "last_checked": "2026-09-18T07:43:40-06:00"
   },
   "2026-03-palantir-petition-EN": {
     "slug": "2026-03-palantir-petition-EN",
