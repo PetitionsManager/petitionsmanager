@@ -31,13 +31,9 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-18T17:02:57-06:00",
+    "generated_at": "2026-09-18T17:30:05-06:00",
     "petition_count": 211,
     "available": 258,
-    "new_petitions_last_run": [
-      "2026-09-Big-Food-petition-IT",
-      "2026-09-toxic-coffee-petition-IT"
-    ],
     "unbrauchbare": {
       "2023-01-lucas-ig-wrapper-test-petition-IT": "2026-09-05T14:34:12-06:00",
       "2023-07-simon-1-IT": "2026-09-05T15:44:34-06:00",
@@ -87,6 +83,7 @@
       "lucas-test-donate-petition-IT": "2026-09-18T17:02:01-06:00",
       "lucas-test-donation-2-petition-IT": "2026-09-18T17:02:01-06:00"
     },
+    "new_petitions_last_run": [],
     "lauf_verlauf": [
       {
         "zeit": "2026-09-18T17:02:56-06:00",
@@ -103,10 +100,26 @@
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
         "neu": 2
+      },
+      {
+        "zeit": "2026-09-18T17:30:05-06:00",
+        "gesamt": 211,
+        "online": 206,
+        "offline": 5,
+        "ohne_titel": 5,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 5,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 178,
+        "juengstes_start": "2026-09-01",
+        "mit_code_im_text": 0,
+        "herkunft": "lokal_cron",
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-18T17:02:56-06:00",
+      "zeit": "2026-09-18T17:30:05-06:00",
       "gesamt": 211,
       "online": 206,
       "offline": 5,

@@ -31,7 +31,7 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-18T17:05:42-06:00",
+    "generated_at": "2026-09-18T17:33:44-06:00",
     "petition_count": 167,
     "available": 223,
     "unbrauchbare": {
@@ -91,7 +91,7 @@
     "new_petitions_last_run": [],
     "lauf_verlauf": [
       {
-        "zeit": "2026-09-18T17:05:42-06:00",
+        "zeit": "2026-09-18T17:33:44-06:00",
         "gesamt": 167,
         "online": 166,
         "offline": 1,
@@ -108,7 +108,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-18T17:05:42-06:00",
+      "zeit": "2026-09-18T17:33:44-06:00",
       "gesamt": 167,
       "online": 166,
       "offline": 1,
@@ -121,7 +121,7 @@
       "juengstes_start": "2026-08-01",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-09-18T17:05:42-06:00",
+    "verlauf_felder_ab": "2026-09-18T17:33:44-06:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 166
@@ -1408,6 +1408,10 @@
       {
         "checked_at": "2026-09-05T15:11:04-06:00",
         "count": 9889
+      },
+      {
+        "checked_at": "2026-09-18T17:30:10-06:00",
+        "count": 9890
       }
     ],
     "title": "Red de Amazone van Europa",
@@ -1418,12 +1422,12 @@
     "start_date": "2023-04-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 9889,
+    "signatures": 9890,
     "goal": 10000,
     "lang": "nl",
     "campaign_id": "wemove:2023-04-save-polesia-petition",
     "status": "online",
-    "last_seen": "2026-09-05T15:11:04-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Europese",
@@ -1437,7 +1441,7 @@
       "Deze",
       "Door"
     ],
-    "last_checked": "2026-09-05T15:11:04-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2023-04-SUR-pesticide-petition-NL": {
     "slug": "2023-04-SUR-pesticide-petition-NL",
@@ -1446,6 +1450,10 @@
       {
         "checked_at": "2026-09-05T15:11:04-06:00",
         "count": 1247
+      },
+      {
+        "checked_at": "2026-09-18T17:30:10-06:00",
+        "count": 1248
       }
     ],
     "title": "Europa, zeg nee tegen pesticiden!",
@@ -1456,12 +1464,12 @@
     "start_date": "2023-04-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 1247,
+    "signatures": 1248,
     "goal": 2000,
     "lang": "nl",
     "campaign_id": "wemove:2023-04-SUR-pesticide-petition",
     "status": "online",
-    "last_seen": "2026-09-05T15:11:04-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Pesticiden",
@@ -1475,7 +1483,7 @@
       "Willen",
       "Meer"
     ],
-    "last_checked": "2026-09-05T15:11:04-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2023-05-end-bottom-trawling-petition-NL": {
     "slug": "2023-05-end-bottom-trawling-petition-NL",
@@ -1484,6 +1492,10 @@
       {
         "checked_at": "2026-09-05T15:50:36-06:00",
         "count": 116383
+      },
+      {
+        "checked_at": "2026-09-18T17:30:10-06:00",
+        "count": 116403
       }
     ],
     "title": "Maak een einde aan trawlvisserij",
@@ -1494,12 +1506,12 @@
     "start_date": "2023-05-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 116383,
+    "signatures": 116403,
     "goal": 150000,
     "lang": "nl",
     "campaign_id": "wemove:2023-05-end-bottom-trawling-petition",
     "status": "online",
-    "last_seen": "2026-09-05T15:50:36-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Visserij",
@@ -1513,7 +1525,7 @@
       "Gebieden",
       "Trawling"
     ],
-    "last_checked": "2026-09-05T15:50:36-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2023-05-end-bottom-trawling-widget-NL": {
     "slug": "2023-05-end-bottom-trawling-widget-NL",
@@ -1522,6 +1534,10 @@
       {
         "checked_at": "2026-09-05T15:50:36-06:00",
         "count": 116383
+      },
+      {
+        "checked_at": "2026-09-18T17:30:10-06:00",
+        "count": 116403
       }
     ],
     "title": "Maak een einde aan trawlvisserij",
@@ -1532,12 +1548,12 @@
     "start_date": "2023-05-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 116383,
+    "signatures": 116403,
     "goal": 150000,
     "lang": "nl",
     "campaign_id": "wemove:2023-05-end-bottom-trawling-widget",
     "status": "online",
-    "last_seen": "2026-09-05T15:50:36-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Visserij",
@@ -1551,7 +1567,7 @@
       "Europese",
       "Gebieden"
     ],
-    "last_checked": "2026-09-05T15:50:36-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2023-05-european-health-data-space-petition-NL": {
     "slug": "2023-05-european-health-data-space-petition-NL",
@@ -1560,6 +1576,10 @@
       {
         "checked_at": "2026-09-05T15:50:36-06:00",
         "count": 10012
+      },
+      {
+        "checked_at": "2026-09-18T17:30:10-06:00",
+        "count": 10030
       }
     ],
     "title": "Geef Big Tech geen toegang tot onze medische dossiers",
@@ -1570,12 +1590,12 @@
     "start_date": "2023-05-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 10012,
+    "signatures": 10030,
     "goal": 20000,
     "lang": "nl",
     "campaign_id": "wemove:2023-05-european-health-data-space-petition",
     "status": "online",
-    "last_seen": "2026-09-05T15:50:36-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Voor",
@@ -1589,7 +1609,7 @@
       "Maar",
       "Gezondheidsgegevens"
     ],
-    "last_checked": "2026-09-05T15:50:36-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2023-05-protect-objectors-petition-NL": {
     "slug": "2023-05-protect-objectors-petition-NL",
@@ -1613,7 +1633,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2023-05-protect-objectors-petition",
     "status": "online",
-    "last_seen": "2026-09-05T15:50:36-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Belangrijk",
@@ -1627,7 +1647,7 @@
       "Français",
       "Italiano"
     ],
-    "last_checked": "2026-09-05T15:50:36-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2023-05-save-donana-petition-NL": {
     "slug": "2023-05-save-donana-petition-NL",
@@ -1651,7 +1671,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2023-05-save-donana-petition",
     "status": "online",
-    "last_seen": "2026-09-05T15:50:36-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Europese",
@@ -1665,7 +1685,7 @@
       "Bedreigde",
       "Petitie"
     ],
-    "last_checked": "2026-09-05T15:50:36-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2023-05-violence-against-women-directive-petition-NL": {
     "slug": "2023-05-violence-against-women-directive-petition-NL",
@@ -1674,6 +1694,10 @@
       {
         "checked_at": "2026-09-05T15:50:36-06:00",
         "count": 45749
+      },
+      {
+        "checked_at": "2026-09-18T17:30:10-06:00",
+        "count": 45750
       }
     ],
     "title": "Maak Europa tot een veilige plek voor alle vrouwen en meisjes!",
@@ -1684,12 +1708,12 @@
     "start_date": "2023-05-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 45749,
+    "signatures": 45750,
     "goal": 50000,
     "lang": "nl",
     "campaign_id": "wemove:2023-05-violence-against-women-directive-petition",
     "status": "online",
-    "last_seen": "2026-09-05T15:50:36-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Geweld",
@@ -1703,7 +1727,7 @@
       "Zijn",
       "Overlevenden"
     ],
-    "last_checked": "2026-09-05T15:50:36-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2023-06-deaths-at-sea-petition-NL": {
     "slug": "2023-06-deaths-at-sea-petition-NL",
@@ -1727,7 +1751,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2023-06-deaths-at-sea-petition",
     "status": "online",
-    "last_seen": "2026-09-05T15:50:36-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Mensen",
@@ -1741,12 +1765,17 @@
       "Migratieroutes",
       "Ervoor"
     ],
-    "last_checked": "2026-09-05T15:50:36-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2023-06-odra-river-petition-NL": {
     "slug": "2023-06-odra-river-petition-NL",
     "first_seen": "2026-09-05T15:50:36-06:00",
-    "signatures_history": [],
+    "signatures_history": [
+      {
+        "checked_at": "2026-09-18T17:30:10-06:00",
+        "count": 45042
+      }
+    ],
     "title": "Laten we de rivier de Oder voor nog een natuurramp behoeden",
     "image_url": "https://drupal.wemove.eu/sites/wemove.eu/files/odra_river_petition_image.jpg",
     "url": "https://action.wemove.eu/sign/2023-06-odra-river-petition-NL",
@@ -1758,7 +1787,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2023-06-odra-river-petition",
     "status": "online",
-    "last_seen": "2026-09-05T15:50:36-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Rivier",
@@ -1772,7 +1801,9 @@
       "Overheid",
       "Laten"
     ],
-    "last_checked": "2026-09-05T15:50:36-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00",
+    "signatures": 45042,
+    "goal": 50000
   },
   "2023-07-frontex-whistleblowers-petition-NL": {
     "slug": "2023-07-frontex-whistleblowers-petition-NL",
@@ -1781,6 +1812,10 @@
       {
         "checked_at": "2026-09-05T16:38:40-06:00",
         "count": 1197
+      },
+      {
+        "checked_at": "2026-09-18T17:30:10-06:00",
+        "count": 1198
       }
     ],
     "title": "Medewerkers van Frontex, luid die klok",
@@ -1791,12 +1826,12 @@
     "start_date": "2023-07-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 1197,
+    "signatures": 1198,
     "goal": 2000,
     "lang": "nl",
     "campaign_id": "wemove:2023-07-frontex-whistleblowers-petition",
     "status": "online",
-    "last_seen": "2026-09-05T16:38:40-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Frontex",
@@ -1810,7 +1845,7 @@
       "Brengen",
       "Actie"
     ],
-    "last_checked": "2026-09-05T16:38:40-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2023-07-Make-Polluters-Pay-petition-NL": {
     "slug": "2023-07-Make-Polluters-Pay-petition-NL",
@@ -1819,6 +1854,10 @@
       {
         "checked_at": "2026-09-05T16:38:40-06:00",
         "count": 27807
+      },
+      {
+        "checked_at": "2026-09-18T17:30:10-06:00",
+        "count": 27808
       }
     ],
     "title": "Laat de vervuiler betalen",
@@ -1829,12 +1868,12 @@
     "start_date": "2023-07-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 27807,
+    "signatures": 27808,
     "goal": 50000,
     "lang": "nl",
     "campaign_id": "wemove:2023-07-Make-Polluters-Pay-petition",
     "status": "online",
-    "last_seen": "2026-09-05T16:38:40-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Voor",
@@ -1848,12 +1887,17 @@
       "Gevolgen",
       "Toekomst"
     ],
-    "last_checked": "2026-09-05T16:38:40-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2023-08-glyphosate-petition-NL": {
     "slug": "2023-08-glyphosate-petition-NL",
     "first_seen": "2026-09-05T16:38:40-06:00",
-    "signatures_history": [],
+    "signatures_history": [
+      {
+        "checked_at": "2026-09-18T17:30:10-06:00",
+        "count": 22377
+      }
+    ],
     "title": "Verbied nu het giftige glyfosaat!",
     "image_url": "https://drupal.wemove.eu/sites/wemove.eu/files/shutterstock_1042790671.jpg",
     "url": "https://action.wemove.eu/sign/2023-08-glyphosate-petition-NL",
@@ -1865,7 +1909,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2023-08-glyphosate-petition",
     "status": "online",
-    "last_seen": "2026-09-05T16:38:40-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Glyfosaat",
@@ -1879,7 +1923,9 @@
       "Nederlands",
       "Uitspraken"
     ],
-    "last_checked": "2026-09-05T16:38:40-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00",
+    "signatures": 22377,
+    "goal": 50000
   },
   "2023-08-hope-trumps-hate-training-NL": {
     "slug": "2023-08-hope-trumps-hate-training-NL",
@@ -1902,7 +1948,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2023-08-hope-trumps-hate-training",
     "status": "online",
-    "last_seen": "2026-09-05T17:21:22-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Nederlands",
@@ -1916,7 +1962,7 @@
       "Parlement",
       "REPLACEME"
     ],
-    "last_checked": "2026-09-05T17:21:22-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2023-08-pesticide-rebels-training-NL": {
     "slug": "2023-08-pesticide-rebels-training-NL",
@@ -1940,7 +1986,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2023-08-pesticide-rebels-training",
     "status": "online",
-    "last_seen": "2026-09-05T17:21:22-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Pesticides",
@@ -1954,7 +2000,7 @@
       "Local",
       "Against"
     ],
-    "last_checked": "2026-09-05T17:21:22-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2023-09-pesticide-rebels-training-campaigns-petition-NL": {
     "slug": "2023-09-pesticide-rebels-training-campaigns-petition-NL",
@@ -1977,7 +2023,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2023-09-pesticide-rebels-training-campaigns-petition",
     "status": "online",
-    "last_seen": "2026-09-05T17:21:22-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Pesticides",
@@ -1991,7 +2037,7 @@
       "Local",
       "Against"
     ],
-    "last_checked": "2026-09-05T17:21:22-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2023-09-stop-hoekstra-petition-NL": {
     "slug": "2023-09-stop-hoekstra-petition-NL",
@@ -2015,7 +2061,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2023-09-stop-hoekstra-petition",
     "status": "online",
-    "last_seen": "2026-09-05T17:21:22-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Voor",
@@ -2029,7 +2075,7 @@
       "Ursula",
       "Actie"
     ],
-    "last_checked": "2026-09-05T17:21:22-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2023-10-eu-parliament-stop-selling-out-people-and-nature-to-mining-petition-NL": {
     "slug": "2023-10-eu-parliament-stop-selling-out-people-and-nature-to-mining-petition-NL",
@@ -2038,6 +2084,10 @@
       {
         "checked_at": "2026-09-05T17:21:22-06:00",
         "count": 78916
+      },
+      {
+        "checked_at": "2026-09-18T17:30:10-06:00",
+        "count": 78917
       }
     ],
     "title": "Wij roepen de EU op: zet eindelijk niet mijnbouw, maar mens en natuur op één!",
@@ -2047,12 +2097,12 @@
     "start_date": "2023-10-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 78916,
+    "signatures": 78917,
     "goal": 100000,
     "lang": "nl",
     "campaign_id": "wemove:2023-10-eu-parliament-stop-selling-out-people-and-nature-to-mining-petition",
     "status": "online",
-    "last_seen": "2026-09-05T17:21:22-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Voor",
@@ -2066,7 +2116,7 @@
       "Niet",
       "Eindelijk"
     ],
-    "last_checked": "2026-09-05T17:21:22-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2023-10-gaza-civilians-petition-NL": {
     "slug": "2023-10-gaza-civilians-petition-NL",
@@ -2090,7 +2140,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2023-10-gaza-civilians-petition",
     "status": "online",
-    "last_seen": "2026-09-05T17:21:22-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Zich",
@@ -2104,7 +2154,7 @@
       "Oorlogsmisdaden",
       "Europese"
     ],
-    "last_checked": "2026-09-05T17:21:22-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2023-11-end-tax-havens-in-the-eu-implement-the-treaty-reform-adopted-by-NL": {
     "slug": "2023-11-end-tax-havens-in-the-eu-implement-the-treaty-reform-adopted-by-NL",
@@ -2128,7 +2178,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2023-11-end-tax-havens-in-the-eu-implement-the-treaty-reform-adopted-by",
     "status": "online",
-    "last_seen": "2026-09-05T17:21:22-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Europese",
@@ -2142,7 +2192,7 @@
       "Einde",
       "Door"
     ],
-    "last_checked": "2026-09-05T17:21:22-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2023-12-tax-the-rich-petition-NL": {
     "slug": "2023-12-tax-the-rich-petition-NL",
@@ -2151,21 +2201,25 @@
       {
         "checked_at": "2026-09-05T17:21:22-06:00",
         "count": 179710
+      },
+      {
+        "checked_at": "2026-09-18T17:30:10-06:00",
+        "count": 179717
       }
     ],
     "title": "Belast de superrijken!",
     "url": "https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-NL",
-    "description_full": "<p>\n\n<!-- Remove this if you don't want popins like \"This page also in English\" -->\n\n\n<img alt=\"Language selector\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/icon_translate_eeaca63123.svg\"/>\n\n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n              \n              Nederlands\n\n              \n            \n          \n            \n          \n        \n\n</p><ul>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-EN\" rel=\"noopener\" target=\"_blank\">\n                    \n                    English\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-FR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Français\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-DE\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Deutsch\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-ES\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Español\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-IT\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Italiano\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-PL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Polski\n\n                    \n                    </a>\n</li>\n</ul><p>\n\n\n          Belast de superrijken!\n        \n\n\n\n\n      Accepteer marketingcookies om deze video te bekijken\n    \n\n\n\n\n</p><h3>\n<p>Aan de Europese Commissie</p>\n</h3>\n\n<h2>\n            Petitie\n          </h2>\n<p>We roepen de Europese Commissie op om een <strong>Europese belasting op overdadige vermogens </strong>te heffen, gebaseerd op Artikel 115 van het WEU-verdrag. Deze belasting zal de basis zijn voor gemeenschappelijk beleid en gecoördineerde actie voor een maximale positieve impact van belasting op overdadig vermogen.</p>\n\n\n<h2>\n            \n              Waarom is dit belangrijk?\n            \n          </h2>\n<p><strong>Duizenden van ons moeten het hoofd bieden aan rekeningen die de pan uit rijzen. </strong>Terwijl wij deze winter met moeite levensmiddelen kopen of onze huizen verwarmen, <strong>worden de mega-rijken alleen maar rijker. </strong>Dat is omdat miljardairs hun eerlijk aandeel aan belastingen niet betalen. [1] </p>\n<p>De <strong>rijkste één procent bezit bijna de helft van al het vermogen, maar ze betalen nauwelijks belasting. </strong>Ze buiten belastingparadijzen uit en gebruiken mazen in de wet om zo weinig mogelijk bij te dragen aan de staat. Hiermee beroven ze ons allen van cruciaal geld om onze ziekenhuizen, leraren en verplegers mee te betalen. [2] </p>\n<p>Maar nu hebben we de kans om <strong>deze onrechtvaardigheid een halt toe te roepen. </strong>Spanje experimenteert al met een belasting op het vermogen van de superrijken. [3] Deze <strong>belasting kan miljarden euro’s aan de kas bijdragen </strong>– het kan ons van de middelen voorzien om de diensten te bekostigen die we hard nodig hebben.</p>\n<p>Laten we samen oproepen tot een belasting voor de rijken, tot een eerlijker Europa! <strong>Eis een Europese vermogensbelasting voor de superrijken!</strong></p>\n<p>Deze vermogensbelasting voor de superrijken is al van kracht in Spanje: daar heeft het in 2023 inmiddels meer dan 1,8 miljard euro opgebracht. [4] Als de belasting door heel Europa wordt aangenomen, kunnen we miljarden laten doorstromen naar onze gezondheidsstelsels, ons onderwijs en naar het openbaar vervoer. [5]</p>\n<p>Zo krijgen we niet alleen meer geld voor onze gebrekkige publieke voorzieningen, maar <strong>kunnen we ook de mensen helpen die de klimaatcrisis het hardste treft. </strong>De superrijken zijn bijna geheel verantwoordelijk voor de klimaatcrisis, maar ondertussen zijn jongeren en arme mensen de dupe. [6] Zij moeten het hoofd bieden aan de ergste droogtes, overstromingen, hittegolven en bosbranden. </p>\n<p>Wij vinden allemaal dat ieder eerlijk moet bijdragen om de hulpbehoevenden te steunen. De rijksten onder ons belasten is juist, het is nodig en het zal een groot verschil maken! Maar politici <strong>zullen niets durven te doen totdat ze weten dat de burgers hen steunen. </strong>Laten we samen een vermogensbelasting voor de superrijken eisen!</p>\n<p>Een nieuwe Europese vermogensbelasting is niet makkelijk te bereiken, en het zal ons niet zomaar lukken. Maar we weten dat <strong>als we onze tanden zetten in de kwesties die ons aan het hart gaan, we samen de overwinning kunnen binnenslepen.</strong></p>\n<p>Vorig jaar streden we om de vernietiging van de planeet, ofwel ‘ecocide’, tot misdaad te maken. <strong>Velen zeiden dat dit te ambitieus was, zowaar onmogelijk. </strong>Maar nu hebben we een nieuwe EU-wet die de beulen van onze natuur ter verantwoording roept, met geldboetes en gevangenisstraffen! [7, 8]</p>\n<p><strong>Help ons om nog een overwinning binnen te slepen – dit keer tegen de ongelijkheid door de superrijken te belasten. </strong>Het is eerlijk en het is slim – dit maakt het verschil. Teken nu!</p>\n<p><strong>Bronnen: </strong></p>\n<p>[1] Elon Musk, een van ‘s werelds rijkste mensen, betaalde een ‘werkelijke belasting’ van nauwelijks meer dan drie procent tussen 2014 en 2018.<br/>https://oxfamilibrary.openrepository.com/bitstream/handle/10546/621477/bp-survival-of-the-richest-160123-en.pdf<br/>Andere rijken betalen een werkelijke belasting van tussen de 0 en 0,6 procent, zo kunnen we hier lezen: https://www.taxobservatory.eu/publication/global-tax-evasion-report-2024/</p>\n<p>[2] https://www.theguardian.com/business/2023/oct/22/eu-funded-report-calls-for-wealth-of-super-rich-to-be-taxed-not-income</p>\n<p>[3] Spanje wil de inkomsten met 3,14 miljard euro spekken met de nieuwe belastingen https://www.reuters.com/markets/europe/spain-hopes-gain-314-billion-euros-revenues-with-new-tax-proposals-2022-09-29/<br/>https://www.taxnotes.com/featured-news/tax-justice-network-suggests-eu-wealth-tax-similar-spains/2023/09/20/7hcm</p>\n<p>[4] Hier vind je details van de nieuwe Spaanse vermogensbelasting: https://www.aljazeera.com/news/2022/9/29/spain-agrees-on-new-asset-tax-for-wealthy-residents<br/>https://news.bloombergtax.com/daily-tax-report-international/spains-new-wealth-tax-beats-revenue-forecast-as-eu-mulls-stance</p>\n<p>[5] Een Europese vermogensbelasting kan beginnen bij twee procent op vermogens vanaf 4,6 miljoen euro, drie procent op vermogens boven de 45,7 miljoen euro, en vijf procent op miljardenvermogens.<br/>https://www.oxfam.org/en/press-releases/eus-richest-10-emit-much-planet-heating-emissions-half-eus-poorest-population, <br/>https://www.socialeurope.eu/for-equality-and-the-climate-a-european-wealth-tax</p>\n<p>[6] De superrijken stoten meer koolstof uit dan de 3,1 miljard mensen die tot de armste helft van de mensheid behoren.<br/>https://www.oxfam.org/en/press-releases/carbon-emissions-richest-1-percent-more-double-emissions-poorest-half-humanity</p>\n<p>[7,8] https://www.theguardian.com/environment/2023/nov/17/eu-criminalises-environmental-damage-comparable-to-ecocide<br/>Zie ook: https://ec.europa.eu/commission/presscorner/detail/en/ip_23_5817<br/>https://www.stopecocide.earth/legal-definition</p>\n\n\n<h3>Deze campagne is in samenwerking met:</h3>\n\n<p><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/logos_avaaz_logo_pink_brand.png\"/><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/editor-2023-12-05-3.png\"/></p>",
+    "description_full": "<p>\n\n<!-- Remove this if you don't want popins like \"This page also in English\" -->\n\n\n<img alt=\"Language selector\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/icon_translate_eeaca63123.svg\"/>\n\n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n              \n              Nederlands\n\n              \n            \n          \n            \n          \n        \n\n</p><ul>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-EN\" rel=\"noopener\" target=\"_blank\">\n                    \n                    English\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-FR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Français\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-DE\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Deutsch\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-ES\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Español\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-IT\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Italiano\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-PL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Polski\n\n                    \n                    </a>\n</li>\n</ul><p>\n\n\n          Belast de superrijken!\n        \n\n\n\n\n        Accepteer marketingcookies om deze video te bekijken\n      \n\n\n\n\n</p><h3>\n<p>Aan de Europese Commissie</p>\n</h3>\n\n<h2>\n            Petitie\n          </h2>\n<p>We roepen de Europese Commissie op om een <strong>Europese belasting op overdadige vermogens </strong>te heffen, gebaseerd op Artikel 115 van het WEU-verdrag. Deze belasting zal de basis zijn voor gemeenschappelijk beleid en gecoördineerde actie voor een maximale positieve impact van belasting op overdadig vermogen.</p>\n\n\n<h2>\n            \n              Waarom is dit belangrijk?\n            \n          </h2>\n<p><strong>Duizenden van ons moeten het hoofd bieden aan rekeningen die de pan uit rijzen. </strong>Terwijl wij deze winter met moeite levensmiddelen kopen of onze huizen verwarmen, <strong>worden de mega-rijken alleen maar rijker. </strong>Dat is omdat miljardairs hun eerlijk aandeel aan belastingen niet betalen. [1] </p>\n<p>De <strong>rijkste één procent bezit bijna de helft van al het vermogen, maar ze betalen nauwelijks belasting. </strong>Ze buiten belastingparadijzen uit en gebruiken mazen in de wet om zo weinig mogelijk bij te dragen aan de staat. Hiermee beroven ze ons allen van cruciaal geld om onze ziekenhuizen, leraren en verplegers mee te betalen. [2] </p>\n<p>Maar nu hebben we de kans om <strong>deze onrechtvaardigheid een halt toe te roepen. </strong>Spanje experimenteert al met een belasting op het vermogen van de superrijken. [3] Deze <strong>belasting kan miljarden euro’s aan de kas bijdragen </strong>– het kan ons van de middelen voorzien om de diensten te bekostigen die we hard nodig hebben.</p>\n<p>Laten we samen oproepen tot een belasting voor de rijken, tot een eerlijker Europa! <strong>Eis een Europese vermogensbelasting voor de superrijken!</strong></p>\n<p>Deze vermogensbelasting voor de superrijken is al van kracht in Spanje: daar heeft het in 2023 inmiddels meer dan 1,8 miljard euro opgebracht. [4] Als de belasting door heel Europa wordt aangenomen, kunnen we miljarden laten doorstromen naar onze gezondheidsstelsels, ons onderwijs en naar het openbaar vervoer. [5]</p>\n<p>Zo krijgen we niet alleen meer geld voor onze gebrekkige publieke voorzieningen, maar <strong>kunnen we ook de mensen helpen die de klimaatcrisis het hardste treft. </strong>De superrijken zijn bijna geheel verantwoordelijk voor de klimaatcrisis, maar ondertussen zijn jongeren en arme mensen de dupe. [6] Zij moeten het hoofd bieden aan de ergste droogtes, overstromingen, hittegolven en bosbranden. </p>\n<p>Wij vinden allemaal dat ieder eerlijk moet bijdragen om de hulpbehoevenden te steunen. De rijksten onder ons belasten is juist, het is nodig en het zal een groot verschil maken! Maar politici <strong>zullen niets durven te doen totdat ze weten dat de burgers hen steunen. </strong>Laten we samen een vermogensbelasting voor de superrijken eisen!</p>\n<p>Een nieuwe Europese vermogensbelasting is niet makkelijk te bereiken, en het zal ons niet zomaar lukken. Maar we weten dat <strong>als we onze tanden zetten in de kwesties die ons aan het hart gaan, we samen de overwinning kunnen binnenslepen.</strong></p>\n<p>Vorig jaar streden we om de vernietiging van de planeet, ofwel ‘ecocide’, tot misdaad te maken. <strong>Velen zeiden dat dit te ambitieus was, zowaar onmogelijk. </strong>Maar nu hebben we een nieuwe EU-wet die de beulen van onze natuur ter verantwoording roept, met geldboetes en gevangenisstraffen! [7, 8]</p>\n<p><strong>Help ons om nog een overwinning binnen te slepen – dit keer tegen de ongelijkheid door de superrijken te belasten. </strong>Het is eerlijk en het is slim – dit maakt het verschil. Teken nu!</p>\n<p><strong>Bronnen: </strong></p>\n<p>[1] Elon Musk, een van ‘s werelds rijkste mensen, betaalde een ‘werkelijke belasting’ van nauwelijks meer dan drie procent tussen 2014 en 2018.<br/>https://oxfamilibrary.openrepository.com/bitstream/handle/10546/621477/bp-survival-of-the-richest-160123-en.pdf<br/>Andere rijken betalen een werkelijke belasting van tussen de 0 en 0,6 procent, zo kunnen we hier lezen: https://www.taxobservatory.eu/publication/global-tax-evasion-report-2024/</p>\n<p>[2] https://www.theguardian.com/business/2023/oct/22/eu-funded-report-calls-for-wealth-of-super-rich-to-be-taxed-not-income</p>\n<p>[3] Spanje wil de inkomsten met 3,14 miljard euro spekken met de nieuwe belastingen https://www.reuters.com/markets/europe/spain-hopes-gain-314-billion-euros-revenues-with-new-tax-proposals-2022-09-29/<br/>https://www.taxnotes.com/featured-news/tax-justice-network-suggests-eu-wealth-tax-similar-spains/2023/09/20/7hcm</p>\n<p>[4] Hier vind je details van de nieuwe Spaanse vermogensbelasting: https://www.aljazeera.com/news/2022/9/29/spain-agrees-on-new-asset-tax-for-wealthy-residents<br/>https://news.bloombergtax.com/daily-tax-report-international/spains-new-wealth-tax-beats-revenue-forecast-as-eu-mulls-stance</p>\n<p>[5] Een Europese vermogensbelasting kan beginnen bij twee procent op vermogens vanaf 4,6 miljoen euro, drie procent op vermogens boven de 45,7 miljoen euro, en vijf procent op miljardenvermogens.<br/>https://www.oxfam.org/en/press-releases/eus-richest-10-emit-much-planet-heating-emissions-half-eus-poorest-population, <br/>https://www.socialeurope.eu/for-equality-and-the-climate-a-european-wealth-tax</p>\n<p>[6] De superrijken stoten meer koolstof uit dan de 3,1 miljard mensen die tot de armste helft van de mensheid behoren.<br/>https://www.oxfam.org/en/press-releases/carbon-emissions-richest-1-percent-more-double-emissions-poorest-half-humanity</p>\n<p>[7,8] https://www.theguardian.com/environment/2023/nov/17/eu-criminalises-environmental-damage-comparable-to-ecocide<br/>Zie ook: https://ec.europa.eu/commission/presscorner/detail/en/ip_23_5817<br/>https://www.stopecocide.earth/legal-definition</p>\n\n\n<h3>Deze campagne is in samenwerking met:</h3>\n\n<p><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/logos_avaaz_logo_pink_brand.png\"/><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/editor-2023-12-05-3.png\"/></p>",
     "summary": "Nederlands English Français Deutsch Español Italiano Polski Belast de superrijken! Accepteer marketingcookies om deze video te bekijken Aan de Europese Commissie Petitie We roepen de Europese Commissi…",
     "start_date": "2023-12-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 179710,
+    "signatures": 179717,
     "goal": 200000,
     "lang": "nl",
     "campaign_id": "wemove:2023-12-tax-the-rich-petition",
     "status": "online",
-    "last_seen": "2026-09-05T17:21:22-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Belasting",
@@ -2179,7 +2233,7 @@
       "Betalen",
       "Kunnen"
     ],
-    "last_checked": "2026-09-05T17:21:22-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2023-8-petition-sans-image-NL": {
     "slug": "2023-8-petition-sans-image-NL",
@@ -2201,7 +2255,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2023-8-petition-sans-image",
     "status": "online",
-    "last_seen": "2026-09-05T17:21:22-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Petitie",
@@ -2215,7 +2269,7 @@
       "Français",
       "English"
     ],
-    "last_checked": "2026-09-05T17:21:22-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "202305-stop_financing_putin_s_aggression_now-petition-NL": {
     "slug": "202305-stop_financing_putin_s_aggression_now-petition-NL",
@@ -2224,6 +2278,10 @@
       {
         "checked_at": "2026-09-05T18:00:57-06:00",
         "count": 18704
+      },
+      {
+        "checked_at": "2026-09-18T17:30:10-06:00",
+        "count": 18705
       }
     ],
     "title": "Stop nu de financiering van Poetin's agressie!",
@@ -2234,12 +2292,12 @@
     "start_date": "2023-05-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 18704,
+    "signatures": 18705,
     "goal": 20000,
     "lang": "nl",
     "campaign_id": "wemove:202305-stop_financing_putin_s_aggression_now-petition",
     "status": "online",
-    "last_seen": "2026-09-05T18:00:57-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Russische",
@@ -2253,7 +2311,7 @@
       "Organisaties",
       "Aardolie"
     ],
-    "last_checked": "2026-09-05T18:00:57-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "202307-save_the_great_river_of_rafina_greece-petition-NL": {
     "slug": "202307-save_the_great_river_of_rafina_greece-petition-NL",
@@ -2262,6 +2320,10 @@
       {
         "checked_at": "2026-09-05T18:00:57-06:00",
         "count": 20662
+      },
+      {
+        "checked_at": "2026-09-18T17:30:10-06:00",
+        "count": 20666
       }
     ],
     "title": "Red de prachtige rivier de Rafina",
@@ -2272,12 +2334,12 @@
     "start_date": "2023-07-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 20662,
+    "signatures": 20666,
     "goal": 50000,
     "lang": "nl",
     "campaign_id": "wemove:202307-save_the_great_river_of_rafina_greece-petition",
     "status": "online",
-    "last_seen": "2026-09-05T18:00:57-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Rivier",
@@ -2291,7 +2353,7 @@
       "Klimaatverandering",
       "Biodiversiteit"
     ],
-    "last_checked": "2026-09-05T18:00:57-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "202310-act_now_to_ban_pvc-petition-NL": {
     "slug": "202310-act_now_to_ban_pvc-petition-NL",
@@ -2300,6 +2362,10 @@
       {
         "checked_at": "2026-09-05T18:00:57-06:00",
         "count": 68165
+      },
+      {
+        "checked_at": "2026-09-18T17:30:10-06:00",
+        "count": 68168
       }
     ],
     "title": "Handel nu en verbied PVC",
@@ -2310,12 +2376,12 @@
     "start_date": "2023-10-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 68165,
+    "signatures": 68168,
     "goal": 75000,
     "lang": "nl",
     "campaign_id": "wemove:202310-act_now_to_ban_pvc-petition",
     "status": "online",
-    "last_seen": "2026-09-05T18:00:57-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Commissie",
@@ -2329,7 +2395,7 @@
       "Verbied",
       "Handel"
     ],
-    "last_checked": "2026-09-05T18:00:57-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2024-01-ban-forever-chemicals-petition2-NL": {
     "slug": "2024-01-ban-forever-chemicals-petition2-NL",
@@ -2338,6 +2404,10 @@
       {
         "checked_at": "2026-09-05T18:00:57-06:00",
         "count": 144889
+      },
+      {
+        "checked_at": "2026-09-18T17:30:10-06:00",
+        "count": 144904
       }
     ],
     "title": "Nu een gifvrij Europa!",
@@ -2347,12 +2417,12 @@
     "start_date": "2024-01-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 144889,
+    "signatures": 144904,
     "goal": 150000,
     "lang": "nl",
     "campaign_id": "wemove:2024-01-ban-forever-chemicals-petition2",
     "status": "online",
-    "last_seen": "2026-09-05T18:00:57-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Europese",
@@ -2366,7 +2436,7 @@
       "Bedrijven",
       "Chemische"
     ],
-    "last_checked": "2026-09-05T18:00:57-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2024-02-end-the-destruction-of-romanian-forests-petition-NL": {
     "slug": "2024-02-end-the-destruction-of-romanian-forests-petition-NL",
@@ -2389,7 +2459,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-02-end-the-destruction-of-romanian-forests-petition",
     "status": "online",
-    "last_seen": "2026-09-05T18:44:38-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Voor",
@@ -2403,7 +2473,7 @@
       "Petitie",
       "Milieu"
     ],
-    "last_checked": "2026-09-05T18:44:38-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2024-02-save-the-alps-petition-NL": {
     "slug": "2024-02-save-the-alps-petition-NL",
@@ -2412,6 +2482,10 @@
       {
         "checked_at": "2026-09-05T18:44:38-06:00",
         "count": 77921
+      },
+      {
+        "checked_at": "2026-09-18T17:30:10-06:00",
+        "count": 77922
       }
     ],
     "title": "Red de laatste gletsjers van de Alpen!",
@@ -2421,12 +2495,12 @@
     "start_date": "2024-02-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 77921,
+    "signatures": 77922,
     "goal": 100000,
     "lang": "nl",
     "campaign_id": "wemove:2024-02-save-the-alps-petition",
     "status": "online",
-    "last_seen": "2026-09-05T18:44:38-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Gletsjers",
@@ -2440,7 +2514,7 @@
       "Door",
       "Oostenrijks"
     ],
-    "last_checked": "2026-09-05T18:44:38-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2024-03-plastic-pellets-petition-NL": {
     "slug": "2024-03-plastic-pellets-petition-NL",
@@ -2449,6 +2523,10 @@
       {
         "checked_at": "2026-09-05T18:44:38-06:00",
         "count": 92648
+      },
+      {
+        "checked_at": "2026-09-18T17:30:10-06:00",
+        "count": 92651
       }
     ],
     "title": "Maak een einde aan de vervuiling van plastic pellets!",
@@ -2459,12 +2537,12 @@
     "start_date": "2024-03-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 92648,
+    "signatures": 92651,
     "goal": 100000,
     "lang": "nl",
     "campaign_id": "wemove:2024-03-plastic-pellets-petition",
     "status": "online",
-    "last_seen": "2026-09-05T18:44:38-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Voor",
@@ -2478,7 +2556,7 @@
       "Milieu",
       "Deze"
     ],
-    "last_checked": "2026-09-05T18:44:38-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2024-03-raiffeisen-russia-petition-NL": {
     "slug": "2024-03-raiffeisen-russia-petition-NL",
@@ -2502,7 +2580,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-03-raiffeisen-russia-petition",
     "status": "online",
-    "last_seen": "2026-09-05T18:44:38-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Raiffeisen",
@@ -2516,7 +2594,7 @@
       "Vertrek",
       "Roepen"
     ],
-    "last_checked": "2026-09-05T18:44:38-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2024-03-Santander-Amazon-petition-NL": {
     "slug": "2024-03-Santander-Amazon-petition-NL",
@@ -2525,6 +2603,10 @@
       {
         "checked_at": "2026-09-05T18:44:38-06:00",
         "count": 97069
+      },
+      {
+        "checked_at": "2026-09-18T17:30:10-06:00",
+        "count": 97071
       }
     ],
     "title": "Maak een einde aan de vernietiging van het Amazonewoud!",
@@ -2535,12 +2617,12 @@
     "start_date": "2024-03-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 97069,
+    "signatures": 97071,
     "goal": 100000,
     "lang": "nl",
     "campaign_id": "wemove:2024-03-Santander-Amazon-petition",
     "status": "online",
-    "last_seen": "2026-09-05T18:44:38-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Santander",
@@ -2554,7 +2636,7 @@
       "Maakt",
       "Maak"
     ],
-    "last_checked": "2026-09-05T18:44:38-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2024-03-world-bank-petition-NL": {
     "slug": "2024-03-world-bank-petition-NL",
@@ -2563,6 +2645,10 @@
       {
         "checked_at": "2026-09-05T18:44:38-06:00",
         "count": 104908
+      },
+      {
+        "checked_at": "2026-09-18T17:30:10-06:00",
+        "count": 104912
       }
     ],
     "title": "Stop de financiering van de intensieve veehouderij!",
@@ -2572,12 +2658,12 @@
     "start_date": "2024-03-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 104908,
+    "signatures": 104912,
     "goal": 150000,
     "lang": "nl",
     "campaign_id": "wemove:2024-03-world-bank-petition",
     "status": "online",
-    "last_seen": "2026-09-05T18:44:38-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Veehouderij",
@@ -2591,7 +2677,7 @@
       "Onder",
       "Tegen"
     ],
-    "last_checked": "2026-09-05T18:44:38-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2024-04-cap-reform-petition-NL": {
     "slug": "2024-04-cap-reform-petition-NL",
@@ -2614,7 +2700,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-04-cap-reform-petition",
     "status": "online",
-    "last_seen": "2026-09-05T18:44:38-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Hervorming",
@@ -2628,7 +2714,7 @@
       "Zijn",
       "Gemeenschappelijk"
     ],
-    "last_checked": "2026-09-05T18:44:38-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2024-04-Elections-GOTVMM-campaign-petition-NL": {
     "slug": "2024-04-Elections-GOTVMM-campaign-petition-NL",
@@ -2637,6 +2723,10 @@
       {
         "checked_at": "2026-09-05T18:44:38-06:00",
         "count": 44339
+      },
+      {
+        "checked_at": "2026-09-18T17:30:10-06:00",
+        "count": 44340
       }
     ],
     "title": "Ik stem om de natuur te beschermen",
@@ -2647,12 +2737,12 @@
     "start_date": "2024-04-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 44339,
+    "signatures": 44340,
     "goal": 50000,
     "lang": "nl",
     "campaign_id": "wemove:2024-04-Elections-GOTVMM-campaign-petition",
     "status": "online",
-    "last_seen": "2026-09-05T18:44:38-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Natuur",
@@ -2666,7 +2756,7 @@
       "Europese",
       "Hebben"
     ],
-    "last_checked": "2026-09-05T18:44:38-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2024-04-EU-elections-GOTV-climate-message-testing-climate-energy-hr-NL": {
     "slug": "2024-04-EU-elections-GOTV-climate-message-testing-climate-energy-hr-NL",
@@ -2689,7 +2779,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-climate-message-testing-climate-energy-hr",
     "status": "online",
-    "last_seen": "2026-09-05T18:44:38-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Polski",
@@ -2703,7 +2793,7 @@
       "Daadkrachtige",
       "Klimaatactie"
     ],
-    "last_checked": "2026-09-05T18:44:38-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2024-04-EU-elections-GOTV-climate-message-testing-climate-nature-hr-NL": {
     "slug": "2024-04-EU-elections-GOTV-climate-message-testing-climate-nature-hr-NL",
@@ -2726,7 +2816,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-climate-message-testing-climate-nature-hr",
     "status": "online",
-    "last_seen": "2026-09-05T18:44:38-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Polski",
@@ -2740,7 +2830,7 @@
       "Daadkrachtige",
       "Klimaatactie"
     ],
-    "last_checked": "2026-09-05T18:44:38-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2024-04-EU-elections-GOTV-climate-message-testing-food-security-hr-NL": {
     "slug": "2024-04-EU-elections-GOTV-climate-message-testing-food-security-hr-NL",
@@ -2763,7 +2853,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-climate-message-testing-food-security-hr",
     "status": "online",
-    "last_seen": "2026-09-05T18:44:38-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Polski",
@@ -2777,7 +2867,7 @@
       "Daadkrachtige",
       "Klimaatactie"
     ],
-    "last_checked": "2026-09-05T18:44:38-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2024-04-EU-elections-GOTV-extremists-message-testing-eu-unity-hr-NL": {
     "slug": "2024-04-EU-elections-GOTV-extremists-message-testing-eu-unity-hr-NL",
@@ -2800,7 +2890,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-extremists-message-testing-eu-unity-hr",
     "status": "online",
-    "last_seen": "2026-09-05T18:44:38-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Nederlands",
@@ -2814,7 +2904,7 @@
       "Extremistische",
       "Groepen"
     ],
-    "last_checked": "2026-09-05T18:44:38-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2024-04-EU-elections-GOTV-extremists-message-testing-far-right-democracy-hr-NL": {
     "slug": "2024-04-EU-elections-GOTV-extremists-message-testing-far-right-democracy-hr-NL",
@@ -2837,7 +2927,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-extremists-message-testing-far-right-democracy-hr",
     "status": "online",
-    "last_seen": "2026-09-05T18:44:38-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Nederlands",
@@ -2851,7 +2941,7 @@
       "Extremistische",
       "Groepen"
     ],
-    "last_checked": "2026-09-05T18:44:38-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2024-04-EU-elections-GOTV-extremists-message-testing-far-right-feminism-hr-NL": {
     "slug": "2024-04-EU-elections-GOTV-extremists-message-testing-far-right-feminism-hr-NL",
@@ -2874,7 +2964,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-extremists-message-testing-far-right-feminism-hr",
     "status": "online",
-    "last_seen": "2026-09-05T18:44:38-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Nederlands",
@@ -2888,7 +2978,7 @@
       "Extremistische",
       "Groepen"
     ],
-    "last_checked": "2026-09-05T18:44:38-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2024-04-EU-elections-GOTV-get-stuff-done-climate-pride-message-testing-hr-NL": {
     "slug": "2024-04-EU-elections-GOTV-get-stuff-done-climate-pride-message-testing-hr-NL",
@@ -2911,7 +3001,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-get-stuff-done-climate-pride-message-testing-hr",
     "status": "online",
-    "last_seen": "2026-09-05T18:44:38-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Voor",
@@ -2925,7 +3015,7 @@
       "Verdienen",
       "Klaart"
     ],
-    "last_checked": "2026-09-05T18:44:38-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2024-04-EU-elections-GOTV-get-stuff-done-future-message-testing-hr-NL": {
     "slug": "2024-04-EU-elections-GOTV-get-stuff-done-future-message-testing-hr-NL",
@@ -2948,7 +3038,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-get-stuff-done-future-message-testing-hr",
     "status": "online",
-    "last_seen": "2026-09-05T18:44:38-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Willen",
@@ -2962,7 +3052,7 @@
       "Polski",
       "Waarin"
     ],
-    "last_checked": "2026-09-05T18:44:38-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2024-04-recognise-Palestine-petition-NL": {
     "slug": "2024-04-recognise-Palestine-petition-NL",
@@ -2971,6 +3061,10 @@
       {
         "checked_at": "2026-09-05T18:44:38-06:00",
         "count": 109489
+      },
+      {
+        "checked_at": "2026-09-18T17:30:10-06:00",
+        "count": 109516
       }
     ],
     "title": "Erken de Palestijnse stem en toekomst!",
@@ -2981,12 +3075,12 @@
     "start_date": "2024-04-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 109489,
+    "signatures": 109516,
     "goal": 150000,
     "lang": "nl",
     "campaign_id": "wemove:2024-04-recognise-Palestine-petition",
     "status": "online",
-    "last_seen": "2026-09-05T18:44:38-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Palestijnse",
@@ -3000,7 +3094,7 @@
       "Staat",
       "Vrede"
     ],
-    "last_checked": "2026-09-05T18:44:38-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2024-05-GOTV-Use-You-Power-postcard-NL": {
     "slug": "2024-05-GOTV-Use-You-Power-postcard-NL",
@@ -3023,7 +3117,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-05-GOTV-Use-You-Power-postcard",
     "status": "online",
-    "last_seen": "2026-09-05T18:44:38-06:00",
+    "last_seen": "2026-09-18T17:30:10-06:00",
     "offline_since": null,
     "tags": [
       "Jouw",
@@ -3037,7 +3131,7 @@
       "Bent",
       "Zijn"
     ],
-    "last_checked": "2026-09-05T18:44:38-06:00"
+    "last_checked": "2026-09-18T17:30:10-06:00"
   },
   "2024-05-national-laws-ecocide-youmove-petition-NL": {
     "slug": "2024-05-national-laws-ecocide-youmove-petition-NL",
