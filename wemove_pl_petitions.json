@@ -31,13 +31,9 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-18T20:45:13-06:00",
+    "generated_at": "2026-09-18T21:09:34-06:00",
     "petition_count": 181,
     "available": 227,
-    "new_petitions_last_run": [
-      "2026-09-Big-Food-petition-PL",
-      "2026-09-toxic-coffee-petition-PL"
-    ],
     "unbrauchbare": {
       "2023-06-deaths-at-sea-testing-PL": "2026-09-05T16:48:37-06:00",
       "2023-07-simon-1-PL": "2026-09-05T16:48:37-06:00",
@@ -86,6 +82,7 @@
       "lucas-test-donate-petition-PL": "2026-09-18T20:42:20-06:00",
       "lucas-test-donation-2-petition-PL": "2026-09-18T20:42:20-06:00"
     },
+    "new_petitions_last_run": [],
     "lauf_verlauf": [
       {
         "zeit": "2026-09-18T20:45:13-06:00",
@@ -102,10 +99,26 @@
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
         "neu": 2
+      },
+      {
+        "zeit": "2026-09-18T21:09:34-06:00",
+        "gesamt": 181,
+        "online": 181,
+        "offline": 0,
+        "ohne_titel": 0,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 0,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 169,
+        "juengstes_start": "2026-09-01",
+        "mit_code_im_text": 0,
+        "herkunft": "lokal_cron",
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-18T20:45:13-06:00",
+      "zeit": "2026-09-18T21:09:34-06:00",
       "gesamt": 181,
       "online": 181,
       "offline": 0,
