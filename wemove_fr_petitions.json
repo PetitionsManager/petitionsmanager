@@ -31,7 +31,7 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-19T07:04:55-06:00",
+    "generated_at": "2026-09-19T07:27:55-06:00",
     "petition_count": 226,
     "available": 292,
     "unbrauchbare": {
@@ -104,22 +104,6 @@
     },
     "new_petitions_last_run": [],
     "lauf_verlauf": [
-      {
-        "zeit": "2026-09-18T19:20:07-06:00",
-        "gesamt": 226,
-        "online": 218,
-        "offline": 8,
-        "ohne_titel": 8,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 8,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 185,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
       {
         "zeit": "2026-09-18T19:46:56-06:00",
         "gesamt": 226,
@@ -583,10 +567,26 @@
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
         "neu": 0
+      },
+      {
+        "zeit": "2026-09-19T07:27:55-06:00",
+        "gesamt": 226,
+        "online": 218,
+        "offline": 8,
+        "ohne_titel": 8,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 8,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 185,
+        "juengstes_start": "2026-09-01",
+        "mit_code_im_text": 0,
+        "herkunft": "lokal_cron",
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-19T07:04:55-06:00",
+      "zeit": "2026-09-19T07:27:55-06:00",
       "gesamt": 226,
       "online": 218,
       "offline": 8,
