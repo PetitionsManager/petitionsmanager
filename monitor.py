@@ -879,6 +879,17 @@ def main() -> None:
                 except Exception as exc:   # eine Plattform darf den Lauf nicht kippen
                     core.log(f"!! {p.name} fehlgeschlagen: {exc!r} – übersprungen, "
                              "die übrigen Plattformen laufen weiter.")
+                    # ⚠️⚠️ Weiterlaufen ja, VERSCHWEIGEN nein (19.9.2026). Bis
+                    # hierher stand der Fehler nur im Protokoll — in der CI
+                    # ohne Token nicht einmal lesbar. Die Kachel blieb grün,
+                    # der Lauf endete mit Exit 0. Change.org ist so über
+                    # Wochen bei JEDEM Lauf in der Nachprüfung abgestürzt
+                    # (Invalid IPv6 URL), verlor jedes Mal ~470 geprüfte
+                    # Kandidaten und sah dabei gesund aus. Ein abgefangener
+                    # Absturz, den niemand sieht, ist schlimmer als einer, der
+                    # den Lauf kippt.
+                    if p.data_file:
+                        core.absturz_vermerken(p.data_file, p.name, exc)
         finally:
             # AUCH BEI ABBRUCH schreiben. Der CI-Lauf schickt SIGINT, sobald die
             # gemeinsame Frist erreicht ist (scrape.yml, "Zeitrahmen beim

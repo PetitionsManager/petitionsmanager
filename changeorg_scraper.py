@@ -400,6 +400,31 @@ def scrape_petition(fetcher: core.Fetcher, slug: str, sprache: str = "de",
     Parser-Problem — hätte damit eine deutsche Petition für immer aus dem Vorrat
     genommen. Unter 60 gemessenen Kandidaten kam der Fall zwar nicht vor, aber
     er kostet nichts, ihn auszuschließen, und alles, ihn zu übersehen."""
+    # ⚠️⚠️ EIN Satz darf höchstens sich selbst kosten (19.9.2026). Bis hierher
+    # riss eine unzerlegbare Adresse den ganzen Lauf mit: am 19.9. stürzte die
+    # Nachprüfung nach 60 Sekunden mit ValueError('Invalid IPv6 URL') ab —
+    # Pythons Zerleger wirft das bei einer eckigen Klammer im Adressteil, und
+    # die kam NICHT aus unserem Bestand (alle 2.618 Sätze geprüft, 0 Treffer),
+    # sondern von einem Weiterleitungsziel. Der Absturz kostete jedes Mal den
+    # Abschluss-Save und damit ~470 geprüfte, aber nie vermerkte Kandidaten.
+    #
+    # ⚠️ Bewusst um den GANZEN Rumpf, nicht nur um fetcher.get(): wo genau die
+    # Ausnahme entstand, ist NICHT belegt — der Abruf, das Weiterleitungsziel
+    # und das Auswerten der Seite kommen alle in Frage. Ein Riegel, der nur die
+    # vermutete Stelle abdeckt, sähe aus wie eine Reparatur und wäre keine.
+    # „error" ist der richtige Ausgang: der Aufrufer zählt ihn nicht als
+    # geprüft, der Kandidat bleibt im Vorrat und kommt wieder.
+    try:
+        return _scrape_petition(fetcher, slug, sprache, merker)
+    except Exception as exc:
+        core.log(f"  Satz nicht verarbeitbar ({exc!r}) – übersprungen: "
+                 f"{slug[:60]}")
+        return "error", None
+
+
+def _scrape_petition(fetcher: core.Fetcher, slug: str, sprache: str = "de",
+                     merker: dict | None = None) -> tuple[str, dict | None]:
+    """Der eigentliche Abruf; Ausnahmen fängt scrape_petition ab."""
     url = f"{BASE_URL}/p/{slug}"
     resp = fetcher.get(url)
     if resp is None:

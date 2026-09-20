@@ -120,6 +120,33 @@ def durchgang(limit: int | None, protokoll: Path) -> dict:
             "quote": len(fehler) / versuche, "available": available}
 
 
+def diagnose() -> str:
+    """Die Selbstauskunft des Scrapers zum Verwerfungs-Register.
+
+    ⚠️⚠️ DER Messwert dieses Skripts. `merke_verworfene()` gibt das Register
+    nur frei, wenn der Lauf an bekannten Sätzen BELEGT hat, dass seine Prüfung
+    noch funktioniert (VERWORFEN_BELEG_MIN = 10). Bleibt `belegt` darunter,
+    werden die verworfenen Kandidaten weggeworfen statt vermerkt — und
+    derselbe Stapel kommt im nächsten Lauf wieder. Am 19.9.2026 stand im
+    exportierten Bestand genau das: belegt 9, Schwelle 10, register_nachher
+    null, Phase „2-nachprüfung läuft" — die CI-Frist hatte mitten in der
+    Nachprüfung abgeschnitten. Ein Lauf, der den Bestand vergrößert, aber das
+    Register nicht schreibt, sieht nach Fortschritt aus und ist keiner.
+    """
+    if not STORE.exists():
+        return "kein Bestand"
+    d = json.loads(STORE.read_text(encoding="utf-8")).get("_meta", {}).get(
+        "verwerfungs_diagnose") or {}
+    if not d:
+        return "keine Diagnose im Bestand"
+    nachher = d.get("register_nachher")
+    stand_ = ("Register GESCHRIEBEN" if nachher
+              else "Register NICHT geschrieben")
+    return (f"{stand_} · Phase {d.get('phase')} · belegt {d.get('belegt')}/"
+            f"{d.get('schwelle')} · Verwerfungen {d.get('verwerfungen')} · "
+            f"Register {d.get('register_vorher')} -> {nachher}")
+
+
 def bericht(e: dict) -> None:
     print(f"    {e['dauer']/60:5.1f} min · Exit {e['exit']} · "
           f"+{e['neu_im_bestand']} im Bestand · +{e['neu_im_register']} "
@@ -128,6 +155,7 @@ def bericht(e: dict) -> None:
         codes = ", ".join(f"{c}×{n}" for c, n in sorted(e["codes"].items()))
         print(f"    {e['fehler']} Fehlversuch(e) ({e['quote']:.1%})"
               + (f" · Codes: {codes}" if codes else " · ohne HTTP-Code"))
+    print(f"    {diagnose()}")
 
 
 def haltegrund(e: dict) -> str | None:
@@ -198,7 +226,8 @@ def abgleich_mit_veroeffentlichtem_stand() -> str | None:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--probe", action="store_true",
-                    help="ein kurzer Durchgang mit Messbericht, dann Schluss")
+                    help="EIN vollständiger Durchgang mit Messbericht, dann "
+                         "Schluss (~500 Abrufe, ~13 min)")
     ap.add_argument("--ohne-abgleich", action="store_true",
                     dest="ohne_abgleich",
                     help="den Frischeabgleich gegen den veröffentlichten Stand "
@@ -206,8 +235,15 @@ def main() -> int:
     ap.add_argument("--durchgaenge", type=int, default=0,
                     help="höchstens so viele Durchgänge")
     ap.add_argument("--limit", type=int,
-                    help="Abrufe je Durchgang (Vorgabe: 100 beim Probelauf, "
-                         "sonst der Deckel des Scrapers = 500)")
+                    help="Abrufe je Durchgang. ⚠️⚠️ NUR zum Ausprobieren, "
+                         "NICHT zum Aufholen: --limit schaltet in "
+                         "changeorg_scraper.py (Zeile 716) die NACHPRÜFUNG ab "
+                         "— und die ist die Positivkontrolle, ohne die "
+                         "merke_verworfene() das Register nicht freigibt. Ein "
+                         "gedeckelter Lauf holt also Kandidaten, verwirft sie "
+                         "und VERGISST sie, genau wie der Zustand, den wir "
+                         "beheben wollen. Ohne Angabe: der Deckel des "
+                         "Scrapers (500).")
     a = ap.parse_args()
     if not a.probe and a.durchgaenge <= 0:
         ap.error("entweder --probe oder --durchgaenge N")
@@ -231,7 +267,14 @@ def main() -> int:
         return 0
 
     runden = 1 if a.probe else a.durchgaenge
-    limit = a.limit or (100 if a.probe else None)
+    # ⚠️ Der Probelauf ist bewusst ein VOLLER Durchgang (kein Deckel). Ein
+    # gedeckelter Lauf überspränge die Nachprüfung und damit die
+    # Positivkontrolle des Registers — er wäre schnell, würde aber genau das
+    # NICHT prüfen, worauf es ankommt: ob dieser Rechner einen Durchgang bis
+    # zum Register-Schreiben durchbringt. Am 19.9.2026 stand im Bestand
+    # "belegt: 9, schwelle: 10, register_nachher: null": die CI wurde mitten in
+    # der Nachprüfung abgeschnitten, 474 geprüfte Kandidaten gingen verloren.
+    limit = a.limit
     ziel = Path("changeorg-aufholen.log")
     getan = 0
     for i in range(1, runden + 1):

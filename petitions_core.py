@@ -2707,6 +2707,50 @@ def _bestandspruefung(store: dict, vorher: dict,
     return neu, kennzahlen
 
 
+def absturz_vermerken(data_file: Path, name: str, exc: BaseException) -> None:
+    """Einen abgefangenen Scraper-Absturz SICHTBAR machen.
+
+    ⚠️⚠️ Anlass (19.9.2026): monitor.py fängt eine abgestürzte Plattform ab,
+    damit sie den Sammellauf nicht kippt — schrieb den Fehler aber nur ins
+    Protokoll. Folge: der Lauf endet mit Exit 0, die Kachel bleibt grün, und
+    in der CI ist das Protokoll ohne Token gar nicht lesbar. Change.org ist
+    so über Wochen bei jedem Lauf an derselben Stelle abgestürzt
+    (`ValueError('Invalid IPv6 URL')` in der Nachprüfung), hat jedes Mal rund
+    470 geprüfte Kandidaten verloren und sah dabei durchgehend gesund aus.
+
+    Der übliche Weg über befund() trägt hier NICHT: der schreibt die Meldung
+    erst beim Abschluss-Save ins _meta — und genau der findet nach einem
+    Absturz nie statt. Deshalb wird hier direkt in die Bestandsdatei
+    geschrieben, mit derselben Atomik wie save_store.
+    """
+    text = (f"Der Scraper ist mitten im Lauf abgestürzt ({exc!r}). Was bis "
+            f"dahin geholt wurde, steht im Bestand; alles danach fehlt — "
+            f"darunter der Abschluss-Save, der die Register und die Bilanz "
+            f"schreibt. Der Lauf sieht trotzdem grün aus, weil eine Plattform "
+            f"den Sammellauf nicht kippen darf.")
+    text_en = (f"The scraper crashed mid-run ({exc!r}). Whatever was fetched "
+               f"up to that point is on record; everything after is missing, "
+               f"including the final save that writes the registers and the "
+               f"ledger.")
+    eintrag = {"stufe": "warnung", "thema": "Scraper abgestürzt",
+               "text": text, "thema_en": "scraper crashed", "text_en": text_en,
+               "zeit": now_iso()}
+    if in_github_actions():
+        einzeilig = " ".join(f"{name}: {text}".split())[:400]
+        print(f"::error title=Scraper abgestürzt::{einzeilig}")
+    try:
+        d = json.loads(data_file.read_text(encoding="utf-8"))
+    except (ValueError, OSError):
+        return                      # kein Bestand: nichts zu vermerken
+    meta = d.setdefault("_meta", {})
+    meta["befunde"] = [b for b in (meta.get("befunde") or [])
+                       if b.get("thema") != "Scraper abgestürzt"] + [eintrag]
+    meta["health_warning"] = f"{eintrag['thema']}: {text}"
+    tmp = data_file.with_suffix(".tmp.json")
+    tmp.write_text(json.dumps(d, ensure_ascii=False), encoding="utf-8")
+    tmp.replace(data_file)
+
+
 def _melde_an_ci(name: str, befunde: list[dict]) -> None:
     """Befunde dorthin schreiben, wo man sie OHNE ABSICHT sieht: als Annotation
     am Lauf und als Tabelle in seiner Zusammenfassung. Außerhalb von GitHub

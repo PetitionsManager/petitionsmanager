@@ -1257,6 +1257,73 @@ pruefe("bilanz: verschwundene Archiv-Kandidaten sind erledigt, nicht offen",
 
 
 # ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# Abgefangener Absturz — ein Scraper, der stirbt, darf nicht grün aussehen
+#
+# Anlass 19.9.2026: Change.org stürzte bei JEDEM Lauf in der Nachprüfung ab
+# (ValueError('Invalid IPv6 URL') aus einem Weiterleitungsziel). monitor.py
+# fing das ab, damit der Sammellauf weiterläuft, schrieb den Fehler aber nur
+# ins Protokoll — in der CI ohne Token nicht lesbar. Kachel grün, Lauf Exit 0,
+# ~470 geprüfte Kandidaten je Lauf verloren, wochenlang unbemerkt.
+# ---------------------------------------------------------------------------
+def absturz_meta(mit_bestand: bool = True) -> dict:
+    """Vermerkt einen Absturz in einem Kunstbestand, liefert dessen _meta."""
+    datei = Path(tempfile.mkdtemp()) / "kunst_petitions.json"
+    if mit_bestand:
+        datei.write_text(json.dumps({"a": {"status": "online"},
+                                     "_meta": {"befunde": []}}))
+    core.absturz_vermerken(datei, "Kunst", ValueError("Invalid IPv6 URL"))
+    if not datei.exists():
+        return {}
+    return json.loads(datei.read_text()).get("_meta", {})
+
+
+_am = absturz_meta()
+pruefe("absturz: Befund landet im Bestand",
+       [b["thema"] for b in _am.get("befunde", [])], ["Scraper abgestürzt"])
+pruefe("absturz: Stufe warnung – die Kachel wird rot",
+       [b["stufe"] for b in _am.get("befunde", [])], ["warnung"])
+pruefe("absturz: health_warning gesetzt (ältere Leser sehen ihn auch)",
+       bool(_am.get("health_warning")), True)
+pruefe("absturz: die echte Fehlermeldung steht drin, nicht nur „Fehler“",
+       "Invalid IPv6 URL" in str(_am.get("befunde")), True)
+# Gegenprobe: der Vermerk darf KEINE Daten kosten – sonst wäre die Heilung
+# schlimmer als die Krankheit.
+_ad = Path(tempfile.mkdtemp()) / "kunst_petitions.json"
+_ad.write_text(json.dumps({"a": {"status": "online"}, "b": {"status": "online"},
+                           "_meta": {}}))
+core.absturz_vermerken(_ad, "Kunst", RuntimeError("x"))
+pruefe("absturz: Datensätze bleiben unangetastet",
+       len([k for k in json.loads(_ad.read_text()) if k != "_meta"]), 2)
+pruefe("absturz: fehlende Bestandsdatei wirft nicht",
+       absturz_meta(mit_bestand=False), {})
+core.absturz_vermerken(_ad, "Kunst", RuntimeError("y"))
+core.absturz_vermerken(_ad, "Kunst", RuntimeError("z"))
+pruefe("absturz: mehrfaches Vermerken häuft sich nicht an",
+       len(json.loads(_ad.read_text())["_meta"]["befunde"]), 1)
+
+# Und die Stelle, an der es knallte: eine unzerlegbare Adresse kostet EINEN
+# Satz, nicht den Lauf. Fetcher, der wirft — genau wie urllib bei „[“.
+class _WerfenderFetcher:
+    def get(self, url, timeout=None):
+        raise ValueError("Invalid IPv6 URL")
+
+
+pruefe("absturz: kaputte Adresse ergibt error statt Ausnahme",
+       changeorg.scrape_petition(_WerfenderFetcher(), "egal")[0], "error")
+# Gegenprobe: ein gesunder Fetcher darf NICHT „error“ liefern, sonst wäre der
+# Test auch bei einer Funktion bestanden, die immer error sagt.
+class _ToterFetcher:
+    def get(self, url, timeout=None):
+        return None
+
+
+pruefe("absturz: Gegenprobe – error kommt nicht aus dem Nichts",
+       changeorg.scrape_petition(_ToterFetcher(), "egal")[1], None)
+
+
+# ---------------------------------------------------------------------------
 print()
 if fehler:
     print(f"::error::selbsttest.py: {len(fehler)} Fall/Fälle fehlgeschlagen "
