@@ -527,7 +527,12 @@ def run(args) -> None:
     discovered = discover_slugs(fetcher)
     # Vorläufiger Wert, überlebt jeden Abbruch; der Abschluss-Save ersetzt ihn
     # durch len(erreichbar) (s. save_store: _TLS.lauf_meta, 24.8.2026).
-    core.lauf_meta_setzen(available=len(discovered))
+    # ⚠️ Die Bilanz bekommt die VOLLE Entdeckung, nicht `erreichbar`. Die
+    # unbrauchbaren hier abzuziehen war die alte Notlösung, um den Balken grün
+    # zu bekommen — sie versteckte, wie viele Testseiten die Quelle mitliefert.
+    # Jetzt werden sie über das Register `unbrauchbare` einsortiert und
+    # ausgewiesen; der Nenner bleibt ehrlich.
+    core.entdeckt_setzen(discovered)
     # WeMove verlinkt seine Test- und Entwurfsseiten auf der Startseite mit,
     # die Entdeckung findet sie also jeden Tag wieder. Ohne den Merkzettel
     # würden sie hier als „neu" gelten und das Abrufbudget genauso auffressen
@@ -767,7 +772,7 @@ def run_sprache(args, lang: str = "en") -> None:
             save()
 
     entdeckt = discover_sprache_slugs(fetcher, lang)
-    core.lauf_meta_setzen(available=len(entdeckt))   # überlebt Abbruch
+    core.entdeckt_setzen(entdeckt)   # überlebt Abbruch, trägt die Bilanz
     neu_slugs = [p for p in entdeckt
                  if p not in store and p not in unbrauchbare]
     if args.limit:

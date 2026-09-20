@@ -539,6 +539,10 @@ def run(args) -> None:
     log("Scanne Sitemaps nach deutschen Kandidaten …")
     discovered = discover_slugs(fetcher)
     lauf_meta["available"] = len(discovered)
+    # Die Menge zusätzlich für die Bilanz (19.9.2026). Change.org führt sein
+    # eigenes lauf_meta (es gewinnt über das im Thread-Speicher), deshalb steht
+    # die Zeile darüber unverändert — hier geht es allein um die MENGE.
+    core.entdeckt_setzen(discovered)
     repariert = heile_abgeschnittene(store, discovered, save)
     # ⚠️⚠️ Der Register-Filter ist der Unterschied zwischen „langsam" und „nie".
     # Ohne ihn lieferte die Entdeckung dieselben verworfenen Kandidaten in
@@ -943,7 +947,11 @@ def run_en(args) -> None:
 
     entdeckt, offset = discover_en_slugs(fetcher, offset)
     # Überlebt jeden Abbruch (s. save_store: _TLS.lauf_meta, 24.8.2026).
-    core.lauf_meta_setzen(available=len(entdeckt))
+    # ⚠️ `entdeckt` ist hier nur das FENSTER dieses Laufs (discover_en_slugs
+    # läuft mit offset im Rundlauf), nicht der ganze Katalog. Die Bilanz sagt
+    # damit „von dem, was dieser Lauf gesehen hat, ist nichts offen" — was für
+    # den englischen Zweig die richtige Aussage ist.
+    core.entdeckt_setzen(entdeckt)
     neu = [s for s in entdeckt if s not in store][:args.limit or EN_NEUE_JE_LAUF]
     log(f"{len(neu)} neue englische Petition(en) zum Scrapen "
         f"(Gesamt im Store: {len(store)}).")

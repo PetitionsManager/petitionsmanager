@@ -1120,6 +1120,102 @@ def load_meta(data_file: Path) -> dict:
     return {}
 
 
+# ---- Bilanz eines Laufs (19.9.2026) ------------------------------------
+# Register, über die ein entdeckter Kandidat als ERLEDIGT gelten kann, in der
+# Reihenfolge der Prüfung. Jeder Kandidat zählt in genau einen Topf; wer schon
+# im Bestand steht, wird gar nicht erst gefragt. Neue Register gehören HIER
+# hinein — sonst rutschen ihre Kandidaten stillschweigend nach "offen" und der
+# Zweig sieht auf Dauer unfertig aus, obwohl niemand etwas holen müsste.
+BILANZ_TOEPFE = (
+    ("unbrauchbar",     ("unbrauchbare",)),       # geholt, geprüft, keine Petition
+    ("verworfen",       ("verworfen",)),          # geholt, geprüft, aussortiert
+    ("dublette",        ("dubletten",)),          # zweiter Pfad auf dieselbe Seite
+    ("zurueckgestellt", ("archive_todo", "backfill_todo")),   # bekannt, später
+)
+# Wie viele offene Schlüssel als Beispiel mitgeschrieben werden. Die Liste ist
+# zum HINSEHEN da ("was fehlt denn?"), nicht als Arbeitsvorrat — bei Change.org
+# wären es über 13.000 und der Bestand würde spürbar größer.
+BILANZ_BEISPIELE = 50
+# Wie viele unbrauchbare Kandidaten die Kachel aufklappt. Der Rest steht in
+# data/unbrauchbar.json — 102 Zeilen auf einer Kachel liest niemand, und die
+# Datei ist ohnehin die Fassung, mit der sich rechnen lässt.
+UNBRAUCHBAR_ZEIGEN = 25
+
+
+def _bilanz(store: dict, entdeckt, meta: dict, zeit: str,
+            zusatz: dict | None = None) -> dict | None:
+    """Die Bilanz eines Laufs: jeder entdeckte Kandidat in genau einem Topf.
+
+        gefunden = im_bestand + unbrauchbar + verworfen + zurueckgestellt + offen
+
+    ⚠️⚠️ Die Gleichung gilt durch KONSTRUKTION — jeder Topf wird aus der
+    Restmenge herausgeschnitten, die Zahlen entstehen erst danach durch len().
+    Genau daran ist die alte Anzeige gescheitert: sie hielt `available` (was
+    DIESER Lauf sah) gegen len(store) (was je gesammelt wurde) und bildete aus
+    zwei verschiedenen Grundgesamtheiten einen Anteil. Ergebnisse waren
+    "1906 von ~1871" und ein Rückstand, der nie kleiner wurde.
+
+    `meta` ist die Sicht NACH diesem Lauf (prev, überschrieben von dem, was der
+    Aufrufer gerade mitgibt) — sonst zählte ein Kandidat, den genau dieser Lauf
+    als unbrauchbar abgelegt hat, noch als offen.
+
+    Ohne entdeckte Menge gibt es KEINE Bilanz, sondern None: ein Altbestand und
+    eine abgebrochene Entdeckung dürfen nicht als "alles erledigt" durchgehen.
+    Eine erfundene 100 % wäre schlimmer als keine Angabe.
+    """
+    if entdeckt is None:
+        return None
+    zusatz = zusatz or {}
+    rest = set(entdeckt)
+    gefunden = len(rest)
+    im_bestand = rest & set(store)
+    rest -= im_bestand
+    toepfe: dict[str, int] = {}
+    for name, felder in BILANZ_TOEPFE:
+        # Zwei Quellen je Topf: die dauerhaften Register im _meta (wemove führt
+        # `unbrauchbare` über Läufe hinweg) und das, was GENAU DIESER Lauf
+        # unterwegs eingeordnet hat (foodwatch erkennt Kategorieseiten erst
+        # beim Abruf). Beides zusammen, sonst fehlt je nach Scraper die Hälfte.
+        treffer: set = set(zusatz.get(name) or ())
+        for feld in felder:
+            treffer |= set(als_register(meta.get(feld)))
+        treffer &= rest
+        rest -= treffer
+        toepfe[name] = len(treffer)
+    bilanz = {"stand": zeit,
+              "gefunden": gefunden,
+              "im_bestand": len(im_bestand),
+              **toepfe,
+              "offen": len(rest),
+              "offene_beispiele": sorted(rest)[:BILANZ_BEISPIELE],
+              # Sätze, die dieser Lauf NICHT entdeckt hat, die aber im Bestand
+              # stehen: bundestag holt beendete Petitionen per --backfill,
+              # avaaz aus dem Archiv. Das ist der Wert, der früher als
+              # "der Bestand ist größer als der Lauf" umschrieben wurde.
+              "bestand_gesamt": len(store),
+              "bestand_ausserhalb": len(store) - len(im_bestand)}
+    summe = bilanz["im_bestand"] + bilanz["offen"] + sum(toepfe.values())
+    if summe != gefunden:
+        # Kann nur bei einem Programmierfehler auftreten (die Töpfe sind
+        # disjunkt). Sichtbar machen statt schweigen — eine Bilanz, die nicht
+        # aufgeht, ist keine Bilanz.
+        bilanz["fehler"] = f"Summe {summe} weicht von gefunden {gefunden} ab"
+    # ⚠️⚠️ Schlüsselraum-Sperre. Die ganze Rechnung ist ein Mengenschnitt; sie
+    # setzt voraus, dass die Entdeckung DIESELBEN Schlüssel liefert, unter denen
+    # der Bestand ablegt. foodwatch sammelt z. B. ganze PFADE
+    # (/kampagnen/x/petition-y), legt aber unter dem letzten Wegstück ab —
+    # ein Schnitt daraus ist leer, und die Kachel meldete "alles offen",
+    # vollkommen plausibel aussehend. Ein leerer Schnitt bei zwei nichtleeren
+    # Mengen ist praktisch nie die Wahrheit: lieber als Fehler ausweisen und
+    # die Anzeige stumm schalten, als eine erfundene Zahl zeigen.
+    if store and gefunden and not im_bestand:
+        bilanz["fehler"] = (
+            f"kein einziger der {gefunden} entdeckten Schlüssel steht im "
+            f"Bestand ({len(store)} Sätze) – Verdacht auf verschiedene "
+            f"Schlüsselräume (Pfad gegen Slug?)")
+    return bilanz
+
+
 def save_store(store: dict, data_file: Path, extra_meta: dict | None = None,
                quiet: bool = False) -> None:
     """Atomar (Temp-Datei + Rename): ein Abbruch mitten im Schreiben hinterlässt
@@ -1179,6 +1275,16 @@ def save_store(store: dict, data_file: Path, extra_meta: dict | None = None,
         verlauf.append(eintrag)
         meta_extra["lauf_verlauf"] = verlauf[-VERLAUF_MAX:]
         meta_extra["kennzahlen"] = kennzahlen
+        # Die Bilanz nur beim ABSCHLUSS-Save (quiet=False): eine
+        # Zwischenspeicherung sähe den halb abgearbeiteten Vorrat und schriebe
+        # einen Rückstand fest, den es am Ende des Laufs nicht mehr gibt.
+        # ⚠️ Registerstand NACH diesem Lauf lesen: was der Aufrufer gerade
+        # mitgibt (meta_extra) gewinnt über den alten Stand (prev).
+        bilanz = _bilanz(store, getattr(_TLS, "entdeckt", None),
+                         {**prev, **meta_extra}, kennzahlen["zeit"],
+                         getattr(_TLS, "entdeckt_zusatz", None))
+        if bilanz is not None:
+            meta_extra["bilanz"] = bilanz
         # ⚠️⚠️ Ab wann tragen die Einträge "herkunft" und "neu"? Die Grenze muss
         # im Bestand STEHEN, sonst kann ein späterer Auswerter „vor der
         # Umstellung" nicht von „Feld ging verloren" unterscheiden — und würde
@@ -1358,6 +1464,11 @@ def set_progress_platform(key: str) -> None:
     # Sammellaufs available/Neu-Liste der vorigen und schriebe sie in ihr
     # eigenes _meta (save_store nimmt _TLS.lauf_meta bei jedem Schreiben mit).
     _TLS.lauf_meta = {}
+    # Dasselbe für die entdeckte Menge (19.9.2026). Sie liegt bewusst NEBEN
+    # lauf_meta und nicht darin: save_store schreibt lauf_meta wörtlich ins
+    # _meta, und ein set() ist nicht JSON-fähig — der Export risse ab.
+    _TLS.entdeckt = None
+    _TLS.entdeckt_zusatz = {}
 
 
 def lauf_meta_setzen(**felder) -> None:
@@ -1369,6 +1480,57 @@ def lauf_meta_setzen(**felder) -> None:
     d = getattr(_TLS, "lauf_meta", None)
     if d is not None:
         d.update(felder)
+
+
+def entdeckt_setzen(menge) -> set:
+    """Merkt die KANDIDATENMENGE dieses Laufs – nicht nur ihre Anzahl.
+
+    Bis zum 19.9.2026 meldete jeder Scraper nur `available=len(...)`. Aus einer
+    Anzahl lässt sich aber nicht sagen, WAS fehlt: „606 von ~708" konnte heißen
+    „102 sind noch zu holen" oder „102 sind längst geprüft und als unbrauchbar
+    abgelegt". Im Dashboard stand beides als Rückstand, und der Vorlauf-Planer
+    schickte deshalb täglich fünf WeMove-Zweige hinter Seiten her, die der
+    Scraper unmittelbar danach überspringt — auf Kosten des WAF-Fensters.
+
+    Mit der Menge rechnet save_store die Bilanz als Mengenoperation (_bilanz):
+    jeder entdeckte Kandidat landet in genau einem Topf. `available` wird
+    weiterhin gesetzt, damit ältere Leser unverändert weiterlaufen.
+
+    ⚠️ Die Menge wird dabei ENTDOPPELT. Kam derselbe Schlüssel zweimal aus der
+    Entdeckung, zählte ihn `len(liste)` doppelt — ein Kandidat, der sich nie
+    abarbeiten ließ, weil er nur einmal existiert. Eine Entdopplung wird
+    gemeldet, nicht verschwiegen: sie ist ein Befund über die Quellseite.
+    """
+    roh = list(menge or ())
+    m = {str(s) for s in roh}
+    if len(m) != len(roh):
+        log(f"Entdeckung: {len(roh) - len(m)} doppelte Kandidatenschlüssel "
+            f"zusammengefasst ({len(roh)} → {len(m)}).")
+    _TLS.entdeckt = m
+    _TLS.entdeckt_zusatz = {}
+    lauf_meta_setzen(available=len(m))
+    return m
+
+
+def entdeckt_klassifizieren(**toepfe) -> None:
+    """Ordnet Kandidaten einem Bilanz-Topf zu, die DIESER Lauf unterwegs
+    eingeordnet hat – z. B. `unbrauchbar=` für Seiten ohne Unterschriftenzähler
+    oder `dublette=` für einen zweiten Pfad auf dieselbe Petition.
+
+    Der Unterschied zu den Registern im _meta: die gelten über Läufe hinweg
+    (wemove merkt sich unbrauchbare Seiten, um sie nicht täglich neu zu holen),
+    das hier gilt nur für den laufenden Lauf. Für die Bilanz zählt beides
+    gleich — ein eingeordneter Kandidat ist erledigt, egal woher man das weiß.
+
+    ⚠️ Erwartet MENGEN von Schlüsseln, keine Anzahlen. Eine Anzahl ließe sich
+    nicht überschneidungsfrei verrechnen: derselbe Kandidat könnte in zwei
+    Töpfen gezählt werden und die Bilanz ginge über 100 %.
+    """
+    d = getattr(_TLS, "entdeckt_zusatz", None)
+    if d is None:
+        return
+    for name, menge in toepfe.items():
+        d.setdefault(name, set()).update(str(s) for s in (menge or ()))
 
 
 def prog(**kw) -> None:
@@ -3594,6 +3756,12 @@ def _live_card(platform: Platform, schnappschuss: bool = False,
     # und das muss dranstehen, sonst versteckt die Kachel genau den Ausfall,
     # den sie melden soll. Zwei Wochen Stillstand sind so unbemerkt geblieben.
     available = meta.get("available")
+    # Die Bilanz des letzten Laufs (19.9.2026). Fehlt sie, ist der Bestand vor
+    # der Umstellung entstanden oder der Lauf hat die Entdeckung nicht beendet
+    # — dann greifen unten die alten Rückfälle, und zwar SICHTBAR: ein stilles
+    # Zurückfallen auf eine Rechnung, die den Rückstand anders definiert, wäre
+    # genau der Fehler, der hier behoben wird.
+    bilanz = meta.get("bilanz") or None
     if host_ausgelassen:
         # Vorrang vor available/Bestand: von diesem Host kam in diesem Lauf
         # nichts Frisches, egal was die Zahlen nahelegen. eko zeigte so „39 von
@@ -3607,6 +3775,52 @@ def _live_card(platform: Platform, schnappschuss: bool = False,
                     f"und ihre Zahlen stammen aus früheren Läufen")
         comp_sub_en = (f"source blocked in this run · the {len(store)} records "
                        f"and their numbers are from earlier runs")
+    elif bilanz and bilanz.get("gefunden") and not bilanz.get("fehler"):
+        # ---- Der Regelfall seit 19.9.2026: die Bilanz des Laufs ------------
+        # EINE Formulierung für alle 41 Kacheln. Vorher gab es drei, die sich
+        # gegenseitig widersprachen: „X von ~Y abgearbeitet", „alle X in diesem
+        # Lauf gefundenen sind im Bestand" und ein nacktes „—". changeorg stand
+        # damit auf 16 %, changeorg_en auf 100 % — dieselbe Plattform.
+        #
+        # Die Bilanz teilt jeden entdeckten Kandidaten in genau einen Topf
+        # (core._bilanz). „Erledigt" ist alles außer `offen`: ein Kandidat, den
+        # wir geprüft und als unbrauchbar abgelegt haben, ist bearbeitet — er
+        # darf nicht ewig als Rückstand erscheinen und den Vorlauf-Planer
+        # Abrufe kosten, die nie einen Satz bringen.
+        gefunden = bilanz["gefunden"]
+        offen = bilanz.get("offen", 0)
+        pct = min(100, round((gefunden - offen) / gefunden * 100))
+        comp_wert, comp_wert_en = f"{pct}%", f"{pct}%"
+        comp_cls, comp_lbl, comp_lbl_en = (
+            ("full", "vollständig", "complete") if offen == 0 else
+            ("full", "fast vollständig", "nearly complete") if pct >= 95 else
+            ("grow", "Rückstand", "backlog") if pct >= 50 else
+            ("low", "großer Rückstand", "large backlog"))
+        # Nur benennen, was es gibt — sonst steht auf 35 Kacheln dreimal „0".
+        teile, teile_en = [], []
+        for zahl, de, en in (
+                (bilanz.get("im_bestand", 0), "im Bestand", "on record"),
+                (bilanz.get("unbrauchbar", 0), "unbrauchbar", "unusable"),
+                (bilanz.get("verworfen", 0), "verworfen", "rejected"),
+                (bilanz.get("dublette", 0), "Dublette(n)", "duplicates"),
+                (bilanz.get("zurueckgestellt", 0), "zurückgestellt", "deferred"),
+                (offen, "offen", "open")):
+            if zahl or de == "offen":     # „0 offen" ist die Kernaussage
+                teile.append(f"{zahl} {de}")
+                teile_en.append(f"{zahl} {en}")
+        rest = bilanz.get("bestand_ausserhalb", 0)
+        if rest:
+            # bundestag holt beendete Petitionen per --backfill, avaaz aus dem
+            # Archiv: die stehen im Bestand, ohne dass dieser Lauf sie listet.
+            # Früher erzeugte genau das „1906 von ~1871" und den Sonderzweig
+            # „der Bestand ist größer als der Lauf".
+            teile.append(f"{rest} weitere im Bestand, von diesem Lauf nicht "
+                         f"gelistet")
+            teile_en.append(f"{rest} more on record, not listed by this run")
+        comp_sub = (f"{' · '.join(teile)} von {gefunden} gefundenen "
+                    f"· {comp_lbl}")
+        comp_sub_en = (f"{' · '.join(teile_en)} of {gefunden} discovered "
+                       f"· {comp_lbl_en}")
     elif not available:
         pct = 0
         comp_cls = "unbekannt"
@@ -3643,10 +3857,11 @@ def _live_card(platform: Platform, schnappschuss: bool = False,
         comp_wert = comp_wert_en = "100%"
         comp_sub = (f"alle {available} in diesem Lauf gefundenen Kandidaten "
                     f"sind im Bestand · der Bestand ({len(store)}) ist größer "
-                    f"als das, was dieser Lauf gesehen hat")
+                    f"als das, was dieser Lauf gesehen hat "
+                    f"· Bilanz noch nicht erhoben")
         comp_sub_en = (f"all {available} candidates found in this run are on "
                        f"record · the record ({len(store)}) is larger than "
-                       f"what this run saw")
+                       f"what this run saw · no ledger yet")
     else:
         # Abgearbeitet = übernommen + geprüft-und-verworfen. Ein verworfener
         # Kandidat ist bearbeitet (geholt, sprachlich geprüft, aussortiert) und
@@ -3677,6 +3892,44 @@ def _live_card(platform: Platform, schnappschuss: bool = False,
                         f"· {comp_lbl}")
             comp_sub_en = (f"{len(store)} of ~{available} discovered candidates "
                            f"· {comp_lbl_en}")
+        # ⚠️ Diese Rechnung kennt nur `verworfen` und zählt jedes andere
+        # Register als Rückstand. Sie steht hier als Rückfall für Bestände ohne
+        # Bilanz — und sagt das auch, statt sich als Wahrheit auszugeben.
+        comp_sub += " · Bilanz noch nicht erhoben (Rückfall auf die alte "
+        comp_sub += "Rechnung, erst der nächste Lauf ist belastbar)"
+        comp_sub_en += (" · no ledger yet (fallback to the old formula, only "
+                        "the next run is dependable)")
+
+    # ---- Die unbrauchbaren getrennt ausweisen (19.9.2026) -----------------
+    # Sie zählen in der Bilanz als erledigt — damit ist die Zahl aber eine
+    # BEHAUPTUNG, solange niemand nachsehen kann, was dahintersteckt. Deshalb
+    # aufklappbar darunter, und maschinenlesbar in data/unbrauchbar.json
+    # (publish.py). Zugeklappt, weil es der Normalfall ist und die Kachel nicht
+    # beherrschen soll; die Zahl steht schon in der Zeile darüber.
+    unbrauchbar_reg = als_register(meta.get("unbrauchbare"))
+    if unbrauchbar_reg:
+        zeilen = "".join(
+            f"<li>{_esc(s)}</li>" for s in sorted(unbrauchbar_reg)[:UNBRAUCHBAR_ZEIGEN])
+        mehr = len(unbrauchbar_reg) - UNBRAUCHBAR_ZEIGEN
+        rest_de = (f"<li>… und {mehr} weitere, vollständig in "
+                   f"data/unbrauchbar.json</li>" if mehr > 0 else "")
+        # ⚠️ Kopf und Hinweis VOR dem f-String zusammensetzen: gleiche
+        # Anführungszeichen INNERHALB eines f-Strings setzen Python 3.12
+        # voraus (PEP 701). Hier läuft 3.14, die CI bringt ihre eigene Fassung
+        # mit — nichts voraussetzen, was ein älterer Übersetzer nicht kennt.
+        kopf = _zs(f"{len(unbrauchbar_reg)} unbrauchbare Kandidaten ansehen",
+                   f"show {len(unbrauchbar_reg)} unusable candidates")
+        hinweis = _zs("Geholt, geprüft, keine Petition — Test-, Entwurfs- oder "
+                      "Inhaltsseiten. Der Merkzettel läuft ab, eine Seite kann "
+                      "also zurückkehren.",
+                      "Fetched, checked, not a petition — test, draft or "
+                      "content pages. The note expires, so a page can return.",
+                      klasse="unbrauchbar__hint")
+        unbrauchbar_html = (
+            f'<details class="unbrauchbar"><summary>{kopf}</summary>{hinweis}'
+            f'<ul class="unbrauchbar__liste">{zeilen}{rest_de}</ul></details>')
+    else:
+        unbrauchbar_html = ""
 
     # Einbruch des Online-Bestands = fast immer ein Quellenproblem, kein echtes
     # Verschwinden der Petitionen (siehe save_store).
@@ -3832,6 +4085,7 @@ def _live_card(platform: Platform, schnappschuss: bool = False,
           {_zs(comp_wert, comp_wert_en, tag="b")}</div>
         <div class="completeness__bar"><div class="completeness__fill" style="width:{pct}%"></div></div>
         {_zs(comp_sub, comp_sub_en, klasse="completeness__sub")}
+        {unbrauchbar_html}
       </div>
       {warn_html}
       {pflege_html}
@@ -5719,6 +5973,15 @@ _DASHBOARD_TEMPLATE = """<!DOCTYPE html>
     overflow:hidden;margin:4px 0 4px}
   .completeness__fill{height:100%;border-radius:999px;transition:width .3s}
   .completeness__sub{font-size:11px;color:var(--muted)}
+  /* Die unbrauchbaren Kandidaten: zugeklappt der Normalfall, deshalb leise
+     gesetzt. <details> braucht kein JavaScript — die Seite ist ein
+     Schnappschuss und muss auch ohne Skripte vollständig lesbar sein. */
+  .unbrauchbar{margin-top:6px;font-size:11px;color:var(--muted)}
+  .unbrauchbar>summary{cursor:pointer;opacity:.85}
+  .unbrauchbar>summary:hover{opacity:1}
+  .unbrauchbar__hint{margin:4px 0 2px}
+  .unbrauchbar__liste{margin:0;padding-left:16px;max-height:190px;
+    overflow-y:auto;word-break:break-all}
   .completeness.full  .completeness__fill{background:var(--online)}
   .completeness.grow  .completeness__fill{background:var(--grow)}
   .completeness.low   .completeness__fill{background:var(--offline)}

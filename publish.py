@@ -514,6 +514,9 @@ def _stamp(iso: str | None) -> float:
 def main() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     manifest = {"platforms": [], "generated_at": None, "format": 2}
+    # Je Zweig das Register der unbrauchbaren Kandidaten — wird unten als
+    # eigene Datei veröffentlicht, damit die Kachelzahl nachprüfbar ist.
+    unbrauchbar_je_key: dict[str, dict] = {}
     by_platform: dict[str, list[dict]] = {}
     texts_by_platform: dict[str, list[str | None]] = {}
     # Je Plattform eine Liste, gleich lang und gleich sortiert wie items:
@@ -542,6 +545,11 @@ def main() -> None:
             "online": 0,
             "new": 0,
             "generated_at": None,
+            # ⚠️ Im GERÜST, nicht erst im Erfolgsfall: ein Zweig ohne
+            # Bestandsdatei bekäme das Feld sonst gar nicht, und „Feld fehlt"
+            # ist von „noch nicht erhoben" nicht zu unterscheiden. null heißt
+            # hier immer dasselbe: wir wissen es nicht.
+            "bilanz": None,
         }
         if p.is_live and p.data_file and p.data_file.exists():
             try:
@@ -555,6 +563,21 @@ def main() -> None:
             meta = data.pop("_meta", {})
             entry["generated_at"] = meta.get("generated_at")
             entry["new"] = len(meta.get("new_petitions_last_run") or [])
+            # ---- Bilanz maschinenlesbar mitgeben (19.9.2026) ---------------
+            # ⚠️ Bis hierher war im Manifest KEINE Angabe zur Vollständigkeit.
+            # Die Balken des Dashboards wurden beim Seitenbau aus den Beständen
+            # gerechnet, und die Bestände werden nicht veröffentlicht — von
+            # außen war also nicht prüfbar, ob ein Zweig durch ist.
+            # `bilanz` fehlt, solange der Zweig seit der Umstellung nicht
+            # gelaufen ist; dann steht das Feld auf null statt auf einem
+            # geschätzten Wert. Ein Auswerter muss „noch nicht erhoben" von
+            # „nichts offen" unterscheiden können.
+            entry["bilanz"] = meta.get("bilanz")
+            # ⚠️ count (unten) ist die AUSGELIEFERTE Zahl nach dem Titelfilter,
+            # bilanz.im_bestand der BESTAND. Beide nebeneinander, nie
+            # gleichsetzen: bei wemove_en sind das 605 gegen 606.
+            unbrauchbar_je_key[p.key] = core.als_register(
+                meta.get("unbrauchbare"))
             # Titellose Datensätze bleiben im Store, gehen aber nicht in die
             # App — siehe brauchbarer_titel().
             brauchbar = [r for r in data.values() if brauchbarer_titel(r)]
@@ -690,6 +713,33 @@ def main() -> None:
 
     (OUT_DIR / "manifest.json").write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    # ---- Die unbrauchbaren Kandidaten als eigene Ausgabe (19.9.2026) -------
+    # Getrennt von den Petitionsdaten, weil es KEINE Petitionen sind: sie
+    # gehören weder in die App noch in die Zählung. Aber sie sind der Grund,
+    # warum eine Kachel nicht auf 100 % stand — ohne die Liste bleibt die Zahl
+    # eine Behauptung. Die Datei ist die Nachprüfung dazu.
+    # ⚠️ Der Zeitstempel ist der der EINORDNUNG, nicht des letzten Abrufs; das
+    # Register läuft ab (UNBRAUCHBAR_ERNEUT_NACH_TAGEN in wemove_scraper.py),
+    # eine Seite kann also zurückkehren. „unbrauchbar" heißt hier deshalb
+    # „beim letzten Hinsehen keine Petition", nicht „für immer erledigt".
+    unbrauchbar = {
+        "generated_at": manifest["generated_at"],
+        "hinweis": ("Kandidaten, die geholt und geprueft wurden und keine "
+                    "Petition sind (Test-, Entwurfs- oder Inhaltsseiten). "
+                    "Sie zaehlen in der Bilanz als erledigt, nicht als "
+                    "Rueckstand."),
+        "zweige": {k: {"anzahl": len(reg),
+                       "eintraege": [{"slug": s, "eingeordnet": z or None}
+                                     for s, z in sorted(reg.items())]}
+                   for k, reg in sorted(unbrauchbar_je_key.items()) if reg},
+    }
+    unbrauchbar["gesamt"] = sum(z["anzahl"]
+                                for z in unbrauchbar["zweige"].values())
+    (OUT_DIR / "unbrauchbar.json").write_text(
+        json.dumps(unbrauchbar, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"  unbrauchbar.json: {unbrauchbar['gesamt']} Eintrag/Einträge "
+          f"aus {len(unbrauchbar['zweige'])} Zweig(en)")
 
     # Scraper-Dashboard als Status-Snapshot mit auf GitHub Pages ausliefern.
     # Die Datei ist gitignoriert und entsteht ausschließlich zur Laufzeit.

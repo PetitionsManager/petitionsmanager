@@ -672,7 +672,7 @@ def _lauf(args, data_file, plattform, lang_code: str, sprache: str,
         f"(Europa + ohne Regionsfilter) …")
     discovered = discover(fetcher, lang_code, sprachname)
     # Überlebt jeden Abbruch (s. save_store: _TLS.lauf_meta, 24.8.2026).
-    core.lauf_meta_setzen(available=len(discovered))
+    core.entdeckt_setzen(discovered)
 
     # (1) Bekannte, die nicht mehr im Feed sind → Offline-Prüfung.
     missing = [k for k in store if k not in discovered]

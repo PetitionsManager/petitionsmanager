@@ -730,7 +730,10 @@ def run(args) -> None:
         hints[key] = hint
     # Überlebt jeden Abbruch (s. save_store: _TLS.lauf_meta, 24.8.2026) —
     # bewusst NACH der Alias-Auflösung, wie im Abschluss-Save.
-    core.lauf_meta_setzen(available=len(hints))
+    # ⚠️ NACH der Alias-Auflösung ist auch für die Bilanz richtig: `hints` ist
+    # dann nach dem KANONISCHEN Schlüssel geschlüsselt, genau wie der Bestand.
+    # Vorher stünden alte und neue Schreibweise als zwei Kandidaten da.
+    core.entdeckt_setzen(hints)
 
     known_set = set(store)     # nach dem Recheck: die kanonischen Schlüssel
     # Bereits geprüfte Petitionen nicht nochmal laden – nur Listen-Infos

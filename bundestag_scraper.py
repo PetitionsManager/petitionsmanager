@@ -384,7 +384,10 @@ def run(args) -> None:
     discovered = discover_slugs(fetcher, status=2)
     # Vorläufiger Wert, überlebt jeden Abbruch; der Abschluss-Save ersetzt ihn
     # durch die endgültige Zählung (s. save_store: _TLS.lauf_meta, 24.8.2026).
-    core.lauf_meta_setzen(available=len(discovered))
+    # ⚠️ Die MENGE ist hier bewusst nur die laufende Mitzeichnungsfrist. Die
+    # beendeten Petitionen kommen aus --backfill und stehen deshalb in der
+    # Bilanz als "bestand_ausserhalb" — nicht als Rückstand.
+    core.entdeckt_setzen(discovered)
 
     # Bekannte Einträge auffrischen (Zähler aus Liste; Detail-Re-Scrape nur
     # für Einträge, die nicht mehr gelistet sind → Fristende/offline).

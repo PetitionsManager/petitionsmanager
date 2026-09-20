@@ -81,6 +81,18 @@ def _ist_at(key: str) -> bool:
     return key.startswith(AT_PREFIX)
 
 
+def _slug(pfad: str) -> str:
+    """Der Bestands-Schlüssel zu einem Listenpfad: das letzte Wegstück.
+
+    ⚠️ Eigene Funktion, seit die Bilanz (core._bilanz, 19.9.2026) die entdeckte
+    MENGE gegen den Bestand schneidet. Die Umrechnung stand vorher nur inline
+    in der Abrufschleife; hätte die Bilanz sie nachgebaut und wäre eine der
+    beiden Stellen später geändert worden, wäre der Schnitt still leer geworden
+    und die Kachel hätte „alles offen" gemeldet. Eine Stelle, ein Ergebnis.
+    """
+    return pfad.rstrip("/").rsplit("/", 1)[-1]
+
+
 def _url_fuer(key: str) -> str:
     """Store-Schlüssel → Detailadresse. Der Schlüssel trägt das Land."""
     if _ist_at(key):
@@ -451,7 +463,7 @@ def run(args) -> None:
     log("Sammle Aktionen von der Mitmachen-Übersicht …")
     discovered = discover_slugs(fetcher)
     # Überlebt jeden Abbruch (s. save_store: _TLS.lauf_meta, 24.8.2026).
-    core.lauf_meta_setzen(available=len(discovered))
+    core.entdeckt_setzen(discovered)
     known_set = set(known_slugs)
     new_slugs = [s for s in discovered if s not in known_set]
     if args.limit:
@@ -545,7 +557,7 @@ def run_en(args) -> None:
     log("Sammle englische Aktionen …")
     prog(phase="scrape", current=0, total=0, message="Hole englischen Baum …")
     seiten = _en_seiten(fetcher)
-    core.lauf_meta_setzen(available=len(seiten))   # überlebt Abbruch
+    core.entdeckt_setzen(seiten)   # überlebt Abbruch, trägt die Bilanz
     log(f"{len(seiten)} englische Aktion(en) gefunden "
         f"(Gesamt im Store: {len(store)}).")
 
@@ -553,13 +565,16 @@ def run_en(args) -> None:
     # Anders als in run_zweig() ist hier kein Netzabruf mehr im Spiel: `seiten`
     # ist bereits geparst. Eine Seite ohne Zähler ist also nachweislich keine
     # Aktion — es gibt keinen „unbekannt"-Fall, der im Nenner bleiben müsste.
-    keine_aktion = 0
+    # Als MENGE, nicht als Zähler: die Bilanz muss wissen, WELCHE Seiten
+    # Inhaltsseiten sind, sonst kann sie sie nicht überschneidungsfrei aus dem
+    # Rest herausrechnen (s. core.entdeckt_klassifizieren).
+    keine_aktion_slugs: set[str] = set()
     for i, (slug, rec) in enumerate(sorted(seiten.items()), 1):
         prog(current=i, total=len(seiten), message=slug)
         # Ohne Zähler ist es keine Mitzeichnungs-Aktion, sondern eine
         # Inhaltsseite — dieselbe Bedingung wie im deutschen Lauf.
         if rec.get("signatures") is None:
-            keine_aktion += 1
+            keine_aktion_slugs.add(slug)
             continue
         satz = dict(rec)
         i18n.setze_hauptsprache(satz, "en")
@@ -594,8 +609,9 @@ def run_en(args) -> None:
 
     prog(message="Speichere & baue HTML …")
     # Inhaltsseiten aus dem Nenner — siehe die Begründung in run_zweig().
+    core.entdeckt_klassifizieren(unbrauchbar=keine_aktion_slugs)
     save(quiet=False, new_petitions_last_run=neu,
-         available=len(seiten) - keine_aktion)
+         available=len(seiten) - len(keine_aktion_slugs))
     core.write_list_html(PLATFORM_EN)
     log(f"Fertig (foodwatch English, {gesehen} Aktion(en) bestätigt).")
 
@@ -687,7 +703,13 @@ def run_zweig(args, lang: str) -> None:
             pfade |= {m.group(1) for m in z["href"].finditer(resp.text)}
     core.entdeckung(f"foodwatch {lang}", len(pfade), erwartet_min=z["min"],
                     name_en=f"foodwatch {lang} action list")
-    core.lauf_meta_setzen(available=len(pfade))
+    # ⚠️⚠️ `pfade` sind ganze PFADE (/kampagnen/x/petition-y), der Bestand legt
+    # aber unter dem letzten Wegstück ab — siehe `slug = …rsplit("/", 1)[-1]`
+    # in der Schleife unten. Die Bilanz ist ein Mengenschnitt gegen den
+    # Bestand; gäbe man ihr die Pfade, wäre der Schnitt LEER und die Kachel
+    # meldete „alles offen", ohne dass irgendetwas falsch aussähe.
+    # (core._bilanz hat dafür eine Sperre, aber die ist der Notnagel.)
+    core.entdeckt_setzen(_slug(p) for p in pfade)
     log(f"{lang}: {len(pfade)} Kandidat(en) gefunden "
         f"(Gesamt im Store: {len(store)}).")
 
@@ -701,10 +723,13 @@ def run_zweig(args, lang: str) -> None:
     # Beides in einen Topf zu werfen hiesse, bei Netzfehlern den Rueckstand
     # kleinzurechnen. (17.9.2026: foodwatch_fr meldete 64 % Abarbeitung, weil
     # 13 Kategorieseiten im Nenner standen.)
-    keine_aktion = 0
-    zweitpfade = 0
+    # Als MENGEN statt als Zähler (19.9.2026): die Bilanz ordnet jeden
+    # entdeckten Kandidaten genau einem Topf zu und braucht dafür die
+    # SCHLÜSSEL, nicht ihre Anzahl.
+    keine_aktion_slugs: set[str] = set()
+    zweitpfad_slugs: set[str] = set()
     for i, pfad in enumerate(sorted(pfade), 1):
-        slug = pfad.rstrip("/").rsplit("/", 1)[-1]
+        slug = _slug(pfad)
         prog(current=i, total=len(pfade), message=slug)
         url = f"{BASE_URL}{pfad}"
         resp = fetcher.get(url)
@@ -713,7 +738,7 @@ def run_zweig(args, lang: str) -> None:
         rec = parse_detail(resp.text, url, z["detail"])
         # Ohne Zähler ist es eine Inhalts- oder Kategorieseite, keine Aktion.
         if rec.get("signatures") is None:
-            keine_aktion += 1
+            keine_aktion_slugs.add(slug)
             continue
         # ⚠️⚠️ foodwatch verlinkt dieselbe Petition unter MEHREREN Pfaden. Am
         # 17.9.2026 gemeldet („URL 2× vorhanden") und an der Quelle bestätigt:
@@ -727,7 +752,9 @@ def run_zweig(args, lang: str) -> None:
         # sonst risse die Unterschriftenkurve an der Umstellung ab.
         kanon = (rec.get("url") or url).rstrip("/").rsplit("/", 1)[-1]
         if kanon and kanon != slug:
-            zweitpfade += 1
+            # Der ZWEITPFAD-Schlüssel ist die Dublette, nicht der kanonische:
+            # unter dem kanonischen steht gleich der echte Satz.
+            zweitpfad_slugs.add(slug)
             alt = store.pop(slug, None)
             if alt is not None and kanon not in store:
                 alt["slug"] = kanon
@@ -742,17 +769,19 @@ def run_zweig(args, lang: str) -> None:
     if neu:
         log(f"NEU: {len(neu)} neue Aktion(en) ({lang}) in diesem Lauf.")
     prog(message="Speichere & baue HTML …")
-    if zweitpfade:
+    if zweitpfad_slugs:
         # Nie still verwerfen: sonst sieht ein schrumpfender Bestand wie ein
         # Datenverlust aus, obwohl nur Dubletten zusammengefallen sind.
-        log(f"{lang}: {zweitpfade} Zweitpfad(e) auf bereits erfasste "
+        log(f"{lang}: {len(zweitpfad_slugs)} Zweitpfad(e) auf bereits erfasste "
             f"Petitionen zusammengeführt.")
     # available ist der NENNER der Dashboard-Kachel: „x von y Kandidaten".
     # Kategorieseiten UND Zweitpfade hier abziehen — beide sind keine eigenen
     # Petitionen. Sonst meldet die Kachel dauerhaft einen Rueckstand, den es
     # nicht gibt, und ein erfundener Rueckstand lenkt von den echten ab.
+    core.entdeckt_klassifizieren(unbrauchbar=keine_aktion_slugs,
+                                 dublette=zweitpfad_slugs)
     save(quiet=False, new_petitions_last_run=neu,
-         available=len(pfade) - keine_aktion - zweitpfade)
+         available=len(pfade) - len(keine_aktion_slugs) - len(zweitpfad_slugs))
     core.write_list_html(PLATFORM_JE_ZWEIG[lang])
     log(f"Fertig (foodwatch {lang}, {gesehen} Aktion(en) bestätigt).")
 

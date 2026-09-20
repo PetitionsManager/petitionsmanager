@@ -1020,7 +1020,7 @@ def run(args) -> None:
     discovered = discover_slugs(fetcher)
     # Überlebt jeden Abbruch: save_store schreibt _TLS.lauf_meta bei jeder
     # Zwischenspeicherung mit (24.8.2026); der Abschluss-Save gewinnt.
-    core.lauf_meta_setzen(available=len(discovered))
+    core.entdeckt_setzen(discovered)
     new_slugs = [s for s in discovered if s not in store]
     if args.limit:
         new_slugs = new_slugs[:args.limit]

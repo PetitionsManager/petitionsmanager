@@ -528,6 +528,24 @@ def offener_rest(p: Platform) -> tuple[int | None, str]:
            and b.get("thema") == core.THEMA_HOST_AUSGELASSEN
            for b in (meta.get("befunde") or [])):
         return None, "Host im letzten Lauf gesperrt"
+    # ---- Regelfall: die Bilanz des letzten Laufs ---------------------------
+    # ⚠️⚠️ Der Planer MUSS dieselbe Rechnung benutzen wie die Kachel. Bis zum
+    # 19.9.2026 rechnete er `anzahl + verworfen` gegen `available` und kannte
+    # das Register `unbrauchbare` nicht: alle fünf lokal gepflegten
+    # WeMove-Zweige meldeten damit zusammen 315 „offene Kandidaten", die es
+    # nicht gab (en 102, fr 66, nl 54, it 47, pl 46). Bei einer Schwelle von
+    # 200 je Zweig und einem Budget von 400 kamen sie deshalb Tag für Tag in
+    # den Vorlauf — für Seiten, die der Scraper unmittelbar danach überspringt,
+    # auf Kosten des WeMove-WAF-Fensters. Ein falscher Rückstand ist hier nicht
+    # nur Kosmetik, er verbrennt genau das knappste Gut.
+    bilanz = meta.get("bilanz")
+    if isinstance(bilanz, dict) and not bilanz.get("fehler"):
+        gefunden = bilanz.get("gefunden")
+        offen = bilanz.get("offen")
+        if isinstance(gefunden, int) and isinstance(offen, int) and gefunden > 0:
+            return offen, (f"{gefunden - offen} von {gefunden} erledigt "
+                           f"(Bilanz vom {str(bilanz.get('stand'))[:16]})")
+    # ---- Rückfall für Bestände ohne Bilanz ---------------------------------
     available = meta.get("available")
     if not isinstance(available, int) or isinstance(available, bool):
         return None, "kein available (Lauf abgebrochen)"
@@ -537,9 +555,13 @@ def offener_rest(p: Platform) -> tuple[int | None, str]:
     # dürfen nicht als Rückstand zählen — sonst stünde Change.org für immer im
     # Vorlauf, obwohl sein Vorrat durch ist, und der Zweig käme jeden Tag wieder
     # mit demselben Rest. Für alle anderen Plattformen ist das Register leer.
+    # ⚠️ Diese Rechnung sieht `unbrauchbare` NICHT. Sie gilt nur, bis der Zweig
+    # einmal gelaufen ist; der Grund sagt es, damit ein zu großer Rest nicht
+    # als Tatsache durchgeht.
     erfasst = anzahl + len(core.als_register(meta.get("verworfen")))
     rest = max(0, available - erfasst)
-    return rest, f"{erfasst} von ~{available} abgearbeitet"
+    return rest, (f"{erfasst} von ~{available} abgearbeitet "
+                  f"(ohne Bilanz – Rückstand womöglich zu hoch)")
 
 
 def vorlauf_kandidaten(platforms: list[Platform],

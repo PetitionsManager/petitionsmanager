@@ -325,6 +325,11 @@ def run(args) -> None:
         log(f"NEU: {len(new_petitions)} neue Petition(en) in diesem Lauf.")
 
     prog(message="Speichere & baue HTML …")
+    # ⚠️ `available` bleibt die Zahl der QUELLE (meta.totalCount) — sie sagt,
+    # wie viele es dort gibt. Die Bilanz dagegen rechnet über das, was WIR
+    # entdeckt haben; `seen` enthält nur Slugs, die slug_ok() bestanden haben
+    # und damit überhaupt in unserem Schlüsselraum liegen.
+    core.entdeckt_setzen(seen)
     save(quiet=False, new_petitions_last_run=new_petitions,
          available=(total_count if total_count is not None else len(seen)))
     core.write_list_html(PLATFORM)

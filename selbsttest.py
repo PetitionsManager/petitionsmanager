@@ -1166,6 +1166,80 @@ pruefe("hld: Sprachkürzel aus fremden Daten kommt nicht in einen Pfad",
 
 
 # ---------------------------------------------------------------------------
+# Bilanz eines Laufs — core._bilanz (19.9.2026)
+#
+# Anlass: das Dashboard meldete für alle fünf lokal gepflegten WeMove-Zweige
+# dauerhaft „Rückstand" (76–86 %), obwohl nichts offen war. Die fehlenden
+# Kandidaten waren das Register `unbrauchbare` — geprüfte Test- und
+# Entwurfsseiten. Die alte Rechnung kannte nur `verworfen` und zählte alles
+# andere als Rückstand; der Vorlauf-Planer bestellte daraufhin täglich Abrufe,
+# die nie einen Satz brachten.
+# ---------------------------------------------------------------------------
+def bil(store_keys, entdeckt, meta=None, zusatz=None):
+    store = {k: {"status": "online"} for k in store_keys}
+    return core._bilanz(store, entdeckt, meta or {}, "2026-09-19T00:00:00+00:00",
+                        zusatz)
+
+
+# Die Kernaussage: die Gleichung geht auf, in jedem Fall.
+_b = bil("ab", {"a", "b", "c", "d", "e"},
+         {"unbrauchbare": {"c": "t"}, "verworfen": {"d": ""}})
+pruefe("bilanz: Summe der Töpfe ist die Zahl der gefundenen Kandidaten",
+       _b["im_bestand"] + _b["unbrauchbar"] + _b["verworfen"] + _b["dublette"]
+       + _b["zurueckgestellt"] + _b["offen"], _b["gefunden"])
+pruefe("bilanz: geprüft-und-unbrauchbar ist kein Rückstand", _b["offen"], 1)
+
+# Der WeMove-Fall, der den Anlass gab: alles entdeckte ist entweder im Bestand
+# oder als unbrauchbar abgelegt → nichts offen.
+_w = bil([f"p{i}" for i in range(606)],
+         {f"p{i}" for i in range(606)} | {f"u{i}" for i in range(102)},
+         {"unbrauchbare": {f"u{i}": "t" for i in range(102)}})
+pruefe("bilanz: WeMove-Fall (606 im Bestand + 102 unbrauchbar) ist vollständig",
+       (_w["gefunden"], _w["offen"]), (708, 0))
+# GEGENPROBE: ohne das Register muss derselbe Bestand 102 offene melden —
+# sonst wäre „0 offen" auch mit einer Rechnung erklärbar, die nie etwas findet.
+_wo = bil([f"p{i}" for i in range(606)],
+          {f"p{i}" for i in range(606)} | {f"u{i}" for i in range(102)}, {})
+pruefe("bilanz: Gegenprobe — ohne Register sind es wieder 102 offene",
+       _wo["offen"], 102)
+
+# Ein Kandidat darf nie in zwei Töpfen zählen (sonst ginge es über 100 %).
+_d = bil("a", {"a"}, {"unbrauchbare": {"a": "t"}, "verworfen": {"a": ""}})
+pruefe("bilanz: Kandidat in mehreren Registern zählt genau einmal",
+       (_d["im_bestand"], _d["unbrauchbar"], _d["verworfen"]), (1, 0, 0))
+
+# Bestand größer als der Lauf (bundestag --backfill, avaaz-Archiv): kein
+# Überlauf, sondern eine eigene Angabe. Früher ergab das „1906 von ~1871".
+_g = bil("abz", {"a", "b"})
+pruefe("bilanz: Bestand größer als der Lauf läuft nicht über",
+       (_g["gefunden"], _g["offen"], _g["bestand_ausserhalb"]), (2, 0, 1))
+
+# Ohne entdeckte Menge gibt es keine Bilanz — und ganz sicher keine 100 %.
+pruefe("bilanz: Altbestand ohne entdeckte Menge liefert None",
+       bil("ab", None), None)
+
+# ⚠️⚠️ Die Falle, die am teuersten gewesen wäre: die Entdeckung liefert PFADE,
+# der Bestand ist nach Slugs geschlüsselt. Der Schnitt ist dann leer und die
+# Kachel meldete „alles offen" — vollkommen plausibel aussehend.
+_p = bil(["petition-x", "petition-y"],
+         {"/kampagnen/a/petition-x", "/kampagnen/b/petition-y"})
+pruefe("bilanz: verschiedene Schlüsselräume werden als Fehler ausgewiesen",
+       bool(_p.get("fehler")), True)
+# Gegenprobe: bei passendem Schlüsselraum darf die Sperre NICHT anschlagen.
+pruefe("bilanz: Gegenprobe — gleicher Schlüsselraum meldet keinen Fehler",
+       bool(bil(["petition-x"], {"petition-x"}).get("fehler")), False)
+# Und ein Erstlauf mit leerem Bestand ist kein Schlüsselraum-Fehler.
+pruefe("bilanz: Erstlauf mit leerem Bestand löst keinen Fehlalarm aus",
+       bool(bil([], {"a", "b"}).get("fehler")), False)
+
+# Der Zusatz aus dem laufenden Lauf (foodwatch ordnet Kategorieseiten und
+# Zweitpfade erst beim Abruf ein) zählt wie ein Register.
+_z = bil("a", {"a", "b", "c"}, {}, {"unbrauchbar": {"b"}, "dublette": {"c"}})
+pruefe("bilanz: Einordnung aus dem laufenden Lauf zählt mit",
+       (_z["unbrauchbar"], _z["dublette"], _z["offen"]), (1, 1, 0))
+
+
+# ---------------------------------------------------------------------------
 print()
 if fehler:
     print(f"::error::selbsttest.py: {len(fehler)} Fall/Fälle fehlgeschlagen "
