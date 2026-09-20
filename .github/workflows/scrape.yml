@@ -57,6 +57,24 @@ on:
         description: 'Diese Scraper-Zustände aus dem Repo statt aus dem Cache nehmen (Plattform-Schlüssel, mit Komma getrennt, z. B. "europarl")'
         type: string
         default: ''
+      # Der RÜCKWEG zu store_aus_repo (19.9.2026). Anlass: der Rechner des
+      # Nutzers soll den Change.org-Rückstand aufholen — dafür braucht er den
+      # aktuellen Bestand. Der lebt aber im Actions-Cache, im Repo liegt eine
+      # viel ältere Fassung (457 gegen 2.586 Sätze, gemessen 19.9.). Ein
+      # lokaler Lauf von der alten Fassung aus würde sie committen, und
+      # ci_stores_uebernehmen.py nähme sie als die JÜNGERE — über 2.000 Sätze
+      # und das ganze Verwerfungs-Register wären weg.
+      #
+      # ⚠️ Bewusst EINMALIG auf Anforderung, nicht bei jedem Lauf: ein Bestand
+      # samt Register liegt im MB-Bereich, ein täglicher Commit bliese die
+      # Historie auf — genau deshalb ist webapp/data aus dem Repo geflogen.
+      # ⚠️ Schnellster Weg: zusammen mit nur_veroeffentlichen = true. Dann wird
+      # der Cache geholt, nichts gescrapt, und der Stand landet im Repo (~3 min
+      # statt ~300).
+      stores_ins_repo:
+        description: 'Diese Scraper-Zustände einmalig aus dem Cache ins REPO committen (Plattform-Schlüssel, mit Komma getrennt, z. B. "changeorg")'
+        type: string
+        default: ''
 
 permissions:
   contents: read
@@ -455,6 +473,40 @@ jobs:
           print("\nAlle App-Daten in Ordnung.")
           PY
 
+      # ⚠️ Rechte gibt es nur je JOB. Dieser Job hat contents: read und behält
+      # es: er läuft täglich unbeaufsichtigt 350 Minuten und schickt fremdes
+      # HTML durch Parser — ihm Schreibrecht aufs Repo zu geben, nur damit
+      # einmal im Quartal eine Datei committet wird, wäre das falsche
+      # Verhältnis. Stattdessen wie beim Release-Job in build-apk.yml: die
+      # Dateien gehen als Artefakt an einen eigenen Job, der das Schreibrecht
+      # hat und sonst nichts tut.
+      - name: "Stores für den Repo-Commit einsammeln (auf Anforderung)"
+        if: ${{ inputs.stores_ins_repo != '' }}
+        env:
+          SCHLUESSEL: ${{ inputs.stores_ins_repo }}
+        run: |
+          mkdir -p stores-fuer-repo
+          fehlt=0
+          for k in $(echo "$SCHLUESSEL" | tr ',' ' '); do
+            f="${k}_petitions.json"
+            if [ -f "$f" ]; then
+              cp "$f" stores-fuer-repo/
+              echo "$f: $(python3 -c "import json,sys;d=json.load(open('$f'));print(len(d)-('_meta' in d))") Datensätze"
+            else
+              echo "::error title=Store fehlt::$f gibt es nicht – Schlüssel falsch geschrieben?"
+              fehlt=1
+            fi
+          done
+          [ "$fehlt" -eq 0 ]
+
+      - name: "Stores als Artefakt weitergeben (auf Anforderung)"
+        if: ${{ inputs.stores_ins_repo != '' }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a  # v7
+        with:
+          name: stores-fuer-repo
+          path: stores-fuer-repo/
+          retention-days: 1
+
       - name: Scraper-Zustand cachen
         if: always()
         uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9  # v6
@@ -475,3 +527,98 @@ jobs:
       - name: Auf GitHub Pages veröffentlichen
         id: deploy
         uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128  # v5
+
+  # ---------------------------------------------------------------------------
+  # Der Rückweg Cache → Repo (19.9.2026). Eigener Job, WEIL Rechte nur je Job
+  # vergeben werden: hier steht contents: write, im Scrape-Job bleibt read.
+  # Läuft nur auf ausdrückliche Anforderung und tut sonst nichts.
+  # ---------------------------------------------------------------------------
+  stores_ins_repo:
+    needs: scrape
+    if: ${{ inputs.stores_ins_repo != '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7
+
+      - name: Stores aus dem Artefakt holen
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c  # v8
+        with:
+          name: stores-fuer-repo
+          path: stores-fuer-repo
+
+      - name: "Prüfen, übernehmen, committen"
+        env:
+          SCHLUESSEL: ${{ inputs.stores_ins_repo }}
+        run: |
+          python3 - <<'PY'
+          import json, os, pathlib, subprocess, sys
+
+          def saetze(pfad):
+              """Datensätze im Store, oder None wenn unlesbar.
+
+              ⚠️ None statt 0: ein unlesbarer Store sähe als 0 wie ein leerer
+              Bestand aus, und der Größenvergleich unten würde ihn dann als
+              'kleiner' ablehnen — mit einer Begründung, die den echten Grund
+              (kaputte Datei) verschweigt."""
+              try:
+                  d = json.loads(pathlib.Path(pfad).read_text(encoding="utf-8"))
+              except Exception:
+                  return None
+              return len(d) - (1 if "_meta" in d else 0)
+
+          neu_dir = pathlib.Path("stores-fuer-repo")
+          uebernommen, abgelehnt = [], []
+          for k in [s.strip() for s in os.environ["SCHLUESSEL"].split(",") if s.strip()]:
+              name = f"{k}_petitions.json"
+              neu, alt = neu_dir / name, pathlib.Path(name)
+              n_neu, n_alt = saetze(neu), saetze(alt) if alt.exists() else 0
+              if n_neu is None:
+                  abgelehnt.append(f"{name}: Artefakt unlesbar")
+                  continue
+              # ⚠️⚠️ Die Sperre. Ein Cache-Stand, der KLEINER ist als der im
+              # Repo, ist fast immer ein Unfall: ein abgebrochener Lauf, ein
+              # verlorener Cache, ein zurückgefallener Zweig. Genau so ist am
+              # 19.9.2026 die umgekehrte Gefahr entstanden (457 gegen 2.586).
+              # Hier schreiben wir ins REPO, also die Fassung, auf die sich
+              # später alles verlässt — im Zweifel nichts tun und melden.
+              if n_alt and n_neu < n_alt:
+                  abgelehnt.append(f"{name}: Cache {n_neu} < Repo {n_alt} "
+                                   f"– NICHT übernommen")
+                  continue
+              neu.replace(alt)
+              uebernommen.append(f"{name}: {n_alt} -> {n_neu}")
+
+          for z in uebernommen:
+              print(f"übernommen  {z}")
+          for z in abgelehnt:
+              print(f"::warning title=Store nicht übernommen::{z}")
+          if not uebernommen:
+              print("::error title=Nichts übernommen::Kein einziger Store "
+                    "konnte ins Repo geschrieben werden.")
+              sys.exit(1)
+
+          subprocess.run(["git", "config", "user.name", "Matthias Drees"], check=True)
+          subprocess.run(["git", "config", "user.email",
+                          "mail@petitionsmanager.app"], check=True)
+          # NUR die genannten Dateien stagen – nie 'git add -A'. Der Lauf
+          # erzeugt nebenbei webapp/, HTML-Listen und anderes.
+          dateien = [z.split(":")[0] for z in uebernommen]
+          subprocess.run(["git", "add", "--"] + dateien, check=True)
+          if subprocess.run(["git", "diff", "--cached", "--quiet"]).returncode == 0:
+              print("Keine Änderung – der Repo-Stand war schon der aktuelle.")
+              sys.exit(0)
+          text = ("Stores aus dem Cache ins Repo: "
+                  + ", ".join(uebernommen)
+                  + "\n\nEinmaliger Export auf Anforderung (stores_ins_repo), "
+                    "damit der Bestand lokal weitergepflegt werden kann.")
+          subprocess.run(["git", "commit", "-m", text], check=True)
+          # Zwischen Checkout und Push können Minuten liegen; ein anderer
+          # Push (z. B. der 20:15-Timer) darf den Lauf nicht kippen.
+          subprocess.run(["git", "pull", "--rebase", "--autostash"], check=True)
+          subprocess.run(["git", "push"], check=True)
+          print("Gepusht.")
+          PY
