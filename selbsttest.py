@@ -1238,6 +1238,23 @@ _z = bil("a", {"a", "b", "c"}, {}, {"unbrauchbar": {"b"}, "dublette": {"c"}})
 pruefe("bilanz: Einordnung aus dem laufenden Lauf zählt mit",
        (_z["unbrauchbar"], _z["dublette"], _z["offen"]), (1, 1, 0))
 
+# ⚠️⚠️ Eine WARTESCHLANGE steht nicht auf der Listenseite. Ohne Sonderregel
+# fiele sie aus dem Nenner und die Kachel zeigte 100 %, obwohl avaaz noch 40
+# Archiv-Kandidaten zu prüfen hat. Der Fall, den ich beim Bauen selbst gebaut
+# und erst beim Nachlesen des avaaz-Scrapers gefunden habe.
+_q = bil("ab", {"a", "b"}, {"archive_todo": ["x", "y", "z"]})
+pruefe("bilanz: Archiv-Warteschlange zählt in den Nenner",
+       (_q["gefunden"], _q["zurueckgestellt"]), (5, 3))
+pruefe("bilanz: Warteschlange offen ⇒ nicht 100 %",
+       _q["im_bestand"] == _q["gefunden"], False)
+# Gegenprobe: ohne Warteschlange derselbe Bestand -> vollständig.
+pruefe("bilanz: Gegenprobe — ohne Warteschlange ist es vollständig",
+       bil("ab", {"a", "b"})["gefunden"], 2)
+# Geprüft-und-weg (404/410) bleibt im Nenner, zählt aber als erledigt.
+_v = bil("ab", {"a", "b"}, {"archive_dead": ["tot1"]})
+pruefe("bilanz: verschwundene Archiv-Kandidaten sind erledigt, nicht offen",
+       (_v["gefunden"], _v["verschwunden"], _v["offen"]), (3, 1, 0))
+
 
 # ---------------------------------------------------------------------------
 print()

@@ -1126,11 +1126,24 @@ def load_meta(data_file: Path) -> dict:
 # im Bestand steht, wird gar nicht erst gefragt. Neue Register gehören HIER
 # hinein — sonst rutschen ihre Kandidaten stillschweigend nach "offen" und der
 # Zweig sieht auf Dauer unfertig aus, obwohl niemand etwas holen müsste.
+# Das dritte Feld: gehören diese Kandidaten IMMER in den Nenner, auch wenn die
+# Entdeckung sie in diesem Lauf nicht gelistet hat?
+#
+# ⚠️⚠️ Der Unterschied ist nicht akademisch. `unbrauchbare` und `verworfen`
+# stehen jeden Lauf wieder auf der Listenseite, sind also ohnehin in der
+# Entdeckung — für sie ändert das Flag nichts. Eine WARTESCHLANGE dagegen
+# (avaaz `archive_todo`, bundestag `backfill_todo`) steht NICHT auf der
+# Listenseite: das sind Kandidaten, die wir nachweislich kennen und noch nicht
+# geholt haben. Ohne das Flag fielen sie aus dem Nenner — die Kachel zeigte
+# 100 %, während die Warteschlange voll ist. Genau davor schützte im
+# avaaz-Scraper das alte `max(len(discovered)+len(campaigns),
+# len(store)+len(arch_todo))`; diese Absicht wäre sonst verlorengegangen.
 BILANZ_TOEPFE = (
-    ("unbrauchbar",     ("unbrauchbare",)),       # geholt, geprüft, keine Petition
-    ("verworfen",       ("verworfen",)),          # geholt, geprüft, aussortiert
-    ("dublette",        ("dubletten",)),          # zweiter Pfad auf dieselbe Seite
-    ("zurueckgestellt", ("archive_todo", "backfill_todo")),   # bekannt, später
+    ("unbrauchbar",     ("unbrauchbare",),   False),  # geprüft, keine Petition
+    ("verworfen",       ("verworfen",),      False),  # geprüft, aussortiert
+    ("dublette",        ("dubletten",),      False),  # zweiter Pfad, gleiche Seite
+    ("verschwunden",    ("archive_dead",),   True),   # geprüft, 404/410
+    ("zurueckgestellt", ("archive_todo", "backfill_todo"), True),  # bekannt, offen
 )
 # Wie viele offene Schlüssel als Beispiel mitgeschrieben werden. Die Liste ist
 # zum HINSEHEN da ("was fehlt denn?"), nicht als Arbeitsvorrat — bei Change.org
@@ -1167,11 +1180,19 @@ def _bilanz(store: dict, entdeckt, meta: dict, zeit: str,
         return None
     zusatz = zusatz or {}
     rest = set(entdeckt)
+    # Warteschlangen gehören in den Nenner, auch wenn die Listenseite sie nicht
+    # (mehr) führt — siehe die Begründung an BILANZ_TOEPFE. Erst vereinigen,
+    # dann zählen: `gefunden` ist alles, wovon wir wissen, nicht nur das, was
+    # heute auf der Übersicht stand.
+    for _name, felder, immer in BILANZ_TOEPFE:
+        if immer:
+            for feld in felder:
+                rest |= set(als_register(meta.get(feld)))
     gefunden = len(rest)
     im_bestand = rest & set(store)
     rest -= im_bestand
     toepfe: dict[str, int] = {}
-    for name, felder in BILANZ_TOEPFE:
+    for name, felder, _immer in BILANZ_TOEPFE:
         # Zwei Quellen je Topf: die dauerhaften Register im _meta (wemove führt
         # `unbrauchbare` über Läufe hinweg) und das, was GENAU DIESER Lauf
         # unterwegs eingeordnet hat (foodwatch erkennt Kategorieseiten erst
@@ -3803,7 +3824,9 @@ def _live_card(platform: Platform, schnappschuss: bool = False,
                 (bilanz.get("unbrauchbar", 0), "unbrauchbar", "unusable"),
                 (bilanz.get("verworfen", 0), "verworfen", "rejected"),
                 (bilanz.get("dublette", 0), "Dublette(n)", "duplicates"),
-                (bilanz.get("zurueckgestellt", 0), "zurückgestellt", "deferred"),
+                (bilanz.get("verschwunden", 0), "verschwunden", "gone"),
+                (bilanz.get("zurueckgestellt", 0), "in Warteschlange",
+                 "queued"),
                 (offen, "offen", "open")):
             if zahl or de == "offen":     # „0 offen" ist die Kernaussage
                 teile.append(f"{zahl} {de}")

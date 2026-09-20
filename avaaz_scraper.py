@@ -897,9 +897,12 @@ def run(args) -> None:
     log("Sammle Petitionen & Kampagnen (Startseite, Übersicht, Feeds) …")
     discovered, campaigns = discover_slugs(fetcher)
     # Beide Arten sind Kandidaten desselben Bestands und tragen denselben
-    # Schlüsselraum — für die Bilanz also EINE Menge. Die Archiv-Kandidaten
-    # kommen nicht hierher: sie stehen im Register `archive_todo` und werden
-    # darüber als "zurückgestellt" einsortiert, nicht als Rückstand.
+    # Schlüsselraum — für die Bilanz also EINE Menge.
+    # ⚠️ Die Archiv-Warteschlange steht NICHT hier, sondern im Register
+    # `archive_todo`; core._bilanz vereinigt sie selbst in den Nenner
+    # (BILANZ_TOEPFE, Flag „immer"). Das ersetzt die Absicht des alten
+    # max(len(discovered)+len(campaigns), len(store)+len(arch_todo)) unten:
+    # solange Archiv-Kandidaten offen sind, darf die Kachel nicht 100 % zeigen.
     core.entdeckt_setzen(set(discovered) | set(campaigns))
     known_set = set(known_slugs)
     # Neue Arbeit: (slug, kind)-Paare; Kampagnen-Slug kollidiert praktisch nie
