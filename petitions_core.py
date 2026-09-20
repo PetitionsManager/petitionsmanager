@@ -1149,6 +1149,10 @@ BILANZ_TOEPFE = (
 # zum HINSEHEN da ("was fehlt denn?"), nicht als Arbeitsvorrat — bei Change.org
 # wären es über 13.000 und der Bestand würde spürbar größer.
 BILANZ_BEISPIELE = 50
+# Kennzeichen „noch nicht nachgesehen" für den Vorstand der Bilanz. None geht
+# dafür NICHT: None ist ein gültiges Ergebnis (Bestand ohne Bilanz), und wir
+# würden bei jedem Speichern erneut die Datei lesen.
+_UNGELESEN = object()
 # Wie viele unbrauchbare Kandidaten die Kachel aufklappt. Der Rest steht in
 # data/unbrauchbar.json — 102 Zeilen auf einer Kachel liest niemand, und die
 # Datei ist ohnehin die Fassung, mit der sich rechnen lässt.
@@ -1260,6 +1264,23 @@ def save_store(store: dict, data_file: Path, extra_meta: dict | None = None,
     # der Abschluss-Save nennt seine endgültigen Werte selbst.
     meta_extra = {**(getattr(_TLS, "lauf_meta", None) or {}),
                   **(extra_meta or {})}
+    # ⚠️⚠️ Die Bilanz WEITERREICHEN (20.9.2026). Das _meta wird unten komplett
+    # neu gebaut; was nicht in meta_extra steht, fällt weg. Die Bilanz entsteht
+    # aber erst beim Abschluss-Save — zwischen zwei Läufen verschwand sie
+    # deshalb bei der ersten Zwischenspeicherung und kam erst am Ende zurück.
+    # Wirkung: während eines Laufs zeigte die Kachel „Bilanz noch nicht
+    # erhoben", und ein Lauf, der vorher stirbt, nahm sie ganz mit. Dieselbe
+    # Falle, die für `verworfen` seit 30.8.2026 dokumentiert ist; die
+    # Gegenmaßnahme dort ist eine Zeile ganz oben in run(), hier muss sie
+    # zentral stehen, weil keine Bilanz aus dem Scraper kommt.
+    # Der Vorstand wird EINMAL je Plattform gelesen, nicht bei jedem Speichern.
+    if "bilanz" not in meta_extra:
+        vorher = getattr(_TLS, "bilanz_vorher", _UNGELESEN)
+        if vorher is _UNGELESEN:
+            vorher = load_meta(data_file).get("bilanz")
+            _TLS.bilanz_vorher = vorher
+        if vorher:
+            meta_extra["bilanz"] = vorher
     if not quiet:
         prev = load_meta(data_file)
         vor_kennzahlen = prev.get("kennzahlen") or {}
@@ -1306,6 +1327,7 @@ def save_store(store: dict, data_file: Path, extra_meta: dict | None = None,
                          getattr(_TLS, "entdeckt_zusatz", None))
         if bilanz is not None:
             meta_extra["bilanz"] = bilanz
+            _TLS.bilanz_vorher = bilanz      # ab jetzt gilt die neue
         # ⚠️⚠️ Ab wann tragen die Einträge "herkunft" und "neu"? Die Grenze muss
         # im Bestand STEHEN, sonst kann ein späterer Auswerter „vor der
         # Umstellung" nicht von „Feld ging verloren" unterscheiden — und würde
@@ -1490,6 +1512,9 @@ def set_progress_platform(key: str) -> None:
     # _meta, und ein set() ist nicht JSON-fähig — der Export risse ab.
     _TLS.entdeckt = None
     _TLS.entdeckt_zusatz = {}
+    # Der gemerkte Vorstand gehört zur VORIGEN Plattform — sonst trüge der
+    # nächste Bestand die Bilanz seines Vorgängers.
+    _TLS.bilanz_vorher = _UNGELESEN
 
 
 def lauf_meta_setzen(**felder) -> None:

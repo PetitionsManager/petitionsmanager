@@ -1259,6 +1259,32 @@ pruefe("bilanz: verschwundene Archiv-Kandidaten sind erledigt, nicht offen",
 # ---------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------
+# Die Bilanz darf beim Zwischenspeichern nicht verlorengehen (20.9.2026).
+# save_store baut _meta komplett neu; was nicht in meta_extra steht, faellt
+# weg. Die Bilanz entsteht aber erst beim Abschluss-Save — dazwischen war sie
+# weg, und ein Lauf, der vorher stirbt, nahm sie ganz mit.
+# ---------------------------------------------------------------------------
+def _zwischenspeichern(mit_bilanz: bool) -> dict:
+    datei = Path(tempfile.mkdtemp()) / "kunst_petitions.json"
+    vor = {"a": {"status": "online", "title": "A", "url": "https://x/a"}}
+    if mit_bilanz:
+        datei.write_text(json.dumps({**vor, "_meta": {
+            "bilanz": {"gefunden": 9, "offen": 0, "stand": "gestern"}}}))
+    else:
+        datei.write_text(json.dumps({**vor, "_meta": {}}))
+    core.set_progress_platform("kunst")
+    core.save_store(vor, datei, quiet=True)      # Zwischenspeicherung
+    return json.loads(datei.read_text())["_meta"]
+
+
+pruefe("bilanz: überlebt eine Zwischenspeicherung",
+       (_zwischenspeichern(True).get("bilanz") or {}).get("gefunden"), 9)
+# Gegenprobe: ohne Vorstand darf nichts erfunden werden.
+pruefe("bilanz: Gegenprobe – ohne Vorstand bleibt sie abwesend",
+       "bilanz" in _zwischenspeichern(False), False)
+
+
+# ---------------------------------------------------------------------------
 # Abgefangener Absturz — ein Scraper, der stirbt, darf nicht grün aussehen
 #
 # Anlass 19.9.2026: Change.org stürzte bei JEDEM Lauf in der Nachprüfung ab
