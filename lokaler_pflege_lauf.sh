@@ -131,6 +131,35 @@ main() {
         sag "PFLEGE_NUR_PRUEFEN=1 – Scrapen übersprungen."
     fi
 
+    # ---- Change.org aufholen: EIN Durchgang je Lauf ----------------------
+    # Nutzerauftrag 20.9.2026 („automatisch immer laufen lassen"). Change.org
+    # ist NICHT WAF-gesperrt wie die Zweige oben — es steht hier, weil die CI
+    # zu wenig Zeit hat: sie bricht ihre Aufholschleife bei FRIST+15 min ab,
+    # übrig blieben ~18 Sätze am Tag bei 12.200 offenen Kandidaten. Dieser
+    # Rechner hat keine Frist.
+    #
+    # ⚠️ Genau EIN Durchgang (~22 min), nicht „bis fertig": der Pflege-Lauf
+    # würde sonst länger als sein eigener Takt. Der Vorrat wird über viele
+    # Läufe abgearbeitet, nicht in einem.
+    # ⚠️ Ein Fehlschlag darf den Lauf NICHT beenden — die Stores der Zweige
+    # oben sind dann schon geschrieben und müssen noch committet werden.
+    # changeorg_aufholen.py hört von sich aus auf: bei HTTP 403/429, bei zu
+    # hoher Fehlerquote, bei fehlendem Fortschritt und wenn der lokale Stand
+    # hinter dem veröffentlichten zurückliegt.
+    # ⚠️ Abschalten ohne Codeänderung: PFLEGE_OHNE_CHANGEORG=1.
+    if [ "${PFLEGE_NUR_PRUEFEN:-0}" != "1" ] \
+       && [ "${PFLEGE_OHNE_CHANGEORG:-0}" != "1" ]; then
+        sag "Change.org aufholen (ein Durchgang) …"
+        read -r ZW_WALL ZW_MONO < <(uhren)
+        if python3 changeorg_aufholen.py --durchgaenge 1 >>"$LOG" 2>&1; then
+            ZCODE=0
+        else
+            ZCODE=$?
+            sag "Change.org-Aufholen endete mit Code $ZCODE – weiter, die Stores werden trotzdem gesichert."
+        fi
+        zeitzeile "aufholen:changeorg" "$ZW_WALL" "$ZW_MONO" "$ZCODE"
+    fi
+
     GEAENDERT="$(git status --porcelain -- '*_petitions.json' texts_index.json)"
     if [ -z "$GEAENDERT" ]; then
         sag "Keine Store-Änderungen – fertig."
