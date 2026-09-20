@@ -31,7 +31,7 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-20T07:51:55-06:00",
+    "generated_at": "2026-09-20T08:39:59-06:00",
     "petition_count": 169,
     "available": 223,
     "unbrauchbare": {
@@ -91,23 +91,21 @@
       "lucas-test-donation-2-petition-NL": "2026-09-18T18:53:11-06:00"
     },
     "new_petitions_last_run": [],
+    "bilanz": {
+      "stand": "2026-09-20T08:39:59-06:00",
+      "gefunden": 223,
+      "im_bestand": 169,
+      "unbrauchbar": 54,
+      "verworfen": 0,
+      "dublette": 0,
+      "verschwunden": 0,
+      "zurueckgestellt": 0,
+      "offen": 0,
+      "offene_beispiele": [],
+      "bestand_gesamt": 169,
+      "bestand_ausserhalb": 0
+    },
     "lauf_verlauf": [
-      {
-        "zeit": "2026-09-19T11:26:43-06:00",
-        "gesamt": 169,
-        "online": 168,
-        "offline": 1,
-        "ohne_titel": 1,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 1,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 160,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
       {
         "zeit": "2026-09-19T11:51:40-06:00",
         "gesamt": 169,
@@ -571,10 +569,26 @@
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
         "neu": 0
+      },
+      {
+        "zeit": "2026-09-20T08:39:59-06:00",
+        "gesamt": 169,
+        "online": 168,
+        "offline": 1,
+        "ohne_titel": 1,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 1,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 160,
+        "juengstes_start": "2026-09-01",
+        "mit_code_im_text": 0,
+        "herkunft": "lokal_cron",
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-20T07:51:55-06:00",
+      "zeit": "2026-09-20T08:39:59-06:00",
       "gesamt": 169,
       "online": 168,
       "offline": 1,
@@ -586,20 +600,6 @@
       "mit_start": 160,
       "juengstes_start": "2026-09-01",
       "mit_code_im_text": 0
-    },
-    "bilanz": {
-      "stand": "2026-09-20T07:51:55-06:00",
-      "gefunden": 223,
-      "im_bestand": 169,
-      "unbrauchbar": 54,
-      "verworfen": 0,
-      "dublette": 0,
-      "verschwunden": 0,
-      "zurueckgestellt": 0,
-      "offen": 0,
-      "offene_beispiele": [],
-      "bestand_gesamt": 169,
-      "bestand_ausserhalb": 0
     },
     "verlauf_felder_ab": "2026-09-18T18:54:34-06:00",
     "befunde": [],
