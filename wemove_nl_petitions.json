@@ -31,9 +31,9 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-20T23:16:32-06:00",
+    "generated_at": "2026-09-21T07:16:20-06:00",
     "petition_count": 169,
-    "available": 223,
+    "available": 224,
     "unbrauchbare": {
       "2023-01-lucas-ig-wrapper-test-petition-NL": "2026-09-05T15:11:04-06:00",
       "2023-07-simon-1-NL": "2026-09-05T16:38:40-06:00",
@@ -92,36 +92,22 @@
     },
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-09-20T23:16:32-06:00",
-      "gefunden": 223,
+      "stand": "2026-09-21T07:16:20-06:00",
+      "gefunden": 224,
       "im_bestand": 169,
       "unbrauchbar": 54,
       "verworfen": 0,
       "dublette": 0,
       "verschwunden": 0,
       "zurueckgestellt": 0,
-      "offen": 0,
-      "offene_beispiele": [],
+      "offen": 1,
+      "offene_beispiele": [
+        "2026-09-insurance-natural-disasters-petition-NL"
+      ],
       "bestand_gesamt": 169,
       "bestand_ausserhalb": 0
     },
     "lauf_verlauf": [
-      {
-        "zeit": "2026-09-19T18:32:43-06:00",
-        "gesamt": 169,
-        "online": 168,
-        "offline": 1,
-        "ohne_titel": 1,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 1,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 160,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
       {
         "zeit": "2026-09-19T18:56:51-06:00",
         "gesamt": 169,
@@ -585,10 +571,26 @@
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
         "neu": 0
+      },
+      {
+        "zeit": "2026-09-21T07:16:20-06:00",
+        "gesamt": 169,
+        "online": 168,
+        "offline": 1,
+        "ohne_titel": 1,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 1,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 160,
+        "juengstes_start": "2026-09-01",
+        "mit_code_im_text": 0,
+        "herkunft": "lokal_cron",
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-20T23:16:32-06:00",
+      "zeit": "2026-09-21T07:16:20-06:00",
       "gesamt": 169,
       "online": 168,
       "offline": 1,
@@ -602,8 +604,17 @@
       "mit_code_im_text": 0
     },
     "verlauf_felder_ab": "2026-09-18T18:54:34-06:00",
-    "befunde": [],
-    "health_warning": null,
+    "befunde": [
+      {
+        "stufe": "warnung",
+        "thema": "Host ausgelassen (robots.txt nicht lesbar)",
+        "text": "action.wemove.eu: HTTP 202. Der Host wurde für diesen Lauf komplett ausgelassen; von dort stammen KEINE frischen Daten. Der Bestand bleibt unverändert stehen.",
+        "zeit": "2026-09-21T07:16:20-06:00",
+        "thema_en": "Host skipped (robots.txt unreadable)",
+        "text_en": "action.wemove.eu: HTTP 202. The host was skipped entirely for this run; no fresh data came from it. The existing records stay as they are."
+      }
+    ],
+    "health_warning": "Host ausgelassen (robots.txt nicht lesbar): action.wemove.eu: HTTP 202. Der Host wurde für diesen Lauf komplett ausgelassen; von dort stammen KEINE frischen Daten. Der Bestand bleibt unverändert stehen.",
     "online_count": 168
   },
   "2026-08-protect-europe-make-polluters-pay-petition-NL": {

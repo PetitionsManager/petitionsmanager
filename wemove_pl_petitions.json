@@ -31,9 +31,9 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-20T23:16:52-06:00",
+    "generated_at": "2026-09-21T07:16:39-06:00",
     "petition_count": 181,
-    "available": 227,
+    "available": 228,
     "unbrauchbare": {
       "2023-06-deaths-at-sea-testing-PL": "2026-09-05T16:48:37-06:00",
       "2023-07-simon-1-PL": "2026-09-05T16:48:37-06:00",
@@ -84,36 +84,22 @@
     },
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-09-20T23:16:52-06:00",
-      "gefunden": 227,
+      "stand": "2026-09-21T07:16:39-06:00",
+      "gefunden": 228,
       "im_bestand": 181,
       "unbrauchbar": 46,
       "verworfen": 0,
       "dublette": 0,
       "verschwunden": 0,
       "zurueckgestellt": 0,
-      "offen": 0,
-      "offene_beispiele": [],
+      "offen": 1,
+      "offene_beispiele": [
+        "2026-09-insurance-natural-disasters-petition-PL"
+      ],
       "bestand_gesamt": 181,
       "bestand_ausserhalb": 0
     },
     "lauf_verlauf": [
-      {
-        "zeit": "2026-09-19T18:32:55-06:00",
-        "gesamt": 181,
-        "online": 181,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 169,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
       {
         "zeit": "2026-09-19T18:57:03-06:00",
         "gesamt": 181,
@@ -577,10 +563,26 @@
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
         "neu": 0
+      },
+      {
+        "zeit": "2026-09-21T07:16:39-06:00",
+        "gesamt": 181,
+        "online": 181,
+        "offline": 0,
+        "ohne_titel": 0,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 0,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 169,
+        "juengstes_start": "2026-09-01",
+        "mit_code_im_text": 0,
+        "herkunft": "lokal_cron",
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-20T23:16:52-06:00",
+      "zeit": "2026-09-21T07:16:39-06:00",
       "gesamt": 181,
       "online": 181,
       "offline": 0,
@@ -594,8 +596,17 @@
       "mit_code_im_text": 0
     },
     "verlauf_felder_ab": "2026-09-18T20:45:13-06:00",
-    "befunde": [],
-    "health_warning": null,
+    "befunde": [
+      {
+        "stufe": "warnung",
+        "thema": "Host ausgelassen (robots.txt nicht lesbar)",
+        "text": "action.wemove.eu: HTTP 202. Der Host wurde für diesen Lauf komplett ausgelassen; von dort stammen KEINE frischen Daten. Der Bestand bleibt unverändert stehen.",
+        "zeit": "2026-09-21T07:16:39-06:00",
+        "thema_en": "Host skipped (robots.txt unreadable)",
+        "text_en": "action.wemove.eu: HTTP 202. The host was skipped entirely for this run; no fresh data came from it. The existing records stay as they are."
+      }
+    ],
+    "health_warning": "Host ausgelassen (robots.txt nicht lesbar): action.wemove.eu: HTTP 202. Der Host wurde für diesen Lauf komplett ausgelassen; von dort stammen KEINE frischen Daten. Der Bestand bleibt unverändert stehen.",
     "online_count": 181
   },
   "2026-08-protect-europe-make-polluters-pay-petition-PL": {

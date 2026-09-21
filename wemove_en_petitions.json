@@ -31,9 +31,9 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-20T23:15:28-06:00",
+    "generated_at": "2026-09-21T07:15:20-06:00",
     "petition_count": 606,
-    "available": 708,
+    "available": 709,
     "unbrauchbare": {
       "20216-05-all-out-list-swap-petition-EN": "2026-09-05T14:05:02-06:00",
       "2023-01-lucas-ig-wrapper-test-petition-EN": "2026-09-05T15:27:48-06:00",
@@ -140,22 +140,24 @@
     },
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-09-20T23:15:28-06:00",
-      "gefunden": 708,
+      "stand": "2026-09-21T07:15:20-06:00",
+      "gefunden": 709,
       "im_bestand": 606,
       "unbrauchbar": 102,
       "verworfen": 0,
       "dublette": 0,
       "verschwunden": 0,
       "zurueckgestellt": 0,
-      "offen": 0,
-      "offene_beispiele": [],
+      "offen": 1,
+      "offene_beispiele": [
+        "2026-09-insurance-natural-disasters-petition-EN"
+      ],
       "bestand_gesamt": 606,
       "bestand_ausserhalb": 0
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-09-20T23:15:28-06:00",
+        "zeit": "2026-09-21T07:15:20-06:00",
         "gesamt": 606,
         "online": 605,
         "offline": 1,
@@ -172,7 +174,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-20T23:15:28-06:00",
+      "zeit": "2026-09-21T07:15:20-06:00",
       "gesamt": 606,
       "online": 605,
       "offline": 1,
@@ -185,7 +187,7 @@
       "juengstes_start": "2026-09-01",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-09-20T23:15:28-06:00",
+    "verlauf_felder_ab": "2026-09-21T07:15:20-06:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 605
@@ -3577,7 +3579,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-10-testing-pixel",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "Testing",
@@ -3588,7 +3590,7 @@
       "People",
       "Name"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "2023-11-27-trial2-taxtheultrarich-petition-EN": {
     "slug": "2023-11-27-trial2-taxtheultrarich-petition-EN",
@@ -3612,7 +3614,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-11-27-trial2-taxtheultrarich-petition",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -3626,7 +3628,7 @@
       "Governments",
       "Directive"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "2023-11-end-tax-havens-in-the-eu-implement-the-treaty-reform-adopted-by-EN": {
     "slug": "2023-11-end-tax-havens-in-the-eu-implement-the-treaty-reform-adopted-by-EN",
@@ -3650,7 +3652,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-11-end-tax-havens-in-the-eu-implement-the-treaty-reform-adopted-by",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -3664,7 +3666,7 @@
       "States",
       "Taxation"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "2023-11-europe-please-include-scotland-in-enlargement-conversation-EN": {
     "slug": "2023-11-europe-please-include-scotland-in-enlargement-conversation-EN",
@@ -3688,7 +3690,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-11-europe-please-include-scotland-in-enlargement-conversation",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "SCOTLAND",
@@ -3702,7 +3704,7 @@
       "EUROPE",
       "INCLUDE"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "2023-11-flat-incompatibility-deter-spread-firmly-EN": {
     "slug": "2023-11-flat-incompatibility-deter-spread-firmly-EN",
@@ -3725,7 +3727,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-11-flat-incompatibility-deter-spread-firmly",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "Incompatibility",
@@ -3739,7 +3741,7 @@
       "Name",
       "Important"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "2023-11-pesticide-rebels-training-Jolanta-petition-EN": {
     "slug": "2023-11-pesticide-rebels-training-Jolanta-petition-EN",
@@ -3763,7 +3765,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-11-pesticide-rebels-training-Jolanta-petition",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "South",
@@ -3777,7 +3779,7 @@
       "Against",
       "Jolanta"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "2023-11-this-is-not-a-spam-from-romain-2-EN": {
     "slug": "2023-11-this-is-not-a-spam-from-romain-2-EN",
@@ -3800,7 +3802,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-11-this-is-not-a-spam-from-romain-2",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "Spam",
@@ -3809,7 +3811,7 @@
       "Important",
       "Name"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "2023-11-this-is-not-a-spam-from-romain-EN": {
     "slug": "2023-11-this-is-not-a-spam-from-romain-EN",
@@ -3832,7 +3834,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-11-this-is-not-a-spam-from-romain",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "Spam",
@@ -3842,7 +3844,7 @@
       "Name",
       "Romai"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "2023-11-trial-forever-chemicals-coverup-petition-EN": {
     "slug": "2023-11-trial-forever-chemicals-coverup-petition-EN",
@@ -3865,7 +3867,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-11-trial-forever-chemicals-coverup-petition",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "Chemicals",
@@ -3879,7 +3881,7 @@
       "People",
       "Plan"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "2023-11-trial-taxtherich-petition-EN": {
     "slug": "2023-11-trial-taxtherich-petition-EN",
@@ -3903,7 +3905,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-11-trial-taxtherich-petition",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -3917,7 +3919,7 @@
       "Call",
       "Establishing"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "2023-12-iskra-testing-if-new-trello-cards-are-generated-EN": {
     "slug": "2023-12-iskra-testing-if-new-trello-cards-are-generated-EN",
@@ -3940,7 +3942,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-12-iskra-testing-if-new-trello-cards-are-generated",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "Generated",
@@ -3953,7 +3955,7 @@
       "Fdff",
       "Name"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "2023-12-quality-access-to-care-for-people-with-multiple-sclerosis-and-ne-EN": {
     "slug": "2023-12-quality-access-to-care-for-people-with-multiple-sclerosis-and-ne-EN",
@@ -3977,7 +3979,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-12-quality-access-to-care-for-people-with-multiple-sclerosis-and-ne",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "People",
@@ -3991,7 +3993,7 @@
       "Carers",
       "Neurological"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "2023-12-simon-sequence-petition-EN": {
     "slug": "2023-12-simon-sequence-petition-EN",
@@ -4014,7 +4016,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-12-simon-sequence-petition",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -4028,7 +4030,7 @@
       "Important",
       "Council"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "2023-12-tax-the-rich-petition-EN": {
     "slug": "2023-12-tax-the-rich-petition-EN",
@@ -4060,7 +4062,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-12-tax-the-rich-petition",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "Wealth",
@@ -4074,7 +4076,7 @@
       "Spain",
       "Call"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "2023-12-trial-gmo-rules-petition-EN": {
     "slug": "2023-12-trial-gmo-rules-petition-EN",
@@ -4098,7 +4100,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-12-trial-gmo-rules-petition",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "GMOs",
@@ -4112,7 +4114,7 @@
       "Pesticides",
       "Essential"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "2023-8-campagne-avec-image-EN": {
     "slug": "2023-8-campagne-avec-image-EN",
@@ -4134,7 +4136,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-8-campagne-avec-image",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "Campagne",
@@ -4148,7 +4150,7 @@
       "Voyeurs",
       "Name"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "2023-8-petition-sans-image-EN": {
     "slug": "2023-8-petition-sans-image-EN",
@@ -4170,7 +4172,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-8-petition-sans-image",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "Without",
@@ -4184,7 +4186,7 @@
       "English",
       "Español"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "2023-9-another-sign-the-button-EN": {
     "slug": "2023-9-another-sign-the-button-EN",
@@ -4206,7 +4208,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-9-another-sign-the-button",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "Sign",
@@ -4216,7 +4218,7 @@
       "Name",
       "Page"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "2023-9-campagne-sans-aucune-image-EN": {
     "slug": "2023-9-campagne-sans-aucune-image-EN",
@@ -4238,7 +4240,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-9-campagne-sans-aucune-image",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "Campagne",
@@ -4251,7 +4253,7 @@
       "Find",
       "Name"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "2023-9-correctly-modeled-campaign-EN": {
     "slug": "2023-9-correctly-modeled-campaign-EN",
@@ -4273,7 +4275,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-9-correctly-modeled-campaign",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "Correctly",
@@ -4283,7 +4285,7 @@
       "Models",
       "Name"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "2023-9-fix-checker-EN": {
     "slug": "2023-9-fix-checker-EN",
@@ -4305,7 +4307,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-9-fix-checker",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "Checker",
@@ -4316,7 +4318,7 @@
       "Works",
       "Name"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "2023-9-image-fixer-2-EN": {
     "slug": "2023-9-image-fixer-2-EN",
@@ -4338,7 +4340,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-9-image-fixer-2",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "Fixer",
@@ -4350,7 +4352,7 @@
       "Bugs",
       "Name"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "2023-9-image-fixer-EN": {
     "slug": "2023-9-image-fixer-EN",
@@ -4372,7 +4374,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-9-image-fixer",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "Fixer",
@@ -4384,7 +4386,7 @@
       "Bugs",
       "Name"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "2023-9-local-ghoster-EN": {
     "slug": "2023-9-local-ghoster-EN",
@@ -4406,7 +4408,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-9-local-ghoster",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "Ghoster",
@@ -4420,7 +4422,7 @@
       "Image",
       "Name"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "2023-9-local-image-checker-EN": {
     "slug": "2023-9-local-image-checker-EN",
@@ -4442,7 +4444,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-9-local-image-checker",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "Image",
@@ -4456,7 +4458,7 @@
       "Please",
       "Name"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "2023-9-local-image-newbie-EN": {
     "slug": "2023-9-local-image-newbie-EN",
@@ -4478,7 +4480,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-9-local-image-newbie",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "Image",
@@ -4492,7 +4494,7 @@
       "Please",
       "Name"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "2023-9-local-image-veteran-EN": {
     "slug": "2023-9-local-image-veteran-EN",
@@ -4514,7 +4516,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-9-local-image-veteran",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "Veteran",
@@ -4528,7 +4530,7 @@
       "Surprise",
       "Please"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "2023-9-nth-image-debugger-EN": {
     "slug": "2023-9-nth-image-debugger-EN",
@@ -4550,7 +4552,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-9-nth-image-debugger",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "Debugger",
@@ -4562,7 +4564,7 @@
       "Help",
       "Name"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "2023-9-quick-campaign-EN": {
     "slug": "2023-9-quick-campaign-EN",
@@ -4584,7 +4586,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-9-quick-campaign",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "Quick",
@@ -4593,7 +4595,7 @@
       "People",
       "Name"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "2023-9-remote-image-creator-EN": {
     "slug": "2023-9-remote-image-creator-EN",
@@ -4615,7 +4617,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-9-remote-image-creator",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "Creator",
@@ -4628,7 +4630,7 @@
       "Check",
       "Name"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "2023-9-sign-the-button-EN": {
     "slug": "2023-9-sign-the-button-EN",
@@ -4650,7 +4652,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-9-sign-the-button",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "Sign",
@@ -4661,7 +4663,7 @@
       "Check",
       "Name"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "2023-9-titled-campaign-EN": {
     "slug": "2023-9-titled-campaign-EN",
@@ -4683,7 +4685,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-9-titled-campaign",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "Titled",
@@ -4696,7 +4698,7 @@
       "Give",
       "Name"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "2023-9-veteran-image-checker-EN": {
     "slug": "2023-9-veteran-image-checker-EN",
@@ -4718,7 +4720,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-9-veteran-image-checker",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "Checker",
@@ -4732,7 +4734,7 @@
       "Surprise",
       "Please"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "202302-ayudanos-a-detener-la-construccion-de-macro-parques-eolicos-en-el-golfo-de-roses-petition-EN": {
     "slug": "202302-ayudanos-a-detener-la-construccion-de-macro-parques-eolicos-en-el-golfo-de-roses-petition-EN",
@@ -4756,7 +4758,7 @@
     "lang": "en",
     "campaign_id": "wemove:202302-ayudanos-a-detener-la-construccion-de-macro-parques-eolicos-en-el-golfo-de-roses-petition",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "Area",
@@ -4770,7 +4772,7 @@
       "Areas",
       "FARMS"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "202303-na_ratunek_polskiej_energetyce_wiatrowej-petition-EN": {
     "slug": "202303-na_ratunek_polskiej_energetyce_wiatrowej-petition-EN",
@@ -4794,7 +4796,7 @@
     "lang": "en",
     "campaign_id": "wemove:202303-na_ratunek_polskiej_energetyce_wiatrowej-petition",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "Wind",
@@ -4808,7 +4810,7 @@
       "Council",
       "Minimum"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "202303-non_a_l_exploitation_du_fort_de_vaujours_france-petition-EN": {
     "slug": "202303-non_a_l_exploitation_du_fort_de_vaujours_france-petition-EN",
@@ -4832,7 +4834,7 @@
     "lang": "en",
     "campaign_id": "wemove:202303-non_a_l_exploitation_du_fort_de_vaujours_france-petition",
     "status": "online",
-    "last_seen": "2026-09-17T20:32:43-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "State",
@@ -4846,7 +4848,7 @@
       "PLACO",
       "Industrialist"
     ],
-    "last_checked": "2026-09-17T20:32:43-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "202303-proteggiamo_i_bambini_dalle_aziende_di_videogiochi_che_non_rispettano_le_regole_imposte_per_immagini_pubblicita_e_contenuti-petition-EN": {
     "slug": "202303-proteggiamo_i_bambini_dalle_aziende_di_videogiochi_che_non_rispettano_le_regole_imposte_per_immagini_pubblicita_e_contenuti-petition-EN",
@@ -4870,7 +4872,7 @@
     "lang": "en",
     "campaign_id": "wemove:202303-proteggiamo_i_bambini_dalle_aziende_di_videogiochi_che_non_rispettano_le_regole_imposte_per_immagini_pubblicita_e_contenuti-petition",
     "status": "online",
-    "last_seen": "2026-09-17T20:59:46-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "Health",
@@ -4884,7 +4886,7 @@
       "Youth",
       "PEGI"
     ],
-    "last_checked": "2026-09-17T20:59:46-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "202304-detengamos_la_tala_de_encinas_de_200_anos_en_el_parque_nacional_sierra_de_grazalema-petition-EN": {
     "slug": "202304-detengamos_la_tala_de_encinas_de_200_anos_en_el_parque_nacional_sierra_de_grazalema-petition-EN",
@@ -4908,7 +4910,7 @@
     "lang": "en",
     "campaign_id": "wemove:202304-detengamos_la_tala_de_encinas_de_200_anos_en_el_parque_nacional_sierra_de_grazalema-petition",
     "status": "online",
-    "last_seen": "2026-09-17T20:59:46-06:00",
+    "last_seen": "2026-09-21T07:12:21-06:00",
     "offline_since": null,
     "tags": [
       "Natural",
@@ -4922,7 +4924,7 @@
       "OAKS",
       "Grazalema"
     ],
-    "last_checked": "2026-09-17T20:59:46-06:00"
+    "last_checked": "2026-09-21T07:12:21-06:00"
   },
   "202305-stop_financing_putin_s_aggression_now-petition-EN": {
     "slug": "202305-stop_financing_putin_s_aggression_now-petition-EN",
