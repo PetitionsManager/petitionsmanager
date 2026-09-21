@@ -31,7 +31,7 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-21T09:55:47-06:00",
+    "generated_at": "2026-09-21T10:49:02-06:00",
     "petition_count": 606,
     "available": 709,
     "unbrauchbare": {
@@ -140,7 +140,7 @@
     },
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-09-21T09:55:47-06:00",
+      "stand": "2026-09-21T10:49:01-06:00",
       "gefunden": 709,
       "im_bestand": 606,
       "unbrauchbar": 102,
@@ -157,7 +157,7 @@
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-09-21T09:55:47-06:00",
+        "zeit": "2026-09-21T10:49:01-06:00",
         "gesamt": 606,
         "online": 605,
         "offline": 1,
@@ -174,7 +174,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-21T09:55:47-06:00",
+      "zeit": "2026-09-21T10:49:01-06:00",
       "gesamt": 606,
       "online": 605,
       "offline": 1,
@@ -187,7 +187,7 @@
       "juengstes_start": "2026-09-01",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-09-21T09:55:47-06:00",
+    "verlauf_felder_ab": "2026-09-21T10:49:01-06:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 605
@@ -9624,7 +9624,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-10-trial-pour-plan-national-contre-le-viol-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-17T22:23:51-06:00",
+    "last_seen": "2026-09-21T10:46:11-06:00",
     "offline_since": null,
     "tags": [
       "Rape",
@@ -9638,7 +9638,7 @@
       "Eradicate",
       "Implement"
     ],
-    "last_checked": "2026-09-17T22:23:51-06:00"
+    "last_checked": "2026-09-21T10:46:11-06:00"
   },
   "2024-10-urgent-action-to-reform-eu-agricultural-policies-to-support-sust-EN": {
     "slug": "2024-10-urgent-action-to-reform-eu-agricultural-policies-to-support-sust-EN",
@@ -9662,7 +9662,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-10-urgent-action-to-reform-eu-agricultural-policies-to-support-sust",
     "status": "online",
-    "last_seen": "2026-09-17T22:23:51-06:00",
+    "last_seen": "2026-09-21T10:46:11-06:00",
     "offline_since": null,
     "tags": [
       "Agriculture",
@@ -9676,7 +9676,7 @@
       "Subsidies",
       "Farming"
     ],
-    "last_checked": "2026-09-17T22:23:51-06:00"
+    "last_checked": "2026-09-21T10:46:11-06:00"
   },
   "2024-10-youmove-wildlife-crossings-petition-EN": {
     "slug": "2024-10-youmove-wildlife-crossings-petition-EN",
@@ -9685,6 +9685,10 @@
       {
         "checked_at": "2026-09-06T13:34:11-06:00",
         "count": 43514
+      },
+      {
+        "checked_at": "2026-09-21T10:46:11-06:00",
+        "count": 43515
       }
     ],
     "title": "Let’s make our roads safer for all",
@@ -9695,12 +9699,12 @@
     "start_date": "2024-10-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 43514,
+    "signatures": 43515,
     "goal": 50000,
     "lang": "en",
     "campaign_id": "wemove:2024-10-youmove-wildlife-crossings-petition",
     "status": "online",
-    "last_seen": "2026-09-17T22:23:51-06:00",
+    "last_seen": "2026-09-21T10:46:11-06:00",
     "offline_since": null,
     "tags": [
       "Roads",
@@ -9714,7 +9718,7 @@
       "Infrastructure",
       "Including"
     ],
-    "last_checked": "2026-09-17T22:23:51-06:00"
+    "last_checked": "2026-09-21T10:46:11-06:00"
   },
   "2024-11-28-trial-repair-fund-petition-EN": {
     "slug": "2024-11-28-trial-repair-fund-petition-EN",
@@ -9738,7 +9742,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-11-28-trial-repair-fund-petition",
     "status": "online",
-    "last_seen": "2026-09-17T22:23:51-06:00",
+    "last_seen": "2026-09-21T10:46:11-06:00",
     "offline_since": null,
     "tags": [
       "Climate",
@@ -9752,7 +9756,7 @@
       "Disasters",
       "Call"
     ],
-    "last_checked": "2026-09-17T22:23:51-06:00"
+    "last_checked": "2026-09-21T10:46:11-06:00"
   },
   "2024-11-erreway-in-greece-EN": {
     "slug": "2024-11-erreway-in-greece-EN",
@@ -9775,7 +9779,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-11-erreway-in-greece",
     "status": "online",
-    "last_seen": "2026-09-17T22:23:51-06:00",
+    "last_seen": "2026-09-21T10:46:11-06:00",
     "offline_since": null,
     "tags": [
       "Erreway",
@@ -9784,7 +9788,7 @@
       "Dream",
       "Name"
     ],
-    "last_checked": "2026-09-17T22:23:51-06:00"
+    "last_checked": "2026-09-21T10:46:11-06:00"
   },
   "2024-11-erreway-tour-2025-concert-in-greece-EN": {
     "slug": "2024-11-erreway-tour-2025-concert-in-greece-EN",
@@ -9808,7 +9812,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-11-erreway-tour-2025-concert-in-greece",
     "status": "online",
-    "last_seen": "2026-09-17T22:23:51-06:00",
+    "last_seen": "2026-09-21T10:46:11-06:00",
     "offline_since": null,
     "tags": [
       "CONCERT",
@@ -9822,7 +9826,7 @@
       "Several",
       "Known"
     ],
-    "last_checked": "2026-09-17T22:23:51-06:00"
+    "last_checked": "2026-09-21T10:46:11-06:00"
   },
   "2024-11-i-love-cheese-puffs-EN": {
     "slug": "2024-11-i-love-cheese-puffs-EN",
@@ -9846,7 +9850,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-11-i-love-cheese-puffs",
     "status": "online",
-    "last_seen": "2026-09-17T22:23:51-06:00",
+    "last_seen": "2026-09-21T10:46:11-06:00",
     "offline_since": null,
     "tags": [
       "Puffs",
@@ -9860,7 +9864,7 @@
       "Kinds",
       "Name"
     ],
-    "last_checked": "2026-09-17T22:23:51-06:00"
+    "last_checked": "2026-09-21T10:46:11-06:00"
   },
   "2024-11-iskra-completely-new-test-with-unique-name-EN": {
     "slug": "2024-11-iskra-completely-new-test-with-unique-name-EN",
@@ -9883,7 +9887,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-11-iskra-completely-new-test-with-unique-name",
     "status": "online",
-    "last_seen": "2026-09-17T22:23:51-06:00",
+    "last_seen": "2026-09-21T10:46:11-06:00",
     "offline_since": null,
     "tags": [
       "Name",
@@ -9897,7 +9901,7 @@
       "English",
       "Testing"
     ],
-    "last_checked": "2026-09-17T22:23:51-06:00"
+    "last_checked": "2026-09-21T10:46:11-06:00"
   },
   "2024-11-iskra-testing-issues-with-ym-EN": {
     "slug": "2024-11-iskra-testing-issues-with-ym-EN",
@@ -9920,7 +9924,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-11-iskra-testing-issues-with-ym",
     "status": "online",
-    "last_seen": "2026-09-17T22:23:51-06:00",
+    "last_seen": "2026-09-21T10:46:11-06:00",
     "offline_since": null,
     "tags": [
       "Test",
@@ -9932,7 +9936,7 @@
       "Jdhjkdf",
       "Name"
     ],
-    "last_checked": "2026-09-17T22:23:51-06:00"
+    "last_checked": "2026-09-21T10:46:11-06:00"
   },
   "2024-11-iskra-testing-new-issues-222-EN": {
     "slug": "2024-11-iskra-testing-new-issues-222-EN",
@@ -9955,7 +9959,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-11-iskra-testing-new-issues-222",
     "status": "online",
-    "last_seen": "2026-09-17T22:23:51-06:00",
+    "last_seen": "2026-09-21T10:46:11-06:00",
     "offline_since": null,
     "tags": [
       "Test",
@@ -9966,7 +9970,7 @@
       "Important",
       "Name"
     ],
-    "last_checked": "2026-09-17T22:23:51-06:00"
+    "last_checked": "2026-09-21T10:46:11-06:00"
   },
   "2024-11-marcin-test-norwegian1-EN": {
     "slug": "2024-11-marcin-test-norwegian1-EN",
@@ -9989,7 +9993,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-11-marcin-test-norwegian1",
     "status": "online",
-    "last_seen": "2026-09-17T22:23:51-06:00",
+    "last_seen": "2026-09-21T10:46:11-06:00",
     "offline_since": null,
     "tags": [
       "Norwegian",
@@ -10003,7 +10007,7 @@
       "Please",
       "Name"
     ],
-    "last_checked": "2026-09-17T22:23:51-06:00"
+    "last_checked": "2026-09-21T10:46:11-06:00"
   },
   "2024-11-marcin-test-norwegian2-EN": {
     "slug": "2024-11-marcin-test-norwegian2-EN",
@@ -10026,7 +10030,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-11-marcin-test-norwegian2",
     "status": "online",
-    "last_seen": "2026-09-17T22:23:51-06:00",
+    "last_seen": "2026-09-21T10:46:11-06:00",
     "offline_since": null,
     "tags": [
       "Test",
@@ -10037,7 +10041,7 @@
       "Norway",
       "Name"
     ],
-    "last_checked": "2026-09-17T22:23:51-06:00"
+    "last_checked": "2026-09-21T10:46:11-06:00"
   },
   "2024-11-stop-scientific-frauds-to-fund-further-science-EN": {
     "slug": "2024-11-stop-scientific-frauds-to-fund-further-science-EN",
@@ -10060,7 +10064,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-11-stop-scientific-frauds-to-fund-further-science",
     "status": "online",
-    "last_seen": "2026-09-17T22:23:51-06:00",
+    "last_seen": "2026-09-21T10:46:11-06:00",
     "offline_since": null,
     "tags": [
       "Scientific",
@@ -10074,7 +10078,7 @@
       "World",
       "Companies"
     ],
-    "last_checked": "2026-09-17T22:23:51-06:00"
+    "last_checked": "2026-09-21T10:46:11-06:00"
   },
   "2024-11-till-training-campaign-petition-EN": {
     "slug": "2024-11-till-training-campaign-petition-EN",
@@ -10098,7 +10102,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-11-till-training-campaign-petition",
     "status": "online",
-    "last_seen": "2026-09-17T22:23:51-06:00",
+    "last_seen": "2026-09-21T10:46:11-06:00",
     "offline_since": null,
     "tags": [
       "Pesticides",
@@ -10112,7 +10116,7 @@
       "Nederlands",
       "Interests"
     ],
-    "last_checked": "2026-09-17T22:23:51-06:00"
+    "last_checked": "2026-09-21T10:46:11-06:00"
   },
   "2024-11-trial-because-our-planet-is-blue-second-trial-petition-EN": {
     "slug": "2024-11-trial-because-our-planet-is-blue-second-trial-petition-EN",
@@ -10133,7 +10137,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-11-trial-because-our-planet-is-blue-second-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-17T22:23:51-06:00",
+    "last_seen": "2026-09-21T10:46:11-06:00",
     "offline_since": null,
     "tags": [
       "Ocean",
@@ -10147,7 +10151,7 @@
       "Marine",
       "President"
     ],
-    "last_checked": "2026-09-17T22:23:51-06:00",
+    "last_checked": "2026-09-21T10:46:11-06:00",
     "signatures": 1,
     "goal": 1000
   },
@@ -10173,7 +10177,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-11-trial-Free-Abdallah-2-petition",
     "status": "online",
-    "last_seen": "2026-09-17T22:23:51-06:00",
+    "last_seen": "2026-09-21T10:46:11-06:00",
     "offline_since": null,
     "tags": [
       "Children",
@@ -10187,7 +10191,7 @@
       "Fights",
       "Commission"
     ],
-    "last_checked": "2026-09-17T22:23:51-06:00"
+    "last_checked": "2026-09-21T10:46:11-06:00"
   },
   "2024-11-trial-Free-Abdallah-petition-EN": {
     "slug": "2024-11-trial-Free-Abdallah-petition-EN",
@@ -10211,7 +10215,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-11-trial-Free-Abdallah-petition",
     "status": "online",
-    "last_seen": "2026-09-17T22:23:51-06:00",
+    "last_seen": "2026-09-21T10:46:11-06:00",
     "offline_since": null,
     "tags": [
       "President",
@@ -10225,7 +10229,7 @@
       "Tunisian",
       "Rights"
     ],
-    "last_checked": "2026-09-17T22:23:51-06:00"
+    "last_checked": "2026-09-21T10:46:11-06:00"
   },
   "2024-11-trial-human-rights-borders-EN": {
     "slug": "2024-11-trial-human-rights-borders-EN",
@@ -10249,7 +10253,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-11-trial-human-rights-borders",
     "status": "online",
-    "last_seen": "2026-09-17T22:23:51-06:00",
+    "last_seen": "2026-09-21T10:46:11-06:00",
     "offline_since": null,
     "tags": [
       "Border",
@@ -10263,7 +10267,7 @@
       "Tunisian",
       "Safety"
     ],
-    "last_checked": "2026-09-17T22:23:51-06:00"
+    "last_checked": "2026-09-21T10:46:11-06:00"
   },
   "2024-11-trial-mina-touro-petition-EN": {
     "slug": "2024-11-trial-mina-touro-petition-EN",
@@ -10286,7 +10290,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-11-trial-mina-touro-petition",
     "status": "online",
-    "last_seen": "2026-09-17T22:23:51-06:00",
+    "last_seen": "2026-09-21T10:46:11-06:00",
     "offline_since": null,
     "tags": [
       "Government",
@@ -10300,7 +10304,7 @@
       "Heritage",
       "Santiago"
     ],
-    "last_checked": "2026-09-17T22:23:51-06:00"
+    "last_checked": "2026-09-21T10:46:11-06:00"
   },
   "2024-11-trial-puffins-iceland-trial-petition-EN": {
     "slug": "2024-11-trial-puffins-iceland-trial-petition-EN",
@@ -10323,7 +10327,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-11-trial-puffins-iceland-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-17T22:23:51-06:00",
+    "last_seen": "2026-09-21T10:46:11-06:00",
     "offline_since": null,
     "tags": [
       "Puffins",
@@ -10337,7 +10341,7 @@
       "Specifically",
       "Environment"
     ],
-    "last_checked": "2026-09-17T22:23:51-06:00"
+    "last_checked": "2026-09-21T10:46:11-06:00"
   },
   "2024-11-trial-unpaid-internship-ban-petition-EN": {
     "slug": "2024-11-trial-unpaid-internship-ban-petition-EN",
@@ -10361,7 +10365,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-11-trial-unpaid-internship-ban-petition",
     "status": "online",
-    "last_seen": "2026-09-17T22:23:51-06:00",
+    "last_seen": "2026-09-21T10:46:11-06:00",
     "offline_since": null,
     "tags": [
       "Internships",
@@ -10375,7 +10379,7 @@
       "Micallef",
       "Youth"
     ],
-    "last_checked": "2026-09-17T22:23:51-06:00"
+    "last_checked": "2026-09-21T10:46:11-06:00"
   },
   "2024-11-trial-youmove-toxic-mineral-oils-petition-EN": {
     "slug": "2024-11-trial-youmove-toxic-mineral-oils-petition-EN",
@@ -10399,7 +10403,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-11-trial-youmove-toxic-mineral-oils-petition",
     "status": "online",
-    "last_seen": "2026-09-17T22:23:51-06:00",
+    "last_seen": "2026-09-21T10:46:11-06:00",
     "offline_since": null,
     "tags": [
       "Food",
@@ -10413,7 +10417,7 @@
       "European",
       "Shelves"
     ],
-    "last_checked": "2026-09-17T22:23:51-06:00"
+    "last_checked": "2026-09-21T10:46:11-06:00"
   },
   "2024-12-02-trial-antiracism-Soumahoro-trial-EN": {
     "slug": "2024-12-02-trial-antiracism-Soumahoro-trial-EN",
@@ -10437,7 +10441,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-12-02-trial-antiracism-Soumahoro-trial",
     "status": "online",
-    "last_seen": "2026-09-17T22:23:51-06:00",
+    "last_seen": "2026-09-21T10:46:11-06:00",
     "offline_since": null,
     "tags": [
       "Parliament",
@@ -10451,7 +10455,7 @@
       "Conference",
       "Justice"
     ],
-    "last_checked": "2026-09-17T22:23:51-06:00"
+    "last_checked": "2026-09-21T10:46:11-06:00"
   },
   "2024-12-11-syria-is-not-safe-yet-trial-petition-EN": {
     "slug": "2024-12-11-syria-is-not-safe-yet-trial-petition-EN",
@@ -10474,7 +10478,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-12-11-syria-is-not-safe-yet-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-17T22:23:51-06:00",
+    "last_seen": "2026-09-21T10:46:11-06:00",
     "offline_since": null,
     "tags": [
       "Syria",
@@ -10488,7 +10492,7 @@
       "Council",
       "Country"
     ],
-    "last_checked": "2026-09-17T22:23:51-06:00"
+    "last_checked": "2026-09-21T10:46:11-06:00"
   },
   "2024-12-Amazon-workers-petition-EN": {
     "slug": "2024-12-Amazon-workers-petition-EN",
@@ -10512,7 +10516,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-12-Amazon-workers-petition",
     "status": "online",
-    "last_seen": "2026-09-17T22:23:51-06:00",
+    "last_seen": "2026-09-21T10:46:11-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -10526,7 +10530,7 @@
       "Hold",
       "Parliament"
     ],
-    "last_checked": "2026-09-17T22:23:51-06:00"
+    "last_checked": "2026-09-21T10:46:11-06:00"
   },
   "2024-12-shark-meat-off-my-plate-EN": {
     "slug": "2024-12-shark-meat-off-my-plate-EN",
@@ -10550,7 +10554,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-12-shark-meat-off-my-plate",
     "status": "online",
-    "last_seen": "2026-09-17T22:23:51-06:00",
+    "last_seen": "2026-09-21T10:46:11-06:00",
     "offline_since": null,
     "tags": [
       "Shark",
@@ -10564,7 +10568,7 @@
       "Education",
       "Labelling"
     ],
-    "last_checked": "2026-09-17T22:23:51-06:00"
+    "last_checked": "2026-09-21T10:46:11-06:00"
   },
   "2024-12-Soumahoro-antiracism-petition-EN": {
     "slug": "2024-12-Soumahoro-antiracism-petition-EN",
@@ -10588,7 +10592,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-12-Soumahoro-antiracism-petition",
     "status": "online",
-    "last_seen": "2026-09-17T22:23:51-06:00",
+    "last_seen": "2026-09-21T10:46:11-06:00",
     "offline_since": null,
     "tags": [
       "Europe",
@@ -10602,7 +10606,7 @@
       "Maboula",
       "Directorate-General"
     ],
-    "last_checked": "2026-09-17T22:23:51-06:00"
+    "last_checked": "2026-09-21T10:46:11-06:00"
   },
   "2024-12-trial-antiracism-Soumahoro-2-petition-EN": {
     "slug": "2024-12-trial-antiracism-Soumahoro-2-petition-EN",
@@ -10626,7 +10630,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-12-trial-antiracism-Soumahoro-2-petition",
     "status": "online",
-    "last_seen": "2026-09-17T22:23:51-06:00",
+    "last_seen": "2026-09-21T10:46:11-06:00",
     "offline_since": null,
     "tags": [
       "Parliament",
@@ -10640,7 +10644,7 @@
       "Conference",
       "Scholar"
     ],
-    "last_checked": "2026-09-17T22:23:51-06:00"
+    "last_checked": "2026-09-21T10:46:11-06:00"
   },
   "2024-12-trial-environmental-education-petition-EN": {
     "slug": "2024-12-trial-environmental-education-petition-EN",
@@ -10664,7 +10668,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-12-trial-environmental-education-petition",
     "status": "online",
-    "last_seen": "2026-09-17T22:23:51-06:00",
+    "last_seen": "2026-09-21T10:46:11-06:00",
     "offline_since": null,
     "tags": [
       "Environmental",
@@ -10678,7 +10682,7 @@
       "Protecting",
       "European"
     ],
-    "last_checked": "2026-09-17T22:23:51-06:00"
+    "last_checked": "2026-09-21T10:46:11-06:00"
   },
   "2024-12-trial-russia-shadow-fleet-petition-EN": {
     "slug": "2024-12-trial-russia-shadow-fleet-petition-EN",
@@ -10702,7 +10706,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-12-trial-russia-shadow-fleet-petition",
     "status": "online",
-    "last_seen": "2026-09-17T22:23:51-06:00",
+    "last_seen": "2026-09-21T10:46:11-06:00",
     "offline_since": null,
     "tags": [
       "Fleet",
@@ -10716,7 +10720,7 @@
       "Member",
       "States"
     ],
-    "last_checked": "2026-09-17T22:23:51-06:00"
+    "last_checked": "2026-09-21T10:46:11-06:00"
   },
   "2024-12-trial-stop-deforestation-for-electricity-production-trial-2-petition-EN": {
     "slug": "2024-12-trial-stop-deforestation-for-electricity-production-trial-2-petition-EN",
@@ -10739,7 +10743,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-12-trial-stop-deforestation-for-electricity-production-trial-2-petition",
     "status": "online",
-    "last_seen": "2026-09-17T22:23:51-06:00",
+    "last_seen": "2026-09-21T10:46:11-06:00",
     "offline_since": null,
     "tags": [
       "Deforestation",
@@ -10753,7 +10757,7 @@
       "President",
       "Products"
     ],
-    "last_checked": "2026-09-17T22:23:51-06:00"
+    "last_checked": "2026-09-21T10:46:11-06:00"
   },
   "2024-2-clothes-restoration-EN": {
     "slug": "2024-2-clothes-restoration-EN",
@@ -10775,7 +10779,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-2-clothes-restoration",
     "status": "online",
-    "last_seen": "2026-09-17T22:23:51-06:00",
+    "last_seen": "2026-09-21T10:46:11-06:00",
     "offline_since": null,
     "tags": [
       "Restoration",
@@ -10789,7 +10793,7 @@
       "Clothes",
       "Time"
     ],
-    "last_checked": "2026-09-17T22:23:51-06:00"
+    "last_checked": "2026-09-21T10:46:11-06:00"
   },
   "2024-2-free-doctor-ahmed-muhanna-and-the-awda-medical-staff-EN": {
     "slug": "2024-2-free-doctor-ahmed-muhanna-and-the-awda-medical-staff-EN",
@@ -10812,7 +10816,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-2-free-doctor-ahmed-muhanna-and-the-awda-medical-staff",
     "status": "online",
-    "last_seen": "2026-09-17T22:23:51-06:00",
+    "last_seen": "2026-09-21T10:46:11-06:00",
     "offline_since": null,
     "tags": [
       "Muhanna",
@@ -10826,7 +10830,7 @@
       "AWDA",
       "Free"
     ],
-    "last_checked": "2026-09-17T22:23:51-06:00"
+    "last_checked": "2026-09-21T10:46:11-06:00"
   },
   "2024-2-galen-test-youmove-petition-2-EN": {
     "slug": "2024-2-galen-test-youmove-petition-2-EN",
@@ -10848,7 +10852,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-2-galen-test-youmove-petition-2",
     "status": "online",
-    "last_seen": "2026-09-17T22:23:51-06:00",
+    "last_seen": "2026-09-21T10:46:11-06:00",
     "offline_since": null,
     "tags": [
       "Youmove",
@@ -10861,7 +10865,7 @@
       "Nothing",
       "Name"
     ],
-    "last_checked": "2026-09-17T22:23:51-06:00"
+    "last_checked": "2026-09-21T10:46:11-06:00"
   },
   "2024-2-galen-test-youmove-petition-EN": {
     "slug": "2024-2-galen-test-youmove-petition-EN",
@@ -10883,7 +10887,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-2-galen-test-youmove-petition",
     "status": "online",
-    "last_seen": "2026-09-17T22:50:50-06:00",
+    "last_seen": "2026-09-21T10:46:11-06:00",
     "offline_since": null,
     "tags": [
       "Youmove",
@@ -10896,7 +10900,7 @@
       "Nothing",
       "Name"
     ],
-    "last_checked": "2026-09-17T22:50:50-06:00"
+    "last_checked": "2026-09-21T10:46:11-06:00"
   },
   "2024-2-justice-on-trial-will-you-politicians-stand-with-us-EN": {
     "slug": "2024-2-justice-on-trial-will-you-politicians-stand-with-us-EN",
