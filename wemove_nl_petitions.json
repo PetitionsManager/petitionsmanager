@@ -31,7 +31,7 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-22T15:48:09-06:00",
+    "generated_at": "2026-09-22T16:23:08-06:00",
     "petition_count": 169,
     "available": 224,
     "unbrauchbare": {
@@ -92,7 +92,7 @@
     },
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-09-22T15:48:09-06:00",
+      "stand": "2026-09-22T16:23:08-06:00",
       "gefunden": 224,
       "im_bestand": 169,
       "unbrauchbar": 54,
@@ -109,7 +109,7 @@
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-09-22T15:48:09-06:00",
+        "zeit": "2026-09-22T16:23:08-06:00",
         "gesamt": 169,
         "online": 168,
         "offline": 1,
@@ -126,7 +126,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-22T15:48:09-06:00",
+      "zeit": "2026-09-22T16:23:08-06:00",
       "gesamt": 169,
       "online": 168,
       "offline": 1,
@@ -139,7 +139,7 @@
       "juengstes_start": "2026-09-01",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-09-22T15:48:09-06:00",
+    "verlauf_felder_ab": "2026-09-22T16:23:08-06:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 168
@@ -1745,7 +1745,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2023-05-save-donana-petition",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Europese",
@@ -1759,7 +1759,7 @@
       "Bedreigde",
       "Petitie"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "2023-05-violence-against-women-directive-petition-NL": {
     "slug": "2023-05-violence-against-women-directive-petition-NL",
@@ -1787,7 +1787,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2023-05-violence-against-women-directive-petition",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Geweld",
@@ -1801,7 +1801,7 @@
       "Zijn",
       "Overlevenden"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "2023-06-deaths-at-sea-petition-NL": {
     "slug": "2023-06-deaths-at-sea-petition-NL",
@@ -1825,7 +1825,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2023-06-deaths-at-sea-petition",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Mensen",
@@ -1839,7 +1839,7 @@
       "Migratieroutes",
       "Ervoor"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "2023-06-odra-river-petition-NL": {
     "slug": "2023-06-odra-river-petition-NL",
@@ -1848,6 +1848,10 @@
       {
         "checked_at": "2026-09-18T17:30:10-06:00",
         "count": 45042
+      },
+      {
+        "checked_at": "2026-09-22T16:19:50-06:00",
+        "count": 45043
       }
     ],
     "title": "Laten we de rivier de Oder voor nog een natuurramp behoeden",
@@ -1861,7 +1865,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2023-06-odra-river-petition",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Rivier",
@@ -1875,8 +1879,8 @@
       "Overheid",
       "Laten"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00",
-    "signatures": 45042,
+    "last_checked": "2026-09-22T16:19:50-06:00",
+    "signatures": 45043,
     "goal": 50000
   },
   "2023-07-frontex-whistleblowers-petition-NL": {
@@ -1905,7 +1909,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2023-07-frontex-whistleblowers-petition",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Frontex",
@@ -1919,7 +1923,7 @@
       "Brengen",
       "Actie"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "2023-07-Make-Polluters-Pay-petition-NL": {
     "slug": "2023-07-Make-Polluters-Pay-petition-NL",
@@ -1947,7 +1951,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2023-07-Make-Polluters-Pay-petition",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Voor",
@@ -1961,7 +1965,7 @@
       "Gevolgen",
       "Toekomst"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "2023-08-glyphosate-petition-NL": {
     "slug": "2023-08-glyphosate-petition-NL",
@@ -1970,6 +1974,10 @@
       {
         "checked_at": "2026-09-18T17:30:10-06:00",
         "count": 22377
+      },
+      {
+        "checked_at": "2026-09-22T16:19:50-06:00",
+        "count": 22379
       }
     ],
     "title": "Verbied nu het giftige glyfosaat!",
@@ -1983,7 +1991,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2023-08-glyphosate-petition",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Glyfosaat",
@@ -1997,8 +2005,8 @@
       "Nederlands",
       "Uitspraken"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00",
-    "signatures": 22377,
+    "last_checked": "2026-09-22T16:19:50-06:00",
+    "signatures": 22379,
     "goal": 50000
   },
   "2023-08-hope-trumps-hate-training-NL": {
@@ -2022,7 +2030,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2023-08-hope-trumps-hate-training",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Nederlands",
@@ -2036,7 +2044,7 @@
       "Parlement",
       "REPLACEME"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "2023-08-pesticide-rebels-training-NL": {
     "slug": "2023-08-pesticide-rebels-training-NL",
@@ -2060,7 +2068,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2023-08-pesticide-rebels-training",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Pesticides",
@@ -2074,7 +2082,7 @@
       "Local",
       "Against"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "2023-09-pesticide-rebels-training-campaigns-petition-NL": {
     "slug": "2023-09-pesticide-rebels-training-campaigns-petition-NL",
@@ -2097,7 +2105,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2023-09-pesticide-rebels-training-campaigns-petition",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Pesticides",
@@ -2111,7 +2119,7 @@
       "Local",
       "Against"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "2023-09-stop-hoekstra-petition-NL": {
     "slug": "2023-09-stop-hoekstra-petition-NL",
@@ -2135,7 +2143,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2023-09-stop-hoekstra-petition",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Voor",
@@ -2149,7 +2157,7 @@
       "Ursula",
       "Actie"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "2023-10-eu-parliament-stop-selling-out-people-and-nature-to-mining-petition-NL": {
     "slug": "2023-10-eu-parliament-stop-selling-out-people-and-nature-to-mining-petition-NL",
@@ -2176,7 +2184,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2023-10-eu-parliament-stop-selling-out-people-and-nature-to-mining-petition",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Voor",
@@ -2190,7 +2198,7 @@
       "Niet",
       "Eindelijk"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "2023-10-gaza-civilians-petition-NL": {
     "slug": "2023-10-gaza-civilians-petition-NL",
@@ -2214,7 +2222,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2023-10-gaza-civilians-petition",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Zich",
@@ -2228,7 +2236,7 @@
       "Oorlogsmisdaden",
       "Europese"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "2023-11-end-tax-havens-in-the-eu-implement-the-treaty-reform-adopted-by-NL": {
     "slug": "2023-11-end-tax-havens-in-the-eu-implement-the-treaty-reform-adopted-by-NL",
@@ -2252,7 +2260,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2023-11-end-tax-havens-in-the-eu-implement-the-treaty-reform-adopted-by",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Europese",
@@ -2266,7 +2274,7 @@
       "Einde",
       "Door"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "2023-12-tax-the-rich-petition-NL": {
     "slug": "2023-12-tax-the-rich-petition-NL",
@@ -2293,7 +2301,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2023-12-tax-the-rich-petition",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Belasting",
@@ -2307,7 +2315,7 @@
       "Betalen",
       "Kunnen"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "2023-8-petition-sans-image-NL": {
     "slug": "2023-8-petition-sans-image-NL",
@@ -2329,7 +2337,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2023-8-petition-sans-image",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Petitie",
@@ -2343,7 +2351,7 @@
       "Français",
       "English"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "202305-stop_financing_putin_s_aggression_now-petition-NL": {
     "slug": "202305-stop_financing_putin_s_aggression_now-petition-NL",
@@ -2371,7 +2379,7 @@
     "lang": "nl",
     "campaign_id": "wemove:202305-stop_financing_putin_s_aggression_now-petition",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Russische",
@@ -2385,7 +2393,7 @@
       "Organisaties",
       "Aardolie"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "202307-save_the_great_river_of_rafina_greece-petition-NL": {
     "slug": "202307-save_the_great_river_of_rafina_greece-petition-NL",
@@ -2413,7 +2421,7 @@
     "lang": "nl",
     "campaign_id": "wemove:202307-save_the_great_river_of_rafina_greece-petition",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Rivier",
@@ -2427,7 +2435,7 @@
       "Klimaatverandering",
       "Biodiversiteit"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "202310-act_now_to_ban_pvc-petition-NL": {
     "slug": "202310-act_now_to_ban_pvc-petition-NL",
@@ -2455,7 +2463,7 @@
     "lang": "nl",
     "campaign_id": "wemove:202310-act_now_to_ban_pvc-petition",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Commissie",
@@ -2469,7 +2477,7 @@
       "Verbied",
       "Handel"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "2024-01-ban-forever-chemicals-petition2-NL": {
     "slug": "2024-01-ban-forever-chemicals-petition2-NL",
@@ -2482,6 +2490,10 @@
       {
         "checked_at": "2026-09-18T17:30:10-06:00",
         "count": 144904
+      },
+      {
+        "checked_at": "2026-09-22T16:19:50-06:00",
+        "count": 144907
       }
     ],
     "title": "Nu een gifvrij Europa!",
@@ -2491,12 +2503,12 @@
     "start_date": "2024-01-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 144904,
+    "signatures": 144907,
     "goal": 150000,
     "lang": "nl",
     "campaign_id": "wemove:2024-01-ban-forever-chemicals-petition2",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Europese",
@@ -2510,7 +2522,7 @@
       "Bedrijven",
       "Chemische"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "2024-02-end-the-destruction-of-romanian-forests-petition-NL": {
     "slug": "2024-02-end-the-destruction-of-romanian-forests-petition-NL",
@@ -2533,7 +2545,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-02-end-the-destruction-of-romanian-forests-petition",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Voor",
@@ -2547,7 +2559,7 @@
       "Petitie",
       "Milieu"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "2024-02-save-the-alps-petition-NL": {
     "slug": "2024-02-save-the-alps-petition-NL",
@@ -2574,7 +2586,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-02-save-the-alps-petition",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Gletsjers",
@@ -2588,7 +2600,7 @@
       "Door",
       "Oostenrijks"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "2024-03-plastic-pellets-petition-NL": {
     "slug": "2024-03-plastic-pellets-petition-NL",
@@ -2616,7 +2628,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-03-plastic-pellets-petition",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Voor",
@@ -2630,7 +2642,7 @@
       "Milieu",
       "Deze"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "2024-03-raiffeisen-russia-petition-NL": {
     "slug": "2024-03-raiffeisen-russia-petition-NL",
@@ -2654,7 +2666,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-03-raiffeisen-russia-petition",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Raiffeisen",
@@ -2668,7 +2680,7 @@
       "Vertrek",
       "Roepen"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "2024-03-Santander-Amazon-petition-NL": {
     "slug": "2024-03-Santander-Amazon-petition-NL",
@@ -2696,7 +2708,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-03-Santander-Amazon-petition",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Santander",
@@ -2710,7 +2722,7 @@
       "Maakt",
       "Maak"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "2024-03-world-bank-petition-NL": {
     "slug": "2024-03-world-bank-petition-NL",
@@ -2737,7 +2749,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-03-world-bank-petition",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Veehouderij",
@@ -2751,7 +2763,7 @@
       "Onder",
       "Tegen"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "2024-04-cap-reform-petition-NL": {
     "slug": "2024-04-cap-reform-petition-NL",
@@ -2774,7 +2786,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-04-cap-reform-petition",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Hervorming",
@@ -2788,7 +2800,7 @@
       "Zijn",
       "Gemeenschappelijk"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "2024-04-Elections-GOTVMM-campaign-petition-NL": {
     "slug": "2024-04-Elections-GOTVMM-campaign-petition-NL",
@@ -2816,7 +2828,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-04-Elections-GOTVMM-campaign-petition",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Natuur",
@@ -2830,7 +2842,7 @@
       "Europese",
       "Hebben"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "2024-04-EU-elections-GOTV-climate-message-testing-climate-energy-hr-NL": {
     "slug": "2024-04-EU-elections-GOTV-climate-message-testing-climate-energy-hr-NL",
@@ -2853,7 +2865,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-climate-message-testing-climate-energy-hr",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Polski",
@@ -2867,7 +2879,7 @@
       "Daadkrachtige",
       "Klimaatactie"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "2024-04-EU-elections-GOTV-climate-message-testing-climate-nature-hr-NL": {
     "slug": "2024-04-EU-elections-GOTV-climate-message-testing-climate-nature-hr-NL",
@@ -2890,7 +2902,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-climate-message-testing-climate-nature-hr",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Polski",
@@ -2904,7 +2916,7 @@
       "Daadkrachtige",
       "Klimaatactie"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "2024-04-EU-elections-GOTV-climate-message-testing-food-security-hr-NL": {
     "slug": "2024-04-EU-elections-GOTV-climate-message-testing-food-security-hr-NL",
@@ -2927,7 +2939,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-climate-message-testing-food-security-hr",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Polski",
@@ -2941,7 +2953,7 @@
       "Daadkrachtige",
       "Klimaatactie"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "2024-04-EU-elections-GOTV-extremists-message-testing-eu-unity-hr-NL": {
     "slug": "2024-04-EU-elections-GOTV-extremists-message-testing-eu-unity-hr-NL",
@@ -2964,7 +2976,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-extremists-message-testing-eu-unity-hr",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Nederlands",
@@ -2978,7 +2990,7 @@
       "Extremistische",
       "Groepen"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "2024-04-EU-elections-GOTV-extremists-message-testing-far-right-democracy-hr-NL": {
     "slug": "2024-04-EU-elections-GOTV-extremists-message-testing-far-right-democracy-hr-NL",
@@ -3001,7 +3013,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-extremists-message-testing-far-right-democracy-hr",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Nederlands",
@@ -3015,7 +3027,7 @@
       "Extremistische",
       "Groepen"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "2024-04-EU-elections-GOTV-extremists-message-testing-far-right-feminism-hr-NL": {
     "slug": "2024-04-EU-elections-GOTV-extremists-message-testing-far-right-feminism-hr-NL",
@@ -3038,7 +3050,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-extremists-message-testing-far-right-feminism-hr",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Nederlands",
@@ -3052,7 +3064,7 @@
       "Extremistische",
       "Groepen"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "2024-04-EU-elections-GOTV-get-stuff-done-climate-pride-message-testing-hr-NL": {
     "slug": "2024-04-EU-elections-GOTV-get-stuff-done-climate-pride-message-testing-hr-NL",
@@ -3075,7 +3087,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-get-stuff-done-climate-pride-message-testing-hr",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Voor",
@@ -3089,7 +3101,7 @@
       "Verdienen",
       "Klaart"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "2024-04-EU-elections-GOTV-get-stuff-done-future-message-testing-hr-NL": {
     "slug": "2024-04-EU-elections-GOTV-get-stuff-done-future-message-testing-hr-NL",
@@ -3112,7 +3124,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-get-stuff-done-future-message-testing-hr",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Willen",
@@ -3126,7 +3138,7 @@
       "Polski",
       "Waarin"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "2024-04-recognise-Palestine-petition-NL": {
     "slug": "2024-04-recognise-Palestine-petition-NL",
@@ -3139,6 +3151,10 @@
       {
         "checked_at": "2026-09-18T17:30:10-06:00",
         "count": 109516
+      },
+      {
+        "checked_at": "2026-09-22T16:19:50-06:00",
+        "count": 109520
       }
     ],
     "title": "Erken de Palestijnse stem en toekomst!",
@@ -3149,12 +3165,12 @@
     "start_date": "2024-04-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 109516,
+    "signatures": 109520,
     "goal": 150000,
     "lang": "nl",
     "campaign_id": "wemove:2024-04-recognise-Palestine-petition",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Palestijnse",
@@ -3168,7 +3184,7 @@
       "Staat",
       "Vrede"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "2024-05-GOTV-Use-You-Power-postcard-NL": {
     "slug": "2024-05-GOTV-Use-You-Power-postcard-NL",
@@ -3191,7 +3207,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-05-GOTV-Use-You-Power-postcard",
     "status": "online",
-    "last_seen": "2026-09-18T17:30:10-06:00",
+    "last_seen": "2026-09-22T16:19:50-06:00",
     "offline_since": null,
     "tags": [
       "Jouw",
@@ -3205,7 +3221,7 @@
       "Bent",
       "Zijn"
     ],
-    "last_checked": "2026-09-18T17:30:10-06:00"
+    "last_checked": "2026-09-22T16:19:50-06:00"
   },
   "2024-05-national-laws-ecocide-youmove-petition-NL": {
     "slug": "2024-05-national-laws-ecocide-youmove-petition-NL",
