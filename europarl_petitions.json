@@ -31,14 +31,17 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-22T08:52:52-06:00",
-    "petition_count": 1884,
-    "available": 1875,
-    "new_petitions_last_run": [],
+    "generated_at": "2026-09-22T09:31:07-06:00",
+    "petition_count": 1886,
+    "available": 1877,
+    "new_petitions_last_run": [
+      "1141-2026",
+      "1134-2026"
+    ],
     "bilanz": {
-      "stand": "2026-09-22T08:52:52-06:00",
-      "gefunden": 1875,
-      "im_bestand": 1875,
+      "stand": "2026-09-22T09:31:07-06:00",
+      "gefunden": 1877,
+      "im_bestand": 1877,
       "unbrauchbar": 0,
       "verworfen": 0,
       "dublette": 0,
@@ -46,14 +49,14 @@
       "zurueckgestellt": 0,
       "offen": 0,
       "offene_beispiele": [],
-      "bestand_gesamt": 1884,
+      "bestand_gesamt": 1886,
       "bestand_ausserhalb": 9
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-09-21T09:52:17-06:00",
-        "gesamt": 1884,
-        "online": 1884,
+        "zeit": "2026-09-22T09:31:07-06:00",
+        "gesamt": 1886,
+        "online": 1886,
         "offline": 0,
         "ohne_titel": 0,
         "platzhalter": 0,
@@ -65,188 +68,12 @@
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
         "neu": 2
-      },
-      {
-        "zeit": "2026-09-21T10:46:00-06:00",
-        "gesamt": 1884,
-        "online": 1884,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 975,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-21T11:40:58-06:00",
-        "gesamt": 1884,
-        "online": 1884,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 975,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-21T12:35:01-06:00",
-        "gesamt": 1884,
-        "online": 1884,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 975,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-21T17:50:32-06:00",
-        "gesamt": 1884,
-        "online": 1884,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 975,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-21T19:56:06-06:00",
-        "gesamt": 1884,
-        "online": 1884,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 975,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-21T21:39:04-06:00",
-        "gesamt": 1884,
-        "online": 1884,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 975,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-21T22:31:03-06:00",
-        "gesamt": 1884,
-        "online": 1884,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 975,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-21T23:25:05-06:00",
-        "gesamt": 1884,
-        "online": 1884,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 975,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-22T07:30:51-06:00",
-        "gesamt": 1884,
-        "online": 1884,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 975,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-22T08:15:52-06:00",
-        "gesamt": 1884,
-        "online": 1884,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 975,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-22T08:52:52-06:00",
-        "gesamt": 1884,
-        "online": 1884,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 975,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-22T08:52:52-06:00",
-      "gesamt": 1884,
-      "online": 1884,
+      "zeit": "2026-09-22T09:31:07-06:00",
+      "gesamt": 1886,
+      "online": 1886,
       "offline": 0,
       "ohne_titel": 0,
       "platzhalter": 0,
@@ -257,19 +84,19 @@
       "juengstes_start": "2026-07-17",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-09-21T09:52:17-06:00",
+    "verlauf_felder_ab": "2026-09-22T09:31:07-06:00",
     "befunde": [
       {
         "stufe": "hinweis",
         "thema": "Startdatum ist ein Verfahrensdatum",
-        "text": "Tagesgenaues Datum bei 975 von 1884 Sätzen; es ist das Zulässigkeitsdatum aus der Mitteilung an die Mitglieder, nicht der Start der Petition. Das jüngste ist 67 Tage alt (2026-07-17) — bauartbedingt, weil das Dokument erst mit der Kommissionsantwort entsteht. Der Altersmelder ist hier deshalb ausgen",
-        "zeit": "2026-09-22T08:52:52-06:00",
+        "text": "Tagesgenaues Datum bei 975 von 1886 Sätzen; es ist das Zulässigkeitsdatum aus der Mitteilung an die Mitglieder, nicht der Start der Petition. Das jüngste ist 67 Tage alt (2026-07-17) — bauartbedingt, weil das Dokument erst mit der Kommissionsantwort entsteht. Der Altersmelder ist hier deshalb ausgen",
+        "zeit": "2026-09-22T09:31:07-06:00",
         "thema_en": "Start date is a procedural date",
-        "text_en": "Day-exact date on 975 of 1884 records; it is the date of admissibility from the Notice to Members, not the start of the petition. The newest is 67 days old (2026-07-17) — by design, as the document is only drawn up once the Commission has replied. The ageing check is therefore skipped here."
+        "text_en": "Day-exact date on 975 of 1886 records; it is the date of admissibility from the Notice to Members, not the start of the petition. The newest is 67 days old (2026-07-17) — by design, as the document is only drawn up once the Commission has replied. The ageing check is therefore skipped here."
       }
     ],
     "health_warning": null,
-    "online_count": 1884
+    "online_count": 1886
   },
   "0474-2026": {
     "slug": "0474-2026",
@@ -115593,5 +115420,105 @@
       "Authorities"
     ],
     "last_checked": "2026-09-21T09:50:55-06:00"
+  },
+  "1141-2026": {
+    "slug": "1141-2026",
+    "first_seen": "2026-09-22T09:29:49-06:00",
+    "signatures_history": [],
+    "title": "Petition 1141/2026: the demolition of the Puente Mesa dam in Segovia, Spain",
+    "started_by": "A. R. A. (Spanish)",
+    "category": "Environment - Water",
+    "country": "Spain",
+    "description_full": "<p>The petitioner raises concerns regarding the demolition of a centuries-old dam on the River Cega, in the province of Segovia, Spain. The dam formed a significant element of the area known as “El Paraje de Mesa” and is considered by the petitioner to be part of the region’s cultural heritage and collective identity. The petitioner alleges that the demolition may have been carried out in breach of EU law, in particular the Water Framework Directive and other applicable provisions, owing to an alleged failure to apply EU law correctly. The petitioner also questions whether the administrative procedure complied fully with the relevant legal requirements. According to the petitioner, the decision involved the Duero River Basin Authority, the Regional Government of Castilla y León, and the municipalities of Veganzones and Cabezuela. The petitioner considers that these authorities shared competence in the matter and, through action or omission, enabled the demolition. The petitioner requests that the Committee on Petitions examine the matter before judicial proceedings are pursued, on the grounds that the available administrative avenues have allegedly been exhausted or would be ineffective.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1141%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1141/2026</a></p>",
+    "summary": "The petitioner raises concerns regarding the demolition of a centuries-old dam on the River Cega, in the province of Segovia, Spain. The dam formed a significant element of the area known as “El Paraj…",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:1141-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1141%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-09-22T09:30:54",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 1141/2026: zum Abriss des Staudamms Puente Mesa in Segovia (Spanien)",
+        "summary": "Der Petent äußert Bedenken in Bezug auf den Abriss eines jahrhundertealten Staudamms am Fluss Cega in der Provinz Segovia (Spanien). Der Staudamm sei ein wesentlicher Bestandteil des als „El Paraje de…",
+        "description_full": "<p>Der Petent äußert Bedenken in Bezug auf den Abriss eines jahrhundertealten Staudamms am Fluss Cega in der Provinz Segovia (Spanien). Der Staudamm sei ein wesentlicher Bestandteil des als „El Paraje de Mesa“ bekannten Gebiets gewesen und wird vom Petenten als Teil des kulturellen Erbes und der kollektiven Identität der Region angesehen. Der Petent macht geltend, dass der Abriss möglicherweise unter Verstoß gegen das EU-Recht, insbesondere gegen die Wasserrahmenrichtlinie und andere anwendbare Bestimmungen, da das EU-Recht mutmaßlich nicht ordnungsgemäß angewandt worden sei. Der Petent bezweifelt auch, dass das Verwaltungsverfahren in vollem Umfang den einschlägigen rechtlichen Anforderungen entsprach. An der Entscheidung seien die Behörde für das Einzugsgebiet des Duero, die Regionalregierung von Kastilien und León sowie die Gemeinden Veganzones und Cabezuela beteiligt gewesen. Der Petent ist der Ansicht, dass diese Behörden in dieser Angelegenheit gemeinsam zuständig waren und durch Handlungen bzw. Unterlassungen den Abriss ermöglicht hätten. Der Petent ersucht den Petitionsausschuss, die Angelegenheit zu prüfen, bevor gerichtliche Schritte eingeleitet werden, da die verfügbaren Verwaltungswege mutmaßlich ausgeschöpft seien oder unwirksam wären.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=1141%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1141/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=1141%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-09-22T09:29:49-06:00",
+    "offline_since": null,
+    "tags": [
+      "Petitioner",
+      "Demolition",
+      "Segovia",
+      "River",
+      "Spain",
+      "Administrative",
+      "Centuries-old",
+      "Significant",
+      "Regarding",
+      "Concerns"
+    ],
+    "last_checked": "2026-09-22T09:29:49-06:00"
+  },
+  "1134-2026": {
+    "slug": "1134-2026",
+    "first_seen": "2026-09-22T09:29:49-06:00",
+    "signatures_history": [],
+    "title": "Petition 1134/2026: the rule of law in Greece",
+    "started_by": "C. S. (Greek)",
+    "category": "Justice",
+    "country": "Greece",
+    "description_full": "<p>The petitioner alleges that the rule of law in Greece has deteriorated in recent years. In particular, the petitioner raises concerns regarding the legal framework governing ministerial immunity, the alleged unlawful surveillance of citizens, journalists and politicians through the use of the “Predator” spyware, which is claimed to infringe the rights to privacy and data protection, the alleged disproportionate tax burden on low-income earners and the failure to reduce indirect taxation on essential goods, as well as the alleged lack of effective competition oversight in the energy, food and banking sectors. The petitioner further alleges the misuse of direct procurement procedures and clientelist allocation of national and EU public funds, together with practices allegedly affecting media pluralism and freedom of expression.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1134%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1134/2026</a></p>",
+    "summary": "The petitioner alleges that the rule of law in Greece has deteriorated in recent years. In particular, the petitioner raises concerns regarding the legal framework governing ministerial immunity, the …",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:1134-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1134%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-09-22T09:31:01",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 1134/2026: zur Rechtsstaatlichkeit in Griechenland",
+        "summary": "Der Petent führt aus, dass sich die Rechtsstaatlichkeit in Griechenland in den vergangenen Jahren verschlechtert habe. Er äußert insbesondere Bedenken in Bezug auf den Rechtsrahmen für die Immunität v…",
+        "description_full": "<p>Der Petent führt aus, dass sich die Rechtsstaatlichkeit in Griechenland in den vergangenen Jahren verschlechtert habe. Er äußert insbesondere Bedenken in Bezug auf den Rechtsrahmen für die Immunität von Ministern, die mutmaßlich rechtswidrige Überwachung von Bürgern, Journalisten und Politikern durch den Einsatz der Spähsoftware „Predator“, die mutmaßlich das Recht auf Privatsphäre und Datenschutz verletze, die mutmaßlich unverhältnismäßige Steuerbelastung von Geringverdienern und das Versäumnis, die indirekte Besteuerung wesentlicher Güter zu verringern, sowie das mutmaßliche Fehlen einer wirksamen Wettbewerbsaufsicht im Energie-, Lebensmittel- und Bankensektor. Ferner macht er den missbräuchlichen Rückgriff auf direkte Vergabeverfahren und die Zuweisung von öffentlichen Mitteln der Mitgliedstaaten und der EU auf der Grundlage von Kundenlisten sowie Praktiken geltend, die mutmaßlich den Medienpluralismus und das Recht auf freie Meinungsäußerung beeinträchtigten.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=1134%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1134/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=1134%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-09-22T09:29:49-06:00",
+    "offline_since": null,
+    "tags": [
+      "Petitioner",
+      "Alleged",
+      "Alleges",
+      "Greece",
+      "Rule",
+      "Deteriorated",
+      "Ministerial",
+      "Particular",
+      "Framework",
+      "Governing"
+    ],
+    "last_checked": "2026-09-22T09:29:49-06:00"
   }
 }
