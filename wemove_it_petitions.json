@@ -31,7 +31,7 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-22T10:14:10-06:00",
+    "generated_at": "2026-09-22T10:51:13-06:00",
     "petition_count": 211,
     "available": 259,
     "unbrauchbare": {
@@ -85,7 +85,7 @@
     },
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-09-22T10:14:10-06:00",
+      "stand": "2026-09-22T10:51:12-06:00",
       "gefunden": 259,
       "im_bestand": 211,
       "unbrauchbar": 47,
@@ -101,22 +101,6 @@
       "bestand_ausserhalb": 0
     },
     "lauf_verlauf": [
-      {
-        "zeit": "2026-09-20T04:40:40-06:00",
-        "gesamt": 211,
-        "online": 206,
-        "offline": 5,
-        "ohne_titel": 5,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 5,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 178,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
       {
         "zeit": "2026-09-20T05:28:46-06:00",
         "gesamt": 211,
@@ -580,10 +564,26 @@
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
         "neu": 0
+      },
+      {
+        "zeit": "2026-09-22T10:51:12-06:00",
+        "gesamt": 211,
+        "online": 206,
+        "offline": 5,
+        "ohne_titel": 5,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 5,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 178,
+        "juengstes_start": "2026-09-01",
+        "mit_code_im_text": 0,
+        "herkunft": "lokal_cron",
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-22T10:14:10-06:00",
+      "zeit": "2026-09-22T10:51:12-06:00",
       "gesamt": 211,
       "online": 206,
       "offline": 5,
@@ -602,7 +602,7 @@
         "stufe": "warnung",
         "thema": "Host ausgelassen (robots.txt nicht lesbar)",
         "text": "action.wemove.eu: HTTP 202. Der Host wurde für diesen Lauf komplett ausgelassen; von dort stammen KEINE frischen Daten. Der Bestand bleibt unverändert stehen.",
-        "zeit": "2026-09-22T10:14:03-06:00",
+        "zeit": "2026-09-22T10:51:06-06:00",
         "thema_en": "Host skipped (robots.txt unreadable)",
         "text_en": "action.wemove.eu: HTTP 202. The host was skipped entirely for this run; no fresh data came from it. The existing records stay as they are."
       }
