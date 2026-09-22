@@ -31,7 +31,7 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-22T14:35:20-06:00",
+    "generated_at": "2026-09-22T15:11:35-06:00",
     "petition_count": 211,
     "available": 259,
     "unbrauchbare": {
@@ -85,7 +85,7 @@
     },
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-09-22T14:35:20-06:00",
+      "stand": "2026-09-22T15:11:35-06:00",
       "gefunden": 259,
       "im_bestand": 211,
       "unbrauchbar": 47,
@@ -102,7 +102,7 @@
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-09-22T14:35:20-06:00",
+        "zeit": "2026-09-22T15:11:35-06:00",
         "gesamt": 211,
         "online": 206,
         "offline": 5,
@@ -119,7 +119,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-22T14:35:20-06:00",
+      "zeit": "2026-09-22T15:11:35-06:00",
       "gesamt": 211,
       "online": 206,
       "offline": 5,
@@ -132,7 +132,7 @@
       "juengstes_start": "2026-09-01",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-09-22T14:35:20-06:00",
+    "verlauf_felder_ab": "2026-09-22T15:11:35-06:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 206
@@ -7133,7 +7133,7 @@
     "lang": "it",
     "campaign_id": "wemove:2025-6-protect-the-freedom-flotilla-end-gazas-blockade-now-petition",
     "status": "online",
-    "last_seen": "2026-09-18T16:36:00-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "Gaza",
@@ -7147,7 +7147,7 @@
       "Blocco",
       "Porre"
     ],
-    "last_checked": "2026-09-18T16:36:00-06:00"
+    "last_checked": "2026-09-22T15:08:35-06:00"
   },
   "2025-7-costruiamol-italiadelfuturo-correct-version-IT": {
     "slug": "2025-7-costruiamol-italiadelfuturo-correct-version-IT",
@@ -7170,7 +7170,7 @@
     "lang": "it",
     "campaign_id": "wemove:2025-7-costruiamol-italiadelfuturo-correct-version",
     "status": "online",
-    "last_seen": "2026-09-18T16:36:00-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "PETIZIONI",
@@ -7184,7 +7184,7 @@
       "Cambiamento",
       "Petizione"
     ],
-    "last_checked": "2026-09-18T16:36:00-06:00"
+    "last_checked": "2026-09-22T15:08:35-06:00"
   },
   "2025-7-costruiamol-italiadelfuturo-IT": {
     "slug": "2025-7-costruiamol-italiadelfuturo-IT",
@@ -7207,7 +7207,7 @@
     "lang": "it",
     "campaign_id": "wemove:2025-7-costruiamol-italiadelfuturo",
     "status": "online",
-    "last_seen": "2026-09-18T16:36:00-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "PETIZIONI",
@@ -7221,7 +7221,7 @@
       "Insieme",
       "Vita"
     ],
-    "last_checked": "2026-09-18T16:36:00-06:00"
+    "last_checked": "2026-09-22T15:08:35-06:00"
   },
   "2025-8-proposta-legge-ita-per-il-cambio-luogo-di-nascita-quelli-che-si-IT": {
     "slug": "2025-8-proposta-legge-ita-per-il-cambio-luogo-di-nascita-quelli-che-si-IT",
@@ -7244,7 +7244,7 @@
     "lang": "it",
     "campaign_id": "wemove:2025-8-proposta-legge-ita-per-il-cambio-luogo-di-nascita-quelli-che-si",
     "status": "online",
-    "last_seen": "2026-09-18T16:36:00-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "Cognomi",
@@ -7258,7 +7258,7 @@
       "Cambiamento",
       "Documenti"
     ],
-    "last_checked": "2026-09-18T16:36:00-06:00"
+    "last_checked": "2026-09-22T15:08:35-06:00"
   },
   "2026-01-omnibus-tech-petition-IT": {
     "slug": "2026-01-omnibus-tech-petition-IT",
@@ -7271,6 +7271,10 @@
       {
         "checked_at": "2026-09-18T16:36:00-06:00",
         "count": 92013
+      },
+      {
+        "checked_at": "2026-09-22T15:08:35-06:00",
+        "count": 92017
       }
     ],
     "title": "Basta impunità per le Big Tech!",
@@ -7281,12 +7285,12 @@
     "start_date": "2026-01-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 92013,
+    "signatures": 92017,
     "goal": 100000,
     "lang": "it",
     "campaign_id": "wemove:2026-01-omnibus-tech-petition",
     "status": "online",
-    "last_seen": "2026-09-18T16:36:00-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "Tech",
@@ -7300,7 +7304,7 @@
       "Vicepresidente",
       "Democrazia"
     ],
-    "last_checked": "2026-09-18T16:36:00-06:00"
+    "last_checked": "2026-09-22T15:08:35-06:00"
   },
   "2026-01-PFAS-ban-forever-chemicals-petition-IT": {
     "slug": "2026-01-PFAS-ban-forever-chemicals-petition-IT",
@@ -7313,6 +7317,10 @@
       {
         "checked_at": "2026-09-18T16:36:00-06:00",
         "count": 109736
+      },
+      {
+        "checked_at": "2026-09-22T15:08:35-06:00",
+        "count": 109743
       }
     ],
     "title": "Vietiamo ora le sostanze chimiche eterne",
@@ -7323,12 +7331,12 @@
     "start_date": "2026-01-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 109736,
+    "signatures": 109743,
     "goal": 150000,
     "lang": "it",
     "campaign_id": "wemove:2026-01-PFAS-ban-forever-chemicals-petition",
     "status": "online",
-    "last_seen": "2026-09-18T16:36:00-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "PFAS",
@@ -7342,7 +7350,7 @@
       "Dell",
       "Chiamate"
     ],
-    "last_checked": "2026-09-18T16:36:00-06:00"
+    "last_checked": "2026-09-22T15:08:35-06:00"
   },
   "2026-01-safe-country-petition-IT": {
     "slug": "2026-01-safe-country-petition-IT",
@@ -7355,6 +7363,10 @@
       {
         "checked_at": "2026-09-18T16:36:00-06:00",
         "count": 49197
+      },
+      {
+        "checked_at": "2026-09-22T15:08:35-06:00",
+        "count": 49199
       }
     ],
     "title": "UE, non espellere le persone verso Paesi non sicuri!",
@@ -7365,12 +7377,12 @@
     "start_date": "2026-01-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 49197,
+    "signatures": 49199,
     "goal": 50000,
     "lang": "it",
     "campaign_id": "wemove:2026-01-safe-country-petition",
     "status": "online",
-    "last_seen": "2026-09-18T16:36:00-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "Persone",
@@ -7384,7 +7396,7 @@
       "Diritto",
       "Sicuro"
     ],
-    "last_checked": "2026-09-18T16:36:00-06:00"
+    "last_checked": "2026-09-22T15:08:35-06:00"
   },
   "2026-01-test-matilda-2-petition-IT": {
     "slug": "2026-01-test-matilda-2-petition-IT",
@@ -7407,7 +7419,7 @@
     "lang": "it",
     "campaign_id": "wemove:2026-01-test-matilda-2-petition",
     "status": "online",
-    "last_seen": "2026-09-18T16:36:00-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "Petizione",
@@ -7421,7 +7433,7 @@
       "Test",
       "Destinatario"
     ],
-    "last_checked": "2026-09-18T16:36:00-06:00"
+    "last_checked": "2026-09-22T15:08:35-06:00"
   },
   "2026-02-boycott-world-cup-petition-IT": {
     "slug": "2026-02-boycott-world-cup-petition-IT",
@@ -7449,7 +7461,7 @@
     "lang": "it",
     "campaign_id": "wemove:2026-02-boycott-world-cup-petition",
     "status": "online",
-    "last_seen": "2026-09-18T16:36:00-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "Stati",
@@ -7463,7 +7475,7 @@
       "Negli",
       "Loro"
     ],
-    "last_checked": "2026-09-18T16:36:00-06:00"
+    "last_checked": "2026-09-22T15:08:35-06:00"
   },
   "2026-02-deforestation-petition-IT": {
     "slug": "2026-02-deforestation-petition-IT",
@@ -7476,6 +7488,10 @@
       {
         "checked_at": "2026-09-18T16:36:00-06:00",
         "count": 53561
+      },
+      {
+        "checked_at": "2026-09-22T15:08:35-06:00",
+        "count": 53562
       }
     ],
     "title": "È un nostro diritto avere foreste sane!",
@@ -7486,12 +7502,12 @@
     "start_date": "2026-02-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 53561,
+    "signatures": 53562,
     "goal": 75000,
     "lang": "it",
     "campaign_id": "wemove:2026-02-deforestation-petition",
     "status": "online",
-    "last_seen": "2026-09-18T16:36:00-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "Foreste",
@@ -7505,7 +7521,7 @@
       "Legge",
       "Possibilità"
     ],
-    "last_checked": "2026-09-18T16:36:00-06:00"
+    "last_checked": "2026-09-22T15:08:35-06:00"
   },
   "2026-02-digital-euro-petition-IT": {
     "slug": "2026-02-digital-euro-petition-IT",
@@ -7518,6 +7534,10 @@
       {
         "checked_at": "2026-09-18T16:36:00-06:00",
         "count": 79106
+      },
+      {
+        "checked_at": "2026-09-22T15:08:35-06:00",
+        "count": 79109
       }
     ],
     "title": "Salviamo l’euro digitale!",
@@ -7528,12 +7548,12 @@
     "start_date": "2026-02-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 79106,
+    "signatures": 79109,
     "goal": 100000,
     "lang": "it",
     "campaign_id": "wemove:2026-02-digital-euro-petition",
     "status": "online",
-    "last_seen": "2026-09-18T16:36:00-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "Digitale",
@@ -7547,7 +7567,7 @@
       "Alla",
       "Tecnologiche"
     ],
-    "last_checked": "2026-09-18T16:36:00-06:00"
+    "last_checked": "2026-09-22T15:08:35-06:00"
   },
   "2026-02-my-voice-my-choice-petition-IT": {
     "slug": "2026-02-my-voice-my-choice-petition-IT",
@@ -7571,7 +7591,7 @@
     "lang": "it",
     "campaign_id": "wemove:2026-02-my-voice-my-choice-petition",
     "status": "online",
-    "last_seen": "2026-09-18T16:36:00-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "Donne",
@@ -7585,7 +7605,7 @@
       "Tutte",
       "Voice"
     ],
-    "last_checked": "2026-09-18T16:36:00-06:00"
+    "last_checked": "2026-09-22T15:08:35-06:00"
   },
   "2026-02-pesticides-mayor-Italy-test-petition-IT": {
     "slug": "2026-02-pesticides-mayor-Italy-test-petition-IT",
@@ -7609,7 +7629,7 @@
     "lang": "it",
     "campaign_id": "wemove:2026-02-pesticides-mayor-Italy-test-petition",
     "status": "online",
-    "last_seen": "2026-09-18T16:36:00-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "Pesticidi",
@@ -7623,7 +7643,7 @@
       "Senza",
       "Sono"
     ],
-    "last_checked": "2026-09-18T16:36:00-06:00"
+    "last_checked": "2026-09-22T15:08:35-06:00"
   },
   "2026-03-Europe-against-illegal-war-in-Iran-petition-IT": {
     "slug": "2026-03-Europe-against-illegal-war-in-Iran-petition-IT",
@@ -7636,6 +7656,10 @@
       {
         "checked_at": "2026-09-18T16:36:00-06:00",
         "count": 124650
+      },
+      {
+        "checked_at": "2026-09-22T15:08:35-06:00",
+        "count": 124652
       }
     ],
     "title": "Europa: Fai sentire la tua voce contro la guerra illegale in Iran",
@@ -7646,12 +7670,12 @@
     "start_date": "2026-03-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 124650,
+    "signatures": 124652,
     "goal": 150000,
     "lang": "it",
     "campaign_id": "wemove:2026-03-Europe-against-illegal-war-in-Iran-petition",
     "status": "online",
-    "last_seen": "2026-09-18T16:36:00-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "Guerra",
@@ -7665,7 +7689,7 @@
       "Militari",
       "Europei"
     ],
-    "last_checked": "2026-09-18T16:36:00-06:00"
+    "last_checked": "2026-09-22T15:08:35-06:00"
   },
   "2026-03-palantir-petition-IT": {
     "slug": "2026-03-palantir-petition-IT",
@@ -7678,6 +7702,10 @@
       {
         "checked_at": "2026-09-18T16:36:00-06:00",
         "count": 103429
+      },
+      {
+        "checked_at": "2026-09-22T15:08:35-06:00",
+        "count": 103438
       }
     ],
     "title": "No a Palantir in Europa",
@@ -7688,12 +7716,12 @@
     "start_date": "2026-03-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 103429,
+    "signatures": 103438,
     "goal": 150000,
     "lang": "it",
     "campaign_id": "wemove:2026-03-palantir-petition",
     "status": "online",
-    "last_seen": "2026-09-18T16:36:00-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "Palantir",
@@ -7707,7 +7735,7 @@
       "Pubblici",
       "Persone"
     ],
-    "last_checked": "2026-09-18T16:36:00-06:00"
+    "last_checked": "2026-09-22T15:08:35-06:00"
   },
   "2026-04-anti-slapps-petition-IT": {
     "slug": "2026-04-anti-slapps-petition-IT",
@@ -7720,6 +7748,10 @@
       {
         "checked_at": "2026-09-18T16:36:00-06:00",
         "count": 99664
+      },
+      {
+        "checked_at": "2026-09-22T15:08:35-06:00",
+        "count": 99669
       }
     ],
     "title": "Proteggiamo le persone, non le aziende prepotenti",
@@ -7730,12 +7762,12 @@
     "start_date": "2026-04-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 99664,
+    "signatures": 99669,
     "goal": 100000,
     "lang": "it",
     "campaign_id": "wemove:2026-04-anti-slapps-petition",
     "status": "online",
-    "last_seen": "2026-09-18T16:36:00-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "Persone",
@@ -7749,7 +7781,7 @@
       "Legale",
       "Legge"
     ],
-    "last_checked": "2026-09-18T16:36:00-06:00"
+    "last_checked": "2026-09-22T15:08:35-06:00"
   },
   "2026-04-ban-landmines-europe-petition-IT": {
     "slug": "2026-04-ban-landmines-europe-petition-IT",
@@ -7758,6 +7790,10 @@
       {
         "checked_at": "2026-09-18T16:36:00-06:00",
         "count": 102779
+      },
+      {
+        "checked_at": "2026-09-22T15:08:35-06:00",
+        "count": 102785
       }
     ],
     "title": "Difendiamo i civili: le mine antiuomo devono restare vietate",
@@ -7771,7 +7807,7 @@
     "lang": "it",
     "campaign_id": "wemove:2026-04-ban-landmines-europe-petition",
     "status": "online",
-    "last_seen": "2026-09-18T16:36:00-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "Mine",
@@ -7785,8 +7821,8 @@
       "Membri",
       "Unione"
     ],
-    "last_checked": "2026-09-18T16:36:00-06:00",
-    "signatures": 102779,
+    "last_checked": "2026-09-22T15:08:35-06:00",
+    "signatures": 102785,
     "goal": 150000
   },
   "2026-05-circular-economy-petition-IT": {
@@ -7800,6 +7836,10 @@
       {
         "checked_at": "2026-09-18T16:36:00-06:00",
         "count": 97806
+      },
+      {
+        "checked_at": "2026-09-22T15:08:35-06:00",
+        "count": 97811
       }
     ],
     "title": "Durata più lunga, costi più bassi!",
@@ -7810,12 +7850,12 @@
     "start_date": "2026-05-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 97806,
+    "signatures": 97811,
     "goal": 100000,
     "lang": "it",
     "campaign_id": "wemove:2026-05-circular-economy-petition",
     "status": "online",
-    "last_seen": "2026-09-18T16:36:00-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "Riparazione",
@@ -7829,7 +7869,7 @@
       "Riciclo",
       "Durata"
     ],
-    "last_checked": "2026-09-18T16:36:00-06:00"
+    "last_checked": "2026-09-22T15:08:35-06:00"
   },
   "2026-05-Israel-out-Eurovision-petition-IT": {
     "slug": "2026-05-Israel-out-Eurovision-petition-IT",
@@ -7842,6 +7882,10 @@
       {
         "checked_at": "2026-09-18T16:36:00-06:00",
         "count": 65099
+      },
+      {
+        "checked_at": "2026-09-22T15:08:35-06:00",
+        "count": 65100
       }
     ],
     "title": "Israele fuori dall’Eurovision!",
@@ -7852,12 +7896,12 @@
     "start_date": "2026-05-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 65099,
+    "signatures": 65100,
     "goal": 75000,
     "lang": "it",
     "campaign_id": "wemove:2026-05-Israel-out-Eurovision-petition",
     "status": "online",
-    "last_seen": "2026-09-18T16:36:00-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "Israele",
@@ -7871,7 +7915,7 @@
       "Fuori",
       "Tutte"
     ],
-    "last_checked": "2026-09-18T16:36:00-06:00"
+    "last_checked": "2026-09-22T15:08:35-06:00"
   },
   "2026-05-lyle-testing-petition-IT": {
     "slug": "2026-05-lyle-testing-petition-IT",
@@ -7895,7 +7939,7 @@
     "lang": "it",
     "campaign_id": "wemove:2026-05-lyle-testing-petition",
     "status": "online",
-    "last_seen": "2026-09-18T16:36:00-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "Center",
@@ -7909,7 +7953,7 @@
       "Tutti",
       "Energetico"
     ],
-    "last_checked": "2026-09-18T16:36:00-06:00"
+    "last_checked": "2026-09-22T15:08:35-06:00"
   },
   "2026-05-only-yes-means-yes-petition-IT": {
     "slug": "2026-05-only-yes-means-yes-petition-IT",
@@ -7918,6 +7962,10 @@
       {
         "checked_at": "2026-09-18T16:36:00-06:00",
         "count": 47609
+      },
+      {
+        "checked_at": "2026-09-22T15:08:35-06:00",
+        "count": 47615
       }
     ],
     "title": "UE: Solo SÌ vuol dire SÌ",
@@ -7931,7 +7979,7 @@
     "lang": "it",
     "campaign_id": "wemove:2026-05-only-yes-means-yes-petition",
     "status": "online",
-    "last_seen": "2026-09-18T16:36:00-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "Gisèle",
@@ -7945,8 +7993,8 @@
       "Dell",
       "Dire"
     ],
-    "last_checked": "2026-09-18T16:36:00-06:00",
-    "signatures": 47609,
+    "last_checked": "2026-09-22T15:08:35-06:00",
+    "signatures": 47615,
     "goal": 50000
   },
   "2026-06-lyle-opus-petition-IT": {
@@ -7971,7 +8019,7 @@
     "lang": "it",
     "campaign_id": "wemove:2026-06-lyle-opus-petition",
     "status": "online",
-    "last_seen": "2026-09-18T16:36:00-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "Center",
@@ -7985,7 +8033,7 @@
       "Sulle",
       "Tutti"
     ],
-    "last_checked": "2026-09-18T16:36:00-06:00"
+    "last_checked": "2026-09-22T15:08:35-06:00"
   },
   "2026-06-lyle-opus-translation-petition-IT": {
     "slug": "2026-06-lyle-opus-translation-petition-IT",
@@ -8009,7 +8057,7 @@
     "lang": "it",
     "campaign_id": "wemove:2026-06-lyle-opus-translation-petition",
     "status": "online",
-    "last_seen": "2026-09-18T16:36:00-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "Center",
@@ -8023,7 +8071,7 @@
       "Europea",
       "Tutti"
     ],
-    "last_checked": "2026-09-18T16:36:00-06:00"
+    "last_checked": "2026-09-22T15:08:35-06:00"
   },
   "2026-06-lyle-webabel-opus-petition-IT": {
     "slug": "2026-06-lyle-webabel-opus-petition-IT",
@@ -8047,7 +8095,7 @@
     "lang": "it",
     "campaign_id": "wemove:2026-06-lyle-webabel-opus-petition",
     "status": "online",
-    "last_seen": "2026-09-18T16:36:00-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "Center",
@@ -8061,7 +8109,7 @@
       "Essere",
       "Tutti"
     ],
-    "last_checked": "2026-09-18T16:36:00-06:00"
+    "last_checked": "2026-09-22T15:08:35-06:00"
   },
   "2026-06-lyle-webabel-sonnet-petition-IT": {
     "slug": "2026-06-lyle-webabel-sonnet-petition-IT",
@@ -8085,7 +8133,7 @@
     "lang": "it",
     "campaign_id": "wemove:2026-06-lyle-webabel-sonnet-petition",
     "status": "online",
-    "last_seen": "2026-09-18T16:36:00-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "Center",
@@ -8099,7 +8147,7 @@
       "Europea",
       "Tutti"
     ],
-    "last_checked": "2026-09-18T16:36:00-06:00"
+    "last_checked": "2026-09-22T15:08:35-06:00"
   },
   "2026-06-phone-hacking-petition-IT": {
     "slug": "2026-06-phone-hacking-petition-IT",
@@ -8112,6 +8160,10 @@
       {
         "checked_at": "2026-09-18T16:36:00-06:00",
         "count": 58023
+      },
+      {
+        "checked_at": "2026-09-22T15:08:35-06:00",
+        "count": 58029
       }
     ],
     "title": "Fermiamo gli spyware",
@@ -8122,12 +8174,12 @@
     "start_date": "2026-06-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 58023,
+    "signatures": 58029,
     "goal": 75000,
     "lang": "it",
     "campaign_id": "wemove:2026-06-phone-hacking-petition",
     "status": "online",
-    "last_seen": "2026-09-18T16:36:00-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "Spyware",
@@ -8141,7 +8193,7 @@
       "Questa",
       "Hanno"
     ],
-    "last_checked": "2026-09-18T16:36:00-06:00"
+    "last_checked": "2026-09-22T15:08:35-06:00"
   },
   "2026-07-investigate-FIFA-leader-petition-IT": {
     "slug": "2026-07-investigate-FIFA-leader-petition-IT",
@@ -8154,6 +8206,10 @@
       {
         "checked_at": "2026-09-18T16:36:00-06:00",
         "count": 80772
+      },
+      {
+        "checked_at": "2026-09-22T15:08:35-06:00",
+        "count": 80782
       }
     ],
     "title": "Chiedi un'indagine sul Presidente della FIFA",
@@ -8164,12 +8220,12 @@
     "start_date": "2026-07-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 80772,
+    "signatures": 80782,
     "goal": 100000,
     "lang": "it",
     "campaign_id": "wemove:2026-07-investigate-FIFA-leader-petition",
     "status": "online",
-    "last_seen": "2026-09-18T16:36:00-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "FIFA",
@@ -8183,7 +8239,7 @@
       "Dell",
       "Comitato"
     ],
-    "last_checked": "2026-09-18T16:36:00-06:00"
+    "last_checked": "2026-09-22T15:08:35-06:00"
   },
   "2026-07-maximum-working-temperature-petition-IT": {
     "slug": "2026-07-maximum-working-temperature-petition-IT",
@@ -8196,6 +8252,10 @@
       {
         "checked_at": "2026-09-18T16:36:00-06:00",
         "count": 55793
+      },
+      {
+        "checked_at": "2026-09-22T15:08:35-06:00",
+        "count": 55800
       }
     ],
     "title": "Al sicuro sul lavoro anche nel caldo estremo",
@@ -8206,12 +8266,12 @@
     "start_date": "2026-07-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 55793,
+    "signatures": 55800,
     "goal": 75000,
     "lang": "it",
     "campaign_id": "wemove:2026-07-maximum-working-temperature-petition",
     "status": "online",
-    "last_seen": "2026-09-18T16:36:00-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "Lavoro",
@@ -8225,7 +8285,7 @@
       "Europea",
       "Membri"
     ],
-    "last_checked": "2026-09-18T16:36:00-06:00"
+    "last_checked": "2026-09-22T15:08:35-06:00"
   },
   "2026-1-ma-sante-n-est-pas-a-vendre-my-health-is-not-for-sale-stop-ue-me-IT": {
     "slug": "2026-1-ma-sante-n-est-pas-a-vendre-my-health-is-not-for-sale-stop-ue-me-IT",
@@ -8247,7 +8307,7 @@
     "lang": "it",
     "campaign_id": "wemove:2026-1-ma-sante-n-est-pas-a-vendre-my-health-is-not-for-sale-stop-ue-me",
     "status": "online",
-    "last_seen": "2026-09-18T16:36:00-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "Salute",
@@ -8261,7 +8321,7 @@
       "Prodotti",
       "Sanitari"
     ],
-    "last_checked": "2026-09-18T16:36:00-06:00"
+    "last_checked": "2026-09-22T15:08:35-06:00"
   },
   "2026-2-flor-bertotti-2026-european-tour-audience-initiative-IT": {
     "slug": "2026-2-flor-bertotti-2026-european-tour-audience-initiative-IT",
@@ -8274,6 +8334,10 @@
       {
         "checked_at": "2026-09-18T17:02:01-06:00",
         "count": 249
+      },
+      {
+        "checked_at": "2026-09-22T15:08:35-06:00",
+        "count": 251
       }
     ],
     "title": "FLOR BERTOTTI 2026 – European Tour Audience Demand 🇮🇹",
@@ -8283,12 +8347,12 @@
     "summary": "FLOR BERTOTTI 2026 – European Tour Audience Demand 🇮🇹 Al pubblico in Italia interessato a dichiarare ufficialmente il proprio interesse per possibili esibizioni live di Flor Bertotti. Questa petizione…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 249,
+    "signatures": 251,
     "goal": 1000,
     "lang": "it",
     "campaign_id": "wemove:2026-2-flor-bertotti-2026-european-tour-audience-initiative",
     "status": "online",
-    "last_seen": "2026-09-18T17:02:01-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "BERTOTTI",
@@ -8302,7 +8366,7 @@
       "Esibizioni",
       "Petizione"
     ],
-    "last_checked": "2026-09-18T17:02:01-06:00"
+    "last_checked": "2026-09-22T15:08:35-06:00"
   },
   "2026-2-no-alle-armi-si-alla-pace-IT": {
     "slug": "2026-2-no-alle-armi-si-alla-pace-IT",
@@ -8325,7 +8389,7 @@
     "lang": "it",
     "campaign_id": "wemove:2026-2-no-alle-armi-si-alla-pace",
     "status": "online",
-    "last_seen": "2026-09-18T17:02:01-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "Europeo",
@@ -8339,7 +8403,7 @@
       "Petizione",
       "Governi"
     ],
-    "last_checked": "2026-09-18T17:02:01-06:00"
+    "last_checked": "2026-09-22T15:08:35-06:00"
   },
   "democratization-of-europe-IT": {
     "slug": "democratization-of-europe-IT",
@@ -8352,6 +8416,10 @@
       {
         "checked_at": "2026-09-18T17:02:01-06:00",
         "count": 92140
+      },
+      {
+        "checked_at": "2026-09-22T15:08:35-06:00",
+        "count": 92142
       }
     ],
     "title": "Per la democratizzazione dell'Europa",
@@ -8361,12 +8429,12 @@
     "summary": "Italiano English Français Deutsch Español Polski Per la democratizzazione dell'Europa Assemblea europea Questa petizione è gestita da [% inititator_name %] Petizione Manifesto Noi, cittadini europei, …",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 92140,
+    "signatures": 92142,
     "goal": 100000,
     "lang": "it",
     "campaign_id": "wemove:democratization-of-europe",
     "status": "online",
-    "last_seen": "2026-09-18T17:02:01-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "Europei",
@@ -8380,7 +8448,7 @@
       "Manifesto",
       "Movimenti"
     ],
-    "last_checked": "2026-09-18T17:02:01-06:00"
+    "last_checked": "2026-09-22T15:08:35-06:00"
   },
   "developers-testing-campaign-petition-IT": {
     "slug": "developers-testing-campaign-petition-IT",
@@ -8393,6 +8461,10 @@
       {
         "checked_at": "2026-09-18T17:02:01-06:00",
         "count": 2220
+      },
+      {
+        "checked_at": "2026-09-22T15:08:35-06:00",
+        "count": 2527
       }
     ],
     "title": "Europa, ferma la violenza di genere!",
@@ -8402,12 +8474,12 @@
     "summary": "Italiano English English English English English English English English English English English English Français Deutsch Deutsch Español Polski Europa, ferma la violenza di genere! Alla Commissione e…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 2220,
+    "signatures": 2527,
     "goal": 5000,
     "lang": "it",
     "campaign_id": "wemove:developers-testing-campaign-petition",
     "status": "online",
-    "last_seen": "2026-09-18T17:02:01-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "English",
@@ -8421,7 +8493,7 @@
       "Commissione",
       "Chiediamo"
     ],
-    "last_checked": "2026-09-18T17:02:01-06:00"
+    "last_checked": "2026-09-22T15:08:35-06:00"
   },
   "2025-12-omnibus-food-petition-it": {
     "slug": "2025-12-omnibus-food-petition-it",
@@ -8434,6 +8506,10 @@
       {
         "checked_at": "2026-09-18T17:02:01-06:00",
         "count": 154255
+      },
+      {
+        "checked_at": "2026-09-22T15:08:35-06:00",
+        "count": 154268
       }
     ],
     "title": "Proteggiamo il nostro cibo dai pesticidi tossici",
@@ -8444,12 +8520,12 @@
     "start_date": "2025-12-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 154255,
+    "signatures": 154268,
     "goal": 200000,
     "lang": "it",
     "campaign_id": "wemove:2025-12-omnibus-food-petition",
     "status": "online",
-    "last_seen": "2026-09-18T17:02:01-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "Pesticidi",
@@ -8463,7 +8539,7 @@
       "Bayer-Monsanto",
       "Commissione"
     ],
-    "last_checked": "2026-09-18T17:02:01-06:00"
+    "last_checked": "2026-09-22T15:08:35-06:00"
   },
   "2026-09-Big-Food-petition-IT": {
     "slug": "2026-09-Big-Food-petition-IT",
@@ -8472,6 +8548,10 @@
       {
         "checked_at": "2026-09-18T17:02:01-06:00",
         "count": 54434
+      },
+      {
+        "checked_at": "2026-09-22T15:08:35-06:00",
+        "count": 55208
       }
     ],
     "title": "I colossi del cibo ci stanno facendo ammalare - serve una tassa europea sullo zucchero!",
@@ -8482,12 +8562,12 @@
     "start_date": "2026-09-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 54434,
+    "signatures": 55208,
     "goal": 75000,
     "lang": "it",
     "campaign_id": "wemove:2026-09-Big-Food-petition",
     "status": "online",
-    "last_seen": "2026-09-18T17:02:01-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "Zucchero",
@@ -8501,7 +8581,7 @@
       "Facendo",
       "Nostri"
     ],
-    "last_checked": "2026-09-18T17:02:01-06:00"
+    "last_checked": "2026-09-22T15:08:35-06:00"
   },
   "2026-09-toxic-coffee-petition-IT": {
     "slug": "2026-09-toxic-coffee-petition-IT",
@@ -8510,6 +8590,10 @@
       {
         "checked_at": "2026-09-18T17:02:01-06:00",
         "count": 46263
+      },
+      {
+        "checked_at": "2026-09-22T15:08:35-06:00",
+        "count": 46682
       }
     ],
     "title": "Basta veleni nel nostro caffè!",
@@ -8520,12 +8604,12 @@
     "start_date": "2026-09-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 46263,
+    "signatures": 46682,
     "goal": 50000,
     "lang": "it",
     "campaign_id": "wemove:2026-09-toxic-coffee-petition",
     "status": "online",
-    "last_seen": "2026-09-18T17:02:01-06:00",
+    "last_seen": "2026-09-22T15:08:35-06:00",
     "offline_since": null,
     "tags": [
       "Caffè",
@@ -8539,6 +8623,6 @@
       "Residui",
       "Basta"
     ],
-    "last_checked": "2026-09-18T17:02:01-06:00"
+    "last_checked": "2026-09-22T15:08:35-06:00"
   }
 }
