@@ -31,9 +31,12 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-22T07:34:07-06:00",
-    "petition_count": 606,
+    "generated_at": "2026-09-22T08:18:03-06:00",
+    "petition_count": 607,
     "available": 709,
+    "new_petitions_last_run": [
+      "2026-09-insurance-natural-disasters-petition-EN"
+    ],
     "unbrauchbare": {
       "20216-05-all-out-list-swap-petition-EN": "2026-09-05T14:05:02-06:00",
       "2023-01-lucas-ig-wrapper-test-petition-EN": "2026-09-05T15:27:48-06:00",
@@ -138,59 +141,56 @@
       "lucas-test-donate-petition-EN": "2026-09-18T09:03:37-06:00",
       "lucas-test-donation-2-petition-EN": "2026-09-18T09:03:37-06:00"
     },
-    "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-09-22T07:34:07-06:00",
+      "stand": "2026-09-22T08:18:03-06:00",
       "gefunden": 709,
-      "im_bestand": 606,
+      "im_bestand": 607,
       "unbrauchbar": 102,
       "verworfen": 0,
       "dublette": 0,
       "verschwunden": 0,
       "zurueckgestellt": 0,
-      "offen": 1,
-      "offene_beispiele": [
-        "2026-09-insurance-natural-disasters-petition-EN"
-      ],
-      "bestand_gesamt": 606,
+      "offen": 0,
+      "offene_beispiele": [],
+      "bestand_gesamt": 607,
       "bestand_ausserhalb": 0
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-09-22T07:34:07-06:00",
-        "gesamt": 606,
-        "online": 605,
+        "zeit": "2026-09-22T08:18:03-06:00",
+        "gesamt": 607,
+        "online": 606,
         "offline": 1,
         "ohne_titel": 1,
         "platzhalter": 0,
         "nicht_ausgeliefert": 1,
         "torsi": 0,
         "dubletten": 0,
-        "mit_start": 483,
+        "mit_start": 484,
         "juengstes_start": "2026-09-01",
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
-        "neu": 0
+        "neu": 1
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-22T07:34:07-06:00",
-      "gesamt": 606,
-      "online": 605,
+      "zeit": "2026-09-22T08:18:03-06:00",
+      "gesamt": 607,
+      "online": 606,
       "offline": 1,
       "ohne_titel": 1,
       "platzhalter": 0,
       "nicht_ausgeliefert": 1,
       "torsi": 0,
       "dubletten": 0,
-      "mit_start": 483,
+      "mit_start": 484,
       "juengstes_start": "2026-09-01",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-09-22T07:34:07-06:00",
+    "verlauf_felder_ab": "2026-09-22T08:18:03-06:00",
     "befunde": [],
     "health_warning": null,
-    "online_count": 605
+    "online_count": 606
   },
   "2026-07-ban-coral-killers-sunscreen-petition-EN": {
     "slug": "2026-07-ban-coral-killers-sunscreen-petition-EN",
@@ -22819,7 +22819,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-1-stop-the-trump-sports-shows-in-2026",
     "status": "online",
-    "last_seen": "2026-09-18T08:37:36-06:00",
+    "last_seen": "2026-09-22T08:16:10-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -22833,7 +22833,7 @@
       "Inititator",
       "Parliament"
     ],
-    "last_checked": "2026-09-18T08:37:36-06:00"
+    "last_checked": "2026-09-22T08:16:10-06:00"
   },
   "2026-1-virginia-testing-EN": {
     "slug": "2026-1-virginia-testing-EN",
@@ -22855,7 +22855,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-1-virginia-testing",
     "status": "online",
-    "last_seen": "2026-09-18T08:37:36-06:00",
+    "last_seen": "2026-09-22T08:16:10-06:00",
     "offline_since": null,
     "tags": [
       "Virginia",
@@ -22863,7 +22863,7 @@
       "Inititator",
       "Name"
     ],
-    "last_checked": "2026-09-18T08:37:36-06:00"
+    "last_checked": "2026-09-22T08:16:10-06:00"
   },
   "2026-2-end-eu-sanctions-on-journalist-huseyin-dogru-protect-press-freed-EN": {
     "slug": "2026-2-end-eu-sanctions-on-journalist-huseyin-dogru-protect-press-freed-EN",
@@ -22872,6 +22872,10 @@
       {
         "checked_at": "2026-09-06T16:02:35-06:00",
         "count": 88
+      },
+      {
+        "checked_at": "2026-09-22T08:16:10-06:00",
+        "count": 89
       }
     ],
     "title": "End EU Sanctions on Journalist Hüseyin Doğru! Protect Press Freedom & Confront Genocide in Gaza!",
@@ -22881,12 +22885,12 @@
     "summary": "English Español End EU Sanctions on Journalist Hüseyin Doğru! Protect Press Freedom & Confront Genocide in Gaza! The President of the European Commission and Members of the European Council This petit…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 88,
+    "signatures": 89,
     "goal": 1000,
     "lang": "en",
     "campaign_id": "wemove:2026-2-end-eu-sanctions-on-journalist-huseyin-dogru-protect-press-freed",
     "status": "online",
-    "last_seen": "2026-09-18T08:37:36-06:00",
+    "last_seen": "2026-09-22T08:16:10-06:00",
     "offline_since": null,
     "tags": [
       "Journalist",
@@ -22900,7 +22904,7 @@
       "Gaza",
       "Press"
     ],
-    "last_checked": "2026-09-18T08:37:36-06:00"
+    "last_checked": "2026-09-22T08:16:10-06:00"
   },
   "2026-2-no-alle-armi-si-alla-pace-EN": {
     "slug": "2026-2-no-alle-armi-si-alla-pace-EN",
@@ -22923,7 +22927,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-2-no-alle-armi-si-alla-pace",
     "status": "online",
-    "last_seen": "2026-09-18T09:03:37-06:00",
+    "last_seen": "2026-09-22T08:16:10-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -22937,7 +22941,7 @@
       "Based",
       "Revitalization"
     ],
-    "last_checked": "2026-09-18T09:03:37-06:00"
+    "last_checked": "2026-09-22T08:16:10-06:00"
   },
   "2026-2-proper-um-and-date-format-EN": {
     "slug": "2026-2-proper-um-and-date-format-EN",
@@ -22960,7 +22964,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-2-proper-um-and-date-format",
     "status": "online",
-    "last_seen": "2026-09-18T09:03:37-06:00",
+    "last_seen": "2026-09-22T08:16:10-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -22974,7 +22978,7 @@
       "Digital",
       "Metric"
     ],
-    "last_checked": "2026-09-18T09:03:37-06:00"
+    "last_checked": "2026-09-22T08:16:10-06:00"
   },
   "2026-2-urgent-petition-greenland-is-not-for-sale-trump-does-not-own-the-EN": {
     "slug": "2026-2-urgent-petition-greenland-is-not-for-sale-trump-does-not-own-the-EN",
@@ -22996,7 +23000,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-2-urgent-petition-greenland-is-not-for-sale-trump-does-not-own-the",
     "status": "online",
-    "last_seen": "2026-09-18T09:03:37-06:00",
+    "last_seen": "2026-09-22T08:16:10-06:00",
     "offline_since": null,
     "tags": [
       "GREENLAND",
@@ -23010,7 +23014,7 @@
       "Denmark",
       "Fragile"
     ],
-    "last_checked": "2026-09-18T09:03:37-06:00"
+    "last_checked": "2026-09-22T08:16:10-06:00"
   },
   "aarongiuliotest-petition-EN": {
     "slug": "aarongiuliotest-petition-EN",
@@ -23032,7 +23036,7 @@
     "lang": "en",
     "campaign_id": "wemove:aarongiuliotest-petition",
     "status": "online",
-    "last_seen": "2026-09-18T09:03:37-06:00",
+    "last_seen": "2026-09-22T08:16:10-06:00",
     "offline_since": null,
     "tags": [
       "Pesticides",
@@ -23046,7 +23050,7 @@
       "Bayer-Monsanto",
       "Commission"
     ],
-    "last_checked": "2026-09-18T09:03:37-06:00"
+    "last_checked": "2026-09-22T08:16:10-06:00"
   },
   "democratization-of-europe-EN": {
     "slug": "democratization-of-europe-EN",
@@ -23073,7 +23077,7 @@
     "lang": "en",
     "campaign_id": "wemove:democratization-of-europe",
     "status": "online",
-    "last_seen": "2026-09-18T09:03:37-06:00",
+    "last_seen": "2026-09-22T08:16:10-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -23087,7 +23091,7 @@
       "Assembly",
       "Project"
     ],
-    "last_checked": "2026-09-18T09:03:37-06:00"
+    "last_checked": "2026-09-22T08:16:10-06:00"
   },
   "developers-testing-campaign-petition-checkbox-EN": {
     "slug": "developers-testing-campaign-petition-checkbox-EN",
@@ -23100,6 +23104,10 @@
       {
         "checked_at": "2026-09-18T09:03:37-06:00",
         "count": 2220
+      },
+      {
+        "checked_at": "2026-09-22T08:16:10-06:00",
+        "count": 2527
       }
     ],
     "title": "Make Europe a safe place for all women and girls!",
@@ -23109,12 +23117,12 @@
     "summary": "English English English English English English English English English English English English Français Deutsch Deutsch Español Italiano Polski Make Europe a safe place for all women and girls! To th…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 2220,
+    "signatures": 2527,
     "goal": 5000,
     "lang": "en",
     "campaign_id": "wemove:developers-testing-campaign-petition-checkbox",
     "status": "online",
-    "last_seen": "2026-09-18T09:03:37-06:00",
+    "last_seen": "2026-09-22T08:16:10-06:00",
     "offline_since": null,
     "tags": [
       "English",
@@ -23128,7 +23136,7 @@
       "Place",
       "Make"
     ],
-    "last_checked": "2026-09-18T09:03:37-06:00"
+    "last_checked": "2026-09-22T08:16:10-06:00"
   },
   "developers-testing-campaign-petition-EN": {
     "slug": "developers-testing-campaign-petition-EN",
@@ -23141,6 +23149,10 @@
       {
         "checked_at": "2026-09-18T09:03:37-06:00",
         "count": 2220
+      },
+      {
+        "checked_at": "2026-09-22T08:16:10-06:00",
+        "count": 2527
       }
     ],
     "title": "Make Europe a safe place for all women and girls!",
@@ -23150,12 +23162,12 @@
     "summary": "English English English English English English English English English English English English Français Deutsch Deutsch Español Italiano Polski Make Europe a safe place for all women and girls! To th…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 2220,
+    "signatures": 2527,
     "goal": 5000,
     "lang": "en",
     "campaign_id": "wemove:developers-testing-campaign-petition",
     "status": "online",
-    "last_seen": "2026-09-18T09:03:37-06:00",
+    "last_seen": "2026-09-22T08:16:10-06:00",
     "offline_since": null,
     "tags": [
       "English",
@@ -23169,7 +23181,7 @@
       "Place",
       "Make"
     ],
-    "last_checked": "2026-09-18T09:03:37-06:00"
+    "last_checked": "2026-09-22T08:16:10-06:00"
   },
   "developers-testing-campaign-petition-external-video-EN": {
     "slug": "developers-testing-campaign-petition-external-video-EN",
@@ -23182,6 +23194,10 @@
       {
         "checked_at": "2026-09-18T09:03:37-06:00",
         "count": 2220
+      },
+      {
+        "checked_at": "2026-09-22T08:16:10-06:00",
+        "count": 2527
       }
     ],
     "title": "Make Europe a safe place for all women and girls!",
@@ -23191,12 +23207,12 @@
     "summary": "English English English English English English English English English English English English Français Deutsch Deutsch Español Italiano Polski Make Europe a safe place for all women and girls! To th…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 2220,
+    "signatures": 2527,
     "goal": 5000,
     "lang": "en",
     "campaign_id": "wemove:developers-testing-campaign-petition-external-video",
     "status": "online",
-    "last_seen": "2026-09-18T09:03:37-06:00",
+    "last_seen": "2026-09-22T08:16:10-06:00",
     "offline_since": null,
     "tags": [
       "English",
@@ -23210,7 +23226,7 @@
       "Place",
       "Make"
     ],
-    "last_checked": "2026-09-18T09:03:37-06:00"
+    "last_checked": "2026-09-22T08:16:10-06:00"
   },
   "developers-testing-campaign-petition-germanic-users-EN": {
     "slug": "developers-testing-campaign-petition-germanic-users-EN",
@@ -23223,6 +23239,10 @@
       {
         "checked_at": "2026-09-18T09:03:37-06:00",
         "count": 2220
+      },
+      {
+        "checked_at": "2026-09-22T08:16:10-06:00",
+        "count": 2527
       }
     ],
     "title": "Make Europe a safe place for all women and girls!",
@@ -23232,12 +23252,12 @@
     "summary": "English English English English English English English English English English English English Français Deutsch Deutsch Español Italiano Polski Make Europe a safe place for all women and girls! To th…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 2220,
+    "signatures": 2527,
     "goal": 5000,
     "lang": "en",
     "campaign_id": "wemove:developers-testing-campaign-petition-germanic-users",
     "status": "online",
-    "last_seen": "2026-09-18T09:03:37-06:00",
+    "last_seen": "2026-09-22T08:16:10-06:00",
     "offline_since": null,
     "tags": [
       "English",
@@ -23251,7 +23271,7 @@
       "Place",
       "Make"
     ],
-    "last_checked": "2026-09-18T09:03:37-06:00"
+    "last_checked": "2026-09-22T08:16:10-06:00"
   },
   "developers-testing-campaign-petition-radio-buttons-EN": {
     "slug": "developers-testing-campaign-petition-radio-buttons-EN",
@@ -23264,6 +23284,10 @@
       {
         "checked_at": "2026-09-18T09:03:37-06:00",
         "count": 2220
+      },
+      {
+        "checked_at": "2026-09-22T08:16:10-06:00",
+        "count": 2527
       }
     ],
     "title": "Make Europe a safe place for all women and girls!",
@@ -23273,12 +23297,12 @@
     "summary": "English English English English English English English English English English English English Français Deutsch Deutsch Español Italiano Polski Make Europe a safe place for all women and girls! To th…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 2220,
+    "signatures": 2527,
     "goal": 5000,
     "lang": "en",
     "campaign_id": "wemove:developers-testing-campaign-petition-radio-buttons",
     "status": "online",
-    "last_seen": "2026-09-18T09:03:37-06:00",
+    "last_seen": "2026-09-22T08:16:10-06:00",
     "offline_since": null,
     "tags": [
       "English",
@@ -23292,7 +23316,7 @@
       "Place",
       "Make"
     ],
-    "last_checked": "2026-09-18T09:03:37-06:00"
+    "last_checked": "2026-09-22T08:16:10-06:00"
   },
   "developers-testing-campaign-petition-with-recaptcha-EN": {
     "slug": "developers-testing-campaign-petition-with-recaptcha-EN",
@@ -23305,6 +23329,10 @@
       {
         "checked_at": "2026-09-18T09:03:37-06:00",
         "count": 2220
+      },
+      {
+        "checked_at": "2026-09-22T08:16:10-06:00",
+        "count": 2527
       }
     ],
     "title": "Recaptcha - Make Europe a safe place for all women and girls!",
@@ -23314,12 +23342,12 @@
     "summary": "English English English English English English English English English English English English Français Deutsch Deutsch Español Italiano Polski Recaptcha - Make Europe a safe place for all women and …",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 2220,
+    "signatures": 2527,
     "goal": 5000,
     "lang": "en",
     "campaign_id": "wemove:developers-testing-campaign-petition-with-recaptcha",
     "status": "online",
-    "last_seen": "2026-09-18T09:03:37-06:00",
+    "last_seen": "2026-09-22T08:16:10-06:00",
     "offline_since": null,
     "tags": [
       "English",
@@ -23333,7 +23361,7 @@
       "Sexual",
       "Place"
     ],
-    "last_checked": "2026-09-18T09:03:37-06:00"
+    "last_checked": "2026-09-22T08:16:10-06:00"
   },
   "developers-testing-campaign-petition-youtube-EN": {
     "slug": "developers-testing-campaign-petition-youtube-EN",
@@ -23346,6 +23374,10 @@
       {
         "checked_at": "2026-09-18T09:03:37-06:00",
         "count": 2220
+      },
+      {
+        "checked_at": "2026-09-22T08:16:10-06:00",
+        "count": 2527
       }
     ],
     "title": "Make Europe a safe place for all women and girls!",
@@ -23355,12 +23387,12 @@
     "summary": "English English English English English English English English English English English English Français Deutsch Deutsch Español Italiano Polski Make Europe a safe place for all women and girls! Pleas…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 2220,
+    "signatures": 2527,
     "goal": 5000,
     "lang": "en",
     "campaign_id": "wemove:developers-testing-campaign-petition-youtube",
     "status": "online",
-    "last_seen": "2026-09-18T09:03:37-06:00",
+    "last_seen": "2026-09-22T08:16:10-06:00",
     "offline_since": null,
     "tags": [
       "English",
@@ -23374,7 +23406,7 @@
       "Place",
       "Make"
     ],
-    "last_checked": "2026-09-18T09:03:37-06:00"
+    "last_checked": "2026-09-22T08:16:10-06:00"
   },
   "developers-tw-css-campaign-petition-EN": {
     "slug": "developers-tw-css-campaign-petition-EN",
@@ -23387,6 +23419,10 @@
       {
         "checked_at": "2026-09-18T09:03:37-06:00",
         "count": 2220
+      },
+      {
+        "checked_at": "2026-09-22T08:16:10-06:00",
+        "count": 2527
       }
     ],
     "title": "Tailwind-css Make Europe a safe place for all women and girls!",
@@ -23396,12 +23432,12 @@
     "summary": "English English English English English English English English English English English English Français Deutsch Deutsch Español Italiano Polski Tailwind-css Make Europe a safe place for all women and…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 2220,
+    "signatures": 2527,
     "goal": 5000,
     "lang": "en",
     "campaign_id": "wemove:developers-tw-css-campaign-petition",
     "status": "online",
-    "last_seen": "2026-09-18T09:03:37-06:00",
+    "last_seen": "2026-09-22T08:16:10-06:00",
     "offline_since": null,
     "tags": [
       "English",
@@ -23415,7 +23451,7 @@
       "Place",
       "Tailwind-css"
     ],
-    "last_checked": "2026-09-18T09:03:37-06:00"
+    "last_checked": "2026-09-22T08:16:10-06:00"
   },
   "save-the-glaciers-petition-EN": {
     "slug": "save-the-glaciers-petition-EN",
@@ -23438,7 +23474,7 @@
     "lang": "en",
     "campaign_id": "wemove:save-the-glaciers-petition",
     "status": "online",
-    "last_seen": "2026-09-18T09:03:37-06:00",
+    "last_seen": "2026-09-22T08:16:10-06:00",
     "offline_since": null,
     "tags": [
       "Government",
@@ -23452,7 +23488,7 @@
       "Kaunertal",
       "Dornauer"
     ],
-    "last_checked": "2026-09-18T09:03:37-06:00"
+    "last_checked": "2026-09-22T08:16:10-06:00"
   },
   "sharesteptest-petition-EN": {
     "slug": "sharesteptest-petition-EN",
@@ -23475,7 +23511,7 @@
     "lang": "en",
     "campaign_id": "wemove:sharesteptest-petition",
     "status": "online",
-    "last_seen": "2026-09-18T09:03:37-06:00",
+    "last_seen": "2026-09-22T08:16:10-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -23489,7 +23525,7 @@
       "Italiano",
       "Council"
     ],
-    "last_checked": "2026-09-18T09:03:37-06:00"
+    "last_checked": "2026-09-22T08:16:10-06:00"
   },
   "trial-save-the-mackerel-petition-EN": {
     "slug": "trial-save-the-mackerel-petition-EN",
@@ -23512,7 +23548,7 @@
     "lang": "en",
     "campaign_id": "wemove:trial-save-the-mackerel-petition",
     "status": "online",
-    "last_seen": "2026-09-18T09:03:37-06:00",
+    "last_seen": "2026-09-22T08:16:10-06:00",
     "offline_since": null,
     "tags": [
       "Mackerel",
@@ -23526,7 +23562,7 @@
       "Europe",
       "Future"
     ],
-    "last_checked": "2026-09-18T09:03:37-06:00"
+    "last_checked": "2026-09-22T08:16:10-06:00"
   },
   "2026-09-14-trial-killer-robots-trial-EN": {
     "slug": "2026-09-14-trial-killer-robots-trial-EN",
@@ -23535,6 +23571,10 @@
       {
         "checked_at": "2026-09-18T09:03:37-06:00",
         "count": 506
+      },
+      {
+        "checked_at": "2026-09-22T08:16:10-06:00",
+        "count": 522
       }
     ],
     "title": "Stop Killer Robots",
@@ -23545,12 +23585,12 @@
     "start_date": "2026-09-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 506,
+    "signatures": 522,
     "goal": 1000,
     "lang": "en",
     "campaign_id": "wemove:2026-09-14-trial-killer-robots-trial",
     "status": "online",
-    "last_seen": "2026-09-18T09:03:37-06:00",
+    "last_seen": "2026-09-22T08:16:10-06:00",
     "offline_since": null,
     "tags": [
       "Weapons",
@@ -23564,7 +23604,7 @@
       "Meaningful",
       "Launching"
     ],
-    "last_checked": "2026-09-18T09:03:37-06:00"
+    "last_checked": "2026-09-22T08:16:10-06:00"
   },
   "2026-09-Big-Food-petition-EN": {
     "slug": "2026-09-Big-Food-petition-EN",
@@ -23573,6 +23613,10 @@
       {
         "checked_at": "2026-09-18T09:03:37-06:00",
         "count": 54330
+      },
+      {
+        "checked_at": "2026-09-22T08:16:10-06:00",
+        "count": 55149
       }
     ],
     "title": "Big Food is making us sick - we need an EU sugar tax!",
@@ -23583,12 +23627,12 @@
     "start_date": "2026-09-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 54330,
+    "signatures": 55149,
     "goal": 75000,
     "lang": "en",
     "campaign_id": "wemove:2026-09-Big-Food-petition",
     "status": "online",
-    "last_seen": "2026-09-18T09:03:37-06:00",
+    "last_seen": "2026-09-22T08:16:10-06:00",
     "offline_since": null,
     "tags": [
       "Sugar",
@@ -23602,7 +23646,7 @@
       "Need",
       "Stop"
     ],
-    "last_checked": "2026-09-18T09:03:37-06:00"
+    "last_checked": "2026-09-22T08:16:10-06:00"
   },
   "2026-09-toxic-coffee-petition-EN": {
     "slug": "2026-09-toxic-coffee-petition-EN",
@@ -23611,6 +23655,10 @@
       {
         "checked_at": "2026-09-18T09:03:37-06:00",
         "count": 46211
+      },
+      {
+        "checked_at": "2026-09-22T08:16:10-06:00",
+        "count": 46652
       }
     ],
     "title": "No more poison in our coffee!",
@@ -23621,12 +23669,12 @@
     "start_date": "2026-09-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 46211,
+    "signatures": 46652,
     "goal": 50000,
     "lang": "en",
     "campaign_id": "wemove:2026-09-toxic-coffee-petition",
     "status": "online",
-    "last_seen": "2026-09-18T09:03:37-06:00",
+    "last_seen": "2026-09-22T08:16:10-06:00",
     "offline_since": null,
     "tags": [
       "Coffee",
@@ -23640,7 +23688,7 @@
       "Require",
       "Rules"
     ],
-    "last_checked": "2026-09-18T09:03:37-06:00"
+    "last_checked": "2026-09-22T08:16:10-06:00"
   },
   "2026-09-trial-ticket-companies-ripping-off-fans-petition-EN": {
     "slug": "2026-09-trial-ticket-companies-ripping-off-fans-petition-EN",
@@ -23649,6 +23697,10 @@
       {
         "checked_at": "2026-09-18T09:03:37-06:00",
         "count": 409
+      },
+      {
+        "checked_at": "2026-09-22T08:16:10-06:00",
+        "count": 415
       }
     ],
     "title": "Stop ticket companies from ripping off fans",
@@ -23659,12 +23711,12 @@
     "start_date": "2026-09-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 409,
+    "signatures": 415,
     "goal": 1000,
     "lang": "en",
     "campaign_id": "wemove:2026-09-trial-ticket-companies-ripping-off-fans-petition",
     "status": "online",
-    "last_seen": "2026-09-18T09:03:37-06:00",
+    "last_seen": "2026-09-22T08:16:10-06:00",
     "offline_since": null,
     "tags": [
       "Ticket",
@@ -23678,7 +23730,7 @@
       "Introduce",
       "Fairness"
     ],
-    "last_checked": "2026-09-18T09:03:37-06:00"
+    "last_checked": "2026-09-22T08:16:10-06:00"
   },
   "2026-09-trial2-fuelled-by-greed-petition-EN": {
     "slug": "2026-09-trial2-fuelled-by-greed-petition-EN",
@@ -23687,6 +23739,10 @@
       {
         "checked_at": "2026-09-18T09:03:37-06:00",
         "count": 661
+      },
+      {
+        "checked_at": "2026-09-22T08:16:10-06:00",
+        "count": 666
       }
     ],
     "title": "Keep clean fuel in our planes",
@@ -23696,12 +23752,12 @@
     "start_date": "2026-09-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 661,
+    "signatures": 666,
     "goal": 1000,
     "lang": "en",
     "campaign_id": "wemove:2026-09-trial2-fuelled-by-greed-petition",
     "status": "online",
-    "last_seen": "2026-09-18T09:03:37-06:00",
+    "last_seen": "2026-09-22T08:16:10-06:00",
     "offline_since": null,
     "tags": [
       "Fuel",
@@ -23715,6 +23771,44 @@
       "Every",
       "Decarbonise"
     ],
-    "last_checked": "2026-09-18T09:03:37-06:00"
+    "last_checked": "2026-09-22T08:16:10-06:00"
+  },
+  "2026-09-insurance-natural-disasters-petition-EN": {
+    "slug": "2026-09-insurance-natural-disasters-petition-EN",
+    "first_seen": "2026-09-22T08:16:10-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-09-22T08:16:10-06:00",
+        "count": 3
+      }
+    ],
+    "title": "Climate disasters: protect people, not insurers",
+    "image_url": "https://wemove.cdn.actionkit.com/images/Insurance_natural_disasters_house_1200_x_630_px.png",
+    "url": "https://action.wemove.eu/sign/2026-09-insurance-natural-disasters-petition-EN",
+    "description_full": "<p>\n\n<!-- Remove this if you don't want popins like \"This page also in English\" -->\n\n\n<img alt=\"Language selector\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/icon_translate_eeaca63123.svg\"/>\n\n          \n            \n              \n              English\n\n              \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n        \n\n</p><ul>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-insurance-natural-disasters-petition-FR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Français\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-insurance-natural-disasters-petition-DE\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Deutsch\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-insurance-natural-disasters-petition-ES\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Español\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-insurance-natural-disasters-petition-IT\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Italiano\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-insurance-natural-disasters-petition-NL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Nederlands\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-insurance-natural-disasters-petition-PL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Polski\n\n                    \n                    </a>\n</li>\n</ul><p>\n\n\n          Climate disasters: protect people, not insurers\n        \n\n<img alt=\"Climate disasters: protect people, not insurers\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/Insurance_natural_disasters_house_1200_x_630_px.png\"/>\n\n</p><h3>\n<p>To the European Commission, European Parliament and Council of the European Union</p>\n</h3>\n\n<h2>\n            Petition\n          </h2>\n<p>We call on the EU to:</p>\n<ol>\n<li>Introduce a public-private EU reinsurance scheme to ensure wide insurance coverage before natural disasters hit</li>\n<li>Create a EU disaster fund that functions as a public safety net, to reduce the burden on national budgets after climate catastrophes</li>\n<li>Require governments and insurers to have credible climate transition and adaptation plans if they want to access EU-level support</li>\n</ol>\n\n\n<h2>\n            \n              Why is this important?\n            \n          </h2>\n<p>In Europe, your home could burn down and your insurance company could refuse to pay for it. [1]</p>\n<p>As wildfires and other disasters become more common and devastating, <strong>insurance companies are lining their pockets by making what we pay them more expensive. While </strong>simultaneously reducing what they cover and pay for - sometimes even <strong>removing coverage altogether if climate risks are deemed too high.</strong> [2]</p>\n<p>Governments, or even individuals like you and me, are often left to pick up the bill alone after a big disaster hits. [3]</p>\n<p>But a fair insurance system should be shouldered by all and there for anyone, no matter where they live, or who’s been struck by climate disaster. </p>\n<p>Some countries already have a public safety net and a disaster fund in place. [4] <strong>An EU-wide disaster fund </strong>would make this safety net available to all Europeans. A plan for what this could look like across Europe <strong>is already on the table ready to implement.</strong> [5]</p>\n<p>Now we need our representatives to push through and make an EU disaster fund a reality. </p>\n<p><strong>Sign now to tell the EU: Create a disaster fund that doesn’t leave anyone behind!</strong></p>\n<h4>\n            References:\n          </h4>\n\n<p>[1] In France, wildfires are excluded from the countries’ public natural disaster prevention scheme. In Europe, only one quarter of climate related disaster damages between 1980 and 2024 were insured. https://www.reuters.com/legal/litigation/europes-wildfire-season-exposes-climate-insurance-gap-2026-08-04/</p>\n<p>[2] [3] https://www.politico.eu/article/climate-change-europe-insurance/; https://wearesolomon.com/en/mag/format/investigation/floods-redefining-disaster-insurance-mediterranean/</p>\n<p>[4] https://cepr.org/voxeu/columns/insuring-world-tomorrow</p>\n<p>[5] https://www.eiopa.europa.eu/document/download/51ada191-ba28-4ae8-8756-ba4eb72b203f_en; https://www.reuters.com/business/swiss-re-posts-47-rise-2025-net-profit-life-health-weighs-2026-02-27/</p>",
+    "summary": "English Français Deutsch Español Italiano Nederlands Polski Climate disasters: protect people, not insurers To the European Commission, European Parliament and Council of the European Union Petition W…",
+    "start_date": "2026-09-01",
+    "started_by": "WeMove Europe",
+    "kind": "petition",
+    "signatures": 3,
+    "goal": 1000,
+    "lang": "en",
+    "campaign_id": "wemove:2026-09-insurance-natural-disasters-petition",
+    "status": "online",
+    "last_seen": "2026-09-22T08:16:10-06:00",
+    "offline_since": null,
+    "tags": [
+      "Disaster",
+      "Climate",
+      "European",
+      "Disasters",
+      "Fund",
+      "Insurance",
+      "Insurers",
+      "Protect",
+      "Europe",
+      "People"
+    ],
+    "last_checked": "2026-09-22T08:16:10-06:00"
   }
 }
