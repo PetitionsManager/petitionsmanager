@@ -31,12 +31,12 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-23T14:26:17-06:00",
+    "generated_at": "2026-09-23T15:01:18-06:00",
     "petition_count": 1886,
     "available": 1876,
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-09-23T14:26:17-06:00",
+      "stand": "2026-09-23T15:01:18-06:00",
       "gefunden": 1876,
       "im_bestand": 1876,
       "unbrauchbar": 0,
@@ -129,10 +129,26 @@
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
         "neu": 0
+      },
+      {
+        "zeit": "2026-09-23T15:01:18-06:00",
+        "gesamt": 1886,
+        "online": 1886,
+        "offline": 0,
+        "ohne_titel": 0,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 0,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 975,
+        "juengstes_start": "2026-07-17",
+        "mit_code_im_text": 0,
+        "herkunft": "lokal_cron",
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-23T14:26:17-06:00",
+      "zeit": "2026-09-23T15:01:18-06:00",
       "gesamt": 1886,
       "online": 1886,
       "offline": 0,
@@ -151,7 +167,7 @@
         "stufe": "hinweis",
         "thema": "Startdatum ist ein Verfahrensdatum",
         "text": "Tagesgenaues Datum bei 975 von 1886 Sätzen; es ist das Zulässigkeitsdatum aus der Mitteilung an die Mitglieder, nicht der Start der Petition. Das jüngste ist 68 Tage alt (2026-07-17) — bauartbedingt, weil das Dokument erst mit der Kommissionsantwort entsteht. Der Altersmelder ist hier deshalb ausgen",
-        "zeit": "2026-09-23T14:26:17-06:00",
+        "zeit": "2026-09-23T15:01:18-06:00",
         "thema_en": "Start date is a procedural date",
         "text_en": "Day-exact date on 975 of 1886 records; it is the date of admissibility from the Notice to Members, not the start of the petition. The newest is 68 days old (2026-07-17) — by design, as the document is only drawn up once the Commission has replied. The ageing check is therefore skipped here."
       }
