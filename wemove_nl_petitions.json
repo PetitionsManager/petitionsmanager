@@ -31,7 +31,7 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-22T17:36:30-06:00",
+    "generated_at": "2026-09-22T18:11:07-06:00",
     "petition_count": 169,
     "available": 224,
     "unbrauchbare": {
@@ -88,28 +88,27 @@
       "2026-04-landmine-petition-NL": "2026-09-06T10:22:09-06:00",
       "sharesteptest-petition-NL": "2026-09-06T12:48:22-06:00",
       "lucas-test-donate-petition-NL": "2026-09-18T18:53:11-06:00",
-      "lucas-test-donation-2-petition-NL": "2026-09-18T18:53:11-06:00"
+      "lucas-test-donation-2-petition-NL": "2026-09-18T18:53:11-06:00",
+      "2026-09-insurance-natural-disasters-petition-NL": "2026-09-22T18:10:03-06:00"
     },
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-09-22T17:36:30-06:00",
+      "stand": "2026-09-22T18:11:07-06:00",
       "gefunden": 224,
       "im_bestand": 169,
-      "unbrauchbar": 54,
+      "unbrauchbar": 55,
       "verworfen": 0,
       "dublette": 0,
       "verschwunden": 0,
       "zurueckgestellt": 0,
-      "offen": 1,
-      "offene_beispiele": [
-        "2026-09-insurance-natural-disasters-petition-NL"
-      ],
+      "offen": 0,
+      "offene_beispiele": [],
       "bestand_gesamt": 169,
       "bestand_ausserhalb": 0
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-09-22T17:36:30-06:00",
+        "zeit": "2026-09-22T18:11:07-06:00",
         "gesamt": 169,
         "online": 168,
         "offline": 1,
@@ -126,7 +125,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-22T17:36:30-06:00",
+      "zeit": "2026-09-22T18:11:07-06:00",
       "gesamt": 169,
       "online": 168,
       "offline": 1,
@@ -139,7 +138,7 @@
       "juengstes_start": "2026-09-01",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-09-22T17:36:30-06:00",
+    "verlauf_felder_ab": "2026-09-22T18:11:07-06:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 168
@@ -6647,7 +6646,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2026-06-lyle-opus-petition",
     "status": "online",
-    "last_seen": "2026-09-18T18:53:11-06:00",
+    "last_seen": "2026-09-22T18:10:03-06:00",
     "offline_since": null,
     "tags": [
       "Centres",
@@ -6661,7 +6660,7 @@
       "Renewables",
       "Made"
     ],
-    "last_checked": "2026-09-18T18:53:11-06:00"
+    "last_checked": "2026-09-22T18:10:03-06:00"
   },
   "2026-06-lyle-opus-petition-NL-NL": {
     "slug": "2026-06-lyle-opus-petition-NL-NL",
@@ -6685,7 +6684,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2026-06-lyle-opus-petition-NL",
     "status": "online",
-    "last_seen": "2026-09-18T18:53:11-06:00",
+    "last_seen": "2026-09-22T18:10:03-06:00",
     "offline_since": null,
     "tags": [
       "Datacentra",
@@ -6699,7 +6698,7 @@
       "EU-datacentra",
       "Petitie"
     ],
-    "last_checked": "2026-09-18T18:53:11-06:00"
+    "last_checked": "2026-09-22T18:10:03-06:00"
   },
   "2026-06-lyle-opus-translation-petition-NL": {
     "slug": "2026-06-lyle-opus-translation-petition-NL",
@@ -6723,7 +6722,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2026-06-lyle-opus-translation-petition",
     "status": "online",
-    "last_seen": "2026-09-18T18:53:11-06:00",
+    "last_seen": "2026-09-22T18:10:03-06:00",
     "offline_since": null,
     "tags": [
       "Datacenters",
@@ -6737,7 +6736,7 @@
       "Voor",
       "Zijn"
     ],
-    "last_checked": "2026-09-18T18:53:11-06:00"
+    "last_checked": "2026-09-22T18:10:03-06:00"
   },
   "2026-06-lyle-webabel-opus-petition-NL": {
     "slug": "2026-06-lyle-webabel-opus-petition-NL",
@@ -6761,7 +6760,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2026-06-lyle-webabel-opus-petition",
     "status": "online",
-    "last_seen": "2026-09-18T18:53:11-06:00",
+    "last_seen": "2026-09-22T18:10:03-06:00",
     "offline_since": null,
     "tags": [
       "Datacenters",
@@ -6775,7 +6774,7 @@
       "EU-datacenters",
       "Kunnen"
     ],
-    "last_checked": "2026-09-18T18:53:11-06:00"
+    "last_checked": "2026-09-22T18:10:03-06:00"
   },
   "2026-06-lyle-webabel-sonnet-petition-NL": {
     "slug": "2026-06-lyle-webabel-sonnet-petition-NL",
@@ -6799,7 +6798,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2026-06-lyle-webabel-sonnet-petition",
     "status": "online",
-    "last_seen": "2026-09-18T18:53:11-06:00",
+    "last_seen": "2026-09-22T18:10:03-06:00",
     "offline_since": null,
     "tags": [
       "Datacenters",
@@ -6813,7 +6812,7 @@
       "EU-datacenters",
       "Petitie"
     ],
-    "last_checked": "2026-09-18T18:53:11-06:00"
+    "last_checked": "2026-09-22T18:10:03-06:00"
   },
   "2026-06-phone-hacking-petition-NL": {
     "slug": "2026-06-phone-hacking-petition-NL",
@@ -6826,6 +6825,10 @@
       {
         "checked_at": "2026-09-18T18:53:11-06:00",
         "count": 58023
+      },
+      {
+        "checked_at": "2026-09-22T18:10:03-06:00",
+        "count": 58029
       }
     ],
     "title": "Stop de telefoonhackers",
@@ -6836,12 +6839,12 @@
     "start_date": "2026-06-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 58023,
+    "signatures": 58029,
     "goal": 75000,
     "lang": "nl",
     "campaign_id": "wemove:2026-06-phone-hacking-petition",
     "status": "online",
-    "last_seen": "2026-09-18T18:53:11-06:00",
+    "last_seen": "2026-09-22T18:10:03-06:00",
     "offline_since": null,
     "tags": [
       "Spyware",
@@ -6855,7 +6858,7 @@
       "Telefoonhackers",
       "Bedrijven"
     ],
-    "last_checked": "2026-09-18T18:53:11-06:00"
+    "last_checked": "2026-09-22T18:10:03-06:00"
   },
   "2026-07-investigate-FIFA-leader-petition-NL": {
     "slug": "2026-07-investigate-FIFA-leader-petition-NL",
@@ -6868,6 +6871,10 @@
       {
         "checked_at": "2026-09-18T18:53:11-06:00",
         "count": 80772
+      },
+      {
+        "checked_at": "2026-09-22T18:10:03-06:00",
+        "count": 80782
       }
     ],
     "title": "Onderzoek de baas van FIFA, Gianni Infantino",
@@ -6878,12 +6885,12 @@
     "start_date": "2026-07-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 80772,
+    "signatures": 80782,
     "goal": 100000,
     "lang": "nl",
     "campaign_id": "wemove:2026-07-investigate-FIFA-leader-petition",
     "status": "online",
-    "last_seen": "2026-09-18T18:53:11-06:00",
+    "last_seen": "2026-09-22T18:10:03-06:00",
     "offline_since": null,
     "tags": [
       "FIFA",
@@ -6897,7 +6904,7 @@
       "Kaart",
       "Internationale"
     ],
-    "last_checked": "2026-09-18T18:53:11-06:00"
+    "last_checked": "2026-09-22T18:10:03-06:00"
   },
   "2026-07-maximum-working-temperature-petition-NL": {
     "slug": "2026-07-maximum-working-temperature-petition-NL",
@@ -6910,6 +6917,10 @@
       {
         "checked_at": "2026-09-18T18:53:11-06:00",
         "count": 55793
+      },
+      {
+        "checked_at": "2026-09-22T18:10:03-06:00",
+        "count": 55800
       }
     ],
     "title": "Bescherm werknemers tegen de hitte",
@@ -6920,12 +6931,12 @@
     "start_date": "2026-07-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 55793,
+    "signatures": 55800,
     "goal": 75000,
     "lang": "nl",
     "campaign_id": "wemove:2026-07-maximum-working-temperature-petition",
     "status": "online",
-    "last_seen": "2026-09-18T18:53:11-06:00",
+    "last_seen": "2026-09-22T18:10:03-06:00",
     "offline_since": null,
     "tags": [
       "Hitte",
@@ -6939,7 +6950,7 @@
       "Werken",
       "Zoals"
     ],
-    "last_checked": "2026-09-18T18:53:11-06:00"
+    "last_checked": "2026-09-22T18:10:03-06:00"
   },
   "2026-1-ma-sante-n-est-pas-a-vendre-my-health-is-not-for-sale-stop-ue-me-NL": {
     "slug": "2026-1-ma-sante-n-est-pas-a-vendre-my-health-is-not-for-sale-stop-ue-me-NL",
@@ -6961,7 +6972,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2026-1-ma-sante-n-est-pas-a-vendre-my-health-is-not-for-sale-stop-ue-me",
     "status": "online",
-    "last_seen": "2026-09-18T18:53:11-06:00",
+    "last_seen": "2026-09-22T18:10:03-06:00",
     "offline_since": null,
     "tags": [
       "Gezondheid",
@@ -6975,7 +6986,7 @@
       "Koop",
       "Mijn"
     ],
-    "last_checked": "2026-09-18T18:53:11-06:00"
+    "last_checked": "2026-09-22T18:10:03-06:00"
   },
   "2025-12-omnibus-food-petition-nl": {
     "slug": "2025-12-omnibus-food-petition-nl",
@@ -6988,6 +6999,10 @@
       {
         "checked_at": "2026-09-18T18:53:11-06:00",
         "count": 154255
+      },
+      {
+        "checked_at": "2026-09-22T18:10:03-06:00",
+        "count": 154268
       }
     ],
     "title": "Bescherm ons voedsel tegen giftige pesticiden",
@@ -6998,12 +7013,12 @@
     "start_date": "2025-12-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 154255,
+    "signatures": 154268,
     "goal": 200000,
     "lang": "nl",
     "campaign_id": "wemove:2025-12-omnibus-food-petition",
     "status": "online",
-    "last_seen": "2026-09-18T18:53:11-06:00",
+    "last_seen": "2026-09-22T18:10:03-06:00",
     "offline_since": null,
     "tags": [
       "Pesticiden",
@@ -7017,7 +7032,7 @@
       "Onze",
       "Bayer-Monsanto"
     ],
-    "last_checked": "2026-09-18T18:53:11-06:00"
+    "last_checked": "2026-09-22T18:10:03-06:00"
   },
   "2021-11-aid-Polish-border-petition-NL": {
     "slug": "2021-11-aid-Polish-border-petition-NL",
@@ -7036,6 +7051,10 @@
       {
         "checked_at": "2026-09-18T18:53:11-06:00",
         "count": 54435
+      },
+      {
+        "checked_at": "2026-09-22T18:10:03-06:00",
+        "count": 55214
       }
     ],
     "title": "Junkfoodreuzen maken ons ziek – een Europese suikertaks is nodig!",
@@ -7046,12 +7065,12 @@
     "start_date": "2026-09-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 54435,
+    "signatures": 55214,
     "goal": 75000,
     "lang": "nl",
     "campaign_id": "wemove:2026-09-Big-Food-petition",
     "status": "online",
-    "last_seen": "2026-09-18T18:53:11-06:00",
+    "last_seen": "2026-09-22T18:10:03-06:00",
     "offline_since": null,
     "tags": [
       "Suikertaks",
@@ -7065,7 +7084,7 @@
       "Voedselindustrie",
       "Gezondheid"
     ],
-    "last_checked": "2026-09-18T18:53:11-06:00"
+    "last_checked": "2026-09-22T18:10:03-06:00"
   },
   "2026-09-toxic-coffee-petition-NL": {
     "slug": "2026-09-toxic-coffee-petition-NL",
@@ -7074,6 +7093,10 @@
       {
         "checked_at": "2026-09-18T18:53:11-06:00",
         "count": 46265
+      },
+      {
+        "checked_at": "2026-09-22T18:10:03-06:00",
+        "count": 46685
       }
     ],
     "title": "Geen gif meer in onze koffie!",
@@ -7084,12 +7107,12 @@
     "start_date": "2026-09-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 46265,
+    "signatures": 46685,
     "goal": 50000,
     "lang": "nl",
     "campaign_id": "wemove:2026-09-toxic-coffee-petition",
     "status": "online",
-    "last_seen": "2026-09-18T18:53:11-06:00",
+    "last_seen": "2026-09-22T18:10:03-06:00",
     "offline_since": null,
     "tags": [
       "Koffie",
@@ -7103,6 +7126,6 @@
       "Verboden",
       "Gebruik"
     ],
-    "last_checked": "2026-09-18T18:53:11-06:00"
+    "last_checked": "2026-09-22T18:10:03-06:00"
   }
 }
