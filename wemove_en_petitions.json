@@ -31,7 +31,7 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-24T09:23:50-06:00",
+    "generated_at": "2026-09-24T10:18:16-06:00",
     "petition_count": 607,
     "available": 709,
     "unbrauchbare": {
@@ -140,7 +140,7 @@
     },
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-09-24T09:23:49-06:00",
+      "stand": "2026-09-24T10:18:16-06:00",
       "gefunden": 709,
       "im_bestand": 607,
       "unbrauchbar": 102,
@@ -155,7 +155,7 @@
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-09-24T09:23:49-06:00",
+        "zeit": "2026-09-24T10:18:16-06:00",
         "gesamt": 607,
         "online": 606,
         "offline": 1,
@@ -172,7 +172,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-24T09:23:49-06:00",
+      "zeit": "2026-09-24T10:18:16-06:00",
       "gesamt": 607,
       "online": 606,
       "offline": 1,
@@ -185,7 +185,7 @@
       "juengstes_start": "2026-09-01",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-09-24T09:23:49-06:00",
+    "verlauf_felder_ab": "2026-09-24T10:18:16-06:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 606
@@ -6652,7 +6652,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-extremists-message-testing-far-right-democracy-hr",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "Nederlands",
@@ -6666,7 +6666,7 @@
       "Continent",
       "Poli"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-04-EU-elections-GOTV-extremists-message-testing-far-right-feminism-hr-EN": {
     "slug": "2024-04-EU-elections-GOTV-extremists-message-testing-far-right-feminism-hr-EN",
@@ -6689,7 +6689,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-extremists-message-testing-far-right-feminism-hr",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "Nederlands",
@@ -6703,7 +6703,7 @@
       "Extremist",
       "Groups"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-04-EU-elections-GOTV-get-stuff-done-climate-pride-message-testing-hr-EN": {
     "slug": "2024-04-EU-elections-GOTV-get-stuff-done-climate-pride-message-testing-hr-EN",
@@ -6726,7 +6726,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-get-stuff-done-climate-pride-message-testing-hr",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "Europe",
@@ -6740,7 +6740,7 @@
       "Polski",
       "European"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-04-EU-elections-GOTV-get-stuff-done-future-message-testing-hr-EN": {
     "slug": "2024-04-EU-elections-GOTV-get-stuff-done-future-message-testing-hr-EN",
@@ -6763,7 +6763,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-get-stuff-done-future-message-testing-hr",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "Nederlands",
@@ -6777,7 +6777,7 @@
       "Deserve",
       "Reality"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-04-recognise-Palestine-petition-EN": {
     "slug": "2024-04-recognise-Palestine-petition-EN",
@@ -6794,6 +6794,10 @@
       {
         "checked_at": "2026-09-21T08:58:11-06:00",
         "count": 109518
+      },
+      {
+        "checked_at": "2026-09-24T10:14:58-06:00",
+        "count": 109520
       }
     ],
     "title": "Recognise the Palestinian voice and future!",
@@ -6804,12 +6808,12 @@
     "start_date": "2024-04-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 109518,
+    "signatures": 109520,
     "goal": 150000,
     "lang": "en",
     "campaign_id": "wemove:2024-04-recognise-Palestine-petition",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -6823,7 +6827,7 @@
       "Future",
       "People"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-04-trial-recognise-Palestine-trial-INT-EN": {
     "slug": "2024-04-trial-recognise-Palestine-trial-INT-EN",
@@ -6846,7 +6850,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-04-trial-recognise-Palestine-trial-INT",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -6860,7 +6864,7 @@
       "Palestine",
       "Respect"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-05-antoine-training-campaign-petition-EN": {
     "slug": "2024-05-antoine-training-campaign-petition-EN",
@@ -6884,7 +6888,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-05-antoine-training-campaign-petition",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "Raiffeisen",
@@ -6898,7 +6902,7 @@
       "Business",
       "Already"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-05-GOTV-Share-Your-Story-video-EN": {
     "slug": "2024-05-GOTV-Share-Your-Story-video-EN",
@@ -6921,7 +6925,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-05-GOTV-Share-Your-Story-video",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "Maybe",
@@ -6935,7 +6939,7 @@
       "Celebrate",
       "Electoral"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-05-GOTV-Use-You-Power-petition-EN": {
     "slug": "2024-05-GOTV-Use-You-Power-petition-EN",
@@ -6958,7 +6962,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-05-GOTV-Use-You-Power-petition",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "Power",
@@ -6972,7 +6976,7 @@
       "June",
       "Like"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-05-GOTV-Use-You-Power-petition-video-EN": {
     "slug": "2024-05-GOTV-Use-You-Power-petition-video-EN",
@@ -6995,7 +6999,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-05-GOTV-Use-You-Power-petition-video",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "Voter",
@@ -7009,7 +7013,7 @@
       "Avoid",
       "Every"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-05-national-laws-ecocide-youmove-petition-EN": {
     "slug": "2024-05-national-laws-ecocide-youmove-petition-EN",
@@ -7026,6 +7030,10 @@
       {
         "checked_at": "2026-09-21T08:58:11-06:00",
         "count": 88881
+      },
+      {
+        "checked_at": "2026-09-24T10:14:58-06:00",
+        "count": 88883
       }
     ],
     "title": "Make ecocide a crime!",
@@ -7036,12 +7044,12 @@
     "start_date": "2024-05-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 88881,
+    "signatures": 88883,
     "goal": 100000,
     "lang": "en",
     "campaign_id": "wemove:2024-05-national-laws-ecocide-youmove-petition",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "Deutsch",
@@ -7055,7 +7063,7 @@
       "Italiano",
       "National"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-05-trial-national-laws-ecocide-petition-EN": {
     "slug": "2024-05-trial-national-laws-ecocide-petition-EN",
@@ -7079,7 +7087,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-05-trial-national-laws-ecocide-petition",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "Ecocide",
@@ -7093,7 +7101,7 @@
       "Directive",
       "Introduce"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-05-trial-renew-no-hate-petition-EN": {
     "slug": "2024-05-trial-renew-no-hate-petition-EN",
@@ -7116,7 +7124,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-05-trial-renew-no-hate-petition",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "Renew",
@@ -7130,7 +7138,7 @@
       "Vote",
       "Netherlands"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-06-03-Triple-Your-Vote-petition-EN": {
     "slug": "2024-06-03-Triple-Your-Vote-petition-EN",
@@ -7154,7 +7162,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-06-03-Triple-Your-Vote-petition",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "Power",
@@ -7168,7 +7176,7 @@
       "Relatives",
       "Français"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-06-majid-training-campaign-petition-EN": {
     "slug": "2024-06-majid-training-campaign-petition-EN",
@@ -7192,7 +7200,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-06-majid-training-campaign-petition",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "Russia",
@@ -7206,7 +7214,7 @@
       "Board",
       "Close"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-06-Renew-dont-normalise-hate-petition-EN": {
     "slug": "2024-06-Renew-dont-normalise-hate-petition-EN",
@@ -7215,6 +7223,10 @@
       {
         "checked_at": "2026-09-06T10:42:07-06:00",
         "count": 13532
+      },
+      {
+        "checked_at": "2026-09-24T10:14:58-06:00",
+        "count": 13533
       }
     ],
     "title": "Renew: don’t normalise hate!",
@@ -7225,12 +7237,12 @@
     "start_date": "2024-06-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 13532,
+    "signatures": 13533,
     "goal": 20000,
     "lang": "en",
     "campaign_id": "wemove:2024-06-Renew-dont-normalise-hate-petition",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "Renew",
@@ -7244,7 +7256,7 @@
       "Climate",
       "Power"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-06-trial-ban-PVC-trial-petition-EN": {
     "slug": "2024-06-trial-ban-PVC-trial-petition-EN",
@@ -7267,7 +7279,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-06-trial-ban-PVC-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "Health",
@@ -7281,7 +7293,7 @@
       "Additives",
       "Human"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-06-trial-big-meat-trial-INT-EN": {
     "slug": "2024-06-trial-big-meat-trial-INT-EN",
@@ -7305,7 +7317,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-06-trial-big-meat-trial-INT",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -7319,7 +7331,7 @@
       "Dairy",
       "Diets"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-06-trial-dont-collaborate-with-hate-climate-petition-EN": {
     "slug": "2024-06-trial-dont-collaborate-with-hate-climate-petition-EN",
@@ -7342,7 +7354,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-06-trial-dont-collaborate-with-hate-climate-petition",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "Extremists",
@@ -7356,7 +7368,7 @@
       "Party",
       "Renew"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-06-trial-dont-collaborate-with-hate-INT-EN": {
     "slug": "2024-06-trial-dont-collaborate-with-hate-INT-EN",
@@ -7379,7 +7391,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-06-trial-dont-collaborate-with-hate-INT",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "MEPs",
@@ -7393,7 +7405,7 @@
       "Far-right",
       "Policies"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-06-trial-fao-sustainable-fish-farms-petition-EN": {
     "slug": "2024-06-trial-fao-sustainable-fish-farms-petition-EN",
@@ -7416,7 +7428,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-06-trial-fao-sustainable-fish-farms-petition",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "Fish",
@@ -7430,7 +7442,7 @@
       "Policy",
       "Food"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-06-trial-fao-sustainable-fish-farms-second-trial-petition-EN": {
     "slug": "2024-06-trial-fao-sustainable-fish-farms-second-trial-petition-EN",
@@ -7454,7 +7466,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-06-trial-fao-sustainable-fish-farms-second-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "Fish",
@@ -7468,7 +7480,7 @@
       "Policy",
       "Food"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-06-trial-fao-sustainable-fish-farms-third-trial-petition-EN": {
     "slug": "2024-06-trial-fao-sustainable-fish-farms-third-trial-petition-EN",
@@ -7491,7 +7503,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-06-trial-fao-sustainable-fish-farms-third-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "Fish",
@@ -7505,7 +7517,7 @@
       "World",
       "Food"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-06-trial-houses-for-people-not-business-petition-EN": {
     "slug": "2024-06-trial-houses-for-people-not-business-petition-EN",
@@ -7528,7 +7540,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-06-trial-houses-for-people-not-business-petition",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -7542,7 +7554,7 @@
       "Commissioner",
       "Businesses"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-06-trial-israel-eu-agreement-trial-petition-EN": {
     "slug": "2024-06-trial-israel-eu-agreement-trial-petition-EN",
@@ -7565,7 +7577,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-06-trial-israel-eu-agreement-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "Agreement",
@@ -7579,7 +7591,7 @@
       "Trade",
       "Gaza"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-06-trial-my-voice-my-choice-trial-petition-EN": {
     "slug": "2024-06-trial-my-voice-my-choice-trial-petition-EN",
@@ -7602,7 +7614,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-06-trial-my-voice-my-choice-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "Abortion",
@@ -7616,7 +7628,7 @@
       "Country",
       "Demand"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-07-big-meat-petition-EN": {
     "slug": "2024-07-big-meat-petition-EN",
@@ -7648,7 +7660,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-07-big-meat-petition",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "Meat",
@@ -7662,7 +7674,7 @@
       "Methane",
       "People"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-07-kreni-promeni-invitation-handraiser-EN": {
     "slug": "2024-07-kreni-promeni-invitation-handraiser-EN",
@@ -7685,7 +7697,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-07-kreni-promeni-invitation-handraiser",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "Hvala",
@@ -7699,7 +7711,7 @@
       "Primate",
       "Europe"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-07-lidl-chicken-scandal-petition-EN": {
     "slug": "2024-07-lidl-chicken-scandal-petition-EN",
@@ -7727,7 +7739,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-07-lidl-chicken-scandal-petition",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "Lidl",
@@ -7741,7 +7753,7 @@
       "Unnecessary",
       "Commitment"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-07-pesticide-free-petition-EN": {
     "slug": "2024-07-pesticide-free-petition-EN",
@@ -7768,7 +7780,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-07-pesticide-free-petition",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "Pesticides",
@@ -7782,7 +7794,7 @@
       "Français",
       "Italiano"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-07-trial-ban-PVC-trial-petition-EN": {
     "slug": "2024-07-trial-ban-PVC-trial-petition-EN",
@@ -7806,7 +7818,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-07-trial-ban-PVC-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "Health",
@@ -7820,7 +7832,7 @@
       "Additives",
       "Human"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-07-trial-because-our-planet-is-blue-petition-EN": {
     "slug": "2024-07-trial-because-our-planet-is-blue-petition-EN",
@@ -7844,7 +7856,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-07-trial-because-our-planet-is-blue-petition",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "Ocean",
@@ -7858,7 +7870,7 @@
       "Because",
       "Life"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-07-trial-housing-trial-petition-EN": {
     "slug": "2024-07-trial-housing-trial-petition-EN",
@@ -7881,7 +7893,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-07-trial-housing-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "Homes",
@@ -7895,7 +7907,7 @@
       "Communities",
       "Commission"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-07-trial-my-voice-my-choice-trial-3-petition-EN": {
     "slug": "2024-07-trial-my-voice-my-choice-trial-3-petition-EN",
@@ -7918,7 +7930,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-07-trial-my-voice-my-choice-trial-3-petition",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "Abortion",
@@ -7932,7 +7944,7 @@
       "Deserve",
       "Travel"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-07-trial-my-voice-my-choice-trial-petition-EN": {
     "slug": "2024-07-trial-my-voice-my-choice-trial-petition-EN",
@@ -7955,7 +7967,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-07-trial-my-voice-my-choice-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "Abortion",
@@ -7969,7 +7981,7 @@
       "Lives",
       "Care"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-07-trial-no-nuclear-weapon-Sweden-trial-petition-EN": {
     "slug": "2024-07-trial-no-nuclear-weapon-Sweden-trial-petition-EN",
@@ -7992,7 +8004,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-07-trial-no-nuclear-weapon-Sweden-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "Weapons",
@@ -8006,7 +8018,7 @@
       "Parliament",
       "Important"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-07-trial-pesticides-petition-EN": {
     "slug": "2024-07-trial-pesticides-petition-EN",
@@ -8030,7 +8042,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-07-trial-pesticides-petition",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "Pesticides",
@@ -8044,7 +8056,7 @@
       "Agribusiness",
       "Europeans"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-07-trial-Toxic-Pesticides-petition-EN": {
     "slug": "2024-07-trial-Toxic-Pesticides-petition-EN",
@@ -8068,7 +8080,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-07-trial-Toxic-Pesticides-petition",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "Pesticides",
@@ -8082,7 +8094,7 @@
       "Ambitious",
       "Interests"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-08-conflict-of-interest-petition-EN": {
     "slug": "2024-08-conflict-of-interest-petition-EN",
@@ -8105,7 +8117,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-08-conflict-of-interest-petition",
     "status": "online",
-    "last_seen": "2026-09-21T08:58:11-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "Fossil",
@@ -8119,7 +8131,7 @@
       "Europe",
       "Build"
     ],
-    "last_checked": "2026-09-21T08:58:11-06:00"
+    "last_checked": "2026-09-24T10:14:58-06:00"
   },
   "2024-08-Fossil-Fuel-Firewall-petition-EN": {
     "slug": "2024-08-Fossil-Fuel-Firewall-petition-EN",
@@ -8141,7 +8153,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-08-Fossil-Fuel-Firewall-petition",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T10:14:58-06:00",
     "offline_since": null,
     "tags": [
       "Fossil",
@@ -8155,7 +8167,7 @@
       "Enforce",
       "Lobby"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00",
+    "last_checked": "2026-09-24T10:14:58-06:00",
     "signatures": 64549,
     "goal": 75000
   },

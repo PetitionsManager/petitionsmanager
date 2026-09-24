@@ -31,12 +31,12 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-24T09:20:31-06:00",
+    "generated_at": "2026-09-24T10:14:45-06:00",
     "petition_count": 1898,
     "available": 1888,
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-09-24T09:20:31-06:00",
+      "stand": "2026-09-24T10:14:44-06:00",
       "gefunden": 1888,
       "im_bestand": 1888,
       "unbrauchbar": 0,
@@ -51,39 +51,7 @@
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-09-24T08:20:16-06:00",
-        "gesamt": 1898,
-        "online": 1898,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 976,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 12
-      },
-      {
-        "zeit": "2026-09-24T08:30:32-06:00",
-        "gesamt": 1898,
-        "online": 1898,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 976,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-24T09:20:31-06:00",
+        "zeit": "2026-09-24T10:14:44-06:00",
         "gesamt": 1898,
         "online": 1898,
         "offline": 0,
@@ -100,7 +68,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-24T09:20:31-06:00",
+      "zeit": "2026-09-24T10:14:44-06:00",
       "gesamt": 1898,
       "online": 1898,
       "offline": 0,
@@ -113,13 +81,13 @@
       "juengstes_start": "2026-07-17",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-09-24T08:20:16-06:00",
+    "verlauf_felder_ab": "2026-09-24T10:14:44-06:00",
     "befunde": [
       {
         "stufe": "hinweis",
         "thema": "Startdatum ist ein Verfahrensdatum",
         "text": "Tagesgenaues Datum bei 976 von 1898 Sätzen; es ist das Zulässigkeitsdatum aus der Mitteilung an die Mitglieder, nicht der Start der Petition. Das jüngste ist 69 Tage alt (2026-07-17) — bauartbedingt, weil das Dokument erst mit der Kommissionsantwort entsteht. Der Altersmelder ist hier deshalb ausgen",
-        "zeit": "2026-09-24T09:20:31-06:00",
+        "zeit": "2026-09-24T10:14:44-06:00",
         "thema_en": "Start date is a procedural date",
         "text_en": "Day-exact date on 976 of 1898 records; it is the date of admissibility from the Notice to Members, not the start of the petition. The newest is 69 days old (2026-07-17) — by design, as the document is only drawn up once the Commission has replied. The ageing check is therefore skipped here."
       }
@@ -115370,7 +115338,7 @@
     "kind": "petition",
     "updates": [
       {
-        "timestamp": "2026-09-21T09:52:06",
+        "timestamp": "2026-09-24T10:13:30",
         "text": "Status: Available to supporters"
       }
     ],
@@ -115387,7 +115355,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-09-21T09:50:55-06:00",
+    "last_seen": "2026-09-24T10:13:28-06:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -115401,7 +115369,7 @@
       "Rights",
       "State"
     ],
-    "last_checked": "2026-09-21T09:50:55-06:00"
+    "last_checked": "2026-09-24T10:13:28-06:00"
   },
   "1116-2026": {
     "slug": "1116-2026",
@@ -115409,7 +115377,7 @@
     "signatures_history": [],
     "title": "Petition 1116/2026: alleged breach of Directive (EU) 2019/944 on common rules for the internal market for electricity in the Netherlands",
     "started_by": "Michiel Teeling (Dutch)",
-    "category": "Taxation",
+    "category": "Energy",
     "country": "Netherlands",
     "description_full": "<p>The petitioner alleges that the Netherlands has failed to comply with Articles 15 and 16 of Directive (EU) 2019/944 on common rules for the internal market for electricity by maintaining a system of double taxation on electricity stored collectively in neighbourhood batteries. According to the petitioner, this makes collective energy storage financially unviable and creates a disproportionate barrier to the development of citizen energy communities. The petitioner further argues that the Dutch authorities have acknowledged the existence of this barrier but have delayed introducing a solution. The petitioner considers that, with the planned abolition of the national net-metering scheme in 2027, the current framework will further discourage collective energy storage and hinder the energy transition. The petitioner therefore calls on the European Parliament to investigate the matter and urge the Dutch authorities to remove these barriers.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1116%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1116/2026</a></p>",
     "summary": "The petitioner alleges that the Netherlands has failed to comply with Articles 15 and 16 of Directive (EU) 2019/944 on common rules for the internal market for electricity by maintaining a system of d…",
@@ -115420,7 +115388,7 @@
     "kind": "petition",
     "updates": [
       {
-        "timestamp": "2026-09-21T09:52:13",
+        "timestamp": "2026-09-24T10:13:36",
         "text": "Status: Available to supporters"
       }
     ],
@@ -115437,7 +115405,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-09-21T09:50:55-06:00",
+    "last_seen": "2026-09-24T10:13:28-06:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -115451,7 +115419,7 @@
       "Rules",
       "Authorities"
     ],
-    "last_checked": "2026-09-21T09:50:55-06:00"
+    "last_checked": "2026-09-24T10:13:28-06:00"
   },
   "1141-2026": {
     "slug": "1141-2026",
