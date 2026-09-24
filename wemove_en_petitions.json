@@ -31,7 +31,7 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-24T05:55:18-06:00",
+    "generated_at": "2026-09-24T07:13:29-06:00",
     "petition_count": 607,
     "available": 709,
     "unbrauchbare": {
@@ -140,7 +140,7 @@
     },
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-09-24T05:55:18-06:00",
+      "stand": "2026-09-24T07:13:28-06:00",
       "gefunden": 709,
       "im_bestand": 607,
       "unbrauchbar": 102,
@@ -155,7 +155,7 @@
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-09-24T05:55:18-06:00",
+        "zeit": "2026-09-24T07:13:28-06:00",
         "gesamt": 607,
         "online": 606,
         "offline": 1,
@@ -172,7 +172,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-24T05:55:18-06:00",
+      "zeit": "2026-09-24T07:13:28-06:00",
       "gesamt": 607,
       "online": 606,
       "offline": 1,
@@ -185,7 +185,7 @@
       "juengstes_start": "2026-09-01",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-09-24T05:55:18-06:00",
+    "verlauf_felder_ab": "2026-09-24T07:13:28-06:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 606
@@ -2079,6 +2079,10 @@
       {
         "checked_at": "2026-09-05T15:27:48-06:00",
         "count": 23712
+      },
+      {
+        "checked_at": "2026-09-24T07:10:01-06:00",
+        "count": 23713
       }
     ],
     "title": "Save the Baltic harbour porpoise",
@@ -2089,12 +2093,12 @@
     "start_date": "2022-03-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 23712,
+    "signatures": 23713,
     "goal": 50000,
     "lang": "en",
     "campaign_id": "wemove:202203-save_the_baltic_harbour_porpoise-petition",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "Baltic",
@@ -2108,7 +2112,7 @@
       "Countries",
       "Bycatch"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "202206-help_us_protect_the_puffins_in_iceland_-_establish_a_sales_ban-petition-EN": {
     "slug": "202206-help_us_protect_the_puffins_in_iceland_-_establish_a_sales_ban-petition-EN",
@@ -2129,6 +2133,10 @@
       {
         "checked_at": "2026-09-20T23:11:50-06:00",
         "count": 214232
+      },
+      {
+        "checked_at": "2026-09-24T07:10:01-06:00",
+        "count": 214238
       }
     ],
     "title": "Protect the Puffins in Iceland – Establish a Sales Ban",
@@ -2139,12 +2147,12 @@
     "start_date": "2022-06-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 214232,
+    "signatures": 214238,
     "goal": 300000,
     "lang": "en",
     "campaign_id": "wemove:202206-help_us_protect_the_puffins_in_iceland_-_establish_a_sales_ban-petition",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "Iceland",
@@ -2158,7 +2166,7 @@
       "Especially",
       "Government"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "202207-stop_tax-free_private_flights_in_the_eu-petition-EN": {
     "slug": "202207-stop_tax-free_private_flights_in_the_eu-petition-EN",
@@ -2182,7 +2190,7 @@
     "lang": "en",
     "campaign_id": "wemove:202207-stop_tax-free_private_flights_in_the_eu-petition",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "People",
@@ -2196,7 +2204,7 @@
       "Parliament",
       "Committee"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "202209-russia_belarus_ukraine_protection_and_asylum_for_deserters_and_conscientious_objectors_to_military_service-petition-EN": {
     "slug": "202209-russia_belarus_ukraine_protection_and_asylum_for_deserters_and_conscientious_objectors_to_military_service-petition-EN",
@@ -2220,7 +2228,7 @@
     "lang": "en",
     "campaign_id": "wemove:202209-russia_belarus_ukraine_protection_and_asylum_for_deserters_and_conscientious_objectors_to_military_service-petition",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "Conscientious",
@@ -2234,7 +2242,7 @@
       "President",
       "Military"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "202211-stop_chocolate_giant_storck_to_save_the_rainforest-petition-EN": {
     "slug": "202211-stop_chocolate_giant_storck_to_save_the_rainforest-petition-EN",
@@ -2262,7 +2270,7 @@
     "lang": "en",
     "campaign_id": "wemove:202211-stop_chocolate_giant_storck_to_save_the_rainforest-petition",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "Storck",
@@ -2276,7 +2284,7 @@
       "Company",
       "Fair"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "2023-01-cut-ties-fossil-fuel-petition-EN": {
     "slug": "2023-01-cut-ties-fossil-fuel-petition-EN",
@@ -2304,7 +2312,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-01-cut-ties-fossil-fuel-petition",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "Fossil",
@@ -2318,7 +2326,7 @@
       "Access",
       "Energy"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "2023-03-basel-plastic-waste-petition-EN": {
     "slug": "2023-03-basel-plastic-waste-petition-EN",
@@ -2342,7 +2350,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-03-basel-plastic-waste-petition",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "Plastic",
@@ -2356,7 +2364,7 @@
       "Governments",
       "Polluting"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "2023-03-stop-deep-sea-mining-petition-EN": {
     "slug": "2023-03-stop-deep-sea-mining-petition-EN",
@@ -2383,7 +2391,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-03-stop-deep-sea-mining-petition",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "Mining",
@@ -2397,7 +2405,7 @@
       "Marine",
       "Seabed"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "2023-03-stop-rio-tinto-EN": {
     "slug": "2023-03-stop-rio-tinto-EN",
@@ -2429,7 +2437,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-03-stop-rio-tinto",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "Serbia",
@@ -2443,7 +2451,7 @@
       "Minister",
       "Land"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "2023-04-restore-nature-petition-EN": {
     "slug": "2023-04-restore-nature-petition-EN",
@@ -2467,7 +2475,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-04-restore-nature-petition",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "Nature",
@@ -2481,7 +2489,7 @@
       "Ecosystems",
       "Regulation"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "2023-04-save-polesia-petition-EN": {
     "slug": "2023-04-save-polesia-petition-EN",
@@ -2494,6 +2502,10 @@
       {
         "checked_at": "2026-09-17T20:05:45-06:00",
         "count": 9890
+      },
+      {
+        "checked_at": "2026-09-24T07:10:01-06:00",
+        "count": 9891
       }
     ],
     "title": "Save Europe's Amazon!",
@@ -2504,12 +2516,12 @@
     "start_date": "2023-04-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 9890,
+    "signatures": 9891,
     "goal": 10000,
     "lang": "en",
     "campaign_id": "wemove:2023-04-save-polesia-petition",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "Poland",
@@ -2523,7 +2535,7 @@
       "Barrage",
       "Belarus"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "2023-04-SUR-pesticide-petition-EN": {
     "slug": "2023-04-SUR-pesticide-petition-EN",
@@ -2551,7 +2563,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-04-SUR-pesticide-petition",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "Pesticides",
@@ -2565,7 +2577,7 @@
       "Commission",
       "Nederlands"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "2023-05-end-bottom-trawling-petition-EN": {
     "slug": "2023-05-end-bottom-trawling-petition-EN",
@@ -2586,6 +2598,10 @@
       {
         "checked_at": "2026-09-20T23:11:50-06:00",
         "count": 116403
+      },
+      {
+        "checked_at": "2026-09-24T07:10:01-06:00",
+        "count": 116406
       }
     ],
     "title": "End bottom trawling",
@@ -2596,12 +2612,12 @@
     "start_date": "2023-05-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 116403,
+    "signatures": 116406,
     "goal": 150000,
     "lang": "en",
     "campaign_id": "wemove:2023-05-end-bottom-trawling-petition",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "Trawling",
@@ -2615,7 +2631,7 @@
       "European",
       "Practice"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "2023-05-end-bottom-trawling-widget-EN": {
     "slug": "2023-05-end-bottom-trawling-widget-EN",
@@ -2636,6 +2652,10 @@
       {
         "checked_at": "2026-09-20T23:11:50-06:00",
         "count": 116403
+      },
+      {
+        "checked_at": "2026-09-24T07:10:01-06:00",
+        "count": 116406
       }
     ],
     "title": "End bottom trawling",
@@ -2646,12 +2666,12 @@
     "start_date": "2023-05-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 116403,
+    "signatures": 116406,
     "goal": 150000,
     "lang": "en",
     "campaign_id": "wemove:2023-05-end-bottom-trawling-widget",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "Trawling",
@@ -2665,7 +2685,7 @@
       "Ocean",
       "European"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "2023-05-european-health-data-space-petition-EN": {
     "slug": "2023-05-european-health-data-space-petition-EN",
@@ -2686,6 +2706,10 @@
       {
         "checked_at": "2026-09-20T23:11:50-06:00",
         "count": 10030
+      },
+      {
+        "checked_at": "2026-09-24T07:10:01-06:00",
+        "count": 10033
       }
     ],
     "title": "Do No Harm: Don't give Big Tech access to our medical records",
@@ -2696,12 +2720,12 @@
     "start_date": "2023-05-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 10030,
+    "signatures": 10033,
     "goal": 20000,
     "lang": "en",
     "campaign_id": "wemove:2023-05-european-health-data-space-petition",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "Medical",
@@ -2715,7 +2739,7 @@
       "Sensitive",
       "Privacy"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "2023-05-luxury-emissions-petition-EN": {
     "slug": "2023-05-luxury-emissions-petition-EN",
@@ -2743,7 +2767,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-05-luxury-emissions-petition",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "Emissions",
@@ -2757,7 +2781,7 @@
       "Super-rich",
       "Français"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "2023-05-protect-objectors-petition-EN": {
     "slug": "2023-05-protect-objectors-petition-EN",
@@ -2780,7 +2804,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-05-protect-objectors-petition",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "Important",
@@ -2794,7 +2818,7 @@
       "Français",
       "Italiano"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "2023-05-save-donana-petition-EN": {
     "slug": "2023-05-save-donana-petition-EN",
@@ -2818,7 +2842,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-05-save-donana-petition",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "Doñana",
@@ -2832,7 +2856,7 @@
       "Save",
       "Spain"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "2023-05-violence-against-women-directive-petition-EN": {
     "slug": "2023-05-violence-against-women-directive-petition-EN",
@@ -2860,7 +2884,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-05-violence-against-women-directive-petition",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "Women",
@@ -2874,7 +2898,7 @@
       "Ensure",
       "Europe"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "2023-06-deaths-at-sea-petition-EN": {
     "slug": "2023-06-deaths-at-sea-petition-EN",
@@ -2898,7 +2922,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-06-deaths-at-sea-petition",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "People",
@@ -2912,7 +2936,7 @@
       "Nederlands",
       "Parliament"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "2023-06-deaths-at-sea-testing-EN": {
     "slug": "2023-06-deaths-at-sea-testing-EN",
@@ -2935,7 +2959,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-06-deaths-at-sea-testing",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "People",
@@ -2949,7 +2973,7 @@
       "Partnership",
       "Parliament"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "2023-06-odra-river-petition-EN": {
     "slug": "2023-06-odra-river-petition-EN",
@@ -2958,6 +2982,10 @@
       {
         "checked_at": "2026-09-05T15:27:48-06:00",
         "count": 45042
+      },
+      {
+        "checked_at": "2026-09-24T07:10:01-06:00",
+        "count": 45043
       }
     ],
     "title": "Let's save the Oder River from another disaster",
@@ -2968,12 +2996,12 @@
     "start_date": "2023-06-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 45042,
+    "signatures": 45043,
     "goal": 50000,
     "lang": "en",
     "campaign_id": "wemove:2023-06-odra-river-petition",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "River",
@@ -2987,7 +3015,7 @@
       "Directive",
       "Environment"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "2023-07-frontex-whistleblowers-petition-EN": {
     "slug": "2023-07-frontex-whistleblowers-petition-EN",
@@ -3015,7 +3043,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-07-frontex-whistleblowers-petition",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "Frontex",
@@ -3029,7 +3057,7 @@
       "European",
       "Whistle"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "2023-07-Make-Polluters-Pay-petition-EN": {
     "slug": "2023-07-Make-Polluters-Pay-petition-EN",
@@ -3057,7 +3085,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-07-Make-Polluters-Pay-petition",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "Climate",
@@ -3071,7 +3099,7 @@
       "Commissioner",
       "European"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "2023-07-test10-michal-EN": {
     "slug": "2023-07-test10-michal-EN",
@@ -3094,7 +3122,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-07-test10-michal",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -3108,7 +3136,7 @@
       "Council",
       "Deutsch"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "2023-08-glyphosate-petition-EN": {
     "slug": "2023-08-glyphosate-petition-EN",
@@ -3144,7 +3172,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-08-glyphosate-petition",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "Glyphosate",
@@ -3158,7 +3186,7 @@
       "Commission",
       "Nederlands"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "2023-08-michal-test20-petition-EN": {
     "slug": "2023-08-michal-test20-petition-EN",
@@ -3182,7 +3210,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-08-michal-test20-petition",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "Enter",
@@ -3196,7 +3224,7 @@
       "Italiano",
       "Deutsch"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "2023-08-pesticide-rebels-training-EN": {
     "slug": "2023-08-pesticide-rebels-training-EN",
@@ -3219,7 +3247,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-08-pesticide-rebels-training",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "Pesticides",
@@ -3233,7 +3261,7 @@
       "Local",
       "Against"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "2023-09-pesticide-rebels-training-campaigns-petition-EN": {
     "slug": "2023-09-pesticide-rebels-training-campaigns-petition-EN",
@@ -3256,7 +3284,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-09-pesticide-rebels-training-campaigns-petition",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "Pesticides",
@@ -3270,7 +3298,7 @@
       "Local",
       "Against"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "2023-09-pesticide-rebels-training-morecampaigns-petition-EN": {
     "slug": "2023-09-pesticide-rebels-training-morecampaigns-petition-EN",
@@ -3293,7 +3321,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-09-pesticide-rebels-training-morecampaigns-petition",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "Pesticides",
@@ -3307,7 +3335,7 @@
       "Local",
       "Against"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "2023-09-simon-6-p1-EN": {
     "slug": "2023-09-simon-6-p1-EN",
@@ -3357,7 +3385,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-09-stop-hoekstra-petition",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "Climate",
@@ -3371,7 +3399,7 @@
       "Leader",
       "Real"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "2023-10-chiediamo-che-i-fondi-europei-siano-destinati-anche-per-i-corrid-EN": {
     "slug": "2023-10-chiediamo-che-i-fondi-europei-siano-destinati-anche-per-i-corrid-EN",
@@ -3394,7 +3422,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-10-chiediamo-che-i-fondi-europei-siano-destinati-anche-per-i-corrid",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -3408,7 +3436,7 @@
       "Inititator",
       "Important"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "2023-10-end-the-destruction-of-romanian-forests-EN": {
     "slug": "2023-10-end-the-destruction-of-romanian-forests-EN",
@@ -3432,7 +3460,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-10-end-the-destruction-of-romanian-forests",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "Forests",
@@ -3446,7 +3474,7 @@
       "Commissioner",
       "Environment"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "2023-10-eu-parliament-stop-selling-out-people-and-nature-to-mining-EN": {
     "slug": "2023-10-eu-parliament-stop-selling-out-people-and-nature-to-mining-EN",
@@ -3474,7 +3502,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-10-eu-parliament-stop-selling-out-people-and-nature-to-mining",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "Mining",
@@ -3488,7 +3516,7 @@
       "Labelled",
       "Selling"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "2023-10-eu-parliament-stop-selling-out-people-and-nature-to-mining-trial-EN": {
     "slug": "2023-10-eu-parliament-stop-selling-out-people-and-nature-to-mining-trial-EN",
@@ -3516,7 +3544,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-10-eu-parliament-stop-selling-out-people-and-nature-to-mining-trial",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "Mining",
@@ -3530,7 +3558,7 @@
       "Selling",
       "Europe"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "2023-10-test-api-permissions-EN": {
     "slug": "2023-10-test-api-permissions-EN",
@@ -3553,7 +3581,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-10-test-api-permissions",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "Permissions",
@@ -3567,7 +3595,7 @@
       "Català",
       "Create"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "2023-10-test-EN": {
     "slug": "2023-10-test-EN",
@@ -3590,7 +3618,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-10-test",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "Test",
@@ -3598,7 +3626,7 @@
       "Dasdad",
       "Name"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "2023-10-testing-pixel-EN": {
     "slug": "2023-10-testing-pixel-EN",
@@ -3621,7 +3649,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-10-testing-pixel",
     "status": "online",
-    "last_seen": "2026-09-21T07:12:21-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "Testing",
@@ -3632,7 +3660,7 @@
       "People",
       "Name"
     ],
-    "last_checked": "2026-09-21T07:12:21-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "2023-11-27-trial2-taxtheultrarich-petition-EN": {
     "slug": "2023-11-27-trial2-taxtheultrarich-petition-EN",
@@ -3656,7 +3684,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-11-27-trial2-taxtheultrarich-petition",
     "status": "online",
-    "last_seen": "2026-09-21T07:12:21-06:00",
+    "last_seen": "2026-09-24T07:10:01-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -3670,7 +3698,7 @@
       "Governments",
       "Directive"
     ],
-    "last_checked": "2026-09-21T07:12:21-06:00"
+    "last_checked": "2026-09-24T07:10:01-06:00"
   },
   "2023-11-end-tax-havens-in-the-eu-implement-the-treaty-reform-adopted-by-EN": {
     "slug": "2023-11-end-tax-havens-in-the-eu-implement-the-treaty-reform-adopted-by-EN",
