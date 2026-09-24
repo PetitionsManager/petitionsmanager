@@ -31,7 +31,7 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-23T17:19:42-06:00",
+    "generated_at": "2026-09-24T05:55:18-06:00",
     "petition_count": 607,
     "available": 709,
     "unbrauchbare": {
@@ -140,7 +140,7 @@
     },
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-09-23T17:19:42-06:00",
+      "stand": "2026-09-24T05:55:18-06:00",
       "gefunden": 709,
       "im_bestand": 607,
       "unbrauchbar": 102,
@@ -155,471 +155,7 @@
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-09-22T08:18:03-06:00",
-        "gesamt": 607,
-        "online": 606,
-        "offline": 1,
-        "ohne_titel": 1,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 1,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 484,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 1
-      },
-      {
-        "zeit": "2026-09-22T08:53:20-06:00",
-        "gesamt": 607,
-        "online": 606,
-        "offline": 1,
-        "ohne_titel": 1,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 1,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 484,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-22T09:31:33-06:00",
-        "gesamt": 607,
-        "online": 606,
-        "offline": 1,
-        "ohne_titel": 1,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 1,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 484,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-22T10:10:13-06:00",
-        "gesamt": 607,
-        "online": 606,
-        "offline": 1,
-        "ohne_titel": 1,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 1,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 484,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-22T10:47:14-06:00",
-        "gesamt": 607,
-        "online": 606,
-        "offline": 1,
-        "ohne_titel": 1,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 1,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 484,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-22T11:24:29-06:00",
-        "gesamt": 607,
-        "online": 606,
-        "offline": 1,
-        "ohne_titel": 1,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 1,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 484,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-22T12:02:20-06:00",
-        "gesamt": 607,
-        "online": 606,
-        "offline": 1,
-        "ohne_titel": 1,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 1,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 484,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-22T12:40:56-06:00",
-        "gesamt": 607,
-        "online": 606,
-        "offline": 1,
-        "ohne_titel": 1,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 1,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 484,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-22T13:17:23-06:00",
-        "gesamt": 607,
-        "online": 606,
-        "offline": 1,
-        "ohne_titel": 1,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 1,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 484,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-22T13:55:11-06:00",
-        "gesamt": 607,
-        "online": 606,
-        "offline": 1,
-        "ohne_titel": 1,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 1,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 484,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-22T14:31:10-06:00",
-        "gesamt": 607,
-        "online": 606,
-        "offline": 1,
-        "ohne_titel": 1,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 1,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 484,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-22T15:08:09-06:00",
-        "gesamt": 607,
-        "online": 606,
-        "offline": 1,
-        "ohne_titel": 1,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 1,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 484,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-22T15:44:11-06:00",
-        "gesamt": 607,
-        "online": 606,
-        "offline": 1,
-        "ohne_titel": 1,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 1,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 484,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-22T16:19:09-06:00",
-        "gesamt": 607,
-        "online": 606,
-        "offline": 1,
-        "ohne_titel": 1,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 1,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 484,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-22T16:55:11-06:00",
-        "gesamt": 607,
-        "online": 606,
-        "offline": 1,
-        "ohne_titel": 1,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 1,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 484,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-22T17:32:15-06:00",
-        "gesamt": 607,
-        "online": 606,
-        "offline": 1,
-        "ohne_titel": 1,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 1,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 484,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-22T18:09:11-06:00",
-        "gesamt": 607,
-        "online": 606,
-        "offline": 1,
-        "ohne_titel": 1,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 1,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 484,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-22T18:47:10-06:00",
-        "gesamt": 607,
-        "online": 606,
-        "offline": 1,
-        "ohne_titel": 1,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 1,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 484,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-22T19:24:14-06:00",
-        "gesamt": 607,
-        "online": 606,
-        "offline": 1,
-        "ohne_titel": 1,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 1,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 484,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-22T20:00:13-06:00",
-        "gesamt": 607,
-        "online": 606,
-        "offline": 1,
-        "ohne_titel": 1,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 1,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 484,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-22T21:09:47-06:00",
-        "gesamt": 607,
-        "online": 606,
-        "offline": 1,
-        "ohne_titel": 1,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 1,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 484,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-22T22:53:08-06:00",
-        "gesamt": 607,
-        "online": 606,
-        "offline": 1,
-        "ohne_titel": 1,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 1,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 484,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-23T06:42:37-06:00",
-        "gesamt": 607,
-        "online": 606,
-        "offline": 1,
-        "ohne_titel": 1,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 1,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 484,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-23T12:04:22-06:00",
-        "gesamt": 607,
-        "online": 606,
-        "offline": 1,
-        "ohne_titel": 1,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 1,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 484,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-23T14:26:40-06:00",
-        "gesamt": 607,
-        "online": 606,
-        "offline": 1,
-        "ohne_titel": 1,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 1,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 484,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-23T15:01:40-06:00",
-        "gesamt": 607,
-        "online": 606,
-        "offline": 1,
-        "ohne_titel": 1,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 1,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 484,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-23T15:36:42-06:00",
-        "gesamt": 607,
-        "online": 606,
-        "offline": 1,
-        "ohne_titel": 1,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 1,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 484,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-23T16:10:38-06:00",
-        "gesamt": 607,
-        "online": 606,
-        "offline": 1,
-        "ohne_titel": 1,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 1,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 484,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-23T16:45:34-06:00",
-        "gesamt": 607,
-        "online": 606,
-        "offline": 1,
-        "ohne_titel": 1,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 1,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 484,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-23T17:19:42-06:00",
+        "zeit": "2026-09-24T05:55:18-06:00",
         "gesamt": 607,
         "online": 606,
         "offline": 1,
@@ -636,7 +172,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-23T17:19:42-06:00",
+      "zeit": "2026-09-24T05:55:18-06:00",
       "gesamt": 607,
       "online": 606,
       "offline": 1,
@@ -649,7 +185,7 @@
       "juengstes_start": "2026-09-01",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-09-22T08:18:03-06:00",
+    "verlauf_felder_ab": "2026-09-24T05:55:18-06:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 606
@@ -693,6 +229,10 @@
       {
         "checked_at": "2026-09-20T22:19:16-06:00",
         "count": 67641
+      },
+      {
+        "checked_at": "2026-09-24T05:51:45-06:00",
+        "count": 67659
       }
     ],
     "title": "Ban coral-killing sunscreen!",
@@ -703,12 +243,12 @@
     "start_date": "2026-07-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 67641,
+    "signatures": 67659,
     "goal": 75000,
     "lang": "en",
     "campaign_id": "wemove:2026-07-ban-coral-killers-sunscreen-petition",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "Sunscreen",
@@ -722,7 +262,7 @@
       "Coral",
       "Reef"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "2026-06-StopVW-Israel-Airshield-petition-EN": {
     "slug": "2026-06-StopVW-Israel-Airshield-petition-EN",
@@ -763,6 +303,10 @@
       {
         "checked_at": "2026-09-20T22:19:16-06:00",
         "count": 78177
+      },
+      {
+        "checked_at": "2026-09-24T05:51:45-06:00",
+        "count": 78189
       }
     ],
     "title": "Stop Volkswagen’s dangerous new deal",
@@ -773,12 +317,12 @@
     "start_date": "2026-06-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 78177,
+    "signatures": 78189,
     "goal": 100000,
     "lang": "en",
     "campaign_id": "wemove:2026-06-StopVW-Israel-Airshield-petition",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "Volkswagen",
@@ -792,7 +336,7 @@
       "Before",
       "Commission"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "2026-05-only-yes-means-yes-petition-EN": {
     "slug": "2026-05-only-yes-means-yes-petition-EN",
@@ -829,6 +373,10 @@
       {
         "checked_at": "2026-09-20T22:19:16-06:00",
         "count": 47613
+      },
+      {
+        "checked_at": "2026-09-24T05:51:45-06:00",
+        "count": 47616
       }
     ],
     "title": "EU: Only Yes Means Yes!",
@@ -839,12 +387,12 @@
     "start_date": "2026-05-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 47613,
+    "signatures": 47616,
     "goal": 50000,
     "lang": "en",
     "campaign_id": "wemove:2026-05-only-yes-means-yes-petition",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "Means",
@@ -858,7 +406,7 @@
       "Nederlands",
       "Introduce"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "2026-06-phone-hacking-petition-EN": {
     "slug": "2026-06-phone-hacking-petition-EN",
@@ -899,6 +447,10 @@
       {
         "checked_at": "2026-09-20T22:19:16-06:00",
         "count": 58027
+      },
+      {
+        "checked_at": "2026-09-24T05:51:45-06:00",
+        "count": 58029
       }
     ],
     "title": "Stop the phone hackers",
@@ -909,12 +461,12 @@
     "start_date": "2026-06-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 58027,
+    "signatures": 58029,
     "goal": 75000,
     "lang": "en",
     "campaign_id": "wemove:2026-06-phone-hacking-petition",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "Spyware",
@@ -928,7 +480,7 @@
       "Funding",
       "Commission"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "2026-06-dont-send-our-data-to-the-US-petition-EN": {
     "slug": "2026-06-dont-send-our-data-to-the-US-petition-EN",
@@ -969,6 +521,10 @@
       {
         "checked_at": "2026-09-20T22:19:16-06:00",
         "count": 114483
+      },
+      {
+        "checked_at": "2026-09-24T05:51:45-06:00",
+        "count": 114494
       }
     ],
     "title": "EU: Don’t send our data to the US!",
@@ -979,12 +535,12 @@
     "start_date": "2026-06-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 114483,
+    "signatures": 114494,
     "goal": 150000,
     "lang": "en",
     "campaign_id": "wemove:2026-06-dont-send-our-data-to-the-US-petition",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "Data",
@@ -998,7 +554,7 @@
       "Facial",
       "Images"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "2026-05-green-data-centres-petition-EN": {
     "slug": "2026-05-green-data-centres-petition-EN",
@@ -1039,6 +595,10 @@
       {
         "checked_at": "2026-09-20T22:19:16-06:00",
         "count": 100293
+      },
+      {
+        "checked_at": "2026-09-24T05:51:45-06:00",
+        "count": 100305
       }
     ],
     "title": "Run EU data centres on 100% renewables!",
@@ -1049,12 +609,12 @@
     "start_date": "2026-05-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 100293,
+    "signatures": 100305,
     "goal": 150000,
     "lang": "en",
     "campaign_id": "wemove:2026-05-green-data-centres-petition",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "Centres",
@@ -1068,7 +628,7 @@
       "Made",
       "Must"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "2018-09-Kodaikanal-petition-EN": {
     "slug": "2018-09-Kodaikanal-petition-EN",
@@ -1091,7 +651,7 @@
     "lang": "en",
     "campaign_id": "wemove:2018-09-Kodaikanal-petition",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "Unilever",
@@ -1105,7 +665,7 @@
       "Mercury",
       "Europe"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "2019-08-Mercosur-petition-EN": {
     "slug": "2019-08-Mercosur-petition-EN",
@@ -1122,6 +682,10 @@
       {
         "checked_at": "2026-09-17T19:37:50-06:00",
         "count": 18426
+      },
+      {
+        "checked_at": "2026-09-24T05:51:45-06:00",
+        "count": 18427
       }
     ],
     "title": "Protect local farmers: stop EU-MERCOSUR trade deal!",
@@ -1132,12 +696,12 @@
     "start_date": "2019-08-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 18426,
+    "signatures": 18427,
     "goal": 20000,
     "lang": "en",
     "campaign_id": "wemove:2019-08-Mercosur-petition",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -1151,7 +715,7 @@
       "Agreement",
       "Protect"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "2026-08-protect-europe-make-polluters-pay-petition-EN": {
     "slug": "2026-08-protect-europe-make-polluters-pay-petition-EN",
@@ -1188,6 +752,10 @@
       {
         "checked_at": "2026-09-20T22:19:16-06:00",
         "count": 55517
+      },
+      {
+        "checked_at": "2026-09-24T05:51:45-06:00",
+        "count": 55567
       }
     ],
     "title": "Make Polluters Pay for Climate Disasters",
@@ -1198,12 +766,12 @@
     "start_date": "2026-08-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 55517,
+    "signatures": 55567,
     "goal": 75000,
     "lang": "en",
     "campaign_id": "wemove:2026-08-protect-europe-make-polluters-pay-petition",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "Climate",
@@ -1217,7 +785,7 @@
       "People",
       "Preparedness"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "2026-08-rogue-AI-petition-EN": {
     "slug": "2026-08-rogue-AI-petition-EN",
@@ -1254,6 +822,10 @@
       {
         "checked_at": "2026-09-20T22:19:16-06:00",
         "count": 86218
+      },
+      {
+        "checked_at": "2026-09-24T05:51:45-06:00",
+        "count": 87812
       }
     ],
     "title": "AI should serve us, not tech billionaires!",
@@ -1264,12 +836,12 @@
     "start_date": "2026-08-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 86218,
+    "signatures": 87812,
     "goal": 100000,
     "lang": "en",
     "campaign_id": "wemove:2026-08-rogue-AI-petition",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "Systems",
@@ -1283,7 +855,7 @@
       "Tech",
       "Companies"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "201906-actua_por_hope_deten_nuevo_macropuerto_en_tenerife-petition-EN": {
     "slug": "201906-actua_por_hope_deten_nuevo_macropuerto_en_tenerife-petition-EN",
@@ -1307,7 +879,7 @@
     "lang": "en",
     "campaign_id": "wemove:201906-actua_por_hope_deten_nuevo_macropuerto_en_tenerife-petition",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -1321,7 +893,7 @@
       "Dolphins",
       "Species"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "201906-firma_el_manifiesto_contra_los_megacruceros-petition-EN": {
     "slug": "201906-firma_el_manifiesto_contra_los_megacruceros-petition-EN",
@@ -1349,7 +921,7 @@
     "lang": "en",
     "campaign_id": "wemove:201906-firma_el_manifiesto_contra_los_megacruceros-petition",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "Megacruises",
@@ -1363,7 +935,7 @@
       "Tourism",
       "Impact"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "2020-06-Salvemos-la-Sanidad-Publica-petition-EN": {
     "slug": "2020-06-Salvemos-la-Sanidad-Publica-petition-EN",
@@ -1387,7 +959,7 @@
     "lang": "en",
     "campaign_id": "wemove:2020-06-Salvemos-la-Sanidad-Publica-petition",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "Public",
@@ -1401,7 +973,7 @@
       "Leaders",
       "Personnel"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "2020-12-resign-leggeri-frontex-launch-petition-EN": {
     "slug": "2020-12-resign-leggeri-frontex-launch-petition-EN",
@@ -1425,7 +997,7 @@
     "lang": "en",
     "campaign_id": "wemove:2020-12-resign-leggeri-frontex-launch-petition",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "FRONTEX",
@@ -1439,7 +1011,7 @@
       "After",
       "Human"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "202009-the_eu_must_protect_forests_not_burn_them_for_energy-petition-EN": {
     "slug": "202009-the_eu_must_protect_forests_not_burn_them_for_energy-petition-EN",
@@ -1463,7 +1035,7 @@
     "lang": "en",
     "campaign_id": "wemove:202009-the_eu_must_protect_forests_not_burn_them_for_energy-petition",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "Forests",
@@ -1477,7 +1049,7 @@
       "Must",
       "Wood"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "202011-salvar_el_barranco_de_arguineguin_del_macroproyecto_hidroelectrico_de_chira-soria_save_the_ravine_of_arguineguin_from_the_macroproject_chira-soria_hydroelectric_project-petition-EN": {
     "slug": "202011-salvar_el_barranco_de_arguineguin_del_macroproyecto_hidroelectrico_de_chira-soria_save_the_ravine_of_arguineguin_from_the_macroproject_chira-soria_hydroelectric_project-petition-EN",
@@ -1501,7 +1073,7 @@
     "lang": "en",
     "campaign_id": "wemove:202011-salvar_el_barranco_de_arguineguin_del_macroproyecto_hidroelectrico_de_chira-soria_save_the_ravine_of_arguineguin_from_the_macroproject_chira-soria_hydroelectric_project-petition",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "PROJECT",
@@ -1515,7 +1087,7 @@
       "SAVE",
       "MACROPROJECT"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "2021-02-energy-charter-treaty-petition-EN": {
     "slug": "2021-02-energy-charter-treaty-petition-EN",
@@ -1543,7 +1115,7 @@
     "lang": "en",
     "campaign_id": "wemove:2021-02-energy-charter-treaty-petition",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "Governments",
@@ -1557,7 +1129,7 @@
       "People",
       "Companies"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "2021-03-air-quality-petition-EN": {
     "slug": "2021-03-air-quality-petition-EN",
@@ -1581,7 +1153,7 @@
     "lang": "en",
     "campaign_id": "wemove:2021-03-air-quality-petition",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -1595,7 +1167,7 @@
       "Parliament",
       "Breathing"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "2021-06-ban-live-export-petition-EN": {
     "slug": "2021-06-ban-live-export-petition-EN",
@@ -1627,7 +1199,7 @@
     "lang": "en",
     "campaign_id": "wemove:2021-06-ban-live-export-petition",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "Live",
@@ -1641,7 +1213,7 @@
       "Export",
       "Commission"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "2021-06-poland-abortion-rescue-bill-petition-EN": {
     "slug": "2021-06-poland-abortion-rescue-bill-petition-EN",
@@ -1665,7 +1237,7 @@
     "lang": "en",
     "campaign_id": "wemove:2021-06-poland-abortion-rescue-bill-petition",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "Abortions",
@@ -1679,7 +1251,7 @@
       "Doctors",
       "Members"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "2021-10-non-au-glyphosate-petition-EN": {
     "slug": "2021-10-non-au-glyphosate-petition-EN",
@@ -1703,7 +1275,7 @@
     "lang": "en",
     "campaign_id": "wemove:2021-10-non-au-glyphosate-petition",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "Macron",
@@ -1717,7 +1289,7 @@
       "President",
       "Italiano"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "2021-11-aid-Polish-border-petition-EN": {
     "slug": "2021-11-aid-Polish-border-petition-EN",
@@ -1741,7 +1313,7 @@
     "lang": "en",
     "campaign_id": "wemove:2021-11-aid-Polish-border-petition",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "Humanitarian",
@@ -1755,7 +1327,7 @@
       "Polish",
       "Right"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "2021-11-stop-big-tech-petition-EN": {
     "slug": "2021-11-stop-big-tech-petition-EN",
@@ -1779,7 +1351,7 @@
     "lang": "en",
     "campaign_id": "wemove:2021-11-stop-big-tech-petition",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "Tech",
@@ -1793,7 +1365,7 @@
       "Parliament",
       "Companies"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "202103-fur_neue_grundrechte_in_europa-petition-EN": {
     "slug": "202103-fur_neue_grundrechte_in_europa-petition-EN",
@@ -1830,6 +1402,10 @@
       {
         "checked_at": "2026-09-20T22:19:16-06:00",
         "count": 10420
+      },
+      {
+        "checked_at": "2026-09-24T05:51:45-06:00",
+        "count": 10435
       }
     ],
     "title": "For New Fundamental Rights in Europe",
@@ -1840,12 +1416,12 @@
     "start_date": "2021-03-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 10420,
+    "signatures": 10435,
     "goal": 20000,
     "lang": "en",
     "campaign_id": "wemove:202103-fur_neue_grundrechte_in_europa-petition",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "Rights",
@@ -1859,7 +1435,7 @@
       "Want",
       "Protected"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "202106-stop_the_planned_regional_landfill_near_novi_sad_which_destroys_the_environment_of_serbian_citizens-petition-EN": {
     "slug": "202106-stop_the_planned_regional_landfill_near_novi_sad_which_destroys_the_environment_of_serbian_citizens-petition-EN",
@@ -1883,7 +1459,7 @@
     "lang": "en",
     "campaign_id": "wemove:202106-stop_the_planned_regional_landfill_near_novi_sad_which_destroys_the_environment_of_serbian_citizens-petition",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "NOVI",
@@ -1897,7 +1473,7 @@
       "Minister",
       "NEAR"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "202107-save_cukaru_peki-petition-EN": {
     "slug": "202107-save_cukaru_peki-petition-EN",
@@ -1921,7 +1497,7 @@
     "lang": "en",
     "campaign_id": "wemove:202107-save_cukaru_peki-petition",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "Postoji",
@@ -1935,7 +1511,7 @@
       "Prikaz",
       "Biti"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "2022-02-aus-ahrtal-wird-sola-h-rtal-petition-EN": {
     "slug": "2022-02-aus-ahrtal-wird-sola-h-rtal-petition-EN",
@@ -1959,7 +1535,7 @@
     "lang": "en",
     "campaign_id": "wemove:2022-02-aus-ahrtal-wird-sola-h-rtal-petition",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "Region",
@@ -1973,7 +1549,7 @@
       "Rtal",
       "SOLa"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "2022-02-ban-killing-forests-products-petition-EN": {
     "slug": "2022-02-ban-killing-forests-products-petition-EN",
@@ -1997,7 +1573,7 @@
     "lang": "en",
     "campaign_id": "wemove:2022-02-ban-killing-forests-products-petition",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -2011,7 +1587,7 @@
       "Union",
       "Made"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "2022-03-ukraine-rapid-response-petition-EN": {
     "slug": "2022-03-ukraine-rapid-response-petition-EN",
@@ -2035,7 +1611,7 @@
     "lang": "en",
     "campaign_id": "wemove:2022-03-ukraine-rapid-response-petition",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "People",
@@ -2049,7 +1625,7 @@
       "Interior",
       "Protect"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "2022-07-new-gmos-petition-EN": {
     "slug": "2022-07-new-gmos-petition-EN",
@@ -2074,6 +1650,10 @@
       {
         "checked_at": "2026-09-20T22:19:16-06:00",
         "count": 74004
+      },
+      {
+        "checked_at": "2026-09-24T05:51:45-06:00",
+        "count": 74006
       }
     ],
     "title": "Keep GMO food regulated and labelled!",
@@ -2084,12 +1664,12 @@
     "start_date": "2022-07-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 74004,
+    "signatures": 74006,
     "goal": 75000,
     "lang": "en",
     "campaign_id": "wemove:2022-07-new-gmos-petition",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "Food",
@@ -2103,7 +1683,7 @@
       "Labelled",
       "National"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "2022-07-uber-launch-petition-EN": {
     "slug": "2022-07-uber-launch-petition-EN",
@@ -2127,7 +1707,7 @@
     "lang": "en",
     "campaign_id": "wemove:2022-07-uber-launch-petition",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "Uber",
@@ -2141,7 +1721,7 @@
       "Parliament",
       "Employees"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "2022-08-justice-is-everybodys-business-iframe-EN": {
     "slug": "2022-08-justice-is-everybodys-business-iframe-EN",
@@ -2165,7 +1745,7 @@
     "lang": "en",
     "campaign_id": "wemove:2022-08-justice-is-everybodys-business-iframe",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "English",
@@ -2179,7 +1759,7 @@
       "Français",
       "Italiano"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "2022-08-justice-is-everybodys-business-petition-EN": {
     "slug": "2022-08-justice-is-everybodys-business-petition-EN",
@@ -2203,7 +1783,7 @@
     "lang": "en",
     "campaign_id": "wemove:2022-08-justice-is-everybodys-business-petition",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "Business",
@@ -2217,7 +1797,7 @@
       "People",
       "Planet"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "2022-08-justice-is-everybodys-business-petition-iframe-EN": {
     "slug": "2022-08-justice-is-everybodys-business-petition-iframe-EN",
@@ -2241,7 +1821,7 @@
     "lang": "en",
     "campaign_id": "wemove:2022-08-justice-is-everybodys-business-petition-iframe",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "English",
@@ -2255,7 +1835,7 @@
       "Italiano",
       "Deutsch"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "2022-09-ecocide-EN": {
     "slug": "2022-09-ecocide-EN",
@@ -2286,7 +1866,7 @@
     "lang": "en",
     "campaign_id": "wemove:2022-09-ecocide",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "Crime",
@@ -2300,7 +1880,7 @@
       "International",
       "Environment"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "2022-10-frontex-discharge-petition-EN": {
     "slug": "2022-10-frontex-discharge-petition-EN",
@@ -2324,7 +1904,7 @@
     "lang": "en",
     "campaign_id": "wemove:2022-10-frontex-discharge-petition",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "Frontex",
@@ -2338,7 +1918,7 @@
       "Stop",
       "Parliament"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "2022-11-bee-killer-exports-petition-EN": {
     "slug": "2022-11-bee-killer-exports-petition-EN",
@@ -2362,7 +1942,7 @@
     "lang": "en",
     "campaign_id": "wemove:2022-11-bee-killer-exports-petition",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "Pesticides",
@@ -2376,7 +1956,7 @@
       "Environment",
       "Nederlands"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "2022-12-lobby-scandal-petition-EN": {
     "slug": "2022-12-lobby-scandal-petition-EN",
@@ -2400,7 +1980,7 @@
     "lang": "en",
     "campaign_id": "wemove:2022-12-lobby-scandal-petition",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "Rules",
@@ -2414,7 +1994,7 @@
       "Urgently",
       "Bribery"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "202202-the_eu_must_not_become_a_lawless_zone-petition-EN": {
     "slug": "202202-the_eu_must_not_become_a_lawless_zone-petition-EN",
@@ -2438,7 +2018,7 @@
     "lang": "en",
     "campaign_id": "wemove:202202-the_eu_must_not_become_a_lawless_zone-petition",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "Asylum",
@@ -2452,7 +2032,7 @@
       "Parliament",
       "Lawless"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "202203-end_forced_sterilisation_in_the_eu_now-petition-EN": {
     "slug": "202203-end_forced_sterilisation_in_the_eu_now-petition-EN",
@@ -2476,7 +2056,7 @@
     "lang": "en",
     "campaign_id": "wemove:202203-end_forced_sterilisation_in_the_eu_now-petition",
     "status": "online",
-    "last_seen": "2026-09-20T23:11:50-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -2490,7 +2070,7 @@
       "Directive",
       "Português"
     ],
-    "last_checked": "2026-09-20T23:11:50-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "202203-save_the_baltic_harbour_porpoise-petition-EN": {
     "slug": "202203-save_the_baltic_harbour_porpoise-petition-EN",
@@ -3748,12 +3328,12 @@
     "lang": "en",
     "campaign_id": "wemove:2023-09-simon-6-p1",
     "status": "online",
-    "last_seen": "2026-09-20T22:19:16-06:00",
+    "last_seen": "2026-09-24T05:51:45-06:00",
     "offline_since": null,
     "tags": [
       "Finished"
     ],
-    "last_checked": "2026-09-20T22:19:16-06:00"
+    "last_checked": "2026-09-24T05:51:45-06:00"
   },
   "2023-09-stop-hoekstra-petition-EN": {
     "slug": "2023-09-stop-hoekstra-petition-EN",
@@ -11961,9 +11541,9 @@
     "slug": "2024-7-2024-07-michaltest-you4-EN",
     "first_seen": "2026-09-06T14:04:45-06:00",
     "signatures_history": [],
-    "offline_misses": 8,
+    "offline_misses": 9,
     "status": "offline",
-    "last_checked": "2026-09-20T22:19:16-06:00",
+    "last_checked": "2026-09-24T05:51:45-06:00",
     "url": "https://action.wemove.eu/sign/2024-7-2024-07-michaltest-you4-EN",
     "offline_since": "2026-09-07T20:23:44-06:00"
   },
