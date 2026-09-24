@@ -31,7 +31,7 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-24T10:18:16-06:00",
+    "generated_at": "2026-09-24T11:11:58-06:00",
     "petition_count": 607,
     "available": 709,
     "unbrauchbare": {
@@ -140,7 +140,7 @@
     },
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-09-24T10:18:16-06:00",
+      "stand": "2026-09-24T11:11:58-06:00",
       "gefunden": 709,
       "im_bestand": 607,
       "unbrauchbar": 102,
@@ -155,7 +155,7 @@
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-09-24T10:18:16-06:00",
+        "zeit": "2026-09-24T11:11:58-06:00",
         "gesamt": 607,
         "online": 606,
         "offline": 1,
@@ -172,7 +172,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-24T10:18:16-06:00",
+      "zeit": "2026-09-24T11:11:58-06:00",
       "gesamt": 607,
       "online": 606,
       "offline": 1,
@@ -185,7 +185,7 @@
       "juengstes_start": "2026-09-01",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-09-24T10:18:16-06:00",
+    "verlauf_felder_ab": "2026-09-24T11:11:58-06:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 606
@@ -8192,7 +8192,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-08-free-school-meals-petition",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "School",
@@ -8206,7 +8206,7 @@
       "Free",
       "Commission"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-08-gender-disinformation-trial-petition-EN": {
     "slug": "2024-08-gender-disinformation-trial-petition-EN",
@@ -8233,7 +8233,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-08-gender-disinformation-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "Women",
@@ -8247,7 +8247,7 @@
       "Parliament",
       "Violence"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-08-homes-for-people-not-for-profit-petition-EN": {
     "slug": "2024-08-homes-for-people-not-for-profit-petition-EN",
@@ -8271,7 +8271,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-08-homes-for-people-not-for-profit-petition",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -8285,7 +8285,7 @@
       "Home",
       "Tell"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-08-language-switch-pages-petition-EN": {
     "slug": "2024-08-language-switch-pages-petition-EN",
@@ -8298,6 +8298,10 @@
       {
         "checked_at": "2026-09-17T21:54:36-06:00",
         "count": 370
+      },
+      {
+        "checked_at": "2026-09-24T11:08:47-06:00",
+        "count": 372
       }
     ],
     "title": "Thanks for being part of this community!",
@@ -8307,12 +8311,12 @@
     "start_date": "2024-08-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 370,
+    "signatures": 372,
     "goal": 1000,
     "lang": "en",
     "campaign_id": "wemove:2024-08-language-switch-pages-petition",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "English",
@@ -8326,7 +8330,7 @@
       "Italiano",
       "Deutsch"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-08-trial-2-youmove-wildlife-corridors-petition-EN": {
     "slug": "2024-08-trial-2-youmove-wildlife-corridors-petition-EN",
@@ -8350,7 +8354,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-08-trial-2-youmove-wildlife-corridors-petition",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "Roads",
@@ -8364,7 +8368,7 @@
       "Collisions",
       "Corridors"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-08-trial-fossil-fuel-firewall-trial-2-petition-EN": {
     "slug": "2024-08-trial-fossil-fuel-firewall-trial-2-petition-EN",
@@ -8388,7 +8392,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-08-trial-fossil-fuel-firewall-trial-2-petition",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "Fossil",
@@ -8402,7 +8406,7 @@
       "Commission",
       "Parliament"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-08-trial-housing-trial-2-petition-EN": {
     "slug": "2024-08-trial-housing-trial-2-petition-EN",
@@ -8425,7 +8429,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-08-trial-housing-trial-2-petition",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -8439,7 +8443,7 @@
       "Investment",
       "Parliament"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-08-trial-housing-trial-3-petition-EN": {
     "slug": "2024-08-trial-housing-trial-3-petition-EN",
@@ -8462,7 +8466,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-08-trial-housing-trial-3-petition",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -8476,7 +8480,7 @@
       "Investment",
       "Parliament"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-08-trial-PVC-trial-petition-EN": {
     "slug": "2024-08-trial-PVC-trial-petition-EN",
@@ -8500,7 +8504,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-08-trial-PVC-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "Health",
@@ -8514,7 +8518,7 @@
       "Additives",
       "HARMFUL"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-08-trial-seasonal-worker-exploitation-trial-petition-EN": {
     "slug": "2024-08-trial-seasonal-worker-exploitation-trial-petition-EN",
@@ -8537,7 +8541,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-08-trial-seasonal-worker-exploitation-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -8551,7 +8555,7 @@
       "Agriculture",
       "Commission"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-08-trial-youmove-wildlife-corridors-petition-EN": {
     "slug": "2024-08-trial-youmove-wildlife-corridors-petition-EN",
@@ -8575,7 +8579,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-08-trial-youmove-wildlife-corridors-petition",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "Roads",
@@ -8589,7 +8593,7 @@
       "Collisions",
       "Corridors"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-09-ban-octopus-farming-in-the-eu-petition-EN": {
     "slug": "2024-09-ban-octopus-farming-in-the-eu-petition-EN",
@@ -8606,6 +8610,10 @@
       {
         "checked_at": "2026-09-21T09:52:32-06:00",
         "count": 133028
+      },
+      {
+        "checked_at": "2026-09-24T11:08:47-06:00",
+        "count": 133037
       }
     ],
     "title": "Ban Octopus Farming in the EU!",
@@ -8616,12 +8624,12 @@
     "start_date": "2024-09-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 133028,
+    "signatures": 133037,
     "goal": 150000,
     "lang": "en",
     "campaign_id": "wemove:2024-09-ban-octopus-farming-in-the-eu-petition",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "Octopus",
@@ -8635,7 +8643,7 @@
       "Environmental",
       "Cephalopods"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-09-digital-futures-petition-EN": {
     "slug": "2024-09-digital-futures-petition-EN",
@@ -8659,7 +8667,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-09-digital-futures-petition",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "PEOPLE",
@@ -8673,7 +8681,7 @@
       "Prioritise",
       "Justice"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-09-free-school-meals-petition-EN": {
     "slug": "2024-09-free-school-meals-petition-EN",
@@ -8696,7 +8704,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-09-free-school-meals-petition",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "School",
@@ -8710,7 +8718,7 @@
       "Commission",
       "Concentrate"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-09-hajar-training-petition-EN": {
     "slug": "2024-09-hajar-training-petition-EN",
@@ -8734,7 +8742,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-09-hajar-training-petition",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "Pesticides",
@@ -8748,7 +8756,7 @@
       "Nederlands",
       "Interests"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-09-pour-plan-national-contre-le-viol-petition-EN": {
     "slug": "2024-09-pour-plan-national-contre-le-viol-petition-EN",
@@ -8780,7 +8788,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-09-pour-plan-national-contre-le-viol-petition",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "Rape",
@@ -8794,7 +8802,7 @@
       "European",
       "Français"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-09-seals-ban-trial-petition-EN": {
     "slug": "2024-09-seals-ban-trial-petition-EN",
@@ -8818,7 +8826,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-09-seals-ban-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "Seals",
@@ -8832,7 +8840,7 @@
       "Hands",
       "Seal"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-09-seasonal-farm-workers-petition-EN": {
     "slug": "2024-09-seasonal-farm-workers-petition-EN",
@@ -8864,7 +8872,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-09-seasonal-farm-workers-petition",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -8878,7 +8886,7 @@
       "Stand",
       "Commission"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-09-trial-ban-octopus-farming-in-the-eu-trial-youmove-petition-EN": {
     "slug": "2024-09-trial-ban-octopus-farming-in-the-eu-trial-youmove-petition-EN",
@@ -8902,7 +8910,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-09-trial-ban-octopus-farming-in-the-eu-trial-youmove-petition",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "Octopuses",
@@ -8916,7 +8924,7 @@
       "Evidence",
       "Sentient"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-09-trial-digital-futures-data-centres-trial-petition-EN": {
     "slug": "2024-09-trial-digital-futures-data-centres-trial-petition-EN",
@@ -8939,7 +8947,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-09-trial-digital-futures-data-centres-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "PEOPLE",
@@ -8953,7 +8961,7 @@
       "Prioritise",
       "Societies"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-09-uk-raffle-fishnets-expedition-registration-EN": {
     "slug": "2024-09-uk-raffle-fishnets-expedition-registration-EN",
@@ -8976,7 +8984,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-09-uk-raffle-fishnets-expedition-registration",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "Raffle",
@@ -8990,7 +8998,7 @@
       "Abandoned",
       "Wreaking"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-1-a-european-progressive-tax-on-growth-of-wealth-EN": {
     "slug": "2024-1-a-european-progressive-tax-on-growth-of-wealth-EN",
@@ -9013,7 +9021,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-1-a-european-progressive-tax-on-growth-of-wealth",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "Wealth",
@@ -9027,7 +9035,7 @@
       "Year",
       "Must"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-1-the-european-patients-forum-s-eu-elections-campaign-2024-EN": {
     "slug": "2024-1-the-european-patients-forum-s-eu-elections-campaign-2024-EN",
@@ -9050,7 +9058,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-1-the-european-patients-forum-s-eu-elections-campaign-2024",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -9064,7 +9072,7 @@
       "Involved",
       "Union"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-1-trial-criminalisation-solidarity-EN": {
     "slug": "2024-1-trial-criminalisation-solidarity-EN",
@@ -9087,7 +9095,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-1-trial-criminalisation-solidarity",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "People",
@@ -9101,7 +9109,7 @@
       "Parliament",
       "Migration"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-1-vollgeld-fur-alle-EN": {
     "slug": "2024-1-vollgeld-fur-alle-EN",
@@ -9124,7 +9132,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-1-vollgeld-fur-alle",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "Money",
@@ -9138,7 +9146,7 @@
       "Bank",
       "Speculation"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-1-welcome-scotland-back-in-the-eu-EN": {
     "slug": "2024-1-welcome-scotland-back-in-the-eu-EN",
@@ -9151,6 +9159,10 @@
       {
         "checked_at": "2026-09-17T21:54:36-06:00",
         "count": 161
+      },
+      {
+        "checked_at": "2026-09-24T11:08:47-06:00",
+        "count": 162
       }
     ],
     "title": "Welcome Scotland back in the EU",
@@ -9160,12 +9172,12 @@
     "summary": "Welcome Scotland back in the EU Heads of State and Government of the EU, President of the European Council, President and Members of the European Parliament, President and Members of the European Comm…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 161,
+    "signatures": 162,
     "goal": 1000,
     "lang": "en",
     "campaign_id": "wemove:2024-1-welcome-scotland-back-in-the-eu",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "Scotland",
@@ -9179,7 +9191,7 @@
       "Scottish",
       "Members"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-10-addressing-education-allowance-for-parents-of-children-enrolled-EN": {
     "slug": "2024-10-addressing-education-allowance-for-parents-of-children-enrolled-EN",
@@ -9202,7 +9214,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-10-addressing-education-allowance-for-parents-of-children-enrolled",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "Schools",
@@ -9216,7 +9228,7 @@
       "Parents",
       "Institutions"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-10-are-you-sick-and-tired-of-changing-the-clock-twice-a-year-EN": {
     "slug": "2024-10-are-you-sick-and-tired-of-changing-the-clock-twice-a-year-EN",
@@ -9233,6 +9245,10 @@
       {
         "checked_at": "2026-09-21T09:52:32-06:00",
         "count": 6693
+      },
+      {
+        "checked_at": "2026-09-24T11:08:47-06:00",
+        "count": 6739
       }
     ],
     "title": "ARE YOU SICK AND TIRED OF CHANGING THE CLOCK TWICE A YEAR?",
@@ -9243,12 +9259,12 @@
     "start_date": "2024-10-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 6693,
+    "signatures": 6739,
     "goal": 10000,
     "lang": "en",
     "campaign_id": "wemove:2024-10-are-you-sick-and-tired-of-changing-the-clock-twice-a-year",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "Suomalainen",
@@ -9262,7 +9278,7 @@
       "Russian",
       "Svenska"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-10-for-more-i-spend-on-arts-craqdi-mazedona-craquis-queen-EN": {
     "slug": "2024-10-for-more-i-spend-on-arts-craqdi-mazedona-craquis-queen-EN",
@@ -9286,7 +9302,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-10-for-more-i-spend-on-arts-craqdi-mazedona-craquis-queen",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "Arts",
@@ -9300,7 +9316,7 @@
       "Inititator",
       "Population"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-10-no-toxic-mineral-oils-in-our-food-EN": {
     "slug": "2024-10-no-toxic-mineral-oils-in-our-food-EN",
@@ -9332,7 +9348,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-10-no-toxic-mineral-oils-in-our-food",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "Food",
@@ -9346,7 +9362,7 @@
       "Commissioner",
       "Commission"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-10-paul-watson-france-asylum-petition-EN": {
     "slug": "2024-10-paul-watson-france-asylum-petition-EN",
@@ -9370,7 +9386,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-10-paul-watson-france-asylum-petition",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "Watson",
@@ -9384,7 +9400,7 @@
       "President",
       "French"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-10-paul-watson-france-asylum-trial-EN": {
     "slug": "2024-10-paul-watson-france-asylum-trial-EN",
@@ -9407,7 +9423,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-10-paul-watson-france-asylum-trial",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "Watson",
@@ -9421,7 +9437,7 @@
       "Must",
       "Nationality"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-10-per-il-bene-dell-italia-eliminiamo-il-governo-di-centrodestra-fr-EN": {
     "slug": "2024-10-per-il-bene-dell-italia-eliminiamo-il-governo-di-centrodestra-fr-EN",
@@ -9444,7 +9460,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-10-per-il-bene-dell-italia-eliminiamo-il-governo-di-centrodestra-fr",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "ITALIA",
@@ -9458,7 +9474,7 @@
       "Inititator",
       "ELIMINARE"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-10-seals-ban-petition-EN": {
     "slug": "2024-10-seals-ban-petition-EN",
@@ -9486,7 +9502,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-10-seals-ban-petition",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "Seals",
@@ -9500,7 +9516,7 @@
       "Nederlands",
       "Thousands"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-10-stop-arms-Israel-petition-EN": {
     "slug": "2024-10-stop-arms-Israel-petition-EN",
@@ -9523,7 +9539,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-10-stop-arms-Israel-petition",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "Israel",
@@ -9537,7 +9553,7 @@
       "Violence",
       "Israeli"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-10-taime-training-campaign-petition-EN": {
     "slug": "2024-10-taime-training-campaign-petition-EN",
@@ -9560,7 +9576,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-10-taime-training-campaign-petition",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -9574,7 +9590,7 @@
       "English",
       "Español"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-10-the-eradication-of-the-palestinian-people-from-thier-own-land-EN": {
     "slug": "2024-10-the-eradication-of-the-palestinian-people-from-thier-own-land-EN",
@@ -9597,7 +9613,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-10-the-eradication-of-the-palestinian-people-from-thier-own-land",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "People",
@@ -9611,7 +9627,7 @@
       "International",
       "Governments"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-10-transform-the-eu-food-system-for-a-sustainable-future-EN": {
     "slug": "2024-10-transform-the-eu-food-system-for-a-sustainable-future-EN",
@@ -9635,7 +9651,7 @@
     "lang": "en",
     "campaign_id": "wemove:2024-10-transform-the-eu-food-system-for-a-sustainable-future",
     "status": "online",
-    "last_seen": "2026-09-21T09:52:32-06:00",
+    "last_seen": "2026-09-24T11:08:47-06:00",
     "offline_since": null,
     "tags": [
       "Food",
@@ -9649,7 +9665,7 @@
       "Subsidies",
       "Farming"
     ],
-    "last_checked": "2026-09-21T09:52:32-06:00"
+    "last_checked": "2026-09-24T11:08:47-06:00"
   },
   "2024-10-trial-migration-hubs-petition-EN": {
     "slug": "2024-10-trial-migration-hubs-petition-EN",
