@@ -31,14 +31,17 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-25T03:54:46-06:00",
-    "petition_count": 1907,
-    "available": 1897,
-    "new_petitions_last_run": [],
+    "generated_at": "2026-09-25T04:28:57-06:00",
+    "petition_count": 1909,
+    "available": 1899,
+    "new_petitions_last_run": [
+      "1204-2026",
+      "1220-2026"
+    ],
     "bilanz": {
-      "stand": "2026-09-25T03:54:46-06:00",
-      "gefunden": 1897,
-      "im_bestand": 1897,
+      "stand": "2026-09-25T04:28:57-06:00",
+      "gefunden": 1899,
+      "im_bestand": 1899,
       "unbrauchbar": 0,
       "verworfen": 0,
       "dublette": 0,
@@ -46,14 +49,14 @@
       "zurueckgestellt": 0,
       "offen": 0,
       "offene_beispiele": [],
-      "bestand_gesamt": 1907,
+      "bestand_gesamt": 1909,
       "bestand_ausserhalb": 10
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-09-25T01:42:37-06:00",
-        "gesamt": 1907,
-        "online": 1907,
+        "zeit": "2026-09-25T04:28:57-06:00",
+        "gesamt": 1909,
+        "online": 1909,
         "offline": 0,
         "ohne_titel": 0,
         "platzhalter": 0,
@@ -64,77 +67,13 @@
         "juengstes_start": "2026-07-17",
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
-        "neu": 9
-      },
-      {
-        "zeit": "2026-09-25T02:15:40-06:00",
-        "gesamt": 1907,
-        "online": 1907,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 976,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-25T02:48:42-06:00",
-        "gesamt": 1907,
-        "online": 1907,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 976,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-25T03:20:47-06:00",
-        "gesamt": 1907,
-        "online": 1907,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 976,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-25T03:54:46-06:00",
-        "gesamt": 1907,
-        "online": 1907,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 976,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
+        "neu": 2
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-25T03:54:46-06:00",
-      "gesamt": 1907,
-      "online": 1907,
+      "zeit": "2026-09-25T04:28:57-06:00",
+      "gesamt": 1909,
+      "online": 1909,
       "offline": 0,
       "ohne_titel": 0,
       "platzhalter": 0,
@@ -145,19 +84,19 @@
       "juengstes_start": "2026-07-17",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-09-25T01:42:37-06:00",
+    "verlauf_felder_ab": "2026-09-25T04:28:57-06:00",
     "befunde": [
       {
         "stufe": "hinweis",
         "thema": "Startdatum ist ein Verfahrensdatum",
-        "text": "Tagesgenaues Datum bei 976 von 1907 Sätzen; es ist das Zulässigkeitsdatum aus der Mitteilung an die Mitglieder, nicht der Start der Petition. Das jüngste ist 70 Tage alt (2026-07-17) — bauartbedingt, weil das Dokument erst mit der Kommissionsantwort entsteht. Der Altersmelder ist hier deshalb ausgen",
-        "zeit": "2026-09-25T03:54:46-06:00",
+        "text": "Tagesgenaues Datum bei 976 von 1909 Sätzen; es ist das Zulässigkeitsdatum aus der Mitteilung an die Mitglieder, nicht der Start der Petition. Das jüngste ist 70 Tage alt (2026-07-17) — bauartbedingt, weil das Dokument erst mit der Kommissionsantwort entsteht. Der Altersmelder ist hier deshalb ausgen",
+        "zeit": "2026-09-25T04:28:57-06:00",
         "thema_en": "Start date is a procedural date",
-        "text_en": "Day-exact date on 976 of 1907 records; it is the date of admissibility from the Notice to Members, not the start of the petition. The newest is 70 days old (2026-07-17) — by design, as the document is only drawn up once the Commission has replied. The ageing check is therefore skipped here."
+        "text_en": "Day-exact date on 976 of 1909 records; it is the date of admissibility from the Notice to Members, not the start of the petition. The newest is 70 days old (2026-07-17) — by design, as the document is only drawn up once the Commission has replied. The ageing check is therefore skipped here."
       }
     ],
     "health_warning": null,
-    "online_count": 1907
+    "online_count": 1909
   },
   "0474-2026": {
     "slug": "0474-2026",
@@ -116634,5 +116573,105 @@
       "Alleges"
     ],
     "last_checked": "2026-09-25T01:40:38-06:00"
+  },
+  "1204-2026": {
+    "slug": "1204-2026",
+    "first_seen": "2026-09-25T04:27:38-06:00",
+    "signatures_history": [],
+    "title": "Petition 1204/2026: Finland's alleged refusal to refund harmonised excise duties in breach of Directive 2008/118/EC",
+    "started_by": "Juan Diego Artigas (Spanish), on behalf of LICOREA S.L.U.,",
+    "category": "Taxation",
+    "country": "Finland",
+    "description_full": "<p>The petitioner calls on the European Parliament to ask the European Commission to examine the compatibility of Finland’s excise-duty procedural regime with EU law and to seek clarification from the Finnish authorities concerning the legal basis for the extraordinary reassessment of excise duties and the refusal to extend to excise duties the reasoning applied by the Helsinki Administrative Court to parallel VAT assessments. The petitioner states that Finland imposes harmonised excise duties on alcohol and a related beverage-container tax under EU law. According to the petitioner, on 3 February 2026 the Helsinki Administrative Court annulled parallel VAT assessments on the ground that the transactions did not constitute distance sales under EU law. The petitioner claims that the Finnish Tax Administration nevertheless refused to apply the same reasoning to excise-duty assessments concerning the same transactions. The petitioner states that four excise-duty and packaging-tax assessments issued in June 2022 to the Spanish company LICOREA S.L.U. resulted in €67,911.22 being collected by Finland. The petitioner argues that the subsequent rejection of administrative remedies and the collection of additional amounts reveal an asymmetric procedural regime under which extraordinary reassessment is available for VAT but not for harmonised excise duties. The petitioner considers that this practice is incompatible with the principles of equivalence and effectiveness and with Directive 2008/118/EC, Directive 2006/112/EC, Directive 2010/24/EU, the Charter of Fundamental Rights and the principle of sincere cooperation. The petitioner further alleges that the issue has a wider impact on EU operators trading with Finland and refers to a SOLVIT request, a complaint to the European Commission under Article 258 TFEU and proceedings before the Finnish Supreme Administrative Court.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1204%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1204/2026</a></p>",
+    "summary": "The petitioner calls on the European Parliament to ask the European Commission to examine the compatibility of Finland’s excise-duty procedural regime with EU law and to seek clarification from the Fi…",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:1204-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1204%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-09-25T04:28:46",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 1204/2026: zur mutmaßlichen Weigerung Finnlands, harmonisierte Verbrauchsteuern unter Verstoß gegen die Richtlinie 2008/118/EG zu erstatten",
+        "summary": "Der Petent ersucht das Europäische Parlament, die Kommission aufzufordern, die Vereinbarkeit der finnischen Verfahrensregelung für Verbrauchsteuern mit dem EU-Recht zu prüfen und die finnischen Behörd…",
+        "description_full": "<p>Der Petent ersucht das Europäische Parlament, die Kommission aufzufordern, die Vereinbarkeit der finnischen Verfahrensregelung für Verbrauchsteuern mit dem EU-Recht zu prüfen und die finnischen Behörden um Klärung der Rechtsgrundlage für die außerordentliche Neubewertung von Verbrauchsteuern sowie für die Weigerung zu ersuchen, die Begründung des Verwaltungsgerichts Helsinki für parallele Mehrwertsteuerbescheide auf Verbrauchsteuern auszuweiten. Er gibt an, dass Finnland nach EU-Recht harmonisierte Verbrauchsteuern auf Alkohol und eine entsprechende Steuer auf Getränkebehälter erhebe. Laut dem Petenten erklärte das Verwaltungsgericht Helsinki am 3. Februar 2026 parallele Mehrwertsteuerbescheide für nichtig und habe dies damit begründet, dass es sich bei den Umsätzen nicht um Fernverkäufe im Sinne des EU-Rechts handele. Die finnische Steuerverwaltung habe sich dennoch geweigert, bei der Bemessung der Verbrauchsteuer für dieselben Umsätze dieselbe Argumentation anzuwenden. Der Petent führt aus, dass vier Verbrauchsteuer- und Verpackungssteuerbescheide, die im Juni 2022 an das spanische Unternehmen LICOREA S.L.U. ausgestellt worden seien, dazu geführt hätten, dass Finnland einen Betrag in Höhe von 67 911,22 EUR erhoben habe. Die anschließende Ablehnung von verwaltungsrechtlichen Rechtsbehelfen und die Erhebung zusätzlicher Beträge würden auf eine asymmetrische Verfahrensregelung hindeuten, bei der eine außerordentliche Neubemessung für die Mehrwertsteuer, nicht aber für harmonisierte Verbrauchsteuern möglich sei. Der Petent ist der Ansicht, dass diese Praxis mit den Grundsätzen der Äquivalenz und der Effektivität sowie mit der Richtlinie 2008/118/EG, der Richtlinie 2006/112/EG, der Richtlinie 2010/24/EU, der Charta der Grundrechte und dem Grundsatz der loyalen Zusammenarbeit unvereinbar sei. Er macht ferner geltend, dass das Problem weitreichendere Auswirkungen auf EU-Wirtschaftsbeteiligte habe, die mit Finnland Handel treiben, und verweist auf eine SOLVIT-Anfrage, eine Beschwerde bei der Kommission gemäß Artikel 258 AEUV sowie ein Verfahren vor dem finnischen Obersten Verwaltungsgericht.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=1204%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1204/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=1204%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-09-25T04:27:38-06:00",
+    "offline_since": null,
+    "tags": [
+      "Petitioner",
+      "Finland",
+      "European",
+      "Duties",
+      "Excise",
+      "Administrative",
+      "Assessments",
+      "Excise-duty",
+      "Directive",
+      "Under"
+    ],
+    "last_checked": "2026-09-25T04:27:38-06:00"
+  },
+  "1220-2026": {
+    "slug": "1220-2026",
+    "first_seen": "2026-09-25T04:27:38-06:00",
+    "signatures_history": [],
+    "title": "Petition 1220/2026: the alleged unequal treatment of fixed-term teachers in State and recognised private schools in Italy",
+    "started_by": "A. M. F. (Italian), on behalf of Comitato Nazionale Paritarie,",
+    "category": "Employment",
+    "country": "Italy",
+    "description_full": "<p>The petitioner argues that Italian legislation unlawfully differentiates between teachers employed on successive fixed-term contracts in State schools and teachers employed in recognised private schools (scuole paritarie). The petitioner stresses that the complaint does not concern the recognition of previous service for career or salary purposes, but specifically the availability of compensation for damage resulting from the abusive use of successive fixed-term contracts. The petitioner relies on Italian legislation concerning recruitment and the recognition of teaching service, arguing that service performed in recognised private schools is accepted by the Italian State as relevant for access to permanent teaching positions through the Graduatorie ad Esaurimento (GaE). On that basis, the petitioner contends that the State cannot subsequently rely on the private-law status of the employer to deny such teachers the compensation available to teachers in State schools for abuse of fixed-term employment. The petitioner therefore alleges an infringement of Directive 1999/70/EC, in particular its requirements concerning the prevention and sanctioning of the abusive use of successive fixed-term contracts. The petitioner asks the European Parliament to establish if the Italian rules are discriminatory and to ensure that teachers in recognised private schools are also entitled to compensation of between 4 and 24 months’ salary.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1220%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1220/2026</a></p>",
+    "summary": "The petitioner argues that Italian legislation unlawfully differentiates between teachers employed on successive fixed-term contracts in State schools and teachers employed in recognised private schoo…",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:1220-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1220%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-09-25T04:28:52",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 1220/2026: zur mutmaßlichen Ungleichbehandlung von befristet beschäftigten Lehrkräften an staatlichen Schulen und anerkannten Privatschulen in Italien",
+        "summary": "Die Petentin macht geltend, dass in den italienischen Rechtsvorschriften rechtswidrig zwischen Lehrkräften, die mit Kettenarbeitsverträgen an staatlichen Schulen beschäftigt seien, und Lehrkräften, di…",
+        "description_full": "<p>Die Petentin macht geltend, dass in den italienischen Rechtsvorschriften rechtswidrig zwischen Lehrkräften, die mit Kettenarbeitsverträgen an staatlichen Schulen beschäftigt seien, und Lehrkräften, die an anerkannten Privatschulen (scuole paritarie) beschäftigt seien, unterschieden werde. Sie weist darauf hin, dass es bei der Beschwerde nicht um die Anerkennung früherer Dienstzeiten aus Gründen der Laufbahn oder des Gehalts gehe, sondern um die Möglichkeit einer Entschädigung für Schäden, die durch den missbräuchlichen Einsatz von Kettenarbeitsverträgen entstanden seien. Die Petentin beruft sich auf die italienischen Rechtsvorschriften über die Einstellung und die Anerkennung von Lehrtätigkeiten und führt aus, dass der an anerkannten Privatschulen geleistete Dienst vom italienischen Staat im Rahmen der „Graduatorie ad Esaurimento“ (GaE) als relevant für den Zugang zu unbefristeten Lehrstellen anerkannt werde. Auf dieser Grundlage macht sie geltend, dass sich der Staat in der Folge nicht auf den privatrechtlichen Status des Arbeitgebers berufen könne, um diesen Lehrkräften die Entschädigung zu verweigern, die Lehrkräften an staatlichen Schulen für den Missbrauch befristeter Arbeitsverträge zustehe. Die Petentin macht daher einen Verstoß gegen die Richtlinie 1999/70/EG geltend, insbesondere gegen deren Vorschriften zur Verhinderung und Ahndung des missbräuchlichen Einsatzes von Kettenarbeitsverträgen. Sie ersucht das Europäische Parlament, festzustellen, ob die italienischen Vorschriften diskriminierend sind, und sicherzustellen, dass auch Lehrkräfte an anerkannten Privatschulen Anspruch auf eine Entschädigung in Höhe von vier bis 24 Monatsgehältern haben.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=1220%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1220/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=1220%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-09-25T04:27:38-06:00",
+    "offline_since": null,
+    "tags": [
+      "Teachers",
+      "Petitioner",
+      "Schools",
+      "Fixed-term",
+      "State",
+      "Recognised",
+      "Italian",
+      "Private",
+      "Successive",
+      "Contracts"
+    ],
+    "last_checked": "2026-09-25T04:27:38-06:00"
   }
 }
