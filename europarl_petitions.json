@@ -31,12 +31,12 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-25T09:09:47-06:00",
+    "generated_at": "2026-09-25T09:46:55-06:00",
     "petition_count": 1911,
     "available": 1901,
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-09-25T09:09:47-06:00",
+      "stand": "2026-09-25T09:46:55-06:00",
       "gefunden": 1901,
       "im_bestand": 1901,
       "unbrauchbar": 0,
@@ -51,39 +51,7 @@
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-09-25T07:49:54-06:00",
-        "gesamt": 1911,
-        "online": 1911,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 976,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 2
-      },
-      {
-        "zeit": "2026-09-25T08:32:41-06:00",
-        "gesamt": 1911,
-        "online": 1911,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 976,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-25T09:09:47-06:00",
+        "zeit": "2026-09-25T09:46:55-06:00",
         "gesamt": 1911,
         "online": 1911,
         "offline": 0,
@@ -100,7 +68,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-25T09:09:47-06:00",
+      "zeit": "2026-09-25T09:46:55-06:00",
       "gesamt": 1911,
       "online": 1911,
       "offline": 0,
@@ -113,13 +81,13 @@
       "juengstes_start": "2026-07-17",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-09-25T07:49:54-06:00",
+    "verlauf_felder_ab": "2026-09-25T09:46:55-06:00",
     "befunde": [
       {
         "stufe": "hinweis",
         "thema": "Startdatum ist ein Verfahrensdatum",
         "text": "Tagesgenaues Datum bei 976 von 1911 Sätzen; es ist das Zulässigkeitsdatum aus der Mitteilung an die Mitglieder, nicht der Start der Petition. Das jüngste ist 70 Tage alt (2026-07-17) — bauartbedingt, weil das Dokument erst mit der Kommissionsantwort entsteht. Der Altersmelder ist hier deshalb ausgen",
-        "zeit": "2026-09-25T09:09:47-06:00",
+        "zeit": "2026-09-25T09:46:55-06:00",
         "thema_en": "Start date is a procedural date",
         "text_en": "Day-exact date on 976 of 1911 records; it is the date of admissibility from the Notice to Members, not the start of the petition. The newest is 70 days old (2026-07-17) — by design, as the document is only drawn up once the Commission has replied. The ageing check is therefore skipped here."
       }
@@ -115470,8 +115438,8 @@
     "kind": "petition",
     "updates": [
       {
-        "timestamp": "2026-09-22T09:30:54",
-        "text": "Status: Available to supporters"
+        "timestamp": "2026-09-25T09:45:41",
+        "text": "Status: Not available to supporters"
       }
     ],
     "lang": "en",
@@ -115487,7 +115455,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-09-22T09:29:49-06:00",
+    "last_seen": "2026-09-25T09:45:38-06:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -115501,7 +115469,7 @@
       "Regarding",
       "Concerns"
     ],
-    "last_checked": "2026-09-22T09:29:49-06:00"
+    "last_checked": "2026-09-25T09:45:38-06:00"
   },
   "1134-2026": {
     "slug": "1134-2026",
@@ -115509,7 +115477,7 @@
     "signatures_history": [],
     "title": "Petition 1134/2026: the rule of law in Greece",
     "started_by": "C. S. (Greek)",
-    "category": "Justice",
+    "category": "Economic and Monetary Affairs",
     "country": "Greece",
     "description_full": "<p>The petitioner alleges that the rule of law in Greece has deteriorated in recent years. In particular, the petitioner raises concerns regarding the legal framework governing ministerial immunity, the alleged unlawful surveillance of citizens, journalists and politicians through the use of the “Predator” spyware, which is claimed to infringe the rights to privacy and data protection, the alleged disproportionate tax burden on low-income earners and the failure to reduce indirect taxation on essential goods, as well as the alleged lack of effective competition oversight in the energy, food and banking sectors. The petitioner further alleges the misuse of direct procurement procedures and clientelist allocation of national and EU public funds, together with practices allegedly affecting media pluralism and freedom of expression.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1134%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1134/2026</a></p>",
     "summary": "The petitioner alleges that the rule of law in Greece has deteriorated in recent years. In particular, the petitioner raises concerns regarding the legal framework governing ministerial immunity, the …",
@@ -115520,7 +115488,7 @@
     "kind": "petition",
     "updates": [
       {
-        "timestamp": "2026-09-22T09:31:01",
+        "timestamp": "2026-09-25T09:45:47",
         "text": "Status: Available to supporters"
       }
     ],
@@ -115537,7 +115505,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-09-22T09:29:49-06:00",
+    "last_seen": "2026-09-25T09:45:38-06:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -115551,7 +115519,7 @@
       "Framework",
       "Governing"
     ],
-    "last_checked": "2026-09-22T09:29:49-06:00"
+    "last_checked": "2026-09-25T09:45:38-06:00"
   },
   "0752-2026": {
     "slug": "0752-2026",
