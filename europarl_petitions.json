@@ -31,14 +31,24 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-25T01:09:42-06:00",
-    "petition_count": 1898,
-    "available": 1888,
-    "new_petitions_last_run": [],
+    "generated_at": "2026-09-25T01:42:37-06:00",
+    "petition_count": 1907,
+    "available": 1897,
+    "new_petitions_last_run": [
+      "1034-2026",
+      "1012-2026",
+      "0966-2026",
+      "0957-2026",
+      "0943-2026",
+      "0941-2026",
+      "1030-2026",
+      "1013-2026",
+      "0972-2026"
+    ],
     "bilanz": {
-      "stand": "2026-09-25T01:09:42-06:00",
-      "gefunden": 1888,
-      "im_bestand": 1888,
+      "stand": "2026-09-25T01:42:37-06:00",
+      "gefunden": 1897,
+      "im_bestand": 1897,
       "unbrauchbar": 0,
       "verworfen": 0,
       "dublette": 0,
@@ -46,14 +56,14 @@
       "zurueckgestellt": 0,
       "offen": 0,
       "offene_beispiele": [],
-      "bestand_gesamt": 1898,
+      "bestand_gesamt": 1907,
       "bestand_ausserhalb": 10
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-09-24T10:14:44-06:00",
-        "gesamt": 1898,
-        "online": 1898,
+        "zeit": "2026-09-25T01:42:37-06:00",
+        "gesamt": 1907,
+        "online": 1907,
         "offline": 0,
         "ohne_titel": 0,
         "platzhalter": 0,
@@ -64,349 +74,13 @@
         "juengstes_start": "2026-07-17",
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-24T11:08:33-06:00",
-        "gesamt": 1898,
-        "online": 1898,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 976,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-24T12:02:32-06:00",
-        "gesamt": 1898,
-        "online": 1898,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 976,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-24T12:57:31-06:00",
-        "gesamt": 1898,
-        "online": 1898,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 976,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-24T13:59:09-06:00",
-        "gesamt": 1898,
-        "online": 1898,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 976,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-24T14:55:09-06:00",
-        "gesamt": 1898,
-        "online": 1898,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 976,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-24T15:26:43-06:00",
-        "gesamt": 1898,
-        "online": 1898,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 976,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-24T15:51:42-06:00",
-        "gesamt": 1898,
-        "online": 1898,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 976,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-24T16:25:42-06:00",
-        "gesamt": 1898,
-        "online": 1898,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 976,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-24T16:59:47-06:00",
-        "gesamt": 1898,
-        "online": 1898,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 976,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-24T17:33:49-06:00",
-        "gesamt": 1898,
-        "online": 1898,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 976,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-24T18:06:07-06:00",
-        "gesamt": 1898,
-        "online": 1898,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 976,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-24T19:00:40-06:00",
-        "gesamt": 1898,
-        "online": 1898,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 976,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-24T19:33:41-06:00",
-        "gesamt": 1898,
-        "online": 1898,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 976,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-24T20:08:43-06:00",
-        "gesamt": 1898,
-        "online": 1898,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 976,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-24T20:59:41-06:00",
-        "gesamt": 1898,
-        "online": 1898,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 976,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-24T21:33:44-06:00",
-        "gesamt": 1898,
-        "online": 1898,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 976,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-24T22:21:41-06:00",
-        "gesamt": 1898,
-        "online": 1898,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 976,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-24T22:57:43-06:00",
-        "gesamt": 1898,
-        "online": 1898,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 976,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-24T23:47:29-06:00",
-        "gesamt": 1898,
-        "online": 1898,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 976,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-25T00:36:41-06:00",
-        "gesamt": 1898,
-        "online": 1898,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 976,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-25T01:09:42-06:00",
-        "gesamt": 1898,
-        "online": 1898,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 976,
-        "juengstes_start": "2026-07-17",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
+        "neu": 9
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-25T01:09:42-06:00",
-      "gesamt": 1898,
-      "online": 1898,
+      "zeit": "2026-09-25T01:42:37-06:00",
+      "gesamt": 1907,
+      "online": 1907,
       "offline": 0,
       "ohne_titel": 0,
       "platzhalter": 0,
@@ -417,19 +91,19 @@
       "juengstes_start": "2026-07-17",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-09-24T10:14:44-06:00",
+    "verlauf_felder_ab": "2026-09-25T01:42:37-06:00",
     "befunde": [
       {
         "stufe": "hinweis",
         "thema": "Startdatum ist ein Verfahrensdatum",
-        "text": "Tagesgenaues Datum bei 976 von 1898 Sätzen; es ist das Zulässigkeitsdatum aus der Mitteilung an die Mitglieder, nicht der Start der Petition. Das jüngste ist 70 Tage alt (2026-07-17) — bauartbedingt, weil das Dokument erst mit der Kommissionsantwort entsteht. Der Altersmelder ist hier deshalb ausgen",
-        "zeit": "2026-09-25T01:09:42-06:00",
+        "text": "Tagesgenaues Datum bei 976 von 1907 Sätzen; es ist das Zulässigkeitsdatum aus der Mitteilung an die Mitglieder, nicht der Start der Petition. Das jüngste ist 70 Tage alt (2026-07-17) — bauartbedingt, weil das Dokument erst mit der Kommissionsantwort entsteht. Der Altersmelder ist hier deshalb ausgen",
+        "zeit": "2026-09-25T01:42:37-06:00",
         "thema_en": "Start date is a procedural date",
-        "text_en": "Day-exact date on 976 of 1898 records; it is the date of admissibility from the Notice to Members, not the start of the petition. The newest is 70 days old (2026-07-17) — by design, as the document is only drawn up once the Commission has replied. The ageing check is therefore skipped here."
+        "text_en": "Day-exact date on 976 of 1907 records; it is the date of admissibility from the Notice to Members, not the start of the petition. The newest is 70 days old (2026-07-17) — by design, as the document is only drawn up once the Commission has replied. The ageing check is therefore skipped here."
       }
     ],
     "health_warning": null,
-    "online_count": 1898
+    "online_count": 1907
   },
   "0474-2026": {
     "slug": "0474-2026",
@@ -116456,5 +116130,455 @@
       "Expresses"
     ],
     "last_checked": "2026-09-24T08:12:39-06:00"
+  },
+  "1034-2026": {
+    "slug": "1034-2026",
+    "first_seen": "2026-09-25T01:40:38-06:00",
+    "signatures_history": [],
+    "title": "Petition 1034/2026: alleged failure of cross-border social security coordination between Belgium and the Netherlands",
+    "started_by": "Eric Messa (Belgian)",
+    "category": "Internal Market - Free movement of persons",
+    "country": "Belgium",
+    "description_full": "<p>The petitioner alleges that Belgium and the Netherlands have failed to properly coordinate their social security systems, leaving the petitioner without recognition of invalidity benefits despite having worked for 21 years in Belgium and now residing in the Netherlands. The petitioner claims that both Member States have failed to apply the judgment of the Court of Justice of the European Union in Case C-117/18 (Vester), which, according to the petitioner, requires the competent Member State to carry out a medical assessment and determine entitlement to invalidity benefits even where the worker no longer resides in that State.The petitioner argues that the Belgian authorities have refused to recognise the petitioner&#39;s invalidity by linking entitlement to national residence requirements and by failing to aggregate insurance periods, while the Dutch authorities have not provided an effective mechanism to facilitate the coordination of social security rights. The petitioner maintains that this has resulted in the absence of any recognised status, benefits or income despite severe disabilities. The petitioner calls on the European Parliament to investigate the alleged systemic failure of Belgium and the Netherlands to apply EU social security coordination rules, urges the European Commission to initiate infringement proceedings against the two Member States, and requests measures to ensure that medical assessments and the export of social security rights are not made dependent on residence requirements.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1034%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1034/2026</a></p>",
+    "summary": "The petitioner alleges that Belgium and the Netherlands have failed to properly coordinate their social security systems, leaving the petitioner without recognition of invalidity benefits despite havi…",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:1034-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1034%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-09-25T01:41:43",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 1034/2026: zur mutmaßlichen mangelnden grenzüberschreitenden Koordinierung der Systeme der sozialen Sicherheit zwischen Belgien und den Niederlanden",
+        "summary": "Der Petent macht geltend, dass Belgien und die Niederlande ihre Systeme der sozialen Sicherheit nicht ordnungsgemäß koordiniert hätten, wodurch ihm keine Invaliditätsrente gewährt würde, obwohl er 21 …",
+        "description_full": "<p>Der Petent macht geltend, dass Belgien und die Niederlande ihre Systeme der sozialen Sicherheit nicht ordnungsgemäß koordiniert hätten, wodurch ihm keine Invaliditätsrente gewährt würde, obwohl er 21 Jahre lang in Belgien gearbeitet habe und nun in den Niederlanden wohne. Er weist darauf hin, dass beide Mitgliedstaaten das Urteil des Gerichtshofs der Europäischen Union in der Rechtssache C-117/18 (Vester) nicht umgesetzt hätten, dem zufolge der zuständige Mitgliedstaat verpflichtet sei, ein medizinisches Gutachten auszuführen und den Anspruch auf Leistungen bei Invalidität festzustellen, auch wenn der Arbeitnehmer nicht mehr in diesem Staat wohne.Die belgischen Behörden hätten sich geweigert, die Invalidität des Petenten anzuerkennen, indem sie den Anspruch an das Erfordernis eines Wohnsitzes im Land geknüpft und Versicherungszeiten nicht zusammengerechnet hätten, während die niederländischen Behörden keinen wirksamen Mechanismus zur Erleichterung der Koordinierung der Sozialversicherungsansprüche bereitgestellt hätten. Dies habe dazu geführt, dass ihm trotz schwerer Behinderungen weder ein anerkannter Status noch Leistungen oder Einkünfte zustünden. Der Petent appelliert an das Europäische Parlament, das mutmaßliche systemische Versäumnis Belgiens und der Niederlande bei der Anwendung der EU-Vorschriften zur Koordinierung der Systeme der sozialen Sicherheit zu untersuchen, fordert die Kommission auf, Vertragsverletzungsverfahren gegen die beiden Mitgliedstaaten einzuleiten, und fordert Maßnahmen, um sicherzustellen, dass medizinische Gutachten und die Übertragung von Sozialversicherungsansprüchen nicht vom Erfordernis eines Wohnsitzes abhängig gemacht werden.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=1034%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1034/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=1034%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-09-25T01:40:38-06:00",
+    "offline_since": null,
+    "tags": [
+      "Petitioner",
+      "Security",
+      "Social",
+      "Netherlands",
+      "Belgium",
+      "Invalidity",
+      "Benefits",
+      "Coordination",
+      "European",
+      "Despite"
+    ],
+    "last_checked": "2026-09-25T01:40:38-06:00"
+  },
+  "1012-2026": {
+    "slug": "1012-2026",
+    "first_seen": "2026-09-25T01:40:38-06:00",
+    "signatures_history": [],
+    "title": "Petition 1012/2026: management of stray animals in Kardzhali, Bulgaria",
+    "started_by": "Violeta Yordanova (Bulgarian)",
+    "category": "Animal Welfare",
+    "country": "Greece",
+    "description_full": "<p>The petitioner, a resident of Kardzhali, Bulgaria, raises concerns about the rapidly escalating population of stray dogs and cats in the region. Despite numerous attempts to engage local authorities, assurances that the situation is under control have not translated into effective action. The petitioner attributes the problem to a lack of proper pet care, information, and preventive measures such as sterilization, vaccination, and deworming. A planned rescue center, nearing completion, is insufficient to tackle the immediate crisis, as the system lacks coherence, a clear goal, and accountability for the increasing number of accidents. The petitioner calls on the European Parliament to address this issue using several measures, including sending EU experts to assess the state of emergency, forming a committee to reinforce and monitor European regulations, and providing feedback to the local community on necessary steps as well as doing regular testing for problematic diseases at local reference laboratories, support for local authorities to enforce laws and disseminate information and establishing a long-term mechanism to maintain a balanced animal population are also recommended. The petitioner underscores the urgency of the situation, warning of potential fatal incidents that could lead to a mass disaster, not only in the region but also beyond.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1012%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1012/2026</a></p>",
+    "summary": "The petitioner, a resident of Kardzhali, Bulgaria, raises concerns about the rapidly escalating population of stray dogs and cats in the region. Despite numerous attempts to engage local authorities, …",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:1012-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1012%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-09-25T01:41:50",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 1012/2026: zum Umgang mit streunenden Tieren in Kardschali (Bulgarien)",
+        "summary": "Die Petentin, die in Kardschali, Bulgarien, lebt, äußert ihre Besorgnis über die rasant zunehmende Population streunender Hunde und Katzen in der Region. Trotz zahlreicher Versuche, die lokalen Behörd…",
+        "description_full": "<p>Die Petentin, die in Kardschali, Bulgarien, lebt, äußert ihre Besorgnis über die rasant zunehmende Population streunender Hunde und Katzen in der Region. Trotz zahlreicher Versuche, die lokalen Behörden auf dieses Problem aufmerksam zu machen, hätten sich die Zusicherungen, dass die Situation unter Kontrolle sei, nicht in wirksamen Maßnahmen niedergeschlagen. Die Petentin führt das Problem auf einen Mangel an angemessener Heimtierpflege, an Informationen und an Präventivmaßnahmen wie Sterilisation, Impfung und Entwurmung zurück. Ein geplantes Tierschutzheim, das kurz vor der Fertigstellung stehe, reiche nicht aus, um die unmittelbare Krise zu bewältigen, da es dem System an Kohärenz, einem klaren Ziel und Rechenschaftspflicht für die steigende Zahl von Unfällen mangele. Die Petentin fordert das Europäische Parlament auf, dieses Problem durch mehrere Maßnahmen anzugehen, darunter die Entsendung von EU-Sachverständigen zur Bewertung des Ausnahmezustands, die Einrichtung eines Ausschusses zur Stärkung und Überwachung der europäischen Vorschriften sowie Rückmeldungen an die Bevölkerung vor Ort hinsichtlich der erforderlichen Schritte. Des Weiteren seien regelmäßige Tests auf problematische Krankheiten in lokalen Referenzlaboratorien, die Unterstützung der lokalen Behörden bei der Durchsetzung der Rechtsvorschriften und der Verbreitung von Informationen sowie die Einrichtung eines langfristigen Mechanismus zur Aufrechterhaltung eines ausgewogenen Tierbestands angebracht. Die Petentin weist auf die Dringlichkeit der Lage hin und warnt vor möglichen tödlichen Vorfällen, die nicht nur in der Region, sondern auch darüber hinaus zu einer Massenkatastrophe führen könnten.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=1012%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1012/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=1012%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-09-25T01:40:38-06:00",
+    "offline_since": null,
+    "tags": [
+      "Petitioner",
+      "Local",
+      "Authorities",
+      "Population",
+      "Kardzhali",
+      "Bulgaria",
+      "Region",
+      "Stray",
+      "Information",
+      "Escalating"
+    ],
+    "last_checked": "2026-09-25T01:40:38-06:00"
+  },
+  "0966-2026": {
+    "slug": "0966-2026",
+    "first_seen": "2026-09-25T01:40:38-06:00",
+    "signatures_history": [],
+    "title": "Petition 0966/2026: the rule of law in Spain and compliance with the Council of Europe's opinions",
+    "started_by": "Mercenario Villalba Lava (Spanish)",
+    "category": "Justice",
+    "country": "Spain",
+    "description_full": "<p>The petitioner requests the European Parliament to ensure that Spain fully complies with the Council of Europe’s opinions and recommendations concerning the rule of law and the independence of the judiciary. The petitioner states that Article 27 of the Vienna Convention on the Law of Treaties prohibits invoking internal law as a justification for treaty breaches. The petitioner highlights that Article 2 of the EU Treaty enshrines values such as the rule of law, respect for human dignity and human rights. The petitioner points out that the Council of Europe’s corpus, its bodies, the European Charter of Human Rights and GRECO form part of EU law and that their opinions contribute to the rule of law. The petitioner considers the Venice Commission’s opinion of 27 February 2026 on democracy through law and the Council of Europe’s Directorate General of Human Rights and the Rule of Law to be relevant. The petitioner argues that the opinion states that a judiciary cannot be regarded as independent if its governing body of judges is predominantly elected by judges, due to the risk of politicisation. The petitioner denounces that similar concerns have been raised regarding Spain in the Venice Commission’s October 2025 opinion. The petitioner claims that the Venice Commission’s assessment of Poland identified a defective appointment system that violates Article 6 of the European Convention on Human Rights, and that comparable issues have been warned about in Spain in 2013, 2015, 2018, 2021 and 2025. The petitioner points out that, unlike Poland which received a warning in 2017, Spain’s General Council of the Judiciary continues to apply the contested appointment procedure. According to the petitioner, the continuation of this procedure undermines judicial independence and the principle of non-removal of judges.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=0966%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 0966/2026</a></p>",
+    "summary": "The petitioner requests the European Parliament to ensure that Spain fully complies with the Council of Europe’s opinions and recommendations concerning the rule of law and the independence of the jud…",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:0966-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0966%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-09-25T01:41:56",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 0966/2026: zur Rechtsstaatlichkeit in Spanien und zur Berücksichtigung der Stellungnahmen des Europarats",
+        "summary": "Der Petent fordert das Europäische Parlament auf, dafür zu sorgen, dass Spanien den Stellungnahmen und Empfehlungen des Europarats zur Rechtsstaatlichkeit und zur Unabhängigkeit der Justiz in vollem U…",
+        "description_full": "<p>Der Petent fordert das Europäische Parlament auf, dafür zu sorgen, dass Spanien den Stellungnahmen und Empfehlungen des Europarats zur Rechtsstaatlichkeit und zur Unabhängigkeit der Justiz in vollem Umfang nachkommt. Er führt an, dass es nach Artikel 27 des Wiener Übereinkommens über das Recht der Verträge verboten sei, sich auf innerstaatliches Recht zu berufen, um Verstöße gegen die Verträge zu rechtfertigen. Der Petent hebt hervor, dass in Artikel 2 des EU-Vertrags Werte wie Rechtsstaatlichkeit, Achtung der Menschenwürde und Menschenrechte verankert seien. Er weist darauf hin, dass das Rechtsinstrumentarium des Europarats, seine Organe, die Europäische Charta der Menschenrechte und die Gruppe der Staaten gegen Korruption Teil des EU-Rechts seien und dass ihre Stellungnahmen zur Rechtsstaatlichkeit beitrügen. Der Petent hält die Stellungnahme der Venedig-Kommission vom 27. Februar 2026 zum Thema Demokratie durch Recht sowie die Generaldirektion für Menschenrechte und Rechtsstaatlichkeit des Europarats für relevant. In der Stellungnahme würde festgestellt, dass eine Justiz nicht als unabhängig angesehen werden könne, wenn ihr Leitungsorgan überwiegend von Richtern gewählt werde, da die Gefahr einer Politisierung bestehe. In der Stellungnahme der Venedig-Kommission vom Oktober 2025 seien ähnliche Bedenken in Bezug auf Spanien geäußert worden. Der Petent macht geltend, dass bei der Bewertung Polens durch die Venedig-Kommission ein fehlerhaftes Ernennungssystem festgestellt worden sei, das gegen Artikel 6 der Europäischen Menschenrechtskonvention verstoße, und dass in Spanien in den Jahren 2013, 2015, 2018, 2021 und 2025 vor vergleichbaren Problemen gewarnt worden sei. Er weist darauf hin, dass der Generalrat der rechtsprechenden Gewalt in Spanien im Gegensatz zu Polen, das 2017 eine Verwarnung erhalten habe, weiterhin das umstrittene Ernennungsverfahren anwende. Dem Petenten zufolge unterlaufe die Beibehaltung dieses Verfahrens die Unabhängigkeit der Justiz und den Grundsatz der Unabsetzbarkeit von Richtern.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=0966%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 0966/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=0966%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-09-25T01:40:38-06:00",
+    "offline_since": null,
+    "tags": [
+      "Petitioner",
+      "Council",
+      "Spain",
+      "Rule",
+      "Europe",
+      "Human",
+      "European",
+      "Opinions",
+      "Rights",
+      "Independence"
+    ],
+    "last_checked": "2026-09-25T01:40:38-06:00"
+  },
+  "0957-2026": {
+    "slug": "0957-2026",
+    "first_seen": "2026-09-25T01:40:38-06:00",
+    "signatures_history": [],
+    "title": "Petition 0957/2026: concerns over judicial independence and rule of law in Spain",
+    "started_by": "E. V. E. (Spanish)",
+    "category": "Justice",
+    "country": "Spain",
+    "description_full": "<p>The petitioner expresses concern about the perceived politicisation of the Spanish Constitutional Court and its impact on the effective prosecution of corruption cases. Referring to recent judgments and the European Commission&#39;s Rule of Law reports, the petitioner argues that the current system for appointing Constitutional Court judges and certain judicial decisions risk undermining public confidence in judicial independence and the fight against corruption. The petitioner calls on the European Parliament and the European Commission to closely monitor future decisions of the Spanish Constitutional Court, assess their compliance with EU rule of law standards, include specific monitoring in the annual Rule of Law reports, and encourage Spain to strengthen the independence and depoliticisation of its constitutional and judicial institutions.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=0957%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 0957/2026</a></p>",
+    "summary": "The petitioner expresses concern about the perceived politicisation of the Spanish Constitutional Court and its impact on the effective prosecution of corruption cases. Referring to recent judgments a…",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:0957-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0957%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-09-25T01:42:02",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 0957/2026: zu Bedenken hinsichtlich der Unabhängigkeit der Justiz und der Rechtsstaatlichkeit in Spanien",
+        "summary": "Der Petent zeigt sich besorgt über die wahrgenommene Politisierung des spanischen Verfassungsgerichts und ihre Auswirkungen auf die wirksame Verfolgung von Korruptionsfällen. Unter Verweis auf jüngste…",
+        "description_full": "<p>Der Petent zeigt sich besorgt über die wahrgenommene Politisierung des spanischen Verfassungsgerichts und ihre Auswirkungen auf die wirksame Verfolgung von Korruptionsfällen. Unter Verweis auf jüngste Urteile und die Berichte der Kommission über die Rechtsstaatlichkeit macht der Petent geltend, dass das derzeitige System zur Ernennung von Richtern am Verfassungsgericht sowie bestimmte gerichtliche Entscheidungen das Vertrauen der Öffentlichkeit in die Unabhängigkeit der Justiz und die Korruptionsbekämpfung beeinträchtigen könnten. Der Petent fordert das Europäische Parlament und die Kommission auf, künftige Entscheidungen des spanischen Verfassungsgerichts genau zu überwachen, ihre Übereinstimmung mit den EU-Standards im Bereich der Rechtsstaatlichkeit zu bewerten, eine spezifische Überwachung in die jährlichen Berichte über die Rechtsstaatlichkeit aufzunehmen und Spanien zu ermutigen, die Unabhängigkeit und Entpolitisierung seiner Verfassungs- und Justizorgane zu stärken.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=0957%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 0957/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=0957%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-09-25T01:40:38-06:00",
+    "offline_since": null,
+    "tags": [
+      "Constitutional",
+      "Petitioner",
+      "Judicial",
+      "Court",
+      "Rule",
+      "Independence",
+      "Corruption",
+      "European",
+      "Spanish",
+      "Politicisation"
+    ],
+    "last_checked": "2026-09-25T01:40:38-06:00"
+  },
+  "0943-2026": {
+    "slug": "0943-2026",
+    "first_seen": "2026-09-25T01:40:38-06:00",
+    "signatures_history": [],
+    "title": "Petition 0943/2026: prolonged displacement of Oriol residents and administrative inaction after the 2019 Dana storm in Spain",
+    "started_by": "Antonio Trujillo (Spanish)",
+    "category": "Disability Issues",
+    "country": "Spain",
+    "description_full": "<p>The petitioner complains about prolonged delays in restoring the Oriol Residential Centre in Orihuela (Spain) after it was destroyed by flooding in 2019. The petitioner states that around 30 residents have remained in temporary accommodation for more than six years, adversely affecting their well-being and social inclusion. Although rehabilitation works were tendered in January 2026, the petitioner alleges a lack of transparency and the absence of a clear timetable for completion, return of residents and commissioning of the new facility. The petitioner also raises questions regarding the possible use of EU funding and claims that the situation may be incompatible with the Charter of Fundamental Rights of the European Union. The petitioner calls on the European Parliament to seek information from the competent authorities and assess compliance with the relevant EU legal framework.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=0943%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 0943/2026</a></p>",
+    "summary": "The petitioner complains about prolonged delays in restoring the Oriol Residential Centre in Orihuela (Spain) after it was destroyed by flooding in 2019. The petitioner states that around 30 residents…",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:0943-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0943%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-09-25T01:42:08",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 0943/2026: zur andauernden Umsiedlung von Bewohnern von Oriol und zur Untätigkeit der Verwaltung nach dem Sturm Dana 2019 in Spanien",
+        "summary": "Der Petent beklagt die langen Verzögerungen bei der Wiederherstellung des Wohnzentrums Oriol in Orihuela (Spanien), nachdem es 2019 durch Überschwemmungen zerstört worden sei. Etwa 30 Einwohner seien …",
+        "description_full": "<p>Der Petent beklagt die langen Verzögerungen bei der Wiederherstellung des Wohnzentrums Oriol in Orihuela (Spanien), nachdem es 2019 durch Überschwemmungen zerstört worden sei. Etwa 30 Einwohner seien seit mehr als sechs Jahren in Notunterkünften untergebracht, was sich negativ auf ihr Wohlergehen und ihre gesellschaftliche Integration auswirke. Im Januar 2026 seien Aufträge für Sanierungsarbeiten ausgeschrieben worden. Der Petent macht jedoch einen Mangel an Transparenz und das Fehlen eines klaren Zeitplans für die Fertigstellung, die Rückkehr der Bewohner und die Inbetriebnahme der neuen Einrichtung geltend. Außerdem wirft er Fragen bezüglich der möglichen Verwendung von EU-Mitteln auf und macht geltend, dass die Situation möglicherweise nicht mit der Charta der Grundrechte der Europäischen Union vereinbar sei. Der Petent fordert das Europäische Parlament auf, die zuständigen Behörden um Informationen zu ersuchen und die Einhaltung des einschlägigen EU-Rechtsrahmens zu bewerten.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=0943%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 0943/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=0943%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-09-25T01:40:38-06:00",
+    "offline_since": null,
+    "tags": [
+      "Petitioner",
+      "Residents",
+      "Prolonged",
+      "After",
+      "Oriol",
+      "Spain",
+      "Residential",
+      "Complains",
+      "Destroyed",
+      "Restoring"
+    ],
+    "last_checked": "2026-09-25T01:40:38-06:00"
+  },
+  "0941-2026": {
+    "slug": "0941-2026",
+    "first_seen": "2026-09-25T01:40:38-06:00",
+    "signatures_history": [],
+    "title": "Petition 0941/2026: the mass regularization of immigrants by Spain",
+    "started_by": "Daniel Pozo Sánchez (Spanish)",
+    "category": "Immigration",
+    "country": "Spain",
+    "description_full": "<p>The petitioner requests the European Parliament to request a detailed report from the European Commission on the trans‑border implications of Spain’s 2026 extraordinary regularisation of third‑country nationals. The petitioner states that the Spanish Government authorised on 27 January 2026 an urgent Royal Decree to regularise approximately 500,000 irregular migrants who have resided in Spain for at least five months and were present before 31 December 2025, provided they have no criminal record. The petitioner highlights that the regularisation grants a one‑year renewable residence and work permit valid throughout Spain and that the application period is set from early April to 30 June 2026. The petitioner points out that, according to a response from Commissioner Magnus Brunner in April 2026, the European Commission had not received any formal notification or coordinated impact assessment from Spain prior to the measure. The petitioner argues that the unilateral nature of the measure may affect the Schengen Area by increasing irregular migration pressure on external borders and facilitating secondary movements to other Member States. The petitioner denounces that the lack of prior notification may breach the principle of loyal cooperation under Article 4.3 TEU and the governance rules of the Schengen Decision of 5 October 2006. The petitioner claims that the regularisation appears inconsistent with the European Migration and Asylum Pact, which seeks an orderly and balanced migration management, strengthened external borders and effective return mechanisms. The petitioner underscores that previous large‑scale regularisations in Spain (2000, 2001 and 2005) generated short‑term fiscal benefits but also long‑term integration and return challenges. The petitioner points out that security controls, including checks of criminal records and data entry into SIS and EES, may be insufficient, potentially affecting the safety of all Schengen Member States. The petitioner considers that the measure could create incentives for irregular migration and undermine equity between EU citizens, regular migrants and those who follow ordinary procedures. According to the petitioner, the European Parliament debated the issue on 10 February 2026, where several MEPs and the Commissioner for Migration expressed concerns about security and cohesion. The petitioner urges the Committee on Petitions to request from the European Commission a detailed assessment of the measure’s impact on Schengen functioning, Spain’s compliance with loyal cooperation and notification obligations, and its coherence with the Migration and Asylum Pact, and to consider recommendations for future national regularisations.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=0941%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 0941/2026</a></p>",
+    "summary": "The petitioner requests the European Parliament to request a detailed report from the European Commission on the trans‑border implications of Spain’s 2026 extraordinary regularisation of third‑country…",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:0941-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0941%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-09-25T01:42:14",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 0941/2026: zur Massenlegalisierung der Einwanderung durch Spanien",
+        "summary": "Der Petent fordert das Europäische Parlament auf, von der Kommission einen ausführlichen Bericht über die grenzübergreifenden Auswirkungen der außerordentlichen Legalisierung Drittstaatsangehöriger du…",
+        "description_full": "<p>Der Petent fordert das Europäische Parlament auf, von der Kommission einen ausführlichen Bericht über die grenzübergreifenden Auswirkungen der außerordentlichen Legalisierung Drittstaatsangehöriger durch Spanien von 2026 anzufordern. Die spanische Regierung habe am 27. Januar 2026 ein dringendes königliches Dekret genehmigt, womit etwa 500 000 irreguläre Migranten legalisiert wurden, die mindestens fünf Monate in Spanien ansässig waren und bereits vor dem 31. Dezember 2025 dort aufhältig waren, sofern sie keine Einträge im Strafregister hatten. Mit der Legalisierung werde eine ein Jahr lang gültige, verlängerbare Aufenthalts- und Arbeitserlaubnis gewährt, die in ganz Spanien gültig sei. Als Antragszeitraum sei der Zeitraum von Anfang April bis zum 30. Juni 2026 festgelegt worden. Einer Antwort von Kommissionsmitglied Magnus Brunner von April 2026 zufolge habe die Kommission im Vorfeld der Maßnahme keine förmliche Mitteilung oder koordinierte Folgenabschätzung von Spanien erhalten. Der einseitige Charakter der Maßnahme könne insofern Einfluss auf den Schengen-Raum haben, als der irreguläre Migrationsdruck auf die Außengrenzen zunehme und Sekundärbewegungen in andere Mitgliedstaaten erleichtert würden. Dass im Vorfeld keine Mitteilung erfolgt sei, sei möglicherweise ein Verstoß gegen den Grundsatz der loyalen Zusammenarbeit gemäß Artikel 4 Absatz 3 EUV und die Verwaltungsregelungen des Schengen-Beschlusses vom 5. Oktober 2006. Die Legalisierung stehe augenscheinlich nicht im Einklang mit dem Migrations- und Asylpaket der EU, das auf ein ordnungsgemäßes und ausgewogenes Migrationsmanagement, die Stärkung der Außengrenzen und wirksame Rückkehrmechanismen ausgelegt sei. Frühere Massenlegalisierungen in Spanien (2000, 2001 und 2005) hätten kurzfristige steuerliche Vorteile, aber auch langfristige Integrations- und Rückkehrprobleme nach sich gezogen. Die Sicherheitskontrollen, u. a. Prüfungen der Strafregister und Dateneinträge im SIS und im EES, seien möglicherweise unzureichend, was sich auf die Sicherheit aller Schengen-Mitgliedstaaten auswirken könnte. Die Maßnahme könne Anreize für irreguläre Migration setzen und die Gleichheit der Unionsbürgerinnen und -bürger, regulären Migranten und derjenigen, die ordentliche Verfahren befolgen, untergraben. Das Europäische Parlament habe am 10. Februar 2026 über das Thema diskutiert, wobei mehrere Mitglieder und das für Migration zuständige Kommissionsmitglied Besorgnis über Sicherheit und Kohäsion geäußert hätten. Der Petent fordert den Petitionsausschuss nachdrücklich auf, von der Kommission eine eingehende Beurteilung der Auswirkungen der Maßnahme auf die Funktionsweise des Schengen-Raums, die Einhaltung der Verpflichtungen zur loyalen Zusammenarbeit und der Mitteilungspflichten durch Spanien und ihre Übereinstimmung mit dem Migrations- und Asylpaket anzufordern und Empfehlungen für künftige nationale Legalisierungen in Erwägung zu ziehen.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=0941%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 0941/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=0941%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-09-25T01:40:38-06:00",
+    "offline_since": null,
+    "tags": [
+      "Petitioner",
+      "European",
+      "Spain",
+      "Migration",
+      "Regularisation",
+      "Commission",
+      "Schengen",
+      "Measure",
+      "Notification",
+      "Parliament"
+    ],
+    "last_checked": "2026-09-25T01:40:38-06:00"
+  },
+  "1030-2026": {
+    "slug": "1030-2026",
+    "first_seen": "2026-09-25T01:40:38-06:00",
+    "signatures_history": [],
+    "title": "Petition 1030/2026: the transposition of Directive (EU) 2025/1237 as regards the protection status of the wolf (Canis lupus) in Spain",
+    "started_by": "J. G. G. (Spanish)",
+    "category": "Agriculture",
+    "country": "Spain",
+    "description_full": "<p>The petitioner requests the European Parliament to urge the Spanish Government to immediately apply the transposition of Directive (EU) 2025/1237 concerning the protection status of the wolf, to ensure full compliance with Law 1/2025 on the prevention of losses and food waste, and to present a six‑year management plan detailing the current wolf population in Spain. The petitioner states that Directive 92/43/CEE established different protection levels for wolf populations north and south of the Duero River, with the southern population classified as a strictly protected species. The petitioner points out that Spanish transposition of the directive is reflected in Law 42/2007, Royal Decree 139/2011 and the List of Species under Special Protection (LESPRE), which initially maintained the differentiated status. The petitioner argues that in 2021 the Spanish Government unilaterally extended strict protection to the entire wolf population without scientific justification or consultation with regional experts. According to the petitioner, this decision contributed to an increase in wolf numbers and consequently to more frequent attacks on his livestock facilities. The petitioner highlights that on 17 June 2025 the European Parliament adopted Directive (EU) 2025/1237, which amends Directive 92/43/CEE to reflect the successful recovery of the wolf across Europe. The petitioner claims that the Spanish Government has not yet transposed this 2025 amendment into national law, despite the obligations created by Law 1/2025 on the prevention of losses and food waste. The petitioner urges the European Parliament to request that Spain immediately implement the transposition of Directive (EU) 2025/1237 in accordance with the transitional provision of Law 1/2025. The petitioner also urges that Spain ensure uniform application of the wolf protection status, both north and south of the Duero, as required by the amended Directive 92/43/CEE and national regulations.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1030%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1030/2026</a></p>",
+    "summary": "The petitioner requests the European Parliament to urge the Spanish Government to immediately apply the transposition of Directive (EU) 2025/1237 concerning the protection status of the wolf, to ensur…",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:1030-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1030%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-09-25T01:42:20",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 1030/2026: zur Umsetzung der Richtlinie (EU) 2025/1237 in Bezug auf den Schutzstatus des Wolfs (Canis lupus) in Spanien",
+        "summary": "Der Petent ersucht das Europäische Parlament, die spanische Regierung nachdrücklich aufzufordern, die Umsetzung der Richtlinie (EU) 2025/1237 über den Schutzstatus des Wolfs unverzüglich umzusetzen, d…",
+        "description_full": "<p>Der Petent ersucht das Europäische Parlament, die spanische Regierung nachdrücklich aufzufordern, die Umsetzung der Richtlinie (EU) 2025/1237 über den Schutzstatus des Wolfs unverzüglich umzusetzen, die uneingeschränkte Einhaltung des Gesetzes 1/2025 zur Vermeidung von Lebensmittelverlusten und -verschwendung sicherzustellen und einen Sechsjahres-Bewirtschaftungsplan vorzulegen, in dem der aktuelle Wolfsbestand in Spanien aufgeführt ist. Der Petent führt aus, dass in der Richtlinie 92/43/EWG unterschiedliche Schutzstufen für Wolfsbestände nördlich und südlich des Flusses Duero festgelegt worden seien und dabei der südliche Bestand als streng geschützte Art eingestuft worden sei. Er weist darauf hin, dass die spanische Umsetzung der Richtlinie im Gesetz 42/2007, im Königlichen Erlass 139/2011 und in der Liste der besonders geschützten Arten (LESPRE) zum Ausdruck komme, in denen der differenzierte Status zunächst beibehalten worden sei. Der Petent macht geltend, dass die spanische Regierung im Jahr 2021 den strengen Schutz ohne wissenschaftliche Begründung oder Konsultation regionaler Sachverständiger einseitig auf den gesamten Wolfsbestand ausgeweitet habe. Durch diesen Beschluss sei es zu einem Anstieg der Wolfspopulation und folglich zu häufigeren Angriffen auf seine Tierhaltungsbetriebe gekommen. Der Petent weist darauf hin, dass das Europäische Parlament am 17. Juni 2025 die Richtlinie (EU) 2025/1237 zur Änderung der Richtlinie 92/43/EWG angenommen habe, um der erfolgreichen Erholung des Wolfsbestands in Europa Rechnung zu tragen. Er macht geltend, dass die spanische Regierung diese Änderung von 2025 trotz der durch das Gesetz 1/2025 zur Vermeidung von Lebensmittelverlusten und -verschwendung geschaffenen Verpflichtungen noch nicht in nationales Recht umgesetzt habe. Der Petent appelliert an das Europäische Parlament, Spanien aufzufordern, die Umsetzung der Richtlinie (EU) 2025/1237 gemäß den Übergangsbestimmung des Gesetzes 1/2025 unverzüglich durchzuführen. Der Petent fordert ferner Spanien nachdrücklich auf, für eine einheitliche Anwendung des Wolfsschutzstatus sowohl nördlich als auch südlich des Duero zu sorgen, wie in der geänderten Richtlinie 92/43/EWG und den nationalen Vorschriften gefordert.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=1030%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1030/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=1030%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-09-25T01:40:38-06:00",
+    "offline_since": null,
+    "tags": [
+      "Petitioner",
+      "Directive",
+      "Wolf",
+      "Protection",
+      "Transposition",
+      "Spanish",
+      "Status",
+      "Government",
+      "Parliament",
+      "European"
+    ],
+    "last_checked": "2026-09-25T01:40:38-06:00"
+  },
+  "1013-2026": {
+    "slug": "1013-2026",
+    "first_seen": "2026-09-25T01:40:38-06:00",
+    "signatures_history": [],
+    "title": "Petition 1013/2026: the EU-UK Agreement on Gibraltar",
+    "started_by": "F. M. D. (Spanish)",
+    "category": "Security",
+    "country": "Spain",
+    "description_full": "<p>The petitioner requests the urgent assessment of whether the EU‑UK agreement on Gibraltar contains provisions contrary to Union law, including the Treaty on European Union, the Treaty on the Functioning of the European Union, and the principles of equality, non‑discrimination and internal security. The petitioner alleges that the agreement grants Gibraltar an exclusive veto over immigration and residence measures, excluding Spain from any decision‑making on third‑country nationals residing in Gibraltar. The petitioner argues that this provision may breach the Union competence over external borders and undermine the coherence of the Schengen area. The petitioner claims that the agreement allows Gibraltar residents to purchase property in Spain while EU citizens face restrictions or prohibitions on acquiring property in Gibraltar, which could violate the principle of non‑discrimination and the free movement of capital. The petitioner points out that Spanish citizens and the Spanish Parliament have not been adequately informed about the concrete content and legal impact of the agreement, affecting democratic participation and transparency. The petitioner highlights that the agreement provides for the free movement of British military and security personnel across Spanish territory up to the Pyrenees, while Gibraltar remains outside Spanish control over residence and armed forces. The petitioner considers that this arrangement may pose a disproportionate risk to Spain’s national security and conflict with the EU principle of internal security and the right of Member States to ensure territorial integrity. The petitioner argues that the agreement could undermine the equality of Member States in managing external borders. The petitioner claims that it may weaken the coherence of the single market and customs union by allowing a high‑tax, opaque financial territory to escape effective control measures. The petitioner states that the arrangement could create risks for legal certainty and equal competition in the fight against tax fraud and money laundering. The petitioner urges the Parliament to commission a legal impact study on the compatibility of the agreement with Union law. The petitioner urges the Parliament to formulate a recommendation to the Council and the Commission to revise any clauses found to be contrary to the Treaties and the principles of equality, non‑discrimination and internal security. The petitioner urges the Parliament to ensure that public and accessible information is provided to citizens affected by these measures, especially residents of the Campo de Gibraltar.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1013%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1013/2026</a></p>",
+    "summary": "The petitioner requests the urgent assessment of whether the EU‑UK agreement on Gibraltar contains provisions contrary to Union law, including the Treaty on European Union, the Treaty on the Functioni…",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:1013-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1013%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-09-25T01:42:26",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 1013/2026: zum Abkommen zwischen der EU und dem Vereinigten Königreich über Gibraltar",
+        "summary": "Der Petent ersucht um eine dringende Prüfung, ob das Abkommen zwischen der EU und dem Vereinigten Königreich über Gibraltar Bestimmungen enthält, die gegen das Unionsrecht, einschließlich des Vertrags…",
+        "description_full": "<p>Der Petent ersucht um eine dringende Prüfung, ob das Abkommen zwischen der EU und dem Vereinigten Königreich über Gibraltar Bestimmungen enthält, die gegen das Unionsrecht, einschließlich des Vertrags über die Europäische Union, des Vertrags über die Arbeitsweise der Europäischen Union und der Grundsätze der Gleichheit, der Nichtdiskriminierung und der inneren Sicherheit, verstoßen. Er macht geltend, dass Gibraltar in dem Abkommen ein ausschließliches Vetorecht in Bezug auf Einwanderungs- und Aufenthaltsmaßnahmen eingeräumt werde, wodurch Spanien von jeglicher Entscheidung über in Gibraltar ansässige Drittstaatsangehörige ausgeschlossen werde. Dem Petenten zufolge könnte durch diese Bestimmung die Zuständigkeit der Union für die Außengrenzen verletzt und die Kohärenz des Schengen-Raums untergraben werden. Mit dem Abkommen werde es in Gibraltar ansässigen Personen ermöglicht, Immobilien in Spanien zu erwerben, während für die EU-Bürgerinnen und -Bürger Einschränkungen oder Verbote beim Erwerb von Immobilien in Gibraltar gälten, was gegen den Grundsatz der Nichtdiskriminierung und den freien Kapitalverkehr verstoßen könnte. Der Petent weist darauf hin, dass die spanischen Bürgerinnen und Bürger und das spanische Parlament nicht angemessen über den konkreten Inhalt und die rechtlichen Auswirkungen des Abkommens informiert worden seien, wodurch die demokratische Teilhabe und die Transparenz beeinträchtigt würden. In dem Abkommen sei die Freizügigkeit für britisches Militär- und Sicherheitspersonal auf spanischem Hoheitsgebiet bis zu den Pyrenäen vorgesehen, während Gibraltar hinsichtlich der Aufenthaltsrechte und der Streitkräfte außerhalb der spanischen Kontrolle bleibe. Der Petent ist der Ansicht, dass diese Regelung ein unverhältnismäßiges Risiko für die nationale Sicherheit Spaniens darstellen und im Widerspruch zum EU-Grundsatz der inneren Sicherheit sowie zum Recht der Mitgliedstaaten auf Wahrung ihrer territorialen Integrität stehen könnte. Er macht geltend, dass durch das Abkommen die Gleichheit der Mitgliedstaaten bei der Verwaltung der Außengrenzen untergraben werden könnte. Dies könnte die Kohärenz des Binnenmarkts und der Zollunion schwächen, da sich ein hochbesteuertes, undurchsichtiges Finanzgebiet wirksamen Kontrollmaßnahmen entziehen könne. Der Petent führt aus, dass die Regelung Risiken für die Rechtssicherheit und den gleichberechtigten Wettbewerb bei der Bekämpfung von Steuerbetrug und Geldwäsche mit sich bringen könnte. Er fordert das Parlament auf, eine rechtliche Folgenabschätzung zur Vereinbarkeit des Abkommens mit dem Unionsrecht in Auftrag zu geben. Er fordert das Parlament ferner auf, eine Empfehlung an den Rat und die Kommission abzugeben, um alle Bestimmungen zu überarbeiten, die für unvereinbar mit den Verträgen und den Grundsätzen der Gleichheit, der Nichtdiskriminierung und der inneren Sicherheit befunden wurden. Er appelliert an das Parlament, dafür zu sorgen, dass den von diesen Maßnahmen betroffenen Bürgerinnen und Bürgern, insbesondere den Bewohnerinnen und Bewohnern des Campo de Gibraltar, öffentliche und zugängliche Informationen zur Verfügung gestellt werden.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=1013%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1013/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=1013%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-09-25T01:40:38-06:00",
+    "offline_since": null,
+    "tags": [
+      "Petitioner",
+      "Agreement",
+      "Gibraltar",
+      "Union",
+      "Security",
+      "Parliament",
+      "Spanish",
+      "Treaty",
+      "Discrimination",
+      "Citizens"
+    ],
+    "last_checked": "2026-09-25T01:40:38-06:00"
+  },
+  "0972-2026": {
+    "slug": "0972-2026",
+    "first_seen": "2026-09-25T01:40:38-06:00",
+    "signatures_history": [],
+    "title": "Petition 0972/2026: petitioner’s disability assessment and victims’ rights in Slovakia",
+    "started_by": "L. S. (Slovak)",
+    "category": "Disability Issues",
+    "country": "Slovakia",
+    "description_full": "<p>The petitioner alleges that the authorities of the Slovak Republic have failed to adequately assess the health status and social rights of a person affected by long-term health. The petitioner claims that the competent authorities, in particular the Social Insurance Agency, do not apply a holistic approach when assessing disability, as the evaluation allegedly focuses only on specific periods and does not take into account the complete medical history. According to the petitioner, this approach has resulted in discriminatory treatment and an incorrect determination of the degree of reduction in work capacity. The petitioner also alleges that court proceedings and processing of applications take an unreasonably long time, endangering the basic life needs of EU citizens. The petitioner requests that the European Parliament examine the procedures of the Social Insurance Agency of the Slovak Republic when assessing disability in individuals with combined physical and mental disabilities. The petitioner also asks the European Parliament to verify the compliance of Slovak legislation and practice with the European Strategy for the Area of Disability Rights and the EU Charter of Fundamental Rights. By doing so, the petitioner hopes to bring attention to the systemic failures and ensure that the rights of individuals with disabilities and victims of crime are protected in Slovakia.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=0972%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 0972/2026</a></p>",
+    "summary": "The petitioner alleges that the authorities of the Slovak Republic have failed to adequately assess the health status and social rights of a person affected by long-term health. The petitioner claims …",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:0972-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=0972%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-09-25T01:42:33",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 0972/2026: zur Bewertung ihrer Behinderung und zu den Rechten von Opfern in der Slowakei",
+        "summary": "Die Petentin führt an, dass die Behörden der Slowakischen Republik den Gesundheitszustand und die sozialen Rechte einer Person, die unter langfristigen gesundheitlichen Problemen leiden würde, nicht a…",
+        "description_full": "<p>Die Petentin führt an, dass die Behörden der Slowakischen Republik den Gesundheitszustand und die sozialen Rechte einer Person, die unter langfristigen gesundheitlichen Problemen leiden würde, nicht angemessen bewertet hätten. Sie macht geltend, dass die zuständigen Behörden, insbesondere die Sozialversicherungsanstalt, bei der Bewertung von Behinderungen keinen ganzheitlichen Ansatz anwenden würden, da bei der Bewertung nur bestimmte Zeiträume berücksichtigt würden und die vollständige Anamnese außer Acht gelassen würde. Der Petentin zufolge bewirke dieser Ansatz, dass Menschen diskriminierend behandelt würden und der Grad der Einschränkung der Arbeitsfähigkeit nicht korrekt bestimmt werde. Sie macht ferner geltend, dass Gerichtsverfahren und die Bearbeitung von Anträgen unangemessen lange dauern würden, wodurch die grundlegenden Lebensbedürfnisse von EU-Bürgerinnen und -Bürgern gefährdet würden. Die Petentin fordert das Europäische Parlament auf, die Verfahren der Sozialversicherungsanstalt der Slowakischen Republik zu prüfen, die angewendet werden, um Behinderungen von Personen, die sowohl körperlich als auch geistig beeinträchtigt sind, zu bewerten. Sie fordert das Europäische Parlament ferner auf, zu prüfen, ob mit den slowakischen Rechtsvorschriften und Gepflogenheiten gegen die europäische Strategie im Bereich der Rechte von Menschen mit Behinderungen und die Charta der Grundrechte der Europäischen Union verstoßen wird. So möchte die Petentin auf die systemischen Versäumnisse aufmerksam machen und dafür sorgen, dass die Rechte von Menschen mit Behinderungen und Opfern von Straftaten in der Slowakei geschützt werden.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=0972%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 0972/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=0972%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-09-25T01:40:38-06:00",
+    "offline_since": null,
+    "tags": [
+      "Petitioner",
+      "Rights",
+      "Disability",
+      "Health",
+      "Slovak",
+      "Social",
+      "Authorities",
+      "European",
+      "Republic",
+      "Alleges"
+    ],
+    "last_checked": "2026-09-25T01:40:38-06:00"
   }
 }
