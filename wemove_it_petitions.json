@@ -31,7 +31,7 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-25T13:30:32-06:00",
+    "generated_at": "2026-09-25T14:08:53-06:00",
     "petition_count": 211,
     "available": 259,
     "unbrauchbare": {
@@ -86,7 +86,7 @@
     },
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-09-25T13:30:32-06:00",
+      "stand": "2026-09-25T14:08:52-06:00",
       "gefunden": 259,
       "im_bestand": 211,
       "unbrauchbar": 48,
@@ -101,7 +101,7 @@
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-09-25T13:30:32-06:00",
+        "zeit": "2026-09-25T14:08:52-06:00",
         "gesamt": 211,
         "online": 206,
         "offline": 5,
@@ -118,7 +118,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-25T13:30:32-06:00",
+      "zeit": "2026-09-25T14:08:52-06:00",
       "gesamt": 211,
       "online": 206,
       "offline": 5,
@@ -131,7 +131,7 @@
       "juengstes_start": "2026-09-01",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-09-25T13:30:32-06:00",
+    "verlauf_felder_ab": "2026-09-25T14:08:52-06:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 206
@@ -3728,7 +3728,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-04-GOTV-message-testing-get-stuff-done-future-frame",
     "status": "online",
-    "last_seen": "2026-09-22T13:17:50-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "Mondo",
@@ -3742,7 +3742,7 @@
       "Polski",
       "Meritiamo"
     ],
-    "last_checked": "2026-09-22T13:17:50-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-04-recognise-Palestine-petition-IT": {
     "slug": "2024-04-recognise-Palestine-petition-IT",
@@ -3759,6 +3759,10 @@
       {
         "checked_at": "2026-09-22T13:17:50-06:00",
         "count": 109520
+      },
+      {
+        "checked_at": "2026-09-25T14:05:34-06:00",
+        "count": 109521
       }
     ],
     "title": "Diamo voce e riconosciamo il popolo palestinese",
@@ -3769,12 +3773,12 @@
     "start_date": "2024-04-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 109520,
+    "signatures": 109521,
     "goal": 150000,
     "lang": "it",
     "campaign_id": "wemove:2024-04-recognise-Palestine-petition",
     "status": "online",
-    "last_seen": "2026-09-22T13:17:50-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "Voce",
@@ -3788,7 +3792,7 @@
       "Riconosciamo",
       "Europea"
     ],
-    "last_checked": "2026-09-22T13:17:50-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-05-GOTV-Use-You-Power-postcards-IT": {
     "slug": "2024-05-GOTV-Use-You-Power-postcards-IT",
@@ -3811,7 +3815,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-05-GOTV-Use-You-Power-postcards",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "Voto",
@@ -3825,7 +3829,7 @@
       "Nederlands",
       "Ricordare"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-05-national-laws-ecocide-youmove-petition-IT": {
     "slug": "2024-05-national-laws-ecocide-youmove-petition-IT",
@@ -3842,6 +3846,10 @@
       {
         "checked_at": "2026-09-22T13:55:38-06:00",
         "count": 88881
+      },
+      {
+        "checked_at": "2026-09-25T14:05:34-06:00",
+        "count": 88883
       }
     ],
     "title": "L’ecocidio deve essere un reato!",
@@ -3852,12 +3860,12 @@
     "start_date": "2024-05-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 88881,
+    "signatures": 88883,
     "goal": 100000,
     "lang": "it",
     "campaign_id": "wemove:2024-05-national-laws-ecocide-youmove-petition",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "Ecocidio",
@@ -3871,7 +3879,7 @@
       "Français",
       "Hrvatski"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-06-03-Triple-Your-Vote-petition-IT": {
     "slug": "2024-06-03-Triple-Your-Vote-petition-IT",
@@ -3894,7 +3902,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-06-03-Triple-Your-Vote-petition",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "Potere",
@@ -3908,7 +3916,7 @@
       "Ricordare",
       "Aggiungi"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-06-Renew-dont-normalise-hate-petition-IT": {
     "slug": "2024-06-Renew-dont-normalise-hate-petition-IT",
@@ -3936,7 +3944,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-06-Renew-dont-normalise-hate-petition",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "Renew",
@@ -3950,7 +3958,7 @@
       "Nederlands",
       "Olandese"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-07-big-meat-petition-IT": {
     "slug": "2024-07-big-meat-petition-IT",
@@ -3963,6 +3971,10 @@
       {
         "checked_at": "2026-09-18T15:38:42-06:00",
         "count": 112517
+      },
+      {
+        "checked_at": "2026-09-25T14:05:34-06:00",
+        "count": 112518
       }
     ],
     "title": "Difendiamo la nostra salute, lottiamo contro l'industria della carne",
@@ -3973,12 +3985,12 @@
     "start_date": "2024-07-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 112517,
+    "signatures": 112518,
     "goal": 150000,
     "lang": "it",
     "campaign_id": "wemove:2024-07-big-meat-petition",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "Dell",
@@ -3992,7 +4004,7 @@
       "Salute",
       "Dalla"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-07-lidl-chicken-scandal-petition-IT": {
     "slug": "2024-07-lidl-chicken-scandal-petition-IT",
@@ -4019,7 +4031,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-07-lidl-chicken-scandal-petition",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "Polli",
@@ -4033,7 +4045,7 @@
       "Sofferenze",
       "Eliminare"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-07-pesticide-free-petition-IT": {
     "slug": "2024-07-pesticide-free-petition-IT",
@@ -4061,7 +4073,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-07-pesticide-free-petition",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "Pesticidi",
@@ -4075,7 +4087,7 @@
       "Nederlands",
       "Petizione"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-08-Fossil-Fuel-Firewall-petition-IT": {
     "slug": "2024-08-Fossil-Fuel-Firewall-petition-IT",
@@ -4098,7 +4110,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-08-Fossil-Fuel-Firewall-petition",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "Industria",
@@ -4112,7 +4124,7 @@
       "Incarichi",
       "Politiche"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-08-homes-for-people-not-for-profit-petition-IT": {
     "slug": "2024-08-homes-for-people-not-for-profit-petition-IT",
@@ -4136,7 +4148,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-08-homes-for-people-not-for-profit-petition",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "Abitativa",
@@ -4150,7 +4162,7 @@
       "Tutti",
       "Comunità"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-08-language-switch-pages-petition-IT": {
     "slug": "2024-08-language-switch-pages-petition-IT",
@@ -4181,7 +4193,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-08-language-switch-pages-petition",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "Italiano",
@@ -4195,7 +4207,7 @@
       "Nederlands",
       "Français"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-09-ban-octopus-farming-in-the-eu-petition-IT": {
     "slug": "2024-09-ban-octopus-farming-in-the-eu-petition-IT",
@@ -4212,6 +4224,10 @@
       {
         "checked_at": "2026-09-22T13:55:38-06:00",
         "count": 133028
+      },
+      {
+        "checked_at": "2026-09-25T14:05:34-06:00",
+        "count": 133037
       }
     ],
     "title": "Vietare l'allevamento di polpi nell'UE!",
@@ -4221,12 +4237,12 @@
     "start_date": "2024-09-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 133028,
+    "signatures": 133037,
     "goal": 150000,
     "lang": "it",
     "campaign_id": "wemove:2024-09-ban-octopus-farming-in-the-eu-petition",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "Polpi",
@@ -4240,7 +4256,7 @@
       "Delle",
       "Hanno"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-09-digital-futures-petition-IT": {
     "slug": "2024-09-digital-futures-petition-IT",
@@ -4264,7 +4280,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-09-digital-futures-petition",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "PERSONE",
@@ -4278,7 +4294,7 @@
       "Digitale",
       "Priorità"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-09-free-school-meals-petition-IT": {
     "slug": "2024-09-free-school-meals-petition-IT",
@@ -4302,7 +4318,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-09-free-school-meals-petition",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "Bambini",
@@ -4316,7 +4332,7 @@
       "Bambino",
       "Dell"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-09-pour-plan-national-contre-le-viol-petition-IT": {
     "slug": "2024-09-pour-plan-national-contre-le-viol-petition-IT",
@@ -4348,7 +4364,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-09-pour-plan-national-contre-le-viol-petition",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "Stupro",
@@ -4362,7 +4378,7 @@
       "Petizione",
       "Sostenere"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-09-seasonal-farm-workers-petition-IT": {
     "slug": "2024-09-seasonal-farm-workers-petition-IT",
@@ -4394,7 +4410,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-09-seasonal-farm-workers-petition",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "Lavoratori",
@@ -4408,7 +4424,7 @@
       "Satnam",
       "Basta"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-1-federalismo-europeo-IT": {
     "slug": "2024-1-federalismo-europeo-IT",
@@ -4431,7 +4447,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-1-federalismo-europeo",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "Petizione",
@@ -4445,7 +4461,7 @@
       "Importante",
       "Inititator"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-1-vollgeld-fur-alle-IT": {
     "slug": "2024-1-vollgeld-fur-alle-IT",
@@ -4468,7 +4484,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-1-vollgeld-fur-alle",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "Denaro",
@@ -4482,7 +4498,7 @@
       "Solo",
       "COMMERCIALI"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-10-are-you-sick-and-tired-of-changing-the-clock-twice-a-year-IT": {
     "slug": "2024-10-are-you-sick-and-tired-of-changing-the-clock-twice-a-year-IT",
@@ -4499,6 +4515,10 @@
       {
         "checked_at": "2026-09-22T13:55:38-06:00",
         "count": 6726
+      },
+      {
+        "checked_at": "2026-09-25T14:05:34-06:00",
+        "count": 6743
       }
     ],
     "title": "SEI STANCO DI CAMBIARE L'OROLOGIO DUE VOLTE L'ANNO?",
@@ -4509,12 +4529,12 @@
     "start_date": "2024-10-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 6726,
+    "signatures": 6743,
     "goal": 10000,
     "lang": "it",
     "campaign_id": "wemove:2024-10-are-you-sick-and-tired-of-changing-the-clock-twice-a-year",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "Suomalainen",
@@ -4528,7 +4548,7 @@
       "Russian",
       "Svenska"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-10-no-toxic-mineral-oils-in-our-food-petition-IT": {
     "slug": "2024-10-no-toxic-mineral-oils-in-our-food-petition-IT",
@@ -4560,7 +4580,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-10-no-toxic-mineral-oils-in-our-food-petition",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "Tossici",
@@ -4574,7 +4594,7 @@
       "Questi",
       "Salute"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-10-paul-watson-france-asylum-petition-IT": {
     "slug": "2024-10-paul-watson-france-asylum-petition-IT",
@@ -4597,7 +4617,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-10-paul-watson-france-asylum-petition",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "Watson",
@@ -4611,7 +4631,7 @@
       "Francia",
       "Oceano"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-10-per-il-bene-dell-italia-eliminiamo-il-governo-di-centrodestra-fr-IT": {
     "slug": "2024-10-per-il-bene-dell-italia-eliminiamo-il-governo-di-centrodestra-fr-IT",
@@ -4652,7 +4672,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-10-seals-ban-petition",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "Foche",
@@ -4666,7 +4686,7 @@
       "Foca",
       "Loro"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-10-vietare-antifurti-che-spaccano-i-timpani-IT": {
     "slug": "2024-10-vietare-antifurti-che-spaccano-i-timpani-IT",
@@ -4689,7 +4709,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-10-vietare-antifurti-che-spaccano-i-timpani",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "Antifurti",
@@ -4703,7 +4723,7 @@
       "Impedire",
       "Gestita"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-10-youmove-wildlife-crossings-petition-IT": {
     "slug": "2024-10-youmove-wildlife-crossings-petition-IT",
@@ -4730,7 +4750,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-10-youmove-wildlife-crossings-petition",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "Animali",
@@ -4744,7 +4764,7 @@
       "Selvatica",
       "Questo"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-11--IT": {
     "slug": "2024-11--IT",
@@ -4777,7 +4797,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-11-marcin-test-20241120",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "Test",
@@ -4790,7 +4810,7 @@
       "Questa",
       "Name"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-12-Amazon-workers-petition-IT": {
     "slug": "2024-12-Amazon-workers-petition-IT",
@@ -4814,7 +4834,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-12-Amazon-workers-petition",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "Amazon",
@@ -4828,7 +4848,7 @@
       "Loro",
       "Difendiamo"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-12-Soumahoro-antiracism-petition-IT": {
     "slug": "2024-12-Soumahoro-antiracism-petition-IT",
@@ -4852,7 +4872,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-12-Soumahoro-antiracism-petition",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "Parlamento",
@@ -4866,7 +4886,7 @@
       "Odio",
       "Maboula"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-2-free-doctor-ahmed-muhanna-and-the-awda-medical-staff-petition-IT": {
     "slug": "2024-2-free-doctor-ahmed-muhanna-and-the-awda-medical-staff-petition-IT",
@@ -4889,7 +4909,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-2-free-doctor-ahmed-muhanna-and-the-awda-medical-staff-petition",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "Muhanna",
@@ -4903,7 +4923,7 @@
       "Dottor",
       "Alla"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-4-orto-comunale-IT": {
     "slug": "2024-4-orto-comunale-IT",
@@ -4925,7 +4945,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-4-orto-comunale",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "Comunale",
@@ -4939,7 +4959,7 @@
       "Piante",
       "Buono"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-4-palestina-indipendente-IT": {
     "slug": "2024-4-palestina-indipendente-IT",
@@ -4961,7 +4981,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-4-palestina-indipendente",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "Petizione",
@@ -4974,7 +4994,7 @@
       "Questa",
       "Name"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-4-proteggi-la-biodiversita-IT": {
     "slug": "2024-4-proteggi-la-biodiversita-IT",
@@ -5007,7 +5027,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-4-sfruttiamo-macchine-e-robot-per-dare-reddito-universale-ed-estin",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "Reddito",
@@ -5021,7 +5041,7 @@
       "Sfruttiamo",
       "Macchine"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-4-stop-al-razzismo-IT": {
     "slug": "2024-4-stop-al-razzismo-IT",
@@ -5041,7 +5061,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-4-stop-al-razzismo",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "Razzismo",
@@ -5055,7 +5075,7 @@
       "Superare",
       "Gestita"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00",
+    "last_checked": "2026-09-25T14:05:34-06:00",
     "signatures": 0,
     "goal": 1000
   },
@@ -5079,7 +5099,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-4-tamburi-di-guerra",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "Petizione",
@@ -5093,7 +5113,7 @@
       "RINAMGA",
       "SALVARE"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-6-because-our-planet-is-blue-petition-IT": {
     "slug": "2024-6-because-our-planet-is-blue-petition-IT",
@@ -5116,7 +5136,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-6-because-our-planet-is-blue-petition",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "Delle",
@@ -5130,7 +5150,7 @@
       "Collisioni",
       "Perché"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-6-divertiamiamoci-IT": {
     "slug": "2024-6-divertiamiamoci-IT",
@@ -5153,7 +5173,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-6-divertiamiamoci",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "Petizione",
@@ -5167,7 +5187,7 @@
       "Dobbiamo",
       "Sobrietà"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-6-piu-acqua-al-fiume-mincio-IT": {
     "slug": "2024-6-piu-acqua-al-fiume-mincio-IT",
@@ -5190,7 +5210,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-6-piu-acqua-al-fiume-mincio",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "MINCIO",
@@ -5204,7 +5224,7 @@
       "Video",
       "Parlamento"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-6-salario-e-penzione-minima-garantita-di-1000-euro-in-tutta-europa-IT": {
     "slug": "2024-6-salario-e-penzione-minima-garantita-di-1000-euro-in-tutta-europa-IT",
@@ -5226,7 +5246,7 @@
     "lang": "it",
     "campaign_id": "wemove:2024-6-salario-e-penzione-minima-garantita-di-1000-euro-in-tutta-europa",
     "status": "online",
-    "last_seen": "2026-09-22T13:55:38-06:00",
+    "last_seen": "2026-09-25T14:05:34-06:00",
     "offline_since": null,
     "tags": [
       "GARANTITA",
@@ -5240,7 +5260,7 @@
       "Inititator",
       "Europei"
     ],
-    "last_checked": "2026-09-22T13:55:38-06:00"
+    "last_checked": "2026-09-25T14:05:34-06:00"
   },
   "2024-7-tassiamo-i-ricchi-per-un-mondo-piu-equo-e-solidale-IT": {
     "slug": "2024-7-tassiamo-i-ricchi-per-un-mondo-piu-equo-e-solidale-IT",
