@@ -31,7 +31,7 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-25T16:09:24-06:00",
+    "generated_at": "2026-09-25T16:45:02-06:00",
     "petition_count": 211,
     "available": 259,
     "unbrauchbare": {
@@ -86,7 +86,7 @@
     },
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-09-25T16:09:24-06:00",
+      "stand": "2026-09-25T16:45:01-06:00",
       "gefunden": 259,
       "im_bestand": 211,
       "unbrauchbar": 48,
@@ -101,7 +101,7 @@
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-09-25T16:09:24-06:00",
+        "zeit": "2026-09-25T16:45:01-06:00",
         "gesamt": 211,
         "online": 206,
         "offline": 5,
@@ -118,7 +118,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-25T16:09:24-06:00",
+      "zeit": "2026-09-25T16:45:01-06:00",
       "gesamt": 211,
       "online": 206,
       "offline": 5,
@@ -131,7 +131,7 @@
       "juengstes_start": "2026-09-01",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-09-25T16:09:24-06:00",
+    "verlauf_felder_ab": "2026-09-25T16:45:01-06:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 206
@@ -8431,6 +8431,10 @@
       {
         "checked_at": "2026-09-22T15:08:35-06:00",
         "count": 55800
+      },
+      {
+        "checked_at": "2026-09-25T16:44:15-06:00",
+        "count": 55804
       }
     ],
     "title": "Al sicuro sul lavoro anche nel caldo estremo",
@@ -8441,12 +8445,12 @@
     "start_date": "2026-07-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 55800,
+    "signatures": 55804,
     "goal": 75000,
     "lang": "it",
     "campaign_id": "wemove:2026-07-maximum-working-temperature-petition",
     "status": "online",
-    "last_seen": "2026-09-22T15:08:35-06:00",
+    "last_seen": "2026-09-25T16:44:15-06:00",
     "offline_since": null,
     "tags": [
       "Lavoro",
@@ -8460,7 +8464,7 @@
       "Europea",
       "Membri"
     ],
-    "last_checked": "2026-09-22T15:08:35-06:00"
+    "last_checked": "2026-09-25T16:44:15-06:00"
   },
   "2026-1-ma-sante-n-est-pas-a-vendre-my-health-is-not-for-sale-stop-ue-me-IT": {
     "slug": "2026-1-ma-sante-n-est-pas-a-vendre-my-health-is-not-for-sale-stop-ue-me-IT",
@@ -8482,7 +8486,7 @@
     "lang": "it",
     "campaign_id": "wemove:2026-1-ma-sante-n-est-pas-a-vendre-my-health-is-not-for-sale-stop-ue-me",
     "status": "online",
-    "last_seen": "2026-09-22T15:08:35-06:00",
+    "last_seen": "2026-09-25T16:44:15-06:00",
     "offline_since": null,
     "tags": [
       "Salute",
@@ -8496,7 +8500,7 @@
       "Prodotti",
       "Sanitari"
     ],
-    "last_checked": "2026-09-22T15:08:35-06:00"
+    "last_checked": "2026-09-25T16:44:15-06:00"
   },
   "2026-2-flor-bertotti-2026-european-tour-audience-initiative-IT": {
     "slug": "2026-2-flor-bertotti-2026-european-tour-audience-initiative-IT",
@@ -8513,6 +8517,10 @@
       {
         "checked_at": "2026-09-22T15:08:35-06:00",
         "count": 251
+      },
+      {
+        "checked_at": "2026-09-25T16:44:15-06:00",
+        "count": 254
       }
     ],
     "title": "FLOR BERTOTTI 2026 – European Tour Audience Demand 🇮🇹",
@@ -8522,12 +8530,12 @@
     "summary": "FLOR BERTOTTI 2026 – European Tour Audience Demand 🇮🇹 Al pubblico in Italia interessato a dichiarare ufficialmente il proprio interesse per possibili esibizioni live di Flor Bertotti. Questa petizione…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 251,
+    "signatures": 254,
     "goal": 1000,
     "lang": "it",
     "campaign_id": "wemove:2026-2-flor-bertotti-2026-european-tour-audience-initiative",
     "status": "online",
-    "last_seen": "2026-09-22T15:08:35-06:00",
+    "last_seen": "2026-09-25T16:44:15-06:00",
     "offline_since": null,
     "tags": [
       "BERTOTTI",
@@ -8541,7 +8549,7 @@
       "Esibizioni",
       "Petizione"
     ],
-    "last_checked": "2026-09-22T15:08:35-06:00"
+    "last_checked": "2026-09-25T16:44:15-06:00"
   },
   "2026-2-no-alle-armi-si-alla-pace-IT": {
     "slug": "2026-2-no-alle-armi-si-alla-pace-IT",
@@ -8564,7 +8572,7 @@
     "lang": "it",
     "campaign_id": "wemove:2026-2-no-alle-armi-si-alla-pace",
     "status": "online",
-    "last_seen": "2026-09-22T15:08:35-06:00",
+    "last_seen": "2026-09-25T16:44:15-06:00",
     "offline_since": null,
     "tags": [
       "Europeo",
@@ -8578,7 +8586,7 @@
       "Petizione",
       "Governi"
     ],
-    "last_checked": "2026-09-22T15:08:35-06:00"
+    "last_checked": "2026-09-25T16:44:15-06:00"
   },
   "democratization-of-europe-IT": {
     "slug": "democratization-of-europe-IT",
@@ -8609,7 +8617,7 @@
     "lang": "it",
     "campaign_id": "wemove:democratization-of-europe",
     "status": "online",
-    "last_seen": "2026-09-22T15:08:35-06:00",
+    "last_seen": "2026-09-25T16:44:15-06:00",
     "offline_since": null,
     "tags": [
       "Europei",
@@ -8623,7 +8631,7 @@
       "Manifesto",
       "Movimenti"
     ],
-    "last_checked": "2026-09-22T15:08:35-06:00"
+    "last_checked": "2026-09-25T16:44:15-06:00"
   },
   "developers-testing-campaign-petition-IT": {
     "slug": "developers-testing-campaign-petition-IT",
@@ -8640,6 +8648,10 @@
       {
         "checked_at": "2026-09-22T15:08:35-06:00",
         "count": 2527
+      },
+      {
+        "checked_at": "2026-09-25T16:44:15-06:00",
+        "count": 2544
       }
     ],
     "title": "Europa, ferma la violenza di genere!",
@@ -8649,12 +8661,12 @@
     "summary": "Italiano English English English English English English English English English English English English Français Deutsch Deutsch Español Polski Europa, ferma la violenza di genere! Alla Commissione e…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 2527,
+    "signatures": 2544,
     "goal": 5000,
     "lang": "it",
     "campaign_id": "wemove:developers-testing-campaign-petition",
     "status": "online",
-    "last_seen": "2026-09-22T15:08:35-06:00",
+    "last_seen": "2026-09-25T16:44:15-06:00",
     "offline_since": null,
     "tags": [
       "English",
@@ -8668,7 +8680,7 @@
       "Commissione",
       "Chiediamo"
     ],
-    "last_checked": "2026-09-22T15:08:35-06:00"
+    "last_checked": "2026-09-25T16:44:15-06:00"
   },
   "2025-12-omnibus-food-petition-it": {
     "slug": "2025-12-omnibus-food-petition-it",
@@ -8685,6 +8697,10 @@
       {
         "checked_at": "2026-09-22T15:08:35-06:00",
         "count": 154268
+      },
+      {
+        "checked_at": "2026-09-25T16:44:15-06:00",
+        "count": 154328
       }
     ],
     "title": "Proteggiamo il nostro cibo dai pesticidi tossici",
@@ -8695,12 +8711,12 @@
     "start_date": "2025-12-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 154268,
+    "signatures": 154328,
     "goal": 200000,
     "lang": "it",
     "campaign_id": "wemove:2025-12-omnibus-food-petition",
     "status": "online",
-    "last_seen": "2026-09-22T15:08:35-06:00",
+    "last_seen": "2026-09-25T16:44:15-06:00",
     "offline_since": null,
     "tags": [
       "Pesticidi",
@@ -8714,7 +8730,7 @@
       "Bayer-Monsanto",
       "Commissione"
     ],
-    "last_checked": "2026-09-22T15:08:35-06:00"
+    "last_checked": "2026-09-25T16:44:15-06:00"
   },
   "2026-09-Big-Food-petition-IT": {
     "slug": "2026-09-Big-Food-petition-IT",
@@ -8727,6 +8743,10 @@
       {
         "checked_at": "2026-09-22T15:08:35-06:00",
         "count": 55208
+      },
+      {
+        "checked_at": "2026-09-25T16:44:15-06:00",
+        "count": 55480
       }
     ],
     "title": "I colossi del cibo ci stanno facendo ammalare - serve una tassa europea sullo zucchero!",
@@ -8737,12 +8757,12 @@
     "start_date": "2026-09-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 55208,
+    "signatures": 55480,
     "goal": 75000,
     "lang": "it",
     "campaign_id": "wemove:2026-09-Big-Food-petition",
     "status": "online",
-    "last_seen": "2026-09-22T15:08:35-06:00",
+    "last_seen": "2026-09-25T16:44:15-06:00",
     "offline_since": null,
     "tags": [
       "Zucchero",
@@ -8756,7 +8776,7 @@
       "Facendo",
       "Nostri"
     ],
-    "last_checked": "2026-09-22T15:08:35-06:00"
+    "last_checked": "2026-09-25T16:44:15-06:00"
   },
   "2026-09-toxic-coffee-petition-IT": {
     "slug": "2026-09-toxic-coffee-petition-IT",
@@ -8769,6 +8789,10 @@
       {
         "checked_at": "2026-09-22T15:08:35-06:00",
         "count": 46682
+      },
+      {
+        "checked_at": "2026-09-25T16:44:15-06:00",
+        "count": 46880
       }
     ],
     "title": "Basta veleni nel nostro caffè!",
@@ -8779,12 +8803,12 @@
     "start_date": "2026-09-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 46682,
+    "signatures": 46880,
     "goal": 50000,
     "lang": "it",
     "campaign_id": "wemove:2026-09-toxic-coffee-petition",
     "status": "online",
-    "last_seen": "2026-09-22T15:08:35-06:00",
+    "last_seen": "2026-09-25T16:44:15-06:00",
     "offline_since": null,
     "tags": [
       "Caffè",
@@ -8798,6 +8822,6 @@
       "Residui",
       "Basta"
     ],
-    "last_checked": "2026-09-22T15:08:35-06:00"
+    "last_checked": "2026-09-25T16:44:15-06:00"
   }
 }
