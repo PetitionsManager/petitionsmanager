@@ -31,7 +31,7 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-25T16:48:10-06:00",
+    "generated_at": "2026-09-28T19:45:58-06:00",
     "petition_count": 181,
     "available": 228,
     "unbrauchbare": {
@@ -85,7 +85,7 @@
     },
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-09-25T16:48:09-06:00",
+      "stand": "2026-09-28T19:45:58-06:00",
       "gefunden": 228,
       "im_bestand": 181,
       "unbrauchbar": 47,
@@ -99,70 +99,6 @@
       "bestand_ausserhalb": 0
     },
     "lauf_verlauf": [
-      {
-        "zeit": "2026-09-24T22:25:51-06:00",
-        "gesamt": 181,
-        "online": 181,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 169,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-24T23:02:02-06:00",
-        "gesamt": 181,
-        "online": 181,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 169,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-24T23:51:47-06:00",
-        "gesamt": 181,
-        "online": 181,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 169,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-09-25T00:38:20-06:00",
-        "gesamt": 181,
-        "online": 181,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 169,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
       {
         "zeit": "2026-09-25T01:11:03-06:00",
         "gesamt": 181,
@@ -578,10 +514,74 @@
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
         "neu": 0
+      },
+      {
+        "zeit": "2026-09-26T09:13:07-06:00",
+        "gesamt": 181,
+        "online": 181,
+        "offline": 0,
+        "ohne_titel": 0,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 0,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 169,
+        "juengstes_start": "2026-09-01",
+        "mit_code_im_text": 0,
+        "herkunft": "lokal_cron",
+        "neu": 0
+      },
+      {
+        "zeit": "2026-09-27T19:23:36-06:00",
+        "gesamt": 181,
+        "online": 181,
+        "offline": 0,
+        "ohne_titel": 0,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 0,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 169,
+        "juengstes_start": "2026-09-01",
+        "mit_code_im_text": 0,
+        "herkunft": "lokal_cron",
+        "neu": 0
+      },
+      {
+        "zeit": "2026-09-28T08:28:46-06:00",
+        "gesamt": 181,
+        "online": 181,
+        "offline": 0,
+        "ohne_titel": 0,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 0,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 169,
+        "juengstes_start": "2026-09-01",
+        "mit_code_im_text": 0,
+        "herkunft": "lokal_cron",
+        "neu": 0
+      },
+      {
+        "zeit": "2026-09-28T19:45:58-06:00",
+        "gesamt": 181,
+        "online": 181,
+        "offline": 0,
+        "ohne_titel": 0,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 0,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 169,
+        "juengstes_start": "2026-09-01",
+        "mit_code_im_text": 0,
+        "herkunft": "lokal_cron",
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-25T16:48:09-06:00",
+      "zeit": "2026-09-28T19:45:58-06:00",
       "gesamt": 181,
       "online": 181,
       "offline": 0,
@@ -595,8 +595,17 @@
       "mit_code_im_text": 0
     },
     "verlauf_felder_ab": "2026-09-22T21:13:33-06:00",
-    "befunde": [],
-    "health_warning": null,
+    "befunde": [
+      {
+        "stufe": "warnung",
+        "thema": "Host ausgelassen (robots.txt nicht lesbar)",
+        "text": "action.wemove.eu: HTTP 202. Der Host wurde für diesen Lauf komplett ausgelassen; von dort stammen KEINE frischen Daten. Der Bestand bleibt unverändert stehen.",
+        "zeit": "2026-09-28T19:45:43-06:00",
+        "thema_en": "Host skipped (robots.txt unreadable)",
+        "text_en": "action.wemove.eu: HTTP 202. The host was skipped entirely for this run; no fresh data came from it. The existing records stay as they are."
+      }
+    ],
+    "health_warning": "Host ausgelassen (robots.txt nicht lesbar): action.wemove.eu: HTTP 202. Der Host wurde für diesen Lauf komplett ausgelassen; von dort stammen KEINE frischen Daten. Der Bestand bleibt unverändert stehen.",
     "online_count": 181
   },
   "2026-08-protect-europe-make-polluters-pay-petition-PL": {
