@@ -31,7 +31,7 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-30T10:26:37-06:00",
+    "generated_at": "2026-09-30T11:02:28-06:00",
     "petition_count": 226,
     "available": 294,
     "unbrauchbare": {
@@ -105,7 +105,7 @@
     },
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-09-30T10:26:37-06:00",
+      "stand": "2026-09-30T11:02:28-06:00",
       "gefunden": 294,
       "im_bestand": 226,
       "unbrauchbar": 67,
@@ -122,7 +122,7 @@
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-09-30T10:26:37-06:00",
+        "zeit": "2026-09-30T11:02:28-06:00",
         "gesamt": 226,
         "online": 218,
         "offline": 8,
@@ -139,7 +139,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-30T10:26:37-06:00",
+      "zeit": "2026-09-30T11:02:28-06:00",
       "gesamt": 226,
       "online": 218,
       "offline": 8,
@@ -152,7 +152,7 @@
       "juengstes_start": "2026-09-01",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-09-30T10:26:37-06:00",
+    "verlauf_felder_ab": "2026-09-30T11:02:28-06:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 218
@@ -6328,7 +6328,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2025-04-Huawei-EU-corruption-scandal-petition",
     "status": "online",
-    "last_seen": "2026-09-25T11:00:14-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Nous",
@@ -6342,7 +6342,7 @@
       "Parlement",
       "Européen"
     ],
-    "last_checked": "2026-09-25T11:00:14-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-04-score-fast-fashion-petition-FR": {
     "slug": "2025-04-score-fast-fashion-petition-FR",
@@ -6363,6 +6363,10 @@
       {
         "checked_at": "2026-09-25T11:00:14-06:00",
         "count": 127660
+      },
+      {
+        "checked_at": "2026-09-30T10:59:02-06:00",
+        "count": 127670
       }
     ],
     "title": "Mettons fin à l'impunité de la fast fashion !",
@@ -6373,12 +6377,12 @@
     "start_date": "2025-04-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 127660,
+    "signatures": 127670,
     "goal": 150000,
     "lang": "fr",
     "campaign_id": "wemove:2025-04-score-fast-fashion-petition",
     "status": "online",
-    "last_seen": "2026-09-25T11:00:14-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Fast-fashion",
@@ -6392,7 +6396,7 @@
       "Système",
       "Impact"
     ],
-    "last_checked": "2026-09-25T11:00:14-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-04-Trump-Gas-petition-FR": {
     "slug": "2025-04-Trump-Gas-petition-FR",
@@ -6413,6 +6417,10 @@
       {
         "checked_at": "2026-09-25T11:00:14-06:00",
         "count": 46626
+      },
+      {
+        "checked_at": "2026-09-30T10:59:02-06:00",
+        "count": 46628
       }
     ],
     "title": "L'Europe doit s'affranchir du gaz de Trump !",
@@ -6423,12 +6431,12 @@
     "start_date": "2025-04-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 46626,
+    "signatures": 46628,
     "goal": 50000,
     "lang": "fr",
     "campaign_id": "wemove:2025-04-Trump-Gas-petition",
     "status": "online",
-    "last_seen": "2026-09-25T11:00:14-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Nous",
@@ -6442,7 +6450,7 @@
       "Français",
       "Naturel"
     ],
-    "last_checked": "2026-09-25T11:00:14-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-05-berlin-onboarding-campaign-petition-FR": {
     "slug": "2025-05-berlin-onboarding-campaign-petition-FR",
@@ -6466,7 +6474,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2025-05-berlin-onboarding-campaign-petition",
     "status": "online",
-    "last_seen": "2026-09-25T11:00:14-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Google",
@@ -6480,7 +6488,7 @@
       "Publicitaire",
       "Concurrence"
     ],
-    "last_checked": "2026-09-25T11:00:14-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-05-breakupbigtech-petition-FR": {
     "slug": "2025-05-breakupbigtech-petition-FR",
@@ -6501,6 +6509,10 @@
       {
         "checked_at": "2026-09-25T11:00:14-06:00",
         "count": 89169
+      },
+      {
+        "checked_at": "2026-09-30T10:59:02-06:00",
+        "count": 89285
       }
     ],
     "title": "Mettons fin au monopole des géants de la Tech",
@@ -6511,12 +6523,12 @@
     "start_date": "2025-05-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 89169,
+    "signatures": 89285,
     "goal": 100000,
     "lang": "fr",
     "campaign_id": "wemove:2025-05-breakupbigtech-petition",
     "status": "online",
-    "last_seen": "2026-09-25T11:00:14-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Monopole",
@@ -6530,7 +6542,7 @@
       "Publicitaire",
       "Mettons"
     ],
-    "last_checked": "2026-09-25T11:00:14-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-05-criminalisation-migration-petition-FR": {
     "slug": "2025-05-criminalisation-migration-petition-FR",
@@ -6562,7 +6574,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2025-05-criminalisation-migration-petition",
     "status": "online",
-    "last_seen": "2026-09-25T11:00:14-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Pour",
@@ -6576,7 +6588,7 @@
       "Données",
       "Europe"
     ],
-    "last_checked": "2026-09-25T11:00:14-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-05-EU-trade-Israel-petition-FR": {
     "slug": "2025-05-EU-trade-Israel-petition-FR",
@@ -6608,7 +6620,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2025-05-EU-trade-Israel-petition",
     "status": "online",
-    "last_seen": "2026-09-25T11:00:14-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Israël",
@@ -6622,7 +6634,7 @@
       "Criminels",
       "Affaire"
     ],
-    "last_checked": "2026-09-25T11:00:14-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-05-landmine-ban-petition-FR": {
     "slug": "2025-05-landmine-ban-petition-FR",
@@ -6639,6 +6651,10 @@
       {
         "checked_at": "2026-09-25T11:00:14-06:00",
         "count": 98175
+      },
+      {
+        "checked_at": "2026-09-30T10:59:02-06:00",
+        "count": 98176
       }
     ],
     "title": "Ne laissons pas l'Europe réintroduire les mines antipersonnel",
@@ -6649,12 +6665,12 @@
     "start_date": "2025-05-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 98175,
+    "signatures": 98176,
     "goal": 100000,
     "lang": "fr",
     "campaign_id": "wemove:2025-05-landmine-ban-petition",
     "status": "online",
-    "last_seen": "2026-09-25T11:00:14-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Mines",
@@ -6668,7 +6684,7 @@
       "Décennies",
       "Finlande"
     ],
-    "last_checked": "2026-09-25T11:00:14-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-06-hungary-pride-ban-petition-FR": {
     "slug": "2025-06-hungary-pride-ban-petition-FR",
@@ -6692,7 +6708,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2025-06-hungary-pride-ban-petition",
     "status": "online",
-    "last_seen": "2026-09-25T11:00:14-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Pride",
@@ -6706,7 +6722,7 @@
       "Conseil",
       "English"
     ],
-    "last_checked": "2026-09-25T11:00:14-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-07-antigreenwashing-directive-petition-FR": {
     "slug": "2025-07-antigreenwashing-directive-petition-FR",
@@ -6737,7 +6753,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2025-07-antigreenwashing-directive-petition",
     "status": "online",
-    "last_seen": "2026-09-25T11:00:14-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Entreprises",
@@ -6751,7 +6767,7 @@
       "Revendications",
       "Mensonges"
     ],
-    "last_checked": "2026-09-25T11:00:14-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-07-coffee-certification-schemes-petition-FR": {
     "slug": "2025-07-coffee-certification-schemes-petition-FR",
@@ -6772,6 +6788,10 @@
       {
         "checked_at": "2026-09-25T11:00:14-06:00",
         "count": 71438
+      },
+      {
+        "checked_at": "2026-09-30T10:59:02-06:00",
+        "count": 71439
       }
     ],
     "title": "Un café juste pour les gens et la planète",
@@ -6782,12 +6802,12 @@
     "start_date": "2025-07-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 71438,
+    "signatures": 71439,
     "goal": 75000,
     "lang": "fr",
     "campaign_id": "wemove:2025-07-coffee-certification-schemes-petition",
     "status": "online",
-    "last_seen": "2026-09-25T11:00:14-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Café",
@@ -6801,7 +6821,7 @@
       "Certifiées",
       "Programmes"
     ],
-    "last_checked": "2026-09-25T11:00:14-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-08-end-the-plastic-era-petition-FR": {
     "slug": "2025-08-end-the-plastic-era-petition-FR",
@@ -6818,6 +6838,10 @@
       {
         "checked_at": "2026-09-25T11:00:14-06:00",
         "count": 95340
+      },
+      {
+        "checked_at": "2026-09-30T10:59:02-06:00",
+        "count": 95343
       }
     ],
     "title": "Sortons de l'ère du plastique!",
@@ -6828,12 +6852,12 @@
     "start_date": "2025-08-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 95340,
+    "signatures": 95343,
     "goal": 100000,
     "lang": "fr",
     "campaign_id": "wemove:2025-08-end-the-plastic-era-petition",
     "status": "online",
-    "last_seen": "2026-09-25T11:00:14-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Plastique",
@@ -6847,7 +6871,7 @@
       "Majorité",
       "Mondiaux"
     ],
-    "last_checked": "2026-09-25T11:00:14-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-08-EU-2040-climate-goal-petition-FR": {
     "slug": "2025-08-EU-2040-climate-goal-petition-FR",
@@ -6879,7 +6903,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2025-08-EU-2040-climate-goal-petition",
     "status": "online",
-    "last_seen": "2026-09-25T11:36:48-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Europe",
@@ -6893,7 +6917,7 @@
       "Aucun",
       "Leurs"
     ],
-    "last_checked": "2026-09-25T11:36:48-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-08-USAID-contraceptives-petition-FR": {
     "slug": "2025-08-USAID-contraceptives-petition-FR",
@@ -6910,6 +6934,10 @@
       {
         "checked_at": "2026-09-22T11:24:41-06:00",
         "count": 115847
+      },
+      {
+        "checked_at": "2026-09-30T10:59:02-06:00",
+        "count": 115848
       }
     ],
     "title": "Ne brûlez pas les contraceptifs. Sauvez des vies !",
@@ -6920,12 +6948,12 @@
     "start_date": "2025-08-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 115847,
+    "signatures": 115848,
     "goal": 150000,
     "lang": "fr",
     "campaign_id": "wemove:2025-08-USAID-contraceptives-petition",
     "status": "online",
-    "last_seen": "2026-09-25T11:36:48-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Contraceptifs",
@@ -6939,7 +6967,7 @@
       "Gouvernements",
       "Destruction"
     ],
-    "last_checked": "2026-09-25T11:36:48-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-09-Global-Flotilla-petition-FR": {
     "slug": "2025-09-Global-Flotilla-petition-FR",
@@ -6963,7 +6991,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2025-09-Global-Flotilla-petition",
     "status": "online",
-    "last_seen": "2026-09-25T11:36:48-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Membres",
@@ -6977,7 +7005,7 @@
       "Protéger",
       "Protégez"
     ],
-    "last_checked": "2026-09-25T11:36:48-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-09-israelfootballban-petition-FR": {
     "slug": "2025-09-israelfootballban-petition-FR",
@@ -6998,6 +7026,10 @@
       {
         "checked_at": "2026-09-25T11:36:48-06:00",
         "count": 63448
+      },
+      {
+        "checked_at": "2026-09-30T10:59:02-06:00",
+        "count": 63451
       }
     ],
     "title": "Carton rouge pour crimes de guerre : Israël doit être exclu de la Coupe du monde 2026",
@@ -7008,12 +7040,12 @@
     "start_date": "2025-09-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 63448,
+    "signatures": 63451,
     "goal": 75000,
     "lang": "fr",
     "campaign_id": "wemove:2025-09-israelfootballban-petition",
     "status": "online",
-    "last_seen": "2026-09-25T11:36:48-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Football",
@@ -7027,7 +7059,7 @@
       "Match",
       "Monde"
     ],
-    "last_checked": "2026-09-25T11:36:48-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-10-22-jamie-onboarding-petition-EN-test-FR": {
     "slug": "2025-10-22-jamie-onboarding-petition-EN-test-FR",
@@ -7051,7 +7083,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2025-10-22-jamie-onboarding-petition-EN-test",
     "status": "online",
-    "last_seen": "2026-09-25T11:36:48-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Accord",
@@ -7065,7 +7097,7 @@
       "Pouvons",
       "Dites"
     ],
-    "last_checked": "2026-09-25T11:36:48-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-10-oil-Baltic-Sea-petition-FR": {
     "slug": "2025-10-oil-Baltic-Sea-petition-FR",
@@ -7086,6 +7118,10 @@
       {
         "checked_at": "2026-09-25T11:36:48-06:00",
         "count": 89293
+      },
+      {
+        "checked_at": "2026-09-30T10:59:02-06:00",
+        "count": 89302
       }
     ],
     "title": "Pour une mer Baltique saine et protégée !",
@@ -7096,12 +7132,12 @@
     "start_date": "2025-10-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 89293,
+    "signatures": 89302,
     "goal": 100000,
     "lang": "fr",
     "campaign_id": "wemove:2025-10-oil-Baltic-Sea-petition",
     "status": "online",
-    "last_seen": "2026-09-25T11:36:48-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Baltique",
@@ -7115,7 +7151,7 @@
       "Toute",
       "Dans"
     ],
-    "last_checked": "2026-09-25T11:36:48-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-10-trump-trade-deal-petition-FR": {
     "slug": "2025-10-trump-trade-deal-petition-FR",
@@ -7132,6 +7168,10 @@
       {
         "checked_at": "2026-09-22T11:24:41-06:00",
         "count": 115915
+      },
+      {
+        "checked_at": "2026-09-30T10:59:02-06:00",
+        "count": 115917
       }
     ],
     "title": "Dites NON à l’accord commercial de Trump !",
@@ -7142,12 +7182,12 @@
     "start_date": "2025-10-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 115915,
+    "signatures": 115917,
     "goal": 150000,
     "lang": "fr",
     "campaign_id": "wemove:2025-10-trump-trade-deal-petition",
     "status": "online",
-    "last_seen": "2026-09-25T11:36:48-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Accord",
@@ -7161,7 +7201,7 @@
       "Entreprises",
       "États-Unis"
     ],
-    "last_checked": "2026-09-25T11:36:48-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-10-yes-to-greening-no-to-mandates-FR": {
     "slug": "2025-10-yes-to-greening-no-to-mandates-FR",
@@ -7185,7 +7225,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2025-10-yes-to-greening-no-to-mandates",
     "status": "online",
-    "last_seen": "2026-09-25T11:36:48-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Verdissement",
@@ -7199,7 +7239,7 @@
       "Français",
       "Hrvatski"
     ],
-    "last_checked": "2026-09-25T11:36:48-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-11-ban-shark-meat-EU-petition-FR": {
     "slug": "2025-11-ban-shark-meat-EU-petition-FR",
@@ -7220,6 +7260,10 @@
       {
         "checked_at": "2026-09-25T11:36:48-06:00",
         "count": 64264
+      },
+      {
+        "checked_at": "2026-09-30T10:59:02-06:00",
+        "count": 64269
       }
     ],
     "title": "Des océans sains, un avenir sûr : mettons fin au commerce toxique des requins",
@@ -7230,12 +7274,12 @@
     "start_date": "2025-11-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 64264,
+    "signatures": 64269,
     "goal": 75000,
     "lang": "fr",
     "campaign_id": "wemove:2025-11-ban-shark-meat-EU-petition",
     "status": "online",
-    "last_seen": "2026-09-25T11:36:48-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Requins",
@@ -7249,7 +7293,7 @@
       "Produits",
       "Avenir"
     ],
-    "last_checked": "2026-09-25T11:36:48-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-11-dpc-ireland-petition-FR": {
     "slug": "2025-11-dpc-ireland-petition-FR",
@@ -7284,7 +7328,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2025-11-dpc-ireland-petition",
     "status": "online",
-    "last_seen": "2026-09-25T11:36:48-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Données",
@@ -7298,7 +7342,7 @@
       "Indépendance",
       "Entreprises"
     ],
-    "last_checked": "2026-09-25T11:36:48-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-11-housing-for-all-petition-FR": {
     "slug": "2025-11-housing-for-all-petition-FR",
@@ -7319,6 +7363,10 @@
       {
         "checked_at": "2026-09-25T11:36:48-06:00",
         "count": 82705
+      },
+      {
+        "checked_at": "2026-09-30T10:59:02-06:00",
+        "count": 82710
       }
     ],
     "title": "Des logements pour les personnes, pas pour le profit",
@@ -7329,12 +7377,12 @@
     "start_date": "2025-11-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 82705,
+    "signatures": 82710,
     "goal": 100000,
     "lang": "fr",
     "campaign_id": "wemove:2025-11-housing-for-all-petition",
     "status": "online",
-    "last_seen": "2026-09-25T11:36:48-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Pour",
@@ -7348,7 +7396,7 @@
       "Européen",
       "Notre"
     ],
-    "last_checked": "2026-09-25T11:36:48-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-11-stop-aux-megots-les-fabricants-de-tabac-doivent-financer-le-recy-FR": {
     "slug": "2025-11-stop-aux-megots-les-fabricants-de-tabac-doivent-financer-le-recy-FR",
@@ -7372,7 +7420,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2025-11-stop-aux-megots-les-fabricants-de-tabac-doivent-financer-le-recy",
     "status": "online",
-    "last_seen": "2026-09-25T11:36:48-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Mégots",
@@ -7386,7 +7434,7 @@
       "Milliards",
       "Produits"
     ],
-    "last_checked": "2026-09-25T11:36:48-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-12-no-deportation-petition-FR": {
     "slug": "2025-12-no-deportation-petition-FR",
@@ -7407,6 +7455,10 @@
       {
         "checked_at": "2026-09-25T11:36:48-06:00",
         "count": 125740
+      },
+      {
+        "checked_at": "2026-09-30T10:59:02-06:00",
+        "count": 125748
       }
     ],
     "title": "Refusez les déportations de masse en Europe",
@@ -7417,12 +7469,12 @@
     "start_date": "2025-12-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 125740,
+    "signatures": 125748,
     "goal": 150000,
     "lang": "fr",
     "campaign_id": "wemove:2025-12-no-deportation-petition",
     "status": "online",
-    "last_seen": "2026-09-25T11:36:48-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Nous",
@@ -7436,7 +7488,7 @@
       "Sécurité",
       "Refusez"
     ],
-    "last_checked": "2026-09-25T11:36:48-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-12-omnibus-food-petition-FR": {
     "slug": "2025-12-omnibus-food-petition-FR",
@@ -7457,6 +7509,10 @@
       {
         "checked_at": "2026-09-25T11:36:48-06:00",
         "count": 154327
+      },
+      {
+        "checked_at": "2026-09-30T10:59:02-06:00",
+        "count": 154420
       }
     ],
     "title": "Protégeons notre alimentation des pesticides toxiques",
@@ -7467,12 +7523,12 @@
     "start_date": "2025-12-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 154327,
+    "signatures": 154420,
     "goal": 200000,
     "lang": "fr",
     "campaign_id": "wemove:2025-12-omnibus-food-petition",
     "status": "online",
-    "last_seen": "2026-09-25T11:36:48-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Pesticides",
@@ -7486,7 +7542,7 @@
       "Sont",
       "Toujours"
     ],
-    "last_checked": "2026-09-25T11:36:48-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-12-translation-test-dpc-ireland-petition-FR": {
     "slug": "2025-12-translation-test-dpc-ireland-petition-FR",
@@ -7510,7 +7566,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2025-12-translation-test-dpc-ireland-petition",
     "status": "online",
-    "last_seen": "2026-09-25T11:36:48-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Données",
@@ -7524,7 +7580,7 @@
       "Indépendance",
       "Entreprises"
     ],
-    "last_checked": "2026-09-25T11:36:48-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-12-translation-test-oil-baltic-sea-petition-FR": {
     "slug": "2025-12-translation-test-oil-baltic-sea-petition-FR",
@@ -7548,7 +7604,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2025-12-translation-test-oil-baltic-sea-petition",
     "status": "online",
-    "last_seen": "2026-09-25T11:36:48-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Baltique",
@@ -7562,7 +7618,7 @@
       "Convention",
       "Extraction"
     ],
-    "last_checked": "2026-09-25T11:36:48-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-12-translation-test-plastic-era-petition-FR": {
     "slug": "2025-12-translation-test-plastic-era-petition-FR",
@@ -7586,7 +7642,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2025-12-translation-test-plastic-era-petition",
     "status": "online",
-    "last_seen": "2026-09-25T11:36:48-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Plastique",
@@ -7600,7 +7656,7 @@
       "Majorité",
       "Mondiaux"
     ],
-    "last_checked": "2026-09-25T11:36:48-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-2-cancelacion-inmediata-del-macro-proyecto-turistico-underwatergar-petition-FR": {
     "slug": "2025-2-cancelacion-inmediata-del-macro-proyecto-turistico-underwatergar-petition-FR",
@@ -7621,6 +7677,10 @@
       {
         "checked_at": "2026-09-25T11:36:48-06:00",
         "count": 62974
+      },
+      {
+        "checked_at": "2026-09-30T10:59:02-06:00",
+        "count": 62976
       }
     ],
     "title": "Arrêtez de détruire notre littoral !",
@@ -7630,12 +7690,12 @@
     "summary": "Français English Deutsch Español Italiano Nederlands Polski Arrêtez de détruire notre littoral ! À Marc García-Durán Huet, promoteur du projet, Rosa Dávila Mamely, présidente du Conseil insulaire de T…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 62974,
+    "signatures": 62976,
     "goal": 75000,
     "lang": "fr",
     "campaign_id": "wemove:2025-2-cancelacion-inmediata-del-macro-proyecto-turistico-underwatergar-petition",
     "status": "online",
-    "last_seen": "2026-09-25T11:36:48-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Attractions",
@@ -7649,7 +7709,7 @@
       "Promoteur",
       "Protéger"
     ],
-    "last_checked": "2026-09-25T11:36:48-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-2-non-a-l-extension-de-la-decharge-de-dechets-dangereux-de-suez-FR": {
     "slug": "2025-2-non-a-l-extension-de-la-decharge-de-dechets-dangereux-de-suez-FR",
@@ -7672,7 +7732,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2025-2-non-a-l-extension-de-la-decharge-de-dechets-dangereux-de-suez",
     "status": "online",
-    "last_seen": "2026-09-25T11:36:48-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "DÉCHETS",
@@ -7686,7 +7746,7 @@
       "Butte",
       "Dhuis"
     ],
-    "last_checked": "2026-09-25T11:36:48-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-3-demand-immediate-inclusion-of-complementary-and-alternative-medi-FR": {
     "slug": "2025-3-demand-immediate-inclusion-of-complementary-and-alternative-medi-FR",
@@ -7709,7 +7769,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2025-3-demand-immediate-inclusion-of-complementary-and-alternative-medi",
     "status": "online",
-    "last_seen": "2026-09-25T11:36:48-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Santé",
@@ -7723,7 +7783,7 @@
       "Pour",
       "Publique"
     ],
-    "last_checked": "2026-09-25T11:36:48-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-3-santa-should-wear-european-blue-FR": {
     "slug": "2025-3-santa-should-wear-european-blue-FR",
@@ -7746,7 +7806,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2025-3-santa-should-wear-european-blue",
     "status": "online",
-    "last_seen": "2026-09-25T11:36:48-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Noël",
@@ -7760,7 +7820,7 @@
       "Parlement",
       "Wikipédia"
     ],
-    "last_checked": "2026-09-25T11:36:48-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-4-8-mart-dunya-emekci-kadinlar-gunu-ucretli-izin-gunu-olsun-FR": {
     "slug": "2025-4-8-mart-dunya-emekci-kadinlar-gunu-ucretli-izin-gunu-olsun-FR",
@@ -7783,7 +7843,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2025-4-8-mart-dunya-emekci-kadinlar-gunu-ucretli-izin-gunu-olsun",
     "status": "online",
-    "last_seen": "2026-09-25T11:36:48-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "FEMMES",
@@ -7797,7 +7857,7 @@
       "Égalité",
       "JOURNEE"
     ],
-    "last_checked": "2026-09-25T11:36:48-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-4-tribune-pour-une-union-europeenne-forte-et-solidaire-au-plus-pro-FR": {
     "slug": "2025-4-tribune-pour-une-union-europeenne-forte-et-solidaire-au-plus-pro-FR",
@@ -7820,7 +7880,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2025-4-tribune-pour-une-union-europeenne-forte-et-solidaire-au-plus-pro",
     "status": "online",
-    "last_seen": "2026-09-25T11:36:48-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Européenne",
@@ -7834,7 +7894,7 @@
       "Solidaire",
       "Européen"
     ],
-    "last_checked": "2026-09-25T11:36:48-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-6-protect-the-freedom-flotilla-end-gazas-blockade-now-petition-FR": {
     "slug": "2025-6-protect-the-freedom-flotilla-end-gazas-blockade-now-petition-FR",
@@ -7857,7 +7917,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2025-6-protect-the-freedom-flotilla-end-gazas-blockade-now-petition",
     "status": "online",
-    "last_seen": "2026-09-25T11:36:48-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Gaza",
@@ -7871,7 +7931,7 @@
       "Cette",
       "Européenne"
     ],
-    "last_checked": "2026-09-25T11:36:48-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-6-protegeons-le-gouf-de-capbreton-pour-une-vraie-aire-marine-prote-FR": {
     "slug": "2025-6-protegeons-le-gouf-de-capbreton-pour-une-vraie-aire-marine-prote-FR",
@@ -7902,7 +7962,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2025-6-protegeons-le-gouf-de-capbreton-pour-une-vraie-aire-marine-prote",
     "status": "online",
-    "last_seen": "2026-09-25T11:36:48-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Gouf",
@@ -7916,7 +7976,7 @@
       "Aire",
       "Français"
     ],
-    "last_checked": "2026-09-25T11:36:48-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2025-8-ensemble-nous-pouvons-changer-la-vie-des-enfants-de-gaza-en-pale-FR": {
     "slug": "2025-8-ensemble-nous-pouvons-changer-la-vie-des-enfants-de-gaza-en-pale-FR",
@@ -7939,7 +7999,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2025-8-ensemble-nous-pouvons-changer-la-vie-des-enfants-de-gaza-en-pale",
     "status": "online",
-    "last_seen": "2026-09-25T11:36:48-06:00",
+    "last_seen": "2026-09-30T10:59:02-06:00",
     "offline_since": null,
     "tags": [
       "Palestine",
@@ -7953,7 +8013,7 @@
       "Paix",
       "Tous"
     ],
-    "last_checked": "2026-09-25T11:36:48-06:00"
+    "last_checked": "2026-09-30T10:59:02-06:00"
   },
   "2026-01-omnibus-tech-petition-FR": {
     "slug": "2026-01-omnibus-tech-petition-FR",
