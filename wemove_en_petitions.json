@@ -31,9 +31,13 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-29T19:09:01-06:00",
-    "petition_count": 607,
+    "generated_at": "2026-09-29T19:47:36-06:00",
+    "petition_count": 609,
     "available": 711,
+    "new_petitions_last_run": [
+      "2026-09-fuelled-by-greed-petition-EN",
+      "2026-09-trial-dont-deregulate-banks-petition-EN"
+    ],
     "unbrauchbare": {
       "20216-05-all-out-list-swap-petition-EN": "2026-09-05T14:05:02-06:00",
       "2023-01-lucas-ig-wrapper-test-petition-EN": "2026-09-05T15:27:48-06:00",
@@ -138,60 +142,56 @@
       "lucas-test-donate-petition-EN": "2026-09-18T09:03:37-06:00",
       "lucas-test-donation-2-petition-EN": "2026-09-18T09:03:37-06:00"
     },
-    "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-09-29T19:09:01-06:00",
+      "stand": "2026-09-29T19:47:35-06:00",
       "gefunden": 711,
-      "im_bestand": 607,
+      "im_bestand": 609,
       "unbrauchbar": 102,
       "verworfen": 0,
       "dublette": 0,
       "verschwunden": 0,
       "zurueckgestellt": 0,
-      "offen": 2,
-      "offene_beispiele": [
-        "2026-09-fuelled-by-greed-petition-EN",
-        "2026-09-trial-dont-deregulate-banks-petition-EN"
-      ],
-      "bestand_gesamt": 607,
+      "offen": 0,
+      "offene_beispiele": [],
+      "bestand_gesamt": 609,
       "bestand_ausserhalb": 0
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-09-29T19:09:01-06:00",
-        "gesamt": 607,
-        "online": 606,
+        "zeit": "2026-09-29T19:47:35-06:00",
+        "gesamt": 609,
+        "online": 608,
         "offline": 1,
         "ohne_titel": 1,
         "platzhalter": 0,
         "nicht_ausgeliefert": 1,
         "torsi": 0,
         "dubletten": 0,
-        "mit_start": 484,
+        "mit_start": 486,
         "juengstes_start": "2026-09-01",
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
-        "neu": 0
+        "neu": 2
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-29T19:09:01-06:00",
-      "gesamt": 607,
-      "online": 606,
+      "zeit": "2026-09-29T19:47:35-06:00",
+      "gesamt": 609,
+      "online": 608,
       "offline": 1,
       "ohne_titel": 1,
       "platzhalter": 0,
       "nicht_ausgeliefert": 1,
       "torsi": 0,
       "dubletten": 0,
-      "mit_start": 484,
+      "mit_start": 486,
       "juengstes_start": "2026-09-01",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-09-29T19:09:01-06:00",
+    "verlauf_felder_ab": "2026-09-29T19:47:35-06:00",
     "befunde": [],
     "health_warning": null,
-    "online_count": 606
+    "online_count": 608
   },
   "2026-07-ban-coral-killers-sunscreen-petition-EN": {
     "slug": "2026-07-ban-coral-killers-sunscreen-petition-EN",
@@ -22958,7 +22958,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-08-trial-AI-hack-petition",
     "status": "online",
-    "last_seen": "2026-09-25T07:50:04-06:00",
+    "last_seen": "2026-09-29T19:44:57-06:00",
     "offline_since": null,
     "tags": [
       "Systems",
@@ -22972,7 +22972,7 @@
       "Tech",
       "Livelihoods"
     ],
-    "last_checked": "2026-09-25T07:50:04-06:00"
+    "last_checked": "2026-09-29T19:44:57-06:00"
   },
   "2026-08-trial-insurance-natural-disasters-petition-EN": {
     "slug": "2026-08-trial-insurance-natural-disasters-petition-EN",
@@ -23004,7 +23004,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-08-trial-insurance-natural-disasters-petition",
     "status": "online",
-    "last_seen": "2026-09-25T07:50:04-06:00",
+    "last_seen": "2026-09-29T19:44:57-06:00",
     "offline_since": null,
     "tags": [
       "Disasters",
@@ -23018,7 +23018,7 @@
       "Public-private",
       "Catastrophes"
     ],
-    "last_checked": "2026-09-25T07:50:04-06:00"
+    "last_checked": "2026-09-29T19:44:57-06:00"
   },
   "2026-09-trial-cheaper-electricity-petition-EN": {
     "slug": "2026-09-trial-cheaper-electricity-petition-EN",
@@ -23031,6 +23031,10 @@
       {
         "checked_at": "2026-09-18T08:37:36-06:00",
         "count": 706
+      },
+      {
+        "checked_at": "2026-09-29T19:44:57-06:00",
+        "count": 707
       }
     ],
     "title": "Make Clean Energy Cheaper",
@@ -23040,12 +23044,12 @@
     "start_date": "2026-09-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 706,
+    "signatures": 707,
     "goal": 1000,
     "lang": "en",
     "campaign_id": "wemove:2026-09-trial-cheaper-electricity-petition",
     "status": "online",
-    "last_seen": "2026-09-25T07:50:04-06:00",
+    "last_seen": "2026-09-29T19:44:57-06:00",
     "offline_since": null,
     "tags": [
       "Clean",
@@ -23059,7 +23063,7 @@
       "Electric",
       "Heavily"
     ],
-    "last_checked": "2026-09-25T07:50:04-06:00"
+    "last_checked": "2026-09-29T19:44:57-06:00"
   },
   "2026-09-trial-social-media-design-petition-EN": {
     "slug": "2026-09-trial-social-media-design-petition-EN",
@@ -23076,6 +23080,10 @@
       {
         "checked_at": "2026-09-22T07:31:02-06:00",
         "count": 270
+      },
+      {
+        "checked_at": "2026-09-29T19:44:57-06:00",
+        "count": 271
       }
     ],
     "title": "Protect our kids, not social media giants’ profits",
@@ -23085,12 +23093,12 @@
     "start_date": "2026-09-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 270,
+    "signatures": 271,
     "goal": 1000,
     "lang": "en",
     "campaign_id": "wemove:2026-09-trial-social-media-design-petition",
     "status": "online",
-    "last_seen": "2026-09-25T07:50:04-06:00",
+    "last_seen": "2026-09-29T19:44:57-06:00",
     "offline_since": null,
     "tags": [
       "Children",
@@ -23104,7 +23112,7 @@
       "President",
       "Giants"
     ],
-    "last_checked": "2026-09-25T07:50:04-06:00"
+    "last_checked": "2026-09-29T19:44:57-06:00"
   },
   "2026-1-eu-to-boycott-2026-fifa-world-cup-EN": {
     "slug": "2026-1-eu-to-boycott-2026-fifa-world-cup-EN",
@@ -23127,7 +23135,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-1-eu-to-boycott-2026-fifa-world-cup",
     "status": "online",
-    "last_seen": "2026-09-25T07:50:04-06:00",
+    "last_seen": "2026-09-29T19:44:57-06:00",
     "offline_since": null,
     "tags": [
       "World",
@@ -23141,7 +23149,7 @@
       "Parliament",
       "Important"
     ],
-    "last_checked": "2026-09-25T07:50:04-06:00"
+    "last_checked": "2026-09-29T19:44:57-06:00"
   },
   "2026-1-let-the-digital-euro-become-the-worldwide-standard-of-digital-mo-EN": {
     "slug": "2026-1-let-the-digital-euro-become-the-worldwide-standard-of-digital-mo-EN",
@@ -23163,7 +23171,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-1-let-the-digital-euro-become-the-worldwide-standard-of-digital-mo",
     "status": "online",
-    "last_seen": "2026-09-25T07:50:04-06:00",
+    "last_seen": "2026-09-29T19:44:57-06:00",
     "offline_since": null,
     "tags": [
       "Digital",
@@ -23177,7 +23185,7 @@
       "Europe",
       "Name"
     ],
-    "last_checked": "2026-09-25T07:50:04-06:00"
+    "last_checked": "2026-09-29T19:44:57-06:00"
   },
   "2026-1-ma-sante-n-est-pas-a-vendre-my-health-is-not-for-sale-stop-ue-me-EN": {
     "slug": "2026-1-ma-sante-n-est-pas-a-vendre-my-health-is-not-for-sale-stop-ue-me-EN",
@@ -23199,7 +23207,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-1-ma-sante-n-est-pas-a-vendre-my-health-is-not-for-sale-stop-ue-me",
     "status": "online",
-    "last_seen": "2026-09-25T07:50:04-06:00",
+    "last_seen": "2026-09-29T19:44:57-06:00",
     "offline_since": null,
     "tags": [
       "Health",
@@ -23213,7 +23221,7 @@
       "Food",
       "Name"
     ],
-    "last_checked": "2026-09-25T07:50:04-06:00"
+    "last_checked": "2026-09-29T19:44:57-06:00"
   },
   "2026-1-menaces-sur-l-europe-boycottons-les-produits-americains-EN": {
     "slug": "2026-1-menaces-sur-l-europe-boycottons-les-produits-americains-EN",
@@ -23236,7 +23244,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-1-menaces-sur-l-europe-boycottons-les-produits-americains",
     "status": "online",
-    "last_seen": "2026-09-25T08:32:51-06:00",
+    "last_seen": "2026-09-29T19:44:57-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -23250,7 +23258,7 @@
       "United",
       "Boycott"
     ],
-    "last_checked": "2026-09-25T08:32:51-06:00"
+    "last_checked": "2026-09-29T19:44:57-06:00"
   },
   "2026-1-stop-the-trump-sports-shows-in-2026-EN": {
     "slug": "2026-1-stop-the-trump-sports-shows-in-2026-EN",
@@ -23272,7 +23280,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-1-stop-the-trump-sports-shows-in-2026",
     "status": "online",
-    "last_seen": "2026-09-25T08:32:51-06:00",
+    "last_seen": "2026-09-29T19:44:57-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -23286,7 +23294,7 @@
       "Inititator",
       "Parliament"
     ],
-    "last_checked": "2026-09-25T08:32:51-06:00"
+    "last_checked": "2026-09-29T19:44:57-06:00"
   },
   "2026-1-virginia-testing-EN": {
     "slug": "2026-1-virginia-testing-EN",
@@ -23308,7 +23316,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-1-virginia-testing",
     "status": "online",
-    "last_seen": "2026-09-25T08:32:51-06:00",
+    "last_seen": "2026-09-29T19:44:57-06:00",
     "offline_since": null,
     "tags": [
       "Virginia",
@@ -23316,7 +23324,7 @@
       "Inititator",
       "Name"
     ],
-    "last_checked": "2026-09-25T08:32:51-06:00"
+    "last_checked": "2026-09-29T19:44:57-06:00"
   },
   "2026-2-end-eu-sanctions-on-journalist-huseyin-dogru-protect-press-freed-EN": {
     "slug": "2026-2-end-eu-sanctions-on-journalist-huseyin-dogru-protect-press-freed-EN",
@@ -23343,7 +23351,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-2-end-eu-sanctions-on-journalist-huseyin-dogru-protect-press-freed",
     "status": "online",
-    "last_seen": "2026-09-25T08:32:51-06:00",
+    "last_seen": "2026-09-29T19:44:57-06:00",
     "offline_since": null,
     "tags": [
       "Journalist",
@@ -23357,7 +23365,7 @@
       "Gaza",
       "Press"
     ],
-    "last_checked": "2026-09-25T08:32:51-06:00"
+    "last_checked": "2026-09-29T19:44:57-06:00"
   },
   "2026-2-no-alle-armi-si-alla-pace-EN": {
     "slug": "2026-2-no-alle-armi-si-alla-pace-EN",
@@ -23380,7 +23388,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-2-no-alle-armi-si-alla-pace",
     "status": "online",
-    "last_seen": "2026-09-25T08:32:51-06:00",
+    "last_seen": "2026-09-29T19:44:57-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -23394,7 +23402,7 @@
       "Based",
       "Revitalization"
     ],
-    "last_checked": "2026-09-25T08:32:51-06:00"
+    "last_checked": "2026-09-29T19:44:57-06:00"
   },
   "2026-2-proper-um-and-date-format-EN": {
     "slug": "2026-2-proper-um-and-date-format-EN",
@@ -23417,7 +23425,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-2-proper-um-and-date-format",
     "status": "online",
-    "last_seen": "2026-09-25T08:32:51-06:00",
+    "last_seen": "2026-09-29T19:44:57-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -23431,7 +23439,7 @@
       "Digital",
       "Metric"
     ],
-    "last_checked": "2026-09-25T08:32:51-06:00"
+    "last_checked": "2026-09-29T19:44:57-06:00"
   },
   "2026-2-urgent-petition-greenland-is-not-for-sale-trump-does-not-own-the-EN": {
     "slug": "2026-2-urgent-petition-greenland-is-not-for-sale-trump-does-not-own-the-EN",
@@ -23453,7 +23461,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-2-urgent-petition-greenland-is-not-for-sale-trump-does-not-own-the",
     "status": "online",
-    "last_seen": "2026-09-25T08:32:51-06:00",
+    "last_seen": "2026-09-29T19:44:57-06:00",
     "offline_since": null,
     "tags": [
       "GREENLAND",
@@ -23467,7 +23475,7 @@
       "Denmark",
       "Fragile"
     ],
-    "last_checked": "2026-09-25T08:32:51-06:00"
+    "last_checked": "2026-09-29T19:44:57-06:00"
   },
   "aarongiuliotest-petition-EN": {
     "slug": "aarongiuliotest-petition-EN",
@@ -23489,7 +23497,7 @@
     "lang": "en",
     "campaign_id": "wemove:aarongiuliotest-petition",
     "status": "online",
-    "last_seen": "2026-09-25T08:32:51-06:00",
+    "last_seen": "2026-09-29T19:44:57-06:00",
     "offline_since": null,
     "tags": [
       "Pesticides",
@@ -23503,7 +23511,7 @@
       "Bayer-Monsanto",
       "Commission"
     ],
-    "last_checked": "2026-09-25T08:32:51-06:00"
+    "last_checked": "2026-09-29T19:44:57-06:00"
   },
   "democratization-of-europe-EN": {
     "slug": "democratization-of-europe-EN",
@@ -23534,7 +23542,7 @@
     "lang": "en",
     "campaign_id": "wemove:democratization-of-europe",
     "status": "online",
-    "last_seen": "2026-09-25T08:32:51-06:00",
+    "last_seen": "2026-09-29T19:44:57-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -23548,7 +23556,7 @@
       "Assembly",
       "Project"
     ],
-    "last_checked": "2026-09-25T08:32:51-06:00"
+    "last_checked": "2026-09-29T19:44:57-06:00"
   },
   "developers-testing-campaign-petition-checkbox-EN": {
     "slug": "developers-testing-campaign-petition-checkbox-EN",
@@ -23569,6 +23577,10 @@
       {
         "checked_at": "2026-09-25T08:32:51-06:00",
         "count": 2544
+      },
+      {
+        "checked_at": "2026-09-29T19:44:57-06:00",
+        "count": 2573
       }
     ],
     "title": "Make Europe a safe place for all women and girls!",
@@ -23578,12 +23590,12 @@
     "summary": "English English English English English English English English English English English English Français Deutsch Deutsch Español Italiano Polski Make Europe a safe place for all women and girls! To th…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 2544,
+    "signatures": 2573,
     "goal": 5000,
     "lang": "en",
     "campaign_id": "wemove:developers-testing-campaign-petition-checkbox",
     "status": "online",
-    "last_seen": "2026-09-25T08:32:51-06:00",
+    "last_seen": "2026-09-29T19:44:57-06:00",
     "offline_since": null,
     "tags": [
       "English",
@@ -23597,7 +23609,7 @@
       "Place",
       "Make"
     ],
-    "last_checked": "2026-09-25T08:32:51-06:00"
+    "last_checked": "2026-09-29T19:44:57-06:00"
   },
   "developers-testing-campaign-petition-EN": {
     "slug": "developers-testing-campaign-petition-EN",
@@ -23618,6 +23630,10 @@
       {
         "checked_at": "2026-09-25T08:32:51-06:00",
         "count": 2544
+      },
+      {
+        "checked_at": "2026-09-29T19:44:57-06:00",
+        "count": 2573
       }
     ],
     "title": "Make Europe a safe place for all women and girls!",
@@ -23627,12 +23643,12 @@
     "summary": "English English English English English English English English English English English English Français Deutsch Deutsch Español Italiano Polski Make Europe a safe place for all women and girls! To th…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 2544,
+    "signatures": 2573,
     "goal": 5000,
     "lang": "en",
     "campaign_id": "wemove:developers-testing-campaign-petition",
     "status": "online",
-    "last_seen": "2026-09-25T08:32:51-06:00",
+    "last_seen": "2026-09-29T19:44:57-06:00",
     "offline_since": null,
     "tags": [
       "English",
@@ -23646,7 +23662,7 @@
       "Place",
       "Make"
     ],
-    "last_checked": "2026-09-25T08:32:51-06:00"
+    "last_checked": "2026-09-29T19:44:57-06:00"
   },
   "developers-testing-campaign-petition-external-video-EN": {
     "slug": "developers-testing-campaign-petition-external-video-EN",
@@ -23667,6 +23683,10 @@
       {
         "checked_at": "2026-09-25T08:32:51-06:00",
         "count": 2544
+      },
+      {
+        "checked_at": "2026-09-29T19:44:57-06:00",
+        "count": 2573
       }
     ],
     "title": "Make Europe a safe place for all women and girls!",
@@ -23676,12 +23696,12 @@
     "summary": "English English English English English English English English English English English English Français Deutsch Deutsch Español Italiano Polski Make Europe a safe place for all women and girls! To th…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 2544,
+    "signatures": 2573,
     "goal": 5000,
     "lang": "en",
     "campaign_id": "wemove:developers-testing-campaign-petition-external-video",
     "status": "online",
-    "last_seen": "2026-09-25T08:32:51-06:00",
+    "last_seen": "2026-09-29T19:44:57-06:00",
     "offline_since": null,
     "tags": [
       "English",
@@ -23695,7 +23715,7 @@
       "Place",
       "Make"
     ],
-    "last_checked": "2026-09-25T08:32:51-06:00"
+    "last_checked": "2026-09-29T19:44:57-06:00"
   },
   "developers-testing-campaign-petition-germanic-users-EN": {
     "slug": "developers-testing-campaign-petition-germanic-users-EN",
@@ -23716,6 +23736,10 @@
       {
         "checked_at": "2026-09-25T08:32:51-06:00",
         "count": 2544
+      },
+      {
+        "checked_at": "2026-09-29T19:44:57-06:00",
+        "count": 2573
       }
     ],
     "title": "Make Europe a safe place for all women and girls!",
@@ -23725,12 +23749,12 @@
     "summary": "English English English English English English English English English English English English Français Deutsch Deutsch Español Italiano Polski Make Europe a safe place for all women and girls! To th…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 2544,
+    "signatures": 2573,
     "goal": 5000,
     "lang": "en",
     "campaign_id": "wemove:developers-testing-campaign-petition-germanic-users",
     "status": "online",
-    "last_seen": "2026-09-25T08:32:51-06:00",
+    "last_seen": "2026-09-29T19:44:57-06:00",
     "offline_since": null,
     "tags": [
       "English",
@@ -23744,7 +23768,7 @@
       "Place",
       "Make"
     ],
-    "last_checked": "2026-09-25T08:32:51-06:00"
+    "last_checked": "2026-09-29T19:44:57-06:00"
   },
   "developers-testing-campaign-petition-radio-buttons-EN": {
     "slug": "developers-testing-campaign-petition-radio-buttons-EN",
@@ -23765,6 +23789,10 @@
       {
         "checked_at": "2026-09-25T08:32:51-06:00",
         "count": 2544
+      },
+      {
+        "checked_at": "2026-09-29T19:44:57-06:00",
+        "count": 2573
       }
     ],
     "title": "Make Europe a safe place for all women and girls!",
@@ -23774,12 +23802,12 @@
     "summary": "English English English English English English English English English English English English Français Deutsch Deutsch Español Italiano Polski Make Europe a safe place for all women and girls! To th…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 2544,
+    "signatures": 2573,
     "goal": 5000,
     "lang": "en",
     "campaign_id": "wemove:developers-testing-campaign-petition-radio-buttons",
     "status": "online",
-    "last_seen": "2026-09-25T08:32:51-06:00",
+    "last_seen": "2026-09-29T19:44:57-06:00",
     "offline_since": null,
     "tags": [
       "English",
@@ -23793,7 +23821,7 @@
       "Place",
       "Make"
     ],
-    "last_checked": "2026-09-25T08:32:51-06:00"
+    "last_checked": "2026-09-29T19:44:57-06:00"
   },
   "developers-testing-campaign-petition-with-recaptcha-EN": {
     "slug": "developers-testing-campaign-petition-with-recaptcha-EN",
@@ -23814,6 +23842,10 @@
       {
         "checked_at": "2026-09-25T08:32:51-06:00",
         "count": 2544
+      },
+      {
+        "checked_at": "2026-09-29T19:44:57-06:00",
+        "count": 2573
       }
     ],
     "title": "Recaptcha - Make Europe a safe place for all women and girls!",
@@ -23823,12 +23855,12 @@
     "summary": "English English English English English English English English English English English English Français Deutsch Deutsch Español Italiano Polski Recaptcha - Make Europe a safe place for all women and …",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 2544,
+    "signatures": 2573,
     "goal": 5000,
     "lang": "en",
     "campaign_id": "wemove:developers-testing-campaign-petition-with-recaptcha",
     "status": "online",
-    "last_seen": "2026-09-25T08:32:51-06:00",
+    "last_seen": "2026-09-29T19:44:57-06:00",
     "offline_since": null,
     "tags": [
       "English",
@@ -23842,7 +23874,7 @@
       "Sexual",
       "Place"
     ],
-    "last_checked": "2026-09-25T08:32:51-06:00"
+    "last_checked": "2026-09-29T19:44:57-06:00"
   },
   "developers-testing-campaign-petition-youtube-EN": {
     "slug": "developers-testing-campaign-petition-youtube-EN",
@@ -23863,6 +23895,10 @@
       {
         "checked_at": "2026-09-25T08:32:51-06:00",
         "count": 2544
+      },
+      {
+        "checked_at": "2026-09-29T19:44:57-06:00",
+        "count": 2573
       }
     ],
     "title": "Make Europe a safe place for all women and girls!",
@@ -23872,12 +23908,12 @@
     "summary": "English English English English English English English English English English English English Français Deutsch Deutsch Español Italiano Polski Make Europe a safe place for all women and girls! Pleas…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 2544,
+    "signatures": 2573,
     "goal": 5000,
     "lang": "en",
     "campaign_id": "wemove:developers-testing-campaign-petition-youtube",
     "status": "online",
-    "last_seen": "2026-09-25T08:32:51-06:00",
+    "last_seen": "2026-09-29T19:44:57-06:00",
     "offline_since": null,
     "tags": [
       "English",
@@ -23891,7 +23927,7 @@
       "Place",
       "Make"
     ],
-    "last_checked": "2026-09-25T08:32:51-06:00"
+    "last_checked": "2026-09-29T19:44:57-06:00"
   },
   "developers-tw-css-campaign-petition-EN": {
     "slug": "developers-tw-css-campaign-petition-EN",
@@ -23912,6 +23948,10 @@
       {
         "checked_at": "2026-09-25T08:32:51-06:00",
         "count": 2544
+      },
+      {
+        "checked_at": "2026-09-29T19:44:57-06:00",
+        "count": 2573
       }
     ],
     "title": "Tailwind-css Make Europe a safe place for all women and girls!",
@@ -23921,12 +23961,12 @@
     "summary": "English English English English English English English English English English English English Français Deutsch Deutsch Español Italiano Polski Tailwind-css Make Europe a safe place for all women and…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 2544,
+    "signatures": 2573,
     "goal": 5000,
     "lang": "en",
     "campaign_id": "wemove:developers-tw-css-campaign-petition",
     "status": "online",
-    "last_seen": "2026-09-25T08:32:51-06:00",
+    "last_seen": "2026-09-29T19:44:57-06:00",
     "offline_since": null,
     "tags": [
       "English",
@@ -23940,7 +23980,7 @@
       "Place",
       "Tailwind-css"
     ],
-    "last_checked": "2026-09-25T08:32:51-06:00"
+    "last_checked": "2026-09-29T19:44:57-06:00"
   },
   "save-the-glaciers-petition-EN": {
     "slug": "save-the-glaciers-petition-EN",
@@ -23963,7 +24003,7 @@
     "lang": "en",
     "campaign_id": "wemove:save-the-glaciers-petition",
     "status": "online",
-    "last_seen": "2026-09-25T08:32:51-06:00",
+    "last_seen": "2026-09-29T19:44:57-06:00",
     "offline_since": null,
     "tags": [
       "Government",
@@ -23977,7 +24017,7 @@
       "Kaunertal",
       "Dornauer"
     ],
-    "last_checked": "2026-09-25T08:32:51-06:00"
+    "last_checked": "2026-09-29T19:44:57-06:00"
   },
   "sharesteptest-petition-EN": {
     "slug": "sharesteptest-petition-EN",
@@ -24000,7 +24040,7 @@
     "lang": "en",
     "campaign_id": "wemove:sharesteptest-petition",
     "status": "online",
-    "last_seen": "2026-09-25T08:32:51-06:00",
+    "last_seen": "2026-09-29T19:44:57-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -24014,7 +24054,7 @@
       "Italiano",
       "Council"
     ],
-    "last_checked": "2026-09-25T08:32:51-06:00"
+    "last_checked": "2026-09-29T19:44:57-06:00"
   },
   "trial-save-the-mackerel-petition-EN": {
     "slug": "trial-save-the-mackerel-petition-EN",
@@ -24037,7 +24077,7 @@
     "lang": "en",
     "campaign_id": "wemove:trial-save-the-mackerel-petition",
     "status": "online",
-    "last_seen": "2026-09-25T08:32:51-06:00",
+    "last_seen": "2026-09-29T19:44:57-06:00",
     "offline_since": null,
     "tags": [
       "Mackerel",
@@ -24051,7 +24091,7 @@
       "Europe",
       "Future"
     ],
-    "last_checked": "2026-09-25T08:32:51-06:00"
+    "last_checked": "2026-09-29T19:44:57-06:00"
   },
   "2026-09-14-trial-killer-robots-trial-EN": {
     "slug": "2026-09-14-trial-killer-robots-trial-EN",
@@ -24068,6 +24108,10 @@
       {
         "checked_at": "2026-09-25T08:32:51-06:00",
         "count": 529
+      },
+      {
+        "checked_at": "2026-09-29T19:44:57-06:00",
+        "count": 531
       }
     ],
     "title": "Stop Killer Robots",
@@ -24078,12 +24122,12 @@
     "start_date": "2026-09-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 529,
+    "signatures": 531,
     "goal": 1000,
     "lang": "en",
     "campaign_id": "wemove:2026-09-14-trial-killer-robots-trial",
     "status": "online",
-    "last_seen": "2026-09-25T08:32:51-06:00",
+    "last_seen": "2026-09-29T19:44:57-06:00",
     "offline_since": null,
     "tags": [
       "Weapons",
@@ -24097,7 +24141,7 @@
       "Meaningful",
       "Launching"
     ],
-    "last_checked": "2026-09-25T08:32:51-06:00"
+    "last_checked": "2026-09-29T19:44:57-06:00"
   },
   "2026-09-Big-Food-petition-EN": {
     "slug": "2026-09-Big-Food-petition-EN",
@@ -24114,6 +24158,10 @@
       {
         "checked_at": "2026-09-25T08:32:51-06:00",
         "count": 55457
+      },
+      {
+        "checked_at": "2026-09-29T19:44:57-06:00",
+        "count": 55747
       }
     ],
     "title": "Big Food is making us sick - we need an EU sugar tax!",
@@ -24124,12 +24172,12 @@
     "start_date": "2026-09-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 55457,
+    "signatures": 55747,
     "goal": 75000,
     "lang": "en",
     "campaign_id": "wemove:2026-09-Big-Food-petition",
     "status": "online",
-    "last_seen": "2026-09-25T08:32:51-06:00",
+    "last_seen": "2026-09-29T19:44:57-06:00",
     "offline_since": null,
     "tags": [
       "Sugar",
@@ -24143,7 +24191,7 @@
       "Need",
       "Stop"
     ],
-    "last_checked": "2026-09-25T08:32:51-06:00"
+    "last_checked": "2026-09-29T19:44:57-06:00"
   },
   "2026-09-toxic-coffee-petition-EN": {
     "slug": "2026-09-toxic-coffee-petition-EN",
@@ -24160,6 +24208,10 @@
       {
         "checked_at": "2026-09-25T08:32:51-06:00",
         "count": 46857
+      },
+      {
+        "checked_at": "2026-09-29T19:44:57-06:00",
+        "count": 47038
       }
     ],
     "title": "No more poison in our coffee!",
@@ -24170,12 +24222,12 @@
     "start_date": "2026-09-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 46857,
+    "signatures": 47038,
     "goal": 50000,
     "lang": "en",
     "campaign_id": "wemove:2026-09-toxic-coffee-petition",
     "status": "online",
-    "last_seen": "2026-09-25T08:32:51-06:00",
+    "last_seen": "2026-09-29T19:44:57-06:00",
     "offline_since": null,
     "tags": [
       "Coffee",
@@ -24189,7 +24241,7 @@
       "Require",
       "Rules"
     ],
-    "last_checked": "2026-09-25T08:32:51-06:00"
+    "last_checked": "2026-09-29T19:44:57-06:00"
   },
   "2026-09-trial-ticket-companies-ripping-off-fans-petition-EN": {
     "slug": "2026-09-trial-ticket-companies-ripping-off-fans-petition-EN",
@@ -24206,6 +24258,10 @@
       {
         "checked_at": "2026-09-25T08:32:51-06:00",
         "count": 420
+      },
+      {
+        "checked_at": "2026-09-29T19:44:57-06:00",
+        "count": 422
       }
     ],
     "title": "Stop ticket companies from ripping off fans",
@@ -24216,12 +24272,12 @@
     "start_date": "2026-09-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 420,
+    "signatures": 422,
     "goal": 1000,
     "lang": "en",
     "campaign_id": "wemove:2026-09-trial-ticket-companies-ripping-off-fans-petition",
     "status": "online",
-    "last_seen": "2026-09-25T08:32:51-06:00",
+    "last_seen": "2026-09-29T19:44:57-06:00",
     "offline_since": null,
     "tags": [
       "Ticket",
@@ -24235,7 +24291,7 @@
       "Introduce",
       "Fairness"
     ],
-    "last_checked": "2026-09-25T08:32:51-06:00"
+    "last_checked": "2026-09-29T19:44:57-06:00"
   },
   "2026-09-trial2-fuelled-by-greed-petition-EN": {
     "slug": "2026-09-trial2-fuelled-by-greed-petition-EN",
@@ -24252,6 +24308,10 @@
       {
         "checked_at": "2026-09-25T08:32:51-06:00",
         "count": 667
+      },
+      {
+        "checked_at": "2026-09-29T19:44:57-06:00",
+        "count": 668
       }
     ],
     "title": "Keep clean fuel in our planes",
@@ -24261,12 +24321,12 @@
     "start_date": "2026-09-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 667,
+    "signatures": 668,
     "goal": 1000,
     "lang": "en",
     "campaign_id": "wemove:2026-09-trial2-fuelled-by-greed-petition",
     "status": "online",
-    "last_seen": "2026-09-25T08:32:51-06:00",
+    "last_seen": "2026-09-29T19:44:57-06:00",
     "offline_since": null,
     "tags": [
       "Fuel",
@@ -24280,7 +24340,7 @@
       "Every",
       "Decarbonise"
     ],
-    "last_checked": "2026-09-25T08:32:51-06:00"
+    "last_checked": "2026-09-29T19:44:57-06:00"
   },
   "2026-09-insurance-natural-disasters-petition-EN": {
     "slug": "2026-09-insurance-natural-disasters-petition-EN",
@@ -24304,7 +24364,7 @@
     "lang": "en",
     "campaign_id": "wemove:2026-09-insurance-natural-disasters-petition",
     "status": "online",
-    "last_seen": "2026-09-25T08:32:51-06:00",
+    "last_seen": "2026-09-29T19:44:57-06:00",
     "offline_since": null,
     "tags": [
       "Disaster",
@@ -24318,6 +24378,82 @@
       "Europe",
       "People"
     ],
-    "last_checked": "2026-09-25T08:32:51-06:00"
+    "last_checked": "2026-09-29T19:44:57-06:00"
+  },
+  "2026-09-fuelled-by-greed-petition-EN": {
+    "slug": "2026-09-fuelled-by-greed-petition-EN",
+    "first_seen": "2026-09-29T19:44:57-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-09-29T19:44:57-06:00",
+        "count": 1
+      }
+    ],
+    "title": "Keep Big Oil out of our skies",
+    "image_url": "https://wemove.cdn.actionkit.com/images/fuelled-by-greed_1024x630.jpg",
+    "url": "https://action.wemove.eu/sign/2026-09-fuelled-by-greed-petition-EN",
+    "description_full": "<p>\n\n<!-- Remove this if you don't want popins like \"This page also in English\" -->\n\n\n<img alt=\"Language selector\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/icon_translate_eeaca63123.svg\"/>\n\n          \n            \n              \n              English\n\n              \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n        \n\n</p><ul>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-fuelled-by-greed-petition-FR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Français\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-fuelled-by-greed-petition-DE\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Deutsch\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-fuelled-by-greed-petition-ES\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Español\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-fuelled-by-greed-petition-IT\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Italiano\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-fuelled-by-greed-petition-NL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Nederlands\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-fuelled-by-greed-petition-PL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Polski\n\n                    \n                    </a>\n</li>\n</ul><p>\n\n\n          Keep Big Oil out of our skies\n        \n\n<img alt=\"Keep Big Oil out of our skies\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/fuelled-by-greed_1024x630.jpg\"/>\n\n</p><h3>\n<p>To the European Commission, Members of the European Parliament and Heads of State in the EU</p>\n</h3>\n\n<h2>\n            Petition\n          </h2>\n<p>Keep the EU's cleaner fuel law for planes strong, and don't let Big Oil gut it.</p>\n<p>Planes can already fly on cleaner fuel. It's one of the best chances we have to cut the damage flying does to our planet.</p>\n<p>But a handful of oil companies control almost every drop of jet fuel in Europe. Under the law, they're the ones who must deliver the cleaner fuel. Instead of investing in it, they're lobbying to reopen and weaken the rules.</p>\n<p>As you review ReFuelEU, we call on you to keep every target in the law, with no delays:</p>\n<ol>\n<li>6% cleaner fuel in every plane's tank by 2030, 20% by 2035, and 70% by 2050.</li>\n<li>E-fuels made from renewable electricity: 1.2% by 2030, rising to 35% by 2050.</li>\n<li>Strong penalties for fuel suppliers who miss these targets, so it's never cheaper for oil companies to pay a fine than to supply cleaner fuel.</li>\n</ol>\n\n\n<h2>\n            \n              Why is this important?\n            \n          </h2>\n<p>There's good news you probably haven't heard: <strong>there is a cleaner way to fly.</strong> Planes can already fly on clean fuel made from waste like used cooking oil, instead of crude oil dug from the ground. [1] </p>\n<p><strong>It's one of the best chances we have to stop flying from wrecking the planet.</strong> With no changes needed to our existing planes. </p>\n<p><strong>The EU has even passed a law to make it happen.</strong> Every plane's fuel tank must hold a growing share of clean fuel. Starting small today and rising to 70% by 2050. [2]</p>\n<p>But a handful of oil giants like <strong>BP, Shell and Total control almost every drop of jet fuel in Europe.</strong> They own the pipelines and the tanks at the airport. And instead of building or using the clean fuel we need, they're lobbying to kill this law.  </p>\n<p>A world that flies on used cooking oil doesn't need them. <strong>That's a big problem for them.</strong></p>\n<p>Big Oil is counting on one thing: that a law hardly anyone has heard of can be gutted without anyone noticing. And it’s happening as you read this. [3] But <strong>if thousands of us tell EU leaders we want clean fuel, they'll know the lobbyists aren't the only ones in the room.</strong></p>\n<h4>\n            References:\n          </h4>\n\n<p>[1] Clean aviation fuel, known as Sustainable aviation fuel (SAF), includes not only cooking oil and animal fat, but also biofuel made from municipal solid waste, forestry residues, and agricultural waste, and e-fuels made by combining captured carbon dioxide with green hydrogen produced using renewable electricity. https://uploads.transportenvironment.org/production/files/202603_SAF_Factsheet.pdf?dm=1773407228)</p>\n<p>[2] Under the law, it's fuel suppliers, not airlines, who must put cleaner fuel in the tank. Cleaner fuel still costs more than fossil jet fuel and much of the waste used to make it is imported, so the law works best alongside public investment in affordable cleaner fuel made here in Europe, which the EU has begun to provide. https://transport.ec.europa.eu/transport-modes/air/environment/refueleu-aviation_en ; https://uploads.transportenvironment.org/production/files/202603_SAF_Factsheet.pdf?dm=1773407228</p>\n<p>[3] The EU is expected to publish its proposal for the fast-track simplification of ReFuelEU Aviation – the law that would bring clean fuel to planes – in early Autumn. https://www.ebaa.org/news/refueleu-simplification-what-is-really-on-the-table-for-operators</p>",
+    "summary": "English Français Deutsch Español Italiano Nederlands Polski Keep Big Oil out of our skies To the European Commission, Members of the European Parliament and Heads of State in the EU Petition Keep the …",
+    "start_date": "2026-09-01",
+    "started_by": "WeMove Europe",
+    "kind": "petition",
+    "signatures": 1,
+    "goal": 1000,
+    "lang": "en",
+    "campaign_id": "wemove:2026-09-fuelled-by-greed-petition",
+    "status": "online",
+    "last_seen": "2026-09-29T19:44:57-06:00",
+    "offline_since": null,
+    "tags": [
+      "Fuel",
+      "Cleaner",
+      "Clean",
+      "Keep",
+      "Planes",
+      "Every",
+      "Made",
+      "European",
+      "Waste",
+      "Aviation"
+    ],
+    "last_checked": "2026-09-29T19:44:57-06:00"
+  },
+  "2026-09-trial-dont-deregulate-banks-petition-EN": {
+    "slug": "2026-09-trial-dont-deregulate-banks-petition-EN",
+    "first_seen": "2026-09-29T19:44:57-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-09-29T19:44:57-06:00",
+        "count": 343
+      }
+    ],
+    "title": "EU: Protect us from another financial crisis, don’t deregulate banks!",
+    "image_url": "https://wemove.cdn.actionkit.com/images/bank-deregulation-trial.jpg",
+    "url": "https://action.wemove.eu/sign/2026-09-trial-dont-deregulate-banks-petition-EN",
+    "description_full": "<p>\n\n\n          EU: Protect us from another financial crisis, don’t deregulate banks!\n        \n\n<img alt=\"EU: Protect us from another financial crisis, don’t deregulate banks!\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/bank-deregulation-trial.jpg\"/>\n\n</p><h3>\n<p>To the Commissioner for Financial Services and the Savings and Investments Union Maria Luís Albuquerque, Commission President Ursula von der Leyen, the Council of the European Union and the European Parliament</p>\n</h3>\n\n<h2>\n            Petition\n          </h2>\n<p>We call on you to protect people over profits, and <strong>ensure EU banking regulation is strong enough for banks to withstand another financial crisis</strong> like the one in 2008. Do not engage in an international race to the bottom and don’t cut crucial rules that protect our financial system and keep banks in check. <br/><br/>We especially ask you to refrain from:<br/></p>\n<ul>\n<li><strong>easing capital requirements</strong> for banks</li>\n<li><strong>removing caps on bonuses </strong>for bankers </li>\n<li><strong>shifting banking supervision focus</strong> from protecting financial stability and consumers to competitiveness</li>\n</ul>\n\n\n<h2>\n            \n              Why is this important?\n            \n          </h2>\n<p>You probably still remember the fear and worry when the financial crisis hit in 2008. <strong>Millions of people were losing their jobs and their homes.</strong> </p>\n<p>After the crisis, the EU took action and introduced stronger rules to keep banks in check. [1] But now – terrifyingly – those rules are at risk. [2]</p>\n<p><strong>The Trump administration is making a \"bonfire\" of banking rules in the US, and there are signs the EU wants to follow suit. </strong>[3]</p>\n<p>The EU is about to carry out a major review of banking rules and many fear it will give banks too much freedom. It could reduce the funds banks need to keep to cover unexpected losses, and remove caps on bankers’ bonuses. [4]</p>\n<p><strong>If it’s allowed to go ahead, it could lead to another 2008-style crisis.</strong> Where profit-hungry banks need to be bailed out by the state and people like you and me have to pay the price. </p>\n<p><strong>Right now, the new rules are a draft.</strong> This means there’s still time for us to push back, and make sure we are kept safe from another financial crisis. [5]</p>\n<p><strong>Sign the petition to tell the EU: Don’t push us into another financial crisis, don’t deregulate banks!</strong></p>\n<h4>\n            References:\n          </h4>\n\n\n<p>[1] https://publications.parliament.uk/pa/ld201415/ldselect/ldeucom/103/10305.htm</p>\n<p>[2] and [4] https://www.politico.eu/article/eu-banks-copy-us-deregulation-playbook/ </p>\n<p>[3] https://www.politico.com/newsletters/morning-money/2026/07/22/deregulation-on-both-sides-of-the-pond-01007339</p>\n<p>[5] https://www.bloomberg.com/news/articles/2026-07-17/eu-s-answer-to-trump-s-bank-deregulation-agenda-explainer </p>",
+    "summary": "EU: Protect us from another financial crisis, don’t deregulate banks! To the Commissioner for Financial Services and the Savings and Investments Union Maria Luís Albuquerque, Commission President Ursu…",
+    "start_date": "2026-09-01",
+    "started_by": "WeMove Europe",
+    "kind": "petition",
+    "signatures": 343,
+    "goal": 1000,
+    "lang": "en",
+    "campaign_id": "wemove:2026-09-trial-dont-deregulate-banks-petition",
+    "status": "online",
+    "last_seen": "2026-09-29T19:44:57-06:00",
+    "offline_since": null,
+    "tags": [
+      "Financial",
+      "Banks",
+      "Crisis",
+      "Rules",
+      "Protect",
+      "Deregulate",
+      "Banking",
+      "People",
+      "Union",
+      "Keep"
+    ],
+    "last_checked": "2026-09-29T19:44:57-06:00"
   }
 }
