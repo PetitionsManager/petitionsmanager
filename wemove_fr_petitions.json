@@ -31,12 +31,9 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-09-30T11:39:06-06:00",
+    "generated_at": "2026-09-30T12:13:25-06:00",
     "petition_count": 227,
     "available": 294,
-    "new_petitions_last_run": [
-      "2026-09-fuelled-by-greed-petition-FR"
-    ],
     "unbrauchbare": {
       "2023-06-deaths-at-sea-testing-FR": "2026-09-05T14:54:52-06:00",
       "2023-06-test11-simon-petition-FR": "2026-09-05T14:54:52-06:00",
@@ -106,8 +103,9 @@
       "lucas-test-donation-2-petition-FR": "2026-09-18T14:40:58-06:00",
       "2026-09-insurance-natural-disasters-petition-FR": "2026-09-22T12:02:38-06:00"
     },
+    "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-09-30T11:39:06-06:00",
+      "stand": "2026-09-30T12:13:25-06:00",
       "gefunden": 294,
       "im_bestand": 227,
       "unbrauchbar": 67,
@@ -136,10 +134,26 @@
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
         "neu": 1
+      },
+      {
+        "zeit": "2026-09-30T12:13:25-06:00",
+        "gesamt": 227,
+        "online": 219,
+        "offline": 8,
+        "ohne_titel": 8,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 8,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 186,
+        "juengstes_start": "2026-09-01",
+        "mit_code_im_text": 0,
+        "herkunft": "lokal_cron",
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-09-30T11:39:06-06:00",
+      "zeit": "2026-09-30T12:13:25-06:00",
       "gesamt": 227,
       "online": 219,
       "offline": 8,
