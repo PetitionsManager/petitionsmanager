@@ -31,7 +31,7 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-10-03T11:41:06-06:00",
+    "generated_at": "2026-10-03T12:18:27-06:00",
     "petition_count": 227,
     "available": 294,
     "unbrauchbare": {
@@ -105,7 +105,7 @@
     },
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-10-03T11:41:06-06:00",
+      "stand": "2026-10-03T12:18:27-06:00",
       "gefunden": 294,
       "im_bestand": 227,
       "unbrauchbar": 67,
@@ -120,7 +120,7 @@
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-10-03T11:41:06-06:00",
+        "zeit": "2026-10-03T12:18:27-06:00",
         "gesamt": 227,
         "online": 219,
         "offline": 8,
@@ -137,7 +137,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-10-03T11:41:06-06:00",
+      "zeit": "2026-10-03T12:18:27-06:00",
       "gesamt": 227,
       "online": 219,
       "offline": 8,
@@ -150,7 +150,7 @@
       "juengstes_start": "2026-09-01",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-10-03T11:41:06-06:00",
+    "verlauf_felder_ab": "2026-10-03T12:18:27-06:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 219
@@ -4034,7 +4034,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-climate-message-testing-climate-nature-petition",
     "status": "online",
-    "last_seen": "2026-09-30T09:47:07-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Polski",
@@ -4048,7 +4048,7 @@
       "Inverser",
       "Tendance"
     ],
-    "last_checked": "2026-09-30T09:47:07-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-04-EU-elections-GOTV-climate-message-testing-food-security-petition-FR": {
     "slug": "2024-04-EU-elections-GOTV-climate-message-testing-food-security-petition-FR",
@@ -4071,7 +4071,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-climate-message-testing-food-security-petition",
     "status": "online",
-    "last_seen": "2026-09-30T09:47:07-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Polski",
@@ -4085,7 +4085,7 @@
       "Inverser",
       "Tendance"
     ],
-    "last_checked": "2026-09-30T09:47:07-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-04-EU-elections-GOTV-extremists-message-testing-eu-unity-hr-FR": {
     "slug": "2024-04-EU-elections-GOTV-extremists-message-testing-eu-unity-hr-FR",
@@ -4108,7 +4108,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-extremists-message-testing-eu-unity-hr",
     "status": "online",
-    "last_seen": "2026-09-30T09:47:07-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Nederlands",
@@ -4122,7 +4122,7 @@
       "Extrémistes",
       "Gagner"
     ],
-    "last_checked": "2026-09-30T09:47:07-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-04-EU-elections-GOTV-extremists-message-testing-far-right-democracy-hr-FR": {
     "slug": "2024-04-EU-elections-GOTV-extremists-message-testing-far-right-democracy-hr-FR",
@@ -4145,7 +4145,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-extremists-message-testing-far-right-democracy-hr",
     "status": "online",
-    "last_seen": "2026-09-30T09:47:07-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Nederlands",
@@ -4159,7 +4159,7 @@
       "Extrémistes",
       "Gagner"
     ],
-    "last_checked": "2026-09-30T09:47:07-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-04-EU-elections-GOTV-extremists-message-testing-far-right-feminism-hr-FR": {
     "slug": "2024-04-EU-elections-GOTV-extremists-message-testing-far-right-feminism-hr-FR",
@@ -4182,7 +4182,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2024-04-EU-elections-GOTV-extremists-message-testing-far-right-feminism-hr",
     "status": "online",
-    "last_seen": "2026-09-30T09:47:07-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Nederlands",
@@ -4196,7 +4196,7 @@
       "Extrémistes",
       "Gagner"
     ],
-    "last_checked": "2026-09-30T09:47:07-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-04-GOTV-message-testing-get-stuff-done-climate-backsliding-FR": {
     "slug": "2024-04-GOTV-message-testing-get-stuff-done-climate-backsliding-FR",
@@ -4219,7 +4219,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2024-04-GOTV-message-testing-get-stuff-done-climate-backsliding",
     "status": "online",
-    "last_seen": "2026-09-30T09:47:07-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Nous",
@@ -4233,7 +4233,7 @@
       "English",
       "Español"
     ],
-    "last_checked": "2026-09-30T09:47:07-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-04-GOTV-message-testing-get-stuff-done-future-frame-FR": {
     "slug": "2024-04-GOTV-message-testing-get-stuff-done-future-frame-FR",
@@ -4256,7 +4256,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2024-04-GOTV-message-testing-get-stuff-done-future-frame",
     "status": "online",
-    "last_seen": "2026-09-30T09:47:07-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Dans",
@@ -4270,7 +4270,7 @@
       "Español",
       "Lequel"
     ],
-    "last_checked": "2026-09-30T09:47:07-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-04-recognise-Palestine-petition-FR": {
     "slug": "2024-04-recognise-Palestine-petition-FR",
@@ -4291,6 +4291,10 @@
       {
         "checked_at": "2026-09-25T10:23:25-06:00",
         "count": 109521
+      },
+      {
+        "checked_at": "2026-10-03T12:14:53-06:00",
+        "count": 109523
       }
     ],
     "title": "Reconnaissez la voix et l’avenir du peuple palestinien !",
@@ -4301,12 +4305,12 @@
     "start_date": "2024-04-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 109521,
+    "signatures": 109523,
     "goal": 150000,
     "lang": "fr",
     "campaign_id": "wemove:2024-04-recognise-Palestine-petition",
     "status": "online",
-    "last_seen": "2026-09-30T09:47:07-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Pour",
@@ -4320,7 +4324,7 @@
       "Paix",
       "Avenir"
     ],
-    "last_checked": "2026-09-30T09:47:07-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-05-antoine-training-campaign-petition-FR": {
     "slug": "2024-05-antoine-training-campaign-petition-FR",
@@ -4344,7 +4348,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2024-05-antoine-training-campaign-petition",
     "status": "online",
-    "last_seen": "2026-09-30T09:47:07-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Raiffeisen",
@@ -4358,7 +4362,7 @@
       "Business",
       "Already"
     ],
-    "last_checked": "2026-09-30T09:47:07-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-05-GOTV-Use-You-Power-petition-FR": {
     "slug": "2024-05-GOTV-Use-You-Power-petition-FR",
@@ -4381,7 +4385,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2024-05-GOTV-Use-You-Power-petition",
     "status": "online",
-    "last_seen": "2026-09-30T09:47:07-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Pouvoir",
@@ -4395,7 +4399,7 @@
       "Proches",
       "Nederlands"
     ],
-    "last_checked": "2026-09-30T09:47:07-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-06-majid-training-campaign-petition-FR": {
     "slug": "2024-06-majid-training-campaign-petition-FR",
@@ -4418,7 +4422,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2024-06-majid-training-campaign-petition",
     "status": "online",
-    "last_seen": "2026-09-30T09:47:07-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Raiffeisen",
@@ -4432,7 +4436,7 @@
       "Immediately",
       "Already"
     ],
-    "last_checked": "2026-09-30T09:47:07-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-06-Renew-dont-normalise-hate-petition-FR": {
     "slug": "2024-06-Renew-dont-normalise-hate-petition-FR",
@@ -4459,7 +4463,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2024-06-Renew-dont-normalise-hate-petition",
     "status": "online",
-    "last_seen": "2026-09-30T09:47:07-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Europe",
@@ -4473,7 +4477,7 @@
       "Représentant",
       "Néerlandais"
     ],
-    "last_checked": "2026-09-30T09:47:07-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-07-big-meat-petition-FR": {
     "slug": "2024-07-big-meat-petition-FR",
@@ -4509,7 +4513,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2024-07-big-meat-petition",
     "status": "online",
-    "last_seen": "2026-09-30T09:47:07-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Viande",
@@ -4523,7 +4527,7 @@
       "Alimentation",
       "Alimentaire"
     ],
-    "last_checked": "2026-09-30T09:47:07-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-07-lidl-chicken-scandal-petition-FR": {
     "slug": "2024-07-lidl-chicken-scandal-petition-FR",
@@ -4551,7 +4555,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2024-07-lidl-chicken-scandal-petition",
     "status": "online",
-    "last_seen": "2026-09-30T09:47:07-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Lidl",
@@ -4565,7 +4569,7 @@
       "Commitment",
       "Engagement"
     ],
-    "last_checked": "2026-09-30T09:47:07-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-07-pesticide-free-petition-FR": {
     "slug": "2024-07-pesticide-free-petition-FR",
@@ -4578,6 +4582,10 @@
       {
         "checked_at": "2026-09-18T10:25:44-06:00",
         "count": 115057
+      },
+      {
+        "checked_at": "2026-10-03T12:14:53-06:00",
+        "count": 115058
       }
     ],
     "title": "Interdisez les pesticides toxiques !",
@@ -4587,12 +4595,12 @@
     "start_date": "2024-07-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 115057,
+    "signatures": 115058,
     "goal": 150000,
     "lang": "fr",
     "campaign_id": "wemove:2024-07-pesticide-free-petition",
     "status": "online",
-    "last_seen": "2026-09-30T09:47:07-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Pesticides",
@@ -4606,7 +4614,7 @@
       "Populations",
       "Commission"
     ],
-    "last_checked": "2026-09-30T09:47:07-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-08-Fossil-Fuel-Firewall-petition-FR": {
     "slug": "2024-08-Fossil-Fuel-Firewall-petition-FR",
@@ -4630,7 +4638,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2024-08-Fossil-Fuel-Firewall-petition",
     "status": "online",
-    "last_seen": "2026-09-30T09:47:07-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Fossiles",
@@ -4644,7 +4652,7 @@
       "Commission",
       "Européen"
     ],
-    "last_checked": "2026-09-30T09:47:07-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-08-homes-for-people-not-for-profit-petition-FR": {
     "slug": "2024-08-homes-for-people-not-for-profit-petition-FR",
@@ -4668,7 +4676,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2024-08-homes-for-people-not-for-profit-petition",
     "status": "online",
-    "last_seen": "2026-09-30T09:47:07-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Pour",
@@ -4682,7 +4690,7 @@
       "Commission",
       "Européen"
     ],
-    "last_checked": "2026-09-30T09:47:07-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-08-language-switch-pages-petition-FR": {
     "slug": "2024-08-language-switch-pages-petition-FR",
@@ -4699,6 +4707,10 @@
       {
         "checked_at": "2026-09-22T10:10:26-06:00",
         "count": 372
+      },
+      {
+        "checked_at": "2026-10-03T12:14:53-06:00",
+        "count": 375
       }
     ],
     "title": "Merci de faire partie de ce mouvement !",
@@ -4708,12 +4720,12 @@
     "start_date": "2024-08-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 372,
+    "signatures": 375,
     "goal": 1000,
     "lang": "fr",
     "campaign_id": "wemove:2024-08-language-switch-pages-petition",
     "status": "online",
-    "last_seen": "2026-09-30T10:23:04-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Français",
@@ -4727,7 +4739,7 @@
       "Communiquer",
       "Formulaire"
     ],
-    "last_checked": "2026-09-30T10:23:04-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-09-ban-octopus-farming-in-the-eu-petition-FR": {
     "slug": "2024-09-ban-octopus-farming-in-the-eu-petition-FR",
@@ -4767,7 +4779,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2024-09-ban-octopus-farming-in-the-eu-petition",
     "status": "online",
-    "last_seen": "2026-09-30T10:23:04-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Poulpes",
@@ -4781,7 +4793,7 @@
       "Adressée",
       "Européen"
     ],
-    "last_checked": "2026-09-30T10:23:04-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-09-digital-futures-petition-FR": {
     "slug": "2024-09-digital-futures-petition-FR",
@@ -4805,7 +4817,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2024-09-digital-futures-petition",
     "status": "online",
-    "last_seen": "2026-09-30T10:23:04-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Nous",
@@ -4819,7 +4831,7 @@
       "REDEVABILITÉ",
       "Numérique"
     ],
-    "last_checked": "2026-09-30T10:23:04-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-09-free-school-meals-petition-FR": {
     "slug": "2024-09-free-school-meals-petition-FR",
@@ -4842,7 +4854,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2024-09-free-school-meals-petition",
     "status": "online",
-    "last_seen": "2026-09-30T10:23:04-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Enfants",
@@ -4856,7 +4868,7 @@
       "Nous",
       "Commission"
     ],
-    "last_checked": "2026-09-30T10:23:04-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-09-hajar-training-petition-FR": {
     "slug": "2024-09-hajar-training-petition-FR",
@@ -4880,7 +4892,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2024-09-hajar-training-petition",
     "status": "online",
-    "last_seen": "2026-09-30T10:23:04-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Pesticides",
@@ -4894,7 +4906,7 @@
       "Nederlands",
       "Interests"
     ],
-    "last_checked": "2026-09-30T10:23:04-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-09-pour-plan-national-contre-le-viol-petition-FR": {
     "slug": "2024-09-pour-plan-national-contre-le-viol-petition-FR",
@@ -4911,6 +4923,10 @@
       {
         "checked_at": "2026-09-22T10:10:26-06:00",
         "count": 89790
+      },
+      {
+        "checked_at": "2026-10-03T12:14:53-06:00",
+        "count": 89791
       }
     ],
     "title": "Pour un Plan national contre le viol",
@@ -4921,12 +4937,12 @@
     "start_date": "2024-09-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 89790,
+    "signatures": 89791,
     "goal": 100000,
     "lang": "fr",
     "campaign_id": "wemove:2024-09-pour-plan-national-contre-le-viol-petition",
     "status": "online",
-    "last_seen": "2026-09-30T10:23:04-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Pour",
@@ -4940,7 +4956,7 @@
       "Gisèle",
       "Viols"
     ],
-    "last_checked": "2026-09-30T10:23:04-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-09-seasonal-farm-workers-petition-FR": {
     "slug": "2024-09-seasonal-farm-workers-petition-FR",
@@ -4972,7 +4988,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2024-09-seasonal-farm-workers-petition",
     "status": "online",
-    "last_seen": "2026-09-30T10:23:04-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Agricoles",
@@ -4986,7 +5002,7 @@
       "Travailleur",
       "Européen"
     ],
-    "last_checked": "2026-09-30T10:23:04-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-1-la-trahison-de-sarcozy-car-nous-n-en-voulions-pas-de-cette-europ-FR": {
     "slug": "2024-1-la-trahison-de-sarcozy-car-nous-n-en-voulions-pas-de-cette-europ-FR",
@@ -5029,7 +5045,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2024-1-vollgeld-fur-alle",
     "status": "online",
-    "last_seen": "2026-09-30T10:23:04-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Pour",
@@ -5043,7 +5059,7 @@
       "Tous",
       "COMMERCIALES"
     ],
-    "last_checked": "2026-09-30T10:23:04-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-10-are-you-sick-and-tired-of-changing-the-clock-twice-a-year-FR": {
     "slug": "2024-10-are-you-sick-and-tired-of-changing-the-clock-twice-a-year-FR",
@@ -5068,6 +5084,10 @@
       {
         "checked_at": "2026-09-30T10:23:04-06:00",
         "count": 6774
+      },
+      {
+        "checked_at": "2026-10-03T12:14:53-06:00",
+        "count": 6795
       }
     ],
     "title": "VOUS EN AVEZ ASSEZ DE CHANGER D’HEURE DEUX FOIS PAR AN?",
@@ -5078,12 +5098,12 @@
     "start_date": "2024-10-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 6774,
+    "signatures": 6795,
     "goal": 10000,
     "lang": "fr",
     "campaign_id": "wemove:2024-10-are-you-sick-and-tired-of-changing-the-clock-twice-a-year",
     "status": "online",
-    "last_seen": "2026-09-30T10:23:04-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Suomalainen",
@@ -5097,7 +5117,7 @@
       "Russian",
       "Svenska"
     ],
-    "last_checked": "2026-09-30T10:23:04-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-10-no-toxic-mineral-oils-in-our-food-petition-FR": {
     "slug": "2024-10-no-toxic-mineral-oils-in-our-food-petition-FR",
@@ -5133,7 +5153,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2024-10-no-toxic-mineral-oils-in-our-food-petition",
     "status": "online",
-    "last_seen": "2026-09-30T10:23:04-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Huiles",
@@ -5147,7 +5167,7 @@
       "Pour",
       "Alimentation"
     ],
-    "last_checked": "2026-09-30T10:23:04-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-10-paul-watson-france-asylum-petition-FR": {
     "slug": "2024-10-paul-watson-france-asylum-petition-FR",
@@ -5170,7 +5190,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2024-10-paul-watson-france-asylum-petition",
     "status": "online",
-    "last_seen": "2026-09-30T10:23:04-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Watson",
@@ -5184,7 +5204,7 @@
       "Politique",
       "Accorder"
     ],
-    "last_checked": "2026-09-30T10:23:04-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-10-seals-ban-petition-FR": {
     "slug": "2024-10-seals-ban-petition-FR",
@@ -5220,7 +5240,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2024-10-seals-ban-petition",
     "status": "online",
-    "last_seen": "2026-09-30T10:23:04-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Nous",
@@ -5234,7 +5254,7 @@
       "Dérivés",
       "Touchez"
     ],
-    "last_checked": "2026-09-30T10:23:04-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-10-youmove-wildlife-crossings-petition-FR": {
     "slug": "2024-10-youmove-wildlife-crossings-petition-FR",
@@ -5266,7 +5286,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2024-10-youmove-wildlife-crossings-petition",
     "status": "online",
-    "last_seen": "2026-09-30T10:23:04-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Animaux",
@@ -5280,7 +5300,7 @@
       "Tous",
       "Infrastructures"
     ],
-    "last_checked": "2026-09-30T10:23:04-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-11-i-love-cheese-puffs-FR": {
     "slug": "2024-11-i-love-cheese-puffs-FR",
@@ -5303,7 +5323,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2024-11-i-love-cheese-puffs",
     "status": "online",
-    "last_seen": "2026-09-30T10:23:04-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Puffs",
@@ -5317,7 +5337,7 @@
       "Cheesy",
       "Cette"
     ],
-    "last_checked": "2026-09-30T10:23:04-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-11-marcin-test-norwegian1-FR": {
     "slug": "2024-11-marcin-test-norwegian1-FR",
@@ -5340,7 +5360,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2024-11-marcin-test-norwegian1",
     "status": "online",
-    "last_seen": "2026-09-30T10:23:04-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Pétition",
@@ -5354,7 +5374,7 @@
       "English",
       "French"
     ],
-    "last_checked": "2026-09-30T10:23:04-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-12-Amazon-workers-petition-FR": {
     "slug": "2024-12-Amazon-workers-petition-FR",
@@ -5378,7 +5398,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2024-12-Amazon-workers-petition",
     "status": "online",
-    "last_seen": "2026-09-30T10:23:04-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Amazon",
@@ -5392,7 +5412,7 @@
       "Européen",
       "Européennes"
     ],
-    "last_checked": "2026-09-30T10:23:04-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-12-Soumahoro-antiracism-petition-FR": {
     "slug": "2024-12-Soumahoro-antiracism-petition-FR",
@@ -5416,7 +5436,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2024-12-Soumahoro-antiracism-petition",
     "status": "online",
-    "last_seen": "2026-09-30T10:23:04-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Européen",
@@ -5430,7 +5450,7 @@
       "Haine",
       "Place"
     ],
-    "last_checked": "2026-09-30T10:23:04-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-2--FR": {
     "slug": "2024-2--FR",
@@ -5463,7 +5483,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2024-2-free-doctor-ahmed-muhanna-and-the-awda-medical-staff",
     "status": "online",
-    "last_seen": "2026-09-30T10:23:04-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Muhanna",
@@ -5477,7 +5497,7 @@
       "Libération",
       "Personnel"
     ],
-    "last_checked": "2026-09-30T10:23:04-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-2-fret-ferroviaire-europeen-FR": {
     "slug": "2024-2-fret-ferroviaire-europeen-FR",
@@ -5500,7 +5520,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2024-2-fret-ferroviaire-europeen",
     "status": "online",
-    "last_seen": "2026-09-30T10:23:04-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Européen",
@@ -5514,7 +5534,7 @@
       "Européenne",
       "Présidente"
     ],
-    "last_checked": "2026-09-30T10:23:04-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-2-sauvegarder-les-forets-FR": {
     "slug": "2024-2-sauvegarder-les-forets-FR",
@@ -5536,7 +5556,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2024-2-sauvegarder-les-forets",
     "status": "online",
-    "last_seen": "2026-09-30T10:23:04-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Pétition",
@@ -5550,7 +5570,7 @@
       "Cette",
       "Verts"
     ],
-    "last_checked": "2026-09-30T10:23:04-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-3-alerte-destruction-dune-zone-humide-de-10-hectares-FR": {
     "slug": "2024-3-alerte-destruction-dune-zone-humide-de-10-hectares-FR",
@@ -5572,7 +5592,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2024-3-alerte-destruction-dune-zone-humide-de-10-hectares",
     "status": "online",
-    "last_seen": "2026-09-30T10:23:04-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Zone",
@@ -5586,7 +5606,7 @@
       "Dans",
       "Pour"
     ],
-    "last_checked": "2026-09-30T10:23:04-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-3-pas-de-mega-camions-sur-nos-routes-FR": {
     "slug": "2024-3-pas-de-mega-camions-sur-nos-routes-FR",
@@ -5608,7 +5628,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2024-3-pas-de-mega-camions-sur-nos-routes",
     "status": "online",
-    "last_seen": "2026-09-30T10:23:04-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "Pétition",
@@ -5621,7 +5641,7 @@
       "Name",
       "Vous"
     ],
-    "last_checked": "2026-09-30T10:23:04-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-3-this-is-michal-s-test-youmove-campaign-FR": {
     "slug": "2024-3-this-is-michal-s-test-youmove-campaign-FR",
@@ -5643,7 +5663,7 @@
     "lang": "fr",
     "campaign_id": "wemove:2024-3-this-is-michal-s-test-youmove-campaign",
     "status": "online",
-    "last_seen": "2026-09-30T10:23:04-06:00",
+    "last_seen": "2026-10-03T12:14:53-06:00",
     "offline_since": null,
     "tags": [
       "French",
@@ -5657,7 +5677,7 @@
       "Pourquoi",
       "English"
     ],
-    "last_checked": "2026-09-30T10:23:04-06:00"
+    "last_checked": "2026-10-03T12:14:53-06:00"
   },
   "2024-4-des-panneaux-photovoltaiques-sur-les-toits-pas-dans-les-bois-FR": {
     "slug": "2024-4-des-panneaux-photovoltaiques-sur-les-toits-pas-dans-les-bois-FR",
