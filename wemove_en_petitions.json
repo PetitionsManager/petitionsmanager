@@ -31,7 +31,7 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-10-02T17:19:36-06:00",
+    "generated_at": "2026-10-02T17:57:41-06:00",
     "petition_count": 610,
     "available": 712,
     "unbrauchbare": {
@@ -140,7 +140,7 @@
     },
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-10-02T17:19:36-06:00",
+      "stand": "2026-10-02T17:57:41-06:00",
       "gefunden": 712,
       "im_bestand": 610,
       "unbrauchbar": 102,
@@ -155,7 +155,7 @@
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-10-02T17:19:36-06:00",
+        "zeit": "2026-10-02T17:57:41-06:00",
         "gesamt": 610,
         "online": 609,
         "offline": 1,
@@ -172,7 +172,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-10-02T17:19:36-06:00",
+      "zeit": "2026-10-02T17:57:41-06:00",
       "gesamt": 610,
       "online": 609,
       "offline": 1,
@@ -185,7 +185,7 @@
       "juengstes_start": "2026-09-01",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-10-02T17:19:36-06:00",
+    "verlauf_felder_ab": "2026-10-02T17:57:41-06:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 609
@@ -14229,6 +14229,10 @@
       {
         "checked_at": "2026-09-29T15:59:01-06:00",
         "count": 46627
+      },
+      {
+        "checked_at": "2026-10-02T17:54:21-06:00",
+        "count": 46628
       }
     ],
     "title": "Europe, break free from Trump Gas!",
@@ -14239,12 +14243,12 @@
     "start_date": "2025-04-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 46627,
+    "signatures": 46628,
     "goal": 50000,
     "lang": "en",
     "campaign_id": "wemove:2025-04-Trump-Gas-petition",
     "status": "online",
-    "last_seen": "2026-09-29T15:59:01-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "Trump",
@@ -14258,7 +14262,7 @@
       "Energy",
       "Fair"
     ],
-    "last_checked": "2026-09-29T15:59:01-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-05-14-trial-olga-v-onboarding-coffee-child-labour-petition-EN": {
     "slug": "2025-05-14-trial-olga-v-onboarding-coffee-child-labour-petition-EN",
@@ -14282,7 +14286,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-05-14-trial-olga-v-onboarding-coffee-child-labour-petition",
     "status": "online",
-    "last_seen": "2026-09-29T15:59:01-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "Reference",
@@ -14295,7 +14299,7 @@
       "Important",
       "Target"
     ],
-    "last_checked": "2026-09-29T15:59:01-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-05-berlin-onboarding-campaign-petition-EN": {
     "slug": "2025-05-berlin-onboarding-campaign-petition-EN",
@@ -14319,7 +14323,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-05-berlin-onboarding-campaign-petition",
     "status": "online",
-    "last_seen": "2026-09-29T15:59:01-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "Google",
@@ -14333,7 +14337,7 @@
       "Time",
       "Competition"
     ],
-    "last_checked": "2026-09-29T15:59:01-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-05-breakupbigtech-petition-EN": {
     "slug": "2025-05-breakupbigtech-petition-EN",
@@ -14358,6 +14362,10 @@
       {
         "checked_at": "2026-09-29T15:59:01-06:00",
         "count": 89283
+      },
+      {
+        "checked_at": "2026-10-02T17:54:21-06:00",
+        "count": 89296
       }
     ],
     "title": "Break up Big Tech",
@@ -14368,12 +14376,12 @@
     "start_date": "2025-05-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 89283,
+    "signatures": 89296,
     "goal": 100000,
     "lang": "en",
     "campaign_id": "wemove:2025-05-breakupbigtech-petition",
     "status": "online",
-    "last_seen": "2026-09-29T15:59:01-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "Google",
@@ -14387,7 +14395,7 @@
       "Time",
       "Competition"
     ],
-    "last_checked": "2026-09-29T15:59:01-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-05-criminalisation-migration-petition-EN": {
     "slug": "2025-05-criminalisation-migration-petition-EN",
@@ -14419,7 +14427,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-05-criminalisation-migration-petition",
     "status": "online",
-    "last_seen": "2026-09-29T15:59:01-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -14433,7 +14441,7 @@
       "Commission",
       "Including"
     ],
-    "last_checked": "2026-09-29T15:59:01-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-05-EU-trade-Israel-petition-EN": {
     "slug": "2025-05-EU-trade-Israel-petition-EN",
@@ -14450,6 +14458,10 @@
       {
         "checked_at": "2026-09-21T17:50:43-06:00",
         "count": 120850
+      },
+      {
+        "checked_at": "2026-10-02T17:54:21-06:00",
+        "count": 120851
       }
     ],
     "title": "No EU Business with War Criminals",
@@ -14460,12 +14472,12 @@
     "start_date": "2025-05-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 120850,
+    "signatures": 120851,
     "goal": 150000,
     "lang": "en",
     "campaign_id": "wemove:2025-05-EU-trade-Israel-petition",
     "status": "online",
-    "last_seen": "2026-09-29T15:59:01-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -14479,7 +14491,7 @@
       "Member",
       "States"
     ],
-    "last_checked": "2026-09-29T15:59:01-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-05-landmine-ban-petition-EN": {
     "slug": "2025-05-landmine-ban-petition-EN",
@@ -14496,6 +14508,10 @@
       {
         "checked_at": "2026-09-24T18:06:21-06:00",
         "count": 98175
+      },
+      {
+        "checked_at": "2026-10-02T17:54:21-06:00",
+        "count": 98176
       }
     ],
     "title": "Don’t let Europe bring back landmines",
@@ -14506,12 +14522,12 @@
     "start_date": "2025-05-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 98175,
+    "signatures": 98176,
     "goal": 100000,
     "lang": "en",
     "campaign_id": "wemove:2025-05-landmine-ban-petition",
     "status": "online",
-    "last_seen": "2026-09-29T15:59:01-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "Landmines",
@@ -14525,7 +14541,7 @@
       "Estonia",
       "Finland"
     ],
-    "last_checked": "2026-09-29T15:59:01-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-05-trial-Berlin-onboarding-iskra-petition-EN": {
     "slug": "2025-05-trial-Berlin-onboarding-iskra-petition-EN",
@@ -14549,7 +14565,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-05-trial-Berlin-onboarding-iskra-petition",
     "status": "online",
-    "last_seen": "2026-09-29T15:59:01-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -14563,7 +14579,7 @@
       "Parliament",
       "Fjkdskfj"
     ],
-    "last_checked": "2026-09-29T15:59:01-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-05-trial-berlin-onboarding-rebecca-petition-EN": {
     "slug": "2025-05-trial-berlin-onboarding-rebecca-petition-EN",
@@ -14586,7 +14602,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-05-trial-berlin-onboarding-rebecca-petition",
     "status": "online",
-    "last_seen": "2026-09-29T15:59:01-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "Google",
@@ -14600,7 +14616,7 @@
       "Rebecca",
       "Break"
     ],
-    "last_checked": "2026-09-29T15:59:01-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-05-trial-criminalisation-migration-petition-EN": {
     "slug": "2025-05-trial-criminalisation-migration-petition-EN",
@@ -14624,7 +14640,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-05-trial-criminalisation-migration-petition",
     "status": "online",
-    "last_seen": "2026-09-29T15:59:01-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "Christian",
@@ -14638,7 +14654,7 @@
       "Especially",
       "Rapporteur"
     ],
-    "last_checked": "2026-09-29T15:59:01-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-05-trial-EU-trade-Israel-petition-EN": {
     "slug": "2025-05-trial-EU-trade-Israel-petition-EN",
@@ -14661,7 +14677,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-05-trial-EU-trade-Israel-petition",
     "status": "online",
-    "last_seen": "2026-09-29T15:59:01-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -14675,7 +14691,7 @@
       "Government",
       "Parliament"
     ],
-    "last_checked": "2026-09-29T15:59:01-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-05-trial-Europol-regulation-trial-EN": {
     "slug": "2025-05-trial-Europol-regulation-trial-EN",
@@ -14699,7 +14715,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-05-trial-Europol-regulation-trial",
     "status": "online",
-    "last_seen": "2026-09-29T15:59:01-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -14713,7 +14729,7 @@
       "People",
       "Regulation"
     ],
-    "last_checked": "2026-09-29T15:59:01-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-05-trial-Hungary-antiNGO-law-petition-EN": {
     "slug": "2025-05-trial-Hungary-antiNGO-law-petition-EN",
@@ -14737,7 +14753,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-05-trial-Hungary-antiNGO-law-petition",
     "status": "online",
-    "last_seen": "2026-09-29T15:59:01-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "Hungary",
@@ -14751,7 +14767,7 @@
       "Bill",
       "Institutions"
     ],
-    "last_checked": "2026-09-29T15:59:01-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-05-trial-landmine-ban-1-petition-EN": {
     "slug": "2025-05-trial-landmine-ban-1-petition-EN",
@@ -14774,7 +14790,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-05-trial-landmine-ban-1-petition",
     "status": "online",
-    "last_seen": "2026-09-29T15:59:01-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "Landmines",
@@ -14788,7 +14804,7 @@
       "Call",
       "Landmine"
     ],
-    "last_checked": "2026-09-29T15:59:01-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-05-trial-landmine-ban-2-petition-EN": {
     "slug": "2025-05-trial-landmine-ban-2-petition-EN",
@@ -14811,7 +14827,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-05-trial-landmine-ban-2-petition",
     "status": "online",
-    "last_seen": "2026-09-29T15:59:01-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "Landmines",
@@ -14825,7 +14841,7 @@
       "Call",
       "Landmine"
     ],
-    "last_checked": "2026-09-29T15:59:01-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-05-trial-landmine-ban-3-petition-EN": {
     "slug": "2025-05-trial-landmine-ban-3-petition-EN",
@@ -14848,7 +14864,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-05-trial-landmine-ban-3-petition",
     "status": "online",
-    "last_seen": "2026-09-29T15:59:01-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "Landmines",
@@ -14862,7 +14878,7 @@
       "Call",
       "Landmine"
     ],
-    "last_checked": "2026-09-29T15:59:01-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-05-trial-landmines-petition-EN": {
     "slug": "2025-05-trial-landmines-petition-EN",
@@ -14885,7 +14901,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-05-trial-landmines-petition",
     "status": "online",
-    "last_seen": "2026-09-29T15:59:01-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "Landmines",
@@ -14899,7 +14915,7 @@
       "Estonia",
       "Finland"
     ],
-    "last_checked": "2026-09-29T15:59:01-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-05-trial-we-cant-plant-ice-petition-EN": {
     "slug": "2025-05-trial-we-cant-plant-ice-petition-EN",
@@ -14922,7 +14938,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-05-trial-we-cant-plant-ice-petition",
     "status": "online",
-    "last_seen": "2026-09-29T15:59:01-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "Arctic",
@@ -14936,7 +14952,7 @@
       "Secretary-General",
       "Unregulated"
     ],
-    "last_checked": "2026-09-29T15:59:01-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-06-farmersunite-petition-EN": {
     "slug": "2025-06-farmersunite-petition-EN",
@@ -14959,7 +14975,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-06-farmersunite-petition",
     "status": "online",
-    "last_seen": "2026-09-29T15:59:01-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "Farmers",
@@ -14973,7 +14989,7 @@
       "Unite",
       "Stop"
     ],
-    "last_checked": "2026-09-29T15:59:01-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-06-hungary-ban-pride-trial-petition-EN": {
     "slug": "2025-06-hungary-ban-pride-trial-petition-EN",
@@ -14996,7 +15012,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-06-hungary-ban-pride-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-29T15:59:01-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "Pride",
@@ -15010,7 +15026,7 @@
       "Support",
       "Rights"
     ],
-    "last_checked": "2026-09-29T15:59:01-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-06-hungary-pride-ban-petition-EN": {
     "slug": "2025-06-hungary-pride-ban-petition-EN",
@@ -15033,7 +15049,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-06-hungary-pride-ban-petition",
     "status": "online",
-    "last_seen": "2026-09-29T15:59:01-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "Hungary",
@@ -15047,7 +15063,7 @@
       "Community",
       "Rights"
     ],
-    "last_checked": "2026-09-29T15:59:01-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-06-trial-antigreenwashing-directive-petition-EN": {
     "slug": "2025-06-trial-antigreenwashing-directive-petition-EN",
@@ -15071,7 +15087,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-06-trial-antigreenwashing-directive-petition",
     "status": "online",
-    "last_seen": "2026-09-29T15:59:01-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -15085,7 +15101,7 @@
       "Environmental",
       "Parliament"
     ],
-    "last_checked": "2026-09-29T15:59:01-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-06-trial-vape-addiction-petition-EN": {
     "slug": "2025-06-trial-vape-addiction-petition-EN",
@@ -15109,7 +15125,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-06-trial-vape-addiction-petition",
     "status": "online",
-    "last_seen": "2026-09-29T15:59:01-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "Tobacco",
@@ -15123,7 +15139,7 @@
       "Union",
       "Commission"
     ],
-    "last_checked": "2026-09-29T15:59:01-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-07-antigreenwashing-directive-petition-EN": {
     "slug": "2025-07-antigreenwashing-directive-petition-EN",
@@ -15140,6 +15156,10 @@
       {
         "checked_at": "2026-09-21T17:50:43-06:00",
         "count": 89205
+      },
+      {
+        "checked_at": "2026-10-02T17:54:21-06:00",
+        "count": 89207
       }
     ],
     "title": "No more “green” lies! Don’t let the EU kill the anti-greenwashing law.",
@@ -15150,12 +15170,12 @@
     "start_date": "2025-07-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 89205,
+    "signatures": 89207,
     "goal": 100000,
     "lang": "en",
     "campaign_id": "wemove:2025-07-antigreenwashing-directive-petition",
     "status": "online",
-    "last_seen": "2026-09-29T15:59:01-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "Green",
@@ -15169,7 +15189,7 @@
       "Climate",
       "Lies"
     ],
-    "last_checked": "2026-09-29T15:59:01-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-07-coffee-certification-schemes-petition-EN": {
     "slug": "2025-07-coffee-certification-schemes-petition-EN",
@@ -15194,6 +15214,10 @@
       {
         "checked_at": "2026-09-29T15:59:01-06:00",
         "count": 71439
+      },
+      {
+        "checked_at": "2026-10-02T17:54:21-06:00",
+        "count": 71440
       }
     ],
     "title": "Make coffee fair for people and the planet",
@@ -15204,12 +15228,12 @@
     "start_date": "2025-07-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 71439,
+    "signatures": 71440,
     "goal": 75000,
     "lang": "en",
     "campaign_id": "wemove:2025-07-coffee-certification-schemes-petition",
     "status": "online",
-    "last_seen": "2026-09-29T15:59:01-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "Coffee",
@@ -15223,7 +15247,7 @@
       "Alliance",
       "Schemes"
     ],
-    "last_checked": "2026-09-29T15:59:01-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-07-trial-coffee-certification-schemes-petition-EN": {
     "slug": "2025-07-trial-coffee-certification-schemes-petition-EN",
@@ -15247,7 +15271,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-07-trial-coffee-certification-schemes-petition",
     "status": "online",
-    "last_seen": "2026-09-29T15:59:01-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "Coffee",
@@ -15261,7 +15285,7 @@
       "Practices",
       "Schemes"
     ],
-    "last_checked": "2026-09-29T15:59:01-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-07-trial-SoMe-age-2-petition-EN": {
     "slug": "2025-07-trial-SoMe-age-2-petition-EN",
@@ -15285,7 +15309,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-07-trial-SoMe-age-2-petition",
     "status": "online",
-    "last_seen": "2026-09-29T15:59:01-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "Kids",
@@ -15299,7 +15323,7 @@
       "Make",
       "Enforceable"
     ],
-    "last_checked": "2026-09-29T15:59:01-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-08-02-trial-protect-the-wolf-trial-petition-EN": {
     "slug": "2025-08-02-trial-protect-the-wolf-trial-petition-EN",
@@ -15322,7 +15346,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-08-02-trial-protect-the-wolf-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-29T15:59:01-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "Wolves",
@@ -15336,7 +15360,7 @@
       "Already",
       "Europe"
     ],
-    "last_checked": "2026-09-29T15:59:01-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-08-end-the-plastic-era-petition-EN": {
     "slug": "2025-08-end-the-plastic-era-petition-EN",
@@ -15372,7 +15396,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-08-end-the-plastic-era-petition",
     "status": "online",
-    "last_seen": "2026-09-29T15:59:01-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "Plastic",
@@ -15386,7 +15410,7 @@
       "Leaders",
       "Treaty"
     ],
-    "last_checked": "2026-09-29T15:59:01-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-08-EU-2040-climate-goal-petition-EN": {
     "slug": "2025-08-EU-2040-climate-goal-petition-EN",
@@ -15403,6 +15427,10 @@
       {
         "checked_at": "2026-09-21T17:50:43-06:00",
         "count": 60871
+      },
+      {
+        "checked_at": "2026-10-02T17:54:21-06:00",
+        "count": 60872
       }
     ],
     "title": "We won’t let climate-deniers rest",
@@ -15413,12 +15441,12 @@
     "start_date": "2025-08-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 60871,
+    "signatures": 60872,
     "goal": 75000,
     "lang": "en",
     "campaign_id": "wemove:2025-08-EU-2040-climate-goal-petition",
     "status": "online",
-    "last_seen": "2026-09-29T15:59:01-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -15432,7 +15460,7 @@
       "Rest",
       "Stop"
     ],
-    "last_checked": "2026-09-29T15:59:01-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-08-global-plastic-treaty-trial-petition-EN": {
     "slug": "2025-08-global-plastic-treaty-trial-petition-EN",
@@ -15455,7 +15483,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-08-global-plastic-treaty-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-29T15:59:01-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "Plastic",
@@ -15469,7 +15497,7 @@
       "Last",
       "Commissioner"
     ],
-    "last_checked": "2026-09-29T15:59:01-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-08-plastic-treaty-trial-petition-EN": {
     "slug": "2025-08-plastic-treaty-trial-petition-EN",
@@ -15492,7 +15520,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-08-plastic-treaty-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-29T15:59:01-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "Plastics",
@@ -15506,7 +15534,7 @@
       "Production",
       "Resilience"
     ],
-    "last_checked": "2026-09-29T15:59:01-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-08-trial-2-USAID-contraceptives-petition-EN": {
     "slug": "2025-08-trial-2-USAID-contraceptives-petition-EN",
@@ -15530,7 +15558,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-08-trial-2-USAID-contraceptives-petition",
     "status": "online",
-    "last_seen": "2026-09-29T15:59:01-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "Save",
@@ -15544,7 +15572,7 @@
       "Destruction",
       "Health"
     ],
-    "last_checked": "2026-09-29T15:59:01-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-08-trial-2040-climate-goal-petition-EN": {
     "slug": "2025-08-trial-2040-climate-goal-petition-EN",
@@ -15567,7 +15595,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-08-trial-2040-climate-goal-petition",
     "status": "online",
-    "last_seen": "2026-09-29T15:59:01-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -15581,7 +15609,7 @@
       "Greenhouse",
       "Far-right"
     ],
-    "last_checked": "2026-09-29T15:59:01-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-08-trial-climate-action-wanted-2-EN": {
     "slug": "2025-08-trial-climate-action-wanted-2-EN",
@@ -15604,7 +15632,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-08-trial-climate-action-wanted-2",
     "status": "online",
-    "last_seen": "2026-09-29T16:35:48-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -15618,7 +15646,7 @@
       "Parliament",
       "Emissions"
     ],
-    "last_checked": "2026-09-29T16:35:48-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-08-trial-climate-far-right-petition-EN": {
     "slug": "2025-08-trial-climate-far-right-petition-EN",
@@ -15642,7 +15670,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-08-trial-climate-far-right-petition",
     "status": "online",
-    "last_seen": "2026-09-29T16:35:48-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -15656,7 +15684,7 @@
       "Commissioner",
       "Greenhouse"
     ],
-    "last_checked": "2026-09-29T16:35:48-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-08-trial-climate-heading-back-EN": {
     "slug": "2025-08-trial-climate-heading-back-EN",
@@ -15679,7 +15707,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-08-trial-climate-heading-back",
     "status": "online",
-    "last_seen": "2026-09-29T16:35:48-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -15693,7 +15721,7 @@
       "Parliament",
       "Emissions"
     ],
-    "last_checked": "2026-09-29T16:35:48-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-08-trial-EU-budget-climate-trial-petition-EN": {
     "slug": "2025-08-trial-EU-budget-climate-trial-petition-EN",
@@ -15716,7 +15744,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-08-trial-EU-budget-climate-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-29T16:35:48-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -15730,7 +15758,7 @@
       "Wildfires",
       "Proposal"
     ],
-    "last_checked": "2026-09-29T16:35:48-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-08-trial-noise-pollution-petition-EN": {
     "slug": "2025-08-trial-noise-pollution-petition-EN",
@@ -15754,7 +15782,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-08-trial-noise-pollution-petition",
     "status": "online",
-    "last_seen": "2026-09-29T16:35:48-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "Noise",
@@ -15768,7 +15796,7 @@
       "Action",
       "Public"
     ],
-    "last_checked": "2026-09-29T16:35:48-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-08-trial-underwater-garden-youmove-trial-petition-EN": {
     "slug": "2025-08-trial-underwater-garden-youmove-trial-petition-EN",
@@ -15791,7 +15819,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-08-trial-underwater-garden-youmove-trial-petition",
     "status": "online",
-    "last_seen": "2026-09-29T16:35:48-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "Underwater",
@@ -15805,7 +15833,7 @@
       "Cabildo",
       "Protect"
     ],
-    "last_checked": "2026-09-29T16:35:48-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-08-trial-USAID-contraceptives-petition-EN": {
     "slug": "2025-08-trial-USAID-contraceptives-petition-EN",
@@ -15829,7 +15857,7 @@
     "lang": "en",
     "campaign_id": "wemove:2025-08-trial-USAID-contraceptives-petition",
     "status": "online",
-    "last_seen": "2026-09-29T16:35:48-06:00",
+    "last_seen": "2026-10-02T17:54:21-06:00",
     "offline_since": null,
     "tags": [
       "Save",
@@ -15843,7 +15871,7 @@
       "Destruction",
       "Health"
     ],
-    "last_checked": "2026-09-29T16:35:48-06:00"
+    "last_checked": "2026-10-02T17:54:21-06:00"
   },
   "2025-08-USAID-contraceptives-petition-EN": {
     "slug": "2025-08-USAID-contraceptives-petition-EN",
