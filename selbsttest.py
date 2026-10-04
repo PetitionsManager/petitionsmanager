@@ -1487,6 +1487,37 @@ pruefe("budget: Gegenprobe – Zwischenspeicherung ist kein Abschluss",
 
 
 # ---------------------------------------------------------------------------
+# Alters-Melder: WO sagt eine Warnung etwas aus? (4.10.2026)
+#
+# Gemessen an einem echten Pflege-Lauf: 96 Warnzeilen, davon 90 aus
+# melde_veraltete_unterschriften und 18 aus melde_eingefrorene — alle über
+# Store-Kopien, die dieser Rechner absichtlich nie auffrischt (der lebende
+# Stand liegt im Actions-Cache). In der CI sind dieselben Warnungen echt.
+# Beide Melder fragen deshalb DIESELBE Quelle: monitor.hier_gepflegt().
+# ---------------------------------------------------------------------------
+def gepflegt_bei(in_ci: bool):
+    echt = core.in_github_actions
+    core.in_github_actions = lambda: in_ci
+    try:
+        return monitor.hier_gepflegt()
+    finally:
+        core.in_github_actions = echt
+
+
+pruefe("melder: in der CI wird NICHT gefiltert (None = alles zählt)",
+       gepflegt_bei(True), None)
+# Lokal: genau die Bestände, die dieser Rechner wirklich pflegt …
+pruefe("melder: lokal gelten die lokal gepflegten Bestände",
+       {"europarl", "openpetition", "changeorg"} <= (gepflegt_bei(False) or set()),
+       True)
+# … und eben NICHT die, deren Kopie hier absichtlich alt ist. Ohne diese
+# Gegenprobe bestünde der Test auch bei einer Funktion, die alles zurückgibt.
+pruefe("melder: Gegenprobe – CI-gepflegte Bestände stehen nicht drin",
+       any(k in (gepflegt_bei(False) or set())
+           for k in ("avaaz", "bundestag", "innnit")), False)
+
+
+# ---------------------------------------------------------------------------
 # Store-Übernahme Repo → Cache: die Schrumpf-Sperre (4.10.2026)
 #
 # Anlass: changeorg steht seit heute in BEFRISTET_LOKAL, der Rechner pflegt den

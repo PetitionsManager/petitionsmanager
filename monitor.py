@@ -261,6 +261,40 @@ EINGEFROREN_TAGE = 6
 # senkt, meldet den Normalbetrieb als Ausfall.
 
 
+# ⚠️ LOKAL sagen die Alters-Warnungen beider Melder nichts aus (gemessen
+# 4.10.2026: 18 Zeilen aus melde_eingefrorene und 90 aus
+# melde_veraltete_unterschriften je Pflege-Lauf, „Avaaz: letzter abgeschlossener
+# Lauf 56 Tage her" usw.). Dieser Rechner pflegt nur die Zweige aus
+# core.LOKALE_PFLEGE und BEFRISTET_LOKAL; alle anderen Store-Kopien hier stehen
+# ABSICHTLICH auf dem Klonstand vom 5.9.2026 – der lebende Stand liegt im
+# Actions-Cache (siehe ci_stores_uebernehmen.py). In der CI sind dieselben
+# Warnungen ECHT und bleiben unverändert.
+# ⚠️⚠️ Es wird kein Melder abgeschaltet und keine Schwelle verschoben: nur der
+# Ort, an dem die Meldung etwas aussagt. Was lokal nicht einzeln gewarnt wird,
+# kommt als EINE Sammelzeile – eine still gekappte Liste läse sich wie „hier ist
+# alles in Ordnung".
+# ⚠️ EINE gemeinsame Quelle für beide Melder: zwei Kopien derselben Regel laufen
+# beim nächsten Eintrag in BEFRISTET_LOKAL auseinander, und dann warnt der eine
+# Melder über einen Bestand, den der andere längst als gepflegt kennt.
+def hier_gepflegt() -> set[str] | None:
+    """Welche Bestände pflegt DIESER Rechner? ``None`` = in der CI, dort zählt
+    jeder Bestand (die Melder verhalten sich dann wie vor dem 4.10.2026)."""
+    if core.in_github_actions():
+        return None
+    schluessel = set(core.LOKALE_PFLEGE)
+    try:
+        import ci_stores_uebernehmen as _ci_stores
+        schluessel |= set(_ci_stores.BEFRISTET_LOKAL)
+    except Exception as exc:
+        # Fehlt das Modul, zählt höchstens eine befristete Ausnahme in die
+        # Sammelzeile statt einzeln zu warnen – kein Fall geht verloren.
+        # Aber nicht STILL: ein verschwiegener Importfehler ist genau der
+        # abgefangene Absturz, der nirgends auffällt.
+        core.log(f"ℹ️ BEFRISTET_LOKAL nicht lesbar ({exc!r}) – befristet "
+                 "lokal gepflegte Bestände stehen in der Sammelzeile.")
+    return schluessel
+
+
 def melde_eingefrorene() -> None:
     """Warnt, wenn eine Plattform seit EINGEFROREN_TAGE keinen ABGESCHLOSSENEN
     Lauf hatte (letzter Eintrag in lauf_verlauf) oder ihre Entdeckung zuletzt
@@ -272,30 +306,7 @@ def melde_eingefrorene() -> None:
     nicht (Lehre vom 10.8.2026). Bestände ohne _meta werden übergangen: noch
     nie gelaufen ist der Anfangszustand, kein Ausfall."""
     jetzt = datetime.now(timezone.utc)
-    # ⚠️ LOKAL sagen diese Warnungen nichts aus (gemessen 4.10.2026: 18 Zeilen
-    # je Pflege-Lauf, „Avaaz: letzter abgeschlossener Lauf 56 Tage her" usw.).
-    # Dieser Rechner pflegt nur die Zweige aus core.LOKALE_PFLEGE (plus die
-    # Change.org-Aufholung); alle anderen Store-Kopien hier stehen ABSICHTLICH
-    # auf dem Klonstand vom 5.9.2026 – der lebende Stand liegt im Actions-Cache
-    # (siehe ci_stores_uebernehmen.py). In der CI sind dieselben Warnungen ECHT
-    # und bleiben unverändert.
-    # ⚠️⚠️ Es wird kein Melder abgeschaltet und keine Schwelle verschoben: nur
-    # der Ort, an dem die Meldung etwas aussagt. Was lokal nicht einzeln
-    # gewarnt wird, kommt als EINE Sammelzeile – eine still gekappte Liste
-    # läse sich wie „hier ist alles in Ordnung".
-    hier_gepflegt: set[str] | None = None
-    if not core.in_github_actions():
-        hier_gepflegt = set(core.LOKALE_PFLEGE)
-        try:
-            import ci_stores_uebernehmen as _ci_stores
-            hier_gepflegt |= set(_ci_stores.BEFRISTET_LOKAL)
-        except Exception as exc:
-            # Fehlt das Modul, zählt höchstens eine befristete Ausnahme in die
-            # Sammelzeile statt einzeln zu warnen – kein Fall geht verloren.
-            # Aber nicht STILL: ein verschwiegener Importfehler ist genau der
-            # abgefangene Absturz, der nirgends auffällt.
-            core.log(f"ℹ️ BEFRISTET_LOKAL nicht lesbar ({exc!r}) – befristet "
-                     "lokal gepflegte Bestände stehen in der Sammelzeile.")
+    gepflegt = hier_gepflegt()
     verschwiegen: list[str] = []
     for p in PLATFORMS:
         if not p.is_live:
@@ -313,7 +324,7 @@ def melde_eingefrorene() -> None:
             gruende.append("die Entdeckung fand zuletzt NICHTS "
                            "(Host gesperrt oder ausgelassen?)")
         if gruende:
-            if hier_gepflegt is not None and p.key not in hier_gepflegt:
+            if gepflegt is not None and p.key not in gepflegt:
                 verschwiegen.append(p.name)
                 continue
             text = f"{p.name}: " + " · ".join(gruende)
@@ -374,8 +385,20 @@ def melde_veraltete_unterschriften() -> None:
     grenze = timedelta(days=UNTERSCHRIFTEN_VERALTET_TAGE)
     gesamt_alt = gesamt = 0
     gemeldet = verschwiegen = 0
+    # ⚠️ Dieselbe Trennung wie in melde_eingefrorene, über dieselbe Quelle
+    # (hier_gepflegt()). Hier wiegt sie schwerer: gemessen am 4.10.2026 kamen
+    # 90 der 96 lokalen Warnzeilen je Pflege-Lauf aus DIESEM Melder — 15
+    # Bestände × 6 monitor.py-Aufrufe, alle über Store-Kopien, die dieser
+    # Rechner nie auffrischt. ⚠️ Der `continue` steht VOR load_store(): das
+    # spart nebenbei das Lesen von ~80 MB JSON je Aufruf (changeorg allein
+    # 55 MB), und zwar sechsmal je Lauf.
+    nicht_hier: list[str] = []
+    gepflegt = hier_gepflegt()
     for p in PLATFORMS:
         if not p.is_live:
+            continue
+        if gepflegt is not None and p.key not in gepflegt:
+            nicht_hier.append(p.name)
             continue
         try:
             store = core.load_store(p.data_file)
@@ -433,6 +456,13 @@ def melde_veraltete_unterschriften() -> None:
     # oben hergeleitete Schwelle später überprüft werden kann. ⚠️ Und sie nennt
     # ausdrücklich, wie viele Warnungen der Deckel geschluckt hat: eine still
     # gekappte Liste liest sich wie „mehr war nicht".
+    # Lokal: EINE Zeile statt Schweigen — sonst sähe die Auslassung aus wie
+    # „bei den anderen ist alles frisch".
+    if nicht_hier:
+        core.log(f"ℹ️ {len(nicht_hier)} Bestände werden auf diesem Rechner "
+                 f"nicht gepflegt, das Alter ihrer Unterschriftenzahlen ist "
+                 f"hier also kein Befund – gemessen wird es in der CI: "
+                 f"{', '.join(nicht_hier)}.")
     if gesamt and core.in_github_actions():
         rest = (f" {verschwiegen} weitere Plattform(en) betroffen, wegen des "
                 f"Anmerkungs-Deckels nicht einzeln gemeldet."
