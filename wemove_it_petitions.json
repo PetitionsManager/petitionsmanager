@@ -31,12 +31,9 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-10-03T19:49:51-06:00",
+    "generated_at": "2026-10-03T20:26:30-06:00",
     "petition_count": 212,
     "available": 260,
-    "new_petitions_last_run": [
-      "2026-09-fuelled-by-greed-petition-IT"
-    ],
     "unbrauchbare": {
       "2023-01-lucas-ig-wrapper-test-petition-IT": "2026-09-05T14:34:12-06:00",
       "2023-07-simon-1-IT": "2026-09-05T15:44:34-06:00",
@@ -87,8 +84,9 @@
       "lucas-test-donation-2-petition-IT": "2026-09-18T17:02:01-06:00",
       "2026-09-insurance-natural-disasters-petition-IT": "2026-09-22T15:44:37-06:00"
     },
+    "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-10-03T19:49:51-06:00",
+      "stand": "2026-10-03T20:26:30-06:00",
       "gefunden": 260,
       "im_bestand": 212,
       "unbrauchbar": 48,
@@ -117,10 +115,26 @@
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
         "neu": 1
+      },
+      {
+        "zeit": "2026-10-03T20:26:30-06:00",
+        "gesamt": 212,
+        "online": 207,
+        "offline": 5,
+        "ohne_titel": 5,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 5,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 179,
+        "juengstes_start": "2026-09-01",
+        "mit_code_im_text": 0,
+        "herkunft": "lokal_cron",
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-10-03T19:49:51-06:00",
+      "zeit": "2026-10-03T20:26:30-06:00",
       "gesamt": 212,
       "online": 207,
       "offline": 5,
@@ -134,17 +148,8 @@
       "mit_code_im_text": 0
     },
     "verlauf_felder_ab": "2026-10-03T19:49:51-06:00",
-    "befunde": [
-      {
-        "stufe": "warnung",
-        "thema": "Startdatum rückt nicht nach",
-        "text": "1 neue Sätze aufgenommen, das jüngste Startdatum im Bestand ist aber 32 Tage alt (2026-09-01). Entweder wird das Feld nicht mehr gelesen – dann prüfe den Ausdruck, der start_date aus der Seite zieht – oder die Quelle liefert wirklich nichts Neues.",
-        "zeit": "2026-10-03T19:49:51-06:00",
-        "thema_en": "Start date is not catching up",
-        "text_en": "1 new records added, but the newest start date in the store is 32 days old (2026-09-01). Either the field is no longer being read – then check the expression that extracts start_date from the page – or the source really has nothing new."
-      }
-    ],
-    "health_warning": "Startdatum rückt nicht nach: 1 neue Sätze aufgenommen, das jüngste Startdatum im Bestand ist aber 32 Tage alt (2026-09-01). Entweder wird das Feld nicht mehr gelesen – dann prüfe den Ausdruck, der start_date aus der Seite zieht – oder die Quelle liefert wirklich nichts Neues.",
+    "befunde": [],
+    "health_warning": null,
     "online_count": 207
   },
   "2026-08-protect-europe-make-polluters-pay-petition-IT": {
