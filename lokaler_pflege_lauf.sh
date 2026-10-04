@@ -175,7 +175,48 @@ main() {
         zeitzeile "aufholen:changeorg" "$ZW_WALL" "$ZW_MONO" "$ZCODE"
     fi
 
-    GEAENDERT="$(git status --porcelain -- '*_petitions.json' texts_index.json)"
+    # ---- Sprach-Sweep: der blinde Fleck der Sitemaps ----------------------
+    # Nutzerentscheidung 4.10.2026 („alles aufnehmen"). Gemessen: der
+    # Sitemap-Index führt ~56.000 Petitionen, die deutsche Entdeckung sieht
+    # davon nur, was GERMAN_SLUG_RE passiert (43 von 1.168 in der Sitemap des
+    # laufenden Monats). Die übrigen ~54.000 wurden nie angesehen; eine
+    # Stichprobe von 25 ergab 13-mal englisch, der Rest pt/fr/it/es.
+    #
+    # ⚠️⚠️ Das gehört HIERHER und nicht in die CI: 54.000 Abrufe sind 22,5 h
+    # reine Abrufzeit. Dieser Rechner hat keine Frist, die CI hat 300 min —
+    # dort würde derselbe Vorrat Wochen dauern und täglich den Rundlauf
+    # verdrängen. Bei 1.500 je Lauf (~37 min) und sechs Läufen am Tag ist der
+    # Vorrat in rund sechs Tagen einmal durchgesehen; danach kostet er fast
+    # nichts mehr, weil nur noch neue Sitemap-Einträge übrig bleiben.
+    # ⚠️ Abschalten ohne Codeänderung: PFLEGE_OHNE_SWEEP=1.
+    if [ "${PFLEGE_NUR_PRUEFEN:-0}" != "1" ] \
+       && [ "${PFLEGE_OHNE_SWEEP:-0}" != "1" ]; then
+        sag "Sprach-Sweep über die Sitemap-Kandidaten (ein Fenster) …"
+        read -r ZW_WALL ZW_MONO < <(uhren)
+        if python3 monitor.py --platform changeorg --sprachsweep 1500 >>"$LOG" 2>&1; then
+            ZCODE=0
+        else
+            ZCODE=$?
+            sag "Sprach-Sweep endete mit Code $ZCODE – weiter, die Stores werden trotzdem gesichert."
+        fi
+        zeitzeile "sweep:changeorg" "$ZW_WALL" "$ZW_MONO" "$ZCODE"
+    fi
+
+    # ---- Archiv auffrischen ----------------------------------------------
+    # Spiegelt JEDE Plattform schlank nach archiv/<key>_<jahr>-<monat>.json
+    # (402 B statt 4.644 B je Satz). Kein Netzzugriff, läuft in Sekunden —
+    # und hält die Monatsdateien auf dem Stand der Bestände, während der
+    # Sweep seine Funde unabhängig davon direkt dorthin schreibt.
+    if [ "${PFLEGE_NUR_PRUEFEN:-0}" != "1" ]; then
+        if ! python3 monitor.py --archiv-spiegeln >>"$LOG" 2>&1; then
+            sag "Archiv-Spiegelung endete mit Fehler – weiter."
+        fi
+    fi
+
+    # ⚠️ `archiv/` gehört MIT in den Commit: es ist die Dauerablage, aus der
+    # später entschieden wird, was in die App kommt. Ohne diese Zeile bliebe
+    # sie auf diesem Rechner liegen und wäre beim nächsten frischen Klon weg.
+    GEAENDERT="$(git status --porcelain -- '*_petitions.json' texts_index.json archiv)"
 
     # ---- Den großen Store höchstens EINMAL AM TAG committen ---------------
     # Gemessen 4.10.2026: 145 Commits auf changeorg_petitions.json (55 MB)

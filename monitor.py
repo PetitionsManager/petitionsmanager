@@ -372,6 +372,36 @@ UNTERSCHRIFTEN_VERALTET_ANTEIL = 0.25
 UNTERSCHRIFTEN_MAX_WARNUNGEN = 5
 
 
+def spiegle_ins_archiv(nur: str | None = None) -> None:
+    """Jede Plattform ins Monatsarchiv spiegeln (archiv/<key>_<monat>.json).
+
+    ⚠️ Der Sinn ist NICHT die Auslieferung — die Bestände bleiben, was die App
+    zeigt. Das Archiv ist die schlanke Dauerablage (402 B statt 4.644 B je
+    Satz, core.ARCHIV_FELDER), aus der später ohne einen einzigen neuen Abruf
+    entschieden werden kann, was in die App gehört.
+    ⚠️ Nach MONATEN geteilt, weil jede einzelne Datei dann klein bleibt: ein
+    Bestand in EINER Datei läuft gegen die 100-MB-Grenze von GitHub
+    (changeorg_petitions.json liegt heute bei 55 MB).
+    """
+    gesamt = 0
+    for p in PLATFORMS:
+        if not p.is_live or (nur and p.key != nur):
+            continue
+        try:
+            store = core.load_store(p.data_file)
+        except (OSError, ValueError) as e:
+            core.log(f"⚠️ {p.name}: Bestand nicht lesbar ({e}) – übersprungen.")
+            continue
+        saetze = [r for k, r in (store or {}).items()
+                  if not k.startswith("_") and isinstance(r, dict)]
+        if not saetze:
+            continue
+        monate = core.archiv_mergen(p.key, saetze)
+        gesamt += len(saetze)
+        core.log(f"  {p.name}: {len(saetze)} Sätze in {len(monate)} Monatsdatei(en).")
+    core.log(f"Archiv aufgefrischt: {gesamt} Sätze gespiegelt.")
+
+
 def melde_veraltete_unterschriften() -> None:
     """Warnt, wenn die Unterschriftenzahlen einer Plattform veralten.
 
@@ -843,6 +873,25 @@ def parse_args():
                    action="store_true",
                    help="fremdsprachige Fassungen NICHT mitholen (halbiert die "
                         "Detailabrufe; die Hauptsprache kommt weiterhin)")
+    # ⚠️ Sonderlauf, nur mit --platform changeorg sinnvoll. Er holt die
+    # Sitemap-Kandidaten, die GERMAN_SLUG_RE nie passieren liessen (gemessen
+    # 4.10.2026: 1.125 von 1.168 je Sitemap), und sortiert sie nach gemessener
+    # Sprache: Deutsches in den Bestand, alles andere ins Register — von dort
+    # holt der englische Zweig seine Kandidaten. Rund die Hälfte des Rests ist
+    # englisch (Stichprobe 25: en 13, pt 4, fr 4, it 3, es 1).
+    # ⚠️⚠️ Gehört auf den Rechner, nicht in die CI: ~54.000 Abrufe sind 22,5 h.
+    p.add_argument("--sprachsweep", type=int, default=0, metavar="N",
+                   help="Change.org: N nie angesehene Sitemap-Kandidaten holen "
+                        "und nach Sprache einsortieren (0 = aus). Ersetzt den "
+                        "normalen Lauf dieser Plattform")
+    # ⚠️ Reine Spiegelung, kein Abruf: liest die Bestände und schreibt daraus
+    # die Monatsdateien unter archiv/. Gedacht für einmal am Tag (lokaler
+    # Pflege-Lauf) — in der CI kostet es nur Schreibzeit und bringt nichts,
+    # was der Checkout nicht schon hätte.
+    p.add_argument("--archiv-spiegeln", dest="archiv_spiegeln",
+                   action="store_true",
+                   help="Bestände ins Monatsarchiv (archiv/<key>_<jahr>-<monat>."
+                        "json) spiegeln; mit --platform nur eine Plattform")
     p.add_argument("--serve", action="store_true",
                    help="Monitor lokal ausliefern, inkl. 'Jetzt scrapen'-Buttons")
     p.add_argument("--port", type=int, default=8000,
@@ -945,6 +994,9 @@ def main() -> None:
             return
         if args.html_only:
             write_all_html()
+            return
+        if args.archiv_spiegeln:
+            spiegle_ins_archiv(args.platform)
             return
         targets = [p for p in PLATFORMS if p.is_live
                    and (not args.platform or p.key == args.platform)]

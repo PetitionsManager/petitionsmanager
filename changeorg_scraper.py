@@ -527,6 +527,12 @@ def offene_kandidaten(discovered, store, verworfen) -> list[str]:
 
 
 def run(args) -> None:
+    # Sonderlauf statt Tageslauf — dasselbe Muster wie --backfill beim
+    # Bundestag und --archive bei Avaaz: ausdrücklich angefordert, nie
+    # nebenbei. Begründung und Messwerte stehen bei sprachsweep().
+    if int(getattr(args, "sprachsweep", 0) or 0) > 0:
+        sprachsweep(args)
+        return
     store = core.load_store(DATA_FILE)
     fetcher = core.Fetcher(delay=args.delay, headers=FETCH_HEADERS)
     ts = now_iso()
@@ -959,6 +965,48 @@ def discover_en_slugs(fetcher: core.Fetcher,
     return found, (offset + EN_ORTE_JE_LAUF) % len(orte)
 
 
+# ----------------------------------------------------------------------------
+# Sprach-Sweep: die nie angesehenen Sitemap-Kandidaten (4.10.2026)
+# ----------------------------------------------------------------------------
+# ⚠️⚠️ Der blinde Fleck, den dieser Lauf schliesst — gemessen, nicht vermutet:
+# Der Sitemap-Index führt 48 datierte Sitemaps mit je ~1.168 Petitionen, also
+# rund 56.000. Die deutsche Entdeckung nimmt davon nur, was GERMAN_SLUG_RE
+# passieren lässt: in der Sitemap vom Oktober 2026 waren das 43 von 1.168
+# (3,7 %). Die übrigen 1.125 wurden nie angesehen — nicht verworfen, nicht
+# vermerkt, einfach nie geholt.
+#
+# Stichprobe vom 4.10.2026 aus genau diesem Rest (25 Kandidaten, gleichmässig
+# über die Datei verteilt): englisch 13, portugiesisch 4, französisch 4,
+# italienisch 3, spanisch 1. Rund die Hälfte ist also englisch — hochgerechnet
+# ~28.000 Petitionen gegen 8.600 im damaligen englischen Bestand.
+# ⚠️ Die Stichprobe stammt aus EINER Sitemap (dem laufenden Monat). „Rund die
+# Hälfte" ist belastbar, eine genauere Zahl nicht.
+#
+# Die Weiche schreibt NICHT in den englischen Bestand: englische Funde landen
+# im Register mit Befund „en/XX", und en_kandidaten_aus_de_register() holt sie
+# von dort in den englischen Zweig. Ein Schreibweg, nicht zwei.
+SWEEP_OFFSET_FELD = "sweep_offset"
+SWEEP_JE_LAUF = 1500        # Kandidaten je Aufruf; 1.500 × 1,5 s ≈ 37 min
+
+
+def sweep_urteil(html: str) -> tuple[str, str]:
+    """('de' | 'en' | 'fremd' | 'unklar', befund) für EINE geholte Seite.
+
+    Eigener Rumpf statt scrape_petition, weil der genau EINE Sprache
+    beantwortet — hier wird eine Seite gegen zwei gehalten, ohne sie ein
+    zweites Mal zu holen. Das ist der ganze Zweck: 54.000 Abrufe statt 81.000.
+    """
+    befund = sprachbefund(html)
+    if parse_detail(html, "https://x/p/x", "de") is not None:
+        return "de", befund
+    if parse_detail(html, "https://x/p/x", "en") is not None:
+        return "en", befund
+    # Dieselbe Unterscheidung wie in scrape_petition: „fremd" ist ein Urteil
+    # über die Petition und darf ins Register, „unklar" ist eines über unser
+    # Auswerten und darf es NICHT (sonst sperrt ein Seitenumbau den Vorrat).
+    return ("fremd" if falsche_sprache(html, "de") else "unklar"), befund
+
+
 def en_kandidaten_aus_de_register() -> dict[str, str]:
     """Englische Kandidaten, die der DEUTSCHE Zweig schon gemessen hat.
 
@@ -985,6 +1033,115 @@ def en_kandidaten_aus_de_register() -> dict[str, str]:
     reg = core.als_register(core.load_meta(DATA_FILE).get("verworfen"))
     return {slug: befund for slug, befund in reg.items()
             if str(befund).lower().startswith("en")}
+
+
+def alle_sitemap_slugs(fetcher: core.Fetcher) -> list[str]:
+    """Jeder Petitions-Slug aus allen Sitemaps des Index — ohne Heuristik.
+
+    ⚠️ Reihenfolge bleibt die der Sitemaps (neueste zuerst, der Index ist nach
+    Monaten benannt). Der Sweep läuft mit einem Versatz darüber; eine stabile
+    Reihenfolge ist deshalb Bedingung, sonst springt das Fenster."""
+    resp = fetcher.get(SITEMAP_INDEX)
+    maps = (re.findall(r"<loc>([^<]+sitemap-[^<]+)</loc>", resp.text)[:SITEMAP_COUNT]
+            if resp is not None and resp.ok else [])
+    core.entdeckung("Sitemap-Verzeichnis (Sweep)", len(maps),
+                    name_en="sitemap index (sweep)")
+    slugs: list[str] = []
+    gesehen: set[str] = set()
+    for j, sm in enumerate(maps, 1):
+        r = fetcher.get(sm)
+        if r is None or not r.ok:
+            continue
+        for m in LOC_RE.finditer(r.text):
+            s = m.group(1)
+            if s not in gesehen:
+                gesehen.add(s)
+                slugs.append(s)
+        prog(current=j, total=len(maps),
+             message=f"Sitemap {j}/{len(maps)} · {len(slugs)} Slugs")
+    log(f"Sweep: {len(slugs)} Slugs in {len(maps)} Sitemaps.")
+    return slugs
+
+
+def sprachsweep(args) -> None:
+    """Holt nie angesehene Sitemap-Kandidaten und sortiert sie nach Sprache.
+
+    Deutsche Funde gehen in den deutschen Bestand, alles andere ins Register
+    mit Sprachbefund — englische holt der englische Zweig von dort ab.
+    ⚠️ Gedacht für den Rechner ohne Frist (lokaler Pflege-Lauf). In der CI
+    würde derselbe Vorrat Wochen brauchen: 54.000 Abrufe sind 22,5 h.
+    """
+    anzahl = int(getattr(args, "sprachsweep", 0) or 0)
+    meta = core.load_meta(DATA_FILE)
+    offset = int(meta.get(SWEEP_OFFSET_FELD) or 0)
+    fetcher = core.Fetcher(delay=args.delay, headers=FETCH_HEADERS)
+    ts = now_iso()
+
+    # Ausschlussmenge: was schon im Archiv steht, und was beide Bestände
+    # ohnehin führen. ⚠️ Die Bestände werden NUR für ihre Schlüssel geladen —
+    # der Sweep schreibt in keinen von beiden. Was er findet, geht ins Archiv;
+    # die Entscheidung, was davon in die App gehört, fällt später und ohne
+    # einen einzigen neuen Abruf.
+    bekannt = core.archiv_schluessel(PLATFORM.key)
+    bekannt |= set(core.load_store(DATA_FILE))
+    bekannt |= set(core.load_store(EN_DATA_FILE))
+
+    alle = alle_sitemap_slugs(fetcher)
+    offen = [s for s in alle if s not in bekannt]
+    log(f"Sweep: {len(offen)} von {len(alle)} Slugs sind noch nie angesehen "
+        f"worden ({len(bekannt)} bereits bekannt, Versatz {offset}).")
+    if not offen:
+        log("Sweep: nichts offen – fertig.")
+        return
+    offset %= len(offen)
+    fenster = [offen[(offset + i) % len(offen)] for i in range(min(anzahl, len(offen)))]
+
+    urteile: dict[str, int] = {}
+    fuers_archiv: list[dict] = []
+    prog(phase="sweep", current=0, total=len(fenster), message="Sprach-Sweep …")
+    for i, slug in enumerate(fenster, 1):
+        prog(current=i, total=len(fenster), message=slug[:60])
+        url = f"{BASE_URL}/p/{slug}"
+        try:
+            resp = fetcher.get(url)
+        except Exception as exc:                 # dieselbe Lehre wie oben:
+            core.log(f"  Satz nicht verarbeitbar ({exc!r}): {slug[:60]}")
+            urteile["error"] = urteile.get("error", 0) + 1
+            continue
+        if resp is None or not resp.ok:
+            urteile["error"] = urteile.get("error", 0) + 1
+            continue
+        urteil, befund = sweep_urteil(resp.text)
+        urteile[urteil] = urteile.get(urteil, 0) + 1
+        if urteil == "unklar":
+            # Kein Urteil über die Petition, sondern über unser Auswerten —
+            # gehört NICHT ins Archiv, sonst stünde dort eine Sprache, die
+            # niemand gemessen hat. Der Kandidat kommt nach einer Umdrehung
+            # wieder.
+            continue
+        rec = parse_detail(resp.text, url, urteil) if urteil in ("de", "en") else None
+        eintrag = dict(rec or {})
+        eintrag.setdefault("slug", slug)
+        eintrag.setdefault("url", url)
+        eintrag.setdefault("first_seen", ts)
+        # Die gemessene Sprache steht IMMER drin — auch bei „fremd", wo es
+        # keinen Datensatz gibt. Genau dafür ist das Archiv da.
+        eintrag["lang"] = (befund.split("/")[0] or "") if befund else eintrag.get("lang")
+        if befund and "/" in befund and not eintrag.get("country"):
+            eintrag["country"] = befund.split("/")[-1]
+        fuers_archiv.append(eintrag)
+
+    monate = core.archiv_mergen(PLATFORM.key, fuers_archiv)
+    offset = (offset + len(fenster)) % max(len(offen), 1)
+    # Der Versatz gehört in den Bestand, weil nur dessen _meta den
+    # Actions-Cache überlebt — dieselbe Begründung wie beim Register.
+    core.save_store(core.load_store(DATA_FILE), DATA_FILE,
+                    extra_meta={SWEEP_OFFSET_FELD: offset,
+                                **{k: v for k, v in meta.items()
+                                   if k in ("verworfen", "orte_offset")}},
+                    quiet=True)
+    log(f"Sweep fertig: {dict(sorted(urteile.items()))} · {len(fuers_archiv)} "
+        f"ins Archiv ({len(monate)} Monatsdatei(en)) · Versatz jetzt {offset}.")
 
 
 def run_en(args) -> None:

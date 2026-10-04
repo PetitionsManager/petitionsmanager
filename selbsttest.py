@@ -1417,6 +1417,94 @@ def budget_sperrt(frist, force: bool = False) -> bool:
 
 
 # ---------------------------------------------------------------------------
+# Archiv je Plattform, nach Monaten (4.10.2026)
+#
+# Anlass: Der Change.org-Sitemap-Index führt 453.168 Petitionen, im Bestand
+# stehen 4,8 % davon. In die Bestände passt der Rest nicht (4.644 B je Satz,
+# GitHub-Grenze 100 MB, changeorg_petitions.json liegt bei 55 MB), ins
+# Verworfenen-Register auch nicht (VERWORFEN_MAX = 25.000). Ein schlanker
+# Eintrag wiegt 402 B; nach Monaten geteilt bleibt jede Datei klein.
+# ---------------------------------------------------------------------------
+_ARCHIV_ALT = core.ARCHIV_DIR
+core.ARCHIV_DIR = Path(tempfile.mkdtemp())
+
+pruefe("archiv: Monat kommt aus start_date",
+       core.archiv_monat({"start_date": "2026-10-04", "first_seen": "2024-01-01"}),
+       "2026-10")
+pruefe("archiv: ohne start_date zählt first_seen",
+       core.archiv_monat({"first_seen": "2026-08-01T10:00:00-06:00"}), "2026-08")
+# ⚠️ Kein erfundener Monat: europarl trägt bei 931 von 1.912 Sätzen kein
+# Startdatum. Ein geratener Monat wäre später nicht mehr von einem gemessenen
+# zu unterscheiden.
+pruefe("archiv: ohne jedes Datum ein eigener Topf",
+       core.archiv_monat({}), core.ARCHIV_OHNE_DATUM)
+pruefe("archiv: unbrauchbares Datum landet ebenfalls dort",
+       core.archiv_monat({"start_date": "demnächst"}), core.ARCHIV_OHNE_DATUM)
+
+pruefe("archiv: der Eintrag trägt nur die Archivfelder",
+       set(core.archiv_eintrag({"slug": "a", "title": "T", "signatures": 5,
+                                "description_full": "x" * 4000})),
+       {"slug", "title", "signatures"})
+
+_A1 = {"slug": "a", "title": "Alt", "start_date": "2026-10-01", "signatures": 1}
+_A2 = {"slug": "b", "title": "B", "start_date": "2026-09-30", "signatures": 2}
+core.archiv_mergen("kunst", [_A1, _A2])
+pruefe("archiv: zwei Monate ergeben zwei Dateien",
+       sorted(p.name for p in core.ARCHIV_DIR.glob("kunst_*.json")),
+       ["kunst_2026-09.json", "kunst_2026-10.json"])
+# Fortschreiben heisst AKTUALISIEREN, nie löschen — ein Archiv, aus dem etwas
+# verschwindet, ist keines.
+core.archiv_mergen("kunst", [{**_A1, "title": "Neu", "signatures": 99}])
+_gelesen = core.archiv_lesen("kunst")
+pruefe("archiv: vorhandener Eintrag wird aufgefrischt",
+       (_gelesen["a"]["title"], _gelesen["a"]["signatures"]), ("Neu", 99))
+pruefe("archiv: der andere Monat bleibt unangetastet",
+       "b" in _gelesen, True)
+pruefe("archiv: Schlüssel kommen aus allen Monatsdateien",
+       core.archiv_schluessel("kunst"), {"a", "b"})
+# Gegenprobe: ohne sie bestünde der Test auch bei „gib immer alles zurück".
+pruefe("archiv: Gegenprobe – fremde Plattform liefert nichts",
+       core.archiv_schluessel("gibtsnicht"), set())
+# Ein Satz ohne slug hat keinen Schlüssel und darf nicht stillschweigend
+# unter einem erfundenen landen.
+core.archiv_mergen("kunst", [{"title": "ohne slug", "start_date": "2026-10-01"}])
+pruefe("archiv: Satz ohne slug wird übergangen",
+       core.archiv_schluessel("kunst"), {"a", "b"})
+core.ARCHIV_DIR = _ARCHIV_ALT
+
+
+# ---------------------------------------------------------------------------
+# Sprach-Sweep: die Weiche für nie angesehene Sitemap-Kandidaten (4.10.2026)
+#
+# Gemessen: von 1.168 Slugs einer Sitemap passieren 43 die DE-Heuristik, 1.125
+# wurden nie angesehen. Stichprobe aus diesem Rest (25): englisch 13, pt 4,
+# fr 4, it 3, es 1. Der Sweep holt jede Seite EINMAL und hält sie gegen beide
+# Sprachen — deshalb eine eigene Weiche statt scrape_petition, das genau eine
+# Sprache beantwortet.
+# ---------------------------------------------------------------------------
+def _sweep_seite(locale: str, land: str = "DE") -> str:
+    return (f'"originalLocale":{{"localeCode":"{locale}"}}'
+            f'"country":{{"countryCode":"{land}"}}"ask":"Ein Titel"')
+
+
+pruefe("sweep: deutsche Seite geht in den deutschen Bestand",
+       changeorg.sweep_urteil(_sweep_seite("de-DE"))[0], "de")
+pruefe("sweep: englische Seite wird als en erkannt",
+       changeorg.sweep_urteil(_sweep_seite("en-US", "US"))[0], "en")
+pruefe("sweep: andere Sprache wird verworfen (mit Befund)",
+       changeorg.sweep_urteil(_sweep_seite("es-419", "MX")), ("fremd", "es/MX"))
+# ⚠️ Die wichtigste Unterscheidung: eine unlesbare Seite ist KEIN Urteil über
+# die Petition und darf nicht ins Register — sonst sperrt ein Seitenumbau den
+# ganzen Vorrat dauerhaft (dieselbe Trennung wie in scrape_petition).
+pruefe("sweep: unlesbare Seite bleibt unklar, nicht verworfen",
+       changeorg.sweep_urteil("nichts davon")[0], "unklar")
+# Gegenprobe zur Reihenfolge: eine englische Seite darf nicht als „fremd"
+# durchrutschen, nur weil sie aus deutscher Sicht fremdsprachig IST.
+pruefe("sweep: Gegenprobe – englisch sticht „fremd“",
+       changeorg.sweep_urteil(_sweep_seite("en-GB", "GB"))[0] != "fremd", True)
+
+
+# ---------------------------------------------------------------------------
 # Brücke: englische Kandidaten aus dem Register des deutschen Zweigs
 #
 # Gemessen 4.10.2026: Die englische Entdeckung läuft nur über

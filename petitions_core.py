@@ -399,6 +399,125 @@ def _zeitpunkt_oder_none(wert) -> "_dt.datetime | None":
     except (TypeError, ValueError):
         return None
 
+# ----------------------------------------------------------------------------
+# Archiv: je Plattform, nach Monaten (4.10.2026)
+# ----------------------------------------------------------------------------
+# ⚠️⚠️ Warum es das gibt, in Zahlen: Der Change.org-Sitemap-Index führt
+# **453.168** Petitionen (am 4.10.2026 über alle 51 Sitemaps gezählt, nicht
+# geschätzt). Im Bestand stehen davon 13.219 deutsche und 8.600 englische —
+# **4,8 %**. Der Rest wurde nie angesehen.
+#
+# In die Bestände passt er nicht: ein voller Satz wiegt dort 4.644 B, GitHub
+# lehnt Dateien über 100 MB ab, und `changeorg_petitions.json` liegt heute
+# schon bei 55 MB — Luft für rund 11.000 weitere Sätze, dann scheitert der
+# Push des Pflege-Laufs. Ins Verworfenen-Register passt er auch nicht
+# (VERWORFEN_MAX = 25.000, und es liegt im _meta eines Bestands).
+#
+# Das Archiv löst beides: ein SCHLANKER Eintrag (die zehn Felder unten) wiegt
+# **402 B** statt 4.644 — Faktor 11,6. Alle 453.168 wären damit 182 MB, auf
+# Monate verteilt rund 3,8 MB je Datei. Es liegt im git und nicht im
+# Actions-Cache: die CI holt das Repo ohnehin per Checkout, während der Cache
+# ausschliesslich `*_petitions.json` sichert (siehe VERWORFEN_MAX).
+#
+# ⚠️ Das Archiv ist NICHT die Auslieferung. Was die App zeigt, steht weiterhin
+# in den Beständen; das Archiv ist die Grundlage, um später zu ENTSCHEIDEN,
+# was hinein gehört (Sprache, Unterschriften, Datum stehen drin) — ohne dafür
+# noch einmal abrufen zu müssen.
+ARCHIV_DIR = Path("archiv")
+ARCHIV_FELDER = ("slug", "title", "lang", "country", "signatures", "goal",
+                 "start_date", "status", "url", "first_seen")
+# Sätze ohne jedes Datum. Ein eigener Topf statt „irgendeinem" Monat: ein
+# erfundener Monat wäre später nicht mehr von einem gemessenen zu
+# unterscheiden (europarl trägt bei 931 von 1.912 Sätzen kein start_date).
+ARCHIV_OHNE_DATUM = "ohne-datum"
+
+
+def archiv_monat(rec: dict) -> str:
+    """„2026-10" aus start_date, sonst aus first_seen, sonst ARCHIV_OHNE_DATUM."""
+    for feld in ("start_date", "first_seen"):
+        wert = str((rec or {}).get(feld) or "")[:7]
+        if len(wert) == 7 and wert[4] == "-" and wert[:4].isdigit():
+            return wert
+    return ARCHIV_OHNE_DATUM
+
+
+def archiv_eintrag(rec: dict) -> dict:
+    """Der schlanke Satz fürs Archiv — nur ARCHIV_FELDER, nichts erfunden."""
+    return {f: rec.get(f) for f in ARCHIV_FELDER if rec.get(f) is not None}
+
+
+def archiv_datei(key: str, monat: str) -> Path:
+    return ARCHIV_DIR / f"{key}_{monat}.json"
+
+
+def archiv_mergen(key: str, saetze) -> dict[str, int]:
+    """Schreibt/aktualisiert die Monatsdateien einer Plattform.
+
+    Rückgabe: {monat: Zahl der Einträge in dieser Datei}. Vorhandene Einträge
+    werden ÜBERSCHRIEBEN (der neue Stand ist der bessere), nie gelöscht — ein
+    Archiv, aus dem etwas verschwindet, ist keines.
+
+    ⚠️ Atomar je Datei (Temp + os.replace), wie save_store: ein Abbruch mitten
+    im Schreiben darf keine halbe Datei hinterlassen.
+    """
+    nach_monat: dict[str, dict] = {}
+    for rec in saetze:
+        slug = (rec or {}).get("slug")
+        if not slug:
+            continue
+        nach_monat.setdefault(archiv_monat(rec), {})[slug] = archiv_eintrag(rec)
+    ergebnis: dict[str, int] = {}
+    for monat, neue in nach_monat.items():
+        pfad = archiv_datei(key, monat)
+        pfad.parent.mkdir(parents=True, exist_ok=True)
+        alt: dict = {}
+        if pfad.exists():
+            try:
+                alt = json.loads(pfad.read_text(encoding="utf-8"))
+            except (OSError, ValueError) as e:
+                # Nicht still überschreiben: eine unlesbare Archivdatei ist ein
+                # Befund, kein Grund, ihren Inhalt wegzuwerfen.
+                log(f"⚠️ Archiv {pfad} unlesbar ({e}) – Datei bleibt, "
+                    f"{len(neue)} Einträge NICHT geschrieben.")
+                continue
+        alt.update(neue)
+        tmp = pfad.with_suffix(".tmp")
+        tmp.write_text(json.dumps(alt, ensure_ascii=False, sort_keys=True),
+                       encoding="utf-8")
+        os.replace(tmp, pfad)
+        ergebnis[monat] = len(alt)
+    return ergebnis
+
+
+def archiv_schluessel(key: str) -> set[str]:
+    """Nur die Slugs im Archiv einer Plattform — Datei für Datei.
+
+    ⚠️ Eigene Funktion statt `set(archiv_lesen(key))`: das Archiv wird einmal
+    453.168 Einträge tragen, und die ALLE gleichzeitig im Speicher zu halten
+    sind über ein Gigabyte. So ist die Spitze immer nur EINE Monatsdatei
+    (~3,8 MB) — der Sweep läuft auf dem Rechner des Nutzers, während der damit
+    arbeitet."""
+    schluessel: set[str] = set()
+    for pfad in sorted(ARCHIV_DIR.glob(f"{key}_*.json")):
+        try:
+            schluessel.update(json.loads(pfad.read_text(encoding="utf-8")))
+        except (OSError, ValueError) as e:
+            log(f"⚠️ Archiv {pfad} unlesbar ({e}) – übersprungen.")
+    return schluessel
+
+
+def archiv_lesen(key: str, monat: str | None = None) -> dict[str, dict]:
+    """Alle Archiveinträge einer Plattform (oder nur eines Monats)."""
+    muster = f"{key}_{monat}.json" if monat else f"{key}_*.json"
+    gesamt: dict[str, dict] = {}
+    for pfad in sorted(ARCHIV_DIR.glob(muster)):
+        try:
+            gesamt.update(json.loads(pfad.read_text(encoding="utf-8")))
+        except (OSError, ValueError) as e:
+            log(f"⚠️ Archiv {pfad} unlesbar ({e}) – übersprungen.")
+    return gesamt
+
+
 # So oft muss eine bekannte Petition in aufeinanderfolgenden Läufen fehlen,
 # bevor sie wirklich als offline gilt (siehe upsert). Schützt davor, dass eine
 # vorübergehend blockierende Quelle einen kompletten Bestand abschaltet.
