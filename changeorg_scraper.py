@@ -911,8 +911,23 @@ LOCATION_LOC_RE = re.compile(r"<loc>(https://www\.change\.org/r/[^<]+)</loc>")
 # Tagesbudgets. Der Lauf nimmt ein WANDERNDES Fenster und merkt sich die
 # Stelle im _meta — so ist jeder Lauf gleich teuer und der Bestand wächst
 # über die Zeit, ohne dass irgendwo still etwas wegfällt.
-EN_ORTE_JE_LAUF = 25
-EN_NEUE_JE_LAUF = 300
+#
+# ⚠️⚠️ 4.10.2026 von 25 auf 100 gestellt, und zwar nachgerechnet: die Sitemap
+# führt (an diesem Tag abgerufen) genau 4.579 Ortsseiten. Bei 25 je Lauf und
+# zwei CI-Läufen am Tag braucht EINE Umdrehung 184 Läufe = rund 92 Tage — so
+# lange dauerte es, bis eine Ortsseite überhaupt wieder an die Reihe kam. Mit
+# 100 sind es 46 Läufe = rund 23 Tage. Preis: 100 statt 25 Abrufe à 1,5 s,
+# also 2,5 statt 0,6 Minuten je Lauf.
+# ⚠️ Der zweite Deckel musste MIT: gemessen kamen 164 neue Sätze je Lauf an,
+# also deutlich unter den 300 — es war das FENSTER, das band, nicht dieser
+# Wert. Wer nur das Fenster weitet, verschiebt die Bremse bloß hierher.
+# 500 entspricht MAX_NEW_PER_RUN des deutschen Zweigs; 500 × 1,5 s = 12,5 min
+# ist der Preis im schlechtesten Fall.
+# ⚠️⚠️ Beide Werte sind NICHT vom Zeitbudget gedeckt (core.budget_erschoepft
+# bremst nur die Nachprüfung, siehe skip_recent) — wer sie weiter anhebt,
+# verlängert den Lauf dieser Plattform unmittelbar.
+EN_ORTE_JE_LAUF = 100
+EN_NEUE_JE_LAUF = 500
 
 
 def discover_en_slugs(fetcher: core.Fetcher,
@@ -944,15 +959,55 @@ def discover_en_slugs(fetcher: core.Fetcher,
     return found, (offset + EN_ORTE_JE_LAUF) % len(orte)
 
 
+def en_kandidaten_aus_de_register() -> dict[str, str]:
+    """Englische Kandidaten, die der DEUTSCHE Zweig schon gemessen hat.
+
+    ⚠️⚠️ Der Grund, warum es diese Brücke geben muss (gemessen 4.10.2026): Die
+    englische Entdeckung läuft ausschließlich über `sitemap-location_pages.xml`,
+    und deren 4.579 Ortsseiten enden AUSNAHMSLOS auf `--us`. Englische
+    Petitionen ausserhalb der USA sind über diese Quelle also nicht spät dran,
+    sondern strukturell unsichtbar.
+
+    Der deutsche Zweig holt dieselben Petitionen längst — er verwirft sie als
+    „nicht DE" und schreibt dabei ihren Sprachbefund ins Register
+    (merke_verworfene, „<sprache>/<land>"). Dort lagen an diesem Tag 600
+    englische Kandidaten: SE 144, US 101, DE 81, CH 70, HU 44, GB 18, CA 12,
+    NL 12 … — 499 davon ausserhalb der USA. Sie sind bereits bezahlt: ihr
+    Abruf hat stattgefunden, nur das Ergebnis lag ungenutzt herum.
+
+    ⚠️ Kostet einmal das Lesen der 55-MB-Datei je Lauf (load_meta parst sie
+    ganz). Das ist der Preis; eine zweite, schlankere Ablage wäre ein zweiter
+    Zustand, der mit dem Register auseinanderlaufen kann.
+    ⚠️ Ein Register in der alten LISTEN-Form trägt keine Sprache (als_register
+    füllt dann ""); daraus lässt sich kein englischer Kandidat ableiten, und
+    die Funktion liefert zu Recht nichts.
+    """
+    reg = core.als_register(core.load_meta(DATA_FILE).get("verworfen"))
+    return {slug: befund for slug, befund in reg.items()
+            if str(befund).lower().startswith("en")}
+
+
 def run_en(args) -> None:
     store = core.load_store(EN_DATA_FILE)
     fetcher = core.Fetcher(delay=args.delay, headers=FETCH_HEADERS)
     ts = now_iso()
-    offset = int(core.load_meta(EN_DATA_FILE).get("orte_offset") or 0)
+    en_meta = core.load_meta(EN_DATA_FILE)
+    offset = int(en_meta.get("orte_offset") or 0)
+    # Eigenes Register des englischen Zweigs. ⚠️⚠️ Ohne das würde die Brücke
+    # aus dem deutschen Register zur Endlosschleife: ein Kandidat, der sich
+    # hier als doch nicht englisch erweist, käme in JEDEM Lauf erneut — genau
+    # das Muster, mit dem 141 Change.org-Seiten wochenlang im Kreis liefen
+    # (siehe die es-419-Lehre bei ORIGINAL_LOCALE_RE).
+    verworfen = core.als_register(en_meta.get("verworfen"))
 
     def save(quiet=True, **extra):
+        # ⚠️ `verworfen` steht hier bewusst als Name und nicht als Wert: der
+        # Lauf schreibt das Register erst am Ende neu, und jede
+        # Zwischenspeicherung soll den dann aktuellen Stand mitnehmen
+        # (save_store baut _meta jedes Mal komplett neu auf).
         core.save_store(store, EN_DATA_FILE,
-                        extra_meta={"orte_offset": offset, **extra},
+                        extra_meta={"orte_offset": offset,
+                                    "verworfen": verworfen, **extra},
                         quiet=quiet)
 
     known = list(store.keys())
@@ -988,11 +1043,21 @@ def run_en(args) -> None:
             log(f"  {len(weg)} Satz/Sätze ohne englische Petition entfernt.")
 
     entdeckt, offset = discover_en_slugs(fetcher, offset)
+    # Brücke aus dem deutschen Register (4.10.2026) — die einzige Quelle für
+    # englische Petitionen AUSSERHALB der USA, siehe
+    # en_kandidaten_aus_de_register(). Schon Bekanntes und schon Verworfenes
+    # bleibt draussen: sonst stünde derselbe Kandidat in jedem Lauf wieder da.
+    aus_register = {s: {} for s in en_kandidaten_aus_de_register()
+                    if s not in store and s not in verworfen}
+    if aus_register:
+        entdeckt.update(aus_register)
+        log(f"  {len(aus_register)} englische Kandidat(en) aus dem Register "
+            f"des deutschen Zweigs übernommen.")
     # Überlebt jeden Abbruch (s. save_store: _TLS.lauf_meta, 24.8.2026).
     # ⚠️ `entdeckt` ist hier nur das FENSTER dieses Laufs (discover_en_slugs
-    # läuft mit offset im Rundlauf), nicht der ganze Katalog. Die Bilanz sagt
-    # damit „von dem, was dieser Lauf gesehen hat, ist nichts offen" — was für
-    # den englischen Zweig die richtige Aussage ist.
+    # läuft mit offset im Rundlauf) plus die Brücke, nicht der ganze Katalog.
+    # Die Bilanz sagt damit „von dem, was dieser Lauf gesehen hat, ist nichts
+    # offen" — was für den englischen Zweig die richtige Aussage ist.
     core.entdeckt_setzen(entdeckt)
     neu = [s for s in entdeckt if s not in store][:args.limit or EN_NEUE_JE_LAUF]
     log(f"{len(neu)} neue englische Petition(en) zum Scrapen "
@@ -1000,9 +1065,14 @@ def run_en(args) -> None:
     prog(phase="scrape", current=0, total=len(neu), message="Beginne …")
 
     fremdsprachig = 0
+    belegt = 0
+    neu_verworfen: dict[str, str] = {}
     for i, slug in enumerate(neu, 1):
         prog(current=i, total=len(neu), message=slug)
-        status, rec = scrape_petition(fetcher, slug, "en")
+        # Derselbe Weg wie im deutschen Zweig: der Sprachbefund entsteht beim
+        # ohnehin nötigen Abruf und kostet keine zusätzliche Anfrage.
+        merker: dict = {}
+        status, rec = scrape_petition(fetcher, slug, "en", merker)
         if status == "error":
             continue
         if status in ("online", "skip", "unklar"):
@@ -1014,13 +1084,27 @@ def run_en(args) -> None:
             # Die Ortsseiten sind US-Seiten, aber nicht jede dort verlinkte
             # Petition ist englisch verfasst. Das ist kein Fehler, sondern
             # genau der Zweck der Sprachprüfung — nur zählen wollen wir es.
+            # ⚠️⚠️ Seit 4.10.2026 wird es auch VERMERKT: ohne Register käme
+            # jeder dieser Kandidaten im nächsten Lauf erneut, und bei der
+            # Brücke aus dem deutschen Register wäre das eine Dauerschleife.
             fremdsprachig += 1
+            neu_verworfen[slug] = merker.get("befund") or ""
             continue
+        # Positivkontrolle für merke_verworfene: solange hier etwas ankommt,
+        # funktioniert die Sprachprüfung — und nur dann darf verworfen werden.
+        belegt += 1
         core.upsert(store, slug, rec or {}, {}, status, ts,
                     f"{BASE_URL}/p/{slug}")
         save()
 
     core.melde_unklare(unklar, gelesen, "Change.org (English)")
+    # Register fortschreiben — mit derselben Positivkontrolle wie im deutschen
+    # Zweig: verworfen wird nur, wenn dieser Lauf auch belegt hat, dass die
+    # Sprachprüfung noch funktioniert (sonst vergiftet ein Seitenumbau den
+    # Vorrat dauerhaft).
+    verworfen = core.merke_verworfene(
+        verworfen, neu_verworfen, belegt, "Change.org (English)",
+        grund_de="nicht englisch", grund_en="not English")
     neue = [s for s, r in store.items() if r.get("first_seen") == ts]
     if neue:
         log(f"NEU: {len(neue)} neue englische Petition(en) in diesem Lauf.")

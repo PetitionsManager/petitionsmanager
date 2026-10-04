@@ -1417,6 +1417,40 @@ def budget_sperrt(frist, force: bool = False) -> bool:
 
 
 # ---------------------------------------------------------------------------
+# Brücke: englische Kandidaten aus dem Register des deutschen Zweigs
+#
+# Gemessen 4.10.2026: Die englische Entdeckung läuft nur über
+# sitemap-location_pages.xml, und alle 4.579 Ortsseiten dort enden auf `--us`.
+# Englische Petitionen ausserhalb der USA sind darüber strukturell unsichtbar.
+# Der deutsche Zweig holt sie längst und verwirft sie als „nicht DE" — mit
+# Sprachbefund im Register. Dort lagen 600 englische Kandidaten, 499 davon
+# ausserhalb der USA.
+# ---------------------------------------------------------------------------
+def en_aus_register(reg):
+    echt = core.load_meta
+    core.load_meta = lambda pfad: {"verworfen": reg}
+    try:
+        return changeorg.en_kandidaten_aus_de_register()
+    finally:
+        core.load_meta = echt
+
+
+_REG = {"a-slug": "en/US", "b-slug": "en/SE", "c-slug": "de/AT",
+        "d-slug": "es/MX", "e-slug": "EN-GB", "f-slug": ""}
+pruefe("brücke: nur englische Kandidaten kommen heraus",
+       sorted(en_aus_register(_REG)), ["a-slug", "b-slug", "e-slug"])
+# Gegenprobe: ohne sie bestünde der Test auch bei „gib alles zurück".
+pruefe("brücke: Gegenprobe – deutsche und spanische bleiben draussen",
+       any(s in en_aus_register(_REG) for s in ("c-slug", "d-slug")), False)
+# ⚠️ Das Register gab es am 30.8.2026 einen Abend lang als reine LISTE, ohne
+# Sprache. Daraus darf kein englischer Kandidat abgeleitet werden.
+pruefe("brücke: altes Listen-Register liefert nichts (keine Sprache darin)",
+       en_aus_register(["a-slug", "b-slug"]), {})
+pruefe("brücke: fehlendes Register wirft nicht",
+       en_aus_register(None), {})
+
+
+# ---------------------------------------------------------------------------
 # Gestaffelter Nachprüfungsabstand (4.10.2026)
 #
 # Ein einheitlicher Abstand löst das Grundproblem nicht: 40.711 Sätze × 1,5 s
