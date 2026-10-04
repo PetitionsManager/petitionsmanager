@@ -320,6 +320,155 @@ DEFAULT_MIN_INTERVAL_HOURS = 72
 OFFLINE_CONFIRMATIONS = 2
 
 
+# ----------------------------------------------------------------------------
+# Zeitbudget eines Sammellaufs
+# ----------------------------------------------------------------------------
+# ⚠️⚠️ Gemessen am 4.10.2026 an CI-Lauf #118: 303 min Laufzeit, bearbeitet wurde
+# NUR changeorg — die übrigen 40 Plattformen blieben auf dem Stand des
+# Vorlaufs. Die Ursache liegt nicht im Scraper, sondern in der Arbeitsteilung:
+# die 300-min-Frist stand ausschließlich in .github/workflows/scrape.yml
+# (FRIST), Python kannte sie nicht. changeorg hat 13.209 Sätze; bei
+# REQUEST_DELAY = 1,5 s sind das allein 5,5 h Nachprüfung, also mehr als das
+# ganze Budget. Weil die Nachprüfung je Lauf nicht gedeckelt ist, wächst der
+# fällige Stapel mit jeder verpassten Runde weiter: die erste Plattform der
+# Rotation frisst die Frist, die hinteren kommen nie dran.
+#
+# Die Gegenmaßnahme ist bewusst KEIN Abbruch, sondern ein Riegel VOR den
+# Abrufen (skip_recent, siehe unten): jede Plattform bekommt einen Anteil der
+# Restzeit; ist er verbraucht, überspringt sie ihre restlichen Abrufe, läuft
+# aber bis zu ihrem Abschluss-Save durch.
+#
+# ⚠️ Der Anteil wird bei JEDEM Plattformstart NEU gerechnet
+# ((Frist − jetzt − Reserve) / verbleibende Plattformen), nicht einmal am
+# Anfang verteilt. Wer früh fertig ist, vererbt seinen Rest an die hinteren.
+# Eine Pauschalverteilung hätte 41 Plattformen je ~7 min gegeben und die
+# ungenutzte Zeit der schnellen (die meisten brauchen Sekunden) verfallen
+# lassen — changeorg hätte dann wieder nach 7 min aufgehört und die Frist
+# wäre trotzdem ungenutzt verstrichen.
+#
+# ⚠️ Der Sammellauf ist SEQUENZIELL (monitor.py, `for p in targets`), deshalb
+# genügt EINE globale Teilfrist; eine Ablage je Thread wäre hier nur Ballast.
+# Die Hintergrund-Threads der Web-App rufen budget_start() nie auf — dort
+# bleibt das Budget aus und alles verhält sich wie vor dem 4.10.2026.
+#
+# Rücksetzen (Selbsttest, Einzelläufe): budget_start(0, None).
+BUDGET_MINDESTANTEIL_S = 60.0
+
+_BUDGET: dict = {
+    "frist": None,       # Epoch-Sekunden, Ende des GANZEN Laufs (None = aus)
+    "reserve_s": 0.0,    # Zeit, die am Ende für HTML/Export frei bleiben soll
+    "offen": 0,          # noch nicht begonnene Plattformen
+    "teilfrist": None,   # Epoch-Sekunden, Ende der LAUFENDEN Plattform
+    "gemeldet": set(),   # schon beklagte unbrauchbare Fristwerte (nur 1× melden)
+}
+
+
+def budget_start(plattformen: int, frist_epoch=None,
+                 reserve_s: float = 0.0) -> None:
+    """Meldet die Gesamtfrist dieses Laufs an — einmal, vor der ersten
+    Plattform.
+
+    `frist_epoch` ist der absolute Endzeitpunkt in Epoch-Sekunden und kommt
+    in der CI als **str aus der Umgebung** (FRIST), lokal als float oder
+    None. `reserve_s` ist die Zeit, die nach dem letzten Abruf noch für
+    HTML-Schreiben und Export frei bleiben soll.
+
+    ⚠️ Nicht interpretierbar oder None ⇒ Budget AUS, budget_erschoepft()
+    gibt dann immer False zurück und der Lauf verhält sich exakt wie vor dem
+    4.10.2026. Das ist die bewusste Richtung des Rückfalls: ein kaputter
+    Fristwert darf niemals alle Abrufe sperren.
+    ⚠️ Deshalb gelten auch 0 und negative Werte als „aus" und nicht als
+    „Frist 1970 längst vorbei" — eine leer gesetzte Umgebungsvariable
+    (FRIST="" ⇒ "0") hätte sonst jede Plattform sofort stillgelegt.
+    ⚠️ Ein unbrauchbarer Wert wird über log() GEMELDET, nicht verschwiegen
+    (je Wert einmal): ein still abgeschaltetes Budget sieht aus wie ein
+    gesunder Lauf — genau der Fehler, der #118 erst entstehen ließ."""
+    _BUDGET["teilfrist"] = None
+    try:
+        _BUDGET["reserve_s"] = max(0.0, float(reserve_s or 0.0))
+    except (TypeError, ValueError):
+        _BUDGET["reserve_s"] = 0.0
+    try:
+        _BUDGET["offen"] = max(0, int(plattformen or 0))
+    except (TypeError, ValueError):
+        _BUDGET["offen"] = 0
+    frist = None
+    if frist_epoch is not None and str(frist_epoch).strip() != "":
+        try:
+            wert = float(str(frist_epoch).strip())
+        except (TypeError, ValueError):
+            wert = None
+        # NaN und ±∞ überleben float() anstandslos — ohne diese Prüfung wäre
+        # "nan" eine Frist, die in keinem Vergleich je True ergibt.
+        unbrauchbar = (wert is None or wert != wert
+                       or abs(wert) == float("inf") or wert <= 0)
+        if unbrauchbar:
+            schluessel = repr(frist_epoch)
+            if schluessel not in _BUDGET["gemeldet"]:
+                _BUDGET["gemeldet"].add(schluessel)
+                log(f"⚠️ Zeitbudget AUS: Frist {schluessel} ist nicht als "
+                    "Epoch-Sekunde lesbar. Der Lauf arbeitet ungedeckelt "
+                    "weiter — die hinteren Plattformen der Rotation können "
+                    "also wieder ausfallen (wie CI-Lauf #118).")
+        else:
+            frist = wert
+    _BUDGET["frist"] = frist
+
+
+def budget_plattform_beginnt() -> None:
+    """Setzt die Teilfrist der Plattform, die JETZT anfängt, und zählt die
+    verbleibenden herunter.
+
+    Der Anteil ist (Frist − jetzt − Reserve) / verbleibende Plattformen, bei
+    jedem Aufruf neu gerechnet (Begründung oben). Ohne budget_start() ohne
+    Wirkung — bewusst, damit Einzelläufe sich nicht anders verhalten als
+    bisher (dieselbe Regel wie bei lauf_meta_setzen)."""
+    frist = _BUDGET["frist"]
+    if frist is None:
+        _BUDGET["teilfrist"] = None
+        return
+    jetzt = time.time()
+    # ⚠️ Nie durch 0 teilen. Beginnen mehr Plattformen als angekündigt
+    # (Nachzügler, ein zweiter Durchlauf, ein Aufholschritt im selben
+    # Prozess), ist "offen" längst 0 — dann gilt die ganze Restzeit dieser
+    # einen Plattform.
+    offen = _BUDGET["offen"] if _BUDGET["offen"] > 0 else 1
+    anteil = (frist - jetzt - _BUDGET["reserve_s"]) / offen
+    if anteil > 0:
+        # ⚠️ Mindestanteil: unter 60 s täte eine Plattform praktisch nichts
+        # mehr, und ihre ENTDECKUNG bräche mitten in der Seitenliste ab. Die
+        # halbe Kandidatenmenge sähe in der Bilanz dann wie ein Einbruch der
+        # Quelle aus (siehe entdeckt_setzen) — ein Messfehler, den wir uns
+        # selbst einbauen würden. 60 s reichen bei REQUEST_DELAY = 1,5 s für
+        # ~40 Abrufe, also mindestens die erste Listenseite.
+        # ⚠️ Nur solange überhaupt Zeit übrig ist: ist die Gesamtfrist schon
+        # vorbei (anteil ≤ 0), gibt es nichts zu verlängern, und die
+        # Teilfrist liegt absichtlich in der Vergangenheit.
+        anteil = max(anteil, BUDGET_MINDESTANTEIL_S)
+    _BUDGET["teilfrist"] = jetzt + anteil
+    _BUDGET["offen"] = max(0, _BUDGET["offen"] - 1)
+    log(f"Zeitbudget: {anteil / 60:.1f} min für diese Plattform "
+        f"({_BUDGET['offen']} danach noch offen).")
+
+
+def budget_erschoepft() -> bool:
+    """True, wenn diese Plattform ihren Zeitanteil verbraucht hat (oder die
+    Gesamtfrist des Laufs vorbei ist).
+
+    Ohne budget_start() — lokale Läufe, --platform, Selbsttest — immer
+    False. Die Gesamtfrist sticht dabei auch ohne Teilfrist: so ist
+    `budget_start(1, time.time() - 1)` sofort erschöpft, ohne dass eine
+    Plattform begonnen haben muss."""
+    frist = _BUDGET["frist"]
+    if frist is None:
+        return False
+    jetzt = time.time()
+    if jetzt > frist:
+        return True
+    teilfrist = _BUDGET["teilfrist"]
+    return teilfrist is not None and jetzt > teilfrist
+
+
 def skip_recent(rec: dict | None, args=None,
                 hours: float | None = None) -> bool:
     """True, wenn dieser Datensatz innerhalb des Mindestabstands bereits geprüft
@@ -330,6 +479,21 @@ def skip_recent(rec: dict | None, args=None,
     --force setzt die Sperre außer Kraft."""
     if args is not None and getattr(args, "force", False):
         return False
+    # ⚠️ Das Zeitbudget steht ABSICHTLICH hinter der force-Prüfung. --force ist
+    # die Nacharbeit, mit der ein gekürzter Lauf seinen Rückstand abträgt (die
+    # Aufholschritte in scrape.yml rufen bewusst EINE Plattform auf), und muss
+    # das Budget deshalb weiterhin stechen. Stünde der Riegel davor, würde er
+    # genau den Lauf lahmlegen, der den Stapel abbauen soll — und der Stapel
+    # wächst nach #118 (303 min nur für changeorg) mit jeder Runde weiter.
+    #
+    # ⚠️ Hier wird NICHTS abgebrochen: die Plattform überspringt nur ihre
+    # restlichen Abrufe, läuft bis zu ihrem Abschluss-Save durch und bleibt
+    # damit „abgeschlossen". Genau darum sitzt der Riegel hier und nicht in
+    # Fetcher.get — dort heißt None „endgültiger Fehler", und zwei gekürzte
+    # Läufe in Folge würden mit OFFLINE_CONFIRMATIONS = 2 ganze Bestände als
+    # offline markieren.
+    if budget_erschoepft():
+        return True
     if hours is None:
         hours = getattr(args, "min_interval_hours", DEFAULT_MIN_INTERVAL_HOURS) \
             if args is not None else DEFAULT_MIN_INTERVAL_HOURS
@@ -3778,8 +3942,16 @@ def _kachel_rahmen(platform: Platform, schnappschuss: bool,
 # aber von einem gewöhnlichen Anschluss aus erreichbar sind: ihr Bestand wird
 # per lokalem monitor.py-Lauf + store_aus_repo gepflegt. eko gehört NICHT
 # hierher — dort sperrt der Checkpoint jeden, ein lokaler Lauf hilft nicht.
-LOKALE_PFLEGE = {"europarl", "wemove_en", "wemove_fr", "wemove_it",
-                 "wemove_nl", "wemove_pl"}
+# ⚠️ openpetition dazu am 4.10.2026: dort sperrt kein WAF, die CI kommt
+# netzwerkseitig gar nicht an den Host. Anmerkung aus Lauf #117: „Host
+# ausgelassen (robots.txt nicht lesbar): www.openpetition.de … Failed to
+# establish a new connection". Folge: bilanz = gefunden 0 / offen 0 bei 2.380
+# ausgelieferten Sätzen — in der CI kann dort keine neue Petition mehr
+# entdeckt werden, und die Kachel sieht dabei ruhig aus. Von diesem Rechner
+# antwortet dieselbe Seite mit HTTP 200 und 18 Slugs auf Seite 1 (gemessen
+# 4.10.2026), der lokale Lauf trägt den Bestand also.
+LOKALE_PFLEGE = {"europarl", "openpetition", "wemove_en", "wemove_fr",
+                 "wemove_it", "wemove_nl", "wemove_pl"}
 
 # Wächter für den PC-Upload: der Timer auf dem Rechner des Nutzers läuft
 # täglich (Persistent=true holt Verpasstes nach). Liegt der letzte

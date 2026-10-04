@@ -90,7 +90,24 @@ from pathlib import Path
 # Repo-Stand gepflegt und darf den Cache-Stand ersetzen, sobald sein
 # lauf_verlauf jünger ist." Nach dem Ende der Aktion gehört er wieder RAUS —
 # sonst schlägt ein alter lokaler Stand irgendwann einen frischen CI-Stand.
-BEFRISTET_LOKAL: frozenset[str] = frozenset()
+#
+# WARUM changeorg am 4.10.2026 aufgenommen wurde — mit Messung, nicht aus
+# Gefühl: Die ausgelieferten Change.org-Daten sind eine echte TEILMENGE des
+# lokalen Stands (13.209 von 13.219 Sätzen live; 13 der 14 am 3./4.10. lokal
+# erstmals gesehenen Sätze stehen live). Der Rechner pflegt den Bestand also
+# ohne Frist weiter, die CI übernahm ihn aber nicht — BEFRISTET_LOKAL war leer
+# — und meldete seit Tagen genau das in einer ::warning: „changeorg: von der CI
+# gepflegt, deshalb NICHT übernommen – der Repo-Stand (13218 Sätze) gälte nach
+# der alten Regel aber als der jüngere."
+#
+# ⚠️ Die Gefahr aus der Warnung oben („ein alter lokaler Stand schlägt einen
+# frischen CI-Stand") ist damit NICHT mehr nur eine Frage der Disziplin: seit
+# dem 4.10.2026 lehnt entscheide() jede Übernahme ab, deren Repo-Stand WENIGER
+# Sätze hat als der Cache-Stand (siehe schrumpft()). Ein vergessener Eintrag
+# hier kann den Bestand also nicht mehr schrumpfen lassen — er kann nur noch
+# einen gleich großen oder größeren, aber älteren Stand durchlassen. Raus
+# gehört changeorg nach dem Ende der Aktion trotzdem.
+BEFRISTET_LOKAL: frozenset[str] = frozenset({"changeorg"})
 
 # Der Import darf den Schritt nicht kippen (Exit 0 ist zugesagt). Scheitert
 # er, läuft der Schritt OHNE Geltungsbereich weiter — und das heißt hier
@@ -135,10 +152,37 @@ def satzzahl(store: dict) -> int:
     return sum(1 for k in store if not k.startswith("_"))
 
 
+def schrumpft(repo: dict | None, cache: dict | None) -> bool:
+    """Wahr, wenn der Repo-Stand WENIGER Sätze hat als der Cache-Stand.
+
+    ⚠️⚠️ Das ist das Spiegelbild der Sperre, die im Job `stores_ins_repo` in
+    .github/workflows/scrape.yml schon seit dem 19.9.2026 steht: „Ein
+    Cache-Stand, der KLEINER ist als der im Repo, ist fast immer ein Unfall …
+    457 gegen 2.586". Dort wird die Richtung Cache → Repo geschützt; hier geht
+    es um die GEGENRICHTUNG Repo → Cache, und die kann auf demselben Weg
+    kaputtgehen: ein abgebrochener CI-Lauf kostet dem Cache-Stand seinen
+    `lauf_verlauf` (letzter_lauf() liefert dann None), und nach der reinen
+    Zeitregel gewänne damit ein ÄLTERER, kleinerer Repo-Stand — der frische,
+    größere Cache-Stand wäre überschrieben und mit ihm die Arbeit des Laufs.
+    Eine Satzzahl ist dafür der robustere Beleg als ein Zeitstempel: sie steht
+    in der Datei selbst und kann nicht fehlen.
+
+    ⚠️ None-Fälle wie überall hier: fehlt eine der beiden Fassungen, gibt es
+    nichts zu vergleichen — dann greift die Sperre nicht (False), und
+    entscheide() behandelt den Fall wie bisher.
+    """
+    if repo is None or cache is None:
+        return False
+    return satzzahl(repo) < satzzahl(cache)
+
+
 def entscheide(repo: dict | None, cache: dict | None) -> str:
     """'repo' | 'cache' — wer den Zuschlag bekommt.
 
     cache=None  -> Datei fehlt auf der Platte (neue Plattform) -> repo.
+    repo kleiner als cache -> cache (Schrumpf-Sperre, siehe schrumpft();
+    steht VOR der Zeitregel, weil genau ein fehlender lauf_verlauf im Cache
+    der Auslöser ist, den sie abfangen soll).
     repo ohne lauf_verlauf -> nie bevorzugen (kein Beleg für Frische).
     cache ohne lauf_verlauf, repo mit -> repo (der einzige Beleg zählt).
     beide mit -> der jüngere Abschluss gewinnt, bei Gleichstand der Cache
@@ -148,6 +192,10 @@ def entscheide(repo: dict | None, cache: dict | None) -> str:
         return "cache"
     if cache is None:
         return "repo"
+    # ⚠️ Vor der Zeitregel, nicht danach: ein Cache-Stand ohne lauf_verlauf
+    # (abgebrochener CI-Lauf) würde unten ohne Prüfung verlieren.
+    if schrumpft(repo, cache):
+        return "cache"
     r, c = letzter_lauf(repo), letzter_lauf(cache)
     if r is None:
         return "cache"
@@ -222,6 +270,19 @@ def main() -> int:
                       f"dem Cache-Stand den lauf_verlauf gekostet?")
             continue
         if urteil != "repo":
+            # ⚠️ Eine abgelehnte Übernahme darf NICHT still bleiben: sonst sieht
+            # ein lokal gepflegter Stand, der hier nie ankommt, wie
+            # Normalbetrieb aus. Beide Satzzahlen gehören in die Meldung —
+            # ohne sie ist nicht entscheidbar, ob der Cache-Stand wirklich der
+            # vollständigere ist oder ob der lokale Lauf Sätze verloren hat.
+            if schrumpft(repo, cache):
+                print(f"::warning title=Store-Übernahme::{name}: Übernahme "
+                      f"ABGELEHNT – der Repo-Stand hat {satzzahl(repo)} Sätze, "
+                      f"der Cache-Stand {satzzahl(cache)}. Ein kleinerer "
+                      f"Repo-Stand ist fast immer ein Unfall (abgebrochener "
+                      f"Lauf, halb geschriebene Datei); der Cache-Stand "
+                      f"bleibt. Ist der lokale Stand wirklich der richtige, "
+                      f"muss er erst vollständig gepusht werden.")
             continue
         try:
             pfad.write_text(zeig.stdout, encoding="utf-8")

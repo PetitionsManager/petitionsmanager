@@ -272,6 +272,31 @@ def melde_eingefrorene() -> None:
     nicht (Lehre vom 10.8.2026). Bestände ohne _meta werden übergangen: noch
     nie gelaufen ist der Anfangszustand, kein Ausfall."""
     jetzt = datetime.now(timezone.utc)
+    # ⚠️ LOKAL sagen diese Warnungen nichts aus (gemessen 4.10.2026: 18 Zeilen
+    # je Pflege-Lauf, „Avaaz: letzter abgeschlossener Lauf 56 Tage her" usw.).
+    # Dieser Rechner pflegt nur die Zweige aus core.LOKALE_PFLEGE (plus die
+    # Change.org-Aufholung); alle anderen Store-Kopien hier stehen ABSICHTLICH
+    # auf dem Klonstand vom 5.9.2026 – der lebende Stand liegt im Actions-Cache
+    # (siehe ci_stores_uebernehmen.py). In der CI sind dieselben Warnungen ECHT
+    # und bleiben unverändert.
+    # ⚠️⚠️ Es wird kein Melder abgeschaltet und keine Schwelle verschoben: nur
+    # der Ort, an dem die Meldung etwas aussagt. Was lokal nicht einzeln
+    # gewarnt wird, kommt als EINE Sammelzeile – eine still gekappte Liste
+    # läse sich wie „hier ist alles in Ordnung".
+    hier_gepflegt: set[str] | None = None
+    if not core.in_github_actions():
+        hier_gepflegt = set(core.LOKALE_PFLEGE)
+        try:
+            import ci_stores_uebernehmen as _ci_stores
+            hier_gepflegt |= set(_ci_stores.BEFRISTET_LOKAL)
+        except Exception as exc:
+            # Fehlt das Modul, zählt höchstens eine befristete Ausnahme in die
+            # Sammelzeile statt einzeln zu warnen – kein Fall geht verloren.
+            # Aber nicht STILL: ein verschwiegener Importfehler ist genau der
+            # abgefangene Absturz, der nirgends auffällt.
+            core.log(f"ℹ️ BEFRISTET_LOKAL nicht lesbar ({exc!r}) – befristet "
+                     "lokal gepflegte Bestände stehen in der Sammelzeile.")
+    verschwiegen: list[str] = []
     for p in PLATFORMS:
         if not p.is_live:
             continue
@@ -288,10 +313,18 @@ def melde_eingefrorene() -> None:
             gruende.append("die Entdeckung fand zuletzt NICHTS "
                            "(Host gesperrt oder ausgelassen?)")
         if gruende:
+            if hier_gepflegt is not None and p.key not in hier_gepflegt:
+                verschwiegen.append(p.name)
+                continue
             text = f"{p.name}: " + " · ".join(gruende)
             core.log(f"⚠️ {text}")
             if core.in_github_actions():
                 print(f"::warning title=Plattform liefert nichts::{text}")
+    if verschwiegen:
+        core.log(f"ℹ️ {len(verschwiegen)} Bestände werden auf diesem Rechner "
+                 f"nicht gepflegt, ihr Alter ist hier also kein Befund – der "
+                 f"lebende Stand steht in der CI: "
+                 f"{', '.join(verschwiegen)}.")
 
 
 # ----------------------------------------------------------------------------
@@ -689,6 +722,21 @@ def parse_args():
                    help="Petitionen, die vor weniger als N Stunden geprüft "
                         f"wurden, überspringen (Default {core.DEFAULT_MIN_INTERVAL_HOURS}; "
                         "0 = immer prüfen)")
+    # ⚠️ NUR FÜR DEN TROCKENLAUF. Im Betrieb steht die Frist in der Umgebung
+    # (FRIST, gesetzt von scrape.yml) — eine zweite Stelle dafür wäre genau der
+    # Fehler, den der Kommentar bei --vorlauf-liste beschreibt. Diese beiden
+    # Argumente gehen der Umgebung vor, damit sich der Umbau in 5 Minuten
+    # lokal messen lässt (`--budget-minuten 5`) und nicht erst ein Lauf über
+    # 5 Stunden abgewartet werden muss, um zu sehen, ob die Teilfristen greifen.
+    p.add_argument("--frist-epoch", dest="frist_epoch", type=float, default=0.0,
+                   help="Zeitpunkt, zu dem der Sammellauf fertig sein muss, als "
+                        "Unix-Zeit in Sekunden (Default 0 = kein Budget). Wirkt "
+                        "nur ohne --platform")
+    p.add_argument("--budget-minuten", dest="budget_minuten", type=float,
+                   default=0.0,
+                   help="Frist stattdessen als Minuten AB JETZT angeben "
+                        "(Default 0 = kein Budget); wird intern in --frist-epoch "
+                        "umgerechnet. Für den Trockenlauf, z. B. 5")
     p.add_argument("--force", action="store_true",
                    help="Mindestabstand ignorieren und alle bekannten "
                         "Petitionen erneut prüfen")
@@ -861,6 +909,42 @@ def main() -> None:
         # rufen bewusst EINE Plattform auf – die soll auch die sein.
         if not args.platform:
             targets = rotiere_auf_aeltestes(targets)
+            # ---- Zeitbudget, NUR für den Sammellauf ------------------------
+            # Anlass (gemessen 4.10.2026): CI-Lauf #118 lief 303 min und
+            # bearbeitete NUR changeorg – die anderen 40 Plattformen blieben
+            # auf dem Stand des Vorlaufs. Die Frist kannte bis hierher allein
+            # die Shell (scrape.yml, `timeout --signal=INT`), Python nicht. Wer
+            # die Frist nicht kennt, kann sie auch nicht TEILEN: die erste
+            # Plattform verbraucht alles, der Rest fällt still aus und sieht
+            # dabei gesund aus – derselbe Befundtyp wie bei europarl.
+            # ⚠️⚠️ AUSDRÜCKLICH NUR HIER, nie bei --platform. Die Schritte
+            # „Change.org aufholen" und „Übersetzungen nachholen" in
+            # .github/workflows/scrape.yml rufen bewusst EINE Plattform auf und
+            # laufen mit einem eigenen Zuschlag ÜBER FRIST hinaus. Ein aus
+            # FRIST abgeleitetes Budget wäre dort von der ersten Sekunde an
+            # erschöpft und würde ihre Nachprüfung komplett stilllegen – also
+            # genau den Schritt, der den chronischen Rückstand abträgt.
+            # Ohne brauchbare Frist ist das Budget AUS und alles verhält sich
+            # wie vorher (core.budget_start: None oder unbrauchbar = aus).
+            frist = getattr(args, "frist_epoch", 0.0) or 0.0
+            minuten = getattr(args, "budget_minuten", 0.0) or 0.0
+            if not frist and minuten:
+                frist = time.time() + minuten * 60
+            # CLI vor Umgebung: die beiden Argumente sind für den Trockenlauf
+            # da und dürfen von einem gesetzten FRIST nicht überstimmt werden.
+            #
+            # ⚠️ Reserve 120 s: die LETZTE Plattform der Rotation erbt den
+            # ganzen Rest (budget_plattform_beginnt teilt durch die noch
+            # offenen, am Ende also durch 1). Ohne Reserve dürfte sie bis zur
+            # Sekunde der Frist abrufen — und dann trifft das SIGINT aus
+            # scrape.yml mitten in write_dashboard()/write_placeholder_pages()
+            # im finally unten. Die beiden Zeilen sind genau deshalb dorthin
+            # gewandert (siehe ihren Kommentar: ohne sie fehlte die
+            # Status-Ansicht nach jedem gekürzten Lauf auf Pages, am
+            # 4.8.2026 als HTTP 404 nachgemessen). 120 s reichen für sie
+            # samt Meldern und kosten bei 300 min Budget 0,7 %.
+            core.budget_start(len(targets), frist or os.environ.get("FRIST"),
+                              reserve_s=120.0)
         try:
             for p in targets:
                 core.log(f"=== Scrape: {p.name} ===")
@@ -874,6 +958,14 @@ def main() -> None:
                 # (scrape.yml), ein Abbruch mitten im Lauf ist hier also der
                 # Normalfall, nicht der Ausnahmefall.
                 core.set_progress_platform(p.key)
+                # Teilfrist für GENAU DIESE Plattform. ⚠️ Bewusst hier und
+                # nicht vor rotiere_auf_aeltestes: der Anteil wird je Plattform
+                # neu aus der RESTZEIT berechnet, wer früh fertig ist, vererbt
+                # seinen Rest nach hinten. Eine einmalige Aufteilung am Anfang
+                # würde die hinteren Plattformen um genau diesen Rest bringen.
+                # ⚠️ Und nicht in den except-Zweig unten: ein Absturz beendet
+                # die Plattform, er beginnt keine.
+                core.budget_plattform_beginnt()
                 try:
                     p.run(args)
                 except Exception as exc:   # eine Plattform darf den Lauf nicht kippen

@@ -1,5 +1,30 @@
 # Startet den Pflege-Lauf immer wieder, solange der Rechner läuft.
 #
+# ⚠️⚠️ Takt am 4.10.2026 von 20 min auf 4 h gestreckt (Nutzerentscheidung).
+# Vier Messwerte tragen das, nicht ein Gefühl:
+#   (1) Gemessen 3.10.2026: 11 Läufe mit rund 37 min Abstand — der Rechner war
+#       praktisch dauerhaft am Scrapen.
+#   (2) Der ANLASS vom 20.9.2026 ist erledigt: damals lagen ~12.200 offene
+#       Change.org-Kandidaten vor (deshalb der dichte Takt), am 4.10. sind es
+#       142 offene, davon 141 dauerhaft unparsbar. Es gibt keinen Rückstand
+#       mehr abzutragen.
+#   (3) Jeder Lauf committet changeorg_petitions.json (55 MB) — 145 Commits
+#       seit dem 20.9. bei ~2,3 MB Zuwachs je Commit, Repo auf GitHub 341 MB.
+#       ⚠️ Beim Nachzählen am 4.10. um 12 h waren es schon 158 (`git log
+#       --since="2026-09-20 00:00" --oneline -- changeorg_petitions.json |
+#       wc -l`) — die Zahl wächst, solange der Takt bleibt.
+#       Die CI braucht nur EINEN Stand am Tag; lokaler_pflege_lauf.sh staget
+#       diese Datei seit dem 4.10. deshalb höchstens einmal täglich.
+#   (4) Jeder Lauf verbrennt außerdem das WeMove-WAF-Fenster: am 4.10. um
+#       08:14 „6 Fehlschläge in Folge" und „0 Detailabruf(e) erfolgreich" —
+#       häufigere Anläufe holen dort nichts, sie halten die Sperre nur warm.
+# Dass 4 h reichen, hängt am NACHPRÜFUNGSABSTAND von 72 h: bei 4 h Pause sind
+# das rund 6 Läufe am Tag, also etwa 18 Gelegenheiten innerhalb eines
+# Nachprüfungsfensters — bequem genug.
+# ⚠️ Die alte Begründung „häufige Läufe blähen die Historie nicht auf" (unten,
+# 17.9.2026) war für die kleinen Stores richtig und für den 55-MB-Store falsch:
+# der ändert sich bei fast jedem Lauf. Sie steht hier nur noch als Chronik.
+#
 # ⚠️⚠️ Umgestellt am 17.9.2026 auf Wunsch des Nutzers („soll immer im
 # Hintergrund laufen, wann immer der Rechner an ist"). Vorher: OnCalendar
 # 20:15 + RandomizedDelaySec=900 + Persistent=true, also einmal am Tag.
@@ -53,10 +78,13 @@ Description=PetitionsManager-Pflege-Lauf (laufend, solange der Rechner an ist)
 OnActiveSec=2min
 # Nach dem Hochfahren kurz warten, damit Netz und Anmeldung stehen.
 OnBootSec=5min
-# Danach 20 min Pause nach jedem ENDE, dann wieder. Bei rund 2 h Laufzeit sind
-# das etwa 5–6 Läufe je 24 h Wachzeit statt bisher einem.
+# Danach 4 h Pause nach jedem ENDE, dann wieder (4.10.2026, vorher 20 min —
+# Begründung mit Messwerten im Kopf der Datei). ⚠️ Die „rund 2 h Laufzeit" von
+# oben gelten nicht mehr: am 3.10.2026 lagen 11 Läufe je 37 min auseinander,
+# bei 20 min Pause also ~17 min Lauf. Eine Runde ist damit gut 4 h → etwa
+# 6 Läufe je 24 h Wachzeit statt 11 am Tag.
 # systemd nimmt von mehreren Terminen den nächstliegenden.
-OnUnitInactiveSec=20min
+OnUnitInactiveSec=4h
 # Die Streuung bleibt, damit nicht alle Läufe auf dieselbe Minute fallen —
 # gegenüber den Quellen freundlicher, und ein Muster ist schwerer zu sperren.
 RandomizedDelaySec=120

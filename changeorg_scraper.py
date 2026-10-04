@@ -117,8 +117,25 @@ CREATED_RE  = re.compile(r'"createdAt":"(\d{4}-\d{2}-\d{2})')
 STARTER_RE  = re.compile(r'"displayName":"((?:[^"\\]|\\.)*)"')
 COUNTRY_RE  = re.compile(r'"country":\{"countryCode":"([A-Z]{2})"')
 # Die SPRACHE der Petition (nicht ihr Land) — Grundlage des englischen Eintrags.
+# ⚠️⚠️ ZIFFERN GEHÖREN IN DIE KLASSE (4.10.2026). Bis hierher stand da
+# `[A-Za-z\-]+`, und das ist genau ein Sprachkürzel zu wenig: Lateinamerika-
+# Spanisch heißt `es-419` (UN-M49-Regionsnummer statt Länderkürzel). Das Muster
+# traf dort nicht, falsche_sprache() lieferte deshalb „nicht belegt" = False,
+# und scrape_petition gab „unklar" zurück statt „skip".
+# Folge, am 4.10.2026 gemessen: 141 der 142 noch offenen Change.org-Kandidaten
+# kamen in JEDEM Durchgang erneut als „unklar" zurück — in der CI und auf dem
+# PC dieselben Slugs (Beispiel-Listen 50/50 identisch). Sie wanderten nie ins
+# Verworfenen-Register, blieben also für immer offen und wurden endlos neu
+# abgerufen; die Aufholschleife konnte nie fertig werden. Reproduziert mit dem
+# ECHTEN Scraper: `scrape_petition` → „unklar", ORIGINAL_LOCALE_RE → kein
+# Treffer, während dieselbe Zeile auf einer deutschen Seite `de-DE` liefert —
+# beide Seiten tragen das Feld in IDENTISCHER Form.
+# ⚠️ Vor der Änderung am Bestand gemessen: 13.192 Sätze tragen lang=de, 27
+# keins, KEINER ein anderes. Die Erweiterung kann also keinen bekannten Satz
+# neu als fremdsprachig verwerfen und die Massen-Lösch-Bremse nicht auslösen;
+# sie trifft nur zusätzlich (de-DE, en-US, zh-Hans trafen vorher wie nachher).
 ORIGINAL_LOCALE_RE = re.compile(
-    r'"originalLocale":\{"localeCode":"([A-Za-z\-]+)"')
+    r'"originalLocale":\{"localeCode":"([A-Za-z0-9\-]+)"')
 TAG_RE      = re.compile(r'"slug":"([a-z0-9\-]+)","name":"((?:[^"\\]|\\.)*)"')
 
 FETCH_HEADERS = {

@@ -1125,6 +1125,22 @@ def run_sprache(args, sprache: str = "en") -> None:
     neu = [s for s, r in store.items() if r.get("first_seen") == ts]
     if neu:
         log(f"NEU: {len(neu)} neue Einträge ({sprache}) in diesem Lauf.")
+    # ⚠️⚠️ Gemessen am 4.10.2026 im ausgelieferten Manifest: 18 von 41
+    # Plattformen hatten KEIN Feld `bilanz` — genau avaaz_en und die 17
+    # Sprachzweige, also alle, die durch diese Funktion laufen. Ursache war
+    # nicht die Bilanz selbst, sondern eine fehlende Zeile: run() meldet seine
+    # Kandidatenmenge mit core.entdeckt_setzen(), run_sprache() tat es nie.
+    # Ohne entdeckte Menge gibt core._bilanz() bewusst None zurück („eine
+    # erfundene 100 % wäre schlimmer als keine Angabe") — die Kacheln dieser
+    # 18 Zweige konnten ihren Rückstand deshalb gar nicht ausweisen.
+    # Genauso gebildet wie in run(): BEIDE Arten sind Kandidaten desselben
+    # Bestands und teilen den Schlüsselraum, gehören also in EINE Menge
+    # (entdeckt_setzen entdoppelt selbst und meldet eine Entdopplung).
+    # Damit wird je Zweig wieder nachrechenbar, dass
+    #   gefunden = im_bestand + unbrauchbar + verworfen + zurueckgestellt + offen
+    # aufgeht; `available` bleibt daneben stehen, damit ältere Leser der
+    # Manifest-Felder unverändert weiterlaufen.
+    core.entdeckt_setzen(set(petitionen) | set(kampagnen))
     prog(message="Speichere & baue HTML …")
     save(quiet=False, new_petitions_last_run=neu,
          available=len(petitionen) + len(kampagnen))

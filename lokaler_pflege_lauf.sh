@@ -20,7 +20,22 @@ LOG="$KLON/pflege-lauf.log"
 MARKER="$KLON/PFLEGE-LAUF-KLEMMT.txt"
 # Nur die LOKALE_PFLEGE-Zweige — wemove_es und alles andere erledigt die CI
 # selbst; jeder zusätzliche Zweig hier kostet WeMove-WAF-Fensterbudget.
-PLATTFORMEN=(europarl wemove_en wemove_fr wemove_it wemove_nl wemove_pl)
+#
+# ⚠️⚠️ openpetition dazu am 4.10.2026, und zwar nicht wegen eines WAF: die CI
+# kommt dort netzwerkseitig GAR NICHT hin. Anmerkung aus Lauf #117: „Host
+# ausgelassen (robots.txt nicht lesbar): www.openpetition.de … Failed to
+# establish a new connection". Folge im ausgelieferten Manifest: bilanz
+# gefunden 0 / offen 0 bei 2.380 Sätzen im Bestand — es konnte dort keine neue
+# Petition mehr entdeckt werden, und der Bestand sah dabei gesund aus.
+# Von diesem Anschluss antwortet dieselbe Liste mit HTTP 200 und 18 Slugs auf
+# Seite 1 (4.10.2026 gemessen). Kosten hier: ~93 Listenseiten × 1,5 s ≈ 2,5 min
+# plus die Nachprüfung (2.380 Sätze / 72 h ≈ 800 Abrufe am Tag, verteilt auf
+# ~6 Läufe). ⚠️ REIHENFOLGE bei der Einführung: erst muss der CI-Stand per
+# „Run workflow" mit stores_ins_repo=openpetition ins Repo kommen, sonst
+# schreibt dieser Lauf den älteren lokalen Stand darüber (die Schrumpf-Sperre
+# in ci_stores_uebernehmen.entscheide() fängt es ab, aber dann steht der
+# Bestand still, statt zu wachsen).
+PLATTFORMEN=(europarl openpetition wemove_en wemove_fr wemove_it wemove_nl wemove_pl)
 
 sag() { echo "[$(date '+%F %T')] $*" | tee -a "$LOG"; }
 
@@ -161,8 +176,43 @@ main() {
     fi
 
     GEAENDERT="$(git status --porcelain -- '*_petitions.json' texts_index.json)"
+
+    # ---- Den großen Store höchstens EINMAL AM TAG committen ---------------
+    # Gemessen 4.10.2026: 145 Commits auf changeorg_petitions.json (55 MB)
+    # seit dem 20.9., rund 2,3 MB Zuwachs je Commit — das Repo liegt auf
+    # GitHub bei 341 MB. Gebraucht wird davon EIN Stand pro Tag: mehr holt
+    # sich ci_stores_uebernehmen.py nicht ab, es übernimmt je CI-Lauf immer
+    # nur den aktuellen HEAD-Stand. Jeder weitere Commit am selben Tag kostet
+    # also nur Repo-Größe.
+    #
+    # ⚠️ Entschieden wird das aus git selbst, nicht über eine Merkdatei: eine
+    # zusätzliche Datei im Klon wäre ein zweiter Zustand, der mit dem Repo
+    # auseinanderlaufen kann (und ein .gitignore-Eintrag dazu). `git log
+    # --since=<heute 00:00>` liest die Wahrheit direkt aus der Historie —
+    # leere Ausgabe heißt „heute noch nicht committet". Nach einem `git pull`
+    # zählt auch ein Commit aus der CI mit; das ist gewollt, denn dann liegt
+    # für heute schon ein Stand vor.
+    # ⚠️ Die KLEINEN Stores bleiben bei „je Lauf": sie wachsen um Kilobytes,
+    # und ihr Zweck ist die zeitnahe Übernahme (europarl, wemove_*).
+    CHANGEORG_ZURUECK=""
+    if printf '%s\n' "$GEAENDERT" | grep -q 'changeorg_petitions\.json' \
+       && [ -n "$(git log --since="$(date '+%F') 00:00" --oneline -- changeorg_petitions.json)" ]; then
+        CHANGEORG_ZURUECK="ja"
+        GEAENDERT="$(printf '%s\n' "$GEAENDERT" | grep -v 'changeorg_petitions\.json' || true)"
+        sag "changeorg_petitions.json wurde heute schon committet – diesen Lauf nicht erneut stagen (die Änderungen bleiben im Arbeitsbaum und gehen morgen mit)."
+    fi
+
     if [ -z "$GEAENDERT" ]; then
-        sag "Keine Store-Änderungen – fertig."
+        # ⚠️ Beide Wege müssen hier landen, sonst würde unten ein leeres
+        # `git add` auf einen leeren Commit laufen: entweder hat sich nichts
+        # geändert, oder die EINZIGE Änderung war der zurückgehaltene große
+        # Store. Die Meldungen bleiben getrennt — „keine Änderungen" und
+        # „absichtlich nichts gestaget" sind im Log zwei verschiedene Befunde.
+        if [ -n "$CHANGEORG_ZURUECK" ]; then
+            sag "Nur changeorg_petitions.json geändert und heute schon committet – nichts zu pushen, fertig."
+        else
+            sag "Keine Store-Änderungen – fertig."
+        fi
         exit 0
     fi
     # Nur genau die Store-Dateien stagen — nie pauschal (geteilte Repo-Disziplin).

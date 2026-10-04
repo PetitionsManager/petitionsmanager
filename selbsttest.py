@@ -22,6 +22,7 @@ from __future__ import annotations
 import json
 import sys
 import tempfile
+import time
 from datetime import date, timedelta
 from pathlib import Path
 from types import SimpleNamespace
@@ -29,8 +30,10 @@ from types import SimpleNamespace
 from bs4 import BeautifulSoup
 
 import changeorg_scraper as changeorg
+import ci_stores_uebernehmen as ci_stores
 import europarl_scraper as europarl
 import hole_live_daten as hld
+import monitor
 import openpetition_scraper as openpetition
 import petitions_core as core
 
@@ -676,6 +679,37 @@ pruefe("sprachbefund liest Sprache UND Land",
                               '"country":{"countryCode":"AT"}'), "de/AT")
 pruefe("sprachbefund ohne Felder bleibt leer",
        changeorg.sprachbefund("nichts davon"), "")
+
+# ⚠️⚠️ Sprachkürzel MIT ZIFFER (4.10.2026). `es-419` ist Lateinamerika-Spanisch
+# — eine UN-M49-Regionsnummer statt eines Länderkürzels. Daran scheiterte die
+# alte Zeichenklasse `[A-Za-z\-]+` still: kein Treffer heißt für
+# falsche_sprache() „nicht belegt", und der Aufrufer bekommt „unklar" statt
+# „skip". 141 der 142 offenen Change.org-Kandidaten hingen genau deshalb
+# dauerhaft im Vorrat und wurden in jedem Durchgang neu abgerufen.
+_ES419 = ('"originalLocale":{"localeCode":"es-419"}'
+          '"country":{"countryCode":"MX"}"ask":"Un título"')
+# ⚠️ Erwartet wird „es/MX", nicht „es-419/MX": sprachbefund kürzt bewusst auf
+# das Primärkürzel (Zeile 400, `split("-")[0]`) — das Register soll die
+# SPRACHE führen, nicht die Region. Der Fall prüft also, dass das Kürzel
+# überhaupt ankommt; vor der Änderung stand hier „/MX" ohne Sprache.
+pruefe("sprachbefund: Kürzel mit Ziffer (es-419) wird gelesen",
+       changeorg.sprachbefund(_ES419), "es/MX")
+pruefe("es-419 ist BELEGT eine andere Sprache – also skip, nicht unklar",
+       changeorg.falsche_sprache(_ES419, "de"), True)
+# Gegenprobe 1: der Test darf nicht einfach für jede Seite True sagen.
+pruefe("Gegenprobe – de-DE bleibt die richtige Sprache",
+       changeorg.falsche_sprache('"originalLocale":{"localeCode":"de-DE"}',
+                                 "de"), False)
+# Gegenprobe 2: ein FEHLENDES Feld muss weiterhin „keine Aussage" ergeben,
+# sonst würde ein Seitenumbau wieder Bestände löschen statt zu melden.
+pruefe("Gegenprobe – ohne Sprachfeld bleibt es unbelegt",
+       changeorg.falsche_sprache("nichts davon", "de"), False)
+# Und die Aufnahmeentscheidung selbst: eine es-419-Seite darf NICHT in den
+# deutschen Bestand, aber im englischen Zweig auch nicht als Englisch gelten.
+pruefe("es-419 wird vom deutschen Zweig nicht übernommen",
+       changeorg.parse_detail(_ES419, "https://x.test/p/a", "de"), None)
+pruefe("es-419 wird auch vom englischen Zweig nicht übernommen",
+       changeorg.parse_detail(_ES419, "https://x.test/p/a", "en"), None)
 
 # Das Land am Datensatz — bei beiden Plattformen. Heute ist es überall dasselbe
 # (die Auswahl lässt ja nur Deutschland durch); erst wenn das Feld verschwindet,
@@ -1347,6 +1381,152 @@ class _ToterFetcher:
 
 pruefe("absturz: Gegenprobe – error kommt nicht aus dem Nichts",
        changeorg.scrape_petition(_ToterFetcher(), "egal")[1], None)
+
+
+# ---------------------------------------------------------------------------
+# Zeitbudget je Plattform — und die Falle, die dabei zuschnappen könnte
+#
+# Anlass 4.10.2026: CI-Lauf #118 lief 303 min und bearbeitete NUR changeorg;
+# die anderen 40 Plattformen blieben auf dem Stand des Vorlaufs. Python kannte
+# die Frist nicht, es gab keine Obergrenze je Plattform, und die Nachprüfung
+# ist je Lauf nicht gedeckelt — bei 13.209 Sätzen × 1,5 s sind das 5,5 h.
+#
+# ⚠️⚠️ Die eigentliche Gefahr des Umbaus ist NICHT, dass das Budget zu früh
+# greift, sondern dass eine gedeckelte Plattform ihren Abschluss-Save verliert:
+# `kennzahlen` schreibt nur save_store(quiet=False), und ihr FEHLEN ist für
+# monitor._abschlussmarke() der Beleg „nicht fertig geworden". Eine Plattform,
+# die in JEDEM Lauf künstlich gekürzt wird, gälte dann dauerhaft als chronisch
+# offen (CHRONISCH_OFFEN_TAGE = 2) und verlöre ihren Rundlauf-Vorrang für
+# immer. Genau das prüft der Fall „Abschluss-Save läuft trotzdem" unten; er ist
+# der Grund, warum der Riegel in skip_recent sitzt und nicht in Fetcher.get.
+# ---------------------------------------------------------------------------
+def budget_sperrt(frist, force: bool = False) -> bool:
+    """Was sagt skip_recent unter dieser Frist über einen 30 TAGE alten Satz?
+
+    ⚠️ Der Satz muss ALT sein, sonst ist der Test wertlos: einen frisch
+    geprüften hält skip_recent ohnehin zurück, und „True" wäre dann kein Beleg
+    für das Budget, sondern für den Mindestabstand."""
+    core.budget_start(1, frist)
+    args = SimpleNamespace(force=force,
+                           min_interval_hours=core.DEFAULT_MIN_INTERVAL_HOURS)
+    alt = {"last_checked": (date.today() - timedelta(days=30)).isoformat()}
+    try:
+        return core.skip_recent(alt, args)
+    finally:
+        core.budget_start(0, None)          # Rücksetzung in den Grundzustand
+
+
+pruefe("budget: ohne Frist bleibt ein alter Satz fällig",
+       budget_sperrt(None), False)
+pruefe("budget: erschöpfte Frist hält die Nachprüfung zurück",
+       budget_sperrt(time.time() - 1), True)
+pruefe("budget: --force sticht das Budget (sonst stirbt die Nacharbeit)",
+       budget_sperrt(time.time() - 1, force=True), False)
+# Die Richtung des Rückfalls ist Absicht: ein kaputter Fristwert darf nie ALLE
+# Abrufe sperren. FRIST="" kommt aus der Shell als "0" an.
+pruefe("budget: unlesbare Frist schaltet AUS statt alles zu sperren",
+       budget_sperrt("abc"), False)
+pruefe("budget: leere Frist (\"0\") sperrt nichts",
+       budget_sperrt("0"), False)
+pruefe("budget: Frist in der Zukunft sperrt nichts",
+       budget_sperrt(time.time() + 600), False)
+
+
+def budget_anteil(plattformen: int, restsekunden: float) -> bool:
+    """Erschöpft, nachdem eine Plattform mit diesem Zuschnitt begonnen hat?"""
+    core.budget_start(plattformen, time.time() + restsekunden)
+    core.budget_plattform_beginnt()
+    try:
+        return core.budget_erschoepft()
+    finally:
+        core.budget_start(0, None)
+
+
+# 70 s / 100 Plattformen wären 0,7 s — darunter bricht die ENTDECKUNG mitten
+# in der Seitenliste ab, und die halbe Kandidatenmenge sähe in der Bilanz wie
+# ein Einbruch der Quelle aus. Deshalb der Mindestanteil von 60 s.
+pruefe("budget: Mindestanteil greift bei vielen Plattformen",
+       budget_anteil(100, 70), False)
+pruefe("budget: Gegenprobe – abgelaufene Gesamtfrist wird nicht verlängert",
+       budget_anteil(100, -5), True)
+# Nachzügler: beginnen mehr Plattformen als angekündigt, darf nichts durch 0
+# teilen und niemand grundlos gesperrt werden.
+core.budget_start(1, time.time() + 600)
+core.budget_plattform_beginnt()
+core.budget_plattform_beginnt()
+pruefe("budget: mehr Plattformen als angekündigt sperren nicht",
+       core.budget_erschoepft(), False)
+core.budget_start(0, None)
+
+
+def budget_abschluss(quiet: bool) -> tuple:
+    """Speichert unter ERSCHÖPFTEM Budget und liefert
+    (kennzahlen geschrieben?, Abschlussmarke)."""
+    datei = Path(tempfile.mkdtemp()) / "kunst_petitions.json"
+    satz = {"slug": "a", "url": "https://x.test/a", "title": "A",
+            "status": "online"}
+    datei.write_text(json.dumps({"a": satz, "_meta": {}}))
+    core.set_progress_platform("kunst")
+    core.BEFUNDE.pop("kunst", None)
+    core.budget_start(1, time.time() - 1)
+    try:
+        core.save_store({"a": satz}, datei, quiet=quiet)
+    finally:
+        core.budget_start(0, None)
+    meta = json.loads(datei.read_text())["_meta"]
+    marke = monitor._abschlussmarke(SimpleNamespace(data_file=datei))
+    return ("kennzahlen" in meta, marke[0])
+
+
+pruefe("budget: Abschluss-Save läuft trotzdem – Plattform bleibt abgeschlossen",
+       budget_abschluss(quiet=False), (True, 1))
+# Gegenprobe: ohne sie bewiese der Fall oben nur, dass _abschlussmarke immer 1
+# sagt. Eine Zwischenspeicherung darf NICHT als Abschluss durchgehen.
+pruefe("budget: Gegenprobe – Zwischenspeicherung ist kein Abschluss",
+       budget_abschluss(quiet=True), (False, 0))
+
+
+# ---------------------------------------------------------------------------
+# Store-Übernahme Repo → Cache: die Schrumpf-Sperre (4.10.2026)
+#
+# Anlass: changeorg steht seit heute in BEFRISTET_LOKAL, der Rechner pflegt den
+# Bestand also mit Wirkung auf die Auslieferung. Damit wird die Gegenrichtung
+# gefährlich: ein abgebrochener CI-Lauf kostet dem Cache-Stand seinen
+# lauf_verlauf, und nach der reinen Zeitregel gewänne ein ÄLTERER, kleinerer
+# Repo-Stand. Die Satzzahl ist der robustere Beleg — sie kann nicht fehlen.
+# ---------------------------------------------------------------------------
+def kunst_store(n: int, zeit: str | None) -> dict:
+    store = {f"s{i}": {"status": "online"} for i in range(n)}
+    store["_meta"] = {"lauf_verlauf": [{"zeit": zeit}]} if zeit else {}
+    return store
+
+
+_JUENGER = "2026-10-04T08:00:00+00:00"
+_AELTER = "2026-10-01T08:00:00+00:00"
+
+pruefe("übernahme: jüngerer, gleich großer Repo-Stand gewinnt",
+       ci_stores.entscheide(kunst_store(100, _JUENGER),
+                            kunst_store(100, _AELTER)), "repo")
+pruefe("übernahme: kleinerer Repo-Stand wird abgelehnt, obwohl jünger",
+       ci_stores.entscheide(kunst_store(50, _JUENGER),
+                            kunst_store(100, _AELTER)), "cache")
+pruefe("übernahme: kleinerer Repo-Stand gegen Cache OHNE Verlauf – Cache bleibt",
+       ci_stores.entscheide(kunst_store(50, _JUENGER),
+                            kunst_store(100, None)), "cache")
+# Gegenprobe zur Sperre: sie darf nicht einfach immer „cache" sagen.
+pruefe("übernahme: größerer, jüngerer Repo-Stand kommt weiterhin durch",
+       ci_stores.entscheide(kunst_store(120, _JUENGER),
+                            kunst_store(100, None)), "repo")
+pruefe("übernahme: älterer Repo-Stand verliert wie bisher",
+       ci_stores.entscheide(kunst_store(100, _AELTER),
+                            kunst_store(100, _JUENGER)), "cache")
+pruefe("übernahme: schrumpft() ohne Gegenstück urteilt nicht",
+       (ci_stores.schrumpft(None, kunst_store(9, None)),
+        ci_stores.schrumpft(kunst_store(9, None), None)), (False, False))
+# Die beiden Bestände, die seit dem 4.10.2026 lokal gepflegt werden, müssen in
+# der Übernahmemenge stehen — sonst läuft der PC-Timer ins Leere.
+pruefe("übernahme: changeorg und openpetition sind übernahmefähig",
+       {"changeorg", "openpetition"} <= ci_stores.uebernahme_menge(), True)
 
 
 # ---------------------------------------------------------------------------
