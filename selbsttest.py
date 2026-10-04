@@ -1416,6 +1416,58 @@ def budget_sperrt(frist, force: bool = False) -> bool:
         core.budget_start(0, None)          # Rücksetzung in den Grundzustand
 
 
+# ---------------------------------------------------------------------------
+# Gestaffelter Nachprüfungsabstand (4.10.2026)
+#
+# Ein einheitlicher Abstand löst das Grundproblem nicht: 40.711 Sätze × 1,5 s
+# sind 17 h reine Abrufzeit, die CI hat 2 × 5 h am Tag. Gemessen an 16.947
+# Sätzen mit Zeitreihe stehen 66 % der Zahlen seit 7–30 Tagen still, 7,5 %
+# seit über 30. Die Staffel fragt genau dort seltener.
+# ---------------------------------------------------------------------------
+def satz_mit_stillstand(tage, geprueft_vor: int = 0) -> dict:
+    """Ein Satz, dessen Zahl sich zuletzt vor `tage` Tagen geändert hat.
+    `tage=None` = gar keine Zeitreihe (frisch angelegt)."""
+    rec = {"last_checked": (date.today() - timedelta(days=geprueft_vor)).isoformat()}
+    if tage is not None:
+        rec["signatures_history"] = [
+            {"checked_at": (date.today() - timedelta(days=tage)).isoformat(),
+             "count": 5}]
+    return rec
+
+
+pruefe("staffel: lebhafte Zahl bleibt bei der Grundstufe",
+       core.min_interval_fuer(satz_mit_stillstand(1)),
+       core.DEFAULT_MIN_INTERVAL_HOURS)
+pruefe("staffel: 10 Tage Stillstand → 7 Tage Abstand",
+       core.min_interval_fuer(satz_mit_stillstand(10)), 7 * 24)
+pruefe("staffel: 40 Tage Stillstand → 14 Tage Abstand",
+       core.min_interval_fuer(satz_mit_stillstand(40)), 14 * 24)
+# ⚠️ Die sichere Richtung: ohne Beleg lieber öfter fragen als seltener.
+pruefe("staffel: ohne Zeitreihe bleibt es bei der Grundstufe",
+       core.min_interval_fuer(satz_mit_stillstand(None)),
+       core.DEFAULT_MIN_INTERVAL_HOURS)
+pruefe("staffel: unlesbarer Zeitstempel bleibt bei der Grundstufe",
+       core.min_interval_fuer({"signatures_history": [{"checked_at": "kaputt"}]}),
+       core.DEFAULT_MIN_INTERVAL_HOURS)
+
+# Das entscheidende Paar: GLEICHES last_checked, nur der Stillstand
+# unterscheidet sich. Ohne diese Gegenprobe bewiese der Test nur, dass
+# skip_recent irgendetwas zurückhält.
+_args72 = SimpleNamespace(force=False,
+                          min_interval_hours=core.DEFAULT_MIN_INTERVAL_HOURS)
+pruefe("staffel: Satz mit stillstehender Zahl wird nach 5 Tagen übersprungen",
+       core.skip_recent(satz_mit_stillstand(40, geprueft_vor=5), _args72), True)
+pruefe("staffel: Gegenprobe – lebhafter Satz wird nach 5 Tagen geprüft",
+       core.skip_recent(satz_mit_stillstand(1, geprueft_vor=5), _args72), False)
+# Eine ausdrückliche Ansage des Aufrufers darf die Staffel NICHT verlängern.
+pruefe("staffel: --min-interval-hours 1 sticht die Staffel",
+       core.skip_recent(satz_mit_stillstand(40, geprueft_vor=5),
+                        SimpleNamespace(force=False, min_interval_hours=1)), False)
+pruefe("staffel: --force sticht sie ebenfalls",
+       core.skip_recent(satz_mit_stillstand(40, geprueft_vor=5),
+                        SimpleNamespace(force=True, min_interval_hours=72)), False)
+
+
 pruefe("budget: ohne Frist bleibt ein alter Satz fällig",
        budget_sperrt(None), False)
 pruefe("budget: erschöpfte Frist hält die Nachprüfung zurück",

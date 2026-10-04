@@ -382,7 +382,18 @@ def melde_veraltete_unterschriften() -> None:
     baut einen Melder, der bei kaputtem Mechanismus schweigt.
     """
     jetzt = datetime.now(timezone.utc)
-    grenze = timedelta(days=UNTERSCHRIFTEN_VERALTET_TAGE)
+    # ⚠️⚠️ Seit dem gestaffelten Nachprüfungsabstand (4.10.2026,
+    # core.min_interval_fuer) wäre eine FESTE Grenze falsch: zwei Drittel der
+    # Sätze werden absichtlich nur noch alle 7 bzw. 14 Tage gefragt, weil ihre
+    # Zahl seit Wochen stillsteht. Gegen feste 7 Tage gemessen wäre jeder
+    # einzelne davon „veraltet" — der Melder würde den eigenen Entwurf als
+    # Fehler ausgeben und nach drei Tagen überlesen. Gemessen wird deshalb
+    # gegen den Abstand DIESES Satzes, mal derselben Toleranz wie bisher:
+    # 7 Tage bei 72 h Abstand sind Faktor 2,33. Für die Grundstufe ändert sich
+    # damit nichts, und die Aussage bleibt dieselbe — „die Nachprüfung kommt
+    # hier nicht durch".
+    toleranz = (UNTERSCHRIFTEN_VERALTET_TAGE * 24.0
+                / max(core.DEFAULT_MIN_INTERVAL_HOURS, 1))
     gesamt_alt = gesamt = 0
     gemeldet = verschwiegen = 0
     # ⚠️ Dieselbe Trennung wie in melde_eingefrorene, über dieselbe Quelle
@@ -415,7 +426,8 @@ def melde_veraltete_unterschriften() -> None:
             if zp == datetime.min.replace(tzinfo=timezone.utc):
                 ohne += 1
                 continue
-            if jetzt - zp > grenze:
+            # Grenze je Satz: sein eigener Mindestabstand mal der Toleranz.
+            if jetzt - zp > timedelta(hours=core.min_interval_fuer(r) * toleranz):
                 alt += 1
                 if aeltestes is None or zp < aeltestes:
                     aeltestes = zp
@@ -440,11 +452,13 @@ def melde_veraltete_unterschriften() -> None:
         if anteil >= UNTERSCHRIFTEN_VERALTET_ANTEIL:
             tage = (jetzt - aeltestes).days if aeltestes else 0
             text = (f"{p.name}: {alt} von {messbar} Unterschriftenzahlen sind "
-                    f"älter als {UNTERSCHRIFTEN_VERALTET_TAGE} Tage "
-                    f"({anteil:.0%}), ältester Stand {tage} Tage. Der "
-                    f"Mindestabstand liegt bei "
-                    f"{core.DEFAULT_MIN_INTERVAL_HOURS} h — wenn so viel "
-                    f"darüber liegt, kommt die Nachprüfung nicht durch.")
+                    f"älter, als ihr eigener Abstand erlaubt "
+                    f"({anteil:.0%}), ältester Stand {tage} Tage. Gemessen "
+                    f"wird je Satz gegen seine Stufe (Grundstufe "
+                    f"{core.DEFAULT_MIN_INTERVAL_HOURS} h, bei stillstehender "
+                    f"Zahl 7 bzw. 14 Tage), mal Toleranz {toleranz:.1f} — "
+                    f"wenn so viel darüber liegt, kommt die Nachprüfung hier "
+                    f"nicht durch.")
             core.log(f"⚠️ {text}")
             if core.in_github_actions():
                 if gemeldet < UNTERSCHRIFTEN_MAX_WARNUNGEN:

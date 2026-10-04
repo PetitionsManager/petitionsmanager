@@ -314,6 +314,91 @@ def now_iso() -> str:
 # Umkehrbar über --min-interval-hours N; 0 schaltet die Sperre ganz ab.
 DEFAULT_MIN_INTERVAL_HOURS = 72
 
+# ----------------------------------------------------------------------------
+# Gestaffelter Nachprüfungsabstand (4.10.2026)
+# ----------------------------------------------------------------------------
+# ⚠️⚠️ Das Problem, das ein EINHEITLICHER Abstand nicht lösen kann: 40.711 Sätze
+# × REQUEST_DELAY 1,5 s sind 17 h reine Abrufzeit für einen vollen Durchgang,
+# die CI hat 2 × 5 h am Tag. Ein Zeitbudget je Plattform (siehe budget_start)
+# verteilt diese Knappheit nur gerechter — mehr Durchsatz entsteht daraus
+# nicht. Mehr Durchsatz entsteht erst, wenn seltener gefragt wird, WO sich
+# ohnehin nichts ändert.
+#
+# Gemessen am 4.10.2026 über die acht Bestände, deren Kopie hier frisch war
+# (18.911 Sätze, davon 16.947 online mit Zeitreihe — changeorg, openpetition,
+# europarl, fünf WeMove-Zweige):
+#     Stillstand der Unterschriftenzahl   < 7 Tage   26,1 %
+#                                         7–30 Tage  66,4 %
+#                                         >= 30 Tage  7,5 %
+# ⚠️ „Stillstand" ist belastbar, weil `signatures_history` NICHT gekappt wird
+# und ein Eintrag nur bei einer ÄNDERUNG entsteht (siehe upsert): der letzte
+# Eintrag ist also der Zeitpunkt der letzten Änderung. Median der Länge: 1 —
+# zwei Drittel aller Sätze haben ihre Zahl seit der Ersterfassung nie bewegt.
+# ⚠️ Die Messung reicht nur ~90 Tage zurück (ältester Eintrag 6.7.2026, Umbau
+# des Change.org-Bestands); „0 Sätze mit >= 90 Tagen Stillstand" ist deshalb
+# die Reichweite der Daten und KEIN Befund über die Welt.
+#
+# Daraus die Staffel. Sie kennt bewusst KEINE Sonderregel für `status`:
+# ein offline gegangener Satz bewegt seine Zahl nicht mehr und wandert von
+# allein in die lange Stufe — eine Regel weniger, die falsch sein kann.
+STAFFEL_STILL_TAGE = (30, 7)          # Schwellen, absteigend geprüft
+STAFFEL_STUNDEN = (14 * 24, 7 * 24)   # zugehöriger Mindestabstand
+# Rechnung für 40.711 Sätze: 26,1 % alle 3 d + 66,4 % alle 7 d + 7,5 % alle
+# 14 d = rund 7.600 Abrufe am Tag statt 13.570 — gut 3,2 h statt 5,7 h.
+#
+# ⚠️⚠️ WER DIESE WERTE ÄNDERT, muss melde_veraltete_unterschriften mitziehen:
+# der Melder misst seit demselben Tag gegen den Abstand DIESES Satzes, nicht
+# mehr gegen feste 7 Tage. Täte er es nicht, würde er genau die Sätze anklagen,
+# die wir hier absichtlich seltener fragen — ein Wächter, der den eigenen
+# Entwurf als Fehler meldet, wird nach drei Tagen überlesen.
+
+
+def min_interval_fuer(rec: dict | None,
+                      basis: float = DEFAULT_MIN_INTERVAL_HOURS) -> float:
+    """Mindestabstand in Stunden für GENAU DIESEN Satz.
+
+    Grundlage ist die letzte ÄNDERUNG der Unterschriftenzahl, nicht das Alter
+    des Satzes: eine zehn Jahre alte Petition, deren Zahl gestern gestiegen
+    ist, gehört in die kurze Stufe, eine letzte Woche angelegte mit
+    unbewegter Zahl in die lange.
+
+    ⚠️ Ohne Zeitreihe (frisch angelegt, fremder Bestand, Scraper ohne Zahlen)
+    bleibt es beim `basis`-Abstand. Das ist die sichere Richtung: im Zweifel
+    öfter fragen, nicht seltener — ein neuer Satz ist der, bei dem sich am
+    meisten tut.
+    ⚠️⚠️ Diese Funktion verlängert nur (`max(basis, Stufe)`). Ob sie überhaupt
+    befragt wird, entscheidet `skip_recent`: **nur beim Vorgabe-Abstand**. Wer
+    ausdrücklich `--min-interval-hours 1` setzt, meint „jetzt alles
+    nachprüfen" — eine Staffel, die daraus 14 Tage macht, wäre das Gegenteil
+    dessen, was er getippt hat.
+    """
+    if not isinstance(rec, dict):
+        return basis
+    hist = rec.get("signatures_history") or []
+    if not hist:
+        return basis
+    letzter = hist[-1]
+    if not isinstance(letzter, dict):
+        return basis
+    zp = _zeitpunkt_oder_none(letzter.get("checked_at"))
+    if zp is None:
+        return basis
+    jetzt = _dt.datetime.now(zp.tzinfo) if zp.tzinfo else _dt.datetime.now()
+    tage = (jetzt - zp).days
+    for schwelle, stunden in zip(STAFFEL_STILL_TAGE, STAFFEL_STUNDEN):
+        if tage >= schwelle:
+            return max(basis, stunden) if basis else basis
+    return basis
+
+
+def _zeitpunkt_oder_none(wert) -> "_dt.datetime | None":
+    """ISO-Zeitstempel → datetime, oder None. Eigene Funktion, weil ein
+    unlesbarer Wert hier „keine Aussage" heißen muss und nicht „1970"."""
+    try:
+        return _dt.datetime.fromisoformat(str(wert))
+    except (TypeError, ValueError):
+        return None
+
 # So oft muss eine bekannte Petition in aufeinanderfolgenden Läufen fehlen,
 # bevor sie wirklich als offline gilt (siehe upsert). Schützt davor, dass eine
 # vorübergehend blockierende Quelle einen kompletten Bestand abschaltet.
@@ -499,6 +584,11 @@ def skip_recent(rec: dict | None, args=None,
             if args is not None else DEFAULT_MIN_INTERVAL_HOURS
     if not hours or hours <= 0:
         return False
+    # Gestaffelter Abstand — aber NUR, wenn niemand ausdrücklich einen anderen
+    # verlangt hat. `--min-interval-hours N` ist eine Ansage des Aufrufers und
+    # wird nicht hinterrücks verlängert (Begründung bei min_interval_fuer).
+    if hours == DEFAULT_MIN_INTERVAL_HOURS:
+        hours = min_interval_fuer(rec, hours)
     lc = (rec or {}).get("last_checked")
     if not lc:
         return False
