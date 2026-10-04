@@ -31,9 +31,12 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-10-04T08:14:02-06:00",
-    "petition_count": 169,
+    "generated_at": "2026-10-04T10:49:43-06:00",
+    "petition_count": 170,
     "available": 225,
+    "new_petitions_last_run": [
+      "2026-09-fuelled-by-greed-petition-NL"
+    ],
     "unbrauchbare": {
       "2023-01-lucas-ig-wrapper-test-petition-NL": "2026-09-05T15:11:04-06:00",
       "2023-07-simon-1-NL": "2026-09-05T16:38:40-06:00",
@@ -91,84 +94,65 @@
       "lucas-test-donation-2-petition-NL": "2026-09-18T18:53:11-06:00",
       "2026-09-insurance-natural-disasters-petition-NL": "2026-09-22T18:10:03-06:00"
     },
-    "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-10-04T08:14:02-06:00",
+      "stand": "2026-10-04T10:49:43-06:00",
       "gefunden": 225,
-      "im_bestand": 169,
+      "im_bestand": 170,
       "unbrauchbar": 55,
       "verworfen": 0,
       "dublette": 0,
       "verschwunden": 0,
       "zurueckgestellt": 0,
-      "offen": 1,
-      "offene_beispiele": [
-        "2026-09-fuelled-by-greed-petition-NL"
-      ],
-      "bestand_gesamt": 169,
+      "offen": 0,
+      "offene_beispiele": [],
+      "bestand_gesamt": 170,
       "bestand_ausserhalb": 0
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-10-03T22:20:00-06:00",
-        "gesamt": 169,
-        "online": 168,
+        "zeit": "2026-10-04T10:49:43-06:00",
+        "gesamt": 170,
+        "online": 169,
         "offline": 1,
         "ohne_titel": 1,
         "platzhalter": 0,
         "nicht_ausgeliefert": 1,
         "torsi": 0,
         "dubletten": 0,
-        "mit_start": 160,
+        "mit_start": 161,
         "juengstes_start": "2026-09-01",
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-10-04T08:14:02-06:00",
-        "gesamt": 169,
-        "online": 168,
-        "offline": 1,
-        "ohne_titel": 1,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 1,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 160,
-        "juengstes_start": "2026-09-01",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
+        "neu": 1
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-10-04T08:14:02-06:00",
-      "gesamt": 169,
-      "online": 168,
+      "zeit": "2026-10-04T10:49:43-06:00",
+      "gesamt": 170,
+      "online": 169,
       "offline": 1,
       "ohne_titel": 1,
       "platzhalter": 0,
       "nicht_ausgeliefert": 1,
       "torsi": 0,
       "dubletten": 0,
-      "mit_start": 160,
+      "mit_start": 161,
       "juengstes_start": "2026-09-01",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-10-03T22:20:00-06:00",
+    "verlauf_felder_ab": "2026-10-04T10:49:43-06:00",
     "befunde": [
       {
         "stufe": "warnung",
-        "thema": "Host ausgelassen (robots.txt nicht lesbar)",
-        "text": "action.wemove.eu: HTTP 202. Der Host wurde für diesen Lauf komplett ausgelassen; von dort stammen KEINE frischen Daten. Der Bestand bleibt unverändert stehen.",
-        "zeit": "2026-10-04T08:13:55-06:00",
-        "thema_en": "Host skipped (robots.txt unreadable)",
-        "text_en": "action.wemove.eu: HTTP 202. The host was skipped entirely for this run; no fresh data came from it. The existing records stay as they are."
+        "thema": "Startdatum rückt nicht nach",
+        "text": "1 neue Sätze aufgenommen, das jüngste Startdatum im Bestand ist aber 33 Tage alt (2026-09-01). Entweder wird das Feld nicht mehr gelesen – dann prüfe den Ausdruck, der start_date aus der Seite zieht – oder die Quelle liefert wirklich nichts Neues.",
+        "zeit": "2026-10-04T10:49:43-06:00",
+        "thema_en": "Start date is not catching up",
+        "text_en": "1 new records added, but the newest start date in the store is 33 days old (2026-09-01). Either the field is no longer being read – then check the expression that extracts start_date from the page – or the source really has nothing new."
       }
     ],
-    "health_warning": "Host ausgelassen (robots.txt nicht lesbar): action.wemove.eu: HTTP 202. Der Host wurde für diesen Lauf komplett ausgelassen; von dort stammen KEINE frischen Daten. Der Bestand bleibt unverändert stehen.",
-    "online_count": 168
+    "health_warning": "Startdatum rückt nicht nach: 1 neue Sätze aufgenommen, das jüngste Startdatum im Bestand ist aber 33 Tage alt (2026-09-01). Entweder wird das Feld nicht mehr gelesen – dann prüfe den Ausdruck, der start_date aus der Seite zieht – oder die Quelle liefert wirklich nichts Neues.",
+    "online_count": 169
   },
   "2026-08-protect-europe-make-polluters-pay-petition-NL": {
     "slug": "2026-08-protect-europe-make-polluters-pay-petition-NL",
@@ -7488,6 +7472,10 @@
       {
         "checked_at": "2026-09-22T18:10:03-06:00",
         "count": 46685
+      },
+      {
+        "checked_at": "2026-10-04T10:49:28-06:00",
+        "count": 47183
       }
     ],
     "title": "Geen gif meer in onze koffie!",
@@ -7498,12 +7486,12 @@
     "start_date": "2026-09-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 46685,
+    "signatures": 47183,
     "goal": 50000,
     "lang": "nl",
     "campaign_id": "wemove:2026-09-toxic-coffee-petition",
     "status": "online",
-    "last_seen": "2026-09-22T18:10:03-06:00",
+    "last_seen": "2026-10-04T10:49:28-06:00",
     "offline_since": null,
     "tags": [
       "Koffie",
@@ -7517,6 +7505,44 @@
       "Verboden",
       "Gebruik"
     ],
-    "last_checked": "2026-09-22T18:10:03-06:00"
+    "last_checked": "2026-10-04T10:49:28-06:00"
+  },
+  "2026-09-fuelled-by-greed-petition-NL": {
+    "slug": "2026-09-fuelled-by-greed-petition-NL",
+    "first_seen": "2026-10-04T10:49:28-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-04T10:49:28-06:00",
+        "count": 33837
+      }
+    ],
+    "title": "Haal oliereuzen uit de lucht",
+    "image_url": "https://wemove.cdn.actionkit.com/images/fuelled-by-greed_1024x630.jpg",
+    "url": "https://action.wemove.eu/sign/2026-09-fuelled-by-greed-petition-NL",
+    "description_full": "<p>\n\n<!-- Remove this if you don't want popins like \"This page also in English\" -->\n\n\n<img alt=\"Language selector\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/icon_translate_eeaca63123.svg\"/>\n\n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n              \n              Nederlands\n\n              \n            \n          \n            \n          \n        \n\n</p><ul>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-fuelled-by-greed-petition-EN\" rel=\"noopener\" target=\"_blank\">\n                    \n                    English\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-fuelled-by-greed-petition-FR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Français\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-fuelled-by-greed-petition-DE\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Deutsch\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-fuelled-by-greed-petition-ES\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Español\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-fuelled-by-greed-petition-IT\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Italiano\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-fuelled-by-greed-petition-PL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Polski\n\n                    \n                    </a>\n</li>\n</ul><p>\n\n\n          Haal oliereuzen uit de lucht\n        \n\n<img alt=\"Haal oliereuzen uit de lucht\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/fuelled-by-greed_1024x630.jpg\"/>\n\n</p><h3>\n<p>Aan de Europese Commissie, leden van het Europees Parlement en regeringsleiders van EU-lidstaten</p>\n</h3>\n\n<h2>\n            Petitie\n          </h2>\n<p>Oliereuzen willen de EU-wet voor schonere vliegtuigbrandstof tegenhouden. Laat dat niet toe!<br/><br/>Het is technisch goed mogelijk om vliegtuigen op schonere brandstoffen te laten vliegen. Er is geen andere manier om zo effectief de vervuiling van vliegen aan te pakken. Zo wordt onze planeet schoner.</p>\n<p>Maar een handjevol oliebedrijven hebben bijna elke druppel kerosine in Europa in handen. De huidige wet maakt hen verantwoordelijk voor de levering van de schonere brandstoffen. Maar in plaats van dat ze de nodige investeringen doen, lobbyen ze om de wet te herzien en af te zwakken. </p>\n<p>Wij roepen u op om in uw herziening van ReFuelEU de volgende doelstellingen in de wet te behouden, zonder uitstel:</p>\n<ol>\n<li>tegen 2030 6% schonere brandstoffen in de tank van elk vliegtuig, 20% tegen 2035 en 70% tegen 2050;</li>\n<li>e-brandstoffen gemaakt van duurzame stroom: 1.2% tegen 2030 en oplopend tot 35% tegen 2050;</li>\n<li>strenge straffen voor de brandstofleveranciers die deze doelstellingen niet halen. Het mag nooit goedkoper zijn voor oliebedrijven om een boete te betalen dan om schonere energie te leveren. </li>\n</ol>\n\n\n<h2>\n            \n              Waarom is dit belangrijk?\n            \n          </h2>\n<p>Goed nieuws dat voor de meeste mensen een verrassing is: <strong>we kunnen minder vervuilend vliegen. </strong>Vliegtuigen zijn nu al in staat om te vliegen op brandstoffen gemaakt van afval zoals bak- en braadolie. We hebben die ruwe olie uit de grond helemaal niet nodig. [1] </p>\n<p><strong>Dit is een buitenkans om de planeet te behoeden voor de vervuiling van al die vliegtuigen. </strong>En dat alles zonder dat onze huidige vliegtuigen omgebouwd hoeven te worden.</p>\n<p><strong>De EU heeft zelfs een wet aangenomen om dit mogelijk te maken. </strong>Elke brandstoftank moet een steeds groter aandeel schone energie bevatten. Vandaag nog een klein deel, en tegen 2050 moet dat 70% zijn. [2]</p>\n<p>Maar een handjevol oliereuzen, <strong>zoals BP, Shell en Total, beheersen bijna elk druppeltje kerosine in Europa. </strong>Zij zijn eigenaar van de pijpleidingen en de tanks op de vliegvelden. En zij maken nog geen aanstalten om de faciliteiten te bouwen om deze nieuwe, broodnodige brandstoffen te kunnen aanvoeren. In plaats daarvan lobbyen ze zich een slag in de rondte om de wet tegen te houden.</p>\n<p>In een wereld die op bak- en braadolie vliegt, maken zij minder winst. <strong>Dat vinden ze verschrikkelijk. </strong></p>\n<p>Fossiele reuzen richten al hun pijlen op de wet. Ze gokken erop dat ze een wettekst die niemand kent onopvallend door de papierversnipperaar kunnen halen. Dat plan zijn ze aan het uitvoeren terwijl je dit leest. [3] Maar <strong>als duizenden van ons de EU-politici op het hart drukken dat we schone brandstof willen, horen ze meer stemmen dan alleen die van de lobbyisten.</strong></p>\n<h4>\n            Bronnen:\n          </h4>\n\n<p>[1] Schone vliegtuigbrandstof, ook wel bekend als Sustainable Aviation Fuel (SAF), bevat meer dan alleen bak- en braadolie of dierlijke vetten. Hieronder vallen ook bio-brandstoffen gemaakt uit gemeentelijk afval, afvalstoffen van de houtkap, landbouwafval, en e-brandstoffen. Die produceert men door koolstofdioxide te combineren met groene waterstof, die met duurzame stroom is geproduceerd. <a href=\"https://uploads.transportenvironment.org/production/files/202603_SAF_Factsheet.pdf?dm=1773407228\" rel=\"noopener\" target=\"_blank\">https://uploads.transportenvironment.org/production/files/202603_SAF_Factsheet.pdf?dm=1773407228</a>)</p>\n<p>[2] Deze wet maakt niet de luchtvaartmaatschappijen maar de brandstofleveranciers verantwoordelijk voor de schonere brandstoffen. Die kosten vooralsnog meer dan kerosine en veel van de benodigde afvalstoffen voor de productie worden op dit moment nog geïmporteerd. Daarom moet deze wet gepaard gaan met investeringen in betaalbare, schonere brandstoffen <em>made in Europe. </em>De EU is daar al mee aan de slag.</p>\n<p><a href=\"https://transport.ec.europa.eu/transport-modes/air/environment/refueleu-aviation_en\" rel=\"noopener\" target=\"_blank\">https://transport.ec.europa.eu/transport-modes/air/environment/refueleu-aviation_en</a> ; <a href=\"https://uploads.transportenvironment.org/production/files/202603_SAF_Factsheet.pdf?dm=1773407228\" rel=\"noopener\" target=\"_blank\">https://uploads.transportenvironment.org/production/files/202603_SAF_Factsheet.pdf?dm=1773407228</a></p>\n<p>[3] De EU zal waarschijnlijk in oktober met een voorstel komen om de ReFuelEU Aviation-wet versneld te simplificeren. Dat is de wet die schonere brandstoffen voor vliegtuigen moet verplichten.</p>\n<p><a href=\"https://www.ebaa.org/news/refueleu-simplification-what-is-really-on-the-table-for-operators\" rel=\"noopener\" target=\"_blank\">https://www.ebaa.org/news/refueleu-simplification-what-is-really-on-the-table-for-operators</a></p>",
+    "summary": "Nederlands English Français Deutsch Español Italiano Polski Haal oliereuzen uit de lucht Aan de Europese Commissie, leden van het Europees Parlement en regeringsleiders van EU-lidstaten Petitie Oliere…",
+    "start_date": "2026-09-01",
+    "started_by": "WeMove Europe",
+    "kind": "petition",
+    "signatures": 33837,
+    "goal": 50000,
+    "lang": "nl",
+    "campaign_id": "wemove:2026-09-fuelled-by-greed-petition",
+    "status": "online",
+    "last_seen": "2026-10-04T10:49:28-06:00",
+    "offline_since": null,
+    "tags": [
+      "Voor",
+      "Tegen",
+      "Brandstoffen",
+      "Schonere",
+      "Oliereuzen",
+      "Maar",
+      "Zijn",
+      "Vliegtuigen",
+      "Vliegen",
+      "Deze"
+    ],
+    "last_checked": "2026-10-04T10:49:28-06:00"
   }
 }
