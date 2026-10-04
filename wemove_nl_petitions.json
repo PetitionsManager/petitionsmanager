@@ -31,7 +31,7 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-10-03T21:07:00-06:00",
+    "generated_at": "2026-10-03T21:42:47-06:00",
     "petition_count": 169,
     "available": 225,
     "unbrauchbare": {
@@ -93,7 +93,7 @@
     },
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-10-03T21:07:00-06:00",
+      "stand": "2026-10-03T21:42:47-06:00",
       "gefunden": 225,
       "im_bestand": 169,
       "unbrauchbar": 55,
@@ -110,7 +110,7 @@
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-10-03T21:07:00-06:00",
+        "zeit": "2026-10-03T21:42:47-06:00",
         "gesamt": 169,
         "online": 168,
         "offline": 1,
@@ -127,7 +127,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-10-03T21:07:00-06:00",
+      "zeit": "2026-10-03T21:42:47-06:00",
       "gesamt": 169,
       "online": 168,
       "offline": 1,
@@ -140,7 +140,7 @@
       "juengstes_start": "2026-09-01",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-10-03T21:07:00-06:00",
+    "verlauf_felder_ab": "2026-10-03T21:42:47-06:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 168
@@ -4127,7 +4127,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-10-paul-watson-france-asylum-petition",
     "status": "online",
-    "last_seen": "2026-09-22T16:55:52-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Watson",
@@ -4141,7 +4141,7 @@
       "President",
       "Oceaan"
     ],
-    "last_checked": "2026-09-22T16:55:52-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2024-10-seals-ban-petition-NL": {
     "slug": "2024-10-seals-ban-petition-NL",
@@ -4158,6 +4158,10 @@
       {
         "checked_at": "2026-09-22T16:55:52-06:00",
         "count": 139433
+      },
+      {
+        "checked_at": "2026-10-03T21:39:39-06:00",
+        "count": 139434
       }
     ],
     "title": "Blijf af van de zeehonden!",
@@ -4168,12 +4172,12 @@
     "start_date": "2024-10-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 139433,
+    "signatures": 139434,
     "goal": 150000,
     "lang": "nl",
     "campaign_id": "wemove:2024-10-seals-ban-petition",
     "status": "online",
-    "last_seen": "2026-09-22T16:55:52-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Zeehonden",
@@ -4187,7 +4191,7 @@
       "Zeehondenjacht",
       "International"
     ],
-    "last_checked": "2026-09-22T16:55:52-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2024-10-youmove-wildlife-crossings-petition-NL": {
     "slug": "2024-10-youmove-wildlife-crossings-petition-NL",
@@ -4215,7 +4219,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-10-youmove-wildlife-crossings-petition",
     "status": "online",
-    "last_seen": "2026-09-22T16:55:52-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Voor",
@@ -4229,7 +4233,7 @@
       "Meer",
       "Aanrijdingen"
     ],
-    "last_checked": "2026-09-22T16:55:52-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2024-11-pesticide-free-till-test-NL": {
     "slug": "2024-11-pesticide-free-till-test-NL",
@@ -4252,7 +4256,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-11-pesticide-free-till-test",
     "status": "online",
-    "last_seen": "2026-09-22T16:55:52-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Pesticides",
@@ -4266,7 +4270,7 @@
       "Nederlands",
       "Commissie"
     ],
-    "last_checked": "2026-09-22T16:55:52-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2024-11-voer-energiebelasting-in-en-verlaag-daardoor-arbeidskosten-NL": {
     "slug": "2024-11-voer-energiebelasting-in-en-verlaag-daardoor-arbeidskosten-NL",
@@ -4289,7 +4293,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-11-voer-energiebelasting-in-en-verlaag-daardoor-arbeidskosten",
     "status": "online",
-    "last_seen": "2026-09-22T16:55:52-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Deze",
@@ -4303,7 +4307,7 @@
       "Wordt",
       "Concurrentie"
     ],
-    "last_checked": "2026-09-22T16:55:52-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2024-12-Amazon-workers-petition-NL": {
     "slug": "2024-12-Amazon-workers-petition-NL",
@@ -4327,7 +4331,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-12-Amazon-workers-petition",
     "status": "online",
-    "last_seen": "2026-09-22T16:55:52-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Amazon",
@@ -4341,7 +4345,7 @@
       "Verantwoording",
       "Waardigheid"
     ],
-    "last_checked": "2026-09-22T16:55:52-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2024-12-iskra-testing-revamped-mail-action-petition-NL": {
     "slug": "2024-12-iskra-testing-revamped-mail-action-petition-NL",
@@ -4364,7 +4368,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-12-iskra-testing-revamped-mail-action-petition",
     "status": "online",
-    "last_seen": "2026-09-22T16:55:52-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Europese",
@@ -4378,7 +4382,7 @@
       "Parlement",
       "Europees"
     ],
-    "last_checked": "2026-09-22T16:55:52-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2024-12-Soumahoro-antiracism-petition-NL": {
     "slug": "2024-12-Soumahoro-antiracism-petition-NL",
@@ -4401,7 +4405,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-12-Soumahoro-antiracism-petition",
     "status": "online",
-    "last_seen": "2026-09-22T16:55:52-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Niet",
@@ -4415,7 +4419,7 @@
       "Tegen",
       "Thuis"
     ],
-    "last_checked": "2026-09-22T16:55:52-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2024-2-free-doctor-ahmed-muhanna-and-the-awda-medical-staff-NL": {
     "slug": "2024-2-free-doctor-ahmed-muhanna-and-the-awda-medical-staff-NL",
@@ -4438,7 +4442,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-2-free-doctor-ahmed-muhanna-and-the-awda-medical-staff",
     "status": "online",
-    "last_seen": "2026-09-22T16:55:52-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Muhanna",
@@ -4452,7 +4456,7 @@
       "Ahmed",
       "Deze"
     ],
-    "last_checked": "2026-09-22T16:55:52-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2024-3-investeren-in-vrede-prepare-for-peace-NL": {
     "slug": "2024-3-investeren-in-vrede-prepare-for-peace-NL",
@@ -4475,7 +4479,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2024-3-investeren-in-vrede-prepare-for-peace",
     "status": "online",
-    "last_seen": "2026-09-22T16:55:52-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Vrede",
@@ -4489,7 +4493,7 @@
       "Zijn",
       "Beëindigen"
     ],
-    "last_checked": "2026-09-22T16:55:52-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2024-6-because-our-planet-is-blue-petition-NL": {
     "slug": "2024-6-because-our-planet-is-blue-petition-NL",
@@ -4498,6 +4502,10 @@
       {
         "checked_at": "2026-09-05T22:24:17-06:00",
         "count": 116423
+      },
+      {
+        "checked_at": "2026-10-03T21:39:39-06:00",
+        "count": 116424
       }
     ],
     "title": "Omdat de oceaan onze planeet kleurt",
@@ -4506,12 +4514,12 @@
     "summary": "Nederlands English Français Deutsch Español Italiano Polski Omdat de oceaan onze planeet kleurt Aan António Guterres, secretaris-generaal van de Verenigde Naties Aan Emmanuel Macron, president van Fra…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 116423,
+    "signatures": 116424,
     "goal": 150000,
     "lang": "nl",
     "campaign_id": "wemove:2024-6-because-our-planet-is-blue-petition",
     "status": "online",
-    "last_seen": "2026-09-22T16:55:52-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Voor",
@@ -4525,7 +4533,7 @@
       "President",
       "Verenigde"
     ],
-    "last_checked": "2026-09-22T16:55:52-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2025-01-23-russian-fleet-launch-NL": {
     "slug": "2025-01-23-russian-fleet-launch-NL",
@@ -4542,6 +4550,10 @@
       {
         "checked_at": "2026-09-22T16:55:52-06:00",
         "count": 65665
+      },
+      {
+        "checked_at": "2026-10-03T21:39:39-06:00",
+        "count": 65667
       }
     ],
     "title": "EU, hou op Russisch olie te kopen en de oorlog te financieren",
@@ -4552,12 +4564,12 @@
     "start_date": "2025-01-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 65665,
+    "signatures": 65667,
     "goal": 75000,
     "lang": "nl",
     "campaign_id": "wemove:2025-01-23-russian-fleet-launch",
     "status": "online",
-    "last_seen": "2026-09-22T16:55:52-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Russische",
@@ -4571,7 +4583,7 @@
       "Russisch",
       "Sancties"
     ],
-    "last_checked": "2026-09-22T16:55:52-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2025-01-elon-musk-dsa-petition-NL": {
     "slug": "2025-01-elon-musk-dsa-petition-NL",
@@ -4588,6 +4600,10 @@
       {
         "checked_at": "2026-09-22T16:55:52-06:00",
         "count": 150761
+      },
+      {
+        "checked_at": "2026-10-03T21:39:39-06:00",
+        "count": 150762
       }
     ],
     "title": "Bescherm onze democratie tegen het X van Elon Musk",
@@ -4598,12 +4614,12 @@
     "start_date": "2025-01-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 150761,
+    "signatures": 150762,
     "goal": 200000,
     "lang": "nl",
     "campaign_id": "wemove:2025-01-elon-musk-dsa-petition",
     "status": "online",
-    "last_seen": "2026-09-22T16:55:52-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Onze",
@@ -4617,7 +4633,7 @@
       "Democratische",
       "Desinformatie"
     ],
-    "last_checked": "2026-09-22T16:55:52-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2025-01-Stop-Trump-Greenland-petition-NL": {
     "slug": "2025-01-Stop-Trump-Greenland-petition-NL",
@@ -4634,6 +4650,10 @@
       {
         "checked_at": "2026-09-22T16:55:52-06:00",
         "count": 178786
+      },
+      {
+        "checked_at": "2026-10-03T21:39:39-06:00",
+        "count": 178788
       }
     ],
     "title": "Bescherm Groenland tegen de greep van Trump!",
@@ -4644,12 +4664,12 @@
     "start_date": "2025-01-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 178786,
+    "signatures": 178788,
     "goal": 200000,
     "lang": "nl",
     "campaign_id": "wemove:2025-01-Stop-Trump-Greenland-petition",
     "status": "online",
-    "last_seen": "2026-09-22T16:55:52-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Groenland",
@@ -4663,7 +4683,7 @@
       "Soevereiniteit",
       "Democratie"
     ],
-    "last_checked": "2026-09-22T16:55:52-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2025-02-mercosur-pesticides-petition-NL": {
     "slug": "2025-02-mercosur-pesticides-petition-NL",
@@ -4680,6 +4700,10 @@
       {
         "checked_at": "2026-09-22T16:55:52-06:00",
         "count": 137428
+      },
+      {
+        "checked_at": "2026-10-03T21:39:39-06:00",
+        "count": 137430
       }
     ],
     "title": "Houd verboden pesticides uit ons voedsel",
@@ -4690,12 +4714,12 @@
     "start_date": "2025-02-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 137428,
+    "signatures": 137430,
     "goal": 150000,
     "lang": "nl",
     "campaign_id": "wemove:2025-02-mercosur-pesticides-petition",
     "status": "online",
-    "last_seen": "2026-09-22T16:55:52-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Pesticides",
@@ -4709,7 +4733,7 @@
       "Akkoord",
       "Giftige"
     ],
-    "last_checked": "2026-09-22T16:55:52-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2025-02-ngo-funding-petition-NL": {
     "slug": "2025-02-ngo-funding-petition-NL",
@@ -4726,6 +4750,10 @@
       {
         "checked_at": "2026-09-22T16:55:52-06:00",
         "count": 81285
+      },
+      {
+        "checked_at": "2026-10-03T21:39:39-06:00",
+        "count": 81286
       }
     ],
     "title": "EU: Leg onze natuurbeschermers niet het zwijgen op",
@@ -4736,12 +4764,12 @@
     "start_date": "2025-02-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 81285,
+    "signatures": 81286,
     "goal": 100000,
     "lang": "nl",
     "campaign_id": "wemove:2025-02-ngo-funding-petition",
     "status": "online",
-    "last_seen": "2026-09-22T16:55:52-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Commissie",
@@ -4755,7 +4783,7 @@
       "Niet",
       "Voor"
     ],
-    "last_checked": "2026-09-22T16:55:52-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2025-02-save-green-deal-petition-NL": {
     "slug": "2025-02-save-green-deal-petition-NL",
@@ -4768,6 +4796,10 @@
       {
         "checked_at": "2026-09-18T17:58:16-06:00",
         "count": 151656
+      },
+      {
+        "checked_at": "2026-10-03T21:39:39-06:00",
+        "count": 151659
       }
     ],
     "title": "Verdedig de Green Deal tegen de lobby van vervuilers!",
@@ -4778,12 +4810,12 @@
     "start_date": "2025-02-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 151656,
+    "signatures": 151659,
     "goal": 200000,
     "lang": "nl",
     "campaign_id": "wemove:2025-02-save-green-deal-petition",
     "status": "online",
-    "last_seen": "2026-09-22T16:55:52-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Green",
@@ -4797,7 +4829,7 @@
       "Wordt",
       "Deze"
     ],
-    "last_checked": "2026-09-22T16:55:52-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2025-04-capreform-launch-petition-NL": {
     "slug": "2025-04-capreform-launch-petition-NL",
@@ -4814,6 +4846,10 @@
       {
         "checked_at": "2026-09-22T16:55:52-06:00",
         "count": 120069
+      },
+      {
+        "checked_at": "2026-10-03T21:39:39-06:00",
+        "count": 120070
       }
     ],
     "title": "Landbouw die mensen voedt, niet winsten",
@@ -4824,12 +4860,12 @@
     "start_date": "2025-04-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 120069,
+    "signatures": 120070,
     "goal": 150000,
     "lang": "nl",
     "campaign_id": "wemove:2025-04-capreform-launch-petition",
     "status": "online",
-    "last_seen": "2026-09-22T16:55:52-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Boeren",
@@ -4843,7 +4879,7 @@
       "Planeet",
       "Winsten"
     ],
-    "last_checked": "2026-09-22T16:55:52-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2025-04-Huawei-EU-corruption-scandal-petition-NL": {
     "slug": "2025-04-Huawei-EU-corruption-scandal-petition-NL",
@@ -4875,7 +4911,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2025-04-Huawei-EU-corruption-scandal-petition",
     "status": "online",
-    "last_seen": "2026-09-22T16:55:52-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Laten",
@@ -4889,7 +4925,7 @@
       "Politiek",
       "Hebben"
     ],
-    "last_checked": "2026-09-22T16:55:52-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2025-04-score-fast-fashion-petition-NL": {
     "slug": "2025-04-score-fast-fashion-petition-NL",
@@ -4906,6 +4942,10 @@
       {
         "checked_at": "2026-09-22T16:55:52-06:00",
         "count": 127650
+      },
+      {
+        "checked_at": "2026-10-03T21:39:39-06:00",
+        "count": 127672
       }
     ],
     "title": "Maak een einde aan de straffeloosheid van fast-fashion!",
@@ -4915,12 +4955,12 @@
     "start_date": "2025-04-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 127650,
+    "signatures": 127672,
     "goal": 150000,
     "lang": "nl",
     "campaign_id": "wemove:2025-04-score-fast-fashion-petition",
     "status": "online",
-    "last_seen": "2026-09-22T16:55:52-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Deze",
@@ -4934,7 +4974,7 @@
       "Straffeloosheid",
       "Milieu-impact"
     ],
-    "last_checked": "2026-09-22T16:55:52-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2025-04-Trump-Gas-petition-NL": {
     "slug": "2025-04-Trump-Gas-petition-NL",
@@ -4951,6 +4991,10 @@
       {
         "checked_at": "2026-09-22T16:55:52-06:00",
         "count": 46626
+      },
+      {
+        "checked_at": "2026-10-03T21:39:39-06:00",
+        "count": 46628
       }
     ],
     "title": "Europa, breek los van Trump Gas!",
@@ -4961,12 +5005,12 @@
     "start_date": "2025-04-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 46626,
+    "signatures": 46628,
     "goal": 50000,
     "lang": "nl",
     "campaign_id": "wemove:2025-04-Trump-Gas-petition",
     "status": "online",
-    "last_seen": "2026-09-22T16:55:52-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Trump",
@@ -4980,7 +5024,7 @@
       "Meer",
       "Onze"
     ],
-    "last_checked": "2026-09-22T16:55:52-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2025-05-breakupbigtech-petition-NL": {
     "slug": "2025-05-breakupbigtech-petition-NL",
@@ -4997,6 +5041,10 @@
       {
         "checked_at": "2026-09-22T16:55:52-06:00",
         "count": 89151
+      },
+      {
+        "checked_at": "2026-10-03T21:39:39-06:00",
+        "count": 89299
       }
     ],
     "title": "Breek Big Tech op",
@@ -5007,12 +5055,12 @@
     "start_date": "2025-05-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 89151,
+    "signatures": 89299,
     "goal": 100000,
     "lang": "nl",
     "campaign_id": "wemove:2025-05-breakupbigtech-petition",
     "status": "online",
-    "last_seen": "2026-09-22T16:55:52-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Google",
@@ -5026,7 +5074,7 @@
       "Breek",
       "Heeft"
     ],
-    "last_checked": "2026-09-22T16:55:52-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2025-05-criminalisation-migration-petition-NL": {
     "slug": "2025-05-criminalisation-migration-petition-NL",
@@ -5039,6 +5087,10 @@
       {
         "checked_at": "2026-09-18T17:58:16-06:00",
         "count": 30753
+      },
+      {
+        "checked_at": "2026-10-03T21:39:39-06:00",
+        "count": 30754
       }
     ],
     "title": "Europa: kies zorg boven toezicht",
@@ -5049,12 +5101,12 @@
     "start_date": "2025-05-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 30753,
+    "signatures": 30754,
     "goal": 50000,
     "lang": "nl",
     "campaign_id": "wemove:2025-05-criminalisation-migration-petition",
     "status": "online",
-    "last_seen": "2026-09-22T16:55:52-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Europese",
@@ -5068,7 +5120,7 @@
       "Zijn",
       "Bevoegdheden"
     ],
-    "last_checked": "2026-09-22T16:55:52-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2025-05-EU-trade-Israel-petition-NL": {
     "slug": "2025-05-EU-trade-Israel-petition-NL",
@@ -5081,6 +5133,10 @@
       {
         "checked_at": "2026-09-22T17:33:02-06:00",
         "count": 120850
+      },
+      {
+        "checked_at": "2026-10-03T21:39:39-06:00",
+        "count": 120851
       }
     ],
     "title": "Geen EU-handel met oorlogsmisdadigers",
@@ -5091,12 +5147,12 @@
     "start_date": "2025-05-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 120850,
+    "signatures": 120851,
     "goal": 150000,
     "lang": "nl",
     "campaign_id": "wemove:2025-05-EU-trade-Israel-petition",
     "status": "online",
-    "last_seen": "2026-09-22T17:33:02-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Israël",
@@ -5110,7 +5166,7 @@
       "EU-handel",
       "Grootste"
     ],
-    "last_checked": "2026-09-22T17:33:02-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2025-05-landmine-ban-petition-NL": {
     "slug": "2025-05-landmine-ban-petition-NL",
@@ -5127,6 +5183,10 @@
       {
         "checked_at": "2026-09-22T17:33:02-06:00",
         "count": 98175
+      },
+      {
+        "checked_at": "2026-10-03T21:39:39-06:00",
+        "count": 98177
       }
     ],
     "title": "Laat Europa landmijnen niet terugbrengen",
@@ -5137,12 +5197,12 @@
     "start_date": "2025-05-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 98175,
+    "signatures": 98177,
     "goal": 100000,
     "lang": "nl",
     "campaign_id": "wemove:2025-05-landmine-ban-petition",
     "status": "online",
-    "last_seen": "2026-09-22T17:33:02-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Landmijnen",
@@ -5156,7 +5216,7 @@
       "Letland",
       "Levens"
     ],
-    "last_checked": "2026-09-22T17:33:02-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2025-06-hungary-pride-ban-petition-NL": {
     "slug": "2025-06-hungary-pride-ban-petition-NL",
@@ -5180,7 +5240,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2025-06-hungary-pride-ban-petition",
     "status": "online",
-    "last_seen": "2026-09-22T17:33:02-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Voor",
@@ -5194,7 +5254,7 @@
       "English",
       "LHBTQ"
     ],
-    "last_checked": "2026-09-22T17:33:02-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2025-07-antigreenwashing-directive-petition-NL": {
     "slug": "2025-07-antigreenwashing-directive-petition-NL",
@@ -5211,6 +5271,10 @@
       {
         "checked_at": "2026-09-22T17:33:02-06:00",
         "count": 89205
+      },
+      {
+        "checked_at": "2026-10-03T21:39:39-06:00",
+        "count": 89207
       }
     ],
     "title": "Maak een eind aan groene leugens! Laat de EU de anti-greenwashwet niet om zeep helpen.",
@@ -5221,12 +5285,12 @@
     "start_date": "2025-07-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 89205,
+    "signatures": 89207,
     "goal": 100000,
     "lang": "nl",
     "campaign_id": "wemove:2025-07-antigreenwashing-directive-petition",
     "status": "online",
-    "last_seen": "2026-09-22T17:33:02-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Bedrijven",
@@ -5240,7 +5304,7 @@
       "Maak",
       "Zeep"
     ],
-    "last_checked": "2026-09-22T17:33:02-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2025-07-coffee-certification-schemes-petition-NL": {
     "slug": "2025-07-coffee-certification-schemes-petition-NL",
@@ -5257,6 +5321,10 @@
       {
         "checked_at": "2026-09-22T17:33:02-06:00",
         "count": 71437
+      },
+      {
+        "checked_at": "2026-10-03T21:39:39-06:00",
+        "count": 71441
       }
     ],
     "title": "Maak koffie eerlijk voor mens en planeet",
@@ -5267,12 +5335,12 @@
     "start_date": "2025-07-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 71437,
+    "signatures": 71441,
     "goal": 75000,
     "lang": "nl",
     "campaign_id": "wemove:2025-07-coffee-certification-schemes-petition",
     "status": "online",
-    "last_seen": "2026-09-22T17:33:02-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Voor",
@@ -5286,7 +5354,7 @@
       "Rainforest",
       "Fairtrade"
     ],
-    "last_checked": "2026-09-22T17:33:02-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2025-08-end-the-plastic-era-petition-NL": {
     "slug": "2025-08-end-the-plastic-era-petition-NL",
@@ -5303,6 +5371,10 @@
       {
         "checked_at": "2026-09-22T17:33:02-06:00",
         "count": 95340
+      },
+      {
+        "checked_at": "2026-10-03T21:39:39-06:00",
+        "count": 95343
       }
     ],
     "title": "Luid het einde van het plastic tijdperk in!",
@@ -5313,12 +5385,12 @@
     "start_date": "2025-08-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 95340,
+    "signatures": 95343,
     "goal": 100000,
     "lang": "nl",
     "campaign_id": "wemove:2025-08-end-the-plastic-era-petition",
     "status": "online",
-    "last_seen": "2026-09-22T17:33:02-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Plastic",
@@ -5332,7 +5404,7 @@
       "Einde",
       "Luid"
     ],
-    "last_checked": "2026-09-22T17:33:02-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2025-08-EU-2040-climate-goal-petition-NL": {
     "slug": "2025-08-EU-2040-climate-goal-petition-NL",
@@ -5349,6 +5421,10 @@
       {
         "checked_at": "2026-09-22T17:33:02-06:00",
         "count": 60871
+      },
+      {
+        "checked_at": "2026-10-03T21:39:39-06:00",
+        "count": 60872
       }
     ],
     "title": "We geven niet toe aan klimaatontkenners",
@@ -5358,12 +5434,12 @@
     "start_date": "2025-08-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 60871,
+    "signatures": 60872,
     "goal": 75000,
     "lang": "nl",
     "campaign_id": "wemove:2025-08-EU-2040-climate-goal-petition",
     "status": "online",
-    "last_seen": "2026-09-22T17:33:02-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Niet",
@@ -5377,7 +5453,7 @@
       "Commissie",
       "Parlement"
     ],
-    "last_checked": "2026-09-22T17:33:02-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2025-08-USAID-contraceptives-petition-NL": {
     "slug": "2025-08-USAID-contraceptives-petition-NL",
@@ -5394,6 +5470,10 @@
       {
         "checked_at": "2026-09-22T17:33:02-06:00",
         "count": 115847
+      },
+      {
+        "checked_at": "2026-10-03T21:39:39-06:00",
+        "count": 115849
       }
     ],
     "title": "Verbrand geen zorg: red voorbehoedsmiddelen en red levens",
@@ -5404,12 +5484,12 @@
     "start_date": "2025-08-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 115847,
+    "signatures": 115849,
     "goal": 150000,
     "lang": "nl",
     "campaign_id": "wemove:2025-08-USAID-contraceptives-petition",
     "status": "online",
-    "last_seen": "2026-09-22T17:33:02-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Voorbehoedsmiddelen",
@@ -5423,7 +5503,7 @@
       "Geen",
       "Voor"
     ],
-    "last_checked": "2026-09-22T17:33:02-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2025-09-Global-Flotilla-petition-NL": {
     "slug": "2025-09-Global-Flotilla-petition-NL",
@@ -5447,7 +5527,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2025-09-Global-Flotilla-petition",
     "status": "online",
-    "last_seen": "2026-09-22T17:33:02-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Europese",
@@ -5461,7 +5541,7 @@
       "Lidstaten",
       "Bescherm"
     ],
-    "last_checked": "2026-09-22T17:33:02-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2025-09-israelfootballban-petition-NL": {
     "slug": "2025-09-israelfootballban-petition-NL",
@@ -5478,6 +5558,10 @@
       {
         "checked_at": "2026-09-22T17:33:02-06:00",
         "count": 63446
+      },
+      {
+        "checked_at": "2026-10-03T21:39:39-06:00",
+        "count": 63454
       }
     ],
     "title": "Een rode kaart voor oorlogsmisdaden: gooi Israël uit het WK voetbal 2026",
@@ -5488,12 +5572,12 @@
     "start_date": "2025-09-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 63446,
+    "signatures": 63454,
     "goal": 75000,
     "lang": "nl",
     "campaign_id": "wemove:2025-09-israelfootballban-petition",
     "status": "online",
-    "last_seen": "2026-09-22T17:33:02-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Israël",
@@ -5507,7 +5591,7 @@
       "UEFA",
       "Normaliseren"
     ],
-    "last_checked": "2026-09-22T17:33:02-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2025-10-22-jamie-onboarding-petition-EN-test-NL": {
     "slug": "2025-10-22-jamie-onboarding-petition-EN-test-NL",
@@ -5531,7 +5615,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2025-10-22-jamie-onboarding-petition-EN-test",
     "status": "online",
-    "last_seen": "2026-09-22T17:33:02-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Parlement",
@@ -5545,7 +5629,7 @@
       "Leden",
       "Niet"
     ],
-    "last_checked": "2026-09-22T17:33:02-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2025-10-oil-Baltic-Sea-petition-NL": {
     "slug": "2025-10-oil-Baltic-Sea-petition-NL",
@@ -5562,6 +5646,10 @@
       {
         "checked_at": "2026-09-22T17:33:02-06:00",
         "count": 89291
+      },
+      {
+        "checked_at": "2026-10-03T21:39:39-06:00",
+        "count": 89325
       }
     ],
     "title": "Houd de Oostzee schoon en veilig!",
@@ -5572,12 +5660,12 @@
     "start_date": "2025-10-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 89291,
+    "signatures": 89325,
     "goal": 100000,
     "lang": "nl",
     "campaign_id": "wemove:2025-10-oil-Baltic-Sea-petition",
     "status": "online",
-    "last_seen": "2026-09-22T17:33:02-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Oostzee",
@@ -5591,7 +5679,7 @@
       "Commissie",
       "Helsinki"
     ],
-    "last_checked": "2026-09-22T17:33:02-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2025-10-trump-trade-deal-petition-NL": {
     "slug": "2025-10-trump-trade-deal-petition-NL",
@@ -5608,6 +5696,10 @@
       {
         "checked_at": "2026-09-22T17:33:02-06:00",
         "count": 115915
+      },
+      {
+        "checked_at": "2026-10-03T21:39:39-06:00",
+        "count": 115919
       }
     ],
     "title": "Zeg NEE tegen de deal van Trump",
@@ -5618,12 +5710,12 @@
     "start_date": "2025-10-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 115915,
+    "signatures": 115919,
     "goal": 150000,
     "lang": "nl",
     "campaign_id": "wemove:2025-10-trump-trade-deal-petition",
     "status": "online",
-    "last_seen": "2026-09-22T17:33:02-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Deal",
@@ -5637,7 +5729,7 @@
       "Brandstoffen",
       "Commissie"
     ],
-    "last_checked": "2026-09-22T17:33:02-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2025-10-yes-to-greening-no-to-mandates-NL": {
     "slug": "2025-10-yes-to-greening-no-to-mandates-NL",
@@ -5661,7 +5753,7 @@
     "lang": "nl",
     "campaign_id": "wemove:2025-10-yes-to-greening-no-to-mandates",
     "status": "online",
-    "last_seen": "2026-09-22T17:33:02-06:00",
+    "last_seen": "2026-10-03T21:39:39-06:00",
     "offline_since": null,
     "tags": [
       "Tegen",
@@ -5675,7 +5767,7 @@
       "Europese",
       "Français"
     ],
-    "last_checked": "2026-09-22T17:33:02-06:00"
+    "last_checked": "2026-10-03T21:39:39-06:00"
   },
   "2025-11-ban-shark-meat-EU-petition-NL": {
     "slug": "2025-11-ban-shark-meat-EU-petition-NL",
