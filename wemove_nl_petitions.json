@@ -31,7 +31,7 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-10-04T12:50:48-06:00",
+    "generated_at": "2026-10-04T17:19:22-06:00",
     "petition_count": 170,
     "available": 225,
     "unbrauchbare": {
@@ -93,7 +93,7 @@
     },
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-10-04T12:50:47-06:00",
+      "stand": "2026-10-04T17:19:22-06:00",
       "gefunden": 225,
       "im_bestand": 170,
       "unbrauchbar": 55,
@@ -154,10 +154,26 @@
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
         "neu": 0
+      },
+      {
+        "zeit": "2026-10-04T17:19:22-06:00",
+        "gesamt": 170,
+        "online": 169,
+        "offline": 1,
+        "ohne_titel": 1,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 1,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 161,
+        "juengstes_start": "2026-09-01",
+        "mit_code_im_text": 0,
+        "herkunft": "lokal_cron",
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-10-04T12:50:47-06:00",
+      "zeit": "2026-10-04T17:19:22-06:00",
       "gesamt": 170,
       "online": 169,
       "offline": 1,
