@@ -29,6 +29,7 @@ from types import SimpleNamespace
 
 from bs4 import BeautifulSoup
 
+import changeorg_aufholen as aufholen
 import changeorg_scraper as changeorg
 import ci_stores_uebernehmen as ci_stores
 import europarl_scraper as europarl
@@ -1012,10 +1013,16 @@ _args = SimpleNamespace(delay=0, limit=0, no_recheck=False,
 try:
     with tempfile.TemporaryDirectory() as ordner:
         changeorg.DATA_FILE = Path(ordner) / "changeorg_petitions.json"
+        # ⚠️ Zwei Fremdfelder im _meta mitgeben (5.10.2026): `sweep_offset` MUSS
+        # jeden Lauf überleben, `nur_zum_test` darf es NICHT. Ohne das zweite
+        # wäre der Fall wertlos — er wäre auch dann grün, wenn save_store
+        # einfach alles behielte, und würde die Durchreiche nicht prüfen.
         core.save_store({s: {"slug": s, "title": f"Titel {s}",
                              "status": "online"}
                          for s in SEITEN if s.startswith("alt")},
-                        changeorg.DATA_FILE, quiet=True)
+                        changeorg.DATA_FILE, quiet=True,
+                        extra_meta={changeorg.SWEEP_OFFSET_FELD: 4711,
+                                    "nur_zum_test": "wegwerfen"})
         changeorg.run(_args)
         meta1 = core.load_meta(changeorg.DATA_FILE)
 
@@ -1058,6 +1065,23 @@ pruefe("Register hält den Befund je Kandidat fest",
        ["tr/TR", "hu/HU"])
 pruefe("Register übersteht einen ABGEBROCHENEN Lauf",
        sorted(meta3.get("verworfen") or []), soll2)
+# ---- Sweep-Versatz übersteht gewöhnliche Läufe (5.10.2026) ----------------
+# Gemessen am laufenden Betrieb: nach ZWEI Sprach-Sweeps stand `sweep_offset`
+# auf 1500 statt 3000, weil der Aufhol-Lauf dazwischen gespeichert und das
+# _meta neu aufgebaut hatte. Dritter Fall derselben Falle nach `verworfen`
+# (30.8.) und `bilanz` (20.9.) — deshalb hier mit demselben Nachdruck geprüft,
+# einschließlich des abgebrochenen Laufs.
+pruefe("Sweep-Versatz übersteht Lauf 1",
+       meta1.get(changeorg.SWEEP_OFFSET_FELD), 4711)
+pruefe("Sweep-Versatz übersteht Lauf 2",
+       meta2.get(changeorg.SWEEP_OFFSET_FELD), 4711)
+pruefe("Sweep-Versatz übersteht einen ABGEBROCHENEN Lauf",
+       meta3.get(changeorg.SWEEP_OFFSET_FELD), 4711)
+# ⚠️⚠️ DIE Gegenprobe: ohne sie wäre die Reihe oben auch grün, wenn save_store
+# das _meta gar nicht neu aufbaute — dann prüfte sie nichts.
+pruefe("Gegenprobe: ein NICHT durchgereichtes Feld fällt weg",
+       [m.get("nur_zum_test") for m in (meta1, meta2, meta3)],
+       [None, None, None])
 
 
 # ---------------------------------------------------------------------------
@@ -1732,6 +1756,119 @@ pruefe("übernahme: schrumpft() ohne Gegenstück urteilt nicht",
 # der Übernahmemenge stehen — sonst läuft der PC-Timer ins Leere.
 pruefe("übernahme: changeorg und openpetition sind übernahmefähig",
        {"changeorg", "openpetition"} <= ci_stores.uebernahme_menge(), True)
+
+
+# ---------------------------------------------------------------------------
+# 21. Sweep-Versatz und Aufhol-Schwelle (5.10.2026)
+# ---------------------------------------------------------------------------
+# Beides sind Berichtigungen von Code, der am 4.10.2026 entstanden ist, und
+# beide Fehler sahen im Betrieb harmlos aus:
+#   · Der Versatz rückte um die ganze Fenstergröße vor, obwohl `offen` schon
+#     um die archivierten Kandidaten schrumpft — doppelter Vorlauf, 1.500
+#     übersprungene Kandidaten je Lauf. Unsichtbar geblieben, weil ein
+#     zweiter Fehler ihn jedes Mal auf 0 zurücksetzte.
+#   · Der Aufhol-Durchgang lief 21,3 min für `offen = 1`.
+# ---------------------------------------------------------------------------
+VIEL = 440_000
+
+pruefe("versatz: alles vermerkt – das Fenster rückt NICHT zusätzlich vor",
+       changeorg.sweep_versatz(0, 1500, 1500, VIEL), 0)
+pruefe("versatz: akkumulierter Stand bleibt stehen, wenn alles vermerkt ist",
+       changeorg.sweep_versatz(7, 1500, 1500, VIEL), 7)
+pruefe("versatz: 7 unvermerkte – genau um 7 vorrücken",
+       changeorg.sweep_versatz(0, 1500, 1493, VIEL), 7)
+# ⚠️⚠️ Gegenprobe: ohne diesen Fall wäre „gibt immer den alten Wert zurück"
+# genauso grün. Er belegt, dass die Funktion überhaupt unterscheidet.
+pruefe("versatz: nichts vermerkt – um das ganze Fenster vorrücken",
+       changeorg.sweep_versatz(0, 1500, 0, VIEL), 1500)
+pruefe("versatz: Umdrehung läuft über, statt aus der Liste zu laufen",
+       changeorg.sweep_versatz(VIEL - 1, 1500, 0, VIEL), 1499)
+pruefe("versatz: leere Liste teilt nicht durch null",
+       changeorg.sweep_versatz(5, 0, 0, 0), 0)
+
+pruefe("aufholen: nichts offen – übersprungen",
+       bool(aufholen.aufhol_verzicht(0, False)), True)
+pruefe("aufholen: 1 offen – übersprungen (der gemessene Fall vom 4.10.)",
+       bool(aufholen.aufhol_verzicht(1, False)), True)
+pruefe("aufholen: knapp unter der Schwelle – übersprungen",
+       bool(aufholen.aufhol_verzicht(aufholen.AUFHOL_SCHWELLE - 1, False)), True)
+# ⚠️⚠️ Drei Gegenproben: die Schwelle darf nicht alles abwürgen. Ohne sie wäre
+# „überspringt immer" grün — und der Aufhol-Weg wäre stillgelegt.
+pruefe("aufholen: GENAU auf der Schwelle wird aufgeholt",
+       aufholen.aufhol_verzicht(aufholen.AUFHOL_SCHWELLE, False), None)
+pruefe("aufholen: großer Rückstand wird aufgeholt",
+       aufholen.aufhol_verzicht(5000, False), None)
+pruefe("aufholen: `offen` UNBEKANNT ist kein Grund zu überspringen",
+       aufholen.aufhol_verzicht(None, False), None)
+pruefe("aufholen: --probe sticht die Schwelle",
+       aufholen.aufhol_verzicht(1, True), None)
+
+
+# ---------------------------------------------------------------------------
+# 22. Ein ECHTER sprachsweep()-Lauf (5.10.2026)
+# ---------------------------------------------------------------------------
+# ⚠️⚠️ Warum zusätzlich zu den Rechenfällen oben: `sweep_versatz` und
+# `sweep_urteil` waren einzeln geprüft, der LAUF darum herum nicht — und genau
+# dort sitzen die beiden Fehler vom 4.10.2026 (Versatz doppelt vorgerückt,
+# `available` beim Speichern verloren). Eine geprüfte Formel in einem
+# ungeprüften Aufruf ist kein Beleg: der doppelte Vorlauf war arithmetisch
+# korrekt, er stand nur an der falschen Stelle.
+# Vier Kandidaten, davon einer unlesbar – so ist `nicht vermerkt` = 1 und der
+# Versatz muss um genau 1 vorrücken, nicht um 4.
+# ---------------------------------------------------------------------------
+_SWEEP_SEITEN = {"sde": _sweep_seite("de-DE"),
+                 "sen": _sweep_seite("en-US", "US"),
+                 "ses": _sweep_seite("es-419", "MX"),
+                 "skaputt": "kein Feld, das wir kennen"}
+
+
+class _SweepFetcher:
+    def __init__(self, *a, **k):
+        pass
+
+    def get(self, url):
+        return _Antwort(_SWEEP_SEITEN.get(url.rsplit("/", 1)[-1], ""))
+
+
+_echt_sweep = (core.Fetcher, changeorg.alle_sitemap_slugs, changeorg.DATA_FILE,
+               changeorg.EN_DATA_FILE, core.ARCHIV_DIR)
+try:
+    with tempfile.TemporaryDirectory() as ordner:
+        o = Path(ordner)
+        core.Fetcher = _SweepFetcher
+        changeorg.alle_sitemap_slugs = lambda f: list(_SWEEP_SEITEN)
+        changeorg.DATA_FILE = o / "changeorg_petitions.json"
+        changeorg.EN_DATA_FILE = o / "changeorg_en_petitions.json"
+        core.ARCHIV_DIR = o / "archiv"
+        # Ausgangsbestand mit zwei Feldern, die der Sweep NICHT erheben kann
+        # und deshalb auch nicht einkassieren darf.
+        core.save_store({}, changeorg.DATA_FILE, quiet=True,
+                        extra_meta={"available": 16081,
+                                    "verworfen": {"frueher": "tr/TR"}})
+        core.save_store({}, changeorg.EN_DATA_FILE, quiet=True)
+        changeorg.sprachsweep(SimpleNamespace(sprachsweep=4, delay=0))
+        sweep_meta = core.load_meta(changeorg.DATA_FILE)
+        archiv_keys = core.archiv_schluessel(changeorg.PLATFORM.key)
+        sweep_bestand = len(core.load_store(changeorg.DATA_FILE))
+finally:
+    (core.Fetcher, changeorg.alle_sitemap_slugs, changeorg.DATA_FILE,
+     changeorg.EN_DATA_FILE, core.ARCHIV_DIR) = _echt_sweep
+
+pruefe("sweep-lauf: die drei lesbaren Kandidaten stehen im Archiv",
+       sorted(archiv_keys), ["sde", "sen", "ses"])
+# ⚠️ DER Fall: 4 angesehen, 3 vermerkt → Versatz 1. Beim alten Code wäre es 4
+# gewesen, und drei längst archivierte Kandidaten wären übersprungen worden.
+pruefe("sweep-lauf: Versatz rückt um den EINEN unvermerkten vor, nicht um vier",
+       sweep_meta.get(changeorg.SWEEP_OFFSET_FELD), 1)
+pruefe("sweep-lauf: `available` übersteht das Speichern",
+       sweep_meta.get("available"), 16081)
+pruefe("sweep-lauf: das Verwerfungs-Register übersteht das Speichern",
+       sweep_meta.get("verworfen"), {"frueher": "tr/TR"})
+# ⚠️⚠️ Gegenprobe: der Sweep darf den DEUTSCHEN Bestand nicht anfassen – seine
+# Funde gehören ins Archiv, und was davon in die App kommt, ist eine offene
+# Entscheidung des Nutzers (4.10.2026).
+pruefe("sweep-lauf: Gegenprobe – der Bestand bleibt leer",
+       sweep_bestand, 0)
 
 
 # ---------------------------------------------------------------------------

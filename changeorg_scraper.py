@@ -558,8 +558,24 @@ def run(args) -> None:
     # bei jedem Schreiben neu auf, siehe oben), und der Vorrat stünde nach einem
     # einzigen Lauf wieder bei null. Der Fehler wäre dabei völlig stumm: der
     # Bestand bliebe unversehrt, das Fenster stünde nur wieder still.
-    verworfen = core.als_register(core.load_meta(DATA_FILE).get("verworfen"))
+    # ⚠️ EIN load_meta für beide Felder: es liest und parst die ganze Datei
+    # (55 MB bei Change.org), ein zweiter Aufruf kostete Sekunden für nichts.
+    meta_vorher = core.load_meta(DATA_FILE)
+    verworfen = core.als_register(meta_vorher.get("verworfen"))
     lauf_meta["verworfen"] = verworfen
+
+    # ⚠️⚠️ Derselbe Grund, dritter Fall (5.10.2026): der Versatz des
+    # Sprach-Sweeps lebt ebenfalls im _meta, und JEDER gewöhnliche Lauf wirft
+    # ihn weg. Gemessen am laufenden Betrieb: nach ZWEI Sweeps stand
+    # `sweep_offset` auf 1500 statt 3000 — beide hatten bei 0 angefangen, weil
+    # der Aufhol-Lauf dazwischen gespeichert hatte. Scheinbar harmlos, weil der
+    # „schon bekannt"-Filter das Fenster trotzdem vorrückt; dauerhaft hängen
+    # bleiben aber genau die Kandidaten, die der Sweep ANSIEHT, ohne sie ins
+    # Archiv zu schreiben (502er, unlesbare Seiten) — die werden sonst in jedem
+    # Lauf neu abgerufen. Nicht als Zahl prüfen, sondern auf `is not None`: ein
+    # Versatz von 0 ist ein gültiger Wert und darf nicht wie „fehlt" aussehen.
+    if meta_vorher.get(SWEEP_OFFSET_FELD) is not None:
+        lauf_meta[SWEEP_OFFSET_FELD] = meta_vorher[SWEEP_OFFSET_FELD]
 
     # Vor der Entdeckung festhalten: „bekannt" meint den Stand zu LAUFBEGINN.
     # Sonst zählten die gleich frisch angelegten Petitionen als nachzuprüfen
@@ -1063,6 +1079,31 @@ def alle_sitemap_slugs(fetcher: core.Fetcher) -> list[str]:
     return slugs
 
 
+def sweep_versatz(alt: int, fenster: int, vermerkt: int, offen: int) -> int:
+    """Wohin rückt das Sweep-Fenster? Eigene Funktion, damit der Selbsttest es
+    messen kann.
+
+    ⚠️⚠️ Der Versatz rückt um die NICHT vermerkten Kandidaten vor, nicht um die
+    Fenstergröße (berichtigt 5.10.2026 — mein eigener Fehler vom 4.10.).
+    Begründung: der Versatz indiziert in `offen`, und `offen` ist bei jedem Lauf
+    neu berechnet als „alles, was nicht schon bekannt ist". Wer archiviert
+    wurde, ist beim nächsten Lauf also ohnehin heraus — die Liste rückt von
+    selbst vor. Ein Versatz um die ganze Fenstergröße rückte ein ZWEITES Mal
+    vor und überspränge je Lauf 1.500 Kandidaten.
+
+    Übrig bleiben genau die, die der Sweep angesehen, aber nicht vermerkt hat
+    (`error`, `unklar`). Die stehen beim nächsten Lauf wieder am Anfang von
+    `offen` und würden das Fenster blockieren — um sie, und nur um sie, rückt
+    der Versatz vor. Nach einer vollen Umdrehung kommen sie wieder dran.
+
+    ⚠️ Am 4./5.10.2026 war `nicht vermerkt` in zwei echten Läufen **0** (je
+    1.500 Kandidaten, kein error, kein unklar). Der Versatz ist also heute
+    wirkungslos — er ist die Vorsorge für den Tag, an dem Change.org wieder
+    unlesbare Seiten liefert, nicht ein laufender Mechanismus.
+    """
+    return (alt + max(0, fenster - vermerkt)) % max(offen, 1)
+
+
 def sprachsweep(args) -> None:
     """Holt nie angesehene Sitemap-Kandidaten und sortiert sie nach Sprache.
 
@@ -1132,13 +1173,25 @@ def sprachsweep(args) -> None:
         fuers_archiv.append(eintrag)
 
     monate = core.archiv_mergen(PLATFORM.key, fuers_archiv)
-    offset = (offset + len(fenster)) % max(len(offen), 1)
+    nicht_vermerkt = max(0, len(fenster) - len(fuers_archiv))
+    offset = sweep_versatz(offset, len(fenster), len(fuers_archiv), len(offen))
+    if nicht_vermerkt:
+        log(f"Sweep: {nicht_vermerkt} von {len(fenster)} Kandidaten ohne "
+            f"Archiveintrag (error/unklar) – der Versatz rückt um sie vor, "
+            f"sie kommen nach einer Umdrehung wieder.")
     # Der Versatz gehört in den Bestand, weil nur dessen _meta den
     # Actions-Cache überlebt — dieselbe Begründung wie beim Register.
+    # ⚠️ `available` gehört in dieselbe Liste (5.10.2026 gemessen: nach dem
+    # Sweep stand es auf None). Der Sweep ENTDECKT nichts — er darf die
+    # Entdeckungszahl des letzten echten Laufs also nicht einkassieren. Die
+    # Kachel fällt dadurch nicht auf eine Falschauskunft zurück (seit 19.9. hat
+    # die Bilanz Vorrang, siehe petitions_core.py ~4229), aber die Zahl im
+    # Aufhol-Bericht wurde falsch.
     core.save_store(core.load_store(DATA_FILE), DATA_FILE,
                     extra_meta={SWEEP_OFFSET_FELD: offset,
                                 **{k: v for k, v in meta.items()
-                                   if k in ("verworfen", "orte_offset")}},
+                                   if k in ("verworfen", "orte_offset",
+                                            "available")}},
                     quiet=True)
     log(f"Sweep fertig: {dict(sorted(urteile.items()))} · {len(fuers_archiv)} "
         f"ins Archiv ({len(monate)} Monatsdatei(en)) · Versatz jetzt {offset}.")

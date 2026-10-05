@@ -46,6 +46,23 @@ STORE = Path("changeorg_petitions.json")
 # steigen, sonst geht wirklich nichts mehr.
 FORTSCHRITT_MIN = 1
 
+# ⚠️⚠️ Unterhalb dieser Schwelle ist Aufholen VERSCHWENDUNG (gemessen 5.10.2026).
+# Ein Durchgang kostet ~500 Abrufe ≈ 21 min, egal wie viel offen ist. Am
+# 4.10. stand `offen` auf 1 — der Durchgang meldete nach 21,3 min „+0 im
+# Bestand · +0 verworfen · Fortschritt 0" und endete mit ⛔ ABBRUCH. Bei sechs
+# Pflege-Läufen am Tag sind das rund zwei Stunden für nichts.
+# Der Rest bleibt NICHT liegen: die CI entdeckt Change.org seit `cc99f82` in
+# JEDEM Lauf und holt dort bis zu MAX_NEW_PER_RUN = 500 neue Sätze — ein
+# Rückstand unter dieser Schwelle ist in einem einzigen CI-Lauf abgeräumt,
+# ohne dass dieser Rechner etwas tut.
+# ⚠️ Und der Durchgang ist nicht nur nutzlos, er SCHADET: sein Abschluss-Save
+# baut das `_meta` neu auf und nimmt `sweep_offset` mit (petitions_core.py,
+# „was nicht in meta_extra steht, fällt weg"). Weil er im Pflege-Lauf VOR dem
+# Sprach-Sweep steht, begann der Sweep danach jedes Mal wieder bei Versatz 0.
+# ⚠️ Bei `offen = unbekannt` (None) wird NICHT übersprungen — eine fehlende
+# Bilanz ist kein Beleg für „nichts zu tun".
+AUFHOL_SCHWELLE = 200
+
 # Ein Durchgang, bei dem mehr als jeder zehnte Abruf scheitert, ist kein
 # Arbeitsdurchgang mehr, sondern ein Hinweis auf die Gegenseite.
 FEHLERQUOTE_MAX = 0.10
@@ -223,6 +240,27 @@ def abgleich_mit_veroeffentlichtem_stand() -> str | None:
     return None
 
 
+def aufhol_verzicht(rest: int | None, probe: bool) -> str | None:
+    """Lohnt ein Durchgang? `None` = ja, aufholen. Sonst der Grund dagegen,
+    fertig zum Ausgeben.
+
+    Eigene Funktion, damit der Selbsttest die Entscheidung messen kann, ohne
+    das Netz und einen Unterprozess anzufassen — inline in main() wäre sie
+    unprüfbar gewesen.
+
+    ⚠️ `--probe` sticht die Schwelle: der Probelauf soll ausdrücklich messen,
+    ob dieser Rechner einen Durchgang durchbringt, auch wenn kaum etwas offen
+    ist. Nur der unbeaufsichtigte Pflege-Lauf (--durchgaenge) verzichtet.
+    """
+    if rest == 0:
+        return "Nichts offen — nichts zu tun."
+    if rest is not None and rest < AUFHOL_SCHWELLE and not probe:
+        return (f"Nur {rest} offen (Schwelle {AUFHOL_SCHWELLE}) — ein Durchgang "
+                f"kostet ~500 Abrufe und brächte höchstens {rest}. Die CI räumt "
+                f"das in ihrem eigenen 500er-Fenster ab. Übersprungen.")
+    return None
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--probe", action="store_true",
@@ -262,8 +300,9 @@ def main() -> int:
     print(f"Ausgangslage: {bestand} im Bestand · {register} im "
           f"Verwerfungs-Register · available {available} · offen "
           f"{rest if rest is not None else 'unbekannt'}")
-    if rest == 0:
-        print("Nichts offen — nichts zu tun.")
+    verzicht = aufhol_verzicht(rest, a.probe)
+    if verzicht:
+        print(verzicht)
         return 0
 
     runden = 1 if a.probe else a.durchgaenge

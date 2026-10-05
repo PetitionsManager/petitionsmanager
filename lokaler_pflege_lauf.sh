@@ -161,6 +161,11 @@ main() {
     # changeorg_aufholen.py hört von sich aus auf: bei HTTP 403/429, bei zu
     # hoher Fehlerquote, bei fehlendem Fortschritt und wenn der lokale Stand
     # hinter dem veröffentlichten zurückliegt.
+    # ⚠️ Seit 5.10.2026 ist der Schritt meist ein NULLSCHRITT (Sekunden statt
+    # 22 min): `offen` steht auf 1, und unter AUFHOL_SCHWELLE verzichtet das
+    # Skript. Der Rückstand von ~13.500, für den es am 19.9. gebaut wurde, ist
+    # abgearbeitet. Stehen lassen — es greift wieder, wenn die Entdeckung
+    # einmal einen großen Schwung findet.
     # ⚠️ Abschalten ohne Codeänderung: PFLEGE_OHNE_CHANGEORG=1.
     if [ "${PFLEGE_NUR_PRUEFEN:-0}" != "1" ] \
        && [ "${PFLEGE_OHNE_CHANGEORG:-0}" != "1" ]; then
@@ -176,18 +181,20 @@ main() {
     fi
 
     # ---- Sprach-Sweep: der blinde Fleck der Sitemaps ----------------------
-    # Nutzerentscheidung 4.10.2026 („alles aufnehmen"). Gemessen: der
-    # Sitemap-Index führt ~56.000 Petitionen, die deutsche Entdeckung sieht
-    # davon nur, was GERMAN_SLUG_RE passiert (43 von 1.168 in der Sitemap des
-    # laufenden Monats). Die übrigen ~54.000 wurden nie angesehen; eine
-    # Stichprobe von 25 ergab 13-mal englisch, der Rest pt/fr/it/es.
+    # Nutzerentscheidung 4.10.2026 („alles aufnehmen"). Die deutsche Entdeckung
+    # sieht nur, was GERMAN_SLUG_RE passiert; alles andere wurde nie angesehen.
     #
-    # ⚠️⚠️ Das gehört HIERHER und nicht in die CI: 54.000 Abrufe sind 22,5 h
-    # reine Abrufzeit. Dieser Rechner hat keine Frist, die CI hat 300 min —
-    # dort würde derselbe Vorrat Wochen dauern und täglich den Rundlauf
-    # verdrängen. Bei 1.500 je Lauf (~37 min) und sechs Läufen am Tag ist der
-    # Vorrat in rund sechs Tagen einmal durchgesehen; danach kostet er fast
-    # nichts mehr, weil nur noch neue Sitemap-Einträge übrig bleiben.
+    # ⚠️⚠️ ZAHL BERICHTIGT 5.10.2026. Hier stand „~56.000 Petitionen", aus EINER
+    # Sitemap hochgerechnet. Der erste echte Lauf zählte **453.168 Slugs in 51
+    # Sitemaps** — Faktor 8. Der Fehler lag in der Stichprobe: gemessen war die
+    # Datei des LAUFENDEN Monats, und die ist erst angefangen. Bei datierten
+    # Dateien ist die jüngste nie typisch.
+    #
+    # ⚠️⚠️ Das gehört HIERHER und nicht in die CI: 453.000 Abrufe sind rund
+    # 190 h reine Abrufzeit. Dieser Rechner hat keine Frist, die CI hat 300 min.
+    # Bei 1.500 je Lauf (~58 min gemessen) und sechs Läufen am Tag sind das
+    # ~9.000/Tag — eine volle Umdrehung dauert damit rund **50 Tage**, nicht
+    # sechs. Gemessene Ausbeute je Fenster: ~0,8 % deutsch, ~61 % englisch.
     # ⚠️ Abschalten ohne Codeänderung: PFLEGE_OHNE_SWEEP=1.
     if [ "${PFLEGE_NUR_PRUEFEN:-0}" != "1" ] \
        && [ "${PFLEGE_OHNE_SWEEP:-0}" != "1" ]; then
