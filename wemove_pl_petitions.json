@@ -31,9 +31,12 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-10-04T22:51:58-06:00",
-    "petition_count": 181,
+    "generated_at": "2026-10-05T04:45:38-06:00",
+    "petition_count": 182,
     "available": 229,
+    "new_petitions_last_run": [
+      "2026-09-fuelled-by-greed-petition-PL"
+    ],
     "unbrauchbare": {
       "2023-06-deaths-at-sea-testing-PL": "2026-09-05T16:48:37-06:00",
       "2023-07-simon-1-PL": "2026-09-05T16:48:37-06:00",
@@ -83,59 +86,65 @@
       "lucas-test-donation-2-petition-PL": "2026-09-18T20:42:20-06:00",
       "2026-09-insurance-natural-disasters-petition-PL": "2026-09-22T21:10:52-06:00"
     },
-    "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-10-04T22:51:57-06:00",
+      "stand": "2026-10-05T04:45:38-06:00",
       "gefunden": 229,
-      "im_bestand": 181,
+      "im_bestand": 182,
       "unbrauchbar": 47,
       "verworfen": 0,
       "dublette": 0,
       "verschwunden": 0,
       "zurueckgestellt": 0,
-      "offen": 1,
-      "offene_beispiele": [
-        "2026-09-fuelled-by-greed-petition-PL"
-      ],
-      "bestand_gesamt": 181,
+      "offen": 0,
+      "offene_beispiele": [],
+      "bestand_gesamt": 182,
       "bestand_ausserhalb": 0
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-10-04T22:51:57-06:00",
-        "gesamt": 181,
-        "online": 181,
+        "zeit": "2026-10-05T04:45:38-06:00",
+        "gesamt": 182,
+        "online": 182,
         "offline": 0,
         "ohne_titel": 0,
         "platzhalter": 0,
         "nicht_ausgeliefert": 0,
         "torsi": 0,
         "dubletten": 0,
-        "mit_start": 169,
+        "mit_start": 170,
         "juengstes_start": "2026-09-01",
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
-        "neu": 0
+        "neu": 1
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-10-04T22:51:57-06:00",
-      "gesamt": 181,
-      "online": 181,
+      "zeit": "2026-10-05T04:45:38-06:00",
+      "gesamt": 182,
+      "online": 182,
       "offline": 0,
       "ohne_titel": 0,
       "platzhalter": 0,
       "nicht_ausgeliefert": 0,
       "torsi": 0,
       "dubletten": 0,
-      "mit_start": 169,
+      "mit_start": 170,
       "juengstes_start": "2026-09-01",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-10-04T22:51:57-06:00",
-    "befunde": [],
-    "health_warning": null,
-    "online_count": 181
+    "verlauf_felder_ab": "2026-10-05T04:45:38-06:00",
+    "befunde": [
+      {
+        "stufe": "warnung",
+        "thema": "Startdatum rückt nicht nach",
+        "text": "1 neue Sätze aufgenommen, das jüngste Startdatum im Bestand ist aber 34 Tage alt (2026-09-01). Entweder wird das Feld nicht mehr gelesen – dann prüfe den Ausdruck, der start_date aus der Seite zieht – oder die Quelle liefert wirklich nichts Neues.",
+        "zeit": "2026-10-05T04:45:38-06:00",
+        "thema_en": "Start date is not catching up",
+        "text_en": "1 new records added, but the newest start date in the store is 34 days old (2026-09-01). Either the field is no longer being read – then check the expression that extracts start_date from the page – or the source really has nothing new."
+      }
+    ],
+    "health_warning": "Startdatum rückt nicht nach: 1 neue Sätze aufgenommen, das jüngste Startdatum im Bestand ist aber 34 Tage alt (2026-09-01). Entweder wird das Feld nicht mehr gelesen – dann prüfe den Ausdruck, der start_date aus der Seite zieht – oder die Quelle liefert wirklich nichts Neues.",
+    "online_count": 182
   },
   "2026-08-protect-europe-make-polluters-pay-petition-PL": {
     "slug": "2026-08-protect-europe-make-polluters-pay-petition-PL",
@@ -7736,7 +7745,7 @@
     "lang": "pl",
     "campaign_id": "wemove:2026-1-ma-sante-n-est-pas-a-vendre-my-health-is-not-for-sale-stop-ue-me",
     "status": "online",
-    "last_seen": "2026-09-22T21:10:52-06:00",
+    "last_seen": "2026-10-05T04:45:04-06:00",
     "offline_since": null,
     "tags": [
       "Zdrowie",
@@ -7750,7 +7759,7 @@
       "Europy",
       "Handlu"
     ],
-    "last_checked": "2026-09-22T21:10:52-06:00"
+    "last_checked": "2026-10-05T04:45:04-06:00"
   },
   "democratization-of-europe-PL": {
     "slug": "democratization-of-europe-PL",
@@ -7781,7 +7790,7 @@
     "lang": "pl",
     "campaign_id": "wemove:democratization-of-europe",
     "status": "online",
-    "last_seen": "2026-09-22T21:10:52-06:00",
+    "last_seen": "2026-10-05T04:45:04-06:00",
     "offline_since": null,
     "tags": [
       "Europ",
@@ -7795,7 +7804,7 @@
       "Opodatkowa",
       "Obywatele"
     ],
-    "last_checked": "2026-09-22T21:10:52-06:00"
+    "last_checked": "2026-10-05T04:45:04-06:00"
   },
   "developers-testing-campaign-petition-PL": {
     "slug": "developers-testing-campaign-petition-PL",
@@ -7812,6 +7821,10 @@
       {
         "checked_at": "2026-09-22T21:10:52-06:00",
         "count": 2533
+      },
+      {
+        "checked_at": "2026-10-05T04:45:04-06:00",
+        "count": 2614
       }
     ],
     "title": "Europa bezpiecznym miejscem dla wszystkich kobiet i dziewcząt!",
@@ -7821,12 +7834,12 @@
     "summary": "Polski English English English English English English English English English English English English Français Deutsch Deutsch Español Italiano Europa bezpiecznym miejscem dla wszystkich kobiet i dzi…",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 2533,
+    "signatures": 2614,
     "goal": 5000,
     "lang": "pl",
     "campaign_id": "wemove:developers-testing-campaign-petition",
     "status": "online",
-    "last_seen": "2026-09-22T21:10:52-06:00",
+    "last_seen": "2026-10-05T04:45:04-06:00",
     "offline_since": null,
     "tags": [
       "English",
@@ -7840,7 +7853,7 @@
       "Kobiety",
       "Europejskiej"
     ],
-    "last_checked": "2026-09-22T21:10:52-06:00"
+    "last_checked": "2026-10-05T04:45:04-06:00"
   },
   "2026-09-Big-Food-petition-PL": {
     "slug": "2026-09-Big-Food-petition-PL",
@@ -7853,6 +7866,10 @@
       {
         "checked_at": "2026-09-22T21:10:52-06:00",
         "count": 55219
+      },
+      {
+        "checked_at": "2026-10-05T04:45:04-06:00",
+        "count": 55966
       }
     ],
     "title": "Koncerny żywnościowe rujnują nasze zdrowie – potrzebujemy unijnego podatku cukrowego!",
@@ -7863,12 +7880,12 @@
     "start_date": "2026-09-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 55219,
+    "signatures": 55966,
     "goal": 75000,
     "lang": "pl",
     "campaign_id": "wemove:2026-09-Big-Food-petition",
     "status": "online",
-    "last_seen": "2026-09-22T21:10:52-06:00",
+    "last_seen": "2026-10-05T04:45:04-06:00",
     "offline_since": null,
     "tags": [
       "Ywno",
@@ -7882,7 +7899,7 @@
       "Koncernów",
       "Unijnego"
     ],
-    "last_checked": "2026-09-22T21:10:52-06:00"
+    "last_checked": "2026-10-05T04:45:04-06:00"
   },
   "2026-09-toxic-coffee-petition-PL": {
     "slug": "2026-09-toxic-coffee-petition-PL",
@@ -7895,6 +7912,10 @@
       {
         "checked_at": "2026-09-22T21:10:52-06:00",
         "count": 46687
+      },
+      {
+        "checked_at": "2026-10-05T04:45:04-06:00",
+        "count": 47205
       }
     ],
     "title": "Nie chcemy trucizny w naszej kawie!",
@@ -7905,12 +7926,12 @@
     "start_date": "2026-09-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 46687,
+    "signatures": 47205,
     "goal": 50000,
     "lang": "pl",
     "campaign_id": "wemove:2026-09-toxic-coffee-petition",
     "status": "online",
-    "last_seen": "2026-09-22T21:10:52-06:00",
+    "last_seen": "2026-10-05T04:45:04-06:00",
     "offline_since": null,
     "tags": [
       "Trucizny",
@@ -7924,6 +7945,44 @@
       "Importu",
       "Których"
     ],
-    "last_checked": "2026-09-22T21:10:52-06:00"
+    "last_checked": "2026-10-05T04:45:04-06:00"
+  },
+  "2026-09-fuelled-by-greed-petition-PL": {
+    "slug": "2026-09-fuelled-by-greed-petition-PL",
+    "first_seen": "2026-10-05T04:45:04-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-05T04:45:04-06:00",
+        "count": 34673
+      }
+    ],
+    "title": "Koncerny naftowe: precz z naszego nieba!",
+    "image_url": "https://wemove.cdn.actionkit.com/images/fuelled-by-greed_1024x630.jpg",
+    "url": "https://action.wemove.eu/sign/2026-09-fuelled-by-greed-petition-PL",
+    "description_full": "<p>\n\n<!-- Remove this if you don't want popins like \"This page also in English\" -->\n\n\n<img alt=\"Language selector\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/icon_translate_eeaca63123.svg\"/>\n\n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n              \n              Polski\n\n              \n            \n          \n        \n\n</p><ul>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-fuelled-by-greed-petition-EN\" rel=\"noopener\" target=\"_blank\">\n                    \n                    English\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-fuelled-by-greed-petition-FR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Français\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-fuelled-by-greed-petition-DE\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Deutsch\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-fuelled-by-greed-petition-ES\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Español\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-fuelled-by-greed-petition-IT\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Italiano\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-09-fuelled-by-greed-petition-NL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Nederlands\n\n                    \n                    </a>\n</li>\n</ul><p>\n\n\n          Koncerny naftowe: precz z naszego nieba!\n        \n\n<img alt=\"Koncerny naftowe: precz z naszego nieba!\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/fuelled-by-greed_1024x630.jpg\"/>\n\n</p><h3>\n<p>Do Komisji Europejskiej, członkiń i członków Parlamentu Europejskiego oraz głów państw członkowskich Unii Europejskiej</p>\n</h3>\n\n<h2>\n            Petycja\n          </h2>\n<p>Domagamy się utrzymania przepisów dotyczących czystszego paliwa lotniczego w obecnym kształcie. Nie możemy dopuścić do tego, aby lobbing przemysłu naftowego poskutkował ich poluzowaniem.</p>\n<p>Samoloty już teraz są w stanie latać na czystszym paliwie. To szansa, aby zmniejszyć szkody, jakie lotnictwo wyrządza naszej planecie.</p>\n<p>Jednak kilka spółek naftowych kontroluje prawie każdą kroplę paliwa lotniczego w Europie. Według unijnych przepisów to na nich spoczywa odpowiedzialność za dostarczenie czystego paliwa. Jednak zamiast w nie inwestować, wydają one pieniądze na lobbowanie, aby osłabić i zakwestionować te przepisy.</p>\n<p>Podczas ponownego przeglądu inicjatywy ReFuelEU apelujemy o utrzymanie wszystkich celów określonych przez te przepisy, bez opóźnień:</p>\n<ol>\n<li>6% czystszego paliwa w baku każdego samolotu do 2030 roku, 20% do 2035 roku i 70% do 2050 roku.</li>\n<li>E-paliwa powstałe przy użyciu energii ze źródeł odnawialnych: 1,2% do 2030 roku, 35% do 2050 roku.</li>\n<li>Surowe grzywny dla producentów paliw, którzy nie osiągną tych poziomów. Zapłacenie takiej grzywny nie może być bardziej opłacalne dla spółek naftowych niż dostarczenie czystszego paliwa.</li>\n</ol>\n\n\n<h2>\n            \n              Dlaczego jest to ważne?\n            \n          </h2>\n<p><strong>Istnieje sposób, aby latanie było bardziej ekologiczne. </strong>Samoloty są już w stanie latać na czystym paliwie, zrobionym z odpadów, w tym zużytego oleju kuchennego, a nie na ropie naftowej, wydobywanej prosto z ziemi. [1]</p>\n<p><strong>To nasza szansa, aby powstrzymać lotnictwo od niszczenia naszej planety</strong> – bez konieczności wprowadzania jakichkolwiek zmian w już istniejących samolotach.</p>\n<p><strong>Unia Europejska wdrożyła nawet przepisy, aby tak się stało.</strong> Udział czystego paliwa w baku każdego samolotu musi być coraz większy. Dziś jest to niewielka ilość, ale już w 2050 roku ma to być aż 70%. [2]</p>\n<p>Jednak kilka wielkich koncernów naftowych, takich jak <strong>BP, Shell i Total kontroluje niemal każdą kroplę paliwa lotniczego w Europie. </strong>To do nich należą rurociągi i zbiorniki na lotniskach. A zamiast opracowywać czyste paliwo, którego tak bardzo potrzebujemy, lub z niego korzystać, wydają pieniądze na lobbowanie, by do tego nie dopuścić.</p>\n<p>W świecie, w którym samoloty latają na oleju kuchennym, koncerny naftowe przestają być potrzebne. <strong>A to bezpośrednio zagraża ich istnieniu.</strong></p>\n<p>Duże spółki naftowe liczą na to, że uda im się powstrzymać przepisy, o których prawie nikt nie słyszał, bez zwracania na siebie uwagi. Dzieje się to teraz, gdy czytasz tę wiadomość. [3] Ale <strong>jeśli tysiące z nas przekaże przywódcom UE, że chcemy czystego paliwa, to przestaną oni liczyć się tylko ze zdaniem lobbystów.</strong></p>\n<h4>\n            Przypisy:\n          </h4>\n\n<p>[1] Czyste paliwo lotnicze (<em>sustainable aviation fuel</em> – SAF) zawiera nie tylko olej kuchenny i tłuszcz zwierzęcy, ale także biopaliwo z odpadów komunalnych, leśnych i rolniczych oraz e-paliwa powstałe z połączenia przechwyconego dwutlenku węgla z zielonym wodorem wyprodukowanym przy użyciu energii ze źródeł odnawialnych.</p>\n<p>https://uploads.transportenvironment.org/production/files/202603_SAF_Factsheet.pdf?dm=1773407228)</p>\n<p>[2] Zgodnie z przepisami to producenci paliwa, a nie linie lotnicze, ponoszą obowiązek dostarczenia czystego paliwa. Nadal kosztuje ono więcej niż paliwo lotnicze z ropy naftowej, a duża część odpadów, z których powstaje, pochodzi z importu, dlatego przepisy odniosą najlepszy skutek w połączeniu z inwestycją pieniędzy publicznych w przystępne cenowo, czyste paliwo produkowane tu w Europie.</p>\n<p>https://transport.ec.europa.eu/transport-modes/air/environment/refueleu-aviation_en ; https://uploads.transportenvironment.org/production/files/202603_SAF_Factsheet.pdf?dm=1773407228</p>\n<p>[3] Unia Europejska ma opublikować swoją propozycję przyspieszonego uproszczenia inicjatywy ReFuelEU Aviation –  przepisów, które nakładają obowiązek stosowania czystego paliwa w samolotach –  we wrześniu 2026 r.</p>\n<p>https://www.ebaa.org/news/refueleu-simplification-what-is-really-on-the-table-for-operators</p>",
+    "summary": "Polski English Français Deutsch Español Italiano Nederlands Koncerny naftowe: precz z naszego nieba! Do Komisji Europejskiej, członkiń i członków Parlamentu Europejskiego oraz głów państw członkowskic…",
+    "start_date": "2026-09-01",
+    "started_by": "WeMove Europe",
+    "kind": "petition",
+    "signatures": 34673,
+    "goal": 50000,
+    "lang": "pl",
+    "campaign_id": "wemove:2026-09-fuelled-by-greed-petition",
+    "status": "online",
+    "last_seen": "2026-10-05T04:45:04-06:00",
+    "offline_since": null,
+    "tags": [
+      "Paliwa",
+      "Roku",
+      "Przepisy",
+      "Naftowe",
+      "Czystego",
+      "Koncerny",
+      "Paliwo",
+      "Europejskiej",
+      "Czystszego",
+      "Lotniczego"
+    ],
+    "last_checked": "2026-10-05T04:45:04-06:00"
   }
 }
