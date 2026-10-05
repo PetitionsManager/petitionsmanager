@@ -31,14 +31,12 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-10-04T17:17:08-06:00",
+    "generated_at": "2026-10-04T22:47:51-06:00",
     "petition_count": 2381,
     "available": 1675,
-    "new_petitions_last_run": [
-      "sos-stillstand-oder-spitzenmedizin-fairespj"
-    ],
+    "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-10-04T17:17:07-06:00",
+      "stand": "2026-10-04T22:47:50-06:00",
       "gefunden": 1675,
       "im_bestand": 1675,
       "unbrauchbar": 0,
@@ -67,10 +65,26 @@
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
         "neu": 1
+      },
+      {
+        "zeit": "2026-10-04T22:47:50-06:00",
+        "gesamt": 2381,
+        "online": 2381,
+        "offline": 0,
+        "ohne_titel": 0,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 0,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 2366,
+        "juengstes_start": "2026-10-02",
+        "mit_code_im_text": 0,
+        "herkunft": "lokal_cron",
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-10-04T17:17:07-06:00",
+      "zeit": "2026-10-04T22:47:50-06:00",
       "gesamt": 2381,
       "online": 2381,
       "offline": 0,
