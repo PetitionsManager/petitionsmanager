@@ -31,21 +31,22 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-10-05T04:43:34-06:00",
-    "petition_count": 2389,
+    "generated_at": "2026-10-05T18:49:51-06:00",
+    "petition_count": 2398,
     "available": 1684,
     "new_petitions_last_run": [
-      "duisburger-bibliotheken-erhalten-keine-schliessung-der-bibliothek-an-der-gesamtschule-sued",
-      "ohne-nahrung-keine-kraniche-rettet-den-traditionsrastplatz-linum",
-      "kinder-sind-keine-wanderpokale-gemeinsam-stark-fuer-den-erhalt-unserer-kita-wichtelburg-in-pulsnitz",
-      "kein-asphaltierter-ausbau-des-waldweges-zwischen-zippendorf-und-muess",
-      "kinder-gehoeren-mitten-ins-dorf-villa-kunterbunt-in-burghaun-erhalten",
-      "gemeinschaftsunterkunft-in-seeshaupt-standort-und-genehmigungsverfahren-nochmals-ueberpruefen",
-      "petition-fuer-erhalt-bauhuette-und-freiversuchsflaeche",
-      "paketsteuer-abschaffen-schluss-mit-zusatzkosten-beim-onlinekauf"
+      "keine-rueckfuehrung-in-die-gefahr-reformiert-das-hkue",
+      "fuer-einen-zukunftsstabilen-oepnv-in-bonn-keine-kappung-von-buslinien-vorfahrt-fuer-bahn-und-bus",
+      "jetzt-handeln-integriertes-verkehrskonzept-fuer-ein-sicheres-ribbesbuettel",
+      "gegen-den-bebauungsplan-buero-und-gewerbegebiet-h-22-in-muelheim-an-der-ruhr",
+      "131-teilhabe-oder-einsamkeit-entlastungsbetrag-bei-pflegegrad-1-erhalten",
+      "grieserwiese-landshut-parkpreis-zurueck-auf-1-und-kiesparkplatz-kostenlos-2",
+      "mrt-fuer-alle-rasche-diagnose-schnelle-behandlung-auch-fuer-das-obere-ennstal-und-das-ausseerland",
+      "anrainer-gegen-dauerparker-fuer-eine-faire-parkregelung-in-der-friedhofstrasse-66-72",
+      "nachtbus-fuer-die-linie-60-sichere-heimwege-fuer-graz-waltendorf"
     ],
     "bilanz": {
-      "stand": "2026-10-05T04:43:33-06:00",
+      "stand": "2026-10-05T18:49:50-06:00",
       "gefunden": 1684,
       "im_bestand": 1684,
       "unbrauchbar": 0,
@@ -55,45 +56,45 @@
       "zurueckgestellt": 0,
       "offen": 0,
       "offene_beispiele": [],
-      "bestand_gesamt": 2389,
-      "bestand_ausserhalb": 705
+      "bestand_gesamt": 2398,
+      "bestand_ausserhalb": 714
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-10-05T04:43:33-06:00",
-        "gesamt": 2389,
-        "online": 2389,
+        "zeit": "2026-10-05T18:49:50-06:00",
+        "gesamt": 2398,
+        "online": 2398,
         "offline": 0,
         "ohne_titel": 0,
         "platzhalter": 0,
         "nicht_ausgeliefert": 0,
         "torsi": 0,
         "dubletten": 0,
-        "mit_start": 2374,
-        "juengstes_start": "2026-10-04",
+        "mit_start": 2383,
+        "juengstes_start": "2026-10-05",
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
-        "neu": 8
+        "neu": 9
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-10-05T04:43:33-06:00",
-      "gesamt": 2389,
-      "online": 2389,
+      "zeit": "2026-10-05T18:49:50-06:00",
+      "gesamt": 2398,
+      "online": 2398,
       "offline": 0,
       "ohne_titel": 0,
       "platzhalter": 0,
       "nicht_ausgeliefert": 0,
       "torsi": 0,
       "dubletten": 0,
-      "mit_start": 2374,
-      "juengstes_start": "2026-10-04",
+      "mit_start": 2383,
+      "juengstes_start": "2026-10-05",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-10-05T04:43:33-06:00",
+    "verlauf_felder_ab": "2026-10-05T18:49:50-06:00",
     "befunde": [],
     "health_warning": null,
-    "online_count": 2389
+    "online_count": 2398
   },
   "fuer-den-erhalt-einer-sicheren-individuellen-geburtshilfe-stoppt-den-neuen-hebammenhilfevertrag-2": {
     "slug": "fuer-den-erhalt-einer-sicheren-individuellen-geburtshilfe-stoppt-den-neuen-hebammenhilfevertrag-2",
@@ -133662,6 +133663,10 @@
       {
         "checked_at": "2026-10-02T20:12:55+00:00",
         "count": 436
+      },
+      {
+        "checked_at": "2026-10-05T18:44:55-06:00",
+        "count": 465
       }
     ],
     "title": "Für eine sichere, saubere und nutzbare Turnhalle in Springe",
@@ -133673,10 +133678,10 @@
     "category": "Sport",
     "category_url": "https://www.openpetition.de/petitionen?category=44#petitionen",
     "country": "DE",
-    "signatures": 436,
+    "signatures": 465,
     "start_date": "2026-09-29",
     "status": "online",
-    "last_seen": "2026-10-02T20:12:55+00:00",
+    "last_seen": "2026-10-05T18:44:55-06:00",
     "offline_since": null,
     "tags": [
       "Turnhalle",
@@ -133690,7 +133695,12 @@
       "Besuchertoiletten",
       "Sportlerinnen"
     ],
-    "last_checked": "2026-10-02T20:12:55+00:00"
+    "last_checked": "2026-10-05T18:44:55-06:00",
+    "lang": "de",
+    "campaign_id": "openpetition:fuer-eine-sichere-saubere-und-nutzbare-turnhalle-in-springe",
+    "i18n_state": {
+      "en": "fehlt"
+    }
   },
   "gegen-das-315-system-im-amateursport-erhalt-der-321-zaehlweise-im-nbv-mannschaftsspielbetrieb": {
     "slug": "gegen-das-315-system-im-amateursport-erhalt-der-321-zaehlweise-im-nbv-mannschaftsspielbetrieb",
@@ -133703,6 +133713,10 @@
       {
         "checked_at": "2026-10-02T20:12:55+00:00",
         "count": 40
+      },
+      {
+        "checked_at": "2026-10-05T18:44:55-06:00",
+        "count": 60
       }
     ],
     "title": "Gegen das 3×15-System im Amateursport: Erhalt der 3×21-Zählweise im NBV-Mannschaftsspielbetrieb!",
@@ -133714,11 +133728,11 @@
     "category": "Sport",
     "category_url": "https://www.openpetition.de/petitionen?category=44#petitionen",
     "country": "DE",
-    "signatures": 40,
+    "signatures": 60,
     "goal": 500,
     "start_date": "2026-09-29",
     "status": "online",
-    "last_seen": "2026-10-02T20:12:55+00:00",
+    "last_seen": "2026-10-05T18:44:55-06:00",
     "offline_since": null,
     "tags": [
       "Amateursport",
@@ -133732,7 +133746,12 @@
       "Badminton",
       "Zählweise"
     ],
-    "last_checked": "2026-10-02T20:12:55+00:00"
+    "last_checked": "2026-10-05T18:44:55-06:00",
+    "lang": "de",
+    "campaign_id": "openpetition:gegen-das-315-system-im-amateursport-erhalt-der-321-zaehlweise-im-nbv-mannschaftsspielbetrieb",
+    "i18n_state": {
+      "en": "fehlt"
+    }
   },
   "touristische-hubschrauberfluege-regulieren-lebensqualitaet-schuetzen-in-suedtirol-2": {
     "slug": "touristische-hubschrauberfluege-regulieren-lebensqualitaet-schuetzen-in-suedtirol-2",
@@ -134710,6 +134729,10 @@
       {
         "checked_at": "2026-10-02T20:12:55+00:00",
         "count": 1582
+      },
+      {
+        "checked_at": "2026-10-05T18:44:55-06:00",
+        "count": 2192
       }
     ],
     "title": "Wir fordern den Erhalt der Palliativstation in Büt zum Erhalt der Palliativstation in Bützow",
@@ -134721,11 +134744,11 @@
     "category": "Gesundheit",
     "category_url": "https://www.openpetition.de/petitionen?category=20#petitionen",
     "country": "DE",
-    "signatures": 1582,
+    "signatures": 2192,
     "goal": 5000,
     "start_date": "2026-10-01",
     "status": "online",
-    "last_seen": "2026-10-02T20:12:55+00:00",
+    "last_seen": "2026-10-05T18:44:55-06:00",
     "offline_since": null,
     "tags": [
       "Palliativstation",
@@ -134739,7 +134762,12 @@
       "Region",
       "Krankenhausaufenthalte"
     ],
-    "last_checked": "2026-10-02T20:12:55+00:00"
+    "last_checked": "2026-10-05T18:44:55-06:00",
+    "lang": "de",
+    "campaign_id": "openpetition:wir-fordern-den-erhalt-der-palliativstation-in-buet-zum-erhalt-der-palliativstation-in-buetzow",
+    "i18n_state": {
+      "en": "fehlt"
+    }
   },
   "lasst-unsere-kinder-spielen-fuer-den-erhalt-der-freiflaechen-im-quartier-lichtenbroich": {
     "slug": "lasst-unsere-kinder-spielen-fuer-den-erhalt-der-freiflaechen-im-quartier-lichtenbroich",
@@ -134748,6 +134776,10 @@
       {
         "checked_at": "2026-10-02T20:12:55+00:00",
         "count": 117
+      },
+      {
+        "checked_at": "2026-10-05T18:44:55-06:00",
+        "count": 134
       }
     ],
     "title": "Lasst unsere Kinder spielen! – Für den Erhalt der Freiflächen im Quartier Lichtenbroich",
@@ -134759,11 +134791,11 @@
     "category": "Familie",
     "category_url": "https://www.openpetition.de/petitionen?category=14#petitionen",
     "country": "DE",
-    "signatures": 117,
-    "goal": 120,
+    "signatures": 134,
+    "goal": 130,
     "start_date": "2026-10-01",
     "status": "online",
-    "last_seen": "2026-10-02T20:12:55+00:00",
+    "last_seen": "2026-10-05T18:44:55-06:00",
     "offline_since": null,
     "tags": [
       "Freiflächen",
@@ -134777,7 +134809,12 @@
       "Erhalten",
       "Letzten"
     ],
-    "last_checked": "2026-10-02T20:12:55+00:00"
+    "last_checked": "2026-10-05T18:44:55-06:00",
+    "lang": "de",
+    "campaign_id": "openpetition:lasst-unsere-kinder-spielen-fuer-den-erhalt-der-freiflaechen-im-quartier-lichtenbroich",
+    "i18n_state": {
+      "en": "fehlt"
+    }
   },
   "verlaesslicher-schulbesuch-fuer-kinder-an-foerderschulen": {
     "slug": "verlaesslicher-schulbesuch-fuer-kinder-an-foerderschulen",
@@ -134786,6 +134823,10 @@
       {
         "checked_at": "2026-10-02T20:12:55+00:00",
         "count": 89
+      },
+      {
+        "checked_at": "2026-10-05T18:44:55-06:00",
+        "count": 193
       }
     ],
     "title": "Verlässlicher Schulbesuch für Kinder an Förderschulen",
@@ -134797,10 +134838,10 @@
     "category": "Bildung",
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
     "country": "DE",
-    "signatures": 89,
+    "signatures": 193,
     "start_date": "2026-10-02",
     "status": "online",
-    "last_seen": "2026-10-02T20:12:55+00:00",
+    "last_seen": "2026-10-05T18:44:55-06:00",
     "offline_since": null,
     "tags": [
       "Förderschulen",
@@ -134814,7 +134855,12 @@
       "Beruf",
       "Herausforderung"
     ],
-    "last_checked": "2026-10-02T20:12:55+00:00"
+    "last_checked": "2026-10-05T18:44:55-06:00",
+    "lang": "de",
+    "campaign_id": "openpetition:verlaesslicher-schulbesuch-fuer-kinder-an-foerderschulen",
+    "i18n_state": {
+      "en": "fehlt"
+    }
   },
   "sicherheit-laermschutz-konrad-adenauer-platz-brueckenforum-kennedybruecke-in-bonn-beuel": {
     "slug": "sicherheit-laermschutz-konrad-adenauer-platz-brueckenforum-kennedybruecke-in-bonn-beuel",
@@ -134823,6 +134869,10 @@
       {
         "checked_at": "2026-10-02T20:12:55+00:00",
         "count": 84
+      },
+      {
+        "checked_at": "2026-10-05T18:44:55-06:00",
+        "count": 108
       }
     ],
     "title": "Sicherheit & Lärmschutz: Konrad-Adenauer-Platz, Brückenforum & Kennedybrücke in Bonn-Beuel",
@@ -134834,10 +134884,10 @@
     "category": "Verkehr",
     "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
     "country": "DE",
-    "signatures": 84,
+    "signatures": 108,
     "start_date": "2026-09-30",
     "status": "online",
-    "last_seen": "2026-10-02T20:12:55+00:00",
+    "last_seen": "2026-10-05T18:44:55-06:00",
     "offline_since": null,
     "tags": [
       "Brückenforum",
@@ -134851,7 +134901,12 @@
       "Fahrtrichtung",
       "Zebrastreifen"
     ],
-    "last_checked": "2026-10-02T20:12:55+00:00"
+    "last_checked": "2026-10-05T18:44:55-06:00",
+    "lang": "de",
+    "campaign_id": "openpetition:sicherheit-laermschutz-konrad-adenauer-platz-brueckenforum-kennedybruecke-in-bonn-beuel",
+    "i18n_state": {
+      "en": "fehlt"
+    }
   },
   "mitstadtzentrale-erhalten-gemeinschaftliches-wohnen-in-koeln-weiter-staerken": {
     "slug": "mitstadtzentrale-erhalten-gemeinschaftliches-wohnen-in-koeln-weiter-staerken",
@@ -134860,6 +134915,10 @@
       {
         "checked_at": "2026-10-02T20:12:55+00:00",
         "count": 69
+      },
+      {
+        "checked_at": "2026-10-05T18:44:55-06:00",
+        "count": 239
       }
     ],
     "title": "MitStadtZentrale erhalten – gemeinschaftliches Wohnen in Köln weiter stärken",
@@ -134871,11 +134930,11 @@
     "category": "Wohnen",
     "category_url": "https://www.openpetition.de/petitionen?category=42#petitionen",
     "country": "DE",
-    "signatures": 69,
+    "signatures": 239,
     "goal": 200,
     "start_date": "2026-10-01",
     "status": "online",
-    "last_seen": "2026-10-02T20:12:55+00:00",
+    "last_seen": "2026-10-05T18:44:55-06:00",
     "offline_since": null,
     "tags": [
       "MitStadtZentrale",
@@ -134889,7 +134948,12 @@
       "Stadt",
       "Finanzierung"
     ],
-    "last_checked": "2026-10-02T20:12:55+00:00"
+    "last_checked": "2026-10-05T18:44:55-06:00",
+    "lang": "de",
+    "campaign_id": "openpetition:mitstadtzentrale-erhalten-gemeinschaftliches-wohnen-in-koeln-weiter-staerken",
+    "i18n_state": {
+      "en": "fehlt"
+    }
   },
   "hunger-ist-keine-loesung-nein-zum-bussgeld-fuers-taubenfuettern-in-halberstadt": {
     "slug": "hunger-ist-keine-loesung-nein-zum-bussgeld-fuers-taubenfuettern-in-halberstadt",
@@ -134898,6 +134962,10 @@
       {
         "checked_at": "2026-10-02T20:12:55+00:00",
         "count": 68
+      },
+      {
+        "checked_at": "2026-10-05T18:44:55-06:00",
+        "count": 83
       }
     ],
     "title": "Hunger ist keine Lösung – Nein zum Bußgeld fürs Taubenfüttern in Halberstadt!",
@@ -134909,10 +134977,10 @@
     "category": "Tierschutz",
     "category_url": "https://www.openpetition.de/petitionen?category=45#petitionen",
     "country": "DE",
-    "signatures": 68,
+    "signatures": 83,
     "start_date": "2026-09-30",
     "status": "online",
-    "last_seen": "2026-10-02T20:12:55+00:00",
+    "last_seen": "2026-10-05T18:44:55-06:00",
     "offline_since": null,
     "tags": [
       "Stadt",
@@ -134926,7 +134994,12 @@
       "Teil",
       "Braunschweig"
     ],
-    "last_checked": "2026-10-02T20:12:55+00:00"
+    "last_checked": "2026-10-05T18:44:55-06:00",
+    "lang": "de",
+    "campaign_id": "openpetition:hunger-ist-keine-loesung-nein-zum-bussgeld-fuers-taubenfuettern-in-halberstadt",
+    "i18n_state": {
+      "en": "fehlt"
+    }
   },
   "keine-sperrung-der-anzingerstrasse-zwischen-poering-und-eglharting": {
     "slug": "keine-sperrung-der-anzingerstrasse-zwischen-poering-und-eglharting",
@@ -134935,6 +135008,10 @@
       {
         "checked_at": "2026-10-02T20:12:55+00:00",
         "count": 48
+      },
+      {
+        "checked_at": "2026-10-05T18:44:55-06:00",
+        "count": 215
       }
     ],
     "title": "Keine Sperrung der Anzingerstraße zwischen Pöring und Eglharting",
@@ -134946,10 +135023,10 @@
     "category": "Verkehr",
     "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
     "country": "DE",
-    "signatures": 48,
+    "signatures": 215,
     "start_date": "2026-10-01",
     "status": "online",
-    "last_seen": "2026-10-02T20:12:55+00:00",
+    "last_seen": "2026-10-05T18:44:55-06:00",
     "offline_since": null,
     "tags": [
       "Pöring",
@@ -134963,7 +135040,12 @@
       "Betriebe",
       "Direkten"
     ],
-    "last_checked": "2026-10-02T20:12:55+00:00"
+    "last_checked": "2026-10-05T18:44:55-06:00",
+    "lang": "de",
+    "campaign_id": "openpetition:keine-sperrung-der-anzingerstrasse-zwischen-poering-und-eglharting",
+    "i18n_state": {
+      "en": "fehlt"
+    }
   },
   "schutz-der-vereinsseen-sperrung-der-stillgewaesser-fuer-tages-und-gastkarten-im-fv-lingen": {
     "slug": "schutz-der-vereinsseen-sperrung-der-stillgewaesser-fuer-tages-und-gastkarten-im-fv-lingen",
@@ -134972,6 +135054,10 @@
       {
         "checked_at": "2026-10-02T20:12:55+00:00",
         "count": 15
+      },
+      {
+        "checked_at": "2026-10-05T18:44:55-06:00",
+        "count": 20
       }
     ],
     "title": "Schutz der Vereinsseen: Sperrung der Stillgewässer für Tages- und Gastkarten im FV Lingen",
@@ -134983,10 +135069,10 @@
     "category": "Umwelt",
     "category_url": "https://www.openpetition.de/petitionen?category=46#petitionen",
     "country": "DE",
-    "signatures": 15,
+    "signatures": 20,
     "start_date": "2026-09-30",
     "status": "online",
-    "last_seen": "2026-10-02T20:12:55+00:00",
+    "last_seen": "2026-10-05T18:44:55-06:00",
     "offline_since": null,
     "tags": [
       "Tageskarten",
@@ -135000,7 +135086,12 @@
       "Telgenkampsee",
       "Mitgliedern"
     ],
-    "last_checked": "2026-10-02T20:12:55+00:00"
+    "last_checked": "2026-10-05T18:44:55-06:00",
+    "lang": "de",
+    "campaign_id": "openpetition:schutz-der-vereinsseen-sperrung-der-stillgewaesser-fuer-tages-und-gastkarten-im-fv-lingen",
+    "i18n_state": {
+      "en": "fehlt"
+    }
   },
   "verhinderung-der-zukuenftigen-aufnahmekriterien-sj-27-28-fuer-die-fos-hessen-zweijaehrige-hbfs-hesse": {
     "slug": "verhinderung-der-zukuenftigen-aufnahmekriterien-sj-27-28-fuer-die-fos-hessen-zweijaehrige-hbfs-hesse",
@@ -135009,6 +135100,10 @@
       {
         "checked_at": "2026-10-02T20:12:55+00:00",
         "count": 15
+      },
+      {
+        "checked_at": "2026-10-05T18:44:55-06:00",
+        "count": 20
       }
     ],
     "title": "VERHINDERUNG der zukünftigen Aufnahmekriterien (SJ_27_28) für die FOS Hessen & zweijährige HBFS Hessen",
@@ -135020,10 +135115,10 @@
     "category": "Bildung",
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
     "country": "DE",
-    "signatures": 15,
+    "signatures": 20,
     "start_date": "2026-09-30",
     "status": "online",
-    "last_seen": "2026-10-02T20:12:55+00:00",
+    "last_seen": "2026-10-05T18:44:55-06:00",
     "offline_since": null,
     "tags": [
       "Schülerinnen",
@@ -135037,7 +135132,12 @@
       "Schulformen",
       "Zweijährige"
     ],
-    "last_checked": "2026-10-02T20:12:55+00:00"
+    "last_checked": "2026-10-05T18:44:55-06:00",
+    "lang": "de",
+    "campaign_id": "openpetition:verhinderung-der-zukuenftigen-aufnahmekriterien-sj-27-28-fuer-die-fos-hessen-zweijaehrige-hbfs-hesse",
+    "i18n_state": {
+      "en": "fehlt"
+    }
   },
   "gerechte-reform-des-pflegebeitrags-fuer-kinderlose-keine-erhoehung-des-zuschlags": {
     "slug": "gerechte-reform-des-pflegebeitrags-fuer-kinderlose-keine-erhoehung-des-zuschlags",
@@ -135046,6 +135146,10 @@
       {
         "checked_at": "2026-10-02T20:12:55+00:00",
         "count": 13
+      },
+      {
+        "checked_at": "2026-10-05T18:44:55-06:00",
+        "count": 151
       }
     ],
     "title": "Gerechte Reform des Pflegebeitrags für Kinderlose – Keine Erhöhung des Zuschlags!",
@@ -135057,10 +135161,10 @@
     "category": "Soziales",
     "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
     "country": "DE",
-    "signatures": 13,
+    "signatures": 151,
     "start_date": "2026-10-01",
     "status": "online",
-    "last_seen": "2026-10-02T20:12:55+00:00",
+    "last_seen": "2026-10-05T18:44:55-06:00",
     "offline_since": null,
     "tags": [
       "Kinderlose",
@@ -135074,7 +135178,12 @@
       "Entscheidung",
       "Finanziell"
     ],
-    "last_checked": "2026-10-02T20:12:55+00:00"
+    "last_checked": "2026-10-05T18:44:55-06:00",
+    "lang": "de",
+    "campaign_id": "openpetition:gerechte-reform-des-pflegebeitrags-fuer-kinderlose-keine-erhoehung-des-zuschlags",
+    "i18n_state": {
+      "en": "fehlt"
+    }
   },
   "fuer-unser-koeln-veedels-kultur-schuetzen-monokulturen-stoppen-und-sauberkeit-staerken": {
     "slug": "fuer-unser-koeln-veedels-kultur-schuetzen-monokulturen-stoppen-und-sauberkeit-staerken",
@@ -135083,6 +135192,10 @@
       {
         "checked_at": "2026-10-02T20:12:55+00:00",
         "count": 11
+      },
+      {
+        "checked_at": "2026-10-05T18:44:55-06:00",
+        "count": 16
       }
     ],
     "title": "Für unser Köln: Veedels-Kultur schützen, Monokulturen stoppen und Sauberkeit stärken!",
@@ -135094,10 +135207,10 @@
     "category": "Bürgerrechte",
     "category_url": "https://www.openpetition.de/petitionen?category=58#petitionen",
     "country": "DE",
-    "signatures": 11,
+    "signatures": 16,
     "start_date": "2026-10-01",
     "status": "online",
-    "last_seen": "2026-10-02T20:12:55+00:00",
+    "last_seen": "2026-10-05T18:44:55-06:00",
     "offline_since": null,
     "tags": [
       "Saubere",
@@ -135111,7 +135224,12 @@
       "Faire",
       "Räume"
     ],
-    "last_checked": "2026-10-02T20:12:55+00:00"
+    "last_checked": "2026-10-05T18:44:55-06:00",
+    "lang": "de",
+    "campaign_id": "openpetition:fuer-unser-koeln-veedels-kultur-schuetzen-monokulturen-stoppen-und-sauberkeit-staerken",
+    "i18n_state": {
+      "en": "fehlt"
+    }
   },
   "busfahrplanaenderung-in-kirchberg-an-der-murr": {
     "slug": "busfahrplanaenderung-in-kirchberg-an-der-murr",
@@ -135120,6 +135238,10 @@
       {
         "checked_at": "2026-10-02T20:12:55+00:00",
         "count": 11
+      },
+      {
+        "checked_at": "2026-10-05T18:44:55-06:00",
+        "count": 52
       }
     ],
     "title": "Busfahrplanänderung in Kirchberg an der Murr",
@@ -135131,10 +135253,10 @@
     "category": "Bürgerrechte",
     "category_url": "https://www.openpetition.de/petitionen?category=58#petitionen",
     "country": "DE",
-    "signatures": 11,
+    "signatures": 52,
     "start_date": "2026-09-29",
     "status": "online",
-    "last_seen": "2026-10-02T20:12:55+00:00",
+    "last_seen": "2026-10-05T18:44:55-06:00",
     "offline_since": null,
     "tags": [
       "Minuten",
@@ -135148,7 +135270,12 @@
       "Kirchberger",
       "Behinderte"
     ],
-    "last_checked": "2026-10-02T20:12:55+00:00"
+    "last_checked": "2026-10-05T18:44:55-06:00",
+    "lang": "de",
+    "campaign_id": "openpetition:busfahrplanaenderung-in-kirchberg-an-der-murr",
+    "i18n_state": {
+      "en": "fehlt"
+    }
   },
   "echte-bewertungen-schuetzen-keine-loeschung-allein-durch-ki": {
     "slug": "echte-bewertungen-schuetzen-keine-loeschung-allein-durch-ki",
@@ -135157,6 +135284,10 @@
       {
         "checked_at": "2026-10-02T20:12:55+00:00",
         "count": 8
+      },
+      {
+        "checked_at": "2026-10-05T18:44:55-06:00",
+        "count": 17
       }
     ],
     "title": "Echte Bewertungen schützen – keine Löschung allein durch KI",
@@ -135168,10 +135299,10 @@
     "category": "Internet",
     "category_url": "https://www.openpetition.de/petitionen?category=35#petitionen",
     "country": "DE",
-    "signatures": 8,
+    "signatures": 17,
     "start_date": "2026-10-01",
     "status": "online",
-    "last_seen": "2026-10-02T20:12:55+00:00",
+    "last_seen": "2026-10-05T18:44:55-06:00",
     "offline_since": null,
     "tags": [
       "Bewertungen",
@@ -135185,7 +135316,12 @@
       "Bewertungsportale",
       "Entscheidung"
     ],
-    "last_checked": "2026-10-02T20:12:55+00:00"
+    "last_checked": "2026-10-05T18:44:55-06:00",
+    "lang": "de",
+    "campaign_id": "openpetition:echte-bewertungen-schuetzen-keine-loeschung-allein-durch-ki",
+    "i18n_state": {
+      "en": "fehlt"
+    }
   },
   "gleichbehandlung-statt-finanzieller-benachteiligung-kinderloser-menschen": {
     "slug": "gleichbehandlung-statt-finanzieller-benachteiligung-kinderloser-menschen",
@@ -135194,21 +135330,25 @@
       {
         "checked_at": "2026-10-02T20:12:55+00:00",
         "count": 8
+      },
+      {
+        "checked_at": "2026-10-05T18:44:55-06:00",
+        "count": 51
       }
     ],
     "title": "Gleichbehandlung statt finanzieller Benachteiligung kinderloser Menschen!",
-    "summary": "Gleichbehandlung statt finanzieller Benachteiligung kinderloser Menschen! Petition gegen die geplante Erhöhung des Beitragszuschlags für Kinderlose in der Pflegeversicherung Wir fordern den Deutschen Bundestag und die Bundesregierung auf, die geplante Erhöhung des Beitragszuschlags für kinderlose Mitglieder der sozialen Pflegeversicherung von 0,3 auf 0,9 Prozentpunkte nicht umzusetzen und die bestehende Regelung grundsätzlich auf ihre soziale Gerechtigkeit und Gleichbehandlung hin zu überprüfen.",
+    "summary": "Gleichbehandlung statt finanzieller Benachteiligung kinderloser Menschen! Petition gegen die geplante Erhöhung des Beitragszuschlags für Kinderlose in der Pflegeversicherung Wir fordern den Deutschen Bundestag und die Bundesregierung auf, die geplante Erhöhung des Beitragszuschlags für kinderlose Mitglieder der sozialen Pflegeversicherung von 0,6 auf 0,9 Prozentpunkte nicht umzusetzen und die bestehende Regelung grundsätzlich auf ihre soziale Gerechtigkeit und Gleichbehandlung hin zu überprüfen.",
     "image_url": "https://www.openpetition.de/images/default_petition.jpg",
     "url": "https://www.openpetition.de/petition/online/gleichbehandlung-statt-finanzieller-benachteiligung-kinderloser-menschen",
-    "description_full": "<!--marker--><p>Gleichbehandlung statt finanzieller Benachteiligung kinderloser Menschen!</p><p>Petition gegen die geplante Erhöhung des Beitragszuschlags für Kinderlose in der Pflegeversicherung</p><p>Wir fordern den Deutschen Bundestag und die Bundesregierung auf, die geplante Erhöhung des Beitragszuschlags für kinderlose Mitglieder der sozialen Pflegeversicherung von 0,3 auf 0,9 Prozentpunkte nicht umzusetzen und die bestehende Regelung grundsätzlich auf ihre soziale Gerechtigkeit und Gleichbehandlung hin zu überprüfen.</p><p>Kinderlosigkeit hat viele Ursachen. Manche Menschen wünschen sich Kinder, können aber aus gesundheitlichen oder persönlichen Gründen keine bekommen. Andere finden nicht den passenden Partner oder entscheiden sich bewusst gegen eigene Kinder. Auch Paare können aus ganz unterschiedlichen Gründen kinderlos bleiben.</p><p>Diese Lebensumstände lassen sich nicht über einen Kamm scheren. Dennoch werden kinderlose Versicherte bei den Beiträgen zur Pflegeversicherung pauschal zusätzlich belastet, unabhängig davon, warum sie keine Kinder haben.</p><p>Eine solidarische Gesellschaft muss die Pflege ihrer älteren und pflegebedürftigen Menschen finanzieren. Dabei sollte die Verantwortung jedoch fair verteilt werden. Kinderlosigkeit darf nicht automatisch als persönliches Versäumnis behandelt werden, das finanziell ausgeglichen werden muss.</p><p>Kinderlose Menschen leisten ebenfalls ihren Beitrag zur Gesellschaft: durch ihre Arbeit, ihre Steuern, ihre Sozialversicherungsbeiträge und häufig auch durch die Unterstützung und Pflege von Angehörigen oder anderen Menschen.</p><p>Gerade Menschen, die ungewollt kinderlos sind oder aus gesundheitlichen Gründen keine Kinder bekommen können, sollten nicht zusätzlich finanziell belastet werden, ohne dass ihre individuellen Lebensumstände berücksichtigt werden.</p><p>Wir fordern deshalb:<br/>1. Keine weitere pauschale Erhöhung des Beitragszuschlags für Kinderlose.<br/>2. Eine transparente und sozial gerechte Überprüfung der bestehenden Zuschlagsregelung.<br/>3. Eine Pflegefinanzierung, die unterschiedliche Lebensrealitäten berücksichtigt und niemanden allein aufgrund seiner Kinderlosigkeit abwertet oder benachteiligt.<br/>4. Eine öffentliche und parlamentarische Diskussion über faire Alternativen zur Finanzierung der Pflegeversicherung.</p><p>Gleichberechtigung bedeutet, unterschiedliche Lebenswege zu respektieren. Niemand sollte sich dafür rechtfertigen müssen, keine Kinder zu haben. Die Finanzierung unseres Pflegesystems ist eine gesamtgesellschaftliche Aufgabe und verdient eine Lösung, die Solidarität ermöglicht, ohne Menschen pauschal für ihre Lebensumstände zusätzlich zu belasten.</p><p>Wir bitten den Deutschen Bundestag und die Bundesregierung, diese Forderungen zu prüfen und die geplante Beitragserhöhung zu überdenken.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Die Bundesregierung plant, das akute Defizit der <a href=\"https://www.focus.de/finanzen/pflegereform-beschlossen-das-aendert-sich-jetzt-fuer-sie-kinderlose-und-topverdiener-zahlen-mehr_e42b4a8a-bc44-4f8a-ade9-275f3b0d1915.html\" rel=\"noopener\" target=\"_blank\">sozialen Pflegeversicherung ab dem 1. Januar 2027 </a>maßgeblich durch eine stärkere finanzielle Belastung kinderloser Menschen aufzufangen. Während der allgemeine Beitragssatz stabil bleiben soll, wird der Zuschlag für Kinderlose, den diese komplett alleine tragen müssen, um 0,3 Prozentpunkte angehoben. Für Betroffene bedeutet dies eine spürbare finanzielle Mehrbelastung. Diese Maßnahme greift tief in die Lebensrealitäten von Millionen Bürgerinnen und Bürgern ein und bedarf einer dringenden Korrektur.</p><p>1. Kinderlosigkeit ist keine bewusste Verweigerung gesellschaftlicher Verantwortung<br/>Kinderlosigkeit hat viele Gesichter und Ursachen. Manche Menschen wünschen sich sehnlichst Kinder, können aber aus gesundheitlichen, biologischen oder persönlichen Gründen keine bekommen. Andere finden nicht den passenden Partner oder entscheiden sich aus individuellen Lebensumständen bewusst gegen eigene Kinder. Diese Schicksale und Lebenswege lassen sich nicht über einen Kamm scheren. Die pauschale Annahme, Kinderlosigkeit sei ein rein persönliches Versäumnis, das finanziell „bestraft“ werden muss, ist unzeitgemäß und ungerecht.</p><p>2. Betroffene werden doppelt belastet<br/>Gerade Menschen, die ungewollt kinderlos sind, erleben diese pauschale Gesetzgebung wie das „Streuen von Salz in eine offene Wunde“. Sie tragen bereits oft erhebliche Kosten für medizinische Behandlungen (z.B. Reproduktionsmedizin) selbst und werden nun im Alterssicherungssystem zusätzlich finanziell benachteiligt, ohne dass ihre individuellen Lebensumstände oder Schicksale im Gesetz (§ 55 SGB XI) berücksichtigt werden.</p><p>3. Solidarität ist eine gesamtgesellschaftliche Aufgabe<br/>Eine solidarische Gesellschaft muss die Pflege ihrer älteren und pflegebedürftigen Menschen finanzieren. Kinderlose Menschen leisten dazu bereits einen enormen Beitrag: Sie zahlen den vollen regulären Pflegebeitrag, finanzieren durch ihre Steuern das Familien- und Kindergeldsystem mit und übernehmen im privaten Umfeld oft die Pflege und Unterstützung von Angehörigen oder Freunden. Die Verantwortung für das Pflegesystem darf nicht einseitig und disproportional auf eine Gruppe abgewälzt werden, um eine echte Strukturreform des Systems zu umgehen.</p>",
+    "description_full": "<!--marker--><p>Gleichbehandlung statt finanzieller Benachteiligung kinderloser Menschen!</p><p>Petition gegen die geplante Erhöhung des Beitragszuschlags für Kinderlose in der Pflegeversicherung</p><p>Wir fordern den Deutschen Bundestag und die Bundesregierung auf, die geplante Erhöhung des Beitragszuschlags für kinderlose Mitglieder der sozialen Pflegeversicherung von 0,6 auf 0,9 Prozentpunkte nicht umzusetzen und die bestehende Regelung grundsätzlich auf ihre soziale Gerechtigkeit und Gleichbehandlung hin zu überprüfen.</p><p>Kinderlosigkeit hat viele Ursachen. Manche Menschen wünschen sich Kinder, können aber aus gesundheitlichen oder persönlichen Gründen keine bekommen. Andere finden nicht den passenden Partner oder entscheiden sich bewusst gegen eigene Kinder. Auch Paare können aus ganz unterschiedlichen Gründen kinderlos bleiben.</p><p>Diese Lebensumstände lassen sich nicht über einen Kamm scheren. Dennoch werden kinderlose Versicherte bei den Beiträgen zur Pflegeversicherung pauschal zusätzlich belastet, unabhängig davon, warum sie keine Kinder haben.</p><p>Eine solidarische Gesellschaft muss die Pflege ihrer älteren und pflegebedürftigen Menschen finanzieren. Dabei sollte die Verantwortung jedoch fair verteilt werden. Kinderlosigkeit darf nicht automatisch als persönliches Versäumnis behandelt werden, das finanziell ausgeglichen werden muss.</p><p>Kinderlose Menschen leisten ebenfalls ihren Beitrag zur Gesellschaft: durch ihre Arbeit, ihre Steuern, ihre Sozialversicherungsbeiträge und häufig auch durch die Unterstützung und Pflege von Angehörigen oder anderen Menschen.</p><p>Gerade Menschen, die ungewollt kinderlos sind oder aus gesundheitlichen Gründen keine Kinder bekommen können, sollten nicht zusätzlich finanziell belastet werden, ohne dass ihre individuellen Lebensumstände berücksichtigt werden.</p><p>Wir fordern deshalb:<br/>1. Keine weitere pauschale Erhöhung des Beitragszuschlags für Kinderlose.<br/>2. Eine transparente und sozial gerechte Überprüfung der bestehenden Zuschlagsregelung.<br/>3. Eine Pflegefinanzierung, die unterschiedliche Lebensrealitäten berücksichtigt und niemanden allein aufgrund seiner Kinderlosigkeit abwertet oder benachteiligt.<br/>4. Eine öffentliche und parlamentarische Diskussion über faire Alternativen zur Finanzierung der Pflegeversicherung.</p><p>Gleichberechtigung bedeutet, unterschiedliche Lebenswege zu respektieren. Niemand sollte sich dafür rechtfertigen müssen, keine Kinder zu haben. Die Finanzierung unseres Pflegesystems ist eine gesamtgesellschaftliche Aufgabe und verdient eine Lösung, die Solidarität ermöglicht, ohne Menschen pauschal für ihre Lebensumstände zusätzlich zu belasten.</p><p>Wir bitten den Deutschen Bundestag und die Bundesregierung, diese Forderungen zu prüfen und die geplante Beitragserhöhung zu überdenken.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Die Bundesregierung plant, das akute Defizit der <a href=\"https://www.focus.de/finanzen/pflegereform-beschlossen-das-aendert-sich-jetzt-fuer-sie-kinderlose-und-topverdiener-zahlen-mehr_e42b4a8a-bc44-4f8a-ade9-275f3b0d1915.html\" rel=\"noopener\" target=\"_blank\">sozialen Pflegeversicherung ab dem 1. Januar 2027 </a>maßgeblich durch eine stärkere finanzielle Belastung kinderloser Menschen aufzufangen. Während der allgemeine Beitragssatz stabil bleiben soll, wird der Zuschlag für Kinderlose, den diese komplett alleine tragen müssen, um 0,3 Prozentpunkte angehoben. Für Betroffene bedeutet dies eine spürbare finanzielle Mehrbelastung. Diese Maßnahme greift tief in die Lebensrealitäten von Millionen Bürgerinnen und Bürgern ein und bedarf einer dringenden Korrektur.</p><p>1. Kinderlosigkeit ist keine bewusste Verweigerung gesellschaftlicher Verantwortung<br/>Kinderlosigkeit hat viele Gesichter und Ursachen. Manche Menschen wünschen sich sehnlichst Kinder, können aber aus gesundheitlichen, biologischen oder persönlichen Gründen keine bekommen. Andere finden nicht den passenden Partner oder entscheiden sich aus individuellen Lebensumständen bewusst gegen eigene Kinder. Diese Schicksale und Lebenswege lassen sich nicht über einen Kamm scheren. Die pauschale Annahme, Kinderlosigkeit sei ein rein persönliches Versäumnis, das finanziell „bestraft“ werden muss, ist unzeitgemäß und ungerecht.</p><p>2. Betroffene werden doppelt belastet<br/>Gerade Menschen, die ungewollt kinderlos sind, erleben diese pauschale Gesetzgebung wie das „Streuen von Salz in eine offene Wunde“. Sie tragen bereits oft erhebliche Kosten für medizinische Behandlungen (z.B. Reproduktionsmedizin) selbst und werden nun im Alterssicherungssystem zusätzlich finanziell benachteiligt, ohne dass ihre individuellen Lebensumstände oder Schicksale im Gesetz (§ 55 SGB XI) berücksichtigt werden.</p><p>3. Solidarität ist eine gesamtgesellschaftliche Aufgabe<br/>Eine solidarische Gesellschaft muss die Pflege ihrer älteren und pflegebedürftigen Menschen finanzieren. Kinderlose Menschen leisten dazu bereits einen enormen Beitrag: Sie zahlen den vollen regulären Pflegebeitrag, finanzieren durch ihre Steuern das Familien- und Kindergeldsystem mit und übernehmen im privaten Umfeld oft die Pflege und Unterstützung von Angehörigen oder Freunden. Die Verantwortung für das Pflegesystem darf nicht einseitig und disproportional auf eine Gruppe abgewälzt werden, um eine echte Strukturreform des Systems zu umgehen.</p>",
     "started_by": "Stephanie Haseloff-Eifler",
     "category": "Bürgerrechte",
     "category_url": "https://www.openpetition.de/petitionen?category=58#petitionen",
     "country": "DE",
-    "signatures": 8,
+    "signatures": 51,
     "start_date": "2026-09-30",
     "status": "online",
-    "last_seen": "2026-10-02T20:12:55+00:00",
+    "last_seen": "2026-10-05T18:44:55-06:00",
     "offline_since": null,
     "tags": [
       "Kinderlose",
@@ -135222,7 +135362,12 @@
       "Bundesregierung",
       "Lebensumstände"
     ],
-    "last_checked": "2026-10-02T20:12:55+00:00"
+    "last_checked": "2026-10-05T18:44:55-06:00",
+    "lang": "de",
+    "campaign_id": "openpetition:gleichbehandlung-statt-finanzieller-benachteiligung-kinderloser-menschen",
+    "i18n_state": {
+      "en": "fehlt"
+    }
   },
   "unser-tipi-soll-bleiben-2": {
     "slug": "unser-tipi-soll-bleiben-2",
@@ -135231,6 +135376,10 @@
       {
         "checked_at": "2026-10-02T20:12:55+00:00",
         "count": 118
+      },
+      {
+        "checked_at": "2026-10-05T18:44:55-06:00",
+        "count": 258
       }
     ],
     "title": "Unser Tipi soll bleiben!",
@@ -135242,10 +135391,10 @@
     "category": "Soziales",
     "category_url": "https://www.openpetition.de/at/petitionen?category=39#petitionen",
     "country": "AT",
-    "signatures": 118,
+    "signatures": 258,
     "start_date": "2026-10-01",
     "status": "online",
-    "last_seen": "2026-10-02T20:12:55+00:00",
+    "last_seen": "2026-10-05T18:44:55-06:00",
     "offline_since": null,
     "tags": [
       "Tipi",
@@ -135259,7 +135408,12 @@
       "Erhalt",
       "Verein"
     ],
-    "last_checked": "2026-10-02T20:12:55+00:00"
+    "last_checked": "2026-10-05T18:44:55-06:00",
+    "lang": "de",
+    "campaign_id": "openpetition:unser-tipi-soll-bleiben-2",
+    "i18n_state": {
+      "en": "fehlt"
+    }
   },
   "kein-hundeverbot-im-bank-austria-kunstpark-1210-wien": {
     "slug": "kein-hundeverbot-im-bank-austria-kunstpark-1210-wien",
@@ -135268,6 +135422,10 @@
       {
         "checked_at": "2026-10-02T20:12:55+00:00",
         "count": 63
+      },
+      {
+        "checked_at": "2026-10-05T18:44:55-06:00",
+        "count": 150
       }
     ],
     "title": "Kein Hundeverbot im Bank Austria Kunstpark (1210 Wien)",
@@ -135279,10 +135437,10 @@
     "category": "Bürgerrechte",
     "category_url": "https://www.openpetition.de/at/petitionen?category=58#petitionen",
     "country": "AT",
-    "signatures": 63,
+    "signatures": 150,
     "start_date": "2026-10-02",
     "status": "online",
-    "last_seen": "2026-10-02T20:12:55+00:00",
+    "last_seen": "2026-10-05T18:44:55-06:00",
     "offline_since": null,
     "tags": [
       "Innen",
@@ -135296,7 +135454,12 @@
       "Täglich",
       "Durchqueren"
     ],
-    "last_checked": "2026-10-02T20:12:55+00:00"
+    "last_checked": "2026-10-05T18:44:55-06:00",
+    "lang": "de",
+    "campaign_id": "openpetition:kein-hundeverbot-im-bank-austria-kunstpark-1210-wien",
+    "i18n_state": {
+      "en": "fehlt"
+    }
   },
   "faire-besteuerung-von-alleinerziehenden-ohne-unterhalt-im-kanton-zuerich": {
     "slug": "faire-besteuerung-von-alleinerziehenden-ohne-unterhalt-im-kanton-zuerich",
@@ -135305,6 +135468,10 @@
       {
         "checked_at": "2026-10-02T20:12:55+00:00",
         "count": 34
+      },
+      {
+        "checked_at": "2026-10-05T18:44:55-06:00",
+        "count": 57
       }
     ],
     "title": "Faire Besteuerung von Alleinerziehenden ohne Unterhalt im Kanton Zürich",
@@ -135316,11 +135483,11 @@
     "category": "Steuern",
     "category_url": "https://www.openpetition.de/ch/petitionen?category=16#petitionen",
     "country": "CH",
-    "signatures": 34,
+    "signatures": 57,
     "goal": 500,
     "start_date": "2026-10-01",
     "status": "online",
-    "last_seen": "2026-10-02T20:12:55+00:00",
+    "last_seen": "2026-10-05T18:44:55-06:00",
     "offline_since": null,
     "tags": [
       "Kinder",
@@ -135334,7 +135501,12 @@
       "Kanton",
       "Weder"
     ],
-    "last_checked": "2026-10-02T20:12:55+00:00"
+    "last_checked": "2026-10-05T18:44:55-06:00",
+    "lang": "de",
+    "campaign_id": "openpetition:faire-besteuerung-von-alleinerziehenden-ohne-unterhalt-im-kanton-zuerich",
+    "i18n_state": {
+      "en": "fehlt"
+    }
   },
   "krisengewinne-gerecht-besteuern-fuer-eine-europaeische-uebergewinnsteuer": {
     "slug": "krisengewinne-gerecht-besteuern-fuer-eine-europaeische-uebergewinnsteuer",
@@ -135343,6 +135515,10 @@
       {
         "checked_at": "2026-10-02T20:12:55+00:00",
         "count": 21
+      },
+      {
+        "checked_at": "2026-10-05T18:44:55-06:00",
+        "count": 52
       }
     ],
     "title": "Krisengewinne gerecht besteuern: Für eine europäische Übergewinnsteuer!",
@@ -135354,11 +135530,11 @@
     "category": "Steuern",
     "category_url": "https://www.openpetition.de/petitionen?category=16#petitionen",
     "country": "DE",
-    "signatures": 21,
+    "signatures": 52,
     "goal": 10000,
     "start_date": "2026-10-02",
     "status": "online",
-    "last_seen": "2026-10-02T20:12:55+00:00",
+    "last_seen": "2026-10-05T18:44:55-06:00",
     "offline_since": null,
     "tags": [
       "Europäische",
@@ -135372,7 +135548,12 @@
       "Unverzüglich",
       "Krise"
     ],
-    "last_checked": "2026-10-02T20:12:55+00:00"
+    "last_checked": "2026-10-05T18:44:55-06:00",
+    "lang": "de",
+    "campaign_id": "openpetition:krisengewinne-gerecht-besteuern-fuer-eine-europaeische-uebergewinnsteuer",
+    "i18n_state": {
+      "en": "fehlt"
+    }
   },
   "tempo-30-auf-der-furttalstrasse-in-zuerich-affoltern-zum-schutz-unserer-kinder-und-tiere": {
     "slug": "tempo-30-auf-der-furttalstrasse-in-zuerich-affoltern-zum-schutz-unserer-kinder-und-tiere",
@@ -135396,7 +135577,7 @@
     "goal": 1000,
     "start_date": "2026-09-30",
     "status": "online",
-    "last_seen": "2026-10-02T20:12:55+00:00",
+    "last_seen": "2026-10-05T18:44:55-06:00",
     "offline_since": null,
     "tags": [
       "Furttalstrasse",
@@ -135410,7 +135591,12 @@
       "Umliegenden",
       "Wohnhäusern"
     ],
-    "last_checked": "2026-10-02T20:12:55+00:00"
+    "last_checked": "2026-10-05T18:44:55-06:00",
+    "lang": "de",
+    "campaign_id": "openpetition:tempo-30-auf-der-furttalstrasse-in-zuerich-affoltern-zum-schutz-unserer-kinder-und-tiere",
+    "i18n_state": {
+      "en": "fehlt"
+    }
   },
   "einzelzimmer-zuschlag-muss-weg-2": {
     "slug": "einzelzimmer-zuschlag-muss-weg-2",
@@ -135419,6 +135605,10 @@
       {
         "checked_at": "2026-10-02T20:12:55+00:00",
         "count": 6
+      },
+      {
+        "checked_at": "2026-10-05T18:44:55-06:00",
+        "count": 47
       }
     ],
     "title": "Einzelzimmer-Zuschlag muss weg",
@@ -135430,10 +135620,10 @@
     "category": "Soziales",
     "category_url": "https://www.openpetition.de/at/petitionen?category=39#petitionen",
     "country": "AT",
-    "signatures": 6,
+    "signatures": 47,
     "start_date": "2026-10-01",
     "status": "online",
-    "last_seen": "2026-10-02T20:12:55+00:00",
+    "last_seen": "2026-10-05T18:44:55-06:00",
     "offline_since": null,
     "tags": [
       "Alleinreisende",
@@ -135447,7 +135637,12 @@
       "Beherbergungsbetrieben",
       "Einzelzimmer-Zuschlag"
     ],
-    "last_checked": "2026-10-02T20:12:55+00:00"
+    "last_checked": "2026-10-05T18:44:55-06:00",
+    "lang": "de",
+    "campaign_id": "openpetition:einzelzimmer-zuschlag-muss-weg-2",
+    "i18n_state": {
+      "en": "fehlt"
+    }
   },
   "eine-pumptrack-fuer-geseke-mehr-bewegung-fuer-kids": {
     "slug": "eine-pumptrack-fuer-geseke-mehr-bewegung-fuer-kids",
@@ -135902,5 +136097,385 @@
       "Bundesregierung"
     ],
     "last_checked": "2026-10-05T04:07:47-06:00"
+  },
+  "keine-rueckfuehrung-in-die-gefahr-reformiert-das-hkue": {
+    "slug": "keine-rueckfuehrung-in-die-gefahr-reformiert-das-hkue",
+    "first_seen": "2026-10-05T18:44:55-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-05T18:44:55-06:00",
+        "count": 675
+      }
+    ],
+    "title": "Keine Rückführung in die Gefahr! Reformiert das HKÜ!",
+    "summary": "Für das Wohl der Kinder: Warum das HKÜ-Verfahren dringend reformiert werden muss! Das Haager Übereinkommen über die zivilrechtlichen Aspekte internationaler Kindesentführung (HKÜ) wurde ursprünglich geschaffen, um Kinder vor eigenmächtigen Entzügen durch einen Elternteil zu schützen. In der Praxis führt die starre Anwendung des Abkommens heute jedoch zu untragbarem Leid – insbesondere für gewaltbetroffene Mütter und ihre Kinder. ​Das HKÜ wird zunehmend missbraucht, um Mütter, die vor häuslicher",
+    "image_url": "https://www.openpetition.de/images/petition/keine-rueckfuehrung-in-die-gefahr-reformiert-das-hkue_1790844250_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/keine-rueckfuehrung-in-die-gefahr-reformiert-das-hkue",
+    "description_full": "<!--marker--><p><b>Für das Wohl der Kinder: Warum das HKÜ-Verfahren dringend reformiert werden muss!</b></p><p>Das <i>Haager Übereinkommen über die zivilrechtlichen Aspekte internationaler Kindesentführung (HKÜ)</i> wurde ursprünglich geschaffen, um Kinder vor eigenmächtigen Entzügen durch einen Elternteil zu schützen. In der Praxis führt die starre Anwendung des Abkommens heute jedoch zu untragbarem Leid – insbesondere für gewaltbetroffene Mütter und ihre Kinder.</p><p>​Das HKÜ wird zunehmend <b>missbraucht</b>, um Mütter, die vor häuslicher Gewalt und Partnerschaftsgewalt ins Ausland bzw. in ihr Herkunftsland fliehen, zur Rückkehr zu zwingen. Mütter werden so vor die unmenschliche Wahl gestellt: Entweder kehren sie an den <b>Ort der Gewalt</b> zurück, oder das Kind wird ihnen <b>entzogen</b> und zum mutmaßlichen Täter <b>zurückgeschickt</b>.</p><p>​<b>Wir fordern eine dringende Reform der Anwendung und Gesetzgebung des HKÜ!</b></p><p>​<b>Warum das wichtig ist:</b></p><p>Das HKÜ darf nicht länger als Instrument der Macht und Kontrolle missbraucht werden! Kinder brauchen <b>Sicherheit</b> und ein <b>gewaltfreies Umfeld</b> – <b>kein starres Formalrecht</b>, <b><i>das sie und ihre schützenden Elternteile re-traumatisiert</i></b>.</p><p>​<b>Unterzeichnen Sie diese Petition, um dem Leid betroffener Familien ein Ende zu setzen und das HKÜ endlich kindgerecht und gewaltbewusst zu reformieren!</b></p>\n<h3>Begründung</h3>\n<!--marker--><p>Meine Schwester (deutsche Staatsbürgerin) ist Mitte 2024 zu ihrem Noch-Ehemann in die USA gezogen. Ein Jahr später kam ihr Kind zur Welt.</p><p>Nur wenige Monate später zerbrach unser Leben.</p><p>Noch bevor es zu der Eskalation kam, wurde die Situation für meine Schwester unerträglich: Aus Eifersucht verbot ihr Noch-Ehemann den Umgang mit dem gemeinsamen Baby und hielt ihr das Kind vor. Meine Schwester rief daraufhin die Polizei. Diese wollte jedoch nicht weiterhelfen.</p><p>Nachdem meine Schwester und ihr Noch-Ehemann aus beruflichen Gründen in einen anderen US-Bundesstaat umgezogen sind, reiste unser Vater zu ihnen in die USA, um seine Tochter und seine Enkelin zu besuchen. Während seines Aufenthalts erhielt meine Schwester einen Anruf ihres Noch-Ehemanns. Er erklärte ihr, dass es kurz zuvor zu einer körperlichen Auseinandersetzung zwischen ihm und unserem Vater gekommen sei.</p><p>Als meine Schwester nach Hause zurückkehrte, fand sie unseren Vater leblos im Kinderzimmer. Sie begann sofort mit Wiederbelebungsmaßnahmen und verständigte den Notruf. Trotz aller Bemühungen konnte sein Leben nicht mehr gerettet werden.</p><p>Bis heute ist dieser Verlust für uns unbegreiflich.</p><p>Nach dem Vorfall wurde zunächst eine einstweilige Verfügung gegen den Noch-Ehemann meiner Schwester erlassen. Diese wurde später wieder aufgehoben. Meine Schwester fühlte sich in dieser Situation weitgehend allein gelassen und suchte verzweifelt nach rechtlicher Unterstützung.</p><p>Kurz darauf ist sie auf Anraten ihrer amerikanische Anwälte nach Deutschland zurückgekehrt. Seit ihrer Rückkehr kämpft sie mit anwaltlicher Unterstützung für das alleinige Sorgerecht ihrer Tochter. Gleichzeitig bemüht sie sich darum, dass die Umstände des Todes unseres Vaters weiterhin rechtlich überprüft werden.</p><p>Im Juli hat ihr Noch-Ehemann ein HKÜ-Verfahren gegen sie einleiten lassen. Dieses hat sie nun auch in zweiter Instanz verloren. Ihre Tochter soll in die USA zurückkehren - auch ohne Mutter, so die Entscheidung. Meine Schwester leidet unter einer schweren PTBS durch die gesamte Situation, welche die Gerichte jedoch für gering gravierend erachten. Eine Rückkehr sei laut ihnen möglich, dies widerspricht den Diagnosen und Meinungen mehrerer Fachärzte.</p><p>Das HKÜ hat uns jetzt gezeigt: eine verpflichtende Prüfung von Gewaltberichten, Personencharakteristika, Sorge- &amp; Umgangsrecht uvm. müssen endlich berücksichtigt werden!</p><p>Nachdem uns bereits unser Vater gewaltsam genommen wurde, wird unsere Familie nun komplett zerstört und gebrochen.</p><p>Nicht nur wir, auch viele andere verzweifelte Familien brauchen eure Unterstützung! Wir sind nicht alleine, uns erreichen viele Nachrichten von anderen Betroffenen.</p><p>Die Opfer müssen endlich gehört werden!</p><p>---</p><p><b>For the Sake of the Children: Why 1980 Hague Convention Proceedings Urgently Need Reform!</b> ​<br/>The <i>Hague Convention on the Civil Aspects of International Child Abduction</i> was originally established to protect children from arbitrary removals by a parent.</p><p>In practice, however, the rigid application of the agreement today leads to unbearable suffering—especially for mothers affected by violence and their children. The Hague Abduction Convention is increasingly being <b>abused</b> to force mothers who flee abroad or to their country of origin from domestic and intimate partner violence to return. Mothers are thus faced with an inhumane choice: either return to the <b>site of violence</b>, or have the child <b>taken away</b> from them and sent back to the alleged perpetrator. ​</p><p><b>We demand an urgent reform of the application and legislation of the Hague Abduction Convention!</b></p><p><b>Why this matters:</b> ​</p><p>The Hague Abduction Convention must no longer be abused as an instrument of power and control! Children need <b>safety</b> and a <b>violence-free environment </b>— not rigid formal law that re-traumatizes them and their protective parents.</p><p>​<b>Sign this petition to put an end to the suffering of affected families and to finally reform the Hague Abduction Convention to make it child-friendly and violence-aware!</b> <b>​</b></p><p>In July, my sisters estranged husband initiated Hague Abduction Convention proceedings against her. She has now lost this case on appeal (in the second instance) as well. Her daughter is ordered to return to the USA — even without her mother, according to the ruling. My sister suffers from severe PTSD as a result of the entire situation, which the courts, however, deem to be of minor severity. They claim a return is possible, contradicting the diagnoses and opinions of several medical specialists.<br/>​<br/>The current Hague Abduction Convention has shown us: mandatory examination of violence reports, personal traits, custody and contact rights, and much more must finally be taken into account!</p><p>Our father was already violently taken from us, now our family is being completely destroyed and broken. Not only us, many other desperate families need your support!</p><p>We are not alone; we are receiving many messages from other affected individuals. The victims must finally be heard!</p>",
+    "started_by": "Petent/in nicht öffentlich",
+    "category": "Familie",
+    "category_url": "https://www.openpetition.de/petitionen?category=14#petitionen",
+    "country": "DE",
+    "signatures": 675,
+    "goal": 1000,
+    "start_date": "2026-10-01",
+    "lang": "de",
+    "campaign_id": "openpetition:keine-rueckfuehrung-in-die-gefahr-reformiert-das-hkue",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-05T18:44:55-06:00",
+    "offline_since": null,
+    "tags": [
+      "Schwester",
+      "Convention",
+      "Kinder",
+      "Hague",
+      "Abduction",
+      "Wurde",
+      "Noch-Ehemann",
+      "Mütter",
+      "Situation",
+      "Children"
+    ],
+    "last_checked": "2026-10-05T18:44:55-06:00"
+  },
+  "fuer-einen-zukunftsstabilen-oepnv-in-bonn-keine-kappung-von-buslinien-vorfahrt-fuer-bahn-und-bus": {
+    "slug": "fuer-einen-zukunftsstabilen-oepnv-in-bonn-keine-kappung-von-buslinien-vorfahrt-fuer-bahn-und-bus",
+    "first_seen": "2026-10-05T18:44:55-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-05T18:44:55-06:00",
+        "count": 191
+      }
+    ],
+    "title": "Für einen zukunftsstabilen ÖPNV in Bonn, keine Kappung von Buslinien, Vorfahrt für Bahn und Bus",
+    "summary": "Forderungen: Die Buslinien 610 und 611 fahren wie schon bisher nach Mehlem und Heiderhof, ein Umstieg am Godesberger Bahnhof entfällt. Die Linien 604 und 605 halten ebenfalls wie bisher am Opernhaus.",
+    "image_url": "https://www.openpetition.de/images/petition/fuer-einen-zukunftsstabilen-oepnv-in-bonn-keine-kappung-von-buslinien-vorfahrt-fuer-bahn-bus_1791125520_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/fuer-einen-zukunftsstabilen-oepnv-in-bonn-keine-kappung-von-buslinien-vorfahrt-fuer-bahn-und-bus",
+    "description_full": "<!--marker--><p><b>Forderungen: </b></p><p>Die Buslinien 610 und 611 fahren wie schon bisher nach Mehlem und Heiderhof, ein Umstieg am Godesberger Bahnhof entfällt.<br/>Die Linien 604 und 605 halten ebenfalls wie bisher am Opernhaus.         </p>\n<h3>Begründung</h3>\n<!--marker--><p>Die Bonner Buslinien 610 &amp; 611 sollen zukünftig am Bad Godesberger Bahnhof enden und die Weiterfahrt nach Mehlem bzw. zum Heiderhof von einer neuen Linie übernommen werden, wie zurzeit bei den SWB erwogen wird. Das zwingt die Fahrgäste zum Umstieg. Wie seit vielen Jahren bekannt ist, kostet jeder Umstieg Fahrgäste. Der gleiche Effekt tritt ein, wenn die Linien 604 &amp; 605 nicht mehr über die Haltestelle Opernhaus fahren. Fahrgastverluste sind in Zeiten des beschleunigten Klimawandels kontraproduktiv. Ein gut funktionierender ÖPNV wird in den nächsten Jahren immer wichtiger, um den motorisierten Individualverkehr in stadtverträglichen Grenzen zu halten.</p>",
+    "started_by": "Verkehrsforum Bonner Bürgerinitiativen",
+    "category": "Umwelt",
+    "category_url": "https://www.openpetition.de/petitionen?category=46#petitionen",
+    "country": "DE",
+    "signatures": 191,
+    "start_date": "2026-10-04",
+    "lang": "de",
+    "campaign_id": "openpetition:fuer-einen-zukunftsstabilen-oepnv-in-bonn-keine-kappung-von-buslinien-vorfahrt-fuer-bahn-und-bus",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-05T18:44:55-06:00",
+    "offline_since": null,
+    "tags": [
+      "Buslinien",
+      "Umstieg",
+      "Bisher",
+      "Godesberger",
+      "Heiderhof",
+      "Opernhaus",
+      "Bahnhof",
+      "Fahren",
+      "Halten",
+      "Linien"
+    ],
+    "last_checked": "2026-10-05T18:44:55-06:00"
+  },
+  "jetzt-handeln-integriertes-verkehrskonzept-fuer-ein-sicheres-ribbesbuettel": {
+    "slug": "jetzt-handeln-integriertes-verkehrskonzept-fuer-ein-sicheres-ribbesbuettel",
+    "first_seen": "2026-10-05T18:44:55-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-05T18:44:55-06:00",
+        "count": 68
+      }
+    ],
+    "title": "Jetzt handeln! Integriertes Verkehrskonzept für ein sicheres Ribbesbüttel",
+    "summary": "Geben Sie Ribbesbüttel Lebensqualität und Sicherheit zurück. Bitte unterschreiben Sie jetzt für ein zukunftsfähiges Verkehrskonzept! Zur Sicherheit unserer Kinder, unserer Alten und unserer Radfahrer brauchen wir jetzt eine Geschwindigkeitsbegrenzung von 30 km/h und Überquerungshilfen an unseren Hauptstraßen. Große Probleme gibt es in der Masch, an der Dorfstraße, an der Peiner Landstraße und der Winkler Straße. Die Fahrzeuge sind einfach zu schnell, um sicher zu leben. In den vergangenen Jahren",
+    "image_url": "https://www.openpetition.de/images/default_petition.jpg",
+    "url": "https://www.openpetition.de/petition/online/jetzt-handeln-integriertes-verkehrskonzept-fuer-ein-sicheres-ribbesbuettel",
+    "description_full": "<!--marker--><p>Geben Sie Ribbesbüttel Lebensqualität und Sicherheit zurück. Bitte unterschreiben Sie jetzt für ein zukunftsfähiges Verkehrskonzept!</p><p><b>Zur Sicherheit unserer Kinder, unserer Alten und unserer Radfahrer brauchen wir jetzt eine Geschwindigkeitsbegrenzung von 30 km/h und Überquerungshilfen an unseren Hauptstraßen. </b></p><p>Große Probleme gibt es in der Masch, an der Dorfstraße, an der Peiner Landstraße und der Winkler Straße. Die Fahrzeuge sind einfach zu schnell, um sicher zu leben.<b> </b>In den vergangenen Jahren gab es Unfälle mit Verletzten, Klagen und Streitigkeiten. Jede größere Umleitung, die durch unseren Ort führt, löst ein Chaos aus. Aber auch ohne Umleitung ist es täglich zu den Stoßzeiten schwierig.</p><p><b>Wir wollen in Ribbesbüttel die Gefahren und die Lärmbelastung des normalen Straßenverkehrs durch eine langsamere Geschwindigkeit auf das Mögliche, für alle Parteien Zumutbare reduzieren. Viele andere Dörfer machen es vor, es gibt keinen Grund, Ribbesbüttel baulich und rechtlich im Stich zu lassen. </b></p><p>Wenn sich jetzt nichts ändert, dann wird es unserer Ansicht nach wieder passieren. Es wird weitere Unfälle geben. Anwohner werden wieder auf der Straße parken, weil sie den Verkehr verlangsamen wollen und andere werden auf der Straße parken, weil sie anders nicht mehr vom Hof kommen.<br/>Kinder werden Zuhause bleiben, weil der Weg zum Spielplatz ohne Erwachsenen zu gefährlich ist.</p><p><b>Wir können nicht warten, bis die neue B4 kommt. Wir brauchen heute Sicherheit auf unseren Straßen. Wir brauchen jetzt ein neues Verkehrskonzept. Es ist schon schlimm genug.</b></p><p>Wir fordern die zeitnahe Prüfung, Planung und Umsetzung folgender Einzelmaßnahmen im Rahmen des neuen Verkehrskonzepts:</p><ul><li><b>Dorfstraße</b>: Tempo 30, Zebrastreifen und dauerhafte Bordsteinabsenkung vor der Grundschule</li><li><b>Masch</b>: Optische Bremssignale am Ortseingang, Tempo 30, Hilfe zum Überqueren</li><li><b>Peiner Landstraße</b>: Optische Bremssignale an beiden Ortseingängen, Tempo 30, Hilfe zum Überqueren im Bereich der Bushaltestelle Heerstraße, Freigabe des Fußweges für Radfahrer</li><li><b>Winkler Straße</b>: Optische Bremssignale am Ortseingang, Tempo 30, Zebrastreifen zwischen Gartenweg und \"Vor dem Birkenkamp\"</li></ul>\n<h3>Begründung</h3>\n<!--marker--><p>Die Verkehrsdichte hat sich in den letzten Jahren durch Pendler- und Ausweichverkehr vervielfacht. Besonders der Lkw-Verkehr durch Ribbesbüttel<i> </i>hat massiv zugenommen. Dies führt auf den Hauptstraßen unseres Ortes zu einer kontinuierlich steigenden Gefahr für alle, die nicht in einem Auto sitzen. Besonders gefährdet sind Radfahrer, Schulkinder und langsame Fußgänger.<br/>Auch sind die Anwohner ständigem Lärm ausgesetzt.</p><p><b>Ribbesbüttels Masch und Dorfstraße sind eng, dunkel und unübersichtlich, sie haben leider teilweise sehr schmale Fußwege. Auf dem Schulweg muss die Straße deswegen mehrfach überquert werden. </b></p><p>In den Kurven der Masch und der Dorfstraße ist es so eng, dass die Bordsteinkanten immer wieder kaputtgefahren werden. Lkw, Busse und landwirtschaftliche Fahrzeuge haben Probleme, wenn sie sich begegnen. Es gab bereits Unfälle in beiden Straßen.<br/>Auch an der Peiner Landstraße sieht die StVO vor, dass Radfahrer auf der Straße fahren, was durch das schnelle, hohe Verkehrsaufkommen und Überholen in der Kurve eine Gefährdung für alle Beteiligten ist. Die Ein- und Ausfahrt zum Tierheim ist schon lange ein Problem. Die Ausfahrt aus dem Sonnenweg ist momentan nur in eine Richtung möglich.<br/>Die Peiner Landstraße muss an der Bushaltestelle der Heerstraße wenige Meter nach dem Ortseingang überquert werden, dort ist der ankommende Verkehr noch sehr schnell. Es gab dort bereits Unfälle.</p><p><b>Auch die Schulkinder aus dem Gartenweg und aus „Vor dem Birkenkamp“ sind beim Überqueren der Straße durch überhöhte Geschwindigkeit gefährdet. </b><br/><b>Überhöhte Geschwindigkeit ist an allen benannten Ortseingängen ein Problem. </b></p><p>Sobald eine größere Umleitung durch Ribbesbüttel führt, ist das Verkehrsaufkommen schlussendlich so hoch, dass das Auffahren auf die Peiner Landstraße nur noch erschwert möglich ist.<br/>In der Masch ist das Verlassen der Grundstücke mit Fahrzeugen durch die Kombination aus mangelnder Einsehbarkeit und hoher Geschwindigkeit des Verkehrs mit massiven Gefahren verbunden.</p><p>Diese Petition wurde durch eine Vielzahl engagierter Bürgerinnen und Bürger angeregt, die sich für unseren Wohnort stark machen.</p>",
+    "started_by": "Interessengemeinschaft zur Verkehrsberuhigung in Ribbesbüttel",
+    "category": "Verkehr",
+    "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
+    "country": "DE",
+    "signatures": 68,
+    "goal": 500,
+    "start_date": "2026-10-05",
+    "lang": "de",
+    "campaign_id": "openpetition:jetzt-handeln-integriertes-verkehrskonzept-fuer-ein-sicheres-ribbesbuettel",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-05T18:44:55-06:00",
+    "offline_since": null,
+    "tags": [
+      "Straße",
+      "Ribbesbüttel",
+      "Unserer",
+      "Landstraße",
+      "Peiner",
+      "Masch",
+      "Dorfstraße",
+      "Sicherheit",
+      "Radfahrer",
+      "Unseren"
+    ],
+    "last_checked": "2026-10-05T18:44:55-06:00"
+  },
+  "gegen-den-bebauungsplan-buero-und-gewerbegebiet-h-22-in-muelheim-an-der-ruhr": {
+    "slug": "gegen-den-bebauungsplan-buero-und-gewerbegebiet-h-22-in-muelheim-an-der-ruhr",
+    "first_seen": "2026-10-05T18:44:55-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-05T18:44:55-06:00",
+        "count": 27
+      }
+    ],
+    "title": "Gegen den Bebauungsplan Büro- und Gewerbegebiet H-22 in Mülheim an der Ruhr",
+    "summary": "Wir sprechen uns deutlich gegen den geplanten Büro- und Gewerbepark H22 unmittelbar an der Flughafensiedlung in Mülheim aus. Die großflächige Bebauung würde einen heute weitgehend offenen Bereich dauerhaft verändern. Zu erwarten sind zusätzliche Belastungen durch Verkehr, Lärm und Licht sowie erhebliche Eingriffe in Natur, Klima, Artenschutz und die Wohn- und Lebensqualität der angrenzenden Siedlung. Warum soll ein Büro- und Gewerbepark dieser Größenordnung ausgerechnet auf einer offenen Fläche",
+    "image_url": "https://www.openpetition.de/images/petition/gegen-den-bebauungsplan-buero-und-gewerbegebiet-h-22-in-muelheim-an-der-ruhr_1791136948_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/gegen-den-bebauungsplan-buero-und-gewerbegebiet-h-22-in-muelheim-an-der-ruhr",
+    "description_full": "<!--marker--><p>Wir sprechen uns deutlich gegen den geplanten Büro- und Gewerbepark H22 unmittelbar an der Flughafensiedlung in Mülheim aus.</p><p>Die großflächige Bebauung würde einen heute weitgehend offenen Bereich dauerhaft verändern. Zu erwarten sind zusätzliche Belastungen durch Verkehr, Lärm und Licht sowie erhebliche Eingriffe in Natur, Klima, Artenschutz und die Wohn- und Lebensqualität der angrenzenden Siedlung.</p><p>Warum soll ein Büro- und Gewerbepark dieser Größenordnung ausgerechnet auf einer offenen Fläche unmittelbar neben einer bestehenden Wohnsiedlung entstehen? Gerade angesichts des Klimawandels und der zunehmenden Bedeutung unversiegelter Grünflächen halten wir diesen Standort und diese Dimensionierung für nicht vertretbar. Wir fordern daher die ernsthafte Prüfung weniger konfliktträchtiger Alternativen und bestehender Flächenreserven in Mülheim und Essen, bevor weitere offene Flächen bebaut und versiegelt werden.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Unsere Bedenken betreffen nicht nur einzelne Auswirkungen, sondern deren Gesamtwirkung: zusätzlicher Verkehr und Parkdruck, Schleichverkehr durch Wohnstraßen, Lärm und Licht, eine mehrjährige Bauphase sowie Eingriffe in Klima, Kaltluft, Natur und Lebensräume.</p><p>Deshalb stellen wir die grundlegende Frage: Warum soll ein Büro- und Gewerbepark dieser Größenordnung gerade auf einer heute weitgehend offenen Fläche unmittelbar neben einer bestehenden Wohnsiedlung entstehen? Im Zuge des Klimawandels und der steigenden Notwendigkeit von Grünflächen halten wir dies für unverantwortlich.</p><p>Wir sind nicht gegen wirtschaftliche Entwicklung. Wir sind gegen diesen Standort und diese Dimensionierung. Bestehende Flächenreserven und weniger konfliktträchtige Alternativen in Mülheim und Essen wie bspw. leerstehende Bürogebäude müssen ernsthaft geprüft werden.</p><p>Bitte Unterstützen Sie uns und unser Zuhause mit Ihrer Unterschrift</p>",
+    "started_by": "Daniela Plath",
+    "category": "Bürgerrechte",
+    "category_url": "https://www.openpetition.de/petitionen?category=58#petitionen",
+    "country": "DE",
+    "signatures": 27,
+    "start_date": "2026-10-04",
+    "lang": "de",
+    "campaign_id": "openpetition:gegen-den-bebauungsplan-buero-und-gewerbegebiet-h-22-in-muelheim-an-der-ruhr",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-05T18:44:55-06:00",
+    "offline_since": null,
+    "tags": [
+      "Büro",
+      "Gewerbepark",
+      "Mülheim",
+      "Offenen",
+      "Unmittelbar",
+      "Größenordnung",
+      "Weitgehend",
+      "Eingriffe",
+      "Verkehr",
+      "Fläche"
+    ],
+    "last_checked": "2026-10-05T18:44:55-06:00"
+  },
+  "131-teilhabe-oder-einsamkeit-entlastungsbetrag-bei-pflegegrad-1-erhalten": {
+    "slug": "131-teilhabe-oder-einsamkeit-entlastungsbetrag-bei-pflegegrad-1-erhalten",
+    "first_seen": "2026-10-05T18:44:55-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-05T18:44:55-06:00",
+        "count": 24
+      }
+    ],
+    "title": "131€: Teilhabe oder Einsamkeit? Entlastungsbetrag bei Pflegegrad 1 erhalten!",
+    "summary": "Sehr geehrte Damen und Herren Abgeordnete, ich starte diese Petition als Privatperson, aber auch als Inhaber einer Alltagsbegleitung, der jeden Tag miterlebt, was der Entlastungsbetrag für Menschen mit Pflegegrad 1 bedeutet. Für die Menschen, die wir begleiten, sind 131 Euro nicht irgendeine Leistung. Sie sind der Unterschied zwischen Teilhabe und Vereinsamung, zwischen selbstbestimmtem Leben und Abhängigkeit. Ich erlebe sie täglich: die Menschen, für die der wöchentliche Besuch einer Alltagsbeg",
+    "image_url": "https://www.openpetition.de/images/petition/131-teilhabe-oder-einsamkeit-entlastungsbetrag-bei-pflegegrad-1-erhalten_1791102275_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/131-teilhabe-oder-einsamkeit-entlastungsbetrag-bei-pflegegrad-1-erhalten",
+    "description_full": "<!--marker--><p>Sehr geehrte Damen und Herren Abgeordnete,</p><p>ich starte diese Petition als Privatperson, aber auch als Inhaber einer Alltagsbegleitung, der jeden Tag miterlebt, was der Entlastungsbetrag für Menschen mit Pflegegrad 1 bedeutet. Für die Menschen, die wir begleiten, sind 131 Euro nicht irgendeine Leistung. Sie sind der Unterschied zwischen Teilhabe und Vereinsamung, zwischen selbstbestimmtem Leben und Abhängigkeit.</p><p>Ich erlebe sie täglich: die Menschen, für die der wöchentliche Besuch einer Alltagsbegleitung oft der einzige Moment ist, in dem sich jemand wirklich Zeit nimmt. Die noch ihren eigenen Haushalt führen könnten, wenn jemand den Boden wischt. Die noch zum Arzt gehen könnten, wenn sie begleitet werden. Es sind die ersten kleinen Gebrechen des Alters. Und genau dafür wurde der Pflegegrad 1 einmal gedacht: als frühe, niedrigschwellige Stütze, damit es gar nicht erst schlimmer wird.</p><p>Genau diese Stütze, 131 Euro im Monat, 1.572 Euro im Jahr, soll ab dem 1. Januar 2027 für rund 863.000 Menschen <a href=\"https://www.morgenpost.de/ratgeber-wissen/article413168020/entlastungsbeitrag-faellt-weg-pflegereform-2027.html\" rel=\"noopener\" target=\"_blank\">ersatzlos gestrichen</a> werden. Der angekündigte Ersatz? Eine Pflegebegleitung, die erst 2028 startet und die vor allem berät. Wer aber Hilfe beim Putzen, beim Einkaufen, beim Aufstehen braucht, dem nützt die beste Beratung der Welt nichts, wenn die Hände fehlen.</p><p>Ich sehe auch die pflegenden Angehörigen: die Tochter, die neben ihrem Beruf jede Nacht aufsteht, weil sie die Mutter nicht ins Heim geben will. Auch für sie wird alles knapp: Der bisherige Jahresbetrag für Verhinderungs- und Kurzzeitpflege von 3.539 Euro sinkt für viele auf 1.855 oder 2.285 Euro. Die Entlastung, die ihnen bleibt, wird kleiner, nicht größer.</p><p>Ja, auch Anbieter wie meiner sind von der Reform betroffen, nach Angaben des Bundesverbands Angebote zur Unterstützung im Alltag verlieren viele Betriebe bis zu 70 Prozent ihrer Grundlage, weil Menschen mit Pflegegrad 1 bis zu 40 Prozent ihrer Kundschaft stellen. Aber im Mittelpunkt dieser Petition stehen nicht Umsätze. Im Mittelpunkt stehen die Menschen, deren Alltagshilfe wegzubrechen droht. Strukturen, die über Jahrzehnte gewachsen sind, werden in wenigen Monaten zerschlagen, und was einmal weg ist, baut niemand neu auf. Die Folge ist absehbar: Menschen verlassen ihre Wohnung früher, als sie müssten, und landen in einer stationären Pflege, die keine Kapazitäten hat und am Ende teurer wird als jede der gestrichenen 131 Euro.</p><p>Ich bestreite nicht, dass die Pflegeversicherung einen hohen Reformbedarf hat. Aber eine Reform, die ausgerechnet bei der niedrigschwelligsten und präventivsten Leistung aller spart, widerspricht ihrem eigenen Ziel. Prävention darf nicht dadurch finanziert werden, dass man die Prävention abschafft.</p><p>Deshalb fordere ich:<br/></p><ul><li>Erhalt des Entlastungsbetrags in Pflegegrad 1, ohne Wenn und Aber; mindestens eine Übergangs- und Härtefallregelung, solange kein gleichwertiger Ersatz real existiert.</li><li>Keine faktische Kürzung der Verhinderungs- und Kurzzeitpflege, das Überbrückungsbudget muss mindestens das bisherige Niveau von 3.539 Euro im Jahr erreichen.</li><li>Übertragbarkeit des Sozialraumbudgets, nicht genutzte Beträge müssen wie bisher ins Folgehalbjahr übertragbar sein.</li><li>Keine Entweder-oder-Falle für Alltagsbegleitungen, Anerkennung nach § 45a SGB XI und Zulassung nach § 72 SGB XI müssen nebeneinander möglich bleiben.</li><li>Pflegebegleitung darf nicht erst ein Jahr später als Ersatz kommen, sie muss, wenn überhaupt, zusätzlich, zeitgleich und praktisch wirksam ausgestaltet werden.</li></ul><br/><p>Die im Referentenentwurf noch geplante Kürzung der Rentenbeiträge für pflegende Angehörige ist im Kabinettsbeschluss nicht mehr enthalten. Das zeigt: Korrekturen sind möglich. Der Bundestag entscheidet in diesem Winter, und damit entscheiden Sie, ob 863.000 Menschen ihre Alltagshilfe behalten oder verlieren.</p><p>Ich bitte Sie: Unterschreiben Sie nicht für mich. Unterschreiben Sie für die Menschen, für die 131 Euro der Einkauf, die Hand im Haushalt und der Mensch an der Tür sind. Halten Sie das Versprechen, dass Pflege eine Aufgabe unserer Solidargemeinschaft ist.</p><p>Mit freundlichen Grüßen<br/>Stefan Heyde<br/>(Inhaber einer Alltagsbegleitung, diese Petition aus persönlicher Überzeugung)</p>\n<h3>Begründung</h3>\n<!--marker--><p>Diese Petition ist mir wichtig, weil ich als Inhaber einer Alltagsbegleitung täglich erlebe, was 131 Euro für Menschen mit Pflegegrad 1 bedeuten:</p><p>Sie ermöglichen Hilfe im Haushalt, Begleitung zum Arzt oder beim Einkaufen und vor allem soziale Teilhabe. Wird diese Unterstützung gestrichen, drohen Einsamkeit, Überforderung und ein früherer Verlust der Selbstständigkeit.</p><p>Jetzt muss gehandelt werden, weil die geplanten Änderungen bereits zum 1. Januar 2027 greifen sollen.</p><p>Wenn bestehende Unterstützungsstrukturen jetzt wegfallen, lassen sie sich nicht kurzfristig wieder aufbauen. Es geht deshalb nicht um die Interessen einzelner Anbieter, sondern um die Frage, ob Menschen möglichst lange selbstbestimmt und in ihrem sozialen Umfeld leben können.</p>",
+    "started_by": "Stefan Heyde",
+    "category": "Gesundheit",
+    "category_url": "https://www.openpetition.de/petitionen?category=20#petitionen",
+    "country": "DE",
+    "signatures": 24,
+    "start_date": "2026-10-04",
+    "lang": "de",
+    "campaign_id": "openpetition:131-teilhabe-oder-einsamkeit-entlastungsbetrag-bei-pflegegrad-1-erhalten",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-05T18:44:55-06:00",
+    "offline_since": null,
+    "tags": [
+      "Euro",
+      "Pflegegrad",
+      "Alltagsbegleitung",
+      "Teilhabe",
+      "Inhaber",
+      "Entlastungsbetrag",
+      "Haushalt",
+      "Leistung",
+      "Täglich",
+      "Erlebe"
+    ],
+    "last_checked": "2026-10-05T18:44:55-06:00"
+  },
+  "grieserwiese-landshut-parkpreis-zurueck-auf-1-und-kiesparkplatz-kostenlos-2": {
+    "slug": "grieserwiese-landshut-parkpreis-zurueck-auf-1-und-kiesparkplatz-kostenlos-2",
+    "first_seen": "2026-10-05T18:44:55-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-05T18:44:55-06:00",
+        "count": 14
+      }
+    ],
+    "title": "Grieserwiese Landshut: Parkpreis zurück auf 1€ und Kiesparkplatz kostenlos",
+    "summary": "Die Stadt Landshut soll die Parkgebühren an der Grieserwiese wieder auf den Stand vor August 2026 zurücksetzen: * Der Tagespreis auf dem Parkplatz Grieserwiese soll wieder 1€ statt 2€ betragen. * Der Kiesparkplatz ist soll wieder kostenlos sein. * Die Höchstparkdauer von 10 Stunden soll aufgehoben werden. * Verwarnungen, die wegen der neuen Regeln ausgestellt wurden, sollen auf Antrag kulant aufgehoben werden. Dafür muss der Stadtrat die Gebührenänderung vom August zurücknehmen.",
+    "image_url": "https://www.openpetition.de/images/petition/grieserwiese-landshut-parkpreis-zurueck-auf-1-und-kiesparkplatz-kostenlos-2_1791201487_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/grieserwiese-landshut-parkpreis-zurueck-auf-1-und-kiesparkplatz-kostenlos-2",
+    "description_full": "<!--marker--><p>Die Stadt Landshut soll die Parkgebühren an der Grieserwiese wieder auf den Stand vor August 2026 zurücksetzen:</p><ul><li>Der Tagespreis auf dem Parkplatz Grieserwiese soll wieder 1€ statt 2€ betragen.</li><li>Der Kiesparkplatz ist soll wieder kostenlos sein.</li><li>Die Höchstparkdauer von 10 Stunden soll aufgehoben werden.</li><li>Verwarnungen, die wegen der neuen Regeln ausgestellt wurden, sollen auf Antrag kulant aufgehoben werden.</li></ul><p>Dafür muss der Stadtrat die Gebührenänderung vom August zurücknehmen.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Der Parkplatz an der Grieserwiese gehört für viele Menschen aus Landshut und dem Umland zum Alltag. Der Kiesparkplatz war über 20 Jahre lang kostenfrei nutzbar. Seit August 2026 kostet das Parken dort 2€ pro Tag statt bisher 1€, und es gilt eine Höchstparkdauer von 10 Stunden. Auf dem Kiesparkplatz gelten inzwischen dieselben Regeln.</p><p>Die Parkplätze werden für den Weg zur Arbeit, zur Ausbildung oder zum Studium genutzt, für Erholung an der Isar und für Besuche in der Innenstadt. Besonders betroffen sind Pendlerinnen und Pendler, Auszubildende, Studierende und Geringverdienende, die täglich auf einen Stellplatz in Innenstadtnähe angewiesen sind. Das gilt zum Beispiel für Beschäftigte im Einzelhandel, die in der Regel keinen Mitarbeiterparkplatz haben. Bei rund 20 Arbeitstagen im Monat steigen die Parkkosten von 20 € auf 40 €. In Zeiten gestiegener Lebenshaltungs- und Spritkosten sind solche Dauerbelastungen für viele Haushalte kaum tragbar. Die Höchstparkdauer von 10 Stunden erschwert zudem die Nutzung bei langen Arbeitstagen.</p><p>Die Änderung wurde zwar angekündigt, allerdings nur über einen begrenzten Zeitraum und mit Verwarnungszetteln an den Fahrzeugen. Wer in dieser Zeit nicht vor Ort war, etwa wegen Urlaub, Krankheit oder eines Auslandsaufenthalts, oder wer im Umland wohnt und nicht täglich in Landshut ist, hat davon nichts erfahren. Dauerhaft weist lediglich ein einzelnes Schild im seitlichen Einfahrtsbereich auf die neuen Gebühren hin (das leicht zu übersehen ist), sowie am Parkautomat. Wer den Platz jahrelang kostenfrei genutzt hat, rechnet nicht mit einer Änderung. Die Folge sind Verwarnungen gegen Personen, die von der neuen Regelung nichts wussten.</p><p>Ein bezahlbarer Parkplatz am Rand der Innenstadt ist für alle, die in Landshut arbeiten, lernen oder die Stadt besuchen, eine wichtige Entlastung. Die Stadt sollte daher kurzfristig handeln, die Gebührenerhöhung zurücknehmen und den Kiesparkplatz wieder kostenfrei zur Verfügung stellen.</p>",
+    "started_by": "Chiara-Maria Glöß",
+    "category": "Verkehr",
+    "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
+    "country": "DE",
+    "signatures": 14,
+    "start_date": "2026-10-05",
+    "lang": "de",
+    "campaign_id": "openpetition:grieserwiese-landshut-parkpreis-zurueck-auf-1-und-kiesparkplatz-kostenlos-2",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-05T18:44:55-06:00",
+    "offline_since": null,
+    "tags": [
+      "Kiesparkplatz",
+      "Grieserwiese",
+      "Landshut",
+      "August",
+      "Höchstparkdauer",
+      "Aufgehoben",
+      "Parkplatz",
+      "Stunden",
+      "Stadt",
+      "Verwarnungen"
+    ],
+    "last_checked": "2026-10-05T18:44:55-06:00"
+  },
+  "mrt-fuer-alle-rasche-diagnose-schnelle-behandlung-auch-fuer-das-obere-ennstal-und-das-ausseerland": {
+    "slug": "mrt-fuer-alle-rasche-diagnose-schnelle-behandlung-auch-fuer-das-obere-ennstal-und-das-ausseerland",
+    "first_seen": "2026-10-05T18:44:55-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-05T18:44:55-06:00",
+        "count": 451
+      }
+    ],
+    "title": "MRT für alle: Rasche Diagnose, schnelle Behandlung auch für das obere Ennstal und das Ausseerland",
+    "summary": "Ziel dieser Petition ist die Eintragung des MRT Schladming in den „Regionalen Strukturplan Gesundheit Steiermark“ (RSG-St). Für die Bevölkerung des oberen Ennstals und des gesamten Ausseerlandes gibt es derzeit keine angemessene Versorgung mit MRT-Untersuchungen (Magnetresonanztomograﬁe). Das bedeutet weitere Wege und längere Wartezeiten bei wichtigen Untersuchungen. Kaum eine Region in der Steiermark bietet so wenig allgemeinen Zugang zu diesen wichtigen bildgebenden Untersuchungen und Diagnose",
+    "image_url": "https://www.openpetition.eu/images/petition/ansuchen-um-eintrag-in-den-regionalen-strukturplan-gesundheit-steiermark-mrt_1776928651_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/mrt-fuer-alle-rasche-diagnose-schnelle-behandlung-auch-fuer-das-obere-ennstal-und-das-ausseerland",
+    "description_full": "<!--marker--><p>Ziel dieser Petition ist die Eintragung des MRT Schladming in den „Regionalen Strukturplan Gesundheit Steiermark“ (RSG-St).</p><p>Für die Bevölkerung des oberen Ennstals und des gesamten Ausseerlandes gibt es derzeit keine angemessene Versorgung mit MRT-Untersuchungen <br/>(Magnetresonanztomograﬁe). Das bedeutet weitere Wege und längere Wartezeiten bei wichtigen Untersuchungen. Kaum eine Region in der Steiermark bietet so wenig allgemeinen Zugang zu diesen wichtigen bildgebenden Untersuchungen und Diagnosen. Das ist umso weniger nachvollziehbar, handelt es sich doch um eine der bedeutendsten und stärksten Tourismusregionen mit deutlich erhöhtem Patientenaufkommen in den Winter- und Sommermonaten.</p><p>Im gesamten Bezirk Liezen - der bekanntlich der größte Bezirk Österreichs ist, größer als das Bundesland Vorarlberg - gibt es überhaupt nur in Rottenmann (ausschließlich innerhalb des Krankenhausbetriebes) und in Liezen MRT-Geräte, die im Regionalen Strukturplan Gesundheit Steiermark aufscheinen. Die Wartezeiten zeigen, dass das zu wenig für die rund 80.000 Bewohnerinnen und Bewohner des Bezirks Liezen ist.</p><p>Das Diagnostikum Schladming betreibt seit Anfang 2013 ein MRT im Klinikum der Diakonissen Schladming. Zu den ersten Patienten zählte Ski-Star Lindsey Vonn, die sich bei einem schweren Sturz bei der Ski-WM 2013 eine komplexe Knieverletzung zugezogen hatte.</p><p>Mittlerweile werden jährlich rund 4.000 Patientinnen und Patienten - über 75 Prozent davon aus der Region - im Diagnostikum Schladming untersucht. Der Bedarf ist also absolut gegeben - sowohl für die Versorgung der Bürgerinnen und Bürger im oberen Ennstal als auch für die der zahlreichen Touristinnen und Touristen in der Region. Auch für die Bevölkerung des Ausseerlandes können die Wartezeiten durch MRT-Untersuchungen in Schladming signiﬁkant gesenkt werden.</p><p>Bis dato erfolgen die MRT-Untersuchungen in Schladming auf rein privater Basis - das bedeutet, dass die Patientinnen und Patienten die Kosten zur Gänze selbst tragen müssen.</p><p>Ein Umstand, der nur durch eine Eintragung des Diagnostikum Schladming und des bestehenden MRT-Geräts in den Regionalen Strukturplan Steiermark verbessert werden kann. Diese Eintragung würde dem Diagnostikum Schladming den Wahlarztstatus zukommen lassen und es den Patientinnen und Patienten ermöglichen, einen Teil der Kosten von der Sozialversicherung erstattet zu bekommen.</p><p><b>Die Unterzeichner dieser Petition fordern daher die steirische Landespolitik dazu auf, die Benachteiligung des oberen Ennstals im Bereich der bildgebenden Diagnostik zu beenden und den MRT in Schladming in den Regionalen Strukturplan Gesundheit Steiermark aufzunehmen. Denn nur so gibt es raschere Diagnosen und schnellere Behandlungen für die örtliche Bevölkerung.</b></p>\n<h3>Begründung</h3>\n<!--marker--><p><b>DIE VORTEILE AUF EINEN BLICK:</b><br/></p><ul><li><b>Kostenübernahme:</b> Das MRT-Gerät ist in Schladming vorhanden, kann durch die Hürde der ausschließlich privaten Verrechnungsmöglichkeit aber nicht von allen Bürgerinnen und Bürgern genutzt werden. Durch die Aufnahme in den RSG-St würde eine Verrechnung auf Wahlarztbasis möglich. Das würde die ﬁnanzielle Belastung für die vorrangig steirischen Patientinnen und Patienten signiﬁkant reduzieren und einen fairen Zugang zu moderner Diagnostik ermöglichen.</li><li><b>Schnellere Behandlung für mehr Sicherheit:</b> Eine wohnortnahe und allgemein zugängliche bildgebende Versorgung erhöht die medizinische Sicherheit deutlich. Je schneller eine Diagnose gestellt wird, desto früher kann eine zielgerichtete Therapie eingeleitet und eine langwierige stationäre Behandlung im Krankenhaus vermieden werden. Angelehnt an des Motto der Landesregierung: rascher zur Diagnose, schneller zur Behandlung.</li><li><b>Kürzere Wege:</b> Die Aufnahme in den RSG-St würde kürzere Wege (derzeit von Schladming aus rund 50 Minuten Fahrzeit zu den nächsten MRT- und CT-Geräten nach Liezen oder Salzburg!), raschere Untersuchungstermine und somit schnellere Behandlungen bewirken. Gerade die wichtige Früherkennung von Erkrankungen und Verletzungen sollte nicht an andere Bundesländer und damit auf längere Fahrtwege und Wartezeiten ausgelagert werden.</li><li><b>Benachteiligung beenden:</b> Eine starke regionale Versorgungsstruktur stärkt das Vertrauen in das öffentliche Gesundheitssystem. Die Bevölkerung im Bezirk Liezen sowie die zahlreichen touristischen Gäste sollen im Bedarfsfall denselben Zugang zu zeitnaher Diagnostik erhalten wie andere Regionen der Steiermark.</li><li><b>Der Bedarf ist klar erkennbar:</b> Die vorhandenen diagnostischen Kapazitäten vor Ort werden stark nachgefragt. Obwohl die Patientinnen und Patienten die Kosten zur Gänze selbst tragen müssen, ﬁnden jährlich rund 4.000 MRT-Untersuchungen im Diagnostikum Schladming statt - 75 Prozent aus der Region. Es wurden qualiﬁzierte Arbeitsplätze in der Region geschaffen und könnten künftig weiter ausgebaut werden.</li><li><b>Kosten sparen durch Zusammenarbeit:</b> Neben dem MRT könnte auch das CT-Gerät (Computertomograf) im Krankenhaus der Diakonissen nicht nur für stationäre sonder auch für ambulante Patientinnen und Patienten genutzt werden. Das wäre kostensparend und volkswirtschaftlich äußerst sinnvoll.</li></ul>",
+    "started_by": "Diagnostikum",
+    "category": "Gesundheit",
+    "category_url": "https://www.openpetition.de/at/petitionen?category=20#petitionen",
+    "country": "AT",
+    "signatures": 451,
+    "start_date": "2026-10-01",
+    "lang": "de",
+    "campaign_id": "openpetition:mrt-fuer-alle-rasche-diagnose-schnelle-behandlung-auch-fuer-das-obere-ennstal-und-das-ausseerland",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-05T18:44:55-06:00",
+    "offline_since": null,
+    "tags": [
+      "Schladming",
+      "Steiermark",
+      "Patienten",
+      "Patientinnen",
+      "Region",
+      "MRT-Untersuchungen",
+      "Diagnostikum",
+      "Strukturplan",
+      "Bevölkerung",
+      "Wartezeiten"
+    ],
+    "last_checked": "2026-10-05T18:44:55-06:00"
+  },
+  "anrainer-gegen-dauerparker-fuer-eine-faire-parkregelung-in-der-friedhofstrasse-66-72": {
+    "slug": "anrainer-gegen-dauerparker-fuer-eine-faire-parkregelung-in-der-friedhofstrasse-66-72",
+    "first_seen": "2026-10-05T18:44:55-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-05T18:44:55-06:00",
+        "count": 34
+      }
+    ],
+    "title": "Anrainer gegen Dauerparker! – Für eine faire Parkregelung in der Friedhofstraße 66–72",
+    "summary": "Wir fordern die Marktgemeinde Langenzersdorf auf, die Parksituation in der Friedhofstraße 66–72, 2103 Langenzersdorf, zu überprüfen und eine geeignete Anrainer-Parkregelung einzuführen. Die vorhandenen Parkplätze sollen vorrangig den dort wohnenden Anrainerinnen und Anrainern zur Verfügung stehen. Dauerparken durch Firmenfahrzeuge bzw. Fahrzeughalter, die nicht in diesem Bereich wohnhaft sind, soll durch eine geeignete Regelung verhindert werden. Wir wünschen uns daher eine Kurzparkzone mit ents",
+    "image_url": "https://www.openpetition.eu/images/petition/anrainer-gegen-dauerparker-fuer-eine-faire-parkregelung-in-der-friedhofstrasse-66-72_1791178541_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/anrainer-gegen-dauerparker-fuer-eine-faire-parkregelung-in-der-friedhofstrasse-66-72",
+    "description_full": "<!--marker--><p>Wir fordern die Marktgemeinde Langenzersdorf auf, die Parksituation in der <b>Friedhofstraße 66–72, 2103 Langenzersdorf</b>, zu überprüfen und eine geeignete <b>Anrainer-Parkregelung</b> einzuführen.</p><p>Die vorhandenen Parkplätze sollen vorrangig den dort wohnenden Anrainerinnen und Anrainern zur Verfügung stehen. Dauerparken durch Firmenfahrzeuge bzw. Fahrzeughalter, die nicht in diesem Bereich wohnhaft sind, soll durch eine geeignete Regelung verhindert werden.</p><p>Wir wünschen uns daher eine <b>Kurzparkzone mit entsprechender Ausnahmegenehmigung für Anrainer bzw. eine vergleichbare Regelung</b>, durch die Anrainer mit Hauptwohnsitz in der betroffenen Straße ihre Fahrzeuge weiterhin ohne zeitliche Einschränkung abstellen können.</p><p>Ziel ist eine <b>faire und dauerhafte Lösung für die Anrainer</b>, damit die ohnehin begrenzten Parkmöglichkeiten nicht dauerhaft durch betriebsfremde Fahrzeuge bzw. Firmenfahrzeuge blockiert werden.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Die Parksituation in der <b>Friedhofstraße 66–72</b> ist für die Anrainer seit längerer Zeit zunehmend problematisch. Die ohnehin begrenzten Parkmöglichkeiten werden regelmäßig durch Fahrzeuge blockiert, die dort dauerhaft bzw. über längere Zeit abgestellt werden – darunter auch Firmenfahrzeuge.<br/>Für die Anrainer bedeutet das, dass es zunehmend schwieriger wird, in unmittelbarer Nähe zum eigenen Wohnort einen Parkplatz zu finden.<br/>Zusätzlich kommt es durch die Nutzung der Fahrzeuge in den frühen Morgenstunden immer wieder zu vermeidbaren Lärmbelästigungen. Wenn bereits vor 7:00 Uhr Werkzeug und Arbeitsmaterial aus Fahrzeugen ausgeladen werden, lautstarke Zurufe stattfinden und Fahrzeugtüren mehrfach zugeschlagen werden, beeinträchtigt das die Ruhe und Lebensqualität der Anwohner.</p><p><b>Wir möchten keine Sonderbehandlung, sondern eine faire und nachvollziehbare Lösung:</b><br/>Die vorhandenen Parkmöglichkeiten sollen in erster Linie den Menschen zur Verfügung stehen, die in diesem Bereich wohnen und auf diese Parkplätze angewiesen sind.</p><p>Mit dieser Petition möchten wir zeigen, dass es sich nicht um das Anliegen einer einzelnen Person handelt, sondern um ein gemeinsames Anliegen der betroffenen Anrainer.</p><p>Wir bitten die Marktgemeinde Langenzersdorf daher, die Situation ernst zu nehmen, zu prüfen und gemeinsam mit den Anrainern eine dauerhafte und faire Parkregelung für die Friedhofstraße 66–72 zu schaffen.</p>",
+    "started_by": "Sandra Flackl",
+    "category": "Verkehr",
+    "category_url": "https://www.openpetition.de/at/petitionen?category=47#petitionen",
+    "country": "AT",
+    "signatures": 34,
+    "start_date": "2026-10-05",
+    "lang": "de",
+    "campaign_id": "openpetition:anrainer-gegen-dauerparker-fuer-eine-faire-parkregelung-in-der-friedhofstrasse-66-72",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-05T18:44:55-06:00",
+    "offline_since": null,
+    "tags": [
+      "Anrainer",
+      "Friedhofstraße",
+      "Langenzersdorf",
+      "Firmenfahrzeuge",
+      "Fahrzeuge",
+      "Geeignete",
+      "Faire",
+      "Parkmöglichkeiten",
+      "Marktgemeinde",
+      "Parksituation"
+    ],
+    "last_checked": "2026-10-05T18:44:55-06:00"
+  },
+  "nachtbus-fuer-die-linie-60-sichere-heimwege-fuer-graz-waltendorf": {
+    "slug": "nachtbus-fuer-die-linie-60-sichere-heimwege-fuer-graz-waltendorf",
+    "first_seen": "2026-10-05T18:44:55-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-05T18:44:55-06:00",
+        "count": 29
+      }
+    ],
+    "title": "Nachtbus für die Linie 60: Sichere Heimwege für Graz-Waltendorf",
+    "summary": "Wir fordern die Stadt Graz, das Verkehrsressort sowie die Holding Graz Linien auf, an Freitag- und Samstagnächten sowie vor Feiertagen zumindest 1 bis 2 Nachtfahrten der Buslinie 60 einzurichten (z. B. um 01:30 Uhr und 03:00 Uhr ab Krenngasse / Schillerplatz). Dadurch soll die lückenlose Versorgung zwischen dem Ende des regulären Tagesverkehrs (ca. 23:54 Uhr) und dem Betriebsbeginn am Morgen (ca. 05:29 Uhr) sichergestellt werden.",
+    "image_url": "https://www.openpetition.eu/images/petition/nachtbus-fuer-die-linie-60-sichere-heimwege-fuer-graz-waltendorf_1791198312_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/nachtbus-fuer-die-linie-60-sichere-heimwege-fuer-graz-waltendorf",
+    "description_full": "<!--marker--><p>Wir fordern die Stadt Graz, das Verkehrsressort sowie die Holding Graz Linien auf, an Freitag- und Samstagnächten sowie vor Feiertagen zumindest 1 bis 2 Nachtfahrten der Buslinie 60 einzurichten (z. B. um 01:30 Uhr und 03:00 Uhr ab Krenngasse / Schillerplatz). Dadurch soll die lückenlose Versorgung zwischen dem Ende des regulären Tagesverkehrs (ca. 23:54 Uhr) und dem Betriebsbeginn am Morgen (ca. 05:29 Uhr) sichergestellt werden.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Die Buslinie 60 erschließt wichtige Wohngebiete und Hanglagen in Waltendorf und Ries. Da die Grazer Nightlines diese Strecken nicht anfahren, existiert in der Nacht ein massives Öffi-Loch: Wie die Fahrplanauskunft belegt, fährt der letzte Bus von der Krenngasse Richtung Lustbühel um 23:54 Uhr – der nächste erst wieder um 05:29 Uhr morgens.</p><p>Besonders für Jugendliche und junge Erwachsene bedeutet das: Wenn man am Wochenende etwas länger unterwegs ist, muss man entweder teure Taxis nutzen, stundenlang bis 5 Uhr morgens festsitzen oder nachts kilometerweit bergauf zu Fuß gehen. Ein Fußmarsch über mehrere Kilometer im Dunkeln ist unzumutbar und stellt ein Sicherheitsrisiko dar. Ein moderner öffentlicher Nahverkehr in einer Studentinnen- und Studentenstadt wie Graz muss auch nachts sichere und leistbare Mobilität für Außenbezirke bieten.</p>",
+    "started_by": "Flora Pellet",
+    "category": "Verkehr",
+    "category_url": "https://www.openpetition.de/at/petitionen?category=47#petitionen",
+    "country": "AT",
+    "signatures": 29,
+    "start_date": "2026-10-05",
+    "lang": "de",
+    "campaign_id": "openpetition:nachtbus-fuer-die-linie-60-sichere-heimwege-fuer-graz-waltendorf",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-05T18:44:55-06:00",
+    "offline_since": null,
+    "tags": [
+      "Graz",
+      "Krenngasse",
+      "Buslinie",
+      "Verkehrsressort",
+      "Betriebsbeginn",
+      "Samstagnächten",
+      "Sichergestellt",
+      "Schillerplatz",
+      "Tagesverkehrs",
+      "Einzurichten"
+    ],
+    "last_checked": "2026-10-05T18:44:55-06:00"
   }
 }
