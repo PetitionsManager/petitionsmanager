@@ -564,18 +564,12 @@ def run(args) -> None:
     verworfen = core.als_register(meta_vorher.get("verworfen"))
     lauf_meta["verworfen"] = verworfen
 
-    # ⚠️⚠️ Derselbe Grund, dritter Fall (5.10.2026): der Versatz des
-    # Sprach-Sweeps lebt ebenfalls im _meta, und JEDER gewöhnliche Lauf wirft
-    # ihn weg. Gemessen am laufenden Betrieb: nach ZWEI Sweeps stand
-    # `sweep_offset` auf 1500 statt 3000 — beide hatten bei 0 angefangen, weil
-    # der Aufhol-Lauf dazwischen gespeichert hatte. Scheinbar harmlos, weil der
-    # „schon bekannt"-Filter das Fenster trotzdem vorrückt; dauerhaft hängen
-    # bleiben aber genau die Kandidaten, die der Sweep ANSIEHT, ohne sie ins
-    # Archiv zu schreiben (502er, unlesbare Seiten) — die werden sonst in jedem
-    # Lauf neu abgerufen. Nicht als Zahl prüfen, sondern auf `is not None`: ein
-    # Versatz von 0 ist ein gültiger Wert und darf nicht wie „fehlt" aussehen.
-    if meta_vorher.get(SWEEP_OFFSET_FELD) is not None:
-        lauf_meta[SWEEP_OFFSET_FELD] = meta_vorher[SWEEP_OFFSET_FELD]
+    # ⚠️⚠️ Hier stand vom 5.10.2026 eine Durchreiche für `sweep_offset` — den
+    # Fortschrittsversatz des Sprach-Sweeps. Sie ist am selben Tag wieder
+    # entfernt worden, weil der Versatz ABGESCHAFFT wurde: er trug den
+    # Fortschritt ein zweites Mal neben `bekannt` und übersprang dauerhaft den
+    # Anfang der Kandidatenliste (Begründung in sprachsweep()). **Nicht wieder
+    # einbauen** — ein erhaltener Versatz ist genau der Schaden, nicht der Fix.
 
     # Vor der Entdeckung festhalten: „bekannt" meint den Stand zu LAUFBEGINN.
     # Sonst zählten die gleich frisch angelegten Petitionen als nachzuprüfen
@@ -1001,8 +995,11 @@ def discover_en_slugs(fetcher: core.Fetcher,
 # Die Weiche schreibt NICHT in den englischen Bestand: englische Funde landen
 # im Register mit Befund „en/XX", und en_kandidaten_aus_de_register() holt sie
 # von dort in den englischen Zweig. Ein Schreibweg, nicht zwei.
-SWEEP_OFFSET_FELD = "sweep_offset"
-SWEEP_JE_LAUF = 1500        # Kandidaten je Aufruf; 1.500 × 1,5 s ≈ 37 min
+SWEEP_JE_LAUF = 1500        # Kandidaten je Aufruf; 1.500 × 1,5 s ≈ 58 min gemessen
+# ⚠️⚠️ Hier stand `SWEEP_OFFSET_FELD = "sweep_offset"` (4.–5.10.2026). Der
+# Versatz ist abgeschafft: er trug den Fortschritt neben `bekannt` ein zweites
+# Mal und übersprang dauerhaft den Anfang der Kandidatenliste. Begründung und
+# Messwerte in sprachsweep(). **Nicht wieder einführen.**
 
 
 def sweep_urteil(html: str) -> tuple[str, str]:
@@ -1079,31 +1076,6 @@ def alle_sitemap_slugs(fetcher: core.Fetcher) -> list[str]:
     return slugs
 
 
-def sweep_versatz(alt: int, fenster: int, vermerkt: int, offen: int) -> int:
-    """Wohin rückt das Sweep-Fenster? Eigene Funktion, damit der Selbsttest es
-    messen kann.
-
-    ⚠️⚠️ Der Versatz rückt um die NICHT vermerkten Kandidaten vor, nicht um die
-    Fenstergröße (berichtigt 5.10.2026 — mein eigener Fehler vom 4.10.).
-    Begründung: der Versatz indiziert in `offen`, und `offen` ist bei jedem Lauf
-    neu berechnet als „alles, was nicht schon bekannt ist". Wer archiviert
-    wurde, ist beim nächsten Lauf also ohnehin heraus — die Liste rückt von
-    selbst vor. Ein Versatz um die ganze Fenstergröße rückte ein ZWEITES Mal
-    vor und überspränge je Lauf 1.500 Kandidaten.
-
-    Übrig bleiben genau die, die der Sweep angesehen, aber nicht vermerkt hat
-    (`error`, `unklar`). Die stehen beim nächsten Lauf wieder am Anfang von
-    `offen` und würden das Fenster blockieren — um sie, und nur um sie, rückt
-    der Versatz vor. Nach einer vollen Umdrehung kommen sie wieder dran.
-
-    ⚠️ Am 4./5.10.2026 war `nicht vermerkt` in zwei echten Läufen **0** (je
-    1.500 Kandidaten, kein error, kein unklar). Der Versatz ist also heute
-    wirkungslos — er ist die Vorsorge für den Tag, an dem Change.org wieder
-    unlesbare Seiten liefert, nicht ein laufender Mechanismus.
-    """
-    return (alt + max(0, fenster - vermerkt)) % max(offen, 1)
-
-
 def sprachsweep(args) -> None:
     """Holt nie angesehene Sitemap-Kandidaten und sortiert sie nach Sprache.
 
@@ -1114,7 +1086,6 @@ def sprachsweep(args) -> None:
     """
     anzahl = int(getattr(args, "sprachsweep", 0) or 0)
     meta = core.load_meta(DATA_FILE)
-    offset = int(meta.get(SWEEP_OFFSET_FELD) or 0)
     fetcher = core.Fetcher(delay=args.delay, headers=FETCH_HEADERS)
     ts = now_iso()
 
@@ -1130,12 +1101,26 @@ def sprachsweep(args) -> None:
     alle = alle_sitemap_slugs(fetcher)
     offen = [s for s in alle if s not in bekannt]
     log(f"Sweep: {len(offen)} von {len(alle)} Slugs sind noch nie angesehen "
-        f"worden ({len(bekannt)} bereits bekannt, Versatz {offset}).")
+        f"worden ({len(bekannt)} bereits bekannt).")
     if not offen:
         log("Sweep: nichts offen – fertig.")
         return
-    offset %= len(offen)
-    fenster = [offen[(offset + i) % len(offen)] for i in range(min(anzahl, len(offen)))]
+    # ⚠️⚠️ KEIN Versatz mehr (5.10.2026, Nutzerentscheid). Bis dahin trug der
+    # Sweep den Fortschritt ZWEIMAL: in einem gespeicherten Versatz und in
+    # `bekannt`. Beide rückten unabhängig vor, und der Versatz rückte nie
+    # zurück — ein einmal angesammelter Wert übersprang den Anfang von `offen`
+    # DAUERHAFT (am 5.10. gemessen: 1.500 nie angesehene Kandidaten, die kein
+    # Lauf mehr erreicht hätte). Jetzt gibt es eine Quelle der Wahrheit:
+    # `bekannt`. Die rückt zuverlässig vor, weil jeder archivierte Kandidat
+    # beim nächsten Lauf herausfällt — in drei echten Läufen 1.500 von 1.500.
+    # ⚠️ Preis, bewusst in Kauf genommen: Kandidaten, die angesehen, aber nicht
+    # vermerkt werden konnten (`error`, `unklar`), bleiben am Anfang der Liste
+    # und werden im nächsten Lauf WIEDER abgerufen. Bei transienten Fehlern
+    # (502) ist das genau richtig. Bleibt es nicht transient, blockieren sie
+    # das Fenster — deshalb nennt der Lauf ihre Zahl unten bei JEDEM Durchgang,
+    # auch bei 0. Eine Zeile, die nur im Schadensfall erscheint, ist von einem
+    # kaputten Zähler nicht zu unterscheiden.
+    fenster = offen[:anzahl]
 
     urteile: dict[str, int] = {}
     fuers_archiv: list[dict] = []
@@ -1174,27 +1159,23 @@ def sprachsweep(args) -> None:
 
     monate = core.archiv_mergen(PLATFORM.key, fuers_archiv)
     nicht_vermerkt = max(0, len(fenster) - len(fuers_archiv))
-    offset = sweep_versatz(offset, len(fenster), len(fuers_archiv), len(offen))
-    if nicht_vermerkt:
-        log(f"Sweep: {nicht_vermerkt} von {len(fenster)} Kandidaten ohne "
-            f"Archiveintrag (error/unklar) – der Versatz rückt um sie vor, "
-            f"sie kommen nach einer Umdrehung wieder.")
-    # Der Versatz gehört in den Bestand, weil nur dessen _meta den
-    # Actions-Cache überlebt — dieselbe Begründung wie beim Register.
-    # ⚠️ `available` gehört in dieselbe Liste (5.10.2026 gemessen: nach dem
-    # Sweep stand es auf None). Der Sweep ENTDECKT nichts — er darf die
-    # Entdeckungszahl des letzten echten Laufs also nicht einkassieren. Die
-    # Kachel fällt dadurch nicht auf eine Falschauskunft zurück (seit 19.9. hat
-    # die Bilanz Vorrang, siehe petitions_core.py ~4229), aber die Zahl im
-    # Aufhol-Bericht wurde falsch.
+    # ⚠️ UNBEDINGT, auch bei 0 — siehe Begründung oben am Fenster.
+    log(f"Sweep: {nicht_vermerkt} von {len(fenster)} Kandidaten ohne "
+        f"Archiveintrag (error/unklar); die werden im nächsten Lauf erneut "
+        f"abgerufen. Bleibt die Zahl groß, blockieren sie das Fenster.")
+    # ⚠️ Der Sweep speichert nur, um `verworfen`/`available` NICHT zu verlieren
+    # (save_store baut das _meta bei jedem Schreiben neu auf). Er entdeckt
+    # nichts und zählt nichts — jedes Feld, das er hier nicht durchreicht,
+    # verliert der Bestand. `sweep_offset` steht bewusst NICHT mehr dabei:
+    # damit verschwindet der Altwert beim ersten Speichern von selbst, ohne
+    # Eingriff in die Datendatei.
     core.save_store(core.load_store(DATA_FILE), DATA_FILE,
-                    extra_meta={SWEEP_OFFSET_FELD: offset,
-                                **{k: v for k, v in meta.items()
-                                   if k in ("verworfen", "orte_offset",
-                                            "available")}},
+                    extra_meta={k: v for k, v in meta.items()
+                                if k in ("verworfen", "orte_offset",
+                                         "available")},
                     quiet=True)
     log(f"Sweep fertig: {dict(sorted(urteile.items()))} · {len(fuers_archiv)} "
-        f"ins Archiv ({len(monate)} Monatsdatei(en)) · Versatz jetzt {offset}.")
+        f"ins Archiv ({len(monate)} Monatsdatei(en)).")
 
 
 def run_en(args) -> None:
