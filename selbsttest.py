@@ -1915,6 +1915,65 @@ pruefe("sweep-lauf: Gegenprobe – der Bestand bleibt leer",
 
 
 # ---------------------------------------------------------------------------
+# europarl: der Status-Stempel wird nur bei einer ECHTEN Änderung neu gesetzt
+#
+# ⚠️⚠️ Gemessen am 6.10.2026 über fünf aufeinanderfolgende Pflege-Läufe:
+# `parse_detail` baute `updates` bei jedem Abruf neu, mit frischem Zeitstempel
+# und fast immer demselben Text — **3.789** Satzänderungen über vier Übergänge,
+# die keine Änderung waren. Gegen dieselben Läufe nachgerechnet lässt der
+# Eingriff genau die **22** echten Statuswechsel durch, die eine unabhängige
+# Gegenprobe dort findet (22 = 22, Rechenkontrolle).
+print()
+_alt_u = [{"timestamp": "2026-10-01T10:00:00", "text": "Status: Available"}]
+_neu_u = [{"timestamp": "2026-10-06T07:00:00", "text": "Status: Available"}]
+_and_u = [{"timestamp": "2026-10-06T07:00:00", "text": "Status: Closed"}]
+
+_r = {"updates": list(_neu_u), "title": "T"}
+europarl._status_stempel_behalten({"updates": _alt_u}, _r)
+pruefe("europarl-Stempel: gleicher Text wird nicht neu gestempelt",
+       "updates" in _r, False)
+pruefe("europarl-Stempel: andere Felder bleiben unberührt", _r.get("title"), "T")
+
+_r = {"updates": list(_and_u)}
+europarl._status_stempel_behalten({"updates": _alt_u}, _r)
+pruefe("europarl-Stempel: echter Statuswechsel kommt DURCH",
+       _r.get("updates"), _and_u)
+
+_r = {"updates": list(_neu_u)}
+europarl._status_stempel_behalten(None, _r)
+pruefe("europarl-Stempel: neuer Satz behält seinen Eintrag",
+       _r.get("updates"), _neu_u)
+
+# ⚠️ Ein Bestand in fremder Form darf nicht zum Absturz führen und auch nicht
+# zum Weglassen — sonst verlöre ein Formwechsel still die Einträge.
+_r = {"updates": list(_neu_u)}
+europarl._status_stempel_behalten({"updates": ["roher string"]}, _r)
+pruefe("europarl-Stempel: fremde Bestandsform lässt den Eintrag stehen",
+       _r.get("updates"), _neu_u)
+
+# ⚠️⚠️ DER TRAGENDE FALL: geprüft wird nicht die Funktion, sondern die ANNAHME
+# über core.upsert — ein weggelassenes Feld behält seinen Bestandswert. Träfe
+# das nicht zu, LÖSCHTE dieser Eingriff die Einträge.
+_store_u = {"0603-2018": {"slug": "0603-2018", "updates": list(_alt_u),
+                          "signatures_history": []}}
+_r = {"updates": list(_neu_u), "title": "Petition 0603/2018"}
+europarl._status_stempel_behalten(_store_u["0603-2018"], _r)
+core.upsert(_store_u, "0603-2018", _r, {}, "online", "2026-10-06T07:30:00",
+            "https://x/p")
+pruefe("europarl-Stempel: upsert behält den Bestandswert (ALTER Stempel)",
+       _store_u["0603-2018"].get("updates"), _alt_u)
+pruefe("europarl-Stempel: der Titel kommt trotzdem an",
+       _store_u["0603-2018"].get("title"), "Petition 0603/2018")
+# Gegenprobe, damit der Fall oben nicht trivial besteht: OHNE den Eingriff
+# überschreibt upsert den Stempel (= Zustand bis zum 6.10.2026).
+_store_u2 = {"x": {"slug": "x", "updates": list(_alt_u),
+                   "signatures_history": []}}
+core.upsert(_store_u2, "x", {"updates": list(_neu_u)}, {}, "online", "t", "u")
+pruefe("europarl-Stempel: Gegenprobe – ohne Eingriff wird überschrieben",
+       _store_u2["x"].get("updates"), _neu_u)
+
+
+# ---------------------------------------------------------------------------
 print()
 if fehler:
     print(f"::error::selbsttest.py: {len(fehler)} Fall/Fälle fehlgeschlagen "

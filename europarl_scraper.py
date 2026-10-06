@@ -802,6 +802,40 @@ def parse_detail(html: str, url: str, slug: str,
     return rec
 
 
+def _status_stempel_behalten(alt: dict | None, rec: dict | None) -> None:
+    """Den Status-Eintrag nur bei einer ECHTEN Änderung neu stempeln.
+
+    `parse_detail` baut `updates` bei jedem Abruf neu, mit frischem
+    Zeitstempel — der Text ist aber fast immer derselbe. Gemessen am
+    6.10.2026 über fünf aufeinanderfolgende Pflege-Läufe: **338 von 1911**
+    Sätzen trugen je Lauf eine Änderung, die keine war (identischer Text,
+    nur anderer Zeitstempel; 327× „Status: Available to supporters"). Der
+    Stempel behauptete damit eine Neuigkeit zum Zeitpunkt des Nachsehens.
+
+    Bleibt der alte Stempel stehen, nennt er stattdessen, **seit wann** der
+    Status gilt. Nur für die Nachprüfung bekannter Sätze nötig; neue Sätze
+    haben keinen Vorwert, dort ist `alt` None und die Funktion tut nichts.
+
+    ⚠️ Datensicher, weil `core.upsert` leere/fehlende Werte verwirft statt
+    sie zu übernehmen (`if val not in (None, "", [], {})`) — ein
+    weggelassenes Feld behält also seinen Bestandswert. Würde upsert
+    stattdessen überschreiben, löschte dieser Weg die Einträge.
+    ⚠️ Die Textliste wird verglichen, nicht die Einträge: der Zeitstempel ist
+    genau das Feld, das sich unterscheiden DARF.
+    """
+    if not alt or not rec:
+        return
+
+    def texte(liste) -> list:
+        if not isinstance(liste, list):
+            return []
+        return [u.get("text") for u in liste if isinstance(u, dict)]
+
+    neu, vorher = texte(rec.get("updates")), texte(alt.get("updates"))
+    if neu and neu == vorher:
+        rec.pop("updates", None)
+
+
 # Welche Felder eine Fremdsprache mitbringt.
 #
 # ⚠️⚠️ "category" gehört NICHT dazu, und der Versuch ist am 8.8.2026 GEMESSEN
@@ -1010,6 +1044,7 @@ def run(args) -> None:
             status, rec = scrape_petition(fetcher, slug, store.get(slug))
             if status == "error":
                 continue
+            _status_stempel_behalten(store.get(slug), rec)
             core.upsert(store, slug, rec or {}, {}, status, ts,
                         _detail_url(slug))
             save()
