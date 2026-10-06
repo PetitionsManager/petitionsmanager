@@ -31,14 +31,29 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-10-06T00:00:44-06:00",
-    "petition_count": 2398,
-    "available": 1684,
-    "new_petitions_last_run": [],
+    "generated_at": "2026-10-06T05:10:30-06:00",
+    "petition_count": 2412,
+    "available": 1696,
+    "new_petitions_last_run": [
+      "teufelsstatue-vom-esslinger-rathausplatz-entfernen",
+      "nancy-und-heiko-gehoeren-zusammen-familienzusammenfuehrung-auf-borkum-ermoeglichen",
+      "gruenen-blockinnenbereich-am-krugenofen-51-51a-erhalten-keine-zustimmung-nach-36a-baugb",
+      "einen-pumptrack-fuer-geseke-mehr-bewegung-fuer-kids",
+      "keine-mehrbelastung-fuer-eltern-kindergartengebuehren-in-ergolding-zum-1-januar-2027-anpassen",
+      "erst-versorgung-sichern-dann-pflegeleistungen-veraendern",
+      "sichere-ortsmitte-in-oberbergkirchen-fuer-unsere-kinder-senioren-spaziergaenger-und-radfahrer",
+      "pfullingen-schlossstrasse-kein-mobilfunkmast-neben-kindergaerten-und-schulen",
+      "berlins-kulturelle-vielfalt-sichern-einladung-zur-mitzeichnung",
+      "ruecktrittsforderung-friedrich-merz-als-vorsitzender-der-cdu-und-der-cdu-csu-bundestagsfraktion",
+      "aufsplittung-des-5-sgb-xi-und-20-sgb-v-fuer-freiberufliche-fachkraefte-gymnastiklehrer-etc",
+      "weg-mit-dem-buerokratiemonster-mehr-zeit-fuer-oesterreichs-unternehmer-innen",
+      "wiener-linien-preis-erhoehung-2027",
+      "fussballtore-der-gemeinde-in-aigen-auf-parzelle-534-203"
+    ],
     "bilanz": {
-      "stand": "2026-10-06T00:00:44-06:00",
-      "gefunden": 1684,
-      "im_bestand": 1684,
+      "stand": "2026-10-06T05:10:29-06:00",
+      "gefunden": 1696,
+      "im_bestand": 1696,
       "unbrauchbar": 0,
       "verworfen": 0,
       "dublette": 0,
@@ -46,61 +61,45 @@
       "zurueckgestellt": 0,
       "offen": 0,
       "offene_beispiele": [],
-      "bestand_gesamt": 2398,
-      "bestand_ausserhalb": 714
+      "bestand_gesamt": 2412,
+      "bestand_ausserhalb": 716
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-10-05T18:49:50-06:00",
-        "gesamt": 2398,
-        "online": 2398,
+        "zeit": "2026-10-06T05:10:29-06:00",
+        "gesamt": 2412,
+        "online": 2412,
         "offline": 0,
         "ohne_titel": 0,
         "platzhalter": 0,
         "nicht_ausgeliefert": 0,
         "torsi": 0,
         "dubletten": 0,
-        "mit_start": 2383,
-        "juengstes_start": "2026-10-05",
+        "mit_start": 2397,
+        "juengstes_start": "2026-10-06",
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
-        "neu": 9
-      },
-      {
-        "zeit": "2026-10-06T00:00:44-06:00",
-        "gesamt": 2398,
-        "online": 2398,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 2383,
-        "juengstes_start": "2026-10-05",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
+        "neu": 14
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-10-06T00:00:44-06:00",
-      "gesamt": 2398,
-      "online": 2398,
+      "zeit": "2026-10-06T05:10:29-06:00",
+      "gesamt": 2412,
+      "online": 2412,
       "offline": 0,
       "ohne_titel": 0,
       "platzhalter": 0,
       "nicht_ausgeliefert": 0,
       "torsi": 0,
       "dubletten": 0,
-      "mit_start": 2383,
-      "juengstes_start": "2026-10-05",
+      "mit_start": 2397,
+      "juengstes_start": "2026-10-06",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-10-05T18:49:50-06:00",
+    "verlauf_felder_ab": "2026-10-06T05:10:29-06:00",
     "befunde": [],
     "health_warning": null,
-    "online_count": 2398
+    "online_count": 2412
   },
   "fuer-den-erhalt-einer-sicheren-individuellen-geburtshilfe-stoppt-den-neuen-hebammenhilfevertrag-2": {
     "slug": "fuer-den-erhalt-einer-sicheren-individuellen-geburtshilfe-stoppt-den-neuen-hebammenhilfevertrag-2",
@@ -135657,21 +135656,25 @@
       {
         "checked_at": "2026-10-03T09:28:17+00:00",
         "count": 105
+      },
+      {
+        "checked_at": "2026-10-06T05:06:23-06:00",
+        "count": 139
       }
     ],
-    "title": "Eine Pumptrack für Geseke! Mehr Bewegung für Kids",
-    "summary": "Ich möchte hier in Geseke eine Pumptrack errichten lassen. Damit die Kids mehr Möglichkeiten haben sich zu bewegen. Egal welche Altersklassen mit Laufrad, Fahrrad, BMX oder Mountenbike, ob Inliner oder Skateboards... tatsächlich sogar mit Rollstuhl befahrbar (je nach Streckenbau). Es ist ein Ganzkörpertraining der Beweglichkeit, Gleichewichtssinn und Reaktionsfähigkeit schult.",
+    "title": "Einen Pumptrack für Geseke! Mehr Bewegung für Kids",
+    "summary": "Ich möchte hier in Geseke einen Pumptrack errichten lassen. Damit die Kids mehr Möglichkeiten haben sich zu bewegen. Egal welche Altersklassen mit Laufrad, Fahrrad, BMX oder Mountenbike, ob Inliner oder Skateboards... tatsächlich sogar mit Rollstuhl befahrbar (je nach Streckenbau). Es ist ein Ganzkörpertraining der Beweglichkeit, Gleichewichtssinn und Reaktionsfähigkeit schult.",
     "image_url": "https://www.openpetition.de/images/petition/eine-pumptrack-fuer-geseke-mehr-bewegung-fuer-kids_1790838051_desktop.jpg",
     "url": "https://www.openpetition.de/petition/online/eine-pumptrack-fuer-geseke-mehr-bewegung-fuer-kids",
-    "description_full": "<!--marker--><p>Ich möchte hier in Geseke eine Pumptrack errichten lassen. Damit die Kids mehr Möglichkeiten haben sich zu bewegen. Egal welche Altersklassen mit Laufrad, Fahrrad, BMX oder Mountenbike, ob Inliner oder Skateboards... tatsächlich sogar mit Rollstuhl befahrbar (je nach Streckenbau). Es ist ein Ganzkörpertraining der Beweglichkeit, Gleichewichtssinn und Reaktionsfähigkeit schult.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Hier ins Geseke gibt es Spielplätze... die sind aber für Kinder ab 8 oder 9 schon uninteressant. Es gibt den großen Fußballplatz, dort wird aber oft trainiert und der Soccerplatz ist immer voll. Ausserdem will nicht jeder Fußball spielen. Der Skatepark dort ist zu klein eher was für Könner.</p><p>Der Pumptrack wäre die perfekte Ergänzung für das Sportangebot hier. Die Kids könne auf ihm mit ihren Bikes oder Scootern fahren. Zusammen Spaß haben. Und würden ihren ganzen Körper trainieren. Man sieht so viele Kinder mit ihren Scootern oder Bikes durch die Gegend fahren. Ohne Ziel und stur geradeaus. Die Pumptrack würde ihnen ein Ziel geben und sie von gefährlichen Manövern mit selbstgebauten Rampen oder Strecken im Wald weg holen.</p><p>Gerade für die Altersgruppe von 8-16 Jahren, wäre diese Strecke eine sinnvolle Möglichkeit ihre Freizeit zu verbringen. Freunde treffen, Zeit draußen verbringen, den Körper trainieren.</p><p>Weg von der Couch und der Langeweile!</p>",
+    "description_full": "<!--marker--><p>Ich möchte hier in Geseke einen Pumptrack errichten lassen. Damit die Kids mehr Möglichkeiten haben sich zu bewegen. Egal welche Altersklassen mit Laufrad, Fahrrad, BMX oder Mountenbike, ob Inliner oder Skateboards... tatsächlich sogar mit Rollstuhl befahrbar (je nach Streckenbau). Es ist ein Ganzkörpertraining der Beweglichkeit, Gleichewichtssinn und Reaktionsfähigkeit schult.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Hier in Geseke gibt es Spielplätze... die sind aber für Kinder ab 8 oder 9 schon uninteressant. Es gibt den großen Fußballplatz, dort wird aber oft trainiert und der Soccerplatz ist immer voll. Ausserdem will nicht jeder Fußball spielen. Der Skatepark dort ist zu klein eher was für Könner.</p><p>Der Pumptrack wäre die perfekte Ergänzung für das Sportangebot hier. Die Kids könne auf ihm mit ihren Bikes oder Scootern fahren. Zusammen Spaß haben. Und würden ihren ganzen Körper trainieren. Man sieht so viele Kinder mit ihren Scootern oder Bikes durch die Gegend fahren. Ohne Ziel und stur geradeaus. Der Pumptrack würde ihnen ein Ziel geben und sie von gefährlichen Manövern mit selbstgebauten Rampen oder Strecken im Wald weg holen.</p><p>Gerade für die Altersgruppe von 8-16 Jahren, wäre diese Strecke eine sinnvolle Möglichkeit ihre Freizeit zu verbringen. Freunde treffen, Zeit draußen verbringen, den Körper trainieren.</p><p>Weg von der Couch und der Langeweile hin zu mehr Bewegung und Koordination!</p>",
     "started_by": "Claudia Albarrán Padilla",
     "category": "Sport",
     "category_url": "https://www.openpetition.de/petitionen?category=44#petitionen",
     "country": "DE",
-    "signatures": 105,
+    "signatures": 139,
     "start_date": "2026-10-01",
     "status": "online",
-    "last_seen": "2026-10-03T09:28:17+00:00",
+    "last_seen": "2026-10-06T05:06:23-06:00",
     "offline_since": null,
     "tags": [
       "Pumptrack",
@@ -135685,7 +135688,12 @@
       "Möglichkeiten",
       "Mountenbike"
     ],
-    "last_checked": "2026-10-03T09:28:17+00:00"
+    "last_checked": "2026-10-06T05:06:23-06:00",
+    "lang": "de",
+    "campaign_id": "openpetition:eine-pumptrack-fuer-geseke-mehr-bewegung-fuer-kids",
+    "i18n_state": {
+      "en": "fehlt"
+    }
   },
   "deutschland-schafft-sich-ab-kurswechsel-jetzt-und-ruecktritt-von-bundeskanzler-merz": {
     "slug": "deutschland-schafft-sich-ab-kurswechsel-jetzt-und-ruecktritt-von-bundeskanzler-merz",
@@ -135694,6 +135702,10 @@
       {
         "checked_at": "2026-10-03T09:28:17+00:00",
         "count": 46
+      },
+      {
+        "checked_at": "2026-10-06T05:06:23-06:00",
+        "count": 54
       }
     ],
     "title": "Deutschland schafft sich ab - Kurswechsel jetzt und Ruecktritt von Bundeskanzler Merz!",
@@ -135705,11 +135717,11 @@
     "category": "Bürgerrechte",
     "category_url": "https://www.openpetition.de/petitionen?category=58#petitionen",
     "country": "DE",
-    "signatures": 46,
+    "signatures": 54,
     "goal": 100,
     "start_date": "2026-09-21",
     "status": "online",
-    "last_seen": "2026-10-03T09:28:17+00:00",
+    "last_seen": "2026-10-06T05:06:23-06:00",
     "offline_since": null,
     "tags": [
       "Bundeskanzler",
@@ -135723,7 +135735,20 @@
       "Ergebnisse",
       "Politische"
     ],
-    "last_checked": "2026-10-03T09:28:17+00:00"
+    "last_checked": "2026-10-06T05:06:23-06:00",
+    "lang": "de",
+    "campaign_id": "openpetition:change-of-course-now-resignation-of-federal-chancellor-merz-respect-the-will-of-the-citizens-end",
+    "i18n_state": {
+      "en": "vorhanden"
+    },
+    "i18n": {
+      "en": {
+        "title": "Change of course now: Resignation of Federal Chancellor Merz – Respect the will of the citizens, end",
+        "summary": "We demand the immediate resignation of Federal Chancellor Friedrich Merz as well as the immediate termination of a policy that persistently refuses to acknowledge the will of the citizens. We demand a return to political reason, to genuine respect for election results, and to a purely objective, solution-oriented interaction among all elected members of parliament. Ideological bans on thinking and the exclusion of voters' voices must end. The will of the voters is the ultimate standard of a demo",
+        "description_full": "<!--marker--><p>We demand the immediate resignation of Federal Chancellor Friedrich Merz as well as the immediate termination of a policy that persistently refuses to acknowledge the will of the citizens. We demand a return to political reason, to genuine respect for election results, and to a purely objective, solution-oriented interaction among all elected members of parliament. Ideological bans on thinking and the exclusion of voters' voices must end. The will of the voters is the ultimate standard of a democracy and must be accepted without moral lecturing.<br/>The results of the recent state elections in the Northeast and in Berlin are an unmistakable, resounding vote of no confidence by the population. They reveal mercilessly that an overwhelming majority of the people has withdrawn legitimacy from the current federal policy under the leadership of Friedrich Merz. When a Federal Chancellor stands before the cameras after such historic losses and defiantly announces that he intends to stoically \"ride out\" his unpopular course regardless of the voters' will, it reveals a disturbing loss of touch with reality.<br/><b>1. Leadership without Sympathy and Support</b><br/>The government's leadership has lost all support and sympathy among the population.<br/><i>\"From the perspective of the supporters of this petition, we are currently not experiencing reliable leadership in Germany, but are perceiving a policy characterized by severe mistakes in economic and migration policy as well as massive cost increases.\"</i><br/>A Federal Chancellor who ignores this obvious loss of trust and instead looks past the resentment of the citizens in a detached and arrogant manner damages the reputation of our country and the stability of our democracy.<br/><b>2. The Will of the Voters is Not a Suggestion, but a Mandate</b><br/>In a democracy, all state authority emanates from the people. Those who hold free and secret elections must not subsequently explain away the results, sugarcoat them, or insult the voters. The German people demand tangible, profound changes. The stubborn insistence on a policy that misses the reality of life is dividing the country to a historic extent.<br/><b>3. Return to Objective Work in Parliament</b><br/>We demand an end to ideological blockades. Parliament must be about objective solutions for the country. Members of parliament are elected to speak with one another in a respectful and objective manner within democratic discourse and to vote on arguments, instead of entrenching themselves behind artificial divides.<br/><i>Source reference for the editors: The official election results from September 20, 2026 (CDU at 4.9% in Mecklenburg-Vorpommern) as well as the press conference of Chancellor Merz from September 21, 2026 (40% of voters labeled as \"destructive\") are documented in reports by Tagesschau and Euronews.</i></p><p><b>Below is the open original letter to the Federal Chancellery:</b><br/>To the Federal Chancellor of the Federal Republic of Germany<br/>Mr. Friedrich Merz<br/>Willy-Brandt-Straße 1, 10557 Berlin<br/>Dear Mr. Federal Chancellor,<br/>I am addressing you today as an independent, non-partisan citizen. I do so out of deep concern for the political stability and internal cohesion of our country.<br/>The results of Sunday's state elections in Mecklenburg-Vorpommern and Berlin are not a mere regional setback – they are an unmistakable vote of no confidence against your policies. The fact that a former major popular party like the CDU has to fear for its survival in parliament in the Northeast is the direct result of a severe loss of trust in your government's work.<br/>After the elections, you stood before the cameras, described the results as a \"disaster,\" and announced that you intended to stick to your reform course regardless. This attitude testifies to a disturbing alienation from the everyday reality of the population. The claim that the measures initiated must simply be \"ridden out\" against the express resistance of your own voter base is not political leadership – it is the deliberate ignoring of democratic warning signs.<br/>Your announced clinging to power is dividing the country and strengthening the political fringes to a historic extent. True statesmanship in times of crisis is not characterized by remaining in office, but by having the courage to admit one's own failure and to clear the way for a genuine political new beginning.<br/>Therefore, as a citizen of this country, I urgently call upon you: Draw the consequences from this historic debacle. Take real responsibility instead of merely lamenting it rhetorically. Resign from your office as Federal Chancellor.<br/>Sincerely yours,<br/>Steffen Prescher<br/><i>IMPORTANT NOTE ON LEGAL ADMISSIBILITY: This petition and your participation in it are absolutely legal and legally secure. The right of petition is a fundamental right of every citizen anchored in the Basic Law (Art. 17 GG, the German constitution).</i></p>\n<h3>Reason</h3>\n<!--marker--><p><b>Rationale</b><br/>As an independent and non-partisan citizen, I experience on a daily basis how the decisions of federal politics negatively affect the everyday reality in our country. Whether it is technical errors in economic policy, a lack of relief regarding the cost of living, or a migration policy that ignores the concerns of local municipalities – the political course bypasses the people.<br/>This petition is of central importance because the recent election results are an unmistakable democratic warning signal. When the political leadership in Berlin ignores these election results and attempts to simply ride out a profound loss of trust, it damages the very foundation of our democracy. The silent majority of society must now send a clear signal against the rampant denial of reality and demand a genuine political new beginning.</p>",
+        "url": "https://www.openpetition.de/petition/online/change-of-course-now-resignation-of-federal-chancellor-merz-respect-the-will-of-the-citizens-end"
+      }
+    }
   },
   "sos-stillstand-oder-spitzenmedizin-fairespj": {
     "slug": "sos-stillstand-oder-spitzenmedizin-fairespj",
@@ -136483,5 +136508,596 @@
       "Einzurichten"
     ],
     "last_checked": "2026-10-05T18:44:55-06:00"
+  },
+  "teufelsstatue-vom-esslinger-rathausplatz-entfernen": {
+    "slug": "teufelsstatue-vom-esslinger-rathausplatz-entfernen",
+    "first_seen": "2026-10-06T05:06:23-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-06T05:06:23-06:00",
+        "count": 281
+      }
+    ],
+    "title": "Teufelsstatue vom Esslinger Rathausplatz entfernen",
+    "summary": "Seit anfang Oktober 2026 steht auf dem Esslinger Rathausplatz eine Teufelsfigur des Künstlers Tim Bengel. Die Skulptur wurde als Geschenk der Sektkellerei Kessler im Rahmen des 1250-jährigen Stadtjubiläums enthüllt.",
+    "image_url": "https://www.openpetition.de/images/default_petition.jpg",
+    "url": "https://www.openpetition.de/petition/online/teufelsstatue-vom-esslinger-rathausplatz-entfernen",
+    "description_full": "<!--marker--><p>Seit anfang Oktober 2026 steht auf dem Esslinger Rathausplatz eine Teufelsfigur des Künstlers Tim Bengel. Die Skulptur wurde als Geschenk der Sektkellerei Kessler im Rahmen des 1250-jährigen Stadtjubiläums enthüllt.</p>\n<h3>Begründung</h3>\n<!--marker--><p>WARUM DIE STATUE PROBLEMATISCH IST</p><p>Die Installation stößt auf breites Unverständnis bei Esslinger Bürgerinnen und Bürgern. In öffentlichen sozialen Medien äußern viele ihre tiefe Unzufriedenheit:</p><p><b>Religiöse Bedenken:</b><br/>„Christliches Land wohlgemerkt... Ich würd lieber ne Statue von Jesus sehen.\" (4.184+) Unterstützer stimmen dieser Kritik zu.</p><p><b>Fehlende Repräsentation:</b><br/>„Anstatt die Heldin zu ehren, stellt man den Teufel hin...\", „Wir haben jetzt wortwörtlich den Teufel in unserer Stadt – und ihn auch noch selbst zurückgeholt.\"</p><p><b>Kostenfrage:</b><br/>„Wie kann man in heutiger Zeit 200k für einen Teufel ausgeben? Anstatt es zu spenden, an Läden, an Kinder, an Heime vor Ort oder arme Menschen.\"</p><p><b>Aufmerksamkeit um jeden Preis:</b><br/>Aber warum zeigt die Skulptur nicht die Frau, sondern den Teufel? Der Künstler Tim Bengel sagte öffentlich, „Es ist einfach das eindrucksvollere Symbol und wir leben in Zeiten von Instagram von begrenzter Aufmerksamkeitsspanne“</p><p>Das Problem: Die Statue zeigt NICHT die Marktfrau (die Heldin der Esslinger Sage), sondern ausschließlich den besiegten Teufel – in vergrößertem, dominanter Darstellung auf einem zentralen Platz.</p><p>UNSERE FORDERUNGEN</p><p>Wir fordern die Stadt Esslingen am Neckar auf:<br/></p><ol><li><b>Die Teufelsstatue vom Rathausplatz entfernen</b> – Dieser zentrale Platz gehört allen Bürgerinnen und Bürgern, nicht einer kontroversen Einzelinterpretation.</li><li><b>Eine neue Skulptur zur Marktfrau installieren</b> – Die eigentliche Heldin der Esslinger Sage verdient ein eigenes Denkmal, das alle Bevölkerungsgruppen repräsentiert.</li><li><b>Transparentes Verfahren für Kunst im öffentlichen Raum</b> – Künftige Installationen müssen vor der Umsetzung breit mit der Bevölkerung diskutiert werden.</li></ol><br/><p>WARUM DAS WICHTIG IST</p><p>Ein christlich geprägtes Land, ein Weihnachtmarkt-Stadtzentrum, Familien mit Kindern – die goldene Teufelsfigur sendet Signale, die viele Esslinger nicht mit ihrer Identität verbinden können.</p><p>Kunst darf provozieren – aber auf einem zentralen Platz sollte sie niemanden ausschließen oder verletzen.</p><p><b>Unterschreiben Sie unsere Petition und helfen Sie mit, dass die Stimme der Bürger gehört wird!</b></p>",
+    "started_by": "Für meine Mitmenschen",
+    "category": "Bauen",
+    "category_url": "https://www.openpetition.de/petitionen?category=6#petitionen",
+    "country": "DE",
+    "signatures": 281,
+    "start_date": "2026-10-05",
+    "lang": "de",
+    "campaign_id": "openpetition:teufelsstatue-vom-esslinger-rathausplatz-entfernen",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-06T05:06:23-06:00",
+    "offline_since": null,
+    "tags": [
+      "Esslinger",
+      "Teufel",
+      "Rathausplatz",
+      "Skulptur",
+      "Teufelsfigur",
+      "Bengel",
+      "Heldin",
+      "STATUE",
+      "Platz",
+      "Stadtjubiläums"
+    ],
+    "last_checked": "2026-10-06T05:06:23-06:00"
+  },
+  "nancy-und-heiko-gehoeren-zusammen-familienzusammenfuehrung-auf-borkum-ermoeglichen": {
+    "slug": "nancy-und-heiko-gehoeren-zusammen-familienzusammenfuehrung-auf-borkum-ermoeglichen",
+    "first_seen": "2026-10-06T05:06:23-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-06T05:06:23-06:00",
+        "count": 185
+      }
+    ],
+    "title": "Nancy und Heiko gehören zusammen – Familienzusammenführung auf Borkum ermöglichen",
+    "summary": "Wir bitten die zuständigen Stellen, alle rechtlich möglichen Wege zu prüfen, damit Nancy Mensah und Heiko Becker ihre Ehe gemeinsam auf Borkum leben können. Dabei sollen ihre Eheschließung am 2. Oktober 2026 in Accra (Ghana) und ihr langjähriger gemeinsamer Lebensmittelpunkt auf der Insel berücksichtigt werden. Wir bitten insbesondere darum, eine Verkürzung oder Aufhebung des bestehenden Einreise- und Aufenthaltsverbots zu prüfen und damit den Weg für eine Familienzusammenführung zu ermöglichen.",
+    "image_url": "https://www.openpetition.de/images/petition/nancy-und-heiko-gehoeren-zusammen-familienzusammenfuehrung-auf-borkum-ermoeglichen_1791028475_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/nancy-und-heiko-gehoeren-zusammen-familienzusammenfuehrung-auf-borkum-ermoeglichen",
+    "description_full": "<!--marker--><p>Wir bitten die zuständigen Stellen, alle rechtlich möglichen Wege zu prüfen, damit Nancy Mensah und Heiko Becker ihre Ehe gemeinsam auf Borkum leben können.<br/>Dabei sollen ihre Eheschließung am 2. Oktober 2026 in Accra (Ghana) und ihr langjähriger gemeinsamer Lebensmittelpunkt auf der Insel berücksichtigt werden. Wir bitten insbesondere darum, eine Verkürzung oder Aufhebung des bestehenden Einreise- und Aufenthaltsverbots zu prüfen und damit den Weg für eine Familienzusammenführung zu ermöglichen.<br/>Auch Nancys langjährige Beschäftigung soll in die Prüfung einfließen: Seit mindestens 2019 war sie bis zu ihrer Abschiebung im Juli 2026 bei einem Arbeitgeber im Gesundheitswesen sozialversicherungspflichtig beschäftigt.<br/>In Gesprächen mit dem Verbindungsbüro des Landesbeauftragten für Migration und Teilhabe bei der Niedersächsischen Staatskanzlei wurde bereits Unterstützung signalisiert. Wir bitten sie, das Anliegen zu begleiten und sich bei den zuständigen Stellen für eine Familienzusammenführung einzusetzen.<br/>Unser Anliegen ist eine menschliche, individuelle und sorgfältige Prüfung im Rahmen der geltenden Gesetze.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Borkum ist Nancy nicht fremd. Sie hat einen großen Teil ihres Lebens in Deutschland verbracht und lebte seit mindestens 2002 mit Heiko auf der Insel. Hier hat sie gearbeitet, hier haben beide ihr Zuhause und ihr gemeinsames Leben aufgebaut. Borkum ist Nancys Zuhause.<br/>Im Juli 2026 wurde Nancy nach Ghana abgeschoben. Für Nancy und Heiko bedeutete das vor allem eines: Sie wurden nach vielen gemeinsamen Jahren voneinander getrennt. Heiko lebt weiterhin auf Borkum.<br/>Am 2. Oktober 2026 haben die beiden in Accra (Ghana) geheiratet. Aus ihrer langjährigen Partnerschaft ist eine Ehe geworden. Jetzt wünschen sie sich, ihren Alltag wieder miteinander teilen zu können – auf Borkum, ihrem bisherigen gemeinsamen Lebensmittelpunkt.<br/>Mit dieser Petition möchten wir ein Zeichen für Familie, Zusammenhalt und Menschlichkeit setzen. Nancy und Heiko sollen wissen, dass sie mit ihrem Wunsch nach einer gemeinsamen Zukunft auf der Insel Borkum nicht alleine sind.</p><p>Bitte unterstützt Nancy und Heiko mit eurer Unterschrift.</p><p>Gemeinsam für Nancy und Heiko.<br/>Gemeinsam für Familie.<br/>Gemeinsam für Borkum.</p>",
+    "started_by": "Melanie Helms",
+    "category": "Migration",
+    "category_url": "https://www.openpetition.de/petitionen?category=56#petitionen",
+    "country": "DE",
+    "signatures": 185,
+    "start_date": "2026-10-03",
+    "lang": "de",
+    "campaign_id": "openpetition:nancy-und-heiko-gehoeren-zusammen-familienzusammenfuehrung-auf-borkum-ermoeglichen",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-06T05:06:23-06:00",
+    "offline_since": null,
+    "tags": [
+      "Borkum",
+      "Heiko",
+      "Nancy",
+      "Gemeinsam",
+      "Bitten",
+      "Familienzusammenführung",
+      "Prüfen",
+      "Ghana",
+      "Insel",
+      "Lebensmittelpunkt"
+    ],
+    "last_checked": "2026-10-06T05:06:23-06:00"
+  },
+  "gruenen-blockinnenbereich-am-krugenofen-51-51a-erhalten-keine-zustimmung-nach-36a-baugb": {
+    "slug": "gruenen-blockinnenbereich-am-krugenofen-51-51a-erhalten-keine-zustimmung-nach-36a-baugb",
+    "first_seen": "2026-10-06T05:06:23-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-06T05:06:23-06:00",
+        "count": 177
+      }
+    ],
+    "title": "Grünen Blockinnenbereich am Krugenofen 51/51a erhalten – keine Zustimmung nach §36a BauGB",
+    "summary": "Der Rat der Stadt Aachen soll der beantragten Zustimmung gemäß §36a BauGB zum geplanten Neubau im Blockinnenbereich von Krugenofen 51/51a nicht zustimmen.",
+    "image_url": "https://www.openpetition.de/images/petition/gruenen-blockinnenbereich-am-krugenofen-51-51a-erhalten-keine-zustimmung-nach-36a-baugb_1791151755_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/gruenen-blockinnenbereich-am-krugenofen-51-51a-erhalten-keine-zustimmung-nach-36a-baugb",
+    "description_full": "<!--marker--><p>Der Rat der Stadt Aachen soll der beantragten Zustimmung gemäß §36a BauGB zum geplanten Neubau im Blockinnenbereich von Krugenofen 51/51a nicht zustimmen.</p>\n<h3>Begründung</h3>\n<!--marker--><p><b>Grünen Blockinnenbereich am Krugenofen 51/51a erhalten – keine Zustimmung zum geplanten Neubau</b><br/>Wir bitten den Rat der Stadt Aachen, der geplanten Bebauung des begrünten Blockinnenbereichs von Krugenofen 51 und 51a gemäß § 36a BauGB <b>nicht zuzustimmen</b>.</p><p>Hier geht es nicht um eine ungenutzte Baulücke. Der grüne Innenbereich wird von den Bewohnerinnen und Bewohnern des gesamten Blocks genutzt – insbesondere auch von Kindern. Er ist ein gemeinsamer Ort zum Spielen, Gärtnern, Begegnen und Erholen und bildet einen kleinen <b>grünen Rückzugsort mitten in der dicht bebauten Stadt</b>.</p><p>Die Stadt Aachen bezeichnet diesen Bereich in der Vorlage FB 61/0087/WP19 selbst als <b>„den letzten grünen Innenblock in dieser Lage“</b> und bewertet die Nachverdichtung aus Sicht des Stadtklimas kritisch.</p><p>Die eigenen Kriterien der Stadt werden nicht erfüllt:<br/>Die Verwaltung stellt ausdrücklich fest, dass sich das geplante freistehende Wohngebäude aufgrund fehlender Vorbilder <b>nicht gemäß § 34 Abs. 1 BauGB in den vorhandenen Baublock einfügt</b>. Die Bebauung soll deshalb über die neue Ausnahmeregelung des § 34 Abs. 3b BauGB ermöglicht werden.<br/>Gleichzeitig heißt es in der Vorlage ausdrücklich, dass die <b>Qualitätskriterien der Leitlinien für die Innenentwicklung nicht berücksichtigt werden</b>.<br/>Wir fragen deshalb: <b>Warum soll gerade dieser besonders wertvolle grüne Innenbereich bebaut werden, obwohl das Vorhaben nicht in das bestehende städtebauliche Gefüge passt und die eigenen Qualitätskriterien der Stadt nicht berücksichtigt werden?</b></p><p>Wasser, Versiegelung und Entwässerung:<br/>Der bisher weitgehend unversiegelte Innenbereich kann Niederschlagswasser aufnehmen und zurückhalten. Durch Gebäude, Tiefgarage, Zufahrt und weitere befestigte Flächen würde sich dies verändern.<br/>Die Stadt erklärt selbst, dass die <b>Entwässerung derzeit noch nicht bewertet werden kann</b> und erst im weiteren Verfahren geprüft werden soll.<br/>Für uns ist das besonders relevant: Im gegenüberliegenden Gebäudebereich gibt es bereits heute Probleme mit Wasser im Keller. Wir befürchten, dass zusätzliche Versiegelung und veränderte Wasserabflüsse diese Situation verschärfen könnten. Deshalb muss die Entwässerung vor einer endgültigen Entscheidung sorgfältig untersucht werden.</p><p>Lebensqualität und gewachsene Natur:<br/>Der Garten ist ein wichtiger Aufenthaltsort für die Menschen des gesamten Blocks. Kinder spielen dort, Nachbarinnen und Nachbarn begegnen sich und Familien können sich im Grünen aufhalten, ohne den dicht bebauten Stadtteil verlassen zu müssen.<br/>Außerdem befinden sich dort große, über viele Jahre gewachsene Bäume und Pflanzen, darunter ein Kirschbaum mit etwa <b>190 cm Stammumfang</b>, eine große Zeder mit etwa <b>180 cm Stammumfang</b>, Eiben, zwei Apfelbäume und ein Feigenbaum.<br/>Ein neu angelegter Garten kann einen solchen gewachsenen grünen Lebensraum nicht kurzfristig ersetzen.<br/>Auch die geplante Tiefgaragenzufahrt grenzt unmittelbar an die Garten- und Aufenthaltsbereiche der Nachbargrundstücke. Die Verwaltung sieht deshalb selbst weiteren Prüfbedarf hinsichtlich der Lärmauswirkungen.</p><p>Es gibt bessere Orte für Nachverdichtung:<br/>Wir sind <b>nicht gegen Wohnungsbau</b>. Aachen braucht Wohnraum.<br/>Aber Wohnraumbedarf sollte nicht bedeuten, dass jeder noch verbliebene grüne Innenbereich bebaut werden muss. In der näheren Umgebung gibt es aus unserer Sicht bereits versiegelte oder städtebaulich besser geeignete Flächen, die vorrangig geprüft werden sollten.<br/>Die Vorlage selbst weist zudem auf ein <b>erhöhtes Klagerisiko</b> und eine kritisch gesehene <b>Vorbildwirkung für weitere Blockinnenbereiche</b> hin.</p><p>Unsere Forderung:<br/><b>Wir bitten den Rat der Stadt Aachen, der Zustimmung gemäß § 36a BauGB zum geplanten Neubau Krugenofen 51/51a nicht zuzustimmen.</b><br/>Wir wollen Wohnraum und eine sinnvolle Innenentwicklung – aber auch eine Stadt, in der Menschen gerne leben können.<br/>Dieser grüne Innenbereich ist für viele Bewohnerinnen und Bewohner ein kleines Stück Natur, Ruhe, Spielraum und Gemeinschaft mitten in Aachen.<br/><b>Bitte helfen Sie uns, diesen grünen Rückzugsort für die heutigen und zukünftigen Bewohnerinnen und Bewohner des Viertels zu erhalten.</b></p>",
+    "started_by": "Sara Vivanco",
+    "category": "Wohnen",
+    "category_url": "https://www.openpetition.de/petitionen?category=42#petitionen",
+    "country": "DE",
+    "signatures": 177,
+    "start_date": "2026-10-04",
+    "lang": "de",
+    "campaign_id": "openpetition:gruenen-blockinnenbereich-am-krugenofen-51-51a-erhalten-keine-zustimmung-nach-36a-baugb",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-06T05:06:23-06:00",
+    "offline_since": null,
+    "tags": [
+      "Stadt",
+      "Aachen",
+      "Grünen",
+      "BauGB",
+      "Krugenofen",
+      "Innenbereich",
+      "Zustimmung",
+      "Geplanten",
+      "Gemäß",
+      "Blockinnenbereich"
+    ],
+    "last_checked": "2026-10-06T05:06:23-06:00"
+  },
+  "einen-pumptrack-fuer-geseke-mehr-bewegung-fuer-kids": {
+    "slug": "einen-pumptrack-fuer-geseke-mehr-bewegung-fuer-kids",
+    "first_seen": "2026-10-06T05:06:23-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-06T05:06:23-06:00",
+        "count": 139
+      }
+    ],
+    "title": "Einen Pumptrack für Geseke! Mehr Bewegung für Kids",
+    "summary": "Ich möchte hier in Geseke einen Pumptrack errichten lassen. Damit die Kids mehr Möglichkeiten haben sich zu bewegen. Egal welche Altersklassen mit Laufrad, Fahrrad, BMX oder Mountenbike, ob Inliner oder Skateboards... tatsächlich sogar mit Rollstuhl befahrbar (je nach Streckenbau). Es ist ein Ganzkörpertraining der Beweglichkeit, Gleichewichtssinn und Reaktionsfähigkeit schult.",
+    "image_url": "https://www.openpetition.de/images/petition/eine-pumptrack-fuer-geseke-mehr-bewegung-fuer-kids_1790838051_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/einen-pumptrack-fuer-geseke-mehr-bewegung-fuer-kids",
+    "description_full": "<!--marker--><p>Ich möchte hier in Geseke einen Pumptrack errichten lassen. Damit die Kids mehr Möglichkeiten haben sich zu bewegen. Egal welche Altersklassen mit Laufrad, Fahrrad, BMX oder Mountenbike, ob Inliner oder Skateboards... tatsächlich sogar mit Rollstuhl befahrbar (je nach Streckenbau). Es ist ein Ganzkörpertraining der Beweglichkeit, Gleichewichtssinn und Reaktionsfähigkeit schult.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Hier in Geseke gibt es Spielplätze... die sind aber für Kinder ab 8 oder 9 schon uninteressant. Es gibt den großen Fußballplatz, dort wird aber oft trainiert und der Soccerplatz ist immer voll. Ausserdem will nicht jeder Fußball spielen. Der Skatepark dort ist zu klein eher was für Könner.</p><p>Der Pumptrack wäre die perfekte Ergänzung für das Sportangebot hier. Die Kids könne auf ihm mit ihren Bikes oder Scootern fahren. Zusammen Spaß haben. Und würden ihren ganzen Körper trainieren. Man sieht so viele Kinder mit ihren Scootern oder Bikes durch die Gegend fahren. Ohne Ziel und stur geradeaus. Der Pumptrack würde ihnen ein Ziel geben und sie von gefährlichen Manövern mit selbstgebauten Rampen oder Strecken im Wald weg holen.</p><p>Gerade für die Altersgruppe von 8-16 Jahren, wäre diese Strecke eine sinnvolle Möglichkeit ihre Freizeit zu verbringen. Freunde treffen, Zeit draußen verbringen, den Körper trainieren.</p><p>Weg von der Couch und der Langeweile hin zu mehr Bewegung und Koordination!</p>",
+    "started_by": "Claudia Albarrán Padilla",
+    "category": "Sport",
+    "category_url": "https://www.openpetition.de/petitionen?category=44#petitionen",
+    "country": "DE",
+    "signatures": 139,
+    "start_date": "2026-10-01",
+    "lang": "de",
+    "campaign_id": "openpetition:einen-pumptrack-fuer-geseke-mehr-bewegung-fuer-kids",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-06T05:06:23-06:00",
+    "offline_since": null,
+    "tags": [
+      "Pumptrack",
+      "Geseke",
+      "Kids",
+      "Ganzkörpertraining",
+      "Reaktionsfähigkeit",
+      "Gleichewichtssinn",
+      "Altersklassen",
+      "Beweglichkeit",
+      "Möglichkeiten",
+      "Mountenbike"
+    ],
+    "last_checked": "2026-10-06T05:06:23-06:00"
+  },
+  "keine-mehrbelastung-fuer-eltern-kindergartengebuehren-in-ergolding-zum-1-januar-2027-anpassen": {
+    "slug": "keine-mehrbelastung-fuer-eltern-kindergartengebuehren-in-ergolding-zum-1-januar-2027-anpassen",
+    "first_seen": "2026-10-06T05:06:23-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-06T05:06:23-06:00",
+        "count": 94
+      }
+    ],
+    "title": "Keine Mehrbelastung für Eltern: Kindergartengebühren in Ergolding zum 1. Januar 2027 anpassen!",
+    "summary": "Der Markt Ergolding soll seine Gebührensatzung für die kommunalen Kindertagesstätten vor dem 1. Januar 2027 anpassen, damit Eltern durch die Reform des BayKiBiG nicht mehr zahlen müssen. Wir fordern: 1. Transparenz: Die Verwaltung legt dem Marktgemeinderat rechtzeitig dar, welche zusätzlichen staatlichen Fördermittel der Markt Ergolding ab 2027 für seine Kindertagesstätten erhält. 2. Beiträge senken: Die Beiträge für Kinder ab dem 1. September des Jahres, in dem sie drei Jahre alt werden, bis zu",
+    "image_url": "https://www.openpetition.de/images/petition/keine-mehrbelastung-fuer-eltern-kindergartengebuehren-in-ergolding-zum-1-januar-2027-anpassen_1791231916_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/keine-mehrbelastung-fuer-eltern-kindergartengebuehren-in-ergolding-zum-1-januar-2027-anpassen",
+    "description_full": "<!--marker--><p>Der Markt Ergolding soll seine Gebührensatzung für die kommunalen Kindertagesstätten vor dem 1. Januar 2027 anpassen, damit Eltern durch die Reform des BayKiBiG nicht mehr zahlen müssen. Wir fordern:<br/></p><ol><li><b>Transparenz</b>: Die Verwaltung legt dem Marktgemeinderat rechtzeitig dar, welche zusätzlichen staatlichen Fördermittel der Markt Ergolding ab 2027 für seine Kindertagesstätten erhält.</li><li><b>Beiträge senken:</b> Die Beiträge für Kinder ab dem 1. September des Jahres, in dem sie drei Jahre alt werden, bis zur Einschulung sinken um 100 € pro Monat. Der Beschluss soll vor dem 1. Januar 2027 gefasst werden.</li><li><b>Geschwisterrabatt:</b> Für das zweite und jedes weitere Kind aus demselben Haushalt werden die Beiträge um 50 % ermäßigt.</li></ol>\n<h3>Begründung</h3>\n<!--marker--><p>Am 22. Juli 2026 hat der Bayerische Landtag die Reform des Kinderbildungs- und -betreuungsgesetzes (BayKiBiG) beschlossen. Sie tritt am 1. Januar 2027 in Kraft. Bisher hat der Freistaat für jedes Kind ab dem Kindergartenalter 100 € pro Monat an die Gemeinden gezahlt, und die Gebühren mussten um genau diesen Betrag gesenkt werden. Diese Pflicht entfällt mit der Reform.<br/>Ändert der Markt Ergolding seine Gebührensatzung nicht, zahlen Eltern von Kindergartenkindern ab Januar 2027 <a href=\"https://www.regensburg.de/regensburg-507/nachgefragt/aenderungen-kindergartengebuehren-und-neues-baykibig-ab-2027\" rel=\"noopener\" target=\"_blank\"><b>100 € mehr pro Kind und Monat, also 1.200 € mehr im Jahr</b>. </a><br/>Dabei verschwindet das Geld nicht: Laut Staatsregierung bleiben die Mittel in voller Höhe im Kita-System und fließen künftig über den sogenannten Qualitätsbonus direkt an die Einrichtungen. Insgesamt soll die staatliche Betriebskostenförderung um 25 % steigen.<br/>Die Beitragssenkung ist also durch die umgeschichteten staatlichen Mittel gedeckt, denn genau dafür waren sie bisher gedacht. Die darüber hinausgehende Erhöhung der Förderung bleibt beim Markt und kann das Defizit der Kinderbetreuung verringern.<br/>Familien mit mehreren Kindern tragen die höchste Last. Ein Geschwisterrabatt ist eine bewusste Investition des Marktes in Familien und, bei einer historisch niedrigen Geburtenrate, ein Zeichen für eine kinderfreundliche Gemeinde.<br/>Die Zeit drängt: Damit Eltern ab Januar nicht mehr zahlen, muss der Marktgemeinderat noch in diesem Jahr entscheiden.</p>",
+    "started_by": "ödp Ortsverband Ergolding",
+    "category": "Familie",
+    "category_url": "https://www.openpetition.de/petitionen?category=14#petitionen",
+    "country": "DE",
+    "signatures": 94,
+    "goal": 350,
+    "start_date": "2026-10-04",
+    "lang": "de",
+    "campaign_id": "openpetition:keine-mehrbelastung-fuer-eltern-kindergartengebuehren-in-ergolding-zum-1-januar-2027-anpassen",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-06T05:06:23-06:00",
+    "offline_since": null,
+    "tags": [
+      "Januar",
+      "Ergolding",
+      "Markt",
+      "Beiträge",
+      "Eltern",
+      "Kindertagesstätten",
+      "Reform",
+      "Zahlen",
+      "Marktgemeinderat",
+      "Gebührensatzung"
+    ],
+    "last_checked": "2026-10-06T05:06:23-06:00"
+  },
+  "erst-versorgung-sichern-dann-pflegeleistungen-veraendern": {
+    "slug": "erst-versorgung-sichern-dann-pflegeleistungen-veraendern",
+    "first_seen": "2026-10-06T05:06:23-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-06T05:06:23-06:00",
+        "count": 73
+      }
+    ],
+    "title": "Erst Versorgung sichern – dann Pflegeleistungen verändern!",
+    "summary": "Unsere Forderungen Wir fordern den Deutschen Bundestag und die Bundesregierung auf: 1. Versorgungslücken bundesweit zu erfassen Vor wesentlichen Änderungen bestehender Pflegeleistungen müssen belastbare Daten darüber vorliegen, welche Pflege- und Entlastungsangebote tatsächlich verfügbar sind – einschließlich regionaler Unterschiede, Wartezeiten und ungedecktem Bedarf. 2. Ersatzpflege tatsächlich erreichbar zu machen Pflegebedürftige und ihre Angehörigen müssen auch in Regionen mit Versorgungsen",
+    "image_url": "https://www.openpetition.de/images/petition/erst-versorgung-sichern-dann-pflegeleistungen-veraendern_1791198182_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/erst-versorgung-sichern-dann-pflegeleistungen-veraendern",
+    "description_full": "<!--marker--><p>Unsere Forderungen<br/>Wir fordern den Deutschen Bundestag und die Bundesregierung auf:<br/>1. Versorgungslücken bundesweit zu erfassen<br/>Vor wesentlichen Änderungen bestehender Pflegeleistungen müssen belastbare Daten darüber vorliegen, welche Pflege- und Entlastungsangebote tatsächlich verfügbar sind – einschließlich regionaler Unterschiede, Wartezeiten und ungedecktem Bedarf.<br/>2. Ersatzpflege tatsächlich erreichbar zu machen<br/>Pflegebedürftige und ihre Angehörigen müssen auch in Regionen mit Versorgungsengpässen zeitnah geeignete Ersatzpflege erhalten können.<br/>Vertraute private Ersatzpflegepersonen müssen dabei weiterhin verlässlich und rechtssicher einbezogen werden können.<br/>3. Menschen mit besonderen Bedürfnissen zu schützen<br/>Es gibt pflegebedürftige Menschen, für die die Betreuung durch fremde oder individuell ungeeignete Personen nicht zumutbar ist.<br/>Für diese Fälle brauchen wir eine klare Härtefallregelung, damit notwendige Ersatzpflege nicht daran scheitert, dass keine geeignete vertraute Person finanziert werden kann.<br/>4. Flexible Entlastung ermöglichen<br/>Unterstützungsbedarf kann schwanken und manchmal kurzfristig erheblich steigen.<br/>Deshalb müssen Leistungen flexibel eingesetzt werden können und auch dann helfen, wenn Unterstützung kurzfristig benötigt wird.<br/>5. Keine Einschränkungen ohne nachgewiesene Alternative<br/>Bestehende Möglichkeiten der häuslichen Pflege und der Entlastung sollen so lange erhalten bleiben, bis anhand überprüfbarer Daten festgestellt werden kann, dass die erforderliche Unterstützung bundesweit tatsächlich vorhanden und erreichbar ist.<br/>Warum diese Petition wichtig ist<br/>Die häusliche Pflege wird in Deutschland zu einem erheblichen Teil von Angehörigen getragen. Viele Familien übernehmen diese Verantwortung über Jahre hinweg.<br/>Diese Menschen brauchen keine Versprechen, dass irgendwo ein Angebot existiert. Sie brauchen konkrete, erreichbare und verlässliche Hilfe, wenn sie krank werden, arbeiten müssen, eine Pause benötigen oder die Belastung vorübergehend zu groß wird.<br/>Besonders problematisch wird es, wenn gesetzliche Leistungen verändert werden, während vor Ort nicht genügend geeignete Angebote vorhanden sind.<br/>Dann kann eine Leistung zwar gesetzlich vorgesehen sein, aber im Alltag trotzdem nicht genutzt werden.<br/>Das Risiko ist, dass die zusätzliche Versorgungslast wieder bei den Angehörigen landet.<br/>Gerade deshalb muss vor einer Einschränkung bestehender Möglichkeiten geklärt werden:<br/>Gibt es ausreichend Ersatzpflege?<br/>Wie schnell ist sie verfügbar?<br/>Gibt es regionale Versorgungslücken?<br/>Wie lange müssen Betroffene warten?<br/>Können vertraute private Pflegepersonen weiterhin einbezogen werden?<br/>Was passiert mit Menschen, für die fremde Betreuung nicht zumutbar ist?<br/>Was geschieht bei kurzfristig stark steigendem Unterstützungsbedarf?<br/>Unser Ziel<br/>Wir sind nicht gegen eine Weiterentwicklung der Pflege.<br/>Wir wollen eine Pflegepolitik, die die Lebensrealität von Pflegebedürftigen und Angehörigen berücksichtigt.<br/>Reformen dürfen nicht dazu führen, dass Menschen am Ende weniger Hilfe bekommen, weil die vorgesehenen Alternativen vor Ort nicht verfügbar sind.<br/>Deshalb lautet unsere zentrale Forderung:<br/>Erst Versorgung sichern – dann Pflegeleistungen verändern!<br/>Wir bitten alle Pflegebedürftigen, pflegenden Angehörigen, Familien, Unterstützerinnen und Unterstützer sowie Organisationen und Verbände, diese Petition zu unterstützen.<br/>Denn Pflege darf nicht vom Wohnort, von der regionalen Angebotslage oder davon abhängen, ob ein Mensch bereit und in der Lage ist, eine fremde Person in seine persönliche Lebenssituation zu lassen.<br/>Kein Einzelfall e. V.<br/>Wir setzen uns dafür ein, dass Menschen mit Pflegebedarf und ihre Angehörigen nicht allein gelassen werden.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Warum diese Petition wichtig ist<br/>Die häusliche Pflege wird in Deutschland zu einem erheblichen Teil von Angehörigen getragen. Viele Familien übernehmen diese Verantwortung über Jahre hinweg.<br/>Diese Menschen brauchen keine Versprechen, dass irgendwo ein Angebot existiert. Sie brauchen konkrete, erreichbare und verlässliche Hilfe, wenn sie krank werden, arbeiten müssen, eine Pause benötigen oder die Belastung vorübergehend zu groß wird.<br/>Besonders problematisch wird es, wenn gesetzliche Leistungen verändert werden, während vor Ort nicht genügend geeignete Angebote vorhanden sind.<br/>Dann kann eine Leistung zwar gesetzlich vorgesehen sein, aber im Alltag trotzdem nicht genutzt werden.<br/>Das Risiko ist, dass die zusätzliche Versorgungslast wieder bei den Angehörigen landet.<br/>Gerade deshalb muss vor einer Einschränkung bestehender Möglichkeiten geklärt werden:<br/>Gibt es ausreichend Ersatzpflege?<br/>Wie schnell ist sie verfügbar?<br/>Gibt es regionale Versorgungslücken?<br/>Wie lange müssen Betroffene warten?<br/>Können vertraute private Pflegepersonen weiterhin einbezogen werden?<br/>Was passiert mit Menschen, für die fremde Betreuung nicht zumutbar ist?<br/>Was geschieht bei kurzfristig stark steigendem Unterstützungsbedarf</p>",
+    "started_by": "KE!N EINZELFALL e.V.",
+    "category": "Soziales",
+    "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
+    "country": "DE",
+    "signatures": 73,
+    "start_date": "2026-10-05",
+    "lang": "de",
+    "campaign_id": "openpetition:erst-versorgung-sichern-dann-pflegeleistungen-veraendern",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-06T05:06:23-06:00",
+    "offline_since": null,
+    "tags": [
+      "Angehörigen",
+      "Pflege",
+      "Ersatzpflege",
+      "Verfügbar",
+      "Brauchen",
+      "Versorgungslücken",
+      "Pflegeleistungen",
+      "Bestehender",
+      "Kurzfristig",
+      "Geeignete"
+    ],
+    "last_checked": "2026-10-06T05:06:23-06:00"
+  },
+  "sichere-ortsmitte-in-oberbergkirchen-fuer-unsere-kinder-senioren-spaziergaenger-und-radfahrer": {
+    "slug": "sichere-ortsmitte-in-oberbergkirchen-fuer-unsere-kinder-senioren-spaziergaenger-und-radfahrer",
+    "first_seen": "2026-10-06T05:06:23-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-06T05:06:23-06:00",
+        "count": 17
+      }
+    ],
+    "title": "Sichere Ortsmitte in Oberbergkirchen - für unsere Kinder, Senioren, Spaziergänger und Radfahrer!",
+    "summary": "Wir fordern Tempo 30 und einen Zebrastreifen im Bereich der Kurve bei Hofmark 28-32 (Edeka). Schon öfters wurde das Problem eines sicheren Straßenübergangs an dieser Stelle diskutiert. Bereits im Radverkehrskonzept von 2023 wurden für die Hofmark Verbesserungen und unter anderem Tempo-30-Abschnitte vorgeschlagen. Das Konzept wurde damals kritisch diskutiert. Umso wichtiger finden wir es, die konkrete Situation heute noch einmal sachlich und ergebnisoffen zu betrachten. Deshalb wünschen wir uns:",
+    "image_url": "https://www.openpetition.de/images/petition/sichere-ortsmitte-in-oberbergkirchen-fuer-unsere-kinder-senioren-spaziergaenger-und-radfahrer_1791273894_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/sichere-ortsmitte-in-oberbergkirchen-fuer-unsere-kinder-senioren-spaziergaenger-und-radfahrer",
+    "description_full": "<!--marker--><p>Wir fordern <b>Tempo 30</b> und einen <b>Zebrastreifen</b> im Bereich der <b>Kurve bei Hofmark 28-32</b> (Edeka).</p><p>Schon öfters wurde das Problem eines sicheren Straßenübergangs an dieser Stelle diskutiert. Bereits im Radverkehrskonzept von 2023 wurden für die Hofmark Verbesserungen und unter anderem Tempo-30-Abschnitte vorgeschlagen. Das Konzept wurde damals kritisch diskutiert. Umso wichtiger finden wir es, die konkrete Situation heute noch einmal sachlich und ergebnisoffen zu betrachten.</p><p><b>Deshalb wünschen wir uns:</b></p><p>👉 eine <b>Verkehrsschau</b> mit Gemeinde, Landratsamt, Polizei und Straßenbaulastträger<br/>👉 eine <b>Prüfung der Sichtverhältnisse</b> und tatsächlich gefahrenen Geschwindigkeiten<br/>👉 eine <b>Prüfung der Querungssituation</b> für Fußgänger und Radfahrer<br/>👉 als Verbesserung der Verkehrssicherheit <b>Tempo 30</b> im Bereich der Ortsmitte<br/>👉 als weitere Maßnahme einen <b>Zebrastreifen</b> für einen sicheren Schul- und Fußweg</p><p>Wir möchten mit dieser Petition zeigen, dass viele Bürgerinnen und Bürger eine sichere Ortsmitte als wichtiges Anliegen sehen.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Uns beschäftigt die Verkehrssituation in unserer Ortsmitte – insbesondere mit Blick auf unsere Kinder und deren Schulweg.</p><p>Die Staatsstraße 2086 führt mitten durch unsere Ortsmitte. Hier sind täglich <b>Seniorinnen und Senioren, Spaziergänger, Familien, Radfahrer und Schulkinder</b> unterwegs. Kinder müssen diese <b>gefährliche Stelle</b> queren und sich dabei auf eine Verkehrssituation verlassen, die gerade im Bereich der Kurve bei Hofmark 28–32 besondere Aufmerksamkeit verdient.</p><p>Es geht um ganz alltägliche Wege: <b>zur Schule, zum Kindergarten, zur Kirche, zum Rathaus, zum Einkaufen oder einfach beim Spaziergang durch unseren Ort</b>.</p><p>Als Eltern fragen wir uns: Ist diese Stelle wirklich sicher genug?</p><p>Für unsere Kinder, die morgens zur Schule gehen.<br/>Für unsere Senioren, die zu Fuß unterwegs sind.<br/>Für Familien, Spaziergänger und alle, die auf dem Weg zur Kirche, zum Rathaus oder durch unsere Ortsmitte unterwegs sind.</p><p>Bitte unterstützt unsere Petition mit eurer Unterschrift. ❤️<br/>Julias Stotz &amp; Sarah M. Richter</p>",
+    "started_by": "Julia Alexandra Stotz",
+    "category": "Verkehr",
+    "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
+    "country": "DE",
+    "signatures": 17,
+    "goal": 300,
+    "start_date": "2026-10-05",
+    "lang": "de",
+    "campaign_id": "openpetition:sichere-ortsmitte-in-oberbergkirchen-fuer-unsere-kinder-senioren-spaziergaenger-und-radfahrer",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-06T05:06:23-06:00",
+    "offline_since": null,
+    "tags": [
+      "Ortsmitte",
+      "Hofmark",
+      "Tempo",
+      "Diskutiert",
+      "Bereich",
+      "Kinder",
+      "Stelle",
+      "Wurde",
+      "Spaziergänger",
+      "Zebrastreifen"
+    ],
+    "last_checked": "2026-10-06T05:06:23-06:00"
+  },
+  "pfullingen-schlossstrasse-kein-mobilfunkmast-neben-kindergaerten-und-schulen": {
+    "slug": "pfullingen-schlossstrasse-kein-mobilfunkmast-neben-kindergaerten-und-schulen",
+    "first_seen": "2026-10-06T05:06:23-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-06T05:06:23-06:00",
+        "count": 12
+      }
+    ],
+    "title": "Pfullingen Schloßstraße: Kein Mobilfunkmast neben Kindergärten und Schulen",
+    "summary": "Auf dem städtischen Gebäude (ehemaliges Feuerwehrhaus, jetzt Deutsches Rotes Kreuz-Haus) in Pfullingen, Schloßstraße 28, soll in unmittelbarer Nähe von Schulen und Kindergärten, eine neue Mobilfunkantenne in Betrieb genommen werden. Die Vorrichtung für das Anbringen von Mobilfunksendern wurde am 09.09.2026 bereits vorinstalliert. Dies ist unverantwortlich. Das Bundesamtes für Strahlenschutz (BfS) empfiehlt einen vorsichtigen Umgang bei 5G Mobilfunk. Die Präsidentin des Bundesamtes für Strahlensc",
+    "image_url": "https://www.openpetition.de/images/default_petition.jpg",
+    "url": "https://www.openpetition.de/petition/online/pfullingen-schlossstrasse-kein-mobilfunkmast-neben-kindergaerten-und-schulen",
+    "description_full": "<!--marker--><p>Auf dem städtischen Gebäude (ehemaliges Feuerwehrhaus, jetzt Deutsches Rotes Kreuz-Haus) in Pfullingen, Schloßstraße 28, soll in unmittelbarer Nähe von Schulen und Kindergärten, eine neue Mobilfunkantenne in Betrieb genommen werden. Die Vorrichtung für das Anbringen von Mobilfunksendern wurde am 09.09.2026 bereits vorinstalliert. Dies ist unverantwortlich. Das Bundesamtes für Strahlenschutz (BfS) empfiehlt einen vorsichtigen Umgang bei 5G Mobilfunk. Die Präsidentin des Bundesamtes für Strahlenschutz, Inge Paulini sagte in der 3sat-Sendung vom 25. Februar 2019 wörtlich: „<b>Die Personengruppen die wir besonders im Fokus haben, die besonders schützenswert sind, sind Kinder, Säuglinge, Kranke, alte Menschen. Der Ausbau der 5G-Netze sollte auf jeden Fall so erfolgen, dass sensible Orte, Orte wo diese Menschen sich aufhalten, Kindergärten, Schulen, Krankenhäuser, dass die erstmal ausgenommen werden.</b>“ <a href=\"https://www.youtube.com/watch?v=ELg_zOuA9Pg\" rel=\"noopener\" target=\"_blank\">https://www.youtube.com/watch?v=ELg_zOuA9Pg</a></p><p>Dieselbe Präsidentin hat öffentlich erklärt, dass es keine wissenschaftlich belegten Zusammenhänge zwischen elektromagnetischen Feldern und gesundheitlichen Auswirkungen unterhalb der Grenzwerte geben würde.</p><p>Es gab jedoch immer wieder Ärzteappelle, die vor den gesundheitlichen Auswirkungen warnen. So z.B.:</p><p>2002: der Freiburger-Appell, den über 1000 Ärztinnen und Ärzte sowie 36´000 Menschen aus aller Welt unterzeichneten<br/>2004: „Bamberger-Appell“, und \"Maintaler-Appell“. <a href=\"https://www.aerzte-und-mobilfunk.eu/aerzte-appelle/bamberger-appell-mobilfunk-praevention-therapie-gesundheit/\" rel=\"noopener\" target=\"_blank\">https://www.aerzte-und-mobilfunk.eu/aerzte-appelle/bamberger-appell-mobilfunk-praevention-therapie-gesundheit/</a></p><p>Da Langzeitfolgen unerforscht sind, fordern wir den sofortigen Stopp dieses Vorhabens in der unmittelbaren Nähe von Kindergärten und Schulen.</p><p>Bürgerinitiative Gesundheit vor Strahlung! Keine Mobilfunkanlage in der Schloßstraße Pfullingen</p>\n<h3>Begründung</h3>\n<!--marker--><p>Wo Kinder sind, die über viele Stunden permanent hochfrequenter Strahlung ausgesetzt wären, darf man keine Experimente machen. Unsere Kinder sind unser größtes Gut, unsere Zukunft. Wir befürchten gesundheitsschädliche Auswirkungen von Mobilfunkstrahlung.</p>",
+    "started_by": "Bürgerinitiative Gesundheit vor Strahlung: Keine Mobilfunkanlage in der Schloßstraße Pfullingen",
+    "category": "Gesundheit",
+    "category_url": "https://www.openpetition.de/petitionen?category=20#petitionen",
+    "country": "DE",
+    "signatures": 12,
+    "start_date": "2026-09-25",
+    "lang": "de",
+    "campaign_id": "openpetition:pfullingen-schlossstrasse-kein-mobilfunkmast-neben-kindergaerten-und-schulen",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-06T05:06:23-06:00",
+    "offline_since": null,
+    "tags": [
+      "Kindergärten",
+      "Schulen",
+      "Schloßstraße",
+      "Bundesamtes",
+      "Pfullingen",
+      "Strahlenschutz",
+      "Auswirkungen",
+      "Präsidentin",
+      "Kinder",
+      "Nähe"
+    ],
+    "last_checked": "2026-10-06T05:06:23-06:00"
+  },
+  "berlins-kulturelle-vielfalt-sichern-einladung-zur-mitzeichnung": {
+    "slug": "berlins-kulturelle-vielfalt-sichern-einladung-zur-mitzeichnung",
+    "first_seen": "2026-10-06T05:06:23-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-06T05:06:23-06:00",
+        "count": 10
+      }
+    ],
+    "title": "Berlins kulturelle Vielfalt sichern – Einladung zur Mitzeichnung",
+    "summary": "I. Ein Kulturgesetz für Berlin beschließen. In der kommenden Legislatur. Berlin braucht einen verlässlichen Rahmen für die öffentliche Kulturförderung. Dazu gehören planbare, mehrjährige Förderzusagen, nachvollziehbare Förderkriterien und eine unabhängige fachliche Bewertung. II. Den Kulturetat um 20 Prozent anheben. Verbindlich. Zwei Prozent sind bereits unterschritten. Wir fordern eine Erhöhung des Kulturetats um 20 Prozent. Dazu einen Plan für die Rückkehr der gestrichenen Programme. III. Wer",
+    "image_url": "https://www.openpetition.de/images/petition/berlins-kulturelle-vielfalt-sichern-einladung-zur-mitzeichnung_1791273393_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/berlins-kulturelle-vielfalt-sichern-einladung-zur-mitzeichnung",
+    "description_full": "<!--marker--><p><b>I. Ein Kulturgesetz für Berlin beschließen. In der kommenden Legislatur.</b><br/>Berlin braucht einen verlässlichen Rahmen für die öffentliche Kulturförderung. Dazu gehören planbare,<br/>mehrjährige Förderzusagen, nachvollziehbare Förderkriterien und eine unabhängige fachliche Bewertung.<br/><b>II. Den Kulturetat um 20 Prozent anheben. Verbindlich.</b><br/>Zwei Prozent sind bereits unterschritten. Wir fordern eine Erhöhung des Kulturetats um 20 Prozent. Dazu einen Plan für die Rückkehr der gestrichenen Programme.<br/><b>III. Wer arbeitet, wird bezahlt.</b><br/>Mindesthonorare und Ausstellungsvergütungen gehören verbindlich an jede öffentliche Förderung<br/>gekoppelt und regelmäßig angepasst. Selbstausbeutung darf keine Kalkulationsgrundlage des Landes<br/>Berlin sein.<br/><b>IV. Räume sichern, bevor sie weg sind.</b><br/>Das Arbeitsraumprogramm entsperren. Landeseigene Immobilien für Kultureinrichtungen öffnen, 86<br/>Prozent der Betriebe fordern genau das. Gewerbemieten wirksam schützen. Kulturstätten mit<br/>Bestandsschutz gegenüber heranrückender Wohnbebauung sichern.<br/><b>V. Subkultur fördern statt beatmen.</b><br/>Clubs, Livespielstätten und Kollektive brauchen eine mehrjährige Förderstruktur statt Einzelprojekte. Dazu braucht jeder der zwölf Bezirke ein bezahltes Nachtbürgermeisteramt, dauerhaft aus Landesmitteln finanziert. So soll zwischen Anwohnenden, Nachtkultur, Gastronomie, Veranstaltenden, Behörden und Sicherheitsakteuren vermittelt werden. Die Nacht braucht eine Zuständigkeit, nicht drei halbe.<br/><b>VI. Kunstfreiheit ist nicht verhandelbar.</b><br/>Keine Gesinnungsprüfung als Förderkriterium, keine politische Einflussnahme auf Jurys. Und wo<br/>Zivilgesellschaft kulturelle Aufgaben ohne Haushaltsmittel übernimmt, wie an der Siegessäule zum<br/>Jahreswechsel, verdient sie verlässliche Genehmigungswege statt Grauzonen.</p>\n<h3>Begründung</h3>\n<!--marker--><p><b>Berlin kürzt sich selbst weg. Die Seele dieser Stadt steht in keiner Haushaltszeile. Ihre Rendite schon.</b></p><p><b>Was das nächste Abgeordnetenhaus für Kultur und Subkultur entscheiden muss</b><br/><i>Berlin spart seit drei Haushalten an dem, was die Stadt zusammenhält. Am 20. September wurde ein</i><br/><i>neues Abgeordnetenhaus gewählt. Hier steht, was diese Kürzungen kosten und was jetzt zu tun ist.</i></p><p><b>1. Wo diese Stadt sich selbst begegnet</b><br/>Berlin funktioniert nicht wegen seiner Ämter. Berlin funktioniert trotz seiner Verwaltung, weil es Orte gibt, die Menschen verbinden. Ob Bezirksbibliothek, Jugendtheater, Stadtteilchor im Gemeindesaal oder die Tanzfläche im Club um vier Uhr morgens: Wer in Berlin ankommt, landet fast nie zuerst auf einem Amt. Sondern im Kollektiv, im Proberaum, in der Kultureinrichtung. Kultur ist Berlins mächtigster Integrationsmotor. Und zwar der einzige, der ganz ohne staatliche Verordnung auskommt. Sie fragt nicht nach Aufenthaltstitel, Schulabschluss oder Geldbörse. Sie stellt Räume bereit und lässt Menschen einander begegnen, die sich sonst nie begegnen würden. Die Zahlen des Instituts für Kulturelle Teilhabeforschung (IKTf) sprechen eine klare Sprache: Vier Kulturbesuche im Jahr steigern das persönliche Wohlbefinden so stark wie 2.700 Euro mehr Jahreseinkommen. Kultur verwaltet gesellschaftliche Ungleichheit nicht, sie baut sie ab. Kultur ist das erste Ziel autoritärer Kräfte. Wer die Demokratie verteidigen will, muss bei der Freiheit der Kunst anfangen. Nicht mit Sonntagsreden, sondern mit Budgets, Räumen und Rechtssicherheit. Wer hier streicht, streicht nicht einfach Freizeitangebote. Er zerschneidet die Bänder, die diese Stadt zusammenhalten. <b>Kultur ist nicht ausschließlich ein gesellschaftlicher Wert, sondern auch Wirtschafts-, Standort-, Tourismus- und Beschäftigungsfaktor und gehört deshalb ins Zentrum der Berliner Wirtschafts- und Standortpolitik.</b></p><p><b>2. Jeder Euro kommt dreieinhalbfach zurück</b><br/>Wer das für Luxus hält, den überzeugt die Rechnung. Rund 528 Millionen Euro Kulturförderung im Jahr erzeugen wirtschaftliche Rückflüsse von 1,88 Milliarden Euro. Das sind mehr als 3,50 Euro für jeden investierten Euro und ein Überschuss von 1,35 Milliarden. Mit den großen Gedenkstätten steigt der Rückfluss auf bis zu 4,65 Milliarden. Diese Studie stammt nicht von der Szene. Sie wurde von der Kulturverwaltung des Senats selbst gefördert. Dahinter steht kein Nischensektor: Die Kultur- und Kreativwirtschaft setzt 41,1 Milliarden Euro um, beschäftigt rund 195.000 Menschen und übertrifft in der Bruttowertschöpfung klassische Industriebranchen der Stadt. <b>Wer angesichts dieser Zahlen bei der Kultur kürzt, spart nicht. Er verbrennt Geld und setzt wirtschaftliche Wertschöpfung aufs Spiel.</b></p><p><b>3. Und genau hier wird gekürzt</b><br/>Der Rotstift setzt bei der Kultur zuerst an, und härter als anderswo. Die Zahlen des laufenden Doppelhaushalts:<br/>• <b>130 Millionen Euro </b>wurden 2025 gestrichen, gut zwölf Prozent des Etats, kurzfristig und ohne Übergang.<br/>• <b>Je 110 Millionen Euro </b>weniger sieht der Doppelhaushalt 2026/27 zusätzlich vor. Gegenüber dem Stand von<br/>2024 fehlen der Kultur damit in jedem Jahr rund 240 Millionen Euro.<br/>• <b>Weniger als zwei Prozent</b> des Berliner Landeshaushalts fließen in die Kultur. 2026 sinken die reinen<br/>Kulturausgaben auf rund 826 Millionen Euro, trotz der enormen wirtschaftlichen und gesellschaftlichen<br/>Bedeutung der Kultur für die Stadt.<br/>• <b>25 Prozent weniger </b>bekommt die bezirkliche Kultur. Der Fonds für Ausstellungsvergütungen in den<br/>kommunalen Galerien und der Fonds für bezirkliche Projekte im Stadtraum wurden vollständig abgeschafft. Gekürzt wurden auch Jugendkunstschulen sowie Kinder-, Jugend- und Puppentheater.<br/>• <b>Gestrichen </b>sind unter anderem die Künstlerische Forschung, der KinderKulturMonat, Musikprogramme für Kitas und Berlin Mondiale. Gekürzt werden Urbane Praxis und Kunst im öffentlichen Raum; das<br/>Arbeitsraumprogramm ist faktisch blockiert. Rechnet man mit dem Faktor von 3,5 aus der eigenen Studie des Senats, kostet allein die Kürzung von 110 Millionen Euro die Stadt rund <b>385 Millionen Euro entgangene Rückflüsse. Jedes Jahr.</b> Und das lässt sich später nicht per Haushaltsbeschluss wieder einschalten. Ein Ensemble, das auseinandergeht, findet nicht wieder zusammen. Ein geräumtes Atelier wartet nicht. Das ist keine Sparpolitik. Das ist Substanzverzehr, und die Rechnung dafür bekommt die nächste Legislatur.<b> Man saniert keine Stadt, indem man ihr wegnimmt, wofür Menschen in sie ziehen und weshalb Millionen von Touristen sie besuchen. </b></p><p><b>Wer die Clubs verliert, verliert nicht nur Nächte. Er verliert den Grund, aus dem die halbe Welt auf die Stadt der Freiheit schaut.</b></p><p><b>Berlin kann viele Debatten vertagen. Diese nicht. Was in dieser Legislatur an kultureller Substanz verloren geht, gewinnt keine spätere zurück.</b></p>",
+    "started_by": "We Are Berlin e.V.",
+    "category": "Kultur",
+    "category_url": "https://www.openpetition.de/petitionen?category=25#petitionen",
+    "country": "DE",
+    "signatures": 10,
+    "start_date": "2026-10-05",
+    "lang": "de",
+    "campaign_id": "openpetition:berlins-kulturelle-vielfalt-sichern-einladung-zur-mitzeichnung",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-06T05:06:23-06:00",
+    "offline_since": null,
+    "tags": [
+      "Kultur",
+      "Berlin",
+      "Euro",
+      "Prozent",
+      "Stadt",
+      "Millionen",
+      "Milliarden",
+      "Braucht",
+      "Kulturförderung",
+      "Mehrjährige"
+    ],
+    "last_checked": "2026-10-06T05:06:23-06:00"
+  },
+  "ruecktrittsforderung-friedrich-merz-als-vorsitzender-der-cdu-und-der-cdu-csu-bundestagsfraktion": {
+    "slug": "ruecktrittsforderung-friedrich-merz-als-vorsitzender-der-cdu-und-der-cdu-csu-bundestagsfraktion",
+    "first_seen": "2026-10-06T05:06:23-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-06T05:06:23-06:00",
+        "count": 7
+      }
+    ],
+    "title": "Rücktrittsforderung: Friedrich Merz als Vorsitzender der CDU und der CDU/CSU-Bundestagsfraktion",
+    "summary": "Wir fordern den Rücktritt von Friedrich Merz von seinen Ämtern als Parteivorsitzender der CDU Deutschlands und als Vorsitzender der CDU/CSU-Bundestagsfraktion im Deutschen Bundestag. Ein führender Politiker an der Spitze einer der größten Parteien Deutschlands hat eine besondere Verantwortung für den politischen Diskurs, den gesellschaftlichen Zusammenhalt und die Vertretung der Interessen der Bürgerinnen und Bürger. Wir sind der Überzeugung, dass Friedrich Merz dieser Verantwortung nicht mehr g",
+    "image_url": "https://www.openpetition.de/images/default_petition.jpg",
+    "url": "https://www.openpetition.de/petition/online/ruecktrittsforderung-friedrich-merz-als-vorsitzender-der-cdu-und-der-cdu-csu-bundestagsfraktion",
+    "description_full": "<!--marker--><p>Wir fordern den Rücktritt von Friedrich Merz von seinen Ämtern als Parteivorsitzender der CDU Deutschlands und als Vorsitzender der CDU/CSU-Bundestagsfraktion im Deutschen Bundestag.<br/>Ein führender Politiker an der Spitze einer der größten Parteien Deutschlands hat eine besondere Verantwortung für den politischen Diskurs, den gesellschaftlichen Zusammenhalt und die Vertretung der Interessen der Bürgerinnen und Bürger. Wir sind der Überzeugung, dass Friedrich Merz dieser Verantwortung nicht mehr gerecht wird.</p><p>1. Polarisierung und Verletzung der Verantwortung im politischen Diskurs<br/>Wiederholte pauschalisierende und entwertende Aussagen (wie etwa die Begriffe „Sozialtourismus“ oder „kleine Paschas“) schaden dem gesellschaftlichen Miteinander und bedienen Ressentiments. Statt Brücken zu bauen und zu verbinden, vertieft Friedrich Merz die Gräben in unserer Gesellschaft und spaltet die Bevölkerung.</p><p>2. Fehlender Fokus auf die Alltagsnöte der Menschen im Land<br/>In Zeiten von wirtschaftlicher Unsicherheit und steigenden Lebenshaltungskosten vermissen viele Bürgerinnen und Bürger eine Politik, die sich prioritär um die drängenden innenpolitischen Aufgaben kümmert. Eine politische Prioritätensetzung, die den Schwerpunkt auf internationale Aufrüstung und globale Debatten legt, während bei der heimischen Infrastruktur, der Bildung und im Sozialbereich gespart werden soll, geht an den Realitäten und Bedürfnissen der Menschen vorbei.</p><p>3. Eine Politik der sozialen Härte und veralteter Konzepte<br/>Die Vorstöße zur Verschärfung des Bürgergelds sowie Angriffe auf den Sozialstaat treffen einkommensschwache und bedürftige Menschen unverhältnismäßig hart. Eine nachhaltige Zukunftspolitik benötigt soziale Sicherheit, massive Zukunfts- und Infrastrukturinvestitionen sowie ein klares Bekenntnis zu fairen Lebensbedingungen für alle – Werte, die unter der aktuellen Führung nicht vertreten werden.</p><p>Aus diesen Gründen ist ein personeller und inhaltlicher Neuanfang an der Spitze der Partei und der Fraktion notwendig.</p><p>Noch mal Aufgeführte Konkrete Forderungen:</p><p>Persönliche und politische Konsequenzen:</p><p>Der unverzügliche Rücktritt von Friedrich Merz als Parteivorsitzender der CDU Deutschlands und als Vorsitzender der CDU/CSU-Bundestagsfraktion.</p><p>Neuausrichtung der Parteiführung:</p><p>Ein personeller Neuanfang für eine Politik, die den gesellschaftlichen Zusammenhalt stärkt, verlässliche soziale Sicherheit garantiert und die Anliegen der gesamten Bevölkerung in den Mittelpunkt stellt.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Ein klares Signal setzen:</p><p>Spitzenpolitiker tragen eine direkte Verantwortung für die Sprache und Ausrichtung im Land. Ein Rücktrittsersuchen verdeutlicht, dass verletzende Rhetorik und unsoziale Politik nicht widerspruchslos hingenommen werden.</p><p>Verantwortung einfordern:</p><p>Wenn die politische Ausrichtung den Zusammenhalt der Gesellschaft gefährdet und die Nöte der eigenen Bevölkerung vernachlässigt, ist ein personeller Wechsel das stärkste demokratische Signal.</p>",
+    "started_by": "Benny Gerstner",
+    "category": "Bürgerrechte",
+    "category_url": "https://www.openpetition.de/petitionen?category=58#petitionen",
+    "country": "DE",
+    "signatures": 7,
+    "start_date": "2026-10-04",
+    "lang": "de",
+    "campaign_id": "openpetition:ruecktrittsforderung-friedrich-merz-als-vorsitzender-der-cdu-und-der-cdu-csu-bundestagsfraktion",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-06T05:06:23-06:00",
+    "offline_since": null,
+    "tags": [
+      "Verantwortung",
+      "Friedrich",
+      "Merz",
+      "Deutschlands",
+      "CSU-Bundestagsfraktion",
+      "Gesellschaftlichen",
+      "Vorsitzender",
+      "Zusammenhalt",
+      "Politik",
+      "Parteivorsitzender"
+    ],
+    "last_checked": "2026-10-06T05:06:23-06:00"
+  },
+  "aufsplittung-des-5-sgb-xi-und-20-sgb-v-fuer-freiberufliche-fachkraefte-gymnastiklehrer-etc": {
+    "slug": "aufsplittung-des-5-sgb-xi-und-20-sgb-v-fuer-freiberufliche-fachkraefte-gymnastiklehrer-etc",
+    "first_seen": "2026-10-06T05:06:23-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-06T05:06:23-06:00",
+        "count": 5
+      }
+    ],
+    "title": "Aufsplittung des §5 SGB XI und §20 SGB V für freiberufliche Fachkräfte (Gymnastiklehrer etc.)",
+    "summary": "Durch präventive individuelle Mobiltätsmaßnahmen im Einzelsetting (Häuslichen Umfeld) werden enorme finanzielle Kosten der Krankenkasse ( zb. vehinderte Stürze) als auch der Pflegekasse ( z.b späterer stationäre Heimaufnahme eingespart. So wird die weitestgehende Selbstständigkeit im häuslichen Umfeld nachhweislich gefördert. Die strikte Trennung von §20 SGB V und § 5 SGB XI ist nicht mehr zeitgemäß. Eine Aufsplittung des Pragrafen zur Ermöglichung von möglicher Einzelprävention durch qualifizie",
+    "image_url": "https://www.openpetition.de/images/default_petition.jpg",
+    "url": "https://www.openpetition.de/petition/online/aufsplittung-des-5-sgb-xi-und-20-sgb-v-fuer-freiberufliche-fachkraefte-gymnastiklehrer-etc",
+    "description_full": "<!--marker--><p>Durch präventive individuelle Mobiltätsmaßnahmen im Einzelsetting (Häuslichen Umfeld) werden enorme finanzielle Kosten der Krankenkasse ( zb. vehinderte Stürze) als auch der Pflegekasse (  z.b späterer stationäre Heimaufnahme eingespart. So wird die weitestgehende Selbstständigkeit im häuslichen Umfeld nachhweislich gefördert. Die strikte Trennung von §20 SGB V und § 5 SGB XI ist nicht mehr zeitgemäß. Eine Aufsplittung des Pragrafen zur Ermöglichung von möglicher Einzelprävention durch qualifizierte Fachkräfte verhindert präventiv Stürze und Inmobilität und entlastet enorm die Pflegefachkräfte und pflegende Anghörige. Daduch werden dem Sozialsystem langfristig Milliardenbeträge  eingespart. Das Wirtschaftlichkeitsgebot wird durch diese Reform nicht verletzt, sonder im Sinne einer nachhaltigen Vorsorge erst realisiert. </p>\n<h3>Begründung</h3>\n<!--marker--><p>Für freiberufliche Bewegungsfachkräfte wie ( Gymnastiklehrer) bedeutet die Aufsplittung der §20 SGB V und §5 SGB XI Existenzsicherung, Präventionsqualität und Bürokratieabbau in der häuslichen Umgebung für Menschen mit Pflegegrad. Freiberufliche Gymnastiklehrer leben davon das ihre Kurse von den Krankenkassen (nach §20 SGB V) zertifiziert und bezuschusst werden. Fallen diese Möglichkeiten weg oder werden die Hürden zu hoch bricht die Haupteinnahmequelle weg.<br/>Berufliche Gleichberechtigung: Gymnastiklehrer/innen schließen die Lücke zwischen medizinischer Therapie und reinen Breitensport.</p>",
+    "started_by": "Hering, Anja",
+    "category": "Gesundheit",
+    "category_url": "https://www.openpetition.de/petitionen?category=20#petitionen",
+    "country": "DE",
+    "signatures": 5,
+    "start_date": "2026-09-28",
+    "lang": "de",
+    "campaign_id": "openpetition:aufsplittung-des-5-sgb-xi-und-20-sgb-v-fuer-freiberufliche-fachkraefte-gymnastiklehrer-etc",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-06T05:06:23-06:00",
+    "offline_since": null,
+    "tags": [
+      "Häuslichen",
+      "Gymnastiklehrer",
+      "Aufsplittung",
+      "Umfeld",
+      "Freiberufliche",
+      "Eingespart",
+      "Stürze",
+      "Mobiltätsmaßnahmen",
+      "Selbstständigkeit",
+      "Einzelprävention"
+    ],
+    "last_checked": "2026-10-06T05:06:23-06:00"
+  },
+  "weg-mit-dem-buerokratiemonster-mehr-zeit-fuer-oesterreichs-unternehmer-innen": {
+    "slug": "weg-mit-dem-buerokratiemonster-mehr-zeit-fuer-oesterreichs-unternehmer-innen",
+    "first_seen": "2026-10-06T05:06:23-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-06T05:06:23-06:00",
+        "count": 64
+      }
+    ],
+    "title": "Weg mit dem Bürokratiemonster – mehr Zeit für Österreichs Unternehmer:innen!",
+    "summary": "Österreichs Unternehmer:innen wollen unternehmen – statt einen immer größeren Teil ihrer Arbeitszeit mit Formularen, Mehrfachmeldungen, Nachweisen, Dokumentationspflichten und langwierigen Behördenwegen zu verbringen. Gerade Ein-Personen-Unternehmen sowie kleine und mittlere Betriebe trifft übermäßiger Verwaltungsaufwand besonders stark. Was in größeren Unternehmen eigene Abteilungen übernehmen können, müssen Kleinunternehmer:innen oft selbst erledigen. Diese Zeit fehlt bei Kund:innen, Mitarbeit",
+    "image_url": "https://www.openpetition.eu/images/petition/weg-mit-dem-buerokratiemonster-mehr-zeit-fuer-oesterreichs-unternehmer-innen_1790673671_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/weg-mit-dem-buerokratiemonster-mehr-zeit-fuer-oesterreichs-unternehmer-innen",
+    "description_full": "<!--marker--><p>Österreichs Unternehmer:innen wollen unternehmen – statt einen immer größeren Teil ihrer Arbeitszeit mit Formularen, Mehrfachmeldungen, Nachweisen, Dokumentationspflichten und langwierigen Behördenwegen zu verbringen.</p><p>Gerade <b>Ein-Personen-Unternehmen sowie kleine und mittlere Betriebe</b> trifft übermäßiger Verwaltungsaufwand besonders stark. Was in größeren Unternehmen eigene Abteilungen übernehmen können, müssen Kleinunternehmer:innen oft selbst erledigen. Diese Zeit fehlt bei Kund:innen, Mitarbeiter:innen, Innovation und der Weiterentwicklung des eigenen Unternehmens.<br/>Deshalb fordern wir einen <b>konsequenten und spürbaren Bürokratieabbau für Österreichs Unternehmen.</b></p><p><b>Unsere konkreten Forderungen:</b><br/>✅ <b>Once-Only statt Mehrfachmeldungen</b><br/>Daten, die Unternehmen bereits an eine Behörde übermittelt haben, sollen nicht immer wieder neu angegeben werden müssen. Behörden sollen vorhandene Daten – unter Einhaltung des Datenschutzes – untereinander nutzen können.<br/>✅ <b>Digitale Behördenwege, die wirklich Zeit sparen</b><br/>Verwaltungsprozesse sollen vollständig digital, verständlich und möglichst zentral abgewickelt werden können. Digitalisierung darf nicht bedeuten, dass komplizierte Papierprozesse lediglich ins Internet übertragen werden.<br/>✅ <b>Weniger Melde-, Nachweis- und Dokumentationspflichten</b><br/>Bestehende Verpflichtungen sollen systematisch auf Notwendigkeit, Doppelgleisigkeiten und tatsächlichen Nutzen überprüft und unnötige Vorgaben gestrichen werden.<br/>✅ <b>Schnellere und einfachere Genehmigungsverfahren</b><br/>Unternehmerische Investitionen dürfen nicht durch vermeidbare Verfahrensschritte und lange Bearbeitungszeiten verzögert werden. Verfahren sollen einfacher, transparenter und mit klaren Fristen gestaltet werden.<br/>✅ <b>Verpflichtender KMU-Check bei neuen Regelungen</b><br/>Neue Gesetze und Verordnungen sollen bereits vor ihrer Einführung darauf geprüft werden, welche administrativen Belastungen sie speziell für EPUs und kleine Unternehmen verursachen.<br/>✅ <b>Neue Bürokratie nur, wenn alte tatsächlich wegfällt</b><br/>Nach dem Prinzip <b>„One in, one out“</b> soll bei neuen administrativen Verpflichtungen geprüft werden, welche bestehenden Belastungen im Gegenzug entfallen können.<br/>✅ <b>Mehr Eigenverantwortung, weniger unnötige Kontrollen</b><br/>Kontrollen sind dort notwendig, wo sie einen konkreten Zweck erfüllen. Unternehmen sollen aber nicht unter Generalverdacht gestellt werden. Vorgaben müssen verhältnismäßig und risikobasiert sein.</p><p><b>👹 Gemeinsam sagen wir: WEG MIT DEM BÜROKRATIEMONSTER!</b></p>\n<h3>Begründung</h3>\n<!--marker--><p><b>WORUM ES UNS GEHT: </b><br/>Bürokratie lässt sich nicht vollständig abschaffen – und Regeln erfüllen wichtige Aufgaben. Entscheidend ist aber, dass <b>Vorschriften verständlich, verhältnismäßig und in der betrieblichen Praxis umsetzbar sind.</b><br/>Bürokratieabbau darf deshalb nicht nur angekündigt werden. <b>Die Entlastung muss bei den Unternehmer:innen tatsächlich ankommen.</b><br/>Denn jede unnötige Stunde Verwaltungsaufwand ist eine Stunde, die nicht für Kund:innen, Mitarbeiter:innen, Innovation oder das eigene Unternehmen zur Verfügung steht.</p><p><b>Unser Ziel: weniger unnötige Bürokratie. Einfachere Verfahren. Mehr Zeit fürs Unternehmertum.</b><br/>Mit dieser Petition fordern wir die politisch Verantwortlichen auf Bundesebene auf, gemeinsam mit Ländern, Gemeinden und Interessenvertretungen einen <b>konkreten, messbaren und dauerhaft wirksamen Bürokratieabbau für EPUs und KMU</b> umzusetzen.</p><p><b>👹 Gemeinsam sagen wir: WEG MIT DEM BÜROKRATIEMONSTER!</b></p><p><b>*** QUELLEN:</b><br/>Österreichische Unternehmen verlieren Woche für Woche viele Arbeitsstunden an Bürokratie. Bei KMU liegt der Aufwand laut einer<b> market-Studie im Auftrag der WKÖ bei durchschnittlich 19,3 Stunden pro Woche</b>. Siehe: <a href=\"https://www.kmuforschung.ac.at/studies/warum-ist-buerokratieabbau-in-oesterreich-noetig/\" rel=\"noopener\" target=\"_blank\">https://www.kmuforschung.ac.at/studies/warum-ist-buerokratieabbau-in-oesterreich-noetig/ </a></p><p>Der <b>gesamte bürokratische Aufwand in Österreich verursacht für Unternehmen pro Jahr Kosten in Höhe von € 21,1 Mrd. Das entspricht € 320 Mio Arbeitskosten</b> und bindet rund 200.000 Arbeitskräfte, die ausschließlich mit bürokratischen Aufgaben beschäftigt sind. Diese Zahlen beruhen auf Hochrechnungen für 2026, die auf der Studie „Bürokratiebelastung der gewerblichen Wirtschaft in Niederösterreich“ (2024) sowie auf Daten der Statistik Austria basieren. Siehe: <a href=\"https://www.wko.at/stmk/news/buerokratie-kostet-unternehmen-zehn-arbeitsstunden-die-woche?\" rel=\"noopener\" target=\"_blank\">https://www.wko.at/stmk/news/buerokratie-kostet-unternehmen-zehn-arbeitsstunden-die-woche?</a></p>",
+    "started_by": "SWV",
+    "category": "Wirtschaft",
+    "category_url": "https://www.openpetition.de/at/petitionen?category=48#petitionen",
+    "country": "AT",
+    "signatures": 64,
+    "start_date": "2026-09-29",
+    "lang": "de",
+    "campaign_id": "openpetition:weg-mit-dem-buerokratiemonster-mehr-zeit-fuer-oesterreichs-unternehmer-innen",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-06T05:06:23-06:00",
+    "offline_since": null,
+    "tags": [
+      "Unternehmen",
+      "Innen",
+      "Unternehmer",
+      "Österreichs",
+      "Bürokratie",
+      "Größeren",
+      "Unnötige",
+      "Dokumentationspflichten",
+      "Verwaltungsaufwand",
+      "Bürokratiemonster"
+    ],
+    "last_checked": "2026-10-06T05:06:23-06:00"
+  },
+  "wiener-linien-preis-erhoehung-2027": {
+    "slug": "wiener-linien-preis-erhoehung-2027",
+    "first_seen": "2026-10-06T05:06:23-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-06T05:06:23-06:00",
+        "count": 30
+      }
+    ],
+    "title": "Wiener Linien Preis Erhöhung 2027",
+    "summary": "Stoppt die geplanten Tariferhöhungen der Wiener Linien ab 2027! Bevor Tickets teurer werden, müssen zuerst die Kernpflichten erfüllt werden: Die sofortige Reparatur defekter Rolltreppen und Aufzüge sowie die strikte Einhaltung der Fahrpläne und Intervalle. 🎯 Das Ziel der Petition Wir fordern den Stadtrat für Mobilität, die Stadt Wien und die Geschäftsführung der Wiener Linien auf: Stoppt die geplanten Tariferhöhungen (Valorisierung ab 2027), bis die Wiener Linien ihre vertraglichen und gesellsch",
+    "image_url": "https://www.openpetition.eu/images/petition/wiener-linien-preis-erhoehung-2027_1791277930_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/wiener-linien-preis-erhoehung-2027",
+    "description_full": "<!--marker--><p>Stoppt die geplanten Tariferhöhungen der Wiener Linien ab 2027! Bevor Tickets teurer werden, müssen zuerst die Kernpflichten erfüllt werden: Die sofortige Reparatur defekter Rolltreppen und Aufzüge sowie die strikte Einhaltung der Fahrpläne und Intervalle.</p><p>🎯 Das Ziel der Petition<br/>Wir fordern den Stadtrat für Mobilität, die Stadt Wien und die Geschäftsführung der Wiener Linien auf: Stoppt die geplanten Tariferhöhungen (Valorisierung ab 2027), bis die Wiener Linien ihre vertraglichen und gesellschaftlichen Pflichten wieder vollumfänglich erfüllen! Priorität muss das Reparieren der Infrastruktur und das Einhalten der Fahrpläne haben – nicht das Abkassieren der Fahrgäste.</p>\n<h3>Begründung</h3>\n<!--marker--><p><b>Qualität statt Teuerung – Wiener Linien müssen ihre Pflichten erfüllen!</b></p><p>Wien war jahrelang ein internationales Vorbild für den öffentlichen Nahverkehr. Doch die Realität der Fahrgäste sieht mittlerweile anders aus. Während die Ticketpreise – nach der drastischen Erhöhung der Jahreskarte auf über 460 Euro im Jahr 2026 – ab Jänner 2027 durch die jährliche Indexierung noch teurer werden sollen, sinkt die Qualität des Angebots massiv.</p><p>Wir, die Wienerinnen und Wiener sowie alle Pendlerinnen und Pendler, sind nicht mehr bereit, für immer schlechtere Leistung immer tiefere Taschen zu haben.<br/>Wir kritisieren und fordern Abhilfe für folgende Missstände:</p><p>• Dauerdefekte Infrastruktur: Kaputte Rolltreppen und Aufzüge sind an vielen U-Bahn-Stationen kein vorübergehendes Problem mehr, sondern Wochen- oder Monatszustand. Das ist eine Zumutung für ältere Menschen, Eltern mit Kinderwagen und Menschen mit Behinderungen. Barrierefreiheit sieht anders aus!<br/>• Mangelhafte Intervalle &amp; Ausfälle: Busse, Straßenbahnen und U-Bahnen kommen unregelmäßig. Züge fallen komplett aus, die Wartezeiten auf den Bahnsteigen werden immer länger. Die Fahrpläne sind oft nur noch Wunschdenken.<br/>• Marode Fahrzeuge: Ausfälle wegen technischer Defekte an älteren Garnituren und Bussen häufen sich, was den täglichen Pendelverkehr unberechenbar macht.<br/>Die Wiener Linien haben eine Pflicht gegenüber der Bevölkerung. Bevor über die nächste Teuerungswelle ab 2027 verhandelt wird, muss die Leistung wieder stimmen!</p><p>🛑 Unsere konkreten Forderungen:<br/>1. Aussetzen der Tarifanpassung 2027: Keine weiteren Preiserhöhungen bei Einzelfahrscheinen, Monats- oder Jahreskarten, solange die Qualitätsprobleme nicht gelöst sind.<br/>2. Sofort-Reparatur-Offensive: Eine drastische Verkürzung der Reparaturzeiten für alle Aufzüge, Rolltreppen und Klimaanlagen im gesamten Netz.<br/>3. Garantierte Intervalle: Rückkehr zu verlässlichen, dichten Fahrplänen und ein Ende der permanenten \"Intervallsverlängerungen\" wegen Personal- oder Fahrzeugmangels.<br/>4. Transparenz: Eine öffentliche und ehrliche Kommunikation über Ausfälle und den echten Zustand der Wiener Infrastruktur.<br/>Für ein leistbares, verlässliches und barrierefreies Wien – unterschreiben Sie jetzt!</p>",
+    "started_by": "Richard Kutschera",
+    "category": "Verkehr",
+    "category_url": "https://www.openpetition.de/at/petitionen?category=47#petitionen",
+    "country": "AT",
+    "signatures": 30,
+    "start_date": "2026-10-06",
+    "lang": "de",
+    "campaign_id": "openpetition:wiener-linien-preis-erhoehung-2027",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-06T05:06:23-06:00",
+    "offline_since": null,
+    "tags": [
+      "Wiener",
+      "Linien",
+      "Tariferhöhungen",
+      "Rolltreppen",
+      "Intervalle",
+      "Fahrpläne",
+      "Geplanten",
+      "Aufzüge",
+      "Stoppt",
+      "Wien"
+    ],
+    "last_checked": "2026-10-06T05:06:23-06:00"
+  },
+  "fussballtore-der-gemeinde-in-aigen-auf-parzelle-534-203": {
+    "slug": "fussballtore-der-gemeinde-in-aigen-auf-parzelle-534-203",
+    "first_seen": "2026-10-06T05:06:23-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-06T05:06:23-06:00",
+        "count": 20
+      }
+    ],
+    "title": "Fußballtore der Gemeinde in Aigen, auf Parzelle 534/203",
+    "summary": "Mit dieser Petition ersuchen wir die Stadt Salzburg, die Grünfläche auf dem Grundstück 534/203 am Ignaz-Rieder-Kai offiziell als Gemeinschaftsfläche für Kinder- und Jugendfußball zu prüfen und die dauerhafte Aufstellung von zwei Fußballtoren zu ermöglichen. Ziel ist es, einen sicheren und niederschwelligen Treffpunkt für Kinder, Jugendliche und Familien aus der Nachbarschaft zu schaffen und damit das Gemeinschaftsleben im Stadtteil nachhaltig zu fördern.",
+    "image_url": "https://www.openpetition.eu/images/petition/fussballtore-der-gemeinde-in-aigen-auf-parzelle-534-203_1791191732_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/fussballtore-der-gemeinde-in-aigen-auf-parzelle-534-203",
+    "description_full": "<!--marker--><p>Mit dieser Petition ersuchen wir die Stadt Salzburg, die Grünfläche auf dem Grundstück 534/203 am Ignaz-Rieder-Kai offiziell als Gemeinschaftsfläche für Kinder- und Jugendfußball zu prüfen und die dauerhafte Aufstellung von zwei Fußballtoren zu ermöglichen. Ziel ist es, einen sicheren und niederschwelligen Treffpunkt für Kinder, Jugendliche und Familien aus der Nachbarschaft zu schaffen und damit das Gemeinschaftsleben im Stadtteil nachhaltig zu fördern.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Diese Petition ist wichtig, weil die Grünfläche auf dem Grundstück 534/203 bereits heute zeigt, welchen positiven Beitrag ein einfacher, frei zugänglicher Fußballplatz für die Nachbarschaft leisten kann. Seit der Aufstellung eines Fußballtores treffen sich dort regelmäßig Kinder und Jugendliche aus der Umgebung, häufig gemeinsam mit ihren Eltern. Sie spielen miteinander, verbringen Zeit im Freien und lernen andere Kinder aus der Nachbarschaft kennen. Dadurch ist innerhalb kürzester Zeit ein lebendiger Treffpunkt für die Gemeinschaft entstanden. Wir möchten diese positive Entwicklung erhalten und langfristig ermöglichen. Zwei geeignete Fußballtore würden Kindern und Jugendlichen einen sicheren, kostenlosen und niederschwelligen Ort für Bewegung, Spiel und Begegnung bieten und gleichzeitig das Zusammenleben in der Nachbarschaft stärken.</p>",
+    "started_by": "Adam Bleyer",
+    "category": "Sport",
+    "category_url": "https://www.openpetition.de/at/petitionen?category=44#petitionen",
+    "country": "AT",
+    "signatures": 20,
+    "goal": 1000,
+    "start_date": "2026-10-05",
+    "lang": "de",
+    "campaign_id": "openpetition:fussballtore-der-gemeinde-in-aigen-auf-parzelle-534-203",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-06T05:06:23-06:00",
+    "offline_since": null,
+    "tags": [
+      "Kinder",
+      "Nachbarschaft",
+      "Niederschwelligen",
+      "Aufstellung",
+      "Ermöglichen",
+      "Jugendliche",
+      "Grundstück",
+      "Grünfläche",
+      "Treffpunkt",
+      "Sicheren"
+    ],
+    "last_checked": "2026-10-06T05:06:23-06:00"
   }
 }

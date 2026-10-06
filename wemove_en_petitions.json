@@ -31,9 +31,15 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-10-06T00:04:29-06:00",
-    "petition_count": 610,
-    "available": 713,
+    "generated_at": "2026-10-06T05:11:17-06:00",
+    "petition_count": 614,
+    "available": 716,
+    "new_petitions_last_run": [
+      "2026-10-hands-off-nature-trial-1-petition-EN",
+      "2026-10-hands-off-nature-trial-2-petition-EN",
+      "2026-10-hands-off-nature-trial-3-petition-EN",
+      "2026-10-stop-killer-robots-petition-EN"
+    ],
     "unbrauchbare": {
       "2024-04-iskra-testing-mep-tool-petition-EN": "2026-09-06T10:42:07-06:00",
       "2024-04-michaltest1-petition-1-EN": "2026-09-06T10:42:07-06:00",
@@ -132,65 +138,62 @@
       "2023-test-romain-petition-EN": "2026-10-06T00:00:56-06:00",
       "2024-01-09-social-actions-wiki-test-lucas-petition-EN": "2026-10-06T00:00:56-06:00",
       "2024-01-michaltest1-petition-EN": "2026-10-06T00:00:56-06:00",
-      "2024-01-michaltest2-petition-EN": "2026-10-06T00:00:56-06:00"
+      "2024-01-michaltest2-petition-EN": "2026-10-06T00:00:56-06:00",
+      "2024-02-15-trial-Mikatest-YouMove-petition-EN": "2026-10-06T05:10:41-06:00",
+      "2024-02-michaltest1-petition-EN": "2026-10-06T05:10:41-06:00",
+      "2024-03-lesly-test-donation-pages-petition-EN": "2026-10-06T05:10:41-06:00",
+      "2024-03-testing-santander-bug-petition-EN": "2026-10-06T05:10:41-06:00"
     },
-    "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-10-06T00:04:29-06:00",
-      "gefunden": 713,
-      "im_bestand": 610,
-      "unbrauchbar": 98,
+      "stand": "2026-10-06T05:11:17-06:00",
+      "gefunden": 716,
+      "im_bestand": 614,
+      "unbrauchbar": 102,
       "verworfen": 0,
       "dublette": 0,
       "verschwunden": 0,
       "zurueckgestellt": 0,
-      "offen": 5,
-      "offene_beispiele": [
-        "2024-02-15-trial-Mikatest-YouMove-petition-EN",
-        "2024-02-michaltest1-petition-EN",
-        "2024-03-lesly-test-donation-pages-petition-EN",
-        "2024-03-testing-santander-bug-petition-EN",
-        "2026-10-stop-killer-robots-petition-EN"
-      ],
-      "bestand_gesamt": 610,
+      "offen": 0,
+      "offene_beispiele": [],
+      "bestand_gesamt": 614,
       "bestand_ausserhalb": 0
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-10-06T00:04:29-06:00",
-        "gesamt": 610,
-        "online": 609,
+        "zeit": "2026-10-06T05:11:17-06:00",
+        "gesamt": 614,
+        "online": 613,
         "offline": 1,
         "ohne_titel": 1,
         "platzhalter": 0,
         "nicht_ausgeliefert": 1,
         "torsi": 0,
         "dubletten": 0,
-        "mit_start": 487,
-        "juengstes_start": "2026-09-01",
+        "mit_start": 491,
+        "juengstes_start": "2026-10-01",
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
-        "neu": 0
+        "neu": 4
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-10-06T00:04:29-06:00",
-      "gesamt": 610,
-      "online": 609,
+      "zeit": "2026-10-06T05:11:17-06:00",
+      "gesamt": 614,
+      "online": 613,
       "offline": 1,
       "ohne_titel": 1,
       "platzhalter": 0,
       "nicht_ausgeliefert": 1,
       "torsi": 0,
       "dubletten": 0,
-      "mit_start": 487,
-      "juengstes_start": "2026-09-01",
+      "mit_start": 491,
+      "juengstes_start": "2026-10-01",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-10-06T00:04:29-06:00",
+    "verlauf_felder_ab": "2026-10-06T05:11:17-06:00",
     "befunde": [],
     "health_warning": null,
-    "online_count": 609
+    "online_count": 613
   },
   "2026-07-ban-coral-killers-sunscreen-petition-EN": {
     "slug": "2026-07-ban-coral-killers-sunscreen-petition-EN",
@@ -24988,5 +24991,157 @@
       "Europe"
     ],
     "last_checked": "2026-10-03T10:23:31-06:00"
+  },
+  "2026-10-hands-off-nature-trial-1-petition-EN": {
+    "slug": "2026-10-hands-off-nature-trial-1-petition-EN",
+    "first_seen": "2026-10-06T05:10:41-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-06T05:10:41-06:00",
+        "count": 100
+      }
+    ],
+    "title": "Hands Off Nature!",
+    "image_url": "https://wemove.cdn.actionkit.com/images/HandsOffNature_Trial_1_image_LowRes.jpg",
+    "url": "https://action.wemove.eu/sign/2026-10-hands-off-nature-trial-1-petition-EN",
+    "description_full": "<p>\n\n\n          Hands Off Nature!\n        \n\n<img alt=\"Hands Off Nature!\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/HandsOffNature_Trial_1_image.png\"/>\n\n</p><h3>\n<p>To the European Commission, especially to President Ursula von der Leyen and Commissioner Jessika Roswall.</p>\n</h3>\n\n<h2>\n            Petition\n          </h2>\n<p>We call on the European Commission, President Ursula von der Leyen and Commissioner Jessika Roswall to protect Europe’s nature and water laws.</p>\n<p>Do not weaken the EU’s environmental safeguards. In particular:</p>\n<ul>\n<li>Protect the <strong>Water Framework Directive</strong> and the standards that safeguard Europe’s rivers, lakes and groundwater.</li>\n<li>Defend the <strong>Birds Directive and Habitats Directive</strong> and other EU laws protecting habitats and biodiversity.</li>\n<li>Ensure that rules designed to protect nature are not weakened to facilitate mining or other industrial activities.</li>\n</ul>\n<p>Keep Europe’s hard-won nature protections strong. Put people, water and nature before polluting interests.</p>\n\n\n<h2>\n            \n              Why is this important?\n            \n          </h2>\n<p>Clean water is not a luxury. <strong>It’s something we all depend on</strong>.</p>\n<p>For drinking, for growing our food, for swimming, and for the rivers, lakes and wildlife that make our homes feel alive.</p>\n<p>But across Europe, rivers, lakes and wetlands are already under enormous pressure from pollution, drought and overuse. And now, instead of strengthening the protections that keep them safe, <strong>our EU leaders are considering weakening some of Europe’s most important nature and water laws</strong>. [1]</p>\n<p>They are willing to put decades of hard-won protections at risk, and for what? To expand mining for tech materials, even in regions already struggling with water scarcity and illness - <strong>sometimes as severe as cancer</strong>. [2] </p>\n<p>We have a powerful chance to make that message impossible to ignore for our leaders across the EU.</p>\n<p><strong>917,000 people have already signed the Hands Off Nature petition</strong>, backed by more than 200 organisations across the continent, all fighting to defend Europe’s nature and our future. [3]</p>\n<p><strong>We have until the 20th of October to reach 1 million signatures</strong>. On 23 October, we will take those signatures directly to Commissioner Jessika Roswall in Brussels. A million voices would show that this is not a handful of organisations speaking up - people across Europe want their nature and water protected.</p>\n<p><strong>Sign now and help us reach 1 million voices to protect our Nature</strong>. #HandsOffNature!</p>\n<h4>\n            References:\n          </h4>\n\n<ol>\n<li>https://www.eubusiness.com/environment/eu-governments-gut-nature-protection-and-permits-will-be-no-faster/ ; https://corporateeurope.org/en/2026/05/permission-pollute</li>\n<li>https://earthworks.org/blog/galicias-toxic-past-threatens-its-present-and-future/ ; https://www.theguardian.com/environment/2026/jun/20/europe-backs-critical-minerals-mines-water-stressed-regions</li>\n<li>https://handsoffnature.eu/  </li>\n</ol>\n\n\n\n<h3>In partnership with:</h3>\n\n<p><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/HON_LOGO.png\"/></p>",
+    "summary": "Hands Off Nature! To the European Commission, especially to President Ursula von der Leyen and Commissioner Jessika Roswall. Petition We call on the European Commission, President Ursula von der Leyen…",
+    "start_date": "2026-10-01",
+    "started_by": "WeMove Europe",
+    "kind": "petition",
+    "signatures": 100,
+    "goal": 1000,
+    "lang": "en",
+    "campaign_id": "wemove:2026-10-hands-off-nature-trial-1-petition",
+    "status": "online",
+    "last_seen": "2026-10-06T05:10:41-06:00",
+    "offline_since": null,
+    "tags": [
+      "Nature",
+      "Europe",
+      "Water",
+      "Commissioner",
+      "Commission",
+      "President",
+      "European",
+      "Jessika",
+      "Protect",
+      "Roswall"
+    ],
+    "last_checked": "2026-10-06T05:10:41-06:00"
+  },
+  "2026-10-hands-off-nature-trial-2-petition-EN": {
+    "slug": "2026-10-hands-off-nature-trial-2-petition-EN",
+    "first_seen": "2026-10-06T05:10:41-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-06T05:10:41-06:00",
+        "count": 106
+      }
+    ],
+    "title": "Hands Off Nature!",
+    "image_url": "https://wemove.cdn.actionkit.com/images/HandsOffNature_Trial_2_image_LowRes.jpg",
+    "url": "https://action.wemove.eu/sign/2026-10-hands-off-nature-trial-2-petition-EN",
+    "description_full": "<p>\n\n\n          Hands Off Nature!\n        \n\n<img alt=\"Hands Off Nature!\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/HandsOffNature_Trial_2_image.png\"/>\n\n</p><h3>\n<p>European Commission, including President Ursula von der Leyen and Commissioner Jessika Roswall.</p>\n</h3>\n\n<h2>\n            Petition\n          </h2>\n<p>We call on the European Commission to maintain strong EU protections for Europe’s wildlife, habitats and biodiversity by:</p>\n<ul>\n<li>Maintaining and strengthening the protections established by the <strong>Birds Directive and Habitats Directive</strong>.</li>\n<li>Not reducing safeguards for protected species, habitats and sites.</li>\n<li>Not making it easier for economic activities to cause damage to protected nature.</li>\n</ul>\n<p>Europe’s nature laws have helped protect species and ecosystems for decades. Instead of discussing changes to weaken these rules, we need more investments to protect the nature we depend on.</p>\n\n\n<h2>\n            \n              Why is this important?\n            \n          </h2>\n<p>Europe’s wildlife belongs to all of us. <strong>And it is in danger</strong>.</p>\n<p>From brown bears and cormorants to wolves, seals and countless other species, Europe’s wildlife is under pressure. <strong>80% of protected habitats are already in poor condition</strong>, while biodiversity continues to decline across the continent. [1]</p>\n<p>EU nature laws provide a framework for protecting the species and habitats we share. <strong>But now, our European leaders are bending to big corporations and proposing changes that could weaken these hard-won protections</strong>, making it easier for economic activities to affect protected areas, species and habitats. [2] </p>\n<p>Healthy ecosystems help provide clean water, healthy soils, pollination and other services that we all depend on. <strong>And when habitats are damaged or fragmented, recovering them can take decades</strong>.</p>\n<p>Yet Europe has also shown what strong protection and conservation can achieve. Species including the <strong>European bison, Iberian lynx and white-tailed eagle</strong> have made significant recoveries thanks to conservation efforts and legal protection. [3]</p>\n<p><strong>917,000 people have already signed the Hands Off Nature petition</strong>, backed by more than 200 organisations across the continent, all fighting to defend Europe’s nature and our future. [4]</p>\n<p><strong>We have until the 20th of October to reach 1 million signatures</strong>. On 23 October, we will take those signatures directly to Commissioner Jessika Roswall in Brussels. A million voices would show that this is not a handful of organisations speaking up - people across Europe want their nature and water protected.</p>\n<p><strong>Sign now and help us reach 1 million voices to protect our Nature.</strong> #HandsOffNature!</p>\n<h4>\n            References:\n          </h4>\n\n<ol>\n<li>https://chateurope.eu/en/80-of-europes-natural-habitats-in-poor-shape-report/ ; https://www.eea.europa.eu/en/analysis/publications/state-of-nature-in-the-eu-2020</li>\n<li>https://corporateeurope.org/en/2026/05/permission-pollute</li>\n<li>https://environment.ec.europa.eu/topics/nature-and-biodiversity_en</li>\n<li>https://handsoffnature.eu/</li>\n</ol>\n\n\n\n<h3>In partnership with:</h3>\n\n<p><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/HON_LOGO.png\"/></p>",
+    "summary": "Hands Off Nature! European Commission, including President Ursula von der Leyen and Commissioner Jessika Roswall. Petition We call on the European Commission to maintain strong EU protections for Euro…",
+    "start_date": "2026-10-01",
+    "started_by": "WeMove Europe",
+    "kind": "petition",
+    "signatures": 106,
+    "goal": 1000,
+    "lang": "en",
+    "campaign_id": "wemove:2026-10-hands-off-nature-trial-2-petition",
+    "status": "online",
+    "last_seen": "2026-10-06T05:10:41-06:00",
+    "offline_since": null,
+    "tags": [
+      "Nature",
+      "Habitats",
+      "Europe",
+      "European",
+      "Species",
+      "Protected",
+      "Protections",
+      "Commission",
+      "Hands",
+      "Commissioner"
+    ],
+    "last_checked": "2026-10-06T05:10:41-06:00"
+  },
+  "2026-10-hands-off-nature-trial-3-petition-EN": {
+    "slug": "2026-10-hands-off-nature-trial-3-petition-EN",
+    "first_seen": "2026-10-06T05:10:41-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-06T05:10:41-06:00",
+        "count": 81
+      }
+    ],
+    "title": "Hands Off Nature!",
+    "image_url": "https://wemove.cdn.actionkit.com/images/HandsOffNature_Trial_3_image_LowRes.jpg",
+    "url": "https://action.wemove.eu/sign/2026-10-hands-off-nature-trial-3-petition-EN",
+    "description_full": "<p>\n\n\n          Hands Off Nature!\n        \n\n<img alt=\"Hands Off Nature!\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/HandsOffNature_Trial_3_image.png\"/>\n\n</p><h3>\n<p>To the European Commission, especially President Ursula von der Leyen and Commissioner Jessika Roswall.</p>\n</h3>\n\n<h2>\n            Petition\n          </h2>\n<p>We call on you to protect Europe’s environmental laws and ensure that efforts to boost competitiveness do not come at the expense of people, nature and our future.</p>\n<p>Do not weaken our environmental protections. In particular:</p>\n<ul>\n<li>Keep robust <strong>environmental assessment and permitting requirements</strong>, so projects cannot bypass proper scrutiny of their impacts.</li>\n<li>Protect the <strong>Birds Directive and Habitats Directive</strong>, and ensure the Natura 2000 network remains properly protected.</li>\n<li>Protect the <strong>Water Framework Directive</strong> and the standards safeguarding Europe’s rivers, lakes, groundwater and coastal waters.</li>\n<li>Ensure that environmental rules are not weakened or bypassed to make mining, infrastructure or other industrial activities easier.</li>\n</ul>\n<p>Europe does not need fewer environmental safeguards. <strong>It needs stronger action to protect nature, water and the communities we all depend on.</strong></p>\n\n\n<h2>\n            \n              Why is this important?\n            \n          </h2>\n<p>The climate crisis is no longer something I read about. <strong>I am living it.</strong></p>\n<p>I live in northern Catalonia, just a handful of metres from the Mediterranean, surrounded by the forests and mountains that watched me grow up.</p>\n<p>In less than six months, I have seen them <strong>burn to the ground and be devastated by floods</strong>.</p>\n<p><strong>My summer has been black - full of ash, fear and pain. </strong>And right now, I’m writing this from a friend’s house in Barcelona, waiting for any way to get back home <strong>while what is being called a hurricane hits us</strong>. [1] Friends and family have been stuck in their cars for hours, terrified the water could drag them into the sea or locked inside their houses, seeing how the water entered their homes and destroyed what is most cherished to them.</p>\n<p><strong>This is what the climate crisis looks like</strong>. And it is directly linked to the environmental protections that keep our forests, rivers, coastlines and our own lives safe. </p>\n<p>The same ones that <strong>our EU leaders are unapologetically trying to weaken for the sake of big corporations</strong>. They are proposing changes to Europe's most important nature and water laws that would make it easier for mining and other industries to encroach on protected areas, species and habitats. Decades of hard-won protections are put at risk for corporate profit. [2]</p>\n<p><strong>Join the 917,000 people who have already signed the Hands Off Nature petition</strong>, demanding that the Commission not weaken our hard-won environmental rules. [4] <strong>We have until 20 October to reach 1 million.</strong> On 23 October, we’ll take those signatures directly to the Commissioner of Environment, Jessika Roswall, in Brussels. We will make ourselves heard.</p>\n<p><strong>Sign now and help us reach 1 million voices to protect our nature. #HandsOffNature!</strong></p>\n<h4>\n            References:\n          </h4>\n\n<ol>\n<li>https://www.bbc.com/news/videos/cw8rzdkmj5n1o ; https://en.ara.cat/society/catalonia-alert-for-great-storm-of-rain-and-wind_1_5868851.html</li>\n<li>https://corporateeurope.org/en/2026/05/permission-pollute</li>\n<li>https://handsoffnature.eu/</li>\n</ol>\n\n\n\n<h3>In partnership with:</h3>\n\n<p><img loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/HON_LOGO.png\"/></p>",
+    "summary": "Hands Off Nature! To the European Commission, especially President Ursula von der Leyen and Commissioner Jessika Roswall. Petition We call on you to protect Europe’s environmental laws and ensure that…",
+    "start_date": "2026-10-01",
+    "started_by": "WeMove Europe",
+    "kind": "petition",
+    "signatures": 81,
+    "goal": 1000,
+    "lang": "en",
+    "campaign_id": "wemove:2026-10-hands-off-nature-trial-3-petition",
+    "status": "online",
+    "last_seen": "2026-10-06T05:10:41-06:00",
+    "offline_since": null,
+    "tags": [
+      "Environmental",
+      "Nature",
+      "Protect",
+      "Europe",
+      "Water",
+      "Ensure",
+      "Hands",
+      "Commissioner",
+      "Protections",
+      "Commission"
+    ],
+    "last_checked": "2026-10-06T05:10:41-06:00"
+  },
+  "2026-10-stop-killer-robots-petition-EN": {
+    "slug": "2026-10-stop-killer-robots-petition-EN",
+    "first_seen": "2026-10-06T05:10:41-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-06T05:10:41-06:00",
+        "count": 2840
+      }
+    ],
+    "title": "Stop Killer Robots",
+    "image_url": "https://wemove.cdn.actionkit.com/images/killer-robots-trial-image1.jpg",
+    "url": "https://action.wemove.eu/sign/2026-10-stop-killer-robots-petition-EN",
+    "description_full": "<p>\n\n<!-- Remove this if you don't want popins like \"This page also in English\" -->\n\n\n<img alt=\"Language selector\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/icon_translate_eeaca63123.svg\"/>\n\n          \n            \n              \n              English\n\n              \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n            \n          \n        \n\n</p><ul>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-10-stop-killer-robots-petition-FR\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Français\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-10-stop-killer-robots-petition-DE\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Deutsch\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-10-stop-killer-robots-petition-ES\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Español\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-10-stop-killer-robots-petition-IT\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Italiano\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-10-stop-killer-robots-petition-NL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Nederlands\n\n                    \n                    </a>\n</li>\n<li>\n<a href=\"https://action.wemove.eu/sign/2026-10-stop-killer-robots-petition-PL\" rel=\"noopener\" target=\"_blank\">\n                    \n                    Polski\n\n                    \n                    </a>\n</li>\n</ul><p>\n\n\n          Stop Killer Robots\n        \n\n<img alt=\"Stop Killer Robots\" loading=\"lazy\" src=\"https://wemove.cdn.actionkit.com/images/killer-robots-trial-image1.jpg\"/>\n\n</p><h3>\n<p>To European Heads of State and Government </p>\n</h3>\n\n<h2>\n            Petition\n          </h2>\n<p>Lead Europe in launching negotiations for a legally binding UN treaty on autonomous weapons.</p>\n<p>We urge you to:</p>\n<ul>\n<li>Start negotiations now at the UN Convention on <strong>Certain Conventional Weapons</strong>.</li>\n<li><strong>Prohibit autonomous weapons that target people</strong>, and ban systems whose effects cannot be reliably predicted.</li>\n<li>Adopt <strong>clear international rules ensuring meaningful human control </strong>over every use of lethal force.</li>\n</ul>\n\n\n<h2>\n            \n              Why is this important?\n            \n          </h2>\n<p>Killer robots. Machines. Deciding who lives and who dies. Children, ‘collateral damage’ in AI-led wars. </p>\n<p>That isn't a future problem. It's happening now. </p>\n<p>Governments and weapons companies are racing to develop autonomous weapons that can identify and attack people as “targets” with less and less human control. <strong>And right now, there is no law to stop them.</strong> A UN expert warns that “we're dangerously close to crossing a moral red line”. [1]</p>\n<p><strong>A machine should never decide who lives and who dies</strong>. </p>\n<p><strong>In just a few weeks, leaders meet in person to decide whether to start writing the first global rules on killer robots.</strong> [2] The technical work is done. A draft exists. Some EU leaders have even shown support. [3] <strong>But they won't move unless they feel the public behind them</strong> - that's us.</p>\n<p>Without it, they could put this off for another three years, <strong>while these weapons kill indiscriminately.</strong></p>\n<p>When thousands of us speak with one voice, governments find the courage to act. <strong>Sign now and tell Europe to draw the line: humans, not machines, must stay in control. </strong>If we reach 100,000 signatures we’ll make sure to bring them to the meeting!</p>\n<h4>\n            References:\n          </h4>\n\n<ol>\n<li>https://news.un.org/en/story/2026/08/1168196</li>\n<li>https://www.hrw.org/news/2026/09/07/un-talks-on-killer-robots-ends-with-calls-for-negotiations-growing ; https://news.un.org/en/story/2026/07/1167873</li>\n<li>https://www.diplomatie.gouv.fr/en/presse-et-ressources/decouvrir-et-informer/actualites/organisations-internationales-reunion-du-groupe-d-experts-gouvernementaux-sur-les-systemes-d-armes</li>\n</ol>",
+    "summary": "English Français Deutsch Español Italiano Nederlands Polski Stop Killer Robots To European Heads of State and Government Petition Lead Europe in launching negotiations for a legally binding UN treaty …",
+    "start_date": "2026-10-01",
+    "started_by": "WeMove Europe",
+    "kind": "petition",
+    "signatures": 2840,
+    "goal": 5000,
+    "lang": "en",
+    "campaign_id": "wemove:2026-10-stop-killer-robots-petition",
+    "status": "online",
+    "last_seen": "2026-10-06T05:10:41-06:00",
+    "offline_since": null,
+    "tags": [
+      "Weapons",
+      "Killer",
+      "Robots",
+      "Stop",
+      "Negotiations",
+      "Autonomous",
+      "Control",
+      "Europe",
+      "Governments",
+      "Government"
+    ],
+    "last_checked": "2026-10-06T05:10:41-06:00"
   }
 }
