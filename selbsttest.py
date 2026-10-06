@@ -2058,6 +2058,59 @@ def _ohne_melder(direkt, graph):
     return offen
 
 
+# ---------------------------------------------------------------------------
+# Bedingter Ballast (Word/IE) und die monatsgenaue Startdatum-Ausnahme
+#
+# ⚠️⚠️ Der Ballast-Fall ist der, den CODE_DESC_TAGS per BAUART nicht fassen
+# kann: die Quelle liefert `&lt;style&gt;` als TEXT, es gibt also kein
+# <style>-Element zum decompose(). Drei Wochenberichte lang stand deshalb
+# dieselbe Petition als Warnung „Quelltext im Petitionstext".
+_roh_ballast = (
+    '<div><p>&lt;!--[if gte mso 9]&gt;&lt;xml&gt; Normal 0 false '
+    '&lt;/xml&gt;&lt;![endif]--&gt;&lt;!--[if gte mso 10]&gt; &lt;style&gt; '
+    'table.MsoNormalTable {mso-style-name:"Table Normal";} &lt;/style&gt; '
+    '&lt;![endif]--&gt;</p>'
+    '<p>Remove obstructions from the 210 East Del Rosa exit.</p>'
+    '<p><a href="https://example.org/x">Quelle</a></p></div>')
+_sauber = core.sanitize_fragment(
+    BeautifulSoup(_roh_ballast, "html.parser").div, "https://www.change.org/")
+pruefe("Ballast: keine mso-Spuren mehr im Text", "mso-" in _sauber, False)
+pruefe("Ballast: der Melder schlägt nicht mehr an",
+       bool(core.CODE_IM_TEXT_RE.search(_sauber)), False)
+# ⚠️⚠️ Die beiden tragenden Gegenproben: ein Fix, der den Inhalt mitnimmt,
+# wäre schlimmer als der Befund.
+pruefe("Ballast: der echte Petitionstext bleibt",
+       "Remove obstructions from the 210 East Del Rosa exit." in _sauber, True)
+pruefe("Ballast: der Link bleibt", "example.org/x" in _sauber, True)
+pruefe("Ballast: keine leeren Absatzhüllen zurück", _sauber.count("<p></p>"), 0)
+# ⚠️ BEIDE Formen: maskiert (im fertigen HTML) und unmaskiert (im aufgelösten
+# Text). Dieselbe Petition trägt sie in Volltext bzw. summary verschieden —
+# ein Muster für nur eine Form verfehlt die Hälfte.
+pruefe("Ballast: unmaskierte Form wird auch erkannt",
+       core.entferne_bedingten_ballast("<p><!--[if gte mso 9]><xml>x</xml>"
+                                       "<![endif]-->Text</p>"),
+       "<p>Text</p>")
+for _unberuehrt in ("<p>Wenn if dann endif</p>", "<p>Bedingung: if (x) { y; }</p>",
+                    "<p>Ganz normaler Text</p>", "", "<!-- Kommentar -->"):
+    pruefe(f"Ballast: unberührt – {_unberuehrt[:28]!r}",
+           core.entferne_bedingten_ballast(_unberuehrt), _unberuehrt)
+
+pruefe("Startdatum: wemove-Zweige gelten als monatsgenau",
+       [core.startdatum_monatsgenau(k)
+        for k in ("wemove", "wemove_en", "wemove_pl", "wemove_es")],
+       [True, True, True, True])
+# ⚠️⚠️ Gegenprobe, ohne die „wemove ist ausgenommen" nichts wert wäre: die
+# Ausnahme darf NICHT auf andere Plattformen übergreifen, sonst schaltet sie
+# den Altersmelder breit stumm.
+pruefe("Startdatum: Gegenprobe – andere Plattformen NICHT ausgenommen",
+       [core.startdatum_monatsgenau(k)
+        for k in ("europarl", "openpetition", "changeorg", "weact", "", None)],
+       [False, False, False, False, False, False])
+pruefe("Startdatum: die beiden Ausnahmearten bleiben getrennt",
+       core.startdatum_monatsgenau("europarl")
+       or "wemove" in core.STARTDATUM_VERFAHRENSDATUM, False)
+
+
 _direkt, _graph = _melder_graph()
 pruefe("Melder-Wächter: JEDER Einstiegspunkt erreicht felder_melden()",
        _ohne_melder(_direkt, _graph), [])

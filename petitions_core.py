@@ -986,6 +986,53 @@ def _sichere_url(href, base_url: str, schemata=_ERLAUBTE_LINK_SCHEMATA):
     return None
 
 
+# Bedingte Kommentarblöcke von Word/Office und alten IE-Versionen, die als
+# TEXT in der Beschreibung ankommen — nicht als Markup.
+#
+# ⚠️⚠️ Das ist der Fall, den CODE_DESC_TAGS per BAUART NICHT fassen kann, und
+# darum stand er drei Wochenberichte lang (21.9./28.9./5.10.2026) als Warnung
+# „Quelltext im Petitionstext" mit immer derselben Petition
+# (change.org/p/keeping-kids-safe-san-bernardino). Die Quelle liefert dort
+# `&lt;style&gt;` — es gibt also **kein** <style>-Element zum decompose(),
+# nur den Text „<style>". Der Melder-Text nennt genau zwei Möglichkeiten
+# („Name gehört in CODE_DESC_TAGS" ODER „die Quelle liefert eine neue
+# Bauform"); dies ist die zweite.
+# Der Browser rendert die maskierten Zeichen wieder sichtbar — der Leser sah
+# also wörtlich „<!--[if gte mso 9]><xml> Normal 0 false false false …" samt
+# kompletter MsoNormalTable-Definition vor dem Petitionstext.
+#
+# BEIDE Formen müssen ins Muster: im fertigen HTML steht der Block maskiert
+# (`&lt;!--[if`), im aufgelösten Text unmaskiert (`<!--[if`). Gemessen am
+# 6.10.2026 trägt dieselbe Petition ihn maskiert im Volltext und UNmaskiert
+# in der `summary` — ein Muster für nur eine Form hätte die Hälfte verfehlt
+# (und mir zuerst ein falsches „0 von 10.591" geliefert).
+_BALLAST_RE = re.compile(
+    r"(?:<|&lt;)!--\[if\s[^\]]{0,40}\](?:>|&gt;)"      # <!--[if gte mso 9]>
+    r".*?"
+    r"(?:<|&lt;)!\[endif\]--(?:>|&gt;)",               # <![endif]-->
+    re.S | re.I)
+# Absatzhüllen, die durch das Entfernen leer zurückbleiben. Ohne diesen
+# zweiten Schritt zeigte die App stattdessen Leerzeilen — ein Fix, der die
+# Lücke nur verschiebt, ist keiner.
+_LEERER_ABSATZ_RE = re.compile(r"<p>(?:\s|&nbsp;|<br\s*/?>)*</p>", re.I)
+
+
+def entferne_bedingten_ballast(html: str) -> str:
+    """Word-/IE-Conditional-Blöcke aus einem Beschreibungs-HTML entfernen.
+
+    ⚠️ Gemessen am echten Bestand, bevor es eingebaut wurde (Pflicht nach der
+    Allowlist-Lehre): über die 10.591 ausgelieferten changeorg_en-`summary`
+    und die 104 Volltexte des Pakets t12 ändert sich **je genau ein** Satz —
+    der bekannte. Negativkontrolle: ein gewöhnlicher `<!-- Kommentar -->`,
+    der Fließtext „Wenn if dann endif" und `if (x) { y; }` bleiben unberührt.
+    Ein echter IE-Block wird mitentfernt, und das ist gewollt: auch er ist
+    Ballast, kein Petitionstext.
+    """
+    if not html or "[if" not in html:
+        return html
+    return _LEERER_ABSATZ_RE.sub("", _BALLAST_RE.sub("", html))
+
+
 def sanitize_fragment(node, base_url: str) -> str:
     """Reduziert einen Container mit gemischtem Inhalt auf erlaubte Tags;
     Links werden absolut gemacht.
@@ -1084,7 +1131,7 @@ def sanitize_fragment(node, base_url: str) -> str:
         else:
             puffer.append(kind)
     fassen()
-    return node.decode_contents().strip()
+    return entferne_bedingten_ballast(node.decode_contents()).strip()
 
 
 # ----------------------------------------------------------------------------
@@ -2518,6 +2565,33 @@ STARTDATUM_MAX_ALTER = 30
 # Prüfungen (Deckung, Titel, Torsi, Quelltext im Text) bleiben scharf.
 STARTDATUM_VERFAHRENSDATUM = {"europarl"}
 
+# Plattformen, deren start_date nur MONATSGENAU ist — zweite Ausnahmeart,
+# und eine andere als oben: europarl liefert ein fachlich anderes Datum
+# (Zulässigkeit statt Start), WeMove liefert das richtige Datum zu grob.
+#
+# ⚠️⚠️ Warum: `wemove_scraper.PAGE_DATE_RE` liest nur `YYYY-MM` **aus dem
+# Slug**, `parse_detail` setzt `-01` dazu. Am 6.10.2026 an den ausgelieferten
+# Paketen gegengeprüft: **848 von 848** Startdaten der Zweige wemove,
+# wemove_en und wemove_pl liegen auf dem **1.** des Monats (Kontrolle:
+# openPetition 68,8 % — das Kriterium unterscheidet also). Ein so gebildetes
+# Datum ist im Mittel 15 Tage zu alt und kann die 30-Tage-Stufe strukturell
+# nie unterschreiten: die Warnung „Startdatum rückt nicht nach" war bei
+# wemove_pl eine Aussage über die Granularität, nicht über den Bestand.
+#
+# ⚠️ PRÄFIX, nicht Aufzählung: die Sprachzweige entstehen in einer Factory
+# (`_platform_fuer`), und eine Liste einzelner Schlüssel würde beim nächsten
+# neuen Zweig still veralten — genau die Falle, die den Melder hier erst
+# nötig gemacht hat.
+# ⚠️ Preis, bewusst in Kauf genommen: bräche die Datumsermittlung bei WeMove
+# ganz, fiele es diesem Melder nicht mehr auf. Die Deckungsprüfung (wie viele
+# Sätze überhaupt ein Datum tragen) bleibt scharf und würde das zeigen.
+STARTDATUM_MONATSGENAU_PRAEFIX = ("wemove",)
+
+
+def startdatum_monatsgenau(platform: str) -> bool:
+    """Trägt diese Plattform ein nur monatsgenaues start_date?"""
+    return str(platform or "").startswith(STARTDATUM_MONATSGENAU_PRAEFIX)
+
 SKIP_LOESCH_ANTEIL_MAX = 0.30   # >30 % skip unter den geprüften = Verdacht
 SKIP_LOESCH_MIN_ABS = 10        # darunter greift die Bremse nicht (kleine Bestände)
 
@@ -3024,6 +3098,28 @@ def _bestandspruefung(store: dict, vorher: dict,
                           f"({juengstes_start}) — by design, as the document "
                           f"is only drawn up once the Commission has replied. "
                           f"The ageing check is therefore skipped here.")
+    # ⚠️ Zweite Ausnahmeart, eigener Zweig statt eines Eintrags in der Menge
+    # oben: dort stünde WeMove unter dem europarl-Text („Zulässigkeitsdatum
+    # aus der Mitteilung an die Mitglieder"), und das wäre schlicht falsch.
+    # Die Wirkung wäre dieselbe, die AUSKUNFT eine erfundene.
+    elif startdatum_monatsgenau(getattr(_TLS, "platform", None)):
+        if alter is not None and not host_gesperrt():
+            merke("hinweis", "Startdatum ist nur monatsgenau",
+                  f"Datum bei {len(startdaten)} von {gesamt} Sätzen, aber nur "
+                  f"auf den Monat genau (der Tag steht an der Quelle nicht, "
+                  f"der Scraper setzt den 1.). Das jüngste ist "
+                  f"{alter} Tage alt ({juengstes_start}) — das ist eine "
+                  f"OBERGRENZE, die Petition kann bis zu 30 Tage jünger sein. "
+                  f"Der Altersmelder ist hier deshalb ausgenommen; die "
+                  f"Deckung bleibt geprüft.",
+                  thema_en="Start date is month-granular only",
+                  text_en=f"Date on {len(startdaten)} of {gesamt} records, but "
+                          f"only accurate to the month (the source gives no "
+                          f"day, the scraper fills in the 1st). The newest is "
+                          f"{alter} days old ({juengstes_start}) — that is an "
+                          f"UPPER BOUND, the petition may be up to 30 days "
+                          f"younger. The ageing check is therefore skipped "
+                          f"here; coverage is still verified.")
     elif deckung >= 0.2 and alter is not None and not host_gesperrt():
         if neu_dazu > 0 and alter > STARTDATUM_MAX_ALTER:
             merke("warnung", "Startdatum rückt nicht nach",
