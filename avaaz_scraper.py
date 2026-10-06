@@ -1153,6 +1153,17 @@ def run_sprache(args, sprache: str = "en") -> None:
     # aufgeht; `available` bleibt daneben stehen, damit ältere Leser der
     # Manifest-Felder unverändert weiterlaufen.
     core.entdeckt_setzen(set(petitionen) | set(kampagnen))
+    # Einmal je Lauf, VOR dem Abschluss-Save — sonst fehlte der Befund im
+    # _meta und damit im Dashboard.
+    # ⚠️⚠️ Am 6.10.2026 gemessen, warum dieser Aufruf hier UNENTBEHRLICH ist:
+    # fehlt er, meldet der Zweig seine Feldernte nicht, sondern lässt sie in
+    # `_TLS.felder` stehen. monitor.py arbeitet alle Plattformen im SELBEN
+    # Thread ab, und geleert wird erst beim Melden — die Ernte erschien
+    # deshalb beim nächsten Zweig, der überhaupt meldet (threefifty_en, über
+    # dessen gemeinsames `_lauf`), und wurde dort als SEIN „Neues Feld auf
+    # der Quellseite" ausgewiesen. Betroffen waren avaaz_en und alle 17
+    # Sprachzweige, weil run_en() hierher läuft.
+    core.felder_melden(BEKANNTE_FELDER)
     prog(message="Speichere & baue HTML …")
     save(quiet=False, new_petitions_last_run=neu,
          available=len(petitionen) + len(kampagnen))

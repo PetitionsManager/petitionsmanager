@@ -607,6 +607,12 @@ def run_en(args) -> None:
     if neu:
         log(f"NEU: {len(neu)} neue englische Aktion(en) in diesem Lauf.")
 
+    # Einmal je Lauf, VOR dem Abschluss-Save — sonst fehlte der Befund im
+    # _meta und damit im Dashboard. ⚠️⚠️ Ohne diesen Aufruf blieb die
+    # Feldernte in `_TLS.felder` stehen und erschien beim nächsten Zweig, der
+    # meldet (monitor.py läuft in EINEM Thread, geleert wird erst beim
+    # Melden) — gemessen am 6.10.2026.
+    core.felder_melden(BEKANNTE_FELDER)
     prog(message="Speichere & baue HTML …")
     # Inhaltsseiten aus dem Nenner — siehe die Begründung in run_zweig().
     core.entdeckt_klassifizieren(unbrauchbar=keine_aktion_slugs)
@@ -768,6 +774,12 @@ def run_zweig(args, lang: str) -> None:
     neu = [s for s, r in store.items() if r.get("first_seen") == ts]
     if neu:
         log(f"NEU: {len(neu)} neue Aktion(en) ({lang}) in diesem Lauf.")
+    # Einmal je Lauf, VOR dem Abschluss-Save — sonst fehlte der Befund im
+    # _meta und damit im Dashboard. ⚠️⚠️ Ohne diesen Aufruf blieb die
+    # Feldernte in `_TLS.felder` stehen und erschien beim nächsten Zweig, der
+    # meldet (monitor.py läuft in EINEM Thread, geleert wird erst beim
+    # Melden) — gemessen am 6.10.2026, betraf die Zweige fr und nl.
+    core.felder_melden(BEKANNTE_FELDER)
     prog(message="Speichere & baue HTML …")
     if zweitpfad_slugs:
         # Nie still verwerfen: sonst sieht ein schrumpfender Bestand wie ein

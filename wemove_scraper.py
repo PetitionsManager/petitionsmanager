@@ -801,6 +801,12 @@ def run_sprache(args, lang: str = "en") -> None:
     neu = [s for s, r in store.items() if r.get("first_seen") == ts]
     if neu:
         log(f"NEU: {len(neu)} neue Kampagne(n) ({lang}) in diesem Lauf.")
+    # Einmal je Lauf, VOR dem Abschluss-Save — sonst fehlte der Befund im
+    # _meta und damit im Dashboard. ⚠️⚠️ Ohne diesen Aufruf blieb die
+    # Feldernte in `_TLS.felder` stehen und erschien beim nächsten Zweig, der
+    # meldet (monitor.py läuft in EINEM Thread, geleert wird erst beim
+    # Melden) — gemessen am 6.10.2026, betraf alle sechs Sprachzweige.
+    core.felder_melden(BEKANNTE_FELDER)
     prog(message="Speichere & baue HTML …")
     save(quiet=False, new_petitions_last_run=neu, available=len(entdeckt))
     core.write_list_html(PLATFORM_JE_SPRACHE[lang])

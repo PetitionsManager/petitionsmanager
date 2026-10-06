@@ -209,6 +209,14 @@ BEKANNTE_FELDER = {
     # Detailseite, altes Champaign-Muster (nur noch 1 von 18 erreichbar)
     "csrf-param", "csrf-token", "fb:app_id", "liquid_layout", "og:url",
     "optimization_tags", "twitter:creator", "twitter:domain", "twitter:site",
+    # 6.10.2026 VERWORFEN: `title` (gemeldet 16/43) — Dublette, kein neuer
+    # Inhalt. Steht nur im neuen Next.js-Template (action.eko.org), dort auf
+    # 3 von 5 frisch gemessenen Detailseiten, und trägt wortgleich denselben
+    # Wert wie das schon geerntete `og:title` bzw. `props.title` aus
+    # __NEXT_DATA__ (gemessen: „Schluss mit Plastik!", „Danone & Blue Diamond,
+    # stoppen Sie das Bienensterben!"). Der Melder hatte recht, dass es INHALT
+    # ist — deshalb gehört es NICHT in ist_seitentechnik(), sondern hierher.
+    "title",
 }
 
 
@@ -707,6 +715,14 @@ def run_en(args) -> None:
         log(f"  {aus_karte} Satz/Sätze nur aus der Kampagnenkarte "
             f"(Detailseite blockiert, ohne campaign_id).")
 
+    # Einmal je Lauf, VOR dem Abschluss-Save — sonst fehlte der Befund im
+    # _meta und damit im Dashboard. ⚠️⚠️ Ohne diesen Aufruf blieb die
+    # Feldernte in `_TLS.felder` stehen und erschien beim nächsten Zweig, der
+    # meldet (monitor.py läuft in EINEM Thread, geleert wird erst beim
+    # Melden) — gemessen am 6.10.2026. Genau so wanderten die
+    # Champaign-Felder `csrf-param`/`liquid_layout`/`optimization_tags` von
+    # hier nach threefifty_en, wo sie als dessen Befund erschienen.
+    core.felder_melden(BEKANNTE_FELDER)
     prog(message="Speichere & baue HTML …")
     save(quiet=False, new_petitions_last_run=neu, available=len(karten))
     core.write_list_html(PLATFORM_EN)

@@ -19,6 +19,8 @@ Dutzend Fälle ist eine Abhängigkeit mehr der schlechtere Tausch. Aufruf:
 """
 from __future__ import annotations
 
+import ast
+import glob
 import json
 import sys
 import tempfile
@@ -1971,6 +1973,101 @@ _store_u2 = {"x": {"slug": "x", "updates": list(_alt_u),
 core.upsert(_store_u2, "x", {"updates": list(_neu_u)}, {}, "online", "t", "u")
 pruefe("europarl-Stempel: Gegenprobe – ohne Eingriff wird überschrieben",
        _store_u2["x"].get("updates"), _neu_u)
+
+
+# ---------------------------------------------------------------------------
+# WÄCHTER: jeder Plattform-Einstiegspunkt muss felder_melden() erreichen
+#
+# ⚠️⚠️ Anlass (6.10.2026): **29 von 41** Einträgen riefen es nicht — nur 12
+# taten es. Ohne den Aufruf bleibt die Feldernte in `_TLS.felder` stehen;
+# monitor.py arbeitet alle Plattformen im SELBEN Thread ab und leert erst beim
+# Melden, also erschien die Ernte beim nächsten Zweig, der überhaupt meldet.
+# Das war `threefifty_en` (über das gemeinsame `_lauf` beider Sprachen), und
+# dort standen dann eko-Champaign-Felder wie `csrf-param` als SEIN Befund —
+# drei Wochenberichte lang, mit wachsender Zahl (3 → 6 Beschriftungen).
+# Der Fehler war unsichtbar, weil nichts fehlschlug: die Meldung erschien ja,
+# nur beim falschen Zweig. Genau dafür ist dieser Wächter da.
+print()
+
+
+def _melder_graph():
+    """(direkt, graph) über alle *_scraper.py — wer ruft felder_melden?"""
+    graph, direkt = {}, set()
+    for datei in sorted(glob.glob(str(Path(__file__).parent / "*_scraper.py"))):
+        mod = Path(datei).stem
+        baum = ast.parse(Path(datei).read_text(encoding="utf-8"), datei)
+
+        class V(ast.NodeVisitor):
+            def __init__(self):
+                self.stack = []
+
+            def _n(self, n):
+                if isinstance(n, ast.Attribute):
+                    return n.attr
+                return n.id if isinstance(n, ast.Name) else None
+
+            def visit_FunctionDef(self, node):
+                self.stack.append(f"{mod}.{node.name}")
+                self.generic_visit(node)
+                self.stack.pop()
+
+            def visit_Lambda(self, node):
+                self.stack.append(f"{mod}.<lambda@{node.lineno}>")
+                self.generic_visit(node)
+                self.stack.pop()
+
+            def visit_Call(self, node):
+                ziel = self._n(node.func)
+                if self.stack:
+                    graph.setdefault(self.stack[-1], set()).add(ziel)
+                    if ziel == "felder_melden":
+                        direkt.add(self.stack[-1])
+                self.generic_visit(node)
+
+        V().visit(baum)
+    return direkt, graph
+
+
+def _ohne_melder(direkt, graph):
+    """Die Plattform-Schlüssel, deren Einstiegspunkt felder_melden NICHT erreicht."""
+    def erreicht(start, tiefe=0, gesehen=None):
+        gesehen = gesehen or set()
+        if start in gesehen or tiefe > 6:
+            return False
+        gesehen.add(start)
+        if start in direkt:
+            return True
+        modul = start.split(".")[0]
+        return any(erreicht(f"{modul}.{z}", tiefe + 1, gesehen)
+                   for z in graph.get(start, ()))
+
+    offen = []
+    for p in monitor.PLATFORMS:
+        fn = p.run
+        # ⚠️ Die Sprachzweige sind LAMBDAS aus einer Factory; ihr __qualname__
+        # ist „…<locals>.<lambda>" und über den Namen nicht auffindbar. Erst
+        # die Zeilennummer aus dem Code-Objekt macht sie adressierbar — ein
+        # Prüfer, der nur nach `def <name>` sucht, meldet sie ALLE als defekt
+        # (so ist mir die erste Messung um 2 Zweige entglitten).
+        if "<lambda>" in fn.__qualname__:
+            name = f"{fn.__module__}.<lambda@{fn.__code__.co_firstlineno}>"
+        else:
+            name = f"{fn.__module__}.{fn.__qualname__}"
+        if not erreicht(name):
+            offen.append(p.key)
+    return offen
+
+
+_direkt, _graph = _melder_graph()
+pruefe("Melder-Wächter: JEDER Einstiegspunkt erreicht felder_melden()",
+       _ohne_melder(_direkt, _graph), [])
+pruefe("Melder-Wächter: alle 41 Plattform-Einträge geprüft",
+       len(monitor.PLATFORMS), 41)
+# ⚠️⚠️ Gegenprobe — ohne sie wäre „0 offen" nicht von „Prüfer blind" zu
+# unterscheiden: wird EINE Meldestelle entfernt, müssen genau ihre Zweige
+# auffallen. avaaz_scraper.run_sprache trägt 18 (en + 17 Sprachen).
+pruefe("Melder-Wächter: Gegenprobe – entfernte Meldestelle fällt auf",
+       len(_ohne_melder(_direkt - {"avaaz_scraper.run_sprache"}, _graph)), 18)
 
 
 # ---------------------------------------------------------------------------
