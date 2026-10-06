@@ -31,19 +31,10 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-10-06T05:13:50-06:00",
+    "generated_at": "2026-10-06T10:22:27-06:00",
     "petition_count": 228,
     "available": 295,
-    "new_petitions_last_run": [
-      "2026-10-stop-killer-robots-petition-FR"
-    ],
     "unbrauchbare": {
-      "2025-05-olga-v-berlin-test-petition-FR": "2026-09-06T09:52:59-06:00",
-      "2025-06-farmersunite-petition-FR": "2026-09-06T09:52:59-06:00",
-      "2025-09-kelsey-onboarding-campaign-petition-FR": "2026-09-06T09:52:59-06:00",
-      "2025-10-15-aaron-onboarding-petition-FR": "2026-09-06T09:52:59-06:00",
-      "2025-10-harmit-onboarding-campaign-petition-FR": "2026-09-06T09:52:59-06:00",
-      "2025-10-jessie-onboarding-campaign-petition-FR": "2026-09-06T09:52:59-06:00",
       "2026-04-landmine-petition-FR": "2026-09-06T12:31:30-06:00",
       "galen-test-2-petition-FR": "2026-09-06T12:59:59-06:00",
       "lucass-target-test-call-FR": "2026-09-06T12:59:59-06:00",
@@ -104,10 +95,17 @@
       "2024-12-iskra-testing-revamped-mail-action-petition-FR": "2026-10-06T05:11:26-06:00",
       "2024-7-2024-07-michaltest-you2-petition-FR": "2026-10-06T05:11:26-06:00",
       "2024-feb-olga-v-test-trial-petition-FR": "2026-10-06T05:11:26-06:00",
-      "2025-05-14-rebecca-practice-petition-FR": "2026-10-06T05:11:26-06:00"
+      "2025-05-14-rebecca-practice-petition-FR": "2026-10-06T05:11:26-06:00",
+      "2025-05-olga-v-berlin-test-petition-FR": "2026-10-06T10:22:05-06:00",
+      "2025-06-farmersunite-petition-FR": "2026-10-06T10:22:05-06:00",
+      "2025-09-kelsey-onboarding-campaign-petition-FR": "2026-10-06T10:22:05-06:00",
+      "2025-10-15-aaron-onboarding-petition-FR": "2026-10-06T10:22:05-06:00",
+      "2025-10-harmit-onboarding-campaign-petition-FR": "2026-10-06T10:22:05-06:00",
+      "2025-10-jessie-onboarding-campaign-petition-FR": "2026-10-06T10:22:05-06:00"
     },
+    "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-10-06T05:13:50-06:00",
+      "stand": "2026-10-06T10:22:27-06:00",
       "gefunden": 295,
       "im_bestand": 228,
       "unbrauchbar": 67,
@@ -122,7 +120,7 @@
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-10-06T05:13:50-06:00",
+        "zeit": "2026-10-06T10:22:27-06:00",
         "gesamt": 228,
         "online": 220,
         "offline": 8,
@@ -135,11 +133,11 @@
         "juengstes_start": "2026-10-01",
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
-        "neu": 1
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-10-06T05:13:50-06:00",
+      "zeit": "2026-10-06T10:22:27-06:00",
       "gesamt": 228,
       "online": 220,
       "offline": 8,
@@ -152,7 +150,7 @@
       "juengstes_start": "2026-10-01",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-10-06T05:13:50-06:00",
+    "verlauf_felder_ab": "2026-10-06T10:22:27-06:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 220
