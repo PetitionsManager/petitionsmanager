@@ -837,6 +837,50 @@ pruefe("Landachse: fest ⇔ country gesetzt",
        [p.key for p in _monitor.PLATFORMS
         if (p.country_scope == "fest") != bool(p.country)], [])
 
+print("\nAvaaz check_sprache: Übersichts-Rückgriff (6.10.2026)")
+# ⚠️ Anlass: avaaz.org/sw/ leitet seit Herbst 2026 auf secure.avaaz.org um —
+# die Startseite trägt dann 0 sw-Links, obwohl die Übersicht weiter 5
+# Petitionen führt (Bilanz 5/5). Der alte Check maß NUR die Startseite und
+# meldete den gesunden Zweig als FAIL. Die vier Fälle hier unterscheiden:
+# gesund über Startseite / gesund nur über Übersicht (sw) / echt leer (ms) /
+# nur Navigations- und Spenden-Links (dürfen keinen PASS stiften).
+
+
+class _SprachAntwort:
+    def __init__(self, text):
+        self.text, self.ok, self.status_code = text, True, 200
+
+
+class _SprachCheckFetcher:
+    """Erste Antwort = Startseite, zweite = Übersicht; zählt die Abrufe."""
+
+    def __init__(self, home_text, liste_text=""):
+        self._antworten = [home_text, liste_text]
+        self.abrufe = 0
+
+    def get(self, url):
+        text = self._antworten[min(self.abrufe, 1)]
+        self.abrufe += 1
+        return _SprachAntwort(text)
+
+
+_sw_pet = "/community_petitions/sw/kenia_marufuku_ya_gmo"
+_nur_nav = ("/community_petitions/sw/about "
+            "/community_petitions/sw/my_account /campaign/sw/donate")
+_f = _SprachCheckFetcher(f"irgendwas {_sw_pet}")
+pruefe("Startseite mit Petition → PASS ohne zweiten Abruf",
+       (_av.check_sprache(_f, "sw")[0], _f.abrufe), (True, 1))
+pruefe("Startseite leer, Übersicht trägt → PASS (der sw-Fall)",
+       _av.check_sprache(_SprachCheckFetcher("", f"nav {_sw_pet}"), "sw")[0],
+       True)
+pruefe("Startseite UND Übersicht leer → FAIL (der ms-Fall)",
+       _av.check_sprache(_SprachCheckFetcher("", _nur_nav), "sw")[0], False)
+# Gegenprobe für den Filter: ein Check, der Navigations-Slugs mitzählte,
+# gäbe hier PASS schon auf der Startseite.
+pruefe("nur about/my_account/donate stiften keinen PASS",
+       _av.check_sprache(_SprachCheckFetcher(_nur_nav, _nur_nav), "sw")[0],
+       False)
+
 print("\nUnlesbare Seiten (melde_unklare)")
 
 

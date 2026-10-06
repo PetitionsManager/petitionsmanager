@@ -149,17 +149,29 @@ AVAAZ_PFADKUERZEL = {"pt": "po", "ko": "kr", "ja": "jp", "zh": "ct"}
 AVAAZ_SPRACHEN = ("el", "es", "fr", "id", "it", "ko", "ms", "nl", "pl",
                   "pt", "ro", "ru", "sw", "tr", "uk", "zh", "ja")
 
-# Zweige, die bei einzelnen Sprachen an der QUELLE leer sind — gemessen
-# 5.9.2026, nicht geraten: avaaz.org/ms/ leitet auf die englische Startseite
+# Zweige, die bei einzelnen Sprachen an der QUELLE leer sind — gemessen,
+# nicht geraten. 5.9.2026: avaaz.org/ms/ leitet auf die englische Startseite
 # um, die ms-Übersicht („Petisyen Komuniti Avaaz") verlinkt ausschließlich
 # Navigation (about, my_account, …) und recent_petitions.json liefert
 # {"petitions": []}. Die Startseiten von id und sw verlinken keine
-# /campaign/-Slugs (id: 5 Petitions-Links, 0 Kampagnen; sw: 0/0 — sw-Petitionen
-# kommen aus Übersicht und Feeds). entdeckung(aufgegeben=True) meldet die
-# RÜCKKEHR eines solchen Zweigs als Hinweis — liefert Avaaz dort wieder etwas,
-# gehört die Sprache hier gestrichen.
+# /campaign/-Slugs. entdeckung(aufgegeben=True) meldet die RÜCKKEHR eines
+# solchen Zweigs als Hinweis — liefert Avaaz dort wieder etwas, gehört die
+# Sprache hier gestrichen.
+# 6.10.2026 nachgemessen (alle neun Warn-Kacheln + Kontrollen de/es): el, ko,
+# nl, ro, ru, tr, uk, zh und ja verlinken auf ihren Startseiten KEINE
+# /campaign/<sprache>/-Slugs mehr, nur noch je zwei englische (/campaign/en/);
+# im September hatten dieselben Zweige noch 4–7 eigene Kampagnen entdeckt
+# (stehen im Bestand). Kein Seitenumbau: de (4 eigene) und es (1 eigene)
+# finden mit denselben Mustern weiter Kampagnen — Avaaz kuratiert die
+# eigensprachigen Kampagnen-Teaser dort schlicht nicht mehr.
+# Die sw-Startseite leitet inzwischen wie ms auf secure.avaaz.org um; die
+# sw-ÜBERSICHT trägt aber weiter 5 Petitionen (beide Feeds leer) → sw gehört
+# NICHT in KEINE_PETITIONEN, nur sein Check braucht den Übersichts-Rückgriff
+# (check_sprache unten).
 KEINE_PETITIONEN = {"ms"}
-KEINE_KAMPAGNEN = {"ms", "id", "sw"}
+KEINE_KAMPAGNEN = {"ms", "id", "sw",
+                   # seit Herbst 2026 nur noch en-Kampagnen verlinkt:
+                   "el", "ko", "nl", "ro", "ru", "tr", "uk", "zh", "ja"}
 
 
 def _pfad(sprache: str) -> str:
@@ -1176,13 +1188,34 @@ def run_en(args) -> None:
 
 
 def check_sprache(fetcher, sprache: str = "en"):
-    home = _sprachteile(sprache)[0]
+    home, liste, pet, camp, _ = _sprachteile(sprache)
+
+    def _aktionen(text: str) -> int:
+        # Navigations- und Spenden-Slugs zählen nicht: eine Seite, die nur
+        # noch about/my_account/donate verlinkt, ist für diesen Zweig leer.
+        return len({s for s in pet.findall(text)
+                    if s not in NON_PETITION_SLUGS} |
+                   {s for s in camp.findall(text)
+                    if s not in NON_CAMPAIGN_SLUGS})
+
     resp = fetcher.get(home)
     if resp is None or not resp.ok:
         return False, "Startseite nicht erreichbar"
-    pet, camp = _sprachteile(sprache)[2], _sprachteile(sprache)[3]
-    n = len(set(pet.findall(resp.text)) | set(camp.findall(resp.text)))
-    return (n >= 1), f"{n} Aktionen (Startseite {sprache})"
+    n = _aktionen(resp.text)
+    if n:
+        return True, f"{n} Aktionen (Startseite {sprache})"
+    # Eine leere Startseite heißt bei Avaaz nicht „Zweig tot": avaaz.org/sw/
+    # leitet seit Herbst 2026 (wie /ms/) auf secure.avaaz.org um, die
+    # sw-Petitionen stehen aber weiter in der Übersicht — gemessen 6.10.2026
+    # (Startseite 0/0, Übersicht 5, Bilanz des Zweigs 5/5). Die Entdeckung
+    # liest die Übersicht ohnehin, also entscheidet erst deren Befund.
+    # ms bleibt damit zu Recht FAIL: dort ist auch die Übersicht leer.
+    resp = fetcher.get(liste)
+    if resp is None or not resp.ok:
+        return False, (f"Startseite {sprache} ohne Aktionen, "
+                       f"Übersicht nicht erreichbar")
+    n = _aktionen(resp.text)
+    return (n >= 1), f"{n} Aktionen (Übersicht {sprache}; Startseite 0)"
 
 
 PLATFORM_EN = Platform(
