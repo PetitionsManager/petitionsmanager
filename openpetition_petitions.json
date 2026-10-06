@@ -31,22 +31,12 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-10-05T18:49:51-06:00",
+    "generated_at": "2026-10-06T00:00:44-06:00",
     "petition_count": 2398,
     "available": 1684,
-    "new_petitions_last_run": [
-      "keine-rueckfuehrung-in-die-gefahr-reformiert-das-hkue",
-      "fuer-einen-zukunftsstabilen-oepnv-in-bonn-keine-kappung-von-buslinien-vorfahrt-fuer-bahn-und-bus",
-      "jetzt-handeln-integriertes-verkehrskonzept-fuer-ein-sicheres-ribbesbuettel",
-      "gegen-den-bebauungsplan-buero-und-gewerbegebiet-h-22-in-muelheim-an-der-ruhr",
-      "131-teilhabe-oder-einsamkeit-entlastungsbetrag-bei-pflegegrad-1-erhalten",
-      "grieserwiese-landshut-parkpreis-zurueck-auf-1-und-kiesparkplatz-kostenlos-2",
-      "mrt-fuer-alle-rasche-diagnose-schnelle-behandlung-auch-fuer-das-obere-ennstal-und-das-ausseerland",
-      "anrainer-gegen-dauerparker-fuer-eine-faire-parkregelung-in-der-friedhofstrasse-66-72",
-      "nachtbus-fuer-die-linie-60-sichere-heimwege-fuer-graz-waltendorf"
-    ],
+    "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-10-05T18:49:50-06:00",
+      "stand": "2026-10-06T00:00:44-06:00",
       "gefunden": 1684,
       "im_bestand": 1684,
       "unbrauchbar": 0,
@@ -75,10 +65,26 @@
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
         "neu": 9
+      },
+      {
+        "zeit": "2026-10-06T00:00:44-06:00",
+        "gesamt": 2398,
+        "online": 2398,
+        "offline": 0,
+        "ohne_titel": 0,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 0,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 2383,
+        "juengstes_start": "2026-10-05",
+        "mit_code_im_text": 0,
+        "herkunft": "lokal_cron",
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-10-05T18:49:50-06:00",
+      "zeit": "2026-10-06T00:00:44-06:00",
       "gesamt": 2398,
       "online": 2398,
       "offline": 0,

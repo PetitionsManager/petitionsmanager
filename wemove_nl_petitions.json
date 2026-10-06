@@ -31,16 +31,10 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-10-05T18:54:59-06:00",
+    "generated_at": "2026-10-06T00:05:26-06:00",
     "petition_count": 170,
     "available": 226,
     "unbrauchbare": {
-      "2024-09-hajar-training-petition-NL": "2026-09-05T19:25:28-06:00",
-      "2024-11-michaltest1-petition-NL": "2026-09-05T22:24:17-06:00",
-      "2024-feb-olga-v-test-trial-petition-NL": "2026-09-05T22:24:17-06:00",
-      "2025-05-14-rebecca-practice-petition-NL": "2026-09-05T22:24:17-06:00",
-      "2025-05-olga-v-berlin-test-petition-NL": "2026-09-05T22:24:17-06:00",
-      "2025-06-farmersunite-petition-NL": "2026-09-05T22:24:17-06:00",
       "2025-09-kelsey-onboarding-campaign-petition-NL": "2026-09-06T10:22:09-06:00",
       "2025-10-harmit-onboarding-campaign-petition-NL": "2026-09-06T10:22:09-06:00",
       "2025-10-jessie-onboarding-campaign-petition-NL": "2026-09-06T10:22:09-06:00",
@@ -52,15 +46,15 @@
     },
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-10-05T18:54:59-06:00",
+      "stand": "2026-10-06T00:05:26-06:00",
       "gefunden": 226,
       "im_bestand": 170,
-      "unbrauchbar": 14,
+      "unbrauchbar": 8,
       "verworfen": 0,
       "dublette": 0,
       "verschwunden": 0,
       "zurueckgestellt": 0,
-      "offen": 42,
+      "offen": 48,
       "offene_beispiele": [
         "2023-01-lucas-ig-wrapper-test-petition-NL",
         "2023-07-simon-1-NL",
@@ -103,6 +97,12 @@
         "2024-04-michaltest4-petition-NL",
         "2024-06-simon-1-petition-NL",
         "2024-07-michaltest1-petition-NL",
+        "2024-09-hajar-training-petition-NL",
+        "2024-11-michaltest1-petition-NL",
+        "2024-feb-olga-v-test-trial-petition-NL",
+        "2025-05-14-rebecca-practice-petition-NL",
+        "2025-05-olga-v-berlin-test-petition-NL",
+        "2025-06-farmersunite-petition-NL",
         "2026-10-stop-killer-robots-petition-NL"
       ],
       "bestand_gesamt": 170,
@@ -220,10 +220,26 @@
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
         "neu": 0
+      },
+      {
+        "zeit": "2026-10-06T00:05:26-06:00",
+        "gesamt": 170,
+        "online": 169,
+        "offline": 1,
+        "ohne_titel": 1,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 1,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 161,
+        "juengstes_start": "2026-09-01",
+        "mit_code_im_text": 0,
+        "herkunft": "lokal_cron",
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-10-05T18:54:59-06:00",
+      "zeit": "2026-10-06T00:05:26-06:00",
       "gesamt": 170,
       "online": 169,
       "offline": 1,
@@ -242,7 +258,7 @@
         "stufe": "warnung",
         "thema": "Host ausgelassen (robots.txt nicht lesbar)",
         "text": "action.wemove.eu: HTTP 202. Der Host wurde für diesen Lauf komplett ausgelassen; von dort stammen KEINE frischen Daten. Der Bestand bleibt unverändert stehen.",
-        "zeit": "2026-10-05T18:54:59-06:00",
+        "zeit": "2026-10-06T00:05:26-06:00",
         "thema_en": "Host skipped (robots.txt unreadable)",
         "text_en": "action.wemove.eu: HTTP 202. The host was skipped entirely for this run; no fresh data came from it. The existing records stay as they are."
       }
