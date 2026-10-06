@@ -388,6 +388,22 @@ def run(args) -> None:
     # beendeten Petitionen kommen aus --backfill und stehen deshalb in der
     # Bilanz als "bestand_ausserhalb" — nicht als Rückstand.
     core.entdeckt_setzen(discovered)
+    # Das jüngste Startdatum, das die QUELLE in diesem Lauf selbst anbietet.
+    # ⚠️⚠️ Damit kann der Altersmelder die beiden Fälle unterscheiden, die er
+    # bisher nur nebeneinander nennen konnte („Feld wird nicht gelesen ODER
+    # die Quelle hat nichts Neues"). Hier steht es tagesgenau in der
+    # Listentabelle, kostet also keinen Zusatzabruf.
+    # Anlass (6.10.2026): Der Melder warnte seit Wochen „Startdatum rückt
+    # nicht nach" — gemessen bot die Quelle als jüngstes ebenfalls
+    # 2026-08-17, der Scraper war also in Ordnung. Davor kamen die Daten im
+    # 1–8-Tage-Rhythmus; der Bundestag veröffentlicht seit dem 17.8. nichts
+    # Neues in der Mitzeichnungsfrist. Die Schwelle anzuheben hätte genau
+    # diesen Befund verdeckt.
+    _quelldaten = sorted(
+        (h.get("start_date") or "") for h in discovered.values()
+        if isinstance(h, dict))
+    if _quelldaten and _quelldaten[-1]:
+        core.lauf_meta_setzen(quell_startdatum=_quelldaten[-1])
 
     # Bekannte Einträge auffrischen (Zähler aus Liste; Detail-Re-Scrape nur
     # für Einträge, die nicht mehr gelistet sind → Fristende/offline).

@@ -3121,7 +3121,44 @@ def _bestandspruefung(store: dict, vorher: dict,
                           f"younger. The ageing check is therefore skipped "
                           f"here; coverage is still verified.")
     elif deckung >= 0.2 and alter is not None and not host_gesperrt():
-        if neu_dazu > 0 and alter > STARTDATUM_MAX_ALTER:
+        # ⚠️⚠️ Trennt die beiden Fälle, die der Warntext darunter bisher nur
+        # NEBENEINANDER nennen konnte („Feld wird nicht gelesen ODER die Quelle
+        # hat nichts Neues"). Liefert ein Scraper über lauf_meta das jüngste
+        # Startdatum, das die QUELLE selbst anbietet, ist die Frage entschieden:
+        #   Quelle == Bestand  → die Quelle stagniert, wir lesen korrekt
+        #   Quelle >  Bestand  → wir lesen etwas nicht  → Warnung bleibt
+        #
+        # Anlass (6.10.2026, bundestag): Der Melder warnte seit Wochen; die
+        # Quelle bot als jüngstes ebenfalls 2026-08-17, davor kamen Daten im
+        # 1–8-Tage-Rhythmus. Der Bundestag veröffentlicht seit dem 17.8. nichts
+        # Neues in der Mitzeichnungsfrist — ein echter Befund über die WELT,
+        # kein Fehlalarm. Die Schwelle anzuheben hätte ihn verdeckt; deshalb
+        # wird hier nur die EINORDNUNG genauer, nicht der Melder stumm.
+        # ⚠️ Kein Rückfall für Scraper ohne dieses Feld: fehlt es, bleibt es
+        # beim alten Verhalten (die Warnung mit beiden Möglichkeiten).
+        quelle_start = (getattr(_TLS, "lauf_meta", None) or {}).get(
+            "quell_startdatum")
+        quelle_stagniert = bool(
+            quelle_start and juengstes_start
+            and str(quelle_start) <= str(juengstes_start))
+        if quelle_stagniert and alter > STARTDATUM_MAX_ALTER:
+            merke("hinweis", "Quelle selbst liefert nichts Neueres",
+                  f"Das jüngste Startdatum im Bestand ist {alter} Tage alt "
+                  f"({juengstes_start}) — die Quelle bietet in diesem Lauf "
+                  f"aber selbst nichts Neueres an (jüngstes dort: "
+                  f"{quelle_start}). Der Scraper liest also korrekt; es "
+                  f"erscheint dort nichts Neues. Kein Handlungsbedarf an "
+                  f"unserem Code — wird die Quelle wieder aktiv, verschwindet "
+                  f"dieser Hinweis von selbst.",
+                  thema_en="Source itself offers nothing newer",
+                  text_en=f"The newest start date in the store is {alter} days "
+                          f"old ({juengstes_start}), but the source itself "
+                          f"offers nothing newer in this run (newest there: "
+                          f"{quelle_start}). So the scraper reads correctly; "
+                          f"nothing new is being published. No action needed "
+                          f"on our side — once the source becomes active "
+                          f"again, this note disappears by itself.")
+        elif neu_dazu > 0 and alter > STARTDATUM_MAX_ALTER:
             merke("warnung", "Startdatum rückt nicht nach",
                   f"{neu_dazu} neue Sätze aufgenommen, das jüngste Startdatum "
                   f"im Bestand ist aber {alter} Tage alt ({juengstes_start}). "

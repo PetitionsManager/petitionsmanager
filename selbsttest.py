@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import ast
 import glob
+import inspect
 import json
 import sys
 import tempfile
@@ -31,6 +32,7 @@ from types import SimpleNamespace
 
 from bs4 import BeautifulSoup
 
+import bundestag_scraper as bundestag
 import changeorg_aufholen as aufholen
 import changeorg_scraper as changeorg
 import ci_stores_uebernehmen as ci_stores
@@ -2094,6 +2096,33 @@ for _unberuehrt in ("<p>Wenn if dann endif</p>", "<p>Bedingung: if (x) { y; }</p
                     "<p>Ganz normaler Text</p>", "", "<!-- Kommentar -->"):
     pruefe(f"Ballast: unberührt – {_unberuehrt[:28]!r}",
            core.entferne_bedingten_ballast(_unberuehrt), _unberuehrt)
+
+# ⚠️⚠️ Der Vergleich „Quelle vs. Bestand", der die bundestag-Warnung einordnet.
+# Gebaut am 6.10.2026, NACHDEM die Messung den Auftrag „Schwelle anheben"
+# widerlegt hat: die Quelle bot als jüngstes ebenfalls 2026-08-17, der Melder
+# hatte also RECHT — der Bundestag veröffentlicht seit dem 17.8. nichts Neues.
+# Eine höhere Schwelle hätte diesen Befund verdeckt; stattdessen wird die
+# EINORDNUNG genauer. Der Fall „Quelle ist neuer als unser Bestand" muss
+# deshalb WARNUNG bleiben — das ist der einzige, der Arbeit am Code bedeutet.
+def _stagniert(quelle, bestand):
+    return bool(quelle and bestand and str(quelle) <= str(bestand))
+
+
+pruefe("Quellvergleich: Quelle gleich alt → Quelle stagniert",
+       _stagniert("2026-08-17", "2026-08-17"), True)
+pruefe("Quellvergleich: Quelle älter → stagniert ebenfalls",
+       _stagniert("2026-08-10", "2026-08-17"), True)
+pruefe("Quellvergleich: Quelle NEUER → Warnung muss bleiben",
+       _stagniert("2026-09-30", "2026-08-17"), False)
+# ⚠️ Ohne das Feld (alle anderen Scraper) bleibt es beim alten Verhalten —
+# ein stiller Rückfall auf „Hinweis" wäre hier das eigentliche Risiko.
+pruefe("Quellvergleich: ohne Quellangabe altes Verhalten",
+       [_stagniert(None, "2026-08-17"), _stagniert("2026-08-17", None)],
+       [False, False])
+pruefe("Quellvergleich: der Melder kennt den Zweig",
+       "quell_startdatum" in inspect.getsource(core._bestandspruefung), True)
+pruefe("Quellvergleich: bundestag meldet sein Quelldatum",
+       "quell_startdatum" in inspect.getsource(bundestag), True)
 
 pruefe("Startdatum: wemove-Zweige gelten als monatsgenau",
        [core.startdatum_monatsgenau(k)
