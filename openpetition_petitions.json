@@ -31,14 +31,24 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-10-06T18:19:07-06:00",
-    "petition_count": 2415,
-    "available": 1696,
-    "new_petitions_last_run": [],
+    "generated_at": "2026-10-07T09:00:19-06:00",
+    "petition_count": 2424,
+    "available": 1702,
+    "new_petitions_last_run": [
+      "rb-71-erhalten-schienenverkehr-zwischen-pirna-lohmen-neustadt-und-sebnitz-sichern",
+      "rathenow-nicht-abhaengen-14-monate-sind-zu-lang",
+      "der-nco-hort-darf-nich-geschlossen-werden-2",
+      "keine-kuendigungen-beim-kita-personal-in-am-mellensee-betreuungsschluessel-sichern",
+      "sicherheit-kennt-kein-alter-regelmaessige-fahrtauglichkeitspruefungen-ab-75-jahren",
+      "strafrechtliche-luecke-schliessen-psychische-gewalt-unter-strafe-stellen",
+      "mehr-sicherheit-und-weniger-verkehr-auf-dem-im-muehlengrunde-in-28844-weyhe",
+      "fuer-den-erhalt-unseres-lagerhauses-in-pernitz",
+      "dringender-aufruf-am-7-maerz-2027-entscheidet-ulten-ueber-das-pskw-unterstuetze-uns-bitte-2"
+    ],
     "bilanz": {
-      "stand": "2026-10-06T18:19:06-06:00",
-      "gefunden": 1696,
-      "im_bestand": 1696,
+      "stand": "2026-10-07T09:00:19-06:00",
+      "gefunden": 1702,
+      "im_bestand": 1702,
       "unbrauchbar": 0,
       "verworfen": 0,
       "dublette": 0,
@@ -46,61 +56,45 @@
       "zurueckgestellt": 0,
       "offen": 0,
       "offene_beispiele": [],
-      "bestand_gesamt": 2415,
-      "bestand_ausserhalb": 719
+      "bestand_gesamt": 2424,
+      "bestand_ausserhalb": 722
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-10-06T10:20:00-06:00",
-        "gesamt": 2415,
-        "online": 2415,
+        "zeit": "2026-10-07T09:00:19-06:00",
+        "gesamt": 2424,
+        "online": 2424,
         "offline": 0,
         "ohne_titel": 0,
         "platzhalter": 0,
         "nicht_ausgeliefert": 0,
         "torsi": 0,
         "dubletten": 0,
-        "mit_start": 2400,
-        "juengstes_start": "2026-10-06",
+        "mit_start": 2409,
+        "juengstes_start": "2026-10-07",
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
-        "neu": 3
-      },
-      {
-        "zeit": "2026-10-06T18:19:06-06:00",
-        "gesamt": 2415,
-        "online": 2415,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 2400,
-        "juengstes_start": "2026-10-06",
-        "mit_code_im_text": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
+        "neu": 9
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-10-06T18:19:06-06:00",
-      "gesamt": 2415,
-      "online": 2415,
+      "zeit": "2026-10-07T09:00:19-06:00",
+      "gesamt": 2424,
+      "online": 2424,
       "offline": 0,
       "ohne_titel": 0,
       "platzhalter": 0,
       "nicht_ausgeliefert": 0,
       "torsi": 0,
       "dubletten": 0,
-      "mit_start": 2400,
-      "juengstes_start": "2026-10-06",
+      "mit_start": 2409,
+      "juengstes_start": "2026-10-07",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-10-06T10:20:00-06:00",
+    "verlauf_felder_ab": "2026-10-07T09:00:19-06:00",
     "befunde": [],
     "health_warning": null,
-    "online_count": 2415
+    "online_count": 2424
   },
   "fuer-den-erhalt-einer-sicheren-individuellen-geburtshilfe-stoppt-den-neuen-hebammenhilfevertrag-2": {
     "slug": "fuer-den-erhalt-einer-sicheren-individuellen-geburtshilfe-stoppt-den-neuen-hebammenhilfevertrag-2",
@@ -137226,5 +137220,385 @@
       "Wurde"
     ],
     "last_checked": "2026-10-06T10:16:32-06:00"
+  },
+  "rb-71-erhalten-schienenverkehr-zwischen-pirna-lohmen-neustadt-und-sebnitz-sichern": {
+    "slug": "rb-71-erhalten-schienenverkehr-zwischen-pirna-lohmen-neustadt-und-sebnitz-sichern",
+    "first_seen": "2026-10-07T08:56:34-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-07T08:56:34-06:00",
+        "count": 629
+      }
+    ],
+    "title": "RB 71 erhalten – Schienenverkehr zwischen Pirna, Lohmen, Neustadt und Sebnitz sichern!",
+    "summary": "Wir, die Unterzeichnerinnen und Unterzeichner dieser Petition, fordern, die Regionalbahn RB 71 auf der Strecke Pirna – Dürrröhrsdorf – Neustadt (Sachs) – Sebnitz dauerhaft zu erhalten und von einer vollständigen Streichung der Linie abzusehen. Nach aktuellen Informationen des VVO wird im Zuge notwendiger Einsparungen geprüft, die RB 71 vollständig zu streichen. Eine solche Entscheidung wäre für die betroffenen Städte und Gemeinden ein erheblicher Einschnitt in die öffentliche Verkehrsanbindung.",
+    "image_url": "https://www.openpetition.de/images/petition/rb-71-erhalten-schienenverkehr-zwischen-pirna-lohmen-neustadt-und-sebnitz-sichern_1791361469_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/rb-71-erhalten-schienenverkehr-zwischen-pirna-lohmen-neustadt-und-sebnitz-sichern",
+    "description_full": "<!--marker--><p>Wir, die Unterzeichnerinnen und Unterzeichner dieser Petition, fordern, die <b>Regionalbahn RB 71 auf der Strecke Pirna – Dürrröhrsdorf – Neustadt (Sachs) – Sebnitz dauerhaft zu erhalten</b> und von einer vollständigen Streichung der Linie abzusehen.<br/>Nach aktuellen Informationen des VVO wird im Zuge notwendiger Einsparungen geprüft, die RB 71 vollständig zu streichen. Eine solche Entscheidung wäre für die betroffenen Städte und Gemeinden ein erheblicher Einschnitt in die öffentliche Verkehrsanbindung. Über die mögliche Kürzung ist bislang noch nicht endgültig entschieden.<br/>Wir fordern:</p><ol><li><b>Die RB 71 auf der gesamten Strecke Pirna – Neustadt – Sebnitz zu erhalten.</b></li><li><b>Keine vollständige Streichung der RB 71 im Rahmen des geplanten Reduktionskonzepts.</b></li><li>Bei der Entscheidung über das zukünftige Angebot die Auswirkungen auf <b>Berufspendler, Schülerinnen und Schüler, Auszubildende, Familien, ältere Menschen, Menschen ohne eigenes Auto sowie den Tourismus</b> angemessen zu berücksichtigen.</li></ol><br/><p><b>Die RB 71 ist wesentlicher Teil der Infrastruktur unserer Region – und damit ein Teil unserer Zukunft.</b><br/><b>Für Pirna, Dürrröhrsdorf, Neustadt, Sebnitz und die vielen Orte dazwischen. Für die Menschen, die hier leben, arbeiten, lernen und ihre Heimat haben.</b><br/><b>Die RB 71 muss bleiben.</b></p><p>Es ist anzuerkennen, dass der VVO/ZVVO derzeit mit erheblichen zusätzlichen Kosten im Schienenpersonennahverkehr konfrontiert ist. Nach Angaben des VVO entstehen dem Zweckverband im Jahr 2026 zusätzliche Kosten von rund 8,8 Millionen Euro; für die Folgejahre werden weitere erhebliche Mehrbelastungen erwartet. Diese finanzielle Situation darf jedoch nicht dazu führen, dass eine wichtige regionale Bahnverbindung ersatzlos aufgegeben wird.<br/>An den Zweckverband Verkehrsverbund Oberelbe (ZVO/VVO), die zuständigen politischen Entscheidungsträger im Landkreis Sächsische Schweiz-Osterzgebirge sowie die Sächsische Staatsregierung<br/>Wir fordern die Verantwortlichen auf, eine Lösung zu finden und notfalls das Thema bis auf Bundesebene hochzutragen, um eine Lösung über die Trassenpreisreform, den Modernisierungspakt des ÖPNV oder eine Aufstockung der Regionalisierungsmittel herbeizuführen.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Gerade im ländlichen Raum ist ein zuverlässiger öffentlicher Verkehr von besonderer Bedeutung. Wird eine Bahnverbindung einmal eingestellt, ist eine spätere Wiederherstellung erfahrungsgemäß keine Selbstverständlichkeit.<br/><b>Unsere Region darf nicht Schritt für Schritt vom Bahnverkehr abgehängt werden.</b> Was heute noch selbstverständlich ist – morgens mit der Bahn zur Arbeit oder zur Berufsschule zu fahren und abends wieder nach Hause zu kommen – könnte für viele Menschen schon bald nicht mehr möglich sein.</p><p>In den vergangenen Jahren wurde in die Modernisierung und Digitalisierung der Eisenbahninfrastruktur entlang der Strecke investiert. Dazu gehören auch Maßnahmen an der Stellwerks- und Sicherungstechnik.<br/>Wenn gleichzeitig über die dauerhafte Einstellung des Zugverkehrs auf der Strecke diskutiert wird, stellt sich die Frage nach der langfristigen Sinnhaftigkeit dieser Investitionen.<br/><b>Wir sollten nicht heute in moderne Eisenbahninfrastruktur investieren, um die Verbindung, für die sie gebraucht wird, morgen aufzugeben.</b><br/>Eine dauerhafte Einstellung des Zugbetriebs hätte deshalb nicht nur Auswirkungen auf die Fahrgäste. Auch bei den mit dem Betrieb verbundenen Tätigkeiten und Arbeitsplätzen können Folgen entstehen – beispielsweise bei Zugpersonal, Instandhaltung, Disposition und weiteren bahnbezogenen Dienstleistungen.</p><p>Die Bahnlinie ist Bestandteil gleichwertiger Lebensverhältnisse. Aus einer direkten und regelmäßigen Bahnverbindung würde eine Abhängigkeit von Busverbindungen und von individuellen Verkehrsmitteln.<br/>Für viele Menschen bedeutet die Bahn nicht nur eine Alternative zum Auto, sondern ist Voraussetzung dafür, Ausbildungsplätze, Arbeitsplätze, Schulen, Behörden, Einkaufsmöglichkeiten und medizinische Angebote erreichen zu können.<br/>Es trifft somit insbesondere Menschen, die kein Auto besitzen oder nicht selbst fahren können: Jugendliche, Auszubildende, ältere Menschen, Menschen mit Behinderungen und Personen mit geringem Einkommen.<br/>Pirna ist für die Region ein wichtiger Bildungsstandort, welcher erreichbar bleiben muss. Für Schülerinnen und Schüler sowie Auszubildende aus den Gemeinden entlang der RB 71 ist eine zuverlässige Bahnverbindung deshalb von besonderer Bedeutung.<br/>Wird die RB 71 vollständig eingestellt, verschlechtert sich die Erreichbarkeit des Bildungsstandorts Pirna für Menschen aus dem ländlichen Raum.<br/><b>Gerade junge Menschen dürfen nicht davon abhängig sein, ob ihre Eltern sie jeden Morgen mit dem Auto zur Berufsschule fahren können.</b><br/>Bildung darf nicht davon abhängen, ob junge Menschen ein eigenes Auto besitzen.</p><p>Die RB 71 erschließt touristisch bedeutende Orte und schafft Verbindungen in die Sächsische Schweiz.<br/>Der VVO bewirbt die Region ausdrücklich als Ausflugsregion mit Bus und Bahn und bezeichnet die RB 71 als Bestandteil des „Sächsische Schweiz Rings“.<br/>Auch die touristische Vermarktung von Neustadt verweist auf die stündliche RB 71 sowie die dadurch bestehenden Verbindungen Richtung Dresden und in den Nationalpark.<br/>Eine Einstellung der RB 71 würde deshalb nicht nur Pendler treffen. Sie würde auch die touristische Erreichbarkeit unserer Region erheblich verschlechtern.<br/>Orte wie Sebnitz und die umliegenden Ausflugsziele würden stärker vom motorisierten Individualverkehr oder von zusätzlichen Busverbindungen abhängig.<br/><b>Eine Region, die für ihre Natur, ihre Landschaft und ihre touristischen Ziele wirbt, sollte auch mit öffentlichen Verkehrsmitteln gut erreichbar bleiben.</b></p><p>Entscheidend ist auch, welchen wirtschaftlichen und gesellschaftlichen Nutzen die Bahn für unsere Region erzeugt.<br/>Eine im Mai 2025 veröffentlichte Studie des Zukunftsclusters MCube unter Leitung der Technischen Universität München hat den volkswirtschaftlichen Nutzen des öffentlichen Personennahverkehrs untersucht. Die von der Deutschen Bahn beauftragte Untersuchung kommt zu dem Ergebnis, dass der deutsche ÖPNV jährlich rund 75 Milliarden Euro Wertschöpfung ermöglicht, bei Betriebskosten von rund 25 Milliarden Euro.<br/>Dabei entsteht der Nutzen nicht beim Verkehrsunternehmen selbst. Busse und Bahnen ermöglichen unter anderem:</p><ul><li>den Zugang zu Arbeitsplätzen und Ausbildung,</li><li>Pendelverkehr und damit die Verfügbarkeit von Arbeitskräften,</li><li>Umsätze im Einzelhandel,</li><li>touristische Wertschöpfung,</li><li>wirtschaftliche Aktivität bei Zulieferern und Dienstleistern,</li><li>Mobilität für Menschen ohne eigenes Auto,</li><li>sowie die Vermeidung von Unfall-, Umwelt- und weiteren gesellschaftlichen Folgekosten.</li></ul><p>Wer eine Bahnlinie streicht, spart nicht automatisch den gesamten Betrag ihrer Betriebskosten als volkswirtschaftlichen Gewinn ein.<br/>Dem eingesparten Zuschuss stehen mögliche Folgekosten und entgangene wirtschaftliche Effekte gegenüber: zusätzliche Busverkehre, längere Wege, höhere Abhängigkeit vom Auto, erschwerte Erreichbarkeit von Arbeits- und Ausbildungsplätzen, mögliche Einbußen für den Tourismus und zusätzliche Umwelt- und Verkehrskosten.</p>",
+    "started_by": "Robert Butterling",
+    "category": "Verkehr",
+    "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
+    "country": "DE",
+    "signatures": 629,
+    "start_date": "2026-10-02",
+    "lang": "de",
+    "campaign_id": "openpetition:rb-71-erhalten-schienenverkehr-zwischen-pirna-lohmen-neustadt-und-sebnitz-sichern",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-07T08:56:34-06:00",
+    "offline_since": null,
+    "tags": [
+      "Region",
+      "Pirna",
+      "Neustadt",
+      "Sebnitz",
+      "Strecke",
+      "Auto",
+      "Bahnverbindung",
+      "Sächsische",
+      "Erhalten",
+      "Bahn"
+    ],
+    "last_checked": "2026-10-07T08:56:34-06:00"
+  },
+  "rathenow-nicht-abhaengen-14-monate-sind-zu-lang": {
+    "slug": "rathenow-nicht-abhaengen-14-monate-sind-zu-lang",
+    "first_seen": "2026-10-07T08:56:34-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-07T08:56:34-06:00",
+        "count": 448
+      }
+    ],
+    "title": "Rathenow nicht abhängen - 14 Monate sind zu lang",
+    "summary": "Für eine kürzere Sperrzeit und für einen leistungsfähigen Ersatzverkehr für Rathenow, Nennhausen, Stendal und die gesamte Region.",
+    "image_url": "https://www.openpetition.de/images/petition/rathenow-nicht-abhaengen-14-monate-sind-zu-lang_1791366819_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/rathenow-nicht-abhaengen-14-monate-sind-zu-lang",
+    "description_full": "<!--marker--><p><b>Für eine kürzere Sperrzeit und für einen leistungsfähigen Ersatzverkehr für Rathenow, Nennhausen, Stendal und die gesamte Region.</b></p>\n<h3>Begründung</h3>\n<!--marker--><p>Die Bahnstrecke zwischen Berlin und Rathenow ist für tausende Menschen täglich von großer Bedeutung. Sie verbindet unsere Städte und Gemeinden des westlichen Havellandes mit den Arbeitsplätzen, Schulen, Hochschulen, Behörden und medizinischen Einrichtungen der Hauptstadtregion.<br/> <br/>Ursprünglich sollte die Strecke Wustermark–Rathenow–Stendal zwei Mal zwei Monate ab Oktober 2026 und ab Oktober 2027 gesperrt werden.<br/> <br/>Jetzt sind es <b>14 Monate</b>!<br/> <br/>Eine derart lange Unterbrechung stellt Pendlerinnen und Pendler, Schülerinnen und Schüler, Familien, Seniorinnen und Senioren sowie Unternehmen vor erhebliche Herausforderungen.<br/> <br/>Die Deutsche Bahn begründet die massive Ausweitung unter anderem mit Verzögerungen bei  bei der Elektrifizierung der Strecke und räumt ein, dass „zu optimistisch“ geplant worden sei. Bekannt wurde die Verlängerung zudem erst Anfang September 2026, wenige Wochen vor Beginn der Vollsperrung. <br/><b> </b><br/><b>Das können und wollen wir so nicht hinnehmen.</b><br/> <br/>Notwendige Bauarbeiten sind richtig. Aber die Menschen der Region dürfen nicht derartig lange von der Bahnverbindung von und nach Berlin abgeschnitten werden.<br/><b> </b><br/><b>Wir fordern:</b><br/> <br/><b>1. Sperrzeit verkürzen!</b><br/>Alle Möglichkeiten ausschöpfen, um die 14 Monate Vollsperrung deutlich zu verkürzen. Die Bauabschnitte so organisieren, dass möglichst nur die ursprünglich angekündigten 2 x 2 Monate Vollsperrung notwendig sind und in der Zwischenzeit Zugverkehr möglich ist.<br/><b> </b><br/><b>2. RE 4 erhalten!</b><br/>Die Weiterführung des RE 4 mindestens bis Nennhausen, möglichst bis Rathenow, muss mit höchster Priorität verfolgt werden.<br/><b> </b><br/><b>3. Leistungsfähigen Ersatzverkehr während der Sperrzeit!</b><br/>Wo Züge nicht fahren können, braucht es schnelle Verbindungen. Das Ziel muss sein, wieder schnell vom Ersatzbus auf die Schiene zu kommen. <br/>Die Ersatzbus-Strecke von 42 km nach Nauen ist mit knapp einer Stunde geplant und trägt besonders dazu bei, dass sich die gesamte Fahrzeit von und nach Berlin erheblich verlängert. Unter realen Bedingungen auf der Straße dürfte die Fahrzeit sogar noch höher liegen. Dieser Ersatzverkehr macht es insbesondere Pendlern besonders schwer, die Zeit der Vollsperrung zu bewältigen. <br/>Die Buskapazitäten sind so zu planen, dass ausreichend Sitzplätze vorhanden sind.<br/>Es sind ergänzende Ersatzbus-Fahrten zum Bahnhof Friesack zum Umstieg auf den RE 8, wo stündliche Fahrten nach Berlin abgehen, zu prüfen. So müssen nur 30 km im Ersatzbus auf der Straße zurückgelegt werden.<br/>Der RB51 als Zubringer von Rathenow nach Brandenburg ist bereits heute von den Fahrgästen sehr gefragt und entsprechend voll. Es braucht eine<b> </b>Verlängerung der vorhandenen Züge um zusätzliche Wagen.<br/>Die Ersatzhaltestellen sind mit ausreichend Sitzmöglichkeiten, Wetterunterstand und Anzeigetafeln auszustatten.<br/> <br/><b>4. Gemeinsame Verantwortung für die Region</b><br/>Bund, Land, Deutsche Bahn und die weiteren zuständigen Akteure müssen gemeinsam dafür sorgen, dass die Region nicht über einen unverhältnismäßig langen Zeitraum von einer leistungsfähigen Bahnverbindung abgeschnitten bleibt.<br/> <br/><b>5. Verbindlicher 30 Minuten Takt nach den Bauarbeiten!</b><br/>Die Fahrgäste von und nach Rathenow haben in den letzten Jahren duldsam die Einschränkungen und Belastungen mitgetragen, die die Bauarbeiten und bisherigen Sperrungen mit sich gebracht haben. Jüngst die Sperrung der Hamburger Schiene, die die Lehrter Bahn als Umleitung nutzte und den Regionalverkehr auf der Linie RE 4 täglich teils massiv beeinträchtigt hat. Wir fordern, dass sich die erneuten massiven Einschränkungen endlich für die Fahrgäste von und nach Rathenow auszahlen. Die Bauarbeiten müssen zu einer Verbesserung führen, nämlich den lange gewünschten 30-Minuten-Takt direkt nach den Bauarbeiten. <br/>  <br/><b>Unsere Forderungen:</b><br/><b>14 Monate sind zu lang - Sperrzeit verkürzen.</b><br/><b>Wir wollen keine weiteren Vertröstungen.</b><br/><b>Wir wollen einen verbindlichen Zeitplan.</b><br/><b>Wir wollen Transparenz.</b><br/><b>Wir wollen einen leistungsfähigen Ersatzverkehr.</b><br/><b>Und wir wollen unsere Bahnverbindung zurück.</b><br/><b>14 Monate Vollsperrung dürfen nicht einfach als alternativlos hingenommen werden.</b><br/> <br/><b>Unterzeichnen Sie diese Petition und unterstützen Sie unsere Forderung nach einer schnellen, transparenten und verlässlichen Lösung für die Bahnverbindung zwischen Berlin, Buschow, Nennhauen, Rathenow und Stendal.</b><br/> <br/><b>Du fährst selbst nicht regelmäßig RE 4? Dann kennst du wahrscheinlich jemanden, der auf eine zuverlässige Verkehrsanbindung angewiesen ist.</b><br/>Kollegen. Freunde. Familie. Nachbarn. Vereinsmitglieder.</p>",
+    "started_by": "Stadt Rathenow",
+    "category": "Verkehr",
+    "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
+    "country": "DE",
+    "signatures": 448,
+    "goal": 510,
+    "start_date": "2026-10-06",
+    "lang": "de",
+    "campaign_id": "openpetition:rathenow-nicht-abhaengen-14-monate-sind-zu-lang",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-07T08:56:34-06:00",
+    "offline_since": null,
+    "tags": [
+      "Rathenow",
+      "Monate",
+      "Leistungsfähigen",
+      "Ersatzverkehr",
+      "Vollsperrung",
+      "Bauarbeiten",
+      "Sperrzeit",
+      "Berlin",
+      "Region",
+      "Bahnverbindung"
+    ],
+    "last_checked": "2026-10-07T08:56:34-06:00"
+  },
+  "der-nco-hort-darf-nich-geschlossen-werden-2": {
+    "slug": "der-nco-hort-darf-nich-geschlossen-werden-2",
+    "first_seen": "2026-10-07T08:56:34-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-07T08:56:34-06:00",
+        "count": 123
+      }
+    ],
+    "title": "Der NCO HORT darf nich geschlossen werden!",
+    "summary": "NCO-Hort in der Nordstadt erhalten! Wir setzen uns gemeinsam für den Erhalt des NCO-Horts in der Karlsruher Nordstadt ein. Für uns Kinder ist der NCO-Hort viel mehr als nur ein Betreuungsort. Er ist ein Ort, an dem wir uns wohl und sicher fühlen, Freunde treffen, gemeinsam Zeit verbringen und Unterstützung bekommen. Der Hort gibt uns Raum und Schutz und ist ein wichtiger Teil unseres Alltags. Besonders wichtig ist für uns, dass der NCO-Hort der einzige Hort für Schülerinnen und Schüler der 5. bi",
+    "image_url": "https://www.openpetition.de/images/petition/der-nco-hort-darf-nich-geschlossen-werden-2_1791212283_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/der-nco-hort-darf-nich-geschlossen-werden-2",
+    "description_full": "<!--marker--><p><b>NCO-Hort in der Nordstadt erhalten!</b></p><p>Wir setzen uns gemeinsam für den Erhalt des NCO-Horts in der Karlsruher Nordstadt ein.<br/>Für uns Kinder ist der NCO-Hort viel mehr als nur ein Betreuungsort. Er ist ein Ort, an dem wir uns wohl und sicher fühlen, Freunde treffen, gemeinsam Zeit verbringen und Unterstützung bekommen. Der Hort gibt uns Raum und Schutz und ist ein wichtiger Teil unseres Alltags.</p><p>Besonders wichtig ist für uns, dass der NCO-Hort der einzige Hort für Schülerinnen und Schüler der 5. bis 7. Klasse in diesem Zusammenhang ist. Wenn er geschlossen wird, verlieren wir diesen wichtigen Ort und damit eine Betreuung, die für uns und unsere Familien eine große Bedeutung hat.<br/>Wir möchten deshalb, dass der NCO-Hort erhalten bleibt und gemeinsam nach Lösungen gesucht wird, damit dieser Ort auch in Zukunft für Kinder und Jugendliche da sein kann.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Wir wollen nicht einfach hinnehmen, dass uns dieser wichtige Ort genommen wird. Deshalb setzen wir uns gemeinsam für den Erhalt des NCO-Horts ein.</p><p>Unsere Forderung: Der NCO-Hort in der Karlsruher Nordstadt soll erhalten bleiben!</p><p>Bitte unterstützt unsere Petition und helft uns dabei, dass unser Hort weiterhin ein sicherer und wichtiger Ort für Kinder und Jugendliche bleibt.</p>",
+    "started_by": "Lara",
+    "category": "Soziales",
+    "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
+    "country": "DE",
+    "signatures": 123,
+    "start_date": "2026-10-02",
+    "lang": "de",
+    "campaign_id": "openpetition:der-nco-hort-darf-nich-geschlossen-werden-2",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-07T08:56:34-06:00",
+    "offline_since": null,
+    "tags": [
+      "NCO-Hort",
+      "Gemeinsam",
+      "HORT",
+      "Nordstadt",
+      "Erhalten",
+      "Kinder",
+      "Karlsruher",
+      "NCO-Horts",
+      "Wichtiger",
+      "Erhalt"
+    ],
+    "last_checked": "2026-10-07T08:56:34-06:00"
+  },
+  "keine-kuendigungen-beim-kita-personal-in-am-mellensee-betreuungsschluessel-sichern": {
+    "slug": "keine-kuendigungen-beim-kita-personal-in-am-mellensee-betreuungsschluessel-sichern",
+    "first_seen": "2026-10-07T08:56:34-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-07T08:56:34-06:00",
+        "count": 81
+      }
+    ],
+    "title": "Keine Kündigungen beim Kita-Personal in Am Mellensee – Betreuungsschlüssel sichern!",
+    "summary": "Der geplante Abbau (https://daten.verwaltungsportal.de/dateien/news/1/2/8/7/4/2/6/FAQ_-_Situation_Kitapersonal.pdf)von ca. 14 Kita-Mitarbeitenden (11,7 Vollzeitstellen) in der Gemeinde Am Mellensee muss gestoppt werden, um die Betreuungsqualität und verlässliche Bezugspersonen für die Kinder zu erhalten.",
+    "image_url": "https://www.openpetition.de/images/petition/keine-kuendigungen-beim-kita-personal-in-am-mellensee-betreuungsschluessel-sichern_1791352593_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/keine-kuendigungen-beim-kita-personal-in-am-mellensee-betreuungsschluessel-sichern",
+    "description_full": "<!--marker--><p>Der <a href=\"https://daten.verwaltungsportal.de/dateien/news/1/2/8/7/4/2/6/FAQ_-_Situation_Kitapersonal.pdf\" rel=\"noopener\" target=\"_blank\">geplante Abbau </a>von ca. 14 Kita-Mitarbeitenden (11,7 Vollzeitstellen) in der Gemeinde Am Mellensee muss gestoppt werden, um die Betreuungsqualität und verlässliche Bezugspersonen für die Kinder zu erhalten.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Krankheitsausfälle, Urlaubszeiten und Fortbildungen haben bereits mehrfach zu personellen Unterbesetzungen und Notbetreuung in den Kitas der Gemeinde Am Mellensee geführt. Ein Abbau von ca. 14 Fachkräften (11,7 Vollzeiteinheiten) würde diese prekäre Lage weiter verschärfen.</p><p>Der gesetzliche Betreuungsschlüssel stellt lediglich eine Mindestanforderung dar und fängt reale Ausfallzeiten im Alltag nicht ab. Um den tatsächlichen Betreuungsschlüssel in den Einrichtungen dauerhaft zu sichern, muss der geplante Stellenabbau gestoppt werden.<br/>Anstelle von Kündigungen müssen vorhandene Kapazitäten gezielt als Vertretungs- und Personalpuffer genutzt werden. Nur so vermeiden wir den Verlust verlässlicher Bezugspersonen, verhindern die Überlastung der verbleibenden Teams und stellen eine verlässliche, qualitativ hochwertige Kinderbetreuung ohne ständige Notbetreuung sicher.</p>",
+    "started_by": "Martin Brosowski",
+    "category": "Bildung",
+    "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
+    "country": "DE",
+    "signatures": 81,
+    "start_date": "2026-10-07",
+    "lang": "de",
+    "campaign_id": "openpetition:keine-kuendigungen-beim-kita-personal-in-am-mellensee-betreuungsschluessel-sichern",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-07T08:56:34-06:00",
+    "offline_since": null,
+    "tags": [
+      "Mellensee",
+      "Betreuungsschlüssel",
+      "Bezugspersonen",
+      "Verlässliche",
+      "Gemeinde",
+      "Geplante",
+      "Gestoppt",
+      "Abbau",
+      "Kita-Mitarbeitenden",
+      "Betreuungsqualität"
+    ],
+    "last_checked": "2026-10-07T08:56:34-06:00"
+  },
+  "sicherheit-kennt-kein-alter-regelmaessige-fahrtauglichkeitspruefungen-ab-75-jahren": {
+    "slug": "sicherheit-kennt-kein-alter-regelmaessige-fahrtauglichkeitspruefungen-ab-75-jahren",
+    "first_seen": "2026-10-07T08:56:34-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-07T08:56:34-06:00",
+        "count": 15
+      }
+    ],
+    "title": "🚗 Sicherheit kennt kein Alter – regelmäßige Fahrtauglichkeitsprüfungen ab 75 Jahren",
+    "summary": "Ein Führerschein ist keine lebenslange Garantie dafür, dass man auch Jahrzehnte später noch sicher Auto fahren kann. Wir alle wünschen uns, möglichst lange selbstständig und mobil zu bleiben. Gerade für ältere Menschen bedeutet das Auto häufig Freiheit, Unabhängigkeit und die Möglichkeit, weiterhin am gesellschaftlichen Leben teilzunehmen. Doch mit zunehmendem Alter können sich Sehvermögen, Hörvermögen, Reaktionsfähigkeit, Beweglichkeit und Konzentration verändern. Auch Erkrankungen oder bestimm",
+    "image_url": "https://www.openpetition.de/images/default_petition.jpg",
+    "url": "https://www.openpetition.de/petition/online/sicherheit-kennt-kein-alter-regelmaessige-fahrtauglichkeitspruefungen-ab-75-jahren",
+    "description_full": "<!--marker--><p><b>Ein Führerschein ist keine lebenslange Garantie dafür, dass man auch Jahrzehnte später noch sicher Auto fahren kann.</b></p><p>Wir alle wünschen uns, möglichst lange selbstständig und mobil zu bleiben. Gerade für ältere Menschen bedeutet das Auto häufig Freiheit, Unabhängigkeit und die Möglichkeit, weiterhin am gesellschaftlichen Leben teilzunehmen.</p><p>Doch mit zunehmendem Alter können sich Sehvermögen, Hörvermögen, Reaktionsfähigkeit, Beweglichkeit und Konzentration verändern. Auch Erkrankungen oder bestimmte Medikamente können die Fahrtüchtigkeit beeinflussen.</p><p><b>Und genau deshalb möchte ich eine Veränderung.</b></p><p>Ich fordere, dass Autofahrerinnen und Autofahrer ab dem 75. <b>Lebensjahr regelmäßig ihre Fahrtauglichkeit überprüfen lassen müssen.</b></p><p>Dabei soll ausdrücklich <b>nicht das Alter allein darüber entscheiden, ob jemand noch fahren darf.</b></p><p>Ein 75-jähriger Mensch kann körperlich und geistig vollkommen fit sein und sicherer fahren als manch deutlich jüngerer Mensch.</p><p>Deshalb soll es um das gehen, was wirklich zählt:</p><p><b>Kann diese Person noch sicher am Straßenverkehr teilnehmen?</b></p><p>Geprüft werden könnten beispielsweise:</p><p>🔹 Seh- und Hörvermögen<br/>🔹 Reaktionsfähigkeit<br/>🔹 Konzentration und Aufmerksamkeit<br/>🔹 Beweglichkeit<br/>🔹 gesundheitliche Voraussetzungen<br/>🔹 der sichere Umgang mit unterschiedlichen Verkehrssituationen<br/>🔹 gegebenenfalls der Einfluss bestimmter Medikamente</p><p>Wer die Überprüfung besteht, fährt selbstverständlich weiter.</p><p>Wer leichte Schwierigkeiten zeigt, sollte Unterstützung bekommen – beispielsweise durch ein Fahrsicherheitstraining oder eine erneute Überprüfung.</p><p>Erst wenn eindeutig festgestellt wird, dass eine sichere Teilnahme am Straßenverkehr nicht mehr möglich ist, sollten entsprechende Konsequenzen folgen.</p><p><b>Warum ist mir das so wichtig?</b></p><p>Weil ein Fehler im Straßenverkehr nicht nur das eigene Leben betreffen kann.</p><p>Hinter jedem Unfall stehen Menschen.</p><p>Mütter. Väter. Kinder. Großeltern. Freunde. Partner.</p><p>Manchmal entscheidet eine Sekunde, ein übersehener Fußgänger, ein zu spätes Bremsen oder eine falsche Reaktion über Leben und Tod.</p><p><b>Wir überprüfen Fahrzeuge regelmäßig. Wir überprüfen unsere Technik. Wir überprüfen unsere Sicherheitssysteme. Warum sollte die Fahrtauglichkeit eines Menschen niemals überprüft werden, obwohl sich körperliche und geistige Fähigkeiten im Laufe des Lebens verändern können?</b></p><p>Diese Forderung richtet sich <b>nicht gegen ältere Menschen</b>.</p><p>Sie richtet sich für <b>mehr Sicherheit für ältere Menschen und für alle anderen Verkehrsteilnehmer.</b></p><p>Niemand sollte seinen Führerschein verlieren, nur weil er ein bestimmtes Alter erreicht hat.</p><p>Aber niemand sollte seinen Führerschein allein deshalb lebenslang behalten, weil er ihn irgendwann einmal bestanden hat.</p><p><b>Alter sollte kein Grund sein, jemanden vom Autofahren auszuschließen.</b><br/><b>Alter sollte aber auch kein Grund sein, auf eine Überprüfung der Fahrtauglichkeit zu verzichten.</b></p><p>Lasst uns deshalb eine faire, regelmäßige und altersgerechte Überprüfung schaffen, die nicht diskriminiert, sondern schützt.</p><p><b>Für unsere Eltern.</b><br/><b>Für unsere Großeltern.</b><br/><b>Für unsere Kinder.</b><br/><b>Für uns selbst.</b><br/><b>Für mehr Sicherheit auf unseren Straßen.</b></p><p>❤️ <b>Bitte unterstützt diese Petition und setzt gemeinsam ein Zeichen für mehr Sicherheit im Straßenverkehr.</b></p>\n<h3>Begründung</h3>\n<!--marker--><p>Weil ein Fehler im Straßenverkehr nicht nur das eigene Leben betreffen kann.</p>",
+    "started_by": "Jasmin Biermann",
+    "category": "Verkehr",
+    "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
+    "country": "DE",
+    "signatures": 15,
+    "start_date": "2026-10-06",
+    "lang": "de",
+    "campaign_id": "openpetition:sicherheit-kennt-kein-alter-regelmaessige-fahrtauglichkeitspruefungen-ab-75-jahren",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-07T08:56:34-06:00",
+    "offline_since": null,
+    "tags": [
+      "Alter",
+      "Straßenverkehr",
+      "Führerschein",
+      "Überprüfung",
+      "Sicherheit",
+      "Überprüfen",
+      "Fahren",
+      "Ältere",
+      "Auto",
+      "Reaktionsfähigkeit"
+    ],
+    "last_checked": "2026-10-07T08:56:34-06:00"
+  },
+  "strafrechtliche-luecke-schliessen-psychische-gewalt-unter-strafe-stellen": {
+    "slug": "strafrechtliche-luecke-schliessen-psychische-gewalt-unter-strafe-stellen",
+    "first_seen": "2026-10-07T08:56:34-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-07T08:56:34-06:00",
+        "count": 5
+      }
+    ],
+    "title": "Strafrechtliche Lücke schließen: Psychische Gewalt unter Strafe stellen!",
+    "summary": "Ich fordere den Deutschen Bundestag auf, ein Gesetz nach französischem Vorbild zu beschließen: Psychische Gewalt und kontrollierendes Verhalten in engen sozialen Beziehungen müssen als eigenständiger Straftatbestand in das Strafgesetzbuch (StGB) aufgenommen werden. Täter müssen spürbar bestraft und Opfer – einschließlich mitbetroffener Kinder – wirksam geschützt werden.",
+    "image_url": "https://www.openpetition.de/images/petition/strafrechtliche-luecke-schliessen-psychische-gewalt-unter-strafe-stellen_1781782994_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/strafrechtliche-luecke-schliessen-psychische-gewalt-unter-strafe-stellen",
+    "description_full": "<!--marker--><p>Ich fordere den Deutschen Bundestag auf, ein Gesetz nach französischem Vorbild zu beschließen: Psychische Gewalt und kontrollierendes Verhalten in engen sozialen Beziehungen müssen als eigenständiger Straftatbestand in das Strafgesetzbuch (StGB) aufgenommen werden. Täter müssen spürbar bestraft und Opfer – einschließlich mitbetroffener Kinder – wirksam geschützt werden.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Ich starte diese Petition aus tiefster Überzeugung und eigener Lebenserfahrung. Psychische Gewalt hinterlässt keine blauen Flecken, aber sie zerstört Seelen und bricht Menschen von innen heraus. Ich habe selbst miterlebt, wie zerstörerisch systematische Erniedrigung, soziale Isolation und emotionale Erpressung sind. Wenn Betroffene in Deutschland Hilfe bei der Polizei oder den Behörden suchen, stehen sie fast immer vor verschlossenen Türen. Solange keine körperliche Gewalt im Spiel ist, sind dem Staat rechtlich die Hände gebunden. Das darf nicht so bleiben!<br/>Dieses Gesetz ist mir eine Herzensangelegenheit, weil wir Opfer nicht erst dann schützen dürfen, wenn es zu spät ist. Psychische Gewalt ist die unsichtbare Vorstufe zu physischer Gewalt und im schlimmsten Fall zu Femiziden. Ein eigenes Gesetz nach französischem Vorbild würde Tätern klare Grenzen setzen, betroffenen Frauen und ihren Kindern echten Schutz bieten und dem Staat am Ende sogar Kosten im Gesundheitssystem und bei Polizeieinsätzen sparen.<br/>Hier sind die offiziellen Quellen, die zeigen, dass ein solches Gesetz machbar ist und funktioniert:</p><ul><li><b>Das französische Gesetz zur psychischen Gewalt in der Partnerschaft (Artikel 222-33-2-1 Code pénal):</b> legifrance.gouv.fr</li><li><b>Die rechtliche Gleichstellung von physischer und psychischer Gewalt im französischen Strafrecht (Artikel 222-14-3 Code pénal):</b> legifrance.gouv.fr</li><li><b>Analyse des Deutschen Bundestages zum Schutz vor psychischer Gewalt im Ländervergleich:</b>bundestag.de</li></ul>",
+    "started_by": "Slavica Drazovic",
+    "category": "Familie",
+    "category_url": "https://www.openpetition.de/petitionen?category=14#petitionen",
+    "country": "DE",
+    "signatures": 5,
+    "start_date": "2026-06-01",
+    "lang": "de",
+    "campaign_id": "openpetition:strafrechtliche-luecke-schliessen-psychische-gewalt-unter-strafe-stellen",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-07T08:56:34-06:00",
+    "offline_since": null,
+    "tags": [
+      "Gewalt",
+      "Gesetz",
+      "Psychische",
+      "Französischem",
+      "Vorbild",
+      "Opfer",
+      "Kontrollierendes",
+      "Strafgesetzbuch",
+      "Straftatbestand",
+      "Eigenständiger"
+    ],
+    "last_checked": "2026-10-07T08:56:34-06:00"
+  },
+  "mehr-sicherheit-und-weniger-verkehr-auf-dem-im-muehlengrunde-in-28844-weyhe": {
+    "slug": "mehr-sicherheit-und-weniger-verkehr-auf-dem-im-muehlengrunde-in-28844-weyhe",
+    "first_seen": "2026-10-07T08:56:34-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-07T08:56:34-06:00",
+        "count": 5
+      }
+    ],
+    "title": "Mehr Sicherheit und weniger Verkehr auf dem „Im Mühlengrunde“ in 28844 Weyhe",
+    "summary": "Wir fordern mehr Verkehrssicherheit und Lebensqualität für die Anwohnerinnen und Anwohner der Straße Im Mühlengrunde (L334) in 28844 Weyhe. Unsere Forderungen: 🚗 Durchgehend Tempo 30 🚛 Weniger bzw. kein übergeordneter Lkw-Durchgangsverkehr – erneute Prüfung eines Lkw-Durchfahrtsverbots 🚸 Verkehrsinseln, Fahrbahnteiler und sichere Querungshilfen 📊 Aktuelle Verkehrszählungen und Geschwindigkeitsmessungen Wir möchten, dass die heutige Verkehrssituation auf dem Im Mühlengrunde erneut umfassend geprü",
+    "image_url": "https://www.openpetition.de/images/petition/mehr-sicherheit-und-weniger-verkehr-auf-dem-im-muehlengrunde-in-28844-weyhe_1791274917_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/mehr-sicherheit-und-weniger-verkehr-auf-dem-im-muehlengrunde-in-28844-weyhe",
+    "description_full": "<!--marker--><p>Wir fordern mehr Verkehrssicherheit und<br/>Lebensqualität für die Anwohnerinnen und Anwohner der Straße Im Mühlengrunde (L334) in 28844 Weyhe.</p><p>Unsere Forderungen:</p><p>🚗 <b>Durchgehend Tempo 30</b><br/>🚛 <b>Weniger bzw. kein übergeordneter Lkw-Durchgangsverkehr – erneute Prüfung eines Lkw-Durchfahrtsverbots</b><br/>🚸 <b>Verkehrsinseln, Fahrbahnteiler und sichere Querungshilfen</b><br/>📊 <b>Aktuelle Verkehrszählungen und Geschwindigkeitsmessungen</b></p><p>Wir möchten, dass die heutige Verkehrssituation auf dem Im Mühlengrunde erneut umfassend geprüft wird.</p><p>Die Straße ist nicht nur eine wichtige Verkehrsverbindung, sondern gleichzeitig Wohn- und Lebensraum für viele Menschen. Besonders Fußgänger, Radfahrer, Kinder und ältere Menschen brauchen eine sichere und verkehrsberuhigte Umgebung.<br/>Auf der L334/Im Mühlengrunde wurden bereits Tempo-30-Maßnahmen umgesetzt. Wir möchten, dass nun geprüft wird, ob diese Maßnahmen ausgeweitet werden müssen und welche zusätzlichen baulichen Maßnahmen sinnvoll sind.</p><p><b>Unser Ziel: </b><br/><b>weniger Lärm, weniger Schwerlastverkehr, geringere Geschwindigkeiten und mehr Sicherheit für alle.</b></p><p>👉 Unterstützt unsere Petition und helft uns, dieses Anliegen gegenüber der Gemeinde Weyhe und den zuständigen Behörden sichtbar zu machen.</p><p><b>Je mehr Menschen sich beteiligen, desto deutlicher wird: Wir wünschen uns eine sichere und lebenswerte Straße Im Mühlengrunde.</b><br/>Bitte teilt die Petition auch mit Nachbarn, Freunden und Bekannten in Weyhe.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Als direkte Anwohnerin dieser Straße kämpfen wir jeden Tag mit dem stark gestiegenen Verkehr. Insbesondere die viel zu schnell fahrenden PKWs und die schweren LKWs stellen eine große Gefahr da.</p>",
+    "started_by": "Jana Reuter",
+    "category": "Verkehr",
+    "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
+    "country": "DE",
+    "signatures": 5,
+    "start_date": "2026-10-06",
+    "lang": "de",
+    "campaign_id": "openpetition:mehr-sicherheit-und-weniger-verkehr-auf-dem-im-muehlengrunde-in-28844-weyhe",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-07T08:56:34-06:00",
+    "offline_since": null,
+    "tags": [
+      "Mühlengrunde",
+      "Weniger",
+      "Straße",
+      "Weyhe",
+      "Sichere",
+      "Maßnahmen",
+      "Möchten",
+      "Tempo",
+      "Lkw-Durchfahrtsverbots",
+      "Lkw-Durchgangsverkehr"
+    ],
+    "last_checked": "2026-10-07T08:56:34-06:00"
+  },
+  "fuer-den-erhalt-unseres-lagerhauses-in-pernitz": {
+    "slug": "fuer-den-erhalt-unseres-lagerhauses-in-pernitz",
+    "first_seen": "2026-10-07T08:56:34-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-07T08:56:34-06:00",
+        "count": 383
+      }
+    ],
+    "title": "Für den Erhalt unseres Lagerhauses in Pernitz",
+    "summary": "Gemeinsam für unser Lagerhaus in Pernitz – Für eine starke Region und eine nachhaltige Zukunft! Worum geht es? Wir setzen uns mit dieser Petition voller Begeisterung für den langfristigen Erhalt unseres geschätzten Lagerhauses in Pernitz ein. Als verlässlicher Mittelpunkt unseres Ortes sichert das Lagerhaus die Lebensqualität und die Nahversorgung für alle Generationen. Es ist ein lebendiger Ort der Begegnung, des Vertrauens und der wirtschaftlichen Stabilität, den wir für unsere gemeinsame Zuku",
+    "image_url": "https://www.openpetition.eu/images/default_petition.jpg",
+    "url": "https://www.openpetition.de/petition/online/fuer-den-erhalt-unseres-lagerhauses-in-pernitz",
+    "description_full": "<!--marker--><p><b>Gemeinsam für unser Lagerhaus in Pernitz – Für eine starke Region und eine nachhaltige Zukunft!</b><br/><b>Worum geht es?</b></p><p>Wir setzen uns mit dieser Petition voller Begeisterung für den <b>langfristigen Erhalt unseres geschätzten Lagerhauses in Pernitz</b> ein. Als verlässlicher Mittelpunkt unseres Ortes sichert das Lagerhaus die Lebensqualität und die Nahversorgung für alle Generationen. Es ist ein lebendiger Ort der Begegnung, des Vertrauens und der wirtschaftlichen Stabilität, den wir für unsere gemeinsame Zukunft bewahren möchten.</p><p><b>Warum ist das Lagerhaus wirtschaftlich so wertvoll?</b></p><ul><li> <b>Stärkung der regionalen Wirtschaft:</b> Das Lagerhaus sichert wertvolle Arbeitsplätze direkt vor unserer Haustür und hält die Kaufkraft in unserer schönen Gemeinde Pernitz.</li><li> <b>Einzigartiger Allround-Versorger:</b> Da es im weiten Umkreis keine vergleichbare Einkaufsmöglichkeit gibt, erfüllt das Lagerhaus eine absolut unverzichtbare Versorgungsfunktion. Es schenkt uns die Sicherheit, alle wichtigen Güter des täglichen Bedarfs, für Haus, Garten und Handwerk, unkompliziert direkt im Ort zu bekommen.</li></ul><p> <br/><b>Wertschöpfung vor Ort:</b> Durch die enge Zusammenarbeit mit heimischen Betrieben und der Landwirtschaft bleibt Pernitz wirtschaftlich eigenständig, krisensicher und attraktiv.<br/> <br/><b>Zwei großartige Zusatzservices an einem Ort: Die Tankstelle und der neue Postpartner</b><br/></p><ul><li> <b>Rund um die Uhr mobil dank der Tankstelle:</b> Die im Areal integrierte Genol-Tankstelle sichert unsere tägliche Mobilität. Sie ermöglicht es allen Gemeindebürgern und Pendlern, unkompliziert, flexibel und jederzeit direkt im Ort aufzutanken.</li><li>·<b>Beste Anbindung durch den neuen Postpartner:</b> Mit der kürzlich erfolgreich übernommenen Postpartnerschaft hat das Lagerhaus Pernitz eine enorm wichtige Funktion für das gesamte Piestingtal hinzugewonnen. Ob Briefe, Pakete oder wichtige Post- und Bankdienstleistungen – alles kann nun wunderbar bequem, zeitsparend und gesammelt bei einem einzigen Besuch im Ort erledigt werden.</li></ul><br/><p><b>Ein großer Gewinn für unsere Umwelt: Klimaschutz durch kurze Wege</b><br/></p><ul><li><b>Aktive CO2-Einsparung:</b> Unser Lagerhaus im Ort ist der beste Garant für echten Klimaschutz. Weil wir alles Wichtige – vom Einkauf über das Postwesen bis hin zum Tanken – direkt in Pernitz erledigen können, sparen wir uns lange Autofahrten in andere Bezirke.</li><li><b>Effizienz und Komfort:</b> Pernitz hat ein sehr großes Einzugsgebiet. Die Nahversorgung vor Ort spielt eine entscheidende Rolle. Das nächste Lagerhaus, das dieses umfassende Spektrum an Waren bietet, ist <b>über 40 Kilometer entfernt</b>.</li><li>Gerade deshalb gilt: <b>Kurze Wege bedeuten minimale Fahrtzeiten und maximalen Umwelt</b> <b>schutz.</b> Den täglichen Bedarf direkt vor Ort zu decken, schont wertvolle Ressourcen, verbessert unsere CO2-Bilanz und schenkt uns allen mehr Lebensqualität.</li></ul><p> <br/><b>Unser Ziel:</b><br/>Wir möchten mit dieser Petition zeigen, wie sehr uns unser Lagerhaus am Herzen liegt. Gemeinsam setzen wir ein positives Zeichen für den Erhalt dieses wirtschaftlichen und ökologischen Vorzeigebetriebs, der Pernitz jeden Tag aufs Neue bereichert.<br/><b>Bitte unterstützen Sie uns mit Ihrer Unterschrift für ein starkes, lebenswertes und nachhaltiges Pernitz!</b></p>\n<h3>Begründung</h3>\n<!--marker--><p><b>Unser Lagerhaus</b> ist ein verlässlicher und sehr geschätzter Teil unserer Gemeinschaft.</p><p>Dieser Ort steht für <b>Hilfsbereitschaft</b>,<b> gute Qualität</b> und das beruhigende Gefühl, wichtige Dinge<b> direkt in der Region</b> zu bekommen. Besonders hervorzuheben ist das <b>tolle</b>, <b>kompetente </b>und <b>freundliche Team vor Ort</b>. Alle Mitarbeiter unterstützen uns Kunden immer mit bestem Rat und großem Einsatz.</p><p>Für mich persönlich ist das Lagerhaus mit einer wichtigen und witzigen Erinnerung verbunden:<br/>Als ich für ein Bauprojekt dringend passende Gummistiefel brauchte und ich im kilometerweiten Radius keine geeigneten gefunden habe, war dieses Geschäft meine Rettung. Nirgendwo sonst – in keinem anderen Geschäft weit und breit waren diese zu bekommen. Nur unser Lagerhaus hatte sie sofort bereitstehen. Und so konnte ich rechtzeitig zu meinem Bauprojekt gelangen.<br/>Diese Erfahrung zeigt, wie wichtig dieser Standort für unsere konkreten Bedürfnisse vor Ort ist.<br/>Das Lagerhaus sichert unsere Lebensqualität und bietet ein einzigartiges Angebot. Der Erhalt dieses Standorts ist eine große Bereicherung für uns alle. Lassen Sie uns diesen wertvollen Ort für die Zukunft bewahren!</p>",
+    "started_by": "Eva Christina Aigner",
+    "category": "Wirtschaft",
+    "category_url": "https://www.openpetition.de/at/petitionen?category=48#petitionen",
+    "country": "AT",
+    "signatures": 383,
+    "start_date": "2026-10-06",
+    "lang": "de",
+    "campaign_id": "openpetition:fuer-den-erhalt-unseres-lagerhauses-in-pernitz",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-07T08:56:34-06:00",
+    "offline_since": null,
+    "tags": [
+      "Lagerhaus",
+      "Pernitz",
+      "Direkt",
+      "Sichert",
+      "Unseres",
+      "Erhalt",
+      "Lebensqualität",
+      "Wichtige",
+      "Zukunft",
+      "Wirtschaftlichen"
+    ],
+    "last_checked": "2026-10-07T08:56:34-06:00"
+  },
+  "dringender-aufruf-am-7-maerz-2027-entscheidet-ulten-ueber-das-pskw-unterstuetze-uns-bitte-2": {
+    "slug": "dringender-aufruf-am-7-maerz-2027-entscheidet-ulten-ueber-das-pskw-unterstuetze-uns-bitte-2",
+    "first_seen": "2026-10-07T08:56:34-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-07T08:56:34-06:00",
+        "count": 42
+      }
+    ],
+    "title": "Dringender Aufruf: Am 7. März 2027 entscheidet Ulten über das PSKW - unterstütze uns bitte",
+    "summary": "Stoppt das Projekt . Unser Ultental ist nicht nur ein Energiestandort, er ist unser Lebensraum. Sechs Stauseen, überflutete Höfe, enteignete Familien sowie massive Eingriffe in die Landschaft: Der Ausbau der Wasserkraft in den 50er Jahren hat das Ultental geprägt wie kaum eine andere Entwicklung. Die bestehenden Wasserkraftanlagen in Ulten produzieren bereits jährlich rund 390 Millionen Kilowattstunden Strom für etwa 85.000 Haushalte. Nun plant der Energiekonzern Alperia ein neues 700 Millionen",
+    "image_url": "https://www.openpetition.eu/images/petition/dringender-aufruf-am-7-maerz-2027-entscheidet-ulten-ueber-das-pskw-unterstuetze-uns-bitte_1791289265_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/dringender-aufruf-am-7-maerz-2027-entscheidet-ulten-ueber-das-pskw-unterstuetze-uns-bitte-2",
+    "description_full": "<!--marker--><p><b>Stoppt das Projekt</b> .<br/>Unser Ultental ist nicht nur ein Energiestandort, er ist unser Lebensraum.<br/>Sechs Stauseen, überflutete Höfe, enteignete Familien sowie massive Eingriffe in die Landschaft:<br/>Der Ausbau der Wasserkraft in den 50er Jahren hat das Ultental geprägt wie kaum eine andere Entwicklung. Die bestehenden Wasserkraftanlagen in Ulten produzieren bereits jährlich rund 390 Millionen Kilowattstunden Strom für etwa 85.000 Haushalte.<br/>Nun plant der Energiekonzern Alperia ein neues 700 Millionen Euro Mammutprojekt mit zusätzlichen 400 Megawatt Leistung.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Darum sagen wir NEIN zu dem geplanten Pumpspeicherkraftwerk:</p><ul><li>mindestens 10 Jahre Baustellenchaos, massive Staubentwicklung, Verkehrsüberlastung durch tonnenschwere Materialtransporte. <a href=\"https://salto.bz/de/article/29092026/6200-unterschriften-gegen-alperias-plan\" rel=\"noopener\" target=\"_blank\">https://salto.bz/de/article/29092026/6200-unterschriften-gegen-alperias-plan</a></li><li>anhaltender Bohr-und Sprenglärm</li><li>Befürchtung der Instabilität des Berges. <a href=\"https://www.lebenswertes-kaunertal.org/post/warnung-vor-steigenden-gefahren-im-kaunertal\" rel=\"noopener\" target=\"_blank\">https://www.lebenswertes-kaunertal.org/post/warnung-vor-steigenden-gefahren-im-kaunertal</a></li><li>das Risiko des Versiegens von Quellen für Trinkwasser und Landwirtschaft <a href=\"https://salto.bz/de/article/10072026/ultner-grundstucksbesitzer-wehren-sich\" rel=\"noopener\" target=\"_blank\">https://salto.bz/de/article/10072026/ultner-grundstucksbesitzer-wehren-sich</a></li><li>eine geplante, ca. 20 Meter breite Waldschneise für die Materialseilbahn zerstört unwiederbringlich den Lebensraum geschützter Flora und Fauna.</li><li>riesige Stromleitungen für den Abtransport von 400 Megawatt Strom</li></ul>",
+    "started_by": "Bündnis für Ulten",
+    "category": "Umwelt",
+    "category_url": "https://www.openpetition.de/it/petitionen?category=46#petitionen",
+    "country": "IT",
+    "signatures": 42,
+    "goal": 500,
+    "start_date": "2026-10-06",
+    "lang": "de",
+    "campaign_id": "openpetition:dringender-aufruf-am-7-maerz-2027-entscheidet-ulten-ueber-das-pskw-unterstuetze-uns-bitte-2",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-07T08:56:34-06:00",
+    "offline_since": null,
+    "tags": [
+      "Millionen",
+      "Ultental",
+      "Lebensraum",
+      "Massive",
+      "Strom",
+      "Ulten",
+      "Wasserkraftanlagen",
+      "Energiestandort",
+      "Kilowattstunden",
+      "Energiekonzern"
+    ],
+    "last_checked": "2026-10-07T08:56:34-06:00"
   }
 }

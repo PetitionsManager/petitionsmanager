@@ -31,14 +31,17 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-10-06T18:15:23-06:00",
-    "petition_count": 1913,
-    "available": 1880,
-    "new_petitions_last_run": [],
+    "generated_at": "2026-10-07T08:56:23-06:00",
+    "petition_count": 1915,
+    "available": 1882,
+    "new_petitions_last_run": [
+      "1319-2026",
+      "1342-2026"
+    ],
     "bilanz": {
-      "stand": "2026-10-06T18:15:23-06:00",
-      "gefunden": 1880,
-      "im_bestand": 1880,
+      "stand": "2026-10-07T08:56:22-06:00",
+      "gefunden": 1882,
+      "im_bestand": 1882,
       "unbrauchbar": 0,
       "verworfen": 0,
       "dublette": 0,
@@ -46,14 +49,14 @@
       "zurueckgestellt": 0,
       "offen": 0,
       "offene_beispiele": [],
-      "bestand_gesamt": 1913,
+      "bestand_gesamt": 1915,
       "bestand_ausserhalb": 33
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-10-06T18:15:23-06:00",
-        "gesamt": 1913,
-        "online": 1913,
+        "zeit": "2026-10-07T08:56:22-06:00",
+        "gesamt": 1915,
+        "online": 1915,
         "offline": 0,
         "ohne_titel": 0,
         "platzhalter": 0,
@@ -64,13 +67,13 @@
         "juengstes_start": "2026-07-23",
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
-        "neu": 0
+        "neu": 2
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-10-06T18:15:23-06:00",
-      "gesamt": 1913,
-      "online": 1913,
+      "zeit": "2026-10-07T08:56:22-06:00",
+      "gesamt": 1915,
+      "online": 1915,
       "offline": 0,
       "ohne_titel": 0,
       "platzhalter": 0,
@@ -81,19 +84,19 @@
       "juengstes_start": "2026-07-23",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-10-06T18:15:23-06:00",
+    "verlauf_felder_ab": "2026-10-07T08:56:22-06:00",
     "befunde": [
       {
         "stufe": "hinweis",
         "thema": "Startdatum ist ein Verfahrensdatum",
-        "text": "Tagesgenaues Datum bei 983 von 1913 Sätzen; es ist das Zulässigkeitsdatum aus der Mitteilung an die Mitglieder, nicht der Start der Petition. Das jüngste ist 75 Tage alt (2026-07-23) — bauartbedingt, weil das Dokument erst mit der Kommissionsantwort entsteht. Der Altersmelder ist hier deshalb ausgen",
-        "zeit": "2026-10-06T18:15:23-06:00",
+        "text": "Tagesgenaues Datum bei 983 von 1915 Sätzen; es ist das Zulässigkeitsdatum aus der Mitteilung an die Mitglieder, nicht der Start der Petition. Das jüngste ist 76 Tage alt (2026-07-23) — bauartbedingt, weil das Dokument erst mit der Kommissionsantwort entsteht. Der Altersmelder ist hier deshalb ausgen",
+        "zeit": "2026-10-07T08:56:22-06:00",
         "thema_en": "Start date is a procedural date",
-        "text_en": "Day-exact date on 983 of 1913 records; it is the date of admissibility from the Notice to Members, not the start of the petition. The newest is 75 days old (2026-07-23) — by design, as the document is only drawn up once the Commission has replied. The ageing check is therefore skipped here."
+        "text_en": "Day-exact date on 983 of 1915 records; it is the date of admissibility from the Notice to Members, not the start of the petition. The newest is 76 days old (2026-07-23) — by design, as the document is only drawn up once the Commission has replied. The ageing check is therefore skipped here."
       }
     ],
     "health_warning": null,
-    "online_count": 1913
+    "online_count": 1915
   },
   "0474-2026": {
     "slug": "0474-2026",
@@ -116925,5 +116928,105 @@
       "Environmentally"
     ],
     "last_checked": "2026-10-05T18:10:10-06:00"
+  },
+  "1319-2026": {
+    "slug": "1319-2026",
+    "first_seen": "2026-10-07T08:55:09-06:00",
+    "signatures_history": [],
+    "title": "Petition 1319/2026: the labelling of food products containing insects",
+    "started_by": "P. R. L. (Spanish)",
+    "category": "Consumer Rights",
+    "country": "Spain",
+    "description_full": "<p>The petitioner raises concerns about the authorisation and marketing of insect-based foods in the European Union, arguing that their introduction into the food market may pose health risks, including allergic reactions, and could mislead consumers if not clearly identified. The petitioner also questions the benefits of insect-based foods as a solution to food security and expresses concerns about the economic interests of the insect industry. The petitioner calls on the Spanish Government to introduce national rules requiring products containing insects to display a clearly visible logo on the packaging, in addition to listing insects in the ingredients. The petitioner also calls on the European Parliament to amend Commission Implementing Regulation (EU) 2023/5 to introduce an EU-wide requirement for a distinctive logo on the packaging of foods containing insect ingredients, alongside ingredient labelling.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1319%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1319/2026</a></p>",
+    "summary": "The petitioner raises concerns about the authorisation and marketing of insect-based foods in the European Union, arguing that their introduction into the food market may pose health risks, including …",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:1319-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1319%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-10-07T08:56:12",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 1319/2026: zur Kennzeichnung von Lebensmitteln, die Insekten enthalten",
+        "summary": "Der Petent äußert Bedenken hinsichtlich der Zulassung und des Inverkehrbringens von Lebensmitteln auf Insektenbasis in der Europäischen Union und argumentiert, dass ihre Einführung auf dem Lebensmitte…",
+        "description_full": "<p>Der Petent äußert Bedenken hinsichtlich der Zulassung und des Inverkehrbringens von Lebensmitteln auf Insektenbasis in der Europäischen Union und argumentiert, dass ihre Einführung auf dem Lebensmittelmarkt Gesundheitsrisiken, einschließlich allergischer Reaktionen, bergen und die Verbraucher irreführen könnte, wenn sie nicht eindeutig identifiziert würden. Der Petent stellt auch die Vorteile von Lebensmitteln auf Insektenbasis als Lösung für die Ernährungssicherheit in Frage und äußert Bedenken hinsichtlich der wirtschaftlichen Interessen der Insektenindustrie. Der Petent fordert die spanische Regierung auf, nationale Vorschriften einzuführen, nach denen Produkte, die Insekten enthalten, neben der Auflistung von Insekten in den Zutaten auch ein deutlich sichtbares Logo auf der Verpackung tragen müssen. Der Petent fordert das Europäische Parlament ferner auf, die Durchführungsverordnung (EU) 2023/5 der Kommission zu ändern, um eine EU-weite Anforderung für ein unverwechselbares Logo auf der Verpackung von Lebensmitteln, die Insektenzutaten enthalten, neben der Kennzeichnung von Zutaten einzuführen.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=1319%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1319/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=1319%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-10-07T08:55:09-06:00",
+    "offline_since": null,
+    "tags": [
+      "Petitioner",
+      "Foods",
+      "Food",
+      "Insect-based",
+      "Containing",
+      "Concerns",
+      "European",
+      "Insects",
+      "Authorisation",
+      "Introduction"
+    ],
+    "last_checked": "2026-10-07T08:55:09-06:00"
+  },
+  "1342-2026": {
+    "slug": "1342-2026",
+    "first_seen": "2026-10-07T08:55:09-06:00",
+    "signatures_history": [],
+    "title": "Petition 1342/2026: the alleged breach of Regulation (EC) No 883/2004 on the coordination of social security systems in Poland",
+    "started_by": "K. P. (Polish), signed by 12 other persons,",
+    "category": "Social Affairs",
+    "country": "Slovakia",
+    "description_full": "<p>The petitioners claim that Poland is repeatedly failing to comply with the EU social socialsecurity coordination rules, namely Regulations  (EC) No 883/2004 and (EC) No 987/2009, as a result of the Polish Social Insurance Institution (ZUS) allegedly incorrectly determining that Polish legislation applies to persons who, under Article 13(3) of Regulation 883/2004, should be subject to Slovak legislation. The petitioners are Polish citizens carry out self-employed activities through businesses registered in Poland while also being employed by Slovak employers; the petitioners work in Slovakia is not occasional but constitutes their main professional activity, which should therefore fall within the scope of  Article 14(5b) of Regulation (EC) No 987/2009 According to the petitioners, under Article 13(3) of Regulation (EC) No 883/2004, the applicable social security legislation should in these circumstances be that of Slovakia.Therefore, the petitioner asks the European Commission to examine this practice for compliance with EU law, especially Article 13(3) of Regulation (EC) No 883/2004 and Article 16 of Regulation (EC) No 987/2009, and to request the Administrative Commission for the Coordination of Social Security Systems to issue a binding interpretative decision under Article 72(a). The requested decision should clarify: whether the procedure laid down in Article 16 is an administrative one or merely a notificationbased process, the exact powers of the competent authority in the country of residence to determine the applicable legislation, and whether the regulations require a clarifying procedure (i.e., an examination of the factual situation, before any substantive decision on the applicable law is taken).</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1342%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1342/2026</a></p>",
+    "summary": "The petitioners claim that Poland is repeatedly failing to comply with the EU social socialsecurity coordination rules, namely Regulations  (EC) No 883/2004 and (EC) No 987/2009, as a result of the Po…",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:1342-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1342%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-10-07T08:56:18",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 1342/2026: zum mutmaßlichen Verstoß gegen die Verordnung (EG) Nr. 883/2004 zur Koordinierung der Systeme der sozialen Sicherheit in Polen",
+        "summary": "Die Petenten machen geltend, dass Polen wiederholt gegen die EU-Vorschriften zur Koordinierung der Systeme der sozialen Sicherheit, insbesondere die Verordnungen (EG) Nr. 883/2004 und (EG) Nr. 987/200…",
+        "description_full": "<p>Die Petenten machen geltend, dass Polen wiederholt gegen die EU-Vorschriften zur Koordinierung der Systeme der sozialen Sicherheit, insbesondere die Verordnungen (EG) Nr. 883/2004 und (EG) Nr. 987/2009, verstoße, da der polnische Sozialversicherungsträger (ZUS) angeblich fälschlicherweise festgestellt habe, dass die polnischen Rechtsvorschriften für Personen gelten, die gemäß Artikel 13 Absatz 3 der Verordnung (EG) Nr. 883/2004 den slowakischen Rechtsvorschriften unterliegen sollten. Bei den Petenten handelt es sich um polnische Staatsangehörige, die über in Polen registrierte Unternehmen eine selbständige Tätigkeit ausüben und gleichzeitig bei slowakischen Arbeitgebern beschäftigt sind. Die Petenten arbeiten nicht nur gelegentlich in der Slowakei, sondern stellen ihre berufliche Haupttätigkeit dar, die daher in den Anwendungsbereich von Artikel 14 Absatz 5-b der Verordnung (EG) Nr. 987/2009 fallen sollte. Nach Ansicht der Petenten sollten gemäß Artikel 13 Absatz 3 der Verordnung (EG) Nr. 883/2004 unter diesen Umständen die slowakischen Rechtsvorschriften über die soziale Sicherheit Anwendung finden.Daher fordert der Petent die Kommission auf, diese Praxis im Hinblick auf die Einhaltung des EU-Rechts, insbesondere des Artikels 13 Absatz 3 der Verordnung (EG) Nr. 883/2004 und des Artikels 16 der Verordnung (EG) Nr. 987/2009, zu prüfen und die Verwaltungskommission für die Koordinierung der Systeme der sozialen Sicherheit zu ersuchen, einen verbindlichen Auslegungsbeschluss gemäß Artikel 72 Buchstabe a zu erlassen. Mit dem beantragten Beschluss soll geklärt werden, ob es sich bei dem in Artikel 16 festgelegten Verfahren um ein Verwaltungsverfahren oder lediglich um ein auf einer Mitteilung beruhendes Verfahren handelt, welche Befugnisse die zuständige Behörde im Wohnsitzstaat genau zur Bestimmung des anwendbaren Rechts hat und ob die Vorschriften ein Klärungsverfahren vorschreiben (d. h. eine Prüfung des Sachverhalts, bevor eine inhaltliche Entscheidung über das anwendbare Recht getroffen wird).</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=1342%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1342/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=1342%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-10-07T08:55:09-06:00",
+    "offline_since": null,
+    "tags": [
+      "Article",
+      "Regulation",
+      "Social",
+      "Petitioners",
+      "Coordination",
+      "Legislation",
+      "Poland",
+      "Regulations",
+      "Applicable",
+      "Decision"
+    ],
+    "last_checked": "2026-10-07T08:55:09-06:00"
   }
 }
