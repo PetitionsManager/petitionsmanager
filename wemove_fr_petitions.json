@@ -31,15 +31,10 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-10-06T10:22:27-06:00",
+    "generated_at": "2026-10-06T18:23:06-06:00",
     "petition_count": 228,
     "available": 295,
     "unbrauchbare": {
-      "2026-04-landmine-petition-FR": "2026-09-06T12:31:30-06:00",
-      "galen-test-2-petition-FR": "2026-09-06T12:59:59-06:00",
-      "lucass-target-test-call-FR": "2026-09-06T12:59:59-06:00",
-      "lucass-target-test-petition-FR": "2026-09-06T12:59:59-06:00",
-      "sharesteptest-petition-FR": "2026-09-06T12:59:59-06:00",
       "lucas-test-donate-petition-FR": "2026-09-18T14:40:58-06:00",
       "lucas-test-donation-2-petition-FR": "2026-09-18T14:40:58-06:00",
       "2026-09-insurance-natural-disasters-petition-FR": "2026-09-22T12:02:38-06:00",
@@ -105,22 +100,28 @@
     },
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-10-06T10:22:27-06:00",
+      "stand": "2026-10-06T18:23:06-06:00",
       "gefunden": 295,
       "im_bestand": 228,
-      "unbrauchbar": 67,
+      "unbrauchbar": 62,
       "verworfen": 0,
       "dublette": 0,
       "verschwunden": 0,
       "zurueckgestellt": 0,
-      "offen": 0,
-      "offene_beispiele": [],
+      "offen": 5,
+      "offene_beispiele": [
+        "2026-04-landmine-petition-FR",
+        "galen-test-2-petition-FR",
+        "lucass-target-test-call-FR",
+        "lucass-target-test-petition-FR",
+        "sharesteptest-petition-FR"
+      ],
       "bestand_gesamt": 228,
       "bestand_ausserhalb": 0
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-10-06T10:22:27-06:00",
+        "zeit": "2026-10-06T18:23:06-06:00",
         "gesamt": 228,
         "online": 220,
         "offline": 8,
@@ -137,7 +138,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-10-06T10:22:27-06:00",
+      "zeit": "2026-10-06T18:23:06-06:00",
       "gesamt": 228,
       "online": 220,
       "offline": 8,
@@ -150,8 +151,17 @@
       "juengstes_start": "2026-10-01",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-10-06T10:22:27-06:00",
-    "befunde": [],
+    "verlauf_felder_ab": "2026-10-06T18:23:06-06:00",
+    "befunde": [
+      {
+        "stufe": "hinweis",
+        "thema": "Startdatum ist nur monatsgenau",
+        "text": "Datum bei 187 von 228 Sätzen, aber nur auf den Monat genau (der Tag steht an der Quelle nicht, der Scraper setzt den 1.). Das jüngste ist 5 Tage alt (2026-10-01) — das ist eine OBERGRENZE, die Petition kann bis zu 30 Tage jünger sein. Der Altersmelder ist hier deshalb ausgenommen; die Deckung bleibt",
+        "zeit": "2026-10-06T18:23:06-06:00",
+        "thema_en": "Start date is month-granular only",
+        "text_en": "Date on 187 of 228 records, but only accurate to the month (the source gives no day, the scraper fills in the 1st). The newest is 5 days old (2026-10-01) — that is an UPPER BOUND, the petition may be up to 30 days younger. The ageing check is therefore skipped here; coverage is still verified."
+      }
+    ],
     "health_warning": null,
     "online_count": 220
   },
@@ -3053,9 +3063,9 @@
     "slug": "2023-11-arretez-de-donner-l-argent-a-l-esprit-de-la-dualite-et-de-la-gue-FR",
     "first_seen": "2026-09-05T17:05:01-06:00",
     "signatures_history": [],
-    "offline_misses": 6,
+    "offline_misses": 7,
     "status": "offline",
-    "last_checked": "2026-10-03T10:25:38-06:00",
+    "last_checked": "2026-10-06T18:22:40-06:00",
     "url": "https://action.wemove.eu/sign/2023-11-arretez-de-donner-l-argent-a-l-esprit-de-la-dualite-et-de-la-gue-FR",
     "offline_since": "2026-09-18T09:05:27-06:00"
   },
@@ -3139,9 +3149,9 @@
     "slug": "2023-11-ne-pas-donner-d-argent-a-la-guerre-d-apres-un-message-de-michael-FR",
     "first_seen": "2026-09-05T17:05:01-06:00",
     "signatures_history": [],
-    "offline_misses": 6,
+    "offline_misses": 7,
     "status": "offline",
-    "last_checked": "2026-10-03T10:25:38-06:00",
+    "last_checked": "2026-10-06T18:22:40-06:00",
     "url": "https://action.wemove.eu/sign/2023-11-ne-pas-donner-d-argent-a-la-guerre-d-apres-un-message-de-michael-FR",
     "offline_since": "2026-09-18T09:05:27-06:00"
   },
@@ -5008,9 +5018,9 @@
     "slug": "2024-1-la-trahison-de-sarcozy-car-nous-n-en-voulions-pas-de-cette-europ-FR",
     "first_seen": "2026-09-05T18:27:44-06:00",
     "signatures_history": [],
-    "offline_misses": 6,
+    "offline_misses": 7,
     "status": "offline",
-    "last_checked": "2026-10-03T10:25:38-06:00",
+    "last_checked": "2026-10-06T18:22:40-06:00",
     "url": "https://action.wemove.eu/sign/2024-1-la-trahison-de-sarcozy-car-nous-n-en-voulions-pas-de-cette-europ-FR",
     "offline_since": "2026-09-18T09:05:27-06:00"
   },
@@ -5018,9 +5028,9 @@
     "slug": "2024-1-vers-une-langue-commune-autre-que-l-anglais-FR",
     "first_seen": "2026-09-05T18:27:44-06:00",
     "signatures_history": [],
-    "offline_misses": 6,
+    "offline_misses": 7,
     "status": "offline",
-    "last_checked": "2026-10-03T10:25:38-06:00",
+    "last_checked": "2026-10-06T18:22:40-06:00",
     "url": "https://action.wemove.eu/sign/2024-1-vers-une-langue-commune-autre-que-l-anglais-FR",
     "offline_since": "2026-09-18T09:05:27-06:00"
   },
@@ -5456,9 +5466,9 @@
     "slug": "2024-2--FR",
     "first_seen": "2026-09-05T19:52:45-06:00",
     "signatures_history": [],
-    "offline_misses": 6,
+    "offline_misses": 7,
     "status": "offline",
-    "last_checked": "2026-10-03T10:25:38-06:00",
+    "last_checked": "2026-10-06T18:22:40-06:00",
     "url": "https://action.wemove.eu/sign/2024-2--FR",
     "offline_since": "2026-09-18T09:05:27-06:00"
   },

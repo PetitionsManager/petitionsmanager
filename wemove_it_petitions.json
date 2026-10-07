@@ -31,15 +31,10 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-10-06T10:24:19-06:00",
+    "generated_at": "2026-10-06T18:23:33-06:00",
     "petition_count": 212,
     "available": 261,
     "unbrauchbare": {
-      "2026-04-landmine-petition-IT": "2026-09-06T13:02:24-06:00",
-      "lucas-testing-ig-link-petition-IT": "2026-09-06T13:30:04-06:00",
-      "lucass-target-test-call-IT": "2026-09-06T13:30:04-06:00",
-      "lucass-target-test-petition-IT": "2026-09-06T13:30:04-06:00",
-      "sharesteptest-petition-IT": "2026-09-06T13:30:04-06:00",
       "lucas-test-donate-petition-IT": "2026-09-18T17:02:01-06:00",
       "lucas-test-donation-2-petition-IT": "2026-09-18T17:02:01-06:00",
       "2026-09-insurance-natural-disasters-petition-IT": "2026-09-22T15:44:37-06:00",
@@ -82,21 +77,26 @@
     },
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-10-06T10:24:19-06:00",
+      "stand": "2026-10-06T18:23:33-06:00",
       "gefunden": 261,
       "im_bestand": 212,
-      "unbrauchbar": 44,
+      "unbrauchbar": 39,
       "verworfen": 0,
       "dublette": 0,
       "verschwunden": 0,
       "zurueckgestellt": 0,
-      "offen": 5,
+      "offen": 10,
       "offene_beispiele": [
         "2025-06-farmersunite-petition-IT",
         "2025-09-kelsey-onboarding-campaign-petition-IT",
         "2025-10-harmit-onboarding-campaign-petition-IT",
         "2025-10-jessie-onboarding-campaign-petition-IT",
-        "2026-10-stop-killer-robots-petition-IT"
+        "2026-04-landmine-petition-IT",
+        "2026-10-stop-killer-robots-petition-IT",
+        "lucas-testing-ig-link-petition-IT",
+        "lucass-target-test-call-IT",
+        "lucass-target-test-petition-IT",
+        "sharesteptest-petition-IT"
       ],
       "bestand_gesamt": 212,
       "bestand_ausserhalb": 0
@@ -117,10 +117,26 @@
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
         "neu": 0
+      },
+      {
+        "zeit": "2026-10-06T18:23:33-06:00",
+        "gesamt": 212,
+        "online": 207,
+        "offline": 5,
+        "ohne_titel": 5,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 5,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 179,
+        "juengstes_start": "2026-09-01",
+        "mit_code_im_text": 0,
+        "herkunft": "lokal_cron",
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-10-06T10:24:19-06:00",
+      "zeit": "2026-10-06T18:23:33-06:00",
       "gesamt": 212,
       "online": 207,
       "offline": 5,
@@ -134,8 +150,17 @@
       "mit_code_im_text": 0
     },
     "verlauf_felder_ab": "2026-10-06T10:24:19-06:00",
-    "befunde": [],
-    "health_warning": null,
+    "befunde": [
+      {
+        "stufe": "warnung",
+        "thema": "Host ausgelassen (robots.txt nicht lesbar)",
+        "text": "action.wemove.eu: HTTP 202. Der Host wurde für diesen Lauf komplett ausgelassen; von dort stammen KEINE frischen Daten. Der Bestand bleibt unverändert stehen.",
+        "zeit": "2026-10-06T18:23:27-06:00",
+        "thema_en": "Host skipped (robots.txt unreadable)",
+        "text_en": "action.wemove.eu: HTTP 202. The host was skipped entirely for this run; no fresh data came from it. The existing records stay as they are."
+      }
+    ],
+    "health_warning": "Host ausgelassen (robots.txt nicht lesbar): action.wemove.eu: HTTP 202. Der Host wurde für diesen Lauf komplett ausgelassen; von dort stammen KEINE frischen Daten. Der Bestand bleibt unverändert stehen.",
     "online_count": 207
   },
   "2026-08-protect-europe-make-polluters-pay-petition-IT": {
