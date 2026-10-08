@@ -31,7 +31,7 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-10-07T09:01:45-06:00",
+    "generated_at": "2026-10-07T21:05:36-06:00",
     "petition_count": 614,
     "available": 716,
     "unbrauchbare": {
@@ -140,7 +140,7 @@
     },
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-10-07T09:01:45-06:00",
+      "stand": "2026-10-07T21:05:36-06:00",
       "gefunden": 716,
       "im_bestand": 614,
       "unbrauchbar": 102,
@@ -155,7 +155,7 @@
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-10-07T09:01:45-06:00",
+        "zeit": "2026-10-07T21:05:36-06:00",
         "gesamt": 614,
         "online": 613,
         "offline": 1,
@@ -172,7 +172,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-10-07T09:01:45-06:00",
+      "zeit": "2026-10-07T21:05:36-06:00",
       "gesamt": 614,
       "online": 613,
       "offline": 1,
@@ -185,13 +185,13 @@
       "juengstes_start": "2026-10-01",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-10-07T09:01:45-06:00",
+    "verlauf_felder_ab": "2026-10-07T21:05:36-06:00",
     "befunde": [
       {
         "stufe": "hinweis",
         "thema": "Startdatum ist nur monatsgenau",
         "text": "Datum bei 491 von 614 Sätzen, aber nur auf den Monat genau (der Tag steht an der Quelle nicht, der Scraper setzt den 1.). Das jüngste ist 6 Tage alt (2026-10-01) — das ist eine OBERGRENZE, die Petition kann bis zu 30 Tage jünger sein. Der Altersmelder ist hier deshalb ausgenommen; die Deckung bleibt",
-        "zeit": "2026-10-07T09:01:45-06:00",
+        "zeit": "2026-10-07T21:05:36-06:00",
         "thema_en": "Start date is month-granular only",
         "text_en": "Date on 491 of 614 records, but only accurate to the month (the source gives no day, the scraper fills in the 1st). The newest is 6 days old (2026-10-01) — that is an UPPER BOUND, the petition may be up to 30 days younger. The ageing check is therefore skipped here; coverage is still verified."
       }
@@ -2330,6 +2330,10 @@
       {
         "checked_at": "2026-10-04T17:17:21-06:00",
         "count": 214250
+      },
+      {
+        "checked_at": "2026-10-07T21:04:25-06:00",
+        "count": 214256
       }
     ],
     "title": "Protect the Puffins in Iceland – Establish a Sales Ban",
@@ -2340,12 +2344,12 @@
     "start_date": "2022-06-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 214250,
+    "signatures": 214256,
     "goal": 300000,
     "lang": "en",
     "campaign_id": "wemove:202206-help_us_protect_the_puffins_in_iceland_-_establish_a_sales_ban-petition",
     "status": "online",
-    "last_seen": "2026-10-04T17:17:21-06:00",
+    "last_seen": "2026-10-07T21:04:25-06:00",
     "offline_since": null,
     "tags": [
       "Iceland",
@@ -2359,7 +2363,7 @@
       "Especially",
       "Government"
     ],
-    "last_checked": "2026-10-04T17:17:21-06:00"
+    "last_checked": "2026-10-07T21:04:25-06:00"
   },
   "202207-stop_tax-free_private_flights_in_the_eu-petition-EN": {
     "slug": "202207-stop_tax-free_private_flights_in_the_eu-petition-EN",
@@ -2574,6 +2578,10 @@
       {
         "checked_at": "2026-10-01T13:44:02-06:00",
         "count": 25099
+      },
+      {
+        "checked_at": "2026-10-07T21:04:25-06:00",
+        "count": 25101
       }
     ],
     "title": "Stop deep sea mining",
@@ -2583,12 +2591,12 @@
     "start_date": "2023-03-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 25099,
+    "signatures": 25101,
     "goal": 50000,
     "lang": "en",
     "campaign_id": "wemove:2023-03-stop-deep-sea-mining-petition",
     "status": "online",
-    "last_seen": "2026-10-04T17:17:21-06:00",
+    "last_seen": "2026-10-07T21:04:25-06:00",
     "offline_since": null,
     "tags": [
       "Mining",
@@ -2602,7 +2610,7 @@
       "Marine",
       "Seabed"
     ],
-    "last_checked": "2026-10-04T17:17:21-06:00"
+    "last_checked": "2026-10-07T21:04:25-06:00"
   },
   "2023-03-stop-rio-tinto-EN": {
     "slug": "2023-03-stop-rio-tinto-EN",
@@ -2638,7 +2646,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-03-stop-rio-tinto",
     "status": "online",
-    "last_seen": "2026-10-04T17:17:21-06:00",
+    "last_seen": "2026-10-07T21:04:25-06:00",
     "offline_since": null,
     "tags": [
       "Serbia",
@@ -2652,7 +2660,7 @@
       "Minister",
       "Land"
     ],
-    "last_checked": "2026-10-04T17:17:21-06:00"
+    "last_checked": "2026-10-07T21:04:25-06:00"
   },
   "2023-04-restore-nature-petition-EN": {
     "slug": "2023-04-restore-nature-petition-EN",
@@ -2819,6 +2827,10 @@
       {
         "checked_at": "2026-10-04T17:17:21-06:00",
         "count": 116418
+      },
+      {
+        "checked_at": "2026-10-07T21:04:25-06:00",
+        "count": 116425
       }
     ],
     "title": "End bottom trawling",
@@ -2829,12 +2841,12 @@
     "start_date": "2023-05-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 116418,
+    "signatures": 116425,
     "goal": 150000,
     "lang": "en",
     "campaign_id": "wemove:2023-05-end-bottom-trawling-petition",
     "status": "online",
-    "last_seen": "2026-10-04T17:17:21-06:00",
+    "last_seen": "2026-10-07T21:04:25-06:00",
     "offline_since": null,
     "tags": [
       "Trawling",
@@ -2848,7 +2860,7 @@
       "European",
       "Practice"
     ],
-    "last_checked": "2026-10-04T17:17:21-06:00"
+    "last_checked": "2026-10-07T21:04:25-06:00"
   },
   "2023-05-end-bottom-trawling-widget-EN": {
     "slug": "2023-05-end-bottom-trawling-widget-EN",
@@ -2885,6 +2897,10 @@
       {
         "checked_at": "2026-10-04T17:17:21-06:00",
         "count": 116418
+      },
+      {
+        "checked_at": "2026-10-07T21:04:25-06:00",
+        "count": 116425
       }
     ],
     "title": "End bottom trawling",
@@ -2895,12 +2911,12 @@
     "start_date": "2023-05-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 116418,
+    "signatures": 116425,
     "goal": 150000,
     "lang": "en",
     "campaign_id": "wemove:2023-05-end-bottom-trawling-widget",
     "status": "online",
-    "last_seen": "2026-10-04T17:17:21-06:00",
+    "last_seen": "2026-10-07T21:04:25-06:00",
     "offline_since": null,
     "tags": [
       "Trawling",
@@ -2914,7 +2930,7 @@
       "Ocean",
       "European"
     ],
-    "last_checked": "2026-10-04T17:17:21-06:00"
+    "last_checked": "2026-10-07T21:04:25-06:00"
   },
   "2023-05-european-health-data-space-petition-EN": {
     "slug": "2023-05-european-health-data-space-petition-EN",
@@ -2951,6 +2967,10 @@
       {
         "checked_at": "2026-10-04T17:17:21-06:00",
         "count": 10040
+      },
+      {
+        "checked_at": "2026-10-07T21:04:25-06:00",
+        "count": 10044
       }
     ],
     "title": "Do No Harm: Don't give Big Tech access to our medical records",
@@ -2961,12 +2981,12 @@
     "start_date": "2023-05-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 10040,
+    "signatures": 10044,
     "goal": 20000,
     "lang": "en",
     "campaign_id": "wemove:2023-05-european-health-data-space-petition",
     "status": "online",
-    "last_seen": "2026-10-04T17:17:21-06:00",
+    "last_seen": "2026-10-07T21:04:25-06:00",
     "offline_since": null,
     "tags": [
       "Medical",
@@ -2980,7 +3000,7 @@
       "Sensitive",
       "Privacy"
     ],
-    "last_checked": "2026-10-04T17:17:21-06:00"
+    "last_checked": "2026-10-07T21:04:25-06:00"
   },
   "2023-05-luxury-emissions-petition-EN": {
     "slug": "2023-05-luxury-emissions-petition-EN",
@@ -3133,7 +3153,7 @@
     "lang": "en",
     "campaign_id": "wemove:2023-05-violence-against-women-directive-petition",
     "status": "online",
-    "last_seen": "2026-10-04T17:17:21-06:00",
+    "last_seen": "2026-10-07T21:04:25-06:00",
     "offline_since": null,
     "tags": [
       "Women",
@@ -3147,7 +3167,7 @@
       "Ensure",
       "Europe"
     ],
-    "last_checked": "2026-10-04T17:17:21-06:00"
+    "last_checked": "2026-10-07T21:04:25-06:00"
   },
   "2023-06-deaths-at-sea-petition-EN": {
     "slug": "2023-06-deaths-at-sea-petition-EN",
@@ -3414,6 +3434,10 @@
       {
         "checked_at": "2026-10-01T13:44:02-06:00",
         "count": 22381
+      },
+      {
+        "checked_at": "2026-10-07T21:04:25-06:00",
+        "count": 22382
       }
     ],
     "title": "Ban toxic glyphosate now!",
@@ -3424,12 +3448,12 @@
     "start_date": "2023-08-01",
     "started_by": "WeMove Europe",
     "kind": "petition",
-    "signatures": 22381,
+    "signatures": 22382,
     "goal": 50000,
     "lang": "en",
     "campaign_id": "wemove:2023-08-glyphosate-petition",
     "status": "online",
-    "last_seen": "2026-10-04T17:17:21-06:00",
+    "last_seen": "2026-10-07T21:04:25-06:00",
     "offline_since": null,
     "tags": [
       "Glyphosate",
@@ -3443,7 +3467,7 @@
       "Commission",
       "Nederlands"
     ],
-    "last_checked": "2026-10-04T17:17:21-06:00"
+    "last_checked": "2026-10-07T21:04:25-06:00"
   },
   "2023-08-michal-test20-petition-EN": {
     "slug": "2023-08-michal-test20-petition-EN",

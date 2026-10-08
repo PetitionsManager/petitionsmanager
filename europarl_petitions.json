@@ -31,15 +31,12 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-10-07T08:56:23-06:00",
+    "generated_at": "2026-10-07T20:36:59-06:00",
     "petition_count": 1915,
     "available": 1882,
-    "new_petitions_last_run": [
-      "1319-2026",
-      "1342-2026"
-    ],
+    "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-10-07T08:56:22-06:00",
+      "stand": "2026-10-07T20:36:58-06:00",
       "gefunden": 1882,
       "im_bestand": 1882,
       "unbrauchbar": 0,
@@ -54,7 +51,7 @@
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-10-07T08:56:22-06:00",
+        "zeit": "2026-10-07T20:36:58-06:00",
         "gesamt": 1915,
         "online": 1915,
         "offline": 0,
@@ -67,11 +64,11 @@
         "juengstes_start": "2026-07-23",
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
-        "neu": 2
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-10-07T08:56:22-06:00",
+      "zeit": "2026-10-07T20:36:58-06:00",
       "gesamt": 1915,
       "online": 1915,
       "offline": 0,
@@ -84,13 +81,13 @@
       "juengstes_start": "2026-07-23",
       "mit_code_im_text": 0
     },
-    "verlauf_felder_ab": "2026-10-07T08:56:22-06:00",
+    "verlauf_felder_ab": "2026-10-07T20:36:58-06:00",
     "befunde": [
       {
         "stufe": "hinweis",
         "thema": "Startdatum ist ein Verfahrensdatum",
         "text": "Tagesgenaues Datum bei 983 von 1915 Sätzen; es ist das Zulässigkeitsdatum aus der Mitteilung an die Mitglieder, nicht der Start der Petition. Das jüngste ist 76 Tage alt (2026-07-23) — bauartbedingt, weil das Dokument erst mit der Kommissionsantwort entsteht. Der Altersmelder ist hier deshalb ausgen",
-        "zeit": "2026-10-07T08:56:22-06:00",
+        "zeit": "2026-10-07T20:36:58-06:00",
         "thema_en": "Start date is a procedural date",
         "text_en": "Day-exact date on 983 of 1915 records; it is the date of admissibility from the Notice to Members, not the start of the petition. The newest is 76 days old (2026-07-23) — by design, as the document is only drawn up once the Commission has replied. The ageing check is therefore skipped here."
       }
@@ -54846,7 +54843,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-10-04T16:59:16-06:00",
+    "last_seen": "2026-10-07T20:34:16-06:00",
     "offline_since": null,
     "tags": [
       "Environmental",
@@ -54860,7 +54857,7 @@
       "Construction",
       "Specifically"
     ],
-    "last_checked": "2026-10-04T16:59:16-06:00",
+    "last_checked": "2026-10-07T20:34:16-06:00",
     "notice_url": {
       "bg": "https://www.europarl.europa.eu/RegData/commissions/peti/communication/2025/775757/PETI_CM(2025)775757_BG.pdf",
       "da": "https://www.europarl.europa.eu/RegData/commissions/peti/communication/2025/775757/PETI_CM(2025)775757_DA.pdf",
@@ -78906,7 +78903,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-10-04T16:59:16-06:00",
+    "last_seen": "2026-10-07T20:34:16-06:00",
     "offline_since": null,
     "tags": [
       "Rights",
@@ -78920,7 +78917,7 @@
       "Right",
       "Concession"
     ],
-    "last_checked": "2026-10-04T16:59:16-06:00"
+    "last_checked": "2026-10-07T20:34:16-06:00"
   },
   "1294-2016": {
     "slug": "1294-2016",
@@ -116185,8 +116182,8 @@
     "signatures_history": [],
     "title": "Petition 1034/2026: alleged failure of cross-border social security coordination between Belgium and the Netherlands",
     "started_by": "Eric Messa (Belgian)",
-    "category": "Internal Market - Free movement of persons",
-    "country": "Netherlands",
+    "category": "Employment",
+    "country": "Belgium",
     "description_full": "<p>The petitioner alleges that Belgium and the Netherlands have failed to properly coordinate their social security systems, leaving the petitioner without recognition of invalidity benefits despite having worked for 21 years in Belgium and now residing in the Netherlands. The petitioner claims that both Member States have failed to apply the judgment of the Court of Justice of the European Union in Case C-117/18 (Vester), which, according to the petitioner, requires the competent Member State to carry out a medical assessment and determine entitlement to invalidity benefits even where the worker no longer resides in that State.The petitioner argues that the Belgian authorities have refused to recognise the petitioner&#39;s invalidity by linking entitlement to national residence requirements and by failing to aggregate insurance periods, while the Dutch authorities have not provided an effective mechanism to facilitate the coordination of social security rights. The petitioner maintains that this has resulted in the absence of any recognised status, benefits or income despite severe disabilities. The petitioner calls on the European Parliament to investigate the alleged systemic failure of Belgium and the Netherlands to apply EU social security coordination rules, urges the European Commission to initiate infringement proceedings against the two Member States, and requests measures to ensure that medical assessments and the export of social security rights are not made dependent on residence requirements.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1034%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1034/2026</a></p>",
     "summary": "The petitioner alleges that Belgium and the Netherlands have failed to properly coordinate their social security systems, leaving the petitioner without recognition of invalidity benefits despite havi…",
     "recipient": "Committee on Petitions of the European Parliament (PETI)",
@@ -116213,7 +116210,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-10-04T16:59:16-06:00",
+    "last_seen": "2026-10-07T20:34:16-06:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -116227,7 +116224,7 @@
       "European",
       "Despite"
     ],
-    "last_checked": "2026-10-04T16:59:16-06:00"
+    "last_checked": "2026-10-07T20:34:16-06:00"
   },
   "1012-2026": {
     "slug": "1012-2026",
@@ -116236,7 +116233,7 @@
     "title": "Petition 1012/2026: management of stray animals in Kardzhali, Bulgaria",
     "started_by": "Violeta Yordanova (Bulgarian)",
     "category": "Regional Policy",
-    "country": "Greece",
+    "country": "Bulgaria",
     "description_full": "<p>The petitioner, a resident of Kardzhali, Bulgaria, raises concerns about the rapidly escalating population of stray dogs and cats in the region. Despite numerous attempts to engage local authorities, assurances that the situation is under control have not translated into effective action. The petitioner attributes the problem to a lack of proper pet care, information, and preventive measures such as sterilization, vaccination, and deworming. A planned rescue center, nearing completion, is insufficient to tackle the immediate crisis, as the system lacks coherence, a clear goal, and accountability for the increasing number of accidents. The petitioner calls on the European Parliament to address this issue using several measures, including sending EU experts to assess the state of emergency, forming a committee to reinforce and monitor European regulations, and providing feedback to the local community on necessary steps as well as doing regular testing for problematic diseases at local reference laboratories, support for local authorities to enforce laws and disseminate information and establishing a long-term mechanism to maintain a balanced animal population are also recommended. The petitioner underscores the urgency of the situation, warning of potential fatal incidents that could lead to a mass disaster, not only in the region but also beyond.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1012%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1012/2026</a></p>",
     "summary": "The petitioner, a resident of Kardzhali, Bulgaria, raises concerns about the rapidly escalating population of stray dogs and cats in the region. Despite numerous attempts to engage local authorities, …",
     "recipient": "Committee on Petitions of the European Parliament (PETI)",
@@ -116263,7 +116260,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-10-04T16:59:16-06:00",
+    "last_seen": "2026-10-07T20:34:16-06:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -116277,7 +116274,7 @@
       "Information",
       "Escalating"
     ],
-    "last_checked": "2026-10-04T16:59:16-06:00"
+    "last_checked": "2026-10-07T20:34:16-06:00"
   },
   "0966-2026": {
     "slug": "0966-2026",
@@ -116313,7 +116310,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-10-04T16:59:16-06:00",
+    "last_seen": "2026-10-07T20:34:16-06:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -116327,7 +116324,7 @@
       "Rights",
       "Independence"
     ],
-    "last_checked": "2026-10-04T16:59:16-06:00"
+    "last_checked": "2026-10-07T20:34:16-06:00"
   },
   "0957-2026": {
     "slug": "0957-2026",
@@ -116363,7 +116360,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-10-04T16:59:16-06:00",
+    "last_seen": "2026-10-07T20:34:16-06:00",
     "offline_since": null,
     "tags": [
       "Constitutional",
@@ -116377,7 +116374,7 @@
       "Spanish",
       "Politicisation"
     ],
-    "last_checked": "2026-10-04T16:59:16-06:00"
+    "last_checked": "2026-10-07T20:34:16-06:00"
   },
   "0943-2026": {
     "slug": "0943-2026",
@@ -116413,7 +116410,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-10-04T16:59:16-06:00",
+    "last_seen": "2026-10-07T20:34:16-06:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -116427,7 +116424,7 @@
       "Destroyed",
       "Restoring"
     ],
-    "last_checked": "2026-10-04T16:59:16-06:00"
+    "last_checked": "2026-10-07T20:34:16-06:00"
   },
   "0941-2026": {
     "slug": "0941-2026",
@@ -116463,7 +116460,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-10-04T16:59:16-06:00",
+    "last_seen": "2026-10-07T20:34:16-06:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -116477,7 +116474,7 @@
       "Notification",
       "Parliament"
     ],
-    "last_checked": "2026-10-04T16:59:16-06:00"
+    "last_checked": "2026-10-07T20:34:16-06:00"
   },
   "1030-2026": {
     "slug": "1030-2026",
@@ -116513,7 +116510,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-10-04T16:59:16-06:00",
+    "last_seen": "2026-10-07T20:34:16-06:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -116527,7 +116524,7 @@
       "Parliament",
       "European"
     ],
-    "last_checked": "2026-10-04T16:59:16-06:00"
+    "last_checked": "2026-10-07T20:34:16-06:00"
   },
   "1013-2026": {
     "slug": "1013-2026",
@@ -116535,7 +116532,7 @@
     "signatures_history": [],
     "title": "Petition 1013/2026: the EU-UK Agreement on Gibraltar",
     "started_by": "F. M. D. (Spanish)",
-    "category": "Security",
+    "category": "Constitutional Affairs",
     "country": "Spain",
     "description_full": "<p>The petitioner requests the urgent assessment of whether the EU‑UK agreement on Gibraltar contains provisions contrary to Union law, including the Treaty on European Union, the Treaty on the Functioning of the European Union, and the principles of equality, non‑discrimination and internal security. The petitioner alleges that the agreement grants Gibraltar an exclusive veto over immigration and residence measures, excluding Spain from any decision‑making on third‑country nationals residing in Gibraltar. The petitioner argues that this provision may breach the Union competence over external borders and undermine the coherence of the Schengen area. The petitioner claims that the agreement allows Gibraltar residents to purchase property in Spain while EU citizens face restrictions or prohibitions on acquiring property in Gibraltar, which could violate the principle of non‑discrimination and the free movement of capital. The petitioner points out that Spanish citizens and the Spanish Parliament have not been adequately informed about the concrete content and legal impact of the agreement, affecting democratic participation and transparency. The petitioner highlights that the agreement provides for the free movement of British military and security personnel across Spanish territory up to the Pyrenees, while Gibraltar remains outside Spanish control over residence and armed forces. The petitioner considers that this arrangement may pose a disproportionate risk to Spain’s national security and conflict with the EU principle of internal security and the right of Member States to ensure territorial integrity. The petitioner argues that the agreement could undermine the equality of Member States in managing external borders. The petitioner claims that it may weaken the coherence of the single market and customs union by allowing a high‑tax, opaque financial territory to escape effective control measures. The petitioner states that the arrangement could create risks for legal certainty and equal competition in the fight against tax fraud and money laundering. The petitioner urges the Parliament to commission a legal impact study on the compatibility of the agreement with Union law. The petitioner urges the Parliament to formulate a recommendation to the Council and the Commission to revise any clauses found to be contrary to the Treaties and the principles of equality, non‑discrimination and internal security. The petitioner urges the Parliament to ensure that public and accessible information is provided to citizens affected by these measures, especially residents of the Campo de Gibraltar.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1013%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1013/2026</a></p>",
     "summary": "The petitioner requests the urgent assessment of whether the EU‑UK agreement on Gibraltar contains provisions contrary to Union law, including the Treaty on European Union, the Treaty on the Functioni…",
@@ -116563,7 +116560,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-10-04T16:59:16-06:00",
+    "last_seen": "2026-10-07T20:34:16-06:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -116577,7 +116574,7 @@
       "Discrimination",
       "Citizens"
     ],
-    "last_checked": "2026-10-04T16:59:16-06:00"
+    "last_checked": "2026-10-07T20:34:16-06:00"
   },
   "0972-2026": {
     "slug": "0972-2026",
@@ -116613,7 +116610,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-10-04T16:59:16-06:00",
+    "last_seen": "2026-10-07T20:34:16-06:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -116627,7 +116624,7 @@
       "Republic",
       "Alleges"
     ],
-    "last_checked": "2026-10-04T16:59:16-06:00"
+    "last_checked": "2026-10-07T20:34:16-06:00"
   },
   "1204-2026": {
     "slug": "1204-2026",
@@ -116635,7 +116632,7 @@
     "signatures_history": [],
     "title": "Petition 1204/2026: Finland's alleged refusal to refund harmonised excise duties in breach of Directive 2008/118/EC",
     "started_by": "Juan Diego Artigas (Spanish), on behalf of LICOREA S.L.U.,",
-    "category": "Internal Market",
+    "category": "Internal Market - Free movement of goods and services",
     "country": "Finland",
     "description_full": "<p>The petitioner calls on the European Parliament to ask the European Commission to examine the compatibility of Finland’s excise-duty procedural regime with EU law and to seek clarification from the Finnish authorities concerning the legal basis for the extraordinary reassessment of excise duties and the refusal to extend to excise duties the reasoning applied by the Helsinki Administrative Court to parallel VAT assessments. The petitioner states that Finland imposes harmonised excise duties on alcohol and a related beverage-container tax under EU law. According to the petitioner, on 3 February 2026 the Helsinki Administrative Court annulled parallel VAT assessments on the ground that the transactions did not constitute distance sales under EU law. The petitioner claims that the Finnish Tax Administration nevertheless refused to apply the same reasoning to excise-duty assessments concerning the same transactions. The petitioner states that four excise-duty and packaging-tax assessments issued in June 2022 to the Spanish company LICOREA S.L.U. resulted in €67,911.22 being collected by Finland. The petitioner argues that the subsequent rejection of administrative remedies and the collection of additional amounts reveal an asymmetric procedural regime under which extraordinary reassessment is available for VAT but not for harmonised excise duties. The petitioner considers that this practice is incompatible with the principles of equivalence and effectiveness and with Directive 2008/118/EC, Directive 2006/112/EC, Directive 2010/24/EU, the Charter of Fundamental Rights and the principle of sincere cooperation. The petitioner further alleges that the issue has a wider impact on EU operators trading with Finland and refers to a SOLVIT request, a complaint to the European Commission under Article 258 TFEU and proceedings before the Finnish Supreme Administrative Court.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1204%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1204/2026</a></p>",
     "summary": "The petitioner calls on the European Parliament to ask the European Commission to examine the compatibility of Finland’s excise-duty procedural regime with EU law and to seek clarification from the Fi…",
@@ -116663,7 +116660,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-10-04T16:59:16-06:00",
+    "last_seen": "2026-10-07T20:34:16-06:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -116677,7 +116674,7 @@
       "Directive",
       "Under"
     ],
-    "last_checked": "2026-10-04T16:59:16-06:00"
+    "last_checked": "2026-10-07T20:34:16-06:00"
   },
   "1220-2026": {
     "slug": "1220-2026",
@@ -116713,7 +116710,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-10-04T16:59:16-06:00",
+    "last_seen": "2026-10-07T20:34:16-06:00",
     "offline_since": null,
     "tags": [
       "Teachers",
@@ -116727,7 +116724,7 @@
       "Successive",
       "Contracts"
     ],
-    "last_checked": "2026-10-04T16:59:16-06:00"
+    "last_checked": "2026-10-07T20:34:16-06:00"
   },
   "1167-2026": {
     "slug": "1167-2026",
@@ -116763,7 +116760,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-10-04T16:59:16-06:00",
+    "last_seen": "2026-10-07T20:34:16-06:00",
     "offline_since": null,
     "tags": [
       "Agricultural",
@@ -116777,7 +116774,7 @@
       "Different",
       "Framework"
     ],
-    "last_checked": "2026-10-04T16:59:16-06:00"
+    "last_checked": "2026-10-07T20:34:16-06:00"
   },
   "1166-2026": {
     "slug": "1166-2026",
@@ -116785,7 +116782,7 @@
     "signatures_history": [],
     "title": "Petition 1166/2026: the Slievegrine Wind Farm project near Dungarvan, County Waterford, Ireland",
     "started_by": "Cyril O’Donnell (Irish)",
-    "category": "Health",
+    "category": "Environment - Impact Assessments",
     "country": "Ireland",
     "description_full": "<p>The petitioner raises concerns about Ireland’s Wind Energy Development Guidelines being outdated for contemporary windfarm projects. The petitioner states that the proposed Slievegrine Wind Farm near Dungarvan, County Waterford, would use 7.2 MW turbines up to 185 m tab, many sited only about 600 m from homes and farms. The petitioner argues that the 2006 guidelines do not address the scale of modern turbines, nor issues such as lowfrequency noise or infrasound, potentially overlooking environmental and health impacts. The petitioner questions whether current Irish Environmental Impact Assessments comply with EU environmental principles, including the precautionary principle, and calls on the European Parliament to examine whether Ireland’s standards align with EU publichealth and environmental requirements. While supportive of renewable energy, the petitioner urges an update of national guidelines to reflect technological advances and ensure adequate protection for nearby communities.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1166%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1166/2026</a></p>",
     "summary": "The petitioner raises concerns about Ireland’s Wind Energy Development Guidelines being outdated for contemporary windfarm projects. The petitioner states that the proposed Slievegrine Wind Farm near …",
@@ -116813,7 +116810,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-10-04T16:59:16-06:00",
+    "last_seen": "2026-10-07T20:34:16-06:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -116827,7 +116824,7 @@
       "Near",
       "Contemporary"
     ],
-    "last_checked": "2026-10-04T16:59:16-06:00"
+    "last_checked": "2026-10-07T20:34:16-06:00"
   },
   "1227-2026": {
     "slug": "1227-2026",
