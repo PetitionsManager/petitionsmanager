@@ -31,9 +31,9 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-10-07T21:08:50-06:00",
+    "generated_at": "2026-10-12T21:34:02+02:00",
     "petition_count": 228,
-    "available": 295,
+    "available": 296,
     "unbrauchbare": {
       "lucas-test-donate-petition-FR": "2026-09-18T14:40:58-06:00",
       "lucas-test-donation-2-petition-FR": "2026-09-18T14:40:58-06:00",
@@ -100,17 +100,18 @@
     },
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-10-07T21:08:50-06:00",
-      "gefunden": 295,
+      "stand": "2026-10-12T21:34:01+02:00",
+      "gefunden": 296,
       "im_bestand": 228,
       "unbrauchbar": 62,
       "verworfen": 0,
       "dublette": 0,
       "verschwunden": 0,
       "zurueckgestellt": 0,
-      "offen": 5,
+      "offen": 6,
       "offene_beispiele": [
         "2026-04-landmine-petition-FR",
+        "2026-10-no-child-excluded-petition-FR",
         "galen-test-2-petition-FR",
         "lucass-target-test-call-FR",
         "lucass-target-test-petition-FR",
@@ -135,10 +136,42 @@
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
         "neu": 0
+      },
+      {
+        "zeit": "2026-10-12T13:24:16+02:00",
+        "gesamt": 228,
+        "online": 220,
+        "offline": 8,
+        "ohne_titel": 8,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 8,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 187,
+        "juengstes_start": "2026-10-01",
+        "mit_code_im_text": 0,
+        "herkunft": "lokal_cron",
+        "neu": 0
+      },
+      {
+        "zeit": "2026-10-12T21:34:01+02:00",
+        "gesamt": 228,
+        "online": 220,
+        "offline": 8,
+        "ohne_titel": 8,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 8,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 187,
+        "juengstes_start": "2026-10-01",
+        "mit_code_im_text": 0,
+        "herkunft": "lokal_cron",
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-10-07T21:08:50-06:00",
+      "zeit": "2026-10-12T21:34:01+02:00",
       "gesamt": 228,
       "online": 220,
       "offline": 8,
@@ -154,15 +187,15 @@
     "verlauf_felder_ab": "2026-10-07T21:08:50-06:00",
     "befunde": [
       {
-        "stufe": "hinweis",
-        "thema": "Startdatum ist nur monatsgenau",
-        "text": "Datum bei 187 von 228 Sätzen, aber nur auf den Monat genau (der Tag steht an der Quelle nicht, der Scraper setzt den 1.). Das jüngste ist 6 Tage alt (2026-10-01) — das ist eine OBERGRENZE, die Petition kann bis zu 30 Tage jünger sein. Der Altersmelder ist hier deshalb ausgenommen; die Deckung bleibt",
-        "zeit": "2026-10-07T21:08:50-06:00",
-        "thema_en": "Start date is month-granular only",
-        "text_en": "Date on 187 of 228 records, but only accurate to the month (the source gives no day, the scraper fills in the 1st). The newest is 6 days old (2026-10-01) — that is an UPPER BOUND, the petition may be up to 30 days younger. The ageing check is therefore skipped here; coverage is still verified."
+        "stufe": "warnung",
+        "thema": "Host ausgelassen (robots.txt nicht lesbar)",
+        "text": "action.wemove.eu: HTTP 202. Der Host wurde für diesen Lauf komplett ausgelassen; von dort stammen KEINE frischen Daten. Der Bestand bleibt unverändert stehen.",
+        "zeit": "2026-10-12T21:33:57+02:00",
+        "thema_en": "Host skipped (robots.txt unreadable)",
+        "text_en": "action.wemove.eu: HTTP 202. The host was skipped entirely for this run; no fresh data came from it. The existing records stay as they are."
       }
     ],
-    "health_warning": null,
+    "health_warning": "Host ausgelassen (robots.txt nicht lesbar): action.wemove.eu: HTTP 202. Der Host wurde für diesen Lauf komplett ausgelassen; von dort stammen KEINE frischen Daten. Der Bestand bleibt unverändert stehen.",
     "online_count": 220
   },
   "2026-07-ban-coral-killers-sunscreen-petition-FR": {
