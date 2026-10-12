@@ -2537,6 +2537,38 @@ CODE_IM_TEXT_RE = re.compile(
     r"|\bvar\s+[A-Za-z_$][\w$]*\s*=\s*(?:function|\{|\[)"
     r"|<\s*(?:style|script|iframe|object|embed)\b",
     re.I)
+
+# Ballast in der KURZFASSUNG — Prüfung (g), gebaut am 12.10.2026.
+#
+# ⚠️⚠️ Warum CODE_IM_TEXT_RE dafür nicht genügt, obwohl es dieselbe Sorte Müll
+# sucht: `summary` ist bei 200 Zeichen abgeschnitten. Im einzigen bekannten Fall
+# (changeorg_en /p/keeping-kids-safe-san-bernardino) endet die Kurzfassung
+# genau VOR dem `<style>`-Teil — über alle 41 Bestände gemessen trifft
+# CODE_IM_TEXT_RE dort **0 von 48.973**, während der Block sichtbar dasteht.
+# Ein Wächter für diese Schicht braucht den ERÖFFNENDEN Marker, nicht die
+# CSS-Form.
+#
+# ⚠️ Deshalb nur die Eröffnung `<!--[if` (maskiert und unmaskiert), nicht das
+# lose `[if`: englische Petitionstexte schreiben sehr wohl „[if you agree]", und
+# ein Melder, der täglich grundlos blinkt, gehört nach drei Tagen niemandem
+# mehr. Der Abschluss `<![endif]-->` darf NICHT verlangt werden — er ist beim
+# Kürzen auf 200 Zeichen regelmäßig abgeschnitten, und genau dieser Fall ist
+# der Anlass.
+#
+# 📏 Gegen den echten Bestand gemessen, bevor es eingebaut wurde: über alle
+# 41 Plattformen und 48.973 ausgelieferten Sätze findet dieses Muster **genau
+# EINEN** Satz — den bekannten. `mso-` kommt dort **0×** vor; der Zweig ist
+# reine Vorsorge für den Word-Einfügerest OHNE bedingten Block, den der
+# Ballast-Fix per Bauart nicht fassen kann (er braucht `[if`).
+# ⚠️ Grenze der Messung: gemessen wurde die AUSLIEFERUNG, der Melder liest den
+# STORE. Der Store kann Sätze enthalten, die publish herausfiltert — der erste
+# Lauf kann also Treffer zeigen, die in dieser Messung nicht vorkamen. Das ist
+# kein Fehlalarm, sondern ein echter Befund über eine Schicht, die ich von
+# außen nicht sehen konnte.
+BALLAST_IN_KURZFASSUNG_RE = re.compile(
+    r"(?:<|&lt;)!--\[if\b"
+    r"|mso-[a-z-]{2,30}\s*:",
+    re.I)
 # Zweite, langsamere Stufe: so alt darf das jüngste start_date sein, bevor eine
 # LAUFENDE Plattform auch ohne Neuzugänge gemeldet wird (Prüfung (e), Stufe 2).
 # Am 30.8.2026 gemessen; die Begründung der Höhe steht dort.
@@ -3212,7 +3244,15 @@ def _bestandspruefung(store: dict, vorher: dict,
     #     weiter an — die alten Texte tragen den Quelltext ja noch. Das ist
     #     Absicht: der Befund ist wahr, solange er wahr ist.
     mit_code, beispiel = 0, None
+    mit_ballast, ballast_beispiel = 0, None
     for rec in store.values():
+        # (g) läuft im SELBEN Durchlauf — ein zweiter über 16.569 Sätze wäre
+        #     reine Laufzeit für dieselbe Frage an eine andere Spalte.
+        kurz = rec.get("summary") or ""
+        if kurz and BALLAST_IN_KURZFASSUNG_RE.search(kurz):
+            mit_ballast += 1
+            if ballast_beispiel is None:
+                ballast_beispiel = rec.get("url") or rec.get("slug") or "?"
         text = rec.get("description_full") or ""
         if not text:
             continue
@@ -3221,6 +3261,7 @@ def _bestandspruefung(store: dict, vorher: dict,
             if beispiel is None:
                 beispiel = rec.get("url") or rec.get("slug") or "?"
     kennzahlen["mit_code_im_text"] = mit_code
+    kennzahlen["mit_ballast_in_kurzfassung"] = mit_ballast
     if mit_code:
         merke("warnung", "Quelltext im Petitionstext",
               f"{mit_code} Beschreibung(en) enthalten CSS oder JavaScript als "
@@ -3234,6 +3275,50 @@ def _bestandspruefung(store: dict, vorher: dict,
                       f"sanitize_fragment() unwraps an element whose CONTENT "
                       f"is code – then its name belongs in CODE_DESC_TAGS – or "
                       f"the source introduced a new shape. Target value is 0.")
+
+    # (g) Ballast in der Kurzfassung (12.10.2026). Anlass: der Word-Ballast-Fix
+    #     `8a2258f` machte `description_full` sauber — und ließ `summary`
+    #     unberührt, weil entferne_bedingten_ballast() auf die serialisierte
+    #     Zeichenkette wirkt und nicht auf den Baum, aus dem die Kurzfassung
+    #     gebildet wurde. Der Melder (f) liest description_full; er wäre nach
+    #     dem nächsten Scrape also VERSTUMMT, während die Liste in der App
+    #     weiter den Müll zeigt.
+    #
+    #     ⚠️⚠️ Genau dafür ist dieser Melder da: er bewacht die Schicht, die der
+    #     NUTZER liest. Der Anlassfall hat sich sieben Wochen gehalten, weil
+    #     kein Wächter auf sie sah — (f) prüft eine andere Spalte, und ein
+    #     grüner Lauf plus eine stille Kachel sahen gesund aus.
+    #
+    #     ⚠️ Die Schwelle ist 0 und braucht keine Feinjustierung: eine
+    #     Kurzfassung ist Text für Menschen, Word-Ballast hat darin nie etwas zu
+    #     suchen. Messung hinter der 0 steht bei BALLAST_IN_KURZFASSUNG_RE.
+    #
+    #     ⚠️⚠️ Der Melder nennt die Ursache, statt zwei Möglichkeiten
+    #     aufzuzählen — die Lehre aus `ee23147`, wo ein Meldetext mit
+    #     „entweder A oder B" selbst die fehlende Messung benannte. Hier gibt
+    #     es nur EINE Bauart: die Kurzfassung wird nicht aus dem gereinigten
+    #     description_full abgeleitet. Bekannte Kandidaten (12.10.2026 im Code
+    #     gezählt, Bestand damals sauber): bundestag, innnit, eko, wemove
+    #     bilden sie aus dem Baum; avaaz, openpetition, weact, foodwatch aus
+    #     `og:description`, das den Sanitizer gar nicht sieht.
+    if mit_ballast:
+        merke("warnung", "Ballast in der Kurzfassung",
+              f"{mit_ballast} Kurzfassung(en) enthalten Word-/IE-Ballast als "
+              f"sichtbaren Text, z. B. {ballast_beispiel}. Die Kurzfassung "
+              f"wird dort nicht aus dem gereinigten description_full "
+              f"abgeleitet – siehe changeorg_scraper.py als Vorbild, wo genau "
+              f"das behoben ist. ⚠️ Der Melder „Quelltext im Petitionstext“ "
+              f"sieht diesen Fall NICHT, er prüft eine andere Spalte. "
+              f"Sollwert ist 0.",
+              thema_en="Boilerplate in the summary",
+              text_en=f"{mit_ballast} summary/summaries contain Word/IE "
+                      f"boilerplate as visible text, e.g. {ballast_beispiel}. "
+                      f"The summary is not derived from the cleaned "
+                      f"description_full there – see changeorg_scraper.py, "
+                      f"where exactly that is fixed. Note: the check "
+                      f"\"Source code inside petition text\" does NOT see "
+                      f"this case, it inspects a different column. Target "
+                      f"value is 0.")
 
     return neu, kennzahlen
 

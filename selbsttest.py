@@ -469,6 +469,93 @@ pruefe("leerer Bestand → still", code_lauf(0, 0), False)
 
 
 # ---------------------------------------------------------------------------
+# 5b. BALLAST_IN_KURZFASSUNG_RE — Prüfung (g): Ballast in der Kurzfassung
+#
+# ⚠️⚠️ Der TRAGENDE Fall ist das Paar weiter unten: dieselbe echte Kurzfassung,
+# bei der (f) schweigt und (g) meldet. Ohne ihn wäre nicht zu unterscheiden, ob
+# (g) etwas Neues bewacht oder nur (f) verdoppelt — und „verdoppelt" wäre ein
+# Melder, der nichts bewacht, aber zweimal blinkt.
+# ⚠️ Die Gegenproben sind auch hier wichtiger als die Treffer: das Muster läuft
+# über JEDE Kurzfassung im Bestand, und englische Petitionstexte schreiben
+# tatsächlich „[if you agree]".
+# ---------------------------------------------------------------------------
+print()
+print("BALLAST_IN_KURZFASSUNG_RE — Ballast in der Kurzfassung")
+
+# Wörtlich die am 12.10.2026 ausgelieferte Kurzfassung (201 Zeichen, bei „<s…"
+# abgeschnitten) — NICHT nachgebaut.
+_ECHTE_KURZFASSUNG = (
+    "<!--[if gte mso 9]><xml> </xml><![endif]--> <!--[if gte mso 9]><xml> "
+    "Normal 0 false false false EN-US X-NONE X-NONE </xml><![endif]-->"
+    "<!--[if gte mso 9]><xml> </xml><![endif]--><!--[if gte mso 10]> <s…")
+
+for text, soll, was in [
+    (_ECHTE_KURZFASSUNG, True, "die ECHTE abgeschnittene Kurzfassung"),
+    ("<!--[if gte mso 9]><xml>x</xml><![endif]-->", True, "unmaskierte Form"),
+    ("&lt;!--[if gte mso 9]&gt;&lt;xml&gt;", True, "maskierte Form"),
+    ('{mso-style-name:"Table Normal";}', True, "Word-Rest OHNE bedingten Block"),
+    # darf NICHT greifen
+    ("If you agree, please sign [if you agree]", False,
+     "englischer Fließtext mit „[if you agree]“"),
+    ("Wir fordern: if (x) dann y", False, "das Wort if im Fließtext"),
+    ("<p>Ein ganz gewöhnlicher Petitionstext</p>", False, "gewöhnlicher Text"),
+    ("<!-- ein normaler Kommentar -->", False, "gewöhnlicher HTML-Kommentar"),
+    ("Die Firma heißt Mso-Tech und baut Zäune", False,
+     "mso ohne Doppelpunkt-Eigenschaft"),
+    ("", False, "leere Kurzfassung"),
+]:
+    pruefe(was, bool(core.BALLAST_IN_KURZFASSUNG_RE.search(text)), soll)
+
+# ⚠️⚠️ DAS PAAR — die Begründung für einen eigenen Melder, in zwei Zeilen.
+# Über alle 41 Bestände gemessen (48.973 Sätze): CODE_IM_TEXT_RE trifft diese
+# Kurzfassung 0×, weil der <style>-Teil beim Kürzen auf 200 Zeichen wegfiel.
+pruefe("Blindstelle: (f) sieht die echte Kurzfassung NICHT",
+       bool(core.CODE_IM_TEXT_RE.search(_ECHTE_KURZFASSUNG)), False)
+pruefe("…und (g) sieht sie",
+       bool(core.BALLAST_IN_KURZFASSUNG_RE.search(_ECHTE_KURZFASSUNG)), True)
+
+
+def ballast_lauf(mit_ballast: int, sauber: int, kurz: str | None = None) -> bool:
+    """True, wenn Prüfung (g) meldet. Gleicher Weg wie code_lauf: über
+    _bestandspruefung, nicht nur am Muster — ein Muster beweist nicht, dass der
+    Melder auch feuert."""
+    core._TLS.platform = "selbsttest"
+    core._TLS.lauf_meta = {"new_petitions_last_run": [], "available": 100}
+    core.BEFUNDE.pop("selbsttest", None)
+    store = {}
+    for i in range(mit_ballast):
+        store[f"b{i}"] = {"slug": f"b{i}", "url": f"https://x.test/b{i}",
+                          "title": f"B{i}", "status": "online",
+                          "summary": kurz or _ECHTE_KURZFASSUNG,
+                          "description_full": "<p>Sauberer Text</p>"}
+    for i in range(sauber):
+        store[f"s{i}"] = {"slug": f"s{i}", "url": f"https://x.test/s{i}",
+                          "title": f"S{i}", "status": "online",
+                          "summary": "Ganz gewöhnliche Kurzfassung",
+                          "description_full": "<p>Sauberer Text</p>"}
+    befunde, _ = core._bestandspruefung(store, {})
+    return "Ballast in der Kurzfassung" in [b["thema"] for b in befunde]
+
+
+pruefe("eine einzige Kurzfassung mit Ballast → meldet",
+       ballast_lauf(1, 99), True)
+pruefe("Bestand ganz ohne Ballast → still", ballast_lauf(0, 100), False)
+pruefe("leerer Bestand → still", ballast_lauf(0, 0), False)
+# ⚠️⚠️ Die wichtigste Gegenprobe des GANZEN Blocks: der Melder darf nicht an
+# `description_full` hängen. Wäre (g) versehentlich auf dieselbe Spalte wie (f)
+# verdrahtet, bliebe er hier still — die Sätze oben tragen ja eine SAUBERE
+# Beschreibung. Genau diesen Fall soll er fangen.
+pruefe("description_full sauber, Kurzfassung nicht → (g) meldet trotzdem",
+       ballast_lauf(1, 50), True)
+pruefe("Gegenprobe: englischer Fließtext stiftet KEINE Meldung",
+       ballast_lauf(3, 50, kurz="If you agree [if you agree] please sign"),
+       False)
+pruefe("der Melder zählt in die Kennzahlen",
+       "mit_ballast_in_kurzfassung"
+       in inspect.getsource(core._bestandspruefung), True)
+
+
+# ---------------------------------------------------------------------------
 # 5. host_gesperrt() — Folgemeldungen bei ausgelassenem Host
 # ---------------------------------------------------------------------------
 # Anlass (30.8.2026): Das Dashboard zählte eine Ursache mehrfach — Europarl mit
