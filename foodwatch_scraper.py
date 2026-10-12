@@ -193,10 +193,41 @@ def _meta(soup: BeautifulSoup, prop: str) -> str | None:
 # Rest steht als bewusst VERWORFEN dabei — Seitentechnik, keine Inhalte. Ein
 # Eintrag hier heißt „gesehen und entschieden", nicht „genutzt".
 BEKANNTE_FELDER = {
+    # 13.10.2026 VERWORFEN: `author` (gemeldet 1/35 auf foodwatch_fr).
+    # ⚠️⚠️ EHRLICH VERMERKT: der WERT ist nie gemessen worden. 1/35 heißt eine
+    # Einzelseite, und vier frisch geholte fr-Seiten trugen das Feld nicht
+    # (0/4). Die Entscheidung hängt aber nicht am Inhalt, sondern an der Art
+    # des Inhalts: `author` ist bei diesem CMS die Redaktions-Signatur der
+    # Seite, und ein PERSONENNAME hat im ausgelieferten JSON nichts zu suchen.
+    # Träger aller foodwatch-Petitionen ist ohnehin foodwatch selbst — das
+    # führt `og:site_name` bereits. ➡️ Taucht hier doch einmal ein fachlich
+    # gebrauchter Wert auf, ist diese Zeile der Ort, an dem die Begründung
+    # widerlegt werden muss; sie steht datiert da, damit das möglich ist.
+    "author",
     "description",
     "format-detection",
     "generator",
     "google-site-verification",
+    # 13.10.2026 VERWORFEN: `keywords` (gemeldet 1/22 en, 5/35 fr, 14/15 nl).
+    # ⚠️ Der Melder hatte recht, dass es INHALT ist — auf niederländischen
+    # Seiten stehen dort brauchbare Schlagwörter („Zalm, kweekzalm, ASC, GNN",
+    # „aspartaam", „Energiedrank, kindermarketing"). Deshalb gehört es NICHT
+    # in ist_seitentechnik(), sondern hierher; dieselbe Begründung wie bei
+    # eko `title`.
+    # Verworfen wird es aus zwei Gründen, beide am 13.10.2026 an 10 echten
+    # Seiten gemessen (je Sprache mit den Scraper-Headern, 1,6 s Pause;
+    # Kontrollen: 23–27 Meta-Namen je Seite, `viewport`/`og:title` 10/10):
+    #   1. Die Deckung ist willkürlich gepflegt — en 0/3, fr 1/4, nl 3/3. Ein
+    #      Feld, das zwei von drei Sprachbäumen nicht führen, taugt nicht als
+    #      Schlagwortquelle; `make_tags()` leitet Schlagwörter ohnehin aus
+    #      Titel + summary + description_full ab (petitions_core.py:1196).
+    #   2. ⚠️⚠️ Auf fr steht dort REDAKTIONSTEXT statt eines Inhalts:
+    #      „additifs, ajouter ici tous les EXXX" — eine Notiz an die eigene
+    #      Redaktion. Ein Feld, das Redaktionsnotizen in die App tragen kann,
+    #      ist kein Datenfeld.
+    # Der Gewinn wäre ohnehin klein: foodwatch führt über alle vier Zweige
+    # zusammen 84 Sätze.
+    "keywords",
     "msapplication-TileColor",
     "msapplication-TileImage",
     "msapplication-config",
