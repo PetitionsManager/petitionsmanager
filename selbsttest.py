@@ -2097,6 +2097,69 @@ for _unberuehrt in ("<p>Wenn if dann endif</p>", "<p>Bedingung: if (x) { y; }</p
     pruefe(f"Ballast: unberührt – {_unberuehrt[:28]!r}",
            core.entferne_bedingten_ballast(_unberuehrt), _unberuehrt)
 
+# ---------------------------------------------------------------------------
+# Die ZWEITE Schicht desselben Befunds: die Kurzfassung (12.10.2026)
+#
+# ⚠️⚠️ Der Fix oben machte `description_full` sauber — und genau DAS war die
+# Falle. Der Melder liest description_full, die Liste in der App zeigt
+# `summary`. Solange summary aus dem BAUM kam (frag.get_text()), wäre der
+# Wächter verstummt, während der Nutzer den Word-Ballast weiter liest:
+# entferne_bedingten_ballast() wirkt auf die serialisierte Zeichenkette, nicht
+# auf den Baum. Geprüft wird am ECHTEN Pfad (changeorg.parse_detail), nicht an
+# einer Nachbildung — die Nachbildung war ja nie das Problem.
+_seite_ballast = (
+    '{"originalLocale":{"localeCode":"en-US"},'
+    '"ask":"Keeping kids safe",'
+    '"signatureCount":{"displayed":107},'
+    '"signatureGoal":{"displayed":200},'
+    '"createdAt":"2014-07-03",'
+    '"description":' + json.dumps(
+        '<p>&lt;!--[if gte mso 9]&gt;&lt;xml&gt; Normal 0 false false false '
+        'EN-US X-NONE X-NONE &lt;/xml&gt;&lt;![endif]--&gt;'
+        '&lt;!--[if gte mso 10]&gt; &lt;style&gt; /* Style Definitions */ '
+        'table.MsoNormalTable {mso-style-name:"Table Normal"; '
+        'mso-tstyle-rowband-size:0;} &lt;/style&gt; &lt;![endif]--&gt;</p>'
+        '<p>Remove obstructions from the 210 East Del Rosa exit.</p>'
+        '<p><a href="https://example.org/x">Quelle</a></p>') + '}')
+_rec_ballast = changeorg.parse_detail(
+    _seite_ballast, "https://www.change.org/p/keeping-kids-safe-san-bernardino",
+    "en") or {}
+pruefe("Kurzfassung: der Satz wird überhaupt angenommen",
+       bool(_rec_ballast.get("title")), True)
+pruefe("Kurzfassung: kein Ballast mehr in summary",
+       "[if" in (_rec_ballast.get("summary") or ""), False)
+pruefe("Kurzfassung: keine mso-Spuren in summary",
+       "mso-" in (_rec_ballast.get("summary") or ""), False)
+# ⚠️⚠️ Die tragende Gegenprobe: ein Fix, der die Kurzfassung LEERT, wäre
+# schlimmer als der Befund — dann stünde in der Liste gar nichts mehr.
+pruefe("Kurzfassung: der echte Petitionstext steht drin",
+       "Remove obstructions from the 210 East Del Rosa exit."
+       in (_rec_ballast.get("summary") or ""), True)
+pruefe("Kurzfassung: description_full bleibt ebenfalls sauber",
+       "[if" in (_rec_ballast.get("description_full") or ""), False)
+# ⚠️⚠️ MUTATIONSPROBE — ohne sie ist nicht zu unterscheiden, ob die Fälle oben
+# etwas prüfen oder nur die Nachbildung bestätigen. Hier steht der ALTE Weg
+# (Text aus dem Baum): er MUSS den Ballast noch tragen, sonst wären die drei
+# Fälle darüber blind. Und er muss ihn als VOLLE 201 Zeichen tragen — so lang
+# ist der Block, der in der App drei Wochen lang die Liste füllte.
+_frag_alt = BeautifulSoup(
+    changeorg._junescape(changeorg.DESC_RE.search(_seite_ballast).group(1)),
+    "html.parser")
+core.sanitize_fragment(_frag_alt, "https://www.change.org")
+_alt_text = _frag_alt.get_text(" ", strip=True)
+pruefe("Kurzfassung/Mutationsprobe: der alte Weg trug den Ballast",
+       "[if" in _alt_text, True)
+pruefe("Kurzfassung/Mutationsprobe: und zwar statt des Petitionstextes",
+       _alt_text[:200].find("Remove obstructions"), -1)
+# ⚠️ Gereinigt wird VOR dem Kürzen. Auf 200 Zeichen abgeschnitten verliert der
+# letzte Block sein `<![endif]-->`, und _BALLAST_RE findet ihn dann nie mehr —
+# ein Fix in der falschen Reihenfolge ließe genau diesen Rest stehen.
+pruefe("Kurzfassung: Reinigen vor dem Kürzen (abgeschnittener Rest)",
+       "[if" in core.entferne_bedingten_ballast(_alt_text[:200] + "…"), True)
+pruefe("Kurzfassung: der Scraper leitet sie aus description_full ab",
+       "description_full" in inspect.getsource(changeorg.parse_detail)
+       .split('rec["summary"]')[0].rsplit("text =", 1)[-1], True)
+
 # ⚠️⚠️ Der Vergleich „Quelle vs. Bestand", der die bundestag-Warnung einordnet.
 # Gebaut am 6.10.2026, NACHDEM die Messung den Auftrag „Schwelle anheben"
 # widerlegt hat: die Quelle bot als jüngstes ebenfalls 2026-08-17, der Melder

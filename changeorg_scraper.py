@@ -346,7 +346,25 @@ def parse_detail(html: str, url: str, sprache: str = "de") -> dict | None:
         desc_html = _junescape(m.group(1))
         frag = BeautifulSoup(desc_html, "html.parser")
         rec["description_full"] = sanitize_fragment(frag, BASE_URL) or None
-        text = frag.get_text(" ", strip=True)
+        # ⚠️⚠️ Die Kurzfassung kommt aus dem BEREITS GEREINIGTEN HTML, nicht
+        # aus `frag`. Grund: entferne_bedingten_ballast() wirkt am Ende von
+        # sanitize_fragment auf die serialisierte Zeichenkette
+        # (node.decode_contents()), NICHT auf den Baum — `frag` trägt den
+        # Word-/IE-Ballast danach unverändert weiter. Vorher stand hier
+        # frag.get_text(): description_full wurde sauber, die Liste in der App
+        # zeigte weiter den Müll, und der Melder (er liest description_full)
+        # wäre dabei verstummt. Ein Fix, der nur den Wächter beruhigt, ist
+        # keiner.
+        # ⚠️ Gereinigt wird VOR dem Kürzen. Auf dem bei 200 Zeichen
+        # abgeschnittenen Text findet _BALLAST_RE seinen Abschluss
+        # `<![endif]-->` nicht mehr und lässt einen Rest stehen.
+        # 📏 Differenz alt↔neu über ALLE 16.569 ausgelieferten
+        # changeorg_en-Volltexte (gemessen 12.10.2026, Positivkontrolle gegen
+        # die Auslieferung 16.564/16.569 zeichengleich): genau EIN Satz,
+        # /p/keeping-kids-safe-san-bernardino. Wer hier etwas ändert, messe
+        # diese Differenz bitte neu.
+        text = BeautifulSoup(rec["description_full"] or "",
+                             "html.parser").get_text(" ", strip=True)
         rec["summary"] = (text[:200] + "…") if len(text) > 200 else text or None
 
     tags = TAG_RE.findall(html)
