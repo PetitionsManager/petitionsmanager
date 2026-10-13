@@ -35,7 +35,60 @@ MARKER="$KLON/PFLEGE-LAUF-KLEMMT.txt"
 # schreibt dieser Lauf den älteren lokalen Stand darüber (die Schrumpf-Sperre
 # in ci_stores_uebernehmen.entscheide() fängt es ab, aber dann steht der
 # Bestand still, statt zu wachsen).
-PLATTFORMEN=(europarl openpetition wemove_en wemove_fr wemove_it wemove_nl wemove_pl)
+#
+# 🔴🔴 13.10.2026: die REIHENFOLGE war eine stille Benachteiligung der letzten
+# Zweige. Gemessen an den lokalen Beständen vom 12.10. (Feld `_meta.bilanz`):
+#
+#   Zweig      offen   an 5 Lauftagen ausgelassen
+#   wemove_en      2   0 von 5
+#   wemove_fr      6   3 von 5
+#   wemove_it     11   4 von 5
+#   wemove_nl     54   5 von 5   ← nie Detaildaten
+#   wemove_pl     46   5 von 5   ← nie Detaildaten
+#
+# Der offene Rest folgt exakt dieser Liste — zusammen 119 Sätze ohne
+# Detaildaten. Ursache: `Fetcher._robots` ist ein INSTANZ-Cache
+# (petitions_core.py:1350), und die Schleife unten startet je Zweig einen
+# EIGENEN `python3 monitor.py`-Prozess. Jeder Zweig holt robots.txt also neu
+# und verbrennt WAF-Budget; die WeMove-WAF erlaubt nur ~35–40 Abrufe je
+# Fenster und antwortet danach HTTP 202. Wer zuletzt kommt, bekommt nichts.
+# ⚠️ Nicht robots.txt sperrt: von diesem Anschluss antwortet
+# action.wemove.eu/robots.txt mit HTTP 200 (217 B) und erlaubt `/sign/…`
+# ausdrücklich (13.10.2026 mit vollem Browser-Header-Satz gemessen). Es ist
+# allein das Abruf-Budget.
+#
+# ➡️ Deshalb rotiert die wemove-Reihenfolge TAGESWEISE. Das ist Reparatur und
+# Gegenprobe in einem: trifft die Reihenfolge-Erklärung zu, verteilt sich der
+# offene Rest über fünf Tage gleichmäßig. Tut er es nicht, war sie falsch —
+# und das sieht man dann an genau diesen Zahlen.
+# ⚠️ europarl und openpetition bleiben VORN: sie liegen auf anderen Hosts, ihr
+# Budget ist von WeMove unabhängig, und europarl kam an 7 von 7 Lauftagen
+# durch. Sie zu rotieren würde einen gesunden Zweig in Gefahr bringen, um
+# nichts zu gewinnen.
+# ⚠️ Der Versatz kommt aus dem TAG DES JAHRES, nicht aus einer Merkdatei —
+# eine Datei müsste gepflegt, gesichert und beim Klonen mitgedacht werden,
+# und ein verlorener Zustand würde die Rotation still beenden. Dieselbe
+# Entscheidung wie beim Tageszähler des changeorg-Store (git log statt Datei).
+#
+# ⚠️⚠️ DIE MARKER UNTEN NICHT ENTFERNEN. `checks.yml` schneidet den Block
+# zwischen ihnen heraus und prüft die Invariante über alle 366 Tage gegen
+# DIESEN Code — nicht gegen eine Nachbildung. Wer die Marker löscht, lässt den
+# Prüfschritt ins Leere laufen; er bricht dann ab, statt grün zu werden
+# (dieselbe Falle wie beim 2026-09 entfernten Schritt „App-Daten validieren",
+# der wochenlang still Exit 0 setzte).
+# >>> ROTATION >>>
+WEMOVE_ZWEIGE=(wemove_en wemove_fr wemove_it wemove_nl wemove_pl)
+# ⚠️⚠️ `10#` erzwingt Dezimal. `date +%j` ist NULLGEPOLSTERT (008, 097), und
+# bash liest führende Nullen als Oktal — ohne das Präfix stirbt der Lauf an
+# „value too great for base" an jedem Tag mit einer 8 oder 9 darin, also
+# ausgerechnet nicht beim Testen am Einbautag.
+VERSATZ=$(( 10#$(date '+%j') % ${#WEMOVE_ZWEIGE[@]} ))
+PLATTFORMEN=(europarl openpetition)
+for ((_i = 0; _i < ${#WEMOVE_ZWEIGE[@]}; _i++)); do
+    PLATTFORMEN+=("${WEMOVE_ZWEIGE[$(( (_i + VERSATZ) % ${#WEMOVE_ZWEIGE[@]} ))]}")
+done
+# <<< ROTATION <<<
+unset _i
 
 sag() { echo "[$(date '+%F %T')] $*" | tee -a "$LOG"; }
 
