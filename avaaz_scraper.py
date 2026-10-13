@@ -203,7 +203,23 @@ NON_PETITION_SLUGS = {"about", "how_to_create_petition", "my_account",
                       "start_a_petition", "popular_petitions",
                       "recent_petitions", "search", "sitemap"}
 # Seiten unter /campaign/de/, die keine Kampagnen sind.
-NON_CAMPAIGN_SLUGS = {"donate"}
+#
+# ⚠️⚠️ 13.10.2026 dazu: `disinfo_hub`. Es ist eine THEMEN-HUB-Seite, keine
+# Kampagne — sie antwortet mit HTTP 200 und ~90 KB Markup (Titel de
+# „Avaaz - Online Desinformation richtigstellen", it „Avaaz - Rettificare la
+# disinformazione online"), trägt aber WEDER `createdAtTimestamp` NOCH
+# `campaign_id`. Ohne campaign_id gibt es keinen Zähler und damit keinen
+# speicherbaren Satz: der Slug wurde in JEDEM Lauf der Zweige de und it
+# entdeckt, abgerufen und verworfen, ohne je im Bestand zu landen.
+# 📏 Vor dem Eintrag gegen den Bestand gemessen (Pflicht: diese Menge verwirft
+# STILL): über ALLE 19 avaaz-Zweige und 353 ausgelieferte Sätze trägt **kein
+# einziger** einen Slug mit „disinfo" — die Sperre nimmt uns also nichts weg.
+# Positivkontrolle derselben Suche: `land_rights_evergreen_2026` findet sie 16×.
+# 💡 Der Slug war zugleich der letzte offene Punkt bei der Frage, ob die
+# Warnung „Bestand altert" für avaaz (de) und avaaz_it einen Scraper-Defekt
+# verdeckt. Er tat es nicht: ohne Datum an der Quelle kann er kein jüngeres
+# Startdatum liefern.
+NON_CAMPAIGN_SLUGS = {"donate", "disinfo_hub"}
 
 KIND_LABELS = {"petition": "Bürgerpetition",
                "campaign_sign": "Avaaz-Kampagne (Unterschriften)",
