@@ -31,7 +31,7 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-10-13T16:54:33+02:00",
+    "generated_at": "2026-10-13T22:23:14+02:00",
     "petition_count": 614,
     "available": 720,
     "unbrauchbare": {
@@ -140,7 +140,7 @@
     },
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-10-13T16:54:33+02:00",
+      "stand": "2026-10-13T22:23:13+02:00",
       "gefunden": 720,
       "im_bestand": 614,
       "unbrauchbar": 102,
@@ -175,10 +175,27 @@
         "mit_ballast_in_kurzfassung": 0,
         "herkunft": "lokal_cron",
         "neu": 0
+      },
+      {
+        "zeit": "2026-10-13T22:23:13+02:00",
+        "gesamt": 614,
+        "online": 613,
+        "offline": 1,
+        "ohne_titel": 1,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 1,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 491,
+        "juengstes_start": "2026-10-01",
+        "mit_code_im_text": 0,
+        "mit_ballast_in_kurzfassung": 0,
+        "herkunft": "lokal_cron",
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-10-13T16:54:33+02:00",
+      "zeit": "2026-10-13T22:23:13+02:00",
       "gesamt": 614,
       "online": 613,
       "offline": 1,
@@ -195,15 +212,15 @@
     "verlauf_felder_ab": "2026-10-13T16:54:33+02:00",
     "befunde": [
       {
-        "stufe": "hinweis",
-        "thema": "Startdatum ist nur monatsgenau",
-        "text": "Datum bei 491 von 614 Sätzen, aber nur auf den Monat genau (der Tag steht an der Quelle nicht, der Scraper setzt den 1.). Das jüngste ist 12 Tage alt (2026-10-01) — das ist eine OBERGRENZE, die Petition kann bis zu 30 Tage jünger sein. Der Altersmelder ist hier deshalb ausgenommen; die Deckung bleib",
-        "zeit": "2026-10-13T16:54:33+02:00",
-        "thema_en": "Start date is month-granular only",
-        "text_en": "Date on 491 of 614 records, but only accurate to the month (the source gives no day, the scraper fills in the 1st). The newest is 12 days old (2026-10-01) — that is an UPPER BOUND, the petition may be up to 30 days younger. The ageing check is therefore skipped here; coverage is still verified."
+        "stufe": "warnung",
+        "thema": "Host ausgelassen (robots.txt nicht lesbar)",
+        "text": "action.wemove.eu: HTTP 202. Der Host wurde für diesen Lauf komplett ausgelassen; von dort stammen KEINE frischen Daten. Der Bestand bleibt unverändert stehen.",
+        "zeit": "2026-10-13T22:23:09+02:00",
+        "thema_en": "Host skipped (robots.txt unreadable)",
+        "text_en": "action.wemove.eu: HTTP 202. The host was skipped entirely for this run; no fresh data came from it. The existing records stay as they are."
       }
     ],
-    "health_warning": null,
+    "health_warning": "Host ausgelassen (robots.txt nicht lesbar): action.wemove.eu: HTTP 202. Der Host wurde für diesen Lauf komplett ausgelassen; von dort stammen KEINE frischen Daten. Der Bestand bleibt unverändert stehen.",
     "online_count": 613
   },
   "2026-07-ban-coral-killers-sunscreen-petition-EN": {
