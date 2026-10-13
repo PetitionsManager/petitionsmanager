@@ -31,9 +31,9 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-10-12T21:34:55+02:00",
+    "generated_at": "2026-10-13T16:55:51+02:00",
     "petition_count": 182,
-    "available": 231,
+    "available": 232,
     "unbrauchbare": {
       "lucas-test-donate-petition-PL": "2026-09-18T20:42:20-06:00",
       "lucas-test-donation-2-petition-PL": "2026-09-18T20:42:20-06:00",
@@ -41,15 +41,15 @@
     },
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-10-12T21:34:55+02:00",
-      "gefunden": 231,
+      "stand": "2026-10-13T16:55:51+02:00",
+      "gefunden": 232,
       "im_bestand": 182,
       "unbrauchbar": 3,
       "verworfen": 0,
       "dublette": 0,
       "verschwunden": 0,
       "zurueckgestellt": 0,
-      "offen": 46,
+      "offen": 47,
       "offene_beispiele": [
         "2023-06-deaths-at-sea-testing-PL",
         "2023-07-simon-1-PL",
@@ -94,6 +94,7 @@
         "2025-10-harmit-onboarding-campaign-petition-PL",
         "2025-10-jessie-onboarding-campaign-petition-PL",
         "2026-04-landmine-petition-PL",
+        "2026-10-handsoffnature-petition-PL",
         "2026-10-no-child-excluded-petition-PL",
         "2026-10-stop-killer-robots-petition-PL",
         "sharesteptest-petition-PL"
@@ -261,10 +262,27 @@
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
         "neu": 0
+      },
+      {
+        "zeit": "2026-10-13T16:55:51+02:00",
+        "gesamt": 182,
+        "online": 182,
+        "offline": 0,
+        "ohne_titel": 0,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 0,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 170,
+        "juengstes_start": "2026-09-01",
+        "mit_code_im_text": 0,
+        "mit_ballast_in_kurzfassung": 0,
+        "herkunft": "lokal_cron",
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-10-12T21:34:55+02:00",
+      "zeit": "2026-10-13T16:55:51+02:00",
       "gesamt": 182,
       "online": 182,
       "offline": 0,
@@ -275,7 +293,8 @@
       "dubletten": 0,
       "mit_start": 170,
       "juengstes_start": "2026-09-01",
-      "mit_code_im_text": 0
+      "mit_code_im_text": 0,
+      "mit_ballast_in_kurzfassung": 0
     },
     "verlauf_felder_ab": "2026-10-05T04:45:38-06:00",
     "befunde": [
@@ -283,7 +302,7 @@
         "stufe": "warnung",
         "thema": "Host ausgelassen (robots.txt nicht lesbar)",
         "text": "action.wemove.eu: HTTP 202. Der Host wurde für diesen Lauf komplett ausgelassen; von dort stammen KEINE frischen Daten. Der Bestand bleibt unverändert stehen.",
-        "zeit": "2026-10-12T21:34:51+02:00",
+        "zeit": "2026-10-13T16:55:47+02:00",
         "thema_en": "Host skipped (robots.txt unreadable)",
         "text_en": "action.wemove.eu: HTTP 202. The host was skipped entirely for this run; no fresh data came from it. The existing records stay as they are."
       }

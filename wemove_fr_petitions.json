@@ -31,9 +31,9 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-10-12T21:34:02+02:00",
+    "generated_at": "2026-10-13T16:54:53+02:00",
     "petition_count": 228,
-    "available": 296,
+    "available": 297,
     "unbrauchbare": {
       "lucas-test-donate-petition-FR": "2026-09-18T14:40:58-06:00",
       "lucas-test-donation-2-petition-FR": "2026-09-18T14:40:58-06:00",
@@ -100,17 +100,18 @@
     },
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-10-12T21:34:01+02:00",
-      "gefunden": 296,
+      "stand": "2026-10-13T16:54:52+02:00",
+      "gefunden": 297,
       "im_bestand": 228,
       "unbrauchbar": 62,
       "verworfen": 0,
       "dublette": 0,
       "verschwunden": 0,
       "zurueckgestellt": 0,
-      "offen": 6,
+      "offen": 7,
       "offene_beispiele": [
         "2026-04-landmine-petition-FR",
+        "2026-10-handsoffnature-petition-FR",
         "2026-10-no-child-excluded-petition-FR",
         "galen-test-2-petition-FR",
         "lucass-target-test-call-FR",
@@ -168,10 +169,27 @@
         "mit_code_im_text": 0,
         "herkunft": "lokal_cron",
         "neu": 0
+      },
+      {
+        "zeit": "2026-10-13T16:54:52+02:00",
+        "gesamt": 228,
+        "online": 220,
+        "offline": 8,
+        "ohne_titel": 8,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 8,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 187,
+        "juengstes_start": "2026-10-01",
+        "mit_code_im_text": 0,
+        "mit_ballast_in_kurzfassung": 0,
+        "herkunft": "lokal_cron",
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-10-12T21:34:01+02:00",
+      "zeit": "2026-10-13T16:54:52+02:00",
       "gesamt": 228,
       "online": 220,
       "offline": 8,
@@ -182,7 +200,8 @@
       "dubletten": 0,
       "mit_start": 187,
       "juengstes_start": "2026-10-01",
-      "mit_code_im_text": 0
+      "mit_code_im_text": 0,
+      "mit_ballast_in_kurzfassung": 0
     },
     "verlauf_felder_ab": "2026-10-07T21:08:50-06:00",
     "befunde": [
@@ -190,7 +209,7 @@
         "stufe": "warnung",
         "thema": "Host ausgelassen (robots.txt nicht lesbar)",
         "text": "action.wemove.eu: HTTP 202. Der Host wurde für diesen Lauf komplett ausgelassen; von dort stammen KEINE frischen Daten. Der Bestand bleibt unverändert stehen.",
-        "zeit": "2026-10-12T21:33:57+02:00",
+        "zeit": "2026-10-13T16:54:48+02:00",
         "thema_en": "Host skipped (robots.txt unreadable)",
         "text_en": "action.wemove.eu: HTTP 202. The host was skipped entirely for this run; no fresh data came from it. The existing records stay as they are."
       }

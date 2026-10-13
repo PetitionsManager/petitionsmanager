@@ -31,19 +31,28 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-10-12T21:29:26+02:00",
-    "petition_count": 2465,
-    "available": 1713,
+    "generated_at": "2026-10-13T16:50:40+02:00",
+    "petition_count": 2478,
+    "available": 1723,
     "new_petitions_last_run": [
-      "stoppt-die-kita-schliessungen-in-greven-kinder-sind-keine-rechengroessen-vorlage-260-2026-vertagen",
-      "therapiebad-der-carl-orff-schule-erhalten",
-      "nehmt-den-menschen-nicht-die-hilfe-im-eigenen-zuhause-die-ihnen-ein-leben-in-wuerde-ermoeglicht",
-      "steirischer-zusammenhalt-fuer-unsere-kinder-nein-zu-kuerzungen-bei-sport-musik-und-ehrenamt"
+      "sichere-und-ausreichende-schulbusse-fuer-ettringen-tuerkheim-mindelheim",
+      "nein-zur-erhoehung-der-hundesteuer-um-33-2027-in-hamburg-stopp",
+      "lasst-leano-an-seiner-vertrauten-foerderschule-bleiben-autistische-kinder-brauchen-stabilitaet-2",
+      "stoppt-das-neue-kibiz-rettet-die-qualitaet-in-unseren-kitas-und-schuetzt-unsere-erzieher-in",
+      "tempo-30-auf-der-alten-braunschweiger-strasse-in-flechtorf-fuer-sichere-schulwege",
+      "lasst-harry-den-busfahrer-wieder-singen-hamburg-braucht-seine-originale",
+      "rettet-die-spaetis-in-schwerin",
+      "nachbarschafts-schutzkonzept-fuer-die-wohngebiete-am-areal-boehler-sichere-strassen-fuer-unsere-kind",
+      "zukunft-auf-die-schiene-rettet-die-gelstertalbahn-vor-dem-endgueltigen-aus",
+      "selbstschutz-bei-bahnreisen-als-berechtigtes-interesse-anerkennen",
+      "rettet-die-kinder-fruehneuro-reha-bundesweite-finanzierung-fuer-rekiz-spezialstationen-sichern",
+      "parkplaetze-in-der-versorgungshausstrasse-erhalten-verlegung-der-s-bike-station",
+      "radweganbindung-vs-aspernallee-dammhaufensiedlung"
     ],
     "bilanz": {
-      "stand": "2026-10-12T21:29:25+02:00",
-      "gefunden": 1713,
-      "im_bestand": 1713,
+      "stand": "2026-10-13T16:50:40+02:00",
+      "gefunden": 1723,
+      "im_bestand": 1723,
       "unbrauchbar": 0,
       "verworfen": 0,
       "dublette": 0,
@@ -51,45 +60,47 @@
       "zurueckgestellt": 0,
       "offen": 0,
       "offene_beispiele": [],
-      "bestand_gesamt": 2465,
-      "bestand_ausserhalb": 752
+      "bestand_gesamt": 2478,
+      "bestand_ausserhalb": 755
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-10-12T21:29:25+02:00",
-        "gesamt": 2465,
-        "online": 2465,
+        "zeit": "2026-10-13T16:50:40+02:00",
+        "gesamt": 2478,
+        "online": 2478,
         "offline": 0,
         "ohne_titel": 0,
         "platzhalter": 0,
         "nicht_ausgeliefert": 0,
         "torsi": 0,
         "dubletten": 0,
-        "mit_start": 2450,
+        "mit_start": 2463,
         "juengstes_start": "2026-10-12",
         "mit_code_im_text": 0,
+        "mit_ballast_in_kurzfassung": 0,
         "herkunft": "lokal_cron",
-        "neu": 4
+        "neu": 13
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-10-12T21:29:25+02:00",
-      "gesamt": 2465,
-      "online": 2465,
+      "zeit": "2026-10-13T16:50:40+02:00",
+      "gesamt": 2478,
+      "online": 2478,
       "offline": 0,
       "ohne_titel": 0,
       "platzhalter": 0,
       "nicht_ausgeliefert": 0,
       "torsi": 0,
       "dubletten": 0,
-      "mit_start": 2450,
+      "mit_start": 2463,
       "juengstes_start": "2026-10-12",
-      "mit_code_im_text": 0
+      "mit_code_im_text": 0,
+      "mit_ballast_in_kurzfassung": 0
     },
-    "verlauf_felder_ab": "2026-10-12T21:29:25+02:00",
+    "verlauf_felder_ab": "2026-10-13T16:50:40+02:00",
     "befunde": [],
     "health_warning": null,
-    "online_count": 2465
+    "online_count": 2478
   },
   "fuer-den-erhalt-einer-sicheren-individuellen-geburtshilfe-stoppt-den-neuen-hebammenhilfevertrag-2": {
     "slug": "fuer-den-erhalt-einer-sicheren-individuellen-geburtshilfe-stoppt-den-neuen-hebammenhilfevertrag-2",
@@ -141350,7 +141361,7 @@
     "goal": 1000,
     "start_date": "2026-09-30",
     "status": "online",
-    "last_seen": "2026-10-05T18:44:55-06:00",
+    "last_seen": "2026-10-13T16:47:23+02:00",
     "offline_since": null,
     "tags": [
       "Furttalstrasse",
@@ -141364,7 +141375,7 @@
       "Umliegenden",
       "Wohnhäusern"
     ],
-    "last_checked": "2026-10-05T18:44:55-06:00",
+    "last_checked": "2026-10-13T16:47:23+02:00",
     "lang": "de",
     "campaign_id": "openpetition:tempo-30-auf-der-furttalstrasse-in-zuerich-affoltern-zum-schutz-unserer-kinder-und-tiere",
     "i18n_state": {
@@ -145301,5 +145312,552 @@
       "Bildung"
     ],
     "last_checked": "2026-10-12T21:23:48+02:00"
+  },
+  "sichere-und-ausreichende-schulbusse-fuer-ettringen-tuerkheim-mindelheim": {
+    "slug": "sichere-und-ausreichende-schulbusse-fuer-ettringen-tuerkheim-mindelheim",
+    "first_seen": "2026-10-13T16:47:23+02:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-13T16:47:23+02:00",
+        "count": 164
+      }
+    ],
+    "title": "Sichere und ausreichende Schulbusse für Ettringen – Türkheim – Mindelheim",
+    "summary": "Wir, Eltern und Erziehungsberechtigte aus Ettringen, fordern den Landkreis Unterallgäu als Aufgabenträger der Schülerbeförderung auf, die morgendliche Busverbindung Ettringen – Türkheim – Mindelheim (Abfahrten 6:56 Uhr und 7:03 Uhr ab Ettringen) kurzfristig zu überprüfen und so auszustatten, dass alle Schülerinnen und Schüler zuverlässig und sicher zur Schule befördert werden. Konkret fordern wir: 1. Eine kurzfristige Überprüfung der morgendlichen Busverbindungen um 6:56 Uhr und 7:03 Uhr ab Ettr",
+    "image_url": "https://www.openpetition.de/images/petition/sichere-und-ausreichende-schulbusse-fuer-ettringen-tuerkheim-mindelheim_1791799718_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/sichere-und-ausreichende-schulbusse-fuer-ettringen-tuerkheim-mindelheim",
+    "description_full": "<!--marker--><p>Wir, Eltern und Erziehungsberechtigte aus Ettringen, fordern den Landkreis Unterallgäu als Aufgabenträger der Schülerbeförderung auf, die morgendliche Busverbindung Ettringen – Türkheim – Mindelheim (Abfahrten 6:56 Uhr und 7:03 Uhr ab Ettringen) kurzfristig zu überprüfen und so auszustatten, dass alle Schülerinnen und Schüler zuverlässig und sicher zur Schule befördert werden.<br/>Konkret fordern wir:</p><ol><li>Eine kurzfristige Überprüfung der morgendlichen Busverbindungen um 6:56 Uhr und 7:03 Uhr ab Ettringen.</li><li>Eine Überprüfung der tatsächlichen Auslastung und der zugelassenen Beförderungskapazität der eingesetzten Busse.</li><li>Eine Prüfung, warum der Bus um 7:03 Uhr teilweise nicht mehr an der Haltestelle in Ettringen anhält.</li><li>Eine konkrete Lösung, damit alle Schülerinnen und Schüler zuverlässig und sicher zur Schule befördert werden können.</li><li>Falls die vorhandene Kapazität nicht ausreicht: die Prüfung eines größeren Busses, eines zusätzlichen Busses oder einer anderen geeigneten Lösung.</li></ol>\n<h3>Begründung</h3>\n<!--marker--><p>Die Problematik besteht montags bis freitags täglich. Der erste Bus fährt morgens um 6:56 Uhr ab Ettringen und ist bereits beim Einstieg sehr stark ausgelastet. Der zweite Bus fährt um 7:03 Uhr ab Ettringen; dieser hält teilweise gar nicht mehr an der Haltestelle, da er zu diesem Zeitpunkt bereits voll ist.<br/>Dadurch können Schülerinnen und Schüler teilweise nicht mehr mitgenommen werden. Betroffene Kinder müssen wieder nach Hause gehen und anschließend von ihren Eltern selbstständig mit dem Auto zur Schule gebracht werden. Das stellt für die betroffenen Kinder und Familien eine erhebliche Belastung dar – vor allem für die Jüngsten der 5. und 6. Klassen, die gerade erst mit dem eigenständigen Schulweg beginnen.<br/>Gleichzeitig stellt sich für uns die Frage, ob die vorhandene Beförderungskapazität für die tatsächlich zu befördernden Schülerinnen und Schüler ausreicht und ob eine zuverlässige und sichere Schülerbeförderung gewährleistet werden kann. In einem überfüllten Bus finden Kinder keinen festen Halt; bei einer Vollbremsung drohen Verletzungen.<br/>Mehrere Eltern haben sich seit Mitte September wiederholt an das Busunternehmen gewandt – mit schriftlichen Beschwerden, Nachfragen und Gesprächen. Eine Antwort oder eine erkennbare Verbesserung gab es bis heute nicht. Es kann aus unserer Sicht keine dauerhafte Lösung sein, dass Kinder morgens an der Haltestelle zurückbleiben, wieder nach Hause gehen müssen und anschließend von ihren Eltern zur Schule gefahren werden müssen.<br/>Wir möchten mit dieser Petition erreichen, dass die Situation zeitnah überprüft und eine dauerhafte Lösung gefunden wird. Wir bitten darum, die Schülerbeförderung so zu organisieren, dass alle betroffenen Kinder zuverlässig, sicher und ohne zusätzliche Belastung für ihre Familien zur Schule gelangen können.</p>",
+    "started_by": "Florian Stöckl",
+    "category": "Verkehr",
+    "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
+    "country": "DE",
+    "signatures": 164,
+    "start_date": "2026-10-12",
+    "lang": "de",
+    "campaign_id": "openpetition:sichere-und-ausreichende-schulbusse-fuer-ettringen-tuerkheim-mindelheim",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-13T16:47:23+02:00",
+    "offline_since": null,
+    "tags": [
+      "Ettringen",
+      "Schule",
+      "Schülerinnen",
+      "Schüler",
+      "Eltern",
+      "Kinder",
+      "Schülerbeförderung",
+      "Zuverlässig",
+      "Lösung",
+      "Sicher"
+    ],
+    "last_checked": "2026-10-13T16:47:23+02:00"
+  },
+  "nein-zur-erhoehung-der-hundesteuer-um-33-2027-in-hamburg-stopp": {
+    "slug": "nein-zur-erhoehung-der-hundesteuer-um-33-2027-in-hamburg-stopp",
+    "first_seen": "2026-10-13T16:47:23+02:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-13T16:47:23+02:00",
+        "count": 117
+      }
+    ],
+    "title": "„Nein zur Erhöhung der Hundesteuer um 33% 2027 in Hamburg – Stopp",
+    "summary": "Ich fordere die Hamburgische Bürgerschaft und den Senat der Freien und Hansestadt Hamburg auf, den Beschluss zur Erhöhung der Hundesteuer zum 1. Januar 2027 aufzuheben. Der jährliche Regelsatz für den ersten Hund muss auf dem bisherigen Niveau von 90 Euro belassen werden. Die geplante Anhebung um 33,3 % auf 120,00 Euro ist zurückzunehmen oder zumindest auf 10% zu reduzieren.",
+    "image_url": "https://www.openpetition.de/images/petition/nein-zur-erhoehung-der-hundesteuer-um-33-2027-in-hamburg-stopp_1791716487_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/nein-zur-erhoehung-der-hundesteuer-um-33-2027-in-hamburg-stopp",
+    "description_full": "<!--marker--><p>Ich fordere die Hamburgische Bürgerschaft und den Senat der Freien und Hansestadt Hamburg auf, den Beschluss zur Erhöhung der Hundesteuer zum 1. Januar 2027 aufzuheben. Der jährliche Regelsatz für den ersten Hund muss auf dem bisherigen Niveau von 90 Euro belassen werden. Die geplante Anhebung um 33,3 % auf 120,00 Euro ist zurückzunehmen oder zumindest auf 10% zu reduzieren.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Die <a href=\"https://www.ndr.de/nachrichten/hamburg/einige-steuern-in-hamburg-sollen-2027-erhoeht-werden,steuer-142.html\" rel=\"noopener\" target=\"_blank\">geplante Erhöhung der Hundesteuer</a> ist aus folgenden Gründen sozial ungerecht und tierschutzwidrig:<br/></p><ol><li><b>Unverhältnismäßige finanzielle Belastung: </b>Eine Preiserhöhung von über 33 % trifft insbesondere Bürgerinnen und Bürger mit geringem Einkommen, Familien sowie Rentnerinnen und Rentner hart. In Zeiten ohnehin stark gestiegener Lebenshaltungskosten (Futter, Tierarztgebühren nach der GOT-Anpassung, Energie) stellt diese Erhöhung für viele Haushalte eine akute finanzielle Überlastung dar.</li><li><b>Gefahr für den Tierschutz und überlastete Tierheime: </b>Es steht zu befürchten, dass Halterinnen und Halter ihre Tiere aus finanzieller Not in Tierheimen abgeben müssen. Das Hamburger Tierheim (z. B. an der Süderstraße) arbeitet bereits jetzt an der absolute Belastungsgrenze. Die durch Abgaben entstehenden Kosten für die Stadt würden die steuerlichen Mehreinnahmen schnell übersteigen.</li><li><b>Fehlende Zweckbindung und Gegenleistung: </b>Da die Hundesteuer eine nicht zweckgebundene Aufwandssteuer ist, fließt sie in den allgemeinen Hamburger Haushalt. Den Hundehaltern entsteht durch die Erhöhung kein Gegenwert – weder durch den Ausbau von Freilaufflächen noch durch eine verbesserte Infrastruktur (wie Kotbeutelspender). Hunde sind jedoch Sozialpartner und keine Luxusgüter, die zur Sanierung des Haushalts herangezogen werden sollten.</li></ol><br/><p>Die beschlossene dreijährige Steuerbefreiung bei der Adoption von Tierheimhunden ist ein Schritt in die richtige Richtung, reicht jedoch nicht aus, um die massive Belastung für den bestehenden, treuen Halterkreis zu rechtfertigen.</p><p>Aus diesen Gründen bitte ich den Eingabenausschuss der Hamburgischen Bürgerschaft, sich für die Interessen der Hamburger Hundehalterinnen und Hundehalter einzusetzen und die Steuererhöhung abzuwenden.</p>",
+    "started_by": "Martin Brügmann",
+    "category": "Soziales",
+    "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
+    "country": "DE",
+    "signatures": 117,
+    "start_date": "2026-10-11",
+    "lang": "de",
+    "campaign_id": "openpetition:nein-zur-erhoehung-der-hundesteuer-um-33-2027-in-hamburg-stopp",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-13T16:47:23+02:00",
+    "offline_since": null,
+    "tags": [
+      "Erhöhung",
+      "Hundesteuer",
+      "Euro",
+      "Bürgerschaft",
+      "Hamburger",
+      "Geplante",
+      "Hamburg",
+      "Zurückzunehmen",
+      "Hamburgische",
+      "Finanzielle"
+    ],
+    "last_checked": "2026-10-13T16:47:23+02:00"
+  },
+  "lasst-leano-an-seiner-vertrauten-foerderschule-bleiben-autistische-kinder-brauchen-stabilitaet-2": {
+    "slug": "lasst-leano-an-seiner-vertrauten-foerderschule-bleiben-autistische-kinder-brauchen-stabilitaet-2",
+    "first_seen": "2026-10-13T16:47:23+02:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-13T16:47:23+02:00",
+        "count": 115
+      }
+    ],
+    "title": "Lasst Leano an seiner vertrauten Förderschule bleiben! Autistische Kinder brauchen Stabilität!",
+    "summary": "Lasst Leano an seiner vertrauten Förderschule bleiben! Autistische Kinder brauchen Stabilität statt erzwungener Schulwechsel!",
+    "image_url": "https://www.openpetition.de/images/petition/lasst-leano-an-seiner-vertrauten-foerderschule-bleiben-autistische-kinder-brauchen-stabilitaet_1791897320_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/lasst-leano-an-seiner-vertrauten-foerderschule-bleiben-autistische-kinder-brauchen-stabilitaet-2",
+    "description_full": "<!--marker--><p>Lasst Leano an seiner vertrauten Förderschule bleiben! Autistische Kinder brauchen Stabilität statt erzwungener Schulwechsel!</p>\n<h3>Begründung</h3>\n<!--marker--><br/><p>Ich kämpfe für meinen autistischen Sohn Leano und für das Recht auf eine Schulbildung, die seine besonderen Bedürfnisse berücksichtigt.</p><p>Mein Sohn besucht eine Förderschule im Kreis Düren. Dort kennt er seine Lehrer, seine Bezugspersonen und die täglichen Abläufe.</p><p>Nun soll er nach den Herbstferien die Schule wechseln – aufgrund der Zuständigkeit des Schuleinzugsgebiets.</p><p>Für ein autistisches Kind bedeutet ein Schulwechsel jedoch weit mehr als nur ein anderes Schulgebäude. Vertraute Strukturen, Sicherheit und feste Bezugspersonen sind für seine Entwicklung von großer Bedeutung.</p><p>Ich möchte erreichen, dass mein Sohn an seiner bisherigen Schule bleiben darf und seine individuellen Bedürfnisse bei der Entscheidung angemessen berücksichtigt werden.</p><p>Ich fordere die zuständigen Behörden auf, den geplanten Schulwechsel erneut zu prüfen und eine Lösung im Sinne des Kindeswohls zu ermöglichen.</p><p>Bitte unterstützt uns mit eurer Unterschrift!</p><p>Denn jedes Kind verdient eine Schule, an der es sich sicher fühlt, verstanden wird und sich entwickeln kann.</p><p>Autismus braucht Verständnis, keine zusätzlichen Hürden! ❤️</p>",
+    "started_by": "Sandra Mack",
+    "category": "Bildung",
+    "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
+    "country": "DE",
+    "signatures": 115,
+    "start_date": "2026-10-12",
+    "lang": "de",
+    "campaign_id": "openpetition:lasst-leano-an-seiner-vertrauten-foerderschule-bleiben-autistische-kinder-brauchen-stabilitaet-2",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-13T16:47:23+02:00",
+    "offline_since": null,
+    "tags": [
+      "Förderschule",
+      "Schulwechsel",
+      "Bleiben",
+      "Seiner",
+      "Leano",
+      "Autistische",
+      "Stabilität",
+      "Vertrauten",
+      "Brauchen",
+      "Kinder"
+    ],
+    "last_checked": "2026-10-13T16:47:23+02:00"
+  },
+  "stoppt-das-neue-kibiz-rettet-die-qualitaet-in-unseren-kitas-und-schuetzt-unsere-erzieher-in": {
+    "slug": "stoppt-das-neue-kibiz-rettet-die-qualitaet-in-unseren-kitas-und-schuetzt-unsere-erzieher-in",
+    "first_seen": "2026-10-13T16:47:23+02:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-13T16:47:23+02:00",
+        "count": 52
+      }
+    ],
+    "title": "Stoppt das neue KiBiz! Rettet die Qualität in unseren Kitas und schützt unsere Erzieher:in",
+    "summary": "Warum ist das wichtig? Die Situation in unseren Kindertagesstätten ist angespannt wie nie zuvor. Statt echter Entlastung und einer nachhaltigen Stärkung der frühkindlichen Bildung bringt die geplante Überarbeitung des Kinderbildungsgesetzes (KiBiz) noch mehr Unruhe, Unsicherheit und Qualitätsverlust in den Kita-Alltag. Wir – Erzieher:innen, pädagogische Fachkräfte, Eltern und Unterstützer:innen – schlagen Alarm! 1. Angst um Arbeitsplätze und Zukunftsfähigkeit des Berufs Viele ausgebildete Fachkr",
+    "image_url": "https://www.openpetition.de/images/petition/stoppt-das-neue-kibiz-rettet-die-qualitaet-in-unseren-kitas-und-schuetzt-unsere-erzieher-in_1791886983_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/stoppt-das-neue-kibiz-rettet-die-qualitaet-in-unseren-kitas-und-schuetzt-unsere-erzieher-in",
+    "description_full": "<!--marker--><p>Warum ist das wichtig?</p><p>Die Situation in unseren Kindertagesstätten ist angespannt wie nie zuvor. Statt echter Entlastung und einer nachhaltigen Stärkung der frühkindlichen Bildung bringt die geplante Überarbeitung des Kinderbildungsgesetzes (KiBiz) noch mehr Unruhe, Unsicherheit und Qualitätsverlust in den Kita-Alltag.</p><p>Wir – Erzieher:innen, pädagogische Fachkräfte, Eltern und Unterstützer:innen – schlagen Alarm!</p><p><b>1. Angst um Arbeitsplätze und Zukunftsfähigkeit des Berufs</b><br/>Viele ausgebildete Fachkräfte haben durch die neuen gesetzlichen Rahmenbedingungen und drohenden Kürzungen oder Umstrukturierungen konkrete Zukunftsängste und Angst um ihre Jobs. Anstatt den Beruf attraktiver zu machen, um dem Fachkräftemangel entgegenzuwirken, wird der Druck auf das vorhandene Personal weiter erhöht. Das führt zu Frust, Burnout und schlussendlich dazu, dass noch mehr wertvolle Fachkräfte dem Beruf den Rücken kehren.</p><p><b>2. Qualitätsverlust durch den Einsatz ungelernter Kräfte in Schlüsselzeiten</b><br/>Es soll vermehrt auf Ergänzungs- und Hilfskräfte gesetzt werden, um Personallücken zu stopfen. So wichtig Unterstützung im Alltag ist: Ungelernte Kräfte können und dürfen fachlich ausgebildete Erzieher:innen nicht ersetzen!<br/>Besonders in den sogenannten Randzeiten (früh morgens und späten Nachmittags) ist diese Entwicklung verheerend. Diese Zeiten dürfen nicht als „Ablagezeiten“ entwertet werden.</p><p><b>3. Vernachlässigung der Beziehungsarbeit – Gerade morgens und nachmittags</b><br/>Gerade der frühe Morgen und der Nachmittag sind für die Entwicklung der Kinder von zentraler Bedeutung:<br/>Der Morgen: Hier findet das Ankommen statt. Kinder brauchen vertraute Bezugspersonen, um Trennungsschmerz zu bewältigen, Sicherheit zu gewinnen und gut in den Tag zu starten.<br/>Der Nachmittag: Hier wird der Tag verarbeitet, Vertrauen vertieft und ruhige, intensive Beziehungsarbeit geleistet.<br/>Wenn in genau diesen Phasen qualifiziertes Personal fehlt und durch nicht ausgebildete Kräfte ersetzt wird, geht das Kernstück unserer pädagogischen Arbeit verloren: eine verlässliche, professionelle Bindung.</p><p><b>4. Ein Teufelskreis aus Unzufriedenheit bei Personal und Eltern</b><br/>Die Leidtragenden sind am Ende alle: Die Erzieher:innen, die unter Dauerbelastung stehen, ihren eigenen pädagogischen Ansprüchen nicht mehr gerecht werden können und völlig überfordert werden. Die Eltern, die sich Sorgen um das Wohl ihrer Kinder machen, mit kürzeren Öffnungszeiten kämpfen müssen und das Vertrauen in die Verlässlichkeit der Betreuung verlieren. Die Kinder, die das wichtigste Fundament für ihre Entwicklung verlieren: Zeit, Qualität und verlässliche Bezugspersonen.</p><p><b>Unsere Forderungen an die Landespolitik:</b></p><ul><li>Keine Abstriche bei der Qualität: Echte Mindeststandards bei Fachkräften garantieren – kein Ersetzen von ausgebildeten Erzieher:innen durch Hilfskräfte in der Kern- und Beziehungsarbeit.</li><li>Sicherung von Beziehungszeit: Genügend Fachpersonal für die Randzeiten am Morgen und Nachmittag bereitstellen.</li><li>Arbeitsplatz- und Wertschätzungssicherung: Bessere Arbeitsbedingungen schaffen, um Fachkräfte zu halten und Zukunftsängste abzubauen, statt den Druck zu erhöhen.</li><li>Ausreichende und verlässliche Finanzierung: Eine auskömmliche KiBiz-Finanzierung, die den Kitas Planungssicherheit gibt und die Belastung von den Schultern des Personals nimmt.</li></ul><br/><p><b>Setzt ein Zeichen für unsere Kinder, für die Qualität in den Kitas und für den Schutz der Erzieher:innen! Unterschreibt diese Petition!</b></p>\n<h3>Begründung</h3>\n<!--marker--><p>Als Erzieherin erlebe ich täglich, wie sehr die Qualität unserer Arbeit unter den schlechten Rahmenbedingungen leidet. Das neue KiBiz macht den Arbeitsalltag noch schwerer und schadet letztlich unseren Kindern, weshalb mir diese Petition ein großes persönliches Anliegen ist.</p>",
+    "started_by": "Janette Rauter",
+    "category": "Bildung",
+    "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
+    "country": "DE",
+    "signatures": 52,
+    "start_date": "2026-10-11",
+    "lang": "de",
+    "campaign_id": "openpetition:stoppt-das-neue-kibiz-rettet-die-qualitaet-in-unseren-kitas-und-schuetzt-unsere-erzieher-in",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-13T16:47:23+02:00",
+    "offline_since": null,
+    "tags": [
+      "Innen",
+      "Erzieher",
+      "Fachkräfte",
+      "Qualität",
+      "Kinder",
+      "Ausgebildete",
+      "Unseren",
+      "Eltern",
+      "KiBiz",
+      "Beziehungsarbeit"
+    ],
+    "last_checked": "2026-10-13T16:47:23+02:00"
+  },
+  "tempo-30-auf-der-alten-braunschweiger-strasse-in-flechtorf-fuer-sichere-schulwege": {
+    "slug": "tempo-30-auf-der-alten-braunschweiger-strasse-in-flechtorf-fuer-sichere-schulwege",
+    "first_seen": "2026-10-13T16:47:23+02:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-13T16:47:23+02:00",
+        "count": 43
+      }
+    ],
+    "title": "Tempo 30 auf der Alten Braunschweiger Straße in Flechtorf – für sichere Schulwege!",
+    "summary": "Wir fordern die Gemeinde Lehre und die zuständigen Verkehrsbehörden auf, eine Geschwindigkeitsbegrenzung während der Schulzeiten auf 30 kmh im Bereich der Alten Braunschweiger Straße in Flechtorf zu prüfen und umzusetzen.",
+    "image_url": "https://www.openpetition.de/images/petition/tempo-30-auf-der-alten-braunschweiger-strasse-in-flechtorf-fuer-sichere-schulwege_1791785598_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/tempo-30-auf-der-alten-braunschweiger-strasse-in-flechtorf-fuer-sichere-schulwege",
+    "description_full": "<!--marker--><p>Wir fordern die Gemeinde Lehre und die zuständigen Verkehrsbehörden auf, eine Geschwindigkeitsbegrenzung während der Schulzeiten auf 30 kmh im Bereich der Alten Braunschweiger Straße in Flechtorf zu prüfen und umzusetzen.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Kinder müssen ihren Schulweg sicher zu Fuß oder mit dem Fahrrad zurücklegen können. Eine Geschwindigkeitsbegrenzung auf 30 km/h kann dazu beitragen, das Unfallrisiko zu senken und die Folgen möglicher Unfälle zu verringern.</p><p>Durch den <b>Ausbau der Flechtorfer Mühle</b> ist zudem eine Zunahme des Lkw-Verkehrs zu erwarten beziehungsweise zu prüfen. Mehr Schwerlastverkehr kann zusätzliche Gefahren mit sich bringen – insbesondere dort, wo Kinder unterwegs sind.<br/>Die Erfahrungen mit <b>Tempo-30-Regelungen in Lehre </b>könnten als<b> Vorbild</b> dienen, um auch für Flechtorf eine geeignete Lösung zu finden.</p><p>Was wir erreichen möchten:</p><ul><li>Tempo 30 im Bereich des Schulwegs auf der Alten Braunschweiger Straße.</li><li>Eine Prüfung der Verkehrssituation unter Berücksichtigung des zunehmenden Lkw-Verkehrs.</li><li>Mehr Sicherheit für Kinder, Eltern und alle anderen Verkehrsteilnehmenden.</li></ul><br/><p><b>Wir möchten handeln, bevor etwas passiert.</b></p><p>Die Sicherheit unserer Kinder sollte Vorrang haben. Deshalb bitten wir die Verantwortlichen, sich für eine sichere und kindgerechte Verkehrsführung in Flechtorf einzusetzen.</p><p><b>Bitte unterstützen Sie diese Petition mit Ihrer Unterschrift!</b></p>",
+    "started_by": "Ivo Meier",
+    "category": "Verkehr",
+    "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
+    "country": "DE",
+    "signatures": 43,
+    "start_date": "2026-10-11",
+    "lang": "de",
+    "campaign_id": "openpetition:tempo-30-auf-der-alten-braunschweiger-strasse-in-flechtorf-fuer-sichere-schulwege",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-13T16:47:23+02:00",
+    "offline_since": null,
+    "tags": [
+      "Flechtorf",
+      "Braunschweiger",
+      "Kinder",
+      "Straße",
+      "Alten",
+      "Bereich",
+      "Prüfen",
+      "Lehre",
+      "Tempo",
+      "Verkehrsbehörden"
+    ],
+    "last_checked": "2026-10-13T16:47:23+02:00"
+  },
+  "lasst-harry-den-busfahrer-wieder-singen-hamburg-braucht-seine-originale": {
+    "slug": "lasst-harry-den-busfahrer-wieder-singen-hamburg-braucht-seine-originale",
+    "first_seen": "2026-10-13T16:47:23+02:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-13T16:47:23+02:00",
+        "count": 29
+      }
+    ],
+    "title": "🎶 Lasst Harry den Busfahrer wieder singen – Hamburg braucht seine Originale! ❤️",
+    "summary": "Manchmal braucht es nicht viel, um einem Menschen den Tag zu verschönern. Ein freundliches Lächeln. Ein herzliches Wort. Oder ein Lied, das uns für einen kurzen Moment die Sorgen des Alltags vergessen lässt. Seit Jahrzehnten sorgt Busfahrer Harry Willhöft auf Hamburgs Straßen für genau solche Momente. Mit seinen Schlagern, seinem Humor und seiner unverwechselbaren Herzlichkeit hat er sich einen besonderen Platz in den Herzen vieler Menschen erobert. Harry ist längst mehr als nur ein Busfahrer. E",
+    "image_url": "https://www.openpetition.de/images/petition/lasst-harry-den-busfahrer-wieder-singen-hamburg-braucht-seine-originale_1791811883_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/lasst-harry-den-busfahrer-wieder-singen-hamburg-braucht-seine-originale",
+    "description_full": "<!--marker--><p>Manchmal braucht es nicht viel, um einem Menschen den Tag zu verschönern.<br/>Ein freundliches Lächeln. Ein herzliches Wort. Oder ein Lied, das uns für einen kurzen Moment die Sorgen des Alltags vergessen lässt.<br/>Seit Jahrzehnten sorgt Busfahrer Harry Willhöft auf Hamburgs Straßen für genau solche Momente.<br/>Mit seinen Schlagern, seinem Humor und seiner unverwechselbaren Herzlichkeit hat er sich einen besonderen Platz in den Herzen vieler Menschen erobert.<br/>Harry ist längst mehr als nur ein Busfahrer. Er ist ein Hamburger Original mit Kultstatus.</p><p>Ein Mensch, der zeigt, dass selbst eine alltägliche Busfahrt zu etwas Besonderem werden kann.<br/>Doch inzwischen ist es still geworden in Harrys Bus.<br/>Die Hamburger Hochbahn hat ihm das Singen während seiner Dienstzeit untersagt.<br/>Damit ist etwas verstummt, das über viele Jahre nicht nur Harrys Arbeitsalltag geprägt, sondern auch unzähligen Fahrgästen Freude bereitet hat.</p><p>❤️ Wenn die Freude am Beruf ausgebremst wird</p><p>Busfahrer zu sein, ist kein leichter Beruf.<br/>Tag für Tag tragen Fahrerinnen und Fahrer Verantwortung für zahlreiche Menschen. Sie müssen sich im dichten Stadtverkehr konzentrieren, Fahrpläne einhalten und unterschiedlichsten Situationen und Menschen gerecht werden.<br/>Nicht jeder Arbeitstag ist einfach. Nicht jeder Morgen beginnt mit einem Lächeln.<br/>Umso bemerkenswerter ist es, wenn jemand seinen Beruf über Jahrzehnte mit so viel sichtbarer Begeisterung, Humor und Lebensfreude ausübt wie Harry.<br/>Er bringt nicht nur seine Fahrgäste von A nach B. Er bringt für viele Menschen auch ein kleines Stück Lebensfreude in ihren Alltag.<br/>Wie wertvoll ist ein Mitarbeiter, der seinen Beruf nicht einfach nur ausübt, sondern ihn mit so viel Herz und Persönlichkeit erfüllt?<br/>Und wie muss es sich für einen solchen Menschen anfühlen, wenn ausgerechnet das, wofür er über Jahre bekannt und geschätzt wurde, plötzlich nicht mehr erlaubt ist?<br/>Wer Harry erlebt, spürt, dass es bei seinem Gesang um weit mehr geht als um Musik.<br/>Es geht um Begeisterung, um Herzlichkeit und um die Freude daran, anderen Menschen ein Lächeln zu schenken.<br/>Diese Lebensfreude ist etwas Besonderes. Und sie verdient es, bewahrt zu werden.</p><p>❤️ Geben wir der Lebensfreude eine Stimme<br/>Viele Menschen verbinden mit Harrys Gesang schöne Momente und ein Stück Hamburger Lebensgefühl.</p><p>Doch nicht jeder Mensch, der durch Harrys Gesang ein Lächeln geschenkt bekommt, schreibt anschließend eine E-Mail.<br/>Nicht jeder Fahrgast, dessen Tag ein bisschen schöner geworden ist, meldet sich bei der Hochbahn.<br/>Und nicht jeder, der Harrys besondere Art schätzt, hatte bisher Gelegenheit, seine Wertschätzung zum Ausdruck zu bringen.<br/>Mit dieser Petition möchten wir genau diesen Menschen eine Stimme geben.<br/>Wir möchten sichtbar machen, wie viel Freude ein einzelner Mensch mit seiner positiven Art verbreiten kann.<br/>Denn es sind nicht allein die Lieder, die Harry besonders machen.<br/>Es ist seine ansteckende Lebensfreude, die aus einer gewöhnlichen Busfahrt für viele Menschen einen besonderen Moment macht.</p><p>❤️ Ein Hamburger Original, das Wertschätzung verdient</p><p>Hamburg ist eine Stadt mit Charakter.<br/>Eine Stadt, die von ihren Menschen lebt. Von ihrer Offenheit, ihrem Humor und ihren unverwechselbaren Originalen.<br/>Harry gehört für viele Menschen genau dazu.<br/>Mit seiner fröhlichen Art hat er sich über die Jahre einen besonderen Bekanntheitsgrad erarbeitet und ist für zahlreiche Menschen zu einem sympathischen Gesicht der Hamburger Hochbahn geworden.<br/>Harry ist ein Hamburger Original mit Kultstatus und solche Menschen machen unsere Stadt besonders.</p><p>Gerade in Zeiten, in denen vielerorts über Fachkräftemangel, Arbeitsbelastung und fehlende Motivation gesprochen wird, sollten Menschen, die ihren Beruf mit so viel Begeisterung ausüben, besondere Anerkennung erfahren.<br/>Denn es ist alles andere als selbstverständlich, dass jemand auch nach Jahrzehnten im Beruf noch so viel Freude und Herzlichkeit ausstrahlt.<br/>Echte Herzlichkeit lässt sich nicht vorschreiben. Aber man kann ihr Raum geben.</p><p>Harry zeigt uns, dass Freude am Beruf weit mehr sein kann als persönliche Zufriedenheit.<br/>Sie kann ansteckend sein, andere Menschen berühren und selbst einen gewöhnlichen Arbeitstag ein kleines bisschen heller machen.<br/>Und genau diese Lebensfreude ist es, die Harry für so viele Menschen unvergesslich macht.</p>\n<h3>Begründung</h3>\n<!--marker--><p>❤️ Unsere Bitte an die Hamburger Hochbahn</p><p>Liebe Verantwortliche der Hamburger Hochbahn,<br/>mit dieser Petition möchten wir Sie von Herzen bitten, Ihre Entscheidung im Fall von Harry Willhöft noch einmal zu überdenken.<br/>Wir fordern die Hamburger Hochbahn AG auf, das Gesangsverbot für Harry Willhöft aufzuheben und ihm zu erlauben, während seiner Arbeit wieder zu singen.</p><p>Mit unserer Unterschrift unterstützen wir die Forderung, das Gesangsverbot für Harry Willhöft aufzuheben, damit er seine Lebensfreude auch weiterhin singend mit seinen Fahrgästen teilen darf.</p>",
+    "started_by": "Melanie Melanie",
+    "category": "Kultur",
+    "category_url": "https://www.openpetition.de/petitionen?category=25#petitionen",
+    "country": "DE",
+    "signatures": 29,
+    "goal": 1000,
+    "start_date": "2026-10-12",
+    "lang": "de",
+    "campaign_id": "openpetition:lasst-harry-den-busfahrer-wieder-singen-hamburg-braucht-seine-originale",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-13T16:47:23+02:00",
+    "offline_since": null,
+    "tags": [
+      "Harry",
+      "Hamburger",
+      "Lebensfreude",
+      "Beruf",
+      "Busfahrer",
+      "Hochbahn",
+      "Freude",
+      "Seiner",
+      "Herzlichkeit",
+      "Willhöft"
+    ],
+    "last_checked": "2026-10-13T16:47:23+02:00"
+  },
+  "rettet-die-spaetis-in-schwerin": {
+    "slug": "rettet-die-spaetis-in-schwerin",
+    "first_seen": "2026-10-13T16:47:23+02:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-13T16:47:23+02:00",
+        "count": 27
+      }
+    ],
+    "title": "Rettet die Spätis in Schwerin",
+    "summary": "Wir fordern die Stadt Schwerin und das Land Mecklenburg-Vorpommern auf, eine Lösung zu finden, damit Spätis auch sonntags länger und möglichst ganzjährig öffnen dürfen. Nach der aktuellen Öffnungszeitenverordnung dürfen Spätis vom 15. März bis 31. Oktober und vom 17. Dezember bis 8. Januar sonntags nur maximal sechs Stunden bis spätestens 19 Uhr öffnen. In der übrigen Zeit müssen sie sonntags grundsätzlich geschlossen bleiben. Wir möchten, dass diese Regelung für Spätis überprüft und eine passen",
+    "image_url": "https://www.openpetition.de/images/petition/spaetikultur-schwerin_1791743736_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/rettet-die-spaetis-in-schwerin",
+    "description_full": "<!--marker--><p>Wir fordern die Stadt Schwerin und das Land Mecklenburg-Vorpommern auf, eine Lösung zu finden, damit Spätis auch sonntags länger und möglichst ganzjährig öffnen dürfen.</p><p>Nach der aktuellen Öffnungszeitenverordnung dürfen Spätis vom 15. März bis 31. Oktober und vom 17. Dezember bis 8. Januar sonntags nur maximal sechs Stunden bis spätestens 19 Uhr öffnen. In der übrigen Zeit müssen sie sonntags grundsätzlich geschlossen bleiben.</p><p>Wir möchten, dass diese Regelung für Spätis überprüft und eine passende Ausnahme geschaffen wird.</p>\n<h3>Begründung</h3>\n<!--marker--><p>In den letzten Jahren hat sich in Schwerin eine richtige Späti-Kultur entwickelt. Die kleinen Läden gehören mittlerweile zum Stadtleben dazu und sind gerade abends und sonntags für viele Menschen wichtig.</p><p>Spätis verkaufen nicht nur Getränke und Tabakwaren, sondern auch Lebensmittel wie Milch, Eier und Brot sowie Hygieneartikel, darunter auch Menstruationsprodukte. Dinge, die man manchmal dringend braucht, wenn normale Supermärkte längst geschlossen haben.</p><p>Bisher konnten viele Spätis ihre Kunden auch sonntags versorgen. Genau das macht einen Späti aus: Er ist da, wenn andere Geschäfte geschlossen haben.</p><p>Für manche Betreiber ist der Sonntag außerdem einer der wichtigsten Tage der Woche. Wenn diese Einnahmen wegfallen, kann das ihre Existenz gefährden.</p><p><b>Wir wollen nicht, dass die Späti-Kultur in Schwerin verschwindet, bevor sie sich richtig entwickeln konnte.</b></p><p><b>Rettet unsere Spätis!</b></p>",
+    "started_by": "Felix Bendel",
+    "category": "Soziales",
+    "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
+    "country": "DE",
+    "signatures": 27,
+    "start_date": "2026-10-11",
+    "lang": "de",
+    "campaign_id": "openpetition:rettet-die-spaetis-in-schwerin",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-13T16:47:23+02:00",
+    "offline_since": null,
+    "tags": [
+      "Spätis",
+      "Sonntags",
+      "Schwerin",
+      "Geschlossen",
+      "Dürfen",
+      "Öffnen",
+      "Öffnungszeitenverordnung",
+      "Mecklenburg-Vorpommern",
+      "Grundsätzlich",
+      "Späti-Kultur"
+    ],
+    "last_checked": "2026-10-13T16:47:23+02:00"
+  },
+  "nachbarschafts-schutzkonzept-fuer-die-wohngebiete-am-areal-boehler-sichere-strassen-fuer-unsere-kind": {
+    "slug": "nachbarschafts-schutzkonzept-fuer-die-wohngebiete-am-areal-boehler-sichere-strassen-fuer-unsere-kind",
+    "first_seen": "2026-10-13T16:47:23+02:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-13T16:47:23+02:00",
+        "count": 20
+      }
+    ],
+    "title": "Nachbarschafts-Schutzkonzept für die Wohngebiete am Areal Böhler – sichere Straßen für unsere Kinder",
+    "summary": "Wir fordern die Stadt Meerbusch auf, gemeinsam mit der Nachbarschaft „Unter der Mühle“ ein verbindliches Nachbarschafts-Schutzkonzept für die Wohngebiete am Areal Böhler zu entwickeln. Dazu gehören: 1. Poller zwischen Ruth-Niehaus-Straße und Böhlerstraße an Messetagen, damit unser Wohngebiet nicht als Zufahrt oder Abkürzung zum Areal dient. 2. Deutliche Beschilderung des Parkkonzepts: Wegweiser zu den Parkplätzen auf dem Areal, zum Parkhaus BÖ69 und zum Shuttle-Parkplatz Strandbad Lörick – so wi",
+    "image_url": "https://www.openpetition.de/images/petition/nachbarschafts-schutzkonzept-fuer-die-wohngebiete-am-areal-boehler-sichere-strassen-fuer-unsere-kind_1791632078_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/nachbarschafts-schutzkonzept-fuer-die-wohngebiete-am-areal-boehler-sichere-strassen-fuer-unsere-kind",
+    "description_full": "<!--marker--><p><b>Wir fordern die Stadt Meerbusch auf, gemeinsam mit der Nachbarschaft „Unter der Mühle“ ein verbindliches Nachbarschafts-Schutzkonzept für die Wohngebiete am Areal Böhler zu entwickeln.</b></p><p>Dazu gehören:<br/></p><ol><li><b>Poller zwischen Ruth-Niehaus-Straße und Böhlerstraße an Messetagen</b>, damit unser Wohngebiet nicht als Zufahrt oder Abkürzung zum Areal dient.</li><li><b>Deutliche Beschilderung des Parkkonzepts: </b>Wegweiser zu den Parkplätzen auf dem Areal, zum Parkhaus BÖ69 und zum Shuttle-Parkplatz Strandbad Lörick – so wie der Veranstalter es online bereits ausweist.</li><li><b>Umgestaltung der Ruth-Niehaus-Straße,</b> damit sie als Wohnstraße erkennbar ist.</li><li><b>Öffentliche Begehung mit Anwohnern, Stadt, Polizei und Betreiber, </b>um die Maßnahmen gemeinsam festzulegen – nach dem Vorbild der Stockumer Kirchstraße in Düsseldorf.</li><li><b>Beteiligung der Anwohner am Verkehrskonzept für den Schulneubau –</b> wir bringen unsere Ortskenntnis gern ein.</li></ol><br/><p>Diese Petition ist zugleich eine Anregung nach § 24 GO NRW; wir bitten um Beratung im zuständigen Gremium und um Mitteilung des Ergebnisses.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Wir schätzen das Areal Böhler und die Kultur und Urbanität, die es in unsere Nachbarschaft bringt. Bei Großveranstaltungen leidet unser Wohngebiet jedoch unter Parksuchverkehr und zu schnell fahrenden Autos – und mit dem geplanten Schulneubau wird der Verkehr weiter zunehmen.</p><p><b>Sachverhalt:</b></p><ul><li>Bei Messen und Großveranstaltungen suchen Besucher Parkplätze in unseren Wohnstraßen und fahren viel zu schnell.</li><li>Vor Ort fehlt eine Ausschilderung zu den Parkmöglichkeiten, die der Veranstalter auf seinen Internetseiten nennt (Parkplätze auf dem Areal, Parkhaus BÖ69, Shuttle ab Strandbad Lörick).</li><li>Unter der Mühle ist Spielstraße, wird aber als Durchfahrt und Parkplatz genutzt.</li><li>Die Ruth-Niehaus-Straße (Tempo 10) ist breit und gerade und wirkt wie eine Durchgangsstraße zur Böhlerstraße – das Tempolimit hält kaum jemand ein.</li><li>Der geplante Schulneubau bringt zusätzlichen Hol- und Bringverkehr in dieselben Straßen.</li></ul><br/><p><b>Begründung:</b><br/>Auf unseren Straßen spielen viele Kinder – wir haben Angst vor einem Unfall. Selbst schützen können wir uns nicht: Absperrungen oder auf die Straße gestellte Autos wären ein unzulässiger Eingriff in den Verkehr. Deshalb ist die Stadt gefordert – und wir wirken gern mit, denn wir kennen die Situation vor Ort jeden Tag. Wir wollen kein Gegeneinander, sondern ein gutes Miteinander von Areal und Nachbarschaft.</p><p>Quellen:<br/>• Wikipedia – Areal Böhler<br/>• <a href=\"https://areal-boehler.de/besuch\" rel=\"noopener\" target=\"_blank\">Areal Böhler – Besuch &amp; Anfahrt</a><br/>• <a href=\"https://www.art-dus.de/de/besuch\" rel=\"noopener\" target=\"_blank\">Art Düsseldorf – Visit (Parken BÖ69, Shuttle Strandbad Lörick)</a><br/>• <a href=\"https://www.tradefairdates.com/Fairground-Areal-Boehler-Meerbusch-ZS8879.html\" rel=\"noopener\" target=\"_blank\">tradefairdates – Messen im Areal Böhler</a><br/>• <a href=\"https://www.instaff.jobs/messen/2026/duesseldorf\" rel=\"noopener\" target=\"_blank\">InStaff – Messen Düsseldorf 2026</a></p>",
+    "started_by": "Nachbarschaft „Unter der Mühle/Ruth Niehaus Strasse“, Meerbusch-Büderich",
+    "category": "Verkehr",
+    "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
+    "country": "DE",
+    "signatures": 20,
+    "start_date": "2026-10-10",
+    "lang": "de",
+    "campaign_id": "openpetition:nachbarschafts-schutzkonzept-fuer-die-wohngebiete-am-areal-boehler-sichere-strassen-fuer-unsere-kind",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-13T16:47:23+02:00",
+    "offline_since": null,
+    "tags": [
+      "Areal",
+      "Böhler",
+      "Nachbarschaft",
+      "Strandbad",
+      "Lörick",
+      "Stadt",
+      "Böhlerstraße",
+      "Schulneubau",
+      "Wohngebiete",
+      "Düsseldorf"
+    ],
+    "last_checked": "2026-10-13T16:47:23+02:00"
+  },
+  "zukunft-auf-die-schiene-rettet-die-gelstertalbahn-vor-dem-endgueltigen-aus": {
+    "slug": "zukunft-auf-die-schiene-rettet-die-gelstertalbahn-vor-dem-endgueltigen-aus",
+    "first_seen": "2026-10-13T16:47:23+02:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-13T16:47:23+02:00",
+        "count": 20
+      }
+    ],
+    "title": "Zukunft auf die Schiene: Rettet die Gelstertalbahn vor dem endgültigen Aus!",
+    "summary": "Wir fordern von Frau Landrätin Nicole Rathgeber und den Fraktionsvorsitzenden des Werra-Meißner-Kreises: 1. Ein sofortiges Moratorium für den geplanten Rückbau der Netzanbindung (Weiche W16) durch die DB InfraGO. 2. Die Übernahme einer überparteilichen, kostenfreien Schirmherrschaft zur Trassensicherung. 3. Die Nutzung der rechtlichen Atempause des beim Eisenbahn-Bundesamt (EBA) anhängigen Eilantrags (Az. 551ppo/155-2025#009), um eine moderne Reaktivierung für Pendler, Güter und Tourismus fair z",
+    "image_url": "https://www.openpetition.de/images/petition/zukunft-auf-die-schiene-rettet-die-gelstertalbahn-vor-dem-endgueltigen-aus_1791813613_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/zukunft-auf-die-schiene-rettet-die-gelstertalbahn-vor-dem-endgueltigen-aus",
+    "description_full": "<!--marker--><p>Wir fordern von Frau Landrätin Nicole Rathgeber und den Fraktionsvorsitzenden des Werra-Meißner-Kreises:</p><ol><li>Ein sofortiges Moratorium für den geplanten Rückbau der Netzanbindung (Weiche W16) durch die DB InfraGO.</li><li>Die Übernahme einer überparteilichen, kostenfreien Schirmherrschaft zur Trassensicherung.</li><li>Die Nutzung der rechtlichen Atempause des beim Eisenbahn-Bundesamt (EBA) anhängigen Eilantrags (Az. 551ppo/155-2025#009), um eine moderne Reaktivierung für Pendler, Güter und Tourismus fair zu prüfen.</li></ol>\n<h3>Begründung</h3>\n<!--marker--><p>Die Schieneninfrastruktur der Gelstertalbahn steht vor der unumkehrbaren Vernichtung. Wird die Weiche W16 ausgebaut, verliert die Region für immer ihre Netzanbindung. Wir befürchten, dass ein späterer Wiedereinbau den Steuerzahler mehrere Hunderttausend Euro kosten wird.</p><p>Es geht ausdrücklich nicht um finanzielle Forderungen an den Kreis, sondern um kostenfreie politische Schadensbegrenzung und wertvollen Zeitgewinn. Schienenwege sind die Lebensadern der Zukunft. Wer Schienen abreißt, hängt den ländlichen Raum ab. Eine reaktivierte Bahn bietet Pendlern, Familien und der Jugend eine sichere, umweltfreundliche Alternative zum Auto und erschließt der Region wichtige Zukunftschancen mit dem Deutschlandticket.</p><p><b>Quellen &amp; Aktenzeichen:</b><br/>Parallel läuft dazu ein offizieller Eilantrag beim Eisenbahn-Bundesamt (EBA) unter dem Aktenzeichen: Az. 551ppo/155-2025#009.</p>",
+    "started_by": "Stefan Bauer",
+    "category": "Verkehr",
+    "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
+    "country": "DE",
+    "signatures": 20,
+    "start_date": "2026-10-11",
+    "lang": "de",
+    "campaign_id": "openpetition:zukunft-auf-die-schiene-rettet-die-gelstertalbahn-vor-dem-endgueltigen-aus",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-13T16:47:23+02:00",
+    "offline_since": null,
+    "tags": [
+      "Eisenbahn-Bundesamt",
+      "Netzanbindung",
+      "Weiche",
+      "Fraktionsvorsitzenden",
+      "Schirmherrschaft",
+      "Trassensicherung",
+      "Überparteilichen",
+      "Gelstertalbahn",
+      "Reaktivierung",
+      "Aktenzeichen"
+    ],
+    "last_checked": "2026-10-13T16:47:23+02:00"
+  },
+  "selbstschutz-bei-bahnreisen-als-berechtigtes-interesse-anerkennen": {
+    "slug": "selbstschutz-bei-bahnreisen-als-berechtigtes-interesse-anerkennen",
+    "first_seen": "2026-10-13T16:47:23+02:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-13T16:47:23+02:00",
+        "count": 9
+      }
+    ],
+    "title": "Selbstschutz bei Bahnreisen als berechtigtes Interesse anerkennen",
+    "summary": "Ich fordere, dass der persönliche Selbstschutz für die weitere Reise ausdrücklich als berechtigtes Interesse für den gesicherten Transport legal mitführbarer Selbstschutzmittel durch Waffen- und Mitführverbotsbereiche der Bundespolizei anerkannt wird. Reisende sollen solche Gegenstände während des Aufenthalts im Verbotsbereich in einem geschlossenen und gesicherten Behältnis transportieren dürfen, wenn sie diese erst nach Verlassen des Verbotsbereichs für den weiteren Reiseweg mitführen wollen.",
+    "image_url": "https://www.openpetition.de/images/petition/selbstschutz-bei-bahnreisen-als-berechtigtes-interesse-anerkennen_1791803713_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/selbstschutz-bei-bahnreisen-als-berechtigtes-interesse-anerkennen",
+    "description_full": "<!--marker--><p><b>Ich fordere, dass der persönliche Selbstschutz für die weitere Reise ausdrücklich als berechtigtes Interesse für den gesicherten Transport legal mitführbarer Selbstschutzmittel durch Waffen- und Mitführverbotsbereiche der Bundespolizei anerkannt wird.</b></p><p>Reisende sollen solche Gegenstände während des Aufenthalts im Verbotsbereich in einem geschlossenen und gesicherten Behältnis transportieren dürfen, wenn sie diese erst nach Verlassen des Verbotsbereichs für den weiteren Reiseweg mitführen wollen.</p><p>Diese Regelung soll für alle außerhalb des jeweiligen Verbotsbereichs rechtmäßig mitführbaren Selbstschutzmittel gelten und nicht ausschließlich auf Pfeffer- oder Tierabwehrspray beschränkt sein.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Waffen- und Mitführverbote an großen Bahnhöfen verfolgen ein nachvollziehbares Sicherheitsziel. Gleichzeitig darf eine solche Regelung nicht dazu führen, dass Reisende für den weiteren Reiseweg faktisch auf legale Möglichkeiten des persönlichen Selbstschutzes verzichten müssen.</p><p>Die bestehenden Regelungen sehen zwar bereits vor, dass bestimmte Gegenstände bei glaubhaft gemachter Berechtigung in einem geschlossenen und gesicherten Behältnis transportiert werden dürfen. <b>Nicht eindeutig geregelt ist jedoch, ob das persönliche Bedürfnis nach Selbstschutz für die anschließende Weiterreise einer Privatperson als solche Berechtigung anerkannt wird. </b>Genau hier besteht Klärungsbedarf.</p><p>Viele Bahnreisen führen über große Hauptbahnhöfe mit hoher Polizei- und Sicherheitspräsenz zu kleineren oder nachts unbesetzten Bahnhöfen. Gerade dort und auf dem anschließenden Heimweg kann die persönliche Sicherheit eine wesentlich größere Rolle spielen als während des Aufenthalts im stark überwachten Hauptbahnhof.</p><p>Besonders für Frauen kann dies von Bedeutung sein, wenn sie sich einer körperlichen Auseinandersetzung mit einem körperlich überlegenen Angreifer nicht gewachsen sehen. Die geforderte Regelung soll dennoch für alle Reisenden gelten.</p><p>Dabei sollte die Anerkennung des Selbstschutzinteresses nicht ausschließlich auf Pfeffer- oder Tierabwehrspray beschränkt werden. Nicht jedes Selbstschutzmittel ist für jeden Menschen gleichermaßen geeignet. Manche Menschen möchten beispielsweise kein Reizstoffspray verwenden, weil sie eine Eigengefährdung durch Wind, Fehlanwendung oder die Wirkung in geschlossenen Räumen befürchten. Deshalb sollten auch andere außerhalb des jeweiligen Verbotsbereichs rechtmäßig mitführbare Selbstschutzmittel erfasst werden. Dazu können beispielsweise klassische Kubotans gehören, soweit die konkrete Bauform nach geltendem Recht außerhalb des Verbotsbereichs geführt werden darf.</p><p>Gefordert wird ausdrücklich nicht, solche Gegenstände innerhalb eines Waffen- oder Mitführverbotsbereichs griffbereit tragen zu dürfen. Sie sollen dort weiterhin geschlossen und gesichert transportiert werden.</p><p>Es geht um eine eindeutige Regelung, die das Sicherheitsinteresse innerhalb des Bahnhofs mit dem legitimen Interesse an persönlichem Selbstschutz nach Verlassen des Verbotsbereichs vereinbart.</p><p><b>Sicherheit darf nicht am Ausgang eines gut überwachten Hauptbahnhofs enden.</b></p>",
+    "started_by": "Katja Hellmeier",
+    "category": "Sicherheit",
+    "category_url": "https://www.openpetition.de/petitionen?category=55#petitionen",
+    "country": "DE",
+    "signatures": 9,
+    "start_date": "2026-10-12",
+    "lang": "de",
+    "campaign_id": "openpetition:selbstschutz-bei-bahnreisen-als-berechtigtes-interesse-anerkennen",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-13T16:47:23+02:00",
+    "offline_since": null,
+    "tags": [
+      "Verbotsbereichs",
+      "Selbstschutzmittel",
+      "Selbstschutz",
+      "Gesicherten",
+      "Solche",
+      "Geschlossenen",
+      "Gegenstände",
+      "Persönliche",
+      "Interesse",
+      "Regelung"
+    ],
+    "last_checked": "2026-10-13T16:47:23+02:00"
+  },
+  "rettet-die-kinder-fruehneuro-reha-bundesweite-finanzierung-fuer-rekiz-spezialstationen-sichern": {
+    "slug": "rettet-die-kinder-fruehneuro-reha-bundesweite-finanzierung-fuer-rekiz-spezialstationen-sichern",
+    "first_seen": "2026-10-13T16:47:23+02:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-13T16:47:23+02:00",
+        "count": 1489
+      }
+    ],
+    "title": "Rettet die Kinder-Frühneuro-Reha: Bundesweite Finanzierung für reKIZ & Spezialstationen sichern!",
+    "summary": "Das reKIZ am Salzburger Landeskrankenhaus ist eine von nur zwei Stationen in Österreich, die schutzbedürftige Kinder nach Unfällen, Erkrankungen oder Koma per hochspezialisierter Früh-Neurorehabilitation versorgen. Da für diese kritische Phase zwischen Intensivstation und Heimatort keine gesetzliche Regelfinanzierung existiert, droht der Station durch regionalen Spardruck (44 Mio. € (https://www.sn.at/salzburg/politik/salzburger-landeskliniken-muessen-44-millionen-euro-einsparen-art-646174)) und",
+    "image_url": "https://www.openpetition.eu/images/petition/rettet-die-kinder-fruehneuro-reha-bundesweite-finanzierung-fuer-rekiz-spezialstationen-sichern_1791807987_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/rettet-die-kinder-fruehneuro-reha-bundesweite-finanzierung-fuer-rekiz-spezialstationen-sichern",
+    "description_full": "<!--marker--><p>Das reKIZ am Salzburger Landeskrankenhaus ist eine von nur zwei Stationen in Österreich, die schutzbedürftige Kinder nach Unfällen, Erkrankungen oder Koma per hochspezialisierter Früh-Neurorehabilitation versorgen. Da für diese kritische Phase zwischen Intensivstation und Heimatort keine gesetzliche Regelfinanzierung existiert, droht der Station durch regionalen Spardruck (<a href=\"https://www.sn.at/salzburg/politik/salzburger-landeskliniken-muessen-44-millionen-euro-einsparen-art-646174\" rel=\"noopener\" target=\"_blank\">44 Mio. €</a>) und den ÖGK-Ausstieg das Aus. Wir fordern Land Salzburg, ÖGK und Gesundheitsministerium auf, das Kompetenzgerangel zu beenden und ein bundesweit sicheres Finanzierungsmodell für die Kinder-Frühneurorehabilitation zu schaffen. </p><p><b>Wir fordern die sofortige Beendigung des bürokratischen Kompetenz- und Finanzierungsgerangels auf dem Rücken schwerstkranker Kinder und deren Familien.</b> Das reKIZ am Uniklinikum Salzburg und ähnliche hochspezialisierte Stationen in Österreich benötigen eine sofortige, rechtsverbindliche und dauerhafte Regelfinanzierung. Spitzenmedizin für Kinder darf nicht an formalen Zuständigkeitsgrenzen scheitern!</p><p><b>Unsere konkreten Forderungen:</b></p><p>A) An die Bundesebene (Gesundheitsministerium &amp; Dachverband):<br/>1. Aufnahme in den ÖSG: Die pädiatrische Frühneurorehabilitation muss als eigenständiger, hochspezialisierter Leistungsbereich in den Österreichischen Strukturplan Gesundheit (ÖSG) aufgenommen werden.<br/>2. Zentraler Strukturfonds: Schaffung eines bundesweiten Finanzierungstopfes (z.B. über die Bundes-Zielsteuerung Gesundheit). Da diese Stationen Patientinnen und Patienten überregional versorgen, darf die finanzielle Last nicht an einem einzelnen Bundesland hängenbleiben.</p><p>B) An die Österreichische Gesundheitskasse (ÖGK):<br/>Vertragssicherheit herstellen: Den sofortigen Abschluss von bundesweit einheitlichen Leistungs- und Tarifverträgen für diese akutnahen Spezialstationen, um die seit der Kassenfusion 2020 bestehenden Vertragslücken dauerhaft zu schließen.</p><p>C) An das Land Salzburg:<br/>Bestandsgarantie: Eine uneingeschränkte Garantie für den Erhalt aller Betten und des Fachpersonals am reKIZ Salzburg. Keine strukturellen Kürzungen im Zuge des anstehenden Sparpakets der Landeskliniken (SALK).</p>\n<h3>Begründung</h3>\n<!--marker--><p>Das Problem um das reKIZ Salzburg offenbart einen schweren strukturellen Fehler im österreichischen Gesundheitssystem: Die akutnahe, hochspezialisierte Frühneurorehabilitation für Kinder direkt nach der Intensivstation wurde bei den bisherigen Reformen im System schlichtweg vergessen. </p><p><b>Warum das reKIZ aus Betroffenensicht unersetzbar ist:</b> <br/>Für eine Familie beginnt mit einer schweren Erkrankung oder Verletzung ihres Kindes eine extreme Ausnahmesituation. Plötzlich geht es um die grundlegendsten Dinge: Kann unser Kind wieder selbstständig atmen? Kann es schlucken? Wird es sich jemals wieder bewegen oder sprechen können? Genau in dieser Phase schließt das reKIZ die kritische Lücke zwischen Akutmedizin und dem weiteren Leben: </p><ul><li><b>Medizinische Sicherheit rund um die Uhr: </b>Kinder kommen häufig direkt von der Intensivstation (z. B. nach Schädel-Hirn-Traumata oder Sauerstoffmangel). Das reKIZ bietet eine 24/7 pflegerische und kinderärztliche Versorgung mit direkter Anbindung an das Uniklinikum. Normale Reha-Kliniken können diese hochakute medizinische Überwachung nicht leisten. </li><li><b>Menschlichkeit statt reiner Diagnose:</b> Das hochindividualisierte Therapiekonzept (mindestens drei Einzeltherapien pro Werktag) passt das Programm an das Kind an, nicht umgekehrt. Mit Kunst-, Musik- und Hundetherapie wird dafür gesorgt, dass Kinder trotz schwerer Erkrankung auch einfach „Kind sein“ dürfen. Dieses Gefühl wird auch durch ehrenamtliche Studierende unterstützt, die sich jede Woche die Zeit nehmen, um mit dem Kind etwas zu unternehmen, das innerhalb dessen momentanen Fähigkeitsbereiches liegt und ihm einfach nur Spaß macht. </li><li><b>Ganzheitliche Mitbehandlung der Familie:</b> Eltern werden psychologisch, sozialarbeiterisch und durch ein starkes Entlassungsmanagement aufgefangen. Sie werden Schritt für Schritt angeleitet, wie sie ihr Kind im Alltag versorgen können und erhalten in Zeiten tiefster Zukunftsangst das Wichtigste: Hoffnung auf jeden noch so kleinen Fortschritt und die Gewissheit damit nicht völlig allein dazustehen. </li></ul><br/><p><b>Ein strukturelles Problem, das ganz Österreich betrifft:</b> </p><ul><li><b>Keine Alternativen:</b> Für ganz Österreich gibt es de facto nur zwei klinisch angebundene Stationen dieser Art (darunter das reKIZ als größte Einrichtung). Fällt diese Struktur weg, bricht die Versorgung für Westösterreich komplett zusammen. </li><li><b>Das Föderalismus-Dilemma:</b> Rund 80 % der im reKIZ behandelten Kinder stammen nicht aus Salzburg, sondern werden aus anderen Bundesländern (wie Tirol, Vorarlberg oder Oberösterreich) zugewiesen. Salzburg trägt derzeit die Kosten für eine überregionale Schwerpunktmedizin fast vollständig allein. </li><li><b>Der Spardruck eskaliert:</b> Da die ÖGK seit 2020 mangels formellen Vertrags keine Zahlungen mehr leistet und das Land Salzburg im Spitalbereich nun akut 44 Millionen Euro einsparen muss, steht diese unverzichtbare Station plötzlich zur Disposition. </li></ul><br/><p>Wenn eine solche Einrichtung eingeschränkt wird, verliert man nicht einfach Betten oder Therapieplätze. Man nimmt Familien in ihrer dunkelsten Lebensphase den Ort, an dem sie medizinische Sicherheit, therapeutische und fachliche Kompetenz sowie menschliche Unterstützung bekommen. Es geht um die Chance dieser Kinder auf Entwicklung und Selbstständigkeit. </p><p><b>Wir fordern eine nachhaltige, systemische Lösung für ganz Österreich. Unterschreiben Sie für die Zukunft unserer Kinder!</b> </p>",
+    "started_by": "Selbsthilfegruppe Frühneurorehabilitation",
+    "category": "Gesundheit",
+    "category_url": "https://www.openpetition.de/at/petitionen?category=20#petitionen",
+    "country": "AT",
+    "signatures": 1489,
+    "start_date": "2026-10-12",
+    "lang": "de",
+    "campaign_id": "openpetition:rettet-die-kinder-fruehneuro-reha-bundesweite-finanzierung-fuer-rekiz-spezialstationen-sichern",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-13T16:47:23+02:00",
+    "offline_since": null,
+    "tags": [
+      "ReKIZ",
+      "Kinder",
+      "Salzburg",
+      "Österreich",
+      "Stationen",
+      "Kind",
+      "Intensivstation",
+      "Versorgen",
+      "Hochspezialisierter",
+      "Regelfinanzierung"
+    ],
+    "last_checked": "2026-10-13T16:47:23+02:00"
+  },
+  "parkplaetze-in-der-versorgungshausstrasse-erhalten-verlegung-der-s-bike-station": {
+    "slug": "parkplaetze-in-der-versorgungshausstrasse-erhalten-verlegung-der-s-bike-station",
+    "first_seen": "2026-10-13T16:47:23+02:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-13T16:47:23+02:00",
+        "count": 28
+      }
+    ],
+    "title": "Parkplätze in der Versorgungshausstraße erhalten - Verlegung der S-Bike Station",
+    "summary": "Verlegung der S-Bike-Station von den Parkplätzen auf eine der nahegelegenen Freiflächen (z. B. beim Schulareal) und sofortige Wiederfreigabe der zwei PKW-Stellplätze für die Post-, Schul- und Friedhofbesucher und Anwohner der Nachbarschaft.",
+    "image_url": "https://www.openpetition.eu/images/default_petition.jpg",
+    "url": "https://www.openpetition.de/petition/online/parkplaetze-in-der-versorgungshausstrasse-erhalten-verlegung-der-s-bike-station",
+    "description_full": "<!--marker--><p>Verlegung der S-Bike-Station von den Parkplätzen auf eine der nahegelegenen Freiflächen (z. B. beim Schulareal) und sofortige Wiederfreigabe der zwei PKW-Stellplätze für die Post-, Schul- und Friedhofbesucher und Anwohner der Nachbarschaft.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Wir unterstützen den Ausbau des nachhaltigen Mobilitätsangebots S-Bike in Salzburg ausdrücklich. Dennoch verfehlt die konkrete Standortwahl in der Versorgnungshausstraße das Ziel des verträglichen Miteinanders im Stadtteil:<br/></p><ol><li><b>Dringend benötigter Parkraum:</b> Die Parkplatzsituation im Wohnquartier ist extrem angespannt. Durch das Umwidmen von zwei regulären PKW-Stellplätzen wird der Parkdruck für Anwohner und Besucher unnötig verschärft.</li><li><b>Sinnvolle Alternativen direkt vor Ort:</b> In unmittelbarer Nähe (u. a. direkt im Bereich der Schule sowie auf angrenzenden öffentlichen Freiflächen, nähe Gnigl S-Bahn Station etc.) existieren ungenutzte Flächen, die sich hervorragend und ohne Verlust von Anwohnerparkplätzen für die S-Bike-Station eignen.</li></ol><br/><p><b>Unsere Forderung:</b></p><ul><li>die bestehenden Parkplätze in der Versorgungshausstraße sollen erhalten bleiben</li><li>Alternative Standorte für die S-Bike-Station sollen geprüft werden</li></ul>",
+    "started_by": "Theresa Köster",
+    "category": "Bauen",
+    "category_url": "https://www.openpetition.de/at/petitionen?category=6#petitionen",
+    "country": "AT",
+    "signatures": 28,
+    "start_date": "2026-10-10",
+    "lang": "de",
+    "campaign_id": "openpetition:parkplaetze-in-der-versorgungshausstrasse-erhalten-verlegung-der-s-bike-station",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-13T16:47:23+02:00",
+    "offline_since": null,
+    "tags": [
+      "Freiflächen",
+      "Verlegung",
+      "Anwohner",
+      "Zwei",
+      "Versorgungshausstraße",
+      "Friedhofbesucher",
+      "PKW-Stellplätze",
+      "Wiederfreigabe",
+      "Nachbarschaft",
+      "Nahegelegenen"
+    ],
+    "last_checked": "2026-10-13T16:47:23+02:00"
+  },
+  "radweganbindung-vs-aspernallee-dammhaufensiedlung": {
+    "slug": "radweganbindung-vs-aspernallee-dammhaufensiedlung",
+    "first_seen": "2026-10-13T16:47:23+02:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-10-13T16:47:23+02:00",
+        "count": 17
+      }
+    ],
+    "title": "Radweganbindung VS Aspernallee + Dammhaufensiedlung",
+    "summary": "Sicher in die Schule und nach Hause radeln: 1. Sicheres Radfahren in der Aspernallee über Hauptallee 2. Geh-/Radweg am Handelskai und Kfz-Entschleunigung Sowohl die Volksschule Aspernallee (ca. 240 Schüler*innen) als auch die Dammhaufensiedlung (ca. 150 Bewohner*innen) sind noch nicht an das Radwegenetz angebunden, was deren Mobilität einschränkt. Die Radlobby will erreichen, dass Kinder und Erwachsene dort auch mit dem Rad ihre Wege zurücklegen können.",
+    "image_url": "https://www.openpetition.eu/images/petition/radweganbindung-vs-aspernallee-dammhaufensiedlung_1791710829_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/radweganbindung-vs-aspernallee-dammhaufensiedlung",
+    "description_full": "<!--marker--><p>Sicher in die Schule und nach Hause radeln: <br/></p><ol><li>Sicheres Radfahren in der Aspernallee über Hauptallee </li><li>Geh-/Radweg am Handelskai und Kfz-Entschleunigung</li></ol><br/><p>Sowohl die Volksschule Aspernallee (ca. 240 Schüler*innen) als auch die Dammhaufensiedlung (ca. 150 Bewohner*innen) sind noch nicht an das Radwegenetz angebunden, was deren Mobilität einschränkt.</p><p>Die Radlobby will erreichen, dass Kinder und Erwachsene dort auch mit dem Rad ihre Wege zurücklegen können.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Die Zubringerstraße Handelskai ist stark von LKWs befahren, Tempo 50 wird dort sehr oft überschritten. <br/>Ein Geh-/Radweg auf der besiedelten Seite kann aber Radfahren zu wichtiger Infrastruktur ermöglichen (Bildungseinrichtungen, Geschäfte, Radwegenetzanbindung an Wehlistraße und Grünhaufenbrücke). <br/>Auch in der Aspernallee gibt es keine Radinfrastruktur, aber Platz für 3 Kfz-Spuren inklusive Parkspur.</p><p><b>Lösungsansatz: </b><br/>Betonleitwände vom Gehsteig auf Fahrbahnrand stellen, damit der Gehsteig von 2,50 m auf 3,10 m verbreitert wird, dadurch wird er breit genug für einen Geh-/Radweg (geeignet da wenig Frequenz). <br/>Nebeneffekt: Die Verschmälerung der Fahrbahn reduziert außerdem die Geschwindigkeit der PKW und v.a. LKW. </p><p>Handelskai: Die existierenden Betonleitwände zwischen der Wehlistraße (Anbindung an das Radwegenetz) und der Aspernallee (Schule) könnten vom Gehsteig auf den Fahrbahnrand hinuntergestellt werden; weiter südlich bis zur Grünhaufenbrücke (Anbindung an den Radweg Donau-Treppelweg) könnten die Betonleitwände von der anderen Straßenseite ebenso platziert werden. </p><p>Zwei kurze Engstellen (Gasthaus/S-Bahnstation Praterkai, Gehsteigvertiefung/Bushaltestelle) bleiben. </p><p>Aspernallee: Auch in der Aspernallee (Tempo 30) wird teilweise mit sehr überhöhter Geschwindigkeit durchgefahren. Damit Kinder (und ihre Eltern) auch sicher über der Hauptallee zur Schule mit dem Rad fahren können, ist es notwendig, sicheres Radfahren in der Aspernallee zu ermöglichen. Derzeit fahren <br/>dort viele Kinder zusammen mit Eltern gemeinsam als “Bicibus”, da nur die Gruppe Sicherheit bietet.</p>",
+    "started_by": "Radlobby Leopoldstadt",
+    "category": "Verkehr",
+    "category_url": "https://www.openpetition.de/at/petitionen?category=47#petitionen",
+    "country": "AT",
+    "signatures": 17,
+    "start_date": "2026-10-11",
+    "lang": "de",
+    "campaign_id": "openpetition:radweganbindung-vs-aspernallee-dammhaufensiedlung",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-10-13T16:47:23+02:00",
+    "offline_since": null,
+    "tags": [
+      "Aspernallee",
+      "Radweg",
+      "Handelskai",
+      "Radfahren",
+      "Kinder",
+      "Schule",
+      "Innen",
+      "Dammhaufensiedlung",
+      "Betonleitwände",
+      "Radwegenetz"
+    ],
+    "last_checked": "2026-10-13T16:47:23+02:00"
   }
 }
