@@ -80,7 +80,14 @@ jobs:
           zeile=$(grep -c '^PLATTFORMEN=(' lokaler_pflege_lauf.sh || true)
           [ "$zeile" = 1 ] || { echo "::error::PLATTFORMEN=( kommt ${zeile}x vor, erwartet 1 – der Prüfschritt hätte ins Leere gelaufen"; exit 1; }
           # Die Liste aus der ECHTEN Datei lesen, nicht nachbilden.
-          eval "$(grep '^PLATTFORMEN=(' lokaler_pflege_lauf.sh)"
+          # ⚠️⚠️ BIS ZUR SCHLIESSENDEN KLAMMER lesen, nicht nur die erste Zeile.
+          # Ein `grep` auf die Anfangszeile stirbt an einer mehrzeiligen
+          # Definition ("unexpected EOF while looking for matching )") — und das
+          # ist ein FEHLALARM: bash selbst akzeptiert die Fortsetzung, `bash -n`
+          # gibt grün. Der Schritt hätte einen gültigen Umbau abgelehnt und
+          # dabei wie ein echter Fehler ausgesehen. Am 13.10.2026 so gemessen,
+          # bevor es jemand in der CI erlebt hat.
+          eval "$(sed -n '/^PLATTFORMEN=(/,/)/p' lokaler_pflege_lauf.sh)"
           n=${#PLATTFORMEN[@]}
           u=$(printf '%s\n' "${PLATTFORMEN[@]}" | sort -u | wc -l)
           [ "$n" -eq 7 ] || { echo "::error::PLATTFORMEN nennt $n Zweige, erwartet 7"; exit 1; }
