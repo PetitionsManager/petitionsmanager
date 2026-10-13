@@ -36,59 +36,65 @@ MARKER="$KLON/PFLEGE-LAUF-KLEMMT.txt"
 # in ci_stores_uebernehmen.entscheide() fängt es ab, aber dann steht der
 # Bestand still, statt zu wachsen).
 #
-# 🔴🔴 13.10.2026: die REIHENFOLGE war eine stille Benachteiligung der letzten
-# Zweige. Gemessen an den lokalen Beständen vom 12.10. (Feld `_meta.bilanz`):
+# 🔴🔴 13.10.2026: REIHENFOLGE GEPRÜFT — und eine Rotation wieder ENTFERNT.
+# Wer sie erneut einbauen will, lese zuerst die Messung unten. Sie ist der
+# Grund, warum hier eine ganz gewöhnliche Liste steht.
 #
-#   Zweig      offen   an 5 Lauftagen ausgelassen
-#   wemove_en      2   0 von 5
-#   wemove_fr      6   3 von 5
-#   wemove_it     11   4 von 5
-#   wemove_nl     54   5 von 5   ← nie Detaildaten
-#   wemove_pl     46   5 von 5   ← nie Detaildaten
-#
-# Der offene Rest folgt exakt dieser Liste — zusammen 119 Sätze ohne
-# Detaildaten. Ursache: `Fetcher._robots` ist ein INSTANZ-Cache
+# Die Beobachtung, die dazu führte: der offene Rest folgt der Reihenfolge
+# dieser Liste. `Fetcher._robots` ist ein INSTANZ-Cache
 # (petitions_core.py:1350), und die Schleife unten startet je Zweig einen
-# EIGENEN `python3 monitor.py`-Prozess. Jeder Zweig holt robots.txt also neu
-# und verbrennt WAF-Budget; die WeMove-WAF erlaubt nur ~35–40 Abrufe je
-# Fenster und antwortet danach HTTP 202. Wer zuletzt kommt, bekommt nichts.
-# ⚠️ Nicht robots.txt sperrt: von diesem Anschluss antwortet
-# action.wemove.eu/robots.txt mit HTTP 200 (217 B) und erlaubt `/sign/…`
-# ausdrücklich (13.10.2026 mit vollem Browser-Header-Satz gemessen). Es ist
-# allein das Abruf-Budget.
+# EIGENEN `python3 monitor.py`-Prozess — jeder holt robots.txt neu, und die
+# WeMove-WAF erlaubt nur ~35–40 Abrufe je Fenster.
 #
-# ➡️ Deshalb rotiert die wemove-Reihenfolge TAGESWEISE. Das ist Reparatur und
-# Gegenprobe in einem: trifft die Reihenfolge-Erklärung zu, verteilt sich der
-# offene Rest über fünf Tage gleichmäßig. Tut er es nicht, war sie falsch —
-# und das sieht man dann an genau diesen Zahlen.
-# ⚠️ europarl und openpetition bleiben VORN: sie liegen auf anderen Hosts, ihr
-# Budget ist von WeMove unabhängig, und europarl kam an 7 von 7 Lauftagen
-# durch. Sie zu rotieren würde einen gesunden Zweig in Gefahr bringen, um
-# nichts zu gewinnen.
-# ⚠️ Der Versatz kommt aus dem TAG DES JAHRES, nicht aus einer Merkdatei —
-# eine Datei müsste gepflegt, gesichert und beim Klonen mitgedacht werden,
-# und ein verlorener Zustand würde die Rotation still beenden. Dieselbe
-# Entscheidung wie beim Tageszähler des changeorg-Store (git log statt Datei).
+# ⚠️⚠️ Am Pflege-Log nachgemessen, und das kippt die naheliegende Reparatur:
+# es gibt KEIN Gefälle, das Muster ist BINÄR. In beiden letzten Läufen nahm
+# der ERSTE wemove-Zweig das ganze Fenster, die vier anderen bekamen
+# augenblicklich HTTP 202:
 #
-# ⚠️⚠️ DIE MARKER UNTEN NICHT ENTFERNEN. `checks.yml` schneidet den Block
-# zwischen ihnen heraus und prüft die Invariante über alle 366 Tage gegen
-# DIESEN Code — nicht gegen eine Nachbildung. Wer die Marker löscht, lässt den
-# Prüfschritt ins Leere laufen; er bricht dann ab, statt grün zu werden
-# (dieselbe Falle wie beim 2026-09 entfernten Schritt „App-Daten validieren",
-# der wochenlang still Exit 0 setzte).
-# >>> ROTATION >>>
-WEMOVE_ZWEIGE=(wemove_en wemove_fr wemove_it wemove_nl wemove_pl)
-# ⚠️⚠️ `10#` erzwingt Dezimal. `date +%j` ist NULLGEPOLSTERT (008, 097), und
-# bash liest führende Nullen als Oktal — ohne das Präfix stirbt der Lauf an
-# „value too great for base" an jedem Tag mit einer 8 oder 9 darin, also
-# ausgerechnet nicht beim Testen am Einbautag.
-VERSATZ=$(( 10#$(date '+%j') % ${#WEMOVE_ZWEIGE[@]} ))
-PLATTFORMEN=(europarl openpetition)
-for ((_i = 0; _i < ${#WEMOVE_ZWEIGE[@]}; _i++)); do
-    PLATTFORMEN+=("${WEMOVE_ZWEIGE[$(( (_i + VERSATZ) % ${#WEMOVE_ZWEIGE[@]} ))]}")
-done
-# <<< ROTATION <<<
-unset _i
+#   12.10. 21:33   en 46 Detailabrufe · fr 0 · it 0 · nl 0 · pl 0
+#   13.10. 16:54   en 38 Detailabrufe · fr 0 · it 0 · nl 0 · pl 0
+#
+# ➡️ Eine Rotation verteilt also nichts — sie rotiert nur, WER alles bekommt.
+# Sie kostet en/fr/it vier Fünftel ihrer Nachprüfkapazität (en verbraucht
+# seine 38–46 Abrufe TÄGLICH für die Nachprüfung von 615 Sätzen) und löst
+# damit `melde_veraltete_unterschriften` aus, der gegen den Abstand DIESES
+# Satzes misst. nl/pl bräuchten an ihrem Tag 55 bzw. 47 Abrufe bei ~38
+# Fenstergröße — zwei Turnusse, also 10 Tage, nur um Testseiten abzuhaken.
+#
+# ➡️ DIE URSACHE liegt woanders: im Merkzettel `_meta["unbrauchbare"]`
+# (eingeführt `ce34ca1`, Begründung bei UNBRAUCHBAR_ERNEUT_NACH_TAGEN in
+# wemove_scraper.py). Er reist mit dem Bestand — und im LOKALEN Klon ist er
+# für nl/pl praktisch leer:
+#
+#   Zweig      unbrauchbare-Register   lokal offen
+#   wemove_en            102                  4   ← gesund
+#   wemove_fr             62                  7
+#   wemove_it             39                 12
+#   wemove_nl              3                 55   ← Register leer
+#   wemove_pl              3                 47   ← Register leer
+#
+# Weil nl/pl immer ausgelassen wurden, konnten die Testseiten nie EINGEORDNET
+# werden, also füllte sich das Register nie, also werden sie in jedem Lauf
+# erneut gefragt — ein geschlossener Kreis. Es sind WeMoves eigene Testseiten
+# von 2023 (`2023-07-test01-michal-NL`, `2023-07-simon-1-PL`, …), und die CI
+# hat sie längst abgerufen und als `unbrauchbar` eingeordnet: ihre Zahlen sind
+# ZAHLENGLEICH mit unseren offenen (nl 55↔55, pl 47↔47).
+# ⚠️ Es fehlen also KEINE Daten. Eine frühere Fassung dieses Kommentars
+# behauptete „119 Sätze ohne Detaildaten" — das war der lokale `offen`-Zähler,
+# gelesen als Datenverlust, ohne ihn gegen die CI zu halten.
+#
+# ✅ Der wirksame Eingriff ist KEINE Codeänderung, sondern ein Nutzerschritt:
+# den CI-Bestand per „Run workflow" mit `stores_ins_repo=wemove_nl,wemove_pl`
+# ins Repo bringen, dann zieht der PC das gefüllte Register mit. NUR diese
+# zwei — bei fr und it ist der CI-Stand KLEINER als der lokale (220<228,
+# 209<212), dort würde die Schrumpf-Sperre zu Recht greifen.
+# ⏰ ⬜ Offen und größer als diese Datei: die CI hat am 13.10. ALLE
+# wemove-Zweige erfolgreich gescrapt (stand 10:45–11:22, offen 0–7) und die 55
+# Testseiten selbst eingeordnet — das kann nur ein eigener Detailabruf. Die
+# Prämisse der lokalen Pflege („die CI kommt dort nicht hin") stimmt für
+# wemove möglicherweise nicht mehr; dann konkurrieren PC und CI um dasselbe
+# Fenster.
+PLATTFORMEN=(europarl openpetition wemove_en wemove_fr wemove_it wemove_nl wemove_pl)
 
 sag() { echo "[$(date '+%F %T')] $*" | tee -a "$LOG"; }
 
