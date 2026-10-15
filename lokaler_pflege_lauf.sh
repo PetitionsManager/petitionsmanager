@@ -94,7 +94,16 @@ MARKER="$KLON/PFLEGE-LAUF-KLEMMT.txt"
 # Prämisse der lokalen Pflege („die CI kommt dort nicht hin") stimmt für
 # wemove möglicherweise nicht mehr; dann konkurrieren PC und CI um dasselbe
 # Fenster.
-PLATTFORMEN=(europarl openpetition wemove_en wemove_fr wemove_it wemove_nl wemove_pl)
+# 🔴🔴 15.10.2026: die fünf wemove-Zweige sind RAUS. Die vollständige Messreihe
+# steht bei `LOKALE_PFLEGE` in petitions_core.py — kurz: der PC trug NULL
+# veröffentlichte Sätze bei (alle nur-lokalen Sätze sind leere offline-Hüllen),
+# die CI war bei den Unterschriftenzahlen auf 57 Sätzen frischer gegen 19 des
+# PC, und nl/pl bekamen in jedem Lauf 0 Abrufe. Er war ein Konkurrent um das
+# WAF-Fenster, kein Zulieferer.
+# ⚠️ Der ganze Abschnitt darüber beschreibt noch die wemove-Lage — er bleibt
+# absichtlich stehen: er erklärt, WARUM die Zweige einmal hier waren, und die
+# Nachkontrolle braucht diese Zahlen, falls sie zurückkommen.
+PLATTFORMEN=(europarl openpetition)
 
 sag() { echo "[$(date '+%F %T')] $*" | tee -a "$LOG"; }
 

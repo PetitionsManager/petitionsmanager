@@ -65,6 +65,13 @@ jobs:
       # keiner — genau so setzte der 2026-09 entfernte Schritt „App-Daten
       # validieren" wochenlang still einen Haken.
       #
+      # ⚠️⚠️ SOLLWERT 7 → 2 am 15.10.2026, und das ist KEINE Abschwächung des
+      # Wächters, sondern die Folge einer gemessenen Entscheidung: die fünf
+      # wemove-Zweige sind aus der lokalen Pflege entfernt (Messreihe bei
+      # LOKALE_PFLEGE in petitions_core.py). Der Wächter hat dabei genau seine
+      # Aufgabe erfüllt — er hätte die Änderung abgelehnt, wenn ich die Zahl
+      # nicht mitgezogen hätte. Wer die Zweige zurückbringt, zieht sie wieder
+      # mit; die Zahl ist der Ort, an dem auffällt, dass man es vergessen hat.
       # ℹ️ Hier stand am 13.10.2026 kurzzeitig eine Invariante über eine
       # tagesweise ROTATION der wemove-Reihenfolge. Die Rotation ist am selben
       # Tag am Pflege-Log widerlegt und zurückgenommen worden (Begründung im
@@ -90,13 +97,13 @@ jobs:
           eval "$(sed -n '/^PLATTFORMEN=(/,/)/p' lokaler_pflege_lauf.sh)"
           n=${#PLATTFORMEN[@]}
           u=$(printf '%s\n' "${PLATTFORMEN[@]}" | sort -u | wc -l)
-          [ "$n" -eq 7 ] || { echo "::error::PLATTFORMEN nennt $n Zweige, erwartet 7"; exit 1; }
-          [ "$u" -eq 7 ] || { echo "::error::PLATTFORMEN enthält eine Dublette ($u verschiedene von $n)"; exit 1; }
+          [ "$n" -eq 2 ] || { echo "::error::PLATTFORMEN nennt $n Zweige, erwartet 2"; exit 1; }
+          [ "$u" -eq 2 ] || { echo "::error::PLATTFORMEN enthält eine Dublette ($u verschiedene von $n)"; exit 1; }
           for pflicht in europarl openpetition; do
             printf '%s\n' "${PLATTFORMEN[@]}" | grep -qx "$pflicht" || {
               echo "::error::$pflicht fehlt in PLATTFORMEN"; exit 1; }
           done
-          echo "PLATTFORMEN: 7 verschiedene Zweige (${PLATTFORMEN[*]})"
+          echo "PLATTFORMEN: 2 verschiedene Zweige (${PLATTFORMEN[*]})"
 
       # ⚠️⚠️ Hier stand bis 17.9.2026 der Schritt "App-Daten als JSON
       # validieren". Er war seit dem 7.8.2026 WIRKUNGSLOS: seit webapp/data in

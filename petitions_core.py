@@ -4377,8 +4377,43 @@ def _kachel_rahmen(platform: Platform, schnappschuss: bool,
 # entdeckt werden, und die Kachel sieht dabei ruhig aus. Von diesem Rechner
 # antwortet dieselbe Seite mit HTTP 200 und 18 Slugs auf Seite 1 (gemessen
 # 4.10.2026), der lokale Lauf trägt den Bestand also.
-LOKALE_PFLEGE = {"europarl", "openpetition", "wemove_en", "wemove_fr",
-                 "wemove_it", "wemove_nl", "wemove_pl"}
+# 🔴🔴 15.10.2026: die fünf wemove-Zweige sind hier RAUS. Sie standen seit dem
+# 5.9.2026 drin, und die Pflege hat über diese Zeit nachweislich nichts
+# beigetragen. Fünf Messungen, keine Annahme:
+#   1. NULL veröffentlichte Sätze kamen vom PC. Jeder Satz, den der lokale
+#      Store führt und die Auslieferung nicht, hat `status=offline`,
+#      `title=None`, `signatures=None` — leere Hüllen, die publish zu Recht
+#      filtert (fr 8, it 5, en 1, nl 1, pl 0). Umgekehrt führt die
+#      Auslieferung 4+1+2+1 Sätze, die der PC NICHT hat.
+#   2. Die Unterschriftenzahlen auch nicht: bei wemove_en ist die CI auf
+#      57 Sätzen frischer, der PC auf 19 — und dort jeweils um EINE
+#      Unterschrift (53000/52999). Die 38–46 Detailabrufe, die der erste
+#      Zweig je Lauf verbraucht, kaufen nichts Messbares.
+#   3. wemove_nl/_pl bekamen in JEDEM Lauf 0 Abrufe (Host mit 202
+#      ausgelassen) und konnten sich ihr `unbrauchbare`-Register nie
+#      verdienen; das am 13.10. aus der CI übertragene verfällt ab 18.10.
+#      (UNBRAUCHBAR_ERNEUT_NACH_TAGEN = 30).
+#   4. Natürliches Experiment: `wemove` (de) und `wemove_es` waren NIE lokal
+#      gepflegt und sind gesund (offen 0, Satzzahlen auf Höhe der anderen).
+#      Wäre CI-only unzureichend, müssten genau sie verrotten.
+#   5. Kosten: 38–46 Detailabrufe plus fünf robots.txt-Abrufe je Lauf aus
+#      demselben ~35–40er-WAF-Fenster, das die CI braucht — der PC war ein
+#      Konkurrent um das Budget, kein Zulieferer.
+#
+# ⚠️⚠️ WAS DAGEGEN SPRICHT, und warum es die Entscheidung trotzdem nicht
+# kippt: die CI ist STOSSWEISE erfolgreich. Die Registereinträge klumpen in
+# KW41 (nl 52 von 55, pl 44 von 47), davor fast nichts, und am 12.10. hat sie
+# vier wemove-Zweige ausgelassen. Es ist also NICHT belegt, dass die CI nach
+# dem Wegfall des Konkurrenten häufiger durchkommt — belegt ist nur, dass der
+# PC den Ausfall nicht abdeckt. Er pflegte leere Hüllen.
+# ⏰ ⬜ NACHKONTROLLE, an der diese Entscheidung kippt: je wemove-Zweig
+# `bilanz.offen` und das jüngste `start_date` beobachten. Steigt `offen`
+# dauerhaft über ~10 oder altert das jüngste Startdatum über 30 Tage, war der
+# Ausbau falsch und die Zweige gehören zurück.
+# ⚠️ Nebenwirkung, bewusst in Kauf genommen: diese Menge steuert auch den
+# 🔄-Vermerk der Kachel und die rote Warnung LOKALE_PFLEGE_MAX_TAGE. Die
+# wemove-Kacheln verlieren beides — richtig, aber sichtbar.
+LOKALE_PFLEGE = {"europarl", "openpetition"}
 
 # Wächter für den PC-Upload: der Timer auf dem Rechner des Nutzers läuft
 # täglich (Persistent=true holt Verpasstes nach). Liegt der letzte
@@ -5130,7 +5165,7 @@ def _schema_fakten(platforms: list) -> dict:
             continue
         # ⚠️ Das Feld „herkunft" (ci/lokal) entsteht parallel in einer anderen
         # Sitzung. Es ist hier NICHT vorausgesetzt: ohne das Feld trennen wir
-        # nach dem, was ohnehin feststeht — die sechs LOKALE_PFLEGE-Zweige kann
+        # nach dem, was ohnehin feststeht — die LOKALE_PFLEGE-Zweige kann
         # die Cloud gar nicht holen, alle anderen holt sie. Das ist gröber als
         # eine echte Herkunft, aber es ist wahr. Sobald das Feld da ist, wird
         # es zusätzlich ausgewertet und die Anzeige genauer.
@@ -5753,7 +5788,7 @@ def _ablaufschema(platforms: list | None = None,
     # Bahn 3 — lokal. Diese drei Punkte laufen auf dem Rechner des Nutzers.
     # Der Schnappschuss entsteht in der Cloud und kann dorthin NICHT sehen: was
     # er weiß, weiß er allein daraus, dass ein lokaler Lauf einen Abschluss in
-    # die sechs LOKALE_PFLEGE-Bestände geschrieben und sie hochgeschoben hat.
+    # die LOKALE_PFLEGE-Bestände geschrieben und sie hochgeschoben hat.
     teile += [
         k(106, 318, 132, 44, "run", "git pull", "git pull",
           "6 Anläufe", "6 attempts", zustand=st_lokal, z_de=zl_de, z_en=zl_en),

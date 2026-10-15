@@ -119,9 +119,15 @@ jobs:
           restore-keys: |
             petition-stores-
 
-      # Automatische Übernahme lokal gepflegter Stores: europarl/wemove werden
-      # auf dem Rechner des Nutzers gescrapt (WAF sperrt Rechenzentren) und
-      # gepusht. Genommen wird die Repo-Fassung NUR, wenn ihr letzter
+      # Automatische Übernahme lokal gepflegter Stores: europarl und
+      # openpetition werden auf dem Rechner des Nutzers gescrapt (bei europarl
+      # sperrt die WAF Rechenzentren, openpetition ist von hier netzwerkseitig
+      # gar nicht erreichbar) und gepusht.
+      # ⚠️ Die fünf wemove-Zweige standen hier bis zum 15.10.2026 ebenfalls.
+      # Sie sind aus der lokalen Pflege entfernt, weil der PC nachweislich
+      # NULL veröffentlichte Sätze beitrug und nur WAF-Fensterbudget verbrauchte
+      # — die Messreihe steht bei LOKALE_PFLEGE in petitions_core.py.
+      # Genommen wird die Repo-Fassung NUR, wenn ihr letzter
       # ABGESCHLOSSENER Lauf (lauf_verlauf, nicht generated_at!) jünger ist
       # als der des Cache-Stands — ein später doch erfolgreicher CI-Scrape
       # gewinnt damit von allein wieder. Der Schritt darf den Lauf nie kippen.
