@@ -769,7 +769,7 @@ def melde_vorlauf(platforms: list[Platform],
           f"{offen_gesamt * core.REQUEST_DELAY / 60:.1f} min reine Abrufzeit.",
           file=sys.stderr)
     print("\n".join(zeilen), file=sys.stderr)
-    if os.environ.get("GITHUB_ACTIONS") == "true":
+    if core.in_github_actions():
         # Auf stderr, damit die Schlüsselliste auf stdout sauber bleibt; der
         # Runner liest Arbeitsablauf-Befehle aus beiden Strömen. Falls die
         # Anmerkung doch einmal fehlt, steht dasselbe im Schritt-Protokoll.

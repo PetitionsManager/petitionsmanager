@@ -2369,6 +2369,38 @@ pruefe("WeMove: Gegenprobe – run_sprache hatte sie schon, unverändert",
             "fehler_in_folge >= ABBRUCH_NACH_FEHLERN")], [2, 2])
 
 
+# `core.in_github_actions()` hat am 17.9.2026 vier rohe Umgebungsabfragen
+# ersetzt — und trotzdem griff eine SPÄTER hinzugekommene fünfte Fundstelle
+# (monitor.vorlauf_schluessel, ::notice title=Vorlauf::) wieder am Helfer
+# vorbei. Das ist still passiert: nichts wurde rot, der Helfer wurde nur
+# ausgehöhlt. Nach der Umstellung am 19.10.2026 darf die Zeichenfolge genau
+# EINMAL vorkommen, nämlich in der Definition selbst.
+# ⚠️ Die Nadel wird ZUSAMMENGESETZT, damit diese Datei nicht ihren eigenen
+# Treffer mitzählt — sonst müsste man selbsttest.py ausnehmen, und eine
+# Ausnahme ist ein blinder Fleck.
+# ⚠️ Der Fall ist selbstkontrollierend: findet das Muster 0 statt 1, ist es
+# kaputt und nicht der Code. Deshalb steht hier die Fundstelle MIT Datei,
+# nicht nur eine Summe.
+_gha_nadel = 'os.environ.get("GITHUB' + '_ACTIONS")'
+_gha_fund = {Path(d).name: open(d, encoding="utf-8").read().count(_gha_nadel)
+             for d in sorted(glob.glob(str(Path(__file__).parent / "*.py")))}
+pruefe("GITHUB_ACTIONS: genau eine rohe Abfrage, und zwar die Definition",
+       {k: v for k, v in _gha_fund.items() if v},
+       {"petitions_core.py": 1})
+pruefe("GITHUB_ACTIONS: die Definition ist in_github_actions() selbst",
+       _gha_nadel in inspect.getsource(core.in_github_actions), True)
+# Gegenprobe, ohne die „1 Treffer" nichts aussagt: der Helfer wird auch
+# wirklich benutzt — sonst wäre die Umstellung eine stille Abschaffung und
+# „0 rohe Abfragen" hätte man auch durch Löschen des Codes erreicht.
+# Untergrenze statt Festzahl: am 19.10.2026 waren es 9 in monitor.py, und
+# neue Fundstellen sollen den Fall nicht rot machen — weniger als 4 wäre
+# dagegen ein Rückbau.
+_gha_ruf = "core.in_github" + "_actions()"
+pruefe("GITHUB_ACTIONS: der Helfer wird benutzt, nicht nur definiert",
+       (Path(__file__).parent / "monitor.py").read_text(
+           encoding="utf-8").count(_gha_ruf) >= 4, True)
+
+
 _direkt, _graph = _melder_graph()
 pruefe("Melder-Wächter: JEDER Einstiegspunkt erreicht felder_melden()",
        _ohne_melder(_direkt, _graph), [])
