@@ -64,7 +64,6 @@
 from __future__ import annotations
 
 import argparse
-import os
 import re
 import sys
 import time
@@ -74,8 +73,18 @@ import requests
 # Kopfzeilen und Adressen aus dem echten Scraper ziehen statt sie abzuschreiben.
 # Sonst misst die Diagnose eine Konfiguration, die es im Betrieb nicht gibt.
 import europarl_scraper as E
+import petitions_core as core
 
-IN_ACTIONS = bool(os.environ.get("GITHUB_ACTIONS"))
+# 19.10.2026 beim Übernehmen nach main umgestellt: dieselbe Frage an den
+# AUSGABEKANAL, die core.in_github_actions() seit dem 17.9.2026 an fünf
+# anderen Stellen beantwortet (hier: dürfen ::notice::-Kommandos raus?).
+# Keine neue Abhängigkeit — europarl_scraper zieht petitions_core ohnehin.
+# `import os` ist dadurch entfallen, es wurde nur hierfür gebraucht.
+# ⚠️ Die Umstellung ist dabei STRENGER als vorher: `bool(os.environ.get(…))`
+# war für JEDEN nichtleeren Wert wahr, also auch für "false". Der Helfer
+# vergleicht mit "true". Im Lauf setzt GitHub immer "true", der Unterschied
+# wirkt also nur, wenn jemand die Variable von Hand setzt.
+IN_ACTIONS = core.in_github_actions()
 
 # Zweiter User-Agent als Gegenprobe: antwortet die Quelle IHM anders, liegt die
 # Sperre am Kennzeichen und nicht an der IP – das wäre die billigste Reparatur
