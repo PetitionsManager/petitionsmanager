@@ -76,9 +76,49 @@ DETAIL_BUDGET = 120        # erfolgreiche Detailabrufe pro Lauf
 # So lange gilt eine als unbrauchbar erkannte Seite als erledigt, bevor sie
 # erneut geprüft wird (siehe Merkzettel in run()).
 UNBRAUCHBAR_ERNEUT_NACH_TAGEN = 30
+# ⚠️⚠️ 19.10.2026: Die 30 Tage sind für FRISCH ANGELEGTE Seiten falsch und
+# haben echte Petitionen verschluckt. WeMove legt eine Kampagne per ActionKit
+# mit dem Platzhaltertitel „Enter a Title for <slug>" an; der Scraper besucht
+# sie am Tag der Anlage, ordnet völlig korrekt „unbrauchbar" ein — und sperrt
+# sie damit einen Monat, während WeMove den echten Titel ein, zwei Tage später
+# nachträgt. An der Quelle gemessen: `2026-10-stop-killer-robots-petition-DE`
+# (eingeordnet 5.10.) heißt heute „Stoppt Killerroboter",
+# `2026-10-handsoffnature-…` (13.10.) „Hände weg von unserer Natur!",
+# `2026-10-no-child-excluded-…` (8.10.) „Europas Klassenzimmer gehören allen
+# Kindern". Alle vier Oktober-Petitionen des de-Zweigs standen so im Register,
+# weshalb sein jüngstes `start_date` auf September festhing.
+# ➡️ Der Merkzettel bleibt für tote Testseiten (2023er `michal-test*` &c.)
+# unverändert; nur wer KURZ NACH SEINER ANLAGE eingeordnet wurde, kommt schon
+# nach UNBRAUCHBAR_FRISCH_TAGE wieder dran.
+# ⚠️ Die Regel heilt sich selbst: `2026-09-insurance-natural-disasters-…` ist
+# heute noch ein Platzhalter (gemessen) — es wird kurz erneut geprüft, wieder
+# eingeordnet, und sobald der Abstand Anlage↔Stempel über
+# UNBRAUCHBAR_NEUANLAGE_TAGE wächst, greift wieder die lange Frist.
+# ⚠️ Blinder Fleck, bewusst: 34 der 385 Einträge (19.10.) haben gar kein
+# Datum im Slug (alte „202203-…"-Form ohne Monat o. ä.) — für sie bleibt es
+# bei 30 Tagen. Wer die Zahlen ändert, misst bitte neu: Schwelle 45 traf
+# 19 Einträge, 30 nur 18, 60 ebenfalls 19.
+UNBRAUCHBAR_FRISCH_TAGE = 2
+UNBRAUCHBAR_NEUANLAGE_TAGE = 45
 
 
-def _merk_abgelaufen(zeitstempel: str) -> bool:
+def _frisch_eingeordnet(page: str, zeitstempel: str) -> bool:
+    """Wurde die Seite kurz nach ihrer ANLAGE als unbrauchbar eingestuft?
+    Maßstab ist der Abstand zwischen dem Monat IM SLUG und dem Stempel — nicht
+    der Abstand zu heute. Sonst wanderte eine Seite mit der Zeit von selbst in
+    die kurze Frist zurück, obwohl sie längst feststeht."""
+    m = PAGE_DATE_RE.match(page or "")
+    if not m:
+        return False
+    try:
+        angelegt = _dt.datetime(int(m.group(1)), int(m.group(2)), 1)
+        stempel = _dt.datetime.fromisoformat(str(zeitstempel))
+    except (TypeError, ValueError):
+        return False
+    return (stempel.replace(tzinfo=None) - angelegt).days <= UNBRAUCHBAR_NEUANLAGE_TAGE
+
+
+def _merk_abgelaufen(zeitstempel: str, page: str = "") -> bool:
     """Ist der Merkzettel-Eintrag alt genug für eine erneute Prüfung?
     Ein unlesbarer Stempel gilt als abgelaufen — im Zweifel lieber einmal zu
     viel prüfen als eine Seite für immer abschreiben."""
@@ -86,8 +126,10 @@ def _merk_abgelaufen(zeitstempel: str) -> bool:
         alt = _dt.datetime.fromisoformat(str(zeitstempel))
     except (TypeError, ValueError):
         return True
+    frist = (UNBRAUCHBAR_FRISCH_TAGE if _frisch_eingeordnet(page, zeitstempel)
+             else UNBRAUCHBAR_ERNEUT_NACH_TAGEN)
     jetzt = _dt.datetime.now(alt.tzinfo)
-    return (jetzt - alt).days >= UNBRAUCHBAR_ERNEUT_NACH_TAGEN
+    return (jetzt - alt).days >= frist
 ABBRUCH_NACH_FEHLERN = 5   # Leerantworten in Folge = Checkpoint erreicht
 
 
@@ -432,7 +474,7 @@ def run(args) -> None:
     # ein endgültiges Urteil über eine Seite, die sich ändern darf.
     unbrauchbare = dict(core.load_meta(DATA_FILE).get("unbrauchbare") or {})
     unbrauchbare = {p: z for p, z in unbrauchbare.items()
-                    if not _merk_abgelaufen(z)}
+                    if not _merk_abgelaufen(z, p)}
 
     # ⚠️⚠️ Die Kennung braucht KEINEN Abruf. `_kampagne()` ist eine reine
     # Funktion des Seitennamens, und der Seitenname IST der Schlüssel im
@@ -469,12 +511,14 @@ def run(args) -> None:
     # aendert. Solange der Rueckstand besteht, werden die vollstaendigen
     # Datensaetze seltener nachgezaehlt - das ist der Preis und geht vorbei.
     known.sort(key=lambda p: bool((store.get(p) or {}).get("description_full")))
+    # ⚠️ VOR dem Block, nicht darin: die Neu-Schleife unten liest beide
+    # Zähler weiter. Lagen sie innerhalb, waren sie bei `--no-recheck` oder
+    # `--limit` gar nicht definiert. `run_sprache` macht es genauso.
+    erfolge = fehler_in_folge = 0
     if known and not args.no_recheck and not args.limit:
         log(f"Prüfe {len(known)} bekannte Kampagne(n) …")
         prog(phase="check-known", current=0, total=len(known),
              message="Prüfe bekannte Kampagnen …")
-        erfolge = 0
-        fehler_in_folge = 0
         unbrauchbar = 0
         for k, page in enumerate(known, 1):
             if erfolge >= DETAIL_BUDGET:
@@ -551,7 +595,23 @@ def run(args) -> None:
     prog(phase="scrape", current=0, total=len(new_pages),
          message="Beginne Scrape …")
 
+    # ⚠️⚠️ 19.10.2026: Diese Schleife hatte als EINZIGE der drei weder den
+    # Budget- noch den Abbruchwächter — `run_sprache` hat beide (dort in der
+    # Neu-Schleife), die Bestandsschleife oben ebenfalls. Folge: war der
+    # Checkpoint mitten im Lauf zu, lief de trotzdem jeden restlichen
+    # Kandidaten durch, bekam lauter "error" — und "error" ist der EINE
+    # Status, der keinen Merkzettel-Eintrag hinterlässt (siehe unten). Die
+    # Seiten kamen also im nächsten Lauf als "offen" wieder, und der Zweig
+    # befragte einen Host weiter, der schon abwies. Am 19.10. standen so 30
+    # Kandidaten offen, während alle sechs Sprachzweige bei 2 lagen.
+    # Die Zählweise ist absichtlich dieselbe wie in der Bestandsschleife:
+    # "unbrauchbar" heißt „der Host hat geantwortet" → Fehlerzähler auf null,
+    # und es zählt gegen das Budget (so entschieden am 8.8.2026, s. o.).
     for i, page in enumerate(new_pages, 1):
+        if erfolge >= DETAIL_BUDGET:
+            log(f"  Budget von {DETAIL_BUDGET} Abrufen erreicht – "
+                f"Rest folgt beim nächsten Lauf.")
+            break
         log(f"({i}/{len(new_pages)}) {page}")
         prog(current=i, total=len(new_pages), message=page)
         status, rec = scrape_petition(fetcher, page)
@@ -561,9 +621,19 @@ def run(args) -> None:
         # erneut abruft.
         if status == "unbrauchbar":
             unbrauchbare[page] = ts
+            fehler_in_folge = 0
+            erfolge += 1
             continue
         if status == "error":
+            fehler_in_folge += 1
+            if fehler_in_folge >= ABBRUCH_NACH_FEHLERN:
+                log(f"  {fehler_in_folge} Fehlschläge in Folge – vermutlich "
+                    f"der Checkpoint von WeMove. Lauf hier beendet; der "
+                    f"Rest folgt beim nächsten Mal.")
+                break
             continue
+        fehler_in_folge = 0
+        erfolge += 1
         core.upsert(store, page, rec or {}, {}, status, ts,
                     f"{BASE_URL}/sign/{page}")
         save()
@@ -725,7 +795,7 @@ def run_sprache(args, lang: str = "en") -> None:
 
     unbrauchbare = dict(core.load_meta(data_file).get("unbrauchbare") or {})
     unbrauchbare = {p: z for p, z in unbrauchbare.items()
-                    if not _merk_abgelaufen(z)}
+                    if not _merk_abgelaufen(z, p)}
 
     def save(quiet=True, **extra):
         core.save_store(store, data_file,

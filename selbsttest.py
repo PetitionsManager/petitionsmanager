@@ -2309,6 +2309,66 @@ pruefe("Avaaz: jeder Eintrag ist ein geführtes Sprachkürzel",
        sorted(_av.KEINE_KAMPAGNEN - set(_av.AVAAZ_SPRACHEN)), [])
 
 
+import datetime as _wmdt                                          # noqa: E402
+
+
+def _wm_stempel(tage_her: int) -> str:
+    return (_wmdt.datetime.now(_wmdt.timezone.utc)
+            - _wmdt.timedelta(days=tage_her)).isoformat()
+
+
+def _wm_slug(stempel_iso: str, monate_zurueck: int = 0) -> str:
+    """Slug, dessen Datumspräfix N Monate VOR dem Stempel liegt. Relativ
+    gebaut, damit die Fälle nicht in einem späteren Monat umkippen."""
+    d = _wmdt.datetime.fromisoformat(stempel_iso)
+    jahr, monat = d.year, d.month - monate_zurueck
+    while monat <= 0:
+        jahr -= 1
+        monat += 12
+    return f"{jahr}-{monat:02d}-handsoffnature-petition-DE"
+
+
+_wm_st = _wm_stempel(6)
+# WeMove sperrte frisch angelegte Seiten 30 Tage weg und hat damit echte
+# Petitionen verschluckt (19.10.2026, drei an der Quelle belegt). Kurze Frist
+# nur für Seiten, die KURZ NACH IHRER ANLAGE eingeordnet wurden.
+pruefe("WeMove: frisch eingeordnete Seite kommt nach 2 Tagen wieder dran",
+       _wm._merk_abgelaufen(_wm_st, _wm_slug(_wm_st)), True)
+# ⚠️⚠️ Die tragende Gegenprobe: ohne sie wäre die Ausnahme nicht von
+# „Merkzettel abgeschaltet" zu unterscheiden — 366 der 385 Einträge sind
+# dauerhaft tote Testseiten und MÜSSEN die langen 30 Tage behalten, sonst
+# frisst der Zweig genau das Abrufbudget, das der Merkzettel schützen soll.
+pruefe("WeMove: Gegenprobe – tote Testseite behält die 30 Tage",
+       _wm._merk_abgelaufen(_wm_st, "2023-09-michal-test1-DE"), False)
+pruefe("WeMove: frisch, aber Stempel erst 1 Tag alt → bleibt gesperrt",
+       (lambda s: _wm._merk_abgelaufen(s, _wm_slug(s)))(_wm_stempel(1)), False)
+# Blinder Fleck, bewusst in Kauf genommen: 34 der 385 Einträge haben gar kein
+# Datum im Slug. Sie dürfen nicht versehentlich in die kurze Frist rutschen.
+pruefe("WeMove: Slug ohne Datum behält die 30 Tage",
+       [_wm._merk_abgelaufen(_wm_st, "galen-tweet-test-petition-DE"),
+        _wm._merk_abgelaufen(_wm_st, "")], [False, False])
+# Selbstheilung: eine Seite, die auch beim kurzen Nachschauen Platzhalter
+# bleibt, wird neu gestempelt und fällt dadurch aus der kurzen Frist heraus.
+pruefe("WeMove: Selbstheilung – 3 Monate nach Anlage ist nichts mehr frisch",
+       _wm._frisch_eingeordnet(_wm_slug(_wm_st, 3), _wm_st), False)
+pruefe("WeMove: unlesbarer Stempel gilt weiter als abgelaufen",
+       [_wm._merk_abgelaufen("kaputt", "x"), _wm._merk_abgelaufen(None, "x")],
+       [True, True])
+pruefe("WeMove: Aufruf ohne Seitenname = altes Verhalten",
+       _wm._merk_abgelaufen(_wm_st), False)
+
+# Der de-Zweig war der einzige, dessen NEU-Schleife weder Budget- noch
+# Abbruchwächter hatte; beide Schleifen beider Einstiegspunkte brauchen beide.
+pruefe("WeMove de: beide Schleifen haben Budget- und Abbruchwächter",
+       [inspect.getsource(_wm.run).count("erfolge >= DETAIL_BUDGET"),
+        inspect.getsource(_wm.run).count(
+            "fehler_in_folge >= ABBRUCH_NACH_FEHLERN")], [2, 2])
+pruefe("WeMove: Gegenprobe – run_sprache hatte sie schon, unverändert",
+       [inspect.getsource(_wm.run_sprache).count("erfolge >= DETAIL_BUDGET"),
+        inspect.getsource(_wm.run_sprache).count(
+            "fehler_in_folge >= ABBRUCH_NACH_FEHLERN")], [2, 2])
+
+
 _direkt, _graph = _melder_graph()
 pruefe("Melder-Wächter: JEDER Einstiegspunkt erreicht felder_melden()",
        _ohne_melder(_direkt, _graph), [])
