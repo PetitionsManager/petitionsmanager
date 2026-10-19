@@ -130,7 +130,11 @@ def _fingerabdruck(body: str, art: str) -> str:
     if art == "liste":
         return f"{len(set(E.NUMBER_HREF_RE.findall(body)))} Petitionsnummern"
     if art == "detail":
-        hat = E.SPRACHE["en"]["titel_marker"] in body
+        # 19.10.2026: hieß früher SPRACHE["en"]["titel_marker"] und war ein
+        # String. Den Schlüssel gibt es nicht mehr; an seiner Stelle steht
+        # `titel_start`, und das ist ein KOMPILIERTES Muster — `in` würde hier
+        # mit TypeError sterben, nicht mit KeyError. Deshalb .search().
+        hat = E.SPRACHE["en"]["titel_start"].search(body) is not None
         return f"Titelmarker {'gefunden' if hat else 'FEHLT'}"
     return "—"
 
@@ -205,7 +209,16 @@ def main() -> int:
         #      hier zum ERSTEN Mal aus dem Rechenzentrum versucht – bisher hat
         #      der Riegel sie nie bis zum Netz durchgelassen.
         time.sleep(5)
-        messungen.append(messen(s, E.LIST_URL.format(size=20), "liste",
+        # ⚠️ 19.10.2026: LIST_URL hat seit der Landachse-Arbeit (4.9.2026) einen
+        # ZWEITEN Platzhalter `{land}`. Das alte `.format(size=20)` warf deshalb
+        # `KeyError: 'land'` — str.format meldet einen fehlenden benannten
+        # Platzhalter so, und genau daran starb Lauf #2 vom 19.10., BEVOR eine
+        # einzige Messung ausgewertet war (die Schlusszeile fehlte folgerichtig).
+        # `land=""` ist die ungefilterte Liste, dieselbe Wahl wie im Scraper
+        # selbst (europarl_scraper.py ~Z. 894). Für eine Diagnose ist das der
+        # richtige Fall: gefragt ist „antwortet der Host überhaupt mit Inhalt",
+        # nicht „wie viele Petitionen hat ein bestimmtes Land".
+        messungen.append(messen(s, E.LIST_URL.format(land="", size=20), "liste",
                                 "Trefferliste (Entdeckung)"))
         time.sleep(5)
         messungen.append(messen(s, E._detail_url(args.slug, "en"), "detail",
