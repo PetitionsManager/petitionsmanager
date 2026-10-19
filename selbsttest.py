@@ -2290,6 +2290,25 @@ pruefe("Startdatum: die beiden Ausnahmearten bleiben getrennt",
        or "wemove" in core.STARTDATUM_VERFAHRENSDATUM, False)
 
 
+import avaaz_scraper as _av                                       # noqa: E402
+
+# KEINE_KAMPAGNEN schaltet die Entdeckungs-Warnung für eine Sprache ab
+# (avaaz_scraper: aufgegeben=sprache in KEINE_KAMPAGNEN). 19.10.2026 kamen
+# es/it/pl/pt dazu, womit 16 der 17 Sprachen stumm sind.
+pruefe("Avaaz: die vier am 19.10.2026 gemessenen Sprachen sind eingetragen",
+       sorted({"es", "it", "pl", "pt"} - _av.KEINE_KAMPAGNEN), [])
+# ⚠️⚠️ Die eigentliche Gegenprobe: de und fr tragen nachweislich noch eigene
+# Kampagnen (3 bzw. 2, gemessen 19.10.2026). Rutschen sie mit auf die Liste,
+# ist der Melder für ALLE Sprachen stumm und der Ausfall des Zweigs fällt
+# nirgends mehr auf — das ist der schlechteste Zustand, nicht der ruhigste.
+pruefe("Avaaz: Gegenprobe – de und fr sind NICHT stummgeschaltet",
+       [s in _av.KEINE_KAMPAGNEN for s in ("de", "fr")], [False, False])
+# ⚠️ Ein Tippfehler („ptt") schaltet nicht stumm, sondern bleibt stille
+# Totlast: die Warnung käme weiter und niemand sucht in dieser Liste.
+pruefe("Avaaz: jeder Eintrag ist ein geführtes Sprachkürzel",
+       sorted(_av.KEINE_KAMPAGNEN - set(_av.AVAAZ_SPRACHEN)), [])
+
+
 _direkt, _graph = _melder_graph()
 pruefe("Melder-Wächter: JEDER Einstiegspunkt erreicht felder_melden()",
        _ohne_melder(_direkt, _graph), [])

@@ -159,19 +159,41 @@ AVAAZ_SPRACHEN = ("el", "es", "fr", "id", "it", "ko", "ms", "nl", "pl",
 # Sprache hier gestrichen.
 # 6.10.2026 nachgemessen (alle neun Warn-Kacheln + Kontrollen de/es): el, ko,
 # nl, ro, ru, tr, uk, zh und ja verlinken auf ihren Startseiten KEINE
-# /campaign/<sprache>/-Slugs mehr, nur noch je zwei englische (/campaign/en/);
-# im September hatten dieselben Zweige noch 4–7 eigene Kampagnen entdeckt
-# (stehen im Bestand). Kein Seitenumbau: de (4 eigene) und es (1 eigene)
-# finden mit denselben Mustern weiter Kampagnen — Avaaz kuratiert die
-# eigensprachigen Kampagnen-Teaser dort schlicht nicht mehr.
+# /campaign/<sprache>/-Slugs mehr; im September hatten dieselben Zweige noch
+# 4–7 eigene Kampagnen entdeckt (stehen im Bestand). Kein Seitenumbau: de
+# (4 eigene) und es (1 eigene) finden mit denselben Mustern weiter Kampagnen
+# — Avaaz kuratiert die eigensprachigen Kampagnen-Teaser dort schlicht nicht
+# mehr.
+# ⚠️ 19.10.2026 BERICHTIGT: der Satz „nur noch je zwei englische
+# (/campaign/en/)" stand hier falsch. Die zwei en-Pfade sind /campaign/en/
+# hiring und /imprint — FUSSZEILEN-Links, die auch die gesunde de-Startseite
+# trägt (auf allen fünf gemessenen Seiten identisch). Avaaz verlinkt dort
+# also nicht englische Kampagnen statt eigener, sondern GAR KEINE.
+# ⚠️⚠️ 19.10.2026 kamen es, it, pl und pt dazu — darunter mit `es` die
+# Gegenprobe vom 6.10., die damals „kein Seitenumbau" belegte. Alle vier
+# tragen auf der Startseite genau /campaign/<pfad>/disinfo_hub und /donate,
+# beide stehen in NON_CAMPAIGN_SLUGS → 0 echte Kampagnen. Positivkontrolle
+# de am selben Tag: 3 echte (human_ai_de_rst, stop_the_whale_butcher_loc,
+# uganda_wendy_s_petition_loc) neben denselben zwei Nicht-Kampagnen, das
+# Muster greift also. Die Seiten sind intakt (lokaler <title>, 4–20 eigene
+# Petitions-Links) — leer ist allein der Kampagnen-Zweig. Damit tragen von
+# den 17 Sprachen hier nur noch de (3) und fr (2) eigene Kampagnen; kippen
+# auch die, ist die Erwartung „mindestens 1" generell zu prüfen und nicht je
+# Sprache. ⚠️ Bei fr ist eine der beiden `bequest_gifts_in_wills` — eine
+# Spenden-/Vermächtnisseite wie `donate`, die aber NICHT in
+# NON_CAMPAIGN_SLUGS steht und daher als Kampagne zählt. Nicht angefasst
+# (eigene Entscheidung), aber fr steht damit auf nur EINER echten Kampagne.
 # Die sw-Startseite leitet inzwischen wie ms auf secure.avaaz.org um; die
 # sw-ÜBERSICHT trägt aber weiter 5 Petitionen (beide Feeds leer) → sw gehört
 # NICHT in KEINE_PETITIONEN, nur sein Check braucht den Übersichts-Rückgriff
 # (check_sprache unten).
 KEINE_PETITIONEN = {"ms"}
 KEINE_KAMPAGNEN = {"ms", "id", "sw",
-                   # seit Herbst 2026 nur noch en-Kampagnen verlinkt:
-                   "el", "ko", "nl", "ro", "ru", "tr", "uk", "zh", "ja"}
+                   # Startseite verlinkt keine eigenen Kampagnen mehr,
+                   # gemessen 6.10.2026:
+                   "el", "ko", "nl", "ro", "ru", "tr", "uk", "zh", "ja",
+                   # dieselbe Lage, gemessen 19.10.2026:
+                   "es", "it", "pl", "pt"}
 
 
 def _pfad(sprache: str) -> str:
