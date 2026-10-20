@@ -2289,6 +2289,41 @@ pruefe("Startdatum: die beiden Ausnahmearten bleiben getrennt",
        core.startdatum_monatsgenau("europarl")
        or "wemove" in core.STARTDATUM_VERFAHRENSDATUM, False)
 
+# DRITTE Ausnahmeart (20.10.2026): Avaaz veröffentlicht kuratiert — an der
+# Quelle gemessen, alle 8 angebotenen Petitionen standen schon im Bestand, und
+# der „Neu"-Feed ist nicht chronologisch (Einträge von 2020–2024).
+pruefe("Startdatum: avaaz-Zweige gelten als kuratiert",
+       [core.startdatum_kuratiert(k)
+        for k in ("avaaz", "avaaz_en", "avaaz_it", "avaaz_ja")],
+       [True, True, True, True])
+# ⚠️⚠️ Die tragende Gegenprobe: greift die Ausnahme über, ist der Altersmelder
+# für ALLE Plattformen stumm — und das wäre schlimmer als die acht Warnungen.
+pruefe("Startdatum: Gegenprobe – andere Plattformen NICHT kuratiert",
+       [core.startdatum_kuratiert(k)
+        for k in ("wemove", "europarl", "openpetition", "changeorg",
+                  "bundestag", "weact", "", None)],
+       [False] * 8)
+# ⚠️ Die drei Ausnahmearten dürfen sich nicht vermischen: europarl liefert ein
+# fachlich ANDERES Datum, wemove dasselbe zu GROB, avaaz ein richtiges Datum zu
+# einem kuratierten Bestand. Gleiche Wirkung, verschiedene Begründung — und die
+# Kachel behauptet jeweils etwas anderes.
+pruefe("Startdatum: alle drei Ausnahmearten bleiben getrennt",
+       [core.startdatum_kuratiert("wemove"),
+        core.startdatum_monatsgenau("avaaz"),
+        "avaaz" in core.STARTDATUM_VERFAHRENSDATUM],
+       [False, False, False])
+# ⚠️⚠️ Der Kern des Entwurfs: der neue Zweig ist eine reine UMSTUFUNG. Seine
+# Bedingung MUSS die Vereinigung der beiden Warnbedingungen sein, sonst
+# erfindet er Hinweise zwischen 30 und 90 Tagen, wo vorher nichts stand.
+_bp = inspect.getsource(core._bestandspruefung)
+pruefe("Startdatum/kuratiert: Umstufung, keine neue Meldung",
+       [_bp.count("startdatum_kuratiert("),
+        "neu_dazu > 0 and alter > STARTDATUM_MAX_ALTER" in _bp,
+        "alter > STARTDATUM_ALT_TAGE" in _bp], [1, True, True])
+pruefe("Startdatum/kuratiert: der Melder meldet als Hinweis, nicht als Warnung",
+       _bp.split("startdatum_kuratiert(")[1].split("merke(")[1][:9],
+       '"hinweis"')
+
 
 import avaaz_scraper as _av                                       # noqa: E402
 

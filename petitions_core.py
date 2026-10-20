@@ -2624,6 +2624,45 @@ def startdatum_monatsgenau(platform: str) -> bool:
     """Trägt diese Plattform ein nur monatsgenaues start_date?"""
     return str(platform or "").startswith(STARTDATUM_MONATSGENAU_PRAEFIX)
 
+
+# DRITTE Ausnahmeart (19.10./20.10.2026): Plattformen, deren Quelle KURATIERT
+# veröffentlicht — das Alter des Bestands ist dort keine Aussage über den
+# Scraper und auch keine über die Quelle, sondern über deren Redaktion.
+#
+# ⚠️⚠️ An der Quelle gemessen, nicht angenommen. avaaz (deutsch) hat am
+# 20.10.2026 über ALLE VIER Entdeckungsquellen (Startseite, Übersicht,
+# Beliebt-Feed, Neu-Feed) genau 8 Petitionen angeboten, und **alle acht
+# standen schon im Bestand** (`bilanz`: gefunden 11 = im_bestand 11, offen 0;
+# die 11 sind 8 Petitionen + 3 Kampagnen). Die jüngste davon ist vom
+# 2026-05-05, also 168 Tage alt. Der Scraper liest also korrekt.
+# 🔴 Entscheidend: der „Neu-Feed" (`recent_petitions.json`) ist NICHT
+# chronologisch — er lieferte Petitionen von 2020, 2021, 2023 und 2024. Es
+# gibt bei Avaaz also gar keinen Frischekanal, und die Alterungswarnung ist
+# von der Quelle her NIE erfüllbar.
+#
+# ⚠️ Warum nicht der bundestag-Weg (`quell_startdatum`, s. u.): die Feeds
+# tragen **kein Datumsfeld** — nur `id`, `number_of_signatures`,
+# `petition_image`, `petition_name`, `petition_url`. Über Zweige gegengeprüft
+# (de, it je 6 Einträge; id, ja leer): in KEINER Sprache ein Datum. Ein
+# Quelldatum wäre nur mit einem Zusatzabruf je Petition zu haben, und das
+# Abrufbudget ist bei Avaaz schon der Engpass. Die Lücke ist also strukturell,
+# nicht Nachlässigkeit.
+#
+# ⚠️ PRÄFIX, nicht Aufzählung — wie bei WeMove: die 19 Avaaz-Zweige entstehen
+# in einer Factory, eine Schlüsselliste würde beim nächsten still veralten.
+# Das Präfix ist hier zusätzlich durch das FEED-SCHEMA gedeckt, das für alle
+# Sprachen gleich ist; die Chronologie selbst ist an `de` gemessen.
+# ⚠️ Preis, bewusst in Kauf genommen: bräche die Datumsermittlung bei Avaaz
+# ganz, fiele es DIESEM Melder nicht mehr auf. Scharf bleiben die
+# Deckungsprüfung (wie viele Sätze überhaupt ein Datum tragen), die
+# Entdeckungs-Warnung je Zweig und `bilanz.offen`.
+STARTDATUM_KURATIERT_PRAEFIX = ("avaaz",)
+
+
+def startdatum_kuratiert(platform: str) -> bool:
+    """Veröffentlicht die Quelle dieser Plattform kuratiert statt laufend?"""
+    return str(platform or "").startswith(STARTDATUM_KURATIERT_PRAEFIX)
+
 SKIP_LOESCH_ANTEIL_MAX = 0.30   # >30 % skip unter den geprüften = Verdacht
 SKIP_LOESCH_MIN_ABS = 10        # darunter greift die Bremse nicht (kleine Bestände)
 
@@ -3190,6 +3229,37 @@ def _bestandspruefung(store: dict, vorher: dict,
                           f"nothing new is being published. No action needed "
                           f"on our side — once the source becomes active "
                           f"again, this note disappears by itself.")
+        elif (startdatum_kuratiert(getattr(_TLS, "platform", None) or "")
+                and ((neu_dazu > 0 and alter > STARTDATUM_MAX_ALTER)
+                     or (alter > STARTDATUM_ALT_TAGE
+                         and isinstance(verfuegbar, int) and verfuegbar > 0))):
+            # ⚠️⚠️ Die Bedingung ist ABSICHTLICH die Vereinigung der beiden
+            # Warnzweige darunter — Wort für Wort dieselbe. Damit ist dieser
+            # Zweig eine reine UMSTUFUNG: er kann keine Meldung erzeugen, wo
+            # vorher keine war. Eine eigene (z. B. nur STARTDATUM_MAX_ALTER)
+            # hätte zwischen 30 und 90 Tagen neue Hinweise erfunden.
+            merke("hinweis", "Quelle veröffentlicht kuratiert",
+                  f"Das jüngste Startdatum im Bestand ist {alter} Tage alt "
+                  f"({juengstes_start}). Diese Quelle veröffentlicht aber "
+                  f"KURATIERT: ihr „Neu\"-Feed ist nicht chronologisch "
+                  f"sortiert, und sie bietet nur eine Auswahl an. Am "
+                  f"20.10.2026 standen alle angebotenen Petitionen schon im "
+                  f"Bestand. Das Alter sagt hier also nichts über den Scraper "
+                  f"und nichts über den Bestand, sondern etwas über die "
+                  f"Redaktion der Quelle. Kein Handlungsbedarf. ⚠️ Ein echter "
+                  f"Ausfall der Datumsermittlung fiele diesem Melder nicht "
+                  f"auf — dafür sind die Deckungsprüfung, die "
+                  f"Entdeckungs-Warnung und bilanz.offen zuständig.",
+                  thema_en="Source publishes a curated selection",
+                  text_en=f"The newest start date in the store is {alter} days "
+                          f"old ({juengstes_start}). This source publishes a "
+                          f"CURATED selection, though: its \"recent\" feed is "
+                          f"not in chronological order and it only offers a "
+                          f"subset. On 2026-10-20 every petition it offered "
+                          f"was already in the store. So the age says nothing "
+                          f"about the scraper and nothing about the store — it "
+                          f"says something about the source's editorial "
+                          f"choices. No action needed.")
         elif neu_dazu > 0 and alter > STARTDATUM_MAX_ALTER:
             merke("warnung", "Startdatum rückt nicht nach",
                   f"{neu_dazu} neue Sätze aufgenommen, das jüngste Startdatum "
