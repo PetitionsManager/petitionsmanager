@@ -31,18 +31,17 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-10-19T20:28:38+02:00",
-    "petition_count": 1918,
-    "available": 1864,
+    "generated_at": "2026-10-20T14:55:34+02:00",
+    "petition_count": 1920,
+    "available": 1866,
     "new_petitions_last_run": [
-      "1402-2026",
-      "1437-2026",
-      "1413-2026"
+      "1458-2026",
+      "1475-2026"
     ],
     "bilanz": {
-      "stand": "2026-10-19T20:28:38+02:00",
-      "gefunden": 1864,
-      "im_bestand": 1864,
+      "stand": "2026-10-20T14:55:34+02:00",
+      "gefunden": 1866,
+      "im_bestand": 1866,
       "unbrauchbar": 0,
       "verworfen": 0,
       "dublette": 0,
@@ -50,14 +49,14 @@
       "zurueckgestellt": 0,
       "offen": 0,
       "offene_beispiele": [],
-      "bestand_gesamt": 1918,
+      "bestand_gesamt": 1920,
       "bestand_ausserhalb": 54
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-10-19T20:28:38+02:00",
-        "gesamt": 1918,
-        "online": 1918,
+        "zeit": "2026-10-20T14:55:34+02:00",
+        "gesamt": 1920,
+        "online": 1920,
         "offline": 0,
         "ohne_titel": 0,
         "platzhalter": 0,
@@ -69,13 +68,13 @@
         "mit_code_im_text": 0,
         "mit_ballast_in_kurzfassung": 0,
         "herkunft": "lokal_cron",
-        "neu": 3
+        "neu": 2
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-10-19T20:28:38+02:00",
-      "gesamt": 1918,
-      "online": 1918,
+      "zeit": "2026-10-20T14:55:34+02:00",
+      "gesamt": 1920,
+      "online": 1920,
       "offline": 0,
       "ohne_titel": 0,
       "platzhalter": 0,
@@ -87,19 +86,19 @@
       "mit_code_im_text": 0,
       "mit_ballast_in_kurzfassung": 0
     },
-    "verlauf_felder_ab": "2026-10-19T20:28:38+02:00",
+    "verlauf_felder_ab": "2026-10-20T14:55:34+02:00",
     "befunde": [
       {
         "stufe": "hinweis",
         "thema": "Startdatum ist ein Verfahrensdatum",
-        "text": "Tagesgenaues Datum bei 991 von 1918 Sätzen; es ist das Zulässigkeitsdatum aus der Mitteilung an die Mitglieder, nicht der Start der Petition. Das jüngste ist 88 Tage alt (2026-07-23) — bauartbedingt, weil das Dokument erst mit der Kommissionsantwort entsteht. Der Altersmelder ist hier deshalb ausgen",
-        "zeit": "2026-10-19T20:28:38+02:00",
+        "text": "Tagesgenaues Datum bei 991 von 1920 Sätzen; es ist das Zulässigkeitsdatum aus der Mitteilung an die Mitglieder, nicht der Start der Petition. Das jüngste ist 89 Tage alt (2026-07-23) — bauartbedingt, weil das Dokument erst mit der Kommissionsantwort entsteht. Der Altersmelder ist hier deshalb ausgen",
+        "zeit": "2026-10-20T14:55:34+02:00",
         "thema_en": "Start date is a procedural date",
-        "text_en": "Day-exact date on 991 of 1918 records; it is the date of admissibility from the Notice to Members, not the start of the petition. The newest is 88 days old (2026-07-23) — by design, as the document is only drawn up once the Commission has replied. The ageing check is therefore skipped here."
+        "text_en": "Day-exact date on 991 of 1920 records; it is the date of admissibility from the Notice to Members, not the start of the petition. The newest is 89 days old (2026-07-23) — by design, as the document is only drawn up once the Commission has replied. The ageing check is therefore skipped here."
       }
     ],
     "health_warning": null,
-    "online_count": 1918
+    "online_count": 1920
   },
   "0474-2026": {
     "slug": "0474-2026",
@@ -117222,5 +117221,105 @@
       "Vulnerable"
     ],
     "last_checked": "2026-10-19T17:48:47+02:00"
+  },
+  "1458-2026": {
+    "slug": "1458-2026",
+    "first_seen": "2026-10-20T14:54:24+02:00",
+    "signatures_history": [],
+    "title": "Petition 1458/2026: the alleged incorrect implementation of Directive 2004/38/EC concerning durable partners in Austria",
+    "started_by": "Simon Lauter (Austrian)",
+    "category": "Internal Market - Free movement of persons",
+    "country": "Austria",
+    "description_full": "<p>The petitioner, an Austrian citizen, claims that Austria does not correctly implement Directive 2004/38/EC with regard to the rights of extended family members under Article 3(2), in particular durable partners. The petitioner states that, after having exercised free movement rights in other EU Member States and subsequently returning to Austria, an application was made for a residence permit for the petitioner’s long-term partner, a third-country national. According to the petitioner, following legal proceedings, the partner was permitted to enter Austria but was granted only a national residence permit valid for one year rather than a residence card based on EU free movement rules. Moreover, the petitioner alleges that the partner is not permitted to take up employment in Austria during the first two years of residence. The petitioner further states that the Austrian embassy requires payment of a high fee for the necessary visa. The petitioner considers that these restrictions are incompatible with Directive 2004/38/EC, in particular its provisions concerning extended family members, entry visas and access to employment.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1458%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1458/2026</a></p>",
+    "summary": "The petitioner, an Austrian citizen, claims that Austria does not correctly implement Directive 2004/38/EC with regard to the rights of extended family members under Article 3(2), in particular durabl…",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:1458-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1458%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-10-20T14:55:22",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 1458/2026: zur mutmaßlich nicht ordnungsgemäßen Umsetzung der Richtlinie 2004/38/EG in Bezug auf Lebenspartner in einer dauerhaften Beziehung in Österreich",
+        "summary": "Der Petent, bei dem es sich um einen österreichischen Staatsbürger handelt, macht geltend, dass Österreich die Richtlinie 2004/38/EG in Bezug auf die Rechte von sonstigen Familienangehörigen gemäß Art…",
+        "description_full": "<p>Der Petent, bei dem es sich um einen österreichischen Staatsbürger handelt, macht geltend, dass Österreich die Richtlinie 2004/38/EG in Bezug auf die Rechte von sonstigen Familienangehörigen gemäß Artikel 3 Absatz 2, insbesondere von Lebenspartnern in einer dauerhaften Beziehung, nicht ordnungsgemäß umsetze. Er gibt an, nach der Wahrnehmung des Rechts auf Freizügigkeit in anderen EU-Mitgliedstaaten und der anschließenden Rückkehr nach Österreich einen Antrag auf Erteilung eines Aufenthaltstitels für die Person gestellt zu haben, mit der er eine langjährige Partnerschaft führt und die die Staatsangehörigkeit eines Drittlands besitzt. Nach einem Gerichtsverfahren sei der betreffenden Person die Einreise nach Österreich gestattet worden, ihr sei jedoch nur ein nationaler Aufenthaltstitel mit einer Gültigkeitsdauer von einem Jahr und nicht eine Aufenthaltskarte auf der Grundlage der EU-Freizügigkeitsvorschriften erteilt worden. Darüber hinaus sei es ihr in den ersten beiden Jahren ihres Aufenthalts in Österreich nicht gestattet, eine Beschäftigung aufzunehmen. Der Petent erklärt ferner, dass die österreichische Botschaft eine hohe Gebühr für das erforderliche Visum verlange. Seiner Ansicht nach seien diese Beschränkungen nicht mit der Richtlinie 2004/38/EG vereinbar, insbesondere mit den Bestimmungen über sonstige Familienangehörige, Einreisevisa und den Zugang zu Beschäftigung.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=1458%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1458/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=1458%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-10-20T14:54:24+02:00",
+    "offline_since": null,
+    "tags": [
+      "Petitioner",
+      "Austria",
+      "Directive",
+      "Residence",
+      "Particular",
+      "Austrian",
+      "Extended",
+      "Members",
+      "Partner",
+      "Family"
+    ],
+    "last_checked": "2026-10-20T14:54:24+02:00"
+  },
+  "1475-2026": {
+    "slug": "1475-2026",
+    "first_seen": "2026-10-20T14:54:24+02:00",
+    "signatures_history": [],
+    "title": "Petition 1475/2026: alleged non-compliant transposition of Directive (EU) 2023/970 by Italy",
+    "started_by": "D. F. (Italian)",
+    "category": "Equal Opportunities and Gender",
+    "country": "Italy",
+    "description_full": "<p>The petitioner alleges that Italy has not correctly transposed Directive (EU) 2023/970 on pay transparency through Legislative Decree No 96 of 7 May 2026. In particular, the petitioner challenges Article 3 of the Italian decree, which defines “pay level” by referring to fixed and continuous remuneration components while excluding certain individual non-structural remuneration components, including, according to the petitioner, individual salary increases known as “superminimi”. The petitioner considers that this exclusion is inconsistent with the broad concept of “pay” established by the Directive, which includes basic or minimum salary as well as other remuneration received directly or indirectly from the employer, including complementary or variable components. The petitioner argues that excluding such individual remuneration components from the comparison underlying pay transparency could prevent workers from obtaining meaningful information on actual remuneration and could make it more difficult to identify potential gender-based pay differences. The petitioner therefore calls on the European Parliament to examine the compatibility of the Italian legislation with Directive (EU) 2023/970, to invite the European Commission to consider infringement proceedings against Italy and to encourage the Italian authorities to amend the definition of “pay level” so as to include all relevant remuneration components and ensure effective justification of individual pay differences on objective and gender-neutral grounds.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1475%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1475/2026</a></p>",
+    "summary": "The petitioner alleges that Italy has not correctly transposed Directive (EU) 2023/970 on pay transparency through Legislative Decree No 96 of 7 May 2026. In particular, the petitioner challenges Arti…",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:1475-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1475%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-10-20T14:55:29",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 1475/2026: zur mutmaßlich nicht konformen Umsetzung der Richtlinie (EU) 2023/970 durch Italien",
+        "summary": "Der Petent macht geltend, dass Italien die Richtlinie (EU) 2023/970 über Entgelttransparenz durch das gesetzesvertretende Dekret Nr. 96 vom 7. Mai 2026 nicht ordnungsgemäß umgesetzt habe. Insbesondere…",
+        "description_full": "<p>Der Petent macht geltend, dass Italien die Richtlinie (EU) 2023/970 über Entgelttransparenz durch das gesetzesvertretende Dekret Nr. 96 vom 7. Mai 2026 nicht ordnungsgemäß umgesetzt habe. Insbesondere beanstandet der Petent Artikel 3 des italienischen Dekrets, in dem der Begriff „Entgelthöhe“ unter Bezugnahme auf feste und fortlaufende Vergütungsbestandteile definiert werde, während bestimmte individuelle, nicht strukturelle Vergütungsbestandteile ausgeschlossen würden, wozu nach Angaben des Petenten auch als „Superminimi“ bekannte individuelle Gehaltserhöhungen gehörten. Er ist der Ansicht, dass dieser Ausschluss nicht mit dem in der Richtlinie festgelegten weit gefassten Begriff „Entgelt“ vereinbar sei, der Grund- oder Mindestgehälter sowie andere direkt oder indirekt vom Arbeitgeber erhaltene Vergütungen, einschließlich ergänzender oder variabler Bestandteile, umfasse. Der Petent führt an, dass der Ausschluss solcher individuellen Vergütungsbestandteile aus dem Vergleich, der der Entgelttransparenz zugrunde liegt, dazu führen könnte, dass Arbeitnehmer keine aussagekräftigen Informationen über die tatsächliche Vergütung erhalten und die Ermittlung potenzieller geschlechtsspezifischer Entgeltunterschiede erschwert wird. Er fordert das Europäische Parlament daher auf, die Vereinbarkeit der italienischen Rechtsvorschriften mit der Richtlinie (EU) 2023/970 zu prüfen, die Kommission aufzufordern, ein Vertragsverletzungsverfahren gegen Italien in Erwägung zu ziehen, und die italienischen Behörden dazu anzuhalten, die Definition des Begriffs „Entgelthöhe“ zu ändern, um alle einschlägigen Vergütungsbestandteile einzubeziehen und eine wirksame Rechtfertigung individueller Entgeltunterschiede aus objektiven und geschlechtsneutralen Gründen sicherzustellen.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=1475%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1475/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=1475%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-10-20T14:54:24+02:00",
+    "offline_since": null,
+    "tags": [
+      "Petitioner",
+      "Remuneration",
+      "Components",
+      "Directive",
+      "Individual",
+      "Italy",
+      "Transparency",
+      "Italian",
+      "Decree",
+      "Differences"
+    ],
+    "last_checked": "2026-10-20T14:54:24+02:00"
   }
 }
