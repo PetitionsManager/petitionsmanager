@@ -9,6 +9,16 @@ threefifty_petitions.html
 
 # Scratch / lokal
 *.log
+# ⚠️ Die ROTIERTE Fassung braucht eine eigene Zeile: lokaler_pflege_lauf.sh
+# deckelt pflege-lauf.log bei 2 MB und schiebt die alte Fassung per
+# `mv -f "$LOG" "$LOG.alt"` beiseite (~Z. 171-173) — und `*.log` trifft
+# `pflege-lauf.log.alt` NICHT, weil das Muster am Namensende ansetzt. Die
+# Rotation erzeugte damit eine Datei, die ihre eigene Ignore-Regel verfehlt:
+# im Cron-Baum stand sie seit dem 4.10.2026 mit 1,9 MB dauerhaft im
+# `git status`. Gefahr war gering, weil das Pflege-Skript BENANNTE Pfade stagt
+# und kein `git add -A` — aber ein Repo soll sich selbst schuetzen (dieselbe
+# Begruendung wie bei .claude/settings.local.json unten). Gefunden 20.10.2026.
+*.log.alt
 # Laufzeit-Protokolle: laufzeiten.tsv schreibt lokaler_pflege_lauf.sh je Lauf,
 # ci-laufzeiten.tsv fuehrt laufzeiten.py aus der GitHub-API nach. Beides sind
 # Messwerte DIESES Rechners, keine Quelle — und ci-laufzeiten.tsv waechst
