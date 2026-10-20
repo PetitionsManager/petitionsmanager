@@ -81,3 +81,20 @@ android/app/signing.p12
 # `.claude/launch.json` bleibt bewusst versioniert: der Vorschau-Server
 # gehoert zum Projekt.
 .claude/settings.local.json
+
+# Wegwerf-Arbeitsbaeume von Claude-Code-Agenten - derselbe Fall wie die Zeile
+# darueber, nur groesser.
+#
+# Warum es hier steht (20.10.2026): in .claude/worktrees/ lag ein Agenten-Klon
+# vom 18.9.2026 mit 65 MB herum und tauchte in JEDEM `git status` als
+# unverfolgt auf. Er trug +142 unversionierte Zeilen und 0 eigene Commits; von
+# 126 geprueften Zeilen fehlte auf main keine einzige, das Loeschen war also
+# gefahrlos - aber genau diese Pruefung musste jemand erst machen. Agenten
+# legen dort immer wieder neue an, und ein `git add -A` wuerde sie mitnehmen.
+#
+# ⚠️ NUR der Unterordner, nicht `.claude/` selbst: agents/*.md und launch.json
+# sind versioniert und gehoeren zum Projekt.
+# ⚠️ Entfernt werden die Baeume mit `git worktree remove --force` + `worktree
+# prune` + `branch -D`, nicht mit `rm -rf` - sonst bleibt die Registrierung
+# stehen. Eine Ignore-Regel raeumt nichts auf, sie haelt nur den Status sauber.
+.claude/worktrees/
