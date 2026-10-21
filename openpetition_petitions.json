@@ -31,22 +31,12 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-10-21T18:20:48+02:00",
+    "generated_at": "2026-10-21T23:37:38+02:00",
     "petition_count": 2560,
     "available": 1738,
-    "new_petitions_last_run": [
-      "425-mitglieder-aber-nur-noch-4-wasserstunden-faire-wasserzeiten-fuer-die-white-sharks-trier-e-v",
-      "duisburger-bibliotheken-erhalten-keine-schliessung-der-bibliothek-in-rumeln-kaldenhausen",
-      "gegen-die-schliessung-des-mathilden-hospitals-in-herford",
-      "stoppt-die-baumfaellung-in-der-pestalozzistrasse",
-      "liebe-darf-keine-existenz-kosten",
-      "angemessene-entschaedigung-fuer-dienstfahrten-mit-dem-privaten-pkw",
-      "kein-musterungszentrum-in-kassel",
-      "unsere-biberfamilie-in-waidmannsbach-soll-bleiben",
-      "preise-senken-oder-mehr-lohn-rente-keine-steuern-fuer-pensionierte-und-schluss-mit-der-teuerung"
-    ],
+    "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-10-21T18:20:47+02:00",
+      "stand": "2026-10-21T23:37:38+02:00",
       "gefunden": 1738,
       "im_bestand": 1738,
       "unbrauchbar": 0,
@@ -76,10 +66,27 @@
         "mit_ballast_in_kurzfassung": 0,
         "herkunft": "lokal_cron",
         "neu": 9
+      },
+      {
+        "zeit": "2026-10-21T23:37:38+02:00",
+        "gesamt": 2560,
+        "online": 2560,
+        "offline": 0,
+        "ohne_titel": 0,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 0,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 2545,
+        "juengstes_start": "2026-10-21",
+        "mit_code_im_text": 0,
+        "mit_ballast_in_kurzfassung": 0,
+        "herkunft": "lokal_cron",
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-10-21T18:20:47+02:00",
+      "zeit": "2026-10-21T23:37:38+02:00",
       "gesamt": 2560,
       "online": 2560,
       "offline": 0,
