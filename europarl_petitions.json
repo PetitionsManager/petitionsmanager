@@ -31,14 +31,17 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-10-21T10:27:45+02:00",
-    "petition_count": 1920,
-    "available": 1866,
-    "new_petitions_last_run": [],
+    "generated_at": "2026-10-21T18:17:26+02:00",
+    "petition_count": 1922,
+    "available": 1868,
+    "new_petitions_last_run": [
+      "1484-2026",
+      "1500-2026"
+    ],
     "bilanz": {
-      "stand": "2026-10-21T10:27:44+02:00",
-      "gefunden": 1866,
-      "im_bestand": 1866,
+      "stand": "2026-10-21T18:17:26+02:00",
+      "gefunden": 1868,
+      "im_bestand": 1868,
       "unbrauchbar": 0,
       "verworfen": 0,
       "dublette": 0,
@@ -46,14 +49,14 @@
       "zurueckgestellt": 0,
       "offen": 0,
       "offene_beispiele": [],
-      "bestand_gesamt": 1920,
+      "bestand_gesamt": 1922,
       "bestand_ausserhalb": 54
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-10-21T10:27:44+02:00",
-        "gesamt": 1920,
-        "online": 1920,
+        "zeit": "2026-10-21T18:17:26+02:00",
+        "gesamt": 1922,
+        "online": 1922,
         "offline": 0,
         "ohne_titel": 0,
         "platzhalter": 0,
@@ -65,13 +68,13 @@
         "mit_code_im_text": 0,
         "mit_ballast_in_kurzfassung": 0,
         "herkunft": "lokal_cron",
-        "neu": 0
+        "neu": 2
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-10-21T10:27:44+02:00",
-      "gesamt": 1920,
-      "online": 1920,
+      "zeit": "2026-10-21T18:17:26+02:00",
+      "gesamt": 1922,
+      "online": 1922,
       "offline": 0,
       "ohne_titel": 0,
       "platzhalter": 0,
@@ -83,19 +86,19 @@
       "mit_code_im_text": 0,
       "mit_ballast_in_kurzfassung": 0
     },
-    "verlauf_felder_ab": "2026-10-21T10:27:44+02:00",
+    "verlauf_felder_ab": "2026-10-21T18:17:26+02:00",
     "befunde": [
       {
         "stufe": "hinweis",
         "thema": "Startdatum ist ein Verfahrensdatum",
-        "text": "Tagesgenaues Datum bei 991 von 1920 Sätzen; es ist das Zulässigkeitsdatum aus der Mitteilung an die Mitglieder, nicht der Start der Petition. Das jüngste ist 90 Tage alt (2026-07-23) — bauartbedingt, weil das Dokument erst mit der Kommissionsantwort entsteht. Der Altersmelder ist hier deshalb ausgen",
-        "zeit": "2026-10-21T10:27:44+02:00",
+        "text": "Tagesgenaues Datum bei 991 von 1922 Sätzen; es ist das Zulässigkeitsdatum aus der Mitteilung an die Mitglieder, nicht der Start der Petition. Das jüngste ist 90 Tage alt (2026-07-23) — bauartbedingt, weil das Dokument erst mit der Kommissionsantwort entsteht. Der Altersmelder ist hier deshalb ausgen",
+        "zeit": "2026-10-21T18:17:26+02:00",
         "thema_en": "Start date is a procedural date",
-        "text_en": "Day-exact date on 991 of 1920 records; it is the date of admissibility from the Notice to Members, not the start of the petition. The newest is 90 days old (2026-07-23) — by design, as the document is only drawn up once the Commission has replied. The ageing check is therefore skipped here."
+        "text_en": "Day-exact date on 991 of 1922 records; it is the date of admissibility from the Notice to Members, not the start of the petition. The newest is 90 days old (2026-07-23) — by design, as the document is only drawn up once the Commission has replied. The ageing check is therefore skipped here."
       }
     ],
     "health_warning": null,
-    "online_count": 1920
+    "online_count": 1922
   },
   "0474-2026": {
     "slug": "0474-2026",
@@ -117318,5 +117321,105 @@
       "Differences"
     ],
     "last_checked": "2026-10-20T14:54:24+02:00"
+  },
+  "1484-2026": {
+    "slug": "1484-2026",
+    "first_seen": "2026-10-21T18:16:19+02:00",
+    "signatures_history": [],
+    "title": "Petition 1484/2026: whistleblower protection in Germany",
+    "started_by": "M. L. (Ukrainian)",
+    "category": "Fundamental Rights",
+    "country": "Germany",
+    "description_full": "<p>The petitioner asks the European Parliament to examine whether Germany’s national whistleblower-protection, enforcement, data-protection and judicial mechanisms provide effective protection in practice where reports concern Union-law-relevant IT-security and compliance risks in the financial sector. The petitioner states that in 2025, an employee of a large IT service provider raised internal concerns about, inter alia, compliance failures, access controls, and database security, in a financial-sector IT project. The concerns were reported to the financial‑sector supervisory authorities. After the reporting activity, the reporting person allegedly suffered pressure, threats and continued adverse HR processing, including disputed warning records and negative performance entries. Retaliation was reported to the Federal Office of Justice. The petitioner alleges that the Federal Office of Justice limited protection on the basis that no prior report to a formally designated reporting office could be identified.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1484%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1484/2026</a></p>",
+    "summary": "The petitioner asks the European Parliament to examine whether Germany’s national whistleblower-protection, enforcement, data-protection and judicial mechanisms provide effective protection in practic…",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:1484-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1484%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-10-21T18:17:15",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 1484/2026: zum Schutz von Hinweisgebern in Deutschland",
+        "summary": "Der Petent ersucht das Europäische Parlament, zu prüfen, ob die deutschen nationalen Mechanismen zum Schutz von Hinweisgebern, zur Rechtsdurchsetzung, zum Datenschutz und zu Rechtsbehelfen in der Prax…",
+        "description_full": "<p>Der Petent ersucht das Europäische Parlament, zu prüfen, ob die deutschen nationalen Mechanismen zum Schutz von Hinweisgebern, zur Rechtsdurchsetzung, zum Datenschutz und zu Rechtsbehelfen in der Praxis einen wirksamen Schutz bieten, wenn die Meldungen Risiken im Bereich der IT-Sicherheit und Compliance-Risiken im Finanzsektor betreffen, die unter das Unionsrecht fallen. Der Petent führt aus, dass im Jahr 2025 ein Mitarbeiter eines großen IT-Dienstleisters im Rahmen eines IT-Projekts im Finanzsektor intern Bedenken unter anderem in Bezug auf Verstöße gegen die Vorschriften, Zugriffskontrollen und die Sicherheit von Datenbanken geäußert habe. Die Bedenken seien den Aufsichtsbehörden des Finanzsektors gemeldet worden. Nach der Meldung sei der Hinweisgeber mutmaßlich Druck, Drohungen und anhaltenden nachteiligen Maßnahmen seitens der Personalabteilung ausgesetzt gewesen, darunter fragwürdige Verwarnungen und negative Leistungsbeurteilungen. Die Vergeltungsmaßnahmen seien dem Bundesamt für Justiz gemeldet worden. Der Petent macht geltend, dass das Bundesamt für Justiz den Schutz mit der Begründung eingeschränkt habe, dass keine vorherige Meldung an eine formell benannte Meldestelle festgestellt werden konnte.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=1484%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1484/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=1484%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-10-21T18:16:19+02:00",
+    "offline_since": null,
+    "tags": [
+      "Petitioner",
+      "Protection",
+      "Reporting",
+      "Germany",
+      "Office",
+      "Whistleblower-protection",
+      "Data-protection",
+      "Enforcement",
+      "Compliance",
+      "Mechanisms"
+    ],
+    "last_checked": "2026-10-21T18:16:19+02:00"
+  },
+  "1500-2026": {
+    "slug": "1500-2026",
+    "first_seen": "2026-10-21T18:16:19+02:00",
+    "signatures_history": [],
+    "title": "Petition 1500/2026: the revision of ETS2 and the Energy Performance of Buildings Directive in Poland",
+    "started_by": "Sylwia Walasek (Polish)",
+    "category": "Security",
+    "country": "Poland",
+    "description_full": "<p>The petitioner demands review of the ETS 2 system regulations and the Energy Performance of Buildings Directive (EPBD), arguing that they violate the principle of social justice and equal treatment by disproportionately affecting residents of cold-climate countries like Poland. According to the petitioner, introduction of a tax on emissions from fossil fuels used for home heating (ETS 2) from 2027 and the mandatory phase-out of gas and coal heating systems by 2040 allegedly disproportionately affects residents of countries with cold climates, such as Poland, compared to those in Southern Europe. The petitioner cites climate inequality (long harsh winters in east and north), lack of technological neutrality and threat to property rights (mandatory retrofitting and bans on existing heating systems are financially unfeasible for average households, risking energy poverty and dispossession) as well as domino effect on costs of living as key concerns. Moreover, support programs and subsidies allegedly do not solve them. The petitioner therefore calls on the European Parliament to take immediate action to exclude households from the ETS 2 tax system, abolish rigid and unrealistic deadlines for the ban on fossil fuel use in home heating for countries with harsh climates and align climate goals with the real financial capabilities of citizens and local geographical conditions.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1500%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1500/2026</a></p>",
+    "summary": "The petitioner demands review of the ETS 2 system regulations and the Energy Performance of Buildings Directive (EPBD), arguing that they violate the principle of social justice and equal treatment by…",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:1500-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1500%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-10-21T18:17:22",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 1500/2026: zur Überarbeitung des EHS2 und der Richtlinie über die Gesamtenergieeffizienz von Gebäuden in Polen",
+        "summary": "Die Petentin fordert eine Überprüfung der Vorschriften zum EHS2 und der Richtlinie über die Gesamtenergieeffizienz von Gebäuden (EPBD) und macht geltend, dass diese gegen den Grundsatz der sozialen Ge…",
+        "description_full": "<p>Die Petentin fordert eine Überprüfung der Vorschriften zum EHS2 und der Richtlinie über die Gesamtenergieeffizienz von Gebäuden (EPBD) und macht geltend, dass diese gegen den Grundsatz der sozialen Gerechtigkeit und der Gleichbehandlung verstießen, da sie Einwohner von Ländern mit kaltem Klima wie Polen unverhältnismäßig stark belasteten. Die Einführung einer Bepreisung von Emissionen aus fossilen Brennstoffen für die Beheizung von Wohngebäuden (EHS2) ab 2027 und der verbindliche Ausstieg aus mit Gas und Kohle betriebenen Heizsystemen bis 2040 hätten ihrer Ansicht nach für die Einwohner von Ländern mit kaltem Klima wie Polen weitaus größere Auswirkungen als für die Menschen in Südeuropa. Als zentrale Bedenken nennt die Petentin die Klimaungleichheit (lange raue Winter im Osten und Norden), die fehlende Technologieneutralität und die Bedrohung der Eigentumsrechte (obligatorische Nachrüstung und Verbote bestehender Heizungsanlagen seien für Durchschnittshaushalte finanziell nicht machbar, wodurch Energiearmut und Enteignung drohten) sowie den Dominoeffekt auf die Lebenshaltungskosten. Darüber hinaus würden Unterstützungsprogramme und Zuschüsse hierbei keine Abhilfe schaffen. Die Petentin fordert das Europäische Parlament daher auf, unverzüglich Maßnahmen zu ergreifen, um Haushalte von der Besteuerung im Rahmen des EHS2 auszunehmen, starre und unrealistische Fristen für das Verbot der Nutzung fossiler Brennstoffe für die Beheizung von Wohngebäuden in Ländern mit rauem Klima abzuschaffen und die Klimaziele mit den tatsächlichen finanziellen Möglichkeiten der Bürgerinnen und Bürger sowie mit den lokalen geografischen Gegebenheiten in Einklang zu bringen.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=1500%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1500/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=1500%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-10-21T18:16:19+02:00",
+    "offline_since": null,
+    "tags": [
+      "Petitioner",
+      "Heating",
+      "Energy",
+      "Performance",
+      "Buildings",
+      "Countries",
+      "Directive",
+      "Poland",
+      "System",
+      "Disproportionately"
+    ],
+    "last_checked": "2026-10-21T18:16:19+02:00"
   }
 }
