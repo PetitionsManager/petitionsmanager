@@ -31,21 +31,14 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-10-20T20:44:22+02:00",
+    "generated_at": "2026-10-21T10:30:58+02:00",
     "petition_count": 2551,
-    "available": 1740,
-    "new_petitions_last_run": [
-      "balance-sports-am-hammerwerk-erhalten-sport-und-reha-in-grevenbroich-sichern",
-      "einfuehrung-nationaler-pflegekindertag-am-2-juni-2027",
-      "direktverbindung-retten-keine-streichung-der-durchfahrende-zuege-von-pressig-rohtenkirchen-nach-erla",
-      "ploeckenpass-aufnahme-der-ploeckenpass-strasse-b-110-in-die-zustaendigkeit-des-bundes",
-      "keine-geschwindigkeitsueberwachung-durch-polizeidrohnen-in-der-schweiz",
-      "gegen-die-kriminalisierung-von-buergern-im-awz-grafendorf-fuer-wuerde-transparenz"
-    ],
+    "available": 1730,
+    "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-10-20T20:44:21+02:00",
-      "gefunden": 1740,
-      "im_bestand": 1740,
+      "stand": "2026-10-21T10:30:57+02:00",
+      "gefunden": 1730,
+      "im_bestand": 1730,
       "unbrauchbar": 0,
       "verworfen": 0,
       "dublette": 0,
@@ -54,11 +47,11 @@
       "offen": 0,
       "offene_beispiele": [],
       "bestand_gesamt": 2551,
-      "bestand_ausserhalb": 811
+      "bestand_ausserhalb": 821
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-10-20T20:44:21+02:00",
+        "zeit": "2026-10-21T10:30:57+02:00",
         "gesamt": 2551,
         "online": 2551,
         "offline": 0,
@@ -72,11 +65,11 @@
         "mit_code_im_text": 0,
         "mit_ballast_in_kurzfassung": 0,
         "herkunft": "lokal_cron",
-        "neu": 6
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-10-20T20:44:21+02:00",
+      "zeit": "2026-10-21T10:30:57+02:00",
       "gesamt": 2551,
       "online": 2551,
       "offline": 0,
@@ -90,7 +83,7 @@
       "mit_code_im_text": 0,
       "mit_ballast_in_kurzfassung": 0
     },
-    "verlauf_felder_ab": "2026-10-20T20:44:21+02:00",
+    "verlauf_felder_ab": "2026-10-21T10:30:57+02:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 2551
@@ -151536,6 +151529,10 @@
       {
         "checked_at": "2026-10-17T21:43:46+02:00",
         "count": 726
+      },
+      {
+        "checked_at": "2026-10-21T10:27:56+02:00",
+        "count": 786
       }
     ],
     "title": "Tiere gehören zum Historischen Cannstatter Volksfestumzug",
@@ -151547,7 +151544,7 @@
     "category": "Kultur",
     "category_url": "https://www.openpetition.de/petitionen?category=25#petitionen",
     "country": "DE",
-    "signatures": 726,
+    "signatures": 786,
     "start_date": "2026-10-12",
     "lang": "de",
     "campaign_id": "openpetition:tiere-gehoeren-zum-historischen-cannstatter-volksfestumzug",
@@ -151555,7 +151552,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-17T21:43:46+02:00",
+    "last_seen": "2026-10-21T10:27:56+02:00",
     "offline_since": null,
     "tags": [
       "Volksfestumzug",
@@ -151569,7 +151566,7 @@
       "Teilnahme",
       "Historischen"
     ],
-    "last_checked": "2026-10-17T21:43:46+02:00"
+    "last_checked": "2026-10-21T10:27:56+02:00"
   },
   "vertraute-beziehungen-erhalten-niklas-winkler-in-der-kita-sonnenstrahlen-halten": {
     "slug": "vertraute-beziehungen-erhalten-niklas-winkler-in-der-kita-sonnenstrahlen-halten",
@@ -151582,6 +151579,10 @@
       {
         "checked_at": "2026-10-17T21:43:46+02:00",
         "count": 136
+      },
+      {
+        "checked_at": "2026-10-21T10:27:56+02:00",
+        "count": 138
       }
     ],
     "title": "Vertraute Beziehungen erhalten: Niklas Winkler in der Kita SOnnenStrahlen halten",
@@ -151593,7 +151594,7 @@
     "category": "Bildung",
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
     "country": "DE",
-    "signatures": 136,
+    "signatures": 138,
     "goal": 500,
     "start_date": "2026-10-12",
     "lang": "de",
@@ -151602,7 +151603,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-17T21:43:46+02:00",
+    "last_seen": "2026-10-21T10:27:56+02:00",
     "offline_since": null,
     "tags": [
       "Kinder",
@@ -151616,7 +151617,7 @@
       "Weiterbeschäftigung",
       "Finanziellen"
     ],
-    "last_checked": "2026-10-17T21:43:46+02:00"
+    "last_checked": "2026-10-21T10:27:56+02:00"
   },
   "keine-kuerzung-des-freistaats-bayern-nein-zur-aenderung-der-gebuehrensatzung-fuer-staedtische-kitas": {
     "slug": "keine-kuerzung-des-freistaats-bayern-nein-zur-aenderung-der-gebuehrensatzung-fuer-staedtische-kitas",
@@ -151629,6 +151630,10 @@
       {
         "checked_at": "2026-10-17T21:43:46+02:00",
         "count": 51
+      },
+      {
+        "checked_at": "2026-10-21T10:27:56+02:00",
+        "count": 53
       }
     ],
     "title": "Keine Kürzung des Freistaats Bayern - Nein! zur Änderung der Gebührensatzung für städtische Kitas",
@@ -151640,7 +151645,7 @@
     "category": "Familie",
     "category_url": "https://www.openpetition.de/petitionen?category=14#petitionen",
     "country": "DE",
-    "signatures": 51,
+    "signatures": 53,
     "start_date": "2026-10-12",
     "lang": "de",
     "campaign_id": "openpetition:keine-kuerzung-des-freistaats-bayern-nein-zur-aenderung-der-gebuehrensatzung-fuer-staedtische-kitas",
@@ -151648,7 +151653,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-17T21:43:46+02:00",
+    "last_seen": "2026-10-21T10:27:56+02:00",
     "offline_since": null,
     "tags": [
       "Gebührensatzung",
@@ -151662,7 +151667,7 @@
       "Änderung",
       "Besuch"
     ],
-    "last_checked": "2026-10-17T21:43:46+02:00"
+    "last_checked": "2026-10-21T10:27:56+02:00"
   },
   "der-staat-bestimmt-nicht-wann-ich-mein-kind-abgebe": {
     "slug": "der-staat-bestimmt-nicht-wann-ich-mein-kind-abgebe",
@@ -151675,6 +151680,10 @@
       {
         "checked_at": "2026-10-17T21:43:46+02:00",
         "count": 28
+      },
+      {
+        "checked_at": "2026-10-21T10:27:56+02:00",
+        "count": 30
       }
     ],
     "title": "Der Staat bestimmt nicht, wann ich mein Kind abgebe!",
@@ -151686,7 +151695,7 @@
     "category": "Familie",
     "category_url": "https://www.openpetition.de/petitionen?category=14#petitionen",
     "country": "DE",
-    "signatures": 28,
+    "signatures": 30,
     "start_date": "2026-10-12",
     "lang": "de",
     "campaign_id": "openpetition:der-staat-bestimmt-nicht-wann-ich-mein-kind-abgebe",
@@ -151694,7 +151703,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-17T21:43:46+02:00",
+    "last_seen": "2026-10-21T10:27:56+02:00",
     "offline_since": null,
     "tags": [
       "Kind",
@@ -151708,7 +151717,7 @@
       "Arbeiten",
       "Familien"
     ],
-    "last_checked": "2026-10-17T21:43:46+02:00"
+    "last_checked": "2026-10-21T10:27:56+02:00"
   },
   "kita-beitragserhoehung-in-paderborn-stoppen": {
     "slug": "kita-beitragserhoehung-in-paderborn-stoppen",
