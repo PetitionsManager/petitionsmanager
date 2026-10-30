@@ -31,26 +31,12 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-10-29T19:42:35+01:00",
+    "generated_at": "2026-10-30T07:05:33+01:00",
     "petition_count": 1940,
     "available": 1886,
-    "new_petitions_last_run": [
-      "1562-2026",
-      "1093-2026",
-      "1606-2026",
-      "1334-2026",
-      "1294-2026",
-      "1247-2026",
-      "1322-2026",
-      "1555-2026",
-      "1271-2026",
-      "1051-2026",
-      "1602-2026",
-      "1251-2026",
-      "1392-2026"
-    ],
+    "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-10-29T19:42:34+01:00",
+      "stand": "2026-10-30T07:05:33+01:00",
       "gefunden": 1886,
       "im_bestand": 1886,
       "unbrauchbar": 0,
@@ -80,10 +66,27 @@
         "mit_ballast_in_kurzfassung": 0,
         "herkunft": "lokal_cron",
         "neu": 13
+      },
+      {
+        "zeit": "2026-10-30T07:05:33+01:00",
+        "gesamt": 1940,
+        "online": 1940,
+        "offline": 0,
+        "ohne_titel": 0,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 0,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 994,
+        "juengstes_start": "2026-07-23",
+        "mit_code_im_text": 0,
+        "mit_ballast_in_kurzfassung": 0,
+        "herkunft": "lokal_cron",
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-10-29T19:42:34+01:00",
+      "zeit": "2026-10-30T07:05:33+01:00",
       "gesamt": 1940,
       "online": 1940,
       "offline": 0,
@@ -102,10 +105,10 @@
       {
         "stufe": "hinweis",
         "thema": "Startdatum ist ein Verfahrensdatum",
-        "text": "Tagesgenaues Datum bei 994 von 1940 Sätzen; es ist das Zulässigkeitsdatum aus der Mitteilung an die Mitglieder, nicht der Start der Petition. Das jüngste ist 98 Tage alt (2026-07-23) — bauartbedingt, weil das Dokument erst mit der Kommissionsantwort entsteht. Der Altersmelder ist hier deshalb ausgen",
-        "zeit": "2026-10-29T19:42:34+01:00",
+        "text": "Tagesgenaues Datum bei 994 von 1940 Sätzen; es ist das Zulässigkeitsdatum aus der Mitteilung an die Mitglieder, nicht der Start der Petition. Das jüngste ist 99 Tage alt (2026-07-23) — bauartbedingt, weil das Dokument erst mit der Kommissionsantwort entsteht. Der Altersmelder ist hier deshalb ausgen",
+        "zeit": "2026-10-30T07:05:33+01:00",
         "thema_en": "Start date is a procedural date",
-        "text_en": "Day-exact date on 994 of 1940 records; it is the date of admissibility from the Notice to Members, not the start of the petition. The newest is 98 days old (2026-07-23) — by design, as the document is only drawn up once the Commission has replied. The ageing check is therefore skipped here."
+        "text_en": "Day-exact date on 994 of 1940 records; it is the date of admissibility from the Notice to Members, not the start of the petition. The newest is 99 days old (2026-07-23) — by design, as the document is only drawn up once the Commission has replied. The ageing check is therefore skipped here."
       }
     ],
     "health_warning": null,
