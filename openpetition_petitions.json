@@ -31,26 +31,14 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-10-30T20:49:02+01:00",
+    "generated_at": "2026-10-31T09:21:23+01:00",
     "petition_count": 2645,
-    "available": 1755,
-    "new_petitions_last_run": [
-      "sperrung-waechtersbach-birstein-b276",
-      "verkehrschaos-und-laerm-stoppt-den-durchgangsverkehr-in-der-mittenwalder-fuerbringerstrasse",
-      "kita-st-thomas-morus-in-vogelheim-muss-bleiben",
-      "schillerschule-reilingen-genuegend-schulhofflaeche-fuer-unsere-kinder-der-klassen-1-10",
-      "gemeinsam-fuer-den-erhalt-des-landschaftsschutzgebietes-warper-heide",
-      "krankenhaeuser-auskoemmlich-finanzieren-fallpauschalen-abschaffen",
-      "streuobstwiese-in-gefahr-bauvorhaben-verhindern-die-streuobstwiese-erhalten-2",
-      "schluss-mit-dem-mietwahnsinn-in-werder",
-      "wohnquartier-knobben-in-hoerstel-bebauung-mit-augenmass-statt-11-mehrfamilienhaeusern",
-      "sicherung-und-staerkung-des-busverkehrs-in-mildstedt-erhalt-der-stadtbuslinien-5-7",
-      "doppelbesteuerung-der-rente-abschaffen"
-    ],
+    "available": 1753,
+    "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-10-30T20:49:02+01:00",
-      "gefunden": 1755,
-      "im_bestand": 1755,
+      "stand": "2026-10-31T09:21:22+01:00",
+      "gefunden": 1753,
+      "im_bestand": 1753,
       "unbrauchbar": 0,
       "verworfen": 0,
       "dublette": 0,
@@ -59,7 +47,7 @@
       "offen": 0,
       "offene_beispiele": [],
       "bestand_gesamt": 2645,
-      "bestand_ausserhalb": 890
+      "bestand_ausserhalb": 892
     },
     "lauf_verlauf": [
       {
@@ -78,10 +66,27 @@
         "mit_ballast_in_kurzfassung": 0,
         "herkunft": "lokal_cron",
         "neu": 11
+      },
+      {
+        "zeit": "2026-10-31T09:21:22+01:00",
+        "gesamt": 2645,
+        "online": 2645,
+        "offline": 0,
+        "ohne_titel": 0,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 0,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 2630,
+        "juengstes_start": "2026-10-30",
+        "mit_code_im_text": 0,
+        "mit_ballast_in_kurzfassung": 0,
+        "herkunft": "lokal_cron",
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-10-30T20:49:02+01:00",
+      "zeit": "2026-10-31T09:21:22+01:00",
       "gesamt": 2645,
       "online": 2645,
       "offline": 0,
