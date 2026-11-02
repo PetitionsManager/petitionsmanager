@@ -31,12 +31,12 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-10-31T09:18:22+01:00",
+    "generated_at": "2026-11-01T22:37:28+01:00",
     "petition_count": 1940,
     "available": 1886,
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-10-31T09:18:22+01:00",
+      "stand": "2026-11-01T22:37:28+01:00",
       "gefunden": 1886,
       "im_bestand": 1886,
       "unbrauchbar": 0,
@@ -51,24 +51,7 @@
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-10-30T19:51:49+01:00",
-        "gesamt": 1940,
-        "online": 1940,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 995,
-        "juengstes_start": "2026-07-23",
-        "mit_code_im_text": 0,
-        "mit_ballast_in_kurzfassung": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-10-31T09:18:22+01:00",
+        "zeit": "2026-11-01T22:37:28+01:00",
         "gesamt": 1940,
         "online": 1940,
         "offline": 0,
@@ -86,7 +69,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-10-31T09:18:22+01:00",
+      "zeit": "2026-11-01T22:37:28+01:00",
       "gesamt": 1940,
       "online": 1940,
       "offline": 0,
@@ -100,15 +83,15 @@
       "mit_code_im_text": 0,
       "mit_ballast_in_kurzfassung": 0
     },
-    "verlauf_felder_ab": "2026-10-30T19:51:49+01:00",
+    "verlauf_felder_ab": "2026-11-01T22:37:28+01:00",
     "befunde": [
       {
         "stufe": "hinweis",
         "thema": "Startdatum ist ein Verfahrensdatum",
-        "text": "Tagesgenaues Datum bei 995 von 1940 Sätzen; es ist das Zulässigkeitsdatum aus der Mitteilung an die Mitglieder, nicht der Start der Petition. Das jüngste ist 100 Tage alt (2026-07-23) — bauartbedingt, weil das Dokument erst mit der Kommissionsantwort entsteht. Der Altersmelder ist hier deshalb ausge",
-        "zeit": "2026-10-31T09:18:22+01:00",
+        "text": "Tagesgenaues Datum bei 995 von 1940 Sätzen; es ist das Zulässigkeitsdatum aus der Mitteilung an die Mitglieder, nicht der Start der Petition. Das jüngste ist 101 Tage alt (2026-07-23) — bauartbedingt, weil das Dokument erst mit der Kommissionsantwort entsteht. Der Altersmelder ist hier deshalb ausge",
+        "zeit": "2026-11-01T22:37:28+01:00",
         "thema_en": "Start date is a procedural date",
-        "text_en": "Day-exact date on 995 of 1940 records; it is the date of admissibility from the Notice to Members, not the start of the petition. The newest is 100 days old (2026-07-23) — by design, as the document is only drawn up once the Commission has replied. The ageing check is therefore skipped here."
+        "text_en": "Day-exact date on 995 of 1940 records; it is the date of admissibility from the Notice to Members, not the start of the petition. The newest is 101 days old (2026-07-23) — by design, as the document is only drawn up once the Commission has replied. The ageing check is therefore skipped here."
       }
     ],
     "health_warning": null,
@@ -16577,7 +16560,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-10-29T08:54:58+01:00",
+    "last_seen": "2026-11-01T22:34:44+01:00",
     "offline_since": null,
     "tags": [
       "Framework",
@@ -16591,7 +16574,7 @@
       "Petitioner",
       "According"
     ],
-    "last_checked": "2026-10-29T08:54:58+01:00"
+    "last_checked": "2026-11-01T22:34:44+01:00"
   },
   "1300-2025": {
     "slug": "1300-2025",
@@ -16627,7 +16610,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-10-29T08:54:58+01:00",
+    "last_seen": "2026-11-01T22:34:44+01:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -16641,7 +16624,7 @@
       "Subsequent",
       "Inability"
     ],
-    "last_checked": "2026-10-29T08:54:58+01:00"
+    "last_checked": "2026-11-01T22:34:44+01:00"
   },
   "1294-2025": {
     "slug": "1294-2025",
@@ -16677,7 +16660,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-10-29T08:54:58+01:00",
+    "last_seen": "2026-11-01T22:34:44+01:00",
     "offline_since": null,
     "tags": [
       "Occupation",
@@ -16691,7 +16674,7 @@
       "Territory",
       "Violation"
     ],
-    "last_checked": "2026-10-29T08:54:58+01:00",
+    "last_checked": "2026-11-01T22:34:44+01:00",
     "notice_url": {
       "bg": "https://www.europarl.europa.eu/RegData/commissions/peti/communication/2026/785156/PETI_CM(2026)785156_BG.pdf",
       "da": "https://www.europarl.europa.eu/RegData/commissions/peti/communication/2026/785156/PETI_CM(2026)785156_DA.pdf",
@@ -16747,7 +16730,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-10-29T08:54:58+01:00",
+    "last_seen": "2026-11-01T22:34:44+01:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -16761,7 +16744,7 @@
       "Complains",
       "Business"
     ],
-    "last_checked": "2026-10-29T08:54:58+01:00"
+    "last_checked": "2026-11-01T22:34:44+01:00"
   },
   "1289-2025": {
     "slug": "1289-2025",
@@ -117740,8 +117723,8 @@
     "signatures_history": [],
     "title": "Petition 1562/2026: the environmental safety risks of the Roșia Poieni tailings facility in Romania",
     "started_by": "Moritz Linder (German)",
-    "category": "Fishery and Maritime Affairs",
-    "country": "Hungary",
+    "category": "Environment - Pollution",
+    "country": "Bulgaria",
     "description_full": "<p>The petitioner raises concerns about the alleged environmental and safety risks associated with the Roșia Poieni copper mine and its tailings storage facility in Alba County, Romania, operated by a state-owned company. The petitioner alleges that monitoring has identified highly acidic water and elevated concentrations of sulphates, iron, copper and zinc, while satellite analysis has documented declining vegetation health in the surrounding area. The petitioner claims that a failure of the tailings dam, caused by structural collapse, overtopping during extreme rainfall or seismic activity, could release contaminated slurry into local streams and subsequently into the Arieș, Mureș, Tisza and Danube rivers, ultimately reaching the Black Sea and affecting several downstream countries. Recalling the 2000 Baia Mare cyanide spill, the petitioner alleges that Roșia Poieni presents comparable cross-border risks and expresses uncertainty as to whether adequate independent oversight and EU-compliant safety measures are in place. The petitioner further claims that increasingly severe rainfall and flooding linked to climate change may heighten the risk of overtopping. The petitioner questions whether Romania complies with Directive 2006/21/EC on waste from extractive industries and with relevant obligations under the Water Framework Directive, the Environmental Liability Directive and the Danube Protection Convention. The petitioner calls for the suspension of operations and expansion of the facility pending a public independent safety audit, an EU-level inspection, infringement proceedings against Romania, real-time public monitoring, a coordinated transboundary risk assessment and a review of the adequacy of Directive 2006/21/EC for facilities of this age, scale and risk profile.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1562%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1562/2026</a></p>",
     "summary": "The petitioner raises concerns about the alleged environmental and safety risks associated with the Roșia Poieni copper mine and its tailings storage facility in Alba County, Romania, operated by a st…",
     "recipient": "Committee on Petitions of the European Parliament (PETI)",
@@ -117768,7 +117751,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-10-29T19:40:14+01:00",
+    "last_seen": "2026-11-01T22:34:44+01:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -117782,7 +117765,7 @@
       "Risks",
       "Copper"
     ],
-    "last_checked": "2026-10-29T19:40:14+01:00"
+    "last_checked": "2026-11-01T22:34:44+01:00"
   },
   "1093-2026": {
     "slug": "1093-2026",
@@ -117818,7 +117801,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-10-29T19:40:14+01:00",
+    "last_seen": "2026-11-01T22:34:44+01:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -117832,7 +117815,7 @@
       "Union",
       "Situation"
     ],
-    "last_checked": "2026-10-29T19:40:14+01:00"
+    "last_checked": "2026-11-01T22:34:44+01:00"
   },
   "1606-2026": {
     "slug": "1606-2026",
@@ -117868,7 +117851,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-10-29T19:40:14+01:00",
+    "last_seen": "2026-11-01T22:34:44+01:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -117882,7 +117865,7 @@
       "Alleges",
       "Award"
     ],
-    "last_checked": "2026-10-29T19:40:14+01:00"
+    "last_checked": "2026-11-01T22:34:44+01:00"
   },
   "1334-2026": {
     "slug": "1334-2026",
@@ -117890,7 +117873,7 @@
     "signatures_history": [],
     "title": "Petition 1334/2026: the rule of law and democracy in Spain",
     "started_by": "C. G. (Spanish)",
-    "category": "Constitutional Affairs",
+    "category": "Fraud and Corruption",
     "country": "Spain",
     "description_full": "<p>The petitioner asks the European Parliament to intervene in order to protect democracy in Spain by safeguarding the rule of law, the separation of powers, legal certainty and judicial independence. The petitioner states that the Spanish government is removing judges who are investigating corruption cases involving the government itself. The petitioner argues that such actions undermine the rule of law and threaten the independence of the judiciary. The petitioner highlights that preserving the separation of powers and ensuring legal certainty are essential for maintaining citizens’ trust in institutions. The petitioner urges the Parliament to support measures that defend these fundamental values.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1334%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1334/2026</a></p>",
     "summary": "The petitioner asks the European Parliament to intervene in order to protect democracy in Spain by safeguarding the rule of law, the separation of powers, legal certainty and judicial independence. Th…",
@@ -117918,7 +117901,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-10-29T19:40:14+01:00",
+    "last_seen": "2026-11-01T22:34:44+01:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -117932,7 +117915,7 @@
       "Legal",
       "Spain"
     ],
-    "last_checked": "2026-10-29T19:40:14+01:00"
+    "last_checked": "2026-11-01T22:34:44+01:00"
   },
   "1294-2026": {
     "slug": "1294-2026",
@@ -117940,7 +117923,7 @@
     "signatures_history": [],
     "title": "Petition 1294/2026: the reduction of the educational offer in Spanish and its impact on students in the Basque Country, Spain",
     "started_by": "Ana Losada (Spanish), on behalf of ‘Escuela de Todos’,",
-    "category": "Disability Issues",
+    "category": "Fundamental Rights",
     "country": "Spain",
     "description_full": "<p>The petitioner requests the European Parliament to examine the compatibility of the progressive reduction of public education provision in Spanish and Spanish‑Basque bilingual models in the Basque Country with European Union law and to consider appropriate recommendations. The petitioner states that the Basque Government will offer instruction in Spanish or bilingual Spanish‑Basque in only 14 % of public schools in the 2026‑2027 academic year, amounting to 63 of 446 centres. The petitioner highlights that this reduction limits effective linguistic choice for families, forcing many to seek schools where Basque is the sole language of instruction or to turn to private institutions with additional costs. The petitioner points out that the closure of the public primary school CEIP Larrañazubi in Getxo, which taught primarily in Spanish and accommodated approximately 70 pupils, 30 % of whom had special educational needs, was communicated to families without guaranteeing equivalent alternatives. The petitioner argues that the proposed reallocation of those pupils to other schools does not ensure comparable specialised facilities, stable special‑needs classrooms, or proximity to the families’ residence. The petitioner claims that the lack of equivalent Spanish‑language or bilingual options disproportionately affects vulnerable groups, including pupils with special educational needs, foreign‑origin students and children with linguistic adaptation difficulties. The petitioner considers that the situation may contravene EU principles of non‑discrimination, linguistic diversity, the right to education and protection of persons with disabilities as set out in the Charter of Fundamental Rights and other international instruments. According to the petitioner, official data from the Basque Statistics Institute indicate that Spanish remains the mother tongue of the majority of the population in large areas of the region. The petitioner highlights that the reduction in Spanish‑language provision coincides with a reported decline in PISA results and widening socio‑economic gaps in academic performance. The petitioner urges the Committee of Petitions to collect information from the Spanish State and the Basque Government on the evolution of the public education offer in Spanish and bilingual models. The petitioner urges the Committee to assess the impact of the policies on equality of opportunity, inclusion and linguistic pluralism, particularly for the identified vulnerable groups.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1294%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1294/2026</a></p>",
     "summary": "The petitioner requests the European Parliament to examine the compatibility of the progressive reduction of public education provision in Spanish and Spanish‑Basque bilingual models in the Basque Cou…",
@@ -117968,7 +117951,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-10-29T19:40:14+01:00",
+    "last_seen": "2026-11-01T22:34:44+01:00",
     "offline_since": null,
     "tags": [
       "Spanish",
@@ -117982,7 +117965,7 @@
       "Educational",
       "Provision"
     ],
-    "last_checked": "2026-10-29T19:40:14+01:00"
+    "last_checked": "2026-11-01T22:34:44+01:00"
   },
   "1247-2026": {
     "slug": "1247-2026",
@@ -117990,7 +117973,7 @@
     "signatures_history": [],
     "title": "Petition 1247/2026: Spain's regularisation program of undocumented immigrants and its implications for the Schengen zone",
     "started_by": "Cinta Casamitjana I Mendoza (Spanish)",
-    "category": "Justice",
+    "category": "Fundamental Rights",
     "country": "Spain",
     "description_full": "<p>The petitioner requests the European Parliament to launch a fact‑finding mission on the alleged degradation of judicial independence and the rule of law in Spain, to evaluate the compliance of Spain’s migration policies with EU security and border regulations, and to assess the use of EU funds by the Spanish administration. The petitioner states that the Spanish executive is implementing a policy of “extraordinary regularisation” for hundreds of thousands of undocumented third‑country nationals, which the petitioner believes bypasses security vetting and individual assessment requirements of the Schengen Borders Code and the EU Pact on Migration and Asylum. The petitioner highlights that this rapid influx has contributed to a documented rise in public insecurity, particularly in regions such as Catalonia, and may affect the stability of the Schengen area. The petitioner argues that recent convictions of high‑ranking judicial officials for leaking confidential information and allegations of corruption within the executive’s inner circle indicate a politicisation of the Spanish judiciary and a systemic failure to protect Union financial interests under Article 325 TFEU. The petitioner claims that national anti‑corruption frameworks are being deliberately weakened, fostering impunity. The petitioner points out that while the government allocates substantial resources to diplomatic optics and non‑transparent international loans, Spain faces a severe housing crisis that the petitioner says contravenes the European Parliament resolution of 10 March 2026 on affordable housing. The petitioner states that the executive’s increasing reliance on “emergency powers” to bypass ordinary parliamentary debate undermines the legislative branch. The petitioner highlights concerns about potential manipulation of the electoral roll through fast‑tracked citizenship and voting rights, which the petitioner believes poses a risk to the integrity of future democratic processes within the Union. The petitioner urges the European Commission to evaluate whether Spain’s migration policies comply with EU security and border integrity regulations. The petitioner urges the European Parliament to assess whether EU funds are being used to support an administration that is regressing in its democratic standards.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1247%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1247/2026</a></p>",
     "summary": "The petitioner requests the European Parliament to launch a fact‑finding mission on the alleged degradation of judicial independence and the rule of law in Spain, to evaluate the compliance of Spain’s…",
@@ -118018,7 +118001,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-10-29T19:40:14+01:00",
+    "last_seen": "2026-11-01T22:34:44+01:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -118032,7 +118015,7 @@
       "Schengen",
       "Security"
     ],
-    "last_checked": "2026-10-29T19:40:14+01:00"
+    "last_checked": "2026-11-01T22:34:44+01:00"
   },
   "1322-2026": {
     "slug": "1322-2026",
@@ -118040,7 +118023,7 @@
     "signatures_history": [],
     "title": "Petition 1322/2026: allegedly urgent risk of landslide and deterioration of road infrastructure in Petrovouni, Municipality of Megalopolis, Greece",
     "started_by": "Andreas Tsiamis (Greek)",
-    "category": "Environment",
+    "category": "Regional Policy",
     "country": "Greece",
     "description_full": "<p>The petitioner alleges that, since 2021, repeated warnings about ground instability and slope failure risk in the settlement of Petrovouni (Municipality of Megalopolis, Arcadia) were submitted to local and regional authorities without any preventive or mitigation measures being implemented. In February 2026, a major landslide reportedly damaged the main access road, restricting safe entry to private residences and limiting access for emergency services. According to the petitioner, after the event no restoration plan, technical intervention schedule or binding timetable for works has been communicated to residents. The matter has been allegedly reported to municipal and regional authorities, civil protection services and the Greek Ombudsman, which, according to the petitioner, has requested actions from the municipality but has received no effective response. Therefore, the petitioner requests that the European Parliament examine the case in the context of EU civil protection, environmental risk prevention, infrastructure resilience and regional development policies, and consider appropriate follow up actions or inquiries regarding the lack of effective administrative response and mitigation measures at national and local level.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1322%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1322/2026</a></p>",
     "summary": "The petitioner alleges that, since 2021, repeated warnings about ground instability and slope failure risk in the settlement of Petrovouni (Municipality of Megalopolis, Arcadia) were submitted to loca…",
@@ -118068,7 +118051,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-10-29T19:40:14+01:00",
+    "last_seen": "2026-11-01T22:34:44+01:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -118082,7 +118065,7 @@
       "Instability",
       "Mitigation"
     ],
-    "last_checked": "2026-10-29T19:40:14+01:00"
+    "last_checked": "2026-11-01T22:34:44+01:00"
   },
   "1555-2026": {
     "slug": "1555-2026",
@@ -118090,7 +118073,7 @@
     "signatures_history": [],
     "title": "Petition 1555/2026: alleged breach of EU environmental law in the management of a landfill in Gospić, Croatia",
     "started_by": "Daria Došen (Croatian), on behalf of “Gospić je naš dom”,",
-    "category": "Environment - Waste",
+    "category": "Environment - Protection and Preservation",
     "country": "Croatia",
     "description_full": "<p>The petitioner raises concerns about the alleged illegal disposal of at least 35 000 tonnes of hazardous waste at the Silos and Rakitovac sites in Gospić, Croatia. According to the petitioner, the waste includes infectious medical waste, shredded plastic and other hazardous waste originating from Croatia and imported from Italy and Slovenia. The petitioner states that the waste was deposited and buried in a sensitive karst area, which constitutes an important water source for the wider Lika region and the Croatian coast, and is located close to residential areas and agricultural land. The petitioner alleges that, despite analyses indicating the presence of hazardous substances, the competent authorities have failed to take adequate remediation measures and have not provided the public with complete information on the waste or the results of soil and groundwater analyses. The petitioner considers that this may constitute a breach of Directives 2003/4/EC, 2004/35/EC and 2008/98/EC and calls for urgent remediation of the sites, access to environmental information and measures to protect the local population and environment.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1555%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1555/2026</a></p>",
     "summary": "The petitioner raises concerns about the alleged illegal disposal of at least 35 000 tonnes of hazardous waste at the Silos and Rakitovac sites in Gospić, Croatia. According to the petitioner, the was…",
@@ -118118,7 +118101,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-10-29T19:40:14+01:00",
+    "last_seen": "2026-11-01T22:34:44+01:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -118132,7 +118115,7 @@
       "Information",
       "Remediation"
     ],
-    "last_checked": "2026-10-29T19:40:14+01:00"
+    "last_checked": "2026-11-01T22:34:44+01:00"
   },
   "1271-2026": {
     "slug": "1271-2026",
@@ -118168,7 +118151,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-10-29T19:40:14+01:00",
+    "last_seen": "2026-11-01T22:34:44+01:00",
     "offline_since": null,
     "tags": [
       "Directive",
@@ -118182,7 +118165,7 @@
       "Plan",
       "Irreversible"
     ],
-    "last_checked": "2026-10-29T19:40:14+01:00"
+    "last_checked": "2026-11-01T22:34:44+01:00"
   },
   "1051-2026": {
     "slug": "1051-2026",
@@ -118218,7 +118201,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-10-29T19:40:14+01:00",
+    "last_seen": "2026-11-01T22:34:44+01:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -118232,7 +118215,7 @@
       "Recognised",
       "Member"
     ],
-    "last_checked": "2026-10-29T19:40:14+01:00"
+    "last_checked": "2026-11-01T22:34:44+01:00"
   },
   "1602-2026": {
     "slug": "1602-2026",
@@ -118268,7 +118251,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-10-29T19:40:14+01:00",
+    "last_seen": "2026-11-01T22:34:44+01:00",
     "offline_since": null,
     "tags": [
       "Biodiversity",
@@ -118282,7 +118265,7 @@
       "Laurisilva",
       "Management"
     ],
-    "last_checked": "2026-10-29T19:40:14+01:00"
+    "last_checked": "2026-11-01T22:34:44+01:00"
   },
   "1251-2026": {
     "slug": "1251-2026",
@@ -118290,7 +118273,7 @@
     "signatures_history": [],
     "title": "Petition 1251/2026: EU procurement, Habitats Directive and Aarhus Convention compliance in Swedish wildlife management",
     "started_by": "Ali Klaiq (Swedish)",
-    "category": "Constitutional Affairs",
+    "category": "Institutions",
     "country": "Sweden",
     "description_full": "<p>The petitioner alleges structural governance and procurement shortcomings in Sweden concerning the relationship between the Swedish Environmental Protection Agency (NVV) and the Swedish Association for Hunting and Wildlife Management (SJF). The petitioner claims that SJF simultaneously acts as a public contractor, wildlife data coordinator and EU-level political lobbyist, without the Swedish authorities having adequately assessed potential conflicts of interest or compliance with EU and national law. The petitioner states that Sweden previously acknowledged procurement shortcomings in EU Pilot 8746/16 and committed to reforms, but that SJF has continued to hold the main contractual position through repeated extensions from 2021 to 2027, with limited evidence of competitive market testing. The petitioner also points to SJF&#39;s financial dependence on hunting licences and alleges that SJF, through FACE, has lobbied at EU level on wolf protection while being contracted by NVV to manage wolf populations. The petitioner further refers to FACE&#39;s unsuccessful application for a 2024 LIFE Operating Grant due to concerns regarding independence and argues that no equivalent safeguards apply to SJF in Sweden. The petitioner also raises concerns regarding the 2025 GPS-tracking requirements for wolf hunters, alleging political interference in the decisions of the 21 Swedish county boards, and claims that NVV improperly classified environmental information concerning SJF&#39;s wildlife-management contract as commercially confidential, without adequately considering the transparency requirements of the Aarhus Convention, including Article 4(4)(d). Furthermore, the petitioner questions the independence and reliability of wolf population data used for Sweden&#39;s reporting under the Habitats Directive, as such data allegedly pass through SJF-coordinated systems without sufficient independence safeguards. The petitioner considers that the alleged failures are structural and undermine the effective implementation of EU biodiversity obligations and reporting requirements under the Habitats Directive, Article 4(3) TEU and Article 197 TFEU. The petitioner requests the European Parliament to seek explanations from the Swedish authorities, refer the procurement and Habitats Directive issues to the European Commission for consideration of possible infringement proceedings, and refer the Aarhus Convention issues to the relevant compliance mechanism.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1251%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1251/2026</a></p>",
     "summary": "The petitioner alleges structural governance and procurement shortcomings in Sweden concerning the relationship between the Swedish Environmental Protection Agency (NVV) and the Swedish Association fo…",
@@ -118318,7 +118301,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-10-29T19:40:14+01:00",
+    "last_seen": "2026-11-01T22:34:44+01:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -118332,7 +118315,7 @@
       "Independence",
       "Requirements"
     ],
-    "last_checked": "2026-10-29T19:40:14+01:00"
+    "last_checked": "2026-11-01T22:34:44+01:00"
   },
   "1392-2026": {
     "slug": "1392-2026",
@@ -118340,7 +118323,7 @@
     "signatures_history": [],
     "title": "Petition 1392/2026: democracy, rule of law and LGBT rights in Slovakia",
     "started_by": "Patrik Szivek (Slovak)",
-    "category": "Fundamental Rights",
+    "category": "Security",
     "country": "Slovakia",
     "description_full": "<p>The petitioner raises concerns about the current political and social situation in Slovakia. According to the petitioner, increasing social tensions, declining trust in public institutions and the conduct of the political authorities have contributed to the weakening of the rule of law and democratic values. The petitioner further alleges that hostile rhetoric towards LGBTQ+ persons, the absence of legal recognition for same-sex couples, the management of public finances and the treatment of government critics have undermined fundamental rights, social cohesion and public confidence in state institutions. The petitioner therefore requests that the European Parliament pay particular attention to the situation in Slovakia, notably with regard to respect for the rule of law, the protection of minorities and fundamental rights, the transparent management of public finances, the protection of democratic values and public expressions of hatred and social division by politicians.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1392%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1392/2026</a></p>",
     "summary": "The petitioner raises concerns about the current political and social situation in Slovakia. According to the petitioner, increasing social tensions, declining trust in public institutions and the con…",
@@ -118368,7 +118351,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-10-29T19:40:14+01:00",
+    "last_seen": "2026-11-01T22:34:44+01:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -118382,6 +118365,6 @@
       "Rule",
       "Fundamental"
     ],
-    "last_checked": "2026-10-29T19:40:14+01:00"
+    "last_checked": "2026-11-01T22:34:44+01:00"
   }
 }

@@ -31,14 +31,14 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-10-31T09:21:23+01:00",
+    "generated_at": "2026-11-01T22:41:11+01:00",
     "petition_count": 2645,
-    "available": 1753,
+    "available": 1710,
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-10-31T09:21:22+01:00",
-      "gefunden": 1753,
-      "im_bestand": 1753,
+      "stand": "2026-11-01T22:41:10+01:00",
+      "gefunden": 1710,
+      "im_bestand": 1710,
       "unbrauchbar": 0,
       "verworfen": 0,
       "dublette": 0,
@@ -47,28 +47,11 @@
       "offen": 0,
       "offene_beispiele": [],
       "bestand_gesamt": 2645,
-      "bestand_ausserhalb": 892
+      "bestand_ausserhalb": 935
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-10-30T20:49:02+01:00",
-        "gesamt": 2645,
-        "online": 2645,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 2630,
-        "juengstes_start": "2026-10-30",
-        "mit_code_im_text": 0,
-        "mit_ballast_in_kurzfassung": 0,
-        "herkunft": "lokal_cron",
-        "neu": 11
-      },
-      {
-        "zeit": "2026-10-31T09:21:22+01:00",
+        "zeit": "2026-11-01T22:41:10+01:00",
         "gesamt": 2645,
         "online": 2645,
         "offline": 0,
@@ -86,7 +69,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-10-31T09:21:22+01:00",
+      "zeit": "2026-11-01T22:41:10+01:00",
       "gesamt": 2645,
       "online": 2645,
       "offline": 0,
@@ -100,7 +83,7 @@
       "mit_code_im_text": 0,
       "mit_ballast_in_kurzfassung": 0
     },
-    "verlauf_felder_ab": "2026-10-30T20:49:02+01:00",
+    "verlauf_felder_ab": "2026-11-01T22:41:10+01:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 2645
@@ -67747,6 +67730,10 @@
       {
         "checked_at": "2026-10-29T08:56:28+01:00",
         "count": 79
+      },
+      {
+        "checked_at": "2026-11-01T22:37:45+01:00",
+        "count": 81
       }
     ],
     "title": "Sicherheit und Lebensqualität am Mönchengladbacher Busbahnhof wiederherstellen!",
@@ -67758,11 +67745,11 @@
     "started_by": "Eileen Ritter",
     "category": "Sicherheit",
     "category_url": "https://www.openpetition.de/petitionen?category=55#petitionen",
-    "signatures": 79,
+    "signatures": 81,
     "status": "online",
-    "last_seen": "2026-10-29T08:56:28+01:00",
+    "last_seen": "2026-11-01T22:37:45+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-29T08:56:28+01:00",
+    "last_checked": "2026-11-01T22:37:45+01:00",
     "lang": "de",
     "campaign_id": "openpetition:sicherheit-und-lebensqualitaet-am-moenchengladbacher-busbahnhof-wiederherstellen",
     "i18n_state": {
@@ -67811,9 +67798,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=14#petitionen",
     "signatures": 99,
     "status": "online",
-    "last_seen": "2026-10-29T08:56:28+01:00",
+    "last_seen": "2026-11-01T22:37:45+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-29T08:56:28+01:00",
+    "last_checked": "2026-11-01T22:37:45+01:00",
     "lang": "de",
     "campaign_id": "openpetition:moderner-und-sicherer-spielplatz-fuer-den-kaukenberg-in-paderborn",
     "i18n_state": {
@@ -67988,6 +67975,10 @@
       {
         "checked_at": "2026-10-29T08:56:28+01:00",
         "count": 97209
+      },
+      {
+        "checked_at": "2026-11-01T22:37:45+01:00",
+        "count": 102473
       }
     ],
     "title": "Erhalt der abschlagsfreien Rente nach 45 Beitragsjahren",
@@ -67999,12 +67990,12 @@
     "started_by": "Josef Meyer",
     "category": "Bürgerrechte",
     "category_url": "https://www.openpetition.de/petitionen?category=58#petitionen",
-    "signatures": 97209,
+    "signatures": 102473,
     "goal": 100000,
     "status": "online",
-    "last_seen": "2026-10-29T08:56:28+01:00",
+    "last_seen": "2026-11-01T22:37:45+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-29T08:56:28+01:00",
+    "last_checked": "2026-11-01T22:37:45+01:00",
     "lang": "de",
     "campaign_id": "openpetition:erhalt-der-abschlagsfreien-rente-nach-45-beitragsjahren",
     "i18n_state": {
@@ -68103,6 +68094,10 @@
       {
         "checked_at": "2026-10-29T08:56:28+01:00",
         "count": 87
+      },
+      {
+        "checked_at": "2026-11-01T22:37:45+01:00",
+        "count": 92
       }
     ],
     "title": "Bayern: Bessere Verfolgung von Sexualstraftaten und Ausbau spezialisierter Fachstellen",
@@ -68114,11 +68109,11 @@
     "started_by": "Robin Putz",
     "category": "Sicherheit",
     "category_url": "https://www.openpetition.de/petitionen?category=55#petitionen",
-    "signatures": 87,
+    "signatures": 92,
     "status": "online",
-    "last_seen": "2026-10-29T08:56:28+01:00",
+    "last_seen": "2026-11-01T22:37:45+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-29T08:56:28+01:00",
+    "last_checked": "2026-11-01T22:37:45+01:00",
     "lang": "de",
     "campaign_id": "openpetition:bayern-bessere-verfolgung-von-sexualstraftaten-und-ausbau-spezialisierter-fachstellen",
     "i18n_state": {
@@ -68605,9 +68600,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
     "signatures": 154,
     "status": "online",
-    "last_seen": "2026-10-29T08:56:28+01:00",
+    "last_seen": "2026-11-01T22:37:45+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-29T08:56:28+01:00",
+    "last_checked": "2026-11-01T22:37:45+01:00",
     "lang": "de",
     "campaign_id": "openpetition:sommerferien-in-nordrhein-westfalen-auf-mindestens-8-10-wochen-verlaengern",
     "i18n_state": {
@@ -68681,9 +68676,9 @@
     "signatures": 147,
     "start_date": "2026-01-01",
     "status": "online",
-    "last_seen": "2026-10-29T08:56:28+01:00",
+    "last_seen": "2026-11-01T22:37:45+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-29T08:56:28+01:00",
+    "last_checked": "2026-11-01T22:37:45+01:00",
     "lang": "de",
     "campaign_id": "openpetition:krank-nicht-kinderlos-aus-wahl-schluss-mit-der-ungerechtigkeit-beim-kinderlosenzuschlag",
     "i18n_state": {
@@ -68867,9 +68862,9 @@
     "signatures": 442,
     "goal": 400,
     "status": "online",
-    "last_seen": "2026-10-29T08:56:28+01:00",
+    "last_seen": "2026-11-01T22:37:45+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-29T08:56:28+01:00",
+    "last_checked": "2026-11-01T22:37:45+01:00",
     "lang": "de",
     "campaign_id": "openpetition:die-bahrenfelder-chaussee-ist-keine-rennstrecke",
     "i18n_state": {
@@ -69240,6 +69235,10 @@
       {
         "checked_at": "2026-10-29T08:56:28+01:00",
         "count": 171
+      },
+      {
+        "checked_at": "2026-11-01T22:37:45+01:00",
+        "count": 172
       }
     ],
     "title": "E-Roller Helmpflicht",
@@ -69251,11 +69250,11 @@
     "started_by": "Nadine Klein",
     "category": "Sicherheit",
     "category_url": "https://www.openpetition.de/petitionen?category=55#petitionen",
-    "signatures": 171,
+    "signatures": 172,
     "status": "online",
-    "last_seen": "2026-10-29T08:56:28+01:00",
+    "last_seen": "2026-11-01T22:37:45+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-29T08:56:28+01:00",
+    "last_checked": "2026-11-01T22:37:45+01:00",
     "lang": "de",
     "campaign_id": "openpetition:e-roller-helmpflicht",
     "i18n_state": {
@@ -167081,6 +167080,10 @@
       {
         "checked_at": "2026-10-29T08:56:28+01:00",
         "count": 5
+      },
+      {
+        "checked_at": "2026-11-01T22:37:45+01:00",
+        "count": 8
       }
     ],
     "title": "Mehr Bemühungen für gleiches Entgelt, gleiche Chancen und die Vertretung von Frauen in Ihrer Region",
@@ -167092,7 +167095,7 @@
     "category": "Bürgerrechte",
     "category_url": "https://www.openpetition.de/petitionen?category=58#petitionen",
     "country": "DE",
-    "signatures": 5,
+    "signatures": 8,
     "goal": 5000,
     "start_date": "2026-03-01",
     "lang": "de",
@@ -167101,7 +167104,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-29T08:56:28+01:00",
+    "last_seen": "2026-11-01T22:37:45+01:00",
     "offline_since": null,
     "tags": [
       "Chancen",
@@ -167115,7 +167118,7 @@
       "Bildung",
       "Entgelt"
     ],
-    "last_checked": "2026-10-29T08:56:28+01:00"
+    "last_checked": "2026-11-01T22:37:45+01:00"
   },
   "ein-supermarkt-fuer-die-ketzerbach-wir-brauchen-eine-nahversorgung-vor-ort": {
     "slug": "ein-supermarkt-fuer-die-ketzerbach-wir-brauchen-eine-nahversorgung-vor-ort",
@@ -167124,6 +167127,10 @@
       {
         "checked_at": "2026-10-29T19:42:50+01:00",
         "count": 294
+      },
+      {
+        "checked_at": "2026-11-01T22:37:45+01:00",
+        "count": 878
       }
     ],
     "title": "Ein Supermarkt für die Ketzerbach, wir brauchen eine Nahversorgung vor Ort!",
@@ -167135,7 +167142,7 @@
     "category": "Soziales",
     "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
     "country": "DE",
-    "signatures": 294,
+    "signatures": 878,
     "start_date": "2026-10-28",
     "lang": "de",
     "campaign_id": "openpetition:ein-supermarkt-fuer-die-ketzerbach-wir-brauchen-eine-nahversorgung-vor-ort",
@@ -167143,7 +167150,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-29T19:42:50+01:00",
+    "last_seen": "2026-11-01T22:37:45+01:00",
     "offline_since": null,
     "tags": [
       "Ketzerbach",
@@ -167157,7 +167164,7 @@
       "Nachbarschaft",
       "Unterschrift"
     ],
-    "last_checked": "2026-10-29T19:42:50+01:00"
+    "last_checked": "2026-11-01T22:37:45+01:00"
   },
   "tuttlingen-braucht-eine-pause-und-neustart-beim-gefoerderten-wohnraum-2": {
     "slug": "tuttlingen-braucht-eine-pause-und-neustart-beim-gefoerderten-wohnraum-2",
@@ -167166,6 +167173,10 @@
       {
         "checked_at": "2026-10-29T19:42:50+01:00",
         "count": 74
+      },
+      {
+        "checked_at": "2026-11-01T22:37:45+01:00",
+        "count": 186
       }
     ],
     "title": "Tuttlingen braucht eine Pause und Neustart beim geförderten Wohnraum!",
@@ -167177,7 +167188,7 @@
     "category": "Wohnen",
     "category_url": "https://www.openpetition.de/petitionen?category=42#petitionen",
     "country": "DE",
-    "signatures": 74,
+    "signatures": 186,
     "start_date": "2026-10-28",
     "lang": "de",
     "campaign_id": "openpetition:tuttlingen-braucht-eine-pause-und-neustart-beim-gefoerderten-wohnraum-2",
@@ -167185,7 +167196,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-29T19:42:50+01:00",
+    "last_seen": "2026-11-01T22:37:45+01:00",
     "offline_since": null,
     "tags": [
       "Geförderter",
@@ -167199,7 +167210,7 @@
       "Infrastruktur",
       "Geförderten"
     ],
-    "last_checked": "2026-10-29T19:42:50+01:00"
+    "last_checked": "2026-11-01T22:37:45+01:00"
   },
   "keine-kuerzungen-beim-landesbeauftragen-fuer-datenschutz-und-informationsfreiheit-in-baden-wuerttemb": {
     "slug": "keine-kuerzungen-beim-landesbeauftragen-fuer-datenschutz-und-informationsfreiheit-in-baden-wuerttemb",
@@ -167208,6 +167219,10 @@
       {
         "checked_at": "2026-10-29T19:42:50+01:00",
         "count": 43
+      },
+      {
+        "checked_at": "2026-11-01T22:37:45+01:00",
+        "count": 117
       }
     ],
     "title": "Keine Kürzungen beim Landesbeauftragen für Datenschutz und Informationsfreiheit in Baden-Württemberg",
@@ -167219,7 +167234,7 @@
     "category": "Datenschutz",
     "category_url": "https://www.openpetition.de/petitionen?category=13#petitionen",
     "country": "DE",
-    "signatures": 43,
+    "signatures": 117,
     "start_date": "2026-10-29",
     "lang": "de",
     "campaign_id": "openpetition:keine-kuerzungen-beim-landesbeauftragen-fuer-datenschutz-und-informationsfreiheit-in-baden-wuerttemb",
@@ -167227,7 +167242,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-29T19:42:50+01:00",
+    "last_seen": "2026-11-01T22:37:45+01:00",
     "offline_since": null,
     "tags": [
       "Datenschutz",
@@ -167241,7 +167256,7 @@
       "Firmen",
       "Organisationen"
     ],
-    "last_checked": "2026-10-29T19:42:50+01:00"
+    "last_checked": "2026-11-01T22:37:45+01:00"
   },
   "stadtteilbibliothek-vierlinden-erhalten-keine-kuendigung-am-franz-lenze-platz": {
     "slug": "stadtteilbibliothek-vierlinden-erhalten-keine-kuendigung-am-franz-lenze-platz",
@@ -167250,6 +167265,10 @@
       {
         "checked_at": "2026-10-29T19:42:50+01:00",
         "count": 18
+      },
+      {
+        "checked_at": "2026-11-01T22:37:45+01:00",
+        "count": 389
       }
     ],
     "title": "Stadtteilbibliothek Vierlinden erhalten – keine Kündigung am Franz-Lenze-Platz!",
@@ -167261,7 +167280,7 @@
     "category": "Bildung",
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
     "country": "DE",
-    "signatures": 18,
+    "signatures": 389,
     "start_date": "2026-10-28",
     "lang": "de",
     "campaign_id": "openpetition:stadtteilbibliothek-vierlinden-erhalten-keine-kuendigung-am-franz-lenze-platz",
@@ -167269,7 +167288,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-29T19:42:50+01:00",
+    "last_seen": "2026-11-01T22:37:45+01:00",
     "offline_since": null,
     "tags": [
       "Stadtteilbibliothek",
@@ -167283,7 +167302,7 @@
       "Stadtteil",
       "Veranstaltungen"
     ],
-    "last_checked": "2026-10-29T19:42:50+01:00"
+    "last_checked": "2026-11-01T22:37:45+01:00"
   },
   "ruecknahme-der-streichung-kostenuebernahme-von-cannabisblueten-fuer-schmerzpatienten-sichern": {
     "slug": "ruecknahme-der-streichung-kostenuebernahme-von-cannabisblueten-fuer-schmerzpatienten-sichern",
@@ -167292,6 +167311,10 @@
       {
         "checked_at": "2026-10-29T19:42:50+01:00",
         "count": 11
+      },
+      {
+        "checked_at": "2026-11-01T22:37:45+01:00",
+        "count": 13
       }
     ],
     "title": "Rücknahme der Streichung: Kostenübernahme von Cannabisblüten für Schmerzpatienten sichern!",
@@ -167303,7 +167326,7 @@
     "category": "Gesundheit",
     "category_url": "https://www.openpetition.de/petitionen?category=20#petitionen",
     "country": "DE",
-    "signatures": 11,
+    "signatures": 13,
     "start_date": "2026-10-28",
     "lang": "de",
     "campaign_id": "openpetition:ruecknahme-der-streichung-kostenuebernahme-von-cannabisblueten-fuer-schmerzpatienten-sichern",
@@ -167311,7 +167334,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-29T19:42:50+01:00",
+    "last_seen": "2026-11-01T22:37:45+01:00",
     "offline_since": null,
     "tags": [
       "Cannabisblüten",
@@ -167325,7 +167348,7 @@
       "Gesetzlichen",
       "Gearbeitet"
     ],
-    "last_checked": "2026-10-29T19:42:50+01:00"
+    "last_checked": "2026-11-01T22:37:45+01:00"
   },
   "weniger-boeller-mehr-ruecksicht-aalen-kann-mehr": {
     "slug": "weniger-boeller-mehr-ruecksicht-aalen-kann-mehr",
@@ -167334,6 +167357,10 @@
       {
         "checked_at": "2026-10-29T19:42:50+01:00",
         "count": 11
+      },
+      {
+        "checked_at": "2026-11-01T22:37:45+01:00",
+        "count": 16
       }
     ],
     "title": "Weniger Böller, mehr Rücksicht – Aalen kann mehr",
@@ -167345,7 +167372,7 @@
     "category": "Umwelt",
     "category_url": "https://www.openpetition.de/petitionen?category=46#petitionen",
     "country": "DE",
-    "signatures": 11,
+    "signatures": 16,
     "start_date": "2026-10-28",
     "lang": "de",
     "campaign_id": "openpetition:weniger-boeller-mehr-ruecksicht-aalen-kann-mehr",
@@ -167353,7 +167380,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-29T19:42:50+01:00",
+    "last_seen": "2026-11-01T22:37:45+01:00",
     "offline_since": null,
     "tags": [
       "Konsequenter",
@@ -167367,7 +167394,7 @@
       "Kontrollieren",
       "Möglichkeiten"
     ],
-    "last_checked": "2026-10-29T19:42:50+01:00"
+    "last_checked": "2026-11-01T22:37:45+01:00"
   },
   "schwerins-historischen-wasserturm-neumuehle-erhalten-sanieren-und-kulturell-erlebbar-machen": {
     "slug": "schwerins-historischen-wasserturm-neumuehle-erhalten-sanieren-und-kulturell-erlebbar-machen",
@@ -167376,6 +167403,10 @@
       {
         "checked_at": "2026-10-29T19:42:50+01:00",
         "count": 10
+      },
+      {
+        "checked_at": "2026-11-01T22:37:45+01:00",
+        "count": 48
       }
     ],
     "title": "Schwerins historischen Wasserturm Neumühle erhalten, sanieren und kulturell erlebbar machen!",
@@ -167387,7 +167418,7 @@
     "category": "Kultur",
     "category_url": "https://www.openpetition.de/petitionen?category=25#petitionen",
     "country": "DE",
-    "signatures": 10,
+    "signatures": 48,
     "start_date": "2026-10-27",
     "lang": "de",
     "campaign_id": "openpetition:schwerins-historischen-wasserturm-neumuehle-erhalten-sanieren-und-kulturell-erlebbar-machen",
@@ -167395,7 +167426,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-29T19:42:50+01:00",
+    "last_seen": "2026-11-01T22:37:45+01:00",
     "offline_since": null,
     "tags": [
       "Wasserturm",
@@ -167409,7 +167440,7 @@
       "Erhalten",
       "Bauwerk"
     ],
-    "last_checked": "2026-10-29T19:42:50+01:00"
+    "last_checked": "2026-11-01T22:37:45+01:00"
   },
   "barrierefreie-wohngemeinschaften-fuer-me-cfs-long-covid-post-vac-in-darmstadt": {
     "slug": "barrierefreie-wohngemeinschaften-fuer-me-cfs-long-covid-post-vac-in-darmstadt",
@@ -167418,6 +167449,10 @@
       {
         "checked_at": "2026-10-29T19:42:50+01:00",
         "count": 7
+      },
+      {
+        "checked_at": "2026-11-01T22:37:45+01:00",
+        "count": 42
       }
     ],
     "title": "Barrierefreie Wohngemeinschaften für ME/CFS/Long Covid/Post Vac in Darmstadt",
@@ -167429,7 +167464,7 @@
     "category": "Wohnen",
     "category_url": "https://www.openpetition.de/petitionen?category=42#petitionen",
     "country": "DE",
-    "signatures": 7,
+    "signatures": 42,
     "goal": 2500,
     "start_date": "2026-10-29",
     "lang": "de",
@@ -167438,7 +167473,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-29T19:42:50+01:00",
+    "last_seen": "2026-11-01T22:37:45+01:00",
     "offline_since": null,
     "tags": [
       "Betroffene",
@@ -167452,7 +167487,7 @@
       "Unterstützung",
       "Schwer"
     ],
-    "last_checked": "2026-10-29T19:42:50+01:00"
+    "last_checked": "2026-11-01T22:37:45+01:00"
   },
   "sperrung-waechtersbach-birstein-b276": {
     "slug": "sperrung-waechtersbach-birstein-b276",
