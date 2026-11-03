@@ -31,21 +31,12 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-11-03T16:35:43+01:00",
+    "generated_at": "2026-11-03T21:09:24+01:00",
     "petition_count": 2670,
     "available": 1717,
-    "new_petitions_last_run": [
-      "keine-experimentierklausel-im-strassenverkehr",
-      "widerspuchsloesung-bei-organspenden-jetzt",
-      "internationalen-studierenden-eine-buehne-geben-englischer-theaterworkshop-an-der-uni-oldenburg",
-      "stopp-der-gewalt-gegen-schiedsrichter-haertere-strafen-jetzt-2",
-      "eine-internationale-krankenversicherung-und-direkte-bundessteuer-fuer-die-tessiner-bevoelkerung",
-      "rettet-den-ofen-von-soveltra-fuer-alpine-tradition-und-nachhaltigkeit",
-      "schliessung-der-kantonalen-asylunterkunft-in-stein-ag-pruefen",
-      "pyrotechnik-raus-aus-den-stadien"
-    ],
+    "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-11-03T16:35:42+01:00",
+      "stand": "2026-11-03T21:09:23+01:00",
       "gefunden": 1717,
       "im_bestand": 1717,
       "unbrauchbar": 0,
@@ -60,7 +51,7 @@
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-11-03T16:35:42+01:00",
+        "zeit": "2026-11-03T21:09:23+01:00",
         "gesamt": 2670,
         "online": 2670,
         "offline": 0,
@@ -74,11 +65,11 @@
         "mit_code_im_text": 0,
         "mit_ballast_in_kurzfassung": 0,
         "herkunft": "lokal_cron",
-        "neu": 8
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-11-03T16:35:42+01:00",
+      "zeit": "2026-11-03T21:09:23+01:00",
       "gesamt": 2670,
       "online": 2670,
       "offline": 0,
@@ -92,7 +83,7 @@
       "mit_code_im_text": 0,
       "mit_ballast_in_kurzfassung": 0
     },
-    "verlauf_felder_ab": "2026-11-03T16:35:42+01:00",
+    "verlauf_felder_ab": "2026-11-03T21:09:23+01:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 2670
@@ -2575,6 +2566,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 11769
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 11772
       }
     ],
     "title": "+ Rettet das Hallenfreibad Höntrop + 10 Jahre Stillstand sind genug!",
@@ -2586,11 +2581,11 @@
     "started_by": "Stefan Wolf",
     "category": "Gesundheit",
     "category_url": "https://www.openpetition.de/petitionen?category=20#petitionen",
-    "signatures": 11769,
+    "signatures": 11772,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:rettet-das-hallenfreibad-hoentrop-10-jahre-stillstand-sind-genug-10",
     "i18n_state": {
@@ -2820,6 +2815,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 10358
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 10364
       }
     ],
     "title": "SOS - Rettet den Uferweg und die Laubenpieper am Breitehorn in Berlin - Spandau",
@@ -2831,13 +2830,13 @@
     "started_by": "Laubenpieper am Breitehornweg in Berlin-Spandau",
     "category": "Bauen",
     "category_url": "https://www.openpetition.de/petitionen?category=6#petitionen",
-    "signatures": 10358,
+    "signatures": 10364,
     "goal": 20000,
     "start_date": "2025-07-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:sos-rettet-den-uferweg-und-die-laubenpieper-am-breitehorn-in-berlin-spandau",
     "i18n_state": {
@@ -6114,6 +6113,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 5103
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 5105
       }
     ],
     "title": "Rettet die Wiesn",
@@ -6125,12 +6128,12 @@
     "started_by": "Bürgerinitiative „Rettet die Wiesn“",
     "category": "Kultur",
     "category_url": "https://www.openpetition.de/petitionen?category=25#petitionen",
-    "signatures": 5103,
+    "signatures": 5105,
     "goal": 5000,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-05-01",
     "lang": "de",
     "campaign_id": "openpetition:rettet-die-wiesn",
@@ -7610,6 +7613,10 @@
       {
         "checked_at": "2026-10-15T23:26:51+02:00",
         "count": 4802
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 4803
       }
     ],
     "title": "Für Eberswalde: Nein zur B 167 neu!",
@@ -7621,13 +7628,13 @@
     "started_by": "Pro Waldstadt",
     "category": "Verkehr",
     "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
-    "signatures": 4802,
+    "signatures": 4803,
     "goal": 5000,
     "start_date": "2024-12-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-eberswalde-nein-zur-b167-neu",
     "i18n_state": {
@@ -10491,9 +10498,9 @@
     "signatures": 4192,
     "start_date": "2026-02-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:buergerinitiative-fuer-das-tierschutzzentrum-an-der-bergischen-diakonie-aprath",
     "i18n_state": {
@@ -10536,6 +10543,10 @@
       {
         "checked_at": "2026-10-15T23:26:51+02:00",
         "count": 3304
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 3307
       }
     ],
     "title": "Urologie im Klinikum Friedrichshafen muss bleiben!",
@@ -10547,11 +10558,11 @@
     "started_by": "Urologische Gemeinschaftspraxis Friedrichshafen",
     "category": "Gesundheit",
     "category_url": "https://www.openpetition.de/petitionen?category=20#petitionen",
-    "signatures": 3304,
+    "signatures": 3307,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-05-01",
     "lang": "de",
     "campaign_id": "openpetition:urologie-im-klinikum-friedrichshafen-muss-bleiben-2",
@@ -11968,9 +11979,9 @@
     "signatures": 11442,
     "goal": 10000,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-05-01",
     "lang": "de",
     "campaign_id": "openpetition:frieden-in-den-lehrplan",
@@ -14550,9 +14561,9 @@
     "signatures": 3352,
     "start_date": "2026-03-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:neubau-der-agra-bruecke-stoppen-tieferlegung-der-bundesstrasse-pruefen",
     "i18n_state": {
@@ -15658,9 +15669,9 @@
     "signatures": 2136,
     "start_date": "2026-02-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:erhalt-des-historischen-pflasters-in-der-altstadt-nideggen",
     "i18n_state": {
@@ -16418,9 +16429,9 @@
     "signatures": 2201,
     "start_date": "2025-10-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:schutz-und-erhalt-von-langjaehrig-genutzten-erholungsgrundstuecken-gegen-raeumung-abriss-etc",
     "i18n_state": {
@@ -16659,9 +16670,9 @@
     "signatures": 3357,
     "start_date": "2026-03-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:katzenschutzverordnung-im-landkreis-harz-jetzt",
     "i18n_state": {
@@ -16990,9 +17001,9 @@
     "signatures": 1939,
     "start_date": "2026-01-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:unsere-haeuser-in-hamburg-mitte-sollen-abgerissen-werden-bewahren-sie-uns-vor-dem-rausschmiss-2",
     "i18n_state": {
@@ -17554,9 +17565,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=46#petitionen",
     "signatures": 1830,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-den-erhalt-des-kottenheimer-waldes-fuer-klimaschutz",
     "i18n_state": {
@@ -17824,6 +17835,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 1833
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 1835
       }
     ],
     "title": "Familienfreundliche Ferienordnung in Bayern: Schulfreier Brückentag nach Christi Himmelfahrt",
@@ -17835,11 +17850,11 @@
     "started_by": "Bayerischer Elternverband e. V.",
     "category": "Familie",
     "category_url": "https://www.openpetition.de/petitionen?category=14#petitionen",
-    "signatures": 1833,
+    "signatures": 1835,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:familienfreundliche-ferienordnung-in-bayern-schulfreier-brueckentag-nach-christi-himmelfahrt",
     "i18n_state": {
@@ -18878,9 +18893,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=45#petitionen",
     "signatures": 1802,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:stoppt-den-saufang-wildtiere-schuetzen",
@@ -20773,6 +20788,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 1521
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 1524
       }
     ],
     "title": "Deutschlandticket für Schülerinnen und Schüler in NRW erhalten – Mobilität darf kein Luxus wer",
@@ -20784,11 +20803,11 @@
     "started_by": "Pascal Geißler",
     "category": "Familie",
     "category_url": "https://www.openpetition.de/petitionen?category=14#petitionen",
-    "signatures": 1521,
+    "signatures": 1524,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:deutschlandticket-fuer-schuelerinnen-und-schueler-in-nrw-erhalten-mobilitaet-darf-kein-luxus-wer",
     "i18n_state": {
@@ -21167,9 +21186,9 @@
     "goal": 1500,
     "start_date": "2024-11-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:kein-buergerhaus-am-moosacher-st-martinsplatz-keine-bebauung-des-botanikums-moosach",
     "i18n_state": {
@@ -21457,6 +21476,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 1497
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 1499
       }
     ],
     "title": "+++  Rettet Bochums Bäume  +++  Für eine bewohnbare Stadt",
@@ -21468,12 +21491,12 @@
     "started_by": "Bochumer Klimaschutzbündnis",
     "category": "Umwelt",
     "category_url": "https://www.openpetition.de/petitionen?category=46#petitionen",
-    "signatures": 1497,
+    "signatures": 1499,
     "start_date": "2024-10-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:rettet-bochums-baeume-fuer-eine-bewohnbare-stadt-2",
     "i18n_state": {
@@ -22166,9 +22189,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=14#petitionen",
     "signatures": 1393,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:fuer-den-erhalt-der-kita-waldhaus-in-treppendorf-luebben",
@@ -23542,9 +23565,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=20#petitionen",
     "signatures": 3721,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:abschaffung-der-mehrwertsteuer-auf-arzneimittel",
@@ -24217,9 +24240,9 @@
     "goal": 1500,
     "start_date": "2025-11-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:wir-fordern-die-einfuehrung-des-vollstaendig-integrierten-bachelor-of-laws-ll-b-auch-in-bayern",
     "i18n_state": {
@@ -24634,9 +24657,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=46#petitionen",
     "signatures": 1272,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:kein-biomasseheizwerk-im-wohngebiet-grauhalde-schulgelaende-und-anwohner-schuetzen",
@@ -24925,6 +24948,10 @@
       {
         "checked_at": "2026-10-15T23:26:51+02:00",
         "count": 1164
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 1165
       }
     ],
     "title": "Rettet das Badezentrum Sindelfingen - Dachtragwerk und 50m-Becken!",
@@ -24936,12 +24963,12 @@
     "started_by": "Gaby Schadow",
     "category": "Bauen",
     "category_url": "https://www.openpetition.de/petitionen?category=6#petitionen",
-    "signatures": 1164,
+    "signatures": 1165,
     "start_date": "2026-02-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:rettet-das-badezentrum-sindelfingen-dachtragwerk-und-50m-becken",
     "i18n_state": {
@@ -25147,6 +25174,10 @@
       {
         "checked_at": "2026-10-07T20:37:09-06:00",
         "count": 1262
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 1263
       }
     ],
     "title": "Mehr Frauenhausplätze in Düsseldorf jetzt!",
@@ -25158,12 +25189,12 @@
     "started_by": "Frauenverband Courage  e.V. Düsseldorf",
     "category": "Soziales",
     "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
-    "signatures": 1262,
+    "signatures": 1263,
     "start_date": "2025-08-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:mehr-frauenhausplaetze-in-duesseldorf-jetzt",
     "i18n_state": {
@@ -25890,9 +25921,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=58#petitionen",
     "signatures": 1087,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:keine-interimsschule-in-der-goldgrube-auf-kosten-unserer-kinder",
@@ -25954,9 +25985,9 @@
     "signatures": 1087,
     "start_date": "2025-10-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:kein-lauter-jugend-standort-im-wohngebiet-werner-voss-damm-47-jugendkultur-braucht-passende-raeume",
     "i18n_state": {
@@ -26425,9 +26456,9 @@
     "signatures": 1091,
     "start_date": "2025-02-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:rettet-die-gruenflaeche-in-meerbusch-lank-fuer-natur-baeume-und-unsere-zukunft",
     "i18n_state": {
@@ -27140,6 +27171,10 @@
       {
         "checked_at": "2026-10-15T23:26:51+02:00",
         "count": 1288
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 1289
       }
     ],
     "title": "Menschenwürde endet nicht an der Unfallstelle",
@@ -27151,11 +27186,11 @@
     "started_by": "Alexandra Ilsanker-Kreidler",
     "category": "Bürgerrechte",
     "category_url": "https://www.openpetition.de/petitionen?category=58#petitionen",
-    "signatures": 1288,
+    "signatures": 1289,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:menschenwuerde-endet-nicht-an-der-unfallstelle",
     "i18n_state": {
@@ -27650,9 +27685,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
     "signatures": 980,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:sichere-schlierbergstrasse-kein-durchgangsverkehr-fuer-autos-2",
@@ -28635,9 +28670,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=25#petitionen",
     "signatures": 870,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:stoppt-den-abriss-des-loewen-in-lauben",
@@ -29070,9 +29105,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
     "signatures": 918,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:turmschule-leimen-schulhoefe-verbinden-gemeinsam-rennen-spielen-lachen",
     "i18n_state": {
@@ -30958,6 +30993,10 @@
       {
         "checked_at": "2026-10-15T23:26:51+02:00",
         "count": 1026
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 1027
       }
     ],
     "title": "Wohnraum und Grün gemeinsam denken – Kleingartenanlage „Am Habichtweg“ erhalten",
@@ -30969,11 +31008,11 @@
     "started_by": "Kleingarten- und Siedlerverein \"am Habichtweg\" e.V.",
     "category": "Umwelt",
     "category_url": "https://www.openpetition.de/petitionen?category=46#petitionen",
-    "signatures": 1026,
+    "signatures": 1027,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:wohnraum-und-gruen-gemeinsam-denken-kleingartenanlage-am-habichtweg-erhalten",
     "i18n_state": {
@@ -31538,9 +31577,9 @@
     "signatures": 885,
     "goal": 1000,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:tempo-30-sofort-in-stuttgart-gablenberg",
@@ -31753,9 +31792,9 @@
     "signatures": 885,
     "start_date": "2026-02-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:wiedereinfuehrung-der-buslinien-717-und-718-in-dachau-sued",
     "i18n_state": {
@@ -31993,9 +32032,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=20#petitionen",
     "signatures": 818,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:fuer-kostenlose-mitversicherung-von-ehepartnern",
@@ -32126,6 +32165,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 1035
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 1036
       }
     ],
     "title": "STOPPT DIE JAGD: Über 5 Millionen tote Wildtiere jedes Jahr",
@@ -32137,11 +32180,11 @@
     "started_by": "Arche Tierwohl e.V.",
     "category": "Tierschutz",
     "category_url": "https://www.openpetition.de/petitionen?category=45#petitionen",
-    "signatures": 1035,
+    "signatures": 1036,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:stoppt-die-jagd-ueber-5-millionen-tote-wildtiere-jedes-jahr",
@@ -32690,9 +32733,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=14#petitionen",
     "signatures": 686,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:stoppt-die-schliessung-der-kita-zwergenhaus-bornitz",
@@ -32892,9 +32935,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
     "signatures": 714,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:sichere-schulwege-fuer-taucha-zebrastreifen-jetzt",
     "i18n_state": {
@@ -33206,6 +33249,10 @@
       {
         "checked_at": "2026-10-07T20:37:09-06:00",
         "count": 655
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 656
       }
     ],
     "title": "13 Jahre ohne Busanbindung – jetzt muss Hannover endlich handeln!",
@@ -33217,12 +33264,12 @@
     "started_by": "Katrin Lindemann",
     "category": "Verkehr",
     "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
-    "signatures": 655,
+    "signatures": 656,
     "goal": 500,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:13-jahre-ohne-busanbindung-jetzt-muss-hannover-endlich-handeln",
     "i18n_state": {
@@ -33894,6 +33941,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 691
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 692
       }
     ],
     "title": "Stoppt den Abschuss von Nilgänsen mitten in der Landeshauptstadt Stuttgart!",
@@ -33905,11 +33956,11 @@
     "started_by": "Dennis Landgraf",
     "category": "Tierschutz",
     "category_url": "https://www.openpetition.de/petitionen?category=45#petitionen",
-    "signatures": 691,
+    "signatures": 692,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:stoppt-den-abschuss-von-nilgaensen-mitten-in-der-landeshauptstadt-stuttgart",
     "i18n_state": {
@@ -34087,6 +34138,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 639
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 640
       }
     ],
     "title": "Stoppt den Bau von vier Windkraftanlagen in den südlichen Ausläufern des Pöllwitzer Waldes!",
@@ -34098,12 +34153,12 @@
     "started_by": "Nina Allekotte",
     "category": "Umwelt",
     "category_url": "https://www.openpetition.de/petitionen?category=46#petitionen",
-    "signatures": 639,
-    "goal": 580,
+    "signatures": 640,
+    "goal": 650,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:stoppt-den-bau-von-vier-windkraftanlagen-in-den-suedlichen-auslaeufern-des-poellwitzer-waldes",
     "i18n_state": {
@@ -34553,9 +34608,9 @@
     "signatures": 905,
     "start_date": "2026-04-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:osnabrueck-muss-friedensstadt-bleiben-kein-einstieg-von-ruestungskonzernen-ins-vw-werk",
     "i18n_state": {
@@ -34802,9 +34857,9 @@
     "signatures": 592,
     "start_date": "2026-04-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:windrad-stopp-in-suemmern-und-aufm-gaxberg",
     "i18n_state": {
@@ -34932,9 +34987,9 @@
     "signatures": 653,
     "goal": 200,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:unterstuetze-unsere-petition-gegen-die-abschiebung-einer-familie",
     "i18n_state": {
@@ -35249,9 +35304,9 @@
     "signatures": 561,
     "goal": 500,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:forderung-eines-stuendlichen-bedarfshalts-fuer-fretzdorf",
@@ -35386,6 +35441,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 603
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 606
       }
     ],
     "title": "Hundeauslaufflächen im Öjendorfer Park schützen – Grillchaos und offene Feuer stoppen",
@@ -35397,11 +35456,11 @@
     "started_by": "Photografie Claus Döpelheuer",
     "category": "Umwelt",
     "category_url": "https://www.openpetition.de/petitionen?category=46#petitionen",
-    "signatures": 603,
+    "signatures": 606,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:hundeauslaufflaechen-im-oejendorfer-park-schuetzen-grillchaos-und-offene-feuer-stoppen",
     "i18n_state": {
@@ -36467,9 +36526,9 @@
     "signatures": 617,
     "goal": 500,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:erhalt-des-evangelischen-kindergarten-schliessung-vom-awa-anwanden-verhindern",
     "i18n_state": {
@@ -37167,6 +37226,10 @@
       {
         "checked_at": "2026-10-15T23:26:51+02:00",
         "count": 533
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 534
       }
     ],
     "title": "Rettet unsere Gärten - Keine Umwandlung von Garten- in Bauland in Jena",
@@ -37178,11 +37241,11 @@
     "started_by": "Kleingartenverein \"Obstbau Süd-West e.V.\" Jena",
     "category": "Soziales",
     "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
-    "signatures": 533,
+    "signatures": 534,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:rettet-unsere-gaerten-keine-umwandlung-von-garten-in-bauland-in-jena",
     "i18n_state": {
@@ -37547,6 +37610,10 @@
       {
         "checked_at": "2026-10-15T23:26:51+02:00",
         "count": 746
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 749
       }
     ],
     "title": "Vergabeverbot für mobile Kaffee-Bikes am Maschsee in Hannover aufheben",
@@ -37558,11 +37625,11 @@
     "started_by": "Heiko Fuchs",
     "category": "Kultur",
     "category_url": "https://www.openpetition.de/petitionen?category=25#petitionen",
-    "signatures": 746,
+    "signatures": 749,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:vergabeverbot-fuer-mobile-kaffee-bikes-am-maschsee-in-hannover-aufheben",
     "i18n_state": {
@@ -38616,6 +38683,10 @@
       {
         "checked_at": "2026-10-15T23:26:51+02:00",
         "count": 794
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 795
       }
     ],
     "title": "Fahrtkostenerstattung für den Schulweg für ALLE Schülerinnen und Schüler!",
@@ -38627,11 +38698,11 @@
     "started_by": "Marisa Schulz",
     "category": "Bildung",
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
-    "signatures": 794,
+    "signatures": 795,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:fahrtkostenerstattung-fuer-den-schulweg-fuer-alle-schuelerinnen-und-schueler",
     "i18n_state": {
@@ -39365,9 +39436,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=20#petitionen",
     "signatures": 548,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:hitzeschutz-fuer-krankenhaeuser-gesundheit-braucht-kuehle-raeume",
     "i18n_state": {
@@ -39452,9 +39523,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
     "signatures": 509,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:faire-bedingungen-fuer-die-praktische-ausbildung-in-der-medizinischen-technologie",
@@ -40063,9 +40134,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=20#petitionen",
     "signatures": 554,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:gesundheitsschutz-vor-profit-stoppt-die-deponieplaene-in-berkum",
     "i18n_state": {
@@ -40217,9 +40288,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=42#petitionen",
     "signatures": 482,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:anwohnerparken-in-der-auenstrasse-in-freising",
     "i18n_state": {
@@ -40279,6 +40350,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 473
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 475
       }
     ],
     "title": "Faire Baustellenpolitik in Hamburg – Schutz für Gewerbe, Anwohner und Rettungswege  Keine jahrelange",
@@ -40290,11 +40365,11 @@
     "started_by": "Orion Apotheke",
     "category": "Wirtschaft",
     "category_url": "https://www.openpetition.de/petitionen?category=48#petitionen",
-    "signatures": 473,
+    "signatures": 475,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:faire-baustellenpolitik-in-hamburg-schutz-fuer-gewerbe-anwohner-und-rettungswege-keine-jahrelange",
     "i18n_state": {
@@ -40447,9 +40522,9 @@
     "signatures": 478,
     "start_date": "2026-04-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:genug-ist-genug-gebt-den-buergern-ihre-stimme-zurueck-neuwahlen-jetzt",
     "i18n_state": {
@@ -40695,9 +40770,9 @@
     "signatures": 415,
     "start_date": "2026-04-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:rettet-die-kita-schatztruhe-keine-verlegung-an-den-kreisverkehr-erhalt-am-jetzigen-standort",
     "i18n_state": {
@@ -42272,6 +42347,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 471
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 476
       }
     ],
     "title": "Für Therapiefreiheit ohne Quotendruck – Rücknahme der neuen Vorhaltepauschale für Hausärzte ab 2026",
@@ -42283,12 +42362,12 @@
     "started_by": "IVfG - Interdisziplinärer Verband für Gesundheitsberufe e. V.",
     "category": "Gesundheit",
     "category_url": "https://www.openpetition.de/petitionen?category=20#petitionen",
-    "signatures": 471,
+    "signatures": 476,
     "start_date": "2026-03-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-therapiefreiheit-ohne-quotendruck-ruecknahme-der-neuen-vorhaltepauschale-fuer-hausaerzte-ab-202",
     "i18n_state": {
@@ -42402,6 +42481,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 412
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 413
       }
     ],
     "title": "Erhaltung des evangelischen Friedhofes Netphen",
@@ -42413,11 +42496,11 @@
     "started_by": "Nico Eggers",
     "category": "Soziales",
     "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
-    "signatures": 412,
+    "signatures": 413,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:erhaltung-des-evangelischen-friedhofes-netphen",
     "i18n_state": {
@@ -43674,9 +43757,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=46#petitionen",
     "signatures": 536,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:ja-zum-recycling-in-althengstett-nein-zum-standort-im-biotop-wald-langenloechle-schnaufer-teich",
@@ -44190,9 +44273,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
     "signatures": 440,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:ja-zum-neubau-der-bickenalbtalgrundschule-in-medelsheim",
     "i18n_state": {
@@ -44799,6 +44882,10 @@
       {
         "checked_at": "2026-10-15T23:26:51+02:00",
         "count": 401
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 402
       }
     ],
     "title": "Erhalt des bisherigen Betreibers des Hardausee-Kiosks",
@@ -44810,11 +44897,11 @@
     "started_by": "Lisa Marie Weiss",
     "category": "Verwaltung",
     "category_url": "https://www.openpetition.de/petitionen?category=12#petitionen",
-    "signatures": 401,
+    "signatures": 402,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:erhalt-des-bisherigen-betreibers-des-hardausee-kiosks",
     "i18n_state": {
@@ -46756,9 +46843,9 @@
     "signatures": 292,
     "start_date": "2026-04-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:oeffnung-der-schulsportanlagen-ausserhalb-der-unterrichtszeiten",
     "i18n_state": {
@@ -46821,6 +46908,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 688
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 698
       }
     ],
     "title": "Großwale in der Ostsee: Früher erkennen, bevor es zu spät ist.",
@@ -46832,12 +46923,12 @@
     "started_by": "Nadja Sander",
     "category": "Tierschutz",
     "category_url": "https://www.openpetition.de/petitionen?category=45#petitionen",
-    "signatures": 688,
+    "signatures": 698,
     "goal": 50000,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:schuetzt-wale-vor-der-todesfalle-ostsee-jetzt-handeln",
     "i18n_state": {
@@ -46895,9 +46986,9 @@
     "signatures": 289,
     "goal": 300,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-05-01",
     "lang": "de",
     "campaign_id": "openpetition:unser-katholischer-glaube-braucht-ein-zuhause-dialog-ueber-den-verkauf-der-st-antonius-kirche",
@@ -47387,6 +47478,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 291
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 293
       }
     ],
     "title": "Keine Bundeswehr auf Karrieremessen der TH Köln!",
@@ -47398,11 +47493,11 @@
     "started_by": "Unis gegen Krieg.",
     "category": "Wissenschaft",
     "category_url": "https://www.openpetition.de/petitionen?category=19#petitionen",
-    "signatures": 291,
+    "signatures": 293,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:keine-bundeswehr-auf-karrieremessen-der-th-koeln",
     "i18n_state": {
@@ -48917,9 +49012,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
     "signatures": 261,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:nein-zum-erzieherwechsel-in-panketal",
@@ -49904,9 +49999,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=46#petitionen",
     "signatures": 461,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-eine-verantwortungsvolle-freiflaechen-photovoltaikanlage-am-rippertfeld-thomashof-stupferich",
     "i18n_state": {
@@ -49975,9 +50070,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=14#petitionen",
     "signatures": 325,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:wasserspielplatz-borken-stadtpark",
     "i18n_state": {
@@ -50795,9 +50890,9 @@
     "signatures": 235,
     "goal": 500,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-05-01",
     "lang": "de",
     "campaign_id": "openpetition:leipzig-innenstadt-autofrei",
@@ -50858,9 +50953,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=20#petitionen",
     "signatures": 237,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:versorgung-statt-mangel-massnahmen-gegen-lieferengpaesse-im-gesundheitswesen",
     "i18n_state": {
@@ -51197,9 +51292,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
     "signatures": 268,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:tempo-30-auf-der-trompeter-strasse-in-duisburg-bergheim-fuer-mehr-sicherheit-fuer-kinder-radfahrer",
     "i18n_state": {
@@ -51271,6 +51366,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 384
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 385
       }
     ],
     "title": "Das Konstanzer Paradies schützen – Nachverdichtung mit Augenmaß statt Massenbau",
@@ -51282,11 +51381,11 @@
     "started_by": "Andrea Bernhardt",
     "category": "Bauen",
     "category_url": "https://www.openpetition.de/petitionen?category=6#petitionen",
-    "signatures": 384,
+    "signatures": 385,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:das-konstanzer-paradies-schuetzen-nachverdichtung-mit-augenmass-statt-massenbau",
     "i18n_state": {
@@ -51355,9 +51454,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
     "signatures": 232,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:erhaltet-den-biomarkt-in-naumburg",
     "i18n_state": {
@@ -52627,9 +52726,9 @@
     "signatures": 206,
     "goal": 1000,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:gemeinsam-fuer-frau-chloe-laufen-fuer-den-erhalt-von-herz-und-expertise-am-standort-aachen-hfmt-koel",
@@ -52956,9 +53055,9 @@
     "signatures": 215,
     "start_date": "2025-04-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:bau-einer-calisthenicsanlage-beim-baketballplatz-in-der-goetheanlage",
     "i18n_state": {
@@ -53480,9 +53579,9 @@
     "goal": 200,
     "start_date": "2025-10-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:mehr-sicherheit-und-ordnung-in-der-richard-paulick-strasse-halle-saale",
     "i18n_state": {
@@ -53576,6 +53675,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 194
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 195
       }
     ],
     "title": "Zeit für eine offene Debatte zur Zivilklausel der Universität Kassel",
@@ -53587,12 +53690,12 @@
     "started_by": "ver.di Betriebsgruppe an der Universität Kassel",
     "category": "Wissenschaft",
     "category_url": "https://www.openpetition.de/petitionen?category=19#petitionen",
-    "signatures": 194,
+    "signatures": 195,
     "goal": 100,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:zeit-fuer-eine-offene-debatte-zur-zivilklausel-der-universitaet-kassel",
     "i18n_state": {
@@ -54463,6 +54566,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 229
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 231
       }
     ],
     "title": "Hindenburg nicht länger ehren - Straße umbenennen!",
@@ -54474,11 +54581,11 @@
     "started_by": "Bürgerinitiative Umbennenung Hindenburgstrasse",
     "category": "Verwaltung",
     "category_url": "https://www.openpetition.de/petitionen?category=12#petitionen",
-    "signatures": 229,
+    "signatures": 231,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-05-01",
     "lang": "de",
     "campaign_id": "openpetition:hindenburg-nicht-laenger-ehren-strasse-umbenennen",
@@ -54530,6 +54637,10 @@
       {
         "checked_at": "2026-10-15T23:26:51+02:00",
         "count": 211
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 232
       }
     ],
     "title": "Durchfahrt sperren: Schluss mit dem Auto-Schleichverkehr in der Georg-Deuschle-Straße",
@@ -54541,11 +54652,11 @@
     "started_by": "Anwohnerinitiative Georg-Deuschle-Straße",
     "category": "Verkehr",
     "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
-    "signatures": 211,
+    "signatures": 232,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:durchfahrt-sperren-schluss-mit-dem-auto-schleichverkehr-in-der-georg-deuschle-strasse",
     "i18n_state": {
@@ -54605,6 +54716,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 201
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 202
       }
     ],
     "title": "Keine Abschiebung von Fuat Yaşar – Gebt ihm eine faire Zukunft in Deutschland",
@@ -54616,12 +54731,12 @@
     "started_by": "Ali Bugrahan",
     "category": "Migration",
     "category_url": "https://www.openpetition.de/petitionen?category=56#petitionen",
-    "signatures": 201,
+    "signatures": 202,
     "goal": 500,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:keine-abschiebung-von-fuat-yasar-gebt-ihm-eine-faire-zukunft-in-deutschland",
     "i18n_state": {
@@ -55396,9 +55511,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
     "signatures": 181,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:unsere-kinder-sind-keine-sparmassnahme-rettet-die-hamburger-kitas",
@@ -55567,9 +55682,9 @@
     "goal": 1000,
     "start_date": "2026-04-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:herz-licht-butjadingen-ja-zum-3d-vr-feuerwerk-statt-boeller",
     "i18n_state": {
@@ -57302,6 +57417,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 209
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 211
       }
     ],
     "title": "Petition für eine bedarfsgerechte Schulkindbetreuung in Rheinau-Freistett",
@@ -57313,11 +57432,11 @@
     "started_by": "Nadine Schneider",
     "category": "Familie",
     "category_url": "https://www.openpetition.de/petitionen?category=14#petitionen",
-    "signatures": 209,
+    "signatures": 211,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:petition-fuer-eine-bedarfsgerechte-schulkindbetreuung-in-rheinau-freistett",
     "i18n_state": {
@@ -58186,9 +58305,9 @@
     "signatures": 150,
     "start_date": "2026-04-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:wir-sind-die-stimme",
     "i18n_state": {
@@ -58694,9 +58813,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
     "signatures": 143,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:rettet-wildwasser-e-v-hagen",
@@ -58882,6 +59001,10 @@
       {
         "checked_at": "2026-10-15T23:26:51+02:00",
         "count": 401
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 409
       }
     ],
     "title": "Kostenloser öffentlicher Nahverkehr für alle Schülerinnen und Schüler der Stadt Hannover",
@@ -58893,11 +59016,11 @@
     "started_by": "Asya Gözacan",
     "category": "Verkehr",
     "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
-    "signatures": 401,
+    "signatures": 409,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:kostenloser-oeffentlicher-nahverkehr-fuer-alle-schuelerinnen-und-schueler-der-stadt-hannover",
@@ -59195,9 +59318,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
     "signatures": 254,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:starke-schulen-fuer-europa-verlaessliche-rahmenbedingungen-fuer-erasmus",
     "i18n_state": {
@@ -59617,11 +59740,11 @@
     "category": "Verkehr",
     "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
     "signatures": 631,
-    "goal": 612,
+    "goal": 500,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:mehr-lebensqualitaet-fuer-preungesheim-sichere-homburger-landstrasse",
@@ -59944,9 +60067,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
     "signatures": 135,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:wenn-schule-zu-eng-wird-unsere-kinder-brauchen-raum",
@@ -61756,9 +61879,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
     "signatures": 134,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:haende-weg-vom-minijob-fuer-erwerbsminderungsrentner-keine-abgabe-bei-krankheitsbedingtem-zuverdiens",
     "i18n_state": {
@@ -62733,9 +62856,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=55#petitionen",
     "signatures": 96,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:kita-leinenborn-staerken-hangabstuetzung-jetzt-umsetzen",
@@ -64636,9 +64759,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
     "signatures": 86,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:gedenken-an-kuersat-timuroglu",
     "i18n_state": {
@@ -66812,9 +66935,9 @@
     "signatures": 81,
     "goal": 200,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:podkrepa-nbu-ivan-vazov-gr-ludvigsburg",
     "i18n_state": {
@@ -70640,9 +70763,9 @@
     "signatures": 83,
     "goal": 1000,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:dies-ist-ein-sofort-nutzbares-loesungskonzept-fuer-den-meeressaeugerschutz-in-deutschland",
@@ -72391,9 +72514,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
     "signatures": 57,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:stoppt-die-akute-gefaehrdung-in-der-salzastrasse-in-fgroden-gehweg-sichern-leben-schuetzen",
@@ -73463,9 +73586,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=20#petitionen",
     "signatures": 78,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:abschaffung-der-beitragsbemessungsgrenze",
@@ -75131,9 +75254,9 @@
     "signatures": 50,
     "start_date": "2026-01-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:balkonkraftwerke-etc-auch-fuer-minderheiten-in-bruchteilsgemeinschaften",
     "i18n_state": {
@@ -75236,9 +75359,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=20#petitionen",
     "signatures": 46,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:starke-fachkraefte-starke-kinder-fuer-mehr-selbstfuersorge-und-resilienz-in-ev-kitas",
@@ -75562,9 +75685,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=59#petitionen",
     "signatures": 61,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:got-gebuehrenordnung-fuer-tieraerzte",
@@ -75625,9 +75748,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
     "signatures": 50,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:mobilitaet-darf-kein-luxus-sein-entlastung-fuer-menschen-mit-geringem-einkommen-jetzt",
@@ -76153,9 +76276,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=14#petitionen",
     "signatures": 49,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:deutschland-bestraft-familien-das-muss-aufhoeren",
@@ -76802,9 +76925,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=12#petitionen",
     "signatures": 38,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:mehr-sicherheit-in-82541-muensing-stoppt-raserei-auf-unseren-strassen",
     "i18n_state": {
@@ -77839,9 +77962,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
     "signatures": 43,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:erhalt-und-ausbau-von-foerder-und-inklusiven-schulen-fuer-kinder-mit-autismus-andere-einschraenkunge",
@@ -79907,9 +80030,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=55#petitionen",
     "signatures": 30,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:massnahmen-vandalismus",
     "i18n_state": {
@@ -81102,9 +81225,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=55#petitionen",
     "signatures": 30,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:sicherheit-geht-vor-keine-totale-dunkelheit-in-ammerbuch",
@@ -82625,9 +82748,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=56#petitionen",
     "signatures": 27,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:besuchsvisum-fuer-ueber-90-jaehrige-mutter-aus-der-tuerkei-ermoeglichen-menschlichkeit-vor-buerokrat",
@@ -83036,9 +83159,9 @@
     "signatures": 26,
     "goal": 500,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:mehr-sicherheit-in-der-saarbruecker-strasse-tempo-30-jetzt",
@@ -84548,9 +84671,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=25#petitionen",
     "signatures": 20,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:baustopp-fuer-den-40-meter-funkmast-an-der-grillhuette-in-derschen-erst-buerger-fragen-dann-bauen",
@@ -84594,6 +84717,10 @@
       {
         "checked_at": "2026-10-15T23:26:51+02:00",
         "count": 33
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 34
       }
     ],
     "title": "Fahrrad-Kennzeichen für mehr Verkehrssicherheit",
@@ -84605,11 +84732,11 @@
     "started_by": "Fabian Zehnder",
     "category": "Verkehr",
     "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
-    "signatures": 33,
+    "signatures": 34,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-05-01",
     "lang": "de",
     "campaign_id": "openpetition:fahrrad-kennzeichen-fuer-mehr-verkehrssicherheit",
@@ -85049,9 +85176,9 @@
     "signatures": 25,
     "goal": 500,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:rettet-den-marienpark-im-hemshof",
@@ -86025,9 +86152,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
     "signatures": 19,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:parkplatznot-im-wohngebiet-toepferstrasse-pottkuhle-beenden",
@@ -86241,9 +86368,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=55#petitionen",
     "signatures": 24,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:sofortige-massnahmen-fuer-sicherheit-und-hilfe-rund-um-den-bonner-hauptbahnhof",
@@ -86344,9 +86471,9 @@
     "signatures": 16,
     "start_date": "2026-04-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:fracking-in-deutschland-pruefen",
     "i18n_state": {
@@ -87129,6 +87256,10 @@
       {
         "checked_at": "2026-10-08T14:13:52-06:00",
         "count": 42
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 43
       }
     ],
     "title": "Rettet den Chili-Cheese-Fleischkäse! Globus, bring den scharfen Kult-Klassiker dauerhaft zurück!",
@@ -87140,11 +87271,11 @@
     "started_by": "Yàn Phillip Thome",
     "category": "Verbraucherschutz",
     "category_url": "https://www.openpetition.de/petitionen?category=59#petitionen",
-    "signatures": 42,
+    "signatures": 43,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:rettet-den-chili-cheese-fleischkaese-globus-bring-den-scharfen-kult-klassiker-dauerhaft-zurueck",
     "i18n_state": {
@@ -90277,9 +90408,9 @@
     "goal": 13000,
     "start_date": "2025-10-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:reede-von-ostende-umgebung-fort-napoleon",
     "i18n_state": {
@@ -90773,9 +90904,9 @@
     "signatures": 17049,
     "goal": 14000,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-eine-gesicherte-und-wohnortsnahe-physiotherapie-im-kanton-bern",
     "i18n_state": {
@@ -91151,9 +91282,9 @@
     "signatures": 15633,
     "goal": 20000,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-eine-gesicherte-und-wohnortsnahe-physiotherapie-im-kanton-zuerich-3",
     "i18n_state": {
@@ -91610,9 +91741,9 @@
     "signatures": 10253,
     "goal": 8500,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-eine-gesicherte-und-wohnortsnahe-physiotherapie-im-kanton-aargau",
     "i18n_state": {
@@ -92414,9 +92545,9 @@
     "signatures": 5775,
     "goal": 3000,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-eine-gesicherte-und-wohnortsnahe-physiotherapie-im-kanton-basel-landschaft",
     "i18n_state": {
@@ -92670,9 +92801,9 @@
     "signatures": 6035,
     "goal": 5500,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-eine-gesicherte-und-wohnortsnahe-physiotherapie-im-kanton-luzern",
     "i18n_state": {
@@ -92892,9 +93023,9 @@
     "signatures": 4692,
     "goal": 6500,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-eine-gesicherte-und-wohnortsnahe-physiotherapie-im-kanton-st-gallen",
     "i18n_state": {
@@ -93179,9 +93310,9 @@
     "signatures": 3789,
     "goal": 2500,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-eine-gesicherte-und-wohnortsnahe-physiotherapie-im-kanton-basel-stadt",
     "i18n_state": {
@@ -93478,6 +93609,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 1566
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 1567
       }
     ],
     "title": "UKH Kalwang retten mit Zusammenarbeit– Gesundheit am Land darf nicht fallen!",
@@ -93489,11 +93624,11 @@
     "started_by": "Marktgemeinde Kalwang",
     "category": "Gesundheit",
     "category_url": "https://www.openpetition.de/at/petitionen?category=20#petitionen",
-    "signatures": 1566,
+    "signatures": 1567,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:ukh-kalwang-retten-mit-zusammenarbeit-gesundheit-am-land-darf-nicht-fallen",
     "i18n_state": {
@@ -93553,6 +93688,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 1521
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 1523
       }
     ],
     "title": "Für ein lebenswertes Baden – Nein zum Gewerbepark am Lorenzteich",
@@ -93564,12 +93703,12 @@
     "started_by": "Ursula Obermeier",
     "category": "Verkehr",
     "category_url": "https://www.openpetition.de/at/petitionen?category=47#petitionen",
-    "signatures": 1521,
+    "signatures": 1523,
     "start_date": "2025-08-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-ein-lebenswertes-baden-nein-zum-gewerbepark-am-lorenzteich",
     "i18n_state": {
@@ -93974,6 +94113,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 1640
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 1641
       }
     ],
     "title": "Rettet die Lindenallee in St.Pölten (Heidenheimer Straße)!",
@@ -93985,11 +94128,11 @@
     "started_by": "Bürgerplattform Pro St.Pölten",
     "category": "Gesundheit",
     "category_url": "https://www.openpetition.de/at/petitionen?category=20#petitionen",
-    "signatures": 1640,
+    "signatures": 1641,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:rettet-die-lindenallee-in-st-poelten-heidenheimer-strasse",
     "i18n_state": {
@@ -94077,6 +94220,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 1504
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 1505
       }
     ],
     "title": "Hände weg vom Egelsee! STOPP die Aushubdeponie in Tisis/Tosters!",
@@ -94088,11 +94235,11 @@
     "started_by": "Peter Ulmer",
     "category": "Umwelt",
     "category_url": "https://www.openpetition.de/at/petitionen?category=46#petitionen",
-    "signatures": 1504,
+    "signatures": 1505,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:haende-weg-vom-egelsee-stopp-die-aushubdeponie-in-tisis-tosters",
     "i18n_state": {
@@ -94170,9 +94317,9 @@
     "signatures": 3944,
     "goal": 3000,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-eine-gesicherte-und-wohnortsnahe-physiotherapie-im-kanton-solothurn",
     "i18n_state": {
@@ -94338,6 +94485,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 1278
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 1279
       }
     ],
     "title": "Sicher Radfahren in Pressbaum: JETZT!",
@@ -94349,12 +94500,12 @@
     "started_by": "Radlobby Pressbaum",
     "category": "Verkehr",
     "category_url": "https://www.openpetition.de/at/petitionen?category=47#petitionen",
-    "signatures": 1278,
+    "signatures": 1279,
     "start_date": "2026-01-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:sicher-radfahren-in-pressbaum-jetzt-3",
     "i18n_state": {
@@ -94405,6 +94556,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 1315
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 1316
       }
     ],
     "title": "Erhalt und ganzjährige Nutzung der Schwimmmöglichkeiten in Traun – Überdachung des Freibads",
@@ -94416,11 +94571,11 @@
     "started_by": "1. USC Traun",
     "category": "Gesundheit",
     "category_url": "https://www.openpetition.de/at/petitionen?category=20#petitionen",
-    "signatures": 1315,
+    "signatures": 1316,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:erhalt-und-ganzjaehrige-nutzung-der-schwimmmoeglichkeiten-in-traun-ueberdachung-des-freibads",
     "i18n_state": {
@@ -94554,9 +94709,9 @@
     "goal": 1500,
     "start_date": "2025-09-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:buergerinitiative-rettet-die-wies",
     "i18n_state": {
@@ -94696,9 +94851,9 @@
     "signatures": 3154,
     "goal": 2000,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-eine-gesicherte-und-wohnortsnahe-physiotherapie-im-kanton-graubuenden",
     "i18n_state": {
@@ -94843,9 +94998,9 @@
     "signatures": 4110,
     "goal": 3000,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-eine-gesicherte-und-wohnortsnahe-physiotherapie-im-kanton-thurgau",
     "i18n_state": {
@@ -95463,9 +95618,9 @@
     "signatures": 737,
     "start_date": "2026-01-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:oeffnung-der-sporthallen",
     "i18n_state": {
@@ -95700,9 +95855,9 @@
     "signatures": 1752,
     "goal": 1500,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-eine-gesicherte-und-wohnortsnahe-physiotherapie-im-kanton-zug",
     "i18n_state": {
@@ -95871,9 +96026,9 @@
     "category_url": "https://www.openpetition.de/at/petitionen?category=7#petitionen",
     "signatures": 641,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:hitzefrei-in-tirol",
     "i18n_state": {
@@ -96357,9 +96512,9 @@
     "signatures": 1565,
     "goal": 1000,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-eine-gesicherte-und-wohnortsnahe-physiotherapie-im-kanton-schaffhausen",
     "i18n_state": {
@@ -96433,9 +96588,9 @@
     "signatures": 1742,
     "goal": 2000,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-eine-gesicherte-und-wohnortsnahe-physiotherapie-im-kanton-schwyz",
     "i18n_state": {
@@ -96711,9 +96866,9 @@
     "category_url": "https://www.openpetition.de/at/petitionen?category=39#petitionen",
     "signatures": 1823,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:keine-paketabgabe-auf-kosten-von-buergern-kaufkraft-und-wirtschaft",
@@ -97002,9 +97157,9 @@
     "signatures": 940,
     "goal": 500,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-eine-gesicherte-und-wohnortsnahe-physiotherapie-im-kanton-nidwalden",
     "i18n_state": {
@@ -97402,6 +97557,10 @@
       {
         "checked_at": "2026-10-15T23:26:51+02:00",
         "count": 415
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 416
       }
     ],
     "title": "Tempo-30-Zone im Dorfkern von Galgenen",
@@ -97413,13 +97572,13 @@
     "started_by": "Cedric Meyer",
     "category": "Verkehr",
     "category_url": "https://www.openpetition.de/ch/petitionen?category=47#petitionen",
-    "signatures": 415,
+    "signatures": 416,
     "goal": 400,
     "start_date": "2026-01-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:tempo-30-zone-im-dorfkern-von-galgenen-2",
     "i18n_state": {
@@ -97959,9 +98118,9 @@
     "signatures": 725,
     "goal": 500,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-eine-gesicherte-und-wohnortsnahe-physiotherapie-im-kanton-obwalden",
     "i18n_state": {
@@ -98083,9 +98242,9 @@
     "signatures": 317,
     "goal": 500,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:haende-weg-von-der-lazag-freier-zugang-und-keine-strafen-fuer-einheimische-an-der-passer-in-mer-2",
     "i18n_state": {
@@ -98154,9 +98313,9 @@
     "category_url": "https://www.openpetition.de/at/petitionen?category=39#petitionen",
     "signatures": 306,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:pflege-ohne-risiko-verbindliche-kontrollen-und-klare-verantwortung-in-der-24-stunden-betreuung",
@@ -98285,9 +98444,9 @@
     "signatures": 774,
     "goal": 500,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-eine-gesicherte-und-wohnortsnahe-physiotherapie-im-kanton-appenzell-ausserrhoden",
     "i18n_state": {
@@ -98883,9 +99042,9 @@
     "signatures": 677,
     "goal": 500,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-eine-gesicherte-und-wohnortsnahe-physiotherapie-im-kanton-glarus",
     "i18n_state": {
@@ -99117,6 +99276,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 261
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 262
       }
     ],
     "title": "Rhino 3D natively for Linux",
@@ -99128,13 +99291,13 @@
     "started_by": "André Bauer",
     "category": "Wirtschaft",
     "category_url": "https://www.openpetition.de/us/petitionen?category=48#petitionen",
-    "signatures": 261,
+    "signatures": 262,
     "goal": 1000,
     "start_date": "2026-04-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:rhino-3d-natively-for-linux",
     "i18n_state": {
@@ -99193,6 +99356,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 360
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 361
       }
     ],
     "title": "Fürsorge vor Diskriminierung ist ein Menschenrecht",
@@ -99204,12 +99371,12 @@
     "started_by": "KOPAC",
     "category": "Bürgerrechte",
     "category_url": "https://www.openpetition.de/petitionen?category=58#petitionen",
-    "signatures": 360,
+    "signatures": 361,
     "goal": 500,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:fuersorge-vor-diskriminierung-ist-ein-menschenrecht",
     "i18n_state": {
@@ -99271,9 +99438,9 @@
     "signatures": 229,
     "goal": 500,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:transparente-schulzuteilung-und-keine-geschwistertrennung-im-kanton-zuerich",
     "i18n_state": {
@@ -100131,9 +100298,9 @@
     "category_url": "https://www.openpetition.de/at/petitionen?category=14#petitionen",
     "signatures": 137,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:spielplatz-an-der-westbahn-neben-der-traisen-muss-zurueckkommen",
@@ -100242,9 +100409,9 @@
     "signatures": 138,
     "goal": 500,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:fairer-zugang-und-transparenz-bei-der-isst-akkreditierung",
     "i18n_state": {
@@ -100301,9 +100468,9 @@
     "category_url": "https://www.openpetition.de/at/petitionen?category=6#petitionen",
     "signatures": 133,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:stoppt-den-bau-des-transformators-im-wohngebiet",
@@ -100535,9 +100702,9 @@
     "signatures": 340,
     "goal": 250,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-eine-gesicherte-und-wohnortsnahe-physiotherapie-im-kanton-appenzell-innerrhoden",
     "i18n_state": {
@@ -100842,6 +101009,10 @@
       {
         "checked_at": "2026-10-15T23:26:51+02:00",
         "count": 112
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 111
       }
     ],
     "title": "VS Mülln: Umsetzung dringender Erhaltungsmaßnahmen",
@@ -100853,11 +101024,11 @@
     "started_by": "Elternverein VS Mülln",
     "category": "Familie",
     "category_url": "https://www.openpetition.de/at/petitionen?category=14#petitionen",
-    "signatures": 112,
+    "signatures": 111,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:vs-muelln-umsetzung-dringender-erhaltungsmassnahmen",
     "i18n_state": {
@@ -101578,9 +101749,9 @@
     "category_url": "https://www.openpetition.de/at/petitionen?category=46#petitionen",
     "signatures": 136,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-die-versprochene-begruente-autofreie-zone-in-der-nekulagasse-keine-strasse-durch-unser-wohngebi",
     "i18n_state": {
@@ -101749,9 +101920,9 @@
     "signatures": 83,
     "goal": 500,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:stoppt-das-treffen-mit-den-taliban-in-bruessel",
     "i18n_state": {
@@ -102625,9 +102796,9 @@
     "category_url": "https://www.openpetition.de/at/petitionen?category=20#petitionen",
     "signatures": 65,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:klimatisierte-schulen-und-kindergaerten",
     "i18n_state": {
@@ -102681,9 +102852,9 @@
     "signatures": 55,
     "goal": 200,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:keine-doppelrolle-in-der-goed-fuehrung",
     "i18n_state": {
@@ -103216,9 +103387,9 @@
     "category_url": "https://www.openpetition.de/at/petitionen?category=58#petitionen",
     "signatures": 42,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-eine-gesunde-und-kindgerechte-volksschule-entfernung-des-snackautomaten",
     "i18n_state": {
@@ -103570,9 +103741,9 @@
     "category_url": "https://www.openpetition.de/at/petitionen?category=20#petitionen",
     "signatures": 42,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:schluss-mit-der-toiletten-gebuehr-gratis-wcs-fuer-alle",
     "i18n_state": {
@@ -103706,9 +103877,9 @@
     "signatures": 47,
     "goal": 500,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:kein-hund-sollte-auf-die-rennstrecke-muessen",
     "i18n_state": {
@@ -103820,9 +103991,9 @@
     "category_url": "https://www.openpetition.de/at/petitionen?category=7#petitionen",
     "signatures": 35,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:heisse-klassen-kuehle-parteikassen-parteifoerderung-halbieren-klimaanlagen-fuer-noe-schulen",
     "i18n_state": {
@@ -104011,9 +104182,9 @@
     "category_url": "https://www.openpetition.de/at/petitionen?category=47#petitionen",
     "signatures": 30,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-05-01",
     "lang": "de",
     "campaign_id": "openpetition:sicherheit-vor-schnelligkeit-verkehrsberuhigung-in-der-matthias-corvinus-strasse-jetzt",
@@ -104945,9 +105116,9 @@
     "signatures": 24,
     "goal": 500,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:sicherung-von-arbeitsplaetzen-im-zeitalter-der-kuenstlichen-intelligenz",
@@ -105168,9 +105339,9 @@
     "category_url": "https://www.openpetition.de/at/petitionen?category=47#petitionen",
     "signatures": 19,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:klimafreundlich-unterwegs-und-trotzdem-ausgebremst",
     "i18n_state": {
@@ -105429,9 +105600,9 @@
     "category_url": "https://www.openpetition.de/at/petitionen?category=7#petitionen",
     "signatures": 12,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:verkuerzung-des-schuljahres-in-wien-um-die-letzten-zwei-wochen-aufgrund-von-extremer-sommerhitze",
     "i18n_state": {
@@ -105722,6 +105893,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 16
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 17
       }
     ],
     "title": "Petition für ein strengeres Gewaltschutzgesetz",
@@ -105733,12 +105908,12 @@
     "started_by": "Andrea Koller",
     "category": "Sicherheit",
     "category_url": "https://www.openpetition.de/ch/petitionen?category=55#petitionen",
-    "signatures": 16,
+    "signatures": 17,
     "goal": 500,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:petition-fuer-ein-strengeres-gewaltschutzgesetz",
     "i18n_state": {
@@ -106741,9 +106916,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
     "signatures": 825,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:kinder-brauchen-vielfalt-kita-st-elisabeth-erhalten",
     "i18n_state": {
@@ -106988,6 +107163,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 424
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 426
       }
     ],
     "title": "Abschiebestopp für Mehmet Emin Tunc – Integration und Familie schützen",
@@ -106999,11 +107178,11 @@
     "started_by": "BAUSTARK GmbH",
     "category": "Soziales",
     "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
-    "signatures": 424,
+    "signatures": 426,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:abschiebestopp-fuer-mehmet-emin-tunc-integration-und-familie-schuetzen",
     "i18n_state": {
@@ -109222,6 +109401,10 @@
       {
         "checked_at": "2026-10-15T23:26:51+02:00",
         "count": 236
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 237
       }
     ],
     "title": "Wir fordern Prävention von Gewalt gegen Frauen!",
@@ -109233,11 +109416,11 @@
     "started_by": "Melia Oeker",
     "category": "Bürgerrechte",
     "category_url": "https://www.openpetition.de/petitionen?category=58#petitionen",
-    "signatures": 236,
+    "signatures": 237,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:wir-fordern-praevention-von-gewalt-gegen-frauen",
     "i18n_state": {
@@ -109546,9 +109729,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
     "signatures": 49,
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:abschaffung-der-30-stunden-grenze-fuer-pflegende-angehoerige",
     "i18n_state": {
@@ -112548,6 +112731,10 @@
       {
         "checked_at": "2026-10-15T23:26:51+02:00",
         "count": 1011
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 1012
       }
     ],
     "title": "Stoppt die neuen Kita-Gebühren in Haan – Für Fairness, Planbarkeit, eine familienfreundliche Zukunft",
@@ -112558,14 +112745,14 @@
     "started_by": "Faire Familienpolitik",
     "category": "Familie",
     "category_url": "https://www.openpetition.de/petitionen?category=14#petitionen",
-    "signatures": 1011,
+    "signatures": 1012,
     "lang": "de",
     "campaign_id": "openpetition:stoppt-die-neuen-kita-gebuehren-in-haan-fuer-fairness-planbarkeit-eine-familienfreundliche-zukunft",
     "i18n_state": {
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Familien",
@@ -112579,7 +112766,7 @@
       "Betreuungsmodelle",
       "Bedarfsgerechte"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "country": "DE",
     "start_date": "2026-07-01"
   },
@@ -112750,6 +112937,10 @@
       {
         "checked_at": "2026-10-15T23:26:51+02:00",
         "count": 975
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 976
       }
     ],
     "title": "Rettet unser Vereinsheim - FKG Narrhalla 1948 e.V.",
@@ -112760,7 +112951,7 @@
     "started_by": "FKG Narrhalla 1948 e.V.",
     "category": "Soziales",
     "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
-    "signatures": 975,
+    "signatures": 976,
     "goal": 1000,
     "lang": "de",
     "campaign_id": "openpetition:rettet-unser-vereinsheim-fkg-narrhalla-1948-e-v",
@@ -112768,7 +112959,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Kündigung",
@@ -112782,9 +112973,9 @@
       "Zurückzunehmen",
       "Vereinsheims"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "country": "DE",
-    "start_date": "2026-07-29"
+    "start_date": "2026-07-01"
   },
   "finger-weg-von-den-gruenen-fingern-in-osnabrueck-bauplanungsstopp-sofort-2": {
     "slug": "finger-weg-von-den-gruenen-fingern-in-osnabrueck-bauplanungsstopp-sofort-2",
@@ -113207,6 +113398,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 804
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 805
       }
     ],
     "title": "Vertrauensschutz bei der Rentenreform – Keine nachträgliche Änderung für rentennahe Jahrgänge",
@@ -113217,14 +113412,14 @@
     "started_by": "Axel Kobbenbring",
     "category": "Soziales",
     "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
-    "signatures": 804,
+    "signatures": 805,
     "lang": "de",
     "campaign_id": "openpetition:vertrauensschutz-bei-der-rentenreform-keine-nachtraegliche-aenderung-fuer-rentennahe-jahrgaenge",
     "i18n_state": {
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Gesetzlichen",
@@ -113238,7 +113433,7 @@
       "Arbeitnehmerinnen",
       "Beschäftigte"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "country": "DE",
     "start_date": "2026-07-01"
   },
@@ -113381,7 +113576,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Einsiedel",
@@ -113395,7 +113590,7 @@
       "Landesamt",
       "Chemnitz"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "country": "DE",
     "start_date": "2026-07-01"
   },
@@ -113626,7 +113821,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Dunlop",
@@ -113640,7 +113835,7 @@
       "Alternativen",
       "Überteuerter"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "country": "DE",
     "start_date": "2026-07-01"
   },
@@ -113823,6 +114018,10 @@
       {
         "checked_at": "2026-10-08T14:13:52-06:00",
         "count": 588
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 589
       }
     ],
     "title": "Ja zu Wohnraum – Nein zu dieser Dimension in Dingden! Ortsverträgliche Entwicklung an der Ringstraße",
@@ -113833,14 +114032,14 @@
     "started_by": "Initiative Zukunft für Dingden",
     "category": "Bauen",
     "category_url": "https://www.openpetition.de/petitionen?category=6#petitionen",
-    "signatures": 588,
+    "signatures": 589,
     "lang": "de",
     "campaign_id": "openpetition:ja-zu-wohnraum-nein-zu-dieser-dimension-in-dingden-ortsvertraegliche-entwicklung-an-der-ringstrasse",
     "i18n_state": {
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Dingden",
@@ -113854,7 +114053,7 @@
       "Bestehende",
       "Sportplatz"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "country": "DE",
     "start_date": "2026-07-01"
   },
@@ -114226,7 +114425,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Mingers",
@@ -114240,7 +114439,7 @@
       "Eindringlich",
       "Unterschrift"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "country": "DE",
     "start_date": "2026-07-01"
   },
@@ -114395,6 +114594,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 489
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 490
       }
     ],
     "title": "Volksentscheid bundesweit - Nord-Stream 2 öffnen!",
@@ -114405,14 +114608,14 @@
     "started_by": "Malte Griesse",
     "category": "Energie",
     "category_url": "https://www.openpetition.de/petitionen?category=50#petitionen",
-    "signatures": 489,
+    "signatures": 490,
     "lang": "de",
     "campaign_id": "openpetition:volksentscheid-bundesweit-nord-stream-2-oeffnen",
     "i18n_state": {
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Nord-Stream",
@@ -114426,7 +114629,7 @@
       "Terrorakt",
       "Energieversorgung"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "country": "DE",
     "start_date": "2026-07-01"
   },
@@ -114470,7 +114673,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Kinder",
@@ -114484,7 +114687,7 @@
       "Sicher",
       "Hause"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "country": "DE",
     "start_date": "2026-07-01"
   },
@@ -114528,7 +114731,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Tierschutz",
@@ -114542,7 +114745,7 @@
       "Ehrenamtlichen",
       "Privathaltung"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "country": "DE",
     "start_date": "2026-07-01"
   },
@@ -114925,7 +115128,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Schulen",
@@ -114939,7 +115142,7 @@
       "Temperaturen",
       "Bedingungen"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "country": "DE",
     "start_date": "2026-07-01"
   },
@@ -115066,7 +115269,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Während",
@@ -115080,7 +115283,7 @@
       "Aufzuchtzeit",
       "Tierschutzes"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "country": "DE",
     "start_date": "2026-07-01"
   },
@@ -115128,7 +115331,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Landkreis",
@@ -115142,7 +115345,7 @@
       "Welt",
       "Industriegeländen"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "country": "DE",
     "start_date": "2026-08-04"
   },
@@ -115286,6 +115489,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 481
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 483
       }
     ],
     "title": "Tempo 30 auf dem Düesbergweg in Münster für mehr Sicherheit, Lärmschutz und Lebensqualität",
@@ -115296,14 +115503,14 @@
     "started_by": "Dirk Woltering",
     "category": "Verkehr",
     "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
-    "signatures": 481,
+    "signatures": 483,
     "lang": "de",
     "campaign_id": "openpetition:tempo-30-auf-dem-dueesbergweg-in-muenster-fuer-mehr-sicherheit-laermschutz-und-lebensqualitaet",
     "i18n_state": {
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Tempo",
@@ -115317,7 +115524,7 @@
       "Verkehrssicherheit",
       "Lärmschutzes"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "country": "DE",
     "start_date": "2026-07-01"
   },
@@ -115348,6 +115555,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 292
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 294
       }
     ],
     "title": "Keine Anhebung der Altersgrenze für die abschlagsbehaftete Altersrente von 63 auf 64 Jahre",
@@ -115358,14 +115569,14 @@
     "started_by": "Gabriele Kolbe",
     "category": "Bürgerrechte",
     "category_url": "https://www.openpetition.de/petitionen?category=58#petitionen",
-    "signatures": 292,
+    "signatures": 294,
     "lang": "de",
     "campaign_id": "openpetition:keine-anhebung-der-altersgrenze-fuer-die-abschlagsbehaftete-altersrente-von-63-auf-64-jahre",
     "i18n_state": {
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Möglichkeit",
@@ -115379,7 +115590,7 @@
       "Fordere",
       "Jahren"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "country": "DE",
     "start_date": "2026-07-01"
   },
@@ -115531,6 +115742,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 1016
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 1025
       }
     ],
     "title": "Kein Abriss! Bahnsteigdach am Bahnhof Übersee erhalten und fertigstellen**",
@@ -115541,14 +115756,14 @@
     "started_by": "Bündnis 90/ Die Grünen",
     "category": "Bauen",
     "category_url": "https://www.openpetition.de/petitionen?category=6#petitionen",
-    "signatures": 1016,
+    "signatures": 1025,
     "lang": "de",
     "campaign_id": "openpetition:kein-abriss-bahnsteigdach-am-bahnhof-uebersee-erhalten-und-fertigstellen",
     "i18n_state": {
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Bahnhof",
@@ -115562,9 +115777,9 @@
       "Fertigstellung",
       "Bahnsteigdach"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "country": "DE",
-    "start_date": "2026-08-03"
+    "start_date": "2026-08-01"
   },
   "rettet-neurieds-kommunale-kultur-und-sporteinrichtungen": {
     "slug": "rettet-neurieds-kommunale-kultur-und-sporteinrichtungen",
@@ -115676,7 +115891,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Kinder",
@@ -115690,7 +115905,7 @@
       "Beratungszentrum",
       "Comeniusschule"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "country": "DE",
     "goal": 3400,
     "start_date": "2026-08-04"
@@ -115735,7 +115950,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Ulmer",
@@ -115749,9 +115964,9 @@
       "Anwohnerschaft",
       "Anwohnerinnen"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "country": "DE",
-    "start_date": "2026-07-30"
+    "start_date": "2026-07-01"
   },
   "erhalt-der-oeffnungszeit-7-15-uhr-in-den-kindergaerten-und-der-schulkindbetreuung-3": {
     "slug": "erhalt-der-oeffnungszeit-7-15-uhr-in-den-kindergaerten-und-der-schulkindbetreuung-3",
@@ -116106,7 +116321,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Imbisswagen",
@@ -116120,9 +116335,9 @@
       "Versorgt",
       "Essen"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "country": "DE",
-    "start_date": "2026-07-31"
+    "start_date": "2026-07-01"
   },
   "faire-kita-gebuehren-fuer-familien-mit-mehreren-kindern-in-weinstadt": {
     "slug": "faire-kita-gebuehren-fuer-familien-mit-mehreren-kindern-in-weinstadt",
@@ -116582,7 +116797,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Marialinden",
@@ -116596,7 +116811,7 @@
       "Veränderungen",
       "Einfahrten"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "country": "DE",
     "start_date": "2026-07-01"
   },
@@ -116780,7 +116995,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Pfälzer",
@@ -116794,9 +117009,9 @@
       "Dies",
       "Krisendestillation"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "country": "DE",
-    "start_date": "2026-07-29"
+    "start_date": "2026-07-01"
   },
   "petition-zur-erweiterung-der-mittagsbetreuung-bis-14-00-uhr-mit-warmem-mittagessen-in-oberbergkirche": {
     "slug": "petition-zur-erweiterung-der-mittagsbetreuung-bis-14-00-uhr-mit-warmem-mittagessen-in-oberbergkirche",
@@ -116854,7 +117069,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Kinder",
@@ -116868,7 +117083,7 @@
       "Verpflichtende",
       "Mindestens"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "country": "DE",
     "start_date": "2026-07-01"
   },
@@ -119299,6 +119514,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 133
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 134
       }
     ],
     "title": "Erhalt der Kostenübernahme für medizinische Cannabisblüten durch die gesetzlichen Krankenkassen ⭐",
@@ -119309,14 +119528,14 @@
     "started_by": "Yasemin Bell",
     "category": "Gesundheit",
     "category_url": "https://www.openpetition.de/petitionen?category=20#petitionen",
-    "signatures": 133,
+    "signatures": 134,
     "lang": "de",
     "campaign_id": "openpetition:erhalt-der-kostenuebernahme-fuer-medizinische-cannabisblueten-durch-die-gesetzlichen-krankenkassen",
     "i18n_state": {
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Medizinische",
@@ -119330,9 +119549,9 @@
       "Medizinisch",
       "Behandlung"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "country": "DE",
-    "start_date": "2026-08-04"
+    "start_date": "2026-08-05"
   },
   "rettet-den-rohrsee-bei-bad-wurzach-bevor-es-zu-spaet-ist": {
     "slug": "rettet-den-rohrsee-bei-bad-wurzach-bevor-es-zu-spaet-ist",
@@ -119467,7 +119686,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Spiele",
@@ -119481,7 +119700,7 @@
       "Videospielgeschichte",
       "Sammelleidenschaft"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "country": "DE",
     "start_date": "2026-07-01"
   },
@@ -120299,7 +120518,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Jugendliche",
@@ -120313,9 +120532,9 @@
       "Schulbarometer",
       "Nachweisbaren"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "country": "DE",
-    "start_date": "2026-08-02"
+    "start_date": "2026-08-01"
   },
   "kinder-haben-ein-recht-auf-beide-eltern-umgangsverfahren-beschleunigen": {
     "slug": "kinder-haben-ein-recht-auf-beide-eltern-umgangsverfahren-beschleunigen",
@@ -120948,7 +121167,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Familien",
@@ -120962,7 +121181,7 @@
       "Dm-Filiale",
       "Babylove"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "country": "DE",
     "start_date": "2026-08-06"
   },
@@ -121729,7 +121948,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Personen",
@@ -121743,7 +121962,7 @@
       "Weiterbildung",
       "Arbeitgeber"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "country": "DE",
     "start_date": "2026-07-01"
   },
@@ -122073,7 +122292,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Arnoldstein",
@@ -122087,7 +122306,7 @@
       "Finanzierung",
       "Umzusetzen"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "country": "AT",
     "start_date": "2026-07-01"
   },
@@ -122212,6 +122431,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 980
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 982
       }
     ],
     "title": "Offener Brief an Papst Leo XIV. - Fast 1000 Unterschriften erreicht! Helfen Sie uns - und dem Papst!",
@@ -122222,7 +122445,7 @@
     "started_by": "Pro Fide Ecclesiae e.V.i.Gr.",
     "category": "Kultur",
     "category_url": "https://www.openpetition.de/petitionen?category=25#petitionen",
-    "signatures": 980,
+    "signatures": 982,
     "goal": 30000,
     "lang": "de",
     "campaign_id": "openpetition:offener-brief-an-papst-leo-xiv",
@@ -122230,7 +122453,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Kirche",
@@ -122244,7 +122467,7 @@
       "Heiliger",
       "Offenen"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "country": "DE",
     "start_date": "2026-07-01"
   },
@@ -122342,7 +122565,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Arbogast",
@@ -122356,9 +122579,9 @@
       "Natur",
       "Zufahrtsstraße"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "country": "AT",
-    "start_date": "2026-08-02"
+    "start_date": "2026-08-01"
   },
   "fuer-eine-nachhaltige-streunerkatzenpolitik-und-die-unterstuetzung-des-ehrenamts-in-kaernten-2": {
     "slug": "fuer-eine-nachhaltige-streunerkatzenpolitik-und-die-unterstuetzung-des-ehrenamts-in-kaernten-2",
@@ -122794,7 +123017,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Politik",
@@ -122808,7 +123031,7 @@
       "Leistungsfähige",
       "Wirtschaftliche"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "country": "AT",
     "start_date": "2026-06-01"
   },
@@ -123183,7 +123406,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Wochen",
@@ -123197,7 +123420,7 @@
       "Tourismus",
       "Schaffen"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "country": "AT",
     "start_date": "2026-07-01"
   },
@@ -123389,7 +123612,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Bevölkerung",
@@ -123403,7 +123626,7 @@
       "Anliegen",
       "Öffentliche"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "country": "AT",
     "start_date": "2026-07-01"
   },
@@ -123801,7 +124024,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Kinder",
@@ -123815,7 +124038,7 @@
       "Transparenz",
       "Vergangenen"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "country": "AT",
     "start_date": "2026-07-01"
   },
@@ -126129,6 +126352,10 @@
       {
         "checked_at": "2026-10-15T23:26:51+02:00",
         "count": 1174
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 1175
       }
     ],
     "title": "Kein Pony- und Pferdereiten mehr auf dem Bad Kreuznacher Jahrmarkt!",
@@ -126140,10 +126367,10 @@
     "category": "Tierschutz",
     "category_url": "https://www.openpetition.de/petitionen?category=45#petitionen",
     "country": "DE",
-    "signatures": 1174,
+    "signatures": 1175,
     "start_date": "2026-08-24",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Jahrmarkt",
@@ -126157,7 +126384,7 @@
       "Engem",
       "Kreis"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:kein-pony-und-pferdereiten-mehr-auf-dem-bad-kreuznacher-jahrmarkt",
     "i18n_state": {
@@ -127411,7 +127638,7 @@
     "signatures": 945,
     "start_date": "2026-08-21",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Saarbahn",
@@ -127425,7 +127652,7 @@
       "Schüler",
       "Kaum"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:saarbahn-streiks-schluss-mit-der-eskalation-wir-brauchen-wieder-einen-verlaesslichen-oepnv",
     "i18n_state": {
@@ -128397,7 +128624,7 @@
     "signatures": 684,
     "start_date": "2026-08-21",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Bergfelde",
@@ -128411,7 +128638,7 @@
       "Weiterführenden",
       "ÖPNV-Verbindung"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:buslinie-822-als-schulbus-erhalten-schulweg-fuer-kinder-aus-bergfelde-sichern",
     "i18n_state": {
@@ -128455,7 +128682,7 @@
     "signatures": 678,
     "start_date": "2026-08-25",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Seite",
@@ -128469,7 +128696,7 @@
       "Verkehr",
       "Klare"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:kein-baumhaus-komplex-am-sonnenbachsee-ruhe-natur-und-idylle-erhalten",
     "i18n_state": {
@@ -128561,6 +128788,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 688
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 698
       }
     ],
     "title": "Großwale in der Ostsee: Früher erkennen, bevor es zu spät ist.",
@@ -128572,11 +128803,11 @@
     "category": "Tierschutz",
     "category_url": "https://www.openpetition.de/petitionen?category=45#petitionen",
     "country": "DE",
-    "signatures": 688,
+    "signatures": 698,
     "goal": 50000,
     "start_date": "2026-05-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Großwale",
@@ -128590,7 +128821,7 @@
       "Erforschen",
       "Untersucht"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:grosswale-in-der-ostsee-frueher-erkennen-bevor-es-zu-spaet-ist",
     "i18n_state": {
@@ -129098,7 +129329,7 @@
     "signatures": 648,
     "start_date": "2026-09-09",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Auswirkungen",
@@ -129112,7 +129343,7 @@
       "Ortsbild",
       "Stadt"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:bauvorhaben-gueckelberg-fuer-eine-transparente-planung-und-eine-vertraegliche-zukunft-unserer-stadt",
     "i18n_state": {
@@ -130769,7 +131000,7 @@
     "goal": 5000,
     "start_date": "2026-08-23",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Verantwortung",
@@ -130783,7 +131014,7 @@
       "Kill",
       "FAZ-Korrespondent"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:frieden-braucht-menschliche-groesse-ein-appell-an-die-faz-und-den-deutschen-presserat-zur-umkehr",
     "i18n_state": {
@@ -131316,7 +131547,7 @@
     "signatures": 322,
     "start_date": "2026-08-05",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Datzeberg",
@@ -131330,7 +131561,7 @@
       "Datzeberges",
       "Zusätzliche"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:zum-50-geburtstag-soll-unser-datzeberg-schoener-werden",
     "i18n_state": {
@@ -131549,6 +131780,10 @@
       {
         "checked_at": "2026-10-15T23:26:51+02:00",
         "count": 378
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 379
       }
     ],
     "title": "Katzenleid beenden- Erlass Katzenschutzverordnung in der Gemeinde Rasdorf",
@@ -131560,10 +131795,10 @@
     "category": "Tierschutz",
     "category_url": "https://www.openpetition.de/petitionen?category=45#petitionen",
     "country": "DE",
-    "signatures": 378,
+    "signatures": 379,
     "start_date": "2026-09-03",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Rasdorf",
@@ -131577,7 +131812,7 @@
       "Verordnung",
       "Kosten"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:katzenleid-beenden-erlass-katzenschutzverordnung-in-der-gemeinde-rasdorf",
     "i18n_state": {
@@ -131736,7 +131971,7 @@
     "goal": 671,
     "start_date": "2026-09-05",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Wuhlheide",
@@ -131750,7 +131985,7 @@
       "Ausnahmsweise",
       "Gegebenheiten"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:rettung-der-gastronomie-der-waldkater-im-wald-und-volkspark-wuhlheide-2",
     "i18n_state": {
@@ -132299,6 +132534,10 @@
       {
         "checked_at": "2026-10-08T14:13:52-06:00",
         "count": 299
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 302
       }
     ],
     "title": "Bezahlbare Ferienangebote für Berliner Kinder retten – Sportanlagengebühren sozial gerecht gestalten",
@@ -132310,10 +132549,10 @@
     "category": "Soziales",
     "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
     "country": "DE",
-    "signatures": 299,
+    "signatures": 302,
     "start_date": "2026-09-04",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Kinder",
@@ -132327,7 +132566,7 @@
       "Nutzungsgebühren",
       "Ferienangebote"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:bezahlbare-ferienangebote-fuer-berliner-kinder-retten-sportanlagengebuehren-sozial-gerecht-gestalten",
     "i18n_state": {
@@ -132596,6 +132835,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 279
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 379
       }
     ],
     "title": "K 138 bei Hartenfels sicherer machen – Jetzt handeln, bevor weitere Menschen sterben!",
@@ -132607,10 +132850,10 @@
     "category": "Sicherheit",
     "category_url": "https://www.openpetition.de/petitionen?category=55#petitionen",
     "country": "DE",
-    "signatures": 279,
+    "signatures": 379,
     "start_date": "2026-09-10",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Hartenfels",
@@ -132624,7 +132867,7 @@
       "Reduzierung",
       "Zuständigen"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "goal": 1000,
     "lang": "de",
     "campaign_id": "openpetition:k-138-bei-hartenfels-sicherer-machen-jetzt-handeln-bevor-weitere-menschen-sterben",
@@ -133270,7 +133513,7 @@
     "signatures": 298,
     "start_date": "2026-09-04",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Fürstenau",
@@ -133284,7 +133527,7 @@
       "Gewerbegebiet",
       "Entgegenkommenden"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:unfallschwerpunkt-b239-bei-fuerstenau-entschaerfen-tempo-70-an-der-abfahrt-l946-gewerbegebiet",
     "i18n_state": {
@@ -133598,7 +133841,7 @@
     "goal": 500,
     "start_date": "2026-08-14",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Rosenheim",
@@ -133612,7 +133855,7 @@
       "Außerhalb",
       "Verwiesen"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:24-7-tieraerztliche-notfallversorgung-fuer-rosenheim-kein-tier-darf-nachts-ohne-hilfe-bleiben",
     "i18n_state": {
@@ -133840,6 +134083,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 384
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 386
       }
     ],
     "title": "Saubere Luft für Altenfurt – wiederkehrende Geruchsbelastung wirksam reduzieren",
@@ -133851,11 +134098,11 @@
     "category": "Umwelt",
     "category_url": "https://www.openpetition.de/petitionen?category=46#petitionen",
     "country": "DE",
-    "signatures": 384,
+    "signatures": 386,
     "goal": 500,
     "start_date": "2026-08-16",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Altenfurt",
@@ -133869,7 +134116,7 @@
       "Landratsamt",
       "Nürnberger"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:saubere-luft-fuer-altenfurt-wiederkehrende-geruchsbelastung-wirksam-reduzieren",
     "i18n_state": {
@@ -134350,7 +134597,7 @@
     "signatures": 178,
     "start_date": "2026-08-09",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Frankfurt",
@@ -134364,7 +134611,7 @@
       "Ausreichend",
       "Bürgerinnen"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:volle-transparenz-zur-kunstinstallation-a-sky-full-of-hope-und-politische-konsequenzen-bei-der-sta",
     "i18n_state": {
@@ -134924,7 +135171,7 @@
     "goal": 1000,
     "start_date": "2026-08-26",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Fans",
@@ -134938,7 +135185,7 @@
       "Erst",
       "Dauerkarteninhaber"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:rueckkehr-zum-alten-ticketvergabe-system-sc-paderborn-07",
     "i18n_state": {
@@ -135164,7 +135411,7 @@
     "signatures": 140,
     "start_date": "2026-09-05",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Schulsozialarbeit",
@@ -135178,7 +135425,7 @@
       "Beiden",
       "Kinder"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:schulsozialarbeit-an-den-schulen-der-stadt-karlsruhe-erhalten",
     "i18n_state": {
@@ -135970,6 +136217,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 221
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 224
       }
     ],
     "title": "ISIS-Petition: Initiative Schaf im Schutzmantel(Wolfspelz)-Gesamtreform des Sexual-& Gewaltstrafrechts",
@@ -135981,10 +136232,10 @@
     "category": "Bürgerrechte",
     "category_url": "https://www.openpetition.de/petitionen?category=58#petitionen",
     "country": "DE",
-    "signatures": 221,
+    "signatures": 224,
     "start_date": "2026-07-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Sexual",
@@ -135998,7 +136249,7 @@
       "Modernisierung",
       "Gesamtreform"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:isis-petition-initiative-schaf-im-schutzmantel-wolfspelz-gesamtreform-des-sexual-gewaltstrafrec-2",
     "i18n_state": {
@@ -136163,7 +136414,7 @@
     "signatures": 146,
     "start_date": "2026-09-11",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Grund",
@@ -136177,7 +136428,7 @@
       "Maßnahmen",
       "Anwohner"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:verkehrssicherheit-wohnqualitaet-und-schutz-der-erholungsraeume-an-der-b242-in-bad-grund-verbessern",
     "i18n_state": {
@@ -136317,6 +136568,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 119
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 120
       }
     ],
     "title": "Klimapolitisches Manifest für die Pfalz",
@@ -136328,11 +136583,11 @@
     "category": "Umwelt",
     "category_url": "https://www.openpetition.de/petitionen?category=46#petitionen",
     "country": "DE",
-    "signatures": 119,
+    "signatures": 120,
     "goal": 500,
     "start_date": "2026-08-05",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Manifest",
@@ -136346,7 +136601,7 @@
       "Hitzeperioden",
       "Niedrigwasser"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:klimapolitisches-manifest-fuer-die-pfalz",
     "i18n_state": {
@@ -137144,7 +137399,7 @@
     "signatures": 287,
     "start_date": "2026-08-13",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Steimle",
@@ -137158,7 +137413,7 @@
       "Unterzeichnenden",
       "Partei"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:offener-brief-protest-gegen-den-geplanten-auftritt-von-uwe-steimle-in-magdeburg",
     "i18n_state": {
@@ -137477,7 +137732,7 @@
     "signatures": 142,
     "start_date": "2026-08-14",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Tempo",
@@ -137491,7 +137746,7 @@
       "Geschwindigkeit",
       "Unverständlich"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:wederweg-celle-tempo-30-lueckenschluss-jetzt",
     "i18n_state": {
@@ -138359,7 +138614,7 @@
     "goal": 500,
     "start_date": "2026-09-15",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Unmittelbar",
@@ -138373,7 +138628,7 @@
       "Großbatteriespeicher",
       "Transformatoren"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:grossbatteriespeicher-an-der-randersweide-stoppen-sicherheit-und-nachbarschutz-zuerst",
     "i18n_state": {
@@ -139041,6 +139296,10 @@
       {
         "checked_at": "2026-10-15T23:26:51+02:00",
         "count": 43
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 44
       }
     ],
     "title": "Rettet unser Fachwerk",
@@ -139052,10 +139311,10 @@
     "category": "Bauen",
     "category_url": "https://www.openpetition.de/petitionen?category=6#petitionen",
     "country": "DE",
-    "signatures": 43,
+    "signatures": 44,
     "start_date": "2026-08-22",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Behörde",
@@ -139069,7 +139328,7 @@
       "Sanierungsprojekten",
       "Altstadtsatzung"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:rettet-unser-fachwerk",
     "i18n_state": {
@@ -139248,7 +139507,7 @@
     "signatures": 35,
     "start_date": "2026-09-03",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Calisthenicspark",
@@ -139262,7 +139521,7 @@
       "Erwachsenen",
       "Möglichkeit"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-mehr-bewegung-und-begegnung-ein-calisthenicspark-fuer-bietigheim-bissingen",
     "i18n_state": {
@@ -139364,7 +139623,7 @@
     "signatures": 37,
     "start_date": "2026-08-12",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Haustiere",
@@ -139378,7 +139637,7 @@
       "Artgerechter",
       "Ausgesetzt"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:durchsetzung-artgerechter-haustierhaltung",
     "i18n_state": {
@@ -139854,7 +140113,7 @@
     "signatures": 33,
     "start_date": "2026-09-04",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Zuckersteuer",
@@ -139868,7 +140127,7 @@
       "Study",
       "Gesamtgesellschaftlichen"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:zuckersteuer-ja-aber-haende-weg-von-nachhaltigen-milchalternativen",
     "i18n_state": {
@@ -139936,6 +140195,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 32
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 33
       }
     ],
     "title": "Der Bundestag möge prüfen, ob rechtskräftige Verurteilungen wegen besonders schwerer vorsätzlicher Straftaten gegen den demokratischen Rechtsstaat – für einen angemessenen Zeitraum Auswirkungen auf die Wählbarkeit haben können.",
@@ -139947,10 +140210,10 @@
     "category": "Verwaltung",
     "category_url": "https://www.openpetition.de/petitionen?category=12#petitionen",
     "country": "DE",
-    "signatures": 32,
+    "signatures": 33,
     "start_date": "2026-08-22",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Straftaten",
@@ -139964,7 +140227,7 @@
       "Öffentliche",
       "Sollten"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:der-bundestag-moege-pruefen-ob-rechtskraeftige-verurteilungen-wegen-besonders-schwerer-vorsaetz-2",
     "i18n_state": {
@@ -139990,6 +140253,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 31
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 32
       }
     ],
     "title": "A13 konsequent zu Ende denken – faire Besoldung für Realschul-Funktionsämter in NRW",
@@ -140001,10 +140268,10 @@
     "category": "Bildung",
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
     "country": "DE",
-    "signatures": 31,
+    "signatures": 32,
     "start_date": "2026-08-29",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Realschulen",
@@ -140018,7 +140285,7 @@
       "Eingangsamtes",
       "Verschiedenen"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:a13-konsequent-zu-ende-denken-faire-besoldung-fuer-realschul-funktionsaemter-in-nrw",
     "i18n_state": {
@@ -140202,6 +140469,10 @@
       {
         "checked_at": "2026-10-15T23:26:51+02:00",
         "count": 29
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 30
       }
     ],
     "title": "Mehr Verkehrssicherheit durch Zebrastreifen für Falkensee (insbesondere für Kinder)",
@@ -140213,10 +140484,10 @@
     "category": "Verkehr",
     "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
     "country": "DE",
-    "signatures": 29,
+    "signatures": 30,
     "start_date": "2026-09-09",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Zebrastreifen",
@@ -140230,7 +140501,7 @@
       "Unübersichtlichen",
       "Kita-Zufahrten"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:mehr-verkehrssicherheit-durch-zebrastreifen-fuer-falkensee-insbesondere-fuer-kinder",
     "i18n_state": {
@@ -141777,7 +142048,7 @@
     "signatures": 15,
     "start_date": "2026-08-12",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Walder",
@@ -141791,7 +142062,7 @@
       "Bleiben",
       "Kirche"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:solingen-wald-muss-erreichbar-bleiben-fuer-die-fussgaengerzone-aber-gegen-die-neue-verkehrsregelung",
     "i18n_state": {
@@ -142219,7 +142490,7 @@
     "signatures": 13,
     "start_date": "2026-09-11",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Alten",
@@ -142233,7 +142504,7 @@
       "Wahllokale",
       "Wahlurnen"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:freie-wahlbeteiligung-fuer-aeltere-menschen-in-alten-und-pflegeheim",
     "i18n_state": {
@@ -142590,7 +142861,7 @@
     "signatures": 132,
     "start_date": "2026-09-16",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Grundsteuer",
@@ -142604,7 +142875,7 @@
       "Einsparpotenziale",
       "Unterzeichnenden"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:keine-erhoehung-der-grundsteuer-in-oberzent-initiative-vernuenftiger-haushalt-2",
     "i18n_state": {
@@ -143451,6 +143722,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 980
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 982
       }
     ],
     "title": "Offener Brief an Papst Leo XIV. - Fast 1000 Unterschriften erreicht! Helfen Sie uns - und dem Papst!",
@@ -143462,11 +143737,11 @@
     "category": "Kultur",
     "category_url": "https://www.openpetition.de/petitionen?category=25#petitionen",
     "country": "DE",
-    "signatures": 980,
+    "signatures": 982,
     "goal": 30000,
     "start_date": "2026-07-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Kirche",
@@ -143480,7 +143755,7 @@
       "Heiliger",
       "Offenen"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:offener-brief-an-papst-leo-xiv-fast-1000-unterschriften-erreicht-helfen-sie-uns-und-dem-papst",
     "i18n_state": {
@@ -144433,7 +144708,7 @@
     "goal": 254,
     "start_date": "2026-09-09",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Römerswil",
@@ -144447,7 +144722,7 @@
       "Dorf",
       "Neudorfstrasse"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:petition-fuer-einen-lebendigen-dorfmittelpunkt",
     "i18n_state": {
@@ -144487,7 +144762,7 @@
     "signatures": 200,
     "start_date": "2026-08-28",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Promenade",
@@ -144501,7 +144776,7 @@
       "Unübersehbarer",
       "Anwohnerinnen"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:stoppt-die-e-scooter-raser-fahrverbot-auf-der-ottilie-bondy-promenade-zum-schutz-unserer-kinder",
     "i18n_state": {
@@ -144633,7 +144908,7 @@
     "goal": 160,
     "start_date": "2026-09-09",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Entsorgungsplatzes",
@@ -144647,7 +144922,7 @@
       "Zentralisierung",
       "Weiterführung"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:weiterfuehrung-des-gemeindeeigenen-entsorgungsplatzes-2",
     "i18n_state": {
@@ -145066,9 +145341,9 @@
     "category_url": "https://www.openpetition.de/at/petitionen?category=45#petitionen",
     "country": "AT",
     "signatures": 78,
-    "start_date": "2026-08-10",
+    "start_date": "2026-08-11",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Luna",
@@ -145082,7 +145357,7 @@
       "Familienmitglied",
       "Bürokratische"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:freiheit-fuer-luna-holt-sie-endlich-aus-dem-tierquartier-wien-2",
     "i18n_state": {
@@ -145307,6 +145582,10 @@
       {
         "checked_at": "2026-10-15T23:26:51+02:00",
         "count": 105
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 108
       }
     ],
     "title": "Nein zum Veranstaltungsort \"Dorfsaal\" in Bütgenbach",
@@ -145318,11 +145597,11 @@
     "category": "Bauen",
     "category_url": "https://www.openpetition.de/be/petitionen?category=6#petitionen",
     "country": "BE",
-    "signatures": 105,
+    "signatures": 108,
     "goal": 120,
     "start_date": "2026-09-14",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Gemeinde",
@@ -145336,7 +145615,7 @@
       "Fragen",
       "Mitten"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:nein-zum-veranstaltungsort-dorfsaal-in-buetgenbach",
     "i18n_state": {
@@ -145412,6 +145691,10 @@
       {
         "checked_at": "2026-10-08T14:13:52-06:00",
         "count": 43
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 44
       }
     ],
     "title": "Mehr Sicherheit auf dem Schulweg Benzenschwil 5636",
@@ -145423,11 +145706,11 @@
     "category": "Sicherheit",
     "category_url": "https://www.openpetition.de/ch/petitionen?category=55#petitionen",
     "country": "CH",
-    "signatures": 43,
+    "signatures": 44,
     "goal": 500,
     "start_date": "2026-08-05",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Benzenschwil",
@@ -145441,7 +145724,7 @@
       "Einführung",
       "Fussgänger"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:mehr-sicherheit-auf-dem-schulweg-benzenschwil-5636",
     "i18n_state": {
@@ -145848,6 +146131,10 @@
       {
         "checked_at": "2026-10-15T23:26:51+02:00",
         "count": 15
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 17
       }
     ],
     "title": "Windenergieausbau aussetzen bis zur Klärung der tatsächlichen Auswirkungen",
@@ -145859,11 +146146,11 @@
     "category": "Umwelt",
     "category_url": "https://www.openpetition.de/petitionen?category=46#petitionen",
     "country": "DE",
-    "signatures": 15,
+    "signatures": 17,
     "goal": 500,
     "start_date": "2026-09-12",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Europäischen",
@@ -145877,7 +146164,7 @@
       "Wissenschaftliche",
       "Gesamtbestandes"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:windenergieausbau-aussetzen-bis-zur-klaerung-der-tatsaechlichen-auswirkungen",
     "i18n_state": {
@@ -146008,7 +146295,7 @@
     "goal": 500,
     "start_date": "2026-08-06",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Lindbauer",
@@ -146022,7 +146309,7 @@
       "Urfahranerinnen",
       "Entscheidungen"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:lindbauer-und-wuerstelstand-urfahr-muss-seine-identitaet-behalten",
     "i18n_state": {
@@ -146070,7 +146357,7 @@
     "signatures": 14,
     "start_date": "2026-09-10",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Thaller",
@@ -146084,7 +146371,7 @@
       "Zusammenarbeiten",
       "Weiterarbeiten"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:dr-christian-thaller-soll-bleiben-und-den-kassenvertrag-behalten",
     "i18n_state": {
@@ -146425,7 +146712,7 @@
     "signatures": 156,
     "start_date": "2026-09-18",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Eltern",
@@ -146439,7 +146726,7 @@
       "Situation",
       "Varrel"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "goal": 620,
     "lang": "de",
     "campaign_id": "openpetition:grundschule-varrel-eltern-fordern-aufklaerung-und-veraenderung",
@@ -146951,6 +147238,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 307
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 313
       }
     ],
     "title": "Kinder und Jugendliche brauchen Perspektiven – blu:boks Brandenburg in Friedland erhalten!",
@@ -146962,10 +147253,10 @@
     "category": "Familie",
     "category_url": "https://www.openpetition.de/petitionen?category=14#petitionen",
     "country": "DE",
-    "signatures": 307,
+    "signatures": 313,
     "start_date": "2026-09-19",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Brandenburg",
@@ -146979,7 +147270,7 @@
       "Familien",
       "Stadt"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:kinder-und-jugendliche-brauchen-perspektiven-blu-boks-brandenburg-in-friedland-erhalten",
     "i18n_state": {
@@ -147271,6 +147562,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 152
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 155
       }
     ],
     "title": "Keine drastische Erhöhung der Kitabeiträge in der Städteregion Aachen",
@@ -147282,10 +147577,10 @@
     "category": "Familie",
     "category_url": "https://www.openpetition.de/petitionen?category=14#petitionen",
     "country": "DE",
-    "signatures": 152,
+    "signatures": 155,
     "start_date": "2026-09-20",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "MONAT",
@@ -147299,7 +147594,7 @@
       "Eltern",
       "Einkommensstufen"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:keine-drastische-erhoehung-der-kitabeitraege-in-der-staedteregion-aachen",
     "i18n_state": {
@@ -147437,7 +147732,7 @@
     "signatures": 555,
     "start_date": "2026-09-21",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Arbeit",
@@ -147451,7 +147746,7 @@
       "Toleranzarbeit",
       "Streichung"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:keine-kuerzung-der-interkulturellen-arbeit-begegnung-toleranzarbeit-und-demokratie-schuetzen",
     "i18n_state": {
@@ -147809,7 +148104,7 @@
     "signatures": 42,
     "start_date": "2026-09-18",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Behinderung",
@@ -147823,7 +148118,7 @@
       "Beschäftigt",
       "Bekommen"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:mindestlohn-jetzt-und-aussen-arbeitsplaetze-40-stunden-arbeit-moeglich-machen-2",
     "i18n_state": {
@@ -149038,7 +149333,7 @@
     "signatures": 463,
     "start_date": "2026-09-22",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Familien",
@@ -149052,7 +149347,7 @@
       "Krippengebühren",
       "Entscheidung"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:keine-unverhaeltnismaessige-erhoehung-der-kita-und-krippengebuehren-in-selters-taunus",
     "i18n_state": {
@@ -149255,6 +149550,10 @@
       {
         "checked_at": "2026-10-15T23:26:51+02:00",
         "count": 578
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 613
       }
     ],
     "title": "Privatsphäre sichern: Geplante Toiletten-Umbauten an der Sekundarschule Wadersloh jetzt umsetzen!",
@@ -149266,10 +149565,10 @@
     "category": "Bildung",
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
     "country": "DE",
-    "signatures": 578,
+    "signatures": 613,
     "start_date": "2026-09-23",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Wadersloh",
@@ -149283,7 +149582,7 @@
       "Gesundheit",
       "Maßnahmen"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:privatsphaere-sichern-geplante-toiletten-umbauten-an-der-sekundarschule-wadersloh-jetzt-umsetzen",
     "i18n_state": {
@@ -149501,7 +149800,7 @@
     "goal": 100,
     "start_date": "2026-09-10",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Unterrichts",
@@ -149515,7 +149814,7 @@
       "Gesamte",
       "Kühlung"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:gemeinsam-fuer-wirksamen-hitzeschutz-an-der-ganztagsgrundschule-rastpfuhl",
     "i18n_state": {
@@ -149624,6 +149923,10 @@
       {
         "checked_at": "2026-10-07T20:37:09-06:00",
         "count": 61
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 63
       }
     ],
     "title": "Würmpark Menzing - Klimaschutz, Hitzevermeidung, Gesundheitsförderung",
@@ -149635,11 +149938,11 @@
     "category": "Gesundheit",
     "category_url": "https://www.openpetition.de/petitionen?category=20#petitionen",
     "country": "DE",
-    "signatures": 61,
+    "signatures": 63,
     "goal": 500,
     "start_date": "2026-09-22",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Obermenzings",
@@ -149653,7 +149956,7 @@
       "Kaltluftbahn",
       "Sportanlagen"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:wuermpark-menzing-klimaschutz-hitzevermeidung-gesundheitsfoerderung",
     "i18n_state": {
@@ -149903,7 +150206,7 @@
     "signatures": 17,
     "start_date": "2026-09-17",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Elsdorf",
@@ -149917,7 +150220,7 @@
       "Belange",
       "Bürgermeister"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:inklusion-und-die-belange-von-menschen-in-elsdorf",
     "i18n_state": {
@@ -150257,7 +150560,7 @@
     "signatures": 114,
     "start_date": "2026-09-22",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Wulkenzin",
@@ -150271,7 +150574,7 @@
       "Bürgerbeteiligung",
       "Transparente"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:stoppt-die-grossbatterie-vor-unserer-haustuer-wulkenzin-soll-kein-industriegebiet-werden",
     "i18n_state": {
@@ -150323,7 +150626,7 @@
     "signatures": 58,
     "start_date": "2026-09-23",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Nutzung",
@@ -150337,7 +150640,7 @@
       "Eigentümer",
       "Rechtlich"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:schluss-mit-dem-sylter-mass-verbindliche-wohnflaechen-und-nutzungsangaben-auch-durch-makler",
     "i18n_state": {
@@ -151558,6 +151861,10 @@
       {
         "checked_at": "2026-10-15T23:26:51+02:00",
         "count": 385
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 386
       }
     ],
     "title": "Erhalt unserer Kita Hartmannweg und Verhinderung der geplanten Schließung im Jahr 2030",
@@ -151569,10 +151876,10 @@
     "category": "Familie",
     "category_url": "https://www.openpetition.de/petitionen?category=14#petitionen",
     "country": "DE",
-    "signatures": 385,
+    "signatures": 386,
     "start_date": "2026-09-26",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Kita",
@@ -151586,7 +151893,7 @@
       "Vertraute",
       "Gruppenstrukturen"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:erhalt-unserer-kita-hartmannweg-und-verhinderung-der-geplanten-schliessung-im-jahr-2030",
     "i18n_state": {
@@ -152896,7 +153203,7 @@
     "signatures": 491,
     "start_date": "2026-09-29",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Turnhalle",
@@ -152910,7 +153217,7 @@
       "Besuchertoiletten",
       "Sportlerinnen"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-eine-sichere-saubere-und-nutzbare-turnhalle-in-springe",
     "i18n_state": {
@@ -152955,7 +153262,7 @@
     "goal": 500,
     "start_date": "2026-09-29",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Amateursport",
@@ -152969,7 +153276,7 @@
       "Badminton",
       "Zählweise"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:gegen-das-315-system-im-amateursport-erhalt-der-321-zaehlweise-im-nbv-mannschaftsspielbetrieb",
     "i18n_state": {
@@ -153092,7 +153399,7 @@
     "signatures": 1393,
     "start_date": "2026-09-27",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Mettmann",
@@ -153106,7 +153413,7 @@
       "Wohnbebauung",
       "Metzkausen"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:kirchendelle-schuetzen-nein-zu-supermarkt-strassen-und-wohnbebauung-auf-wertvollen-freiflaechen",
     "i18n_state": {
@@ -153902,7 +154209,7 @@
     "goal": 500,
     "start_date": "2026-09-15",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Platz",
@@ -153916,7 +154223,7 @@
       "Verbliebenen",
       "Verschmälert"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:etwas-fuer-die-anwohnenden-statt-luxus-fuer-einen-auswaertigen",
     "i18n_state": {
@@ -155522,7 +155829,7 @@
     "goal": 500,
     "start_date": "2026-10-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Kinder",
@@ -155536,7 +155843,7 @@
       "Kanton",
       "Weder"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:faire-besteuerung-von-alleinerziehenden-ohne-unterhalt-im-kanton-zuerich",
     "i18n_state": {
@@ -155620,7 +155927,7 @@
     "goal": 800,
     "start_date": "2026-09-30",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Furttalstrasse",
@@ -155634,7 +155941,7 @@
       "Umliegenden",
       "Wohnhäusern"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:tempo-30-auf-der-furttalstrasse-in-zuerich-affoltern-zum-schutz-unserer-kinder-und-tiere",
     "i18n_state": {
@@ -155682,7 +155989,7 @@
     "signatures": 59,
     "start_date": "2026-10-01",
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Alleinreisende",
@@ -155696,7 +156003,7 @@
       "Beherbergungsbetrieben",
       "Einzelzimmer-Zuschlag"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00",
+    "last_checked": "2026-11-03T20:54:46+01:00",
     "lang": "de",
     "campaign_id": "openpetition:einzelzimmer-zuschlag-muss-weg-2",
     "i18n_state": {
@@ -156949,7 +157256,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Anrainer",
@@ -156963,7 +157270,7 @@
       "Marktgemeinde",
       "Parksituation"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00"
+    "last_checked": "2026-11-03T20:54:46+01:00"
   },
   "nachtbus-fuer-die-linie-60-sichere-heimwege-fuer-graz-waltendorf": {
     "slug": "nachtbus-fuer-die-linie-60-sichere-heimwege-fuer-graz-waltendorf",
@@ -157735,7 +158042,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Häuslichen",
@@ -157749,7 +158056,7 @@
       "Einzelprävention",
       "Freiberufliche"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00"
+    "last_checked": "2026-11-03T20:54:46+01:00"
   },
   "weg-mit-dem-buerokratiemonster-mehr-zeit-fuer-oesterreichs-unternehmer-innen": {
     "slug": "weg-mit-dem-buerokratiemonster-mehr-zeit-fuer-oesterreichs-unternehmer-innen",
@@ -157926,7 +158233,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Kinder",
@@ -157940,7 +158247,7 @@
       "Treffpunkt",
       "Sicheren"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00"
+    "last_checked": "2026-11-03T20:54:46+01:00"
   },
   "fuer-eine-bedarfsgerechte-kita-planung-im-ebsdorfergrund": {
     "slug": "fuer-eine-bedarfsgerechte-kita-planung-im-ebsdorfergrund",
@@ -158613,7 +158920,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Lagerhaus",
@@ -158627,7 +158934,7 @@
       "Zukunft",
       "Wirtschaftlichen"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00"
+    "last_checked": "2026-11-03T20:54:46+01:00"
   },
   "dringender-aufruf-am-7-maerz-2027-entscheidet-ulten-ueber-das-pskw-unterstuetze-uns-bitte-2": {
     "slug": "dringender-aufruf-am-7-maerz-2027-entscheidet-ulten-ueber-das-pskw-unterstuetze-uns-bitte-2",
@@ -160350,7 +160657,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Häuslichen",
@@ -160364,7 +160671,7 @@
       "Einzelprävention",
       "Freiberufliche"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00"
+    "last_checked": "2026-11-03T20:54:46+01:00"
   },
   "sicherer-schuelertransport-fuer-unsere-kinder": {
     "slug": "sicherer-schuelertransport-fuer-unsere-kinder",
@@ -160694,7 +161001,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Volksschule",
@@ -160708,7 +161015,7 @@
       "Elternverein",
       "Jugendlichen"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00"
+    "last_checked": "2026-11-03T20:54:46+01:00"
   },
   "ermoeglichung-der-hybriden-teilnahme-an-den-proseminaren-faszination-mensch": {
     "slug": "ermoeglichung-der-hybriden-teilnahme-an-den-proseminaren-faszination-mensch",
@@ -160741,7 +161048,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Studierenden",
@@ -160755,7 +161062,7 @@
       "Durchführung",
       "Proseminaren"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00"
+    "last_checked": "2026-11-03T20:54:46+01:00"
   },
   "unser-postler-gehoert-zu-unserem-graetzl-csaba-soll-zurueck-in-sein-rayon": {
     "slug": "unser-postler-gehoert-zu-unserem-graetzl-csaba-soll-zurueck-in-sein-rayon",
@@ -162663,7 +162970,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Einsatz",
@@ -162677,7 +162984,7 @@
       "Vorgesehenen",
       "Prorektorat"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00"
+    "last_checked": "2026-11-03T20:54:46+01:00"
   },
   "gegen-die-schliessung-der-jakobusschule": {
     "slug": "gegen-die-schliessung-der-jakobusschule",
@@ -163126,7 +163433,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Studierende",
@@ -163140,7 +163447,7 @@
       "Vorhandenen",
       "Situation"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00"
+    "last_checked": "2026-11-03T20:54:46+01:00"
   },
   "petition-zum-erhalt-der-buslinie-265-zwischen-idstein-und-eltville": {
     "slug": "petition-zum-erhalt-der-buslinie-265-zwischen-idstein-und-eltville",
@@ -163215,6 +163522,10 @@
       {
         "checked_at": "2026-10-23T12:53:16+02:00",
         "count": 90
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 91
       }
     ],
     "title": "Kein Ablehnen der WKA auf Gemeinde Flächen, während privat gebaut werden kann, W38 Häuschenhöhe",
@@ -163226,7 +163537,7 @@
     "category": "Energie",
     "category_url": "https://www.openpetition.de/petitionen?category=50#petitionen",
     "country": "DE",
-    "signatures": 90,
+    "signatures": 91,
     "start_date": "2026-10-13",
     "lang": "de",
     "campaign_id": "openpetition:kein-ablehnen-der-wka-auf-gemeinde-flaechen-waehrend-privat-gebaut-werden-kann-w38-haeuschenhoehe",
@@ -163234,7 +163545,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Energie",
@@ -163248,7 +163559,7 @@
       "Gemeindlichen",
       "Voraussetzung"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00"
+    "last_checked": "2026-11-03T20:54:46+01:00"
   },
   "fuer-die-zukunft-unserer-kleinsten-rettet-den-katholischen-kindergarten-christkoenig": {
     "slug": "fuer-die-zukunft-unserer-kleinsten-rettet-den-katholischen-kindergarten-christkoenig",
@@ -163710,6 +164021,10 @@
       {
         "checked_at": "2026-10-15T23:26:51+02:00",
         "count": 7
+      },
+      {
+        "checked_at": "2026-11-03T20:54:46+01:00",
+        "count": 8
       }
     ],
     "title": "Vodafone muss handeln! Unterschriftenaktion für Bad Herrenalb und Umgebung",
@@ -163721,7 +164036,7 @@
     "category": "Internet",
     "category_url": "https://www.openpetition.de/petitionen?category=35#petitionen",
     "country": "DE",
-    "signatures": 7,
+    "signatures": 8,
     "goal": 100,
     "start_date": "2026-10-12",
     "lang": "de",
@@ -163730,7 +164045,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Netzausbau",
@@ -163744,7 +164059,7 @@
       "Zuverlässige",
       "Anhaltenden"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00"
+    "last_checked": "2026-11-03T20:54:46+01:00"
   },
   "fuer-mehr-hausaerzte-in-zerbst-anhalt": {
     "slug": "fuer-mehr-hausaerzte-in-zerbst-anhalt",
@@ -163826,7 +164141,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-10-27T18:52:15+01:00",
+    "last_seen": "2026-11-03T20:54:46+01:00",
     "offline_since": null,
     "tags": [
       "Gemeinschaft",
@@ -163840,7 +164155,7 @@
       "Genommen",
       "Gerechte"
     ],
-    "last_checked": "2026-10-27T18:52:15+01:00"
+    "last_checked": "2026-11-03T20:54:46+01:00"
   },
   "schluss-mit-der-benachteiligung-von-autofahrern-fuer-eine-faire-verkehrspolitik-bezahlbare-mobilit": {
     "slug": "schluss-mit-der-benachteiligung-von-autofahrern-fuer-eine-faire-verkehrspolitik-bezahlbare-mobilit",
