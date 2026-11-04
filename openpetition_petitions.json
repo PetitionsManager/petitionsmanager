@@ -31,14 +31,14 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-11-03T21:09:24+01:00",
+    "generated_at": "2026-11-04T01:37:23+01:00",
     "petition_count": 2670,
-    "available": 1717,
+    "available": 1708,
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-11-03T21:09:23+01:00",
-      "gefunden": 1717,
-      "im_bestand": 1717,
+      "stand": "2026-11-04T01:37:22+01:00",
+      "gefunden": 1708,
+      "im_bestand": 1708,
       "unbrauchbar": 0,
       "verworfen": 0,
       "dublette": 0,
@@ -47,7 +47,7 @@
       "offen": 0,
       "offene_beispiele": [],
       "bestand_gesamt": 2670,
-      "bestand_ausserhalb": 953
+      "bestand_ausserhalb": 962
     },
     "lauf_verlauf": [
       {
@@ -66,10 +66,27 @@
         "mit_ballast_in_kurzfassung": 0,
         "herkunft": "lokal_cron",
         "neu": 0
+      },
+      {
+        "zeit": "2026-11-04T01:37:22+01:00",
+        "gesamt": 2670,
+        "online": 2670,
+        "offline": 0,
+        "ohne_titel": 0,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 0,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 2655,
+        "juengstes_start": "2026-11-03",
+        "mit_code_im_text": 0,
+        "mit_ballast_in_kurzfassung": 0,
+        "herkunft": "lokal_cron",
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-11-03T21:09:23+01:00",
+      "zeit": "2026-11-04T01:37:22+01:00",
       "gesamt": 2670,
       "online": 2670,
       "offline": 0,
