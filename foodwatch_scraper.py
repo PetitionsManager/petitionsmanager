@@ -253,6 +253,28 @@ BEKANNTE_FELDER = {
 }
 
 
+# ⚠️⚠️ 8.11.2026: Warum es dieses Muster braucht — ohne es GINGEN DATEN VERLOREN.
+# Beendete foodwatch-Aktionen tragen kein `#form-counter` mehr; der Zähler kam
+# bis dahin ausschliesslich von dort (unten), `scrape_petition` gab deshalb
+# "skip" zurück, und `core.entferne_skip` LÖSCHTE den Satz samt
+# `signatures_history` aus dem Bestand. Gemessen an zwei am 28.10.2026
+# beendeten Aktionen (`minister-rainer-…`, `nestle-…`): HTTP 200, Seite
+# vollständig da, Schlussstand im Klartext — 26.557 bzw. 52.141 Unterschriften.
+# Die Löschbremse griff nicht (2 Fälle < SKIP_LOESCH_MIN_ABS = 10), und die
+# einzige Spur war ein dauerhaftes `offen = 2` in der Lauf-Bilanz.
+# ⚠️ `status` bleibt dabei "online": das Feld beantwortet „ist die Seite noch
+# erreichbar?", nicht „kann man noch mitzeichnen". Das Ende steht in `closed`,
+# `phase` und `deadline` — drei Felder, die das Schema bereits führt und die
+# bundestag_scraper.py:436-437 genauso schreibt. Kein neues Feld, also auch
+# nicht die Kette aus acht Stellen (s. pm_offenheit_texte).
+# ⚠️ Nur deutschsprachig gemessen. Die Zweige en/fr/nl laufen durch denselben
+# parse_detail, dort greift das Muster schlicht nicht — ihr Wortlaut ist
+# ungemessen, deshalb steht hier kein mehrsprachiges Muster auf Verdacht.
+AKTION_BEENDET_RE = re.compile(
+    r"Aktion\s+wurde\s+am\s+(\d{1,2})\.(\d{1,2})\.(\d{4})\s+mit\s+insgesamt\s+"
+    r"([\d.\s  ]+?)\s*Unterschriften\s+beendet", re.I)
+
+
 def parse_detail(html: str, url: str, muster: re.Pattern = None) -> dict:
     """`muster` ist der Maßstab für core.eigene_adresse; ohne Angabe der
     deutsche Baum. Der englische Baum hat ein anderes Wegstück und braucht
@@ -283,6 +305,18 @@ def parse_detail(html: str, url: str, muster: re.Pattern = None) -> dict:
         digits = re.sub(r"\D", "", counter.get_text())
         if digits:
             rec["signatures"] = int(digits)
+    else:
+        # Kein Formular mehr → beendete Aktion? Dann steht der Schlussstand im
+        # Fließtext (s. die Begründung bei AKTION_BEENDET_RE oben). Der Zähler
+        # darf dabei NICHT geraten werden: greift das Muster nicht, bleibt
+        # `signatures` None und der Satz wird wie bisher als "skip" behandelt.
+        treffer = AKTION_BEENDET_RE.search(soup.get_text(" ", strip=True))
+        if treffer:
+            tag, monat, jahr, zahl = treffer.groups()
+            rec["signatures"] = int(re.sub(r"\D", "", zahl))
+            rec["deadline"] = f"{jahr}-{int(monat):02d}-{int(tag):02d}"
+            rec["closed"] = True
+            rec["phase"] = "beendet"
 
     content = soup.select_one("section.document-content__content")
     if content:
