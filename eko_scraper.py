@@ -334,8 +334,23 @@ def _kampagne_aus_html(html: str, props: dict | None = None) -> str | None:
     return f"eko:{m.group(1)}" if m else None
 
 
-def parse_detail(html: str, url: str) -> dict | None:
-    """None = keine deutsche Unterschriften-Aktion (skip).
+def parse_detail(html: str, url: str, sprache: str = "de") -> dict | None:
+    """None = keine Unterschriften-Aktion in `sprache` (skip).
+
+    ⚠️⚠️ 8.11.2026: `sprache` war hier fest „de", obwohl scrape_petition sie
+    seit dem englischen Zwilling als Parameter annimmt — sie kam nur nie an.
+    Beide Template-Parser werfen eine Seite weg, deren Sprache nicht „de" ist,
+    also wurde im Zweig eko_en JEDE englische Kampagne als „keine deutsche
+    Aktion" ausgesondert. Gemessen am ausgelieferten Manifest: 11 Kandidaten
+    standen dauerhaft auf `offen`, alle 11 mit Titel auf der Kartenseite,
+    und `eu-leaders-ban-glyphosate` antwortet mit HTTP 200 und 60.325 Zeichen
+    ganz normalem Champaign-HTML — die Seiten sind lesbar, nur die Sprachprüfung
+    verwarf sie.
+    ⚠️ Warum es vorher nicht auffiel: solange `action.eko.org` mit 429
+    antwortete, kam `error` heraus und run_en zog die Kampagnenkarte nach
+    (eko_scraper.py:695-706). Seit der Host 404/200 liefert, ist daraus `skip`
+    geworden — und skip hat keinen Rückfall. Der Wegfall des Bot-Schutzes hat
+    den Ersatzweg abgeschaltet, nicht den Zugang.
 
     Eko hat ZWEI Templates: actions.eko.org (alt, Champaign-Server-HTML mit
     Thermometer-JSON) und action.eko.org (neu, Next.js – ältere Kampagnen
@@ -351,13 +366,14 @@ def parse_detail(html: str, url: str) -> dict | None:
         except ValueError:
             props = {}
         if props.get("title"):
-            return _parse_next_template(props, html, url)
+            return _parse_next_template(props, html, url, sprache)
 
-    return _parse_legacy_template(html, url)
+    return _parse_legacy_template(html, url, sprache)
 
 
-def _parse_next_template(props: dict, html: str, url: str) -> dict | None:
-    if props.get("language") != "de":
+def _parse_next_template(props: dict, html: str, url: str,
+                         sprache: str = "de") -> dict | None:
+    if props.get("language") != sprache:
         return None
     count = core.zahl(props.get("action_count"))
     if count is None:
@@ -388,9 +404,10 @@ def _parse_next_template(props: dict, html: str, url: str) -> dict | None:
     return rec
 
 
-def _parse_legacy_template(html: str, url: str) -> dict | None:
+def _parse_legacy_template(html: str, url: str,
+                           sprache: str = "de") -> dict | None:
     m_lang = re.search(r'<html[^>]*lang="([a-z]{2})"', html)
-    if m_lang and m_lang.group(1) != "de":
+    if m_lang and m_lang.group(1) != sprache:
         return None
 
     m_sig = SIG_RE.search(html)
@@ -447,7 +464,7 @@ def scrape_petition(fetcher: core.Fetcher, slug: str,
         return "offline", None
     if not resp.ok:
         return "error", None
-    rec = parse_detail(resp.text, url)
+    rec = parse_detail(resp.text, url, sprache)
     if rec is None:
         return "skip", None
     i18n.setze_hauptsprache(rec, sprache)
