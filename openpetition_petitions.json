@@ -31,16 +31,12 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-11-09T12:21:56-06:00",
+    "generated_at": "2026-11-09T16:46:48-06:00",
     "petition_count": 2718,
     "available": 1704,
-    "new_petitions_last_run": [
-      "erhalt-der-kita-sonnenglanz-brand-erbisdorf-kinder-sind-keine-auslastungsquote",
-      "janni-unser-postbote-gehoert-zu-gehrden-wir-wuenschen-uns-seine-rueckkehr",
-      "unterschriftensammlung-gegen-die-schliessung-der-volksbankfiliale-in-bispingen"
-    ],
+    "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-11-09T12:21:55-06:00",
+      "stand": "2026-11-09T16:46:47-06:00",
       "gefunden": 1704,
       "im_bestand": 1704,
       "unbrauchbar": 0,
@@ -70,10 +66,27 @@
         "mit_ballast_in_kurzfassung": 0,
         "herkunft": "lokal_cron",
         "neu": 3
+      },
+      {
+        "zeit": "2026-11-09T16:46:47-06:00",
+        "gesamt": 2718,
+        "online": 2718,
+        "offline": 0,
+        "ohne_titel": 0,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 0,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 2703,
+        "juengstes_start": "2026-11-08",
+        "mit_code_im_text": 0,
+        "mit_ballast_in_kurzfassung": 0,
+        "herkunft": "lokal_cron",
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-11-09T12:21:55-06:00",
+      "zeit": "2026-11-09T16:46:47-06:00",
       "gesamt": 2718,
       "online": 2718,
       "offline": 0,

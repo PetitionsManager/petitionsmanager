@@ -31,20 +31,12 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-11-09T12:18:18-06:00",
+    "generated_at": "2026-11-09T16:43:24-06:00",
     "petition_count": 1949,
     "available": 1887,
-    "new_petitions_last_run": [
-      "1655-2026",
-      "1682-2026",
-      "1666-2026",
-      "1661-2026",
-      "1664-2026",
-      "1663-2026",
-      "1674-2026"
-    ],
+    "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-11-09T12:18:17-06:00",
+      "stand": "2026-11-09T16:43:24-06:00",
       "gefunden": 1887,
       "im_bestand": 1887,
       "unbrauchbar": 0,
@@ -74,10 +66,27 @@
         "mit_ballast_in_kurzfassung": 0,
         "herkunft": "lokal_cron",
         "neu": 7
+      },
+      {
+        "zeit": "2026-11-09T16:43:24-06:00",
+        "gesamt": 1949,
+        "online": 1949,
+        "offline": 0,
+        "ohne_titel": 0,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 0,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 999,
+        "juengstes_start": "2026-07-23",
+        "mit_code_im_text": 0,
+        "mit_ballast_in_kurzfassung": 0,
+        "herkunft": "lokal_cron",
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-11-09T12:18:17-06:00",
+      "zeit": "2026-11-09T16:43:24-06:00",
       "gesamt": 1949,
       "online": 1949,
       "offline": 0,
@@ -97,7 +106,7 @@
         "stufe": "hinweis",
         "thema": "Startdatum ist ein Verfahrensdatum",
         "text": "Tagesgenaues Datum bei 999 von 1949 Sätzen; es ist das Zulässigkeitsdatum aus der Mitteilung an die Mitglieder, nicht der Start der Petition. Das jüngste ist 109 Tage alt (2026-07-23) — bauartbedingt, weil das Dokument erst mit der Kommissionsantwort entsteht. Der Altersmelder ist hier deshalb ausge",
-        "zeit": "2026-11-09T12:18:17-06:00",
+        "zeit": "2026-11-09T16:43:24-06:00",
         "thema_en": "Start date is a procedural date",
         "text_en": "Day-exact date on 999 of 1949 records; it is the date of admissibility from the Notice to Members, not the start of the petition. The newest is 109 days old (2026-07-23) — by design, as the document is only drawn up once the Commission has replied. The ageing check is therefore skipped here."
       }
