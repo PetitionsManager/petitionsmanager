@@ -1154,6 +1154,9 @@ def run_sprache(args, sprache: str = "en") -> None:
     prog(phase="scrape", current=0, total=gesamt, message="Beginne …")
 
     i = 0
+    # Kandidaten, die DIESER Lauf als unbrauchbar erkannt hat — siehe die
+    # Begründung bei entdeckt_klassifizieren() am Ende dieser Funktion.
+    unbrauchbar_slugs: set[str] = set()
     for slug, kind in ([(s, "petition") for s in neu_pet]
                        + [(s, "campaign") for s in neu_kamp]):
         i += 1
@@ -1163,6 +1166,13 @@ def run_sprache(args, sprache: str = "en") -> None:
         else:
             status, rec = scrape_petition(fetcher, slug, sprache)
         if status in ("error", "skip"):
+            # ⚠️⚠️ NUR `skip` ist eine Entscheidung ÜBER die Seite (sie hat
+            # keine `petition_id` bzw. ungueltige_seite() greift, Z. 873/878).
+            # `error` heißt „nicht erreicht" — der Kandidat muss OFFEN bleiben,
+            # sonst verschwindet ein echter Ausfall in der Unbrauchbar-Spalte
+            # und die Kachel sieht gesund aus.
+            if status == "skip":
+                unbrauchbar_slugs.add(slug)
             continue
         if rec is not None and petitionen.get(slug):
             # Der Feed liefert Zähler und ID gratis mit — sie zu verwerfen
@@ -1191,6 +1201,23 @@ def run_sprache(args, sprache: str = "en") -> None:
     # aufgeht; `available` bleibt daneben stehen, damit ältere Leser der
     # Manifest-Felder unverändert weiterlaufen.
     core.entdeckt_setzen(set(petitionen) | set(kampagnen))
+    # ⚠️⚠️ 8.11.2026 am ausgelieferten Manifest gemessen: avaaz_en stand auf
+    # `offen = 3`, und die drei waren VOLLSTÄNDIG `bequest_gifts_in_wills`,
+    # `hiring`, `imprint` — Fußzeilenseiten, keine Petitionen; avaaz_fr auf
+    # `offen = 1` mit demselben `bequest_gifts_in_wills`. Beide Zweige sind
+    # also vollständig, die Kachel wies trotzdem dauerhaft Rückstand aus: die
+    # Seiten stehen über entdeckt_setzen() im NENNER, landen per „skip" aber
+    # nie im Bestand und in keinem Topf — `_bilanz()` zählt sie damit bei
+    # JEDEM Lauf neu als offen, der Zähler konnte 100 % nie erreichen.
+    # ➡️ Einordnen statt filtern: eine Fußzeilenseite ist ein eingeordneter
+    # Kandidat, kein Rückstand. Dieselbe Mechanik wie foodwatch_scraper.py:649
+    # und :824 (die einzigen zwei Aufrufe im Projekt — run() hier und
+    # foodwatch run() haben die Lücke noch, s. [[pm_bilanz_vollstaendigkeit]]).
+    # ⚠️ MUSS nach entdeckt_setzen() stehen: das initialisiert
+    # `_TLS.entdeckt_zusatz` (petitions_core.py:2010), und
+    # entdeckt_klassifizieren() kehrt bei fehlendem Topf STILL zurück
+    # (dort Z. 2029-2031) — davor aufgerufen wirkt es wie ein Erfolg.
+    core.entdeckt_klassifizieren(unbrauchbar=unbrauchbar_slugs)
     # Einmal je Lauf, VOR dem Abschluss-Save — sonst fehlte der Befund im
     # _meta und damit im Dashboard.
     # ⚠️⚠️ Am 6.10.2026 gemessen, warum dieser Aufruf hier UNENTBEHRLICH ist:
