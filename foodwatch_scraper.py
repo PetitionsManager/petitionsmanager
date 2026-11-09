@@ -493,9 +493,20 @@ def run(args) -> None:
     store = core.load_store(DATA_FILE)
     fetcher = core.Fetcher(delay=args.delay, headers=FETCH_HEADERS)
     ts = now_iso()
+    # Sätze, die ein früherer Lauf per „skip" aus dem Bestand gelöscht hat.
+    # ⚠️⚠️ Das ist der Unterschied, auf dem die Einordnung unten beruht — die
+    # ausführliche Begründung steht bei core.PER_SKIP_ENTFERNT. Kurz: eine
+    # Seite, die NIE im Bestand stand und keinen Zähler hat, ist eine
+    # Inhaltsseite und gehört eingeordnet; ein Satz, der einmal DRIN war, ist
+    # ein möglicher Datenverlust und muss in der Bilanz offen bleiben.
+    per_skip = core.per_skip_register(DATA_FILE)
 
     def save(quiet=True, **extra):
-        core.save_store(store, DATA_FILE, extra_meta=extra, quiet=quiet)
+        # ⚠️ Das Register bei JEDEM Speichern mitgeben: save_store baut das
+        # _meta neu, was hier fehlt, ist nach dem nächsten Schreibvorgang weg.
+        core.save_store(store, DATA_FILE,
+                        extra_meta={core.PER_SKIP_ENTFERNT: per_skip, **extra},
+                        quiet=quiet)
 
     known_slugs = list(store.keys())
     if known_slugs and not args.no_recheck and not args.limit:
@@ -516,6 +527,10 @@ def run(args) -> None:
                 # Unterschriften-Formular überall „verschwinden". Sammeln.
                 skip_slugs.append(slug)
                 continue
+            # Wieder lesbar → der Verdacht ist erledigt, Register aufräumen.
+            # Ohne das blieb ein einmal verschwundener Satz für immer als
+            # „offen" gemeldet, obwohl er längst zurück im Bestand ist.
+            per_skip.pop(slug, None)
             core.upsert(store, slug, rec or {}, {}, status, ts,
                         _url_fuer(slug))
             save()
@@ -523,7 +538,8 @@ def run(args) -> None:
                 log(f"  OFFLINE: {slug}")
         core.entferne_skip(store, skip_slugs, geprueft, "foodwatch",
                            grund_de="kein Unterschriften-Formular mehr",
-                           grund_en="no signature form anymore", save=save)
+                           grund_en="no signature form anymore", save=save,
+                           register=per_skip)
 
     log("Sammle Aktionen von der Mitmachen-Übersicht …")
     discovered = discover_slugs(fetcher)
@@ -538,15 +554,35 @@ def run(args) -> None:
     prog(phase="scrape", current=0, total=len(new_slugs),
          message="Beginne Scrape …")
 
+    # Kandidaten, die DIESER Lauf als Inhaltsseite erkannt hat — siehe die
+    # Begründung bei entdeckt_klassifizieren() weiter unten.
+    inhaltsseiten: set[str] = set()
     for i, slug in enumerate(new_slugs, 1):
         log(f"({i}/{len(new_slugs)}) {slug}")
         prog(current=i, total=len(new_slugs), message=slug)
         status, rec = scrape_petition(fetcher, slug)
         if status == "error":
+            # ⚠️ „nicht erreicht" wird NICHT eingeordnet: der Kandidat bleibt
+            # offen, sonst verschwindet ein Netz-/WAF-Ausfall in der
+            # Unbrauchbar-Spalte und die Kachel sieht gesund aus.
             continue
         if status == "skip":
-            log("  übersprungen (keine Mitzeichnungs-Aktion).")
+            if slug in per_skip:
+                # ⚠️⚠️ DIESER Slug stand einmal im Bestand und wurde per
+                # „skip" gelöscht (Grund im Register). Er wird NICHT
+                # eingeordnet: sein `offen` in der Bilanz ist die einzige
+                # Spur des möglichen Datenverlusts — genau die Spur, an der
+                # am 8.11.2026 zwei beendete Aktionen samt
+                # signatures_history auffielen.
+                log(f"  übersprungen – stand einmal im Bestand "
+                    f"({per_skip[slug]}), bleibt in der Bilanz OFFEN.")
+            else:
+                # Nie im Bestand und ohne Zähler → Inhaltsseite, kein
+                # Rückstand. Dieselbe Einordnung wie in run_en und run_zweig.
+                inhaltsseiten.add(slug)
+                log("  übersprungen (keine Mitzeichnungs-Aktion).")
             continue
+        per_skip.pop(slug, None)       # wieder da → Verdacht erledigt
         core.upsert(store, slug, rec or {}, {}, status, ts, _url_fuer(slug))
         save()
 
@@ -559,8 +595,22 @@ def run(args) -> None:
         log(f"NEU: {len(new_petitions)} neue Aktion(en) in diesem Lauf.")
 
     prog(message="Speichere & baue HTML …")
+    # ⚠️⚠️ Am 8.11.2026 am ausgelieferten Manifest gemessen, BEVOR hier etwas
+    # geändert wurde: foodwatch stand auf `gefunden 29 · im_bestand 27 ·
+    # unbrauchbar 0 · offen 2` — die Entdeckung dieses Zweigs (ACTION_HREF_RE
+    # auf der Mitmachen-Übersicht plus AT_ACTION_HREF_RE) liefert also derzeit
+    # KEINE einzige Inhaltsseite, und die zwei offenen waren echte Petitionen.
+    # Die Einordnung steht deshalb nicht hier, weil sie einen Rückstand
+    # wegräumt, den es gibt, sondern damit eine Inhaltsseite, die eines Tages
+    # auf der Übersicht landet, keinen erfindet. `per_skip` hält die Grenze:
+    # eingeordnet wird nur, was nie im Bestand stand.
+    # ⚠️ MUSS nach entdeckt_setzen() stehen (oben, Z. 547): das initialisiert
+    # `_TLS.entdeckt_zusatz` (petitions_core.py:2010), und
+    # entdeckt_klassifizieren() kehrt bei fehlendem Topf STILL zurück (dort
+    # Z. 2029-2031) — davor aufgerufen wirkt es wie ein Erfolg, ohne zu wirken.
+    core.entdeckt_klassifizieren(unbrauchbar=inhaltsseiten)
     save(quiet=False, new_petitions_last_run=new_petitions,
-         available=len(discovered))
+         available=len(discovered) - len(inhaltsseiten))
     core.write_list_html(PLATFORM)
     log("Fertig (foodwatch).")
 

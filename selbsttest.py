@@ -1450,6 +1450,366 @@ pruefe("bilanz: verschwundene Archiv-Kandidaten sind erledigt, nicht offen",
 
 
 # ---------------------------------------------------------------------------
+# avaaz run(): „skip" einordnen, „error" offen lassen (8.11.2026)
+# ---------------------------------------------------------------------------
+# ⚠️⚠️ Der Fall, der die Lücke erzeugte: ein Kandidat, den der Lauf per „skip"
+# aussortiert (Fußzeilenseite wie `imprint`), steht über entdeckt_setzen() im
+# Nenner, landet nie im Bestand und in keinem Topf — `_bilanz()` zählte ihn
+# bei JEDEM Lauf neu als offen, die Kachel wies dauerhaft Rückstand aus
+# (avaaz_en `offen = 3` am ausgelieferten Manifest, s. pm_bilanz_vollstaendigkeit).
+# ⚠️⚠️ Und die Gegenrichtung ist die wichtigere: `error` heißt „nicht erreicht"
+# und MUSS offen bleiben. Würde er mit eingeordnet, verschwände ein echter
+# Ausfall in der Unbrauchbar-Spalte und die Kachel sähe gesund aus.
+# Geprüft wird am ECHTEN run() samt save_store, nicht an einer Nachbildung:
+# nur so deckt der Fall auch die Reihenfolge ab (entdeckt_klassifizieren nach
+# entdeckt_setzen — davor kehrt es still zurück, petitions_core.py:2029-2031).
+def _avaaz_folge(laeufe: list[dict], vorbestand: dict | None = None) -> list:
+    """Mehrere avaaz-Läufe auf DEMSELBEN Wegwerf-Bestand. Rückgabe: je Lauf ein
+    Paar (_meta, Bestand) danach — der Bestand gehört dazu, weil die Bilanz
+    allein den Fall „leerer Ersatzsatz statt Löschung" nicht sichtbar macht."""
+    echt = (core.Fetcher, _av.discover_slugs, _av._scrape_any, _av.DATA_FILE,
+            core.write_list_html)
+    core.Fetcher = lambda *a, **k: None
+    core.write_list_html = lambda *a, **k: None
+    jetzt: dict = {}
+    _av.discover_slugs = lambda f, *a, **k: ({s: {} for s in jetzt}, set())
+
+    def _scrape(fetcher, slug, kind):
+        st = jetzt[slug]
+        rec = {"title": f"Titel {slug}", "signatures": 5} if st == "online" \
+            else None
+        return st, rec, f"https://example.invalid/{slug}/"
+
+    _av._scrape_any = _scrape
+    args = SimpleNamespace(delay=0, limit=0, no_recheck=False,
+                           min_interval_hours=0, archive=False,
+                           archive_batch=0)
+    metas = []
+    try:
+        with tempfile.TemporaryDirectory() as ordner:
+            _av.DATA_FILE = Path(ordner) / "avaaz_petitions.json"
+            if vorbestand:
+                core.save_store(dict(vorbestand), _av.DATA_FILE, quiet=True)
+            for lauf in laeufe:
+                jetzt.clear()
+                jetzt.update(lauf)
+                core._TLS.bilanz_vorher = core._UNGELESEN   # neuer Lauf
+                _av.run(args)
+                metas.append((core.load_meta(_av.DATA_FILE),
+                              core.load_store(_av.DATA_FILE)))
+    finally:
+        (core.Fetcher, _av.discover_slugs, _av._scrape_any, _av.DATA_FILE,
+         core.write_list_html) = echt
+    return metas
+
+
+def _avaaz_bilanz(status_je_slug: dict[str, str]) -> dict:
+    return _avaaz_folge([status_je_slug])[0][0].get("bilanz") or {}
+
+
+_ab = _avaaz_bilanz({"gute_petition": "online", "imprint": "skip",
+                     "netzfehler": "error"})
+pruefe("avaaz run(): übersprungene Seite ist eingeordnet, kein Rückstand",
+       (_ab.get("gefunden"), _ab.get("im_bestand"), _ab.get("unbrauchbar")),
+       (3, 1, 1))
+# ⚠️⚠️ DIE Negativkontrolle: der nicht erreichte Kandidat bleibt offen — und
+# zwar namentlich, sonst wäre „offen = 1" nicht von „der falsche ist offen"
+# zu unterscheiden.
+pruefe("avaaz run(): Negativkontrolle – `error` bleibt offen",
+       (_ab.get("offen"), _ab.get("offene_beispiele")), (1, ["netzfehler"]))
+# Gegenprobe, dass der Fall ÜBERHAUPT unterscheidet: ist derselbe Kandidat ein
+# `skip`, geht der Rückstand auf 0. Ohne sie könnte „offen = 1" auch daran
+# liegen, dass die Einordnung gar nicht greift.
+_ab2 = _avaaz_bilanz({"gute_petition": "online", "imprint": "skip",
+                      "netzfehler": "skip"})
+pruefe("avaaz run(): Gegenprobe – als `skip` wäre derselbe Fall erledigt",
+       (_ab2.get("unbrauchbar"), _ab2.get("offen")), (2, 0))
+# Und die Mengengleichung muss in beiden Läufen aufgehen — eine Bilanz, die
+# nicht aufgeht, ist keine Bilanz (core._bilanz setzt dann `fehler`).
+pruefe("avaaz run(): Mengengleichung geht in beiden Läufen auf",
+       [b.get("fehler") for b in (_ab, _ab2)], [None, None])
+
+
+# ---------------------------------------------------------------------------
+# Register „einmal im Bestand" — der Verlust darf NICHT eingeordnet werden
+# ---------------------------------------------------------------------------
+# ⚠️⚠️ Der Fall, der die Einordnung oben überhaupt begrenzt (8.11.2026,
+# Anlass foodwatch): zwei beendete Aktionen verloren ihr Unterschriften-
+# Formular, lieferten „skip", entferne_skip löschte sie samt
+# signatures_history, die Löschbremse griff bei 2 Fällen nicht — und
+# `bilanz.offen = 2` war die EINZIGE Spur. Würde die Neu-Schleife solche
+# Slugs einordnen, ginge die Kachel auf „0 offen" und sähe gesund aus.
+print()
+print("Register „einmal im Bestand“ (core.PER_SKIP_ENTFERNT)")
+
+# ---- Zuerst die Mechanik in core: nur WIRKLICH Gelöschtes wird vermerkt.
+core._TLS.platform = "selbsttest"
+core.BEFUNDE.pop("selbsttest", None)
+_reg: dict = {}
+_st = bestand(200)
+core.entferne_skip(_st, ["s1", "s2"], 100, "T", "kein Formular mehr",
+                   register=_reg)
+pruefe("Register: gelöschte Slugs stehen mit ihrem Grund drin",
+       _reg, {"s1": "kein Formular mehr", "s2": "kein Formular mehr"})
+# ⚠️⚠️ Gegenprobe, und sie ist die wichtigere: greift die Massen-Lösch-Bremse,
+# bleiben die Sätze im Bestand — dann hat das Register nichts zu vermerken.
+# Täte es das doch, würde ein Markup-Bruch pauschal alle Slugs als
+# „einmal verloren" markieren und die Einordnung dauerhaft lahmlegen.
+core.BEFUNDE.pop("selbsttest", None)
+_reg2: dict = {}
+core.entferne_skip(bestand(200), [f"s{i}" for i in range(31)], 100, "T", "g",
+                   register=_reg2)
+pruefe("Register: Gegenprobe – bei greifender Bremse bleibt es leer",
+       _reg2, {})
+# Ohne `register=` verhält sich die Funktion unverändert (die drei anderen
+# Scraper rufen sie so auf) — sonst wäre die Erweiterung ein stiller Umbau.
+core.BEFUNDE.pop("selbsttest", None)
+_st3 = bestand(20)
+pruefe("Register: ohne Parameter unverändertes Verhalten",
+       (core.entferne_skip(_st3, ["s1"], 20, "T", "g"), len(_st3)), (1, 19))
+
+# ---- Und jetzt der ganze Weg über mehrere Läufe der echten run()-Funktionen.
+# ⚠️⚠️ Mehrere Läufe sind hier UNVERZICHTBAR: ein per „skip" gelöschter Satz
+# ist im nächsten Lauf kein „bekannter" mehr, sondern läuft als „neu" durch die
+# Scrape-Schleife. Genau dort entscheidet sich, ob der Verlust offen bleibt
+# oder in der Unbrauchbar-Spalte verschwindet — ein Einzellauf kann das per
+# Bauart nicht prüfen. Genau dieser Aufbau hat am 8.11.2026 auch den Altfehler
+# in avaaz_scraper.run() aufgedeckt (leerer Ersatzsatz statt Löschung); eine
+# Nachbildung der Schleife hätte ihn nie gezeigt.
+def _foodwatch_folge(laeufe: list[dict],
+                     vorbestand: dict | None = None) -> list:
+    """Mehrere foodwatch-Läufe auf DEMSELBEN Wegwerf-Bestand; Rückgabe: je Lauf
+    das _meta danach (Bilanz UND Register)."""
+    echt = (core.Fetcher, _fw.discover_slugs, _fw.scrape_petition,
+            _fw.DATA_FILE, core.write_list_html, _fw._fremdsprachen_holen)
+    core.Fetcher = lambda *a, **k: None
+    core.write_list_html = lambda *a, **k: None
+    _fw._fremdsprachen_holen = lambda *a, **k: None
+    jetzt: dict = {}
+    _fw.discover_slugs = lambda f, *a, **k: {s: {} for s in jetzt}
+
+    def _scrape(fetcher, slug):
+        st = jetzt[slug]
+        return st, ({"title": slug, "signatures": 5} if st == "online"
+                    else None)
+
+    _fw.scrape_petition = _scrape
+    args = SimpleNamespace(delay=0, limit=0, no_recheck=False,
+                           min_interval_hours=0)
+    metas = []
+    try:
+        with tempfile.TemporaryDirectory() as ordner:
+            _fw.DATA_FILE = Path(ordner) / "foodwatch_petitions.json"
+            if vorbestand:
+                core.save_store(dict(vorbestand), _fw.DATA_FILE, quiet=True)
+            for lauf in laeufe:
+                jetzt.clear()
+                jetzt.update(lauf)
+                core._TLS.bilanz_vorher = core._UNGELESEN   # neuer Lauf
+                _fw.run(args)
+                metas.append(core.load_meta(_fw.DATA_FILE))
+    finally:
+        (core.Fetcher, _fw.discover_slugs, _fw.scrape_petition, _fw.DATA_FILE,
+         core.write_list_html, _fw._fremdsprachen_holen) = echt
+    return metas
+
+
+_VERLUST = {"verlorene_aktion": {
+    "slug": "verlorene_aktion", "title": "Verlorene Aktion",
+    "url": "https://example.invalid/verlorene_aktion",
+    "status": "online", "signatures": 26557}}
+# Lauf 1 löscht `verlorene_aktion` (skip), Lauf 2 trifft denselben Slug als
+# „neu" wieder — die Stelle, an der ein Einzeiler den Verlust stumm gestellt
+# hätte. `ueber-uns` stand nie im Bestand und ist die Inhaltsseite daneben.
+_fl = {"gute_aktion": "online", "verlorene_aktion": "skip",
+       "ueber-uns": "skip"}
+_f1, _f2, _f3 = _foodwatch_folge([_fl, _fl, _fl], vorbestand=_VERLUST)
+pruefe("Register: Lauf 1 merkt den gelöschten Satz",
+       sorted(core.als_register(_f1.get(core.PER_SKIP_ENTFERNT))),
+       ["verlorene_aktion"])
+# ⚠️⚠️ DER entscheidende Fall — namentlich, nicht als Zahl: „offen = 1" allein
+# wäre nicht von „der falsche ist offen" zu unterscheiden.
+_b2 = _f2.get("bilanz") or {}
+pruefe("Register: Lauf 2 – der Verlust bleibt OFFEN, die Inhaltsseite nicht",
+       (_b2.get("offen"), _b2.get("offene_beispiele"), _b2.get("unbrauchbar")),
+       (1, ["verlorene_aktion"], 1))
+# Und er bleibt es: ein Melder, der beim dritten Lauf verstummt, ist keiner.
+_b3 = _f3.get("bilanz") or {}
+pruefe("Register: auch Lauf 3 meldet den Verlust noch",
+       (_b3.get("offen"), _b3.get("offene_beispiele")),
+       (1, ["verlorene_aktion"]))
+# Gegenprobe: ohne Vorbestand war derselbe Slug nie im Register — dann wird er
+# eingeordnet und der Rückstand ist 0. Ohne sie bewiese der Fall oben nur, dass
+# überhaupt nie eingeordnet wird.
+_b4 = (_foodwatch_folge([_fl, _fl])[1].get("bilanz") or {})
+pruefe("Register: Gegenprobe – nie im Bestand ⇒ eingeordnet, 0 offen",
+       (_b4.get("unbrauchbar"), _b4.get("offen")), (2, 0))
+# Selbstheilung: liefert der Slug wieder einen Satz, ist der Verdacht erledigt
+# und das Register gibt ihn frei — sonst meldete die Bilanz den Rückstand für
+# immer, auch wenn die Aktion längst zurück ist.
+_f5 = _foodwatch_folge([_fl, {**_fl, "verlorene_aktion": "online"}],
+                       vorbestand=_VERLUST)[1]
+pruefe("Register: Selbstheilung – wieder im Bestand ⇒ Eintrag weg",
+       sorted(core.als_register(_f5.get(core.PER_SKIP_ENTFERNT))), [])
+pruefe("Register: Selbstheilung – und die Bilanz ist wieder vollständig",
+       ((_f5.get("bilanz") or {}).get("offen"),
+        (_f5.get("bilanz") or {}).get("im_bestand")), (0, 2))
+
+# ---- Dasselbe durch avaaz_scraper.run(). ⚠️⚠️ Hier hing bis 9.11.2026 ein
+# ALTFEHLER davor: die Auffrisch-Schleife prüfte `known_set` (aufgenommen VOR
+# der Recheck-Schleife) statt den lebenden Bestand und legte den gerade
+# gelöschten Satz als LEEREN „online"-Datensatz wieder an — entferne_skip war
+# in diesem Zweig wirkungslos, die Lösch-Bremse lief ins Leere und der Verlust
+# war unsichtbar (`im_bestand` statt `offen`).
+_AV_VERLUST = {"verlorene_aktion": {
+    "slug": "verlorene_aktion", "title": "Verlorene Aktion",
+    "url": "https://example.invalid/verlorene_aktion/",
+    "status": "online", "signatures": 26557}}
+_al = {"gute_petition": "online", "verlorene_aktion": "skip",
+       "imprint": "skip"}
+(_am1, _as1), (_am2, _as2) = _avaaz_folge([_al, _al], vorbestand=_AV_VERLUST)
+# ⚠️⚠️ Am BESTAND geprüft, nicht an der Bilanz: der Altfehler hätte eine
+# unverdächtige „offen"-Zahl geliefert, aber einen hohlen Satz hinterlassen.
+# „weg" heisst weg — nicht „als leere Hülle wieder da".
+pruefe("avaaz Altfehler: der gelöschte Satz ist WEG, keine leere Hülle",
+       sorted(_as1), ["gute_petition"])
+pruefe("avaaz Altfehler: Gegenprobe – der gesunde Satz ist vollständig da",
+       ((_as1.get("gute_petition") or {}).get("status"),
+        (_as1.get("gute_petition") or {}).get("signatures")),
+       ("online", 5))
+_ab5 = _am1.get("bilanz") or {}
+pruefe("avaaz Altfehler: der Verlust steht als offen, nicht als im_bestand",
+       (_ab5.get("im_bestand"), _ab5.get("offen"),
+        _ab5.get("offene_beispiele"), _ab5.get("unbrauchbar")),
+       (1, 1, ["verlorene_aktion"], 1))
+# Und über den Lauf hinaus: ab hier greift `per_skip` auch in avaaz.
+_ab6 = _am2.get("bilanz") or {}
+pruefe("avaaz: Lauf 2 – Verlust weiter offen, Fußzeile eingeordnet",
+       (sorted(_as2), _ab6.get("offen"), _ab6.get("offene_beispiele"),
+        _ab6.get("unbrauchbar")),
+       (["gute_petition"], 1, ["verlorene_aktion"], 1))
+
+
+# ---- Und derselbe Weg durch run_sprache() (avaaz_en + 17 Sprachzweige).
+# ⚠️⚠️ Dort wirkt das Register noch unmittelbarer: `neu_pet` wird gegen den
+# LEBENDEN Bestand gebildet, der gerade gelöschte Slug ist also schon im
+# SELBEN Lauf wieder neue Arbeit. Ohne Register wäre er ohne jede Verzögerung
+# als unbrauchbar eingeordnet worden — die Spur hätte nie existiert, auch
+# nicht für einen Lauf. Deshalb prüft der Fall LAUF 1, nicht erst Lauf 2.
+def _sprache_folge(laeufe: list[dict], vorbestand: dict | None = None) -> list:
+    """Mehrere run_sprache('en')-Läufe auf DEMSELBEN Wegwerf-Bestand;
+    Rückgabe: je Lauf ein Paar (_meta, Bestand)."""
+    echt = (core.Fetcher, _av.discover_slugs, _av.scrape_petition,
+            _av.scrape_campaign, _av._sprach_dateien, core.write_list_html)
+    core.Fetcher = lambda *a, **k: None
+    core.write_list_html = lambda *a, **k: None
+    jetzt: dict = {}
+    _av.discover_slugs = lambda f, *a, **k: ({s: {} for s in jetzt}, set())
+
+    def _scrape(fetcher, slug, sprache):
+        st = jetzt[slug]
+        return st, ({"title": slug, "signatures": 5} if st == "online"
+                    else None)
+
+    _av.scrape_petition = _scrape
+    _av.scrape_campaign = _scrape
+    args = SimpleNamespace(delay=0, limit=0, no_recheck=False,
+                           min_interval_hours=0)
+    metas = []
+    try:
+        with tempfile.TemporaryDirectory() as ordner:
+            datei = Path(ordner) / "avaaz_en_petitions.json"
+            _av._sprach_dateien = lambda spr: (datei,
+                                               Path(ordner) / "avaaz_en.html")
+            if vorbestand:
+                core.save_store(dict(vorbestand), datei, quiet=True)
+            for lauf in laeufe:
+                jetzt.clear()
+                jetzt.update(lauf)
+                core._TLS.bilanz_vorher = core._UNGELESEN   # neuer Lauf
+                # Befunde eines Vorlaufs wegräumen: save_store schreibt sie ins
+                # _meta, ein Rest aus einem früheren Fall sähe hier wie ein
+                # Befund DIESES Laufs aus.
+                core.BEFUNDE.pop(getattr(core._TLS, "platform", None)
+                                 or "_cli", None)
+                _av.run_sprache(args, "en")
+                metas.append((core.load_meta(datei), core.load_store(datei)))
+    finally:
+        (core.Fetcher, _av.discover_slugs, _av.scrape_petition,
+         _av.scrape_campaign, _av._sprach_dateien,
+         core.write_list_html) = echt
+    return metas
+
+
+(_sm1, _ss1), (_sm2, _ss2) = _sprache_folge([_al, _al],
+                                            vorbestand=_AV_VERLUST)
+_sb1 = _sm1.get("bilanz") or {}
+pruefe("run_sprache: SCHON Lauf 1 hält den Verlust offen",
+       (sorted(_ss1), _sb1.get("offen"), _sb1.get("offene_beispiele"),
+        _sb1.get("unbrauchbar")),
+       (["gute_petition"], 1, ["verlorene_aktion"], 1))
+pruefe("run_sprache: Register trägt den Grund",
+       core.als_register(_sm1.get(core.PER_SKIP_ENTFERNT)),
+       {"verlorene_aktion": "keine Petition mehr an der Adresse"})
+_sb2 = _sm2.get("bilanz") or {}
+pruefe("run_sprache: Lauf 2 meldet ihn immer noch",
+       (_sb2.get("offen"), _sb2.get("offene_beispiele")),
+       (1, ["verlorene_aktion"]))
+# ⚠️⚠️ Gegenprobe – ohne sie bewiesen die Fälle oben nur, dass run_sprache nie
+# einordnet: ein Slug, der NIE im Bestand stand, muss eingeordnet werden.
+_sb3 = (_sprache_folge([_al])[0][0].get("bilanz") or {})
+pruefe("run_sprache: Gegenprobe – nie im Bestand ⇒ eingeordnet, 0 offen",
+       (_sb3.get("unbrauchbar"), _sb3.get("offen")), (2, 0))
+# Selbstheilung auch hier.
+_sm4 = _sprache_folge([_al, {**_al, "verlorene_aktion": "online"}],
+                      vorbestand=_AV_VERLUST)[1][0]
+pruefe("run_sprache: Selbstheilung – wieder im Bestand ⇒ Eintrag weg",
+       (sorted(core.als_register(_sm4.get(core.PER_SKIP_ENTFERNT))),
+        (_sm4.get("bilanz") or {}).get("offen")), ([], 0))
+
+
+# ---- Massen-Lösch-Bremse in run_sprache (9.11.2026)
+# ⚠️⚠️ Bis dahin löschte diese Funktion BEDINGUNGSLOS (eigene store.pop()-
+# Schleife statt core.entferne_skip). Bräche das Markup eines Sprachbaums,
+# liefert JEDE Seite „skip" — ein einziger Lauf hätte den ganzen Zweig geleert,
+# und zwar ohne Warnung. Geprüft wird am echten run_sprache(), nicht an
+# core.entferne_skip allein: dass die Funktion bremst, war oben schon belegt;
+# offen war, ob dieser Zweig sie überhaupt ERREICHT.
+def _sprache_bremse(gesamt: int, skips: int) -> tuple:
+    """(Bestandsgröße danach, Register, warnt?) für `skips` von `gesamt`
+    bekannten Sätzen, die in EINEM Lauf „skip" liefern."""
+    slugs = [f"s{i}" for i in range(gesamt)]
+    vorbestand = {s: {"slug": s, "title": f"T{s}", "status": "online",
+                      "signatures": 100,
+                      "url": f"https://secure.avaaz.org/community_petitions/"
+                             f"en/{s}/"} for s in slugs}
+    lauf = {s: ("skip" if i < skips else "online")
+            for i, s in enumerate(slugs)}
+    meta, store = _sprache_folge([lauf], vorbestand=vorbestand)[0]
+    warnt = any(b.get("stufe") == "warnung"
+                and "Massen-Löschung" in (b.get("thema") or "")
+                for b in (meta.get("befunde") or []))
+    return len(store), core.als_register(meta.get(core.PER_SKIP_ENTFERNT)), warnt
+
+
+# 11 von 20 sind 55 % und damit über SKIP_LOESCH_ANTEIL_MAX (30 %).
+_rest, _reg3, _warnt = _sprache_bremse(20, 11)
+pruefe("run_sprache Bremse: 55 % → nichts gelöscht, Bestand vollständig",
+       _rest, 20)
+pruefe("run_sprache Bremse: 55 % → und es wird GEMELDET", _warnt, True)
+# ⚠️⚠️ Wichtig: greift die Bremse, darf auch das Register LEER bleiben. Sonst
+# wären nach einem Markup-Bruch alle Slugs dauerhaft als „einmal verloren"
+# markiert und die Einordnung des Zweigs läge für immer lahm.
+pruefe("run_sprache Bremse: 55 % → Register bleibt leer", _reg3, {})
+# ⚠️⚠️ Gegenprobe bei GLEICHER absoluter Menge (10), nur der Anteil ist
+# unauffällig (10 von 40 = 25 %): hier MUSS gelöscht werden. Ohne diesen Fall
+# bewiese der obige nur, dass run_sprache nie löscht.
+_rest2, _reg4, _warnt2 = _sprache_bremse(40, 10)
+pruefe("run_sprache Bremse: Gegenprobe 25 % bei 10 Sätzen → gelöscht",
+       (_rest2, len(_reg4), _warnt2), (30, 10, False))
+
+
+# ---------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------
 # Die Bilanz darf beim Zwischenspeichern nicht verlorengehen (20.9.2026).

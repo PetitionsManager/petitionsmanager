@@ -2700,14 +2700,56 @@ def startdatum_kuratiert(platform: str) -> bool:
 SKIP_LOESCH_ANTEIL_MAX = 0.30   # >30 % skip unter den geprüften = Verdacht
 SKIP_LOESCH_MIN_ABS = 10        # darunter greift die Bremse nicht (kleine Bestände)
 
+# ---------------------------------------------------------------------------
+# Register: welche Sätze hat ein Lauf per „skip" aus dem Bestand GELÖSCHT?
+# ---------------------------------------------------------------------------
+# ⚠️⚠️ Wozu (8.11.2026, Anlass foodwatch): Ein Kandidat, den der Lauf per
+# „skip" aussortiert, steht über entdeckt_setzen() im Nenner der Bilanz, landet
+# aber nie im Bestand und in keinem Topf — `_bilanz()` zählt ihn bei JEDEM Lauf
+# neu als offen. Für eine Fußzeilenseite (`imprint`) ist das ein erfundener
+# Rückstand; sie gehört per entdeckt_klassifizieren(unbrauchbar=…) eingeordnet.
+#
+# Für einen Satz, der im Bestand STAND, ist es das Gegenteil: dort ist genau
+# dieses `offen` die einzige Spur eines Datenverlusts. Gemessen an foodwatch:
+# zwei am 28.10.2026 beendete Aktionen verloren ihr `#form-counter`, lieferten
+# „skip", entferne_skip löschte sie samt `signatures_history`, die Löschbremse
+# griff nicht (2 < SKIP_LOESCH_MIN_ABS) — und `bilanz.offen = 2` war das
+# EINZIGE, was davon übrig blieb.
+#
+# ⚠️⚠️ Ohne dieses Register sind die beiden Fälle nach EINEM Lauf nicht mehr zu
+# unterscheiden: ist der Satz gelöscht, zählt der nächste Lauf denselben Slug
+# als „neu", und eine Einordnung in der Neu-Schleife schöbe den Verlust in die
+# Unbrauchbar-Spalte. Die Kachel ginge auf 0 offen und sähe gesund aus.
+#
+# Es ist bewusst KEIN Bilanz-Topf (BILANZ_TOEPFE): ein Topf würde den Kandidaten
+# gerade aus dem Rückstand herausrechnen. Das Register sagt nur „diesen hier
+# NICHT einordnen" — es hält den Melder laut.
+PER_SKIP_ENTFERNT = "per_skip_entfernt"
+
+
+def per_skip_register(data_file: Path) -> dict:
+    """Das Register aus dem _meta des Bestandes, als {slug: grund}.
+
+    ⚠️ Der Aufrufer muss es bei JEDEM Speichern wieder mitgeben
+    (`extra_meta={core.PER_SKIP_ENTFERNT: reg, …}`) — save_store baut das _meta
+    neu auf, was nicht in extra_meta steht, fällt weg. Dieselbe Falle, die für
+    `verworfen` seit 30.8.2026 und für `bilanz` seit 20.9.2026 dokumentiert
+    ist."""
+    return als_register(load_meta(data_file).get(PER_SKIP_ENTFERNT))
+
 
 def entferne_skip(store: dict, slugs, geprueft: int, plattform: str,
-                  grund_de: str, grund_en: str = "", save=None) -> int:
+                  grund_de: str, grund_en: str = "", save=None,
+                  register: dict | None = None) -> int:
     """Entfernt die als "skip" gesammelten Datensätze – aber nur, wenn ihr
     Anteil an den TATSÄCHLICH geprüften Sätzen unauffällig bleibt. `geprueft`
     ist die Zahl der Sätze mit echtem Ergebnis (online/offline/skip), NICHT die
     Gesamtzahl der bekannten: durch skip_recent läuft pro Tag nur ein Teil, und
     ein an der Gesamtzahl gemessener Anteil verschleierte den Markup-Bruch.
+
+    `register` (optional, wird IN PLACE ergänzt) nimmt die gelöschten Slugs auf
+    – siehe PER_SKIP_ENTFERNT. Nur wirklich Gelöschtes kommt hinein: greift die
+    Bremse, bleiben die Sätze im Bestand und haben nichts zu vermerken.
 
     Rückgabe: Zahl der wirklich gelöschten Sätze (0, wenn die Bremse griff)."""
     if not slugs:
@@ -2727,7 +2769,15 @@ def entferne_skip(store: dict, slugs, geprueft: int, plattform: str,
         return 0
     for s in slugs:
         store.pop(s, None)
+        if register is not None:
+            # Der Grund ist die ERHEBUNG für später: beim nächsten Lauf steht
+            # damit ohne Zusatzabruf da, WARUM der Satz einmal verschwand.
+            register[s] = grund_de
     log(f"  {len(slugs)} Eintrag/Einträge entfernt ({grund_de}).")
+    if register is not None:
+        log(f"  Register „einmal im Bestand“: {len(register)} Slug(s) – diese "
+            f"bleiben in der Bilanz OFFEN, auch wenn sie erneut „skip“ "
+            f"liefern.")
     if save:
         save()
     return len(slugs)

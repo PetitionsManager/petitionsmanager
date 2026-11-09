@@ -903,13 +903,19 @@ def run(args) -> None:
     fetcher = core.Fetcher(delay=args.delay, headers=FETCH_HEADERS)
     ts = now_iso()
     arch_todo, arch_dead = core.archive_queue(DATA_FILE)
+    # Sätze, die ein früherer Lauf per „skip“ aus dem Bestand gelöscht hat —
+    # Begründung bei core.PER_SKIP_ENTFERNT. Sie dürfen unten NICHT eingeordnet
+    # werden: ihr `offen` ist die einzige Spur eines möglichen Datenverlusts.
+    per_skip = core.per_skip_register(DATA_FILE)
 
     def save(quiet=True, **extra):
         # Die Archiv-Warteschlange muss bei jedem Speichern mit, sonst ist sie
         # nach dem nächsten Schreibvorgang weg (save_store ersetzt _meta).
+        # Für das Register gilt dasselbe.
         core.save_store(store, DATA_FILE,
                         extra_meta={"archive_todo": arch_todo,
-                                    "archive_dead": arch_dead, **extra},
+                                    "archive_dead": arch_dead,
+                                    core.PER_SKIP_ENTFERNT: per_skip, **extra},
                         quiet=quiet)
 
     # Bekannte Einträge zuerst prüfen (Status/Unterschriften auffrischen).
@@ -934,13 +940,15 @@ def run(args) -> None:
                 # Seitenumbau ließe die Erkennung überall gleich fehlschlagen.
                 skip_slugs.append(slug)
                 continue
+            per_skip.pop(slug, None)     # wieder lesbar → Verdacht erledigt
             core.upsert(store, slug, rec or {}, {}, status, ts, url)
             save()
             if status == "offline":
                 log(f"  OFFLINE: {slug}")
         core.entferne_skip(store, skip_slugs, geprueft, "Avaaz",
                            grund_de="keine Aktions-Kampagne",
-                           grund_en="not an action campaign", save=save)
+                           grund_en="not an action campaign", save=save,
+                           register=per_skip)
     elif args.no_recheck:
         log("Prüfung bekannter Einträge übersprungen (--no-recheck).")
 
@@ -960,8 +968,28 @@ def run(args) -> None:
     new_work = ([(s, "petition") for s in discovered if s not in known_set]
                 + [(s, "campaign") for s in campaigns
                    if s not in known_set and s not in discovered])
+    # Bekanntes mit dem Hinweis aus der Entdeckung auffrischen (Zähler und
+    # petition_id liefert der Feed gratis mit — ohne Detailabruf).
+    # ⚠️⚠️ Die Bedingung prüft den LEBENDEN Bestand, nicht `known_set`. Der Fehler
+    # dahinter, am 8.11.2026 am echten run() gemessen: `known_set` stammt aus
+    # `known_slugs`, aufgenommen VOR der Recheck-Schleife. Hatte
+    # core.entferne_skip dort gerade einen Satz gelöscht, stand sein Slug
+    # trotzdem noch darin — und upsert() legte ihn hier als LEEREN
+    # „online"-Datensatz wieder an (gemessen: status='online', title=None,
+    # signatures=None, 8 Felder) und meldete ihn obendrein als NEUEN Satz.
+    # Wirkung: entferne_skip konnte in diesem Zweig nichts dauerhaft entfernen,
+    # die Massen-Lösch-Bremse lief ins Leere, und ein Verlust war UNSICHTBAR —
+    # die Bilanz zählte den hohlen Satz als `im_bestand` statt als offen. Das
+    # ist schlechter als jeder zu laute Zähler.
+    # ➡️ `slug in store` ist nicht nur die Reparatur, sondern die richtige Frage:
+    # aufgefrischt wird, was wir JETZT haben. Eine zweite Menge daneben kann
+    # wieder veralten, der Bestand selbst nicht.
+    # ⚠️ `new_work` bleibt bewusst an `known_set`: ein soeben gelöschter Slug
+    # wird NICHT im selben Lauf erneut abgerufen (er ist gerade geprüft). Er
+    # fehlt damit im Bestand und steht als `offen` in der Bilanz — genau das
+    # gewollte Signal; beim nächsten Lauf fängt ihn `per_skip`.
     for slug, hint in discovered.items():
-        if slug in known_set:
+        if slug in store:
             core.upsert(store, slug, {}, hint, "online", ts,
                         f"{BASE_URL}/community_petitions/de/{slug}/")
     if args.limit:
@@ -970,16 +998,33 @@ def run(args) -> None:
         f"(Gesamt im Store: {len(store)}).")
     prog(phase="scrape", current=0, total=len(new_work), message="Beginne Scrape …")
 
+    # Kandidaten, die DIESER Lauf als unbrauchbar erkannt hat — siehe die
+    # Begründung bei entdeckt_klassifizieren() weiter unten.
+    unbrauchbar_slugs: set[str] = set()
     for i, (slug, kind) in enumerate(new_work, 1):
         log(f"({i}/{len(new_work)}) [{kind}] {slug}")
         prog(current=i, total=len(new_work), message=slug)
         status, rec, url = _scrape_any(fetcher, slug, kind)
         if status == "error":
+            # ⚠️⚠️ `error` heißt „nicht erreicht" und wird NICHT eingeordnet:
+            # der Kandidat muss offen bleiben, sonst verschwindet ein echter
+            # Ausfall in der Unbrauchbar-Spalte und die Kachel sieht gesund aus.
             log("  übersprungen (Fehler) – Datensatz bleibt unverändert.")
             continue
         if status == "skip":
-            log("  übersprungen (keine Aktions-Kampagne).")
+            # `skip` dagegen ist eine Entscheidung ÜBER die Seite: ungueltige_
+            # seite() greift bzw. der Kampagne fehlt die petition_id.
+            if slug in per_skip:
+                # ⚠️⚠️ Dieser Slug STAND einmal im Bestand und wurde per „skip“
+                # gelöscht. Nicht einordnen: sein `offen` ist die einzige Spur
+                # des möglichen Datenverlusts (s. core.PER_SKIP_ENTFERNT).
+                log(f"  übersprungen – stand einmal im Bestand "
+                    f"({per_skip[slug]}), bleibt in der Bilanz OFFEN.")
+            else:
+                unbrauchbar_slugs.add(slug)
+                log("  übersprungen (keine Aktions-Kampagne).")
             continue
+        per_skip.pop(slug, None)         # wieder da → Verdacht erledigt
         core.upsert(store, slug, rec or {}, discovered.get(slug, {}), status,
                     ts, url)
         save()
@@ -1024,6 +1069,7 @@ def run(args) -> None:
                 arch_dead.append(entry)
                 weg += 1
                 continue
+            per_skip.pop(slug, None)     # aus dem Archiv zurück → Verdacht weg
             core.upsert(store, slug, rec or {}, {}, "online", ts, url)
             gefunden += 1
             save()
@@ -1044,6 +1090,30 @@ def run(args) -> None:
         log("Keine neuen Einträge seit dem letzten Lauf gefunden.")
 
     prog(message="Speichere & baue HTML …")
+    # ⚠️⚠️ Dieselbe Lücke wie am 8.11.2026 in run_sprache() geschlossen (dort
+    # die ausführliche Begründung mit den Messwerten): ein Kandidat, den dieser
+    # Lauf per „skip" aussortiert hat, steht über entdeckt_setzen() im NENNER,
+    # landet aber nie im Bestand und in keinem Topf — `_bilanz()` zählt ihn
+    # damit bei JEDEM Lauf neu als offen, der Zähler kann 100 % nie erreichen.
+    # Belegt am ausgelieferten Manifest: avaaz_en stand so auf `offen = 3`
+    # (`bequest_gifts_in_wills`, `hiring`, `imprint` — Fußzeilenseiten), avaaz_fr
+    # auf `offen = 1`. Der deutsche Zweig stand am 8.11. auf `offen = 0`; die
+    # Entdeckung ist hier dieselbe (CAMPAIGN_HREF_RE über die Startseite), die
+    # Seiten sind auf avaaz.org/de/ nur gerade nicht verlinkt.
+    # ⚠️ ORDNUNG, in beide Richtungen: der Aufruf muss NACH entdeckt_setzen()
+    # stehen (das initialisiert `_TLS.entdeckt_zusatz`, petitions_core.py:2010,
+    # und entdeckt_klassifizieren() kehrt bei fehlendem Topf STILL zurück —
+    # dort Z. 2029-2031, davor aufgerufen wirkt es wie ein Erfolg) und NACH der
+    # Scrape-Schleife, die die Menge erst füllt. Anders als in run_sprache()
+    # liegt entdeckt_setzen() hier VOR der Schleife, deshalb steht der Aufruf
+    # am Ende und nicht direkt daneben.
+    # ⚠️⚠️ Was NICHT eingeordnet wird, ist der eigentliche Punkt: Sätze, die im
+    # Bestand STANDEN und von core.entferne_skip gelöscht wurden. Ihr `offen`
+    # ist die einzige Spur eines Datenverlusts. Die Recheck-Schleife kommt
+    # deshalb gar nicht in `unbrauchbar_slugs` — und weil ein gelöschter Satz
+    # beim NÄCHSTEN Lauf als „neu" wiederkommt und dort erneut „skip" liefert,
+    # hält `per_skip` die Grenze über Läufe hinweg (core.PER_SKIP_ENTFERNT).
+    core.entdeckt_klassifizieren(unbrauchbar=unbrauchbar_slugs)
     # Vollständigkeit ehrlich halten: solange Archiv-Kandidaten offen sind,
     # kennen wir nachweislich mehr Petitionen, als im Bestand stehen.
     available = max(len(discovered) + len(campaigns),
@@ -1107,9 +1177,23 @@ def run_sprache(args, sprache: str = "en") -> None:
     fetcher = core.Fetcher(delay=args.delay,
                            headers=_sprach_headers(sprache))
     ts = now_iso()
+    # Sätze, die ein früherer Lauf per „skip“ aus dem Bestand gelöscht hat —
+    # Begründung bei core.PER_SKIP_ENTFERNT.
+    # ⚠️⚠️ Hier wirkt das Register noch unmittelbarer als in run(): `neu_pet`
+    # unten wird gegen den LEBENDEN `store` gebildet, ein soeben gelöschter
+    # Slug ist also schon im SELBEN Lauf wieder neue Arbeit, liefert erneut
+    # „skip“ — und wäre ohne Register ohne jede Verzögerung als unbrauchbar
+    # eingeordnet worden. Der Verlust wäre nie sichtbar geworden.
+    # ⚠️ Gegenprobe zum Mitdenken: greift unten die Massen-Lösch-Bremse, bleibt
+    # das Register leer — richtig so, denn dann steht der Satz noch im Bestand.
+    per_skip = core.per_skip_register(data_file)
 
     def save(quiet=True, **extra):
-        core.save_store(store, data_file, extra_meta=extra, quiet=quiet)
+        # ⚠️ Das Register bei JEDEM Speichern mitgeben: save_store baut das
+        # _meta neu, was hier fehlt, ist nach dem nächsten Schreibvorgang weg.
+        core.save_store(store, data_file,
+                        extra_meta={core.PER_SKIP_ENTFERNT: per_skip, **extra},
+                        quiet=quiet)
 
     def adresse(slug: str, kind: str) -> str:
         teil = "campaign" if kind == "campaign" else "community_petitions"
@@ -1119,7 +1203,10 @@ def run_sprache(args, sprache: str = "en") -> None:
     if known and not args.no_recheck and not args.limit:
         log(f"Prüfe {len(known)} bekannte Einträge ({sprache}) …")
         prog(phase="check-known", current=0, total=len(known), message="…")
-        weg = []
+        # `geprueft` zählt nur Sätze mit ECHTEM Ergebnis (online/offline/skip),
+        # nicht die bekannten insgesamt — an der Gesamtzahl gemessen würde der
+        # Anteil unten durch skip_recent verwässert (s. core.entferne_skip).
+        weg, geprueft = [], 0
         for k, slug in enumerate(known, 1):
             prog(current=k, total=len(known), message=slug)
             if core.skip_recent(store.get(slug), args):
@@ -1131,16 +1218,31 @@ def run_sprache(args, sprache: str = "en") -> None:
                 status, rec = scrape_petition(fetcher, slug, sprache)
             if status == "error":
                 continue
+            geprueft += 1
             if status == "skip":
                 weg.append(slug)
                 continue
+            per_skip.pop(slug, None)     # wieder lesbar → Verdacht erledigt
             core.upsert(store, slug, rec or {}, {}, status, ts,
                         adresse(slug, kind))
             save()
-        for slug in weg:
-            store.pop(slug, None)
-        if weg:
-            log(f"  {len(weg)} Eintrag/Einträge ohne Petition entfernt.")
+        # ⚠️⚠️ Bis 9.11.2026 stand hier eine eigene Schleife `for slug in weg:
+        # store.pop(...)`. Sie löschte BEDINGUNGSLOS — und damit fehlte diesen
+        # 18 Zweigen die Massen-Lösch-Bremse, die run() seit je hat: bräche das
+        # Markup eines Sprachbaums (ungueltige_seite() greift dann überall oder
+        # die petition_id verschwindet), liefert JEDE Seite „skip", und ein
+        # einziger Lauf hätte den ganzen Zweig geleert — ohne eine Warnung.
+        # ➡️ Jetzt dieselbe Funktion wie in run(): sie löscht nur, solange der
+        # Anteil unauffällig bleibt, meldet sonst „Massen-Löschung verhindert"
+        # und lässt die Sätze stehen. Sie führt auch das Register — und zwar
+        # NUR bei wirklicher Löschung; greift die Bremse, ist nichts verloren
+        # und es gibt nichts zu vermerken.
+        # ⚠️ Der Zweigname gehört in die Meldung: 18 Zweige laufen durch diese
+        # Funktion, ein nacktes „Avaaz" sagte nicht, welcher gebrochen ist.
+        core.entferne_skip(store, weg, geprueft, f"Avaaz {sprache}",
+                           grund_de="keine Petition mehr an der Adresse",
+                           grund_en="no petition at this address", save=save,
+                           register=per_skip)
 
     log(f"Sammle Petitionen und Kampagnen ({sprache}) …")
     petitionen, kampagnen = discover_slugs(fetcher, sprache)
@@ -1171,14 +1273,23 @@ def run_sprache(args, sprache: str = "en") -> None:
             # `error` heißt „nicht erreicht" — der Kandidat muss OFFEN bleiben,
             # sonst verschwindet ein echter Ausfall in der Unbrauchbar-Spalte
             # und die Kachel sieht gesund aus.
+            # ⚠️⚠️ Und ein Slug aus `per_skip` ebenso: der STAND einmal im
+            # Bestand (Grund im Register), sein `offen` ist die einzige Spur
+            # eines möglichen Datenverlusts. Eingeordnet wird nur, was nie
+            # drin war — eine Fußzeilenseite wie `imprint`.
             if status == "skip":
-                unbrauchbar_slugs.add(slug)
+                if slug in per_skip:
+                    log(f"  {slug}: übersprungen – stand einmal im Bestand "
+                        f"({per_skip[slug]}), bleibt in der Bilanz OFFEN.")
+                else:
+                    unbrauchbar_slugs.add(slug)
             continue
         if rec is not None and petitionen.get(slug):
             # Der Feed liefert Zähler und ID gratis mit — sie zu verwerfen
             # kostete einen zusätzlichen Stats-Abruf.
             for f, w in petitionen[slug].items():
                 rec.setdefault(f, w)
+        per_skip.pop(slug, None)         # wieder da → Verdacht erledigt
         core.upsert(store, slug, rec or {}, {}, status, ts, adresse(slug, kind))
         save()
 
@@ -1210,9 +1321,13 @@ def run_sprache(args, sprache: str = "en") -> None:
     # nie im Bestand und in keinem Topf — `_bilanz()` zählt sie damit bei
     # JEDEM Lauf neu als offen, der Zähler konnte 100 % nie erreichen.
     # ➡️ Einordnen statt filtern: eine Fußzeilenseite ist ein eingeordneter
-    # Kandidat, kein Rückstand. Dieselbe Mechanik wie foodwatch_scraper.py:649
-    # und :824 (die einzigen zwei Aufrufe im Projekt — run() hier und
-    # foodwatch run() haben die Lücke noch, s. [[pm_bilanz_vollstaendigkeit]]).
+    # Kandidat, kein Rückstand. Dieselbe Mechanik wie in foodwatch_scraper.py
+    # (run_en und run_zweig, Aufrufe bei :683 und :858).
+    # ⚠️⚠️ Die GRENZE dazu zieht `per_skip` oben (core.PER_SKIP_ENTFERNT): ein
+    # Slug, der einmal im Bestand STAND, kommt nicht in diese Menge. Ohne das
+    # wäre die Einordnung hier ein Verlust-Verdecker, weil `neu_pet` gegen den
+    # lebenden Bestand gebildet wird — der gerade gelöschte Satz läuft schon im
+    # SELBEN Lauf wieder durch die Schleife darüber.
     # ⚠️ MUSS nach entdeckt_setzen() stehen: das initialisiert
     # `_TLS.entdeckt_zusatz` (petitions_core.py:2010), und
     # entdeckt_klassifizieren() kehrt bei fehlendem Topf STILL zurück
