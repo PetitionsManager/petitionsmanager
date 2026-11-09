@@ -1369,6 +1369,11 @@ class Fetcher:
         # Cloudflare mit 403 beantwortet – dann hielten wir eine erreichbare
         # robots.txt fälschlich für gesperrt.
         letzter = "?"
+        # Zweite Kategorie im Meldetext: zwei verschiedene Ursachen haben hier
+        # dieselbe Wirkung (Host weg), und „nicht lesbar" nennt nur die
+        # harmlosere. Bleibt leer, solange der Statuscode die Wirkung selbst
+        # erklärt (401/403/429/5xx/Zeitüberschreitung).
+        ursache = ursache_en = ""
         # Die Grenze hängt davon ab, WORAN es scheitert (siehe die Begründung
         # bei ROBOTS_NETZ_RETRIES): eine Antwort — auch eine abweisende — ist
         # eine Auskunft und wiederholt sich; ein Verbindungsabbruch ist keine
@@ -1392,6 +1397,35 @@ class Fetcher:
                     log(f"robots.txt von {netloc}: HTTP {resp.status_code} – "
                         f"es gibt keine, alles erlaubt.")
                     return None
+                if 200 <= resp.status_code < 300:
+                    # Nur 200 ist eine Freigabe (siehe oben) — ein anderes 2xx
+                    # heißt: der Host HAT geantwortet, nur nicht mit der
+                    # robots.txt. ⚠️ Das gehört in den Meldetext, sonst liest
+                    # die nächste Sitzung „nicht lesbar" als Defekt der Site.
+                    # Am 8.11.2026 nachgemessen: von diesem Rechner liefern
+                    # www.europarl.europa.eu und action.wemove.eu HTTP 200 mit
+                    # gültiger robots.txt (1778 bzw. 217 Byte); die HTTP 202 der
+                    # Wochenberichte vom 26.10./2.11. entsteht erst am LAUFORT
+                    # (Bot-Challenge aus GitHubs Rechenzentrum, bei WeMove
+                    # zusätzlich ratenabhängig). Verhalten bleibt unverändert:
+                    # der Körper trägt keine Regeln, also weiter konservativ.
+                    # ⚠️ KURZ halten: wochenbericht.py:59 schneidet den Text bei
+                    # 140 Zeichen ab, Dashboard und Monitor bei 200. Am
+                    # 8.11.2026 durchgerechnet — ein ausformulierter
+                    # Ursachensatz (182 Zeichen) drängt „Host komplett
+                    # ausgelassen / KEINE frischen Daten" aus BEIDEN Vorschauen.
+                    # Die Begründung steht deshalb hier im Kommentar, in der
+                    # Meldung nur das Schlagwort.
+                    if "user-agent:" in resp.text[:8000].lower():
+                        ursache = ("Körper trägt robots.txt-Regeln, Statuscode "
+                                   "aber kein 200. ")
+                        ursache_en = ("Body carries robots.txt rules, but status "
+                                      "code is not 200. ")
+                    else:
+                        ursache = ("Bot-Challenge statt robots.txt (hängt am "
+                                   "Laufort). ")
+                        ursache_en = ("Bot challenge instead of robots.txt "
+                                      "(depends on the run location). ")
                 # 401/403/429/5xx: einmal nachfassen, dann konservativ. Der
                 # Server hat geantwortet — mehr Anläufe holen dieselbe Antwort.
                 grenze = ROBOTS_RETRIES
@@ -1416,13 +1450,13 @@ class Fetcher:
         # unverändert da. Der Lauf sähe aus wie „nichts Neues" – der
         # gefährlichste aller Zustände, weil er nach Erfolg aussieht.
         befund("warnung", THEMA_HOST_AUSGELASSEN,
-               f"{netloc}: {letzter}. Der Host wurde für diesen Lauf komplett "
-               f"ausgelassen; von dort stammen KEINE frischen Daten. Der "
-               f"Bestand bleibt unverändert stehen.",
+               f"{netloc}: {letzter}. {ursache}Der Host wurde für diesen Lauf "
+               f"komplett ausgelassen; von dort stammen KEINE frischen Daten. "
+               f"Der Bestand bleibt unverändert stehen.",
                thema_en="Host skipped (robots.txt unreadable)",
-               text_en=f"{netloc}: {letzter}. The host was skipped entirely for "
-                       f"this run; no fresh data came from it. The existing "
-                       f"records stay as they are.")
+               text_en=f"{netloc}: {letzter}. {ursache_en}The host was skipped "
+                       f"entirely for this run; no fresh data came from it. The "
+                       f"existing records stay as they are.")
         self._robots[netloc] = RobotsRules.BLOCK_ALL
         return self._robots[netloc]
 
