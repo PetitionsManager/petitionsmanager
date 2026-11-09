@@ -3225,6 +3225,55 @@ def _bestandspruefung(store: dict, vorher: dict,
                           f"UPPER BOUND, the petition may be up to 30 days "
                           f"younger. The ageing check is therefore skipped "
                           f"here; coverage is still verified.")
+    # ⚠️⚠️ Vierte Ausnahmeart (8.11.2026): KEINE verwertbare Datumsdeckung.
+    # Bis hierher fiel so ein Zweig durch die GANZE Kette und meldete gar
+    # nichts — auf der Kachel war „keine Warnung" dann nicht von „überhaupt
+    # nicht messbar" zu unterscheiden. An der Auslieferung über alle 41 Zweige
+    # gemessen: SIEBEN haben 0 % Deckung (foodwatch, foodwatch_en/_fr/_nl,
+    # threefifty, threefifty_en, eko_en) und weact 0,1 % (2 von 1986).
+    # europarl und die wemove-Zweige tragen für dieselbe Lage längst eine
+    # ausdrückliche ℹ (die beiden Zweige oben) — diese acht schwiegen.
+    # ⚠️ Bewusst ℹ und nicht ⚠: dass eine Quelle kein Startdatum zeigt, ist
+    # ihre Eigenschaft, kein Defekt bei uns (bei foodwatch steht es sogar im
+    # Kopfkommentar des Scrapers). Still bleibt es bei leerem Bestand
+    # (gesamt == 0, nichts auszusagen) und bei gesperrtem Host (dessen Meldung
+    # steht daneben).
+    # ⚠️⚠️ `deckung < 0.2` steht hier AUSDRÜCKLICH, obwohl dieser Zweig vor dem
+    # Melder sitzt: ein bloßes `elif gesamt and not host_gesperrt()` wäre auch
+    # für gesunde Zweige wahr und hätte den Altersmelder darunter vollständig
+    # verschluckt — eine Reihenfolgefalle, die kein Test gemeldet hätte, weil
+    # das Ergebnis „keine Warnung" heißt.
+    elif deckung < 0.2 and gesamt and not host_gesperrt():
+        if not startdaten:
+            merke("hinweis", "Kein Startdatum an der Quelle",
+                  f"Kein einziger der {gesamt} Sätze trägt ein Startdatum — "
+                  f"die Quelle veröffentlicht keins. Der Altersmelder ist hier "
+                  f"ausgenommen, weil er nichts messen KANN: „keine Warnung“ "
+                  f"heißt auf dieser Kachel nicht „aktuell“, sondern „nicht "
+                  f"messbar“.",
+                  thema_en="Source publishes no start date",
+                  text_en=f"Not one of the {gesamt} records carries a start "
+                          f"date — the source does not publish one. The ageing "
+                          f"check is skipped here because it CANNOT measure "
+                          f"anything: on this card 'no warning' does not mean "
+                          f"'up to date' but 'not measurable'.")
+        else:
+            merke("hinweis", "Startdatum nur bei wenigen Sätzen",
+                  f"Datum bei {len(startdaten)} von {gesamt} Sätzen "
+                  f"({deckung * 100:.1f} %), unter der Mindestdeckung von "
+                  f"20 %. Der Altersmelder ist deshalb ausgenommen — aus so "
+                  f"wenigen Sätzen ließe sich das Alter des Bestands nicht "
+                  f"ablesen."
+                  + (f" Jüngstes vorhandenes Datum: {juengstes_start}."
+                     if juengstes_start else ""),
+                  thema_en="Start date on only a few records",
+                  text_en=f"Date on {len(startdaten)} of {gesamt} records "
+                          f"({deckung * 100:.1f} %), below the 20 % minimum "
+                          f"coverage. The ageing check is therefore skipped — "
+                          f"the age of the collection cannot be read off so "
+                          f"few records."
+                          + (f" Newest date present: {juengstes_start}."
+                             if juengstes_start else ""))
     elif deckung >= 0.2 and alter is not None and not host_gesperrt():
         # ⚠️⚠️ Trennt die beiden Fälle, die der Warntext darunter bisher nur
         # NEBENEINANDER nennen konnte („Feld wird nicht gelesen ODER die Quelle
