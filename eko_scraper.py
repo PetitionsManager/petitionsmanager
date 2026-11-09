@@ -493,8 +493,17 @@ def run(args) -> None:
     fetcher = core.Fetcher(delay=args.delay, headers=FETCH_HEADERS)
     ts = now_iso()
 
+    # Sätze, die ein früherer Lauf per „skip“ aus dem Bestand gelöscht hat —
+    # Begründung bei core.PER_SKIP_ENTFERNT. Sie dürfen unten NICHT eingeordnet
+    # werden: ihr `offen` ist die einzige Spur eines möglichen Datenverlusts.
+    per_skip = core.per_skip_register(DATA_FILE)
+
     def save(quiet=True, **extra):
-        core.save_store(store, DATA_FILE, extra_meta=extra, quiet=quiet)
+        # ⚠️ Das Register muss bei JEDEM Speichern mit, sonst ist es nach dem
+        # nächsten Schreibvorgang weg (save_store ersetzt _meta).
+        core.save_store(store, DATA_FILE,
+                        extra_meta={core.PER_SKIP_ENTFERNT: per_skip, **extra},
+                        quiet=quiet)
 
     # Erst entdecken, dann nachprüfen: die Kampagnenkarten sind auch beim
     # Nachprüfen bekannter Aktionen die einzige Rückfallebene, solange die
@@ -533,6 +542,7 @@ def run(args) -> None:
                 # Umbau ließe die Sprach-/Aktionsprüfung überall fehlschlagen.
                 skip_slugs.append(slug)
                 continue
+            per_skip.pop(slug, None)     # wieder lesbar → Verdacht erledigt
             core.upsert(store, slug, rec or {}, {}, status, ts,
                         f"{BASE_URL}/a/{slug}")
             save()
@@ -540,7 +550,8 @@ def run(args) -> None:
                 log(f"  OFFLINE: {slug}")
         core.entferne_skip(store, skip_slugs, geprueft, "Ekō",
                            grund_de="keine deutsche Unterschriften-Aktion",
-                           grund_en="not a German signature action", save=save)
+                           grund_en="not a German signature action", save=save,
+                           register=per_skip)
 
     new_slugs = [s for s in discovered if s not in store]
     if args.limit:
@@ -551,6 +562,20 @@ def run(args) -> None:
          message="Beginne Scrape …")
 
     from_cards = 0
+    # Die deutsche Übersicht listet auch globale (englische) Kampagnen; deren
+    # Detailseite weist sich per <html lang> bzw. props.language selbst als
+    # fremdsprachig aus und kommt als „skip" zurück. ⚠️⚠️ Am 9.11.2026 am
+    # ausgelieferten Manifest gemessen: `offen = 17`, und alle 17 Beispiele
+    # waren englische Slugs — ein Rückstand, der nie kleiner wurde, weil diese
+    # Kandidaten im Nenner standen, aber in keinem Topf.
+    # ⚠️ NICHT nach der Karten-Heuristik `card["german"]` aussortieren: die
+    # Karten tragen vielfach `title=None`, `_looks_german` sieht dann keinen
+    # Text und urteilt per Vorgabe „nicht deutsch". Am 9.11. gemessen: VIER so
+    # eingestufte Slugs stehen mit deutschen Titeln im Bestand
+    # (`schweiz-plastik`, `stoppt-den-amazonas-zerstorer-nr-1`, …). Das Negativ
+    # der Heuristik heißt „keine Daten", nicht „englisch" — danach zu
+    # verwerfen hätte echte deutsche Petitionen still aussortiert.
+    verworfen_slugs: set[str] = set()
     for i, slug in enumerate(new_slugs, 1):
         card = discovered.get(slug) or {}
         log(f"({i}/{len(new_slugs)}) {slug}")
@@ -569,9 +594,24 @@ def run(args) -> None:
             continue
         if status == "skip":
             log("  übersprungen (keine deutsche Unterschriften-Aktion).")
+            # ⚠️⚠️ NUR was NIE im Bestand stand. Ein Slug im Register wurde von
+            # einem früheren Lauf gelöscht — ihn hier einzuordnen würde den
+            # Verlust aus dem Rückstand herausrechnen und die Kachel gesund
+            # aussehen lassen (s. core.PER_SKIP_ENTFERNT).
+            if slug not in per_skip:
+                verworfen_slugs.add(slug)
             continue
+        # Wieder lesbar, obwohl ein früherer Lauf ihn gelöscht hatte → Verdacht
+        # erledigt. ⚠️ NUR hier, nicht im `error`-Zweig oben: dort kommt der
+        # Satz aus der Kampagnenkarte, die Detailseite bleibt unlesbar und der
+        # Verdacht offen.
+        per_skip.pop(slug, None)
         core.upsert(store, slug, rec or {}, {}, status, ts, f"{BASE_URL}/a/{slug}")
         save()
+
+    # „verworfen“ und nicht „unbrauchbar“: es sind echte Petitionen, nur in der
+    # falschen Sprache — geprüft und aussortiert (s. BILANZ_TOEPFE).
+    core.entdeckt_klassifizieren(verworfen=verworfen_slugs)
 
     # Einmal je Lauf, VOR dem Abschluss-Save — sonst fehlte der Befund im _meta
     # und damit im Dashboard.

@@ -36,6 +36,7 @@ import bundestag_scraper as bundestag
 import changeorg_aufholen as aufholen
 import changeorg_scraper as changeorg
 import ci_stores_uebernehmen as ci_stores
+import eko_scraper as _eko
 import europarl_scraper as europarl
 import hole_live_daten as hld
 import monitor
@@ -2809,6 +2810,112 @@ pruefe("Melder-Wächter: Gegenprobe – entfernte Meldestelle fällt auf",
 
 
 # ---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# eko run(): fremdsprachige Kampagnen einordnen, Verlust offen lassen (9.11.26)
+# ---------------------------------------------------------------------------
+# Die deutsche Uebersicht listet auch globale (englische) Kampagnen mit. Deren
+# Detailseite weist sich per <html lang> bzw. props.language selbst als
+# fremdsprachig aus und kommt als "skip" zurueck — stand damit im Nenner, aber
+# in keinem Topf. Am ausgelieferten Manifest gemessen (9.11.2026): eko
+# `offen = 17`, und alle 17 Beispiele waren englische Slugs.
+# ⚠️⚠️ NICHT nach der Karten-Heuristik `card["german"]` aussortiert: die Karten
+# tragen vielfach `title=None`, `_looks_german` sieht dann keinen Text und
+# urteilt per Vorgabe "nicht deutsch" — vier so eingestufte Slugs stehen mit
+# DEUTSCHEN Titeln im Bestand. Das Negativ der Heuristik heisst "keine Daten".
+# Geprueft am ECHTEN run() ueber mehrere Laeufe: nur so ist sichtbar, dass ein
+# per entferne_skip geloeschter Satz im NAECHSTEN Lauf als "neu" durch dieselbe
+# Schleife laeuft und ohne das Register eingeordnet wuerde (Verlust unsichtbar).
+_EKO_KARTEN = {"gesunde_aktion": {"german": True, "title": "Gesunde Aktion"},
+               "verlorene_aktion": {"german": True, "title": "Verlorene"},
+               "english-campaign": {"german": False, "title": None}}
+
+
+def _eko_folge(laeufe: list[dict], vorbestand: dict | None = None) -> list:
+    """Mehrere eko-Laeufe auf DEMSELBEN Wegwerf-Bestand.
+    Rueckgabe: je Lauf (bilanz, register)."""
+    echt = (core.Fetcher, _eko.discover_slugs, _eko.scrape_petition,
+            _eko.DATA_FILE, core.write_list_html)
+    core.Fetcher = lambda *a, **k: None
+    core.write_list_html = lambda *a, **k: None
+    jetzt: dict = {}
+    # ⚠️ Die Entdeckung liefert in JEDEM Lauf alle drei Karten — sonst waere
+    # der Kernfall nicht pruefbar: ein geloeschter Satz muss im naechsten Lauf
+    # wieder auf der Uebersicht stehen und als "neu" durch die Schleife laufen.
+    _eko.discover_slugs = lambda f, *a, **k: {s: dict(c)
+                                              for s, c in _EKO_KARTEN.items()}
+
+    def _scrape(fetcher, slug, *a, **k):
+        # Vorgabe "skip" = Detailseite nicht lesbar; der Plan nennt nur, was
+        # in diesem Lauf online ist.
+        st = jetzt.get(slug, "skip")
+        rec = {"title": f"Titel {slug}", "signatures": 5} if st == "online" \
+            else None
+        return st, rec
+
+    _eko.scrape_petition = _scrape
+    args = SimpleNamespace(delay=0, limit=0, no_recheck=False,
+                           min_interval_hours=0)
+    raus = []
+    try:
+        with tempfile.TemporaryDirectory() as ordner:
+            _eko.DATA_FILE = Path(ordner) / "eko_petitions.json"
+            if vorbestand:
+                core.save_store(dict(vorbestand), _eko.DATA_FILE, quiet=True)
+            for lauf in laeufe:
+                jetzt.clear()
+                jetzt.update(lauf)
+                core._TLS.platform = "eko"
+                core._TLS.bilanz_vorher = core._UNGELESEN   # neuer Lauf
+                _eko.run(args)
+                meta = core.load_meta(_eko.DATA_FILE)
+                raus.append(((meta.get("bilanz") or {}),
+                             meta.get(core.PER_SKIP_ENTFERNT) or {}))
+    finally:
+        (core.Fetcher, _eko.discover_slugs, _eko.scrape_petition,
+         _eko.DATA_FILE, core.write_list_html) = echt
+    return raus
+
+
+def _eko_satz(slug: str) -> dict:
+    return {"slug": slug, "url": f"https://actions.eko.org/a/{slug}",
+            "title": f"Titel {slug}", "status": "online", "signatures": 5,
+            "first_seen": "2026-01-01T00:00:00+00:00",
+            "last_checked": "2026-01-01T00:00:00+00:00"}
+
+
+print()
+print("eko run(): fremdsprachige Kampagnen einordnen")
+_EKO_VOR = {"gesunde_aktion": _eko_satz("gesunde_aktion"),
+            "verlorene_aktion": _eko_satz("verlorene_aktion")}
+_el = _eko_folge([{"gesunde_aktion": "online"}, {"gesunde_aktion": "online"}],
+                 vorbestand=_EKO_VOR)
+pruefe("eko run(): englische Kampagne eingeordnet, Verlust offen",
+       (_el[0][0].get("verworfen"), _el[0][0].get("offen"),
+        _el[0][0].get("im_bestand")), (1, 1, 1))
+pruefe("eko run(): der geloeschte Slug steht im Register",
+       list(_el[0][1]), ["verlorene_aktion"])
+# ⚠️⚠️ DER Fall: im zweiten Lauf ist derselbe Slug kein bekannter mehr, sondern
+# neue Arbeit. Ohne das Register wuerde er hier eingeordnet und der Verlust
+# verschwaende aus dem Rueckstand.
+pruefe("eko run(): Lauf 2 — Verlust bleibt OFFEN, nicht verworfen",
+       (_el[1][0].get("offen"), _el[1][0].get("offene_beispiele"),
+        _el[1][0].get("verworfen")), (1, ["verlorene_aktion"], 1))
+# Gegenprobe, dass der Fall ueberhaupt unterscheidet: ohne Vorbestand war der
+# Slug nie im Bestand, also ist er schlicht aussortiert.
+_eg = _eko_folge([{"gesunde_aktion": "online"}])
+pruefe("eko run(): Gegenprobe — nie im Bestand ⇒ eingeordnet, 0 offen",
+       (_eg[0][0].get("verworfen"), _eg[0][0].get("offen")), (2, 0))
+# Selbstheilung: wird die Seite wieder lesbar, faellt der Registereintrag weg.
+_es = _eko_folge([{"gesunde_aktion": "online"},
+                  {"gesunde_aktion": "online", "verlorene_aktion": "online"}],
+                 vorbestand=_EKO_VOR)
+pruefe("eko run(): Selbstheilung — Registereintrag weg, Satz wieder im Bestand",
+       (list(_es[1][1]), _es[1][0].get("im_bestand"), _es[1][0].get("offen")),
+       ([], 2, 0))
+pruefe("eko run(): Mengengleichung geht in allen Laeufen auf",
+       [b.get("fehler") for b, _r in (*_el, *_eg, *_es)], [None] * 5)
+
+
 print()
 if fehler:
     print(f"::error::selbsttest.py: {len(fehler)} Fall/Fälle fehlgeschlagen "
