@@ -2910,6 +2910,45 @@ def _eko_folge(laeufe: list[dict], vorbestand: dict | None = None) -> list:
     return raus
 
 
+# ---------------------------------------------------------------------------
+# eko run_en(): bekannte Saetze werden nachgeprueft (11.11.2026)
+# ---------------------------------------------------------------------------
+# Bis heute hatte run_en NUR die Schleife ueber die Kampagnenliste. Alles, was
+# die Liste verlassen hatte, war damit per Bauart unerreichbar: am
+# ausgelieferten Bestand gezaehlt trugen 33 von 66 englischen Saetzen weder
+# Startdatum noch Unterschriftenstand (Notdatensaetze aus der Checkpoint-Zeit),
+# kein einziger stand noch in der Liste — und alle 33 Detailseiten antworteten
+# `online` MIT Datum und Zaehler. Der deutsche Zwilling hatte 0 von 57.
+# ⚠️⚠️ Geprueft wird am ECHTEN run_en, nicht am Quelltext: die Eigenschaft ist
+# "der eingefrorene Satz wird geheilt", nicht "das Wort kommt vor".
+def _eko_en_lauf(vorbestand: dict, gelistet: dict, antwort, n: int = 1,
+                 **argv) -> dict:
+    """n run_en-Laeufe auf DEMSELBEN Wegwerf-Bestand. Rueckgabe: Store danach.
+    ⚠️ n > 1 ist noetig, wo core.OFFLINE_CONFIRMATIONS greift: ein einzelner
+    Fehlschlag kippt einen Satz absichtlich NICHT auf offline."""
+    echt = (core.Fetcher, _eko.discover_en_slugs, _eko.scrape_petition,
+            _eko.EN_DATA_FILE, core.write_list_html)
+    core.Fetcher = lambda *a, **k: None
+    core.write_list_html = lambda *a, **k: None
+    _eko.discover_en_slugs = lambda f, *a, **k: {s: dict(c)
+                                                 for s, c in gelistet.items()}
+    _eko.scrape_petition = antwort
+    args = SimpleNamespace(**{"delay": 0, "limit": 0, "no_recheck": False,
+                              "min_interval_hours": 0, **argv})
+    try:
+        with tempfile.TemporaryDirectory() as ordner:
+            _eko.EN_DATA_FILE = Path(ordner) / "eko_en_petitions.json"
+            core.save_store(dict(vorbestand), _eko.EN_DATA_FILE, quiet=True)
+            for _ in range(n):
+                core._TLS.platform = "eko_en"
+                core._TLS.bilanz_vorher = core._UNGELESEN   # neuer Lauf
+                _eko.run_en(args)
+            return core.load_store(_eko.EN_DATA_FILE)
+    finally:
+        (core.Fetcher, _eko.discover_en_slugs, _eko.scrape_petition,
+         _eko.EN_DATA_FILE, core.write_list_html) = echt
+
+
 def _eko_satz(slug: str) -> dict:
     return {"slug": slug, "url": f"https://actions.eko.org/a/{slug}",
             "title": f"Titel {slug}", "status": "online", "signatures": 5,
@@ -2949,6 +2988,59 @@ pruefe("eko run(): Selbstheilung — Registereintrag weg, Satz wieder im Bestand
 pruefe("eko run(): Mengengleichung geht in allen Laeufen auf",
        [b.get("fehler") for b, _r in (*_el, *_eg, *_es)], [None] * 5)
 
+
+print()
+print("eko run_en(): bekannte Saetze nachpruefen")
+# Der eingefrorene Notdatensatz: im Bestand, aber NICHT mehr gelistet, ohne
+# Startdatum und ohne Zaehler — genau die 33 aus der Messung.
+_EN_STUMPF = {"slug": "weg-von-der-liste",
+              "url": "https://actions.eko.org/a/weg-von-der-liste",
+              "title": "Nur aus der Kampagnenkarte", "status": "online",
+              "first_seen": "2026-01-01T00:00:00+00:00",
+              "last_checked": "2026-01-01T00:00:00+00:00"}
+_EN_VOR = {"weg-von-der-liste": dict(_EN_STUMPF)}
+_EN_LISTE = {"noch-gelistet": {"title": "Noch gelistet"}}
+
+
+def _en_voll(fetcher, slug, *a, **k):
+    return "online", {"title": f"Titel {slug}", "signatures": 4711,
+                      "start_date": "2026-07-06"}
+
+
+_en = _eko_en_lauf(_EN_VOR, _EN_LISTE, _en_voll)
+pruefe("eko run_en(): nicht gelisteter Satz wird GEHEILT",
+       (_en["weg-von-der-liste"].get("start_date"),
+        _en["weg-von-der-liste"].get("signatures")), ("2026-07-06", 4711))
+# ⚠️⚠️ Gegenprobe, ohne die der Test nichts wert waere: mit --no-recheck muss
+# derselbe Satz UNVERAENDERT bleiben. Sonst koennte die Heilung auch aus der
+# Hauptschleife stammen, und der Test wuerde nicht die Nachpruefung messen.
+_en_ohne = _eko_en_lauf(_EN_VOR, _EN_LISTE, _en_voll, no_recheck=True)
+pruefe("eko run_en(): Gegenprobe – ohne Nachpruefung bleibt er stumpf",
+       (_en_ohne["weg-von-der-liste"].get("start_date"),
+        _en_ohne["weg-von-der-liste"].get("signatures")), (None, None))
+# Bei gesperrter Detailseite darf ein Notdatensatz den Satz nicht ueberschreiben
+# und auch nicht verschwinden — der englische Zweig hat keinen Loeschpfad.
+_en_err = _eko_en_lauf(_EN_VOR, _EN_LISTE,
+                       lambda f, s, *a, **k: ("error", None))
+_en_skip = _eko_en_lauf(_EN_VOR, _EN_LISTE,
+                        lambda f, s, *a, **k: ("skip", None))
+pruefe("eko run_en(): bei error/skip bleibt der Satz erhalten",
+       [("weg-von-der-liste" in _en_err, _en_err["weg-von-der-liste"]["title"]),
+        ("weg-von-der-liste" in _en_skip,
+         _en_skip["weg-von-der-liste"]["title"])],
+       [(True, "Nur aus der Kampagnenkarte")] * 2)
+# Die zweite Folge der Luecke: Offline-Gehen wurde nie bemerkt. ⚠️⚠️ Geprueft
+# ueber ZWEI Laeufe, weil core.OFFLINE_CONFIRMATIONS = 2 absichtlich bremst
+# ("nicht beim ersten Fehlschlag abschalten"). Der Einzellauf gehoert als
+# Gegenprobe dazu — sonst pruefte dieser Fall die Bremse mit und man koennte
+# ihr Versagen nicht von fehlender Erkennung unterscheiden.
+_en_off1 = _eko_en_lauf(_EN_VOR, _EN_LISTE,
+                        lambda f, s, *a, **k: ("offline", {"title": "T"}))
+_en_off2 = _eko_en_lauf(_EN_VOR, _EN_LISTE,
+                        lambda f, s, *a, **k: ("offline", {"title": "T"}), n=2)
+pruefe("eko run_en(): Offline erst nach zwei Laeufen (Bremse + Erkennung)",
+       [_en_off1["weg-von-der-liste"].get("status"),
+        _en_off2["weg-von-der-liste"].get("status")], ["online", "offline"])
 
 print()
 if fehler:

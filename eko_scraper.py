@@ -782,6 +782,45 @@ def run_en(args) -> None:
     karten = discover_en_slugs(fetcher)
     core.entdeckt_setzen(karten)   # überlebt Abbruch, trägt die Bilanz
     log(f"{len(karten)} englische Kampagne(n) (Gesamt im Store: {len(store)}).")
+
+    # Erst entdecken, dann nachprüfen — wie im deutschen Zweig (s. run(), der
+    # Durchgang dort unter `known`). ⚠️⚠️ Ohne ihn erreicht der Lauf
+    # AUSSCHLIESSLICH die gerade gelisteten Kampagnen: was die Liste einmal
+    # verlassen hat, friert für immer in dem Zustand ein, in dem es zuletzt
+    # gespeichert wurde. Am ausgelieferten Bestand gemessen (11.11.2026):
+    # 33 von 66 englischen Sätzen trugen weder Startdatum noch
+    # Unterschriftenstand — reine Notdatensätze aus der Checkpoint-Zeit, kein
+    # einziger noch in der Liste, und alle 33 Detailseiten antworteten auf
+    # Anhieb `online` MIT Datum und Zähler. Der deutsche Zwilling hatte 0 von
+    # 57 solcher Sätze, genau weil er diesen Durchgang hat.
+    # ⚠️ Zweite Folge derselben Lücke: ohne Nachprüfung erkennt der Zweig auch
+    # kein Offline-Gehen — der Status blieb ungeprüft auf „online" stehen.
+    bekannt = list(store.keys())
+    if bekannt and not args.no_recheck and not args.limit:
+        log(f"Prüfe {len(bekannt)} bekannte englische Kampagne(n) …")
+        prog(phase="check-known", current=0, total=len(bekannt),
+             message="Prüfe bekannte Kampagnen …")
+        for k, slug in enumerate(bekannt, 1):
+            prog(current=k, total=len(bekannt), message=slug)
+            if core.skip_recent(store.get(slug), args):
+                continue
+            status, rec = scrape_petition(fetcher, slug, sprache="en")
+            # ⚠️⚠️ Zwei bewusste Abweichungen vom deutschen Zweig. (1) Bei
+            # `error` wird NICHT die Kampagnenkarte nachgezogen: der Satz steht
+            # schon im Bestand, und ein Notdatensatz darf einen vollständigen
+            # nicht überschreiben (dieselbe Begründung wie in der Hauptschleife
+            # unten). (2) Bei `skip` wird NICHT gelöscht — der englische Zweig
+            # hat keinen Löschpfad, `core.entferne_skip` steht nur in run().
+            # Ein Löschpfad hier wäre eine neue Entscheidung, nicht die
+            # Behebung dieser Lücke.
+            if status in ("error", "skip"):
+                continue
+            core.upsert(store, slug, rec or {}, {}, status, ts,
+                        f"{BASE_URL}/a/{slug}")
+            save()
+            if status == "offline":
+                log(f"  OFFLINE: {slug}")
+
     prog(phase="scrape", current=0, total=len(karten), message="Beginne …")
 
     aus_karte = 0
