@@ -31,14 +31,18 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-11-10T18:14:08-06:00",
-    "petition_count": 1952,
-    "available": 1890,
-    "new_petitions_last_run": [],
+    "generated_at": "2026-11-11T09:58:24-06:00",
+    "petition_count": 1955,
+    "available": 1893,
+    "new_petitions_last_run": [
+      "1761-2026",
+      "1760-2026",
+      "1756-2026"
+    ],
     "bilanz": {
-      "stand": "2026-11-10T18:14:08-06:00",
-      "gefunden": 1890,
-      "im_bestand": 1890,
+      "stand": "2026-11-11T09:58:23-06:00",
+      "gefunden": 1893,
+      "im_bestand": 1893,
       "unbrauchbar": 0,
       "verworfen": 0,
       "dublette": 0,
@@ -46,14 +50,14 @@
       "zurueckgestellt": 0,
       "offen": 0,
       "offene_beispiele": [],
-      "bestand_gesamt": 1952,
+      "bestand_gesamt": 1955,
       "bestand_ausserhalb": 62
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-11-10T06:28:49-06:00",
-        "gesamt": 1952,
-        "online": 1952,
+        "zeit": "2026-11-11T09:58:23-06:00",
+        "gesamt": 1955,
+        "online": 1955,
         "offline": 0,
         "ohne_titel": 0,
         "platzhalter": 0,
@@ -66,29 +70,12 @@
         "mit_ballast_in_kurzfassung": 0,
         "herkunft": "lokal_cron",
         "neu": 3
-      },
-      {
-        "zeit": "2026-11-10T18:14:08-06:00",
-        "gesamt": 1952,
-        "online": 1952,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 999,
-        "juengstes_start": "2026-07-23",
-        "mit_code_im_text": 0,
-        "mit_ballast_in_kurzfassung": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-11-10T18:14:08-06:00",
-      "gesamt": 1952,
-      "online": 1952,
+      "zeit": "2026-11-11T09:58:23-06:00",
+      "gesamt": 1955,
+      "online": 1955,
       "offline": 0,
       "ohne_titel": 0,
       "platzhalter": 0,
@@ -100,19 +87,19 @@
       "mit_code_im_text": 0,
       "mit_ballast_in_kurzfassung": 0
     },
-    "verlauf_felder_ab": "2026-11-10T06:28:49-06:00",
+    "verlauf_felder_ab": "2026-11-11T09:58:23-06:00",
     "befunde": [
       {
         "stufe": "hinweis",
         "thema": "Startdatum ist ein Verfahrensdatum",
-        "text": "Tagesgenaues Datum bei 999 von 1952 Sätzen; es ist das Zulässigkeitsdatum aus der Mitteilung an die Mitglieder, nicht der Start der Petition. Das jüngste ist 110 Tage alt (2026-07-23) — bauartbedingt, weil das Dokument erst mit der Kommissionsantwort entsteht. Der Altersmelder ist hier deshalb ausge",
-        "zeit": "2026-11-10T18:14:08-06:00",
+        "text": "Tagesgenaues Datum bei 999 von 1955 Sätzen; es ist das Zulässigkeitsdatum aus der Mitteilung an die Mitglieder, nicht der Start der Petition. Das jüngste ist 111 Tage alt (2026-07-23) — bauartbedingt, weil das Dokument erst mit der Kommissionsantwort entsteht. Der Altersmelder ist hier deshalb ausge",
+        "zeit": "2026-11-11T09:58:23-06:00",
         "thema_en": "Start date is a procedural date",
-        "text_en": "Day-exact date on 999 of 1952 records; it is the date of admissibility from the Notice to Members, not the start of the petition. The newest is 110 days old (2026-07-23) — by design, as the document is only drawn up once the Commission has replied. The ageing check is therefore skipped here."
+        "text_en": "Day-exact date on 999 of 1955 records; it is the date of admissibility from the Notice to Members, not the start of the petition. The newest is 111 days old (2026-07-23) — by design, as the document is only drawn up once the Commission has replied. The ageing check is therefore skipped here."
       }
     ],
     "health_warning": null,
-    "online_count": 1952
+    "online_count": 1955
   },
   "0474-2026": {
     "slug": "0474-2026",
@@ -119023,5 +119010,155 @@
       "Expiration"
     ],
     "last_checked": "2026-11-10T06:27:27-06:00"
+  },
+  "1761-2026": {
+    "slug": "1761-2026",
+    "first_seen": "2026-11-11T09:56:45-06:00",
+    "signatures_history": [],
+    "title": "Petition 1761/2026: neurodivergent accessibility in digital financial and crypto services",
+    "started_by": "Denim Katana (German)",
+    "category": "Disability Issues",
+    "country": "Germany",
+    "description_full": "<p>The petitioner asks the European Parliament to review the access of people with disabilities to digital financial services and cryptocurrency platforms. The petitioner reports issues such as long hold periods for deposits and withdrawals, as well as minimum withdrawal amounts, which restrict access to their own funds. The petitioner also points out the refusal to process and ignoring of citizen complaints by the supervisory authority (CSSF) in Luxembourg. The petitioner suggests introducing more transparency, simpler information, and less barrier-heavy procedures for people with disabilities. Additionally, the petitioner proposes that crypto service providers should enable smaller withdrawal amounts and better justify long hold periods. The petitioner also asks for a review of whether KYC, AML, and MiCA regulations can be made more accessible and flexible for people with disabilities, particularly those with autism. While acknowledging the imortance of identity verification and anti-money laundering measures, the petitioner points out that complex procedures and difficult-to-understand requirements can pose particular challenges for people with autism. The petitioner suggests introducing additional support measures, such as clearer information in plain language, better transparency regarding holds, faster resolution processes in special cases, and accessible communication channels. The goal of the proposal is to improve accessibility and participation for people with disabilities and autism in digital financial services without abolishing existing security regulations.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1761%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1761/2026</a></p>",
+    "summary": "The petitioner asks the European Parliament to review the access of people with disabilities to digital financial services and cryptocurrency platforms. The petitioner reports issues such as long hold…",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:1761-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1761%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-11-11T09:58:03",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 1761/2026: zur Barrierefreiheit digitaler Finanz- und Kryptodienstleistungen für neurodivergente Personen",
+        "summary": "Der Petent ersucht das Europäische Parlament, den Zugang von Menschen mit Behinderungen zu digitalen Finanzdienstleistungen und Kryptowährungsplattformen zu überprüfen. Er berichtet über Probleme wie …",
+        "description_full": "<p>Der Petent ersucht das Europäische Parlament, den Zugang von Menschen mit Behinderungen zu digitalen Finanzdienstleistungen und Kryptowährungsplattformen zu überprüfen. Er berichtet über Probleme wie lange Haltefristen für Ein- und Auszahlungen sowie Mindestabhebungsbeträge, die den Zugang zu den Eigenmitteln einschränken würden. Ferner weigere sich die Aufsichtsbehörde (CSSF) in Luxemburg, Bürgerbeschwerden zu bearbeiten, und ignoriere diese. Der Petent plädiert dafür, mehr Transparenz, verständlichere Informationen und zugänglichere Verfahren für Menschen mit Behinderungen einzuführen. Darüber hinaus schlägt er vor, dass Anbieter von Krypto-Dienstleistungen geringere Auszahlungsbeträge ermöglichen und lange Haltefristen besser begründen sollten. Er ersucht ferner um eine Überprüfung, ob die KYC-, AML- und MiCA-Vorschriften für Menschen mit Behinderungen, insbesondere Menschen mit Autismus, zugänglicher und flexibler gestaltet werden können. Der Petent nimmt zwar zur Kenntnis, dass Identitätsprüfungen und Maßnahmen zur Bekämpfung der Geldwäsche wichtig seien, weist jedoch darauf hin, dass komplexe Verfahren und schwer verständliche Anforderungen für Menschen mit Autismus besondere Herausforderungen darstellen könnten. Er schlägt vor, zusätzliche Unterstützungsmaßnahmen einzuführen, wie etwa klarere Informationen in einfacher Sprache, mehr Transparenz bei Sperrungen, schnellere Klärungsverfahren in Sonderfällen und barrierefreie Kommunikationskanäle. Ziel des Vorschlags sei es, die Barrierefreiheit und die Teilhabe von Menschen mit Behinderungen und Autismus an digitalen Finanzdienstleistungen zu verbessern, ohne die bestehenden Sicherheitsvorschriften aufzuheben.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=1761%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1761/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=1761%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-11-11T09:56:45-06:00",
+    "offline_since": null,
+    "tags": [
+      "Petitioner",
+      "People",
+      "Disabilities",
+      "Financial",
+      "Services",
+      "Digital",
+      "Access",
+      "Autism",
+      "Review",
+      "Asks"
+    ],
+    "last_checked": "2026-11-11T09:56:45-06:00"
+  },
+  "1760-2026": {
+    "slug": "1760-2026",
+    "first_seen": "2026-11-11T09:56:45-06:00",
+    "signatures_history": [],
+    "title": "Petition 1760/2026: abolishing geo-blocking of public service broadcasting in the EU",
+    "started_by": "W. M. (Austrian)",
+    "category": "Information Society and Media",
+    "country": "Austria",
+    "description_full": "<p>The petitioner calls on the European Parliament to review the existing EU rules on cross-border access to public service broadcasting and free-to-air broadcasting content. According to the petitioner, sporting events, cultural programmes and documentaries that are freely accessible via public service broadcasting in one Member State are often unavailable in other Member States via the internet or satellite, often due to territorial licensing restrictions. The petitioner argues that these restrictions are incompatible with the objectives of a modern European digital single market. The petitioner therefore requests EU-wide access to free-to-air public service broadcasting services, the restriction or abolition of territorial barriers, and the development of new licensing models for sports, cultural and informational content. The petitioner also calls for citizens’ interests to be given greater consideration in the allocation of broadcasting rights, while acknowledging the need to protect rights holders’ interests and the financing of broadcasters.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1760%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1760/2026</a></p>",
+    "summary": "The petitioner calls on the European Parliament to review the existing EU rules on cross-border access to public service broadcasting and free-to-air broadcasting content. According to the petitioner,…",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:1760-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1760%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-11-11T09:58:10",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 1760/2026: zur Abschaffung von Geoblocking im öffentlich-rechtlichen Rundfunk in der EU",
+        "summary": "Der Petent fordert das Europäische Parlament auf, die bestehenden EU-Vorschriften über den grenzüberschreitenden Zugang zum öffentlich-rechtlichen Rundfunk und zu frei empfangbaren Rundfunkinhalten zu…",
+        "description_full": "<p>Der Petent fordert das Europäische Parlament auf, die bestehenden EU-Vorschriften über den grenzüberschreitenden Zugang zum öffentlich-rechtlichen Rundfunk und zu frei empfangbaren Rundfunkinhalten zu überprüfen. Sportveranstaltungen, Kulturprogramme und Dokumentarfilme, die über den öffentlich-rechtlichen Rundfunk in einem Mitgliedstaat frei zugänglich seien, seien in anderen Mitgliedstaaten häufig über Internet oder Satellit nicht verfügbar, was häufig auf territoriale Lizenzbeschränkungen zurückzuführen sei. Der Petent macht geltend, dass diese Beschränkungen mit den Zielen eines modernen europäischen digitalen Binnenmarkts unvereinbar seien. Er fordert daher einen EU-weiten Zugang zu frei empfangbaren öffentlich-rechtlichen Rundfunkdiensten, die Einschränkung bzw. Abschaffung territorialer Hindernisse und die Entwicklung neuer Lizenzmodelle für Sport-, Kultur- und Informationsinhalte. Der Petent fordert ferner, dass die Interessen der Bürgerinnen und Bürger bei der Vergabe von Senderechten stärker berücksichtigt werden, räumt jedoch gleichzeitig ein, dass die Interessen der Rechteinhaber und die Finanzierung der Rundfunkanstalten geschützt werden müssen.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=1760%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1760/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=1760%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-11-11T09:56:45-06:00",
+    "offline_since": null,
+    "tags": [
+      "Broadcasting",
+      "Petitioner",
+      "Service",
+      "Public",
+      "European",
+      "Content",
+      "Access",
+      "Calls",
+      "Cross-border",
+      "Restrictions"
+    ],
+    "last_checked": "2026-11-11T09:56:45-06:00"
+  },
+  "1756-2026": {
+    "slug": "1756-2026",
+    "first_seen": "2026-11-11T09:56:45-06:00",
+    "signatures_history": [],
+    "title": "Petition 1756/2026: extending the lifespan of digital devices circulating in the EU",
+    "started_by": "Leopoldo Camba Méndez (Spanish)",
+    "category": "Consumer Rights",
+    "country": "Spain",
+    "description_full": "<p>The petitioner welcomes EU initiatives aimed at extending product lifespans, promoting repair and reducing electronic waste, but raises concerns about the impact of software and digital services on the effective lifespan of digital devices. The petitioner argues that devices with fully functional hardware may become obsolete prematurely due to discontinued operating system support, application incompatibility and changes to digital services, particularly subscription-based services. Therefore, the petitioner calls on the EU institutions to consider the concept of the “effective lifespan” of digital devices and to assess whether the combined impact of software and service providers’ support policies is adequately addressed by EU legislation on ecodesign, repair, the circular economy and consumer protection.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1756%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1756/2026</a></p>",
+    "summary": "The petitioner welcomes EU initiatives aimed at extending product lifespans, promoting repair and reducing electronic waste, but raises concerns about the impact of software and digital services on th…",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:1756-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1756%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-11-11T09:58:19",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 1756/2026: zur Verlängerung der Lebensdauer digitaler Geräte in der EU",
+        "summary": "Der Petent begrüßt die EU-Initiativen zur Verlängerung der Produktlebensdauer, zur Förderung von Reparaturen und zur Verringerung von Elektronikschrott, äußert jedoch Bedenken hinsichtlich der Auswirk…",
+        "description_full": "<p>Der Petent begrüßt die EU-Initiativen zur Verlängerung der Produktlebensdauer, zur Förderung von Reparaturen und zur Verringerung von Elektronikschrott, äußert jedoch Bedenken hinsichtlich der Auswirkungen von Software und digitalen Diensten auf die tatsächliche Lebensdauer digitaler Geräte. Er führt aus, dass Geräte mit voll funktionsfähiger Hardware aufgrund der eingestellten Unterstützung für das Betriebssystem, der Inkompatibilität von Anwendungen und Änderungen bei digitalen Diensten – insbesondere bei abonnementbasierten Diensten – vorzeitig veraltet sein könnten. Daher fordert der Petent die EU-Organe auf, das Konzept der „tatsächlichen Lebensdauer“ digitaler Geräte zu prüfen und zu bewerten, ob die Gesamtauswirkungen der Supportpolitik von Software- und Dienstleistungsanbietern in den EU-Rechtsvorschriften über Ökodesign, Reparatur, Kreislaufwirtschaft und Verbraucherschutz angemessen berücksichtigt werden.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=1756%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1756/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=1756%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-11-11T09:56:45-06:00",
+    "offline_since": null,
+    "tags": [
+      "Digital",
+      "Petitioner",
+      "Services",
+      "Devices",
+      "Extending",
+      "Lifespan",
+      "Software",
+      "Impact",
+      "Repair",
+      "Initiatives"
+    ],
+    "last_checked": "2026-11-11T09:56:45-06:00"
   }
 }
