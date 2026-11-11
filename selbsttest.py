@@ -2635,6 +2635,40 @@ pruefe("Quellvergleich: der Melder kennt den Zweig",
 pruefe("Quellvergleich: bundestag meldet sein Quelldatum",
        "quell_startdatum" in inspect.getsource(bundestag), True)
 
+# ---------------------------------------------------------------------------
+# eko: Quelldatum über die GELISTETEN Slugs (11.11.2026)
+# ⚠️⚠️ Der Kern ist die zweite Prüfung. Bei bundestag trägt die Listenseite das
+# Datum, bei eko NICHT — dort heißt „kein Datum" = „die Quelle hat keins", hier
+# = „wir haben es nicht gelesen". Ein aus Lücken gerechnetes Maximum wäre eine
+# Untergrenze und würde die Warnung genau dann abstufen, wenn sie recht hat.
+# ---------------------------------------------------------------------------
+_eko_store = {
+    "neu": {"start_date": "2026-10-05"},
+    "alt": {"start_date": "2024-06-24"},
+    "karte": {"title": "nur aus der Kampagnenkarte"},   # kein start_date
+    "weg": {"start_date": "2026-11-09"},                # nicht mehr gelistet
+}
+pruefe("eko-Quelldatum: jüngstes der gelisteten Slugs",
+       _eko._quell_startdatum(_eko_store, ["neu", "alt"]), "2026-10-05")
+pruefe("eko-Quelldatum: EIN Slug ohne Datum → keine Auskunft",
+       _eko._quell_startdatum(_eko_store, ["neu", "alt", "karte"]), None)
+pruefe("eko-Quelldatum: gelisteter Slug fehlt im Store → keine Auskunft",
+       _eko._quell_startdatum(_eko_store, ["neu", "unbekannt"]), None)
+# Gegenprobe zur Blickrichtung: der Bestand ist NICHT das Angebot. Ein Satz mit
+# jüngerem Datum, den die Quelle nicht mehr listet, darf nicht mitzählen —
+# sonst behauptete die Auskunft ein Angebot, das es nicht gibt.
+pruefe("eko-Quelldatum: nicht gelistete Sätze zählen nicht mit",
+       [_eko._quell_startdatum(_eko_store, ["neu", "alt"]),
+        _eko._quell_startdatum(_eko_store, ["weg"])],
+       ["2026-10-05", "2026-11-09"])
+pruefe("eko-Quelldatum: leere Liste → keine Auskunft",
+       _eko._quell_startdatum(_eko_store, []), None)
+# Und beide Zweige müssen es auch MELDEN — eine Funktion, die niemand aufruft,
+# ist die Fehlerart aus dem Melder-Leck vom 6.10.2026.
+pruefe("eko-Quelldatum: beide Zweige melden es",
+       [inspect.getsource(_eko.run).count("lauf_meta_setzen("),
+        inspect.getsource(_eko.run_en).count("lauf_meta_setzen(")], [1, 1])
+
 pruefe("Startdatum: wemove-Zweige gelten als monatsgenau",
        [core.startdatum_monatsgenau(k)
         for k in ("wemove", "wemove_en", "wemove_pl", "wemove_es")],

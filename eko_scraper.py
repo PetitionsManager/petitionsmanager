@@ -485,6 +485,37 @@ def scrape_petition(fetcher: core.Fetcher, slug: str,
     return "online", rec
 
 
+def _quell_startdatum(store: dict, gelistet) -> str | None:
+    """Jüngstes `start_date` über die Slugs, die die Quelle GERADE listet.
+
+    Für `core.lauf_meta_setzen(quell_startdatum=…)`: damit unterscheidet der
+    Altersmelder die beiden Fälle, die sein Warntext bisher nur nebeneinander
+    nennen konnte („Feld wird nicht gelesen ODER die Quelle hat nichts Neues").
+    Begründung und Wirkung in `petitions_core._bestandspruefung`.
+
+    Maßgeblich ist die LISTE, nicht der Bestand: Sätze, die die Quelle nicht
+    mehr zeigt, sagen nichts darüber, was sie heute anbietet. Das Datum selbst
+    kommt aus dem Store, weil es nur auf der Detailseite steht.
+
+    ⚠️⚠️ Hier muss STRENGER gerechnet werden als bei bundestag, und zwar weil
+    die Listenseite das Datum nicht trägt: dort heißt „in der Liste kein Datum"
+    = „die Quelle hat keins", hier = „wir haben es nicht gelesen" — zwei
+    verschiedene Eigenschaften. Fehlt also bei EINEM gelisteten Slug das Datum,
+    gibt es gar keine Auskunft (None) und der Melder bleibt bei seiner Warnung.
+    Ein aus Lücken gerechnetes Maximum wäre eine UNTERGRENZE; weil der Melder
+    bei `quell_startdatum <= juengstes` auf einen Hinweis abstuft, würde es
+    genau die Lage stillstellen, für die er da ist — neue Kampagne gelistet,
+    Datum nicht gelesen. Lieber einmal zu viel warnen als einmal zu wenig.
+    """
+    daten = []
+    for slug in gelistet:
+        sd = (store.get(slug) or {}).get("start_date")
+        if not sd:
+            return None
+        daten.append(str(sd)[:10])
+    return max(daten) if daten else None
+
+
 # ----------------------------------------------------------------------------
 # Ablauf eines Laufs
 # ----------------------------------------------------------------------------
@@ -612,6 +643,18 @@ def run(args) -> None:
     # „verworfen“ und nicht „unbrauchbar“: es sind echte Petitionen, nur in der
     # falschen Sprache — geprüft und aussortiert (s. BILANZ_TOEPFE).
     core.entdeckt_klassifizieren(verworfen=verworfen_slugs)
+
+    # Wie im englischen Zweig, aber nur über die Kampagnen, die zum DEUTSCHEN
+    # Angebot zählen: die fremdsprachigen sind geprüft und aussortiert
+    # (verworfen_slugs) bzw. stehen im per-skip-Register — für sie gibt es per
+    # Bauart kein Datum, und sie dürfen die Auskunft nicht verhindern.
+    # ⚠️ Bleibt davon ein gelisteter Slug ohne Datum übrig (Kampagnenkarte,
+    # weil die Detailseite gesperrt war), schweigt die Auskunft und die
+    # Warnung bleibt stehen — so ist _quell_startdatum gebaut.
+    quell_start = _quell_startdatum(
+        store, set(discovered) - verworfen_slugs - set(per_skip))
+    if quell_start:
+        core.lauf_meta_setzen(quell_startdatum=quell_start)
 
     # Einmal je Lauf, VOR dem Abschluss-Save — sonst fehlte der Befund im _meta
     # und damit im Dashboard.
@@ -771,6 +814,17 @@ def run_en(args) -> None:
     if aus_karte:
         log(f"  {aus_karte} Satz/Sätze nur aus der Kampagnenkarte "
             f"(Detailseite blockiert, ohne campaign_id).")
+
+    # Jüngstes Startdatum, das die QUELLE anbietet (s. _quell_startdatum).
+    # Anlass (11.11.2026): die Kachel warnte „Startdatum rückt nicht nach, das
+    # jüngste ist 36 Tage alt (2026-10-05)". An der GANZEN Quelle gemessen —
+    # 29 Kampagnen auf vier Listenseiten, 29 von 29 Detailseiten lesbar und
+    # datiert, jüngstes dort ebenfalls 2026-10-05 — war die Warnung sachlich
+    # RICHTIG: Ekō veröffentlicht nichts Neueres. Sie gehört also eingeordnet,
+    # nicht stummgeschaltet; die Schwellen bleiben unberührt.
+    quell_start = _quell_startdatum(store, karten)
+    if quell_start:
+        core.lauf_meta_setzen(quell_startdatum=quell_start)
 
     # Einmal je Lauf, VOR dem Abschluss-Save — sonst fehlte der Befund im
     # _meta und damit im Dashboard. ⚠️⚠️ Ohne diesen Aufruf blieb die
