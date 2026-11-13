@@ -198,22 +198,46 @@ def _parse_card(card) -> tuple[str, dict] | None:
 #   · in parse_detail, falls doch einmal eine Detailseite antwortet. Diese
 #     Hälfte ruht auf n=1 — mehr war nicht zu holen, und das ist eine Aussage
 #     über die Migration, keine Nachlässigkeit.
+#     ➡️ ÜBERHOLT, siehe 13.11.2026 unten: n ist jetzt 40.
 #
 # ⚠️ Antwortet actions.eko.org/a/<slug> wieder verlässlich mit 200 (siehe
 # „BEOBACHTEN" im Kopf), gehört diese Liste an echten Seiten nachgemessen.
 #
-# ⚠️⚠️ 13.11.2026: GENAU DIESER FALL IST EINGETRETEN — die Zahlen oben sind
-# überholt. 31 von 31 frisch abgerufenen Detailseiten antworteten mit HTTP 200
-# (87–105 kB, Next.js-Template); kein 429, kein Checkpoint. Die Sperre, die den
-# Sonderfall begründet hat, ist weg.
-# ⬜ Die Liste ist damit FÄLLIG zum Nachmessen, aber NICHT nachgemessen — der
-# Auftrag an diesem Tag war ein einzelnes gemeldetes Feld (`keywords`), und der
-# Reparaturumfang gehört an den Schaden gebunden, nicht an die Gelegenheit.
-# Was der Nebenbefund trägt: auf allen 31 Seiten standen dieselben 21
-# Meta-Namen, und gemeldet wurde davon nur `keywords` — die übrigen 20 sind
-# also bereits gedeckt. Offen ist damit vor allem, ob der Champaign-Block
-# unten (9 Namen, n=1 vom 30.8.) überhaupt noch einer echten Seite entspricht:
-# in dieser Messung kam KEINE Legacy-Seite mehr vor.
+# ✅ 13.11.2026: NACHGEMESSEN. Die Zahlen oben sind überholt — die Sperre ist
+# weg (42 von 42 Abrufen HTTP 200, kein 429, kein Checkpoint), und damit ist
+# die Bedingung dieses Absatzes erfüllt. Gemessen an 20 de- + 20 en-
+# Detailseiten (Slugs aus den Stores) plus beiden Kampagnenübersichten:
+#
+#   Gruppe                     de-Detail   en-Detail   Übersicht
+#   description/og:*           20/20       20/20       2/2
+#   title                      17/20       20/20       0/2
+#   next-size-adjust            0/20        0/20       2/2   (nur Liste)
+#   og:url                     20/20       20/20       0/2
+#   csrf-param, liquid_layout,
+#   optimization_tags           3/20        0/20       0/2   (Champaign)
+#   keywords                    0/20        0/20       0/2
+#
+# ⚠️⚠️ **Der Champaign-Block ist NICHT tot** — das war meine Hypothese am
+# selben Tag, und sie ist widerlegt: 3 von 20 deutschen Detailseiten laufen
+# weiter über das alte Template. Im en-Zweig sind es 0 von 20; wer nur dort
+# misst, hält den Block für überflüssig und löscht ihn. ➡️ Er bleibt.
+# ⚠️ `og:url` steht unten im Champaign-Block, kommt aber auf ALLEN
+# Detailseiten beider Templates vor — Einordnung ungenau, Wirkung richtig.
+#
+# ⚠️⚠️ **11 der 23 Einträge sind WIRKUNGSLOS**, nämlich `viewport`,
+# `og:site_name`, `csrf-token`, `fb:app_id` und die sieben `twitter:*`: sie
+# werden von `core.ist_seitentechnik()` schon vor dem Vergleich gefiltert und
+# erreichen `felder_melden()` nie. Das ist kein Fehler, sondern Alterung —
+# diese Liste stammt vom 30.8.2026, der globale Technikfilter kam am 17.9.
+# **Sie bleiben trotzdem stehen:** der Technikfilter ist global und bewusst
+# eng gehalten; würde er je verengt (z. B. `twitter:` raus, weil eine andere
+# Plattform dort Inhalt führt), wären diese sieben sonst schlagartig wieder
+# Meldungen. Ein Eintrag hier kostet nichts und ist die plattformeigene
+# Entscheidung — siehe den Absatz über ist_seitentechnik in petitions_core.
+#
+# ✅ Gegenrichtung mitgemessen (das eigentliche Abnahmekriterium): auf den
+# 42 Seiten stehen 24 (de) bzw. 20 (en) verschiedene Meta-Namen, und davon
+# wären **0** zu melden. Die Liste ist also vollständig, nicht nur plausibel.
 BEKANNTE_FELDER = {
     # Kampagnenübersicht (eko.org/de/campaigns), zwei Varianten geprüft
     "description", "next-size-adjust", "og:description", "og:image",
@@ -392,7 +416,8 @@ def parse_detail(html: str, url: str, sprache: str = "de") -> dict | None:
     Thermometer-JSON) und action.eko.org (neu, Next.js – ältere Kampagnen
     werden dorthin umgeleitet; Daten in __NEXT_DATA__.props.pageProps)."""
     # Zweite Ernte-Stelle, siehe BEKANNTE_FELDER: greift nur, wenn eine
-    # Detailseite überhaupt noch antwortet (1 von 18 am 30.8.2026).
+    # Detailseite überhaupt noch antwortet (1 von 18 am 30.8.2026;
+    # 40 von 40 am 13.11.2026 — die Sperre ist weg).
     core.felder_aus_meta(BeautifulSoup(html, "html.parser"))
     m_next = NEXT_DATA_RE.search(html)
     if m_next:
