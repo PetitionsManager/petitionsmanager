@@ -201,6 +201,19 @@ def _parse_card(card) -> tuple[str, dict] | None:
 #
 # ⚠️ Antwortet actions.eko.org/a/<slug> wieder verlässlich mit 200 (siehe
 # „BEOBACHTEN" im Kopf), gehört diese Liste an echten Seiten nachgemessen.
+#
+# ⚠️⚠️ 13.11.2026: GENAU DIESER FALL IST EINGETRETEN — die Zahlen oben sind
+# überholt. 31 von 31 frisch abgerufenen Detailseiten antworteten mit HTTP 200
+# (87–105 kB, Next.js-Template); kein 429, kein Checkpoint. Die Sperre, die den
+# Sonderfall begründet hat, ist weg.
+# ⬜ Die Liste ist damit FÄLLIG zum Nachmessen, aber NICHT nachgemessen — der
+# Auftrag an diesem Tag war ein einzelnes gemeldetes Feld (`keywords`), und der
+# Reparaturumfang gehört an den Schaden gebunden, nicht an die Gelegenheit.
+# Was der Nebenbefund trägt: auf allen 31 Seiten standen dieselben 21
+# Meta-Namen, und gemeldet wurde davon nur `keywords` — die übrigen 20 sind
+# also bereits gedeckt. Offen ist damit vor allem, ob der Champaign-Block
+# unten (9 Namen, n=1 vom 30.8.) überhaupt noch einer echten Seite entspricht:
+# in dieser Messung kam KEINE Legacy-Seite mehr vor.
 BEKANNTE_FELDER = {
     # Kampagnenübersicht (eko.org/de/campaigns), zwei Varianten geprüft
     "description", "next-size-adjust", "og:description", "og:image",
@@ -217,6 +230,29 @@ BEKANNTE_FELDER = {
     # stoppen Sie das Bienensterben!"). Der Melder hatte recht, dass es INHALT
     # ist — deshalb gehört es NICHT in ist_seitentechnik(), sondern hierher.
     "title",
+    # 13.11.2026 VERWORFEN: `keywords` (gemeldet 1/30 bei eko_en).
+    # An 31 frisch abgerufenen Detailseiten gemessen (alle HTTP 200,
+    # 87–105 kB, <title> = Petitionstitel): `keywords` steht dort auf
+    # **0 von 31**. Abgedeckt waren alle 28 Sätze aus eko_en_petitions.json
+    # plus die 19 Karten von eko.org/en/campaigns, Seite 1 und 2.
+    # ⚠️ Eine „0" ist nur dann ein Befund, wenn dieselbe Suche anderswo eine
+    # „1" liefert — Positivkontrolle: auf https://eko.org/en (251 kB) trifft
+    # sie, Wert „ekō, eko, eco, eko movement". Also Markenname in vier
+    # Schreibweisen, auf jeder Trägerseite derselbe String, ohne jeden
+    # Kampagnenbezug: SEO des Marketing-Templates, kein Datenfeld.
+    # ⚠️⚠️ Wie es überhaupt in die Ernte kommt: actions.eko.org liefert bei
+    # einem UNBEKANNTEN Slug nicht 404, sondern die eko.org-Startseite aus
+    # (reproduziert mit dem Kunst-Slug `/a/_meta`, 251 kB statt ~95 kB) — und
+    # genau die trägt `keywords`. Die 1/30 ist deshalb sehr wahrscheinlich ein
+    # zurückgezogener Slug, nicht eine Kampagnenseite. ⬜ Welcher, ist NICHT
+    # gemessen; der Mechanismus ist reproduziert, die Zuordnung zu dem einen
+    # Slug bleibt eine begründete Hypothese.
+    # ⚠️ NICHT in ist_seitentechnik(): auf foodwatch_nl trägt dasselbe Feld
+    # echten Inhalt („Zalm, kweekzalm, ASC, GNN"). Ein globaler Eintrag würde
+    # dort still verwerfen. Die foodwatch-Begründung ist deshalb auch NICHT
+    # übertragbar — dort war es Inhalt mit schlechter Deckung, hier ist es
+    # Markenname. Gleiche Entscheidung, anderer Grund.
+    "keywords",
 }
 
 
