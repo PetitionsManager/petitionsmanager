@@ -31,14 +31,22 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-11-13T03:12:48-06:00",
-    "petition_count": 1957,
-    "available": 1895,
-    "new_petitions_last_run": [],
+    "generated_at": "2026-11-13T06:41:50-06:00",
+    "petition_count": 1964,
+    "available": 1902,
+    "new_petitions_last_run": [
+      "1820-2026",
+      "1817-2026",
+      "1819-2026",
+      "1810-2026",
+      "1803-2026",
+      "1812-2026",
+      "1823-2026"
+    ],
     "bilanz": {
-      "stand": "2026-11-13T03:12:48-06:00",
-      "gefunden": 1895,
-      "im_bestand": 1895,
+      "stand": "2026-11-13T06:41:50-06:00",
+      "gefunden": 1902,
+      "im_bestand": 1902,
       "unbrauchbar": 0,
       "verworfen": 0,
       "dublette": 0,
@@ -46,14 +54,14 @@
       "zurueckgestellt": 0,
       "offen": 0,
       "offene_beispiele": [],
-      "bestand_gesamt": 1957,
+      "bestand_gesamt": 1964,
       "bestand_ausserhalb": 62
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-11-12T17:03:37-06:00",
-        "gesamt": 1957,
-        "online": 1957,
+        "zeit": "2026-11-13T06:41:50-06:00",
+        "gesamt": 1964,
+        "online": 1964,
         "offline": 0,
         "ohne_titel": 0,
         "platzhalter": 0,
@@ -65,47 +73,13 @@
         "mit_code_im_text": 0,
         "mit_ballast_in_kurzfassung": 0,
         "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-11-12T22:10:44-06:00",
-        "gesamt": 1957,
-        "online": 1957,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 999,
-        "juengstes_start": "2026-07-23",
-        "mit_code_im_text": 0,
-        "mit_ballast_in_kurzfassung": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-11-13T03:12:48-06:00",
-        "gesamt": 1957,
-        "online": 1957,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 999,
-        "juengstes_start": "2026-07-23",
-        "mit_code_im_text": 0,
-        "mit_ballast_in_kurzfassung": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
+        "neu": 7
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-11-13T03:12:48-06:00",
-      "gesamt": 1957,
-      "online": 1957,
+      "zeit": "2026-11-13T06:41:50-06:00",
+      "gesamt": 1964,
+      "online": 1964,
       "offline": 0,
       "ohne_titel": 0,
       "platzhalter": 0,
@@ -117,19 +91,19 @@
       "mit_code_im_text": 0,
       "mit_ballast_in_kurzfassung": 0
     },
-    "verlauf_felder_ab": "2026-11-12T17:03:37-06:00",
+    "verlauf_felder_ab": "2026-11-13T06:41:50-06:00",
     "befunde": [
       {
         "stufe": "hinweis",
         "thema": "Startdatum ist ein Verfahrensdatum",
-        "text": "Tagesgenaues Datum bei 999 von 1957 Sätzen; es ist das Zulässigkeitsdatum aus der Mitteilung an die Mitglieder, nicht der Start der Petition. Das jüngste ist 113 Tage alt (2026-07-23) — bauartbedingt, weil das Dokument erst mit der Kommissionsantwort entsteht. Der Altersmelder ist hier deshalb ausge",
-        "zeit": "2026-11-13T03:12:48-06:00",
+        "text": "Tagesgenaues Datum bei 999 von 1964 Sätzen; es ist das Zulässigkeitsdatum aus der Mitteilung an die Mitglieder, nicht der Start der Petition. Das jüngste ist 113 Tage alt (2026-07-23) — bauartbedingt, weil das Dokument erst mit der Kommissionsantwort entsteht. Der Altersmelder ist hier deshalb ausge",
+        "zeit": "2026-11-13T06:41:50-06:00",
         "thema_en": "Start date is a procedural date",
-        "text_en": "Day-exact date on 999 of 1957 records; it is the date of admissibility from the Notice to Members, not the start of the petition. The newest is 113 days old (2026-07-23) — by design, as the document is only drawn up once the Commission has replied. The ageing check is therefore skipped here."
+        "text_en": "Day-exact date on 999 of 1964 records; it is the date of admissibility from the Notice to Members, not the start of the petition. The newest is 113 days old (2026-07-23) — by design, as the document is only drawn up once the Commission has replied. The ageing check is therefore skipped here."
       }
     ],
     "health_warning": null,
-    "online_count": 1957
+    "online_count": 1964
   },
   "0474-2026": {
     "slug": "0474-2026",
@@ -118897,7 +118871,7 @@
     "signatures_history": [],
     "title": "Petition 1738/2026: transparency of future CO₂ removal liabilities",
     "started_by": "Jan Kechel (German)",
-    "category": "Economic and Monetary Affairs",
+    "category": "Institutions",
     "country": "Germany",
     "description_full": "<p>The petitioner raises concerns about the alleged lack of transparency regarding future CO₂ removal liabilities arising from authorised fossil fuel emissions under the European Climate Law. According to the petitioner, the legally binding objective of climate neutrality by 2050 implies that fossil CO₂ emissions authorised today must eventually be removed from the atmosphere, creating future financial obligations for public authorities. The petitioner claims that these liabilities are neither recorded nor quantified or disclosed in Member States&#39; public accounts or in the EU&#39;s financial management. Referring to cases in Germany, the petitioner argues that no authority assumes responsibility for recording these obligations, resulting in a structural transparency gap. The petitioner further claims that these unrecorded liabilities shift financial burdens onto future generations. The petitioner calls on the European Parliament to request that the Commission examine whether such liabilities should be identified, quantified and disclosed at EU and Member State level, clarify which authorities are responsible for their recording, and encourage the European Court of Auditors to examine the issue in the context of EU financial management.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1738%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1738/2026</a></p>",
     "summary": "The petitioner raises concerns about the alleged lack of transparency regarding future CO₂ removal liabilities arising from authorised fossil fuel emissions under the European Climate Law. According t…",
@@ -118925,7 +118899,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-11-10T06:27:27-06:00",
+    "last_seen": "2026-11-13T06:39:41-06:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -118939,7 +118913,7 @@
       "Climate",
       "Removal"
     ],
-    "last_checked": "2026-11-10T06:27:27-06:00"
+    "last_checked": "2026-11-13T06:39:41-06:00"
   },
   "1709-2026": {
     "slug": "1709-2026",
@@ -118947,7 +118921,7 @@
     "signatures_history": [],
     "title": "Petition 1709/2026: alleged breach of Directive (EU) 2018/2001 on the promotion of the use of energy from renewable sources in Cyprus",
     "started_by": "Rene Schellhorn (German)",
-    "category": "Environment",
+    "category": "Internal Market",
     "country": "Cyprus",
     "description_full": "<p>The petitioner alleges that the Electricity Authority of Cyprus (EAC) cancelled 4,101 kWh of accumulated solarenergy credits from his netmetering account in March 2026 without remuneration, written notice or an itemised calculation. The petitioner argues that the Cyprus netmetering framework – CERA Decision 28/2020 and Law 107(I)/2022, which transposes the Renewable Energy Directive (RED II) – permits such cancellations, but this practice conflicts with Article 21(2)(d) of Directive 2018/2001, which requires selfconsumers to receive remuneration reflecting the market value of the electricity they feed into the grid. The petitioner argues that a stated threeyear clearing rule was applied to an account of only 15 months old, indicating a systemwide simultaneous clearing, allegedly contrary to the authority’s own policy. The petitioner refers to the opinion of “Your Europe” on his case that allegedly concluded that the unconditional deletion of energy credits is incompatible with the RED II provisions and raised concerns about legitimate expectations and legal certainty. The petitioner notes that the clearing occurred before the 2026 amendment to the Renewable Energy Law entered into force and before a ministerial decree on surpluselectricity management was issued, leaving the regulatory basis undefined. The petitioner requests an assessment of the compatibility of the Cypriot netmetering rules with RED II.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1709%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1709/2026</a></p>",
     "summary": "The petitioner alleges that the Electricity Authority of Cyprus (EAC) cancelled 4,101 kWh of accumulated solarenergy credits from his netmetering account in March 2026 without remuneration, written no…",
@@ -118975,7 +118949,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-11-10T06:27:27-06:00",
+    "last_seen": "2026-11-13T06:39:41-06:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -118989,7 +118963,7 @@
       "Renewable",
       "Clearing"
     ],
-    "last_checked": "2026-11-10T06:27:27-06:00"
+    "last_checked": "2026-11-13T06:39:41-06:00"
   },
   "1731-2026": {
     "slug": "1731-2026",
@@ -119025,7 +118999,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-11-10T06:27:27-06:00",
+    "last_seen": "2026-11-13T06:39:41-06:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -119039,7 +119013,7 @@
       "Greek",
       "Expiration"
     ],
-    "last_checked": "2026-11-10T06:27:27-06:00"
+    "last_checked": "2026-11-13T06:39:41-06:00"
   },
   "1761-2026": {
     "slug": "1761-2026",
@@ -119290,5 +119264,355 @@
       "Standards"
     ],
     "last_checked": "2026-11-11T14:21:45-06:00"
+  },
+  "1820-2026": {
+    "slug": "1820-2026",
+    "first_seen": "2026-11-13T06:39:41-06:00",
+    "signatures_history": [],
+    "title": "Petition 1820/2026: designating Maritsa-East in Bulgaria as an EU-wide critical grid stability asset",
+    "started_by": "Svetoslav Proynov (Bulgarian), on behalf of Civic Initiative Protection of Maritsa-East, signed by 8,000 others,",
+    "category": "Energy",
+    "country": "All EU countries",
+    "description_full": "<p>The petitioner states that the European Commission, the European Parliament, and ENTSO-E must formally designate the Maritsa-East energy facility as Critical Grid Stability Asset to prevent blackouts in Southeast Europe. Being the easternmost synchronous node of the European grid, the complex provides essential system services like rotational inertia, reactive power, and dispatchable generation. In order to safeguard this strategic infrastructure, the petitioner calls for a temporary derogation from EU ETS carbon costs until a permanent compensation scheme is set up, as well as integrating the site into a future East-West electricity corridor under the TEN-E framework.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1820%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1820/2026</a></p>",
+    "summary": "The petitioner states that the European Commission, the European Parliament, and ENTSO-E must formally designate the Maritsa-East energy facility as Critical Grid Stability Asset to prevent blackouts …",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:1820-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1820%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-11-13T06:41:08",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 1820/2026: zur Einstufung von Maritsa-Ost in Bulgarien als EU-weite kritische Anlage für die Netzstabilität",
+        "summary": "Der Petent führt aus, dass die Kommission, das Europäische Parlament und ENTSO-E die Energieanlage Maritsa-East offiziell als kritische Anlage für die Netzstabilität ausweisen müssten, um Stromausfäll…",
+        "description_full": "<p>Der Petent führt aus, dass die Kommission, das Europäische Parlament und ENTSO-E die Energieanlage Maritsa-East offiziell als kritische Anlage für die Netzstabilität ausweisen müssten, um Stromausfälle in Südosteuropa zu verhindern. Als östlichster synchroner Knotenpunkt des europäischen Stromnetzes erbringe der Komplex wesentliche Netzdienste wie Rotationsträgheit, Blindleistung und regelbare Erzeugung. Um diese strategische Infrastruktur zu schützen, fordert der Petent eine vorübergehende Befreiung von den CO2-Kosten im Rahmen des EU-EHS bis zur Einrichtung eines dauerhaften Ausgleichssystems sowie die Einbindung des Standorts in einen künftigen Ost-West-Stromkorridor im Rahmen von TEN-E.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=1820%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1820/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=1820%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-11-13T06:39:41-06:00",
+    "offline_since": null,
+    "tags": [
+      "European",
+      "Grid",
+      "Maritsa-East",
+      "Petitioner",
+      "Stability",
+      "Critical",
+      "Asset",
+      "Commission",
+      "Parliament",
+      "Blackouts"
+    ],
+    "last_checked": "2026-11-13T06:39:41-06:00"
+  },
+  "1817-2026": {
+    "slug": "1817-2026",
+    "first_seen": "2026-11-13T06:39:41-06:00",
+    "signatures_history": [],
+    "title": "Petition 1817/2026: alleged breach of EU legislation relating to access to safe drinking water in Selishten Dol, Bulgaria",
+    "started_by": "Vladislav Vergilov (Bulgarian)",
+    "category": "Fundamental Rights",
+    "country": "Bulgaria",
+    "description_full": "<p>The petitioner asserts that Bulgaria has consistently failed to tackle a long-standing drinking water crisis in the village of Selishten Dol, directly breaching EU Directive 2020/2184, which provides for citizens’ right to access safe drinking water. Due to a system of asbestos-cement pipes which has been left decaying by the local water operator, residents must carry out maintenance themselves the best they can, leading to severe water shortages. The community is routinely left without water for weeks, while during summer water supplies are rationed to only a few hours once a week. Despite national media attention and a series of unfulfilled govern project announcements, Bulgarian officials have not provided any clear timeline or a permanent fix. As a consequence, the petitioner calls on the European Parliament to request a European Commission investigation into the alleged breaches and demand that the Bulgarian authorities draft a reconstruction plan.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1817%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1817/2026</a></p>",
+    "summary": "The petitioner asserts that Bulgaria has consistently failed to tackle a long-standing drinking water crisis in the village of Selishten Dol, directly breaching EU Directive 2020/2184, which provides …",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:1817-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1817%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-11-13T06:41:15",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 1817/2026: zu einem mutmaßlichen Verstoß gegen die EU-Rechtsvorschriften über den Zugang zu sauberem Trinkwasser in Selishten Dol (Bulgarien)",
+        "summary": "Der Petent macht geltend, dass Bulgarien es konsequent versäumt habe, eine seit langem bestehende Trinkwasserkrise im Dorf Selishten Dol zu beheben, was einen direkten Verstoß gegen die Richtlinie (EU…",
+        "description_full": "<p>Der Petent macht geltend, dass Bulgarien es konsequent versäumt habe, eine seit langem bestehende Trinkwasserkrise im Dorf Selishten Dol zu beheben, was einen direkten Verstoß gegen die Richtlinie (EU) 2020/2184 darstelle, in der das Recht der Bürgerinnen und Bürger auf Zugang zu sauberem Trinkwasser verankert sei. Da das örtliche Wasserversorgungsunternehmen ein System aus Asbestzementrohren verrotten lassen habe, müssten die Anwohner die Instandhaltung so gut es geht selbst übernehmen, was zu schwerwiegender Wasserknappheit führe. Die Gemeinde sei regelmäßig wochenlang ohne Wasser, während die Wasserversorgung im Sommer auf nur wenige Stunden pro Woche rationiert werde. Trotz der Aufmerksamkeit der nationalen Medien und etlicher Ankündigungen der Regierung, die nicht umgesetzt worden seien, hätten die bulgarischen Behörden weder einen klaren Zeitplan noch eine dauerhafte Lösung vorgelegt. Daher fordert der Petent das Europäische Parlament auf, die Kommission um eine Untersuchung der mutmaßlichen Verstöße zu ersuchen und von den bulgarischen Behörden die Ausarbeitung eines Sanierungsplans zu verlangen.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=1817%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1817/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=1817%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-11-13T06:39:41-06:00",
+    "offline_since": null,
+    "tags": [
+      "Water",
+      "Drinking",
+      "Petitioner",
+      "Selishten",
+      "Bulgaria",
+      "Long-standing",
+      "Consistently",
+      "Breaching",
+      "Bulgarian",
+      "Directive"
+    ],
+    "last_checked": "2026-11-13T06:39:41-06:00"
+  },
+  "1819-2026": {
+    "slug": "1819-2026",
+    "first_seen": "2026-11-13T06:39:41-06:00",
+    "signatures_history": [],
+    "title": "Petition 1819/2026: the alleged breach of EU legislation relating to access to safe drinking water in Can Fornaca, Spain",
+    "started_by": "Steven Lavigne (French)",
+    "category": "Health",
+    "country": "Spain",
+    "description_full": "<p>The petitioner requests the European Parliament to intervene regarding the systematic violation of the right to access clean water and sanitation and the non-compliance with European regulations on the quality of water intended for human consumption in the residential area of Can Fornaca (municipality of Riudarenes, Catalonia, Spain), directly affecting a population of approximately 800 residents. The petitioner states that the water supply for the residential area depends on local wells. The petitioner highlights that official laboratory analyses have confirmed for two years that the water contains uranium and fluoride concentrations exceeding the maximum levels permitted for human health. The petitioner points out that, especially during the summer months, residents experience total water supply cuts lasting entire days. The petitioner argues that the temporary system of water tankers deployed by the City Council of Riudarenes is insufficient to meet the basic needs of the approximately 800 inhabitants. The petitioner notes that the local distribution network suffers from structural leaks, causing water loss before reaching households and exacerbating scarcity. The petitioner claims that, according to the City Council, the Catalan Water Agency (ACA) has rejected a project to connect the area to a safe external supply network, citing exclusively economic reasons. The petitioner considers that this rejection prioritises budgetary spending over the right to health and a dignified life for EU citizens. The petitioner argues that the situation constitutes an infringement of Directive (EU) 2020/2184 on the quality of water intended for human consumption, which requires water to be wholesome and clean and obliges Member States to guarantee access for vulnerable groups.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1819%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1819/2026</a></p>",
+    "summary": "The petitioner requests the European Parliament to intervene regarding the systematic violation of the right to access clean water and sanitation and the non-compliance with European regulations on th…",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:1819-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1819%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-11-13T06:41:21",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 1819/2026: zu einem mutmaßlichen Verstoß gegen die EU-Rechtsvorschriften über den Zugang zu sauberem Trinkwasser in Can Fornaca (Spanien)",
+        "summary": "Der Petent fordert das Europäische Parlament auf, in Bezug auf die systematische Verletzung des Rechts auf Zugang zu sauberem Wasser und Sanitärversorgung sowie die mangelnde Einhaltung der Unionsvors…",
+        "description_full": "<p>Der Petent fordert das Europäische Parlament auf, in Bezug auf die systematische Verletzung des Rechts auf Zugang zu sauberem Wasser und Sanitärversorgung sowie die mangelnde Einhaltung der Unionsvorschriften über die Qualität von Wasser für den menschlichen Gebrauch im Wohngebiet Can Fornaca in der Gemeinde Riudarenes, Katalonien (Spanien) tätig zu werden, von denen rund 800 Einwohnerinnen und Einwohner unmittelbar betroffen seien. Die Wasserversorgung des Wohngebiets hänge von örtlichen Brunnen ab. Seit zwei Jahren werde von amtlichen Laboranalysen bestätigt, dass das Wasser Uran- und Fluoridkonzentrationen über den für die menschliche Gesundheit zulässigen Höchstwerten enthalte. Der Petent weist darauf hin, dass die Bewohner insbesondere in den Sommermonaten von ganztägigen Unterbrechungen der Wasserversorgung betroffen seien. Er macht geltend, dass das von der Gemeinde Riudarenes eingerichtete provisorische Wassertanksystem nicht ausreiche, um die Grundbedürfnisse der rund 800 Einwohnerinnen und Einwohner zu decken. Durch strukturelle Leckagen im lokalen Verteilungsnetz komme es zu Wasserverlusten, bevor das Wasser die Haushalte erreiche, wodurch die Wasserknappheit verschlimmert werde. Der Petent macht geltend, dass die katalanische Wasserbehörde (ACA) nach Angaben der Gemeinde ein Projekt zur Anbindung des Gebiets an ein sicheres externes Versorgungsnetz aus rein wirtschaftlichen Gründen abgelehnt habe. Er ist der Ansicht, dass durch diese Ablehnung den Haushaltsausgaben Vorrang vor dem Recht auf Gesundheit und ein Leben in Würde für die EU-Bürgerinnen und -Bürger eingeräumt werde. Der Petent macht geltend, dass diese Situation einen Verstoß gegen die Richtlinie (EU) 2020/2184 über die Qualität von Wasser für den menschlichen Gebrauch darstelle, nach der Wasser genusstauglich und sauber sein müsse und die Mitgliedstaaten verpflichtet seien, den Zugang für benachteiligte Gruppen zu gewährleisten.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=1819%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1819/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=1819%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-11-13T06:39:41-06:00",
+    "offline_since": null,
+    "tags": [
+      "Water",
+      "Petitioner",
+      "European",
+      "Access",
+      "Supply",
+      "Clean",
+      "Human",
+      "Right",
+      "Area",
+      "Non-compliance"
+    ],
+    "last_checked": "2026-11-13T06:39:41-06:00"
+  },
+  "1810-2026": {
+    "slug": "1810-2026",
+    "first_seen": "2026-11-13T06:39:41-06:00",
+    "signatures_history": [],
+    "title": "Petition 1810/2026: the treatment of substitute judges and prosecutors in Spain, following the Curia Obadal ruling (C-418/24)",
+    "started_by": "María Carolina Hita Fernández (Spanish)",
+    "category": "Justice",
+    "country": "Spain",
+    "description_full": "<p>The petitioner requests the European Parliament to urge Spain to comply with the Obadal judgment and to stabilise substitute judges and prosecutors. The petitioner claims to have worked for more than 24 years in the Spanish Administration of Justice and the Ministry of Justice, always serving as a substitute based on merits assessed by the administration. The petitioner points out that the administration now intends not to comply with the Obadal judgment of the Court of Justice of the European Union (case C‑418/24, 14 April 2024). The petitioner highlights that a competitive examination process has been called with which they cannot compete against younger candidates who devote their time to studying rather than working. The petitioner claims to be facing dismissal alongside other colleagues with 24 years of service based on personal merit, capacity and supporting reports.. The petitioner argues that this would also prevent their real stabilisation as substitute judges and prosecutors. According to the petitioner, the lack of compliance with the Obadal judgment undermines the principle of equal treatment for long‑serving staff.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1810%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1810/2026</a></p>",
+    "summary": "The petitioner requests the European Parliament to urge Spain to comply with the Obadal judgment and to stabilise substitute judges and prosecutors. The petitioner claims to have worked for more than …",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:1810-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1810%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-11-13T06:41:27",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 1810/2026: zur Behandlung von Ergänzungsrichtern und -staatsanwälten in Spanien im Anschluss an das Urteil in der Rechtssache Curia Obadal (C-418/24)",
+        "summary": "Die Petentin appelliert an das Europäische Parlament, Spanien nachdrücklich aufzufordern, dem Urteil in der Rechtssache Obadal nachzukommen und Ergänzungsrichter und -staatsanwälte fest anzustellen. S…",
+        "description_full": "<p>Die Petentin appelliert an das Europäische Parlament, Spanien nachdrücklich aufzufordern, dem Urteil in der Rechtssache Obadal nachzukommen und Ergänzungsrichter und -staatsanwälte fest anzustellen. Sie führt aus, dass sie mehr als 24 Jahre in der spanischen Justizverwaltung und im Justizministerium gearbeitet habe, und zwar stets in ergänzender Funktion auf der Grundlage von Verdiensten, die von der Verwaltung bewertet worden seien. Die Verwaltung beabsichtige nun, dem Urteil des Gerichtshofs der Europäischen Union in der Rechtssache Obadal (Rechtssache C-418/24, 14. April 2024) nicht nachzukommen. Die Petentin weist darauf hin, dass ein Auswahlverfahren ausgeschrieben worden sei, bei dem sie nicht mit jüngeren Bewerbern konkurrieren könne, die ihre Zeit eher dem Studium als der Arbeit widmen würden. Sie macht geltend, dass ihr, ebenso wie anderen Kolleginnen und Kollegen, nach 24 Dienstjahren auf der Grundlage persönlicher Leistungen, Kompetenzen und entsprechender Beurteilungen die Kündigung drohe. Sie macht ferner geltend, dass dadurch auch ihre feste Anstellung als Ergänzungsrichter und -staatsanwälte verhindert würde. Die Petentin ist der Ansicht, dass durch die Missachtung des Obadal-Urteils der Grundsatz der Gleichbehandlung von langjährigem Personal untergraben wird.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=1810%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1810/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=1810%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-11-13T06:39:41-06:00",
+    "offline_since": null,
+    "tags": [
+      "Petitioner",
+      "Substitute",
+      "Obadal",
+      "Prosecutors",
+      "Judgment",
+      "Judges",
+      "Administration",
+      "European",
+      "Justice",
+      "Claims"
+    ],
+    "last_checked": "2026-11-13T06:39:41-06:00"
+  },
+  "1803-2026": {
+    "slug": "1803-2026",
+    "first_seen": "2026-11-13T06:39:41-06:00",
+    "signatures_history": [],
+    "title": "Petition 1803/2026: alleged abuse of temporary contracts in the Spanish judicial system and breach of Directive 1999/70/EC on fixed-term work",
+    "started_by": "Eduardo Carmelo Rodriguez-Cano Gimenez-La Chica (Spanish), on behalf of “Plataforma libre change.org”,",
+    "category": "Employment",
+    "country": "Spain",
+    "description_full": "<p>The petitioner denounces that for more than two decades the Spanish Administration of Justice has allegedly made abusive, discriminatory and arbitrary use of temporary judicial and prosecutorial staff.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1803%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1803/2026</a></p>",
+    "summary": "The petitioner denounces that for more than two decades the Spanish Administration of Justice has allegedly made abusive, discriminatory and arbitrary use of temporary judicial and prosecutorial staff…",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:1803-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1803%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-11-13T06:41:34",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 1803/2026: zum mutmaßlichen Missbrauch befristeter Arbeitsverträge im spanischen Justizsystem und zum Verstoß gegen die Richtlinie 1999/70/EG über befristete Arbeitsverträge",
+        "summary": "Der Petent prangert an, dass die spanische Justizverwaltung seit mehr als zwei Jahrzehnten mutmaßlich missbräuchlich, diskriminierend und willkürlich auf befristet beschäftigte Justiz- und Staatsanwal…",
+        "description_full": "<p>Der Petent prangert an, dass die spanische Justizverwaltung seit mehr als zwei Jahrzehnten mutmaßlich missbräuchlich, diskriminierend und willkürlich auf befristet beschäftigte Justiz- und Staatsanwaltschaftsbedienstete zurückgreife.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=1803%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1803/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=1803%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-11-13T06:39:41-06:00",
+    "offline_since": null,
+    "tags": [
+      "Temporary",
+      "Judicial",
+      "Spanish",
+      "Administration",
+      "Discriminatory",
+      "Prosecutorial",
+      "Petitioner",
+      "Allegedly",
+      "Arbitrary",
+      "Denounces"
+    ],
+    "last_checked": "2026-11-13T06:39:41-06:00"
+  },
+  "1812-2026": {
+    "slug": "1812-2026",
+    "first_seen": "2026-11-13T06:39:41-06:00",
+    "signatures_history": [],
+    "title": "Petition 1812/2026: the terms of bank loans in Swiss francs in Greece and alleged breach of Directive 93/13/EEC on unfair terms in consumer contracts",
+    "started_by": "K. S. (Greek)",
+    "category": "Fraud and Corruption",
+    "country": "Greece",
+    "description_full": "<p>The petitioner alleges systemic breaches of Directive 93/13/EEC on unfair terms in consumer contracts in connection with a Swiss franc-denominated mortgage loan granted in Greece in 2007. According to the petitioner, the bank failed to provide adequate information on exchange rate risks and exploited borrowers’ limited financial knowledge, leading them to assume substantial financial obligations without understanding the consequences. The petitioner further argues that, during the Greek financial crisis, banks benefited from public recapitalisation while borrowers faced severe financial difficulties without corresponding relief. The petitioner also criticises recent national legislation for allegedly failing to ensure effective consumer protection and imposing conditions requiring borrowers to waive future legal claims under EU law. The petitioner therefore calls on the European Parliament to examine the alleged violations, link the petition to an existing case and urge the European Commission to initiate infringement proceedings against Greece for non-compliance with Directive 93/13/EEC.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1812%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1812/2026</a></p>",
+    "summary": "The petitioner alleges systemic breaches of Directive 93/13/EEC on unfair terms in consumer contracts in connection with a Swiss franc-denominated mortgage loan granted in Greece in 2007. According to…",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:1812-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1812%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-11-13T06:41:40",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 1812/2026: zu den Bedingungen von Bankdarlehen in Schweizer Franken in Griechenland und einem mutmaßlichen Verstoß gegen die Richtlinie 93/13/EWG über missbräuchliche Klauseln in Verbraucherverträgen",
+        "summary": "Der Petent macht systematische Verstöße gegen die Richtlinie 93/13/EWG über missbräuchliche Klauseln in Verbraucherverträgen im Zusammenhang mit einem auf Schweizer Franken lautenden Hypothekendarlehe…",
+        "description_full": "<p>Der Petent macht systematische Verstöße gegen die Richtlinie 93/13/EWG über missbräuchliche Klauseln in Verbraucherverträgen im Zusammenhang mit einem auf Schweizer Franken lautenden Hypothekendarlehen geltend, das im Jahr 2007 in Griechenland gewährt worden sei. Dem Petenten zufolge habe die Bank keine angemessenen Informationen über Wechselkursrisiken bereitgestellt und die begrenzten Finanzkenntnisse der Kreditnehmer ausgenutzt, was dazu geführt habe, dass diese erhebliche finanzielle Verpflichtungen eingegangen seien, ohne die Folgen zu verstehen. Er führt ferner aus, dass die Banken während der griechischen Finanzkrise von einer staatlichen Rekapitalisierung profitiert hätten, während die Kreditnehmer mit schweren finanziellen Schwierigkeiten zu kämpfen gehabt hätten, ohne dass ihnen eine entsprechende Entlastung gewährt worden sei. Der Petent beanstandet auch die jüngsten nationalen Rechtsvorschriften, da sie keinen wirksamen Verbraucherschutz gewährleisten würden und den Kreditnehmern Bedingungen auferlegen würden, wonach sie auf künftige Rechtsansprüche nach dem Unionsrecht verzichten müssten. Er fordert das Europäische Parlament daher auf, die mutmaßlichen Verstöße zu prüfen, die Petition mit einem bestehenden Verfahren zu verknüpfen und die Kommission nachdrücklich aufzufordern, ein Vertragsverletzungsverfahren gegen Griechenland wegen Nichteinhaltung der Richtlinie 93/13/EWG einzuleiten.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=1812%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1812/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=1812%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-11-13T06:39:41-06:00",
+    "offline_since": null,
+    "tags": [
+      "Petitioner",
+      "Directive",
+      "Financial",
+      "Consumer",
+      "Greece",
+      "Terms",
+      "Borrowers",
+      "Contracts",
+      "Unfair",
+      "Swiss"
+    ],
+    "last_checked": "2026-11-13T06:39:41-06:00"
+  },
+  "1823-2026": {
+    "slug": "1823-2026",
+    "first_seen": "2026-11-13T06:39:41-06:00",
+    "signatures_history": [],
+    "title": "Petition 1823/2026: alleged breach of Directive (EU) 2018/958 on a proportionality test before adoption of new regulation of professions in Romania",
+    "started_by": "Cristian Louis Miu (Romanian)",
+    "category": "Internal Market - Recognition of qualifications",
+    "country": "Romania",
+    "description_full": "<p>The petitioner alleges that Romania breached Directive (EU) 2018/958 on proportionality tests before new regulation of professions by adopting Emergency Ordinance No 66/2024, which introduced additional conditions for practising as a biologist, biochemist or chemist in the healthcare system, and transferred authorising powers to the professional body ‘Order of Biochemists, Biologists and Chemists in the Romanian Healthcare System’ (OBBCSSR). The petitioner claims that these restrictions were adopted without a prior proportionality assessment, consideration of their cumulative effects or stakeholder consultation. The petitioner also questions the objectivity and independence of the process, alleging that OBBCSSR drafted the requirements despite having a direct economic interest and subsequently introduced fees for authorisation and related procedures. The petitioner states that the new requirements blocked the renewal of their authorisation as an independent practitioner. Referring to a previous Commission infringement procedure concerning Romania’s implementation of the Directive, the petitioner requests that the petition be sent to the Commission and that a new procedure under Article 258 TFEU be opened concerning Romania’s alleged failure to apply the Directive in legislative practice.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1823%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1823/2026</a></p>",
+    "summary": "The petitioner alleges that Romania breached Directive (EU) 2018/958 on proportionality tests before new regulation of professions by adopting Emergency Ordinance No 66/2024, which introduced addition…",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:1823-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1823%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-11-13T06:41:46",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 1823/2026: zu einem mutmaßlichen Verstoß gegen die Richtlinie (EU) 2018/958 über eine Verhältnismäßigkeitsprüfung vor Erlass neuer Berufsreglementierungen in Rumänien",
+        "summary": "Der Petent macht geltend, dass Rumänien durch den Erlass der Dringlichkeitsverordnung Nr. 66/2024 gegen die Richtlinie (EU) 2018/958 über eine Verhältnismäßigkeitsprüfung vor neuen Berufsreglementieru…",
+        "description_full": "<p>Der Petent macht geltend, dass Rumänien durch den Erlass der Dringlichkeitsverordnung Nr. 66/2024 gegen die Richtlinie (EU) 2018/958 über eine Verhältnismäßigkeitsprüfung vor neuen Berufsreglementierungen verstoßen habe, da mit dieser Verordnung zusätzliche Bedingungen für die Ausübung des Berufs als Biologe, Biochemiker oder Chemiker im Gesundheitssystem eingeführt und die Genehmigungsbefugnisse auf die berufsständische Organisation „Kammer der Biochemiker, Biologen und Chemiker im rumänischen Gesundheitswesen“ (OBBCSSR) übertragen worden seien. Diese Beschränkungen seien ohne vorherige Verhältnismäßigkeitsprüfung, Berücksichtigung ihrer kumulativen Auswirkungen oder Konsultation der Interessenträger erlassen worden. Der Petent stellt auch die Objektivität und Unabhängigkeit des Verfahrens in Frage und macht geltend, dass die OBBCSSR die Anforderungen ausgearbeitet habe, obwohl sie ein unmittelbares wirtschaftliches Interesse habe, und anschließend Gebühren für die Genehmigung und die damit verbundenen Verfahren eingeführt habe. Durch die neuen Anforderungen sei die Verlängerung seiner Zulassung als selbstständige Fachkraft verhindert worden. Unter Bezugnahme auf ein früheres Vertragsverletzungsverfahren der Kommission betreffend die Umsetzung der Richtlinie durch Rumänien ersucht der Petent darum, die Petition an die Kommission weiterzuleiten und ein neues Verfahren gemäß Artikel 258 AEUV einzuleiten, da Rumänien die Richtlinie in der Gesetzgebungspraxis mutmaßlich nicht angewandt habe.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=1823%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1823/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=1823%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-11-13T06:39:41-06:00",
+    "offline_since": null,
+    "tags": [
+      "Petitioner",
+      "Directive",
+      "Romania",
+      "Proportionality",
+      "Professions",
+      "Introduced",
+      "Regulation",
+      "Before",
+      "Authorisation",
+      "Requirements"
+    ],
+    "last_checked": "2026-11-13T06:39:41-06:00"
   }
 }
