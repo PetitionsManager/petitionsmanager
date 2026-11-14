@@ -31,14 +31,14 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-11-13T15:32:01-06:00",
+    "generated_at": "2026-11-13T20:01:42-06:00",
     "petition_count": 2793,
-    "available": 1719,
+    "available": 1712,
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-11-13T15:32:00-06:00",
-      "gefunden": 1719,
-      "im_bestand": 1719,
+      "stand": "2026-11-13T20:01:41-06:00",
+      "gefunden": 1712,
+      "im_bestand": 1712,
       "unbrauchbar": 0,
       "verworfen": 0,
       "dublette": 0,
@@ -47,11 +47,11 @@
       "offen": 0,
       "offene_beispiele": [],
       "bestand_gesamt": 2793,
-      "bestand_ausserhalb": 1074
+      "bestand_ausserhalb": 1081
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-11-13T15:32:00-06:00",
+        "zeit": "2026-11-13T20:01:41-06:00",
         "gesamt": 2793,
         "online": 2793,
         "offline": 0,
@@ -69,7 +69,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-11-13T15:32:00-06:00",
+      "zeit": "2026-11-13T20:01:41-06:00",
       "gesamt": 2793,
       "online": 2793,
       "offline": 0,
@@ -83,7 +83,7 @@
       "mit_code_im_text": 0,
       "mit_ballast_in_kurzfassung": 0
     },
-    "verlauf_felder_ab": "2026-11-13T15:32:00-06:00",
+    "verlauf_felder_ab": "2026-11-13T20:01:41-06:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 2793
@@ -17715,6 +17715,10 @@
       {
         "checked_at": "2026-11-10T18:14:20-06:00",
         "count": 1940
+      },
+      {
+        "checked_at": "2026-11-13T19:53:54-06:00",
+        "count": 1942
       }
     ],
     "title": "Unsere Häuser in Hamburg Mitte sollen abgerissen werden !  Bewahren Sie uns vor dem Rausschmiss !",
@@ -17726,12 +17730,12 @@
     "started_by": "Heiko Mohr",
     "category": "Bauen",
     "category_url": "https://www.openpetition.de/petitionen?category=6#petitionen",
-    "signatures": 1940,
+    "signatures": 1942,
     "start_date": "2026-01-01",
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:unsere-haeuser-in-hamburg-mitte-sollen-abgerissen-werden-bewahren-sie-uns-vor-dem-rausschmiss-2",
     "i18n_state": {
@@ -21546,9 +21550,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=58#petitionen",
     "signatures": 1499,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:ban-on-the-public-display-of-torture-symbols-savak-and-monitoring-of-vigilante-groups-in-germany",
     "i18n_state": {
@@ -25192,9 +25196,9 @@
     "goal": 1500,
     "start_date": "2025-11-01",
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:wir-fordern-die-einfuehrung-des-vollstaendig-integrierten-bachelor-of-laws-ll-b-auch-in-bayern",
     "i18n_state": {
@@ -28007,9 +28011,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
     "signatures": 1007,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:vollsperrung-alter-wiesenweg-stoppen-lebensnotwendige-erschliessung-der-maeckeritzwiesen-sichern",
     "i18n_state": {
@@ -30153,9 +30157,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
     "signatures": 929,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:turmschule-leimen-schulhoefe-verbinden-gemeinsam-rennen-spielen-lachen",
     "i18n_state": {
@@ -33623,9 +33627,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=55#petitionen",
     "signatures": 682,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:sicherheit-in-toenisheide-mitte",
     "i18n_state": {
@@ -36137,6 +36141,10 @@
       {
         "checked_at": "2026-11-10T18:14:20-06:00",
         "count": 656
+      },
+      {
+        "checked_at": "2026-11-13T19:53:54-06:00",
+        "count": 657
       }
     ],
     "title": "Unterstütze Unsere Petition Gegen die Abschiebung einer Familie.",
@@ -36148,12 +36156,12 @@
     "started_by": "Michael Ziegler",
     "category": "Migration",
     "category_url": "https://www.openpetition.de/petitionen?category=56#petitionen",
-    "signatures": 656,
+    "signatures": 657,
     "goal": 200,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:unterstuetze-unsere-petition-gegen-die-abschiebung-einer-familie",
     "i18n_state": {
@@ -37150,9 +37158,9 @@
     "signatures": 533,
     "start_date": "2025-08-01",
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:barrierefreiheit-fuer-deutschland",
     "i18n_state": {
@@ -39474,9 +39482,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
     "signatures": 516,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-den-erhalt-der-grundschule-siemerode",
     "i18n_state": {
@@ -40704,9 +40712,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=20#petitionen",
     "signatures": 549,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:hitzeschutz-fuer-krankenhaeuser-gesundheit-braucht-kuehle-raeume",
     "i18n_state": {
@@ -42914,9 +42922,9 @@
     "signatures": 452,
     "goal": 500,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:rueckabwicklung-aenderung-parkraumnutzung-wohngebiet-am-daimlerwerk-duesseldorf",
     "i18n_state": {
@@ -46998,9 +47006,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=55#petitionen",
     "signatures": 312,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:gewalttat-in-billstedt-aufklaeren-fuer-sicherheit-respekt-und-verantwortung",
     "i18n_state": {
@@ -50828,9 +50836,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
     "signatures": 263,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:kostenlose-fahrradmitnahme-bei-db-und-oertl-verkehrsbetrieben-max-10-euro-mon",
@@ -51498,6 +51506,10 @@
       {
         "checked_at": "2026-11-10T18:14:20-06:00",
         "count": 462
+      },
+      {
+        "checked_at": "2026-11-13T19:53:54-06:00",
+        "count": 463
       }
     ],
     "title": "Für eine verantwortungsvolle Freiflächen-Photovoltaikanlage am Rippertfeld (Thomashof/ Stupferich)",
@@ -51509,11 +51521,11 @@
     "started_by": "Jan Steinbach",
     "category": "Umwelt",
     "category_url": "https://www.openpetition.de/petitionen?category=46#petitionen",
-    "signatures": 462,
+    "signatures": 463,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-eine-verantwortungsvolle-freiflaechen-photovoltaikanlage-am-rippertfeld-thomashof-stupferich",
     "i18n_state": {
@@ -57476,9 +57488,9 @@
     "signatures": 168,
     "goal": 500,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "start_date": "2026-05-01",
     "lang": "de",
     "campaign_id": "openpetition:waldfreibad-walbeck-erhalten-aber-keine-event-arena-auf-kosten-der-anwohner",
@@ -58277,9 +58289,9 @@
     "signatures": 182,
     "goal": 1000,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:windkraft-heidelberg-erst-die-wissenschaftlichen-fakten-dann-die-entscheidung",
     "i18n_state": {
@@ -60410,9 +60422,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=6#petitionen",
     "signatures": 141,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-eine-verantwortungsvolle-und-bezahlbare-wohnraumschaffung-am-platanenweg-in-landshut",
     "i18n_state": {
@@ -66550,9 +66562,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=20#petitionen",
     "signatures": 119,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:keine-kuerzungen-beim-infektionsschutz-in-der-haeuslichen-pflege",
     "i18n_state": {
@@ -68487,9 +68499,9 @@
     "signatures": 91,
     "start_date": "2026-02-01",
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:schluss-mit-der-parteienherrschaft-fuer-eine-echte-buergerdemokratie",
     "i18n_state": {
@@ -72379,6 +72391,10 @@
       {
         "checked_at": "2026-11-10T18:14:20-06:00",
         "count": 234
+      },
+      {
+        "checked_at": "2026-11-13T19:53:54-06:00",
+        "count": 597
       }
     ],
     "title": "Für die Einführung von bis zu drei Stipendien für Zahnmedizin im Landkreis Schmalkalden-Meiningen",
@@ -72390,12 +72406,12 @@
     "started_by": "Dr Katja Müller",
     "category": "Gesundheit",
     "category_url": "https://www.openpetition.de/petitionen?category=20#petitionen",
-    "signatures": 234,
+    "signatures": 597,
     "goal": 100,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-die-einfuehrung-von-bis-zu-drei-stipendien-fuer-zahnmedizin-im-landkreis-schmalkalden-meiningen",
     "i18n_state": {
@@ -74102,9 +74118,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
     "signatures": 58,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:verkehrsberuhigter-bereich-fuer-den-auweg-in-mintraching-mehr-sicherheit-fuer-anwohner-und-kinder",
     "i18n_state": {
@@ -76617,9 +76633,9 @@
     "signatures": 48,
     "goal": 100,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:online-unterricht-nachmittags-am-rbg",
     "i18n_state": {
@@ -78840,6 +78856,10 @@
       {
         "checked_at": "2026-11-10T18:14:20-06:00",
         "count": 39
+      },
+      {
+        "checked_at": "2026-11-13T19:53:54-06:00",
+        "count": 40
       }
     ],
     "title": "Mehr Sicherheit in 82541 Münsing! STOPPT RASEREI auf unseren Straßen",
@@ -78851,11 +78871,11 @@
     "started_by": "Rebekka Neubauer",
     "category": "Verwaltung",
     "category_url": "https://www.openpetition.de/petitionen?category=12#petitionen",
-    "signatures": 39,
+    "signatures": 40,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:mehr-sicherheit-in-82541-muensing-stoppt-raserei-auf-unseren-strassen",
     "i18n_state": {
@@ -80165,6 +80185,10 @@
       {
         "checked_at": "2026-11-10T18:14:20-06:00",
         "count": 41
+      },
+      {
+        "checked_at": "2026-11-13T19:53:54-06:00",
+        "count": 43
       }
     ],
     "title": "Dienstradleasing - Bundeseinheitliche Regelung für Bundesdienst schaffen",
@@ -80176,11 +80200,11 @@
     "started_by": "Gunnar Steinseifer",
     "category": "Verkehr",
     "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
-    "signatures": 41,
+    "signatures": 43,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:dienstradleasing-bundeseinheitliche-regelung-fuer-bundesdienst-schaffen",
     "i18n_state": {
@@ -81529,9 +81553,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=25#petitionen",
     "signatures": 37,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:ganzjaehriges-hissen-der-deutschlandflagge-an-oeffentlichen-gebaeuden",
     "i18n_state": {
@@ -82010,9 +82034,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=55#petitionen",
     "signatures": 31,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:massnahmen-vandalismus",
     "i18n_state": {
@@ -82342,9 +82366,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=1#petitionen",
     "signatures": 33,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:weltweiter-menschenhandel-300-000-verschleppte-opfer-in-zwangsarbeit-deutschland-muss-handeln",
     "i18n_state": {
@@ -87054,9 +87078,9 @@
     "signatures": 25,
     "goal": 100,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:oeffentl-recht-medien-muessen-breiter-ueber-sportarten-berichten-fussball-hat-kein-monopol-2",
     "i18n_state": {
@@ -87939,9 +87963,9 @@
     "signatures": 20,
     "goal": 200,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "start_date": "2026-05-01",
     "lang": "de",
     "campaign_id": "openpetition:steuerbefreiung-fuer-kfz-anhaenger-bis-850-kg",
@@ -88344,6 +88368,10 @@
       {
         "checked_at": "2026-11-10T18:14:20-06:00",
         "count": 21
+      },
+      {
+        "checked_at": "2026-11-13T19:53:54-06:00",
+        "count": 22
       }
     ],
     "title": "Hygieneartikel für Frauen",
@@ -88355,11 +88383,11 @@
     "started_by": "Christian Jörn",
     "category": "Familie",
     "category_url": "https://www.openpetition.de/petitionen?category=14#petitionen",
-    "signatures": 21,
+    "signatures": 22,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:hygieneartikel-fuer-frauen",
     "i18n_state": {
@@ -90234,9 +90262,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
     "signatures": 34,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:verkehrsberuhigung-der-wallaustrasse-zwischen-hausnummer-84-und-101",
     "i18n_state": {
@@ -98257,6 +98285,10 @@
       {
         "checked_at": "2026-11-10T18:14:20-06:00",
         "count": 642
+      },
+      {
+        "checked_at": "2026-11-13T19:53:54-06:00",
+        "count": 643
       }
     ],
     "title": "Hitzefrei in Tirol",
@@ -98268,11 +98300,11 @@
     "started_by": "Lena Lechner",
     "category": "Bildung",
     "category_url": "https://www.openpetition.de/at/petitionen?category=7#petitionen",
-    "signatures": 642,
+    "signatures": 643,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:hitzefrei-in-tirol",
     "i18n_state": {
@@ -104109,9 +104141,9 @@
     "category_url": "https://www.openpetition.de/at/petitionen?category=46#petitionen",
     "signatures": 137,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-die-versprochene-begruente-autofreie-zone-in-der-nekulagasse-keine-strasse-durch-unser-wohngebi",
     "i18n_state": {
@@ -105755,9 +105787,9 @@
     "category_url": "https://www.openpetition.de/at/petitionen?category=58#petitionen",
     "signatures": 43,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-eine-gesunde-und-kindgerechte-volksschule-entfernung-des-snackautomaten",
     "i18n_state": {
@@ -106247,6 +106279,10 @@
       {
         "checked_at": "2026-11-10T18:14:20-06:00",
         "count": 52
+      },
+      {
+        "checked_at": "2026-11-13T19:53:54-06:00",
+        "count": 57
       }
     ],
     "title": "Kein Hund sollte auf die Rennstrecke müssen.",
@@ -106258,12 +106294,12 @@
     "started_by": "René Grünig",
     "category": "Tierschutz",
     "category_url": "https://www.openpetition.de/petitionen?category=45#petitionen",
-    "signatures": 52,
+    "signatures": 57,
     "goal": 500,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:kein-hund-sollte-auf-die-rennstrecke-muessen",
     "i18n_state": {
@@ -106578,9 +106614,9 @@
     "category_url": "https://www.openpetition.de/at/petitionen?category=47#petitionen",
     "signatures": 31,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "start_date": "2026-05-01",
     "lang": "de",
     "campaign_id": "openpetition:sicherheit-vor-schnelligkeit-verkehrsberuhigung-in-der-matthias-corvinus-strasse-jetzt",
@@ -107524,9 +107560,9 @@
     "signatures": 27,
     "goal": 500,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:sicherung-von-arbeitsplaetzen-im-zeitalter-der-kuenstlichen-intelligenz",
@@ -107584,9 +107620,9 @@
     "signatures": 18,
     "goal": 500,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:besserer-schutz-fuer-working-holiday-backpacker-in-australien",
@@ -108830,6 +108866,10 @@
       {
         "checked_at": "2026-11-10T18:14:20-06:00",
         "count": 9
+      },
+      {
+        "checked_at": "2026-11-13T19:53:54-06:00",
+        "count": 10
       }
     ],
     "title": "United States of Europe 2030 - Den Demokratischen Gründungsprozess jetzt einleiten",
@@ -108841,12 +108881,12 @@
     "started_by": "Thomas Richard Fränkle",
     "category": "Sicherheit",
     "category_url": "https://www.openpetition.de/petitionen?category=55#petitionen",
-    "signatures": 9,
+    "signatures": 10,
     "goal": 500,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:united-states-of-europe-2030-den-demokratischen-gruendungsprozess-jetzt-einleiten",
     "i18n_state": {
@@ -109271,6 +109311,10 @@
       {
         "checked_at": "2026-11-10T18:14:20-06:00",
         "count": 855
+      },
+      {
+        "checked_at": "2026-11-13T19:53:54-06:00",
+        "count": 856
       }
     ],
     "title": "Erhalt des Schülerspezialverkehrs in Herkenrath und Moitzfeld",
@@ -109282,12 +109326,12 @@
     "started_by": "Eltern der betroffenen Kinder",
     "category": "Bildung",
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
-    "signatures": 855,
+    "signatures": 856,
     "goal": 750,
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:erhalt-des-schuelerspezialverkehrs-in-herkenrath-und-moitzfeld",
     "i18n_state": {
@@ -118040,6 +118084,10 @@
       {
         "checked_at": "2026-11-10T18:14:20-06:00",
         "count": 302
+      },
+      {
+        "checked_at": "2026-11-13T19:53:54-06:00",
+        "count": 303
       }
     ],
     "title": "Ausnahmsloses Abschussverbot für Nilgänse während der Brut- und Schonzeit in Trier und RLP!",
@@ -118050,14 +118098,14 @@
     "started_by": "Anja Hansen",
     "category": "Tierschutz",
     "category_url": "https://www.openpetition.de/petitionen?category=45#petitionen",
-    "signatures": 302,
+    "signatures": 303,
     "lang": "de",
     "campaign_id": "openpetition:ausnahmsloses-abschussverbot-fuer-nilgaense-waehrend-der-brut-und-schonzeit-in-trier-und-rlp",
     "i18n_state": {
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Während",
@@ -118071,7 +118119,7 @@
       "Aufzuchtzeit",
       "Tierschutzes"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "country": "DE",
     "start_date": "2026-07-01"
   },
@@ -118106,6 +118154,10 @@
       {
         "checked_at": "2026-11-10T18:14:20-06:00",
         "count": 524
+      },
+      {
+        "checked_at": "2026-11-13T19:53:54-06:00",
+        "count": 528
       }
     ],
     "title": "Katzenschutzverordnung Landkreis Landshut",
@@ -118116,14 +118168,14 @@
     "started_by": "Katzenschutzverordnung Landkreis Landshut",
     "category": "Tierschutz",
     "category_url": "https://www.openpetition.de/petitionen?category=45#petitionen",
-    "signatures": 524,
+    "signatures": 528,
     "lang": "de",
     "campaign_id": "openpetition:katzenschutzverordnung-landkreis-landshut",
     "i18n_state": {
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Landkreis",
@@ -118137,7 +118189,7 @@
       "Welt",
       "Industriegeländen"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "country": "DE",
     "start_date": "2026-08-01"
   },
@@ -118173,7 +118225,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Encanto",
@@ -118187,7 +118239,7 @@
       "Nachbarinnen",
       "Gemütlichen"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "country": "DE",
     "start_date": "2026-07-01"
   },
@@ -118224,7 +118276,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Summerty",
@@ -118238,7 +118290,7 @@
       "Unterzeichnerinnen",
       "Finanziellen"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "country": "DE",
     "start_date": "2026-07-01"
   },
@@ -118477,7 +118529,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Kinder",
@@ -118491,7 +118543,7 @@
       "Umsteigen",
       "Deutlich"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "country": "DE",
     "start_date": "2026-07-01"
   },
@@ -119120,6 +119172,10 @@
       {
         "checked_at": "2026-11-10T18:14:20-06:00",
         "count": 274
+      },
+      {
+        "checked_at": "2026-11-13T19:53:54-06:00",
+        "count": 275
       }
     ],
     "title": "Der Imbisswagen am Café Weichhardt gehört seit vielen Jahren zum Schützenfest in der Biberacher Inne",
@@ -119130,14 +119186,14 @@
     "started_by": "Café Weichhardt",
     "category": "Kultur",
     "category_url": "https://www.openpetition.de/petitionen?category=25#petitionen",
-    "signatures": 274,
+    "signatures": 275,
     "lang": "de",
     "campaign_id": "openpetition:der-imbisswagen-am-cafe-weichhardt-gehoert-seit-vielen-jahren-zum-schuetzenfest-in-der-biberacher-in",
     "i18n_state": {
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Imbisswagen",
@@ -119151,7 +119207,7 @@
       "Versorgt",
       "Essen"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "country": "DE",
     "start_date": "2026-07-01"
   },
@@ -119892,6 +119948,10 @@
       {
         "checked_at": "2026-11-10T18:14:20-06:00",
         "count": 153
+      },
+      {
+        "checked_at": "2026-11-13T19:53:54-06:00",
+        "count": 154
       }
     ],
     "title": "Petition zur Erweiterung der Mittagsbetreuung bis 14:00 Uhr mit warmem Mittagessen in Oberbergkirche",
@@ -119902,14 +119962,14 @@
     "started_by": "Piekart Joanna",
     "category": "Bildung",
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
-    "signatures": 153,
+    "signatures": 154,
     "lang": "de",
     "campaign_id": "openpetition:petition-zur-erweiterung-der-mittagsbetreuung-bis-14-00-uhr-mit-warmem-mittagessen-in-oberbergkirche",
     "i18n_state": {
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Kinder",
@@ -119923,7 +119983,7 @@
       "Verpflichtende",
       "Mindestens"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "country": "DE",
     "start_date": "2026-07-01"
   },
@@ -120398,7 +120458,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Kita",
@@ -120412,7 +120472,7 @@
       "Entscheidung",
       "Generationen"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "country": "DE",
     "start_date": "2026-07-01"
   },
@@ -121000,7 +121060,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Familien",
@@ -121014,7 +121074,7 @@
       "Träger",
       "Faire"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "country": "DE",
     "start_date": "2026-07-01"
   },
@@ -123014,7 +123074,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Abgeordnete",
@@ -123028,7 +123088,7 @@
       "Ärztliche",
       "Landtage"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "country": "DE",
     "start_date": "2026-07-01"
   },
@@ -123176,7 +123236,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Fußgängerzone",
@@ -123190,7 +123250,7 @@
       "Weniger",
       "Stadt"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "country": "DE",
     "start_date": "2026-07-01"
   },
@@ -123520,7 +123580,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Kinder",
@@ -123534,7 +123594,7 @@
       "Beziehung",
       "Wirksamer"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "country": "DE",
     "start_date": "2026-07-01"
   },
@@ -123702,7 +123762,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Schiedsrichter",
@@ -123716,7 +123776,7 @@
       "Fördergelder",
       "Spielbetrieb"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "country": "DE",
     "start_date": "2026-07-01"
   },
@@ -127080,7 +127140,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Kinder",
@@ -127094,7 +127154,7 @@
       "Transparenz",
       "Vergangenen"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "country": "AT",
     "start_date": "2026-07-01"
   },
@@ -132034,7 +132094,7 @@
     "signatures": 677,
     "start_date": "2026-08-25",
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Seite",
@@ -132048,7 +132108,7 @@
       "Verkehr",
       "Klare"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:kein-baumhaus-komplex-am-sonnenbachsee-ruhe-natur-und-idylle-erhalten",
     "i18n_state": {
@@ -134480,7 +134540,7 @@
     "goal": 5000,
     "start_date": "2026-08-23",
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Verantwortung",
@@ -134494,7 +134554,7 @@
       "Kill",
       "FAZ-Korrespondent"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:frieden-braucht-menschliche-groesse-ein-appell-an-die-faz-und-den-deutschen-presserat-zur-umkehr",
     "i18n_state": {
@@ -138261,7 +138321,7 @@
     "signatures": 179,
     "start_date": "2026-08-01",
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Frankfurt",
@@ -138275,7 +138335,7 @@
       "Ausreichend",
       "Bürgerinnen"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:volle-transparenz-zur-kunstinstallation-a-sky-full-of-hope-und-politische-konsequenzen-bei-der-sta",
     "i18n_state": {
@@ -139572,7 +139632,7 @@
     "signatures": 102,
     "start_date": "2026-08-26",
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Kinder",
@@ -139586,7 +139646,7 @@
       "Neuberg",
       "Altersübergreifende"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:unser-spielplatz-braucht-sein-klettergeruest-zurueck",
     "i18n_state": {
@@ -142426,7 +142486,7 @@
     "goal": 500,
     "start_date": "2026-09-15",
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Unmittelbar",
@@ -142440,7 +142500,7 @@
       "Großbatteriespeicher",
       "Transformatoren"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:grossbatteriespeicher-an-der-randersweide-stoppen-sicherheit-und-nachbarschutz-zuerst",
     "i18n_state": {
@@ -142565,7 +142625,7 @@
     "signatures": 44,
     "start_date": "2026-09-07",
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Elektronische",
@@ -142579,7 +142639,7 @@
       "Mindestabstand",
       "Dezibelgrenze"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-faire-regeln-bei-der-strassenmusik-in-heilbronn-lautstaerke-statt-technik-verbieten",
     "i18n_state": {
@@ -143048,9 +143108,9 @@
     "country": "DE",
     "signatures": 38,
     "goal": 30,
-    "start_date": "2026-08-13",
+    "start_date": "2026-08-01",
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Straße",
@@ -143064,7 +143124,7 @@
       "Baumaßnahmen",
       "Konsequente"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:endlich-tempo-30-in-der-kammerrathsfeldstrasse-umsetzen",
     "i18n_state": {
@@ -143208,7 +143268,7 @@
     "signatures": 35,
     "start_date": "2026-08-19",
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Magdalenenhäuser",
@@ -143222,7 +143282,7 @@
       "Westenendstraße",
       "Westendstraße"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:tempo-30-im-magdalenenhaeuser-weg-und-westend-strasse-bis-zu-gwab",
     "i18n_state": {
@@ -145794,7 +145854,7 @@
     "signatures": 14,
     "start_date": "2026-08-01",
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Personal",
@@ -145808,7 +145868,7 @@
       "Mitarbeiter",
       "Mäharbeiten"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:stoppt-den-personalabbau-beim-betriebshof",
     "i18n_state": {
@@ -145946,9 +146006,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=58#petitionen",
     "country": "DE",
     "signatures": 17,
-    "start_date": "2026-08-12",
+    "start_date": "2026-08-01",
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Walder",
@@ -145962,7 +146022,7 @@
       "Bleiben",
       "Kirche"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:solingen-wald-muss-erreichbar-bleiben-fuer-die-fussgaengerzone-aber-gegen-die-neue-verkehrsregelung",
     "i18n_state": {
@@ -146695,7 +146755,7 @@
     "signatures": 8,
     "start_date": "2026-09-02",
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Stadthalle",
@@ -146709,7 +146769,7 @@
       "Kulturverantwortlichen",
       "Kuschel-Party"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:rettet-den-offenbacher-freitagsfasching-zurueck-in-die-stadthalle-schluss-mit-der-kuschel-party-im-k",
     "i18n_state": {
@@ -147015,7 +147075,7 @@
     "signatures": 6,
     "start_date": "2026-08-17",
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Private",
@@ -147029,7 +147089,7 @@
       "Zuständigen",
       "Rechtliche"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:bostalsee-keine-nutzungsgebuehr-fuer-private-sups-erhoehung-auf-11-stoppen",
     "i18n_state": {
@@ -150762,6 +150822,10 @@
       {
         "checked_at": "2026-11-10T18:14:20-06:00",
         "count": 157
+      },
+      {
+        "checked_at": "2026-11-13T19:53:54-06:00",
+        "count": 158
       }
     ],
     "title": "„Grundschule Varrel: Eltern fordern Aufklärung und Veränderung!“",
@@ -150773,10 +150837,10 @@
     "category": "Soziales",
     "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
     "country": "DE",
-    "signatures": 157,
+    "signatures": 158,
     "start_date": "2026-09-18",
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Eltern",
@@ -150790,7 +150854,7 @@
       "Situation",
       "Varrel"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "goal": 620,
     "lang": "de",
     "campaign_id": "openpetition:grundschule-varrel-eltern-fordern-aufklaerung-und-veraenderung",
@@ -152232,7 +152296,7 @@
     "signatures": 43,
     "start_date": "2026-09-18",
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Behinderung",
@@ -152246,7 +152310,7 @@
       "Beschäftigt",
       "Bekommen"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00",
+    "last_checked": "2026-11-13T19:53:54-06:00",
     "lang": "de",
     "campaign_id": "openpetition:mindestlohn-jetzt-und-aussen-arbeitsplaetze-40-stunden-arbeit-moeglich-machen-2",
     "i18n_state": {
@@ -162778,7 +162842,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Häuslichen",
@@ -162792,7 +162856,7 @@
       "Einzelprävention",
       "Freiberufliche"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00"
+    "last_checked": "2026-11-13T19:53:54-06:00"
   },
   "weg-mit-dem-buerokratiemonster-mehr-zeit-fuer-oesterreichs-unternehmer-innen": {
     "slug": "weg-mit-dem-buerokratiemonster-mehr-zeit-fuer-oesterreichs-unternehmer-innen",
@@ -165601,7 +165665,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Häuslichen",
@@ -165615,7 +165679,7 @@
       "Einzelprävention",
       "Freiberufliche"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00"
+    "last_checked": "2026-11-13T19:53:54-06:00"
   },
   "sicherer-schuelertransport-fuer-unsere-kinder": {
     "slug": "sicherer-schuelertransport-fuer-unsere-kinder",
@@ -181182,18 +181246,22 @@
       {
         "checked_at": "2026-11-10T18:14:20-06:00",
         "count": 785
+      },
+      {
+        "checked_at": "2026-11-13T19:53:54-06:00",
+        "count": 1365
       }
     ],
     "title": "\"Nein\" zu einem Rechenzentrum auf dem ehemaligen Zeller-Gelände in Alzenau",
-    "summary": "Vorwort: Überrascht, von der kurzfristigen Information (im Main Echo vom 07/08.11.) hinsichlich einer Stadtratssitzung mit TOP \"Bauleitplanverfahren\" am 12.11.2026, hat sich am Sonntag 08.11. spontan eine Bürgerinitiative gegründet. Aufgrund der Dringlich- und Kurzfristigkeit bitten wir um Nachsicht, wenn die nachfolgenden Textpassagen in ihrer Reihenfolge und Formulierung noch \"Chancen zur Verbesserung'\" aufweisen. Das Nachfolgende ist jedoch gewisssenhaft recherchiert. Dies alles um Sie möglic",
-    "image_url": "https://www.openpetition.de/images/petition/nein-zu-einem-rechenzentrum-auf-dem-ehemaligen-zeller-gelaende-in-alzenau_1794234013_desktop.jpg",
+    "summary": "Vorwort: Überrascht, von der kurzfristigen Information (im Main Echo vom 07/08.11.) hinsichlich einer Stadtratssitzung mit TOP \"Bauleitplanverfahren\" am 12.11.2026, hat sich am Sonntag 08.11. spontan eine Bürgerinitiative gegründet. Wichtiger Hinweis zu dem Bild: das Bild ist KI generiert und nur eine exemplarische Visualisierung für dieses Gelände. Gerne würden wir ein bereits bestehendes Geländemodell an diese Stelle setzen, haben jedoch keinen Zugang zu diesem Modell. Bitte gehen Sie am 10.11",
+    "image_url": "https://www.openpetition.de/images/petition/nein-zu-einem-rechenzentrum-auf-dem-ehemaligen-zeller-gelaende-in-alzenau_1794471988_desktop.jpg",
     "url": "https://www.openpetition.de/petition/online/nein-zu-einem-rechenzentrum-auf-dem-ehemaligen-zeller-gelaende-in-alzenau",
-    "description_full": "<!--marker--><p><b>Vorwort</b>: Überrascht, von der kurzfristigen Information (im Main Echo vom 07/08.11.) hinsichlich einer Stadtratssitzung mit TOP \"Bauleitplanverfahren\" am 12.11.2026, hat sich am Sonntag 08.11. spontan eine Bürgerinitiative gegründet. Aufgrund der Dringlich- und Kurzfristigkeit bitten wir um Nachsicht, wenn die nachfolgenden Textpassagen in ihrer Reihenfolge und Formulierung noch \"Chancen zur Verbesserung'\" aufweisen. Das Nachfolgende ist jedoch gewisssenhaft recherchiert. Dies alles um Sie möglichst frühzeitig zu erreichen, bevor es zu spät ist.</p><p><b>Bitte gehen Sie am 10.11.2026 zur Bürgerversammlung und stellen Sie fragen. Bitte gehen Sie in die Stadtratssitzung am 12.11.2026 und zeigen Sie Präsenz.</b></p><p>Wir wollen verhindern, dass auf dem ehemaligen Gelände der Fa. Zeller ein Rechenzentrum (RZ) errichtet wird und dadurch Bürger, Tiere und Landschaft nachhaltig und intensiv in Mitleidenschaft gezogen werden.</p><ul><li>Es bestehen die <b>Industriegebiete Nord und Süd in Alzenau</b>. Es ist nicht nachvollziehbar, warum auf dem Gelände der Fa. Zeller, ein lärmendes Ungetüm errichtet werden soll, dass sich in keinster in die Landschaft einpasst und zu massiven Beeinträchtigungen der Wohn- und Lebensqualität führen wird.</li><li><b>Stromverbrauch</b>: ein RZ mit 80MW (das ist die bisher bekannte Größe bei Start; im Raum stehen 300 MW) verbraucht bei Vollast ca.1051 GWh/Jahr (das wäre der Stromverbrauch von ca. 250.000 deutschen 3 Personen Haushalten. Das Klimakonzept der Stadt Alzenau ist nicht mehr haltbar</li><li><b>Ressourcenhunger &amp; Klima:</b> Der gigantische Strom- und Wasserbedarf verschärft die regionalen Klimaziele</li><li><b>Fehlende Wertschöpfung vor Ort:</b> Die Anlagen verbrauchen enorm viel Fläche, schaffen nach der Bauphase aber kaum nennenswerte Arbeitsplätze</li><li><b>Städtebauliche Unverträglichkeit</b>: Die angedachten Maße wären aktuell 20m breit, 20m hoch und 60-70 lang. Die geplante Höhe des Rechenzentrums beträgt ca 20 Meter. Im Rahmen immissionsschutzrechtlicher Vorgaben könnten jedoch zusätzliche 6 bis 11 Meter hinzukommen, was zu einer Gesamtgebäudehöhe von bis zu 26 bis 31 Metern führen würde.</li><li><b>Standort und Nutzungsalternativen. </b>Einerseits bestehen bereits mit Alzenau Nord und Süd zwei Gewerbegebiete und andererseits Bedarf an Wohnbauflächen. Es ist, aufgrund der vorliegenden Informationen, nicht nachvollziehbar weshalb für dieses Gebiet z.B. potentielle Wohnbauflächen in Verbindung mit Kleingewerbe als mögliche Nutzung ausgeschlossen werden/wurden und andererseits potentielle Flächen, die nicht unmittelbar an Naturschutzgebiete und nicht an Wohnbebauung grenzen, als Standort für ein Rechenzentrum nicht in Betracht kommen. Die PWG hat sich im Rahmen des Wahlkampfes 2026 dafür eingesetzt, das Zeller Gelände als Wohngebiet und für Kleingewerbe auszuweisen. Warum wurde/wird dieser sinnvolle Ansatz nicht weiter verfolgt?</li><li><b>Flächenverbrauch, fehlender Abwärmenutzung und geringem Nutzen</b>. Der massive Eingriff in Natur und Landschaft steht in keinem Verhältnis zum Nutzen für die Bürger der Stadt Alzenau. Im Flächennutzungsplan war für das ehemalige Tonabbaugebiet bislang eine Renaturierung als Biotopentwicklungsfläche vorgesehen. Stattdessen drohten nun riesige, fensterlose Hallenbauten, Umspannwerke, Sicherheitszäune, Lichtsmog durch starke Beleuchtung in den Abend- und Nachtstunden sowie rund um die Uhr laufende Kühlanlagen unmittelbar am Waldrand. Zudem fehlt die Einbindung in die kommunale Wärmeplanung.</li><li>Im engeren und weiteren <b>Umland von Frankfurt</b> am Main (Rhein-Main-Gebiet) hat sich letzten Jahren spürbarer politischer und gesellschaftlicher Widerstand gegen den Bau neuer Rechenzentren formiert hat. Mehrere Kommunen haben konkrete Beschlüsse gefasst, um Großprojekte abzuweisen oder die Ansiedlung in bestimmten Stadtgebieten gezielt zu verbieten.</li><li><b>Lebensraumverlust und Fragmentierung Flächenerschließung:</b> Der Bau großer Rechenzentren benötigt viel Platz. Dadurch werden natürliche Lebensräume, Wiesen oder Wälder versiegelt. <b>Zerschneidung von Revieren:</b> Zäune und Zufahrtsstraßen trennen bestehende Ökosysteme. Dies blockiert Wanderrouten von Säugetieren und Amphibien</li><li><b>Notstromdiesel</b> (Stickoxide und Feinstaub) belasten zusätzlich</li><li><b>Wertverlust (ca. 20-30%) der Wohnimmobilien : </b>Das gilt nicht für Kälberau, sondern auch für angrenzende Teile der Kernstadt Alzenau. Es geht hier auch um die Altersversorgung und Existenzgrundlage von Mitbürgern</li><li>Auch in den <b>Fraktionen</b> besteht offensichtlich Unklarheit. Mit Schreiben vom <b>12.10.2026</b> hat sich die <b>WBA-Fraktion</b> direkt an den Investor gewandt. Alleine aus dem Umstand, dass sich eine im Stadtrat vertretene Fraktion an einen Investor wenden muß, um Fragen beantwortet zu bekommen, läßt sich ableiten, dass zumindest diese Fraktion bis zu diesem Daten keine ausreichenden Informationen von den Verantwortlichen der Stadt Alzenau hatte.</li><li>es liegen der Bevölkerung (und vermutlich weiten Teilen des Stadtrats) keinerlei Information vor, welche <b>Art von RZ (KI oder \"normales\")</b> das eigentlich sein soll. Der Unterschied ist beträchtlich</li></ul>\n<h3>Begründung</h3>\n<!--marker--><p>In der Ausgabe des Main Echos vom 07/08.11.2026 wurde darüber informiert, dass am 12.11.2026 um 19.00 Uhr der Stadtrat über \"Die Einleitung eines Bauleitplanverfahrens zur Ausweisung einer gewerblichen Baufläche für ein Rechenzentrum\" auf der Fläche der ehemaligen Ziegelei Zeller entscheiden soll.</p><p>Weiterführende Informationen an die Bevölkerung erfolgten bis dato nicht. Eine Bürgerversammlung am Dienstag 10.11. , in der über wichtige Themen informiert werden soll, kann nicht Ersatz für eine ausführliche Information der Bevölkerung sein. Letztlich werden die Bürger, wenn dieses Thema zur Sprache kommen sollte, schlichtweg überrumpelt. Der Bau eines Rechenzentrums ist ein bedeutendes Vorhaben mit massiven Auswirkungen auf die Bevölkerung in Alzenau.</p><p>Was mich sehr stört und ärgert:</p><ul><li>Betroffene, nämlich Bürger, werden in einem frühen Stadium nicht zu Beteiligten gemacht</li><li>dürftige/keine Informationen</li><li>offensichtlich können Stadträte, als Vertreter der Bevölkerung, nur bedingt Einfluß nehmen</li><li>dem massiven Eingriff in die Landschaft, Lärmbelästigung, Lichtsmog, Natur und den damit einhergehenden Beeinträchtigungen der Bevölkerung wurde im Vorfeld keinerlei Rechnung getragen.</li><li>das Vorhaben dient letztlich dem Investor. Mögliche finanzielle Zuwendungen an die Stadt helfen a) den betroffen Anwohnern nicht. b) könnten nahe oder in den Bereich \"Kopplungsgeschäfte\" geraten, die per Gesetz ausdrücklich untersagt sind</li><li>Aus den Festlegungen der Nutzung als Gewerbegebiet, deren Ursache vor über 200 Jahren begründet lagen, leitet man heute ab, dass das Gewerbegebiet nach wie vor als solches aufrecht erhalten werden soll. Die Zeiten und die Wohnbebauung haben sich jedoch massiv verändert. Die Wohnbebauung ist näher an die Ziegelei herangerückt. Diesem Umstand wird nicht Rechnung getragen. Im Jahre 1808 wurde die Fa. Zeller in Alzenau gegründet. Zusammenfassend erlebte man in Alzenau 1808 ein typisches, von der Landwirtschaft geprägtes Kahlgrund-Dorf unter hessischer Verwaltung, dessen Alltag sich um die alte Mainzer Amtsburg abspielte, während <b>vor den Toren</b> der Gemeinde die ersten Kiefernwälder gepflanzt und die ersten Ziegel gebrannt wurden. Nachfolgend wurde, folgerichtig, das Areal der Fa. Zeller als Gewerbegebiet ausgewiesen, was für die Bevölkerung nahezu unschädlich war, da deutlich vor den Toren Alzenaus. <b>Alzenau ist zwischenzeitlich gewachsen, im OT Kälberau kamen die Bahnhofstraße und der Rannebergring hinzu. Im Ergebnis ist die Wohbebauung näher an das Gelände der Ziegelei herangewachsen.</b> Insofern hatte die Ziegelei \"Bestandsschutz\".</li></ul>",
+    "description_full": "<!--marker--><p><b>Vorwort</b>: Überrascht, von der kurzfristigen Information (im Main Echo vom 07/08.11.) hinsichlich einer Stadtratssitzung mit TOP \"Bauleitplanverfahren\" am 12.11.2026, hat sich am Sonntag 08.11. spontan eine Bürgerinitiative gegründet.<br/><b>Wichtiger Hinweis zu dem Bild</b>: das Bild ist KI generiert und nur eine exemplarische Visualisierung für dieses Gelände. Gerne würden wir ein bereits bestehendes Geländemodell an diese Stelle setzen, haben jedoch keinen Zugang zu diesem Modell.</p><p><b>Bitte gehen Sie am 10.11.2026 zur Bürgerversammlung und stellen Sie fragen. Bitte gehen Sie in die Stadtratssitzung am 12.11.2026 und zeigen Sie Präsenz.</b></p><p>Wir wollen verhindern, dass auf dem ehemaligen Gelände der Fa. Zeller ein Rechenzentrum (RZ) errichtet wird und dadurch Bürger, Tiere und Landschaft nachhaltig und intensiv in Mitleidenschaft gezogen werden.</p><ul><li>Es bestehen die <b>Industriegebiete Nord und Süd in Alzenau</b>. Es ist nicht nachvollziehbar, warum auf dem Gelände der Fa. Zeller, ein lärmendes Ungetüm errichtet werden soll, dass sich in keinster in die Landschaft einpasst und zu massiven Beeinträchtigungen der Wohn- und Lebensqualität führen wird.</li><li><b>Stromverbrauch</b>: ein RZ mit 80MW (das ist die bisher bekannte Größe bei Start; im Raum stehen 300 MW) verbraucht bei Vollast ca.1051 GWh/Jahr (das wäre der Stromverbrauch von ca. 250.000 deutschen 3 Personen Haushalten. Das Klimakonzept der Stadt Alzenau ist nicht mehr haltbar</li><li><b>Ressourcenhunger &amp; Klima:</b> Der gigantische Strom- und Wasserbedarf verschärft die regionalen Klimaziele</li><li><b>Fehlende Wertschöpfung vor Ort:</b> Die Anlagen verbrauchen enorm viel Fläche, schaffen nach der Bauphase aber kaum nennenswerte Arbeitsplätze</li><li><b>Städtebauliche Unverträglichkeit</b>: Die angedachten Maße wären aktuell ??? breit, 28m hoch und 120 lang pro Block. Die geplante Höhe des Rechenzentrums beträgt ca 28 Meter. Im Rahmen immissionsschutzrechtlicher Vorgaben könnten jedoch zusätzliche 6 bis 11 Meter hinzukommen, was zu einer Gesamtgebäudehöhe von bis zu 34 bis 39 Metern führen würde.</li><li><b>Standort und Nutzungsalternativen. </b>Einerseits bestehen bereits mit Alzenau Nord und Süd zwei Gewerbegebiete und andererseits Bedarf an Wohnbauflächen. Es ist, aufgrund der vorliegenden Informationen, nicht nachvollziehbar weshalb für dieses Gebiet z.B. potentielle Wohnbauflächen in Verbindung mit Kleingewerbe als mögliche Nutzung ausgeschlossen werden/wurden und andererseits potentielle Flächen, die nicht unmittelbar an Naturschutzgebiete und nicht an Wohnbebauung grenzen, als Standort für ein Rechenzentrum nicht in Betracht kommen. Die PWG hat sich im Rahmen des Wahlkampfes 2026 dafür eingesetzt, das Zeller Gelände als Wohngebiet und für Kleingewerbe auszuweisen. Warum wurde/wird dieser sinnvolle Ansatz nicht weiter verfolgt?</li><li><b>Flächenverbrauch, fehlender Abwärmenutzung und geringem Nutzen</b>. Der massive Eingriff in Natur und Landschaft steht in keinem Verhältnis zum Nutzen für die Bürger der Stadt Alzenau. Im Flächennutzungsplan war für das ehemalige Tonabbaugebiet bislang eine Renaturierung als Biotopentwicklungsfläche vorgesehen. Stattdessen drohten nun riesige, fensterlose Hallenbauten, Umspannwerke, Sicherheitszäune, Lichtsmog durch starke Beleuchtung in den Abend- und Nachtstunden sowie rund um die Uhr laufende Kühlanlagen unmittelbar am Waldrand. Zudem fehlt die Einbindung in die kommunale Wärmeplanung.</li><li>Im engeren und weiteren <b>Umland von Frankfurt</b> am Main (Rhein-Main-Gebiet) hat sich letzten Jahren spürbarer politischer und gesellschaftlicher Widerstand gegen den Bau neuer Rechenzentren formiert hat. Mehrere Kommunen haben konkrete Beschlüsse gefasst, um Großprojekte abzuweisen oder die Ansiedlung in bestimmten Stadtgebieten gezielt zu verbieten.</li><li><b>Lebensraumverlust und Fragmentierung Flächenerschließung:</b> Der Bau großer Rechenzentren benötigt viel Platz. Dadurch werden natürliche Lebensräume, Wiesen oder Wälder versiegelt. <b>Zerschneidung von Revieren:</b> Zäune und Zufahrtsstraßen trennen bestehende Ökosysteme. Dies blockiert Wanderrouten von Säugetieren und Amphibien</li><li><b>Notstromdiesel</b> (Stickoxide und Feinstaub) belasten zusätzlich</li><li><b>Wertverlust (ca. 20-30%) der Wohnimmobilien : </b>Das gilt nicht für Kälberau, sondern auch für angrenzende Teile der Kernstadt Alzenau. Es geht hier auch um die Altersversorgung und Existenzgrundlage von Mitbürgern</li><li>Auch in den <b>Fraktionen</b> besteht offensichtlich Unklarheit. Mit Schreiben vom <b>12.10.2026</b> hat sich die <b>WBA-Fraktion</b> direkt an den Investor gewandt. Alleine aus dem Umstand, dass sich eine im Stadtrat vertretene Fraktion an einen Investor wenden muß, um Fragen beantwortet zu bekommen, läßt sich ableiten, dass zumindest diese Fraktion bis zu diesem Daten keine ausreichenden Informationen von den Verantwortlichen der Stadt Alzenau hatte.</li><li>es liegen der Bevölkerung (und vermutlich weiten Teilen des Stadtrats) keinerlei Information vor, welche <b>Art von RZ (KI oder \"normales\")</b> das eigentlich sein soll. Der Unterschied ist beträchtlich</li></ul>\n<h3>Begründung</h3>\n<!--marker--><p>In der Ausgabe des Main Echos vom 07/08.11.2026 wurde darüber informiert, dass am 12.11.2026 um 19.00 Uhr der Stadtrat über \"Die Einleitung eines Bauleitplanverfahrens zur Ausweisung einer gewerblichen Baufläche für ein Rechenzentrum\" auf der Fläche der ehemaligen Ziegelei Zeller entscheiden soll.</p><p>Weiterführende Informationen an die Bevölkerung erfolgten bis dato nicht. Eine Bürgerversammlung am Dienstag 10.11. , in der über wichtige Themen informiert werden soll, kann nicht Ersatz für eine ausführliche Information der Bevölkerung sein. Letztlich werden die Bürger, wenn dieses Thema zur Sprache kommen sollte, schlichtweg überrumpelt. Der Bau eines Rechenzentrums ist ein bedeutendes Vorhaben mit massiven Auswirkungen auf die Bevölkerung in Alzenau.</p><p>Was mich sehr stört und ärgert:</p><ul><li>Betroffene, nämlich Bürger, werden in einem frühen Stadium nicht zu Beteiligten gemacht</li><li>dürftige/keine Informationen</li><li>offensichtlich können Stadträte, als Vertreter der Bevölkerung, nur bedingt Einfluß nehmen</li><li>dem massiven Eingriff in die Landschaft, Lärmbelästigung, Lichtsmog, Natur und den damit einhergehenden Beeinträchtigungen der Bevölkerung wurde im Vorfeld keinerlei Rechnung getragen.</li><li>das Vorhaben dient letztlich dem Investor. Mögliche finanzielle Zuwendungen an die Stadt helfen a) den betroffen Anwohnern nicht. b) könnten nahe oder in den Bereich \"Kopplungsgeschäfte\" geraten, die per Gesetz ausdrücklich untersagt sind</li><li>Aus den Festlegungen der Nutzung als Gewerbegebiet, deren Ursache vor über 200 Jahren begründet lagen, leitet man heute ab, dass das Gewerbegebiet nach wie vor als solches aufrecht erhalten werden soll. Die Zeiten und die Wohnbebauung haben sich jedoch massiv verändert. Die Wohnbebauung ist näher an die Ziegelei herangerückt. Diesem Umstand wird nicht Rechnung getragen. Im Jahre 1808 wurde die Fa. Zeller in Alzenau gegründet. Zusammenfassend erlebte man in Alzenau 1808 ein typisches, von der Landwirtschaft geprägtes Kahlgrund-Dorf unter hessischer Verwaltung, dessen Alltag sich um die alte Mainzer Amtsburg abspielte, während <b>vor den Toren</b> der Gemeinde die ersten Kiefernwälder gepflanzt und die ersten Ziegel gebrannt wurden. Nachfolgend wurde, folgerichtig, das Areal der Fa. Zeller als Gewerbegebiet ausgewiesen, was für die Bevölkerung nahezu unschädlich war, da deutlich vor den Toren Alzenaus. <b>Alzenau ist zwischenzeitlich gewachsen, im OT Kälberau kamen die Bahnhofstraße und der Rannebergring hinzu. Im Ergebnis ist die Wohbebauung näher an das Gelände der Ziegelei herangewachsen.</b> Insofern hatte die Ziegelei \"Bestandsschutz\".</li></ul>",
     "started_by": "Bürgerinitiative i.Gr.: \"Nein\" zu einem Rechenzentrum auf dem ehemaligen Zeller-Gelände Alzenau",
     "category": "Wohnen",
     "category_url": "https://www.openpetition.de/petitionen?category=42#petitionen",
     "country": "DE",
-    "signatures": 785,
+    "signatures": 1365,
     "start_date": "2026-11-09",
     "lang": "de",
     "campaign_id": "openpetition:nein-zu-einem-rechenzentrum-auf-dem-ehemaligen-zeller-gelaende-in-alzenau",
@@ -181201,21 +181269,21 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Alzenau",
+      "Gelände",
       "Rechenzentrum",
+      "Bevölkerung",
       "Information",
       "Zeller",
+      "Bild",
       "Main",
       "Stadtratssitzung",
-      "Informationen",
-      "Bevölkerung",
-      "Ehemaligen",
-      "Landschaft"
+      "Informationen"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00"
+    "last_checked": "2026-11-13T19:53:54-06:00"
   },
   "rettet-den-vt-club-50-jahre-studentisches-leben-in-koethen-duerfen-nicht-enden": {
     "slug": "rettet-den-vt-club-50-jahre-studentisches-leben-in-koethen-duerfen-nicht-enden",
@@ -181224,18 +181292,22 @@
       {
         "checked_at": "2026-11-10T18:14:20-06:00",
         "count": 587
+      },
+      {
+        "checked_at": "2026-11-13T19:53:54-06:00",
+        "count": 666
       }
     ],
-    "title": "Rettet den VT-Club - 50 Jahre studentisches Leben in Köthen dürfen nicht enden",
-    "summary": "Das Studentenwerk Halle hat den Nutzungsvertrag zum 28.02.2027 gekündigt, nachdem sich Bewohner über Lärm beschwert hatten. Wir nehmen die Anliegen der Bewohner ernst. Der Verein hat nach einer Abmahnung bereits Maßnahmen ergriffen, und ist in den Austausch mit den Bewohnern gegangen. Der Verein ist zu weiteren verbindlichen Schritten bereit. Wir sind uns sicher: Rücksicht auf die Bewohner und der Erhalt der Bar schließen sich nicht aus. Wir fordern: 1. Die Kündigung zurückzunehmen 2. Gemeinsam",
+    "title": "Petition nach Annahme des Sachverhalts eingestellt",
+    "summary": "Ziel der Petition erreicht",
     "image_url": "https://www.openpetition.de/images/default_petition.jpg",
     "url": "https://www.openpetition.de/petition/online/rettet-den-vt-club-50-jahre-studentisches-leben-in-koethen-duerfen-nicht-enden",
-    "description_full": "<!--marker--><p>Das Studentenwerk Halle hat den Nutzungsvertrag zum 28.02.2027 gekündigt, nachdem sich Bewohner über Lärm beschwert hatten. Wir nehmen die Anliegen der Bewohner ernst. Der Verein hat nach einer Abmahnung bereits Maßnahmen ergriffen, und ist in den Austausch mit den Bewohnern gegangen. Der Verein ist zu weiteren verbindlichen Schritten bereit.<br/>Wir sind uns sicher: Rücksicht auf die Bewohner und der Erhalt der Bar schließen sich nicht aus.<br/>Wir fordern:</p><ol><li>Die Kündigung zurückzunehmen</li><li>Gemeinsam mit dem Verein, Bewohnern, Studentenwerk und Hochschule eine verbindliche Lösung zu erarbeiten</li></ol>\n<h3>Begründung</h3>\n<!--marker--><p>Seit 1974 ist der VT-Club im Keller des Wohnheim 6 in Köthen als Bar ein Ort für Austausch und Gemeinschaft an der Hochschule Anhalt. Dienstags und donnerstags treffen sich hier Studierende aus aller Welt. Die Bar wird von Studierenden ehrenamtlich und unentgeltlich vom Verein Studentenclub Köthen e.V. betrieben ist aber auch darüber hinaus für alle Menschen aus Köthen und Umgebung ein Ort der Zusammenkunft. Gerade aufgrund der aktuellen politischen Lage bietet der VT-Club einen Safe-Space für internationale Studierende.<br/>Eine Schließung würde den Verlust der letzten Studentenbar an unserer Hochschule bedeuten und somit langfristig zu einer Auflösung des Studentenclub Köthen e.V. führen. Damit würde das studentische Leben seitens des Vereins komplett enden.</p>",
+    "description_full": "<!--marker--><p>Ziel der Petition erreicht</p>\n<h3>Begründung</h3>\n<!--marker--><p>Ziel der Petition erreicht</p>",
     "started_by": "Studentenclub Köthen e.V.",
     "category": "Kultur",
     "category_url": "https://www.openpetition.de/petitionen?category=25#petitionen",
     "country": "DE",
-    "signatures": 587,
+    "signatures": 666,
     "start_date": "2026-11-10",
     "lang": "de",
     "campaign_id": "openpetition:rettet-den-vt-club-50-jahre-studentisches-leben-in-koethen-duerfen-nicht-enden",
@@ -181243,21 +181315,16 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
-      "Bewohner",
-      "Verein",
-      "Köthen",
-      "Studentenwerk",
-      "Hochschule",
-      "Austausch",
-      "Bewohnern",
-      "VT-Club",
-      "Nutzungsvertrag",
-      "Zurückzunehmen"
+      "Erreicht",
+      "Ziel",
+      "Sachverhalts",
+      "Eingestellt",
+      "Annahme"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00"
+    "last_checked": "2026-11-13T19:53:54-06:00"
   },
   "kein-sommer-ohne-tinyccino-fuer-den-dauerhaften-erhalt-unseres-nachbarschaftstreffs": {
     "slug": "kein-sommer-ohne-tinyccino-fuer-den-dauerhaften-erhalt-unseres-nachbarschaftstreffs",
@@ -181266,6 +181333,10 @@
       {
         "checked_at": "2026-11-10T18:14:20-06:00",
         "count": 79
+      },
+      {
+        "checked_at": "2026-11-13T19:53:54-06:00",
+        "count": 247
       }
     ],
     "title": "Kein Sommer ohne Tinyccino: Für den dauerhaften Erhalt unseres Nachbarschaftstreffs!",
@@ -181277,7 +181348,7 @@
     "category": "Wirtschaft",
     "category_url": "https://www.openpetition.de/petitionen?category=48#petitionen",
     "country": "DE",
-    "signatures": 79,
+    "signatures": 247,
     "start_date": "2026-11-07",
     "lang": "de",
     "campaign_id": "openpetition:kein-sommer-ohne-tinyccino-fuer-den-dauerhaften-erhalt-unseres-nachbarschaftstreffs",
@@ -181285,7 +181356,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Tinyccino",
@@ -181299,7 +181370,7 @@
       "Sommerabenden",
       "Freundliches"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00"
+    "last_checked": "2026-11-13T19:53:54-06:00"
   },
   "mobicard-und-streifenticket-erhalten-mobilitaet-fuer-familien-sozial-und-ohne-smartphone": {
     "slug": "mobicard-und-streifenticket-erhalten-mobilitaet-fuer-familien-sozial-und-ohne-smartphone",
@@ -181308,6 +181379,10 @@
       {
         "checked_at": "2026-11-10T18:14:20-06:00",
         "count": 74
+      },
+      {
+        "checked_at": "2026-11-13T19:53:54-06:00",
+        "count": 82
       }
     ],
     "title": "MobiCard und Streifenticket erhalten: Mobilität für Familien, sozial und ohne Smartphone",
@@ -181319,7 +181394,7 @@
     "category": "Verkehr",
     "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
     "country": "DE",
-    "signatures": 74,
+    "signatures": 82,
     "start_date": "2026-11-06",
     "lang": "de",
     "campaign_id": "openpetition:mobicard-und-streifenticket-erhalten-mobilitaet-fuer-familien-sozial-und-ohne-smartphone",
@@ -181327,7 +181402,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Familien",
@@ -181341,7 +181416,7 @@
       "Ticket",
       "Angebot"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00"
+    "last_checked": "2026-11-13T19:53:54-06:00"
   },
   "rettet-segor-electronics-berlins-letzte-elektronik-maker-bastion": {
     "slug": "rettet-segor-electronics-berlins-letzte-elektronik-maker-bastion",
@@ -181350,18 +181425,22 @@
       {
         "checked_at": "2026-11-10T18:14:20-06:00",
         "count": 25
+      },
+      {
+        "checked_at": "2026-11-13T19:53:54-06:00",
+        "count": 48
       }
     ],
     "title": "Rettet Segor Electronics – Berlins letzte Elektronik- & Maker-Bastion!",
     "summary": "Wir fordern den Berliner Senat (insbesondere die Senatsverwaltung für Wirtschaft, Energie und Betriebe sowie die Senatsverwaltung für Stadtentwicklung, Bauen und Wohnen) auf: 1. Erhalt von Segor Electronics sichern: Aktive Unterstützung und Vermittlung zwischen den Inhabern und dem Vermieter bzw. die Bereitstellung alternativer, bezahlbarer Gewerbeflächen in Berlin, um den Fortbestand des Betriebs über 2026 hinaus zu ermöglichen. 2. Schutz von gewerblicher Technik-Infrastruktur: Schaffung von Sc",
-    "image_url": "https://www.openpetition.de/images/petition/rettet-segor-electronics-berlins-letzte-elektronik-maker-bastion_1794051695_desktop.jpg",
+    "image_url": "https://www.openpetition.de/images/petition/rettet-segor-electronics-berlins-letzte-elektronik-maker-bastion_1794472753_desktop.jpg",
     "url": "https://www.openpetition.de/petition/online/rettet-segor-electronics-berlins-letzte-elektronik-maker-bastion",
     "description_full": "<!--marker--><p>Wir fordern den Berliner Senat (insbesondere die Senatsverwaltung für Wirtschaft, Energie und Betriebe sowie die Senatsverwaltung für Stadtentwicklung, Bauen und Wohnen) auf:</p><ol><li>Erhalt von Segor Electronics sichern: Aktive Unterstützung und Vermittlung zwischen den Inhabern und dem Vermieter bzw. die Bereitstellung alternativer, bezahlbarer Gewerbeflächen in Berlin, um den Fortbestand des Betriebs über 2026 hinaus zu ermöglichen.</li><li>Schutz von gewerblicher Technik-Infrastruktur: Schaffung von Schutzräumen und Förderprogrammen gegen Mietwucher für traditionsreiche Fachgeschäfte, die Handwerk, Prototypenbau und Reparaturkultur in Berlin aufrechterhalten.</li><li>Echte Innovationsförderung vor Ort: Die Anerkennung von stationären Elektronik- und Bauteilehändlern als unverzichtbare Infrastruktur für den technologischen Nachwuchs, Ingenieure und die Berliner Maker-Szene.</li></ol>\n<h3>Begründung</h3>\n<!--marker--><p>Mit der angekündigten Schließung von Segor Electronics zum 23. Dezember 2026 verliert Berlin den allerletzten stationären Fachhändler für elektronische Bauteile. Nachdem bereits alle Conrad-Filialen geschlossen wurden, bricht damit die letzte physische Anlaufstelle für Reparaturen, Prototypenentwicklung und spontanen Ersatzteilbedarf weg.</p><p>Der Grund für das Aus sind keine fehlenden Kunden, sondern eine drastische Mietsteigerung, die für ein inhabergeführtes Fachgeschäft nicht mehr tragbar ist.</p><p>Wenn Berlin den Anspruch erhebt, digitale und technologische Hauptstadt zu sein, darf die Stadt nicht tatenlos zusehen, wie das praktische Know-how und die lokale Hardware-Versorgung vertrieben werden. Hohe Zölle und lange Lieferzeiten beim Auslandsversand erschweren die Situation für Bastler, Studenten und lokale Reparaturbetriebe zusätzlich.</p><p>Das Aus von Segor ist ein fataler Signalwechsel: Es schadet der lokalen Reparaturkultur, der Nachhaltigkeit und der Nachwuchsförderung im MINT-Bereich. Wir müssen jetzt ein Zeichen setzen, bevor der letzte Lötkolben in dieser Stadt kalt wird!</p>",
     "started_by": "Simon Schröter",
     "category": "Wirtschaft",
     "category_url": "https://www.openpetition.de/petitionen?category=48#petitionen",
     "country": "DE",
-    "signatures": 25,
+    "signatures": 48,
     "start_date": "2026-11-07",
     "lang": "de",
     "campaign_id": "openpetition:rettet-segor-electronics-berlins-letzte-elektronik-maker-bastion",
@@ -181369,7 +181448,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Berlin",
@@ -181383,7 +181462,7 @@
       "Reparaturkultur",
       "Bereitstellung"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00"
+    "last_checked": "2026-11-13T19:53:54-06:00"
   },
   "unsere-christuskirche-in-zieverich-vor-der-abrissbirne-retten-zukunft-gemeinsam-gestalten": {
     "slug": "unsere-christuskirche-in-zieverich-vor-der-abrissbirne-retten-zukunft-gemeinsam-gestalten",
@@ -181392,6 +181471,10 @@
       {
         "checked_at": "2026-11-10T18:14:20-06:00",
         "count": 21
+      },
+      {
+        "checked_at": "2026-11-13T19:53:54-06:00",
+        "count": 27
       }
     ],
     "title": "Unsere Christuskirche in Zieverich vor der Abrissbirne retten – Zukunft gemeinsam gestalten!",
@@ -181403,7 +181486,7 @@
     "category": "Kultur",
     "category_url": "https://www.openpetition.de/petitionen?category=25#petitionen",
     "country": "DE",
-    "signatures": 21,
+    "signatures": 27,
     "goal": 500,
     "start_date": "2026-11-06",
     "lang": "de",
@@ -181412,7 +181495,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Unserer",
@@ -181426,7 +181509,7 @@
       "Möchten",
       "Evangelischen"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00"
+    "last_checked": "2026-11-13T19:53:54-06:00"
   },
   "keine-kuerzungen-auf-kosten-pflegebeduerftiger-menschen": {
     "slug": "keine-kuerzungen-auf-kosten-pflegebeduerftiger-menschen",
@@ -181435,6 +181518,10 @@
       {
         "checked_at": "2026-11-10T18:14:20-06:00",
         "count": 19
+      },
+      {
+        "checked_at": "2026-11-13T19:53:54-06:00",
+        "count": 25
       }
     ],
     "title": "Keine Kürzungen auf Kosten pflegebedürftiger Menschen!",
@@ -181446,7 +181533,7 @@
     "category": "Minderheitenschutz",
     "category_url": "https://www.openpetition.de/petitionen?category=54#petitionen",
     "country": "DE",
-    "signatures": 19,
+    "signatures": 25,
     "start_date": "2026-11-07",
     "lang": "de",
     "campaign_id": "openpetition:keine-kuerzungen-auf-kosten-pflegebeduerftiger-menschen",
@@ -181454,7 +181541,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Brauchen",
@@ -181468,7 +181555,7 @@
       "Ambulante",
       "Sichere"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00"
+    "last_checked": "2026-11-13T19:53:54-06:00"
   },
   "recht-auf-ein-basiskonto-durchsetzen": {
     "slug": "recht-auf-ein-basiskonto-durchsetzen",
@@ -181477,6 +181564,10 @@
       {
         "checked_at": "2026-11-10T18:14:20-06:00",
         "count": 14
+      },
+      {
+        "checked_at": "2026-11-13T19:53:54-06:00",
+        "count": 28
       }
     ],
     "title": "Recht auf ein Basiskonto durchsetzen",
@@ -181488,7 +181579,7 @@
     "category": "Bürgerrechte",
     "category_url": "https://www.openpetition.de/petitionen?category=58#petitionen",
     "country": "DE",
-    "signatures": 14,
+    "signatures": 28,
     "goal": 1000,
     "start_date": "2026-11-09",
     "lang": "de",
@@ -181497,7 +181588,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Basiskonto",
@@ -181511,7 +181602,7 @@
       "Kreditinstituten",
       "Diskriminierung"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00"
+    "last_checked": "2026-11-13T19:53:54-06:00"
   },
   "hilfe-statt-huerden-psychotherapie-fuer-alle-die-sie-brauchen": {
     "slug": "hilfe-statt-huerden-psychotherapie-fuer-alle-die-sie-brauchen",
@@ -181520,6 +181611,10 @@
       {
         "checked_at": "2026-11-10T18:14:20-06:00",
         "count": 13
+      },
+      {
+        "checked_at": "2026-11-13T19:53:54-06:00",
+        "count": 30
       }
     ],
     "title": "Hilfe statt Hürden: Psychotherapie für alle, die sie brauchen",
@@ -181531,7 +181626,7 @@
     "category": "Gesundheit",
     "category_url": "https://www.openpetition.de/petitionen?category=20#petitionen",
     "country": "DE",
-    "signatures": 13,
+    "signatures": 30,
     "start_date": "2026-11-06",
     "lang": "de",
     "campaign_id": "openpetition:hilfe-statt-huerden-psychotherapie-fuer-alle-die-sie-brauchen",
@@ -181539,7 +181634,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Innen",
@@ -181553,7 +181648,7 @@
       "Soziale",
       "Unverzüglich"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00"
+    "last_checked": "2026-11-13T19:53:54-06:00"
   },
   "rentenrechtliche-anerkennung-der-pflegeleistung-von-angehoerigen-die-vollzeitbeschaeftigt-bleiben": {
     "slug": "rentenrechtliche-anerkennung-der-pflegeleistung-von-angehoerigen-die-vollzeitbeschaeftigt-bleiben",
@@ -181562,6 +181657,10 @@
       {
         "checked_at": "2026-11-10T18:14:20-06:00",
         "count": 8
+      },
+      {
+        "checked_at": "2026-11-13T19:53:54-06:00",
+        "count": 16
       }
     ],
     "title": "Rentenrechtliche Anerkennung der Pflegeleistung von Angehörigen, die vollzeitbeschäftigt bleiben",
@@ -181573,7 +181672,7 @@
     "category": "Soziales",
     "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
     "country": "DE",
-    "signatures": 8,
+    "signatures": 16,
     "start_date": "2026-11-01",
     "lang": "de",
     "campaign_id": "openpetition:rentenrechtliche-anerkennung-der-pflegeleistung-von-angehoerigen-die-vollzeitbeschaeftigt-bleiben",
@@ -181581,7 +181680,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Pflege",
@@ -181595,7 +181694,7 @@
       "Angehörige",
       "Anliegen"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00"
+    "last_checked": "2026-11-13T19:53:54-06:00"
   },
   "alle-geburten-muessen-die-gleichen-rentenpunkte-nach-sich-ziehen": {
     "slug": "alle-geburten-muessen-die-gleichen-rentenpunkte-nach-sich-ziehen",
@@ -181604,6 +181703,10 @@
       {
         "checked_at": "2026-11-10T18:14:20-06:00",
         "count": 7
+      },
+      {
+        "checked_at": "2026-11-13T19:53:54-06:00",
+        "count": 35
       }
     ],
     "title": "Alle Geburten müssen die gleichen Rentenpunkte nach sich ziehen!",
@@ -181615,7 +181718,7 @@
     "category": "Minderheitenschutz",
     "category_url": "https://www.openpetition.de/petitionen?category=54#petitionen",
     "country": "DE",
-    "signatures": 7,
+    "signatures": 35,
     "start_date": "2026-11-08",
     "lang": "de",
     "campaign_id": "openpetition:alle-geburten-muessen-die-gleichen-rentenpunkte-nach-sich-ziehen",
@@ -181623,7 +181726,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Geburten",
@@ -181637,7 +181740,7 @@
       "Kitas",
       "Erziehungsleistung"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00"
+    "last_checked": "2026-11-13T19:53:54-06:00"
   },
   "nein-zu-den-geplanten-windenergieanlagen-im-zuercher-weinland": {
     "slug": "nein-zu-den-geplanten-windenergieanlagen-im-zuercher-weinland",
@@ -181646,6 +181749,10 @@
       {
         "checked_at": "2026-11-10T18:14:20-06:00",
         "count": 284
+      },
+      {
+        "checked_at": "2026-11-13T19:53:54-06:00",
+        "count": 797
       }
     ],
     "title": "NEIN zu den geplanten Windenergieanlagen im Zürcher Weinland",
@@ -181657,7 +181764,7 @@
     "category": "Energie",
     "category_url": "https://www.openpetition.de/ch/petitionen?category=50#petitionen",
     "country": "CH",
-    "signatures": 284,
+    "signatures": 797,
     "goal": 1000,
     "start_date": "2026-10-18",
     "lang": "de",
@@ -181666,7 +181773,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Zürich",
@@ -181680,7 +181787,7 @@
       "Kantonsrat",
       "Geplanten"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00"
+    "last_checked": "2026-11-13T19:53:54-06:00"
   },
   "sanierung-des-turnsaals-der-musik-mittelschule-enns": {
     "slug": "sanierung-des-turnsaals-der-musik-mittelschule-enns",
@@ -181689,6 +181796,10 @@
       {
         "checked_at": "2026-11-10T18:14:20-06:00",
         "count": 126
+      },
+      {
+        "checked_at": "2026-11-13T19:53:54-06:00",
+        "count": 194
       }
     ],
     "title": "Sanierung des Turnsaals der Musik Mittelschule Enns",
@@ -181700,7 +181811,7 @@
     "category": "Bildung",
     "category_url": "https://www.openpetition.de/at/petitionen?category=7#petitionen",
     "country": "AT",
-    "signatures": 126,
+    "signatures": 194,
     "start_date": "2026-11-10",
     "lang": "de",
     "campaign_id": "openpetition:sanierung-des-turnsaals-der-musik-mittelschule-enns",
@@ -181708,7 +181819,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Turnsaals",
@@ -181722,7 +181833,7 @@
       "Gemeinsam",
       "Anliegen"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00"
+    "last_checked": "2026-11-13T19:53:54-06:00"
   },
   "strukturelle-benachteiligung-von-alleinerziehenden-und-einelternfamilien-im-kanton-obwalden": {
     "slug": "strukturelle-benachteiligung-von-alleinerziehenden-und-einelternfamilien-im-kanton-obwalden",
@@ -181731,6 +181842,10 @@
       {
         "checked_at": "2026-11-10T18:14:20-06:00",
         "count": 18
+      },
+      {
+        "checked_at": "2026-11-13T19:53:54-06:00",
+        "count": 21
       }
     ],
     "title": "strukturelle Benachteiligung von Alleinerziehenden und Einelternfamilien im Kanton Obwalden",
@@ -181742,7 +181857,7 @@
     "category": "Familie",
     "category_url": "https://www.openpetition.de/ch/petitionen?category=14#petitionen",
     "country": "CH",
-    "signatures": 18,
+    "signatures": 21,
     "goal": 500,
     "start_date": "2026-11-08",
     "lang": "de",
@@ -181751,7 +181866,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Einelternfamilien",
@@ -181765,7 +181880,7 @@
       "Kanton",
       "Prüft"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00"
+    "last_checked": "2026-11-13T19:53:54-06:00"
   },
   "zugangshuerden-und-mangelnde-unterstuetzungsorientierung-beim-sozialdienst-obwalden": {
     "slug": "zugangshuerden-und-mangelnde-unterstuetzungsorientierung-beim-sozialdienst-obwalden",
@@ -181774,6 +181889,10 @@
       {
         "checked_at": "2026-11-10T18:14:20-06:00",
         "count": 16
+      },
+      {
+        "checked_at": "2026-11-13T19:53:54-06:00",
+        "count": 19
       }
     ],
     "title": "Zugangshürden und mangelnde Unterstützungsorientierung beim Sozialdienst Obwalden",
@@ -181785,7 +181904,7 @@
     "category": "Soziales",
     "category_url": "https://www.openpetition.de/ch/petitionen?category=39#petitionen",
     "country": "CH",
-    "signatures": 16,
+    "signatures": 19,
     "goal": 500,
     "start_date": "2026-11-08",
     "lang": "de",
@@ -181794,7 +181913,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-10T18:14:20-06:00",
+    "last_seen": "2026-11-13T19:53:54-06:00",
     "offline_since": null,
     "tags": [
       "Obwalden",
@@ -181808,7 +181927,7 @@
       "Sozialhilfe",
       "Überprüfung"
     ],
-    "last_checked": "2026-11-10T18:14:20-06:00"
+    "last_checked": "2026-11-13T19:53:54-06:00"
   },
   "rettet-das-oder-spree-krankenhaus-beeskow": {
     "slug": "rettet-das-oder-spree-krankenhaus-beeskow",
