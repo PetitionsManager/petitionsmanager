@@ -229,23 +229,31 @@ def _parse_card(card) -> tuple[str, dict] | None:
 # werden von `core.ist_seitentechnik()` schon vor dem Vergleich gefiltert und
 # erreichen `felder_melden()` nie. Das ist kein Fehler, sondern Alterung —
 # diese Liste stammt vom 30.8.2026, der globale Technikfilter kam am 17.9.
-# **Sie bleiben trotzdem stehen:** der Technikfilter ist global und bewusst
-# eng gehalten; würde er je verengt (z. B. `twitter:` raus, weil eine andere
-# Plattform dort Inhalt führt), wären diese sieben sonst schlagartig wieder
-# Meldungen. Ein Eintrag hier kostet nichts und ist die plattformeigene
-# Entscheidung — siehe den Absatz über ist_seitentechnik in petitions_core.
+# ✅ ENTFERNT auf Nutzerentscheidung 13.11.2026 — 23 → 12 Einträge. Grund:
+# ein wirkungsloser Eintrag verschleiert, was die Liste leistet; wer sie liest,
+# hält 23 Namen für geprüfte Entscheidungen, obwohl nur 12 je einen Vergleich
+# erreichen. Die elf Entfernten waren `viewport`, `og:site_name`, `csrf-token`,
+# `fb:app_id`, `twitter:card/creator/description/domain/image/site/title`.
+# ⚠️⚠️ **Der Preis, und er ist bewusst bezahlt:** wird `ist_seitentechnik()`
+# je VERENGT (etwa `twitter:` raus, weil eine andere Plattform dort Inhalt
+# führt), meldet eko diese Namen wieder — sie stehen dann nicht mehr als
+# „gesehen und entschieden" hier. Das ist kein Rückschritt: eine Meldung ist
+# der gewollte Zustand, wenn die globale Entscheidung zurückgenommen wird.
+# ➡️ Wer `_TECHNIK_PRAEFIXE`/`_TECHNIK_NAMEN` in petitions_core verengt, prüft
+# diese Liste mit.
 #
-# ✅ Gegenrichtung mitgemessen (das eigentliche Abnahmekriterium): auf den
-# 42 Seiten stehen 24 (de) bzw. 20 (en) verschiedene Meta-Namen, und davon
-# wären **0** zu melden. Die Liste ist also vollständig, nicht nur plausibel.
+# ✅ Gegenrichtung mitgemessen (das eigentliche Abnahmekriterium, VOR und NACH
+# dem Entfernen identisch): auf den 42 Seiten stehen 24 (de) bzw. 20 (en)
+# verschiedene Meta-Namen, und davon wären **0** zu melden. Die Liste ist also
+# vollständig, nicht nur plausibel — und das Entfernen hat daran nichts
+# geändert, genau das war seine Bedingung.
 BEKANNTE_FELDER = {
     # Kampagnenübersicht (eko.org/de/campaigns), zwei Varianten geprüft
     "description", "next-size-adjust", "og:description", "og:image",
-    "og:site_name", "og:title", "og:type", "twitter:card",
-    "twitter:description", "twitter:image", "twitter:title", "viewport",
-    # Detailseite, altes Champaign-Muster (nur noch 1 von 18 erreichbar)
-    "csrf-param", "csrf-token", "fb:app_id", "liquid_layout", "og:url",
-    "optimization_tags", "twitter:creator", "twitter:domain", "twitter:site",
+    "og:title", "og:type",
+    # Detailseite, altes Champaign-Muster — lebt weiter: 3 von 20 deutschen
+    # Detailseiten am 13.11.2026, im en-Zweig 0 von 20.
+    "csrf-param", "liquid_layout", "og:url", "optimization_tags",
     # 6.10.2026 VERWORFEN: `title` (gemeldet 16/43) — Dublette, kein neuer
     # Inhalt. Steht nur im neuen Next.js-Template (action.eko.org), dort auf
     # 3 von 5 frisch gemessenen Detailseiten, und trägt wortgleich denselben
