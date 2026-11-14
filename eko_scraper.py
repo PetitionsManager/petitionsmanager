@@ -251,9 +251,12 @@ BEKANNTE_FELDER = {
     # Kampagnenübersicht (eko.org/de/campaigns), zwei Varianten geprüft
     "description", "next-size-adjust", "og:description", "og:image",
     "og:title", "og:type",
-    # Detailseite, altes Champaign-Muster — lebt weiter: 3 von 20 deutschen
-    # Detailseiten am 13.11.2026, im en-Zweig 0 von 20.
-    "csrf-param", "liquid_layout", "og:url", "optimization_tags",
+    # Detailseiten BEIDER Templates, aber nicht auf der Übersicht:
+    # 20/20 de, 20/20 en, 0/2 Liste (13.11.2026).
+    "og:url",
+    # Detailseite, NUR altes Champaign-Muster — lebt weiter: 3 von 20
+    # deutschen Detailseiten am 13.11.2026, im en-Zweig 0 von 20.
+    "csrf-param", "liquid_layout", "optimization_tags",
     # 6.10.2026 VERWORFEN: `title` (gemeldet 16/43) — Dublette, kein neuer
     # Inhalt. Steht nur im neuen Next.js-Template (action.eko.org), dort auf
     # 3 von 5 frisch gemessenen Detailseiten, und trägt wortgleich denselben
