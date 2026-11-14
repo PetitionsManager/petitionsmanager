@@ -31,12 +31,12 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-11-14T09:46:14-06:00",
+    "generated_at": "2026-11-14T14:25:28-06:00",
     "petition_count": 2793,
     "available": 1709,
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-11-14T09:46:13-06:00",
+      "stand": "2026-11-14T14:25:27-06:00",
       "gefunden": 1709,
       "im_bestand": 1709,
       "unbrauchbar": 0,
@@ -51,58 +51,7 @@
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-11-13T20:01:41-06:00",
-        "gesamt": 2793,
-        "online": 2793,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 2778,
-        "juengstes_start": "2026-11-12",
-        "mit_code_im_text": 0,
-        "mit_ballast_in_kurzfassung": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-11-14T00:34:22-06:00",
-        "gesamt": 2793,
-        "online": 2793,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 2778,
-        "juengstes_start": "2026-11-12",
-        "mit_code_im_text": 0,
-        "mit_ballast_in_kurzfassung": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-11-14T05:09:18-06:00",
-        "gesamt": 2793,
-        "online": 2793,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 2778,
-        "juengstes_start": "2026-11-12",
-        "mit_code_im_text": 0,
-        "mit_ballast_in_kurzfassung": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-11-14T09:46:13-06:00",
+        "zeit": "2026-11-14T14:25:27-06:00",
         "gesamt": 2793,
         "online": 2793,
         "offline": 0,
@@ -120,7 +69,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-11-14T09:46:13-06:00",
+      "zeit": "2026-11-14T14:25:27-06:00",
       "gesamt": 2793,
       "online": 2793,
       "offline": 0,
@@ -134,7 +83,7 @@
       "mit_code_im_text": 0,
       "mit_ballast_in_kurzfassung": 0
     },
-    "verlauf_felder_ab": "2026-11-13T20:01:41-06:00",
+    "verlauf_felder_ab": "2026-11-14T14:25:27-06:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 2793
@@ -181987,6 +181936,10 @@
       {
         "checked_at": "2026-11-11T09:58:42-06:00",
         "count": 1704
+      },
+      {
+        "checked_at": "2026-11-14T14:21:18-06:00",
+        "count": 4701
       }
     ],
     "title": "Rettet das Oder Spree Krankenhaus Beeskow!",
@@ -181998,7 +181951,7 @@
     "category": "Gesundheit",
     "category_url": "https://www.openpetition.de/petitionen?category=20#petitionen",
     "country": "DE",
-    "signatures": 1704,
+    "signatures": 4701,
     "start_date": "2026-11-08",
     "lang": "de",
     "campaign_id": "openpetition:rettet-das-oder-spree-krankenhaus-beeskow",
@@ -182006,7 +181959,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-11T09:58:42-06:00",
+    "last_seen": "2026-11-14T14:21:18-06:00",
     "offline_since": null,
     "tags": [
       "Unterstützung",
@@ -182020,7 +181973,7 @@
       "Gezwungen",
       "Beeskow"
     ],
-    "last_checked": "2026-11-11T09:58:42-06:00"
+    "last_checked": "2026-11-14T14:21:18-06:00"
   },
   "saubere-luft-fuer-unsere-zukunft-verpflichtende-lufthygiene-in-kindertagesstaetten-schulen": {
     "slug": "saubere-luft-fuer-unsere-zukunft-verpflichtende-lufthygiene-in-kindertagesstaetten-schulen",
@@ -182029,6 +181982,10 @@
       {
         "checked_at": "2026-11-11T09:58:42-06:00",
         "count": 753
+      },
+      {
+        "checked_at": "2026-11-14T14:21:18-06:00",
+        "count": 947
       }
     ],
     "title": "Saubere Luft für unsere Zukunft: Verpflichtende Lufthygiene in Kindertagesstätten & Schulen",
@@ -182040,7 +181997,7 @@
     "category": "Gesundheit",
     "category_url": "https://www.openpetition.de/petitionen?category=20#petitionen",
     "country": "DE",
-    "signatures": 753,
+    "signatures": 947,
     "start_date": "2026-11-08",
     "lang": "de",
     "campaign_id": "openpetition:saubere-luft-fuer-unsere-zukunft-verpflichtende-lufthygiene-in-kindertagesstaetten-schulen",
@@ -182048,7 +182005,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-11T09:58:42-06:00",
+    "last_seen": "2026-11-14T14:21:18-06:00",
     "offline_since": null,
     "tags": [
       "Bildung",
@@ -182062,7 +182019,7 @@
       "Liegenddemo",
       "Zuständigen"
     ],
-    "last_checked": "2026-11-11T09:58:42-06:00"
+    "last_checked": "2026-11-14T14:21:18-06:00"
   },
   "erfahrungsfeld-der-sinne-nuernberg-in-jedem-jahr": {
     "slug": "erfahrungsfeld-der-sinne-nuernberg-in-jedem-jahr",
@@ -182071,6 +182028,10 @@
       {
         "checked_at": "2026-11-11T09:58:42-06:00",
         "count": 595
+      },
+      {
+        "checked_at": "2026-11-14T14:21:18-06:00",
+        "count": 1975
       }
     ],
     "title": "Erfahrungsfeld der Sinne Nürnberg in jedem Jahr",
@@ -182082,7 +182043,7 @@
     "category": "Kultur",
     "category_url": "https://www.openpetition.de/petitionen?category=25#petitionen",
     "country": "DE",
-    "signatures": 595,
+    "signatures": 1975,
     "start_date": "2026-11-08",
     "lang": "de",
     "campaign_id": "openpetition:erfahrungsfeld-der-sinne-nuernberg-in-jedem-jahr",
@@ -182090,7 +182051,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-11T09:58:42-06:00",
+    "last_seen": "2026-11-14T14:21:18-06:00",
     "offline_since": null,
     "tags": [
       "Erfahrungsfeld",
@@ -182104,7 +182065,7 @@
       "Wöhrderwiese",
       "Entfaltung"
     ],
-    "last_checked": "2026-11-11T09:58:42-06:00"
+    "last_checked": "2026-11-14T14:21:18-06:00"
   },
   "rettet-die-tanzzentrale-ohne-proberaeume-keine-freie-tanzszene": {
     "slug": "rettet-die-tanzzentrale-ohne-proberaeume-keine-freie-tanzszene",
@@ -182113,6 +182074,10 @@
       {
         "checked_at": "2026-11-11T09:58:42-06:00",
         "count": 473
+      },
+      {
+        "checked_at": "2026-11-14T14:21:18-06:00",
+        "count": 744
       }
     ],
     "title": "Rettet die Tanzzentrale! Ohne Proberäume keine freie Tanzszene",
@@ -182124,7 +182089,7 @@
     "category": "Kultur",
     "category_url": "https://www.openpetition.de/petitionen?category=25#petitionen",
     "country": "DE",
-    "signatures": 473,
+    "signatures": 744,
     "start_date": "2026-11-09",
     "lang": "de",
     "campaign_id": "openpetition:rettet-die-tanzzentrale-ohne-proberaeume-keine-freie-tanzszene",
@@ -182132,7 +182097,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-11T09:58:42-06:00",
+    "last_seen": "2026-11-14T14:21:18-06:00",
     "offline_since": null,
     "tags": [
       "Tanzzentrale",
@@ -182146,7 +182111,7 @@
       "Nürnberger",
       "Tafelhalle"
     ],
-    "last_checked": "2026-11-11T09:58:42-06:00"
+    "last_checked": "2026-11-14T14:21:18-06:00"
   },
   "kleinere-kita-gruppen-statt-gruppenschliessungen-fuer-eine-bessere-fruehkindliche-bildung": {
     "slug": "kleinere-kita-gruppen-statt-gruppenschliessungen-fuer-eine-bessere-fruehkindliche-bildung",
@@ -182155,6 +182120,10 @@
       {
         "checked_at": "2026-11-11T09:58:42-06:00",
         "count": 198
+      },
+      {
+        "checked_at": "2026-11-14T14:21:18-06:00",
+        "count": 1555
       }
     ],
     "title": "Kleinere Kita-Gruppen statt Gruppenschließungen – für eine bessere frühkindliche Bildung",
@@ -182166,7 +182135,7 @@
     "category": "Soziales",
     "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
     "country": "DE",
-    "signatures": 198,
+    "signatures": 1555,
     "start_date": "2026-11-09",
     "lang": "de",
     "campaign_id": "openpetition:kleinere-kita-gruppen-statt-gruppenschliessungen-fuer-eine-bessere-fruehkindliche-bildung",
@@ -182174,7 +182143,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-11T09:58:42-06:00",
+    "last_seen": "2026-11-14T14:21:18-06:00",
     "offline_since": null,
     "tags": [
       "Kinder",
@@ -182188,7 +182157,7 @@
       "Unserer",
       "Chance"
     ],
-    "last_checked": "2026-11-11T09:58:42-06:00"
+    "last_checked": "2026-11-14T14:21:18-06:00"
   },
   "kinder-schuetzen-statt-risiken-schaffen-nein-zur-substitutionspraxis-am-spielplatz": {
     "slug": "kinder-schuetzen-statt-risiken-schaffen-nein-zur-substitutionspraxis-am-spielplatz",
@@ -182197,6 +182166,10 @@
       {
         "checked_at": "2026-11-11T09:58:42-06:00",
         "count": 188
+      },
+      {
+        "checked_at": "2026-11-14T14:21:18-06:00",
+        "count": 538
       }
     ],
     "title": "Kinder schützen statt Risiken schaffen – Nein zur Substitutionspraxis am Spielplatz!",
@@ -182208,7 +182181,7 @@
     "category": "Sicherheit",
     "category_url": "https://www.openpetition.de/petitionen?category=55#petitionen",
     "country": "DE",
-    "signatures": 188,
+    "signatures": 538,
     "start_date": "2026-11-10",
     "lang": "de",
     "campaign_id": "openpetition:kinder-schuetzen-statt-risiken-schaffen-nein-zur-substitutionspraxis-am-spielplatz",
@@ -182216,7 +182189,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-11T09:58:42-06:00",
+    "last_seen": "2026-11-14T14:21:18-06:00",
     "offline_since": null,
     "tags": [
       "Kinder",
@@ -182230,7 +182203,7 @@
       "Wohlbefinden",
       "Einrichtung"
     ],
-    "last_checked": "2026-11-11T09:58:42-06:00"
+    "last_checked": "2026-11-14T14:21:18-06:00"
   },
   "erhalt-der-location-k1-in-leverkusen-wiesdorf": {
     "slug": "erhalt-der-location-k1-in-leverkusen-wiesdorf",
@@ -182239,18 +182212,22 @@
       {
         "checked_at": "2026-11-11T09:58:42-06:00",
         "count": 95
+      },
+      {
+        "checked_at": "2026-11-14T14:21:18-06:00",
+        "count": 343
       }
     ],
     "title": "Erhalt der Location K1 in Leverkusen Wiesdorf",
     "summary": "Ich melde mich hier, da ich soeben erfahren habe, daß die Räumlichkeiten der Location K1 in Leverkusen Wiesdorf in Verwaltungsräume umgewandelt werden sollen. Ist das wirklich nötig, ist das wirklich durchdacht? Hat man in den vielen großen Gebäuden, die man von Bayer übernommen hat nicht genügend Platz? Sind diese 120 m2 entscheidend? Dort finden zahllose Veranstaltungen (Geburtstage, Hochzeitsfeiern, Jubiläen, Karnevalsfeten) von Bürgern, oft aus Wiesdorf, statt. Die Gestaltung dieser Räumlich",
-    "image_url": "https://www.openpetition.de/images/default_petition.jpg",
+    "image_url": "https://www.openpetition.de/images/petition/erhalt-der-location-k1-in-leverkusen-wiesdorf_1794609419_desktop.jpg",
     "url": "https://www.openpetition.de/petition/online/erhalt-der-location-k1-in-leverkusen-wiesdorf",
     "description_full": "<!--marker--><p>Ich melde mich hier, da ich soeben erfahren habe, daß die Räumlichkeiten der Location K1 in Leverkusen Wiesdorf in Verwaltungsräume umgewandelt werden sollen.</p><p>Ist das wirklich nötig, ist das wirklich durchdacht? Hat man in den vielen großen Gebäuden, die man von Bayer übernommen hat nicht genügend Platz?<br/>Sind diese 120 m2 entscheidend?</p><p>Dort finden zahllose Veranstaltungen (Geburtstage, Hochzeitsfeiern, Jubiläen, Karnevalsfeten) von Bürgern, oft aus Wiesdorf, statt.<br/>Die Gestaltung dieser Räumlichkeiten ist einmalig und sollte erhalten bleiben. So etwas bekommen wir nie wieder.<br/>Bei mir herrscht Unverständnis über diese Entscheidung.</p><p>Ich hätte mir sogar erhofft, dass man etwas Geld anpackt um die Räumlichkeiten wieder auf Stand zu bringen.</p><p>Es gibt immer weniger zentrale Räumlichkeiten wie diese, lasst uns den Verantwortlichen zeigen, wie wichtig uns der Erhalt ist !!!</p><p>AUF GEHT'S LEVERKUSEN 💪</p><p>Veröffentlichungen auf der Leverkusen Webseite:</p><p><a href=\"https://www.leverkusen.de/pressemodul/pressemitteilungen/november/kolonie-1\" rel=\"noopener\" target=\"_blank\">https://www.leverkusen.de/pressemodul/pressemitteilungen/november/kolonie-1</a></p>\n<h3>Begründung</h3>\n<!--marker--><p>Für mich persönlich ginge hier wieder ein Stück Tradition kaputt. So etwas ist schnell, mit einer Unterschrift, entschieden. Leider ist es bei einer späteren Einsicht der Verantwortlichen nicht mehr umkehrbar.</p><p>Politik FÜR Bürger ist hier gefragt!!!</p>",
     "started_by": "Horst Wedlich",
     "category": "Kultur",
     "category_url": "https://www.openpetition.de/petitionen?category=25#petitionen",
     "country": "DE",
-    "signatures": 95,
+    "signatures": 343,
     "start_date": "2026-11-10",
     "lang": "de",
     "campaign_id": "openpetition:erhalt-der-location-k1-in-leverkusen-wiesdorf",
@@ -182258,7 +182235,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-11T09:58:42-06:00",
+    "last_seen": "2026-11-14T14:21:18-06:00",
     "offline_since": null,
     "tags": [
       "Räumlichkeiten",
@@ -182272,7 +182249,7 @@
       "Karnevalsfeten",
       "Entscheidend"
     ],
-    "last_checked": "2026-11-11T09:58:42-06:00"
+    "last_checked": "2026-11-14T14:21:18-06:00"
   },
   "beibehaltung-der-tempo-50-regelung-auf-der-marienfelder-allee-radweg-auf-dem-buergersteig": {
     "slug": "beibehaltung-der-tempo-50-regelung-auf-der-marienfelder-allee-radweg-auf-dem-buergersteig",
@@ -182281,6 +182258,10 @@
       {
         "checked_at": "2026-11-11T09:58:42-06:00",
         "count": 42
+      },
+      {
+        "checked_at": "2026-11-14T14:21:18-06:00",
+        "count": 55
       }
     ],
     "title": "Beibehaltung der Tempo 50 Regelung auf der Marienfelder Allee + Radweg auf dem Bürgersteig!",
@@ -182292,7 +182273,7 @@
     "category": "Verkehr",
     "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
     "country": "DE",
-    "signatures": 42,
+    "signatures": 55,
     "start_date": "2026-11-06",
     "lang": "de",
     "campaign_id": "openpetition:beibehaltung-der-tempo-50-regelung-auf-der-marienfelder-allee-radweg-auf-dem-buergersteig",
@@ -182300,7 +182281,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-11T09:58:42-06:00",
+    "last_seen": "2026-11-14T14:21:18-06:00",
     "offline_since": null,
     "tags": [
       "Meiner",
@@ -182314,7 +182295,7 @@
       "Unterschriften",
       "Bürgersteig"
     ],
-    "last_checked": "2026-11-11T09:58:42-06:00"
+    "last_checked": "2026-11-14T14:21:18-06:00"
   },
   "nuernberger-kulturlaeden-erhalten": {
     "slug": "nuernberger-kulturlaeden-erhalten",
@@ -182323,6 +182304,10 @@
       {
         "checked_at": "2026-11-11T09:58:42-06:00",
         "count": 17
+      },
+      {
+        "checked_at": "2026-11-14T14:21:18-06:00",
+        "count": 1116
       }
     ],
     "title": "Nürnberger Kulturläden erhalten!",
@@ -182334,7 +182319,7 @@
     "category": "Soziales",
     "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
     "country": "DE",
-    "signatures": 17,
+    "signatures": 1116,
     "start_date": "2026-11-10",
     "lang": "de",
     "campaign_id": "openpetition:nuernberger-kulturlaeden-erhalten",
@@ -182342,7 +182327,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-11T09:58:42-06:00",
+    "last_seen": "2026-11-14T14:21:18-06:00",
     "offline_since": null,
     "tags": [
       "Kulturläden",
@@ -182356,7 +182341,7 @@
       "Zusammenkunft",
       "Vereinsamung"
     ],
-    "last_checked": "2026-11-11T09:58:42-06:00"
+    "last_checked": "2026-11-14T14:21:18-06:00"
   },
   "unsere-feeds-unsere-freiheit-keine-staatliche-einflussnahme-auf-social-media": {
     "slug": "unsere-feeds-unsere-freiheit-keine-staatliche-einflussnahme-auf-social-media",
@@ -182365,19 +182350,23 @@
       {
         "checked_at": "2026-11-11T09:58:42-06:00",
         "count": 13
+      },
+      {
+        "checked_at": "2026-11-14T14:21:18-06:00",
+        "count": 2152
       }
     ],
     "title": "Unsere Feeds. Unsere Freiheit. Keine staatliche Einflussnahme auf Social Media!",
     "summary": "Wir fordern die Rundfunkkommission der Länder und die Landesregierungen auf, die geplante gesetzliche Mindestquote für bestimmte Medienangebote in den Empfehlungssystemen von YouTube, Instagram, TikTok und anderen sozialen Netzwerken zu streichen. Der aktuelle Diskussionsentwurf zum Digitalen Medien-Staatsvertrag (Teil 2) sieht vor, dass mindestens jede fünfte algorithmische Empfehlung aus einem Pool besonders anerkannter Medienangebote. Private Anbieter und unabhängige Creator müssten einen bes",
-    "image_url": "https://www.openpetition.de/images/petition/unsere-feeds-unsere-freiheit-keine-staatliche-einflussnahme-auf-social-media_1794346930_desktop.jpg",
+    "image_url": "https://www.openpetition.de/images/petition/unsere-feeds-unsere-freiheit-keine-staatliche-einflussnahme-auf-social-media_1794500436_desktop.jpg",
     "url": "https://www.openpetition.de/petition/online/unsere-feeds-unsere-freiheit-keine-staatliche-einflussnahme-auf-social-media",
-    "description_full": "<!--marker--><p>Wir fordern die Rundfunkkommission der Länder und die Landesregierungen auf, die geplante gesetzliche Mindestquote für bestimmte Medienangebote in den Empfehlungssystemen von YouTube, Instagram, TikTok und anderen sozialen Netzwerken zu streichen. Der aktuelle Diskussionsentwurf zum Digitalen Medien-Staatsvertrag (Teil 2) sieht vor, dass mindestens jede fünfte algorithmische Empfehlung aus einem Pool besonders anerkannter Medienangebote. Private Anbieter und unabhängige Creator müssten einen besonderen Status erst beantragen und könnten an den Hürden (wie z.B. einer bestimmten Redaktionsgröße) scheitern.</p><p><b>Wir sagen: Medienvielfalt darf nicht davon abhängen, wer einen privilegierten Status besitzt. </b>Wir unterstützen die Förderung von Qualitätsjournalismus und unabhängigen Medien. Aber nicht durch gesetzlich festgelegte Reichweitenquoten, die neue Nachteile für andere Medienschaffende erzeugen. Stattdessen fordern wir faire und transparente Empfehlungssysteme, echte Wahlfreiheit für Nutzer und gleiche Chancen für unabhängige Creator, Journalisten und etablierte Medienhäuser.</p>\n<h3>Begründung</h3>\n<!--marker--><p><b>Stell dir vor, du öffnest Instagram, TikTok oder YouTube, und der Staat schreibt künftig vor, welche Inhalte dir empfohlen werden sollen.</b></p><p>Was nach einem weit entfernten politischen Thema klingt, könnte bald Millionen Menschen in Deutschland betreffen. Die Bundesländer diskutieren derzeit eine Änderung des Medienstaatsvertrags. Ein Vorschlag sieht vor, dass künftig mindestens jede fünfte algorithmische Empfehlung aus einem Kreis besonders anerkannter Medienangebote stammen soll. Öffentlich-rechtliche Sender wie ARD und ZDF gehören automatisch dazu.</p><p><b>Das Problem: Damit würde der Staat nicht nur Regeln für soziale Netzwerke festlegen, sondern auch Einfluss darauf nehmen, welche Anbieter in unseren Feeds besonders sichtbar werden.</b></p><p>1. Dein Feed sollte sich nach deinen Interessen richten – nicht nach staatlichen Quoten. Ob Nachrichten, Sport, Unterhaltung, Wissenschaft oder Politik: Jeder Mensch interessiert sich für andere Inhalte. Natürlich entscheiden schon heute Algorithmen darüber, was wir sehen. Aber die Antwort darauf darf nicht sein, dass die Politik zusätzliche Quoten für bestimmte Medienanbieter vorschreibt. <b>Wir brauchen mehr Transparenz und Kontrolle über unsere Feeds, nicht weniger.</b></p><p>2. Meinungsvielfalt darf nicht staatlich vorgegeben werden. Eine lebendige Demokratie braucht unterschiedliche Perspektiven. Große und kleine Medien, etablierte Journalisten, unabhängige Stimmen und Menschen, die abseits traditioneller Medien ihre Öffentlichkeit finden. Wenn der Staat bestimmt, welche Anbieter bevorzugt empfohlen werden müssen, stellt sich eine grundsätzliche Frage: Wer entscheidet eigentlich, welche Stimmen besonders förderungswürdig sind? <b>Medienvielfalt bedeutet nicht, bestimmten Medien einen festen Anteil an unserer Aufmerksamkeit zu garantieren.</b></p><p>3. Gute Inhalte brauchen keine gesetzlich garantierte Sichtbarkeit. ARD, ZDF und unabhängiger Qualitätsjournalismus leisten wichtige Arbeit. Sie sollen selbstverständlich auch auf Social Media stattfinden und Menschen erreichen können. Doch ihre Inhalte sollten uns vor allem deshalb empfohlen werden, weil wir uns dafür interessieren, weil sie relevant sind und weil sie überzeugen, nicht aufgrund einer staatlich vorgeschriebenen Mindestquote.</p><p>4. Heute 20 Prozent – und morgen? Noch handelt es sich um einen Diskussionsentwurf, nicht um ein beschlossenes Gesetz. Aber schon jetzt sollten wir die grundsätzliche Frage stellen: Wie viel Einfluss sollte der Staat darauf nehmen dürfen, welche Inhalte und Medienangebote in unseren personalisierten Feeds auftauchen? Es geht hier nicht um Zensur oder darum, dass bestimmte Meinungen verboten würden. Es geht um die Grenze zwischen sinnvoller Medienregulierung und staatlicher Einflussnahme auf die Verteilung unserer Aufmerksamkeit.</p><p><b>Unsere Forderung ist einfach: Wir wollen selbst entscheiden können, welche Inhalte wir sehen. Wir wollen unabhängige Medien, vielfältige Perspektiven und transparente Algorithmen. Wir wollen Medienvielfalt, aber keine staatlich vorgeschriebenen Empfehlungsquoten.</b></p><p>Für alle, die mehr wissen wollen: Prof. Dr. Christian Rieck erklärt mögliche Konsequenzen sehr anschaulich in diesem Video:<a href=\"https://www.youtube.com/watch?v=46J8_ubfd4Q\" rel=\"noopener\" target=\"_blank\"> https://www.youtube.com/watch?v=46J8_ubfd4Q</a></p><p>► Weitere Quellen:</p><p>[1]<a href=\"https://www.youtube.com/redirect?event=video_description&amp;redir_token=QUlxb01IWTd6eXJma1RpNm4xZ2ZhWTNVZEczV3xBQnJ0NjluTVFCdUhMbjc5QU1XcmNkM1VReU5VMlREenEwYTcxMWY5amRmZ1k4NDAzR3ByMTdXdmdsNHN3amFiRm90TEVYdGtLMkJxWTZ4bFkySm96VlNXNDM3elExQjZIa3JG&amp;q=https%3A%2F%2Frundfunkkommission.rlp.de%2Fdigitale-medien-staatsvertrag-2&amp;v=46J8_ubfd4Q\" rel=\"noopener\" target=\"_blank\"> </a><a href=\"https://rundfunkkommission.rlp.de/digitale-medien-staatsvertrag-2\" rel=\"noopener\" target=\"_blank\">https://rundfunkkommission.rlp.de/digitale-medien-staatsvertrag-2</a><br/>[2] Besley, Timothy, and Andrea Prat (2006): “Handcuffs for the Grabbing Hand? Media Capture and Government Accountability.” American Economic Review, 96(3), 720–736.<br/>[3] Darstellung von YouTube:<a href=\"https://www.youtube.com/redirect?event=video_description&amp;redir_token=QUlxb01IWld5Y05VSl91WndiOTFmRFlvdHJ2YnxBQnJ0NjluVF9wQ0g5aTdLc3JOWlZxS0lXRHVHRER0cTlTTGR4cmFYOXVaUmNiZGFfRWF6RjhvVzZkTThGZ0F1QmZwTlZkNGpQbEg0cEIwYjdWY0UtVk0zU1FxTkoxc1NmY1R0&amp;q=https%3A%2F%2Fblog.youtube%2Fintl%2Fde-de%2Fnews-and-events%2Fmedienpolitik-demokratie-braucht-vielfalt%2F&amp;v=46J8_ubfd4Q\" rel=\"noopener\" target=\"_blank\"> https://blog.youtube/intl/de-de/news-...</a></p>",
+    "description_full": "<!--marker--><p>Wir fordern die Rundfunkkommission der Länder und die Landesregierungen auf, die geplante gesetzliche Mindestquote für bestimmte Medienangebote in den Empfehlungssystemen von YouTube, Instagram, TikTok und anderen sozialen Netzwerken zu streichen. Der aktuelle Diskussionsentwurf zum Digitalen Medien-Staatsvertrag (Teil 2) sieht vor, dass mindestens jede fünfte algorithmische Empfehlung aus einem Pool besonders anerkannter Medienangebote. Private Anbieter und unabhängige Creator müssten einen besonderen Status erst beantragen und könnten an den Hürden (wie z.B. einer bestimmten Redaktionsgröße) scheitern.</p><p><b>Wir sagen: Medienvielfalt darf nicht davon abhängen, wer einen privilegierten Status besitzt. </b>Wir unterstützen die Förderung von Qualitätsjournalismus und unabhängigen Medien. Aber nicht durch gesetzlich festgelegte Reichweitenquoten, die neue Nachteile für andere Medienschaffende erzeugen. Stattdessen fordern wir faire und transparente Empfehlungssysteme, echte Wahlfreiheit für Nutzer und gleiche Chancen für unabhängige Creator, Journalisten und etablierte Medienhäuser.</p>\n<h3>Begründung</h3>\n<!--marker--><p><b>Stell dir vor, du öffnest Instagram, TikTok oder YouTube, und der Staat schreibt künftig vor, welche Inhalte dir empfohlen werden sollen.</b></p><p>Was nach einem weit entfernten politischen Thema klingt, könnte bald Millionen Menschen in Deutschland betreffen. Die Bundesländer diskutieren derzeit eine Änderung des Medienstaatsvertrags. Ein Vorschlag sieht vor, dass künftig mindestens jede fünfte algorithmische Empfehlung aus einem Kreis besonders anerkannter Medienangebote stammen soll. Öffentlich-rechtliche Sender wie ARD und ZDF gehören automatisch dazu.</p><p><b>Das Problem: Damit würde der Staat nicht nur Regeln für soziale Netzwerke festlegen, sondern auch Einfluss darauf nehmen, welche Anbieter in unseren Feeds besonders sichtbar werden.</b></p><p>1. Dein Feed sollte sich nach deinen Interessen richten – nicht nach staatlichen Quoten. Ob Nachrichten, Sport, Unterhaltung, Wissenschaft oder Politik: Jeder Mensch interessiert sich für andere Inhalte. Natürlich entscheiden schon heute Algorithmen darüber, was wir sehen. Aber die Antwort darauf darf nicht sein, dass die Politik zusätzliche Quoten für bestimmte Medienanbieter vorschreibt. <b>Wir brauchen mehr Transparenz und Kontrolle über unsere Feeds, nicht weniger.</b></p><p>2. Meinungsvielfalt darf nicht staatlich vorgegeben werden. Eine lebendige Demokratie braucht unterschiedliche Perspektiven. Große und kleine Medien, etablierte Journalisten, unabhängige Stimmen und Menschen, die abseits traditioneller Medien ihre Öffentlichkeit finden. Wenn der Staat bestimmt, welche Anbieter bevorzugt empfohlen werden müssen, stellt sich eine grundsätzliche Frage: Wer entscheidet eigentlich, welche Stimmen besonders förderungswürdig sind? <b>Medienvielfalt bedeutet nicht, bestimmten Medien einen festen Anteil an unserer Aufmerksamkeit zu garantieren.</b></p><p>3. Gute Inhalte brauchen keine gesetzlich garantierte Sichtbarkeit. ARD, ZDF und unabhängiger Qualitätsjournalismus leisten wichtige Arbeit. Sie sollen selbstverständlich auch auf Social Media stattfinden und Menschen erreichen können. Doch ihre Inhalte sollten uns vor allem deshalb empfohlen werden, weil wir uns dafür interessieren, weil sie relevant sind und weil sie überzeugen, nicht aufgrund einer staatlich vorgeschriebenen Mindestquote.</p><p>4. Heute 20 Prozent – und morgen? Noch handelt es sich um einen Diskussionsentwurf, nicht um ein beschlossenes Gesetz. Aber schon jetzt sollten wir die grundsätzliche Frage stellen: Wie viel Einfluss sollte der Staat darauf nehmen dürfen, welche Inhalte und Medienangebote in unseren personalisierten Feeds auftauchen? Es geht hier nicht um Zensur oder darum, dass bestimmte Meinungen verboten würden. Es geht um die Grenze zwischen sinnvoller Medienregulierung und staatlicher Einflussnahme auf die Verteilung unserer Aufmerksamkeit.</p><p><b>Unsere Forderung ist einfach: Wir wollen selbst entscheiden können, welche Inhalte wir sehen. Wir wollen unabhängige Medien, vielfältige Perspektiven und transparente Algorithmen. Wir wollen Medienvielfalt, aber keine staatlich vorgeschriebenen Empfehlungsquoten.</b></p><p>► Weitere Quellen:</p><p>[1]<a href=\"https://www.youtube.com/redirect?event=video_description&amp;redir_token=QUlxb01IWTd6eXJma1RpNm4xZ2ZhWTNVZEczV3xBQnJ0NjluTVFCdUhMbjc5QU1XcmNkM1VReU5VMlREenEwYTcxMWY5amRmZ1k4NDAzR3ByMTdXdmdsNHN3amFiRm90TEVYdGtLMkJxWTZ4bFkySm96VlNXNDM3elExQjZIa3JG&amp;q=https%3A%2F%2Frundfunkkommission.rlp.de%2Fdigitale-medien-staatsvertrag-2&amp;v=46J8_ubfd4Q\" rel=\"noopener\" target=\"_blank\"> </a><a href=\"https://rundfunkkommission.rlp.de/digitale-medien-staatsvertrag-2\" rel=\"noopener\" target=\"_blank\">https://rundfunkkommission.rlp.de/digitale-medien-staatsvertrag-2</a><br/>[2] Darstellung von YouTube:<a href=\"https://www.youtube.com/redirect?event=video_description&amp;redir_token=QUlxb01IWld5Y05VSl91WndiOTFmRFlvdHJ2YnxBQnJ0NjluVF9wQ0g5aTdLc3JOWlZxS0lXRHVHRER0cTlTTGR4cmFYOXVaUmNiZGFfRWF6RjhvVzZkTThGZ0F1QmZwTlZkNGpQbEg0cEIwYjdWY0UtVk0zU1FxTkoxc1NmY1R0&amp;q=https%3A%2F%2Fblog.youtube%2Fintl%2Fde-de%2Fnews-and-events%2Fmedienpolitik-demokratie-braucht-vielfalt%2F&amp;v=46J8_ubfd4Q\" rel=\"noopener\" target=\"_blank\"> https://blog.youtube/intl/de-de/news-...</a><br/>[3] Rob Bubble: <a href=\"https://www.youtube.com/watch?v=FC8vOSEcaN4\" rel=\"noopener\" target=\"_blank\">https://www.youtube.com/watch?v=FC8vOSEcaN4</a></p>",
     "started_by": "9:16® Summit",
     "category": "Internet",
     "category_url": "https://www.openpetition.de/petitionen?category=35#petitionen",
     "country": "DE",
-    "signatures": 13,
-    "goal": 2000,
+    "signatures": 2152,
+    "goal": 30000,
     "start_date": "2026-11-09",
     "lang": "de",
     "campaign_id": "openpetition:unsere-feeds-unsere-freiheit-keine-staatliche-einflussnahme-auf-social-media",
@@ -182385,7 +182374,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-11T09:58:42-06:00",
+    "last_seen": "2026-11-14T14:21:18-06:00",
     "offline_since": null,
     "tags": [
       "Medienangebote",
@@ -182399,7 +182388,7 @@
       "Staat",
       "Diskussionsentwurf"
     ],
-    "last_checked": "2026-11-11T09:58:42-06:00"
+    "last_checked": "2026-11-14T14:21:18-06:00"
   },
   "katzenschutzverordnung-fuer-sachsen-kastration-chip-und-registrierung-fuer-freigaenger-katzen": {
     "slug": "katzenschutzverordnung-fuer-sachsen-kastration-chip-und-registrierung-fuer-freigaenger-katzen",
@@ -182408,6 +182397,10 @@
       {
         "checked_at": "2026-11-11T09:58:42-06:00",
         "count": 10
+      },
+      {
+        "checked_at": "2026-11-14T14:21:18-06:00",
+        "count": 459
       }
     ],
     "title": "Katzenschutzverordnung für Sachsen: Kastration, Chip und Registrierung für Freigänger-Katzen",
@@ -182419,7 +182412,7 @@
     "category": "Tierschutz",
     "category_url": "https://www.openpetition.de/petitionen?category=45#petitionen",
     "country": "DE",
-    "signatures": 10,
+    "signatures": 459,
     "start_date": "2026-11-09",
     "lang": "de",
     "campaign_id": "openpetition:katzenschutzverordnung-fuer-sachsen-kastration-chip-und-registrierung-fuer-freigaenger-katzen",
@@ -182427,7 +182420,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-11T09:58:42-06:00",
+    "last_seen": "2026-11-14T14:21:18-06:00",
     "offline_since": null,
     "tags": [
       "Landesweite",
@@ -182441,7 +182434,7 @@
       "Freilaufenden",
       "Vorschreiben"
     ],
-    "last_checked": "2026-11-11T09:58:42-06:00"
+    "last_checked": "2026-11-14T14:21:18-06:00"
   },
   "haende-weg-von-unseren-spiel-und-lernstuben": {
     "slug": "haende-weg-von-unseren-spiel-und-lernstuben",
@@ -182450,6 +182443,10 @@
       {
         "checked_at": "2026-11-11T09:58:42-06:00",
         "count": 5
+      },
+      {
+        "checked_at": "2026-11-14T14:21:18-06:00",
+        "count": 57
       }
     ],
     "title": "Hände weg von unseren Spiel- und Lernstuben!",
@@ -182461,7 +182458,7 @@
     "category": "Bildung",
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
     "country": "DE",
-    "signatures": 5,
+    "signatures": 57,
     "start_date": "2026-10-21",
     "lang": "de",
     "campaign_id": "openpetition:haende-weg-von-unseren-spiel-und-lernstuben",
@@ -182469,7 +182466,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-11T09:58:42-06:00",
+    "last_seen": "2026-11-14T14:21:18-06:00",
     "offline_since": null,
     "tags": [
       "Lernstuben",
@@ -182483,7 +182480,7 @@
       "Gruppen",
       "Alltag"
     ],
-    "last_checked": "2026-11-11T09:58:42-06:00"
+    "last_checked": "2026-11-14T14:21:18-06:00"
   },
   "faire-netzentgelte-keine-bestrafung-fuer-netzdienliches-verhalten": {
     "slug": "faire-netzentgelte-keine-bestrafung-fuer-netzdienliches-verhalten",
@@ -182492,6 +182489,10 @@
       {
         "checked_at": "2026-11-11T09:58:42-06:00",
         "count": 194
+      },
+      {
+        "checked_at": "2026-11-14T14:21:18-06:00",
+        "count": 419
       }
     ],
     "title": "Faire Netzentgelte: keine Bestrafung für netzdienliches Verhalten",
@@ -182503,7 +182504,7 @@
     "category": "Energie",
     "category_url": "https://www.openpetition.de/at/petitionen?category=50#petitionen",
     "country": "AT",
-    "signatures": 194,
+    "signatures": 419,
     "start_date": "2026-11-09",
     "lang": "de",
     "campaign_id": "openpetition:faire-netzentgelte-keine-bestrafung-fuer-netzdienliches-verhalten",
@@ -182511,7 +182512,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-11T09:58:42-06:00",
+    "last_seen": "2026-11-14T14:21:18-06:00",
     "offline_since": null,
     "tags": [
       "Verbraucht",
@@ -182525,7 +182526,7 @@
       "Jemand",
       "Nachbarschaft"
     ],
-    "last_checked": "2026-11-11T09:58:42-06:00"
+    "last_checked": "2026-11-14T14:21:18-06:00"
   },
   "nachdenkpause-fuer-spitalsbau-am-oberberg-in-eisenstadt": {
     "slug": "nachdenkpause-fuer-spitalsbau-am-oberberg-in-eisenstadt",
@@ -182534,6 +182535,10 @@
       {
         "checked_at": "2026-11-11T09:58:42-06:00",
         "count": 23
+      },
+      {
+        "checked_at": "2026-11-14T14:21:18-06:00",
+        "count": 37
       }
     ],
     "title": "Nachdenkpause für Spitalsbau am Oberberg in Eisenstadt",
@@ -182545,7 +182550,7 @@
     "category": "Bauen",
     "category_url": "https://www.openpetition.de/at/petitionen?category=6#petitionen",
     "country": "AT",
-    "signatures": 23,
+    "signatures": 37,
     "start_date": "2026-11-09",
     "lang": "de",
     "campaign_id": "openpetition:nachdenkpause-fuer-spitalsbau-am-oberberg-in-eisenstadt",
@@ -182553,7 +182558,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-11T09:58:42-06:00",
+    "last_seen": "2026-11-14T14:21:18-06:00",
     "offline_since": null,
     "tags": [
       "Krankenhaus",
@@ -182567,7 +182572,7 @@
       "Euro",
       "Zwischenlösung"
     ],
-    "last_checked": "2026-11-11T09:58:42-06:00"
+    "last_checked": "2026-11-14T14:21:18-06:00"
   },
   "petition-zur-wahrung-der-elterlichen-bildungsfreiheit": {
     "slug": "petition-zur-wahrung-der-elterlichen-bildungsfreiheit",
@@ -182576,6 +182581,10 @@
       {
         "checked_at": "2026-11-11T09:58:42-06:00",
         "count": 6
+      },
+      {
+        "checked_at": "2026-11-14T14:21:18-06:00",
+        "count": 8
       }
     ],
     "title": "Petition zur Wahrung der elterlichen Bildungsfreiheit",
@@ -182587,7 +182596,7 @@
     "category": "Bildung",
     "category_url": "https://www.openpetition.de/ch/petitionen?category=7#petitionen",
     "country": "CH",
-    "signatures": 6,
+    "signatures": 8,
     "goal": 500,
     "start_date": "2026-11-09",
     "lang": "de",
@@ -182596,7 +182605,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-11T09:58:42-06:00",
+    "last_seen": "2026-11-14T14:21:18-06:00",
     "offline_since": null,
     "tags": [
       "Überprüfung",
@@ -182610,7 +182619,7 @@
       "Bildungsfreiheit",
       "Bildungsgesetzes"
     ],
-    "last_checked": "2026-11-11T09:58:42-06:00"
+    "last_checked": "2026-11-14T14:21:18-06:00"
   },
   "nuernberg-linie-82-muss-bleiben-unsere-kinder-und-senioren-duerfen-nicht-im-stich-gelassen-werden": {
     "slug": "nuernberg-linie-82-muss-bleiben-unsere-kinder-und-senioren-duerfen-nicht-im-stich-gelassen-werden",
