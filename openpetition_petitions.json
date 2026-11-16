@@ -31,17 +31,14 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-11-15T14:36:45-06:00",
+    "generated_at": "2026-11-15T19:38:33-06:00",
     "petition_count": 2795,
-    "available": 1700,
-    "new_petitions_last_run": [
-      "amtsneubau-kosten-raumbedarf-und-alternativen-konsequent-pruefen-ziel-3-000-unterschriften",
-      "rettet-die-berliner-strasse-84-jetzt-handeln-gegen-verdraengung"
-    ],
+    "available": 1690,
+    "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-11-15T14:36:45-06:00",
-      "gefunden": 1700,
-      "im_bestand": 1700,
+      "stand": "2026-11-15T19:38:33-06:00",
+      "gefunden": 1690,
+      "im_bestand": 1690,
       "unbrauchbar": 0,
       "verworfen": 0,
       "dublette": 0,
@@ -50,11 +47,11 @@
       "offen": 0,
       "offene_beispiele": [],
       "bestand_gesamt": 2795,
-      "bestand_ausserhalb": 1095
+      "bestand_ausserhalb": 1105
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-11-15T14:36:45-06:00",
+        "zeit": "2026-11-15T19:38:33-06:00",
         "gesamt": 2795,
         "online": 2795,
         "offline": 0,
@@ -68,11 +65,11 @@
         "mit_code_im_text": 0,
         "mit_ballast_in_kurzfassung": 0,
         "herkunft": "lokal_cron",
-        "neu": 2
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-11-15T14:36:45-06:00",
+      "zeit": "2026-11-15T19:38:33-06:00",
       "gesamt": 2795,
       "online": 2795,
       "offline": 0,
@@ -86,7 +83,7 @@
       "mit_code_im_text": 0,
       "mit_ballast_in_kurzfassung": 0
     },
-    "verlauf_felder_ab": "2026-11-15T14:36:45-06:00",
+    "verlauf_felder_ab": "2026-11-15T19:38:33-06:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 2795
@@ -183191,6 +183188,10 @@
       {
         "checked_at": "2026-11-12T17:03:48-06:00",
         "count": 547
+      },
+      {
+        "checked_at": "2026-11-15T19:35:07-06:00",
+        "count": 562
       }
     ],
     "title": "Erhalt der Kita Sonnenglanz Brand-Erbisdorf- Kinder sind keine Auslastungsquote!",
@@ -183202,7 +183203,7 @@
     "category": "Familie",
     "category_url": "https://www.openpetition.de/petitionen?category=14#petitionen",
     "country": "DE",
-    "signatures": 547,
+    "signatures": 562,
     "start_date": "2026-11-06",
     "lang": "de",
     "campaign_id": "openpetition:erhalt-der-kita-sonnenglanz-brand-erbisdorf-kinder-sind-keine-auslastungsquote",
@@ -183210,7 +183211,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-12T17:03:48-06:00",
+    "last_seen": "2026-11-15T19:35:07-06:00",
     "offline_since": null,
     "tags": [
       "Kita",
@@ -183224,7 +183225,7 @@
       "Eltern",
       "Kinder"
     ],
-    "last_checked": "2026-11-12T17:03:48-06:00"
+    "last_checked": "2026-11-15T19:35:07-06:00"
   },
   "janni-unser-postbote-gehoert-zu-gehrden-wir-wuenschen-uns-seine-rueckkehr": {
     "slug": "janni-unser-postbote-gehoert-zu-gehrden-wir-wuenschen-uns-seine-rueckkehr",
@@ -183237,6 +183238,10 @@
       {
         "checked_at": "2026-11-12T17:03:48-06:00",
         "count": 333
+      },
+      {
+        "checked_at": "2026-11-15T19:35:07-06:00",
+        "count": 340
       }
     ],
     "title": "Janni, unser Postbote gehört zu Gehrden – wir wünschen uns seine Rückkehr!",
@@ -183248,7 +183253,7 @@
     "category": "Soziales",
     "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
     "country": "DE",
-    "signatures": 333,
+    "signatures": 340,
     "goal": 400,
     "start_date": "2026-11-07",
     "lang": "de",
@@ -183257,7 +183262,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-12T17:03:48-06:00",
+    "last_seen": "2026-11-15T19:35:07-06:00",
     "offline_since": null,
     "tags": [
       "Gehrden",
@@ -183271,7 +183276,7 @@
       "Einzusetzen",
       "Freundliche"
     ],
-    "last_checked": "2026-11-12T17:03:48-06:00"
+    "last_checked": "2026-11-15T19:35:07-06:00"
   },
   "unterschriftensammlung-gegen-die-schliessung-der-volksbankfiliale-in-bispingen": {
     "slug": "unterschriftensammlung-gegen-die-schliessung-der-volksbankfiliale-in-bispingen",
@@ -183284,6 +183289,10 @@
       {
         "checked_at": "2026-11-12T17:03:48-06:00",
         "count": 425
+      },
+      {
+        "checked_at": "2026-11-15T19:35:07-06:00",
+        "count": 459
       }
     ],
     "title": "Unterschriftensammlung gegen die Schließung der Volksbankfiliale in Bispingen",
@@ -183295,7 +183304,7 @@
     "category": "Verbraucherschutz",
     "category_url": "https://www.openpetition.de/petitionen?category=59#petitionen",
     "country": "DE",
-    "signatures": 425,
+    "signatures": 459,
     "goal": 300,
     "start_date": "2026-11-05",
     "lang": "de",
@@ -183304,7 +183313,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-12T17:03:48-06:00",
+    "last_seen": "2026-11-15T19:35:07-06:00",
     "offline_since": null,
     "tags": [
       "Bispingen",
@@ -183318,7 +183327,7 @@
       "Gewerbetreibenden",
       "Geschäftsleitung"
     ],
-    "last_checked": "2026-11-12T17:03:48-06:00"
+    "last_checked": "2026-11-15T19:35:07-06:00"
   },
   "unsere-burgschule-braucht-einen-hausmeister-in-vollzeit": {
     "slug": "unsere-burgschule-braucht-einen-hausmeister-in-vollzeit",
