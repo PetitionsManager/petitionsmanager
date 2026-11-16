@@ -31,14 +31,18 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-11-16T08:22:17-06:00",
-    "petition_count": 2806,
-    "available": 1698,
-    "new_petitions_last_run": [],
+    "generated_at": "2026-11-16T10:30:24-06:00",
+    "petition_count": 2809,
+    "available": 1701,
+    "new_petitions_last_run": [
+      "theaterhaus-rudi-bleibt-offen",
+      "zwei-kurzzeitparkplaetze-zur-paketabgabe-in-der-werlberger-strasse-2",
+      "gebt-den-stadttauben-an-der-dresdner-hauptstrasse-eine-zukunft"
+    ],
     "bilanz": {
-      "stand": "2026-11-16T08:22:17-06:00",
-      "gefunden": 1698,
-      "im_bestand": 1698,
+      "stand": "2026-11-16T10:30:24-06:00",
+      "gefunden": 1701,
+      "im_bestand": 1701,
       "unbrauchbar": 0,
       "verworfen": 0,
       "dublette": 0,
@@ -46,64 +50,47 @@
       "zurueckgestellt": 0,
       "offen": 0,
       "offene_beispiele": [],
-      "bestand_gesamt": 2806,
+      "bestand_gesamt": 2809,
       "bestand_ausserhalb": 1108
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-11-16T07:25:05-06:00",
-        "gesamt": 2806,
-        "online": 2806,
+        "zeit": "2026-11-16T10:30:24-06:00",
+        "gesamt": 2809,
+        "online": 2809,
         "offline": 0,
         "ohne_titel": 0,
         "platzhalter": 0,
         "nicht_ausgeliefert": 0,
         "torsi": 0,
         "dubletten": 0,
-        "mit_start": 2791,
-        "juengstes_start": "2026-11-14",
+        "mit_start": 2794,
+        "juengstes_start": "2026-11-16",
         "mit_code_im_text": 0,
         "mit_ballast_in_kurzfassung": 0,
         "herkunft": "lokal_cron",
-        "neu": 4
-      },
-      {
-        "zeit": "2026-11-16T08:22:17-06:00",
-        "gesamt": 2806,
-        "online": 2806,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 2791,
-        "juengstes_start": "2026-11-14",
-        "mit_code_im_text": 0,
-        "mit_ballast_in_kurzfassung": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
+        "neu": 3
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-11-16T08:22:17-06:00",
-      "gesamt": 2806,
-      "online": 2806,
+      "zeit": "2026-11-16T10:30:24-06:00",
+      "gesamt": 2809,
+      "online": 2809,
       "offline": 0,
       "ohne_titel": 0,
       "platzhalter": 0,
       "nicht_ausgeliefert": 0,
       "torsi": 0,
       "dubletten": 0,
-      "mit_start": 2791,
-      "juengstes_start": "2026-11-14",
+      "mit_start": 2794,
+      "juengstes_start": "2026-11-16",
       "mit_code_im_text": 0,
       "mit_ballast_in_kurzfassung": 0
     },
-    "verlauf_felder_ab": "2026-11-16T07:25:05-06:00",
+    "verlauf_felder_ab": "2026-11-16T10:30:24-06:00",
     "befunde": [],
     "health_warning": null,
-    "online_count": 2806
+    "online_count": 2809
   },
   "fuer-den-erhalt-einer-sicheren-individuellen-geburtshilfe-stoppt-den-neuen-hebammenhilfevertrag-2": {
     "slug": "fuer-den-erhalt-einer-sicheren-individuellen-geburtshilfe-stoppt-den-neuen-hebammenhilfevertrag-2",
@@ -187623,5 +187610,131 @@
       "Kostenlosen"
     ],
     "last_checked": "2026-11-16T07:13:18-06:00"
+  },
+  "theaterhaus-rudi-bleibt-offen": {
+    "slug": "theaterhaus-rudi-bleibt-offen",
+    "first_seen": "2026-11-16T10:27:08-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-11-16T10:27:08-06:00",
+        "count": 205
+      }
+    ],
+    "title": "THEATERHAUS RUDI bleibt offen!",
+    "summary": "Die Frage ist nicht, wie viel ehrenamtlich getragene Kultur kosten darf – sondern, was sie uns wert ist. Mit großer Sorge verfolgen wir die Berichterstattung zu den Haushaltsverhandlungen 2027/2028 der Stadt Dresden. Es ist von drastischen Einsparungen die Rede – und wie so oft würde zuerst bei der Kultur und den so genannten Freiwilligen Aufgaben gespart. Beim Theaterhaus RUDI, das unter kommunaler Verwaltung steht, wäre das ein Totalschaden: sozial, gesellschaftlich, kulturell und wirtschaftli",
+    "image_url": "https://www.openpetition.de/images/petition/theaterhaus-rudi-bleibt-offen_1794827326_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/theaterhaus-rudi-bleibt-offen",
+    "description_full": "<!--marker--><p><b>Die Frage ist nicht, wie viel ehrenamtlich getragene Kultur kosten darf – sondern, was sie uns wert ist.</b><br/>Mit großer Sorge verfolgen wir die Berichterstattung zu den Haushaltsverhandlungen 2027/2028 der Stadt Dresden. Es ist von drastischen Einsparungen die Rede – und wie so oft würde zuerst bei der Kultur und den so genannten Freiwilligen Aufgaben gespart. Beim Theaterhaus RUDI, das unter kommunaler Verwaltung steht, wäre das ein Totalschaden: sozial, gesellschaftlich, kulturell und wirtschaftlich.</p><p><b>Was auf dem Spiel steht</b><br/>Das RUDI ist ein sozioökonomisches und kulturwirtschaftliches Powerhouse: Stand jetzt kamen 2026 über 9000 zahlende Gäste aus acht Ländern innerhalb und außerhalb der EU, 180-mal gingen die Scheinwerfer an. 14 Vereine mit mehreren hundert Mitgliedern haben hier teils seit Jahrzehnten ihr Zuhause und leisten jedes Jahr tausende Stunden ehrenamtlicher Arbeit – in Theater, Tanz, Konzerten, Vereinstreffen und Netzwerk-Events. Seit Jahrzehnten ist das RUDI das einzige aus öffentlichen Geldern finanzierte Amateurtheaterhaus in ganz Deutschland; auch wir als kulturpolitische Interessenvertretung sächsischer Amateurtheater (LATS) haben hier unsere Geschäftsstelle.</p><p><b>Fordert mit uns: Das Theaterhaus RUDI muss erhalten bleiben!</b></p><ul><li>Als Anlaufpunkt für seine 14 Gruppen und ihre mehreren hundert Mitglieder.</li><li>Als bezahlbarer Proben- und Aufführungsort mit steigendem sozioökonomischem Mehrwert.</li><li>Als Ort, an dem Gesellschaft sich entwickeln und lebendig sein darf.</li><li>Als unverzichtbares Umfeld und Zuhause einer internationalen Gemeinschaft.</li><li>Als Geschäftsstelle des Landesverbands Amateurtheater Sachsen.</li></ul>\n<h3>Begründung</h3>\n<!--marker--><p><b>Ein Geschenk an Dresden, das sich auszahlt</b><br/>Freie und ehrenamtlich organisierte Kultur leistet ökonomisch Schwerstarbeit: Amateurtheater machen aus sehr wenig Ressourcen das Meiste. Wissenschaftliche Untersuchung zu Dresdner Kultureinrichtungen haben gezeigt, dass öffentliche Kulturförderung erhebliche wirtschaftliche Folgeeffekte auslöst – weit über die geförderten Einrichtungen hinaus, etwa in Gastronomie, Hotellerie und weiteren Branchen.</p><p><b>Wer hier den Rotstift ansetzt, nimmt Menschen ihr Umfeld</b><br/>Das RUDI ist seit Jahrzehnten gewachsenes Zuhause für viele: für Dresdner*innen und Zugezogene, für Menschen aller Generationen und Hintergründe. Ob als Gast oder Vereinsmitglied, ob aus Indien, den USA, Großbritannien, der Ukraine, Deutschland, Russland, Zypern oder Australien – RUDI hilft, sich in Dresden zu verwurzeln und den guten Ruf der Stadt in die Welt zu tragen. Hier finden Menschen Selbstwirksamkeit, Zugehörigkeit, einen Möglichkeits- und Diskursraum; Freundschaften, Lampenfieber und echten Applaus. RUDI ist ein Safe Space, der vom Alltag ablenkt, auffängt und trösten kann – ein Gegenentwurf zu digitaler Anonymität und Einsamkeit. Qualitäten, die unsere Gesellschaft sucht. Schlimmstenfalls geht diese Chance auf gesellschaftliche und kulturelle Teilhabe verloren.</p><p>Quellen:<br/><a href=\"https://soziokultur-sachsen.de/cdn/user_upload/soziokultur/Downloads/Fachliche-Standards-Soziokultur_2024_Digital__1_.pdf\" rel=\"noopener\" target=\"_blank\">Mit Kultur Gemeinswesen gestalten. Fachliche Standards für die Soziokultur im Freistaat Sachsen 2024</a> 2024<br/><a href=\"https://soziokultur-sachsen.de/cdn/user_upload/soziokultur/Downloads/Bestandserhebung_LV-Soziokultur-Sachsen_2023-NEU.pdf?utm_source=chatgpt.com\" rel=\"noopener\" target=\"_blank\">Bestandserhebung_LV-Soziokultur-Sachsen_2023-NEU.pdf</a> 2023<br/><a href=\"https://www.dwif.de/news/item/wirtschaftsfaktor-oekonomischer-faktencheck-ihk-sachsen.html?utm_source=chatgpt.com\" rel=\"noopener\" target=\"_blank\">dwif-Studie: Ökonomischer Faktencheck Freizeit-/Kultureinrichtungen &amp; Großveranstaltungen in Sachsen</a> 2020</p>",
+    "started_by": "Landesverband Amateurtheater Sachsen",
+    "category": "Kultur",
+    "category_url": "https://www.openpetition.de/petitionen?category=25#petitionen",
+    "country": "DE",
+    "signatures": 205,
+    "start_date": "2026-11-16",
+    "lang": "de",
+    "campaign_id": "openpetition:theaterhaus-rudi-bleibt-offen",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-11-16T10:27:08-06:00",
+    "offline_since": null,
+    "tags": [
+      "RUDI",
+      "Kultur",
+      "THEATERHAUS",
+      "Dresden",
+      "Amateurtheater",
+      "Ehrenamtlich",
+      "Jahrzehnten",
+      "Sachsen",
+      "Zuhause",
+      "Stadt"
+    ],
+    "last_checked": "2026-11-16T10:27:08-06:00"
+  },
+  "zwei-kurzzeitparkplaetze-zur-paketabgabe-in-der-werlberger-strasse-2": {
+    "slug": "zwei-kurzzeitparkplaetze-zur-paketabgabe-in-der-werlberger-strasse-2",
+    "first_seen": "2026-11-16T10:27:08-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-11-16T10:27:08-06:00",
+        "count": 142
+      }
+    ],
+    "title": "Zwei Kurzzeitparkplätze zur Paketabgabe in der Werlberger Straße 2",
+    "summary": "Wir bitten die Stadt Aichach, direkt vor dem Tierfreunde Fachgeschäft in der Werlberger Straße 2 zwei Kurzzeitparkplätze zur Paketabgabe offiziell auszuweisen und gut sichtbar zu beschildern. Eine klare Regelung zeigt allen, wo sie ihr Fahrzeug für die Paketabgabe abstellen dürfen. So lässt sich ungeordnetes Parken vermeiden, und Fahrbahn, Gehweg und Zugänge bleiben frei. Die Plätze sollen nur für die Dauer der unmittelbaren Paketabgabe genutzt und danach sofort freigemacht werden. Mit Ihrer Unt",
+    "image_url": "https://www.openpetition.de/images/petition/zwei-kurzzeitparkplaetze-zur-paketabgabe-in-der-werlberger-strasse-2_1794572484_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/zwei-kurzzeitparkplaetze-zur-paketabgabe-in-der-werlberger-strasse-2",
+    "description_full": "<!--marker--><p>Wir bitten die Stadt Aichach, direkt vor dem Tierfreunde Fachgeschäft in der Werlberger Straße 2 zwei Kurzzeitparkplätze zur Paketabgabe offiziell auszuweisen und gut sichtbar zu beschildern.</p><p>Eine klare Regelung zeigt allen, wo sie ihr Fahrzeug für die Paketabgabe abstellen dürfen.<br/>So lässt sich ungeordnetes Parken vermeiden, und Fahrbahn, Gehweg und Zugänge bleiben frei.</p><p>Die Plätze sollen nur für die Dauer der unmittelbaren Paketabgabe genutzt und danach sofort freigemacht werden.</p><p>Mit Ihrer Unterschrift unterstützen Sie eine klare Parkregelung für die Paketabgabe vor Ort.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Für Aichach soll eine Lösung gefunden werden, die für alle funktioniert. Wer ein Paket abgibt, soll wissen, wo kurz gehalten werden darf. Gleichzeitig sollen Gehwege, Zufahrten und die Fahrbahn frei bleiben. Die Plätze sollen nur für die unmittelbare Paketabgabe genutzt und direkt danach wieder freigemacht werden.</p><p>Eine klare Regelung hilft, ungeordnetes Parken zu vermeiden.</p><p>Mit Ihrer Unterschrift unterstützen Sie einen Kompromiss, der die Paketabgabe erleichtert und die Interessen von Anwohnern, Fußgängern und Autofahrern berücksichtigt.</p>",
+    "started_by": "Florian Ziegler",
+    "category": "Bürgerrechte",
+    "category_url": "https://www.openpetition.de/petitionen?category=58#petitionen",
+    "country": "DE",
+    "signatures": 142,
+    "start_date": "2026-11-13",
+    "lang": "de",
+    "campaign_id": "openpetition:zwei-kurzzeitparkplaetze-zur-paketabgabe-in-der-werlberger-strasse-2",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-11-16T10:27:08-06:00",
+    "offline_since": null,
+    "tags": [
+      "Paketabgabe",
+      "Klare",
+      "Kurzzeitparkplätze",
+      "Ungeordnetes",
+      "Freigemacht",
+      "Werlberger",
+      "Vermeiden",
+      "Fahrbahn",
+      "Regelung",
+      "Aichach"
+    ],
+    "last_checked": "2026-11-16T10:27:08-06:00"
+  },
+  "gebt-den-stadttauben-an-der-dresdner-hauptstrasse-eine-zukunft": {
+    "slug": "gebt-den-stadttauben-an-der-dresdner-hauptstrasse-eine-zukunft",
+    "first_seen": "2026-11-16T10:27:08-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-11-16T10:27:08-06:00",
+        "count": 89
+      }
+    ],
+    "title": "Gebt den Stadttauben an der Dresdner Hauptstraße eine Zukunft!",
+    "summary": "Wir fordern Vonovia und die Landeshauptstadt Dresden auf, gemeinsam mit der Stadttaubeninitiative Dresden einen dauerhaften, betreuten Taubenschlag für die gesamte betroffene Taubenkolonie an der Hauptstraße einzurichten. Unsere Forderungen: 1. Einrichtung eines betreuten Taubenschlags. Für die gesamte betroffene Kolonie muss ein geeigneter, sicherer und dauerhafter Standort an der Hauptstraße geschaffen werden. 2. Finanzielle Beteiligung durch Vonovia. Die Verantwortung darf nicht allein auf ei",
+    "image_url": "https://www.openpetition.de/images/petition/gebt-den-stadttauben-an-der-dresdner-hauptstrasse-eine-zukunft_1794822449_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/gebt-den-stadttauben-an-der-dresdner-hauptstrasse-eine-zukunft",
+    "description_full": "<!--marker--><p>Wir fordern Vonovia und die Landeshauptstadt Dresden auf, gemeinsam mit der Stadttaubeninitiative Dresden einen dauerhaften, betreuten Taubenschlag für die gesamte betroffene Taubenkolonie an der Hauptstraße einzurichten.</p><p>Unsere Forderungen:</p><p>1. Einrichtung eines betreuten Taubenschlags.<br/>Für die gesamte betroffene Kolonie muss ein geeigneter, sicherer und dauerhafter Standort an der Hauptstraße geschaffen werden.</p><p>2. Finanzielle Beteiligung durch Vonovia.<br/>Die Verantwortung darf nicht allein auf einen gemeinnützigen Verein und ehrenamtliche Helfer übertragen werden. Die Stadttaubeninitiative Dresden leistet bereits umfangreiche Arbeit, verfügt jedoch nur über begrenzte finanzielle Mittel.</p><p>Wir fordern Vonovia deshalb auf, sich maßgeblich an den Kosten für Standort, Bau, Einrichtung und Ausstattung des Taubenschlags zu beteiligen.</p><p>3. Zusammenarbeit mit der Stadttaubeninitiative Dresden. Aufgrund ihrer Erfahrung muss die Initiative verbindlich in die Planung und spätere Betreuung des Taubenschlags eingebunden werden.</p><p>4. Schutz aller Tiere während der Sanierung.<br/>Kein Tier darf eingeschlossen, zurückgelassen oder durch die Bauarbeiten gefährdet werden. Vor dem Verschließen jedes Bauabschnitts müssen alle Nischen sorgfältig auf Tauben, Eier und Küken kontrolliert werden.</p><p>5. Zeitnaher Gesprächstermin.<br/>Wir fordern ein gemeinsames Gespräch zwischen Vonovia, dem Veterinäramt, der Landeshauptstadt Dresden und der Stadttaubeninitiative Dresden. Ziel müssen konkrete Maßnahmen, verbindliche Absprachen und eine langfristige Lösung sein.</p>\n<h3>Begründung</h3>\n<!--marker--><p>An der Dresdner Hauptstraße lebt eine Stadttaubenkolonie, die in den Hohlräumen und Nischen eines Gebäudes Schutz und Brutplätze gefunden hat.<br/>Die Situation ist seit längerer Zeit bekannt. Bereits am 8. Januar 2026 berichtete TAG24 über die Sorgen der Tierschützer und die Gefahr, dass die Tauben durch geplante Baumaßnahmen ihren Lebensraum verlieren könnten.</p><p>Nun stehen Sanierungsarbeiten bevor. Wir möchten verhindern, dass die Tiere einfach verdrängt werden. Stattdessen fordern wir eine dauerhafte, tierschutzgerechte und nachhaltige Lösung: einen betreuten Taubenschlag.</p><p>Bisherige Entwicklung. Am 29.05.2026 fand ein Vor-Ort-Termin mit dem Veterinäramt, Vonovia, einem Schädlingsbekämpfer und Vertretern der Stadttaubeninitiative Dresden statt.</p><p>Die Initiative erklärte dabei ihre Bereitschaft, die Sanierungsarbeiten zu begleiten und Taubenküken aus geöffneten Bauabschnitten zu übernehmen.<br/>Im November 2026 informierte das Veterinäramt die Initiative darüber, dass die Sanierung beginnen soll. Geplant ist, den Unterbau abschnittsweise von hinten in Richtung der Einflugöffnung zu öffnen, zu reinigen und anschließend wieder zu verschließen. Zuletzt waren zwei Abschnitte pro Woche vorgesehen.<br/>Einige Pflegestellen haben bereits grundsätzlich zugesagt, bei einer überschaubaren Anzahl Küken Aufnahmekapazitäten bereitzustellen.<br/>Wir begrüßen dieses Engagement ausdrücklich. Da die tatsächliche Größe der Kolonie jedoch noch unbekannt ist, braucht es eine sorgfältige Planung und verbindliche Absprachen, bevor Brutplätze verschlossen werden. Brütende Tauben fliehen bei Gefahr nicht zwangsläufig.<br/>Wir fordern daher eine tierschutzgerechte Begleitung sämtlicher Bauabschnitte sowie eine sorgfältige Kontrolle vor jedem endgültigen Verschließen.<br/>Warum ein betreuter Taubenschlag die nachhaltige Lösung ist, Stadttauben stammen von domestizierten Haustauben ab und sind standorttreue Tiere. Sie suchen geschützte Gebäudenischen und Hohlräume als Brut- und Rückzugsplätze. Eine bloße Verdrängung löst das Problem nicht, sondern führt dazu, dass die Tiere andernorts neue Brutplätze suchen.</p><p>Ein betreuter Taubenschlag bietet eine dauerhafte Alternative. Dort können die Tauben:<br/>- einen geschützten und sicheren Lebensraum finden<br/>- regelmäßig artgerechtes Futter und sauberes Wasser erhalten<br/>- kontrollierte Brutplätze nutzen<br/>- durch Eiertausch, gegen Attrappen, wird die die Vermehrung minimiert<br/>- bei Erkrankungen oder Verletzungen frühzeitig versorgt werden.<br/>So kann die Population langfristig und tierschutzgerecht reguliert werden. Davon profitieren sowohl die Tiere als auch Anwohner und Eigentümer.</p><p>Ehrenamtliche Unterstützung ist vorhanden<br/>Wir stehen mit unserem Anliegen nicht allein. Familien, Menschen aus der Umgebung und weitere Unterstützer haben bereits ihre Bereitschaft erklärt, sich ehrenamtlich einzubringen und beispielsweise bei Reinigungsarbeiten und der Betreuung eines Taubenschlags zu helfen.<br/>Die Bereitschaft, Verantwortung zu übernehmen, ist also vorhanden. Was fehlt, sind die notwendigen finanziellen und organisatorischen Voraussetzungen sowie eine verbindliche Zusammenarbeit aller Beteiligten.</p><p>Unsere Bitte:</p><p>Wir möchten keine Konfrontation zwischen Tierschutz, Eigentümern und Stadt. Wir möchten eine Lösung, die den Interessen aller Beteiligten gerecht wird und vor allem das Leben der betroffenen Tauben schützt.<br/>Die Tauben sind Nachkommen domestizierter Tiere und auf einen verantwortungsvollen Umgang durch uns Menschen angewiesen. Ihre Brutplätze einfach zu verschließen, ohne ihnen eine Alternative zu bieten, ist keine nachhaltige Lösung.<br/>Ein betreuter Taubenschlag bietet die Chance, aus einer langjährigen Konfliktsituation eine tierschutzgerechte und dauerhafte Lösung zu entwickeln.<br/>Wir appellieren daher an Vonovia und die Verantwortlichen der Landeshauptstadt Dresden, gemeinsam mit der Stadttaubeninitiative diesen Weg zu gehen.</p><p>Ich starte diese Petition, weil ich überzeugt bin, dass wir es besser machen können.</p><p>Mensch und Tier müssen nicht gegeneinanderstehen.<br/>Die Tauben brauchen eine Stimme. Und ich möchte ihnen diese Stimme geben.</p><p>Bitte unterstützt unsere Forderung und gebt den Stadttauben an der Dresdner Hauptstraße eine Zukunft!</p><p>Jede Unterschrift zählt. Jede Stimme hilft.</p><p>Für ein friedliches Zusammenleben von Mensch und Tier!</p><p>In Zusammenarbeit mit und unter Einbeziehung der Stadttaubeninitiative Dresden.</p><p>♡ Alles für die Tauben immer. Für den Tierschutz. Für eine gemeinsame Zukunft. ♡</p><p>Quelle:<br/><a href=\"https://www.tag24.de/dresden/lokales/dachoeffnung-in-dresden-tierschuetzer-kaempfen-um-taubenrettung-3455044\" rel=\"noopener\" target=\"_blank\">https://www.tag24.de/dresden/lokales/dachoeffnung-in-dresden-tierschuetzer-kaempfen-um-taubenrettung-3455044</a></p>",
+    "started_by": "Isabell Bernert",
+    "category": "Tierschutz",
+    "category_url": "https://www.openpetition.de/petitionen?category=45#petitionen",
+    "country": "DE",
+    "signatures": 89,
+    "start_date": "2026-11-16",
+    "lang": "de",
+    "campaign_id": "openpetition:gebt-den-stadttauben-an-der-dresdner-hauptstrasse-eine-zukunft",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-11-16T10:27:08-06:00",
+    "offline_since": null,
+    "tags": [
+      "Dresden",
+      "Vonovia",
+      "Stadttaubeninitiative",
+      "Hauptstraße",
+      "Tauben",
+      "Taubenschlag",
+      "Lösung",
+      "Tiere",
+      "Taubenschlags",
+      "Brutplätze"
+    ],
+    "last_checked": "2026-11-16T10:27:08-06:00"
   }
 }
