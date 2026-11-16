@@ -31,17 +31,12 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-11-16T07:25:06-06:00",
+    "generated_at": "2026-11-16T08:22:17-06:00",
     "petition_count": 2806,
     "available": 1698,
-    "new_petitions_last_run": [
-      "erhalt-der-lahrer-geburtshilfe-erhalt-der-bestandsklinik-lahr",
-      "sprottenflotte-in-laboe-erhalten-damit-die-region-verbunden-bleibt",
-      "sicherer-schulweg-am-kreisverkehr-franzberg-fuer-unsere-kinder-und-jugendlichen",
-      "tim-ticket-kostenlos-fuer-schueler-innen-in-oldenburg-unabhaengig-von-ihrem-wohnort-oder-alter"
-    ],
+    "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-11-16T07:25:05-06:00",
+      "stand": "2026-11-16T08:22:17-06:00",
       "gefunden": 1698,
       "im_bestand": 1698,
       "unbrauchbar": 0,
@@ -71,10 +66,27 @@
         "mit_ballast_in_kurzfassung": 0,
         "herkunft": "lokal_cron",
         "neu": 4
+      },
+      {
+        "zeit": "2026-11-16T08:22:17-06:00",
+        "gesamt": 2806,
+        "online": 2806,
+        "offline": 0,
+        "ohne_titel": 0,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 0,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 2791,
+        "juengstes_start": "2026-11-14",
+        "mit_code_im_text": 0,
+        "mit_ballast_in_kurzfassung": 0,
+        "herkunft": "lokal_cron",
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-11-16T07:25:05-06:00",
+      "zeit": "2026-11-16T08:22:17-06:00",
       "gesamt": 2806,
       "online": 2806,
       "offline": 0,
