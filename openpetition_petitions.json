@@ -31,14 +31,22 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-11-16T00:42:33-06:00",
-    "petition_count": 2795,
-    "available": 1690,
-    "new_petitions_last_run": [],
+    "generated_at": "2026-11-16T04:55:53-06:00",
+    "petition_count": 2802,
+    "available": 1696,
+    "new_petitions_last_run": [
+      "es-sind-nicht-nur-100-euro-schluss-mit-der-systematischen-sparpolitik-auf-dem-ruecken-von-familien",
+      "keine-kuerzungen-auf-kosten-unserer-kinder",
+      "unser-postbote-gehoert-zu-gehrden-wir-wuenschen-uns-seine-rueckkehr",
+      "fuer-den-erhalt-der-schlossbibliothek-in-schloss-neuhaus",
+      "stoppt-die-vorschnelle-aufloesung-unserer-melanchthon-gemeinde-in-eine-grossgemeinde",
+      "hindenburg-ist-kein-vorbild-fuer-bergisch-gladbach-benennt-den-platz-in-wilhelm-marx-platz-um",
+      "kein-wohnbau-auf-der-schulwiese"
+    ],
     "bilanz": {
-      "stand": "2026-11-16T00:42:33-06:00",
-      "gefunden": 1690,
-      "im_bestand": 1690,
+      "stand": "2026-11-16T04:55:53-06:00",
+      "gefunden": 1696,
+      "im_bestand": 1696,
       "unbrauchbar": 0,
       "verworfen": 0,
       "dublette": 0,
@@ -46,64 +54,47 @@
       "zurueckgestellt": 0,
       "offen": 0,
       "offene_beispiele": [],
-      "bestand_gesamt": 2795,
-      "bestand_ausserhalb": 1105
+      "bestand_gesamt": 2802,
+      "bestand_ausserhalb": 1106
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-11-15T19:38:33-06:00",
-        "gesamt": 2795,
-        "online": 2795,
+        "zeit": "2026-11-16T04:55:53-06:00",
+        "gesamt": 2802,
+        "online": 2802,
         "offline": 0,
         "ohne_titel": 0,
         "platzhalter": 0,
         "nicht_ausgeliefert": 0,
         "torsi": 0,
         "dubletten": 0,
-        "mit_start": 2780,
-        "juengstes_start": "2026-11-12",
+        "mit_start": 2787,
+        "juengstes_start": "2026-11-13",
         "mit_code_im_text": 0,
         "mit_ballast_in_kurzfassung": 0,
         "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-11-16T00:42:33-06:00",
-        "gesamt": 2795,
-        "online": 2795,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 2780,
-        "juengstes_start": "2026-11-12",
-        "mit_code_im_text": 0,
-        "mit_ballast_in_kurzfassung": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
+        "neu": 7
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-11-16T00:42:33-06:00",
-      "gesamt": 2795,
-      "online": 2795,
+      "zeit": "2026-11-16T04:55:53-06:00",
+      "gesamt": 2802,
+      "online": 2802,
       "offline": 0,
       "ohne_titel": 0,
       "platzhalter": 0,
       "nicht_ausgeliefert": 0,
       "torsi": 0,
       "dubletten": 0,
-      "mit_start": 2780,
-      "juengstes_start": "2026-11-12",
+      "mit_start": 2787,
+      "juengstes_start": "2026-11-13",
       "mit_code_im_text": 0,
       "mit_ballast_in_kurzfassung": 0
     },
-    "verlauf_felder_ab": "2026-11-15T19:38:33-06:00",
+    "verlauf_felder_ab": "2026-11-16T04:55:53-06:00",
     "befunde": [],
     "health_warning": null,
-    "online_count": 2795
+    "online_count": 2802
   },
   "fuer-den-erhalt-einer-sicheren-individuellen-geburtshilfe-stoppt-den-neuen-hebammenhilfevertrag-2": {
     "slug": "fuer-den-erhalt-einer-sicheren-individuellen-geburtshilfe-stoppt-den-neuen-hebammenhilfevertrag-2",
@@ -52401,9 +52392,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
     "signatures": 243,
     "status": "online",
-    "last_seen": "2026-11-13T03:13:00-06:00",
+    "last_seen": "2026-11-16T04:51:16-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-13T03:13:00-06:00",
+    "last_checked": "2026-11-16T04:51:16-06:00",
     "start_date": "2026-05-01",
     "lang": "de",
     "campaign_id": "openpetition:bitte-helfen-sie-uns-unsere-kita-storchennest-in-wedderstedt-im-dorf-zu-retten",
@@ -54956,6 +54947,10 @@
       {
         "checked_at": "2026-11-13T03:13:00-06:00",
         "count": 205
+      },
+      {
+        "checked_at": "2026-11-16T04:51:16-06:00",
+        "count": 206
       }
     ],
     "title": "Rettet den Arbeitsplatz von Stefan Lanzinger und damit auch den Unterricht hunderter Schüler!",
@@ -54967,12 +54962,12 @@
     "started_by": "Fabian Steinhauser",
     "category": "Bildung",
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
-    "signatures": 205,
+    "signatures": 206,
     "goal": 500,
     "status": "online",
-    "last_seen": "2026-11-13T03:13:00-06:00",
+    "last_seen": "2026-11-16T04:51:16-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-13T03:13:00-06:00",
+    "last_checked": "2026-11-16T04:51:16-06:00",
     "lang": "de",
     "campaign_id": "openpetition:rettet-den-arbeitsplatz-von-stefan-lanzinger-und-damit-auch-den-unterricht-hunderter-schueler",
     "i18n_state": {
@@ -58409,9 +58404,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=44#petitionen",
     "signatures": 165,
     "status": "online",
-    "last_seen": "2026-11-13T03:13:00-06:00",
+    "last_seen": "2026-11-16T04:51:16-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-13T03:13:00-06:00",
+    "last_checked": "2026-11-16T04:51:16-06:00",
     "lang": "de",
     "campaign_id": "openpetition:calestenics-park-in-hohbuch-2",
     "i18n_state": {
@@ -59509,9 +59504,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
     "signatures": 154,
     "status": "online",
-    "last_seen": "2026-11-13T03:13:00-06:00",
+    "last_seen": "2026-11-16T04:51:16-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-13T03:13:00-06:00",
+    "last_checked": "2026-11-16T04:51:16-06:00",
     "start_date": "2026-05-01",
     "lang": "de",
     "campaign_id": "openpetition:stoppt-das-kita-chaos-verlaessliche-bildung-und-betreuung-fuer-die-kita-28-hafen-jetzt",
@@ -61684,6 +61679,10 @@
       {
         "checked_at": "2026-11-13T03:13:00-06:00",
         "count": 133
+      },
+      {
+        "checked_at": "2026-11-16T04:51:16-06:00",
+        "count": 134
       }
     ],
     "title": "Komplizenschaft mit Genozid, Besatzung und Apartheid an der Ruhr-Universität Bochum beenden.",
@@ -61695,11 +61694,11 @@
     "started_by": "Sozialistisch Demokratischer Studierendenverband (dieLinke.SDS)",
     "category": "Bildung",
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
-    "signatures": 133,
+    "signatures": 134,
     "status": "online",
-    "last_seen": "2026-11-13T03:13:00-06:00",
+    "last_seen": "2026-11-16T04:51:16-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-13T03:13:00-06:00",
+    "last_checked": "2026-11-16T04:51:16-06:00",
     "lang": "de",
     "campaign_id": "openpetition:komplizenschaft-mit-genozid-besatzung-und-apartheid-an-der-ruhr-universitaet-bochum-beenden",
     "i18n_state": {
@@ -67387,6 +67386,10 @@
       {
         "checked_at": "2026-11-13T03:13:00-06:00",
         "count": 85
+      },
+      {
+        "checked_at": "2026-11-16T04:51:16-06:00",
+        "count": 86
       }
     ],
     "title": "Sicherer Verkehr am Krügelpark: Zebrastreifen, Tempo 30 und Verkehrsspiegel auf der Deutenbacher Str",
@@ -67398,11 +67401,11 @@
     "started_by": "Meik Perlis",
     "category": "Verkehr",
     "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
-    "signatures": 85,
+    "signatures": 86,
     "status": "online",
-    "last_seen": "2026-11-13T03:13:00-06:00",
+    "last_seen": "2026-11-16T04:51:16-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-13T03:13:00-06:00",
+    "last_checked": "2026-11-16T04:51:16-06:00",
     "lang": "de",
     "campaign_id": "openpetition:sicherer-verkehr-am-kruegelpark-zebrastreifen-tempo-30-und-verkehrsspiegel-auf-der-deutenbacher-str",
     "i18n_state": {
@@ -71425,9 +71428,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=44#petitionen",
     "signatures": 66,
     "status": "online",
-    "last_seen": "2026-11-13T03:13:00-06:00",
+    "last_seen": "2026-11-16T04:51:16-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-13T03:13:00-06:00",
+    "last_checked": "2026-11-16T04:51:16-06:00",
     "lang": "de",
     "campaign_id": "openpetition:trickjump-fuer-holzkirchner-jugend",
     "i18n_state": {
@@ -74834,9 +74837,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=6#petitionen",
     "signatures": 56,
     "status": "online",
-    "last_seen": "2026-11-13T03:13:00-06:00",
+    "last_seen": "2026-11-16T04:51:16-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-13T03:13:00-06:00",
+    "last_checked": "2026-11-16T04:51:16-06:00",
     "lang": "de",
     "campaign_id": "openpetition:erhalt-der-gruenflaeche-im-wohngebiet-eggesin",
     "i18n_state": {
@@ -75165,9 +75168,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
     "signatures": 68,
     "status": "online",
-    "last_seen": "2026-11-13T03:13:00-06:00",
+    "last_seen": "2026-11-16T04:51:16-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-13T03:13:00-06:00",
+    "last_checked": "2026-11-16T04:51:16-06:00",
     "lang": "de",
     "campaign_id": "openpetition:ukrainisch-als-regulaere-zweite-fremdsprache-an-den-schulen-in-brandenburg-einfuehren",
     "i18n_state": {
@@ -75216,9 +75219,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=20#petitionen",
     "signatures": 55,
     "status": "online",
-    "last_seen": "2026-11-13T03:13:00-06:00",
+    "last_seen": "2026-11-16T04:51:16-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-13T03:13:00-06:00",
+    "last_checked": "2026-11-16T04:51:16-06:00",
     "start_date": "2026-05-01",
     "lang": "de",
     "campaign_id": "openpetition:tempo-30-auf-der-hochstrasse-in-recklinghausen-fuer-laermschutz-sicherheit-und-lebensqualitaet",
@@ -81375,9 +81378,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=55#petitionen",
     "signatures": 33,
     "status": "online",
-    "last_seen": "2026-11-13T03:13:00-06:00",
+    "last_seen": "2026-11-16T04:51:16-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-13T03:13:00-06:00",
+    "last_checked": "2026-11-16T04:51:16-06:00",
     "start_date": "2026-05-01",
     "lang": "de",
     "campaign_id": "openpetition:neue-fussgaengerbruecke-ueber-die-schoenmuenz-am-grillplatz-wasserhaeusle-tauchert",
@@ -83209,9 +83212,9 @@
     "signatures": 29,
     "goal": 420,
     "status": "online",
-    "last_seen": "2026-11-13T03:13:00-06:00",
+    "last_seen": "2026-11-16T04:51:16-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-13T03:13:00-06:00",
+    "last_checked": "2026-11-16T04:51:16-06:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-eine-bezahlbare-und-stabile-digitale-infrastruktur-im-laendlichen-bereich",
     "i18n_state": {
@@ -83848,9 +83851,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=58#petitionen",
     "signatures": 29,
     "status": "online",
-    "last_seen": "2026-11-13T03:13:00-06:00",
+    "last_seen": "2026-11-16T04:51:16-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-13T03:13:00-06:00",
+    "last_checked": "2026-11-16T04:51:16-06:00",
     "start_date": "2026-05-01",
     "lang": "de",
     "campaign_id": "openpetition:parkchaos-rund-um-die-klinik-anwohner-brauchen-loesungen",
@@ -84222,9 +84225,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
     "signatures": 31,
     "status": "online",
-    "last_seen": "2026-11-13T03:13:00-06:00",
+    "last_seen": "2026-11-16T04:51:16-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-13T03:13:00-06:00",
+    "last_checked": "2026-11-16T04:51:16-06:00",
     "lang": "de",
     "campaign_id": "openpetition:fahrradstaender-statt-parkplaetze-im-max-eichholz-ring-nicht-so-nicht-hier",
     "i18n_state": {
@@ -85652,9 +85655,9 @@
     "signatures": 26,
     "goal": 500,
     "status": "online",
-    "last_seen": "2026-11-13T03:13:00-06:00",
+    "last_seen": "2026-11-16T04:51:16-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-13T03:13:00-06:00",
+    "last_checked": "2026-11-16T04:51:16-06:00",
     "lang": "de",
     "campaign_id": "openpetition:ordnungsgemaesse-treppenhausreinigung-in-unserem-wohnhaus-sicherstellen",
     "i18n_state": {
@@ -85805,9 +85808,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
     "signatures": 25,
     "status": "online",
-    "last_seen": "2026-11-13T03:13:00-06:00",
+    "last_seen": "2026-11-16T04:51:16-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-13T03:13:00-06:00",
+    "last_checked": "2026-11-16T04:51:16-06:00",
     "start_date": "2026-05-01",
     "lang": "de",
     "campaign_id": "openpetition:sperrung-des-alten-wiesenweges-fuer-autoverkehr-stoppen",
@@ -90405,9 +90408,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
     "signatures": 14,
     "status": "online",
-    "last_seen": "2026-11-13T03:13:00-06:00",
+    "last_seen": "2026-11-16T04:51:16-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-13T03:13:00-06:00",
+    "last_checked": "2026-11-16T04:51:16-06:00",
     "lang": "de",
     "campaign_id": "openpetition:koeln-innenstadt-petition-gegen-das-verkehrschaos-an-der-maastrichter-ecke-brabanter-strasse",
     "i18n_state": {
@@ -91057,9 +91060,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=25#petitionen",
     "signatures": 12,
     "status": "online",
-    "last_seen": "2026-11-13T03:13:00-06:00",
+    "last_seen": "2026-11-16T04:51:16-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-13T03:13:00-06:00",
+    "last_checked": "2026-11-16T04:51:16-06:00",
     "lang": "de",
     "campaign_id": "openpetition:marktplatz-in-glinde-in-franz-rudorff-marktplatz-umbenennen",
     "i18n_state": {
@@ -100993,9 +100996,9 @@
     "signatures": 352,
     "goal": 400,
     "status": "online",
-    "last_seen": "2026-11-13T03:13:00-06:00",
+    "last_seen": "2026-11-16T04:51:16-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-13T03:13:00-06:00",
+    "last_checked": "2026-11-16T04:51:16-06:00",
     "lang": "de",
     "campaign_id": "openpetition:ein-gruener-lebensraum-fuer-die-nms-und-die-volksschule-fulpmes-unser-pausenhof-der-zukunft",
     "i18n_state": {
@@ -125660,7 +125663,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-13T03:13:00-06:00",
+    "last_seen": "2026-11-16T04:51:16-06:00",
     "offline_since": null,
     "tags": [
       "Kusenweg",
@@ -125674,7 +125677,7 @@
       "Vollständig",
       "Altenhagen"
     ],
-    "last_checked": "2026-11-13T03:13:00-06:00",
+    "last_checked": "2026-11-16T04:51:16-06:00",
     "country": "DE",
     "start_date": "2026-07-01"
   },
@@ -186872,5 +186875,300 @@
       "Vorkaufsrecht"
     ],
     "last_checked": "2026-11-15T13:49:13-06:00"
+  },
+  "es-sind-nicht-nur-100-euro-schluss-mit-der-systematischen-sparpolitik-auf-dem-ruecken-von-familien": {
+    "slug": "es-sind-nicht-nur-100-euro-schluss-mit-der-systematischen-sparpolitik-auf-dem-ruecken-von-familien",
+    "first_seen": "2026-11-16T04:51:16-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-11-16T04:51:16-06:00",
+        "count": 3658
+      }
+    ],
+    "title": "Es sind nicht nur 100 Euro – Schluss mit der systematischen Sparpolitik auf dem Rücken von Familien!",
+    "summary": "100 Euro Kita-Zuschuss erhalten – Familien dürfen nicht länger die Rechnung zahlen! Der Bayerische Landtag möge beschließen: 1. Die 100 Euro müssen bei den Familien bleiben. Der Freistaat muss den Zuschuss zum Kindergartenbeitrag erhalten. Eltern dürfen durch die Reform nicht mehr für denselben Betreuungsplatz bezahlen müssen. 2. Familien vor weiteren Belastungen schützen. Für ab Januar 2025 geborene Kinder hat die Staatsregierung 6.000 Euro Familiengeld pro Kind und das einkommensabhängige Krip",
+    "image_url": "https://www.openpetition.de/images/petition/es-sind-nicht-nur-100-euro-schluss-mit-der-systematischen-sparpolitik-auf-dem-ruecken-von-familien_1794817259_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/es-sind-nicht-nur-100-euro-schluss-mit-der-systematischen-sparpolitik-auf-dem-ruecken-von-familien",
+    "description_full": "<!--marker--><p><b>100 Euro Kita-Zuschuss erhalten – Familien dürfen nicht länger die Rechnung zahlen!</b></p><p>Der Bayerische Landtag möge beschließen:</p><p><b>1. Die 100 Euro müssen bei den Familien bleiben. </b>Der Freistaat muss den Zuschuss zum Kindergartenbeitrag erhalten. Eltern dürfen durch die Reform nicht mehr für denselben Betreuungsplatz bezahlen müssen.</p><p><b>2. Familien vor weiteren Belastungen schützen. </b>Für ab Januar 2025 geborene Kinder hat die Staatsregierung 6.000 Euro Familiengeld pro Kind und das einkommensabhängige Krippengeld von bis zu 100 Euro monatlich gestrichen. Jetzt dürfen nicht auch noch höhere Kindergartenbeiträge hinzukommen. Der Freistaat muss bezahlbare Beiträge verbindlich absichern.</p><p><b>3. Gute Kitas ausreichend finanzieren. </b>Der Freistaat muss die Finanzierung von Personal, Räumen und laufenden Kosten verlässlich sichern, ohne Eltern stärker zur Kasse zu bitten.</p><p><b>4. Bezahlbare Kinderbetreuung darf keine Frage der Postleitzahl sein. </b>Klamme Kommunen und Kita-Träger sind vielerorts längst am Limit. Sie können die gestrichene Entlastung nicht auch noch auffangen. Der Freistaat darf die Rechnung nicht nach unten durchreichen – bis sie bei den Eltern landet.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Die Staatsregierung preist Bayern gerne als Familienland. Doch ausgerechnet bei Familien setzt sie systematisch den Rotstift an. Erst streicht sie Familiengeld und Krippengeld für jüngere Kinder. Jetzt nimmt sie Eltern auch noch die Garantie, bei den Kindergartenbeiträgen um 100 Euro monatlich entlastet zu werden. <b>Wer Familienland sagt, darf Familien nicht kaputtsparen.</b></p><p>Denn Eltern stemmen längst steigende Ausgaben: immer höhere Kosten fürs Wohnen, teurere Lebensmittel und höhere Energiepreise. Dazu kommen Schuhe, aus denen die Kinder herauswachsen, Schulmaterial und Vereinsbeiträge. Vieles davon lässt sich weder aufschieben noch einsparen. Statt Familien Luft zu verschaffen, bürdet die Staatsregierung ihnen die nächste Belastung auf – für die Betreuung, auf die sie angewiesen sind.</p><p><b>Wie viel Geld fehlt, zeigt eine einfache Rechnung:</b> Für ab Januar 2025 geborene Kinder entfallen 6.000 Euro Familiengeld pro Kind. Müssen Eltern zusätzlich die bisherigen 100 Euro Kindergartenbeitragszuschuss monatlich selbst tragen, kommen bei drei Jahren Kindergarten weitere 3.600 Euro hinzu. <b>Das sind 9.600 Euro pro Kind – bei zwei Kindern fast 20.000 Euro weniger im Geldbeutel.</b> Das ebenfalls gestrichene einkommensabhängige Krippengeld ist dabei noch nicht eingerechnet.<br/>Ab Januar 2027 fließen die Zuschussmittel in die allgemeine Kita-Finanzierung. Können klamme Kommunen und Träger die bisherige Entlastung nicht auffangen, zahlen die Eltern drauf. <b>So wird die bessere Finanzierung der Kitas mit Geld bezahlt, das Familien beim nächsten Einkauf fehlt.</b><br/>Steigende Beiträge können Eltern zwingen, Betreuung zu reduzieren und beruflich zurückzustecken. Dann fehlt auch noch ein Teil des Gehalts. Besonders Frauen geraten so finanziell ins Hintertreffen. Und gerade Kinder aus Familien mit wenig Geld drohen den Zugang zu früher Bildung zu verlieren.<br/><b>Es sind nicht nur 100 Euro. Es ist systematische Sparpolitik auf dem Rücken von Familien. Wer Bayern zum Familienland machen will, muss Eltern entlasten. Deshalb: Die 100 Euro müssen bleiben.</b></p><p><b>Initiator:innen:</b></p><p>Kathrin Pollack<br/>Katja Reitmaier<br/>Eva-Maria Weimann<br/>Matthias Bonigut<br/>Dr. Carolin Wagner </p>",
+    "started_by": "Kathrin Pollack",
+    "category": "Familie",
+    "category_url": "https://www.openpetition.de/petitionen?category=14#petitionen",
+    "country": "DE",
+    "signatures": 3658,
+    "start_date": "2026-11-13",
+    "lang": "de",
+    "campaign_id": "openpetition:es-sind-nicht-nur-100-euro-schluss-mit-der-systematischen-sparpolitik-auf-dem-ruecken-von-familien",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-11-16T04:51:16-06:00",
+    "offline_since": null,
+    "tags": [
+      "Euro",
+      "Familien",
+      "Eltern",
+      "Kinder",
+      "Freistaat",
+      "Dürfen",
+      "Staatsregierung",
+      "Familiengeld",
+      "Erhalten",
+      "Rechnung"
+    ],
+    "last_checked": "2026-11-16T04:51:16-06:00"
+  },
+  "keine-kuerzungen-auf-kosten-unserer-kinder": {
+    "slug": "keine-kuerzungen-auf-kosten-unserer-kinder",
+    "first_seen": "2026-11-16T04:51:16-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-11-16T04:51:16-06:00",
+        "count": 1305
+      }
+    ],
+    "title": "Keine Kürzungen auf Kosten unserer Kinder!",
+    "summary": "Die geplanten Veränderungen an der Kreismusikschule Bautzen gefährden die musikalische Bildung und kulturelle Teilhabe vieler Kinder und Jugendlicher im Landkreis. Die Schließung von Außenstellen und die Einschränkung von Unterrichtsangeboten bedeuten längere Anfahrtswege, schlechte Erreichbarkeit und zusätzliche Belastungen für Familien. Eltern werden zunehmend in die Pflicht genommen. Kinder aus ländlichen Regionen und sozial schwächeren Familien drohen abgehängt zu werden. Es kann nicht sein,",
+    "image_url": "https://www.openpetition.de/images/petition/keine-kuerzungen-auf-kosten-unserer-kinder_1794602204_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/keine-kuerzungen-auf-kosten-unserer-kinder",
+    "description_full": "<!--marker--><p>Die geplanten Veränderungen an der Kreismusikschule Bautzen gefährden die musikalische Bildung und kulturelle Teilhabe vieler Kinder und Jugendlicher im Landkreis. Die Schließung von Außenstellen und die Einschränkung von Unterrichtsangeboten bedeuten längere Anfahrtswege, schlechte Erreichbarkeit und zusätzliche Belastungen für Familien. Eltern werden zunehmend in die Pflicht genommen. Kinder aus ländlichen Regionen und sozial schwächeren Familien drohen abgehängt zu werden.</p><p><b>Es kann nicht sein, dass ausgerechnet bei unseren Kindern und ihrer Bildung gespart wird!</b></p><p>Die Kreismusikschule ist weit mehr als ein Unterrichtsangebot. Sie ist ein unverzichtbarer Bestandteil unserer Bildungslandschaft und unserer kulturellen Identität. Wir fordern den Kreistag Bautzen auf, die geplanten Einschnitte zu überdenken, wohnortnahe Unterrichtsangebote zu erhalten und eine sozial gerechte, zukunftsfähige Lösung zu schaffen.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Unterschreibt diese Petition! Setzen wir gemeinsam ein Zeichen für unsere Kinder, für die Musik und für die kulturelle Zukunft unseres Landkreises!</p><p><b>Musikalische Bildung darf kein Privileg sein - sie muss für alle erreichbar bleiben!</b></p>",
+    "started_by": "Tomas Kreibich-Nawka - Intendant des Sorbischen National-Ensembles",
+    "category": "Bildung",
+    "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
+    "country": "DE",
+    "signatures": 1305,
+    "start_date": "2026-11-13",
+    "lang": "de",
+    "campaign_id": "openpetition:keine-kuerzungen-auf-kosten-unserer-kinder",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-11-16T04:51:16-06:00",
+    "offline_since": null,
+    "tags": [
+      "Kinder",
+      "Familien",
+      "Bildung",
+      "Kreismusikschule",
+      "Musikalische",
+      "Kulturelle",
+      "Geplanten",
+      "Bautzen",
+      "Unserer",
+      "Sozial"
+    ],
+    "last_checked": "2026-11-16T04:51:16-06:00"
+  },
+  "unser-postbote-gehoert-zu-gehrden-wir-wuenschen-uns-seine-rueckkehr": {
+    "slug": "unser-postbote-gehoert-zu-gehrden-wir-wuenschen-uns-seine-rueckkehr",
+    "first_seen": "2026-11-16T04:51:16-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-11-16T04:51:16-06:00",
+        "count": 340
+      }
+    ],
+    "title": "Unser Postbote gehört zu Gehrden – wir wünschen uns seine Rückkehr!",
+    "summary": "Wir bitten die Deutsche Post, die Versetzung unseres vertrauten Postboten, zu überdenken und ihn wieder in seinem bisherigen Zustellgebiet in Gehrden einzusetzen. Er kennt die Straßen, die Häuser und die Menschen und hat durch seine freundliche, zuverlässige und hilfsbereite Art großes Vertrauen gewonnen. Auch bei den Kindern ist er sehr beliebt. Für viele von uns ist er ein vertrautes Gesicht, das zum Alltag und zum Zusammenleben in unserer Stadt gehört. Mit seiner herzlichen und fröhlichen Art",
+    "image_url": "https://www.openpetition.de/images/default_petition.jpg",
+    "url": "https://www.openpetition.de/petition/online/unser-postbote-gehoert-zu-gehrden-wir-wuenschen-uns-seine-rueckkehr",
+    "description_full": "<!--marker--><p>Wir bitten die Deutsche Post, die Versetzung unseres vertrauten Postboten, zu überdenken und ihn wieder in seinem bisherigen Zustellgebiet in Gehrden einzusetzen.<br/>Er kennt die Straßen, die Häuser und die Menschen und hat durch seine freundliche, zuverlässige und hilfsbereite Art großes Vertrauen gewonnen. Auch bei den Kindern ist er sehr beliebt. Für viele von uns ist er ein vertrautes Gesicht, das zum Alltag und zum Zusammenleben in unserer Stadt gehört. Mit seiner herzlichen und fröhlichen Art bereicherte er das Miteinander und schuf einen echten Mehrwert für die Stadt Gehrden.</p><p>Er wohnt selbst in Gehrden und muss nun für seine Zustelltätigkeit jeden Tag jeweils 45 Minuten für die Fahrt in den Sahlkamp und wieder zurück aufwenden. Wir wünschen uns, dass seine Ortskenntnis und die gewachsenen Beziehungen bei der Einsatzplanung berücksichtigt werden.<br/>Mit unseren Unterschriften setzen wir uns dafür ein, dass unser Postbote wieder zu uns zurückkehren kann – und zeigen ihm zugleich, wie sehr wir seine Arbeit schätzen.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Diese Petition gibt den Menschen in Gehrden die Möglichkeit, ihre Wertschätzung gemeinsam sichtbar zu machen. Wir möchten zeigen, dass sein Einsatz wahrgenommen wurde und dass seine Versetzung viele von uns entsetzt.<br/>Wir kennen die betrieblichen Gründe für diese Entscheidung nicht. Doch wir hoffen, dass unsere Stimmen Anlass geben, sie noch einmal zu prüfen und eine Rückkehr in sein bisheriges Zustellgebiet zu ermöglichen.</p>",
+    "started_by": "Petent/in nicht öffentlich",
+    "category": "Soziales",
+    "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
+    "country": "DE",
+    "signatures": 340,
+    "goal": 400,
+    "start_date": "2026-11-07",
+    "lang": "de",
+    "campaign_id": "openpetition:unser-postbote-gehoert-zu-gehrden-wir-wuenschen-uns-seine-rueckkehr",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-11-16T04:51:16-06:00",
+    "offline_since": null,
+    "tags": [
+      "Gehrden",
+      "Zustellgebiet",
+      "Versetzung",
+      "Gehört",
+      "Stadt",
+      "Zusammenleben",
+      "Hilfsbereite",
+      "Zuverlässige",
+      "Einzusetzen",
+      "Freundliche"
+    ],
+    "last_checked": "2026-11-16T04:51:16-06:00"
+  },
+  "fuer-den-erhalt-der-schlossbibliothek-in-schloss-neuhaus": {
+    "slug": "fuer-den-erhalt-der-schlossbibliothek-in-schloss-neuhaus",
+    "first_seen": "2026-11-16T04:51:16-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-11-16T04:51:16-06:00",
+        "count": 146
+      }
+    ],
+    "title": "Für den Erhalt der Schloßbibliothek in Schloß Neuhaus",
+    "summary": "Wir, die SCHLOSSEULEN Initiative für die Schloßbibliothek Schloß Neuhaus e.V. sowie Unterstützerinnen und Unterstützer der Schloßbibliothek in Schloß Neuhaus, appellieren eindringlich an die Verantwortlichen in Verwaltung und Rat der Stadt Paderborn, die empfohlene Schließung der Schloßbibliothek abzuwenden und alle Möglichkeiten für ihren Erhalt sorgfältig und ergebnisoffen zu prüfen.",
+    "image_url": "https://www.openpetition.de/images/petition/fuer-den-erhalt-der-schlossbibliothek-in-schloss-neuhaus_1794489460_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/fuer-den-erhalt-der-schlossbibliothek-in-schloss-neuhaus",
+    "description_full": "<!--marker--><p>Wir, die SCHLOSSEULEN Initiative für die Schloßbibliothek Schloß Neuhaus e.V. sowie Unterstützerinnen und Unterstützer der Schloßbibliothek in Schloß Neuhaus, appellieren eindringlich an die Verantwortlichen in Verwaltung und Rat der Stadt Paderborn, die empfohlene Schließung der Schloßbibliothek abzuwenden und alle Möglichkeiten für ihren Erhalt sorgfältig und ergebnisoffen zu prüfen.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Die Stadt Paderborn muss sparen und hat ein Gutachterbüro beauftragt, ein Sparkonzept zu erarbeiten. Darin wird u.a. die Schließung der Stadtteilbibliotheken in Schloß Neuhaus und Elsen vorgeschlagen. Damit wiederholt sich, was die Bürgerinnen und Bürger schon einmal erlebt haben: Die Existenz ihrer Schloßbibliothek war bereits im Jahr 2011 aufgrund einer schweren städtischen Finanzkrise bedroht. Gerettet wurde sie durch ehrenamtliches Engagement und Gründung der SCHLOSSEULEN Initiative. Das, was vor 15 Jahren mit viel Engagement und Fleiß aufgebaut wurde, könnte nun durch Ratsbeschluss vernichtet werden. </p><p>Wir, die unterzeichnenden Unterstützerinnen und Unterstützer der Schloßbibliothek appellieren eindringlich an die Verantwortlichen, die empfohlene Schließung der Schloßbibliothek zu überdenken.</p><p>Insbesondere für Kinder und Jugendliche, aber auch für Erwachsene ist die Bibliothek ein wichtiger Lern- und Begegnungsort, der sehr viel bietet:<br/></p><ul><li>einen ortsnahen Zugang zu mehr als 15.000 Medien für Jung und Alt,</li><li>einen Treffpunkt zum Lernen mit kostenfreier Nutzung von Rechnern und Internet,</li><li>einen Treffpunkt zum Klönen, Spielen und Zeitunglesen,</li><li>einen Veranstaltungsort mit Bilderbuchkino, Puppentheater, Lesungen, Vorträgen ….</li><li>einen Treffpunkt für Literaturkreis und Handarbeitsgruppen,</li><li>die Artothek mit Bildern und Skulpturen zum Ausleihen.</li></ul><br/><p>Die aktuelle Finanzmisere ist für Verwaltung und Rat der Stadt Paderborn eine große finanzpolitische Herausforderung. Die SCHLOSSEULEN Initiative ist bereit, bürgerschaftliche Verantwortung zu übernehmen und auch künftig ehrenamtlich in der Schloßbibliothek mitzuarbeiten - Voraussetzung dafür ist jedoch, dass die Schloßbibliothek erhalten bleibt.<br/> </p>",
+    "started_by": "SCHLOSSEULEN Initiative für die Schloßbibliothek Schloß Neuhaus e.V.",
+    "category": "Bildung",
+    "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
+    "country": "DE",
+    "signatures": 146,
+    "start_date": "2026-11-12",
+    "lang": "de",
+    "campaign_id": "openpetition:fuer-den-erhalt-der-schlossbibliothek-in-schloss-neuhaus",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-11-16T04:51:16-06:00",
+    "offline_since": null,
+    "tags": [
+      "Schloßbibliothek",
+      "Neuhaus",
+      "Schloß",
+      "SCHLOSSEULEN",
+      "Initiative",
+      "Schließung",
+      "Paderborn",
+      "Stadt",
+      "Unterstützerinnen",
+      "Verantwortlichen"
+    ],
+    "last_checked": "2026-11-16T04:51:16-06:00"
+  },
+  "stoppt-die-vorschnelle-aufloesung-unserer-melanchthon-gemeinde-in-eine-grossgemeinde": {
+    "slug": "stoppt-die-vorschnelle-aufloesung-unserer-melanchthon-gemeinde-in-eine-grossgemeinde",
+    "first_seen": "2026-11-16T04:51:16-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-11-16T04:51:16-06:00",
+        "count": 89
+      }
+    ],
+    "title": "Stoppt die vorschnelle Auflösung unserer Melanchthon-Gemeinde in eine Großgemeinde!",
+    "summary": "Von Adelheid Prüfer und Justus Schiller Am 25.11.2026 will der Kirchenvorstand beschließen, dass unsere Melanchthon-Gemeinde endgültig in einer Großgemeinde aufgeht. Das wäre unumkehrbar und würde unserer Gemeinde unsere Unabhängigkeit nehmen. Wir fordern: Keine endgültige Entscheidung am 25.11.! Gebt uns bis Ostern 2027 Zeit, andere Wege zu prüfen, und lasst die Gemeinde mitentscheiden. Die Melanchthonkirche hält unsere Bult zusammen. Geben Sie unserer Bult in 60 Sekunden die Zeit für eine fair",
+    "image_url": "https://www.openpetition.de/images/petition/stoppt-die-voreilige-fusion-hinter-verschlossenen-tueren-keine-unabhaengigkeit-aufgeben-ohne-pruefun_1794337673_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/stoppt-die-vorschnelle-aufloesung-unserer-melanchthon-gemeinde-in-eine-grossgemeinde",
+    "description_full": "<!--marker--><p><i>Von Adelheid Prüfer und Justus Schiller</i></p><p>Am 25.11.2026 <b>will der Kirchenvorstand beschließen</b>, dass<b> unsere Melanchthon-Gemeinde endgültig in </b>einer <b>Großgemeinde aufgeht. </b>Das wäre<b> unumkehrbar </b>und würde<b> unserer Gemeinde </b>unsere <b>Unabhängigkeit nehmen.</b> Wir fordern: <b>Keine endgültige Entscheidung am 25.11.! Gebt uns bis Ostern 2027 Zeit, andere Wege zu prüfen</b>, und lasst die Gemeinde mitentscheiden.</p><p><b>Die Melanchthonkirche hält unsere Bult zusammen.</b><br/><b>Geben Sie unserer Bult in 60 Sekunden die Zeit für eine faire Entscheidung</b></p>\n<h3>Begründung</h3>\n<!--marker--><p><b>1. Wir können es anders machen.</b><br/>Die Auflösung unserer Gemeinde in die geplante Großgemeinde „Südost“ ist <b>nicht die einzige Option</b>. Es gibt <b>andere Wege</b>, die Kosten senken und unsere <b>Eigenständigkeit bewahren</b> können. Sie können die Versorgung unserer Gemeinde sichern und kommen dem ganzen Stadtteil zugute. Sinkende Mitgliederzahlen erfordern Veränderungen, doch diese Wege verdienen eine ernsthafte Prüfung.</p><p><b>2.</b> <b>Eine Auflösung lässt sich nicht zurücknehmen.</b><br/>Unsere Gemeinde würde ihre <b>Eigenständigkeit dauerhaft verlieren</b>. Mit nur rund <b>9 % Anteil</b> an der Gesamtgemeinde hätten wir deutlich weniger Einfluss. <b>Andere</b> würden über unsere Angebote, unsere finanziellen Mittel und die Zukunft unseres Kirchengeländes <b>entscheiden</b>.</p><p><b>3.</b> <b>Erst nach Ostern 2027 soll der Kirchenvorstand endgültig entscheiden!</b><br/>Jetzt darf <b>nicht überhastet</b> gehandelt werden, weder auf Druck anderer Gemeinden noch auf Druck der Landeskirche. Eine <b>ausgewogene Bewertung</b> aller Optionen soll die<b> richtige Entscheidung</b> für die Zukunft unserer Gemeinde und unseres Stadtteils vorbereiten.</p><p><b>Welche Vorgehensweise schlagen wir dem Kirchenvorstand vor?</b></p><ol><li><b>Verschiebung:</b> Am <b>25.11.2026</b> soll keine endgültige Entscheidung getroffen werden.</li><li><b>Prüfung:</b> Ein Beirat aus vier engagierten Gemeindemitgliedern entwickelt bis <b>Ostern 2027</b> andere Wege und prüft sie rechtlich, finanziell sowie organisatorisch.</li><li><b>Vergleich:</b> Alle Optionen, auch die Fusion, werden ergebnisoffen bewertet. Die Ergebnisse werden in einer Gemeindeversammlung vorgestellt.</li><li><b>Entscheidung:</b> Nach Beteiligung der Gemeinde entscheidet der Kirchenvorstand im <b>zweiten Quartal 2027</b> endgültig.</li></ol><br/><p><b>Die Ausgangssituation</b><br/>Sinkende Mitgliederzahlen, knappe Finanzen und Personalmangel stellen unsere Kirche vor große Herausforderungen. Melanchthon, Bugenhagen, Timotheus und Südstadt planen deshalb einen Zusammenschluss zu einer Großgemeinde (Fusion). Er verspricht Synergien in der Verwaltung, gebündelte Personalressourcen und verlässliche Gottesdienste.</p><p><b>Für unsere Melanchthon-Gemeinde wäre das die Auflösung als eigenständige Gemeinde. Auf der Gemeindeversammlung am 1.11.2026</b> mit rund 80 Teilnehmenden wurden erhebliche Bedenken deutlich. Trotzdem soll bereits am <b>25.11.</b> endgültig entschieden werden. <b>Wir halten das für verfrüht.</b></p><p><b>Was steht auf dem Spiel?</b></p><ul><li><b>Eigenständigkeit und Mitbestimmung:</b> Melanchthon würde seine rechtliche Selbstständigkeit verlieren. Ein gemeinsamer Kirchenvorstand entschiede über wesentliche Angelegenheiten. Mit nur rund <b>9 % der Mitglieder</b> wäre unser Einfluss verschwindend gering.</li><li><b>Lebendiges Gemeindeleben:</b> Zugehörigkeit lebt von persönlichen Begegnungen, kurzen Entscheidungswegen und engagierten Menschen. Ob dies in einer Großgemeinde, in der wir nur ein winziges Teilchen sind, Bestand hat, ist fraglich.</li><li><b>Kirchengebäude und Ressourcen:</b> Unsere renovierte Kirche ist ein Mittelpunkt der Bult. Künftig würden gemeinsame Gremien über Gebäude und Finanzen entscheiden. Wie bleibt unser Kirchengelände langfristig als lebendiger Ort erhalten?</li></ul><br/><p><b>Welche anderen Wege gibt es, zum Beispiel?</b></p><ol><li><b>Zusammenarbeit mit anderen kleinen, hannoverschen Ortskirchengemeinden statt vollständiger Fusion:</b> Eine Gesamtkirchengemeinde (§§ 16–25 RegG) könnte Aufgaben bündeln, Kosten reduzieren und Sicherheit in der kirchlichen Versorgung schaffen. Die Ortsgemeinden würden rechtlich eigenständig bleiben und damit auch ihren eigenen Kirchenvorstand behalten.</li><li><b>Melanchthon als Stadtteilzentrum der Bult:</b> Zusätzliche Angebote für Familien, Kinder und ältere Menschen sowie Kooperationen mit sozialen und kulturellen Einrichtungen könnten neue Menschen erreichen und damit Gemeinde und Stadtteil stärken.</li></ol><br/><p>Quellen:<br/><a href=\"https://www.melanchthon-hannover.de/wie-geht-es-weiter-mit-melanchthon/\" rel=\"noopener\" target=\"_blank\">https://www.melanchthon-hannover.de/wie-geht-es-weiter-mit-melanchthon/</a></p>",
+    "started_by": "Justus Schiller",
+    "category": "Kultur",
+    "category_url": "https://www.openpetition.de/petitionen?category=25#petitionen",
+    "country": "DE",
+    "signatures": 89,
+    "start_date": "2026-11-10",
+    "lang": "de",
+    "campaign_id": "openpetition:stoppt-die-vorschnelle-aufloesung-unserer-melanchthon-gemeinde-in-eine-grossgemeinde",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-11-16T04:51:16-06:00",
+    "offline_since": null,
+    "tags": [
+      "Gemeinde",
+      "Unserer",
+      "Kirchenvorstand",
+      "Entscheidung",
+      "Großgemeinde",
+      "Bult",
+      "Wege",
+      "Endgültig",
+      "Melanchthon-Gemeinde",
+      "Auflösung"
+    ],
+    "last_checked": "2026-11-16T04:51:16-06:00"
+  },
+  "hindenburg-ist-kein-vorbild-fuer-bergisch-gladbach-benennt-den-platz-in-wilhelm-marx-platz-um": {
+    "slug": "hindenburg-ist-kein-vorbild-fuer-bergisch-gladbach-benennt-den-platz-in-wilhelm-marx-platz-um",
+    "first_seen": "2026-11-16T04:51:16-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-11-16T04:51:16-06:00",
+        "count": 10
+      }
+    ],
+    "title": "Hindenburg ist kein Vorbild für Bergisch Gladbach – benennt den Platz in Wilhelm-Marx-Platz um!",
+    "summary": "Wir fordern den Rat der Stadt Bergisch Gladbach auf, den Hindenburgplatz im Stadtteil Bensberg in Wilhelm-Marx-Platz umzubenennen.",
+    "image_url": "https://www.openpetition.de/images/petition/hindenburg-ist-kein-vorbild-fuer-bergisch-gladbach-benennt-den-platz-in-wilhelm-marx-platz-um_1794468814_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/hindenburg-ist-kein-vorbild-fuer-bergisch-gladbach-benennt-den-platz-in-wilhelm-marx-platz-um",
+    "description_full": "<!--marker--><p><b>Wir fordern den Rat der Stadt Bergisch Gladbach auf, den Hindenburgplatz im Stadtteil Bensberg in Wilhelm-Marx-Platz umzubenennen.</b></p>\n<h3>Begründung</h3>\n<!--marker--><p><b>Die Ehrung durch einen Platznamen ist keine Nebensache</b></p><p>Platznamen sind mehr als Orientierungshilfe. Sie zeigen, welche Menschen und welche Werte eine Stadtgesellschaft würdigen möchte. Deshalb ist es an der Zeit, die Benennung des Hindenburgplatzes in Bensberg zu korrigieren.<br/>Paul von Hindenburg war kein politisch überforderter alter Reichspräsident, der Hitler nur widerwillig zum Reichskanzler ernannte. Er war ein überzeugter Gegner der parlamentarischen Demokratie und einer der Wegbereiter der NS-Diktatur und hat Hitler aus Überzeugung zur Macht verholfen.</p><p>Bereits 1919 verbreitete er die sogenannte Dolchstoßlegende und belastete damit die junge demokratische Republik mit dem Vorwurf des Landesverrats.<br/>Ab 1930 trug er mit der Einsetzung autoritärer Präsidialkabinette und der systematischen Entmachtung des Reichstags zur Zerstörung der parlamentarischen Demokratie bei. <i>(Quelle Nr. 1)</i><br/>Am 30. Januar 1933 ernannte er Hitler zum Reichskanzler. Wenig später erließ er als Reichspräsident die Verordnungen vom 4.2. und 28.2.1933, mit denen demokratische Grundrechte eingeschränkt und die staatlichen Voraussetzungen für die Verfolgung der politischen Opposition geschaffen wurden.<br/>Auch das Ermächtigungsgesetz vom 23.3.1933 wurde von Hindenburg unterzeichnet. Damit bestätigte er die endgültige Ausschaltung des Parlamentarismus. <i>(Quelle Nr. 2)</i></p><p>Hindenburg war nicht bloß ein unbeteiligter Zuschauer oder Marionette. Er war ein maßgeblicher Akteur bei der Zerstörung der Weimarer Republik und arbeitete mit Hitler und der NSDAP dabei zusammen.</p><p>Warum sollte eine demokratische Stadtgesellschaft einen solchen Politiker weiterhin mit einem öffentlichen Platznamen ehren?</p><p><b>Wilhelm Marx: Ein demokratisches Vorbild aus unserer Region</b></p><p>Mit Wilhelm Marx (1863–1946) gibt es eine überzeugende demokratische Alternative.</p><p>Der gebürtige Kölner war Jurist, Zentrumspolitiker und mehrfach Reichskanzler der Weimarer Republik. Er gehörte zu den bedeutenden Vertretern des parlamentarischen Republikanismus. <i>(Quelle Nr. 3)</i></p><p>Bemerkenswert ist die Reichspräsidentenwahl von 1925: Wilhelm Marx trat im 2ten Wahlgang als gemeinsamer Kandidat des Volksblocks gegen Hindenburg an. SPD, katholische Zentrumspartei und Deutsche Demokratische Partei (DDP) hatten sich trotz ihrer unterschiedlicher Weltanschauungen auf eine gemeinsame Kandidatur verständigt, um die parlamentarische Republik zu verteidigen.</p><p>Das Ergebnis in Bensberg war:</p><ul><li>4.668 Stimmen - W. Marx</li><li>823 Stimmen - P. .v. Hindenburg</li></ul><p>Die Bensberger entschieden sich mit großer Mehrheit für den demokratischen Kandidaten. <i>(Quelle Nr. 4)</i></p><p>Es wäre deshalb ein bemerkenswertes Zeichen, wenn Bergisch Gladbach gerade diesem Politiker einen öffentlichen Platz widmen würde.</p><p>Wilhelm Marx unterstützte 1946 den demokratischen Neubeginn und die Gründung der CDU. Er steht damit für eine demokratische Tradition, die parteipolitische und weltanschauliche Grenzen überwinden konnte. <i>(Quellen Nr. 5 / Nr. 6) </i></p><p><b>Ein Zeichen für die Demokratie – auch heute</b></p><p>Wir erleben eine Zeit, in der autoritäre Ideologien wieder gesellschaftlichen Einfluss gewinnen und demokratische Institutionen unter Druck sind.</p><p><b>Eine verantwortungsvolle Erinnerungskultur ist wichtig.</b></p><p>Geschichte zeigt, welche Folgen es haben kann, wenn demokratische Kräfte auseinanderdividiert w0erden und autoritäre Entwicklungen nicht entschieden genug entgegentreten. Die gemeinsame Kandidatur von SPD, Zentrum &amp; DDP 1925 ist ein Beispiel: Unterschiedliche politische Kräfte können zusammenstehen, wenn die Grundlagen der Demokratie auf dem Spiel stehen.</p><p>Die Umbenennung des Platzes wäre deshalb mehr als eine Korrektur eines historisch belasteten Namens. Sie wäre ein sichtbares demokratisches Bekenntnis zur historischer Verantwortung.<br/>Eine Informationstafel am Platz soll zusätzlich über die historische Bedeutung beider Persönlichkeiten und die damaligen politischen Entscheidungen informieren.</p><p><b>Nicht diejenigen, die Demokratie zerstören, verdienen unsere öffentliche Ehrung, sondern diejenigen, die sie verteidigen.</b></p><p><b>Wir möchten einen Platz, der für demokratische Verantwortung und parlamentarische Zusammenarbeit steht.</b></p><p><b>Wir wollen, dass die Geschichte Bensbergs sichtbar bleibt und demokratische Vorbilder die Anerkennung erhalten, die sie verdienen.</b></p><p><b>Quellen:</b></p><ul><li><i>( Nr1. </i><a href=\"https://youtu.be/L_W4MO7PaEQ?si=kyaEjidNXNRpglAv\" rel=\"noopener\" target=\"_blank\"><b><i>Prof. Dr. Pyta:,\" Das Verhältnis von Hindenburg und Hitler\" </i></b></a>)</li><li><i>(Nr.2</i><b><i> </i></b><a href=\"https://www.dhm.de/lemo/biografie/paul-hindenburg\" rel=\"noopener\" target=\"_blank\"><b><i>Deutsches Historisches Museum.</i></b><i> Hindenburg ebnet durch seine Unterschriften unter die Notverordnungen den Weg in die Diktatur</i></a><i> )</i></li><li>(Nr. 3: <a href=\"https://www.rheinische-geschichte.lvr.de/Persoenlichkeiten/wilhelm-marx/DE-2086/lido/57c948cccdce28.56504387\" rel=\"noopener\" target=\"_blank\"><b><i>Rönz, Helmut: „Wilhelm Marx“, Rheinische Geschichte (LVR)</i></b></a> )</li><li><i>(Nr. 4 </i><a href=\"https://www.ksta.de/region/rhein-berg/bergisch-gladbach/bergisch-gladbach-initiative-will-hindenburgplatz-umbenennen-809173?utm_source=chatgpt.com\" rel=\"noopener\" target=\"_blank\"><i>Boelen-Theile, Claus: Kölner Stadt-Anzeiger – Initiative will Hindenburgplatz umbenennen</i></a><b><i> - </i></b><i>Wahlergebnisse 1925:)</i></li><li><i>( Nr. 5 </i><a href=\"https://www.santillan.de/2026/11/12/rede-von-dr-konrad-adenauer-beim-begräbnis-von-wilhelm-marx-1946-melaten-köln/\" rel=\"noopener\" target=\"_blank\"><i>Santillan.de.: „Rede von Dr. Konrad Adenauer beim Begräbnis (1946)“</i></a><i>)</i></li><li><i>( Nr. 6 </i><a href=\"https://www.demokratiegeschichten.de/wilhelm-marx-kanzler-des-ausgleichs/\" rel=\"noopener\" target=\"_blank\">Björn Höfer: Wilhelm Marx – Kanzler des Ausgleichs</a> </li><li><a href=\"https://de.wikipedia.org/wiki/Paul_von_Hindenburg\" rel=\"noopener\" target=\"_blank\"><b>Paul von Hindenburg </b>Wikipedia.org</a></li><li><a href=\"https://de.wikipedia.org/wiki/Wilhelm_Marx\" rel=\"noopener\" target=\"_blank\"><b>Wilhelm Marx </b>Wikipedia.org</a></li></ul>",
+    "started_by": "Tomás M. Santillán",
+    "category": "Kultur",
+    "category_url": "https://www.openpetition.de/petitionen?category=25#petitionen",
+    "country": "DE",
+    "signatures": 10,
+    "start_date": "2026-11-12",
+    "lang": "de",
+    "campaign_id": "openpetition:hindenburg-ist-kein-vorbild-fuer-bergisch-gladbach-benennt-den-platz-in-wilhelm-marx-platz-um",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-11-16T04:51:16-06:00",
+    "offline_since": null,
+    "tags": [
+      "Demokratische",
+      "Hindenburg",
+      "Marx",
+      "Demokratie",
+      "Wilhelm",
+      "Hitler",
+      "Bensberg",
+      "Bergisch",
+      "Gladbach",
+      "Republik"
+    ],
+    "last_checked": "2026-11-16T04:51:16-06:00"
+  },
+  "kein-wohnbau-auf-der-schulwiese": {
+    "slug": "kein-wohnbau-auf-der-schulwiese",
+    "first_seen": "2026-11-16T04:51:16-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-11-16T04:51:16-06:00",
+        "count": 1802
+      }
+    ],
+    "title": "Kein Wohnbau auf der Schulwiese!",
+    "summary": "Der Elternverein am Campus Sacré Coeur Graz fordert – unterstützt von einer Interessensgemeinschaft von Eltern, Anrainerinnen und Anrainern –, ein Wohnbauprojekt auf einer bedeutenden Grünfläche des Campus zu stoppen und die Wiese als Grünfläche, Sport- und Veranstaltungsgelände dauerhaft zu sichern.",
+    "image_url": "https://www.openpetition.eu/images/petition/kein-wohnbau-in-unserem-gruenraum_1791789980_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/kein-wohnbau-auf-der-schulwiese",
+    "description_full": "<!--marker--><p>Der Elternverein am Campus Sacré Coeur Graz fordert  – unterstützt von  einer Interessensgemeinschaft von Eltern, Anrainerinnen und Anrainern –, ein <b>Wohnbauprojekt auf einer bedeutenden Grünfläche</b> des Campus zu <b>stoppen</b> und die Wiese als Grünfläche, Sport- und Veranstaltungsgelände dauerhaft zu sichern.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Auf der Fußball- und Veranstaltungswiese des Campus Sacré Coeur in Graz ist ein Wohnbauprojekt geplant. Diese Wiese ist keine beliebige Brachfläche, sondern ein zentraler, intensiv genutzter Freiraum: Sie dient dem Schulsport, der körperlichen Betätigung der Schülerinnen und Schüler, als Fest- und Veranstaltungsgelände für das Schulumfeld und als grüne Lunge für die Nachbarschaft. Die letzte durchgeführte Klimaanalyse weist im Gebiet Grünflächen der Klasse \"Parkanlagen\" aus: \"Ausgleichsraum hoher Bedeutung\", Empfehlung \"Nutzung nicht verändern\".</p><p>Der Verlust der Grünfläche durch Wohnbau wäre dauerhaft, irreversibel und weder durch Ersatzbegrünung noch durch andere Maßnahmen ausgleichbar. Der Elternverein fordert daher – gestützt auf eine Gemeinschaft von Eltern, Anrainerinnen und Anrainern –, das Bauprojekt zu stoppen und die Wiese als Grünfläche, Sport- und Veranstaltungsgelände dauerhaft zu sichern. </p><p>Weitere Informationen zu dem geplanten Projekt sowie zu den Anliegen des Elternvereins am Campus des Sacré Coeur Graz finden Sie hier: <a href=\"https://ev-sacrecoeur-graz.at\" rel=\"noopener\" target=\"_blank\">https://ev-sacrecoeur-graz.at</a>.</p><p>Die. Entscheidungsträger werden umso eher aufhorchen, je mehr Menschen sich deutlich zu Wort melden. Ob Eltern, Anrainerinnen und Anrainer oder Bürger und Bürgerinnen der Stadt Graz die eine grüne, lebenswerte Stadt wollen – Ihre Unterschrift ist ein starkes Zeichen.</p><p>👉 <b>Unterschreiben Sie jetzt die Petition zum Erhalt der Campus-Wiese Sacré Coeur!</b></p><p>Es dauert nur wenige Minuten. Teilen Sie diesen Aufruf außerdem mit Familie, Freundinnen und Freunden, Nachbarinnen und Nachbarn – jede geteilte Nachricht verdoppelt unsere Reichweite.<br/>Gemeinschaftlich können wir den Erhalt der Wiese für unsere Kinder und unseren Stadtteil erreichen. Helfen Sie mit!</p>",
+    "started_by": "Elternverein am Campus Sacré Coeur Graz",
+    "category": "Bauen",
+    "category_url": "https://www.openpetition.de/at/petitionen?category=6#petitionen",
+    "country": "AT",
+    "signatures": 1802,
+    "start_date": "2026-10-12",
+    "lang": "de",
+    "campaign_id": "openpetition:kein-wohnbau-auf-der-schulwiese",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-11-16T04:51:16-06:00",
+    "offline_since": null,
+    "tags": [
+      "Grünfläche",
+      "Campus",
+      "Coeur",
+      "Sacré",
+      "Wiese",
+      "Graz",
+      "Veranstaltungsgelände",
+      "Anrainerinnen",
+      "Dauerhaft",
+      "Eltern"
+    ],
+    "last_checked": "2026-11-16T04:51:16-06:00"
   }
 }
