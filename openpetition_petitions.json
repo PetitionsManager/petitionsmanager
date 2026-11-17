@@ -31,34 +31,17 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-11-17T07:32:06-06:00",
-    "petition_count": 2828,
-    "available": 1706,
+    "generated_at": "2026-11-17T12:15:52-06:00",
+    "petition_count": 2830,
+    "available": 1708,
     "new_petitions_last_run": [
-      "rettet-den-natursprinter-im-maerkischen-kreis",
-      "unsere-spickelschule-aussenstelle-der-grundschule-herrenbach-dauerhaft-erhalten",
-      "schluss-mit-den-ausreden-unsere-kinder-brauchen-endlich-eine-richtige-schule-schule-am-hang",
-      "kein-mobilfunkmast-auf-der-panner-strasse-in-velbert-langenberg-alternativstandort-finden",
-      "fuer-eine-ehrliche-und-echte-reform-des-deutschen-gesundheitswesens",
-      "kein-plastik-fuer-das-prinzi",
-      "sicher-unterwegs-auf-der-hohkeppeler-strasse-in-overath-mit-tempo-30-parkbuchten-zebrastreifen",
-      "streicht-uns-nicht-die-zweite-chance-das-hermann-kesten-kolleg-muss-bleiben",
-      "ehrenamt-und-gemeinschaft-schuetzen-keine-hallengebuehren-fuer-sportvereine-in-heilbronn",
-      "mehr-polizeipraesenz-in-eberswalde",
-      "familien-in-bad-kohlgrub-entlasten-50-gemeindezuschuss-pro-kindergartenkind-ab-2027",
-      "sanierung-der-brueder-grimm-schule",
-      "pro-bargeld-anahme-am-kiosk-frybad-im-thermalbad-heidelberg",
-      "kimbo-soll-bei-seiner-familie-bleiben-faire-einzelfallpruefung-statt-unterbringung-im-tierheim",
-      "zusaetzliche-sev-re-9x-schnellbusse-ab-au-sieg-nach-koeln-und-siegen-hbf-sperrung-2026-2027",
-      "laengere-oeffnungszeiten-am-wochenende-im-fitnessstudio",
-      "response-to-hdk-valands-announcement-on-the-withdrawal-of-the-professorship-in-photography",
-      "mattersburg-solls-wissen-fuer-eine-buergerinnen-info-zum-bauprojekt-am-pucher-areal-und-den-folgen",
-      "sicherer-schulweg-in-lichtenberg-sichere-querungen-an-der-bushaltestelle-neulichtenberg"
+      "schulhof-der-rolandschule-und-stiftspielplatz-einhaltung-der-nutzungszeiten-und-weniger-laermbe-2",
+      "buergerinnenbeteiligung-bei-umgestaltung-der-landeggerstrasse"
     ],
     "bilanz": {
-      "stand": "2026-11-17T07:32:04-06:00",
-      "gefunden": 1706,
-      "im_bestand": 1706,
+      "stand": "2026-11-17T12:15:51-06:00",
+      "gefunden": 1708,
+      "im_bestand": 1708,
       "unbrauchbar": 0,
       "verworfen": 0,
       "dublette": 0,
@@ -66,47 +49,47 @@
       "zurueckgestellt": 0,
       "offen": 0,
       "offene_beispiele": [],
-      "bestand_gesamt": 2828,
+      "bestand_gesamt": 2830,
       "bestand_ausserhalb": 1122
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-11-17T07:32:04-06:00",
-        "gesamt": 2828,
-        "online": 2828,
+        "zeit": "2026-11-17T12:15:51-06:00",
+        "gesamt": 2830,
+        "online": 2830,
         "offline": 0,
         "ohne_titel": 0,
         "platzhalter": 0,
         "nicht_ausgeliefert": 0,
         "torsi": 0,
         "dubletten": 0,
-        "mit_start": 2813,
+        "mit_start": 2815,
         "juengstes_start": "2026-11-17",
         "mit_code_im_text": 0,
         "mit_ballast_in_kurzfassung": 0,
         "herkunft": "lokal_cron",
-        "neu": 19
+        "neu": 2
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-11-17T07:32:04-06:00",
-      "gesamt": 2828,
-      "online": 2828,
+      "zeit": "2026-11-17T12:15:51-06:00",
+      "gesamt": 2830,
+      "online": 2830,
       "offline": 0,
       "ohne_titel": 0,
       "platzhalter": 0,
       "nicht_ausgeliefert": 0,
       "torsi": 0,
       "dubletten": 0,
-      "mit_start": 2813,
+      "mit_start": 2815,
       "juengstes_start": "2026-11-17",
       "mit_code_im_text": 0,
       "mit_ballast_in_kurzfassung": 0
     },
-    "verlauf_felder_ab": "2026-11-17T07:32:04-06:00",
+    "verlauf_felder_ab": "2026-11-17T12:15:51-06:00",
     "befunde": [],
     "health_warning": null,
-    "online_count": 2828
+    "online_count": 2830
   },
   "fuer-den-erhalt-einer-sicheren-individuellen-geburtshilfe-stoppt-den-neuen-hebammenhilfevertrag-2": {
     "slug": "fuer-den-erhalt-einer-sicheren-individuellen-geburtshilfe-stoppt-den-neuen-hebammenhilfevertrag-2",
@@ -75750,6 +75733,10 @@
       {
         "checked_at": "2026-09-28T21:15:28+00:00",
         "count": 56
+      },
+      {
+        "checked_at": "2026-11-17T12:11:49-06:00",
+        "count": 60
       }
     ],
     "title": "Stoppt die endlosen Gutachtertermine der Deutschen Rentenversicherung - Wir sind Menschen, keine Akten",
@@ -75761,11 +75748,11 @@
     "started_by": "dirk wehner",
     "category": "Soziales",
     "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
-    "signatures": 56,
+    "signatures": 60,
     "status": "online",
-    "last_seen": "2026-11-03T16:31:43+01:00",
+    "last_seen": "2026-11-17T12:11:49-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-03T16:31:43+01:00",
+    "last_checked": "2026-11-17T12:11:49-06:00",
     "lang": "de",
     "campaign_id": "openpetition:stoppt-die-endlosen-gutachtertermine-der-deutschen-rentenversicherung-wir-sind-menschen-keine-a-2",
     "i18n_state": {
@@ -76752,9 +76739,9 @@
     "signatures": 72,
     "start_date": "2026-03-01",
     "status": "online",
-    "last_seen": "2026-11-03T16:31:43+01:00",
+    "last_seen": "2026-11-17T12:11:49-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-03T16:31:43+01:00",
+    "last_checked": "2026-11-17T12:11:49-06:00",
     "lang": "de",
     "campaign_id": "openpetition:stoppt-die-clan-kriminalitaet-beweislastumkehr-nach-italienischem-vorbild-jetzt",
     "i18n_state": {
@@ -78212,9 +78199,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=14#petitionen",
     "signatures": 45,
     "status": "online",
-    "last_seen": "2026-11-03T16:31:43+01:00",
+    "last_seen": "2026-11-17T12:11:49-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-03T16:31:43+01:00",
+    "last_checked": "2026-11-17T12:11:49-06:00",
     "lang": "de",
     "campaign_id": "openpetition:wiedereinstellung-leon-recker-in-der-kita-birkenallee",
     "i18n_state": {
@@ -79622,9 +79609,9 @@
     "signatures": 45,
     "start_date": "2026-03-01",
     "status": "online",
-    "last_seen": "2026-11-03T16:31:43+01:00",
+    "last_seen": "2026-11-17T12:11:49-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-03T16:31:43+01:00",
+    "last_checked": "2026-11-17T12:11:49-06:00",
     "lang": "de",
     "campaign_id": "openpetition:75-tage-schulferien-aber-nur-30-tage-urlaub-familien-brauchen-eine-loesung",
     "i18n_state": {
@@ -81042,9 +81029,9 @@
     "goal": 100,
     "start_date": "2026-03-01",
     "status": "online",
-    "last_seen": "2026-11-03T16:31:43+01:00",
+    "last_seen": "2026-11-17T12:11:49-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-03T16:31:43+01:00",
+    "last_checked": "2026-11-17T12:11:49-06:00",
     "lang": "de",
     "campaign_id": "openpetition:vegane-schnittlauchbrezel-bei-yormas",
     "i18n_state": {
@@ -82778,9 +82765,9 @@
     "signatures": 32,
     "start_date": "2026-03-01",
     "status": "online",
-    "last_seen": "2026-11-03T16:31:43+01:00",
+    "last_seen": "2026-11-17T12:11:49-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-03T16:31:43+01:00",
+    "last_checked": "2026-11-17T12:11:49-06:00",
     "lang": "de",
     "campaign_id": "openpetition:aufforderung-zur-strikten-einhaltung-des-voelkerrechts-bei-bundeswehreinsaetzen",
     "i18n_state": {
@@ -84082,9 +84069,9 @@
     "signatures": 32,
     "start_date": "2026-03-01",
     "status": "online",
-    "last_seen": "2026-11-03T16:31:43+01:00",
+    "last_seen": "2026-11-17T12:11:49-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-03T16:31:43+01:00",
+    "last_checked": "2026-11-17T12:11:49-06:00",
     "lang": "de",
     "campaign_id": "openpetition:stoppt-gutscheinbetrug-an-kindern-gesetzliche-altersgrenzen-fuer-digitale-guthabenkarten",
     "i18n_state": {
@@ -88067,9 +88054,9 @@
     "signatures": 21,
     "start_date": "2026-04-01",
     "status": "online",
-    "last_seen": "2026-11-03T16:31:43+01:00",
+    "last_seen": "2026-11-17T12:11:49-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-03T16:31:43+01:00",
+    "last_checked": "2026-11-17T12:11:49-06:00",
     "lang": "de",
     "campaign_id": "openpetition:kotbeutelspender-fuer-hunde-in-nideggen",
     "i18n_state": {
@@ -89701,9 +89688,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=14#petitionen",
     "signatures": 18,
     "status": "online",
-    "last_seen": "2026-11-03T16:31:43+01:00",
+    "last_seen": "2026-11-17T12:11:49-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-03T16:31:43+01:00",
+    "last_checked": "2026-11-17T12:11:49-06:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:fuer-saubere-und-sichere-spielplaetze-in-quakenbrueck",
@@ -90270,6 +90257,10 @@
       {
         "checked_at": "2026-09-28T21:15:28+00:00",
         "count": 23
+      },
+      {
+        "checked_at": "2026-11-17T12:11:49-06:00",
+        "count": 24
       }
     ],
     "title": "Gleichberechtigung für Inhaber der Mofa-Prüfbescheinigung – 45 km/h auch für ältere Jahrgänge erlaub",
@@ -90281,11 +90272,11 @@
     "started_by": "Stefan Schweitzer",
     "category": "Verkehr",
     "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
-    "signatures": 23,
+    "signatures": 24,
     "status": "online",
-    "last_seen": "2026-11-03T16:31:43+01:00",
+    "last_seen": "2026-11-17T12:11:49-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-03T16:31:43+01:00",
+    "last_checked": "2026-11-17T12:11:49-06:00",
     "lang": "de",
     "campaign_id": "openpetition:gleichberechtigung-fuer-inhaber-der-mofa-pruefbescheinigung-45-km-h-auch-fuer-aeltere-jahrgaenge-erl",
     "i18n_state": {
@@ -92713,6 +92704,10 @@
       {
         "checked_at": "2026-09-28T21:15:28+00:00",
         "count": 8
+      },
+      {
+        "checked_at": "2026-11-17T12:11:49-06:00",
+        "count": 9
       }
     ],
     "title": "Maschinen und automatisierte Systeme an der Finanzierung der Sozialversicherungen beteiligen",
@@ -92724,11 +92719,11 @@
     "started_by": "Mike Schaub",
     "category": "Soziales",
     "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
-    "signatures": 8,
+    "signatures": 9,
     "status": "online",
-    "last_seen": "2026-11-03T16:31:43+01:00",
+    "last_seen": "2026-11-17T12:11:49-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-03T16:31:43+01:00",
+    "last_checked": "2026-11-17T12:11:49-06:00",
     "lang": "de",
     "campaign_id": "openpetition:maschinen-und-automatisierte-systeme-an-der-finanzierung-der-sozialversicherungen-beteiligen",
     "i18n_state": {
@@ -98650,9 +98645,9 @@
     "goal": 1000,
     "start_date": "2026-04-01",
     "status": "online",
-    "last_seen": "2026-11-03T16:31:43+01:00",
+    "last_seen": "2026-11-17T12:11:49-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-03T16:31:43+01:00",
+    "last_checked": "2026-11-17T12:11:49-06:00",
     "lang": "de",
     "campaign_id": "openpetition:rettet-den-verein-downup-in-kaernten-betroffene-familien-ergreifen-die-initiative",
     "i18n_state": {
@@ -101205,9 +101200,9 @@
     "category_url": "https://www.openpetition.de/at/petitionen?category=56#petitionen",
     "signatures": 559,
     "status": "online",
-    "last_seen": "2026-11-03T16:31:43+01:00",
+    "last_seen": "2026-11-17T12:11:49-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-03T16:31:43+01:00",
+    "last_checked": "2026-11-17T12:11:49-06:00",
     "start_date": "2026-04-01",
     "lang": "de",
     "campaign_id": "openpetition:familienzusammenfuehrung-retten-beendet-die-humanitaere-krise-iranischer-familien-in-oesterreich",
@@ -103035,6 +103030,10 @@
       {
         "checked_at": "2026-09-28T21:15:28+00:00",
         "count": 200
+      },
+      {
+        "checked_at": "2026-11-17T12:11:49-06:00",
+        "count": 201
       }
     ],
     "title": "Ärztekammer Wien: Arbeiten statt Wahlkampf! Jetzt ist nicht die Zeit für vorgezogene Wahlen!",
@@ -103046,12 +103045,12 @@
     "started_by": "Wahlgemeinschaft",
     "category": "Gesundheit",
     "category_url": "https://www.openpetition.de/at/petitionen?category=20#petitionen",
-    "signatures": 200,
+    "signatures": 201,
     "goal": 500,
     "status": "online",
-    "last_seen": "2026-11-03T16:31:43+01:00",
+    "last_seen": "2026-11-17T12:11:49-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-03T16:31:43+01:00",
+    "last_checked": "2026-11-17T12:11:49-06:00",
     "lang": "de",
     "campaign_id": "openpetition:aerztekammer-wien-arbeiten-statt-wahlkampf-jetzt-ist-nicht-die-zeit-fuer-vorgezogene-wahlen",
     "i18n_state": {
@@ -105570,6 +105569,10 @@
       {
         "checked_at": "2026-09-28T21:15:28+00:00",
         "count": 142
+      },
+      {
+        "checked_at": "2026-11-17T12:11:49-06:00",
+        "count": 144
       }
     ],
     "title": "Gegen das Hundeverbot am Surferbadeplatz am Attersee – Für eine faire und hundefreundliche Lösung",
@@ -105581,11 +105584,11 @@
     "started_by": "Julia Zitzler",
     "category": "Tierschutz",
     "category_url": "https://www.openpetition.de/at/petitionen?category=45#petitionen",
-    "signatures": 142,
+    "signatures": 144,
     "status": "online",
-    "last_seen": "2026-11-03T16:31:43+01:00",
+    "last_seen": "2026-11-17T12:11:49-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-03T16:31:43+01:00",
+    "last_checked": "2026-11-17T12:11:49-06:00",
     "lang": "de",
     "campaign_id": "openpetition:gegen-das-hundeverbot-am-surferbadeplatz-am-attersee-fuer-eine-faire-und-hundefreundliche-loesung",
     "i18n_state": {
@@ -189086,5 +189089,89 @@
       "Möglichkeit"
     ],
     "last_checked": "2026-11-17T06:58:44-06:00"
+  },
+  "schulhof-der-rolandschule-und-stiftspielplatz-einhaltung-der-nutzungszeiten-und-weniger-laermbe-2": {
+    "slug": "schulhof-der-rolandschule-und-stiftspielplatz-einhaltung-der-nutzungszeiten-und-weniger-laermbe-2",
+    "first_seen": "2026-11-17T12:11:49-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-11-17T12:11:49-06:00",
+        "count": 7
+      }
+    ],
+    "title": "Schulhof der Rolandschule und Stiftspielplatz: Einhaltung der Nutzungszeiten und weniger Lärmbelästigung",
+    "summary": "Wir fordern die Stadt Düsseldorf auf, für die Einhaltung der geltenden Nutzungszeiten auf dem Schulhof der Rolandschule in der Rolandstraße zu sorgen und eine praktikable Lösung für die wiederkehrenden Lärmbelästigungen am Abend und in der Nacht zu schaffen. Dazu gehören: * Eine wirksame Sicherung des Schulhofs nach Ende der erlaubten Nutzungszeit. * Maßnahmen gegen das Basketballspielen außerhalb der zulässigen Zeiten. * Maßnahmen gegen das Übersteigen des Zauns und das unbefugte Betreten des S",
+    "image_url": "https://www.openpetition.de/images/default_petition.jpg",
+    "url": "https://www.openpetition.de/petition/online/schulhof-der-rolandschule-und-stiftspielplatz-einhaltung-der-nutzungszeiten-und-weniger-laermbe-2",
+    "description_full": "<!--marker--><p>Wir fordern die Stadt Düsseldorf auf, für die Einhaltung der geltenden Nutzungszeiten auf dem Schulhof der Rolandschule in der Rolandstraße zu sorgen und eine praktikable Lösung für die wiederkehrenden Lärmbelästigungen am Abend und in der Nacht zu schaffen.</p><p>Dazu gehören:</p><ul><li>Eine wirksame Sicherung des Schulhofs nach Ende der erlaubten Nutzungszeit.</li><li>Maßnahmen gegen das Basketballspielen außerhalb der zulässigen Zeiten.</li><li>Maßnahmen gegen das Übersteigen des Zauns und das unbefugte Betreten des Schulgeländes.</li><li>Maßnahmen gegen das Abbrennen von Böllern und Feuerwerkskörpern auf dem Schulhof und im Bereich des Stiftspielplatzes.</li></ul><br/><p>Ziel ist ein fairer Ausgleich zwischen der Freizeitnutzung öffentlicher Flächen und dem Ruhebedürfnis der Anwohner. Die bestehenden Regeln sollen eingehalten und die Anwohner nicht mit den Problemen allein gelassen werden.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Ich wohne in unmittelbarer Nähe der Rolandschule in Düsseldorf. Seit längerer Zeit kommt es auf dem Schulhof und im angrenzenden Bereich des Stiftspielplatzes regelmäßig zu Lärmbelästigungen.<br/>Obwohl die Stadt Düsseldorf schriftlich bestätigt hat, dass die reguläre Nutzungszeit des Schulhofs um 18:30 Uhr endet und sonntags keine Nutzung vorgesehen ist, wird der Schulhof weiterhin außerhalb dieser Zeiten genutzt.</p><p>Dabei handelt es sich unter anderem um:</p><ul><li><b>Basketballspielen am Abend und in der Nacht</b></li></ul><p>Auf dem Schulhof wird regelmäßig Basketball gespielt, auch nach 18:30 Uhr. Teilweise findet das Basketballspielen sogar nach 22 Uhr statt. Die Geräusche durch das ständige Aufprallen des Balls sind in den angrenzenden Wohnungen deutlich zu hören.</p><ul><li><b>Böller und laute Knallgeräusche</b></li></ul><p>Auch im Bereich des Schulhofs und des Stiftspielplatzes kommt es zu lauten Knallgeräuschen. Nach Berichten aus der Nachbarschaft werden dort Böller gezündet, unter anderem in den Hochbeeten am Stiftspielplatz. Die Geräusche sind teilweise auch in den umliegenden Straßen deutlich zu hören.</p><ul><li><b>Unbefugtes Betreten des Schulgeländes</b></li></ul><p>Das Verschließen des Tores verhindert die Nutzung des Schulhofs nicht zuverlässig. Personen gelangen teilweise über den Zaun auf das Gelände. Auch Aufenthalte auf Gebäudeteilen und dem Dach wurden beobachtet.</p><p>Ich habe mich bereits mehrfach an die Stadt Düsseldorf gewandt. Die Stadt hat die geltenden Nutzungszeiten bestätigt. Gleichzeitig wurde mir mitgeteilt, dass eine dauerhafte Kontrolle insbesondere in den Abendstunden und an Wochenenden nicht gewährleistet werden könne. Eine konkrete und dauerhafte Verbesserung ist bisher nicht eingetreten. Auch andere Anwohner berichten von entsprechenden Lärmbelästigungen. Es handelt sich daher nicht ausschließlich um die Beschwerde einer einzelnen Person.</p><p>Es geht uns nicht darum, Kindern und Jugendlichen die Möglichkeit zum Spielen zu nehmen. Wir wünschen uns vielmehr, dass die bestehenden Regeln eingehalten werden und die Interessen der Anwohner ebenfalls berücksichtigt werden.<br/>Wir möchten abends in unseren Wohnungen zur Ruhe kommen können, ohne regelmäßig durch Basketball, Training oder laute Knallgeräusche gestört zu werden.</p><p>Mit dieser Petition möchten wir erreichen, dass sich die Stadt Düsseldorf der Situation annimmt und eine praktikable, dauerhafte Lösung für alle Beteiligten findet.</p>",
+    "started_by": "Melanie Kornetzki",
+    "category": "Verwaltung",
+    "category_url": "https://www.openpetition.de/petitionen?category=12#petitionen",
+    "country": "DE",
+    "signatures": 7,
+    "start_date": "2026-11-17",
+    "lang": "de",
+    "campaign_id": "openpetition:schulhof-der-rolandschule-und-stiftspielplatz-einhaltung-der-nutzungszeiten-und-weniger-laermbe-2",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-11-17T12:11:49-06:00",
+    "offline_since": null,
+    "tags": [
+      "Schulhof",
+      "Düsseldorf",
+      "Stadt",
+      "Maßnahmen",
+      "Schulhofs",
+      "Basketballspielen",
+      "Lärmbelästigungen",
+      "Nutzungszeiten",
+      "Rolandschule",
+      "Anwohner"
+    ],
+    "last_checked": "2026-11-17T12:11:49-06:00"
+  },
+  "buergerinnenbeteiligung-bei-umgestaltung-der-landeggerstrasse": {
+    "slug": "buergerinnenbeteiligung-bei-umgestaltung-der-landeggerstrasse",
+    "first_seen": "2026-11-17T12:11:49-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-11-17T12:11:49-06:00",
+        "count": 22
+      }
+    ],
+    "title": "Bürger*innenbeteiligung bei Umgestaltung der Landeggerstraße",
+    "summary": "Die Grünen Neufeld fordern eine frühzeitige und umfassende Einbindung der Bevölkerung in die geplante Umgestaltung der Landeggerstraße. Dazu sollen ein öffentlicher Planungsworkshop durchgeführt und unterschiedliche Planungsvarianten vorgestellt und diskutiert werden. Darüber hinaus soll der unmittelbar betroffenen Bevölkerung im Planungsgebiet die Möglichkeit eingeräumt werden, im Rahmen einer Abstimmung ihre Präferenzen zur zukünftigen Verkehrsführung einzubringen.",
+    "image_url": "https://www.openpetition.eu/images/petition/buergerinnenbeteiligung-bei-umgestaltung-der-landeggerstrasse_1794645380_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/buergerinnenbeteiligung-bei-umgestaltung-der-landeggerstrasse",
+    "description_full": "<!--marker--><p>Die Grünen Neufeld fordern eine <b>frühzeitige und umfassende Einbindung der Bevölkerung</b> in die geplante Umgestaltung der Landeggerstraße. Dazu sollen ein <b>öffentlicher Planungsworkshop</b> durchgeführt und <b>unterschiedliche Planungsvarianten</b> <b>vorgestellt und diskutiert</b> werden. Darüber hinaus soll der unmittelbar betroffenen Bevölkerung im Planungsgebiet die Möglichkeit eingeräumt werden, im Rahmen einer <b>Abstimmung ihre Präferenzen zur zukünftigen Verkehrsführung einzubringen</b>.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Auf der kommunalpolitischen Agenda steht die Einbahnstraßenregelung der Landeggerstraße bereits. Bei der kommenden Gemeinderatssitzung am <b>24. November 2026</b> soll eine wichtige Weichenstellung für die zukünftige Verkehrsführung erfolgen.</p><p>Damit besteht die Gefahr, dass <b>weitreichende Entscheidungen getroffen werden, bevor die betroffene Bevölkerung ausreichend informiert wurde und ihre Anliegen und Vorstellungen in den Planungsprozess einbringen konnte</b>.</p><p>Wir möchten daher erreichen, dass die Bürger*innenbeteiligung noch rechtzeitig vor einer endgültigen Festlegung der Verkehrsführung ermöglicht wird. <b>Die Bevölkerung soll nicht erst vor vollendete Tatsachen gestellt werden</b>, sondern die Möglichkeit erhalten, die zukünftige Gestaltung ihres unmittelbaren Lebensumfeldes aktiv mitzugestalten.</p><p>Konkrete Auswirkungen hat die Einbahnstraßenregelung auf die täglichen Wege der Bevölkerung. So müssten beispielsweise Pendler*innen aus den betroffenen Gebieten, die in Richtung Ebenfurth oder Wiener Neustadt unterwegs sind, je nach Ausgangs- und Zielpunkt täglich einen <b>zusätzlichen Umweg von bis zu 1,4 Kilometern</b> in Kauf nehmen.</p><p>Für Bewohner*innen im Bereich des Stadtparks könnte die neue Verkehrsführung zudem dazu führen, dass sie den <b>Bahnübergang künftig zweimal passieren müssen</b>, wodurch zusätzliche Wartezeiten und Umwege entstehen können.</p><p>Die Auswirkungen beschränken sich somit nicht allein auf die unmittelbare Landeggerstraße, sondern betreffen auch die Erreichbarkeit angrenzender Wohngebiete und die täglichen Verkehrsverbindungen innerhalb der Stadtgemeinde.</p>",
+    "started_by": "Die Grünen Neufeld",
+    "category": "Verkehr",
+    "category_url": "https://www.openpetition.de/at/petitionen?category=47#petitionen",
+    "country": "AT",
+    "signatures": 22,
+    "start_date": "2026-11-14",
+    "lang": "de",
+    "campaign_id": "openpetition:buergerinnenbeteiligung-bei-umgestaltung-der-landeggerstrasse",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-11-17T12:11:49-06:00",
+    "offline_since": null,
+    "tags": [
+      "Bevölkerung",
+      "Landeggerstraße",
+      "Verkehrsführung",
+      "Umgestaltung",
+      "Betroffenen",
+      "Möglichkeit",
+      "Einbahnstraßenregelung",
+      "Planungsvarianten",
+      "Innenbeteiligung",
+      "Planungsworkshop"
+    ],
+    "last_checked": "2026-11-17T12:11:49-06:00"
   }
 }
