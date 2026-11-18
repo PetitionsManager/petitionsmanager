@@ -31,14 +31,17 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-11-18T00:43:39-06:00",
-    "petition_count": 1965,
-    "available": 1903,
-    "new_petitions_last_run": [],
+    "generated_at": "2026-11-18T05:50:49-06:00",
+    "petition_count": 1967,
+    "available": 1905,
+    "new_petitions_last_run": [
+      "1860-2026",
+      "1870-2026"
+    ],
     "bilanz": {
-      "stand": "2026-11-18T00:43:39-06:00",
-      "gefunden": 1903,
-      "im_bestand": 1903,
+      "stand": "2026-11-18T05:50:48-06:00",
+      "gefunden": 1905,
+      "im_bestand": 1905,
       "unbrauchbar": 0,
       "verworfen": 0,
       "dublette": 0,
@@ -46,14 +49,14 @@
       "zurueckgestellt": 0,
       "offen": 0,
       "offene_beispiele": [],
-      "bestand_gesamt": 1965,
+      "bestand_gesamt": 1967,
       "bestand_ausserhalb": 62
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-11-18T00:43:39-06:00",
-        "gesamt": 1965,
-        "online": 1965,
+        "zeit": "2026-11-18T05:50:48-06:00",
+        "gesamt": 1967,
+        "online": 1967,
         "offline": 0,
         "ohne_titel": 0,
         "platzhalter": 0,
@@ -65,13 +68,13 @@
         "mit_code_im_text": 0,
         "mit_ballast_in_kurzfassung": 0,
         "herkunft": "lokal_cron",
-        "neu": 0
+        "neu": 2
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-11-18T00:43:39-06:00",
-      "gesamt": 1965,
-      "online": 1965,
+      "zeit": "2026-11-18T05:50:48-06:00",
+      "gesamt": 1967,
+      "online": 1967,
       "offline": 0,
       "ohne_titel": 0,
       "platzhalter": 0,
@@ -83,19 +86,19 @@
       "mit_code_im_text": 0,
       "mit_ballast_in_kurzfassung": 0
     },
-    "verlauf_felder_ab": "2026-11-18T00:43:39-06:00",
+    "verlauf_felder_ab": "2026-11-18T05:50:48-06:00",
     "befunde": [
       {
         "stufe": "hinweis",
         "thema": "Startdatum ist ein Verfahrensdatum",
-        "text": "Tagesgenaues Datum bei 1006 von 1965 Sätzen; es ist das Zulässigkeitsdatum aus der Mitteilung an die Mitglieder, nicht der Start der Petition. Das jüngste ist 118 Tage alt (2026-07-23) — bauartbedingt, weil das Dokument erst mit der Kommissionsantwort entsteht. Der Altersmelder ist hier deshalb ausg",
-        "zeit": "2026-11-18T00:43:39-06:00",
+        "text": "Tagesgenaues Datum bei 1006 von 1967 Sätzen; es ist das Zulässigkeitsdatum aus der Mitteilung an die Mitglieder, nicht der Start der Petition. Das jüngste ist 118 Tage alt (2026-07-23) — bauartbedingt, weil das Dokument erst mit der Kommissionsantwort entsteht. Der Altersmelder ist hier deshalb ausg",
+        "zeit": "2026-11-18T05:50:48-06:00",
         "thema_en": "Start date is a procedural date",
-        "text_en": "Day-exact date on 1006 of 1965 records; it is the date of admissibility from the Notice to Members, not the start of the petition. The newest is 118 days old (2026-07-23) — by design, as the document is only drawn up once the Commission has replied. The ageing check is therefore skipped here."
+        "text_en": "Day-exact date on 1006 of 1967 records; it is the date of admissibility from the Notice to Members, not the start of the petition. The newest is 118 days old (2026-07-23) — by design, as the document is only drawn up once the Commission has replied. The ageing check is therefore skipped here."
       }
     ],
     "health_warning": null,
-    "online_count": 1965
+    "online_count": 1967
   },
   "0474-2026": {
     "slug": "0474-2026",
@@ -119745,5 +119748,105 @@
       "Procedures"
     ],
     "last_checked": "2026-11-16T08:17:45-06:00"
+  },
+  "1860-2026": {
+    "slug": "1860-2026",
+    "first_seen": "2026-11-18T05:49:31-06:00",
+    "signatures_history": [],
+    "title": "Petition 1860/2026: alleged breach of EU environmental law in the operation of the public lignite mine in Achlada, Florina, Greece",
+    "started_by": "Evangelos Traikos (Greek) signed by 40 other persons,",
+    "category": "Environment - Pollution",
+    "country": "Greece",
+    "description_full": "<p>The petitioner alleges that the operation of the public lignite mine near Achlada, in the Florina region, Greece, has caused severe environmental, social, and economic harm due to its proximity to residential areas, schools, and the Natura 2000 site &quot;Mount Voras&quot;. Despite environmental permits granted in 2014 and 2021, according to the petitioner, there are systemic failures in enforcement, including inadequate restoration of exhausted mining areas, poor waste management, and insufficient protection of protected habitats. Moreover, the petitioner alleges violations of various EU Directives, including on mining waste management (2006/21/EC), environmental impact assessments (2011/92/EU), Natura 2000 (92/43/EEC), environmental liability (2004/35/EC), and water and flood risk management (2000/60/EC, 2007/60/EC). According to the petitioner, the closure of the Meliti power plant that used lignite as fuel does not justify the mine’s continued operation. The petitioner requests an assessment of Greece’s compliance with EU law, and an evaluation of the effectiveness of Natura 2000 protection and environmental liability mechanisms.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1860%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1860/2026</a></p>",
+    "summary": "The petitioner alleges that the operation of the public lignite mine near Achlada, in the Florina region, Greece, has caused severe environmental, social, and economic harm due to its proximity to res…",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:1860-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1860%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-11-18T05:50:36",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 1860/2026: zum mutmaßlichen Verstoß gegen das EU-Umweltrecht beim Betrieb des öffentlichen Braunkohlebergwerks in Achlada, Florina (Griechenland)",
+        "summary": "Der Petent macht geltend, dass der Betrieb des öffentlichen Braunkohlebergwerks in der Nähe von Achlada in der Region Florina (Griechenland) schwere Umwelt-, Gesellschafts- und Wirtschaftsschäden veru…",
+        "description_full": "<p>Der Petent macht geltend, dass der Betrieb des öffentlichen Braunkohlebergwerks in der Nähe von Achlada in der Region Florina (Griechenland) schwere Umwelt-, Gesellschafts- und Wirtschaftsschäden verursacht habe, da das Bergwerk in der Nähe von Wohngebieten, Schulen und dem Natura-2000-Gebiet Berg Voras liege. Zwar seien 2014 und 2021 Umweltgenehmigungen erteilt worden, aber nach Angaben des Petenten gibt es bei der Durchsetzung Systemfehler, z. B. unangemessene Wiederherstellung erschöpfter Abbaugebiete, schlechte Abfallbewirtschaftung und unzureichender Schutz von Schutzgebieten. Außerdem werde gegen verschiedene EU-Richtlinien verstoßen, u. a. über die Bewirtschaftung von Abfällen aus der mineralgewinnenden Industrie (2006/21/EG), über die Umweltverträglichkeitsprüfung (2011/92/EU), über Natura 2000 (92/43/EWG), über Umwelthaftung (2004/35/EG) und über das Wasser- und Hochwassermanagement (2000/60/EG, 2007/60/EG). Die Schließung des Kraftwerks in Meliti, bei dem Braunkohle als Brennstoff verwendet worden sei, rechtfertige nicht den Weiterbetrieb des Kohlebergwerks. Der Petent fordert eine Beurteilung der Einhaltung des Unionsrechts durch Griechenland und eine Bewertung der Wirksamkeit des Natura-2000-Schutzes und der Umwelthaftungsmechanismen.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=1860%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1860/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=1860%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-11-18T05:49:31-06:00",
+    "offline_since": null,
+    "tags": [
+      "Environmental",
+      "Petitioner",
+      "Operation",
+      "Lignite",
+      "Greece",
+      "Mine",
+      "Management",
+      "Achlada",
+      "Alleges",
+      "Florina"
+    ],
+    "last_checked": "2026-11-18T05:49:31-06:00"
+  },
+  "1870-2026": {
+    "slug": "1870-2026",
+    "first_seen": "2026-11-18T05:49:31-06:00",
+    "signatures_history": [],
+    "title": "Petition 1870/2026: the application of EU law concerning waste management in Lithuania",
+    "started_by": "Andrius Ilgunas (Lithuanian), on behalf of VšĮ „Tyki Klaida“,",
+    "category": "Environment",
+    "country": "Lithuania",
+    "description_full": "<p>The petitioner raises concerns about the implementation of EU waste legislation in Lithuania, particularly Directive 2008/98/EC on waste, Directive 1999/31/EC on the landfill of waste and the EU’s circular-economy objectives. The petitioner refers to the European Commission’s assessment identifying Lithuania as being at risk of missing the 2025 municipal and packaging waste targets. The petitioner also highlights concerns about landfill capacity, unpleasant odours, potential environmental pollution and inadequate waste separation and collection systems. According to the petitioner, the continued disposal of potentially recoverable materials results in economic losses and missed opportunities for recycling, innovation and employment. The petitioner therefore calls on the European Parliament to examine Lithuania’s compliance with EU waste legislation and request updated information on recycling, recovery and landfill rates, as well as environmental monitoring and enforcement. The petitioner further calls for an assessment of the effectiveness of EU funding, improved separate waste collection, greater transparency through digital waste tracking and a national roadmap towards near-total waste recovery.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1870%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1870/2026</a></p>",
+    "summary": "The petitioner raises concerns about the implementation of EU waste legislation in Lithuania, particularly Directive 2008/98/EC on waste, Directive 1999/31/EC on the landfill of waste and the EU’s cir…",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:1870-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1870%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-11-18T05:50:44",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 1870/2026: zur Anwendung des EU-Rechts im Bereich der Abfallwirtschaft in Litauen",
+        "summary": "Der Petent äußert Bedenken hinsichtlich der Umsetzung des EU-Abfallrechts in Litauen, insbesondere der Richtlinie 2008/98/EG über Abfälle, der Richtlinie 1999/31/EG über Abfalldeponien und der Ziele d…",
+        "description_full": "<p>Der Petent äußert Bedenken hinsichtlich der Umsetzung des EU-Abfallrechts in Litauen, insbesondere der Richtlinie 2008/98/EG über Abfälle, der Richtlinie 1999/31/EG über Abfalldeponien und der Ziele der EU für die Kreislaufwirtschaft. Er bezieht sich auf die Bewertung der Kommission, wonach Litauen Gefahr laufe, die Ziele für Siedlungs- und Verpackungsabfälle für 2025 zu verfehlen. Der Petent weist auch auf Bedenken hinsichtlich der Deponiekapazität, unangenehmer Gerüche, möglicher Umweltverschmutzung und unzureichender Systeme zur Abfalltrennung und -sammlung hin. Dem Petenten zufolge führe die fortgesetzte Beseitigung potenziell verwertbarer Materialien zu wirtschaftlichen Verlusten und verpassten Chancen für Recycling, Innovation und Beschäftigung. Er fordert das Europäische Parlament daher auf, die Einhaltung des EU-Abfallrechts durch Litauen zu prüfen und aktualisierte Informationen über die Recycling-, Verwertungs- und Deponierungsquoten sowie über die Umweltüberwachung und die Durchsetzung der Rechtsvorschriften anzufordern. Der Petent fordert ferner eine Bewertung der Wirksamkeit der EU-Finanzierung, eine verbesserte getrennte Abfallsammlung, mehr Transparenz durch digitale Abfallverfolgung und einen nationalen Fahrplan für eine nahezu vollständige Abfallverwertung.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=1870%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1870/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=1870%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-11-18T05:49:31-06:00",
+    "offline_since": null,
+    "tags": [
+      "Waste",
+      "Petitioner",
+      "Lithuania",
+      "Directive",
+      "Landfill",
+      "Legislation",
+      "Concerns",
+      "Implementation",
+      "Environmental",
+      "Particularly"
+    ],
+    "last_checked": "2026-11-18T05:49:31-06:00"
   }
 }
