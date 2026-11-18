@@ -31,14 +31,24 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-11-18T05:54:21-06:00",
-    "petition_count": 2830,
-    "available": 1701,
-    "new_petitions_last_run": [],
+    "generated_at": "2026-11-18T10:02:52-06:00",
+    "petition_count": 2839,
+    "available": 1706,
+    "new_petitions_last_run": [
+      "unser-krankenhaus-braucht-eine-zukunft-orthopaedische-versorgung-am-kav-ehringshausen-erhalten",
+      "rettet-das-lsg-um-ploetzky-keine-naturzerstoerung-fuer-die-erweiterung-des-erlebnisparks",
+      "petition-gegen-forschung-zu-kriegszwecken-fuer-die-einfuehrung-einer-zivilklausel-an-der-univer-2",
+      "darmstadt-sichere-wege-statt-durchgangsverkehr-hammelstrift-und-maulbeerallee-entlasten",
+      "schluss-mit-dem-ackerparkplatz-wir-wollen-einen-befestigten-schuelerparkplatz-an-der-bertha",
+      "zulassungsstelle-kempen-erhalten-2",
+      "parkgebuehren-in-der-bad-belziger-innenstadt-abschaffen-broetchentaste-2-0-einfuehren",
+      "stoppt-die-aushoehlung-des-grazer-altstadtschutzes-3",
+      "sichere-strassenueberquerungen-fuer-unsere-kindergarten-und-schulkinder-im-mettauertal"
+    ],
     "bilanz": {
-      "stand": "2026-11-18T05:54:20-06:00",
-      "gefunden": 1701,
-      "im_bestand": 1701,
+      "stand": "2026-11-18T10:02:51-06:00",
+      "gefunden": 1706,
+      "im_bestand": 1706,
       "unbrauchbar": 0,
       "verworfen": 0,
       "dublette": 0,
@@ -46,64 +56,47 @@
       "zurueckgestellt": 0,
       "offen": 0,
       "offene_beispiele": [],
-      "bestand_gesamt": 2830,
-      "bestand_ausserhalb": 1129
+      "bestand_gesamt": 2839,
+      "bestand_ausserhalb": 1133
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-11-18T00:49:53-06:00",
-        "gesamt": 2830,
-        "online": 2830,
+        "zeit": "2026-11-18T10:02:51-06:00",
+        "gesamt": 2839,
+        "online": 2839,
         "offline": 0,
         "ohne_titel": 0,
         "platzhalter": 0,
         "nicht_ausgeliefert": 0,
         "torsi": 0,
         "dubletten": 0,
-        "mit_start": 2815,
-        "juengstes_start": "2026-11-17",
+        "mit_start": 2824,
+        "juengstes_start": "2026-11-18",
         "mit_code_im_text": 0,
         "mit_ballast_in_kurzfassung": 0,
         "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-11-18T05:54:20-06:00",
-        "gesamt": 2830,
-        "online": 2830,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 2815,
-        "juengstes_start": "2026-11-17",
-        "mit_code_im_text": 0,
-        "mit_ballast_in_kurzfassung": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
+        "neu": 9
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-11-18T05:54:20-06:00",
-      "gesamt": 2830,
-      "online": 2830,
+      "zeit": "2026-11-18T10:02:51-06:00",
+      "gesamt": 2839,
+      "online": 2839,
       "offline": 0,
       "ohne_titel": 0,
       "platzhalter": 0,
       "nicht_ausgeliefert": 0,
       "torsi": 0,
       "dubletten": 0,
-      "mit_start": 2815,
-      "juengstes_start": "2026-11-17",
+      "mit_start": 2824,
+      "juengstes_start": "2026-11-18",
       "mit_code_im_text": 0,
       "mit_ballast_in_kurzfassung": 0
     },
-    "verlauf_felder_ab": "2026-11-18T00:49:53-06:00",
+    "verlauf_felder_ab": "2026-11-18T10:02:51-06:00",
     "befunde": [],
     "health_warning": null,
-    "online_count": 2830
+    "online_count": 2839
   },
   "fuer-den-erhalt-einer-sicheren-individuellen-geburtshilfe-stoppt-den-neuen-hebammenhilfevertrag-2": {
     "slug": "fuer-den-erhalt-einer-sicheren-individuellen-geburtshilfe-stoppt-den-neuen-hebammenhilfevertrag-2",
@@ -189335,5 +189328,385 @@
       "Planungsworkshop"
     ],
     "last_checked": "2026-11-17T12:11:49-06:00"
+  },
+  "unser-krankenhaus-braucht-eine-zukunft-orthopaedische-versorgung-am-kav-ehringshausen-erhalten": {
+    "slug": "unser-krankenhaus-braucht-eine-zukunft-orthopaedische-versorgung-am-kav-ehringshausen-erhalten",
+    "first_seen": "2026-11-18T09:59:13-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-11-18T09:59:13-06:00",
+        "count": 1162
+      }
+    ],
+    "title": "Unser Krankenhaus braucht eine Zukunft! – Orthopädische Versorgung am KAV Ehringshausen erhalten!",
+    "summary": "Wir fordern die Hessische Landesregierung und das Hessische Ministerium für Familie, Senioren, Sport, Gesundheit und Pflege (HMFG) auf, die Entscheidung über die orthopädischen Leistungsgruppen am Kaiserin-Auguste-Victoria-Krankenhaus Ehringshausen erneut vollständig zu überprüfen. Wir fordern insbesondere: 1. Die dauerhafte Zuweisung aller beantragten, aber nicht zugewiesenen orthopädischen Leistungsgruppen. 2. Den Erhalt der Hüftendoprothetik, Knieendoprothetik und Revision von Knieendoprothes",
+    "image_url": "https://www.openpetition.de/images/petition/unser-krankenhaus-braucht-eine-zukunft-orthopaedische-versorgung-am-kav-ehringshausen-erhalten_1794989193_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/unser-krankenhaus-braucht-eine-zukunft-orthopaedische-versorgung-am-kav-ehringshausen-erhalten",
+    "description_full": "<!--marker--><p>Wir fordern die Hessische Landesregierung und das Hessische Ministerium für Familie, Senioren, Sport, Gesundheit und Pflege (HMFG) auf, die Entscheidung über die orthopädischen Leistungsgruppen am Kaiserin-Auguste-Victoria-Krankenhaus Ehringshausen erneut vollständig zu überprüfen.<br/>Wir fordern insbesondere:</p><ol><li>Die dauerhafte Zuweisung aller beantragten, aber nicht zugewiesenen orthopädischen Leistungsgruppen.</li><li>Den Erhalt der Hüftendoprothetik, Knieendoprothetik und Revision von Knieendoprothesen über den 31. Dezember 2027 hinaus.</li><li>Die langfristige Sicherung der Wirbelsäulenchirurgie am Standort Ehringshausen.</li><li>Eine faire Berücksichtigung der medizinischen Qualität, der tatsächlichen Behandlungszahlen und der positiven Gutachten des Medizinischen Dienstes.</li><li>Den Schutz der wohnortnahen medizinischen Versorgung sowie der Arbeitsplätze und der wirtschaftlichen Zukunft des Krankenhauses.</li></ol><p>Wir fordern eine transparente und nachvollziehbare Entscheidung, die den tatsächlichen Leistungen und der Bedeutung des Krankenhausstandorts Ehringshausen gerecht wird.<br/><b>Unser Ziel: Alle beantragten orthopädischen Leistungsgruppen erhalten und die Zukunft des KAV Ehringshausen sichern!</b></p>\n<h3>Begründung</h3>\n<!--marker--><p>Das Kaiserin-Auguste-Victoria-Krankenhaus in Ehringshausen ist ein wichtiger Bestandteil der medizinischen Versorgung im Lahn-Dill-Kreis und ein bedeutender Arbeitgeber in unserer Region.<br/>Nach dem vorliegenden Bescheidentwurf des Landes Hessen sollen wichtige orthopädische Behandlungsangebote am Standort nur noch bis zum 31. Dezember 2027 fortgeführt werden können. Ab 2028 droht damit der Wegfall wesentlicher medizinischer Leistungen.<br/>Betroffen sind insbesondere die Hüftendoprothetik, Knieendoprothetik, Revision von Knieendoprothesen und die Wirbelsäulenchirurgie.<br/>Nach Angaben des Krankenhauses wurden im Jahr 2025 insgesamt 185 Knieendoprothesen und 95 Hüftendoprothesen durchgeführt. Darüber hinaus verweist die Klinik auf positive Gutachten des Medizinischen Dienstes sowie auf die wirtschaftlichen Vorteile ihres bewährten Belegarztsystems.<br/>Wir fragen uns: Warum sollen etablierte und bewährte medizinische Behandlungsangebote zeitlich begrenzt werden, obwohl das Krankenhaus auf seine medizinischen Leistungen, seine Qualität und seine wirtschaftlichen Argumente verweist?<br/><b>Es geht um die Zukunft unseres Krankenhauses und unserer Arbeitsplätze!</b><br/>Der mögliche Wegfall dieser Leistungsgruppen könnte erhebliche wirtschaftliche Folgen für den gesamten Krankenhausstandort haben. Weniger Behandlungsmöglichkeiten können zu Einnahmeverlusten führen und die wirtschaftliche Stabilität des Krankenhauses zusätzlich belasten. Im schlimmsten Fall könnte dadurch sogar die wirtschaftliche Existenz des gesamten Standorts gefährdet werden.<br/>Davon wären zahlreiche Beschäftigte und ihre Familien betroffen. Es geht um Arbeitsplätze, berufliche Perspektiven und die Zukunft eines Krankenhauses, in dem Menschen täglich mit großem Engagement für die Patienten arbeiten.<br/>Für uns als Bürger und Mitarbeiter ist diese Entwicklung besonders besorgniserregend. Wir möchten nicht warten, bis wichtige Leistungen verloren gehen und Arbeitsplätze tatsächlich gefährdet sind. Wir möchten jetzt handeln!<br/><b>Auch die Bevölkerung im Lahn-Dill-Kreis ist betroffen!</b><br/>Wenn die orthopädischen Angebote in Ehringshausen wegfallen, müssen Patientinnen und Patienten möglicherweise weitere Wege zu anderen Krankenhäusern in Kauf nehmen. Besonders ältere und mobilitätseingeschränkte Menschen können dadurch zusätzlich belastet werden.<br/>Ein Krankenhaus im ländlichen Raum ist mehr als ein medizinischer Standort. Es ist ein wichtiger Bestandteil der regionalen Infrastruktur, ein Arbeitgeber und ein unverzichtbarer Teil der wohnortnahen Gesundheitsversorgung.<br/><b>Gemeinsam für die Zukunft unseres Krankenhauses!</b><br/>Wir unterstützen eine sinnvolle Krankenhausreform. Aber eine Reform darf nicht dazu führen, dass bewährte medizinische Versorgungsstrukturen und möglicherweise die wirtschaftliche Existenz eines ganzen Krankenhausstandorts gefährdet werden.<br/>Als Bürger und Mitarbeiter setzen wir uns gemeinsam für den Erhalt unseres Krankenhauses, seiner orthopädischen Leistungen und unserer Arbeitsplätze ein.<br/>Wir fordern eine faire, transparente und vollständige Neubewertung aller beantragten orthopädischen Leistungsgruppen.<br/><b>Unser Krankenhaus braucht eine Zukunft. Unsere Arbeitsplätze brauchen eine Zukunft. Und unsere Region braucht eine starke medizinische Versorgung!</b><br/>Bitte unterstützen Sie unsere Petition mit Ihrer Unterschrift und teilen Sie unseren Aufruf mit Familie, Freunden und Bekannten.<br/><b>Jede Stimme zählt. Jede Unterschrift gibt unserem Krankenhaus eine stärkere Stimme. Gemeinsam kämpfen wir für unsere Zukunft – Näher am Menschen!</b></p>",
+    "started_by": "Bürger- und Mitarbeiterinitiative für den Erhalt des KAV-Krankenhauses Ehringshausen",
+    "category": "Gesundheit",
+    "category_url": "https://www.openpetition.de/petitionen?category=20#petitionen",
+    "country": "DE",
+    "signatures": 1162,
+    "start_date": "2026-11-18",
+    "lang": "de",
+    "campaign_id": "openpetition:unser-krankenhaus-braucht-eine-zukunft-orthopaedische-versorgung-am-kav-ehringshausen-erhalten",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-11-18T09:59:13-06:00",
+    "offline_since": null,
+    "tags": [
+      "Zukunft",
+      "Orthopädischen",
+      "Ehringshausen",
+      "Leistungsgruppen",
+      "Krankenhauses",
+      "Arbeitsplätze",
+      "Medizinischen",
+      "Krankenhaus",
+      "Leistungen",
+      "Wirtschaftliche"
+    ],
+    "last_checked": "2026-11-18T09:59:13-06:00"
+  },
+  "rettet-das-lsg-um-ploetzky-keine-naturzerstoerung-fuer-die-erweiterung-des-erlebnisparks": {
+    "slug": "rettet-das-lsg-um-ploetzky-keine-naturzerstoerung-fuer-die-erweiterung-des-erlebnisparks",
+    "first_seen": "2026-11-18T09:59:13-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-11-18T09:59:13-06:00",
+        "count": 883
+      }
+    ],
+    "title": "Rettet das LSG um Plötzky! Keine Naturzerstörung für die Erweiterung des Erlebnisparks",
+    "summary": "Wir fordern den Stadtrat Schönebeck auf, die Zerstörung von 8,9 Hektar des Landschaftsschutzgebietes „Mittlere Elbe“ für die Erweiterung des Erlebnisparks Plötzky zu stoppen.",
+    "image_url": "https://www.openpetition.de/images/petition/rettet-das-landschaftsschutzgebiet-ploetzky-keine-naturzerstoerung-fuer-die-erweiterung-des-erl-2_1795006115_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/rettet-das-lsg-um-ploetzky-keine-naturzerstoerung-fuer-die-erweiterung-des-erlebnisparks",
+    "description_full": "<!--marker--><p><b>Wir fordern den Stadtrat Schönebeck auf, die Zerstörung von 8,9 Hektar des Landschaftsschutzgebietes „Mittlere Elbe“ für die Erweiterung des Erlebnisparks Plötzky zu stoppen.</b></p>\n<h3>Begründung</h3>\n<!--marker--><p>Wir, die Bürgerinnen und Bürger von Schönebeck, Plötzky und Umgebung, fordern den Stadtrat von Schönebeck auf, dem Antrag auf Herausnahme von ca. 8,9 Hektar aus dem Landschaftsschutzgebiet (LSG) „Mittlere Elbe / Mittelelbe“ zur Erweiterung des Erlebnisparks Plötzky <b>nicht zuzustimmen</b>.<br/>Die geplante Ausgliederung von einer Fläche so groß wie 13 Fußballfelder bedroht ein unersetzbares Ökosystem. Entgegen den Behauptungen im Gutachten des Investors, dass im Umkreis keine geschützten Arten bekannt seien, ist das betroffene Areal ein nachgewiesener Lebensraum streng geschützter Tiere und Pflanzen.<br/>Durch private Dokumentationen (inklusive GPS-Daten und Fotobeweisen) sind auf genau dieser Fläche unter anderem nachgewiesen:</p><ul><li><b>Wiedehopf</b> (streng geschützt, Rote Liste Kategorie 3)</li><li><b>Seeadler</b> (streng geschützt nach EU-Vogelschutzrichtlinie)</li><li><b>Hirschkäfer</b> (prioritäre, streng geschützte Art nach europäischer FFH-Richtlinie)</li><li><b>Sand-Strohblume</b> (besonders geschützt, Rote Liste der gefährdeten Pflanzen)</li><li>Sowie Pirol, Schwarzspecht, Grünspecht und die Ringelnatter.</li></ul><p>Eine Zerstörung dieses Areals durch Campingplätze, Ferienhäuser und Gastronomie widerspricht jeglichem Natur-, Artenschutz- und Hochwasserschutzrecht. Der bestehende Tourismus belastet die Region bereits stark; ein weiterer Ausbau führt zum unwiderruflichen Verlust von wertvollem Lebensraum direkt an den Waldseen.</p><p><b>Wir fordern:</b></p><ol><li>Den sofortigen Stopp des Herausnahmeverfahrens aus dem LSG.</li><li>Eine unabhängige, lückenlose und einjährige artenschutzrechtliche Kartierung des Geländes.</li><li>Den dauerhaften Schutz des Naherholungsgebietes für Mensch und Natur statt kommerzieller Überbauung.</li></ol>",
+    "started_by": "Kirsten Luther-Dücker",
+    "category": "Umwelt",
+    "category_url": "https://www.openpetition.de/petitionen?category=46#petitionen",
+    "country": "DE",
+    "signatures": 883,
+    "start_date": "2026-10-30",
+    "lang": "de",
+    "campaign_id": "openpetition:rettet-das-lsg-um-ploetzky-keine-naturzerstoerung-fuer-die-erweiterung-des-erlebnisparks",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-11-18T09:59:13-06:00",
+    "offline_since": null,
+    "tags": [
+      "Plötzky",
+      "Erlebnisparks",
+      "Erweiterung",
+      "Schönebeck",
+      "Streng",
+      "Zerstörung",
+      "Geschützt",
+      "Mittlere",
+      "Stadtrat",
+      "Hektar"
+    ],
+    "last_checked": "2026-11-18T09:59:13-06:00"
+  },
+  "petition-gegen-forschung-zu-kriegszwecken-fuer-die-einfuehrung-einer-zivilklausel-an-der-univer-2": {
+    "slug": "petition-gegen-forschung-zu-kriegszwecken-fuer-die-einfuehrung-einer-zivilklausel-an-der-univer-2",
+    "first_seen": "2026-11-18T09:59:13-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-11-18T09:59:13-06:00",
+        "count": 35
+      }
+    ],
+    "title": "Petition gegen Forschung zu Kriegszwecken! Für die Einführung einer Zivilklausel an der Universität!",
+    "summary": "Was ist die Zivilklausel? Die Zivilklausel ist die Selbstverpflichtung der Uni, dass Forschung und Lehre ausschließlich zivilen Zielen dienen sollen. In mehreren Bundesländern Deutschlands war die Zivilklausel lange ein wichtiger Bestandteil des Hochschulgesetzes. In Niedersachsen war das von 1993 bis 2002 der Fall. Seitdem waren es vor allem studentische Initiativen, die eine Zivilklausel an der eigenen Universität erkämpft haben. Was fordern wir? Auch wir sprechen uns klar gegen das Forschen u",
+    "image_url": "https://www.openpetition.de/images/default_petition.jpg",
+    "url": "https://www.openpetition.de/petition/online/petition-gegen-forschung-zu-kriegszwecken-fuer-die-einfuehrung-einer-zivilklausel-an-der-univer-2",
+    "description_full": "<!--marker--><p><b>Was ist die Zivilklausel?</b><br/>Die Zivilklausel ist die Selbstverpflichtung der Uni, dass Forschung und Lehre ausschließlich zivilen Zielen dienen sollen. In mehreren Bundesländern Deutschlands war die Zivilklausel lange ein wichtiger Bestandteil des Hochschulgesetzes. In Niedersachsen war das von 1993 bis 2002 der Fall. Seitdem waren es vor allem studentische Initiativen, die eine Zivilklausel an der eigenen Universität erkämpft haben. </p><p><b>Was fordern wir?</b><br/>Auch wir sprechen uns klar gegen das Forschen und Fördern militärischer Zwecke an unserer Universität aus! Wir fordern die Universität Hildesheim dazu auf, die Verhandlungen um eine Zivilklausel neu aufzunehmen und sich der Forschung und Lehre für ausschließlich zivile Ziele zu verpflichten! </p><p><b>Was kannst du tun?</b><br/>Unterschreibe diese Petition für die Einführung der Zivilklausel an der Universität Hildesheim!<br/>Teile die Petition und informiere deine Mitstudierenden, die Dozierenden und Beschäftigte der Universität!</p><p>Komm zum <b>Streik am 20.11.!</b></p>\n<h3>Begründung</h3>\n<!--marker--><p>In Deutschland beobachten wir in den letzten Jahren eine zunehmende Aufrüstung und Militarisierung, auch an den Hochschulen. Zuletzt wurde an der Universität Kassel am 04. November 2026 die Streichung der Zivilklausel beschlossen und eine Zusammenarbeit mit der Rüstungsindustrie ermöglicht. Seitdem sind hunderte Studierende in den Protest getreten und haben sich gegen eine Militarisierung an der Uni gestellt. </p>",
+    "started_by": "Studis gegen Rechts Hildesheim",
+    "category": "Bildung",
+    "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
+    "country": "DE",
+    "signatures": 35,
+    "goal": 500,
+    "start_date": "2026-11-10",
+    "lang": "de",
+    "campaign_id": "openpetition:petition-gegen-forschung-zu-kriegszwecken-fuer-die-einfuehrung-einer-zivilklausel-an-der-univer-2",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-11-18T09:59:13-06:00",
+    "offline_since": null,
+    "tags": [
+      "Zivilklausel",
+      "Universität",
+      "Forschung",
+      "Ausschließlich",
+      "Seitdem",
+      "Lehre",
+      "Selbstverpflichtung",
+      "Hochschulgesetzes",
+      "Militarisierung",
+      "Bundesländern"
+    ],
+    "last_checked": "2026-11-18T09:59:13-06:00"
+  },
+  "darmstadt-sichere-wege-statt-durchgangsverkehr-hammelstrift-und-maulbeerallee-entlasten": {
+    "slug": "darmstadt-sichere-wege-statt-durchgangsverkehr-hammelstrift-und-maulbeerallee-entlasten",
+    "first_seen": "2026-11-18T09:59:13-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-11-18T09:59:13-06:00",
+        "count": 19
+      }
+    ],
+    "title": "Darmstadt: Sichere Wege statt Durchgangsverkehr – Hammelstrift und Maulbeerallee entlasten!",
+    "summary": "Wir fordern die Wissenschaftsstadt Darmstadt auf, den Kraftfahrzeug-Durchgangsverkehr auf der Verbindung Hammelstrift – Weidenweg – Maulbeerallee wirksam zu begrenzen und die Verkehrssicherheit nachhaltig zu verbessern. Unsere konkreten Forderungen: 1. Durchgangsverkehr reduzieren: Prüfung und Umsetzung einer Beschränkung auf berechtigten Zielverkehr, vorzugsweise durch eine geeignete Beschilderung mit dem Zusatz „Anlieger frei“ oder eine vergleichbar wirksame, rechtlich zulässige Regelung. 2. V",
+    "image_url": "https://www.openpetition.de/images/petition/darmstadt-sichere-wege-statt-durchgangsverkehr-hammelstrift-und-maulbeerallee-entlasten_1794993171_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/darmstadt-sichere-wege-statt-durchgangsverkehr-hammelstrift-und-maulbeerallee-entlasten",
+    "description_full": "<!--marker--><p>Wir fordern die Wissenschaftsstadt Darmstadt auf, den Kraftfahrzeug-Durchgangsverkehr auf der Verbindung Hammelstrift – Weidenweg – Maulbeerallee wirksam zu begrenzen und die Verkehrssicherheit nachhaltig zu verbessern.</p><p><b>Unsere konkreten Forderungen:</b></p><ol><li><b>Durchgangsverkehr reduzieren:</b> Prüfung und Umsetzung einer Beschränkung auf berechtigten Zielverkehr, vorzugsweise durch eine geeignete Beschilderung mit dem Zusatz „Anlieger frei“ oder eine vergleichbar wirksame, rechtlich zulässige Regelung.</li><li><b>Verkehrsbelastung untersuchen:</b> Durchführung von Verkehrszählungen, Geschwindigkeitsmessungen und Untersuchungen der tatsächlichen Fahrbeziehungen während der morgendlichen und nachmittäglichen Hauptverkehrszeiten.</li><li><b>Bahnübergänge sicherer gestalten:</b> Überprüfung und Verbesserung der Verkehrsführung, insbesondere bei Begegnungen von Fahrzeugen sowie beim Fuß- und Radverkehr.</li><li><b>Beleuchtung verbessern:</b> Überprüfung und Beseitigung fehlender oder schlechter Beleuchtung auf den betroffenen Strecken.</li><li><b>Gefährliche Einmündungen entschärfen:</b> Überprüfung und Verbesserung der Vorfahrts- und Sichtverhältnisse an der Einmündung Würzburger Straße / Maulbeerallee.</li><li><b>Besonders gefährdete Menschen schützen:</b> Verbesserung der Schul-, Kindergarten-, Fuß- und Radwege sowie geeignete Schutzmaßnahmen im unmittelbaren Umfeld des Merck-Kindergartens.</li><li><b>Bevölkerung einbeziehen:</b> Gemeinsame Ortsbegehung mit betroffenen Menschen aus der Nachbarschaft, transparente Veröffentlichung der Untersuchungsergebnisse und Vorstellung eines konkreten Maßnahmenplans.</li></ol><br/><p><b>Die Erreichbarkeit sämtlicher Grundstücke und Einrichtungen muss erhalten bleiben.</b> Dies gilt ausdrücklich für Wohnhäuser, Gartenanlagen, Bauwagenplätze, Sporteinrichtungen, den Merck-Kindergarten, den Seniorenpark Kranichstein sowie für Besuch, Lieferverkehr, Handwerksbetriebe, Pflege- und Rettungsdienste und alle anderen Fahrten mit berechtigtem Ziel im Gebiet.</p>\n<h3>Begründung</h3>\n<!--marker--><p><b>Unsere Wohnstraßen sind keine Hauptverkehrsstraßen – werden aber zunehmend wie solche genutzt.</b></p><p>Die Verbindung Hammelstrift – Weidenweg – Maulbeerallee führt durch Wohngebiete zwischen Darmstadt-Arheilgen und Kranichstein.</p><p>Nach unseren Beobachtungen nutzen zahlreiche Fahrzeuge diese Strecke als Abkürzung, obwohl für den überörtlichen Verkehr ausgebaute Hauptverkehrsverbindungen zur Verfügung stehen.</p><p><b>Morgens</b> beobachten wir besonders starken Verkehr aus Kranichstein in Richtung Arheilgen, Darmstadt und zum Merck-Gelände.</p><p><b>Nachmittags</b> verlagert sich der Verkehr in die Gegenrichtung: Aus Arheilgen, Darmstadt und dem Bereich Merck fahren zahlreiche Fahrzeuge über dieselben Wohnstraßen nach Kranichstein.</p><p>Hier sind täglich besonders viele Menschen unterwegs<br/>Die betroffenen Straßen sind gleichzeitig wichtige Wege für Kinder, Jugendliche, Familien, ältere Menschen und Menschen mit Behinderungen.</p><p>Zahlreiche Kinder sind morgens auf dem Weg zur Schule. Viele Jugendliche aus Arheilgen nutzen die Verbindung mit dem Fahrrad, beispielsweise in Richtung Nordbad und zu den dortigen Schulen.</p><p><b>Besonders besorgniserregend ist der Verkehr unmittelbar am Merck-Kindergarten.</b> Dort fahren die Fahrzeuge direkt vorbei, während Familien mit kleinen Kindern unterwegs sind.</p><p>Auch Menschen aus der Haardt-Kolonie, der Maulbeerallee, dem westlichen Kranichstein rund um den Hammelstrift sowie aus den angrenzenden Straßen sind betroffen.</p><p>Hinzu kommen die Bauwagenplätze Klabauta und Baba Jaga, die Gartenanlagen entlang Weidenweg und Maulbeerallee, Sporteinrichtungen und der Seniorenpark Kranichstein.</p><p>Es handelt sich also keineswegs um eine unbewohnte Verbindungsstraße, sondern um einen Bereich, in dem täglich Menschen wohnen, arbeiten, spielen und unterwegs sind.</p><p><b>Die Straßen sind für diese Belastung nicht ausgelegt.</b></p><p>Die Bahnübergänge sind ausgesprochen schmal. Teilweise können gerade zwei Fahrzeuge aneinander vorbeifahren. Für Menschen zu Fuß oder auf dem Fahrrad entstehen dadurch besonders unangenehme und potenziell gefährliche Situationen.</p><p>Hinzu kommen fehlende oder schlechte Beleuchtung auf Teilstrecken sowie eingeschränkte Sichtverhältnisse.</p><p>An der Einmündung Würzburger Straße / Maulbeerallee gilt rechts vor links. Durch die Hanglage und Straßenführung ist die Vorfahrtsituation aus unserer Sicht schwer überschaubar.</p><p>Gerade während der Hauptverkehrszeiten treffen hier zahlreiche Fahrzeuge auf Menschen, die zu Fuß oder mit dem Fahrrad unterwegs sind.</p><p><b>Auffällig viele Fahrzeuge kommen offenbar nicht aus dem unmittelbaren Umfeld.</b></p><p>Nach überschlägigen Beobachtungen trägt mehr als die Hälfte der vorbeifahrenden Fahrzeuge kein DA-Kennzeichen.</p><p>Besonders häufig fallen Kennzeichen aus dem Kreis Offenbach (OF) auf. Wir vermuten deshalb einen erheblichen Anteil an Pendelverkehr, möglicherweise auch aus den Bereichen Rodgau und Rödermark.</p><p>Kennzeichen allein beweisen selbstverständlich weder den Wohnort noch das tatsächliche Fahrtziel. Unsere Beobachtungen legen jedoch nahe, dass die Strecke in erheblichem Umfang von Menschen genutzt wird, die kein Ziel innerhalb des Wohngebiets haben.</p><p><b>Frühere Sperrungen zeigen, dass eine Untersuchung sinnvoll ist.</b></p><p>Innerhalb der vergangenen 24 Monate war der Bahnübergang nach Beobachtungen aus der Nachbarschaft mindestens viermal vollständig gesperrt, teilweise über mehrere Tage.</p><p>Diese Sperrungen betrafen auch Menschen zu Fuß und auf dem Fahrrad.</p><p>Uns sind keine dadurch entstandenen zusätzlichen Verkehrsprobleme in umliegenden Straßen bekannt. Eine offizielle Auswertung liegt uns allerdings nicht vor.</p><p>Diese Erfahrungen sind keine belastbare Verkehrsuntersuchung und auch nicht mit einer Beschränkung auf Anliegerverkehr gleichzusetzen. Sie sollten bei der Bewertung möglicher Maßnahmen dennoch berücksichtigt werden.</p><p><b>Es geht um Sicherheit und Lebensqualität.</b></p><p><b>Niemand sollte sich auf dem Schulweg, vor einem Kindergarten oder auf dem Weg durch das eigene Wohngebiet unnötigen Gefahren aussetzen müssen.</b></p><p>Unsere Straßen müssen in erster Linie den Menschen dienen, die hier leben und ihre alltäglichen Wege zurücklegen.</p><p>Die Sicherheit von Kindern, Jugendlichen, älteren Menschen, Menschen mit Behinderungen sowie allen anderen Menschen zu Fuß oder auf dem Fahrrad muss Vorrang vor dem Zeitgewinn durch eine Abkürzung haben.</p><p><b>Wir möchten sichere Wege und lebenswerte Wohngebiete – keine zusätzliche Verkehrsachse mitten durch unsere Nachbarschaft.</b></p>",
+    "started_by": "Daniel Wacker",
+    "category": "Verkehr",
+    "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
+    "country": "DE",
+    "signatures": 19,
+    "start_date": "2026-11-18",
+    "lang": "de",
+    "campaign_id": "openpetition:darmstadt-sichere-wege-statt-durchgangsverkehr-hammelstrift-und-maulbeerallee-entlasten",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-11-18T09:59:13-06:00",
+    "offline_since": null,
+    "tags": [
+      "Maulbeerallee",
+      "Fahrzeuge",
+      "Kranichstein",
+      "Hammelstrift",
+      "Darmstadt",
+      "Beobachtungen",
+      "Verbindung",
+      "Zahlreiche",
+      "Unterwegs",
+      "Weidenweg"
+    ],
+    "last_checked": "2026-11-18T09:59:13-06:00"
+  },
+  "schluss-mit-dem-ackerparkplatz-wir-wollen-einen-befestigten-schuelerparkplatz-an-der-bertha": {
+    "slug": "schluss-mit-dem-ackerparkplatz-wir-wollen-einen-befestigten-schuelerparkplatz-an-der-bertha",
+    "first_seen": "2026-11-18T09:59:13-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-11-18T09:59:13-06:00",
+        "count": 16
+      }
+    ],
+    "title": "Schluss mit dem Ackerparkplatz: Wir wollen einen befestigten Schülerparkplatz an der Bertha!",
+    "summary": "Wir fordern den Landkreis Groß-Gerau als Schulträger der Bertha-von-Suttner-Schule dazu auf, den Schülerparkplatz in Mörfelden-Walldorf grundlegend zu verbessern. Die bisher unbefestigte und unebene Fläche soll dauerhaft befestigt, angemessen entwässert und mit eindeutigen Parkplatzmarkierungen versehen werden. Ziel ist ein ganzjährig nutzbarer, sicherer und geordnet aufgeteilter Schülerparkplatz.",
+    "image_url": "https://www.openpetition.de/images/petition/schluss-mit-dem-ackerparkplatz-wir-wollen-einen-befestigten-schuelerparkplatz-an-der-bertha_1795016393_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/schluss-mit-dem-ackerparkplatz-wir-wollen-einen-befestigten-schuelerparkplatz-an-der-bertha",
+    "description_full": "<!--marker--><p>Wir fordern den Landkreis Groß-Gerau als Schulträger der Bertha-von-Suttner-Schule dazu auf, den Schülerparkplatz in Mörfelden-Walldorf grundlegend zu verbessern. Die bisher unbefestigte und unebene Fläche soll dauerhaft befestigt, angemessen entwässert und mit eindeutigen Parkplatzmarkierungen versehen werden. Ziel ist ein ganzjährig nutzbarer, sicherer und geordnet aufgeteilter Schülerparkplatz.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Der Schülerparkplatz der Bertha-von-Suttner-Schule befindet sich in einem schlechten baulichen Zustand.<br/>Besonders bei Regen und in den Herbst- und Wintermonaten wird die Situation problematisch. Der Boden weicht stark auf und es entstehen tiefe, riesige Pfützen. Fahrzeuge fahren sich fest und man hat Angst dort zu parken.<br/>Der Parkplatz wird täglich von zahlreichen Schülerinnen und Schülern genutzt, die auf eine verlässliche Parkmöglichkeit angewiesen sind, da sie sich nicht auf die Pünktlichkeit des öffentlichen Personennahverkehr verlassen können.</p><p>Zusätzlich fehlen jegliche Parkplatzmarkierungen oder eine erkennbare Aufteilung der Stellplätze. Dadurch parken Fahrzeuge häufig ungeordnet oder man parkt andere ein.</p><p>Es ist nicht nachvollziehbar, dass eine solche Fläche dauerhaft in diesem Zustand bleibt, obwohl mit einer angemessenen Befestigung, einer funktionierenden Entwässerung und einer klaren Parkplatzaufteilung eine deutliche Verbesserung möglich wäre.</p><p>Wir fordern deshalb den Landkreis Groß-Gerau auf, den Parkplatz vor Ort zu begutachten, geeignete Sanierungsmaßnahmen zu prüfen und einen konkreten Plan zur Umsetzung vorzulegen.</p><p>Ein Schulparkplatz sollte ganzjährig vernünftig nutzbar sein. Dafür setzen wir uns mit dieser Petition ein.</p>",
+    "started_by": "Petent/in nicht öffentlich",
+    "category": "Bildung",
+    "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
+    "country": "DE",
+    "signatures": 16,
+    "start_date": "2026-11-18",
+    "lang": "de",
+    "campaign_id": "openpetition:schluss-mit-dem-ackerparkplatz-wir-wollen-einen-befestigten-schuelerparkplatz-an-der-bertha",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-11-18T09:59:13-06:00",
+    "offline_since": null,
+    "tags": [
+      "Schülerparkplatz",
+      "Parkplatzmarkierungen",
+      "Ganzjährig",
+      "Groß-Gerau",
+      "Dauerhaft",
+      "Landkreis",
+      "Fläche",
+      "Mörfelden-Walldorf",
+      "Aufgeteilter",
+      "Unbefestigte"
+    ],
+    "last_checked": "2026-11-18T09:59:13-06:00"
+  },
+  "zulassungsstelle-kempen-erhalten-2": {
+    "slug": "zulassungsstelle-kempen-erhalten-2",
+    "first_seen": "2026-11-18T09:59:13-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-11-18T09:59:13-06:00",
+        "count": 13
+      }
+    ],
+    "title": "Zulassungsstelle Kempen erhalten",
+    "summary": "Seit rund 70 Jahren gibt es eine Kfz-Zulassungsstelle in Kempen. Jetzt soll die Nebenstelle zum Ende August 2028 schließen – künftig soll es nur noch die Zulassungsstelle in Viersen-Dülken geben. Für die Bürgerinnen und Bürger im nördlichen Kreisgebiet bedeutet das: weite Anfahrtswege, lange Wartezeiten und ein Serviceverlust, den wir nicht hinnehmen wollen. Wir verstehen, dass die Digitalisierung voranschreitet. Das i-Kfz-Verfahren des Bundes ermöglicht bereits viele Vorgänge online, aber bei w",
+    "image_url": "https://www.openpetition.de/images/petition/zulassungsstelle-kempen-erhalten_1794992685_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/zulassungsstelle-kempen-erhalten-2",
+    "description_full": "<!--marker--><p>Seit rund <b>70 Jahren</b> gibt es eine Kfz-Zulassungsstelle in Kempen. Jetzt soll die Nebenstelle zum Ende August 2028 schließen – künftig soll es nur noch die Zulassungsstelle in Viersen-Dülken geben.</p><p>Für die Bürgerinnen und Bürger im nördlichen Kreisgebiet bedeutet das: weite Anfahrtswege, lange Wartezeiten und ein Serviceverlust, den wir nicht hinnehmen wollen.</p><p>Wir verstehen, dass die Digitalisierung voranschreitet. Das i-Kfz-Verfahren des Bundes ermöglicht bereits viele Vorgänge online, aber bei weitem nicht alle.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Aber die Realität sieht anders aus:</p><ul><li><b>Noch nicht alles geht online:</b> Gerade technische Eintragungen und viele Sonderfälle erfordern weiterhin den Gang zur Behörde.</li><li><b>Nicht alle Bürger sind digital:</b> Ältere Menschen und Bürger mit Migrationshintergrund haben oft keine Möglichkeit oder wenig Vertrauen, eine Zulassung selbstständig online durchzuführen. Für sie ist die persönliche Vorsprache vor Ort <b>unverzichtbar, </b>weil sie gar <b>kein Internet</b> haben<b>.</b></li><li><b>Die Zeit arbeitet für uns:</b> Bis <b>Dezember 2030</b> wird voraussichtlich die Online-Zulassung in allen Varianten – einschließlich technischer Eintragungen und Sonderfällen – ausgereift und flächendeckend verfügbar sein. Erst dann wäre eine Schließung verantwortbar.</li><li><b>Ca. 40 Minuten Fahrtzeit </b>von Tönisberg bis Dülken</li></ul><br/><p>Bei all unseren Gesprächen vor Ort mit privaten und gewerblichen Kunden, Großkunden, Autohändlern, Kfz-Werkstätten, Institutionen u.s.w. stießen wir auf <b>völliges Unverständnis </b>zu den Schließungsabsichten des Kreises, <b> bis hin zu „bösartigen\" Reaktionen</b>.</p><p><b>Wir fordern daher den Kreistag und den Landrat des Kreises Viersen auf:</b></p><ol><li>Die Schließung der Zulassungsstelle Kempen von August 2028 auf <b>Ende 2030</b> zu verschieben.</li><li>Bis dahin jährlich öffentlich zu berichten, welcher Anteil der Zulassungsvorgänge im Kreis tatsächlich online abgewickelt werden kann.</li><li>Die endgültige Schließung erst zu beschließen, wenn nachweislich alle Vorgänge – auch technische Eintragungen – digital möglich sind.</li></ol><br/><p>Die Zulassungsstelle Kempen ist über<b> 70 Jahren</b> ein Stück Bürgernähe im Kreis Viersen. Geben Sie den Menschen im nördlichen Kreisgebiet die Zeit, die der digitale Wandel braucht – und schließen Sie die Tür nicht, bevor online wirklich alles funktioniert.</p><p><b>Jetzt mitzeichnen – für Erhalt der Zulassungsstelle Kempen bis Ende 2030!</b></p>",
+    "started_by": "Hermann Jörg Osterkamp",
+    "category": "Verbraucherschutz",
+    "category_url": "https://www.openpetition.de/petitionen?category=59#petitionen",
+    "country": "DE",
+    "signatures": 13,
+    "start_date": "2026-11-17",
+    "lang": "de",
+    "campaign_id": "openpetition:zulassungsstelle-kempen-erhalten-2",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-11-18T09:59:13-06:00",
+    "offline_since": null,
+    "tags": [
+      "Zulassungsstelle",
+      "Kempen",
+      "Bürger",
+      "Ende",
+      "Eintragungen",
+      "Kreisgebiet",
+      "Nördlichen",
+      "Schließung",
+      "Schließen",
+      "Vorgänge"
+    ],
+    "last_checked": "2026-11-18T09:59:13-06:00"
+  },
+  "parkgebuehren-in-der-bad-belziger-innenstadt-abschaffen-broetchentaste-2-0-einfuehren": {
+    "slug": "parkgebuehren-in-der-bad-belziger-innenstadt-abschaffen-broetchentaste-2-0-einfuehren",
+    "first_seen": "2026-11-18T09:59:13-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-11-18T09:59:13-06:00",
+        "count": 12
+      }
+    ],
+    "title": "Parkgebühren in der Bad Belziger Innenstadt abschaffen – Brötchentaste 2.0 einführen",
+    "summary": "Die Parkgebühren in der Innenstadt von Bad Belzig vertreiben Kundschaft und benachteiligen die örtlichen Geschäfte. Wir fordern die Abschaffung der Gebühren oder zumindest die Wiedereinführung einer kostenlosen Kurzzeitparkmöglichkeit (Brötchentaste 2.0).",
+    "image_url": "https://www.openpetition.de/images/petition/parkgebuehren-in-der-bad-belziger-innenstadt-abschaffen-broetchentaste-2-0-einfuehren_1794859276_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/parkgebuehren-in-der-bad-belziger-innenstadt-abschaffen-broetchentaste-2-0-einfuehren",
+    "description_full": "<!--marker--><p>Die Parkgebühren in der Innenstadt von Bad Belzig vertreiben Kundschaft und benachteiligen die örtlichen Geschäfte. Wir fordern die Abschaffung der Gebühren oder zumindest die Wiedereinführung einer kostenlosen Kurzzeitparkmöglichkeit (Brötchentaste 2.0).</p>\n<h3>Begründung</h3>\n<!--marker--><p>Sehr geehrter Herr Bürgermeister Pulz,<br/>sehr geehrte Mitglieder der Stadtverordnetenversammlung,<br/>die Parkgebühren in der Innenstadt von Bad Belzig sind für viele Kundinnen und Kunden ein Grund, nicht mehr in die Stadtmitte zu fahren. Statt in den örtlichen Geschäften einzukaufen, weichen sie auf die kostenlosen Parkplätze der Supermärkte und Discounter am Stadtrand aus. Gleichzeitig kämpfen viele unserer Belziger Betriebe in der Innenstadt mit Umsatzeinbußen und Leerständen.<br/>Seit August 2026 gilt die neue Parkgebührenordnung mit 0,50 € pro angefangene 15 Minuten (Höchstparkdauer 2,5 Stunden) in den Bereichen Marktplatz, Straße der Einheit, Wiesenburger Straße, Magdeburger Straße und Baderstraße. Die frühere Brötchentaste entfällt damit.<br/>Wir fordern deshalb:</p><ol><li>Die Abschaffung der Parkgebühren in der Innenstadt <b>oder</b></li><li>die Einführung einer Brötchentaste 2.0: Die ersten 45–60 Minuten kostenlos, danach die bisherige Gebühr bei Beibehaltung der Höchstparkdauer.</li></ol><p>Bitte bringen Sie das Thema zeitnah in die Stadtverordnetenversammlung ein und prüfen Sie die Möglichkeit einer Pilotphase mit anschließender Evaluation.<br/>Mit freundlichen Grüßen<br/>Die Unterzeichnenden</p>",
+    "started_by": "Steffen Schmeisser",
+    "category": "Wirtschaft",
+    "category_url": "https://www.openpetition.de/petitionen?category=48#petitionen",
+    "country": "DE",
+    "signatures": 12,
+    "start_date": "2026-11-16",
+    "lang": "de",
+    "campaign_id": "openpetition:parkgebuehren-in-der-bad-belziger-innenstadt-abschaffen-broetchentaste-2-0-einfuehren",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-11-18T09:59:13-06:00",
+    "offline_since": null,
+    "tags": [
+      "Innenstadt",
+      "Brötchentaste",
+      "Parkgebühren",
+      "Abschaffung",
+      "Kostenlosen",
+      "Örtlichen",
+      "Belzig",
+      "Straße",
+      "Kurzzeitparkmöglichkeit",
+      "Wiedereinführung"
+    ],
+    "last_checked": "2026-11-18T09:59:13-06:00"
+  },
+  "stoppt-die-aushoehlung-des-grazer-altstadtschutzes-3": {
+    "slug": "stoppt-die-aushoehlung-des-grazer-altstadtschutzes-3",
+    "first_seen": "2026-11-18T09:59:13-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-11-18T09:59:13-06:00",
+        "count": 1017
+      }
+    ],
+    "title": "Stoppt die Aushöhlung des Grazer Altstadtschutzes",
+    "summary": "Die Grazer Altstadt ist ein Ort zum Wohnen, Arbeiten und Zusammenkommen. Ihre historischen Gebäude, Straßen, Plätze, Innenhöfe und Gärten machen Graz unverwechselbar. Diesen Lebensraum wollen wir erhalten und sorgfältig weiterentwickeln. Seit 1974 gibt es das Grazer Altstadterhaltungsgesetz (GAEG). Es entstand durch das Engagement der Initiative „Rettet die Grazer Altstadt“. Seit 1999 gehört das historische Zentrum zum UNESCO-Welterbe; 2010 kam Schloss Eggenberg dazu. Die geplanten Änderungen de",
+    "image_url": "https://www.openpetition.eu/images/petition/stoppt-die-aushoehlung-des-grazer-altstadtschutzes-3_1795000018_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/stoppt-die-aushoehlung-des-grazer-altstadtschutzes-3",
+    "description_full": "<!--marker--><p>Die Grazer Altstadt ist ein Ort zum Wohnen, Arbeiten und Zusammenkommen. Ihre historischen Gebäude, Straßen, Plätze, Innenhöfe und Gärten machen Graz unverwechselbar. Diesen Lebensraum wollen wir erhalten und sorgfältig weiterentwickeln.</p><p>Seit 1974 gibt es das Grazer Altstadterhaltungsgesetz (GAEG). Es entstand durch das Engagement der Initiative „Rettet die Grazer Altstadt“. Seit 1999 gehört das historische Zentrum zum UNESCO-Welterbe; 2010 kam Schloss Eggenberg dazu.</p><p>Die geplanten Änderungen des Grazer Altstadterhaltungsgesetzes schwächen wesentliche Schutzbestimmungen. Ein verantwortungsvoller Schutz der Grazer Altstadt, ihrer Schutzzonen und des UNESCO-Welterbes ist damit nicht mehr ausreichend sichergestellt.</p><p><b>Wir fordern die Steiermärkische Landesregierung und den Steiermärkischen Landtag auf, die geplanten Änderungen am Grazer Altstadterhaltungsgesetz in dieser Form nicht weiterzuverfolgen. Neue Regeln sollen gemeinsam mit der Stadt Graz, den bisher in der Altstadt-Sachverständigenkommission vertretenen Institutionen, weiteren Fachleuten sowie unter Beteiligung der Bevölkerung ausgearbeitet werden.</b></p>\n<h3>Begründung</h3>\n<!--marker--><p><b>SCHÜTZEN WIR DIE ALTSTADT ALS GANZES!</b><br/>Gebäude, Straßen, Plätze, Innenhöfe, Gärten und Dachlandschaften bilden ein zusammenhängendes Ganzes. Gesetzesänderungen dürfen hier keine Schutzlücken schaffen. Zukünftig sollen nur noch Objekte, deren „Sichtbarkeit von öffentlichen Flächen…“ gegeben ist geschützt werden, somit nur mehr Teile der Altstadt.<b> </b>Der Abbruch von Gebäuden in Schutzzonen wäre zukünftig im vereinfachten Verfahren gemäß Baugesetz möglich, die Wiedererrichtungspflicht entfällt zur Gänze.</p><p>Der universelle Wert des UNESCO-Welterbes muss erhalten bleiben!</p><p>Auch außerhalb des UNESCO-Welterbes darf der Schutz nicht aufgeweicht werden: Weitere Schutzzonen umfassen den wertvollen Grazer Gründerzeitgürtel und weitere stadt- und architekturhistorisch bedeutende Viertel.</p><p><b>SICHERN WIR FACHLICHE VIELFALT!</b><br/>In der Grazer Altstadt-Sachverständigenkommission (ASVK) prüfen unabhängige Fachleute verschiedener Bereiche, darunter Architektur und Kunstgeschichte, gemeinsam Bauvorhaben in den Schutzzonen. Sie beurteilen, ob die geplanten Veränderungen mit dem Erhalt der Altstadt und ihrem Erscheinungsbild vereinbar sind.<br/>Künftig sollen Einzelgutachten der Regelfall sein. Die Baubehörde alleine entscheidet, ob sie die Kommission im Ausnahmefall zusätzlich befasst. Auch die Möglichkeit, schon vor der Einreichung eines Bauvorhabens klären zu lassen, ob die Pläne mit dem Altstadtschutz vereinbar sind, soll entfallen. Dadurch drohen Rechtsunsicherheit, Verzögerungen, Mehrkosten und Streitfälle.</p><p>Eine tatsächliche Vereinfachung braucht klare Regeln.</p><p><b>SICHERN WIR UNABHÄNGIGKEIT!</b><br/>Die geplante Neuregelung hebt die bisherige unabhängige Zusammensetzung und Selbstbestimmung der Kommission (ASVK) auf.</p><p>Künftig soll das Land Steiermark die Vorsitzenden bestellen, somit entfällt die bisherige unabhängige Wahl durch die Kommissionsmitglieder. Je ein weiteres Mitglied soll von der Stadt Graz, dem Städtebund, dem Gemeindebund und dem Bundesdenkmalamt entsandt werden. Damit ist nicht gewährleistet, dass Fachwissen aus Architektur oder Kunstgeschichte ausreichend vertreten ist. Auch Ersatzmitglieder sind keine vorgesehen.</p><p><b><i>Die Grazer Altstadt soll sich weiterentwickeln können. Zahlreiche auch bisher schon realisierte Bauprojekte zeigen, dass der Altstadtschutz Neues ermöglicht und die Stadt nicht unter eine gläserne Glocke stellt. </i></b></p><p><b>Unterstützen Sie mit Ihrer Unterschrift den Erhalt der Grazer Altstadt und eine gemeinsame Überarbeitung der geplanten Gesetzesänderungen.</b></p><p><b>Ihr unabhängiges Personenkomitee</b></p><p><b>Diese Petition ist eine gemeinsame Initiative unabhängiger Expert:innen aus verschiedenen Fachgebieten. Sie wird von den nachstehend angeführten Initiator:innen persönlich getragen: </b>Architekt Dipl.-Ing. Christian Andexer, Dipl.-Ing.ⁱⁿ Birgit Androschin, BA MA MA, Univ.-Prof. Dr.-Ing. Matthias Castorph, Dipl.-Ing.ⁱⁿ Zerina Džubur, Architektin Dipl.-Ing.ⁱⁿ Dr.ⁱⁿ techn. Eva Kuss, Mag.ᵃ Karin Oberhuber, Mag.ᵃ Heidi Oswald, Architekt Dipl.-Ing. Elemer Ploder, Architekt Dipl.-Ing. Peter Reitmayr, Architekt Dipl.-Ing. Gerhard Springer, Martin Stirner, BSc., Univ.-Prof. Mag. Dr. Anselm Wagner, Raphael Wieser, Architekt Dipl.-Ing. Rainer Wührer</p><br/>",
+    "started_by": "Anselm Wagner",
+    "category": "Bauen",
+    "category_url": "https://www.openpetition.de/at/petitionen?category=6#petitionen",
+    "country": "AT",
+    "signatures": 1017,
+    "start_date": "2026-11-16",
+    "lang": "de",
+    "campaign_id": "openpetition:stoppt-die-aushoehlung-des-grazer-altstadtschutzes-3",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-11-18T09:59:13-06:00",
+    "offline_since": null,
+    "tags": [
+      "Grazer",
+      "Altstadt",
+      "Dipl",
+      "Architekt",
+      "Geplanten",
+      "Schutzzonen",
+      "Stadt",
+      "Graz",
+      "Altstadterhaltungsgesetz",
+      "UNESCO-Welterbes"
+    ],
+    "last_checked": "2026-11-18T09:59:13-06:00"
+  },
+  "sichere-strassenueberquerungen-fuer-unsere-kindergarten-und-schulkinder-im-mettauertal": {
+    "slug": "sichere-strassenueberquerungen-fuer-unsere-kindergarten-und-schulkinder-im-mettauertal",
+    "first_seen": "2026-11-18T09:59:13-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-11-18T09:59:13-06:00",
+        "count": 26
+      }
+    ],
+    "title": "Sichere Strassenüberquerungen für unsere Kindergarten- und Schulkinder im Mettauertal",
+    "summary": "Wir fordern die Gemeinde Mettauertal sowie die zuständigen kantonalen Behörden auf, die Verkehrssicherheit bei den Bushaltestellen in Hottwil, Wil, Mettau, Etzgen und Oberhofen AG zu überprüfen und geeignete Schutzmassnahmen umzusetzen.",
+    "image_url": "https://www.openpetition.eu/images/petition/sichere-strassenueberquerungen-fuer-unsere-kindergarten-und-schulkinder-im-mettauertal_1794917332_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/sichere-strassenueberquerungen-fuer-unsere-kindergarten-und-schulkinder-im-mettauertal",
+    "description_full": "<!--marker--><p>Wir fordern die Gemeinde Mettauertal sowie die zuständigen kantonalen Behörden auf, die Verkehrssicherheit bei den Bushaltestellen in Hottwil, Wil, Mettau, Etzgen und Oberhofen AG zu überprüfen und geeignete Schutzmassnahmen umzusetzen.</p>\n<h3>Begründung</h3>\n<!--marker--><br/><p>Tagtäglich sind Kindergarten- und Schulkinder auf den öffentlichen Verkehr angewiesen. Dabei müssen sie teilweise stark befahrene Hauptstrassen überqueren, um zu ihren Bushaltestellen oder nach Hause zu gelangen.</p><p>Gerade für jüngere Kinder stellt dies eine besondere Herausforderung dar. Sie können Geschwindigkeiten und Entfernungen von Fahrzeugen noch nicht zuverlässig einschätzen. Gleichzeitig sind sie aufgrund ihrer Körpergrösse für Autofahrer nicht immer rechtzeitig erkennbar.</p><p>Wir fordern deshalb:</p><p>1. Sichere Fussgängerübergänge: Prüfung und Einrichtung geeigneter Fussgängerstreifen oder anderer gesicherter Querungsmöglichkeiten im Bereich der betroffenen Bushaltestellen.<br/>2. Bessere Sichtbarkeit: Ausreichende Beleuchtung, gut erkennbare Signalisation und freie Sicht auf wartende und die Strasse überquerende Kinder.<br/>3. Überprüfung aller betroffenen Bushaltestellen: Eine umfassende Sicherheitsbeurteilung in Hottwil, Wil, Mettau, Etzgen und Oberhofen AG unter Berücksichtigung der tatsächlichen Schulwege.<br/>4. Konkrete Umsetzung: Die zuständigen Behörden sollen geeignete Verbesserungsmassnahmen festlegen und deren Umsetzung zeitnah planen.</p><p>Kinder sollen ihren Kindergarten- und Schulweg möglichst sicher und selbstständig zurücklegen können.</p><p>Es darf nicht davon abhängen, ob ein Autofahrer rechtzeitig reagiert oder ein Kind eine Verkehrssituation richtig einschätzt.</p><p>Mit dieser Petition möchten wir erreichen, dass die Sicherheit unserer Kinder bei der Verkehrsplanung stärker berücksichtigt wird.</p><p>Denn ein sicherer Schulweg ist keine Luxusfrage – sondern eine grundlegende Voraussetzung für den Schutz unserer Kinder!</p>",
+    "started_by": "Melanie Neuhaus",
+    "category": "Sicherheit",
+    "category_url": "https://www.openpetition.de/ch/petitionen?category=55#petitionen",
+    "country": "CH",
+    "signatures": 26,
+    "goal": 2000,
+    "start_date": "2026-11-17",
+    "lang": "de",
+    "campaign_id": "openpetition:sichere-strassenueberquerungen-fuer-unsere-kindergarten-und-schulkinder-im-mettauertal",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-11-18T09:59:13-06:00",
+    "offline_since": null,
+    "tags": [
+      "Bushaltestellen",
+      "Kinder",
+      "Kindergarten",
+      "Mettauertal",
+      "Zuständigen",
+      "Geeignete",
+      "Oberhofen",
+      "Behörden",
+      "Hottwil",
+      "Etzgen"
+    ],
+    "last_checked": "2026-11-18T09:59:13-06:00"
   }
 }
