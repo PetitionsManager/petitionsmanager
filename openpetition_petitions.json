@@ -31,14 +31,14 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-11-18T16:07:55-06:00",
+    "generated_at": "2026-11-18T20:16:59-06:00",
     "petition_count": 2839,
-    "available": 1707,
+    "available": 1697,
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-11-18T16:07:55-06:00",
-      "gefunden": 1707,
-      "im_bestand": 1707,
+      "stand": "2026-11-18T20:16:58-06:00",
+      "gefunden": 1697,
+      "im_bestand": 1697,
       "unbrauchbar": 0,
       "verworfen": 0,
       "dublette": 0,
@@ -47,28 +47,11 @@
       "offen": 0,
       "offene_beispiele": [],
       "bestand_gesamt": 2839,
-      "bestand_ausserhalb": 1132
+      "bestand_ausserhalb": 1142
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-11-18T14:57:36-06:00",
-        "gesamt": 2839,
-        "online": 2839,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 2824,
-        "juengstes_start": "2026-11-18",
-        "mit_code_im_text": 0,
-        "mit_ballast_in_kurzfassung": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-11-18T16:07:55-06:00",
+        "zeit": "2026-11-18T20:16:58-06:00",
         "gesamt": 2839,
         "online": 2839,
         "offline": 0,
@@ -86,7 +69,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-11-18T16:07:55-06:00",
+      "zeit": "2026-11-18T20:16:58-06:00",
       "gesamt": 2839,
       "online": 2839,
       "offline": 0,
@@ -100,7 +83,7 @@
       "mit_code_im_text": 0,
       "mit_ballast_in_kurzfassung": 0
     },
-    "verlauf_felder_ab": "2026-11-18T14:57:36-06:00",
+    "verlauf_felder_ab": "2026-11-18T20:16:58-06:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 2839
@@ -186121,6 +186104,10 @@
       {
         "checked_at": "2026-11-15T19:35:07-06:00",
         "count": 562
+      },
+      {
+        "checked_at": "2026-11-18T20:10:50-06:00",
+        "count": 571
       }
     ],
     "title": "Erhalt der Kita Sonnenglanz Brand-Erbisdorf- Kinder sind keine Auslastungsquote!",
@@ -186132,7 +186119,7 @@
     "category": "Familie",
     "category_url": "https://www.openpetition.de/petitionen?category=14#petitionen",
     "country": "DE",
-    "signatures": 562,
+    "signatures": 571,
     "start_date": "2026-11-06",
     "lang": "de",
     "campaign_id": "openpetition:erhalt-der-kita-sonnenglanz-brand-erbisdorf-kinder-sind-keine-auslastungsquote",
@@ -186140,7 +186127,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-15T19:35:07-06:00",
+    "last_seen": "2026-11-18T20:10:50-06:00",
     "offline_since": null,
     "tags": [
       "Kita",
@@ -186154,7 +186141,7 @@
       "Eltern",
       "Kinder"
     ],
-    "last_checked": "2026-11-15T19:35:07-06:00"
+    "last_checked": "2026-11-18T20:10:50-06:00"
   },
   "janni-unser-postbote-gehoert-zu-gehrden-wir-wuenschen-uns-seine-rueckkehr": {
     "slug": "janni-unser-postbote-gehoert-zu-gehrden-wir-wuenschen-uns-seine-rueckkehr",
@@ -186171,18 +186158,22 @@
       {
         "checked_at": "2026-11-15T19:35:07-06:00",
         "count": 340
+      },
+      {
+        "checked_at": "2026-11-18T20:10:50-06:00",
+        "count": 341
       }
     ],
-    "title": "Janni, unser Postbote gehört zu Gehrden – wir wünschen uns seine Rückkehr!",
-    "summary": "Wir bitten die Deutsche Post, die Versetzung unseres vertrauten Postboten, Joannis Agapidis zu überdenken und ihn wieder in seinem bisherigen Zustellgebiet in Gehrden einzusetzen. Er kennt die Straßen, die Häuser und die Menschen und hat durch seine freundliche, zuverlässige und hilfsbereite Art großes Vertrauen gewonnen. Auch bei den Kindern ist er sehr beliebt. Für viele von uns ist er ein vertrautes Gesicht, das zum Alltag und zum Zusammenleben in unserer Stadt gehört. Mit seiner herzlichen u",
-    "image_url": "https://www.openpetition.de/images/petition/janni-unser-postbote-gehoert-zu-gehrden-wir-wuenschen-uns-seine-rueckkehr_1794068640_desktop.jpg",
+    "title": "Unser Postbote gehört zu Gehrden – wir wünschen uns seine Rückkehr!",
+    "summary": "Wir bitten die Deutsche Post, die Versetzung unseres vertrauten Postboten, zu überdenken und ihn wieder in seinem bisherigen Zustellgebiet in Gehrden einzusetzen. Er kennt die Straßen, die Häuser und die Menschen und hat durch seine freundliche, zuverlässige und hilfsbereite Art großes Vertrauen gewonnen. Auch bei den Kindern ist er sehr beliebt. Für viele von uns ist er ein vertrautes Gesicht, das zum Alltag und zum Zusammenleben in unserer Stadt gehört. Mit seiner herzlichen und fröhlichen Art",
+    "image_url": "https://www.openpetition.de/images/default_petition.jpg",
     "url": "https://www.openpetition.de/petition/online/janni-unser-postbote-gehoert-zu-gehrden-wir-wuenschen-uns-seine-rueckkehr",
-    "description_full": "<!--marker--><p>Wir bitten die Deutsche Post, die Versetzung unseres vertrauten Postboten, Joannis Agapidis zu überdenken und ihn wieder in seinem bisherigen Zustellgebiet in Gehrden einzusetzen.<br/>Er kennt die Straßen, die Häuser und die Menschen und hat durch seine freundliche, zuverlässige und hilfsbereite Art großes Vertrauen gewonnen. Auch bei den Kindern ist er sehr beliebt. Für viele von uns ist er ein vertrautes Gesicht, das zum Alltag und zum Zusammenleben in unserer Stadt gehört. Mit seiner herzlichen und fröhlichen Art bereicherte er das Miteinander und schuf einen echten Mehrwert für die Stadt Gehrden.</p><p>Er wohnt selbst in Gehrden und muss nun für seine Zustelltätigkeit jeden Tag jeweils 45 Minuten für die Fahrt in den Sahlkamp und wieder zurück aufwenden. Wir wünschen uns, dass seine Ortskenntnis und die gewachsenen Beziehungen bei der Einsatzplanung berücksichtigt werden.<br/>Mit unseren Unterschriften setzen wir uns dafür ein, dass unser Postbote wieder zu uns zurückkehren kann – und zeigen ihm zugleich, wie sehr wir seine Arbeit schätzen.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Diese Petition gibt den Menschen in Gehrden die Möglichkeit, ihre Wertschätzung gemeinsam sichtbar zu machen. Wir möchten zeigen, dass Jannis Einsatz wahrgenommen wurde und dass seine Versetzung viele von uns entsetzt.<br/>Wir kennen die betrieblichen Gründe für diese Entscheidung nicht. Doch wir hoffen, dass unsere Stimmen Anlass geben, sie noch einmal zu prüfen und eine Rückkehr in sein bisheriges Zustellgebiet zu ermöglichen.</p>",
-    "started_by": "Dr. Sarah Geisemeyer Mangueira",
+    "description_full": "<!--marker--><p>Wir bitten die Deutsche Post, die Versetzung unseres vertrauten Postboten, zu überdenken und ihn wieder in seinem bisherigen Zustellgebiet in Gehrden einzusetzen.<br/>Er kennt die Straßen, die Häuser und die Menschen und hat durch seine freundliche, zuverlässige und hilfsbereite Art großes Vertrauen gewonnen. Auch bei den Kindern ist er sehr beliebt. Für viele von uns ist er ein vertrautes Gesicht, das zum Alltag und zum Zusammenleben in unserer Stadt gehört. Mit seiner herzlichen und fröhlichen Art bereicherte er das Miteinander und schuf einen echten Mehrwert für die Stadt Gehrden.</p><p>Er wohnt selbst in Gehrden und muss nun für seine Zustelltätigkeit jeden Tag jeweils 45 Minuten für die Fahrt in den Sahlkamp und wieder zurück aufwenden. Wir wünschen uns, dass seine Ortskenntnis und die gewachsenen Beziehungen bei der Einsatzplanung berücksichtigt werden.<br/>Mit unseren Unterschriften setzen wir uns dafür ein, dass unser Postbote wieder zu uns zurückkehren kann – und zeigen ihm zugleich, wie sehr wir seine Arbeit schätzen.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Diese Petition gibt den Menschen in Gehrden die Möglichkeit, ihre Wertschätzung gemeinsam sichtbar zu machen. Wir möchten zeigen, dass sein Einsatz wahrgenommen wurde und dass seine Versetzung viele von uns entsetzt.<br/>Wir kennen die betrieblichen Gründe für diese Entscheidung nicht. Doch wir hoffen, dass unsere Stimmen Anlass geben, sie noch einmal zu prüfen und eine Rückkehr in sein bisheriges Zustellgebiet zu ermöglichen.</p>",
+    "started_by": "Petent/in nicht öffentlich",
     "category": "Soziales",
     "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
     "country": "DE",
-    "signatures": 340,
+    "signatures": 341,
     "goal": 400,
     "start_date": "2026-11-07",
     "lang": "de",
@@ -186191,7 +186182,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-15T19:35:07-06:00",
+    "last_seen": "2026-11-18T20:10:50-06:00",
     "offline_since": null,
     "tags": [
       "Gehrden",
@@ -186205,7 +186196,7 @@
       "Einzusetzen",
       "Freundliche"
     ],
-    "last_checked": "2026-11-15T19:35:07-06:00"
+    "last_checked": "2026-11-18T20:10:50-06:00"
   },
   "unterschriftensammlung-gegen-die-schliessung-der-volksbankfiliale-in-bispingen": {
     "slug": "unterschriftensammlung-gegen-die-schliessung-der-volksbankfiliale-in-bispingen",
@@ -186222,6 +186213,10 @@
       {
         "checked_at": "2026-11-15T19:35:07-06:00",
         "count": 459
+      },
+      {
+        "checked_at": "2026-11-18T20:10:50-06:00",
+        "count": 467
       }
     ],
     "title": "Unterschriftensammlung gegen die Schließung der Volksbankfiliale in Bispingen",
@@ -186233,7 +186228,7 @@
     "category": "Verbraucherschutz",
     "category_url": "https://www.openpetition.de/petitionen?category=59#petitionen",
     "country": "DE",
-    "signatures": 459,
+    "signatures": 467,
     "goal": 300,
     "start_date": "2026-11-05",
     "lang": "de",
@@ -186242,7 +186237,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-15T19:35:07-06:00",
+    "last_seen": "2026-11-18T20:10:50-06:00",
     "offline_since": null,
     "tags": [
       "Bispingen",
@@ -186256,7 +186251,7 @@
       "Gewerbetreibenden",
       "Geschäftsleitung"
     ],
-    "last_checked": "2026-11-15T19:35:07-06:00"
+    "last_checked": "2026-11-18T20:10:50-06:00"
   },
   "unsere-burgschule-braucht-einen-hausmeister-in-vollzeit": {
     "slug": "unsere-burgschule-braucht-einen-hausmeister-in-vollzeit",
