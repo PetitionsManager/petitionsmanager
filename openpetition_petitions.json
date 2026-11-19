@@ -31,14 +31,18 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-11-19T00:49:25-06:00",
-    "petition_count": 2839,
-    "available": 1697,
-    "new_petitions_last_run": [],
+    "generated_at": "2026-11-19T05:28:36-06:00",
+    "petition_count": 2842,
+    "available": 1700,
+    "new_petitions_last_run": [
+      "erhalt-der-mdr-sendung-mach-dich-ran",
+      "die-station-s3-am-bkh-bayreuth-muss-bleiben-fuer-den-erhalt-einer-spezialisierten-suchtbehandlung",
+      "kontinuitaet-stabilitaet-und-genuegend-ressourcen-fuer-die-schule-goenhard"
+    ],
     "bilanz": {
-      "stand": "2026-11-19T00:49:25-06:00",
-      "gefunden": 1697,
-      "im_bestand": 1697,
+      "stand": "2026-11-19T05:28:35-06:00",
+      "gefunden": 1700,
+      "im_bestand": 1700,
       "unbrauchbar": 0,
       "verworfen": 0,
       "dublette": 0,
@@ -46,64 +50,47 @@
       "zurueckgestellt": 0,
       "offen": 0,
       "offene_beispiele": [],
-      "bestand_gesamt": 2839,
+      "bestand_gesamt": 2842,
       "bestand_ausserhalb": 1142
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-11-18T20:16:58-06:00",
-        "gesamt": 2839,
-        "online": 2839,
+        "zeit": "2026-11-19T05:28:35-06:00",
+        "gesamt": 2842,
+        "online": 2842,
         "offline": 0,
         "ohne_titel": 0,
         "platzhalter": 0,
         "nicht_ausgeliefert": 0,
         "torsi": 0,
         "dubletten": 0,
-        "mit_start": 2824,
+        "mit_start": 2827,
         "juengstes_start": "2026-11-18",
         "mit_code_im_text": 0,
         "mit_ballast_in_kurzfassung": 0,
         "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-11-19T00:49:25-06:00",
-        "gesamt": 2839,
-        "online": 2839,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 2824,
-        "juengstes_start": "2026-11-18",
-        "mit_code_im_text": 0,
-        "mit_ballast_in_kurzfassung": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
+        "neu": 3
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-11-19T00:49:25-06:00",
-      "gesamt": 2839,
-      "online": 2839,
+      "zeit": "2026-11-19T05:28:35-06:00",
+      "gesamt": 2842,
+      "online": 2842,
       "offline": 0,
       "ohne_titel": 0,
       "platzhalter": 0,
       "nicht_ausgeliefert": 0,
       "torsi": 0,
       "dubletten": 0,
-      "mit_start": 2824,
+      "mit_start": 2827,
       "juengstes_start": "2026-11-18",
       "mit_code_im_text": 0,
       "mit_ballast_in_kurzfassung": 0
     },
-    "verlauf_felder_ab": "2026-11-18T20:16:58-06:00",
+    "verlauf_felder_ab": "2026-11-19T05:28:35-06:00",
     "befunde": [],
     "health_warning": null,
-    "online_count": 2839
+    "online_count": 2842
   },
   "fuer-den-erhalt-einer-sicheren-individuellen-geburtshilfe-stoppt-den-neuen-hebammenhilfevertrag-2": {
     "slug": "fuer-den-erhalt-einer-sicheren-individuellen-geburtshilfe-stoppt-den-neuen-hebammenhilfevertrag-2",
@@ -53109,9 +53096,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
     "signatures": 243,
     "status": "online",
-    "last_seen": "2026-11-16T04:51:16-06:00",
+    "last_seen": "2026-11-19T05:24:01-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-16T04:51:16-06:00",
+    "last_checked": "2026-11-19T05:24:01-06:00",
     "start_date": "2026-05-01",
     "lang": "de",
     "campaign_id": "openpetition:bitte-helfen-sie-uns-unsere-kita-storchennest-in-wedderstedt-im-dorf-zu-retten",
@@ -55702,9 +55689,9 @@
     "signatures": 206,
     "goal": 500,
     "status": "online",
-    "last_seen": "2026-11-16T04:51:16-06:00",
+    "last_seen": "2026-11-19T05:24:01-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-16T04:51:16-06:00",
+    "last_checked": "2026-11-19T05:24:01-06:00",
     "lang": "de",
     "campaign_id": "openpetition:rettet-den-arbeitsplatz-von-stefan-lanzinger-und-damit-auch-den-unterricht-hunderter-schueler",
     "i18n_state": {
@@ -59145,9 +59132,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=44#petitionen",
     "signatures": 165,
     "status": "online",
-    "last_seen": "2026-11-16T04:51:16-06:00",
+    "last_seen": "2026-11-19T05:24:01-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-16T04:51:16-06:00",
+    "last_checked": "2026-11-19T05:24:01-06:00",
     "lang": "de",
     "campaign_id": "openpetition:calestenics-park-in-hohbuch-2",
     "i18n_state": {
@@ -60249,9 +60236,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
     "signatures": 154,
     "status": "online",
-    "last_seen": "2026-11-16T04:51:16-06:00",
+    "last_seen": "2026-11-19T05:24:01-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-16T04:51:16-06:00",
+    "last_checked": "2026-11-19T05:24:01-06:00",
     "start_date": "2026-05-01",
     "lang": "de",
     "campaign_id": "openpetition:stoppt-das-kita-chaos-verlaessliche-bildung-und-betreuung-fuer-die-kita-28-hafen-jetzt",
@@ -62440,6 +62427,10 @@
       {
         "checked_at": "2026-11-16T04:51:16-06:00",
         "count": 134
+      },
+      {
+        "checked_at": "2026-11-19T05:24:01-06:00",
+        "count": 135
       }
     ],
     "title": "Komplizenschaft mit Genozid, Besatzung und Apartheid an der Ruhr-Universität Bochum beenden.",
@@ -62451,11 +62442,11 @@
     "started_by": "Sozialistisch Demokratischer Studierendenverband (dieLinke.SDS)",
     "category": "Bildung",
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
-    "signatures": 134,
+    "signatures": 135,
     "status": "online",
-    "last_seen": "2026-11-16T04:51:16-06:00",
+    "last_seen": "2026-11-19T05:24:01-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-16T04:51:16-06:00",
+    "last_checked": "2026-11-19T05:24:01-06:00",
     "lang": "de",
     "campaign_id": "openpetition:komplizenschaft-mit-genozid-besatzung-und-apartheid-an-der-ruhr-universitaet-bochum-beenden",
     "i18n_state": {
@@ -68188,9 +68179,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
     "signatures": 86,
     "status": "online",
-    "last_seen": "2026-11-16T04:51:16-06:00",
+    "last_seen": "2026-11-19T05:24:01-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-16T04:51:16-06:00",
+    "last_checked": "2026-11-19T05:24:01-06:00",
     "lang": "de",
     "campaign_id": "openpetition:sicherer-verkehr-am-kruegelpark-zebrastreifen-tempo-30-und-verkehrsspiegel-auf-der-deutenbacher-str",
     "i18n_state": {
@@ -72257,9 +72248,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=44#petitionen",
     "signatures": 66,
     "status": "online",
-    "last_seen": "2026-11-16T04:51:16-06:00",
+    "last_seen": "2026-11-19T05:24:01-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-16T04:51:16-06:00",
+    "last_checked": "2026-11-19T05:24:01-06:00",
     "lang": "de",
     "campaign_id": "openpetition:trickjump-fuer-holzkirchner-jugend",
     "i18n_state": {
@@ -75689,6 +75680,10 @@
       {
         "checked_at": "2026-11-13T03:13:00-06:00",
         "count": 56
+      },
+      {
+        "checked_at": "2026-11-19T05:24:01-06:00",
+        "count": 57
       }
     ],
     "title": "Erhalt der Grünfläche im Wohngebiet Eggesin",
@@ -75700,11 +75695,11 @@
     "started_by": "Max Budy",
     "category": "Bauen",
     "category_url": "https://www.openpetition.de/petitionen?category=6#petitionen",
-    "signatures": 56,
+    "signatures": 57,
     "status": "online",
-    "last_seen": "2026-11-16T04:51:16-06:00",
+    "last_seen": "2026-11-19T05:24:01-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-16T04:51:16-06:00",
+    "last_checked": "2026-11-19T05:24:01-06:00",
     "lang": "de",
     "campaign_id": "openpetition:erhalt-der-gruenflaeche-im-wohngebiet-eggesin",
     "i18n_state": {
@@ -76033,9 +76028,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
     "signatures": 68,
     "status": "online",
-    "last_seen": "2026-11-16T04:51:16-06:00",
+    "last_seen": "2026-11-19T05:24:01-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-16T04:51:16-06:00",
+    "last_checked": "2026-11-19T05:24:01-06:00",
     "lang": "de",
     "campaign_id": "openpetition:ukrainisch-als-regulaere-zweite-fremdsprache-an-den-schulen-in-brandenburg-einfuehren",
     "i18n_state": {
@@ -76084,9 +76079,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=20#petitionen",
     "signatures": 55,
     "status": "online",
-    "last_seen": "2026-11-16T04:51:16-06:00",
+    "last_seen": "2026-11-19T05:24:01-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-16T04:51:16-06:00",
+    "last_checked": "2026-11-19T05:24:01-06:00",
     "start_date": "2026-05-01",
     "lang": "de",
     "campaign_id": "openpetition:tempo-30-auf-der-hochstrasse-in-recklinghausen-fuer-laermschutz-sicherheit-und-lebensqualitaet",
@@ -82287,9 +82282,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=55#petitionen",
     "signatures": 33,
     "status": "online",
-    "last_seen": "2026-11-16T04:51:16-06:00",
+    "last_seen": "2026-11-19T05:24:01-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-16T04:51:16-06:00",
+    "last_checked": "2026-11-19T05:24:01-06:00",
     "start_date": "2026-05-01",
     "lang": "de",
     "campaign_id": "openpetition:neue-fussgaengerbruecke-ueber-die-schoenmuenz-am-grillplatz-wasserhaeusle-tauchert",
@@ -84141,9 +84136,9 @@
     "signatures": 29,
     "goal": 420,
     "status": "online",
-    "last_seen": "2026-11-16T04:51:16-06:00",
+    "last_seen": "2026-11-19T05:24:01-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-16T04:51:16-06:00",
+    "last_checked": "2026-11-19T05:24:01-06:00",
     "lang": "de",
     "campaign_id": "openpetition:fuer-eine-bezahlbare-und-stabile-digitale-infrastruktur-im-laendlichen-bereich",
     "i18n_state": {
@@ -84784,9 +84779,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=58#petitionen",
     "signatures": 29,
     "status": "online",
-    "last_seen": "2026-11-16T04:51:16-06:00",
+    "last_seen": "2026-11-19T05:24:01-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-16T04:51:16-06:00",
+    "last_checked": "2026-11-19T05:24:01-06:00",
     "start_date": "2026-05-01",
     "lang": "de",
     "campaign_id": "openpetition:parkchaos-rund-um-die-klinik-anwohner-brauchen-loesungen",
@@ -85158,9 +85153,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
     "signatures": 31,
     "status": "online",
-    "last_seen": "2026-11-16T04:51:16-06:00",
+    "last_seen": "2026-11-19T05:24:01-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-16T04:51:16-06:00",
+    "last_checked": "2026-11-19T05:24:01-06:00",
     "lang": "de",
     "campaign_id": "openpetition:fahrradstaender-statt-parkplaetze-im-max-eichholz-ring-nicht-so-nicht-hier",
     "i18n_state": {
@@ -86592,9 +86587,9 @@
     "signatures": 26,
     "goal": 500,
     "status": "online",
-    "last_seen": "2026-11-16T04:51:16-06:00",
+    "last_seen": "2026-11-19T05:24:01-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-16T04:51:16-06:00",
+    "last_checked": "2026-11-19T05:24:01-06:00",
     "lang": "de",
     "campaign_id": "openpetition:ordnungsgemaesse-treppenhausreinigung-in-unserem-wohnhaus-sicherstellen",
     "i18n_state": {
@@ -86745,9 +86740,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
     "signatures": 25,
     "status": "online",
-    "last_seen": "2026-11-16T04:51:16-06:00",
+    "last_seen": "2026-11-19T05:24:01-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-16T04:51:16-06:00",
+    "last_checked": "2026-11-19T05:24:01-06:00",
     "start_date": "2026-05-01",
     "lang": "de",
     "campaign_id": "openpetition:sperrung-des-alten-wiesenweges-fuer-autoverkehr-stoppen",
@@ -91361,9 +91356,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
     "signatures": 14,
     "status": "online",
-    "last_seen": "2026-11-16T04:51:16-06:00",
+    "last_seen": "2026-11-19T05:24:01-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-16T04:51:16-06:00",
+    "last_checked": "2026-11-19T05:24:01-06:00",
     "lang": "de",
     "campaign_id": "openpetition:koeln-innenstadt-petition-gegen-das-verkehrschaos-an-der-maastrichter-ecke-brabanter-strasse",
     "i18n_state": {
@@ -92017,9 +92012,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=25#petitionen",
     "signatures": 12,
     "status": "online",
-    "last_seen": "2026-11-16T04:51:16-06:00",
+    "last_seen": "2026-11-19T05:24:01-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-16T04:51:16-06:00",
+    "last_checked": "2026-11-19T05:24:01-06:00",
     "lang": "de",
     "campaign_id": "openpetition:marktplatz-in-glinde-in-franz-rudorff-marktplatz-umbenennen",
     "i18n_state": {
@@ -102049,9 +102044,9 @@
     "signatures": 352,
     "goal": 400,
     "status": "online",
-    "last_seen": "2026-11-16T04:51:16-06:00",
+    "last_seen": "2026-11-19T05:24:01-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-16T04:51:16-06:00",
+    "last_checked": "2026-11-19T05:24:01-06:00",
     "lang": "de",
     "campaign_id": "openpetition:ein-gruener-lebensraum-fuer-die-nms-und-die-volksschule-fulpmes-unser-pausenhof-der-zukunft",
     "i18n_state": {
@@ -127068,7 +127063,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-16T04:51:16-06:00",
+    "last_seen": "2026-11-19T05:24:01-06:00",
     "offline_since": null,
     "tags": [
       "Kusenweg",
@@ -127082,7 +127077,7 @@
       "Vollständig",
       "Altenhagen"
     ],
-    "last_checked": "2026-11-16T04:51:16-06:00",
+    "last_checked": "2026-11-19T05:24:01-06:00",
     "country": "DE",
     "start_date": "2026-07-01"
   },
@@ -190096,6 +190091,10 @@
       {
         "checked_at": "2026-11-16T04:51:16-06:00",
         "count": 3658
+      },
+      {
+        "checked_at": "2026-11-19T05:24:01-06:00",
+        "count": 7006
       }
     ],
     "title": "Es sind nicht nur 100 Euro – Schluss mit der systematischen Sparpolitik auf dem Rücken von Familien!",
@@ -190107,7 +190106,7 @@
     "category": "Familie",
     "category_url": "https://www.openpetition.de/petitionen?category=14#petitionen",
     "country": "DE",
-    "signatures": 3658,
+    "signatures": 7006,
     "start_date": "2026-11-13",
     "lang": "de",
     "campaign_id": "openpetition:es-sind-nicht-nur-100-euro-schluss-mit-der-systematischen-sparpolitik-auf-dem-ruecken-von-familien",
@@ -190115,7 +190114,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-16T04:51:16-06:00",
+    "last_seen": "2026-11-19T05:24:01-06:00",
     "offline_since": null,
     "tags": [
       "Euro",
@@ -190129,7 +190128,7 @@
       "Erhalten",
       "Rechnung"
     ],
-    "last_checked": "2026-11-16T04:51:16-06:00"
+    "last_checked": "2026-11-19T05:24:01-06:00"
   },
   "keine-kuerzungen-auf-kosten-unserer-kinder": {
     "slug": "keine-kuerzungen-auf-kosten-unserer-kinder",
@@ -190138,6 +190137,10 @@
       {
         "checked_at": "2026-11-16T04:51:16-06:00",
         "count": 1305
+      },
+      {
+        "checked_at": "2026-11-19T05:24:01-06:00",
+        "count": 2662
       }
     ],
     "title": "Keine Kürzungen auf Kosten unserer Kinder!",
@@ -190149,7 +190152,7 @@
     "category": "Bildung",
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
     "country": "DE",
-    "signatures": 1305,
+    "signatures": 2662,
     "start_date": "2026-11-13",
     "lang": "de",
     "campaign_id": "openpetition:keine-kuerzungen-auf-kosten-unserer-kinder",
@@ -190157,7 +190160,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-16T04:51:16-06:00",
+    "last_seen": "2026-11-19T05:24:01-06:00",
     "offline_since": null,
     "tags": [
       "Kinder",
@@ -190171,7 +190174,7 @@
       "Unserer",
       "Sozial"
     ],
-    "last_checked": "2026-11-16T04:51:16-06:00"
+    "last_checked": "2026-11-19T05:24:01-06:00"
   },
   "unser-postbote-gehoert-zu-gehrden-wir-wuenschen-uns-seine-rueckkehr": {
     "slug": "unser-postbote-gehoert-zu-gehrden-wir-wuenschen-uns-seine-rueckkehr",
@@ -190180,6 +190183,10 @@
       {
         "checked_at": "2026-11-16T04:51:16-06:00",
         "count": 340
+      },
+      {
+        "checked_at": "2026-11-19T05:24:01-06:00",
+        "count": 341
       }
     ],
     "title": "Unser Postbote gehört zu Gehrden – wir wünschen uns seine Rückkehr!",
@@ -190191,7 +190198,7 @@
     "category": "Soziales",
     "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
     "country": "DE",
-    "signatures": 340,
+    "signatures": 341,
     "goal": 400,
     "start_date": "2026-11-07",
     "lang": "de",
@@ -190200,7 +190207,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-16T04:51:16-06:00",
+    "last_seen": "2026-11-19T05:24:01-06:00",
     "offline_since": null,
     "tags": [
       "Gehrden",
@@ -190214,7 +190221,7 @@
       "Einzusetzen",
       "Freundliche"
     ],
-    "last_checked": "2026-11-16T04:51:16-06:00"
+    "last_checked": "2026-11-19T05:24:01-06:00"
   },
   "fuer-den-erhalt-der-schlossbibliothek-in-schloss-neuhaus": {
     "slug": "fuer-den-erhalt-der-schlossbibliothek-in-schloss-neuhaus",
@@ -190223,6 +190230,10 @@
       {
         "checked_at": "2026-11-16T04:51:16-06:00",
         "count": 146
+      },
+      {
+        "checked_at": "2026-11-19T05:24:01-06:00",
+        "count": 1671
       }
     ],
     "title": "Für den Erhalt der Schloßbibliothek in Schloß Neuhaus",
@@ -190234,7 +190245,7 @@
     "category": "Bildung",
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
     "country": "DE",
-    "signatures": 146,
+    "signatures": 1671,
     "start_date": "2026-11-12",
     "lang": "de",
     "campaign_id": "openpetition:fuer-den-erhalt-der-schlossbibliothek-in-schloss-neuhaus",
@@ -190242,7 +190253,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-16T04:51:16-06:00",
+    "last_seen": "2026-11-19T05:24:01-06:00",
     "offline_since": null,
     "tags": [
       "Schloßbibliothek",
@@ -190256,7 +190267,7 @@
       "Unterstützerinnen",
       "Verantwortlichen"
     ],
-    "last_checked": "2026-11-16T04:51:16-06:00"
+    "last_checked": "2026-11-19T05:24:01-06:00"
   },
   "stoppt-die-vorschnelle-aufloesung-unserer-melanchthon-gemeinde-in-eine-grossgemeinde": {
     "slug": "stoppt-die-vorschnelle-aufloesung-unserer-melanchthon-gemeinde-in-eine-grossgemeinde",
@@ -190265,6 +190276,10 @@
       {
         "checked_at": "2026-11-16T04:51:16-06:00",
         "count": 89
+      },
+      {
+        "checked_at": "2026-11-19T05:24:01-06:00",
+        "count": 293
       }
     ],
     "title": "Stoppt die vorschnelle Auflösung unserer Melanchthon-Gemeinde in eine Großgemeinde!",
@@ -190276,7 +190291,7 @@
     "category": "Kultur",
     "category_url": "https://www.openpetition.de/petitionen?category=25#petitionen",
     "country": "DE",
-    "signatures": 89,
+    "signatures": 293,
     "start_date": "2026-11-10",
     "lang": "de",
     "campaign_id": "openpetition:stoppt-die-vorschnelle-aufloesung-unserer-melanchthon-gemeinde-in-eine-grossgemeinde",
@@ -190284,7 +190299,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-16T04:51:16-06:00",
+    "last_seen": "2026-11-19T05:24:01-06:00",
     "offline_since": null,
     "tags": [
       "Gemeinde",
@@ -190298,7 +190313,8 @@
       "Melanchthon-Gemeinde",
       "Auflösung"
     ],
-    "last_checked": "2026-11-16T04:51:16-06:00"
+    "last_checked": "2026-11-19T05:24:01-06:00",
+    "goal": 300
   },
   "hindenburg-ist-kein-vorbild-fuer-bergisch-gladbach-benennt-den-platz-in-wilhelm-marx-platz-um": {
     "slug": "hindenburg-ist-kein-vorbild-fuer-bergisch-gladbach-benennt-den-platz-in-wilhelm-marx-platz-um",
@@ -190307,6 +190323,10 @@
       {
         "checked_at": "2026-11-16T04:51:16-06:00",
         "count": 10
+      },
+      {
+        "checked_at": "2026-11-19T05:24:01-06:00",
+        "count": 11
       }
     ],
     "title": "Hindenburg ist kein Vorbild für Bergisch Gladbach – benennt den Platz in Wilhelm-Marx-Platz um!",
@@ -190318,7 +190338,7 @@
     "category": "Kultur",
     "category_url": "https://www.openpetition.de/petitionen?category=25#petitionen",
     "country": "DE",
-    "signatures": 10,
+    "signatures": 11,
     "start_date": "2026-11-12",
     "lang": "de",
     "campaign_id": "openpetition:hindenburg-ist-kein-vorbild-fuer-bergisch-gladbach-benennt-den-platz-in-wilhelm-marx-platz-um",
@@ -190326,7 +190346,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-16T04:51:16-06:00",
+    "last_seen": "2026-11-19T05:24:01-06:00",
     "offline_since": null,
     "tags": [
       "Demokratische",
@@ -190340,7 +190360,7 @@
       "Gladbach",
       "Republik"
     ],
-    "last_checked": "2026-11-16T04:51:16-06:00"
+    "last_checked": "2026-11-19T05:24:01-06:00"
   },
   "kein-wohnbau-auf-der-schulwiese": {
     "slug": "kein-wohnbau-auf-der-schulwiese",
@@ -190349,6 +190369,10 @@
       {
         "checked_at": "2026-11-16T04:51:16-06:00",
         "count": 1802
+      },
+      {
+        "checked_at": "2026-11-19T05:24:01-06:00",
+        "count": 2810
       }
     ],
     "title": "Kein Wohnbau auf der Schulwiese!",
@@ -190360,7 +190384,7 @@
     "category": "Bauen",
     "category_url": "https://www.openpetition.de/at/petitionen?category=6#petitionen",
     "country": "AT",
-    "signatures": 1802,
+    "signatures": 2810,
     "start_date": "2026-10-12",
     "lang": "de",
     "campaign_id": "openpetition:kein-wohnbau-auf-der-schulwiese",
@@ -190368,7 +190392,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-16T04:51:16-06:00",
+    "last_seen": "2026-11-19T05:24:01-06:00",
     "offline_since": null,
     "tags": [
       "Grünfläche",
@@ -190382,7 +190406,7 @@
       "Dauerhaft",
       "Eltern"
     ],
-    "last_checked": "2026-11-16T04:51:16-06:00"
+    "last_checked": "2026-11-19T05:24:01-06:00"
   },
   "erhalt-der-lahrer-geburtshilfe-erhalt-der-bestandsklinik-lahr": {
     "slug": "erhalt-der-lahrer-geburtshilfe-erhalt-der-bestandsklinik-lahr",
@@ -191943,5 +191967,133 @@
       "Etzgen"
     ],
     "last_checked": "2026-11-18T09:59:13-06:00"
+  },
+  "erhalt-der-mdr-sendung-mach-dich-ran": {
+    "slug": "erhalt-der-mdr-sendung-mach-dich-ran",
+    "first_seen": "2026-11-19T05:24:01-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-11-19T05:24:01-06:00",
+        "count": 84
+      }
+    ],
+    "title": "Erhalt der MDR-Sendung \"Mach dich ran\"",
+    "summary": "WIR MACHEN UNS RAN! Die Zukunft der Kultsendung \"Mach dich ran\" vom MDR ist ungewiss. Laut einem Bericht in der Super lllu werden im Jahr 2O27 nur noch 10 Sendungen ausgestrahlt. Mit dieser Petition wolten wir den MDR bitten, diese Sendung nicht aufzugeben. Es gibt bereits genug negative Schlagzeilen im Fernsehen. Die Sendung Mach dich ran mit Mario D. Richardt hat unzähligen Menschen, Vereinen und sogar Gemeinden geholfen, hat lhnen bei vielen Problemen beigestanden. Wir selbst waren bei einige",
+    "image_url": "https://www.openpetition.de/images/petition/erhalt-der-mdr-sendung-mach-dich-ran_1794916682_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/erhalt-der-mdr-sendung-mach-dich-ran",
+    "description_full": "<!--marker--><p>WIR MACHEN UNS RAN!<br/>Die Zukunft der Kultsendung \"Mach dich ran\" vom MDR ist ungewiss. Laut einem Bericht in der Super lllu werden im Jahr 2O27 nur noch 10 Sendungen ausgestrahlt. Mit dieser Petition wolten wir den MDR bitten, diese Sendung nicht aufzugeben. Es gibt bereits genug negative Schlagzeilen im Fernsehen. Die Sendung Mach dich ran mit Mario D. Richardt hat unzähligen Menschen, Vereinen und sogar Gemeinden geholfen, hat lhnen bei vielen Problemen beigestanden. Wir selbst waren bei einigen Tagesaufgaben dabei. Zum Beispielhat das Team von \"Mach dich ran\" einer älteren Frau nach einem Wohnungsbrand eine neue Küche besorgt. Eigentlich war die Tagesaufgabe nur, einen neuen Herd zu bringen. Daraus wurde letztendlich eine nagelneue Küche mit allen elektrischen Geräten.<br/>Oder nach dem Brand in der Gerätehalle der Feuerwehr Treffurt. Hier hat das Team ein ganzes Regalsystem beschafft. So etwas darf nicht einfach so aufgegeben werden. <br/>WIR MACHEN UNS RAN und bitten den MDR die Sendung \"Mach dich ran\" weiter zu senden. <br/>Wir brauchen solche Sendungen, in denen es nicht nur um die negativen Schlagzeilen der Welt geht. </p>\n<h3>Begründung</h3>\n<!--marker--><p>Hier geht es um Hilfe für Menschen wie du und ich, Vereine und Gemeinden aus unserer Mitte.<br/>Wir kämpfen für den Erhalt der Sendung \"Mach dich ran\".<br/>Kämpft mit uns und unterschreibt diese Petition. <br/>Damit in Zukunft noch viel mehr Menschen, Vereinen und Gemeinden geholfen werden kann, die sonst keinen anderen Ausweg finden.</p>",
+    "started_by": "Ralf Gunter Brand",
+    "category": "Soziales",
+    "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
+    "country": "DE",
+    "signatures": 84,
+    "goal": 20000,
+    "start_date": "2026-11-17",
+    "lang": "de",
+    "campaign_id": "openpetition:erhalt-der-mdr-sendung-mach-dich-ran",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-11-19T05:24:01-06:00",
+    "offline_since": null,
+    "tags": [
+      "Mach",
+      "Sendung",
+      "Gemeinden",
+      "Schlagzeilen",
+      "Sendungen",
+      "Geholfen",
+      "Vereinen",
+      "Zukunft",
+      "Bitten",
+      "Ausgestrahlt"
+    ],
+    "last_checked": "2026-11-19T05:24:01-06:00"
+  },
+  "die-station-s3-am-bkh-bayreuth-muss-bleiben-fuer-den-erhalt-einer-spezialisierten-suchtbehandlung": {
+    "slug": "die-station-s3-am-bkh-bayreuth-muss-bleiben-fuer-den-erhalt-einer-spezialisierten-suchtbehandlung",
+    "first_seen": "2026-11-19T05:24:01-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-11-19T05:24:01-06:00",
+        "count": 10
+      }
+    ],
+    "title": "Die Station S3 am BKH Bayreuth muss bleiben! – Für den Erhalt einer spezialisierten Suchtbehandlung",
+    "summary": "Wir fordern die Verantwortlichen der Gesundheitseinrichtungen des Bezirks Oberfranken (GeBO) auf, die geplante Schließung der Station S3 am Bezirkskrankenhaus Bayreuth zum 15. Dezember 2026 zu überdenken und die spezialisierte stationäre Behandlung von suchtkranken Menschen dauerhaft sicherzustellen.",
+    "image_url": "https://www.openpetition.de/images/petition/die-station-s3-am-bkh-bayreuth-muss-bleiben-fuer-den-erhalt-einer-spezialisierten-suchtbehandlung_1795016120_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/die-station-s3-am-bkh-bayreuth-muss-bleiben-fuer-den-erhalt-einer-spezialisierten-suchtbehandlung",
+    "description_full": "<!--marker--><p><b>Wir fordern die Verantwortlichen der Gesundheitseinrichtungen des Bezirks Oberfranken (GeBO) auf, die geplante Schließung der Station S3 am Bezirkskrankenhaus Bayreuth zum 15. Dezember 2026 zu überdenken und die spezialisierte stationäre Behandlung von suchtkranken Menschen dauerhaft sicherzustellen.</b></p>\n<h3>Begründung</h3>\n<!--marker--><p>Mit großer Sorge haben wir erfahren, dass die Station S3 am Bezirkskrankenhaus Bayreuth zum 15. Dezember 2026 geschlossen werden soll.</p><p>Die Station S3 ist auf die Behandlung von Menschen mit Suchterkrankungen, insbesondere Mehrfachabhängigkeit, spezialisiert. Für zahlreiche Patienten ist sie nicht einfach nur eine Krankenhausstation, sondern eine wichtige Anlaufstelle, an der sie medizinische Hilfe, therapeutische Unterstützung, Verständnis und eine echte Chance auf einen Neuanfang erhalten.</p><p>Viele Patienten entscheiden sich ganz bewusst für das Bezirkskrankenhaus Bayreuth und die Station S3. Nicht jedes Behandlungskonzept passt zu jedem Menschen. Gerade bei einer komplexen Suchterkrankung sind Vertrauen, ein auf die Erkrankung abgestimmtes Therapiekonzept, menschliche Unterstützung und das Gefühl, ernst genommen zu werden, von entscheidender Bedeutung.</p><p>Einige von uns befinden sich bereits zum wiederholten Mal auf dieser Station. Das ist kein Zeichen dafür, dass Behandlung wirkungslos ist. Suchterkrankungen sind chronische Erkrankungen, bei denen Rückfälle Teil des Krankheitsverlaufs sein können. Die Möglichkeit, erneut Hilfe zu suchen und eine geeignete Behandlung in Anspruch zu nehmen, ist deshalb von enormer Bedeutung.</p><p><b>Wenn eine spezialisierte Anlaufstelle wegfällt, stellt sich die Frage: Wohin sollen Menschen gehen, die dringend eine qualifizierte Entgiftung und Unterstützung benötigen?</b></p><p>Wir befürchten, dass durch die Schließung der Station S3 eine Versorgungslücke entstehen könnte, die insbesondere Menschen mit Opioidabhängigkeit und Mehrfachabhängigkeit treffen wird. Für Betroffene kann die Suche nach einer geeigneten Behandlung bereits heute mit erheblichen Hürden verbunden sein. Der Wegfall einer vertrauten und spezialisierten Einrichtung könnte diese Situation weiter verschärfen.</p><p>Wir möchten nicht erst dann auf die Folgen aufmerksam machen, wenn Menschen keine geeignete Anlaufstelle mehr finden.</p><p>Wir sind der Überzeugung, dass spezialisierte Suchtbehandlung, Rückfallprävention und die Möglichkeit zur erneuten Behandlung einen wichtigen Bestandteil der regionalen Gesundheitsversorgung darstellen. Eine Einrichtung, in der sich Patienten verstanden, sicher und gut behandelt fühlen, verdient besondere Aufmerksamkeit und sollte nicht leichtfertig aufgegeben werden.</p><p><b>Unsere Forderungen</b></p><p>Wir fordern die Leitung der Gesundheitseinrichtungen des Bezirks Oberfranken (GeBO), die Verantwortlichen des Bezirks Oberfranken sowie die zuständigen Entscheidungsträger auf:</p><ul><li><b>Die geplante Schließung der Station S3 zum 15. Dezember 2026 zu überdenken und die Station zu erhalten.</b></li><li>Die Gründe für die Schließungsentscheidung transparent und nachvollziehbar darzulegen.</li><li>Die Auswirkungen der Schließung auf die regionale Versorgung suchtkranker Menschen umfassend zu prüfen.</li><li>Patienten, ehemalige Patienten, Mitarbeiter und weitere Betroffene in die Suche nach einer Lösung einzubeziehen.</li><li>Falls eine Weiterführung in der bisherigen Form nicht möglich sein sollte, ein tragfähiges alternatives Konzept zu entwickeln, das die spezialisierte Behandlung von opioid- und mehrfachabhängigen Menschen in Bayreuth und der Region dauerhaft sicherstellt.</li></ul><br/><p><b>Warum wir uns dafür einsetzen</b></p><p>Wir setzen uns für Menschen ein, die mit einer Suchterkrankung kämpfen. Für Menschen, die Rückschläge erleben, die vielleicht schon mehrfach versucht haben, von ihrer Abhängigkeit loszukommen, und die trotzdem immer wieder den Mut aufbringen, Hilfe zu suchen.</p><p>Es darf nicht der Eindruck entstehen, dass Menschen mit Suchterkrankungen weniger Anspruch auf eine erreichbare, spezialisierte und qualitativ hochwertige medizinische Versorgung haben.</p><p>Die Station S3 bietet vielen Betroffenen eine Möglichkeit, die sie bewusst gewählt haben und der sie vertrauen. Dieses Angebot darf nicht einfach verschwinden, ohne dass die Folgen für die Patienten und die regionale Versorgung ernsthaft berücksichtigt und geeignete Alternativen geschaffen werden.</p><p>Wir bitten die Verantwortlichen, diese Stimmen zu hören, die Entscheidung noch einmal zu prüfen und gemeinsam mit Betroffenen eine Lösung zu finden.</p><p><b>Unterstützt diese Petition für den Erhalt der Station S3 am Bezirkskrankenhaus Bayreuth.</b></p><p>Für eine Versorgung, die Menschen mit Suchterkrankungen nicht im Stich lässt.</p><p>Für die Möglichkeit, immer wieder Hilfe zu bekommen.</p><p>Für die Station S3.</p><p><b>S3 muss bleiben!</b></p><p>Die Patienten der Station S3</p><p>Diese Petition wurde von einem Patienten der Station S3 initiiert. Sie soll die Sorgen und Anliegen von Patienten, ehemaligen Patienten, Angehörigen und Unterstützern bündeln, die sich für den Erhalt der Station S3 einsetzen.</p><p>Quellen:</p><p><a href=\"https://www.kurier.de/inhalt.drogenentzugsstation-schliesst-droht-bayreuth-eine-neue-stadtbild-diskussion.e3dc94ee-048b-43d6-8085-098a67bcfc5c.html\" rel=\"noopener\" target=\"_blank\">https://www.kurier.de/inhalt.drogenentzugsstation-schliesst-droht-bayreuth-eine-neue-stadtbild-diskussion.e3dc94ee-048b-43d6-8085-098a67bcfc5c.html</a></p>",
+    "started_by": "Patienten der Station S3 des BKH Bayreuth",
+    "category": "Gesundheit",
+    "category_url": "https://www.openpetition.de/petitionen?category=20#petitionen",
+    "country": "DE",
+    "signatures": 10,
+    "start_date": "2026-11-18",
+    "lang": "de",
+    "campaign_id": "openpetition:die-station-s3-am-bkh-bayreuth-muss-bleiben-fuer-den-erhalt-einer-spezialisierten-suchtbehandlung",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-11-19T05:24:01-06:00",
+    "offline_since": null,
+    "tags": [
+      "Station",
+      "Patienten",
+      "Behandlung",
+      "Bayreuth",
+      "Spezialisierte",
+      "Bezirkskrankenhaus",
+      "Schließung",
+      "Suchterkrankungen",
+      "Verantwortlichen",
+      "Möglichkeit"
+    ],
+    "last_checked": "2026-11-19T05:24:01-06:00"
+  },
+  "kontinuitaet-stabilitaet-und-genuegend-ressourcen-fuer-die-schule-goenhard": {
+    "slug": "kontinuitaet-stabilitaet-und-genuegend-ressourcen-fuer-die-schule-goenhard",
+    "first_seen": "2026-11-19T05:24:01-06:00",
+    "signatures_history": [
+      {
+        "checked_at": "2026-11-19T05:24:01-06:00",
+        "count": 83
+      }
+    ],
+    "title": "Kontinuität, Stabilität und genügend Ressourcen für die Schule Gönhard",
+    "summary": "Wir Unterzeichnenden – Eltern, Lehrpersonen, Anwohnende und weitere Unterstützende – sind besorgt über die Ressourcenkürzungen und den erneuten Wechsel in der Schulleitung des Gönhard. Am 18. November 2026 wurden die Eltern über Klapp über das sofortige Ausscheiden von Hanspeter Draeyer als Schulleiter ad interim informiert. Gemäss dieser Mitteilung wurde sein Engagement beendet, obwohl noch keine Nachfolge feststeht. In den letzten acht Jahren haben wir am Gönhard sechs Schulleiter erlebt. Hans",
+    "image_url": "https://www.openpetition.eu/images/petition/kontinuitaet-stabilitaet-und-genuegend-ressourcen-fuer-die-schule-goenhard-aarau_1794992760_desktop.jpg",
+    "url": "https://www.openpetition.de/petition/online/kontinuitaet-stabilitaet-und-genuegend-ressourcen-fuer-die-schule-goenhard",
+    "description_full": "<!--marker--><p>Wir Unterzeichnenden – Eltern, Lehrpersonen, Anwohnende und weitere Unterstützende – sind besorgt über die Ressourcenkürzungen und den erneuten Wechsel in der Schulleitung des Gönhard.</p><p>Am 18. November 2026 wurden die Eltern über Klapp über das sofortige Ausscheiden von Hanspeter Draeyer als Schulleiter ad interim informiert. Gemäss dieser Mitteilung wurde sein Engagement beendet, obwohl noch keine Nachfolge feststeht.</p><p>In den letzten acht Jahren haben wir am Gönhard sechs Schulleiter erlebt. Hanspeter Draeyer hat merklich Ruhe und Stabilität in die Schule gebracht. Sein sofortiges Ausscheiden gefährdet diese positive Entwicklung. Unsere Schule braucht eine verlässliche Führung und Kontinuität.</p><p>Auch die Ressourcenentwicklung bereitet uns Sorgen: Nach den uns vorliegenden Informationen wurden die ursprünglich 1’160 Wochenlektionen bereits um 110 reduziert. Nun sollen weitere 100 Lektionen wegfallen. Gleichzeitig fehlt es offenbar bereits an ausreichender heilpädagogischer Unterstützung.</p><p>Wir fordern die zuständigen Schulbehörden auf:<br/></p><ul><li>Auf die weitere Kürzung um 100 Wochenlektionen am Gönhard zu verzichten, die bisherige Kürzung um 110 Lektionen rückgängig zu machen und die Ressourcenverteilung der gesamten Schule Aarau zu überarbeiten.</li><li>Die Ressourcen nach dem tatsächlichen Förder- und Unterstützungsbedarf der Kinder sowie den Verhältnissen vor Ort zu verteilen.</li><li>Die Verteilungskriterien und die Gewichtung des Sozialindexes offenzulegen.</li><li>Eine Wiederanstellung von Hanspeter Draeyer zu prüfen, die ihm nach unseren Informationen zugesicherte Mindestdauer von drei Jahren einzuhalten und diese Zeit für eine langfristig tragfähige Lösung für die Schulleitung zu nutzen.</li><li>Die Eltern zeitnah über die Sicherstellung der Schulleitung und die weiteren Schritte zu informieren.</li></ul><br/><p>Unsere Kinder brauchen genügend Unterstützung und eine stabile Schulleitung.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Unsere Kinder brauchen eine verlässliche Schule mit genügend Zeit und Fachpersonen für ihre Bildung und Förderung.</p>",
+    "started_by": "Elternkomitee \"Gönhard\"",
+    "category": "Bildung",
+    "category_url": "https://www.openpetition.de/ch/petitionen?category=7#petitionen",
+    "country": "CH",
+    "signatures": 83,
+    "goal": 500,
+    "start_date": "2026-11-18",
+    "lang": "de",
+    "campaign_id": "openpetition:kontinuitaet-stabilitaet-und-genuegend-ressourcen-fuer-die-schule-goenhard",
+    "i18n_state": {
+      "en": "fehlt"
+    },
+    "status": "online",
+    "last_seen": "2026-11-19T05:24:01-06:00",
+    "offline_since": null,
+    "tags": [
+      "Gönhard",
+      "Schulleitung",
+      "Eltern",
+      "Schule",
+      "Schulleiter",
+      "Hanspeter",
+      "Draeyer",
+      "Weitere",
+      "Ausscheiden",
+      "Genügend"
+    ],
+    "last_checked": "2026-11-19T05:24:01-06:00"
   }
 }
