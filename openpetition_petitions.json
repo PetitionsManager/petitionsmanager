@@ -31,24 +31,12 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-11-19T10:18:22-06:00",
+    "generated_at": "2026-11-19T15:00:40-06:00",
     "petition_count": 2853,
     "available": 1711,
-    "new_petitions_last_run": [
-      "abschiebung-von-nouhaila-stoppen-keine-abschiebung-in-die-krankheit",
-      "gegen-behoerdenwillkuer-neuvergabe-der-hamburger-integrationszentren-jetzt-auf-den-pruefstand-stelle",
-      "die-unterstuetzung-fuer-die-partnerschaft-fuer-demokratie-im-landkreis-ebersberg-muss-bleiben",
-      "sichere-schulwege-statt-vorschneller-einsparungen-schulbus-weetzen-erhalten",
-      "bitte-schuetzt-unser-zuhause-ein-weihnachtswunder-fuer-unsere-familie",
-      "ja-zum-neubau-der-georg-von-neumayer-realschule-plus-keine-jahrelange-baustelle-fuer-unsere-kinder",
-      "gleiche-bezahlung-fuer-alle-psychotherapeutinnen-in-b-w",
-      "kulturcampus-so-nicht",
-      "fuer-eine-bessere-hausaerztliche-versorgung-in-beckum",
-      "mehr-verantwortung-im-gesundheitssystem-anreize-fuer-gesundheitsbewusstes-verhalten-schaffen",
-      "eu-medaillenspiegel-bei-internationalen-sportveranstaltungen-gemeinsame-flagge-nationale-vielfalt"
-    ],
+    "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-11-19T10:18:21-06:00",
+      "stand": "2026-11-19T15:00:40-06:00",
       "gefunden": 1711,
       "im_bestand": 1711,
       "unbrauchbar": 0,
@@ -63,7 +51,7 @@
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-11-19T10:18:21-06:00",
+        "zeit": "2026-11-19T15:00:40-06:00",
         "gesamt": 2853,
         "online": 2853,
         "offline": 0,
@@ -77,11 +65,11 @@
         "mit_code_im_text": 0,
         "mit_ballast_in_kurzfassung": 0,
         "herkunft": "lokal_cron",
-        "neu": 11
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-11-19T10:18:21-06:00",
+      "zeit": "2026-11-19T15:00:40-06:00",
       "gesamt": 2853,
       "online": 2853,
       "offline": 0,
@@ -95,7 +83,7 @@
       "mit_code_im_text": 0,
       "mit_ballast_in_kurzfassung": 0
     },
-    "verlauf_felder_ab": "2026-11-19T10:18:21-06:00",
+    "verlauf_felder_ab": "2026-11-19T15:00:40-06:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 2853
@@ -190428,6 +190416,10 @@
       {
         "checked_at": "2026-11-16T14:46:15-06:00",
         "count": 3621
+      },
+      {
+        "checked_at": "2026-11-19T14:57:03-06:00",
+        "count": 6414
       }
     ],
     "title": "Glaube ist kein Foul: Lasst Felix jubeln!",
@@ -190439,7 +190431,7 @@
     "category": "Bürgerrechte",
     "category_url": "https://www.openpetition.de/petitionen?category=58#petitionen",
     "country": "DE",
-    "signatures": 3621,
+    "signatures": 6414,
     "goal": 10000,
     "start_date": "2026-11-12",
     "lang": "de",
@@ -190448,7 +190440,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-16T14:46:15-06:00",
+    "last_seen": "2026-11-19T14:57:03-06:00",
     "offline_since": null,
     "tags": [
       "Felix",
@@ -190462,7 +190454,7 @@
       "Persönliche",
       "Positionen"
     ],
-    "last_checked": "2026-11-16T14:46:15-06:00"
+    "last_checked": "2026-11-19T14:57:03-06:00"
   },
   "bargeld-schuetzen-wahlfreiheit-beim-bezahlen-im-grundgesetz-verankern": {
     "slug": "bargeld-schuetzen-wahlfreiheit-beim-bezahlen-im-grundgesetz-verankern",
@@ -190475,6 +190467,10 @@
       {
         "checked_at": "2026-11-16T14:46:15-06:00",
         "count": 305
+      },
+      {
+        "checked_at": "2026-11-19T14:57:03-06:00",
+        "count": 310
       }
     ],
     "title": "Bargeld schützen – Wahlfreiheit beim Bezahlen im Grundgesetz verankern!",
@@ -190486,7 +190482,7 @@
     "category": "Verbraucherschutz",
     "category_url": "https://www.openpetition.de/petitionen?category=59#petitionen",
     "country": "DE",
-    "signatures": 305,
+    "signatures": 310,
     "start_date": "2026-07-01",
     "lang": "de",
     "campaign_id": "openpetition:bargeld-schuetzen-wahlfreiheit-beim-bezahlen-im-grundgesetz-verankern",
@@ -190494,7 +190490,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-16T14:46:15-06:00",
+    "last_seen": "2026-11-19T14:57:03-06:00",
     "offline_since": null,
     "tags": [
       "Bargeld",
@@ -190508,7 +190504,7 @@
       "Bezahlen",
       "Selbstbestimmung"
     ],
-    "last_checked": "2026-11-16T14:46:15-06:00"
+    "last_checked": "2026-11-19T14:57:03-06:00"
   },
   "ehrenbuergerschaft-fuer-nikolai-massalow-erneuern": {
     "slug": "ehrenbuergerschaft-fuer-nikolai-massalow-erneuern",
@@ -190540,7 +190536,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-16T14:46:15-06:00",
+    "last_seen": "2026-11-19T14:57:03-06:00",
     "offline_since": null,
     "tags": [
       "Millionen",
@@ -190554,7 +190550,7 @@
       "Mädchen",
       "Nikolai"
     ],
-    "last_checked": "2026-11-16T14:46:15-06:00"
+    "last_checked": "2026-11-19T14:57:03-06:00"
   },
   "amtsneubau-kosten-raumbedarf-und-alternativen-konsequent-pruefen-ziel-3-000-unterschriften": {
     "slug": "amtsneubau-kosten-raumbedarf-und-alternativen-konsequent-pruefen-ziel-3-000-unterschriften",
@@ -191163,6 +191159,10 @@
       {
         "checked_at": "2026-11-16T10:27:08-06:00",
         "count": 205
+      },
+      {
+        "checked_at": "2026-11-19T14:57:03-06:00",
+        "count": 1153
       }
     ],
     "title": "THEATERHAUS RUDI bleibt offen!",
@@ -191174,7 +191174,7 @@
     "category": "Kultur",
     "category_url": "https://www.openpetition.de/petitionen?category=25#petitionen",
     "country": "DE",
-    "signatures": 205,
+    "signatures": 1153,
     "start_date": "2026-11-16",
     "lang": "de",
     "campaign_id": "openpetition:theaterhaus-rudi-bleibt-offen",
@@ -191182,7 +191182,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-16T10:27:08-06:00",
+    "last_seen": "2026-11-19T14:57:03-06:00",
     "offline_since": null,
     "tags": [
       "RUDI",
@@ -191196,7 +191196,7 @@
       "Zuhause",
       "Stadt"
     ],
-    "last_checked": "2026-11-16T10:27:08-06:00"
+    "last_checked": "2026-11-19T14:57:03-06:00"
   },
   "zwei-kurzzeitparkplaetze-zur-paketabgabe-in-der-werlberger-strasse-2": {
     "slug": "zwei-kurzzeitparkplaetze-zur-paketabgabe-in-der-werlberger-strasse-2",
@@ -191205,6 +191205,10 @@
       {
         "checked_at": "2026-11-16T10:27:08-06:00",
         "count": 142
+      },
+      {
+        "checked_at": "2026-11-19T14:57:03-06:00",
+        "count": 198
       }
     ],
     "title": "Zwei Kurzzeitparkplätze zur Paketabgabe in der Werlberger Straße 2",
@@ -191216,7 +191220,7 @@
     "category": "Bürgerrechte",
     "category_url": "https://www.openpetition.de/petitionen?category=58#petitionen",
     "country": "DE",
-    "signatures": 142,
+    "signatures": 198,
     "start_date": "2026-11-13",
     "lang": "de",
     "campaign_id": "openpetition:zwei-kurzzeitparkplaetze-zur-paketabgabe-in-der-werlberger-strasse-2",
@@ -191224,7 +191228,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-16T10:27:08-06:00",
+    "last_seen": "2026-11-19T14:57:03-06:00",
     "offline_since": null,
     "tags": [
       "Paketabgabe",
@@ -191238,7 +191242,7 @@
       "Regelung",
       "Aichach"
     ],
-    "last_checked": "2026-11-16T10:27:08-06:00"
+    "last_checked": "2026-11-19T14:57:03-06:00"
   },
   "gebt-den-stadttauben-an-der-dresdner-hauptstrasse-eine-zukunft": {
     "slug": "gebt-den-stadttauben-an-der-dresdner-hauptstrasse-eine-zukunft",
@@ -191247,6 +191251,10 @@
       {
         "checked_at": "2026-11-16T10:27:08-06:00",
         "count": 89
+      },
+      {
+        "checked_at": "2026-11-19T14:57:03-06:00",
+        "count": 257
       }
     ],
     "title": "Gebt den Stadttauben an der Dresdner Hauptstraße eine Zukunft!",
@@ -191258,7 +191266,7 @@
     "category": "Tierschutz",
     "category_url": "https://www.openpetition.de/petitionen?category=45#petitionen",
     "country": "DE",
-    "signatures": 89,
+    "signatures": 257,
     "start_date": "2026-11-16",
     "lang": "de",
     "campaign_id": "openpetition:gebt-den-stadttauben-an-der-dresdner-hauptstrasse-eine-zukunft",
@@ -191266,7 +191274,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-16T10:27:08-06:00",
+    "last_seen": "2026-11-19T14:57:03-06:00",
     "offline_since": null,
     "tags": [
       "Dresden",
@@ -191280,7 +191288,7 @@
       "Taubenschlags",
       "Brutplätze"
     ],
-    "last_checked": "2026-11-16T10:27:08-06:00"
+    "last_checked": "2026-11-19T14:57:03-06:00"
   },
   "rettet-den-natursprinter-im-maerkischen-kreis": {
     "slug": "rettet-den-natursprinter-im-maerkischen-kreis",
