@@ -31,29 +31,14 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-11-20T11:42:19-06:00",
+    "generated_at": "2026-11-21T10:45:24-06:00",
     "petition_count": 2867,
-    "available": 1712,
-    "new_petitions_last_run": [
-      "kindergarten-fuer-alle-beitragsfrei-in-bayern",
-      "erhalt-des-rufbusverkehrs-angermuende",
-      "petition-gegen-die-geplante-anpassung-der-elternbeitraege-und-essensgelder-in-blumberg",
-      "gekommen-um-zu-bleiben-realschule-am-rhein-am-gereonswall-erhalten",
-      "100-elternzuschuss-freilassinger-familien-weiterhin-entlasten",
-      "erhalt-des-kindergartens-lumda-eulennest-2",
-      "clubin-internationaler-treff-fuer-junge-erwachsene-mit-migrationserfahrung-muss-erhalten-bleiben",
-      "rettet-das-ijz-unsere-jugend-unsere-zukunft",
-      "toetung-der-huendin-jette-forderung-nach-ausschoepfung-des-gesetzlichen-strafrahmens",
-      "bundeswehr-standortschiessanlage-bischofswiesen-versprochenen-laermschutz-endlich-umsetzen",
-      "petition-fuer-einen-weiteren-supermarkt-in-elstal",
-      "antrag-auf-erhebung-des-nationalen-veteranentages-am-15-juni-zum-bundesweiten-gesetzlichen-feiertag",
-      "test-thomas",
-      "eishalle-fuer-das-innviertel-jetzt"
-    ],
+    "available": 1699,
+    "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-11-20T11:42:17-06:00",
-      "gefunden": 1712,
-      "im_bestand": 1712,
+      "stand": "2026-11-21T10:45:24-06:00",
+      "gefunden": 1699,
+      "im_bestand": 1699,
       "unbrauchbar": 0,
       "verworfen": 0,
       "dublette": 0,
@@ -62,11 +47,11 @@
       "offen": 0,
       "offene_beispiele": [],
       "bestand_gesamt": 2867,
-      "bestand_ausserhalb": 1155
+      "bestand_ausserhalb": 1168
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-11-20T11:42:17-06:00",
+        "zeit": "2026-11-21T10:45:24-06:00",
         "gesamt": 2867,
         "online": 2867,
         "offline": 0,
@@ -80,11 +65,11 @@
         "mit_code_im_text": 0,
         "mit_ballast_in_kurzfassung": 0,
         "herkunft": "lokal_cron",
-        "neu": 14
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-11-20T11:42:17-06:00",
+      "zeit": "2026-11-21T10:45:24-06:00",
       "gesamt": 2867,
       "online": 2867,
       "offline": 0,
@@ -98,7 +83,7 @@
       "mit_code_im_text": 0,
       "mit_ballast_in_kurzfassung": 0
     },
-    "verlauf_felder_ab": "2026-11-20T11:42:17-06:00",
+    "verlauf_felder_ab": "2026-11-21T10:45:24-06:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 2867
@@ -28345,6 +28330,10 @@
       {
         "checked_at": "2026-11-18T00:43:51-06:00",
         "count": 1093
+      },
+      {
+        "checked_at": "2026-11-21T10:39:29-06:00",
+        "count": 1092
       }
     ],
     "title": "Rettet die Grünfläche in Meerbusch Lank - für Natur Bäume und unsere Zukunft!",
@@ -28356,12 +28345,12 @@
     "started_by": "Bürgerinitative Kierster Strasse",
     "category": "Umwelt",
     "category_url": "https://www.openpetition.de/petitionen?category=46#petitionen",
-    "signatures": 1093,
+    "signatures": 1092,
     "start_date": "2025-02-01",
     "status": "online",
-    "last_seen": "2026-11-18T00:43:51-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-18T00:43:51-06:00",
+    "last_checked": "2026-11-21T10:39:29-06:00",
     "lang": "de",
     "campaign_id": "openpetition:rettet-die-gruenflaeche-in-meerbusch-lank-fuer-natur-baeume-und-unsere-zukunft",
     "i18n_state": {
@@ -42648,6 +42637,10 @@
       {
         "checked_at": "2026-11-17T16:55:08-06:00",
         "count": 567
+      },
+      {
+        "checked_at": "2026-11-21T10:39:29-06:00",
+        "count": 570
       }
     ],
     "title": "Gesundheitsschutz vor Profit: Stoppt die Deponiepläne in Berkum!",
@@ -42659,11 +42652,11 @@
     "started_by": "Bürgerinitiative \"Keine Deponie in Berkum!\"",
     "category": "Gesundheit",
     "category_url": "https://www.openpetition.de/petitionen?category=20#petitionen",
-    "signatures": 567,
+    "signatures": 570,
     "status": "online",
-    "last_seen": "2026-11-17T16:55:08-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-17T16:55:08-06:00",
+    "last_checked": "2026-11-21T10:39:29-06:00",
     "lang": "de",
     "campaign_id": "openpetition:gesundheitsschutz-vor-profit-stoppt-die-deponieplaene-in-berkum",
     "i18n_state": {
@@ -53901,9 +53894,9 @@
     "signatures": 236,
     "goal": 500,
     "status": "online",
-    "last_seen": "2026-11-17T16:55:08-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-17T16:55:08-06:00",
+    "last_checked": "2026-11-21T10:39:29-06:00",
     "start_date": "2026-05-01",
     "lang": "de",
     "campaign_id": "openpetition:leipzig-innenstadt-autofrei",
@@ -53968,9 +53961,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=20#petitionen",
     "signatures": 238,
     "status": "online",
-    "last_seen": "2026-11-17T16:55:08-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-17T16:55:08-06:00",
+    "last_checked": "2026-11-21T10:39:29-06:00",
     "lang": "de",
     "campaign_id": "openpetition:versorgung-statt-mangel-massnahmen-gegen-lieferengpaesse-im-gesundheitswesen",
     "i18n_state": {
@@ -76586,9 +76579,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
     "signatures": 60,
     "status": "online",
-    "last_seen": "2026-11-17T12:11:49-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-17T12:11:49-06:00",
+    "last_checked": "2026-11-21T10:39:29-06:00",
     "lang": "de",
     "campaign_id": "openpetition:stoppt-die-endlosen-gutachtertermine-der-deutschen-rentenversicherung-wir-sind-menschen-keine-a-2",
     "i18n_state": {
@@ -91146,9 +91139,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
     "signatures": 24,
     "status": "online",
-    "last_seen": "2026-11-17T12:11:49-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-17T12:11:49-06:00",
+    "last_checked": "2026-11-21T10:39:29-06:00",
     "lang": "de",
     "campaign_id": "openpetition:gleichberechtigung-fuer-inhaber-der-mofa-pruefbescheinigung-45-km-h-auch-fuer-aeltere-jahrgaenge-erl",
     "i18n_state": {
@@ -93601,9 +93594,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
     "signatures": 9,
     "status": "online",
-    "last_seen": "2026-11-17T12:11:49-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-17T12:11:49-06:00",
+    "last_checked": "2026-11-21T10:39:29-06:00",
     "lang": "de",
     "campaign_id": "openpetition:maschinen-und-automatisierte-systeme-an-der-finanzierung-der-sozialversicherungen-beteiligen",
     "i18n_state": {
@@ -99040,9 +99033,9 @@
     "goal": 1500,
     "start_date": "2025-09-01",
     "status": "online",
-    "last_seen": "2026-11-18T00:43:51-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-18T00:43:51-06:00",
+    "last_checked": "2026-11-21T10:39:29-06:00",
     "lang": "de",
     "campaign_id": "openpetition:buergerinitiative-rettet-die-wies",
     "i18n_state": {
@@ -99971,6 +99964,10 @@
       {
         "checked_at": "2026-11-17T16:55:08-06:00",
         "count": 750
+      },
+      {
+        "checked_at": "2026-11-21T10:39:29-06:00",
+        "count": 751
       }
     ],
     "title": "Öffnung der Sporthallen",
@@ -99982,12 +99979,12 @@
     "started_by": "Christopher Pinter",
     "category": "Gesundheit",
     "category_url": "https://www.openpetition.de/at/petitionen?category=20#petitionen",
-    "signatures": 750,
+    "signatures": 751,
     "start_date": "2026-01-01",
     "status": "online",
-    "last_seen": "2026-11-17T16:55:08-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-17T16:55:08-06:00",
+    "last_checked": "2026-11-21T10:39:29-06:00",
     "lang": "de",
     "campaign_id": "openpetition:oeffnung-der-sporthallen",
     "i18n_state": {
@@ -102671,6 +102668,10 @@
       {
         "checked_at": "2026-11-18T00:43:51-06:00",
         "count": 319
+      },
+      {
+        "checked_at": "2026-11-21T10:39:29-06:00",
+        "count": 320
       }
     ],
     "title": "Hände weg von der Lazag! Freier Zugang und keine Strafen für Einheimische an der Passer in Meran",
@@ -102682,12 +102683,12 @@
     "started_by": "Markus Woernhart",
     "category": "Bürgerrechte",
     "category_url": "https://www.openpetition.de/it/petitionen?category=58#petitionen",
-    "signatures": 319,
+    "signatures": 320,
     "goal": 500,
     "status": "online",
-    "last_seen": "2026-11-18T00:43:51-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-18T00:43:51-06:00",
+    "last_checked": "2026-11-21T10:39:29-06:00",
     "lang": "de",
     "campaign_id": "openpetition:haende-weg-von-der-lazag-freier-zugang-und-keine-strafen-fuer-einheimische-an-der-passer-in-mer-2",
     "i18n_state": {
@@ -104040,9 +104041,9 @@
     "signatures": 201,
     "goal": 500,
     "status": "online",
-    "last_seen": "2026-11-17T12:11:49-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-17T12:11:49-06:00",
+    "last_checked": "2026-11-21T10:39:29-06:00",
     "lang": "de",
     "campaign_id": "openpetition:aerztekammer-wien-arbeiten-statt-wahlkampf-jetzt-ist-nicht-die-zeit-fuer-vorgezogene-wahlen",
     "i18n_state": {
@@ -106593,6 +106594,10 @@
       {
         "checked_at": "2026-11-17T12:11:49-06:00",
         "count": 144
+      },
+      {
+        "checked_at": "2026-11-21T10:39:29-06:00",
+        "count": 146
       }
     ],
     "title": "Gegen das Hundeverbot am Surferbadeplatz am Attersee – Für eine faire und hundefreundliche Lösung",
@@ -106604,11 +106609,11 @@
     "started_by": "Julia Zitzler",
     "category": "Tierschutz",
     "category_url": "https://www.openpetition.de/at/petitionen?category=45#petitionen",
-    "signatures": 144,
+    "signatures": 146,
     "status": "online",
-    "last_seen": "2026-11-17T12:11:49-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-17T12:11:49-06:00",
+    "last_checked": "2026-11-21T10:39:29-06:00",
     "lang": "de",
     "campaign_id": "openpetition:gegen-das-hundeverbot-am-surferbadeplatz-am-attersee-fuer-eine-faire-und-hundefreundliche-loesung",
     "i18n_state": {
@@ -111683,9 +111688,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
     "signatures": 826,
     "status": "online",
-    "last_seen": "2026-11-18T00:43:51-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-18T00:43:51-06:00",
+    "last_checked": "2026-11-21T10:39:29-06:00",
     "lang": "de",
     "campaign_id": "openpetition:kinder-brauchen-vielfalt-kita-st-elisabeth-erhalten",
     "i18n_state": {
@@ -114623,6 +114628,10 @@
       {
         "checked_at": "2026-11-18T00:43:51-06:00",
         "count": 58
+      },
+      {
+        "checked_at": "2026-11-21T10:39:29-06:00",
+        "count": 61
       }
     ],
     "title": "Abschaffung der 30-Stunden-Grenze für pflegende Angehörige",
@@ -114634,11 +114643,11 @@
     "started_by": "Niklas Tessmann",
     "category": "Soziales",
     "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
-    "signatures": 58,
+    "signatures": 61,
     "status": "online",
-    "last_seen": "2026-11-18T00:43:51-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
-    "last_checked": "2026-11-18T00:43:51-06:00",
+    "last_checked": "2026-11-21T10:39:29-06:00",
     "lang": "de",
     "campaign_id": "openpetition:abschaffung-der-30-stunden-grenze-fuer-pflegende-angehoerige",
     "i18n_state": {
@@ -118931,7 +118940,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-18T00:43:51-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Einsiedel",
@@ -118945,7 +118954,7 @@
       "Landesamt",
       "Chemnitz"
     ],
-    "last_checked": "2026-11-18T00:43:51-06:00",
+    "last_checked": "2026-11-21T10:39:29-06:00",
     "country": "DE",
     "start_date": "2026-07-01"
   },
@@ -120182,7 +120191,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-18T00:43:51-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Tierschutz",
@@ -120196,7 +120205,7 @@
       "Ehrenamtlichen",
       "Privathaltung"
     ],
-    "last_checked": "2026-11-18T00:43:51-06:00",
+    "last_checked": "2026-11-21T10:39:29-06:00",
     "country": "DE",
     "start_date": "2026-07-01"
   },
@@ -126341,7 +126350,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-18T00:43:51-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Jugendliche",
@@ -126355,7 +126364,7 @@
       "Schulbarometer",
       "Nachweisbaren"
     ],
-    "last_checked": "2026-11-18T00:43:51-06:00",
+    "last_checked": "2026-11-21T10:39:29-06:00",
     "country": "DE",
     "start_date": "2026-08-01"
   },
@@ -128182,6 +128191,10 @@
       {
         "checked_at": "2026-11-18T00:43:51-06:00",
         "count": 1552
+      },
+      {
+        "checked_at": "2026-11-21T10:39:29-06:00",
+        "count": 1554
       }
     ],
     "title": "Petition zur Sanierung des Gailstegs Unterschütt",
@@ -128192,14 +128205,14 @@
     "started_by": "Anrainer:innen der Schütt, Erlendorf & SPÖ Villach",
     "category": "Verkehr",
     "category_url": "https://www.openpetition.de/at/petitionen?category=47#petitionen",
-    "signatures": 1552,
+    "signatures": 1554,
     "lang": "de",
     "campaign_id": "openpetition:petition-zur-sanierung-des-gailstegs-unterschuett",
     "i18n_state": {
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-18T00:43:51-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Arnoldstein",
@@ -128213,7 +128226,7 @@
       "Finanzierung",
       "Umzusetzen"
     ],
-    "last_checked": "2026-11-18T00:43:51-06:00",
+    "last_checked": "2026-11-21T10:39:29-06:00",
     "country": "AT",
     "start_date": "2026-07-01"
   },
@@ -129639,7 +129652,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-18T00:43:51-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Bevölkerung",
@@ -129653,7 +129666,7 @@
       "Anliegen",
       "Öffentliche"
     ],
-    "last_checked": "2026-11-18T00:43:51-06:00",
+    "last_checked": "2026-11-21T10:39:29-06:00",
     "country": "AT",
     "start_date": "2026-07-01"
   },
@@ -135249,9 +135262,9 @@
     "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
     "country": "DE",
     "signatures": 685,
-    "start_date": "2026-08-21",
+    "start_date": "2026-08-01",
     "status": "online",
-    "last_seen": "2026-11-17T16:55:08-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Bergfelde",
@@ -135265,7 +135278,7 @@
       "Weiterführenden",
       "ÖPNV-Verbindung"
     ],
-    "last_checked": "2026-11-17T16:55:08-06:00",
+    "last_checked": "2026-11-21T10:39:29-06:00",
     "lang": "de",
     "campaign_id": "openpetition:buslinie-822-als-schulbus-erhalten-schulweg-fuer-kinder-aus-bergfelde-sichern",
     "i18n_state": {
@@ -140980,7 +140993,7 @@
     "goal": 500,
     "start_date": "2026-08-01",
     "status": "online",
-    "last_seen": "2026-11-18T00:43:51-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Rosenheim",
@@ -140994,7 +141007,7 @@
       "Außerhalb",
       "Verwiesen"
     ],
-    "last_checked": "2026-11-18T00:43:51-06:00",
+    "last_checked": "2026-11-21T10:39:29-06:00",
     "lang": "de",
     "campaign_id": "openpetition:24-7-tieraerztliche-notfallversorgung-fuer-rosenheim-kein-tier-darf-nachts-ohne-hilfe-bleiben",
     "i18n_state": {
@@ -143757,7 +143770,7 @@
     "signatures": 148,
     "start_date": "2026-09-11",
     "status": "online",
-    "last_seen": "2026-11-17T16:55:08-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Grund",
@@ -143771,7 +143784,7 @@
       "Maßnahmen",
       "Anwohner"
     ],
-    "last_checked": "2026-11-17T16:55:08-06:00",
+    "last_checked": "2026-11-21T10:39:29-06:00",
     "lang": "de",
     "campaign_id": "openpetition:verkehrssicherheit-wohnqualitaet-und-schutz-der-erholungsraeume-an-der-b242-in-bad-grund-verbessern",
     "i18n_state": {
@@ -144798,7 +144811,7 @@
     "signatures": 289,
     "start_date": "2026-08-01",
     "status": "online",
-    "last_seen": "2026-11-18T00:43:51-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Steimle",
@@ -144812,7 +144825,7 @@
       "Unterzeichnenden",
       "Partei"
     ],
-    "last_checked": "2026-11-18T00:43:51-06:00",
+    "last_checked": "2026-11-21T10:39:29-06:00",
     "lang": "de",
     "campaign_id": "openpetition:offener-brief-protest-gegen-den-geplanten-auftritt-von-uwe-steimle-in-magdeburg",
     "i18n_state": {
@@ -153260,6 +153273,10 @@
       {
         "checked_at": "2026-11-17T16:55:08-06:00",
         "count": 80
+      },
+      {
+        "checked_at": "2026-11-21T10:39:29-06:00",
+        "count": 81
       }
     ],
     "title": "Freiheit für Luna! Holt sie endlich aus dem TierQuarTier Wien!",
@@ -153271,10 +153288,10 @@
     "category": "Tierschutz",
     "category_url": "https://www.openpetition.de/at/petitionen?category=45#petitionen",
     "country": "AT",
-    "signatures": 80,
+    "signatures": 81,
     "start_date": "2026-08-01",
     "status": "online",
-    "last_seen": "2026-11-17T16:55:08-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Luna",
@@ -153288,7 +153305,7 @@
       "Familienmitglied",
       "Bürokratische"
     ],
-    "last_checked": "2026-11-17T16:55:08-06:00",
+    "last_checked": "2026-11-21T10:39:29-06:00",
     "lang": "de",
     "campaign_id": "openpetition:freiheit-fuer-luna-holt-sie-endlich-aus-dem-tierquartier-wien-2",
     "i18n_state": {
@@ -158505,7 +158522,7 @@
     "signatures": 21,
     "start_date": "2026-09-17",
     "status": "online",
-    "last_seen": "2026-11-18T00:43:51-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Elsdorf",
@@ -158519,7 +158536,7 @@
       "Belange",
       "Bürgermeister"
     ],
-    "last_checked": "2026-11-18T00:43:51-06:00",
+    "last_checked": "2026-11-21T10:39:29-06:00",
     "lang": "de",
     "campaign_id": "openpetition:inklusion-und-die-belange-von-menschen-in-elsdorf",
     "i18n_state": {
@@ -158943,6 +158960,10 @@
       {
         "checked_at": "2026-11-18T00:43:51-06:00",
         "count": 61
+      },
+      {
+        "checked_at": "2026-11-21T10:39:29-06:00",
+        "count": 62
       }
     ],
     "title": "Schluss mit dem „Sylter Maß“: verbindliche Wohnflächen- und Nutzungsangaben auch durch Makler",
@@ -158954,10 +158975,10 @@
     "category": "Bauen",
     "category_url": "https://www.openpetition.de/petitionen?category=6#petitionen",
     "country": "DE",
-    "signatures": 61,
+    "signatures": 62,
     "start_date": "2026-09-23",
     "status": "online",
-    "last_seen": "2026-11-18T00:43:51-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Nutzung",
@@ -158971,7 +158992,7 @@
       "Eigentümer",
       "Rechtlich"
     ],
-    "last_checked": "2026-11-18T00:43:51-06:00",
+    "last_checked": "2026-11-21T10:39:29-06:00",
     "lang": "de",
     "campaign_id": "openpetition:schluss-mit-dem-sylter-mass-verbindliche-wohnflaechen-und-nutzungsangaben-auch-durch-makler",
     "i18n_state": {
@@ -164756,7 +164777,7 @@
     "goal": 500,
     "start_date": "2026-10-01",
     "status": "online",
-    "last_seen": "2026-11-18T00:43:51-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Kinder",
@@ -164770,7 +164791,7 @@
       "Kanton",
       "Weder"
     ],
-    "last_checked": "2026-11-18T00:43:51-06:00",
+    "last_checked": "2026-11-21T10:39:29-06:00",
     "lang": "de",
     "campaign_id": "openpetition:faire-besteuerung-von-alleinerziehenden-ohne-unterhalt-im-kanton-zuerich",
     "i18n_state": {
@@ -164906,6 +164927,10 @@
       {
         "checked_at": "2026-11-18T00:43:51-06:00",
         "count": 61
+      },
+      {
+        "checked_at": "2026-11-21T10:39:29-06:00",
+        "count": 62
       }
     ],
     "title": "Einzelzimmer-Zuschlag muss weg",
@@ -164917,10 +164942,10 @@
     "category": "Soziales",
     "category_url": "https://www.openpetition.de/at/petitionen?category=39#petitionen",
     "country": "AT",
-    "signatures": 61,
+    "signatures": 62,
     "start_date": "2026-10-01",
     "status": "online",
-    "last_seen": "2026-11-18T00:43:51-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Alleinreisende",
@@ -164934,7 +164959,7 @@
       "Beherbergungsbetrieben",
       "Einzelzimmer-Zuschlag"
     ],
-    "last_checked": "2026-11-18T00:43:51-06:00",
+    "last_checked": "2026-11-21T10:39:29-06:00",
     "lang": "de",
     "campaign_id": "openpetition:einzelzimmer-zuschlag-muss-weg-2",
     "i18n_state": {
@@ -188247,6 +188272,10 @@
       {
         "checked_at": "2026-11-17T16:55:08-06:00",
         "count": 5457
+      },
+      {
+        "checked_at": "2026-11-21T10:39:29-06:00",
+        "count": 6358
       }
     ],
     "title": "Rettet das Oder Spree Krankenhaus Beeskow!",
@@ -188258,7 +188287,7 @@
     "category": "Gesundheit",
     "category_url": "https://www.openpetition.de/petitionen?category=20#petitionen",
     "country": "DE",
-    "signatures": 5457,
+    "signatures": 6358,
     "start_date": "2026-11-08",
     "lang": "de",
     "campaign_id": "openpetition:rettet-das-oder-spree-krankenhaus-beeskow",
@@ -188266,7 +188295,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-17T16:55:08-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Unterstützung",
@@ -188280,7 +188309,7 @@
       "Gezwungen",
       "Beeskow"
     ],
-    "last_checked": "2026-11-17T16:55:08-06:00"
+    "last_checked": "2026-11-21T10:39:29-06:00"
   },
   "saubere-luft-fuer-unsere-zukunft-verpflichtende-lufthygiene-in-kindertagesstaetten-schulen": {
     "slug": "saubere-luft-fuer-unsere-zukunft-verpflichtende-lufthygiene-in-kindertagesstaetten-schulen",
@@ -188297,6 +188326,10 @@
       {
         "checked_at": "2026-11-17T16:55:08-06:00",
         "count": 1046
+      },
+      {
+        "checked_at": "2026-11-21T10:39:29-06:00",
+        "count": 1078
       }
     ],
     "title": "Saubere Luft für unsere Zukunft: Verpflichtende Lufthygiene in Kindertagesstätten & Schulen",
@@ -188308,7 +188341,7 @@
     "category": "Gesundheit",
     "category_url": "https://www.openpetition.de/petitionen?category=20#petitionen",
     "country": "DE",
-    "signatures": 1046,
+    "signatures": 1078,
     "start_date": "2026-11-08",
     "lang": "de",
     "campaign_id": "openpetition:saubere-luft-fuer-unsere-zukunft-verpflichtende-lufthygiene-in-kindertagesstaetten-schulen",
@@ -188316,7 +188349,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-17T16:55:08-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Bildung",
@@ -188330,7 +188363,7 @@
       "Liegenddemo",
       "Zuständigen"
     ],
-    "last_checked": "2026-11-17T16:55:08-06:00"
+    "last_checked": "2026-11-21T10:39:29-06:00"
   },
   "erfahrungsfeld-der-sinne-nuernberg-in-jedem-jahr": {
     "slug": "erfahrungsfeld-der-sinne-nuernberg-in-jedem-jahr",
@@ -188347,6 +188380,10 @@
       {
         "checked_at": "2026-11-17T16:55:08-06:00",
         "count": 2582
+      },
+      {
+        "checked_at": "2026-11-21T10:39:29-06:00",
+        "count": 2702
       }
     ],
     "title": "Erfahrungsfeld der Sinne Nürnberg in jedem Jahr",
@@ -188358,7 +188395,7 @@
     "category": "Kultur",
     "category_url": "https://www.openpetition.de/petitionen?category=25#petitionen",
     "country": "DE",
-    "signatures": 2582,
+    "signatures": 2702,
     "start_date": "2026-11-08",
     "lang": "de",
     "campaign_id": "openpetition:erfahrungsfeld-der-sinne-nuernberg-in-jedem-jahr",
@@ -188366,7 +188403,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-17T16:55:08-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Erfahrungsfeld",
@@ -188380,7 +188417,7 @@
       "Wöhrderwiese",
       "Entfaltung"
     ],
-    "last_checked": "2026-11-17T16:55:08-06:00"
+    "last_checked": "2026-11-21T10:39:29-06:00"
   },
   "rettet-die-tanzzentrale-ohne-proberaeume-keine-freie-tanzszene": {
     "slug": "rettet-die-tanzzentrale-ohne-proberaeume-keine-freie-tanzszene",
@@ -188397,6 +188434,10 @@
       {
         "checked_at": "2026-11-17T16:55:08-06:00",
         "count": 891
+      },
+      {
+        "checked_at": "2026-11-21T10:39:29-06:00",
+        "count": 976
       }
     ],
     "title": "Rettet die Tanzzentrale! Ohne Proberäume keine freie Tanzszene",
@@ -188408,7 +188449,7 @@
     "category": "Kultur",
     "category_url": "https://www.openpetition.de/petitionen?category=25#petitionen",
     "country": "DE",
-    "signatures": 891,
+    "signatures": 976,
     "start_date": "2026-11-09",
     "lang": "de",
     "campaign_id": "openpetition:rettet-die-tanzzentrale-ohne-proberaeume-keine-freie-tanzszene",
@@ -188416,7 +188457,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-17T16:55:08-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Tanzzentrale",
@@ -188430,7 +188471,7 @@
       "Nürnberger",
       "Tafelhalle"
     ],
-    "last_checked": "2026-11-17T16:55:08-06:00"
+    "last_checked": "2026-11-21T10:39:29-06:00"
   },
   "kleinere-kita-gruppen-statt-gruppenschliessungen-fuer-eine-bessere-fruehkindliche-bildung": {
     "slug": "kleinere-kita-gruppen-statt-gruppenschliessungen-fuer-eine-bessere-fruehkindliche-bildung",
@@ -188447,6 +188488,10 @@
       {
         "checked_at": "2026-11-17T16:55:08-06:00",
         "count": 1869
+      },
+      {
+        "checked_at": "2026-11-21T10:39:29-06:00",
+        "count": 1966
       }
     ],
     "title": "Kleinere Kita-Gruppen statt Gruppenschließungen – für eine bessere frühkindliche Bildung",
@@ -188458,7 +188503,7 @@
     "category": "Soziales",
     "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
     "country": "DE",
-    "signatures": 1869,
+    "signatures": 1966,
     "start_date": "2026-11-09",
     "lang": "de",
     "campaign_id": "openpetition:kleinere-kita-gruppen-statt-gruppenschliessungen-fuer-eine-bessere-fruehkindliche-bildung",
@@ -188466,7 +188511,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-17T16:55:08-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Kinder",
@@ -188480,7 +188525,7 @@
       "Unserer",
       "Chance"
     ],
-    "last_checked": "2026-11-17T16:55:08-06:00"
+    "last_checked": "2026-11-21T10:39:29-06:00"
   },
   "kinder-schuetzen-statt-risiken-schaffen-nein-zur-substitutionspraxis-am-spielplatz": {
     "slug": "kinder-schuetzen-statt-risiken-schaffen-nein-zur-substitutionspraxis-am-spielplatz",
@@ -188497,6 +188542,10 @@
       {
         "checked_at": "2026-11-17T16:55:08-06:00",
         "count": 659
+      },
+      {
+        "checked_at": "2026-11-21T10:39:29-06:00",
+        "count": 705
       }
     ],
     "title": "Kinder schützen statt Risiken schaffen – Nein zur Substitutionspraxis am Spielplatz!",
@@ -188508,7 +188557,7 @@
     "category": "Sicherheit",
     "category_url": "https://www.openpetition.de/petitionen?category=55#petitionen",
     "country": "DE",
-    "signatures": 659,
+    "signatures": 705,
     "start_date": "2026-11-10",
     "lang": "de",
     "campaign_id": "openpetition:kinder-schuetzen-statt-risiken-schaffen-nein-zur-substitutionspraxis-am-spielplatz",
@@ -188516,7 +188565,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-17T16:55:08-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Kinder",
@@ -188530,7 +188579,7 @@
       "Wohlbefinden",
       "Einrichtung"
     ],
-    "last_checked": "2026-11-17T16:55:08-06:00"
+    "last_checked": "2026-11-21T10:39:29-06:00"
   },
   "erhalt-der-location-k1-in-leverkusen-wiesdorf": {
     "slug": "erhalt-der-location-k1-in-leverkusen-wiesdorf",
@@ -188547,6 +188596,10 @@
       {
         "checked_at": "2026-11-17T16:55:08-06:00",
         "count": 569
+      },
+      {
+        "checked_at": "2026-11-21T10:39:29-06:00",
+        "count": 710
       }
     ],
     "title": "Erhalt der Location K1 in Leverkusen Wiesdorf",
@@ -188558,7 +188611,7 @@
     "category": "Kultur",
     "category_url": "https://www.openpetition.de/petitionen?category=25#petitionen",
     "country": "DE",
-    "signatures": 569,
+    "signatures": 710,
     "start_date": "2026-11-10",
     "lang": "de",
     "campaign_id": "openpetition:erhalt-der-location-k1-in-leverkusen-wiesdorf",
@@ -188566,7 +188619,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-17T16:55:08-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Räumlichkeiten",
@@ -188580,7 +188633,7 @@
       "Karnevalsfeten",
       "Entscheidend"
     ],
-    "last_checked": "2026-11-17T16:55:08-06:00"
+    "last_checked": "2026-11-21T10:39:29-06:00"
   },
   "beibehaltung-der-tempo-50-regelung-auf-der-marienfelder-allee-radweg-auf-dem-buergersteig": {
     "slug": "beibehaltung-der-tempo-50-regelung-auf-der-marienfelder-allee-radweg-auf-dem-buergersteig",
@@ -188597,6 +188650,10 @@
       {
         "checked_at": "2026-11-17T16:55:08-06:00",
         "count": 58
+      },
+      {
+        "checked_at": "2026-11-21T10:39:29-06:00",
+        "count": 59
       }
     ],
     "title": "Beibehaltung der Tempo 50 Regelung auf der Marienfelder Allee + Radweg auf dem Bürgersteig!",
@@ -188608,7 +188665,7 @@
     "category": "Verkehr",
     "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
     "country": "DE",
-    "signatures": 58,
+    "signatures": 59,
     "start_date": "2026-11-06",
     "lang": "de",
     "campaign_id": "openpetition:beibehaltung-der-tempo-50-regelung-auf-der-marienfelder-allee-radweg-auf-dem-buergersteig",
@@ -188616,7 +188673,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-17T16:55:08-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Meiner",
@@ -188630,7 +188687,7 @@
       "Unterschriften",
       "Bürgersteig"
     ],
-    "last_checked": "2026-11-17T16:55:08-06:00"
+    "last_checked": "2026-11-21T10:39:29-06:00"
   },
   "nuernberger-kulturlaeden-erhalten": {
     "slug": "nuernberger-kulturlaeden-erhalten",
@@ -188647,6 +188704,10 @@
       {
         "checked_at": "2026-11-17T16:55:08-06:00",
         "count": 2899
+      },
+      {
+        "checked_at": "2026-11-21T10:39:29-06:00",
+        "count": 3907
       }
     ],
     "title": "Nürnberger Kulturläden erhalten!",
@@ -188658,7 +188719,7 @@
     "category": "Soziales",
     "category_url": "https://www.openpetition.de/petitionen?category=39#petitionen",
     "country": "DE",
-    "signatures": 2899,
+    "signatures": 3907,
     "start_date": "2026-11-10",
     "lang": "de",
     "campaign_id": "openpetition:nuernberger-kulturlaeden-erhalten",
@@ -188666,7 +188727,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-17T16:55:08-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Kulturläden",
@@ -188680,7 +188741,7 @@
       "Zusammenkunft",
       "Vereinsamung"
     ],
-    "last_checked": "2026-11-17T16:55:08-06:00"
+    "last_checked": "2026-11-21T10:39:29-06:00"
   },
   "unsere-feeds-unsere-freiheit-keine-staatliche-einflussnahme-auf-social-media": {
     "slug": "unsere-feeds-unsere-freiheit-keine-staatliche-einflussnahme-auf-social-media",
@@ -188697,6 +188758,10 @@
       {
         "checked_at": "2026-11-17T16:55:08-06:00",
         "count": 3271
+      },
+      {
+        "checked_at": "2026-11-21T10:39:29-06:00",
+        "count": 4236
       }
     ],
     "title": "Unsere Feeds. Unsere Freiheit. Keine staatliche Einflussnahme auf Social Media!",
@@ -188708,7 +188773,7 @@
     "category": "Internet",
     "category_url": "https://www.openpetition.de/petitionen?category=35#petitionen",
     "country": "DE",
-    "signatures": 3271,
+    "signatures": 4236,
     "goal": 30000,
     "start_date": "2026-11-09",
     "lang": "de",
@@ -188717,7 +188782,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-17T16:55:08-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Medienangebote",
@@ -188731,7 +188796,7 @@
       "Staat",
       "Diskussionsentwurf"
     ],
-    "last_checked": "2026-11-17T16:55:08-06:00"
+    "last_checked": "2026-11-21T10:39:29-06:00"
   },
   "katzenschutzverordnung-fuer-sachsen-kastration-chip-und-registrierung-fuer-freigaenger-katzen": {
     "slug": "katzenschutzverordnung-fuer-sachsen-kastration-chip-und-registrierung-fuer-freigaenger-katzen",
@@ -188748,6 +188813,10 @@
       {
         "checked_at": "2026-11-17T16:55:08-06:00",
         "count": 641
+      },
+      {
+        "checked_at": "2026-11-21T10:39:29-06:00",
+        "count": 841
       }
     ],
     "title": "Katzenschutzverordnung für Sachsen: Kastration, Chip und Registrierung für Freigänger-Katzen",
@@ -188759,7 +188828,7 @@
     "category": "Tierschutz",
     "category_url": "https://www.openpetition.de/petitionen?category=45#petitionen",
     "country": "DE",
-    "signatures": 641,
+    "signatures": 841,
     "start_date": "2026-11-09",
     "lang": "de",
     "campaign_id": "openpetition:katzenschutzverordnung-fuer-sachsen-kastration-chip-und-registrierung-fuer-freigaenger-katzen",
@@ -188767,7 +188836,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-17T16:55:08-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Landesweite",
@@ -188781,7 +188850,7 @@
       "Freilaufenden",
       "Vorschreiben"
     ],
-    "last_checked": "2026-11-17T16:55:08-06:00"
+    "last_checked": "2026-11-21T10:39:29-06:00"
   },
   "haende-weg-von-unseren-spiel-und-lernstuben": {
     "slug": "haende-weg-von-unseren-spiel-und-lernstuben",
@@ -188798,6 +188867,10 @@
       {
         "checked_at": "2026-11-17T16:55:08-06:00",
         "count": 65
+      },
+      {
+        "checked_at": "2026-11-21T10:39:29-06:00",
+        "count": 86
       }
     ],
     "title": "Hände weg von unseren Spiel- und Lernstuben!",
@@ -188809,7 +188882,7 @@
     "category": "Bildung",
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
     "country": "DE",
-    "signatures": 65,
+    "signatures": 86,
     "start_date": "2026-10-21",
     "lang": "de",
     "campaign_id": "openpetition:haende-weg-von-unseren-spiel-und-lernstuben",
@@ -188817,7 +188890,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-17T16:55:08-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Lernstuben",
@@ -188831,7 +188904,7 @@
       "Gruppen",
       "Alltag"
     ],
-    "last_checked": "2026-11-17T16:55:08-06:00"
+    "last_checked": "2026-11-21T10:39:29-06:00"
   },
   "faire-netzentgelte-keine-bestrafung-fuer-netzdienliches-verhalten": {
     "slug": "faire-netzentgelte-keine-bestrafung-fuer-netzdienliches-verhalten",
@@ -188848,6 +188921,10 @@
       {
         "checked_at": "2026-11-17T16:55:08-06:00",
         "count": 585
+      },
+      {
+        "checked_at": "2026-11-21T10:39:29-06:00",
+        "count": 707
       }
     ],
     "title": "Faire Netzentgelte: keine Bestrafung für netzdienliches Verhalten",
@@ -188859,7 +188936,7 @@
     "category": "Energie",
     "category_url": "https://www.openpetition.de/at/petitionen?category=50#petitionen",
     "country": "AT",
-    "signatures": 585,
+    "signatures": 707,
     "start_date": "2026-11-09",
     "lang": "de",
     "campaign_id": "openpetition:faire-netzentgelte-keine-bestrafung-fuer-netzdienliches-verhalten",
@@ -188867,7 +188944,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-17T16:55:08-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Verbraucht",
@@ -188881,7 +188958,7 @@
       "Jemand",
       "Nachbarschaft"
     ],
-    "last_checked": "2026-11-17T16:55:08-06:00"
+    "last_checked": "2026-11-21T10:39:29-06:00"
   },
   "nachdenkpause-fuer-spitalsbau-am-oberberg-in-eisenstadt": {
     "slug": "nachdenkpause-fuer-spitalsbau-am-oberberg-in-eisenstadt",
@@ -188898,6 +188975,10 @@
       {
         "checked_at": "2026-11-17T16:55:08-06:00",
         "count": 44
+      },
+      {
+        "checked_at": "2026-11-21T10:39:29-06:00",
+        "count": 89
       }
     ],
     "title": "Nachdenkpause für Spitalsbau am Oberberg in Eisenstadt",
@@ -188909,7 +188990,7 @@
     "category": "Bauen",
     "category_url": "https://www.openpetition.de/at/petitionen?category=6#petitionen",
     "country": "AT",
-    "signatures": 44,
+    "signatures": 89,
     "start_date": "2026-11-09",
     "lang": "de",
     "campaign_id": "openpetition:nachdenkpause-fuer-spitalsbau-am-oberberg-in-eisenstadt",
@@ -188917,7 +188998,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-17T16:55:08-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Krankenhaus",
@@ -188931,7 +189012,7 @@
       "Euro",
       "Zwischenlösung"
     ],
-    "last_checked": "2026-11-17T16:55:08-06:00"
+    "last_checked": "2026-11-21T10:39:29-06:00"
   },
   "petition-zur-wahrung-der-elterlichen-bildungsfreiheit": {
     "slug": "petition-zur-wahrung-der-elterlichen-bildungsfreiheit",
@@ -188964,7 +189045,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-17T16:55:08-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Überprüfung",
@@ -188978,7 +189059,7 @@
       "Bildungsfreiheit",
       "Bildungsgesetzes"
     ],
-    "last_checked": "2026-11-17T16:55:08-06:00"
+    "last_checked": "2026-11-21T10:39:29-06:00"
   },
   "nuernberg-linie-82-muss-bleiben-unsere-kinder-und-senioren-duerfen-nicht-im-stich-gelassen-werden": {
     "slug": "nuernberg-linie-82-muss-bleiben-unsere-kinder-und-senioren-duerfen-nicht-im-stich-gelassen-werden",
@@ -192346,6 +192427,10 @@
       {
         "checked_at": "2026-11-17T12:11:49-06:00",
         "count": 7
+      },
+      {
+        "checked_at": "2026-11-21T10:39:29-06:00",
+        "count": 11
       }
     ],
     "title": "Schulhof der Rolandschule und Stiftspielplatz: Einhaltung der Nutzungszeiten und weniger Lärmbelästigung",
@@ -192357,7 +192442,7 @@
     "category": "Verwaltung",
     "category_url": "https://www.openpetition.de/petitionen?category=12#petitionen",
     "country": "DE",
-    "signatures": 7,
+    "signatures": 11,
     "start_date": "2026-11-17",
     "lang": "de",
     "campaign_id": "openpetition:schulhof-der-rolandschule-und-stiftspielplatz-einhaltung-der-nutzungszeiten-und-weniger-laermbe-2",
@@ -192365,7 +192450,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-17T12:11:49-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Schulhof",
@@ -192379,7 +192464,7 @@
       "Rolandschule",
       "Anwohner"
     ],
-    "last_checked": "2026-11-17T12:11:49-06:00"
+    "last_checked": "2026-11-21T10:39:29-06:00"
   },
   "buergerinnenbeteiligung-bei-umgestaltung-der-landeggerstrasse": {
     "slug": "buergerinnenbeteiligung-bei-umgestaltung-der-landeggerstrasse",
@@ -192388,6 +192473,10 @@
       {
         "checked_at": "2026-11-17T12:11:49-06:00",
         "count": 22
+      },
+      {
+        "checked_at": "2026-11-21T10:39:29-06:00",
+        "count": 64
       }
     ],
     "title": "Bürger*innenbeteiligung bei Umgestaltung der Landeggerstraße",
@@ -192399,7 +192488,7 @@
     "category": "Verkehr",
     "category_url": "https://www.openpetition.de/at/petitionen?category=47#petitionen",
     "country": "AT",
-    "signatures": 22,
+    "signatures": 64,
     "start_date": "2026-11-14",
     "lang": "de",
     "campaign_id": "openpetition:buergerinnenbeteiligung-bei-umgestaltung-der-landeggerstrasse",
@@ -192407,7 +192496,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-17T12:11:49-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Bevölkerung",
@@ -192421,7 +192510,7 @@
       "Innenbeteiligung",
       "Planungsworkshop"
     ],
-    "last_checked": "2026-11-17T12:11:49-06:00"
+    "last_checked": "2026-11-21T10:39:29-06:00"
   },
   "unser-krankenhaus-braucht-eine-zukunft-orthopaedische-versorgung-am-kav-ehringshausen-erhalten": {
     "slug": "unser-krankenhaus-braucht-eine-zukunft-orthopaedische-versorgung-am-kav-ehringshausen-erhalten",
@@ -192430,6 +192519,10 @@
       {
         "checked_at": "2026-11-18T09:59:13-06:00",
         "count": 1162
+      },
+      {
+        "checked_at": "2026-11-21T10:39:29-06:00",
+        "count": 3230
       }
     ],
     "title": "Unser Krankenhaus braucht eine Zukunft! – Orthopädische Versorgung am KAV Ehringshausen erhalten!",
@@ -192441,7 +192534,7 @@
     "category": "Gesundheit",
     "category_url": "https://www.openpetition.de/petitionen?category=20#petitionen",
     "country": "DE",
-    "signatures": 1162,
+    "signatures": 3230,
     "start_date": "2026-11-18",
     "lang": "de",
     "campaign_id": "openpetition:unser-krankenhaus-braucht-eine-zukunft-orthopaedische-versorgung-am-kav-ehringshausen-erhalten",
@@ -192449,7 +192542,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-18T09:59:13-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Zukunft",
@@ -192463,7 +192556,7 @@
       "Leistungen",
       "Wirtschaftliche"
     ],
-    "last_checked": "2026-11-18T09:59:13-06:00"
+    "last_checked": "2026-11-21T10:39:29-06:00"
   },
   "rettet-das-lsg-um-ploetzky-keine-naturzerstoerung-fuer-die-erweiterung-des-erlebnisparks": {
     "slug": "rettet-das-lsg-um-ploetzky-keine-naturzerstoerung-fuer-die-erweiterung-des-erlebnisparks",
@@ -192472,6 +192565,10 @@
       {
         "checked_at": "2026-11-18T09:59:13-06:00",
         "count": 883
+      },
+      {
+        "checked_at": "2026-11-21T10:39:29-06:00",
+        "count": 931
       }
     ],
     "title": "Rettet das LSG um Plötzky! Keine Naturzerstörung für die Erweiterung des Erlebnisparks",
@@ -192483,7 +192580,7 @@
     "category": "Umwelt",
     "category_url": "https://www.openpetition.de/petitionen?category=46#petitionen",
     "country": "DE",
-    "signatures": 883,
+    "signatures": 931,
     "start_date": "2026-10-30",
     "lang": "de",
     "campaign_id": "openpetition:rettet-das-lsg-um-ploetzky-keine-naturzerstoerung-fuer-die-erweiterung-des-erlebnisparks",
@@ -192491,7 +192588,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-18T09:59:13-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Plötzky",
@@ -192505,7 +192602,7 @@
       "Stadtrat",
       "Hektar"
     ],
-    "last_checked": "2026-11-18T09:59:13-06:00"
+    "last_checked": "2026-11-21T10:39:29-06:00"
   },
   "petition-gegen-forschung-zu-kriegszwecken-fuer-die-einfuehrung-einer-zivilklausel-an-der-univer-2": {
     "slug": "petition-gegen-forschung-zu-kriegszwecken-fuer-die-einfuehrung-einer-zivilklausel-an-der-univer-2",
@@ -192514,6 +192611,10 @@
       {
         "checked_at": "2026-11-18T09:59:13-06:00",
         "count": 35
+      },
+      {
+        "checked_at": "2026-11-21T10:39:29-06:00",
+        "count": 107
       }
     ],
     "title": "Petition gegen Forschung zu Kriegszwecken! Für die Einführung einer Zivilklausel an der Universität!",
@@ -192525,7 +192626,7 @@
     "category": "Bildung",
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
     "country": "DE",
-    "signatures": 35,
+    "signatures": 107,
     "goal": 500,
     "start_date": "2026-11-10",
     "lang": "de",
@@ -192534,7 +192635,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-18T09:59:13-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Zivilklausel",
@@ -192548,7 +192649,7 @@
       "Militarisierung",
       "Bundesländern"
     ],
-    "last_checked": "2026-11-18T09:59:13-06:00"
+    "last_checked": "2026-11-21T10:39:29-06:00"
   },
   "darmstadt-sichere-wege-statt-durchgangsverkehr-hammelstrift-und-maulbeerallee-entlasten": {
     "slug": "darmstadt-sichere-wege-statt-durchgangsverkehr-hammelstrift-und-maulbeerallee-entlasten",
@@ -192557,6 +192658,10 @@
       {
         "checked_at": "2026-11-18T09:59:13-06:00",
         "count": 19
+      },
+      {
+        "checked_at": "2026-11-21T10:39:29-06:00",
+        "count": 34
       }
     ],
     "title": "Darmstadt: Sichere Wege statt Durchgangsverkehr – Hammelstrift und Maulbeerallee entlasten!",
@@ -192568,7 +192673,7 @@
     "category": "Verkehr",
     "category_url": "https://www.openpetition.de/petitionen?category=47#petitionen",
     "country": "DE",
-    "signatures": 19,
+    "signatures": 34,
     "start_date": "2026-11-18",
     "lang": "de",
     "campaign_id": "openpetition:darmstadt-sichere-wege-statt-durchgangsverkehr-hammelstrift-und-maulbeerallee-entlasten",
@@ -192576,7 +192681,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-18T09:59:13-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Maulbeerallee",
@@ -192590,7 +192695,7 @@
       "Unterwegs",
       "Weidenweg"
     ],
-    "last_checked": "2026-11-18T09:59:13-06:00"
+    "last_checked": "2026-11-21T10:39:29-06:00"
   },
   "schluss-mit-dem-ackerparkplatz-wir-wollen-einen-befestigten-schuelerparkplatz-an-der-bertha": {
     "slug": "schluss-mit-dem-ackerparkplatz-wir-wollen-einen-befestigten-schuelerparkplatz-an-der-bertha",
@@ -192599,18 +192704,22 @@
       {
         "checked_at": "2026-11-18T09:59:13-06:00",
         "count": 16
+      },
+      {
+        "checked_at": "2026-11-21T10:39:29-06:00",
+        "count": 247
       }
     ],
     "title": "Schluss mit dem Ackerparkplatz: Wir wollen einen befestigten Schülerparkplatz an der Bertha!",
     "summary": "Wir fordern den Landkreis Groß-Gerau als Schulträger der Bertha-von-Suttner-Schule dazu auf, den Schülerparkplatz in Mörfelden-Walldorf grundlegend zu verbessern. Die bisher unbefestigte und unebene Fläche soll dauerhaft befestigt, angemessen entwässert und mit eindeutigen Parkplatzmarkierungen versehen werden. Ziel ist ein ganzjährig nutzbarer, sicherer und geordnet aufgeteilter Schülerparkplatz.",
-    "image_url": "https://www.openpetition.de/images/petition/schluss-mit-dem-ackerparkplatz-wir-wollen-einen-befestigten-schuelerparkplatz-an-der-bertha_1795016393_desktop.jpg",
+    "image_url": "https://www.openpetition.de/images/petition/schluss-mit-dem-ackerparkplatz-wir-wollen-einen-befestigten-schuelerparkplatz-an-der-bertha_1795018864_desktop.jpg",
     "url": "https://www.openpetition.de/petition/online/schluss-mit-dem-ackerparkplatz-wir-wollen-einen-befestigten-schuelerparkplatz-an-der-bertha",
     "description_full": "<!--marker--><p>Wir fordern den Landkreis Groß-Gerau als Schulträger der Bertha-von-Suttner-Schule dazu auf, den Schülerparkplatz in Mörfelden-Walldorf grundlegend zu verbessern. Die bisher unbefestigte und unebene Fläche soll dauerhaft befestigt, angemessen entwässert und mit eindeutigen Parkplatzmarkierungen versehen werden. Ziel ist ein ganzjährig nutzbarer, sicherer und geordnet aufgeteilter Schülerparkplatz.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Der Schülerparkplatz der Bertha-von-Suttner-Schule befindet sich in einem schlechten baulichen Zustand.<br/>Besonders bei Regen und in den Herbst- und Wintermonaten wird die Situation problematisch. Der Boden weicht stark auf und es entstehen tiefe, riesige Pfützen. Fahrzeuge fahren sich fest und man hat Angst dort zu parken.<br/>Der Parkplatz wird täglich von zahlreichen Schülerinnen und Schülern genutzt, die auf eine verlässliche Parkmöglichkeit angewiesen sind, da sie sich nicht auf die Pünktlichkeit des öffentlichen Personennahverkehr verlassen können.</p><p>Zusätzlich fehlen jegliche Parkplatzmarkierungen oder eine erkennbare Aufteilung der Stellplätze. Dadurch parken Fahrzeuge häufig ungeordnet oder man parkt andere ein.</p><p>Es ist nicht nachvollziehbar, dass eine solche Fläche dauerhaft in diesem Zustand bleibt, obwohl mit einer angemessenen Befestigung, einer funktionierenden Entwässerung und einer klaren Parkplatzaufteilung eine deutliche Verbesserung möglich wäre.</p><p>Wir fordern deshalb den Landkreis Groß-Gerau auf, den Parkplatz vor Ort zu begutachten, geeignete Sanierungsmaßnahmen zu prüfen und einen konkreten Plan zur Umsetzung vorzulegen.</p><p>Ein Schulparkplatz sollte ganzjährig vernünftig nutzbar sein. Dafür setzen wir uns mit dieser Petition ein.</p>",
     "started_by": "Petent/in nicht öffentlich",
     "category": "Bildung",
     "category_url": "https://www.openpetition.de/petitionen?category=7#petitionen",
     "country": "DE",
-    "signatures": 16,
+    "signatures": 247,
     "start_date": "2026-11-18",
     "lang": "de",
     "campaign_id": "openpetition:schluss-mit-dem-ackerparkplatz-wir-wollen-einen-befestigten-schuelerparkplatz-an-der-bertha",
@@ -192618,7 +192727,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-18T09:59:13-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Schülerparkplatz",
@@ -192632,7 +192741,7 @@
       "Aufgeteilter",
       "Unbefestigte"
     ],
-    "last_checked": "2026-11-18T09:59:13-06:00"
+    "last_checked": "2026-11-21T10:39:29-06:00"
   },
   "zulassungsstelle-kempen-erhalten-2": {
     "slug": "zulassungsstelle-kempen-erhalten-2",
@@ -192641,18 +192750,22 @@
       {
         "checked_at": "2026-11-18T09:59:13-06:00",
         "count": 13
+      },
+      {
+        "checked_at": "2026-11-21T10:39:29-06:00",
+        "count": 66
       }
     ],
     "title": "Zulassungsstelle Kempen erhalten",
-    "summary": "Seit rund 70 Jahren gibt es eine Kfz-Zulassungsstelle in Kempen. Jetzt soll die Nebenstelle zum Ende August 2028 schließen – künftig soll es nur noch die Zulassungsstelle in Viersen-Dülken geben. Für die Bürgerinnen und Bürger im nördlichen Kreisgebiet bedeutet das: weite Anfahrtswege, lange Wartezeiten und ein Serviceverlust, den wir nicht hinnehmen wollen. Wir verstehen, dass die Digitalisierung voranschreitet. Das i-Kfz-Verfahren des Bundes ermöglicht bereits viele Vorgänge online, aber bei w",
-    "image_url": "https://www.openpetition.de/images/petition/zulassungsstelle-kempen-erhalten_1794992685_desktop.jpg",
+    "summary": "Seit über 70 Jahren gibt es eine Kfz-Zulassungsstelle in Kempen. Jetzt soll die Nebenstelle zum Ende August 2028 schließen – künftig soll es nur noch die Zulassungsstelle in Viersen-Dülken geben. Für die Bürgerinnen und Bürger im nördlichen Kreisgebiet bedeutet das: weite Anfahrtswege, lange Wartezeiten und ein Serviceverlust, den wir nicht hinnehmen wollen. Wir verstehen, dass die Digitalisierung voranschreitet. Das i-Kfz-Verfahren des Bundes ermöglicht bereits viele Vorgänge online, aber bei w",
+    "image_url": "https://www.openpetition.de/images/petition/zulassungsstelle-kempen-erhalten-2_1795090297_desktop.jpg",
     "url": "https://www.openpetition.de/petition/online/zulassungsstelle-kempen-erhalten-2",
-    "description_full": "<!--marker--><p>Seit rund <b>70 Jahren</b> gibt es eine Kfz-Zulassungsstelle in Kempen. Jetzt soll die Nebenstelle zum Ende August 2028 schließen – künftig soll es nur noch die Zulassungsstelle in Viersen-Dülken geben.</p><p>Für die Bürgerinnen und Bürger im nördlichen Kreisgebiet bedeutet das: weite Anfahrtswege, lange Wartezeiten und ein Serviceverlust, den wir nicht hinnehmen wollen.</p><p>Wir verstehen, dass die Digitalisierung voranschreitet. Das i-Kfz-Verfahren des Bundes ermöglicht bereits viele Vorgänge online, aber bei weitem nicht alle.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Aber die Realität sieht anders aus:</p><ul><li><b>Noch nicht alles geht online:</b> Gerade technische Eintragungen und viele Sonderfälle erfordern weiterhin den Gang zur Behörde.</li><li><b>Nicht alle Bürger sind digital:</b> Ältere Menschen und Bürger mit Migrationshintergrund haben oft keine Möglichkeit oder wenig Vertrauen, eine Zulassung selbstständig online durchzuführen. Für sie ist die persönliche Vorsprache vor Ort <b>unverzichtbar, </b>weil sie gar <b>kein Internet</b> haben<b>.</b></li><li><b>Die Zeit arbeitet für uns:</b> Bis <b>Dezember 2030</b> wird voraussichtlich die Online-Zulassung in allen Varianten – einschließlich technischer Eintragungen und Sonderfällen – ausgereift und flächendeckend verfügbar sein. Erst dann wäre eine Schließung verantwortbar.</li><li><b>Ca. 40 Minuten Fahrtzeit </b>von Tönisberg bis Dülken</li></ul><br/><p>Bei all unseren Gesprächen vor Ort mit privaten und gewerblichen Kunden, Großkunden, Autohändlern, Kfz-Werkstätten, Institutionen u.s.w. stießen wir auf <b>völliges Unverständnis </b>zu den Schließungsabsichten des Kreises, <b> bis hin zu „bösartigen\" Reaktionen</b>.</p><p><b>Wir fordern daher den Kreistag und den Landrat des Kreises Viersen auf:</b></p><ol><li>Die Schließung der Zulassungsstelle Kempen von August 2028 auf <b>Ende 2030</b> zu verschieben.</li><li>Bis dahin jährlich öffentlich zu berichten, welcher Anteil der Zulassungsvorgänge im Kreis tatsächlich online abgewickelt werden kann.</li><li>Die endgültige Schließung erst zu beschließen, wenn nachweislich alle Vorgänge – auch technische Eintragungen – digital möglich sind.</li></ol><br/><p>Die Zulassungsstelle Kempen ist über<b> 70 Jahren</b> ein Stück Bürgernähe im Kreis Viersen. Geben Sie den Menschen im nördlichen Kreisgebiet die Zeit, die der digitale Wandel braucht – und schließen Sie die Tür nicht, bevor online wirklich alles funktioniert.</p><p><b>Jetzt mitzeichnen – für Erhalt der Zulassungsstelle Kempen bis Ende 2030!</b></p>",
+    "description_full": "<!--marker--><p>Seit über <b>70 Jahren</b> gibt es eine Kfz-Zulassungsstelle in Kempen. Jetzt soll die Nebenstelle zum Ende August 2028 schließen – künftig soll es nur noch die Zulassungsstelle in Viersen-Dülken geben.</p><p>Für die Bürgerinnen und Bürger im nördlichen Kreisgebiet bedeutet das: weite Anfahrtswege, lange Wartezeiten und ein Serviceverlust, den wir nicht hinnehmen wollen.</p><p>Wir verstehen, dass die Digitalisierung voranschreitet. Das i-Kfz-Verfahren des Bundes ermöglicht bereits viele Vorgänge online, aber bei weitem nicht alle.</p>\n<h3>Begründung</h3>\n<!--marker--><p>Aber die Realität sieht anders aus:</p><ul><li><b>Noch nicht alles geht online:</b> Gerade technische Eintragungen und viele Sonderfälle erfordern weiterhin den Gang zur Behörde.</li><li><b>Nicht alle Bürger sind digital:</b> Ältere Menschen und Bürger mit Migrationshintergrund haben oft keine Möglichkeit oder wenig Vertrauen, eine Zulassung selbstständig online durchzuführen. Für sie ist die persönliche Vorsprache vor Ort <b>unverzichtbar, </b>weil sie gar <b>kein Internet</b> haben<b>. </b> <b><i>Digitalisierung ist nicht das Maß der Dinge sondern der Mensch ist das Maß aller Dinge !</i></b></li><li><b>Die Zeit arbeitet für uns:</b> Bis <b>Dezember 2030</b> wird voraussichtlich die Online-Zulassung in allen Varianten – einschließlich technischer Eintragungen und Sonderfällen – ausgereift und flächendeckend verfügbar sein. Erst dann wäre eine Schließung verantwortbar.</li><li><b>Ca. 40 Minuten Fahrtzeit </b>von Tönisberg bis Dülken</li></ul><br/><p>Bei all unseren Gesprächen vor Ort mit privaten und gewerblichen Kunden, Großkunden, Autohändlern, Kfz-Werkstätten, Institutionen u.s.w. stießen wir auf <b>völliges Unverständnis </b>zu den Schließungsabsichten des Kreises, <b> bis hin zu „bösartigen\" Reaktionen</b>.</p><p><b>Wir fordern daher den Kreistag und den Landrat des Kreises Viersen auf:</b></p><ol><li>Die Schließung der Zulassungsstelle Kempen von August 2028 auf <b>Ende 2030</b> zu verschieben.</li><li>Bis dahin jährlich öffentlich zu berichten, welcher Anteil der Zulassungsvorgänge im Kreis tatsächlich online abgewickelt werden kann.</li><li>Die endgültige Schließung erst zu beschließen, wenn nachweislich alle Vorgänge – auch technische Eintragungen – digital möglich sind.</li></ol><br/><p>Die Zulassungsstelle Kempen ist über<b> 70 Jahren</b> ein Stück Bürgernähe im Kreis Viersen. Geben Sie den Menschen im nördlichen Kreisgebiet die Zeit, die der digitale Wandel braucht – und schließen Sie die Tür nicht, bevor online wirklich alles funktioniert.</p><p><b>Jetzt mitzeichnen – für Erhalt der Zulassungsstelle Kempen bis Ende 2030!</b></p>",
     "started_by": "Hermann Jörg Osterkamp",
     "category": "Verbraucherschutz",
     "category_url": "https://www.openpetition.de/petitionen?category=59#petitionen",
     "country": "DE",
-    "signatures": 13,
+    "signatures": 66,
     "start_date": "2026-11-17",
     "lang": "de",
     "campaign_id": "openpetition:zulassungsstelle-kempen-erhalten-2",
@@ -192660,21 +192773,21 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-18T09:59:13-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Zulassungsstelle",
       "Kempen",
       "Bürger",
       "Ende",
+      "Digitalisierung",
       "Eintragungen",
       "Kreisgebiet",
       "Nördlichen",
       "Schließung",
-      "Schließen",
-      "Vorgänge"
+      "Schließen"
     ],
-    "last_checked": "2026-11-18T09:59:13-06:00"
+    "last_checked": "2026-11-21T10:39:29-06:00"
   },
   "parkgebuehren-in-der-bad-belziger-innenstadt-abschaffen-broetchentaste-2-0-einfuehren": {
     "slug": "parkgebuehren-in-der-bad-belziger-innenstadt-abschaffen-broetchentaste-2-0-einfuehren",
@@ -192683,6 +192796,10 @@
       {
         "checked_at": "2026-11-18T09:59:13-06:00",
         "count": 12
+      },
+      {
+        "checked_at": "2026-11-21T10:39:29-06:00",
+        "count": 18
       }
     ],
     "title": "Parkgebühren in der Bad Belziger Innenstadt abschaffen – Brötchentaste 2.0 einführen",
@@ -192694,7 +192811,7 @@
     "category": "Wirtschaft",
     "category_url": "https://www.openpetition.de/petitionen?category=48#petitionen",
     "country": "DE",
-    "signatures": 12,
+    "signatures": 18,
     "start_date": "2026-11-16",
     "lang": "de",
     "campaign_id": "openpetition:parkgebuehren-in-der-bad-belziger-innenstadt-abschaffen-broetchentaste-2-0-einfuehren",
@@ -192702,7 +192819,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-18T09:59:13-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Innenstadt",
@@ -192716,7 +192833,7 @@
       "Kurzzeitparkmöglichkeit",
       "Wiedereinführung"
     ],
-    "last_checked": "2026-11-18T09:59:13-06:00"
+    "last_checked": "2026-11-21T10:39:29-06:00"
   },
   "stoppt-die-aushoehlung-des-grazer-altstadtschutzes-3": {
     "slug": "stoppt-die-aushoehlung-des-grazer-altstadtschutzes-3",
@@ -192725,6 +192842,10 @@
       {
         "checked_at": "2026-11-18T09:59:13-06:00",
         "count": 1017
+      },
+      {
+        "checked_at": "2026-11-21T10:39:29-06:00",
+        "count": 1401
       }
     ],
     "title": "Stoppt die Aushöhlung des Grazer Altstadtschutzes",
@@ -192736,7 +192857,7 @@
     "category": "Bauen",
     "category_url": "https://www.openpetition.de/at/petitionen?category=6#petitionen",
     "country": "AT",
-    "signatures": 1017,
+    "signatures": 1401,
     "start_date": "2026-11-16",
     "lang": "de",
     "campaign_id": "openpetition:stoppt-die-aushoehlung-des-grazer-altstadtschutzes-3",
@@ -192744,7 +192865,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-18T09:59:13-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Grazer",
@@ -192758,7 +192879,7 @@
       "Altstadterhaltungsgesetz",
       "UNESCO-Welterbes"
     ],
-    "last_checked": "2026-11-18T09:59:13-06:00"
+    "last_checked": "2026-11-21T10:39:29-06:00"
   },
   "sichere-strassenueberquerungen-fuer-unsere-kindergarten-und-schulkinder-im-mettauertal": {
     "slug": "sichere-strassenueberquerungen-fuer-unsere-kindergarten-und-schulkinder-im-mettauertal",
@@ -192767,6 +192888,10 @@
       {
         "checked_at": "2026-11-18T09:59:13-06:00",
         "count": 26
+      },
+      {
+        "checked_at": "2026-11-21T10:39:29-06:00",
+        "count": 60
       }
     ],
     "title": "Sichere Strassenüberquerungen für unsere Kindergarten- und Schulkinder im Mettauertal",
@@ -192778,7 +192903,7 @@
     "category": "Sicherheit",
     "category_url": "https://www.openpetition.de/ch/petitionen?category=55#petitionen",
     "country": "CH",
-    "signatures": 26,
+    "signatures": 60,
     "goal": 2000,
     "start_date": "2026-11-17",
     "lang": "de",
@@ -192787,7 +192912,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-18T09:59:13-06:00",
+    "last_seen": "2026-11-21T10:39:29-06:00",
     "offline_since": null,
     "tags": [
       "Bushaltestellen",
@@ -192801,7 +192926,7 @@
       "Hottwil",
       "Etzgen"
     ],
-    "last_checked": "2026-11-18T09:59:13-06:00"
+    "last_checked": "2026-11-21T10:39:29-06:00"
   },
   "erhalt-der-mdr-sendung-mach-dich-ran": {
     "slug": "erhalt-der-mdr-sendung-mach-dich-ran",
