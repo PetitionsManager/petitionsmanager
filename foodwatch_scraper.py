@@ -109,9 +109,29 @@ def _land_fuer(key: str) -> str:
     return "AT" if _ist_at(key) else "DE"
 
 
+# ⚠️⚠️ EIGENE Kennung, abweichend von den anderen zehn Scrapern — und zwar
+# gemessen, nicht gewählt (22.11.2026). foodwatch sperrte ab etwa dem 14.11.
+# alle vier Zweige: die Wochenberichte vom 13.11. trugen 6 ⚠, der vom 16.11.
+# zehn, die vier neuen waren „Entdeckung 0 Treffer – Zweig vermutlich
+# ausgefallen (Seitenumbau?)". Umgebaut war aber nichts. Gleicher Rechner,
+# gleiche Adresse, gleiche Sekunde, nur die Kennung getauscht:
+#   Firefox-128-Wert (der alte)         → HTTP 403, 146 B nginx, 0 Aktionen
+#   ohne jeden Header                   → HTTP 200, 18 Aktionen
+#   "python-requests/2.32.3"            → HTTP 200, 18 Aktionen
+#   diese Kennung hier                  → HTTP 200, 18 Aktionen
+#   Googlebot-Wortlaut                  → HTTP 403 (zu Recht: gefälscht)
+# Es ist also keine Bot-Abwehr, die wir umgehen würden — die robots.txt sagt
+# „User-agent: * / Allow: /" und führt keine der Listenseiten unter Disallow.
+# Gesperrt ist die VORGETÄUSCHTE Browser-Kennung. Ein ehrlicher Name ist hier
+# die regelkonformere Anfrage, nicht die trickreichere.
+# ⚠️ NICHT projektweit übernehmen: dieselbe Messung über alle zehn Hosts ergab
+# achtmal „kein Unterschied", aber bei **europarl** genau umgekehrt (Firefox
+# 200 / 362 kB, diese Kennung 403). Wer das hier nach petitions_core zieht,
+# schaltet europarl ab — gemessen am 22.11.2026 über alle zehn Hosts, je
+# zweimal dieselbe Adresse mit getauschter Kennung.
+# ⚠️ Den Wortlaut nicht „aufhübschen": gemessen ist genau diese Zeichenkette.
 FETCH_HEADERS = {
-    "User-Agent": ("Mozilla/5.0 (X11; Linux x86_64; rv:128.0) "
-                   "Gecko/20100101 Firefox/128.0"),
+    "User-Agent": "PetitionsManagerBot/1.0 (+https://petitionsmanager.app)",
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
     "Accept-Language": "de-DE,de;q=0.9",
 }
