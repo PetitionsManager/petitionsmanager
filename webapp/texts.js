@@ -639,7 +639,13 @@ window.PM_TEXTS = {
          Selektor ein nacktes „AU" stand. Belegt in den Daten: AU. Dazu LI als
          deutschsprachiger Nachbar und TR, weil bei Change.org 34 von 60
          geprüften Kandidaten türkisch waren. */
-      AU: "Australien", LI: "Liechtenstein", TR: "Türkei"
+      AU: "Australien", LI: "Liechtenstein", TR: "Türkei",
+      /* Nachgetragen 22.11.2026, beide in den europarl-Daten belegt.
+         ⚠️ ZZ ist kein Land: das PETI-Register führt eine Sammelrubrik
+         „Other country", und core._LAND_NAMEN bildet sie auf das von
+         ISO-3166-1 freigehaltene ZZ ab. Der Name muss das sagen — ein
+         erfundener Staatsname wäre hier schlimmer als ein nacktes Kürzel. */
+      VE: "Venezuela", ZZ: "Anderes Land"
     },
 
     nav: {
@@ -1269,7 +1275,10 @@ window.PM_TEXTS = {
       MT: "Malta", NL: "Netherlands", PL: "Poland", PT: "Portugal",
       RO: "Romania", SE: "Sweden", SI: "Slovenia", SK: "Slovakia",
       UA: "Ukraine", US: "United States",
-      AU: "Australia", LI: "Liechtenstein", TR: "Türkiye"
+      AU: "Australia", LI: "Liechtenstein", TR: "Türkiye",
+      /* See the German block: ZZ is not a country but the PETI register's
+         catch-all bucket, mapped to the ISO-3166-1 user-assigned code. */
+      VE: "Venezuela", ZZ: "Other country"
     },
 
     nav: {

@@ -229,6 +229,13 @@
      unbelegtes Kürzel zeigt der Browser als zwei Buchstabenkästchen — sichtbar
      unfertig, aber nicht kaputt. */
   function landFlagge(code) {
+    /* ⚠️ ZZ ist die Ausnahme von der Regel darüber: das Kürzel ist uns
+       BEKANNT (die Sammelrubrik „Other country" des PETI-Registers, siehe
+       core._LAND_NAMEN), es wird nur nie eine Flagge bekommen. Die zwei
+       Buchstabenkästchen wären hier also nicht „sichtbar unfertig", sondern
+       dauerhaft falsch — deshalb die neutrale Fahne wie bei „noch nicht
+       zugeordnet". Nachgetragen 22.11.2026. */
+    if (code === "ZZ") return "🏳️";
     if (!/^[A-Z]{2}$/.test(code || "")) return "🏳️";
     return String.fromCodePoint(0x1F1E6 + code.charCodeAt(0) - 65,
                                 0x1F1E6 + code.charCodeAt(1) - 65);

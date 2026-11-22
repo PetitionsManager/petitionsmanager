@@ -904,6 +904,13 @@ _LAND_NAMEN = {
     "türkei": "TR", "turkei": "TR", "turkey": "TR",
     "gibraltar": "GI",
     "russland": "RU", "russia": "RU",
+    # Am 22.11.2026 nachgetragen. Der Melder des Laufs #217 nannte
+    # „'Venezuela'×1"; nachgemessen im Store DIESES Laufs
+    # (a90ed8c:europarl_petitions.json): genau ein Satz auf status=online
+    # unter 1.969, und kein zweiter unzuordenbarer Wert — die Meldung ist
+    # damit auf denselben Wert zurückgeführt, den sie behauptet. Deutsch und
+    # englisch schreiben das Land gleich, ein Schlüssel genügt also.
+    "venezuela": "VE",
     # ⚠️ KEINE Staaten, sondern überstaatliche Angaben — 30 der 34 gemeldeten
     # Sätze. ISO-3166-1 reserviert „EU" ausdrücklich für die Europäische Union,
     # und land_code() reicht zweibuchstabige Werte ohnehin unverändert durch;
@@ -914,6 +921,18 @@ _LAND_NAMEN = {
     "european union": "EU",
     "alle eu-länder": "EU", "alle eu-laender": "EU",
     "all eu countries": "EU",
+    # ⚠️ Auch dies ist KEIN Staat, sondern die Sammelrubrik des PETI-Registers
+    # („Other country"). Die Beschriftung kommt wortgleich von der Quellseite;
+    # im Scraper steht sie nirgends, er reicht nur durch. Nachgetragen am
+    # 22.11.2026, gemessen am Store des Pflege-Laufs 873e60e: ein Satz auf
+    # status=online (Petition 0114/2022, Beziehungen der EU zu Kuba).
+    # ISO-3166-1 hält „ZZ" für benutzerdefinierte Angaben frei — dieselbe
+    # Begründung, mit der oben schon „EU" vergeben ist. Die Alternative wäre,
+    # den Wert unbehandelt zu lassen; dann meldet ihn land_code() in JEDEM
+    # Lauf als unbekannt, und die Meldung verliert ihren Wert für echte Funde.
+    # ⚠️ Der Satz bleibt damit in der Landachse sichtbar, statt sein
+    # country-Feld zu verlieren — texts.js gibt „ZZ" einen Anzeigenamen.
+    "other country": "ZZ",
 }
 # Was land_code() nicht zuordnen konnte — je Rohwert einmal. publish.py liest
 # das aus und meldet es; so wird aus einem stillen Verlust eine Zeile im Lauf.
