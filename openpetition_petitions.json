@@ -31,14 +31,14 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-11-21T15:54:23-06:00",
+    "generated_at": "2026-11-21T20:32:06-06:00",
     "petition_count": 2867,
-    "available": 1699,
+    "available": 1686,
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-11-21T15:54:23-06:00",
-      "gefunden": 1699,
-      "im_bestand": 1699,
+      "stand": "2026-11-21T20:32:05-06:00",
+      "gefunden": 1686,
+      "im_bestand": 1686,
       "unbrauchbar": 0,
       "verworfen": 0,
       "dublette": 0,
@@ -47,11 +47,11 @@
       "offen": 0,
       "offene_beispiele": [],
       "bestand_gesamt": 2867,
-      "bestand_ausserhalb": 1168
+      "bestand_ausserhalb": 1181
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-11-21T15:54:23-06:00",
+        "zeit": "2026-11-21T20:32:05-06:00",
         "gesamt": 2867,
         "online": 2867,
         "offline": 0,
@@ -69,7 +69,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-11-21T15:54:23-06:00",
+      "zeit": "2026-11-21T20:32:05-06:00",
       "gesamt": 2867,
       "online": 2867,
       "offline": 0,
@@ -83,7 +83,7 @@
       "mit_code_im_text": 0,
       "mit_ballast_in_kurzfassung": 0
     },
-    "verlauf_felder_ab": "2026-11-21T15:54:23-06:00",
+    "verlauf_felder_ab": "2026-11-21T20:32:05-06:00",
     "befunde": [],
     "health_warning": null,
     "online_count": 2867
@@ -188616,6 +188616,10 @@
       {
         "checked_at": "2026-11-18T20:10:50-06:00",
         "count": 571
+      },
+      {
+        "checked_at": "2026-11-21T20:28:39-06:00",
+        "count": 574
       }
     ],
     "title": "Erhalt der Kita Sonnenglanz Brand-Erbisdorf- Kinder sind keine Auslastungsquote!",
@@ -188627,7 +188631,7 @@
     "category": "Familie",
     "category_url": "https://www.openpetition.de/petitionen?category=14#petitionen",
     "country": "DE",
-    "signatures": 571,
+    "signatures": 574,
     "start_date": "2026-11-06",
     "lang": "de",
     "campaign_id": "openpetition:erhalt-der-kita-sonnenglanz-brand-erbisdorf-kinder-sind-keine-auslastungsquote",
@@ -188635,7 +188639,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-18T20:10:50-06:00",
+    "last_seen": "2026-11-21T20:28:39-06:00",
     "offline_since": null,
     "tags": [
       "Kita",
@@ -188649,7 +188653,7 @@
       "Eltern",
       "Kinder"
     ],
-    "last_checked": "2026-11-18T20:10:50-06:00"
+    "last_checked": "2026-11-21T20:28:39-06:00"
   },
   "janni-unser-postbote-gehoert-zu-gehrden-wir-wuenschen-uns-seine-rueckkehr": {
     "slug": "janni-unser-postbote-gehoert-zu-gehrden-wir-wuenschen-uns-seine-rueckkehr",
@@ -188690,7 +188694,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-18T20:10:50-06:00",
+    "last_seen": "2026-11-21T20:28:39-06:00",
     "offline_since": null,
     "tags": [
       "Gehrden",
@@ -188704,7 +188708,7 @@
       "Einzusetzen",
       "Freundliche"
     ],
-    "last_checked": "2026-11-18T20:10:50-06:00"
+    "last_checked": "2026-11-21T20:28:39-06:00"
   },
   "unterschriftensammlung-gegen-die-schliessung-der-volksbankfiliale-in-bispingen": {
     "slug": "unterschriftensammlung-gegen-die-schliessung-der-volksbankfiliale-in-bispingen",
@@ -188725,6 +188729,10 @@
       {
         "checked_at": "2026-11-18T20:10:50-06:00",
         "count": 467
+      },
+      {
+        "checked_at": "2026-11-21T20:28:39-06:00",
+        "count": 592
       }
     ],
     "title": "Unterschriftensammlung gegen die Schließung der Volksbankfiliale in Bispingen",
@@ -188736,7 +188744,7 @@
     "category": "Verbraucherschutz",
     "category_url": "https://www.openpetition.de/petitionen?category=59#petitionen",
     "country": "DE",
-    "signatures": 467,
+    "signatures": 592,
     "goal": 300,
     "start_date": "2026-11-05",
     "lang": "de",
@@ -188745,7 +188753,7 @@
       "en": "fehlt"
     },
     "status": "online",
-    "last_seen": "2026-11-18T20:10:50-06:00",
+    "last_seen": "2026-11-21T20:28:39-06:00",
     "offline_since": null,
     "tags": [
       "Bispingen",
@@ -188759,7 +188767,7 @@
       "Gewerbetreibenden",
       "Geschäftsleitung"
     ],
-    "last_checked": "2026-11-18T20:10:50-06:00"
+    "last_checked": "2026-11-21T20:28:39-06:00"
   },
   "unsere-burgschule-braucht-einen-hausmeister-in-vollzeit": {
     "slug": "unsere-burgschule-braucht-einen-hausmeister-in-vollzeit",

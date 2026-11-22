@@ -31,12 +31,12 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-11-21T15:13:39-06:00",
+    "generated_at": "2026-11-21T20:28:29-06:00",
     "petition_count": 1968,
     "available": 1906,
     "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-11-21T15:13:39-06:00",
+      "stand": "2026-11-21T20:28:28-06:00",
       "gefunden": 1906,
       "im_bestand": 1906,
       "unbrauchbar": 0,
@@ -51,24 +51,7 @@
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-11-21T10:39:12-06:00",
-        "gesamt": 1968,
-        "online": 1968,
-        "offline": 0,
-        "ohne_titel": 0,
-        "platzhalter": 0,
-        "nicht_ausgeliefert": 0,
-        "torsi": 0,
-        "dubletten": 0,
-        "mit_start": 1007,
-        "juengstes_start": "2026-09-21",
-        "mit_code_im_text": 0,
-        "mit_ballast_in_kurzfassung": 0,
-        "herkunft": "lokal_cron",
-        "neu": 0
-      },
-      {
-        "zeit": "2026-11-21T15:13:39-06:00",
+        "zeit": "2026-11-21T20:28:28-06:00",
         "gesamt": 1968,
         "online": 1968,
         "offline": 0,
@@ -86,7 +69,7 @@
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-11-21T15:13:39-06:00",
+      "zeit": "2026-11-21T20:28:28-06:00",
       "gesamt": 1968,
       "online": 1968,
       "offline": 0,
@@ -100,13 +83,13 @@
       "mit_code_im_text": 0,
       "mit_ballast_in_kurzfassung": 0
     },
-    "verlauf_felder_ab": "2026-11-21T10:39:12-06:00",
+    "verlauf_felder_ab": "2026-11-21T20:28:28-06:00",
     "befunde": [
       {
         "stufe": "hinweis",
         "thema": "Startdatum ist ein Verfahrensdatum",
         "text": "Tagesgenaues Datum bei 1007 von 1968 Sätzen; es ist das Zulässigkeitsdatum aus der Mitteilung an die Mitglieder, nicht der Start der Petition. Das jüngste ist 61 Tage alt (2026-09-21) — bauartbedingt, weil das Dokument erst mit der Kommissionsantwort entsteht. Der Altersmelder ist hier deshalb ausge",
-        "zeit": "2026-11-21T15:13:39-06:00",
+        "zeit": "2026-11-21T20:28:28-06:00",
         "thema_en": "Start date is a procedural date",
         "text_en": "Day-exact date on 1007 of 1968 records; it is the date of admissibility from the Notice to Members, not the start of the petition. The newest is 61 days old (2026-09-21) — by design, as the document is only drawn up once the Commission has replied. The ageing check is therefore skipped here."
       }
@@ -118650,7 +118633,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-11-18T20:08:52-06:00",
+    "last_seen": "2026-11-21T20:26:39-06:00",
     "offline_since": null,
     "tags": [
       "Waste",
@@ -118664,7 +118647,7 @@
       "National",
       "Compatibility"
     ],
-    "last_checked": "2026-11-18T20:08:52-06:00"
+    "last_checked": "2026-11-21T20:26:39-06:00"
   },
   "1682-2026": {
     "slug": "1682-2026",
@@ -118672,7 +118655,7 @@
     "signatures_history": [],
     "title": "Petition 1682/2026: Spain's ‘nationality by descent’ programme the possible abuse of the system and the consequences for the EU",
     "started_by": "L. M. G. P. (Spanish)",
-    "category": "Constitutional Affairs",
+    "category": "Justice",
     "country": "Spain",
     "description_full": "<p>The petitioner challenges the Spanish administrative procedure for granting nationality to descendants of Spanish nationals, arguing that it allows large-scale acquisition of Spanish and EU citizenship without sufficient parliamentary oversight or requirements for an effective link with Spain. The petitioner considers that this may affect the integrity of the electoral system and the EU free-movement area. The petitioner asks the European Parliament to call on the European Commission to review the procedure, consider whether infringement proceedings should be initiated, and require stronger safeguards, including a centralised register, documentary verification and proof of an effective link with Spain.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1682%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1682/2026</a></p>",
     "summary": "The petitioner challenges the Spanish administrative procedure for granting nationality to descendants of Spanish nationals, arguing that it allows large-scale acquisition of Spanish and EU citizenshi…",
@@ -118700,7 +118683,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-11-18T20:08:52-06:00",
+    "last_seen": "2026-11-21T20:26:39-06:00",
     "offline_since": null,
     "tags": [
       "Spanish",
@@ -118714,7 +118697,7 @@
       "Large-scale",
       "Challenges"
     ],
-    "last_checked": "2026-11-18T20:08:52-06:00"
+    "last_checked": "2026-11-21T20:26:39-06:00"
   },
   "1666-2026": {
     "slug": "1666-2026",
@@ -118723,7 +118706,7 @@
     "title": "Petition 1666/2026: a coordinated EU response to the increase in criminal activity affecting the road transport sector",
     "started_by": "Corneliu Gabriel Vizireanu (Romanian)",
     "category": "Justice",
-    "country": "France",
+    "country": "Spain",
     "description_full": "<p>The petitioner alleges that organised criminal networks increasingly steal fuel and cargo from trucks in parking areas across the EU, particularly along transport corridors in France and Spain. The petitioner claims that thefts frequently occur even during daylight hours and that drivers are threatened or physically assaulted. The petitioner attributes this situation to permissive legislation, insufficient cross-border coordination and inadequate penalties, alleging that offenders caught in the act are swiftly released allowing them to resume their criminal activities. The petitioner claims that this impunity undermines drivers’ morale and causes substantial financial losses to transport companies. The petitioner calls for urgent EU action to harmonise and strengthen criminal legislation on fuel and cargo theft from commercial vehicles, classifying these offences as major security threats and introducing mandatory minimum prison sentences without the possibility of immediate release. The petitioner also requests increased and systematic police checks in motorway hotspots, mandatory funding and expansion of parking areas certified under EU standards for safe and secure truck parking areas (SSTPA), equipped with security personnel, effective video surveillance and controlled access, and a single European register of incidents to help police identify thefts committed by the same mobile criminal groups. The petitioner stresses that truck drivers’ safety at work and the protection of private property are fundamental rights in the EU.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1666%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1666/2026</a></p>",
     "summary": "The petitioner alleges that organised criminal networks increasingly steal fuel and cargo from trucks in parking areas across the EU, particularly along transport corridors in France and Spain. The pe…",
     "recipient": "Committee on Petitions of the European Parliament (PETI)",
@@ -118750,7 +118733,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-11-18T20:08:52-06:00",
+    "last_seen": "2026-11-21T20:26:39-06:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -118764,7 +118747,7 @@
       "Increasingly",
       "Particularly"
     ],
-    "last_checked": "2026-11-18T20:08:52-06:00"
+    "last_checked": "2026-11-21T20:26:39-06:00"
   },
   "1661-2026": {
     "slug": "1661-2026",
@@ -118800,7 +118783,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-11-18T20:08:52-06:00",
+    "last_seen": "2026-11-21T20:26:39-06:00",
     "offline_since": null,
     "tags": [
       "Temporary",
@@ -118814,7 +118797,7 @@
       "Administration",
       "Long-standing"
     ],
-    "last_checked": "2026-11-18T20:08:52-06:00"
+    "last_checked": "2026-11-21T20:26:39-06:00"
   },
   "1664-2026": {
     "slug": "1664-2026",
@@ -118850,7 +118833,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-11-18T20:08:52-06:00",
+    "last_seen": "2026-11-21T20:26:39-06:00",
     "offline_since": null,
     "tags": [
       "Water",
@@ -118864,7 +118847,7 @@
       "Bathing",
       "Bodies"
     ],
-    "last_checked": "2026-11-18T20:08:52-06:00"
+    "last_checked": "2026-11-21T20:26:39-06:00"
   },
   "1663-2026": {
     "slug": "1663-2026",
@@ -118872,7 +118855,7 @@
     "signatures_history": [],
     "title": "Petition 1663/2026: alleged breach of EU environmental legislation in the construction of a waste management facility",
     "started_by": "Gabriel Stelea (Romanian), on behalf of Biodharma SRL,",
-    "category": "Fundamental Rights",
+    "category": "Environment - Waste",
     "country": "Romania",
     "description_full": "<p>The petitioner alleges that local and national authorities are proceeding illegally and inappropriately by planning and authorizing an integrated waste management facility with a capacity of 169,000 tonnes/year in the middle of the 649-year-old community of Maieruș, Brașov County. The petitioner claims this project violates local traditions, cultural heritage, and European environmental protection norms. The facility is designed to process various types of waste, including recyclables and residual waste, and to treat biodegradable waste through anaerobic digestion with a capacity of 86,000 tonnes/year. According to the petitioner, the proposed site is in a non-industrial area dedicated to organic farming and free-range animal grazing, with no historical connection to industrial waste management. The community in Maieruș is recognized for its multi-ethnic heritage, respect for traditions, and the presence of a historic fortified evangelical church. The petitioner highlights that the proposed site is located near several ecologically protected areas, including nature reserves and sites of community importance, and is home to a rich natural fauna, including an active brown bear population. The petitioner claims that the authorities have decided to transport waste, including residual household waste, from Brașov to Maieruș, despite the significant distance and ecological sensitivity of the area. The petitioner urges the European Parliament to intervene urgently to prevent this action by local and national authorities, which they argue threatens the unique way of life, cultural heritage, and traditions of the Maieruș community. The petitioner has attached national-level efforts to block and revoke the authorities&#39; decision and expresses gratitude for any support and assistance.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1663%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1663/2026</a></p>",
     "summary": "The petitioner alleges that local and national authorities are proceeding illegally and inappropriately by planning and authorizing an integrated waste management facility with a capacity of 169,000 t…",
@@ -118900,7 +118883,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-11-18T20:08:52-06:00",
+    "last_seen": "2026-11-21T20:26:39-06:00",
     "offline_since": null,
     "tags": [
       "Waste",
@@ -118914,7 +118897,7 @@
       "Local",
       "Traditions"
     ],
-    "last_checked": "2026-11-18T20:08:52-06:00"
+    "last_checked": "2026-11-21T20:26:39-06:00"
   },
   "1674-2026": {
     "slug": "1674-2026",
@@ -118922,7 +118905,7 @@
     "signatures_history": [],
     "title": "Petition 1674/2026: the Severe Air Pollution and Health Risks Affecting Residents of Berceni and Southern Bucharest",
     "started_by": "Emilian-Gabriel Nica (Romanian)",
-    "category": "Environment",
+    "category": "Environment - Water",
     "country": "Romania",
     "description_full": "<p>The petitioner, a resident of Berceni, Ilfov County, Romania, alleges that the Vidra landfill, located near residential areas in southern Bucharest, has caused serious and persistent pollution for many years, affecting residents of Berceni, Vidra and neighbouring communities. The petitioner describes strong and often unbearable odours, particularly at night and during warm weather, and claims that the air frequently becomes difficult to breathe. The petitioner reports that residents experience headaches, nausea, dizziness, eye and throat irritation, breathing difficulties, worsening asthma and allergies, sleep disturbances, stress and mental health effects. The petitioner considers that this situation violates the fundamental right to health and to a clean and safe environment and may breach Directive 2008/98/EC on waste, Directive 1999/31/EC on the landfill of waste, Articles 35 and 37 of the EU Charter of Fundamental Rights, and the precautionary and prevention principles of EU environmental policy. The petitioner alleges that, despite numerous public complaints and longstanding awareness among Romanian authorities and the media, effective solutions and sufficient protective measures have not been implemented. The petitioner requests that the European institutions investigate the situation, verify Romanian authorities’ compliance with EU environmental legislation, assess and monitor the impact on public health, and require urgent and effective measures to stop the pollution and protect affected residents.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1674%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1674/2026</a></p>",
     "summary": "The petitioner, a resident of Berceni, Ilfov County, Romania, alleges that the Vidra landfill, located near residential areas in southern Bucharest, has caused serious and persistent pollution for man…",
@@ -118950,7 +118933,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-11-18T20:08:52-06:00",
+    "last_seen": "2026-11-21T20:26:39-06:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -118964,7 +118947,7 @@
       "Alleges",
       "Vidra"
     ],
-    "last_checked": "2026-11-18T20:08:52-06:00"
+    "last_checked": "2026-11-21T20:26:39-06:00"
   },
   "1738-2026": {
     "slug": "1738-2026",
