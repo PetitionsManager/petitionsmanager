@@ -31,14 +31,17 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-11-21T20:28:29-06:00",
-    "petition_count": 1968,
-    "available": 1906,
-    "new_petitions_last_run": [],
+    "generated_at": "2026-11-23T08:09:28-06:00",
+    "petition_count": 1970,
+    "available": 1908,
+    "new_petitions_last_run": [
+      "1937-2026",
+      "1936-2026"
+    ],
     "bilanz": {
-      "stand": "2026-11-21T20:28:28-06:00",
-      "gefunden": 1906,
-      "im_bestand": 1906,
+      "stand": "2026-11-23T08:09:28-06:00",
+      "gefunden": 1908,
+      "im_bestand": 1908,
       "unbrauchbar": 0,
       "verworfen": 0,
       "dublette": 0,
@@ -46,14 +49,14 @@
       "zurueckgestellt": 0,
       "offen": 0,
       "offene_beispiele": [],
-      "bestand_gesamt": 1968,
+      "bestand_gesamt": 1970,
       "bestand_ausserhalb": 62
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-11-21T20:28:28-06:00",
-        "gesamt": 1968,
-        "online": 1968,
+        "zeit": "2026-11-23T08:09:28-06:00",
+        "gesamt": 1970,
+        "online": 1970,
         "offline": 0,
         "ohne_titel": 0,
         "platzhalter": 0,
@@ -65,13 +68,13 @@
         "mit_code_im_text": 0,
         "mit_ballast_in_kurzfassung": 0,
         "herkunft": "lokal_cron",
-        "neu": 0
+        "neu": 2
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-11-21T20:28:28-06:00",
-      "gesamt": 1968,
-      "online": 1968,
+      "zeit": "2026-11-23T08:09:28-06:00",
+      "gesamt": 1970,
+      "online": 1970,
       "offline": 0,
       "ohne_titel": 0,
       "platzhalter": 0,
@@ -83,19 +86,19 @@
       "mit_code_im_text": 0,
       "mit_ballast_in_kurzfassung": 0
     },
-    "verlauf_felder_ab": "2026-11-21T20:28:28-06:00",
+    "verlauf_felder_ab": "2026-11-23T08:09:28-06:00",
     "befunde": [
       {
         "stufe": "hinweis",
         "thema": "Startdatum ist ein Verfahrensdatum",
-        "text": "Tagesgenaues Datum bei 1007 von 1968 Sätzen; es ist das Zulässigkeitsdatum aus der Mitteilung an die Mitglieder, nicht der Start der Petition. Das jüngste ist 61 Tage alt (2026-09-21) — bauartbedingt, weil das Dokument erst mit der Kommissionsantwort entsteht. Der Altersmelder ist hier deshalb ausge",
-        "zeit": "2026-11-21T20:28:28-06:00",
+        "text": "Tagesgenaues Datum bei 1007 von 1970 Sätzen; es ist das Zulässigkeitsdatum aus der Mitteilung an die Mitglieder, nicht der Start der Petition. Das jüngste ist 63 Tage alt (2026-09-21) — bauartbedingt, weil das Dokument erst mit der Kommissionsantwort entsteht. Der Altersmelder ist hier deshalb ausge",
+        "zeit": "2026-11-23T08:09:28-06:00",
         "thema_en": "Start date is a procedural date",
-        "text_en": "Day-exact date on 1007 of 1968 records; it is the date of admissibility from the Notice to Members, not the start of the petition. The newest is 61 days old (2026-09-21) — by design, as the document is only drawn up once the Commission has replied. The ageing check is therefore skipped here."
+        "text_en": "Day-exact date on 1007 of 1970 records; it is the date of admissibility from the Notice to Members, not the start of the petition. The newest is 63 days old (2026-09-21) — by design, as the document is only drawn up once the Commission has replied. The ageing check is therefore skipped here."
       }
     ],
     "health_warning": null,
-    "online_count": 1968
+    "online_count": 1970
   },
   "0474-2026": {
     "slug": "0474-2026",
@@ -118955,7 +118958,7 @@
     "signatures_history": [],
     "title": "Petition 1738/2026: transparency of future CO₂ removal liabilities",
     "started_by": "Jan Kechel (German)",
-    "category": "Institutions",
+    "category": "Environment - Protection and Preservation",
     "country": "Germany",
     "description_full": "<p>The petitioner raises concerns about the alleged lack of transparency regarding future CO₂ removal liabilities arising from authorised fossil fuel emissions under the European Climate Law. According to the petitioner, the legally binding objective of climate neutrality by 2050 implies that fossil CO₂ emissions authorised today must eventually be removed from the atmosphere, creating future financial obligations for public authorities. The petitioner claims that these liabilities are neither recorded nor quantified or disclosed in Member States&#39; public accounts or in the EU&#39;s financial management. Referring to cases in Germany, the petitioner argues that no authority assumes responsibility for recording these obligations, resulting in a structural transparency gap. The petitioner further claims that these unrecorded liabilities shift financial burdens onto future generations. The petitioner calls on the European Parliament to request that the Commission examine whether such liabilities should be identified, quantified and disclosed at EU and Member State level, clarify which authorities are responsible for their recording, and encourage the European Court of Auditors to examine the issue in the context of EU financial management.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1738%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1738/2026</a></p>",
     "summary": "The petitioner raises concerns about the alleged lack of transparency regarding future CO₂ removal liabilities arising from authorised fossil fuel emissions under the European Climate Law. According t…",
@@ -118983,7 +118986,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-11-19T09:59:51-06:00",
+    "last_seen": "2026-11-23T08:06:55-06:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -118997,7 +119000,7 @@
       "Climate",
       "Removal"
     ],
-    "last_checked": "2026-11-19T09:59:51-06:00"
+    "last_checked": "2026-11-23T08:06:55-06:00"
   },
   "1709-2026": {
     "slug": "1709-2026",
@@ -119005,7 +119008,7 @@
     "signatures_history": [],
     "title": "Petition 1709/2026: alleged breach of Directive (EU) 2018/2001 on the promotion of the use of energy from renewable sources in Cyprus",
     "started_by": "Rene Schellhorn (German)",
-    "category": "Energy",
+    "category": "Consumer Rights",
     "country": "Cyprus",
     "description_full": "<p>The petitioner alleges that the Electricity Authority of Cyprus (EAC) cancelled 4,101 kWh of accumulated solarenergy credits from his netmetering account in March 2026 without remuneration, written notice or an itemised calculation. The petitioner argues that the Cyprus netmetering framework – CERA Decision 28/2020 and Law 107(I)/2022, which transposes the Renewable Energy Directive (RED II) – permits such cancellations, but this practice conflicts with Article 21(2)(d) of Directive 2018/2001, which requires selfconsumers to receive remuneration reflecting the market value of the electricity they feed into the grid. The petitioner argues that a stated threeyear clearing rule was applied to an account of only 15 months old, indicating a systemwide simultaneous clearing, allegedly contrary to the authority’s own policy. The petitioner refers to the opinion of “Your Europe” on his case that allegedly concluded that the unconditional deletion of energy credits is incompatible with the RED II provisions and raised concerns about legitimate expectations and legal certainty. The petitioner notes that the clearing occurred before the 2026 amendment to the Renewable Energy Law entered into force and before a ministerial decree on surpluselectricity management was issued, leaving the regulatory basis undefined. The petitioner requests an assessment of the compatibility of the Cypriot netmetering rules with RED II.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1709%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1709/2026</a></p>",
     "summary": "The petitioner alleges that the Electricity Authority of Cyprus (EAC) cancelled 4,101 kWh of accumulated solarenergy credits from his netmetering account in March 2026 without remuneration, written no…",
@@ -119033,7 +119036,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-11-19T09:59:51-06:00",
+    "last_seen": "2026-11-23T08:06:55-06:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -119047,7 +119050,7 @@
       "Renewable",
       "Clearing"
     ],
-    "last_checked": "2026-11-19T09:59:51-06:00"
+    "last_checked": "2026-11-23T08:06:55-06:00"
   },
   "1731-2026": {
     "slug": "1731-2026",
@@ -119083,7 +119086,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-11-19T09:59:51-06:00",
+    "last_seen": "2026-11-23T08:06:55-06:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -119097,7 +119100,7 @@
       "Greek",
       "Expiration"
     ],
-    "last_checked": "2026-11-19T09:59:51-06:00"
+    "last_checked": "2026-11-23T08:06:55-06:00"
   },
   "1761-2026": {
     "slug": "1761-2026",
@@ -119356,7 +119359,7 @@
     "title": "Petition 1820/2026: designating Maritsa-East in Bulgaria as an EU-wide critical grid stability asset",
     "started_by": "Svetoslav Proynov (Bulgarian), on behalf of Civic Initiative Protection of Maritsa-East, signed by 8,000 others,",
     "category": "Energy",
-    "country": "All EU countries",
+    "country": "Bulgaria",
     "description_full": "<p>The petitioner states that the European Commission, the European Parliament, and ENTSO-E must formally designate the Maritsa-East energy facility as Critical Grid Stability Asset to prevent blackouts in Southeast Europe. Being the easternmost synchronous node of the European grid, the complex provides essential system services like rotational inertia, reactive power, and dispatchable generation. In order to safeguard this strategic infrastructure, the petitioner calls for a temporary derogation from EU ETS carbon costs until a permanent compensation scheme is set up, as well as integrating the site into a future East-West electricity corridor under the TEN-E framework.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1820%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1820/2026</a></p>",
     "summary": "The petitioner states that the European Commission, the European Parliament, and ENTSO-E must formally designate the Maritsa-East energy facility as Critical Grid Stability Asset to prevent blackouts …",
     "recipient": "Committee on Petitions of the European Parliament (PETI)",
@@ -119383,7 +119386,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-11-19T09:59:51-06:00",
+    "last_seen": "2026-11-23T08:06:55-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -119397,7 +119400,7 @@
       "Parliament",
       "Blackouts"
     ],
-    "last_checked": "2026-11-19T09:59:51-06:00"
+    "last_checked": "2026-11-23T08:06:55-06:00"
   },
   "1817-2026": {
     "slug": "1817-2026",
@@ -119405,7 +119408,7 @@
     "signatures_history": [],
     "title": "Petition 1817/2026: alleged breach of EU legislation relating to access to safe drinking water in Selishten Dol, Bulgaria",
     "started_by": "Vladislav Vergilov (Bulgarian)",
-    "category": "Fundamental Rights",
+    "category": "Environment - Water",
     "country": "Bulgaria",
     "description_full": "<p>The petitioner asserts that Bulgaria has consistently failed to tackle a long-standing drinking water crisis in the village of Selishten Dol, directly breaching EU Directive 2020/2184, which provides for citizens’ right to access safe drinking water. Due to a system of asbestos-cement pipes which has been left decaying by the local water operator, residents must carry out maintenance themselves the best they can, leading to severe water shortages. The community is routinely left without water for weeks, while during summer water supplies are rationed to only a few hours once a week. Despite national media attention and a series of unfulfilled govern project announcements, Bulgarian officials have not provided any clear timeline or a permanent fix. As a consequence, the petitioner calls on the European Parliament to request a European Commission investigation into the alleged breaches and demand that the Bulgarian authorities draft a reconstruction plan.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1817%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1817/2026</a></p>",
     "summary": "The petitioner asserts that Bulgaria has consistently failed to tackle a long-standing drinking water crisis in the village of Selishten Dol, directly breaching EU Directive 2020/2184, which provides …",
@@ -119433,7 +119436,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-11-19T09:59:51-06:00",
+    "last_seen": "2026-11-23T08:06:55-06:00",
     "offline_since": null,
     "tags": [
       "Water",
@@ -119447,7 +119450,7 @@
       "Bulgarian",
       "Directive"
     ],
-    "last_checked": "2026-11-19T09:59:51-06:00"
+    "last_checked": "2026-11-23T08:06:55-06:00"
   },
   "1819-2026": {
     "slug": "1819-2026",
@@ -119483,7 +119486,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-11-19T09:59:51-06:00",
+    "last_seen": "2026-11-23T08:06:55-06:00",
     "offline_since": null,
     "tags": [
       "Water",
@@ -119497,7 +119500,7 @@
       "Area",
       "Non-compliance"
     ],
-    "last_checked": "2026-11-19T09:59:51-06:00"
+    "last_checked": "2026-11-23T08:06:55-06:00"
   },
   "1810-2026": {
     "slug": "1810-2026",
@@ -119533,7 +119536,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-11-19T09:59:51-06:00",
+    "last_seen": "2026-11-23T08:06:55-06:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -119547,7 +119550,7 @@
       "Justice",
       "Claims"
     ],
-    "last_checked": "2026-11-19T09:59:51-06:00"
+    "last_checked": "2026-11-23T08:06:55-06:00"
   },
   "1803-2026": {
     "slug": "1803-2026",
@@ -119555,7 +119558,7 @@
     "signatures_history": [],
     "title": "Petition 1803/2026: alleged abuse of temporary contracts in the Spanish judicial system and breach of Directive 1999/70/EC on fixed-term work",
     "started_by": "Eduardo Carmelo Rodriguez-Cano Gimenez-La Chica (Spanish), on behalf of “Plataforma libre change.org”,",
-    "category": "Justice",
+    "category": "Constitutional Affairs",
     "country": "Spain",
     "description_full": "<p>The petitioner denounces that for more than two decades the Spanish Administration of Justice has allegedly made abusive, discriminatory and arbitrary use of temporary judicial and prosecutorial staff.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1803%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1803/2026</a></p>",
     "summary": "The petitioner denounces that for more than two decades the Spanish Administration of Justice has allegedly made abusive, discriminatory and arbitrary use of temporary judicial and prosecutorial staff…",
@@ -119583,7 +119586,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-11-19T09:59:51-06:00",
+    "last_seen": "2026-11-23T08:06:55-06:00",
     "offline_since": null,
     "tags": [
       "Temporary",
@@ -119597,7 +119600,7 @@
       "Arbitrary",
       "Denounces"
     ],
-    "last_checked": "2026-11-19T09:59:51-06:00"
+    "last_checked": "2026-11-23T08:06:55-06:00"
   },
   "1812-2026": {
     "slug": "1812-2026",
@@ -119605,7 +119608,7 @@
     "signatures_history": [],
     "title": "Petition 1812/2026: the terms of bank loans in Swiss francs in Greece and alleged breach of Directive 93/13/EEC on unfair terms in consumer contracts",
     "started_by": "K. S. (Greek)",
-    "category": "Financial Services",
+    "category": "Economic and Monetary Affairs",
     "country": "Greece",
     "description_full": "<p>The petitioner alleges systemic breaches of Directive 93/13/EEC on unfair terms in consumer contracts in connection with a Swiss franc-denominated mortgage loan granted in Greece in 2007. According to the petitioner, the bank failed to provide adequate information on exchange rate risks and exploited borrowers’ limited financial knowledge, leading them to assume substantial financial obligations without understanding the consequences. The petitioner further argues that, during the Greek financial crisis, banks benefited from public recapitalisation while borrowers faced severe financial difficulties without corresponding relief. The petitioner also criticises recent national legislation for allegedly failing to ensure effective consumer protection and imposing conditions requiring borrowers to waive future legal claims under EU law. The petitioner therefore calls on the European Parliament to examine the alleged violations, link the petition to an existing case and urge the European Commission to initiate infringement proceedings against Greece for non-compliance with Directive 93/13/EEC.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1812%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1812/2026</a></p>",
     "summary": "The petitioner alleges systemic breaches of Directive 93/13/EEC on unfair terms in consumer contracts in connection with a Swiss franc-denominated mortgage loan granted in Greece in 2007. According to…",
@@ -119633,7 +119636,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-11-19T09:59:51-06:00",
+    "last_seen": "2026-11-23T08:06:55-06:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -119647,7 +119650,7 @@
       "Unfair",
       "Swiss"
     ],
-    "last_checked": "2026-11-19T09:59:51-06:00"
+    "last_checked": "2026-11-23T08:06:55-06:00"
   },
   "1823-2026": {
     "slug": "1823-2026",
@@ -119683,7 +119686,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-11-19T09:59:51-06:00",
+    "last_seen": "2026-11-23T08:06:55-06:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -119697,7 +119700,7 @@
       "Authorisation",
       "Requirements"
     ],
-    "last_checked": "2026-11-19T09:59:51-06:00"
+    "last_checked": "2026-11-23T08:06:55-06:00"
   },
   "1835-2026": {
     "slug": "1835-2026",
@@ -119705,7 +119708,7 @@
     "signatures_history": [],
     "title": "Petition 1835/2026: alleged violation of EU environmental legislation concerning the river Biała in Bielsk Podlaski, Poland",
     "started_by": "Urszula Kaczmarek (Polish)",
-    "category": "Institutions",
+    "category": "Environment - Pollution",
     "country": "Poland",
     "description_full": "<p>The petitioner denounces alleged systematic failure and institutional paralysis in Poland in enforcing EU environmental norms and protection procedures as well as the Water Framework Directive. The petitioner refers to the case of Biała River in Bielsk Podlaski (Podlaskie Voivodeship, Poland) between 2023 and 2026 and the allegedly persistent, intentional, and long-term pollution of it by a local industrial dairy production plant. According to the petitioner, the administrative process to stop this practice took nearly three years despite the alleged plant&#39;s exceedance of emission norms, falsification of automatic discharge system reports, and avoidance of cooperation with inspections. Although a decision was finally issued on 1 July 2026 to shut down the plant&#39;s main production line, allegedly due to public protests and biological evidence provided by the public, the years of inaction by the authorities allegedly led to severe degradation of the Biała River ecosystem on a section protected by the Natura 2000 program.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1835%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1835/2026</a></p>",
     "summary": "The petitioner denounces alleged systematic failure and institutional paralysis in Poland in enforcing EU environmental norms and protection procedures as well as the Water Framework Directive. The pe…",
@@ -119733,7 +119736,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-11-19T09:59:51-06:00",
+    "last_seen": "2026-11-23T08:06:55-06:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -119747,7 +119750,7 @@
       "Institutional",
       "Procedures"
     ],
-    "last_checked": "2026-11-19T09:59:51-06:00"
+    "last_checked": "2026-11-23T08:06:55-06:00"
   },
   "1860-2026": {
     "slug": "1860-2026",
@@ -119898,5 +119901,105 @@
       "Operating"
     ],
     "last_checked": "2026-11-20T22:11:01-06:00"
+  },
+  "1937-2026": {
+    "slug": "1937-2026",
+    "first_seen": "2026-11-23T08:06:55-06:00",
+    "signatures_history": [],
+    "title": "Petition 1937/2026: the compatibility of EU law with the proposed acquisition of the Czech airline Smartwings by the Turkish airline Pegasus",
+    "started_by": "Tomasz Obremski (Polish), on behalf of LOT Polish Airlines,",
+    "category": "Transport",
+    "country": "Czech Republic",
+    "description_full": "<p>The petitioner notes that in December 2025 Pegasus, a Turkish lowcost carrier, signed an agreement to acquire full control of České Aerolinie (CSA) and its subsidiary Smartwings, a group operating scheduled, charter and ACMI services in the Czech Republic, Poland, Slovakia, Hungary, Germany and other Member States, and generating approximately €1 billion in annual revenue. The acquisition, to be carried out through Pegasus Europe B.V., remains subject to a number of regulatory approvals. Between January and April 2026 mergercontrol filings were submitted in Germany, Poland, Slovakia, Türkiye, the Czech Republic and Hungary, while parallel submissions concerning Communitycarrier status and Air Operator Certificate (AOC) requirements were made to national civilaviation authorities and to the European Commission&#39;s DG MOVE. Foreigndirectinvestment notifications were also submitted to the Slovak and Czech authorities, and a filing made in March invoked the EU ForeignSubsidies Regulation (Regulation EU 2022/2560), alleging that Pegasus may have received statelinked subsidies exceeding the EU thresholds. The petitioner alleged that there are four interlinked concerns. First, the petitioner questions whether the transaction would comply with Regulation EC 1008/2008 arguing that, although Pegasus Europe is EUincorporated, ultimate ownership and decisionmaking remain with Turkish nationals, thereby raising questions regarding the “effective control” requirement and referring to the CJEU&#39;s judgement in Case C181/23. Second, the petitioner considers that publicly disclosed Turkish tax incentives and airportcharge reductions amounting to more than €400 million could constitute a foreign subsidy, potentially distorting competition in the internal market. Third, the petitioner raises concerns about possible regulatory asymmetries, arguing that non-EU carriers may not be subject to the same range of EU passenger-rights, labour, social and environmental requirements, including EU ETS, Fit for 55 and ReFuelEU measures, potentially resulting in competitive advantages and high combined market shares on certain routes to Türkiye, in some cases allegedly approaching 90%. Fourth, the petitioner raises concerns that the acquisition would give a nonEUcontrolled entity access to strategic aviation assets (including airport slots, AOCs and sensitive passenger and operational data) potentially rise to security, publicorder and dataprotection considerations Consequently, the petitioner asks the European Parliament to examine whether current EU aviation, competition and foreignsubsidy rules adequately safeguard Communitycarrier status, effective control and the integrity of the internal aviation market, to request Commission to provide observations on these matters, and to consider a coordinated EUwide review addressing competition, strategicasset protection and foreigndirectinvestment screening.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1937%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1937/2026</a></p>",
+    "summary": "The petitioner notes that in December 2025 Pegasus, a Turkish lowcost carrier, signed an agreement to acquire full control of České Aerolinie (CSA) and its subsidiary Smartwings, a group operating sch…",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:1937-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1937%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-11-23T08:09:16",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 1937/2026: zur Vereinbarkeit des EU-Rechts mit der geplanten Übernahme der tschechischen Fluggesellschaft Smartwings durch die türkische Fluggesellschaft Pegasus",
+        "summary": "Der Petent weist darauf hin, dass Pegasus, eine türkische Billigfluggesellschaft, im Dezember 2025 eine Vereinbarung über die Übernahme der vollständigen Kontrolle über České Aerolinie (CSA) und ihre …",
+        "description_full": "<p>Der Petent weist darauf hin, dass Pegasus, eine türkische Billigfluggesellschaft, im Dezember 2025 eine Vereinbarung über die Übernahme der vollständigen Kontrolle über České Aerolinie (CSA) und ihre Tochtergesellschaft Smartwings, eine Fluggesellschaft, die Linienflüge, Charterflüge und ACMI-Dienste in der Tschechischen Republik, Polen, der Slowakei, Ungarn, Deutschland und anderen Mitgliedstaaten anbietet und jährliche Einnahmen in Höhe von rund 1 Mrd. EUR generiert, unterzeichnet habe. Die Übernahme durch Pegasus Europe B.V. unterliege einer Reihe von behördlichen Genehmigungen. Zwischen Januar und April 2026 seien Fusionskontrollanträge in Deutschland, Polen, der Slowakei, der Türkei, der Tschechischen Republik und Ungarn eingereicht worden. Gleichzeitig seien auch Anträge in Bezug auf den Status von Luftfahrtunternehmen der Union und die Anforderungen an Luftverkehrsbetreiberzeugnisse bei den nationalen Zivilluftfahrtbehörden und der GD MOVE der Europäischen Kommission gestellt worden. Zudem seien Mitteilungen über ausländische Direktinvestitionen bei den slowakischen und tschechischen Behörden vorgelegt worden, und in einem im März eingereichten Antrag sei auf die EU-Verordnung über drittstaatliche Subventionen (Verordnung (EU) 2022/2560) hingewiesen und geltend gemacht worden, dass Pegasus möglicherweise staatliche Subventionen erhalten habe, die die EU-Schwellenwerte überschritten. Der Petent macht geltend, dass es vier miteinander verknüpfte Bedenken gebe. Erstens fragt sich der Petent, ob die Transaktion mit der Verordnung (EG) Nr. 1008/2008 im Einklang stehe, da Pegasus Europe zwar in der EU niedergelassen sei, das letztendliche Eigentum und die Entscheidungsfindung jedoch bei türkischen Staatsangehörigen liege, was Fragen hinsichtlich des Erfordernisses einer „wirksamen Kontrolle“ aufwerfe. Er bezieht sich dabei auf das Urteil des EuGH in der Rechtssache C-181/23. Zweitens ist der Petent der Ansicht, dass öffentlich bekannt gemachte türkische Steueranreize und Ermäßigungen der Flughafengebühren in Höhe von mehr als 400 Mio. EUR eine drittstaatliche Subvention darstellen könnten, die den Wettbewerb im Binnenmarkt verzerren könnte. Drittens äußert der Petent Bedenken hinsichtlich möglicher regulatorischer Asymmetrien und macht geltend, dass Luftfahrtunternehmen aus Drittstaaten möglicherweise nicht den gleichen Anforderungen an die Fluggastrechte sowie arbeitsrechtlichen, sozialen und ökologischen Anforderungen, einschließlich des EU-EHS, des Pakets „Fit für 55“ und der ReFuelEU-Maßnahmen, unterliegen wie Luftfahrtunternehmen aus der EU, was zu Wettbewerbsvorteilen und hohen gemeinsamen Marktanteilen auf bestimmten Strecken in die Türkei führen könnte, die sich in einigen Fällen mutmaßlich auf 90 % belaufen. Viertens äußert der Petent Bedenken, dass die Übernahme einer nicht von der EU kontrollierten Stelle Zugang zu strategischen Luftfahrtressourcen (einschließlich Flughafenzeitnischen, Luftverkehrsbetreiberzeugnissen sowie sensiblen Fluggast- und Betriebsdaten) verschaffen würde, was möglicherweise zu Risiken in den Bereichen Sicherheit, öffentliche Ordnung und Datenschutz führen könnte. Daher fordert der Petent das Europäische Parlament auf, zu prüfen, ob die derzeitigen EU-Vorschriften in den Bereichen Luftfahrt, Wettbewerb und drittstaatliche Subventionen den Status von Luftfahrtunternehmen der Union, eine wirksame Kontrolle und die Integrität des Luftverkehrsbinnenmarkts angemessen schützen. Zudem solle das Europäische Parlament die Kommission um Stellungnahme zu diesen Fragen ersuchen und eine koordinierte EU-weite Überprüfung in Bezug auf Wettbewerb, den Schutz strategischer Vermögenswerte und die Überprüfung ausländischer Direktinvestitionen in Erwägung zu ziehen.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=1937%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1937/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=1937%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-11-23T08:06:55-06:00",
+    "offline_since": null,
+    "tags": [
+      "Petitioner",
+      "Pegasus",
+      "Turkish",
+      "Control",
+      "Czech",
+      "Acquisition",
+      "Competition",
+      "Potentially",
+      "Regulation",
+      "Smartwings"
+    ],
+    "last_checked": "2026-11-23T08:06:55-06:00"
+  },
+  "1936-2026": {
+    "slug": "1936-2026",
+    "first_seen": "2026-11-23T08:06:55-06:00",
+    "signatures_history": [],
+    "title": "Petition 1936/2026: environmental pollution and the quality of drinking water in the overseas French territories of Martinique and Guadeloupe",
+    "started_by": "Sandra Boulogne (French), on behalf of Alliance Caraïbes Souveraine,",
+    "category": "Environment - Pollution",
+    "country": "France",
+    "description_full": "<p>The petitioner raises concerns about serious and persistent public health and environmental problems in Martinique and Guadeloupe, outermost regions of the EU. The petitioner highlights widespread contamination by chlordecone, a pesticide formerly used in banana plantations, allegedly affecting over 90% of the population and posing long-term health risks, including cancer and reproductive disorders. The petitioner also denounces the recurrent accumulation of sargassum seaweed, which releases toxic gases and affects public health and living conditions, as well as persistent problems with access to safe drinking water in connection with which the petitioner reports having lodged a complaint with the European Commission concerning France&#39;s alleged failure to comply with Directive (EU) 2020/2184 on the quality of water intended for human consumption in Guadeloupe. Referring to findings of the European Committee of Social Rights and the extension of the European Social Charter to French overseas territories, the petitioner argues that residents of these regions have historically received a lower level of protection than those in mainland France. The petitioner therefore calls on the European Commission to assess France&#39;s compliance with applicable EU environmental and drinking water legislation, and recommend measures to ensure safe drinking water, environmental decontamination, effective management of sargassum, enhanced health monitoring and compensation for affected populations. The petitioner also calls for Article 349 TFEU to be applied in a manner that ensures equal protection for residents of the EU&#39;s outermost regions.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1936%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1936/2026</a></p>",
+    "summary": "The petitioner raises concerns about serious and persistent public health and environmental problems in Martinique and Guadeloupe, outermost regions of the EU. The petitioner highlights widespread con…",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:1936-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1936%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-11-23T08:09:23",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 1936/2026: zur Umweltverschmutzung und zur Trinkwasserqualität in den französischen Überseegebieten Martinique und Guadeloupe",
+        "summary": "Die Petentin bringt ihre Besorgnis über schwerwiegende und anhaltende Probleme im Bereich der öffentlichen Gesundheit und der Umwelt in den Gebieten in äußerster Randlage der EU Martinique und Guadelo…",
+        "description_full": "<p>Die Petentin bringt ihre Besorgnis über schwerwiegende und anhaltende Probleme im Bereich der öffentlichen Gesundheit und der Umwelt in den Gebieten in äußerster Randlage der EU Martinique und Guadeloupe zum Ausdruck. Die Petentin weist auf die verbreitete Kontamination mit Chlordecon – einem Pestizid, das früher auf Bananenplantagen verwendet worden sei – hin, die mutmaßlich mehr als 90 % der Bevölkerung betreffe und langfristige Gesundheitsrisiken, einschließlich Krebs und Fortpflanzungsstörungen, mit sich bringe. Die Petentin prangert auch die wiederholte Anhäufung von Braunalgen an, die giftige Gase freisetzen und sich auf die öffentliche Gesundheit und die Lebensbedingungen auswirken würden, sowie anhaltende Probleme beim Zugang zu sauberem Trinkwasser, wozu die Petentin laut eigenen Angaben bei der Kommission eine Beschwerde über den mutmaßlichen Verstoß Frankreichs gegen die Richtlinie (EU) 2020/2184 über die Qualität von Wasser für den menschlichen Gebrauch in Guadeloupe eingebracht hat. Unter Bezugnahme auf Erkenntnisse des Europäischen Ausschusses für soziale Rechte und die Ausweitung der Europäischen Sozialcharta auf die französischen überseeischen Gebiete führt die Petentin an, dass die Einwohnerinnen und Einwohner dieser Regionen in der Vergangenheit ein geringeres Schutzniveau genossen hätten als die des französischen Festlands. Die Petentin fordert die Kommission daher auf, die Einhaltung der geltenden Umwelt- und Trinkwasservorschriften der EU durch Frankreich zu bewerten und Maßnahmen zu empfehlen, um sicheres Trinkwasser, die Dekontaminierung der Umwelt, eine wirksame Bekämpfung von Braunalgen, eine verstärkte Gesundheitsüberwachung und die Entschädigung der betroffenen Bevölkerung zu gewährleisten. Die Petentin fordert ferner, dass Artikel 349 AEUV in einer Weise angewandt wird, die gleichen Schutz für die Einwohnerinnen und Einwohner der Gebiete in äußerster Randlage der EU sicherstellt.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=1936%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1936/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=1936%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-11-23T08:06:55-06:00",
+    "offline_since": null,
+    "tags": [
+      "Petitioner",
+      "Environmental",
+      "Health",
+      "Water",
+      "Guadeloupe",
+      "Drinking",
+      "European",
+      "Regions",
+      "Martinique",
+      "Persistent"
+    ],
+    "last_checked": "2026-11-23T08:06:55-06:00"
   }
 }
