@@ -31,19 +31,14 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-11-23T13:49:09-06:00",
+    "generated_at": "2026-11-23T18:05:42-06:00",
     "petition_count": 2887,
-    "available": 1696,
-    "new_petitions_last_run": [
-      "basketball-im-sternwartpark-ermoeglichen-ein-geeigneter-boden-muss-her",
-      "4-millionen-euro-fuer-zweifall-jetzt-muss-das-buergerhaus-moeglich-werden",
-      "verbot-von-zuckerzusaetzen-in-vogelfutter-klare-warnhinweise-und-bessere-tierarzt-standards",
-      "aeschi-und-graber-sind-keine-angemessenen-kandidaten-fuer-den-bundesrat"
-    ],
+    "available": 1689,
+    "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-11-23T13:49:08-06:00",
-      "gefunden": 1696,
-      "im_bestand": 1696,
+      "stand": "2026-11-23T18:05:41-06:00",
+      "gefunden": 1689,
+      "im_bestand": 1689,
       "unbrauchbar": 0,
       "verworfen": 0,
       "dublette": 0,
@@ -52,7 +47,7 @@
       "offen": 0,
       "offene_beispiele": [],
       "bestand_gesamt": 2887,
-      "bestand_ausserhalb": 1191
+      "bestand_ausserhalb": 1198
     },
     "lauf_verlauf": [
       {
@@ -71,10 +66,27 @@
         "mit_ballast_in_kurzfassung": 0,
         "herkunft": "lokal_cron",
         "neu": 4
+      },
+      {
+        "zeit": "2026-11-23T18:05:41-06:00",
+        "gesamt": 2887,
+        "online": 2887,
+        "offline": 0,
+        "ohne_titel": 0,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 0,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 2872,
+        "juengstes_start": "2026-11-22",
+        "mit_code_im_text": 0,
+        "mit_ballast_in_kurzfassung": 0,
+        "herkunft": "lokal_cron",
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-11-23T13:49:08-06:00",
+      "zeit": "2026-11-23T18:05:41-06:00",
       "gesamt": 2887,
       "online": 2887,
       "offline": 0,
