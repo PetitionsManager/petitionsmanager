@@ -645,7 +645,10 @@ window.PM_TEXTS = {
          „Other country", und core._LAND_NAMEN bildet sie auf das von
          ISO-3166-1 freigehaltene ZZ ab. Der Name muss das sagen — ein
          erfundener Staatsname wäre hier schlimmer als ein nacktes Kürzel. */
-      VE: "Venezuela", ZZ: "Anderes Land"
+      /* PS ist anders als ZZ ein echtes ISO-Kürzel (mit Flagge). Der Name
+         folgt der Beschriftung des PETI-Registers, nicht dem ISO-Staatsnamen
+         „Staat Palästina" — die Quelle sagt „Palestinian territories". */
+      VE: "Venezuela", ZZ: "Anderes Land", PS: "Palästinensische Gebiete"
     },
 
     nav: {
@@ -1278,7 +1281,9 @@ window.PM_TEXTS = {
       AU: "Australia", LI: "Liechtenstein", TR: "Türkiye",
       /* See the German block: ZZ is not a country but the PETI register's
          catch-all bucket, mapped to the ISO-3166-1 user-assigned code. */
-      VE: "Venezuela", ZZ: "Other country"
+      /* See the German block: PS is a real ISO code (with a flag), unlike ZZ.
+         The name follows the PETI register's own wording. */
+      VE: "Venezuela", ZZ: "Other country", PS: "Palestinian territories"
     },
 
     nav: {

@@ -911,6 +911,22 @@ _LAND_NAMEN = {
     # damit auf denselben Wert zurückgeführt, den sie behauptet. Deutsch und
     # englisch schreiben das Land gleich, ein Schlüssel genügt also.
     "venezuela": "VE",
+    # Am 25.11.2026 nachgetragen, gleiche Lage wie Venezuela darüber: der
+    # Melder nannte „'Palestinian territories'×1". Nachgemessen am Stand
+    # 3d6a4ff über ALLE 21 Stores (31.799 Sätze, davon 18.067 mit zuordenbarem
+    # country): genau ein Satz, europarl, status=online — und kein zweiter
+    # unzuordenbarer Wert. Die Beschriftung kommt wortgleich vom PETI-Register.
+    # ISO-3166-1 führt „PS" für „Palestine, State of"; das ist ein echtes
+    # Kürzel mit Flagge, deshalb braucht es hier KEINE app.js-Ausnahme wie ZZ.
+    # ⚠️ texts.js nennt bewusst die Wortwahl der Quelle („Palästinensische
+    # Gebiete" / „Palestinian territories") und nicht den ISO-Staatsnamen —
+    # dieselbe Regel wie bei ZZ: kein Anzeigename, den die Quelle nicht sagt.
+    # 💡 Dabei nachgemessen: EIN Satz bei Change.org trug den Rohwert „PS"
+    # schon vorher, und land_code() reicht zweibuchstabige Werte unverändert
+    # durch — er war also nie „nicht zuordenbar", bekam aber bis heute keinen
+    # Anzeigenamen und erschien als nacktes Kürzel. Der texts.js-Eintrag
+    # schließt damit zwei Lücken, nicht nur die gemeldete.
+    "palestinian territories": "PS",
     # ⚠️ KEINE Staaten, sondern überstaatliche Angaben — 30 der 34 gemeldeten
     # Sätze. ISO-3166-1 reserviert „EU" ausdrücklich für die Europäische Union,
     # und land_code() reicht zweibuchstabige Werte ohnehin unverändert durch;
