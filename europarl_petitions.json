@@ -31,16 +31,20 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-11-26T06:46:02-06:00",
-    "petition_count": 1971,
-    "available": 1908,
+    "generated_at": "2026-11-26T11:07:43-06:00",
+    "petition_count": 1976,
+    "available": 1913,
     "new_petitions_last_run": [
-      "1998-2026"
+      "1966-2026",
+      "1967-2026",
+      "1955-2026",
+      "1970-2026",
+      "1974-2026"
     ],
     "bilanz": {
-      "stand": "2026-11-26T06:46:01-06:00",
-      "gefunden": 1908,
-      "im_bestand": 1908,
+      "stand": "2026-11-26T11:07:43-06:00",
+      "gefunden": 1913,
+      "im_bestand": 1913,
       "unbrauchbar": 0,
       "verworfen": 0,
       "dublette": 0,
@@ -48,14 +52,14 @@
       "zurueckgestellt": 0,
       "offen": 0,
       "offene_beispiele": [],
-      "bestand_gesamt": 1971,
+      "bestand_gesamt": 1976,
       "bestand_ausserhalb": 63
     },
     "lauf_verlauf": [
       {
-        "zeit": "2026-11-26T06:46:01-06:00",
-        "gesamt": 1971,
-        "online": 1971,
+        "zeit": "2026-11-26T11:07:43-06:00",
+        "gesamt": 1976,
+        "online": 1976,
         "offline": 0,
         "ohne_titel": 0,
         "platzhalter": 0,
@@ -67,13 +71,13 @@
         "mit_code_im_text": 0,
         "mit_ballast_in_kurzfassung": 0,
         "herkunft": "lokal_cron",
-        "neu": 1
+        "neu": 5
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-11-26T06:46:01-06:00",
-      "gesamt": 1971,
-      "online": 1971,
+      "zeit": "2026-11-26T11:07:43-06:00",
+      "gesamt": 1976,
+      "online": 1976,
       "offline": 0,
       "ohne_titel": 0,
       "platzhalter": 0,
@@ -85,19 +89,19 @@
       "mit_code_im_text": 0,
       "mit_ballast_in_kurzfassung": 0
     },
-    "verlauf_felder_ab": "2026-11-26T06:46:01-06:00",
+    "verlauf_felder_ab": "2026-11-26T11:07:43-06:00",
     "befunde": [
       {
         "stufe": "hinweis",
         "thema": "Startdatum ist ein Verfahrensdatum",
-        "text": "Tagesgenaues Datum bei 1014 von 1971 Sätzen; es ist das Zulässigkeitsdatum aus der Mitteilung an die Mitglieder, nicht der Start der Petition. Das jüngste ist 30 Tage alt (2026-10-27) — bauartbedingt, weil das Dokument erst mit der Kommissionsantwort entsteht. Der Altersmelder ist hier deshalb ausge",
-        "zeit": "2026-11-26T06:46:01-06:00",
+        "text": "Tagesgenaues Datum bei 1014 von 1976 Sätzen; es ist das Zulässigkeitsdatum aus der Mitteilung an die Mitglieder, nicht der Start der Petition. Das jüngste ist 30 Tage alt (2026-10-27) — bauartbedingt, weil das Dokument erst mit der Kommissionsantwort entsteht. Der Altersmelder ist hier deshalb ausge",
+        "zeit": "2026-11-26T11:07:43-06:00",
         "thema_en": "Start date is a procedural date",
-        "text_en": "Day-exact date on 1014 of 1971 records; it is the date of admissibility from the Notice to Members, not the start of the petition. The newest is 30 days old (2026-10-27) — by design, as the document is only drawn up once the Commission has replied. The ageing check is therefore skipped here."
+        "text_en": "Day-exact date on 1014 of 1976 records; it is the date of admissibility from the Notice to Members, not the start of the petition. The newest is 30 days old (2026-10-27) — by design, as the document is only drawn up once the Commission has replied. The ageing check is therefore skipped here."
       }
     ],
     "health_warning": null,
-    "online_count": 1971
+    "online_count": 1976
   },
   "0474-2026": {
     "slug": "0474-2026",
@@ -118978,7 +118982,7 @@
     "signatures_history": [],
     "title": "Petition 1738/2026: transparency of future CO₂ removal liabilities",
     "started_by": "Jan Kechel (German)",
-    "category": "Environment - Protection and Preservation",
+    "category": "Institutions",
     "country": "Germany",
     "description_full": "<p>The petitioner raises concerns about the alleged lack of transparency regarding future CO₂ removal liabilities arising from authorised fossil fuel emissions under the European Climate Law. According to the petitioner, the legally binding objective of climate neutrality by 2050 implies that fossil CO₂ emissions authorised today must eventually be removed from the atmosphere, creating future financial obligations for public authorities. The petitioner claims that these liabilities are neither recorded nor quantified or disclosed in Member States&#39; public accounts or in the EU&#39;s financial management. Referring to cases in Germany, the petitioner argues that no authority assumes responsibility for recording these obligations, resulting in a structural transparency gap. The petitioner further claims that these unrecorded liabilities shift financial burdens onto future generations. The petitioner calls on the European Parliament to request that the Commission examine whether such liabilities should be identified, quantified and disclosed at EU and Member State level, clarify which authorities are responsible for their recording, and encourage the European Court of Auditors to examine the issue in the context of EU financial management.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1738%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1738/2026</a></p>",
     "summary": "The petitioner raises concerns about the alleged lack of transparency regarding future CO₂ removal liabilities arising from authorised fossil fuel emissions under the European Climate Law. According t…",
@@ -119006,7 +119010,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-11-23T08:06:55-06:00",
+    "last_seen": "2026-11-26T11:04:42-06:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -119020,7 +119024,7 @@
       "Climate",
       "Removal"
     ],
-    "last_checked": "2026-11-23T08:06:55-06:00"
+    "last_checked": "2026-11-26T11:04:42-06:00"
   },
   "1709-2026": {
     "slug": "1709-2026",
@@ -119028,7 +119032,7 @@
     "signatures_history": [],
     "title": "Petition 1709/2026: alleged breach of Directive (EU) 2018/2001 on the promotion of the use of energy from renewable sources in Cyprus",
     "started_by": "Rene Schellhorn (German)",
-    "category": "Consumer Rights",
+    "category": "Internal Market",
     "country": "Cyprus",
     "description_full": "<p>The petitioner alleges that the Electricity Authority of Cyprus (EAC) cancelled 4,101 kWh of accumulated solarenergy credits from his netmetering account in March 2026 without remuneration, written notice or an itemised calculation. The petitioner argues that the Cyprus netmetering framework – CERA Decision 28/2020 and Law 107(I)/2022, which transposes the Renewable Energy Directive (RED II) – permits such cancellations, but this practice conflicts with Article 21(2)(d) of Directive 2018/2001, which requires selfconsumers to receive remuneration reflecting the market value of the electricity they feed into the grid. The petitioner argues that a stated threeyear clearing rule was applied to an account of only 15 months old, indicating a systemwide simultaneous clearing, allegedly contrary to the authority’s own policy. The petitioner refers to the opinion of “Your Europe” on his case that allegedly concluded that the unconditional deletion of energy credits is incompatible with the RED II provisions and raised concerns about legitimate expectations and legal certainty. The petitioner notes that the clearing occurred before the 2026 amendment to the Renewable Energy Law entered into force and before a ministerial decree on surpluselectricity management was issued, leaving the regulatory basis undefined. The petitioner requests an assessment of the compatibility of the Cypriot netmetering rules with RED II.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1709%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1709/2026</a></p>",
     "summary": "The petitioner alleges that the Electricity Authority of Cyprus (EAC) cancelled 4,101 kWh of accumulated solarenergy credits from his netmetering account in March 2026 without remuneration, written no…",
@@ -119056,7 +119060,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-11-23T08:06:55-06:00",
+    "last_seen": "2026-11-26T11:04:42-06:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -119070,7 +119074,7 @@
       "Renewable",
       "Clearing"
     ],
-    "last_checked": "2026-11-23T08:06:55-06:00"
+    "last_checked": "2026-11-26T11:04:42-06:00"
   },
   "1731-2026": {
     "slug": "1731-2026",
@@ -119106,7 +119110,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-11-23T08:06:55-06:00",
+    "last_seen": "2026-11-26T11:04:42-06:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -119120,7 +119124,7 @@
       "Greek",
       "Expiration"
     ],
-    "last_checked": "2026-11-23T08:06:55-06:00"
+    "last_checked": "2026-11-26T11:04:42-06:00"
   },
   "1761-2026": {
     "slug": "1761-2026",
@@ -119406,7 +119410,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-11-23T08:06:55-06:00",
+    "last_seen": "2026-11-26T11:04:42-06:00",
     "offline_since": null,
     "tags": [
       "European",
@@ -119420,7 +119424,7 @@
       "Parliament",
       "Blackouts"
     ],
-    "last_checked": "2026-11-23T08:06:55-06:00"
+    "last_checked": "2026-11-26T11:04:42-06:00"
   },
   "1817-2026": {
     "slug": "1817-2026",
@@ -119428,7 +119432,7 @@
     "signatures_history": [],
     "title": "Petition 1817/2026: alleged breach of EU legislation relating to access to safe drinking water in Selishten Dol, Bulgaria",
     "started_by": "Vladislav Vergilov (Bulgarian)",
-    "category": "Environment - Water",
+    "category": "Food Safety",
     "country": "Bulgaria",
     "description_full": "<p>The petitioner asserts that Bulgaria has consistently failed to tackle a long-standing drinking water crisis in the village of Selishten Dol, directly breaching EU Directive 2020/2184, which provides for citizens’ right to access safe drinking water. Due to a system of asbestos-cement pipes which has been left decaying by the local water operator, residents must carry out maintenance themselves the best they can, leading to severe water shortages. The community is routinely left without water for weeks, while during summer water supplies are rationed to only a few hours once a week. Despite national media attention and a series of unfulfilled govern project announcements, Bulgarian officials have not provided any clear timeline or a permanent fix. As a consequence, the petitioner calls on the European Parliament to request a European Commission investigation into the alleged breaches and demand that the Bulgarian authorities draft a reconstruction plan.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1817%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1817/2026</a></p>",
     "summary": "The petitioner asserts that Bulgaria has consistently failed to tackle a long-standing drinking water crisis in the village of Selishten Dol, directly breaching EU Directive 2020/2184, which provides …",
@@ -119456,7 +119460,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-11-23T08:06:55-06:00",
+    "last_seen": "2026-11-26T11:04:42-06:00",
     "offline_since": null,
     "tags": [
       "Water",
@@ -119470,7 +119474,7 @@
       "Bulgarian",
       "Directive"
     ],
-    "last_checked": "2026-11-23T08:06:55-06:00"
+    "last_checked": "2026-11-26T11:04:42-06:00"
   },
   "1819-2026": {
     "slug": "1819-2026",
@@ -119506,7 +119510,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-11-23T08:06:55-06:00",
+    "last_seen": "2026-11-26T11:04:42-06:00",
     "offline_since": null,
     "tags": [
       "Water",
@@ -119520,7 +119524,7 @@
       "Area",
       "Non-compliance"
     ],
-    "last_checked": "2026-11-23T08:06:55-06:00"
+    "last_checked": "2026-11-26T11:04:42-06:00"
   },
   "1810-2026": {
     "slug": "1810-2026",
@@ -119556,7 +119560,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-11-23T08:06:55-06:00",
+    "last_seen": "2026-11-26T11:04:42-06:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -119570,7 +119574,7 @@
       "Justice",
       "Claims"
     ],
-    "last_checked": "2026-11-23T08:06:55-06:00"
+    "last_checked": "2026-11-26T11:04:42-06:00"
   },
   "1803-2026": {
     "slug": "1803-2026",
@@ -119578,7 +119582,7 @@
     "signatures_history": [],
     "title": "Petition 1803/2026: alleged abuse of temporary contracts in the Spanish judicial system and breach of Directive 1999/70/EC on fixed-term work",
     "started_by": "Eduardo Carmelo Rodriguez-Cano Gimenez-La Chica (Spanish), on behalf of “Plataforma libre change.org”,",
-    "category": "Constitutional Affairs",
+    "category": "Fundamental Rights",
     "country": "Spain",
     "description_full": "<p>The petitioner denounces that for more than two decades the Spanish Administration of Justice has allegedly made abusive, discriminatory and arbitrary use of temporary judicial and prosecutorial staff.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1803%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1803/2026</a></p>",
     "summary": "The petitioner denounces that for more than two decades the Spanish Administration of Justice has allegedly made abusive, discriminatory and arbitrary use of temporary judicial and prosecutorial staff…",
@@ -119606,7 +119610,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-11-23T08:06:55-06:00",
+    "last_seen": "2026-11-26T11:04:42-06:00",
     "offline_since": null,
     "tags": [
       "Temporary",
@@ -119620,7 +119624,7 @@
       "Arbitrary",
       "Denounces"
     ],
-    "last_checked": "2026-11-23T08:06:55-06:00"
+    "last_checked": "2026-11-26T11:04:42-06:00"
   },
   "1812-2026": {
     "slug": "1812-2026",
@@ -119656,7 +119660,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-11-23T08:06:55-06:00",
+    "last_seen": "2026-11-26T11:04:42-06:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -119670,7 +119674,7 @@
       "Unfair",
       "Swiss"
     ],
-    "last_checked": "2026-11-23T08:06:55-06:00"
+    "last_checked": "2026-11-26T11:04:42-06:00"
   },
   "1823-2026": {
     "slug": "1823-2026",
@@ -119706,7 +119710,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-11-23T08:06:55-06:00",
+    "last_seen": "2026-11-26T11:04:42-06:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -119720,7 +119724,7 @@
       "Authorisation",
       "Requirements"
     ],
-    "last_checked": "2026-11-23T08:06:55-06:00"
+    "last_checked": "2026-11-26T11:04:42-06:00"
   },
   "1835-2026": {
     "slug": "1835-2026",
@@ -119756,7 +119760,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-11-23T08:06:55-06:00",
+    "last_seen": "2026-11-26T11:04:42-06:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -119770,7 +119774,7 @@
       "Institutional",
       "Procedures"
     ],
-    "last_checked": "2026-11-23T08:06:55-06:00"
+    "last_checked": "2026-11-26T11:04:42-06:00"
   },
   "1860-2026": {
     "slug": "1860-2026",
@@ -119929,7 +119933,7 @@
     "title": "Petition 1937/2026: the compatibility of EU law with the proposed acquisition of the Czech airline Smartwings by the Turkish airline Pegasus",
     "started_by": "Tomasz Obremski (Polish), on behalf of LOT Polish Airlines,",
     "category": "Transport",
-    "country": "Czech Republic",
+    "country": "Slovakia",
     "description_full": "<p>The petitioner notes that in December 2025 Pegasus, a Turkish lowcost carrier, signed an agreement to acquire full control of České Aerolinie (CSA) and its subsidiary Smartwings, a group operating scheduled, charter and ACMI services in the Czech Republic, Poland, Slovakia, Hungary, Germany and other Member States, and generating approximately €1 billion in annual revenue. The acquisition, to be carried out through Pegasus Europe B.V., remains subject to a number of regulatory approvals. Between January and April 2026 mergercontrol filings were submitted in Germany, Poland, Slovakia, Türkiye, the Czech Republic and Hungary, while parallel submissions concerning Communitycarrier status and Air Operator Certificate (AOC) requirements were made to national civilaviation authorities and to the European Commission&#39;s DG MOVE. Foreigndirectinvestment notifications were also submitted to the Slovak and Czech authorities, and a filing made in March invoked the EU ForeignSubsidies Regulation (Regulation EU 2022/2560), alleging that Pegasus may have received statelinked subsidies exceeding the EU thresholds. The petitioner alleged that there are four interlinked concerns. First, the petitioner questions whether the transaction would comply with Regulation EC 1008/2008 arguing that, although Pegasus Europe is EUincorporated, ultimate ownership and decisionmaking remain with Turkish nationals, thereby raising questions regarding the “effective control” requirement and referring to the CJEU&#39;s judgement in Case C181/23. Second, the petitioner considers that publicly disclosed Turkish tax incentives and airportcharge reductions amounting to more than €400 million could constitute a foreign subsidy, potentially distorting competition in the internal market. Third, the petitioner raises concerns about possible regulatory asymmetries, arguing that non-EU carriers may not be subject to the same range of EU passenger-rights, labour, social and environmental requirements, including EU ETS, Fit for 55 and ReFuelEU measures, potentially resulting in competitive advantages and high combined market shares on certain routes to Türkiye, in some cases allegedly approaching 90%. Fourth, the petitioner raises concerns that the acquisition would give a nonEUcontrolled entity access to strategic aviation assets (including airport slots, AOCs and sensitive passenger and operational data) potentially rise to security, publicorder and dataprotection considerations Consequently, the petitioner asks the European Parliament to examine whether current EU aviation, competition and foreignsubsidy rules adequately safeguard Communitycarrier status, effective control and the integrity of the internal aviation market, to request Commission to provide observations on these matters, and to consider a coordinated EUwide review addressing competition, strategicasset protection and foreigndirectinvestment screening.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1937%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1937/2026</a></p>",
     "summary": "The petitioner notes that in December 2025 Pegasus, a Turkish lowcost carrier, signed an agreement to acquire full control of České Aerolinie (CSA) and its subsidiary Smartwings, a group operating sch…",
     "recipient": "Committee on Petitions of the European Parliament (PETI)",
@@ -119956,7 +119960,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-11-23T08:06:55-06:00",
+    "last_seen": "2026-11-26T11:04:42-06:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -119970,7 +119974,7 @@
       "Regulation",
       "Smartwings"
     ],
-    "last_checked": "2026-11-23T08:06:55-06:00"
+    "last_checked": "2026-11-26T11:04:42-06:00"
   },
   "1936-2026": {
     "slug": "1936-2026",
@@ -120006,7 +120010,7 @@
       "de": "vorhanden"
     },
     "status": "online",
-    "last_seen": "2026-11-23T08:06:55-06:00",
+    "last_seen": "2026-11-26T11:04:42-06:00",
     "offline_since": null,
     "tags": [
       "Petitioner",
@@ -120020,7 +120024,7 @@
       "Martinique",
       "Persistent"
     ],
-    "last_checked": "2026-11-23T08:06:55-06:00"
+    "last_checked": "2026-11-26T11:04:42-06:00"
   },
   "1998-2026": {
     "slug": "1998-2026",
@@ -120071,5 +120075,255 @@
       "Degradation"
     ],
     "last_checked": "2026-11-26T06:44:52-06:00"
+  },
+  "1966-2026": {
+    "slug": "1966-2026",
+    "first_seen": "2026-11-26T11:04:42-06:00",
+    "signatures_history": [],
+    "title": "Petition 1966/2026: accessibility and transparency in digital financial services",
+    "started_by": "Denim Katana (German)",
+    "category": "Consumer Rights",
+    "country": "Luxembourg",
+    "description_full": "<p>The petitioner invokes Article 9 of the UN Convention on the Rights of Persons with Disabilities, which obliges the contracting states to ensure that persons with disabilities have equal access to information and communication technologies as well as systems and services. The petitioner claims that major online payment service providers such as PayPal are increasingly blocking accounts of citizens through purely automated, AI-based algorithms. According to the petitioner, these verification procedures (often justified with KYC – Know Your Customer and AML – Anti-Money Laundering) are rigid and inflexible. When affected persons lodge an objection, they are dealt with by customer service using standardized, generic text modules. A human, individual examination does not take place in practice. In view of the petitioner this leads to massive, systemic discrimination against persons with disabilities, particularly persons with autism. The digital barriers and the rigid handling by customer service make it impossible for persons with impairments to communicate without barriers and on an equal footing. The petitioner therefore calls on the European Parliament and the Petitions Committee to revise the existing EU directives for financial service providers in order to eliminate serious deficiencies in the digital financial sector. The petitioner particularly demands the relaxation and flexibilization of internal verification rules, the right to human verification, full transparency regarding the specific reasons for a block, and the strengthening of supervisory authorities so that consumer complaints are no longer ignored or rejected due to bureaucracy.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1966%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1966/2026</a></p>",
+    "summary": "The petitioner invokes Article 9 of the UN Convention on the Rights of Persons with Disabilities, which obliges the contracting states to ensure that persons with disabilities have equal access to inf…",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:1966-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1966%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-11-26T11:07:13",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 1966/2026: zur Barrierefreiheit und Transparenz digitaler Finanzdienstleistungen",
+        "summary": "Der Petent beruft sich auf Artikel 9 des Übereinkommens der Vereinten Nationen über die Rechte von Menschen mit Behinderungen, nach dem die Vertragsstaaten dafür sorgen müssen, dass Menschen mit Behin…",
+        "description_full": "<p>Der Petent beruft sich auf Artikel 9 des Übereinkommens der Vereinten Nationen über die Rechte von Menschen mit Behinderungen, nach dem die Vertragsstaaten dafür sorgen müssen, dass Menschen mit Behinderungen gleichberechtigten Zugang zu Informations- und Kommunikationstechnologien sowie zu Systemen und Diensten haben. Der Petent macht geltend, dass große Online-Zahlungsdienstleister wie PayPal zunehmend Konten von Bürgerinnen und Bürgern auf der Grundlage rein automatisierter, KI-gestützter Algorithmen sperrten. Diese Überprüfungsverfahren, die häufig mit der Feststellung der Kundenidentität und der Bekämpfung der Geldwäsche begründet würden, seien starr und unflexibel. Widersprüche betroffener Personen würden vom Kundendienst mithilfe standardisierter, allgemeiner Textbausteine bearbeitet. Eine individuelle Überprüfung durch einen Menschen finde in der Praxis nicht statt. Nach Ansicht des Petenten führe dies zu einer massiven systemischen Diskriminierung von Menschen mit Behinderungen, insbesondere von Menschen mit Autismus. Aufgrund der digitalen Barrieren und der starren Handhabung durch den Kundendienst sei es für Menschen mit Beeinträchtigungen unmöglich, barrierefrei und gleichberechtigt zu kommunizieren. Der Petent fordert daher das Europäische Parlament und den Petitionsausschuss auf, die bestehenden EU-Richtlinien für Finanzdienstleister zu überarbeiten, um schwerwiegende Mängel im digitalen Finanzsektor zu beseitigen. Er fordert insbesondere eine Lockerung und Flexibilisierung der internen Überprüfungsvorschriften, das Recht auf Überprüfung durch einen Menschen, vollständige Transparenz in Bezug auf die konkreten Gründe für eine Sperrung sowie eine Stärkung der Aufsichtsbehörden, damit Verbraucherbeschwerden nicht mehr aus bürokratischen Gründen ignoriert oder abgewiesen werden.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=1966%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1966/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=1966%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-11-26T11:04:42-06:00",
+    "offline_since": null,
+    "tags": [
+      "Persons",
+      "Petitioner",
+      "Disabilities",
+      "Service",
+      "Verification",
+      "Financial",
+      "Digital",
+      "Equal",
+      "Particularly",
+      "Transparency"
+    ],
+    "last_checked": "2026-11-26T11:04:42-06:00"
+  },
+  "1967-2026": {
+    "slug": "1967-2026",
+    "first_seen": "2026-11-26T11:04:42-06:00",
+    "signatures_history": [],
+    "title": "Petition 1967/2026: alleged breach of EU environmental legislation in the La Feuillie landfill in Seine-Maritime,, France",
+    "started_by": "P. M. (French)",
+    "category": "Environment - Pollution",
+    "country": "France",
+    "description_full": "<p>The petitioner raises concerns about potential groundwater contamination linked to the former landfill site of La Feuillie, in the Manche department of France, which operated from 1974 to 2003 and reportedly received approximately 250,000 tonnes of waste annually. According to the petitioner, the landfill is located within the protection perimeter of the Hotot-Créances drinking water abstraction site, designated as a priority site in 2009, and above the aquifer supplying it. The petitioner reports having observed indications of possible pollution and having alerted the competent French authorities. The petitioner therefore calls on the European Parliament to examine the situation and assess whether EU legislation on the protection of water intended for human consumption is being correctly implemented.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1967%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1967/2026</a></p>",
+    "summary": "The petitioner raises concerns about potential groundwater contamination linked to the former landfill site of La Feuillie, in the Manche department of France, which operated from 1974 to 2003 and rep…",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:1967-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1967%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-11-26T11:07:19",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 1967/2026: zu einem mutmaßlichen Verstoß gegen das EU-Umweltrecht in der Deponie La Feuillie in Seine-Maritime (Frankreich)",
+        "summary": "Die Person, die diese Petition eingereicht hat, äußert Bedenken hinsichtlich einer möglichen Grundwasserverunreinigung im Zusammenhang mit der ehemaligen Abfalldeponie La Feuillie im französischen Dep…",
+        "description_full": "<p>Die Person, die diese Petition eingereicht hat, äußert Bedenken hinsichtlich einer möglichen Grundwasserverunreinigung im Zusammenhang mit der ehemaligen Abfalldeponie La Feuillie im französischen Departement Manche, die von 1974 bis 2003 betrieben worden sei und auf der Berichten zufolge jährlich etwa 250 000 Tonnen Abfälle abgelagert worden seien. Die Deponie befinde sich innerhalb des Schutzgebiets der Trinkwasserentnahmestelle Hotot-Créances, die 2009 als vorrangiger Standort ausgewiesen worden sei, sowie oberhalb des Grundwasserleiters, aus dem diese Entnahmestelle gespeist werde. Die Person, die diese Petition eingereicht hat, gibt an, Anzeichen für eine mögliche Verunreinigung festgestellt und die zuständigen französischen Behörden benachrichtigt zu haben. Die Person, die diese Petition eingereicht hat, fordert das Europäische Parlament daher auf, die Lage zu prüfen und zu bewerten, ob die EU-Rechtsvorschriften zum Schutz von Wasser für den menschlichen Gebrauch ordnungsgemäß umgesetzt werden.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=1967%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1967/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=1967%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-11-26T11:04:42-06:00",
+    "offline_since": null,
+    "tags": [
+      "Petitioner",
+      "Landfill",
+      "Site",
+      "Feuillie",
+      "France",
+      "Contamination",
+      "Groundwater",
+      "Legislation",
+      "Department",
+      "Protection"
+    ],
+    "last_checked": "2026-11-26T11:04:42-06:00"
+  },
+  "1955-2026": {
+    "slug": "1955-2026",
+    "first_seen": "2026-11-26T11:04:42-06:00",
+    "signatures_history": [],
+    "title": "Petition 1955/2026: allegedly illegal dumping of waste in Kalithea settlement, Thermaikos, Greece",
+    "started_by": "Panayiotis Georgiades (Greek)",
+    "category": "Environment",
+    "country": "Greece",
+    "description_full": "<p>The petitioner alleges that the Kalithea settlement in Thermaikos Municipality, Greece, suffers from severe, long-standing environmental degradation, including illegal waste dumping, asbestos contamination, and uncontrolled pollution. Despite repeated complaints, official reports, and legal obligations, the authorities, including police, regional administration, municipal government, and environmental inspectors, allegedly fail to act. According to the petitioner, public health is endangered by repeated fires, while illegal dumping continues unpunished. The petitioner argues the settlement should be declared a restricted zone until decontamination and requests an investigation into systemic failures in environmental protection and law enforcement.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1955%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1955/2026</a></p>",
+    "summary": "The petitioner alleges that the Kalithea settlement in Thermaikos Municipality, Greece, suffers from severe, long-standing environmental degradation, including illegal waste dumping, asbestos contamin…",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:1955-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1955%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-11-26T11:07:26",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 1955/2026: zur mutmaßlich unzulässigen Abfallablagerung in der Ortschaft Kallithea in Thermaikos (Griechenland)",
+        "summary": "Der Petent macht geltend, dass die Ortschaft Kallithea in der Gemeinde Thermaikos (Griechenland) unter schwerwiegender, seit Langem bestehender Umweltzerstörung leide, die unzulässige Abfallablagerung…",
+        "description_full": "<p>Der Petent macht geltend, dass die Ortschaft Kallithea in der Gemeinde Thermaikos (Griechenland) unter schwerwiegender, seit Langem bestehender Umweltzerstörung leide, die unzulässige Abfallablagerungen, Asbestkontamination und unkontrollierte Verschmutzung umfasse. Trotz wiederholter Beschwerden, offizieller Meldungen und rechtlicher Verpflichtungen würden die Behörden, einschließlich der Polizei, der Regionalverwaltung, der Kommunalverwaltung und der Umweltinspektoren, nicht tätig. Dem Petenten zufolge sei die öffentliche Gesundheit durch wiederholte Brände gefährdet, während die unzulässige Abfallablagerung weiterhin keine rechtlichen Konsequenzen habe. Er führt an, dass die Ortschaft bis zur Dekontaminierung zu einer Sperrzone erklärt werden sollte, und fordert eine Untersuchung systemischer Mängel beim Umweltschutz und beim Gesetzesvollzug.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=1955%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1955/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=1955%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-11-26T11:04:42-06:00",
+    "offline_since": null,
+    "tags": [
+      "Environmental",
+      "Petitioner",
+      "Settlement",
+      "Dumping",
+      "Illegal",
+      "Thermaikos",
+      "Including",
+      "Kalithea",
+      "Greece",
+      "Waste"
+    ],
+    "last_checked": "2026-11-26T11:04:42-06:00"
+  },
+  "1970-2026": {
+    "slug": "1970-2026",
+    "first_seen": "2026-11-26T11:04:42-06:00",
+    "signatures_history": [],
+    "title": "Petition 1970/2026: the Gronda Est project and its incompatibility with European sustainability and conservation obligations in Italy",
+    "started_by": "Alessandro Lovito (Italian)",
+    "category": "Environment - Impact Assessments",
+    "country": "Italy",
+    "description_full": "<p>The petitioner raises concerns about the proposed Gronda Est project (Turin Eastern Bypass), which would involve the construction of approximately 20 km of road infrastructure in the municipality of Pavarolo and the surrounding area, within the CollinaPo UNESCO Man and the Biosphere (MAB) Biosphere Reserve. The petitioner argues that the project would cause significant and potentially irreversible damage to the area&#39;s landscape, biodiversity and environmental quality, as well as adversely local tourism, property values and public health. The petitioner alleges that the project would be incompatible with the objectives of the UNESCO MAB Biosphere Reserve, the Italian Code of Cultural Heritage and Landscape, the EU Habitats Directive, the Environmental Impact Assessment Directive, the European Green Deal, the EU Biodiversity Strategy for 2030 and the European Climate Law. The petitioner further claims that the project would increase land take, road traffic, air pollution and noise, and expresses concern that the current feasibility study does not adequately assess less harmful alternatives, including improvements to rail transport and the development of cycling infrastructure. The petitioner calls on the European Commission to investigate the alleged breaches of EU environmental legislation and, if appropriate, initiate infringement proceedings against Italy. The petitioner also asks the European Parliament to discuss the project, calls on the Italian Government and the Piedmont Region to suspend it pending a comprehensive environmental assessment, and requests stronger landscape protection measures and a public debate on alternative mobility solutions.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1970%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1970/2026</a></p>",
+    "summary": "The petitioner raises concerns about the proposed Gronda Est project (Turin Eastern Bypass), which would involve the construction of approximately 20 km of road infrastructure in the municipality of P…",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:1970-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1970%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-11-26T11:07:32",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 1970/2026: zum Projekt Gronda Est und dessen Unvereinbarkeit mit den europäischen Nachhaltigkeits- und Erhaltungsverpflichtungen in Italien",
+        "summary": "Der Petent äußert Bedenken hinsichtlich des vorgeschlagenen Projekts Gronda Est (Ostumgehung Turin), das den Bau einer Straßeninfrastruktur von etwa 20 km Länge in der Gemeinde Pavarolo und Umgebung i…",
+        "description_full": "<p>Der Petent äußert Bedenken hinsichtlich des vorgeschlagenen Projekts Gronda Est (Ostumgehung Turin), das den Bau einer Straßeninfrastruktur von etwa 20 km Länge in der Gemeinde Pavarolo und Umgebung innerhalb des UNESCO-Biosphärenreservats „Mensch und Biosphäre“ (MAB) umfassen würde. Der Petent macht geltend, dass durch das Projekt die Landschaft, die biologische Vielfalt und die Umweltqualität des Gebiets erheblich und möglicherweise auch irreversibel geschädigt sowie der lokale Tourismus, der Wert von Immobilien und die öffentliche Gesundheit beeinträchtigt würden. Seinen Angaben zufolge sei das Projekt nicht mit den Zielen des UNESCO-Biosphärenreservats MAB, dem italienischen Kodex für Kulturerbe und Landschaft, der Habitat-Richtlinie der EU, der Richtlinie über die Umweltverträglichkeitsprüfung, dem europäischen Grünen Deal, der EU-Biodiversitätsstrategie für 2030 und dem Europäischen Klimagesetz vereinbar. Der Petent macht ferner geltend, dass durch das Projekt der Flächenverbrauch, der Straßenverkehr, die Luftverschmutzung und der Lärm zunehmen würden, und bringt seine Besorgnis darüber zum Ausdruck, dass in der derzeitigen Machbarkeitsstudie weniger schädliche Alternativen, einschließlich Verbesserungen des Schienenverkehrs und der Entwicklung der Radverkehrsinfrastruktur, nicht angemessen bewertet würden. Der Petent fordert die Kommission auf, die mutmaßlichen Verstöße gegen das EU-Umweltrecht zu untersuchen und gegebenenfalls ein Vertragsverletzungsverfahren gegen Italien einzuleiten. Außerdem ersucht der Petent das Europäische Parlament, sich mit dem Projekt zu befassen, fordert die italienische Regierung und die Region Piemont auf, das Projekt bis zu einer umfassenden Umweltprüfung auszusetzen, und verlangt stärkere Landschaftsschutzmaßnahmen und eine öffentliche Debatte über alternative Mobilitätslösungen.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=1970%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1970/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=1970%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-11-26T11:04:42-06:00",
+    "offline_since": null,
+    "tags": [
+      "Petitioner",
+      "Project",
+      "European",
+      "Environmental",
+      "Infrastructure",
+      "Biosphere",
+      "Landscape",
+      "Gronda",
+      "Road",
+      "Approximately"
+    ],
+    "last_checked": "2026-11-26T11:04:42-06:00"
+  },
+  "1974-2026": {
+    "slug": "1974-2026",
+    "first_seen": "2026-11-26T11:04:42-06:00",
+    "signatures_history": [],
+    "title": "Petition 1974/2026: alleged non-compliance with EU law by the Netherlands regarding temporary and migrant workers​",
+    "started_by": "D. N. (Polish) signed by one other person,",
+    "category": "Employment",
+    "country": "Netherlands",
+    "description_full": "<p>The petitioner, a Polish citizen who worked in the Netherlands through a temporary work agency, argues that the experience described in the petition highlights broader concerns regarding the possible non-compliance with, incorrect application and ineffective enforcement of EU legislation protecting temporary and migrant workers in the Netherlands. The petitioner raises several concerns regarding the employment conditions and practices of the agency. In particular, the employment contracts allegedly guaranteed 32 working hours per week, whereas the corresponding payslips (loonstroken) recorded only one contractual working hour per week, raising concerns about the transparency and predictability of the employment relationship. The petitioner also reports unclear deductions from wages for accommodation and health insurance, as well as debts allegedly accumulated and deducted from wages without adequate explanation. Furthermore, the agency is accused of failing to provide complete and transparent wage calculations and proper final settlements. The petitioner also highlights the workers’ dependence on the agency for accommodation, documentation and access to information, which allegedly placed them in a vulnerable position and made it difficult for them to assert their employment rights. Despite attempts to obtain assistance from the Dutch authorities and legal representatives, the petitioner considers that the complaints have not been adequately investigated and that the enforcement of the workers’ rights has been ineffective. The petitioner considers that these practices may infringe fundamental workers’ rights, including the right to fair and just working conditions, the right to an effective remedy and the right to free movement within the European Union. In particular, the petitioner refers to possible breaches of Directive (EU) 2019/1152 on transparent and predictable working conditions, Directive 2008/104/EC on temporary agency work, Article 45 TFEU and Regulation (EU) No 492/2011 on the free movement of workers, as well as Directive 2014/54/EU on measures facilitating the exercise of rights conferred on workers in the context of freedom of movement. The petitioner also invokes Articles 31 and 47 of the Charter of Fundamental Rights of the European Union, concerning fair and just working conditions and the right to an effective remedy and to a fair trial, and Article 19(1) TEU, in connection with the obligation to ensure effective judicial protection. As regards the steps taken to address the alleged shortcomings, the petitioner states that advice was sought from Your Europe Advice, which reportedly considered that the circumstances raised potentially significant issues under EU law. The petitioner also lodged a complaint with the European Commission and contacted several Dutch organisations and authorities, including the Netherlands Labour Authority (Nederlandse Arbeidsinspectie, SZW), FairWork, SNCU, SNF and NBBU. Furthermore, the petitioner sought legal representation and initiated court proceedings. However, the petitioner alleges that the temporary work agency has not fully complied with the court ruling, and that the matter therefore remains unresolved.</p><p><a href=\"https://www.europarl.europa.eu/petitions/en/petition/content/pdf?petitionNumber=1974%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1974/2026</a></p>",
+    "summary": "The petitioner, a Polish citizen who worked in the Netherlands through a temporary work agency, argues that the experience described in the petition highlights broader concerns regarding the possible …",
+    "recipient": "Committee on Petitions of the European Parliament (PETI)",
+    "campaign_id": "europarl:1974-2026",
+    "start_date": "2026",
+    "url": "https://www.europarl.europa.eu/petitions/en/petition/content/html?petitionNumber=1974%252F2026",
+    "kind": "petition",
+    "updates": [
+      {
+        "timestamp": "2026-11-26T11:07:38",
+        "text": "Status: Available to supporters"
+      }
+    ],
+    "lang": "en",
+    "i18n": {
+      "de": {
+        "title": "Petition 1974/2026: zur mutmaßlichen Nichteinhaltung des EU-Rechts durch die Niederlande in Bezug auf Zeit- und Wanderarbeitnehmer",
+        "summary": "Der Petent, ein polnischer Staatsangehöriger, der über ein Leiharbeitsunternehmen in den Niederlanden beschäftigt war, macht geltend, dass die in der Petition beschriebene Sachlage allgemeinere Bedenk…",
+        "description_full": "<p>Der Petent, ein polnischer Staatsangehöriger, der über ein Leiharbeitsunternehmen in den Niederlanden beschäftigt war, macht geltend, dass die in der Petition beschriebene Sachlage allgemeinere Bedenken hinsichtlich der möglichen Nichteinhaltung, fehlerhaften Anwendung und unwirksamen Durchsetzung der EU-Rechtsvorschriften zum Schutz von Zeit- und Wanderarbeitnehmern in den Niederlanden aufzeige. Der Petent äußert mehrere Bedenken hinsichtlich der Beschäftigungsbedingungen und -praktiken des Unternehmens. Insbesondere würde durch die Arbeitsverträge eine wöchentliche Arbeitszeit von 32 Arbeitsstunden garantiert, während in den entsprechenden Gehaltsabrechnungen (loonstroken) lediglich eine vertraglich geregelte Arbeitsstunde pro Woche ausgewiesen sei, was Bedenken hinsichtlich der Transparenz und Verlässlichkeit des Arbeitsverhältnisses aufwerfe. Der Petent berichtet auch über unklare Lohnabzüge für Unterkunft und Krankenversicherung sowie über Schulden, die angeblich angehäuft und ohne angemessene Erklärung vom Lohn abgezogen worden seien. Darüber hinaus wird dem Unternehmen vorgeworfen, keine vollständigen und transparenten Lohnberechnungen und keine ordnungsgemäßen endgültigen Abrechnungen vorgelegt zu haben. Der Petent hebt auch die Abhängigkeit der Arbeitnehmer vom Unternehmen im Hinblick auf Unterkunft, Dokumentation und Zugang zu Informationen hervor, die sie mutmaßlich in eine prekäre Lage gebracht und es ihnen erschwert habe, ihre Arbeitnehmerrechte geltend zu machen. Trotz der Versuche, Unterstützung von den niederländischen Behörden und Rechtsvertretern zu erhalten, ist der Petent der Ansicht, dass die Beschwerden nicht angemessen untersucht worden seien und dass die Durchsetzung der Arbeitnehmerrechte unwirksam gewesen sei. Der Petent ist der Ansicht, dass diese Praktiken gegen grundlegende Arbeitnehmerrechte verstoßen könnten, einschließlich des Rechts auf gerechte und angemessene Arbeitsbedingungen, des Rechts auf einen wirksamen Rechtsbehelf und des Rechts auf Freizügigkeit innerhalb der Europäischen Union. Der Petent verweist insbesondere auf mögliche Verstöße gegen die Richtlinie (EU) 2019/1152 über transparente und vorhersehbare Arbeitsbedingungen, die Richtlinie 2008/104/EG über Leiharbeit, Artikel 45 AEUV und die Verordnung (EU) Nr. 492/2011 über die Freizügigkeit der Arbeitnehmer sowie die Richtlinie 2014/54/EU über Maßnahmen zur Erleichterung der Ausübung der Rechte, die Arbeitnehmern im Rahmen der Freizügigkeit zustehen. Der Petent beruft sich auch auf die Artikel 31 und 47 der Charta der Grundrechte der Europäischen Union über faire und angemessene Arbeitsbedingungen und das Recht auf einen wirksamen Rechtsbehelf und ein unparteiisches Gericht sowie auf Artikel 19 Absatz 1 EUV in Verbindung mit der Verpflichtung, einen wirksamen Rechtsschutz zu gewährleisten. In Bezug auf die Schritte, die zur Behebung der mutmaßlichen Mängel unternommen wurden, erklärt der Petent, dass der Rat von „Ihr Europa – Beratung“ eingeholt worden sei, der den Angaben des Petenten zufolge der Auffassung war, dass die Umstände möglicherweise erhebliche Probleme im Rahmen des EU-Rechts aufwürfen. Der Petent hat zudem eine Beschwerde bei der Europäischen Kommission eingereicht und sich an mehrere niederländische Organisationen und Behörden gewandt, darunter die niederländische Arbeitsbehörde (Nederlandse Arbeidsinspectie, SZW), FairWork, SNCU, SNF und NBBU. Darüber hinaus habe der Petent eine rechtliche Vertretung beantragt und ein Gerichtsverfahren eingeleitet. Der Petent behauptet jedoch, dass das Leiharbeitsunternehmen dem Gerichtsurteil nicht in vollem Umfang nachgekommen und die Angelegenheit daher nach wie vor ungelöst sei.</p><p><a href=\"https://www.europarl.europa.eu/petitions/de/petition/content/pdf?petitionNumber=1974%252F2026\" target=\"_blank\" rel=\"noopener\">PDF 1974/2026</a></p>",
+        "url": "https://www.europarl.europa.eu/petitions/de/petition/content/html?petitionNumber=1974%252F2026"
+      }
+    },
+    "i18n_state": {
+      "de": "vorhanden"
+    },
+    "status": "online",
+    "last_seen": "2026-11-26T11:04:42-06:00",
+    "offline_since": null,
+    "tags": [
+      "Petitioner",
+      "Workers",
+      "Agency",
+      "Temporary",
+      "Netherlands",
+      "Working",
+      "Rights",
+      "Conditions",
+      "Employment",
+      "Regarding"
+    ],
+    "last_checked": "2026-11-26T11:04:42-06:00"
   }
 }
