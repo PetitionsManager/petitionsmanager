@@ -31,16 +31,14 @@
       "last_checked": "zuletzt geprueft",
       "offline_since": "seit wann offline oder null"
     },
-    "generated_at": "2026-11-26T15:46:58-06:00",
+    "generated_at": "2026-11-26T21:28:17-06:00",
     "petition_count": 2941,
-    "available": 1722,
-    "new_petitions_last_run": [
-      "schulbus-streichungen-in-gundelsheim-duttenberg-und-offenau-stoppen"
-    ],
+    "available": 1715,
+    "new_petitions_last_run": [],
     "bilanz": {
-      "stand": "2026-11-26T15:46:56-06:00",
-      "gefunden": 1722,
-      "im_bestand": 1722,
+      "stand": "2026-11-26T21:28:17-06:00",
+      "gefunden": 1715,
+      "im_bestand": 1715,
       "unbrauchbar": 0,
       "verworfen": 0,
       "dublette": 0,
@@ -49,7 +47,7 @@
       "offen": 0,
       "offene_beispiele": [],
       "bestand_gesamt": 2941,
-      "bestand_ausserhalb": 1219
+      "bestand_ausserhalb": 1226
     },
     "lauf_verlauf": [
       {
@@ -68,10 +66,27 @@
         "mit_ballast_in_kurzfassung": 0,
         "herkunft": "lokal_cron",
         "neu": 1
+      },
+      {
+        "zeit": "2026-11-26T21:28:17-06:00",
+        "gesamt": 2941,
+        "online": 2941,
+        "offline": 0,
+        "ohne_titel": 0,
+        "platzhalter": 0,
+        "nicht_ausgeliefert": 0,
+        "torsi": 0,
+        "dubletten": 0,
+        "mit_start": 2926,
+        "juengstes_start": "2026-11-26",
+        "mit_code_im_text": 0,
+        "mit_ballast_in_kurzfassung": 0,
+        "herkunft": "lokal_cron",
+        "neu": 0
       }
     ],
     "kennzahlen": {
-      "zeit": "2026-11-26T15:46:56-06:00",
+      "zeit": "2026-11-26T21:28:17-06:00",
       "gesamt": 2941,
       "online": 2941,
       "offline": 0,
